@@ -3,7 +3,7 @@
 
 import Foundation
 
-// WebhookWorkflowJobCompleted domain models
+/// WebhookWorkflowJobCompleted domain models
 /// The workflow job. Many `workflow_job` keys, such as `head_sha`, `conclusion`, and `started_at` are the same as
 /// those in a `check_run` object.
 public struct WebhookWorkflowJobCompletedWorkflowJobVariant0: Codable {
@@ -84,44 +84,70 @@ public struct WebhookWorkflowJobCompletedWorkflowJobVariant0: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookWorkflowJobCompletedWorkflowJobVariant0 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.checkRunUrl = try container.sdkDecodeRequired(.checkRunUrl)
-        self.completedAt = try container.sdkDecodeNullable(.completedAt)
-        self.conclusion = try container.sdkDecodeNullable(.conclusion)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.headSha = try container.sdkDecodeRequired(.headSha)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.labels = try container.sdkDecodeRequired(.labels)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.runAttempt = try container.sdkDecodeRequired(.runAttempt)
-        self.runId = try container.sdkDecodeRequired(.runId)
-        self.runUrl = try container.sdkDecodeRequired(.runUrl)
-        self.runnerGroupId = try container.sdkDecodeNullable(.runnerGroupId)
-        self.runnerGroupName = try container.sdkDecodeNullable(.runnerGroupName)
-        self.runnerId = try container.sdkDecodeNullable(.runnerId)
-        self.runnerName = try container.sdkDecodeNullable(.runnerName)
-        self.startedAt = try container.sdkDecodeRequired(.startedAt)
-        self.status = try container.sdkDecodeRequired(.status)
-        self.headBranch = try container.sdkDecodeNullable(.headBranch)
-        self.workflowName = try container.sdkDecodeNullable(.workflowName)
-        self.steps = try container.sdkDecodeRequired(.steps)
-        self.url = try container.sdkDecodeRequired(.url)
-            try sdkValidateUri("check_run_url", self.checkRunUrl)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("run_url", self.runUrl)
-            try sdkValidateUri("url", self.url)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WebhookWorkflowJobCompletedWorkflowJobVariant0 {
-    public init(checkRunUrl: String, completedAt: String?, conclusion: WebhookWorkflowJobCompletedWorkflowJobVariant0Conclusion?, createdAt: String, headSha: String, htmlUrl: String, id: Int, labels: [String], name: String, nodeId: String, runAttempt: Int, runId: Double, runUrl: String, runnerGroupId: Int?, runnerGroupName: String?, runnerId: Int?, runnerName: String?, startedAt: String, status: WebhookWorkflowJobCompletedWorkflowJobVariant0Status, headBranch: String?, workflowName: String?, steps: [WebhookWorkflowJobCompletedWorkflowJobVariant0StepsItem], url: String) throws {
+public extension WebhookWorkflowJobCompletedWorkflowJobVariant0 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        checkRunUrl = try container.sdkDecodeRequired(.checkRunUrl)
+        completedAt = try container.sdkDecodeNullable(.completedAt)
+        conclusion = try container.sdkDecodeNullable(.conclusion)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        headSha = try container.sdkDecodeRequired(.headSha)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        id = try container.sdkDecodeRequired(.id)
+        labels = try container.sdkDecodeRequired(.labels)
+        name = try container.sdkDecodeRequired(.name)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        runAttempt = try container.sdkDecodeRequired(.runAttempt)
+        runId = try container.sdkDecodeRequired(.runId)
+        runUrl = try container.sdkDecodeRequired(.runUrl)
+        runnerGroupId = try container.sdkDecodeNullable(.runnerGroupId)
+        runnerGroupName = try container.sdkDecodeNullable(.runnerGroupName)
+        runnerId = try container.sdkDecodeNullable(.runnerId)
+        runnerName = try container.sdkDecodeNullable(.runnerName)
+        startedAt = try container.sdkDecodeRequired(.startedAt)
+        status = try container.sdkDecodeRequired(.status)
+        headBranch = try container.sdkDecodeNullable(.headBranch)
+        workflowName = try container.sdkDecodeNullable(.workflowName)
+        steps = try container.sdkDecodeRequired(.steps)
+        url = try container.sdkDecodeRequired(.url)
+        try sdkValidateUri("check_run_url", checkRunUrl)
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateUri("run_url", runUrl)
+        try sdkValidateUri("url", url)
+    }
+}
+
+public extension WebhookWorkflowJobCompletedWorkflowJobVariant0 {
+    init(
+        checkRunUrl: String,
+        completedAt: String?,
+        conclusion: WebhookWorkflowJobCompletedWorkflowJobVariant0Conclusion?,
+        createdAt: String,
+        headSha: String,
+        htmlUrl: String,
+        id: Int,
+        labels: [String],
+        name: String,
+        nodeId: String,
+        runAttempt: Int,
+        runId: Double,
+        runUrl: String,
+        runnerGroupId: Int?,
+        runnerGroupName: String?,
+        runnerId: Int?,
+        runnerName: String?,
+        startedAt: String,
+        status: WebhookWorkflowJobCompletedWorkflowJobVariant0Status,
+        headBranch: String?,
+        workflowName: String?,
+        steps: [WebhookWorkflowJobCompletedWorkflowJobVariant0StepsItem],
+        url: String
+    ) throws {
         (self.checkRunUrl, self.completedAt) = (checkRunUrl, completedAt)
         (self.conclusion, self.createdAt) = (conclusion, createdAt)
         (self.headSha, self.htmlUrl) = (headSha, htmlUrl)
@@ -134,10 +160,10 @@ extension WebhookWorkflowJobCompletedWorkflowJobVariant0 {
         (self.status, self.headBranch) = (status, headBranch)
         (self.workflowName, self.steps) = (workflowName, steps)
         self.url = url
-            try sdkValidateUri("check_run_url", self.checkRunUrl)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("run_url", self.runUrl)
-            try sdkValidateUri("url", self.url)
+        try sdkValidateUri("check_run_url", self.checkRunUrl)
+        try sdkValidateUri("html_url", self.htmlUrl)
+        try sdkValidateUri("run_url", self.runUrl)
+        try sdkValidateUri("url", self.url)
     }
 }
 
@@ -216,40 +242,66 @@ public struct WebhookWorkflowJobCompletedWorkflowJob: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookWorkflowJobCompletedWorkflowJob {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.checkRunUrl = try container.sdkDecodeRequired(.checkRunUrl)
-        self.completedAt = try container.sdkDecodeRequired(.completedAt)
-        self.conclusion = try container.sdkDecodeRequired(.conclusion)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.headSha = try container.sdkDecodeRequired(.headSha)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.labels = try container.sdkDecodeRequired(.labels)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.runAttempt = try container.sdkDecodeRequired(.runAttempt)
-        self.runId = try container.sdkDecodeRequired(.runId)
-        self.runUrl = try container.sdkDecodeRequired(.runUrl)
-        self.runnerGroupId = try container.sdkDecodeNullable(.runnerGroupId)
-        self.runnerGroupName = try container.sdkDecodeNullable(.runnerGroupName)
-        self.runnerId = try container.sdkDecodeNullable(.runnerId)
-        self.runnerName = try container.sdkDecodeNullable(.runnerName)
-        self.startedAt = try container.sdkDecodeRequired(.startedAt)
-        self.status = try container.sdkDecodeRequired(.status)
-        self.headBranch = try container.sdkDecodeNullable(.headBranch)
-        self.workflowName = try container.sdkDecodeNullable(.workflowName)
-        self.steps = try container.sdkDecodeRequired(.steps)
-        self.url = try container.sdkDecodeRequired(.url)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WebhookWorkflowJobCompletedWorkflowJob {
-    public init(checkRunUrl: String, completedAt: String, conclusion: WebhookWorkflowJobCompletedWorkflowJobVariant1Conclusion, createdAt: String, headSha: String, htmlUrl: String, id: Int, labels: [String?], name: String, nodeId: String, runAttempt: Int, runId: Int, runUrl: String, runnerGroupId: Double?, runnerGroupName: String?, runnerId: Double?, runnerName: String?, startedAt: String, status: String, headBranch: String?, workflowName: String?, steps: [[String: JSONValue]?], url: String) {
+public extension WebhookWorkflowJobCompletedWorkflowJob {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        checkRunUrl = try container.sdkDecodeRequired(.checkRunUrl)
+        completedAt = try container.sdkDecodeRequired(.completedAt)
+        conclusion = try container.sdkDecodeRequired(.conclusion)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        headSha = try container.sdkDecodeRequired(.headSha)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        id = try container.sdkDecodeRequired(.id)
+        labels = try container.sdkDecodeRequired(.labels)
+        name = try container.sdkDecodeRequired(.name)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        runAttempt = try container.sdkDecodeRequired(.runAttempt)
+        runId = try container.sdkDecodeRequired(.runId)
+        runUrl = try container.sdkDecodeRequired(.runUrl)
+        runnerGroupId = try container.sdkDecodeNullable(.runnerGroupId)
+        runnerGroupName = try container.sdkDecodeNullable(.runnerGroupName)
+        runnerId = try container.sdkDecodeNullable(.runnerId)
+        runnerName = try container.sdkDecodeNullable(.runnerName)
+        startedAt = try container.sdkDecodeRequired(.startedAt)
+        status = try container.sdkDecodeRequired(.status)
+        headBranch = try container.sdkDecodeNullable(.headBranch)
+        workflowName = try container.sdkDecodeNullable(.workflowName)
+        steps = try container.sdkDecodeRequired(.steps)
+        url = try container.sdkDecodeRequired(.url)
+    }
+}
+
+public extension WebhookWorkflowJobCompletedWorkflowJob {
+    init(
+        checkRunUrl: String,
+        completedAt: String,
+        conclusion: WebhookWorkflowJobCompletedWorkflowJobVariant1Conclusion,
+        createdAt: String,
+        headSha: String,
+        htmlUrl: String,
+        id: Int,
+        labels: [String?],
+        name: String,
+        nodeId: String,
+        runAttempt: Int,
+        runId: Int,
+        runUrl: String,
+        runnerGroupId: Double?,
+        runnerGroupName: String?,
+        runnerId: Double?,
+        runnerName: String?,
+        startedAt: String,
+        status: String,
+        headBranch: String?,
+        workflowName: String?,
+        steps: [[String: JSONValue]?],
+        url: String
+    ) {
         (self.checkRunUrl, self.completedAt) = (checkRunUrl, completedAt)
         (self.conclusion, self.createdAt) = (conclusion, createdAt)
         (self.headSha, self.htmlUrl) = (headSha, htmlUrl)
@@ -340,43 +392,73 @@ public struct WebhookWorkflowJobCompletedWorkflowJobVariant1: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookWorkflowJobCompletedWorkflowJobVariant1 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.conclusion) else {
-            throw SdkValidationError(field: "conclusion", code: "required", message: "Validation failed for 'conclusion': value is required")
-        }
-        self.conclusion = try container.sdkDecodeRequired(.conclusion)
-        self.checkRunUrl = try container.sdkDecodeIfPresent(.checkRunUrl)
-        self.completedAt = try container.sdkDecodeIfPresent(.completedAt)
-        self.createdAt = try container.sdkDecodeIfPresent(.createdAt)
-        self.headSha = try container.sdkDecodeIfPresent(.headSha)
-        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        self.id = try container.sdkDecodeIfPresent(.id)
-        self.labels = try container.sdkDecodeIfPresent(.labels)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        self.runAttempt = try container.sdkDecodeIfPresent(.runAttempt)
-        self.runId = try container.sdkDecodeIfPresent(.runId)
-        self.runUrl = try container.sdkDecodeIfPresent(.runUrl)
-        self.runnerGroupId = try container.sdkDecodeIfPresent(.runnerGroupId)
-        self.runnerGroupName = try container.sdkDecodeIfPresent(.runnerGroupName)
-        self.runnerId = try container.sdkDecodeIfPresent(.runnerId)
-        self.runnerName = try container.sdkDecodeIfPresent(.runnerName)
-        self.startedAt = try container.sdkDecodeIfPresent(.startedAt)
-        self.status = try container.sdkDecodeIfPresent(.status)
-        self.headBranch = try container.sdkDecodeIfPresent(.headBranch)
-        self.workflowName = try container.sdkDecodeIfPresent(.workflowName)
-        self.steps = try container.sdkDecodeIfPresent(.steps)
-        self.url = try container.sdkDecodeIfPresent(.url)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WebhookWorkflowJobCompletedWorkflowJobVariant1 {
-    public init(conclusion: WebhookWorkflowJobCompletedWorkflowJobVariant1Conclusion, checkRunUrl: String? = nil, completedAt: String? = nil, createdAt: String? = nil, headSha: String? = nil, htmlUrl: String? = nil, id: Int? = nil, labels: [String?]? = nil, name: String? = nil, nodeId: String? = nil, runAttempt: Int? = nil, runId: Int? = nil, runUrl: String? = nil, runnerGroupId: Double? = nil, runnerGroupName: String? = nil, runnerId: Double? = nil, runnerName: String? = nil, startedAt: String? = nil, status: String? = nil, headBranch: String? = nil, workflowName: String? = nil, steps: [[String: JSONValue]?]? = nil, url: String? = nil) {
+public extension WebhookWorkflowJobCompletedWorkflowJobVariant1 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.conclusion) else {
+            throw SdkValidationError(
+                field: "conclusion",
+                code: "required",
+                message: "Validation failed for 'conclusion': value is required"
+            )
+        }
+        conclusion = try container.sdkDecodeRequired(.conclusion)
+        checkRunUrl = try container.sdkDecodeIfPresent(.checkRunUrl)
+        completedAt = try container.sdkDecodeIfPresent(.completedAt)
+        createdAt = try container.sdkDecodeIfPresent(.createdAt)
+        headSha = try container.sdkDecodeIfPresent(.headSha)
+        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        id = try container.sdkDecodeIfPresent(.id)
+        labels = try container.sdkDecodeIfPresent(.labels)
+        name = try container.sdkDecodeIfPresent(.name)
+        nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        runAttempt = try container.sdkDecodeIfPresent(.runAttempt)
+        runId = try container.sdkDecodeIfPresent(.runId)
+        runUrl = try container.sdkDecodeIfPresent(.runUrl)
+        runnerGroupId = try container.sdkDecodeIfPresent(.runnerGroupId)
+        runnerGroupName = try container.sdkDecodeIfPresent(.runnerGroupName)
+        runnerId = try container.sdkDecodeIfPresent(.runnerId)
+        runnerName = try container.sdkDecodeIfPresent(.runnerName)
+        startedAt = try container.sdkDecodeIfPresent(.startedAt)
+        status = try container.sdkDecodeIfPresent(.status)
+        headBranch = try container.sdkDecodeIfPresent(.headBranch)
+        workflowName = try container.sdkDecodeIfPresent(.workflowName)
+        steps = try container.sdkDecodeIfPresent(.steps)
+        url = try container.sdkDecodeIfPresent(.url)
+    }
+}
+
+public extension WebhookWorkflowJobCompletedWorkflowJobVariant1 {
+    init(
+        conclusion: WebhookWorkflowJobCompletedWorkflowJobVariant1Conclusion,
+        checkRunUrl: String? = nil,
+        completedAt: String? = nil,
+        createdAt: String? = nil,
+        headSha: String? = nil,
+        htmlUrl: String? = nil,
+        id: Int? = nil,
+        labels: [String?]? = nil,
+        name: String? = nil,
+        nodeId: String? = nil,
+        runAttempt: Int? = nil,
+        runId: Int? = nil,
+        runUrl: String? = nil,
+        runnerGroupId: Double? = nil,
+        runnerGroupName: String? = nil,
+        runnerId: Double? = nil,
+        runnerName: String? = nil,
+        startedAt: String? = nil,
+        status: String? = nil,
+        headBranch: String? = nil,
+        workflowName: String? = nil,
+        steps: [[String: JSONValue]?]? = nil,
+        url: String? = nil
+    ) {
         (self.conclusion, self.checkRunUrl) = (conclusion, checkRunUrl)
         (self.completedAt, self.createdAt) = (completedAt, createdAt)
         (self.headSha, self.htmlUrl) = (headSha, htmlUrl)
@@ -427,37 +509,64 @@ public struct WebhookWorkflowJobCompleted: Codable {
         case deployment
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookWorkflowJobCompleted {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.action) else {
-            throw SdkValidationError(field: "action", code: "required", message: "Validation failed for 'action': value is required")
-        }
-        guard container.contains(.repository) else {
-            throw SdkValidationError(field: "repository", code: "required", message: "Validation failed for 'repository': value is required")
-        }
-        guard container.contains(.sender) else {
-            throw SdkValidationError(field: "sender", code: "required", message: "Validation failed for 'sender': value is required")
-        }
-        guard container.contains(.workflowJob) else {
-            throw SdkValidationError(field: "workflow_job", code: "required", message: "Validation failed for 'workflow_job': value is required")
-        }
-        self.action = try container.sdkDecodeRequired(.action)
-        self.repository = try container.sdkDecodeRequired(.repository)
-        self.sender = try container.sdkDecodeRequired(.sender)
-        self.workflowJob = try container.sdkDecodeRequired(.workflowJob)
-        self.enterprise = try container.sdkDecodeIfPresent(.enterprise)
-        self.installation = try container.sdkDecodeIfPresent(.installation)
-        self.organization = try container.sdkDecodeIfPresent(.organization)
-        self.deployment = try container.sdkDecodeIfPresent(.deployment)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WebhookWorkflowJobCompleted {
-    public init(action: WebhookWorkflowJobCompletedAction, repository: RepositoryWebhooks, sender: SimpleUser, workflowJob: WebhookWorkflowJobCompletedWorkflowJob, enterprise: EnterpriseWebhooks? = nil, installation: SimpleInstallation? = nil, organization: OrganizationSimpleWebhooks? = nil, deployment: Deployment? = nil) {
+public extension WebhookWorkflowJobCompleted {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.action) else {
+            throw SdkValidationError(
+                field: "action",
+                code: "required",
+                message: "Validation failed for 'action': value is required"
+            )
+        }
+        guard container.contains(.repository) else {
+            throw SdkValidationError(
+                field: "repository",
+                code: "required",
+                message: "Validation failed for 'repository': value is required"
+            )
+        }
+        guard container.contains(.sender) else {
+            throw SdkValidationError(
+                field: "sender",
+                code: "required",
+                message: "Validation failed for 'sender': value is required"
+            )
+        }
+        guard container.contains(.workflowJob) else {
+            throw SdkValidationError(
+                field: "workflow_job",
+                code: "required",
+                message: "Validation failed for 'workflow_job': value is required"
+            )
+        }
+        action = try container.sdkDecodeRequired(.action)
+        repository = try container.sdkDecodeRequired(.repository)
+        sender = try container.sdkDecodeRequired(.sender)
+        workflowJob = try container.sdkDecodeRequired(.workflowJob)
+        enterprise = try container.sdkDecodeIfPresent(.enterprise)
+        installation = try container.sdkDecodeIfPresent(.installation)
+        organization = try container.sdkDecodeIfPresent(.organization)
+        deployment = try container.sdkDecodeIfPresent(.deployment)
+    }
+}
+
+public extension WebhookWorkflowJobCompleted {
+    init(
+        action: WebhookWorkflowJobCompletedAction,
+        repository: RepositoryWebhooks,
+        sender: SimpleUser,
+        workflowJob: WebhookWorkflowJobCompletedWorkflowJob,
+        enterprise: EnterpriseWebhooks? = nil,
+        installation: SimpleInstallation? = nil,
+        organization: OrganizationSimpleWebhooks? = nil,
+        deployment: Deployment? = nil
+    ) {
         (self.action, self.repository) = (action, repository)
         (self.sender, self.workflowJob) = (sender, workflowJob)
         (self.enterprise, self.installation) = (enterprise, installation)
@@ -489,5 +598,7 @@ public struct WebhookWorkflowJobCompletedWorkflowJobVariant0StepsItem: Codable {
         case status
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }

@@ -6,7 +6,8 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testPackagesGetAllPackageVersionsForPackageOwnedByUserPackagesGetX0e0acdf2acReachesMockAndDecodesResponse() async throws {
+    func testPackagesGetAllPackageVersionsForPackageOwnedByUserPackagesGetX0e0acdf2acReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -17,10 +18,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.packages.getAllPackageVersionsForPackageOwnedByUser(
-            packageType: decoded("\"npm\""),
-            packageName: decoded("\"Example Name\""),
-            username: decoded("\"Example Name\"")
-        )
+                packageType: decoded("\"npm\""),
+                packageName: decoded("\"Example Name\""),
+                username: decoded("\"Example Name\"")
+            )
             XCTFail("packagesGetAllPackageVersionsForPackageOwnedByUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -37,7 +38,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testPackagesGetPackageForAuthenticatedUserPackagesGetPackageForAuX2777503d88ReachesMockAndDecodesResponse() async throws {
+    func testPackagesGetPackageForAuthenticatedUserPackagesGetPackageForAuX2777503d88ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -57,7 +59,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testPackagesGetPackageForOrganizationPackagesGetPackageForOrganizationReachesMockAndDecodesResponse() async throws {
+    func testPackagesGetPackageForOrganizationPackagesGetPackageForOrganizationReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -99,7 +102,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testPackagesGetPackageVersionForAuthenticatedUserPackagesGetPackaX8c8e4e13aaReachesMockAndDecodesResponse() async throws {
+    func testPackagesGetPackageVersionForAuthenticatedUserPackagesGetPackaX8c8e4e13aaReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -120,7 +124,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testPackagesGetPackageVersionForOrganizationPackagesGetPackageVerXb7772b111cReachesMockAndDecodesResponse() async throws {
+    func testPackagesGetPackageVersionForOrganizationPackagesGetPackageVerXb7772b111cReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -142,7 +147,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testPackagesGetPackageVersionForUserPackagesGetPackageVersionForUserReachesMockAndDecodesResponse() async throws {
+    func testPackagesGetPackageVersionForUserPackagesGetPackageVersionForUserReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -164,7 +170,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testPackagesListDockerMigrationConflictingPackagesForAuthenticateXe826f49129ReachesMockAndDecodesResponse() async throws {
+    func testPackagesListDockerMigrationConflictingPackagesForAuthenticateXe826f49129ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -181,7 +188,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testPackagesListDockerMigrationConflictingPackagesForOrganizationXc35d179f50ReachesMockAndDecodesResponse() async throws {
+    func testPackagesListDockerMigrationConflictingPackagesForOrganizationXc35d179f50ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -200,7 +208,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testPackagesListDockerMigrationConflictingPackagesForOrganizationX6148b08c09ReachesMockAndDecodesResponse() async throws {
+    func testPackagesListDockerMigrationConflictingPackagesForOrganizationX6148b08c09ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -211,8 +220,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.packages.listDockerMigrationConflictingPackagesForOrganization(
-            org: decoded("\"org\"")
-        )
+                org: decoded("\"org\"")
+            )
             XCTFail("packagesListDockerMigrationConflictingPackagesForOrganization did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -229,7 +238,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testPackagesListDockerMigrationConflictingPackagesForUserPackagesX4cca3c73baReachesMockAndDecodesResponse() async throws {
+    func testPackagesListDockerMigrationConflictingPackagesForUserPackagesX4cca3c73baReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -248,7 +258,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testPackagesListDockerMigrationConflictingPackagesForUserPackagesXe601a77816ReachesMockAndDecodesResponse() async throws {
+    func testPackagesListDockerMigrationConflictingPackagesForUserPackagesXe601a77816ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -259,8 +270,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.packages.listDockerMigrationConflictingPackagesForUser(
-            username: decoded("\"Example Name\"")
-        )
+                username: decoded("\"Example Name\"")
+            )
             XCTFail("packagesListDockerMigrationConflictingPackagesForUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -277,7 +288,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testPackagesListPackagesForAuthenticatedUserPackagesListPackagesFX25322ae28cReachesMockAndDecodesResponse() async throws {
+    func testPackagesListPackagesForAuthenticatedUserPackagesListPackagesFX25322ae28cReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -299,7 +311,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testPackagesListPackagesForOrganizationPackagesListPackagesForOrganizationReachesMockAndDecodesResponse() async throws {
+    func testPackagesListPackagesForOrganizationPackagesListPackagesForOrganizationReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -322,7 +335,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testPackagesListPackagesForOrganizationPackagesListPackagesForOrgXb2a22c2a5aReachesMockAndDecodesResponse() async throws {
+    func testPackagesListPackagesForOrganizationPackagesListPackagesForOrgXb2a22c2a5aReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -333,12 +347,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.packages.listPackagesForOrganization(
-            org: decoded("\"org\""),
-            packageType: decoded("\"npm\""),
-            visibility: decoded("\"public\""),
-            page: decoded("1"),
-            perPage: decoded("30")
-        )
+                org: decoded("\"org\""),
+                packageType: decoded("\"npm\""),
+                visibility: decoded("\"public\""),
+                page: decoded("1"),
+                perPage: decoded("30")
+            )
             XCTFail("packagesListPackagesForOrganization did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -389,12 +403,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.packages.listPackagesForUser(
-            username: decoded("\"Example Name\""),
-            packageType: decoded("\"npm\""),
-            visibility: decoded("\"public\""),
-            page: decoded("1"),
-            perPage: decoded("30")
-        )
+                username: decoded("\"Example Name\""),
+                packageType: decoded("\"npm\""),
+                visibility: decoded("\"public\""),
+                page: decoded("1"),
+                perPage: decoded("30")
+            )
             XCTFail("packagesListPackagesForUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -411,7 +425,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testPackagesRestorePackageForAuthenticatedUserPackagesRestorePackXfd120f37ceReachesMockAndDecodesResponse() async throws {
+    func testPackagesRestorePackageForAuthenticatedUserPackagesRestorePackXfd120f37ceReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -424,7 +439,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testPackagesRestorePackageForAuthenticatedUserPackagesRestorePackXdfd55f7e4eReachesMockAndDecodesResponse() async throws {
+    func testPackagesRestorePackageForAuthenticatedUserPackagesRestorePackXdfd55f7e4eReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -435,10 +451,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.packages.restorePackageForAuthenticatedUser(
-            packageType: decoded("\"npm\""),
-            packageName: decoded("\"Example Name\""),
-            token: decoded("\"token\"")
-        )
+                packageType: decoded("\"npm\""),
+                packageName: decoded("\"Example Name\""),
+                token: decoded("\"token\"")
+            )
             XCTFail("packagesRestorePackageForAuthenticatedUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -480,11 +496,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.packages.restorePackageForOrg(
-            packageType: decoded("\"npm\""),
-            packageName: decoded("\"Example Name\""),
-            org: decoded("\"org\""),
-            token: decoded("\"token\"")
-        )
+                packageType: decoded("\"npm\""),
+                packageName: decoded("\"Example Name\""),
+                org: decoded("\"org\""),
+                token: decoded("\"token\"")
+            )
             XCTFail("packagesRestorePackageForOrg did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)

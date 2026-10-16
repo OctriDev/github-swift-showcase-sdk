@@ -3,7 +3,7 @@
 
 import Foundation
 
-// SharedIssue domain models
+/// SharedIssue domain models
 /// Required object value serialized in the `labels[]` wire field.
 public struct IssueLabelsItemVariant1: Codable {
     /// Optional `int64`-formatted value serialized in the `id` wire field.
@@ -35,35 +35,44 @@ public struct IssueLabelsItemVariant1: Codable {
     }
 
     init() {
-        (self.id, self.nodeId, self.url, self.name, self.description) = (nil, nil, nil, nil, nil)
-        (self.color, self.`default`, self.archivedBy) = (nil, nil, nil)
+        (id, nodeId, url, name, description) = (nil, nil, nil, nil, nil)
+        (color, self.default, archivedBy) = (nil, nil, nil)
     }
 }
 
-extension IssueLabelsItemVariant1 {
-    public init(from decoder: Decoder) throws {
+public extension IssueLabelsItemVariant1 {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeIfPresent(.id)
-        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        self.url = try container.sdkDecodeIfPresent(.url)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.description = try container.sdkDecodeIfPresent(.description)
-        self.color = try container.sdkDecodeIfPresent(.color)
-        self.`default` = try container.sdkDecodeIfPresent(.`default`)
-        self.archivedBy = try container.sdkDecodeIfPresent(.archivedBy)
-        if let value = self.url {
+        id = try container.sdkDecodeIfPresent(.id)
+        nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        url = try container.sdkDecodeIfPresent(.url)
+        name = try container.sdkDecodeIfPresent(.name)
+        description = try container.sdkDecodeIfPresent(.description)
+        color = try container.sdkDecodeIfPresent(.color)
+        self.default = try container.sdkDecodeIfPresent(.default)
+        archivedBy = try container.sdkDecodeIfPresent(.archivedBy)
+        if let value = url {
             try sdkValidateUri("url", value)
         }
     }
 }
 
-extension IssueLabelsItemVariant1 {
-    public init(id: Int? = nil, nodeId: String? = nil, url: String? = nil, name: String? = nil, description: String? = nil, color: String? = nil, `default`: Bool? = nil, archivedBy: IssueLabelsItemVariant1ArchivedBy? = nil) throws {
+public extension IssueLabelsItemVariant1 {
+    init(
+        id: Int? = nil,
+        nodeId: String? = nil,
+        url: String? = nil,
+        name: String? = nil,
+        description: String? = nil,
+        color: String? = nil,
+        default: Bool? = nil,
+        archivedBy: IssueLabelsItemVariant1ArchivedBy? = nil
+    ) throws {
         self.init()
         (self.id, self.nodeId) = (id, nodeId)
         (self.url, self.name) = (url, name)
         (self.description, self.color) = (description, color)
-        (self.`default`, self.archivedBy) = (`default`, archivedBy)
+        (self.default, self.archivedBy) = (`default`, archivedBy)
         if let value = self.url {
             try sdkValidateUri("url", value)
         }
@@ -76,22 +85,32 @@ public indirect enum IssueLabelsItem {
 }
 
 extension IssueLabelsItem: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for IssueLabelsItem")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for IssueLabelsItem"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension IssueLabelsItem {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) { return .stringValue(value) }
-        if let value = try? container.decode(IssueLabelsItemVariant1.self) { return .issueLabelsItemVariant1(value) }
+        if let value = try? container.decode(String.self) {
+            return .stringValue(value)
+        }
+        if let value = try? container.decode(IssueLabelsItemVariant1.self) {
+            return .issueLabelsItemVariant1(value)
+        }
         return nil
     }
 }
@@ -124,33 +143,51 @@ public struct IssueDependenciesSummary: Codable {
         case totalBlocking = "total_blocking"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension IssueDependenciesSummary {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.blockedBy) else {
-            throw SdkValidationError(field: "blocked_by", code: "required", message: "Validation failed for 'blocked_by': value is required")
-        }
-        guard container.contains(.blocking) else {
-            throw SdkValidationError(field: "blocking", code: "required", message: "Validation failed for 'blocking': value is required")
-        }
-        guard container.contains(.totalBlockedBy) else {
-            throw SdkValidationError(field: "total_blocked_by", code: "required", message: "Validation failed for 'total_blocked_by': value is required")
-        }
-        guard container.contains(.totalBlocking) else {
-            throw SdkValidationError(field: "total_blocking", code: "required", message: "Validation failed for 'total_blocking': value is required")
-        }
-        self.blockedBy = try container.sdkDecodeRequired(.blockedBy)
-        self.blocking = try container.sdkDecodeRequired(.blocking)
-        self.totalBlockedBy = try container.sdkDecodeRequired(.totalBlockedBy)
-        self.totalBlocking = try container.sdkDecodeRequired(.totalBlocking)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension IssueDependenciesSummary {
-    public init(blockedBy: Int, blocking: Int, totalBlockedBy: Int, totalBlocking: Int) {
+public extension IssueDependenciesSummary {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.blockedBy) else {
+            throw SdkValidationError(
+                field: "blocked_by",
+                code: "required",
+                message: "Validation failed for 'blocked_by': value is required"
+            )
+        }
+        guard container.contains(.blocking) else {
+            throw SdkValidationError(
+                field: "blocking",
+                code: "required",
+                message: "Validation failed for 'blocking': value is required"
+            )
+        }
+        guard container.contains(.totalBlockedBy) else {
+            throw SdkValidationError(
+                field: "total_blocked_by",
+                code: "required",
+                message: "Validation failed for 'total_blocked_by': value is required"
+            )
+        }
+        guard container.contains(.totalBlocking) else {
+            throw SdkValidationError(
+                field: "total_blocking",
+                code: "required",
+                message: "Validation failed for 'total_blocking': value is required"
+            )
+        }
+        blockedBy = try container.sdkDecodeRequired(.blockedBy)
+        blocking = try container.sdkDecodeRequired(.blocking)
+        totalBlockedBy = try container.sdkDecodeRequired(.totalBlockedBy)
+        totalBlocking = try container.sdkDecodeRequired(.totalBlocking)
+    }
+}
+
+public extension IssueDependenciesSummary {
+    init(blockedBy: Int, blocking: Int, totalBlockedBy: Int, totalBlocking: Int) {
         (self.blockedBy, self.blocking) = (blockedBy, blocking)
         (self.totalBlockedBy, self.totalBlocking) = (totalBlockedBy, totalBlocking)
     }
@@ -163,23 +200,35 @@ public indirect enum IssueFieldValueValue {
 }
 
 extension IssueFieldValueValue: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for IssueFieldValueValue")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for IssueFieldValueValue"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension IssueFieldValueValue {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) { return .stringValue(value) }
-        if let value = try? container.decode(Double.self) { return .doubleValue(value) }
-        if let value = try? container.decode(Int.self) { return .intValue(value) }
+        if let value = try? container.decode(String.self) {
+            return .stringValue(value)
+        }
+        if let value = try? container.decode(Double.self) {
+            return .doubleValue(value)
+        }
+        if let value = try? container.decode(Int.self) {
+            return .intValue(value)
+        }
         return nil
     }
 }
@@ -267,38 +316,57 @@ public struct IssueComment: Codable {
         case minimized
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension IssueComment {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.user = try container.sdkDecodeNullable(.user)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        self.issueUrl = try container.sdkDecodeRequired(.issueUrl)
-        self.body = try container.sdkDecodeIfPresent(.body)
-        self.bodyText = try container.sdkDecodeIfPresent(.bodyText)
-        self.bodyHtml = try container.sdkDecodeIfPresent(.bodyHtml)
-        self.authorAssociation = try container.sdkDecodeIfPresent(.authorAssociation)
-        self.performedViaGithubApp = try container.sdkDecodeIfPresent(.performedViaGithubApp)
-        self.reactions = try container.sdkDecodeIfPresent(.reactions)
-        self.pin = try container.sdkDecodeIfPresent(.pin)
-        self.minimized = try container.sdkDecodeIfPresent(.minimized)
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-            try sdkValidateUri("issue_url", self.issueUrl)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension IssueComment {
-    public init(id: Int, nodeId: String, url: String, htmlUrl: String, user: NullableSimpleUser?, createdAt: Date, updatedAt: Date, issueUrl: String, body: String? = nil, bodyText: String? = nil, bodyHtml: String? = nil, authorAssociation: AuthorAssociation? = nil, performedViaGithubApp: NullableIntegration? = nil, reactions: ReactionRollup? = nil, pin: NullablePinnedIssueComment? = nil, minimized: NullableIssueCommentMinimized? = nil) throws {
+public extension IssueComment {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        url = try container.sdkDecodeRequired(.url)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        user = try container.sdkDecodeNullable(.user)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        issueUrl = try container.sdkDecodeRequired(.issueUrl)
+        body = try container.sdkDecodeIfPresent(.body)
+        bodyText = try container.sdkDecodeIfPresent(.bodyText)
+        bodyHtml = try container.sdkDecodeIfPresent(.bodyHtml)
+        authorAssociation = try container.sdkDecodeIfPresent(.authorAssociation)
+        performedViaGithubApp = try container.sdkDecodeIfPresent(.performedViaGithubApp)
+        reactions = try container.sdkDecodeIfPresent(.reactions)
+        pin = try container.sdkDecodeIfPresent(.pin)
+        minimized = try container.sdkDecodeIfPresent(.minimized)
+        try sdkValidateUri("url", url)
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+        try sdkValidateUri("issue_url", issueUrl)
+    }
+}
+
+public extension IssueComment {
+    init(
+        id: Int,
+        nodeId: String,
+        url: String,
+        htmlUrl: String,
+        user: NullableSimpleUser?,
+        createdAt: Date,
+        updatedAt: Date,
+        issueUrl: String,
+        body: String? = nil,
+        bodyText: String? = nil,
+        bodyHtml: String? = nil,
+        authorAssociation: AuthorAssociation? = nil,
+        performedViaGithubApp: NullableIntegration? = nil,
+        reactions: ReactionRollup? = nil,
+        pin: NullablePinnedIssueComment? = nil,
+        minimized: NullableIssueCommentMinimized? = nil
+    ) throws {
         (self.id, self.nodeId) = (id, nodeId)
         (self.url, self.htmlUrl) = (url, htmlUrl)
         (self.user, self.createdAt) = (user, createdAt)
@@ -307,11 +375,11 @@ extension IssueComment {
         (self.bodyHtml, self.authorAssociation) = (bodyHtml, authorAssociation)
         (self.performedViaGithubApp, self.reactions) = (performedViaGithubApp, reactions)
         (self.pin, self.minimized) = (pin, minimized)
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-            try sdkValidateUri("issue_url", self.issueUrl)
+        try sdkValidateUri("url", self.url)
+        try sdkValidateUri("html_url", self.htmlUrl)
+        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+        try sdkValidateUri("issue_url", self.issueUrl)
     }
 }
 
@@ -455,52 +523,54 @@ public struct Issue: Codable {
         case issueFieldValues = "issue_field_values"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension Issue {
-    public init(from decoder: Decoder) throws {
+public extension Issue {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.repositoryUrl = try container.sdkDecodeRequired(.repositoryUrl)
-        self.labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
-        self.commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
-        self.eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.number = try container.sdkDecodeRequired(.number)
-        self.state = try container.sdkDecodeRequired(.state)
-        self.title = try container.sdkDecodeRequired(.title)
-        self.user = try container.sdkDecodeNullable(.user)
-        self.labels = try container.sdkDecodeRequired(.labels)
-        self.assignee = try container.sdkDecodeNullable(.assignee)
-        self.milestone = try container.sdkDecodeNullable(.milestone)
-        self.locked = try container.sdkDecodeRequired(.locked)
-        self.comments = try container.sdkDecodeRequired(.comments)
-        self.closedAt = try container.sdkDecodeNullable(.closedAt)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        self.stateReason = try container.sdkDecodeIfPresent(.stateReason)
-        self.body = try container.sdkDecodeIfPresent(.body)
-        self.assignees = try container.sdkDecodeIfPresent(.assignees)
-        self.activeLockReason = try container.sdkDecodeIfPresent(.activeLockReason)
-        self.pullRequest = try container.sdkDecodeIfPresent(.pullRequest)
-        self.draft = try container.sdkDecodeIfPresent(.draft)
-        self.closedBy = try container.sdkDecodeIfPresent(.closedBy)
-        self.bodyHtml = try container.sdkDecodeIfPresent(.bodyHtml)
-        self.bodyText = try container.sdkDecodeIfPresent(.bodyText)
-        self.timelineUrl = try container.sdkDecodeIfPresent(.timelineUrl)
-        self.type = try container.sdkDecodeIfPresent(.type)
-        self.repository = try container.sdkDecodeIfPresent(.repository)
-        self.performedViaGithubApp = try container.sdkDecodeIfPresent(.performedViaGithubApp)
-        self.authorAssociation = try container.sdkDecodeIfPresent(.authorAssociation)
-        self.reactions = try container.sdkDecodeIfPresent(.reactions)
-        self.subIssuesSummary = try container.sdkDecodeIfPresent(.subIssuesSummary)
-        self.parentIssueUrl = try container.sdkDecodeIfPresent(.parentIssueUrl)
-        self.pinnedComment = try container.sdkDecodeIfPresent(.pinnedComment)
-        self.issueDependenciesSummary = try container.sdkDecodeIfPresent(.issueDependenciesSummary)
-        self.issueFieldValues = try container.sdkDecodeIfPresent(.issueFieldValues)
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        url = try container.sdkDecodeRequired(.url)
+        repositoryUrl = try container.sdkDecodeRequired(.repositoryUrl)
+        labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
+        commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
+        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        number = try container.sdkDecodeRequired(.number)
+        state = try container.sdkDecodeRequired(.state)
+        title = try container.sdkDecodeRequired(.title)
+        user = try container.sdkDecodeNullable(.user)
+        labels = try container.sdkDecodeRequired(.labels)
+        assignee = try container.sdkDecodeNullable(.assignee)
+        milestone = try container.sdkDecodeNullable(.milestone)
+        locked = try container.sdkDecodeRequired(.locked)
+        comments = try container.sdkDecodeRequired(.comments)
+        closedAt = try container.sdkDecodeNullable(.closedAt)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        stateReason = try container.sdkDecodeIfPresent(.stateReason)
+        body = try container.sdkDecodeIfPresent(.body)
+        assignees = try container.sdkDecodeIfPresent(.assignees)
+        activeLockReason = try container.sdkDecodeIfPresent(.activeLockReason)
+        pullRequest = try container.sdkDecodeIfPresent(.pullRequest)
+        draft = try container.sdkDecodeIfPresent(.draft)
+        closedBy = try container.sdkDecodeIfPresent(.closedBy)
+        bodyHtml = try container.sdkDecodeIfPresent(.bodyHtml)
+        bodyText = try container.sdkDecodeIfPresent(.bodyText)
+        timelineUrl = try container.sdkDecodeIfPresent(.timelineUrl)
+        type = try container.sdkDecodeIfPresent(.type)
+        repository = try container.sdkDecodeIfPresent(.repository)
+        performedViaGithubApp = try container.sdkDecodeIfPresent(.performedViaGithubApp)
+        authorAssociation = try container.sdkDecodeIfPresent(.authorAssociation)
+        reactions = try container.sdkDecodeIfPresent(.reactions)
+        subIssuesSummary = try container.sdkDecodeIfPresent(.subIssuesSummary)
+        parentIssueUrl = try container.sdkDecodeIfPresent(.parentIssueUrl)
+        pinnedComment = try container.sdkDecodeIfPresent(.pinnedComment)
+        issueDependenciesSummary = try container.sdkDecodeIfPresent(.issueDependenciesSummary)
+        issueFieldValues = try container.sdkDecodeIfPresent(.issueFieldValues)
         try sdkValidateConstraints()
     }
 }

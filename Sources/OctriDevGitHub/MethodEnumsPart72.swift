@@ -6,17 +6,21 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public struct IssuesUpdateResponseVariant1SuggestionsTypeItemConfidence: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct IssuesUpdateResponseVariant1SuggestionsTypeItemConfidence: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let low = IssuesUpdateResponseVariant1SuggestionsTypeItemConfidence(rawValue: "low")
     public static let medium = IssuesUpdateResponseVariant1SuggestionsTypeItemConfidence(rawValue: "medium")
     public static let high = IssuesUpdateResponseVariant1SuggestionsTypeItemConfidence(rawValue: "high")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -27,16 +31,22 @@ public struct IssuesUpdateResponseVariant1SuggestionsTypeItemConfidence: RawRepr
 
 /// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
 /// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
-public struct AgentAutomationsListAutomationsResponseItemTriggersPullRequesX722f4b8d4b: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct AgentAutomationsListAutomationsResponseItemTriggersPullRequesX722f4b8d4b: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let trigger = AgentAutomationsListAutomationsResponseItemTriggersPullRequesX722f4b8d4b(rawValue: "trigger")
-    public static let repository = AgentAutomationsListAutomationsResponseItemTriggersPullRequesX722f4b8d4b(rawValue: "repository")
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let trigger =
+        AgentAutomationsListAutomationsResponseItemTriggersPullRequesX722f4b8d4b(rawValue: "trigger")
+    public static let repository =
+        AgentAutomationsListAutomationsResponseItemTriggersPullRequesX722f4b8d4b(rawValue: "repository")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -47,16 +57,22 @@ public struct AgentAutomationsListAutomationsResponseItemTriggersPullRequesX722f
 
 /// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
 /// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
-public struct AgentAutomationsListRepoAutomationsResponseAutomationsItemTriXed84f28191: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct AgentAutomationsListRepoAutomationsResponseAutomationsItemTriXed84f28191: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let trigger = AgentAutomationsListRepoAutomationsResponseAutomationsItemTriXed84f28191(rawValue: "trigger")
-    public static let repository = AgentAutomationsListRepoAutomationsResponseAutomationsItemTriXed84f28191(rawValue: "repository")
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let trigger =
+        AgentAutomationsListRepoAutomationsResponseAutomationsItemTriXed84f28191(rawValue: "trigger")
+    public static let repository =
+        AgentAutomationsListRepoAutomationsResponseAutomationsItemTriXed84f28191(rawValue: "repository")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -65,15 +81,20 @@ public struct AgentAutomationsListRepoAutomationsResponseAutomationsItemTriXed84
     }
 }
 
-public struct AgentAutomationsGetRepoAutomationResponseTriggersWorkflowRunCXb98c94d1cb: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct AgentAutomationsGetRepoAutomationResponseTriggersWorkflowRunCXb98c94d1cb: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let failure = AgentAutomationsGetRepoAutomationResponseTriggersWorkflowRunCXb98c94d1cb(rawValue: "failure")
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let failure =
+        AgentAutomationsGetRepoAutomationResponseTriggersWorkflowRunCXb98c94d1cb(rawValue: "failure")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -82,16 +103,22 @@ public struct AgentAutomationsGetRepoAutomationResponseTriggersWorkflowRunCXb98c
     }
 }
 
-public struct PackagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUserParameter: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct PackagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUserParameter: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let active = PackagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUserParameter(rawValue: "active")
-    public static let deleted = PackagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUserParameter(rawValue: "deleted")
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let active =
+        PackagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUserParameter(rawValue: "active")
+    public static let deleted =
+        PackagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUserParameter(rawValue: "deleted")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -103,7 +130,10 @@ public struct PackagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUserPar
 public struct CampaignsListOrgCampaignsParameter: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let created = CampaignsListOrgCampaignsParameter(rawValue: "created")
     public static let updated = CampaignsListOrgCampaignsParameter(rawValue: "updated")
     public static let endsAt = CampaignsListOrgCampaignsParameter(rawValue: "ends_at")
@@ -111,7 +141,7 @@ public struct CampaignsListOrgCampaignsParameter: RawRepresentable, Hashable, Co
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -133,27 +163,27 @@ struct SecurityAdvisoriesCreateRepositoryAdvisoryRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.summary, forKey: SdkCodingKey("summary"))
-        try keyedContainer.encode(self.description, forKey: SdkCodingKey("description"))
-        try keyedContainer.encode(self.vulnerabilities, forKey: SdkCodingKey("vulnerabilities"))
-        try keyedContainer.encodeIfPresent(self.cveId, forKey: SdkCodingKey("cve_id"))
-        try keyedContainer.encodeIfPresent(self.cweIds, forKey: SdkCodingKey("cwe_ids"))
-        try keyedContainer.encodeIfPresent(self.credits, forKey: SdkCodingKey("credits"))
-        try keyedContainer.encodeIfPresent(self.severity, forKey: SdkCodingKey("severity"))
-        try keyedContainer.encodeIfPresent(self.cvssVectorString, forKey: SdkCodingKey("cvss_vector_string"))
-        try keyedContainer.encodeIfPresent(self.startPrivateFork, forKey: SdkCodingKey("start_private_fork"))
+        try keyedContainer.encode(summary, forKey: SdkCodingKey("summary"))
+        try keyedContainer.encode(description, forKey: SdkCodingKey("description"))
+        try keyedContainer.encode(vulnerabilities, forKey: SdkCodingKey("vulnerabilities"))
+        try keyedContainer.encodeIfPresent(cveId, forKey: SdkCodingKey("cve_id"))
+        try keyedContainer.encodeIfPresent(cweIds, forKey: SdkCodingKey("cwe_ids"))
+        try keyedContainer.encodeIfPresent(credits, forKey: SdkCodingKey("credits"))
+        try keyedContainer.encodeIfPresent(severity, forKey: SdkCodingKey("severity"))
+        try keyedContainer.encodeIfPresent(cvssVectorString, forKey: SdkCodingKey("cvss_vector_string"))
+        try keyedContainer.encodeIfPresent(startPrivateFork, forKey: SdkCodingKey("start_private_fork"))
     }
 
     init(options: SecurityAdvisoriesMethods.SecurityAdvisoriesCreateRepositoryAdvisoryOptions) {
-        self.summary = options.summary
-        self.description = options.description
-        self.vulnerabilities = options.vulnerabilities
-        self.cveId = options.cveId
-        self.cweIds = options.cweIds
-        self.credits = options.credits
-        self.severity = options.severity
-        self.cvssVectorString = options.cvssVectorString
-        self.startPrivateFork = options.startPrivateFork
+        summary = options.summary
+        description = options.description
+        vulnerabilities = options.vulnerabilities
+        cveId = options.cveId
+        cweIds = options.cweIds
+        credits = options.credits
+        severity = options.severity
+        cvssVectorString = options.cvssVectorString
+        startPrivateFork = options.startPrivateFork
     }
 }
 
@@ -168,22 +198,22 @@ struct SecurityAdvisoriesCreatePrivateVulnerabilityReportRequestBody: Encodable 
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.summary, forKey: SdkCodingKey("summary"))
-        try keyedContainer.encode(self.description, forKey: SdkCodingKey("description"))
-        try keyedContainer.encodeIfPresent(self.vulnerabilities, forKey: SdkCodingKey("vulnerabilities"))
-        try keyedContainer.encodeIfPresent(self.cweIds, forKey: SdkCodingKey("cwe_ids"))
-        try keyedContainer.encodeIfPresent(self.severity, forKey: SdkCodingKey("severity"))
-        try keyedContainer.encodeIfPresent(self.cvssVectorString, forKey: SdkCodingKey("cvss_vector_string"))
-        try keyedContainer.encodeIfPresent(self.startPrivateFork, forKey: SdkCodingKey("start_private_fork"))
+        try keyedContainer.encode(summary, forKey: SdkCodingKey("summary"))
+        try keyedContainer.encode(description, forKey: SdkCodingKey("description"))
+        try keyedContainer.encodeIfPresent(vulnerabilities, forKey: SdkCodingKey("vulnerabilities"))
+        try keyedContainer.encodeIfPresent(cweIds, forKey: SdkCodingKey("cwe_ids"))
+        try keyedContainer.encodeIfPresent(severity, forKey: SdkCodingKey("severity"))
+        try keyedContainer.encodeIfPresent(cvssVectorString, forKey: SdkCodingKey("cvss_vector_string"))
+        try keyedContainer.encodeIfPresent(startPrivateFork, forKey: SdkCodingKey("start_private_fork"))
     }
 
     init(options: SecurityAdvisoriesMethods.SecurityAdvisoriesCreatePrivateVulnerabilityReportOptions) {
-        self.summary = options.summary
-        self.description = options.description
-        self.vulnerabilities = options.vulnerabilities
-        self.cweIds = options.cweIds
-        self.severity = options.severity
-        self.cvssVectorString = options.cvssVectorString
-        self.startPrivateFork = options.startPrivateFork
+        summary = options.summary
+        description = options.description
+        vulnerabilities = options.vulnerabilities
+        cweIds = options.cweIds
+        severity = options.severity
+        cvssVectorString = options.cvssVectorString
+        startPrivateFork = options.startPrivateFork
     }
 }

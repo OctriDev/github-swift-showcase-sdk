@@ -6,12 +6,16 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testPrivateRegistriesUpdateOrgPrivateRegistryPrivateRegistriesUpdXfc757f048aReachesMockAndDecodesResponse() async throws {
+    func testPrivateRegistriesUpdateOrgPrivateRegistryPrivateRegistriesUpdXfc757f048aReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
         _ = client
-        var options = try PrivateRegistriesMethods.PrivateRegistriesUpdateOrgPrivateRegistryOptions(org: decoded("\"org\""), secretName: decoded("\"Example Name\""))
+        var options = try PrivateRegistriesMethods.PrivateRegistriesUpdateOrgPrivateRegistryOptions(
+            org: decoded("\"org\""),
+            secretName: decoded("\"Example Name\"")
+        )
         options.registryType = try decoded("null")
         options.url = try decoded("null")
         options.username = try decoded("\"monalisa\"")
@@ -42,8 +46,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.privateRegistries.updateOrgPrivateRegistry(
-            options: options
-        )
+                options: options
+            )
             XCTFail("privateRegistriesUpdateOrgPrivateRegistry did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -92,10 +96,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.projects.addFieldForOrg(
-            projectNumber: decoded("1"),
-            org: decoded("\"org\""),
-            body: decoded("{\"name\":\"Team notes\",\"data_type\":\"text\",\"issue_field_id\":1}")
-        )
+                projectNumber: decoded("1"),
+                org: decoded("\"org\""),
+                body: decoded("{\"name\":\"Team notes\",\"data_type\":\"text\",\"issue_field_id\":1}")
+            )
             XCTFail("projectsAddFieldForOrg did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -144,10 +148,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.projects.addFieldForUser(
-            username: decoded("\"Example Name\""),
-            projectNumber: decoded("1"),
-            body: decoded("{\"name\":\"Team notes\",\"data_type\":\"text\"}")
-        )
+                username: decoded("\"Example Name\""),
+                projectNumber: decoded("1"),
+                body: decoded("{\"name\":\"Team notes\",\"data_type\":\"text\"}")
+            )
             XCTFail("projectsAddFieldForUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -171,14 +175,14 @@ extension SdkMethodTests {
         _ = client
         do {
             _ = try await client.projects.addItemForOrg(
-            org: decoded("\"org\""),
-            projectNumber: decoded("1"),
-            type: decoded("\"Issue\""),
-            id: decoded("3"),
-            owner: decoded("null"),
-            repo: decoded("null"),
-            number: decoded("null")
-        )
+                org: decoded("\"org\""),
+                projectNumber: decoded("1"),
+                type: decoded("\"Issue\""),
+                id: decoded("3"),
+                owner: decoded("null"),
+                repo: decoded("null"),
+                number: decoded("null")
+            )
             XCTFail("projectsAddItemForOrg decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -198,14 +202,14 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.projects.addItemForOrg(
-            org: decoded("\"org\""),
-            projectNumber: decoded("1"),
-            type: decoded("\"Issue\""),
-            id: decoded("3"),
-            owner: decoded("null"),
-            repo: decoded("null"),
-            number: decoded("null")
-        )
+                org: decoded("\"org\""),
+                projectNumber: decoded("1"),
+                type: decoded("\"Issue\""),
+                id: decoded("3"),
+                owner: decoded("null"),
+                repo: decoded("null"),
+                number: decoded("null")
+            )
             XCTFail("projectsAddItemForOrg did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -229,14 +233,14 @@ extension SdkMethodTests {
         _ = client
         do {
             _ = try await client.projects.addItemForUser(
-            username: decoded("\"Example Name\""),
-            projectNumber: decoded("1"),
-            type: decoded("\"Issue\""),
-            id: decoded("3"),
-            owner: decoded("null"),
-            repo: decoded("null"),
-            number: decoded("null")
-        )
+                username: decoded("\"Example Name\""),
+                projectNumber: decoded("1"),
+                type: decoded("\"Issue\""),
+                id: decoded("3"),
+                owner: decoded("null"),
+                repo: decoded("null"),
+                number: decoded("null")
+            )
             XCTFail("projectsAddItemForUser decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -256,14 +260,14 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.projects.addItemForUser(
-            username: decoded("\"Example Name\""),
-            projectNumber: decoded("1"),
-            type: decoded("\"Issue\""),
-            id: decoded("3"),
-            owner: decoded("null"),
-            repo: decoded("null"),
-            number: decoded("null")
-        )
+                username: decoded("\"Example Name\""),
+                projectNumber: decoded("1"),
+                type: decoded("\"Issue\""),
+                id: decoded("3"),
+                owner: decoded("null"),
+                repo: decoded("null"),
+                number: decoded("null")
+            )
             XCTFail("projectsAddItemForUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -280,7 +284,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testProjectsCreateDraftItemForAuthenticatedUserProjectsCreateDrafXa2ca47ecd5ReachesMockAndDecodesResponse() async throws {
+    func testProjectsCreateDraftItemForAuthenticatedUserProjectsCreateDrafXa2ca47ecd5ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -302,7 +307,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testProjectsCreateDraftItemForAuthenticatedUserProjectsCreateDrafX3ca17a9cabReachesMockAndDecodesResponse() async throws {
+    func testProjectsCreateDraftItemForAuthenticatedUserProjectsCreateDrafX3ca17a9cabReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -313,11 +319,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.projects.createDraftItemForAuthenticatedUser(
-            userId: decoded("\"user-1\""),
-            projectNumber: decoded("1"),
-            title: decoded("\"Sample Draft Issue Title\""),
-            body: decoded("null")
-        )
+                userId: decoded("\"user-1\""),
+                projectNumber: decoded("1"),
+                title: decoded("\"Sample Draft Issue Title\""),
+                body: decoded("null")
+            )
             XCTFail("projectsCreateDraftItemForAuthenticatedUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -367,11 +373,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.projects.createDraftItemForOrg(
-            org: decoded("\"org\""),
-            projectNumber: decoded("1"),
-            title: decoded("\"Sample Draft Issue Title\""),
-            body: decoded("null")
-        )
+                org: decoded("\"org\""),
+                projectNumber: decoded("1"),
+                title: decoded("\"Sample Draft Issue Title\""),
+                body: decoded("null")
+            )
             XCTFail("projectsCreateDraftItemForOrg did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -393,7 +399,12 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try ProjectsMethods.ProjectsCreateViewForOrgOptions(org: decoded("\"org\""), projectNumber: decoded("1"), name: decoded("\"All Issues\""), layout: decoded("\"table\""))
+        var options = try ProjectsMethods.ProjectsCreateViewForOrgOptions(
+            org: decoded("\"org\""),
+            projectNumber: decoded("1"),
+            name: decoded("\"All Issues\""),
+            layout: decoded("\"table\"")
+        )
         options.filter = try decoded("\"is:issue\"")
         options.visibleFields = try decoded("[123,456,789]")
         options.sortBy = try decoded("null")
@@ -401,8 +412,8 @@ extension SdkMethodTests {
         options.verticalGroupBy = try decoded("null")
         do {
             _ = try await client.projects.createViewForOrg(
-            options: options
-        )
+                options: options
+            )
             XCTFail("projectsCreateViewForOrg decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -416,7 +427,12 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try ProjectsMethods.ProjectsCreateViewForOrgOptions(org: decoded("\"org\""), projectNumber: decoded("1"), name: decoded("\"All Issues\""), layout: decoded("\"table\""))
+        var options = try ProjectsMethods.ProjectsCreateViewForOrgOptions(
+            org: decoded("\"org\""),
+            projectNumber: decoded("1"),
+            name: decoded("\"All Issues\""),
+            layout: decoded("\"table\"")
+        )
         options.filter = try decoded("\"is:issue\"")
         options.visibleFields = try decoded("[123,456,789]")
         options.sortBy = try decoded("null")
@@ -428,8 +444,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.projects.createViewForOrg(
-            options: options
-        )
+                options: options
+            )
             XCTFail("projectsCreateViewForOrg did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -451,7 +467,12 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try ProjectsMethods.ProjectsCreateViewForUserOptions(userId: decoded("\"user-1\""), projectNumber: decoded("1"), name: decoded("\"All Issues\""), layout: decoded("\"table\""))
+        var options = try ProjectsMethods.ProjectsCreateViewForUserOptions(
+            userId: decoded("\"user-1\""),
+            projectNumber: decoded("1"),
+            name: decoded("\"All Issues\""),
+            layout: decoded("\"table\"")
+        )
         options.filter = try decoded("\"is:issue\"")
         options.visibleFields = try decoded("[123,456,789]")
         options.sortBy = try decoded("null")
@@ -459,8 +480,8 @@ extension SdkMethodTests {
         options.verticalGroupBy = try decoded("null")
         do {
             _ = try await client.projects.createViewForUser(
-            options: options
-        )
+                options: options
+            )
             XCTFail("projectsCreateViewForUser decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -474,7 +495,12 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try ProjectsMethods.ProjectsCreateViewForUserOptions(userId: decoded("\"user-1\""), projectNumber: decoded("1"), name: decoded("\"All Issues\""), layout: decoded("\"table\""))
+        var options = try ProjectsMethods.ProjectsCreateViewForUserOptions(
+            userId: decoded("\"user-1\""),
+            projectNumber: decoded("1"),
+            name: decoded("\"All Issues\""),
+            layout: decoded("\"table\"")
+        )
         options.filter = try decoded("\"is:issue\"")
         options.visibleFields = try decoded("[123,456,789]")
         options.sortBy = try decoded("null")
@@ -486,8 +512,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.projects.createViewForUser(
-            options: options
-        )
+                options: options
+            )
             XCTFail("projectsCreateViewForUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -528,10 +554,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.projects.deleteItemForOrg(
-            projectNumber: decoded("1"),
-            org: decoded("\"org\""),
-            itemId: decoded("1")
-        )
+                projectNumber: decoded("1"),
+                org: decoded("\"org\""),
+                itemId: decoded("1")
+            )
             XCTFail("projectsDeleteItemForOrg did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)

@@ -6,13 +6,33 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension CampaignsMethods {
-    /// Gets a campaign for an organization. The authenticated user must be an owner or security manager for the organization to use this endpoint. OAuth app tokens and personal access tokens (classic) need the `security_events` scope to use this endpoint.
+public extension CampaignsMethods {
+    /// Gets a campaign for an organization. The authenticated user must be an owner or security manager for the
+    /// organization to use this endpoint. OAuth app tokens and personal access tokens (classic) need the
+    /// `security_events` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - campaignNumber: The campaign number.
-    public static func campaignsGetCampaignSummary(config: ClientConfig, org: String, campaignNumber: Int, requestOptions: RequestOptions? = nil) async throws -> CampaignSummary {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/campaigns/", sdkEncodePathSegment(sdkWireString(campaignNumber))].joined(), config: config, decoder: .json, operationId: "campaignsGetCampaignSummary", options: requestOptions, errors: ["404": BasicError.self, "422": BasicError.self])).data
+    static func campaignsGetCampaignSummary(
+        config: ClientConfig,
+        org: String,
+        campaignNumber: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CampaignSummary {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/orgs/",
+                sdkEncodePathSegment(sdkWireString(org)),
+                "/campaigns/",
+                sdkEncodePathSegment(sdkWireString(campaignNumber)),
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "campaignsGetCampaignSummary",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "422": BasicError.self]
+        )).data
     }
 }

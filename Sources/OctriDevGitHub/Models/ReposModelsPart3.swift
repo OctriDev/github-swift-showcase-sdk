@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Repos domain models
+/// Repos domain models
 /// Required object value serialized in the `parents[]` wire field.
 public struct FileCommitCommitParentsItem: Codable {
     /// Optional `string` value serialized in the `url` wire field.
@@ -20,21 +20,21 @@ public struct FileCommitCommitParentsItem: Codable {
     }
 
     init() {
-        (self.url, self.htmlUrl, self.sha) = (nil, nil, nil)
+        (url, htmlUrl, sha) = (nil, nil, nil)
     }
 }
 
-extension FileCommitCommitParentsItem {
-    public init(from decoder: Decoder) throws {
+public extension FileCommitCommitParentsItem {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.url = try container.sdkDecodeIfPresent(.url)
-        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        self.sha = try container.sdkDecodeIfPresent(.sha)
+        url = try container.sdkDecodeIfPresent(.url)
+        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        sha = try container.sdkDecodeIfPresent(.sha)
     }
 }
 
-extension FileCommitCommitParentsItem {
-    public init(url: String? = nil, htmlUrl: String? = nil, sha: String? = nil) {
+public extension FileCommitCommitParentsItem {
+    init(url: String? = nil, htmlUrl: String? = nil, sha: String? = nil) {
         self.init()
         (self.url, self.htmlUrl) = (url, htmlUrl)
         self.sha = sha
@@ -62,31 +62,45 @@ public struct CollaboratorPermissions: Codable {
         case maintain
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension CollaboratorPermissions {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.pull) else {
-            throw SdkValidationError(field: "pull", code: "required", message: "Validation failed for 'pull': value is required")
-        }
-        guard container.contains(.push) else {
-            throw SdkValidationError(field: "push", code: "required", message: "Validation failed for 'push': value is required")
-        }
-        guard container.contains(.admin) else {
-            throw SdkValidationError(field: "admin", code: "required", message: "Validation failed for 'admin': value is required")
-        }
-        self.pull = try container.sdkDecodeRequired(.pull)
-        self.push = try container.sdkDecodeRequired(.push)
-        self.admin = try container.sdkDecodeRequired(.admin)
-        self.triage = try container.sdkDecodeIfPresent(.triage)
-        self.maintain = try container.sdkDecodeIfPresent(.maintain)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension CollaboratorPermissions {
-    public init(pull: Bool, push: Bool, admin: Bool, triage: Bool? = nil, maintain: Bool? = nil) {
+public extension CollaboratorPermissions {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.pull) else {
+            throw SdkValidationError(
+                field: "pull",
+                code: "required",
+                message: "Validation failed for 'pull': value is required"
+            )
+        }
+        guard container.contains(.push) else {
+            throw SdkValidationError(
+                field: "push",
+                code: "required",
+                message: "Validation failed for 'push': value is required"
+            )
+        }
+        guard container.contains(.admin) else {
+            throw SdkValidationError(
+                field: "admin",
+                code: "required",
+                message: "Validation failed for 'admin': value is required"
+            )
+        }
+        pull = try container.sdkDecodeRequired(.pull)
+        push = try container.sdkDecodeRequired(.push)
+        admin = try container.sdkDecodeRequired(.admin)
+        triage = try container.sdkDecodeIfPresent(.triage)
+        maintain = try container.sdkDecodeIfPresent(.maintain)
+    }
+}
+
+public extension CollaboratorPermissions {
+    init(pull: Bool, push: Bool, admin: Bool, triage: Bool? = nil, maintain: Bool? = nil) {
         (self.pull, self.push) = (pull, push)
         (self.admin, self.triage) = (admin, triage)
         self.maintain = maintain
@@ -130,29 +144,40 @@ public struct FileCommitContent: Codable {
     }
 
     init() {
-        (self.name, self.path, self.sha, self.size, self.url) = (nil, nil, nil, nil, nil)
-        (self.htmlUrl, self.gitUrl, self.downloadUrl, self.type, self.links) = (nil, nil, nil, nil, nil)
+        (name, path, sha, size, url) = (nil, nil, nil, nil, nil)
+        (htmlUrl, gitUrl, downloadUrl, type, links) = (nil, nil, nil, nil, nil)
     }
 }
 
-extension FileCommitContent {
-    public init(from decoder: Decoder) throws {
+public extension FileCommitContent {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.path = try container.sdkDecodeIfPresent(.path)
-        self.sha = try container.sdkDecodeIfPresent(.sha)
-        self.size = try container.sdkDecodeIfPresent(.size)
-        self.url = try container.sdkDecodeIfPresent(.url)
-        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        self.gitUrl = try container.sdkDecodeIfPresent(.gitUrl)
-        self.downloadUrl = try container.sdkDecodeIfPresent(.downloadUrl)
-        self.type = try container.sdkDecodeIfPresent(.type)
-        self.links = try container.sdkDecodeIfPresent(.links)
+        name = try container.sdkDecodeIfPresent(.name)
+        path = try container.sdkDecodeIfPresent(.path)
+        sha = try container.sdkDecodeIfPresent(.sha)
+        size = try container.sdkDecodeIfPresent(.size)
+        url = try container.sdkDecodeIfPresent(.url)
+        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        gitUrl = try container.sdkDecodeIfPresent(.gitUrl)
+        downloadUrl = try container.sdkDecodeIfPresent(.downloadUrl)
+        type = try container.sdkDecodeIfPresent(.type)
+        links = try container.sdkDecodeIfPresent(.links)
     }
 }
 
-extension FileCommitContent {
-    public init(name: String? = nil, path: String? = nil, sha: String? = nil, size: Int? = nil, url: String? = nil, htmlUrl: String? = nil, gitUrl: String? = nil, downloadUrl: String? = nil, type: String? = nil, links: FileCommitContentLinks? = nil) {
+public extension FileCommitContent {
+    init(
+        name: String? = nil,
+        path: String? = nil,
+        sha: String? = nil,
+        size: Int? = nil,
+        url: String? = nil,
+        htmlUrl: String? = nil,
+        gitUrl: String? = nil,
+        downloadUrl: String? = nil,
+        type: String? = nil,
+        links: FileCommitContentLinks? = nil
+    ) {
         self.init()
         (self.name, self.path) = (name, path)
         (self.sha, self.size) = (sha, size)
@@ -174,28 +199,38 @@ public struct ShortBranchCommit: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ShortBranchCommit {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.sha) else {
-            throw SdkValidationError(field: "sha", code: "required", message: "Validation failed for 'sha': value is required")
-        }
-        guard container.contains(.url) else {
-            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
-        }
-        self.sha = try container.sdkDecodeRequired(.sha)
-        self.url = try container.sdkDecodeRequired(.url)
-            try sdkValidateUri("url", self.url)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ShortBranchCommit {
-    public init(sha: String, url: String) throws {
+public extension ShortBranchCommit {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.sha) else {
+            throw SdkValidationError(
+                field: "sha",
+                code: "required",
+                message: "Validation failed for 'sha': value is required"
+            )
+        }
+        guard container.contains(.url) else {
+            throw SdkValidationError(
+                field: "url",
+                code: "required",
+                message: "Validation failed for 'url': value is required"
+            )
+        }
+        sha = try container.sdkDecodeRequired(.sha)
+        url = try container.sdkDecodeRequired(.url)
+        try sdkValidateUri("url", url)
+    }
+}
+
+public extension ShortBranchCommit {
+    init(sha: String, url: String) throws {
         (self.sha, self.url) = (sha, url)
-            try sdkValidateUri("url", self.url)
+        try sdkValidateUri("url", self.url)
     }
 }
 
@@ -216,29 +251,43 @@ public struct CloneTraffic: Codable {
         case clones
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension CloneTraffic {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.count) else {
-            throw SdkValidationError(field: "count", code: "required", message: "Validation failed for 'count': value is required")
-        }
-        guard container.contains(.uniques) else {
-            throw SdkValidationError(field: "uniques", code: "required", message: "Validation failed for 'uniques': value is required")
-        }
-        guard container.contains(.clones) else {
-            throw SdkValidationError(field: "clones", code: "required", message: "Validation failed for 'clones': value is required")
-        }
-        self.count = try container.sdkDecodeRequired(.count)
-        self.uniques = try container.sdkDecodeRequired(.uniques)
-        self.clones = try container.sdkDecodeRequired(.clones)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension CloneTraffic {
-    public init(count: Int, uniques: Int, clones: [Traffic]) {
+public extension CloneTraffic {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.count) else {
+            throw SdkValidationError(
+                field: "count",
+                code: "required",
+                message: "Validation failed for 'count': value is required"
+            )
+        }
+        guard container.contains(.uniques) else {
+            throw SdkValidationError(
+                field: "uniques",
+                code: "required",
+                message: "Validation failed for 'uniques': value is required"
+            )
+        }
+        guard container.contains(.clones) else {
+            throw SdkValidationError(
+                field: "clones",
+                code: "required",
+                message: "Validation failed for 'clones': value is required"
+            )
+        }
+        count = try container.sdkDecodeRequired(.count)
+        uniques = try container.sdkDecodeRequired(.uniques)
+        clones = try container.sdkDecodeRequired(.clones)
+    }
+}
+
+public extension CloneTraffic {
+    init(count: Int, uniques: Int, clones: [Traffic]) {
         (self.count, self.uniques) = (count, uniques)
         self.clones = clones
     }
@@ -270,37 +319,55 @@ public struct Autolink: Codable {
         case updatedAt = "updated_at"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension Autolink {
-    public init(from decoder: Decoder) throws {
+public extension Autolink {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
         }
         guard container.contains(.keyPrefix) else {
-            throw SdkValidationError(field: "key_prefix", code: "required", message: "Validation failed for 'key_prefix': value is required")
+            throw SdkValidationError(
+                field: "key_prefix",
+                code: "required",
+                message: "Validation failed for 'key_prefix': value is required"
+            )
         }
         guard container.contains(.urlTemplate) else {
-            throw SdkValidationError(field: "url_template", code: "required", message: "Validation failed for 'url_template': value is required")
+            throw SdkValidationError(
+                field: "url_template",
+                code: "required",
+                message: "Validation failed for 'url_template': value is required"
+            )
         }
         guard container.contains(.isAlphanumeric) else {
-            throw SdkValidationError(field: "is_alphanumeric", code: "required", message: "Validation failed for 'is_alphanumeric': value is required")
+            throw SdkValidationError(
+                field: "is_alphanumeric",
+                code: "required",
+                message: "Validation failed for 'is_alphanumeric': value is required"
+            )
         }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.keyPrefix = try container.sdkDecodeRequired(.keyPrefix)
-        self.urlTemplate = try container.sdkDecodeRequired(.urlTemplate)
-        self.isAlphanumeric = try container.sdkDecodeRequired(.isAlphanumeric)
-        self.updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
-        if let value = self.updatedAt {
+        id = try container.sdkDecodeRequired(.id)
+        keyPrefix = try container.sdkDecodeRequired(.keyPrefix)
+        urlTemplate = try container.sdkDecodeRequired(.urlTemplate)
+        isAlphanumeric = try container.sdkDecodeRequired(.isAlphanumeric)
+        updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
+        if let value = updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
     }
 }
 
-extension Autolink {
-    public init(id: Int, keyPrefix: String, urlTemplate: String, isAlphanumeric: Bool, updatedAt: Date? = nil) throws {
+public extension Autolink {
+    init(id: Int, keyPrefix: String, urlTemplate: String, isAlphanumeric: Bool, updatedAt: Date? = nil) throws {
         (self.id, self.keyPrefix) = (id, keyPrefix)
         (self.urlTemplate, self.isAlphanumeric) = (urlTemplate, isAlphanumeric)
         self.updatedAt = updatedAt
@@ -325,33 +392,47 @@ public struct Traffic: Codable {
         case count
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension Traffic {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.timestamp) else {
-            throw SdkValidationError(field: "timestamp", code: "required", message: "Validation failed for 'timestamp': value is required")
-        }
-        guard container.contains(.uniques) else {
-            throw SdkValidationError(field: "uniques", code: "required", message: "Validation failed for 'uniques': value is required")
-        }
-        guard container.contains(.count) else {
-            throw SdkValidationError(field: "count", code: "required", message: "Validation failed for 'count': value is required")
-        }
-        self.timestamp = try container.sdkDecodeRequired(.timestamp)
-        self.uniques = try container.sdkDecodeRequired(.uniques)
-        self.count = try container.sdkDecodeRequired(.count)
-            try sdkValidateDateTime("timestamp", sdkWireString(self.timestamp))
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension Traffic {
-    public init(timestamp: Date, uniques: Int, count: Int) throws {
+public extension Traffic {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.timestamp) else {
+            throw SdkValidationError(
+                field: "timestamp",
+                code: "required",
+                message: "Validation failed for 'timestamp': value is required"
+            )
+        }
+        guard container.contains(.uniques) else {
+            throw SdkValidationError(
+                field: "uniques",
+                code: "required",
+                message: "Validation failed for 'uniques': value is required"
+            )
+        }
+        guard container.contains(.count) else {
+            throw SdkValidationError(
+                field: "count",
+                code: "required",
+                message: "Validation failed for 'count': value is required"
+            )
+        }
+        timestamp = try container.sdkDecodeRequired(.timestamp)
+        uniques = try container.sdkDecodeRequired(.uniques)
+        count = try container.sdkDecodeRequired(.count)
+        try sdkValidateDateTime("timestamp", sdkWireString(timestamp))
+    }
+}
+
+public extension Traffic {
+    init(timestamp: Date, uniques: Int, count: Int) throws {
         (self.timestamp, self.uniques) = (timestamp, uniques)
         self.count = count
-            try sdkValidateDateTime("timestamp", sdkWireString(self.timestamp))
+        try sdkValidateDateTime("timestamp", sdkWireString(self.timestamp))
     }
 }
 
@@ -371,21 +452,21 @@ public struct MergedUpstream: Codable {
     }
 
     init() {
-        (self.message, self.mergeType, self.baseBranch) = (nil, nil, nil)
+        (message, mergeType, baseBranch) = (nil, nil, nil)
     }
 }
 
-extension MergedUpstream {
-    public init(from decoder: Decoder) throws {
+public extension MergedUpstream {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.message = try container.sdkDecodeIfPresent(.message)
-        self.mergeType = try container.sdkDecodeIfPresent(.mergeType)
-        self.baseBranch = try container.sdkDecodeIfPresent(.baseBranch)
+        message = try container.sdkDecodeIfPresent(.message)
+        mergeType = try container.sdkDecodeIfPresent(.mergeType)
+        baseBranch = try container.sdkDecodeIfPresent(.baseBranch)
     }
 }
 
-extension MergedUpstream {
-    public init(message: String? = nil, mergeType: MergedUpstreamMergeType? = nil, baseBranch: String? = nil) {
+public extension MergedUpstream {
+    init(message: String? = nil, mergeType: MergedUpstreamMergeType? = nil, baseBranch: String? = nil) {
         self.init()
         (self.message, self.mergeType) = (message, mergeType)
         self.baseBranch = baseBranch
@@ -413,34 +494,54 @@ public struct ShortBranch: Codable {
         case protectionUrl = "protection_url"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension ShortBranch {
-    public init(from decoder: Decoder) throws {
+public extension ShortBranch {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
         }
         guard container.contains(.commit) else {
-            throw SdkValidationError(field: "commit", code: "required", message: "Validation failed for 'commit': value is required")
+            throw SdkValidationError(
+                field: "commit",
+                code: "required",
+                message: "Validation failed for 'commit': value is required"
+            )
         }
         guard container.contains(.protected) else {
-            throw SdkValidationError(field: "protected", code: "required", message: "Validation failed for 'protected': value is required")
+            throw SdkValidationError(
+                field: "protected",
+                code: "required",
+                message: "Validation failed for 'protected': value is required"
+            )
         }
-        self.name = try container.sdkDecodeRequired(.name)
-        self.commit = try container.sdkDecodeRequired(.commit)
-        self.protected = try container.sdkDecodeRequired(.protected)
-        self.protection = try container.sdkDecodeIfPresent(.protection)
-        self.protectionUrl = try container.sdkDecodeIfPresent(.protectionUrl)
-        if let value = self.protectionUrl {
+        name = try container.sdkDecodeRequired(.name)
+        commit = try container.sdkDecodeRequired(.commit)
+        protected = try container.sdkDecodeRequired(.protected)
+        protection = try container.sdkDecodeIfPresent(.protection)
+        protectionUrl = try container.sdkDecodeIfPresent(.protectionUrl)
+        if let value = protectionUrl {
             try sdkValidateUri("protection_url", value)
         }
     }
 }
 
-extension ShortBranch {
-    public init(name: String, commit: ShortBranchCommit, protected: Bool, protection: BranchProtection? = nil, protectionUrl: String? = nil) throws {
+public extension ShortBranch {
+    init(
+        name: String,
+        commit: ShortBranchCommit,
+        protected: Bool,
+        protection: BranchProtection? = nil,
+        protectionUrl: String? = nil
+    ) throws {
         (self.name, self.commit) = (name, commit)
         (self.protected, self.protection) = (protected, protection)
         self.protectionUrl = protectionUrl
@@ -485,33 +586,55 @@ public struct CodeownersErrorsErrorsItem: Codable {
         case suggestion
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension CodeownersErrorsErrorsItem {
-    public init(from decoder: Decoder) throws {
+public extension CodeownersErrorsErrorsItem {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.line) else {
-            throw SdkValidationError(field: "line", code: "required", message: "Validation failed for 'line': value is required")
+            throw SdkValidationError(
+                field: "line",
+                code: "required",
+                message: "Validation failed for 'line': value is required"
+            )
         }
         guard container.contains(.column) else {
-            throw SdkValidationError(field: "column", code: "required", message: "Validation failed for 'column': value is required")
+            throw SdkValidationError(
+                field: "column",
+                code: "required",
+                message: "Validation failed for 'column': value is required"
+            )
         }
         guard container.contains(.kind) else {
-            throw SdkValidationError(field: "kind", code: "required", message: "Validation failed for 'kind': value is required")
+            throw SdkValidationError(
+                field: "kind",
+                code: "required",
+                message: "Validation failed for 'kind': value is required"
+            )
         }
         guard container.contains(.message) else {
-            throw SdkValidationError(field: "message", code: "required", message: "Validation failed for 'message': value is required")
+            throw SdkValidationError(
+                field: "message",
+                code: "required",
+                message: "Validation failed for 'message': value is required"
+            )
         }
         guard container.contains(.path) else {
-            throw SdkValidationError(field: "path", code: "required", message: "Validation failed for 'path': value is required")
+            throw SdkValidationError(
+                field: "path",
+                code: "required",
+                message: "Validation failed for 'path': value is required"
+            )
         }
-        self.line = try container.sdkDecodeRequired(.line)
-        self.column = try container.sdkDecodeRequired(.column)
-        self.kind = try container.sdkDecodeRequired(.kind)
-        self.message = try container.sdkDecodeRequired(.message)
-        self.path = try container.sdkDecodeRequired(.path)
-        self.source = try container.sdkDecodeIfPresent(.source)
-        self.suggestion = try container.sdkDecodeIfPresent(.suggestion)
+        line = try container.sdkDecodeRequired(.line)
+        column = try container.sdkDecodeRequired(.column)
+        kind = try container.sdkDecodeRequired(.kind)
+        message = try container.sdkDecodeRequired(.message)
+        path = try container.sdkDecodeRequired(.path)
+        source = try container.sdkDecodeIfPresent(.source)
+        suggestion = try container.sdkDecodeIfPresent(.suggestion)
     }
 }

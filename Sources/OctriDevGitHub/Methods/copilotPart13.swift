@@ -6,23 +6,72 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension CopilotMethods {
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Removes a repository from the list of selected repositories enabled for Copilot cloud agent in an organization. This method can only be called when the cloud agent repository policy is set to `selected`. OAuth app tokens and personal access tokens (classic) need the `admin:org` scopes to use this endpoint.
+public extension CopilotMethods {
+    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Removes a repository from the list of
+    /// selected repositories enabled for Copilot cloud agent in an organization. This method can only be called when
+    /// the cloud agent repository policy is set to `selected`. OAuth app tokens and personal access tokens (classic)
+    /// need the `admin:org` scopes to use this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - repositoryId: The unique identifier of the repository.
-    public static func copilotDisableCopilotCodingAgentForRepositoryInOrganization(config: ClientConfig, org: String, repositoryId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/copilot/coding-agent/permissions/repositories/", sdkEncodePathSegment(sdkWireString(repositoryId))].joined(), config: config, decoder: .empty, operationId: "copilotDisableCopilotCodingAgentForRepositoryInOrganization", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "409": BasicError.self, "500": BasicError.self])).data
+    static func copilotDisableCopilotCodingAgentForRepositoryInOrganization(
+        config: ClientConfig,
+        org: String,
+        repositoryId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            [
+                "/orgs/",
+                sdkEncodePathSegment(sdkWireString(org)),
+                "/copilot/coding-agent/permissions/repositories/",
+                sdkEncodePathSegment(sdkWireString(repositoryId)),
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "copilotDisableCopilotCodingAgentForRepositoryInOrganization",
+            options: requestOptions,
+            errors: [
+                "401": BasicError.self,
+                "403": BasicError.self,
+                "404": BasicError.self,
+                "409": BasicError.self,
+                "500": BasicError.self,
+            ]
+        )).data
     }
 
-    /// Retrieves the Copilot content exclusion rules configured for an organization. Use this endpoint to view the organization's path rules; organization owners can view these details. The response does not include comments, and duplicate keys are represented by their last occurrence.
+    /// Retrieves the Copilot content exclusion rules configured for an organization. Use this endpoint to view the
+    /// organization's path rules; organization owners can view these details. The response does not include comments,
+    /// and duplicate keys are represented by their last occurrence.
     ///
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Gets information about an organization's Copilot content exclusion path rules. To configure these settings, go to the organization's settings on GitHub. For more information, see "[Excluding content from GitHub Copilot](https://docs.github.com/copilot/managing-copilot/configuring-and-auditing-content-exclusion/excluding-content-from-github-copilot#configuring-content-exclusions-for-your-organization)." Organization owners can view details about Copilot content exclusion rules for the organization. OAuth app tokens and personal access tokens (classic) need either the `copilot` or `read:org` scopes to use this endpoint. > [!CAUTION] > * At this time, the API does not support comments. This endpoint will not return any comments in the existing rules. > * At this time, the API does not support duplicate keys. If your content exclusion configuration contains duplicate keys, the API will return only the last occurrence of that key. For example, if duplicate entries are present, only the final value will be included in the response.
+    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Gets information about an
+    /// organization's Copilot content exclusion path rules. To configure these settings, go to the organization's
+    /// settings on GitHub. For more information, see "[Excluding content from GitHub Copilot](https://docs.github.com/copilot/managing-copilot/configuring-and-auditing-content-exclusion/excluding-content-from-github-copilot#configuring-content-exclusions-for-your-organization)."
+    /// Organization owners can view details about Copilot content exclusion rules for the organization. OAuth app
+    /// tokens and personal access tokens (classic) need either the `copilot` or `read:org` scopes to use this endpoint.
+    /// > [!CAUTION] > * At this time, the API does not support comments. This endpoint will not return any comments in
+    /// the existing rules. > * At this time, the API does not support duplicate keys. If your content exclusion
+    /// configuration contains duplicate keys, the API will return only the last occurrence of that key. For example, if
+    /// duplicate entries are present, only the final value will be included in the response.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
-    public static func copilotCopilotContentExclusionForOrganization(config: ClientConfig, org: String, requestOptions: RequestOptions? = nil) async throws -> CopilotOrganizationContentExclusionDetails {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/copilot/content_exclusion"].joined(), config: config, decoder: .json, operationId: "copilotCopilotContentExclusionForOrganization", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self])).data
+    static func copilotCopilotContentExclusionForOrganization(
+        config: ClientConfig,
+        org: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CopilotOrganizationContentExclusionDetails {
+        try await (sdkRequest(
+            "GET",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/copilot/content_exclusion"].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "copilotCopilotContentExclusionForOrganization",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self]
+        )).data
     }
 }

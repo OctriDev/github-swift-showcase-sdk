@@ -9,181 +9,538 @@ public class AppsNamespace {
         self.config = config
     }
 
-/// Returns the GitHub App associated with the authentication credentials used. To see how many app installations are associated with this GitHub App, see the `installations_count` in the response. For more details about your app's installations, see the "[List installations for the authenticated app](https://docs.github.com/rest/apps/apps#list-installations-for-the-authenticated-app)" endpoint. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
+    /// Returns the GitHub App associated with the authentication credentials used. To see how many app installations
+    /// are associated with this GitHub App, see the `installations_count` in the response. For more details about your
+    /// app's installations, see the "[List installations for the authenticated
+    /// app](https://docs.github.com/rest/apps/apps#list-installations-for-the-authenticated-app)" endpoint. You must
+    /// use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
+    /// to access this endpoint.
     public func getAuthenticated(requestOptions: RequestOptions? = nil) async throws -> Integration {
-        return try await AppsMethods.appsGetAuthenticated(config: config, requestOptions: requestOptions)
+        try await AppsMethods.appsGetAuthenticated(config: config, requestOptions: requestOptions)
     }
 
-/// Creates a GitHub App from a manifest to complete the GitHub App Manifest flow. Use the temporary `code` to retrieve the app details and credentials, including its `id`, `pem`, and `webhook_secret`.
+    /// Creates a GitHub App from a manifest to complete the GitHub App Manifest flow. Use the temporary `code` to
+    /// retrieve the app details and credentials, including its `id`, `pem`, and `webhook_secret`.
     ///
-    /// Use this endpoint to complete the handshake necessary when implementing the [GitHub App Manifest flow](https://docs.github.com/apps/building-github-apps/creating-github-apps-from-a-manifest/). When you create a GitHub App with the manifest flow, you receive a temporary `code` used to retrieve the GitHub App's `id`, `pem` (private key), and `webhook_secret`.
-    public func createFromManifest(code: String, requestOptions: RequestOptions? = nil) async throws -> AppsCreateFromManifestResponse {
-        return try await AppsMethods.appsCreateFromManifest(config: config, code: code, requestOptions: requestOptions)
+    /// Use this endpoint to complete the handshake necessary when implementing the [GitHub App Manifest
+    /// flow](https://docs.github.com/apps/building-github-apps/creating-github-apps-from-a-manifest/). When you create
+    /// a GitHub App with the manifest flow, you receive a temporary `code` used to retrieve the GitHub App's `id`,
+    /// `pem` (private key), and `webhook_secret`.
+    public func createFromManifest(
+        code: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> AppsCreateFromManifestResponse {
+        try await AppsMethods.appsCreateFromManifest(config: config, code: code, requestOptions: requestOptions)
     }
 
-/// Returns the webhook configuration for a GitHub App. For more information about configuring a webhook for your app, see "Creating a GitHub App." You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
+    /// Returns the webhook configuration for a GitHub App. For more information about configuring a webhook for your
+    /// app, see "Creating a GitHub App." You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
+    /// to access this endpoint.
     public func getWebhookConfigForApp(requestOptions: RequestOptions? = nil) async throws -> WebhookConfig {
-        return try await AppsMethods.appsGetWebhookConfigForApp(config: config, requestOptions: requestOptions)
+        try await AppsMethods.appsGetWebhookConfigForApp(config: config, requestOptions: requestOptions)
     }
 
-/// Updates the webhook configuration for a GitHub App, including its payload URL and delivery settings. Supply `url` as a URI; `content_type` defaults to `form`, and `insecure_ssl` defaults to `0`. Authenticate with a GitHub App JWT to access this endpoint.
+    /// Updates the webhook configuration for a GitHub App, including its payload URL and delivery settings. Supply
+    /// `url` as a URI; `content_type` defaults to `form`, and `insecure_ssl` defaults to `0`. Authenticate with a
+    /// GitHub App JWT to access this endpoint.
     ///
-    /// Updates the webhook configuration for a GitHub App. For more information about configuring a webhook for your app, see "Creating a GitHub App." You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
-    public func updateWebhookConfigForApp(url: WebhookConfigUrl? = nil, contentType: WebhookConfigContentType? = nil, secret: WebhookConfigSecret? = nil, insecureSsl: WebhookConfigInsecureSsl? = nil, requestOptions: RequestOptions? = nil) async throws -> WebhookConfig {
-        return try await AppsMethods.appsUpdateWebhookConfigForApp(config: config, url: url, contentType: contentType, secret: secret, insecureSsl: insecureSsl, requestOptions: requestOptions)
+    /// Updates the webhook configuration for a GitHub App. For more information about configuring a webhook for your
+    /// app, see "Creating a GitHub App." You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
+    /// to access this endpoint.
+    public func updateWebhookConfigForApp(
+        url: WebhookConfigUrl? = nil,
+        contentType: WebhookConfigContentType? = nil,
+        secret: WebhookConfigSecret? = nil,
+        insecureSsl: WebhookConfigInsecureSsl? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> WebhookConfig {
+        try await AppsMethods.appsUpdateWebhookConfigForApp(
+            config: config,
+            url: url,
+            contentType: contentType,
+            secret: secret,
+            insecureSsl: insecureSsl,
+            requestOptions: requestOptions
+        )
     }
 
-/// Returns a list of webhook deliveries for the webhook configured for a GitHub App. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
-    public func listWebhookDeliveries(perPage: Int? = nil, cursor: String? = nil, status: AppsListWebhookDeliveriesParameter? = nil, requestOptions: RequestOptions? = nil) async throws -> [HookDeliveryItem] {
-        return try await AppsMethods.appsListWebhookDeliveries(config: config, perPage: perPage, cursor: cursor, status: status, requestOptions: requestOptions)
+    /// Returns a list of webhook deliveries for the webhook configured for a GitHub App. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
+    /// to access this endpoint.
+    public func listWebhookDeliveries(
+        perPage: Int? = nil,
+        cursor: String? = nil,
+        status: AppsListWebhookDeliveriesParameter? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [HookDeliveryItem] {
+        try await AppsMethods.appsListWebhookDeliveries(
+            config: config,
+            perPage: perPage,
+            cursor: cursor,
+            status: status,
+            requestOptions: requestOptions
+        )
     }
 
-/// Retrieves a delivery for a webhook configured for a GitHub App. Use `delivery_id` to identify the delivery whose request, response, and delivery status you need to inspect. Authenticate with a GitHub App JWT to access this endpoint.
+    /// Retrieves a delivery for a webhook configured for a GitHub App. Use `delivery_id` to identify the delivery whose
+    /// request, response, and delivery status you need to inspect. Authenticate with a GitHub App JWT to access this
+    /// endpoint.
     ///
-    /// Returns a delivery for the webhook configured for a GitHub App. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
-    public func getWebhookDelivery(deliveryId: Int, requestOptions: RequestOptions? = nil) async throws -> HookDelivery {
-        return try await AppsMethods.appsGetWebhookDelivery(config: config, deliveryId: deliveryId, requestOptions: requestOptions)
+    /// Returns a delivery for the webhook configured for a GitHub App. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
+    /// to access this endpoint.
+    public func getWebhookDelivery(
+        deliveryId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> HookDelivery {
+        try await AppsMethods.appsGetWebhookDelivery(
+            config: config,
+            deliveryId: deliveryId,
+            requestOptions: requestOptions
+        )
     }
 
-/// Triggers a redelivery attempt for a delivery made by a webhook configured for a GitHub App. Supply `delivery_id` to identify the delivery to attempt again. Authenticate with a GitHub App JWT to access this endpoint.
+    /// Triggers a redelivery attempt for a delivery made by a webhook configured for a GitHub App. Supply `delivery_id`
+    /// to identify the delivery to attempt again. Authenticate with a GitHub App JWT to access this endpoint.
     ///
-    /// Redeliver a delivery for the webhook configured for a GitHub App. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
-    public func redeliverWebhookDelivery(deliveryId: Int, requestOptions: RequestOptions? = nil) async throws -> [String: JSONValue] {
-        return try await AppsMethods.appsRedeliverWebhookDelivery(config: config, deliveryId: deliveryId, requestOptions: requestOptions)
+    /// Redeliver a delivery for the webhook configured for a GitHub App. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
+    /// to access this endpoint.
+    public func redeliverWebhookDelivery(
+        deliveryId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [String: JSONValue] {
+        try await AppsMethods.appsRedeliverWebhookDelivery(
+            config: config,
+            deliveryId: deliveryId,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists all the pending installation requests for the authenticated GitHub App.
-    public func listInstallationRequestsForAuthenticatedApp(perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [IntegrationInstallationRequest] {
-        return try await AppsMethods.appsListInstallationRequestsForAuthenticatedApp(config: config, perPage: perPage, page: page, requestOptions: requestOptions)
+    /// Lists all the pending installation requests for the authenticated GitHub App.
+    public func listInstallationRequestsForAuthenticatedApp(
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [IntegrationInstallationRequest] {
+        try await AppsMethods.appsListInstallationRequestsForAuthenticatedApp(
+            config: config,
+            perPage: perPage,
+            page: page,
+            requestOptions: requestOptions
+        )
     }
 }
 
-extension AppsNamespace {
-/// Lists installations for the authenticated GitHub App. Use `since` to filter for installations updated after a timestamp, and use `page` and `per_page` to paginate the results. Each installation includes its granted permissions; authenticate with a GitHub App JWT to access this endpoint.
+public extension AppsNamespace {
+    /// Lists installations for the authenticated GitHub App. Use `since` to filter for installations updated after a
+    /// timestamp, and use `page` and `per_page` to paginate the results. Each installation includes its granted
+    /// permissions; authenticate with a GitHub App JWT to access this endpoint.
     ///
-    /// The permissions the installation has are included under the `permissions` key. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
-    public func listInstallations(perPage: Int? = nil, page: Int? = nil, since: Date? = nil, outdated: String? = nil, requestOptions: RequestOptions? = nil) async throws -> [Installation] {
-        return try await AppsMethods.appsListInstallations(config: config, perPage: perPage, page: page, since: since, outdated: outdated, requestOptions: requestOptions)
+    /// The permissions the installation has are included under the `permissions` key. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
+    /// to access this endpoint.
+    func listInstallations(
+        perPage: Int? = nil,
+        page: Int? = nil,
+        since: Date? = nil,
+        outdated: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [Installation] {
+        try await AppsMethods.appsListInstallations(
+            config: config,
+            perPage: perPage,
+            page: page,
+            since: since,
+            outdated: outdated,
+            requestOptions: requestOptions
+        )
     }
 
-/// Enables an authenticated GitHub App to find an installation's information using the installation id. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
-    public func getInstallation(installationId: Int, requestOptions: RequestOptions? = nil) async throws -> Installation {
-        return try await AppsMethods.appsGetInstallation(config: config, installationId: installationId, requestOptions: requestOptions)
+    /// Enables an authenticated GitHub App to find an installation's information using the installation id. You must
+    /// use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
+    /// to access this endpoint.
+    func getInstallation(installationId: Int, requestOptions: RequestOptions? = nil) async throws -> Installation {
+        try await AppsMethods.appsGetInstallation(
+            config: config,
+            installationId: installationId,
+            requestOptions: requestOptions
+        )
     }
 
-/// Uninstalls a GitHub App on a user, organization, or enterprise account. If you prefer to temporarily suspend an app's access to your account's resources, then we recommend the "[Suspend an app installation](https://docs.github.com/rest/apps/apps#suspend-an-app-installation)" endpoint. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
-    public func deleteInstallation(installationId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await AppsMethods.appsDeleteInstallation(config: config, installationId: installationId, requestOptions: requestOptions)
+    /// Uninstalls a GitHub App on a user, organization, or enterprise account. If you prefer to temporarily suspend an
+    /// app's access to your account's resources, then we recommend the "[Suspend an app
+    /// installation](https://docs.github.com/rest/apps/apps#suspend-an-app-installation)" endpoint. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
+    /// to access this endpoint.
+    func deleteInstallation(
+        installationId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await AppsMethods.appsDeleteInstallation(
+            config: config,
+            installationId: installationId,
+            requestOptions: requestOptions
+        )
     }
 
-/// Creates an installation access token that enables a GitHub App to make authenticated API requests for the app's installation on an organization or individual account. Installation tokens expire one hour from the time you create them. Using an expired token produces a status code of `401 - Unauthorized`, and requires creating a new installation token. By default the installation token has access to all repositories that the installation can access. > [!NOTE] > Starting April 27, 2026, GitHub began a staged rollout of a stateless format (`ghs_APPID_JWT`) to all newly minted GitHub App installation tokens, making them more performant and improving the reliability of our API surface. If your application expects or relies on installation tokens being exactly 40 characters long, it may not handle this new token format correctly. You can now validate your apps and workflows using a temporary request header that lets you enable the token format on demand. For more information about the temporary header, see [the GitHub blog](https://github.blog/changelog/2026-05-15-github-app-installation-tokens-per-request-override-header). Optionally, you can use the `repositories` or `repository_ids` body parameters to specify individual repositories that the installation access token can access. If you don't use `repositories` or `repository_ids` to grant access to specific repositories, the installation access token will have access to all repositories that the installation was granted access to. The installation access token cannot be granted access to repositories that the installation was not granted access to. Up to 500 repositories can be listed in this manner. Optionally, use the `permissions` body parameter to specify the permissions that the installation access token should have. If `permissions` is not specified, the installation access token will have all of the permissions that were granted to the app. The installation access token cannot be granted permissions that the app…
-    public func createInstallationAccessToken(installationId: Int, repositories: [String]? = nil, repositoryIds: [Int]? = nil, permissions: AppPermissions? = nil, requestOptions: RequestOptions? = nil) async throws -> InstallationToken {
-        return try await AppsMethods.appsCreateInstallationAccessToken(config: config, installationId: installationId, repositories: repositories, repositoryIds: repositoryIds, permissions: permissions, requestOptions: requestOptions)
+    /// Creates an installation access token that enables a GitHub App to make authenticated API requests for the app's
+    /// installation on an organization or individual account. Installation tokens expire one hour from the time you
+    /// create them. Using an expired token produces a status code of `401 - Unauthorized`, and requires creating a new
+    /// installation token. By default the installation token has access to all repositories that the installation can
+    /// access. > [!NOTE] > Starting April 27, 2026, GitHub began a staged rollout of a stateless format
+    /// (`ghs_APPID_JWT`) to all newly minted GitHub App installation tokens, making them more performant and improving
+    /// the reliability of our API surface. If your application expects or relies on installation tokens being exactly
+    /// 40 characters long, it may not handle this new token format correctly. You can now validate your apps and
+    /// workflows using a temporary request header that lets you enable the token format on demand. For more information
+    /// about the temporary header, see [the GitHub
+    /// blog](https://github.blog/changelog/2026-05-15-github-app-installation-tokens-per-request-override-header).
+    /// Optionally, you can use the `repositories` or `repository_ids` body parameters to specify individual
+    /// repositories that the installation access token can access. If you don't use `repositories` or `repository_ids`
+    /// to grant access to specific repositories, the installation access token will have access to all repositories
+    /// that the installation was granted access to. The installation access token cannot be granted access to
+    /// repositories that the installation was not granted access to. Up to 500 repositories can be listed in this
+    /// manner. Optionally, use the `permissions` body parameter to specify the permissions that the installation access
+    /// token should have. If `permissions` is not specified, the installation access token will have all of the
+    /// permissions that were granted to the app. The installation access token cannot be granted permissions that the
+    /// app…
+    func createInstallationAccessToken(
+        installationId: Int,
+        repositories: [String]? = nil,
+        repositoryIds: [Int]? = nil,
+        permissions: AppPermissions? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> InstallationToken {
+        try await AppsMethods.appsCreateInstallationAccessToken(
+            config: config,
+            installationId: installationId,
+            repositories: repositories,
+            repositoryIds: repositoryIds,
+            permissions: permissions,
+            requestOptions: requestOptions
+        )
     }
 
-/// Suspends a GitHub App on a user, organization, or enterprise account, which blocks the app from accessing the account's resources. When a GitHub App is suspended, the app's access to the GitHub API or webhook events is blocked for that account. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
-    public func suspendInstallation(installationId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await AppsMethods.appsSuspendInstallation(config: config, installationId: installationId, requestOptions: requestOptions)
+    /// Suspends a GitHub App on a user, organization, or enterprise account, which blocks the app from accessing the
+    /// account's resources. When a GitHub App is suspended, the app's access to the GitHub API or webhook events is
+    /// blocked for that account. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
+    /// to access this endpoint.
+    func suspendInstallation(
+        installationId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await AppsMethods.appsSuspendInstallation(
+            config: config,
+            installationId: installationId,
+            requestOptions: requestOptions
+        )
     }
 
-/// Removes a GitHub App installation suspension. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
-    public func unsuspendInstallation(installationId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await AppsMethods.appsUnsuspendInstallation(config: config, installationId: installationId, requestOptions: requestOptions)
+    /// Removes a GitHub App installation suspension. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
+    /// to access this endpoint.
+    func unsuspendInstallation(
+        installationId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await AppsMethods.appsUnsuspendInstallation(
+            config: config,
+            installationId: installationId,
+            requestOptions: requestOptions
+        )
     }
 
-/// OAuth and GitHub application owners can revoke a grant for their application and a specific user. You must provide a valid OAuth `access_token` as an input parameter and the grant for the token's owner will be deleted. Deleting an application's grant will also delete all OAuth tokens associated with the application for the user. Once deleted, the application will have no access to the user's account and will no longer be listed on [the application authorizations settings screen within GitHub](https://github.com/settings/applications#authorized).
-    public func deleteAuthorization(clientId: String, accessToken: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await AppsMethods.appsDeleteAuthorization(config: config, clientId: clientId, accessToken: accessToken, requestOptions: requestOptions)
+    /// OAuth and GitHub application owners can revoke a grant for their application and a specific user. You must
+    /// provide a valid OAuth `access_token` as an input parameter and the grant for the token's owner will be deleted.
+    /// Deleting an application's grant will also delete all OAuth tokens associated with the application for the user.
+    /// Once deleted, the application will have no access to the user's account and will no longer be listed on [the
+    /// application authorizations settings screen within GitHub](https://github.com/settings/applications#authorized).
+    func deleteAuthorization(
+        clientId: String,
+        accessToken: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await AppsMethods.appsDeleteAuthorization(
+            config: config,
+            clientId: clientId,
+            accessToken: accessToken,
+            requestOptions: requestOptions
+        )
     }
 
-/// OAuth applications and GitHub applications with OAuth authorizations can use this API method for checking OAuth token validity without exceeding the normal rate limits for failed login attempts. Authentication works differently with this particular endpoint. Invalid tokens will return `404 NOT FOUND`.
-    public func checkToken(clientId: String, accessToken: String, requestOptions: RequestOptions? = nil) async throws -> Authorization {
-        return try await AppsMethods.appsCheckToken(config: config, clientId: clientId, accessToken: accessToken, requestOptions: requestOptions)
+    /// OAuth applications and GitHub applications with OAuth authorizations can use this API method for checking OAuth
+    /// token validity without exceeding the normal rate limits for failed login attempts. Authentication works
+    /// differently with this particular endpoint. Invalid tokens will return `404 NOT FOUND`.
+    func checkToken(
+        clientId: String,
+        accessToken: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Authorization {
+        try await AppsMethods.appsCheckToken(
+            config: config,
+            clientId: clientId,
+            accessToken: accessToken,
+            requestOptions: requestOptions
+        )
     }
 }
 
-extension AppsNamespace {
-/// OAuth applications and GitHub applications with OAuth authorizations can use this API method to reset a valid OAuth token without end-user involvement. Applications must save the "token" property in the response because changes take effect immediately. Invalid tokens will return `404 NOT FOUND`.
-    public func resetToken(clientId: String, accessToken: String, requestOptions: RequestOptions? = nil) async throws -> Authorization {
-        return try await AppsMethods.appsResetToken(config: config, clientId: clientId, accessToken: accessToken, requestOptions: requestOptions)
+public extension AppsNamespace {
+    /// OAuth applications and GitHub applications with OAuth authorizations can use this API method to reset a valid
+    /// OAuth token without end-user involvement. Applications must save the "token" property in the response because
+    /// changes take effect immediately. Invalid tokens will return `404 NOT FOUND`.
+    func resetToken(
+        clientId: String,
+        accessToken: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Authorization {
+        try await AppsMethods.appsResetToken(
+            config: config,
+            clientId: clientId,
+            accessToken: accessToken,
+            requestOptions: requestOptions
+        )
     }
 
-/// OAuth or GitHub application owners can revoke a single token for an OAuth application or a GitHub application with an OAuth authorization.
-    public func deleteToken(clientId: String, accessToken: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await AppsMethods.appsDeleteToken(config: config, clientId: clientId, accessToken: accessToken, requestOptions: requestOptions)
+    /// OAuth or GitHub application owners can revoke a single token for an OAuth application or a GitHub application
+    /// with an OAuth authorization.
+    func deleteToken(
+        clientId: String,
+        accessToken: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await AppsMethods.appsDeleteToken(
+            config: config,
+            clientId: clientId,
+            accessToken: accessToken,
+            requestOptions: requestOptions
+        )
     }
 
-/// Use a non-scoped user access token to create a repository-scoped and/or permission-scoped user access token. You can specify which repositories the token can access and which permissions are granted to the token. Invalid tokens will return `404 NOT FOUND`.
-    public func scopeToken(clientId: String, accessToken: String, target: String? = nil, targetId: Int? = nil, repositories: [String]? = nil, repositoryIds: [Int]? = nil, permissions: AppPermissions? = nil, requestOptions: RequestOptions? = nil) async throws -> Authorization {
-        return try await AppsMethods.appsScopeToken(config: config, clientId: clientId, accessToken: accessToken, target: target, targetId: targetId, repositories: repositories, repositoryIds: repositoryIds, permissions: permissions, requestOptions: requestOptions)
+    /// Use a non-scoped user access token to create a repository-scoped and/or permission-scoped user access token. You
+    /// can specify which repositories the token can access and which permissions are granted to the token. Invalid
+    /// tokens will return `404 NOT FOUND`.
+    func scopeToken(
+        clientId: String,
+        accessToken: String,
+        target: String? = nil,
+        targetId: Int? = nil,
+        repositories: [String]? = nil,
+        repositoryIds: [Int]? = nil,
+        permissions: AppPermissions? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Authorization {
+        try await AppsMethods.appsScopeToken(
+            config: config,
+            clientId: clientId,
+            accessToken: accessToken,
+            target: target,
+            targetId: targetId,
+            repositories: repositories,
+            repositoryIds: repositoryIds,
+            permissions: permissions,
+            requestOptions: requestOptions
+        )
     }
 
-/// Retrieves a GitHub App by its URL-friendly slug. Use the `app_slug` path parameter shown in the app's settings URL to identify the app.
+    /// Retrieves a GitHub App by its URL-friendly slug. Use the `app_slug` path parameter shown in the app's settings
+    /// URL to identify the app.
     ///
-    /// > [!NOTE] > The `:app_slug` is just the URL-friendly name of your GitHub App. You can find this on the settings page for your GitHub App (e.g., `https://github.com/settings/apps/:app_slug`).
-    public func getBySlug(appSlug: String, requestOptions: RequestOptions? = nil) async throws -> Integration {
-        return try await AppsMethods.appsGetBySlug(config: config, appSlug: appSlug, requestOptions: requestOptions)
+    /// > [!NOTE] > The `:app_slug` is just the URL-friendly name of your GitHub App. You can find this on the settings
+    /// page for your GitHub App (e.g., `https://github.com/settings/apps/:app_slug`).
+    func getBySlug(appSlug: String, requestOptions: RequestOptions? = nil) async throws -> Integration {
+        try await AppsMethods.appsGetBySlug(config: config, appSlug: appSlug, requestOptions: requestOptions)
     }
 
-/// List repositories that an app installation can access.
-    public func listReposAccessibleToInstallation(perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> AppsListReposAccessibleToInstallationResponse {
-        return try await AppsMethods.appsListReposAccessibleToInstallation(config: config, perPage: perPage, page: page, requestOptions: requestOptions)
+    /// List repositories that an app installation can access.
+    func listReposAccessibleToInstallation(
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> AppsListReposAccessibleToInstallationResponse {
+        try await AppsMethods.appsListReposAccessibleToInstallation(
+            config: config,
+            perPage: perPage,
+            page: page,
+            requestOptions: requestOptions
+        )
     }
 
-/// Revokes the installation token you're using to authenticate as an installation and access this endpoint. Once an installation token is revoked, the token is invalidated and cannot be used. Other endpoints that require the revoked installation token must have a new installation token to work. You can create a new token using the "[Create an installation access token for an app](https://docs.github.com/rest/apps/apps#create-an-installation-access-token-for-an-app)" endpoint.
-    public func revokeInstallationAccessToken(requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await AppsMethods.appsRevokeInstallationAccessToken(config: config, requestOptions: requestOptions)
+    /// Revokes the installation token you're using to authenticate as an installation and access this endpoint. Once an
+    /// installation token is revoked, the token is invalidated and cannot be used. Other endpoints that require the
+    /// revoked installation token must have a new installation token to work. You can create a new token using the
+    /// "[Create an installation access token for an
+    /// app](https://docs.github.com/rest/apps/apps#create-an-installation-access-token-for-an-app)" endpoint.
+    func revokeInstallationAccessToken(requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        try await AppsMethods.appsRevokeInstallationAccessToken(config: config, requestOptions: requestOptions)
     }
 
-/// Shows whether the user or organization account actively subscribes to a plan listed by the authenticated GitHub App. When someone submits a plan change that won't be processed until the end of their billing cycle, you will also see the upcoming pending change. GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint. OAuth apps must use [basic authentication](https://docs.github.com/rest/authentication/authenticating-to-the-rest-api#using-basic-authentication) with their client ID and client secret to access this endpoint.
-    public func getSubscriptionPlanForAccount(accountId: Int, requestOptions: RequestOptions? = nil) async throws -> MarketplacePurchase {
-        return try await AppsMethods.appsGetSubscriptionPlanForAccount(config: config, accountId: accountId, requestOptions: requestOptions)
+    /// Shows whether the user or organization account actively subscribes to a plan listed by the authenticated GitHub
+    /// App. When someone submits a plan change that won't be processed until the end of their billing cycle, you will
+    /// also see the upcoming pending change. GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
+    /// to access this endpoint. OAuth apps must use [basic authentication](https://docs.github.com/rest/authentication/authenticating-to-the-rest-api#using-basic-authentication)
+    /// with their client ID and client secret to access this endpoint.
+    func getSubscriptionPlanForAccount(
+        accountId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> MarketplacePurchase {
+        try await AppsMethods.appsGetSubscriptionPlanForAccount(
+            config: config,
+            accountId: accountId,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists all plans that are part of your GitHub Marketplace listing. GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint. OAuth apps must use [basic authentication](https://docs.github.com/rest/authentication/authenticating-to-the-rest-api#using-basic-authentication) with their client ID and client secret to access this endpoint.
-    public func listPlans(perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [MarketplaceListingPlan] {
-        return try await AppsMethods.appsListPlans(config: config, perPage: perPage, page: page, requestOptions: requestOptions)
+    /// Lists all plans that are part of your GitHub Marketplace listing. GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
+    /// to access this endpoint. OAuth apps must use [basic authentication](https://docs.github.com/rest/authentication/authenticating-to-the-rest-api#using-basic-authentication)
+    /// with their client ID and client secret to access this endpoint.
+    func listPlans(
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [MarketplaceListingPlan] {
+        try await AppsMethods.appsListPlans(
+            config: config,
+            perPage: perPage,
+            page: page,
+            requestOptions: requestOptions
+        )
     }
 }
 
-extension AppsNamespace {
-/// Returns user and organization accounts associated with the specified plan, including free plans. For per-seat pricing, you see the list of accounts that have purchased the plan, including the number of seats purchased. When someone submits a plan change that won't be processed until the end of their billing cycle, you will also see the upcoming pending change. GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint. OAuth apps must use [basic authentication](https://docs.github.com/rest/authentication/authenticating-to-the-rest-api#using-basic-authentication) with their client ID and client secret to access this endpoint.
-    public func listAccountsForPlan(planId: Int, sort: AppsListAccountsForPlanParameter? = nil, direction: AppsListAccountsForPlanParameterXfe431365? = nil, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [MarketplacePurchase] {
-        return try await AppsMethods.appsListAccountsForPlan(config: config, planId: planId, sort: sort, direction: direction, perPage: perPage, page: page, requestOptions: requestOptions)
+public extension AppsNamespace {
+    /// Returns user and organization accounts associated with the specified plan, including free plans. For per-seat
+    /// pricing, you see the list of accounts that have purchased the plan, including the number of seats purchased.
+    /// When someone submits a plan change that won't be processed until the end of their billing cycle, you will also
+    /// see the upcoming pending change. GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
+    /// to access this endpoint. OAuth apps must use [basic authentication](https://docs.github.com/rest/authentication/authenticating-to-the-rest-api#using-basic-authentication)
+    /// with their client ID and client secret to access this endpoint.
+    func listAccountsForPlan(
+        planId: Int,
+        sort: AppsListAccountsForPlanParameter? = nil,
+        direction: AppsListAccountsForPlanParameterXfe431365? = nil,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [MarketplacePurchase] {
+        try await AppsMethods.appsListAccountsForPlan(
+            config: config,
+            planId: planId,
+            sort: sort,
+            direction: direction,
+            perPage: perPage,
+            page: page,
+            requestOptions: requestOptions
+        )
     }
 
-/// Shows whether the user or organization account actively subscribes to a plan listed by the authenticated GitHub App. When someone submits a plan change that won't be processed until the end of their billing cycle, you will also see the upcoming pending change. GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint. OAuth apps must use [basic authentication](https://docs.github.com/rest/authentication/authenticating-to-the-rest-api#using-basic-authentication) with their client ID and client secret to access this endpoint.
-    public func getSubscriptionPlanForAccountStubbed(accountId: Int, requestOptions: RequestOptions? = nil) async throws -> MarketplacePurchase {
-        return try await AppsMethods.appsGetSubscriptionPlanForAccountStubbed(config: config, accountId: accountId, requestOptions: requestOptions)
+    /// Shows whether the user or organization account actively subscribes to a plan listed by the authenticated GitHub
+    /// App. When someone submits a plan change that won't be processed until the end of their billing cycle, you will
+    /// also see the upcoming pending change. GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
+    /// to access this endpoint. OAuth apps must use [basic authentication](https://docs.github.com/rest/authentication/authenticating-to-the-rest-api#using-basic-authentication)
+    /// with their client ID and client secret to access this endpoint.
+    func getSubscriptionPlanForAccountStubbed(
+        accountId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> MarketplacePurchase {
+        try await AppsMethods.appsGetSubscriptionPlanForAccountStubbed(
+            config: config,
+            accountId: accountId,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists all plans that are part of your GitHub Marketplace listing. GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint. OAuth apps must use [basic authentication](https://docs.github.com/rest/authentication/authenticating-to-the-rest-api#using-basic-authentication) with their client ID and client secret to access this endpoint.
-    public func listPlansStubbed(perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [MarketplaceListingPlan] {
-        return try await AppsMethods.appsListPlansStubbed(config: config, perPage: perPage, page: page, requestOptions: requestOptions)
+    /// Lists all plans that are part of your GitHub Marketplace listing. GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
+    /// to access this endpoint. OAuth apps must use [basic authentication](https://docs.github.com/rest/authentication/authenticating-to-the-rest-api#using-basic-authentication)
+    /// with their client ID and client secret to access this endpoint.
+    func listPlansStubbed(
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [MarketplaceListingPlan] {
+        try await AppsMethods.appsListPlansStubbed(
+            config: config,
+            perPage: perPage,
+            page: page,
+            requestOptions: requestOptions
+        )
     }
 
-/// Returns repository and organization accounts associated with the specified plan, including free plans. For per-seat pricing, you see the list of accounts that have purchased the plan, including the number of seats purchased. When someone submits a plan change that won't be processed until the end of their billing cycle, you will also see the upcoming pending change. GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint. OAuth apps must use [basic authentication](https://docs.github.com/rest/authentication/authenticating-to-the-rest-api#using-basic-authentication) with their client ID and client secret to access this endpoint.
-    public func listAccountsForPlanStubbed(planId: Int, sort: AppsListAccountsForPlanParameter? = nil, direction: AppsListAccountsForPlanStubbedParameter? = nil, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [MarketplacePurchase] {
-        return try await AppsMethods.appsListAccountsForPlanStubbed(config: config, planId: planId, sort: sort, direction: direction, perPage: perPage, page: page, requestOptions: requestOptions)
+    /// Returns repository and organization accounts associated with the specified plan, including free plans. For
+    /// per-seat pricing, you see the list of accounts that have purchased the plan, including the number of seats
+    /// purchased. When someone submits a plan change that won't be processed until the end of their billing cycle, you
+    /// will also see the upcoming pending change. GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
+    /// to access this endpoint. OAuth apps must use [basic authentication](https://docs.github.com/rest/authentication/authenticating-to-the-rest-api#using-basic-authentication)
+    /// with their client ID and client secret to access this endpoint.
+    func listAccountsForPlanStubbed(
+        planId: Int,
+        sort: AppsListAccountsForPlanParameter? = nil,
+        direction: AppsListAccountsForPlanStubbedParameter? = nil,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [MarketplacePurchase] {
+        try await AppsMethods.appsListAccountsForPlanStubbed(
+            config: config,
+            planId: planId,
+            sort: sort,
+            direction: direction,
+            perPage: perPage,
+            page: page,
+            requestOptions: requestOptions
+        )
     }
 
-/// Enables an authenticated GitHub App to find the organization's installation information. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
-    public func getOrgInstallation(org: String, requestOptions: RequestOptions? = nil) async throws -> Installation {
-        return try await AppsMethods.appsGetOrgInstallation(config: config, org: org, requestOptions: requestOptions)
+    /// Enables an authenticated GitHub App to find the organization's installation information. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
+    /// to access this endpoint.
+    func getOrgInstallation(org: String, requestOptions: RequestOptions? = nil) async throws -> Installation {
+        try await AppsMethods.appsGetOrgInstallation(config: config, org: org, requestOptions: requestOptions)
     }
 
-/// Enables an authenticated GitHub App to find the repository's installation information. The installation's account type will be either an organization or a user account, depending which account the repository belongs to. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
-    public func getRepoInstallation(owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> Installation {
-        return try await AppsMethods.appsGetRepoInstallation(config: config, owner: owner, repo: repo, requestOptions: requestOptions)
+    /// Enables an authenticated GitHub App to find the repository's installation information. The installation's
+    /// account type will be either an organization or a user account, depending which account the repository belongs
+    /// to. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
+    /// to access this endpoint.
+    func getRepoInstallation(
+        owner: String,
+        repo: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Installation {
+        try await AppsMethods.appsGetRepoInstallation(
+            config: config,
+            owner: owner,
+            repo: repo,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists installations of your GitHub App that the authenticated user has explicit permission (`:read`, `:write`, or `:admin`) to access. The authenticated user has explicit permission to access repositories they own, repositories where they are a collaborator, and repositories that they can access through an organization membership. You can find the permissions for the installation under the `permissions` key.
-    public func listInstallationsForAuthenticatedUser(perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> AppsListInstallationsForAuthenticatedUserResponse {
-        return try await AppsMethods.appsListInstallationsForAuthenticatedUser(config: config, perPage: perPage, page: page, requestOptions: requestOptions)
+    /// Lists installations of your GitHub App that the authenticated user has explicit permission (`:read`, `:write`,
+    /// or `:admin`) to access. The authenticated user has explicit permission to access repositories they own,
+    /// repositories where they are a collaborator, and repositories that they can access through an organization
+    /// membership. You can find the permissions for the installation under the `permissions` key.
+    func listInstallationsForAuthenticatedUser(
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> AppsListInstallationsForAuthenticatedUserResponse {
+        try await AppsMethods.appsListInstallationsForAuthenticatedUser(
+            config: config,
+            perPage: perPage,
+            page: page,
+            requestOptions: requestOptions
+        )
     }
 
-/// List repositories that the authenticated user has explicit permission (`:read`, `:write`, or `:admin`) to access for an installation. The authenticated user has explicit permission to access repositories they own, repositories where they are a collaborator, and repositories that they can access through an organization membership. The access the user has to each repository is included in the hash under the `permissions` key.
-    public func listInstallationReposForAuthenticatedUser(installationId: Int, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> AppsListInstallationReposForAuthenticatedUserResponse {
-        return try await AppsMethods.appsListInstallationReposForAuthenticatedUser(config: config, installationId: installationId, perPage: perPage, page: page, requestOptions: requestOptions)
+    /// List repositories that the authenticated user has explicit permission (`:read`, `:write`, or `:admin`) to access
+    /// for an installation. The authenticated user has explicit permission to access repositories they own,
+    /// repositories where they are a collaborator, and repositories that they can access through an organization
+    /// membership. The access the user has to each repository is included in the hash under the `permissions` key.
+    func listInstallationReposForAuthenticatedUser(
+        installationId: Int,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> AppsListInstallationReposForAuthenticatedUserResponse {
+        try await AppsMethods.appsListInstallationReposForAuthenticatedUser(
+            config: config,
+            installationId: installationId,
+            perPage: perPage,
+            page: page,
+            requestOptions: requestOptions
+        )
     }
 }

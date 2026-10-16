@@ -3,58 +3,233 @@
 
 import Foundation
 
-extension IssuesNamespace {
-/// Adds up to 10 assignees to an issue. Users already assigned to an issue are not replaced.
-    public func addAssignees(owner: String, repo: String, issueNumber: Int, assignees: [IssuesAddAssigneesRequestBodyAssigneesItem]? = nil, requestOptions: RequestOptions? = nil) async throws -> Issue {
-        return try await IssuesMethods.issuesAddAssignees(config: config, owner: owner, repo: repo, issueNumber: issueNumber, assignees: assignees, requestOptions: requestOptions)
+public extension IssuesNamespace {
+    /// Adds up to 10 assignees to an issue. Users already assigned to an issue are not replaced.
+    func addAssignees(
+        owner: String,
+        repo: String,
+        issueNumber: Int,
+        assignees: [IssuesAddAssigneesRequestBodyAssigneesItem]? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Issue {
+        try await IssuesMethods.issuesAddAssignees(
+            config: config,
+            owner: owner,
+            repo: repo,
+            issueNumber: issueNumber,
+            assignees: assignees,
+            requestOptions: requestOptions
+        )
     }
 
-/// Removes specified assignees from an issue in a repository. Use `assignees` to identify the usernames to remove; users without push access cannot remove assignees, and those changes are silently ignored.
+    /// Removes specified assignees from an issue in a repository. Use `assignees` to identify the usernames to remove;
+    /// users without push access cannot remove assignees, and those changes are silently ignored.
     ///
     /// Removes one or more assignees from an issue.
-    public func removeAssignees(owner: String, repo: String, issueNumber: Int, assignees: [String]? = nil, requestOptions: RequestOptions? = nil) async throws -> Issue {
-        return try await IssuesMethods.issuesRemoveAssignees(config: config, owner: owner, repo: repo, issueNumber: issueNumber, assignees: assignees, requestOptions: requestOptions)
+    func removeAssignees(
+        owner: String,
+        repo: String,
+        issueNumber: Int,
+        assignees: [String]? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Issue {
+        try await IssuesMethods.issuesRemoveAssignees(
+            config: config,
+            owner: owner,
+            repo: repo,
+            issueNumber: issueNumber,
+            assignees: assignees,
+            requestOptions: requestOptions
+        )
     }
 
-/// Checks whether a user can be assigned to a specific issue in a repository. Use `assignee` to identify the user and the repository and issue parameters to specify where you want to assign them.
+    /// Checks whether a user can be assigned to a specific issue in a repository. Use `assignee` to identify the user
+    /// and the repository and issue parameters to specify where you want to assign them.
     ///
-    /// Checks if a user has permission to be assigned to a specific issue. If the `assignee` can be assigned to this issue, a `204` status code with no content is returned. Otherwise a `404` status code is returned.
-    public func checkUserCanBeAssignedToIssue(owner: String, repo: String, issueNumber: Int, assignee: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await IssuesMethods.issuesCheckUserCanBeAssignedToIssue(config: config, owner: owner, repo: repo, issueNumber: issueNumber, assignee: assignee, requestOptions: requestOptions)
+    /// Checks if a user has permission to be assigned to a specific issue. If the `assignee` can be assigned to this
+    /// issue, a `204` status code with no content is returned. Otherwise a `404` status code is returned.
+    func checkUserCanBeAssignedToIssue(
+        owner: String,
+        repo: String,
+        issueNumber: Int,
+        assignee: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await IssuesMethods.issuesCheckUserCanBeAssignedToIssue(
+            config: config,
+            owner: owner,
+            repo: repo,
+            issueNumber: issueNumber,
+            assignee: assignee,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists comments on an issue or pull request in a repository, ordered by ascending comment ID. Use `since` to filter by update time and `page` with `per_page` to paginate results; the response can include raw Markdown, plain text, or rendered HTML according to the requested media type.
+    /// Lists comments on an issue or pull request in a repository, ordered by ascending comment ID. Use `since` to
+    /// filter by update time and `page` with `per_page` to paginate results; the response can include raw Markdown,
+    /// plain text, or rendered HTML according to the requested media type.
     ///
-    /// You can use the REST API to list comments on issues and pull requests. Every pull request is an issue, but not every issue is a pull request. Issue comments are ordered by ascending ID. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text only representation of the markdown body. Response will include `body_text`. - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
-    public func listComments(owner: String, repo: String, issueNumber: Int, since: Date? = nil, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [IssueComment] {
-        return try await IssuesMethods.issuesListComments(config: config, owner: owner, repo: repo, issueNumber: issueNumber, since: since, perPage: perPage, page: page, requestOptions: requestOptions)
+    /// You can use the REST API to list comments on issues and pull requests. Every pull request is an issue, but not
+    /// every issue is a pull request. Issue comments are ordered by ascending ID. This endpoint supports the following
+    /// custom media types. For more information, see "[Media
+    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
+    /// **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the
+    /// default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text
+    /// only representation of the markdown body. Response will include `body_text`. -
+    /// **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include
+    /// `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response
+    /// will include `body`, `body_text`, and `body_html`.
+    func listComments(
+        owner: String,
+        repo: String,
+        issueNumber: Int,
+        since: Date? = nil,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [IssueComment] {
+        try await IssuesMethods.issuesListComments(
+            config: config,
+            owner: owner,
+            repo: repo,
+            issueNumber: issueNumber,
+            since: since,
+            perPage: perPage,
+            page: page,
+            requestOptions: requestOptions
+        )
     }
 
-/// Creates a comment on an issue or pull request in a repository. Provide the comment contents in `body`; creating a comment triggers notifications, and creating content too quickly may result in secondary rate limiting. The response can include raw Markdown, plain text, or rendered HTML according to the requested media type.
+    /// Creates a comment on an issue or pull request in a repository. Provide the comment contents in `body`; creating
+    /// a comment triggers notifications, and creating content too quickly may result in secondary rate limiting. The
+    /// response can include raw Markdown, plain text, or rendered HTML according to the requested media type.
     ///
-    /// You can use the REST API to create comments on issues and pull requests. Every pull request is an issue, but not every issue is a pull request. This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. For more information, see "[Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)" and "[Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)." This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text only representation of the markdown body. Response will include `body_text`. - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
-    public func createComment(owner: String, repo: String, issueNumber: Int, body: String, requestOptions: RequestOptions? = nil) async throws -> IssueComment {
-        return try await IssuesMethods.issuesCreateComment(config: config, owner: owner, repo: repo, issueNumber: issueNumber, body: body, requestOptions: requestOptions)
+    /// You can use the REST API to create comments on issues and pull requests. Every pull request is an issue, but not
+    /// every issue is a pull request. This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications).
+    /// Creating content too quickly using this endpoint may result in secondary rate limiting. For more information,
+    /// see "[Rate limits for the
+    /// API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)"
+    /// and "[Best practices for using the REST
+    /// API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)." This endpoint supports the
+    /// following custom media types. For more information, see "[Media
+    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
+    /// **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the
+    /// default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text
+    /// only representation of the markdown body. Response will include `body_text`. -
+    /// **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include
+    /// `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response
+    /// will include `body`, `body_text`, and `body_html`.
+    func createComment(
+        owner: String,
+        repo: String,
+        issueNumber: Int,
+        body: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> IssueComment {
+        try await IssuesMethods.issuesCreateComment(
+            config: config,
+            owner: owner,
+            repo: repo,
+            issueNumber: issueNumber,
+            body: body,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists the issues that block a specified issue in a repository. Use `page` and `per_page` to paginate the results; returned issues include their issue details.
+    /// Lists the issues that block a specified issue in a repository. Use `page` and `per_page` to paginate the
+    /// results; returned issues include their issue details.
     ///
-    /// You can use the REST API to list the dependencies an issue is blocked by. This endpoint supports the following custom media types. For more information, see [Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types). - **`application/vnd.github.raw+json`**: Returns the raw Markdown body. Response will include `body`. This is the default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text only representation of the Markdown body. Response will include `body_text`. - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's Markdown. Response will include `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
-    public func listDependenciesBlockedBy(owner: String, repo: String, issueNumber: Int, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [Issue] {
-        return try await IssuesMethods.issuesListDependenciesBlockedBy(config: config, owner: owner, repo: repo, issueNumber: issueNumber, perPage: perPage, page: page, requestOptions: requestOptions)
+    /// You can use the REST API to list the dependencies an issue is blocked by. This endpoint supports the following
+    /// custom media types. For more information, see [Media
+    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types). -
+    /// **`application/vnd.github.raw+json`**: Returns the raw Markdown body. Response will include `body`. This is the
+    /// default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text
+    /// only representation of the Markdown body. Response will include `body_text`. -
+    /// **`application/vnd.github.html+json`**: Returns HTML rendered from the body's Markdown. Response will include
+    /// `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response
+    /// will include `body`, `body_text`, and `body_html`.
+    func listDependenciesBlockedBy(
+        owner: String,
+        repo: String,
+        issueNumber: Int,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [Issue] {
+        try await IssuesMethods.issuesListDependenciesBlockedBy(
+            config: config,
+            owner: owner,
+            repo: repo,
+            issueNumber: issueNumber,
+            perPage: perPage,
+            page: page,
+            requestOptions: requestOptions
+        )
     }
 
-/// Adds a “blocked by” dependency between an issue and another issue in a repository. Provide the blocking issue's ID in `issue_id`; creating content too quickly may result in secondary rate limiting.
+    /// Adds a “blocked by” dependency between an issue and another issue in a repository. Provide the blocking issue's
+    /// ID in `issue_id`; creating content too quickly may result in secondary rate limiting.
     ///
-    /// You can use the REST API to add a 'blocked by' relationship to an issue. Creating content too quickly using this endpoint may result in secondary rate limiting. For more information, see [Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits) and [Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api). This endpoint supports the following custom media types. For more information, see [Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types). - **`application/vnd.github.raw+json`**: Returns the raw Markdown body. Response will include `body`. This is the default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text only representation of the Markdown body. Response will include `body_text`. - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's Markdown. Response will include `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
-    public func addBlockedByDependency(owner: String, repo: String, issueNumber: Int, issueId: Int, requestOptions: RequestOptions? = nil) async throws -> Issue {
-        return try await IssuesMethods.issuesAddBlockedByDependency(config: config, owner: owner, repo: repo, issueNumber: issueNumber, issueId: issueId, requestOptions: requestOptions)
+    /// You can use the REST API to add a 'blocked by' relationship to an issue. Creating content too quickly using this
+    /// endpoint may result in secondary rate limiting. For more information, see [Rate limits for the
+    /// API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)
+    /// and [Best practices for using the REST
+    /// API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api). This endpoint supports the
+    /// following custom media types. For more information, see [Media
+    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types). -
+    /// **`application/vnd.github.raw+json`**: Returns the raw Markdown body. Response will include `body`. This is the
+    /// default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text
+    /// only representation of the Markdown body. Response will include `body_text`. -
+    /// **`application/vnd.github.html+json`**: Returns HTML rendered from the body's Markdown. Response will include
+    /// `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response
+    /// will include `body`, `body_text`, and `body_html`.
+    func addBlockedByDependency(
+        owner: String,
+        repo: String,
+        issueNumber: Int,
+        issueId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Issue {
+        try await IssuesMethods.issuesAddBlockedByDependency(
+            config: config,
+            owner: owner,
+            repo: repo,
+            issueNumber: issueNumber,
+            issueId: issueId,
+            requestOptions: requestOptions
+        )
     }
 
-/// Removes a blocking dependency from an issue in a repository. Specify the issue being blocked with `issue_number` and the blocking issue with `issue_id`; removing content too quickly may result in secondary rate limiting.
+    /// Removes a blocking dependency from an issue in a repository. Specify the issue being blocked with `issue_number`
+    /// and the blocking issue with `issue_id`; removing content too quickly may result in secondary rate limiting.
     ///
-    /// You can use the REST API to remove a dependency that an issue is blocked by. Removing content too quickly using this endpoint may result in secondary rate limiting. For more information, see [Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits) and [Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api). This endpoint supports the following custom media types. For more information, see [Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types). - **`application/vnd.github.raw+json`**: Returns the raw Markdown body. Response will include `body`. This is the default if you do not pass a specific media type. - **`application/vnd.github.text+json`**: Returns a text only representation of the Markdown body. Response will include `body_text`. - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's Markdown. Response will include `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
-    public func removeDependencyBlockedBy(owner: String, repo: String, issueNumber: Int, issueId: Int, requestOptions: RequestOptions? = nil) async throws -> Issue {
-        return try await IssuesMethods.issuesRemoveDependencyBlockedBy(config: config, owner: owner, repo: repo, issueNumber: issueNumber, issueId: issueId, requestOptions: requestOptions)
+    /// You can use the REST API to remove a dependency that an issue is blocked by. Removing content too quickly using
+    /// this endpoint may result in secondary rate limiting. For more information, see [Rate limits for the
+    /// API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)
+    /// and [Best practices for using the REST
+    /// API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api). This endpoint supports the
+    /// following custom media types. For more information, see [Media
+    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types). -
+    /// **`application/vnd.github.raw+json`**: Returns the raw Markdown body. Response will include `body`. This is the
+    /// default if you do not pass a specific media type. - **`application/vnd.github.text+json`**: Returns a text only
+    /// representation of the Markdown body. Response will include `body_text`. -
+    /// **`application/vnd.github.html+json`**: Returns HTML rendered from the body's Markdown. Response will include
+    /// `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response
+    /// will include `body`, `body_text`, and `body_html`.
+    func removeDependencyBlockedBy(
+        owner: String,
+        repo: String,
+        issueNumber: Int,
+        issueId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Issue {
+        try await IssuesMethods.issuesRemoveDependencyBlockedBy(
+            config: config,
+            owner: owner,
+            repo: repo,
+            issueNumber: issueNumber,
+            issueId: issueId,
+            requestOptions: requestOptions
+        )
     }
 }

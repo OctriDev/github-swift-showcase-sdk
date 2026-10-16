@@ -12,8 +12,8 @@ struct OrgsSetImmutableReleasesSettingsRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.enforcedRepositories, forKey: SdkCodingKey("enforced_repositories"))
-        try keyedContainer.encodeIfPresent(self.selectedRepositoryIds, forKey: SdkCodingKey("selected_repository_ids"))
+        try keyedContainer.encode(enforcedRepositories, forKey: SdkCodingKey("enforced_repositories"))
+        try keyedContainer.encodeIfPresent(selectedRepositoryIds, forKey: SdkCodingKey("selected_repository_ids"))
     }
 }
 
@@ -22,7 +22,7 @@ struct OrgsSetImmutableReleasesSettingsRepositoriesRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.selectedRepositoryIds, forKey: SdkCodingKey("selected_repository_ids"))
+        try keyedContainer.encode(selectedRepositoryIds, forKey: SdkCodingKey("selected_repository_ids"))
     }
 }
 
@@ -31,7 +31,7 @@ struct OrgsEnableOrDisableSecurityProductOnAllOrgReposRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.querySuite, forKey: SdkCodingKey("query_suite"))
+        try keyedContainer.encodeIfPresent(querySuite, forKey: SdkCodingKey("query_suite"))
     }
 }
 
@@ -40,7 +40,7 @@ struct OrgsUpdateMembershipForAuthenticatedUserRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.state, forKey: SdkCodingKey("state"))
+        try keyedContainer.encode(state, forKey: SdkCodingKey("state"))
     }
 }
 
@@ -57,27 +57,27 @@ struct BillingCreateOrganizationBudgetRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.budgetAmount, forKey: SdkCodingKey("budget_amount"))
-        try keyedContainer.encodeIfPresent(self.preventFurtherUsage, forKey: SdkCodingKey("prevent_further_usage"))
-        try keyedContainer.encodeIfPresent(self.budgetAlerting, forKey: SdkCodingKey("budget_alerting"))
-        try keyedContainer.encodeIfPresent(self.budgetScope, forKey: SdkCodingKey("budget_scope"))
-        try keyedContainer.encodeIfPresent(self.budgetEntityName, forKey: SdkCodingKey("budget_entity_name"))
-        try keyedContainer.encodeIfPresent(self.budgetType, forKey: SdkCodingKey("budget_type"))
-        try keyedContainer.encodeIfPresent(self.budgetProductSku, forKey: SdkCodingKey("budget_product_sku"))
-        try keyedContainer.encodeIfPresent(self.user, forKey: SdkCodingKey("user"))
-        try keyedContainer.encodeIfPresent(self.expiresAt, forKey: SdkCodingKey("expires_at"))
+        try keyedContainer.encodeIfPresent(budgetAmount, forKey: SdkCodingKey("budget_amount"))
+        try keyedContainer.encodeIfPresent(preventFurtherUsage, forKey: SdkCodingKey("prevent_further_usage"))
+        try keyedContainer.encodeIfPresent(budgetAlerting, forKey: SdkCodingKey("budget_alerting"))
+        try keyedContainer.encodeIfPresent(budgetScope, forKey: SdkCodingKey("budget_scope"))
+        try keyedContainer.encodeIfPresent(budgetEntityName, forKey: SdkCodingKey("budget_entity_name"))
+        try keyedContainer.encodeIfPresent(budgetType, forKey: SdkCodingKey("budget_type"))
+        try keyedContainer.encodeIfPresent(budgetProductSku, forKey: SdkCodingKey("budget_product_sku"))
+        try keyedContainer.encodeIfPresent(user, forKey: SdkCodingKey("user"))
+        try keyedContainer.encodeIfPresent(expiresAt, forKey: SdkCodingKey("expires_at"))
     }
 
     init(options: BillingMethods.BillingCreateOrganizationBudgetOptions) {
-        self.budgetAmount = options.budgetAmount
-        self.preventFurtherUsage = options.preventFurtherUsage
-        self.budgetAlerting = options.budgetAlerting
-        self.budgetScope = options.budgetScope
-        self.budgetEntityName = options.budgetEntityName
-        self.budgetType = options.budgetType
-        self.budgetProductSku = options.budgetProductSku
-        self.user = options.user
-        self.expiresAt = options.expiresAt
+        budgetAmount = options.budgetAmount
+        preventFurtherUsage = options.preventFurtherUsage
+        budgetAlerting = options.budgetAlerting
+        budgetScope = options.budgetScope
+        budgetEntityName = options.budgetEntityName
+        budgetType = options.budgetType
+        budgetProductSku = options.budgetProductSku
+        user = options.user
+        expiresAt = options.expiresAt
     }
 }
 
@@ -89,10 +89,10 @@ struct BillingUpdateBudgetOrgRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.budgetAmount, forKey: SdkCodingKey("budget_amount"))
-        try keyedContainer.encodeIfPresent(self.preventFurtherUsage, forKey: SdkCodingKey("prevent_further_usage"))
-        try keyedContainer.encodeIfPresent(self.budgetAlerting, forKey: SdkCodingKey("budget_alerting"))
-        try keyedContainer.encodeIfPresent(self.expiresAt, forKey: SdkCodingKey("expires_at"))
+        try keyedContainer.encodeIfPresent(budgetAmount, forKey: SdkCodingKey("budget_amount"))
+        try keyedContainer.encodeIfPresent(preventFurtherUsage, forKey: SdkCodingKey("prevent_further_usage"))
+        try keyedContainer.encodeIfPresent(budgetAlerting, forKey: SdkCodingKey("budget_alerting"))
+        try keyedContainer.encodeIfPresent(expiresAt, forKey: SdkCodingKey("expires_at"))
     }
 }
 
@@ -104,10 +104,10 @@ struct AgentsCreateOrUpdateOrgSecretRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.encryptedValue, forKey: SdkCodingKey("encrypted_value"))
-        try keyedContainer.encode(self.keyId, forKey: SdkCodingKey("key_id"))
-        try keyedContainer.encode(self.visibility, forKey: SdkCodingKey("visibility"))
-        try keyedContainer.encodeIfPresent(self.selectedRepositoryIds, forKey: SdkCodingKey("selected_repository_ids"))
+        try keyedContainer.encode(encryptedValue, forKey: SdkCodingKey("encrypted_value"))
+        try keyedContainer.encode(keyId, forKey: SdkCodingKey("key_id"))
+        try keyedContainer.encode(visibility, forKey: SdkCodingKey("visibility"))
+        try keyedContainer.encodeIfPresent(selectedRepositoryIds, forKey: SdkCodingKey("selected_repository_ids"))
     }
 }
 
@@ -116,7 +116,7 @@ struct AgentsSetSelectedReposForOrgSecretRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.selectedRepositoryIds, forKey: SdkCodingKey("selected_repository_ids"))
+        try keyedContainer.encode(selectedRepositoryIds, forKey: SdkCodingKey("selected_repository_ids"))
     }
 }
 
@@ -128,10 +128,10 @@ struct AgentsCreateOrgVariableRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.name, forKey: SdkCodingKey("name"))
-        try keyedContainer.encode(self.value, forKey: SdkCodingKey("value"))
-        try keyedContainer.encode(self.visibility, forKey: SdkCodingKey("visibility"))
-        try keyedContainer.encodeIfPresent(self.selectedRepositoryIds, forKey: SdkCodingKey("selected_repository_ids"))
+        try keyedContainer.encode(name, forKey: SdkCodingKey("name"))
+        try keyedContainer.encode(value, forKey: SdkCodingKey("value"))
+        try keyedContainer.encode(visibility, forKey: SdkCodingKey("visibility"))
+        try keyedContainer.encodeIfPresent(selectedRepositoryIds, forKey: SdkCodingKey("selected_repository_ids"))
     }
 }
 
@@ -143,10 +143,10 @@ struct AgentsUpdateOrgVariableRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.name2, forKey: SdkCodingKey("name"))
-        try keyedContainer.encodeIfPresent(self.value, forKey: SdkCodingKey("value"))
-        try keyedContainer.encodeIfPresent(self.visibility, forKey: SdkCodingKey("visibility"))
-        try keyedContainer.encodeIfPresent(self.selectedRepositoryIds, forKey: SdkCodingKey("selected_repository_ids"))
+        try keyedContainer.encodeIfPresent(name2, forKey: SdkCodingKey("name"))
+        try keyedContainer.encodeIfPresent(value, forKey: SdkCodingKey("value"))
+        try keyedContainer.encodeIfPresent(visibility, forKey: SdkCodingKey("visibility"))
+        try keyedContainer.encodeIfPresent(selectedRepositoryIds, forKey: SdkCodingKey("selected_repository_ids"))
     }
 }
 
@@ -155,7 +155,7 @@ struct AgentsSetSelectedReposForOrgVariableRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.selectedRepositoryIds, forKey: SdkCodingKey("selected_repository_ids"))
+        try keyedContainer.encode(selectedRepositoryIds, forKey: SdkCodingKey("selected_repository_ids"))
     }
 }
 
@@ -165,8 +165,8 @@ struct AgentsCreateOrUpdateRepoSecretRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.encryptedValue, forKey: SdkCodingKey("encrypted_value"))
-        try keyedContainer.encode(self.keyId, forKey: SdkCodingKey("key_id"))
+        try keyedContainer.encode(encryptedValue, forKey: SdkCodingKey("encrypted_value"))
+        try keyedContainer.encode(keyId, forKey: SdkCodingKey("key_id"))
     }
 }
 
@@ -176,8 +176,8 @@ struct AgentsCreateRepoVariableRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.name, forKey: SdkCodingKey("name"))
-        try keyedContainer.encode(self.value, forKey: SdkCodingKey("value"))
+        try keyedContainer.encode(name, forKey: SdkCodingKey("name"))
+        try keyedContainer.encode(value, forKey: SdkCodingKey("value"))
     }
 }
 
@@ -187,7 +187,7 @@ struct AgentsUpdateRepoVariableRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.name2, forKey: SdkCodingKey("name"))
-        try keyedContainer.encodeIfPresent(self.value, forKey: SdkCodingKey("value"))
+        try keyedContainer.encodeIfPresent(name2, forKey: SdkCodingKey("name"))
+        try keyedContainer.encodeIfPresent(value, forKey: SdkCodingKey("value"))
     }
 }

@@ -38,10 +38,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.git.getBlob(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            fileSha: decoded("\"file_sha\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                fileSha: decoded("\"file_sha\"")
+            )
             XCTFail("gitGetBlob did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -90,10 +90,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.git.getCommit(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            commitSha: decoded("\"commit_sha\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                commitSha: decoded("\"commit_sha\"")
+            )
             XCTFail("gitGetCommit did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -142,10 +142,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.git.getRef(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            ref: decoded("\"heads/feature-a\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                ref: decoded("\"heads/feature-a\"")
+            )
             XCTFail("gitGetRef did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -194,10 +194,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.git.getTag(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            tagSha: decoded("\"tag_sha\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                tagSha: decoded("\"tag_sha\"")
+            )
             XCTFail("gitGetTag did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -247,11 +247,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.git.getTree(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            treeSha: decoded("\"tree_sha\""),
-            recursive: decoded("\"recursive\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                treeSha: decoded("\"tree_sha\""),
+                recursive: decoded("\"recursive\"")
+            )
             XCTFail("gitGetTree did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -336,10 +336,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.git.listMatchingRefs(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            ref: decoded("\"heads/feature-a\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                ref: decoded("\"heads/feature-a\"")
+            )
             XCTFail("gitListMatchingRefs did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 409)
@@ -390,12 +390,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.git.updateRef(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            ref: decoded("\"heads/feature-a\""),
-            sha: decoded("\"aa218f56b14c9653891f9e74264a383fa43fefbd\""),
-            force: decoded("true")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                ref: decoded("\"heads/feature-a\""),
+                sha: decoded("\"aa218f56b14c9653891f9e74264a383fa43fefbd\""),
+                force: decoded("true")
+            )
             XCTFail("gitUpdateRef did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 409)
@@ -412,7 +412,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testHostedComputeCreateNetworkConfigurationForOrgHostedComputeCreXe5abddafb3ReachesMockAndDecodesResponse() async throws {
+    func testHostedComputeCreateNetworkConfigurationForOrgHostedComputeCreXe5abddafb3ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -436,7 +437,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testHostedComputeDeleteNetworkConfigurationFromOrgHostedComputeDeX58a7a49d9aReachesMockAndDecodesResponse() async throws {
+    func testHostedComputeDeleteNetworkConfigurationFromOrgHostedComputeDeX58a7a49d9aReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -448,7 +450,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testHostedComputeGetNetworkConfigurationForOrgHostedComputeGetNetX4628513224ReachesMockAndDecodesResponse() async throws {
+    func testHostedComputeGetNetworkConfigurationForOrgHostedComputeGetNetX4628513224ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -468,7 +471,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testHostedComputeGetNetworkSettingsForOrgHostedComputeGetNetworkSX033ae5873eReachesMockAndDecodesResponse() async throws {
+    func testHostedComputeGetNetworkSettingsForOrgHostedComputeGetNetworkSX033ae5873eReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -488,7 +492,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testHostedComputeListNetworkConfigurationsForOrgHostedComputeListXf65512329eReachesMockAndDecodesResponse() async throws {
+    func testHostedComputeListNetworkConfigurationsForOrgHostedComputeListXf65512329eReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -509,7 +514,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testHostedComputeUpdateNetworkConfigurationForOrgHostedComputeUpdXa198c5f175ReachesMockAndDecodesResponse() async throws {
+    func testHostedComputeUpdateNetworkConfigurationForOrgHostedComputeUpdXa198c5f175ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -534,7 +540,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testInteractionsGetPullRequestBypassListForRepoInteractionsGetPulXc5fdc753bbReachesMockAndDecodesResponse() async throws {
+    func testInteractionsGetPullRequestBypassListForRepoInteractionsGetPulXc5fdc753bbReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }

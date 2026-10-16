@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension IssuesMethods {
-    public struct IssuesUpdateOptions: Codable {
+public extension IssuesMethods {
+    struct IssuesUpdateOptions: Codable {
         public var owner: String
         public var repo: String
         public var issueNumber: Int
@@ -30,9 +30,20 @@ extension IssuesMethods {
         }
     }
 
-    /// Updates the title, body, state, assignees, labels, milestone, type, or field values of an issue. Supply only the properties you want to change; `state_reason` applies only when you change `state`, and `duplicate_issue_id` applies only when `state_reason` is `duplicate`. Users with push access or the Triage role can edit issues, but milestone, label, type, and field-value changes require push access.
+    /// Updates the title, body, state, assignees, labels, milestone, type, or field values of an issue. Supply only the
+    /// properties you want to change; `state_reason` applies only when you change `state`, and `duplicate_issue_id`
+    /// applies only when `state_reason` is `duplicate`. Users with push access or the Triage role can edit issues, but
+    /// milestone, label, type, and field-value changes require push access.
     ///
-    /// Issue owners and users with push access or Triage role can edit an issue. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text only representation of the markdown body. Response will include `body_text`. - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    /// Issue owners and users with push access or Triage role can edit an issue. This endpoint supports the following
+    /// custom media types. For more information, see "[Media
+    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
+    /// **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the
+    /// default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text
+    /// only representation of the markdown body. Response will include `body_text`. -
+    /// **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include
+    /// `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response
+    /// will include `body`, `body_text`, and `body_html`.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -66,9 +77,35 @@ extension IssuesMethods {
     /// - type: The issue type to associate with this issue. Only users with push
     ///   access can set the type for issues. Without push access to the repository,
     ///   type changes are silently dropped.
-    public static func issuesUpdate(config: ClientConfig, options: IssuesUpdateOptions, requestOptions: RequestOptions? = nil) async throws -> IssuesUpdateResponse {
+    static func issuesUpdate(
+        config: ClientConfig,
+        options: IssuesUpdateOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> IssuesUpdateResponse {
         let requestBody = IssuesUpdateRequestBody(options: options)
 
-        return try (await sdkRequest("PATCH", ["/repos/", sdkEncodePathSegment(sdkWireString(options.owner)), "/", sdkEncodePathSegment(sdkWireString(options.repo)), "/issues/", sdkEncodePathSegment(sdkWireString(options.issueNumber))].joined(), config: config, body: requestBody, decoder: .json, operationId: "issuesUpdate", options: requestOptions, errors: ["301": BasicError.self, "403": BasicError.self, "404": BasicError.self, "410": BasicError.self, "422": ValidationError.self])).data
+        return try await (sdkRequest(
+            "PATCH",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(options.owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(options.repo)),
+                "/issues/",
+                sdkEncodePathSegment(sdkWireString(options.issueNumber)),
+            ].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "issuesUpdate",
+            options: requestOptions,
+            errors: [
+                "301": BasicError.self,
+                "403": BasicError.self,
+                "404": BasicError.self,
+                "410": BasicError.self,
+                "422": ValidationError.self,
+            ]
+        )).data
     }
 }

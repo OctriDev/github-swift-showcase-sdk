@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension IssuesMethods {
-    /// Removes the pin from an issue comment in the specified repository. Use `owner`, `repo`, and `comment_id` to identify the comment whose pin you want to remove.
+public extension IssuesMethods {
+    /// Removes the pin from an issue comment in the specified repository. Use `owner`, `repo`, and `comment_id` to
+    /// identify the comment whose pin you want to remove.
     ///
     /// You can use the REST API to unpin comments on issues.
     ///
@@ -17,7 +18,29 @@ extension IssuesMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - commentId: The unique identifier of the comment.
-    public static func issuesUnpinComment(config: ClientConfig, owner: String, repo: String, commentId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/issues/comments/", sdkEncodePathSegment(sdkWireString(commentId)), "/pin"].joined(), config: config, decoder: .empty, operationId: "issuesUnpinComment", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "410": BasicError.self])).data
+    static func issuesUnpinComment(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        commentId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/issues/comments/",
+                sdkEncodePathSegment(sdkWireString(commentId)),
+                "/pin",
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "issuesUnpinComment",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "410": BasicError.self]
+        )).data
     }
 }

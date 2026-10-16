@@ -3,9 +3,14 @@
 
 import Foundation
 
-// Projects domain models
-extension ProjectsV2SingleSelectOptions {
-    public init(id: String, name: ProjectsV2SingleSelectOptionsName, description: ProjectsV2SingleSelectOptionsDescription, color: String) {
+/// Projects domain models
+public extension ProjectsV2SingleSelectOptions {
+    init(
+        id: String,
+        name: ProjectsV2SingleSelectOptionsName,
+        description: ProjectsV2SingleSelectOptionsDescription,
+        color: String
+    ) {
         (self.id, self.name) = (id, name)
         (self.description, self.color) = (description, color)
     }
@@ -27,21 +32,21 @@ public struct ProjectsV2FieldConfiguration: Codable {
     }
 
     init() {
-        (self.startDay, self.duration, self.iterations) = (nil, nil, nil)
+        (startDay, duration, iterations) = (nil, nil, nil)
     }
 }
 
-extension ProjectsV2FieldConfiguration {
-    public init(from decoder: Decoder) throws {
+public extension ProjectsV2FieldConfiguration {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.startDay = try container.sdkDecodeIfPresent(.startDay)
-        self.duration = try container.sdkDecodeIfPresent(.duration)
-        self.iterations = try container.sdkDecodeIfPresent(.iterations)
+        startDay = try container.sdkDecodeIfPresent(.startDay)
+        duration = try container.sdkDecodeIfPresent(.duration)
+        iterations = try container.sdkDecodeIfPresent(.iterations)
     }
 }
 
-extension ProjectsV2FieldConfiguration {
-    public init(startDay: Int? = nil, duration: Int? = nil, iterations: [ProjectsV2IterationSettings]? = nil) {
+public extension ProjectsV2FieldConfiguration {
+    init(startDay: Int? = nil, duration: Int? = nil, iterations: [ProjectsV2IterationSettings]? = nil) {
         self.init()
         (self.startDay, self.duration) = (startDay, duration)
         self.iterations = iterations
@@ -72,29 +77,46 @@ public struct ProjectsV2IterationSetting: Codable {
         case completed
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ProjectsV2IterationSetting {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.title) else {
-            throw SdkValidationError(field: "title", code: "required", message: "Validation failed for 'title': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.title = try container.sdkDecodeRequired(.title)
-        self.titleHtml = try container.sdkDecodeIfPresent(.titleHtml)
-        self.duration = try container.sdkDecodeIfPresent(.duration)
-        self.startDate = try container.sdkDecodeIfPresent(.startDate)
-        self.completed = try container.sdkDecodeIfPresent(.completed)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ProjectsV2IterationSetting {
-    public init(id: String, title: String, titleHtml: String? = nil, duration: Double? = nil, startDate: String? = nil, completed: Bool? = nil) {
+public extension ProjectsV2IterationSetting {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.title) else {
+            throw SdkValidationError(
+                field: "title",
+                code: "required",
+                message: "Validation failed for 'title': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        title = try container.sdkDecodeRequired(.title)
+        titleHtml = try container.sdkDecodeIfPresent(.titleHtml)
+        duration = try container.sdkDecodeIfPresent(.duration)
+        startDate = try container.sdkDecodeIfPresent(.startDate)
+        completed = try container.sdkDecodeIfPresent(.completed)
+    }
+}
+
+public extension ProjectsV2IterationSetting {
+    init(
+        id: String,
+        title: String,
+        titleHtml: String? = nil,
+        duration: Double? = nil,
+        startDate: String? = nil,
+        completed: Bool? = nil
+    ) {
         (self.id, self.title) = (id, title)
         (self.titleHtml, self.duration) = (titleHtml, duration)
         (self.startDate, self.completed) = (startDate, completed)
@@ -140,54 +162,91 @@ public struct ProjectsV2Field: Codable {
         case configuration
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ProjectsV2Field {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.projectUrl) else {
-            throw SdkValidationError(field: "project_url", code: "required", message: "Validation failed for 'project_url': value is required")
-        }
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        guard container.contains(.dataType) else {
-            throw SdkValidationError(field: "data_type", code: "required", message: "Validation failed for 'data_type': value is required")
-        }
-        guard container.contains(.createdAt) else {
-            throw SdkValidationError(field: "created_at", code: "required", message: "Validation failed for 'created_at': value is required")
-        }
-        guard container.contains(.updatedAt) else {
-            throw SdkValidationError(field: "updated_at", code: "required", message: "Validation failed for 'updated_at': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.projectUrl = try container.sdkDecodeRequired(.projectUrl)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.dataType = try container.sdkDecodeRequired(.dataType)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        self.issueFieldId = try container.sdkDecodeIfPresent(.issueFieldId)
-        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        self.options = try container.sdkDecodeIfPresent(.options)
-        self.configuration = try container.sdkDecodeIfPresent(.configuration)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ProjectsV2Field {
-    public init(id: Int, projectUrl: String, name: String, dataType: ProjectsV2FieldDataType, createdAt: Date, updatedAt: Date, issueFieldId: Int? = nil, nodeId: String? = nil, options: [ProjectsV2SingleSelectOptions]? = nil, configuration: ProjectsV2FieldConfiguration? = nil) throws {
+public extension ProjectsV2Field {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.projectUrl) else {
+            throw SdkValidationError(
+                field: "project_url",
+                code: "required",
+                message: "Validation failed for 'project_url': value is required"
+            )
+        }
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        guard container.contains(.dataType) else {
+            throw SdkValidationError(
+                field: "data_type",
+                code: "required",
+                message: "Validation failed for 'data_type': value is required"
+            )
+        }
+        guard container.contains(.createdAt) else {
+            throw SdkValidationError(
+                field: "created_at",
+                code: "required",
+                message: "Validation failed for 'created_at': value is required"
+            )
+        }
+        guard container.contains(.updatedAt) else {
+            throw SdkValidationError(
+                field: "updated_at",
+                code: "required",
+                message: "Validation failed for 'updated_at': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        projectUrl = try container.sdkDecodeRequired(.projectUrl)
+        name = try container.sdkDecodeRequired(.name)
+        dataType = try container.sdkDecodeRequired(.dataType)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        issueFieldId = try container.sdkDecodeIfPresent(.issueFieldId)
+        nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        options = try container.sdkDecodeIfPresent(.options)
+        configuration = try container.sdkDecodeIfPresent(.configuration)
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+    }
+}
+
+public extension ProjectsV2Field {
+    init(
+        id: Int,
+        projectUrl: String,
+        name: String,
+        dataType: ProjectsV2FieldDataType,
+        createdAt: Date,
+        updatedAt: Date,
+        issueFieldId: Int? = nil,
+        nodeId: String? = nil,
+        options: [ProjectsV2SingleSelectOptions]? = nil,
+        configuration: ProjectsV2FieldConfiguration? = nil
+    ) throws {
         (self.id, self.projectUrl) = (id, projectUrl)
         (self.name, self.dataType) = (name, dataType)
         (self.createdAt, self.updatedAt) = (createdAt, updatedAt)
         (self.issueFieldId, self.nodeId) = (issueFieldId, nodeId)
         (self.options, self.configuration) = (options, configuration)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
     }
 }
 
@@ -195,13 +254,16 @@ extension ProjectsV2Field {
 public struct ProjectsV2State: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let open = ProjectsV2State(rawValue: "open")
     public static let closed = ProjectsV2State(rawValue: "closed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -214,7 +276,10 @@ public struct ProjectsV2State: RawRepresentable, Hashable, Codable, Sendable, Sd
 public struct NullableProjectsV2StatusUpdateStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let inactive = NullableProjectsV2StatusUpdateStatus(rawValue: "INACTIVE")
     public static let onTrack = NullableProjectsV2StatusUpdateStatus(rawValue: "ON_TRACK")
     public static let atRisk = NullableProjectsV2StatusUpdateStatus(rawValue: "AT_RISK")
@@ -223,7 +288,7 @@ public struct NullableProjectsV2StatusUpdateStatus: RawRepresentable, Hashable, 
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -236,7 +301,10 @@ public struct NullableProjectsV2StatusUpdateStatus: RawRepresentable, Hashable, 
 public struct ProjectsV2FieldDataType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let assignees = ProjectsV2FieldDataType(rawValue: "assignees")
     public static let linkedPullRequests = ProjectsV2FieldDataType(rawValue: "linked_pull_requests")
     public static let reviewers = ProjectsV2FieldDataType(rawValue: "reviewers")
@@ -255,7 +323,7 @@ public struct ProjectsV2FieldDataType: RawRepresentable, Hashable, Codable, Send
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -265,10 +333,14 @@ public struct ProjectsV2FieldDataType: RawRepresentable, Hashable, Codable, Send
 }
 
 /// The color associated with the option.
-public struct ProjectsV2FieldSingleSelectOptionColor: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ProjectsV2FieldSingleSelectOptionColor: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let blue = ProjectsV2FieldSingleSelectOptionColor(rawValue: "BLUE")
     public static let gray = ProjectsV2FieldSingleSelectOptionColor(rawValue: "GRAY")
     public static let green = ProjectsV2FieldSingleSelectOptionColor(rawValue: "GREEN")
@@ -280,7 +352,7 @@ public struct ProjectsV2FieldSingleSelectOptionColor: RawRepresentable, Hashable
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -293,14 +365,17 @@ public struct ProjectsV2FieldSingleSelectOptionColor: RawRepresentable, Hashable
 public struct ProjectsV2ViewLayout: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let table = ProjectsV2ViewLayout(rawValue: "table")
     public static let board = ProjectsV2ViewLayout(rawValue: "board")
     public static let roadmap = ProjectsV2ViewLayout(rawValue: "roadmap")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -313,7 +388,10 @@ public struct ProjectsV2ViewLayout: RawRepresentable, Hashable, Codable, Sendabl
 public struct ProjectsV2StatusUpdateStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let inactive = ProjectsV2StatusUpdateStatus(rawValue: "INACTIVE")
     public static let onTrack = ProjectsV2StatusUpdateStatus(rawValue: "ON_TRACK")
     public static let atRisk = ProjectsV2StatusUpdateStatus(rawValue: "AT_RISK")
@@ -322,7 +400,7 @@ public struct ProjectsV2StatusUpdateStatus: RawRepresentable, Hashable, Codable,
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -335,14 +413,17 @@ public struct ProjectsV2StatusUpdateStatus: RawRepresentable, Hashable, Codable,
 public struct ProjectsV2ItemContentType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let issue = ProjectsV2ItemContentType(rawValue: "Issue")
     public static let pullRequest = ProjectsV2ItemContentType(rawValue: "PullRequest")
     public static let draftIssue = ProjectsV2ItemContentType(rawValue: "DraftIssue")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

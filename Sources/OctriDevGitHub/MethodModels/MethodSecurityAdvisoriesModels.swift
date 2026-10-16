@@ -7,29 +7,39 @@ import Foundation
     import FoundationNetworking
 #endif
 
-// Canonical securityAdvisories operation model declarations
+/// Canonical securityAdvisories operation model declarations
 public indirect enum SecurityAdvisoriesListGlobalAdvisoriesParameterXe3e10aaf {
     case stringValue(String)
     case stringList([String])
 }
 
 extension SecurityAdvisoriesListGlobalAdvisoriesParameterXe3e10aaf: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for SecurityAdvisoriesListGlobalAdvisoriesParameterXe3e10aaf")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for SecurityAdvisoriesListGlobalAdvisoriesParameterXe3e10aaf"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension SecurityAdvisoriesListGlobalAdvisoriesParameterXe3e10aaf {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) { return .stringValue(value) }
-        if let value = try? container.decode([String].self) { return .stringList(value) }
+        if let value = try? container.decode(String.self) {
+            return .stringValue(value)
+        }
+        if let value = try? container.decode([String].self) {
+            return .stringList(value)
+        }
         return nil
     }
 }
@@ -50,22 +60,32 @@ public indirect enum SecurityAdvisoriesListGlobalAdvisoriesParameterXa7a09876 {
 }
 
 extension SecurityAdvisoriesListGlobalAdvisoriesParameterXa7a09876: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for SecurityAdvisoriesListGlobalAdvisoriesParameterXa7a09876")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for SecurityAdvisoriesListGlobalAdvisoriesParameterXa7a09876"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension SecurityAdvisoriesListGlobalAdvisoriesParameterXa7a09876 {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) { return .stringValue(value) }
-        if let value = try? container.decode([String].self) { return .stringList(value) }
+        if let value = try? container.decode(String.self) {
+            return .stringValue(value)
+        }
+        if let value = try? container.decode([String].self) {
+            return .stringList(value)
+        }
         return nil
     }
 }

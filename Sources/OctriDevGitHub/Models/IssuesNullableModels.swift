@@ -3,7 +3,7 @@
 
 import Foundation
 
-// IssuesNullable domain models
+/// IssuesNullable domain models
 /// The type of the referenced issue.
 public struct NullableIssueReferenceIssueType: Codable {
     /// The unique identifier of the issue type.
@@ -22,30 +22,44 @@ public struct NullableIssueReferenceIssueType: Codable {
         case color
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension NullableIssueReferenceIssueType {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.nodeId) else {
-            throw SdkValidationError(field: "node_id", code: "required", message: "Validation failed for 'node_id': value is required")
-        }
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.color = try container.sdkDecodeIfPresent(.color)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension NullableIssueReferenceIssueType {
-    public init(id: Int, nodeId: String, name: String, color: String? = nil) {
+public extension NullableIssueReferenceIssueType {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.nodeId) else {
+            throw SdkValidationError(
+                field: "node_id",
+                code: "required",
+                message: "Validation failed for 'node_id': value is required"
+            )
+        }
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        name = try container.sdkDecodeRequired(.name)
+        color = try container.sdkDecodeIfPresent(.color)
+    }
+}
+
+public extension NullableIssueReferenceIssueType {
+    init(id: Int, nodeId: String, name: String, color: String? = nil) {
         (self.id, self.nodeId) = (id, nodeId)
         (self.name, self.color) = (name, color)
     }
@@ -57,22 +71,33 @@ public indirect enum NullableIssueLabelsItem {
 }
 
 extension NullableIssueLabelsItem: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for NullableIssueLabelsItem")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for NullableIssueLabelsItem"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension NullableIssueLabelsItem {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) { return .stringValue(value) }
-        if let value = try? container.decode(NullableIssueLabelsItemVariant1.self) { return .nullableIssueLabelsItemVariant1(value) }
+        if let value = try? container.decode(String.self) {
+            return .stringValue(value)
+        }
+        if let value = try? container
+            .decode(NullableIssueLabelsItemVariant1.self) {
+            return .nullableIssueLabelsItemVariant1(value)
+        }
         return nil
     }
 }
@@ -108,49 +133,67 @@ public struct NullableIssuePullRequest: Codable {
         case mergedAt = "merged_at"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension NullableIssuePullRequest {
-    public init(from decoder: Decoder) throws {
+public extension NullableIssuePullRequest {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.diffUrl) else {
-            throw SdkValidationError(field: "diff_url", code: "required", message: "Validation failed for 'diff_url': value is required")
+            throw SdkValidationError(
+                field: "diff_url",
+                code: "required",
+                message: "Validation failed for 'diff_url': value is required"
+            )
         }
         guard container.contains(.htmlUrl) else {
-            throw SdkValidationError(field: "html_url", code: "required", message: "Validation failed for 'html_url': value is required")
+            throw SdkValidationError(
+                field: "html_url",
+                code: "required",
+                message: "Validation failed for 'html_url': value is required"
+            )
         }
         guard container.contains(.patchUrl) else {
-            throw SdkValidationError(field: "patch_url", code: "required", message: "Validation failed for 'patch_url': value is required")
+            throw SdkValidationError(
+                field: "patch_url",
+                code: "required",
+                message: "Validation failed for 'patch_url': value is required"
+            )
         }
         guard container.contains(.url) else {
-            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
+            throw SdkValidationError(
+                field: "url",
+                code: "required",
+                message: "Validation failed for 'url': value is required"
+            )
         }
-        self.diffUrl = try container.sdkDecodeNullable(.diffUrl)
-        self.htmlUrl = try container.sdkDecodeNullable(.htmlUrl)
-        self.patchUrl = try container.sdkDecodeNullable(.patchUrl)
-        self.url = try container.sdkDecodeNullable(.url)
-        self.mergedAt = try container.sdkDecodeIfPresent(.mergedAt)
-        if let value = self.diffUrl {
+        diffUrl = try container.sdkDecodeNullable(.diffUrl)
+        htmlUrl = try container.sdkDecodeNullable(.htmlUrl)
+        patchUrl = try container.sdkDecodeNullable(.patchUrl)
+        url = try container.sdkDecodeNullable(.url)
+        mergedAt = try container.sdkDecodeIfPresent(.mergedAt)
+        if let value = diffUrl {
             try sdkValidateUri("diff_url", value)
         }
-        if let value = self.htmlUrl {
+        if let value = htmlUrl {
             try sdkValidateUri("html_url", value)
         }
-        if let value = self.patchUrl {
+        if let value = patchUrl {
             try sdkValidateUri("patch_url", value)
         }
-        if let value = self.url {
+        if let value = url {
             try sdkValidateUri("url", value)
         }
-        if let value = self.mergedAt {
+        if let value = mergedAt {
             try sdkValidateDateTime("merged_at", sdkWireString(value))
         }
     }
 }
 
-extension NullableIssuePullRequest {
-    public init(diffUrl: String?, htmlUrl: String?, patchUrl: String?, url: String?, mergedAt: Date? = nil) throws {
+public extension NullableIssuePullRequest {
+    init(diffUrl: String?, htmlUrl: String?, patchUrl: String?, url: String?, mergedAt: Date? = nil) throws {
         (self.diffUrl, self.htmlUrl) = (diffUrl, htmlUrl)
         (self.patchUrl, self.url) = (patchUrl, url)
         self.mergedAt = mergedAt
@@ -188,20 +231,20 @@ public struct NullableIssueEventIntent: Codable {
     }
 
     init() {
-        (self.rationale, self.confidence) = (nil, nil)
+        (rationale, confidence) = (nil, nil)
     }
 }
 
-extension NullableIssueEventIntent {
-    public init(from decoder: Decoder) throws {
+public extension NullableIssueEventIntent {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.rationale = try container.sdkDecodeIfPresent(.rationale)
-        self.confidence = try container.sdkDecodeIfPresent(.confidence)
+        rationale = try container.sdkDecodeIfPresent(.rationale)
+        confidence = try container.sdkDecodeIfPresent(.confidence)
     }
 }
 
-extension NullableIssueEventIntent {
-    public init(rationale: String? = nil, confidence: NullableIssueEventIntentConfidence? = nil) {
+public extension NullableIssueEventIntent {
+    init(rationale: String? = nil, confidence: NullableIssueEventIntentConfidence? = nil) {
         self.init()
         (self.rationale, self.confidence) = (rationale, confidence)
     }
@@ -232,38 +275,67 @@ public struct NullableIssueReference: Codable {
         case stateReason = "state_reason"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension NullableIssueReference {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.number) else {
-            throw SdkValidationError(field: "number", code: "required", message: "Validation failed for 'number': value is required")
-        }
-        guard container.contains(.title) else {
-            throw SdkValidationError(field: "title", code: "required", message: "Validation failed for 'title': value is required")
-        }
-        guard container.contains(.state) else {
-            throw SdkValidationError(field: "state", code: "required", message: "Validation failed for 'state': value is required")
-        }
-        guard container.contains(.repository) else {
-            throw SdkValidationError(field: "repository", code: "required", message: "Validation failed for 'repository': value is required")
-        }
-        guard container.contains(.issueType) else {
-            throw SdkValidationError(field: "issue_type", code: "required", message: "Validation failed for 'issue_type': value is required")
-        }
-        self.number = try container.sdkDecodeRequired(.number)
-        self.title = try container.sdkDecodeRequired(.title)
-        self.state = try container.sdkDecodeRequired(.state)
-        self.repository = try container.sdkDecodeRequired(.repository)
-        self.issueType = try container.sdkDecodeNullable(.issueType)
-        self.stateReason = try container.sdkDecodeIfPresent(.stateReason)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension NullableIssueReference {
-    public init(number: Int, title: String, state: String, repository: SimpleRepository, issueType: NullableIssueReferenceIssueType?, stateReason: String? = nil) {
+public extension NullableIssueReference {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.number) else {
+            throw SdkValidationError(
+                field: "number",
+                code: "required",
+                message: "Validation failed for 'number': value is required"
+            )
+        }
+        guard container.contains(.title) else {
+            throw SdkValidationError(
+                field: "title",
+                code: "required",
+                message: "Validation failed for 'title': value is required"
+            )
+        }
+        guard container.contains(.state) else {
+            throw SdkValidationError(
+                field: "state",
+                code: "required",
+                message: "Validation failed for 'state': value is required"
+            )
+        }
+        guard container.contains(.repository) else {
+            throw SdkValidationError(
+                field: "repository",
+                code: "required",
+                message: "Validation failed for 'repository': value is required"
+            )
+        }
+        guard container.contains(.issueType) else {
+            throw SdkValidationError(
+                field: "issue_type",
+                code: "required",
+                message: "Validation failed for 'issue_type': value is required"
+            )
+        }
+        number = try container.sdkDecodeRequired(.number)
+        title = try container.sdkDecodeRequired(.title)
+        state = try container.sdkDecodeRequired(.state)
+        repository = try container.sdkDecodeRequired(.repository)
+        issueType = try container.sdkDecodeNullable(.issueType)
+        stateReason = try container.sdkDecodeIfPresent(.stateReason)
+    }
+}
+
+public extension NullableIssueReference {
+    init(
+        number: Int,
+        title: String,
+        state: String,
+        repository: SimpleRepository,
+        issueType: NullableIssueReferenceIssueType?,
+        stateReason: String? = nil
+    ) {
         (self.number, self.title) = (number, title)
         (self.state, self.repository) = (state, repository)
         (self.issueType, self.stateReason) = (issueType, stateReason)
@@ -361,40 +433,65 @@ public struct NullableIssueLabelsItemVariant1ArchivedBy: Codable {
         case userViewType = "user_view_type"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension NullableIssueLabelsItemVariant1ArchivedBy {
-    public init(from decoder: Decoder) throws {
+public extension NullableIssueLabelsItemVariant1ArchivedBy {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.login = try container.sdkDecodeRequired(.login)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
-        self.gravatarId = try container.sdkDecodeNullable(.gravatarId)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.followersUrl = try container.sdkDecodeRequired(.followersUrl)
-        self.followingUrl = try container.sdkDecodeRequired(.followingUrl)
-        self.gistsUrl = try container.sdkDecodeRequired(.gistsUrl)
-        self.starredUrl = try container.sdkDecodeRequired(.starredUrl)
-        self.subscriptionsUrl = try container.sdkDecodeRequired(.subscriptionsUrl)
-        self.organizationsUrl = try container.sdkDecodeRequired(.organizationsUrl)
-        self.reposUrl = try container.sdkDecodeRequired(.reposUrl)
-        self.eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        self.receivedEventsUrl = try container.sdkDecodeRequired(.receivedEventsUrl)
-        self.type = try container.sdkDecodeRequired(.type)
-        self.siteAdmin = try container.sdkDecodeRequired(.siteAdmin)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.email = try container.sdkDecodeIfPresent(.email)
-        self.starredAt = try container.sdkDecodeIfPresent(.starredAt)
-        self.userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        login = try container.sdkDecodeRequired(.login)
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
+        gravatarId = try container.sdkDecodeNullable(.gravatarId)
+        url = try container.sdkDecodeRequired(.url)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        followersUrl = try container.sdkDecodeRequired(.followersUrl)
+        followingUrl = try container.sdkDecodeRequired(.followingUrl)
+        gistsUrl = try container.sdkDecodeRequired(.gistsUrl)
+        starredUrl = try container.sdkDecodeRequired(.starredUrl)
+        subscriptionsUrl = try container.sdkDecodeRequired(.subscriptionsUrl)
+        organizationsUrl = try container.sdkDecodeRequired(.organizationsUrl)
+        reposUrl = try container.sdkDecodeRequired(.reposUrl)
+        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
+        receivedEventsUrl = try container.sdkDecodeRequired(.receivedEventsUrl)
+        type = try container.sdkDecodeRequired(.type)
+        siteAdmin = try container.sdkDecodeRequired(.siteAdmin)
+        name = try container.sdkDecodeIfPresent(.name)
+        email = try container.sdkDecodeIfPresent(.email)
+        starredAt = try container.sdkDecodeIfPresent(.starredAt)
+        userViewType = try container.sdkDecodeIfPresent(.userViewType)
         try sdkValidateConstraints()
     }
 }
 
-extension NullableIssueLabelsItemVariant1ArchivedBy {
-    public init(login: String, id: Int, nodeId: String, avatarUrl: String, gravatarId: String?, url: String, htmlUrl: String, followersUrl: String, followingUrl: String, gistsUrl: String, starredUrl: String, subscriptionsUrl: String, organizationsUrl: String, reposUrl: String, eventsUrl: String, receivedEventsUrl: String, type: String, siteAdmin: Bool, name: String? = nil, email: String? = nil, starredAt: String? = nil, userViewType: String? = nil) throws {
+public extension NullableIssueLabelsItemVariant1ArchivedBy {
+    init(
+        login: String,
+        id: Int,
+        nodeId: String,
+        avatarUrl: String,
+        gravatarId: String?,
+        url: String,
+        htmlUrl: String,
+        followersUrl: String,
+        followingUrl: String,
+        gistsUrl: String,
+        starredUrl: String,
+        subscriptionsUrl: String,
+        organizationsUrl: String,
+        reposUrl: String,
+        eventsUrl: String,
+        receivedEventsUrl: String,
+        type: String,
+        siteAdmin: Bool,
+        name: String? = nil,
+        email: String? = nil,
+        starredAt: String? = nil,
+        userViewType: String? = nil
+    ) throws {
         (self.login, self.id) = (login, id)
         (self.nodeId, self.avatarUrl) = (nodeId, avatarUrl)
         (self.gravatarId, self.url) = (gravatarId, url)
@@ -412,13 +509,13 @@ extension NullableIssueLabelsItemVariant1ArchivedBy {
 
 extension NullableIssueLabelsItemVariant1ArchivedBy {
     func sdkValidateConstraints() throws {
-            try sdkValidateUri("avatar_url", self.avatarUrl)
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("followers_url", self.followersUrl)
-            try sdkValidateUri("subscriptions_url", self.subscriptionsUrl)
-            try sdkValidateUri("organizations_url", self.organizationsUrl)
-            try sdkValidateUri("repos_url", self.reposUrl)
-            try sdkValidateUri("received_events_url", self.receivedEventsUrl)
+        try sdkValidateUri("avatar_url", avatarUrl)
+        try sdkValidateUri("url", url)
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateUri("followers_url", followersUrl)
+        try sdkValidateUri("subscriptions_url", subscriptionsUrl)
+        try sdkValidateUri("organizations_url", organizationsUrl)
+        try sdkValidateUri("repos_url", reposUrl)
+        try sdkValidateUri("received_events_url", receivedEventsUrl)
     }
 }

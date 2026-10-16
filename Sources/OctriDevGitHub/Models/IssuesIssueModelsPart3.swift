@@ -3,12 +3,15 @@
 
 import Foundation
 
-// IssuesIssue domain models
+/// IssuesIssue domain models
 /// The suggestion's lifecycle state.
 public struct IssueSuggestionState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let pending = IssueSuggestionState(rawValue: "pending")
     public static let applied = IssueSuggestionState(rawValue: "applied")
     public static let approved = IssueSuggestionState(rawValue: "approved")
@@ -18,7 +21,7 @@ public struct IssueSuggestionState: RawRepresentable, Hashable, Codable, Sendabl
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -31,7 +34,10 @@ public struct IssueSuggestionState: RawRepresentable, Hashable, Codable, Sendabl
 public struct IssueTypeWebhookColor: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let gray = IssueTypeWebhookColor(rawValue: "gray")
     public static let blue = IssueTypeWebhookColor(rawValue: "blue")
     public static let green = IssueTypeWebhookColor(rawValue: "green")
@@ -43,7 +49,7 @@ public struct IssueTypeWebhookColor: RawRepresentable, Hashable, Codable, Sendab
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -56,14 +62,17 @@ public struct IssueTypeWebhookColor: RawRepresentable, Hashable, Codable, Sendab
 public struct IssueSuggestionConfidence: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let low = IssueSuggestionConfidence(rawValue: "LOW")
     public static let medium = IssueSuggestionConfidence(rawValue: "MEDIUM")
     public static let high = IssueSuggestionConfidence(rawValue: "HIGH")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -76,7 +85,10 @@ public struct IssueSuggestionConfidence: RawRepresentable, Hashable, Codable, Se
 public struct IssueSuggestionAction: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let setType = IssueSuggestionAction(rawValue: "set_type")
     public static let addLabel = IssueSuggestionAction(rawValue: "add_label")
     public static let addField = IssueSuggestionAction(rawValue: "add_field")
@@ -85,7 +97,7 @@ public struct IssueSuggestionAction: RawRepresentable, Hashable, Codable, Sendab
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

@@ -3,7 +3,7 @@
 
 import Foundation
 
-// AgentAutomations domain models
+/// AgentAutomations domain models
 public indirect enum FieldsItemSchema {
     case fieldsItemSchemaVariant0(FieldsItemSchemaVariant0)
     case fieldsItemSchemaVariant1(FieldsItemSchemaVariant1)
@@ -11,23 +11,35 @@ public indirect enum FieldsItemSchema {
 }
 
 extension FieldsItemSchema: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for FieldsItemSchema")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for FieldsItemSchema"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension FieldsItemSchema {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(FieldsItemSchemaVariant0.self) { return .fieldsItemSchemaVariant0(value) }
-        if let value = try? container.decode(FieldsItemSchemaVariant1.self) { return .fieldsItemSchemaVariant1(value) }
-        if let value = try? container.decode(FieldsItemSchemaVariant2.self) { return .fieldsItemSchemaVariant2(value) }
+        if let value = try? container.decode(FieldsItemSchemaVariant0.self) {
+            return .fieldsItemSchemaVariant0(value)
+        }
+        if let value = try? container.decode(FieldsItemSchemaVariant1.self) {
+            return .fieldsItemSchemaVariant1(value)
+        }
+        if let value = try? container.decode(FieldsItemSchemaVariant2.self) {
+            return .fieldsItemSchemaVariant2(value)
+        }
         return nil
     }
 }
@@ -49,22 +61,34 @@ public indirect enum TasksItemArtifactsItemData {
 }
 
 extension TasksItemArtifactsItemData: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for TasksItemArtifactsItemData")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for TasksItemArtifactsItemData"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension TasksItemArtifactsItemData {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(TasksItemArtifactsItemDataVariant0.self) { return .tasksItemArtifactsItemDataVariant0(value) }
-        if let value = try? container.decode(TasksItemArtifactsItemDataVariant1.self) { return .tasksItemArtifactsItemDataVariant1(value) }
+        if let value = try? container
+            .decode(TasksItemArtifactsItemDataVariant0.self) {
+            return .tasksItemArtifactsItemDataVariant0(value)
+        }
+        if let value = try? container
+            .decode(TasksItemArtifactsItemDataVariant1.self) {
+            return .tasksItemArtifactsItemDataVariant1(value)
+        }
         return nil
     }
 }
@@ -91,22 +115,28 @@ public struct TasksItemArtifactsItemDataVariant0: Codable {
         case globalId = "global_id"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension TasksItemArtifactsItemDataVariant0 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.globalId = try container.sdkDecodeIfPresent(.globalId)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension TasksItemArtifactsItemDataVariant0 {
-    public init(id: Int, globalId: String? = nil) {
+public extension TasksItemArtifactsItemDataVariant0 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        globalId = try container.sdkDecodeIfPresent(.globalId)
+    }
+}
+
+public extension TasksItemArtifactsItemDataVariant0 {
+    init(id: Int, globalId: String? = nil) {
         (self.id, self.globalId) = (id, globalId)
     }
 }
@@ -121,28 +151,50 @@ public struct FieldsItemSchemaVariant1Items: Codable {
         case minLength
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension FieldsItemSchemaVariant1Items {
-    public init(from decoder: Decoder) throws {
+public extension FieldsItemSchemaVariant1Items {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
         }
-        self.type = try container.sdkDecodeRequired(.type)
-        self.minLength = try container.sdkDecodeIfPresent(.minLength)
-        if let value = self.minLength {
-            try validateRange("minLength", Double(value), min: 0, max: nil, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+        type = try container.sdkDecodeRequired(.type)
+        minLength = try container.sdkDecodeIfPresent(.minLength)
+        if let value = minLength {
+            try validateRange(
+                "minLength",
+                Double(value),
+                min: 0,
+                max: nil,
+                exclusiveMin: nil,
+                exclusiveMax: nil,
+                multipleOf: nil
+            )
         }
     }
 }
 
-extension FieldsItemSchemaVariant1Items {
-    public init(type: FieldsItemSchemaVariant1ItemsType, minLength: Int? = nil) throws {
+public extension FieldsItemSchemaVariant1Items {
+    init(type: FieldsItemSchemaVariant1ItemsType, minLength: Int? = nil) throws {
         (self.type, self.minLength) = (type, minLength)
         if let value = self.minLength {
-            try validateRange("minLength", Double(value), min: 0, max: nil, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+            try validateRange(
+                "minLength",
+                Double(value),
+                min: 0,
+                max: nil,
+                exclusiveMin: nil,
+                exclusiveMax: nil,
+                multipleOf: nil
+            )
         }
     }
 }
@@ -154,24 +206,30 @@ public struct FieldsItemSchemaVariant2: Codable {
         case type
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension FieldsItemSchemaVariant2 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        self.type = try container.sdkDecodeRequired(.type)
-            try sdkValidateRawEnum("type", self.type, FieldsItemSchemaVariant2Type.allCases.map(\.rawValue))
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension FieldsItemSchemaVariant2 {
-    public init(type: FieldsItemSchemaVariant2Type) throws {
+public extension FieldsItemSchemaVariant2 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.type) else {
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
+        }
+        type = try container.sdkDecodeRequired(.type)
+        try sdkValidateRawEnum("type", type, FieldsItemSchemaVariant2Type.allCases.map(\.rawValue))
+    }
+}
+
+public extension FieldsItemSchemaVariant2 {
+    init(type: FieldsItemSchemaVariant2Type) throws {
         self.type = type
-            try sdkValidateRawEnum("type", self.type, FieldsItemSchemaVariant2Type.allCases.map(\.rawValue))
+        try sdkValidateRawEnum("type", self.type, FieldsItemSchemaVariant2Type.allCases.map(\.rawValue))
     }
 }
 
@@ -193,44 +251,92 @@ public struct FieldsItemSchemaVariant1: Codable {
         case uniqueItems
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension FieldsItemSchemaVariant1 {
-    public init(from decoder: Decoder) throws {
+public extension FieldsItemSchemaVariant1 {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
         }
         guard container.contains(.items) else {
-            throw SdkValidationError(field: "items", code: "required", message: "Validation failed for 'items': value is required")
+            throw SdkValidationError(
+                field: "items",
+                code: "required",
+                message: "Validation failed for 'items': value is required"
+            )
         }
-        self.type = try container.sdkDecodeRequired(.type)
-        self.items = try container.sdkDecodeRequired(.items)
-        self.minItems = try container.sdkDecodeIfPresent(.minItems)
-        self.maxItems = try container.sdkDecodeIfPresent(.maxItems)
-        self.uniqueItems = try container.sdkDecodeIfPresent(.uniqueItems)
-            try sdkValidateRawEnum("type", self.type, FieldsItemSchemaVariant1Type.allCases.map(\.rawValue))
-        if let value = self.minItems {
-            try validateRange("minItems", Double(value), min: 0, max: nil, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+        type = try container.sdkDecodeRequired(.type)
+        items = try container.sdkDecodeRequired(.items)
+        minItems = try container.sdkDecodeIfPresent(.minItems)
+        maxItems = try container.sdkDecodeIfPresent(.maxItems)
+        uniqueItems = try container.sdkDecodeIfPresent(.uniqueItems)
+        try sdkValidateRawEnum("type", type, FieldsItemSchemaVariant1Type.allCases.map(\.rawValue))
+        if let value = minItems {
+            try validateRange(
+                "minItems",
+                Double(value),
+                min: 0,
+                max: nil,
+                exclusiveMin: nil,
+                exclusiveMax: nil,
+                multipleOf: nil
+            )
         }
-        if let value = self.maxItems {
-            try validateRange("maxItems", Double(value), min: 0, max: nil, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+        if let value = maxItems {
+            try validateRange(
+                "maxItems",
+                Double(value),
+                min: 0,
+                max: nil,
+                exclusiveMin: nil,
+                exclusiveMax: nil,
+                multipleOf: nil
+            )
         }
     }
 }
 
-extension FieldsItemSchemaVariant1 {
-    public init(type: FieldsItemSchemaVariant1Type, items: FieldsItemSchemaVariant1Items, minItems: Int? = nil, maxItems: Int? = nil, uniqueItems: Bool? = nil) throws {
+public extension FieldsItemSchemaVariant1 {
+    init(
+        type: FieldsItemSchemaVariant1Type,
+        items: FieldsItemSchemaVariant1Items,
+        minItems: Int? = nil,
+        maxItems: Int? = nil,
+        uniqueItems: Bool? = nil
+    ) throws {
         (self.type, self.items) = (type, items)
         (self.minItems, self.maxItems) = (minItems, maxItems)
         self.uniqueItems = uniqueItems
-            try sdkValidateRawEnum("type", self.type, FieldsItemSchemaVariant1Type.allCases.map(\.rawValue))
+        try sdkValidateRawEnum("type", self.type, FieldsItemSchemaVariant1Type.allCases.map(\.rawValue))
         if let value = self.minItems {
-            try validateRange("minItems", Double(value), min: 0, max: nil, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+            try validateRange(
+                "minItems",
+                Double(value),
+                min: 0,
+                max: nil,
+                exclusiveMin: nil,
+                exclusiveMax: nil,
+                multipleOf: nil
+            )
         }
         if let value = self.maxItems {
-            try validateRange("maxItems", Double(value), min: 0, max: nil, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+            try validateRange(
+                "maxItems",
+                Double(value),
+                min: 0,
+                max: nil,
+                exclusiveMin: nil,
+                exclusiveMax: nil,
+                multipleOf: nil
+            )
         }
     }
 }
@@ -245,30 +351,52 @@ public struct FieldsItemSchemaVariant0: Codable {
         case minLength
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension FieldsItemSchemaVariant0 {
-    public init(from decoder: Decoder) throws {
+public extension FieldsItemSchemaVariant0 {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
         }
-        self.type = try container.sdkDecodeRequired(.type)
-        self.minLength = try container.sdkDecodeIfPresent(.minLength)
-            try sdkValidateRawEnum("type", self.type, FieldsItemSchemaVariant0Type.allCases.map(\.rawValue))
-        if let value = self.minLength {
-            try validateRange("minLength", Double(value), min: 0, max: nil, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+        type = try container.sdkDecodeRequired(.type)
+        minLength = try container.sdkDecodeIfPresent(.minLength)
+        try sdkValidateRawEnum("type", type, FieldsItemSchemaVariant0Type.allCases.map(\.rawValue))
+        if let value = minLength {
+            try validateRange(
+                "minLength",
+                Double(value),
+                min: 0,
+                max: nil,
+                exclusiveMin: nil,
+                exclusiveMax: nil,
+                multipleOf: nil
+            )
         }
     }
 }
 
-extension FieldsItemSchemaVariant0 {
-    public init(type: FieldsItemSchemaVariant0Type, minLength: Int? = nil) throws {
+public extension FieldsItemSchemaVariant0 {
+    init(type: FieldsItemSchemaVariant0Type, minLength: Int? = nil) throws {
         (self.type, self.minLength) = (type, minLength)
-            try sdkValidateRawEnum("type", self.type, FieldsItemSchemaVariant0Type.allCases.map(\.rawValue))
+        try sdkValidateRawEnum("type", self.type, FieldsItemSchemaVariant0Type.allCases.map(\.rawValue))
         if let value = self.minLength {
-            try validateRange("minLength", Double(value), min: 0, max: nil, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+            try validateRange(
+                "minLength",
+                Double(value),
+                min: 0,
+                max: nil,
+                exclusiveMin: nil,
+                exclusiveMax: nil,
+                multipleOf: nil
+            )
         }
     }
 }
@@ -285,25 +413,35 @@ public struct TasksItemArtifactsItemDataVariant1: Codable {
         case baseRef = "base_ref"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension TasksItemArtifactsItemDataVariant1 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.headRef) else {
-            throw SdkValidationError(field: "head_ref", code: "required", message: "Validation failed for 'head_ref': value is required")
-        }
-        guard container.contains(.baseRef) else {
-            throw SdkValidationError(field: "base_ref", code: "required", message: "Validation failed for 'base_ref': value is required")
-        }
-        self.headRef = try container.sdkDecodeRequired(.headRef)
-        self.baseRef = try container.sdkDecodeRequired(.baseRef)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension TasksItemArtifactsItemDataVariant1 {
-    public init(headRef: String, baseRef: String) {
+public extension TasksItemArtifactsItemDataVariant1 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.headRef) else {
+            throw SdkValidationError(
+                field: "head_ref",
+                code: "required",
+                message: "Validation failed for 'head_ref': value is required"
+            )
+        }
+        guard container.contains(.baseRef) else {
+            throw SdkValidationError(
+                field: "base_ref",
+                code: "required",
+                message: "Validation failed for 'base_ref': value is required"
+            )
+        }
+        headRef = try container.sdkDecodeRequired(.headRef)
+        baseRef = try container.sdkDecodeRequired(.baseRef)
+    }
+}
+
+public extension TasksItemArtifactsItemDataVariant1 {
+    init(headRef: String, baseRef: String) {
         (self.headRef, self.baseRef) = (headRef, baseRef)
     }
 }
@@ -328,12 +466,15 @@ public enum FieldsItemSchemaVariant2Type: String, CaseIterable, Codable {
 public struct FieldsItemSchemaVariant1ItemsType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let string = FieldsItemSchemaVariant1ItemsType(rawValue: "string")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

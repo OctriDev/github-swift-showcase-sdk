@@ -7,7 +7,7 @@ import Foundation
     import FoundationNetworking
 #endif
 
-// Canonical users operation model declarations
+/// Canonical users operation model declarations
 public struct UsersDeleteAttestationsBulkRequestBodyVariant1: Codable {
     /// List of unique IDs associated with the artifact attestations to delete.
     public var attestationIds: [Int]
@@ -16,24 +16,30 @@ public struct UsersDeleteAttestationsBulkRequestBodyVariant1: Codable {
         case attestationIds = "attestation_ids"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension UsersDeleteAttestationsBulkRequestBodyVariant1 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.attestationIds) else {
-            throw SdkValidationError(field: "attestation_ids", code: "required", message: "Validation failed for 'attestation_ids': value is required")
-        }
-        self.attestationIds = try container.sdkDecodeRequired(.attestationIds)
-            try validateItems("attestation_ids", self.attestationIds, min: 1, max: 1024)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension UsersDeleteAttestationsBulkRequestBodyVariant1 {
-    public init(attestationIds: [Int]) throws {
+public extension UsersDeleteAttestationsBulkRequestBodyVariant1 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.attestationIds) else {
+            throw SdkValidationError(
+                field: "attestation_ids",
+                code: "required",
+                message: "Validation failed for 'attestation_ids': value is required"
+            )
+        }
+        attestationIds = try container.sdkDecodeRequired(.attestationIds)
+        try validateItems("attestation_ids", attestationIds, min: 1, max: 1024)
+    }
+}
+
+public extension UsersDeleteAttestationsBulkRequestBodyVariant1 {
+    init(attestationIds: [Int]) throws {
         self.attestationIds = attestationIds
-            try validateItems("attestation_ids", self.attestationIds, min: 1, max: 1024)
+        try validateItems("attestation_ids", self.attestationIds, min: 1, max: 1024)
     }
 }
 
@@ -45,24 +51,30 @@ public struct UsersDeleteAttestationsBulkRequestBodyVariant0: Codable {
         case subjectDigests = "subject_digests"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension UsersDeleteAttestationsBulkRequestBodyVariant0 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.subjectDigests) else {
-            throw SdkValidationError(field: "subject_digests", code: "required", message: "Validation failed for 'subject_digests': value is required")
-        }
-        self.subjectDigests = try container.sdkDecodeRequired(.subjectDigests)
-            try validateItems("subject_digests", self.subjectDigests, min: 1, max: 1024)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension UsersDeleteAttestationsBulkRequestBodyVariant0 {
-    public init(subjectDigests: [String]) throws {
+public extension UsersDeleteAttestationsBulkRequestBodyVariant0 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.subjectDigests) else {
+            throw SdkValidationError(
+                field: "subject_digests",
+                code: "required",
+                message: "Validation failed for 'subject_digests': value is required"
+            )
+        }
+        subjectDigests = try container.sdkDecodeRequired(.subjectDigests)
+        try validateItems("subject_digests", subjectDigests, min: 1, max: 1024)
+    }
+}
+
+public extension UsersDeleteAttestationsBulkRequestBodyVariant0 {
+    init(subjectDigests: [String]) throws {
         self.subjectDigests = subjectDigests
-            try validateItems("subject_digests", self.subjectDigests, min: 1, max: 1024)
+        try validateItems("subject_digests", self.subjectDigests, min: 1, max: 1024)
     }
 }
 
@@ -74,7 +86,6 @@ public indirect enum UsersGetAuthenticatedResponse {
 }
 
 extension UsersGetAuthenticatedResponse: Codable {
-
     private enum CodingKeys: String, CodingKey {
         case discriminator = "user_view_type"
     }
@@ -82,20 +93,29 @@ extension UsersGetAuthenticatedResponse: Codable {
     public init(from decoder: Decoder) throws {
         if let tagged = try? decoder.container(keyedBy: CodingKeys.self),
            let discriminator = try? tagged.decode(String.self, forKey: .discriminator) {
-            if let value = try Self.decodeGroup1(discriminator, from: decoder) { self = value; return }
+            if let value = try Self.decodeGroup1(discriminator, from: decoder) {
+                self = value; return
+            }
         }
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeUntaggedGroup1(from: container) { self = value; return }
+        if let value = Self.decodeUntaggedGroup1(from: container) {
+            self = value; return
+        }
         if let tagged = try? decoder.container(keyedBy: CodingKeys.self),
            let discriminator = try? tagged.decode(String.self, forKey: .discriminator) {
             self = try .unknown(tag: discriminator, raw: JSONValue(from: decoder))
             return
         }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for UsersGetAuthenticatedResponse")
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for UsersGetAuthenticatedResponse"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
         if case let .unknown(_, raw) = self {
             var container = encoder.singleValueContainer()
             try container.encode(raw)
@@ -106,17 +126,21 @@ extension UsersGetAuthenticatedResponse: Codable {
 extension UsersGetAuthenticatedResponse {
     static func decodeGroup1(_ discriminator: String, from decoder: Decoder) throws -> Self? {
         switch discriminator {
-        case "private": return .privateUser(try PrivateUser(from: decoder))
-        case "public": return .publicUser(try PublicUser(from: decoder))
-        default: return nil
+        case "private": try .privateUser(PrivateUser(from: decoder))
+        case "public": try .publicUser(PublicUser(from: decoder))
+        default: nil
         }
     }
 }
 
 extension UsersGetAuthenticatedResponse {
     static func decodeUntaggedGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(PrivateUser.self) { return .privateUser(value) }
-        if let value = try? container.decode(PublicUser.self) { return .publicUser(value) }
+        if let value = try? container.decode(PrivateUser.self) {
+            return .privateUser(value)
+        }
+        if let value = try? container.decode(PublicUser.self) {
+            return .publicUser(value)
+        }
         return nil
     }
 }
@@ -143,23 +167,29 @@ public struct UsersAddEmailForAuthenticatedUserRequestBodyVariant0: Codable {
         case emails
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension UsersAddEmailForAuthenticatedUserRequestBodyVariant0 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.emails) else {
-            throw SdkValidationError(field: "emails", code: "required", message: "Validation failed for 'emails': value is required")
-        }
-        self.emails = try container.sdkDecodeRequired(.emails)
-            try validateItems("emails", self.emails, min: 1, max: nil)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension UsersAddEmailForAuthenticatedUserRequestBodyVariant0 {
-    public init(emails: [String]) throws {
+public extension UsersAddEmailForAuthenticatedUserRequestBodyVariant0 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.emails) else {
+            throw SdkValidationError(
+                field: "emails",
+                code: "required",
+                message: "Validation failed for 'emails': value is required"
+            )
+        }
+        emails = try container.sdkDecodeRequired(.emails)
+        try validateItems("emails", emails, min: 1, max: nil)
+    }
+}
+
+public extension UsersAddEmailForAuthenticatedUserRequestBodyVariant0 {
+    init(emails: [String]) throws {
         self.emails = emails
-            try validateItems("emails", self.emails, min: 1, max: nil)
+        try validateItems("emails", self.emails, min: 1, max: nil)
     }
 }

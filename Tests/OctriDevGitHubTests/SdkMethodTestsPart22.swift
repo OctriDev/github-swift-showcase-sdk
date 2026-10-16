@@ -17,14 +17,14 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codeQuality.updateSetup(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            state: decoded("\"configured\""),
-            runnerType: decoded("null"),
-            runnerLabel: decoded("null"),
-            languages: decoded("[\"javascript-typescript\",\"python\",\"ruby\"]"),
-            aiFindingsOption: decoded("null")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                state: decoded("\"configured\""),
+                runnerType: decoded("null"),
+                runnerLabel: decoded("null"),
+                languages: decoded("[\"javascript-typescript\",\"python\",\"ruby\"]"),
+                aiFindingsOption: decoded("null")
+            )
             XCTFail("codeQualityUpdateSetup did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -75,12 +75,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codeScanning.commitAutofix(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            alertNumber: decoded("1"),
-            targetRef: decoded("\"refs/heads/fix-bug\""),
-            message: decoded("\"Let's fix this 🪲!\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                alertNumber: decoded("1"),
+                targetRef: decoded("\"refs/heads/fix-bug\""),
+                message: decoded("\"Let's fix this 🪲!\"")
+            )
             XCTFail("codeScanningCommitAutofix did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -129,10 +129,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codeScanning.createAutofix(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            alertNumber: decoded("1")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                alertNumber: decoded("1")
+            )
             XCTFail("codeScanningCreateAutofix did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -149,21 +149,22 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCodeScanningCreateVariantAnalysisCodeScanningCreateVariantAnalysisReachesMockAndDecodesResponse() async throws {
+    func testCodeScanningCreateVariantAnalysisCodeScanningCreateVariantAnalysisReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
         do {
             _ = try await client.codeScanning.createVariantAnalysis(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            language: decoded("\"csharp\""),
-            queryPack: decoded("\"aGVsbG8=\""),
-            repositories: decoded("[\"octocat/Hello-World\",\"octocat/example\"]"),
-            repositoryLists: decoded("null"),
-            repositoryOwners: decoded("null")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                language: decoded("\"csharp\""),
+                queryPack: decoded("\"aGVsbG8=\""),
+                repositories: decoded("[\"octocat/Hello-World\",\"octocat/example\"]"),
+                repositoryLists: decoded("null"),
+                repositoryOwners: decoded("null")
+            )
             XCTFail("codeScanningCreateVariantAnalysis decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -172,7 +173,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCodeScanningCreateVariantAnalysisCodeScanningCreateVariantAnalysis404ReachesMockAndDecodesResponse() async throws {
+    func testCodeScanningCreateVariantAnalysisCodeScanningCreateVariantAnalysis404ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -183,14 +185,14 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codeScanning.createVariantAnalysis(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            language: decoded("\"csharp\""),
-            queryPack: decoded("\"aGVsbG8=\""),
-            repositories: decoded("[\"octocat/Hello-World\",\"octocat/example\"]"),
-            repositoryLists: decoded("null"),
-            repositoryOwners: decoded("null")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                language: decoded("\"csharp\""),
+                queryPack: decoded("\"aGVsbG8=\""),
+                repositories: decoded("[\"octocat/Hello-World\",\"octocat/example\"]"),
+                repositoryLists: decoded("null"),
+                repositoryOwners: decoded("null")
+            )
             XCTFail("codeScanningCreateVariantAnalysis did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -240,11 +242,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codeScanning.deleteAnalysis(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            analysisId: decoded("1"),
-            confirmDelete: decoded("\"confirm_delete\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                analysisId: decoded("1"),
+                confirmDelete: decoded("\"confirm_delete\"")
+            )
             XCTFail("codeScanningDeleteAnalysis did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -261,7 +263,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCodeScanningDeleteCodeqlDatabaseCodeScanningDeleteCodeqlDatabaseReachesMockAndDecodesResponse() async throws {
+    func testCodeScanningDeleteCodeqlDatabaseCodeScanningDeleteCodeqlDatabaseReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -274,7 +277,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCodeScanningDeleteCodeqlDatabaseCodeScanningDeleteCodeqlDatabase403ReachesMockAndDecodesResponse() async throws {
+    func testCodeScanningDeleteCodeqlDatabaseCodeScanningDeleteCodeqlDatabase403ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -285,10 +289,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codeScanning.deleteCodeqlDatabase(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            language: decoded("\"language\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                language: decoded("\"language\"")
+            )
             XCTFail("codeScanningDeleteCodeqlDatabase did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -325,7 +329,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testCodeScanningGetAiScanEnablementCodeScanningGetAiScanEnablement403ReachesMockAndDecodesResponse() async throws {
+    func testCodeScanningGetAiScanEnablementCodeScanningGetAiScanEnablement403ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -336,9 +341,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codeScanning.getAiScanEnablement(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\"")
+            )
             XCTFail("codeScanningGetAiScanEnablement did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -355,7 +360,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCodeScanningGetAiScanEnablementForOrgCodeScanningGetAiScanEnaXc6ebd061a7ReachesMockAndDecodesResponse() async throws {
+    func testCodeScanningGetAiScanEnablementForOrgCodeScanningGetAiScanEnaXc6ebd061a7ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -374,7 +380,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testCodeScanningGetAiScanEnablementForOrgCodeScanningGetAiScanEnaX254ffe88adReachesMockAndDecodesResponse() async throws {
+    func testCodeScanningGetAiScanEnablementForOrgCodeScanningGetAiScanEnaX254ffe88adReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -385,8 +392,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codeScanning.getAiScanEnablementForOrg(
-            org: decoded("\"org\"")
-        )
+                org: decoded("\"org\"")
+            )
             XCTFail("codeScanningGetAiScanEnablementForOrg did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -435,10 +442,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codeScanning.getAlert(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            alertNumber: decoded("1")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                alertNumber: decoded("1")
+            )
             XCTFail("codeScanningGetAlert did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -487,10 +494,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codeScanning.getAnalysis(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            analysisId: decoded("1")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                analysisId: decoded("1")
+            )
             XCTFail("codeScanningGetAnalysis did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -539,10 +546,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codeScanning.getAutofix(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            alertNumber: decoded("1")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                alertNumber: decoded("1")
+            )
             XCTFail("codeScanningGetAutofix did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)

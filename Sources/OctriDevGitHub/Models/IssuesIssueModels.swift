@@ -3,7 +3,7 @@
 
 import Foundation
 
-// IssuesIssue domain models
+/// IssuesIssue domain models
 public indirect enum IssueEventForIssue {
     case labeledIssueEvent(LabeledIssueEvent)
     case unlabeledIssueEvent(UnlabeledIssueEvent)
@@ -34,62 +34,141 @@ public indirect enum IssueEventForIssue {
 }
 
 extension IssueEventForIssue: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        if let value = Self.decodeGroup2(from: container) { self = value; return }
-        if let value = Self.decodeGroup3(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for IssueEventForIssue")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        if let value = Self.decodeGroup2(from: container) {
+            self = value; return
+        }
+        if let value = Self.decodeGroup3(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for IssueEventForIssue"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
-        if try encodeGroup2(to: encoder) { return }
-        if try encodeGroup3(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
+        if try encodeGroup2(to: encoder) {
+            return
+        }
+        if try encodeGroup3(to: encoder) {
+            return
+        }
     }
 }
 
 extension IssueEventForIssue {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(LabeledIssueEvent.self) { return .labeledIssueEvent(value) }
-        if let value = try? container.decode(UnlabeledIssueEvent.self) { return .unlabeledIssueEvent(value) }
-        if let value = try? container.decode(AssignedIssueEvent.self) { return .assignedIssueEvent(value) }
-        if let value = try? container.decode(UnassignedIssueEvent.self) { return .unassignedIssueEvent(value) }
-        if let value = try? container.decode(MilestonedIssueEvent.self) { return .milestonedIssueEvent(value) }
-        if let value = try? container.decode(DemilestonedIssueEvent.self) { return .demilestonedIssueEvent(value) }
-        if let value = try? container.decode(RenamedIssueEvent.self) { return .renamedIssueEvent(value) }
-        if let value = try? container.decode(ReviewRequestedIssueEvent.self) { return .reviewRequestedIssueEvent(value) }
-        if let value = try? container.decode(ReviewRequestRemovedIssueEvent.self) { return .reviewRequestRemovedIssueEvent(value) }
-        if let value = try? container.decode(ReviewDismissedIssueEvent.self) { return .reviewDismissedIssueEvent(value) }
-        if let value = try? container.decode(LockedIssueEvent.self) { return .lockedIssueEvent(value) }
-        if let value = try? container.decode(AddedToProjectIssueEvent.self) { return .addedToProjectIssueEvent(value) }
+        if let value = try? container.decode(LabeledIssueEvent.self) {
+            return .labeledIssueEvent(value)
+        }
+        if let value = try? container.decode(UnlabeledIssueEvent.self) {
+            return .unlabeledIssueEvent(value)
+        }
+        if let value = try? container.decode(AssignedIssueEvent.self) {
+            return .assignedIssueEvent(value)
+        }
+        if let value = try? container.decode(UnassignedIssueEvent.self) {
+            return .unassignedIssueEvent(value)
+        }
+        if let value = try? container.decode(MilestonedIssueEvent.self) {
+            return .milestonedIssueEvent(value)
+        }
+        if let value = try? container.decode(DemilestonedIssueEvent.self) {
+            return .demilestonedIssueEvent(value)
+        }
+        if let value = try? container.decode(RenamedIssueEvent.self) {
+            return .renamedIssueEvent(value)
+        }
+        if let value = try? container
+            .decode(ReviewRequestedIssueEvent.self) {
+            return .reviewRequestedIssueEvent(value)
+        }
+        if let value = try? container
+            .decode(ReviewRequestRemovedIssueEvent.self) {
+            return .reviewRequestRemovedIssueEvent(value)
+        }
+        if let value = try? container
+            .decode(ReviewDismissedIssueEvent.self) {
+            return .reviewDismissedIssueEvent(value)
+        }
+        if let value = try? container.decode(LockedIssueEvent.self) {
+            return .lockedIssueEvent(value)
+        }
+        if let value = try? container.decode(AddedToProjectIssueEvent.self) {
+            return .addedToProjectIssueEvent(value)
+        }
         return nil
     }
 }
 
 extension IssueEventForIssue {
     static func decodeGroup2(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(MovedColumnInProjectIssueEvent.self) { return .movedColumnInProjectIssueEvent(value) }
-        if let value = try? container.decode(RemovedFromProjectIssueEvent.self) { return .removedFromProjectIssueEvent(value) }
-        if let value = try? container.decode(ConvertedNoteToIssueIssueEvent.self) { return .convertedNoteToIssueIssueEvent(value) }
-        if let value = try? container.decode(IssueTypeAddedIssueEvent.self) { return .issueTypeAddedIssueEvent(value) }
-        if let value = try? container.decode(IssueTypeRemovedIssueEvent.self) { return .issueTypeRemovedIssueEvent(value) }
-        if let value = try? container.decode(IssueTypeChangedIssueEvent.self) { return .issueTypeChangedIssueEvent(value) }
-        if let value = try? container.decode(SubIssueAddedIssueEvent.self) { return .subIssueAddedIssueEvent(value) }
-        if let value = try? container.decode(SubIssueRemovedIssueEvent.self) { return .subIssueRemovedIssueEvent(value) }
-        if let value = try? container.decode(ParentIssueAddedIssueEvent.self) { return .parentIssueAddedIssueEvent(value) }
-        if let value = try? container.decode(ParentIssueRemovedIssueEvent.self) { return .parentIssueRemovedIssueEvent(value) }
-        if let value = try? container.decode(BlockedByAddedIssueEvent.self) { return .blockedByAddedIssueEvent(value) }
-        if let value = try? container.decode(BlockedByRemovedIssueEvent.self) { return .blockedByRemovedIssueEvent(value) }
+        if let value = try? container
+            .decode(MovedColumnInProjectIssueEvent.self) {
+            return .movedColumnInProjectIssueEvent(value)
+        }
+        if let value = try? container
+            .decode(RemovedFromProjectIssueEvent.self) {
+            return .removedFromProjectIssueEvent(value)
+        }
+        if let value = try? container
+            .decode(ConvertedNoteToIssueIssueEvent.self) {
+            return .convertedNoteToIssueIssueEvent(value)
+        }
+        if let value = try? container.decode(IssueTypeAddedIssueEvent.self) {
+            return .issueTypeAddedIssueEvent(value)
+        }
+        if let value = try? container
+            .decode(IssueTypeRemovedIssueEvent.self) {
+            return .issueTypeRemovedIssueEvent(value)
+        }
+        if let value = try? container
+            .decode(IssueTypeChangedIssueEvent.self) {
+            return .issueTypeChangedIssueEvent(value)
+        }
+        if let value = try? container.decode(SubIssueAddedIssueEvent.self) {
+            return .subIssueAddedIssueEvent(value)
+        }
+        if let value = try? container
+            .decode(SubIssueRemovedIssueEvent.self) {
+            return .subIssueRemovedIssueEvent(value)
+        }
+        if let value = try? container
+            .decode(ParentIssueAddedIssueEvent.self) {
+            return .parentIssueAddedIssueEvent(value)
+        }
+        if let value = try? container
+            .decode(ParentIssueRemovedIssueEvent.self) {
+            return .parentIssueRemovedIssueEvent(value)
+        }
+        if let value = try? container.decode(BlockedByAddedIssueEvent.self) {
+            return .blockedByAddedIssueEvent(value)
+        }
+        if let value = try? container
+            .decode(BlockedByRemovedIssueEvent.self) {
+            return .blockedByRemovedIssueEvent(value)
+        }
         return nil
     }
 }
 
 extension IssueEventForIssue {
     static func decodeGroup3(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(BlockingAddedIssueEvent.self) { return .blockingAddedIssueEvent(value) }
-        if let value = try? container.decode(BlockingRemovedIssueEvent.self) { return .blockingRemovedIssueEvent(value) }
+        if let value = try? container.decode(BlockingAddedIssueEvent.self) {
+            return .blockingAddedIssueEvent(value)
+        }
+        if let value = try? container
+            .decode(BlockingRemovedIssueEvent.self) {
+            return .blockingRemovedIssueEvent(value)
+        }
         return nil
     }
 }
@@ -171,45 +250,74 @@ public struct IssueEventProjectCard: Codable {
         case previousColumnName = "previous_column_name"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension IssueEventProjectCard {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.url) else {
-            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
-        }
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.projectUrl) else {
-            throw SdkValidationError(field: "project_url", code: "required", message: "Validation failed for 'project_url': value is required")
-        }
-        guard container.contains(.projectId) else {
-            throw SdkValidationError(field: "project_id", code: "required", message: "Validation failed for 'project_id': value is required")
-        }
-        guard container.contains(.columnName) else {
-            throw SdkValidationError(field: "column_name", code: "required", message: "Validation failed for 'column_name': value is required")
-        }
-        self.url = try container.sdkDecodeRequired(.url)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.projectUrl = try container.sdkDecodeRequired(.projectUrl)
-        self.projectId = try container.sdkDecodeRequired(.projectId)
-        self.columnName = try container.sdkDecodeRequired(.columnName)
-        self.previousColumnName = try container.sdkDecodeIfPresent(.previousColumnName)
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("project_url", self.projectUrl)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension IssueEventProjectCard {
-    public init(url: String, id: Int, projectUrl: String, projectId: Int, columnName: String, previousColumnName: String? = nil) throws {
+public extension IssueEventProjectCard {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.url) else {
+            throw SdkValidationError(
+                field: "url",
+                code: "required",
+                message: "Validation failed for 'url': value is required"
+            )
+        }
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.projectUrl) else {
+            throw SdkValidationError(
+                field: "project_url",
+                code: "required",
+                message: "Validation failed for 'project_url': value is required"
+            )
+        }
+        guard container.contains(.projectId) else {
+            throw SdkValidationError(
+                field: "project_id",
+                code: "required",
+                message: "Validation failed for 'project_id': value is required"
+            )
+        }
+        guard container.contains(.columnName) else {
+            throw SdkValidationError(
+                field: "column_name",
+                code: "required",
+                message: "Validation failed for 'column_name': value is required"
+            )
+        }
+        url = try container.sdkDecodeRequired(.url)
+        id = try container.sdkDecodeRequired(.id)
+        projectUrl = try container.sdkDecodeRequired(.projectUrl)
+        projectId = try container.sdkDecodeRequired(.projectId)
+        columnName = try container.sdkDecodeRequired(.columnName)
+        previousColumnName = try container.sdkDecodeIfPresent(.previousColumnName)
+        try sdkValidateUri("url", url)
+        try sdkValidateUri("project_url", projectUrl)
+    }
+}
+
+public extension IssueEventProjectCard {
+    init(
+        url: String,
+        id: Int,
+        projectUrl: String,
+        projectId: Int,
+        columnName: String,
+        previousColumnName: String? = nil
+    ) throws {
         (self.url, self.id) = (url, id)
         (self.projectUrl, self.projectId) = (projectUrl, projectId)
         (self.columnName, self.previousColumnName) = (columnName, previousColumnName)
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("project_url", self.projectUrl)
+        try sdkValidateUri("url", self.url)
+        try sdkValidateUri("project_url", self.projectUrl)
     }
 }
 
@@ -225,25 +333,35 @@ public struct IssueEventRename: Codable {
         case to
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension IssueEventRename {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.from) else {
-            throw SdkValidationError(field: "from", code: "required", message: "Validation failed for 'from': value is required")
-        }
-        guard container.contains(.to) else {
-            throw SdkValidationError(field: "to", code: "required", message: "Validation failed for 'to': value is required")
-        }
-        self.from = try container.sdkDecodeRequired(.from)
-        self.to = try container.sdkDecodeRequired(.to)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension IssueEventRename {
-    public init(from: String, to: String) {
+public extension IssueEventRename {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.from) else {
+            throw SdkValidationError(
+                field: "from",
+                code: "required",
+                message: "Validation failed for 'from': value is required"
+            )
+        }
+        guard container.contains(.to) else {
+            throw SdkValidationError(
+                field: "to",
+                code: "required",
+                message: "Validation failed for 'to': value is required"
+            )
+        }
+        from = try container.sdkDecodeRequired(.from)
+        to = try container.sdkDecodeRequired(.to)
+    }
+}
+
+public extension IssueEventRename {
+    init(from: String, to: String) {
         (self.from, self.to) = (from, to)
     }
 }
@@ -294,32 +412,48 @@ public struct IssueSuggestion: Codable {
         case updatedAt = "updated_at"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension IssueSuggestion {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.issueId = try container.sdkDecodeRequired(.issueId)
-        self.action = try container.sdkDecodeRequired(.action)
-        self.state = try container.sdkDecodeRequired(.state)
-        self.targetId = try container.sdkDecodeNullable(.targetId)
-        self.targetValue = try container.sdkDecodeNullable(.targetValue)
-        self.rationale = try container.sdkDecodeNullable(.rationale)
-        self.confidence = try container.sdkDecodeNullable(.confidence)
-        self.actorId = try container.sdkDecodeNullable(.actorId)
-        self.issueEventId = try container.sdkDecodeNullable(.issueEventId)
-        self.resolvedBy = try container.sdkDecodeNullable(.resolvedBy)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension IssueSuggestion {
-    public init(id: Int, issueId: Int, action: IssueSuggestionAction, state: IssueSuggestionState, targetId: Int?, targetValue: IssueSuggestionTargetValue?, rationale: String?, confidence: IssueSuggestionConfidence?, actorId: Int?, issueEventId: Int?, resolvedBy: Int?, createdAt: Date, updatedAt: Date) throws {
+public extension IssueSuggestion {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.sdkDecodeRequired(.id)
+        issueId = try container.sdkDecodeRequired(.issueId)
+        action = try container.sdkDecodeRequired(.action)
+        state = try container.sdkDecodeRequired(.state)
+        targetId = try container.sdkDecodeNullable(.targetId)
+        targetValue = try container.sdkDecodeNullable(.targetValue)
+        rationale = try container.sdkDecodeNullable(.rationale)
+        confidence = try container.sdkDecodeNullable(.confidence)
+        actorId = try container.sdkDecodeNullable(.actorId)
+        issueEventId = try container.sdkDecodeNullable(.issueEventId)
+        resolvedBy = try container.sdkDecodeNullable(.resolvedBy)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+    }
+}
+
+public extension IssueSuggestion {
+    init(
+        id: Int,
+        issueId: Int,
+        action: IssueSuggestionAction,
+        state: IssueSuggestionState,
+        targetId: Int?,
+        targetValue: IssueSuggestionTargetValue?,
+        rationale: String?,
+        confidence: IssueSuggestionConfidence?,
+        actorId: Int?,
+        issueEventId: Int?,
+        resolvedBy: Int?,
+        createdAt: Date,
+        updatedAt: Date
+    ) throws {
         (self.id, self.issueId) = (id, issueId)
         (self.action, self.state) = (action, state)
         (self.targetId, self.targetValue) = (targetId, targetValue)
@@ -327,8 +461,8 @@ extension IssueSuggestion {
         (self.actorId, self.issueEventId) = (actorId, issueEventId)
         (self.resolvedBy, self.createdAt) = (resolvedBy, createdAt)
         self.updatedAt = updatedAt
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
     }
 }
 
@@ -344,25 +478,35 @@ public struct IssueEventLabel: Codable {
         case color
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension IssueEventLabel {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        guard container.contains(.color) else {
-            throw SdkValidationError(field: "color", code: "required", message: "Validation failed for 'color': value is required")
-        }
-        self.name = try container.sdkDecodeNullable(.name)
-        self.color = try container.sdkDecodeNullable(.color)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension IssueEventLabel {
-    public init(name: String?, color: String?) {
+public extension IssueEventLabel {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        guard container.contains(.color) else {
+            throw SdkValidationError(
+                field: "color",
+                code: "required",
+                message: "Validation failed for 'color': value is required"
+            )
+        }
+        name = try container.sdkDecodeNullable(.name)
+        color = try container.sdkDecodeNullable(.color)
+    }
+}
+
+public extension IssueEventLabel {
+    init(name: String?, color: String?) {
         (self.name, self.color) = (name, color)
     }
 }
@@ -385,30 +529,44 @@ public struct IssueEventDismissedReview: Codable {
         case dismissalCommitId = "dismissal_commit_id"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension IssueEventDismissedReview {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.state) else {
-            throw SdkValidationError(field: "state", code: "required", message: "Validation failed for 'state': value is required")
-        }
-        guard container.contains(.reviewId) else {
-            throw SdkValidationError(field: "review_id", code: "required", message: "Validation failed for 'review_id': value is required")
-        }
-        guard container.contains(.dismissalMessage) else {
-            throw SdkValidationError(field: "dismissal_message", code: "required", message: "Validation failed for 'dismissal_message': value is required")
-        }
-        self.state = try container.sdkDecodeRequired(.state)
-        self.reviewId = try container.sdkDecodeRequired(.reviewId)
-        self.dismissalMessage = try container.sdkDecodeNullable(.dismissalMessage)
-        self.dismissalCommitId = try container.sdkDecodeIfPresent(.dismissalCommitId)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension IssueEventDismissedReview {
-    public init(state: String, reviewId: Int, dismissalMessage: String?, dismissalCommitId: String? = nil) {
+public extension IssueEventDismissedReview {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.state) else {
+            throw SdkValidationError(
+                field: "state",
+                code: "required",
+                message: "Validation failed for 'state': value is required"
+            )
+        }
+        guard container.contains(.reviewId) else {
+            throw SdkValidationError(
+                field: "review_id",
+                code: "required",
+                message: "Validation failed for 'review_id': value is required"
+            )
+        }
+        guard container.contains(.dismissalMessage) else {
+            throw SdkValidationError(
+                field: "dismissal_message",
+                code: "required",
+                message: "Validation failed for 'dismissal_message': value is required"
+            )
+        }
+        state = try container.sdkDecodeRequired(.state)
+        reviewId = try container.sdkDecodeRequired(.reviewId)
+        dismissalMessage = try container.sdkDecodeNullable(.dismissalMessage)
+        dismissalCommitId = try container.sdkDecodeIfPresent(.dismissalCommitId)
+    }
+}
+
+public extension IssueEventDismissedReview {
+    init(state: String, reviewId: Int, dismissalMessage: String?, dismissalCommitId: String? = nil) {
         (self.state, self.reviewId) = (state, reviewId)
         (self.dismissalMessage, self.dismissalCommitId) = (dismissalMessage, dismissalCommitId)
     }

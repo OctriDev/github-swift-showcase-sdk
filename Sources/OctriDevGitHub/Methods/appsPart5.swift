@@ -6,12 +6,26 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension AppsMethods {
-    /// Triggers a redelivery attempt for a delivery made by a webhook configured for a GitHub App. Supply `delivery_id` to identify the delivery to attempt again. Authenticate with a GitHub App JWT to access this endpoint.
+public extension AppsMethods {
+    /// Triggers a redelivery attempt for a delivery made by a webhook configured for a GitHub App. Supply `delivery_id`
+    /// to identify the delivery to attempt again. Authenticate with a GitHub App JWT to access this endpoint.
     ///
-    /// Redeliver a delivery for the webhook configured for a GitHub App. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
-    public static func appsRedeliverWebhookDelivery(config: ClientConfig, deliveryId: Int, requestOptions: RequestOptions? = nil) async throws -> [String: JSONValue] {
-        return try (await sdkRequest("POST", ["/app/hook/deliveries/", sdkEncodePathSegment(sdkWireString(deliveryId)), "/attempts"].joined(), config: config, decoder: .json, operationId: "appsRedeliverWebhookDelivery", options: requestOptions, errors: ["400": BasicError.self, "422": ValidationError.self])).data
+    /// Redeliver a delivery for the webhook configured for a GitHub App. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
+    /// to access this endpoint.
+    static func appsRedeliverWebhookDelivery(
+        config: ClientConfig,
+        deliveryId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [String: JSONValue] {
+        try await (sdkRequest(
+            "POST",
+            ["/app/hook/deliveries/", sdkEncodePathSegment(sdkWireString(deliveryId)), "/attempts"].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "appsRedeliverWebhookDelivery",
+            options: requestOptions,
+            errors: ["400": BasicError.self, "422": ValidationError.self]
+        )).data
     }
 
     /// Lists all the pending installation requests for the authenticated GitHub App.
@@ -25,10 +39,24 @@ extension AppsMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func appsListInstallationRequestsForAuthenticatedApp(config: ClientConfig, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [IntegrationInstallationRequest] {
-        return try (await sdkRequest("GET", "/app/installation-requests", config: config, query: [
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "appsListInstallationRequestsForAuthenticatedApp", options: requestOptions, errors: ["401": BasicError.self])).data
+    static func appsListInstallationRequestsForAuthenticatedApp(
+        config: ClientConfig,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [IntegrationInstallationRequest] {
+        try await (sdkRequest(
+            "GET",
+            "/app/installation-requests",
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "appsListInstallationRequestsForAuthenticatedApp",
+            options: requestOptions,
+            errors: ["401": BasicError.self]
+        )).data
     }
 }

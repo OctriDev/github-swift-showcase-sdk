@@ -7,15 +7,16 @@ import Foundation
     import FoundationNetworking
 #endif
 
-// Canonical agentAutomations operation model declarations
-extension AgentAutomationsListAutomationTasksResponseTasksItemCreatorVariant0 {
-    public init(id: Int? = nil) {
+/// Canonical agentAutomations operation model declarations
+public extension AgentAutomationsListAutomationTasksResponseTasksItemCreatorVariant0 {
+    init(id: Int? = nil) {
         self.init()
         self.id = id
     }
 }
 
-public typealias AgentAutomationsListAutomationsResponseItemTriggersIntervalCadenceList = [AgentAutomationsListAutomationsResponseItemTriggersIntervalCadenceItem]
+public typealias AgentAutomationsListAutomationsResponseItemTriggersIntervalCadenceList =
+    [AgentAutomationsListAutomationsResponseItemTriggersIntervalCadenceItem]
 
 public struct AgentAutomationsListAutomationsResponseItemTriggersInterval: Codable {
     /// One or more schedules on which the Automation runs.
@@ -41,41 +42,85 @@ public struct AgentAutomationsListAutomationsResponseItemTriggersInterval: Codab
         case writeScope = "write_scope"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension AgentAutomationsListAutomationsResponseItemTriggersInterval {
-    public init(from decoder: Decoder) throws {
+public extension AgentAutomationsListAutomationsResponseItemTriggersInterval {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.cadence) else {
-            throw SdkValidationError(field: "cadence", code: "required", message: "Validation failed for 'cadence': value is required")
+            throw SdkValidationError(
+                field: "cadence",
+                code: "required",
+                message: "Validation failed for 'cadence': value is required"
+            )
         }
-        self.cadence = try container.sdkDecodeRequired(.cadence)
-        self.hourUtc = try container.sdkDecodeIfPresent(.hourUtc)
-        self.dayOfWeek = try container.sdkDecodeIfPresent(.dayOfWeek)
-        self.minuteUtc = try container.sdkDecodeIfPresent(.minuteUtc)
-        self.writeScope = try container.sdkDecodeIfPresent(.writeScope)
-            try validateItems("cadence", self.cadence, min: 1, max: nil)
-        if let value = self.hourUtc {
-            try validateRange("hour_utc", Double(value), min: 0, max: 23, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+        cadence = try container.sdkDecodeRequired(.cadence)
+        hourUtc = try container.sdkDecodeIfPresent(.hourUtc)
+        dayOfWeek = try container.sdkDecodeIfPresent(.dayOfWeek)
+        minuteUtc = try container.sdkDecodeIfPresent(.minuteUtc)
+        writeScope = try container.sdkDecodeIfPresent(.writeScope)
+        try validateItems("cadence", cadence, min: 1, max: nil)
+        if let value = hourUtc {
+            try validateRange(
+                "hour_utc",
+                Double(value),
+                min: 0,
+                max: 23,
+                exclusiveMin: nil,
+                exclusiveMax: nil,
+                multipleOf: nil
+            )
         }
-        if let value = self.dayOfWeek {
-            try validateRange("day_of_week", Double(value), min: 0, max: 6, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+        if let value = dayOfWeek {
+            try validateRange(
+                "day_of_week",
+                Double(value),
+                min: 0,
+                max: 6,
+                exclusiveMin: nil,
+                exclusiveMax: nil,
+                multipleOf: nil
+            )
         }
     }
 }
 
-extension AgentAutomationsListAutomationsResponseItemTriggersInterval {
-    public init(cadence: AgentAutomationsListAutomationsResponseItemTriggersIntervalCadenceList, hourUtc: Int? = nil, dayOfWeek: Int? = nil, minuteUtc: Int? = nil, writeScope: AgentAutomationsListAutomationsResponseItemTriggersIntervalWriteScope? = nil) throws {
+public extension AgentAutomationsListAutomationsResponseItemTriggersInterval {
+    init(
+        cadence: AgentAutomationsListAutomationsResponseItemTriggersIntervalCadenceList,
+        hourUtc: Int? = nil,
+        dayOfWeek: Int? = nil,
+        minuteUtc: Int? = nil,
+        writeScope: AgentAutomationsListAutomationsResponseItemTriggersIntervalWriteScope? = nil
+    ) throws {
         (self.cadence, self.hourUtc) = (cadence, hourUtc)
         (self.dayOfWeek, self.minuteUtc) = (dayOfWeek, minuteUtc)
         self.writeScope = writeScope
-            try validateItems("cadence", self.cadence, min: 1, max: nil)
+        try validateItems("cadence", self.cadence, min: 1, max: nil)
         if let value = self.hourUtc {
-            try validateRange("hour_utc", Double(value), min: 0, max: 23, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+            try validateRange(
+                "hour_utc",
+                Double(value),
+                min: 0,
+                max: 23,
+                exclusiveMin: nil,
+                exclusiveMax: nil,
+                multipleOf: nil
+            )
         }
         if let value = self.dayOfWeek {
-            try validateRange("day_of_week", Double(value), min: 0, max: 6, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+            try validateRange(
+                "day_of_week",
+                Double(value),
+                min: 0,
+                max: 6,
+                exclusiveMin: nil,
+                exclusiveMax: nil,
+                multipleOf: nil
+            )
         }
     }
 }
@@ -92,22 +137,28 @@ public struct AgentAutomationsCreateRepoAutomationResponseErrorsItemXaa293191: C
         case message
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension AgentAutomationsCreateRepoAutomationResponseErrorsItemXaa293191 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.code) else {
-            throw SdkValidationError(field: "code", code: "required", message: "Validation failed for 'code': value is required")
-        }
-        self.code = try container.sdkDecodeRequired(.code)
-        self.message = try container.sdkDecodeIfPresent(.message)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension AgentAutomationsCreateRepoAutomationResponseErrorsItemXaa293191 {
-    public init(code: AgentAutomationsCreateRepoAutomationResponseErrorsItemCodeX3abeec30, message: String? = nil) {
+public extension AgentAutomationsCreateRepoAutomationResponseErrorsItemXaa293191 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.code) else {
+            throw SdkValidationError(
+                field: "code",
+                code: "required",
+                message: "Validation failed for 'code': value is required"
+            )
+        }
+        code = try container.sdkDecodeRequired(.code)
+        message = try container.sdkDecodeIfPresent(.message)
+    }
+}
+
+public extension AgentAutomationsCreateRepoAutomationResponseErrorsItemXaa293191 {
+    init(code: AgentAutomationsCreateRepoAutomationResponseErrorsItemCodeX3abeec30, message: String? = nil) {
         (self.code, self.message) = (code, message)
     }
 }
@@ -129,24 +180,28 @@ public struct AgentAutomationsGetAutomationResponseTriggersIssueLabeled: Codable
     }
 
     init() {
-        (self.query, self.labels, self.writeScope) = (nil, nil, nil)
+        (query, labels, writeScope) = (nil, nil, nil)
     }
 }
 
-extension AgentAutomationsGetAutomationResponseTriggersIssueLabeled {
-    public init(from decoder: Decoder) throws {
+public extension AgentAutomationsGetAutomationResponseTriggersIssueLabeled {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.query = try container.sdkDecodeIfPresent(.query)
-        self.labels = try container.sdkDecodeIfPresent(.labels)
-        self.writeScope = try container.sdkDecodeIfPresent(.writeScope)
-        if let value = self.query {
+        query = try container.sdkDecodeIfPresent(.query)
+        labels = try container.sdkDecodeIfPresent(.labels)
+        writeScope = try container.sdkDecodeIfPresent(.writeScope)
+        if let value = query {
             try validateLength("query", value, min: 1, max: nil)
         }
     }
 }
 
-extension AgentAutomationsGetAutomationResponseTriggersIssueLabeled {
-    public init(query: String? = nil, labels: [String]? = nil, writeScope: AgentAutomationsGetAutomationResponseTriggersIssueLabeledWriteScope? = nil) throws {
+public extension AgentAutomationsGetAutomationResponseTriggersIssueLabeled {
+    init(
+        query: String? = nil,
+        labels: [String]? = nil,
+        writeScope: AgentAutomationsGetAutomationResponseTriggersIssueLabeledWriteScope? = nil
+    ) throws {
         self.init()
         (self.query, self.labels) = (query, labels)
         self.writeScope = writeScope
@@ -156,7 +211,8 @@ extension AgentAutomationsGetAutomationResponseTriggersIssueLabeled {
     }
 }
 
-public typealias AgentAutomationsListRepoAutomationsResponseXd5c330a9ErrorsList = [AgentAutomationsListRepoAutomationsResponseErrorsItemXf11c3f68]
+public typealias AgentAutomationsListRepoAutomationsResponseXd5c330a9ErrorsList =
+    [AgentAutomationsListRepoAutomationsResponseErrorsItemXf11c3f68]
 
 /// Structured error response following GitHub REST API conventions. For 422 Unprocessable Entity the errors array
 /// contains validation details; for other error status codes only message and documentation_url are returned.
@@ -174,32 +230,47 @@ public struct AgentAutomationsListRepoAutomationsResponseXd5c330a9: Codable {
         case errors
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension AgentAutomationsListRepoAutomationsResponseXd5c330a9 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.message) else {
-            throw SdkValidationError(field: "message", code: "required", message: "Validation failed for 'message': value is required")
-        }
-        guard container.contains(.documentationUrl) else {
-            throw SdkValidationError(field: "documentation_url", code: "required", message: "Validation failed for 'documentation_url': value is required")
-        }
-        self.message = try container.sdkDecodeRequired(.message)
-        self.documentationUrl = try container.sdkDecodeRequired(.documentationUrl)
-        self.errors = try container.sdkDecodeIfPresent(.errors)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension AgentAutomationsListRepoAutomationsResponseXd5c330a9 {
-    public init(message: String, documentationUrl: String, errors: AgentAutomationsListRepoAutomationsResponseXd5c330a9ErrorsList? = nil) {
+public extension AgentAutomationsListRepoAutomationsResponseXd5c330a9 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.message) else {
+            throw SdkValidationError(
+                field: "message",
+                code: "required",
+                message: "Validation failed for 'message': value is required"
+            )
+        }
+        guard container.contains(.documentationUrl) else {
+            throw SdkValidationError(
+                field: "documentation_url",
+                code: "required",
+                message: "Validation failed for 'documentation_url': value is required"
+            )
+        }
+        message = try container.sdkDecodeRequired(.message)
+        documentationUrl = try container.sdkDecodeRequired(.documentationUrl)
+        errors = try container.sdkDecodeIfPresent(.errors)
+    }
+}
+
+public extension AgentAutomationsListRepoAutomationsResponseXd5c330a9 {
+    init(
+        message: String,
+        documentationUrl: String,
+        errors: AgentAutomationsListRepoAutomationsResponseXd5c330a9ErrorsList? = nil
+    ) {
         (self.message, self.documentationUrl) = (message, documentationUrl)
         self.errors = errors
     }
 }
 
-public typealias AgentAutomationsEditRepoAutomationResponseTriggersIntervalCadenceList = [AgentAutomationsEditRepoAutomationResponseTriggersIntervalCadenceItem]
+public typealias AgentAutomationsEditRepoAutomationResponseTriggersIntervalCadenceList =
+    [AgentAutomationsEditRepoAutomationResponseTriggersIntervalCadenceItem]
 
 public struct AgentAutomationsEditRepoAutomationResponseTriggersInterval: Codable {
     /// One or more schedules on which the Automation runs.
@@ -225,46 +296,91 @@ public struct AgentAutomationsEditRepoAutomationResponseTriggersInterval: Codabl
         case writeScope = "write_scope"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension AgentAutomationsEditRepoAutomationResponseTriggersInterval {
-    public init(from decoder: Decoder) throws {
+public extension AgentAutomationsEditRepoAutomationResponseTriggersInterval {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.cadence) else {
-            throw SdkValidationError(field: "cadence", code: "required", message: "Validation failed for 'cadence': value is required")
+            throw SdkValidationError(
+                field: "cadence",
+                code: "required",
+                message: "Validation failed for 'cadence': value is required"
+            )
         }
-        self.cadence = try container.sdkDecodeRequired(.cadence)
-        self.hourUtc = try container.sdkDecodeIfPresent(.hourUtc)
-        self.dayOfWeek = try container.sdkDecodeIfPresent(.dayOfWeek)
-        self.minuteUtc = try container.sdkDecodeIfPresent(.minuteUtc)
-        self.writeScope = try container.sdkDecodeIfPresent(.writeScope)
-            try validateItems("cadence", self.cadence, min: 1, max: nil)
-        if let value = self.hourUtc {
-            try validateRange("hour_utc", Double(value), min: 0, max: 23, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+        cadence = try container.sdkDecodeRequired(.cadence)
+        hourUtc = try container.sdkDecodeIfPresent(.hourUtc)
+        dayOfWeek = try container.sdkDecodeIfPresent(.dayOfWeek)
+        minuteUtc = try container.sdkDecodeIfPresent(.minuteUtc)
+        writeScope = try container.sdkDecodeIfPresent(.writeScope)
+        try validateItems("cadence", cadence, min: 1, max: nil)
+        if let value = hourUtc {
+            try validateRange(
+                "hour_utc",
+                Double(value),
+                min: 0,
+                max: 23,
+                exclusiveMin: nil,
+                exclusiveMax: nil,
+                multipleOf: nil
+            )
         }
-        if let value = self.dayOfWeek {
-            try validateRange("day_of_week", Double(value), min: 0, max: 6, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+        if let value = dayOfWeek {
+            try validateRange(
+                "day_of_week",
+                Double(value),
+                min: 0,
+                max: 6,
+                exclusiveMin: nil,
+                exclusiveMax: nil,
+                multipleOf: nil
+            )
         }
     }
 }
 
-extension AgentAutomationsEditRepoAutomationResponseTriggersInterval {
-    public init(cadence: AgentAutomationsEditRepoAutomationResponseTriggersIntervalCadenceList, hourUtc: Int? = nil, dayOfWeek: Int? = nil, minuteUtc: Int? = nil, writeScope: AgentAutomationsEditRepoAutomationResponseTriggersIntervalWriteScope? = nil) throws {
+public extension AgentAutomationsEditRepoAutomationResponseTriggersInterval {
+    init(
+        cadence: AgentAutomationsEditRepoAutomationResponseTriggersIntervalCadenceList,
+        hourUtc: Int? = nil,
+        dayOfWeek: Int? = nil,
+        minuteUtc: Int? = nil,
+        writeScope: AgentAutomationsEditRepoAutomationResponseTriggersIntervalWriteScope? = nil
+    ) throws {
         (self.cadence, self.hourUtc) = (cadence, hourUtc)
         (self.dayOfWeek, self.minuteUtc) = (dayOfWeek, minuteUtc)
         self.writeScope = writeScope
-            try validateItems("cadence", self.cadence, min: 1, max: nil)
+        try validateItems("cadence", self.cadence, min: 1, max: nil)
         if let value = self.hourUtc {
-            try validateRange("hour_utc", Double(value), min: 0, max: 23, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+            try validateRange(
+                "hour_utc",
+                Double(value),
+                min: 0,
+                max: 23,
+                exclusiveMin: nil,
+                exclusiveMax: nil,
+                multipleOf: nil
+            )
         }
         if let value = self.dayOfWeek {
-            try validateRange("day_of_week", Double(value), min: 0, max: 6, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+            try validateRange(
+                "day_of_week",
+                Double(value),
+                min: 0,
+                max: 6,
+                exclusiveMin: nil,
+                exclusiveMax: nil,
+                multipleOf: nil
+            )
         }
     }
 }
 
-public typealias AgentAutomationsEditRepoAutomationResponseTriggersDiscussionCXb09666067c = [AgentAutomationsEditRepoAutomationResponseTriggersDiscussionCX5a60b15b82]
+public typealias AgentAutomationsEditRepoAutomationResponseTriggersDiscussionCXb09666067c =
+    [AgentAutomationsEditRepoAutomationResponseTriggersDiscussionCX5a60b15b82]
 
 public struct AgentAutomationsEditRepoAutomationResponseTriggersDiscussionComment: Codable {
     /// Top-level discussion comments and replies to match. Omit to match both.
@@ -285,28 +401,33 @@ public struct AgentAutomationsEditRepoAutomationResponseTriggersDiscussionCommen
     }
 
     init() {
-        (self.commentTypes, self.categories, self.bodySubstring, self.writeScope) = (nil, nil, nil, nil)
+        (commentTypes, categories, bodySubstring, writeScope) = (nil, nil, nil, nil)
     }
 }
 
-extension AgentAutomationsEditRepoAutomationResponseTriggersDiscussionComment {
-    public init(from decoder: Decoder) throws {
+public extension AgentAutomationsEditRepoAutomationResponseTriggersDiscussionComment {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.commentTypes = try container.sdkDecodeIfPresent(.commentTypes)
-        self.categories = try container.sdkDecodeIfPresent(.categories)
-        self.bodySubstring = try container.sdkDecodeIfPresent(.bodySubstring)
-        self.writeScope = try container.sdkDecodeIfPresent(.writeScope)
-        if let value = self.commentTypes {
+        commentTypes = try container.sdkDecodeIfPresent(.commentTypes)
+        categories = try container.sdkDecodeIfPresent(.categories)
+        bodySubstring = try container.sdkDecodeIfPresent(.bodySubstring)
+        writeScope = try container.sdkDecodeIfPresent(.writeScope)
+        if let value = commentTypes {
             try validateItems("comment_types", value, min: 1, max: 2)
         }
-        if let value = self.categories {
+        if let value = categories {
             try validateItems("categories", value, min: 1, max: nil)
         }
     }
 }
 
-extension AgentAutomationsEditRepoAutomationResponseTriggersDiscussionComment {
-    public init(commentTypes: AgentAutomationsEditRepoAutomationResponseTriggersDiscussionCXb09666067c? = nil, categories: [String]? = nil, bodySubstring: String? = nil, writeScope: AgentAutomationsEditRepoAutomationResponseTriggersDiscussionCX160f6a04b6? = nil) throws {
+public extension AgentAutomationsEditRepoAutomationResponseTriggersDiscussionComment {
+    init(
+        commentTypes: AgentAutomationsEditRepoAutomationResponseTriggersDiscussionCXb09666067c? = nil,
+        categories: [String]? = nil,
+        bodySubstring: String? = nil,
+        writeScope: AgentAutomationsEditRepoAutomationResponseTriggersDiscussionCX160f6a04b6? = nil
+    ) throws {
         self.init()
         (self.commentTypes, self.categories) = (commentTypes, categories)
         (self.bodySubstring, self.writeScope) = (bodySubstring, writeScope)
@@ -335,27 +456,31 @@ public struct AgentAutomationsCreateRepoAutomationRequestBodyTriggersPullRequest
     }
 
     init() {
-        (self.query, self.paths, self.writeScope) = (nil, nil, nil)
+        (query, paths, writeScope) = (nil, nil, nil)
     }
 }
 
-extension AgentAutomationsCreateRepoAutomationRequestBodyTriggersPullRequestOpened {
-    public init(from decoder: Decoder) throws {
+public extension AgentAutomationsCreateRepoAutomationRequestBodyTriggersPullRequestOpened {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.query = try container.sdkDecodeIfPresent(.query)
-        self.paths = try container.sdkDecodeIfPresent(.paths)
-        self.writeScope = try container.sdkDecodeIfPresent(.writeScope)
-        if let value = self.query {
+        query = try container.sdkDecodeIfPresent(.query)
+        paths = try container.sdkDecodeIfPresent(.paths)
+        writeScope = try container.sdkDecodeIfPresent(.writeScope)
+        if let value = query {
             try validateLength("query", value, min: 1, max: nil)
         }
-        if let value = self.paths {
+        if let value = paths {
             try validateItems("paths", value, min: 1, max: nil)
         }
     }
 }
 
-extension AgentAutomationsCreateRepoAutomationRequestBodyTriggersPullRequestOpened {
-    public init(query: String? = nil, paths: [String]? = nil, writeScope: AgentAutomationsCreateRepoAutomationRequestBodyTriggersPullReX02c0149bc7? = nil) throws {
+public extension AgentAutomationsCreateRepoAutomationRequestBodyTriggersPullRequestOpened {
+    init(
+        query: String? = nil,
+        paths: [String]? = nil,
+        writeScope: AgentAutomationsCreateRepoAutomationRequestBodyTriggersPullReX02c0149bc7? = nil
+    ) throws {
         self.init()
         (self.query, self.paths) = (query, paths)
         self.writeScope = writeScope
@@ -368,7 +493,8 @@ extension AgentAutomationsCreateRepoAutomationRequestBodyTriggersPullRequestOpen
     }
 }
 
-public typealias AgentAutomationsListAvailableAutomationToolsResponseErrorsList = [AgentAutomationsListAvailableAutomationToolsResponseErrorsItem]
+public typealias AgentAutomationsListAvailableAutomationToolsResponseErrorsList =
+    [AgentAutomationsListAvailableAutomationToolsResponseErrorsItem]
 
 /// Structured error response following GitHub REST API conventions. For 422 Unprocessable Entity the errors array
 /// contains validation details; for other error status codes only message and documentation_url are returned.
@@ -386,26 +512,40 @@ public struct AgentAutomationsListAvailableAutomationToolsResponse: Codable {
         case errors
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension AgentAutomationsListAvailableAutomationToolsResponse {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.message) else {
-            throw SdkValidationError(field: "message", code: "required", message: "Validation failed for 'message': value is required")
-        }
-        guard container.contains(.documentationUrl) else {
-            throw SdkValidationError(field: "documentation_url", code: "required", message: "Validation failed for 'documentation_url': value is required")
-        }
-        self.message = try container.sdkDecodeRequired(.message)
-        self.documentationUrl = try container.sdkDecodeRequired(.documentationUrl)
-        self.errors = try container.sdkDecodeIfPresent(.errors)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension AgentAutomationsListAvailableAutomationToolsResponse {
-    public init(message: String, documentationUrl: String, errors: AgentAutomationsListAvailableAutomationToolsResponseErrorsList? = nil) {
+public extension AgentAutomationsListAvailableAutomationToolsResponse {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.message) else {
+            throw SdkValidationError(
+                field: "message",
+                code: "required",
+                message: "Validation failed for 'message': value is required"
+            )
+        }
+        guard container.contains(.documentationUrl) else {
+            throw SdkValidationError(
+                field: "documentation_url",
+                code: "required",
+                message: "Validation failed for 'documentation_url': value is required"
+            )
+        }
+        message = try container.sdkDecodeRequired(.message)
+        documentationUrl = try container.sdkDecodeRequired(.documentationUrl)
+        errors = try container.sdkDecodeIfPresent(.errors)
+    }
+}
+
+public extension AgentAutomationsListAvailableAutomationToolsResponse {
+    init(
+        message: String,
+        documentationUrl: String,
+        errors: AgentAutomationsListAvailableAutomationToolsResponseErrorsList? = nil
+    ) {
         (self.message, self.documentationUrl) = (message, documentationUrl)
         self.errors = errors
     }
@@ -424,23 +564,26 @@ public struct AgentAutomationsGetAutomationResponseTriggersIssueOpened: Codable 
     }
 
     init() {
-        (self.query, self.writeScope) = (nil, nil)
+        (query, writeScope) = (nil, nil)
     }
 }
 
-extension AgentAutomationsGetAutomationResponseTriggersIssueOpened {
-    public init(from decoder: Decoder) throws {
+public extension AgentAutomationsGetAutomationResponseTriggersIssueOpened {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.query = try container.sdkDecodeIfPresent(.query)
-        self.writeScope = try container.sdkDecodeIfPresent(.writeScope)
-        if let value = self.query {
+        query = try container.sdkDecodeIfPresent(.query)
+        writeScope = try container.sdkDecodeIfPresent(.writeScope)
+        if let value = query {
             try validateLength("query", value, min: 1, max: nil)
         }
     }
 }
 
-extension AgentAutomationsGetAutomationResponseTriggersIssueOpened {
-    public init(query: String? = nil, writeScope: AgentAutomationsGetAutomationResponseTriggersIssueOpenedWriteScope? = nil) throws {
+public extension AgentAutomationsGetAutomationResponseTriggersIssueOpened {
+    init(
+        query: String? = nil,
+        writeScope: AgentAutomationsGetAutomationResponseTriggersIssueOpenedWriteScope? = nil
+    ) throws {
         self.init()
         (self.query, self.writeScope) = (query, writeScope)
         if let value = self.query {
@@ -461,22 +604,28 @@ public struct AgentAutomationsDeleteRepoAutomationResponseErrorsItemX1ca2142f: C
         case message
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension AgentAutomationsDeleteRepoAutomationResponseErrorsItemX1ca2142f {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.code) else {
-            throw SdkValidationError(field: "code", code: "required", message: "Validation failed for 'code': value is required")
-        }
-        self.code = try container.sdkDecodeRequired(.code)
-        self.message = try container.sdkDecodeIfPresent(.message)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension AgentAutomationsDeleteRepoAutomationResponseErrorsItemX1ca2142f {
-    public init(code: AgentAutomationsDeleteRepoAutomationResponseErrorsItemCodeX079ca15d, message: String? = nil) {
+public extension AgentAutomationsDeleteRepoAutomationResponseErrorsItemX1ca2142f {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.code) else {
+            throw SdkValidationError(
+                field: "code",
+                code: "required",
+                message: "Validation failed for 'code': value is required"
+            )
+        }
+        code = try container.sdkDecodeRequired(.code)
+        message = try container.sdkDecodeIfPresent(.message)
+    }
+}
+
+public extension AgentAutomationsDeleteRepoAutomationResponseErrorsItemX1ca2142f {
+    init(code: AgentAutomationsDeleteRepoAutomationResponseErrorsItemCodeX079ca15d, message: String? = nil) {
         (self.code, self.message) = (code, message)
     }
 }

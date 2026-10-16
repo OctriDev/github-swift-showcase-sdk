@@ -8,10 +8,14 @@ import Foundation
 #endif
 /// The state of the status. When you set a transient deployment to `inactive`, the deployment will be shown as
 /// `destroyed` in GitHub.
-public struct ReposCreateDeploymentStatusRequestBodyState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ReposCreateDeploymentStatusRequestBodyState: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let error = ReposCreateDeploymentStatusRequestBodyState(rawValue: "error")
     public static let failure = ReposCreateDeploymentStatusRequestBodyState(rawValue: "failure")
     public static let inactive = ReposCreateDeploymentStatusRequestBodyState(rawValue: "inactive")
@@ -22,7 +26,7 @@ public struct ReposCreateDeploymentStatusRequestBodyState: RawRepresentable, Has
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -32,20 +36,27 @@ public struct ReposCreateDeploymentStatusRequestBodyState: RawRepresentable, Has
 }
 
 /// Machine-readable error code
-public struct AgentAutomationsCreateRepoAutomationResponseErrorsItemCode: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct AgentAutomationsCreateRepoAutomationResponseErrorsItemCode: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let missing = AgentAutomationsCreateRepoAutomationResponseErrorsItemCode(rawValue: "missing")
-    public static let missingField = AgentAutomationsCreateRepoAutomationResponseErrorsItemCode(rawValue: "missing_field")
+    public static let missingField =
+        AgentAutomationsCreateRepoAutomationResponseErrorsItemCode(rawValue: "missing_field")
     public static let invalid = AgentAutomationsCreateRepoAutomationResponseErrorsItemCode(rawValue: "invalid")
-    public static let alreadyExists = AgentAutomationsCreateRepoAutomationResponseErrorsItemCode(rawValue: "already_exists")
-    public static let unprocessable = AgentAutomationsCreateRepoAutomationResponseErrorsItemCode(rawValue: "unprocessable")
+    public static let alreadyExists =
+        AgentAutomationsCreateRepoAutomationResponseErrorsItemCode(rawValue: "already_exists")
+    public static let unprocessable =
+        AgentAutomationsCreateRepoAutomationResponseErrorsItemCode(rawValue: "unprocessable")
     public static let custom = AgentAutomationsCreateRepoAutomationResponseErrorsItemCode(rawValue: "custom")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -56,16 +67,22 @@ public struct AgentAutomationsCreateRepoAutomationResponseErrorsItemCode: RawRep
 
 /// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
 /// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
-public struct AgentAutomationsEditRepoAutomationResponseTriggersPullRequestX2afc979810: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct AgentAutomationsEditRepoAutomationResponseTriggersPullRequestX2afc979810: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let trigger = AgentAutomationsEditRepoAutomationResponseTriggersPullRequestX2afc979810(rawValue: "trigger")
-    public static let repository = AgentAutomationsEditRepoAutomationResponseTriggersPullRequestX2afc979810(rawValue: "repository")
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let trigger =
+        AgentAutomationsEditRepoAutomationResponseTriggersPullRequestX2afc979810(rawValue: "trigger")
+    public static let repository =
+        AgentAutomationsEditRepoAutomationResponseTriggersPullRequestX2afc979810(rawValue: "repository")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -82,7 +99,10 @@ public struct AgentAutomationsEditRepoAutomationResponseTriggersPullRequestX2afc
 public struct OrgsCreateInvitationRequestBodyRole: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let admin = OrgsCreateInvitationRequestBodyRole(rawValue: "admin")
     public static let directMember = OrgsCreateInvitationRequestBodyRole(rawValue: "direct_member")
     public static let billingManager = OrgsCreateInvitationRequestBodyRole(rawValue: "billing_manager")
@@ -90,7 +110,7 @@ public struct OrgsCreateInvitationRequestBodyRole: RawRepresentable, Hashable, C
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -104,16 +124,20 @@ public struct OrgsCreateInvitationRequestBodyRole: RawRepresentable, Hashable, C
 /// and maintainable by anyone with write access to the repository, and its runs act as the Copilot app rather
 /// than as a person. `repository` is rejected when repository ownership is not available for the repository.
 /// Supported values: `user`, `repository`. Defaults to…
-public struct AgentAutomationsCreateRepoAutomationRequestBodyOwnerType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct AgentAutomationsCreateRepoAutomationRequestBodyOwnerType: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let user = AgentAutomationsCreateRepoAutomationRequestBodyOwnerType(rawValue: "user")
     public static let repository = AgentAutomationsCreateRepoAutomationRequestBodyOwnerType(rawValue: "repository")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -122,16 +146,22 @@ public struct AgentAutomationsCreateRepoAutomationRequestBodyOwnerType: RawRepre
     }
 }
 
-public struct AgentAutomationsListAutomationsResponseItemTriggersPullRequesXe3ca381461: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct AgentAutomationsListAutomationsResponseItemTriggersPullRequesXe3ca381461: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let timelineComment = AgentAutomationsListAutomationsResponseItemTriggersPullRequesXe3ca381461(rawValue: "timeline_comment")
-    public static let reviewComment = AgentAutomationsListAutomationsResponseItemTriggersPullRequesXe3ca381461(rawValue: "review_comment")
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let timelineComment =
+        AgentAutomationsListAutomationsResponseItemTriggersPullRequesXe3ca381461(rawValue: "timeline_comment")
+    public static let reviewComment =
+        AgentAutomationsListAutomationsResponseItemTriggersPullRequesXe3ca381461(rawValue: "review_comment")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -140,16 +170,20 @@ public struct AgentAutomationsListAutomationsResponseItemTriggersPullRequesXe3ca
     }
 }
 
-public struct SecretScanningListOrgCustomPatternsParameter: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct SecretScanningListOrgCustomPatternsParameter: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let enabled = SecretScanningListOrgCustomPatternsParameter(rawValue: "enabled")
     public static let disabled = SecretScanningListOrgCustomPatternsParameter(rawValue: "disabled")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -159,15 +193,19 @@ public struct SecretScanningListOrgCustomPatternsParameter: RawRepresentable, Ha
 }
 
 /// Provider namespace
-public struct AgentTasksCreateTaskInRepoResponseArtifactsItemProvider: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct AgentTasksCreateTaskInRepoResponseArtifactsItemProvider: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let github = AgentTasksCreateTaskInRepoResponseArtifactsItemProvider(rawValue: "github")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -176,10 +214,14 @@ public struct AgentTasksCreateTaskInRepoResponseArtifactsItemProvider: RawRepres
     }
 }
 
-public struct SecurityAdvisoriesListOrgRepositoryAdvisoriesParameterX737430cc: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct SecurityAdvisoriesListOrgRepositoryAdvisoriesParameterX737430cc: RawRepresentable, Hashable, Codable,
+    Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let triage = SecurityAdvisoriesListOrgRepositoryAdvisoriesParameterX737430cc(rawValue: "triage")
     public static let draft = SecurityAdvisoriesListOrgRepositoryAdvisoriesParameterX737430cc(rawValue: "draft")
     public static let published = SecurityAdvisoriesListOrgRepositoryAdvisoriesParameterX737430cc(rawValue: "published")
@@ -187,7 +229,7 @@ public struct SecurityAdvisoriesListOrgRepositoryAdvisoriesParameterX737430cc: R
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -196,18 +238,26 @@ public struct SecurityAdvisoriesListOrgRepositoryAdvisoriesParameterX737430cc: R
     }
 }
 
-public struct OrgsSetClusterDeploymentRecordsRequestBodyDeploymentsItemRuntXd81b427d92: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct OrgsSetClusterDeploymentRecordsRequestBodyDeploymentsItemRuntXd81b427d92: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let criticalResource = OrgsSetClusterDeploymentRecordsRequestBodyDeploymentsItemRuntXd81b427d92(rawValue: "critical-resource")
-    public static let internetExposed = OrgsSetClusterDeploymentRecordsRequestBodyDeploymentsItemRuntXd81b427d92(rawValue: "internet-exposed")
-    public static let lateralMovement = OrgsSetClusterDeploymentRecordsRequestBodyDeploymentsItemRuntXd81b427d92(rawValue: "lateral-movement")
-    public static let sensitiveData = OrgsSetClusterDeploymentRecordsRequestBodyDeploymentsItemRuntXd81b427d92(rawValue: "sensitive-data")
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let criticalResource =
+        OrgsSetClusterDeploymentRecordsRequestBodyDeploymentsItemRuntXd81b427d92(rawValue: "critical-resource")
+    public static let internetExposed =
+        OrgsSetClusterDeploymentRecordsRequestBodyDeploymentsItemRuntXd81b427d92(rawValue: "internet-exposed")
+    public static let lateralMovement =
+        OrgsSetClusterDeploymentRecordsRequestBodyDeploymentsItemRuntXd81b427d92(rawValue: "lateral-movement")
+    public static let sensitiveData =
+        OrgsSetClusterDeploymentRecordsRequestBodyDeploymentsItemRuntXd81b427d92(rawValue: "sensitive-data")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

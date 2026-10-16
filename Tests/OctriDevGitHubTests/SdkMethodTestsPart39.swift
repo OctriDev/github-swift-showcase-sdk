@@ -17,8 +17,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.gists.delete(
-            gistId: decoded("\"gist-1\"")
-        )
+                gistId: decoded("\"gist-1\"")
+            )
             XCTFail("gistsDelete did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -58,9 +58,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.gists.deleteComment(
-            gistId: decoded("\"gist-1\""),
-            commentId: decoded("1")
-        )
+                gistId: decoded("\"gist-1\""),
+                commentId: decoded("1")
+            )
             XCTFail("gistsDeleteComment did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -107,8 +107,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.gists.fork(
-            gistId: decoded("\"gist-1\"")
-        )
+                gistId: decoded("\"gist-1\"")
+            )
             XCTFail("gistsFork did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -155,8 +155,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.gists.get(
-            gistId: decoded("\"gist-1\"")
-        )
+                gistId: decoded("\"gist-1\"")
+            )
             XCTFail("gistsGet did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -204,9 +204,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.gists.getComment(
-            gistId: decoded("\"gist-1\""),
-            commentId: decoded("1")
-        )
+                gistId: decoded("\"gist-1\""),
+                commentId: decoded("1")
+            )
             XCTFail("gistsGetComment did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -254,9 +254,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.gists.getRevision(
-            gistId: decoded("\"gist-1\""),
-            sha: decoded("\"sha\"")
-        )
+                gistId: decoded("\"gist-1\""),
+                sha: decoded("\"sha\"")
+            )
             XCTFail("gistsGetRevision did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -305,10 +305,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.gists.list(
-            since: decoded("\"2024-01-01T00:00:00Z\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                since: decoded("\"2024-01-01T00:00:00Z\""),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("gistsList did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -357,10 +357,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.gists.listComments(
-            gistId: decoded("\"gist-1\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                gistId: decoded("\"gist-1\""),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("gistsListComments did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -409,10 +409,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.gists.listCommits(
-            gistId: decoded("\"gist-1\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                gistId: decoded("\"gist-1\""),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("gistsListCommits did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -461,10 +461,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.gists.listForks(
-            gistId: decoded("\"gist-1\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                gistId: decoded("\"gist-1\""),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("gistsListForks did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -514,11 +514,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.gists.listForUser(
-            username: decoded("\"Example Name\""),
-            since: decoded("\"2024-01-01T00:00:00Z\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                username: decoded("\"Example Name\""),
+                since: decoded("\"2024-01-01T00:00:00Z\""),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("gistsListForUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 422)
@@ -567,10 +567,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.gists.listPublic(
-            since: decoded("\"2024-01-01T00:00:00Z\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                since: decoded("\"2024-01-01T00:00:00Z\""),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("gistsListPublic did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)

@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Misc domain models
+/// Misc domain models
 /// A minimal reference to an issue linked from a timeline event (e.g. sub-issue, parent-issue, or dependency
 /// events).
 public struct IssueReference: Codable {
@@ -29,38 +29,67 @@ public struct IssueReference: Codable {
         case stateReason = "state_reason"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension IssueReference {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.number) else {
-            throw SdkValidationError(field: "number", code: "required", message: "Validation failed for 'number': value is required")
-        }
-        guard container.contains(.title) else {
-            throw SdkValidationError(field: "title", code: "required", message: "Validation failed for 'title': value is required")
-        }
-        guard container.contains(.state) else {
-            throw SdkValidationError(field: "state", code: "required", message: "Validation failed for 'state': value is required")
-        }
-        guard container.contains(.repository) else {
-            throw SdkValidationError(field: "repository", code: "required", message: "Validation failed for 'repository': value is required")
-        }
-        guard container.contains(.issueType) else {
-            throw SdkValidationError(field: "issue_type", code: "required", message: "Validation failed for 'issue_type': value is required")
-        }
-        self.number = try container.sdkDecodeRequired(.number)
-        self.title = try container.sdkDecodeRequired(.title)
-        self.state = try container.sdkDecodeRequired(.state)
-        self.repository = try container.sdkDecodeRequired(.repository)
-        self.issueType = try container.sdkDecodeNullable(.issueType)
-        self.stateReason = try container.sdkDecodeIfPresent(.stateReason)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension IssueReference {
-    public init(number: Int, title: String, state: String, repository: SimpleRepository, issueType: IssueReferenceIssueType?, stateReason: String? = nil) {
+public extension IssueReference {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.number) else {
+            throw SdkValidationError(
+                field: "number",
+                code: "required",
+                message: "Validation failed for 'number': value is required"
+            )
+        }
+        guard container.contains(.title) else {
+            throw SdkValidationError(
+                field: "title",
+                code: "required",
+                message: "Validation failed for 'title': value is required"
+            )
+        }
+        guard container.contains(.state) else {
+            throw SdkValidationError(
+                field: "state",
+                code: "required",
+                message: "Validation failed for 'state': value is required"
+            )
+        }
+        guard container.contains(.repository) else {
+            throw SdkValidationError(
+                field: "repository",
+                code: "required",
+                message: "Validation failed for 'repository': value is required"
+            )
+        }
+        guard container.contains(.issueType) else {
+            throw SdkValidationError(
+                field: "issue_type",
+                code: "required",
+                message: "Validation failed for 'issue_type': value is required"
+            )
+        }
+        number = try container.sdkDecodeRequired(.number)
+        title = try container.sdkDecodeRequired(.title)
+        state = try container.sdkDecodeRequired(.state)
+        repository = try container.sdkDecodeRequired(.repository)
+        issueType = try container.sdkDecodeNullable(.issueType)
+        stateReason = try container.sdkDecodeIfPresent(.stateReason)
+    }
+}
+
+public extension IssueReference {
+    init(
+        number: Int,
+        title: String,
+        state: String,
+        repository: SimpleRepository,
+        issueType: IssueReferenceIssueType?,
+        stateReason: String? = nil
+    ) {
         (self.number, self.title) = (number, title)
         (self.state, self.repository) = (state, repository)
         (self.issueType, self.stateReason) = (issueType, stateReason)
@@ -88,42 +117,64 @@ public struct CheckRunWithSimpleCheckSuiteOutput: Codable {
         case title
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension CheckRunWithSimpleCheckSuiteOutput {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.annotationsCount) else {
-            throw SdkValidationError(field: "annotations_count", code: "required", message: "Validation failed for 'annotations_count': value is required")
-        }
-        guard container.contains(.annotationsUrl) else {
-            throw SdkValidationError(field: "annotations_url", code: "required", message: "Validation failed for 'annotations_url': value is required")
-        }
-        guard container.contains(.summary) else {
-            throw SdkValidationError(field: "summary", code: "required", message: "Validation failed for 'summary': value is required")
-        }
-        guard container.contains(.text) else {
-            throw SdkValidationError(field: "text", code: "required", message: "Validation failed for 'text': value is required")
-        }
-        guard container.contains(.title) else {
-            throw SdkValidationError(field: "title", code: "required", message: "Validation failed for 'title': value is required")
-        }
-        self.annotationsCount = try container.sdkDecodeRequired(.annotationsCount)
-        self.annotationsUrl = try container.sdkDecodeRequired(.annotationsUrl)
-        self.summary = try container.sdkDecodeNullable(.summary)
-        self.text = try container.sdkDecodeNullable(.text)
-        self.title = try container.sdkDecodeNullable(.title)
-            try sdkValidateUri("annotations_url", self.annotationsUrl)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension CheckRunWithSimpleCheckSuiteOutput {
-    public init(annotationsCount: Int, annotationsUrl: String, summary: String?, text: String?, title: String?) throws {
+public extension CheckRunWithSimpleCheckSuiteOutput {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.annotationsCount) else {
+            throw SdkValidationError(
+                field: "annotations_count",
+                code: "required",
+                message: "Validation failed for 'annotations_count': value is required"
+            )
+        }
+        guard container.contains(.annotationsUrl) else {
+            throw SdkValidationError(
+                field: "annotations_url",
+                code: "required",
+                message: "Validation failed for 'annotations_url': value is required"
+            )
+        }
+        guard container.contains(.summary) else {
+            throw SdkValidationError(
+                field: "summary",
+                code: "required",
+                message: "Validation failed for 'summary': value is required"
+            )
+        }
+        guard container.contains(.text) else {
+            throw SdkValidationError(
+                field: "text",
+                code: "required",
+                message: "Validation failed for 'text': value is required"
+            )
+        }
+        guard container.contains(.title) else {
+            throw SdkValidationError(
+                field: "title",
+                code: "required",
+                message: "Validation failed for 'title': value is required"
+            )
+        }
+        annotationsCount = try container.sdkDecodeRequired(.annotationsCount)
+        annotationsUrl = try container.sdkDecodeRequired(.annotationsUrl)
+        summary = try container.sdkDecodeNullable(.summary)
+        text = try container.sdkDecodeNullable(.text)
+        title = try container.sdkDecodeNullable(.title)
+        try sdkValidateUri("annotations_url", annotationsUrl)
+    }
+}
+
+public extension CheckRunWithSimpleCheckSuiteOutput {
+    init(annotationsCount: Int, annotationsUrl: String, summary: String?, text: String?, title: String?) throws {
         (self.annotationsCount, self.annotationsUrl) = (annotationsCount, annotationsUrl)
         (self.summary, self.text) = (summary, text)
         self.title = title
-            try sdkValidateUri("annotations_url", self.annotationsUrl)
+        try sdkValidateUri("annotations_url", self.annotationsUrl)
     }
 }
 
@@ -144,21 +195,21 @@ public struct PersonalAccessTokenRequestPermissionsResult: Codable {
     }
 
     init() {
-        (self.organization, self.repository, self.other) = (nil, nil, nil)
+        (organization, repository, other) = (nil, nil, nil)
     }
 }
 
-extension PersonalAccessTokenRequestPermissionsResult {
-    public init(from decoder: Decoder) throws {
+public extension PersonalAccessTokenRequestPermissionsResult {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.organization = try container.sdkDecodeIfPresent(.organization)
-        self.repository = try container.sdkDecodeIfPresent(.repository)
-        self.other = try container.sdkDecodeIfPresent(.other)
+        organization = try container.sdkDecodeIfPresent(.organization)
+        repository = try container.sdkDecodeIfPresent(.repository)
+        other = try container.sdkDecodeIfPresent(.other)
     }
 }
 
-extension PersonalAccessTokenRequestPermissionsResult {
-    public init(organization: [String: String]? = nil, repository: [String: String]? = nil, other: [String: String]? = nil) {
+public extension PersonalAccessTokenRequestPermissionsResult {
+    init(organization: [String: String]? = nil, repository: [String: String]? = nil, other: [String: String]? = nil) {
         self.init()
         (self.organization, self.repository) = (organization, repository)
         self.other = other
@@ -220,41 +271,56 @@ public struct OrganizationSimpleWebhooks: Codable {
         case description
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension OrganizationSimpleWebhooks {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.login = try container.sdkDecodeRequired(.login)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.reposUrl = try container.sdkDecodeRequired(.reposUrl)
-        self.eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        self.hooksUrl = try container.sdkDecodeRequired(.hooksUrl)
-        self.issuesUrl = try container.sdkDecodeRequired(.issuesUrl)
-        self.membersUrl = try container.sdkDecodeRequired(.membersUrl)
-        self.publicMembersUrl = try container.sdkDecodeRequired(.publicMembersUrl)
-        self.avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
-        self.description = try container.sdkDecodeNullable(.description)
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("repos_url", self.reposUrl)
-            try sdkValidateUri("events_url", self.eventsUrl)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension OrganizationSimpleWebhooks {
-    public init(login: String, id: Int, nodeId: String, url: String, reposUrl: String, eventsUrl: String, hooksUrl: String, issuesUrl: String, membersUrl: String, publicMembersUrl: String, avatarUrl: String, description: String?) throws {
+public extension OrganizationSimpleWebhooks {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        login = try container.sdkDecodeRequired(.login)
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        url = try container.sdkDecodeRequired(.url)
+        reposUrl = try container.sdkDecodeRequired(.reposUrl)
+        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
+        hooksUrl = try container.sdkDecodeRequired(.hooksUrl)
+        issuesUrl = try container.sdkDecodeRequired(.issuesUrl)
+        membersUrl = try container.sdkDecodeRequired(.membersUrl)
+        publicMembersUrl = try container.sdkDecodeRequired(.publicMembersUrl)
+        avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
+        description = try container.sdkDecodeNullable(.description)
+        try sdkValidateUri("url", url)
+        try sdkValidateUri("repos_url", reposUrl)
+        try sdkValidateUri("events_url", eventsUrl)
+    }
+}
+
+public extension OrganizationSimpleWebhooks {
+    init(
+        login: String,
+        id: Int,
+        nodeId: String,
+        url: String,
+        reposUrl: String,
+        eventsUrl: String,
+        hooksUrl: String,
+        issuesUrl: String,
+        membersUrl: String,
+        publicMembersUrl: String,
+        avatarUrl: String,
+        description: String?
+    ) throws {
         (self.login, self.id) = (login, id)
         (self.nodeId, self.url) = (nodeId, url)
         (self.reposUrl, self.eventsUrl) = (reposUrl, eventsUrl)
         (self.hooksUrl, self.issuesUrl) = (hooksUrl, issuesUrl)
         (self.membersUrl, self.publicMembersUrl) = (membersUrl, publicMembersUrl)
         (self.avatarUrl, self.description) = (avatarUrl, description)
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("repos_url", self.reposUrl)
-            try sdkValidateUri("events_url", self.eventsUrl)
+        try sdkValidateUri("url", self.url)
+        try sdkValidateUri("repos_url", self.reposUrl)
+        try sdkValidateUri("events_url", self.eventsUrl)
     }
 }
 
@@ -275,21 +341,21 @@ public struct PersonalAccessTokenRequestPermissionsUpgraded: Codable {
     }
 
     init() {
-        (self.organization, self.repository, self.other) = (nil, nil, nil)
+        (organization, repository, other) = (nil, nil, nil)
     }
 }
 
-extension PersonalAccessTokenRequestPermissionsUpgraded {
-    public init(from decoder: Decoder) throws {
+public extension PersonalAccessTokenRequestPermissionsUpgraded {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.organization = try container.sdkDecodeIfPresent(.organization)
-        self.repository = try container.sdkDecodeIfPresent(.repository)
-        self.other = try container.sdkDecodeIfPresent(.other)
+        organization = try container.sdkDecodeIfPresent(.organization)
+        repository = try container.sdkDecodeIfPresent(.repository)
+        other = try container.sdkDecodeIfPresent(.other)
     }
 }
 
-extension PersonalAccessTokenRequestPermissionsUpgraded {
-    public init(organization: [String: String]? = nil, repository: [String: String]? = nil, other: [String: String]? = nil) {
+public extension PersonalAccessTokenRequestPermissionsUpgraded {
+    init(organization: [String: String]? = nil, repository: [String: String]? = nil, other: [String: String]? = nil) {
         self.init()
         (self.organization, self.repository) = (organization, repository)
         self.other = other
@@ -300,7 +366,10 @@ extension PersonalAccessTokenRequestPermissionsUpgraded {
 public struct CheckRunWithSimpleCheckSuiteStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let queued = CheckRunWithSimpleCheckSuiteStatus(rawValue: "queued")
     public static let inProgress = CheckRunWithSimpleCheckSuiteStatus(rawValue: "in_progress")
     public static let completed = CheckRunWithSimpleCheckSuiteStatus(rawValue: "completed")
@@ -308,7 +377,7 @@ public struct CheckRunWithSimpleCheckSuiteStatus: RawRepresentable, Hashable, Co
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -318,10 +387,14 @@ public struct CheckRunWithSimpleCheckSuiteStatus: RawRepresentable, Hashable, Co
 }
 
 /// Required enumerated value serialized in the `conclusion` wire field.
-public struct CheckRunWithSimpleCheckSuiteConclusion: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct CheckRunWithSimpleCheckSuiteConclusion: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let waiting = CheckRunWithSimpleCheckSuiteConclusion(rawValue: "waiting")
     public static let pending = CheckRunWithSimpleCheckSuiteConclusion(rawValue: "pending")
     public static let startupFailure = CheckRunWithSimpleCheckSuiteConclusion(rawValue: "startup_failure")
@@ -336,7 +409,7 @@ public struct CheckRunWithSimpleCheckSuiteConclusion: RawRepresentable, Hashable
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -346,17 +419,21 @@ public struct CheckRunWithSimpleCheckSuiteConclusion: RawRepresentable, Hashable
 }
 
 /// Type of repository selection requested.
-public struct PersonalAccessTokenRequestRepositorySelection: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct PersonalAccessTokenRequestRepositorySelection: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let none = PersonalAccessTokenRequestRepositorySelection(rawValue: "none")
     public static let all = PersonalAccessTokenRequestRepositorySelection(rawValue: "all")
     public static let subset = PersonalAccessTokenRequestRepositorySelection(rawValue: "subset")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -369,13 +446,16 @@ public struct PersonalAccessTokenRequestRepositorySelection: RawRepresentable, H
 public struct CampaignAlertType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let codeScanning = CampaignAlertType(rawValue: "code_scanning")
     public static let secretScanning = CampaignAlertType(rawValue: "secret_scanning")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

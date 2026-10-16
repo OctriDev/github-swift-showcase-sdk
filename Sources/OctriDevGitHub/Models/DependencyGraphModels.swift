@@ -3,7 +3,7 @@
 
 import Foundation
 
-// DependencyGraph domain models
+/// DependencyGraph domain models
 public typealias DependencyGraphDiff = [DependencyGraphDiffItem]
 
 public typealias Metadata = [String: MetadataValue]
@@ -27,24 +27,30 @@ public struct Manifest: Codable {
         case resolved
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension Manifest {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        self.name = try container.sdkDecodeRequired(.name)
-        self.file = try container.sdkDecodeIfPresent(.file)
-        self.metadata = try container.sdkDecodeIfPresent(.metadata)
-        self.resolved = try container.sdkDecodeIfPresent(.resolved)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension Manifest {
-    public init(name: String, file: ManifestFile? = nil, metadata: Metadata? = nil, resolved: [String: Dependency]? = nil) {
+public extension Manifest {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        name = try container.sdkDecodeRequired(.name)
+        file = try container.sdkDecodeIfPresent(.file)
+        metadata = try container.sdkDecodeIfPresent(.metadata)
+        resolved = try container.sdkDecodeIfPresent(.resolved)
+    }
+}
+
+public extension Manifest {
+    init(name: String, file: ManifestFile? = nil, metadata: Metadata? = nil, resolved: [String: Dependency]? = nil) {
         (self.name, self.file) = (name, file)
         (self.metadata, self.resolved) = (metadata, resolved)
     }
@@ -59,21 +65,27 @@ public struct DependencyGraphSpdxSbom: Codable {
         case sbom
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension DependencyGraphSpdxSbom {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.sbom) else {
-            throw SdkValidationError(field: "sbom", code: "required", message: "Validation failed for 'sbom': value is required")
-        }
-        self.sbom = try container.sdkDecodeRequired(.sbom)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension DependencyGraphSpdxSbom {
-    public init(sbom: DependencyGraphSpdxSbomSbom) {
+public extension DependencyGraphSpdxSbom {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.sbom) else {
+            throw SdkValidationError(
+                field: "sbom",
+                code: "required",
+                message: "Validation failed for 'sbom': value is required"
+            )
+        }
+        sbom = try container.sdkDecodeRequired(.sbom)
+    }
+}
+
+public extension DependencyGraphSpdxSbom {
+    init(sbom: DependencyGraphSpdxSbomSbom) {
         self.sbom = sbom
     }
 }
@@ -96,29 +108,43 @@ public struct SnapshotDetector: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension SnapshotDetector {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        guard container.contains(.version) else {
-            throw SdkValidationError(field: "version", code: "required", message: "Validation failed for 'version': value is required")
-        }
-        guard container.contains(.url) else {
-            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
-        }
-        self.name = try container.sdkDecodeRequired(.name)
-        self.version = try container.sdkDecodeRequired(.version)
-        self.url = try container.sdkDecodeRequired(.url)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension SnapshotDetector {
-    public init(name: String, version: String, url: String) {
+public extension SnapshotDetector {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        guard container.contains(.version) else {
+            throw SdkValidationError(
+                field: "version",
+                code: "required",
+                message: "Validation failed for 'version': value is required"
+            )
+        }
+        guard container.contains(.url) else {
+            throw SdkValidationError(
+                field: "url",
+                code: "required",
+                message: "Validation failed for 'url': value is required"
+            )
+        }
+        name = try container.sdkDecodeRequired(.name)
+        version = try container.sdkDecodeRequired(.version)
+        url = try container.sdkDecodeRequired(.url)
+    }
+}
+
+public extension SnapshotDetector {
+    init(name: String, version: String, url: String) {
         (self.name, self.version) = (name, version)
         self.url = url
     }
@@ -135,19 +161,19 @@ public struct ManifestFile: Codable {
     }
 
     init() {
-        self.sourceLocation = nil
+        sourceLocation = nil
     }
 }
 
-extension ManifestFile {
-    public init(from decoder: Decoder) throws {
+public extension ManifestFile {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.sourceLocation = try container.sdkDecodeIfPresent(.sourceLocation)
+        sourceLocation = try container.sdkDecodeIfPresent(.sourceLocation)
     }
 }
 
-extension ManifestFile {
-    public init(sourceLocation: String? = nil) {
+public extension ManifestFile {
+    init(sourceLocation: String? = nil) {
         self.init()
         self.sourceLocation = sourceLocation
     }
@@ -188,27 +214,40 @@ public struct DependencyGraphDiffItem: Codable {
         case scope
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension DependencyGraphDiffItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.changeType = try container.sdkDecodeRequired(.changeType)
-        self.manifest = try container.sdkDecodeRequired(.manifest)
-        self.ecosystem = try container.sdkDecodeRequired(.ecosystem)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.version = try container.sdkDecodeRequired(.version)
-        self.packageUrl = try container.sdkDecodeNullable(.packageUrl)
-        self.license = try container.sdkDecodeNullable(.license)
-        self.sourceRepositoryUrl = try container.sdkDecodeNullable(.sourceRepositoryUrl)
-        self.vulnerabilities = try container.sdkDecodeRequired(.vulnerabilities)
-        self.scope = try container.sdkDecodeRequired(.scope)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension DependencyGraphDiffItem {
-    public init(changeType: DependencyGraphDiffItemChangeType, manifest: String, ecosystem: String, name: String, version: String, packageUrl: String?, license: String?, sourceRepositoryUrl: String?, vulnerabilities: [DependencyGraphDiffItemVulnerabilitiesItem], scope: DependencyGraphDiffItemScope) {
+public extension DependencyGraphDiffItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        changeType = try container.sdkDecodeRequired(.changeType)
+        manifest = try container.sdkDecodeRequired(.manifest)
+        ecosystem = try container.sdkDecodeRequired(.ecosystem)
+        name = try container.sdkDecodeRequired(.name)
+        version = try container.sdkDecodeRequired(.version)
+        packageUrl = try container.sdkDecodeNullable(.packageUrl)
+        license = try container.sdkDecodeNullable(.license)
+        sourceRepositoryUrl = try container.sdkDecodeNullable(.sourceRepositoryUrl)
+        vulnerabilities = try container.sdkDecodeRequired(.vulnerabilities)
+        scope = try container.sdkDecodeRequired(.scope)
+    }
+}
+
+public extension DependencyGraphDiffItem {
+    init(
+        changeType: DependencyGraphDiffItemChangeType,
+        manifest: String,
+        ecosystem: String,
+        name: String,
+        version: String,
+        packageUrl: String?,
+        license: String?,
+        sourceRepositoryUrl: String?,
+        vulnerabilities: [DependencyGraphDiffItemVulnerabilitiesItem],
+        scope: DependencyGraphDiffItemScope
+    ) {
         (self.changeType, self.manifest) = (changeType, manifest)
         (self.ecosystem, self.name) = (ecosystem, name)
         (self.version, self.packageUrl) = (version, packageUrl)
@@ -264,29 +303,40 @@ public struct DependencyGraphSpdxSbomSbomPackagesItem: Codable {
     }
 
     init() {
-        (self.spdxid, self.name, self.versionInfo, self.downloadLocation, self.filesAnalyzed) = (nil, nil, nil, nil, nil)
-        (self.licenseConcluded, self.licenseDeclared, self.supplier, self.copyrightText, self.externalRefs) = (nil, nil, nil, nil, nil)
+        (spdxid, name, versionInfo, downloadLocation, filesAnalyzed) = (nil, nil, nil, nil, nil)
+        (licenseConcluded, licenseDeclared, supplier, copyrightText, externalRefs) = (nil, nil, nil, nil, nil)
     }
 }
 
-extension DependencyGraphSpdxSbomSbomPackagesItem {
-    public init(from decoder: Decoder) throws {
+public extension DependencyGraphSpdxSbomSbomPackagesItem {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.spdxid = try container.sdkDecodeIfPresent(.spdxid)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.versionInfo = try container.sdkDecodeIfPresent(.versionInfo)
-        self.downloadLocation = try container.sdkDecodeIfPresent(.downloadLocation)
-        self.filesAnalyzed = try container.sdkDecodeIfPresent(.filesAnalyzed)
-        self.licenseConcluded = try container.sdkDecodeIfPresent(.licenseConcluded)
-        self.licenseDeclared = try container.sdkDecodeIfPresent(.licenseDeclared)
-        self.supplier = try container.sdkDecodeIfPresent(.supplier)
-        self.copyrightText = try container.sdkDecodeIfPresent(.copyrightText)
-        self.externalRefs = try container.sdkDecodeIfPresent(.externalRefs)
+        spdxid = try container.sdkDecodeIfPresent(.spdxid)
+        name = try container.sdkDecodeIfPresent(.name)
+        versionInfo = try container.sdkDecodeIfPresent(.versionInfo)
+        downloadLocation = try container.sdkDecodeIfPresent(.downloadLocation)
+        filesAnalyzed = try container.sdkDecodeIfPresent(.filesAnalyzed)
+        licenseConcluded = try container.sdkDecodeIfPresent(.licenseConcluded)
+        licenseDeclared = try container.sdkDecodeIfPresent(.licenseDeclared)
+        supplier = try container.sdkDecodeIfPresent(.supplier)
+        copyrightText = try container.sdkDecodeIfPresent(.copyrightText)
+        externalRefs = try container.sdkDecodeIfPresent(.externalRefs)
     }
 }
 
-extension DependencyGraphSpdxSbomSbomPackagesItem {
-    public init(spdxid: String? = nil, name: String? = nil, versionInfo: String? = nil, downloadLocation: String? = nil, filesAnalyzed: Bool? = nil, licenseConcluded: String? = nil, licenseDeclared: String? = nil, supplier: String? = nil, copyrightText: String? = nil, externalRefs: [DependencyGraphSpdxSbomSbomPackagesItemExternalRefsItem]? = nil) {
+public extension DependencyGraphSpdxSbomSbomPackagesItem {
+    init(
+        spdxid: String? = nil,
+        name: String? = nil,
+        versionInfo: String? = nil,
+        downloadLocation: String? = nil,
+        filesAnalyzed: Bool? = nil,
+        licenseConcluded: String? = nil,
+        licenseDeclared: String? = nil,
+        supplier: String? = nil,
+        copyrightText: String? = nil,
+        externalRefs: [DependencyGraphSpdxSbomSbomPackagesItemExternalRefsItem]? = nil
+    ) {
         self.init()
         (self.spdxid, self.name) = (spdxid, name)
         (self.versionInfo, self.downloadLocation) = (versionInfo, downloadLocation)
@@ -324,26 +374,32 @@ public struct Dependency: Codable {
     }
 
     init() {
-        (self.packageUrl, self.metadata, self.relationship, self.scope, self.dependencies) = (nil, nil, nil, nil, nil)
+        (packageUrl, metadata, relationship, scope, dependencies) = (nil, nil, nil, nil, nil)
     }
 }
 
-extension Dependency {
-    public init(from decoder: Decoder) throws {
+public extension Dependency {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.packageUrl = try container.sdkDecodeIfPresent(.packageUrl)
-        self.metadata = try container.sdkDecodeIfPresent(.metadata)
-        self.relationship = try container.sdkDecodeIfPresent(.relationship)
-        self.scope = try container.sdkDecodeIfPresent(.scope)
-        self.dependencies = try container.sdkDecodeIfPresent(.dependencies)
-        if let value = self.packageUrl {
+        packageUrl = try container.sdkDecodeIfPresent(.packageUrl)
+        metadata = try container.sdkDecodeIfPresent(.metadata)
+        relationship = try container.sdkDecodeIfPresent(.relationship)
+        scope = try container.sdkDecodeIfPresent(.scope)
+        dependencies = try container.sdkDecodeIfPresent(.dependencies)
+        if let value = packageUrl {
             try sdkValidatePattern("package_url", value, sdkPatterna72d747a93cb)
         }
     }
 }
 
-extension Dependency {
-    public init(packageUrl: String? = nil, metadata: Metadata? = nil, relationship: DependencyRelationship? = nil, scope: DependencyScope? = nil, dependencies: [String]? = nil) throws {
+public extension Dependency {
+    init(
+        packageUrl: String? = nil,
+        metadata: Metadata? = nil,
+        relationship: DependencyRelationship? = nil,
+        scope: DependencyScope? = nil,
+        dependencies: [String]? = nil
+    ) throws {
         self.init()
         (self.packageUrl, self.metadata) = (packageUrl, metadata)
         (self.relationship, self.scope) = (relationship, scope)
@@ -361,23 +417,32 @@ public indirect enum MetadataValue {
 }
 
 extension MetadataValue: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
         throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for MetadataValue")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension MetadataValue {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) { return .stringValue(value) }
-        if let value = try? container.decode(Double.self) { return .doubleValue(value) }
-        if let value = try? container.decode(Bool.self) { return .boolValue(value) }
+        if let value = try? container.decode(String.self) {
+            return .stringValue(value)
+        }
+        if let value = try? container.decode(Double.self) {
+            return .doubleValue(value)
+        }
+        if let value = try? container.decode(Bool.self) {
+            return .boolValue(value)
+        }
         return nil
     }
 }
@@ -419,21 +484,21 @@ public struct DependencyGraphSpdxSbomSbomRelationshipsItem: Codable {
     }
 
     init() {
-        (self.relationshipType, self.spdxElementId, self.relatedSpdxElement) = (nil, nil, nil)
+        (relationshipType, spdxElementId, relatedSpdxElement) = (nil, nil, nil)
     }
 }
 
-extension DependencyGraphSpdxSbomSbomRelationshipsItem {
-    public init(from decoder: Decoder) throws {
+public extension DependencyGraphSpdxSbomSbomRelationshipsItem {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.relationshipType = try container.sdkDecodeIfPresent(.relationshipType)
-        self.spdxElementId = try container.sdkDecodeIfPresent(.spdxElementId)
-        self.relatedSpdxElement = try container.sdkDecodeIfPresent(.relatedSpdxElement)
+        relationshipType = try container.sdkDecodeIfPresent(.relationshipType)
+        spdxElementId = try container.sdkDecodeIfPresent(.spdxElementId)
+        relatedSpdxElement = try container.sdkDecodeIfPresent(.relatedSpdxElement)
     }
 }
 
-extension DependencyGraphSpdxSbomSbomRelationshipsItem {
-    public init(relationshipType: String? = nil, spdxElementId: String? = nil, relatedSpdxElement: String? = nil) {
+public extension DependencyGraphSpdxSbomSbomRelationshipsItem {
+    init(relationshipType: String? = nil, spdxElementId: String? = nil, relatedSpdxElement: String? = nil) {
         self.init()
         (self.relationshipType, self.spdxElementId) = (relationshipType, spdxElementId)
         self.relatedSpdxElement = relatedSpdxElement
@@ -474,40 +539,66 @@ public struct Snapshot: Codable {
         case manifests
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension Snapshot {
-    public init(from decoder: Decoder) throws {
+public extension Snapshot {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.version) else {
-            throw SdkValidationError(field: "version", code: "required", message: "Validation failed for 'version': value is required")
+            throw SdkValidationError(
+                field: "version",
+                code: "required",
+                message: "Validation failed for 'version': value is required"
+            )
         }
         guard container.contains(.job) else {
-            throw SdkValidationError(field: "job", code: "required", message: "Validation failed for 'job': value is required")
+            throw SdkValidationError(
+                field: "job",
+                code: "required",
+                message: "Validation failed for 'job': value is required"
+            )
         }
         guard container.contains(.sha) else {
-            throw SdkValidationError(field: "sha", code: "required", message: "Validation failed for 'sha': value is required")
+            throw SdkValidationError(
+                field: "sha",
+                code: "required",
+                message: "Validation failed for 'sha': value is required"
+            )
         }
         guard container.contains(.ref) else {
-            throw SdkValidationError(field: "ref", code: "required", message: "Validation failed for 'ref': value is required")
+            throw SdkValidationError(
+                field: "ref",
+                code: "required",
+                message: "Validation failed for 'ref': value is required"
+            )
         }
         guard container.contains(.detector) else {
-            throw SdkValidationError(field: "detector", code: "required", message: "Validation failed for 'detector': value is required")
+            throw SdkValidationError(
+                field: "detector",
+                code: "required",
+                message: "Validation failed for 'detector': value is required"
+            )
         }
         guard container.contains(.scanned) else {
-            throw SdkValidationError(field: "scanned", code: "required", message: "Validation failed for 'scanned': value is required")
+            throw SdkValidationError(
+                field: "scanned",
+                code: "required",
+                message: "Validation failed for 'scanned': value is required"
+            )
         }
-        self.version = try container.sdkDecodeRequired(.version)
-        self.job = try container.sdkDecodeRequired(.job)
-        self.sha = try container.sdkDecodeRequired(.sha)
-        self.ref = try container.sdkDecodeRequired(.ref)
-        self.detector = try container.sdkDecodeRequired(.detector)
-        self.scanned = try container.sdkDecodeRequired(.scanned)
-        self.metadata = try container.sdkDecodeIfPresent(.metadata)
-        self.manifests = try container.sdkDecodeIfPresent(.manifests)
-            try validateLength("sha", self.sha, min: 40, max: 64)
-            try sdkValidatePattern("ref", self.ref, sdkPattern4ca596ae636f)
-            try sdkValidateDateTime("scanned", sdkWireString(self.scanned))
+        version = try container.sdkDecodeRequired(.version)
+        job = try container.sdkDecodeRequired(.job)
+        sha = try container.sdkDecodeRequired(.sha)
+        ref = try container.sdkDecodeRequired(.ref)
+        detector = try container.sdkDecodeRequired(.detector)
+        scanned = try container.sdkDecodeRequired(.scanned)
+        metadata = try container.sdkDecodeIfPresent(.metadata)
+        manifests = try container.sdkDecodeIfPresent(.manifests)
+        try validateLength("sha", sha, min: 40, max: 64)
+        try sdkValidatePattern("ref", ref, sdkPattern4ca596ae636f)
+        try sdkValidateDateTime("scanned", sdkWireString(scanned))
     }
 }

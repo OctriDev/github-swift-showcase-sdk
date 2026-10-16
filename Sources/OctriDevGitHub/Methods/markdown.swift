@@ -7,7 +7,8 @@ import Foundation
     import FoundationNetworking
 #endif
 public enum MarkdownMethods {
-    /// Depending on what is rendered in the Markdown, you may need to provide additional token scopes for labels, such as `issues:read` or `pull_requests:read`.
+    /// Depending on what is rendered in the Markdown, you may need to provide additional token scopes for labels, such
+    /// as `issues:read` or `pull_requests:read`.
     ///
     /// - Parameters:
     /// - text: The Markdown text to render in HTML.
@@ -16,15 +17,49 @@ public enum MarkdownMethods {
     ///   mode. For example, setting `context` to `octo-org/octo-repo` will change the
     ///   text `#42` into an HTML link to issue 42 in the `octo-org/octo-repo`
     ///   repository.
-    public static func markdownRender(config: ClientConfig, text: String, mode: MarkdownRenderRequestBodyMode? = nil, context: String? = nil, requestOptions: RequestOptions? = nil) async throws -> String {
+    public static func markdownRender(
+        config: ClientConfig,
+        text: String,
+        mode: MarkdownRenderRequestBodyMode? = nil,
+        context: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> String {
         let requestBody = MarkdownRenderRequestBody(text: text, mode: mode, context: context)
 
-        return try (await sdkRequest("POST", "/markdown", config: config, body: requestBody, decoder: .text, operationId: "markdownRender", options: requestOptions)).data
+        return try await (sdkRequest(
+            "POST",
+            "/markdown",
+            config: config,
+            body: requestBody,
+            decoder: .text,
+            operationId: "markdownRender",
+            options: requestOptions
+        )).data
     }
-    /// Renders Markdown submitted as plain text into HTML. Send the Markdown in the request body with a `Content-Type` of `text/plain` or `text/x-markdown`; raw mode does not support GitHub Flavored Markdown, and the content must be 400 KB or less.
+
+    /// Renders Markdown submitted as plain text into HTML. Send the Markdown in the request body with a `Content-Type`
+    /// of `text/plain` or `text/x-markdown`; raw mode does not support GitHub Flavored Markdown, and the content must
+    /// be 400 KB or less.
     ///
-    /// You must send Markdown as plain text (using a `Content-Type` header of `text/plain` or `text/x-markdown`) to this endpoint, rather than using JSON format. In raw mode, [GitHub Flavored Markdown](https://github.github.com/gfm/) is not supported and Markdown will be rendered in plain format like a README.md file. Markdown content must be 400 KB or less.
-    public static func markdownRenderRaw(config: ClientConfig, body: String? = nil, contentType: String? = nil, requestOptions: RequestOptions? = nil) async throws -> String {
-        return try (await sdkRequest("POST", "/markdown/raw", config: config, rawBody: body?.data(using: .utf8), contentType: "text/plain", decoder: .text, operationId: "markdownRenderRaw", options: requestOptions)).data
+    /// You must send Markdown as plain text (using a `Content-Type` header of `text/plain` or `text/x-markdown`) to
+    /// this endpoint, rather than using JSON format. In raw mode, [GitHub Flavored
+    /// Markdown](https://github.github.com/gfm/) is not supported and Markdown will be rendered in plain format like a
+    /// README.md file. Markdown content must be 400 KB or less.
+    public static func markdownRenderRaw(
+        config: ClientConfig,
+        body: String? = nil,
+        contentType _: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> String {
+        try await (sdkRequest(
+            "POST",
+            "/markdown/raw",
+            config: config,
+            rawBody: body?.data(using: .utf8),
+            contentType: "text/plain",
+            decoder: .text,
+            operationId: "markdownRenderRaw",
+            options: requestOptions
+        )).data
     }
 }

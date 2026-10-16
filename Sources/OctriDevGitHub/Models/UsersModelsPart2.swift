@@ -3,9 +3,53 @@
 
 import Foundation
 
-// Users domain models
-extension PrivateUser {
-    public init(login: String, id: Int, nodeId: String, avatarUrl: String, gravatarId: String?, url: String, htmlUrl: String, followersUrl: String, followingUrl: String, gistsUrl: String, starredUrl: String, subscriptionsUrl: String, organizationsUrl: String, reposUrl: String, eventsUrl: String, receivedEventsUrl: String, type: String, siteAdmin: Bool, name: String?, company: String?, blog: String?, location: String?, email: String?, hireable: Bool?, bio: String?, publicRepos: Int, publicGists: Int, followers: Int, following: Int, createdAt: Date, updatedAt: Date, privateGists: Int, totalPrivateRepos: Int, ownedPrivateRepos: Int, diskUsage: Int, collaborators: Int, twoFactorAuthentication: Bool, userViewType: String? = nil, notificationEmail: String? = nil, twitterUsername: String? = nil, plan: PrivateUserPlan? = nil, businessPlus: Bool? = nil, ldapDn: String? = nil) throws {
+/// Users domain models
+public extension PrivateUser {
+    init(
+        login: String,
+        id: Int,
+        nodeId: String,
+        avatarUrl: String,
+        gravatarId: String?,
+        url: String,
+        htmlUrl: String,
+        followersUrl: String,
+        followingUrl: String,
+        gistsUrl: String,
+        starredUrl: String,
+        subscriptionsUrl: String,
+        organizationsUrl: String,
+        reposUrl: String,
+        eventsUrl: String,
+        receivedEventsUrl: String,
+        type: String,
+        siteAdmin: Bool,
+        name: String?,
+        company: String?,
+        blog: String?,
+        location: String?,
+        email: String?,
+        hireable: Bool?,
+        bio: String?,
+        publicRepos: Int,
+        publicGists: Int,
+        followers: Int,
+        following: Int,
+        createdAt: Date,
+        updatedAt: Date,
+        privateGists: Int,
+        totalPrivateRepos: Int,
+        ownedPrivateRepos: Int,
+        diskUsage: Int,
+        collaborators: Int,
+        twoFactorAuthentication: Bool,
+        userViewType: String? = nil,
+        notificationEmail: String? = nil,
+        twitterUsername: String? = nil,
+        plan: PrivateUserPlan? = nil,
+        businessPlus: Bool? = nil,
+        ldapDn: String? = nil
+    ) throws {
         (self.login, self.id) = (login, id)
         (self.nodeId, self.avatarUrl) = (nodeId, avatarUrl)
         (self.gravatarId, self.url) = (gravatarId, url)
@@ -34,20 +78,20 @@ extension PrivateUser {
 
 extension PrivateUser {
     func sdkValidateConstraints() throws {
-            try sdkValidateUri("avatar_url", self.avatarUrl)
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("followers_url", self.followersUrl)
-            try sdkValidateUri("subscriptions_url", self.subscriptionsUrl)
-            try sdkValidateUri("organizations_url", self.organizationsUrl)
-            try sdkValidateUri("repos_url", self.reposUrl)
-            try sdkValidateUri("received_events_url", self.receivedEventsUrl)
-        if let value = self.email {
+        try sdkValidateUri("avatar_url", avatarUrl)
+        try sdkValidateUri("url", url)
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateUri("followers_url", followersUrl)
+        try sdkValidateUri("subscriptions_url", subscriptionsUrl)
+        try sdkValidateUri("organizations_url", organizationsUrl)
+        try sdkValidateUri("repos_url", reposUrl)
+        try sdkValidateUri("received_events_url", receivedEventsUrl)
+        if let value = email {
             try sdkValidateEmail("email", value)
         }
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-        if let value = self.notificationEmail {
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+        if let value = notificationEmail {
             try sdkValidateEmail("notification_email", value)
         }
     }
@@ -71,33 +115,51 @@ public struct PrivateUserPlan: Codable {
         case privateRepos = "private_repos"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension PrivateUserPlan {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.collaborators) else {
-            throw SdkValidationError(field: "collaborators", code: "required", message: "Validation failed for 'collaborators': value is required")
-        }
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        guard container.contains(.space) else {
-            throw SdkValidationError(field: "space", code: "required", message: "Validation failed for 'space': value is required")
-        }
-        guard container.contains(.privateRepos) else {
-            throw SdkValidationError(field: "private_repos", code: "required", message: "Validation failed for 'private_repos': value is required")
-        }
-        self.collaborators = try container.sdkDecodeRequired(.collaborators)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.space = try container.sdkDecodeRequired(.space)
-        self.privateRepos = try container.sdkDecodeRequired(.privateRepos)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension PrivateUserPlan {
-    public init(collaborators: Int, name: String, space: Int, privateRepos: Int) {
+public extension PrivateUserPlan {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.collaborators) else {
+            throw SdkValidationError(
+                field: "collaborators",
+                code: "required",
+                message: "Validation failed for 'collaborators': value is required"
+            )
+        }
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        guard container.contains(.space) else {
+            throw SdkValidationError(
+                field: "space",
+                code: "required",
+                message: "Validation failed for 'space': value is required"
+            )
+        }
+        guard container.contains(.privateRepos) else {
+            throw SdkValidationError(
+                field: "private_repos",
+                code: "required",
+                message: "Validation failed for 'private_repos': value is required"
+            )
+        }
+        collaborators = try container.sdkDecodeRequired(.collaborators)
+        name = try container.sdkDecodeRequired(.name)
+        space = try container.sdkDecodeRequired(.space)
+        privateRepos = try container.sdkDecodeRequired(.privateRepos)
+    }
+}
+
+public extension PrivateUserPlan {
+    init(collaborators: Int, name: String, space: Int, privateRepos: Int) {
         (self.collaborators, self.name) = (collaborators, name)
         (self.space, self.privateRepos) = (space, privateRepos)
     }
@@ -112,21 +174,27 @@ public struct Hovercard: Codable {
         case contexts
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension Hovercard {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.contexts) else {
-            throw SdkValidationError(field: "contexts", code: "required", message: "Validation failed for 'contexts': value is required")
-        }
-        self.contexts = try container.sdkDecodeRequired(.contexts)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension Hovercard {
-    public init(contexts: [HovercardContextsItem]) {
+public extension Hovercard {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.contexts) else {
+            throw SdkValidationError(
+                field: "contexts",
+                code: "required",
+                message: "Validation failed for 'contexts': value is required"
+            )
+        }
+        contexts = try container.sdkDecodeRequired(.contexts)
+    }
+}
+
+public extension Hovercard {
+    init(contexts: [HovercardContextsItem]) {
         self.contexts = contexts
     }
 }
@@ -144,20 +212,20 @@ public struct GpgKeySubkeysItemEmailsItem: Codable {
     }
 
     init() {
-        (self.email, self.verified) = (nil, nil)
+        (email, verified) = (nil, nil)
     }
 }
 
-extension GpgKeySubkeysItemEmailsItem {
-    public init(from decoder: Decoder) throws {
+public extension GpgKeySubkeysItemEmailsItem {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.email = try container.sdkDecodeIfPresent(.email)
-        self.verified = try container.sdkDecodeIfPresent(.verified)
+        email = try container.sdkDecodeIfPresent(.email)
+        verified = try container.sdkDecodeIfPresent(.verified)
     }
 }
 
-extension GpgKeySubkeysItemEmailsItem {
-    public init(email: String? = nil, verified: Bool? = nil) {
+public extension GpgKeySubkeysItemEmailsItem {
+    init(email: String? = nil, verified: Bool? = nil) {
         self.init()
         (self.email, self.verified) = (email, verified)
     }
@@ -185,37 +253,55 @@ public struct Email: Codable {
         case visibility
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension Email {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.email) else {
-            throw SdkValidationError(field: "email", code: "required", message: "Validation failed for 'email': value is required")
-        }
-        guard container.contains(.primary) else {
-            throw SdkValidationError(field: "primary", code: "required", message: "Validation failed for 'primary': value is required")
-        }
-        guard container.contains(.verified) else {
-            throw SdkValidationError(field: "verified", code: "required", message: "Validation failed for 'verified': value is required")
-        }
-        guard container.contains(.visibility) else {
-            throw SdkValidationError(field: "visibility", code: "required", message: "Validation failed for 'visibility': value is required")
-        }
-        self.email = try container.sdkDecodeRequired(.email)
-        self.primary = try container.sdkDecodeRequired(.primary)
-        self.verified = try container.sdkDecodeRequired(.verified)
-        self.visibility = try container.sdkDecodeNullable(.visibility)
-            try sdkValidateEmail("email", self.email)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension Email {
-    public init(email: String, primary: Bool, verified: Bool, visibility: String?) throws {
+public extension Email {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.email) else {
+            throw SdkValidationError(
+                field: "email",
+                code: "required",
+                message: "Validation failed for 'email': value is required"
+            )
+        }
+        guard container.contains(.primary) else {
+            throw SdkValidationError(
+                field: "primary",
+                code: "required",
+                message: "Validation failed for 'primary': value is required"
+            )
+        }
+        guard container.contains(.verified) else {
+            throw SdkValidationError(
+                field: "verified",
+                code: "required",
+                message: "Validation failed for 'verified': value is required"
+            )
+        }
+        guard container.contains(.visibility) else {
+            throw SdkValidationError(
+                field: "visibility",
+                code: "required",
+                message: "Validation failed for 'visibility': value is required"
+            )
+        }
+        email = try container.sdkDecodeRequired(.email)
+        primary = try container.sdkDecodeRequired(.primary)
+        verified = try container.sdkDecodeRequired(.verified)
+        visibility = try container.sdkDecodeNullable(.visibility)
+        try sdkValidateEmail("email", email)
+    }
+}
+
+public extension Email {
+    init(email: String, primary: Bool, verified: Bool, visibility: String?) throws {
         (self.email, self.primary) = (email, primary)
         (self.verified, self.visibility) = (verified, visibility)
-            try sdkValidateEmail("email", self.email)
+        try sdkValidateEmail("email", self.email)
     }
 }
 
@@ -283,36 +369,54 @@ public struct GpgKey: Codable {
         case name
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension GpgKey {
-    public init(from decoder: Decoder) throws {
+public extension GpgKey {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.primaryKeyId = try container.sdkDecodeNullable(.primaryKeyId)
-        self.keyId = try container.sdkDecodeRequired(.keyId)
-        self.publicKey = try container.sdkDecodeRequired(.publicKey)
-        self.emails = try container.sdkDecodeRequired(.emails)
-        self.subkeys = try container.sdkDecodeRequired(.subkeys)
-        self.canSign = try container.sdkDecodeRequired(.canSign)
-        self.canEncryptComms = try container.sdkDecodeRequired(.canEncryptComms)
-        self.canEncryptStorage = try container.sdkDecodeRequired(.canEncryptStorage)
-        self.canCertify = try container.sdkDecodeRequired(.canCertify)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.expiresAt = try container.sdkDecodeNullable(.expiresAt)
-        self.revoked = try container.sdkDecodeRequired(.revoked)
-        self.rawKey = try container.sdkDecodeNullable(.rawKey)
-        self.name = try container.sdkDecodeIfPresent(.name)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-        if let value = self.expiresAt {
+        id = try container.sdkDecodeRequired(.id)
+        primaryKeyId = try container.sdkDecodeNullable(.primaryKeyId)
+        keyId = try container.sdkDecodeRequired(.keyId)
+        publicKey = try container.sdkDecodeRequired(.publicKey)
+        emails = try container.sdkDecodeRequired(.emails)
+        subkeys = try container.sdkDecodeRequired(.subkeys)
+        canSign = try container.sdkDecodeRequired(.canSign)
+        canEncryptComms = try container.sdkDecodeRequired(.canEncryptComms)
+        canEncryptStorage = try container.sdkDecodeRequired(.canEncryptStorage)
+        canCertify = try container.sdkDecodeRequired(.canCertify)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        expiresAt = try container.sdkDecodeNullable(.expiresAt)
+        revoked = try container.sdkDecodeRequired(.revoked)
+        rawKey = try container.sdkDecodeNullable(.rawKey)
+        name = try container.sdkDecodeIfPresent(.name)
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        if let value = expiresAt {
             try sdkValidateDateTime("expires_at", sdkWireString(value))
         }
     }
 }
 
-extension GpgKey {
-    public init(id: Int, primaryKeyId: Int?, keyId: String, publicKey: String, emails: [GpgKeyEmailsItem], subkeys: [GpgKeySubkeysItem], canSign: Bool, canEncryptComms: Bool, canEncryptStorage: Bool, canCertify: Bool, createdAt: Date, expiresAt: Date?, revoked: Bool, rawKey: String?, name: String? = nil) throws {
+public extension GpgKey {
+    init(
+        id: Int,
+        primaryKeyId: Int?,
+        keyId: String,
+        publicKey: String,
+        emails: [GpgKeyEmailsItem],
+        subkeys: [GpgKeySubkeysItem],
+        canSign: Bool,
+        canEncryptComms: Bool,
+        canEncryptStorage: Bool,
+        canCertify: Bool,
+        createdAt: Date,
+        expiresAt: Date?,
+        revoked: Bool,
+        rawKey: String?,
+        name: String? = nil
+    ) throws {
         (self.id, self.primaryKeyId) = (id, primaryKeyId)
         (self.keyId, self.publicKey) = (keyId, publicKey)
         (self.emails, self.subkeys) = (emails, subkeys)
@@ -321,7 +425,7 @@ extension GpgKey {
         (self.createdAt, self.expiresAt) = (createdAt, expiresAt)
         (self.revoked, self.rawKey) = (revoked, rawKey)
         self.name = name
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
         if let value = self.expiresAt {
             try sdkValidateDateTime("expires_at", sdkWireString(value))
         }
@@ -342,25 +446,35 @@ public struct SocialAccount: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension SocialAccount {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.provider) else {
-            throw SdkValidationError(field: "provider", code: "required", message: "Validation failed for 'provider': value is required")
-        }
-        guard container.contains(.url) else {
-            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
-        }
-        self.provider = try container.sdkDecodeRequired(.provider)
-        self.url = try container.sdkDecodeRequired(.url)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension SocialAccount {
-    public init(provider: String, url: String) {
+public extension SocialAccount {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.provider) else {
+            throw SdkValidationError(
+                field: "provider",
+                code: "required",
+                message: "Validation failed for 'provider': value is required"
+            )
+        }
+        guard container.contains(.url) else {
+            throw SdkValidationError(
+                field: "url",
+                code: "required",
+                message: "Validation failed for 'url': value is required"
+            )
+        }
+        provider = try container.sdkDecodeRequired(.provider)
+        url = try container.sdkDecodeRequired(.url)
+    }
+}
+
+public extension SocialAccount {
+    init(provider: String, url: String) {
         (self.provider, self.url) = (provider, url)
     }
 }
@@ -383,33 +497,43 @@ public struct KeySimple: Codable {
         case lastUsed = "last_used"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension KeySimple {
-    public init(from decoder: Decoder) throws {
+public extension KeySimple {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
         }
         guard container.contains(.key) else {
-            throw SdkValidationError(field: "key", code: "required", message: "Validation failed for 'key': value is required")
+            throw SdkValidationError(
+                field: "key",
+                code: "required",
+                message: "Validation failed for 'key': value is required"
+            )
         }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.key = try container.sdkDecodeRequired(.key)
-        self.createdAt = try container.sdkDecodeIfPresent(.createdAt)
-        self.lastUsed = try container.sdkDecodeIfPresent(.lastUsed)
-        if let value = self.createdAt {
+        id = try container.sdkDecodeRequired(.id)
+        key = try container.sdkDecodeRequired(.key)
+        createdAt = try container.sdkDecodeIfPresent(.createdAt)
+        lastUsed = try container.sdkDecodeIfPresent(.lastUsed)
+        if let value = createdAt {
             try sdkValidateDateTime("created_at", sdkWireString(value))
         }
-        if let value = self.lastUsed {
+        if let value = lastUsed {
             try sdkValidateDateTime("last_used", sdkWireString(value))
         }
     }
 }
 
-extension KeySimple {
-    public init(id: Int, key: String, createdAt: Date? = nil, lastUsed: Date? = nil) throws {
+public extension KeySimple {
+    init(id: Int, key: String, createdAt: Date? = nil, lastUsed: Date? = nil) throws {
         (self.id, self.key) = (id, key)
         (self.createdAt, self.lastUsed) = (createdAt, lastUsed)
         if let value = self.createdAt {

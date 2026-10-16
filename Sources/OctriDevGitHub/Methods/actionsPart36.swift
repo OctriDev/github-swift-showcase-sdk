@@ -6,16 +6,32 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ActionsMethods {
-    /// Lists binaries for the runner application that you can download and run. Authenticated users must have admin access to the organization to use this endpoint. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint. If the repository is private, the `repo` scope is also required.
+public extension ActionsMethods {
+    /// Lists binaries for the runner application that you can download and run. Authenticated users must have admin
+    /// access to the organization to use this endpoint. OAuth app tokens and personal access tokens (classic) need the
+    /// `admin:org` scope to use this endpoint. If the repository is private, the `repo` scope is also required.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
-    public static func actionsListRunnerApplicationsForOrg(config: ClientConfig, org: String, requestOptions: RequestOptions? = nil) async throws -> [RunnerApplication] {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/actions/runners/downloads"].joined(), config: config, decoder: .json, operationId: "actionsListRunnerApplicationsForOrg", options: requestOptions)).data
+    static func actionsListRunnerApplicationsForOrg(
+        config: ClientConfig,
+        org: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [RunnerApplication] {
+        try await (sdkRequest(
+            "GET",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/actions/runners/downloads"].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "actionsListRunnerApplicationsForOrg",
+            options: requestOptions
+        )).data
     }
 
-    /// Generates a configuration that can be passed to the runner application at startup. The authenticated user must have admin access to the organization. OAuth tokens and personal access tokens (classic) need the`admin:org` scope to use this endpoint. If the repository is private, OAuth tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    /// Generates a configuration that can be passed to the runner application at startup. The authenticated user must
+    /// have admin access to the organization. OAuth tokens and personal access tokens (classic) need the`admin:org`
+    /// scope to use this endpoint. If the repository is private, OAuth tokens and personal access tokens (classic) need
+    /// the `repo` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
@@ -25,11 +41,33 @@ extension ActionsMethods {
     ///   items**: 1. **Maximum items**: 100.
     /// - workFolder: The working directory to be used for job execution, relative
     ///   to the runner install directory.
-    public static func actionsGenerateRunnerJitconfigForOrg(config: ClientConfig, org: String, name: String, runnerGroupId: Int, labels: [String], workFolder: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ActionsGenerateRunnerJitconfigForOrgResponse {
+    static func actionsGenerateRunnerJitconfigForOrg(
+        config: ClientConfig,
+        org: String,
+        name: String,
+        runnerGroupId: Int,
+        labels: [String],
+        workFolder: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ActionsGenerateRunnerJitconfigForOrgResponse {
         try validateItems("labels", labels, min: 1, max: 100)
 
-        let requestBody = ActionsGenerateRunnerJitconfigForOrgRequestBody(name: name, runnerGroupId: runnerGroupId, labels: labels, workFolder: workFolder)
+        let requestBody = ActionsGenerateRunnerJitconfigForOrgRequestBody(
+            name: name,
+            runnerGroupId: runnerGroupId,
+            labels: labels,
+            workFolder: workFolder
+        )
 
-        return try (await sdkRequest("POST", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/actions/runners/generate-jitconfig"].joined(), config: config, body: requestBody, decoder: .json, operationId: "actionsGenerateRunnerJitconfigForOrg", options: requestOptions, errors: ["404": BasicError.self, "409": BasicError.self, "422": ValidationErrorSimple.self])).data
+        return try await (sdkRequest(
+            "POST",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/actions/runners/generate-jitconfig"].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "actionsGenerateRunnerJitconfigForOrg",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "409": BasicError.self, "422": ValidationErrorSimple.self]
+        )).data
     }
 }

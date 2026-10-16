@@ -7,15 +7,15 @@ import Foundation
     import FoundationNetworking
 #endif
 
-// Canonical interactions operation model declarations
+/// Canonical interactions operation model declarations
 public struct InteractionsGetRestrictionsForRepoResponseVariant1: Codable {
-
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension InteractionsGetRestrictionsForRepoResponseVariant1 {
-    public init() {
-    }
+public extension InteractionsGetRestrictionsForRepoResponseVariant1 {
+    init() {}
 }
 
 public indirect enum InteractionsGetRestrictionsForAuthenticatedUserResponse {
@@ -24,22 +24,32 @@ public indirect enum InteractionsGetRestrictionsForAuthenticatedUserResponse {
 }
 
 extension InteractionsGetRestrictionsForAuthenticatedUserResponse: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for InteractionsGetRestrictionsForAuthenticatedUserResponse")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for InteractionsGetRestrictionsForAuthenticatedUserResponse"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension InteractionsGetRestrictionsForAuthenticatedUserResponse {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(InteractionLimitResponse.self) { return .interactionLimitResponse(value) }
-        if let value = try? container.decode([String: JSONValue].self) { return .jsonValue(value) }
+        if let value = try? container.decode(InteractionLimitResponse.self) {
+            return .interactionLimitResponse(value)
+        }
+        if let value = try? container.decode([String: JSONValue].self) {
+            return .jsonValue(value)
+        }
         return nil
     }
 }
@@ -60,22 +70,32 @@ public indirect enum InteractionsGetRestrictionsForRepoResponse {
 }
 
 extension InteractionsGetRestrictionsForRepoResponse: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for InteractionsGetRestrictionsForRepoResponse")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for InteractionsGetRestrictionsForRepoResponse"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension InteractionsGetRestrictionsForRepoResponse {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(InteractionLimitResponse.self) { return .interactionLimitResponse(value) }
-        if let value = try? container.decode([String: JSONValue].self) { return .jsonValue(value) }
+        if let value = try? container.decode(InteractionLimitResponse.self) {
+            return .interactionLimitResponse(value)
+        }
+        if let value = try? container.decode([String: JSONValue].self) {
+            return .jsonValue(value)
+        }
         return nil
     }
 }
@@ -104,30 +124,56 @@ public struct InteractionsGetPullRequestCreationCapForRepoResponse: Codable {
         case includeDrafts = "include_drafts"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension InteractionsGetPullRequestCreationCapForRepoResponse {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.enabled) else {
-            throw SdkValidationError(field: "enabled", code: "required", message: "Validation failed for 'enabled': value is required")
-        }
-        guard container.contains(.maxOpenPullRequests) else {
-            throw SdkValidationError(field: "max_open_pull_requests", code: "required", message: "Validation failed for 'max_open_pull_requests': value is required")
-        }
-        self.enabled = try container.sdkDecodeRequired(.enabled)
-        self.maxOpenPullRequests = try container.sdkDecodeRequired(.maxOpenPullRequests)
-        self.includeDrafts = try container.sdkDecodeIfPresent(.includeDrafts)
-            try validateRange("max_open_pull_requests", Double(self.maxOpenPullRequests), min: 1, max: 1000, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension InteractionsGetPullRequestCreationCapForRepoResponse {
-    public init(enabled: Bool, maxOpenPullRequests: Int, includeDrafts: Bool? = nil) throws {
+public extension InteractionsGetPullRequestCreationCapForRepoResponse {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.enabled) else {
+            throw SdkValidationError(
+                field: "enabled",
+                code: "required",
+                message: "Validation failed for 'enabled': value is required"
+            )
+        }
+        guard container.contains(.maxOpenPullRequests) else {
+            throw SdkValidationError(
+                field: "max_open_pull_requests",
+                code: "required",
+                message: "Validation failed for 'max_open_pull_requests': value is required"
+            )
+        }
+        enabled = try container.sdkDecodeRequired(.enabled)
+        maxOpenPullRequests = try container.sdkDecodeRequired(.maxOpenPullRequests)
+        includeDrafts = try container.sdkDecodeIfPresent(.includeDrafts)
+        try validateRange(
+            "max_open_pull_requests",
+            Double(maxOpenPullRequests),
+            min: 1,
+            max: 1000,
+            exclusiveMin: nil,
+            exclusiveMax: nil,
+            multipleOf: nil
+        )
+    }
+}
+
+public extension InteractionsGetPullRequestCreationCapForRepoResponse {
+    init(enabled: Bool, maxOpenPullRequests: Int, includeDrafts: Bool? = nil) throws {
         (self.enabled, self.maxOpenPullRequests) = (enabled, maxOpenPullRequests)
         self.includeDrafts = includeDrafts
-            try validateRange("max_open_pull_requests", Double(self.maxOpenPullRequests), min: 1, max: 1000, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+        try validateRange(
+            "max_open_pull_requests",
+            Double(self.maxOpenPullRequests),
+            min: 1,
+            max: 1000,
+            exclusiveMin: nil,
+            exclusiveMax: nil,
+            multipleOf: nil
+        )
     }
 }
 
@@ -137,22 +183,32 @@ public indirect enum InteractionsGetRestrictionsForOrgResponse {
 }
 
 extension InteractionsGetRestrictionsForOrgResponse: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for InteractionsGetRestrictionsForOrgResponse")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for InteractionsGetRestrictionsForOrgResponse"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension InteractionsGetRestrictionsForOrgResponse {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(InteractionLimitResponse.self) { return .interactionLimitResponse(value) }
-        if let value = try? container.decode([String: JSONValue].self) { return .jsonValue(value) }
+        if let value = try? container.decode(InteractionLimitResponse.self) {
+            return .interactionLimitResponse(value)
+        }
+        if let value = try? container.decode([String: JSONValue].self) {
+            return .jsonValue(value)
+        }
         return nil
     }
 }
@@ -168,13 +224,13 @@ extension InteractionsGetRestrictionsForOrgResponse {
 }
 
 public struct InteractionsGetRestrictionsForOrgResponseVariant1: Codable {
-
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension InteractionsGetRestrictionsForOrgResponseVariant1 {
-    public init() {
-    }
+public extension InteractionsGetRestrictionsForOrgResponseVariant1 {
+    init() {}
 }
 
 public struct InteractionsUpdatePullRequestCreationCapForOrgResponse: Codable {
@@ -191,30 +247,56 @@ public struct InteractionsUpdatePullRequestCreationCapForOrgResponse: Codable {
         case includeDrafts = "include_drafts"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension InteractionsUpdatePullRequestCreationCapForOrgResponse {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.enabled) else {
-            throw SdkValidationError(field: "enabled", code: "required", message: "Validation failed for 'enabled': value is required")
-        }
-        guard container.contains(.maxOpenPullRequests) else {
-            throw SdkValidationError(field: "max_open_pull_requests", code: "required", message: "Validation failed for 'max_open_pull_requests': value is required")
-        }
-        self.enabled = try container.sdkDecodeRequired(.enabled)
-        self.maxOpenPullRequests = try container.sdkDecodeRequired(.maxOpenPullRequests)
-        self.includeDrafts = try container.sdkDecodeIfPresent(.includeDrafts)
-            try validateRange("max_open_pull_requests", Double(self.maxOpenPullRequests), min: 1, max: 1000, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension InteractionsUpdatePullRequestCreationCapForOrgResponse {
-    public init(enabled: Bool, maxOpenPullRequests: Int, includeDrafts: Bool? = nil) throws {
+public extension InteractionsUpdatePullRequestCreationCapForOrgResponse {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.enabled) else {
+            throw SdkValidationError(
+                field: "enabled",
+                code: "required",
+                message: "Validation failed for 'enabled': value is required"
+            )
+        }
+        guard container.contains(.maxOpenPullRequests) else {
+            throw SdkValidationError(
+                field: "max_open_pull_requests",
+                code: "required",
+                message: "Validation failed for 'max_open_pull_requests': value is required"
+            )
+        }
+        enabled = try container.sdkDecodeRequired(.enabled)
+        maxOpenPullRequests = try container.sdkDecodeRequired(.maxOpenPullRequests)
+        includeDrafts = try container.sdkDecodeIfPresent(.includeDrafts)
+        try validateRange(
+            "max_open_pull_requests",
+            Double(maxOpenPullRequests),
+            min: 1,
+            max: 1000,
+            exclusiveMin: nil,
+            exclusiveMax: nil,
+            multipleOf: nil
+        )
+    }
+}
+
+public extension InteractionsUpdatePullRequestCreationCapForOrgResponse {
+    init(enabled: Bool, maxOpenPullRequests: Int, includeDrafts: Bool? = nil) throws {
         (self.enabled, self.maxOpenPullRequests) = (enabled, maxOpenPullRequests)
         self.includeDrafts = includeDrafts
-            try validateRange("max_open_pull_requests", Double(self.maxOpenPullRequests), min: 1, max: 1000, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+        try validateRange(
+            "max_open_pull_requests",
+            Double(self.maxOpenPullRequests),
+            min: 1,
+            max: 1000,
+            exclusiveMin: nil,
+            exclusiveMax: nil,
+            multipleOf: nil
+        )
     }
 }
 
@@ -232,41 +314,67 @@ public struct InteractionsUpdatePullRequestCreationCapForRepoResponse: Codable {
         case includeDrafts = "include_drafts"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension InteractionsUpdatePullRequestCreationCapForRepoResponse {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.enabled) else {
-            throw SdkValidationError(field: "enabled", code: "required", message: "Validation failed for 'enabled': value is required")
-        }
-        guard container.contains(.maxOpenPullRequests) else {
-            throw SdkValidationError(field: "max_open_pull_requests", code: "required", message: "Validation failed for 'max_open_pull_requests': value is required")
-        }
-        self.enabled = try container.sdkDecodeRequired(.enabled)
-        self.maxOpenPullRequests = try container.sdkDecodeRequired(.maxOpenPullRequests)
-        self.includeDrafts = try container.sdkDecodeIfPresent(.includeDrafts)
-            try validateRange("max_open_pull_requests", Double(self.maxOpenPullRequests), min: 1, max: 1000, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension InteractionsUpdatePullRequestCreationCapForRepoResponse {
-    public init(enabled: Bool, maxOpenPullRequests: Int, includeDrafts: Bool? = nil) throws {
+public extension InteractionsUpdatePullRequestCreationCapForRepoResponse {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.enabled) else {
+            throw SdkValidationError(
+                field: "enabled",
+                code: "required",
+                message: "Validation failed for 'enabled': value is required"
+            )
+        }
+        guard container.contains(.maxOpenPullRequests) else {
+            throw SdkValidationError(
+                field: "max_open_pull_requests",
+                code: "required",
+                message: "Validation failed for 'max_open_pull_requests': value is required"
+            )
+        }
+        enabled = try container.sdkDecodeRequired(.enabled)
+        maxOpenPullRequests = try container.sdkDecodeRequired(.maxOpenPullRequests)
+        includeDrafts = try container.sdkDecodeIfPresent(.includeDrafts)
+        try validateRange(
+            "max_open_pull_requests",
+            Double(maxOpenPullRequests),
+            min: 1,
+            max: 1000,
+            exclusiveMin: nil,
+            exclusiveMax: nil,
+            multipleOf: nil
+        )
+    }
+}
+
+public extension InteractionsUpdatePullRequestCreationCapForRepoResponse {
+    init(enabled: Bool, maxOpenPullRequests: Int, includeDrafts: Bool? = nil) throws {
         (self.enabled, self.maxOpenPullRequests) = (enabled, maxOpenPullRequests)
         self.includeDrafts = includeDrafts
-            try validateRange("max_open_pull_requests", Double(self.maxOpenPullRequests), min: 1, max: 1000, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+        try validateRange(
+            "max_open_pull_requests",
+            Double(self.maxOpenPullRequests),
+            min: 1,
+            max: 1000,
+            exclusiveMin: nil,
+            exclusiveMax: nil,
+            multipleOf: nil
+        )
     }
 }
 
 public struct InteractionsGetRestrictionsForAuthenticatedUserResponseVariant1: Codable {
-
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension InteractionsGetRestrictionsForAuthenticatedUserResponseVariant1 {
-    public init() {
-    }
+public extension InteractionsGetRestrictionsForAuthenticatedUserResponseVariant1 {
+    init() {}
 }
 
 public struct InteractionsGetPullRequestCreationCapForOrgResponse: Codable {
@@ -283,29 +391,55 @@ public struct InteractionsGetPullRequestCreationCapForOrgResponse: Codable {
         case includeDrafts = "include_drafts"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension InteractionsGetPullRequestCreationCapForOrgResponse {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.enabled) else {
-            throw SdkValidationError(field: "enabled", code: "required", message: "Validation failed for 'enabled': value is required")
-        }
-        guard container.contains(.maxOpenPullRequests) else {
-            throw SdkValidationError(field: "max_open_pull_requests", code: "required", message: "Validation failed for 'max_open_pull_requests': value is required")
-        }
-        self.enabled = try container.sdkDecodeRequired(.enabled)
-        self.maxOpenPullRequests = try container.sdkDecodeRequired(.maxOpenPullRequests)
-        self.includeDrafts = try container.sdkDecodeIfPresent(.includeDrafts)
-            try validateRange("max_open_pull_requests", Double(self.maxOpenPullRequests), min: 1, max: 1000, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension InteractionsGetPullRequestCreationCapForOrgResponse {
-    public init(enabled: Bool, maxOpenPullRequests: Int, includeDrafts: Bool? = nil) throws {
+public extension InteractionsGetPullRequestCreationCapForOrgResponse {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.enabled) else {
+            throw SdkValidationError(
+                field: "enabled",
+                code: "required",
+                message: "Validation failed for 'enabled': value is required"
+            )
+        }
+        guard container.contains(.maxOpenPullRequests) else {
+            throw SdkValidationError(
+                field: "max_open_pull_requests",
+                code: "required",
+                message: "Validation failed for 'max_open_pull_requests': value is required"
+            )
+        }
+        enabled = try container.sdkDecodeRequired(.enabled)
+        maxOpenPullRequests = try container.sdkDecodeRequired(.maxOpenPullRequests)
+        includeDrafts = try container.sdkDecodeIfPresent(.includeDrafts)
+        try validateRange(
+            "max_open_pull_requests",
+            Double(maxOpenPullRequests),
+            min: 1,
+            max: 1000,
+            exclusiveMin: nil,
+            exclusiveMax: nil,
+            multipleOf: nil
+        )
+    }
+}
+
+public extension InteractionsGetPullRequestCreationCapForOrgResponse {
+    init(enabled: Bool, maxOpenPullRequests: Int, includeDrafts: Bool? = nil) throws {
         (self.enabled, self.maxOpenPullRequests) = (enabled, maxOpenPullRequests)
         self.includeDrafts = includeDrafts
-            try validateRange("max_open_pull_requests", Double(self.maxOpenPullRequests), min: 1, max: 1000, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+        try validateRange(
+            "max_open_pull_requests",
+            Double(self.maxOpenPullRequests),
+            min: 1,
+            max: 1000,
+            exclusiveMin: nil,
+            exclusiveMax: nil,
+            multipleOf: nil
+        )
     }
 }

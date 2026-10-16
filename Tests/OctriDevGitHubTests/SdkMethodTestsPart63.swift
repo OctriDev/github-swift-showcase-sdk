@@ -17,10 +17,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.projects.deleteItemForUser(
-            projectNumber: decoded("1"),
-            username: decoded("\"Example Name\""),
-            itemId: decoded("1")
-        )
+                projectNumber: decoded("1"),
+                username: decoded("\"Example Name\""),
+                itemId: decoded("1")
+            )
             XCTFail("projectsDeleteItemForUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -69,10 +69,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.projects.getFieldForOrg(
-            projectNumber: decoded("1"),
-            fieldId: decoded("1"),
-            org: decoded("\"org\"")
-        )
+                projectNumber: decoded("1"),
+                fieldId: decoded("1"),
+                org: decoded("\"org\"")
+            )
             XCTFail("projectsGetFieldForOrg did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -121,10 +121,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.projects.getFieldForUser(
-            projectNumber: decoded("1"),
-            fieldId: decoded("1"),
-            username: decoded("\"Example Name\"")
-        )
+                projectNumber: decoded("1"),
+                fieldId: decoded("1"),
+                username: decoded("\"Example Name\"")
+            )
             XCTFail("projectsGetFieldForUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -172,9 +172,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.projects.getForOrg(
-            projectNumber: decoded("1"),
-            org: decoded("\"org\"")
-        )
+                projectNumber: decoded("1"),
+                org: decoded("\"org\"")
+            )
             XCTFail("projectsGetForOrg did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -222,9 +222,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.projects.getForUser(
-            projectNumber: decoded("1"),
-            username: decoded("\"Example Name\"")
-        )
+                projectNumber: decoded("1"),
+                username: decoded("\"Example Name\"")
+            )
             XCTFail("projectsGetForUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -274,11 +274,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.projects.getOrgItem(
-            projectNumber: decoded("1"),
-            org: decoded("\"org\""),
-            itemId: decoded("1"),
-            fields: decoded("\"fields\"")
-        )
+                projectNumber: decoded("1"),
+                org: decoded("\"org\""),
+                itemId: decoded("1"),
+                fields: decoded("\"fields\"")
+            )
             XCTFail("projectsGetOrgItem did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -328,11 +328,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.projects.getUserItem(
-            projectNumber: decoded("1"),
-            username: decoded("\"Example Name\""),
-            itemId: decoded("1"),
-            fields: decoded("\"fields\"")
-        )
+                projectNumber: decoded("1"),
+                username: decoded("\"Example Name\""),
+                itemId: decoded("1"),
+                fields: decoded("\"fields\"")
+            )
             XCTFail("projectsGetUserItem did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -356,12 +356,12 @@ extension SdkMethodTests {
         _ = client
         do {
             _ = try await client.projects.listFieldsForOrg(
-            projectNumber: decoded("1"),
-            org: decoded("\"org\""),
-            perPage: decoded("30"),
-            before: decoded("\"before\""),
-            after: decoded("\"after\"")
-        )
+                projectNumber: decoded("1"),
+                org: decoded("\"org\""),
+                perPage: decoded("30"),
+                before: decoded("\"before\""),
+                after: decoded("\"after\"")
+            )
             XCTFail("projectsListFieldsForOrg decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -381,12 +381,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.projects.listFieldsForOrg(
-            projectNumber: decoded("1"),
-            org: decoded("\"org\""),
-            perPage: decoded("30"),
-            before: decoded("\"before\""),
-            after: decoded("\"after\"")
-        )
+                projectNumber: decoded("1"),
+                org: decoded("\"org\""),
+                perPage: decoded("30"),
+                before: decoded("\"before\""),
+                after: decoded("\"after\"")
+            )
             XCTFail("projectsListFieldsForOrg did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -410,12 +410,12 @@ extension SdkMethodTests {
         _ = client
         do {
             _ = try await client.projects.listFieldsForUser(
-            projectNumber: decoded("1"),
-            username: decoded("\"Example Name\""),
-            perPage: decoded("30"),
-            before: decoded("\"before\""),
-            after: decoded("\"after\"")
-        )
+                projectNumber: decoded("1"),
+                username: decoded("\"Example Name\""),
+                perPage: decoded("30"),
+                before: decoded("\"before\""),
+                after: decoded("\"after\"")
+            )
             XCTFail("projectsListFieldsForUser decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -435,12 +435,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.projects.listFieldsForUser(
-            projectNumber: decoded("1"),
-            username: decoded("\"Example Name\""),
-            perPage: decoded("30"),
-            before: decoded("\"before\""),
-            after: decoded("\"after\"")
-        )
+                projectNumber: decoded("1"),
+                username: decoded("\"Example Name\""),
+                perPage: decoded("30"),
+                before: decoded("\"before\""),
+                after: decoded("\"after\"")
+            )
             XCTFail("projectsListFieldsForUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -491,12 +491,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.projects.listForOrg(
-            org: decoded("\"org\""),
-            q: decoded("\"q\""),
-            before: decoded("\"before\""),
-            after: decoded("\"after\""),
-            perPage: decoded("30")
-        )
+                org: decoded("\"org\""),
+                q: decoded("\"q\""),
+                before: decoded("\"before\""),
+                after: decoded("\"after\""),
+                perPage: decoded("30")
+            )
             XCTFail("projectsListForOrg did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -547,12 +547,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.projects.listForUser(
-            username: decoded("\"Example Name\""),
-            q: decoded("\"q\""),
-            before: decoded("\"before\""),
-            after: decoded("\"after\""),
-            perPage: decoded("30")
-        )
+                username: decoded("\"Example Name\""),
+                q: decoded("\"q\""),
+                before: decoded("\"before\""),
+                after: decoded("\"after\""),
+                perPage: decoded("30")
+            )
             XCTFail("projectsListForUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)

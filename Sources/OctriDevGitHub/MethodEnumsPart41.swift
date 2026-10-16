@@ -8,17 +8,21 @@ import Foundation
 #endif
 /// The default value for a squash merge commit message: - `PR_BODY` - default to the pull request's body. -
 /// `COMMIT_MESSAGES` - default to the branch's commit messages. - `BLANK` - default to a blank commit message.
-public struct ReposUpdateRequestBodySquashMergeCommitMessage: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ReposUpdateRequestBodySquashMergeCommitMessage: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let prBody = ReposUpdateRequestBodySquashMergeCommitMessage(rawValue: "PR_BODY")
     public static let commitMessages = ReposUpdateRequestBodySquashMergeCommitMessage(rawValue: "COMMIT_MESSAGES")
     public static let blank = ReposUpdateRequestBodySquashMergeCommitMessage(rawValue: "BLANK")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -28,20 +32,28 @@ public struct ReposUpdateRequestBodySquashMergeCommitMessage: RawRepresentable, 
 }
 
 /// Machine-readable error code
-public struct AgentTasksGetTaskByRepoAndIdResponseErrorsItemCodeXecee4c6c: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct AgentTasksGetTaskByRepoAndIdResponseErrorsItemCodeXecee4c6c: RawRepresentable, Hashable, Codable,
+    Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let missing = AgentTasksGetTaskByRepoAndIdResponseErrorsItemCodeXecee4c6c(rawValue: "missing")
-    public static let missingField = AgentTasksGetTaskByRepoAndIdResponseErrorsItemCodeXecee4c6c(rawValue: "missing_field")
+    public static let missingField =
+        AgentTasksGetTaskByRepoAndIdResponseErrorsItemCodeXecee4c6c(rawValue: "missing_field")
     public static let invalid = AgentTasksGetTaskByRepoAndIdResponseErrorsItemCodeXecee4c6c(rawValue: "invalid")
-    public static let alreadyExists = AgentTasksGetTaskByRepoAndIdResponseErrorsItemCodeXecee4c6c(rawValue: "already_exists")
-    public static let unprocessable = AgentTasksGetTaskByRepoAndIdResponseErrorsItemCodeXecee4c6c(rawValue: "unprocessable")
+    public static let alreadyExists =
+        AgentTasksGetTaskByRepoAndIdResponseErrorsItemCodeXecee4c6c(rawValue: "already_exists")
+    public static let unprocessable =
+        AgentTasksGetTaskByRepoAndIdResponseErrorsItemCodeXecee4c6c(rawValue: "unprocessable")
     public static let custom = AgentTasksGetTaskByRepoAndIdResponseErrorsItemCodeXecee4c6c(rawValue: "custom")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -51,16 +63,21 @@ public struct AgentTasksGetTaskByRepoAndIdResponseErrorsItemCodeXecee4c6c: RawRe
 }
 
 /// Type of artifact. Available Values: `pull`, `branch`.
-public struct AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemType: RawRepresentable, Hashable,
+    Codable,
+    Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let pull = AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemType(rawValue: "pull")
     public static let branch = AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemType(rawValue: "branch")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -71,16 +88,22 @@ public struct AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemT
 
 /// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
 /// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
-public struct AgentAutomationsCreateRepoAutomationResponseTriggersIssueAssiXa3e050bfd0: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct AgentAutomationsCreateRepoAutomationResponseTriggersIssueAssiXa3e050bfd0: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let trigger = AgentAutomationsCreateRepoAutomationResponseTriggersIssueAssiXa3e050bfd0(rawValue: "trigger")
-    public static let repository = AgentAutomationsCreateRepoAutomationResponseTriggersIssueAssiXa3e050bfd0(rawValue: "repository")
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let trigger =
+        AgentAutomationsCreateRepoAutomationResponseTriggersIssueAssiXa3e050bfd0(rawValue: "trigger")
+    public static let repository =
+        AgentAutomationsCreateRepoAutomationResponseTriggersIssueAssiXa3e050bfd0(rawValue: "repository")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -92,13 +115,16 @@ public struct AgentAutomationsCreateRepoAutomationResponseTriggersIssueAssiXa3e0
 public struct AppsListAccountsForPlanParameter: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let created = AppsListAccountsForPlanParameter(rawValue: "created")
     public static let updated = AppsListAccountsForPlanParameter(rawValue: "updated")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -110,13 +136,16 @@ public struct AppsListAccountsForPlanParameter: RawRepresentable, Hashable, Coda
 public struct ChecksUpdateRequestBodyVariant1Status: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let queued = ChecksUpdateRequestBodyVariant1Status(rawValue: "queued")
     public static let inProgress = ChecksUpdateRequestBodyVariant1Status(rawValue: "in_progress")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -126,22 +155,27 @@ public struct ChecksUpdateRequestBodyVariant1Status: RawRepresentable, Hashable,
 }
 
 /// Current state of the task, derived from its most recent session
-public struct AgentAutomationsListAutomationTasksResponseTasksItemState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct AgentAutomationsListAutomationTasksResponseTasksItemState: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let queued = AgentAutomationsListAutomationTasksResponseTasksItemState(rawValue: "queued")
     public static let inProgress = AgentAutomationsListAutomationTasksResponseTasksItemState(rawValue: "in_progress")
     public static let completed = AgentAutomationsListAutomationTasksResponseTasksItemState(rawValue: "completed")
     public static let failed = AgentAutomationsListAutomationTasksResponseTasksItemState(rawValue: "failed")
     public static let idle = AgentAutomationsListAutomationTasksResponseTasksItemState(rawValue: "idle")
-    public static let waitingForUser = AgentAutomationsListAutomationTasksResponseTasksItemState(rawValue: "waiting_for_user")
+    public static let waitingForUser =
+        AgentAutomationsListAutomationTasksResponseTasksItemState(rawValue: "waiting_for_user")
     public static let timedOut = AgentAutomationsListAutomationTasksResponseTasksItemState(rawValue: "timed_out")
     public static let cancelled = AgentAutomationsListAutomationTasksResponseTasksItemState(rawValue: "cancelled")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -152,16 +186,22 @@ public struct AgentAutomationsListAutomationTasksResponseTasksItemState: RawRepr
 
 /// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
 /// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
-public struct AgentAutomationsCreateRepoAutomationResponseTriggersPullRequeX4987a1fb28: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct AgentAutomationsCreateRepoAutomationResponseTriggersPullRequeX4987a1fb28: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let trigger = AgentAutomationsCreateRepoAutomationResponseTriggersPullRequeX4987a1fb28(rawValue: "trigger")
-    public static let repository = AgentAutomationsCreateRepoAutomationResponseTriggersPullRequeX4987a1fb28(rawValue: "repository")
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let trigger =
+        AgentAutomationsCreateRepoAutomationResponseTriggersPullRequeX4987a1fb28(rawValue: "trigger")
+    public static let repository =
+        AgentAutomationsCreateRepoAutomationResponseTriggersPullRequeX4987a1fb28(rawValue: "repository")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -170,16 +210,20 @@ public struct AgentAutomationsCreateRepoAutomationResponseTriggersPullRequeX4987
     }
 }
 
-public struct SecretScanningListAlertsForOrgParameter: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct SecretScanningListAlertsForOrgParameter: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let created = SecretScanningListAlertsForOrgParameter(rawValue: "created")
     public static let updated = SecretScanningListAlertsForOrgParameter(rawValue: "updated")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -189,16 +233,20 @@ public struct SecretScanningListAlertsForOrgParameter: RawRepresentable, Hashabl
 }
 
 /// The process in which the Page will be built. Possible values are `"legacy"` and `"workflow"`.
-public struct ReposCreatePagesSiteRequestBodyBuildType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ReposCreatePagesSiteRequestBodyBuildType: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let legacy = ReposCreatePagesSiteRequestBodyBuildType(rawValue: "legacy")
     public static let workflow = ReposCreatePagesSiteRequestBodyBuildType(rawValue: "workflow")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

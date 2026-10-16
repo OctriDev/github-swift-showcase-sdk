@@ -7,10 +7,14 @@ import Foundation
     import FoundationNetworking
 #endif
 /// Machine-readable error code
-public struct AgentTasksGetTaskByIdResponseErrorsItemCodeX1aa4c709: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct AgentTasksGetTaskByIdResponseErrorsItemCodeX1aa4c709: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let missing = AgentTasksGetTaskByIdResponseErrorsItemCodeX1aa4c709(rawValue: "missing")
     public static let missingField = AgentTasksGetTaskByIdResponseErrorsItemCodeX1aa4c709(rawValue: "missing_field")
     public static let invalid = AgentTasksGetTaskByIdResponseErrorsItemCodeX1aa4c709(rawValue: "invalid")
@@ -20,7 +24,7 @@ public struct AgentTasksGetTaskByIdResponseErrorsItemCodeX1aa4c709: RawRepresent
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -33,17 +37,21 @@ public struct AgentTasksGetTaskByIdResponseErrorsItemCodeX1aa4c709: RawRepresent
 /// side of the diff that the comment applies to. Can be `LEFT` or `RIGHT`. To learn more about multi-line
 /// comments, see "Commenting on a pull request" in the GitHub Help documentation. See `side` in this table for
 /// additional context.
-public struct PullsCreateReviewCommentRequestBodyStartSide: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct PullsCreateReviewCommentRequestBodyStartSide: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let left = PullsCreateReviewCommentRequestBodyStartSide(rawValue: "LEFT")
     public static let right = PullsCreateReviewCommentRequestBodyStartSide(rawValue: "RIGHT")
     public static let side = PullsCreateReviewCommentRequestBodyStartSide(rawValue: "side")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -57,7 +65,10 @@ public struct PullsCreateReviewCommentRequestBodyStartSide: RawRepresentable, Ha
 public struct IssuesLockRequestBodyLockReason: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let offTopic = IssuesLockRequestBodyLockReason(rawValue: "off-topic")
     public static let tooHeated = IssuesLockRequestBodyLockReason(rawValue: "too heated")
     public static let resolved = IssuesLockRequestBodyLockReason(rawValue: "resolved")
@@ -65,7 +76,7 @@ public struct IssuesLockRequestBodyLockReason: RawRepresentable, Hashable, Codab
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -76,16 +87,22 @@ public struct IssuesLockRequestBodyLockReason: RawRepresentable, Hashable, Codab
 
 /// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
 /// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
-public struct AgentAutomationsGetRepoAutomationResponseTriggersIssueOpenedWriteScope: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct AgentAutomationsGetRepoAutomationResponseTriggersIssueOpenedWriteScope: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let trigger = AgentAutomationsGetRepoAutomationResponseTriggersIssueOpenedWriteScope(rawValue: "trigger")
-    public static let repository = AgentAutomationsGetRepoAutomationResponseTriggersIssueOpenedWriteScope(rawValue: "repository")
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let trigger =
+        AgentAutomationsGetRepoAutomationResponseTriggersIssueOpenedWriteScope(rawValue: "trigger")
+    public static let repository =
+        AgentAutomationsGetRepoAutomationResponseTriggersIssueOpenedWriteScope(rawValue: "repository")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -95,10 +112,14 @@ public struct AgentAutomationsGetRepoAutomationResponseTriggersIssueOpenedWriteS
 }
 
 /// The reaction type to add to the issue comment.
-public struct ReactionsCreateForIssueCommentRequestBodyContent: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ReactionsCreateForIssueCommentRequestBodyContent: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let plus1 = ReactionsCreateForIssueCommentRequestBodyContent(rawValue: "+1")
     public static let minus1 = ReactionsCreateForIssueCommentRequestBodyContent(rawValue: "-1")
     public static let laugh = ReactionsCreateForIssueCommentRequestBodyContent(rawValue: "laugh")
@@ -110,7 +131,7 @@ public struct ReactionsCreateForIssueCommentRequestBodyContent: RawRepresentable
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -123,14 +144,17 @@ public struct ReactionsCreateForIssueCommentRequestBodyContent: RawRepresentable
 public struct PullsMergeRequestBodyMergeMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let merge = PullsMergeRequestBodyMergeMethod(rawValue: "merge")
     public static let squash = PullsMergeRequestBodyMergeMethod(rawValue: "squash")
     public static let rebase = PullsMergeRequestBodyMergeMethod(rawValue: "rebase")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -139,10 +163,14 @@ public struct PullsMergeRequestBodyMergeMethod: RawRepresentable, Hashable, Coda
     }
 }
 
-public struct ReposListForAuthenticatedUserParameterX68ee8e50: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ReposListForAuthenticatedUserParameterX68ee8e50: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let all = ReposListForAuthenticatedUserParameterX68ee8e50(rawValue: "all")
     public static let owner = ReposListForAuthenticatedUserParameterX68ee8e50(rawValue: "owner")
     public static let `public` = ReposListForAuthenticatedUserParameterX68ee8e50(rawValue: "public")
@@ -151,7 +179,7 @@ public struct ReposListForAuthenticatedUserParameterX68ee8e50: RawRepresentable,
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -161,17 +189,24 @@ public struct ReposListForAuthenticatedUserParameterX68ee8e50: RawRepresentable,
 }
 
 /// The enablement status of Dependabot delegated alert dismissal. Requires Dependabot alerts to be enabled.
-public struct CodeSecurityCreateConfigurationRequestBodyDependabotDelegatedX3e83a0dd65: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct CodeSecurityCreateConfigurationRequestBodyDependabotDelegatedX3e83a0dd65: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let enabled = CodeSecurityCreateConfigurationRequestBodyDependabotDelegatedX3e83a0dd65(rawValue: "enabled")
-    public static let disabled = CodeSecurityCreateConfigurationRequestBodyDependabotDelegatedX3e83a0dd65(rawValue: "disabled")
-    public static let notSet = CodeSecurityCreateConfigurationRequestBodyDependabotDelegatedX3e83a0dd65(rawValue: "not_set")
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let enabled =
+        CodeSecurityCreateConfigurationRequestBodyDependabotDelegatedX3e83a0dd65(rawValue: "enabled")
+    public static let disabled =
+        CodeSecurityCreateConfigurationRequestBodyDependabotDelegatedX3e83a0dd65(rawValue: "disabled")
+    public static let notSet =
+        CodeSecurityCreateConfigurationRequestBodyDependabotDelegatedX3e83a0dd65(rawValue: "not_set")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -181,16 +216,20 @@ public struct CodeSecurityCreateConfigurationRequestBodyDependabotDelegatedX3e83
 }
 
 /// The status of the artifact. Can be either deployed or decommissioned.
-public struct OrgsCreateArtifactDeploymentRecordRequestBodyStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct OrgsCreateArtifactDeploymentRecordRequestBodyStatus: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let deployed = OrgsCreateArtifactDeploymentRecordRequestBodyStatus(rawValue: "deployed")
     public static let decommissioned = OrgsCreateArtifactDeploymentRecordRequestBodyStatus(rawValue: "decommissioned")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

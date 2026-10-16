@@ -3,22 +3,31 @@
 
 import Foundation
 
-// ActionsActions domain models
-extension ActionsForkPrWorkflowsPrivateReposRequest {
-    public init(from decoder: Decoder) throws {
+/// ActionsActions domain models
+public extension ActionsForkPrWorkflowsPrivateReposRequest {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.runWorkflowsFromForkPullRequests) else {
-            throw SdkValidationError(field: "run_workflows_from_fork_pull_requests", code: "required", message: "Validation failed for 'run_workflows_from_fork_pull_requests': value is required")
+            throw SdkValidationError(
+                field: "run_workflows_from_fork_pull_requests",
+                code: "required",
+                message: "Validation failed for 'run_workflows_from_fork_pull_requests': value is required"
+            )
         }
-        self.runWorkflowsFromForkPullRequests = try container.sdkDecodeRequired(.runWorkflowsFromForkPullRequests)
-        self.sendWriteTokensToWorkflows = try container.sdkDecodeIfPresent(.sendWriteTokensToWorkflows)
-        self.sendSecretsAndVariables = try container.sdkDecodeIfPresent(.sendSecretsAndVariables)
-        self.requireApprovalForForkPrWorkflows = try container.sdkDecodeIfPresent(.requireApprovalForForkPrWorkflows)
+        runWorkflowsFromForkPullRequests = try container.sdkDecodeRequired(.runWorkflowsFromForkPullRequests)
+        sendWriteTokensToWorkflows = try container.sdkDecodeIfPresent(.sendWriteTokensToWorkflows)
+        sendSecretsAndVariables = try container.sdkDecodeIfPresent(.sendSecretsAndVariables)
+        requireApprovalForForkPrWorkflows = try container.sdkDecodeIfPresent(.requireApprovalForForkPrWorkflows)
     }
 }
 
-extension ActionsForkPrWorkflowsPrivateReposRequest {
-    public init(runWorkflowsFromForkPullRequests: Bool, sendWriteTokensToWorkflows: Bool? = nil, sendSecretsAndVariables: Bool? = nil, requireApprovalForForkPrWorkflows: Bool? = nil) {
+public extension ActionsForkPrWorkflowsPrivateReposRequest {
+    init(
+        runWorkflowsFromForkPullRequests: Bool,
+        sendWriteTokensToWorkflows: Bool? = nil,
+        sendSecretsAndVariables: Bool? = nil,
+        requireApprovalForForkPrWorkflows: Bool? = nil
+    ) {
         self.runWorkflowsFromForkPullRequests = runWorkflowsFromForkPullRequests
         self.sendWriteTokensToWorkflows = sendWriteTokensToWorkflows
         self.sendSecretsAndVariables = sendSecretsAndVariables
@@ -39,25 +48,35 @@ public struct ActionsCacheList: Codable {
         case actionsCaches = "actions_caches"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsCacheList {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.totalCount) else {
-            throw SdkValidationError(field: "total_count", code: "required", message: "Validation failed for 'total_count': value is required")
-        }
-        guard container.contains(.actionsCaches) else {
-            throw SdkValidationError(field: "actions_caches", code: "required", message: "Validation failed for 'actions_caches': value is required")
-        }
-        self.totalCount = try container.sdkDecodeRequired(.totalCount)
-        self.actionsCaches = try container.sdkDecodeRequired(.actionsCaches)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsCacheList {
-    public init(totalCount: Int, actionsCaches: [ActionsCacheListActionsCachesItem]) {
+public extension ActionsCacheList {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.totalCount) else {
+            throw SdkValidationError(
+                field: "total_count",
+                code: "required",
+                message: "Validation failed for 'total_count': value is required"
+            )
+        }
+        guard container.contains(.actionsCaches) else {
+            throw SdkValidationError(
+                field: "actions_caches",
+                code: "required",
+                message: "Validation failed for 'actions_caches': value is required"
+            )
+        }
+        totalCount = try container.sdkDecodeRequired(.totalCount)
+        actionsCaches = try container.sdkDecodeRequired(.actionsCaches)
+    }
+}
+
+public extension ActionsCacheList {
+    init(totalCount: Int, actionsCaches: [ActionsCacheListActionsCachesItem]) {
         (self.totalCount, self.actionsCaches) = (totalCount, actionsCaches)
     }
 }
@@ -74,21 +93,27 @@ public struct ActionsWorkflowAccessToRepository: Codable {
         case accessLevel = "access_level"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsWorkflowAccessToRepository {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.accessLevel) else {
-            throw SdkValidationError(field: "access_level", code: "required", message: "Validation failed for 'access_level': value is required")
-        }
-        self.accessLevel = try container.sdkDecodeRequired(.accessLevel)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsWorkflowAccessToRepository {
-    public init(accessLevel: ActionsWorkflowAccessToRepositoryAccessLevel) {
+public extension ActionsWorkflowAccessToRepository {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.accessLevel) else {
+            throw SdkValidationError(
+                field: "access_level",
+                code: "required",
+                message: "Validation failed for 'access_level': value is required"
+            )
+        }
+        accessLevel = try container.sdkDecodeRequired(.accessLevel)
+    }
+}
+
+public extension ActionsWorkflowAccessToRepository {
+    init(accessLevel: ActionsWorkflowAccessToRepositoryAccessLevel) {
         self.accessLevel = accessLevel
     }
 }
@@ -105,22 +130,31 @@ public struct ActionsPolicyOrgConditionsVariant0: Codable {
         case workflowPath = "workflow_path"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsPolicyOrgConditionsVariant0 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.repositoryName) else {
-            throw SdkValidationError(field: "repository_name", code: "required", message: "Validation failed for 'repository_name': value is required")
-        }
-        self.repositoryName = try container.sdkDecodeRequired(.repositoryName)
-        self.workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsPolicyOrgConditionsVariant0 {
-    public init(repositoryName: RepositoryRulesetConditionsRepositoryNameTargetRepositoryName, workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil) {
+public extension ActionsPolicyOrgConditionsVariant0 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.repositoryName) else {
+            throw SdkValidationError(
+                field: "repository_name",
+                code: "required",
+                message: "Validation failed for 'repository_name': value is required"
+            )
+        }
+        repositoryName = try container.sdkDecodeRequired(.repositoryName)
+        workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
+    }
+}
+
+public extension ActionsPolicyOrgConditionsVariant0 {
+    init(
+        repositoryName: RepositoryRulesetConditionsRepositoryNameTargetRepositoryName,
+        workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil
+    ) {
         (self.repositoryName, self.workflowPath) = (repositoryName, workflowPath)
     }
 }
@@ -137,25 +171,35 @@ public struct ActionsRuleParamsActor: Codable {
         case type
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsRuleParamsActor {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.type = try container.sdkDecodeRequired(.type)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsRuleParamsActor {
-    public init(id: Int, type: ActionsRuleParamsActorType) {
+public extension ActionsRuleParamsActor {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.type) else {
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        type = try container.sdkDecodeRequired(.type)
+    }
+}
+
+public extension ActionsRuleParamsActor {
+    init(id: Int, type: ActionsRuleParamsActorType) {
         (self.id, self.type) = (id, type)
     }
 }
@@ -171,19 +215,19 @@ public struct ActionsCacheStorageLimitForRepository: Codable {
     }
 
     init() {
-        self.maxCacheSizeGb = nil
+        maxCacheSizeGb = nil
     }
 }
 
-extension ActionsCacheStorageLimitForRepository {
-    public init(from decoder: Decoder) throws {
+public extension ActionsCacheStorageLimitForRepository {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.maxCacheSizeGb = try container.sdkDecodeIfPresent(.maxCacheSizeGb)
+        maxCacheSizeGb = try container.sdkDecodeIfPresent(.maxCacheSizeGb)
     }
 }
 
-extension ActionsCacheStorageLimitForRepository {
-    public init(maxCacheSizeGb: Int? = nil) {
+public extension ActionsCacheStorageLimitForRepository {
+    init(maxCacheSizeGb: Int? = nil) {
         self.init()
         self.maxCacheSizeGb = maxCacheSizeGb
     }
@@ -193,12 +237,15 @@ extension ActionsCacheStorageLimitForRepository {
 public struct ActionsPolicyTarget: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let actions = ActionsPolicyTarget(rawValue: "actions")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -211,17 +258,21 @@ public struct ActionsPolicyTarget: RawRepresentable, Hashable, Codable, Sendable
 /// within the repository. `none` means the access is only possible from workflows in this repository. `user`
 /// level access allows sharing across user owned private repositories only. `organization` level access allows
 /// sharing across the organization.
-public struct ActionsWorkflowAccessToRepositoryAccessLevel: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ActionsWorkflowAccessToRepositoryAccessLevel: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let none = ActionsWorkflowAccessToRepositoryAccessLevel(rawValue: "none")
     public static let user = ActionsWorkflowAccessToRepositoryAccessLevel(rawValue: "user")
     public static let organization = ActionsWorkflowAccessToRepositoryAccessLevel(rawValue: "organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -234,7 +285,10 @@ public struct ActionsWorkflowAccessToRepositoryAccessLevel: RawRepresentable, Ha
 public struct ActionsHostedRunnerStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let ready = ActionsHostedRunnerStatus(rawValue: "Ready")
     public static let provisioning = ActionsHostedRunnerStatus(rawValue: "Provisioning")
     public static let shutdown = ActionsHostedRunnerStatus(rawValue: "Shutdown")
@@ -243,7 +297,7 @@ public struct ActionsHostedRunnerStatus: RawRepresentable, Hashable, Codable, Se
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -253,23 +307,32 @@ public struct ActionsHostedRunnerStatus: RawRepresentable, Hashable, Codable, Se
 }
 
 /// Required enumerated value serialized in the `allowed_events[]` wire field.
-public struct ActionsRuleRestrictActionEventsParametersAllowedEventsItem: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ActionsRuleRestrictActionEventsParametersAllowedEventsItem: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let branchProtectionRule = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "branch_protection_rule")
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let branchProtectionRule =
+        ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "branch_protection_rule")
     public static let checkRun = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "check_run")
     public static let checkSuite = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "check_suite")
     public static let create = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "create")
     public static let delete = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "delete")
     public static let deployment = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "deployment")
-    public static let deploymentStatus = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "deployment_status")
+    public static let deploymentStatus =
+        ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "deployment_status")
     public static let discussion = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "discussion")
-    public static let discussionComment = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "discussion_comment")
+    public static let discussionComment =
+        ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "discussion_comment")
     public static let fork = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "fork")
     public static let gollum = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "gollum")
-    public static let imageVersion = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "image_version")
-    public static let issueComment = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "issue_comment")
+    public static let imageVersion =
+        ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "image_version")
+    public static let issueComment =
+        ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "issue_comment")
     public static let issues = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "issues")
     public static let label = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "label")
     public static let mergeGroup = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "merge_group")
@@ -277,26 +340,34 @@ public struct ActionsRuleRestrictActionEventsParametersAllowedEventsItem: RawRep
     public static let pageBuild = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "page_build")
     public static let project = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "project")
     public static let projectCard = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "project_card")
-    public static let projectColumn = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "project_column")
+    public static let projectColumn =
+        ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "project_column")
     public static let `public` = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "public")
     public static let pullRequest = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "pull_request")
-    public static let pullRequestReview = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "pull_request_review")
-    public static let pullRequestReviewComment = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "pull_request_review_comment")
-    public static let pullRequestTarget = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "pull_request_target")
+    public static let pullRequestReview =
+        ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "pull_request_review")
+    public static let pullRequestReviewComment =
+        ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "pull_request_review_comment")
+    public static let pullRequestTarget =
+        ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "pull_request_target")
     public static let push = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "push")
-    public static let registryPackage = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "registry_package")
+    public static let registryPackage =
+        ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "registry_package")
     public static let release = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "release")
-    public static let repositoryDispatch = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "repository_dispatch")
+    public static let repositoryDispatch =
+        ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "repository_dispatch")
     public static let schedule = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "schedule")
     public static let status = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "status")
     public static let watch = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "watch")
-    public static let workflowCall = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "workflow_call")
-    public static let workflowDispatch = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "workflow_dispatch")
+    public static let workflowCall =
+        ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "workflow_call")
+    public static let workflowDispatch =
+        ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "workflow_dispatch")
     public static let workflowRun = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "workflow_run")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -327,14 +398,17 @@ public enum ActionsRuleRestrictActionsActorsType: String, CaseIterable, Codable 
 public struct ActionsPolicySourceType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let repository = ActionsPolicySourceType(rawValue: "Repository")
     public static let organization = ActionsPolicySourceType(rawValue: "Organization")
     public static let enterprise = ActionsPolicySourceType(rawValue: "Enterprise")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -347,14 +421,17 @@ public struct ActionsPolicySourceType: RawRepresentable, Hashable, Codable, Send
 public struct ActionsHostedRunnerCuratedImageSource: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let github = ActionsHostedRunnerCuratedImageSource(rawValue: "github")
     public static let partner = ActionsHostedRunnerCuratedImageSource(rawValue: "partner")
     public static let custom = ActionsHostedRunnerCuratedImageSource(rawValue: "custom")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -367,13 +444,16 @@ public struct ActionsHostedRunnerCuratedImageSource: RawRepresentable, Hashable,
 public struct ActionsDefaultWorkflowPermissions: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = ActionsDefaultWorkflowPermissions(rawValue: "read")
     public static let write = ActionsDefaultWorkflowPermissions(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -386,7 +466,10 @@ public struct ActionsDefaultWorkflowPermissions: RawRepresentable, Hashable, Cod
 public struct ActionsRuleParamsActorType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let user = ActionsRuleParamsActorType(rawValue: "User")
     public static let bot = ActionsRuleParamsActorType(rawValue: "Bot")
     public static let team = ActionsRuleParamsActorType(rawValue: "Team")
@@ -398,7 +481,7 @@ public struct ActionsRuleParamsActorType: RawRepresentable, Hashable, Codable, S
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -426,17 +509,24 @@ public enum ActionsRuleRestrictActionEventsType: String, CaseIterable, Codable {
 }
 
 /// The policy that controls when fork PR workflows require approval from a maintainer.
-public struct ActionsForkPrContributorApprovalApprovalPolicy: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ActionsForkPrContributorApprovalApprovalPolicy: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let firstTimeContributorsNewToGithub = ActionsForkPrContributorApprovalApprovalPolicy(rawValue: "first_time_contributors_new_to_github")
-    public static let firstTimeContributors = ActionsForkPrContributorApprovalApprovalPolicy(rawValue: "first_time_contributors")
-    public static let allExternalContributors = ActionsForkPrContributorApprovalApprovalPolicy(rawValue: "all_external_contributors")
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let firstTimeContributorsNewToGithub =
+        ActionsForkPrContributorApprovalApprovalPolicy(rawValue: "first_time_contributors_new_to_github")
+    public static let firstTimeContributors =
+        ActionsForkPrContributorApprovalApprovalPolicy(rawValue: "first_time_contributors")
+    public static let allExternalContributors =
+        ActionsForkPrContributorApprovalApprovalPolicy(rawValue: "all_external_contributors")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

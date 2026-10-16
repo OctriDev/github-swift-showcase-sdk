@@ -6,7 +6,8 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testActivityListPublicEventsForRepoNetworkActivityListPublicEventX93abe106c6ReachesMockAndDecodesResponse() async throws {
+    func testActivityListPublicEventsForRepoNetworkActivityListPublicEventX93abe106c6ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/301") else {
             return
         }
@@ -17,11 +18,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.activity.listPublicEventsForRepoNetwork(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("activityListPublicEventsForRepoNetwork did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 301)
@@ -80,7 +81,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActivityListReceivedEventsForUserActivityListReceivedEventsForUserReachesMockAndDecodesResponse() async throws {
+    func testActivityListReceivedEventsForUserActivityListReceivedEventsForUserReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -101,7 +103,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActivityListReceivedPublicEventsForUserActivityListReceivedPuX42bf15f5d8ReachesMockAndDecodesResponse() async throws {
+    func testActivityListReceivedPublicEventsForUserActivityListReceivedPuX42bf15f5d8ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -144,12 +147,16 @@ extension SdkMethodTests {
         )
     }
 
-    func testActivityListRepoNotificationsForAuthenticatedUserActivityListXaa7d5ebb12ReachesMockAndDecodesResponse() async throws {
+    func testActivityListRepoNotificationsForAuthenticatedUserActivityListXaa7d5ebb12ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        var options = try ActivityMethods.ActivityListRepoNotificationsForAuthenticatedUserOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""))
+        var options = try ActivityMethods.ActivityListRepoNotificationsForAuthenticatedUserOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\"")
+        )
         options.all = try decoded("false")
         options.participating = try decoded("false")
         options.since = try decoded("\"2024-01-01T00:00:00Z\"")
@@ -170,7 +177,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActivityListReposStarredByAuthenticatedUserActivityListReposSX835e356f21ReachesMockAndDecodesResponse() async throws {
+    func testActivityListReposStarredByAuthenticatedUserActivityListReposSX835e356f21ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -192,7 +200,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActivityListReposStarredByAuthenticatedUserActivityListReposSX1d85ccf29aReachesMockAndDecodesResponse() async throws {
+    func testActivityListReposStarredByAuthenticatedUserActivityListReposSX1d85ccf29aReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -203,11 +212,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.activity.listReposStarredByAuthenticatedUser(
-            sort: decoded("\"created\""),
-            direction: decoded("\"desc\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                sort: decoded("\"created\""),
+                direction: decoded("\"desc\""),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("activityListReposStarredByAuthenticatedUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -301,11 +310,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.activity.listStargazersForRepo(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("activityListStargazersForRepo did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 422)
@@ -322,7 +331,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActivityListWatchedReposForAuthenticatedUserActivityListWatchX0471b841adReachesMockAndDecodesResponse() async throws {
+    func testActivityListWatchedReposForAuthenticatedUserActivityListWatchX0471b841adReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -342,7 +352,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActivityListWatchedReposForAuthenticatedUserActivityListWatchXf3ef7811a4ReachesMockAndDecodesResponse() async throws {
+    func testActivityListWatchedReposForAuthenticatedUserActivityListWatchXf3ef7811a4ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -353,9 +364,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.activity.listWatchedReposForAuthenticatedUser(
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("activityListWatchedReposForAuthenticatedUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -414,7 +425,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActivityMarkNotificationsAsReadActivityMarkNotificationsAsRead401ReachesMockAndDecodesResponse() async throws {
+    func testActivityMarkNotificationsAsReadActivityMarkNotificationsAsRead401ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -425,9 +437,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.activity.markNotificationsAsRead(
-            lastReadAt: decoded("\"2022-06-10T00:00:00Z\""),
-            read: decoded("true")
-        )
+                lastReadAt: decoded("\"2022-06-10T00:00:00Z\""),
+                read: decoded("true")
+            )
             XCTFail("activityMarkNotificationsAsRead did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -444,7 +456,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActivityMarkRepoNotificationsAsReadActivityMarkRepoNotificationsAsReadReachesMockAndDecodesResponse() async throws {
+    func testActivityMarkRepoNotificationsAsReadActivityMarkRepoNotificationsAsReadReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -498,8 +511,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.activity.markThreadAsRead(
-            threadId: decoded("1")
-        )
+                threadId: decoded("1")
+            )
             XCTFail("activityMarkThreadAsRead did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)

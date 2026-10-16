@@ -6,12 +6,17 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testSecurityAdvisoriesUpdateRepositoryAdvisorySecurityAdvisoriesUX2d139857b0ReachesMockAndDecodesResponse() async throws {
+    func testSecurityAdvisoriesUpdateRepositoryAdvisorySecurityAdvisoriesUX2d139857b0ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        var options = try SecurityAdvisoriesMethods.SecurityAdvisoriesUpdateRepositoryAdvisoryOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), ghsaId: decoded("\"ghsa-1\""))
+        var options = try SecurityAdvisoriesMethods.SecurityAdvisoriesUpdateRepositoryAdvisoryOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            ghsaId: decoded("\"ghsa-1\"")
+        )
         options.summary = try decoded("null")
         options.description = try decoded("null")
         options.cveId = try decoded("null")
@@ -25,8 +30,8 @@ extension SdkMethodTests {
         options.collaboratingTeams = try decoded("null")
         do {
             _ = try await client.securityAdvisories.updateRepositoryAdvisory(
-            options: options
-        )
+                options: options
+            )
             XCTFail("securityAdvisoriesUpdateRepositoryAdvisory decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -35,12 +40,17 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testSecurityAdvisoriesUpdateRepositoryAdvisorySecurityAdvisoriesUX8186fcab1cReachesMockAndDecodesResponse() async throws {
+    func testSecurityAdvisoriesUpdateRepositoryAdvisorySecurityAdvisoriesUX8186fcab1cReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
         _ = client
-        var options = try SecurityAdvisoriesMethods.SecurityAdvisoriesUpdateRepositoryAdvisoryOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), ghsaId: decoded("\"ghsa-1\""))
+        var options = try SecurityAdvisoriesMethods.SecurityAdvisoriesUpdateRepositoryAdvisoryOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            ghsaId: decoded("\"ghsa-1\"")
+        )
         options.summary = try decoded("null")
         options.description = try decoded("null")
         options.cveId = try decoded("null")
@@ -58,8 +68,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.securityAdvisories.updateRepositoryAdvisory(
-            options: options
-        )
+                options: options
+            )
             XCTFail("securityAdvisoriesUpdateRepositoryAdvisory did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -99,9 +109,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.teams.addMemberLegacy(
-            teamId: decoded("1"),
-            username: decoded("\"Example Name\"")
-        )
+                teamId: decoded("1"),
+                username: decoded("\"Example Name\"")
+            )
             XCTFail("teamsAddMemberLegacy did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -118,7 +128,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testTeamsAddOrUpdateMembershipForUserInOrgTeamsAddOrUpdateMembersX46328b790eReachesMockAndDecodesResponse() async throws {
+    func testTeamsAddOrUpdateMembershipForUserInOrgTeamsAddOrUpdateMembersX46328b790eReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -140,7 +151,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testTeamsAddOrUpdateMembershipForUserLegacyTeamsAddOrUpdateMemberX354259d7a6ReachesMockAndDecodesResponse() async throws {
+    func testTeamsAddOrUpdateMembershipForUserLegacyTeamsAddOrUpdateMemberX354259d7a6ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -161,7 +173,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testTeamsAddOrUpdateMembershipForUserLegacyTeamsAddOrUpdateMemberXfaa587db9eReachesMockAndDecodesResponse() async throws {
+    func testTeamsAddOrUpdateMembershipForUserLegacyTeamsAddOrUpdateMemberXfaa587db9eReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -172,10 +185,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.teams.addOrUpdateMembershipForUserLegacy(
-            teamId: decoded("1"),
-            username: decoded("\"Example Name\""),
-            role: decoded("\"member\"")
-        )
+                teamId: decoded("1"),
+                username: decoded("\"Example Name\""),
+                role: decoded("\"member\"")
+            )
             XCTFail("teamsAddOrUpdateMembershipForUserLegacy did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -192,7 +205,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testTeamsAddOrUpdateRepoPermissionsInOrgTeamsAddOrUpdateRepoPermissionsInOrgReachesMockAndDecodesResponse() async throws {
+    func testTeamsAddOrUpdateRepoPermissionsInOrgTeamsAddOrUpdateRepoPermissionsInOrgReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -207,7 +221,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testTeamsAddOrUpdateRepoPermissionsLegacyTeamsAddOrUpdateRepoPermX663837dd50ReachesMockAndDecodesResponse() async throws {
+    func testTeamsAddOrUpdateRepoPermissionsLegacyTeamsAddOrUpdateRepoPermX663837dd50ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -221,7 +236,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testTeamsAddOrUpdateRepoPermissionsLegacyTeamsAddOrUpdateRepoPermX3dc6ddc1c1ReachesMockAndDecodesResponse() async throws {
+    func testTeamsAddOrUpdateRepoPermissionsLegacyTeamsAddOrUpdateRepoPermX3dc6ddc1c1ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -232,11 +248,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.teams.addOrUpdateRepoPermissionsLegacy(
-            teamId: decoded("1"),
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            permission: decoded("\"push\"")
-        )
+                teamId: decoded("1"),
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                permission: decoded("\"push\"")
+            )
             XCTFail("teamsAddOrUpdateRepoPermissionsLegacy did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -253,7 +269,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testTeamsCheckPermissionsForRepoInOrgTeamsCheckPermissionsForRepoInOrgReachesMockAndDecodesResponse() async throws {
+    func testTeamsCheckPermissionsForRepoInOrgTeamsCheckPermissionsForRepoInOrgReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -275,7 +292,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testTeamsCheckPermissionsForRepoLegacyTeamsCheckPermissionsForRepoLegacyReachesMockAndDecodesResponse() async throws {
+    func testTeamsCheckPermissionsForRepoLegacyTeamsCheckPermissionsForRepoLegacyReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -312,8 +330,8 @@ extension SdkMethodTests {
         options.parentTeamSlug = try decoded("null")
         do {
             _ = try await client.teams.create(
-            options: options
-        )
+                options: options
+            )
             XCTFail("teamsCreate decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -342,8 +360,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.teams.create(
-            options: options
-        )
+                options: options
+            )
             XCTFail("teamsCreate did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -394,8 +412,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.teams.deleteLegacy(
-            teamId: decoded("1")
-        )
+                teamId: decoded("1")
+            )
             XCTFail("teamsDeleteLegacy did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -419,9 +437,9 @@ extension SdkMethodTests {
         _ = client
         do {
             _ = try await client.teams.getByName(
-            org: decoded("\"org\""),
-            teamSlug: decoded("\"team_slug\"")
-        )
+                org: decoded("\"org\""),
+                teamSlug: decoded("\"team_slug\"")
+            )
             XCTFail("teamsGetByName decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -441,9 +459,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.teams.getByName(
-            org: decoded("\"org\""),
-            teamSlug: decoded("\"team_slug\"")
-        )
+                org: decoded("\"org\""),
+                teamSlug: decoded("\"team_slug\"")
+            )
             XCTFail("teamsGetByName did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -467,8 +485,8 @@ extension SdkMethodTests {
         _ = client
         do {
             _ = try await client.teams.getLegacy(
-            teamId: decoded("1")
-        )
+                teamId: decoded("1")
+            )
             XCTFail("teamsGetLegacy decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -488,8 +506,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.teams.getLegacy(
-            teamId: decoded("1")
-        )
+                teamId: decoded("1")
+            )
             XCTFail("teamsGetLegacy did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)

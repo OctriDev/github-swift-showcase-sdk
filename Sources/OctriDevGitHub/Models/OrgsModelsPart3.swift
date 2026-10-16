@@ -3,9 +3,77 @@
 
 import Foundation
 
-// Orgs domain models
-extension OrganizationFull {
-    public init(login: String, id: Int, nodeId: String, url: String, reposUrl: String, eventsUrl: String, hooksUrl: String, issuesUrl: String, membersUrl: String, publicMembersUrl: String, avatarUrl: String, description: String?, hasOrganizationProjects: Bool, hasRepositoryProjects: Bool, publicRepos: Int, publicGists: Int, followers: Int, following: Int, htmlUrl: String, type: String, createdAt: Date, updatedAt: Date, archivedAt: Date?, name: String? = nil, company: String? = nil, blog: String? = nil, location: String? = nil, email: String? = nil, twitterUsername: String? = nil, isVerified: Bool? = nil, totalPrivateRepos: Int? = nil, ownedPrivateRepos: Int? = nil, privateGists: Int? = nil, diskUsage: Int? = nil, collaborators: Int? = nil, billingEmail: String? = nil, plan: OrganizationFullPlan? = nil, defaultRepositoryPermission: String? = nil, defaultRepositoryBranch: String? = nil, membersCanCreateRepositories: Bool? = nil, twoFactorRequirementEnabled: Bool? = nil, membersAllowedRepositoryCreationType: String? = nil, membersCanCreatePublicRepositories: Bool? = nil, membersCanCreatePrivateRepositories: Bool? = nil, membersCanCreateInternalRepositories: Bool? = nil, membersCanCreatePages: Bool? = nil, membersCanCreatePublicPages: Bool? = nil, membersCanCreatePrivatePages: Bool? = nil, membersCanDeleteRepositories: Bool? = nil, membersCanChangeRepoVisibility: Bool? = nil, membersCanInviteOutsideCollaborators: Bool? = nil, membersCanDeleteIssues: Bool? = nil, displayCommenterFullNameSettingEnabled: Bool? = nil, readersCanCreateDiscussions: Bool? = nil, membersCanCreateTeams: Bool? = nil, membersCanViewDependencyInsights: Bool? = nil, membersCanForkPrivateRepositories: Bool? = nil, webCommitSignoffRequired: Bool? = nil, advancedSecurityEnabledForNewRepositories: Bool? = nil, dependabotAlertsEnabledForNewRepositories: Bool? = nil, dependabotSecurityUpdatesEnabledForNewRepositories: Bool? = nil, dependencyGraphEnabledForNewRepositories: Bool? = nil, secretScanningEnabledForNewRepositories: Bool? = nil, secretScanningPushProtectionEnabledForNewRepositories: Bool? = nil, secretScanningPushProtectionCustomLinkEnabled: Bool? = nil, secretScanningPushProtectionCustomLink: String? = nil, deployKeysEnabledForRepositories: Bool? = nil) throws {
+/// Orgs domain models
+public extension OrganizationFull {
+    init(
+        login: String,
+        id: Int,
+        nodeId: String,
+        url: String,
+        reposUrl: String,
+        eventsUrl: String,
+        hooksUrl: String,
+        issuesUrl: String,
+        membersUrl: String,
+        publicMembersUrl: String,
+        avatarUrl: String,
+        description: String?,
+        hasOrganizationProjects: Bool,
+        hasRepositoryProjects: Bool,
+        publicRepos: Int,
+        publicGists: Int,
+        followers: Int,
+        following: Int,
+        htmlUrl: String,
+        type: String,
+        createdAt: Date,
+        updatedAt: Date,
+        archivedAt: Date?,
+        name: String? = nil,
+        company: String? = nil,
+        blog: String? = nil,
+        location: String? = nil,
+        email: String? = nil,
+        twitterUsername: String? = nil,
+        isVerified: Bool? = nil,
+        totalPrivateRepos: Int? = nil,
+        ownedPrivateRepos: Int? = nil,
+        privateGists: Int? = nil,
+        diskUsage: Int? = nil,
+        collaborators: Int? = nil,
+        billingEmail: String? = nil,
+        plan: OrganizationFullPlan? = nil,
+        defaultRepositoryPermission: String? = nil,
+        defaultRepositoryBranch: String? = nil,
+        membersCanCreateRepositories: Bool? = nil,
+        twoFactorRequirementEnabled: Bool? = nil,
+        membersAllowedRepositoryCreationType: String? = nil,
+        membersCanCreatePublicRepositories: Bool? = nil,
+        membersCanCreatePrivateRepositories: Bool? = nil,
+        membersCanCreateInternalRepositories: Bool? = nil,
+        membersCanCreatePages: Bool? = nil,
+        membersCanCreatePublicPages: Bool? = nil,
+        membersCanCreatePrivatePages: Bool? = nil,
+        membersCanDeleteRepositories: Bool? = nil,
+        membersCanChangeRepoVisibility: Bool? = nil,
+        membersCanInviteOutsideCollaborators: Bool? = nil,
+        membersCanDeleteIssues: Bool? = nil,
+        displayCommenterFullNameSettingEnabled: Bool? = nil,
+        readersCanCreateDiscussions: Bool? = nil,
+        membersCanCreateTeams: Bool? = nil,
+        membersCanViewDependencyInsights: Bool? = nil,
+        membersCanForkPrivateRepositories: Bool? = nil,
+        webCommitSignoffRequired: Bool? = nil,
+        advancedSecurityEnabledForNewRepositories: Bool? = nil,
+        dependabotAlertsEnabledForNewRepositories: Bool? = nil,
+        dependabotSecurityUpdatesEnabledForNewRepositories: Bool? = nil,
+        dependencyGraphEnabledForNewRepositories: Bool? = nil,
+        secretScanningEnabledForNewRepositories: Bool? = nil,
+        secretScanningPushProtectionEnabledForNewRepositories: Bool? = nil,
+        secretScanningPushProtectionCustomLinkEnabled: Bool? = nil,
+        secretScanningPushProtectionCustomLink: String? = nil,
+        deployKeysEnabledForRepositories: Bool? = nil
+    ) throws {
         (self.login, self.id) = (login, id)
         (self.nodeId, self.url) = (nodeId, url)
         (self.reposUrl, self.eventsUrl) = (reposUrl, eventsUrl)
@@ -51,7 +119,9 @@ extension OrganizationFull {
         self.dependabotSecurityUpdatesEnabledForNewRepositories = dependabotSecurityUpdatesEnabledForNewRepositories
         self.dependencyGraphEnabledForNewRepositories = dependencyGraphEnabledForNewRepositories
         self.secretScanningEnabledForNewRepositories = secretScanningEnabledForNewRepositories
-        self.secretScanningPushProtectionEnabledForNewRepositories = secretScanningPushProtectionEnabledForNewRepositories
+        self
+            .secretScanningPushProtectionEnabledForNewRepositories =
+            secretScanningPushProtectionEnabledForNewRepositories
         self.secretScanningPushProtectionCustomLinkEnabled = secretScanningPushProtectionCustomLinkEnabled
         self.secretScanningPushProtectionCustomLink = secretScanningPushProtectionCustomLink
         self.deployKeysEnabledForRepositories = deployKeysEnabledForRepositories
@@ -61,22 +131,22 @@ extension OrganizationFull {
 
 extension OrganizationFull {
     func sdkValidateConstraints() throws {
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("repos_url", self.reposUrl)
-            try sdkValidateUri("events_url", self.eventsUrl)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-        if let value = self.archivedAt {
+        try sdkValidateUri("url", url)
+        try sdkValidateUri("repos_url", reposUrl)
+        try sdkValidateUri("events_url", eventsUrl)
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+        if let value = archivedAt {
             try sdkValidateDateTime("archived_at", sdkWireString(value))
         }
-        if let value = self.blog {
+        if let value = blog {
             try sdkValidateUri("blog", value)
         }
-        if let value = self.email {
+        if let value = email {
             try sdkValidateEmail("email", value)
         }
-        if let value = self.billingEmail {
+        if let value = billingEmail {
             try sdkValidateEmail("billing_email", value)
         }
     }
@@ -106,28 +176,43 @@ public struct ApiInsightsUserStatsItem: Codable {
     }
 
     init() {
-        (self.actorType, self.actorName, self.actorId, self.integrationId, self.oauthApplicationId) = (nil, nil, nil, nil, nil)
-        (self.totalRequestCount, self.rateLimitedRequestCount, self.lastRateLimitedTimestamp, self.lastRequestTimestamp) = (nil, nil, nil, nil)
+        (actorType, actorName, actorId, integrationId, oauthApplicationId) = (nil, nil, nil, nil, nil)
+        (totalRequestCount, rateLimitedRequestCount, lastRateLimitedTimestamp, lastRequestTimestamp) = (
+            nil,
+            nil,
+            nil,
+            nil
+        )
     }
 }
 
-extension ApiInsightsUserStatsItem {
-    public init(from decoder: Decoder) throws {
+public extension ApiInsightsUserStatsItem {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.actorType = try container.sdkDecodeIfPresent(.actorType)
-        self.actorName = try container.sdkDecodeIfPresent(.actorName)
-        self.actorId = try container.sdkDecodeIfPresent(.actorId)
-        self.integrationId = try container.sdkDecodeIfPresent(.integrationId)
-        self.oauthApplicationId = try container.sdkDecodeIfPresent(.oauthApplicationId)
-        self.totalRequestCount = try container.sdkDecodeIfPresent(.totalRequestCount)
-        self.rateLimitedRequestCount = try container.sdkDecodeIfPresent(.rateLimitedRequestCount)
-        self.lastRateLimitedTimestamp = try container.sdkDecodeIfPresent(.lastRateLimitedTimestamp)
-        self.lastRequestTimestamp = try container.sdkDecodeIfPresent(.lastRequestTimestamp)
+        actorType = try container.sdkDecodeIfPresent(.actorType)
+        actorName = try container.sdkDecodeIfPresent(.actorName)
+        actorId = try container.sdkDecodeIfPresent(.actorId)
+        integrationId = try container.sdkDecodeIfPresent(.integrationId)
+        oauthApplicationId = try container.sdkDecodeIfPresent(.oauthApplicationId)
+        totalRequestCount = try container.sdkDecodeIfPresent(.totalRequestCount)
+        rateLimitedRequestCount = try container.sdkDecodeIfPresent(.rateLimitedRequestCount)
+        lastRateLimitedTimestamp = try container.sdkDecodeIfPresent(.lastRateLimitedTimestamp)
+        lastRequestTimestamp = try container.sdkDecodeIfPresent(.lastRequestTimestamp)
     }
 }
 
-extension ApiInsightsUserStatsItem {
-    public init(actorType: String? = nil, actorName: String? = nil, actorId: Int? = nil, integrationId: Int? = nil, oauthApplicationId: Int? = nil, totalRequestCount: Int? = nil, rateLimitedRequestCount: Int? = nil, lastRateLimitedTimestamp: String? = nil, lastRequestTimestamp: String? = nil) {
+public extension ApiInsightsUserStatsItem {
+    init(
+        actorType: String? = nil,
+        actorName: String? = nil,
+        actorId: Int? = nil,
+        integrationId: Int? = nil,
+        oauthApplicationId: Int? = nil,
+        totalRequestCount: Int? = nil,
+        rateLimitedRequestCount: Int? = nil,
+        lastRateLimitedTimestamp: String? = nil,
+        lastRequestTimestamp: String? = nil
+    ) {
         self.init()
         (self.actorType, self.actorName) = (actorType, actorName)
         (self.actorId, self.integrationId) = (actorId, integrationId)
@@ -186,45 +271,59 @@ public struct OrgHook: Codable {
         case deliveriesUrl = "deliveries_url"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension OrgHook {
-    public init(from decoder: Decoder) throws {
+public extension OrgHook {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.pingUrl = try container.sdkDecodeRequired(.pingUrl)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.events = try container.sdkDecodeRequired(.events)
-        self.active = try container.sdkDecodeRequired(.active)
-        self.config = try container.sdkDecodeRequired(.config)
-        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.type = try container.sdkDecodeRequired(.type)
-        self.deliveriesUrl = try container.sdkDecodeIfPresent(.deliveriesUrl)
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("ping_url", self.pingUrl)
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-        if let value = self.deliveriesUrl {
+        id = try container.sdkDecodeRequired(.id)
+        url = try container.sdkDecodeRequired(.url)
+        pingUrl = try container.sdkDecodeRequired(.pingUrl)
+        name = try container.sdkDecodeRequired(.name)
+        events = try container.sdkDecodeRequired(.events)
+        active = try container.sdkDecodeRequired(.active)
+        config = try container.sdkDecodeRequired(.config)
+        updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        type = try container.sdkDecodeRequired(.type)
+        deliveriesUrl = try container.sdkDecodeIfPresent(.deliveriesUrl)
+        try sdkValidateUri("url", url)
+        try sdkValidateUri("ping_url", pingUrl)
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        if let value = deliveriesUrl {
             try sdkValidateUri("deliveries_url", value)
         }
     }
 }
 
-extension OrgHook {
-    public init(id: Int, url: String, pingUrl: String, name: String, events: [String], active: Bool, config: OrgHookConfig, updatedAt: Date, createdAt: Date, type: String, deliveriesUrl: String? = nil) throws {
+public extension OrgHook {
+    init(
+        id: Int,
+        url: String,
+        pingUrl: String,
+        name: String,
+        events: [String],
+        active: Bool,
+        config: OrgHookConfig,
+        updatedAt: Date,
+        createdAt: Date,
+        type: String,
+        deliveriesUrl: String? = nil
+    ) throws {
         (self.id, self.url) = (id, url)
         (self.pingUrl, self.name) = (pingUrl, name)
         (self.events, self.active) = (events, active)
         (self.config, self.updatedAt) = (config, updatedAt)
         (self.createdAt, self.type) = (createdAt, type)
         self.deliveriesUrl = deliveriesUrl
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("ping_url", self.pingUrl)
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        try sdkValidateUri("url", self.url)
+        try sdkValidateUri("ping_url", self.pingUrl)
+        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
         if let value = self.deliveriesUrl {
             try sdkValidateUri("deliveries_url", value)
         }
@@ -249,27 +348,37 @@ public struct OrganizationUpdateIssueType: Codable {
         case color
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension OrganizationUpdateIssueType {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        guard container.contains(.isEnabled) else {
-            throw SdkValidationError(field: "is_enabled", code: "required", message: "Validation failed for 'is_enabled': value is required")
-        }
-        self.name = try container.sdkDecodeRequired(.name)
-        self.isEnabled = try container.sdkDecodeRequired(.isEnabled)
-        self.description = try container.sdkDecodeIfPresent(.description)
-        self.color = try container.sdkDecodeIfPresent(.color)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension OrganizationUpdateIssueType {
-    public init(name: String, isEnabled: Bool, description: String? = nil, color: OrganizationUpdateIssueTypeColor? = nil) {
+public extension OrganizationUpdateIssueType {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        guard container.contains(.isEnabled) else {
+            throw SdkValidationError(
+                field: "is_enabled",
+                code: "required",
+                message: "Validation failed for 'is_enabled': value is required"
+            )
+        }
+        name = try container.sdkDecodeRequired(.name)
+        isEnabled = try container.sdkDecodeRequired(.isEnabled)
+        description = try container.sdkDecodeIfPresent(.description)
+        color = try container.sdkDecodeIfPresent(.color)
+    }
+}
+
+public extension OrganizationUpdateIssueType {
+    init(name: String, isEnabled: Bool, description: String? = nil, color: OrganizationUpdateIssueTypeColor? = nil) {
         (self.name, self.isEnabled) = (name, isEnabled)
         (self.description, self.color) = (description, color)
     }
@@ -304,27 +413,41 @@ public struct CustomPropertySetPayload: Codable {
         case requireExplicitValues = "require_explicit_values"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension CustomPropertySetPayload {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.valueType) else {
-            throw SdkValidationError(field: "value_type", code: "required", message: "Validation failed for 'value_type': value is required")
-        }
-        self.valueType = try container.sdkDecodeRequired(.valueType)
-        self.required = try container.sdkDecodeIfPresent(.required)
-        self.defaultValue = try container.sdkDecodeIfPresent(.defaultValue)
-        self.description = try container.sdkDecodeIfPresent(.description)
-        self.allowedValues = try container.sdkDecodeIfPresent(.allowedValues)
-        self.valuesEditableBy = try container.sdkDecodeIfPresent(.valuesEditableBy)
-        self.requireExplicitValues = try container.sdkDecodeIfPresent(.requireExplicitValues)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension CustomPropertySetPayload {
-    public init(valueType: CustomPropertySetPayloadValueType, required: Bool? = nil, defaultValue: CustomPropertySetPayloadDefaultValue? = nil, description: String? = nil, allowedValues: [String]? = nil, valuesEditableBy: CustomPropertySetPayloadValuesEditableBy? = nil, requireExplicitValues: Bool? = nil) {
+public extension CustomPropertySetPayload {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.valueType) else {
+            throw SdkValidationError(
+                field: "value_type",
+                code: "required",
+                message: "Validation failed for 'value_type': value is required"
+            )
+        }
+        valueType = try container.sdkDecodeRequired(.valueType)
+        required = try container.sdkDecodeIfPresent(.required)
+        defaultValue = try container.sdkDecodeIfPresent(.defaultValue)
+        description = try container.sdkDecodeIfPresent(.description)
+        allowedValues = try container.sdkDecodeIfPresent(.allowedValues)
+        valuesEditableBy = try container.sdkDecodeIfPresent(.valuesEditableBy)
+        requireExplicitValues = try container.sdkDecodeIfPresent(.requireExplicitValues)
+    }
+}
+
+public extension CustomPropertySetPayload {
+    init(
+        valueType: CustomPropertySetPayloadValueType,
+        required: Bool? = nil,
+        defaultValue: CustomPropertySetPayloadDefaultValue? = nil,
+        description: String? = nil,
+        allowedValues: [String]? = nil,
+        valuesEditableBy: CustomPropertySetPayloadValuesEditableBy? = nil,
+        requireExplicitValues: Bool? = nil
+    ) {
         (self.valueType, self.required) = (valueType, required)
         (self.defaultValue, self.description) = (defaultValue, description)
         (self.allowedValues, self.valuesEditableBy) = (allowedValues, valuesEditableBy)
@@ -353,31 +476,51 @@ public struct OrganizationUpdateIssueFieldOptionsItem: Codable {
         case description
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension OrganizationUpdateIssueFieldOptionsItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        guard container.contains(.color) else {
-            throw SdkValidationError(field: "color", code: "required", message: "Validation failed for 'color': value is required")
-        }
-        guard container.contains(.priority) else {
-            throw SdkValidationError(field: "priority", code: "required", message: "Validation failed for 'priority': value is required")
-        }
-        self.name = try container.sdkDecodeRequired(.name)
-        self.color = try container.sdkDecodeRequired(.color)
-        self.priority = try container.sdkDecodeRequired(.priority)
-        self.id = try container.sdkDecodeIfPresent(.id)
-        self.description = try container.sdkDecodeIfPresent(.description)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension OrganizationUpdateIssueFieldOptionsItem {
-    public init(name: String, color: OrganizationUpdateIssueFieldOptionsItemColor, priority: Int, id: Int? = nil, description: String? = nil) {
+public extension OrganizationUpdateIssueFieldOptionsItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        guard container.contains(.color) else {
+            throw SdkValidationError(
+                field: "color",
+                code: "required",
+                message: "Validation failed for 'color': value is required"
+            )
+        }
+        guard container.contains(.priority) else {
+            throw SdkValidationError(
+                field: "priority",
+                code: "required",
+                message: "Validation failed for 'priority': value is required"
+            )
+        }
+        name = try container.sdkDecodeRequired(.name)
+        color = try container.sdkDecodeRequired(.color)
+        priority = try container.sdkDecodeRequired(.priority)
+        id = try container.sdkDecodeIfPresent(.id)
+        description = try container.sdkDecodeIfPresent(.description)
+    }
+}
+
+public extension OrganizationUpdateIssueFieldOptionsItem {
+    init(
+        name: String,
+        color: OrganizationUpdateIssueFieldOptionsItemColor,
+        priority: Int,
+        id: Int? = nil,
+        description: String? = nil
+    ) {
         (self.name, self.color) = (name, color)
         (self.priority, self.id) = (priority, id)
         self.description = description
@@ -406,25 +549,38 @@ public struct ApiInsightsRouteStatsItem: Codable {
     }
 
     init() {
-        (self.httpMethod, self.apiRoute, self.totalRequestCount, self.rateLimitedRequestCount, self.lastRateLimitedTimestamp) = (nil, nil, nil, nil, nil)
-        self.lastRequestTimestamp = nil
+        (httpMethod, apiRoute, totalRequestCount, rateLimitedRequestCount, lastRateLimitedTimestamp) = (
+            nil,
+            nil,
+            nil,
+            nil,
+            nil
+        )
+        lastRequestTimestamp = nil
     }
 }
 
-extension ApiInsightsRouteStatsItem {
-    public init(from decoder: Decoder) throws {
+public extension ApiInsightsRouteStatsItem {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.httpMethod = try container.sdkDecodeIfPresent(.httpMethod)
-        self.apiRoute = try container.sdkDecodeIfPresent(.apiRoute)
-        self.totalRequestCount = try container.sdkDecodeIfPresent(.totalRequestCount)
-        self.rateLimitedRequestCount = try container.sdkDecodeIfPresent(.rateLimitedRequestCount)
-        self.lastRateLimitedTimestamp = try container.sdkDecodeIfPresent(.lastRateLimitedTimestamp)
-        self.lastRequestTimestamp = try container.sdkDecodeIfPresent(.lastRequestTimestamp)
+        httpMethod = try container.sdkDecodeIfPresent(.httpMethod)
+        apiRoute = try container.sdkDecodeIfPresent(.apiRoute)
+        totalRequestCount = try container.sdkDecodeIfPresent(.totalRequestCount)
+        rateLimitedRequestCount = try container.sdkDecodeIfPresent(.rateLimitedRequestCount)
+        lastRateLimitedTimestamp = try container.sdkDecodeIfPresent(.lastRateLimitedTimestamp)
+        lastRequestTimestamp = try container.sdkDecodeIfPresent(.lastRequestTimestamp)
     }
 }
 
-extension ApiInsightsRouteStatsItem {
-    public init(httpMethod: String? = nil, apiRoute: String? = nil, totalRequestCount: Int? = nil, rateLimitedRequestCount: Int? = nil, lastRateLimitedTimestamp: String? = nil, lastRequestTimestamp: String? = nil) {
+public extension ApiInsightsRouteStatsItem {
+    init(
+        httpMethod: String? = nil,
+        apiRoute: String? = nil,
+        totalRequestCount: Int? = nil,
+        rateLimitedRequestCount: Int? = nil,
+        lastRateLimitedTimestamp: String? = nil,
+        lastRequestTimestamp: String? = nil
+    ) {
         self.init()
         (self.httpMethod, self.apiRoute) = (httpMethod, apiRoute)
         self.totalRequestCount = totalRequestCount

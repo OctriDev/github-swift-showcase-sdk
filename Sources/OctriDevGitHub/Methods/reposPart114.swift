@@ -6,10 +6,15 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ReposMethods {
-    /// Updates GitHub Pages settings for a repository. Provide at least one of `build_type`, `source`, or `cname`; `build_type` accepts `legacy` or `workflow`, and `source` accepts a branch name with an optional `/docs` path or an object containing `branch` and `path`. The authenticated user must be a repository administrator, maintainer, or have the `manage GitHub Pages settings` permission.
+public extension ReposMethods {
+    /// Updates GitHub Pages settings for a repository. Provide at least one of `build_type`, `source`, or `cname`;
+    /// `build_type` accepts `legacy` or `workflow`, and `source` accepts a branch name with an optional `/docs` path or
+    /// an object containing `branch` and `path`. The authenticated user must be a repository administrator, maintainer,
+    /// or have the `manage GitHub Pages settings` permission.
     ///
-    /// Updates information for a GitHub Pages site. For more information, see "About GitHub Pages. The authenticated user must be a repository administrator, maintainer, or have the 'manage GitHub Pages settings' permission. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    /// Updates information for a GitHub Pages site. For more information, see "About GitHub Pages. The authenticated
+    /// user must be a repository administrator, maintainer, or have the 'manage GitHub Pages settings' permission.
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -27,9 +32,38 @@ extension ReposMethods {
     ///   `workflow` means that the site is built by a custom GitHub Actions workflow.
     ///   `legacy` means that the site is built by GitHub when changes are pushed to a
     ///   specific branch.
-    public static func reposUpdateInformationAboutPagesSite(config: ClientConfig, owner: String, repo: String, cname: SdkOptional<String>? = nil, httpsEnforced: Bool? = nil, buildType: ReposUpdateInformationAboutPagesSiteRequestBodyBuildType? = nil, source: ReposUpdateInformationAboutPagesSiteRequestBodySource? = nil, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        let requestBody = ReposUpdateInformationAboutPagesSiteRequestBody(cname: cname, httpsEnforced: httpsEnforced, buildType: buildType, source: source)
+    static func reposUpdateInformationAboutPagesSite(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        cname: SdkOptional<String>? = nil,
+        httpsEnforced: Bool? = nil,
+        buildType: ReposUpdateInformationAboutPagesSiteRequestBodyBuildType? = nil,
+        source: ReposUpdateInformationAboutPagesSiteRequestBodySource? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        let requestBody = ReposUpdateInformationAboutPagesSiteRequestBody(
+            cname: cname,
+            httpsEnforced: httpsEnforced,
+            buildType: buildType,
+            source: source
+        )
 
-        return try (await sdkRequest("PUT", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/pages"].joined(), config: config, body: requestBody, decoder: .empty, operationId: "reposUpdateInformationAboutPagesSite", options: requestOptions, errors: ["400": BasicError.self, "409": BasicError.self, "422": ValidationError.self])).data
+        return try await (sdkRequest(
+            "PUT",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/pages",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .empty,
+            operationId: "reposUpdateInformationAboutPagesSite",
+            options: requestOptions,
+            errors: ["400": BasicError.self, "409": BasicError.self, "422": ValidationError.self]
+        )).data
     }
 }

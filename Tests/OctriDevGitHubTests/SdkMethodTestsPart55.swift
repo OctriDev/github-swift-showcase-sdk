@@ -17,9 +17,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.getOrgRole(
-            org: decoded("\"org\""),
-            roleId: decoded("1")
-        )
+                org: decoded("\"org\""),
+                roleId: decoded("1")
+            )
             XCTFail("orgsGetOrgRole did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -69,11 +69,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.getOrgRulesetHistory(
-            org: decoded("\"org\""),
-            rulesetId: decoded("1"),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                org: decoded("\"org\""),
+                rulesetId: decoded("1"),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("orgsGetOrgRulesetHistory did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -122,10 +122,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.getOrgRulesetVersion(
-            org: decoded("\"org\""),
-            rulesetId: decoded("1"),
-            versionId: decoded("1")
-        )
+                org: decoded("\"org\""),
+                rulesetId: decoded("1"),
+                versionId: decoded("1")
+            )
             XCTFail("orgsGetOrgRulesetVersion did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -173,9 +173,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.getWebhook(
-            org: decoded("\"org\""),
-            hookId: decoded("1")
-        )
+                org: decoded("\"org\""),
+                hookId: decoded("1")
+            )
             XCTFail("orgsGetWebhook did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -244,10 +244,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.getWebhookDelivery(
-            org: decoded("\"org\""),
-            hookId: decoded("1"),
-            deliveryId: decoded("1")
-        )
+                org: decoded("\"org\""),
+                hookId: decoded("1"),
+                deliveryId: decoded("1")
+            )
             XCTFail("orgsGetWebhookDelivery did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -305,7 +305,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testOrgsListArtifactDeploymentRecordsOrgsListArtifactDeploymentRecordsReachesMockAndDecodesResponse() async throws {
+    func testOrgsListArtifactDeploymentRecordsOrgsListArtifactDeploymentRecordsReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -469,10 +470,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.listFailedInvitations(
-            org: decoded("\"org\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                org: decoded("\"org\""),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("orgsListFailedInvitations did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -520,9 +521,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.listForAuthenticatedUser(
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("orgsListForAuthenticatedUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -567,11 +568,11 @@ extension SdkMethodTests {
         _ = client
         do {
             _ = try await client.orgs.listInvitationTeams(
-            org: decoded("\"org\""),
-            invitationId: decoded("1"),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                org: decoded("\"org\""),
+                invitationId: decoded("1"),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("orgsListInvitationTeams decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {

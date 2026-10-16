@@ -3,7 +3,7 @@
 
 import Foundation
 
-// WebhookStatus domain models
+/// WebhookStatus domain models
 /// Required object value serialized in the `commit` wire field.
 public struct WebhookStatusCommit: Codable {
     /// Required object value serialized in the `author` wire field.
@@ -37,51 +37,69 @@ public struct WebhookStatusCommit: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookStatusCommit {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.author = try container.sdkDecodeNullable(.author)
-        self.commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
-        self.commit = try container.sdkDecodeRequired(.commit)
-        self.committer = try container.sdkDecodeNullable(.committer)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.parents = try container.sdkDecodeRequired(.parents)
-        self.sha = try container.sdkDecodeRequired(.sha)
-        self.url = try container.sdkDecodeRequired(.url)
-            try sdkValidateUri("comments_url", self.commentsUrl)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("url", self.url)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WebhookStatusCommit {
-    public init(author: WebhookStatusCommitAuthor?, commentsUrl: String, commit: WebhookStatusCommitCommit, committer: WebhookStatusCommitCommitter?, htmlUrl: String, nodeId: String, parents: [WebhookStatusCommitParentsItem], sha: String, url: String) throws {
+public extension WebhookStatusCommit {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        author = try container.sdkDecodeNullable(.author)
+        commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
+        commit = try container.sdkDecodeRequired(.commit)
+        committer = try container.sdkDecodeNullable(.committer)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        parents = try container.sdkDecodeRequired(.parents)
+        sha = try container.sdkDecodeRequired(.sha)
+        url = try container.sdkDecodeRequired(.url)
+        try sdkValidateUri("comments_url", commentsUrl)
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateUri("url", url)
+    }
+}
+
+public extension WebhookStatusCommit {
+    init(
+        author: WebhookStatusCommitAuthor?,
+        commentsUrl: String,
+        commit: WebhookStatusCommitCommit,
+        committer: WebhookStatusCommitCommitter?,
+        htmlUrl: String,
+        nodeId: String,
+        parents: [WebhookStatusCommitParentsItem],
+        sha: String,
+        url: String
+    ) throws {
         (self.author, self.commentsUrl) = (author, commentsUrl)
         (self.commit, self.committer) = (commit, committer)
         (self.htmlUrl, self.nodeId) = (htmlUrl, nodeId)
         (self.parents, self.sha) = (parents, sha)
         self.url = url
-            try sdkValidateUri("comments_url", self.commentsUrl)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("url", self.url)
+        try sdkValidateUri("comments_url", self.commentsUrl)
+        try sdkValidateUri("html_url", self.htmlUrl)
+        try sdkValidateUri("url", self.url)
     }
 }
 
 /// Required enumerated value serialized in the `reason` wire field.
-public struct WebhookStatusCommitCommitVerificationReason: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookStatusCommitCommitVerificationReason: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let expiredKey = WebhookStatusCommitCommitVerificationReason(rawValue: "expired_key")
     public static let notSigningKey = WebhookStatusCommitCommitVerificationReason(rawValue: "not_signing_key")
     public static let gpgverifyError = WebhookStatusCommitCommitVerificationReason(rawValue: "gpgverify_error")
-    public static let gpgverifyUnavailable = WebhookStatusCommitCommitVerificationReason(rawValue: "gpgverify_unavailable")
+    public static let gpgverifyUnavailable =
+        WebhookStatusCommitCommitVerificationReason(rawValue: "gpgverify_unavailable")
     public static let unsigned = WebhookStatusCommitCommitVerificationReason(rawValue: "unsigned")
-    public static let unknownSignatureType = WebhookStatusCommitCommitVerificationReason(rawValue: "unknown_signature_type")
+    public static let unknownSignatureType =
+        WebhookStatusCommitCommitVerificationReason(rawValue: "unknown_signature_type")
     public static let noUser = WebhookStatusCommitCommitVerificationReason(rawValue: "no_user")
     public static let unverifiedEmail = WebhookStatusCommitCommitVerificationReason(rawValue: "unverified_email")
     public static let badEmail = WebhookStatusCommitCommitVerificationReason(rawValue: "bad_email")
@@ -94,7 +112,7 @@ public struct WebhookStatusCommitCommitVerificationReason: RawRepresentable, Has
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -107,7 +125,10 @@ public struct WebhookStatusCommitCommitVerificationReason: RawRepresentable, Has
 public struct WebhookStatusState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let pending = WebhookStatusState(rawValue: "pending")
     public static let success = WebhookStatusState(rawValue: "success")
     public static let failure = WebhookStatusState(rawValue: "failure")
@@ -115,7 +136,7 @@ public struct WebhookStatusState: RawRepresentable, Hashable, Codable, Sendable,
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -128,14 +149,17 @@ public struct WebhookStatusState: RawRepresentable, Hashable, Codable, Sendable,
 public struct WebhookStatusCommitCommitterType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = WebhookStatusCommitCommitterType(rawValue: "Bot")
     public static let user = WebhookStatusCommitCommitterType(rawValue: "User")
     public static let organization = WebhookStatusCommitCommitterType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -148,14 +172,17 @@ public struct WebhookStatusCommitCommitterType: RawRepresentable, Hashable, Coda
 public struct WebhookStatusCommitAuthorType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = WebhookStatusCommitAuthorType(rawValue: "Bot")
     public static let user = WebhookStatusCommitAuthorType(rawValue: "User")
     public static let organization = WebhookStatusCommitAuthorType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

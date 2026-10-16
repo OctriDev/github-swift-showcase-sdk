@@ -6,7 +6,8 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testOrgsCustomPropertiesForReposDeleteOrganizationDefinitionOrgsCX1fe9d04d58ReachesMockAndDecodesResponse() async throws {
+    func testOrgsCustomPropertiesForReposDeleteOrganizationDefinitionOrgsCX1fe9d04d58ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -17,9 +18,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.customPropertiesForReposDeleteOrganizationDefinition(
-            org: decoded("\"org\""),
-            customPropertyName: decoded("\"Example Name\"")
-        )
+                org: decoded("\"org\""),
+                customPropertyName: decoded("\"Example Name\"")
+            )
             XCTFail("orgsCustomPropertiesForReposDeleteOrganizationDefinition did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -36,7 +37,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOrgsCustomPropertiesForReposGetOrganizationDefinitionOrgsCustX89f6c26d4aReachesMockAndDecodesResponse() async throws {
+    func testOrgsCustomPropertiesForReposGetOrganizationDefinitionOrgsCustX89f6c26d4aReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -56,7 +58,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testOrgsCustomPropertiesForReposGetOrganizationDefinitionOrgsCustX33d18d7711ReachesMockAndDecodesResponse() async throws {
+    func testOrgsCustomPropertiesForReposGetOrganizationDefinitionOrgsCustX33d18d7711ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -67,9 +70,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.customPropertiesForReposGetOrganizationDefinition(
-            org: decoded("\"org\""),
-            customPropertyName: decoded("\"Example Name\"")
-        )
+                org: decoded("\"org\""),
+                customPropertyName: decoded("\"Example Name\"")
+            )
             XCTFail("orgsCustomPropertiesForReposGetOrganizationDefinition did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -86,7 +89,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOrgsCustomPropertiesForReposGetOrganizationDefinitionsOrgsCusX581c72281dReachesMockAndDecodesResponse() async throws {
+    func testOrgsCustomPropertiesForReposGetOrganizationDefinitionsOrgsCusX581c72281dReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -105,7 +109,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testOrgsCustomPropertiesForReposGetOrganizationDefinitionsOrgsCusX0c0a2cbed5ReachesMockAndDecodesResponse() async throws {
+    func testOrgsCustomPropertiesForReposGetOrganizationDefinitionsOrgsCusX0c0a2cbed5ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -116,8 +121,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.customPropertiesForReposGetOrganizationDefinitions(
-            org: decoded("\"org\"")
-        )
+                org: decoded("\"org\"")
+            )
             XCTFail("orgsCustomPropertiesForReposGetOrganizationDefinitions did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -134,7 +139,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOrgsCustomPropertiesForReposGetOrganizationValuesOrgsCustomPrXff84b0066fReachesMockAndDecodesResponse() async throws {
+    func testOrgsCustomPropertiesForReposGetOrganizationValuesOrgsCustomPrXff84b0066fReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -156,7 +162,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testOrgsCustomPropertiesForReposGetOrganizationValuesOrgsCustomPrXe7158fc023ReachesMockAndDecodesResponse() async throws {
+    func testOrgsCustomPropertiesForReposGetOrganizationValuesOrgsCustomPrXe7158fc023ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -167,11 +174,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.customPropertiesForReposGetOrganizationValues(
-            org: decoded("\"org\""),
-            perPage: decoded("30"),
-            page: decoded("1"),
-            repositoryQuery: decoded("\"repository_query\"")
-        )
+                org: decoded("\"org\""),
+                perPage: decoded("30"),
+                page: decoded("1"),
+                repositoryQuery: decoded("\"repository_query\"")
+            )
             XCTFail("orgsCustomPropertiesForReposGetOrganizationValues did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -218,8 +225,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.delete(
-            org: decoded("\"org\"")
-        )
+                org: decoded("\"org\"")
+            )
             XCTFail("orgsDelete did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -259,9 +266,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.deleteAttestationsBulk(
-            org: decoded("\"org\""),
-            body: decoded("{\"subject_digests\":[\"sha256:abc123\",\"sha512:def456\"]}")
-        )
+                org: decoded("\"org\""),
+                body: decoded("{\"subject_digests\":[\"sha256:abc123\",\"sha512:def456\"]}")
+            )
             XCTFail("orgsDeleteAttestationsBulk did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -301,9 +308,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.deleteAttestationsById(
-            org: decoded("\"org\""),
-            attestationId: decoded("1")
-        )
+                org: decoded("\"org\""),
+                attestationId: decoded("1")
+            )
             XCTFail("orgsDeleteAttestationsById did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -320,7 +327,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOrgsDeleteAttestationsBySubjectDigestOrgsDeleteAttestationsByX982e984306ReachesMockAndDecodesResponse() async throws {
+    func testOrgsDeleteAttestationsBySubjectDigestOrgsDeleteAttestationsByX982e984306ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -332,7 +340,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOrgsDeleteAttestationsBySubjectDigestOrgsDeleteAttestationsByX0f7df728a9ReachesMockAndDecodesResponse() async throws {
+    func testOrgsDeleteAttestationsBySubjectDigestOrgsDeleteAttestationsByX0f7df728a9ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -343,9 +352,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.deleteAttestationsBySubjectDigest(
-            org: decoded("\"org\""),
-            subjectDigest: decoded("\"subject_digest\"")
-        )
+                org: decoded("\"org\""),
+                subjectDigest: decoded("\"subject_digest\"")
+            )
             XCTFail("orgsDeleteAttestationsBySubjectDigest did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -385,9 +394,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.deleteIssueField(
-            org: decoded("\"org\""),
-            issueFieldId: decoded("1")
-        )
+                org: decoded("\"org\""),
+                issueFieldId: decoded("1")
+            )
             XCTFail("orgsDeleteIssueField did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -427,9 +436,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.deleteIssueType(
-            org: decoded("\"org\""),
-            issueTypeId: decoded("1")
-        )
+                org: decoded("\"org\""),
+                issueTypeId: decoded("1")
+            )
             XCTFail("orgsDeleteIssueType did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -469,9 +478,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.deleteWebhook(
-            org: decoded("\"org\""),
-            hookId: decoded("1")
-        )
+                org: decoded("\"org\""),
+                hookId: decoded("1")
+            )
             XCTFail("orgsDeleteWebhook did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -488,7 +497,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOrgsDisableSelectedRepositoryImmutableReleasesOrganizationOrgX852d0815e0ReachesMockAndDecodesResponse() async throws {
+    func testOrgsDisableSelectedRepositoryImmutableReleasesOrganizationOrgX852d0815e0ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -500,7 +510,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOrgsEnableOrDisableSecurityProductOnAllOrgReposOrgsEnableOrDiX929803fa2eReachesMockAndDecodesResponse() async throws {
+    func testOrgsEnableOrDisableSecurityProductOnAllOrgReposOrgsEnableOrDiX929803fa2eReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -514,7 +525,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOrgsEnableSelectedRepositoryImmutableReleasesOrganizationOrgsX85652218c7ReachesMockAndDecodesResponse() async throws {
+    func testOrgsEnableSelectedRepositoryImmutableReleasesOrganizationOrgsX85652218c7ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -526,7 +538,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOrgsExternalPropertiesForReposCreateOrUpdateOrganizationValueX133a727193ReachesMockAndDecodesResponse() async throws {
+    func testOrgsExternalPropertiesForReposCreateOrUpdateOrganizationValueX133a727193ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }

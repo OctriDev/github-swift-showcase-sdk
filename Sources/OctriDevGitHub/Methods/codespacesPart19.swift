@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension CodespacesMethods {
-    /// Lists all development environment secrets available in a repository without revealing their encrypted values. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+public extension CodespacesMethods {
+    /// Lists all development environment secrets available in a repository without revealing their encrypted values.
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -22,10 +23,31 @@ extension CodespacesMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func codespacesListRepoSecrets(config: ClientConfig, owner: String, repo: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> CodespacesListRepoSecretsResponse {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/codespaces/secrets"].joined(), config: config, query: [
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "codespacesListRepoSecrets", options: requestOptions)).data
+    static func codespacesListRepoSecrets(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CodespacesListRepoSecretsResponse {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/codespaces/secrets",
+            ].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "codespacesListRepoSecrets",
+            options: requestOptions
+        )).data
     }
 }

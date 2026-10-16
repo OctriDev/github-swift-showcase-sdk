@@ -17,11 +17,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.setStatusCheckContexts(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            branch: decoded("\"branch\""),
-            body: decoded("{\"contexts\":[\"continuous-integration/travis-ci\"]}")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                branch: decoded("\"branch\""),
+                body: decoded("{\"contexts\":[\"continuous-integration/travis-ci\"]}")
+            )
             XCTFail("reposSetStatusCheckContexts did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -45,11 +45,11 @@ extension SdkMethodTests {
         _ = client
         do {
             _ = try await client.repos.setTeamAccessRestrictions(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            branch: decoded("\"branch\""),
-            body: decoded("{\"teams\":[\"justice-league\"]}")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                branch: decoded("\"branch\""),
+                body: decoded("{\"teams\":[\"justice-league\"]}")
+            )
             XCTFail("reposSetTeamAccessRestrictions decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -58,7 +58,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testReposSetTeamAccessRestrictionsReposSetTeamAccessRestrictions422ReachesMockAndDecodesResponse() async throws {
+    func testReposSetTeamAccessRestrictionsReposSetTeamAccessRestrictions422ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/422") else {
             return
         }
@@ -69,11 +70,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.setTeamAccessRestrictions(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            branch: decoded("\"branch\""),
-            body: decoded("{\"teams\":[\"justice-league\"]}")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                branch: decoded("\"branch\""),
+                body: decoded("{\"teams\":[\"justice-league\"]}")
+            )
             XCTFail("reposSetTeamAccessRestrictions did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 422)
@@ -112,7 +113,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testReposSetUserAccessRestrictionsReposSetUserAccessRestrictions422ReachesMockAndDecodesResponse() async throws {
+    func testReposSetUserAccessRestrictionsReposSetUserAccessRestrictions422ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/422") else {
             return
         }
@@ -123,11 +125,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.setUserAccessRestrictions(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            branch: decoded("\"branch\""),
-            users: decoded("[\"octocat\"]")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                branch: decoded("\"branch\""),
+                users: decoded("[\"octocat\"]")
+            )
             XCTFail("reposSetUserAccessRestrictions did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 422)
@@ -168,10 +170,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.testPushWebhook(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            hookId: decoded("1")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                hookId: decoded("1")
+            )
             XCTFail("reposTestPushWebhook did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -245,8 +247,8 @@ extension SdkMethodTests {
         options.webCommitSignoffRequired = try decoded("null")
         do {
             _ = try await client.repos.update(
-            options: options
-        )
+                options: options
+            )
             XCTFail("reposUpdate decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -293,8 +295,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.update(
-            options: options
-        )
+                options: options
+            )
             XCTFail("reposUpdate did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 307)
@@ -316,7 +318,15 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try ReposMethods.ReposUpdateBranchProtectionOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), branch: decoded("\"branch\""), requiredStatusChecks: decoded("{\"strict\":true,\"contexts\":[\"continuous-integration/travis-ci\"]}"), enforceAdmins: decoded("true"), requiredPullRequestReviews: decoded(sdkMethodFixture1808Value1), restrictions: decoded(sdkMethodFixture1808Value2))
+        var options = try ReposMethods.ReposUpdateBranchProtectionOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            branch: decoded("\"branch\""),
+            requiredStatusChecks: decoded("{\"strict\":true,\"contexts\":[\"continuous-integration/travis-ci\"]}"),
+            enforceAdmins: decoded("true"),
+            requiredPullRequestReviews: decoded(sdkMethodFixture1808Value1),
+            restrictions: decoded(sdkMethodFixture1808Value2)
+        )
         options.requiredLinearHistory = try decoded("true")
         options.allowForcePushes = try decoded("true")
         options.allowDeletions = try decoded("true")
@@ -343,7 +353,15 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try ReposMethods.ReposUpdateBranchProtectionOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), branch: decoded("\"branch\""), requiredStatusChecks: decoded("{\"strict\":true,\"contexts\":[\"continuous-integration/travis-ci\"]}"), enforceAdmins: decoded("true"), requiredPullRequestReviews: decoded(sdkMethodFixture1809Value1), restrictions: decoded(sdkMethodFixture1809Value2))
+        var options = try ReposMethods.ReposUpdateBranchProtectionOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            branch: decoded("\"branch\""),
+            requiredStatusChecks: decoded("{\"strict\":true,\"contexts\":[\"continuous-integration/travis-ci\"]}"),
+            enforceAdmins: decoded("true"),
+            requiredPullRequestReviews: decoded(sdkMethodFixture1809Value1),
+            restrictions: decoded(sdkMethodFixture1809Value2)
+        )
         options.requiredLinearHistory = try decoded("true")
         options.allowForcePushes = try decoded("true")
         options.allowDeletions = try decoded("true")
@@ -357,8 +375,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.updateBranchProtection(
-            options: options
-        )
+                options: options
+            )
             XCTFail("reposUpdateBranchProtection did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -408,11 +426,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.updateCommitComment(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            commentId: decoded("1"),
-            body: decoded("\"Nice change\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                commentId: decoded("1"),
+                body: decoded("\"Nice change\"")
+            )
             XCTFail("reposUpdateCommitComment did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -429,7 +447,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testReposUpdateDeploymentBranchPolicyReposUpdateDeploymentBranchPolicyReachesMockAndDecodesResponse() async throws {
+    func testReposUpdateDeploymentBranchPolicyReposUpdateDeploymentBranchPolicyReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -452,7 +471,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testReposUpdateInformationAboutPagesSiteReposUpdateInformationAboutPagesSiteReachesMockAndDecodesResponse() async throws {
+    func testReposUpdateInformationAboutPagesSiteReposUpdateInformationAboutPagesSiteReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -468,7 +488,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testReposUpdateInformationAboutPagesSiteReposUpdateInformationAboXf67a3bff1aReachesMockAndDecodesResponse() async throws {
+    func testReposUpdateInformationAboutPagesSiteReposUpdateInformationAboXf67a3bff1aReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
             return
         }
@@ -479,13 +500,13 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.updateInformationAboutPagesSite(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            cname: decoded("\"octocatblog.com\""),
-            httpsEnforced: decoded("null"),
-            buildType: decoded("null"),
-            source: decoded("{\"branch\":\"main\",\"path\":\"/\"}")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                cname: decoded("\"octocatblog.com\""),
+                httpsEnforced: decoded("null"),
+                buildType: decoded("null"),
+                source: decoded("{\"branch\":\"main\",\"path\":\"/\"}")
+            )
             XCTFail("reposUpdateInformationAboutPagesSite did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)

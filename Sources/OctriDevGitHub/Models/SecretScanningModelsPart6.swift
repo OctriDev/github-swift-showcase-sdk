@@ -3,7 +3,7 @@
 
 import Foundation
 
-// SecretScanning domain models
+/// SecretScanning domain models
 /// Represents a 'pull_request_comment' secret scanning location type. This location type shows that a secret was
 /// detected in a comment on a pull request.
 public struct SecretScanningLocationPullRequestComment: Codable {
@@ -19,28 +19,34 @@ public struct SecretScanningLocationPullRequestComment: Codable {
         case htmlUrl = "html_url"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension SecretScanningLocationPullRequestComment {
-    public init(from decoder: Decoder) throws {
+public extension SecretScanningLocationPullRequestComment {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.pullRequestCommentUrl) else {
-            throw SdkValidationError(field: "pull_request_comment_url", code: "required", message: "Validation failed for 'pull_request_comment_url': value is required")
+            throw SdkValidationError(
+                field: "pull_request_comment_url",
+                code: "required",
+                message: "Validation failed for 'pull_request_comment_url': value is required"
+            )
         }
-        self.pullRequestCommentUrl = try container.sdkDecodeRequired(.pullRequestCommentUrl)
-        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-            try sdkValidateUri("pull_request_comment_url", self.pullRequestCommentUrl)
-        if let value = self.htmlUrl {
+        pullRequestCommentUrl = try container.sdkDecodeRequired(.pullRequestCommentUrl)
+        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        try sdkValidateUri("pull_request_comment_url", pullRequestCommentUrl)
+        if let value = htmlUrl {
             try sdkValidateUri("html_url", value)
         }
     }
 }
 
-extension SecretScanningLocationPullRequestComment {
-    public init(pullRequestCommentUrl: String, htmlUrl: String? = nil) throws {
+public extension SecretScanningLocationPullRequestComment {
+    init(pullRequestCommentUrl: String, htmlUrl: String? = nil) throws {
         (self.pullRequestCommentUrl, self.htmlUrl) = (pullRequestCommentUrl, htmlUrl)
-            try sdkValidateUri("pull_request_comment_url", self.pullRequestCommentUrl)
+        try sdkValidateUri("pull_request_comment_url", self.pullRequestCommentUrl)
         if let value = self.htmlUrl {
             try sdkValidateUri("html_url", value)
         }
@@ -49,17 +55,21 @@ extension SecretScanningLocationPullRequestComment {
 
 /// The push protection setting for this pattern set at the enterprise level. Only present for partner patterns
 /// when the organization has a parent enterprise.
-public struct SecretScanningPatternOverrideEnterpriseSetting: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct SecretScanningPatternOverrideEnterpriseSetting: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let notSet = SecretScanningPatternOverrideEnterpriseSetting(rawValue: "not-set")
     public static let disabled = SecretScanningPatternOverrideEnterpriseSetting(rawValue: "disabled")
     public static let enabled = SecretScanningPatternOverrideEnterpriseSetting(rawValue: "enabled")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -69,10 +79,14 @@ public struct SecretScanningPatternOverrideEnterpriseSetting: RawRepresentable, 
 }
 
 /// A machine-readable code describing the error.
-public struct SecretScanningCustomPatternValidationErrorCode: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct SecretScanningCustomPatternValidationErrorCode: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let invalid = SecretScanningCustomPatternValidationErrorCode(rawValue: "invalid")
     public static let unprocessable = SecretScanningCustomPatternValidationErrorCode(rawValue: "unprocessable")
     public static let startDelimiter = SecretScanningCustomPatternValidationErrorCode(rawValue: "start_delimiter")
@@ -80,11 +94,12 @@ public struct SecretScanningCustomPatternValidationErrorCode: RawRepresentable, 
     public static let name = SecretScanningCustomPatternValidationErrorCode(rawValue: "name")
     public static let mustMatch = SecretScanningCustomPatternValidationErrorCode(rawValue: "must_match")
     public static let mustNotMatch = SecretScanningCustomPatternValidationErrorCode(rawValue: "must_not_match")
-    public static let customPatternVersionMismatch = SecretScanningCustomPatternValidationErrorCode(rawValue: "custom_pattern_version_mismatch")
+    public static let customPatternVersionMismatch =
+        SecretScanningCustomPatternValidationErrorCode(rawValue: "custom_pattern_version_mismatch")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -94,17 +109,21 @@ public struct SecretScanningCustomPatternValidationErrorCode: RawRepresentable, 
 }
 
 /// The reason for bypassing push protection.
-public struct SecretScanningPushProtectionBypassReason: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct SecretScanningPushProtectionBypassReason: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let falsePositive = SecretScanningPushProtectionBypassReason(rawValue: "false_positive")
     public static let usedInTests = SecretScanningPushProtectionBypassReason(rawValue: "used_in_tests")
     public static let willFixLater = SecretScanningPushProtectionBypassReason(rawValue: "will_fix_later")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -117,7 +136,10 @@ public struct SecretScanningPushProtectionBypassReason: RawRepresentable, Hashab
 public struct SecretScanningAlertResolution: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let falsePositive = SecretScanningAlertResolution(rawValue: "false_positive")
     public static let wontFix = SecretScanningAlertResolution(rawValue: "wont_fix")
     public static let revoked = SecretScanningAlertResolution(rawValue: "revoked")
@@ -125,7 +147,7 @@ public struct SecretScanningAlertResolution: RawRepresentable, Hashable, Codable
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -139,13 +161,16 @@ public struct SecretScanningAlertResolution: RawRepresentable, Hashable, Codable
 public struct SecretScanningAlertState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let open = SecretScanningAlertState(rawValue: "open")
     public static let resolved = SecretScanningAlertState(rawValue: "resolved")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -158,14 +183,17 @@ public struct SecretScanningAlertState: RawRepresentable, Hashable, Codable, Sen
 public struct SecretScanningAlertWebhookValidity: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let active = SecretScanningAlertWebhookValidity(rawValue: "active")
     public static let inactive = SecretScanningAlertWebhookValidity(rawValue: "inactive")
     public static let unknown = SecretScanningAlertWebhookValidity(rawValue: "unknown")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -179,7 +207,10 @@ public struct SecretScanningAlertWebhookValidity: RawRepresentable, Hashable, Co
 public struct SecretScanningLocationType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let commit = SecretScanningLocationType(rawValue: "commit")
     public static let wikiCommit = SecretScanningLocationType(rawValue: "wiki_commit")
     public static let issueTitle = SecretScanningLocationType(rawValue: "issue_title")
@@ -196,7 +227,7 @@ public struct SecretScanningLocationType: RawRepresentable, Hashable, Codable, S
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -209,14 +240,17 @@ public struct SecretScanningLocationType: RawRepresentable, Hashable, Codable, S
 public struct SecretScanningAlertValidity: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let active = SecretScanningAlertValidity(rawValue: "active")
     public static let inactive = SecretScanningAlertValidity(rawValue: "inactive")
     public static let unknown = SecretScanningAlertValidity(rawValue: "unknown")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -227,16 +261,20 @@ public struct SecretScanningAlertValidity: RawRepresentable, Hashable, Codable, 
 
 /// The category of the detected secret. `default` covers specific provider patterns and custom patterns;
 /// `generic` covers non-specific patterns and AI-detected secrets.
-public struct SecretScanningAlertWebhookSecretCategory: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct SecretScanningAlertWebhookSecretCategory: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let `default` = SecretScanningAlertWebhookSecretCategory(rawValue: "default")
     public static let generic = SecretScanningAlertWebhookSecretCategory(rawValue: "generic")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -250,14 +288,17 @@ public struct SecretScanningAlertWebhookSecretCategory: RawRepresentable, Hashab
 public struct SecretScanningPatternOverrideSetting: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let notSet = SecretScanningPatternOverrideSetting(rawValue: "not-set")
     public static let disabled = SecretScanningPatternOverrideSetting(rawValue: "disabled")
     public static let enabled = SecretScanningPatternOverrideSetting(rawValue: "enabled")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -270,13 +311,16 @@ public struct SecretScanningPatternOverrideSetting: RawRepresentable, Hashable, 
 public struct SecretScanningCustomPatternState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let published = SecretScanningCustomPatternState(rawValue: "published")
     public static let unpublished = SecretScanningCustomPatternState(rawValue: "unpublished")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -286,17 +330,21 @@ public struct SecretScanningCustomPatternState: RawRepresentable, Hashable, Coda
 }
 
 /// The token status as of the latest validity check.
-public struct SecretScanningAlertWithMetadataValidity: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct SecretScanningAlertWithMetadataValidity: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let active = SecretScanningAlertWithMetadataValidity(rawValue: "active")
     public static let inactive = SecretScanningAlertWithMetadataValidity(rawValue: "inactive")
     public static let unknown = SecretScanningAlertWithMetadataValidity(rawValue: "unknown")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -306,17 +354,21 @@ public struct SecretScanningAlertWithMetadataValidity: RawRepresentable, Hashabl
 }
 
 /// The token status as of the latest validity check.
-public struct OrganizationSecretScanningAlertValidity: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct OrganizationSecretScanningAlertValidity: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let active = OrganizationSecretScanningAlertValidity(rawValue: "active")
     public static let inactive = OrganizationSecretScanningAlertValidity(rawValue: "inactive")
     public static let unknown = OrganizationSecretScanningAlertValidity(rawValue: "unknown")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -326,16 +378,20 @@ public struct OrganizationSecretScanningAlertValidity: RawRepresentable, Hashabl
 }
 
 /// The default push protection setting for this pattern.
-public struct SecretScanningPatternOverrideDefaultSetting: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct SecretScanningPatternOverrideDefaultSetting: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let disabled = SecretScanningPatternOverrideDefaultSetting(rawValue: "disabled")
     public static let enabled = SecretScanningPatternOverrideDefaultSetting(rawValue: "enabled")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -348,7 +404,10 @@ public struct SecretScanningPatternOverrideDefaultSetting: RawRepresentable, Has
 public struct SecretScanningAlertResolutionWebhook: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let falsePositive = SecretScanningAlertResolutionWebhook(rawValue: "false_positive")
     public static let wontFix = SecretScanningAlertResolutionWebhook(rawValue: "wont_fix")
     public static let revoked = SecretScanningAlertResolutionWebhook(rawValue: "revoked")
@@ -358,7 +417,7 @@ public struct SecretScanningAlertResolutionWebhook: RawRepresentable, Hashable, 
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

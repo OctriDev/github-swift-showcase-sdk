@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ReposMethods {
-    public struct ReposUpdateRepoRulesetOptions: Codable {
+public extension ReposMethods {
+    struct ReposUpdateRepoRulesetOptions: Codable {
         public var owner: String
         public var repo: String
         public var rulesetId: Int
@@ -25,7 +25,9 @@ extension ReposMethods {
         }
     }
 
-    /// Replaces a repository ruleset with the supplied configuration. Supply the ruleset properties you want to set, including its target, enforcement level, bypass actors, conditions, or rules. Use `evaluate` to test rules before enforcement; this option is available only with GitHub Enterprise.
+    /// Replaces a repository ruleset with the supplied configuration. Supply the ruleset properties you want to set,
+    /// including its target, enforcement level, bypass actors, conditions, or rules. Use `evaluate` to test rules
+    /// before enforcement; this option is available only with GitHub Enterprise.
     ///
     /// Update a ruleset for a repository.
     ///
@@ -43,9 +45,29 @@ extension ReposMethods {
     /// - bypassActors: The actors that can bypass the rules in this ruleset
     /// - conditions: Parameters for a repository ruleset ref name condition
     /// - rules: An array of rules within the ruleset.
-    public static func reposUpdateRepoRuleset(config: ClientConfig, options: ReposUpdateRepoRulesetOptions, requestOptions: RequestOptions? = nil) async throws -> RepositoryRuleset {
+    static func reposUpdateRepoRuleset(
+        config: ClientConfig,
+        options: ReposUpdateRepoRulesetOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> RepositoryRuleset {
         let requestBody = ReposUpdateRepoRulesetRequestBody(options: options)
 
-        return try (await sdkRequest("PUT", ["/repos/", sdkEncodePathSegment(sdkWireString(options.owner)), "/", sdkEncodePathSegment(sdkWireString(options.repo)), "/rulesets/", sdkEncodePathSegment(sdkWireString(options.rulesetId))].joined(), config: config, body: requestBody, decoder: .json, operationId: "reposUpdateRepoRuleset", options: requestOptions, errors: ["404": BasicError.self, "422": ValidationError.self, "500": BasicError.self])).data
+        return try await (sdkRequest(
+            "PUT",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(options.owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(options.repo)),
+                "/rulesets/",
+                sdkEncodePathSegment(sdkWireString(options.rulesetId)),
+            ].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "reposUpdateRepoRuleset",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "422": ValidationError.self, "500": BasicError.self]
+        )).data
     }
 }

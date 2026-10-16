@@ -6,8 +6,11 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ActivityMethods {
-    /// If you would like to watch a repository, set `subscribed` to `true`. If you would like to ignore notifications made within a repository, set `ignored` to `true`. If you would like to stop watching a repository, [delete the repository's subscription](https://docs.github.com/rest/activity/watching#delete-a-repository-subscription) completely.
+public extension ActivityMethods {
+    /// If you would like to watch a repository, set `subscribed` to `true`. If you would like to ignore notifications
+    /// made within a repository, set `ignored` to `true`. If you would like to stop watching a repository, [delete the
+    /// repository's subscription](https://docs.github.com/rest/activity/watching#delete-a-repository-subscription)
+    /// completely.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -18,20 +21,61 @@ extension ActivityMethods {
     ///   repository.
     /// - ignored: Determines if all notifications should be blocked from this
     ///   repository.
-    public static func activitySetRepoSubscription(config: ClientConfig, owner: String, repo: String, subscribed: Bool? = nil, ignored: Bool? = nil, requestOptions: RequestOptions? = nil) async throws -> RepositorySubscription {
+    static func activitySetRepoSubscription(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        subscribed: Bool? = nil,
+        ignored: Bool? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> RepositorySubscription {
         let requestBody = ActivitySetRepoSubscriptionRequestBody(subscribed: subscribed, ignored: ignored)
 
-        return try (await sdkRequest("PUT", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/subscription"].joined(), config: config, body: requestBody, decoder: .json, operationId: "activitySetRepoSubscription", options: requestOptions)).data
+        return try await (sdkRequest(
+            "PUT",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/subscription",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "activitySetRepoSubscription",
+            options: requestOptions
+        )).data
     }
 
-    /// This endpoint should only be used to stop watching a repository. To control whether or not you wish to receive notifications from a repository, [set the repository's subscription manually](https://docs.github.com/rest/activity/watching#set-a-repository-subscription).
+    /// This endpoint should only be used to stop watching a repository. To control whether or not you wish to receive
+    /// notifications from a repository, [set the repository's subscription
+    /// manually](https://docs.github.com/rest/activity/watching#set-a-repository-subscription).
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    public static func activityDeleteRepoSubscription(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/subscription"].joined(), config: config, decoder: .empty, operationId: "activityDeleteRepoSubscription", options: requestOptions)).data
+    static func activityDeleteRepoSubscription(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/subscription",
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "activityDeleteRepoSubscription",
+            options: requestOptions
+        )).data
     }
 }

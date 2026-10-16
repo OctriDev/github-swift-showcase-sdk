@@ -3,9 +3,43 @@
 
 import Foundation
 
-// SecretScanning domain models
-extension SecretScanningAlert {
-    public init(number: AlertNumber? = nil, createdAt: AlertCreatedAt? = nil, updatedAt: NullableAlertUpdatedAt? = nil, url: AlertUrl? = nil, htmlUrl: AlertHtmlUrl? = nil, locationsUrl: String? = nil, state: SecretScanningAlertState? = nil, resolution: SecretScanningAlertResolution? = nil, resolvedAt: Date? = nil, resolvedBy: NullableSimpleUser? = nil, resolutionComment: String? = nil, secretType: String? = nil, secretTypeDisplayName: String? = nil, provider: String? = nil, providerSlug: String? = nil, secret: String? = nil, pushProtectionBypassed: Bool? = nil, pushProtectionBypassedBy: NullableSimpleUser? = nil, pushProtectionBypassedAt: Date? = nil, pushProtectionBypassRequestReviewer: NullableSimpleUser? = nil, pushProtectionBypassRequestReviewerComment: String? = nil, pushProtectionBypassRequestComment: String? = nil, pushProtectionBypassRequestHtmlUrl: String? = nil, validity: SecretScanningAlertValidity? = nil, publiclyLeaked: Bool? = nil, multiRepo: Bool? = nil, isBase64Encoded: Bool? = nil, firstLocationDetected: NullableSecretScanningFirstDetectedLocation? = nil, hasMoreLocations: Bool? = nil, assignedTo: NullableSimpleUser? = nil, closureRequestComment: String? = nil, closureRequestReviewerComment: String? = nil, closureRequestReviewer: NullableSimpleUser? = nil) throws {
+/// SecretScanning domain models
+public extension SecretScanningAlert {
+    init(
+        number: AlertNumber? = nil,
+        createdAt: AlertCreatedAt? = nil,
+        updatedAt: NullableAlertUpdatedAt? = nil,
+        url: AlertUrl? = nil,
+        htmlUrl: AlertHtmlUrl? = nil,
+        locationsUrl: String? = nil,
+        state: SecretScanningAlertState? = nil,
+        resolution: SecretScanningAlertResolution? = nil,
+        resolvedAt: Date? = nil,
+        resolvedBy: NullableSimpleUser? = nil,
+        resolutionComment: String? = nil,
+        secretType: String? = nil,
+        secretTypeDisplayName: String? = nil,
+        provider: String? = nil,
+        providerSlug: String? = nil,
+        secret: String? = nil,
+        pushProtectionBypassed: Bool? = nil,
+        pushProtectionBypassedBy: NullableSimpleUser? = nil,
+        pushProtectionBypassedAt: Date? = nil,
+        pushProtectionBypassRequestReviewer: NullableSimpleUser? = nil,
+        pushProtectionBypassRequestReviewerComment: String? = nil,
+        pushProtectionBypassRequestComment: String? = nil,
+        pushProtectionBypassRequestHtmlUrl: String? = nil,
+        validity: SecretScanningAlertValidity? = nil,
+        publiclyLeaked: Bool? = nil,
+        multiRepo: Bool? = nil,
+        isBase64Encoded: Bool? = nil,
+        firstLocationDetected: NullableSecretScanningFirstDetectedLocation? = nil,
+        hasMoreLocations: Bool? = nil,
+        assignedTo: NullableSimpleUser? = nil,
+        closureRequestComment: String? = nil,
+        closureRequestReviewerComment: String? = nil,
+        closureRequestReviewer: NullableSimpleUser? = nil
+    ) throws {
         self.init()
         (self.number, self.createdAt) = (number, createdAt)
         (self.updatedAt, self.url) = (updatedAt, url)
@@ -34,28 +68,28 @@ extension SecretScanningAlert {
 
 extension SecretScanningAlert {
     func sdkValidateConstraints() throws {
-        if let value = self.createdAt {
+        if let value = createdAt {
             try sdkValidateDateTime("created_at", sdkWireString(value))
         }
-        if let value = self.updatedAt {
+        if let value = updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
-        if let value = self.url {
+        if let value = url {
             try sdkValidateUri("url", sdkWireString(value))
         }
-        if let value = self.htmlUrl {
+        if let value = htmlUrl {
             try sdkValidateUri("html_url", sdkWireString(value))
         }
-        if let value = self.locationsUrl {
+        if let value = locationsUrl {
             try sdkValidateUri("locations_url", value)
         }
-        if let value = self.resolvedAt {
+        if let value = resolvedAt {
             try sdkValidateDateTime("resolved_at", sdkWireString(value))
         }
-        if let value = self.pushProtectionBypassedAt {
+        if let value = pushProtectionBypassedAt {
             try sdkValidateDateTime("push_protection_bypassed_at", sdkWireString(value))
         }
-        if let value = self.pushProtectionBypassRequestHtmlUrl {
+        if let value = pushProtectionBypassRequestHtmlUrl {
             try sdkValidateUri("push_protection_bypass_request_html_url", value)
         }
     }
@@ -77,24 +111,28 @@ public struct SecretScanningPushProtectionBypass: Codable {
     }
 
     init() {
-        (self.reason, self.expireAt, self.tokenType) = (nil, nil, nil)
+        (reason, expireAt, tokenType) = (nil, nil, nil)
     }
 }
 
-extension SecretScanningPushProtectionBypass {
-    public init(from decoder: Decoder) throws {
+public extension SecretScanningPushProtectionBypass {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.reason = try container.sdkDecodeIfPresent(.reason)
-        self.expireAt = try container.sdkDecodeIfPresent(.expireAt)
-        self.tokenType = try container.sdkDecodeIfPresent(.tokenType)
-        if let value = self.expireAt {
+        reason = try container.sdkDecodeIfPresent(.reason)
+        expireAt = try container.sdkDecodeIfPresent(.expireAt)
+        tokenType = try container.sdkDecodeIfPresent(.tokenType)
+        if let value = expireAt {
             try sdkValidateDateTime("expire_at", sdkWireString(value))
         }
     }
 }
 
-extension SecretScanningPushProtectionBypass {
-    public init(reason: SecretScanningPushProtectionBypassReason? = nil, expireAt: Date? = nil, tokenType: String? = nil) throws {
+public extension SecretScanningPushProtectionBypass {
+    init(
+        reason: SecretScanningPushProtectionBypassReason? = nil,
+        expireAt: Date? = nil,
+        tokenType: String? = nil
+    ) throws {
         self.init()
         (self.reason, self.expireAt) = (reason, expireAt)
         self.tokenType = tokenType
@@ -119,28 +157,34 @@ public struct SecretScanningLocationIssueBody: Codable {
         case htmlUrl = "html_url"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension SecretScanningLocationIssueBody {
-    public init(from decoder: Decoder) throws {
+public extension SecretScanningLocationIssueBody {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.issueBodyUrl) else {
-            throw SdkValidationError(field: "issue_body_url", code: "required", message: "Validation failed for 'issue_body_url': value is required")
+            throw SdkValidationError(
+                field: "issue_body_url",
+                code: "required",
+                message: "Validation failed for 'issue_body_url': value is required"
+            )
         }
-        self.issueBodyUrl = try container.sdkDecodeRequired(.issueBodyUrl)
-        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-            try sdkValidateUri("issue_body_url", self.issueBodyUrl)
-        if let value = self.htmlUrl {
+        issueBodyUrl = try container.sdkDecodeRequired(.issueBodyUrl)
+        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        try sdkValidateUri("issue_body_url", issueBodyUrl)
+        if let value = htmlUrl {
             try sdkValidateUri("html_url", value)
         }
     }
 }
 
-extension SecretScanningLocationIssueBody {
-    public init(issueBodyUrl: String, htmlUrl: String? = nil) throws {
+public extension SecretScanningLocationIssueBody {
+    init(issueBodyUrl: String, htmlUrl: String? = nil) throws {
         (self.issueBodyUrl, self.htmlUrl) = (issueBodyUrl, htmlUrl)
-            try sdkValidateUri("issue_body_url", self.issueBodyUrl)
+        try sdkValidateUri("issue_body_url", self.issueBodyUrl)
         if let value = self.htmlUrl {
             try sdkValidateUri("html_url", value)
         }
@@ -260,59 +304,107 @@ public struct SecretScanningAlertWithMetadata: Codable {
     }
 
     init() {
-        (self.number, self.createdAt, self.updatedAt, self.url, self.htmlUrl) = (nil, nil, nil, nil, nil)
-        (self.locationsUrl, self.state, self.resolution, self.resolvedAt, self.resolvedBy) = (nil, nil, nil, nil, nil)
-        (self.resolutionComment, self.secretType, self.secretTypeDisplayName, self.provider, self.providerSlug) = (nil, nil, nil, nil, nil)
-        (self.secret, self.pushProtectionBypassed, self.pushProtectionBypassedBy, self.pushProtectionBypassedAt, self.pushProtectionBypassRequestReviewer) = (nil, nil, nil, nil, nil)
-        (self.pushProtectionBypassRequestReviewerComment, self.pushProtectionBypassRequestComment, self.pushProtectionBypassRequestHtmlUrl, self.validity, self.publiclyLeaked) = (nil, nil, nil, nil, nil)
-        (self.multiRepo, self.isBase64Encoded, self.firstLocationDetected, self.hasMoreLocations, self.assignedTo) = (nil, nil, nil, nil, nil)
-        (self.closureRequestComment, self.closureRequestReviewerComment, self.closureRequestReviewer, self.metadata) = (nil, nil, nil, nil)
+        (number, createdAt, updatedAt, url, htmlUrl) = (nil, nil, nil, nil, nil)
+        (locationsUrl, state, resolution, resolvedAt, resolvedBy) = (nil, nil, nil, nil, nil)
+        (resolutionComment, secretType, secretTypeDisplayName, provider, providerSlug) = (nil, nil, nil, nil, nil)
+        (
+            secret,
+            pushProtectionBypassed,
+            pushProtectionBypassedBy,
+            pushProtectionBypassedAt,
+            pushProtectionBypassRequestReviewer
+        ) = (nil, nil, nil, nil, nil)
+        (
+            pushProtectionBypassRequestReviewerComment,
+            pushProtectionBypassRequestComment,
+            pushProtectionBypassRequestHtmlUrl,
+            validity,
+            publiclyLeaked
+        ) = (nil, nil, nil, nil, nil)
+        (multiRepo, isBase64Encoded, firstLocationDetected, hasMoreLocations, assignedTo) = (nil, nil, nil, nil, nil)
+        (closureRequestComment, closureRequestReviewerComment, closureRequestReviewer, metadata) = (nil, nil, nil, nil)
     }
 }
 
-extension SecretScanningAlertWithMetadata {
-    public init(from decoder: Decoder) throws {
+public extension SecretScanningAlertWithMetadata {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.number = try container.sdkDecodeIfPresent(.number)
-        self.createdAt = try container.sdkDecodeIfPresent(.createdAt)
-        self.updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
-        self.url = try container.sdkDecodeIfPresent(.url)
-        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        self.locationsUrl = try container.sdkDecodeIfPresent(.locationsUrl)
-        self.state = try container.sdkDecodeIfPresent(.state)
-        self.resolution = try container.sdkDecodeIfPresent(.resolution)
-        self.resolvedAt = try container.sdkDecodeIfPresent(.resolvedAt)
-        self.resolvedBy = try container.sdkDecodeIfPresent(.resolvedBy)
-        self.resolutionComment = try container.sdkDecodeIfPresent(.resolutionComment)
-        self.secretType = try container.sdkDecodeIfPresent(.secretType)
-        self.secretTypeDisplayName = try container.sdkDecodeIfPresent(.secretTypeDisplayName)
-        self.provider = try container.sdkDecodeIfPresent(.provider)
-        self.providerSlug = try container.sdkDecodeIfPresent(.providerSlug)
-        self.secret = try container.sdkDecodeIfPresent(.secret)
-        self.pushProtectionBypassed = try container.sdkDecodeIfPresent(.pushProtectionBypassed)
-        self.pushProtectionBypassedBy = try container.sdkDecodeIfPresent(.pushProtectionBypassedBy)
-        self.pushProtectionBypassedAt = try container.sdkDecodeIfPresent(.pushProtectionBypassedAt)
-        self.pushProtectionBypassRequestReviewer = try container.sdkDecodeIfPresent(.pushProtectionBypassRequestReviewer)
-        self.pushProtectionBypassRequestReviewerComment = try container.sdkDecodeIfPresent(.pushProtectionBypassRequestReviewerComment)
-        self.pushProtectionBypassRequestComment = try container.sdkDecodeIfPresent(.pushProtectionBypassRequestComment)
-        self.pushProtectionBypassRequestHtmlUrl = try container.sdkDecodeIfPresent(.pushProtectionBypassRequestHtmlUrl)
-        self.validity = try container.sdkDecodeIfPresent(.validity)
-        self.publiclyLeaked = try container.sdkDecodeIfPresent(.publiclyLeaked)
-        self.multiRepo = try container.sdkDecodeIfPresent(.multiRepo)
-        self.isBase64Encoded = try container.sdkDecodeIfPresent(.isBase64Encoded)
-        self.firstLocationDetected = try container.sdkDecodeIfPresent(.firstLocationDetected)
-        self.hasMoreLocations = try container.sdkDecodeIfPresent(.hasMoreLocations)
-        self.assignedTo = try container.sdkDecodeIfPresent(.assignedTo)
-        self.closureRequestComment = try container.sdkDecodeIfPresent(.closureRequestComment)
-        self.closureRequestReviewerComment = try container.sdkDecodeIfPresent(.closureRequestReviewerComment)
-        self.closureRequestReviewer = try container.sdkDecodeIfPresent(.closureRequestReviewer)
-        self.metadata = try container.sdkDecodeIfPresent(.metadata)
+        number = try container.sdkDecodeIfPresent(.number)
+        createdAt = try container.sdkDecodeIfPresent(.createdAt)
+        updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
+        url = try container.sdkDecodeIfPresent(.url)
+        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        locationsUrl = try container.sdkDecodeIfPresent(.locationsUrl)
+        state = try container.sdkDecodeIfPresent(.state)
+        resolution = try container.sdkDecodeIfPresent(.resolution)
+        resolvedAt = try container.sdkDecodeIfPresent(.resolvedAt)
+        resolvedBy = try container.sdkDecodeIfPresent(.resolvedBy)
+        resolutionComment = try container.sdkDecodeIfPresent(.resolutionComment)
+        secretType = try container.sdkDecodeIfPresent(.secretType)
+        secretTypeDisplayName = try container.sdkDecodeIfPresent(.secretTypeDisplayName)
+        provider = try container.sdkDecodeIfPresent(.provider)
+        providerSlug = try container.sdkDecodeIfPresent(.providerSlug)
+        secret = try container.sdkDecodeIfPresent(.secret)
+        pushProtectionBypassed = try container.sdkDecodeIfPresent(.pushProtectionBypassed)
+        pushProtectionBypassedBy = try container.sdkDecodeIfPresent(.pushProtectionBypassedBy)
+        pushProtectionBypassedAt = try container.sdkDecodeIfPresent(.pushProtectionBypassedAt)
+        pushProtectionBypassRequestReviewer = try container.sdkDecodeIfPresent(.pushProtectionBypassRequestReviewer)
+        pushProtectionBypassRequestReviewerComment = try container
+            .sdkDecodeIfPresent(.pushProtectionBypassRequestReviewerComment)
+        pushProtectionBypassRequestComment = try container.sdkDecodeIfPresent(.pushProtectionBypassRequestComment)
+        pushProtectionBypassRequestHtmlUrl = try container.sdkDecodeIfPresent(.pushProtectionBypassRequestHtmlUrl)
+        validity = try container.sdkDecodeIfPresent(.validity)
+        publiclyLeaked = try container.sdkDecodeIfPresent(.publiclyLeaked)
+        multiRepo = try container.sdkDecodeIfPresent(.multiRepo)
+        isBase64Encoded = try container.sdkDecodeIfPresent(.isBase64Encoded)
+        firstLocationDetected = try container.sdkDecodeIfPresent(.firstLocationDetected)
+        hasMoreLocations = try container.sdkDecodeIfPresent(.hasMoreLocations)
+        assignedTo = try container.sdkDecodeIfPresent(.assignedTo)
+        closureRequestComment = try container.sdkDecodeIfPresent(.closureRequestComment)
+        closureRequestReviewerComment = try container.sdkDecodeIfPresent(.closureRequestReviewerComment)
+        closureRequestReviewer = try container.sdkDecodeIfPresent(.closureRequestReviewer)
+        metadata = try container.sdkDecodeIfPresent(.metadata)
         try sdkValidateConstraints()
     }
 }
 
-extension SecretScanningAlertWithMetadata {
-    public init(number: AlertNumber? = nil, createdAt: AlertCreatedAt? = nil, updatedAt: NullableAlertUpdatedAt? = nil, url: AlertUrl? = nil, htmlUrl: AlertHtmlUrl? = nil, locationsUrl: String? = nil, state: SecretScanningAlertState? = nil, resolution: SecretScanningAlertResolution? = nil, resolvedAt: Date? = nil, resolvedBy: NullableSimpleUser? = nil, resolutionComment: String? = nil, secretType: String? = nil, secretTypeDisplayName: String? = nil, provider: String? = nil, providerSlug: String? = nil, secret: String? = nil, pushProtectionBypassed: Bool? = nil, pushProtectionBypassedBy: NullableSimpleUser? = nil, pushProtectionBypassedAt: Date? = nil, pushProtectionBypassRequestReviewer: NullableSimpleUser? = nil, pushProtectionBypassRequestReviewerComment: String? = nil, pushProtectionBypassRequestComment: String? = nil, pushProtectionBypassRequestHtmlUrl: String? = nil, validity: SecretScanningAlertWithMetadataValidity? = nil, publiclyLeaked: Bool? = nil, multiRepo: Bool? = nil, isBase64Encoded: Bool? = nil, firstLocationDetected: NullableSecretScanningFirstDetectedLocation? = nil, hasMoreLocations: Bool? = nil, assignedTo: NullableSimpleUser? = nil, closureRequestComment: String? = nil, closureRequestReviewerComment: String? = nil, closureRequestReviewer: NullableSimpleUser? = nil, metadata: SecretScanningAlertMetadata? = nil) throws {
+public extension SecretScanningAlertWithMetadata {
+    init(
+        number: AlertNumber? = nil,
+        createdAt: AlertCreatedAt? = nil,
+        updatedAt: NullableAlertUpdatedAt? = nil,
+        url: AlertUrl? = nil,
+        htmlUrl: AlertHtmlUrl? = nil,
+        locationsUrl: String? = nil,
+        state: SecretScanningAlertState? = nil,
+        resolution: SecretScanningAlertResolution? = nil,
+        resolvedAt: Date? = nil,
+        resolvedBy: NullableSimpleUser? = nil,
+        resolutionComment: String? = nil,
+        secretType: String? = nil,
+        secretTypeDisplayName: String? = nil,
+        provider: String? = nil,
+        providerSlug: String? = nil,
+        secret: String? = nil,
+        pushProtectionBypassed: Bool? = nil,
+        pushProtectionBypassedBy: NullableSimpleUser? = nil,
+        pushProtectionBypassedAt: Date? = nil,
+        pushProtectionBypassRequestReviewer: NullableSimpleUser? = nil,
+        pushProtectionBypassRequestReviewerComment: String? = nil,
+        pushProtectionBypassRequestComment: String? = nil,
+        pushProtectionBypassRequestHtmlUrl: String? = nil,
+        validity: SecretScanningAlertWithMetadataValidity? = nil,
+        publiclyLeaked: Bool? = nil,
+        multiRepo: Bool? = nil,
+        isBase64Encoded: Bool? = nil,
+        firstLocationDetected: NullableSecretScanningFirstDetectedLocation? = nil,
+        hasMoreLocations: Bool? = nil,
+        assignedTo: NullableSimpleUser? = nil,
+        closureRequestComment: String? = nil,
+        closureRequestReviewerComment: String? = nil,
+        closureRequestReviewer: NullableSimpleUser? = nil,
+        metadata: SecretScanningAlertMetadata? = nil
+    ) throws {
         self.init()
         (self.number, self.createdAt) = (number, createdAt)
         (self.updatedAt, self.url) = (updatedAt, url)
@@ -341,28 +433,28 @@ extension SecretScanningAlertWithMetadata {
 
 extension SecretScanningAlertWithMetadata {
     func sdkValidateConstraints() throws {
-        if let value = self.createdAt {
+        if let value = createdAt {
             try sdkValidateDateTime("created_at", sdkWireString(value))
         }
-        if let value = self.updatedAt {
+        if let value = updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
-        if let value = self.url {
+        if let value = url {
             try sdkValidateUri("url", sdkWireString(value))
         }
-        if let value = self.htmlUrl {
+        if let value = htmlUrl {
             try sdkValidateUri("html_url", sdkWireString(value))
         }
-        if let value = self.locationsUrl {
+        if let value = locationsUrl {
             try sdkValidateUri("locations_url", value)
         }
-        if let value = self.resolvedAt {
+        if let value = resolvedAt {
             try sdkValidateDateTime("resolved_at", sdkWireString(value))
         }
-        if let value = self.pushProtectionBypassedAt {
+        if let value = pushProtectionBypassedAt {
             try sdkValidateDateTime("push_protection_bypassed_at", sdkWireString(value))
         }
-        if let value = self.pushProtectionBypassRequestHtmlUrl {
+        if let value = pushProtectionBypassRequestHtmlUrl {
             try sdkValidateUri("push_protection_bypass_request_html_url", value)
         }
     }
@@ -413,32 +505,51 @@ public struct SecretScanningPatternOverride: Codable {
     }
 
     init() {
-        (self.tokenType, self.customPatternVersion, self.slug, self.displayName, self.alertTotal) = (nil, nil, nil, nil, nil)
-        (self.alertTotalPercentage, self.falsePositives, self.falsePositiveRate, self.bypassRate, self.defaultSetting) = (nil, nil, nil, nil, nil)
-        (self.enterpriseSetting, self.setting) = (nil, nil)
+        (tokenType, customPatternVersion, slug, displayName, alertTotal) = (nil, nil, nil, nil, nil)
+        (alertTotalPercentage, falsePositives, falsePositiveRate, bypassRate, defaultSetting) = (
+            nil,
+            nil,
+            nil,
+            nil,
+            nil
+        )
+        (enterpriseSetting, setting) = (nil, nil)
     }
 }
 
-extension SecretScanningPatternOverride {
-    public init(from decoder: Decoder) throws {
+public extension SecretScanningPatternOverride {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.tokenType = try container.sdkDecodeIfPresent(.tokenType)
-        self.customPatternVersion = try container.sdkDecodeIfPresent(.customPatternVersion)
-        self.slug = try container.sdkDecodeIfPresent(.slug)
-        self.displayName = try container.sdkDecodeIfPresent(.displayName)
-        self.alertTotal = try container.sdkDecodeIfPresent(.alertTotal)
-        self.alertTotalPercentage = try container.sdkDecodeIfPresent(.alertTotalPercentage)
-        self.falsePositives = try container.sdkDecodeIfPresent(.falsePositives)
-        self.falsePositiveRate = try container.sdkDecodeIfPresent(.falsePositiveRate)
-        self.bypassRate = try container.sdkDecodeIfPresent(.bypassRate)
-        self.defaultSetting = try container.sdkDecodeIfPresent(.defaultSetting)
-        self.enterpriseSetting = try container.sdkDecodeIfPresent(.enterpriseSetting)
-        self.setting = try container.sdkDecodeIfPresent(.setting)
+        tokenType = try container.sdkDecodeIfPresent(.tokenType)
+        customPatternVersion = try container.sdkDecodeIfPresent(.customPatternVersion)
+        slug = try container.sdkDecodeIfPresent(.slug)
+        displayName = try container.sdkDecodeIfPresent(.displayName)
+        alertTotal = try container.sdkDecodeIfPresent(.alertTotal)
+        alertTotalPercentage = try container.sdkDecodeIfPresent(.alertTotalPercentage)
+        falsePositives = try container.sdkDecodeIfPresent(.falsePositives)
+        falsePositiveRate = try container.sdkDecodeIfPresent(.falsePositiveRate)
+        bypassRate = try container.sdkDecodeIfPresent(.bypassRate)
+        defaultSetting = try container.sdkDecodeIfPresent(.defaultSetting)
+        enterpriseSetting = try container.sdkDecodeIfPresent(.enterpriseSetting)
+        setting = try container.sdkDecodeIfPresent(.setting)
     }
 }
 
-extension SecretScanningPatternOverride {
-    public init(tokenType: String? = nil, customPatternVersion: String? = nil, slug: String? = nil, displayName: String? = nil, alertTotal: Int? = nil, alertTotalPercentage: Int? = nil, falsePositives: Int? = nil, falsePositiveRate: Int? = nil, bypassRate: Int? = nil, defaultSetting: SecretScanningPatternOverrideDefaultSetting? = nil, enterpriseSetting: SecretScanningPatternOverrideEnterpriseSetting? = nil, setting: SecretScanningPatternOverrideSetting? = nil) {
+public extension SecretScanningPatternOverride {
+    init(
+        tokenType: String? = nil,
+        customPatternVersion: String? = nil,
+        slug: String? = nil,
+        displayName: String? = nil,
+        alertTotal: Int? = nil,
+        alertTotalPercentage: Int? = nil,
+        falsePositives: Int? = nil,
+        falsePositiveRate: Int? = nil,
+        bypassRate: Int? = nil,
+        defaultSetting: SecretScanningPatternOverrideDefaultSetting? = nil,
+        enterpriseSetting: SecretScanningPatternOverrideEnterpriseSetting? = nil,
+        setting: SecretScanningPatternOverrideSetting? = nil
+    ) {
         self.init()
         (self.tokenType, self.customPatternVersion) = (tokenType, customPatternVersion)
         (self.slug, self.displayName) = (slug, displayName)

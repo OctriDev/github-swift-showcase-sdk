@@ -3,7 +3,7 @@
 
 import Foundation
 
-// SharedPull domain models
+/// SharedPull domain models
 /// The user who archived the label, or `null` if it has not been archived.
 public struct PullRequestSimpleLabelsItemArchivedBy: Codable {
     /// Required `string` value serialized in the `login` wire field.
@@ -95,40 +95,65 @@ public struct PullRequestSimpleLabelsItemArchivedBy: Codable {
         case userViewType = "user_view_type"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension PullRequestSimpleLabelsItemArchivedBy {
-    public init(from decoder: Decoder) throws {
+public extension PullRequestSimpleLabelsItemArchivedBy {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.login = try container.sdkDecodeRequired(.login)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
-        self.gravatarId = try container.sdkDecodeNullable(.gravatarId)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.followersUrl = try container.sdkDecodeRequired(.followersUrl)
-        self.followingUrl = try container.sdkDecodeRequired(.followingUrl)
-        self.gistsUrl = try container.sdkDecodeRequired(.gistsUrl)
-        self.starredUrl = try container.sdkDecodeRequired(.starredUrl)
-        self.subscriptionsUrl = try container.sdkDecodeRequired(.subscriptionsUrl)
-        self.organizationsUrl = try container.sdkDecodeRequired(.organizationsUrl)
-        self.reposUrl = try container.sdkDecodeRequired(.reposUrl)
-        self.eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        self.receivedEventsUrl = try container.sdkDecodeRequired(.receivedEventsUrl)
-        self.type = try container.sdkDecodeRequired(.type)
-        self.siteAdmin = try container.sdkDecodeRequired(.siteAdmin)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.email = try container.sdkDecodeIfPresent(.email)
-        self.starredAt = try container.sdkDecodeIfPresent(.starredAt)
-        self.userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        login = try container.sdkDecodeRequired(.login)
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
+        gravatarId = try container.sdkDecodeNullable(.gravatarId)
+        url = try container.sdkDecodeRequired(.url)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        followersUrl = try container.sdkDecodeRequired(.followersUrl)
+        followingUrl = try container.sdkDecodeRequired(.followingUrl)
+        gistsUrl = try container.sdkDecodeRequired(.gistsUrl)
+        starredUrl = try container.sdkDecodeRequired(.starredUrl)
+        subscriptionsUrl = try container.sdkDecodeRequired(.subscriptionsUrl)
+        organizationsUrl = try container.sdkDecodeRequired(.organizationsUrl)
+        reposUrl = try container.sdkDecodeRequired(.reposUrl)
+        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
+        receivedEventsUrl = try container.sdkDecodeRequired(.receivedEventsUrl)
+        type = try container.sdkDecodeRequired(.type)
+        siteAdmin = try container.sdkDecodeRequired(.siteAdmin)
+        name = try container.sdkDecodeIfPresent(.name)
+        email = try container.sdkDecodeIfPresent(.email)
+        starredAt = try container.sdkDecodeIfPresent(.starredAt)
+        userViewType = try container.sdkDecodeIfPresent(.userViewType)
         try sdkValidateConstraints()
     }
 }
 
-extension PullRequestSimpleLabelsItemArchivedBy {
-    public init(login: String, id: Int, nodeId: String, avatarUrl: String, gravatarId: String?, url: String, htmlUrl: String, followersUrl: String, followingUrl: String, gistsUrl: String, starredUrl: String, subscriptionsUrl: String, organizationsUrl: String, reposUrl: String, eventsUrl: String, receivedEventsUrl: String, type: String, siteAdmin: Bool, name: String? = nil, email: String? = nil, starredAt: String? = nil, userViewType: String? = nil) throws {
+public extension PullRequestSimpleLabelsItemArchivedBy {
+    init(
+        login: String,
+        id: Int,
+        nodeId: String,
+        avatarUrl: String,
+        gravatarId: String?,
+        url: String,
+        htmlUrl: String,
+        followersUrl: String,
+        followingUrl: String,
+        gistsUrl: String,
+        starredUrl: String,
+        subscriptionsUrl: String,
+        organizationsUrl: String,
+        reposUrl: String,
+        eventsUrl: String,
+        receivedEventsUrl: String,
+        type: String,
+        siteAdmin: Bool,
+        name: String? = nil,
+        email: String? = nil,
+        starredAt: String? = nil,
+        userViewType: String? = nil
+    ) throws {
         (self.login, self.id) = (login, id)
         (self.nodeId, self.avatarUrl) = (nodeId, avatarUrl)
         (self.gravatarId, self.url) = (gravatarId, url)
@@ -146,14 +171,14 @@ extension PullRequestSimpleLabelsItemArchivedBy {
 
 extension PullRequestSimpleLabelsItemArchivedBy {
     func sdkValidateConstraints() throws {
-            try sdkValidateUri("avatar_url", self.avatarUrl)
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("followers_url", self.followersUrl)
-            try sdkValidateUri("subscriptions_url", self.subscriptionsUrl)
-            try sdkValidateUri("organizations_url", self.organizationsUrl)
-            try sdkValidateUri("repos_url", self.reposUrl)
-            try sdkValidateUri("received_events_url", self.receivedEventsUrl)
+        try sdkValidateUri("avatar_url", avatarUrl)
+        try sdkValidateUri("url", url)
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateUri("followers_url", followersUrl)
+        try sdkValidateUri("subscriptions_url", subscriptionsUrl)
+        try sdkValidateUri("organizations_url", organizationsUrl)
+        try sdkValidateUri("repos_url", reposUrl)
+        try sdkValidateUri("received_events_url", receivedEventsUrl)
     }
 }
 
@@ -178,37 +203,59 @@ public struct PullRequestMinimal: Codable {
         case base
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension PullRequestMinimal {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.number) else {
-            throw SdkValidationError(field: "number", code: "required", message: "Validation failed for 'number': value is required")
-        }
-        guard container.contains(.url) else {
-            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
-        }
-        guard container.contains(.head) else {
-            throw SdkValidationError(field: "head", code: "required", message: "Validation failed for 'head': value is required")
-        }
-        guard container.contains(.base) else {
-            throw SdkValidationError(field: "base", code: "required", message: "Validation failed for 'base': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.number = try container.sdkDecodeRequired(.number)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.head = try container.sdkDecodeRequired(.head)
-        self.base = try container.sdkDecodeRequired(.base)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension PullRequestMinimal {
-    public init(id: Int, number: Int, url: String, head: PullRequestMinimalHead, base: PullRequestMinimalBase) {
+public extension PullRequestMinimal {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.number) else {
+            throw SdkValidationError(
+                field: "number",
+                code: "required",
+                message: "Validation failed for 'number': value is required"
+            )
+        }
+        guard container.contains(.url) else {
+            throw SdkValidationError(
+                field: "url",
+                code: "required",
+                message: "Validation failed for 'url': value is required"
+            )
+        }
+        guard container.contains(.head) else {
+            throw SdkValidationError(
+                field: "head",
+                code: "required",
+                message: "Validation failed for 'head': value is required"
+            )
+        }
+        guard container.contains(.base) else {
+            throw SdkValidationError(
+                field: "base",
+                code: "required",
+                message: "Validation failed for 'base': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        number = try container.sdkDecodeRequired(.number)
+        url = try container.sdkDecodeRequired(.url)
+        head = try container.sdkDecodeRequired(.head)
+        base = try container.sdkDecodeRequired(.base)
+    }
+}
+
+public extension PullRequestMinimal {
+    init(id: Int, number: Int, url: String, head: PullRequestMinimalHead, base: PullRequestMinimalBase) {
         (self.id, self.number) = (id, number)
         (self.url, self.head) = (url, head)
         self.base = base
@@ -230,29 +277,43 @@ public struct PullRequestMinimalHeadRepo: Codable {
         case name
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension PullRequestMinimalHeadRepo {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.url) else {
-            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
-        }
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.name = try container.sdkDecodeRequired(.name)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension PullRequestMinimalHeadRepo {
-    public init(id: Int, url: String, name: String) {
+public extension PullRequestMinimalHeadRepo {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.url) else {
+            throw SdkValidationError(
+                field: "url",
+                code: "required",
+                message: "Validation failed for 'url': value is required"
+            )
+        }
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        url = try container.sdkDecodeRequired(.url)
+        name = try container.sdkDecodeRequired(.name)
+    }
+}
+
+public extension PullRequestMinimalHeadRepo {
+    init(id: Int, url: String, name: String) {
         (self.id, self.url) = (id, url)
         self.name = name
     }
@@ -263,13 +324,16 @@ extension PullRequestMinimalHeadRepo {
 public struct PullRequestReviewCommentSide: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let left = PullRequestReviewCommentSide(rawValue: "LEFT")
     public static let right = PullRequestReviewCommentSide(rawValue: "RIGHT")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -282,13 +346,16 @@ public struct PullRequestReviewCommentSide: RawRepresentable, Hashable, Codable,
 public struct PullRequestReviewCommentSubjectType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let line = PullRequestReviewCommentSubjectType(rawValue: "line")
     public static let file = PullRequestReviewCommentSubjectType(rawValue: "file")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -301,13 +368,16 @@ public struct PullRequestReviewCommentSubjectType: RawRepresentable, Hashable, C
 public struct PullRequestReviewCommentStartSide: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let left = PullRequestReviewCommentStartSide(rawValue: "LEFT")
     public static let right = PullRequestReviewCommentStartSide(rawValue: "RIGHT")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

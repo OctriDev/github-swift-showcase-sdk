@@ -6,8 +6,10 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension PackagesMethods {
-    /// Lists packages owned by the authenticated user within the user's namespace. OAuth app tokens and personal access tokens (classic) need the `read:packages` scope to use this endpoint. For more information, see "[About permissions for GitHub Packages](https://docs.github.com/packages/learn-github-packages/about-permissions-for-github-packages#permissions-for-repository-scoped-packages)."
+public extension PackagesMethods {
+    /// Lists packages owned by the authenticated user within the user's namespace. OAuth app tokens and personal access
+    /// tokens (classic) need the `read:packages` scope to use this endpoint. For more information, see "[About
+    /// permissions for GitHub Packages](https://docs.github.com/packages/learn-github-packages/about-permissions-for-github-packages#permissions-for-repository-scoped-packages)."
     ///
     /// - Parameters:
     /// - packageType: The type of supported package. Packages in GitHub's Gradle
@@ -33,8 +35,15 @@ extension PackagesMethods {
     ///   see "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func packagesListPackagesForAuthenticatedUser(config: ClientConfig, packageType: PackagesListPackagesForAuthenticatedUserParameter, visibility: PackagesListPackagesForOrganizationParameter? = nil, page: Int? = nil, perPage: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [Package] {
-        return try (await sdkRequest("GET", "/user/packages", config: config, query: [
+    static func packagesListPackagesForAuthenticatedUser(
+        config: ClientConfig,
+        packageType: PackagesListPackagesForAuthenticatedUserParameter,
+        visibility: PackagesListPackagesForOrganizationParameter? = nil,
+        page: Int? = nil,
+        perPage: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [Package] {
+        try await (sdkRequest("GET", "/user/packages", config: config, query: [
             SdkQueryParameter("package_type", value: packageType),
             SdkQueryParameter("visibility", value: visibility),
             SdkQueryParameter("page", value: page),

@@ -28,7 +28,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testAppsListInstallationsForAuthenticatedUserAppsListInstallationX89b19b427dReachesMockAndDecodesResponse() async throws {
+    func testAppsListInstallationsForAuthenticatedUserAppsListInstallationX89b19b427dReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -48,7 +49,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testAppsListInstallationsForAuthenticatedUserAppsListInstallationX73519863b5ReachesMockAndDecodesResponse() async throws {
+    func testAppsListInstallationsForAuthenticatedUserAppsListInstallationX73519863b5ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -59,9 +61,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.apps.listInstallationsForAuthenticatedUser(
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("appsListInstallationsForAuthenticatedUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -109,9 +111,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.apps.listPlans(
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("appsListPlans did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -159,9 +161,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.apps.listPlansStubbed(
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("appsListPlansStubbed did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -178,7 +180,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testAppsListReposAccessibleToInstallationAppsListReposAccessibleTX6f881bfaf7ReachesMockAndDecodesResponse() async throws {
+    func testAppsListReposAccessibleToInstallationAppsListReposAccessibleTX6f881bfaf7ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -198,7 +201,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testAppsListReposAccessibleToInstallationAppsListReposAccessibleTX93e31fe23bReachesMockAndDecodesResponse() async throws {
+    func testAppsListReposAccessibleToInstallationAppsListReposAccessibleTX93e31fe23bReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -209,9 +213,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.apps.listReposAccessibleToInstallation(
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("appsListReposAccessibleToInstallation did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -228,7 +232,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testAppsListSubscriptionsForAuthenticatedUserAppsListSubscriptionXa4c72e00d1ReachesMockAndDecodesResponse() async throws {
+    func testAppsListSubscriptionsForAuthenticatedUserAppsListSubscriptionXa4c72e00d1ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -248,7 +253,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testAppsListSubscriptionsForAuthenticatedUserAppsListSubscriptionX6cd3d324d5ReachesMockAndDecodesResponse() async throws {
+    func testAppsListSubscriptionsForAuthenticatedUserAppsListSubscriptionX6cd3d324d5ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -259,9 +265,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.apps.listSubscriptionsForAuthenticatedUser(
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("appsListSubscriptionsForAuthenticatedUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -278,7 +284,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testAppsListSubscriptionsForAuthenticatedUserStubbedAppsListSubscX1b8fce26ebReachesMockAndDecodesResponse() async throws {
+    func testAppsListSubscriptionsForAuthenticatedUserStubbedAppsListSubscX1b8fce26ebReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -298,7 +305,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testAppsListSubscriptionsForAuthenticatedUserStubbedAppsListSubscXd1e6449da5ReachesMockAndDecodesResponse() async throws {
+    func testAppsListSubscriptionsForAuthenticatedUserStubbedAppsListSubscXd1e6449da5ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -309,9 +317,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.apps.listSubscriptionsForAuthenticatedUserStubbed(
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("appsListSubscriptionsForAuthenticatedUserStubbed did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -360,10 +368,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.apps.listWebhookDeliveries(
-            perPage: decoded("30"),
-            cursor: decoded("\"cursor\""),
-            status: decoded("\"success\"")
-        )
+                perPage: decoded("30"),
+                cursor: decoded("\"cursor\""),
+                status: decoded("\"success\"")
+            )
             XCTFail("appsListWebhookDeliveries did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -410,8 +418,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.apps.redeliverWebhookDelivery(
-            deliveryId: decoded("1")
-        )
+                deliveryId: decoded("1")
+            )
             XCTFail("appsRedeliverWebhookDelivery did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -428,7 +436,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testAppsRemoveRepoFromInstallationForAuthenticatedUserAppsRemoveRX93b12ebad7ReachesMockAndDecodesResponse() async throws {
+    func testAppsRemoveRepoFromInstallationForAuthenticatedUserAppsRemoveRX93b12ebad7ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -440,7 +449,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testAppsRemoveRepoFromInstallationForAuthenticatedUserAppsRemoveRXb9e201541eReachesMockAndDecodesResponse() async throws {
+    func testAppsRemoveRepoFromInstallationForAuthenticatedUserAppsRemoveRXb9e201541eReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -451,9 +461,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.apps.removeRepoFromInstallationForAuthenticatedUser(
-            installationId: decoded("1"),
-            repositoryId: decoded("1")
-        )
+                installationId: decoded("1"),
+                repositoryId: decoded("1")
+            )
             XCTFail("appsRemoveRepoFromInstallationForAuthenticatedUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -501,9 +511,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.apps.resetToken(
-            clientId: decoded("\"Iv1.8a61f9b3a7aba766\""),
-            accessToken: decoded("\"e72e16c7e42f292c6912e7710c838347ae178b4a\"")
-        )
+                clientId: decoded("\"Iv1.8a61f9b3a7aba766\""),
+                accessToken: decoded("\"e72e16c7e42f292c6912e7710c838347ae178b4a\"")
+            )
             XCTFail("appsResetToken did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 422)
@@ -520,7 +530,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testAppsRevokeInstallationAccessTokenAppsRevokeInstallationAccessTokenReachesMockAndDecodesResponse() async throws {
+    func testAppsRevokeInstallationAccessTokenAppsRevokeInstallationAccessTokenReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }

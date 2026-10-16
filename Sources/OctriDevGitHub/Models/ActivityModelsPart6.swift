@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Activity domain models
+/// Activity domain models
 /// Stargazer History
 public struct StargazerHistory: Codable {
     /// The number of stars created on each day of the week, starting on Sunday.
@@ -22,29 +22,43 @@ public struct StargazerHistory: Codable {
         case week
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension StargazerHistory {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.days) else {
-            throw SdkValidationError(field: "days", code: "required", message: "Validation failed for 'days': value is required")
-        }
-        guard container.contains(.total) else {
-            throw SdkValidationError(field: "total", code: "required", message: "Validation failed for 'total': value is required")
-        }
-        guard container.contains(.week) else {
-            throw SdkValidationError(field: "week", code: "required", message: "Validation failed for 'week': value is required")
-        }
-        self.days = try container.sdkDecodeRequired(.days)
-        self.total = try container.sdkDecodeRequired(.total)
-        self.week = try container.sdkDecodeRequired(.week)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension StargazerHistory {
-    public init(days: [Int], total: Int, week: Int) {
+public extension StargazerHistory {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.days) else {
+            throw SdkValidationError(
+                field: "days",
+                code: "required",
+                message: "Validation failed for 'days': value is required"
+            )
+        }
+        guard container.contains(.total) else {
+            throw SdkValidationError(
+                field: "total",
+                code: "required",
+                message: "Validation failed for 'total': value is required"
+            )
+        }
+        guard container.contains(.week) else {
+            throw SdkValidationError(
+                field: "week",
+                code: "required",
+                message: "Validation failed for 'week': value is required"
+            )
+        }
+        days = try container.sdkDecodeRequired(.days)
+        total = try container.sdkDecodeRequired(.total)
+        week = try container.sdkDecodeRequired(.week)
+    }
+}
+
+public extension StargazerHistory {
+    init(days: [Int], total: Int, week: Int) {
         (self.days, self.total) = (days, total)
         self.week = week
     }
@@ -74,45 +88,74 @@ public struct Actor: Codable {
         case displayLogin = "display_login"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension Actor {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.login) else {
-            throw SdkValidationError(field: "login", code: "required", message: "Validation failed for 'login': value is required")
-        }
-        guard container.contains(.gravatarId) else {
-            throw SdkValidationError(field: "gravatar_id", code: "required", message: "Validation failed for 'gravatar_id': value is required")
-        }
-        guard container.contains(.url) else {
-            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
-        }
-        guard container.contains(.avatarUrl) else {
-            throw SdkValidationError(field: "avatar_url", code: "required", message: "Validation failed for 'avatar_url': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.login = try container.sdkDecodeRequired(.login)
-        self.gravatarId = try container.sdkDecodeNullable(.gravatarId)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
-        self.displayLogin = try container.sdkDecodeIfPresent(.displayLogin)
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("avatar_url", self.avatarUrl)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension Actor {
-    public init(id: Int, login: String, gravatarId: String?, url: String, avatarUrl: String, displayLogin: String? = nil) throws {
+public extension Actor {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.login) else {
+            throw SdkValidationError(
+                field: "login",
+                code: "required",
+                message: "Validation failed for 'login': value is required"
+            )
+        }
+        guard container.contains(.gravatarId) else {
+            throw SdkValidationError(
+                field: "gravatar_id",
+                code: "required",
+                message: "Validation failed for 'gravatar_id': value is required"
+            )
+        }
+        guard container.contains(.url) else {
+            throw SdkValidationError(
+                field: "url",
+                code: "required",
+                message: "Validation failed for 'url': value is required"
+            )
+        }
+        guard container.contains(.avatarUrl) else {
+            throw SdkValidationError(
+                field: "avatar_url",
+                code: "required",
+                message: "Validation failed for 'avatar_url': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        login = try container.sdkDecodeRequired(.login)
+        gravatarId = try container.sdkDecodeNullable(.gravatarId)
+        url = try container.sdkDecodeRequired(.url)
+        avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
+        displayLogin = try container.sdkDecodeIfPresent(.displayLogin)
+        try sdkValidateUri("url", url)
+        try sdkValidateUri("avatar_url", avatarUrl)
+    }
+}
+
+public extension Actor {
+    init(
+        id: Int,
+        login: String,
+        gravatarId: String?,
+        url: String,
+        avatarUrl: String,
+        displayLogin: String? = nil
+    ) throws {
         (self.id, self.login) = (id, login)
         (self.gravatarId, self.url) = (gravatarId, url)
         (self.avatarUrl, self.displayLogin) = (avatarUrl, displayLogin)
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("avatar_url", self.avatarUrl)
+        try sdkValidateUri("url", self.url)
+        try sdkValidateUri("avatar_url", self.avatarUrl)
     }
 }
 
@@ -373,8 +416,8 @@ extension ForkEventForkee {
     }
 }
 
-extension ForkEventForkee {
-    public init(from decoder: Decoder) throws {
+public extension ForkEventForkee {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.init(sdkDefaults: ())
         try sdkDecodeFieldsPart1(container)
@@ -384,20 +427,103 @@ extension ForkEventForkee {
         try sdkDecodeFieldsPart5(container)
         try sdkDecodeFieldsPart6(container)
         try sdkDecodeFieldsPart7(container)
-        if let value = self.createdAt {
+        if let value = createdAt {
             try sdkValidateDateTime("created_at", sdkWireString(value))
         }
-        if let value = self.updatedAt {
+        if let value = updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
-        if let value = self.pushedAt {
+        if let value = pushedAt {
             try sdkValidateDateTime("pushed_at", sdkWireString(value))
         }
     }
 }
 
-extension ForkEventForkee {
-    public init(id: Int? = nil, nodeId: String? = nil, name: String? = nil, fullName: String? = nil, `private`: Bool? = nil, owner: SimpleUser? = nil, htmlUrl: String? = nil, description: String? = nil, fork: Bool? = nil, url: String? = nil, forksUrl: String? = nil, keysUrl: String? = nil, collaboratorsUrl: String? = nil, teamsUrl: String? = nil, hooksUrl: String? = nil, issueEventsUrl: String? = nil, eventsUrl: String? = nil, assigneesUrl: String? = nil, branchesUrl: String? = nil, tagsUrl: String? = nil, blobsUrl: String? = nil, gitTagsUrl: String? = nil, gitRefsUrl: String? = nil, treesUrl: String? = nil, statusesUrl: String? = nil, languagesUrl: String? = nil, stargazersUrl: String? = nil, contributorsUrl: String? = nil, subscribersUrl: String? = nil, subscriptionUrl: String? = nil, commitsUrl: String? = nil, gitCommitsUrl: String? = nil, commentsUrl: String? = nil, issueCommentUrl: String? = nil, contentsUrl: String? = nil, compareUrl: String? = nil, mergesUrl: String? = nil, archiveUrl: String? = nil, downloadsUrl: String? = nil, issuesUrl: String? = nil, pullsUrl: String? = nil, milestonesUrl: String? = nil, notificationsUrl: String? = nil, labelsUrl: String? = nil, releasesUrl: String? = nil, deploymentsUrl: String? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, pushedAt: Date? = nil, gitUrl: String? = nil, sshUrl: String? = nil, cloneUrl: String? = nil, svnUrl: String? = nil, homepage: String? = nil, size: Int? = nil, stargazersCount: Int? = nil, watchersCount: Int? = nil, language: String? = nil, hasIssues: Bool? = nil, hasProjects: Bool? = nil, hasDownloads: Bool? = nil, hasWiki: Bool? = nil, hasPages: Bool? = nil, hasDiscussions: Bool? = nil, hasPullRequests: Bool? = nil, pullRequestCreationPolicy: ForkEventForkeePullRequestCreationPolicy? = nil, forksCount: Int? = nil, mirrorUrl: String? = nil, archived: Bool? = nil, disabled: Bool? = nil, openIssuesCount: Int? = nil, license: NullableLicenseSimple? = nil, allowForking: Bool? = nil, isTemplate: Bool? = nil, webCommitSignoffRequired: Bool? = nil, topics: [String]? = nil, visibility: String? = nil, forks: Int? = nil, openIssues: Int? = nil, watchers: Int? = nil, defaultBranch: String? = nil, `public`: Bool? = nil) throws {
+public extension ForkEventForkee {
+    init(
+        id: Int? = nil,
+        nodeId: String? = nil,
+        name: String? = nil,
+        fullName: String? = nil,
+        private: Bool? = nil,
+        owner: SimpleUser? = nil,
+        htmlUrl: String? = nil,
+        description: String? = nil,
+        fork: Bool? = nil,
+        url: String? = nil,
+        forksUrl: String? = nil,
+        keysUrl: String? = nil,
+        collaboratorsUrl: String? = nil,
+        teamsUrl: String? = nil,
+        hooksUrl: String? = nil,
+        issueEventsUrl: String? = nil,
+        eventsUrl: String? = nil,
+        assigneesUrl: String? = nil,
+        branchesUrl: String? = nil,
+        tagsUrl: String? = nil,
+        blobsUrl: String? = nil,
+        gitTagsUrl: String? = nil,
+        gitRefsUrl: String? = nil,
+        treesUrl: String? = nil,
+        statusesUrl: String? = nil,
+        languagesUrl: String? = nil,
+        stargazersUrl: String? = nil,
+        contributorsUrl: String? = nil,
+        subscribersUrl: String? = nil,
+        subscriptionUrl: String? = nil,
+        commitsUrl: String? = nil,
+        gitCommitsUrl: String? = nil,
+        commentsUrl: String? = nil,
+        issueCommentUrl: String? = nil,
+        contentsUrl: String? = nil,
+        compareUrl: String? = nil,
+        mergesUrl: String? = nil,
+        archiveUrl: String? = nil,
+        downloadsUrl: String? = nil,
+        issuesUrl: String? = nil,
+        pullsUrl: String? = nil,
+        milestonesUrl: String? = nil,
+        notificationsUrl: String? = nil,
+        labelsUrl: String? = nil,
+        releasesUrl: String? = nil,
+        deploymentsUrl: String? = nil,
+        createdAt: Date? = nil,
+        updatedAt: Date? = nil,
+        pushedAt: Date? = nil,
+        gitUrl: String? = nil,
+        sshUrl: String? = nil,
+        cloneUrl: String? = nil,
+        svnUrl: String? = nil,
+        homepage: String? = nil,
+        size: Int? = nil,
+        stargazersCount: Int? = nil,
+        watchersCount: Int? = nil,
+        language: String? = nil,
+        hasIssues: Bool? = nil,
+        hasProjects: Bool? = nil,
+        hasDownloads: Bool? = nil,
+        hasWiki: Bool? = nil,
+        hasPages: Bool? = nil,
+        hasDiscussions: Bool? = nil,
+        hasPullRequests: Bool? = nil,
+        pullRequestCreationPolicy: ForkEventForkeePullRequestCreationPolicy? = nil,
+        forksCount: Int? = nil,
+        mirrorUrl: String? = nil,
+        archived: Bool? = nil,
+        disabled: Bool? = nil,
+        openIssuesCount: Int? = nil,
+        license: NullableLicenseSimple? = nil,
+        allowForking: Bool? = nil,
+        isTemplate: Bool? = nil,
+        webCommitSignoffRequired: Bool? = nil,
+        topics: [String]? = nil,
+        visibility: String? = nil,
+        forks: Int? = nil,
+        openIssues: Int? = nil,
+        watchers: Int? = nil,
+        defaultBranch: String? = nil,
+        public: Bool? = nil
+    ) throws {
         self.init(sdkDefaults: ())
         sdkSet1(id, nodeId, name, fullName, `private`)
         sdkSet2(owner, htmlUrl, description, fork, url)
@@ -429,17 +555,23 @@ extension ForkEventForkee {
 }
 
 extension ForkEventForkee {
-    mutating func sdkSet1(_ id: Int?, _ nodeId: String?, _ name: String?, _ fullName: String?, _ `private`: Bool?) {
+    mutating func sdkSet1(_ id: Int?, _ nodeId: String?, _ name: String?, _ fullName: String?, _ private: Bool?) {
         self.id = id
         self.nodeId = nodeId
         self.name = name
         self.fullName = fullName
-        self.`private` = `private`
+        self.private = `private`
     }
 }
 
 extension ForkEventForkee {
-    mutating func sdkSet2(_ owner: SimpleUser?, _ htmlUrl: String?, _ description: String?, _ fork: Bool?, _ url: String?) {
+    mutating func sdkSet2(
+        _ owner: SimpleUser?,
+        _ htmlUrl: String?,
+        _ description: String?,
+        _ fork: Bool?,
+        _ url: String?
+    ) {
         self.owner = owner
         self.htmlUrl = htmlUrl
         self.description = description
@@ -449,7 +581,13 @@ extension ForkEventForkee {
 }
 
 extension ForkEventForkee {
-    mutating func sdkSet3(_ forksUrl: String?, _ keysUrl: String?, _ collaboratorsUrl: String?, _ teamsUrl: String?, _ hooksUrl: String?) {
+    mutating func sdkSet3(
+        _ forksUrl: String?,
+        _ keysUrl: String?,
+        _ collaboratorsUrl: String?,
+        _ teamsUrl: String?,
+        _ hooksUrl: String?
+    ) {
         self.forksUrl = forksUrl
         self.keysUrl = keysUrl
         self.collaboratorsUrl = collaboratorsUrl
@@ -459,7 +597,13 @@ extension ForkEventForkee {
 }
 
 extension ForkEventForkee {
-    mutating func sdkSet4(_ issueEventsUrl: String?, _ eventsUrl: String?, _ assigneesUrl: String?, _ branchesUrl: String?, _ tagsUrl: String?) {
+    mutating func sdkSet4(
+        _ issueEventsUrl: String?,
+        _ eventsUrl: String?,
+        _ assigneesUrl: String?,
+        _ branchesUrl: String?,
+        _ tagsUrl: String?
+    ) {
         self.issueEventsUrl = issueEventsUrl
         self.eventsUrl = eventsUrl
         self.assigneesUrl = assigneesUrl
@@ -469,7 +613,13 @@ extension ForkEventForkee {
 }
 
 extension ForkEventForkee {
-    mutating func sdkSet5(_ blobsUrl: String?, _ gitTagsUrl: String?, _ gitRefsUrl: String?, _ treesUrl: String?, _ statusesUrl: String?) {
+    mutating func sdkSet5(
+        _ blobsUrl: String?,
+        _ gitTagsUrl: String?,
+        _ gitRefsUrl: String?,
+        _ treesUrl: String?,
+        _ statusesUrl: String?
+    ) {
         self.blobsUrl = blobsUrl
         self.gitTagsUrl = gitTagsUrl
         self.gitRefsUrl = gitRefsUrl

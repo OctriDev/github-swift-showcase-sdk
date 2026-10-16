@@ -6,7 +6,8 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testSecretScanningListAlertsForOrgSecretScanningListAlertsForOrg404ReachesMockAndDecodesResponse() async throws {
+    func testSecretScanningListAlertsForOrgSecretScanningListAlertsForOrg404ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -38,8 +39,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.secretScanning.listAlertsForOrg(
-            options: options
-        )
+                options: options
+            )
             XCTFail("secretScanningListAlertsForOrg did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -61,7 +62,10 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try SecretScanningMethods.SecretScanningListAlertsForRepoOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""))
+        var options = try SecretScanningMethods.SecretScanningListAlertsForRepoOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\"")
+        )
         options.state = try decoded("\"open\"")
         options.secretType = try decoded("\"secret_type\"")
         options.excludeSecretTypes = try decoded("\"exclude_secret_types\"")
@@ -96,7 +100,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testSecretScanningListLocationsForAlertSecretScanningListLocationsForAlertReachesMockAndDecodesResponse() async throws {
+    func testSecretScanningListLocationsForAlertSecretScanningListLocationsForAlertReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -119,7 +124,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testSecretScanningListOrgCustomPatternsSecretScanningListOrgCustomPatternsReachesMockAndDecodesResponse() async throws {
+    func testSecretScanningListOrgCustomPatternsSecretScanningListOrgCustomPatternsReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -144,7 +150,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testSecretScanningListOrgCustomPatternsSecretScanningListOrgCustoX3225c13178ReachesMockAndDecodesResponse() async throws {
+    func testSecretScanningListOrgCustomPatternsSecretScanningListOrgCustoX3225c13178ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -155,14 +162,14 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.secretScanning.listOrgCustomPatterns(
-            org: decoded("\"org\""),
-            state: decoded("\"published\""),
-            pushProtection: decoded("\"enabled\""),
-            sort: decoded("\"created\""),
-            direction: decoded("\"desc\""),
-            before: decoded("\"before\""),
-            after: decoded("\"after\"")
-        )
+                org: decoded("\"org\""),
+                state: decoded("\"published\""),
+                pushProtection: decoded("\"enabled\""),
+                sort: decoded("\"created\""),
+                direction: decoded("\"desc\""),
+                before: decoded("\"before\""),
+                after: decoded("\"after\"")
+            )
             XCTFail("secretScanningListOrgCustomPatterns did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -179,7 +186,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testSecretScanningListOrgPatternConfigsSecretScanningListOrgPatternConfigsReachesMockAndDecodesResponse() async throws {
+    func testSecretScanningListOrgPatternConfigsSecretScanningListOrgPatternConfigsReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -198,7 +206,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testSecretScanningListOrgPatternConfigsSecretScanningListOrgPatteX006b8a13dbReachesMockAndDecodesResponse() async throws {
+    func testSecretScanningListOrgPatternConfigsSecretScanningListOrgPatteX006b8a13dbReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -209,8 +218,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.secretScanning.listOrgPatternConfigs(
-            org: decoded("\"org\"")
-        )
+                org: decoded("\"org\"")
+            )
             XCTFail("secretScanningListOrgPatternConfigs did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -227,12 +236,16 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testSecretScanningListRepoCustomPatternsSecretScanningListRepoCustomPatternsReachesMockAndDecodesResponse() async throws {
+    func testSecretScanningListRepoCustomPatternsSecretScanningListRepoCustomPatternsReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        var options = try SecretScanningMethods.SecretScanningListRepoCustomPatternsOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""))
+        var options = try SecretScanningMethods.SecretScanningListRepoCustomPatternsOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\"")
+        )
         options.state = try decoded("\"published\"")
         options.pushProtection = try decoded("\"enabled\"")
         options.sort = try decoded("\"created\"")
@@ -253,12 +266,16 @@ extension SdkMethodTests {
         )
     }
 
-    func testSecretScanningListRepoCustomPatternsSecretScanningListRepoCusXbc9b2f39bbReachesMockAndDecodesResponse() async throws {
+    func testSecretScanningListRepoCustomPatternsSecretScanningListRepoCusXbc9b2f39bbReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
         _ = client
-        var options = try SecretScanningMethods.SecretScanningListRepoCustomPatternsOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""))
+        var options = try SecretScanningMethods.SecretScanningListRepoCustomPatternsOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\"")
+        )
         options.state = try decoded("\"published\"")
         options.pushProtection = try decoded("\"enabled\"")
         options.sort = try decoded("\"created\"")
@@ -271,8 +288,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.secretScanning.listRepoCustomPatterns(
-            options: options
-        )
+                options: options
+            )
             XCTFail("secretScanningListRepoCustomPatterns did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -294,7 +311,11 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try SecretScanningMethods.SecretScanningUpdateAlertOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), alertNumber: decoded("1"))
+        var options = try SecretScanningMethods.SecretScanningUpdateAlertOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            alertNumber: decoded("1")
+        )
         options.state = try decoded("\"resolved\"")
         options.resolution = try decoded("\"false_positive\"")
         options.resolutionComment = try decoded("null")
@@ -314,12 +335,17 @@ extension SdkMethodTests {
         )
     }
 
-    func testSecretScanningUpdateOrgCustomPatternSecretScanningUpdateOrgCustomPatternReachesMockAndDecodesResponse() async throws {
+    func testSecretScanningUpdateOrgCustomPatternSecretScanningUpdateOrgCustomPatternReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        var options = try SecretScanningMethods.SecretScanningUpdateOrgCustomPatternOptions(org: decoded("\"org\""), patternId: decoded("1"), customPatternVersion: decoded("\"0ujsswThIGTUYm2K8FjOOfXtY1K\""))
+        var options = try SecretScanningMethods.SecretScanningUpdateOrgCustomPatternOptions(
+            org: decoded("\"org\""),
+            patternId: decoded("1"),
+            customPatternVersion: decoded("\"0ujsswThIGTUYm2K8FjOOfXtY1K\"")
+        )
         options.pattern = try decoded("\"updated_secret_[0-9A-Z]{16}\"")
         options.startDelimiter = try decoded("\"[^0-9A-Za-z]\"")
         options.endDelimiter = try decoded("\"[^0-9A-Za-z]\"")
@@ -339,12 +365,17 @@ extension SdkMethodTests {
         )
     }
 
-    func testSecretScanningUpdateOrgCustomPatternSecretScanningUpdateOrgCuX75babfab12ReachesMockAndDecodesResponse() async throws {
+    func testSecretScanningUpdateOrgCustomPatternSecretScanningUpdateOrgCuX75babfab12ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
             return
         }
         _ = client
-        var options = try SecretScanningMethods.SecretScanningUpdateOrgCustomPatternOptions(org: decoded("\"org\""), patternId: decoded("1"), customPatternVersion: decoded("\"0ujsswThIGTUYm2K8FjOOfXtY1K\""))
+        var options = try SecretScanningMethods.SecretScanningUpdateOrgCustomPatternOptions(
+            org: decoded("\"org\""),
+            patternId: decoded("1"),
+            customPatternVersion: decoded("\"0ujsswThIGTUYm2K8FjOOfXtY1K\"")
+        )
         options.pattern = try decoded("\"updated_secret_[0-9A-Z]{16}\"")
         options.startDelimiter = try decoded("\"[^0-9A-Za-z]\"")
         options.endDelimiter = try decoded("\"[^0-9A-Za-z]\"")
@@ -356,8 +387,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.secretScanning.updateOrgCustomPattern(
-            options: options
-        )
+                options: options
+            )
             XCTFail("secretScanningUpdateOrgCustomPattern did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -374,7 +405,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testSecretScanningUpdateOrgPatternConfigsSecretScanningUpdateOrgPXb050b4783aReachesMockAndDecodesResponse() async throws {
+    func testSecretScanningUpdateOrgPatternConfigsSecretScanningUpdateOrgPXb050b4783aReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -396,7 +428,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testSecretScanningUpdateOrgPatternConfigsSecretScanningUpdateOrgPXb69eb7eef4ReachesMockAndDecodesResponse() async throws {
+    func testSecretScanningUpdateOrgPatternConfigsSecretScanningUpdateOrgPXb69eb7eef4ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
             return
         }
@@ -407,11 +440,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.secretScanning.updateOrgPatternConfigs(
-            org: decoded("\"org\""),
-            patternConfigVersion: decoded("\"0ujsswThIGTUYm2K8FjOOfXtY1K\""),
-            providerPatternSettings: decoded(sdkMethodFixture1868Value1),
-            customPatternSettings: decoded(sdkMethodFixture1868Value2)
-        )
+                org: decoded("\"org\""),
+                patternConfigVersion: decoded("\"0ujsswThIGTUYm2K8FjOOfXtY1K\""),
+                providerPatternSettings: decoded(sdkMethodFixture1868Value1),
+                customPatternSettings: decoded(sdkMethodFixture1868Value2)
+            )
             XCTFail("secretScanningUpdateOrgPatternConfigs did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -428,12 +461,18 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testSecretScanningUpdateRepoCustomPatternSecretScanningUpdateRepoXb3a49c7715ReachesMockAndDecodesResponse() async throws {
+    func testSecretScanningUpdateRepoCustomPatternSecretScanningUpdateRepoXb3a49c7715ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        var options = try SecretScanningMethods.SecretScanningUpdateRepoCustomPatternOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), patternId: decoded("1"), customPatternVersion: decoded("\"0ujsswThIGTUYm2K8FjOOfXtY1K\""))
+        var options = try SecretScanningMethods.SecretScanningUpdateRepoCustomPatternOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            patternId: decoded("1"),
+            customPatternVersion: decoded("\"0ujsswThIGTUYm2K8FjOOfXtY1K\"")
+        )
         options.pattern = try decoded("\"updated_secret_[0-9A-Z]{16}\"")
         options.startDelimiter = try decoded("\"[^0-9A-Za-z]\"")
         options.endDelimiter = try decoded("\"[^0-9A-Za-z]\"")
@@ -453,12 +492,18 @@ extension SdkMethodTests {
         )
     }
 
-    func testSecretScanningUpdateRepoCustomPatternSecretScanningUpdateRepoXd3bb813deaReachesMockAndDecodesResponse() async throws {
+    func testSecretScanningUpdateRepoCustomPatternSecretScanningUpdateRepoXd3bb813deaReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
             return
         }
         _ = client
-        var options = try SecretScanningMethods.SecretScanningUpdateRepoCustomPatternOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), patternId: decoded("1"), customPatternVersion: decoded("\"0ujsswThIGTUYm2K8FjOOfXtY1K\""))
+        var options = try SecretScanningMethods.SecretScanningUpdateRepoCustomPatternOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            patternId: decoded("1"),
+            customPatternVersion: decoded("\"0ujsswThIGTUYm2K8FjOOfXtY1K\"")
+        )
         options.pattern = try decoded("\"updated_secret_[0-9A-Z]{16}\"")
         options.startDelimiter = try decoded("\"[^0-9A-Za-z]\"")
         options.endDelimiter = try decoded("\"[^0-9A-Za-z]\"")
@@ -470,8 +515,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.secretScanning.updateRepoCustomPattern(
-            options: options
-        )
+                options: options
+            )
             XCTFail("secretScanningUpdateRepoCustomPattern did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -495,10 +540,10 @@ extension SdkMethodTests {
         _ = client
         do {
             _ = try await client.securityAdvisories.createFork(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            ghsaId: decoded("\"ghsa-1\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                ghsaId: decoded("\"ghsa-1\"")
+            )
             XCTFail("securityAdvisoriesCreateFork decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {

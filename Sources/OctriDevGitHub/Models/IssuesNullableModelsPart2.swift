@@ -3,7 +3,7 @@
 
 import Foundation
 
-// IssuesNullable domain models
+/// IssuesNullable domain models
 /// Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
 public struct NullableIssue: Codable {
     /// Required `int64`-formatted value serialized in the `id` wire field.
@@ -144,58 +144,101 @@ public struct NullableIssue: Codable {
         case issueFieldValues = "issue_field_values"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension NullableIssue {
-    public init(from decoder: Decoder) throws {
+public extension NullableIssue {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.repositoryUrl = try container.sdkDecodeRequired(.repositoryUrl)
-        self.labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
-        self.commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
-        self.eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.number = try container.sdkDecodeRequired(.number)
-        self.state = try container.sdkDecodeRequired(.state)
-        self.title = try container.sdkDecodeRequired(.title)
-        self.user = try container.sdkDecodeNullable(.user)
-        self.labels = try container.sdkDecodeRequired(.labels)
-        self.assignee = try container.sdkDecodeNullable(.assignee)
-        self.milestone = try container.sdkDecodeNullable(.milestone)
-        self.locked = try container.sdkDecodeRequired(.locked)
-        self.comments = try container.sdkDecodeRequired(.comments)
-        self.closedAt = try container.sdkDecodeNullable(.closedAt)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        self.stateReason = try container.sdkDecodeIfPresent(.stateReason)
-        self.body = try container.sdkDecodeIfPresent(.body)
-        self.assignees = try container.sdkDecodeIfPresent(.assignees)
-        self.activeLockReason = try container.sdkDecodeIfPresent(.activeLockReason)
-        self.pullRequest = try container.sdkDecodeIfPresent(.pullRequest)
-        self.draft = try container.sdkDecodeIfPresent(.draft)
-        self.closedBy = try container.sdkDecodeIfPresent(.closedBy)
-        self.bodyHtml = try container.sdkDecodeIfPresent(.bodyHtml)
-        self.bodyText = try container.sdkDecodeIfPresent(.bodyText)
-        self.timelineUrl = try container.sdkDecodeIfPresent(.timelineUrl)
-        self.type = try container.sdkDecodeIfPresent(.type)
-        self.repository = try container.sdkDecodeIfPresent(.repository)
-        self.performedViaGithubApp = try container.sdkDecodeIfPresent(.performedViaGithubApp)
-        self.authorAssociation = try container.sdkDecodeIfPresent(.authorAssociation)
-        self.reactions = try container.sdkDecodeIfPresent(.reactions)
-        self.subIssuesSummary = try container.sdkDecodeIfPresent(.subIssuesSummary)
-        self.parentIssueUrl = try container.sdkDecodeIfPresent(.parentIssueUrl)
-        self.pinnedComment = try container.sdkDecodeIfPresent(.pinnedComment)
-        self.issueDependenciesSummary = try container.sdkDecodeIfPresent(.issueDependenciesSummary)
-        self.issueFieldValues = try container.sdkDecodeIfPresent(.issueFieldValues)
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        url = try container.sdkDecodeRequired(.url)
+        repositoryUrl = try container.sdkDecodeRequired(.repositoryUrl)
+        labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
+        commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
+        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        number = try container.sdkDecodeRequired(.number)
+        state = try container.sdkDecodeRequired(.state)
+        title = try container.sdkDecodeRequired(.title)
+        user = try container.sdkDecodeNullable(.user)
+        labels = try container.sdkDecodeRequired(.labels)
+        assignee = try container.sdkDecodeNullable(.assignee)
+        milestone = try container.sdkDecodeNullable(.milestone)
+        locked = try container.sdkDecodeRequired(.locked)
+        comments = try container.sdkDecodeRequired(.comments)
+        closedAt = try container.sdkDecodeNullable(.closedAt)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        stateReason = try container.sdkDecodeIfPresent(.stateReason)
+        body = try container.sdkDecodeIfPresent(.body)
+        assignees = try container.sdkDecodeIfPresent(.assignees)
+        activeLockReason = try container.sdkDecodeIfPresent(.activeLockReason)
+        pullRequest = try container.sdkDecodeIfPresent(.pullRequest)
+        draft = try container.sdkDecodeIfPresent(.draft)
+        closedBy = try container.sdkDecodeIfPresent(.closedBy)
+        bodyHtml = try container.sdkDecodeIfPresent(.bodyHtml)
+        bodyText = try container.sdkDecodeIfPresent(.bodyText)
+        timelineUrl = try container.sdkDecodeIfPresent(.timelineUrl)
+        type = try container.sdkDecodeIfPresent(.type)
+        repository = try container.sdkDecodeIfPresent(.repository)
+        performedViaGithubApp = try container.sdkDecodeIfPresent(.performedViaGithubApp)
+        authorAssociation = try container.sdkDecodeIfPresent(.authorAssociation)
+        reactions = try container.sdkDecodeIfPresent(.reactions)
+        subIssuesSummary = try container.sdkDecodeIfPresent(.subIssuesSummary)
+        parentIssueUrl = try container.sdkDecodeIfPresent(.parentIssueUrl)
+        pinnedComment = try container.sdkDecodeIfPresent(.pinnedComment)
+        issueDependenciesSummary = try container.sdkDecodeIfPresent(.issueDependenciesSummary)
+        issueFieldValues = try container.sdkDecodeIfPresent(.issueFieldValues)
         try sdkValidateConstraints()
     }
 }
 
-extension NullableIssue {
-    public init(id: Int, nodeId: String, url: String, repositoryUrl: String, labelsUrl: String, commentsUrl: String, eventsUrl: String, htmlUrl: String, number: Int, state: String, title: String, user: NullableSimpleUser?, labels: [NullableIssueLabelsItem], assignee: NullableSimpleUser?, milestone: NullableMilestone?, locked: Bool, comments: Int, closedAt: Date?, createdAt: Date, updatedAt: Date, stateReason: NullableIssueStateReason? = nil, body: String? = nil, assignees: [SimpleUser]? = nil, activeLockReason: String? = nil, pullRequest: NullableIssuePullRequest? = nil, draft: Bool? = nil, closedBy: NullableSimpleUser? = nil, bodyHtml: String? = nil, bodyText: String? = nil, timelineUrl: String? = nil, type: IssueType? = nil, repository: Repository? = nil, performedViaGithubApp: NullableIntegration? = nil, authorAssociation: AuthorAssociation? = nil, reactions: ReactionRollup? = nil, subIssuesSummary: SubIssuesSummary? = nil, parentIssueUrl: String? = nil, pinnedComment: NullableIssueComment? = nil, issueDependenciesSummary: IssueDependenciesSummary? = nil, issueFieldValues: [IssueFieldValue]? = nil) throws {
+public extension NullableIssue {
+    init(
+        id: Int,
+        nodeId: String,
+        url: String,
+        repositoryUrl: String,
+        labelsUrl: String,
+        commentsUrl: String,
+        eventsUrl: String,
+        htmlUrl: String,
+        number: Int,
+        state: String,
+        title: String,
+        user: NullableSimpleUser?,
+        labels: [NullableIssueLabelsItem],
+        assignee: NullableSimpleUser?,
+        milestone: NullableMilestone?,
+        locked: Bool,
+        comments: Int,
+        closedAt: Date?,
+        createdAt: Date,
+        updatedAt: Date,
+        stateReason: NullableIssueStateReason? = nil,
+        body: String? = nil,
+        assignees: [SimpleUser]? = nil,
+        activeLockReason: String? = nil,
+        pullRequest: NullableIssuePullRequest? = nil,
+        draft: Bool? = nil,
+        closedBy: NullableSimpleUser? = nil,
+        bodyHtml: String? = nil,
+        bodyText: String? = nil,
+        timelineUrl: String? = nil,
+        type: IssueType? = nil,
+        repository: Repository? = nil,
+        performedViaGithubApp: NullableIntegration? = nil,
+        authorAssociation: AuthorAssociation? = nil,
+        reactions: ReactionRollup? = nil,
+        subIssuesSummary: SubIssuesSummary? = nil,
+        parentIssueUrl: String? = nil,
+        pinnedComment: NullableIssueComment? = nil,
+        issueDependenciesSummary: IssueDependenciesSummary? = nil,
+        issueFieldValues: [IssueFieldValue]? = nil
+    ) throws {
         (self.id, self.nodeId) = (id, nodeId)
         (self.url, self.repositoryUrl) = (url, repositoryUrl)
         (self.labelsUrl, self.commentsUrl) = (labelsUrl, commentsUrl)
@@ -223,20 +266,20 @@ extension NullableIssue {
 
 extension NullableIssue {
     func sdkValidateConstraints() throws {
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("repository_url", self.repositoryUrl)
-            try sdkValidateUri("comments_url", self.commentsUrl)
-            try sdkValidateUri("events_url", self.eventsUrl)
-            try sdkValidateUri("html_url", self.htmlUrl)
-        if let value = self.closedAt {
+        try sdkValidateUri("url", url)
+        try sdkValidateUri("repository_url", repositoryUrl)
+        try sdkValidateUri("comments_url", commentsUrl)
+        try sdkValidateUri("events_url", eventsUrl)
+        try sdkValidateUri("html_url", htmlUrl)
+        if let value = closedAt {
             try sdkValidateDateTime("closed_at", sdkWireString(value))
         }
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-        if let value = self.timelineUrl {
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+        if let value = timelineUrl {
             try sdkValidateUri("timeline_url", value)
         }
-        if let value = self.parentIssueUrl {
+        if let value = parentIssueUrl {
             try sdkValidateUri("parent_issue_url", value)
         }
     }
@@ -273,35 +316,44 @@ public struct NullableIssueLabelsItemVariant1: Codable {
     }
 
     init() {
-        (self.id, self.nodeId, self.url, self.name, self.description) = (nil, nil, nil, nil, nil)
-        (self.color, self.`default`, self.archivedBy) = (nil, nil, nil)
+        (id, nodeId, url, name, description) = (nil, nil, nil, nil, nil)
+        (color, self.default, archivedBy) = (nil, nil, nil)
     }
 }
 
-extension NullableIssueLabelsItemVariant1 {
-    public init(from decoder: Decoder) throws {
+public extension NullableIssueLabelsItemVariant1 {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeIfPresent(.id)
-        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        self.url = try container.sdkDecodeIfPresent(.url)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.description = try container.sdkDecodeIfPresent(.description)
-        self.color = try container.sdkDecodeIfPresent(.color)
-        self.`default` = try container.sdkDecodeIfPresent(.`default`)
-        self.archivedBy = try container.sdkDecodeIfPresent(.archivedBy)
-        if let value = self.url {
+        id = try container.sdkDecodeIfPresent(.id)
+        nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        url = try container.sdkDecodeIfPresent(.url)
+        name = try container.sdkDecodeIfPresent(.name)
+        description = try container.sdkDecodeIfPresent(.description)
+        color = try container.sdkDecodeIfPresent(.color)
+        self.default = try container.sdkDecodeIfPresent(.default)
+        archivedBy = try container.sdkDecodeIfPresent(.archivedBy)
+        if let value = url {
             try sdkValidateUri("url", value)
         }
     }
 }
 
-extension NullableIssueLabelsItemVariant1 {
-    public init(id: Int? = nil, nodeId: String? = nil, url: String? = nil, name: String? = nil, description: String? = nil, color: String? = nil, `default`: Bool? = nil, archivedBy: NullableIssueLabelsItemVariant1ArchivedBy? = nil) throws {
+public extension NullableIssueLabelsItemVariant1 {
+    init(
+        id: Int? = nil,
+        nodeId: String? = nil,
+        url: String? = nil,
+        name: String? = nil,
+        description: String? = nil,
+        color: String? = nil,
+        default: Bool? = nil,
+        archivedBy: NullableIssueLabelsItemVariant1ArchivedBy? = nil
+    ) throws {
         self.init()
         (self.id, self.nodeId) = (id, nodeId)
         (self.url, self.name) = (url, name)
         (self.description, self.color) = (description, color)
-        (self.`default`, self.archivedBy) = (`default`, archivedBy)
+        (self.default, self.archivedBy) = (`default`, archivedBy)
         if let value = self.url {
             try sdkValidateUri("url", value)
         }
@@ -312,14 +364,17 @@ extension NullableIssueLabelsItemVariant1 {
 public struct NullableIssueEventIntentConfidence: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let low = NullableIssueEventIntentConfidence(rawValue: "LOW")
     public static let medium = NullableIssueEventIntentConfidence(rawValue: "MEDIUM")
     public static let high = NullableIssueEventIntentConfidence(rawValue: "HIGH")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -332,7 +387,10 @@ public struct NullableIssueEventIntentConfidence: RawRepresentable, Hashable, Co
 public struct NullableIssueStateReason: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let completed = NullableIssueStateReason(rawValue: "completed")
     public static let reopened = NullableIssueStateReason(rawValue: "reopened")
     public static let notPlanned = NullableIssueStateReason(rawValue: "not_planned")
@@ -340,7 +398,7 @@ public struct NullableIssueStateReason: RawRepresentable, Hashable, Codable, Sen
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

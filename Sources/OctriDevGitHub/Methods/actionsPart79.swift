@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ActionsMethods {
-    /// Deletes an Actions policy from a repository. Use `policy_id` to identify the policy you want to remove; this operation does not return a response body when successful.
+public extension ActionsMethods {
+    /// Deletes an Actions policy from a repository. Use `policy_id` to identify the policy you want to remove; this
+    /// operation does not return a response body when successful.
     ///
     /// Delete an Actions policy for a repository.
     ///
@@ -17,7 +18,28 @@ extension ActionsMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - policyId: The ID of the policy.
-    public static func actionsDeleteRepoActionsPolicy(config: ClientConfig, owner: String, repo: String, policyId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/actions/policies/", sdkEncodePathSegment(sdkWireString(policyId))].joined(), config: config, decoder: .empty, operationId: "actionsDeleteRepoActionsPolicy", options: requestOptions, errors: ["404": BasicError.self, "500": BasicError.self])).data
+    static func actionsDeleteRepoActionsPolicy(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        policyId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/actions/policies/",
+                sdkEncodePathSegment(sdkWireString(policyId)),
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "actionsDeleteRepoActionsPolicy",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "500": BasicError.self]
+        )).data
     }
 }

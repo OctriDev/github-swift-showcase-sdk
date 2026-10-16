@@ -3,7 +3,7 @@
 
 import Foundation
 
-// AgentTasks domain models
+/// AgentTasks domain models
 /// A Git branch reference
 public struct ArtifactsItemDataVariant1: Codable {
     /// Head branch name
@@ -16,25 +16,35 @@ public struct ArtifactsItemDataVariant1: Codable {
         case baseRef = "base_ref"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ArtifactsItemDataVariant1 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.headRef) else {
-            throw SdkValidationError(field: "head_ref", code: "required", message: "Validation failed for 'head_ref': value is required")
-        }
-        guard container.contains(.baseRef) else {
-            throw SdkValidationError(field: "base_ref", code: "required", message: "Validation failed for 'base_ref': value is required")
-        }
-        self.headRef = try container.sdkDecodeRequired(.headRef)
-        self.baseRef = try container.sdkDecodeRequired(.baseRef)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ArtifactsItemDataVariant1 {
-    public init(headRef: String, baseRef: String) {
+public extension ArtifactsItemDataVariant1 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.headRef) else {
+            throw SdkValidationError(
+                field: "head_ref",
+                code: "required",
+                message: "Validation failed for 'head_ref': value is required"
+            )
+        }
+        guard container.contains(.baseRef) else {
+            throw SdkValidationError(
+                field: "base_ref",
+                code: "required",
+                message: "Validation failed for 'base_ref': value is required"
+            )
+        }
+        headRef = try container.sdkDecodeRequired(.headRef)
+        baseRef = try container.sdkDecodeRequired(.baseRef)
+    }
+}
+
+public extension ArtifactsItemDataVariant1 {
+    init(headRef: String, baseRef: String) {
         (self.headRef, self.baseRef) = (headRef, baseRef)
     }
 }

@@ -3,9 +3,15 @@
 
 import Foundation
 
-// Activity domain models
+/// Activity domain models
 extension ForkEventForkee {
-    mutating func sdkSet6(_ languagesUrl: String?, _ stargazersUrl: String?, _ contributorsUrl: String?, _ subscribersUrl: String?, _ subscriptionUrl: String?) {
+    mutating func sdkSet6(
+        _ languagesUrl: String?,
+        _ stargazersUrl: String?,
+        _ contributorsUrl: String?,
+        _ subscribersUrl: String?,
+        _ subscriptionUrl: String?
+    ) {
         self.languagesUrl = languagesUrl
         self.stargazersUrl = stargazersUrl
         self.contributorsUrl = contributorsUrl
@@ -15,7 +21,13 @@ extension ForkEventForkee {
 }
 
 extension ForkEventForkee {
-    mutating func sdkSet7(_ commitsUrl: String?, _ gitCommitsUrl: String?, _ commentsUrl: String?, _ issueCommentUrl: String?, _ contentsUrl: String?) {
+    mutating func sdkSet7(
+        _ commitsUrl: String?,
+        _ gitCommitsUrl: String?,
+        _ commentsUrl: String?,
+        _ issueCommentUrl: String?,
+        _ contentsUrl: String?
+    ) {
         self.commitsUrl = commitsUrl
         self.gitCommitsUrl = gitCommitsUrl
         self.commentsUrl = commentsUrl
@@ -25,7 +37,13 @@ extension ForkEventForkee {
 }
 
 extension ForkEventForkee {
-    mutating func sdkSet8(_ compareUrl: String?, _ mergesUrl: String?, _ archiveUrl: String?, _ downloadsUrl: String?, _ issuesUrl: String?) {
+    mutating func sdkSet8(
+        _ compareUrl: String?,
+        _ mergesUrl: String?,
+        _ archiveUrl: String?,
+        _ downloadsUrl: String?,
+        _ issuesUrl: String?
+    ) {
         self.compareUrl = compareUrl
         self.mergesUrl = mergesUrl
         self.archiveUrl = archiveUrl
@@ -35,7 +53,13 @@ extension ForkEventForkee {
 }
 
 extension ForkEventForkee {
-    mutating func sdkSet9(_ pullsUrl: String?, _ milestonesUrl: String?, _ notificationsUrl: String?, _ labelsUrl: String?, _ releasesUrl: String?) {
+    mutating func sdkSet9(
+        _ pullsUrl: String?,
+        _ milestonesUrl: String?,
+        _ notificationsUrl: String?,
+        _ labelsUrl: String?,
+        _ releasesUrl: String?
+    ) {
         self.pullsUrl = pullsUrl
         self.milestonesUrl = milestonesUrl
         self.notificationsUrl = notificationsUrl
@@ -45,7 +69,13 @@ extension ForkEventForkee {
 }
 
 extension ForkEventForkee {
-    mutating func sdkSet10(_ deploymentsUrl: String?, _ createdAt: Date?, _ updatedAt: Date?, _ pushedAt: Date?, _ gitUrl: String?) {
+    mutating func sdkSet10(
+        _ deploymentsUrl: String?,
+        _ createdAt: Date?,
+        _ updatedAt: Date?,
+        _ pushedAt: Date?,
+        _ gitUrl: String?
+    ) {
         self.deploymentsUrl = deploymentsUrl
         self.createdAt = createdAt
         self.updatedAt = updatedAt
@@ -55,7 +85,13 @@ extension ForkEventForkee {
 }
 
 extension ForkEventForkee {
-    mutating func sdkSet11(_ sshUrl: String?, _ cloneUrl: String?, _ svnUrl: String?, _ homepage: String?, _ size: Int?) {
+    mutating func sdkSet11(
+        _ sshUrl: String?,
+        _ cloneUrl: String?,
+        _ svnUrl: String?,
+        _ homepage: String?,
+        _ size: Int?
+    ) {
         self.sshUrl = sshUrl
         self.cloneUrl = cloneUrl
         self.svnUrl = svnUrl
@@ -65,7 +101,13 @@ extension ForkEventForkee {
 }
 
 extension ForkEventForkee {
-    mutating func sdkSet12(_ stargazersCount: Int?, _ watchersCount: Int?, _ language: String?, _ hasIssues: Bool?, _ hasProjects: Bool?) {
+    mutating func sdkSet12(
+        _ stargazersCount: Int?,
+        _ watchersCount: Int?,
+        _ language: String?,
+        _ hasIssues: Bool?,
+        _ hasProjects: Bool?
+    ) {
         self.stargazersCount = stargazersCount
         self.watchersCount = watchersCount
         self.language = language
@@ -75,7 +117,13 @@ extension ForkEventForkee {
 }
 
 extension ForkEventForkee {
-    mutating func sdkSet13(_ hasDownloads: Bool?, _ hasWiki: Bool?, _ hasPages: Bool?, _ hasDiscussions: Bool?, _ hasPullRequests: Bool?) {
+    mutating func sdkSet13(
+        _ hasDownloads: Bool?,
+        _ hasWiki: Bool?,
+        _ hasPages: Bool?,
+        _ hasDiscussions: Bool?,
+        _ hasPullRequests: Bool?
+    ) {
         self.hasDownloads = hasDownloads
         self.hasWiki = hasWiki
         self.hasPages = hasPages
@@ -85,7 +133,13 @@ extension ForkEventForkee {
 }
 
 extension ForkEventForkee {
-    mutating func sdkSet14(_ pullRequestCreationPolicy: ForkEventForkeePullRequestCreationPolicy?, _ forksCount: Int?, _ mirrorUrl: String?, _ archived: Bool?, _ disabled: Bool?) {
+    mutating func sdkSet14(
+        _ pullRequestCreationPolicy: ForkEventForkeePullRequestCreationPolicy?,
+        _ forksCount: Int?,
+        _ mirrorUrl: String?,
+        _ archived: Bool?,
+        _ disabled: Bool?
+    ) {
         self.pullRequestCreationPolicy = pullRequestCreationPolicy
         self.forksCount = forksCount
         self.mirrorUrl = mirrorUrl
@@ -95,7 +149,13 @@ extension ForkEventForkee {
 }
 
 extension ForkEventForkee {
-    mutating func sdkSet15(_ openIssuesCount: Int?, _ license: NullableLicenseSimple?, _ allowForking: Bool?, _ isTemplate: Bool?, _ webCommitSignoffRequired: Bool?) {
+    mutating func sdkSet15(
+        _ openIssuesCount: Int?,
+        _ license: NullableLicenseSimple?,
+        _ allowForking: Bool?,
+        _ isTemplate: Bool?,
+        _ webCommitSignoffRequired: Bool?
+    ) {
         self.openIssuesCount = openIssuesCount
         self.license = license
         self.allowForking = allowForking
@@ -105,7 +165,13 @@ extension ForkEventForkee {
 }
 
 extension ForkEventForkee {
-    mutating func sdkSet16(_ topics: [String]?, _ visibility: String?, _ forks: Int?, _ openIssues: Int?, _ watchers: Int?) {
+    mutating func sdkSet16(
+        _ topics: [String]?,
+        _ visibility: String?,
+        _ forks: Int?,
+        _ openIssues: Int?,
+        _ watchers: Int?
+    ) {
         self.topics = topics
         self.visibility = visibility
         self.forks = forks
@@ -115,126 +181,126 @@ extension ForkEventForkee {
 }
 
 extension ForkEventForkee {
-    mutating func sdkSet17(_ defaultBranch: String?, _ `public`: Bool?) {
+    mutating func sdkSet17(_ defaultBranch: String?, _ public: Bool?) {
         self.defaultBranch = defaultBranch
-        self.`public` = `public`
+        self.public = `public`
     }
 }
 
 extension ForkEventForkee {
     mutating func sdkDecodeFieldsPart1(_ container: KeyedDecodingContainer<CodingKeys>) throws {
-        self.id = try container.sdkDecodeIfPresent(.id)
-        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.fullName = try container.sdkDecodeIfPresent(.fullName)
-        self.`private` = try container.sdkDecodeIfPresent(.`private`)
-        self.owner = try container.sdkDecodeIfPresent(.owner)
-        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        self.description = try container.sdkDecodeIfPresent(.description)
-        self.fork = try container.sdkDecodeIfPresent(.fork)
-        self.url = try container.sdkDecodeIfPresent(.url)
-        self.forksUrl = try container.sdkDecodeIfPresent(.forksUrl)
-        self.keysUrl = try container.sdkDecodeIfPresent(.keysUrl)
+        id = try container.sdkDecodeIfPresent(.id)
+        nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        name = try container.sdkDecodeIfPresent(.name)
+        fullName = try container.sdkDecodeIfPresent(.fullName)
+        self.private = try container.sdkDecodeIfPresent(.private)
+        owner = try container.sdkDecodeIfPresent(.owner)
+        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        description = try container.sdkDecodeIfPresent(.description)
+        fork = try container.sdkDecodeIfPresent(.fork)
+        url = try container.sdkDecodeIfPresent(.url)
+        forksUrl = try container.sdkDecodeIfPresent(.forksUrl)
+        keysUrl = try container.sdkDecodeIfPresent(.keysUrl)
     }
 }
 
 extension ForkEventForkee {
     mutating func sdkDecodeFieldsPart2(_ container: KeyedDecodingContainer<CodingKeys>) throws {
-        self.collaboratorsUrl = try container.sdkDecodeIfPresent(.collaboratorsUrl)
-        self.teamsUrl = try container.sdkDecodeIfPresent(.teamsUrl)
-        self.hooksUrl = try container.sdkDecodeIfPresent(.hooksUrl)
-        self.issueEventsUrl = try container.sdkDecodeIfPresent(.issueEventsUrl)
-        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
-        self.assigneesUrl = try container.sdkDecodeIfPresent(.assigneesUrl)
-        self.branchesUrl = try container.sdkDecodeIfPresent(.branchesUrl)
-        self.tagsUrl = try container.sdkDecodeIfPresent(.tagsUrl)
-        self.blobsUrl = try container.sdkDecodeIfPresent(.blobsUrl)
-        self.gitTagsUrl = try container.sdkDecodeIfPresent(.gitTagsUrl)
-        self.gitRefsUrl = try container.sdkDecodeIfPresent(.gitRefsUrl)
-        self.treesUrl = try container.sdkDecodeIfPresent(.treesUrl)
+        collaboratorsUrl = try container.sdkDecodeIfPresent(.collaboratorsUrl)
+        teamsUrl = try container.sdkDecodeIfPresent(.teamsUrl)
+        hooksUrl = try container.sdkDecodeIfPresent(.hooksUrl)
+        issueEventsUrl = try container.sdkDecodeIfPresent(.issueEventsUrl)
+        eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        assigneesUrl = try container.sdkDecodeIfPresent(.assigneesUrl)
+        branchesUrl = try container.sdkDecodeIfPresent(.branchesUrl)
+        tagsUrl = try container.sdkDecodeIfPresent(.tagsUrl)
+        blobsUrl = try container.sdkDecodeIfPresent(.blobsUrl)
+        gitTagsUrl = try container.sdkDecodeIfPresent(.gitTagsUrl)
+        gitRefsUrl = try container.sdkDecodeIfPresent(.gitRefsUrl)
+        treesUrl = try container.sdkDecodeIfPresent(.treesUrl)
     }
 }
 
 extension ForkEventForkee {
     mutating func sdkDecodeFieldsPart3(_ container: KeyedDecodingContainer<CodingKeys>) throws {
-        self.statusesUrl = try container.sdkDecodeIfPresent(.statusesUrl)
-        self.languagesUrl = try container.sdkDecodeIfPresent(.languagesUrl)
-        self.stargazersUrl = try container.sdkDecodeIfPresent(.stargazersUrl)
-        self.contributorsUrl = try container.sdkDecodeIfPresent(.contributorsUrl)
-        self.subscribersUrl = try container.sdkDecodeIfPresent(.subscribersUrl)
-        self.subscriptionUrl = try container.sdkDecodeIfPresent(.subscriptionUrl)
-        self.commitsUrl = try container.sdkDecodeIfPresent(.commitsUrl)
-        self.gitCommitsUrl = try container.sdkDecodeIfPresent(.gitCommitsUrl)
-        self.commentsUrl = try container.sdkDecodeIfPresent(.commentsUrl)
-        self.issueCommentUrl = try container.sdkDecodeIfPresent(.issueCommentUrl)
-        self.contentsUrl = try container.sdkDecodeIfPresent(.contentsUrl)
-        self.compareUrl = try container.sdkDecodeIfPresent(.compareUrl)
+        statusesUrl = try container.sdkDecodeIfPresent(.statusesUrl)
+        languagesUrl = try container.sdkDecodeIfPresent(.languagesUrl)
+        stargazersUrl = try container.sdkDecodeIfPresent(.stargazersUrl)
+        contributorsUrl = try container.sdkDecodeIfPresent(.contributorsUrl)
+        subscribersUrl = try container.sdkDecodeIfPresent(.subscribersUrl)
+        subscriptionUrl = try container.sdkDecodeIfPresent(.subscriptionUrl)
+        commitsUrl = try container.sdkDecodeIfPresent(.commitsUrl)
+        gitCommitsUrl = try container.sdkDecodeIfPresent(.gitCommitsUrl)
+        commentsUrl = try container.sdkDecodeIfPresent(.commentsUrl)
+        issueCommentUrl = try container.sdkDecodeIfPresent(.issueCommentUrl)
+        contentsUrl = try container.sdkDecodeIfPresent(.contentsUrl)
+        compareUrl = try container.sdkDecodeIfPresent(.compareUrl)
     }
 }
 
 extension ForkEventForkee {
     mutating func sdkDecodeFieldsPart4(_ container: KeyedDecodingContainer<CodingKeys>) throws {
-        self.mergesUrl = try container.sdkDecodeIfPresent(.mergesUrl)
-        self.archiveUrl = try container.sdkDecodeIfPresent(.archiveUrl)
-        self.downloadsUrl = try container.sdkDecodeIfPresent(.downloadsUrl)
-        self.issuesUrl = try container.sdkDecodeIfPresent(.issuesUrl)
-        self.pullsUrl = try container.sdkDecodeIfPresent(.pullsUrl)
-        self.milestonesUrl = try container.sdkDecodeIfPresent(.milestonesUrl)
-        self.notificationsUrl = try container.sdkDecodeIfPresent(.notificationsUrl)
-        self.labelsUrl = try container.sdkDecodeIfPresent(.labelsUrl)
-        self.releasesUrl = try container.sdkDecodeIfPresent(.releasesUrl)
-        self.deploymentsUrl = try container.sdkDecodeIfPresent(.deploymentsUrl)
-        self.createdAt = try container.sdkDecodeIfPresent(.createdAt)
-        self.updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
+        mergesUrl = try container.sdkDecodeIfPresent(.mergesUrl)
+        archiveUrl = try container.sdkDecodeIfPresent(.archiveUrl)
+        downloadsUrl = try container.sdkDecodeIfPresent(.downloadsUrl)
+        issuesUrl = try container.sdkDecodeIfPresent(.issuesUrl)
+        pullsUrl = try container.sdkDecodeIfPresent(.pullsUrl)
+        milestonesUrl = try container.sdkDecodeIfPresent(.milestonesUrl)
+        notificationsUrl = try container.sdkDecodeIfPresent(.notificationsUrl)
+        labelsUrl = try container.sdkDecodeIfPresent(.labelsUrl)
+        releasesUrl = try container.sdkDecodeIfPresent(.releasesUrl)
+        deploymentsUrl = try container.sdkDecodeIfPresent(.deploymentsUrl)
+        createdAt = try container.sdkDecodeIfPresent(.createdAt)
+        updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
     }
 }
 
 extension ForkEventForkee {
     mutating func sdkDecodeFieldsPart5(_ container: KeyedDecodingContainer<CodingKeys>) throws {
-        self.pushedAt = try container.sdkDecodeIfPresent(.pushedAt)
-        self.gitUrl = try container.sdkDecodeIfPresent(.gitUrl)
-        self.sshUrl = try container.sdkDecodeIfPresent(.sshUrl)
-        self.cloneUrl = try container.sdkDecodeIfPresent(.cloneUrl)
-        self.svnUrl = try container.sdkDecodeIfPresent(.svnUrl)
-        self.homepage = try container.sdkDecodeIfPresent(.homepage)
-        self.size = try container.sdkDecodeIfPresent(.size)
-        self.stargazersCount = try container.sdkDecodeIfPresent(.stargazersCount)
-        self.watchersCount = try container.sdkDecodeIfPresent(.watchersCount)
-        self.language = try container.sdkDecodeIfPresent(.language)
-        self.hasIssues = try container.sdkDecodeIfPresent(.hasIssues)
-        self.hasProjects = try container.sdkDecodeIfPresent(.hasProjects)
+        pushedAt = try container.sdkDecodeIfPresent(.pushedAt)
+        gitUrl = try container.sdkDecodeIfPresent(.gitUrl)
+        sshUrl = try container.sdkDecodeIfPresent(.sshUrl)
+        cloneUrl = try container.sdkDecodeIfPresent(.cloneUrl)
+        svnUrl = try container.sdkDecodeIfPresent(.svnUrl)
+        homepage = try container.sdkDecodeIfPresent(.homepage)
+        size = try container.sdkDecodeIfPresent(.size)
+        stargazersCount = try container.sdkDecodeIfPresent(.stargazersCount)
+        watchersCount = try container.sdkDecodeIfPresent(.watchersCount)
+        language = try container.sdkDecodeIfPresent(.language)
+        hasIssues = try container.sdkDecodeIfPresent(.hasIssues)
+        hasProjects = try container.sdkDecodeIfPresent(.hasProjects)
     }
 }
 
 extension ForkEventForkee {
     mutating func sdkDecodeFieldsPart6(_ container: KeyedDecodingContainer<CodingKeys>) throws {
-        self.hasDownloads = try container.sdkDecodeIfPresent(.hasDownloads)
-        self.hasWiki = try container.sdkDecodeIfPresent(.hasWiki)
-        self.hasPages = try container.sdkDecodeIfPresent(.hasPages)
-        self.hasDiscussions = try container.sdkDecodeIfPresent(.hasDiscussions)
-        self.hasPullRequests = try container.sdkDecodeIfPresent(.hasPullRequests)
-        self.pullRequestCreationPolicy = try container.sdkDecodeIfPresent(.pullRequestCreationPolicy)
-        self.forksCount = try container.sdkDecodeIfPresent(.forksCount)
-        self.mirrorUrl = try container.sdkDecodeIfPresent(.mirrorUrl)
-        self.archived = try container.sdkDecodeIfPresent(.archived)
-        self.disabled = try container.sdkDecodeIfPresent(.disabled)
-        self.openIssuesCount = try container.sdkDecodeIfPresent(.openIssuesCount)
-        self.license = try container.sdkDecodeIfPresent(.license)
+        hasDownloads = try container.sdkDecodeIfPresent(.hasDownloads)
+        hasWiki = try container.sdkDecodeIfPresent(.hasWiki)
+        hasPages = try container.sdkDecodeIfPresent(.hasPages)
+        hasDiscussions = try container.sdkDecodeIfPresent(.hasDiscussions)
+        hasPullRequests = try container.sdkDecodeIfPresent(.hasPullRequests)
+        pullRequestCreationPolicy = try container.sdkDecodeIfPresent(.pullRequestCreationPolicy)
+        forksCount = try container.sdkDecodeIfPresent(.forksCount)
+        mirrorUrl = try container.sdkDecodeIfPresent(.mirrorUrl)
+        archived = try container.sdkDecodeIfPresent(.archived)
+        disabled = try container.sdkDecodeIfPresent(.disabled)
+        openIssuesCount = try container.sdkDecodeIfPresent(.openIssuesCount)
+        license = try container.sdkDecodeIfPresent(.license)
     }
 }
 
 extension ForkEventForkee {
     mutating func sdkDecodeFieldsPart7(_ container: KeyedDecodingContainer<CodingKeys>) throws {
-        self.allowForking = try container.sdkDecodeIfPresent(.allowForking)
-        self.isTemplate = try container.sdkDecodeIfPresent(.isTemplate)
-        self.webCommitSignoffRequired = try container.sdkDecodeIfPresent(.webCommitSignoffRequired)
-        self.topics = try container.sdkDecodeIfPresent(.topics)
-        self.visibility = try container.sdkDecodeIfPresent(.visibility)
-        self.forks = try container.sdkDecodeIfPresent(.forks)
-        self.openIssues = try container.sdkDecodeIfPresent(.openIssues)
-        self.watchers = try container.sdkDecodeIfPresent(.watchers)
-        self.defaultBranch = try container.sdkDecodeIfPresent(.defaultBranch)
-        self.`public` = try container.sdkDecodeIfPresent(.`public`)
+        allowForking = try container.sdkDecodeIfPresent(.allowForking)
+        isTemplate = try container.sdkDecodeIfPresent(.isTemplate)
+        webCommitSignoffRequired = try container.sdkDecodeIfPresent(.webCommitSignoffRequired)
+        topics = try container.sdkDecodeIfPresent(.topics)
+        visibility = try container.sdkDecodeIfPresent(.visibility)
+        forks = try container.sdkDecodeIfPresent(.forks)
+        openIssues = try container.sdkDecodeIfPresent(.openIssues)
+        watchers = try container.sdkDecodeIfPresent(.watchers)
+        defaultBranch = try container.sdkDecodeIfPresent(.defaultBranch)
+        self.public = try container.sdkDecodeIfPresent(.public)
     }
 }
 
@@ -250,28 +316,38 @@ public struct Stargazer: Codable {
         case user
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension Stargazer {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.starredAt) else {
-            throw SdkValidationError(field: "starred_at", code: "required", message: "Validation failed for 'starred_at': value is required")
-        }
-        guard container.contains(.user) else {
-            throw SdkValidationError(field: "user", code: "required", message: "Validation failed for 'user': value is required")
-        }
-        self.starredAt = try container.sdkDecodeRequired(.starredAt)
-        self.user = try container.sdkDecodeNullable(.user)
-            try sdkValidateDateTime("starred_at", sdkWireString(self.starredAt))
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension Stargazer {
-    public init(starredAt: Date, user: NullableSimpleUser?) throws {
+public extension Stargazer {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.starredAt) else {
+            throw SdkValidationError(
+                field: "starred_at",
+                code: "required",
+                message: "Validation failed for 'starred_at': value is required"
+            )
+        }
+        guard container.contains(.user) else {
+            throw SdkValidationError(
+                field: "user",
+                code: "required",
+                message: "Validation failed for 'user': value is required"
+            )
+        }
+        starredAt = try container.sdkDecodeRequired(.starredAt)
+        user = try container.sdkDecodeNullable(.user)
+        try sdkValidateDateTime("starred_at", sdkWireString(starredAt))
+    }
+}
+
+public extension Stargazer {
+    init(starredAt: Date, user: NullableSimpleUser?) throws {
         (self.starredAt, self.user) = (starredAt, user)
-            try sdkValidateDateTime("starred_at", sdkWireString(self.starredAt))
+        try sdkValidateDateTime("starred_at", sdkWireString(self.starredAt))
     }
 }
 
@@ -311,33 +387,54 @@ public struct FeedLinks: Codable {
         case repositoryDiscussionsCategory = "repository_discussions_category"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension FeedLinks {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.timeline) else {
-            throw SdkValidationError(field: "timeline", code: "required", message: "Validation failed for 'timeline': value is required")
-        }
-        guard container.contains(.user) else {
-            throw SdkValidationError(field: "user", code: "required", message: "Validation failed for 'user': value is required")
-        }
-        self.timeline = try container.sdkDecodeRequired(.timeline)
-        self.user = try container.sdkDecodeRequired(.user)
-        self.securityAdvisories = try container.sdkDecodeIfPresent(.securityAdvisories)
-        self.currentUser = try container.sdkDecodeIfPresent(.currentUser)
-        self.currentUserPublic = try container.sdkDecodeIfPresent(.currentUserPublic)
-        self.currentUserActor = try container.sdkDecodeIfPresent(.currentUserActor)
-        self.currentUserOrganization = try container.sdkDecodeIfPresent(.currentUserOrganization)
-        self.currentUserOrganizations = try container.sdkDecodeIfPresent(.currentUserOrganizations)
-        self.repositoryDiscussions = try container.sdkDecodeIfPresent(.repositoryDiscussions)
-        self.repositoryDiscussionsCategory = try container.sdkDecodeIfPresent(.repositoryDiscussionsCategory)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension FeedLinks {
-    public init(timeline: LinkWithType, user: LinkWithType, securityAdvisories: LinkWithType? = nil, currentUser: LinkWithType? = nil, currentUserPublic: LinkWithType? = nil, currentUserActor: LinkWithType? = nil, currentUserOrganization: LinkWithType? = nil, currentUserOrganizations: [LinkWithType]? = nil, repositoryDiscussions: LinkWithType? = nil, repositoryDiscussionsCategory: LinkWithType? = nil) {
+public extension FeedLinks {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.timeline) else {
+            throw SdkValidationError(
+                field: "timeline",
+                code: "required",
+                message: "Validation failed for 'timeline': value is required"
+            )
+        }
+        guard container.contains(.user) else {
+            throw SdkValidationError(
+                field: "user",
+                code: "required",
+                message: "Validation failed for 'user': value is required"
+            )
+        }
+        timeline = try container.sdkDecodeRequired(.timeline)
+        user = try container.sdkDecodeRequired(.user)
+        securityAdvisories = try container.sdkDecodeIfPresent(.securityAdvisories)
+        currentUser = try container.sdkDecodeIfPresent(.currentUser)
+        currentUserPublic = try container.sdkDecodeIfPresent(.currentUserPublic)
+        currentUserActor = try container.sdkDecodeIfPresent(.currentUserActor)
+        currentUserOrganization = try container.sdkDecodeIfPresent(.currentUserOrganization)
+        currentUserOrganizations = try container.sdkDecodeIfPresent(.currentUserOrganizations)
+        repositoryDiscussions = try container.sdkDecodeIfPresent(.repositoryDiscussions)
+        repositoryDiscussionsCategory = try container.sdkDecodeIfPresent(.repositoryDiscussionsCategory)
+    }
+}
+
+public extension FeedLinks {
+    init(
+        timeline: LinkWithType,
+        user: LinkWithType,
+        securityAdvisories: LinkWithType? = nil,
+        currentUser: LinkWithType? = nil,
+        currentUserPublic: LinkWithType? = nil,
+        currentUserActor: LinkWithType? = nil,
+        currentUserOrganization: LinkWithType? = nil,
+        currentUserOrganizations: [LinkWithType]? = nil,
+        repositoryDiscussions: LinkWithType? = nil,
+        repositoryDiscussionsCategory: LinkWithType? = nil
+    ) {
         (self.timeline, self.user) = (timeline, user)
         (self.securityAdvisories, self.currentUser) = (securityAdvisories, currentUser)
         (self.currentUserPublic, self.currentUserActor) = (currentUserPublic, currentUserActor)
@@ -414,42 +511,65 @@ public struct PullRequestReviewCommentEventComment: Codable {
         case inReplyToId = "in_reply_to_id"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension PullRequestReviewCommentEventComment {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.pullRequestReviewId = try container.sdkDecodeNullable(.pullRequestReviewId)
-        self.diffHunk = try container.sdkDecodeRequired(.diffHunk)
-        self.path = try container.sdkDecodeRequired(.path)
-        self.position = try container.sdkDecodeNullable(.position)
-        self.originalPosition = try container.sdkDecodeRequired(.originalPosition)
-        self.commitId = try container.sdkDecodeRequired(.commitId)
-        self.user = try container.sdkDecodeNullable(.user)
-        self.body = try container.sdkDecodeRequired(.body)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.pullRequestUrl = try container.sdkDecodeRequired(.pullRequestUrl)
-        self.links = try container.sdkDecodeRequired(.links)
-        self.originalCommitId = try container.sdkDecodeRequired(.originalCommitId)
-        self.reactions = try container.sdkDecodeRequired(.reactions)
-        self.subjectType = try container.sdkDecodeIfPresent(.subjectType)
-        self.inReplyToId = try container.sdkDecodeIfPresent(.inReplyToId)
-            try sdkValidateUri("url", self.url)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("pull_request_url", self.pullRequestUrl)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension PullRequestReviewCommentEventComment {
-    public init(id: Int, nodeId: String, url: String, pullRequestReviewId: Int?, diffHunk: String, path: String, position: Int?, originalPosition: Int, commitId: String, user: PullRequestReviewCommentEventCommentUser?, body: String, createdAt: Date, updatedAt: Date, htmlUrl: String, pullRequestUrl: String, links: PullRequestReviewCommentEventCommentLinks, originalCommitId: String, reactions: PullRequestReviewCommentEventCommentReactions, subjectType: String? = nil, inReplyToId: Int? = nil) throws {
+public extension PullRequestReviewCommentEventComment {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        url = try container.sdkDecodeRequired(.url)
+        pullRequestReviewId = try container.sdkDecodeNullable(.pullRequestReviewId)
+        diffHunk = try container.sdkDecodeRequired(.diffHunk)
+        path = try container.sdkDecodeRequired(.path)
+        position = try container.sdkDecodeNullable(.position)
+        originalPosition = try container.sdkDecodeRequired(.originalPosition)
+        commitId = try container.sdkDecodeRequired(.commitId)
+        user = try container.sdkDecodeNullable(.user)
+        body = try container.sdkDecodeRequired(.body)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        pullRequestUrl = try container.sdkDecodeRequired(.pullRequestUrl)
+        links = try container.sdkDecodeRequired(.links)
+        originalCommitId = try container.sdkDecodeRequired(.originalCommitId)
+        reactions = try container.sdkDecodeRequired(.reactions)
+        subjectType = try container.sdkDecodeIfPresent(.subjectType)
+        inReplyToId = try container.sdkDecodeIfPresent(.inReplyToId)
+        try sdkValidateUri("url", url)
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateUri("pull_request_url", pullRequestUrl)
+    }
+}
+
+public extension PullRequestReviewCommentEventComment {
+    init(
+        id: Int,
+        nodeId: String,
+        url: String,
+        pullRequestReviewId: Int?,
+        diffHunk: String,
+        path: String,
+        position: Int?,
+        originalPosition: Int,
+        commitId: String,
+        user: PullRequestReviewCommentEventCommentUser?,
+        body: String,
+        createdAt: Date,
+        updatedAt: Date,
+        htmlUrl: String,
+        pullRequestUrl: String,
+        links: PullRequestReviewCommentEventCommentLinks,
+        originalCommitId: String,
+        reactions: PullRequestReviewCommentEventCommentReactions,
+        subjectType: String? = nil,
+        inReplyToId: Int? = nil
+    ) throws {
         (self.id, self.nodeId) = (id, nodeId)
         (self.url, self.pullRequestReviewId) = (url, pullRequestReviewId)
         (self.diffHunk, self.path) = (diffHunk, path)
@@ -460,11 +580,11 @@ extension PullRequestReviewCommentEventComment {
         (self.pullRequestUrl, self.links) = (pullRequestUrl, links)
         (self.originalCommitId, self.reactions) = (originalCommitId, reactions)
         (self.subjectType, self.inReplyToId) = (subjectType, inReplyToId)
-            try sdkValidateUri("url", self.url)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("pull_request_url", self.pullRequestUrl)
+        try sdkValidateUri("url", self.url)
+        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+        try sdkValidateUri("html_url", self.htmlUrl)
+        try sdkValidateUri("pull_request_url", self.pullRequestUrl)
     }
 }
 
@@ -477,21 +597,27 @@ public struct WatchEvent: Codable {
         case action
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WatchEvent {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.action) else {
-            throw SdkValidationError(field: "action", code: "required", message: "Validation failed for 'action': value is required")
-        }
-        self.action = try container.sdkDecodeRequired(.action)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WatchEvent {
-    public init(action: String) {
+public extension WatchEvent {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.action) else {
+            throw SdkValidationError(
+                field: "action",
+                code: "required",
+                message: "Validation failed for 'action': value is required"
+            )
+        }
+        action = try container.sdkDecodeRequired(.action)
+    }
+}
+
+public extension WatchEvent {
+    init(action: String) {
         self.action = action
     }
 }

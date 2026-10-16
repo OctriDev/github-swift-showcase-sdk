@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension BillingMethods {
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Gets a summary report of usage for a user. **Note:** Only data from the past 24 months is accessible via this endpoint.
+public extension BillingMethods {
+    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Gets a summary report of usage for a
+    /// user. **Note:** Only data from the past 24 months is accessible via this endpoint.
     ///
     /// - Parameters:
     /// - username: The handle for the GitHub user account.
@@ -25,14 +26,33 @@ extension BillingMethods {
     /// - product: The product name to query usage for. The name is not case
     ///   sensitive.
     /// - sku: The SKU to query for usage.
-    public static func billingGetGithubBillingUsageSummaryReportUser(config: ClientConfig, username: String, year: Int? = nil, month: Int? = nil, day: Int? = nil, repository: String? = nil, product: String? = nil, sku: String? = nil, requestOptions: RequestOptions? = nil) async throws -> BillingUsageSummaryReportUser {
-        return try (await sdkRequest("GET", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/settings/billing/usage/summary"].joined(), config: config, query: [
-            SdkQueryParameter("year", value: year),
-            SdkQueryParameter("month", value: month),
-            SdkQueryParameter("day", value: day),
-            SdkQueryParameter("repository", value: repository),
-            SdkQueryParameter("product", value: product),
-            SdkQueryParameter("sku", value: sku),
-        ], decoder: .json, operationId: "billingGetGithubBillingUsageSummaryReportUser", options: requestOptions, errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self])).data
+    static func billingGetGithubBillingUsageSummaryReportUser(
+        config: ClientConfig,
+        username: String,
+        year: Int? = nil,
+        month: Int? = nil,
+        day: Int? = nil,
+        repository: String? = nil,
+        product: String? = nil,
+        sku: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> BillingUsageSummaryReportUser {
+        try await (sdkRequest(
+            "GET",
+            ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/settings/billing/usage/summary"].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("year", value: year),
+                SdkQueryParameter("month", value: month),
+                SdkQueryParameter("day", value: day),
+                SdkQueryParameter("repository", value: repository),
+                SdkQueryParameter("product", value: product),
+                SdkQueryParameter("sku", value: sku),
+            ],
+            decoder: .json,
+            operationId: "billingGetGithubBillingUsageSummaryReportUser",
+            options: requestOptions,
+            errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self]
+        )).data
     }
 }

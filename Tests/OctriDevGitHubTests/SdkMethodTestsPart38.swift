@@ -11,7 +11,11 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try DependabotMethods.DependabotUpdateAlertOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), alertNumber: decoded("1"))
+        var options = try DependabotMethods.DependabotUpdateAlertOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            alertNumber: decoded("1")
+        )
         options.state = try decoded("\"dismissed\"")
         options.dismissedReason = try decoded("\"tolerable_risk\"")
         options.dismissedComment = try decoded("\"This alert is accurate but we use a sanitizer.\"")
@@ -36,7 +40,11 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try DependabotMethods.DependabotUpdateAlertOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), alertNumber: decoded("1"))
+        var options = try DependabotMethods.DependabotUpdateAlertOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            alertNumber: decoded("1")
+        )
         options.state = try decoded("\"dismissed\"")
         options.dismissedReason = try decoded("\"tolerable_risk\"")
         options.dismissedComment = try decoded("\"This alert is accurate but we use a sanitizer.\"")
@@ -48,8 +56,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.dependabot.updateAlert(
-            options: options
-        )
+                options: options
+            )
             XCTFail("dependabotUpdateAlert did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -66,7 +74,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testDependabotUpdateRepositoryAccessForEnterpriseDependabotUpdateX1d6e3dcbf8ReachesMockAndDecodesResponse() async throws {
+    func testDependabotUpdateRepositoryAccessForEnterpriseDependabotUpdateX1d6e3dcbf8ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -79,7 +88,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testDependabotUpdateRepositoryAccessForEnterpriseDependabotUpdateXb748f1ac24ReachesMockAndDecodesResponse() async throws {
+    func testDependabotUpdateRepositoryAccessForEnterpriseDependabotUpdateXb748f1ac24ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -90,10 +100,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.dependabot.updateRepositoryAccessForEnterprise(
-            enterprise: decoded("\"enterprise\""),
-            repositoryIdsToAdd: decoded("[123,456]"),
-            repositoryIdsToRemove: decoded("null")
-        )
+                enterprise: decoded("\"enterprise\""),
+                repositoryIdsToAdd: decoded("[123,456]"),
+                repositoryIdsToRemove: decoded("null")
+            )
             XCTFail("dependabotUpdateRepositoryAccessForEnterprise did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -110,7 +120,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testDependabotUpdateRepositoryAccessForOrgDependabotUpdateRepositX4330294b86ReachesMockAndDecodesResponse() async throws {
+    func testDependabotUpdateRepositoryAccessForOrgDependabotUpdateRepositX4330294b86ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -123,7 +134,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testDependabotUpdateRepositoryAccessForOrgDependabotUpdateRepositX9cb851b8a0ReachesMockAndDecodesResponse() async throws {
+    func testDependabotUpdateRepositoryAccessForOrgDependabotUpdateRepositX9cb851b8a0ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -134,10 +146,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.dependabot.updateRepositoryAccessForOrg(
-            org: decoded("\"org\""),
-            repositoryIdsToAdd: decoded("[123,456]"),
-            repositoryIdsToRemove: decoded("null")
-        )
+                org: decoded("\"org\""),
+                repositoryIdsToAdd: decoded("[123,456]"),
+                repositoryIdsToRemove: decoded("null")
+            )
             XCTFail("dependabotUpdateRepositoryAccessForOrg did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -154,12 +166,26 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testDependencyGraphCreateRepositorySnapshotDependencyGraphCreateRX24259b9c68ReachesMockAndDecodesResponse() async throws {
+    func testDependencyGraphCreateRepositorySnapshotDependencyGraphCreateRX24259b9c68ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        var options = try DependencyGraphMethods.DependencyGraphCreateRepositorySnapshotOptions(required1: DependencyGraphCreateRepositorySnapshotOptionsRequired1(owner: decoded("\"owner\""), repo: decoded("\"repo\""), version: decoded("0"), job: decoded(sdkMethodFixture823Value1), sha: decoded("\"ce587453ced02b1526dfb4cb910479d431683101\""), ref: decoded("\"refs/heads/main\""), detector: decoded(sdkMethodFixture823Value2)), required2: DependencyGraphCreateRepositorySnapshotOptionsRequired2(scanned: decoded("\"2022-06-14T20:25:00Z\"")))
+        var options = try DependencyGraphMethods.DependencyGraphCreateRepositorySnapshotOptions(
+            required1: DependencyGraphCreateRepositorySnapshotOptionsRequired1(
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                version: decoded("0"),
+                job: decoded(sdkMethodFixture823Value1),
+                sha: decoded("\"ce587453ced02b1526dfb4cb910479d431683101\""),
+                ref: decoded("\"refs/heads/main\""),
+                detector: decoded(sdkMethodFixture823Value2)
+            ),
+            required2: DependencyGraphCreateRepositorySnapshotOptionsRequired2(
+                scanned: decoded("\"2022-06-14T20:25:00Z\"")
+            )
+        )
         options.metadata = try decoded("null")
         options.manifests = try decoded(sdkMethodFixture823Value3)
         let actual = try await client.dependencyGraph.createRepositorySnapshot(
@@ -183,11 +209,11 @@ extension SdkMethodTests {
         _ = client
         do {
             _ = try await client.dependencyGraph.diffRange(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            basehead: decoded("\"basehead\""),
-            name: decoded("\"Example Name\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                basehead: decoded("\"basehead\""),
+                name: decoded("\"Example Name\"")
+            )
             XCTFail("dependencyGraphDiffRange decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -207,11 +233,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.dependencyGraph.diffRange(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            basehead: decoded("\"basehead\""),
-            name: decoded("\"Example Name\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                basehead: decoded("\"basehead\""),
+                name: decoded("\"Example Name\"")
+            )
             XCTFail("dependencyGraphDiffRange did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -259,9 +285,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.dependencyGraph.exportSbom(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\"")
+            )
             XCTFail("dependencyGraphExportSbom did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -291,7 +317,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testDependencyGraphFetchSbomReportDependencyGraphFetchSbomReport403ReachesMockAndDecodesResponse() async throws {
+    func testDependencyGraphFetchSbomReportDependencyGraphFetchSbomReport403ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -302,10 +329,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.dependencyGraph.fetchSbomReport(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            sbomUuid: decoded("\"sbom_uu-1\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                sbomUuid: decoded("\"sbom_uu-1\"")
+            )
             XCTFail("dependencyGraphFetchSbomReport did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -322,7 +349,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testDependencyGraphGenerateSbomReportDependencyGraphGenerateSbomReportReachesMockAndDecodesResponse() async throws {
+    func testDependencyGraphGenerateSbomReportDependencyGraphGenerateSbomReportReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -342,7 +370,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testDependencyGraphGenerateSbomReportDependencyGraphGenerateSbomReport403ReachesMockAndDecodesResponse() async throws {
+    func testDependencyGraphGenerateSbomReportDependencyGraphGenerateSbomReport403ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -353,9 +382,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.dependencyGraph.generateSbomReport(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\"")
+            )
             XCTFail("dependencyGraphGenerateSbomReport did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -411,8 +440,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.gists.checkIsStarred(
-            gistId: decoded("\"gist-1\"")
-        )
+                gistId: decoded("\"gist-1\"")
+            )
             XCTFail("gistsCheckIsStarred did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -461,10 +490,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.gists.create(
-            files: decoded("{\"README.md\":{\"content\":\"Hello World\"}}"),
-            description: decoded("\"Example of a gist\""),
-            public: decoded("false")
-        )
+                files: decoded("{\"README.md\":{\"content\":\"Hello World\"}}"),
+                description: decoded("\"Example of a gist\""),
+                public: decoded("false")
+            )
             XCTFail("gistsCreate did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -512,9 +541,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.gists.createComment(
-            gistId: decoded("\"gist-1\""),
-            body: decoded("\"This is a comment to a gist\"")
-        )
+                gistId: decoded("\"gist-1\""),
+                body: decoded("\"This is a comment to a gist\"")
+            )
             XCTFail("gistsCreateComment did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)

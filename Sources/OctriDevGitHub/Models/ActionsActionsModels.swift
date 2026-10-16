@@ -3,7 +3,7 @@
 
 import Foundation
 
-// ActionsActions domain models
+/// ActionsActions domain models
 public typealias ActionsCanApprovePullRequestReviews = Bool
 
 public typealias ActionsEnabled = Bool
@@ -15,23 +15,38 @@ public indirect enum ActionsPolicyConditions {
 }
 
 extension ActionsPolicyConditions: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ActionsPolicyConditions")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for ActionsPolicyConditions"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension ActionsPolicyConditions {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(ActionsPolicyRepoConditions.self) { return .actionsPolicyRepoConditions(value) }
-        if let value = try? container.decode(ActionsPolicyOrgConditions.self) { return .actionsPolicyOrgConditions(value) }
-        if let value = try? container.decode(ActionsPolicyEnterpriseConditions.self) { return .actionsPolicyEnterpriseConditions(value) }
+        if let value = try? container
+            .decode(ActionsPolicyRepoConditions.self) {
+            return .actionsPolicyRepoConditions(value)
+        }
+        if let value = try? container
+            .decode(ActionsPolicyOrgConditions.self) {
+            return .actionsPolicyOrgConditions(value)
+        }
+        if let value = try? container
+            .decode(ActionsPolicyEnterpriseConditions.self) {
+            return .actionsPolicyEnterpriseConditions(value)
+        }
         return nil
     }
 }
@@ -57,26 +72,44 @@ public indirect enum ActionsPolicyEnterpriseConditions {
 }
 
 extension ActionsPolicyEnterpriseConditions: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ActionsPolicyEnterpriseConditions")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for ActionsPolicyEnterpriseConditions"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension ActionsPolicyEnterpriseConditions {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode([String: JSONValue].self) { return .jsonValue(value) }
-        if let value = try? container.decode([String: JSONValue].self) { return .jsonValue1(value) }
-        if let value = try? container.decode([String: JSONValue].self) { return .jsonValue2(value) }
-        if let value = try? container.decode([String: JSONValue].self) { return .jsonValue3(value) }
-        if let value = try? container.decode([String: JSONValue].self) { return .jsonValue4(value) }
-        if let value = try? container.decode([String: JSONValue].self) { return .jsonValue5(value) }
+        if let value = try? container.decode([String: JSONValue].self) {
+            return .jsonValue(value)
+        }
+        if let value = try? container.decode([String: JSONValue].self) {
+            return .jsonValue1(value)
+        }
+        if let value = try? container.decode([String: JSONValue].self) {
+            return .jsonValue2(value)
+        }
+        if let value = try? container.decode([String: JSONValue].self) {
+            return .jsonValue3(value)
+        }
+        if let value = try? container.decode([String: JSONValue].self) {
+            return .jsonValue4(value)
+        }
+        if let value = try? container.decode([String: JSONValue].self) {
+            return .jsonValue5(value)
+        }
         return nil
     }
 }
@@ -102,23 +135,38 @@ public indirect enum ActionsPolicyOrgConditions {
 }
 
 extension ActionsPolicyOrgConditions: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ActionsPolicyOrgConditions")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for ActionsPolicyOrgConditions"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension ActionsPolicyOrgConditions {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(ActionsPolicyOrgConditionsVariant0.self) { return .actionsPolicyOrgConditionsVariant0(value) }
-        if let value = try? container.decode(ActionsPolicyOrgConditionsVariant1.self) { return .actionsPolicyOrgConditionsVariant1(value) }
-        if let value = try? container.decode(ActionsPolicyOrgConditionsVariant2.self) { return .actionsPolicyOrgConditionsVariant2(value) }
+        if let value = try? container
+            .decode(ActionsPolicyOrgConditionsVariant0.self) {
+            return .actionsPolicyOrgConditionsVariant0(value)
+        }
+        if let value = try? container
+            .decode(ActionsPolicyOrgConditionsVariant1.self) {
+            return .actionsPolicyOrgConditionsVariant1(value)
+        }
+        if let value = try? container
+            .decode(ActionsPolicyOrgConditionsVariant2.self) {
+            return .actionsPolicyOrgConditionsVariant2(value)
+        }
         return nil
     }
 }
@@ -140,25 +188,33 @@ public indirect enum ActionsPolicyRepoConditions {
 }
 
 extension ActionsPolicyRepoConditions: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ActionsPolicyRepoConditions")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for ActionsPolicyRepoConditions"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension ActionsPolicyRepoConditions {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode([String: JSONValue].self) { return .jsonValue(value) }
+        if let value = try? container.decode([String: JSONValue].self) {
+            return .jsonValue(value)
+        }
         if let value = try? container.decode(
             ActionsPolicyRepoConditionsVariant1.self
         ) {
-            return             .actionsPolicyRepoConditionsVariant1(value)
+            return .actionsPolicyRepoConditionsVariant1(value)
         }
         return nil
     }
@@ -182,7 +238,6 @@ public indirect enum ActionsRule {
 }
 
 extension ActionsRule: Codable {
-
     private enum CodingKeys: String, CodingKey {
         case discriminator = "type"
     }
@@ -190,12 +245,16 @@ extension ActionsRule: Codable {
     public init(from decoder: Decoder) throws {
         let tagged = try decoder.container(keyedBy: CodingKeys.self)
         let discriminator = try tagged.decode(String.self, forKey: .discriminator)
-        if let value = try Self.decodeGroup1(discriminator, from: decoder) { self = value; return }
+        if let value = try Self.decodeGroup1(discriminator, from: decoder) {
+            self = value; return
+        }
         self = try .unknown(tag: discriminator, raw: JSONValue(from: decoder))
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
         if case let .unknown(_, raw) = self {
             var container = encoder.singleValueContainer()
             try container.encode(raw)
@@ -206,9 +265,13 @@ extension ActionsRule: Codable {
 extension ActionsRule {
     static func decodeGroup1(_ discriminator: String, from decoder: Decoder) throws -> Self? {
         switch discriminator {
-        case "restrict_actions_actors": return .actionsRuleRestrictActionsActors(try ActionsRuleRestrictActionsActors(from: decoder))
-        case "restrict_action_events": return .actionsRuleRestrictActionEvents(try ActionsRuleRestrictActionEvents(from: decoder))
-        default: return nil
+        case "restrict_actions_actors": try .actionsRuleRestrictActionsActors(
+                ActionsRuleRestrictActionsActors(from: decoder)
+            )
+        case "restrict_action_events": try .actionsRuleRestrictActionEvents(
+                ActionsRuleRestrictActionEvents(from: decoder)
+            )
+        default: nil
         }
     }
 }
@@ -237,25 +300,35 @@ public struct ActionsCacheUsageOrgEnterprise: Codable {
         case totalActiveCachesSizeInBytes = "total_active_caches_size_in_bytes"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsCacheUsageOrgEnterprise {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.totalActiveCachesCount) else {
-            throw SdkValidationError(field: "total_active_caches_count", code: "required", message: "Validation failed for 'total_active_caches_count': value is required")
-        }
-        guard container.contains(.totalActiveCachesSizeInBytes) else {
-            throw SdkValidationError(field: "total_active_caches_size_in_bytes", code: "required", message: "Validation failed for 'total_active_caches_size_in_bytes': value is required")
-        }
-        self.totalActiveCachesCount = try container.sdkDecodeRequired(.totalActiveCachesCount)
-        self.totalActiveCachesSizeInBytes = try container.sdkDecodeRequired(.totalActiveCachesSizeInBytes)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsCacheUsageOrgEnterprise {
-    public init(totalActiveCachesCount: Int, totalActiveCachesSizeInBytes: Int) {
+public extension ActionsCacheUsageOrgEnterprise {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.totalActiveCachesCount) else {
+            throw SdkValidationError(
+                field: "total_active_caches_count",
+                code: "required",
+                message: "Validation failed for 'total_active_caches_count': value is required"
+            )
+        }
+        guard container.contains(.totalActiveCachesSizeInBytes) else {
+            throw SdkValidationError(
+                field: "total_active_caches_size_in_bytes",
+                code: "required",
+                message: "Validation failed for 'total_active_caches_size_in_bytes': value is required"
+            )
+        }
+        totalActiveCachesCount = try container.sdkDecodeRequired(.totalActiveCachesCount)
+        totalActiveCachesSizeInBytes = try container.sdkDecodeRequired(.totalActiveCachesSizeInBytes)
+    }
+}
+
+public extension ActionsCacheUsageOrgEnterprise {
+    init(totalActiveCachesCount: Int, totalActiveCachesSizeInBytes: Int) {
         self.totalActiveCachesCount = totalActiveCachesCount
         self.totalActiveCachesSizeInBytes = totalActiveCachesSizeInBytes
     }
@@ -283,33 +356,51 @@ public struct ActionsHostedRunnerMachineSpec: Codable {
         case storageGb = "storage_gb"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsHostedRunnerMachineSpec {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.cpuCores) else {
-            throw SdkValidationError(field: "cpu_cores", code: "required", message: "Validation failed for 'cpu_cores': value is required")
-        }
-        guard container.contains(.memoryGb) else {
-            throw SdkValidationError(field: "memory_gb", code: "required", message: "Validation failed for 'memory_gb': value is required")
-        }
-        guard container.contains(.storageGb) else {
-            throw SdkValidationError(field: "storage_gb", code: "required", message: "Validation failed for 'storage_gb': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.cpuCores = try container.sdkDecodeRequired(.cpuCores)
-        self.memoryGb = try container.sdkDecodeRequired(.memoryGb)
-        self.storageGb = try container.sdkDecodeRequired(.storageGb)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsHostedRunnerMachineSpec {
-    public init(id: String, cpuCores: Int, memoryGb: Int, storageGb: Int) {
+public extension ActionsHostedRunnerMachineSpec {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.cpuCores) else {
+            throw SdkValidationError(
+                field: "cpu_cores",
+                code: "required",
+                message: "Validation failed for 'cpu_cores': value is required"
+            )
+        }
+        guard container.contains(.memoryGb) else {
+            throw SdkValidationError(
+                field: "memory_gb",
+                code: "required",
+                message: "Validation failed for 'memory_gb': value is required"
+            )
+        }
+        guard container.contains(.storageGb) else {
+            throw SdkValidationError(
+                field: "storage_gb",
+                code: "required",
+                message: "Validation failed for 'storage_gb': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        cpuCores = try container.sdkDecodeRequired(.cpuCores)
+        memoryGb = try container.sdkDecodeRequired(.memoryGb)
+        storageGb = try container.sdkDecodeRequired(.storageGb)
+    }
+}
+
+public extension ActionsHostedRunnerMachineSpec {
+    init(id: String, cpuCores: Int, memoryGb: Int, storageGb: Int) {
         (self.id, self.cpuCores) = (id, cpuCores)
         (self.memoryGb, self.storageGb) = (memoryGb, storageGb)
     }
@@ -334,24 +425,35 @@ public struct ActionsRepositoryPermissions: Codable {
         case shaPinningRequired = "sha_pinning_required"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsRepositoryPermissions {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.enabled) else {
-            throw SdkValidationError(field: "enabled", code: "required", message: "Validation failed for 'enabled': value is required")
-        }
-        self.enabled = try container.sdkDecodeRequired(.enabled)
-        self.allowedActions = try container.sdkDecodeIfPresent(.allowedActions)
-        self.selectedActionsUrl = try container.sdkDecodeIfPresent(.selectedActionsUrl)
-        self.shaPinningRequired = try container.sdkDecodeIfPresent(.shaPinningRequired)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsRepositoryPermissions {
-    public init(enabled: ActionsEnabled, allowedActions: AllowedActions? = nil, selectedActionsUrl: SelectedActionsUrl? = nil, shaPinningRequired: ShaPinningRequired? = nil) {
+public extension ActionsRepositoryPermissions {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.enabled) else {
+            throw SdkValidationError(
+                field: "enabled",
+                code: "required",
+                message: "Validation failed for 'enabled': value is required"
+            )
+        }
+        enabled = try container.sdkDecodeRequired(.enabled)
+        allowedActions = try container.sdkDecodeIfPresent(.allowedActions)
+        selectedActionsUrl = try container.sdkDecodeIfPresent(.selectedActionsUrl)
+        shaPinningRequired = try container.sdkDecodeIfPresent(.shaPinningRequired)
+    }
+}
+
+public extension ActionsRepositoryPermissions {
+    init(
+        enabled: ActionsEnabled,
+        allowedActions: AllowedActions? = nil,
+        selectedActionsUrl: SelectedActionsUrl? = nil,
+        shaPinningRequired: ShaPinningRequired? = nil
+    ) {
         (self.enabled, self.allowedActions) = (enabled, allowedActions)
         (self.selectedActionsUrl, self.shaPinningRequired) = (selectedActionsUrl, shaPinningRequired)
     }
@@ -368,19 +470,19 @@ public struct ActionsCacheRetentionLimitForRepository: Codable {
     }
 
     init() {
-        self.maxCacheRetentionDays = nil
+        maxCacheRetentionDays = nil
     }
 }
 
-extension ActionsCacheRetentionLimitForRepository {
-    public init(from decoder: Decoder) throws {
+public extension ActionsCacheRetentionLimitForRepository {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.maxCacheRetentionDays = try container.sdkDecodeIfPresent(.maxCacheRetentionDays)
+        maxCacheRetentionDays = try container.sdkDecodeIfPresent(.maxCacheRetentionDays)
     }
 }
 
-extension ActionsCacheRetentionLimitForRepository {
-    public init(maxCacheRetentionDays: Int? = nil) {
+public extension ActionsCacheRetentionLimitForRepository {
+    init(maxCacheRetentionDays: Int? = nil) {
         self.init()
         self.maxCacheRetentionDays = maxCacheRetentionDays
     }
@@ -411,37 +513,65 @@ public struct ActionsHostedRunnerCuratedImage: Codable {
         case source
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsHostedRunnerCuratedImage {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.platform) else {
-            throw SdkValidationError(field: "platform", code: "required", message: "Validation failed for 'platform': value is required")
-        }
-        guard container.contains(.sizeGb) else {
-            throw SdkValidationError(field: "size_gb", code: "required", message: "Validation failed for 'size_gb': value is required")
-        }
-        guard container.contains(.displayName) else {
-            throw SdkValidationError(field: "display_name", code: "required", message: "Validation failed for 'display_name': value is required")
-        }
-        guard container.contains(.source) else {
-            throw SdkValidationError(field: "source", code: "required", message: "Validation failed for 'source': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.platform = try container.sdkDecodeRequired(.platform)
-        self.sizeGb = try container.sdkDecodeRequired(.sizeGb)
-        self.displayName = try container.sdkDecodeRequired(.displayName)
-        self.source = try container.sdkDecodeRequired(.source)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsHostedRunnerCuratedImage {
-    public init(id: String, platform: String, sizeGb: Int, displayName: String, source: ActionsHostedRunnerCuratedImageSource) {
+public extension ActionsHostedRunnerCuratedImage {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.platform) else {
+            throw SdkValidationError(
+                field: "platform",
+                code: "required",
+                message: "Validation failed for 'platform': value is required"
+            )
+        }
+        guard container.contains(.sizeGb) else {
+            throw SdkValidationError(
+                field: "size_gb",
+                code: "required",
+                message: "Validation failed for 'size_gb': value is required"
+            )
+        }
+        guard container.contains(.displayName) else {
+            throw SdkValidationError(
+                field: "display_name",
+                code: "required",
+                message: "Validation failed for 'display_name': value is required"
+            )
+        }
+        guard container.contains(.source) else {
+            throw SdkValidationError(
+                field: "source",
+                code: "required",
+                message: "Validation failed for 'source': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        platform = try container.sdkDecodeRequired(.platform)
+        sizeGb = try container.sdkDecodeRequired(.sizeGb)
+        displayName = try container.sdkDecodeRequired(.displayName)
+        source = try container.sdkDecodeRequired(.source)
+    }
+}
+
+public extension ActionsHostedRunnerCuratedImage {
+    init(
+        id: String,
+        platform: String,
+        sizeGb: Int,
+        displayName: String,
+        source: ActionsHostedRunnerCuratedImageSource
+    ) {
         (self.id, self.platform) = (id, platform)
         (self.sizeGb, self.displayName) = (sizeGb, displayName)
         self.source = source
@@ -460,16 +590,22 @@ public struct ActionsPolicyOrgConditionsVariant1: Codable {
         case workflowPath = "workflow_path"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension ActionsPolicyOrgConditionsVariant1 {
-    public init(from decoder: Decoder) throws {
+public extension ActionsPolicyOrgConditionsVariant1 {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.repositoryId) else {
-            throw SdkValidationError(field: "repository_id", code: "required", message: "Validation failed for 'repository_id': value is required")
+            throw SdkValidationError(
+                field: "repository_id",
+                code: "required",
+                message: "Validation failed for 'repository_id': value is required"
+            )
         }
-        self.repositoryId = try container.sdkDecodeRequired(.repositoryId)
-        self.workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
+        repositoryId = try container.sdkDecodeRequired(.repositoryId)
+        workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
     }
 }

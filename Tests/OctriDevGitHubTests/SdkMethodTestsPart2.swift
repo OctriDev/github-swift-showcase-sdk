@@ -50,7 +50,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsCreateRepoActionsPolicyActionsCreateRepoActionsPolicy404ReachesMockAndDecodesResponse() async throws {
+    func testActionsCreateRepoActionsPolicyActionsCreateRepoActionsPolicy404ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -61,13 +62,13 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.actions.createRepoActionsPolicy(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            name: decoded("\"Require approved actors\""),
-            enforcement: decoded("\"active\""),
-            conditions: decoded("null"),
-            rules: decoded(sdkMethodFixture26Value1)
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                name: decoded("\"Require approved actors\""),
+                enforcement: decoded("\"active\""),
+                conditions: decoded("null"),
+                rules: decoded(sdkMethodFixture26Value1)
+            )
             XCTFail("actionsCreateRepoActionsPolicy did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -106,12 +107,16 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsCreateSelfHostedRunnerGroupForOrgActionsCreateSelfHostX0a8ceacbebReachesMockAndDecodesResponse() async throws {
+    func testActionsCreateSelfHostedRunnerGroupForOrgActionsCreateSelfHostX0a8ceacbebReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        var options = try ActionsMethods.ActionsCreateSelfHostedRunnerGroupForOrgOptions(org: decoded("\"org\""), name: decoded("\"Expensive hardware runners\""))
+        var options = try ActionsMethods.ActionsCreateSelfHostedRunnerGroupForOrgOptions(
+            org: decoded("\"org\""),
+            name: decoded("\"Expensive hardware runners\"")
+        )
         options.visibility = try decoded("\"selected\"")
         options.selectedRepositoryIds = try decoded("[32,91]")
         options.runners = try decoded("[9,2]")
@@ -217,7 +222,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsDeleteCustomImageVersionFromOrgActionsDeleteCustomImagXa02698b087ReachesMockAndDecodesResponse() async throws {
+    func testActionsDeleteCustomImageVersionFromOrgActionsDeleteCustomImagXa02698b087ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -244,7 +250,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsDeleteEnvironmentVariableActionsDeleteEnvironmentVariableReachesMockAndDecodesResponse() async throws {
+    func testActionsDeleteEnvironmentVariableActionsDeleteEnvironmentVariableReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -265,9 +272,9 @@ extension SdkMethodTests {
         _ = client
         do {
             _ = try await client.actions.deleteHostedRunnerForOrg(
-            org: decoded("\"org\""),
-            hostedRunnerId: decoded("1")
-        )
+                org: decoded("\"org\""),
+                hostedRunnerId: decoded("1")
+            )
             XCTFail("actionsDeleteHostedRunnerForOrg decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -299,9 +306,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.actions.deleteOrgActionsPolicy(
-            org: decoded("\"org\""),
-            policyId: decoded("1")
-        )
+                org: decoded("\"org\""),
+                policyId: decoded("1")
+            )
             XCTFail("actionsDeleteOrgActionsPolicy did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -355,7 +362,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsDeleteRepoActionsPolicyActionsDeleteRepoActionsPolicy404ReachesMockAndDecodesResponse() async throws {
+    func testActionsDeleteRepoActionsPolicyActionsDeleteRepoActionsPolicy404ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -366,10 +374,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.actions.deleteRepoActionsPolicy(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            policyId: decoded("1")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                policyId: decoded("1")
+            )
             XCTFail("actionsDeleteRepoActionsPolicy did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -412,7 +420,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsDeleteSelfHostedRunnerFromOrgActionsDeleteSelfHostedRunnerFromOrgReachesMockAndDecodesResponse() async throws {
+    func testActionsDeleteSelfHostedRunnerFromOrgActionsDeleteSelfHostedRunnerFromOrgReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -424,7 +433,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsDeleteSelfHostedRunnerFromOrgActionsDeleteSelfHostedRuX7b4e91ed67ReachesMockAndDecodesResponse() async throws {
+    func testActionsDeleteSelfHostedRunnerFromOrgActionsDeleteSelfHostedRuX7b4e91ed67ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/422") else {
             return
         }
@@ -435,9 +445,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.actions.deleteSelfHostedRunnerFromOrg(
-            org: decoded("\"org\""),
-            runnerId: decoded("1")
-        )
+                org: decoded("\"org\""),
+                runnerId: decoded("1")
+            )
             XCTFail("actionsDeleteSelfHostedRunnerFromOrg did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 422)
@@ -454,7 +464,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsDeleteSelfHostedRunnerFromRepoActionsDeleteSelfHostedRXc0eb7b868fReachesMockAndDecodesResponse() async throws {
+    func testActionsDeleteSelfHostedRunnerFromRepoActionsDeleteSelfHostedRXc0eb7b868fReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -467,7 +478,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsDeleteSelfHostedRunnerFromRepoActionsDeleteSelfHostedRX5e195401adReachesMockAndDecodesResponse() async throws {
+    func testActionsDeleteSelfHostedRunnerFromRepoActionsDeleteSelfHostedRX5e195401adReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/422") else {
             return
         }
@@ -478,10 +490,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.actions.deleteSelfHostedRunnerFromRepo(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            runnerId: decoded("1")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                runnerId: decoded("1")
+            )
             XCTFail("actionsDeleteSelfHostedRunnerFromRepo did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 422)
@@ -498,7 +510,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsDeleteSelfHostedRunnerGroupFromOrgActionsDeleteSelfHosXf4ba227da6ReachesMockAndDecodesResponse() async throws {
+    func testActionsDeleteSelfHostedRunnerGroupFromOrgActionsDeleteSelfHosXf4ba227da6ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }

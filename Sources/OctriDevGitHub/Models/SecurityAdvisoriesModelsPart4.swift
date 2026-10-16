@@ -3,7 +3,7 @@
 
 import Foundation
 
-// SecurityAdvisories domain models
+/// SecurityAdvisories domain models
 /// A temporary private fork of the advisory's repository for collaborating on a fix.
 public struct RepositoryAdvisoryPrivateFork: Codable {
     /// A unique identifier of the repository.
@@ -191,68 +191,117 @@ public struct RepositoryAdvisoryPrivateFork: Codable {
         case hooksUrl = "hooks_url"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension RepositoryAdvisoryPrivateFork {
-    public init(from decoder: Decoder) throws {
+public extension RepositoryAdvisoryPrivateFork {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.fullName = try container.sdkDecodeRequired(.fullName)
-        self.owner = try container.sdkDecodeRequired(.owner)
-        self.`private` = try container.sdkDecodeRequired(.`private`)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.description = try container.sdkDecodeNullable(.description)
-        self.fork = try container.sdkDecodeRequired(.fork)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.archiveUrl = try container.sdkDecodeRequired(.archiveUrl)
-        self.assigneesUrl = try container.sdkDecodeRequired(.assigneesUrl)
-        self.blobsUrl = try container.sdkDecodeRequired(.blobsUrl)
-        self.branchesUrl = try container.sdkDecodeRequired(.branchesUrl)
-        self.collaboratorsUrl = try container.sdkDecodeRequired(.collaboratorsUrl)
-        self.commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
-        self.commitsUrl = try container.sdkDecodeRequired(.commitsUrl)
-        self.compareUrl = try container.sdkDecodeRequired(.compareUrl)
-        self.contentsUrl = try container.sdkDecodeRequired(.contentsUrl)
-        self.contributorsUrl = try container.sdkDecodeRequired(.contributorsUrl)
-        self.deploymentsUrl = try container.sdkDecodeRequired(.deploymentsUrl)
-        self.downloadsUrl = try container.sdkDecodeRequired(.downloadsUrl)
-        self.eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        self.forksUrl = try container.sdkDecodeRequired(.forksUrl)
-        self.gitCommitsUrl = try container.sdkDecodeRequired(.gitCommitsUrl)
-        self.gitRefsUrl = try container.sdkDecodeRequired(.gitRefsUrl)
-        self.gitTagsUrl = try container.sdkDecodeRequired(.gitTagsUrl)
-        self.issueCommentUrl = try container.sdkDecodeRequired(.issueCommentUrl)
-        self.issueEventsUrl = try container.sdkDecodeRequired(.issueEventsUrl)
-        self.issuesUrl = try container.sdkDecodeRequired(.issuesUrl)
-        self.keysUrl = try container.sdkDecodeRequired(.keysUrl)
-        self.labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
-        self.languagesUrl = try container.sdkDecodeRequired(.languagesUrl)
-        self.mergesUrl = try container.sdkDecodeRequired(.mergesUrl)
-        self.milestonesUrl = try container.sdkDecodeRequired(.milestonesUrl)
-        self.notificationsUrl = try container.sdkDecodeRequired(.notificationsUrl)
-        self.pullsUrl = try container.sdkDecodeRequired(.pullsUrl)
-        self.releasesUrl = try container.sdkDecodeRequired(.releasesUrl)
-        self.stargazersUrl = try container.sdkDecodeRequired(.stargazersUrl)
-        self.statusesUrl = try container.sdkDecodeRequired(.statusesUrl)
-        self.subscribersUrl = try container.sdkDecodeRequired(.subscribersUrl)
-        self.subscriptionUrl = try container.sdkDecodeRequired(.subscriptionUrl)
-        self.tagsUrl = try container.sdkDecodeRequired(.tagsUrl)
-        self.teamsUrl = try container.sdkDecodeRequired(.teamsUrl)
-        self.treesUrl = try container.sdkDecodeRequired(.treesUrl)
-        self.hooksUrl = try container.sdkDecodeRequired(.hooksUrl)
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        name = try container.sdkDecodeRequired(.name)
+        fullName = try container.sdkDecodeRequired(.fullName)
+        owner = try container.sdkDecodeRequired(.owner)
+        self.private = try container.sdkDecodeRequired(.private)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        description = try container.sdkDecodeNullable(.description)
+        fork = try container.sdkDecodeRequired(.fork)
+        url = try container.sdkDecodeRequired(.url)
+        archiveUrl = try container.sdkDecodeRequired(.archiveUrl)
+        assigneesUrl = try container.sdkDecodeRequired(.assigneesUrl)
+        blobsUrl = try container.sdkDecodeRequired(.blobsUrl)
+        branchesUrl = try container.sdkDecodeRequired(.branchesUrl)
+        collaboratorsUrl = try container.sdkDecodeRequired(.collaboratorsUrl)
+        commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
+        commitsUrl = try container.sdkDecodeRequired(.commitsUrl)
+        compareUrl = try container.sdkDecodeRequired(.compareUrl)
+        contentsUrl = try container.sdkDecodeRequired(.contentsUrl)
+        contributorsUrl = try container.sdkDecodeRequired(.contributorsUrl)
+        deploymentsUrl = try container.sdkDecodeRequired(.deploymentsUrl)
+        downloadsUrl = try container.sdkDecodeRequired(.downloadsUrl)
+        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
+        forksUrl = try container.sdkDecodeRequired(.forksUrl)
+        gitCommitsUrl = try container.sdkDecodeRequired(.gitCommitsUrl)
+        gitRefsUrl = try container.sdkDecodeRequired(.gitRefsUrl)
+        gitTagsUrl = try container.sdkDecodeRequired(.gitTagsUrl)
+        issueCommentUrl = try container.sdkDecodeRequired(.issueCommentUrl)
+        issueEventsUrl = try container.sdkDecodeRequired(.issueEventsUrl)
+        issuesUrl = try container.sdkDecodeRequired(.issuesUrl)
+        keysUrl = try container.sdkDecodeRequired(.keysUrl)
+        labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
+        languagesUrl = try container.sdkDecodeRequired(.languagesUrl)
+        mergesUrl = try container.sdkDecodeRequired(.mergesUrl)
+        milestonesUrl = try container.sdkDecodeRequired(.milestonesUrl)
+        notificationsUrl = try container.sdkDecodeRequired(.notificationsUrl)
+        pullsUrl = try container.sdkDecodeRequired(.pullsUrl)
+        releasesUrl = try container.sdkDecodeRequired(.releasesUrl)
+        stargazersUrl = try container.sdkDecodeRequired(.stargazersUrl)
+        statusesUrl = try container.sdkDecodeRequired(.statusesUrl)
+        subscribersUrl = try container.sdkDecodeRequired(.subscribersUrl)
+        subscriptionUrl = try container.sdkDecodeRequired(.subscriptionUrl)
+        tagsUrl = try container.sdkDecodeRequired(.tagsUrl)
+        teamsUrl = try container.sdkDecodeRequired(.teamsUrl)
+        treesUrl = try container.sdkDecodeRequired(.treesUrl)
+        hooksUrl = try container.sdkDecodeRequired(.hooksUrl)
         try sdkValidateConstraintsPart1()
         try sdkValidateConstraintsPart2()
     }
 }
 
-extension RepositoryAdvisoryPrivateFork {
-    public init(id: Int, nodeId: String, name: String, fullName: String, owner: SimpleUser, `private`: Bool, htmlUrl: String, description: String?, fork: Bool, url: String, archiveUrl: String, assigneesUrl: String, blobsUrl: String, branchesUrl: String, collaboratorsUrl: String, commentsUrl: String, commitsUrl: String, compareUrl: String, contentsUrl: String, contributorsUrl: String, deploymentsUrl: String, downloadsUrl: String, eventsUrl: String, forksUrl: String, gitCommitsUrl: String, gitRefsUrl: String, gitTagsUrl: String, issueCommentUrl: String, issueEventsUrl: String, issuesUrl: String, keysUrl: String, labelsUrl: String, languagesUrl: String, mergesUrl: String, milestonesUrl: String, notificationsUrl: String, pullsUrl: String, releasesUrl: String, stargazersUrl: String, statusesUrl: String, subscribersUrl: String, subscriptionUrl: String, tagsUrl: String, teamsUrl: String, treesUrl: String, hooksUrl: String) throws {
+public extension RepositoryAdvisoryPrivateFork {
+    init(
+        id: Int,
+        nodeId: String,
+        name: String,
+        fullName: String,
+        owner: SimpleUser,
+        private: Bool,
+        htmlUrl: String,
+        description: String?,
+        fork: Bool,
+        url: String,
+        archiveUrl: String,
+        assigneesUrl: String,
+        blobsUrl: String,
+        branchesUrl: String,
+        collaboratorsUrl: String,
+        commentsUrl: String,
+        commitsUrl: String,
+        compareUrl: String,
+        contentsUrl: String,
+        contributorsUrl: String,
+        deploymentsUrl: String,
+        downloadsUrl: String,
+        eventsUrl: String,
+        forksUrl: String,
+        gitCommitsUrl: String,
+        gitRefsUrl: String,
+        gitTagsUrl: String,
+        issueCommentUrl: String,
+        issueEventsUrl: String,
+        issuesUrl: String,
+        keysUrl: String,
+        labelsUrl: String,
+        languagesUrl: String,
+        mergesUrl: String,
+        milestonesUrl: String,
+        notificationsUrl: String,
+        pullsUrl: String,
+        releasesUrl: String,
+        stargazersUrl: String,
+        statusesUrl: String,
+        subscribersUrl: String,
+        subscriptionUrl: String,
+        tagsUrl: String,
+        teamsUrl: String,
+        treesUrl: String,
+        hooksUrl: String
+    ) throws {
         (self.id, self.nodeId) = (id, nodeId)
         (self.name, self.fullName) = (name, fullName)
-        (self.owner, self.`private`) = (owner, `private`)
+        (self.owner, self.private) = (owner, `private`)
         (self.htmlUrl, self.description) = (htmlUrl, description)
         (self.fork, self.url) = (fork, url)
         (self.archiveUrl, self.assigneesUrl) = (archiveUrl, assigneesUrl)
@@ -280,26 +329,26 @@ extension RepositoryAdvisoryPrivateFork {
 
 extension RepositoryAdvisoryPrivateFork {
     func sdkValidateConstraintsPart1() throws {
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("contributors_url", self.contributorsUrl)
-            try sdkValidateUri("deployments_url", self.deploymentsUrl)
-            try sdkValidateUri("downloads_url", self.downloadsUrl)
-            try sdkValidateUri("events_url", self.eventsUrl)
-            try sdkValidateUri("forks_url", self.forksUrl)
-            try sdkValidateUri("languages_url", self.languagesUrl)
-            try sdkValidateUri("merges_url", self.mergesUrl)
-            try sdkValidateUri("stargazers_url", self.stargazersUrl)
-            try sdkValidateUri("subscribers_url", self.subscribersUrl)
-            try sdkValidateUri("subscription_url", self.subscriptionUrl)
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateUri("url", url)
+        try sdkValidateUri("contributors_url", contributorsUrl)
+        try sdkValidateUri("deployments_url", deploymentsUrl)
+        try sdkValidateUri("downloads_url", downloadsUrl)
+        try sdkValidateUri("events_url", eventsUrl)
+        try sdkValidateUri("forks_url", forksUrl)
+        try sdkValidateUri("languages_url", languagesUrl)
+        try sdkValidateUri("merges_url", mergesUrl)
+        try sdkValidateUri("stargazers_url", stargazersUrl)
+        try sdkValidateUri("subscribers_url", subscribersUrl)
+        try sdkValidateUri("subscription_url", subscriptionUrl)
     }
 }
 
 extension RepositoryAdvisoryPrivateFork {
     func sdkValidateConstraintsPart2() throws {
-            try sdkValidateUri("tags_url", self.tagsUrl)
-            try sdkValidateUri("teams_url", self.teamsUrl)
-            try sdkValidateUri("hooks_url", self.hooksUrl)
+        try sdkValidateUri("tags_url", tagsUrl)
+        try sdkValidateUri("teams_url", teamsUrl)
+        try sdkValidateUri("hooks_url", hooksUrl)
     }
 }
 
@@ -318,26 +367,40 @@ public struct RepositoryAdvisoryDescriptionValidationError: Codable {
         case errors
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryAdvisoryDescriptionValidationError {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.message) else {
-            throw SdkValidationError(field: "message", code: "required", message: "Validation failed for 'message': value is required")
-        }
-        guard container.contains(.documentationUrl) else {
-            throw SdkValidationError(field: "documentation_url", code: "required", message: "Validation failed for 'documentation_url': value is required")
-        }
-        self.message = try container.sdkDecodeRequired(.message)
-        self.documentationUrl = try container.sdkDecodeRequired(.documentationUrl)
-        self.errors = try container.sdkDecodeIfPresent(.errors)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension RepositoryAdvisoryDescriptionValidationError {
-    public init(message: String, documentationUrl: String, errors: [RepositoryAdvisoryDescriptionValidationErrorErrorsItem]? = nil) {
+public extension RepositoryAdvisoryDescriptionValidationError {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.message) else {
+            throw SdkValidationError(
+                field: "message",
+                code: "required",
+                message: "Validation failed for 'message': value is required"
+            )
+        }
+        guard container.contains(.documentationUrl) else {
+            throw SdkValidationError(
+                field: "documentation_url",
+                code: "required",
+                message: "Validation failed for 'documentation_url': value is required"
+            )
+        }
+        message = try container.sdkDecodeRequired(.message)
+        documentationUrl = try container.sdkDecodeRequired(.documentationUrl)
+        errors = try container.sdkDecodeIfPresent(.errors)
+    }
+}
+
+public extension RepositoryAdvisoryDescriptionValidationError {
+    init(
+        message: String,
+        documentationUrl: String,
+        errors: [RepositoryAdvisoryDescriptionValidationErrorErrorsItem]? = nil
+    ) {
         (self.message, self.documentationUrl) = (message, documentationUrl)
         self.errors = errors
     }
@@ -384,37 +447,49 @@ public struct RepositoryAdvisoryUpdate: Codable {
     }
 
     init() {
-        (self.summary, self.description, self.cveId, self.vulnerabilities, self.cweIds) = (nil, nil, nil, nil, nil)
-        (self.credits, self.severity, self.cvssVectorString, self.state, self.collaboratingUsers) = (nil, nil, nil, nil, nil)
-        self.collaboratingTeams = nil
+        (summary, description, cveId, vulnerabilities, cweIds) = (nil, nil, nil, nil, nil)
+        (credits, severity, cvssVectorString, state, collaboratingUsers) = (nil, nil, nil, nil, nil)
+        collaboratingTeams = nil
     }
 }
 
-extension RepositoryAdvisoryUpdate {
-    public init(from decoder: Decoder) throws {
+public extension RepositoryAdvisoryUpdate {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.summary = try container.sdkDecodeIfPresent(.summary)
-        self.description = try container.sdkDecodeIfPresent(.description)
-        self.cveId = try container.sdkDecodeIfPresent(.cveId)
-        self.vulnerabilities = try container.sdkDecodeIfPresent(.vulnerabilities)
-        self.cweIds = try container.sdkDecodeIfPresent(.cweIds)
-        self.credits = try container.sdkDecodeIfPresent(.credits)
-        self.severity = try container.sdkDecodeIfPresent(.severity)
-        self.cvssVectorString = try container.sdkDecodeIfPresent(.cvssVectorString)
-        self.state = try container.sdkDecodeIfPresent(.state)
-        self.collaboratingUsers = try container.sdkDecodeIfPresent(.collaboratingUsers)
-        self.collaboratingTeams = try container.sdkDecodeIfPresent(.collaboratingTeams)
-        if let value = self.summary {
+        summary = try container.sdkDecodeIfPresent(.summary)
+        description = try container.sdkDecodeIfPresent(.description)
+        cveId = try container.sdkDecodeIfPresent(.cveId)
+        vulnerabilities = try container.sdkDecodeIfPresent(.vulnerabilities)
+        cweIds = try container.sdkDecodeIfPresent(.cweIds)
+        credits = try container.sdkDecodeIfPresent(.credits)
+        severity = try container.sdkDecodeIfPresent(.severity)
+        cvssVectorString = try container.sdkDecodeIfPresent(.cvssVectorString)
+        state = try container.sdkDecodeIfPresent(.state)
+        collaboratingUsers = try container.sdkDecodeIfPresent(.collaboratingUsers)
+        collaboratingTeams = try container.sdkDecodeIfPresent(.collaboratingTeams)
+        if let value = summary {
             try validateLength("summary", value, min: nil, max: 1024)
         }
-        if let value = self.description {
+        if let value = description {
             try validateLength("description", value, min: nil, max: 65535)
         }
     }
 }
 
-extension RepositoryAdvisoryUpdate {
-    public init(summary: String? = nil, description: String? = nil, cveId: String? = nil, vulnerabilities: [RepositoryAdvisoryUpdateVulnerabilitiesItem]? = nil, cweIds: [String]? = nil, credits: [RepositoryAdvisoryUpdateCreditsItem]? = nil, severity: RepositoryAdvisoryUpdateSeverity? = nil, cvssVectorString: String? = nil, state: RepositoryAdvisoryUpdateState? = nil, collaboratingUsers: [String]? = nil, collaboratingTeams: [String]? = nil) throws {
+public extension RepositoryAdvisoryUpdate {
+    init(
+        summary: String? = nil,
+        description: String? = nil,
+        cveId: String? = nil,
+        vulnerabilities: [RepositoryAdvisoryUpdateVulnerabilitiesItem]? = nil,
+        cweIds: [String]? = nil,
+        credits: [RepositoryAdvisoryUpdateCreditsItem]? = nil,
+        severity: RepositoryAdvisoryUpdateSeverity? = nil,
+        cvssVectorString: String? = nil,
+        state: RepositoryAdvisoryUpdateState? = nil,
+        collaboratingUsers: [String]? = nil,
+        collaboratingTeams: [String]? = nil
+    ) throws {
         self.init()
         (self.summary, self.description) = (summary, description)
         (self.cveId, self.vulnerabilities) = (cveId, vulnerabilities)
@@ -449,33 +524,56 @@ public struct Vulnerability: Codable {
         case vulnerableFunctions = "vulnerable_functions"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension Vulnerability {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.package) else {
-            throw SdkValidationError(field: "package", code: "required", message: "Validation failed for 'package': value is required")
-        }
-        guard container.contains(.vulnerableVersionRange) else {
-            throw SdkValidationError(field: "vulnerable_version_range", code: "required", message: "Validation failed for 'vulnerable_version_range': value is required")
-        }
-        guard container.contains(.firstPatchedVersion) else {
-            throw SdkValidationError(field: "first_patched_version", code: "required", message: "Validation failed for 'first_patched_version': value is required")
-        }
-        guard container.contains(.vulnerableFunctions) else {
-            throw SdkValidationError(field: "vulnerable_functions", code: "required", message: "Validation failed for 'vulnerable_functions': value is required")
-        }
-        self.package = try container.sdkDecodeNullable(.package)
-        self.vulnerableVersionRange = try container.sdkDecodeNullable(.vulnerableVersionRange)
-        self.firstPatchedVersion = try container.sdkDecodeNullable(.firstPatchedVersion)
-        self.vulnerableFunctions = try container.sdkDecodeNullable(.vulnerableFunctions)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension Vulnerability {
-    public init(package: VulnerabilityPackage?, vulnerableVersionRange: String?, firstPatchedVersion: String?, vulnerableFunctions: [String]?) {
+public extension Vulnerability {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.package) else {
+            throw SdkValidationError(
+                field: "package",
+                code: "required",
+                message: "Validation failed for 'package': value is required"
+            )
+        }
+        guard container.contains(.vulnerableVersionRange) else {
+            throw SdkValidationError(
+                field: "vulnerable_version_range",
+                code: "required",
+                message: "Validation failed for 'vulnerable_version_range': value is required"
+            )
+        }
+        guard container.contains(.firstPatchedVersion) else {
+            throw SdkValidationError(
+                field: "first_patched_version",
+                code: "required",
+                message: "Validation failed for 'first_patched_version': value is required"
+            )
+        }
+        guard container.contains(.vulnerableFunctions) else {
+            throw SdkValidationError(
+                field: "vulnerable_functions",
+                code: "required",
+                message: "Validation failed for 'vulnerable_functions': value is required"
+            )
+        }
+        package = try container.sdkDecodeNullable(.package)
+        vulnerableVersionRange = try container.sdkDecodeNullable(.vulnerableVersionRange)
+        firstPatchedVersion = try container.sdkDecodeNullable(.firstPatchedVersion)
+        vulnerableFunctions = try container.sdkDecodeNullable(.vulnerableFunctions)
+    }
+}
+
+public extension Vulnerability {
+    init(
+        package: VulnerabilityPackage?,
+        vulnerableVersionRange: String?,
+        firstPatchedVersion: String?,
+        vulnerableFunctions: [String]?
+    ) {
         (self.package, self.vulnerableVersionRange) = (package, vulnerableVersionRange)
         (self.firstPatchedVersion, self.vulnerableFunctions) = (firstPatchedVersion, vulnerableFunctions)
     }
@@ -493,22 +591,28 @@ public struct RepositoryAdvisoryCreateVulnerabilitiesItemPackage: Codable {
         case name
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryAdvisoryCreateVulnerabilitiesItemPackage {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.ecosystem) else {
-            throw SdkValidationError(field: "ecosystem", code: "required", message: "Validation failed for 'ecosystem': value is required")
-        }
-        self.ecosystem = try container.sdkDecodeRequired(.ecosystem)
-        self.name = try container.sdkDecodeIfPresent(.name)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension RepositoryAdvisoryCreateVulnerabilitiesItemPackage {
-    public init(ecosystem: SecurityAdvisoryEcosystems, name: String? = nil) {
+public extension RepositoryAdvisoryCreateVulnerabilitiesItemPackage {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.ecosystem) else {
+            throw SdkValidationError(
+                field: "ecosystem",
+                code: "required",
+                message: "Validation failed for 'ecosystem': value is required"
+            )
+        }
+        ecosystem = try container.sdkDecodeRequired(.ecosystem)
+        name = try container.sdkDecodeIfPresent(.name)
+    }
+}
+
+public extension RepositoryAdvisoryCreateVulnerabilitiesItemPackage {
+    init(ecosystem: SecurityAdvisoryEcosystems, name: String? = nil) {
         (self.ecosystem, self.name) = (ecosystem, name)
     }
 }

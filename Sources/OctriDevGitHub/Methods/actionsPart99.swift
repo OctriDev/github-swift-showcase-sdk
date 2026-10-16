@@ -6,8 +6,10 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ActionsMethods {
-    /// Get all deployment environments for a workflow run that are waiting for protection rules to pass. Anyone with read access to the repository can use this endpoint. If the repository is private, OAuth tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+public extension ActionsMethods {
+    /// Get all deployment environments for a workflow run that are waiting for protection rules to pass. Anyone with
+    /// read access to the repository can use this endpoint. If the repository is private, OAuth tokens and personal
+    /// access tokens (classic) need the `repo` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -15,7 +17,28 @@ extension ActionsMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - runId: The unique identifier of the workflow run.
-    public static func actionsGetPendingDeploymentsForRun(config: ClientConfig, owner: String, repo: String, runId: Int, requestOptions: RequestOptions? = nil) async throws -> [PendingDeployment] {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/actions/runs/", sdkEncodePathSegment(sdkWireString(runId)), "/pending_deployments"].joined(), config: config, decoder: .json, operationId: "actionsGetPendingDeploymentsForRun", options: requestOptions)).data
+    static func actionsGetPendingDeploymentsForRun(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        runId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [PendingDeployment] {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/actions/runs/",
+                sdkEncodePathSegment(sdkWireString(runId)),
+                "/pending_deployments",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "actionsGetPendingDeploymentsForRun",
+            options: requestOptions
+        )).data
     }
 }

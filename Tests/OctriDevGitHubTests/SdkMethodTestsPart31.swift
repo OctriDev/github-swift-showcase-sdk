@@ -6,7 +6,8 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testCopilotAddCopilotSeatsForUsersCopilotAddCopilotSeatsForUsers401ReachesMockAndDecodesResponse() async throws {
+    func testCopilotAddCopilotSeatsForUsersCopilotAddCopilotSeatsForUsers401ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -17,9 +18,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.copilot.addCopilotSeatsForUsers(
-            org: decoded("\"org\""),
-            selectedUsernames: decoded("[\"cooluser1\",\"hacker2\",\"octocat\"]")
-        )
+                org: decoded("\"org\""),
+                selectedUsernames: decoded("[\"cooluser1\",\"hacker2\",\"octocat\"]")
+            )
             XCTFail("copilotAddCopilotSeatsForUsers did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -36,7 +37,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCopilotAddOrganizationsToEnterpriseCodingAgentPolicyCopilotAdX102e982173ReachesMockAndDecodesResponse() async throws {
+    func testCopilotAddOrganizationsToEnterpriseCodingAgentPolicyCopilotAdX102e982173ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -49,7 +51,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCopilotAddOrganizationsToEnterpriseCodingAgentPolicyCopilotAdXe3c1048d34ReachesMockAndDecodesResponse() async throws {
+    func testCopilotAddOrganizationsToEnterpriseCodingAgentPolicyCopilotAdXe3c1048d34ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
             return
         }
@@ -60,10 +63,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.copilot.addOrganizationsToEnterpriseCodingAgentPolicy(
-            enterprise: decoded("\"enterprise\""),
-            organizations: decoded("[\"my-org-1\",\"my-org-2\"]"),
-            customProperties: decoded(sdkMethodFixture672Value1)
-        )
+                enterprise: decoded("\"enterprise\""),
+                organizations: decoded("[\"my-org-1\",\"my-org-2\"]"),
+                customProperties: decoded(sdkMethodFixture672Value1)
+            )
             XCTFail("copilotAddOrganizationsToEnterpriseCodingAgentPolicy did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -80,7 +83,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCopilotCancelCopilotSeatAssignmentForTeamsCopilotCancelCopiloXc1d374f5a7ReachesMockAndDecodesResponse() async throws {
+    func testCopilotCancelCopilotSeatAssignmentForTeamsCopilotCancelCopiloXc1d374f5a7ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -100,7 +104,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testCopilotCancelCopilotSeatAssignmentForTeamsCopilotCancelCopiloX681b1e9626ReachesMockAndDecodesResponse() async throws {
+    func testCopilotCancelCopilotSeatAssignmentForTeamsCopilotCancelCopiloX681b1e9626ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -111,9 +116,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.copilot.cancelCopilotSeatAssignmentForTeams(
-            org: decoded("\"org\""),
-            selectedTeams: decoded("[\"engteam1\",\"engteam2\",\"engteam3\"]")
-        )
+                org: decoded("\"org\""),
+                selectedTeams: decoded("[\"engteam1\",\"engteam2\",\"engteam3\"]")
+            )
             XCTFail("copilotCancelCopilotSeatAssignmentForTeams did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -130,7 +135,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCopilotCancelCopilotSeatAssignmentForUsersCopilotCancelCopiloXa9924541fbReachesMockAndDecodesResponse() async throws {
+    func testCopilotCancelCopilotSeatAssignmentForUsersCopilotCancelCopiloXa9924541fbReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -150,7 +156,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testCopilotCancelCopilotSeatAssignmentForUsersCopilotCancelCopiloXd087c7ab40ReachesMockAndDecodesResponse() async throws {
+    func testCopilotCancelCopilotSeatAssignmentForUsersCopilotCancelCopiloXd087c7ab40ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -161,9 +168,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.copilot.cancelCopilotSeatAssignmentForUsers(
-            org: decoded("\"org\""),
-            selectedUsernames: decoded("[\"cooluser1\",\"hacker2\",\"octocat\"]")
-        )
+                org: decoded("\"org\""),
+                selectedUsernames: decoded("[\"cooluser1\",\"hacker2\",\"octocat\"]")
+            )
             XCTFail("copilotCancelCopilotSeatAssignmentForUsers did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -180,7 +187,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCopilotCopilotContentExclusionForOrganizationCopilotCopilotCoXe4e021ac49ReachesMockAndDecodesResponse() async throws {
+    func testCopilotCopilotContentExclusionForOrganizationCopilotCopilotCoXe4e021ac49ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -199,7 +207,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testCopilotCopilotContentExclusionForOrganizationCopilotCopilotCoX306e03e82bReachesMockAndDecodesResponse() async throws {
+    func testCopilotCopilotContentExclusionForOrganizationCopilotCopilotCoX306e03e82bReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -210,8 +219,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.copilot.copilotContentExclusionForOrganization(
-            org: decoded("\"org\"")
-        )
+                org: decoded("\"org\"")
+            )
             XCTFail("copilotCopilotContentExclusionForOrganization did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -228,7 +237,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCopilotCopilotEnterpriseOneDayUsageMetricsCopilotCopilotEnterX3893c67f60ReachesMockAndDecodesResponse() async throws {
+    func testCopilotCopilotEnterpriseOneDayUsageMetricsCopilotCopilotEnterX3893c67f60ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -248,7 +258,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testCopilotCopilotEnterpriseOneDayUsageMetricsCopilotCopilotEnterX76f0dbfedaReachesMockAndDecodesResponse() async throws {
+    func testCopilotCopilotEnterpriseOneDayUsageMetricsCopilotCopilotEnterX76f0dbfedaReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -259,9 +270,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.copilot.copilotEnterpriseOneDayUsageMetrics(
-            enterprise: decoded("\"enterprise\""),
-            day: decoded("\"2025-10-13\"")
-        )
+                enterprise: decoded("\"enterprise\""),
+                day: decoded("\"2025-10-13\"")
+            )
             XCTFail("copilotCopilotEnterpriseOneDayUsageMetrics did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -278,7 +289,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCopilotCopilotEnterpriseReposOneDayReportCopilotCopilotEnterpX29804aaec0ReachesMockAndDecodesResponse() async throws {
+    func testCopilotCopilotEnterpriseReposOneDayReportCopilotCopilotEnterpX29804aaec0ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -298,7 +310,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testCopilotCopilotEnterpriseReposOneDayReportCopilotCopilotEnterpXb499054e47ReachesMockAndDecodesResponse() async throws {
+    func testCopilotCopilotEnterpriseReposOneDayReportCopilotCopilotEnterpXb499054e47ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -309,9 +322,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.copilot.copilotEnterpriseReposOneDayReport(
-            enterprise: decoded("\"enterprise\""),
-            day: decoded("\"2025-10-13\"")
-        )
+                enterprise: decoded("\"enterprise\""),
+                day: decoded("\"2025-10-13\"")
+            )
             XCTFail("copilotCopilotEnterpriseReposOneDayReport did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -328,7 +341,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCopilotCopilotEnterpriseUsageMetricsCopilotCopilotEnterpriseUsageMetricsReachesMockAndDecodesResponse() async throws {
+    func testCopilotCopilotEnterpriseUsageMetricsCopilotCopilotEnterpriseUsageMetricsReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -347,7 +361,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testCopilotCopilotEnterpriseUsageMetricsCopilotCopilotEnterpriseUX1e4e402575ReachesMockAndDecodesResponse() async throws {
+    func testCopilotCopilotEnterpriseUsageMetricsCopilotCopilotEnterpriseUX1e4e402575ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -358,8 +373,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.copilot.copilotEnterpriseUsageMetrics(
-            enterprise: decoded("\"enterprise\"")
-        )
+                enterprise: decoded("\"enterprise\"")
+            )
             XCTFail("copilotCopilotEnterpriseUsageMetrics did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -376,7 +391,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCopilotCopilotEnterpriseUserTeamsOneDayReportCopilotCopilotEnXb914a0a3daReachesMockAndDecodesResponse() async throws {
+    func testCopilotCopilotEnterpriseUserTeamsOneDayReportCopilotCopilotEnXb914a0a3daReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -396,7 +412,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testCopilotCopilotEnterpriseUserTeamsOneDayReportCopilotCopilotEnXaf733d99e1ReachesMockAndDecodesResponse() async throws {
+    func testCopilotCopilotEnterpriseUserTeamsOneDayReportCopilotCopilotEnXaf733d99e1ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -407,9 +424,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.copilot.copilotEnterpriseUserTeamsOneDayReport(
-            enterprise: decoded("\"enterprise\""),
-            day: decoded("\"2025-10-13\"")
-        )
+                enterprise: decoded("\"enterprise\""),
+                day: decoded("\"2025-10-13\"")
+            )
             XCTFail("copilotCopilotEnterpriseUserTeamsOneDayReport did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -426,7 +443,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCopilotCopilotOrganizationOneDayUsageMetricsCopilotCopilotOrgX36a09070b3ReachesMockAndDecodesResponse() async throws {
+    func testCopilotCopilotOrganizationOneDayUsageMetricsCopilotCopilotOrgX36a09070b3ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -446,7 +464,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testCopilotCopilotOrganizationOneDayUsageMetricsCopilotCopilotOrgX885f36d0cfReachesMockAndDecodesResponse() async throws {
+    func testCopilotCopilotOrganizationOneDayUsageMetricsCopilotCopilotOrgX885f36d0cfReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -457,9 +476,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.copilot.copilotOrganizationOneDayUsageMetrics(
-            org: decoded("\"org\""),
-            day: decoded("\"2025-10-13\"")
-        )
+                org: decoded("\"org\""),
+                day: decoded("\"2025-10-13\"")
+            )
             XCTFail("copilotCopilotOrganizationOneDayUsageMetrics did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -476,7 +495,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCopilotCopilotOrganizationReposOneDayReportCopilotCopilotOrgaX0dc038c725ReachesMockAndDecodesResponse() async throws {
+    func testCopilotCopilotOrganizationReposOneDayReportCopilotCopilotOrgaX0dc038c725ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -496,7 +516,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testCopilotCopilotOrganizationReposOneDayReportCopilotCopilotOrgaX199dbb199cReachesMockAndDecodesResponse() async throws {
+    func testCopilotCopilotOrganizationReposOneDayReportCopilotCopilotOrgaX199dbb199cReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -507,9 +528,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.copilot.copilotOrganizationReposOneDayReport(
-            org: decoded("\"org\""),
-            day: decoded("\"2025-10-13\"")
-        )
+                org: decoded("\"org\""),
+                day: decoded("\"2025-10-13\"")
+            )
             XCTFail("copilotCopilotOrganizationReposOneDayReport did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)

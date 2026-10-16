@@ -3,29 +3,41 @@
 
 import Foundation
 
-// AgentTasks domain models
+/// AgentTasks domain models
 public indirect enum ArtifactsItemData {
     case artifactsItemDataVariant0(ArtifactsItemDataVariant0)
     case artifactsItemDataVariant1(ArtifactsItemDataVariant1)
 }
 
 extension ArtifactsItemData: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ArtifactsItemData")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for ArtifactsItemData"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension ArtifactsItemData {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(ArtifactsItemDataVariant0.self) { return .artifactsItemDataVariant0(value) }
-        if let value = try? container.decode(ArtifactsItemDataVariant1.self) { return .artifactsItemDataVariant1(value) }
+        if let value = try? container
+            .decode(ArtifactsItemDataVariant0.self) {
+            return .artifactsItemDataVariant0(value)
+        }
+        if let value = try? container
+            .decode(ArtifactsItemDataVariant1.self) {
+            return .artifactsItemDataVariant1(value)
+        }
         return nil
     }
 }
@@ -46,22 +58,34 @@ public indirect enum ArtifactsItemData2 {
 }
 
 extension ArtifactsItemData2: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ArtifactsItemData2")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for ArtifactsItemData2"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension ArtifactsItemData2 {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(ArtifactsItemData2Variant0.self) { return .artifactsItemData2Variant0(value) }
-        if let value = try? container.decode(ArtifactsItemData2Variant1.self) { return .artifactsItemData2Variant1(value) }
+        if let value = try? container
+            .decode(ArtifactsItemData2Variant0.self) {
+            return .artifactsItemData2Variant0(value)
+        }
+        if let value = try? container
+            .decode(ArtifactsItemData2Variant1.self) {
+            return .artifactsItemData2Variant1(value)
+        }
         return nil
     }
 }
@@ -82,22 +106,34 @@ public indirect enum ArtifactsItemData3 {
 }
 
 extension ArtifactsItemData3: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ArtifactsItemData3")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for ArtifactsItemData3"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension ArtifactsItemData3 {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(ArtifactsItemData3Variant0.self) { return .artifactsItemData3Variant0(value) }
-        if let value = try? container.decode(ArtifactsItemData3Variant1.self) { return .artifactsItemData3Variant1(value) }
+        if let value = try? container
+            .decode(ArtifactsItemData3Variant0.self) {
+            return .artifactsItemData3Variant0(value)
+        }
+        if let value = try? container
+            .decode(ArtifactsItemData3Variant1.self) {
+            return .artifactsItemData3Variant1(value)
+        }
         return nil
     }
 }
@@ -118,15 +154,21 @@ public indirect enum TasksItemArtifactsItemData2 {
 }
 
 extension TasksItemArtifactsItemData2: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for TasksItemArtifactsItemData2")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for TasksItemArtifactsItemData2"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
@@ -135,12 +177,12 @@ extension TasksItemArtifactsItemData2 {
         if let value = try? container.decode(
             TasksItemArtifactsItemData2Variant0.self
         ) {
-            return             .tasksItemArtifactsItemData2Variant0(value)
+            return .tasksItemArtifactsItemData2Variant0(value)
         }
         if let value = try? container.decode(
             TasksItemArtifactsItemData2Variant1.self
         ) {
-            return             .tasksItemArtifactsItemData2Variant1(value)
+            return .tasksItemArtifactsItemData2Variant1(value)
         }
         return nil
     }
@@ -162,15 +204,21 @@ public indirect enum TasksItemArtifactsItemData3 {
 }
 
 extension TasksItemArtifactsItemData3: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for TasksItemArtifactsItemData3")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for TasksItemArtifactsItemData3"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
@@ -179,12 +227,12 @@ extension TasksItemArtifactsItemData3 {
         if let value = try? container.decode(
             TasksItemArtifactsItemData3Variant0.self
         ) {
-            return             .tasksItemArtifactsItemData3Variant0(value)
+            return .tasksItemArtifactsItemData3Variant0(value)
         }
         if let value = try? container.decode(
             TasksItemArtifactsItemData3Variant1.self
         ) {
-            return             .tasksItemArtifactsItemData3Variant1(value)
+            return .tasksItemArtifactsItemData3Variant1(value)
         }
         return nil
     }
@@ -212,25 +260,35 @@ public struct TasksItemArtifactsItemData2Variant1: Codable {
         case baseRef = "base_ref"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension TasksItemArtifactsItemData2Variant1 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.headRef) else {
-            throw SdkValidationError(field: "head_ref", code: "required", message: "Validation failed for 'head_ref': value is required")
-        }
-        guard container.contains(.baseRef) else {
-            throw SdkValidationError(field: "base_ref", code: "required", message: "Validation failed for 'base_ref': value is required")
-        }
-        self.headRef = try container.sdkDecodeRequired(.headRef)
-        self.baseRef = try container.sdkDecodeRequired(.baseRef)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension TasksItemArtifactsItemData2Variant1 {
-    public init(headRef: String, baseRef: String) {
+public extension TasksItemArtifactsItemData2Variant1 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.headRef) else {
+            throw SdkValidationError(
+                field: "head_ref",
+                code: "required",
+                message: "Validation failed for 'head_ref': value is required"
+            )
+        }
+        guard container.contains(.baseRef) else {
+            throw SdkValidationError(
+                field: "base_ref",
+                code: "required",
+                message: "Validation failed for 'base_ref': value is required"
+            )
+        }
+        headRef = try container.sdkDecodeRequired(.headRef)
+        baseRef = try container.sdkDecodeRequired(.baseRef)
+    }
+}
+
+public extension TasksItemArtifactsItemData2Variant1 {
+    init(headRef: String, baseRef: String) {
         (self.headRef, self.baseRef) = (headRef, baseRef)
     }
 }
@@ -247,22 +305,28 @@ public struct TasksItemArtifactsItemData2Variant0: Codable {
         case globalId = "global_id"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension TasksItemArtifactsItemData2Variant0 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.globalId = try container.sdkDecodeIfPresent(.globalId)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension TasksItemArtifactsItemData2Variant0 {
-    public init(id: Int, globalId: String? = nil) {
+public extension TasksItemArtifactsItemData2Variant0 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        globalId = try container.sdkDecodeIfPresent(.globalId)
+    }
+}
+
+public extension TasksItemArtifactsItemData2Variant0 {
+    init(id: Int, globalId: String? = nil) {
         (self.id, self.globalId) = (id, globalId)
     }
 }
@@ -279,25 +343,35 @@ public struct ArtifactsItemData2Variant1: Codable {
         case baseRef = "base_ref"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ArtifactsItemData2Variant1 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.headRef) else {
-            throw SdkValidationError(field: "head_ref", code: "required", message: "Validation failed for 'head_ref': value is required")
-        }
-        guard container.contains(.baseRef) else {
-            throw SdkValidationError(field: "base_ref", code: "required", message: "Validation failed for 'base_ref': value is required")
-        }
-        self.headRef = try container.sdkDecodeRequired(.headRef)
-        self.baseRef = try container.sdkDecodeRequired(.baseRef)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ArtifactsItemData2Variant1 {
-    public init(headRef: String, baseRef: String) {
+public extension ArtifactsItemData2Variant1 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.headRef) else {
+            throw SdkValidationError(
+                field: "head_ref",
+                code: "required",
+                message: "Validation failed for 'head_ref': value is required"
+            )
+        }
+        guard container.contains(.baseRef) else {
+            throw SdkValidationError(
+                field: "base_ref",
+                code: "required",
+                message: "Validation failed for 'base_ref': value is required"
+            )
+        }
+        headRef = try container.sdkDecodeRequired(.headRef)
+        baseRef = try container.sdkDecodeRequired(.baseRef)
+    }
+}
+
+public extension ArtifactsItemData2Variant1 {
+    init(headRef: String, baseRef: String) {
         (self.headRef, self.baseRef) = (headRef, baseRef)
     }
 }
@@ -314,22 +388,28 @@ public struct ArtifactsItemDataVariant0: Codable {
         case globalId = "global_id"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ArtifactsItemDataVariant0 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.globalId = try container.sdkDecodeIfPresent(.globalId)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ArtifactsItemDataVariant0 {
-    public init(id: Int, globalId: String? = nil) {
+public extension ArtifactsItemDataVariant0 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        globalId = try container.sdkDecodeIfPresent(.globalId)
+    }
+}
+
+public extension ArtifactsItemDataVariant0 {
+    init(id: Int, globalId: String? = nil) {
         (self.id, self.globalId) = (id, globalId)
     }
 }
@@ -346,25 +426,35 @@ public struct TasksItemArtifactsItemData3Variant1: Codable {
         case baseRef = "base_ref"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension TasksItemArtifactsItemData3Variant1 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.headRef) else {
-            throw SdkValidationError(field: "head_ref", code: "required", message: "Validation failed for 'head_ref': value is required")
-        }
-        guard container.contains(.baseRef) else {
-            throw SdkValidationError(field: "base_ref", code: "required", message: "Validation failed for 'base_ref': value is required")
-        }
-        self.headRef = try container.sdkDecodeRequired(.headRef)
-        self.baseRef = try container.sdkDecodeRequired(.baseRef)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension TasksItemArtifactsItemData3Variant1 {
-    public init(headRef: String, baseRef: String) {
+public extension TasksItemArtifactsItemData3Variant1 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.headRef) else {
+            throw SdkValidationError(
+                field: "head_ref",
+                code: "required",
+                message: "Validation failed for 'head_ref': value is required"
+            )
+        }
+        guard container.contains(.baseRef) else {
+            throw SdkValidationError(
+                field: "base_ref",
+                code: "required",
+                message: "Validation failed for 'base_ref': value is required"
+            )
+        }
+        headRef = try container.sdkDecodeRequired(.headRef)
+        baseRef = try container.sdkDecodeRequired(.baseRef)
+    }
+}
+
+public extension TasksItemArtifactsItemData3Variant1 {
+    init(headRef: String, baseRef: String) {
         (self.headRef, self.baseRef) = (headRef, baseRef)
     }
 }
@@ -381,22 +471,28 @@ public struct TasksItemArtifactsItemData3Variant0: Codable {
         case globalId = "global_id"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension TasksItemArtifactsItemData3Variant0 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.globalId = try container.sdkDecodeIfPresent(.globalId)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension TasksItemArtifactsItemData3Variant0 {
-    public init(id: Int, globalId: String? = nil) {
+public extension TasksItemArtifactsItemData3Variant0 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        globalId = try container.sdkDecodeIfPresent(.globalId)
+    }
+}
+
+public extension TasksItemArtifactsItemData3Variant0 {
+    init(id: Int, globalId: String? = nil) {
         (self.id, self.globalId) = (id, globalId)
     }
 }
@@ -413,22 +509,28 @@ public struct ArtifactsItemData2Variant0: Codable {
         case globalId = "global_id"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ArtifactsItemData2Variant0 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.globalId = try container.sdkDecodeIfPresent(.globalId)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ArtifactsItemData2Variant0 {
-    public init(id: Int, globalId: String? = nil) {
+public extension ArtifactsItemData2Variant0 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        globalId = try container.sdkDecodeIfPresent(.globalId)
+    }
+}
+
+public extension ArtifactsItemData2Variant0 {
+    init(id: Int, globalId: String? = nil) {
         (self.id, self.globalId) = (id, globalId)
     }
 }
@@ -445,25 +547,35 @@ public struct ArtifactsItemData3Variant1: Codable {
         case baseRef = "base_ref"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ArtifactsItemData3Variant1 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.headRef) else {
-            throw SdkValidationError(field: "head_ref", code: "required", message: "Validation failed for 'head_ref': value is required")
-        }
-        guard container.contains(.baseRef) else {
-            throw SdkValidationError(field: "base_ref", code: "required", message: "Validation failed for 'base_ref': value is required")
-        }
-        self.headRef = try container.sdkDecodeRequired(.headRef)
-        self.baseRef = try container.sdkDecodeRequired(.baseRef)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ArtifactsItemData3Variant1 {
-    public init(headRef: String, baseRef: String) {
+public extension ArtifactsItemData3Variant1 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.headRef) else {
+            throw SdkValidationError(
+                field: "head_ref",
+                code: "required",
+                message: "Validation failed for 'head_ref': value is required"
+            )
+        }
+        guard container.contains(.baseRef) else {
+            throw SdkValidationError(
+                field: "base_ref",
+                code: "required",
+                message: "Validation failed for 'base_ref': value is required"
+            )
+        }
+        headRef = try container.sdkDecodeRequired(.headRef)
+        baseRef = try container.sdkDecodeRequired(.baseRef)
+    }
+}
+
+public extension ArtifactsItemData3Variant1 {
+    init(headRef: String, baseRef: String) {
         (self.headRef, self.baseRef) = (headRef, baseRef)
     }
 }
@@ -480,22 +592,28 @@ public struct ArtifactsItemData3Variant0: Codable {
         case globalId = "global_id"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ArtifactsItemData3Variant0 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.globalId = try container.sdkDecodeIfPresent(.globalId)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ArtifactsItemData3Variant0 {
-    public init(id: Int, globalId: String? = nil) {
+public extension ArtifactsItemData3Variant0 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        globalId = try container.sdkDecodeIfPresent(.globalId)
+    }
+}
+
+public extension ArtifactsItemData3Variant0 {
+    init(id: Int, globalId: String? = nil) {
         (self.id, self.globalId) = (id, globalId)
     }
 }

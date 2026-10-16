@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ReposMethods {
-    public struct ReposCreateRepoRulesetOptions: Codable {
+public extension ReposMethods {
+    struct ReposCreateRepoRulesetOptions: Codable {
         public var owner: String
         public var repo: String
         public var name: String
@@ -25,7 +25,9 @@ extension ReposMethods {
         }
     }
 
-    /// Creates a ruleset for a repository to apply rules when its specified conditions are met. Supply a `name` and `enforcement` level, and use `target`, `conditions`, and `rules` to configure where the ruleset applies and which rules it enforces. You can also configure actors that can bypass the ruleset with `bypass_actors`.
+    /// Creates a ruleset for a repository to apply rules when its specified conditions are met. Supply a `name` and
+    /// `enforcement` level, and use `target`, `conditions`, and `rules` to configure where the ruleset applies and
+    /// which rules it enforces. You can also configure actors that can bypass the ruleset with `bypass_actors`.
     ///
     /// Create a ruleset for a repository.
     ///
@@ -42,9 +44,28 @@ extension ReposMethods {
     /// - bypassActors: The actors that can bypass the rules in this ruleset
     /// - conditions: Parameters for a repository ruleset ref name condition
     /// - rules: An array of rules within the ruleset.
-    public static func reposCreateRepoRuleset(config: ClientConfig, options: ReposCreateRepoRulesetOptions, requestOptions: RequestOptions? = nil) async throws -> RepositoryRuleset {
+    static func reposCreateRepoRuleset(
+        config: ClientConfig,
+        options: ReposCreateRepoRulesetOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> RepositoryRuleset {
         let requestBody = ReposCreateRepoRulesetRequestBody(options: options)
 
-        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(options.owner)), "/", sdkEncodePathSegment(sdkWireString(options.repo)), "/rulesets"].joined(), config: config, body: requestBody, decoder: .json, operationId: "reposCreateRepoRuleset", options: requestOptions, errors: ["404": BasicError.self, "422": ValidationError.self, "500": BasicError.self])).data
+        return try await (sdkRequest(
+            "POST",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(options.owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(options.repo)),
+                "/rulesets",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "reposCreateRepoRuleset",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "422": ValidationError.self, "500": BasicError.self]
+        )).data
     }
 }

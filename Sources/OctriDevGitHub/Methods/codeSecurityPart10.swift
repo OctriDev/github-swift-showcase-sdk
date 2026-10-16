@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension CodeSecurityMethods {
-    public struct CodeSecurityCreateConfigurationOptions: Codable {
+public extension CodeSecurityMethods {
+    struct CodeSecurityCreateConfigurationOptions: Codable {
         public var org: String
         public var name: String
         public var description: String?
@@ -42,7 +42,9 @@ extension CodeSecurityMethods {
         }
     }
 
-    /// Creates a code security configuration in an organization. The authenticated user must be an administrator or security manager for the organization to use this endpoint. OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    /// Creates a code security configuration in an organization. The authenticated user must be an administrator or
+    /// security manager for the organization to use this endpoint. OAuth app tokens and personal access tokens
+    /// (classic) need the `write:org` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
@@ -95,13 +97,31 @@ extension CodeSecurityMethods {
     /// - privateVulnerabilityReporting: The enablement status of private
     ///   vulnerability reporting
     /// - enforcement: The enforcement status for a security configuration
-    public static func codeSecurityCreateConfiguration(config: ClientConfig, options: CodeSecurityCreateConfigurationOptions, requestOptions: RequestOptions? = nil) async throws -> CodeSecurityConfiguration {
+    static func codeSecurityCreateConfiguration(
+        config: ClientConfig,
+        options: CodeSecurityCreateConfigurationOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CodeSecurityConfiguration {
         if let description = options.description {
             try validateLength("description", description, max: 255)
         }
 
         let requestBody = CodeSecurityCreateConfigurationRequestBody(options: options)
 
-        return try (await sdkRequest("POST", ["/orgs/", sdkEncodePathSegment(sdkWireString(options.org)), "/code-security/configurations"].joined(), config: config, body: requestBody, decoder: .json, operationId: "codeSecurityCreateConfiguration", options: requestOptions, errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self, "422": ValidationErrorSimple.self])).data
+        return try await (sdkRequest(
+            "POST",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(options.org)), "/code-security/configurations"].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "codeSecurityCreateConfiguration",
+            options: requestOptions,
+            errors: [
+                "400": BasicError.self,
+                "403": BasicError.self,
+                "404": BasicError.self,
+                "422": ValidationErrorSimple.self,
+            ]
+        )).data
     }
 }

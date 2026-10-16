@@ -17,11 +17,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.packages.restorePackageForUser(
-            packageType: decoded("\"npm\""),
-            packageName: decoded("\"Example Name\""),
-            username: decoded("\"Example Name\""),
-            token: decoded("\"token\"")
-        )
+                packageType: decoded("\"npm\""),
+                packageName: decoded("\"Example Name\""),
+                username: decoded("\"Example Name\""),
+                token: decoded("\"token\"")
+            )
             XCTFail("packagesRestorePackageForUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -38,7 +38,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testPackagesRestorePackageVersionForAuthenticatedUserPackagesRestX40384d40c8ReachesMockAndDecodesResponse() async throws {
+    func testPackagesRestorePackageVersionForAuthenticatedUserPackagesRestX40384d40c8ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -51,7 +52,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testPackagesRestorePackageVersionForAuthenticatedUserPackagesRestXa2c38ff2d5ReachesMockAndDecodesResponse() async throws {
+    func testPackagesRestorePackageVersionForAuthenticatedUserPackagesRestXa2c38ff2d5ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -62,10 +64,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.packages.restorePackageVersionForAuthenticatedUser(
-            packageType: decoded("\"npm\""),
-            packageName: decoded("\"Example Name\""),
-            packageVersionId: decoded("30")
-        )
+                packageType: decoded("\"npm\""),
+                packageName: decoded("\"Example Name\""),
+                packageVersionId: decoded("30")
+            )
             XCTFail("packagesRestorePackageVersionForAuthenticatedUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -82,7 +84,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testPackagesRestorePackageVersionForOrgPackagesRestorePackageVersionForOrgReachesMockAndDecodesResponse() async throws {
+    func testPackagesRestorePackageVersionForOrgPackagesRestorePackageVersionForOrgReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -96,7 +99,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testPackagesRestorePackageVersionForOrgPackagesRestorePackageVersX32aa7c575eReachesMockAndDecodesResponse() async throws {
+    func testPackagesRestorePackageVersionForOrgPackagesRestorePackageVersX32aa7c575eReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -107,11 +111,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.packages.restorePackageVersionForOrg(
-            packageType: decoded("\"npm\""),
-            packageName: decoded("\"Example Name\""),
-            org: decoded("\"org\""),
-            packageVersionId: decoded("30")
-        )
+                packageType: decoded("\"npm\""),
+                packageName: decoded("\"Example Name\""),
+                org: decoded("\"org\""),
+                packageVersionId: decoded("30")
+            )
             XCTFail("packagesRestorePackageVersionForOrg did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -128,7 +132,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testPackagesRestorePackageVersionForUserPackagesRestorePackageVersionForUserReachesMockAndDecodesResponse() async throws {
+    func testPackagesRestorePackageVersionForUserPackagesRestorePackageVersionForUserReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -142,7 +147,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testPackagesRestorePackageVersionForUserPackagesRestorePackageVerX242baacf7eReachesMockAndDecodesResponse() async throws {
+    func testPackagesRestorePackageVersionForUserPackagesRestorePackageVerX242baacf7eReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -153,11 +159,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.packages.restorePackageVersionForUser(
-            packageType: decoded("\"npm\""),
-            packageName: decoded("\"Example Name\""),
-            username: decoded("\"Example Name\""),
-            packageVersionId: decoded("30")
-        )
+                packageType: decoded("\"npm\""),
+                packageName: decoded("\"Example Name\""),
+                username: decoded("\"Example Name\""),
+                packageVersionId: decoded("30")
+            )
             XCTFail("packagesRestorePackageVersionForUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -174,12 +180,18 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testPrivateRegistriesCreateOrgPrivateRegistryPrivateRegistriesCreX2219737b01ReachesMockAndDecodesResponse() async throws {
+    func testPrivateRegistriesCreateOrgPrivateRegistryPrivateRegistriesCreX2219737b01ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        var options = try PrivateRegistriesMethods.PrivateRegistriesCreateOrgPrivateRegistryOptions(org: decoded("\"org\""), registryType: decoded("\"maven_repository\""), url: decoded("\"https://maven.pkg.github.com/organization/\""), visibility: decoded("\"private\""))
+        var options = try PrivateRegistriesMethods.PrivateRegistriesCreateOrgPrivateRegistryOptions(
+            org: decoded("\"org\""),
+            registryType: decoded("\"maven_repository\""),
+            url: decoded("\"https://maven.pkg.github.com/organization/\""),
+            visibility: decoded("\"private\"")
+        )
         options.username = try decoded("\"monalisa\"")
         options.replacesBase = try decoded("true")
         options.encryptedValue = try decoded("\"c2VjcmV0\"")
@@ -215,12 +227,18 @@ extension SdkMethodTests {
         )
     }
 
-    func testPrivateRegistriesCreateOrgPrivateRegistryPrivateRegistriesCreX25b563e8cfReachesMockAndDecodesResponse() async throws {
+    func testPrivateRegistriesCreateOrgPrivateRegistryPrivateRegistriesCreX25b563e8cfReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
         _ = client
-        var options = try PrivateRegistriesMethods.PrivateRegistriesCreateOrgPrivateRegistryOptions(org: decoded("\"org\""), registryType: decoded("\"maven_repository\""), url: decoded("\"https://maven.pkg.github.com/organization/\""), visibility: decoded("\"private\""))
+        var options = try PrivateRegistriesMethods.PrivateRegistriesCreateOrgPrivateRegistryOptions(
+            org: decoded("\"org\""),
+            registryType: decoded("\"maven_repository\""),
+            url: decoded("\"https://maven.pkg.github.com/organization/\""),
+            visibility: decoded("\"private\"")
+        )
         options.username = try decoded("\"monalisa\"")
         options.replacesBase = try decoded("true")
         options.encryptedValue = try decoded("\"c2VjcmV0\"")
@@ -248,8 +266,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.privateRegistries.createOrgPrivateRegistry(
-            options: options
-        )
+                options: options
+            )
             XCTFail("privateRegistriesCreateOrgPrivateRegistry did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -266,7 +284,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testPrivateRegistriesDeleteOrgPrivateRegistryPrivateRegistriesDelX2a00aaee6dReachesMockAndDecodesResponse() async throws {
+    func testPrivateRegistriesDeleteOrgPrivateRegistryPrivateRegistriesDelX2a00aaee6dReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -278,7 +297,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testPrivateRegistriesDeleteOrgPrivateRegistryPrivateRegistriesDelX25d7e2c927ReachesMockAndDecodesResponse() async throws {
+    func testPrivateRegistriesDeleteOrgPrivateRegistryPrivateRegistriesDelX25d7e2c927ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
             return
         }
@@ -289,9 +309,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.privateRegistries.deleteOrgPrivateRegistry(
-            org: decoded("\"org\""),
-            secretName: decoded("\"Example Name\"")
-        )
+                org: decoded("\"org\""),
+                secretName: decoded("\"Example Name\"")
+            )
             XCTFail("privateRegistriesDeleteOrgPrivateRegistry did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -308,7 +328,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testPrivateRegistriesGetOrgPrivateRegistryPrivateRegistriesGetOrgX28d9b36725ReachesMockAndDecodesResponse() async throws {
+    func testPrivateRegistriesGetOrgPrivateRegistryPrivateRegistriesGetOrgX28d9b36725ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -328,7 +349,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testPrivateRegistriesGetOrgPrivateRegistryPrivateRegistriesGetOrgX0e37048066ReachesMockAndDecodesResponse() async throws {
+    func testPrivateRegistriesGetOrgPrivateRegistryPrivateRegistriesGetOrgX0e37048066ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -339,9 +361,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.privateRegistries.getOrgPrivateRegistry(
-            org: decoded("\"org\""),
-            secretName: decoded("\"Example Name\"")
-        )
+                org: decoded("\"org\""),
+                secretName: decoded("\"Example Name\"")
+            )
             XCTFail("privateRegistriesGetOrgPrivateRegistry did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -358,7 +380,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testPrivateRegistriesGetOrgPublicKeyPrivateRegistriesGetOrgPublicKeyReachesMockAndDecodesResponse() async throws {
+    func testPrivateRegistriesGetOrgPublicKeyPrivateRegistriesGetOrgPublicKeyReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -377,7 +400,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testPrivateRegistriesGetOrgPublicKeyPrivateRegistriesGetOrgPublicKey404ReachesMockAndDecodesResponse() async throws {
+    func testPrivateRegistriesGetOrgPublicKeyPrivateRegistriesGetOrgPublicKey404ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -388,8 +412,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.privateRegistries.getOrgPublicKey(
-            org: decoded("\"org\"")
-        )
+                org: decoded("\"org\"")
+            )
             XCTFail("privateRegistriesGetOrgPublicKey did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -406,7 +430,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testPrivateRegistriesListOrgPrivateRegistriesPrivateRegistriesLisX797d49a037ReachesMockAndDecodesResponse() async throws {
+    func testPrivateRegistriesListOrgPrivateRegistriesPrivateRegistriesLisX797d49a037ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -427,7 +452,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testPrivateRegistriesListOrgPrivateRegistriesPrivateRegistriesLisXc6ea1fb1baReachesMockAndDecodesResponse() async throws {
+    func testPrivateRegistriesListOrgPrivateRegistriesPrivateRegistriesLisXc6ea1fb1baReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
             return
         }
@@ -438,10 +464,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.privateRegistries.listOrgPrivateRegistries(
-            org: decoded("\"org\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                org: decoded("\"org\""),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("privateRegistriesListOrgPrivateRegistries did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -458,12 +484,16 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testPrivateRegistriesUpdateOrgPrivateRegistryPrivateRegistriesUpdXb694917a13ReachesMockAndDecodesResponse() async throws {
+    func testPrivateRegistriesUpdateOrgPrivateRegistryPrivateRegistriesUpdXb694917a13ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        var options = try PrivateRegistriesMethods.PrivateRegistriesUpdateOrgPrivateRegistryOptions(org: decoded("\"org\""), secretName: decoded("\"Example Name\""))
+        var options = try PrivateRegistriesMethods.PrivateRegistriesUpdateOrgPrivateRegistryOptions(
+            org: decoded("\"org\""),
+            secretName: decoded("\"Example Name\"")
+        )
         options.registryType = try decoded("null")
         options.url = try decoded("null")
         options.username = try decoded("\"monalisa\"")

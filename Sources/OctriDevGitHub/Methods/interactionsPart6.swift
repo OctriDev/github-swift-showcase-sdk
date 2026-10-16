@@ -6,8 +6,11 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension InteractionsMethods {
-    /// Adds users to the pull request creation cap bypass list for a repository. Users on this list can create pull requests regardless of any configured pull request creation cap. Only users with maintainer permissions can modify the bypass list. You can add a maximum of 100 users per request. The bypass list can only hold a maximum of 100 users.
+public extension InteractionsMethods {
+    /// Adds users to the pull request creation cap bypass list for a repository. Users on this list can create pull
+    /// requests regardless of any configured pull request creation cap. Only users with maintainer permissions can
+    /// modify the bypass list. You can add a maximum of 100 users per request. The bypass list can only hold a maximum
+    /// of 100 users.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -15,13 +18,36 @@ extension InteractionsMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - users: A list of user logins to add or remove from the bypass list.
-    public static func interactionsSetPullRequestBypassListForRepo(config: ClientConfig, owner: String, repo: String, users: [String], requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+    static func interactionsSetPullRequestBypassListForRepo(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        users: [String],
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
         let requestBody = InteractionsSetPullRequestBypassListForRepoRequestBody(users: users)
 
-        return try (await sdkRequest("PUT", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/interaction-limits/pulls/bypass-list"].joined(), config: config, body: requestBody, decoder: .empty, operationId: "interactionsSetPullRequestBypassListForRepo", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
+        return try await (sdkRequest(
+            "PUT",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/interaction-limits/pulls/bypass-list",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .empty,
+            operationId: "interactionsSetPullRequestBypassListForRepo",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self]
+        )).data
     }
 
-    /// Removes users from the pull request creation cap bypass list for a repository. Removed users will be subject to any configured pull request creation cap. Only users with maintainer permissions can modify the bypass list. You can remove a maximum of 100 users per request.
+    /// Removes users from the pull request creation cap bypass list for a repository. Removed users will be subject to
+    /// any configured pull request creation cap. Only users with maintainer permissions can modify the bypass list. You
+    /// can remove a maximum of 100 users per request.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -29,9 +55,30 @@ extension InteractionsMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - users: A list of user logins to add or remove from the bypass list.
-    public static func interactionsRemovePullRequestBypassListForRepo(config: ClientConfig, owner: String, repo: String, users: [String], requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+    static func interactionsRemovePullRequestBypassListForRepo(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        users: [String],
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
         let requestBody = InteractionsRemovePullRequestBypassListForRepoRequestBody(users: users)
 
-        return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/interaction-limits/pulls/bypass-list"].joined(), config: config, body: requestBody, decoder: .empty, operationId: "interactionsRemovePullRequestBypassListForRepo", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
+        return try await (sdkRequest(
+            "DELETE",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/interaction-limits/pulls/bypass-list",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .empty,
+            operationId: "interactionsRemovePullRequestBypassListForRepo",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self]
+        )).data
     }
 }

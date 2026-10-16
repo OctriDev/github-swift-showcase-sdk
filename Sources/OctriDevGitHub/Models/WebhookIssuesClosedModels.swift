@@ -3,7 +3,7 @@
 
 import Foundation
 
-// WebhookIssuesClosed domain models
+/// WebhookIssuesClosed domain models
 /// Optional object value serialized in the `assignee` wire field.
 public struct WebhookIssuesClosedIssueVariant0Assignee: Codable {
     /// Required `integer` value serialized in the `id` wire field.
@@ -76,46 +76,79 @@ public struct WebhookIssuesClosedIssueVariant0Assignee: Codable {
         case userViewType = "user_view_type"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension WebhookIssuesClosedIssueVariant0Assignee {
-    public init(from decoder: Decoder) throws {
+public extension WebhookIssuesClosedIssueVariant0Assignee {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
         }
         guard container.contains(.login) else {
-            throw SdkValidationError(field: "login", code: "required", message: "Validation failed for 'login': value is required")
+            throw SdkValidationError(
+                field: "login",
+                code: "required",
+                message: "Validation failed for 'login': value is required"
+            )
         }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.login = try container.sdkDecodeRequired(.login)
-        self.avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
-        self.deleted = try container.sdkDecodeIfPresent(.deleted)
-        self.email = try container.sdkDecodeIfPresent(.email)
-        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
-        self.followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
-        self.followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
-        self.gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
-        self.gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
-        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        self.organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
-        self.receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
-        self.reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
-        self.siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
-        self.starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
-        self.subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
-        self.type = try container.sdkDecodeIfPresent(.type)
-        self.url = try container.sdkDecodeIfPresent(.url)
-        self.userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        id = try container.sdkDecodeRequired(.id)
+        login = try container.sdkDecodeRequired(.login)
+        avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
+        deleted = try container.sdkDecodeIfPresent(.deleted)
+        email = try container.sdkDecodeIfPresent(.email)
+        eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
+        followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
+        gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
+        gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
+        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        name = try container.sdkDecodeIfPresent(.name)
+        nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
+        receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
+        reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
+        siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
+        starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
+        subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
+        type = try container.sdkDecodeIfPresent(.type)
+        url = try container.sdkDecodeIfPresent(.url)
+        userViewType = try container.sdkDecodeIfPresent(.userViewType)
         try sdkValidateConstraints()
     }
 }
 
-extension WebhookIssuesClosedIssueVariant0Assignee {
-    public init(id: Int, login: String, avatarUrl: String? = nil, deleted: Bool? = nil, email: String? = nil, eventsUrl: String? = nil, followersUrl: String? = nil, followingUrl: String? = nil, gistsUrl: String? = nil, gravatarId: String? = nil, htmlUrl: String? = nil, name: String? = nil, nodeId: String? = nil, organizationsUrl: String? = nil, receivedEventsUrl: String? = nil, reposUrl: String? = nil, siteAdmin: Bool? = nil, starredUrl: String? = nil, subscriptionsUrl: String? = nil, type: WebhookIssuesClosedIssueVariant0AssigneeType? = nil, url: String? = nil, userViewType: String? = nil) throws {
+public extension WebhookIssuesClosedIssueVariant0Assignee {
+    init(
+        id: Int,
+        login: String,
+        avatarUrl: String? = nil,
+        deleted: Bool? = nil,
+        email: String? = nil,
+        eventsUrl: String? = nil,
+        followersUrl: String? = nil,
+        followingUrl: String? = nil,
+        gistsUrl: String? = nil,
+        gravatarId: String? = nil,
+        htmlUrl: String? = nil,
+        name: String? = nil,
+        nodeId: String? = nil,
+        organizationsUrl: String? = nil,
+        receivedEventsUrl: String? = nil,
+        reposUrl: String? = nil,
+        siteAdmin: Bool? = nil,
+        starredUrl: String? = nil,
+        subscriptionsUrl: String? = nil,
+        type: WebhookIssuesClosedIssueVariant0AssigneeType? = nil,
+        url: String? = nil,
+        userViewType: String? = nil
+    ) throws {
         (self.id, self.login) = (id, login)
         (self.avatarUrl, self.deleted) = (avatarUrl, deleted)
         (self.email, self.eventsUrl) = (email, eventsUrl)
@@ -133,28 +166,28 @@ extension WebhookIssuesClosedIssueVariant0Assignee {
 
 extension WebhookIssuesClosedIssueVariant0Assignee {
     func sdkValidateConstraints() throws {
-        if let value = self.avatarUrl {
+        if let value = avatarUrl {
             try sdkValidateUri("avatar_url", value)
         }
-        if let value = self.followersUrl {
+        if let value = followersUrl {
             try sdkValidateUri("followers_url", value)
         }
-        if let value = self.htmlUrl {
+        if let value = htmlUrl {
             try sdkValidateUri("html_url", value)
         }
-        if let value = self.organizationsUrl {
+        if let value = organizationsUrl {
             try sdkValidateUri("organizations_url", value)
         }
-        if let value = self.receivedEventsUrl {
+        if let value = receivedEventsUrl {
             try sdkValidateUri("received_events_url", value)
         }
-        if let value = self.reposUrl {
+        if let value = reposUrl {
             try sdkValidateUri("repos_url", value)
         }
-        if let value = self.subscriptionsUrl {
+        if let value = subscriptionsUrl {
             try sdkValidateUri("subscriptions_url", value)
         }
-        if let value = self.url {
+        if let value = url {
             try sdkValidateUri("url", value)
         }
     }
@@ -187,51 +220,89 @@ public struct WebhookIssuesClosedIssueVariant0LabelsItem: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookIssuesClosedIssueVariant0LabelsItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.color) else {
-            throw SdkValidationError(field: "color", code: "required", message: "Validation failed for 'color': value is required")
-        }
-        guard container.contains(.`default`) else {
-            throw SdkValidationError(field: "default", code: "required", message: "Validation failed for 'default': value is required")
-        }
-        guard container.contains(.description) else {
-            throw SdkValidationError(field: "description", code: "required", message: "Validation failed for 'description': value is required")
-        }
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        guard container.contains(.nodeId) else {
-            throw SdkValidationError(field: "node_id", code: "required", message: "Validation failed for 'node_id': value is required")
-        }
-        guard container.contains(.url) else {
-            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
-        }
-        self.color = try container.sdkDecodeRequired(.color)
-        self.`default` = try container.sdkDecodeRequired(.`default`)
-        self.description = try container.sdkDecodeNullable(.description)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.url = try container.sdkDecodeRequired(.url)
-            try sdkValidateUri("url", self.url)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WebhookIssuesClosedIssueVariant0LabelsItem {
-    public init(color: String, `default`: Bool, description: String?, id: Int, name: String, nodeId: String, url: String) throws {
-        (self.color, self.`default`) = (color, `default`)
+public extension WebhookIssuesClosedIssueVariant0LabelsItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.color) else {
+            throw SdkValidationError(
+                field: "color",
+                code: "required",
+                message: "Validation failed for 'color': value is required"
+            )
+        }
+        guard container.contains(.default) else {
+            throw SdkValidationError(
+                field: "default",
+                code: "required",
+                message: "Validation failed for 'default': value is required"
+            )
+        }
+        guard container.contains(.description) else {
+            throw SdkValidationError(
+                field: "description",
+                code: "required",
+                message: "Validation failed for 'description': value is required"
+            )
+        }
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        guard container.contains(.nodeId) else {
+            throw SdkValidationError(
+                field: "node_id",
+                code: "required",
+                message: "Validation failed for 'node_id': value is required"
+            )
+        }
+        guard container.contains(.url) else {
+            throw SdkValidationError(
+                field: "url",
+                code: "required",
+                message: "Validation failed for 'url': value is required"
+            )
+        }
+        color = try container.sdkDecodeRequired(.color)
+        self.default = try container.sdkDecodeRequired(.default)
+        description = try container.sdkDecodeNullable(.description)
+        id = try container.sdkDecodeRequired(.id)
+        name = try container.sdkDecodeRequired(.name)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        url = try container.sdkDecodeRequired(.url)
+        try sdkValidateUri("url", url)
+    }
+}
+
+public extension WebhookIssuesClosedIssueVariant0LabelsItem {
+    init(
+        color: String,
+        default: Bool,
+        description: String?,
+        id: Int,
+        name: String,
+        nodeId: String,
+        url: String
+    ) throws {
+        (self.color, self.default) = (color, `default`)
         (self.description, self.id) = (description, id)
         (self.name, self.nodeId) = (name, nodeId)
         self.url = url
-            try sdkValidateUri("url", self.url)
+        try sdkValidateUri("url", self.url)
     }
 }
 
@@ -322,50 +393,88 @@ public struct WebhookIssuesClosedIssueVariant1: Codable {
         case user
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookIssuesClosedIssueVariant1 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.closedAt) else {
-            throw SdkValidationError(field: "closed_at", code: "required", message: "Validation failed for 'closed_at': value is required")
-        }
-        guard container.contains(.state) else {
-            throw SdkValidationError(field: "state", code: "required", message: "Validation failed for 'state': value is required")
-        }
-        self.closedAt = try container.sdkDecodeNullable(.closedAt)
-        self.state = try container.sdkDecodeRequired(.state)
-        self.activeLockReason = try container.sdkDecodeIfPresent(.activeLockReason)
-        self.assignee = try container.sdkDecodeIfPresent(.assignee)
-        self.assignees = try container.sdkDecodeIfPresent(.assignees)
-        self.authorAssociation = try container.sdkDecodeIfPresent(.authorAssociation)
-        self.body = try container.sdkDecodeIfPresent(.body)
-        self.comments = try container.sdkDecodeIfPresent(.comments)
-        self.commentsUrl = try container.sdkDecodeIfPresent(.commentsUrl)
-        self.createdAt = try container.sdkDecodeIfPresent(.createdAt)
-        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
-        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        self.id = try container.sdkDecodeIfPresent(.id)
-        self.labels = try container.sdkDecodeIfPresent(.labels)
-        self.labelsUrl = try container.sdkDecodeIfPresent(.labelsUrl)
-        self.locked = try container.sdkDecodeIfPresent(.locked)
-        self.milestone = try container.sdkDecodeIfPresent(.milestone)
-        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        self.number = try container.sdkDecodeIfPresent(.number)
-        self.performedViaGithubApp = try container.sdkDecodeIfPresent(.performedViaGithubApp)
-        self.reactions = try container.sdkDecodeIfPresent(.reactions)
-        self.repositoryUrl = try container.sdkDecodeIfPresent(.repositoryUrl)
-        self.timelineUrl = try container.sdkDecodeIfPresent(.timelineUrl)
-        self.title = try container.sdkDecodeIfPresent(.title)
-        self.updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
-        self.url = try container.sdkDecodeIfPresent(.url)
-        self.user = try container.sdkDecodeIfPresent(.user)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WebhookIssuesClosedIssueVariant1 {
-    public init(closedAt: String?, state: WebhookIssuesClosedIssueVariant1State, activeLockReason: String? = nil, assignee: [String: JSONValue]? = nil, assignees: [[String: JSONValue]?]? = nil, authorAssociation: String? = nil, body: String? = nil, comments: Int? = nil, commentsUrl: String? = nil, createdAt: String? = nil, eventsUrl: String? = nil, htmlUrl: String? = nil, id: Int? = nil, labels: [[String: JSONValue]?]? = nil, labelsUrl: String? = nil, locked: Bool? = nil, milestone: [String: JSONValue]? = nil, nodeId: String? = nil, number: Int? = nil, performedViaGithubApp: [String: JSONValue]? = nil, reactions: WebhookIssuesClosedIssueVariant1Reactions? = nil, repositoryUrl: String? = nil, timelineUrl: String? = nil, title: String? = nil, updatedAt: String? = nil, url: String? = nil, user: WebhookIssuesClosedIssueVariant1User? = nil) {
+public extension WebhookIssuesClosedIssueVariant1 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.closedAt) else {
+            throw SdkValidationError(
+                field: "closed_at",
+                code: "required",
+                message: "Validation failed for 'closed_at': value is required"
+            )
+        }
+        guard container.contains(.state) else {
+            throw SdkValidationError(
+                field: "state",
+                code: "required",
+                message: "Validation failed for 'state': value is required"
+            )
+        }
+        closedAt = try container.sdkDecodeNullable(.closedAt)
+        state = try container.sdkDecodeRequired(.state)
+        activeLockReason = try container.sdkDecodeIfPresent(.activeLockReason)
+        assignee = try container.sdkDecodeIfPresent(.assignee)
+        assignees = try container.sdkDecodeIfPresent(.assignees)
+        authorAssociation = try container.sdkDecodeIfPresent(.authorAssociation)
+        body = try container.sdkDecodeIfPresent(.body)
+        comments = try container.sdkDecodeIfPresent(.comments)
+        commentsUrl = try container.sdkDecodeIfPresent(.commentsUrl)
+        createdAt = try container.sdkDecodeIfPresent(.createdAt)
+        eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        id = try container.sdkDecodeIfPresent(.id)
+        labels = try container.sdkDecodeIfPresent(.labels)
+        labelsUrl = try container.sdkDecodeIfPresent(.labelsUrl)
+        locked = try container.sdkDecodeIfPresent(.locked)
+        milestone = try container.sdkDecodeIfPresent(.milestone)
+        nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        number = try container.sdkDecodeIfPresent(.number)
+        performedViaGithubApp = try container.sdkDecodeIfPresent(.performedViaGithubApp)
+        reactions = try container.sdkDecodeIfPresent(.reactions)
+        repositoryUrl = try container.sdkDecodeIfPresent(.repositoryUrl)
+        timelineUrl = try container.sdkDecodeIfPresent(.timelineUrl)
+        title = try container.sdkDecodeIfPresent(.title)
+        updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
+        url = try container.sdkDecodeIfPresent(.url)
+        user = try container.sdkDecodeIfPresent(.user)
+    }
+}
+
+public extension WebhookIssuesClosedIssueVariant1 {
+    init(
+        closedAt: String?,
+        state: WebhookIssuesClosedIssueVariant1State,
+        activeLockReason: String? = nil,
+        assignee: [String: JSONValue]? = nil,
+        assignees: [[String: JSONValue]?]? = nil,
+        authorAssociation: String? = nil,
+        body: String? = nil,
+        comments: Int? = nil,
+        commentsUrl: String? = nil,
+        createdAt: String? = nil,
+        eventsUrl: String? = nil,
+        htmlUrl: String? = nil,
+        id: Int? = nil,
+        labels: [[String: JSONValue]?]? = nil,
+        labelsUrl: String? = nil,
+        locked: Bool? = nil,
+        milestone: [String: JSONValue]? = nil,
+        nodeId: String? = nil,
+        number: Int? = nil,
+        performedViaGithubApp: [String: JSONValue]? = nil,
+        reactions: WebhookIssuesClosedIssueVariant1Reactions? = nil,
+        repositoryUrl: String? = nil,
+        timelineUrl: String? = nil,
+        title: String? = nil,
+        updatedAt: String? = nil,
+        url: String? = nil,
+        user: WebhookIssuesClosedIssueVariant1User? = nil
+    ) {
         (self.closedAt, self.state) = (closedAt, state)
         (self.activeLockReason, self.assignee) = (activeLockReason, assignee)
         (self.assignees, self.authorAssociation) = (assignees, authorAssociation)
@@ -405,38 +514,44 @@ public struct WebhookIssuesClosedIssueVariant0PullRequest: Codable {
     }
 
     init() {
-        (self.diffUrl, self.htmlUrl, self.mergedAt, self.patchUrl, self.url) = (nil, nil, nil, nil, nil)
+        (diffUrl, htmlUrl, mergedAt, patchUrl, url) = (nil, nil, nil, nil, nil)
     }
 }
 
-extension WebhookIssuesClosedIssueVariant0PullRequest {
-    public init(from decoder: Decoder) throws {
+public extension WebhookIssuesClosedIssueVariant0PullRequest {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.diffUrl = try container.sdkDecodeIfPresent(.diffUrl)
-        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        self.mergedAt = try container.sdkDecodeIfPresent(.mergedAt)
-        self.patchUrl = try container.sdkDecodeIfPresent(.patchUrl)
-        self.url = try container.sdkDecodeIfPresent(.url)
-        if let value = self.diffUrl {
+        diffUrl = try container.sdkDecodeIfPresent(.diffUrl)
+        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        mergedAt = try container.sdkDecodeIfPresent(.mergedAt)
+        patchUrl = try container.sdkDecodeIfPresent(.patchUrl)
+        url = try container.sdkDecodeIfPresent(.url)
+        if let value = diffUrl {
             try sdkValidateUri("diff_url", value)
         }
-        if let value = self.htmlUrl {
+        if let value = htmlUrl {
             try sdkValidateUri("html_url", value)
         }
-        if let value = self.mergedAt {
+        if let value = mergedAt {
             try sdkValidateDateTime("merged_at", sdkWireString(value))
         }
-        if let value = self.patchUrl {
+        if let value = patchUrl {
             try sdkValidateUri("patch_url", value)
         }
-        if let value = self.url {
+        if let value = url {
             try sdkValidateUri("url", value)
         }
     }
 }
 
-extension WebhookIssuesClosedIssueVariant0PullRequest {
-    public init(diffUrl: String? = nil, htmlUrl: String? = nil, mergedAt: Date? = nil, patchUrl: String? = nil, url: String? = nil) throws {
+public extension WebhookIssuesClosedIssueVariant0PullRequest {
+    init(
+        diffUrl: String? = nil,
+        htmlUrl: String? = nil,
+        mergedAt: Date? = nil,
+        patchUrl: String? = nil,
+        url: String? = nil
+    ) throws {
         self.init()
         (self.diffUrl, self.htmlUrl) = (diffUrl, htmlUrl)
         (self.mergedAt, self.patchUrl) = (mergedAt, patchUrl)

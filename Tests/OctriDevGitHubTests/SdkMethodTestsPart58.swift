@@ -81,7 +81,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testOrgsSetClusterDeploymentRecordsOrgsSetClusterDeploymentRecords403ReachesMockAndDecodesResponse() async throws {
+    func testOrgsSetClusterDeploymentRecordsOrgsSetClusterDeploymentRecords403ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -92,14 +93,14 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.setClusterDeploymentRecords(
-            org: decoded("\"org\""),
-            cluster: decoded("\"a\""),
-            logicalEnvironment: decoded("\"prod\""),
-            deployments: decoded(sdkMethodFixture1267Value1),
-            physicalEnvironment: decoded("\"pacific-east\""),
-            partialSuccess: decoded("null"),
-            returnRecords: decoded("null")
-        )
+                org: decoded("\"org\""),
+                cluster: decoded("\"a\""),
+                logicalEnvironment: decoded("\"prod\""),
+                deployments: decoded(sdkMethodFixture1267Value1),
+                physicalEnvironment: decoded("\"pacific-east\""),
+                partialSuccess: decoded("null"),
+                returnRecords: decoded("null")
+            )
             XCTFail("orgsSetClusterDeploymentRecords did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -116,7 +117,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOrgsSetImmutableReleasesSettingsOrgsSetImmutableReleasesSettingsReachesMockAndDecodesResponse() async throws {
+    func testOrgsSetImmutableReleasesSettingsOrgsSetImmutableReleasesSettingsReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -129,7 +131,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOrgsSetImmutableReleasesSettingsRepositoriesOrgsSetImmutableRX3c6533e047ReachesMockAndDecodesResponse() async throws {
+    func testOrgsSetImmutableReleasesSettingsRepositoriesOrgsSetImmutableRX3c6533e047ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -173,10 +176,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.setMembershipForUser(
-            org: decoded("\"org\""),
-            username: decoded("\"Example Name\""),
-            role: decoded("\"member\"")
-        )
+                org: decoded("\"org\""),
+                username: decoded("\"Example Name\""),
+                role: decoded("\"member\"")
+            )
             XCTFail("orgsSetMembershipForUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -193,7 +196,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOrgsSetPublicMembershipForAuthenticatedUserOrgsSetPublicMembeX6b7ecd497dReachesMockAndDecodesResponse() async throws {
+    func testOrgsSetPublicMembershipForAuthenticatedUserOrgsSetPublicMembeX6b7ecd497dReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -205,7 +209,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOrgsSetPublicMembershipForAuthenticatedUserOrgsSetPublicMembeX67c18c6928ReachesMockAndDecodesResponse() async throws {
+    func testOrgsSetPublicMembershipForAuthenticatedUserOrgsSetPublicMembeX67c18c6928ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -216,9 +221,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.setPublicMembershipForAuthenticatedUser(
-            org: decoded("\"org\""),
-            username: decoded("\"Example Name\"")
-        )
+                org: decoded("\"org\""),
+                username: decoded("\"Example Name\"")
+            )
             XCTFail("orgsSetPublicMembershipForAuthenticatedUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -285,8 +290,8 @@ extension SdkMethodTests {
         options.deployKeysEnabledForRepositories = try decoded("null")
         do {
             _ = try await client.orgs.update(
-            options: options
-        )
+                options: options
+            )
             XCTFail("orgsUpdate decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -337,8 +342,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.update(
-            options: options
-        )
+                options: options
+            )
             XCTFail("orgsUpdate did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 409)
@@ -390,13 +395,13 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.updateIssueField(
-            org: decoded("\"org\""),
-            issueFieldId: decoded("1"),
-            name: decoded("\"Priority\""),
-            description: decoded("\"Level of importance for the issue\""),
-            visibility: decoded("null"),
-            options: decoded("null")
-        )
+                org: decoded("\"org\""),
+                issueFieldId: decoded("1"),
+                name: decoded("\"Priority\""),
+                description: decoded("\"Level of importance for the issue\""),
+                visibility: decoded("null"),
+                options: decoded("null")
+            )
             XCTFail("orgsUpdateIssueField did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -448,13 +453,13 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.updateIssueType(
-            org: decoded("\"org\""),
-            issueTypeId: decoded("1"),
-            name: decoded("\"Epic\""),
-            isEnabled: decoded("true"),
-            description: decoded("\"An issue type for a multi-week tracking of work\""),
-            color: decoded("\"green\"")
-        )
+                org: decoded("\"org\""),
+                issueTypeId: decoded("1"),
+                name: decoded("\"Epic\""),
+                isEnabled: decoded("true"),
+                description: decoded("\"An issue type for a multi-week tracking of work\""),
+                color: decoded("\"green\"")
+            )
             XCTFail("orgsUpdateIssueType did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -471,7 +476,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOrgsUpdateMembershipForAuthenticatedUserOrgsUpdateMembershipFX2a966a2828ReachesMockAndDecodesResponse() async throws {
+    func testOrgsUpdateMembershipForAuthenticatedUserOrgsUpdateMembershipFX2a966a2828ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -491,7 +497,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testOrgsUpdateMembershipForAuthenticatedUserOrgsUpdateMembershipFX13f6fb3091ReachesMockAndDecodesResponse() async throws {
+    func testOrgsUpdateMembershipForAuthenticatedUserOrgsUpdateMembershipFX13f6fb3091ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -502,9 +509,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.updateMembershipForAuthenticatedUser(
-            org: decoded("\"org\""),
-            state: decoded("\"active\"")
-        )
+                org: decoded("\"org\""),
+                state: decoded("\"active\"")
+            )
             XCTFail("orgsUpdateMembershipForAuthenticatedUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -545,10 +552,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.updatePatAccess(
-            org: decoded("\"org\""),
-            patId: decoded("1"),
-            action: decoded("\"revoke\"")
-        )
+                org: decoded("\"org\""),
+                patId: decoded("1"),
+                action: decoded("\"revoke\"")
+            )
             XCTFail("orgsUpdatePatAccess did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)

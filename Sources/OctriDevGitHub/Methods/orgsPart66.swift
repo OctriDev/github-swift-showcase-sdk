@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension OrgsMethods {
-    /// Lists organization repositories with all of their custom property values. Organization members can read these properties.
+public extension OrgsMethods {
+    /// Lists organization repositories with all of their custom property values. Organization members can read these
+    /// properties.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
@@ -28,11 +29,27 @@ extension OrgsMethods {
     ///   y). See "[Searching for
     ///   repositories](https://docs.github.com/articles/searching-for-repositories/)"
     ///   for a detailed list of qualifiers.
-    public static func orgsCustomPropertiesForReposGetOrganizationValues(config: ClientConfig, org: String, perPage: Int? = nil, page: Int? = nil, repositoryQuery: String? = nil, requestOptions: RequestOptions? = nil) async throws -> [OrgRepoCustomPropertyValues] {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/properties/values"].joined(), config: config, query: [
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-            SdkQueryParameter("repository_query", value: repositoryQuery),
-        ], decoder: .json, operationId: "orgsCustomPropertiesForReposGetOrganizationValues", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+    static func orgsCustomPropertiesForReposGetOrganizationValues(
+        config: ClientConfig,
+        org: String,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        repositoryQuery: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [OrgRepoCustomPropertyValues] {
+        try await (sdkRequest(
+            "GET",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/properties/values"].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+                SdkQueryParameter("repository_query", value: repositoryQuery),
+            ],
+            decoder: .json,
+            operationId: "orgsCustomPropertiesForReposGetOrganizationValues",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 }

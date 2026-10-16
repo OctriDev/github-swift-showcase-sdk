@@ -3,18 +3,21 @@
 
 import Foundation
 
-// Shared domain models
+/// Shared domain models
 /// The level of permission to grant the access token to manage git SSH keys.
 public struct AppPermissionsGitSshKeys: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = AppPermissionsGitSshKeys(rawValue: "read")
     public static let write = AppPermissionsGitSshKeys(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -27,13 +30,16 @@ public struct AppPermissionsGitSshKeys: RawRepresentable, Hashable, Codable, Sen
 public struct AppPermissionsOrganizationCustomRoles: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = AppPermissionsOrganizationCustomRoles(rawValue: "read")
     public static let write = AppPermissionsOrganizationCustomRoles(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -46,13 +52,16 @@ public struct AppPermissionsOrganizationCustomRoles: RawRepresentable, Hashable,
 public struct AppPermissionsArtifactMetadata: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = AppPermissionsArtifactMetadata(rawValue: "read")
     public static let write = AppPermissionsArtifactMetadata(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -65,13 +74,16 @@ public struct AppPermissionsArtifactMetadata: RawRepresentable, Hashable, Codabl
 public struct AppPermissionsDependabotSecrets: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = AppPermissionsDependabotSecrets(rawValue: "read")
     public static let write = AppPermissionsDependabotSecrets(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -85,12 +97,15 @@ public struct AppPermissionsDependabotSecrets: RawRepresentable, Hashable, Codab
 public struct AppPermissionsOrganizationEvents: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = AppPermissionsOrganizationEvents(rawValue: "read")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -103,13 +118,16 @@ public struct AppPermissionsOrganizationEvents: RawRepresentable, Hashable, Coda
 public struct AppPermissionsEmailAddresses: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = AppPermissionsEmailAddresses(rawValue: "read")
     public static let write = AppPermissionsEmailAddresses(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -122,13 +140,16 @@ public struct AppPermissionsEmailAddresses: RawRepresentable, Hashable, Codable,
 public struct AppPermissionsSingleFile: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = AppPermissionsSingleFile(rawValue: "read")
     public static let write = AppPermissionsSingleFile(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -139,16 +160,20 @@ public struct AppPermissionsSingleFile: RawRepresentable, Hashable, Codable, Sen
 
 /// The level of permission to grant the access token for viewing and managing fine-grained personal access
 /// tokens that have been approved by an organization.
-public struct AppPermissionsOrganizationPersonalAccessTokenRequests: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct AppPermissionsOrganizationPersonalAccessTokenRequests: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = AppPermissionsOrganizationPersonalAccessTokenRequests(rawValue: "read")
     public static let write = AppPermissionsOrganizationPersonalAccessTokenRequests(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -161,13 +186,16 @@ public struct AppPermissionsOrganizationPersonalAccessTokenRequests: RawRepresen
 public struct AppPermissionsMembers: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = AppPermissionsMembers(rawValue: "read")
     public static let write = AppPermissionsMembers(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -181,14 +209,17 @@ public struct AppPermissionsMembers: RawRepresentable, Hashable, Codable, Sendab
 public struct FullRepositoryMergeCommitMessage: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let prBody = FullRepositoryMergeCommitMessage(rawValue: "PR_BODY")
     public static let prTitle = FullRepositoryMergeCommitMessage(rawValue: "PR_TITLE")
     public static let blank = FullRepositoryMergeCommitMessage(rawValue: "BLANK")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -200,16 +231,20 @@ public struct FullRepositoryMergeCommitMessage: RawRepresentable, Hashable, Coda
 /// The level of permission to grant the access token for managing access to GitHub Copilot for members of an
 /// organization with a Copilot Business subscription. This property is in public preview and is subject to
 /// change.
-public struct AppPermissionsOrganizationCopilotSeatManagement: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct AppPermissionsOrganizationCopilotSeatManagement: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = AppPermissionsOrganizationCopilotSeatManagement(rawValue: "read")
     public static let write = AppPermissionsOrganizationCopilotSeatManagement(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -223,14 +258,17 @@ public struct AppPermissionsOrganizationCopilotSeatManagement: RawRepresentable,
 public struct AppPermissionsOrganizationProjects: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = AppPermissionsOrganizationProjects(rawValue: "read")
     public static let write = AppPermissionsOrganizationProjects(rawValue: "write")
     public static let admin = AppPermissionsOrganizationProjects(rawValue: "admin")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -243,7 +281,10 @@ public struct AppPermissionsOrganizationProjects: RawRepresentable, Hashable, Co
 public struct AuthorAssociation: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let collaborator = AuthorAssociation(rawValue: "COLLABORATOR")
     public static let contributor = AuthorAssociation(rawValue: "CONTRIBUTOR")
     public static let firstTimer = AuthorAssociation(rawValue: "FIRST_TIMER")
@@ -255,7 +296,7 @@ public struct AuthorAssociation: RawRepresentable, Hashable, Codable, Sendable, 
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -268,14 +309,17 @@ public struct AuthorAssociation: RawRepresentable, Hashable, Codable, Sendable, 
 public struct AutoMergeMergeMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let merge = AutoMergeMergeMethod(rawValue: "merge")
     public static let squash = AutoMergeMergeMethod(rawValue: "squash")
     public static let rebase = AutoMergeMergeMethod(rawValue: "rebase")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -286,17 +330,21 @@ public struct AutoMergeMergeMethod: RawRepresentable, Hashable, Codable, Sendabl
 
 /// The level of permission to grant the access token for organization custom properties management at the
 /// enterprise level.
-public struct AppPermissionsEnterpriseCustomPropertiesForOrganizations: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct AppPermissionsEnterpriseCustomPropertiesForOrganizations: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = AppPermissionsEnterpriseCustomPropertiesForOrganizations(rawValue: "read")
     public static let write = AppPermissionsEnterpriseCustomPropertiesForOrganizations(rawValue: "write")
     public static let admin = AppPermissionsEnterpriseCustomPropertiesForOrganizations(rawValue: "admin")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -309,13 +357,16 @@ public struct AppPermissionsEnterpriseCustomPropertiesForOrganizations: RawRepre
 public struct AppPermissionsStatuses: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = AppPermissionsStatuses(rawValue: "read")
     public static let write = AppPermissionsStatuses(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -328,13 +379,16 @@ public struct AppPermissionsStatuses: RawRepresentable, Hashable, Codable, Senda
 public struct AppPermissionsVulnerabilityAlerts: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = AppPermissionsVulnerabilityAlerts(rawValue: "read")
     public static let write = AppPermissionsVulnerabilityAlerts(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -344,16 +398,20 @@ public struct AppPermissionsVulnerabilityAlerts: RawRepresentable, Hashable, Cod
 }
 
 /// The policy controlling who can create pull requests: all or collaborators_only.
-public struct FullRepositoryPullRequestCreationPolicy: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct FullRepositoryPullRequestCreationPolicy: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let all = FullRepositoryPullRequestCreationPolicy(rawValue: "all")
     public static let collaboratorsOnly = FullRepositoryPullRequestCreationPolicy(rawValue: "collaborators_only")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

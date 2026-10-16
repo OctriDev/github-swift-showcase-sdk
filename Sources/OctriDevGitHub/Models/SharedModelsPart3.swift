@@ -3,12 +3,118 @@
 
 import Foundation
 
-// Shared domain models
-extension FullRepository {
-    public init(id: Int, nodeId: String, name: String, fullName: String, owner: SimpleUser, `private`: Bool, htmlUrl: String, description: String?, fork: Bool, url: String, archiveUrl: String, assigneesUrl: String, blobsUrl: String, branchesUrl: String, collaboratorsUrl: String, commentsUrl: String, commitsUrl: String, compareUrl: String, contentsUrl: String, contributorsUrl: String, deploymentsUrl: String, downloadsUrl: String, eventsUrl: String, forksUrl: String, gitCommitsUrl: String, gitRefsUrl: String, gitTagsUrl: String, gitUrl: String, issueCommentUrl: String, issueEventsUrl: String, issuesUrl: String, keysUrl: String, labelsUrl: String, languagesUrl: String, mergesUrl: String, milestonesUrl: String, notificationsUrl: String, pullsUrl: String, releasesUrl: String, sshUrl: String, stargazersUrl: String, statusesUrl: String, subscribersUrl: String, subscriptionUrl: String, tagsUrl: String, teamsUrl: String, treesUrl: String, cloneUrl: String, mirrorUrl: String?, hooksUrl: String, svnUrl: String, homepage: String?, language: String?, forksCount: Int, stargazersCount: Int, watchersCount: Int, size: Int, defaultBranch: String, openIssuesCount: Int, hasIssues: Bool, hasProjects: Bool, hasWiki: Bool, hasPages: Bool, hasDiscussions: Bool, archived: Bool, disabled: Bool, pushedAt: Date, createdAt: Date, updatedAt: Date, subscribersCount: Int, networkCount: Int, license: NullableLicenseSimple?, forks: Int, openIssues: Int, watchers: Int, isTemplate: Bool? = nil, topics: [String]? = nil, hasDownloads: Bool? = nil, hasPullRequests: Bool? = nil, pullRequestCreationPolicy: FullRepositoryPullRequestCreationPolicy? = nil, visibility: String? = nil, permissions: FullRepositoryPermissions? = nil, allowRebaseMerge: Bool? = nil, templateRepository: NullableRepository? = nil, tempCloneToken: String? = nil, allowSquashMerge: Bool? = nil, allowAutoMerge: Bool? = nil, deleteBranchOnMerge: Bool? = nil, allowMergeCommit: Bool? = nil, allowUpdateBranch: Bool? = nil, useSquashPrTitleAsDefault: Bool? = nil, squashMergeCommitTitle: FullRepositorySquashMergeCommitTitle? = nil, squashMergeCommitMessage: FullRepositorySquashMergeCommitMessage? = nil, mergeCommitTitle: FullRepositoryMergeCommitTitle? = nil, mergeCommitMessage: FullRepositoryMergeCommitMessage? = nil, allowForking: Bool? = nil, webCommitSignoffRequired: Bool? = nil, organization: NullableSimpleUser? = nil, parent: Repository? = nil, source: Repository? = nil, primaryBranch: String? = nil, anonymousAccessEnabled: Bool? = nil, codeOfConduct: CodeOfConductSimple? = nil, securityAndAnalysis: SecurityAndAnalysis? = nil, customProperties: [String: JSONValue]? = nil) throws {
+/// Shared domain models
+public extension FullRepository {
+    init(
+        id: Int,
+        nodeId: String,
+        name: String,
+        fullName: String,
+        owner: SimpleUser,
+        private: Bool,
+        htmlUrl: String,
+        description: String?,
+        fork: Bool,
+        url: String,
+        archiveUrl: String,
+        assigneesUrl: String,
+        blobsUrl: String,
+        branchesUrl: String,
+        collaboratorsUrl: String,
+        commentsUrl: String,
+        commitsUrl: String,
+        compareUrl: String,
+        contentsUrl: String,
+        contributorsUrl: String,
+        deploymentsUrl: String,
+        downloadsUrl: String,
+        eventsUrl: String,
+        forksUrl: String,
+        gitCommitsUrl: String,
+        gitRefsUrl: String,
+        gitTagsUrl: String,
+        gitUrl: String,
+        issueCommentUrl: String,
+        issueEventsUrl: String,
+        issuesUrl: String,
+        keysUrl: String,
+        labelsUrl: String,
+        languagesUrl: String,
+        mergesUrl: String,
+        milestonesUrl: String,
+        notificationsUrl: String,
+        pullsUrl: String,
+        releasesUrl: String,
+        sshUrl: String,
+        stargazersUrl: String,
+        statusesUrl: String,
+        subscribersUrl: String,
+        subscriptionUrl: String,
+        tagsUrl: String,
+        teamsUrl: String,
+        treesUrl: String,
+        cloneUrl: String,
+        mirrorUrl: String?,
+        hooksUrl: String,
+        svnUrl: String,
+        homepage: String?,
+        language: String?,
+        forksCount: Int,
+        stargazersCount: Int,
+        watchersCount: Int,
+        size: Int,
+        defaultBranch: String,
+        openIssuesCount: Int,
+        hasIssues: Bool,
+        hasProjects: Bool,
+        hasWiki: Bool,
+        hasPages: Bool,
+        hasDiscussions: Bool,
+        archived: Bool,
+        disabled: Bool,
+        pushedAt: Date,
+        createdAt: Date,
+        updatedAt: Date,
+        subscribersCount: Int,
+        networkCount: Int,
+        license: NullableLicenseSimple?,
+        forks: Int,
+        openIssues: Int,
+        watchers: Int,
+        isTemplate: Bool? = nil,
+        topics: [String]? = nil,
+        hasDownloads: Bool? = nil,
+        hasPullRequests: Bool? = nil,
+        pullRequestCreationPolicy: FullRepositoryPullRequestCreationPolicy? = nil,
+        visibility: String? = nil,
+        permissions: FullRepositoryPermissions? = nil,
+        allowRebaseMerge: Bool? = nil,
+        templateRepository: NullableRepository? = nil,
+        tempCloneToken: String? = nil,
+        allowSquashMerge: Bool? = nil,
+        allowAutoMerge: Bool? = nil,
+        deleteBranchOnMerge: Bool? = nil,
+        allowMergeCommit: Bool? = nil,
+        allowUpdateBranch: Bool? = nil,
+        useSquashPrTitleAsDefault: Bool? = nil,
+        squashMergeCommitTitle: FullRepositorySquashMergeCommitTitle? = nil,
+        squashMergeCommitMessage: FullRepositorySquashMergeCommitMessage? = nil,
+        mergeCommitTitle: FullRepositoryMergeCommitTitle? = nil,
+        mergeCommitMessage: FullRepositoryMergeCommitMessage? = nil,
+        allowForking: Bool? = nil,
+        webCommitSignoffRequired: Bool? = nil,
+        organization: NullableSimpleUser? = nil,
+        parent: Repository? = nil,
+        source: Repository? = nil,
+        primaryBranch: String? = nil,
+        anonymousAccessEnabled: Bool? = nil,
+        codeOfConduct: CodeOfConductSimple? = nil,
+        securityAndAnalysis: SecurityAndAnalysis? = nil,
+        customProperties: [String: JSONValue]? = nil
+    ) throws {
         (self.id, self.nodeId) = (id, nodeId)
         (self.name, self.fullName) = (name, fullName)
-        (self.owner, self.`private`) = (owner, `private`)
+        (self.owner, self.private) = (owner, `private`)
         (self.htmlUrl, self.description) = (htmlUrl, description)
         (self.fork, self.url) = (fork, url)
         (self.archiveUrl, self.assigneesUrl) = (archiveUrl, assigneesUrl)
@@ -68,36 +174,36 @@ extension FullRepository {
 
 extension FullRepository {
     func sdkValidateConstraintsPart1() throws {
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("contributors_url", self.contributorsUrl)
-            try sdkValidateUri("deployments_url", self.deploymentsUrl)
-            try sdkValidateUri("downloads_url", self.downloadsUrl)
-            try sdkValidateUri("events_url", self.eventsUrl)
-            try sdkValidateUri("forks_url", self.forksUrl)
-            try sdkValidateUri("languages_url", self.languagesUrl)
-            try sdkValidateUri("merges_url", self.mergesUrl)
-            try sdkValidateUri("stargazers_url", self.stargazersUrl)
-            try sdkValidateUri("subscribers_url", self.subscribersUrl)
-            try sdkValidateUri("subscription_url", self.subscriptionUrl)
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateUri("url", url)
+        try sdkValidateUri("contributors_url", contributorsUrl)
+        try sdkValidateUri("deployments_url", deploymentsUrl)
+        try sdkValidateUri("downloads_url", downloadsUrl)
+        try sdkValidateUri("events_url", eventsUrl)
+        try sdkValidateUri("forks_url", forksUrl)
+        try sdkValidateUri("languages_url", languagesUrl)
+        try sdkValidateUri("merges_url", mergesUrl)
+        try sdkValidateUri("stargazers_url", stargazersUrl)
+        try sdkValidateUri("subscribers_url", subscribersUrl)
+        try sdkValidateUri("subscription_url", subscriptionUrl)
     }
 }
 
 extension FullRepository {
     func sdkValidateConstraintsPart2() throws {
-            try sdkValidateUri("tags_url", self.tagsUrl)
-            try sdkValidateUri("teams_url", self.teamsUrl)
-        if let value = self.mirrorUrl {
+        try sdkValidateUri("tags_url", tagsUrl)
+        try sdkValidateUri("teams_url", teamsUrl)
+        if let value = mirrorUrl {
             try sdkValidateUri("mirror_url", value)
         }
-            try sdkValidateUri("hooks_url", self.hooksUrl)
-            try sdkValidateUri("svn_url", self.svnUrl)
-        if let value = self.homepage {
+        try sdkValidateUri("hooks_url", hooksUrl)
+        try sdkValidateUri("svn_url", svnUrl)
+        if let value = homepage {
             try sdkValidateUri("homepage", value)
         }
-            try sdkValidateDateTime("pushed_at", sdkWireString(self.pushedAt))
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+        try sdkValidateDateTime("pushed_at", sdkWireString(pushedAt))
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
     }
 }
 
@@ -119,33 +225,51 @@ public struct AutoMerge: Codable {
         case commitMessage = "commit_message"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension AutoMerge {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.enabledBy) else {
-            throw SdkValidationError(field: "enabled_by", code: "required", message: "Validation failed for 'enabled_by': value is required")
-        }
-        guard container.contains(.mergeMethod) else {
-            throw SdkValidationError(field: "merge_method", code: "required", message: "Validation failed for 'merge_method': value is required")
-        }
-        guard container.contains(.commitTitle) else {
-            throw SdkValidationError(field: "commit_title", code: "required", message: "Validation failed for 'commit_title': value is required")
-        }
-        guard container.contains(.commitMessage) else {
-            throw SdkValidationError(field: "commit_message", code: "required", message: "Validation failed for 'commit_message': value is required")
-        }
-        self.enabledBy = try container.sdkDecodeRequired(.enabledBy)
-        self.mergeMethod = try container.sdkDecodeRequired(.mergeMethod)
-        self.commitTitle = try container.sdkDecodeRequired(.commitTitle)
-        self.commitMessage = try container.sdkDecodeRequired(.commitMessage)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension AutoMerge {
-    public init(enabledBy: SimpleUser, mergeMethod: AutoMergeMergeMethod, commitTitle: String, commitMessage: String) {
+public extension AutoMerge {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.enabledBy) else {
+            throw SdkValidationError(
+                field: "enabled_by",
+                code: "required",
+                message: "Validation failed for 'enabled_by': value is required"
+            )
+        }
+        guard container.contains(.mergeMethod) else {
+            throw SdkValidationError(
+                field: "merge_method",
+                code: "required",
+                message: "Validation failed for 'merge_method': value is required"
+            )
+        }
+        guard container.contains(.commitTitle) else {
+            throw SdkValidationError(
+                field: "commit_title",
+                code: "required",
+                message: "Validation failed for 'commit_title': value is required"
+            )
+        }
+        guard container.contains(.commitMessage) else {
+            throw SdkValidationError(
+                field: "commit_message",
+                code: "required",
+                message: "Validation failed for 'commit_message': value is required"
+            )
+        }
+        enabledBy = try container.sdkDecodeRequired(.enabledBy)
+        mergeMethod = try container.sdkDecodeRequired(.mergeMethod)
+        commitTitle = try container.sdkDecodeRequired(.commitTitle)
+        commitMessage = try container.sdkDecodeRequired(.commitMessage)
+    }
+}
+
+public extension AutoMerge {
+    init(enabledBy: SimpleUser, mergeMethod: AutoMergeMergeMethod, commitTitle: String, commitMessage: String) {
         (self.enabledBy, self.mergeMethod) = (enabledBy, mergeMethod)
         (self.commitTitle, self.commitMessage) = (commitTitle, commitMessage)
     }
@@ -166,29 +290,43 @@ public struct SubIssuesSummary: Codable {
         case percentCompleted = "percent_completed"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension SubIssuesSummary {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.total) else {
-            throw SdkValidationError(field: "total", code: "required", message: "Validation failed for 'total': value is required")
-        }
-        guard container.contains(.completed) else {
-            throw SdkValidationError(field: "completed", code: "required", message: "Validation failed for 'completed': value is required")
-        }
-        guard container.contains(.percentCompleted) else {
-            throw SdkValidationError(field: "percent_completed", code: "required", message: "Validation failed for 'percent_completed': value is required")
-        }
-        self.total = try container.sdkDecodeRequired(.total)
-        self.completed = try container.sdkDecodeRequired(.completed)
-        self.percentCompleted = try container.sdkDecodeRequired(.percentCompleted)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension SubIssuesSummary {
-    public init(total: Int, completed: Int, percentCompleted: Int) {
+public extension SubIssuesSummary {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.total) else {
+            throw SdkValidationError(
+                field: "total",
+                code: "required",
+                message: "Validation failed for 'total': value is required"
+            )
+        }
+        guard container.contains(.completed) else {
+            throw SdkValidationError(
+                field: "completed",
+                code: "required",
+                message: "Validation failed for 'completed': value is required"
+            )
+        }
+        guard container.contains(.percentCompleted) else {
+            throw SdkValidationError(
+                field: "percent_completed",
+                code: "required",
+                message: "Validation failed for 'percent_completed': value is required"
+            )
+        }
+        total = try container.sdkDecodeRequired(.total)
+        completed = try container.sdkDecodeRequired(.completed)
+        percentCompleted = try container.sdkDecodeRequired(.percentCompleted)
+    }
+}
+
+public extension SubIssuesSummary {
+    init(total: Int, completed: Int, percentCompleted: Int) {
         (self.total, self.completed) = (total, completed)
         self.percentCompleted = percentCompleted
     }
@@ -206,31 +344,57 @@ public struct CvssSeveritiesCvssV4: Codable {
         case score
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension CvssSeveritiesCvssV4 {
-    public init(from decoder: Decoder) throws {
+public extension CvssSeveritiesCvssV4 {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.vectorString) else {
-            throw SdkValidationError(field: "vector_string", code: "required", message: "Validation failed for 'vector_string': value is required")
+            throw SdkValidationError(
+                field: "vector_string",
+                code: "required",
+                message: "Validation failed for 'vector_string': value is required"
+            )
         }
         guard container.contains(.score) else {
-            throw SdkValidationError(field: "score", code: "required", message: "Validation failed for 'score': value is required")
+            throw SdkValidationError(
+                field: "score",
+                code: "required",
+                message: "Validation failed for 'score': value is required"
+            )
         }
-        self.vectorString = try container.sdkDecodeNullable(.vectorString)
-        self.score = try container.sdkDecodeNullable(.score)
-        if let value = self.score {
-            try validateRange("score", Double(value), min: 0, max: 10, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+        vectorString = try container.sdkDecodeNullable(.vectorString)
+        score = try container.sdkDecodeNullable(.score)
+        if let value = score {
+            try validateRange(
+                "score",
+                Double(value),
+                min: 0,
+                max: 10,
+                exclusiveMin: nil,
+                exclusiveMax: nil,
+                multipleOf: nil
+            )
         }
     }
 }
 
-extension CvssSeveritiesCvssV4 {
-    public init(vectorString: String?, score: Double?) throws {
+public extension CvssSeveritiesCvssV4 {
+    init(vectorString: String?, score: Double?) throws {
         (self.vectorString, self.score) = (vectorString, score)
         if let value = self.score {
-            try validateRange("score", Double(value), min: 0, max: 10, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+            try validateRange(
+                "score",
+                Double(value),
+                min: 0,
+                max: 10,
+                exclusiveMin: nil,
+                exclusiveMax: nil,
+                multipleOf: nil
+            )
         }
     }
 }
@@ -276,36 +440,48 @@ public struct Label: Codable {
         case archivedBy = "archived_by"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension Label {
-    public init(from decoder: Decoder) throws {
+public extension Label {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.description = try container.sdkDecodeNullable(.description)
-        self.color = try container.sdkDecodeRequired(.color)
-        self.`default` = try container.sdkDecodeRequired(.`default`)
-        self.archivedAt = try container.sdkDecodeNullable(.archivedAt)
-        self.archivedBy = try container.sdkDecodeNullable(.archivedBy)
-            try sdkValidateUri("url", self.url)
-        if let value = self.archivedAt {
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        url = try container.sdkDecodeRequired(.url)
+        name = try container.sdkDecodeRequired(.name)
+        description = try container.sdkDecodeNullable(.description)
+        color = try container.sdkDecodeRequired(.color)
+        self.default = try container.sdkDecodeRequired(.default)
+        archivedAt = try container.sdkDecodeNullable(.archivedAt)
+        archivedBy = try container.sdkDecodeNullable(.archivedBy)
+        try sdkValidateUri("url", url)
+        if let value = archivedAt {
             try sdkValidateDateTime("archived_at", sdkWireString(value))
         }
     }
 }
 
-extension Label {
-    public init(id: Int, nodeId: String, url: String, name: String, description: String?, color: String, `default`: Bool, archivedAt: Date?, archivedBy: LabelArchivedBy?) throws {
+public extension Label {
+    init(
+        id: Int,
+        nodeId: String,
+        url: String,
+        name: String,
+        description: String?,
+        color: String,
+        default: Bool,
+        archivedAt: Date?,
+        archivedBy: LabelArchivedBy?
+    ) throws {
         (self.id, self.nodeId) = (id, nodeId)
         (self.url, self.name) = (url, name)
         (self.description, self.color) = (description, color)
-        (self.`default`, self.archivedAt) = (`default`, archivedAt)
+        (self.default, self.archivedAt) = (`default`, archivedAt)
         self.archivedBy = archivedBy
-            try sdkValidateUri("url", self.url)
+        try sdkValidateUri("url", self.url)
         if let value = self.archivedAt {
             try sdkValidateDateTime("archived_at", sdkWireString(value))
         }
@@ -331,22 +507,22 @@ public struct BasicError: Codable {
     }
 
     init() {
-        (self.message, self.documentationUrl, self.url, self.status) = (nil, nil, nil, nil)
+        (message, documentationUrl, url, status) = (nil, nil, nil, nil)
     }
 }
 
-extension BasicError {
-    public init(from decoder: Decoder) throws {
+public extension BasicError {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.message = try container.sdkDecodeIfPresent(.message)
-        self.documentationUrl = try container.sdkDecodeIfPresent(.documentationUrl)
-        self.url = try container.sdkDecodeIfPresent(.url)
-        self.status = try container.sdkDecodeIfPresent(.status)
+        message = try container.sdkDecodeIfPresent(.message)
+        documentationUrl = try container.sdkDecodeIfPresent(.documentationUrl)
+        url = try container.sdkDecodeIfPresent(.url)
+        status = try container.sdkDecodeIfPresent(.status)
     }
 }
 
-extension BasicError {
-    public init(message: String? = nil, documentationUrl: String? = nil, url: String? = nil, status: String? = nil) {
+public extension BasicError {
+    init(message: String? = nil, documentationUrl: String? = nil, url: String? = nil, status: String? = nil) {
         self.init()
         (self.message, self.documentationUrl) = (message, documentationUrl)
         (self.url, self.status) = (url, status)
@@ -371,33 +547,51 @@ public struct PublicUserPlan: Codable {
         case privateRepos = "private_repos"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension PublicUserPlan {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.collaborators) else {
-            throw SdkValidationError(field: "collaborators", code: "required", message: "Validation failed for 'collaborators': value is required")
-        }
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        guard container.contains(.space) else {
-            throw SdkValidationError(field: "space", code: "required", message: "Validation failed for 'space': value is required")
-        }
-        guard container.contains(.privateRepos) else {
-            throw SdkValidationError(field: "private_repos", code: "required", message: "Validation failed for 'private_repos': value is required")
-        }
-        self.collaborators = try container.sdkDecodeRequired(.collaborators)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.space = try container.sdkDecodeRequired(.space)
-        self.privateRepos = try container.sdkDecodeRequired(.privateRepos)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension PublicUserPlan {
-    public init(collaborators: Int, name: String, space: Int, privateRepos: Int) {
+public extension PublicUserPlan {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.collaborators) else {
+            throw SdkValidationError(
+                field: "collaborators",
+                code: "required",
+                message: "Validation failed for 'collaborators': value is required"
+            )
+        }
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        guard container.contains(.space) else {
+            throw SdkValidationError(
+                field: "space",
+                code: "required",
+                message: "Validation failed for 'space': value is required"
+            )
+        }
+        guard container.contains(.privateRepos) else {
+            throw SdkValidationError(
+                field: "private_repos",
+                code: "required",
+                message: "Validation failed for 'private_repos': value is required"
+            )
+        }
+        collaborators = try container.sdkDecodeRequired(.collaborators)
+        name = try container.sdkDecodeRequired(.name)
+        space = try container.sdkDecodeRequired(.space)
+        privateRepos = try container.sdkDecodeRequired(.privateRepos)
+    }
+}
+
+public extension PublicUserPlan {
+    init(collaborators: Int, name: String, space: Int, privateRepos: Int) {
         (self.collaborators, self.name) = (collaborators, name)
         (self.space, self.privateRepos) = (space, privateRepos)
     }
@@ -405,11 +599,11 @@ extension PublicUserPlan {
 
 /// An object without any properties.
 public struct EmptyObject: Codable {
-
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension EmptyObject {
-    public init() {
-    }
+public extension EmptyObject {
+    init() {}
 }

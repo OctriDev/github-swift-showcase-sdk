@@ -169,7 +169,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testAgentsListRepoOrganizationSecretsAgentsListRepoOrganizationSecretsReachesMockAndDecodesResponse() async throws {
+    func testAgentsListRepoOrganizationSecretsAgentsListRepoOrganizationSecretsReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -191,7 +192,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testAgentsListRepoOrganizationVariablesAgentsListRepoOrganizationVariablesReachesMockAndDecodesResponse() async throws {
+    func testAgentsListRepoOrganizationVariablesAgentsListRepoOrganizationVariablesReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -257,7 +259,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testAgentsListSelectedReposForOrgSecretAgentsListSelectedReposForOrgSecretReachesMockAndDecodesResponse() async throws {
+    func testAgentsListSelectedReposForOrgSecretAgentsListSelectedReposForOrgSecretReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -279,7 +282,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testAgentsListSelectedReposForOrgVariableAgentsListSelectedReposFX1483ef5894ReachesMockAndDecodesResponse() async throws {
+    func testAgentsListSelectedReposForOrgVariableAgentsListSelectedReposFX1483ef5894ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -301,7 +305,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testAgentsRemoveSelectedRepoFromOrgSecretAgentsRemoveSelectedRepoX9dd8ae0ea0ReachesMockAndDecodesResponse() async throws {
+    func testAgentsRemoveSelectedRepoFromOrgSecretAgentsRemoveSelectedRepoX9dd8ae0ea0ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -314,7 +319,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testAgentsRemoveSelectedRepoFromOrgVariableAgentsRemoveSelectedReX543d303572ReachesMockAndDecodesResponse() async throws {
+    func testAgentsRemoveSelectedRepoFromOrgVariableAgentsRemoveSelectedReX543d303572ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -327,7 +333,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testAgentsSetSelectedReposForOrgSecretAgentsSetSelectedReposForOrgSecretReachesMockAndDecodesResponse() async throws {
+    func testAgentsSetSelectedReposForOrgSecretAgentsSetSelectedReposForOrgSecretReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -340,7 +347,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testAgentsSetSelectedReposForOrgVariableAgentsSetSelectedReposForOrgVariableReachesMockAndDecodesResponse() async throws {
+    func testAgentsSetSelectedReposForOrgVariableAgentsSetSelectedReposForOrgVariableReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -389,7 +397,11 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try AgentTasksMethods.AgentTasksCreateTaskInRepoOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), prompt: decoded("\"Fix the login button on the homepage\""))
+        var options = try AgentTasksMethods.AgentTasksCreateTaskInRepoOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            prompt: decoded("\"Fix the login button on the homepage\"")
+        )
         options.model = try decoded("null")
         options.customAgent = try decoded("null")
         options.createPullRequest = try decoded("null")
@@ -479,7 +491,10 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try AgentTasksMethods.AgentTasksListTasksForRepoOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""))
+        var options = try AgentTasksMethods.AgentTasksListTasksForRepoOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\"")
+        )
         options.perPage = try decoded("30")
         options.page = try decoded("1")
         options.sort = try decoded("\"updated_at\"")
@@ -507,7 +522,12 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try OrgsMethods.ApiInsightsGetRouteStatsByActorOptions(org: decoded("\"org\""), actorType: decoded("\"installation\""), actorId: decoded("1"), minTimestamp: decoded("\"2024-01-01T00:00:00Z\""))
+        var options = try OrgsMethods.ApiInsightsGetRouteStatsByActorOptions(
+            org: decoded("\"org\""),
+            actorType: decoded("\"installation\""),
+            actorId: decoded("1"),
+            minTimestamp: decoded("\"2024-01-01T00:00:00Z\"")
+        )
         options.maxTimestamp = try decoded("\"2024-01-01T00:00:00Z\"")
         options.page = try decoded("1")
         options.perPage = try decoded("30")

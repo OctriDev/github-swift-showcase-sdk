@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension BillingMethods {
-    /// Gets a report of AI credit usage for a user. **Note:** Only data from the past 24 months is accessible via this endpoint.
+public extension BillingMethods {
+    /// Gets a report of AI credit usage for a user. **Note:** Only data from the past 24 months is accessible via this
+    /// endpoint.
     ///
     /// - Parameters:
     /// - username: The handle for the GitHub user account.
@@ -23,13 +24,31 @@ extension BillingMethods {
     /// - model: The model name to query usage for. The name is not case sensitive.
     /// - product: The product name to query usage for. The name is not case
     ///   sensitive.
-    public static func billingGetGithubBillingAiCreditUsageReportUser(config: ClientConfig, username: String, year: Int? = nil, month: Int? = nil, day: Int? = nil, model: String? = nil, product: String? = nil, requestOptions: RequestOptions? = nil) async throws -> BillingAiCreditUsageReportUser {
-        return try (await sdkRequest("GET", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/settings/billing/ai_credit/usage"].joined(), config: config, query: [
-            SdkQueryParameter("year", value: year),
-            SdkQueryParameter("month", value: month),
-            SdkQueryParameter("day", value: day),
-            SdkQueryParameter("model", value: model),
-            SdkQueryParameter("product", value: product),
-        ], decoder: .json, operationId: "billingGetGithubBillingAiCreditUsageReportUser", options: requestOptions, errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self])).data
+    static func billingGetGithubBillingAiCreditUsageReportUser(
+        config: ClientConfig,
+        username: String,
+        year: Int? = nil,
+        month: Int? = nil,
+        day: Int? = nil,
+        model: String? = nil,
+        product: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> BillingAiCreditUsageReportUser {
+        try await (sdkRequest(
+            "GET",
+            ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/settings/billing/ai_credit/usage"].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("year", value: year),
+                SdkQueryParameter("month", value: month),
+                SdkQueryParameter("day", value: day),
+                SdkQueryParameter("model", value: model),
+                SdkQueryParameter("product", value: product),
+            ],
+            decoder: .json,
+            operationId: "billingGetGithubBillingAiCreditUsageReportUser",
+            options: requestOptions,
+            errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self]
+        )).data
     }
 }

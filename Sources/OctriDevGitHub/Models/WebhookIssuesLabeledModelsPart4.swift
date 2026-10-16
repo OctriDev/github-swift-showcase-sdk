@@ -3,44 +3,75 @@
 
 import Foundation
 
-// WebhookIssuesLabeled domain models
-extension WebhookIssuesLabeledIssuePerformedViaGithubAppOwner {
-    public init(from decoder: Decoder) throws {
+/// WebhookIssuesLabeled domain models
+public extension WebhookIssuesLabeledIssuePerformedViaGithubAppOwner {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
         }
         guard container.contains(.login) else {
-            throw SdkValidationError(field: "login", code: "required", message: "Validation failed for 'login': value is required")
+            throw SdkValidationError(
+                field: "login",
+                code: "required",
+                message: "Validation failed for 'login': value is required"
+            )
         }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.login = try container.sdkDecodeRequired(.login)
-        self.avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
-        self.deleted = try container.sdkDecodeIfPresent(.deleted)
-        self.email = try container.sdkDecodeIfPresent(.email)
-        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
-        self.followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
-        self.followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
-        self.gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
-        self.gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
-        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        self.organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
-        self.receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
-        self.reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
-        self.siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
-        self.starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
-        self.subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
-        self.type = try container.sdkDecodeIfPresent(.type)
-        self.url = try container.sdkDecodeIfPresent(.url)
-        self.userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        id = try container.sdkDecodeRequired(.id)
+        login = try container.sdkDecodeRequired(.login)
+        avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
+        deleted = try container.sdkDecodeIfPresent(.deleted)
+        email = try container.sdkDecodeIfPresent(.email)
+        eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
+        followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
+        gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
+        gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
+        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        name = try container.sdkDecodeIfPresent(.name)
+        nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
+        receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
+        reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
+        siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
+        starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
+        subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
+        type = try container.sdkDecodeIfPresent(.type)
+        url = try container.sdkDecodeIfPresent(.url)
+        userViewType = try container.sdkDecodeIfPresent(.userViewType)
         try sdkValidateConstraints()
     }
 }
 
-extension WebhookIssuesLabeledIssuePerformedViaGithubAppOwner {
-    public init(id: Int, login: String, avatarUrl: String? = nil, deleted: Bool? = nil, email: String? = nil, eventsUrl: String? = nil, followersUrl: String? = nil, followingUrl: String? = nil, gistsUrl: String? = nil, gravatarId: String? = nil, htmlUrl: String? = nil, name: String? = nil, nodeId: String? = nil, organizationsUrl: String? = nil, receivedEventsUrl: String? = nil, reposUrl: String? = nil, siteAdmin: Bool? = nil, starredUrl: String? = nil, subscriptionsUrl: String? = nil, type: WebhookIssuesLabeledIssuePerformedViaGithubAppOwnerType? = nil, url: String? = nil, userViewType: String? = nil) throws {
+public extension WebhookIssuesLabeledIssuePerformedViaGithubAppOwner {
+    init(
+        id: Int,
+        login: String,
+        avatarUrl: String? = nil,
+        deleted: Bool? = nil,
+        email: String? = nil,
+        eventsUrl: String? = nil,
+        followersUrl: String? = nil,
+        followingUrl: String? = nil,
+        gistsUrl: String? = nil,
+        gravatarId: String? = nil,
+        htmlUrl: String? = nil,
+        name: String? = nil,
+        nodeId: String? = nil,
+        organizationsUrl: String? = nil,
+        receivedEventsUrl: String? = nil,
+        reposUrl: String? = nil,
+        siteAdmin: Bool? = nil,
+        starredUrl: String? = nil,
+        subscriptionsUrl: String? = nil,
+        type: WebhookIssuesLabeledIssuePerformedViaGithubAppOwnerType? = nil,
+        url: String? = nil,
+        userViewType: String? = nil
+    ) throws {
         (self.id, self.login) = (id, login)
         (self.avatarUrl, self.deleted) = (avatarUrl, deleted)
         (self.email, self.eventsUrl) = (email, eventsUrl)
@@ -58,28 +89,28 @@ extension WebhookIssuesLabeledIssuePerformedViaGithubAppOwner {
 
 extension WebhookIssuesLabeledIssuePerformedViaGithubAppOwner {
     func sdkValidateConstraints() throws {
-        if let value = self.avatarUrl {
+        if let value = avatarUrl {
             try sdkValidateUri("avatar_url", value)
         }
-        if let value = self.followersUrl {
+        if let value = followersUrl {
             try sdkValidateUri("followers_url", value)
         }
-        if let value = self.htmlUrl {
+        if let value = htmlUrl {
             try sdkValidateUri("html_url", value)
         }
-        if let value = self.organizationsUrl {
+        if let value = organizationsUrl {
             try sdkValidateUri("organizations_url", value)
         }
-        if let value = self.receivedEventsUrl {
+        if let value = receivedEventsUrl {
             try sdkValidateUri("received_events_url", value)
         }
-        if let value = self.reposUrl {
+        if let value = reposUrl {
             try sdkValidateUri("repos_url", value)
         }
-        if let value = self.subscriptionsUrl {
+        if let value = subscriptionsUrl {
             try sdkValidateUri("subscriptions_url", value)
         }
-        if let value = self.url {
+        if let value = url {
             try sdkValidateUri("url", value)
         }
     }
@@ -129,39 +160,54 @@ public struct WebhookIssuesLabeledIssuePerformedViaGithubApp: Codable {
         case slug
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension WebhookIssuesLabeledIssuePerformedViaGithubApp {
-    public init(from decoder: Decoder) throws {
+public extension WebhookIssuesLabeledIssuePerformedViaGithubApp {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.createdAt = try container.sdkDecodeNullable(.createdAt)
-        self.description = try container.sdkDecodeNullable(.description)
-        self.externalUrl = try container.sdkDecodeNullable(.externalUrl)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.id = try container.sdkDecodeNullable(.id)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.owner = try container.sdkDecodeNullable(.owner)
-        self.updatedAt = try container.sdkDecodeNullable(.updatedAt)
-        self.events = try container.sdkDecodeIfPresent(.events)
-        self.permissions = try container.sdkDecodeIfPresent(.permissions)
-        self.slug = try container.sdkDecodeIfPresent(.slug)
-        if let value = self.createdAt {
+        createdAt = try container.sdkDecodeNullable(.createdAt)
+        description = try container.sdkDecodeNullable(.description)
+        externalUrl = try container.sdkDecodeNullable(.externalUrl)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        id = try container.sdkDecodeNullable(.id)
+        name = try container.sdkDecodeRequired(.name)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        owner = try container.sdkDecodeNullable(.owner)
+        updatedAt = try container.sdkDecodeNullable(.updatedAt)
+        events = try container.sdkDecodeIfPresent(.events)
+        permissions = try container.sdkDecodeIfPresent(.permissions)
+        slug = try container.sdkDecodeIfPresent(.slug)
+        if let value = createdAt {
             try sdkValidateDateTime("created_at", sdkWireString(value))
         }
-        if let value = self.externalUrl {
+        if let value = externalUrl {
             try sdkValidateUri("external_url", value)
         }
-            try sdkValidateUri("html_url", self.htmlUrl)
-        if let value = self.updatedAt {
+        try sdkValidateUri("html_url", htmlUrl)
+        if let value = updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
     }
 }
 
-extension WebhookIssuesLabeledIssuePerformedViaGithubApp {
-    public init(createdAt: Date?, description: String?, externalUrl: String?, htmlUrl: String, id: Int?, name: String, nodeId: String, owner: WebhookIssuesLabeledIssuePerformedViaGithubAppOwner?, updatedAt: Date?, events: [WebhookIssuesLabeledIssuePerformedViaGithubAppEventsItem]? = nil, permissions: WebhookIssuesLabeledIssuePerformedViaGithubAppPermissions? = nil, slug: String? = nil) throws {
+public extension WebhookIssuesLabeledIssuePerformedViaGithubApp {
+    init(
+        createdAt: Date?,
+        description: String?,
+        externalUrl: String?,
+        htmlUrl: String,
+        id: Int?,
+        name: String,
+        nodeId: String,
+        owner: WebhookIssuesLabeledIssuePerformedViaGithubAppOwner?,
+        updatedAt: Date?,
+        events: [WebhookIssuesLabeledIssuePerformedViaGithubAppEventsItem]? = nil,
+        permissions: WebhookIssuesLabeledIssuePerformedViaGithubAppPermissions? = nil,
+        slug: String? = nil
+    ) throws {
         (self.createdAt, self.description) = (createdAt, description)
         (self.externalUrl, self.htmlUrl) = (externalUrl, htmlUrl)
         (self.id, self.name) = (id, name)
@@ -174,7 +220,7 @@ extension WebhookIssuesLabeledIssuePerformedViaGithubApp {
         if let value = self.externalUrl {
             try sdkValidateUri("external_url", value)
         }
-            try sdkValidateUri("html_url", self.htmlUrl)
+        try sdkValidateUri("html_url", self.htmlUrl)
         if let value = self.updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
@@ -235,34 +281,53 @@ public struct WebhookIssuesLabeledIssueMilestone: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension WebhookIssuesLabeledIssueMilestone {
-    public init(from decoder: Decoder) throws {
+public extension WebhookIssuesLabeledIssueMilestone {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.closedAt = try container.sdkDecodeNullable(.closedAt)
-        self.closedIssues = try container.sdkDecodeRequired(.closedIssues)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.creator = try container.sdkDecodeNullable(.creator)
-        self.description = try container.sdkDecodeNullable(.description)
-        self.dueOn = try container.sdkDecodeNullable(.dueOn)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.number = try container.sdkDecodeRequired(.number)
-        self.openIssues = try container.sdkDecodeRequired(.openIssues)
-        self.state = try container.sdkDecodeRequired(.state)
-        self.title = try container.sdkDecodeRequired(.title)
-        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        self.url = try container.sdkDecodeRequired(.url)
+        closedAt = try container.sdkDecodeNullable(.closedAt)
+        closedIssues = try container.sdkDecodeRequired(.closedIssues)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        creator = try container.sdkDecodeNullable(.creator)
+        description = try container.sdkDecodeNullable(.description)
+        dueOn = try container.sdkDecodeNullable(.dueOn)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        id = try container.sdkDecodeRequired(.id)
+        labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        number = try container.sdkDecodeRequired(.number)
+        openIssues = try container.sdkDecodeRequired(.openIssues)
+        state = try container.sdkDecodeRequired(.state)
+        title = try container.sdkDecodeRequired(.title)
+        updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        url = try container.sdkDecodeRequired(.url)
         try sdkValidateConstraints()
     }
 }
 
-extension WebhookIssuesLabeledIssueMilestone {
-    public init(closedAt: Date?, closedIssues: Int, createdAt: Date, creator: WebhookIssuesLabeledIssueMilestoneCreator?, description: String?, dueOn: Date?, htmlUrl: String, id: Int, labelsUrl: String, nodeId: String, number: Int, openIssues: Int, state: WebhookIssuesLabeledIssueMilestoneState, title: String, updatedAt: Date, url: String) throws {
+public extension WebhookIssuesLabeledIssueMilestone {
+    init(
+        closedAt: Date?,
+        closedIssues: Int,
+        createdAt: Date,
+        creator: WebhookIssuesLabeledIssueMilestoneCreator?,
+        description: String?,
+        dueOn: Date?,
+        htmlUrl: String,
+        id: Int,
+        labelsUrl: String,
+        nodeId: String,
+        number: Int,
+        openIssues: Int,
+        state: WebhookIssuesLabeledIssueMilestoneState,
+        title: String,
+        updatedAt: Date,
+        url: String
+    ) throws {
         (self.closedAt, self.closedIssues) = (closedAt, closedIssues)
         (self.createdAt, self.creator) = (createdAt, creator)
         (self.description, self.dueOn) = (description, dueOn)
@@ -277,31 +342,35 @@ extension WebhookIssuesLabeledIssueMilestone {
 
 extension WebhookIssuesLabeledIssueMilestone {
     func sdkValidateConstraints() throws {
-        if let value = self.closedAt {
+        if let value = closedAt {
             try sdkValidateDateTime("closed_at", sdkWireString(value))
         }
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-        if let value = self.dueOn {
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        if let value = dueOn {
             try sdkValidateDateTime("due_on", sdkWireString(value))
         }
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("labels_url", self.labelsUrl)
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-            try sdkValidateUri("url", self.url)
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateUri("labels_url", labelsUrl)
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+        try sdkValidateUri("url", url)
     }
 }
 
 /// Optional enumerated value serialized in the `checks` wire field.
-public struct WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsChecks: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsChecks: RawRepresentable, Hashable, Codable,
+    Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsChecks(rawValue: "read")
     public static let write = WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsChecks(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -311,16 +380,20 @@ public struct WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsChecks: R
 }
 
 /// The state of the milestone.
-public struct WebhookIssuesLabeledIssueMilestoneState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookIssuesLabeledIssueMilestoneState: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let open = WebhookIssuesLabeledIssueMilestoneState(rawValue: "open")
     public static let closed = WebhookIssuesLabeledIssueMilestoneState(rawValue: "closed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -330,16 +403,20 @@ public struct WebhookIssuesLabeledIssueMilestoneState: RawRepresentable, Hashabl
 }
 
 /// Optional enumerated value serialized in the `administration` wire field.
-public struct WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsAdministration: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsAdministration: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsAdministration(rawValue: "read")
     public static let write = WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsAdministration(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -349,16 +426,21 @@ public struct WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsAdministr
 }
 
 /// Optional enumerated value serialized in the `repository_hooks` wire field.
-public struct WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsRepositoryHooks: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsRepositoryHooks: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsRepositoryHooks(rawValue: "read")
-    public static let write = WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsRepositoryHooks(rawValue: "write")
+    public static let write =
+        WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsRepositoryHooks(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -371,13 +453,16 @@ public struct WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsRepositor
 public struct WebhookIssuesLabeledIssueState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let open = WebhookIssuesLabeledIssueState(rawValue: "open")
     public static let closed = WebhookIssuesLabeledIssueState(rawValue: "closed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -387,16 +472,21 @@ public struct WebhookIssuesLabeledIssueState: RawRepresentable, Hashable, Codabl
 }
 
 /// Optional enumerated value serialized in the `environments` wire field.
-public struct WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsEnvironments: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsEnvironments: RawRepresentable, Hashable,
+    Codable,
+    Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsEnvironments(rawValue: "read")
     public static let write = WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsEnvironments(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -406,16 +496,21 @@ public struct WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsEnvironme
 }
 
 /// Optional enumerated value serialized in the `organization_user_blocking` wire field.
-public struct WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsOrgaX2bc83be39b: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsOrgaX2bc83be39b: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsOrgaX2bc83be39b(rawValue: "read")
-    public static let write = WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsOrgaX2bc83be39b(rawValue: "write")
+    public static let write =
+        WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsOrgaX2bc83be39b(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -425,14 +520,19 @@ public struct WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsOrgaX2bc8
 }
 
 /// How the author is associated with the repository.
-public struct WebhookIssuesLabeledIssueAuthorAssociation: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookIssuesLabeledIssueAuthorAssociation: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let collaborator = WebhookIssuesLabeledIssueAuthorAssociation(rawValue: "COLLABORATOR")
     public static let contributor = WebhookIssuesLabeledIssueAuthorAssociation(rawValue: "CONTRIBUTOR")
     public static let firstTimer = WebhookIssuesLabeledIssueAuthorAssociation(rawValue: "FIRST_TIMER")
-    public static let firstTimeContributor = WebhookIssuesLabeledIssueAuthorAssociation(rawValue: "FIRST_TIME_CONTRIBUTOR")
+    public static let firstTimeContributor =
+        WebhookIssuesLabeledIssueAuthorAssociation(rawValue: "FIRST_TIME_CONTRIBUTOR")
     public static let mannequin = WebhookIssuesLabeledIssueAuthorAssociation(rawValue: "MANNEQUIN")
     public static let member = WebhookIssuesLabeledIssueAuthorAssociation(rawValue: "MEMBER")
     public static let none = WebhookIssuesLabeledIssueAuthorAssociation(rawValue: "NONE")
@@ -440,7 +540,7 @@ public struct WebhookIssuesLabeledIssueAuthorAssociation: RawRepresentable, Hash
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -450,16 +550,21 @@ public struct WebhookIssuesLabeledIssueAuthorAssociation: RawRepresentable, Hash
 }
 
 /// Optional enumerated value serialized in the `vulnerability_alerts` wire field.
-public struct WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsVulnX1c63350e65: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsVulnX1c63350e65: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsVulnX1c63350e65(rawValue: "read")
-    public static let write = WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsVulnX1c63350e65(rawValue: "write")
+    public static let write =
+        WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsVulnX1c63350e65(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -469,16 +574,20 @@ public struct WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsVulnX1c63
 }
 
 /// Optional enumerated value serialized in the `actions` wire field.
-public struct WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsActions: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsActions: RawRepresentable, Hashable, Codable,
+    Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsActions(rawValue: "read")
     public static let write = WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsActions(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

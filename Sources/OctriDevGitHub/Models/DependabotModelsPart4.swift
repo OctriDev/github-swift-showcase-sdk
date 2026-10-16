@@ -3,18 +3,22 @@
 
 import Foundation
 
-// Dependabot domain models
+/// Dependabot domain models
 /// The execution scope of the vulnerable dependency.
-public struct DependabotAlertWithRepositoryDependencyScope: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct DependabotAlertWithRepositoryDependencyScope: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let development = DependabotAlertWithRepositoryDependencyScope(rawValue: "development")
     public static let runtime = DependabotAlertWithRepositoryDependencyScope(rawValue: "runtime")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -29,7 +33,10 @@ public struct DependabotAlertWithRepositoryDependencyScope: RawRepresentable, Ha
 public struct DependabotAlertDependencyRelationship: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let unknown = DependabotAlertDependencyRelationship(rawValue: "unknown")
     public static let direct = DependabotAlertDependencyRelationship(rawValue: "direct")
     public static let transitive = DependabotAlertDependencyRelationship(rawValue: "transitive")
@@ -37,7 +44,7 @@ public struct DependabotAlertDependencyRelationship: RawRepresentable, Hashable,
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -50,13 +57,16 @@ public struct DependabotAlertDependencyRelationship: RawRepresentable, Hashable,
 public struct DependabotAlertDependencyScope: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let development = DependabotAlertDependencyScope(rawValue: "development")
     public static let runtime = DependabotAlertDependencyScope(rawValue: "runtime")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -66,10 +76,14 @@ public struct DependabotAlertDependencyScope: RawRepresentable, Hashable, Codabl
 }
 
 /// The reason that the alert was dismissed.
-public struct DependabotAlertWithRepositoryDismissedReason: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct DependabotAlertWithRepositoryDismissedReason: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let fixStarted = DependabotAlertWithRepositoryDismissedReason(rawValue: "fix_started")
     public static let inaccurate = DependabotAlertWithRepositoryDismissedReason(rawValue: "inaccurate")
     public static let noBandwidth = DependabotAlertWithRepositoryDismissedReason(rawValue: "no_bandwidth")
@@ -78,7 +92,7 @@ public struct DependabotAlertWithRepositoryDismissedReason: RawRepresentable, Ha
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -90,10 +104,14 @@ public struct DependabotAlertWithRepositoryDismissedReason: RawRepresentable, Ha
 /// The vulnerable dependency's relationship to your project. > [!NOTE] > We are rolling out support for
 /// dependency relationship across ecosystems. This value will be "unknown" for all dependencies in unsupported
 /// ecosystems.
-public struct DependabotAlertWithRepositoryDependencyRelationship: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct DependabotAlertWithRepositoryDependencyRelationship: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let unknown = DependabotAlertWithRepositoryDependencyRelationship(rawValue: "unknown")
     public static let direct = DependabotAlertWithRepositoryDependencyRelationship(rawValue: "direct")
     public static let transitive = DependabotAlertWithRepositoryDependencyRelationship(rawValue: "transitive")
@@ -101,7 +119,7 @@ public struct DependabotAlertWithRepositoryDependencyRelationship: RawRepresenta
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -114,7 +132,10 @@ public struct DependabotAlertWithRepositoryDependencyRelationship: RawRepresenta
 public struct DependabotAlertWithRepositoryState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let autoDismissed = DependabotAlertWithRepositoryState(rawValue: "auto_dismissed")
     public static let dismissed = DependabotAlertWithRepositoryState(rawValue: "dismissed")
     public static let fixed = DependabotAlertWithRepositoryState(rawValue: "fixed")
@@ -122,7 +143,7 @@ public struct DependabotAlertWithRepositoryState: RawRepresentable, Hashable, Co
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -132,10 +153,14 @@ public struct DependabotAlertWithRepositoryState: RawRepresentable, Hashable, Co
 }
 
 /// The severity of the advisory.
-public struct DependabotAlertSecurityAdvisorySeverity: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct DependabotAlertSecurityAdvisorySeverity: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let low = DependabotAlertSecurityAdvisorySeverity(rawValue: "low")
     public static let medium = DependabotAlertSecurityAdvisorySeverity(rawValue: "medium")
     public static let high = DependabotAlertSecurityAdvisorySeverity(rawValue: "high")
@@ -143,7 +168,7 @@ public struct DependabotAlertSecurityAdvisorySeverity: RawRepresentable, Hashabl
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -153,10 +178,14 @@ public struct DependabotAlertSecurityAdvisorySeverity: RawRepresentable, Hashabl
 }
 
 /// The severity of the vulnerability.
-public struct DependabotAlertSecurityVulnerabilitySeverity: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct DependabotAlertSecurityVulnerabilitySeverity: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let low = DependabotAlertSecurityVulnerabilitySeverity(rawValue: "low")
     public static let medium = DependabotAlertSecurityVulnerabilitySeverity(rawValue: "medium")
     public static let high = DependabotAlertSecurityVulnerabilitySeverity(rawValue: "high")
@@ -164,7 +193,7 @@ public struct DependabotAlertSecurityVulnerabilitySeverity: RawRepresentable, Ha
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -177,12 +206,15 @@ public struct DependabotAlertSecurityVulnerabilitySeverity: RawRepresentable, Ha
 public struct DependabotAlertWithdrawnWebhookState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let withdrawn = DependabotAlertWithdrawnWebhookState(rawValue: "withdrawn")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -192,17 +224,21 @@ public struct DependabotAlertWithdrawnWebhookState: RawRepresentable, Hashable, 
 }
 
 /// Visibility of a secret
-public struct OrganizationDependabotSecretVisibility: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct OrganizationDependabotSecretVisibility: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let all = OrganizationDependabotSecretVisibility(rawValue: "all")
     public static let `private` = OrganizationDependabotSecretVisibility(rawValue: "private")
     public static let selected = OrganizationDependabotSecretVisibility(rawValue: "selected")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -215,7 +251,10 @@ public struct OrganizationDependabotSecretVisibility: RawRepresentable, Hashable
 public struct DependabotAlertState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let autoDismissed = DependabotAlertState(rawValue: "auto_dismissed")
     public static let dismissed = DependabotAlertState(rawValue: "dismissed")
     public static let fixed = DependabotAlertState(rawValue: "fixed")
@@ -223,7 +262,7 @@ public struct DependabotAlertState: RawRepresentable, Hashable, Codable, Sendabl
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -233,16 +272,20 @@ public struct DependabotAlertState: RawRepresentable, Hashable, Codable, Sendabl
 }
 
 /// The type of advisory identifier.
-public struct DependabotAlertSecurityAdvisoryIdentifiersItemType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct DependabotAlertSecurityAdvisoryIdentifiersItemType: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let cve = DependabotAlertSecurityAdvisoryIdentifiersItemType(rawValue: "CVE")
     public static let ghsa = DependabotAlertSecurityAdvisoryIdentifiersItemType(rawValue: "GHSA")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

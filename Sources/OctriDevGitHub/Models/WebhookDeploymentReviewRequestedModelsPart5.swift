@@ -3,31 +3,31 @@
 
 import Foundation
 
-// WebhookDeploymentReviewRequested domain models
+/// WebhookDeploymentReviewRequested domain models
 extension WebhookDeploymentReviewRequestedReviewersItemReviewer {
     func sdkValidateConstraints() throws {
-        if let value = self.avatarUrl {
+        if let value = avatarUrl {
             try sdkValidateUri("avatar_url", value)
         }
-        if let value = self.followersUrl {
+        if let value = followersUrl {
             try sdkValidateUri("followers_url", value)
         }
-        if let value = self.htmlUrl {
+        if let value = htmlUrl {
             try sdkValidateUri("html_url", value)
         }
-        if let value = self.organizationsUrl {
+        if let value = organizationsUrl {
             try sdkValidateUri("organizations_url", value)
         }
-        if let value = self.receivedEventsUrl {
+        if let value = receivedEventsUrl {
             try sdkValidateUri("received_events_url", value)
         }
-        if let value = self.reposUrl {
+        if let value = reposUrl {
             try sdkValidateUri("repos_url", value)
         }
-        if let value = self.subscriptionsUrl {
+        if let value = subscriptionsUrl {
             try sdkValidateUri("subscriptions_url", value)
         }
-        if let value = self.url {
+        if let value = url {
             try sdkValidateUri("url", value)
         }
     }
@@ -48,26 +48,36 @@ public struct WebhookDeploymentReviewRequestedWorkflowRunReferencedWorkflowsItem
         case ref
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookDeploymentReviewRequestedWorkflowRunReferencedWorkflowsItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.path) else {
-            throw SdkValidationError(field: "path", code: "required", message: "Validation failed for 'path': value is required")
-        }
-        guard container.contains(.sha) else {
-            throw SdkValidationError(field: "sha", code: "required", message: "Validation failed for 'sha': value is required")
-        }
-        self.path = try container.sdkDecodeRequired(.path)
-        self.sha = try container.sdkDecodeRequired(.sha)
-        self.ref = try container.sdkDecodeIfPresent(.ref)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WebhookDeploymentReviewRequestedWorkflowRunReferencedWorkflowsItem {
-    public init(path: String, sha: String, ref: String? = nil) {
+public extension WebhookDeploymentReviewRequestedWorkflowRunReferencedWorkflowsItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.path) else {
+            throw SdkValidationError(
+                field: "path",
+                code: "required",
+                message: "Validation failed for 'path': value is required"
+            )
+        }
+        guard container.contains(.sha) else {
+            throw SdkValidationError(
+                field: "sha",
+                code: "required",
+                message: "Validation failed for 'sha': value is required"
+            )
+        }
+        path = try container.sdkDecodeRequired(.path)
+        sha = try container.sdkDecodeRequired(.sha)
+        ref = try container.sdkDecodeIfPresent(.ref)
+    }
+}
+
+public extension WebhookDeploymentReviewRequestedWorkflowRunReferencedWorkflowsItem {
+    init(path: String, sha: String, ref: String? = nil) {
         (self.path, self.sha) = (path, sha)
         self.ref = ref
     }
@@ -88,47 +98,65 @@ public struct WebhookDeploymentReviewRequestedWorkflowRunPullRequestsItemBaseRep
         case url
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookDeploymentReviewRequestedWorkflowRunPullRequestsItemBaseRepo {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        guard container.contains(.url) else {
-            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.url = try container.sdkDecodeRequired(.url)
-            try sdkValidateUri("url", self.url)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WebhookDeploymentReviewRequestedWorkflowRunPullRequestsItemBaseRepo {
-    public init(id: Int, name: String, url: String) throws {
+public extension WebhookDeploymentReviewRequestedWorkflowRunPullRequestsItemBaseRepo {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        guard container.contains(.url) else {
+            throw SdkValidationError(
+                field: "url",
+                code: "required",
+                message: "Validation failed for 'url': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        name = try container.sdkDecodeRequired(.name)
+        url = try container.sdkDecodeRequired(.url)
+        try sdkValidateUri("url", url)
+    }
+}
+
+public extension WebhookDeploymentReviewRequestedWorkflowRunPullRequestsItemBaseRepo {
+    init(id: Int, name: String, url: String) throws {
         (self.id, self.name) = (id, name)
         self.url = url
-            try sdkValidateUri("url", self.url)
+        try sdkValidateUri("url", self.url)
     }
 }
 
 /// Optional enumerated value serialized in the `type` wire field.
-public struct WebhookDeploymentReviewRequestedReviewersItemType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookDeploymentReviewRequestedReviewersItemType: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let user = WebhookDeploymentReviewRequestedReviewersItemType(rawValue: "User")
     public static let team = WebhookDeploymentReviewRequestedReviewersItemType(rawValue: "Team")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -138,21 +166,26 @@ public struct WebhookDeploymentReviewRequestedReviewersItemType: RawRepresentabl
 }
 
 /// Required enumerated value serialized in the `conclusion` wire field.
-public struct WebhookDeploymentReviewRequestedWorkflowRunConclusion: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookDeploymentReviewRequestedWorkflowRunConclusion: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let success = WebhookDeploymentReviewRequestedWorkflowRunConclusion(rawValue: "success")
     public static let failure = WebhookDeploymentReviewRequestedWorkflowRunConclusion(rawValue: "failure")
     public static let neutral = WebhookDeploymentReviewRequestedWorkflowRunConclusion(rawValue: "neutral")
     public static let cancelled = WebhookDeploymentReviewRequestedWorkflowRunConclusion(rawValue: "cancelled")
     public static let timedOut = WebhookDeploymentReviewRequestedWorkflowRunConclusion(rawValue: "timed_out")
-    public static let actionRequired = WebhookDeploymentReviewRequestedWorkflowRunConclusion(rawValue: "action_required")
+    public static let actionRequired =
+        WebhookDeploymentReviewRequestedWorkflowRunConclusion(rawValue: "action_required")
     public static let stale = WebhookDeploymentReviewRequestedWorkflowRunConclusion(rawValue: "stale")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -162,15 +195,19 @@ public struct WebhookDeploymentReviewRequestedWorkflowRunConclusion: RawRepresen
 }
 
 /// Required enumerated value serialized in the `action` wire field.
-public struct WebhookDeploymentReviewRequestedAction: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookDeploymentReviewRequestedAction: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let requested = WebhookDeploymentReviewRequestedAction(rawValue: "requested")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -180,17 +217,21 @@ public struct WebhookDeploymentReviewRequestedAction: RawRepresentable, Hashable
 }
 
 /// Optional enumerated value serialized in the `type` wire field.
-public struct WebhookDeploymentReviewRequestedWorkflowRunActorType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookDeploymentReviewRequestedWorkflowRunActorType: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = WebhookDeploymentReviewRequestedWorkflowRunActorType(rawValue: "Bot")
     public static let user = WebhookDeploymentReviewRequestedWorkflowRunActorType(rawValue: "User")
     public static let organization = WebhookDeploymentReviewRequestedWorkflowRunActorType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -200,10 +241,14 @@ public struct WebhookDeploymentReviewRequestedWorkflowRunActorType: RawRepresent
 }
 
 /// Required enumerated value serialized in the `status` wire field.
-public struct WebhookDeploymentReviewRequestedWorkflowRunStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookDeploymentReviewRequestedWorkflowRunStatus: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let requested = WebhookDeploymentReviewRequestedWorkflowRunStatus(rawValue: "requested")
     public static let inProgress = WebhookDeploymentReviewRequestedWorkflowRunStatus(rawValue: "in_progress")
     public static let completed = WebhookDeploymentReviewRequestedWorkflowRunStatus(rawValue: "completed")
@@ -213,7 +258,7 @@ public struct WebhookDeploymentReviewRequestedWorkflowRunStatus: RawRepresentabl
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -223,17 +268,22 @@ public struct WebhookDeploymentReviewRequestedWorkflowRunStatus: RawRepresentabl
 }
 
 /// Optional enumerated value serialized in the `type` wire field.
-public struct WebhookDeploymentReviewRequestedWorkflowRunTriggeringActorType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookDeploymentReviewRequestedWorkflowRunTriggeringActorType: RawRepresentable, Hashable, Codable,
+    Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = WebhookDeploymentReviewRequestedWorkflowRunTriggeringActorType(rawValue: "Bot")
     public static let user = WebhookDeploymentReviewRequestedWorkflowRunTriggeringActorType(rawValue: "User")
-    public static let organization = WebhookDeploymentReviewRequestedWorkflowRunTriggeringActorType(rawValue: "Organization")
+    public static let organization =
+        WebhookDeploymentReviewRequestedWorkflowRunTriggeringActorType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -243,17 +293,21 @@ public struct WebhookDeploymentReviewRequestedWorkflowRunTriggeringActorType: Ra
 }
 
 /// Optional enumerated value serialized in the `type` wire field.
-public struct WebhookDeploymentReviewRequestedReviewersItemReviewerType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookDeploymentReviewRequestedReviewersItemReviewerType: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = WebhookDeploymentReviewRequestedReviewersItemReviewerType(rawValue: "Bot")
     public static let user = WebhookDeploymentReviewRequestedReviewersItemReviewerType(rawValue: "User")
     public static let organization = WebhookDeploymentReviewRequestedReviewersItemReviewerType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

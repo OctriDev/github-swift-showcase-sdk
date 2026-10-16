@@ -3,12 +3,103 @@
 
 import Foundation
 
-// Shared domain models
-extension MinimalRepository {
-    public init(id: Int, nodeId: String, name: String, fullName: String, owner: SimpleUser, `private`: Bool, htmlUrl: String, description: String?, fork: Bool, url: String, archiveUrl: String, assigneesUrl: String, blobsUrl: String, branchesUrl: String, collaboratorsUrl: String, commentsUrl: String, commitsUrl: String, compareUrl: String, contentsUrl: String, contributorsUrl: String, deploymentsUrl: String, downloadsUrl: String, eventsUrl: String, forksUrl: String, gitCommitsUrl: String, gitRefsUrl: String, gitTagsUrl: String, issueCommentUrl: String, issueEventsUrl: String, issuesUrl: String, keysUrl: String, labelsUrl: String, languagesUrl: String, mergesUrl: String, milestonesUrl: String, notificationsUrl: String, pullsUrl: String, releasesUrl: String, stargazersUrl: String, statusesUrl: String, subscribersUrl: String, subscriptionUrl: String, tagsUrl: String, teamsUrl: String, treesUrl: String, hooksUrl: String, gitUrl: String? = nil, sshUrl: String? = nil, cloneUrl: String? = nil, mirrorUrl: String? = nil, svnUrl: String? = nil, homepage: String? = nil, language: String? = nil, forksCount: Int? = nil, stargazersCount: Int? = nil, watchersCount: Int? = nil, size: Int? = nil, defaultBranch: String? = nil, openIssuesCount: Int? = nil, isTemplate: Bool? = nil, topics: [String]? = nil, hasIssues: Bool? = nil, hasProjects: Bool? = nil, hasWiki: Bool? = nil, hasPages: Bool? = nil, hasDownloads: Bool? = nil, hasDiscussions: Bool? = nil, hasPullRequests: Bool? = nil, pullRequestCreationPolicy: MinimalRepositoryPullRequestCreationPolicy? = nil, archived: Bool? = nil, disabled: Bool? = nil, visibility: String? = nil, pushedAt: Date? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, permissions: MinimalRepositoryPermissions? = nil, roleName: String? = nil, tempCloneToken: String? = nil, deleteBranchOnMerge: Bool? = nil, subscribersCount: Int? = nil, networkCount: Int? = nil, codeOfConduct: CodeOfConduct? = nil, license: MinimalRepositoryLicense? = nil, forks: Int? = nil, openIssues: Int? = nil, watchers: Int? = nil, allowForking: Bool? = nil, webCommitSignoffRequired: Bool? = nil, securityAndAnalysis: SecurityAndAnalysis? = nil, customProperties: [String: JSONValue]? = nil) throws {
+/// Shared domain models
+public extension MinimalRepository {
+    init(
+        id: Int,
+        nodeId: String,
+        name: String,
+        fullName: String,
+        owner: SimpleUser,
+        private: Bool,
+        htmlUrl: String,
+        description: String?,
+        fork: Bool,
+        url: String,
+        archiveUrl: String,
+        assigneesUrl: String,
+        blobsUrl: String,
+        branchesUrl: String,
+        collaboratorsUrl: String,
+        commentsUrl: String,
+        commitsUrl: String,
+        compareUrl: String,
+        contentsUrl: String,
+        contributorsUrl: String,
+        deploymentsUrl: String,
+        downloadsUrl: String,
+        eventsUrl: String,
+        forksUrl: String,
+        gitCommitsUrl: String,
+        gitRefsUrl: String,
+        gitTagsUrl: String,
+        issueCommentUrl: String,
+        issueEventsUrl: String,
+        issuesUrl: String,
+        keysUrl: String,
+        labelsUrl: String,
+        languagesUrl: String,
+        mergesUrl: String,
+        milestonesUrl: String,
+        notificationsUrl: String,
+        pullsUrl: String,
+        releasesUrl: String,
+        stargazersUrl: String,
+        statusesUrl: String,
+        subscribersUrl: String,
+        subscriptionUrl: String,
+        tagsUrl: String,
+        teamsUrl: String,
+        treesUrl: String,
+        hooksUrl: String,
+        gitUrl: String? = nil,
+        sshUrl: String? = nil,
+        cloneUrl: String? = nil,
+        mirrorUrl: String? = nil,
+        svnUrl: String? = nil,
+        homepage: String? = nil,
+        language: String? = nil,
+        forksCount: Int? = nil,
+        stargazersCount: Int? = nil,
+        watchersCount: Int? = nil,
+        size: Int? = nil,
+        defaultBranch: String? = nil,
+        openIssuesCount: Int? = nil,
+        isTemplate: Bool? = nil,
+        topics: [String]? = nil,
+        hasIssues: Bool? = nil,
+        hasProjects: Bool? = nil,
+        hasWiki: Bool? = nil,
+        hasPages: Bool? = nil,
+        hasDownloads: Bool? = nil,
+        hasDiscussions: Bool? = nil,
+        hasPullRequests: Bool? = nil,
+        pullRequestCreationPolicy: MinimalRepositoryPullRequestCreationPolicy? = nil,
+        archived: Bool? = nil,
+        disabled: Bool? = nil,
+        visibility: String? = nil,
+        pushedAt: Date? = nil,
+        createdAt: Date? = nil,
+        updatedAt: Date? = nil,
+        permissions: MinimalRepositoryPermissions? = nil,
+        roleName: String? = nil,
+        tempCloneToken: String? = nil,
+        deleteBranchOnMerge: Bool? = nil,
+        subscribersCount: Int? = nil,
+        networkCount: Int? = nil,
+        codeOfConduct: CodeOfConduct? = nil,
+        license: MinimalRepositoryLicense? = nil,
+        forks: Int? = nil,
+        openIssues: Int? = nil,
+        watchers: Int? = nil,
+        allowForking: Bool? = nil,
+        webCommitSignoffRequired: Bool? = nil,
+        securityAndAnalysis: SecurityAndAnalysis? = nil,
+        customProperties: [String: JSONValue]? = nil
+    ) throws {
         (self.id, self.nodeId) = (id, nodeId)
         (self.name, self.fullName) = (name, fullName)
-        (self.owner, self.`private`) = (owner, `private`)
+        (self.owner, self.private) = (owner, `private`)
         (self.htmlUrl, self.description) = (htmlUrl, description)
         (self.fork, self.url) = (fork, url)
         (self.archiveUrl, self.assigneesUrl) = (archiveUrl, assigneesUrl)
@@ -58,33 +149,33 @@ extension MinimalRepository {
 
 extension MinimalRepository {
     func sdkValidateConstraintsPart1() throws {
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("contributors_url", self.contributorsUrl)
-            try sdkValidateUri("deployments_url", self.deploymentsUrl)
-            try sdkValidateUri("downloads_url", self.downloadsUrl)
-            try sdkValidateUri("events_url", self.eventsUrl)
-            try sdkValidateUri("forks_url", self.forksUrl)
-            try sdkValidateUri("languages_url", self.languagesUrl)
-            try sdkValidateUri("merges_url", self.mergesUrl)
-            try sdkValidateUri("stargazers_url", self.stargazersUrl)
-            try sdkValidateUri("subscribers_url", self.subscribersUrl)
-            try sdkValidateUri("subscription_url", self.subscriptionUrl)
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateUri("url", url)
+        try sdkValidateUri("contributors_url", contributorsUrl)
+        try sdkValidateUri("deployments_url", deploymentsUrl)
+        try sdkValidateUri("downloads_url", downloadsUrl)
+        try sdkValidateUri("events_url", eventsUrl)
+        try sdkValidateUri("forks_url", forksUrl)
+        try sdkValidateUri("languages_url", languagesUrl)
+        try sdkValidateUri("merges_url", mergesUrl)
+        try sdkValidateUri("stargazers_url", stargazersUrl)
+        try sdkValidateUri("subscribers_url", subscribersUrl)
+        try sdkValidateUri("subscription_url", subscriptionUrl)
     }
 }
 
 extension MinimalRepository {
     func sdkValidateConstraintsPart2() throws {
-            try sdkValidateUri("tags_url", self.tagsUrl)
-            try sdkValidateUri("teams_url", self.teamsUrl)
-            try sdkValidateUri("hooks_url", self.hooksUrl)
-        if let value = self.pushedAt {
+        try sdkValidateUri("tags_url", tagsUrl)
+        try sdkValidateUri("teams_url", teamsUrl)
+        try sdkValidateUri("hooks_url", hooksUrl)
+        if let value = pushedAt {
             try sdkValidateDateTime("pushed_at", sdkWireString(value))
         }
-        if let value = self.createdAt {
+        if let value = createdAt {
             try sdkValidateDateTime("created_at", sdkWireString(value))
         }
-        if let value = self.updatedAt {
+        if let value = updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
     }
@@ -126,34 +217,47 @@ public struct ReactionRollup: Codable {
         case rocket
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ReactionRollup {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.totalCount = try container.sdkDecodeRequired(.totalCount)
-        self.plus1 = try container.sdkDecodeRequired(.plus1)
-        self.minus1 = try container.sdkDecodeRequired(.minus1)
-        self.laugh = try container.sdkDecodeRequired(.laugh)
-        self.confused = try container.sdkDecodeRequired(.confused)
-        self.heart = try container.sdkDecodeRequired(.heart)
-        self.hooray = try container.sdkDecodeRequired(.hooray)
-        self.eyes = try container.sdkDecodeRequired(.eyes)
-        self.rocket = try container.sdkDecodeRequired(.rocket)
-            try sdkValidateUri("url", self.url)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ReactionRollup {
-    public init(url: String, totalCount: Int, plus1: Int, minus1: Int, laugh: Int, confused: Int, heart: Int, hooray: Int, eyes: Int, rocket: Int) throws {
+public extension ReactionRollup {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        url = try container.sdkDecodeRequired(.url)
+        totalCount = try container.sdkDecodeRequired(.totalCount)
+        plus1 = try container.sdkDecodeRequired(.plus1)
+        minus1 = try container.sdkDecodeRequired(.minus1)
+        laugh = try container.sdkDecodeRequired(.laugh)
+        confused = try container.sdkDecodeRequired(.confused)
+        heart = try container.sdkDecodeRequired(.heart)
+        hooray = try container.sdkDecodeRequired(.hooray)
+        eyes = try container.sdkDecodeRequired(.eyes)
+        rocket = try container.sdkDecodeRequired(.rocket)
+        try sdkValidateUri("url", url)
+    }
+}
+
+public extension ReactionRollup {
+    init(
+        url: String,
+        totalCount: Int,
+        plus1: Int,
+        minus1: Int,
+        laugh: Int,
+        confused: Int,
+        heart: Int,
+        hooray: Int,
+        eyes: Int,
+        rocket: Int
+    ) throws {
         (self.url, self.totalCount) = (url, totalCount)
         (self.plus1, self.minus1) = (plus1, minus1)
         (self.laugh, self.confused) = (laugh, confused)
         (self.heart, self.hooray) = (heart, hooray)
         (self.eyes, self.rocket) = (eyes, rocket)
-            try sdkValidateUri("url", self.url)
+        try sdkValidateUri("url", self.url)
     }
 }
 
@@ -288,58 +392,101 @@ public struct PublicUser: Codable {
         case collaborators
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension PublicUser {
-    public init(from decoder: Decoder) throws {
+public extension PublicUser {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.login = try container.sdkDecodeRequired(.login)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
-        self.gravatarId = try container.sdkDecodeNullable(.gravatarId)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.followersUrl = try container.sdkDecodeRequired(.followersUrl)
-        self.followingUrl = try container.sdkDecodeRequired(.followingUrl)
-        self.gistsUrl = try container.sdkDecodeRequired(.gistsUrl)
-        self.starredUrl = try container.sdkDecodeRequired(.starredUrl)
-        self.subscriptionsUrl = try container.sdkDecodeRequired(.subscriptionsUrl)
-        self.organizationsUrl = try container.sdkDecodeRequired(.organizationsUrl)
-        self.reposUrl = try container.sdkDecodeRequired(.reposUrl)
-        self.eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        self.receivedEventsUrl = try container.sdkDecodeRequired(.receivedEventsUrl)
-        self.type = try container.sdkDecodeRequired(.type)
-        self.siteAdmin = try container.sdkDecodeRequired(.siteAdmin)
-        self.name = try container.sdkDecodeNullable(.name)
-        self.company = try container.sdkDecodeNullable(.company)
-        self.blog = try container.sdkDecodeNullable(.blog)
-        self.location = try container.sdkDecodeNullable(.location)
-        self.email = try container.sdkDecodeNullable(.email)
-        self.hireable = try container.sdkDecodeNullable(.hireable)
-        self.bio = try container.sdkDecodeNullable(.bio)
-        self.publicRepos = try container.sdkDecodeRequired(.publicRepos)
-        self.publicGists = try container.sdkDecodeRequired(.publicGists)
-        self.followers = try container.sdkDecodeRequired(.followers)
-        self.following = try container.sdkDecodeRequired(.following)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        self.userViewType = try container.sdkDecodeIfPresent(.userViewType)
-        self.notificationEmail = try container.sdkDecodeIfPresent(.notificationEmail)
-        self.twitterUsername = try container.sdkDecodeIfPresent(.twitterUsername)
-        self.plan = try container.sdkDecodeIfPresent(.plan)
-        self.privateGists = try container.sdkDecodeIfPresent(.privateGists)
-        self.totalPrivateRepos = try container.sdkDecodeIfPresent(.totalPrivateRepos)
-        self.ownedPrivateRepos = try container.sdkDecodeIfPresent(.ownedPrivateRepos)
-        self.diskUsage = try container.sdkDecodeIfPresent(.diskUsage)
-        self.collaborators = try container.sdkDecodeIfPresent(.collaborators)
+        login = try container.sdkDecodeRequired(.login)
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
+        gravatarId = try container.sdkDecodeNullable(.gravatarId)
+        url = try container.sdkDecodeRequired(.url)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        followersUrl = try container.sdkDecodeRequired(.followersUrl)
+        followingUrl = try container.sdkDecodeRequired(.followingUrl)
+        gistsUrl = try container.sdkDecodeRequired(.gistsUrl)
+        starredUrl = try container.sdkDecodeRequired(.starredUrl)
+        subscriptionsUrl = try container.sdkDecodeRequired(.subscriptionsUrl)
+        organizationsUrl = try container.sdkDecodeRequired(.organizationsUrl)
+        reposUrl = try container.sdkDecodeRequired(.reposUrl)
+        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
+        receivedEventsUrl = try container.sdkDecodeRequired(.receivedEventsUrl)
+        type = try container.sdkDecodeRequired(.type)
+        siteAdmin = try container.sdkDecodeRequired(.siteAdmin)
+        name = try container.sdkDecodeNullable(.name)
+        company = try container.sdkDecodeNullable(.company)
+        blog = try container.sdkDecodeNullable(.blog)
+        location = try container.sdkDecodeNullable(.location)
+        email = try container.sdkDecodeNullable(.email)
+        hireable = try container.sdkDecodeNullable(.hireable)
+        bio = try container.sdkDecodeNullable(.bio)
+        publicRepos = try container.sdkDecodeRequired(.publicRepos)
+        publicGists = try container.sdkDecodeRequired(.publicGists)
+        followers = try container.sdkDecodeRequired(.followers)
+        following = try container.sdkDecodeRequired(.following)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        notificationEmail = try container.sdkDecodeIfPresent(.notificationEmail)
+        twitterUsername = try container.sdkDecodeIfPresent(.twitterUsername)
+        plan = try container.sdkDecodeIfPresent(.plan)
+        privateGists = try container.sdkDecodeIfPresent(.privateGists)
+        totalPrivateRepos = try container.sdkDecodeIfPresent(.totalPrivateRepos)
+        ownedPrivateRepos = try container.sdkDecodeIfPresent(.ownedPrivateRepos)
+        diskUsage = try container.sdkDecodeIfPresent(.diskUsage)
+        collaborators = try container.sdkDecodeIfPresent(.collaborators)
         try sdkValidateConstraints()
     }
 }
 
-extension PublicUser {
-    public init(login: String, id: Int, nodeId: String, avatarUrl: String, gravatarId: String?, url: String, htmlUrl: String, followersUrl: String, followingUrl: String, gistsUrl: String, starredUrl: String, subscriptionsUrl: String, organizationsUrl: String, reposUrl: String, eventsUrl: String, receivedEventsUrl: String, type: String, siteAdmin: Bool, name: String?, company: String?, blog: String?, location: String?, email: String?, hireable: Bool?, bio: String?, publicRepos: Int, publicGists: Int, followers: Int, following: Int, createdAt: Date, updatedAt: Date, userViewType: String? = nil, notificationEmail: String? = nil, twitterUsername: String? = nil, plan: PublicUserPlan? = nil, privateGists: Int? = nil, totalPrivateRepos: Int? = nil, ownedPrivateRepos: Int? = nil, diskUsage: Int? = nil, collaborators: Int? = nil) throws {
+public extension PublicUser {
+    init(
+        login: String,
+        id: Int,
+        nodeId: String,
+        avatarUrl: String,
+        gravatarId: String?,
+        url: String,
+        htmlUrl: String,
+        followersUrl: String,
+        followingUrl: String,
+        gistsUrl: String,
+        starredUrl: String,
+        subscriptionsUrl: String,
+        organizationsUrl: String,
+        reposUrl: String,
+        eventsUrl: String,
+        receivedEventsUrl: String,
+        type: String,
+        siteAdmin: Bool,
+        name: String?,
+        company: String?,
+        blog: String?,
+        location: String?,
+        email: String?,
+        hireable: Bool?,
+        bio: String?,
+        publicRepos: Int,
+        publicGists: Int,
+        followers: Int,
+        following: Int,
+        createdAt: Date,
+        updatedAt: Date,
+        userViewType: String? = nil,
+        notificationEmail: String? = nil,
+        twitterUsername: String? = nil,
+        plan: PublicUserPlan? = nil,
+        privateGists: Int? = nil,
+        totalPrivateRepos: Int? = nil,
+        ownedPrivateRepos: Int? = nil,
+        diskUsage: Int? = nil,
+        collaborators: Int? = nil
+    ) throws {
         (self.login, self.id) = (login, id)
         (self.nodeId, self.avatarUrl) = (nodeId, avatarUrl)
         (self.gravatarId, self.url) = (gravatarId, url)
@@ -366,20 +513,20 @@ extension PublicUser {
 
 extension PublicUser {
     func sdkValidateConstraints() throws {
-            try sdkValidateUri("avatar_url", self.avatarUrl)
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("followers_url", self.followersUrl)
-            try sdkValidateUri("subscriptions_url", self.subscriptionsUrl)
-            try sdkValidateUri("organizations_url", self.organizationsUrl)
-            try sdkValidateUri("repos_url", self.reposUrl)
-            try sdkValidateUri("received_events_url", self.receivedEventsUrl)
-        if let value = self.email {
+        try sdkValidateUri("avatar_url", avatarUrl)
+        try sdkValidateUri("url", url)
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateUri("followers_url", followersUrl)
+        try sdkValidateUri("subscriptions_url", subscriptionsUrl)
+        try sdkValidateUri("organizations_url", organizationsUrl)
+        try sdkValidateUri("repos_url", reposUrl)
+        try sdkValidateUri("received_events_url", receivedEventsUrl)
+        if let value = email {
             try sdkValidateEmail("email", value)
         }
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-        if let value = self.notificationEmail {
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+        if let value = notificationEmail {
             try sdkValidateEmail("notification_email", value)
         }
     }

@@ -11,7 +11,7 @@ struct AppsDeleteTokenRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.accessToken, forKey: SdkCodingKey("access_token"))
+        try keyedContainer.encode(accessToken, forKey: SdkCodingKey("access_token"))
     }
 }
 
@@ -25,12 +25,12 @@ struct AppsScopeTokenRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.accessToken, forKey: SdkCodingKey("access_token"))
-        try keyedContainer.encodeIfPresent(self.target, forKey: SdkCodingKey("target"))
-        try keyedContainer.encodeIfPresent(self.targetId, forKey: SdkCodingKey("target_id"))
-        try keyedContainer.encodeIfPresent(self.repositories, forKey: SdkCodingKey("repositories"))
-        try keyedContainer.encodeIfPresent(self.repositoryIds, forKey: SdkCodingKey("repository_ids"))
-        try keyedContainer.encodeIfPresent(self.permissions, forKey: SdkCodingKey("permissions"))
+        try keyedContainer.encode(accessToken, forKey: SdkCodingKey("access_token"))
+        try keyedContainer.encodeIfPresent(target, forKey: SdkCodingKey("target"))
+        try keyedContainer.encodeIfPresent(targetId, forKey: SdkCodingKey("target_id"))
+        try keyedContainer.encodeIfPresent(repositories, forKey: SdkCodingKey("repositories"))
+        try keyedContainer.encodeIfPresent(repositoryIds, forKey: SdkCodingKey("repository_ids"))
+        try keyedContainer.encodeIfPresent(permissions, forKey: SdkCodingKey("permissions"))
     }
 }
 
@@ -39,7 +39,7 @@ struct CredentialsRevokeRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.credentials, forKey: SdkCodingKey("credentials"))
+        try keyedContainer.encode(credentials, forKey: SdkCodingKey("credentials"))
     }
 }
 
@@ -48,7 +48,7 @@ struct ActionsSetActionsCacheRetentionLimitForEnterpriseRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.maxCacheRetentionDays, forKey: SdkCodingKey("max_cache_retention_days"))
+        try keyedContainer.encodeIfPresent(maxCacheRetentionDays, forKey: SdkCodingKey("max_cache_retention_days"))
     }
 }
 
@@ -57,7 +57,7 @@ struct ActionsSetActionsCacheStorageLimitForEnterpriseRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.maxCacheSizeGb, forKey: SdkCodingKey("max_cache_size_gb"))
+        try keyedContainer.encodeIfPresent(maxCacheSizeGb, forKey: SdkCodingKey("max_cache_size_gb"))
     }
 }
 
@@ -66,7 +66,7 @@ struct ActionsSetActionsCacheRetentionLimitForOrganizationRequestBody: Encodable
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.maxCacheRetentionDays, forKey: SdkCodingKey("max_cache_retention_days"))
+        try keyedContainer.encodeIfPresent(maxCacheRetentionDays, forKey: SdkCodingKey("max_cache_retention_days"))
     }
 }
 
@@ -75,7 +75,7 @@ struct ActionsSetActionsCacheStorageLimitForOrganizationRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.maxCacheSizeGb, forKey: SdkCodingKey("max_cache_size_gb"))
+        try keyedContainer.encodeIfPresent(maxCacheSizeGb, forKey: SdkCodingKey("max_cache_size_gb"))
     }
 }
 
@@ -90,23 +90,23 @@ struct ActionsCreateHostedRunnerForOrgRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.name, forKey: SdkCodingKey("name"))
-        try keyedContainer.encode(self.image, forKey: SdkCodingKey("image"))
-        try keyedContainer.encode(self.size, forKey: SdkCodingKey("size"))
-        try keyedContainer.encode(self.runnerGroupId, forKey: SdkCodingKey("runner_group_id"))
-        try keyedContainer.encodeIfPresent(self.maximumRunners, forKey: SdkCodingKey("maximum_runners"))
-        try keyedContainer.encodeIfPresent(self.enableStaticIp, forKey: SdkCodingKey("enable_static_ip"))
-        try keyedContainer.encodeIfPresent(self.imageGen, forKey: SdkCodingKey("image_gen"))
+        try keyedContainer.encode(name, forKey: SdkCodingKey("name"))
+        try keyedContainer.encode(image, forKey: SdkCodingKey("image"))
+        try keyedContainer.encode(size, forKey: SdkCodingKey("size"))
+        try keyedContainer.encode(runnerGroupId, forKey: SdkCodingKey("runner_group_id"))
+        try keyedContainer.encodeIfPresent(maximumRunners, forKey: SdkCodingKey("maximum_runners"))
+        try keyedContainer.encodeIfPresent(enableStaticIp, forKey: SdkCodingKey("enable_static_ip"))
+        try keyedContainer.encodeIfPresent(imageGen, forKey: SdkCodingKey("image_gen"))
     }
 
     init(options: ActionsMethods.ActionsCreateHostedRunnerForOrgOptions) {
-        self.name = options.name
-        self.image = options.image
-        self.size = options.size
-        self.runnerGroupId = options.runnerGroupId
-        self.maximumRunners = options.maximumRunners
-        self.enableStaticIp = options.enableStaticIp
-        self.imageGen = options.imageGen
+        name = options.name
+        image = options.image
+        size = options.size
+        runnerGroupId = options.runnerGroupId
+        maximumRunners = options.maximumRunners
+        enableStaticIp = options.enableStaticIp
+        imageGen = options.imageGen
     }
 }
 
@@ -123,27 +123,27 @@ struct ActionsUpdateHostedRunnerForOrgRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.name, forKey: SdkCodingKey("name"))
-        try keyedContainer.encodeIfPresent(self.runnerGroupId, forKey: SdkCodingKey("runner_group_id"))
-        try keyedContainer.encodeIfPresent(self.maximumRunners, forKey: SdkCodingKey("maximum_runners"))
-        try keyedContainer.encodeIfPresent(self.enableStaticIp, forKey: SdkCodingKey("enable_static_ip"))
-        try keyedContainer.encodeIfPresent(self.size, forKey: SdkCodingKey("size"))
-        try keyedContainer.encodeIfPresent(self.imageSource, forKey: SdkCodingKey("image_source"))
-        try keyedContainer.encodeIfPresent(self.imageId, forKey: SdkCodingKey("image_id"))
-        try keyedContainer.encodeIfPresent(self.imageVersion, forKey: SdkCodingKey("image_version"))
-        try keyedContainer.encodeIfPresent(self.imageGen, forKey: SdkCodingKey("image_gen"))
+        try keyedContainer.encodeIfPresent(name, forKey: SdkCodingKey("name"))
+        try keyedContainer.encodeIfPresent(runnerGroupId, forKey: SdkCodingKey("runner_group_id"))
+        try keyedContainer.encodeIfPresent(maximumRunners, forKey: SdkCodingKey("maximum_runners"))
+        try keyedContainer.encodeIfPresent(enableStaticIp, forKey: SdkCodingKey("enable_static_ip"))
+        try keyedContainer.encodeIfPresent(size, forKey: SdkCodingKey("size"))
+        try keyedContainer.encodeIfPresent(imageSource, forKey: SdkCodingKey("image_source"))
+        try keyedContainer.encodeIfPresent(imageId, forKey: SdkCodingKey("image_id"))
+        try keyedContainer.encodeIfPresent(imageVersion, forKey: SdkCodingKey("image_version"))
+        try keyedContainer.encodeIfPresent(imageGen, forKey: SdkCodingKey("image_gen"))
     }
 
     init(options: ActionsMethods.ActionsUpdateHostedRunnerForOrgOptions) {
-        self.name = options.name
-        self.runnerGroupId = options.runnerGroupId
-        self.maximumRunners = options.maximumRunners
-        self.enableStaticIp = options.enableStaticIp
-        self.size = options.size
-        self.imageSource = options.imageSource
-        self.imageId = options.imageId
-        self.imageVersion = options.imageVersion
-        self.imageGen = options.imageGen
+        name = options.name
+        runnerGroupId = options.runnerGroupId
+        maximumRunners = options.maximumRunners
+        enableStaticIp = options.enableStaticIp
+        size = options.size
+        imageSource = options.imageSource
+        imageId = options.imageId
+        imageVersion = options.imageVersion
+        imageGen = options.imageGen
     }
 }
 
@@ -154,9 +154,9 @@ struct ActionsSetGithubActionsPermissionsOrganizationRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.enabledRepositories, forKey: SdkCodingKey("enabled_repositories"))
-        try keyedContainer.encodeIfPresent(self.allowedActions, forKey: SdkCodingKey("allowed_actions"))
-        try keyedContainer.encodeIfPresent(self.shaPinningRequired, forKey: SdkCodingKey("sha_pinning_required"))
+        try keyedContainer.encode(enabledRepositories, forKey: SdkCodingKey("enabled_repositories"))
+        try keyedContainer.encodeIfPresent(allowedActions, forKey: SdkCodingKey("allowed_actions"))
+        try keyedContainer.encodeIfPresent(shaPinningRequired, forKey: SdkCodingKey("sha_pinning_required"))
     }
 }
 
@@ -165,7 +165,7 @@ struct ActionsSetArtifactAndLogRetentionSettingsOrganizationRequestBody: Encodab
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.days, forKey: SdkCodingKey("days"))
+        try keyedContainer.encode(days, forKey: SdkCodingKey("days"))
     }
 }
 
@@ -174,7 +174,7 @@ struct ActionsSetForkPrContributorApprovalPermissionsOrganizationRequestBody: En
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.approvalPolicy, forKey: SdkCodingKey("approval_policy"))
+        try keyedContainer.encode(approvalPolicy, forKey: SdkCodingKey("approval_policy"))
     }
 }
 
@@ -186,10 +186,19 @@ struct ActionsSetPrivateRepoForkPrWorkflowsSettingsOrganizationRequestBody: Enco
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.runWorkflowsFromForkPullRequests, forKey: SdkCodingKey("run_workflows_from_fork_pull_requests"))
-        try keyedContainer.encodeIfPresent(self.sendWriteTokensToWorkflows, forKey: SdkCodingKey("send_write_tokens_to_workflows"))
-        try keyedContainer.encodeIfPresent(self.sendSecretsAndVariables, forKey: SdkCodingKey("send_secrets_and_variables"))
-        try keyedContainer.encodeIfPresent(self.requireApprovalForForkPrWorkflows, forKey: SdkCodingKey("require_approval_for_fork_pr_workflows"))
+        try keyedContainer.encode(
+            runWorkflowsFromForkPullRequests,
+            forKey: SdkCodingKey("run_workflows_from_fork_pull_requests")
+        )
+        try keyedContainer.encodeIfPresent(
+            sendWriteTokensToWorkflows,
+            forKey: SdkCodingKey("send_write_tokens_to_workflows")
+        )
+        try keyedContainer.encodeIfPresent(sendSecretsAndVariables, forKey: SdkCodingKey("send_secrets_and_variables"))
+        try keyedContainer.encodeIfPresent(
+            requireApprovalForForkPrWorkflows,
+            forKey: SdkCodingKey("require_approval_for_fork_pr_workflows")
+        )
     }
 }
 
@@ -200,8 +209,8 @@ struct ActionsSetAllowedActionsOrganizationRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.githubOwnedAllowed, forKey: SdkCodingKey("github_owned_allowed"))
-        try keyedContainer.encodeIfPresent(self.verifiedAllowed, forKey: SdkCodingKey("verified_allowed"))
-        try keyedContainer.encodeIfPresent(self.patternsAllowed, forKey: SdkCodingKey("patterns_allowed"))
+        try keyedContainer.encodeIfPresent(githubOwnedAllowed, forKey: SdkCodingKey("github_owned_allowed"))
+        try keyedContainer.encodeIfPresent(verifiedAllowed, forKey: SdkCodingKey("verified_allowed"))
+        try keyedContainer.encodeIfPresent(patternsAllowed, forKey: SdkCodingKey("patterns_allowed"))
     }
 }

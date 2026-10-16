@@ -3,29 +3,29 @@
 
 import Foundation
 
-// SecurityAdvisories domain models
+/// SecurityAdvisories domain models
 extension GlobalAdvisory {
     func sdkValidateConstraints() throws {
-            try sdkValidateUri("html_url", self.htmlUrl)
-        if let value = self.repositoryAdvisoryUrl {
+        try sdkValidateUri("html_url", htmlUrl)
+        if let value = repositoryAdvisoryUrl {
             try sdkValidateUri("repository_advisory_url", value)
         }
-            try validateLength("summary", self.summary, min: nil, max: 1024)
-        if let value = self.description {
+        try validateLength("summary", summary, min: nil, max: 1024)
+        if let value = description {
             try validateLength("description", value, min: nil, max: 65535)
         }
-        if let value = self.sourceCodeLocation {
+        if let value = sourceCodeLocation {
             try sdkValidateUri("source_code_location", value)
         }
-            try sdkValidateDateTime("published_at", sdkWireString(self.publishedAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-        if let value = self.githubReviewedAt {
+        try sdkValidateDateTime("published_at", sdkWireString(publishedAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+        if let value = githubReviewedAt {
             try sdkValidateDateTime("github_reviewed_at", sdkWireString(value))
         }
-        if let value = self.nvdPublishedAt {
+        if let value = nvdPublishedAt {
             try sdkValidateDateTime("nvd_published_at", sdkWireString(value))
         }
-        if let value = self.withdrawnAt {
+        if let value = withdrawnAt {
             try sdkValidateDateTime("withdrawn_at", sdkWireString(value))
         }
     }
@@ -43,25 +43,35 @@ public struct VulnerabilityPackage: Codable {
         case name
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension VulnerabilityPackage {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.ecosystem) else {
-            throw SdkValidationError(field: "ecosystem", code: "required", message: "Validation failed for 'ecosystem': value is required")
-        }
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        self.ecosystem = try container.sdkDecodeRequired(.ecosystem)
-        self.name = try container.sdkDecodeNullable(.name)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension VulnerabilityPackage {
-    public init(ecosystem: SecurityAdvisoryEcosystems, name: String?) {
+public extension VulnerabilityPackage {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.ecosystem) else {
+            throw SdkValidationError(
+                field: "ecosystem",
+                code: "required",
+                message: "Validation failed for 'ecosystem': value is required"
+            )
+        }
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        ecosystem = try container.sdkDecodeRequired(.ecosystem)
+        name = try container.sdkDecodeNullable(.name)
+    }
+}
+
+public extension VulnerabilityPackage {
+    init(ecosystem: SecurityAdvisoryEcosystems, name: String?) {
         (self.ecosystem, self.name) = (ecosystem, name)
     }
 }
@@ -78,25 +88,35 @@ public struct GlobalAdvisoryIdentifiersItem: Codable {
         case value
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension GlobalAdvisoryIdentifiersItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        guard container.contains(.value) else {
-            throw SdkValidationError(field: "value", code: "required", message: "Validation failed for 'value': value is required")
-        }
-        self.type = try container.sdkDecodeRequired(.type)
-        self.value = try container.sdkDecodeRequired(.value)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension GlobalAdvisoryIdentifiersItem {
-    public init(type: GlobalAdvisoryIdentifiersItemType, value: String) {
+public extension GlobalAdvisoryIdentifiersItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.type) else {
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
+        }
+        guard container.contains(.value) else {
+            throw SdkValidationError(
+                field: "value",
+                code: "required",
+                message: "Validation failed for 'value': value is required"
+            )
+        }
+        type = try container.sdkDecodeRequired(.type)
+        value = try container.sdkDecodeRequired(.value)
+    }
+}
+
+public extension GlobalAdvisoryIdentifiersItem {
+    init(type: GlobalAdvisoryIdentifiersItemType, value: String) {
         (self.type, self.value) = (type, value)
     }
 }
@@ -188,45 +208,75 @@ public struct RepositoryAdvisory: Codable {
         case cvssSeverities = "cvss_severities"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension RepositoryAdvisory {
-    public init(from decoder: Decoder) throws {
+public extension RepositoryAdvisory {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.ghsaId = try container.sdkDecodeRequired(.ghsaId)
-        self.cveId = try container.sdkDecodeNullable(.cveId)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.summary = try container.sdkDecodeRequired(.summary)
-        self.description = try container.sdkDecodeNullable(.description)
-        self.severity = try container.sdkDecodeNullable(.severity)
-        self.author = try container.sdkDecodeNullable(.author)
-        self.publisher = try container.sdkDecodeNullable(.publisher)
-        self.identifiers = try container.sdkDecodeRequired(.identifiers)
-        self.state = try container.sdkDecodeRequired(.state)
-        self.createdAt = try container.sdkDecodeNullable(.createdAt)
-        self.updatedAt = try container.sdkDecodeNullable(.updatedAt)
-        self.publishedAt = try container.sdkDecodeNullable(.publishedAt)
-        self.closedAt = try container.sdkDecodeNullable(.closedAt)
-        self.withdrawnAt = try container.sdkDecodeNullable(.withdrawnAt)
-        self.submission = try container.sdkDecodeNullable(.submission)
-        self.vulnerabilities = try container.sdkDecodeNullable(.vulnerabilities)
-        self.cvss = try container.sdkDecodeNullable(.cvss)
-        self.cwes = try container.sdkDecodeNullable(.cwes)
-        self.cweIds = try container.sdkDecodeNullable(.cweIds)
-        self.credits = try container.sdkDecodeNullable(.credits)
-        self.creditsDetailed = try container.sdkDecodeNullable(.creditsDetailed)
-        self.collaboratingUsers = try container.sdkDecodeNullable(.collaboratingUsers)
-        self.collaboratingTeams = try container.sdkDecodeNullable(.collaboratingTeams)
-        self.privateFork = try container.sdkDecodeNullable(.privateFork)
-        self.cvssSeverities = try container.sdkDecodeIfPresent(.cvssSeverities)
+        ghsaId = try container.sdkDecodeRequired(.ghsaId)
+        cveId = try container.sdkDecodeNullable(.cveId)
+        url = try container.sdkDecodeRequired(.url)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        summary = try container.sdkDecodeRequired(.summary)
+        description = try container.sdkDecodeNullable(.description)
+        severity = try container.sdkDecodeNullable(.severity)
+        author = try container.sdkDecodeNullable(.author)
+        publisher = try container.sdkDecodeNullable(.publisher)
+        identifiers = try container.sdkDecodeRequired(.identifiers)
+        state = try container.sdkDecodeRequired(.state)
+        createdAt = try container.sdkDecodeNullable(.createdAt)
+        updatedAt = try container.sdkDecodeNullable(.updatedAt)
+        publishedAt = try container.sdkDecodeNullable(.publishedAt)
+        closedAt = try container.sdkDecodeNullable(.closedAt)
+        withdrawnAt = try container.sdkDecodeNullable(.withdrawnAt)
+        submission = try container.sdkDecodeNullable(.submission)
+        vulnerabilities = try container.sdkDecodeNullable(.vulnerabilities)
+        cvss = try container.sdkDecodeNullable(.cvss)
+        cwes = try container.sdkDecodeNullable(.cwes)
+        cweIds = try container.sdkDecodeNullable(.cweIds)
+        credits = try container.sdkDecodeNullable(.credits)
+        creditsDetailed = try container.sdkDecodeNullable(.creditsDetailed)
+        collaboratingUsers = try container.sdkDecodeNullable(.collaboratingUsers)
+        collaboratingTeams = try container.sdkDecodeNullable(.collaboratingTeams)
+        privateFork = try container.sdkDecodeNullable(.privateFork)
+        cvssSeverities = try container.sdkDecodeIfPresent(.cvssSeverities)
         try sdkValidateConstraints()
     }
 }
 
-extension RepositoryAdvisory {
-    public init(ghsaId: String, cveId: String?, url: String, htmlUrl: String, summary: String, description: String?, severity: RepositoryAdvisorySeverity?, author: RepositoryAdvisoryAuthor?, publisher: RepositoryAdvisoryPublisher?, identifiers: [RepositoryAdvisoryIdentifiersItem], state: RepositoryAdvisoryState, createdAt: Date?, updatedAt: Date?, publishedAt: Date?, closedAt: Date?, withdrawnAt: Date?, submission: RepositoryAdvisorySubmission?, vulnerabilities: [RepositoryAdvisoryVulnerability]?, cvss: RepositoryAdvisoryCvss?, cwes: [RepositoryAdvisoryCwesItem]?, cweIds: [String]?, credits: [RepositoryAdvisoryCreditsItem]?, creditsDetailed: [RepositoryAdvisoryCredit]?, collaboratingUsers: [SimpleUser]?, collaboratingTeams: [Team]?, privateFork: RepositoryAdvisoryPrivateFork?, cvssSeverities: CvssSeverities? = nil) throws {
+public extension RepositoryAdvisory {
+    init(
+        ghsaId: String,
+        cveId: String?,
+        url: String,
+        htmlUrl: String,
+        summary: String,
+        description: String?,
+        severity: RepositoryAdvisorySeverity?,
+        author: RepositoryAdvisoryAuthor?,
+        publisher: RepositoryAdvisoryPublisher?,
+        identifiers: [RepositoryAdvisoryIdentifiersItem],
+        state: RepositoryAdvisoryState,
+        createdAt: Date?,
+        updatedAt: Date?,
+        publishedAt: Date?,
+        closedAt: Date?,
+        withdrawnAt: Date?,
+        submission: RepositoryAdvisorySubmission?,
+        vulnerabilities: [RepositoryAdvisoryVulnerability]?,
+        cvss: RepositoryAdvisoryCvss?,
+        cwes: [RepositoryAdvisoryCwesItem]?,
+        cweIds: [String]?,
+        credits: [RepositoryAdvisoryCreditsItem]?,
+        creditsDetailed: [RepositoryAdvisoryCredit]?,
+        collaboratingUsers: [SimpleUser]?,
+        collaboratingTeams: [Team]?,
+        privateFork: RepositoryAdvisoryPrivateFork?,
+        cvssSeverities: CvssSeverities? = nil
+    ) throws {
         (self.ghsaId, self.cveId) = (ghsaId, cveId)
         (self.url, self.htmlUrl) = (url, htmlUrl)
         (self.summary, self.description) = (summary, description)
@@ -247,25 +297,25 @@ extension RepositoryAdvisory {
 
 extension RepositoryAdvisory {
     func sdkValidateConstraints() throws {
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try validateLength("summary", self.summary, min: nil, max: 1024)
-        if let value = self.description {
+        try sdkValidateUri("url", url)
+        try sdkValidateUri("html_url", htmlUrl)
+        try validateLength("summary", summary, min: nil, max: 1024)
+        if let value = description {
             try validateLength("description", value, min: nil, max: 65535)
         }
-        if let value = self.createdAt {
+        if let value = createdAt {
             try sdkValidateDateTime("created_at", sdkWireString(value))
         }
-        if let value = self.updatedAt {
+        if let value = updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
-        if let value = self.publishedAt {
+        if let value = publishedAt {
             try sdkValidateDateTime("published_at", sdkWireString(value))
         }
-        if let value = self.closedAt {
+        if let value = closedAt {
             try sdkValidateDateTime("closed_at", sdkWireString(value))
         }
-        if let value = self.withdrawnAt {
+        if let value = withdrawnAt {
             try sdkValidateDateTime("withdrawn_at", sdkWireString(value))
         }
     }
@@ -280,21 +330,27 @@ public struct RepositoryAdvisorySubmission: Codable {
         case accepted
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryAdvisorySubmission {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.accepted) else {
-            throw SdkValidationError(field: "accepted", code: "required", message: "Validation failed for 'accepted': value is required")
-        }
-        self.accepted = try container.sdkDecodeRequired(.accepted)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension RepositoryAdvisorySubmission {
-    public init(accepted: Bool) {
+public extension RepositoryAdvisorySubmission {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.accepted) else {
+            throw SdkValidationError(
+                field: "accepted",
+                code: "required",
+                message: "Validation failed for 'accepted': value is required"
+            )
+        }
+        accepted = try container.sdkDecodeRequired(.accepted)
+    }
+}
+
+public extension RepositoryAdvisorySubmission {
+    init(accepted: Bool) {
         self.accepted = accepted
     }
 }
@@ -317,24 +373,35 @@ public struct PrivateVulnerabilityReportCreateVulnerabilitiesItem: Codable {
         case vulnerableFunctions = "vulnerable_functions"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension PrivateVulnerabilityReportCreateVulnerabilitiesItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.package) else {
-            throw SdkValidationError(field: "package", code: "required", message: "Validation failed for 'package': value is required")
-        }
-        self.package = try container.sdkDecodeRequired(.package)
-        self.vulnerableVersionRange = try container.sdkDecodeIfPresent(.vulnerableVersionRange)
-        self.patchedVersions = try container.sdkDecodeIfPresent(.patchedVersions)
-        self.vulnerableFunctions = try container.sdkDecodeIfPresent(.vulnerableFunctions)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension PrivateVulnerabilityReportCreateVulnerabilitiesItem {
-    public init(package: PrivateVulnerabilityReportCreateVulnerabilitiesItemPackage, vulnerableVersionRange: String? = nil, patchedVersions: String? = nil, vulnerableFunctions: [String]? = nil) {
+public extension PrivateVulnerabilityReportCreateVulnerabilitiesItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.package) else {
+            throw SdkValidationError(
+                field: "package",
+                code: "required",
+                message: "Validation failed for 'package': value is required"
+            )
+        }
+        package = try container.sdkDecodeRequired(.package)
+        vulnerableVersionRange = try container.sdkDecodeIfPresent(.vulnerableVersionRange)
+        patchedVersions = try container.sdkDecodeIfPresent(.patchedVersions)
+        vulnerableFunctions = try container.sdkDecodeIfPresent(.vulnerableFunctions)
+    }
+}
+
+public extension PrivateVulnerabilityReportCreateVulnerabilitiesItem {
+    init(
+        package: PrivateVulnerabilityReportCreateVulnerabilitiesItemPackage,
+        vulnerableVersionRange: String? = nil,
+        patchedVersions: String? = nil,
+        vulnerableFunctions: [String]? = nil
+    ) {
         (self.package, self.vulnerableVersionRange) = (package, vulnerableVersionRange)
         (self.patchedVersions, self.vulnerableFunctions) = (patchedVersions, vulnerableFunctions)
     }
@@ -352,25 +419,35 @@ public struct RepositoryAdvisoryUpdateCreditsItem: Codable {
         case type
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryAdvisoryUpdateCreditsItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.login) else {
-            throw SdkValidationError(field: "login", code: "required", message: "Validation failed for 'login': value is required")
-        }
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        self.login = try container.sdkDecodeRequired(.login)
-        self.type = try container.sdkDecodeRequired(.type)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension RepositoryAdvisoryUpdateCreditsItem {
-    public init(login: String, type: SecurityAdvisoryCreditTypes) {
+public extension RepositoryAdvisoryUpdateCreditsItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.login) else {
+            throw SdkValidationError(
+                field: "login",
+                code: "required",
+                message: "Validation failed for 'login': value is required"
+            )
+        }
+        guard container.contains(.type) else {
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
+        }
+        login = try container.sdkDecodeRequired(.login)
+        type = try container.sdkDecodeRequired(.type)
+    }
+}
+
+public extension RepositoryAdvisoryUpdateCreditsItem {
+    init(login: String, type: SecurityAdvisoryCreditTypes) {
         (self.login, self.type) = (login, type)
     }
 }
@@ -387,25 +464,35 @@ public struct GlobalAdvisoryCreditsItem: Codable {
         case type
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension GlobalAdvisoryCreditsItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.user) else {
-            throw SdkValidationError(field: "user", code: "required", message: "Validation failed for 'user': value is required")
-        }
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        self.user = try container.sdkDecodeRequired(.user)
-        self.type = try container.sdkDecodeRequired(.type)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension GlobalAdvisoryCreditsItem {
-    public init(user: SimpleUser, type: SecurityAdvisoryCreditTypes) {
+public extension GlobalAdvisoryCreditsItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.user) else {
+            throw SdkValidationError(
+                field: "user",
+                code: "required",
+                message: "Validation failed for 'user': value is required"
+            )
+        }
+        guard container.contains(.type) else {
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
+        }
+        user = try container.sdkDecodeRequired(.user)
+        type = try container.sdkDecodeRequired(.type)
+    }
+}
+
+public extension GlobalAdvisoryCreditsItem {
+    init(user: SimpleUser, type: SecurityAdvisoryCreditTypes) {
         (self.user, self.type) = (user, type)
     }
 }
@@ -422,25 +509,35 @@ public struct RepositoryAdvisoryCreateCreditsItem: Codable {
         case type
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryAdvisoryCreateCreditsItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.login) else {
-            throw SdkValidationError(field: "login", code: "required", message: "Validation failed for 'login': value is required")
-        }
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        self.login = try container.sdkDecodeRequired(.login)
-        self.type = try container.sdkDecodeRequired(.type)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension RepositoryAdvisoryCreateCreditsItem {
-    public init(login: String, type: SecurityAdvisoryCreditTypes) {
+public extension RepositoryAdvisoryCreateCreditsItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.login) else {
+            throw SdkValidationError(
+                field: "login",
+                code: "required",
+                message: "Validation failed for 'login': value is required"
+            )
+        }
+        guard container.contains(.type) else {
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
+        }
+        login = try container.sdkDecodeRequired(.login)
+        type = try container.sdkDecodeRequired(.type)
+    }
+}
+
+public extension RepositoryAdvisoryCreateCreditsItem {
+    init(login: String, type: SecurityAdvisoryCreditTypes) {
         (self.login, self.type) = (login, type)
     }
 }

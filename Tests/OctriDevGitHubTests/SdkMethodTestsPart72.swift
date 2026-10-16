@@ -13,14 +13,14 @@ extension SdkMethodTests {
         _ = client
         do {
             _ = try await client.repos.createUsingTemplate(
-            templateOwner: decoded("\"template_owner\""),
-            templateRepo: decoded("\"template_repo\""),
-            name: decoded("\"Hello-World\""),
-            owner: decoded("\"octocat\""),
-            description: decoded("\"This is your first repository\""),
-            includeAllBranches: decoded("false"),
-            private: decoded("false")
-        )
+                templateOwner: decoded("\"template_owner\""),
+                templateRepo: decoded("\"template_repo\""),
+                name: decoded("\"Hello-World\""),
+                owner: decoded("\"octocat\""),
+                description: decoded("\"This is your first repository\""),
+                includeAllBranches: decoded("false"),
+                private: decoded("false")
+            )
             XCTFail("reposCreateUsingTemplate decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -64,13 +64,13 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.createWebhook(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            name: decoded("\"web\""),
-            config: decoded(sdkMethodFixture1554Value1),
-            events: decoded("[\"push\",\"pull_request\"]"),
-            active: decoded("true")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                name: decoded("\"web\""),
+                config: decoded(sdkMethodFixture1554Value1),
+                events: decoded("[\"push\",\"pull_request\"]"),
+                active: decoded("true")
+            )
             XCTFail("reposCreateWebhook did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -87,7 +87,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testReposCustomPropertiesForReposCreateOrUpdateRepositoryValuesReX6b1375d7fcReachesMockAndDecodesResponse() async throws {
+    func testReposCustomPropertiesForReposCreateOrUpdateRepositoryValuesReX6b1375d7fcReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -100,7 +101,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testReposCustomPropertiesForReposCreateOrUpdateRepositoryValuesReX16f6c8742fReachesMockAndDecodesResponse() async throws {
+    func testReposCustomPropertiesForReposCreateOrUpdateRepositoryValuesReX16f6c8742fReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -111,10 +113,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.customPropertiesForReposCreateOrUpdateRepositoryValues(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            properties: decoded(sdkMethodFixture1556Value1)
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                properties: decoded(sdkMethodFixture1556Value1)
+            )
             XCTFail("reposCustomPropertiesForReposCreateOrUpdateRepositoryValues did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -131,7 +133,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testReposCustomPropertiesForReposGetRepositoryValuesReposCustomPrXe6d0b1b365ReachesMockAndDecodesResponse() async throws {
+    func testReposCustomPropertiesForReposGetRepositoryValuesReposCustomPrXe6d0b1b365ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -151,7 +154,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testReposCustomPropertiesForReposGetRepositoryValuesReposCustomPrX959e9bbc17ReachesMockAndDecodesResponse() async throws {
+    func testReposCustomPropertiesForReposGetRepositoryValuesReposCustomPrX959e9bbc17ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -162,9 +166,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.customPropertiesForReposGetRepositoryValues(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\"")
+            )
             XCTFail("reposCustomPropertiesForReposGetRepositoryValues did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -181,7 +185,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testReposDeclineInvitationForAuthenticatedUserReposDeclineInvitatX8731767dc1ReachesMockAndDecodesResponse() async throws {
+    func testReposDeclineInvitationForAuthenticatedUserReposDeclineInvitatX8731767dc1ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -192,7 +197,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testReposDeclineInvitationForAuthenticatedUserReposDeclineInvitatX81eab3c4e5ReachesMockAndDecodesResponse() async throws {
+    func testReposDeclineInvitationForAuthenticatedUserReposDeclineInvitatX81eab3c4e5ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -203,8 +209,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.declineInvitationForAuthenticatedUser(
-            invitationId: decoded("1")
-        )
+                invitationId: decoded("1")
+            )
             XCTFail("reposDeclineInvitationForAuthenticatedUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -244,9 +250,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.delete(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\"")
+            )
             XCTFail("reposDelete did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 307)
@@ -276,7 +282,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testReposDeleteAdminBranchProtectionReposDeleteAdminBranchProtectionReachesMockAndDecodesResponse() async throws {
+    func testReposDeleteAdminBranchProtectionReposDeleteAdminBranchProtectionReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -289,7 +296,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testReposDeleteAdminBranchProtectionReposDeleteAdminBranchProtection404ReachesMockAndDecodesResponse() async throws {
+    func testReposDeleteAdminBranchProtectionReposDeleteAdminBranchProtection404ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -300,10 +308,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.deleteAdminBranchProtection(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            branch: decoded("\"branch\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                branch: decoded("\"branch\"")
+            )
             XCTFail("reposDeleteAdminBranchProtection did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -357,10 +365,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.deleteAutolink(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            autolinkId: decoded("1")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                autolinkId: decoded("1")
+            )
             XCTFail("reposDeleteAutolink did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -401,10 +409,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.deleteBranchProtection(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            branch: decoded("\"branch\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                branch: decoded("\"branch\"")
+            )
             XCTFail("reposDeleteBranchProtection did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -445,10 +453,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.deleteCommitComment(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            commentId: decoded("1")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                commentId: decoded("1")
+            )
             XCTFail("reposDeleteCommitComment did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -465,7 +473,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testReposDeleteCommitSignatureProtectionReposDeleteCommitSignatureProtectionReachesMockAndDecodesResponse() async throws {
+    func testReposDeleteCommitSignatureProtectionReposDeleteCommitSignatureProtectionReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -478,7 +487,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testReposDeleteCommitSignatureProtectionReposDeleteCommitSignaturX39f264a4c8ReachesMockAndDecodesResponse() async throws {
+    func testReposDeleteCommitSignatureProtectionReposDeleteCommitSignaturX39f264a4c8ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -489,10 +499,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.deleteCommitSignatureProtection(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            branch: decoded("\"branch\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                branch: decoded("\"branch\"")
+            )
             XCTFail("reposDeleteCommitSignatureProtection did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)

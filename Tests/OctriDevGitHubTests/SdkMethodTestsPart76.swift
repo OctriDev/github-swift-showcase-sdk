@@ -26,7 +26,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testReposGetCustomDeploymentProtectionRuleReposGetCustomDeploymenX27d0d810e9ReachesMockAndDecodesResponse() async throws {
+    func testReposGetCustomDeploymentProtectionRuleReposGetCustomDeploymenX27d0d810e9ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -80,10 +81,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.getDeployKey(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            keyId: decoded("1")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                keyId: decoded("1")
+            )
             XCTFail("reposGetDeployKey did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -132,10 +133,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.getDeployment(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            deploymentId: decoded("1")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                deploymentId: decoded("1")
+            )
             XCTFail("reposGetDeployment did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -207,11 +208,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.getDeploymentStatus(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            deploymentId: decoded("1"),
-            statusId: decoded("1")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                deploymentId: decoded("1"),
+                statusId: decoded("1")
+            )
             XCTFail("reposGetDeploymentStatus did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -280,9 +281,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.getHashAlgorithm(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\"")
+            )
             XCTFail("reposGetHashAlgorithm did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -350,9 +351,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.getLatestRelease(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\"")
+            )
             XCTFail("reposGetLatestRelease did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -400,9 +401,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.getOrgRuleset(
-            org: decoded("\"org\""),
-            rulesetId: decoded("1")
-        )
+                org: decoded("\"org\""),
+                rulesetId: decoded("1")
+            )
             XCTFail("reposGetOrgRuleset did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -452,11 +453,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.getOrgRulesets(
-            org: decoded("\"org\""),
-            perPage: decoded("30"),
-            page: decoded("1"),
-            targets: decoded("\"branch,tag,push\"")
-        )
+                org: decoded("\"org\""),
+                perPage: decoded("30"),
+                page: decoded("1"),
+                targets: decoded("\"branch,tag,push\"")
+            )
             XCTFail("reposGetOrgRulesets did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -505,10 +506,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.getOrgRuleSuite(
-            org: decoded("\"org\""),
-            ruleSuiteId: decoded("1"),
-            includeMetadata: decoded("false")
-        )
+                org: decoded("\"org\""),
+                ruleSuiteId: decoded("1"),
+                includeMetadata: decoded("false")
+            )
             XCTFail("reposGetOrgRuleSuite did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)

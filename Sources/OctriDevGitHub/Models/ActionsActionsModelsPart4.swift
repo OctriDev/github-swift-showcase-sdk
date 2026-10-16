@@ -3,7 +3,7 @@
 
 import Foundation
 
-// ActionsActions domain models
+/// ActionsActions domain models
 /// Typed representation of the `ActionsOrganizationPermissions` API schema.
 public struct ActionsOrganizationPermissions: Codable {
     /// The policy that controls the repositories in the organization that are allowed to run GitHub Actions.
@@ -27,25 +27,37 @@ public struct ActionsOrganizationPermissions: Codable {
         case shaPinningRequired = "sha_pinning_required"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsOrganizationPermissions {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.enabledRepositories) else {
-            throw SdkValidationError(field: "enabled_repositories", code: "required", message: "Validation failed for 'enabled_repositories': value is required")
-        }
-        self.enabledRepositories = try container.sdkDecodeRequired(.enabledRepositories)
-        self.selectedRepositoriesUrl = try container.sdkDecodeIfPresent(.selectedRepositoriesUrl)
-        self.allowedActions = try container.sdkDecodeIfPresent(.allowedActions)
-        self.selectedActionsUrl = try container.sdkDecodeIfPresent(.selectedActionsUrl)
-        self.shaPinningRequired = try container.sdkDecodeIfPresent(.shaPinningRequired)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsOrganizationPermissions {
-    public init(enabledRepositories: EnabledRepositories, selectedRepositoriesUrl: String? = nil, allowedActions: AllowedActions? = nil, selectedActionsUrl: SelectedActionsUrl? = nil, shaPinningRequired: ShaPinningRequired? = nil) {
+public extension ActionsOrganizationPermissions {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.enabledRepositories) else {
+            throw SdkValidationError(
+                field: "enabled_repositories",
+                code: "required",
+                message: "Validation failed for 'enabled_repositories': value is required"
+            )
+        }
+        enabledRepositories = try container.sdkDecodeRequired(.enabledRepositories)
+        selectedRepositoriesUrl = try container.sdkDecodeIfPresent(.selectedRepositoriesUrl)
+        allowedActions = try container.sdkDecodeIfPresent(.allowedActions)
+        selectedActionsUrl = try container.sdkDecodeIfPresent(.selectedActionsUrl)
+        shaPinningRequired = try container.sdkDecodeIfPresent(.shaPinningRequired)
+    }
+}
+
+public extension ActionsOrganizationPermissions {
+    init(
+        enabledRepositories: EnabledRepositories,
+        selectedRepositoriesUrl: String? = nil,
+        allowedActions: AllowedActions? = nil,
+        selectedActionsUrl: SelectedActionsUrl? = nil,
+        shaPinningRequired: ShaPinningRequired? = nil
+    ) {
         self.enabledRepositories = enabledRepositories
         (self.selectedRepositoriesUrl, self.allowedActions) = (selectedRepositoriesUrl, allowedActions)
         (self.selectedActionsUrl, self.shaPinningRequired) = (selectedActionsUrl, shaPinningRequired)
@@ -67,26 +79,40 @@ public struct ActionsPolicyEnterpriseConditionsVariant0: Codable {
         case workflowPath = "workflow_path"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsPolicyEnterpriseConditionsVariant0 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.organizationName) else {
-            throw SdkValidationError(field: "organization_name", code: "required", message: "Validation failed for 'organization_name': value is required")
-        }
-        guard container.contains(.repositoryName) else {
-            throw SdkValidationError(field: "repository_name", code: "required", message: "Validation failed for 'repository_name': value is required")
-        }
-        self.organizationName = try container.sdkDecodeRequired(.organizationName)
-        self.repositoryName = try container.sdkDecodeRequired(.repositoryName)
-        self.workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsPolicyEnterpriseConditionsVariant0 {
-    public init(organizationName: EnterpriseRulesetConditionsOrganizationNameTargetOrganizationName, repositoryName: RepositoryRulesetConditionsRepositoryNameTargetRepositoryName, workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil) {
+public extension ActionsPolicyEnterpriseConditionsVariant0 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.organizationName) else {
+            throw SdkValidationError(
+                field: "organization_name",
+                code: "required",
+                message: "Validation failed for 'organization_name': value is required"
+            )
+        }
+        guard container.contains(.repositoryName) else {
+            throw SdkValidationError(
+                field: "repository_name",
+                code: "required",
+                message: "Validation failed for 'repository_name': value is required"
+            )
+        }
+        organizationName = try container.sdkDecodeRequired(.organizationName)
+        repositoryName = try container.sdkDecodeRequired(.repositoryName)
+        workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
+    }
+}
+
+public extension ActionsPolicyEnterpriseConditionsVariant0 {
+    init(
+        organizationName: EnterpriseRulesetConditionsOrganizationNameTargetOrganizationName,
+        repositoryName: RepositoryRulesetConditionsRepositoryNameTargetRepositoryName,
+        workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil
+    ) {
         (self.organizationName, self.repositoryName) = (organizationName, repositoryName)
         self.workflowPath = workflowPath
     }
@@ -105,20 +131,20 @@ public struct ActionsPolicyLinks: Codable {
     }
 
     init() {
-        (self.`self`, self.html) = (nil, nil)
+        (self.`self`, html) = (nil, nil)
     }
 }
 
-extension ActionsPolicyLinks {
-    public init(from decoder: Decoder) throws {
+public extension ActionsPolicyLinks {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.`self` = try container.sdkDecodeIfPresent(.`self`)
-        self.html = try container.sdkDecodeIfPresent(.html)
+        html = try container.sdkDecodeIfPresent(.html)
     }
 }
 
-extension ActionsPolicyLinks {
-    public init(`self` selfValue: ActionsPolicyLinksSelf? = nil, html: ActionsPolicyLinksHtml? = nil) {
+public extension ActionsPolicyLinks {
+    init(self selfValue: ActionsPolicyLinksSelf? = nil, html: ActionsPolicyLinksHtml? = nil) {
         self.init()
         (self.`self`, self.html) = (selfValue, html)
     }
@@ -133,21 +159,27 @@ public struct ActionsRuleRestrictActionsActorsParameters: Codable {
         case allowedActors = "allowed_actors"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsRuleRestrictActionsActorsParameters {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.allowedActors) else {
-            throw SdkValidationError(field: "allowed_actors", code: "required", message: "Validation failed for 'allowed_actors': value is required")
-        }
-        self.allowedActors = try container.sdkDecodeRequired(.allowedActors)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsRuleRestrictActionsActorsParameters {
-    public init(allowedActors: [ActionsRuleParamsActor]) {
+public extension ActionsRuleRestrictActionsActorsParameters {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.allowedActors) else {
+            throw SdkValidationError(
+                field: "allowed_actors",
+                code: "required",
+                message: "Validation failed for 'allowed_actors': value is required"
+            )
+        }
+        allowedActors = try container.sdkDecodeRequired(.allowedActors)
+    }
+}
+
+public extension ActionsRuleRestrictActionsActorsParameters {
+    init(allowedActors: [ActionsRuleParamsActor]) {
         self.allowedActors = allowedActors
     }
 }
@@ -165,20 +197,23 @@ public struct ActionsSetDefaultWorkflowPermissions: Codable {
     }
 
     init() {
-        (self.defaultWorkflowPermissions, self.canApprovePullRequestReviews) = (nil, nil)
+        (defaultWorkflowPermissions, canApprovePullRequestReviews) = (nil, nil)
     }
 }
 
-extension ActionsSetDefaultWorkflowPermissions {
-    public init(from decoder: Decoder) throws {
+public extension ActionsSetDefaultWorkflowPermissions {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.defaultWorkflowPermissions = try container.sdkDecodeIfPresent(.defaultWorkflowPermissions)
-        self.canApprovePullRequestReviews = try container.sdkDecodeIfPresent(.canApprovePullRequestReviews)
+        defaultWorkflowPermissions = try container.sdkDecodeIfPresent(.defaultWorkflowPermissions)
+        canApprovePullRequestReviews = try container.sdkDecodeIfPresent(.canApprovePullRequestReviews)
     }
 }
 
-extension ActionsSetDefaultWorkflowPermissions {
-    public init(defaultWorkflowPermissions: ActionsDefaultWorkflowPermissions? = nil, canApprovePullRequestReviews: ActionsCanApprovePullRequestReviews? = nil) {
+public extension ActionsSetDefaultWorkflowPermissions {
+    init(
+        defaultWorkflowPermissions: ActionsDefaultWorkflowPermissions? = nil,
+        canApprovePullRequestReviews: ActionsCanApprovePullRequestReviews? = nil
+    ) {
         self.init()
         self.defaultWorkflowPermissions = defaultWorkflowPermissions
         self.canApprovePullRequestReviews = canApprovePullRequestReviews
@@ -197,25 +232,35 @@ public struct ActionsArtifactAndLogRetentionResponse: Codable {
         case maximumAllowedDays = "maximum_allowed_days"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsArtifactAndLogRetentionResponse {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.days) else {
-            throw SdkValidationError(field: "days", code: "required", message: "Validation failed for 'days': value is required")
-        }
-        guard container.contains(.maximumAllowedDays) else {
-            throw SdkValidationError(field: "maximum_allowed_days", code: "required", message: "Validation failed for 'maximum_allowed_days': value is required")
-        }
-        self.days = try container.sdkDecodeRequired(.days)
-        self.maximumAllowedDays = try container.sdkDecodeRequired(.maximumAllowedDays)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsArtifactAndLogRetentionResponse {
-    public init(days: Int, maximumAllowedDays: Int) {
+public extension ActionsArtifactAndLogRetentionResponse {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.days) else {
+            throw SdkValidationError(
+                field: "days",
+                code: "required",
+                message: "Validation failed for 'days': value is required"
+            )
+        }
+        guard container.contains(.maximumAllowedDays) else {
+            throw SdkValidationError(
+                field: "maximum_allowed_days",
+                code: "required",
+                message: "Validation failed for 'maximum_allowed_days': value is required"
+            )
+        }
+        days = try container.sdkDecodeRequired(.days)
+        maximumAllowedDays = try container.sdkDecodeRequired(.maximumAllowedDays)
+    }
+}
+
+public extension ActionsArtifactAndLogRetentionResponse {
+    init(days: Int, maximumAllowedDays: Int) {
         (self.days, self.maximumAllowedDays) = (days, maximumAllowedDays)
     }
 }
@@ -232,19 +277,19 @@ public struct ActionsCacheStorageLimitForOrganization: Codable {
     }
 
     init() {
-        self.maxCacheSizeGb = nil
+        maxCacheSizeGb = nil
     }
 }
 
-extension ActionsCacheStorageLimitForOrganization {
-    public init(from decoder: Decoder) throws {
+public extension ActionsCacheStorageLimitForOrganization {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.maxCacheSizeGb = try container.sdkDecodeIfPresent(.maxCacheSizeGb)
+        maxCacheSizeGb = try container.sdkDecodeIfPresent(.maxCacheSizeGb)
     }
 }
 
-extension ActionsCacheStorageLimitForOrganization {
-    public init(maxCacheSizeGb: Int? = nil) {
+public extension ActionsCacheStorageLimitForOrganization {
+    init(maxCacheSizeGb: Int? = nil) {
         self.init()
         self.maxCacheSizeGb = maxCacheSizeGb
     }
@@ -262,25 +307,34 @@ public struct ActionsRuleRestrictActionsActors: Codable {
         case parameters
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsRuleRestrictActionsActors {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        self.type = try container.sdkDecodeRequired(.type)
-        self.parameters = try container.sdkDecodeIfPresent(.parameters)
-            try sdkValidateRawEnum("type", self.type, ActionsRuleRestrictActionsActorsType.allCases.map(\.rawValue))
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsRuleRestrictActionsActors {
-    public init(type: ActionsRuleRestrictActionsActorsType, parameters: ActionsRuleRestrictActionsActorsParameters? = nil) throws {
+public extension ActionsRuleRestrictActionsActors {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.type) else {
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
+        }
+        type = try container.sdkDecodeRequired(.type)
+        parameters = try container.sdkDecodeIfPresent(.parameters)
+        try sdkValidateRawEnum("type", type, ActionsRuleRestrictActionsActorsType.allCases.map(\.rawValue))
+    }
+}
+
+public extension ActionsRuleRestrictActionsActors {
+    init(
+        type: ActionsRuleRestrictActionsActorsType,
+        parameters: ActionsRuleRestrictActionsActorsParameters? = nil
+    ) throws {
         (self.type, self.parameters) = (type, parameters)
-            try sdkValidateRawEnum("type", self.type, ActionsRuleRestrictActionsActorsType.allCases.map(\.rawValue))
+        try sdkValidateRawEnum("type", self.type, ActionsRuleRestrictActionsActorsType.allCases.map(\.rawValue))
     }
 }
 
@@ -298,19 +352,19 @@ public struct ActionsPolicyWorkflowPathCondition: Codable {
     }
 
     init() {
-        self.workflowPath = nil
+        workflowPath = nil
     }
 }
 
-extension ActionsPolicyWorkflowPathCondition {
-    public init(from decoder: Decoder) throws {
+public extension ActionsPolicyWorkflowPathCondition {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
+        workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
     }
 }
 
-extension ActionsPolicyWorkflowPathCondition {
-    public init(workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil) {
+public extension ActionsPolicyWorkflowPathCondition {
+    init(workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil) {
         self.init()
         self.workflowPath = workflowPath
     }
@@ -331,25 +385,35 @@ public struct ActionsPolicyWorkflowPathConditionWorkflowPath: Codable {
         case exclude
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsPolicyWorkflowPathConditionWorkflowPath {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.include) else {
-            throw SdkValidationError(field: "include", code: "required", message: "Validation failed for 'include': value is required")
-        }
-        guard container.contains(.exclude) else {
-            throw SdkValidationError(field: "exclude", code: "required", message: "Validation failed for 'exclude': value is required")
-        }
-        self.include = try container.sdkDecodeRequired(.include)
-        self.exclude = try container.sdkDecodeRequired(.exclude)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsPolicyWorkflowPathConditionWorkflowPath {
-    public init(include: [String], exclude: [String]) {
+public extension ActionsPolicyWorkflowPathConditionWorkflowPath {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.include) else {
+            throw SdkValidationError(
+                field: "include",
+                code: "required",
+                message: "Validation failed for 'include': value is required"
+            )
+        }
+        guard container.contains(.exclude) else {
+            throw SdkValidationError(
+                field: "exclude",
+                code: "required",
+                message: "Validation failed for 'exclude': value is required"
+            )
+        }
+        include = try container.sdkDecodeRequired(.include)
+        exclude = try container.sdkDecodeRequired(.exclude)
+    }
+}
+
+public extension ActionsPolicyWorkflowPathConditionWorkflowPath {
+    init(include: [String], exclude: [String]) {
         (self.include, self.exclude) = (include, exclude)
     }
 }
@@ -363,21 +427,27 @@ public struct ActionsArtifactAndLogRetention: Codable {
         case days
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsArtifactAndLogRetention {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.days) else {
-            throw SdkValidationError(field: "days", code: "required", message: "Validation failed for 'days': value is required")
-        }
-        self.days = try container.sdkDecodeRequired(.days)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsArtifactAndLogRetention {
-    public init(days: Int) {
+public extension ActionsArtifactAndLogRetention {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.days) else {
+            throw SdkValidationError(
+                field: "days",
+                code: "required",
+                message: "Validation failed for 'days': value is required"
+            )
+        }
+        days = try container.sdkDecodeRequired(.days)
+    }
+}
+
+public extension ActionsArtifactAndLogRetention {
+    init(days: Int) {
         self.days = days
     }
 }
@@ -392,19 +462,19 @@ public struct ActionsPolicyLinksHtml: Codable {
     }
 
     init() {
-        self.href = nil
+        href = nil
     }
 }
 
-extension ActionsPolicyLinksHtml {
-    public init(from decoder: Decoder) throws {
+public extension ActionsPolicyLinksHtml {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.href = try container.sdkDecodeIfPresent(.href)
+        href = try container.sdkDecodeIfPresent(.href)
     }
 }
 
-extension ActionsPolicyLinksHtml {
-    public init(href: String? = nil) {
+public extension ActionsPolicyLinksHtml {
+    init(href: String? = nil) {
         self.init()
         self.href = href
     }
@@ -422,19 +492,19 @@ public struct ActionsCacheRetentionLimitForEnterprise: Codable {
     }
 
     init() {
-        self.maxCacheRetentionDays = nil
+        maxCacheRetentionDays = nil
     }
 }
 
-extension ActionsCacheRetentionLimitForEnterprise {
-    public init(from decoder: Decoder) throws {
+public extension ActionsCacheRetentionLimitForEnterprise {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.maxCacheRetentionDays = try container.sdkDecodeIfPresent(.maxCacheRetentionDays)
+        maxCacheRetentionDays = try container.sdkDecodeIfPresent(.maxCacheRetentionDays)
     }
 }
 
-extension ActionsCacheRetentionLimitForEnterprise {
-    public init(maxCacheRetentionDays: Int? = nil) {
+public extension ActionsCacheRetentionLimitForEnterprise {
+    init(maxCacheRetentionDays: Int? = nil) {
         self.init()
         self.maxCacheRetentionDays = maxCacheRetentionDays
     }
@@ -455,26 +525,40 @@ public struct ActionsPolicyEnterpriseConditionsVariant4: Codable {
         case workflowPath = "workflow_path"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsPolicyEnterpriseConditionsVariant4 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.organizationProperty) else {
-            throw SdkValidationError(field: "organization_property", code: "required", message: "Validation failed for 'organization_property': value is required")
-        }
-        guard container.contains(.repositoryName) else {
-            throw SdkValidationError(field: "repository_name", code: "required", message: "Validation failed for 'repository_name': value is required")
-        }
-        self.organizationProperty = try container.sdkDecodeRequired(.organizationProperty)
-        self.repositoryName = try container.sdkDecodeRequired(.repositoryName)
-        self.workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsPolicyEnterpriseConditionsVariant4 {
-    public init(organizationProperty: EnterpriseRulesetConditionsOrganizationPropertyTargetOrganizaXfd8187e868, repositoryName: RepositoryRulesetConditionsRepositoryNameTargetRepositoryName, workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil) {
+public extension ActionsPolicyEnterpriseConditionsVariant4 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.organizationProperty) else {
+            throw SdkValidationError(
+                field: "organization_property",
+                code: "required",
+                message: "Validation failed for 'organization_property': value is required"
+            )
+        }
+        guard container.contains(.repositoryName) else {
+            throw SdkValidationError(
+                field: "repository_name",
+                code: "required",
+                message: "Validation failed for 'repository_name': value is required"
+            )
+        }
+        organizationProperty = try container.sdkDecodeRequired(.organizationProperty)
+        repositoryName = try container.sdkDecodeRequired(.repositoryName)
+        workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
+    }
+}
+
+public extension ActionsPolicyEnterpriseConditionsVariant4 {
+    init(
+        organizationProperty: EnterpriseRulesetConditionsOrganizationPropertyTargetOrganizaXfd8187e868,
+        repositoryName: RepositoryRulesetConditionsRepositoryNameTargetRepositoryName,
+        workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil
+    ) {
         (self.organizationProperty, self.repositoryName) = (organizationProperty, repositoryName)
         self.workflowPath = workflowPath
     }
@@ -494,25 +578,35 @@ public struct ActionsHostedRunnerLimitsPublicIps: Codable {
         case currentUsage = "current_usage"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsHostedRunnerLimitsPublicIps {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.maximum) else {
-            throw SdkValidationError(field: "maximum", code: "required", message: "Validation failed for 'maximum': value is required")
-        }
-        guard container.contains(.currentUsage) else {
-            throw SdkValidationError(field: "current_usage", code: "required", message: "Validation failed for 'current_usage': value is required")
-        }
-        self.maximum = try container.sdkDecodeRequired(.maximum)
-        self.currentUsage = try container.sdkDecodeRequired(.currentUsage)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsHostedRunnerLimitsPublicIps {
-    public init(maximum: Int, currentUsage: Int) {
+public extension ActionsHostedRunnerLimitsPublicIps {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.maximum) else {
+            throw SdkValidationError(
+                field: "maximum",
+                code: "required",
+                message: "Validation failed for 'maximum': value is required"
+            )
+        }
+        guard container.contains(.currentUsage) else {
+            throw SdkValidationError(
+                field: "current_usage",
+                code: "required",
+                message: "Validation failed for 'current_usage': value is required"
+            )
+        }
+        maximum = try container.sdkDecodeRequired(.maximum)
+        currentUsage = try container.sdkDecodeRequired(.currentUsage)
+    }
+}
+
+public extension ActionsHostedRunnerLimitsPublicIps {
+    init(maximum: Int, currentUsage: Int) {
         (self.maximum, self.currentUsage) = (maximum, currentUsage)
     }
 }
@@ -537,5 +631,7 @@ public struct ActionsForkPrWorkflowsPrivateReposRequest: Codable {
         case requireApprovalForForkPrWorkflows = "require_approval_for_fork_pr_workflows"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }

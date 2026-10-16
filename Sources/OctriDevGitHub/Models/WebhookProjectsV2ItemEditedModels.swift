@@ -3,7 +3,7 @@
 
 import Foundation
 
-// WebhookProjectsV2ItemEdited domain models
+/// WebhookProjectsV2ItemEdited domain models
 /// Typed representation of the `WebhookProjectsV2ItemEdited` API schema.
 public struct WebhookProjectsV2ItemEdited: Codable {
     /// Required enumerated value serialized in the `action` wire field.
@@ -32,35 +32,60 @@ public struct WebhookProjectsV2ItemEdited: Codable {
         case installation
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookProjectsV2ItemEdited {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.action) else {
-            throw SdkValidationError(field: "action", code: "required", message: "Validation failed for 'action': value is required")
-        }
-        guard container.contains(.organization) else {
-            throw SdkValidationError(field: "organization", code: "required", message: "Validation failed for 'organization': value is required")
-        }
-        guard container.contains(.projectsV2Item) else {
-            throw SdkValidationError(field: "projects_v2_item", code: "required", message: "Validation failed for 'projects_v2_item': value is required")
-        }
-        guard container.contains(.sender) else {
-            throw SdkValidationError(field: "sender", code: "required", message: "Validation failed for 'sender': value is required")
-        }
-        self.action = try container.sdkDecodeRequired(.action)
-        self.organization = try container.sdkDecodeRequired(.organization)
-        self.projectsV2Item = try container.sdkDecodeRequired(.projectsV2Item)
-        self.sender = try container.sdkDecodeRequired(.sender)
-        self.changes = try container.sdkDecodeIfPresent(.changes)
-        self.installation = try container.sdkDecodeIfPresent(.installation)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WebhookProjectsV2ItemEdited {
-    public init(action: WebhookProjectsV2ItemEditedAction, organization: OrganizationSimpleWebhooks, projectsV2Item: ProjectsV2Item, sender: SimpleUser, changes: WebhookProjectsV2ItemEditedChanges? = nil, installation: SimpleInstallation? = nil) {
+public extension WebhookProjectsV2ItemEdited {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.action) else {
+            throw SdkValidationError(
+                field: "action",
+                code: "required",
+                message: "Validation failed for 'action': value is required"
+            )
+        }
+        guard container.contains(.organization) else {
+            throw SdkValidationError(
+                field: "organization",
+                code: "required",
+                message: "Validation failed for 'organization': value is required"
+            )
+        }
+        guard container.contains(.projectsV2Item) else {
+            throw SdkValidationError(
+                field: "projects_v2_item",
+                code: "required",
+                message: "Validation failed for 'projects_v2_item': value is required"
+            )
+        }
+        guard container.contains(.sender) else {
+            throw SdkValidationError(
+                field: "sender",
+                code: "required",
+                message: "Validation failed for 'sender': value is required"
+            )
+        }
+        action = try container.sdkDecodeRequired(.action)
+        organization = try container.sdkDecodeRequired(.organization)
+        projectsV2Item = try container.sdkDecodeRequired(.projectsV2Item)
+        sender = try container.sdkDecodeRequired(.sender)
+        changes = try container.sdkDecodeIfPresent(.changes)
+        installation = try container.sdkDecodeIfPresent(.installation)
+    }
+}
+
+public extension WebhookProjectsV2ItemEdited {
+    init(
+        action: WebhookProjectsV2ItemEditedAction,
+        organization: OrganizationSimpleWebhooks,
+        projectsV2Item: ProjectsV2Item,
+        sender: SimpleUser,
+        changes: WebhookProjectsV2ItemEditedChanges? = nil,
+        installation: SimpleInstallation? = nil
+    ) {
         (self.action, self.organization) = (action, organization)
         (self.projectsV2Item, self.sender) = (projectsV2Item, sender)
         (self.changes, self.installation) = (changes, installation)
@@ -71,12 +96,15 @@ extension WebhookProjectsV2ItemEdited {
 public struct WebhookProjectsV2ItemEditedAction: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let edited = WebhookProjectsV2ItemEditedAction(rawValue: "edited")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

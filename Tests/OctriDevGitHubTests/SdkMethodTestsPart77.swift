@@ -26,8 +26,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.getOrgRuleSuites(
-            options: options
-        )
+                options: options
+            )
             XCTFail("reposGetOrgRuleSuites did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -75,9 +75,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.getPages(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\"")
+            )
             XCTFail("reposGetPages did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -147,10 +147,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.getPagesDeployment(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            pagesDeploymentId: decoded("30")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                pagesDeploymentId: decoded("30")
+            )
             XCTFail("reposGetPagesDeployment did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -198,9 +198,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.getPagesHealthCheck(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\"")
+            )
             XCTFail("reposGetPagesHealthCheck did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -248,9 +248,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.getParticipationStats(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\"")
+            )
             XCTFail("reposGetParticipationStats did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -267,17 +267,18 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testReposGetPullRequestReviewProtectionReposGetPullRequestReviewProtectionReachesMockAndDecodesResponse() async throws {
+    func testReposGetPullRequestReviewProtectionReposGetPullRequestReviewProtectionReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
         do {
             _ = try await client.repos.getPullRequestReviewProtection(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            branch: decoded("\"branch\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                branch: decoded("\"branch\"")
+            )
             XCTFail("reposGetPullRequestReviewProtection decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -338,10 +339,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.getReadme(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            ref: decoded("\"ref\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                ref: decoded("\"ref\"")
+            )
             XCTFail("reposGetReadme did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -391,11 +392,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.getReadmeInDirectory(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            dir: decoded("\"dir\""),
-            ref: decoded("\"ref\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                dir: decoded("\"dir\""),
+                ref: decoded("\"ref\"")
+            )
             XCTFail("reposGetReadmeInDirectory did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -465,10 +466,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.getReleaseAsset(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            assetId: decoded("1")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                assetId: decoded("1")
+            )
             XCTFail("reposGetReleaseAsset did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -517,10 +518,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.getReleaseByTag(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            tag: decoded("\"tag\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                tag: decoded("\"tag\"")
+            )
             XCTFail("reposGetReleaseByTag did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
