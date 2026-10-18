@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension IssuesMethods {
-    /// Replaces all labels on an issue with the labels in your request. Supply the label names in a `labels` array or as a direct array; unlike adding labels, this operation removes labels that are not included in the request.
+public extension IssuesMethods {
+    /// Replaces all labels on an issue with the labels in your request. Supply the label names in a `labels` array or
+    /// as a direct array; unlike adding labels, this operation removes labels that are not included in the request.
     ///
     /// Removes any previous labels and sets the new labels for an issue.
     ///
@@ -17,7 +18,36 @@ extension IssuesMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - issueNumber: The number that identifies the issue.
-    public static func issuesSetLabels(config: ClientConfig, owner: String, repo: String, issueNumber: Int, body: IssuesSetLabelsRequestBody? = nil, requestOptions: RequestOptions? = nil) async throws -> [Label] {
-        return try (await sdkRequest("PUT", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/issues/", sdkEncodePathSegment(sdkWireString(issueNumber)), "/labels"].joined(), config: config, rawBody: (try body.map { try sdkEncodeBody($0, contentType: "application/json") }), decoder: .json, operationId: "issuesSetLabels", options: requestOptions, errors: ["301": BasicError.self, "404": BasicError.self, "410": BasicError.self, "422": ValidationError.self])).data
+    static func issuesSetLabels(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        issueNumber: Int,
+        body: IssuesSetLabelsRequestBody? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [Label] {
+        try await (sdkRequest(
+            "PUT",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/issues/",
+                sdkEncodePathSegment(sdkWireString(issueNumber)),
+                "/labels",
+            ].joined(),
+            config: config,
+            rawBody: (body.map { try sdkEncodeBody($0, contentType: "application/json") }),
+            decoder: .json,
+            operationId: "issuesSetLabels",
+            options: requestOptions,
+            errors: [
+                "301": BasicError.self,
+                "404": BasicError.self,
+                "410": BasicError.self,
+                "422": ValidationError.self,
+            ]
+        )).data
     }
 }

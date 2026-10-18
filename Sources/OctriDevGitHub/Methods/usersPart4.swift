@@ -6,24 +6,55 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension UsersMethods {
-    /// Removes a user from the authenticated user's block list. Use `username` to identify the account to unblock; the request returns no content when the removal succeeds.
+public extension UsersMethods {
+    /// Removes a user from the authenticated user's block list. Use `username` to identify the account to unblock; the
+    /// request returns no content when the removal succeeds.
     ///
     /// Unblocks the given user and returns a 204.
     ///
     /// - Parameters:
     /// - username: The handle for the GitHub user account.
-    public static func usersUnblock(config: ClientConfig, username: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/user/blocks/", sdkEncodePathSegment(sdkWireString(username))].joined(), config: config, decoder: .empty, operationId: "usersUnblock", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
+    static func usersUnblock(
+        config: ClientConfig,
+        username: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            ["/user/blocks/", sdkEncodePathSegment(sdkWireString(username))].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "usersUnblock",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 
     /// Sets the visibility for your primary email addresses.
     ///
     /// - Parameters:
     /// - visibility: Denotes whether an email is publicly visible.
-    public static func usersSetPrimaryEmailVisibilityForAuthenticatedUser(config: ClientConfig, visibility: UsersSetPrimaryEmailVisibilityForAuthenticatedUserRequestBodyVisibility, requestOptions: RequestOptions? = nil) async throws -> [Email] {
+    static func usersSetPrimaryEmailVisibilityForAuthenticatedUser(
+        config: ClientConfig,
+        visibility: UsersSetPrimaryEmailVisibilityForAuthenticatedUserRequestBodyVisibility,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [Email] {
         let requestBody = UsersSetPrimaryEmailVisibilityForAuthenticatedUserRequestBody(visibility: visibility)
 
-        return try (await sdkRequest("PATCH", "/user/email/visibility", config: config, body: requestBody, decoder: .json, operationId: "usersSetPrimaryEmailVisibilityForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
+        return try await (sdkRequest(
+            "PATCH",
+            "/user/email/visibility",
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "usersSetPrimaryEmailVisibilityForAuthenticatedUser",
+            options: requestOptions,
+            errors: [
+                "401": BasicError.self,
+                "403": BasicError.self,
+                "404": BasicError.self,
+                "422": ValidationError.self,
+            ]
+        )).data
     }
 }

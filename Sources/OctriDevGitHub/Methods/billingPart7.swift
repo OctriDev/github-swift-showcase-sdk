@@ -6,13 +6,38 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension BillingMethods {
-    /// Deletes a budget by ID for an organization. The authenticated user must be an organization admin or billing manager.
+public extension BillingMethods {
+    /// Deletes a budget by ID for an organization. The authenticated user must be an organization admin or billing
+    /// manager.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - budgetId: The ID corresponding to the budget.
-    public static func billingDeleteBudgetOrg(config: ClientConfig, org: String, budgetId: String, requestOptions: RequestOptions? = nil) async throws -> DeleteBudget {
-        return try (await sdkRequest("DELETE", ["/organizations/", sdkEncodePathSegment(sdkWireString(org)), "/settings/billing/budgets/", sdkEncodePathSegment(sdkWireString(budgetId))].joined(), config: config, decoder: .json, operationId: "billingDeleteBudgetOrg", options: requestOptions, errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self, "503": ServiceUnavailable.self])).data
+    static func billingDeleteBudgetOrg(
+        config: ClientConfig,
+        org: String,
+        budgetId: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> DeleteBudget {
+        try await (sdkRequest(
+            "DELETE",
+            [
+                "/organizations/",
+                sdkEncodePathSegment(sdkWireString(org)),
+                "/settings/billing/budgets/",
+                sdkEncodePathSegment(sdkWireString(budgetId)),
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "billingDeleteBudgetOrg",
+            options: requestOptions,
+            errors: [
+                "400": BasicError.self,
+                "403": BasicError.self,
+                "404": BasicError.self,
+                "500": BasicError.self,
+                "503": ServiceUnavailable.self,
+            ]
+        )).data
     }
 }

@@ -3,7 +3,7 @@
 
 import Foundation
 
-// WebhookPackagePublished domain models
+/// WebhookPackagePublished domain models
 /// Optional object value serialized in the `npm_metadata` wire field.
 public struct WebhookPackagePublishedPackagePackageVersionNpmMetadata: Codable {
     /// Optional `string` value serialized in the `name` wire field.
@@ -122,62 +122,100 @@ public struct WebhookPackagePublishedPackagePackageVersionNpmMetadata: Codable {
     }
 
     init() {
-        (self.name, self.version, self.npmUser, self.author, self.bugs) = (nil, nil, nil, nil, nil)
-        (self.dependencies, self.devDependencies, self.peerDependencies, self.optionalDependencies, self.description) = (nil, nil, nil, nil, nil)
-        (self.dist, self.gitHead, self.homepage, self.license, self.main) = (nil, nil, nil, nil, nil)
-        (self.repository, self.scripts, self.id, self.nodeVersion, self.npmVersion) = (nil, nil, nil, nil, nil)
-        (self.hasShrinkwrap, self.maintainers, self.contributors, self.engines, self.keywords) = (nil, nil, nil, nil, nil)
-        (self.files, self.bin, self.man, self.directories, self.os) = (nil, nil, nil, nil, nil)
-        (self.cpu, self.readme, self.installationCommand, self.releaseId, self.commitOid) = (nil, nil, nil, nil, nil)
-        (self.publishedViaActions, self.deletedById) = (nil, nil)
+        (name, version, npmUser, author, bugs) = (nil, nil, nil, nil, nil)
+        (dependencies, devDependencies, peerDependencies, optionalDependencies, description) = (nil, nil, nil, nil, nil)
+        (dist, gitHead, homepage, license, main) = (nil, nil, nil, nil, nil)
+        (repository, scripts, id, nodeVersion, npmVersion) = (nil, nil, nil, nil, nil)
+        (hasShrinkwrap, maintainers, contributors, engines, keywords) = (nil, nil, nil, nil, nil)
+        (files, bin, man, directories, os) = (nil, nil, nil, nil, nil)
+        (cpu, readme, installationCommand, releaseId, commitOid) = (nil, nil, nil, nil, nil)
+        (publishedViaActions, deletedById) = (nil, nil)
     }
 }
 
-extension WebhookPackagePublishedPackagePackageVersionNpmMetadata {
-    public init(from decoder: Decoder) throws {
+public extension WebhookPackagePublishedPackagePackageVersionNpmMetadata {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.version = try container.sdkDecodeIfPresent(.version)
-        self.npmUser = try container.sdkDecodeIfPresent(.npmUser)
-        self.author = try container.sdkDecodeIfPresent(.author)
-        self.bugs = try container.sdkDecodeIfPresent(.bugs)
-        self.dependencies = try container.sdkDecodeIfPresent(.dependencies)
-        self.devDependencies = try container.sdkDecodeIfPresent(.devDependencies)
-        self.peerDependencies = try container.sdkDecodeIfPresent(.peerDependencies)
-        self.optionalDependencies = try container.sdkDecodeIfPresent(.optionalDependencies)
-        self.description = try container.sdkDecodeIfPresent(.description)
-        self.dist = try container.sdkDecodeIfPresent(.dist)
-        self.gitHead = try container.sdkDecodeIfPresent(.gitHead)
-        self.homepage = try container.sdkDecodeIfPresent(.homepage)
-        self.license = try container.sdkDecodeIfPresent(.license)
-        self.main = try container.sdkDecodeIfPresent(.main)
-        self.repository = try container.sdkDecodeIfPresent(.repository)
-        self.scripts = try container.sdkDecodeIfPresent(.scripts)
-        self.id = try container.sdkDecodeIfPresent(.id)
-        self.nodeVersion = try container.sdkDecodeIfPresent(.nodeVersion)
-        self.npmVersion = try container.sdkDecodeIfPresent(.npmVersion)
-        self.hasShrinkwrap = try container.sdkDecodeIfPresent(.hasShrinkwrap)
-        self.maintainers = try container.sdkDecodeIfPresent(.maintainers)
-        self.contributors = try container.sdkDecodeIfPresent(.contributors)
-        self.engines = try container.sdkDecodeIfPresent(.engines)
-        self.keywords = try container.sdkDecodeIfPresent(.keywords)
-        self.files = try container.sdkDecodeIfPresent(.files)
-        self.bin = try container.sdkDecodeIfPresent(.bin)
-        self.man = try container.sdkDecodeIfPresent(.man)
-        self.directories = try container.sdkDecodeIfPresent(.directories)
-        self.os = try container.sdkDecodeIfPresent(.os)
-        self.cpu = try container.sdkDecodeIfPresent(.cpu)
-        self.readme = try container.sdkDecodeIfPresent(.readme)
-        self.installationCommand = try container.sdkDecodeIfPresent(.installationCommand)
-        self.releaseId = try container.sdkDecodeIfPresent(.releaseId)
-        self.commitOid = try container.sdkDecodeIfPresent(.commitOid)
-        self.publishedViaActions = try container.sdkDecodeIfPresent(.publishedViaActions)
-        self.deletedById = try container.sdkDecodeIfPresent(.deletedById)
+        name = try container.sdkDecodeIfPresent(.name)
+        version = try container.sdkDecodeIfPresent(.version)
+        npmUser = try container.sdkDecodeIfPresent(.npmUser)
+        author = try container.sdkDecodeIfPresent(.author)
+        bugs = try container.sdkDecodeIfPresent(.bugs)
+        dependencies = try container.sdkDecodeIfPresent(.dependencies)
+        devDependencies = try container.sdkDecodeIfPresent(.devDependencies)
+        peerDependencies = try container.sdkDecodeIfPresent(.peerDependencies)
+        optionalDependencies = try container.sdkDecodeIfPresent(.optionalDependencies)
+        description = try container.sdkDecodeIfPresent(.description)
+        dist = try container.sdkDecodeIfPresent(.dist)
+        gitHead = try container.sdkDecodeIfPresent(.gitHead)
+        homepage = try container.sdkDecodeIfPresent(.homepage)
+        license = try container.sdkDecodeIfPresent(.license)
+        main = try container.sdkDecodeIfPresent(.main)
+        repository = try container.sdkDecodeIfPresent(.repository)
+        scripts = try container.sdkDecodeIfPresent(.scripts)
+        id = try container.sdkDecodeIfPresent(.id)
+        nodeVersion = try container.sdkDecodeIfPresent(.nodeVersion)
+        npmVersion = try container.sdkDecodeIfPresent(.npmVersion)
+        hasShrinkwrap = try container.sdkDecodeIfPresent(.hasShrinkwrap)
+        maintainers = try container.sdkDecodeIfPresent(.maintainers)
+        contributors = try container.sdkDecodeIfPresent(.contributors)
+        engines = try container.sdkDecodeIfPresent(.engines)
+        keywords = try container.sdkDecodeIfPresent(.keywords)
+        files = try container.sdkDecodeIfPresent(.files)
+        bin = try container.sdkDecodeIfPresent(.bin)
+        man = try container.sdkDecodeIfPresent(.man)
+        directories = try container.sdkDecodeIfPresent(.directories)
+        os = try container.sdkDecodeIfPresent(.os)
+        cpu = try container.sdkDecodeIfPresent(.cpu)
+        readme = try container.sdkDecodeIfPresent(.readme)
+        installationCommand = try container.sdkDecodeIfPresent(.installationCommand)
+        releaseId = try container.sdkDecodeIfPresent(.releaseId)
+        commitOid = try container.sdkDecodeIfPresent(.commitOid)
+        publishedViaActions = try container.sdkDecodeIfPresent(.publishedViaActions)
+        deletedById = try container.sdkDecodeIfPresent(.deletedById)
     }
 }
 
-extension WebhookPackagePublishedPackagePackageVersionNpmMetadata {
-    public init(name: String? = nil, version: String? = nil, npmUser: String? = nil, author: [String: JSONValue]? = nil, bugs: [String: JSONValue]? = nil, dependencies: [String: JSONValue]? = nil, devDependencies: [String: JSONValue]? = nil, peerDependencies: [String: JSONValue]? = nil, optionalDependencies: [String: JSONValue]? = nil, description: String? = nil, dist: [String: JSONValue]? = nil, gitHead: String? = nil, homepage: String? = nil, license: String? = nil, main: String? = nil, repository: [String: JSONValue]? = nil, scripts: [String: JSONValue]? = nil, id: String? = nil, nodeVersion: String? = nil, npmVersion: String? = nil, hasShrinkwrap: Bool? = nil, maintainers: [[String: JSONValue]]? = nil, contributors: [[String: JSONValue]]? = nil, engines: [String: JSONValue]? = nil, keywords: [String]? = nil, files: [String]? = nil, bin: [String: JSONValue]? = nil, man: [String: JSONValue]? = nil, directories: [String: JSONValue]? = nil, os: [String]? = nil, cpu: [String]? = nil, readme: String? = nil, installationCommand: String? = nil, releaseId: Int? = nil, commitOid: String? = nil, publishedViaActions: Bool? = nil, deletedById: Int? = nil) {
+public extension WebhookPackagePublishedPackagePackageVersionNpmMetadata {
+    init(
+        name: String? = nil,
+        version: String? = nil,
+        npmUser: String? = nil,
+        author: [String: JSONValue]? = nil,
+        bugs: [String: JSONValue]? = nil,
+        dependencies: [String: JSONValue]? = nil,
+        devDependencies: [String: JSONValue]? = nil,
+        peerDependencies: [String: JSONValue]? = nil,
+        optionalDependencies: [String: JSONValue]? = nil,
+        description: String? = nil,
+        dist: [String: JSONValue]? = nil,
+        gitHead: String? = nil,
+        homepage: String? = nil,
+        license: String? = nil,
+        main: String? = nil,
+        repository: [String: JSONValue]? = nil,
+        scripts: [String: JSONValue]? = nil,
+        id: String? = nil,
+        nodeVersion: String? = nil,
+        npmVersion: String? = nil,
+        hasShrinkwrap: Bool? = nil,
+        maintainers: [[String: JSONValue]]? = nil,
+        contributors: [[String: JSONValue]]? = nil,
+        engines: [String: JSONValue]? = nil,
+        keywords: [String]? = nil,
+        files: [String]? = nil,
+        bin: [String: JSONValue]? = nil,
+        man: [String: JSONValue]? = nil,
+        directories: [String: JSONValue]? = nil,
+        os: [String]? = nil,
+        cpu: [String]? = nil,
+        readme: String? = nil,
+        installationCommand: String? = nil,
+        releaseId: Int? = nil,
+        commitOid: String? = nil,
+        publishedViaActions: Bool? = nil,
+        deletedById: Int? = nil
+    ) {
         self.init()
         (self.name, self.version) = (name, version)
         (self.npmUser, self.author) = (npmUser, author)
@@ -222,44 +260,66 @@ public struct WebhookPackagePublishedPackageRegistry: Codable {
         case vendor
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookPackagePublishedPackageRegistry {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.aboutUrl) else {
-            throw SdkValidationError(field: "about_url", code: "required", message: "Validation failed for 'about_url': value is required")
-        }
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        guard container.contains(.url) else {
-            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
-        }
-        guard container.contains(.vendor) else {
-            throw SdkValidationError(field: "vendor", code: "required", message: "Validation failed for 'vendor': value is required")
-        }
-        self.aboutUrl = try container.sdkDecodeRequired(.aboutUrl)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.type = try container.sdkDecodeRequired(.type)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.vendor = try container.sdkDecodeRequired(.vendor)
-            try sdkValidateUri("about_url", self.aboutUrl)
-            try sdkValidateUri("url", self.url)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WebhookPackagePublishedPackageRegistry {
-    public init(aboutUrl: String, name: String, type: String, url: String, vendor: String) throws {
+public extension WebhookPackagePublishedPackageRegistry {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.aboutUrl) else {
+            throw SdkValidationError(
+                field: "about_url",
+                code: "required",
+                message: "Validation failed for 'about_url': value is required"
+            )
+        }
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        guard container.contains(.type) else {
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
+        }
+        guard container.contains(.url) else {
+            throw SdkValidationError(
+                field: "url",
+                code: "required",
+                message: "Validation failed for 'url': value is required"
+            )
+        }
+        guard container.contains(.vendor) else {
+            throw SdkValidationError(
+                field: "vendor",
+                code: "required",
+                message: "Validation failed for 'vendor': value is required"
+            )
+        }
+        aboutUrl = try container.sdkDecodeRequired(.aboutUrl)
+        name = try container.sdkDecodeRequired(.name)
+        type = try container.sdkDecodeRequired(.type)
+        url = try container.sdkDecodeRequired(.url)
+        vendor = try container.sdkDecodeRequired(.vendor)
+        try sdkValidateUri("about_url", aboutUrl)
+        try sdkValidateUri("url", url)
+    }
+}
+
+public extension WebhookPackagePublishedPackageRegistry {
+    init(aboutUrl: String, name: String, type: String, url: String, vendor: String) throws {
         (self.aboutUrl, self.name) = (aboutUrl, name)
         (self.type, self.url) = (type, url)
         self.vendor = vendor
-            try sdkValidateUri("about_url", self.aboutUrl)
-            try sdkValidateUri("url", self.url)
+        try sdkValidateUri("about_url", self.aboutUrl)
+        try sdkValidateUri("url", self.url)
     }
 }
 
@@ -335,46 +395,79 @@ public struct WebhookPackagePublishedPackagePackageVersionAuthor: Codable {
         case userViewType = "user_view_type"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension WebhookPackagePublishedPackagePackageVersionAuthor {
-    public init(from decoder: Decoder) throws {
+public extension WebhookPackagePublishedPackagePackageVersionAuthor {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
         }
         guard container.contains(.login) else {
-            throw SdkValidationError(field: "login", code: "required", message: "Validation failed for 'login': value is required")
+            throw SdkValidationError(
+                field: "login",
+                code: "required",
+                message: "Validation failed for 'login': value is required"
+            )
         }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.login = try container.sdkDecodeRequired(.login)
-        self.avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
-        self.deleted = try container.sdkDecodeIfPresent(.deleted)
-        self.email = try container.sdkDecodeIfPresent(.email)
-        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
-        self.followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
-        self.followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
-        self.gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
-        self.gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
-        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        self.organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
-        self.receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
-        self.reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
-        self.siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
-        self.starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
-        self.subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
-        self.type = try container.sdkDecodeIfPresent(.type)
-        self.url = try container.sdkDecodeIfPresent(.url)
-        self.userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        id = try container.sdkDecodeRequired(.id)
+        login = try container.sdkDecodeRequired(.login)
+        avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
+        deleted = try container.sdkDecodeIfPresent(.deleted)
+        email = try container.sdkDecodeIfPresent(.email)
+        eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
+        followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
+        gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
+        gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
+        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        name = try container.sdkDecodeIfPresent(.name)
+        nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
+        receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
+        reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
+        siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
+        starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
+        subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
+        type = try container.sdkDecodeIfPresent(.type)
+        url = try container.sdkDecodeIfPresent(.url)
+        userViewType = try container.sdkDecodeIfPresent(.userViewType)
         try sdkValidateConstraints()
     }
 }
 
-extension WebhookPackagePublishedPackagePackageVersionAuthor {
-    public init(id: Int, login: String, avatarUrl: String? = nil, deleted: Bool? = nil, email: String? = nil, eventsUrl: String? = nil, followersUrl: String? = nil, followingUrl: String? = nil, gistsUrl: String? = nil, gravatarId: String? = nil, htmlUrl: String? = nil, name: String? = nil, nodeId: String? = nil, organizationsUrl: String? = nil, receivedEventsUrl: String? = nil, reposUrl: String? = nil, siteAdmin: Bool? = nil, starredUrl: String? = nil, subscriptionsUrl: String? = nil, type: WebhookPackagePublishedPackagePackageVersionAuthorType? = nil, url: String? = nil, userViewType: String? = nil) throws {
+public extension WebhookPackagePublishedPackagePackageVersionAuthor {
+    init(
+        id: Int,
+        login: String,
+        avatarUrl: String? = nil,
+        deleted: Bool? = nil,
+        email: String? = nil,
+        eventsUrl: String? = nil,
+        followersUrl: String? = nil,
+        followingUrl: String? = nil,
+        gistsUrl: String? = nil,
+        gravatarId: String? = nil,
+        htmlUrl: String? = nil,
+        name: String? = nil,
+        nodeId: String? = nil,
+        organizationsUrl: String? = nil,
+        receivedEventsUrl: String? = nil,
+        reposUrl: String? = nil,
+        siteAdmin: Bool? = nil,
+        starredUrl: String? = nil,
+        subscriptionsUrl: String? = nil,
+        type: WebhookPackagePublishedPackagePackageVersionAuthorType? = nil,
+        url: String? = nil,
+        userViewType: String? = nil
+    ) throws {
         (self.id, self.login) = (id, login)
         (self.avatarUrl, self.deleted) = (avatarUrl, deleted)
         (self.email, self.eventsUrl) = (email, eventsUrl)
@@ -392,28 +485,28 @@ extension WebhookPackagePublishedPackagePackageVersionAuthor {
 
 extension WebhookPackagePublishedPackagePackageVersionAuthor {
     func sdkValidateConstraints() throws {
-        if let value = self.avatarUrl {
+        if let value = avatarUrl {
             try sdkValidateUri("avatar_url", value)
         }
-        if let value = self.followersUrl {
+        if let value = followersUrl {
             try sdkValidateUri("followers_url", value)
         }
-        if let value = self.htmlUrl {
+        if let value = htmlUrl {
             try sdkValidateUri("html_url", value)
         }
-        if let value = self.organizationsUrl {
+        if let value = organizationsUrl {
             try sdkValidateUri("organizations_url", value)
         }
-        if let value = self.receivedEventsUrl {
+        if let value = receivedEventsUrl {
             try sdkValidateUri("received_events_url", value)
         }
-        if let value = self.reposUrl {
+        if let value = reposUrl {
             try sdkValidateUri("repos_url", value)
         }
-        if let value = self.subscriptionsUrl {
+        if let value = subscriptionsUrl {
             try sdkValidateUri("subscriptions_url", value)
         }
-        if let value = self.url {
+        if let value = url {
             try sdkValidateUri("url", value)
         }
     }
@@ -423,12 +516,15 @@ extension WebhookPackagePublishedPackagePackageVersionAuthor {
 public struct WebhookPackagePublishedAction: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let published = WebhookPackagePublishedAction(rawValue: "published")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -438,17 +534,22 @@ public struct WebhookPackagePublishedAction: RawRepresentable, Hashable, Codable
 }
 
 /// Optional enumerated value serialized in the `type` wire field.
-public struct WebhookPackagePublishedPackagePackageVersionReleaseAuthorType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookPackagePublishedPackagePackageVersionReleaseAuthorType: RawRepresentable, Hashable, Codable,
+    Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = WebhookPackagePublishedPackagePackageVersionReleaseAuthorType(rawValue: "Bot")
     public static let user = WebhookPackagePublishedPackagePackageVersionReleaseAuthorType(rawValue: "User")
-    public static let organization = WebhookPackagePublishedPackagePackageVersionReleaseAuthorType(rawValue: "Organization")
+    public static let organization =
+        WebhookPackagePublishedPackagePackageVersionReleaseAuthorType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -458,17 +559,21 @@ public struct WebhookPackagePublishedPackagePackageVersionReleaseAuthorType: Raw
 }
 
 /// Optional enumerated value serialized in the `type` wire field.
-public struct WebhookPackagePublishedPackageOwnerType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookPackagePublishedPackageOwnerType: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = WebhookPackagePublishedPackageOwnerType(rawValue: "Bot")
     public static let user = WebhookPackagePublishedPackageOwnerType(rawValue: "User")
     public static let organization = WebhookPackagePublishedPackageOwnerType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

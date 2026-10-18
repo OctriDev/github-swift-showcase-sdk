@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension MigrationsMethods {
-    public struct MigrationsStartForAuthenticatedUserOptions: Codable {
+public extension MigrationsMethods {
+    struct MigrationsStartForAuthenticatedUserOptions: Codable {
         public var repositories: [String]
         public var lockRepositories: Bool?
         public var excludeMetadata: Bool?
@@ -23,7 +23,9 @@ extension MigrationsMethods {
         }
     }
 
-    /// Starts a migration for the authenticated user using the specified repositories. Set `org_metadata_only` to true to include only organization metadata; in this mode, `repositories` must be empty and other flags are ignored. A 201 response returns the created migration record.
+    /// Starts a migration for the authenticated user using the specified repositories. Set `org_metadata_only` to true
+    /// to include only organization metadata; in this mode, `repositories` must be empty and other flags are ignored. A
+    /// 201 response returns the created migration record.
     ///
     /// Initiates the generation of a user migration archive.
     ///
@@ -41,9 +43,22 @@ extension MigrationsMethods {
     /// - orgMetadataOnly: Indicates whether this should only include organization
     ///   metadata (repositories array should be empty and will ignore other flags).
     /// - exclude: Exclude attributes from the API response to improve performance
-    public static func migrationsStartForAuthenticatedUser(config: ClientConfig, options: MigrationsStartForAuthenticatedUserOptions, requestOptions: RequestOptions? = nil) async throws -> Migration {
+    static func migrationsStartForAuthenticatedUser(
+        config: ClientConfig,
+        options: MigrationsStartForAuthenticatedUserOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Migration {
         let requestBody = MigrationsStartForAuthenticatedUserRequestBody(options: options)
 
-        return try (await sdkRequest("POST", "/user/migrations", config: config, body: requestBody, decoder: .json, operationId: "migrationsStartForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "422": ValidationError.self])).data
+        return try await (sdkRequest(
+            "POST",
+            "/user/migrations",
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "migrationsStartForAuthenticatedUser",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self, "422": ValidationError.self]
+        )).data
     }
 }

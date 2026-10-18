@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension UsersMethods {
+public extension UsersMethods {
     /// Lists the social accounts linked to the authenticated user. Use `page` and `per_page` to paginate the results.
     ///
     /// Lists all of your social accounts.
@@ -20,20 +20,53 @@ extension UsersMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func usersListSocialAccountsForAuthenticatedUser(config: ClientConfig, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [SocialAccount] {
-        return try (await sdkRequest("GET", "/user/social_accounts", config: config, query: [
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "usersListSocialAccountsForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
+    static func usersListSocialAccountsForAuthenticatedUser(
+        config: ClientConfig,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [SocialAccount] {
+        try await (sdkRequest(
+            "GET",
+            "/user/social_accounts",
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "usersListSocialAccountsForAuthenticatedUser",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 
-    /// Add one or more social accounts to the authenticated user's profile. OAuth app tokens and personal access tokens (classic) need the `user` scope to use this endpoint.
+    /// Add one or more social accounts to the authenticated user's profile. OAuth app tokens and personal access tokens
+    /// (classic) need the `user` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - accountUrls: Full URLs for the social media profiles to add.
-    public static func usersAddSocialAccountForAuthenticatedUser(config: ClientConfig, accountUrls: [String], requestOptions: RequestOptions? = nil) async throws -> [SocialAccount] {
+    static func usersAddSocialAccountForAuthenticatedUser(
+        config: ClientConfig,
+        accountUrls: [String],
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [SocialAccount] {
         let requestBody = UsersAddSocialAccountForAuthenticatedUserRequestBody(accountUrls: accountUrls)
 
-        return try (await sdkRequest("POST", "/user/social_accounts", config: config, body: requestBody, decoder: .json, operationId: "usersAddSocialAccountForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
+        return try await (sdkRequest(
+            "POST",
+            "/user/social_accounts",
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "usersAddSocialAccountForAuthenticatedUser",
+            options: requestOptions,
+            errors: [
+                "401": BasicError.self,
+                "403": BasicError.self,
+                "404": BasicError.self,
+                "422": ValidationError.self,
+            ]
+        )).data
     }
 }

@@ -6,14 +6,34 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension GistsMethods {
-    /// Retrieves a specified revision of a gist. Supply `gist_id` and `sha` to identify the gist and revision; the `application/vnd.github.raw+json` media type returns the raw Markdown and is the default when you do not specify a media type.
+public extension GistsMethods {
+    /// Retrieves a specified revision of a gist. Supply `gist_id` and `sha` to identify the gist and revision; the
+    /// `application/vnd.github.raw+json` media type returns the raw Markdown and is the default when you do not specify
+    /// a media type.
     ///
-    /// Gets a specified gist revision. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.raw+json`**: Returns the raw markdown. This is the default if you do not pass any specific media type.
+    /// Gets a specified gist revision. This endpoint supports the following custom media types. For more information,
+    /// see "[Media
+    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
+    /// **`application/vnd.github.raw+json`**: Returns the raw markdown. This is the default if you do not pass any
+    /// specific media type.
     ///
     /// - Parameters:
     /// - gistId: The unique identifier of the gist.
-    public static func gistsGetRevision(config: ClientConfig, gistId: String, sha: String, requestOptions: RequestOptions? = nil) async throws -> GistSimple {
-        return try (await sdkRequest("GET", ["/gists/", sdkEncodePathSegment(sdkWireString(gistId)), "/", sdkEncodePathSegment(sdkWireString(sha))].joined(), config: config, decoder: .json, operationId: "gistsGetRevision", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
+    static func gistsGetRevision(
+        config: ClientConfig,
+        gistId: String,
+        sha: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> GistSimple {
+        try await (sdkRequest(
+            "GET",
+            ["/gists/", sdkEncodePathSegment(sdkWireString(gistId)), "/", sdkEncodePathSegment(sdkWireString(sha))]
+                .joined(),
+            config: config,
+            decoder: .json,
+            operationId: "gistsGetRevision",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self]
+        )).data
     }
 }

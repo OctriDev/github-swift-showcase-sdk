@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension UsersMethods {
-    /// Lists all of your email addresses, and specifies which one is visible to the public. OAuth app tokens and personal access tokens (classic) need the `user:email` scope to use this endpoint.
+public extension UsersMethods {
+    /// Lists all of your email addresses, and specifies which one is visible to the public. OAuth app tokens and
+    /// personal access tokens (classic) need the `user:email` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - perPage: The number of results per page (max 100). For more information,
@@ -18,24 +19,78 @@ extension UsersMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func usersListEmailsForAuthenticatedUser(config: ClientConfig, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [Email] {
-        return try (await sdkRequest("GET", "/user/emails", config: config, query: [
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "usersListEmailsForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
+    static func usersListEmailsForAuthenticatedUser(
+        config: ClientConfig,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [Email] {
+        try await (sdkRequest(
+            "GET",
+            "/user/emails",
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "usersListEmailsForAuthenticatedUser",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 
-    /// Adds one or more email addresses to the authenticated user's account. Supply at least one address in `emails`; the request can also be a direct email string or array instead of an object. OAuth app tokens and personal access tokens (classic) need the `user` scope.
+    /// Adds one or more email addresses to the authenticated user's account. Supply at least one address in `emails`;
+    /// the request can also be a direct email string or array instead of an object. OAuth app tokens and personal
+    /// access tokens (classic) need the `user` scope.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `user` scope to use this endpoint.
-    public static func usersAddEmailForAuthenticatedUser(config: ClientConfig, body: UsersAddEmailForAuthenticatedUserRequestBody? = nil, requestOptions: RequestOptions? = nil) async throws -> [Email] {
-        return try (await sdkRequest("POST", "/user/emails", config: config, rawBody: (try body.map { try sdkEncodeBody($0, contentType: "application/json") }), decoder: .json, operationId: "usersAddEmailForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
+    static func usersAddEmailForAuthenticatedUser(
+        config: ClientConfig,
+        body: UsersAddEmailForAuthenticatedUserRequestBody? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [Email] {
+        try await (sdkRequest(
+            "POST",
+            "/user/emails",
+            config: config,
+            rawBody: (body.map { try sdkEncodeBody($0, contentType: "application/json") }),
+            decoder: .json,
+            operationId: "usersAddEmailForAuthenticatedUser",
+            options: requestOptions,
+            errors: [
+                "401": BasicError.self,
+                "403": BasicError.self,
+                "404": BasicError.self,
+                "422": ValidationError.self,
+            ]
+        )).data
     }
 
-    /// Removes one or more email addresses from the authenticated user's account. Supply at least one address in `emails`; the request can also be a direct email string or array instead of an object. OAuth app tokens and personal access tokens (classic) need the `user` scope.
+    /// Removes one or more email addresses from the authenticated user's account. Supply at least one address in
+    /// `emails`; the request can also be a direct email string or array instead of an object. OAuth app tokens and
+    /// personal access tokens (classic) need the `user` scope.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `user` scope to use this endpoint.
-    public static func usersDeleteEmailForAuthenticatedUser(config: ClientConfig, body: UsersDeleteEmailForAuthenticatedUserRequestBody? = nil, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", "/user/emails", config: config, rawBody: (try body.map { try sdkEncodeBody($0, contentType: "application/json") }), decoder: .empty, operationId: "usersDeleteEmailForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
+    static func usersDeleteEmailForAuthenticatedUser(
+        config: ClientConfig,
+        body: UsersDeleteEmailForAuthenticatedUserRequestBody? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            "/user/emails",
+            config: config,
+            rawBody: (body.map { try sdkEncodeBody($0, contentType: "application/json") }),
+            decoder: .empty,
+            operationId: "usersDeleteEmailForAuthenticatedUser",
+            options: requestOptions,
+            errors: [
+                "401": BasicError.self,
+                "403": BasicError.self,
+                "404": BasicError.self,
+                "422": ValidationError.self,
+            ]
+        )).data
     }
 }

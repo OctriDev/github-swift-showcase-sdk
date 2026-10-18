@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension BillingMethods {
-    public struct BillingCreateOrganizationBudgetOptions: Codable {
+public extension BillingMethods {
+    struct BillingCreateOrganizationBudgetOptions: Codable {
         public var org: String
         public var budgetAmount: Int?
         public var preventFurtherUsage: Bool?
@@ -24,9 +24,12 @@ extension BillingMethods {
         }
     }
 
-    /// Creates a budget for an organization. Use `budget_scope`, `budget_amount`, and `budget_product_sku` to define what the budget covers; `user` is required when the scope is `user`, and `expires_at` is supported only for user-scoped budgets. The authenticated user must be an organization admin or billing manager.
+    /// Creates a budget for an organization. Use `budget_scope`, `budget_amount`, and `budget_product_sku` to define
+    /// what the budget covers; `user` is required when the scope is `user`, and `expires_at` is supported only for
+    /// user-scoped budgets. The authenticated user must be an organization admin or billing manager.
     ///
-    /// Creates a new budget for an organization. The authenticated user must be an organization admin or billing manager.
+    /// Creates a new budget for an organization. The authenticated user must be an organization admin or billing
+    /// manager.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
@@ -56,13 +59,33 @@ extension BillingMethods {
     /// - expiresAt: The date the budget will expire in `YYYY-MM-DD` format. Only
     ///   dates in the future are accepted. If not provided, the budget will not
     ///   expire. Only supported for budgets with `budget_scope` of `user`
-    public static func billingCreateOrganizationBudget(config: ClientConfig, options: BillingCreateOrganizationBudgetOptions, requestOptions: RequestOptions? = nil) async throws -> CreateBudget {
+    static func billingCreateOrganizationBudget(
+        config: ClientConfig,
+        options: BillingCreateOrganizationBudgetOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CreateBudget {
         if let expiresAt = options.expiresAt {
             try sdkValidateDate("expires_at", expiresAt)
         }
 
         let requestBody = BillingCreateOrganizationBudgetRequestBody(options: options)
 
-        return try (await sdkRequest("POST", ["/organizations/", sdkEncodePathSegment(sdkWireString(options.org)), "/settings/billing/budgets"].joined(), config: config, body: requestBody, decoder: .json, operationId: "billingCreateOrganizationBudget", options: requestOptions, errors: ["400": BasicError.self, "401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "422": ValidationError.self, "500": BasicError.self])).data
+        return try await (sdkRequest(
+            "POST",
+            ["/organizations/", sdkEncodePathSegment(sdkWireString(options.org)), "/settings/billing/budgets"].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "billingCreateOrganizationBudget",
+            options: requestOptions,
+            errors: [
+                "400": BasicError.self,
+                "401": BasicError.self,
+                "403": BasicError.self,
+                "404": BasicError.self,
+                "422": ValidationError.self,
+                "500": BasicError.self,
+            ]
+        )).data
     }
 }

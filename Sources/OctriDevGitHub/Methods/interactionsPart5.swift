@@ -6,26 +6,68 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension InteractionsMethods {
-    /// Removes all interaction restrictions from the given repository. You must have owner or admin access to remove restrictions. If the interaction limit is set for the user or organization that owns this repository, you will receive a `409 Conflict` response and will not be able to use this endpoint to change the interaction limit for a single repository.
+public extension InteractionsMethods {
+    /// Removes all interaction restrictions from the given repository. You must have owner or admin access to remove
+    /// restrictions. If the interaction limit is set for the user or organization that owns this repository, you will
+    /// receive a `409 Conflict` response and will not be able to use this endpoint to change the interaction limit for
+    /// a single repository.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    public static func interactionsRemoveRestrictionsForRepo(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/interaction-limits"].joined(), config: config, decoder: .empty, operationId: "interactionsRemoveRestrictionsForRepo", options: requestOptions)).data
+    static func interactionsRemoveRestrictionsForRepo(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/interaction-limits",
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "interactionsRemoveRestrictionsForRepo",
+            options: requestOptions
+        )).data
     }
 
-    /// Lists the users that are on the pull request creation cap bypass list for a repository. Users on this list can create pull requests regardless of any configured pull request creation cap. Only users with maintainer permissions can view the bypass list.
+    /// Lists the users that are on the pull request creation cap bypass list for a repository. Users on this list can
+    /// create pull requests regardless of any configured pull request creation cap. Only users with maintainer
+    /// permissions can view the bypass list.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    public static func interactionsGetPullRequestBypassListForRepo(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> [SimpleUser] {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/interaction-limits/pulls/bypass-list"].joined(), config: config, decoder: .json, operationId: "interactionsGetPullRequestBypassListForRepo", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+    static func interactionsGetPullRequestBypassListForRepo(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [SimpleUser] {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/interaction-limits/pulls/bypass-list",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "interactionsGetPullRequestBypassListForRepo",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 }

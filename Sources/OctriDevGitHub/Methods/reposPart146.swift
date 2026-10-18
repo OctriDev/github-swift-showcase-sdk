@@ -6,8 +6,10 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ReposMethods {
-    /// Lists historical versions of a repository ruleset. Use `ruleset_id` to select the ruleset and `page` and `per_page` to navigate its history. Each result identifies the version, the actor who updated it, and the update time.
+public extension ReposMethods {
+    /// Lists historical versions of a repository ruleset. Use `ruleset_id` to select the ruleset and `page` and
+    /// `per_page` to navigate its history. Each result identifies the version, the actor who updated it, and the update
+    /// time.
     ///
     /// Get the history of a repository ruleset.
     ///
@@ -25,10 +27,35 @@ extension ReposMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func reposGetRepoRulesetHistory(config: ClientConfig, owner: String, repo: String, rulesetId: Int, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [RulesetVersion] {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/rulesets/", sdkEncodePathSegment(sdkWireString(rulesetId)), "/history"].joined(), config: config, query: [
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "reposGetRepoRulesetHistory", options: requestOptions, errors: ["404": BasicError.self, "500": BasicError.self])).data
+    static func reposGetRepoRulesetHistory(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        rulesetId: Int,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [RulesetVersion] {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/rulesets/",
+                sdkEncodePathSegment(sdkWireString(rulesetId)),
+                "/history",
+            ].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "reposGetRepoRulesetHistory",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "500": BasicError.self]
+        )).data
     }
 }

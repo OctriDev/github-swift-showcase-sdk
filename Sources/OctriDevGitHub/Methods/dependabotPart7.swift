@@ -6,19 +6,40 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension DependabotMethods {
-    /// Sets the default level of repository access Dependabot will have while performing an update. Available values are: - 'public' - Dependabot will only have access to public repositories, unless access is explicitly granted to non-public repositories. - 'internal' - Dependabot will only have access to public and internal repositories, unless access is explicitly granted to private repositories. Unauthorized users will not see the existence of this endpoint. This operation supports both server-to-server and user-to-server access. OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
+public extension DependabotMethods {
+    /// Sets the default level of repository access Dependabot will have while performing an update. Available values
+    /// are: - 'public' - Dependabot will only have access to public repositories, unless access is explicitly granted
+    /// to non-public repositories. - 'internal' - Dependabot will only have access to public and internal repositories,
+    /// unless access is explicitly granted to private repositories. Unauthorized users will not see the existence of
+    /// this endpoint. This operation supports both server-to-server and user-to-server access. OAuth app tokens and
+    /// personal access tokens (classic) need the `write:org` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - defaultLevel: The default repository access level for Dependabot updates.
-    public static func dependabotSetRepositoryAccessDefaultLevel(config: ClientConfig, org: String, defaultLevel: DependabotSetRepositoryAccessDefaultLevelRequestBodyDefaultLevel, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+    static func dependabotSetRepositoryAccessDefaultLevel(
+        config: ClientConfig,
+        org: String,
+        defaultLevel: DependabotSetRepositoryAccessDefaultLevelRequestBodyDefaultLevel,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
         let requestBody = DependabotSetRepositoryAccessDefaultLevelRequestBody(defaultLevel: defaultLevel)
 
-        return try (await sdkRequest("PUT", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/dependabot/repository-access/default-level"].joined(), config: config, body: requestBody, decoder: .empty, operationId: "dependabotSetRepositoryAccessDefaultLevel", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+        return try await (sdkRequest(
+            "PUT",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/dependabot/repository-access/default-level"]
+                .joined(),
+            config: config,
+            body: requestBody,
+            decoder: .empty,
+            operationId: "dependabotSetRepositoryAccessDefaultLevel",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 
-    /// Lists all secrets available in an organization without revealing their encrypted values. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    /// Lists all secrets available in an organization without revealing their encrypted values. OAuth app tokens and
+    /// personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
@@ -30,10 +51,24 @@ extension DependabotMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func dependabotListOrgSecrets(config: ClientConfig, org: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> DependabotListOrgSecretsResponse {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/dependabot/secrets"].joined(), config: config, query: [
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "dependabotListOrgSecrets", options: requestOptions)).data
+    static func dependabotListOrgSecrets(
+        config: ClientConfig,
+        org: String,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> DependabotListOrgSecretsResponse {
+        try await (sdkRequest(
+            "GET",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/dependabot/secrets"].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "dependabotListOrgSecrets",
+            options: requestOptions
+        )).data
     }
 }

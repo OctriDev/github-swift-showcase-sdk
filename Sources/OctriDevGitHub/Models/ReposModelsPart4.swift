@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Repos domain models
+/// Repos domain models
 /// Collaborator
 public struct Collaborator: Codable {
     /// Required `string` value serialized in the `login` wire field.
@@ -98,41 +98,67 @@ public struct Collaborator: Codable {
         case userViewType = "user_view_type"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension Collaborator {
-    public init(from decoder: Decoder) throws {
+public extension Collaborator {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.login = try container.sdkDecodeRequired(.login)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
-        self.gravatarId = try container.sdkDecodeNullable(.gravatarId)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.followersUrl = try container.sdkDecodeRequired(.followersUrl)
-        self.followingUrl = try container.sdkDecodeRequired(.followingUrl)
-        self.gistsUrl = try container.sdkDecodeRequired(.gistsUrl)
-        self.starredUrl = try container.sdkDecodeRequired(.starredUrl)
-        self.subscriptionsUrl = try container.sdkDecodeRequired(.subscriptionsUrl)
-        self.organizationsUrl = try container.sdkDecodeRequired(.organizationsUrl)
-        self.reposUrl = try container.sdkDecodeRequired(.reposUrl)
-        self.eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        self.receivedEventsUrl = try container.sdkDecodeRequired(.receivedEventsUrl)
-        self.type = try container.sdkDecodeRequired(.type)
-        self.siteAdmin = try container.sdkDecodeRequired(.siteAdmin)
-        self.roleName = try container.sdkDecodeRequired(.roleName)
-        self.email = try container.sdkDecodeIfPresent(.email)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.permissions = try container.sdkDecodeIfPresent(.permissions)
-        self.userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        login = try container.sdkDecodeRequired(.login)
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
+        gravatarId = try container.sdkDecodeNullable(.gravatarId)
+        url = try container.sdkDecodeRequired(.url)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        followersUrl = try container.sdkDecodeRequired(.followersUrl)
+        followingUrl = try container.sdkDecodeRequired(.followingUrl)
+        gistsUrl = try container.sdkDecodeRequired(.gistsUrl)
+        starredUrl = try container.sdkDecodeRequired(.starredUrl)
+        subscriptionsUrl = try container.sdkDecodeRequired(.subscriptionsUrl)
+        organizationsUrl = try container.sdkDecodeRequired(.organizationsUrl)
+        reposUrl = try container.sdkDecodeRequired(.reposUrl)
+        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
+        receivedEventsUrl = try container.sdkDecodeRequired(.receivedEventsUrl)
+        type = try container.sdkDecodeRequired(.type)
+        siteAdmin = try container.sdkDecodeRequired(.siteAdmin)
+        roleName = try container.sdkDecodeRequired(.roleName)
+        email = try container.sdkDecodeIfPresent(.email)
+        name = try container.sdkDecodeIfPresent(.name)
+        permissions = try container.sdkDecodeIfPresent(.permissions)
+        userViewType = try container.sdkDecodeIfPresent(.userViewType)
         try sdkValidateConstraints()
     }
 }
 
-extension Collaborator {
-    public init(login: String, id: Int, nodeId: String, avatarUrl: String, gravatarId: String?, url: String, htmlUrl: String, followersUrl: String, followingUrl: String, gistsUrl: String, starredUrl: String, subscriptionsUrl: String, organizationsUrl: String, reposUrl: String, eventsUrl: String, receivedEventsUrl: String, type: String, siteAdmin: Bool, roleName: String, email: String? = nil, name: String? = nil, permissions: CollaboratorPermissions? = nil, userViewType: String? = nil) throws {
+public extension Collaborator {
+    init(
+        login: String,
+        id: Int,
+        nodeId: String,
+        avatarUrl: String,
+        gravatarId: String?,
+        url: String,
+        htmlUrl: String,
+        followersUrl: String,
+        followingUrl: String,
+        gistsUrl: String,
+        starredUrl: String,
+        subscriptionsUrl: String,
+        organizationsUrl: String,
+        reposUrl: String,
+        eventsUrl: String,
+        receivedEventsUrl: String,
+        type: String,
+        siteAdmin: Bool,
+        roleName: String,
+        email: String? = nil,
+        name: String? = nil,
+        permissions: CollaboratorPermissions? = nil,
+        userViewType: String? = nil
+    ) throws {
         (self.login, self.id) = (login, id)
         (self.nodeId, self.avatarUrl) = (nodeId, avatarUrl)
         (self.gravatarId, self.url) = (gravatarId, url)
@@ -151,14 +177,14 @@ extension Collaborator {
 
 extension Collaborator {
     func sdkValidateConstraints() throws {
-            try sdkValidateUri("avatar_url", self.avatarUrl)
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("followers_url", self.followersUrl)
-            try sdkValidateUri("subscriptions_url", self.subscriptionsUrl)
-            try sdkValidateUri("organizations_url", self.organizationsUrl)
-            try sdkValidateUri("repos_url", self.reposUrl)
-            try sdkValidateUri("received_events_url", self.receivedEventsUrl)
+        try sdkValidateUri("avatar_url", avatarUrl)
+        try sdkValidateUri("url", url)
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateUri("followers_url", followersUrl)
+        try sdkValidateUri("subscriptions_url", subscriptionsUrl)
+        try sdkValidateUri("organizations_url", organizationsUrl)
+        try sdkValidateUri("repos_url", reposUrl)
+        try sdkValidateUri("received_events_url", receivedEventsUrl)
     }
 }
 
@@ -199,29 +225,40 @@ public struct FileCommitCommit: Codable {
     }
 
     init() {
-        (self.sha, self.nodeId, self.url, self.htmlUrl, self.author) = (nil, nil, nil, nil, nil)
-        (self.committer, self.message, self.tree, self.parents, self.verification) = (nil, nil, nil, nil, nil)
+        (sha, nodeId, url, htmlUrl, author) = (nil, nil, nil, nil, nil)
+        (committer, message, tree, parents, verification) = (nil, nil, nil, nil, nil)
     }
 }
 
-extension FileCommitCommit {
-    public init(from decoder: Decoder) throws {
+public extension FileCommitCommit {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.sha = try container.sdkDecodeIfPresent(.sha)
-        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        self.url = try container.sdkDecodeIfPresent(.url)
-        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        self.author = try container.sdkDecodeIfPresent(.author)
-        self.committer = try container.sdkDecodeIfPresent(.committer)
-        self.message = try container.sdkDecodeIfPresent(.message)
-        self.tree = try container.sdkDecodeIfPresent(.tree)
-        self.parents = try container.sdkDecodeIfPresent(.parents)
-        self.verification = try container.sdkDecodeIfPresent(.verification)
+        sha = try container.sdkDecodeIfPresent(.sha)
+        nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        url = try container.sdkDecodeIfPresent(.url)
+        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        author = try container.sdkDecodeIfPresent(.author)
+        committer = try container.sdkDecodeIfPresent(.committer)
+        message = try container.sdkDecodeIfPresent(.message)
+        tree = try container.sdkDecodeIfPresent(.tree)
+        parents = try container.sdkDecodeIfPresent(.parents)
+        verification = try container.sdkDecodeIfPresent(.verification)
     }
 }
 
-extension FileCommitCommit {
-    public init(sha: String? = nil, nodeId: String? = nil, url: String? = nil, htmlUrl: String? = nil, author: FileCommitCommitAuthor? = nil, committer: FileCommitCommitCommitter? = nil, message: String? = nil, tree: FileCommitCommitTree? = nil, parents: [FileCommitCommitParentsItem]? = nil, verification: FileCommitCommitVerification? = nil) {
+public extension FileCommitCommit {
+    init(
+        sha: String? = nil,
+        nodeId: String? = nil,
+        url: String? = nil,
+        htmlUrl: String? = nil,
+        author: FileCommitCommitAuthor? = nil,
+        committer: FileCommitCommitCommitter? = nil,
+        message: String? = nil,
+        tree: FileCommitCommitTree? = nil,
+        parents: [FileCommitCommitParentsItem]? = nil,
+        verification: FileCommitCommitVerification? = nil
+    ) {
         self.init()
         (self.sha, self.nodeId) = (sha, nodeId)
         (self.url, self.htmlUrl) = (url, htmlUrl)
@@ -260,41 +297,70 @@ public struct CommunityProfile: Codable {
         case contentReportsEnabled = "content_reports_enabled"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension CommunityProfile {
-    public init(from decoder: Decoder) throws {
+public extension CommunityProfile {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.healthPercentage) else {
-            throw SdkValidationError(field: "health_percentage", code: "required", message: "Validation failed for 'health_percentage': value is required")
+            throw SdkValidationError(
+                field: "health_percentage",
+                code: "required",
+                message: "Validation failed for 'health_percentage': value is required"
+            )
         }
         guard container.contains(.description) else {
-            throw SdkValidationError(field: "description", code: "required", message: "Validation failed for 'description': value is required")
+            throw SdkValidationError(
+                field: "description",
+                code: "required",
+                message: "Validation failed for 'description': value is required"
+            )
         }
         guard container.contains(.documentation) else {
-            throw SdkValidationError(field: "documentation", code: "required", message: "Validation failed for 'documentation': value is required")
+            throw SdkValidationError(
+                field: "documentation",
+                code: "required",
+                message: "Validation failed for 'documentation': value is required"
+            )
         }
         guard container.contains(.files) else {
-            throw SdkValidationError(field: "files", code: "required", message: "Validation failed for 'files': value is required")
+            throw SdkValidationError(
+                field: "files",
+                code: "required",
+                message: "Validation failed for 'files': value is required"
+            )
         }
         guard container.contains(.updatedAt) else {
-            throw SdkValidationError(field: "updated_at", code: "required", message: "Validation failed for 'updated_at': value is required")
+            throw SdkValidationError(
+                field: "updated_at",
+                code: "required",
+                message: "Validation failed for 'updated_at': value is required"
+            )
         }
-        self.healthPercentage = try container.sdkDecodeRequired(.healthPercentage)
-        self.description = try container.sdkDecodeNullable(.description)
-        self.documentation = try container.sdkDecodeNullable(.documentation)
-        self.files = try container.sdkDecodeRequired(.files)
-        self.updatedAt = try container.sdkDecodeNullable(.updatedAt)
-        self.contentReportsEnabled = try container.sdkDecodeIfPresent(.contentReportsEnabled)
-        if let value = self.updatedAt {
+        healthPercentage = try container.sdkDecodeRequired(.healthPercentage)
+        description = try container.sdkDecodeNullable(.description)
+        documentation = try container.sdkDecodeNullable(.documentation)
+        files = try container.sdkDecodeRequired(.files)
+        updatedAt = try container.sdkDecodeNullable(.updatedAt)
+        contentReportsEnabled = try container.sdkDecodeIfPresent(.contentReportsEnabled)
+        if let value = updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
     }
 }
 
-extension CommunityProfile {
-    public init(healthPercentage: Int, description: String?, documentation: String?, files: CommunityProfileFiles, updatedAt: Date?, contentReportsEnabled: Bool? = nil) throws {
+public extension CommunityProfile {
+    init(
+        healthPercentage: Int,
+        description: String?,
+        documentation: String?,
+        files: CommunityProfileFiles,
+        updatedAt: Date?,
+        contentReportsEnabled: Bool? = nil
+    ) throws {
         (self.healthPercentage, self.description) = (healthPercentage, description)
         (self.documentation, self.files) = (documentation, files)
         (self.updatedAt, self.contentReportsEnabled) = (updatedAt, contentReportsEnabled)
@@ -308,14 +374,17 @@ extension CommunityProfile {
 public struct MergedUpstreamMergeType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let merge = MergedUpstreamMergeType(rawValue: "merge")
     public static let fastForward = MergedUpstreamMergeType(rawValue: "fast-forward")
     public static let none = MergedUpstreamMergeType(rawValue: "none")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -328,7 +397,10 @@ public struct MergedUpstreamMergeType: RawRepresentable, Hashable, Codable, Send
 public struct ActivityActivityType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let push = ActivityActivityType(rawValue: "push")
     public static let forcePush = ActivityActivityType(rawValue: "force_push")
     public static let branchDeletion = ActivityActivityType(rawValue: "branch_deletion")
@@ -338,7 +410,7 @@ public struct ActivityActivityType: RawRepresentable, Hashable, Codable, Sendabl
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

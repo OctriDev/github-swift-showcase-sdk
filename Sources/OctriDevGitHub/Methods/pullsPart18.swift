@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension PullsMethods {
+public extension PullsMethods {
     /// Removes review requests from a pull request for a given set of users and/or teams.
     ///
     /// - Parameters:
@@ -17,9 +17,34 @@ extension PullsMethods {
     /// - pullNumber: The number that identifies the pull request.
     /// - reviewers: An array of user `login`s that will be removed.
     /// - teamReviewers: An array of team `slug`s that will be removed.
-    public static func pullsRemoveRequestedReviewers(config: ClientConfig, owner: String, repo: String, pullNumber: Int, reviewers: [String], teamReviewers: [String]? = nil, requestOptions: RequestOptions? = nil) async throws -> PullRequestSimple {
+    static func pullsRemoveRequestedReviewers(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        pullNumber: Int,
+        reviewers: [String],
+        teamReviewers: [String]? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> PullRequestSimple {
         let requestBody = PullsRemoveRequestedReviewersRequestBody(reviewers: reviewers, teamReviewers: teamReviewers)
 
-        return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/pulls/", sdkEncodePathSegment(sdkWireString(pullNumber)), "/requested_reviewers"].joined(), config: config, body: requestBody, decoder: .json, operationId: "pullsRemoveRequestedReviewers", options: requestOptions, errors: ["422": ValidationError.self])).data
+        return try await (sdkRequest(
+            "DELETE",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/pulls/",
+                sdkEncodePathSegment(sdkWireString(pullNumber)),
+                "/requested_reviewers",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "pullsRemoveRequestedReviewers",
+            options: requestOptions,
+            errors: ["422": ValidationError.self]
+        )).data
     }
 }

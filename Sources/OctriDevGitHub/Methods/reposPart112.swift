@@ -6,8 +6,10 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ReposMethods {
-    /// Merges a branch or commit into a base branch in a repository. Supply `base` and `head`; `commit_message` is optional and defaults to a generated message when omitted. If the changes are already merged, the endpoint returns 204 without a merge commit body.
+public extension ReposMethods {
+    /// Merges a branch or commit into a base branch in a repository. Supply `base` and `head`; `commit_message` is
+    /// optional and defaults to a generated message when omitted. If the changes are already merged, the endpoint
+    /// returns 204 without a merge commit body.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -18,20 +20,63 @@ extension ReposMethods {
     /// - head: The head to merge. This can be a branch name or a commit SHA1.
     /// - commitMessage: Commit message to use for the merge commit. If omitted, a
     ///   default message will be used.
-    public static func reposMerge(config: ClientConfig, owner: String, repo: String, base: String, head: String, commitMessage: String? = nil, requestOptions: RequestOptions? = nil) async throws -> Commit {
+    static func reposMerge(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        base: String,
+        head: String,
+        commitMessage: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Commit {
         let requestBody = ReposMergeRequestBody(base: base, head: head, commitMessage: commitMessage)
 
-        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/merges"].joined(), config: config, body: requestBody, decoder: .json, operationId: "reposMerge", options: requestOptions, errors: ["403": BasicError.self, "422": ValidationError.self])).data
+        return try await (sdkRequest(
+            "POST",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/merges",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "reposMerge",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "422": ValidationError.self]
+        )).data
     }
 
-    /// Gets information about a GitHub Pages site. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    /// Gets information about a GitHub Pages site. OAuth app tokens and personal access tokens (classic) need the
+    /// `repo` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    public static func reposGetPages(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> Page {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/pages"].joined(), config: config, decoder: .json, operationId: "reposGetPages", options: requestOptions, errors: ["404": BasicError.self])).data
+    static func reposGetPages(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Page {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/pages",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "reposGetPages",
+            options: requestOptions,
+            errors: ["404": BasicError.self]
+        )).data
     }
 }

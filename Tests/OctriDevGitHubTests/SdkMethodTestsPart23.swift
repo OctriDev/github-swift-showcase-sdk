@@ -59,8 +59,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codeScanning.listAlertsForOrg(
-            options: options
-        )
+                options: options
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -81,7 +81,10 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try CodeScanningMethods.CodeScanningListAlertsForRepoOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""))
+        var options = try CodeScanningMethods.CodeScanningListAlertsForRepoOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\"")
+        )
         options.toolName = try decoded("\"Example Name\"")
         options.toolGuid = try decoded("\"tool_gu-1\"")
         options.page = try decoded("1")
@@ -113,7 +116,10 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try CodeScanningMethods.CodeScanningListAlertsForRepoOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""))
+        var options = try CodeScanningMethods.CodeScanningListAlertsForRepoOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\"")
+        )
         options.toolName = try decoded("\"Example Name\"")
         options.toolGuid = try decoded("\"tool_gu-1\"")
         options.page = try decoded("1")
@@ -133,8 +139,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codeScanning.listAlertsForRepo(
-            options: options
-        )
+                options: options
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -169,7 +175,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testCodeScanningListCodeqlDatabasesCodeScanningListCodeqlDatabases403ReachesMockAndDecodesResponse() async throws {
+    func testCodeScanningListCodeqlDatabasesCodeScanningListCodeqlDatabases403ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -180,9 +187,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codeScanning.listCodeqlDatabases(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -203,7 +210,10 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try CodeScanningMethods.CodeScanningListRecentAnalysesOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""))
+        var options = try CodeScanningMethods.CodeScanningListRecentAnalysesOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\"")
+        )
         options.toolName = try decoded("\"Example Name\"")
         options.toolGuid = try decoded("\"tool_gu-1\"")
         options.page = try decoded("1")
@@ -226,12 +236,16 @@ extension SdkMethodTests {
         )
     }
 
-    func testCodeScanningListRecentAnalysesCodeScanningListRecentAnalyses403ReachesMockAndDecodesResponse() async throws {
+    func testCodeScanningListRecentAnalysesCodeScanningListRecentAnalyses403ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
         _ = client
-        var options = try CodeScanningMethods.CodeScanningListRecentAnalysesOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""))
+        var options = try CodeScanningMethods.CodeScanningListRecentAnalysesOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\"")
+        )
         options.toolName = try decoded("\"Example Name\"")
         options.toolGuid = try decoded("\"tool_gu-1\"")
         options.page = try decoded("1")
@@ -247,8 +261,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codeScanning.listRecentAnalyses(
-            options: options
-        )
+                options: options
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -264,7 +278,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCodeScanningUpdateAiScanEnablementCodeScanningUpdateAiScanEnablementReachesMockAndDecodesResponse() async throws {
+    func testCodeScanningUpdateAiScanEnablementCodeScanningUpdateAiScanEnablementReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -284,7 +299,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testCodeScanningUpdateAiScanEnablementCodeScanningUpdateAiScanEnablement403ReachesMockAndDecodesResponse() async throws {
+    func testCodeScanningUpdateAiScanEnablementCodeScanningUpdateAiScanEnablement403ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -295,10 +311,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codeScanning.updateAiScanEnablement(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            prScan: decoded("\"enabled\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                prScan: decoded("\"enabled\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -314,7 +330,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCodeScanningUpdateAiScanEnablementForOrgCodeScanningUpdateAiSXacd444a51fReachesMockAndDecodesResponse() async throws {
+    func testCodeScanningUpdateAiScanEnablementForOrgCodeScanningUpdateAiSXacd444a51fReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -333,7 +350,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testCodeScanningUpdateAiScanEnablementForOrgCodeScanningUpdateAiSXf94aa971a7ReachesMockAndDecodesResponse() async throws {
+    func testCodeScanningUpdateAiScanEnablementForOrgCodeScanningUpdateAiSXf94aa971a7ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -344,9 +362,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codeScanning.updateAiScanEnablementForOrg(
-            org: decoded("\"org\""),
-            prScan: decoded("\"enabled\"")
-        )
+                org: decoded("\"org\""),
+                prScan: decoded("\"enabled\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -367,7 +385,11 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try CodeScanningMethods.CodeScanningUpdateAlertOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), alertNumber: decoded("1"))
+        var options = try CodeScanningMethods.CodeScanningUpdateAlertOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            alertNumber: decoded("1")
+        )
         options.state = try decoded("\"dismissed\"")
         options.dismissedReason = try decoded("\"false positive\"")
         options.dismissedComment = try decoded(sdkMethodFixture535Value1)
@@ -391,7 +413,11 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try CodeScanningMethods.CodeScanningUpdateAlertOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), alertNumber: decoded("1"))
+        var options = try CodeScanningMethods.CodeScanningUpdateAlertOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            alertNumber: decoded("1")
+        )
         options.state = try decoded("\"dismissed\"")
         options.dismissedReason = try decoded("\"false positive\"")
         options.dismissedComment = try decoded(sdkMethodFixture536Value1)
@@ -403,8 +429,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codeScanning.updateAlert(
-            options: options
-        )
+                options: options
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -425,7 +451,10 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try CodeScanningMethods.CodeScanningUpdateDefaultSetupOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""))
+        var options = try CodeScanningMethods.CodeScanningUpdateDefaultSetupOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\"")
+        )
         options.state = try decoded("\"configured\"")
         options.runnerType = try decoded("null")
         options.runnerLabel = try decoded("null")
@@ -445,12 +474,16 @@ extension SdkMethodTests {
         )
     }
 
-    func testCodeScanningUpdateDefaultSetupCodeScanningUpdateDefaultSetup403ReachesMockAndDecodesResponse() async throws {
+    func testCodeScanningUpdateDefaultSetupCodeScanningUpdateDefaultSetup403ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
         _ = client
-        var options = try CodeScanningMethods.CodeScanningUpdateDefaultSetupOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""))
+        var options = try CodeScanningMethods.CodeScanningUpdateDefaultSetupOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\"")
+        )
         options.state = try decoded("\"configured\"")
         options.runnerType = try decoded("null")
         options.runnerLabel = try decoded("null")
@@ -463,8 +496,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codeScanning.updateDefaultSetup(
-            options: options
-        )
+                options: options
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -485,7 +518,13 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try CodeScanningMethods.CodeScanningUploadSarifOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), commitSha: decoded("\"4b6472266afd7b471e86085a6659e8c7f2b119da\""), ref: decoded("\"refs/heads/master\""), sarif: decoded(sdkMethodFixture539Value1))
+        var options = try CodeScanningMethods.CodeScanningUploadSarifOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            commitSha: decoded("\"4b6472266afd7b471e86085a6659e8c7f2b119da\""),
+            ref: decoded("\"refs/heads/master\""),
+            sarif: decoded(sdkMethodFixture539Value1)
+        )
         options.checkoutUri = try decoded("null")
         options.startedAt = try decoded("null")
         options.toolName = try decoded("null")
@@ -508,7 +547,13 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try CodeScanningMethods.CodeScanningUploadSarifOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), commitSha: decoded("\"4b6472266afd7b471e86085a6659e8c7f2b119da\""), ref: decoded("\"refs/heads/master\""), sarif: decoded(sdkMethodFixture540Value1))
+        var options = try CodeScanningMethods.CodeScanningUploadSarifOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            commitSha: decoded("\"4b6472266afd7b471e86085a6659e8c7f2b119da\""),
+            ref: decoded("\"refs/heads/master\""),
+            sarif: decoded(sdkMethodFixture540Value1)
+        )
         options.checkoutUri = try decoded("null")
         options.startedAt = try decoded("null")
         options.toolName = try decoded("null")
@@ -519,8 +564,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codeScanning.uploadSarif(
-            options: options
-        )
+                options: options
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)

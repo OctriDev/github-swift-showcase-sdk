@@ -17,9 +17,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.billing.deleteBudgetOrg(
-            org: decoded("\"org\""),
-            budgetId: decoded("\"budget-1\"")
-        )
+                org: decoded("\"org\""),
+                budgetId: decoded("\"budget-1\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -42,12 +42,12 @@ extension SdkMethodTests {
         _ = client
         do {
             _ = try await client.billing.getAllBudgetsOrg(
-            org: decoded("\"org\""),
-            page: decoded("1"),
-            perPage: decoded("10"),
-            scope: decoded("\"enterprise\""),
-            user: decoded("\"user\"")
-        )
+                org: decoded("\"org\""),
+                page: decoded("1"),
+                perPage: decoded("10"),
+                scope: decoded("\"enterprise\""),
+                user: decoded("\"user\"")
+            )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -67,12 +67,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.billing.getAllBudgetsOrg(
-            org: decoded("\"org\""),
-            page: decoded("1"),
-            perPage: decoded("10"),
-            scope: decoded("\"enterprise\""),
-            user: decoded("\"user\"")
-        )
+                org: decoded("\"org\""),
+                page: decoded("1"),
+                perPage: decoded("10"),
+                scope: decoded("\"enterprise\""),
+                user: decoded("\"user\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -118,9 +118,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.billing.getBudgetOrg(
-            org: decoded("\"org\""),
-            budgetId: decoded("\"budget-1\"")
-        )
+                org: decoded("\"org\""),
+                budgetId: decoded("\"budget-1\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -136,7 +136,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testBillingGetGithubBillingAiCreditUsageReportOrgBillingGetGithubX3f159dc50dReachesMockAndDecodesResponse() async throws {
+    func testBillingGetGithubBillingAiCreditUsageReportOrgBillingGetGithubX3f159dc50dReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -160,7 +161,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testBillingGetGithubBillingAiCreditUsageReportOrgBillingGetGithubX0af23244b0ReachesMockAndDecodesResponse() async throws {
+    func testBillingGetGithubBillingAiCreditUsageReportOrgBillingGetGithubX0af23244b0ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
             return
         }
@@ -171,14 +173,14 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.billing.getGithubBillingAiCreditUsageReportOrg(
-            org: decoded("\"org\""),
-            year: decoded("1"),
-            month: decoded("1"),
-            day: decoded("1"),
-            user: decoded("\"user\""),
-            model: decoded("\"model\""),
-            product: decoded("\"product\"")
-        )
+                org: decoded("\"org\""),
+                year: decoded("1"),
+                month: decoded("1"),
+                day: decoded("1"),
+                user: decoded("\"user\""),
+                model: decoded("\"model\""),
+                product: decoded("\"product\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -194,7 +196,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testBillingGetGithubBillingAiCreditUsageReportUserBillingGetGithuXfe4ac35b1fReachesMockAndDecodesResponse() async throws {
+    func testBillingGetGithubBillingAiCreditUsageReportUserBillingGetGithuXfe4ac35b1fReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -217,7 +220,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testBillingGetGithubBillingAiCreditUsageReportUserBillingGetGithuX47d15b9084ReachesMockAndDecodesResponse() async throws {
+    func testBillingGetGithubBillingAiCreditUsageReportUserBillingGetGithuX47d15b9084ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
             return
         }
@@ -228,13 +232,13 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.billing.getGithubBillingAiCreditUsageReportUser(
-            username: decoded("\"Example Name\""),
-            year: decoded("1"),
-            month: decoded("1"),
-            day: decoded("1"),
-            model: decoded("\"model\""),
-            product: decoded("\"product\"")
-        )
+                username: decoded("\"Example Name\""),
+                year: decoded("1"),
+                month: decoded("1"),
+                day: decoded("1"),
+                model: decoded("\"model\""),
+                product: decoded("\"product\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -250,7 +254,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testBillingGetGithubBillingPremiumRequestUsageReportOrgBillingGetXc8e62b7eb4ReachesMockAndDecodesResponse() async throws {
+    func testBillingGetGithubBillingPremiumRequestUsageReportOrgBillingGetXc8e62b7eb4ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -274,7 +279,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testBillingGetGithubBillingPremiumRequestUsageReportOrgBillingGetX241cdb2b3fReachesMockAndDecodesResponse() async throws {
+    func testBillingGetGithubBillingPremiumRequestUsageReportOrgBillingGetX241cdb2b3fReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
             return
         }
@@ -285,14 +291,14 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.billing.getGithubBillingPremiumRequestUsageReportOrg(
-            org: decoded("\"org\""),
-            year: decoded("1"),
-            month: decoded("1"),
-            day: decoded("1"),
-            user: decoded("\"user\""),
-            model: decoded("\"model\""),
-            product: decoded("\"product\"")
-        )
+                org: decoded("\"org\""),
+                year: decoded("1"),
+                month: decoded("1"),
+                day: decoded("1"),
+                user: decoded("\"user\""),
+                model: decoded("\"model\""),
+                product: decoded("\"product\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -308,7 +314,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testBillingGetGithubBillingPremiumRequestUsageReportUserBillingGeX56ee32da1dReachesMockAndDecodesResponse() async throws {
+    func testBillingGetGithubBillingPremiumRequestUsageReportUserBillingGeX56ee32da1dReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -331,7 +338,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testBillingGetGithubBillingPremiumRequestUsageReportUserBillingGeXa24d9d62e8ReachesMockAndDecodesResponse() async throws {
+    func testBillingGetGithubBillingPremiumRequestUsageReportUserBillingGeXa24d9d62e8ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
             return
         }
@@ -342,13 +350,13 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.billing.getGithubBillingPremiumRequestUsageReportUser(
-            username: decoded("\"Example Name\""),
-            year: decoded("1"),
-            month: decoded("1"),
-            day: decoded("1"),
-            model: decoded("\"model\""),
-            product: decoded("\"product\"")
-        )
+                username: decoded("\"Example Name\""),
+                year: decoded("1"),
+                month: decoded("1"),
+                day: decoded("1"),
+                model: decoded("\"model\""),
+                product: decoded("\"product\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -364,7 +372,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testBillingGetGithubBillingUsageReportOrgBillingGetGithubBillingUXdb1f75481cReachesMockAndDecodesResponse() async throws {
+    func testBillingGetGithubBillingUsageReportOrgBillingGetGithubBillingUXdb1f75481cReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -385,7 +394,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testBillingGetGithubBillingUsageReportOrgBillingGetGithubBillingUX287af99ae7ReachesMockAndDecodesResponse() async throws {
+    func testBillingGetGithubBillingUsageReportOrgBillingGetGithubBillingUX287af99ae7ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
             return
         }
@@ -396,11 +406,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.billing.getGithubBillingUsageReportOrg(
-            org: decoded("\"org\""),
-            year: decoded("1"),
-            month: decoded("1"),
-            day: decoded("1")
-        )
+                org: decoded("\"org\""),
+                year: decoded("1"),
+                month: decoded("1"),
+                day: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -416,7 +426,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testBillingGetGithubBillingUsageReportUserBillingGetGithubBillingXb5246615d0ReachesMockAndDecodesResponse() async throws {
+    func testBillingGetGithubBillingUsageReportUserBillingGetGithubBillingXb5246615d0ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -437,7 +448,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testBillingGetGithubBillingUsageReportUserBillingGetGithubBillingXc4052fff09ReachesMockAndDecodesResponse() async throws {
+    func testBillingGetGithubBillingUsageReportUserBillingGetGithubBillingXc4052fff09ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
             return
         }
@@ -448,11 +460,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.billing.getGithubBillingUsageReportUser(
-            username: decoded("\"Example Name\""),
-            year: decoded("1"),
-            month: decoded("1"),
-            day: decoded("1")
-        )
+                username: decoded("\"Example Name\""),
+                year: decoded("1"),
+                month: decoded("1"),
+                day: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -468,7 +480,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testBillingGetGithubBillingUsageSummaryReportOrgBillingGetGithubBXf6f6b645f5ReachesMockAndDecodesResponse() async throws {
+    func testBillingGetGithubBillingUsageSummaryReportOrgBillingGetGithubBXf6f6b645f5ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -492,7 +505,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testBillingGetGithubBillingUsageSummaryReportOrgBillingGetGithubBX10d9a0aa18ReachesMockAndDecodesResponse() async throws {
+    func testBillingGetGithubBillingUsageSummaryReportOrgBillingGetGithubBX10d9a0aa18ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
             return
         }
@@ -503,14 +517,14 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.billing.getGithubBillingUsageSummaryReportOrg(
-            org: decoded("\"org\""),
-            year: decoded("1"),
-            month: decoded("1"),
-            day: decoded("1"),
-            repository: decoded("\"repository\""),
-            product: decoded("\"product\""),
-            sku: decoded("\"sku\"")
-        )
+                org: decoded("\"org\""),
+                year: decoded("1"),
+                month: decoded("1"),
+                day: decoded("1"),
+                repository: decoded("\"repository\""),
+                product: decoded("\"product\""),
+                sku: decoded("\"sku\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -526,7 +540,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testBillingGetGithubBillingUsageSummaryReportUserBillingGetGithubX5eb8bb63ceReachesMockAndDecodesResponse() async throws {
+    func testBillingGetGithubBillingUsageSummaryReportUserBillingGetGithubX5eb8bb63ceReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }

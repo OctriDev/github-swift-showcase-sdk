@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Pulls domain models
+/// Pulls domain models
 /// Pull Request Reviews are reviews on pull requests.
 public struct PullRequestReview: Codable {
     /// Unique identifier of the review
@@ -58,35 +58,51 @@ public struct PullRequestReview: Codable {
         case bodyText = "body_text"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension PullRequestReview {
-    public init(from decoder: Decoder) throws {
+public extension PullRequestReview {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.user = try container.sdkDecodeNullable(.user)
-        self.body = try container.sdkDecodeRequired(.body)
-        self.state = try container.sdkDecodeRequired(.state)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.pullRequestUrl = try container.sdkDecodeRequired(.pullRequestUrl)
-        self.links = try container.sdkDecodeRequired(.links)
-        self.commitId = try container.sdkDecodeNullable(.commitId)
-        self.authorAssociation = try container.sdkDecodeRequired(.authorAssociation)
-        self.submittedAt = try container.sdkDecodeIfPresent(.submittedAt)
-        self.bodyHtml = try container.sdkDecodeIfPresent(.bodyHtml)
-        self.bodyText = try container.sdkDecodeIfPresent(.bodyText)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("pull_request_url", self.pullRequestUrl)
-        if let value = self.submittedAt {
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        user = try container.sdkDecodeNullable(.user)
+        body = try container.sdkDecodeRequired(.body)
+        state = try container.sdkDecodeRequired(.state)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        pullRequestUrl = try container.sdkDecodeRequired(.pullRequestUrl)
+        links = try container.sdkDecodeRequired(.links)
+        commitId = try container.sdkDecodeNullable(.commitId)
+        authorAssociation = try container.sdkDecodeRequired(.authorAssociation)
+        submittedAt = try container.sdkDecodeIfPresent(.submittedAt)
+        bodyHtml = try container.sdkDecodeIfPresent(.bodyHtml)
+        bodyText = try container.sdkDecodeIfPresent(.bodyText)
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateUri("pull_request_url", pullRequestUrl)
+        if let value = submittedAt {
             try sdkValidateDateTime("submitted_at", sdkWireString(value))
         }
     }
 }
 
-extension PullRequestReview {
-    public init(id: Int, nodeId: String, user: NullableSimpleUser?, body: String, state: String, htmlUrl: String, pullRequestUrl: String, links: PullRequestReviewLinks, commitId: String?, authorAssociation: AuthorAssociation, submittedAt: Date? = nil, bodyHtml: String? = nil, bodyText: String? = nil) throws {
+public extension PullRequestReview {
+    init(
+        id: Int,
+        nodeId: String,
+        user: NullableSimpleUser?,
+        body: String,
+        state: String,
+        htmlUrl: String,
+        pullRequestUrl: String,
+        links: PullRequestReviewLinks,
+        commitId: String?,
+        authorAssociation: AuthorAssociation,
+        submittedAt: Date? = nil,
+        bodyHtml: String? = nil,
+        bodyText: String? = nil
+    ) throws {
         (self.id, self.nodeId) = (id, nodeId)
         (self.user, self.body) = (user, body)
         (self.state, self.htmlUrl) = (state, htmlUrl)
@@ -94,8 +110,8 @@ extension PullRequestReview {
         (self.commitId, self.authorAssociation) = (commitId, authorAssociation)
         (self.submittedAt, self.bodyHtml) = (submittedAt, bodyHtml)
         self.bodyText = bodyText
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("pull_request_url", self.pullRequestUrl)
+        try sdkValidateUri("html_url", self.htmlUrl)
+        try sdkValidateUri("pull_request_url", self.pullRequestUrl)
         if let value = self.submittedAt {
             try sdkValidateDateTime("submitted_at", sdkWireString(value))
         }
@@ -111,21 +127,27 @@ public struct PullRequestReviewLinksHtml: Codable {
         case href
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension PullRequestReviewLinksHtml {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.href) else {
-            throw SdkValidationError(field: "href", code: "required", message: "Validation failed for 'href': value is required")
-        }
-        self.href = try container.sdkDecodeRequired(.href)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension PullRequestReviewLinksHtml {
-    public init(href: String) {
+public extension PullRequestReviewLinksHtml {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.href) else {
+            throw SdkValidationError(
+                field: "href",
+                code: "required",
+                message: "Validation failed for 'href': value is required"
+            )
+        }
+        href = try container.sdkDecodeRequired(.href)
+    }
+}
+
+public extension PullRequestReviewLinksHtml {
+    init(href: String) {
         self.href = href
     }
 }
@@ -139,30 +161,40 @@ public struct PullRequestMergeAsyncResultDetailsVariant1: Codable {
         case message
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension PullRequestMergeAsyncResultDetailsVariant1 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.message) else {
-            throw SdkValidationError(field: "message", code: "required", message: "Validation failed for 'message': value is required")
-        }
-        self.message = try container.sdkDecodeRequired(.message)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension PullRequestMergeAsyncResultDetailsVariant1 {
-    public init(message: String) {
+public extension PullRequestMergeAsyncResultDetailsVariant1 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.message) else {
+            throw SdkValidationError(
+                field: "message",
+                code: "required",
+                message: "Validation failed for 'message': value is required"
+            )
+        }
+        message = try container.sdkDecodeRequired(.message)
+    }
+}
+
+public extension PullRequestMergeAsyncResultDetailsVariant1 {
+    init(message: String) {
         self.message = message
     }
 }
 
 /// Required enumerated value serialized in the `merge_method` wire field.
-public struct PullRequestMergeAsyncResultDetailsVariant0MergeMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct PullRequestMergeAsyncResultDetailsVariant0MergeMethod: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let `default` = PullRequestMergeAsyncResultDetailsVariant0MergeMethod(rawValue: "default")
     public static let merge = PullRequestMergeAsyncResultDetailsVariant0MergeMethod(rawValue: "merge")
     public static let squash = PullRequestMergeAsyncResultDetailsVariant0MergeMethod(rawValue: "squash")
@@ -170,7 +202,7 @@ public struct PullRequestMergeAsyncResultDetailsVariant0MergeMethod: RawRepresen
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -183,13 +215,16 @@ public struct PullRequestMergeAsyncResultDetailsVariant0MergeMethod: RawRepresen
 public struct ReviewCommentStartSide: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let left = ReviewCommentStartSide(rawValue: "LEFT")
     public static let right = ReviewCommentStartSide(rawValue: "RIGHT")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -202,7 +237,10 @@ public struct ReviewCommentStartSide: RawRepresentable, Hashable, Codable, Senda
 public struct PullRequestMergeAsyncResultStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let pending = PullRequestMergeAsyncResultStatus(rawValue: "pending")
     public static let merged = PullRequestMergeAsyncResultStatus(rawValue: "merged")
     public static let enqueued = PullRequestMergeAsyncResultStatus(rawValue: "enqueued")
@@ -210,7 +248,7 @@ public struct PullRequestMergeAsyncResultStatus: RawRepresentable, Hashable, Cod
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -220,17 +258,21 @@ public struct PullRequestMergeAsyncResultStatus: RawRepresentable, Hashable, Cod
 }
 
 /// Required enumerated value serialized in the `merge_action` wire field.
-public struct PullRequestMergeAsyncResultDetailsVariant0MergeAction: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct PullRequestMergeAsyncResultDetailsVariant0MergeAction: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let `default` = PullRequestMergeAsyncResultDetailsVariant0MergeAction(rawValue: "default")
     public static let mergeQueue = PullRequestMergeAsyncResultDetailsVariant0MergeAction(rawValue: "merge_queue")
     public static let directMerge = PullRequestMergeAsyncResultDetailsVariant0MergeAction(rawValue: "direct_merge")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -243,13 +285,16 @@ public struct PullRequestMergeAsyncResultDetailsVariant0MergeAction: RawRepresen
 public struct ReviewCommentSubjectType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let line = ReviewCommentSubjectType(rawValue: "line")
     public static let file = ReviewCommentSubjectType(rawValue: "file")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -258,16 +303,20 @@ public struct ReviewCommentSubjectType: RawRepresentable, Hashable, Codable, Sen
     }
 }
 
-public struct PullRequestStackPullRequestVariant1State: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct PullRequestStackPullRequestVariant1State: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let open = PullRequestStackPullRequestVariant1State(rawValue: "open")
     public static let closed = PullRequestStackPullRequestVariant1State(rawValue: "closed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -280,13 +329,16 @@ public struct PullRequestStackPullRequestVariant1State: RawRepresentable, Hashab
 public struct ReviewCommentSide: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let left = ReviewCommentSide(rawValue: "LEFT")
     public static let right = ReviewCommentSide(rawValue: "RIGHT")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -296,16 +348,20 @@ public struct ReviewCommentSide: RawRepresentable, Hashable, Codable, Sendable, 
 }
 
 /// Required enumerated value serialized in the `state` wire field.
-public struct PullRequestStackMinimalPullRequestsItemState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct PullRequestStackMinimalPullRequestsItemState: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let open = PullRequestStackMinimalPullRequestsItemState(rawValue: "open")
     public static let closed = PullRequestStackMinimalPullRequestsItemState(rawValue: "closed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -318,13 +374,16 @@ public struct PullRequestStackMinimalPullRequestsItemState: RawRepresentable, Ha
 public struct PullRequestState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let open = PullRequestState(rawValue: "open")
     public static let closed = PullRequestState(rawValue: "closed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

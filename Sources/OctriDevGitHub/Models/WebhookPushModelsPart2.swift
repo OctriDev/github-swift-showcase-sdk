@@ -3,11 +3,15 @@
 
 import Foundation
 
-// WebhookPush domain models
+/// WebhookPush domain models
 extension WebhookPushRepositoryCreatedAt {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(Int.self) { return .intValue(value) }
-        if let value = try? container.decode(Date.self) { return .date(value) }
+        if let value = try? container.decode(Int.self) {
+            return .intValue(value)
+        }
+        if let value = try? container.decode(Date.self) {
+            return .date(value)
+        }
         return nil
     }
 }
@@ -49,30 +53,36 @@ public struct WebhookPushPusher: Codable {
         case username
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension WebhookPushPusher {
-    public init(from decoder: Decoder) throws {
+public extension WebhookPushPusher {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
         }
-        self.name = try container.sdkDecodeRequired(.name)
-        self.date = try container.sdkDecodeIfPresent(.date)
-        self.email = try container.sdkDecodeIfPresent(.email)
-        self.username = try container.sdkDecodeIfPresent(.username)
-        if let value = self.date {
+        name = try container.sdkDecodeRequired(.name)
+        date = try container.sdkDecodeIfPresent(.date)
+        email = try container.sdkDecodeIfPresent(.email)
+        username = try container.sdkDecodeIfPresent(.username)
+        if let value = date {
             try sdkValidateDateTime("date", sdkWireString(value))
         }
-        if let value = self.email {
+        if let value = email {
             try sdkValidateEmail("email", value)
         }
     }
 }
 
-extension WebhookPushPusher {
-    public init(name: String, date: Date? = nil, email: String? = nil, username: String? = nil) throws {
+public extension WebhookPushPusher {
+    init(name: String, date: Date? = nil, email: String? = nil, username: String? = nil) throws {
         (self.name, self.date) = (name, date)
         (self.email, self.username) = (email, username)
         if let value = self.date {
@@ -373,106 +383,108 @@ public struct WebhookPushRepository: Codable {
         case webCommitSignoffRequired = "web_commit_signoff_required"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension WebhookPushRepository {
-    public init(from decoder: Decoder) throws {
+public extension WebhookPushRepository {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.archiveUrl = try container.sdkDecodeRequired(.archiveUrl)
-        self.archived = try container.sdkDecodeRequired(.archived)
-        self.assigneesUrl = try container.sdkDecodeRequired(.assigneesUrl)
-        self.blobsUrl = try container.sdkDecodeRequired(.blobsUrl)
-        self.branchesUrl = try container.sdkDecodeRequired(.branchesUrl)
-        self.cloneUrl = try container.sdkDecodeRequired(.cloneUrl)
-        self.collaboratorsUrl = try container.sdkDecodeRequired(.collaboratorsUrl)
-        self.commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
-        self.commitsUrl = try container.sdkDecodeRequired(.commitsUrl)
-        self.compareUrl = try container.sdkDecodeRequired(.compareUrl)
-        self.contentsUrl = try container.sdkDecodeRequired(.contentsUrl)
-        self.contributorsUrl = try container.sdkDecodeRequired(.contributorsUrl)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.defaultBranch = try container.sdkDecodeRequired(.defaultBranch)
-        self.deploymentsUrl = try container.sdkDecodeRequired(.deploymentsUrl)
-        self.description = try container.sdkDecodeNullable(.description)
-        self.downloadsUrl = try container.sdkDecodeRequired(.downloadsUrl)
-        self.eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        self.fork = try container.sdkDecodeRequired(.fork)
-        self.forks = try container.sdkDecodeRequired(.forks)
-        self.forksCount = try container.sdkDecodeRequired(.forksCount)
-        self.forksUrl = try container.sdkDecodeRequired(.forksUrl)
-        self.fullName = try container.sdkDecodeRequired(.fullName)
-        self.gitCommitsUrl = try container.sdkDecodeRequired(.gitCommitsUrl)
-        self.gitRefsUrl = try container.sdkDecodeRequired(.gitRefsUrl)
-        self.gitTagsUrl = try container.sdkDecodeRequired(.gitTagsUrl)
-        self.gitUrl = try container.sdkDecodeRequired(.gitUrl)
-        self.hasDownloads = try container.sdkDecodeRequired(.hasDownloads)
-        self.hasIssues = try container.sdkDecodeRequired(.hasIssues)
-        self.hasPages = try container.sdkDecodeRequired(.hasPages)
-        self.hasProjects = try container.sdkDecodeRequired(.hasProjects)
-        self.hasWiki = try container.sdkDecodeRequired(.hasWiki)
-        self.hasDiscussions = try container.sdkDecodeRequired(.hasDiscussions)
-        self.homepage = try container.sdkDecodeNullable(.homepage)
-        self.hooksUrl = try container.sdkDecodeRequired(.hooksUrl)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.issueCommentUrl = try container.sdkDecodeRequired(.issueCommentUrl)
-        self.issueEventsUrl = try container.sdkDecodeRequired(.issueEventsUrl)
-        self.issuesUrl = try container.sdkDecodeRequired(.issuesUrl)
-        self.keysUrl = try container.sdkDecodeRequired(.keysUrl)
-        self.labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
-        self.language = try container.sdkDecodeNullable(.language)
-        self.languagesUrl = try container.sdkDecodeRequired(.languagesUrl)
-        self.license = try container.sdkDecodeNullable(.license)
-        self.mergesUrl = try container.sdkDecodeRequired(.mergesUrl)
-        self.milestonesUrl = try container.sdkDecodeRequired(.milestonesUrl)
-        self.mirrorUrl = try container.sdkDecodeNullable(.mirrorUrl)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.notificationsUrl = try container.sdkDecodeRequired(.notificationsUrl)
-        self.openIssues = try container.sdkDecodeRequired(.openIssues)
-        self.openIssuesCount = try container.sdkDecodeRequired(.openIssuesCount)
-        self.owner = try container.sdkDecodeNullable(.owner)
-        self.`private` = try container.sdkDecodeRequired(.`private`)
-        self.pullsUrl = try container.sdkDecodeRequired(.pullsUrl)
-        self.pushedAt = try container.sdkDecodeNullable(.pushedAt)
-        self.releasesUrl = try container.sdkDecodeRequired(.releasesUrl)
-        self.size = try container.sdkDecodeRequired(.size)
-        self.sshUrl = try container.sdkDecodeRequired(.sshUrl)
-        self.stargazersCount = try container.sdkDecodeRequired(.stargazersCount)
-        self.stargazersUrl = try container.sdkDecodeRequired(.stargazersUrl)
-        self.statusesUrl = try container.sdkDecodeRequired(.statusesUrl)
-        self.subscribersUrl = try container.sdkDecodeRequired(.subscribersUrl)
-        self.subscriptionUrl = try container.sdkDecodeRequired(.subscriptionUrl)
-        self.svnUrl = try container.sdkDecodeRequired(.svnUrl)
-        self.tagsUrl = try container.sdkDecodeRequired(.tagsUrl)
-        self.teamsUrl = try container.sdkDecodeRequired(.teamsUrl)
-        self.topics = try container.sdkDecodeRequired(.topics)
-        self.treesUrl = try container.sdkDecodeRequired(.treesUrl)
-        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.visibility = try container.sdkDecodeRequired(.visibility)
-        self.watchers = try container.sdkDecodeRequired(.watchers)
-        self.watchersCount = try container.sdkDecodeRequired(.watchersCount)
-        self.allowAutoMerge = try container.sdkDecodeIfPresent(.allowAutoMerge)
-        self.allowForking = try container.sdkDecodeIfPresent(.allowForking)
-        self.allowMergeCommit = try container.sdkDecodeIfPresent(.allowMergeCommit)
-        self.allowRebaseMerge = try container.sdkDecodeIfPresent(.allowRebaseMerge)
-        self.allowSquashMerge = try container.sdkDecodeIfPresent(.allowSquashMerge)
-        self.allowUpdateBranch = try container.sdkDecodeIfPresent(.allowUpdateBranch)
-        self.customProperties = try container.sdkDecodeIfPresent(.customProperties)
-        self.deleteBranchOnMerge = try container.sdkDecodeIfPresent(.deleteBranchOnMerge)
-        self.disabled = try container.sdkDecodeIfPresent(.disabled)
-        self.hasPullRequests = try container.sdkDecodeIfPresent(.hasPullRequests)
-        self.pullRequestCreationPolicy = try container.sdkDecodeIfPresent(.pullRequestCreationPolicy)
-        self.isTemplate = try container.sdkDecodeIfPresent(.isTemplate)
-        self.primaryBranch = try container.sdkDecodeIfPresent(.primaryBranch)
-        self.organization = try container.sdkDecodeIfPresent(.organization)
-        self.permissions = try container.sdkDecodeIfPresent(.permissions)
-        self.`public` = try container.sdkDecodeIfPresent(.`public`)
-        self.roleName = try container.sdkDecodeIfPresent(.roleName)
-        self.stargazers = try container.sdkDecodeIfPresent(.stargazers)
-        self.webCommitSignoffRequired = try container.sdkDecodeIfPresent(.webCommitSignoffRequired)
+        archiveUrl = try container.sdkDecodeRequired(.archiveUrl)
+        archived = try container.sdkDecodeRequired(.archived)
+        assigneesUrl = try container.sdkDecodeRequired(.assigneesUrl)
+        blobsUrl = try container.sdkDecodeRequired(.blobsUrl)
+        branchesUrl = try container.sdkDecodeRequired(.branchesUrl)
+        cloneUrl = try container.sdkDecodeRequired(.cloneUrl)
+        collaboratorsUrl = try container.sdkDecodeRequired(.collaboratorsUrl)
+        commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
+        commitsUrl = try container.sdkDecodeRequired(.commitsUrl)
+        compareUrl = try container.sdkDecodeRequired(.compareUrl)
+        contentsUrl = try container.sdkDecodeRequired(.contentsUrl)
+        contributorsUrl = try container.sdkDecodeRequired(.contributorsUrl)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        defaultBranch = try container.sdkDecodeRequired(.defaultBranch)
+        deploymentsUrl = try container.sdkDecodeRequired(.deploymentsUrl)
+        description = try container.sdkDecodeNullable(.description)
+        downloadsUrl = try container.sdkDecodeRequired(.downloadsUrl)
+        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
+        fork = try container.sdkDecodeRequired(.fork)
+        forks = try container.sdkDecodeRequired(.forks)
+        forksCount = try container.sdkDecodeRequired(.forksCount)
+        forksUrl = try container.sdkDecodeRequired(.forksUrl)
+        fullName = try container.sdkDecodeRequired(.fullName)
+        gitCommitsUrl = try container.sdkDecodeRequired(.gitCommitsUrl)
+        gitRefsUrl = try container.sdkDecodeRequired(.gitRefsUrl)
+        gitTagsUrl = try container.sdkDecodeRequired(.gitTagsUrl)
+        gitUrl = try container.sdkDecodeRequired(.gitUrl)
+        hasDownloads = try container.sdkDecodeRequired(.hasDownloads)
+        hasIssues = try container.sdkDecodeRequired(.hasIssues)
+        hasPages = try container.sdkDecodeRequired(.hasPages)
+        hasProjects = try container.sdkDecodeRequired(.hasProjects)
+        hasWiki = try container.sdkDecodeRequired(.hasWiki)
+        hasDiscussions = try container.sdkDecodeRequired(.hasDiscussions)
+        homepage = try container.sdkDecodeNullable(.homepage)
+        hooksUrl = try container.sdkDecodeRequired(.hooksUrl)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        id = try container.sdkDecodeRequired(.id)
+        issueCommentUrl = try container.sdkDecodeRequired(.issueCommentUrl)
+        issueEventsUrl = try container.sdkDecodeRequired(.issueEventsUrl)
+        issuesUrl = try container.sdkDecodeRequired(.issuesUrl)
+        keysUrl = try container.sdkDecodeRequired(.keysUrl)
+        labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
+        language = try container.sdkDecodeNullable(.language)
+        languagesUrl = try container.sdkDecodeRequired(.languagesUrl)
+        license = try container.sdkDecodeNullable(.license)
+        mergesUrl = try container.sdkDecodeRequired(.mergesUrl)
+        milestonesUrl = try container.sdkDecodeRequired(.milestonesUrl)
+        mirrorUrl = try container.sdkDecodeNullable(.mirrorUrl)
+        name = try container.sdkDecodeRequired(.name)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        notificationsUrl = try container.sdkDecodeRequired(.notificationsUrl)
+        openIssues = try container.sdkDecodeRequired(.openIssues)
+        openIssuesCount = try container.sdkDecodeRequired(.openIssuesCount)
+        owner = try container.sdkDecodeNullable(.owner)
+        self.private = try container.sdkDecodeRequired(.private)
+        pullsUrl = try container.sdkDecodeRequired(.pullsUrl)
+        pushedAt = try container.sdkDecodeNullable(.pushedAt)
+        releasesUrl = try container.sdkDecodeRequired(.releasesUrl)
+        size = try container.sdkDecodeRequired(.size)
+        sshUrl = try container.sdkDecodeRequired(.sshUrl)
+        stargazersCount = try container.sdkDecodeRequired(.stargazersCount)
+        stargazersUrl = try container.sdkDecodeRequired(.stargazersUrl)
+        statusesUrl = try container.sdkDecodeRequired(.statusesUrl)
+        subscribersUrl = try container.sdkDecodeRequired(.subscribersUrl)
+        subscriptionUrl = try container.sdkDecodeRequired(.subscriptionUrl)
+        svnUrl = try container.sdkDecodeRequired(.svnUrl)
+        tagsUrl = try container.sdkDecodeRequired(.tagsUrl)
+        teamsUrl = try container.sdkDecodeRequired(.teamsUrl)
+        topics = try container.sdkDecodeRequired(.topics)
+        treesUrl = try container.sdkDecodeRequired(.treesUrl)
+        updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        url = try container.sdkDecodeRequired(.url)
+        visibility = try container.sdkDecodeRequired(.visibility)
+        watchers = try container.sdkDecodeRequired(.watchers)
+        watchersCount = try container.sdkDecodeRequired(.watchersCount)
+        allowAutoMerge = try container.sdkDecodeIfPresent(.allowAutoMerge)
+        allowForking = try container.sdkDecodeIfPresent(.allowForking)
+        allowMergeCommit = try container.sdkDecodeIfPresent(.allowMergeCommit)
+        allowRebaseMerge = try container.sdkDecodeIfPresent(.allowRebaseMerge)
+        allowSquashMerge = try container.sdkDecodeIfPresent(.allowSquashMerge)
+        allowUpdateBranch = try container.sdkDecodeIfPresent(.allowUpdateBranch)
+        customProperties = try container.sdkDecodeIfPresent(.customProperties)
+        deleteBranchOnMerge = try container.sdkDecodeIfPresent(.deleteBranchOnMerge)
+        disabled = try container.sdkDecodeIfPresent(.disabled)
+        hasPullRequests = try container.sdkDecodeIfPresent(.hasPullRequests)
+        pullRequestCreationPolicy = try container.sdkDecodeIfPresent(.pullRequestCreationPolicy)
+        isTemplate = try container.sdkDecodeIfPresent(.isTemplate)
+        primaryBranch = try container.sdkDecodeIfPresent(.primaryBranch)
+        organization = try container.sdkDecodeIfPresent(.organization)
+        permissions = try container.sdkDecodeIfPresent(.permissions)
+        self.public = try container.sdkDecodeIfPresent(.public)
+        roleName = try container.sdkDecodeIfPresent(.roleName)
+        stargazers = try container.sdkDecodeIfPresent(.stargazers)
+        webCommitSignoffRequired = try container.sdkDecodeIfPresent(.webCommitSignoffRequired)
         try sdkValidateConstraintsPart1()
         try sdkValidateConstraintsPart2()
     }

@@ -3,9 +3,38 @@
 
 import Foundation
 
-// ReposPages domain models
-extension PagesHealthCheckDomain {
-    public init(host: String? = nil, uri: String? = nil, nameservers: String? = nil, dnsResolves: Bool? = nil, isProxied: Bool? = nil, isCloudflareIp: Bool? = nil, isFastlyIp: Bool? = nil, isOldIpAddress: Bool? = nil, isARecord: Bool? = nil, hasCnameRecord: Bool? = nil, hasMxRecordsPresent: Bool? = nil, isValidDomain: Bool? = nil, isApexDomain: Bool? = nil, shouldBeARecord: Bool? = nil, isCnameToGithubUserDomain: Bool? = nil, isCnameToPagesDotGithubDotCom: Bool? = nil, isCnameToFastly: Bool? = nil, isPointedToGithubPagesIp: Bool? = nil, isNonGithubPagesIpPresent: Bool? = nil, isPagesDomain: Bool? = nil, isServedByPages: Bool? = nil, isValid: Bool? = nil, reason: String? = nil, respondsToHttps: Bool? = nil, enforcesHttps: Bool? = nil, httpsError: String? = nil, isHttpsEligible: Bool? = nil, caaError: String? = nil) {
+/// ReposPages domain models
+public extension PagesHealthCheckDomain {
+    init(
+        host: String? = nil,
+        uri: String? = nil,
+        nameservers: String? = nil,
+        dnsResolves: Bool? = nil,
+        isProxied: Bool? = nil,
+        isCloudflareIp: Bool? = nil,
+        isFastlyIp: Bool? = nil,
+        isOldIpAddress: Bool? = nil,
+        isARecord: Bool? = nil,
+        hasCnameRecord: Bool? = nil,
+        hasMxRecordsPresent: Bool? = nil,
+        isValidDomain: Bool? = nil,
+        isApexDomain: Bool? = nil,
+        shouldBeARecord: Bool? = nil,
+        isCnameToGithubUserDomain: Bool? = nil,
+        isCnameToPagesDotGithubDotCom: Bool? = nil,
+        isCnameToFastly: Bool? = nil,
+        isPointedToGithubPagesIp: Bool? = nil,
+        isNonGithubPagesIpPresent: Bool? = nil,
+        isPagesDomain: Bool? = nil,
+        isServedByPages: Bool? = nil,
+        isValid: Bool? = nil,
+        reason: String? = nil,
+        respondsToHttps: Bool? = nil,
+        enforcesHttps: Bool? = nil,
+        httpsError: String? = nil,
+        isHttpsEligible: Bool? = nil,
+        caaError: String? = nil
+    ) {
         self.init()
         (self.host, self.uri) = (host, uri)
         (self.nameservers, self.dnsResolves) = (nameservers, dnsResolves)
@@ -29,7 +58,10 @@ extension PagesHealthCheckDomain {
 public struct PagesHttpsCertificateState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let new = PagesHttpsCertificateState(rawValue: "new")
     public static let authorizationCreated = PagesHttpsCertificateState(rawValue: "authorization_created")
     public static let authorizationPending = PagesHttpsCertificateState(rawValue: "authorization_pending")
@@ -45,7 +77,7 @@ public struct PagesHttpsCertificateState: RawRepresentable, Hashable, Codable, S
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -58,7 +90,10 @@ public struct PagesHttpsCertificateState: RawRepresentable, Hashable, Codable, S
 public struct PagesDeploymentStatusStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let deploymentInProgress = PagesDeploymentStatusStatus(rawValue: "deployment_in_progress")
     public static let syncingFiles = PagesDeploymentStatusStatus(rawValue: "syncing_files")
     public static let finishedFileSync = PagesDeploymentStatusStatus(rawValue: "finished_file_sync")
@@ -73,7 +108,7 @@ public struct PagesDeploymentStatusStatus: RawRepresentable, Hashable, Codable, 
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

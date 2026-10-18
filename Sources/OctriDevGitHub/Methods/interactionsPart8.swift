@@ -6,26 +6,62 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension InteractionsMethods {
+public extension InteractionsMethods {
     /// Shows which type of GitHub user can interact with your public repositories and when the restriction expires.
-    public static func interactionsGetRestrictionsForAuthenticatedUser(config: ClientConfig, requestOptions: RequestOptions? = nil) async throws -> InteractionsGetRestrictionsForAuthenticatedUserResponse {
-        return try (await sdkRequest("GET", "/user/interaction-limits", config: config, decoder: .json, operationId: "interactionsGetRestrictionsForAuthenticatedUser", options: requestOptions)).data
+    static func interactionsGetRestrictionsForAuthenticatedUser(
+        config: ClientConfig,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> InteractionsGetRestrictionsForAuthenticatedUserResponse {
+        try await (sdkRequest(
+            "GET",
+            "/user/interaction-limits",
+            config: config,
+            decoder: .json,
+            operationId: "interactionsGetRestrictionsForAuthenticatedUser",
+            options: requestOptions
+        )).data
     }
 
-    /// Temporarily restricts which type of GitHub user can interact with your public repositories. Setting the interaction limit at the user level will overwrite any interaction limits that are set for individual repositories owned by the user.
+    /// Temporarily restricts which type of GitHub user can interact with your public repositories. Setting the
+    /// interaction limit at the user level will overwrite any interaction limits that are set for individual
+    /// repositories owned by the user.
     ///
     /// - Parameters:
     /// - limit: The type of GitHub user that can comment, open issues, or create
     ///   pull requests while the interaction limit is in effect.
     /// - expiry: The duration of the interaction restriction. Default: `one_day`.
-    public static func interactionsSetRestrictionsForAuthenticatedUser(config: ClientConfig, limit: InteractionGroup, expiry: InteractionExpiry? = nil, requestOptions: RequestOptions? = nil) async throws -> InteractionLimitResponse {
+    static func interactionsSetRestrictionsForAuthenticatedUser(
+        config: ClientConfig,
+        limit: InteractionGroup,
+        expiry: InteractionExpiry? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> InteractionLimitResponse {
         let requestBody = InteractionsSetRestrictionsForAuthenticatedUserRequestBody(limit: limit, expiry: expiry)
 
-        return try (await sdkRequest("PUT", "/user/interaction-limits", config: config, body: requestBody, decoder: .json, operationId: "interactionsSetRestrictionsForAuthenticatedUser", options: requestOptions, errors: ["422": ValidationError.self])).data
+        return try await (sdkRequest(
+            "PUT",
+            "/user/interaction-limits",
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "interactionsSetRestrictionsForAuthenticatedUser",
+            options: requestOptions,
+            errors: ["422": ValidationError.self]
+        )).data
     }
 
     /// Removes any interaction restrictions from your public repositories.
-    public static func interactionsRemoveRestrictionsForAuthenticatedUser(config: ClientConfig, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", "/user/interaction-limits", config: config, decoder: .empty, operationId: "interactionsRemoveRestrictionsForAuthenticatedUser", options: requestOptions)).data
+    static func interactionsRemoveRestrictionsForAuthenticatedUser(
+        config: ClientConfig,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            "/user/interaction-limits",
+            config: config,
+            decoder: .empty,
+            operationId: "interactionsRemoveRestrictionsForAuthenticatedUser",
+            options: requestOptions
+        )).data
     }
 }

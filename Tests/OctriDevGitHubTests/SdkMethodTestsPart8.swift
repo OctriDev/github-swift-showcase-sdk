@@ -69,7 +69,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsListRunnerApplicationsForOrgActionsListRunnerApplicationsForOrgReachesMockAndDecodesResponse() async throws {
+    func testActionsListRunnerApplicationsForOrgActionsListRunnerApplicationsForOrgReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -87,7 +88,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsListRunnerApplicationsForRepoActionsListRunnerApplicationsForRepoReachesMockAndDecodesResponse() async throws {
+    func testActionsListRunnerApplicationsForRepoActionsListRunnerApplicationsForRepoReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -106,7 +108,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsListSelectedReposForOrgSecretActionsListSelectedReposForOrgSecretReachesMockAndDecodesResponse() async throws {
+    func testActionsListSelectedReposForOrgSecretActionsListSelectedReposForOrgSecretReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -127,7 +130,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsListSelectedReposForOrgVariableActionsListSelectedRepoXc712f66234ReachesMockAndDecodesResponse() async throws {
+    func testActionsListSelectedReposForOrgVariableActionsListSelectedRepoXc712f66234ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -148,7 +152,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsListSelectedRepositoriesEnabledGithubActionsOrganizatiX2abebbf6d3ReachesMockAndDecodesResponse() async throws {
+    func testActionsListSelectedRepositoriesEnabledGithubActionsOrganizatiX2abebbf6d3ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -168,7 +173,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsListSelectedRepositoriesSelfHostedRunnersOrganizationAX0519c0542eReachesMockAndDecodesResponse() async throws {
+    func testActionsListSelectedRepositoriesSelfHostedRunnersOrganizationAX0519c0542eReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -188,7 +194,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsListSelectedRepositoriesSelfHostedRunnersOrganizationAX220afa3727ReachesMockAndDecodesResponse() async throws {
+    func testActionsListSelectedRepositoriesSelfHostedRunnersOrganizationAX220afa3727ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -199,10 +206,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.actions.listSelectedRepositoriesSelfHostedRunnersOrganization(
-            org: decoded("\"org\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                org: decoded("\"org\""),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -218,7 +225,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsListSelfHostedRunnerGroupsForOrgActionsListSelfHostedRX32b1764e49ReachesMockAndDecodesResponse() async throws {
+    func testActionsListSelfHostedRunnerGroupsForOrgActionsListSelfHostedRX32b1764e49ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -239,7 +247,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsListSelfHostedRunnersForOrgActionsListSelfHostedRunnersForOrgReachesMockAndDecodesResponse() async throws {
+    func testActionsListSelfHostedRunnersForOrgActionsListSelfHostedRunnersForOrgReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -260,7 +269,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsListSelfHostedRunnersForRepoActionsListSelfHostedRunnersForRepoReachesMockAndDecodesResponse() async throws {
+    func testActionsListSelfHostedRunnersForRepoActionsListSelfHostedRunnersForRepoReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -282,7 +292,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsListSelfHostedRunnersInGroupForOrgActionsListSelfHosteX605da929f0ReachesMockAndDecodesResponse() async throws {
+    func testActionsListSelfHostedRunnersInGroupForOrgActionsListSelfHosteX605da929f0ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -332,7 +343,11 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try ActionsMethods.ActionsListWorkflowRunsOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), workflowId: decoded("1"))
+        var options = try ActionsMethods.ActionsListWorkflowRunsOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            workflowId: decoded("1")
+        )
         options.actor = try decoded("\"actor\"")
         options.branch = try decoded("\"branch\"")
         options.event = try decoded("\"event\"")
@@ -361,7 +376,10 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try ActionsMethods.ActionsListWorkflowRunsForRepoOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""))
+        var options = try ActionsMethods.ActionsListWorkflowRunsForRepoOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\"")
+        )
         options.actor = try decoded("\"actor\"")
         options.branch = try decoded("\"branch\"")
         options.event = try decoded("\"event\"")
@@ -385,7 +403,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsRemoveAllCustomLabelsFromSelfHostedRunnerForOrgActionsX07a080bf9fReachesMockAndDecodesResponse() async throws {
+    func testActionsRemoveAllCustomLabelsFromSelfHostedRunnerForOrgActionsX07a080bf9fReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -404,7 +423,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsRemoveAllCustomLabelsFromSelfHostedRunnerForOrgActionsXc0486f046aReachesMockAndDecodesResponse() async throws {
+    func testActionsRemoveAllCustomLabelsFromSelfHostedRunnerForOrgActionsXc0486f046aReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -415,9 +435,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.actions.removeAllCustomLabelsFromSelfHostedRunnerForOrg(
-            org: decoded("\"org\""),
-            runnerId: decoded("1")
-        )
+                org: decoded("\"org\""),
+                runnerId: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -433,7 +453,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsRemoveAllCustomLabelsFromSelfHostedRunnerForRepoActionXe3c2564d20ReachesMockAndDecodesResponse() async throws {
+    func testActionsRemoveAllCustomLabelsFromSelfHostedRunnerForRepoActionXe3c2564d20ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -453,7 +474,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsRemoveAllCustomLabelsFromSelfHostedRunnerForRepoActionX03e9ded489ReachesMockAndDecodesResponse() async throws {
+    func testActionsRemoveAllCustomLabelsFromSelfHostedRunnerForRepoActionX03e9ded489ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -464,10 +486,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.actions.removeAllCustomLabelsFromSelfHostedRunnerForRepo(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            runnerId: decoded("1")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                runnerId: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -483,7 +505,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsRemoveCustomLabelFromSelfHostedRunnerForOrgActionsRemoX66fd264582ReachesMockAndDecodesResponse() async throws {
+    func testActionsRemoveCustomLabelFromSelfHostedRunnerForOrgActionsRemoX66fd264582ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
