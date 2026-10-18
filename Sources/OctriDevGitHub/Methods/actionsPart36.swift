@@ -25,7 +25,7 @@ extension ActionsMethods {
     ///   items**: 1. **Maximum items**: 100.
     /// - workFolder: The working directory to be used for job execution, relative
     ///   to the runner install directory.
-    public static func actionsGenerateRunnerJitconfigForOrg(config: ClientConfig, org: String, name: String, runnerGroupId: Int, labels: [String], workFolder: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ActionsGenerateRunnerJitconfigForOrgResponse {
+    public static func actionsGenerateRunnerJitconfigForOrg(config: ClientConfig, org: String, name: String, runnerGroupId: Int, labels: [String], workFolder: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ActionsRunnerJitconfig {
         try validateItems("labels", labels, min: 1, max: 100)
 
         let requestBody = ActionsGenerateRunnerJitconfigForOrgRequestBody(name: name, runnerGroupId: runnerGroupId, labels: labels, workFolder: workFolder)

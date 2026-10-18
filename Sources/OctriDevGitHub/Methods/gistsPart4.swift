@@ -40,6 +40,6 @@ extension GistsMethods {
     /// - Parameters:
     /// - gistId: The unique identifier of the gist.
     public static func gistsGet(config: ClientConfig, gistId: String, requestOptions: RequestOptions? = nil) async throws -> GistSimple {
-        return try (await sdkRequest("GET", ["/gists/", sdkEncodePathSegment(sdkWireString(gistId))].joined(), config: config, decoder: .json, operationId: "gistsGet", options: requestOptions, errors: ["404": BasicError.self])).data
+        return try (await sdkRequest("GET", ["/gists/", sdkEncodePathSegment(sdkWireString(gistId))].joined(), config: config, decoder: .json, operationId: "gistsGet", options: requestOptions, errors: ["403": ForbiddenGist.self, "404": BasicError.self])).data
     }
 }

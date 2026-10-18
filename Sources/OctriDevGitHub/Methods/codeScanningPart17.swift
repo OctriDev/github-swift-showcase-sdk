@@ -37,6 +37,6 @@ extension CodeScanningMethods {
 
         let requestBody = CodeScanningCreateVariantAnalysisRequestBody(language: language, queryPack: queryPack, repositories: repositories, repositoryLists: repositoryLists, repositoryOwners: repositoryOwners)
 
-        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/code-scanning/codeql/variant-analyses"].joined(), config: config, body: requestBody, decoder: .json, operationId: "codeScanningCreateVariantAnalysis", options: requestOptions, errors: ["404": BasicError.self, "422": BasicError.self])).data
+        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/code-scanning/codeql/variant-analyses"].joined(), config: config, body: requestBody, decoder: .json, operationId: "codeScanningCreateVariantAnalysis", options: requestOptions, errors: ["404": BasicError.self, "422": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

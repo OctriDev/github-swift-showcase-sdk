@@ -4,7 +4,55 @@
 import Foundation
 
 // Activity domain models
-/// Required API value serialized in the `release` wire field.
+extension PullRequestReviewCommentEventComment {
+    public init(id: Int, nodeId: String, url: String, pullRequestReviewId: Int?, diffHunk: String, path: String, position: Int?, originalPosition: Int, commitId: String, user: PullRequestReviewCommentEventCommentUser?, body: String, createdAt: Date, updatedAt: Date, htmlUrl: String, pullRequestUrl: String, links: PullRequestReviewCommentEventCommentLinks, originalCommitId: String, reactions: PullRequestReviewCommentEventCommentReactions, subjectType: String? = nil, inReplyToId: Int? = nil) throws {
+        (self.id, self.nodeId) = (id, nodeId)
+        (self.url, self.pullRequestReviewId) = (url, pullRequestReviewId)
+        (self.diffHunk, self.path) = (diffHunk, path)
+        (self.position, self.originalPosition) = (position, originalPosition)
+        (self.commitId, self.user) = (commitId, user)
+        (self.body, self.createdAt) = (body, createdAt)
+        (self.updatedAt, self.htmlUrl) = (updatedAt, htmlUrl)
+        (self.pullRequestUrl, self.links) = (pullRequestUrl, links)
+        (self.originalCommitId, self.reactions) = (originalCommitId, reactions)
+        (self.subjectType, self.inReplyToId) = (subjectType, inReplyToId)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("pull_request_url", self.pullRequestUrl)
+    }
+}
+
+/// Typed representation of the `WatchEvent` API schema.
+public struct WatchEvent: Codable {
+    /// Required `string` value serialized in the `action` wire field.
+    public var action: String
+
+    enum CodingKeys: String, CodingKey {
+        case action
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension WatchEvent {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.action) else {
+            throw SdkValidationError(field: "action", code: "required", message: "Validation failed for 'action': value is required")
+        }
+        self.action = try container.sdkDecodeRequired(.action)
+    }
+}
+
+extension WatchEvent {
+    public init(action: String) {
+        self.action = action
+    }
+}
+
+/// Required object value serialized in the `release` wire field.
 public struct ReleaseEventRelease: Codable {
     /// Required `uri`-formatted value serialized in the `url` wire field.
     public var url: String

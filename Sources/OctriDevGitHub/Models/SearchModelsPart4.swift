@@ -4,22 +4,153 @@
 import Foundation
 
 // Search domain models
-extension IssueSearchResultItemLabelsItem {
-    public init(id: Int? = nil, nodeId: String? = nil, url: String? = nil, name: String? = nil, color: String? = nil, `default`: Bool? = nil, description: String? = nil, archivedAt: Date? = nil, archivedBy: IssueSearchResultItemLabelsItemArchivedBy? = nil) throws {
+/// Commit Search Result Item
+public struct CommitSearchResultItem: Codable {
+    /// Required `uri`-formatted value serialized in the `url` wire field.
+    public var url: String
+    /// Required `string` value serialized in the `sha` wire field.
+    public var sha: String
+    /// Required `uri`-formatted value serialized in the `html_url` wire field.
+    public var htmlUrl: String
+    /// Required `uri`-formatted value serialized in the `comments_url` wire field.
+    public var commentsUrl: String
+    /// Required object value serialized in the `commit` wire field.
+    public var commit: CommitSearchResultItemCommit
+    /// A GitHub user.
+    public var author: NullableSimpleUser?
+    /// Metaproperties for Git author/committer information.
+    public var committer: NullableGitUser?
+    /// Required array value serialized in the `parents` wire field.
+    public var parents: [CommitSearchResultItemParentsItem]
+    /// Minimal Repository
+    public var repository: MinimalRepository
+    /// Required `number` value serialized in the `score` wire field.
+    public var score: Double
+    /// Required `string` value serialized in the `node_id` wire field.
+    public var nodeId: String
+    /// Optional array value serialized in the `text_matches` wire field.
+    public var textMatches: SearchResultTextMatches?
+
+    enum CodingKeys: String, CodingKey {
+        case url
+        case sha
+        case htmlUrl = "html_url"
+        case commentsUrl = "comments_url"
+        case commit
+        case author
+        case committer
+        case parents
+        case repository
+        case score
+        case nodeId = "node_id"
+        case textMatches = "text_matches"
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension CommitSearchResultItem {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.sha = try container.sdkDecodeRequired(.sha)
+        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        self.commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
+        self.commit = try container.sdkDecodeRequired(.commit)
+        self.author = try container.sdkDecodeNullable(.author)
+        self.committer = try container.sdkDecodeNullable(.committer)
+        self.parents = try container.sdkDecodeRequired(.parents)
+        self.repository = try container.sdkDecodeRequired(.repository)
+        self.score = try container.sdkDecodeRequired(.score)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.textMatches = try container.sdkDecodeIfPresent(.textMatches)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("comments_url", self.commentsUrl)
+    }
+}
+
+extension CommitSearchResultItem {
+    public init(url: String, sha: String, htmlUrl: String, commentsUrl: String, commit: CommitSearchResultItemCommit, author: NullableSimpleUser?, committer: NullableGitUser?, parents: [CommitSearchResultItemParentsItem], repository: MinimalRepository, score: Double, nodeId: String, textMatches: SearchResultTextMatches? = nil) throws {
+        (self.url, self.sha) = (url, sha)
+        (self.htmlUrl, self.commentsUrl) = (htmlUrl, commentsUrl)
+        (self.commit, self.author) = (commit, author)
+        (self.committer, self.parents) = (committer, parents)
+        (self.repository, self.score) = (repository, score)
+        (self.nodeId, self.textMatches) = (nodeId, textMatches)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("comments_url", self.commentsUrl)
+    }
+}
+
+/// Required object value serialized in the `aliases[]` wire field.
+public struct TopicSearchResultItemAliasesItem: Codable {
+    /// Optional object value serialized in the `topic_relation` wire field.
+    public var topicRelation: TopicSearchResultItemAliasesItemTopicRelation?
+
+    enum CodingKeys: String, CodingKey {
+        case topicRelation = "topic_relation"
+    }
+
+    init() {
+        self.topicRelation = nil
+    }
+}
+
+extension TopicSearchResultItemAliasesItem {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.topicRelation = try container.sdkDecodeIfPresent(.topicRelation)
+    }
+}
+
+extension TopicSearchResultItemAliasesItem {
+    public init(topicRelation: TopicSearchResultItemAliasesItemTopicRelation? = nil) {
         self.init()
-        (self.id, self.nodeId) = (id, nodeId)
-        (self.url, self.name) = (url, name)
-        (self.color, self.`default`) = (color, `default`)
-        (self.description, self.archivedAt) = (description, archivedAt)
-        self.archivedBy = archivedBy
-        if let value = self.archivedAt {
-            try sdkValidateDateTime("archived_at", sdkWireString(value))
+        self.topicRelation = topicRelation
+    }
+}
+
+/// Required object value serialized in the `tree` wire field.
+public struct CommitSearchResultItemCommitTree: Codable {
+    /// Required `string` value serialized in the `sha` wire field.
+    public var sha: String
+    /// Required `uri`-formatted value serialized in the `url` wire field.
+    public var url: String
+
+    enum CodingKeys: String, CodingKey {
+        case sha
+        case url
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension CommitSearchResultItemCommitTree {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.sha) else {
+            throw SdkValidationError(field: "sha", code: "required", message: "Validation failed for 'sha': value is required")
         }
+        guard container.contains(.url) else {
+            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
+        }
+        self.sha = try container.sdkDecodeRequired(.sha)
+        self.url = try container.sdkDecodeRequired(.url)
+            try sdkValidateUri("url", self.url)
+    }
+}
+
+extension CommitSearchResultItemCommitTree {
+    public init(sha: String, url: String) throws {
+        (self.sha, self.url) = (sha, url)
+            try sdkValidateUri("url", self.url)
     }
 }
 
 /// Optional object value serialized in the `topic_relation` wire field.
-public struct TopicSearchResultItemRelatedItemTopicRelation: Codable {
+public struct TopicSearchResultItemAliasesItemTopicRelation: Codable {
     /// Optional `integer` value serialized in the `id` wire field.
     public var id: Int?
     /// Optional `string` value serialized in the `name` wire field.
@@ -41,7 +172,7 @@ public struct TopicSearchResultItemRelatedItemTopicRelation: Codable {
     }
 }
 
-extension TopicSearchResultItemRelatedItemTopicRelation {
+extension TopicSearchResultItemAliasesItemTopicRelation {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.sdkDecodeIfPresent(.id)
@@ -51,7 +182,7 @@ extension TopicSearchResultItemRelatedItemTopicRelation {
     }
 }
 
-extension TopicSearchResultItemRelatedItemTopicRelation {
+extension TopicSearchResultItemAliasesItemTopicRelation {
     public init(id: Int? = nil, name: String? = nil, topicId: Int? = nil, relationType: String? = nil) {
         self.init()
         (self.id, self.name) = (id, name)
@@ -59,467 +190,130 @@ extension TopicSearchResultItemRelatedItemTopicRelation {
     }
 }
 
-/// Topic Search Result Item
-public struct TopicSearchResultItem: Codable {
-    /// Required `string` value serialized in the `name` wire field.
-    public var name: String
-    /// Required `string` value serialized in the `display_name` wire field.
-    public var displayName: String?
-    /// Required `string` value serialized in the `short_description` wire field.
-    public var shortDescription: String?
-    /// Required `string` value serialized in the `description` wire field.
-    public var description: String?
-    /// Required `string` value serialized in the `created_by` wire field.
-    public var createdBy: String?
-    /// Required `string` value serialized in the `released` wire field.
-    public var released: String?
-    /// Required `date-time`-formatted value serialized in the `created_at` wire field.
-    public var createdAt: Date
-    /// Required `date-time`-formatted value serialized in the `updated_at` wire field.
-    public var updatedAt: Date
-    /// Required `boolean` value serialized in the `featured` wire field.
-    public var featured: Bool
-    /// Required `boolean` value serialized in the `curated` wire field.
-    public var curated: Bool
-    /// Required `number` value serialized in the `score` wire field.
-    public var score: Double
-    /// Optional `integer` value serialized in the `repository_count` wire field.
-    public var repositoryCount: Int?
-    /// Optional `uri`-formatted value serialized in the `logo_url` wire field.
-    public var logoUrl: String?
-    /// Optional array value serialized in the `text_matches` wire field.
-    public var textMatches: SearchResultTextMatches?
-    /// Optional array value serialized in the `related` wire field.
-    public var related: [TopicSearchResultItemRelatedItem]?
-    /// Optional array value serialized in the `aliases` wire field.
-    public var aliases: [TopicSearchResultItemAliasesItem]?
-
-    enum CodingKeys: String, CodingKey {
-        case name
-        case displayName = "display_name"
-        case shortDescription = "short_description"
-        case description
-        case createdBy = "created_by"
-        case released
-        case createdAt = "created_at"
-        case updatedAt = "updated_at"
-        case featured
-        case curated
-        case score
-        case repositoryCount = "repository_count"
-        case logoUrl = "logo_url"
-        case textMatches = "text_matches"
-        case related
-        case aliases
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension TopicSearchResultItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.displayName = try container.sdkDecodeNullable(.displayName)
-        self.shortDescription = try container.sdkDecodeNullable(.shortDescription)
-        self.description = try container.sdkDecodeNullable(.description)
-        self.createdBy = try container.sdkDecodeNullable(.createdBy)
-        self.released = try container.sdkDecodeNullable(.released)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        self.featured = try container.sdkDecodeRequired(.featured)
-        self.curated = try container.sdkDecodeRequired(.curated)
-        self.score = try container.sdkDecodeRequired(.score)
-        self.repositoryCount = try container.sdkDecodeIfPresent(.repositoryCount)
-        self.logoUrl = try container.sdkDecodeIfPresent(.logoUrl)
-        self.textMatches = try container.sdkDecodeIfPresent(.textMatches)
-        self.related = try container.sdkDecodeIfPresent(.related)
-        self.aliases = try container.sdkDecodeIfPresent(.aliases)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-        if let value = self.logoUrl {
-            try sdkValidateUri("logo_url", value)
-        }
-    }
-}
-
-extension TopicSearchResultItem {
-    public init(name: String, displayName: String?, shortDescription: String?, description: String?, createdBy: String?, released: String?, createdAt: Date, updatedAt: Date, featured: Bool, curated: Bool, score: Double, repositoryCount: Int? = nil, logoUrl: String? = nil, textMatches: SearchResultTextMatches? = nil, related: [TopicSearchResultItemRelatedItem]? = nil, aliases: [TopicSearchResultItemAliasesItem]? = nil) throws {
-        (self.name, self.displayName) = (name, displayName)
-        (self.shortDescription, self.description) = (shortDescription, description)
-        (self.createdBy, self.released) = (createdBy, released)
-        (self.createdAt, self.updatedAt) = (createdAt, updatedAt)
-        (self.featured, self.curated) = (featured, curated)
-        (self.score, self.repositoryCount) = (score, repositoryCount)
-        (self.logoUrl, self.textMatches) = (logoUrl, textMatches)
-        (self.related, self.aliases) = (related, aliases)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-        if let value = self.logoUrl {
-            try sdkValidateUri("logo_url", value)
-        }
-    }
-}
-
-/// Required object value serialized in the `related[]` wire field.
-public struct TopicSearchResultItemRelatedItem: Codable {
-    /// Optional object value serialized in the `topic_relation` wire field.
-    public var topicRelation: TopicSearchResultItemRelatedItemTopicRelation?
-
-    enum CodingKeys: String, CodingKey {
-        case topicRelation = "topic_relation"
-    }
-
-    init() {
-        self.topicRelation = nil
-    }
-}
-
-extension TopicSearchResultItemRelatedItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.topicRelation = try container.sdkDecodeIfPresent(.topicRelation)
-    }
-}
-
-extension TopicSearchResultItemRelatedItem {
-    public init(topicRelation: TopicSearchResultItemRelatedItemTopicRelation? = nil) {
-        self.init()
-        self.topicRelation = topicRelation
-    }
-}
-
-/// Required object value serialized in the `author` wire field.
-public struct CommitSearchResultItemCommitAuthor: Codable {
-    /// Required `string` value serialized in the `name` wire field.
-    public var name: String
-    /// Required `string` value serialized in the `email` wire field.
-    public var email: String
-    /// Required `date-time`-formatted value serialized in the `date` wire field.
-    public var date: Date
-
-    enum CodingKeys: String, CodingKey {
-        case name
-        case email
-        case date
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension CommitSearchResultItemCommitAuthor {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        guard container.contains(.email) else {
-            throw SdkValidationError(field: "email", code: "required", message: "Validation failed for 'email': value is required")
-        }
-        guard container.contains(.date) else {
-            throw SdkValidationError(field: "date", code: "required", message: "Validation failed for 'date': value is required")
-        }
-        self.name = try container.sdkDecodeRequired(.name)
-        self.email = try container.sdkDecodeRequired(.email)
-        self.date = try container.sdkDecodeRequired(.date)
-            try sdkValidateDateTime("date", sdkWireString(self.date))
-    }
-}
-
-extension CommitSearchResultItemCommitAuthor {
-    public init(name: String, email: String, date: Date) throws {
-        (self.name, self.email) = (name, email)
-        self.date = date
-            try sdkValidateDateTime("date", sdkWireString(self.date))
-    }
-}
-
-/// Optional object value serialized in the `pull_request` wire field.
-public struct IssueSearchResultItemPullRequest: Codable {
-    /// Required `uri`-formatted value serialized in the `diff_url` wire field.
-    public var diffUrl: String?
-    /// Required `uri`-formatted value serialized in the `html_url` wire field.
-    public var htmlUrl: String?
-    /// Required `uri`-formatted value serialized in the `patch_url` wire field.
-    public var patchUrl: String?
+/// Required object value serialized in the `commit` wire field.
+public struct CommitSearchResultItemCommit: Codable {
+    /// Required object value serialized in the `author` wire field.
+    public var author: CommitSearchResultItemCommitAuthor
+    /// Metaproperties for Git author/committer information.
+    public var committer: NullableGitUser?
+    /// Required `integer` value serialized in the `comment_count` wire field.
+    public var commentCount: Int
+    /// Required `string` value serialized in the `message` wire field.
+    public var message: String
+    /// Required object value serialized in the `tree` wire field.
+    public var tree: CommitSearchResultItemCommitTree
     /// Required `uri`-formatted value serialized in the `url` wire field.
-    public var url: String?
-    /// Optional `date-time`-formatted value serialized in the `merged_at` wire field.
-    public var mergedAt: Date?
+    public var url: String
+    /// Optional object value serialized in the `verification` wire field.
+    public var verification: Verification?
 
     enum CodingKeys: String, CodingKey {
-        case diffUrl = "diff_url"
-        case htmlUrl = "html_url"
-        case patchUrl = "patch_url"
+        case author
+        case committer
+        case commentCount = "comment_count"
+        case message
+        case tree
         case url
-        case mergedAt = "merged_at"
+        case verification
     }
 
     private init(sdkCopy value: Self) { self = value }
 }
 
-extension IssueSearchResultItemPullRequest {
+extension CommitSearchResultItemCommit {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.diffUrl) else {
-            throw SdkValidationError(field: "diff_url", code: "required", message: "Validation failed for 'diff_url': value is required")
+        guard container.contains(.author) else {
+            throw SdkValidationError(field: "author", code: "required", message: "Validation failed for 'author': value is required")
         }
-        guard container.contains(.htmlUrl) else {
-            throw SdkValidationError(field: "html_url", code: "required", message: "Validation failed for 'html_url': value is required")
+        guard container.contains(.committer) else {
+            throw SdkValidationError(field: "committer", code: "required", message: "Validation failed for 'committer': value is required")
         }
-        guard container.contains(.patchUrl) else {
-            throw SdkValidationError(field: "patch_url", code: "required", message: "Validation failed for 'patch_url': value is required")
+        guard container.contains(.commentCount) else {
+            throw SdkValidationError(field: "comment_count", code: "required", message: "Validation failed for 'comment_count': value is required")
+        }
+        guard container.contains(.message) else {
+            throw SdkValidationError(field: "message", code: "required", message: "Validation failed for 'message': value is required")
+        }
+        guard container.contains(.tree) else {
+            throw SdkValidationError(field: "tree", code: "required", message: "Validation failed for 'tree': value is required")
         }
         guard container.contains(.url) else {
             throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
         }
-        self.diffUrl = try container.sdkDecodeNullable(.diffUrl)
-        self.htmlUrl = try container.sdkDecodeNullable(.htmlUrl)
-        self.patchUrl = try container.sdkDecodeNullable(.patchUrl)
-        self.url = try container.sdkDecodeNullable(.url)
-        self.mergedAt = try container.sdkDecodeIfPresent(.mergedAt)
-        if let value = self.diffUrl {
-            try sdkValidateUri("diff_url", value)
-        }
-        if let value = self.htmlUrl {
-            try sdkValidateUri("html_url", value)
-        }
-        if let value = self.patchUrl {
-            try sdkValidateUri("patch_url", value)
-        }
-        if let value = self.url {
-            try sdkValidateUri("url", value)
-        }
-        if let value = self.mergedAt {
-            try sdkValidateDateTime("merged_at", sdkWireString(value))
-        }
+        self.author = try container.sdkDecodeRequired(.author)
+        self.committer = try container.sdkDecodeNullable(.committer)
+        self.commentCount = try container.sdkDecodeRequired(.commentCount)
+        self.message = try container.sdkDecodeRequired(.message)
+        self.tree = try container.sdkDecodeRequired(.tree)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.verification = try container.sdkDecodeIfPresent(.verification)
+            try sdkValidateUri("url", self.url)
     }
 }
 
-extension IssueSearchResultItemPullRequest {
-    public init(diffUrl: String?, htmlUrl: String?, patchUrl: String?, url: String?, mergedAt: Date? = nil) throws {
-        (self.diffUrl, self.htmlUrl) = (diffUrl, htmlUrl)
-        (self.patchUrl, self.url) = (patchUrl, url)
-        self.mergedAt = mergedAt
-        if let value = self.diffUrl {
-            try sdkValidateUri("diff_url", value)
-        }
-        if let value = self.htmlUrl {
-            try sdkValidateUri("html_url", value)
-        }
-        if let value = self.patchUrl {
-            try sdkValidateUri("patch_url", value)
-        }
-        if let value = self.url {
-            try sdkValidateUri("url", value)
-        }
-        if let value = self.mergedAt {
-            try sdkValidateDateTime("merged_at", sdkWireString(value))
-        }
+extension CommitSearchResultItemCommit {
+    public init(author: CommitSearchResultItemCommitAuthor, committer: NullableGitUser?, commentCount: Int, message: String, tree: CommitSearchResultItemCommitTree, url: String, verification: Verification? = nil) throws {
+        (self.author, self.committer) = (author, committer)
+        (self.commentCount, self.message) = (commentCount, message)
+        (self.tree, self.url) = (tree, url)
+        self.verification = verification
+            try sdkValidateUri("url", self.url)
     }
 }
 
-/// User Search Result Item
-public struct UserSearchResultItem: Codable {
-    /// Required `string` value serialized in the `login` wire field.
-    public var login: String
-    /// Required `int64`-formatted value serialized in the `id` wire field.
-    public var id: Int
-    /// Required `string` value serialized in the `node_id` wire field.
-    public var nodeId: String
-    /// Required `uri`-formatted value serialized in the `avatar_url` wire field.
-    public var avatarUrl: String
-    /// Required `string` value serialized in the `gravatar_id` wire field.
-    public var gravatarId: String?
-    /// Required `uri`-formatted value serialized in the `url` wire field.
-    public var url: String
-    /// Required `uri`-formatted value serialized in the `html_url` wire field.
-    public var htmlUrl: String
-    /// Required `uri`-formatted value serialized in the `followers_url` wire field.
-    public var followersUrl: String
-    /// Required `uri`-formatted value serialized in the `subscriptions_url` wire field.
-    public var subscriptionsUrl: String
-    /// Required `uri`-formatted value serialized in the `organizations_url` wire field.
-    public var organizationsUrl: String
-    /// Required `uri`-formatted value serialized in the `repos_url` wire field.
-    public var reposUrl: String
-    /// Required `uri`-formatted value serialized in the `received_events_url` wire field.
-    public var receivedEventsUrl: String
-    /// Required `string` value serialized in the `type` wire field.
-    public var type: String
-    /// Required `number` value serialized in the `score` wire field.
-    public var score: Double
-    /// Required `string` value serialized in the `following_url` wire field.
-    public var followingUrl: String
-    /// Required `string` value serialized in the `gists_url` wire field.
-    public var gistsUrl: String
-    /// Required `string` value serialized in the `starred_url` wire field.
-    public var starredUrl: String
-    /// Required `string` value serialized in the `events_url` wire field.
-    public var eventsUrl: String
-    /// Required `boolean` value serialized in the `site_admin` wire field.
-    public var siteAdmin: Bool
-    /// Optional `integer` value serialized in the `public_repos` wire field.
-    public var publicRepos: Int?
-    /// Optional `integer` value serialized in the `public_gists` wire field.
-    public var publicGists: Int?
-    /// Optional `integer` value serialized in the `followers` wire field.
-    public var followers: Int?
-    /// Optional `integer` value serialized in the `following` wire field.
-    public var following: Int?
-    /// Optional `date-time`-formatted value serialized in the `created_at` wire field.
-    public var createdAt: Date?
-    /// Optional `date-time`-formatted value serialized in the `updated_at` wire field.
-    public var updatedAt: Date?
-    /// Optional `string` value serialized in the `name` wire field.
-    public var name: String?
-    /// Optional `string` value serialized in the `bio` wire field.
-    public var bio: String?
-    /// Optional `email`-formatted value serialized in the `email` wire field.
-    public var email: String?
-    /// Optional `string` value serialized in the `location` wire field.
-    public var location: String?
-    /// Optional `boolean` value serialized in the `hireable` wire field.
-    public var hireable: Bool?
-    /// Optional array value serialized in the `text_matches` wire field.
-    public var textMatches: SearchResultTextMatches?
-    /// Optional `string` value serialized in the `blog` wire field.
-    public var blog: String?
-    /// Optional `string` value serialized in the `company` wire field.
-    public var company: String?
-    /// Optional `date-time`-formatted value serialized in the `suspended_at` wire field.
-    public var suspendedAt: Date?
-    /// Optional `string` value serialized in the `user_view_type` wire field.
-    public var userViewType: String?
+/// Required object value serialized in the `parents[]` wire field.
+public struct CommitSearchResultItemParentsItem: Codable {
+    /// Optional `string` value serialized in the `url` wire field.
+    public var url: String?
+    /// Optional `string` value serialized in the `html_url` wire field.
+    public var htmlUrl: String?
+    /// Optional `string` value serialized in the `sha` wire field.
+    public var sha: String?
 
     enum CodingKeys: String, CodingKey {
-        case login
-        case id
-        case nodeId = "node_id"
-        case avatarUrl = "avatar_url"
-        case gravatarId = "gravatar_id"
         case url
         case htmlUrl = "html_url"
-        case followersUrl = "followers_url"
-        case subscriptionsUrl = "subscriptions_url"
-        case organizationsUrl = "organizations_url"
-        case reposUrl = "repos_url"
-        case receivedEventsUrl = "received_events_url"
-        case type
-        case score
-        case followingUrl = "following_url"
-        case gistsUrl = "gists_url"
-        case starredUrl = "starred_url"
-        case eventsUrl = "events_url"
-        case siteAdmin = "site_admin"
-        case publicRepos = "public_repos"
-        case publicGists = "public_gists"
-        case followers
-        case following
-        case createdAt = "created_at"
-        case updatedAt = "updated_at"
-        case name
-        case bio
-        case email
-        case location
-        case hireable
-        case textMatches = "text_matches"
-        case blog
-        case company
-        case suspendedAt = "suspended_at"
-        case userViewType = "user_view_type"
+        case sha
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    init() {
+        (self.url, self.htmlUrl, self.sha) = (nil, nil, nil)
+    }
 }
 
-extension UserSearchResultItem {
+extension CommitSearchResultItemParentsItem {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.login = try container.sdkDecodeRequired(.login)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
-        self.gravatarId = try container.sdkDecodeNullable(.gravatarId)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.followersUrl = try container.sdkDecodeRequired(.followersUrl)
-        self.subscriptionsUrl = try container.sdkDecodeRequired(.subscriptionsUrl)
-        self.organizationsUrl = try container.sdkDecodeRequired(.organizationsUrl)
-        self.reposUrl = try container.sdkDecodeRequired(.reposUrl)
-        self.receivedEventsUrl = try container.sdkDecodeRequired(.receivedEventsUrl)
-        self.type = try container.sdkDecodeRequired(.type)
-        self.score = try container.sdkDecodeRequired(.score)
-        self.followingUrl = try container.sdkDecodeRequired(.followingUrl)
-        self.gistsUrl = try container.sdkDecodeRequired(.gistsUrl)
-        self.starredUrl = try container.sdkDecodeRequired(.starredUrl)
-        self.eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        self.siteAdmin = try container.sdkDecodeRequired(.siteAdmin)
-        self.publicRepos = try container.sdkDecodeIfPresent(.publicRepos)
-        self.publicGists = try container.sdkDecodeIfPresent(.publicGists)
-        self.followers = try container.sdkDecodeIfPresent(.followers)
-        self.following = try container.sdkDecodeIfPresent(.following)
-        self.createdAt = try container.sdkDecodeIfPresent(.createdAt)
-        self.updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.bio = try container.sdkDecodeIfPresent(.bio)
-        self.email = try container.sdkDecodeIfPresent(.email)
-        self.location = try container.sdkDecodeIfPresent(.location)
-        self.hireable = try container.sdkDecodeIfPresent(.hireable)
-        self.textMatches = try container.sdkDecodeIfPresent(.textMatches)
-        self.blog = try container.sdkDecodeIfPresent(.blog)
-        self.company = try container.sdkDecodeIfPresent(.company)
-        self.suspendedAt = try container.sdkDecodeIfPresent(.suspendedAt)
-        self.userViewType = try container.sdkDecodeIfPresent(.userViewType)
-        try sdkValidateConstraints()
+        self.url = try container.sdkDecodeIfPresent(.url)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        self.sha = try container.sdkDecodeIfPresent(.sha)
     }
 }
 
-extension UserSearchResultItem {
-    public init(login: String, id: Int, nodeId: String, avatarUrl: String, gravatarId: String?, url: String, htmlUrl: String, followersUrl: String, subscriptionsUrl: String, organizationsUrl: String, reposUrl: String, receivedEventsUrl: String, type: String, score: Double, followingUrl: String, gistsUrl: String, starredUrl: String, eventsUrl: String, siteAdmin: Bool, publicRepos: Int? = nil, publicGists: Int? = nil, followers: Int? = nil, following: Int? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, name: String? = nil, bio: String? = nil, email: String? = nil, location: String? = nil, hireable: Bool? = nil, textMatches: SearchResultTextMatches? = nil, blog: String? = nil, company: String? = nil, suspendedAt: Date? = nil, userViewType: String? = nil) throws {
-        (self.login, self.id) = (login, id)
-        (self.nodeId, self.avatarUrl) = (nodeId, avatarUrl)
-        (self.gravatarId, self.url) = (gravatarId, url)
-        (self.htmlUrl, self.followersUrl) = (htmlUrl, followersUrl)
-        (self.subscriptionsUrl, self.organizationsUrl) = (subscriptionsUrl, organizationsUrl)
-        (self.reposUrl, self.receivedEventsUrl) = (reposUrl, receivedEventsUrl)
-        (self.type, self.score) = (type, score)
-        (self.followingUrl, self.gistsUrl) = (followingUrl, gistsUrl)
-        (self.starredUrl, self.eventsUrl) = (starredUrl, eventsUrl)
-        (self.siteAdmin, self.publicRepos) = (siteAdmin, publicRepos)
-        (self.publicGists, self.followers) = (publicGists, followers)
-        (self.following, self.createdAt) = (following, createdAt)
-        (self.updatedAt, self.name) = (updatedAt, name)
-        (self.bio, self.email) = (bio, email)
-        (self.location, self.hireable) = (location, hireable)
-        (self.textMatches, self.blog) = (textMatches, blog)
-        (self.company, self.suspendedAt) = (company, suspendedAt)
-        self.userViewType = userViewType
-        try sdkValidateConstraints()
+extension CommitSearchResultItemParentsItem {
+    public init(url: String? = nil, htmlUrl: String? = nil, sha: String? = nil) {
+        self.init()
+        (self.url, self.htmlUrl) = (url, htmlUrl)
+        self.sha = sha
     }
 }
 
-extension UserSearchResultItem {
-    func sdkValidateConstraints() throws {
-            try sdkValidateUri("avatar_url", self.avatarUrl)
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("followers_url", self.followersUrl)
-            try sdkValidateUri("subscriptions_url", self.subscriptionsUrl)
-            try sdkValidateUri("organizations_url", self.organizationsUrl)
-            try sdkValidateUri("repos_url", self.reposUrl)
-            try sdkValidateUri("received_events_url", self.receivedEventsUrl)
-        if let value = self.createdAt {
-            try sdkValidateDateTime("created_at", sdkWireString(value))
-        }
-        if let value = self.updatedAt {
-            try sdkValidateDateTime("updated_at", sdkWireString(value))
-        }
-        if let value = self.email {
-            try sdkValidateEmail("email", value)
-        }
-        if let value = self.suspendedAt {
-            try sdkValidateDateTime("suspended_at", sdkWireString(value))
-        }
+/// The policy controlling who can create pull requests: all or collaborators_only.
+public struct RepoSearchResultItemPullRequestCreationPolicy: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let all = RepoSearchResultItemPullRequestCreationPolicy(rawValue: "all")
+    public static let collaboratorsOnly = RepoSearchResultItemPullRequestCreationPolicy(rawValue: "collaborators_only")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
     }
 }

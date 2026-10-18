@@ -176,7 +176,7 @@ extension ReposNamespace {
 /// Updates GitHub Pages settings for a repository. Provide at least one of `build_type`, `source`, or `cname`; `build_type` accepts `legacy` or `workflow`, and `source` accepts a branch name with an optional `/docs` path or an object containing `branch` and `path`. The authenticated user must be a repository administrator, maintainer, or have the `manage GitHub Pages settings` permission.
     ///
     /// Updates information for a GitHub Pages site. For more information, see "About GitHub Pages. The authenticated user must be a repository administrator, maintainer, or have the 'manage GitHub Pages settings' permission. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
-    public func updateInformationAboutPagesSite(owner: String, repo: String, cname: SdkOptional<String>? = nil, httpsEnforced: Bool? = nil, buildType: ReposUpdateInformationAboutPagesSiteRequestBodyBuildType? = nil, source: ReposUpdateInformationAboutPagesSiteRequestBodySource? = nil, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+    public func updateInformationAboutPagesSite(owner: String, repo: String, cname: SdkOptional<String>? = nil, httpsEnforced: Bool? = nil, buildType: ReposUpdateInformationAboutPagesSiteRequestBodyBuildType? = nil, source: ReposUpdateInformationAboutPagesSiteRequestSource? = nil, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
         return try await ReposMethods.reposUpdateInformationAboutPagesSite(config: config, owner: owner, repo: repo, cname: cname, httpsEnforced: httpsEnforced, buildType: buildType, source: source, requestOptions: requestOptions)
     }
 }

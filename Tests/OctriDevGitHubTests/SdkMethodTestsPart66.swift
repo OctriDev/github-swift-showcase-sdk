@@ -6,576 +6,559 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testPullsGetReviewPullsGetReviewReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.pulls.getReview(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            pullNumber: decoded("1"),
-            reviewId: decoded("1")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1429Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "pullsGetReview decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testPullsGetReviewPullsGetReview404ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1430Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.pulls.getReview(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            pullNumber: decoded("1"),
-            reviewId: decoded("1")
-        )
-            XCTFail("pullsGetReview did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 404)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "pullsGetReview decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "pullsGetReview decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testPullsGetReviewCommentPullsGetReviewCommentReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.pulls.getReviewComment(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            commentId: decoded("1")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1431Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "pullsGetReviewComment decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testPullsGetReviewCommentPullsGetReviewComment404ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1432Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.pulls.getReviewComment(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            commentId: decoded("1")
-        )
-            XCTFail("pullsGetReviewComment did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 404)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "pullsGetReviewComment decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "pullsGetReviewComment decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testPullsListPullsListReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        var options = try PullsMethods.PullsListOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""))
-        options.state = try decoded("\"open\"")
-        options.head = try decoded("\"head\"")
-        options.base = try decoded("\"base\"")
-        options.sort = try decoded("\"created\"")
-        options.direction = try decoded("\"asc\"")
-        options.perPage = try decoded("30")
-        options.page = try decoded("1")
-        do {
-            _ = try await client.pulls.list(
-            options: options
-        )
-            XCTFail("pullsList decoded a body its schema refuses")
-        } catch is SdkResponseDecodeError {
-        } catch {
-            XCTFail("pullsList refused with \(error), not SdkResponseDecodeError")
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testPullsListPullsList422ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/422") else {
-            return
-        }
-        _ = client
-        var options = try PullsMethods.PullsListOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""))
-        options.state = try decoded("\"open\"")
-        options.head = try decoded("\"head\"")
-        options.base = try decoded("\"base\"")
-        options.sort = try decoded("\"created\"")
-        options.direction = try decoded("\"asc\"")
-        options.perPage = try decoded("30")
-        options.page = try decoded("1")
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1434Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.pulls.list(
-            options: options
-        )
-            XCTFail("pullsList did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 422)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "pullsList decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "pullsList decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testPullsListCommentsForReviewPullsListCommentsForReviewReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.pulls.listCommentsForReview(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            pullNumber: decoded("1"),
-            reviewId: decoded("1"),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1435Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "pullsListCommentsForReview decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testPullsListCommentsForReviewPullsListCommentsForReview404ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1436Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.pulls.listCommentsForReview(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            pullNumber: decoded("1"),
-            reviewId: decoded("1"),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
-            XCTFail("pullsListCommentsForReview did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 404)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "pullsListCommentsForReview decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "pullsListCommentsForReview decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testPullsListCommitsPullsListCommitsReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.pulls.listCommits(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            pullNumber: decoded("1"),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1437Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "pullsListCommits decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testPullsListFilesPullsListFilesReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.pulls.listFiles(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            pullNumber: decoded("1"),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1438Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "pullsListFiles decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testPullsListFilesPullsListFiles422ReachesMockAndDecodesResponse() async throws {
+    func testReactionsCreateForCommitCommentReactionsCreateForCommitComment422ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/422") else {
             return
         }
         _ = client
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1439Expected.utf8),
+            with: Data(sdkMethodFixture1466Expected.utf8),
             options: [.fragmentsAllowed]
         )
         do {
-            _ = try await client.pulls.listFiles(
+            _ = try await client.reactions.createForCommitComment(
             owner: decoded("\"owner\""),
             repo: decoded("\"repo\""),
-            pullNumber: decoded("1"),
-            perPage: decoded("30"),
-            page: decoded("1")
+            commentId: decoded("1"),
+            content: decoded("\"heart\"")
         )
-            XCTFail("pullsListFiles did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 422)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "pullsListFiles decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "pullsListFiles decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
     }
 
-    func testPullsListRequestedReviewersPullsListRequestedReviewersReachesMockAndDecodesResponse() async throws {
+    func testReactionsCreateForIssueReactionsCreateForIssueReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        do {
-            _ = try await client.pulls.listRequestedReviewers(
+        let actual = try await client.reactions.createForIssue(
             owner: decoded("\"owner\""),
             repo: decoded("\"repo\""),
-            pullNumber: decoded("1")
-        )
-            XCTFail("pullsListRequestedReviewers decoded a body its schema refuses")
-        } catch is SdkResponseDecodeError {
-        } catch {
-            XCTFail("pullsListRequestedReviewers refused with \(error), not SdkResponseDecodeError")
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testPullsListReviewCommentsPullsListReviewCommentsReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        var options = try PullsMethods.PullsListReviewCommentsOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), pullNumber: decoded("1"))
-        options.sort = try decoded("\"created\"")
-        options.direction = try decoded("\"asc\"")
-        options.since = try decoded("\"2024-01-01T00:00:00Z\"")
-        options.perPage = try decoded("30")
-        options.page = try decoded("1")
-        let actual = try await client.pulls.listReviewComments(
-            options: options
+            issueNumber: decoded("1"),
+            content: decoded("\"heart\"")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1441Expected.utf8),
+            with: Data(sdkMethodFixture1467Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "pullsListReviewComments decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
-    func testPullsListReviewCommentsForRepoPullsListReviewCommentsForRepoReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.pulls.listReviewCommentsForRepo(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            sort: decoded("\"created\""),
-            direction: decoded("\"asc\""),
-            since: decoded("\"2024-01-01T00:00:00Z\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1442Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "pullsListReviewCommentsForRepo decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testPullsListReviewsPullsListReviewsReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.pulls.listReviews(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            pullNumber: decoded("1"),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1443Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "pullsListReviews decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testPullsMergePullsMergeReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.pulls.merge(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            pullNumber: decoded("1"),
-            commitTitle: decoded("\"Expand enum\""),
-            commitMessage: decoded("\"Add a new value to the merge_method enum\""),
-            sha: decoded("null"),
-            mergeMethod: decoded("null")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1444Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "pullsMerge decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testPullsMergePullsMerge403ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1445Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.pulls.merge(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            pullNumber: decoded("1"),
-            commitTitle: decoded("\"Expand enum\""),
-            commitMessage: decoded("\"Add a new value to the merge_method enum\""),
-            sha: decoded("null"),
-            mergeMethod: decoded("null")
-        )
-            XCTFail("pullsMerge did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 403)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "pullsMerge decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "pullsMerge decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testPullsMergeAsyncPullsMergeAsyncReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        var options = try PullsMethods.PullsMergeAsyncOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), pullNumber: decoded("1"))
-        options.commitTitle = try decoded("\"Fix race condition\"")
-        options.commitMessage = try decoded(sdkMethodFixture1446Value1)
-        options.sha = try decoded("\"6358cd125586d9def8c3e5943f23506202da81cc\"")
-        options.mergeMethod = try decoded("\"squash\"")
-        options.mergeAction = try decoded("\"direct_merge\"")
-        options.bypassRules = try decoded("null")
-        let actual = try await client.pulls.mergeAsync(
-            options: options
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1446Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "pullsMergeAsync decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testPullsMergeAsyncPullsMergeAsync400ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
-            return
-        }
-        _ = client
-        var options = try PullsMethods.PullsMergeAsyncOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), pullNumber: decoded("1"))
-        options.commitTitle = try decoded("\"Fix race condition\"")
-        options.commitMessage = try decoded(sdkMethodFixture1447Value1)
-        options.sha = try decoded("\"6358cd125586d9def8c3e5943f23506202da81cc\"")
-        options.mergeMethod = try decoded("\"squash\"")
-        options.mergeAction = try decoded("\"direct_merge\"")
-        options.bypassRules = try decoded("null")
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1447Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.pulls.mergeAsync(
-            options: options
-        )
-            XCTFail("pullsMergeAsync did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 400)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "pullsMergeAsync decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "pullsMergeAsync decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testPullsRemoveRequestedReviewersPullsRemoveRequestedReviewersReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        do {
-            _ = try await client.pulls.removeRequestedReviewers(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            pullNumber: decoded("1"),
-            reviewers: decoded("[\"octocat\",\"hubot\",\"other_user\"]"),
-            teamReviewers: decoded("[\"justice-league\"]")
-        )
-            XCTFail("pullsRemoveRequestedReviewers decoded a body its schema refuses")
-        } catch is SdkResponseDecodeError {
-        } catch {
-            XCTFail("pullsRemoveRequestedReviewers refused with \(error), not SdkResponseDecodeError")
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testPullsRemoveRequestedReviewersPullsRemoveRequestedReviewers422ReachesMockAndDecodesResponse() async throws {
+    func testReactionsCreateForIssueReactionsCreateForIssue422ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/422") else {
             return
         }
         _ = client
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1449Expected.utf8),
+            with: Data(sdkMethodFixture1468Expected.utf8),
             options: [.fragmentsAllowed]
         )
         do {
-            _ = try await client.pulls.removeRequestedReviewers(
+            _ = try await client.reactions.createForIssue(
             owner: decoded("\"owner\""),
             repo: decoded("\"repo\""),
-            pullNumber: decoded("1"),
-            reviewers: decoded("[\"octocat\",\"hubot\",\"other_user\"]"),
-            teamReviewers: decoded("[\"justice-league\"]")
+            issueNumber: decoded("1"),
+            content: decoded("\"heart\"")
         )
-            XCTFail("pullsRemoveRequestedReviewers did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 422)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "pullsRemoveRequestedReviewers decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "pullsRemoveRequestedReviewers decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
+    }
+
+    func testReactionsCreateForIssueCommentReactionsCreateForIssueCommentReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.reactions.createForIssueComment(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            commentId: decoded("1"),
+            content: decoded("\"heart\"")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1469Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testReactionsCreateForIssueCommentReactionsCreateForIssueComment422ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/422") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1470Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.reactions.createForIssueComment(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            commentId: decoded("1"),
+            content: decoded("\"heart\"")
+        )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 422)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testReactionsCreateForPullRequestReviewCommentReactionsCreateForPXbde21e2dceReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.reactions.createForPullRequestReviewComment(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            commentId: decoded("1"),
+            content: decoded("\"heart\"")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1471Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testReactionsCreateForPullRequestReviewCommentReactionsCreateForPX741e5071d1ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/422") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1472Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.reactions.createForPullRequestReviewComment(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            commentId: decoded("1"),
+            content: decoded("\"heart\"")
+        )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 422)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testReactionsCreateForReleaseReactionsCreateForReleaseReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.reactions.createForRelease(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            releaseId: decoded("1"),
+            content: decoded("\"heart\"")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1473Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testReactionsCreateForReleaseReactionsCreateForRelease422ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/422") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1474Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.reactions.createForRelease(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            releaseId: decoded("1"),
+            content: decoded("\"heart\"")
+        )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 422)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testReactionsDeleteForCommitCommentReactionsDeleteForCommitCommentReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        _ = try await client.reactions.deleteForCommitComment(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            commentId: decoded("1"),
+            reactionId: decoded("1")
+        )
+        XCTAssertTrue(true)
+    }
+
+    func testReactionsDeleteForIssueReactionsDeleteForIssueReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        _ = try await client.reactions.deleteForIssue(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            issueNumber: decoded("1"),
+            reactionId: decoded("1")
+        )
+        XCTAssertTrue(true)
+    }
+
+    func testReactionsDeleteForIssueCommentReactionsDeleteForIssueCommentReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        _ = try await client.reactions.deleteForIssueComment(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            commentId: decoded("1"),
+            reactionId: decoded("1")
+        )
+        XCTAssertTrue(true)
+    }
+
+    func testReactionsDeleteForPullRequestCommentReactionsDeleteForPullRequestCommentReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        _ = try await client.reactions.deleteForPullRequestComment(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            commentId: decoded("1"),
+            reactionId: decoded("1")
+        )
+        XCTAssertTrue(true)
+    }
+
+    func testReactionsDeleteForReleaseReactionsDeleteForReleaseReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        _ = try await client.reactions.deleteForRelease(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            releaseId: decoded("1"),
+            reactionId: decoded("1")
+        )
+        XCTAssertTrue(true)
+    }
+
+    func testReactionsListForCommitCommentReactionsListForCommitCommentReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.reactions.listForCommitComment(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            commentId: decoded("1"),
+            content: decoded("\"+1\""),
+            perPage: decoded("30"),
+            page: decoded("1")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1480Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testReactionsListForCommitCommentReactionsListForCommitComment404ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1481Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.reactions.listForCommitComment(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            commentId: decoded("1"),
+            content: decoded("\"+1\""),
+            perPage: decoded("30"),
+            page: decoded("1")
+        )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 404)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testReactionsListForIssueReactionsListForIssueReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.reactions.listForIssue(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            issueNumber: decoded("1"),
+            content: decoded("\"+1\""),
+            perPage: decoded("30"),
+            page: decoded("1")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1482Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testReactionsListForIssueReactionsListForIssue404ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1483Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.reactions.listForIssue(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            issueNumber: decoded("1"),
+            content: decoded("\"+1\""),
+            perPage: decoded("30"),
+            page: decoded("1")
+        )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 404)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testReactionsListForIssueCommentReactionsListForIssueCommentReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.reactions.listForIssueComment(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            commentId: decoded("1"),
+            content: decoded("\"+1\""),
+            perPage: decoded("30"),
+            page: decoded("1")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1484Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testReactionsListForIssueCommentReactionsListForIssueComment404ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1485Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.reactions.listForIssueComment(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            commentId: decoded("1"),
+            content: decoded("\"+1\""),
+            perPage: decoded("30"),
+            page: decoded("1")
+        )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 404)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testReactionsListForPullRequestReviewCommentReactionsListForPullRX489d0545ddReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.reactions.listForPullRequestReviewComment(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            commentId: decoded("1"),
+            content: decoded("\"+1\""),
+            perPage: decoded("30"),
+            page: decoded("1")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1486Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testReactionsListForPullRequestReviewCommentReactionsListForPullRXddd89a15dbReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1487Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.reactions.listForPullRequestReviewComment(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            commentId: decoded("1"),
+            content: decoded("\"+1\""),
+            perPage: decoded("30"),
+            page: decoded("1")
+        )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 404)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testReactionsListForReleaseReactionsListForReleaseReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.reactions.listForRelease(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            releaseId: decoded("1"),
+            content: decoded("\"+1\""),
+            perPage: decoded("30"),
+            page: decoded("1")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1488Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
     }
 }

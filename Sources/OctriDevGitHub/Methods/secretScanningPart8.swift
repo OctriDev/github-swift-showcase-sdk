@@ -23,6 +23,6 @@ extension SecretScanningMethods {
     public static func secretScanningGetAlert(config: ClientConfig, owner: String, repo: String, alertNumber: AlertNumber, hideSecret: Bool? = nil, requestOptions: RequestOptions? = nil) async throws -> SecretScanningAlertWithMetadata {
         return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/secret-scanning/alerts/", sdkEncodePathSegment(sdkWireString(alertNumber))].joined(), config: config, query: [
             SdkQueryParameter("hide_secret", value: hideSecret),
-        ], decoder: .json, operationId: "secretScanningGetAlert", options: requestOptions)).data
+        ], decoder: .json, operationId: "secretScanningGetAlert", options: requestOptions, errors: ["503": ServiceUnavailable.self])).data
     }
 }

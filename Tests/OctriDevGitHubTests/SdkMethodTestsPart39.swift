@@ -6,582 +6,572 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testGistsDeleteGistsDelete403ReachesMockAndDecodesResponse() async throws {
+    func testGistsListStarredGistsListStarred401ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture864Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.gists.listStarred(
+            since: decoded("\"2024-01-01T00:00:00Z\""),
+            perPage: decoded("30"),
+            page: decoded("1")
+        )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 401)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testGistsStarGistsStarReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        _ = try await client.gists.star(
+            gistId: decoded("\"gist-1\"")
+        )
+        XCTAssertTrue(true)
+    }
+
+    func testGistsStarGistsStar403ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
         _ = client
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture840Expected.utf8),
+            with: Data(sdkMethodFixture866Expected.utf8),
             options: [.fragmentsAllowed]
         )
         do {
-            _ = try await client.gists.delete(
+            _ = try await client.gists.star(
             gistId: decoded("\"gist-1\"")
         )
-            XCTFail("gistsDelete did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "gistsDelete decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "gistsDelete decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
     }
 
-    func testGistsDeleteCommentGistsDeleteCommentReachesMockAndDecodesResponse() async throws {
+    func testGistsUnstarGistsUnstarReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        _ = try await client.gists.deleteComment(
-            gistId: decoded("\"gist-1\""),
-            commentId: decoded("1")
+        _ = try await client.gists.unstar(
+            gistId: decoded("\"gist-1\"")
         )
         XCTAssertTrue(true)
     }
 
-    func testGistsDeleteCommentGistsDeleteComment403ReachesMockAndDecodesResponse() async throws {
+    func testGistsUnstarGistsUnstar403ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
         _ = client
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture842Expected.utf8),
+            with: Data(sdkMethodFixture868Expected.utf8),
             options: [.fragmentsAllowed]
         )
         do {
-            _ = try await client.gists.deleteComment(
-            gistId: decoded("\"gist-1\""),
-            commentId: decoded("1")
+            _ = try await client.gists.unstar(
+            gistId: decoded("\"gist-1\"")
         )
-            XCTFail("gistsDeleteComment did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "gistsDeleteComment decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "gistsDeleteComment decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
     }
 
-    func testGistsForkGistsForkReachesMockAndDecodesResponse() async throws {
+    func testGistsUpdateGistsUpdateReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        let actual = try await client.gists.fork(
-            gistId: decoded("\"gist-1\"")
+        let actual = try await client.gists.update(
+            gistId: decoded("\"gist-1\""),
+            description: decoded("\"An updated gist description\""),
+            files: decoded("{\"README.md\":{\"content\":\"Hello World from GitHub\"}}")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture843Expected.utf8),
+            with: Data(sdkMethodFixture869Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "gistsFork decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
-    func testGistsForkGistsFork403ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture844Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.gists.fork(
-            gistId: decoded("\"gist-1\"")
-        )
-            XCTFail("gistsFork did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 403)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "gistsFork decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "gistsFork decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testGistsGetGistsGetReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.gists.get(
-            gistId: decoded("\"gist-1\"")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture845Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "gistsGet decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testGistsGetGistsGet404ReachesMockAndDecodesResponse() async throws {
+    func testGistsUpdateGistsUpdate404ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
         _ = client
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture846Expected.utf8),
+            with: Data(sdkMethodFixture870Expected.utf8),
             options: [.fragmentsAllowed]
         )
         do {
-            _ = try await client.gists.get(
-            gistId: decoded("\"gist-1\"")
+            _ = try await client.gists.update(
+            gistId: decoded("\"gist-1\""),
+            description: decoded("\"An updated gist description\""),
+            files: decoded("{\"README.md\":{\"content\":\"Hello World from GitHub\"}}")
         )
-            XCTFail("gistsGet did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "gistsGet decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "gistsGet decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
     }
 
-    func testGistsGetCommentGistsGetCommentReachesMockAndDecodesResponse() async throws {
+    func testGistsUpdateCommentGistsUpdateCommentReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        let actual = try await client.gists.getComment(
+        let actual = try await client.gists.updateComment(
             gistId: decoded("\"gist-1\""),
-            commentId: decoded("1")
+            commentId: decoded("1"),
+            body: decoded("\"This is an update to a comment in a gist\"")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture847Expected.utf8),
+            with: Data(sdkMethodFixture871Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "gistsGetComment decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
-    func testGistsGetCommentGistsGetComment404ReachesMockAndDecodesResponse() async throws {
+    func testGistsUpdateCommentGistsUpdateComment404ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
         _ = client
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture848Expected.utf8),
+            with: Data(sdkMethodFixture872Expected.utf8),
             options: [.fragmentsAllowed]
         )
         do {
-            _ = try await client.gists.getComment(
+            _ = try await client.gists.updateComment(
             gistId: decoded("\"gist-1\""),
-            commentId: decoded("1")
+            commentId: decoded("1"),
+            body: decoded("\"This is an update to a comment in a gist\"")
         )
-            XCTFail("gistsGetComment did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "gistsGetComment decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "gistsGetComment decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
     }
 
-    func testGistsGetRevisionGistsGetRevisionReachesMockAndDecodesResponse() async throws {
+    func testGitCreateBlobGitCreateBlobReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        let actual = try await client.gists.getRevision(
-            gistId: decoded("\"gist-1\""),
-            sha: decoded("\"sha\"")
+        let actual = try await client.git.createBlob(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            content: decoded("\"Content of the blob\""),
+            encoding: decoded("\"utf-8\"")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture849Expected.utf8),
+            with: Data(sdkMethodFixture873Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "gistsGetRevision decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
-    func testGistsGetRevisionGistsGetRevision403ReachesMockAndDecodesResponse() async throws {
+    func testGitCreateBlobGitCreateBlob403ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
         _ = client
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture850Expected.utf8),
+            with: Data(sdkMethodFixture874Expected.utf8),
             options: [.fragmentsAllowed]
         )
         do {
-            _ = try await client.gists.getRevision(
-            gistId: decoded("\"gist-1\""),
-            sha: decoded("\"sha\"")
+            _ = try await client.git.createBlob(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            content: decoded("\"Content of the blob\""),
+            encoding: decoded("\"utf-8\"")
         )
-            XCTFail("gistsGetRevision did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "gistsGetRevision decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "gistsGetRevision decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
     }
 
-    func testGistsListGistsListReachesMockAndDecodesResponse() async throws {
+    func testGitCreateCommitGitCreateCommitReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        let actual = try await client.gists.list(
-            since: decoded("\"2024-01-01T00:00:00Z\""),
-            perPage: decoded("30"),
-            page: decoded("1")
+        var options = try GitMethods.GitCreateCommitOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), message: decoded("\"my commit message\""), tree: decoded("\"827efc6d56897b048c772eb4087f854f46256132\""))
+        options.parents = try decoded("[\"7d1b31e74ee336d15cbd21741bc88a537ed063a0\"]")
+        options.author = try decoded(sdkMethodFixture875Value1)
+        options.committer = try decoded("null")
+        options.signature = try decoded(sdkMethodFixture875Value2)
+        let actual = try await client.git.createCommit(
+            options: options
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture851Expected.utf8),
+            with: Data(sdkMethodFixture875Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "gistsList decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
-    func testGistsListGistsList403ReachesMockAndDecodesResponse() async throws {
+    func testGitCreateCommitGitCreateCommit404ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
+            return
+        }
+        _ = client
+        var options = try GitMethods.GitCreateCommitOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), message: decoded("\"my commit message\""), tree: decoded("\"827efc6d56897b048c772eb4087f854f46256132\""))
+        options.parents = try decoded("[\"7d1b31e74ee336d15cbd21741bc88a537ed063a0\"]")
+        options.author = try decoded(sdkMethodFixture876Value1)
+        options.committer = try decoded("null")
+        options.signature = try decoded(sdkMethodFixture876Value2)
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture876Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.git.createCommit(
+            options: options
+        )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 404)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testGitCreateRefGitCreateRefReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.git.createRef(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            ref: decoded("\"refs/heads/featureA\""),
+            sha: decoded("\"aa218f56b14c9653891f9e74264a383fa43fefbd\"")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture877Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testGitCreateRefGitCreateRef409ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/409") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture878Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.git.createRef(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            ref: decoded("\"refs/heads/featureA\""),
+            sha: decoded("\"aa218f56b14c9653891f9e74264a383fa43fefbd\"")
+        )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 409)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testGitCreateTagGitCreateTagReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.git.createTag(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            tag: decoded("\"v0.0.1\""),
+            message: decoded("\"initial version\""),
+            object: decoded("\"c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c\""),
+            type: decoded("\"commit\""),
+            tagger: decoded(sdkMethodFixture879Value1)
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture879Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testGitCreateTagGitCreateTag409ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/409") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture880Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.git.createTag(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            tag: decoded("\"v0.0.1\""),
+            message: decoded("\"initial version\""),
+            object: decoded("\"c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c\""),
+            type: decoded("\"commit\""),
+            tagger: decoded(sdkMethodFixture880Value1)
+        )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 409)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testGitCreateTreeGitCreateTreeReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.git.createTree(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            tree: decoded(sdkMethodFixture881Value1),
+            baseTree: decoded("\"9fb037999f264ba9a7fc6274d15fa3ae2ab98312\"")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture881Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testGitCreateTreeGitCreateTree403ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
         _ = client
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture852Expected.utf8),
+            with: Data(sdkMethodFixture882Expected.utf8),
             options: [.fragmentsAllowed]
         )
         do {
-            _ = try await client.gists.list(
-            since: decoded("\"2024-01-01T00:00:00Z\""),
-            perPage: decoded("30"),
-            page: decoded("1")
+            _ = try await client.git.createTree(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            tree: decoded(sdkMethodFixture882Value1),
+            baseTree: decoded("\"9fb037999f264ba9a7fc6274d15fa3ae2ab98312\"")
         )
-            XCTFail("gistsList did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "gistsList decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "gistsList decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
     }
 
-    func testGistsListCommentsGistsListCommentsReachesMockAndDecodesResponse() async throws {
+    func testGitDeleteRefGitDeleteRefReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        let actual = try await client.gists.listComments(
-            gistId: decoded("\"gist-1\""),
-            perPage: decoded("30"),
-            page: decoded("1")
+        _ = try await client.git.deleteRef(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            ref: decoded("\"heads/feature-a\"")
+        )
+        XCTAssertTrue(true)
+    }
+
+    func testGitDeleteRefGitDeleteRef409ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/409") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture884Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.git.deleteRef(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            ref: decoded("\"heads/feature-a\"")
+        )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 409)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testGitGetBlobGitGetBlobReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.git.getBlob(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            fileSha: decoded("\"file_sha\"")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture853Expected.utf8),
+            with: Data(sdkMethodFixture885Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "gistsListComments decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
-    func testGistsListCommentsGistsListComments403ReachesMockAndDecodesResponse() async throws {
+    func testGitGetBlobGitGetBlob403ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
         _ = client
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture854Expected.utf8),
+            with: Data(sdkMethodFixture886Expected.utf8),
             options: [.fragmentsAllowed]
         )
         do {
-            _ = try await client.gists.listComments(
-            gistId: decoded("\"gist-1\""),
-            perPage: decoded("30"),
-            page: decoded("1")
+            _ = try await client.git.getBlob(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            fileSha: decoded("\"file_sha\"")
         )
-            XCTFail("gistsListComments did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "gistsListComments decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "gistsListComments decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testGistsListCommitsGistsListCommitsReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.gists.listCommits(
-            gistId: decoded("\"gist-1\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture855Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "gistsListCommits decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testGistsListCommitsGistsListCommits403ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture856Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.gists.listCommits(
-            gistId: decoded("\"gist-1\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
-            XCTFail("gistsListCommits did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 403)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "gistsListCommits decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "gistsListCommits decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testGistsListForksGistsListForksReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.gists.listForks(
-            gistId: decoded("\"gist-1\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture857Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "gistsListForks decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testGistsListForksGistsListForks403ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture858Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.gists.listForks(
-            gistId: decoded("\"gist-1\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
-            XCTFail("gistsListForks did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 403)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "gistsListForks decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "gistsListForks decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testGistsListForUserGistsListForUserReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.gists.listForUser(
-            username: decoded("\"Example Name\""),
-            since: decoded("\"2024-01-01T00:00:00Z\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture859Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "gistsListForUser decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testGistsListForUserGistsListForUser422ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/422") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture860Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.gists.listForUser(
-            username: decoded("\"Example Name\""),
-            since: decoded("\"2024-01-01T00:00:00Z\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
-            XCTFail("gistsListForUser did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 422)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "gistsListForUser decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "gistsListForUser decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testGistsListPublicGistsListPublicReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.gists.listPublic(
-            since: decoded("\"2024-01-01T00:00:00Z\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture861Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "gistsListPublic decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testGistsListPublicGistsListPublic403ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture862Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.gists.listPublic(
-            since: decoded("\"2024-01-01T00:00:00Z\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
-            XCTFail("gistsListPublic did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 403)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "gistsListPublic decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "gistsListPublic decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)

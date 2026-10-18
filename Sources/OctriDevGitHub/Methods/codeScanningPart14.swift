@@ -24,6 +24,6 @@ extension CodeScanningMethods {
     public static func codeScanningDeleteAnalysis(config: ClientConfig, owner: String, repo: String, analysisId: Int, confirmDelete: String? = nil, requestOptions: RequestOptions? = nil) async throws -> CodeScanningAnalysisDeletion {
         return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/code-scanning/analyses/", sdkEncodePathSegment(sdkWireString(analysisId))].joined(), config: config, query: [
             SdkQueryParameter("confirm_delete", value: confirmDelete),
-        ], decoder: .json, operationId: "codeScanningDeleteAnalysis", options: requestOptions, errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
+        ], decoder: .json, operationId: "codeScanningDeleteAnalysis", options: requestOptions, errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

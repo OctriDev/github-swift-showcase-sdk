@@ -42,6 +42,6 @@ extension ReposMethods {
     public static func reposDeleteFile(config: ClientConfig, options: ReposDeleteFileOptions, requestOptions: RequestOptions? = nil) async throws -> FileCommit {
         let requestBody = ReposDeleteFileRequestBody(options: options)
 
-        return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(options.owner)), "/", sdkEncodePathSegment(sdkWireString(options.repo)), "/contents/", sdkEncodePathSegment(sdkWireString(options.path))].joined(), config: config, body: requestBody, decoder: .json, operationId: "reposDeleteFile", options: requestOptions, errors: ["404": BasicError.self, "409": BasicError.self, "422": ValidationError.self])).data
+        return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(options.owner)), "/", sdkEncodePathSegment(sdkWireString(options.repo)), "/contents/", sdkEncodePathSegment(sdkWireString(options.path))].joined(), config: config, body: requestBody, decoder: .json, operationId: "reposDeleteFile", options: requestOptions, errors: ["404": BasicError.self, "409": BasicError.self, "422": ValidationError.self, "503": ServiceUnavailable.self])).data
     }
 }

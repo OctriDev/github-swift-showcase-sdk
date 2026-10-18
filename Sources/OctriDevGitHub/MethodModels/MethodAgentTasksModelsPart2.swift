@@ -9,44 +9,6 @@ import Foundation
 
 // Canonical agentTasks operation model declarations
 extension AgentTasksGetTaskByIdResponseVariant1SessionsItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.state) else {
-            throw SdkValidationError(field: "state", code: "required", message: "Validation failed for 'state': value is required")
-        }
-        guard container.contains(.createdAt) else {
-            throw SdkValidationError(field: "created_at", code: "required", message: "Validation failed for 'created_at': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.state = try container.sdkDecodeRequired(.state)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.user = try container.sdkDecodeIfPresent(.user)
-        self.owner = try container.sdkDecodeIfPresent(.owner)
-        self.repository = try container.sdkDecodeIfPresent(.repository)
-        self.taskId = try container.sdkDecodeIfPresent(.taskId)
-        self.updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
-        self.completedAt = try container.sdkDecodeIfPresent(.completedAt)
-        self.prompt = try container.sdkDecodeIfPresent(.prompt)
-        self.headRef = try container.sdkDecodeIfPresent(.headRef)
-        self.baseRef = try container.sdkDecodeIfPresent(.baseRef)
-        self.model = try container.sdkDecodeIfPresent(.model)
-        self.usage = try container.sdkDecodeIfPresent(.usage)
-        self.error = try container.sdkDecodeIfPresent(.error)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-        if let value = self.updatedAt {
-            try sdkValidateDateTime("updated_at", sdkWireString(value))
-        }
-        if let value = self.completedAt {
-            try sdkValidateDateTime("completed_at", sdkWireString(value))
-        }
-    }
-}
-
-extension AgentTasksGetTaskByIdResponseVariant1SessionsItem {
     public init(id: String, state: AgentTasksGetTaskByIdResponseVariant1SessionsItemState, createdAt: Date, name: String? = nil, user: AgentTasksGetTaskByIdResponseVariant1SessionsItemUser? = nil, owner: AgentTasksGetTaskByIdResponseVariant1SessionsItemOwner? = nil, repository: AgentTasksGetTaskByIdResponseVariant1SessionsItemRepository? = nil, taskId: String? = nil, updatedAt: Date? = nil, completedAt: Date? = nil, prompt: String? = nil, headRef: String? = nil, baseRef: String? = nil, model: String? = nil, usage: AgentTasksGetTaskByIdResponseVariant1SessionsItemUsage? = nil, error: AgentTasksGetTaskByIdResponseVariant1SessionsItemError? = nil) throws {
         (self.id, self.state) = (id, state)
         (self.createdAt, self.name) = (createdAt, name)
@@ -227,34 +189,6 @@ extension AgentTasksGetTaskByRepoAndIdResponseX2015fdde {
     }
 }
 
-/// A GitHub user
-public struct AgentTasksGetTaskByRepoAndIdResponseVariant0CreatorVariant0: Codable {
-    /// The unique identifier of the user
-    public var id: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-    }
-
-    init() {
-        self.id = nil
-    }
-}
-
-extension AgentTasksGetTaskByRepoAndIdResponseVariant0CreatorVariant0 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeIfPresent(.id)
-    }
-}
-
-extension AgentTasksGetTaskByRepoAndIdResponseVariant0CreatorVariant0 {
-    public init(id: Int? = nil) {
-        self.init()
-        self.id = id
-    }
-}
-
 /// Structured error response following GitHub REST API conventions. For 422 Unprocessable Entity the errors array
 /// contains validation details; for other error status codes only message and documentation_url are returned.
 public struct AgentTasksGetTaskByRepoAndIdResponseX13c2602c: Codable {
@@ -293,6 +227,38 @@ extension AgentTasksGetTaskByRepoAndIdResponseX13c2602c {
     public init(message: String, documentationUrl: String, errors: [AgentTasksGetTaskByRepoAndIdResponseErrorsItemX7ddc86d0]? = nil) {
         (self.message, self.documentationUrl) = (message, documentationUrl)
         self.errors = errors
+    }
+}
+
+/// A GitHub resource (pull request, issue, etc.)
+public struct AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemDataVariant0: Codable {
+    /// GitHub resource ID
+    public var id: Int
+    /// GraphQL global ID
+    public var globalId: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case globalId = "global_id"
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemDataVariant0 {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
+        }
+        self.id = try container.sdkDecodeRequired(.id)
+        self.globalId = try container.sdkDecodeIfPresent(.globalId)
+    }
+}
+
+extension AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemDataVariant0 {
+    public init(id: Int, globalId: String? = nil) {
+        (self.id, self.globalId) = (id, globalId)
     }
 }
 
@@ -388,40 +354,31 @@ extension AgentTasksCreateTaskInRepoResponseUserCollaboratorsItem {
     }
 }
 
-public indirect enum AgentTasksListTasksForRepoResponseTasksItemCreator {
-    case agentTasksListTasksForRepoResponseTasksItemCreatorVariant0(AgentTasksListTasksForRepoResponseTasksItemCreatorVariant0)
+/// The entity who created this task
+public struct AgentTasksListTasksForRepoResponseTasksItemCreator: Codable {
+    /// The unique identifier of the user
+    public var id: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+    }
+
+    init() {
+        self.id = nil
+    }
 }
 
-extension AgentTasksListTasksForRepoResponseTasksItemCreator: Codable {
-
+extension AgentTasksListTasksForRepoResponseTasksItemCreator {
     public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for AgentTasksListTasksForRepoResponseTasksItemCreator")
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.sdkDecodeIfPresent(.id)
     }
 }
 
 extension AgentTasksListTasksForRepoResponseTasksItemCreator {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(
-            AgentTasksListTasksForRepoResponseTasksItemCreatorVariant0.self
-        ) {
-            return             .agentTasksListTasksForRepoResponseTasksItemCreatorVariant0(value)
-        }
-        return nil
-    }
-}
-
-extension AgentTasksListTasksForRepoResponseTasksItemCreator {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .agentTasksListTasksForRepoResponseTasksItemCreatorVariant0(value): try container.encode(value); return true
-        }
+    public init(id: Int? = nil) {
+        self.init()
+        self.id = id
     }
 }
 
@@ -523,5 +480,61 @@ extension AgentTasksGetTaskByIdResponseX14135b7d {
     public init(message: String, documentationUrl: String, errors: [AgentTasksGetTaskByIdResponseErrorsItemXe7bb451d]? = nil) {
         (self.message, self.documentationUrl) = (message, documentationUrl)
         self.errors = errors
+    }
+}
+
+/// The owner of the repository
+public struct AgentTasksGetTaskByIdResponseVariant1SessionsItemOwner: Codable {
+    /// The unique identifier of the user
+    public var id: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+    }
+
+    init() {
+        self.id = nil
+    }
+}
+
+extension AgentTasksGetTaskByIdResponseVariant1SessionsItemOwner {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.sdkDecodeIfPresent(.id)
+    }
+}
+
+extension AgentTasksGetTaskByIdResponseVariant1SessionsItemOwner {
+    public init(id: Int? = nil) {
+        self.init()
+        self.id = id
+    }
+}
+
+/// The owner of the repository
+public struct AgentTasksCreateTaskInRepoResponseOwner: Codable {
+    /// The unique identifier of the user
+    public var id: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+    }
+
+    init() {
+        self.id = nil
+    }
+}
+
+extension AgentTasksCreateTaskInRepoResponseOwner {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.sdkDecodeIfPresent(.id)
+    }
+}
+
+extension AgentTasksCreateTaskInRepoResponseOwner {
+    public init(id: Int? = nil) {
+        self.init()
+        self.id = id
     }
 }

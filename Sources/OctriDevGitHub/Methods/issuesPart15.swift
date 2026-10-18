@@ -18,10 +18,10 @@ extension IssuesMethods {
         public var stateReason: SdkOptional<IssuesUpdateRequestBodyStateReason>?
         public var duplicateIssueId: Int?
         public var milestone: SdkOptional<IssuesUpdateRequestBodyMilestone>?
-        public var labels: [IssuesUpdateRequestBodyLabelsItem]?
-        public var assignees: [IssuesUpdateRequestBodyAssigneesItem]?
+        public var labels: [IssuesUpdateRequestLabelsItem]?
+        public var assignees: [IssuesUpdateRequestAssigneesItem]?
         public var issueFieldValues: [IssuesUpdateRequestBodyIssueFieldValuesItem]?
-        public var type: SdkOptional<IssuesUpdateRequestBodyType>?
+        public var type: SdkOptional<IssuesUpdateRequestType>?
 
         public init(owner: String, repo: String, issueNumber: Int) {
             self.owner = owner
@@ -69,6 +69,6 @@ extension IssuesMethods {
     public static func issuesUpdate(config: ClientConfig, options: IssuesUpdateOptions, requestOptions: RequestOptions? = nil) async throws -> IssuesUpdateResponse {
         let requestBody = IssuesUpdateRequestBody(options: options)
 
-        return try (await sdkRequest("PATCH", ["/repos/", sdkEncodePathSegment(sdkWireString(options.owner)), "/", sdkEncodePathSegment(sdkWireString(options.repo)), "/issues/", sdkEncodePathSegment(sdkWireString(options.issueNumber))].joined(), config: config, body: requestBody, decoder: .json, operationId: "issuesUpdate", options: requestOptions, errors: ["301": BasicError.self, "403": BasicError.self, "404": BasicError.self, "410": BasicError.self, "422": ValidationError.self])).data
+        return try (await sdkRequest("PATCH", ["/repos/", sdkEncodePathSegment(sdkWireString(options.owner)), "/", sdkEncodePathSegment(sdkWireString(options.repo)), "/issues/", sdkEncodePathSegment(sdkWireString(options.issueNumber))].joined(), config: config, body: requestBody, decoder: .json, operationId: "issuesUpdate", options: requestOptions, errors: ["301": BasicError.self, "403": BasicError.self, "404": BasicError.self, "410": BasicError.self, "422": ValidationError.self, "503": ServiceUnavailable.self])).data
     }
 }

@@ -23,6 +23,6 @@ extension IssuesMethods {
     public static func issuesReprioritizeSubIssue(config: ClientConfig, owner: String, repo: String, issueNumber: Int, subIssueId: Int, afterId: Int? = nil, beforeId: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> Issue {
         let requestBody = IssuesReprioritizeSubIssueRequestBody(subIssueId: subIssueId, afterId: afterId, beforeId: beforeId)
 
-        return try (await sdkRequest("PATCH", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/issues/", sdkEncodePathSegment(sdkWireString(issueNumber)), "/sub_issues/priority"].joined(), config: config, body: requestBody, decoder: .json, operationId: "issuesReprioritizeSubIssue", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationErrorSimple.self])).data
+        return try (await sdkRequest("PATCH", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/issues/", sdkEncodePathSegment(sdkWireString(issueNumber)), "/sub_issues/priority"].joined(), config: config, body: requestBody, decoder: .json, operationId: "issuesReprioritizeSubIssue", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationErrorSimple.self, "503": ServiceUnavailable.self])).data
     }
 }

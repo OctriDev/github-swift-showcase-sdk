@@ -13,6 +13,6 @@ extension CampaignsMethods {
     /// - org: The organization name. The name is not case sensitive.
     /// - campaignNumber: The campaign number.
     public static func campaignsDeleteCampaign(config: ClientConfig, org: String, campaignNumber: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/campaigns/", sdkEncodePathSegment(sdkWireString(campaignNumber))].joined(), config: config, decoder: .empty, operationId: "campaignsDeleteCampaign", options: requestOptions, errors: ["404": BasicError.self])).data
+        return try (await sdkRequest("DELETE", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/campaigns/", sdkEncodePathSegment(sdkWireString(campaignNumber))].joined(), config: config, decoder: .empty, operationId: "campaignsDeleteCampaign", options: requestOptions, errors: ["404": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

@@ -17,6 +17,6 @@ extension CodeScanningMethods {
     /// - analysisId: The ID of the analysis, as returned from the `GET
     ///   /repos/{owner}/{repo}/code-scanning/analyses` operation.
     public static func codeScanningGetAnalysis(config: ClientConfig, owner: String, repo: String, analysisId: Int, requestOptions: RequestOptions? = nil) async throws -> CodeScanningAnalysis {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/code-scanning/analyses/", sdkEncodePathSegment(sdkWireString(analysisId))].joined(), config: config, decoder: .json, operationId: "codeScanningGetAnalysis", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "422": BasicError.self])).data
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/code-scanning/analyses/", sdkEncodePathSegment(sdkWireString(analysisId))].joined(), config: config, decoder: .json, operationId: "codeScanningGetAnalysis", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "422": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

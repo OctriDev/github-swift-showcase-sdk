@@ -79,6 +79,6 @@ extension CodeScanningMethods {
             SdkQueryParameter("sort", value: options.sort),
             SdkQueryParameter("severity", value: options.severity),
             SdkQueryParameter("assignees", value: options.assignees),
-        ], decoder: .json, operationId: "codeScanningListAlertsForOrg", options: requestOptions, errors: ["404": BasicError.self])).data
+        ], decoder: .json, operationId: "codeScanningListAlertsForOrg", options: requestOptions, errors: ["404": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

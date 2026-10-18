@@ -21,7 +21,7 @@ extension ActionsMethods {
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - runnerId: Unique identifier of the self-hosted runner.
-    public static func actionsListLabelsForSelfHostedRunnerForOrg(config: ClientConfig, org: String, runnerId: Int, requestOptions: RequestOptions? = nil) async throws -> ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgResponse {
+    public static func actionsListLabelsForSelfHostedRunnerForOrg(config: ClientConfig, org: String, runnerId: Int, requestOptions: RequestOptions? = nil) async throws -> ActionsRunnerLabels {
         return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/actions/runners/", sdkEncodePathSegment(sdkWireString(runnerId)), "/labels"].joined(), config: config, decoder: .json, operationId: "actionsListLabelsForSelfHostedRunnerForOrg", options: requestOptions, errors: ["404": BasicError.self])).data
     }
 
@@ -31,7 +31,7 @@ extension ActionsMethods {
     /// - org: The organization name. The name is not case sensitive.
     /// - runnerId: Unique identifier of the self-hosted runner.
     /// - labels: The names of the custom labels to add to the runner.
-    public static func actionsAddCustomLabelsToSelfHostedRunnerForOrg(config: ClientConfig, org: String, runnerId: Int, labels: [String], requestOptions: RequestOptions? = nil) async throws -> ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgResponse {
+    public static func actionsAddCustomLabelsToSelfHostedRunnerForOrg(config: ClientConfig, org: String, runnerId: Int, labels: [String], requestOptions: RequestOptions? = nil) async throws -> ActionsRunnerLabels {
         try validateItems("labels", labels, min: 1, max: 100)
 
         let requestBody = ActionsAddCustomLabelsToSelfHostedRunnerForOrgRequestBody(labels: labels)

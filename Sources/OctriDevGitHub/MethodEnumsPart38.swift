@@ -67,33 +67,6 @@ public struct MigrationsGetStatusForOrgParameterItem: RawRepresentable, Hashable
     }
 }
 
-/// **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check.
-/// **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot
-/// change a check run conclusion to `stale`, only GitHub can set this.
-public struct ChecksUpdateRequestBodyConclusion: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let actionRequired = ChecksUpdateRequestBodyConclusion(rawValue: "action_required")
-    public static let cancelled = ChecksUpdateRequestBodyConclusion(rawValue: "cancelled")
-    public static let failure = ChecksUpdateRequestBodyConclusion(rawValue: "failure")
-    public static let neutral = ChecksUpdateRequestBodyConclusion(rawValue: "neutral")
-    public static let success = ChecksUpdateRequestBodyConclusion(rawValue: "success")
-    public static let skipped = ChecksUpdateRequestBodyConclusion(rawValue: "skipped")
-    public static let stale = ChecksUpdateRequestBodyConclusion(rawValue: "stale")
-    public static let timedOut = ChecksUpdateRequestBodyConclusion(rawValue: "timed_out")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
 /// Controls which repository resources a run may modify. `trigger` limits writes to the resource that started
 /// the run, when one exists, and resources created during the run; `repository` allows writes to any resource
 /// in the repository. Supported values: `trigger`, `repository`.
@@ -202,6 +175,24 @@ public struct CodeSecurityUpdateConfigurationRequestBodyEnforcement: RawRepresen
     public init(rawValue: String) { self.rawValue = rawValue }
     public static let enforced = CodeSecurityUpdateConfigurationRequestBodyEnforcement(rawValue: "enforced")
     public static let unenforced = CodeSecurityUpdateConfigurationRequestBodyEnforcement(rawValue: "unenforced")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+public struct AgentAutomationsCreateRepoAutomationResponseTriggersPullRequeX0f31056c53: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let timelineComment = AgentAutomationsCreateRepoAutomationResponseTriggersPullRequeX0f31056c53(rawValue: "timeline_comment")
+    public static let reviewComment = AgentAutomationsCreateRepoAutomationResponseTriggersPullRequeX0f31056c53(rawValue: "review_comment")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

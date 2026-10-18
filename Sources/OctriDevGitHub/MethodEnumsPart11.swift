@@ -6,45 +6,6 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public struct ReposListCollaboratorsParameter: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let outside = ReposListCollaboratorsParameter(rawValue: "outside")
-    public static let direct = ReposListCollaboratorsParameter(rawValue: "direct")
-    public static let all = ReposListCollaboratorsParameter(rawValue: "all")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
-/// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
-public struct AgentAutomationsCreateRepoAutomationRequestBodyTriggersIssueCX82866bcd4b: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let trigger = AgentAutomationsCreateRepoAutomationRequestBodyTriggersIssueCX82866bcd4b(rawValue: "trigger")
-    public static let repository = AgentAutomationsCreateRepoAutomationRequestBodyTriggersIssueCX82866bcd4b(rawValue: "repository")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
 /// The default value for a squash merge commit message: - `PR_BODY` - default to the pull request's body. -
 /// `COMMIT_MESSAGES` - default to the branch's commit messages. - `BLANK` - default to a blank commit message.
 public struct ReposCreateForAuthenticatedUserRequestBodySquashMergeCommitMessage: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
@@ -127,6 +88,27 @@ public struct SecretScanningUpdateAlertRequestBodyValidity: RawRepresentable, Ha
     }
 }
 
+/// The default value for a merge commit message. - `PR_TITLE` - default to the pull request's title. -
+/// `PR_BODY` - default to the pull request's body. - `BLANK` - default to a blank commit message.
+public struct AppsListReposAccessibleToInstallationResponseRepositoriesItemXd25bc05c9a: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let prBody = AppsListReposAccessibleToInstallationResponseRepositoriesItemXd25bc05c9a(rawValue: "PR_BODY")
+    public static let prTitle = AppsListReposAccessibleToInstallationResponseRepositoriesItemXd25bc05c9a(rawValue: "PR_TITLE")
+    public static let blank = AppsListReposAccessibleToInstallationResponseRepositoriesItemXd25bc05c9a(rawValue: "BLANK")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
 /// The enablement status of secret scanning extended metadata
 public struct CodeSecurityCreateConfigurationRequestBodySecretScanningExtendedMetadata: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
@@ -195,6 +177,25 @@ public struct AgentAutomationsCreateRepoAutomationResponseTriggersPullRequeXeeb6
     public init(rawValue: String) { self.rawValue = rawValue }
     public static let trigger = AgentAutomationsCreateRepoAutomationResponseTriggersPullRequeXeeb6720c67(rawValue: "trigger")
     public static let repository = AgentAutomationsCreateRepoAutomationResponseTriggersPullRequeXeeb6720c67(rawValue: "repository")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+public struct PullsListReviewCommentsForRepoParameter: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let created = PullsListReviewCommentsForRepoParameter(rawValue: "created")
+    public static let updated = PullsListReviewCommentsForRepoParameter(rawValue: "updated")
+    public static let createdAt = PullsListReviewCommentsForRepoParameter(rawValue: "created_at")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

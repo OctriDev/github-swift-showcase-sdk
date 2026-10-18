@@ -24,6 +24,6 @@ extension IssuesMethods {
 
         let requestBody = IssuesAddIssueFieldValuesRequestBody(issueFieldValues: issueFieldValues)
 
-        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/issues/", sdkEncodePathSegment(sdkWireString(issueNumber)), "/issue-field-values"].joined(), config: config, body: requestBody, decoder: .json, operationId: "issuesAddIssueFieldValues", options: requestOptions, errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
+        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/issues/", sdkEncodePathSegment(sdkWireString(issueNumber)), "/issue-field-values"].joined(), config: config, body: requestBody, decoder: .json, operationId: "issuesAddIssueFieldValues", options: requestOptions, errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self, "422": ValidationError.self, "503": ServiceUnavailable.self])).data
     }
 }

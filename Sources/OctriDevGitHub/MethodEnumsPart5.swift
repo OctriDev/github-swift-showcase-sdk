@@ -6,38 +6,6 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-/// The registry type.
-public struct PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let mavenRepository = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "maven_repository")
-    public static let nugetFeed = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "nuget_feed")
-    public static let goproxyServer = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "goproxy_server")
-    public static let npmRegistry = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "npm_registry")
-    public static let rubygemsServer = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "rubygems_server")
-    public static let cargoRegistry = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "cargo_registry")
-    public static let composerRepository = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "composer_repository")
-    public static let dockerRegistry = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "docker_registry")
-    public static let gitSource = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "git_source")
-    public static let helmRegistry = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "helm_registry")
-    public static let hexOrganization = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "hex_organization")
-    public static let hexRepository = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "hex_repository")
-    public static let pubRepository = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "pub_repository")
-    public static let pythonIndex = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "python_index")
-    public static let terraformRegistry = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "terraform_registry")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
 public struct PullsListParameterX7290b69e: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
@@ -191,6 +159,49 @@ public struct AgentAutomationsListAutomationTasksResponseErrorsItemCodeXc64d162e
     public static let alreadyExists = AgentAutomationsListAutomationTasksResponseErrorsItemCodeXc64d162e(rawValue: "already_exists")
     public static let unprocessable = AgentAutomationsListAutomationTasksResponseErrorsItemCodeXc64d162e(rawValue: "unprocessable")
     public static let custom = AgentAutomationsListAutomationTasksResponseErrorsItemCodeXc64d162e(rawValue: "custom")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Machine-readable error code
+public struct AgentTasksGetTaskByIdResponseErrorsItemCode: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let missing = AgentTasksGetTaskByIdResponseErrorsItemCode(rawValue: "missing")
+    public static let missingField = AgentTasksGetTaskByIdResponseErrorsItemCode(rawValue: "missing_field")
+    public static let invalid = AgentTasksGetTaskByIdResponseErrorsItemCode(rawValue: "invalid")
+    public static let alreadyExists = AgentTasksGetTaskByIdResponseErrorsItemCode(rawValue: "already_exists")
+    public static let unprocessable = AgentTasksGetTaskByIdResponseErrorsItemCode(rawValue: "unprocessable")
+    public static let custom = AgentTasksGetTaskByIdResponseErrorsItemCode(rawValue: "custom")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
+/// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
+public struct AgentAutomationsListAutomationsResponseItemTriggersPullRequesX0b712d6354: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let trigger = AgentAutomationsListAutomationsResponseItemTriggersPullRequesX0b712d6354(rawValue: "trigger")
+    public static let repository = AgentAutomationsListAutomationsResponseItemTriggersPullRequesX0b712d6354(rawValue: "repository")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

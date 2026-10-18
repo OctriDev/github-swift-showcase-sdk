@@ -208,13 +208,16 @@ extension RuleSuiteRuleEvaluationsItem {
 public struct RuleSuitePullRequest: Codable {
     /// The pull request associated with the rule evaluation.
     public var pullRequest: RuleSuitePullRequestPullRequest?
+    /// Optional enumerated value serialized in the `rule_type` wire field.
+    public var ruleType: RuleSuitePullRequestRuleType?
 
     enum CodingKeys: String, CodingKey {
         case pullRequest = "pull_request"
+        case ruleType = "rule_type"
     }
 
     init() {
-        self.pullRequest = nil
+        (self.pullRequest, self.ruleType) = (nil, nil)
     }
 }
 
@@ -222,13 +225,20 @@ extension RuleSuitePullRequest {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.pullRequest = try container.sdkDecodeIfPresent(.pullRequest)
+        self.ruleType = try container.sdkDecodeIfPresent(.ruleType)
+        if let value = self.ruleType {
+            try sdkValidateRawEnum("rule_type", value, RuleSuitePullRequestRuleType.allCases.map(\.rawValue))
+        }
     }
 }
 
 extension RuleSuitePullRequest {
-    public init(pullRequest: RuleSuitePullRequestPullRequest? = nil) {
+    public init(pullRequest: RuleSuitePullRequestPullRequest? = nil, ruleType: RuleSuitePullRequestRuleType? = nil) throws {
         self.init()
-        self.pullRequest = pullRequest
+        (self.pullRequest, self.ruleType) = (pullRequest, ruleType)
+        if let value = self.ruleType {
+            try sdkValidateRawEnum("rule_type", value, RuleSuitePullRequestRuleType.allCases.map(\.rawValue))
+        }
     }
 }
 
@@ -444,13 +454,16 @@ extension RuleSuite {
 public struct RuleSuiteRequiredStatusChecks: Codable {
     /// The status checks associated with the rule evaluation.
     public var checks: [RuleSuiteRequiredStatusChecksChecksItem]?
+    /// Optional enumerated value serialized in the `rule_type` wire field.
+    public var ruleType: RuleSuiteRequiredStatusChecksRuleType?
 
     enum CodingKeys: String, CodingKey {
         case checks
+        case ruleType = "rule_type"
     }
 
     init() {
-        self.checks = nil
+        (self.checks, self.ruleType) = (nil, nil)
     }
 }
 
@@ -458,13 +471,20 @@ extension RuleSuiteRequiredStatusChecks {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.checks = try container.sdkDecodeIfPresent(.checks)
+        self.ruleType = try container.sdkDecodeIfPresent(.ruleType)
+        if let value = self.ruleType {
+            try sdkValidateRawEnum("rule_type", value, RuleSuiteRequiredStatusChecksRuleType.allCases.map(\.rawValue))
+        }
     }
 }
 
 extension RuleSuiteRequiredStatusChecks {
-    public init(checks: [RuleSuiteRequiredStatusChecksChecksItem]? = nil) {
+    public init(checks: [RuleSuiteRequiredStatusChecksChecksItem]? = nil, ruleType: RuleSuiteRequiredStatusChecksRuleType? = nil) throws {
         self.init()
-        self.checks = checks
+        (self.checks, self.ruleType) = (checks, ruleType)
+        if let value = self.ruleType {
+            try sdkValidateRawEnum("rule_type", value, RuleSuiteRequiredStatusChecksRuleType.allCases.map(\.rawValue))
+        }
     }
 }
 
@@ -539,25 +559,5 @@ extension RuleSuitePullRequestPullRequestReviewsItem {
         self.init()
         (self.id, self.user) = (id, user)
         self.state = state
-    }
-}
-
-/// Optional object value serialized in the `rule_source` wire field.
-public struct RuleSuiteRuleEvaluationsItemRuleSource: Codable {
-    /// The type of rule source.
-    public var type: String?
-    /// The ID of the rule source.
-    public var id: Int?
-    /// The name of the rule source.
-    public var name: String?
-
-    enum CodingKeys: String, CodingKey {
-        case type
-        case id
-        case name
-    }
-
-    init() {
-        (self.type, self.id, self.name) = (nil, nil, nil)
     }
 }

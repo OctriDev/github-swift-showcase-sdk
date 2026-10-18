@@ -9,7 +9,7 @@ import Foundation
 
 // Canonical apps operation model declarations
 extension AppsListInstallationReposForAuthenticatedUserResponseRepositoriesItem {
-    public init(id: Int, nodeId: String, name: String, fullName: String, license: NullableLicenseSimple?, forks: Int, owner: SimpleUser, `private`: Bool, htmlUrl: String, description: String?, fork: Bool, url: String, archiveUrl: String, assigneesUrl: String, blobsUrl: String, branchesUrl: String, collaboratorsUrl: String, commentsUrl: String, commitsUrl: String, compareUrl: String, contentsUrl: String, contributorsUrl: String, deploymentsUrl: String, downloadsUrl: String, eventsUrl: String, forksUrl: String, gitCommitsUrl: String, gitRefsUrl: String, gitTagsUrl: String, gitUrl: String, issueCommentUrl: String, issueEventsUrl: String, issuesUrl: String, keysUrl: String, labelsUrl: String, languagesUrl: String, mergesUrl: String, milestonesUrl: String, notificationsUrl: String, pullsUrl: String, releasesUrl: String, sshUrl: String, stargazersUrl: String, statusesUrl: String, subscribersUrl: String, subscriptionUrl: String, tagsUrl: String, teamsUrl: String, treesUrl: String, cloneUrl: String, mirrorUrl: String?, hooksUrl: String, svnUrl: String, homepage: String?, language: String?, forksCount: Int, stargazersCount: Int, watchersCount: Int, size: Int, defaultBranch: String, openIssuesCount: Int, hasIssues: Bool, hasProjects: Bool, hasWiki: Bool, hasPages: Bool, hasDownloads: Bool, archived: Bool, disabled: Bool, pushedAt: Date?, createdAt: Date?, updatedAt: Date?, openIssues: Int, watchers: Int, permissions: RepositoryPermissions? = nil, isTemplate: Bool? = nil, topics: [String]? = nil, hasDiscussions: Bool? = nil, hasPullRequests: Bool? = nil, pullRequestCreationPolicy: RepositoryPullRequestCreationPolicy? = nil, visibility: String? = nil, allowRebaseMerge: Bool? = nil, tempCloneToken: String? = nil, allowSquashMerge: Bool? = nil, allowAutoMerge: Bool? = nil, deleteBranchOnMerge: Bool? = nil, allowUpdateBranch: Bool? = nil, useSquashPrTitleAsDefault: Bool? = nil, squashMergeCommitTitle: RepositorySquashMergeCommitTitle? = nil, squashMergeCommitMessage: RepositorySquashMergeCommitMessage? = nil, mergeCommitTitle: RepositoryMergeCommitTitle? = nil, mergeCommitMessage: RepositoryMergeCommitMessage? = nil, allowMergeCommit: Bool? = nil, allowForking: Bool? = nil, webCommitSignoffRequired: Bool? = nil, primaryBranch: String? = nil, starredAt: String? = nil, anonymousAccessEnabled: Bool? = nil, codeSearchIndexStatus: RepositoryCodeSearchIndexStatus? = nil, customProperties: [String: JSONValue]? = nil) throws {
+    public init(id: Int, nodeId: String, name: String, fullName: String, license: NullableLicenseSimple?, forks: Int, owner: SimpleUser, `private`: Bool, htmlUrl: String, description: String?, fork: Bool, url: String, archiveUrl: String, assigneesUrl: String, blobsUrl: String, branchesUrl: String, collaboratorsUrl: String, commentsUrl: String, commitsUrl: String, compareUrl: String, contentsUrl: String, contributorsUrl: String, deploymentsUrl: String, downloadsUrl: String, eventsUrl: String, forksUrl: String, gitCommitsUrl: String, gitRefsUrl: String, gitTagsUrl: String, gitUrl: String, issueCommentUrl: String, issueEventsUrl: String, issuesUrl: String, keysUrl: String, labelsUrl: String, languagesUrl: String, mergesUrl: String, milestonesUrl: String, notificationsUrl: String, pullsUrl: String, releasesUrl: String, sshUrl: String, stargazersUrl: String, statusesUrl: String, subscribersUrl: String, subscriptionUrl: String, tagsUrl: String, teamsUrl: String, treesUrl: String, cloneUrl: String, mirrorUrl: String?, hooksUrl: String, svnUrl: String, homepage: String?, language: String?, forksCount: Int, stargazersCount: Int, watchersCount: Int, size: Int, defaultBranch: String, openIssuesCount: Int, hasIssues: Bool, hasProjects: Bool, hasWiki: Bool, hasPages: Bool, hasDownloads: Bool, archived: Bool, disabled: Bool, pushedAt: Date?, createdAt: Date?, updatedAt: Date?, openIssues: Int, watchers: Int, permissions: AppsListInstallationReposForAuthenticatedUserResponseRepositoXfbc57dcb02? = nil, isTemplate: Bool? = nil, topics: [String]? = nil, hasDiscussions: Bool? = nil, hasPullRequests: Bool? = nil, pullRequestCreationPolicy: AppsListInstallationReposForAuthenticatedUserResponseRepositoX7d8fa4489f? = nil, visibility: String? = nil, allowRebaseMerge: Bool? = nil, tempCloneToken: String? = nil, allowSquashMerge: Bool? = nil, allowAutoMerge: Bool? = nil, deleteBranchOnMerge: Bool? = nil, allowUpdateBranch: Bool? = nil, useSquashPrTitleAsDefault: Bool? = nil, squashMergeCommitTitle: AppsListInstallationReposForAuthenticatedUserResponseRepositoXe6dfe6af0c? = nil, squashMergeCommitMessage: AppsListInstallationReposForAuthenticatedUserResponseRepositoX6003e45528? = nil, mergeCommitTitle: AppsListInstallationReposForAuthenticatedUserResponseRepositoX55612d4937? = nil, mergeCommitMessage: AppsListInstallationReposForAuthenticatedUserResponseRepositoX58478254fe? = nil, allowMergeCommit: Bool? = nil, allowForking: Bool? = nil, webCommitSignoffRequired: Bool? = nil, primaryBranch: String? = nil, starredAt: String? = nil, anonymousAccessEnabled: Bool? = nil, codeSearchIndexStatus: AppsListInstallationReposForAuthenticatedUserResponseRepositoXace4d6c012? = nil, customProperties: [String: JSONValue]? = nil) throws {
         (self.id, self.nodeId) = (id, nodeId)
         (self.name, self.fullName) = (name, fullName)
         (self.license, self.forks) = (license, forks)
@@ -317,7 +317,7 @@ public struct AppsListReposAccessibleToInstallationResponseRepositoriesItem: Cod
     /// Required `integer` value serialized in the `watchers` wire field.
     public var watchers: Int
     /// Optional object value serialized in the `permissions` wire field.
-    public var permissions: RepositoryPermissions?
+    public var permissions: AppsListReposAccessibleToInstallationResponseRepositoriesItemPermissions?
     /// Whether this repository acts as a template that can be used to generate new repositories.
     /// - Example: true
     public var isTemplate: Bool?
@@ -331,7 +331,7 @@ public struct AppsListReposAccessibleToInstallationResponseRepositoriesItem: Cod
     public var hasPullRequests: Bool?
     /// The policy controlling who can create pull requests: all or collaborators_only.
     /// - Example: "all"
-    public var pullRequestCreationPolicy: RepositoryPullRequestCreationPolicy?
+    public var pullRequestCreationPolicy: AppsListReposAccessibleToInstallationResponseRepositoriesItemXd3df6a5cde?
     /// The repository visibility: public, private, or internal.
     public var visibility: String?
     /// Whether to allow rebase merges for pull requests.
@@ -355,17 +355,17 @@ public struct AppsListReposAccessibleToInstallationResponseRepositoriesItem: Cod
     /// The default value for a squash merge commit title: - `PR_TITLE` - default to the pull request's title. -
     /// `COMMIT_OR_PR_TITLE` - default to the commit's title (if only one commit) or the pull request's title (when
     /// more than one commit).
-    public var squashMergeCommitTitle: RepositorySquashMergeCommitTitle?
+    public var squashMergeCommitTitle: AppsListReposAccessibleToInstallationResponseRepositoriesItemX5dafed43da?
     /// The default value for a squash merge commit message: - `PR_BODY` - default to the pull request's body. -
     /// `COMMIT_MESSAGES` - default to the branch's commit messages. - `BLANK` - default to a blank commit message.
-    public var squashMergeCommitMessage: RepositorySquashMergeCommitMessage?
+    public var squashMergeCommitMessage: AppsListReposAccessibleToInstallationResponseRepositoriesItemX553368913c?
     /// The default value for a merge commit title. - `PR_TITLE` - default to the pull request's title. -
     /// `MERGE_MESSAGE` - default to the classic title for a merge message (e.g., Merge pull request #123 from
     /// branch-name).
-    public var mergeCommitTitle: RepositoryMergeCommitTitle?
+    public var mergeCommitTitle: AppsListReposAccessibleToInstallationResponseRepositoriesItemX6025c9444b?
     /// The default value for a merge commit message. - `PR_TITLE` - default to the pull request's title. -
     /// `PR_BODY` - default to the pull request's body. - `BLANK` - default to a blank commit message.
-    public var mergeCommitMessage: RepositoryMergeCommitMessage?
+    public var mergeCommitMessage: AppsListReposAccessibleToInstallationResponseRepositoriesItemXd25bc05c9a?
     /// Whether to allow merge commits for pull requests.
     /// - Example: true
     public var allowMergeCommit: Bool?
@@ -381,7 +381,7 @@ public struct AppsListReposAccessibleToInstallationResponseRepositoriesItem: Cod
     /// Whether anonymous git access is enabled for this repository
     public var anonymousAccessEnabled: Bool?
     /// The status of the code search index for this repository
-    public var codeSearchIndexStatus: RepositoryCodeSearchIndexStatus?
+    public var codeSearchIndexStatus: AppsListReposAccessibleToInstallationResponseRepositoriesItemXbc571f6d86?
     /// The custom properties that were defined for the repository. The keys are the custom property names, and the
     /// values are the corresponding custom property values. Present for org repos only.
     public var customProperties: [String: JSONValue]?

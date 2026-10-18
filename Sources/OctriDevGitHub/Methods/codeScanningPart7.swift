@@ -51,6 +51,6 @@ extension CodeScanningMethods {
 
         let requestBody = CodeScanningUpdateAlertRequestBody(options: options)
 
-        return try (await sdkRequest("PATCH", ["/repos/", sdkEncodePathSegment(sdkWireString(options.owner)), "/", sdkEncodePathSegment(sdkWireString(options.repo)), "/code-scanning/alerts/", sdkEncodePathSegment(sdkWireString(options.alertNumber))].joined(), config: config, body: requestBody, decoder: .json, operationId: "codeScanningUpdateAlert", options: requestOptions, errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
+        return try (await sdkRequest("PATCH", ["/repos/", sdkEncodePathSegment(sdkWireString(options.owner)), "/", sdkEncodePathSegment(sdkWireString(options.repo)), "/code-scanning/alerts/", sdkEncodePathSegment(sdkWireString(options.alertNumber))].joined(), config: config, body: requestBody, decoder: .json, operationId: "codeScanningUpdateAlert", options: requestOptions, errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

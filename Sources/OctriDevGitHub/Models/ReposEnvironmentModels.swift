@@ -14,12 +14,30 @@ extension EnvironmentProtectionRulesItem: Codable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
+        }
         if let value = Self.decodeGroup1(from: container) { self = value; return }
         throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for EnvironmentProtectionRulesItem")
     }
 
     public func encode(to encoder: Encoder) throws {
         if try encodeGroup1(to: encoder) { return }
+    }
+}
+
+extension EnvironmentProtectionRulesItem {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(EnvironmentProtectionRulesItemVariant0.self), sdkKeepsEveryKey(value, of: raw) {
+            return .environmentProtectionRulesItemVariant0(value)
+        }
+        if let value = try? container.decode(EnvironmentProtectionRulesItemVariant1.self), sdkKeepsEveryKey(value, of: raw) {
+            return .environmentProtectionRulesItemVariant1(value)
+        }
+        if let value = try? container.decode(EnvironmentProtectionRulesItemVariant2.self), sdkKeepsEveryKey(value, of: raw) {
+            return .environmentProtectionRulesItemVariant2(value)
+        }
+        return nil
     }
 }
 
@@ -153,6 +171,57 @@ extension EnvironmentProtectionRulesItemVariant0 {
     }
 }
 
+public indirect enum EnvironmentProtectionRulesItemVariant1ReviewersItemReviewer {
+    case simpleUser(SimpleUser)
+    case team(Team)
+}
+
+extension EnvironmentProtectionRulesItemVariant1ReviewersItemReviewer: Codable {
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
+        }
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for EnvironmentProtectionRulesItemVariant1ReviewersItemReviewer")
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        if try encodeGroup1(to: encoder) { return }
+    }
+}
+
+extension EnvironmentProtectionRulesItemVariant1ReviewersItemReviewer {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(SimpleUser.self), sdkKeepsEveryKey(value, of: raw) {
+            return .simpleUser(value)
+        }
+        if let value = try? container.decode(Team.self), sdkKeepsEveryKey(value, of: raw) {
+            return .team(value)
+        }
+        return nil
+    }
+}
+
+extension EnvironmentProtectionRulesItemVariant1ReviewersItemReviewer {
+    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
+        if let value = try? container.decode(SimpleUser.self) { return .simpleUser(value) }
+        if let value = try? container.decode(Team.self) { return .team(value) }
+        return nil
+    }
+}
+
+extension EnvironmentProtectionRulesItemVariant1ReviewersItemReviewer {
+    func encodeGroup1(to encoder: Encoder) throws -> Bool {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case let .simpleUser(value): try container.encode(value); return true
+        case let .team(value): try container.encode(value); return true
+        }
+    }
+}
+
 /// Details of a deployment environment
 public struct Environment: Codable {
     /// The id of the environment.
@@ -252,7 +321,7 @@ public struct EnvironmentProtectionRulesItemVariant1ReviewersItem: Codable {
     /// - Example: "User"
     public var type: DeploymentReviewerType?
     /// Optional API value serialized in the `reviewer` wire field.
-    public var reviewer: ReviewersItemReviewer?
+    public var reviewer: EnvironmentProtectionRulesItemVariant1ReviewersItemReviewer?
 
     enum CodingKeys: String, CodingKey {
         case type
@@ -273,7 +342,7 @@ extension EnvironmentProtectionRulesItemVariant1ReviewersItem {
 }
 
 extension EnvironmentProtectionRulesItemVariant1ReviewersItem {
-    public init(type: DeploymentReviewerType? = nil, reviewer: ReviewersItemReviewer? = nil) {
+    public init(type: DeploymentReviewerType? = nil, reviewer: EnvironmentProtectionRulesItemVariant1ReviewersItemReviewer? = nil) {
         self.init()
         (self.type, self.reviewer) = (type, reviewer)
     }

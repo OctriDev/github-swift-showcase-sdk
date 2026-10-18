@@ -5,6 +5,27 @@ import Foundation
 
 // Apps domain models
 extension MarketplaceListingPlan {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.accountsUrl = try container.sdkDecodeRequired(.accountsUrl)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.number = try container.sdkDecodeRequired(.number)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.description = try container.sdkDecodeRequired(.description)
+        self.monthlyPriceInCents = try container.sdkDecodeRequired(.monthlyPriceInCents)
+        self.yearlyPriceInCents = try container.sdkDecodeRequired(.yearlyPriceInCents)
+        self.priceModel = try container.sdkDecodeRequired(.priceModel)
+        self.hasFreeTrial = try container.sdkDecodeRequired(.hasFreeTrial)
+        self.unitName = try container.sdkDecodeNullable(.unitName)
+        self.state = try container.sdkDecodeRequired(.state)
+        self.bullets = try container.sdkDecodeRequired(.bullets)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("accounts_url", self.accountsUrl)
+    }
+}
+
+extension MarketplaceListingPlan {
     public init(url: String, accountsUrl: String, id: Int, number: Int, name: String, description: String, monthlyPriceInCents: Int, yearlyPriceInCents: Int, priceModel: MarketplaceListingPlanPriceModel, hasFreeTrial: Bool, unitName: String?, state: String, bullets: [String]) throws {
         (self.url, self.accountsUrl) = (url, accountsUrl)
         (self.id, self.number) = (id, number)

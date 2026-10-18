@@ -4,45 +4,6 @@
 import Foundation
 
 // WebhookIssuesLabeled domain models
-/// Optional enumerated value serialized in the `content_references` wire field.
-public struct WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsContX64b57efa3a: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let read = WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsContX64b57efa3a(rawValue: "read")
-    public static let write = WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsContX64b57efa3a(rawValue: "write")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// Optional enumerated value serialized in the `organization_projects` wire field.
-public struct WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsOrgaX29f35975a6: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let read = WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsOrgaX29f35975a6(rawValue: "read")
-    public static let write = WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsOrgaX29f35975a6(rawValue: "write")
-    public static let admin = WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsOrgaX29f35975a6(rawValue: "admin")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
 /// Required enumerated value serialized in the `events[]` wire field.
 public struct WebhookIssuesLabeledIssuePerformedViaGithubAppEventsItem: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
@@ -426,6 +387,63 @@ public struct WebhookIssuesLabeledIssueActiveLockReason: RawRepresentable, Hasha
     public static let offTopic = WebhookIssuesLabeledIssueActiveLockReason(rawValue: "off-topic")
     public static let tooHeated = WebhookIssuesLabeledIssueActiveLockReason(rawValue: "too heated")
     public static let spam = WebhookIssuesLabeledIssueActiveLockReason(rawValue: "spam")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Optional enumerated value serialized in the `organization_administration` wire field.
+public struct WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsOrgaX36d2440800: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let read = WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsOrgaX36d2440800(rawValue: "read")
+    public static let write = WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsOrgaX36d2440800(rawValue: "write")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Optional enumerated value serialized in the `keys` wire field.
+public struct WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsKeys: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let read = WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsKeys(rawValue: "read")
+    public static let write = WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsKeys(rawValue: "write")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Optional enumerated value serialized in the `members` wire field.
+public struct WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsMembers: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let read = WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsMembers(rawValue: "read")
+    public static let write = WebhookIssuesLabeledIssuePerformedViaGithubAppPermissionsMembers(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

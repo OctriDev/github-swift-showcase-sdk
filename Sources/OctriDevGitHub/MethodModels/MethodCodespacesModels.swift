@@ -17,12 +17,29 @@ extension CodespacesCreateForAuthenticatedUserRequestBody: Codable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
+        }
         if let value = Self.decodeGroup1(from: container) { self = value; return }
         throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for CodespacesCreateForAuthenticatedUserRequestBody")
     }
 
     public func encode(to encoder: Encoder) throws {
         if try encodeGroup1(to: encoder) { return }
+    }
+}
+
+extension CodespacesCreateForAuthenticatedUserRequestBody {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(CodespacesCreateForAuthenticatedUserRequestBodyVariant0.self),
+           sdkKeepsEveryKey(value, of: raw) {
+            return .codespacesCreateForAuthenticatedUserRequestBodyVariant0(value)
+        }
+        if let value = try? container.decode(CodespacesCreateForAuthenticatedUserRequestBodyVariant1.self),
+           sdkKeepsEveryKey(value, of: raw) {
+            return .codespacesCreateForAuthenticatedUserRequestBodyVariant1(value)
+        }
+        return nil
     }
 }
 
@@ -487,18 +504,4 @@ public struct CodespacesRepoMachinesForAuthenticatedUserResponse: Codable {
     }
 
     private init(sdkCopy value: Self) { self = value }
-}
-
-extension CodespacesRepoMachinesForAuthenticatedUserResponse {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.totalCount) else {
-            throw SdkValidationError(field: "total_count", code: "required", message: "Validation failed for 'total_count': value is required")
-        }
-        guard container.contains(.machines) else {
-            throw SdkValidationError(field: "machines", code: "required", message: "Validation failed for 'machines': value is required")
-        }
-        self.totalCount = try container.sdkDecodeRequired(.totalCount)
-        self.machines = try container.sdkDecodeRequired(.machines)
-    }
 }

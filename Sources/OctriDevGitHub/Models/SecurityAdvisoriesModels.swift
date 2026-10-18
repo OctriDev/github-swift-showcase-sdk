@@ -357,155 +357,125 @@ extension RepositoryAdvisoryVulnerability {
     }
 }
 
-/// The author of the advisory.
-public struct RepositoryAdvisoryAuthor: Codable {
-    /// Required `string` value serialized in the `login` wire field.
-    /// - Example: "octocat"
-    public var login: String
-    /// Required `int64`-formatted value serialized in the `id` wire field.
-    /// - Example: 1
-    public var id: Int
-    /// Required `string` value serialized in the `node_id` wire field.
-    /// - Example: "MDQ6VXNlcjE="
-    public var nodeId: String
-    /// Required `uri`-formatted value serialized in the `avatar_url` wire field.
-    /// - Example: "https://github.com/images/error/octocat_happy.gif"
-    public var avatarUrl: String
-    /// Required `string` value serialized in the `gravatar_id` wire field.
-    /// - Example: "41d064eb2195891e12d0413f63227ea7"
-    public var gravatarId: String?
-    /// Required `uri`-formatted value serialized in the `url` wire field.
-    /// - Example: "https://api.github.com/users/octocat"
-    public var url: String
-    /// Required `uri`-formatted value serialized in the `html_url` wire field.
-    /// - Example: "https://github.com/octocat"
-    public var htmlUrl: String
-    /// Required `uri`-formatted value serialized in the `followers_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/followers"
-    public var followersUrl: String
-    /// Required `string` value serialized in the `following_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/following{/other_user}"
-    public var followingUrl: String
-    /// Required `string` value serialized in the `gists_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/gists{/gist_id}"
-    public var gistsUrl: String
-    /// Required `string` value serialized in the `starred_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/starred{/owner}{/repo}"
-    public var starredUrl: String
-    /// Required `uri`-formatted value serialized in the `subscriptions_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/subscriptions"
-    public var subscriptionsUrl: String
-    /// Required `uri`-formatted value serialized in the `organizations_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/orgs"
-    public var organizationsUrl: String
-    /// Required `uri`-formatted value serialized in the `repos_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/repos"
-    public var reposUrl: String
-    /// Required `string` value serialized in the `events_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/events{/privacy}"
-    public var eventsUrl: String
-    /// Required `uri`-formatted value serialized in the `received_events_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/received_events"
-    public var receivedEventsUrl: String
-    /// Required `string` value serialized in the `type` wire field.
-    /// - Example: "User"
-    public var type: String
-    /// Required `boolean` value serialized in the `site_admin` wire field.
-    public var siteAdmin: Bool
-    /// Optional `string` value serialized in the `name` wire field.
-    public var name: String?
-    /// Optional `string` value serialized in the `email` wire field.
-    public var email: String?
-    /// Optional `string` value serialized in the `starred_at` wire field.
-    /// - Example: "\"2020-07-09T00:17:55Z\""
-    public var starredAt: String?
-    /// Optional `string` value serialized in the `user_view_type` wire field.
-    /// - Example: "public"
-    public var userViewType: String?
+/// Required object value serialized in the `cvss` wire field.
+public struct GlobalAdvisoryCvss: Codable {
+    /// The CVSS vector.
+    public var vectorString: String?
+    /// The CVSS score.
+    public var score: Double?
 
     enum CodingKeys: String, CodingKey {
-        case login
-        case id
-        case nodeId = "node_id"
-        case avatarUrl = "avatar_url"
-        case gravatarId = "gravatar_id"
-        case url
-        case htmlUrl = "html_url"
-        case followersUrl = "followers_url"
-        case followingUrl = "following_url"
-        case gistsUrl = "gists_url"
-        case starredUrl = "starred_url"
-        case subscriptionsUrl = "subscriptions_url"
-        case organizationsUrl = "organizations_url"
-        case reposUrl = "repos_url"
-        case eventsUrl = "events_url"
-        case receivedEventsUrl = "received_events_url"
-        case type
-        case siteAdmin = "site_admin"
-        case name
-        case email
-        case starredAt = "starred_at"
-        case userViewType = "user_view_type"
+        case vectorString = "vector_string"
+        case score
     }
 
     private init(sdkCopy value: Self) { self = value }
 }
 
-extension RepositoryAdvisoryAuthor {
+extension GlobalAdvisoryCvss {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.login = try container.sdkDecodeRequired(.login)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
-        self.gravatarId = try container.sdkDecodeNullable(.gravatarId)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.followersUrl = try container.sdkDecodeRequired(.followersUrl)
-        self.followingUrl = try container.sdkDecodeRequired(.followingUrl)
-        self.gistsUrl = try container.sdkDecodeRequired(.gistsUrl)
-        self.starredUrl = try container.sdkDecodeRequired(.starredUrl)
-        self.subscriptionsUrl = try container.sdkDecodeRequired(.subscriptionsUrl)
-        self.organizationsUrl = try container.sdkDecodeRequired(.organizationsUrl)
-        self.reposUrl = try container.sdkDecodeRequired(.reposUrl)
-        self.eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        self.receivedEventsUrl = try container.sdkDecodeRequired(.receivedEventsUrl)
-        self.type = try container.sdkDecodeRequired(.type)
-        self.siteAdmin = try container.sdkDecodeRequired(.siteAdmin)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.email = try container.sdkDecodeIfPresent(.email)
-        self.starredAt = try container.sdkDecodeIfPresent(.starredAt)
-        self.userViewType = try container.sdkDecodeIfPresent(.userViewType)
-        try sdkValidateConstraints()
+        guard container.contains(.vectorString) else {
+            throw SdkValidationError(field: "vector_string", code: "required", message: "Validation failed for 'vector_string': value is required")
+        }
+        guard container.contains(.score) else {
+            throw SdkValidationError(field: "score", code: "required", message: "Validation failed for 'score': value is required")
+        }
+        self.vectorString = try container.sdkDecodeNullable(.vectorString)
+        self.score = try container.sdkDecodeNullable(.score)
+        if let value = self.score {
+            try validateRange("score", Double(value), min: 0, max: 10, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+        }
     }
 }
 
-extension RepositoryAdvisoryAuthor {
-    public init(login: String, id: Int, nodeId: String, avatarUrl: String, gravatarId: String?, url: String, htmlUrl: String, followersUrl: String, followingUrl: String, gistsUrl: String, starredUrl: String, subscriptionsUrl: String, organizationsUrl: String, reposUrl: String, eventsUrl: String, receivedEventsUrl: String, type: String, siteAdmin: Bool, name: String? = nil, email: String? = nil, starredAt: String? = nil, userViewType: String? = nil) throws {
-        (self.login, self.id) = (login, id)
-        (self.nodeId, self.avatarUrl) = (nodeId, avatarUrl)
-        (self.gravatarId, self.url) = (gravatarId, url)
-        (self.htmlUrl, self.followersUrl) = (htmlUrl, followersUrl)
-        (self.followingUrl, self.gistsUrl) = (followingUrl, gistsUrl)
-        (self.starredUrl, self.subscriptionsUrl) = (starredUrl, subscriptionsUrl)
-        (self.organizationsUrl, self.reposUrl) = (organizationsUrl, reposUrl)
-        (self.eventsUrl, self.receivedEventsUrl) = (eventsUrl, receivedEventsUrl)
-        (self.type, self.siteAdmin) = (type, siteAdmin)
-        (self.name, self.email) = (name, email)
-        (self.starredAt, self.userViewType) = (starredAt, userViewType)
-        try sdkValidateConstraints()
+extension GlobalAdvisoryCvss {
+    public init(vectorString: String?, score: Double?) throws {
+        (self.vectorString, self.score) = (vectorString, score)
+        if let value = self.score {
+            try validateRange("score", Double(value), min: 0, max: 10, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+        }
     }
 }
 
-extension RepositoryAdvisoryAuthor {
-    func sdkValidateConstraints() throws {
-            try sdkValidateUri("avatar_url", self.avatarUrl)
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("followers_url", self.followersUrl)
-            try sdkValidateUri("subscriptions_url", self.subscriptionsUrl)
-            try sdkValidateUri("organizations_url", self.organizationsUrl)
-            try sdkValidateUri("repos_url", self.reposUrl)
-            try sdkValidateUri("received_events_url", self.receivedEventsUrl)
+/// Required object value serialized in the `vulnerabilities[]` wire field.
+public struct RepositoryAdvisoryCreateVulnerabilitiesItem: Codable {
+    /// The name of the package affected by the vulnerability.
+    public var package: RepositoryAdvisoryCreateVulnerabilitiesItemPackage
+    /// The range of the package versions affected by the vulnerability.
+    public var vulnerableVersionRange: String?
+    /// The package version(s) that resolve the vulnerability.
+    public var patchedVersions: String?
+    /// The functions in the package that are affected.
+    public var vulnerableFunctions: [String]?
+
+    enum CodingKeys: String, CodingKey {
+        case package
+        case vulnerableVersionRange = "vulnerable_version_range"
+        case patchedVersions = "patched_versions"
+        case vulnerableFunctions = "vulnerable_functions"
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension RepositoryAdvisoryCreateVulnerabilitiesItem {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.package) else {
+            throw SdkValidationError(field: "package", code: "required", message: "Validation failed for 'package': value is required")
+        }
+        self.package = try container.sdkDecodeRequired(.package)
+        self.vulnerableVersionRange = try container.sdkDecodeIfPresent(.vulnerableVersionRange)
+        self.patchedVersions = try container.sdkDecodeIfPresent(.patchedVersions)
+        self.vulnerableFunctions = try container.sdkDecodeIfPresent(.vulnerableFunctions)
+    }
+}
+
+extension RepositoryAdvisoryCreateVulnerabilitiesItem {
+    public init(package: RepositoryAdvisoryCreateVulnerabilitiesItemPackage, vulnerableVersionRange: String? = nil, patchedVersions: String? = nil, vulnerableFunctions: [String]? = nil) {
+        (self.package, self.vulnerableVersionRange) = (package, vulnerableVersionRange)
+        (self.patchedVersions, self.vulnerableFunctions) = (patchedVersions, vulnerableFunctions)
+    }
+}
+
+/// Required object value serialized in the `cvss` wire field.
+public struct RepositoryAdvisoryCvss: Codable {
+    /// The CVSS vector.
+    public var vectorString: String?
+    /// The CVSS score.
+    public var score: Double?
+
+    enum CodingKeys: String, CodingKey {
+        case vectorString = "vector_string"
+        case score
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension RepositoryAdvisoryCvss {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.vectorString) else {
+            throw SdkValidationError(field: "vector_string", code: "required", message: "Validation failed for 'vector_string': value is required")
+        }
+        guard container.contains(.score) else {
+            throw SdkValidationError(field: "score", code: "required", message: "Validation failed for 'score': value is required")
+        }
+        self.vectorString = try container.sdkDecodeNullable(.vectorString)
+        self.score = try container.sdkDecodeNullable(.score)
+        if let value = self.score {
+            try validateRange("score", Double(value), min: 0, max: 10, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+        }
+    }
+}
+
+extension RepositoryAdvisoryCvss {
+    public init(vectorString: String?, score: Double?) throws {
+        (self.vectorString, self.score) = (vectorString, score)
+        if let value = self.score {
+            try validateRange("score", Double(value), min: 0, max: 10, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+        }
     }
 }

@@ -23,6 +23,6 @@ extension DependencyGraphMethods {
     public static func dependencyGraphDiffRange(config: ClientConfig, owner: String, repo: String, basehead: String, name: String? = nil, requestOptions: RequestOptions? = nil) async throws -> DependencyGraphDiff {
         return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/dependency-graph/compare/", sdkEncodePathSegment(sdkWireString(basehead))].joined(), config: config, query: [
             SdkQueryParameter("name", value: name),
-        ], decoder: .json, operationId: "dependencyGraphDiffRange", options: requestOptions, errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self])).data
+        ], decoder: .json, operationId: "dependencyGraphDiffRange", options: requestOptions, errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

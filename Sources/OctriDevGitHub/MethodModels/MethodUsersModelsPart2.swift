@@ -8,6 +8,30 @@ import Foundation
 #endif
 
 // Canonical users operation model declarations
+extension UsersDeleteEmailForAuthenticatedUserRequestBody {
+    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
+        if let value = try? container.decode(
+            UsersDeleteEmailForAuthenticatedUserRequestBodyVariant0.self
+        ) {
+            return             .usersDeleteEmailForAuthenticatedUserRequestBodyVariant0(value)
+        }
+        if let value = try? container.decode([String].self) { return .stringList(value) }
+        if let value = try? container.decode(String.self) { return .stringValue(value) }
+        return nil
+    }
+}
+
+extension UsersDeleteEmailForAuthenticatedUserRequestBody {
+    func encodeGroup1(to encoder: Encoder) throws -> Bool {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case let .usersDeleteEmailForAuthenticatedUserRequestBodyVariant0(value): try container.encode(value); return true
+        case let .stringList(value): try container.encode(value); return true
+        case let .stringValue(value): try container.encode(value); return true
+        }
+    }
+}
+
 public struct UsersDeleteAttestationsBulkRequestBodyVariant1: Codable {
     /// List of unique IDs associated with the artifact attestations to delete.
     public var attestationIds: [Int]

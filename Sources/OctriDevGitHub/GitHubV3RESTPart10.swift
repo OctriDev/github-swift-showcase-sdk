@@ -83,7 +83,7 @@ extension ActionsNamespace {
     }
 
 /// Generates a configuration that can be passed to the runner application at startup. The authenticated user must have admin access to the repository. OAuth tokens and personal access tokens (classic) need the`repo` scope to use this endpoint.
-    public func generateRunnerJitconfigForRepo(owner: String, repo: String, name: String, runnerGroupId: Int, labels: [String], workFolder: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ActionsGenerateRunnerJitconfigForOrgResponse {
+    public func generateRunnerJitconfigForRepo(owner: String, repo: String, name: String, runnerGroupId: Int, labels: [String], workFolder: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ActionsRunnerJitconfig {
         return try await ActionsMethods.actionsGenerateRunnerJitconfigForRepo(config: config, owner: owner, repo: repo, name: name, runnerGroupId: runnerGroupId, labels: labels, workFolder: workFolder, requestOptions: requestOptions)
     }
 
@@ -110,27 +110,27 @@ extension ActionsNamespace {
     }
 
 /// Lists all labels for a self-hosted runner configured in a repository. Authenticated users must have admin access to the repository to use this endpoint. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
-    public func listLabelsForSelfHostedRunnerForRepo(owner: String, repo: String, runnerId: Int, requestOptions: RequestOptions? = nil) async throws -> ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgResponse {
+    public func listLabelsForSelfHostedRunnerForRepo(owner: String, repo: String, runnerId: Int, requestOptions: RequestOptions? = nil) async throws -> ActionsRunnerLabels {
         return try await ActionsMethods.actionsListLabelsForSelfHostedRunnerForRepo(config: config, owner: owner, repo: repo, runnerId: runnerId, requestOptions: requestOptions)
     }
 
 /// Adds custom labels to a self-hosted runner configured in a repository. Authenticated users must have admin access to the organization to use this endpoint. OAuth tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
-    public func addCustomLabelsToSelfHostedRunnerForRepo(owner: String, repo: String, runnerId: Int, labels: [String], requestOptions: RequestOptions? = nil) async throws -> ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgResponse {
+    public func addCustomLabelsToSelfHostedRunnerForRepo(owner: String, repo: String, runnerId: Int, labels: [String], requestOptions: RequestOptions? = nil) async throws -> ActionsRunnerLabels {
         return try await ActionsMethods.actionsAddCustomLabelsToSelfHostedRunnerForRepo(config: config, owner: owner, repo: repo, runnerId: runnerId, labels: labels, requestOptions: requestOptions)
     }
 
 /// Remove all previous custom labels and set the new custom labels for a specific self-hosted runner configured in a repository. Authenticated users must have admin access to the repository to use this endpoint. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
-    public func setCustomLabelsForSelfHostedRunnerForRepo(owner: String, repo: String, runnerId: Int, labels: [String], requestOptions: RequestOptions? = nil) async throws -> ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgResponse {
+    public func setCustomLabelsForSelfHostedRunnerForRepo(owner: String, repo: String, runnerId: Int, labels: [String], requestOptions: RequestOptions? = nil) async throws -> ActionsRunnerLabels {
         return try await ActionsMethods.actionsSetCustomLabelsForSelfHostedRunnerForRepo(config: config, owner: owner, repo: repo, runnerId: runnerId, labels: labels, requestOptions: requestOptions)
     }
 
 /// Remove all custom labels from a self-hosted runner configured in a repository. Returns the remaining read-only labels from the runner. Authenticated users must have admin access to the repository to use this endpoint. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
-    public func removeAllCustomLabelsFromSelfHostedRunnerForRepo(owner: String, repo: String, runnerId: Int, requestOptions: RequestOptions? = nil) async throws -> ActionsRemoveAllCustomLabelsFromSelfHostedRunnerForOrgResponse {
+    public func removeAllCustomLabelsFromSelfHostedRunnerForRepo(owner: String, repo: String, runnerId: Int, requestOptions: RequestOptions? = nil) async throws -> ActionsRunnerLabelsReadonly {
         return try await ActionsMethods.actionsRemoveAllCustomLabelsFromSelfHostedRunnerForRepo(config: config, owner: owner, repo: repo, runnerId: runnerId, requestOptions: requestOptions)
     }
 
 /// Remove a custom label from a self-hosted runner configured in a repository. Returns the remaining labels from the runner. This endpoint returns a `404 Not Found` status if the custom label is not present on the runner. Authenticated users must have admin access to the repository to use this endpoint. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
-    public func removeCustomLabelFromSelfHostedRunnerForRepo(owner: String, repo: String, runnerId: Int, name: String, requestOptions: RequestOptions? = nil) async throws -> ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgResponse {
+    public func removeCustomLabelFromSelfHostedRunnerForRepo(owner: String, repo: String, runnerId: Int, name: String, requestOptions: RequestOptions? = nil) async throws -> ActionsRunnerLabels {
         return try await ActionsMethods.actionsRemoveCustomLabelFromSelfHostedRunnerForRepo(config: config, owner: owner, repo: repo, runnerId: runnerId, name: name, requestOptions: requestOptions)
     }
 }

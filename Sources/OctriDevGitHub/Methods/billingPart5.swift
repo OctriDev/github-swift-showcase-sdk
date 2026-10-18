@@ -13,6 +13,6 @@ extension BillingMethods {
     /// - org: The organization name. The name is not case sensitive.
     /// - budgetId: The ID corresponding to the budget.
     public static func billingGetBudgetOrg(config: ClientConfig, org: String, budgetId: String, requestOptions: RequestOptions? = nil) async throws -> GetBudget {
-        return try (await sdkRequest("GET", ["/organizations/", sdkEncodePathSegment(sdkWireString(org)), "/settings/billing/budgets/", sdkEncodePathSegment(sdkWireString(budgetId))].joined(), config: config, decoder: .json, operationId: "billingGetBudgetOrg", options: requestOptions, errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self])).data
+        return try (await sdkRequest("GET", ["/organizations/", sdkEncodePathSegment(sdkWireString(org)), "/settings/billing/budgets/", sdkEncodePathSegment(sdkWireString(budgetId))].joined(), config: config, decoder: .json, operationId: "billingGetBudgetOrg", options: requestOptions, errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

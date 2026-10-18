@@ -6,26 +6,6 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-/// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
-/// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
-public struct AgentAutomationsCreateRepoAutomationRequestBodyTriggersIssueOX1055dcf1c1: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let trigger = AgentAutomationsCreateRepoAutomationRequestBodyTriggersIssueOX1055dcf1c1(rawValue: "trigger")
-    public static let repository = AgentAutomationsCreateRepoAutomationRequestBodyTriggersIssueOX1055dcf1c1(rawValue: "repository")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
 public struct ReposGetOrgRuleSuitesParameterX7f640cd8: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
@@ -198,6 +178,26 @@ public struct AgentAutomationsListAutomationTasksResponseErrorsItemCodeXf4831980
     public static let alreadyExists = AgentAutomationsListAutomationTasksResponseErrorsItemCodeXf4831980(rawValue: "already_exists")
     public static let unprocessable = AgentAutomationsListAutomationTasksResponseErrorsItemCodeXf4831980(rawValue: "unprocessable")
     public static let custom = AgentAutomationsListAutomationTasksResponseErrorsItemCodeXf4831980(rawValue: "custom")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// The source of the runner image.
+public struct ActionsCreateHostedRunnerForOrgRequestBodyImageSource: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let github = ActionsCreateHostedRunnerForOrgRequestBodyImageSource(rawValue: "github")
+    public static let partner = ActionsCreateHostedRunnerForOrgRequestBodyImageSource(rawValue: "partner")
+    public static let custom = ActionsCreateHostedRunnerForOrgRequestBodyImageSource(rawValue: "custom")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

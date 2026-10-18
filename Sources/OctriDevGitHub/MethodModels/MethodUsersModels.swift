@@ -115,12 +115,27 @@ extension UsersDeleteAttestationsBulkRequestBody: Codable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
+        }
         if let value = Self.decodeGroup1(from: container) { self = value; return }
         throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for UsersDeleteAttestationsBulkRequestBody")
     }
 
     public func encode(to encoder: Encoder) throws {
         if try encodeGroup1(to: encoder) { return }
+    }
+}
+
+extension UsersDeleteAttestationsBulkRequestBody {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(UsersDeleteAttestationsBulkRequestBodyVariant0.self), sdkKeepsEveryKey(value, of: raw) {
+            return .usersDeleteAttestationsBulkRequestBodyVariant0(value)
+        }
+        if let value = try? container.decode(UsersDeleteAttestationsBulkRequestBodyVariant1.self), sdkKeepsEveryKey(value, of: raw) {
+            return .usersDeleteAttestationsBulkRequestBodyVariant1(value)
+        }
+        return nil
     }
 }
 
@@ -513,29 +528,5 @@ extension UsersDeleteEmailForAuthenticatedUserRequestBody: Codable {
 
     public func encode(to encoder: Encoder) throws {
         if try encodeGroup1(to: encoder) { return }
-    }
-}
-
-extension UsersDeleteEmailForAuthenticatedUserRequestBody {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(
-            UsersDeleteEmailForAuthenticatedUserRequestBodyVariant0.self
-        ) {
-            return             .usersDeleteEmailForAuthenticatedUserRequestBodyVariant0(value)
-        }
-        if let value = try? container.decode([String].self) { return .stringList(value) }
-        if let value = try? container.decode(String.self) { return .stringValue(value) }
-        return nil
-    }
-}
-
-extension UsersDeleteEmailForAuthenticatedUserRequestBody {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .usersDeleteEmailForAuthenticatedUserRequestBodyVariant0(value): try container.encode(value); return true
-        case let .stringList(value): try container.encode(value); return true
-        case let .stringValue(value): try container.encode(value); return true
-        }
     }
 }

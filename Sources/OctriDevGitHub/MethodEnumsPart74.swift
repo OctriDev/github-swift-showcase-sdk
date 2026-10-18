@@ -6,6 +6,33 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
+struct AppsDeleteAuthorizationRequestBody: Encodable {
+    let accessToken: String
+
+    func encode(to encoder: Encoder) throws {
+        var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
+        try keyedContainer.encode(self.accessToken, forKey: SdkCodingKey("access_token"))
+    }
+}
+
+struct AppsCheckTokenRequestBody: Encodable {
+    let accessToken: String
+
+    func encode(to encoder: Encoder) throws {
+        var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
+        try keyedContainer.encode(self.accessToken, forKey: SdkCodingKey("access_token"))
+    }
+}
+
+struct AppsResetTokenRequestBody: Encodable {
+    let accessToken: String
+
+    func encode(to encoder: Encoder) throws {
+        var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
+        try keyedContainer.encode(self.accessToken, forKey: SdkCodingKey("access_token"))
+    }
+}
+
 struct AppsDeleteTokenRequestBody: Encodable {
     let accessToken: String
 
@@ -175,33 +202,5 @@ struct ActionsSetForkPrContributorApprovalPermissionsOrganizationRequestBody: En
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
         try keyedContainer.encode(self.approvalPolicy, forKey: SdkCodingKey("approval_policy"))
-    }
-}
-
-struct ActionsSetPrivateRepoForkPrWorkflowsSettingsOrganizationRequestBody: Encodable {
-    let runWorkflowsFromForkPullRequests: Bool
-    var sendWriteTokensToWorkflows: Bool?
-    var sendSecretsAndVariables: Bool?
-    var requireApprovalForForkPrWorkflows: Bool?
-
-    func encode(to encoder: Encoder) throws {
-        var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.runWorkflowsFromForkPullRequests, forKey: SdkCodingKey("run_workflows_from_fork_pull_requests"))
-        try keyedContainer.encodeIfPresent(self.sendWriteTokensToWorkflows, forKey: SdkCodingKey("send_write_tokens_to_workflows"))
-        try keyedContainer.encodeIfPresent(self.sendSecretsAndVariables, forKey: SdkCodingKey("send_secrets_and_variables"))
-        try keyedContainer.encodeIfPresent(self.requireApprovalForForkPrWorkflows, forKey: SdkCodingKey("require_approval_for_fork_pr_workflows"))
-    }
-}
-
-struct ActionsSetAllowedActionsOrganizationRequestBody: Encodable {
-    var githubOwnedAllowed: Bool?
-    var verifiedAllowed: Bool?
-    var patternsAllowed: [String]?
-
-    func encode(to encoder: Encoder) throws {
-        var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.githubOwnedAllowed, forKey: SdkCodingKey("github_owned_allowed"))
-        try keyedContainer.encodeIfPresent(self.verifiedAllowed, forKey: SdkCodingKey("verified_allowed"))
-        try keyedContainer.encodeIfPresent(self.patternsAllowed, forKey: SdkCodingKey("patterns_allowed"))
     }
 }

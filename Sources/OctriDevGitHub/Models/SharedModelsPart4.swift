@@ -4,6 +4,98 @@
 import Foundation
 
 // Shared domain models
+/// Data related to a release.
+public struct ReleaseAsset: Codable {
+    /// Required `uri`-formatted value serialized in the `url` wire field.
+    public var url: String
+    /// Required `uri`-formatted value serialized in the `browser_download_url` wire field.
+    public var browserDownloadUrl: String
+    /// Required `integer` value serialized in the `id` wire field.
+    public var id: Int
+    /// Required `string` value serialized in the `node_id` wire field.
+    public var nodeId: String
+    /// The file name of the asset.
+    /// - Example: "Team Environment"
+    public var name: String
+    /// Required `string` value serialized in the `label` wire field.
+    public var label: String?
+    /// State of the release asset.
+    public var state: ReleaseAssetState
+    /// Required `string` value serialized in the `content_type` wire field.
+    public var contentType: String
+    /// Required `integer` value serialized in the `size` wire field.
+    public var size: Int
+    /// Required `string` value serialized in the `digest` wire field.
+    public var digest: String?
+    /// Required `integer` value serialized in the `download_count` wire field.
+    public var downloadCount: Int
+    /// Required `date-time`-formatted value serialized in the `created_at` wire field.
+    public var createdAt: Date
+    /// Required `date-time`-formatted value serialized in the `updated_at` wire field.
+    public var updatedAt: Date
+    /// A GitHub user.
+    public var uploader: NullableSimpleUser?
+
+    enum CodingKeys: String, CodingKey {
+        case url
+        case browserDownloadUrl = "browser_download_url"
+        case id
+        case nodeId = "node_id"
+        case name
+        case label
+        case state
+        case contentType = "content_type"
+        case size
+        case digest
+        case downloadCount = "download_count"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+        case uploader
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension ReleaseAsset {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.browserDownloadUrl = try container.sdkDecodeRequired(.browserDownloadUrl)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.label = try container.sdkDecodeNullable(.label)
+        self.state = try container.sdkDecodeRequired(.state)
+        self.contentType = try container.sdkDecodeRequired(.contentType)
+        self.size = try container.sdkDecodeRequired(.size)
+        self.digest = try container.sdkDecodeNullable(.digest)
+        self.downloadCount = try container.sdkDecodeRequired(.downloadCount)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        self.uploader = try container.sdkDecodeNullable(.uploader)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("browser_download_url", self.browserDownloadUrl)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+    }
+}
+
+extension ReleaseAsset {
+    public init(url: String, browserDownloadUrl: String, id: Int, nodeId: String, name: String, label: String?, state: ReleaseAssetState, contentType: String, size: Int, digest: String?, downloadCount: Int, createdAt: Date, updatedAt: Date, uploader: NullableSimpleUser?) throws {
+        (self.url, self.browserDownloadUrl) = (url, browserDownloadUrl)
+        (self.id, self.nodeId) = (id, nodeId)
+        (self.name, self.label) = (name, label)
+        (self.state, self.contentType) = (state, contentType)
+        (self.size, self.digest) = (size, digest)
+        (self.downloadCount, self.createdAt) = (downloadCount, createdAt)
+        (self.updatedAt, self.uploader) = (updatedAt, uploader)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("browser_download_url", self.browserDownloadUrl)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+    }
+}
+
 /// Diff Entry
 public struct DiffEntry: Codable {
     /// Required `string` value serialized in the `sha` wire field.
@@ -169,431 +261,5 @@ extension ScimError {
         (self.message, self.documentationUrl) = (message, documentationUrl)
         (self.detail, self.status) = (detail, status)
         (self.scimType, self.schemas) = (scimType, schemas)
-    }
-}
-
-/// Minimal Repository
-public struct MinimalRepository: Codable {
-    /// Required `int64`-formatted value serialized in the `id` wire field.
-    /// - Example: 1296269
-    public var id: Int
-    /// Required `string` value serialized in the `node_id` wire field.
-    /// - Example: "MDEwOlJlcG9zaXRvcnkxMjk2MjY5"
-    public var nodeId: String
-    /// Required `string` value serialized in the `name` wire field.
-    /// - Example: "Hello-World"
-    public var name: String
-    /// Required `string` value serialized in the `full_name` wire field.
-    /// - Example: "octocat/Hello-World"
-    public var fullName: String
-    /// A GitHub user.
-    public var owner: SimpleUser
-    /// Required `boolean` value serialized in the `private` wire field.
-    public var `private`: Bool
-    /// Required `uri`-formatted value serialized in the `html_url` wire field.
-    /// - Example: "https://github.com/octocat/Hello-World"
-    public var htmlUrl: String
-    /// Required `string` value serialized in the `description` wire field.
-    /// - Example: "This your first repo!"
-    public var description: String?
-    /// Required `boolean` value serialized in the `fork` wire field.
-    public var fork: Bool
-    /// Required `uri`-formatted value serialized in the `url` wire field.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World"
-    public var url: String
-    /// Required `string` value serialized in the `archive_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/{archive_format}{/ref}"
-    public var archiveUrl: String
-    /// Required `string` value serialized in the `assignees_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/assignees{/user}"
-    public var assigneesUrl: String
-    /// Required `string` value serialized in the `blobs_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/git/blobs{/sha}"
-    public var blobsUrl: String
-    /// Required `string` value serialized in the `branches_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/branches{/branch}"
-    public var branchesUrl: String
-    /// Required `string` value serialized in the `collaborators_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/collaborators{/collaborator}"
-    public var collaboratorsUrl: String
-    /// Required `string` value serialized in the `comments_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/comments{/number}"
-    public var commentsUrl: String
-    /// Required `string` value serialized in the `commits_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/commits{/sha}"
-    public var commitsUrl: String
-    /// Required `string` value serialized in the `compare_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/compare/{base}...{head}"
-    public var compareUrl: String
-    /// Required `string` value serialized in the `contents_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/contents/{+path}"
-    public var contentsUrl: String
-    /// Required `uri`-formatted value serialized in the `contributors_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/contributors"
-    public var contributorsUrl: String
-    /// Required `uri`-formatted value serialized in the `deployments_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/deployments"
-    public var deploymentsUrl: String
-    /// Required `uri`-formatted value serialized in the `downloads_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/downloads"
-    public var downloadsUrl: String
-    /// Required `uri`-formatted value serialized in the `events_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/events"
-    public var eventsUrl: String
-    /// Required `uri`-formatted value serialized in the `forks_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/forks"
-    public var forksUrl: String
-    /// Required `string` value serialized in the `git_commits_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/git/commits{/sha}"
-    public var gitCommitsUrl: String
-    /// Required `string` value serialized in the `git_refs_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/git/refs{/sha}"
-    public var gitRefsUrl: String
-    /// Required `string` value serialized in the `git_tags_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/git/tags{/sha}"
-    public var gitTagsUrl: String
-    /// Required `string` value serialized in the `issue_comment_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/issues/comments{/number}"
-    public var issueCommentUrl: String
-    /// Required `string` value serialized in the `issue_events_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/issues/events{/number}"
-    public var issueEventsUrl: String
-    /// Required `string` value serialized in the `issues_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/issues{/number}"
-    public var issuesUrl: String
-    /// Required `string` value serialized in the `keys_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/keys{/key_id}"
-    public var keysUrl: String
-    /// Required `string` value serialized in the `labels_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/labels{/name}"
-    public var labelsUrl: String
-    /// Required `uri`-formatted value serialized in the `languages_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/languages"
-    public var languagesUrl: String
-    /// Required `uri`-formatted value serialized in the `merges_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/merges"
-    public var mergesUrl: String
-    /// Required `string` value serialized in the `milestones_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/milestones{/number}"
-    public var milestonesUrl: String
-    /// Required `string` value serialized in the `notifications_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/notifications{?since,all,participating}"
-    public var notificationsUrl: String
-    /// Required `string` value serialized in the `pulls_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/pulls{/number}"
-    public var pullsUrl: String
-    /// Required `string` value serialized in the `releases_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/releases{/id}"
-    public var releasesUrl: String
-    /// Required `uri`-formatted value serialized in the `stargazers_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/stargazers"
-    public var stargazersUrl: String
-    /// Required `string` value serialized in the `statuses_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/statuses/{sha}"
-    public var statusesUrl: String
-    /// Required `uri`-formatted value serialized in the `subscribers_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/subscribers"
-    public var subscribersUrl: String
-    /// Required `uri`-formatted value serialized in the `subscription_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/subscription"
-    public var subscriptionUrl: String
-    /// Required `uri`-formatted value serialized in the `tags_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/tags"
-    public var tagsUrl: String
-    /// Required `uri`-formatted value serialized in the `teams_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/teams"
-    public var teamsUrl: String
-    /// Required `string` value serialized in the `trees_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/git/trees{/sha}"
-    public var treesUrl: String
-    /// Required `uri`-formatted value serialized in the `hooks_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/hooks"
-    public var hooksUrl: String
-    /// Optional `string` value serialized in the `git_url` wire field.
-    public var gitUrl: String?
-    /// Optional `string` value serialized in the `ssh_url` wire field.
-    public var sshUrl: String?
-    /// Optional `string` value serialized in the `clone_url` wire field.
-    public var cloneUrl: String?
-    /// Optional `string` value serialized in the `mirror_url` wire field.
-    public var mirrorUrl: String?
-    /// Optional `string` value serialized in the `svn_url` wire field.
-    public var svnUrl: String?
-    /// Optional `string` value serialized in the `homepage` wire field.
-    public var homepage: String?
-    /// Optional `string` value serialized in the `language` wire field.
-    public var language: String?
-    /// Optional `integer` value serialized in the `forks_count` wire field.
-    public var forksCount: Int?
-    /// Optional `integer` value serialized in the `stargazers_count` wire field.
-    public var stargazersCount: Int?
-    /// Optional `integer` value serialized in the `watchers_count` wire field.
-    public var watchersCount: Int?
-    /// The size of the repository, in kilobytes. Size is calculated hourly. When a repository is initially created,
-    /// the size is 0.
-    public var size: Int?
-    /// Optional `string` value serialized in the `default_branch` wire field.
-    public var defaultBranch: String?
-    /// Optional `integer` value serialized in the `open_issues_count` wire field.
-    public var openIssuesCount: Int?
-    /// Optional `boolean` value serialized in the `is_template` wire field.
-    public var isTemplate: Bool?
-    /// Optional array value serialized in the `topics` wire field.
-    public var topics: [String]?
-    /// Optional `boolean` value serialized in the `has_issues` wire field.
-    public var hasIssues: Bool?
-    /// Optional `boolean` value serialized in the `has_projects` wire field.
-    public var hasProjects: Bool?
-    /// Optional `boolean` value serialized in the `has_wiki` wire field.
-    public var hasWiki: Bool?
-    /// Optional `boolean` value serialized in the `has_pages` wire field.
-    public var hasPages: Bool?
-    /// Optional `boolean` value serialized in the `has_downloads` wire field.
-    public var hasDownloads: Bool?
-    /// Optional `boolean` value serialized in the `has_discussions` wire field.
-    public var hasDiscussions: Bool?
-    /// Optional `boolean` value serialized in the `has_pull_requests` wire field.
-    public var hasPullRequests: Bool?
-    /// The policy controlling who can create pull requests: all or collaborators_only.
-    public var pullRequestCreationPolicy: MinimalRepositoryPullRequestCreationPolicy?
-    /// Optional `boolean` value serialized in the `archived` wire field.
-    public var archived: Bool?
-    /// Optional `boolean` value serialized in the `disabled` wire field.
-    public var disabled: Bool?
-    /// Optional `string` value serialized in the `visibility` wire field.
-    public var visibility: String?
-    /// Optional `date-time`-formatted value serialized in the `pushed_at` wire field.
-    /// - Example: "2011-01-26T19:06:43Z"
-    public var pushedAt: Date?
-    /// Optional `date-time`-formatted value serialized in the `created_at` wire field.
-    /// - Example: "2011-01-26T19:01:12Z"
-    public var createdAt: Date?
-    /// Optional `date-time`-formatted value serialized in the `updated_at` wire field.
-    /// - Example: "2011-01-26T19:14:43Z"
-    public var updatedAt: Date?
-    /// Optional object value serialized in the `permissions` wire field.
-    public var permissions: MinimalRepositoryPermissions?
-    /// Optional `string` value serialized in the `role_name` wire field.
-    /// - Example: "admin"
-    public var roleName: String?
-    /// Optional `string` value serialized in the `temp_clone_token` wire field.
-    public var tempCloneToken: String?
-    /// Optional `boolean` value serialized in the `delete_branch_on_merge` wire field.
-    public var deleteBranchOnMerge: Bool?
-    /// Optional `integer` value serialized in the `subscribers_count` wire field.
-    public var subscribersCount: Int?
-    /// Optional `integer` value serialized in the `network_count` wire field.
-    public var networkCount: Int?
-    /// Code Of Conduct
-    public var codeOfConduct: CodeOfConduct?
-    /// Optional object value serialized in the `license` wire field.
-    public var license: MinimalRepositoryLicense?
-    /// Optional `integer` value serialized in the `forks` wire field.
-    public var forks: Int?
-    /// Optional `integer` value serialized in the `open_issues` wire field.
-    public var openIssues: Int?
-    /// Optional `integer` value serialized in the `watchers` wire field.
-    public var watchers: Int?
-    /// Optional `boolean` value serialized in the `allow_forking` wire field.
-    public var allowForking: Bool?
-    /// Optional `boolean` value serialized in the `web_commit_signoff_required` wire field.
-    public var webCommitSignoffRequired: Bool?
-    /// Optional object value serialized in the `security_and_analysis` wire field.
-    public var securityAndAnalysis: SecurityAndAnalysis?
-    /// The custom properties that were defined for the repository. The keys are the custom property names, and the
-    /// values are the corresponding custom property values.
-    public var customProperties: [String: JSONValue]?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case nodeId = "node_id"
-        case name
-        case fullName = "full_name"
-        case owner
-        case `private`
-        case htmlUrl = "html_url"
-        case description
-        case fork
-        case url
-        case archiveUrl = "archive_url"
-        case assigneesUrl = "assignees_url"
-        case blobsUrl = "blobs_url"
-        case branchesUrl = "branches_url"
-        case collaboratorsUrl = "collaborators_url"
-        case commentsUrl = "comments_url"
-        case commitsUrl = "commits_url"
-        case compareUrl = "compare_url"
-        case contentsUrl = "contents_url"
-        case contributorsUrl = "contributors_url"
-        case deploymentsUrl = "deployments_url"
-        case downloadsUrl = "downloads_url"
-        case eventsUrl = "events_url"
-        case forksUrl = "forks_url"
-        case gitCommitsUrl = "git_commits_url"
-        case gitRefsUrl = "git_refs_url"
-        case gitTagsUrl = "git_tags_url"
-        case issueCommentUrl = "issue_comment_url"
-        case issueEventsUrl = "issue_events_url"
-        case issuesUrl = "issues_url"
-        case keysUrl = "keys_url"
-        case labelsUrl = "labels_url"
-        case languagesUrl = "languages_url"
-        case mergesUrl = "merges_url"
-        case milestonesUrl = "milestones_url"
-        case notificationsUrl = "notifications_url"
-        case pullsUrl = "pulls_url"
-        case releasesUrl = "releases_url"
-        case stargazersUrl = "stargazers_url"
-        case statusesUrl = "statuses_url"
-        case subscribersUrl = "subscribers_url"
-        case subscriptionUrl = "subscription_url"
-        case tagsUrl = "tags_url"
-        case teamsUrl = "teams_url"
-        case treesUrl = "trees_url"
-        case hooksUrl = "hooks_url"
-        case gitUrl = "git_url"
-        case sshUrl = "ssh_url"
-        case cloneUrl = "clone_url"
-        case mirrorUrl = "mirror_url"
-        case svnUrl = "svn_url"
-        case homepage
-        case language
-        case forksCount = "forks_count"
-        case stargazersCount = "stargazers_count"
-        case watchersCount = "watchers_count"
-        case size
-        case defaultBranch = "default_branch"
-        case openIssuesCount = "open_issues_count"
-        case isTemplate = "is_template"
-        case topics
-        case hasIssues = "has_issues"
-        case hasProjects = "has_projects"
-        case hasWiki = "has_wiki"
-        case hasPages = "has_pages"
-        case hasDownloads = "has_downloads"
-        case hasDiscussions = "has_discussions"
-        case hasPullRequests = "has_pull_requests"
-        case pullRequestCreationPolicy = "pull_request_creation_policy"
-        case archived
-        case disabled
-        case visibility
-        case pushedAt = "pushed_at"
-        case createdAt = "created_at"
-        case updatedAt = "updated_at"
-        case permissions
-        case roleName = "role_name"
-        case tempCloneToken = "temp_clone_token"
-        case deleteBranchOnMerge = "delete_branch_on_merge"
-        case subscribersCount = "subscribers_count"
-        case networkCount = "network_count"
-        case codeOfConduct = "code_of_conduct"
-        case license
-        case forks
-        case openIssues = "open_issues"
-        case watchers
-        case allowForking = "allow_forking"
-        case webCommitSignoffRequired = "web_commit_signoff_required"
-        case securityAndAnalysis = "security_and_analysis"
-        case customProperties = "custom_properties"
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension MinimalRepository {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.fullName = try container.sdkDecodeRequired(.fullName)
-        self.owner = try container.sdkDecodeRequired(.owner)
-        self.`private` = try container.sdkDecodeRequired(.`private`)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.description = try container.sdkDecodeNullable(.description)
-        self.fork = try container.sdkDecodeRequired(.fork)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.archiveUrl = try container.sdkDecodeRequired(.archiveUrl)
-        self.assigneesUrl = try container.sdkDecodeRequired(.assigneesUrl)
-        self.blobsUrl = try container.sdkDecodeRequired(.blobsUrl)
-        self.branchesUrl = try container.sdkDecodeRequired(.branchesUrl)
-        self.collaboratorsUrl = try container.sdkDecodeRequired(.collaboratorsUrl)
-        self.commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
-        self.commitsUrl = try container.sdkDecodeRequired(.commitsUrl)
-        self.compareUrl = try container.sdkDecodeRequired(.compareUrl)
-        self.contentsUrl = try container.sdkDecodeRequired(.contentsUrl)
-        self.contributorsUrl = try container.sdkDecodeRequired(.contributorsUrl)
-        self.deploymentsUrl = try container.sdkDecodeRequired(.deploymentsUrl)
-        self.downloadsUrl = try container.sdkDecodeRequired(.downloadsUrl)
-        self.eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        self.forksUrl = try container.sdkDecodeRequired(.forksUrl)
-        self.gitCommitsUrl = try container.sdkDecodeRequired(.gitCommitsUrl)
-        self.gitRefsUrl = try container.sdkDecodeRequired(.gitRefsUrl)
-        self.gitTagsUrl = try container.sdkDecodeRequired(.gitTagsUrl)
-        self.issueCommentUrl = try container.sdkDecodeRequired(.issueCommentUrl)
-        self.issueEventsUrl = try container.sdkDecodeRequired(.issueEventsUrl)
-        self.issuesUrl = try container.sdkDecodeRequired(.issuesUrl)
-        self.keysUrl = try container.sdkDecodeRequired(.keysUrl)
-        self.labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
-        self.languagesUrl = try container.sdkDecodeRequired(.languagesUrl)
-        self.mergesUrl = try container.sdkDecodeRequired(.mergesUrl)
-        self.milestonesUrl = try container.sdkDecodeRequired(.milestonesUrl)
-        self.notificationsUrl = try container.sdkDecodeRequired(.notificationsUrl)
-        self.pullsUrl = try container.sdkDecodeRequired(.pullsUrl)
-        self.releasesUrl = try container.sdkDecodeRequired(.releasesUrl)
-        self.stargazersUrl = try container.sdkDecodeRequired(.stargazersUrl)
-        self.statusesUrl = try container.sdkDecodeRequired(.statusesUrl)
-        self.subscribersUrl = try container.sdkDecodeRequired(.subscribersUrl)
-        self.subscriptionUrl = try container.sdkDecodeRequired(.subscriptionUrl)
-        self.tagsUrl = try container.sdkDecodeRequired(.tagsUrl)
-        self.teamsUrl = try container.sdkDecodeRequired(.teamsUrl)
-        self.treesUrl = try container.sdkDecodeRequired(.treesUrl)
-        self.hooksUrl = try container.sdkDecodeRequired(.hooksUrl)
-        self.gitUrl = try container.sdkDecodeIfPresent(.gitUrl)
-        self.sshUrl = try container.sdkDecodeIfPresent(.sshUrl)
-        self.cloneUrl = try container.sdkDecodeIfPresent(.cloneUrl)
-        self.mirrorUrl = try container.sdkDecodeIfPresent(.mirrorUrl)
-        self.svnUrl = try container.sdkDecodeIfPresent(.svnUrl)
-        self.homepage = try container.sdkDecodeIfPresent(.homepage)
-        self.language = try container.sdkDecodeIfPresent(.language)
-        self.forksCount = try container.sdkDecodeIfPresent(.forksCount)
-        self.stargazersCount = try container.sdkDecodeIfPresent(.stargazersCount)
-        self.watchersCount = try container.sdkDecodeIfPresent(.watchersCount)
-        self.size = try container.sdkDecodeIfPresent(.size)
-        self.defaultBranch = try container.sdkDecodeIfPresent(.defaultBranch)
-        self.openIssuesCount = try container.sdkDecodeIfPresent(.openIssuesCount)
-        self.isTemplate = try container.sdkDecodeIfPresent(.isTemplate)
-        self.topics = try container.sdkDecodeIfPresent(.topics)
-        self.hasIssues = try container.sdkDecodeIfPresent(.hasIssues)
-        self.hasProjects = try container.sdkDecodeIfPresent(.hasProjects)
-        self.hasWiki = try container.sdkDecodeIfPresent(.hasWiki)
-        self.hasPages = try container.sdkDecodeIfPresent(.hasPages)
-        self.hasDownloads = try container.sdkDecodeIfPresent(.hasDownloads)
-        self.hasDiscussions = try container.sdkDecodeIfPresent(.hasDiscussions)
-        self.hasPullRequests = try container.sdkDecodeIfPresent(.hasPullRequests)
-        self.pullRequestCreationPolicy = try container.sdkDecodeIfPresent(.pullRequestCreationPolicy)
-        self.archived = try container.sdkDecodeIfPresent(.archived)
-        self.disabled = try container.sdkDecodeIfPresent(.disabled)
-        self.visibility = try container.sdkDecodeIfPresent(.visibility)
-        self.pushedAt = try container.sdkDecodeIfPresent(.pushedAt)
-        self.createdAt = try container.sdkDecodeIfPresent(.createdAt)
-        self.updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
-        self.permissions = try container.sdkDecodeIfPresent(.permissions)
-        self.roleName = try container.sdkDecodeIfPresent(.roleName)
-        self.tempCloneToken = try container.sdkDecodeIfPresent(.tempCloneToken)
-        self.deleteBranchOnMerge = try container.sdkDecodeIfPresent(.deleteBranchOnMerge)
-        self.subscribersCount = try container.sdkDecodeIfPresent(.subscribersCount)
-        self.networkCount = try container.sdkDecodeIfPresent(.networkCount)
-        self.codeOfConduct = try container.sdkDecodeIfPresent(.codeOfConduct)
-        self.license = try container.sdkDecodeIfPresent(.license)
-        self.forks = try container.sdkDecodeIfPresent(.forks)
-        self.openIssues = try container.sdkDecodeIfPresent(.openIssues)
-        self.watchers = try container.sdkDecodeIfPresent(.watchers)
-        self.allowForking = try container.sdkDecodeIfPresent(.allowForking)
-        self.webCommitSignoffRequired = try container.sdkDecodeIfPresent(.webCommitSignoffRequired)
-        self.securityAndAnalysis = try container.sdkDecodeIfPresent(.securityAndAnalysis)
-        self.customProperties = try container.sdkDecodeIfPresent(.customProperties)
-        try sdkValidateConstraintsPart1()
-        try sdkValidateConstraintsPart2()
     }
 }

@@ -4,6 +4,133 @@
 import Foundation
 
 // ReposRepositoryRule domain models
+extension RepositoryRuleCodeQuality {
+    public init(type: RepositoryRuleCodeQualityType, parameters: RepositoryRuleCodeQualityParameters? = nil) throws {
+        (self.type, self.parameters) = (type, parameters)
+            try sdkValidateRawEnum("type", self.type, RepositoryRuleCodeQualityType.allCases.map(\.rawValue))
+    }
+}
+
+/// Enforce any added or changed dependencies to comply with the organization's license policy.
+public struct RepositoryRuleLicenseComplianceScanning: Codable {
+    /// Required enumerated value serialized in the `type` wire field.
+    public var type: RepositoryRuleLicenseComplianceScanningType
+
+    enum CodingKeys: String, CodingKey {
+        case type
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension RepositoryRuleLicenseComplianceScanning {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.type) else {
+            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
+        }
+        self.type = try container.sdkDecodeRequired(.type)
+            try sdkValidateRawEnum("type", self.type, RepositoryRuleLicenseComplianceScanningType.allCases.map(\.rawValue))
+    }
+}
+
+extension RepositoryRuleLicenseComplianceScanning {
+    public init(type: RepositoryRuleLicenseComplianceScanningType) throws {
+        self.type = type
+            try sdkValidateRawEnum("type", self.type, RepositoryRuleLicenseComplianceScanningType.allCases.map(\.rawValue))
+    }
+}
+
+/// A reviewing team, and file patterns describing which files they must approve changes to.
+public struct RepositoryRuleParamsRequiredReviewerConfiguration: Codable {
+    /// Array of file patterns. Pull requests which change matching files must be approved by the specified team.
+    /// File patterns use fnmatch syntax.
+    public var filePatterns: [String]
+    /// Minimum number of approvals required from the specified team. If set to zero, the team will be added to the
+    /// pull request but approval is optional.
+    public var minimumApprovals: Int
+    /// A required reviewing team
+    public var reviewer: RepositoryRuleParamsReviewer
+
+    enum CodingKeys: String, CodingKey {
+        case filePatterns = "file_patterns"
+        case minimumApprovals = "minimum_approvals"
+        case reviewer
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension RepositoryRuleParamsRequiredReviewerConfiguration {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.filePatterns) else {
+            throw SdkValidationError(field: "file_patterns", code: "required", message: "Validation failed for 'file_patterns': value is required")
+        }
+        guard container.contains(.minimumApprovals) else {
+            throw SdkValidationError(field: "minimum_approvals", code: "required", message: "Validation failed for 'minimum_approvals': value is required")
+        }
+        guard container.contains(.reviewer) else {
+            throw SdkValidationError(field: "reviewer", code: "required", message: "Validation failed for 'reviewer': value is required")
+        }
+        self.filePatterns = try container.sdkDecodeRequired(.filePatterns)
+        self.minimumApprovals = try container.sdkDecodeRequired(.minimumApprovals)
+        self.reviewer = try container.sdkDecodeRequired(.reviewer)
+    }
+}
+
+extension RepositoryRuleParamsRequiredReviewerConfiguration {
+    public init(filePatterns: [String], minimumApprovals: Int, reviewer: RepositoryRuleParamsReviewer) {
+        (self.filePatterns, self.minimumApprovals) = (filePatterns, minimumApprovals)
+        self.reviewer = reviewer
+    }
+}
+
+/// Optional object value serialized in the `parameters` wire field.
+public struct RepositoryRuleCodeQualityParameters: Codable {
+    /// The lowest severity level at which code quality reviews need to be resolved before commits can be merged.
+    public var severity: RepositoryRuleCodeQualityParametersSeverity
+
+    enum CodingKeys: String, CodingKey {
+        case severity
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension RepositoryRuleCodeQualityParameters {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.severity) else {
+            throw SdkValidationError(field: "severity", code: "required", message: "Validation failed for 'severity': value is required")
+        }
+        self.severity = try container.sdkDecodeRequired(.severity)
+    }
+}
+
+extension RepositoryRuleCodeQualityParameters {
+    public init(severity: RepositoryRuleCodeQualityParametersSeverity) {
+        self.severity = severity
+    }
+}
+
+/// Optional object value serialized in the `parameters` wire field.
+public struct RepositoryRuleCopilotCodeReviewParameters: Codable {
+    /// Copilot automatically reviews draft pull requests before they are marked as ready for review.
+    public var reviewDraftPullRequests: Bool?
+    /// Copilot automatically reviews each new push to the pull request.
+    public var reviewOnPush: Bool?
+
+    enum CodingKeys: String, CodingKey {
+        case reviewDraftPullRequests = "review_draft_pull_requests"
+        case reviewOnPush = "review_on_push"
+    }
+
+    init() {
+        (self.reviewDraftPullRequests, self.reviewOnPush) = (nil, nil)
+    }
+}
+
 extension RepositoryRuleCopilotCodeReviewParameters {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -401,139 +528,6 @@ public enum RepositoryRuleNonFastForwardType: String, CaseIterable, Codable {
         let rawValue = try container.decode(String.self)
         guard let value = Self(rawValue: rawValue) else {
             let field = decoder.codingPath.last?.stringValue ?? "RepositoryRuleNonFastForwardType"
-            throw SdkValidationError(
-                field: field,
-                code: "enum",
-                message: "Validation failed for '\(field)': enum value '\(rawValue)' is not declared"
-            )
-        }
-        self = value
-    }
-}
-
-/// Required enumerated value serialized in the `type` wire field.
-public enum RepositoryRuleBranchNamePatternType: String, CaseIterable, Codable {
-    case branchNamePattern = "branch_name_pattern"
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        let rawValue = try container.decode(String.self)
-        guard let value = Self(rawValue: rawValue) else {
-            let field = decoder.codingPath.last?.stringValue ?? "RepositoryRuleBranchNamePatternType"
-            throw SdkValidationError(
-                field: field,
-                code: "enum",
-                message: "Validation failed for '\(field)': enum value '\(rawValue)' is not declared"
-            )
-        }
-        self = value
-    }
-}
-
-/// The severity level at which code scanning results that raise alerts block a reference update. For more
-/// information on alert severity levels, see "About code scanning alerts."
-public struct RepositoryRuleParamsCodeScanningToolAlertsThreshold: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let none = RepositoryRuleParamsCodeScanningToolAlertsThreshold(rawValue: "none")
-    public static let errors = RepositoryRuleParamsCodeScanningToolAlertsThreshold(rawValue: "errors")
-    public static let errorsAndWarnings = RepositoryRuleParamsCodeScanningToolAlertsThreshold(rawValue: "errors_and_warnings")
-    public static let all = RepositoryRuleParamsCodeScanningToolAlertsThreshold(rawValue: "all")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// Required enumerated value serialized in the `type` wire field.
-public enum RepositoryRuleCodeQualityType: String, CaseIterable, Codable {
-    case codeQuality = "code_quality"
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        let rawValue = try container.decode(String.self)
-        guard let value = Self(rawValue: rawValue) else {
-            let field = decoder.codingPath.last?.stringValue ?? "RepositoryRuleCodeQualityType"
-            throw SdkValidationError(
-                field: field,
-                code: "enum",
-                message: "Validation failed for '\(field)': enum value '\(rawValue)' is not declared"
-            )
-        }
-        self = value
-    }
-}
-
-/// Required enumerated value serialized in the `type` wire field.
-public enum RepositoryRuleDeletionType: String, CaseIterable, Codable {
-    case deletion
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        let rawValue = try container.decode(String.self)
-        guard let value = Self(rawValue: rawValue) else {
-            let field = decoder.codingPath.last?.stringValue ?? "RepositoryRuleDeletionType"
-            throw SdkValidationError(
-                field: field,
-                code: "enum",
-                message: "Validation failed for '\(field)': enum value '\(rawValue)' is not declared"
-            )
-        }
-        self = value
-    }
-}
-
-/// The type of the actor
-public struct RepositoryRuleParamsActorType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let user = RepositoryRuleParamsActorType(rawValue: "User")
-    public static let team = RepositoryRuleParamsActorType(rawValue: "Team")
-    public static let integrationInstallation = RepositoryRuleParamsActorType(rawValue: "IntegrationInstallation")
-    public static let repositoryRole = RepositoryRuleParamsActorType(rawValue: "RepositoryRole")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// Required enumerated value serialized in the `type` wire field.
-public enum RepositoryRuleCreationType: String, CaseIterable, Codable {
-    case creation
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        let rawValue = try container.decode(String.self)
-        guard let value = Self(rawValue: rawValue) else {
-            let field = decoder.codingPath.last?.stringValue ?? "RepositoryRuleCreationType"
-            throw SdkValidationError(
-                field: field,
-                code: "enum",
-                message: "Validation failed for '\(field)': enum value '\(rawValue)' is not declared"
-            )
-        }
-        self = value
-    }
-}
-
-/// Required enumerated value serialized in the `type` wire field.
-public enum RepositoryRuleCommitterEmailPatternType: String, CaseIterable, Codable {
-    case committerEmailPattern = "committer_email_pattern"
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        let rawValue = try container.decode(String.self)
-        guard let value = Self(rawValue: rawValue) else {
-            let field = decoder.codingPath.last?.stringValue ?? "RepositoryRuleCommitterEmailPatternType"
             throw SdkValidationError(
                 field: field,
                 code: "enum",

@@ -8,47 +8,6 @@ import Foundation
 #endif
 
 // Canonical agentTasks operation model declarations
-/// Structured error response following GitHub REST API conventions. For 422 Unprocessable Entity the errors array
-/// contains validation details; for other error status codes only message and documentation_url are returned.
-public struct AgentTasksListTasksForRepoResponseX339e5b00: Codable {
-    /// Summary message (e.g. "Validation Failed", "Not Found")
-    public var message: String
-    /// URL to relevant API documentation
-    public var documentationUrl: String
-    /// List of validation errors (present only for 422 responses)
-    public var errors: [AgentTasksListTasksForRepoResponseErrorsItemX10a76a3f]?
-
-    enum CodingKeys: String, CodingKey {
-        case message
-        case documentationUrl = "documentation_url"
-        case errors
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension AgentTasksListTasksForRepoResponseX339e5b00 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.message) else {
-            throw SdkValidationError(field: "message", code: "required", message: "Validation failed for 'message': value is required")
-        }
-        guard container.contains(.documentationUrl) else {
-            throw SdkValidationError(field: "documentation_url", code: "required", message: "Validation failed for 'documentation_url': value is required")
-        }
-        self.message = try container.sdkDecodeRequired(.message)
-        self.documentationUrl = try container.sdkDecodeRequired(.documentationUrl)
-        self.errors = try container.sdkDecodeIfPresent(.errors)
-    }
-}
-
-extension AgentTasksListTasksForRepoResponseX339e5b00 {
-    public init(message: String, documentationUrl: String, errors: [AgentTasksListTasksForRepoResponseErrorsItemX10a76a3f]? = nil) {
-        (self.message, self.documentationUrl) = (message, documentationUrl)
-        self.errors = errors
-    }
-}
-
 /// Error details for a failed session
 public struct AgentTasksGetTaskByIdResponseVariant1SessionsItemError: Codable {
     /// Error message
@@ -77,77 +36,59 @@ extension AgentTasksGetTaskByIdResponseVariant1SessionsItemError {
     }
 }
 
-public indirect enum AgentTasksGetTaskByRepoAndIdResponseVariant0Creator {
-    case agentTasksGetTaskByRepoAndIdResponseVariant0CreatorVariant0(AgentTasksGetTaskByRepoAndIdResponseVariant0CreatorVariant0)
-}
+/// The entity who created this task
+public struct AgentTasksGetTaskByRepoAndIdResponseVariant0Creator: Codable {
+    /// The unique identifier of the user
+    public var id: Int?
 
-extension AgentTasksGetTaskByRepoAndIdResponseVariant0Creator: Codable {
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for AgentTasksGetTaskByRepoAndIdResponseVariant0Creator")
+    enum CodingKeys: String, CodingKey {
+        case id
     }
 
-    public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+    init() {
+        self.id = nil
     }
 }
 
 extension AgentTasksGetTaskByRepoAndIdResponseVariant0Creator {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(
-            AgentTasksGetTaskByRepoAndIdResponseVariant0CreatorVariant0.self
-        ) {
-            return             .agentTasksGetTaskByRepoAndIdResponseVariant0CreatorVariant0(value)
-        }
-        return nil
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.sdkDecodeIfPresent(.id)
     }
 }
 
 extension AgentTasksGetTaskByRepoAndIdResponseVariant0Creator {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .agentTasksGetTaskByRepoAndIdResponseVariant0CreatorVariant0(value): try container.encode(value); return true
-        }
+    public init(id: Int? = nil) {
+        self.init()
+        self.id = id
     }
 }
 
-public indirect enum AgentTasksCreateTaskInRepoResponseCreator {
-    case agentTasksCreateTaskInRepoResponseCreatorVariant0(AgentTasksCreateTaskInRepoResponseCreatorVariant0)
+/// The entity who created this task
+public struct AgentTasksCreateTaskInRepoResponseCreator: Codable {
+    /// The unique identifier of the user
+    public var id: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+    }
+
+    init() {
+        self.id = nil
+    }
 }
 
-extension AgentTasksCreateTaskInRepoResponseCreator: Codable {
-
+extension AgentTasksCreateTaskInRepoResponseCreator {
     public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for AgentTasksCreateTaskInRepoResponseCreator")
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.sdkDecodeIfPresent(.id)
     }
 }
 
 extension AgentTasksCreateTaskInRepoResponseCreator {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(
-            AgentTasksCreateTaskInRepoResponseCreatorVariant0.self
-        ) {
-            return             .agentTasksCreateTaskInRepoResponseCreatorVariant0(value)
-        }
-        return nil
-    }
-}
-
-extension AgentTasksCreateTaskInRepoResponseCreator {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .agentTasksCreateTaskInRepoResponseCreatorVariant0(value): try container.encode(value); return true
-        }
+    public init(id: Int? = nil) {
+        self.init()
+        self.id = id
     }
 }
 
@@ -474,58 +415,102 @@ extension AgentTasksListTasksResponseTasksItemCustomAgent {
     }
 }
 
-public struct AgentTasksGetTaskByIdResponseVariant0: Codable {
-    /// Unique task identifier
-    public var id: String
-    /// Current state of the task, derived from its most recent session
-    public var state: AgentTasksGetTaskByIdResponseVariant0State
-    /// Timestamp when the task was created
-    public var createdAt: Date
-    /// API URL for this task
-    public var url: String?
-    /// Web URL for this task
-    public var htmlUrl: String?
-    /// Human-readable name derived from the task prompt
-    public var name: String?
-    /// The entity who created this task
-    public var creator: AgentTasksGetTaskByIdResponseVariant0Creator?
-    /// Type of the task creator
-    public var creatorType: AgentTasksGetTaskByIdResponseVariant0CreatorType?
-    /// User objects of collaborators on this task
-    public var userCollaborators: [AgentTasksGetTaskByIdResponseVariant0UserCollaboratorsItem]?
-    /// The owner of the repository
-    public var owner: AgentTasksGetTaskByIdResponseVariant0Owner?
-    /// The repository this task belongs to
-    public var repository: AgentTasksGetTaskByIdResponseVariant0Repository?
-    /// Number of sessions in this task
-    public var sessionCount: Int?
-    /// Resources created by this task (PRs, branches, etc.)
-    public var artifacts: [AgentTasksGetTaskByIdResponseVariant0ArtifactsItem]?
-    /// Timestamp when the task was archived, null if not archived
-    public var archivedAt: Date?
-    /// Timestamp of the most recent update
-    public var updatedAt: Date?
-    /// Custom agent metadata associated with this task
-    public var customAgent: AgentTasksGetTaskByIdResponseVariant0CustomAgent?
+public indirect enum AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemData {
+    case agentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemDataVariant0(
+        AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemDataVariant0
+    )
+    case agentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemDataVariant1(
+        AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemDataVariant1
+    )
+}
 
-    enum CodingKeys: String, CodingKey {
-        case id
-        case state
-        case createdAt = "created_at"
-        case url
-        case htmlUrl = "html_url"
-        case name
-        case creator
-        case creatorType = "creator_type"
-        case userCollaborators = "user_collaborators"
-        case owner
-        case repository
-        case sessionCount = "session_count"
-        case artifacts
-        case archivedAt = "archived_at"
-        case updatedAt = "updated_at"
-        case customAgent = "custom_agent"
+extension AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemData: Codable {
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
+        }
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemData")
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    public func encode(to encoder: Encoder) throws {
+        if try encodeGroup1(to: encoder) { return }
+    }
+}
+
+extension AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemData {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemDataVariant0.self),
+           sdkKeepsEveryKey(value, of: raw) {
+            return .agentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemDataVariant0(value)
+        }
+        if let value = try? container.decode(AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemDataVariant1.self),
+           sdkKeepsEveryKey(value, of: raw) {
+            return .agentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemDataVariant1(value)
+        }
+        return nil
+    }
+}
+
+extension AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemData {
+    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
+        if let value = try? container.decode(
+            AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemDataVariant0.self
+        ) {
+            return             .agentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemDataVariant0(value)
+        }
+        if let value = try? container.decode(
+            AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemDataVariant1.self
+        ) {
+            return             .agentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemDataVariant1(value)
+        }
+        return nil
+    }
+}
+
+extension AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemData {
+    func encodeGroup1(to encoder: Encoder) throws -> Bool {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case let .agentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemDataVariant0(value): try container.encode(value); return true
+        case let .agentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemDataVariant1(value): try container.encode(value); return true
+        }
+    }
+}
+
+public indirect enum AgentTasksGetTaskByIdResponseVariant0ArtifactsItemData {
+    case agentTasksGetTaskByIdResponseVariant0ArtifactsItemDataVariant0(AgentTasksGetTaskByIdResponseVariant0ArtifactsItemDataVariant0)
+    case agentTasksGetTaskByIdResponseVariant0ArtifactsItemDataVariant1(AgentTasksGetTaskByIdResponseVariant0ArtifactsItemDataVariant1)
+}
+
+extension AgentTasksGetTaskByIdResponseVariant0ArtifactsItemData: Codable {
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
+        }
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for AgentTasksGetTaskByIdResponseVariant0ArtifactsItemData")
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        if try encodeGroup1(to: encoder) { return }
+    }
+}
+
+extension AgentTasksGetTaskByIdResponseVariant0ArtifactsItemData {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(AgentTasksGetTaskByIdResponseVariant0ArtifactsItemDataVariant0.self),
+           sdkKeepsEveryKey(value, of: raw) {
+            return .agentTasksGetTaskByIdResponseVariant0ArtifactsItemDataVariant0(value)
+        }
+        if let value = try? container.decode(AgentTasksGetTaskByIdResponseVariant0ArtifactsItemDataVariant1.self),
+           sdkKeepsEveryKey(value, of: raw) {
+            return .agentTasksGetTaskByIdResponseVariant0ArtifactsItemDataVariant1(value)
+        }
+        return nil
+    }
 }

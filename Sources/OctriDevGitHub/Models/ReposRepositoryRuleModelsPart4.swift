@@ -4,6 +4,123 @@
 import Foundation
 
 // ReposRepositoryRule domain models
+extension RepositoryRuleCodeCoverageParameters {
+    public init(maxCoverageDrop: Double? = nil, minimumCoverage: Double? = nil) throws {
+        self.init()
+        (self.maxCoverageDrop, self.minimumCoverage) = (maxCoverageDrop, minimumCoverage)
+        if let value = self.maxCoverageDrop {
+            try validateRange("max_coverage_drop", Double(value), min: 0, max: 100, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+        }
+        if let value = self.minimumCoverage {
+            try validateRange("minimum_coverage", Double(value), min: 0, max: 100, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+        }
+    }
+}
+
+public struct RepositoryRuleDetailedVariant18: Codable {
+    /// Required enumerated value serialized in the `type` wire field.
+    public var type: RepositoryRuleCodeCoverageType
+    /// Optional object value serialized in the `parameters` wire field.
+    public var parameters: RepositoryRuleCodeCoverageParameters?
+    /// The type of source for the ruleset that includes this rule.
+    public var rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType?
+    /// The name of the source of the ruleset that includes this rule.
+    public var rulesetSource: String?
+    /// The ID of the ruleset that includes this rule.
+    public var rulesetId: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case type
+        case parameters
+        case rulesetSourceType = "ruleset_source_type"
+        case rulesetSource = "ruleset_source"
+        case rulesetId = "ruleset_id"
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension RepositoryRuleDetailedVariant18 {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.type) else {
+            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
+        }
+        self.type = try container.sdkDecodeRequired(.type)
+        self.parameters = try container.sdkDecodeIfPresent(.parameters)
+        self.rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
+        self.rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
+        self.rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
+            try sdkValidateRawEnum("type", self.type, RepositoryRuleCodeCoverageType.allCases.map(\.rawValue))
+    }
+}
+
+extension RepositoryRuleDetailedVariant18 {
+    public init(type: RepositoryRuleCodeCoverageType, parameters: RepositoryRuleCodeCoverageParameters? = nil, rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil, rulesetSource: String? = nil, rulesetId: Int? = nil) throws {
+        (self.type, self.parameters) = (type, parameters)
+        (self.rulesetSourceType, self.rulesetSource) = (rulesetSourceType, rulesetSource)
+        self.rulesetId = rulesetId
+            try sdkValidateRawEnum("type", self.type, RepositoryRuleCodeCoverageType.allCases.map(\.rawValue))
+    }
+}
+
+/// Prevent commits with individual files that exceed the specified limit from being pushed to the commit graph.
+public struct RepositoryRuleMaxFileSize: Codable {
+    /// Required enumerated value serialized in the `type` wire field.
+    public var type: RepositoryRuleMaxFileSizeType
+    /// Optional object value serialized in the `parameters` wire field.
+    public var parameters: RepositoryRuleMaxFileSizeParameters?
+
+    enum CodingKeys: String, CodingKey {
+        case type
+        case parameters
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension RepositoryRuleMaxFileSize {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.type) else {
+            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
+        }
+        self.type = try container.sdkDecodeRequired(.type)
+        self.parameters = try container.sdkDecodeIfPresent(.parameters)
+            try sdkValidateRawEnum("type", self.type, RepositoryRuleMaxFileSizeType.allCases.map(\.rawValue))
+    }
+}
+
+extension RepositoryRuleMaxFileSize {
+    public init(type: RepositoryRuleMaxFileSizeType, parameters: RepositoryRuleMaxFileSizeParameters? = nil) throws {
+        (self.type, self.parameters) = (type, parameters)
+            try sdkValidateRawEnum("type", self.type, RepositoryRuleMaxFileSizeType.allCases.map(\.rawValue))
+    }
+}
+
+/// Only allow users with bypass permission to create matching refs.
+public struct RepositoryRuleCreation: Codable {
+    /// Required enumerated value serialized in the `type` wire field.
+    public var type: RepositoryRuleCreationType
+
+    enum CodingKeys: String, CodingKey {
+        case type
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension RepositoryRuleCreation {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.type) else {
+            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
+        }
+        self.type = try container.sdkDecodeRequired(.type)
+            try sdkValidateRawEnum("type", self.type, RepositoryRuleCreationType.allCases.map(\.rawValue))
+    }
+}
+
 extension RepositoryRuleCreation {
     public init(type: RepositoryRuleCreationType) throws {
         self.type = type
@@ -364,128 +481,6 @@ public struct RepositoryRuleNonFastForward: Codable {
 
     enum CodingKeys: String, CodingKey {
         case type
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryRuleNonFastForward {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        self.type = try container.sdkDecodeRequired(.type)
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleNonFastForwardType.allCases.map(\.rawValue))
-    }
-}
-
-extension RepositoryRuleNonFastForward {
-    public init(type: RepositoryRuleNonFastForwardType) throws {
-        self.type = type
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleNonFastForwardType.allCases.map(\.rawValue))
-    }
-}
-
-/// Optional object value serialized in the `parameters` wire field.
-public struct RepositoryRuleCodeScanningParameters: Codable {
-    /// Tools that must provide code scanning results for this rule to pass.
-    public var codeScanningTools: [RepositoryRuleParamsCodeScanningTool]
-
-    enum CodingKeys: String, CodingKey {
-        case codeScanningTools = "code_scanning_tools"
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryRuleCodeScanningParameters {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.codeScanningTools) else {
-            throw SdkValidationError(field: "code_scanning_tools", code: "required", message: "Validation failed for 'code_scanning_tools': value is required")
-        }
-        self.codeScanningTools = try container.sdkDecodeRequired(.codeScanningTools)
-    }
-}
-
-extension RepositoryRuleCodeScanningParameters {
-    public init(codeScanningTools: [RepositoryRuleParamsCodeScanningTool]) {
-        self.codeScanningTools = codeScanningTools
-    }
-}
-
-public struct RepositoryRuleDetailedVariant6: Codable {
-    /// Required enumerated value serialized in the `type` wire field.
-    public var type: RepositoryRuleRequiredSignaturesType
-    /// The type of source for the ruleset that includes this rule.
-    public var rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType?
-    /// The name of the source of the ruleset that includes this rule.
-    public var rulesetSource: String?
-    /// The ID of the ruleset that includes this rule.
-    public var rulesetId: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case type
-        case rulesetSourceType = "ruleset_source_type"
-        case rulesetSource = "ruleset_source"
-        case rulesetId = "ruleset_id"
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryRuleDetailedVariant6 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        self.type = try container.sdkDecodeRequired(.type)
-        self.rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
-        self.rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
-        self.rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleRequiredSignaturesType.allCases.map(\.rawValue))
-    }
-}
-
-extension RepositoryRuleDetailedVariant6 {
-    public init(type: RepositoryRuleRequiredSignaturesType, rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil, rulesetSource: String? = nil, rulesetId: Int? = nil) throws {
-        (self.type, self.rulesetSourceType) = (type, rulesetSourceType)
-        (self.rulesetSource, self.rulesetId) = (rulesetSource, rulesetId)
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleRequiredSignaturesType.allCases.map(\.rawValue))
-    }
-}
-
-/// Optional object value serialized in the `parameters` wire field.
-public struct RepositoryRuleMergeQueueParameters: Codable {
-    /// Maximum time for a required status check to report a conclusion. After this much time has elapsed, checks
-    /// that have not reported a conclusion will be assumed to have failed
-    public var checkResponseTimeoutMinutes: Int
-    /// When set to ALLGREEN, the merge commit created by merge queue for each PR in the group must pass all
-    /// required checks to merge. When set to HEADGREEN, only the commit at the head of the merge group, i.e. the
-    /// commit containing changes from all of the PRs in the group, must pass its required checks to merge.
-    public var groupingStrategy: RepositoryRuleMergeQueueParametersGroupingStrategy
-    /// Limit the number of queued pull requests requesting checks and workflow runs at the same time.
-    public var maxEntriesToBuild: Int
-    /// The maximum number of PRs that will be merged together in a group.
-    public var maxEntriesToMerge: Int
-    /// Method to use when merging changes from queued pull requests.
-    public var mergeMethod: RepositoryRuleMergeQueueParametersMergeMethod
-    /// The minimum number of PRs that will be merged together in a group.
-    public var minEntriesToMerge: Int
-    /// The time merge queue should wait after the first PR is added to the queue for the minimum group size to be
-    /// met. After this time has elapsed, the minimum group size will be ignored and a smaller group will be merged.
-    public var minEntriesToMergeWaitMinutes: Int
-
-    enum CodingKeys: String, CodingKey {
-        case checkResponseTimeoutMinutes = "check_response_timeout_minutes"
-        case groupingStrategy = "grouping_strategy"
-        case maxEntriesToBuild = "max_entries_to_build"
-        case maxEntriesToMerge = "max_entries_to_merge"
-        case mergeMethod = "merge_method"
-        case minEntriesToMerge = "min_entries_to_merge"
-        case minEntriesToMergeWaitMinutes = "min_entries_to_merge_wait_minutes"
     }
 
     private init(sdkCopy value: Self) { self = value }

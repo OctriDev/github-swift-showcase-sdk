@@ -32,7 +32,7 @@ extension AgentAutomationsListAvailableAutomationTriggersResponseItemFieldsItem 
 }
 
 extension AgentAutomationsListAvailableAutomationTriggersResponseItemFieldsItem {
-    public init(id: String, label: String, required: Bool, schema: FieldsItemSchema, description: String? = nil) {
+    public init(id: String, label: String, required: Bool, schema: AgentAutomationsListAvailableAutomationTriggersResponseItemFiX8d60f6fda7, description: String? = nil) {
         (self.id, self.label) = (id, label)
         (self.required, self.schema) = (required, schema)
         self.description = description
@@ -373,42 +373,31 @@ extension AgentAutomationsListRepoAutomationsResponseX613ecb59 {
     }
 }
 
-public indirect enum AgentAutomationsListAutomationTasksResponseTasksItemCreator {
-    case agentAutomationsListAutomationTasksResponseTasksItemCreatorVariant0(
-        AgentAutomationsListAutomationTasksResponseTasksItemCreatorVariant0
-    )
+/// The entity who created this task
+public struct AgentAutomationsListAutomationTasksResponseTasksItemCreator: Codable {
+    /// The unique identifier of the user
+    public var id: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+    }
+
+    init() {
+        self.id = nil
+    }
 }
 
-extension AgentAutomationsListAutomationTasksResponseTasksItemCreator: Codable {
-
+extension AgentAutomationsListAutomationTasksResponseTasksItemCreator {
     public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for AgentAutomationsListAutomationTasksResponseTasksItemCreator")
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.sdkDecodeIfPresent(.id)
     }
 }
 
 extension AgentAutomationsListAutomationTasksResponseTasksItemCreator {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(
-            AgentAutomationsListAutomationTasksResponseTasksItemCreatorVariant0.self
-        ) {
-            return             .agentAutomationsListAutomationTasksResponseTasksItemCreatorVariant0(value)
-        }
-        return nil
-    }
-}
-
-extension AgentAutomationsListAutomationTasksResponseTasksItemCreator {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .agentAutomationsListAutomationTasksResponseTasksItemCreatorVariant0(value): try container.encode(value); return true
-        }
+    public init(id: Int? = nil) {
+        self.init()
+        self.id = id
     }
 }
 
@@ -539,5 +528,22 @@ extension AgentAutomationsDeleteRepoAutomationResponseErrorsItem {
 extension AgentAutomationsDeleteRepoAutomationResponseErrorsItem {
     public init(code: AgentAutomationsDeleteRepoAutomationResponseErrorsItemCode, message: String? = nil) {
         (self.code, self.message) = (code, message)
+    }
+}
+
+public struct AgentAutomationsListRepoAutomationsResponseAutomationsItemTriX0277499a33: Codable {
+    /// A GitHub issue or pull request search query.
+    public var query: String?
+    /// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
+    /// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
+    public var writeScope: AgentAutomationsListRepoAutomationsResponseAutomationsItemTriXa6d845a784?
+
+    enum CodingKeys: String, CodingKey {
+        case query
+        case writeScope = "write_scope"
+    }
+
+    init() {
+        (self.query, self.writeScope) = (nil, nil)
     }
 }

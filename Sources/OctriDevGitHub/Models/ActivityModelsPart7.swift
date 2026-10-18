@@ -5,6 +5,36 @@ import Foundation
 
 // Activity domain models
 extension ForkEventForkee {
+    mutating func sdkSet3(_ forksUrl: String?, _ keysUrl: String?, _ collaboratorsUrl: String?, _ teamsUrl: String?, _ hooksUrl: String?) {
+        self.forksUrl = forksUrl
+        self.keysUrl = keysUrl
+        self.collaboratorsUrl = collaboratorsUrl
+        self.teamsUrl = teamsUrl
+        self.hooksUrl = hooksUrl
+    }
+}
+
+extension ForkEventForkee {
+    mutating func sdkSet4(_ issueEventsUrl: String?, _ eventsUrl: String?, _ assigneesUrl: String?, _ branchesUrl: String?, _ tagsUrl: String?) {
+        self.issueEventsUrl = issueEventsUrl
+        self.eventsUrl = eventsUrl
+        self.assigneesUrl = assigneesUrl
+        self.branchesUrl = branchesUrl
+        self.tagsUrl = tagsUrl
+    }
+}
+
+extension ForkEventForkee {
+    mutating func sdkSet5(_ blobsUrl: String?, _ gitTagsUrl: String?, _ gitRefsUrl: String?, _ treesUrl: String?, _ statusesUrl: String?) {
+        self.blobsUrl = blobsUrl
+        self.gitTagsUrl = gitTagsUrl
+        self.gitRefsUrl = gitRefsUrl
+        self.treesUrl = treesUrl
+        self.statusesUrl = statusesUrl
+    }
+}
+
+extension ForkEventForkee {
     mutating func sdkSet6(_ languagesUrl: String?, _ stargazersUrl: String?, _ contributorsUrl: String?, _ subscribersUrl: String?, _ subscriptionUrl: String?) {
         self.languagesUrl = languagesUrl
         self.stargazersUrl = stargazersUrl
@@ -445,53 +475,5 @@ extension PullRequestReviewCommentEventComment {
             try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
             try sdkValidateUri("html_url", self.htmlUrl)
             try sdkValidateUri("pull_request_url", self.pullRequestUrl)
-    }
-}
-
-extension PullRequestReviewCommentEventComment {
-    public init(id: Int, nodeId: String, url: String, pullRequestReviewId: Int?, diffHunk: String, path: String, position: Int?, originalPosition: Int, commitId: String, user: PullRequestReviewCommentEventCommentUser?, body: String, createdAt: Date, updatedAt: Date, htmlUrl: String, pullRequestUrl: String, links: PullRequestReviewCommentEventCommentLinks, originalCommitId: String, reactions: PullRequestReviewCommentEventCommentReactions, subjectType: String? = nil, inReplyToId: Int? = nil) throws {
-        (self.id, self.nodeId) = (id, nodeId)
-        (self.url, self.pullRequestReviewId) = (url, pullRequestReviewId)
-        (self.diffHunk, self.path) = (diffHunk, path)
-        (self.position, self.originalPosition) = (position, originalPosition)
-        (self.commitId, self.user) = (commitId, user)
-        (self.body, self.createdAt) = (body, createdAt)
-        (self.updatedAt, self.htmlUrl) = (updatedAt, htmlUrl)
-        (self.pullRequestUrl, self.links) = (pullRequestUrl, links)
-        (self.originalCommitId, self.reactions) = (originalCommitId, reactions)
-        (self.subjectType, self.inReplyToId) = (subjectType, inReplyToId)
-            try sdkValidateUri("url", self.url)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("pull_request_url", self.pullRequestUrl)
-    }
-}
-
-/// Typed representation of the `WatchEvent` API schema.
-public struct WatchEvent: Codable {
-    /// Required `string` value serialized in the `action` wire field.
-    public var action: String
-
-    enum CodingKeys: String, CodingKey {
-        case action
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WatchEvent {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.action) else {
-            throw SdkValidationError(field: "action", code: "required", message: "Validation failed for 'action': value is required")
-        }
-        self.action = try container.sdkDecodeRequired(.action)
-    }
-}
-
-extension WatchEvent {
-    public init(action: String) {
-        self.action = action
     }
 }

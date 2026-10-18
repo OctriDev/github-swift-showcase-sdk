@@ -37,6 +37,12 @@ extension IssueEventForIssue: Codable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
+            if let value = Self.decodeLossless2(from: container, raw) { self = value; return }
+            if let value = Self.decodeLossless3(from: container, raw) { self = value; return }
+            if let value = Self.decodeLossless4(from: container, raw) { self = value; return }
+        }
         if let value = Self.decodeGroup1(from: container) { self = value; return }
         if let value = Self.decodeGroup2(from: container) { self = value; return }
         if let value = Self.decodeGroup3(from: container) { self = value; return }
@@ -47,6 +53,108 @@ extension IssueEventForIssue: Codable {
         if try encodeGroup1(to: encoder) { return }
         if try encodeGroup2(to: encoder) { return }
         if try encodeGroup3(to: encoder) { return }
+    }
+}
+
+extension IssueEventForIssue {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(LabeledIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .labeledIssueEvent(value)
+        }
+        if let value = try? container.decode(UnlabeledIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .unlabeledIssueEvent(value)
+        }
+        if let value = try? container.decode(AssignedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .assignedIssueEvent(value)
+        }
+        if let value = try? container.decode(UnassignedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .unassignedIssueEvent(value)
+        }
+        if let value = try? container.decode(MilestonedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .milestonedIssueEvent(value)
+        }
+        if let value = try? container.decode(DemilestonedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .demilestonedIssueEvent(value)
+        }
+        if let value = try? container.decode(RenamedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .renamedIssueEvent(value)
+        }
+        if let value = try? container.decode(ReviewRequestedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .reviewRequestedIssueEvent(value)
+        }
+        return nil
+    }
+}
+
+extension IssueEventForIssue {
+    static func decodeLossless2(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(ReviewRequestRemovedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .reviewRequestRemovedIssueEvent(value)
+        }
+        if let value = try? container.decode(ReviewDismissedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .reviewDismissedIssueEvent(value)
+        }
+        if let value = try? container.decode(LockedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .lockedIssueEvent(value)
+        }
+        if let value = try? container.decode(AddedToProjectIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .addedToProjectIssueEvent(value)
+        }
+        if let value = try? container.decode(MovedColumnInProjectIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .movedColumnInProjectIssueEvent(value)
+        }
+        if let value = try? container.decode(RemovedFromProjectIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .removedFromProjectIssueEvent(value)
+        }
+        if let value = try? container.decode(ConvertedNoteToIssueIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .convertedNoteToIssueIssueEvent(value)
+        }
+        if let value = try? container.decode(IssueTypeAddedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .issueTypeAddedIssueEvent(value)
+        }
+        return nil
+    }
+}
+
+extension IssueEventForIssue {
+    static func decodeLossless3(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(IssueTypeRemovedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .issueTypeRemovedIssueEvent(value)
+        }
+        if let value = try? container.decode(IssueTypeChangedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .issueTypeChangedIssueEvent(value)
+        }
+        if let value = try? container.decode(SubIssueAddedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .subIssueAddedIssueEvent(value)
+        }
+        if let value = try? container.decode(SubIssueRemovedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .subIssueRemovedIssueEvent(value)
+        }
+        if let value = try? container.decode(ParentIssueAddedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .parentIssueAddedIssueEvent(value)
+        }
+        if let value = try? container.decode(ParentIssueRemovedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .parentIssueRemovedIssueEvent(value)
+        }
+        if let value = try? container.decode(BlockedByAddedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .blockedByAddedIssueEvent(value)
+        }
+        if let value = try? container.decode(BlockedByRemovedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .blockedByRemovedIssueEvent(value)
+        }
+        return nil
+    }
+}
+
+extension IssueEventForIssue {
+    static func decodeLossless4(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(BlockingAddedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .blockingAddedIssueEvent(value)
+        }
+        if let value = try? container.decode(BlockingRemovedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .blockingRemovedIssueEvent(value)
+        }
+        return nil
     }
 }
 
@@ -345,71 +453,4 @@ public struct IssueEventLabel: Codable {
     }
 
     private init(sdkCopy value: Self) { self = value }
-}
-
-extension IssueEventLabel {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        guard container.contains(.color) else {
-            throw SdkValidationError(field: "color", code: "required", message: "Validation failed for 'color': value is required")
-        }
-        self.name = try container.sdkDecodeNullable(.name)
-        self.color = try container.sdkDecodeNullable(.color)
-    }
-}
-
-extension IssueEventLabel {
-    public init(name: String?, color: String?) {
-        (self.name, self.color) = (name, color)
-    }
-}
-
-/// Typed representation of the `IssueEventDismissedReview` API schema.
-public struct IssueEventDismissedReview: Codable {
-    /// Required `string` value serialized in the `state` wire field.
-    public var state: String
-    /// Required `integer` value serialized in the `review_id` wire field.
-    public var reviewId: Int
-    /// Required `string` value serialized in the `dismissal_message` wire field.
-    public var dismissalMessage: String?
-    /// Optional `string` value serialized in the `dismissal_commit_id` wire field.
-    public var dismissalCommitId: String?
-
-    enum CodingKeys: String, CodingKey {
-        case state
-        case reviewId = "review_id"
-        case dismissalMessage = "dismissal_message"
-        case dismissalCommitId = "dismissal_commit_id"
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension IssueEventDismissedReview {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.state) else {
-            throw SdkValidationError(field: "state", code: "required", message: "Validation failed for 'state': value is required")
-        }
-        guard container.contains(.reviewId) else {
-            throw SdkValidationError(field: "review_id", code: "required", message: "Validation failed for 'review_id': value is required")
-        }
-        guard container.contains(.dismissalMessage) else {
-            throw SdkValidationError(field: "dismissal_message", code: "required", message: "Validation failed for 'dismissal_message': value is required")
-        }
-        self.state = try container.sdkDecodeRequired(.state)
-        self.reviewId = try container.sdkDecodeRequired(.reviewId)
-        self.dismissalMessage = try container.sdkDecodeNullable(.dismissalMessage)
-        self.dismissalCommitId = try container.sdkDecodeIfPresent(.dismissalCommitId)
-    }
-}
-
-extension IssueEventDismissedReview {
-    public init(state: String, reviewId: Int, dismissalMessage: String?, dismissalCommitId: String? = nil) {
-        (self.state, self.reviewId) = (state, reviewId)
-        (self.dismissalMessage, self.dismissalCommitId) = (dismissalMessage, dismissalCommitId)
-    }
 }

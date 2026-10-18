@@ -36,6 +36,6 @@ extension CodeScanningMethods {
             SdkQueryParameter("per_page", value: perPage),
             SdkQueryParameter("ref", value: ref),
             SdkQueryParameter("pr", value: pr),
-        ], decoder: .json, operationId: "codeScanningListAlertInstances", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+        ], decoder: .json, operationId: "codeScanningListAlertInstances", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

@@ -14,7 +14,7 @@ extension IssuesMethods {
         public var body: String?
         public var assignee: SdkOptional<String>?
         public var milestone: SdkOptional<IssuesCreateRequestBodyMilestone>?
-        public var labels: [IssuesCreateRequestBodyLabelsItem]?
+        public var labels: [IssuesCreateRequestLabelsItem]?
         public var assignees: [String]?
         public var issueFieldValues: [IssuesCreateRequestBodyIssueFieldValuesItem]?
         public var type: SdkOptional<String>?
@@ -60,6 +60,6 @@ extension IssuesMethods {
     public static func issuesCreate(config: ClientConfig, options: IssuesCreateOptions, requestOptions: RequestOptions? = nil) async throws -> Issue {
         let requestBody = IssuesCreateRequestBody(options: options)
 
-        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(options.owner)), "/", sdkEncodePathSegment(sdkWireString(options.repo)), "/issues"].joined(), config: config, body: requestBody, decoder: .json, operationId: "issuesCreate", options: requestOptions, errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self, "410": BasicError.self, "422": ValidationError.self])).data
+        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(options.owner)), "/", sdkEncodePathSegment(sdkWireString(options.repo)), "/issues"].joined(), config: config, body: requestBody, decoder: .json, operationId: "issuesCreate", options: requestOptions, errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self, "410": BasicError.self, "422": ValidationError.self, "503": ServiceUnavailable.self])).data
     }
 }

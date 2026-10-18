@@ -195,6 +195,43 @@ extension GistCommit {
     }
 }
 
+/// Optional object value serialized in the `block` wire field.
+public struct ForbiddenGistBlock: Codable {
+    /// Optional `string` value serialized in the `reason` wire field.
+    public var reason: String?
+    /// Optional `string` value serialized in the `created_at` wire field.
+    public var createdAt: String?
+    /// Optional `string` value serialized in the `html_url` wire field.
+    public var htmlUrl: String?
+
+    enum CodingKeys: String, CodingKey {
+        case reason
+        case createdAt = "created_at"
+        case htmlUrl = "html_url"
+    }
+
+    init() {
+        (self.reason, self.createdAt, self.htmlUrl) = (nil, nil, nil)
+    }
+}
+
+extension ForbiddenGistBlock {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.reason = try container.sdkDecodeIfPresent(.reason)
+        self.createdAt = try container.sdkDecodeIfPresent(.createdAt)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+    }
+}
+
+extension ForbiddenGistBlock {
+    public init(reason: String? = nil, createdAt: String? = nil, htmlUrl: String? = nil) {
+        self.init()
+        (self.reason, self.createdAt) = (reason, createdAt)
+        self.htmlUrl = htmlUrl
+    }
+}
+
 /// Gist Simple
 public struct GistSimple: Codable {
     /// Optional array value serialized in the `forks` wire field.
@@ -499,19 +536,5 @@ extension BaseGist {
         (self.truncated, self.forks) = (truncated, forks)
         self.history = history
         try sdkValidateConstraints()
-    }
-}
-
-extension BaseGist {
-    func sdkValidateConstraints() throws {
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("forks_url", self.forksUrl)
-            try sdkValidateUri("commits_url", self.commitsUrl)
-            try sdkValidateUri("git_pull_url", self.gitPullUrl)
-            try sdkValidateUri("git_push_url", self.gitPushUrl)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-            try sdkValidateUri("comments_url", self.commentsUrl)
     }
 }

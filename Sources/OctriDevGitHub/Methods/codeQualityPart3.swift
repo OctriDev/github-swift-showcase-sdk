@@ -16,7 +16,7 @@ extension CodeQualityMethods {
     ///   not case sensitive.
     /// - findingNumber: The number that identifies a finding.
     public static func codeQualityGetFinding(config: ClientConfig, owner: String, repo: String, findingNumber: Int, requestOptions: RequestOptions? = nil) async throws -> CodeQualityFinding {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/code-quality/findings/", sdkEncodePathSegment(sdkWireString(findingNumber))].joined(), config: config, decoder: .json, operationId: "codeQualityGetFinding", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/code-quality/findings/", sdkEncodePathSegment(sdkWireString(findingNumber))].joined(), config: config, decoder: .json, operationId: "codeQualityGetFinding", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 
     /// Gets a code quality setup configuration. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with private or public repositories, or the `public_repo` scope to use this endpoint with only public repositories.
@@ -27,6 +27,6 @@ extension CodeQualityMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     public static func codeQualityGetSetup(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> CodeQualitySetup {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/code-quality/setup"].joined(), config: config, decoder: .json, operationId: "codeQualityGetSetup", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/code-quality/setup"].joined(), config: config, decoder: .json, operationId: "codeQualityGetSetup", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

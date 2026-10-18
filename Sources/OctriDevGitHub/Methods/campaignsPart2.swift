@@ -29,6 +29,6 @@ extension CampaignsMethods {
             SdkQueryParameter("direction", value: direction),
             SdkQueryParameter("state", value: state),
             SdkQueryParameter("sort", value: sort),
-        ], decoder: .json, operationId: "campaignsListOrgCampaigns", options: requestOptions, errors: ["404": BasicError.self])).data
+        ], decoder: .json, operationId: "campaignsListOrgCampaigns", options: requestOptions, errors: ["404": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

@@ -6,27 +6,6 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-/// The default value for a squash merge commit message: - `PR_BODY` - default to the pull request's body. -
-/// `COMMIT_MESSAGES` - default to the branch's commit messages. - `BLANK` - default to a blank commit message.
-public struct ReposUpdateRequestBodySquashMergeCommitMessage: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let prBody = ReposUpdateRequestBodySquashMergeCommitMessage(rawValue: "PR_BODY")
-    public static let commitMessages = ReposUpdateRequestBodySquashMergeCommitMessage(rawValue: "COMMIT_MESSAGES")
-    public static let blank = ReposUpdateRequestBodySquashMergeCommitMessage(rawValue: "BLANK")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
 /// Machine-readable error code
 public struct AgentTasksGetTaskByRepoAndIdResponseErrorsItemCodeXecee4c6c: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
@@ -195,6 +174,24 @@ public struct ReposCreatePagesSiteRequestBodyBuildType: RawRepresentable, Hashab
     public init(rawValue: String) { self.rawValue = rawValue }
     public static let legacy = ReposCreatePagesSiteRequestBodyBuildType(rawValue: "legacy")
     public static let workflow = ReposCreatePagesSiteRequestBodyBuildType(rawValue: "workflow")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+public struct ReposGetClonesParameter: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let day = ReposGetClonesParameter(rawValue: "day")
+    public static let week = ReposGetClonesParameter(rawValue: "week")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

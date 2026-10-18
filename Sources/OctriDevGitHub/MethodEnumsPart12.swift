@@ -6,25 +6,6 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public struct PullsListReviewCommentsForRepoParameter: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let created = PullsListReviewCommentsForRepoParameter(rawValue: "created")
-    public static let updated = PullsListReviewCommentsForRepoParameter(rawValue: "updated")
-    public static let createdAt = PullsListReviewCommentsForRepoParameter(rawValue: "created_at")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
 /// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
 /// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
 public struct AgentAutomationsListAutomationsResponseItemTriggersIssueOpenedWriteScope: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
@@ -192,6 +173,26 @@ public struct AgentAutomationsGetAutomationResponseTriggersPullRequestOpenedWrit
     public init(rawValue: String) { self.rawValue = rawValue }
     public static let trigger = AgentAutomationsGetAutomationResponseTriggersPullRequestOpenedWriteScope(rawValue: "trigger")
     public static let repository = AgentAutomationsGetAutomationResponseTriggersPullRequestOpenedWriteScope(rawValue: "repository")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// The enablement status of Dependabot alerts
+public struct CodeSecurityUpdateEnterpriseConfigurationRequestBodyDependabotAlerts: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let enabled = CodeSecurityUpdateEnterpriseConfigurationRequestBodyDependabotAlerts(rawValue: "enabled")
+    public static let disabled = CodeSecurityUpdateEnterpriseConfigurationRequestBodyDependabotAlerts(rawValue: "disabled")
+    public static let notSet = CodeSecurityUpdateEnterpriseConfigurationRequestBodyDependabotAlerts(rawValue: "not_set")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

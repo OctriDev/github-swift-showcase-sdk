@@ -29,7 +29,7 @@ public struct WebhookPullRequestLabeledPullRequestLabelsItem: Codable {
     /// Timestamp indicating when the label was archived, or `null` if it has not been archived.
     public var archivedAt: Date?
     /// The user who archived the label, or `null` if it has not been archived.
-    public var archivedBy: WebhookPullRequestLabeledPullRequestLabelsItemArchivedBy?
+    public var archivedBy: SimpleUser?
     /// Required `integer` value serialized in the `id` wire field.
     public var id: Int
     /// The name of the label.
@@ -74,7 +74,7 @@ extension WebhookPullRequestLabeledPullRequestLabelsItem {
 }
 
 extension WebhookPullRequestLabeledPullRequestLabelsItem {
-    public init(color: String, `default`: Bool, description: String?, archivedAt: Date?, archivedBy: WebhookPullRequestLabeledPullRequestLabelsItemArchivedBy?, id: Int, name: String, nodeId: String, url: String) throws {
+    public init(color: String, `default`: Bool, description: String?, archivedAt: Date?, archivedBy: SimpleUser?, id: Int, name: String, nodeId: String, url: String) throws {
         (self.color, self.`default`) = (color, `default`)
         (self.description, self.archivedAt) = (description, archivedAt)
         (self.archivedBy, self.id) = (archivedBy, id)

@@ -85,42 +85,6 @@ extension WebhookDeploymentStatusCreatedWorkflowRunTriggeringActor {
     }
 }
 
-public indirect enum WebhookDeploymentStatusCreatedDeploymentPayload {
-    case stringValue(String)
-    case jsonValue([String: JSONValue])
-}
-
-extension WebhookDeploymentStatusCreatedDeploymentPayload: Codable {
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for WebhookDeploymentStatusCreatedDeploymentPayload")
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
-    }
-}
-
-extension WebhookDeploymentStatusCreatedDeploymentPayload {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) { return .stringValue(value) }
-        if let value = try? container.decode([String: JSONValue].self) { return .jsonValue(value) }
-        return nil
-    }
-}
-
-extension WebhookDeploymentStatusCreatedDeploymentPayload {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .stringValue(value): try container.encode(value); return true
-        case let .jsonValue(value): try container.encode(value); return true
-        }
-    }
-}
-
 /// Required object value serialized in the `creator` wire field.
 public struct WebhookDeploymentStatusCreatedDeploymentCreator: Codable {
     /// Required `integer` value serialized in the `id` wire field.
@@ -492,6 +456,27 @@ extension WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubApp {
         self.events = try container.sdkDecodeIfPresent(.events)
         self.permissions = try container.sdkDecodeIfPresent(.permissions)
         self.slug = try container.sdkDecodeIfPresent(.slug)
+        if let value = self.createdAt {
+            try sdkValidateDateTime("created_at", sdkWireString(value))
+        }
+        if let value = self.externalUrl {
+            try sdkValidateUri("external_url", value)
+        }
+            try sdkValidateUri("html_url", self.htmlUrl)
+        if let value = self.updatedAt {
+            try sdkValidateDateTime("updated_at", sdkWireString(value))
+        }
+    }
+}
+
+extension WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubApp {
+    public init(createdAt: Date?, description: String?, externalUrl: String?, htmlUrl: String, id: Int?, name: String, nodeId: String, owner: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppOwner?, updatedAt: Date?, events: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppEventsList? = nil, permissions: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppPermissions? = nil, slug: String? = nil) throws {
+        (self.createdAt, self.description) = (createdAt, description)
+        (self.externalUrl, self.htmlUrl) = (externalUrl, htmlUrl)
+        (self.id, self.name) = (id, name)
+        (self.nodeId, self.owner) = (nodeId, owner)
+        (self.updatedAt, self.events) = (updatedAt, events)
+        (self.permissions, self.slug) = (permissions, slug)
         if let value = self.createdAt {
             try sdkValidateDateTime("created_at", sdkWireString(value))
         }

@@ -138,6 +138,6 @@ extension SecretScanningMethods {
             SdkQueryParameter("is_bypassed", value: options.isBypassed),
             SdkQueryParameter("included_metadata", value: options.includedMetadata),
             SdkQueryParameter("owner_email_hash", value: options.ownerEmailHash),
-        ], decoder: .json, operationId: "secretScanningListAlertsForOrg", options: requestOptions, errors: ["404": BasicError.self])).data
+        ], decoder: .json, operationId: "secretScanningListAlertsForOrg", options: requestOptions, errors: ["404": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

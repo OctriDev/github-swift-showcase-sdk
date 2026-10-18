@@ -27,7 +27,9 @@ extension ReposMethods {
     ///   `workflow` means that the site is built by a custom GitHub Actions workflow.
     ///   `legacy` means that the site is built by GitHub when changes are pushed to a
     ///   specific branch.
-    public static func reposUpdateInformationAboutPagesSite(config: ClientConfig, owner: String, repo: String, cname: SdkOptional<String>? = nil, httpsEnforced: Bool? = nil, buildType: ReposUpdateInformationAboutPagesSiteRequestBodyBuildType? = nil, source: ReposUpdateInformationAboutPagesSiteRequestBodySource? = nil, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+    /// - source: Typed representation of the
+    ///   `ReposUpdateInformationAboutPagesSiteRequestSource` API schema.
+    public static func reposUpdateInformationAboutPagesSite(config: ClientConfig, owner: String, repo: String, cname: SdkOptional<String>? = nil, httpsEnforced: Bool? = nil, buildType: ReposUpdateInformationAboutPagesSiteRequestBodyBuildType? = nil, source: ReposUpdateInformationAboutPagesSiteRequestSource? = nil, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
         let requestBody = ReposUpdateInformationAboutPagesSiteRequestBody(cname: cname, httpsEnforced: httpsEnforced, buildType: buildType, source: source)
 
         return try (await sdkRequest("PUT", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/pages"].joined(), config: config, body: requestBody, decoder: .empty, operationId: "reposUpdateInformationAboutPagesSite", options: requestOptions, errors: ["400": BasicError.self, "409": BasicError.self, "422": ValidationError.self])).data

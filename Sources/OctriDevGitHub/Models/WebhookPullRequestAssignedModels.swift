@@ -439,7 +439,7 @@ public struct WebhookPullRequestAssignedPullRequest: Codable {
     /// Required `uri`-formatted value serialized in the `patch_url` wire field.
     public var patchUrl: String
     /// Required array value serialized in the `requested_reviewers` wire field.
-    public var requestedReviewers: [WebhookPullRequestAssignedPullRequestRequestedReviewersItem]
+    public var requestedReviewers: [WebhookPullRequestAssignedPullRequestRequestedReviewersItem?]
     /// Required array value serialized in the `requested_teams` wire field.
     public var requestedTeams: [WebhookPullRequestAssignedPullRequestRequestedTeamsItem]
     /// Required `uri-template`-formatted value serialized in the `review_comment_url` wire field.

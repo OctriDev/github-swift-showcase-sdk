@@ -99,12 +99,30 @@ extension ProjectsAddFieldForUserRequestBody: Codable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
+        }
         if let value = Self.decodeGroup1(from: container) { self = value; return }
         throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ProjectsAddFieldForUserRequestBody")
     }
 
     public func encode(to encoder: Encoder) throws {
         if try encodeGroup1(to: encoder) { return }
+    }
+}
+
+extension ProjectsAddFieldForUserRequestBody {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(ProjectsAddFieldForUserRequestBodyVariant0.self), sdkKeepsEveryKey(value, of: raw) {
+            return .projectsAddFieldForUserRequestBodyVariant0(value)
+        }
+        if let value = try? container.decode(ProjectsAddFieldForUserRequestBodyVariant1.self), sdkKeepsEveryKey(value, of: raw) {
+            return .projectsAddFieldForUserRequestBodyVariant1(value)
+        }
+        if let value = try? container.decode(ProjectsAddFieldForUserRequestBodyVariant2.self), sdkKeepsEveryKey(value, of: raw) {
+            return .projectsAddFieldForUserRequestBodyVariant2(value)
+        }
+        return nil
     }
 }
 
@@ -374,12 +392,33 @@ extension ProjectsAddFieldForOrgRequestBody: Codable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
+        }
         if let value = Self.decodeGroup1(from: container) { self = value; return }
         throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ProjectsAddFieldForOrgRequestBody")
     }
 
     public func encode(to encoder: Encoder) throws {
         if try encodeGroup1(to: encoder) { return }
+    }
+}
+
+extension ProjectsAddFieldForOrgRequestBody {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(ProjectsAddFieldForOrgRequestBodyVariant0.self), sdkKeepsEveryKey(value, of: raw) {
+            return .projectsAddFieldForOrgRequestBodyVariant0(value)
+        }
+        if let value = try? container.decode(ProjectsAddFieldForOrgRequestBodyVariant1.self), sdkKeepsEveryKey(value, of: raw) {
+            return .projectsAddFieldForOrgRequestBodyVariant1(value)
+        }
+        if let value = try? container.decode(ProjectsAddFieldForOrgRequestBodyVariant2.self), sdkKeepsEveryKey(value, of: raw) {
+            return .projectsAddFieldForOrgRequestBodyVariant2(value)
+        }
+        if let value = try? container.decode(ProjectsAddFieldForOrgRequestBodyVariant3.self), sdkKeepsEveryKey(value, of: raw) {
+            return .projectsAddFieldForOrgRequestBodyVariant3(value)
+        }
+        return nil
     }
 }
 
@@ -437,65 +476,4 @@ public struct ProjectsAddFieldForUserRequestBodyVariant1: Codable {
     }
 
     private init(sdkCopy value: Self) { self = value }
-}
-
-extension ProjectsAddFieldForUserRequestBodyVariant1 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        guard container.contains(.dataType) else {
-            throw SdkValidationError(field: "data_type", code: "required", message: "Validation failed for 'data_type': value is required")
-        }
-        guard container.contains(.singleSelectOptions) else {
-            throw SdkValidationError(field: "single_select_options", code: "required", message: "Validation failed for 'single_select_options': value is required")
-        }
-        self.name = try container.sdkDecodeRequired(.name)
-        self.dataType = try container.sdkDecodeRequired(.dataType)
-        self.singleSelectOptions = try container.sdkDecodeRequired(.singleSelectOptions)
-    }
-}
-
-extension ProjectsAddFieldForUserRequestBodyVariant1 {
-    public init(name: String, dataType: ProjectsAddFieldForUserRequestBodyVariant1DataType, singleSelectOptions: [ProjectsV2FieldSingleSelectOption]) {
-        (self.name, self.dataType) = (name, dataType)
-        self.singleSelectOptions = singleSelectOptions
-    }
-}
-
-public indirect enum ProjectsCreateViewForUserRequestBodySortByItemItem {
-    case intValue(Int)
-    case stringValue(String)
-}
-
-extension ProjectsCreateViewForUserRequestBodySortByItemItem: Codable {
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ProjectsCreateViewForUserRequestBodySortByItemItem")
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
-    }
-}
-
-extension ProjectsCreateViewForUserRequestBodySortByItemItem {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(Int.self) { return .intValue(value) }
-        if let value = try? container.decode(String.self) { return .stringValue(value) }
-        return nil
-    }
-}
-
-extension ProjectsCreateViewForUserRequestBodySortByItemItem {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .intValue(value): try container.encode(value); return true
-        case let .stringValue(value): try container.encode(value); return true
-        }
-    }
 }

@@ -13,12 +13,27 @@ extension IntegrationInstallationRequestAccount: Codable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
+        }
         if let value = Self.decodeGroup1(from: container) { self = value; return }
         throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for IntegrationInstallationRequestAccount")
     }
 
     public func encode(to encoder: Encoder) throws {
         if try encodeGroup1(to: encoder) { return }
+    }
+}
+
+extension IntegrationInstallationRequestAccount {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(SimpleUser.self), sdkKeepsEveryKey(value, of: raw) {
+            return .simpleUser(value)
+        }
+        if let value = try? container.decode(Enterprise.self), sdkKeepsEveryKey(value, of: raw) {
+            return .enterprise(value)
+        }
+        return nil
     }
 }
 
@@ -487,25 +502,4 @@ public struct MarketplaceListingPlan: Codable {
     }
 
     private init(sdkCopy value: Self) { self = value }
-}
-
-extension MarketplaceListingPlan {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.accountsUrl = try container.sdkDecodeRequired(.accountsUrl)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.number = try container.sdkDecodeRequired(.number)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.description = try container.sdkDecodeRequired(.description)
-        self.monthlyPriceInCents = try container.sdkDecodeRequired(.monthlyPriceInCents)
-        self.yearlyPriceInCents = try container.sdkDecodeRequired(.yearlyPriceInCents)
-        self.priceModel = try container.sdkDecodeRequired(.priceModel)
-        self.hasFreeTrial = try container.sdkDecodeRequired(.hasFreeTrial)
-        self.unitName = try container.sdkDecodeNullable(.unitName)
-        self.state = try container.sdkDecodeRequired(.state)
-        self.bullets = try container.sdkDecodeRequired(.bullets)
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("accounts_url", self.accountsUrl)
-    }
 }

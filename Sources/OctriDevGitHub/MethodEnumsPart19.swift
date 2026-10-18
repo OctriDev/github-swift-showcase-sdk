@@ -6,6 +6,26 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
+/// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
+/// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
+public struct AgentAutomationsListRepoAutomationsResponseAutomationsItemTriX963a39d3cf: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let trigger = AgentAutomationsListRepoAutomationsResponseAutomationsItemTriX963a39d3cf(rawValue: "trigger")
+    public static let repository = AgentAutomationsListRepoAutomationsResponseAutomationsItemTriX963a39d3cf(rawValue: "repository")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
 public struct ReposListForUserParameterX6f083e9f: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
@@ -51,6 +71,27 @@ public struct HostedComputeCreateNetworkConfigurationForOrgRequestBodyComputeSer
     public init(rawValue: String) { self.rawValue = rawValue }
     public static let none = HostedComputeCreateNetworkConfigurationForOrgRequestBodyComputeService(rawValue: "none")
     public static let actions = HostedComputeCreateNetworkConfigurationForOrgRequestBodyComputeService(rawValue: "actions")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// The default value for a merge commit title. - `PR_TITLE` - default to the pull request's title. -
+/// `MERGE_MESSAGE` - default to the classic title for a merge message (e.g., Merge pull request #123 from
+/// branch-name).
+public struct AppsListReposAccessibleToInstallationResponseRepositoriesItemX6025c9444b: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let prTitle = AppsListReposAccessibleToInstallationResponseRepositoriesItemX6025c9444b(rawValue: "PR_TITLE")
+    public static let mergeMessage = AppsListReposAccessibleToInstallationResponseRepositoriesItemX6025c9444b(rawValue: "MERGE_MESSAGE")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
@@ -158,43 +199,6 @@ public struct PackagesListPackagesForOrganizationParameterXbaeb57df: RawRepresen
     public static let docker = PackagesListPackagesForOrganizationParameterXbaeb57df(rawValue: "docker")
     public static let nuget = PackagesListPackagesForOrganizationParameterXbaeb57df(rawValue: "nuget")
     public static let container = PackagesListPackagesForOrganizationParameterXbaeb57df(rawValue: "container")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-public struct IssuesUpdateResponseVariant1SuggestionsAssigneesItemConfidence: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let low = IssuesUpdateResponseVariant1SuggestionsAssigneesItemConfidence(rawValue: "low")
-    public static let medium = IssuesUpdateResponseVariant1SuggestionsAssigneesItemConfidence(rawValue: "medium")
-    public static let high = IssuesUpdateResponseVariant1SuggestionsAssigneesItemConfidence(rawValue: "high")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// Provider namespace
-public struct AgentTasksGetTaskByIdResponseVariant0ArtifactsItemProvider: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let github = AgentTasksGetTaskByIdResponseVariant0ArtifactsItemProvider(rawValue: "github")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

@@ -6,567 +6,561 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testReposListCommitsReposListCommits400ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
-            return
-        }
-        _ = client
-        var options = try ReposMethods.ReposListCommitsOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""))
-        options.sha = try decoded("\"sha\"")
-        options.path = try decoded("\"path\"")
-        options.author = try decoded("\"author\"")
-        options.committer = try decoded("\"committer\"")
-        options.since = try decoded("\"2024-01-01T00:00:00Z\"")
-        options.until = try decoded("\"2024-01-01T00:00:00Z\"")
-        options.perPage = try decoded("30")
-        options.page = try decoded("1")
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1733Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.repos.listCommits(
-            options: options
-        )
-            XCTFail("reposListCommits did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 400)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "reposListCommits decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "reposListCommits decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testReposListCommitStatusesForRefReposListCommitStatusesForRefReachesMockAndDecodesResponse() async throws {
+    func testReposRemoveStatusCheckContextsReposRemoveStatusCheckContextsReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        let actual = try await client.repos.listCommitStatusesForRef(
+        let actual = try await client.repos.removeStatusCheckContexts(
             owner: decoded("\"owner\""),
             repo: decoded("\"repo\""),
-            ref: decoded("\"ref\""),
-            perPage: decoded("30"),
-            page: decoded("1")
+            branch: decoded("\"branch\""),
+            body: decoded("{\"contexts\":[\"continuous-integration/jenkins\"]}")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1734Expected.utf8),
+            with: Data(sdkMethodFixture1782Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "reposListCommitStatusesForRef decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
-    func testReposListCommitStatusesForRefReposListCommitStatusesForRef301ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/301") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1735Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.repos.listCommitStatusesForRef(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            ref: decoded("\"ref\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
-            XCTFail("reposListCommitStatusesForRef did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 301)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "reposListCommitStatusesForRef decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "reposListCommitStatusesForRef decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testReposListContributorsReposListContributorsReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.repos.listContributors(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            anon: decoded("\"anon\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1736Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "reposListContributors decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testReposListContributorsReposListContributors403ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1737Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.repos.listContributors(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            anon: decoded("\"anon\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
-            XCTFail("reposListContributors did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 403)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "reposListContributors decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "reposListContributors decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testReposListCustomDeploymentRuleIntegrationsReposListCustomDeploX961bccc655ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.repos.listCustomDeploymentRuleIntegrations(
-            environmentName: decoded("\"Example Name\""),
-            repo: decoded("\"repo\""),
-            owner: decoded("\"owner\""),
-            page: decoded("1"),
-            perPage: decoded("30")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1738Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "reposListCustomDeploymentRuleIntegrations decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testReposListDeployKeysReposListDeployKeysReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.repos.listDeployKeys(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1739Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "reposListDeployKeys decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testReposListDeploymentBranchPoliciesReposListDeploymentBranchPoliciesReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.repos.listDeploymentBranchPolicies(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            environmentName: decoded("\"Example Name\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1740Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "reposListDeploymentBranchPolicies decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testReposListDeploymentsReposListDeploymentsReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        var options = try ReposMethods.ReposListDeploymentsOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""))
-        options.sha = try decoded("\"none\"")
-        options.ref = try decoded("\"none\"")
-        options.task = try decoded("\"none\"")
-        options.environment = try decoded("\"none\"")
-        options.perPage = try decoded("30")
-        options.page = try decoded("1")
-        let actual = try await client.repos.listDeployments(
-            options: options
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1741Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "reposListDeployments decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testReposListDeploymentStatusesReposListDeploymentStatusesReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.repos.listDeploymentStatuses(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            deploymentId: decoded("1"),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1742Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "reposListDeploymentStatuses decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testReposListDeploymentStatusesReposListDeploymentStatuses404ReachesMockAndDecodesResponse() async throws {
+    func testReposRemoveStatusCheckContextsReposRemoveStatusCheckContexts404ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
         _ = client
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1743Expected.utf8),
+            with: Data(sdkMethodFixture1783Expected.utf8),
             options: [.fragmentsAllowed]
         )
         do {
-            _ = try await client.repos.listDeploymentStatuses(
+            _ = try await client.repos.removeStatusCheckContexts(
             owner: decoded("\"owner\""),
             repo: decoded("\"repo\""),
-            deploymentId: decoded("1"),
-            perPage: decoded("30"),
-            page: decoded("1")
+            branch: decoded("\"branch\""),
+            body: decoded("{\"contexts\":[\"continuous-integration/jenkins\"]}")
         )
-            XCTFail("reposListDeploymentStatuses did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "reposListDeploymentStatuses decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "reposListDeploymentStatuses decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
     }
 
-    func testReposListForAuthenticatedUserReposListForAuthenticatedUserReachesMockAndDecodesResponse() async throws {
+    func testReposRemoveStatusCheckProtectionReposRemoveStatusCheckProtectionReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        var options = ReposMethods.ReposListForAuthenticatedUserOptions()
-        options.visibility = try decoded("\"all\"")
-        options.affiliation = try decoded("\"owner,collaborator,organization_member\"")
-        options.type = try decoded("\"all\"")
-        options.sort = try decoded("\"full_name\"")
-        options.direction = try decoded("\"asc\"")
-        options.perPage = try decoded("30")
-        options.page = try decoded("1")
-        options.since = try decoded("\"2024-01-01T00:00:00Z\"")
-        options.before = try decoded("\"2024-01-01T00:00:00Z\"")
-        let actual = try await client.repos.listForAuthenticatedUser(
-            options: options
+        _ = try await client.repos.removeStatusCheckProtection(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            branch: decoded("\"branch\"")
         )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1744Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "reposListForAuthenticatedUser decoded a response " +
-                "that differs from the mock"
-        )
+        XCTAssertTrue(true)
     }
 
-    func testReposListForAuthenticatedUserReposListForAuthenticatedUser401ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
+    func testReposRemoveTeamAccessRestrictionsReposRemoveTeamAccessRestrictionsReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
             return
         }
         _ = client
-        var options = ReposMethods.ReposListForAuthenticatedUserOptions()
-        options.visibility = try decoded("\"all\"")
-        options.affiliation = try decoded("\"owner,collaborator,organization_member\"")
-        options.type = try decoded("\"all\"")
-        options.sort = try decoded("\"full_name\"")
-        options.direction = try decoded("\"asc\"")
-        options.perPage = try decoded("30")
-        options.page = try decoded("1")
-        options.since = try decoded("\"2024-01-01T00:00:00Z\"")
-        options.before = try decoded("\"2024-01-01T00:00:00Z\"")
+        do {
+            _ = try await client.repos.removeTeamAccessRestrictions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            branch: decoded("\"branch\""),
+            body: decoded("{\"teams\":[\"octocats\"]}")
+        )
+            XCTFail("decoded a body its schema refuses")
+        } catch is SdkResponseDecodeError {
+        } catch {
+            XCTFail("refused with \(error), not SdkResponseDecodeError")
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testReposRemoveTeamAccessRestrictionsReposRemoveTeamAccessRestrictions422ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/422") else {
+            return
+        }
+        _ = client
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1745Expected.utf8),
+            with: Data(sdkMethodFixture1786Expected.utf8),
             options: [.fragmentsAllowed]
         )
         do {
-            _ = try await client.repos.listForAuthenticatedUser(
-            options: options
+            _ = try await client.repos.removeTeamAccessRestrictions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            branch: decoded("\"branch\""),
+            body: decoded("{\"teams\":[\"octocats\"]}")
         )
-            XCTFail("reposListForAuthenticatedUser did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 401)
+            XCTAssertEqual(error.statusCode, 422)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "reposListForAuthenticatedUser decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "reposListForAuthenticatedUser decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
     }
 
-    func testReposListForksReposListForksReachesMockAndDecodesResponse() async throws {
+    func testReposRemoveUserAccessRestrictionsReposRemoveUserAccessRestrictionsReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        let actual = try await client.repos.listForks(
+        let actual = try await client.repos.removeUserAccessRestrictions(
             owner: decoded("\"owner\""),
             repo: decoded("\"repo\""),
-            sort: decoded("\"newest\""),
-            perPage: decoded("30"),
-            page: decoded("1")
+            branch: decoded("\"branch\""),
+            users: decoded("[\"octocat\"]")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1746Expected.utf8),
+            with: Data(sdkMethodFixture1787Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "reposListForks decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
-    func testReposListForksReposListForks400ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
+    func testReposRemoveUserAccessRestrictionsReposRemoveUserAccessRestrictions422ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/422") else {
             return
         }
         _ = client
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1747Expected.utf8),
+            with: Data(sdkMethodFixture1788Expected.utf8),
             options: [.fragmentsAllowed]
         )
         do {
-            _ = try await client.repos.listForks(
+            _ = try await client.repos.removeUserAccessRestrictions(
             owner: decoded("\"owner\""),
             repo: decoded("\"repo\""),
-            sort: decoded("\"newest\""),
-            perPage: decoded("30"),
-            page: decoded("1")
+            branch: decoded("\"branch\""),
+            users: decoded("[\"octocat\"]")
         )
-            XCTFail("reposListForks did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 400)
+            XCTAssertEqual(error.statusCode, 422)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "reposListForks decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "reposListForks decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
     }
 
-    func testReposListForOrgReposListForOrgReachesMockAndDecodesResponse() async throws {
+    func testReposRenameBranchReposRenameBranchReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        let actual = try await client.repos.listForOrg(
-            org: decoded("\"org\""),
-            type: decoded("\"all\""),
-            sort: decoded("\"created\""),
-            direction: decoded("\"asc\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1748Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "reposListForOrg decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testReposListForUserReposListForUserReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.repos.listForUser(
-            username: decoded("\"Example Name\""),
-            type: decoded("\"owner\""),
-            sort: decoded("\"full_name\""),
-            direction: decoded("\"asc\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1749Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "reposListForUser decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testReposListInvitationsReposListInvitationsReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.repos.listInvitations(
+        do {
+            _ = try await client.repos.renameBranch(
             owner: decoded("\"owner\""),
             repo: decoded("\"repo\""),
-            perPage: decoded("30"),
-            page: decoded("1")
+            branch: decoded("\"branch\""),
+            newName: decoded("\"my_renamed_branch\"")
         )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1750Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "reposListInvitations decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testReposListInvitationsForAuthenticatedUserReposListInvitationsFXe71084f762ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
+            XCTFail("decoded a body its schema refuses")
+        } catch is SdkResponseDecodeError {
+        } catch {
+            XCTFail("refused with \(error), not SdkResponseDecodeError")
         }
-        _ = client
-        let actual = try await client.repos.listInvitationsForAuthenticatedUser(
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1751Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "reposListInvitationsForAuthenticatedUser decoded a response " +
-                "that differs from the mock"
-        )
+        XCTAssertTrue(true)
     }
 
-    func testReposListInvitationsForAuthenticatedUserReposListInvitationsFXc19750a55dReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
+    func testReposRenameBranchReposRenameBranch403ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
         _ = client
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1752Expected.utf8),
+            with: Data(sdkMethodFixture1790Expected.utf8),
             options: [.fragmentsAllowed]
         )
         do {
-            _ = try await client.repos.listInvitationsForAuthenticatedUser(
-            perPage: decoded("30"),
-            page: decoded("1")
+            _ = try await client.repos.renameBranch(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            branch: decoded("\"branch\""),
+            newName: decoded("\"my_renamed_branch\"")
         )
-            XCTFail("reposListInvitationsForAuthenticatedUser did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 401)
+            XCTAssertEqual(error.statusCode, 403)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "reposListInvitationsForAuthenticatedUser decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "reposListInvitationsForAuthenticatedUser decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
     }
 
-    func testReposListIssueTypesReposListIssueTypesReachesMockAndDecodesResponse() async throws {
+    func testReposReplaceAllTopicsReposReplaceAllTopicsReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        let actual = try await client.repos.listIssueTypes(
+        let actual = try await client.repos.replaceAllTopics(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            names: decoded("[\"octocat\",\"atom\",\"electron\",\"api\"]")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1791Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testReposReplaceAllTopicsReposReplaceAllTopics404ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1792Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.repos.replaceAllTopics(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            names: decoded("[\"octocat\",\"atom\",\"electron\",\"api\"]")
+        )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 404)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testReposRequestPagesBuildReposRequestPagesBuildReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.repos.requestPagesBuild(
             owner: decoded("\"owner\""),
             repo: decoded("\"repo\"")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1753Expected.utf8),
+            with: Data(sdkMethodFixture1793Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "reposListIssueTypes decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
+    }
+
+    func testReposSetAdminBranchProtectionReposSetAdminBranchProtectionReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.repos.setAdminBranchProtection(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            branch: decoded("\"branch\"")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1794Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testReposSetAppAccessRestrictionsReposSetAppAccessRestrictionsReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.repos.setAppAccessRestrictions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            branch: decoded("\"branch\""),
+            apps: decoded("[\"octoapp\"]")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1795Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testReposSetAppAccessRestrictionsReposSetAppAccessRestrictions422ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/422") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1796Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.repos.setAppAccessRestrictions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            branch: decoded("\"branch\""),
+            apps: decoded("[\"octoapp\"]")
+        )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 422)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testReposSetStatusCheckContextsReposSetStatusCheckContextsReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.repos.setStatusCheckContexts(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            branch: decoded("\"branch\""),
+            body: decoded("{\"contexts\":[\"continuous-integration/travis-ci\"]}")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1797Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testReposSetStatusCheckContextsReposSetStatusCheckContexts404ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1798Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.repos.setStatusCheckContexts(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            branch: decoded("\"branch\""),
+            body: decoded("{\"contexts\":[\"continuous-integration/travis-ci\"]}")
+        )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 404)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testReposSetTeamAccessRestrictionsReposSetTeamAccessRestrictionsReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        do {
+            _ = try await client.repos.setTeamAccessRestrictions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            branch: decoded("\"branch\""),
+            body: decoded("{\"teams\":[\"justice-league\"]}")
+        )
+            XCTFail("decoded a body its schema refuses")
+        } catch is SdkResponseDecodeError {
+        } catch {
+            XCTFail("refused with \(error), not SdkResponseDecodeError")
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testReposSetTeamAccessRestrictionsReposSetTeamAccessRestrictions422ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/422") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1800Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.repos.setTeamAccessRestrictions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            branch: decoded("\"branch\""),
+            body: decoded("{\"teams\":[\"justice-league\"]}")
+        )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 422)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testReposSetUserAccessRestrictionsReposSetUserAccessRestrictionsReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.repos.setUserAccessRestrictions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            branch: decoded("\"branch\""),
+            users: decoded("[\"octocat\"]")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1801Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testReposSetUserAccessRestrictionsReposSetUserAccessRestrictions422ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/422") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1802Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.repos.setUserAccessRestrictions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            branch: decoded("\"branch\""),
+            users: decoded("[\"octocat\"]")
+        )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 422)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testReposTestPushWebhookReposTestPushWebhookReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        _ = try await client.repos.testPushWebhook(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            hookId: decoded("1")
+        )
+        XCTAssertTrue(true)
+    }
+
+    func testReposTestPushWebhookReposTestPushWebhook404ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1804Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.repos.testPushWebhook(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            hookId: decoded("1")
+        )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 404)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
     }
 }

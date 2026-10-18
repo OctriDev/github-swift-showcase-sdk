@@ -21,7 +21,7 @@ struct ReposUpdateInformationAboutPagesSiteRequestBody: Encodable {
     var cname: SdkOptional<String>?
     var httpsEnforced: Bool?
     var buildType: ReposUpdateInformationAboutPagesSiteRequestBodyBuildType?
-    var source: ReposUpdateInformationAboutPagesSiteRequestBodySource?
+    var source: ReposUpdateInformationAboutPagesSiteRequestSource?
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)

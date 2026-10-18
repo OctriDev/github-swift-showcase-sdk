@@ -19,6 +19,6 @@ extension CodeScanningMethods {
     ///   field in the response from the `GET
     ///   /repos/{owner}/{repo}/code-scanning/alerts` operation.
     public static func codeScanningGetAlert(config: ClientConfig, owner: String, repo: String, alertNumber: AlertNumber, requestOptions: RequestOptions? = nil) async throws -> CodeScanningAlert {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/code-scanning/alerts/", sdkEncodePathSegment(sdkWireString(alertNumber))].joined(), config: config, decoder: .json, operationId: "codeScanningGetAlert", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/code-scanning/alerts/", sdkEncodePathSegment(sdkWireString(alertNumber))].joined(), config: config, decoder: .json, operationId: "codeScanningGetAlert", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

@@ -4,295 +4,528 @@
 import Foundation
 
 // Search domain models
-extension LabelSearchResultItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.color = try container.sdkDecodeRequired(.color)
-        self.`default` = try container.sdkDecodeRequired(.`default`)
-        self.description = try container.sdkDecodeNullable(.description)
-        self.archivedAt = try container.sdkDecodeNullable(.archivedAt)
-        self.archivedBy = try container.sdkDecodeNullable(.archivedBy)
-        self.score = try container.sdkDecodeRequired(.score)
-        self.textMatches = try container.sdkDecodeIfPresent(.textMatches)
-            try sdkValidateUri("url", self.url)
-        if let value = self.archivedAt {
-            try sdkValidateDateTime("archived_at", sdkWireString(value))
-        }
-    }
-}
-
-extension LabelSearchResultItem {
-    public init(id: Int, nodeId: String, url: String, name: String, color: String, `default`: Bool, description: String?, archivedAt: Date?, archivedBy: LabelSearchResultItemArchivedBy?, score: Double, textMatches: SearchResultTextMatches? = nil) throws {
-        (self.id, self.nodeId) = (id, nodeId)
-        (self.url, self.name) = (url, name)
-        (self.color, self.`default`) = (color, `default`)
-        (self.description, self.archivedAt) = (description, archivedAt)
-        (self.archivedBy, self.score) = (archivedBy, score)
-        self.textMatches = textMatches
-            try sdkValidateUri("url", self.url)
-        if let value = self.archivedAt {
-            try sdkValidateDateTime("archived_at", sdkWireString(value))
-        }
-    }
-}
-
-/// Required object value serialized in the `matches[]` wire field.
-public struct SearchResultTextMatchesItemMatchesItem: Codable {
-    /// Optional `string` value serialized in the `text` wire field.
-    public var text: String?
-    /// Optional array value serialized in the `indices` wire field.
-    public var indices: [Int]?
-
-    enum CodingKeys: String, CodingKey {
-        case text
-        case indices
-    }
-
-    init() {
-        (self.text, self.indices) = (nil, nil)
-    }
-}
-
-extension SearchResultTextMatchesItemMatchesItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.text = try container.sdkDecodeIfPresent(.text)
-        self.indices = try container.sdkDecodeIfPresent(.indices)
-    }
-}
-
-extension SearchResultTextMatchesItemMatchesItem {
-    public init(text: String? = nil, indices: [Int]? = nil) {
-        self.init()
-        (self.text, self.indices) = (text, indices)
-    }
-}
-
-/// Issue Search Result Item
-public struct IssueSearchResultItem: Codable {
-    /// Required `uri`-formatted value serialized in the `url` wire field.
-    public var url: String
-    /// Required `uri`-formatted value serialized in the `repository_url` wire field.
-    public var repositoryUrl: String
-    /// Required `string` value serialized in the `labels_url` wire field.
-    public var labelsUrl: String
-    /// Required `uri`-formatted value serialized in the `comments_url` wire field.
-    public var commentsUrl: String
-    /// Required `uri`-formatted value serialized in the `events_url` wire field.
-    public var eventsUrl: String
-    /// Required `uri`-formatted value serialized in the `html_url` wire field.
-    public var htmlUrl: String
-    /// Required `int64`-formatted value serialized in the `id` wire field.
+/// Repo Search Result Item
+public struct RepoSearchResultItem: Codable {
+    /// Required `integer` value serialized in the `id` wire field.
     public var id: Int
     /// Required `string` value serialized in the `node_id` wire field.
     public var nodeId: String
-    /// Required `integer` value serialized in the `number` wire field.
-    public var number: Int
-    /// Required `string` value serialized in the `title` wire field.
-    public var title: String
-    /// Required `boolean` value serialized in the `locked` wire field.
-    public var locked: Bool
+    /// Required `string` value serialized in the `name` wire field.
+    public var name: String
+    /// Required `string` value serialized in the `full_name` wire field.
+    public var fullName: String
     /// A GitHub user.
-    public var user: NullableSimpleUser?
-    /// Required array value serialized in the `labels` wire field.
-    public var labels: [IssueSearchResultItemLabelsItem]
-    /// Required `string` value serialized in the `state` wire field.
-    public var state: String
-    /// A GitHub user.
-    public var assignee: NullableSimpleUser?
-    /// A collection of related issues and pull requests.
-    public var milestone: NullableMilestone?
-    /// Required `integer` value serialized in the `comments` wire field.
-    public var comments: Int
+    public var owner: NullableSimpleUser?
+    /// Required `boolean` value serialized in the `private` wire field.
+    public var `private`: Bool
+    /// Required `uri`-formatted value serialized in the `html_url` wire field.
+    public var htmlUrl: String
+    /// Required `string` value serialized in the `description` wire field.
+    public var description: String?
+    /// Required `boolean` value serialized in the `fork` wire field.
+    public var fork: Bool
+    /// Required `uri`-formatted value serialized in the `url` wire field.
+    public var url: String
     /// Required `date-time`-formatted value serialized in the `created_at` wire field.
     public var createdAt: Date
     /// Required `date-time`-formatted value serialized in the `updated_at` wire field.
     public var updatedAt: Date
-    /// Required `date-time`-formatted value serialized in the `closed_at` wire field.
-    public var closedAt: Date?
+    /// Required `date-time`-formatted value serialized in the `pushed_at` wire field.
+    public var pushedAt: Date
+    /// Required `uri`-formatted value serialized in the `homepage` wire field.
+    public var homepage: String?
+    /// Required `integer` value serialized in the `size` wire field.
+    public var size: Int
+    /// Required `integer` value serialized in the `stargazers_count` wire field.
+    public var stargazersCount: Int
+    /// Required `integer` value serialized in the `watchers_count` wire field.
+    public var watchersCount: Int
+    /// Required `string` value serialized in the `language` wire field.
+    public var language: String?
+    /// Required `integer` value serialized in the `forks_count` wire field.
+    public var forksCount: Int
+    /// Required `integer` value serialized in the `open_issues_count` wire field.
+    public var openIssuesCount: Int
+    /// Required `string` value serialized in the `default_branch` wire field.
+    public var defaultBranch: String
     /// Required `number` value serialized in the `score` wire field.
     public var score: Double
-    /// How the author is associated with the repository.
-    /// - Example: "OWNER"
-    public var authorAssociation: AuthorAssociation
-    /// Optional `string` value serialized in the `active_lock_reason` wire field.
-    public var activeLockReason: String?
-    /// Optional array value serialized in the `assignees` wire field.
-    public var assignees: [SimpleUser]?
-    /// Optional object value serialized in the `sub_issues_summary` wire field.
-    public var subIssuesSummary: SubIssuesSummary?
-    /// Optional object value serialized in the `issue_dependencies_summary` wire field.
-    public var issueDependenciesSummary: IssueDependenciesSummary?
-    /// Optional array value serialized in the `issue_field_values` wire field.
-    public var issueFieldValues: [IssueFieldValue]?
-    /// Optional `string` value serialized in the `state_reason` wire field.
-    public var stateReason: String?
+    /// Required `uri`-formatted value serialized in the `forks_url` wire field.
+    public var forksUrl: String
+    /// Required `string` value serialized in the `keys_url` wire field.
+    public var keysUrl: String
+    /// Required `string` value serialized in the `collaborators_url` wire field.
+    public var collaboratorsUrl: String
+    /// Required `uri`-formatted value serialized in the `teams_url` wire field.
+    public var teamsUrl: String
+    /// Required `uri`-formatted value serialized in the `hooks_url` wire field.
+    public var hooksUrl: String
+    /// Required `string` value serialized in the `issue_events_url` wire field.
+    public var issueEventsUrl: String
+    /// Required `uri`-formatted value serialized in the `events_url` wire field.
+    public var eventsUrl: String
+    /// Required `string` value serialized in the `assignees_url` wire field.
+    public var assigneesUrl: String
+    /// Required `string` value serialized in the `branches_url` wire field.
+    public var branchesUrl: String
+    /// Required `uri`-formatted value serialized in the `tags_url` wire field.
+    public var tagsUrl: String
+    /// Required `string` value serialized in the `blobs_url` wire field.
+    public var blobsUrl: String
+    /// Required `string` value serialized in the `git_tags_url` wire field.
+    public var gitTagsUrl: String
+    /// Required `string` value serialized in the `git_refs_url` wire field.
+    public var gitRefsUrl: String
+    /// Required `string` value serialized in the `trees_url` wire field.
+    public var treesUrl: String
+    /// Required `string` value serialized in the `statuses_url` wire field.
+    public var statusesUrl: String
+    /// Required `uri`-formatted value serialized in the `languages_url` wire field.
+    public var languagesUrl: String
+    /// Required `uri`-formatted value serialized in the `stargazers_url` wire field.
+    public var stargazersUrl: String
+    /// Required `uri`-formatted value serialized in the `contributors_url` wire field.
+    public var contributorsUrl: String
+    /// Required `uri`-formatted value serialized in the `subscribers_url` wire field.
+    public var subscribersUrl: String
+    /// Required `uri`-formatted value serialized in the `subscription_url` wire field.
+    public var subscriptionUrl: String
+    /// Required `string` value serialized in the `commits_url` wire field.
+    public var commitsUrl: String
+    /// Required `string` value serialized in the `git_commits_url` wire field.
+    public var gitCommitsUrl: String
+    /// Required `string` value serialized in the `comments_url` wire field.
+    public var commentsUrl: String
+    /// Required `string` value serialized in the `issue_comment_url` wire field.
+    public var issueCommentUrl: String
+    /// Required `string` value serialized in the `contents_url` wire field.
+    public var contentsUrl: String
+    /// Required `string` value serialized in the `compare_url` wire field.
+    public var compareUrl: String
+    /// Required `uri`-formatted value serialized in the `merges_url` wire field.
+    public var mergesUrl: String
+    /// Required `string` value serialized in the `archive_url` wire field.
+    public var archiveUrl: String
+    /// Required `uri`-formatted value serialized in the `downloads_url` wire field.
+    public var downloadsUrl: String
+    /// Required `string` value serialized in the `issues_url` wire field.
+    public var issuesUrl: String
+    /// Required `string` value serialized in the `pulls_url` wire field.
+    public var pullsUrl: String
+    /// Required `string` value serialized in the `milestones_url` wire field.
+    public var milestonesUrl: String
+    /// Required `string` value serialized in the `notifications_url` wire field.
+    public var notificationsUrl: String
+    /// Required `string` value serialized in the `labels_url` wire field.
+    public var labelsUrl: String
+    /// Required `string` value serialized in the `releases_url` wire field.
+    public var releasesUrl: String
+    /// Required `uri`-formatted value serialized in the `deployments_url` wire field.
+    public var deploymentsUrl: String
+    /// Required `string` value serialized in the `git_url` wire field.
+    public var gitUrl: String
+    /// Required `string` value serialized in the `ssh_url` wire field.
+    public var sshUrl: String
+    /// Required `string` value serialized in the `clone_url` wire field.
+    public var cloneUrl: String
+    /// Required `uri`-formatted value serialized in the `svn_url` wire field.
+    public var svnUrl: String
+    /// Required `integer` value serialized in the `forks` wire field.
+    public var forks: Int
+    /// Required `integer` value serialized in the `open_issues` wire field.
+    public var openIssues: Int
+    /// Required `integer` value serialized in the `watchers` wire field.
+    public var watchers: Int
+    /// Required `uri`-formatted value serialized in the `mirror_url` wire field.
+    public var mirrorUrl: String?
+    /// Required `boolean` value serialized in the `has_issues` wire field.
+    public var hasIssues: Bool
+    /// Required `boolean` value serialized in the `has_projects` wire field.
+    public var hasProjects: Bool
+    /// Required `boolean` value serialized in the `has_pages` wire field.
+    public var hasPages: Bool
+    /// Required `boolean` value serialized in the `has_wiki` wire field.
+    public var hasWiki: Bool
+    /// Required `boolean` value serialized in the `has_downloads` wire field.
+    public var hasDownloads: Bool
+    /// Required `boolean` value serialized in the `archived` wire field.
+    public var archived: Bool
+    /// Returns whether or not this repository disabled.
+    public var disabled: Bool
+    /// License Simple
+    public var license: NullableLicenseSimple?
+    /// Optional `string` value serialized in the `master_branch` wire field.
+    public var primaryBranch: String?
+    /// Optional array value serialized in the `topics` wire field.
+    public var topics: [String]?
+    /// Optional `boolean` value serialized in the `has_discussions` wire field.
+    public var hasDiscussions: Bool?
+    /// Optional `boolean` value serialized in the `has_pull_requests` wire field.
+    public var hasPullRequests: Bool?
+    /// The policy controlling who can create pull requests: all or collaborators_only.
+    public var pullRequestCreationPolicy: RepoSearchResultItemPullRequestCreationPolicy?
+    /// The repository visibility: public, private, or internal.
+    public var visibility: String?
+    /// Optional object value serialized in the `permissions` wire field.
+    public var permissions: RepoSearchResultItemPermissions?
     /// Optional array value serialized in the `text_matches` wire field.
     public var textMatches: SearchResultTextMatches?
-    /// Optional object value serialized in the `pull_request` wire field.
-    public var pullRequest: IssueSearchResultItemPullRequest?
-    /// Optional `string` value serialized in the `body` wire field.
-    public var body: String?
-    /// Optional `boolean` value serialized in the `draft` wire field.
-    public var draft: Bool?
-    /// A repository on GitHub.
-    public var repository: Repository?
-    /// Optional `string` value serialized in the `body_html` wire field.
-    public var bodyHtml: String?
-    /// Optional `string` value serialized in the `body_text` wire field.
-    public var bodyText: String?
-    /// Optional `uri`-formatted value serialized in the `timeline_url` wire field.
-    public var timelineUrl: String?
-    /// The type assigned to the issue. This is only present for issues in repositories where issue types are
-    /// supported.
-    public var type: IssueType?
-    /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user
-    /// accounts and granted access to specific repositories. They come with granular permissions and built-in
-    /// webhooks. GitHub apps are first class actors within GitHub.
-    public var performedViaGithubApp: NullableIntegration?
-    /// Comments provide a way for people to collaborate on an issue.
-    public var pinnedComment: NullableIssueComment?
-    /// Optional object value serialized in the `reactions` wire field.
-    public var reactions: ReactionRollup?
+    /// Optional `string` value serialized in the `temp_clone_token` wire field.
+    public var tempCloneToken: String?
+    /// Optional `boolean` value serialized in the `allow_merge_commit` wire field.
+    public var allowMergeCommit: Bool?
+    /// Optional `boolean` value serialized in the `allow_squash_merge` wire field.
+    public var allowSquashMerge: Bool?
+    /// Optional `boolean` value serialized in the `allow_rebase_merge` wire field.
+    public var allowRebaseMerge: Bool?
+    /// Optional `boolean` value serialized in the `allow_auto_merge` wire field.
+    public var allowAutoMerge: Bool?
+    /// Optional `boolean` value serialized in the `delete_branch_on_merge` wire field.
+    public var deleteBranchOnMerge: Bool?
+    /// Optional `boolean` value serialized in the `allow_forking` wire field.
+    public var allowForking: Bool?
+    /// Optional `boolean` value serialized in the `is_template` wire field.
+    public var isTemplate: Bool?
+    /// Optional `boolean` value serialized in the `web_commit_signoff_required` wire field.
+    public var webCommitSignoffRequired: Bool?
 
     enum CodingKeys: String, CodingKey {
-        case url
-        case repositoryUrl = "repository_url"
-        case labelsUrl = "labels_url"
-        case commentsUrl = "comments_url"
-        case eventsUrl = "events_url"
-        case htmlUrl = "html_url"
         case id
         case nodeId = "node_id"
-        case number
-        case title
-        case locked
-        case user
-        case labels
-        case state
-        case assignee
-        case milestone
-        case comments
+        case name
+        case fullName = "full_name"
+        case owner
+        case `private`
+        case htmlUrl = "html_url"
+        case description
+        case fork
+        case url
         case createdAt = "created_at"
         case updatedAt = "updated_at"
-        case closedAt = "closed_at"
+        case pushedAt = "pushed_at"
+        case homepage
+        case size
+        case stargazersCount = "stargazers_count"
+        case watchersCount = "watchers_count"
+        case language
+        case forksCount = "forks_count"
+        case openIssuesCount = "open_issues_count"
+        case defaultBranch = "default_branch"
         case score
-        case authorAssociation = "author_association"
-        case activeLockReason = "active_lock_reason"
-        case assignees
-        case subIssuesSummary = "sub_issues_summary"
-        case issueDependenciesSummary = "issue_dependencies_summary"
-        case issueFieldValues = "issue_field_values"
-        case stateReason = "state_reason"
+        case forksUrl = "forks_url"
+        case keysUrl = "keys_url"
+        case collaboratorsUrl = "collaborators_url"
+        case teamsUrl = "teams_url"
+        case hooksUrl = "hooks_url"
+        case issueEventsUrl = "issue_events_url"
+        case eventsUrl = "events_url"
+        case assigneesUrl = "assignees_url"
+        case branchesUrl = "branches_url"
+        case tagsUrl = "tags_url"
+        case blobsUrl = "blobs_url"
+        case gitTagsUrl = "git_tags_url"
+        case gitRefsUrl = "git_refs_url"
+        case treesUrl = "trees_url"
+        case statusesUrl = "statuses_url"
+        case languagesUrl = "languages_url"
+        case stargazersUrl = "stargazers_url"
+        case contributorsUrl = "contributors_url"
+        case subscribersUrl = "subscribers_url"
+        case subscriptionUrl = "subscription_url"
+        case commitsUrl = "commits_url"
+        case gitCommitsUrl = "git_commits_url"
+        case commentsUrl = "comments_url"
+        case issueCommentUrl = "issue_comment_url"
+        case contentsUrl = "contents_url"
+        case compareUrl = "compare_url"
+        case mergesUrl = "merges_url"
+        case archiveUrl = "archive_url"
+        case downloadsUrl = "downloads_url"
+        case issuesUrl = "issues_url"
+        case pullsUrl = "pulls_url"
+        case milestonesUrl = "milestones_url"
+        case notificationsUrl = "notifications_url"
+        case labelsUrl = "labels_url"
+        case releasesUrl = "releases_url"
+        case deploymentsUrl = "deployments_url"
+        case gitUrl = "git_url"
+        case sshUrl = "ssh_url"
+        case cloneUrl = "clone_url"
+        case svnUrl = "svn_url"
+        case forks
+        case openIssues = "open_issues"
+        case watchers
+        case mirrorUrl = "mirror_url"
+        case hasIssues = "has_issues"
+        case hasProjects = "has_projects"
+        case hasPages = "has_pages"
+        case hasWiki = "has_wiki"
+        case hasDownloads = "has_downloads"
+        case archived
+        case disabled
+        case license
+        case primaryBranch = "master_branch"
+        case topics
+        case hasDiscussions = "has_discussions"
+        case hasPullRequests = "has_pull_requests"
+        case pullRequestCreationPolicy = "pull_request_creation_policy"
+        case visibility
+        case permissions
         case textMatches = "text_matches"
-        case pullRequest = "pull_request"
-        case body
-        case draft
-        case repository
-        case bodyHtml = "body_html"
-        case bodyText = "body_text"
-        case timelineUrl = "timeline_url"
-        case type
-        case performedViaGithubApp = "performed_via_github_app"
-        case pinnedComment = "pinned_comment"
-        case reactions
+        case tempCloneToken = "temp_clone_token"
+        case allowMergeCommit = "allow_merge_commit"
+        case allowSquashMerge = "allow_squash_merge"
+        case allowRebaseMerge = "allow_rebase_merge"
+        case allowAutoMerge = "allow_auto_merge"
+        case deleteBranchOnMerge = "delete_branch_on_merge"
+        case allowForking = "allow_forking"
+        case isTemplate = "is_template"
+        case webCommitSignoffRequired = "web_commit_signoff_required"
     }
 
     private init(sdkCopy value: Self) { self = value }
 }
 
-extension IssueSearchResultItem {
+extension RepoSearchResultItem {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.repositoryUrl = try container.sdkDecodeRequired(.repositoryUrl)
-        self.labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
-        self.commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
-        self.eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
         self.id = try container.sdkDecodeRequired(.id)
         self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.number = try container.sdkDecodeRequired(.number)
-        self.title = try container.sdkDecodeRequired(.title)
-        self.locked = try container.sdkDecodeRequired(.locked)
-        self.user = try container.sdkDecodeNullable(.user)
-        self.labels = try container.sdkDecodeRequired(.labels)
-        self.state = try container.sdkDecodeRequired(.state)
-        self.assignee = try container.sdkDecodeNullable(.assignee)
-        self.milestone = try container.sdkDecodeNullable(.milestone)
-        self.comments = try container.sdkDecodeRequired(.comments)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.fullName = try container.sdkDecodeRequired(.fullName)
+        self.owner = try container.sdkDecodeNullable(.owner)
+        self.`private` = try container.sdkDecodeRequired(.`private`)
+        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        self.description = try container.sdkDecodeNullable(.description)
+        self.fork = try container.sdkDecodeRequired(.fork)
+        self.url = try container.sdkDecodeRequired(.url)
         self.createdAt = try container.sdkDecodeRequired(.createdAt)
         self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        self.closedAt = try container.sdkDecodeNullable(.closedAt)
+        self.pushedAt = try container.sdkDecodeRequired(.pushedAt)
+        self.homepage = try container.sdkDecodeNullable(.homepage)
+        self.size = try container.sdkDecodeRequired(.size)
+        self.stargazersCount = try container.sdkDecodeRequired(.stargazersCount)
+        self.watchersCount = try container.sdkDecodeRequired(.watchersCount)
+        self.language = try container.sdkDecodeNullable(.language)
+        self.forksCount = try container.sdkDecodeRequired(.forksCount)
+        self.openIssuesCount = try container.sdkDecodeRequired(.openIssuesCount)
+        self.defaultBranch = try container.sdkDecodeRequired(.defaultBranch)
         self.score = try container.sdkDecodeRequired(.score)
-        self.authorAssociation = try container.sdkDecodeRequired(.authorAssociation)
-        self.activeLockReason = try container.sdkDecodeIfPresent(.activeLockReason)
-        self.assignees = try container.sdkDecodeIfPresent(.assignees)
-        self.subIssuesSummary = try container.sdkDecodeIfPresent(.subIssuesSummary)
-        self.issueDependenciesSummary = try container.sdkDecodeIfPresent(.issueDependenciesSummary)
-        self.issueFieldValues = try container.sdkDecodeIfPresent(.issueFieldValues)
-        self.stateReason = try container.sdkDecodeIfPresent(.stateReason)
+        self.forksUrl = try container.sdkDecodeRequired(.forksUrl)
+        self.keysUrl = try container.sdkDecodeRequired(.keysUrl)
+        self.collaboratorsUrl = try container.sdkDecodeRequired(.collaboratorsUrl)
+        self.teamsUrl = try container.sdkDecodeRequired(.teamsUrl)
+        self.hooksUrl = try container.sdkDecodeRequired(.hooksUrl)
+        self.issueEventsUrl = try container.sdkDecodeRequired(.issueEventsUrl)
+        self.eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
+        self.assigneesUrl = try container.sdkDecodeRequired(.assigneesUrl)
+        self.branchesUrl = try container.sdkDecodeRequired(.branchesUrl)
+        self.tagsUrl = try container.sdkDecodeRequired(.tagsUrl)
+        self.blobsUrl = try container.sdkDecodeRequired(.blobsUrl)
+        self.gitTagsUrl = try container.sdkDecodeRequired(.gitTagsUrl)
+        self.gitRefsUrl = try container.sdkDecodeRequired(.gitRefsUrl)
+        self.treesUrl = try container.sdkDecodeRequired(.treesUrl)
+        self.statusesUrl = try container.sdkDecodeRequired(.statusesUrl)
+        self.languagesUrl = try container.sdkDecodeRequired(.languagesUrl)
+        self.stargazersUrl = try container.sdkDecodeRequired(.stargazersUrl)
+        self.contributorsUrl = try container.sdkDecodeRequired(.contributorsUrl)
+        self.subscribersUrl = try container.sdkDecodeRequired(.subscribersUrl)
+        self.subscriptionUrl = try container.sdkDecodeRequired(.subscriptionUrl)
+        self.commitsUrl = try container.sdkDecodeRequired(.commitsUrl)
+        self.gitCommitsUrl = try container.sdkDecodeRequired(.gitCommitsUrl)
+        self.commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
+        self.issueCommentUrl = try container.sdkDecodeRequired(.issueCommentUrl)
+        self.contentsUrl = try container.sdkDecodeRequired(.contentsUrl)
+        self.compareUrl = try container.sdkDecodeRequired(.compareUrl)
+        self.mergesUrl = try container.sdkDecodeRequired(.mergesUrl)
+        self.archiveUrl = try container.sdkDecodeRequired(.archiveUrl)
+        self.downloadsUrl = try container.sdkDecodeRequired(.downloadsUrl)
+        self.issuesUrl = try container.sdkDecodeRequired(.issuesUrl)
+        self.pullsUrl = try container.sdkDecodeRequired(.pullsUrl)
+        self.milestonesUrl = try container.sdkDecodeRequired(.milestonesUrl)
+        self.notificationsUrl = try container.sdkDecodeRequired(.notificationsUrl)
+        self.labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
+        self.releasesUrl = try container.sdkDecodeRequired(.releasesUrl)
+        self.deploymentsUrl = try container.sdkDecodeRequired(.deploymentsUrl)
+        self.gitUrl = try container.sdkDecodeRequired(.gitUrl)
+        self.sshUrl = try container.sdkDecodeRequired(.sshUrl)
+        self.cloneUrl = try container.sdkDecodeRequired(.cloneUrl)
+        self.svnUrl = try container.sdkDecodeRequired(.svnUrl)
+        self.forks = try container.sdkDecodeRequired(.forks)
+        self.openIssues = try container.sdkDecodeRequired(.openIssues)
+        self.watchers = try container.sdkDecodeRequired(.watchers)
+        self.mirrorUrl = try container.sdkDecodeNullable(.mirrorUrl)
+        self.hasIssues = try container.sdkDecodeRequired(.hasIssues)
+        self.hasProjects = try container.sdkDecodeRequired(.hasProjects)
+        self.hasPages = try container.sdkDecodeRequired(.hasPages)
+        self.hasWiki = try container.sdkDecodeRequired(.hasWiki)
+        self.hasDownloads = try container.sdkDecodeRequired(.hasDownloads)
+        self.archived = try container.sdkDecodeRequired(.archived)
+        self.disabled = try container.sdkDecodeRequired(.disabled)
+        self.license = try container.sdkDecodeNullable(.license)
+        self.primaryBranch = try container.sdkDecodeIfPresent(.primaryBranch)
+        self.topics = try container.sdkDecodeIfPresent(.topics)
+        self.hasDiscussions = try container.sdkDecodeIfPresent(.hasDiscussions)
+        self.hasPullRequests = try container.sdkDecodeIfPresent(.hasPullRequests)
+        self.pullRequestCreationPolicy = try container.sdkDecodeIfPresent(.pullRequestCreationPolicy)
+        self.visibility = try container.sdkDecodeIfPresent(.visibility)
+        self.permissions = try container.sdkDecodeIfPresent(.permissions)
         self.textMatches = try container.sdkDecodeIfPresent(.textMatches)
-        self.pullRequest = try container.sdkDecodeIfPresent(.pullRequest)
-        self.body = try container.sdkDecodeIfPresent(.body)
-        self.draft = try container.sdkDecodeIfPresent(.draft)
-        self.repository = try container.sdkDecodeIfPresent(.repository)
-        self.bodyHtml = try container.sdkDecodeIfPresent(.bodyHtml)
-        self.bodyText = try container.sdkDecodeIfPresent(.bodyText)
-        self.timelineUrl = try container.sdkDecodeIfPresent(.timelineUrl)
-        self.type = try container.sdkDecodeIfPresent(.type)
-        self.performedViaGithubApp = try container.sdkDecodeIfPresent(.performedViaGithubApp)
-        self.pinnedComment = try container.sdkDecodeIfPresent(.pinnedComment)
-        self.reactions = try container.sdkDecodeIfPresent(.reactions)
-        try sdkValidateConstraints()
+        self.tempCloneToken = try container.sdkDecodeIfPresent(.tempCloneToken)
+        self.allowMergeCommit = try container.sdkDecodeIfPresent(.allowMergeCommit)
+        self.allowSquashMerge = try container.sdkDecodeIfPresent(.allowSquashMerge)
+        self.allowRebaseMerge = try container.sdkDecodeIfPresent(.allowRebaseMerge)
+        self.allowAutoMerge = try container.sdkDecodeIfPresent(.allowAutoMerge)
+        self.deleteBranchOnMerge = try container.sdkDecodeIfPresent(.deleteBranchOnMerge)
+        self.allowForking = try container.sdkDecodeIfPresent(.allowForking)
+        self.isTemplate = try container.sdkDecodeIfPresent(.isTemplate)
+        self.webCommitSignoffRequired = try container.sdkDecodeIfPresent(.webCommitSignoffRequired)
+        try sdkValidateConstraintsPart1()
+        try sdkValidateConstraintsPart2()
     }
 }
 
-extension IssueSearchResultItem {
-    public init(url: String, repositoryUrl: String, labelsUrl: String, commentsUrl: String, eventsUrl: String, htmlUrl: String, id: Int, nodeId: String, number: Int, title: String, locked: Bool, user: NullableSimpleUser?, labels: [IssueSearchResultItemLabelsItem], state: String, assignee: NullableSimpleUser?, milestone: NullableMilestone?, comments: Int, createdAt: Date, updatedAt: Date, closedAt: Date?, score: Double, authorAssociation: AuthorAssociation, activeLockReason: String? = nil, assignees: [SimpleUser]? = nil, subIssuesSummary: SubIssuesSummary? = nil, issueDependenciesSummary: IssueDependenciesSummary? = nil, issueFieldValues: [IssueFieldValue]? = nil, stateReason: String? = nil, textMatches: SearchResultTextMatches? = nil, pullRequest: IssueSearchResultItemPullRequest? = nil, body: String? = nil, draft: Bool? = nil, repository: Repository? = nil, bodyHtml: String? = nil, bodyText: String? = nil, timelineUrl: String? = nil, type: IssueType? = nil, performedViaGithubApp: NullableIntegration? = nil, pinnedComment: NullableIssueComment? = nil, reactions: ReactionRollup? = nil) throws {
-        (self.url, self.repositoryUrl) = (url, repositoryUrl)
-        (self.labelsUrl, self.commentsUrl) = (labelsUrl, commentsUrl)
-        (self.eventsUrl, self.htmlUrl) = (eventsUrl, htmlUrl)
+extension RepoSearchResultItem {
+    public init(id: Int, nodeId: String, name: String, fullName: String, owner: NullableSimpleUser?, `private`: Bool, htmlUrl: String, description: String?, fork: Bool, url: String, createdAt: Date, updatedAt: Date, pushedAt: Date, homepage: String?, size: Int, stargazersCount: Int, watchersCount: Int, language: String?, forksCount: Int, openIssuesCount: Int, defaultBranch: String, score: Double, forksUrl: String, keysUrl: String, collaboratorsUrl: String, teamsUrl: String, hooksUrl: String, issueEventsUrl: String, eventsUrl: String, assigneesUrl: String, branchesUrl: String, tagsUrl: String, blobsUrl: String, gitTagsUrl: String, gitRefsUrl: String, treesUrl: String, statusesUrl: String, languagesUrl: String, stargazersUrl: String, contributorsUrl: String, subscribersUrl: String, subscriptionUrl: String, commitsUrl: String, gitCommitsUrl: String, commentsUrl: String, issueCommentUrl: String, contentsUrl: String, compareUrl: String, mergesUrl: String, archiveUrl: String, downloadsUrl: String, issuesUrl: String, pullsUrl: String, milestonesUrl: String, notificationsUrl: String, labelsUrl: String, releasesUrl: String, deploymentsUrl: String, gitUrl: String, sshUrl: String, cloneUrl: String, svnUrl: String, forks: Int, openIssues: Int, watchers: Int, mirrorUrl: String?, hasIssues: Bool, hasProjects: Bool, hasPages: Bool, hasWiki: Bool, hasDownloads: Bool, archived: Bool, disabled: Bool, license: NullableLicenseSimple?, primaryBranch: String? = nil, topics: [String]? = nil, hasDiscussions: Bool? = nil, hasPullRequests: Bool? = nil, pullRequestCreationPolicy: RepoSearchResultItemPullRequestCreationPolicy? = nil, visibility: String? = nil, permissions: RepoSearchResultItemPermissions? = nil, textMatches: SearchResultTextMatches? = nil, tempCloneToken: String? = nil, allowMergeCommit: Bool? = nil, allowSquashMerge: Bool? = nil, allowRebaseMerge: Bool? = nil, allowAutoMerge: Bool? = nil, deleteBranchOnMerge: Bool? = nil, allowForking: Bool? = nil, isTemplate: Bool? = nil, webCommitSignoffRequired: Bool? = nil) throws {
         (self.id, self.nodeId) = (id, nodeId)
-        (self.number, self.title) = (number, title)
-        (self.locked, self.user) = (locked, user)
-        (self.labels, self.state) = (labels, state)
-        (self.assignee, self.milestone) = (assignee, milestone)
-        (self.comments, self.createdAt) = (comments, createdAt)
-        (self.updatedAt, self.closedAt) = (updatedAt, closedAt)
-        (self.score, self.authorAssociation) = (score, authorAssociation)
-        (self.activeLockReason, self.assignees) = (activeLockReason, assignees)
-        self.subIssuesSummary = subIssuesSummary
-        self.issueDependenciesSummary = issueDependenciesSummary
-        (self.issueFieldValues, self.stateReason) = (issueFieldValues, stateReason)
-        (self.textMatches, self.pullRequest) = (textMatches, pullRequest)
-        (self.body, self.draft) = (body, draft)
-        (self.repository, self.bodyHtml) = (repository, bodyHtml)
-        (self.bodyText, self.timelineUrl) = (bodyText, timelineUrl)
-        (self.type, self.performedViaGithubApp) = (type, performedViaGithubApp)
-        (self.pinnedComment, self.reactions) = (pinnedComment, reactions)
-        try sdkValidateConstraints()
+        (self.name, self.fullName) = (name, fullName)
+        (self.owner, self.`private`) = (owner, `private`)
+        (self.htmlUrl, self.description) = (htmlUrl, description)
+        (self.fork, self.url) = (fork, url)
+        (self.createdAt, self.updatedAt) = (createdAt, updatedAt)
+        (self.pushedAt, self.homepage) = (pushedAt, homepage)
+        (self.size, self.stargazersCount) = (size, stargazersCount)
+        (self.watchersCount, self.language) = (watchersCount, language)
+        (self.forksCount, self.openIssuesCount) = (forksCount, openIssuesCount)
+        (self.defaultBranch, self.score) = (defaultBranch, score)
+        (self.forksUrl, self.keysUrl) = (forksUrl, keysUrl)
+        (self.collaboratorsUrl, self.teamsUrl) = (collaboratorsUrl, teamsUrl)
+        (self.hooksUrl, self.issueEventsUrl) = (hooksUrl, issueEventsUrl)
+        (self.eventsUrl, self.assigneesUrl) = (eventsUrl, assigneesUrl)
+        (self.branchesUrl, self.tagsUrl) = (branchesUrl, tagsUrl)
+        (self.blobsUrl, self.gitTagsUrl) = (blobsUrl, gitTagsUrl)
+        (self.gitRefsUrl, self.treesUrl) = (gitRefsUrl, treesUrl)
+        (self.statusesUrl, self.languagesUrl) = (statusesUrl, languagesUrl)
+        (self.stargazersUrl, self.contributorsUrl) = (stargazersUrl, contributorsUrl)
+        (self.subscribersUrl, self.subscriptionUrl) = (subscribersUrl, subscriptionUrl)
+        (self.commitsUrl, self.gitCommitsUrl) = (commitsUrl, gitCommitsUrl)
+        (self.commentsUrl, self.issueCommentUrl) = (commentsUrl, issueCommentUrl)
+        (self.contentsUrl, self.compareUrl) = (contentsUrl, compareUrl)
+        (self.mergesUrl, self.archiveUrl) = (mergesUrl, archiveUrl)
+        (self.downloadsUrl, self.issuesUrl) = (downloadsUrl, issuesUrl)
+        (self.pullsUrl, self.milestonesUrl) = (pullsUrl, milestonesUrl)
+        (self.notificationsUrl, self.labelsUrl) = (notificationsUrl, labelsUrl)
+        (self.releasesUrl, self.deploymentsUrl) = (releasesUrl, deploymentsUrl)
+        (self.gitUrl, self.sshUrl) = (gitUrl, sshUrl)
+        (self.cloneUrl, self.svnUrl) = (cloneUrl, svnUrl)
+        (self.forks, self.openIssues) = (forks, openIssues)
+        (self.watchers, self.mirrorUrl) = (watchers, mirrorUrl)
+        (self.hasIssues, self.hasProjects) = (hasIssues, hasProjects)
+        (self.hasPages, self.hasWiki) = (hasPages, hasWiki)
+        (self.hasDownloads, self.archived) = (hasDownloads, archived)
+        (self.disabled, self.license) = (disabled, license)
+        (self.primaryBranch, self.topics) = (primaryBranch, topics)
+        (self.hasDiscussions, self.hasPullRequests) = (hasDiscussions, hasPullRequests)
+        (self.pullRequestCreationPolicy, self.visibility) = (pullRequestCreationPolicy, visibility)
+        (self.permissions, self.textMatches) = (permissions, textMatches)
+        (self.tempCloneToken, self.allowMergeCommit) = (tempCloneToken, allowMergeCommit)
+        (self.allowSquashMerge, self.allowRebaseMerge) = (allowSquashMerge, allowRebaseMerge)
+        (self.allowAutoMerge, self.deleteBranchOnMerge) = (allowAutoMerge, deleteBranchOnMerge)
+        (self.allowForking, self.isTemplate) = (allowForking, isTemplate)
+        self.webCommitSignoffRequired = webCommitSignoffRequired
+        try sdkValidateConstraintsPart1()
+        try sdkValidateConstraintsPart2()
     }
 }
 
-extension IssueSearchResultItem {
-    func sdkValidateConstraints() throws {
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("repository_url", self.repositoryUrl)
-            try sdkValidateUri("comments_url", self.commentsUrl)
-            try sdkValidateUri("events_url", self.eventsUrl)
+extension RepoSearchResultItem {
+    func sdkValidateConstraintsPart1() throws {
             try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("url", self.url)
             try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
             try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-        if let value = self.closedAt {
-            try sdkValidateDateTime("closed_at", sdkWireString(value))
+            try sdkValidateDateTime("pushed_at", sdkWireString(self.pushedAt))
+        if let value = self.homepage {
+            try sdkValidateUri("homepage", value)
         }
-        if let value = self.timelineUrl {
-            try sdkValidateUri("timeline_url", value)
+            try sdkValidateUri("forks_url", self.forksUrl)
+            try sdkValidateUri("teams_url", self.teamsUrl)
+            try sdkValidateUri("hooks_url", self.hooksUrl)
+            try sdkValidateUri("events_url", self.eventsUrl)
+            try sdkValidateUri("tags_url", self.tagsUrl)
+            try sdkValidateUri("languages_url", self.languagesUrl)
+    }
+}
+
+extension RepoSearchResultItem {
+    func sdkValidateConstraintsPart2() throws {
+            try sdkValidateUri("stargazers_url", self.stargazersUrl)
+            try sdkValidateUri("contributors_url", self.contributorsUrl)
+            try sdkValidateUri("subscribers_url", self.subscribersUrl)
+            try sdkValidateUri("subscription_url", self.subscriptionUrl)
+            try sdkValidateUri("merges_url", self.mergesUrl)
+            try sdkValidateUri("downloads_url", self.downloadsUrl)
+            try sdkValidateUri("deployments_url", self.deploymentsUrl)
+            try sdkValidateUri("svn_url", self.svnUrl)
+        if let value = self.mirrorUrl {
+            try sdkValidateUri("mirror_url", value)
+        }
+    }
+}
+
+/// Required object value serialized in the `labels[]` wire field.
+public struct IssueSearchResultItemLabelsItem: Codable {
+    /// Optional `int64`-formatted value serialized in the `id` wire field.
+    public var id: Int?
+    /// Optional `string` value serialized in the `node_id` wire field.
+    public var nodeId: String?
+    /// Optional `string` value serialized in the `url` wire field.
+    public var url: String?
+    /// Optional `string` value serialized in the `name` wire field.
+    public var name: String?
+    /// Optional `string` value serialized in the `color` wire field.
+    public var color: String?
+    /// Optional `boolean` value serialized in the `default` wire field.
+    public var `default`: Bool?
+    /// Optional `string` value serialized in the `description` wire field.
+    public var description: String?
+    /// Timestamp indicating when the label was archived, or `null` if it has not been archived.
+    public var archivedAt: Date?
+    /// The user who archived the label, or `null` if it has not been archived.
+    public var archivedBy: SimpleUser?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case nodeId = "node_id"
+        case url
+        case name
+        case color
+        case `default`
+        case description
+        case archivedAt = "archived_at"
+        case archivedBy = "archived_by"
+    }
+
+    init() {
+        (self.id, self.nodeId, self.url, self.name, self.color) = (nil, nil, nil, nil, nil)
+        (self.`default`, self.description, self.archivedAt, self.archivedBy) = (nil, nil, nil, nil)
+    }
+}
+
+extension IssueSearchResultItemLabelsItem {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.sdkDecodeIfPresent(.id)
+        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        self.url = try container.sdkDecodeIfPresent(.url)
+        self.name = try container.sdkDecodeIfPresent(.name)
+        self.color = try container.sdkDecodeIfPresent(.color)
+        self.`default` = try container.sdkDecodeIfPresent(.`default`)
+        self.description = try container.sdkDecodeIfPresent(.description)
+        self.archivedAt = try container.sdkDecodeIfPresent(.archivedAt)
+        self.archivedBy = try container.sdkDecodeIfPresent(.archivedBy)
+        if let value = self.archivedAt {
+            try sdkValidateDateTime("archived_at", sdkWireString(value))
         }
     }
 }

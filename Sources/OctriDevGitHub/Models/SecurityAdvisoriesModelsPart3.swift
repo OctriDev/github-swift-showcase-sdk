@@ -4,322 +4,6 @@
 import Foundation
 
 // SecurityAdvisories domain models
-extension GlobalAdvisory {
-    func sdkValidateConstraints() throws {
-            try sdkValidateUri("html_url", self.htmlUrl)
-        if let value = self.repositoryAdvisoryUrl {
-            try sdkValidateUri("repository_advisory_url", value)
-        }
-            try validateLength("summary", self.summary, min: nil, max: 1024)
-        if let value = self.description {
-            try validateLength("description", value, min: nil, max: 65535)
-        }
-        if let value = self.sourceCodeLocation {
-            try sdkValidateUri("source_code_location", value)
-        }
-            try sdkValidateDateTime("published_at", sdkWireString(self.publishedAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-        if let value = self.githubReviewedAt {
-            try sdkValidateDateTime("github_reviewed_at", sdkWireString(value))
-        }
-        if let value = self.nvdPublishedAt {
-            try sdkValidateDateTime("nvd_published_at", sdkWireString(value))
-        }
-        if let value = self.withdrawnAt {
-            try sdkValidateDateTime("withdrawn_at", sdkWireString(value))
-        }
-    }
-}
-
-/// The name of the package affected by the vulnerability.
-public struct VulnerabilityPackage: Codable {
-    /// The package's language or package management ecosystem.
-    public var ecosystem: SecurityAdvisoryEcosystems
-    /// The unique package name within its ecosystem.
-    public var name: String?
-
-    enum CodingKeys: String, CodingKey {
-        case ecosystem
-        case name
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension VulnerabilityPackage {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.ecosystem) else {
-            throw SdkValidationError(field: "ecosystem", code: "required", message: "Validation failed for 'ecosystem': value is required")
-        }
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        self.ecosystem = try container.sdkDecodeRequired(.ecosystem)
-        self.name = try container.sdkDecodeNullable(.name)
-    }
-}
-
-extension VulnerabilityPackage {
-    public init(ecosystem: SecurityAdvisoryEcosystems, name: String?) {
-        (self.ecosystem, self.name) = (ecosystem, name)
-    }
-}
-
-/// Required object value serialized in the `identifiers[]` wire field.
-public struct GlobalAdvisoryIdentifiersItem: Codable {
-    /// The type of identifier.
-    public var type: GlobalAdvisoryIdentifiersItemType
-    /// The identifier value.
-    public var value: String
-
-    enum CodingKeys: String, CodingKey {
-        case type
-        case value
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension GlobalAdvisoryIdentifiersItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        guard container.contains(.value) else {
-            throw SdkValidationError(field: "value", code: "required", message: "Validation failed for 'value': value is required")
-        }
-        self.type = try container.sdkDecodeRequired(.type)
-        self.value = try container.sdkDecodeRequired(.value)
-    }
-}
-
-extension GlobalAdvisoryIdentifiersItem {
-    public init(type: GlobalAdvisoryIdentifiersItemType, value: String) {
-        (self.type, self.value) = (type, value)
-    }
-}
-
-/// A repository security advisory.
-public struct RepositoryAdvisory: Codable {
-    /// The GitHub Security Advisory ID.
-    public var ghsaId: String
-    /// The Common Vulnerabilities and Exposures (CVE) ID.
-    public var cveId: String?
-    /// The API URL for the advisory.
-    public var url: String
-    /// The URL for the advisory.
-    public var htmlUrl: String
-    /// A short summary of the advisory.
-    public var summary: String
-    /// A detailed description of what the advisory entails.
-    public var description: String?
-    /// The severity of the advisory.
-    public var severity: RepositoryAdvisorySeverity?
-    /// The author of the advisory.
-    public var author: RepositoryAdvisoryAuthor?
-    /// The publisher of the advisory.
-    public var publisher: RepositoryAdvisoryPublisher?
-    /// Required array value serialized in the `identifiers` wire field.
-    public var identifiers: [RepositoryAdvisoryIdentifiersItem]
-    /// The state of the advisory.
-    public var state: RepositoryAdvisoryState
-    /// The date and time of when the advisory was created, in ISO 8601 format.
-    public var createdAt: Date?
-    /// The date and time of when the advisory was last updated, in ISO 8601 format.
-    public var updatedAt: Date?
-    /// The date and time of when the advisory was published, in ISO 8601 format.
-    public var publishedAt: Date?
-    /// The date and time of when the advisory was closed, in ISO 8601 format.
-    public var closedAt: Date?
-    /// The date and time of when the advisory was withdrawn, in ISO 8601 format.
-    public var withdrawnAt: Date?
-    /// Required object value serialized in the `submission` wire field.
-    public var submission: RepositoryAdvisorySubmission?
-    /// Required array value serialized in the `vulnerabilities` wire field.
-    public var vulnerabilities: [RepositoryAdvisoryVulnerability]?
-    /// Required object value serialized in the `cvss` wire field.
-    public var cvss: RepositoryAdvisoryCvss?
-    /// Required array value serialized in the `cwes` wire field.
-    public var cwes: [RepositoryAdvisoryCwesItem]?
-    /// A list of only the CWE IDs.
-    public var cweIds: [String]?
-    /// Required array value serialized in the `credits` wire field.
-    public var credits: [RepositoryAdvisoryCreditsItem]?
-    /// Required array value serialized in the `credits_detailed` wire field.
-    public var creditsDetailed: [RepositoryAdvisoryCredit]?
-    /// A list of users that collaborate on the advisory.
-    public var collaboratingUsers: [SimpleUser]?
-    /// A list of teams that collaborate on the advisory.
-    public var collaboratingTeams: [Team]?
-    /// A temporary private fork of the advisory's repository for collaborating on a fix.
-    public var privateFork: RepositoryAdvisoryPrivateFork?
-    /// Optional object value serialized in the `cvss_severities` wire field.
-    public var cvssSeverities: CvssSeverities?
-
-    enum CodingKeys: String, CodingKey {
-        case ghsaId = "ghsa_id"
-        case cveId = "cve_id"
-        case url
-        case htmlUrl = "html_url"
-        case summary
-        case description
-        case severity
-        case author
-        case publisher
-        case identifiers
-        case state
-        case createdAt = "created_at"
-        case updatedAt = "updated_at"
-        case publishedAt = "published_at"
-        case closedAt = "closed_at"
-        case withdrawnAt = "withdrawn_at"
-        case submission
-        case vulnerabilities
-        case cvss
-        case cwes
-        case cweIds = "cwe_ids"
-        case credits
-        case creditsDetailed = "credits_detailed"
-        case collaboratingUsers = "collaborating_users"
-        case collaboratingTeams = "collaborating_teams"
-        case privateFork = "private_fork"
-        case cvssSeverities = "cvss_severities"
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryAdvisory {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.ghsaId = try container.sdkDecodeRequired(.ghsaId)
-        self.cveId = try container.sdkDecodeNullable(.cveId)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.summary = try container.sdkDecodeRequired(.summary)
-        self.description = try container.sdkDecodeNullable(.description)
-        self.severity = try container.sdkDecodeNullable(.severity)
-        self.author = try container.sdkDecodeNullable(.author)
-        self.publisher = try container.sdkDecodeNullable(.publisher)
-        self.identifiers = try container.sdkDecodeRequired(.identifiers)
-        self.state = try container.sdkDecodeRequired(.state)
-        self.createdAt = try container.sdkDecodeNullable(.createdAt)
-        self.updatedAt = try container.sdkDecodeNullable(.updatedAt)
-        self.publishedAt = try container.sdkDecodeNullable(.publishedAt)
-        self.closedAt = try container.sdkDecodeNullable(.closedAt)
-        self.withdrawnAt = try container.sdkDecodeNullable(.withdrawnAt)
-        self.submission = try container.sdkDecodeNullable(.submission)
-        self.vulnerabilities = try container.sdkDecodeNullable(.vulnerabilities)
-        self.cvss = try container.sdkDecodeNullable(.cvss)
-        self.cwes = try container.sdkDecodeNullable(.cwes)
-        self.cweIds = try container.sdkDecodeNullable(.cweIds)
-        self.credits = try container.sdkDecodeNullable(.credits)
-        self.creditsDetailed = try container.sdkDecodeNullable(.creditsDetailed)
-        self.collaboratingUsers = try container.sdkDecodeNullable(.collaboratingUsers)
-        self.collaboratingTeams = try container.sdkDecodeNullable(.collaboratingTeams)
-        self.privateFork = try container.sdkDecodeNullable(.privateFork)
-        self.cvssSeverities = try container.sdkDecodeIfPresent(.cvssSeverities)
-        try sdkValidateConstraints()
-    }
-}
-
-extension RepositoryAdvisory {
-    public init(ghsaId: String, cveId: String?, url: String, htmlUrl: String, summary: String, description: String?, severity: RepositoryAdvisorySeverity?, author: RepositoryAdvisoryAuthor?, publisher: RepositoryAdvisoryPublisher?, identifiers: [RepositoryAdvisoryIdentifiersItem], state: RepositoryAdvisoryState, createdAt: Date?, updatedAt: Date?, publishedAt: Date?, closedAt: Date?, withdrawnAt: Date?, submission: RepositoryAdvisorySubmission?, vulnerabilities: [RepositoryAdvisoryVulnerability]?, cvss: RepositoryAdvisoryCvss?, cwes: [RepositoryAdvisoryCwesItem]?, cweIds: [String]?, credits: [RepositoryAdvisoryCreditsItem]?, creditsDetailed: [RepositoryAdvisoryCredit]?, collaboratingUsers: [SimpleUser]?, collaboratingTeams: [Team]?, privateFork: RepositoryAdvisoryPrivateFork?, cvssSeverities: CvssSeverities? = nil) throws {
-        (self.ghsaId, self.cveId) = (ghsaId, cveId)
-        (self.url, self.htmlUrl) = (url, htmlUrl)
-        (self.summary, self.description) = (summary, description)
-        (self.severity, self.author) = (severity, author)
-        (self.publisher, self.identifiers) = (publisher, identifiers)
-        (self.state, self.createdAt) = (state, createdAt)
-        (self.updatedAt, self.publishedAt) = (updatedAt, publishedAt)
-        (self.closedAt, self.withdrawnAt) = (closedAt, withdrawnAt)
-        (self.submission, self.vulnerabilities) = (submission, vulnerabilities)
-        (self.cvss, self.cwes) = (cvss, cwes)
-        (self.cweIds, self.credits) = (cweIds, credits)
-        (self.creditsDetailed, self.collaboratingUsers) = (creditsDetailed, collaboratingUsers)
-        (self.collaboratingTeams, self.privateFork) = (collaboratingTeams, privateFork)
-        self.cvssSeverities = cvssSeverities
-        try sdkValidateConstraints()
-    }
-}
-
-extension RepositoryAdvisory {
-    func sdkValidateConstraints() throws {
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try validateLength("summary", self.summary, min: nil, max: 1024)
-        if let value = self.description {
-            try validateLength("description", value, min: nil, max: 65535)
-        }
-        if let value = self.createdAt {
-            try sdkValidateDateTime("created_at", sdkWireString(value))
-        }
-        if let value = self.updatedAt {
-            try sdkValidateDateTime("updated_at", sdkWireString(value))
-        }
-        if let value = self.publishedAt {
-            try sdkValidateDateTime("published_at", sdkWireString(value))
-        }
-        if let value = self.closedAt {
-            try sdkValidateDateTime("closed_at", sdkWireString(value))
-        }
-        if let value = self.withdrawnAt {
-            try sdkValidateDateTime("withdrawn_at", sdkWireString(value))
-        }
-    }
-}
-
-/// Required object value serialized in the `submission` wire field.
-public struct RepositoryAdvisorySubmission: Codable {
-    /// Whether a private vulnerability report was accepted by the repository's administrators.
-    public var accepted: Bool
-
-    enum CodingKeys: String, CodingKey {
-        case accepted
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryAdvisorySubmission {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.accepted) else {
-            throw SdkValidationError(field: "accepted", code: "required", message: "Validation failed for 'accepted': value is required")
-        }
-        self.accepted = try container.sdkDecodeRequired(.accepted)
-    }
-}
-
-extension RepositoryAdvisorySubmission {
-    public init(accepted: Bool) {
-        self.accepted = accepted
-    }
-}
-
-/// Required object value serialized in the `vulnerabilities[]` wire field.
-public struct PrivateVulnerabilityReportCreateVulnerabilitiesItem: Codable {
-    /// The name of the package affected by the vulnerability.
-    public var package: PrivateVulnerabilityReportCreateVulnerabilitiesItemPackage
-    /// The range of the package versions affected by the vulnerability.
-    public var vulnerableVersionRange: String?
-    /// The package version(s) that resolve the vulnerability.
-    public var patchedVersions: String?
-    /// The functions in the package that are affected.
-    public var vulnerableFunctions: [String]?
-
-    enum CodingKeys: String, CodingKey {
-        case package
-        case vulnerableVersionRange = "vulnerable_version_range"
-        case patchedVersions = "patched_versions"
-        case vulnerableFunctions = "vulnerable_functions"
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
 extension PrivateVulnerabilityReportCreateVulnerabilitiesItem {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -442,5 +126,371 @@ extension RepositoryAdvisoryCreateCreditsItem {
 extension RepositoryAdvisoryCreateCreditsItem {
     public init(login: String, type: SecurityAdvisoryCreditTypes) {
         (self.login, self.type) = (login, type)
+    }
+}
+
+/// The description does not answer the repository's report template.
+public struct RepositoryAdvisoryDescriptionValidationError: Codable {
+    /// Required `string` value serialized in the `message` wire field.
+    public var message: String
+    /// Required `string` value serialized in the `documentation_url` wire field.
+    public var documentationUrl: String
+    /// Optional array value serialized in the `errors` wire field.
+    public var errors: [RepositoryAdvisoryDescriptionValidationErrorErrorsItem]?
+
+    enum CodingKeys: String, CodingKey {
+        case message
+        case documentationUrl = "documentation_url"
+        case errors
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension RepositoryAdvisoryDescriptionValidationError {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.message) else {
+            throw SdkValidationError(field: "message", code: "required", message: "Validation failed for 'message': value is required")
+        }
+        guard container.contains(.documentationUrl) else {
+            throw SdkValidationError(field: "documentation_url", code: "required", message: "Validation failed for 'documentation_url': value is required")
+        }
+        self.message = try container.sdkDecodeRequired(.message)
+        self.documentationUrl = try container.sdkDecodeRequired(.documentationUrl)
+        self.errors = try container.sdkDecodeIfPresent(.errors)
+    }
+}
+
+extension RepositoryAdvisoryDescriptionValidationError {
+    public init(message: String, documentationUrl: String, errors: [RepositoryAdvisoryDescriptionValidationErrorErrorsItem]? = nil) {
+        (self.message, self.documentationUrl) = (message, documentationUrl)
+        self.errors = errors
+    }
+}
+
+/// Typed representation of the `RepositoryAdvisoryUpdate` API schema.
+public struct RepositoryAdvisoryUpdate: Codable {
+    /// A short summary of the advisory.
+    public var summary: String?
+    /// A detailed description of what the advisory impacts.
+    public var description: String?
+    /// The Common Vulnerabilities and Exposures (CVE) ID.
+    public var cveId: String?
+    /// A product affected by the vulnerability detailed in a repository security advisory.
+    public var vulnerabilities: [RepositoryAdvisoryUpdateVulnerabilitiesItem]?
+    /// A list of Common Weakness Enumeration (CWE) IDs.
+    public var cweIds: [String]?
+    /// A list of users receiving credit for their participation in the security advisory.
+    public var credits: [RepositoryAdvisoryUpdateCreditsItem]?
+    /// The severity of the advisory. You must choose between setting this field or `cvss_vector_string`.
+    public var severity: RepositoryAdvisoryUpdateSeverity?
+    /// The CVSS vector that calculates the severity of the advisory. You must choose between setting this field or
+    /// `severity`.
+    public var cvssVectorString: String?
+    /// The state of the advisory.
+    public var state: RepositoryAdvisoryUpdateState?
+    /// A list of usernames who have been granted write access to the advisory.
+    public var collaboratingUsers: [String]?
+    /// A list of team slugs which have been granted write access to the advisory.
+    public var collaboratingTeams: [String]?
+
+    enum CodingKeys: String, CodingKey {
+        case summary
+        case description
+        case cveId = "cve_id"
+        case vulnerabilities
+        case cweIds = "cwe_ids"
+        case credits
+        case severity
+        case cvssVectorString = "cvss_vector_string"
+        case state
+        case collaboratingUsers = "collaborating_users"
+        case collaboratingTeams = "collaborating_teams"
+    }
+
+    init() {
+        (self.summary, self.description, self.cveId, self.vulnerabilities, self.cweIds) = (nil, nil, nil, nil, nil)
+        (self.credits, self.severity, self.cvssVectorString, self.state, self.collaboratingUsers) = (nil, nil, nil, nil, nil)
+        self.collaboratingTeams = nil
+    }
+}
+
+extension RepositoryAdvisoryUpdate {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.summary = try container.sdkDecodeIfPresent(.summary)
+        self.description = try container.sdkDecodeIfPresent(.description)
+        self.cveId = try container.sdkDecodeIfPresent(.cveId)
+        self.vulnerabilities = try container.sdkDecodeIfPresent(.vulnerabilities)
+        self.cweIds = try container.sdkDecodeIfPresent(.cweIds)
+        self.credits = try container.sdkDecodeIfPresent(.credits)
+        self.severity = try container.sdkDecodeIfPresent(.severity)
+        self.cvssVectorString = try container.sdkDecodeIfPresent(.cvssVectorString)
+        self.state = try container.sdkDecodeIfPresent(.state)
+        self.collaboratingUsers = try container.sdkDecodeIfPresent(.collaboratingUsers)
+        self.collaboratingTeams = try container.sdkDecodeIfPresent(.collaboratingTeams)
+        if let value = self.summary {
+            try validateLength("summary", value, min: nil, max: 1024)
+        }
+        if let value = self.description {
+            try validateLength("description", value, min: nil, max: 65535)
+        }
+    }
+}
+
+extension RepositoryAdvisoryUpdate {
+    public init(summary: String? = nil, description: String? = nil, cveId: String? = nil, vulnerabilities: [RepositoryAdvisoryUpdateVulnerabilitiesItem]? = nil, cweIds: [String]? = nil, credits: [RepositoryAdvisoryUpdateCreditsItem]? = nil, severity: RepositoryAdvisoryUpdateSeverity? = nil, cvssVectorString: String? = nil, state: RepositoryAdvisoryUpdateState? = nil, collaboratingUsers: [String]? = nil, collaboratingTeams: [String]? = nil) throws {
+        self.init()
+        (self.summary, self.description) = (summary, description)
+        (self.cveId, self.vulnerabilities) = (cveId, vulnerabilities)
+        (self.cweIds, self.credits) = (cweIds, credits)
+        (self.severity, self.cvssVectorString) = (severity, cvssVectorString)
+        (self.state, self.collaboratingUsers) = (state, collaboratingUsers)
+        self.collaboratingTeams = collaboratingTeams
+        if let value = self.summary {
+            try validateLength("summary", value, min: nil, max: 1024)
+        }
+        if let value = self.description {
+            try validateLength("description", value, min: nil, max: 65535)
+        }
+    }
+}
+
+/// A vulnerability describing the product and its affected versions within a GitHub Security Advisory.
+public struct Vulnerability: Codable {
+    /// The name of the package affected by the vulnerability.
+    public var package: VulnerabilityPackage?
+    /// The range of the package versions affected by the vulnerability.
+    public var vulnerableVersionRange: String?
+    /// The package version that resolves the vulnerability.
+    public var firstPatchedVersion: String?
+    /// The functions in the package that are affected by the vulnerability.
+    public var vulnerableFunctions: [String]?
+
+    enum CodingKeys: String, CodingKey {
+        case package
+        case vulnerableVersionRange = "vulnerable_version_range"
+        case firstPatchedVersion = "first_patched_version"
+        case vulnerableFunctions = "vulnerable_functions"
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension Vulnerability {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.package) else {
+            throw SdkValidationError(field: "package", code: "required", message: "Validation failed for 'package': value is required")
+        }
+        guard container.contains(.vulnerableVersionRange) else {
+            throw SdkValidationError(field: "vulnerable_version_range", code: "required", message: "Validation failed for 'vulnerable_version_range': value is required")
+        }
+        guard container.contains(.firstPatchedVersion) else {
+            throw SdkValidationError(field: "first_patched_version", code: "required", message: "Validation failed for 'first_patched_version': value is required")
+        }
+        guard container.contains(.vulnerableFunctions) else {
+            throw SdkValidationError(field: "vulnerable_functions", code: "required", message: "Validation failed for 'vulnerable_functions': value is required")
+        }
+        self.package = try container.sdkDecodeNullable(.package)
+        self.vulnerableVersionRange = try container.sdkDecodeNullable(.vulnerableVersionRange)
+        self.firstPatchedVersion = try container.sdkDecodeNullable(.firstPatchedVersion)
+        self.vulnerableFunctions = try container.sdkDecodeNullable(.vulnerableFunctions)
+    }
+}
+
+extension Vulnerability {
+    public init(package: VulnerabilityPackage?, vulnerableVersionRange: String?, firstPatchedVersion: String?, vulnerableFunctions: [String]?) {
+        (self.package, self.vulnerableVersionRange) = (package, vulnerableVersionRange)
+        (self.firstPatchedVersion, self.vulnerableFunctions) = (firstPatchedVersion, vulnerableFunctions)
+    }
+}
+
+/// The name of the package affected by the vulnerability.
+public struct RepositoryAdvisoryCreateVulnerabilitiesItemPackage: Codable {
+    /// The package's language or package management ecosystem.
+    public var ecosystem: SecurityAdvisoryEcosystems
+    /// The unique package name within its ecosystem.
+    public var name: String?
+
+    enum CodingKeys: String, CodingKey {
+        case ecosystem
+        case name
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension RepositoryAdvisoryCreateVulnerabilitiesItemPackage {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.ecosystem) else {
+            throw SdkValidationError(field: "ecosystem", code: "required", message: "Validation failed for 'ecosystem': value is required")
+        }
+        self.ecosystem = try container.sdkDecodeRequired(.ecosystem)
+        self.name = try container.sdkDecodeIfPresent(.name)
+    }
+}
+
+extension RepositoryAdvisoryCreateVulnerabilitiesItemPackage {
+    public init(ecosystem: SecurityAdvisoryEcosystems, name: String? = nil) {
+        (self.ecosystem, self.name) = (ecosystem, name)
+    }
+}
+
+public indirect enum RepositoryAdvisoryDescriptionValidationErrorErrorsItemValue {
+    case stringValue(String)
+    case intValue(Int)
+    case stringList([String])
+}
+
+extension RepositoryAdvisoryDescriptionValidationErrorErrorsItemValue: Codable {
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for RepositoryAdvisoryDescriptionValidationErrorErrorsItemValue")
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        if try encodeGroup1(to: encoder) { return }
+    }
+}
+
+extension RepositoryAdvisoryDescriptionValidationErrorErrorsItemValue {
+    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
+        if let value = try? container.decode(String.self) { return .stringValue(value) }
+        if let value = try? container.decode(Int.self) { return .intValue(value) }
+        if let value = try? container.decode([String].self) { return .stringList(value) }
+        return nil
+    }
+}
+
+extension RepositoryAdvisoryDescriptionValidationErrorErrorsItemValue {
+    func encodeGroup1(to encoder: Encoder) throws -> Bool {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case let .stringValue(value): try container.encode(value); return true
+        case let .intValue(value): try container.encode(value); return true
+        case let .stringList(value): try container.encode(value); return true
+        }
+    }
+}
+
+extension RepositoryAdvisoryDescriptionValidationErrorErrorsItemValue: SdkNumericValueConvertible {
+    var sdkNumericValue: Double? {
+        switch self {
+        case let .intValue(value): Double(value)
+        default: nil
+        }
+    }
+}
+
+/// Required object value serialized in the `cwes[]` wire field.
+public struct GlobalAdvisoryCwesItem: Codable {
+    /// The Common Weakness Enumeration (CWE) identifier.
+    public var cweId: String
+    /// The name of the CWE.
+    public var name: String
+
+    enum CodingKeys: String, CodingKey {
+        case cweId = "cwe_id"
+        case name
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension GlobalAdvisoryCwesItem {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.cweId) else {
+            throw SdkValidationError(field: "cwe_id", code: "required", message: "Validation failed for 'cwe_id': value is required")
+        }
+        guard container.contains(.name) else {
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
+        }
+        self.cweId = try container.sdkDecodeRequired(.cweId)
+        self.name = try container.sdkDecodeRequired(.name)
+    }
+}
+
+extension GlobalAdvisoryCwesItem {
+    public init(cweId: String, name: String) {
+        (self.cweId, self.name) = (cweId, name)
+    }
+}
+
+/// Required object value serialized in the `vulnerabilities[]` wire field.
+public struct RepositoryAdvisoryUpdateVulnerabilitiesItem: Codable {
+    /// The name of the package affected by the vulnerability.
+    public var package: RepositoryAdvisoryUpdateVulnerabilitiesItemPackage
+    /// The range of the package versions affected by the vulnerability.
+    public var vulnerableVersionRange: String?
+    /// The package version(s) that resolve the vulnerability.
+    public var patchedVersions: String?
+    /// The functions in the package that are affected.
+    public var vulnerableFunctions: [String]?
+
+    enum CodingKeys: String, CodingKey {
+        case package
+        case vulnerableVersionRange = "vulnerable_version_range"
+        case patchedVersions = "patched_versions"
+        case vulnerableFunctions = "vulnerable_functions"
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension RepositoryAdvisoryUpdateVulnerabilitiesItem {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.package) else {
+            throw SdkValidationError(field: "package", code: "required", message: "Validation failed for 'package': value is required")
+        }
+        self.package = try container.sdkDecodeRequired(.package)
+        self.vulnerableVersionRange = try container.sdkDecodeIfPresent(.vulnerableVersionRange)
+        self.patchedVersions = try container.sdkDecodeIfPresent(.patchedVersions)
+        self.vulnerableFunctions = try container.sdkDecodeIfPresent(.vulnerableFunctions)
+    }
+}
+
+extension RepositoryAdvisoryUpdateVulnerabilitiesItem {
+    public init(package: RepositoryAdvisoryUpdateVulnerabilitiesItemPackage, vulnerableVersionRange: String? = nil, patchedVersions: String? = nil, vulnerableFunctions: [String]? = nil) {
+        (self.package, self.vulnerableVersionRange) = (package, vulnerableVersionRange)
+        (self.patchedVersions, self.vulnerableFunctions) = (patchedVersions, vulnerableFunctions)
+    }
+}
+
+/// The name of the package affected by the vulnerability.
+public struct PrivateVulnerabilityReportCreateVulnerabilitiesItemPackage: Codable {
+    /// The package's language or package management ecosystem.
+    public var ecosystem: SecurityAdvisoryEcosystems
+    /// The unique package name within its ecosystem.
+    public var name: String?
+
+    enum CodingKeys: String, CodingKey {
+        case ecosystem
+        case name
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension PrivateVulnerabilityReportCreateVulnerabilitiesItemPackage {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.ecosystem) else {
+            throw SdkValidationError(field: "ecosystem", code: "required", message: "Validation failed for 'ecosystem': value is required")
+        }
+        self.ecosystem = try container.sdkDecodeRequired(.ecosystem)
+        self.name = try container.sdkDecodeIfPresent(.name)
+    }
+}
+
+extension PrivateVulnerabilityReportCreateVulnerabilitiesItemPackage {
+    public init(ecosystem: SecurityAdvisoryEcosystems, name: String? = nil) {
+        (self.ecosystem, self.name) = (ecosystem, name)
     }
 }

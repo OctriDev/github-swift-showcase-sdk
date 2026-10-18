@@ -8,70 +8,6 @@ import Foundation
 #endif
 
 // Canonical actions operation model declarations
-extension ActionsListRepoSecretsResponse {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.totalCount) else {
-            throw SdkValidationError(field: "total_count", code: "required", message: "Validation failed for 'total_count': value is required")
-        }
-        guard container.contains(.secrets) else {
-            throw SdkValidationError(field: "secrets", code: "required", message: "Validation failed for 'secrets': value is required")
-        }
-        self.totalCount = try container.sdkDecodeRequired(.totalCount)
-        self.secrets = try container.sdkDecodeRequired(.secrets)
-    }
-}
-
-extension ActionsListRepoSecretsResponse {
-    public init(totalCount: Int, secrets: [ActionsSecret]) {
-        (self.totalCount, self.secrets) = (totalCount, secrets)
-    }
-}
-
-public struct ActionsListRepoWorkflowsResponse: Codable {
-    public var totalCount: Int
-    public var workflows: [Workflow]
-
-    enum CodingKeys: String, CodingKey {
-        case totalCount = "total_count"
-        case workflows
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsListRepoWorkflowsResponse {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.totalCount) else {
-            throw SdkValidationError(field: "total_count", code: "required", message: "Validation failed for 'total_count': value is required")
-        }
-        guard container.contains(.workflows) else {
-            throw SdkValidationError(field: "workflows", code: "required", message: "Validation failed for 'workflows': value is required")
-        }
-        self.totalCount = try container.sdkDecodeRequired(.totalCount)
-        self.workflows = try container.sdkDecodeRequired(.workflows)
-    }
-}
-
-extension ActionsListRepoWorkflowsResponse {
-    public init(totalCount: Int, workflows: [Workflow]) {
-        (self.totalCount, self.workflows) = (totalCount, workflows)
-    }
-}
-
-public struct ActionsListSelectedReposForOrgSecretResponse: Codable {
-    public var totalCount: Int
-    public var repositories: [MinimalRepository]
-
-    enum CodingKeys: String, CodingKey {
-        case totalCount = "total_count"
-        case repositories
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
 extension ActionsListSelectedReposForOrgSecretResponse {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -443,38 +379,6 @@ extension ActionsListWorkflowRunArtifactsResponse {
     }
 }
 
-public struct ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgResponse: Codable {
-    public var totalCount: Int
-    public var labels: [RunnerLabel]
-
-    enum CodingKeys: String, CodingKey {
-        case totalCount = "total_count"
-        case labels
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgResponse {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.totalCount) else {
-            throw SdkValidationError(field: "total_count", code: "required", message: "Validation failed for 'total_count': value is required")
-        }
-        guard container.contains(.labels) else {
-            throw SdkValidationError(field: "labels", code: "required", message: "Validation failed for 'labels': value is required")
-        }
-        self.totalCount = try container.sdkDecodeRequired(.totalCount)
-        self.labels = try container.sdkDecodeRequired(.labels)
-    }
-}
-
-extension ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgResponse {
-    public init(totalCount: Int, labels: [RunnerLabel]) {
-        (self.totalCount, self.labels) = (totalCount, labels)
-    }
-}
-
 public indirect enum ActionsReviewCustomGatesForRunRequestBody {
     case reviewCustomGatesCommentRequired(ReviewCustomGatesCommentRequired)
     case reviewCustomGatesStateRequired(ReviewCustomGatesStateRequired)
@@ -484,6 +388,9 @@ extension ActionsReviewCustomGatesForRunRequestBody: Codable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
+        }
         if let value = Self.decodeGroup1(from: container) { self = value; return }
         throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ActionsReviewCustomGatesForRunRequestBody")
     }
@@ -491,4 +398,110 @@ extension ActionsReviewCustomGatesForRunRequestBody: Codable {
     public func encode(to encoder: Encoder) throws {
         if try encodeGroup1(to: encoder) { return }
     }
+}
+
+extension ActionsReviewCustomGatesForRunRequestBody {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(ReviewCustomGatesCommentRequired.self), sdkKeepsEveryKey(value, of: raw) {
+            return .reviewCustomGatesCommentRequired(value)
+        }
+        if let value = try? container.decode(ReviewCustomGatesStateRequired.self), sdkKeepsEveryKey(value, of: raw) {
+            return .reviewCustomGatesStateRequired(value)
+        }
+        return nil
+    }
+}
+
+extension ActionsReviewCustomGatesForRunRequestBody {
+    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
+        if let value = try? container.decode(ReviewCustomGatesCommentRequired.self) { return .reviewCustomGatesCommentRequired(value) }
+        if let value = try? container.decode(ReviewCustomGatesStateRequired.self) { return .reviewCustomGatesStateRequired(value) }
+        return nil
+    }
+}
+
+extension ActionsReviewCustomGatesForRunRequestBody {
+    func encodeGroup1(to encoder: Encoder) throws -> Bool {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case let .reviewCustomGatesCommentRequired(value): try container.encode(value); return true
+        case let .reviewCustomGatesStateRequired(value): try container.encode(value); return true
+        }
+    }
+}
+
+public struct ActionsListSelfHostedRunnersForOrgResponse: Codable {
+    public var totalCount: Int
+    public var runners: [Runner]
+
+    enum CodingKeys: String, CodingKey {
+        case totalCount = "total_count"
+        case runners
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension ActionsListSelfHostedRunnersForOrgResponse {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.totalCount) else {
+            throw SdkValidationError(field: "total_count", code: "required", message: "Validation failed for 'total_count': value is required")
+        }
+        guard container.contains(.runners) else {
+            throw SdkValidationError(field: "runners", code: "required", message: "Validation failed for 'runners': value is required")
+        }
+        self.totalCount = try container.sdkDecodeRequired(.totalCount)
+        self.runners = try container.sdkDecodeRequired(.runners)
+    }
+}
+
+extension ActionsListSelfHostedRunnersForOrgResponse {
+    public init(totalCount: Int, runners: [Runner]) {
+        (self.totalCount, self.runners) = (totalCount, runners)
+    }
+}
+
+public struct ActionsListGithubHostedRunnersInGroupForOrgResponse: Codable {
+    public var totalCount: Double
+    public var runners: [ActionsHostedRunner]
+
+    enum CodingKeys: String, CodingKey {
+        case totalCount = "total_count"
+        case runners
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension ActionsListGithubHostedRunnersInGroupForOrgResponse {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.totalCount) else {
+            throw SdkValidationError(field: "total_count", code: "required", message: "Validation failed for 'total_count': value is required")
+        }
+        guard container.contains(.runners) else {
+            throw SdkValidationError(field: "runners", code: "required", message: "Validation failed for 'runners': value is required")
+        }
+        self.totalCount = try container.sdkDecodeRequired(.totalCount)
+        self.runners = try container.sdkDecodeRequired(.runners)
+    }
+}
+
+extension ActionsListGithubHostedRunnersInGroupForOrgResponse {
+    public init(totalCount: Double, runners: [ActionsHostedRunner]) {
+        (self.totalCount, self.runners) = (totalCount, runners)
+    }
+}
+
+public struct ActionsListJobsForWorkflowRunResponse: Codable {
+    public var totalCount: Int
+    public var jobs: [Job]
+
+    enum CodingKeys: String, CodingKey {
+        case totalCount = "total_count"
+        case jobs
+    }
+
+    private init(sdkCopy value: Self) { self = value }
 }

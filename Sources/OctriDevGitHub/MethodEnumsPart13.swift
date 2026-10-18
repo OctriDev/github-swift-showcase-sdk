@@ -6,26 +6,6 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-/// The enablement status of Dependabot alerts
-public struct CodeSecurityUpdateEnterpriseConfigurationRequestBodyDependabotAlerts: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let enabled = CodeSecurityUpdateEnterpriseConfigurationRequestBodyDependabotAlerts(rawValue: "enabled")
-    public static let disabled = CodeSecurityUpdateEnterpriseConfigurationRequestBodyDependabotAlerts(rawValue: "disabled")
-    public static let notSet = CodeSecurityUpdateEnterpriseConfigurationRequestBodyDependabotAlerts(rawValue: "not_set")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
 /// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
 /// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
 public struct AgentAutomationsEditRepoAutomationResponseTriggersIssueAssignXa5f09872f2: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
@@ -198,6 +178,31 @@ public struct CodeSecurityCreateConfigurationForEnterpriseRequestBodySecretX07e3
     public static let enabled = CodeSecurityCreateConfigurationForEnterpriseRequestBodySecretX07e3274abc(rawValue: "enabled")
     public static let disabled = CodeSecurityCreateConfigurationForEnterpriseRequestBodySecretX07e3274abc(rawValue: "disabled")
     public static let notSet = CodeSecurityCreateConfigurationForEnterpriseRequestBodySecretX07e3274abc(rawValue: "not_set")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Current state of a session
+public struct AgentTasksGetTaskByRepoAndIdResponseVariant1SessionsItemState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let queued = AgentTasksGetTaskByRepoAndIdResponseVariant1SessionsItemState(rawValue: "queued")
+    public static let inProgress = AgentTasksGetTaskByRepoAndIdResponseVariant1SessionsItemState(rawValue: "in_progress")
+    public static let completed = AgentTasksGetTaskByRepoAndIdResponseVariant1SessionsItemState(rawValue: "completed")
+    public static let failed = AgentTasksGetTaskByRepoAndIdResponseVariant1SessionsItemState(rawValue: "failed")
+    public static let idle = AgentTasksGetTaskByRepoAndIdResponseVariant1SessionsItemState(rawValue: "idle")
+    public static let waitingForUser = AgentTasksGetTaskByRepoAndIdResponseVariant1SessionsItemState(rawValue: "waiting_for_user")
+    public static let timedOut = AgentTasksGetTaskByRepoAndIdResponseVariant1SessionsItemState(rawValue: "timed_out")
+    public static let cancelled = AgentTasksGetTaskByRepoAndIdResponseVariant1SessionsItemState(rawValue: "cancelled")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

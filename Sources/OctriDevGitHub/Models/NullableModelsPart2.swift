@@ -5,36 +5,6 @@ import Foundation
 
 // Nullable domain models
 extension NullableRepositoryWebhooksTemplateRepository {
-    mutating func sdkSet11(_ svnUrl: String?, _ homepage: String?, _ language: String?, _ forksCount: Int?, _ stargazersCount: Int?) {
-        self.svnUrl = svnUrl
-        self.homepage = homepage
-        self.language = language
-        self.forksCount = forksCount
-        self.stargazersCount = stargazersCount
-    }
-}
-
-extension NullableRepositoryWebhooksTemplateRepository {
-    mutating func sdkSet12(_ watchersCount: Int?, _ size: Int?, _ defaultBranch: String?, _ openIssuesCount: Int?, _ isTemplate: Bool?) {
-        self.watchersCount = watchersCount
-        self.size = size
-        self.defaultBranch = defaultBranch
-        self.openIssuesCount = openIssuesCount
-        self.isTemplate = isTemplate
-    }
-}
-
-extension NullableRepositoryWebhooksTemplateRepository {
-    mutating func sdkSet13(_ topics: [String]?, _ hasIssues: Bool?, _ hasProjects: Bool?, _ hasWiki: Bool?, _ hasPages: Bool?) {
-        self.topics = topics
-        self.hasIssues = hasIssues
-        self.hasProjects = hasProjects
-        self.hasWiki = hasWiki
-        self.hasPages = hasPages
-    }
-}
-
-extension NullableRepositoryWebhooksTemplateRepository {
     mutating func sdkSet14(_ hasDownloads: Bool?, _ archived: Bool?, _ disabled: Bool?, _ visibility: String?, _ pushedAt: String?) {
         self.hasDownloads = hasDownloads
         self.archived = archived
@@ -205,135 +175,6 @@ extension NullableRepositoryWebhooksTemplateRepository {
         self.allowMergeCommit = try container.sdkDecodeIfPresent(.allowMergeCommit)
         self.subscribersCount = try container.sdkDecodeIfPresent(.subscribersCount)
         self.networkCount = try container.sdkDecodeIfPresent(.networkCount)
-    }
-}
-
-/// A request for a specific ref(branch,sha,tag) to be deployed
-public struct NullableDeployment: Codable {
-    /// Required `uri`-formatted value serialized in the `url` wire field.
-    /// - Example: "https://api.github.com/repos/octocat/example/deployments/1"
-    public var url: String
-    /// Unique identifier of the deployment
-    /// - Example: 42
-    public var id: Int
-    /// Required `string` value serialized in the `node_id` wire field.
-    /// - Example: "MDEwOkRlcGxveW1lbnQx"
-    public var nodeId: String
-    /// Required `string` value serialized in the `sha` wire field.
-    /// - Example: "a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d"
-    public var sha: String
-    /// The ref to deploy. This can be a branch, tag, or sha.
-    /// - Example: "topic-branch"
-    public var ref: String
-    /// Parameter to specify a task to execute
-    /// - Example: "deploy"
-    public var task: String
-    /// Required API value serialized in the `payload` wire field.
-    public var payload: NullableDeploymentPayload
-    /// Name for the target deployment environment.
-    /// - Example: "production"
-    public var environment: String
-    /// Required `string` value serialized in the `description` wire field.
-    /// - Example: "Deploy request from hubot"
-    public var description: String?
-    /// A GitHub user.
-    public var creator: NullableSimpleUser?
-    /// Required `date-time`-formatted value serialized in the `created_at` wire field.
-    /// - Example: "2012-07-20T01:19:13Z"
-    public var createdAt: Date
-    /// Required `date-time`-formatted value serialized in the `updated_at` wire field.
-    /// - Example: "2012-07-20T01:19:13Z"
-    public var updatedAt: Date
-    /// Required `uri`-formatted value serialized in the `statuses_url` wire field.
-    /// - Example: "https://api.github.com/repos/octocat/example/deployments/1/statuses"
-    public var statusesUrl: String
-    /// Required `uri`-formatted value serialized in the `repository_url` wire field.
-    /// - Example: "https://api.github.com/repos/octocat/example"
-    public var repositoryUrl: String
-    /// Optional `string` value serialized in the `original_environment` wire field.
-    /// - Example: "staging"
-    public var originalEnvironment: String?
-    /// Specifies if the given environment is will no longer exist at some point in the future. Default: false.
-    /// - Example: true
-    public var transientEnvironment: Bool?
-    /// Specifies if the given environment is one that end-users directly interact with. Default: false.
-    /// - Example: true
-    public var productionEnvironment: Bool?
-    /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user
-    /// accounts and granted access to specific repositories. They come with granular permissions and built-in
-    /// webhooks. GitHub apps are first class actors within GitHub.
-    public var performedViaGithubApp: NullableIntegration?
-
-    enum CodingKeys: String, CodingKey {
-        case url
-        case id
-        case nodeId = "node_id"
-        case sha
-        case ref
-        case task
-        case payload
-        case environment
-        case description
-        case creator
-        case createdAt = "created_at"
-        case updatedAt = "updated_at"
-        case statusesUrl = "statuses_url"
-        case repositoryUrl = "repository_url"
-        case originalEnvironment = "original_environment"
-        case transientEnvironment = "transient_environment"
-        case productionEnvironment = "production_environment"
-        case performedViaGithubApp = "performed_via_github_app"
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension NullableDeployment {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.sha = try container.sdkDecodeRequired(.sha)
-        self.ref = try container.sdkDecodeRequired(.ref)
-        self.task = try container.sdkDecodeRequired(.task)
-        self.payload = try container.sdkDecodeRequired(.payload)
-        self.environment = try container.sdkDecodeRequired(.environment)
-        self.description = try container.sdkDecodeNullable(.description)
-        self.creator = try container.sdkDecodeNullable(.creator)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        self.statusesUrl = try container.sdkDecodeRequired(.statusesUrl)
-        self.repositoryUrl = try container.sdkDecodeRequired(.repositoryUrl)
-        self.originalEnvironment = try container.sdkDecodeIfPresent(.originalEnvironment)
-        self.transientEnvironment = try container.sdkDecodeIfPresent(.transientEnvironment)
-        self.productionEnvironment = try container.sdkDecodeIfPresent(.productionEnvironment)
-        self.performedViaGithubApp = try container.sdkDecodeIfPresent(.performedViaGithubApp)
-            try sdkValidateUri("url", self.url)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-            try sdkValidateUri("statuses_url", self.statusesUrl)
-            try sdkValidateUri("repository_url", self.repositoryUrl)
-    }
-}
-
-extension NullableDeployment {
-    public init(url: String, id: Int, nodeId: String, sha: String, ref: String, task: String, payload: NullableDeploymentPayload, environment: String, description: String?, creator: NullableSimpleUser?, createdAt: Date, updatedAt: Date, statusesUrl: String, repositoryUrl: String, originalEnvironment: String? = nil, transientEnvironment: Bool? = nil, productionEnvironment: Bool? = nil, performedViaGithubApp: NullableIntegration? = nil) throws {
-        (self.url, self.id) = (url, id)
-        (self.nodeId, self.sha) = (nodeId, sha)
-        (self.ref, self.task) = (ref, task)
-        (self.payload, self.environment) = (payload, environment)
-        (self.description, self.creator) = (description, creator)
-        (self.createdAt, self.updatedAt) = (createdAt, updatedAt)
-        (self.statusesUrl, self.repositoryUrl) = (statusesUrl, repositoryUrl)
-        (self.originalEnvironment, self.transientEnvironment) = (originalEnvironment, transientEnvironment)
-        self.productionEnvironment = productionEnvironment
-        self.performedViaGithubApp = performedViaGithubApp
-            try sdkValidateUri("url", self.url)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-            try sdkValidateUri("statuses_url", self.statusesUrl)
-            try sdkValidateUri("repository_url", self.repositoryUrl)
     }
 }
 
@@ -512,4 +353,32 @@ public struct NullableRepositoryWebhooksPermissions: Codable {
     }
 
     private init(sdkCopy value: Self) { self = value }
+}
+
+extension NullableRepositoryWebhooksPermissions {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.admin) else {
+            throw SdkValidationError(field: "admin", code: "required", message: "Validation failed for 'admin': value is required")
+        }
+        guard container.contains(.pull) else {
+            throw SdkValidationError(field: "pull", code: "required", message: "Validation failed for 'pull': value is required")
+        }
+        guard container.contains(.push) else {
+            throw SdkValidationError(field: "push", code: "required", message: "Validation failed for 'push': value is required")
+        }
+        self.admin = try container.sdkDecodeRequired(.admin)
+        self.pull = try container.sdkDecodeRequired(.pull)
+        self.push = try container.sdkDecodeRequired(.push)
+        self.triage = try container.sdkDecodeIfPresent(.triage)
+        self.maintain = try container.sdkDecodeIfPresent(.maintain)
+    }
+}
+
+extension NullableRepositoryWebhooksPermissions {
+    public init(admin: Bool, pull: Bool, push: Bool, triage: Bool? = nil, maintain: Bool? = nil) {
+        (self.admin, self.pull) = (admin, pull)
+        (self.push, self.triage) = (push, triage)
+        self.maintain = maintain
+    }
 }

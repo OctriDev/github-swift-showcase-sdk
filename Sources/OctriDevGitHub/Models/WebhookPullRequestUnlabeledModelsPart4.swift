@@ -84,6 +84,8 @@ extension WebhookPullRequestUnlabeledPullRequestAssigneesItem {
     }
 }
 
+public typealias WebhookPullRequestUnlabeledPullRequestRequestedReviewersList = [WebhookPullRequestUnlabeledPullRequestRequestedReviewersItem?]
+
 /// Required object value serialized in the `pull_request` wire field.
 public struct WebhookPullRequestUnlabeledPullRequest: Codable {
     /// Required object value serialized in the `_links` wire field.
@@ -139,7 +141,7 @@ public struct WebhookPullRequestUnlabeledPullRequest: Codable {
     /// Required `uri`-formatted value serialized in the `patch_url` wire field.
     public var patchUrl: String
     /// Required array value serialized in the `requested_reviewers` wire field.
-    public var requestedReviewers: [WebhookPullRequestUnlabeledPullRequestRequestedReviewersItem]
+    public var requestedReviewers: WebhookPullRequestUnlabeledPullRequestRequestedReviewersList
     /// Required array value serialized in the `requested_teams` wire field.
     public var requestedTeams: [WebhookPullRequestUnlabeledPullRequestRequestedTeamsItem]
     /// Required `uri-template`-formatted value serialized in the `review_comment_url` wire field.
@@ -298,7 +300,7 @@ extension WebhookPullRequestUnlabeledPullRequest {
 }
 
 extension WebhookPullRequestUnlabeledPullRequest {
-    public init(links: WebhookPullRequestUnlabeledPullRequestLinks, activeLockReason: WebhookPullRequestUnlabeledPullRequestActiveLockReason?, assignee: WebhookPullRequestUnlabeledPullRequestAssignee?, assignees: [WebhookPullRequestUnlabeledPullRequestAssigneesItem?], authorAssociation: WebhookPullRequestUnlabeledPullRequestAuthorAssociation, autoMerge: WebhookPullRequestUnlabeledPullRequestAutoMerge?, base: WebhookPullRequestUnlabeledPullRequestBase, body: String?, closedAt: Date?, commentsUrl: String, commitsUrl: String, createdAt: Date, diffUrl: String, draft: Bool, head: WebhookPullRequestUnlabeledPullRequestHead, htmlUrl: String, id: Int, issueUrl: String, labels: [WebhookPullRequestUnlabeledPullRequestLabelsItem], locked: Bool, mergeCommitSha: String?, mergedAt: Date?, milestone: WebhookPullRequestUnlabeledPullRequestMilestone?, nodeId: String, number: Int, patchUrl: String, requestedReviewers: [WebhookPullRequestUnlabeledPullRequestRequestedReviewersItem], requestedTeams: [WebhookPullRequestUnlabeledPullRequestRequestedTeamsItem], reviewCommentUrl: String, reviewCommentsUrl: String, state: WebhookPullRequestUnlabeledPullRequestState, statusesUrl: String, title: String, updatedAt: Date, url: String, user: WebhookPullRequestUnlabeledPullRequestUser?, additions: Int? = nil, changedFiles: Int? = nil, comments: Int? = nil, commits: Int? = nil, deletions: Int? = nil, maintainerCanModify: Bool? = nil, mergeable: Bool? = nil, mergeableState: String? = nil, merged: Bool? = nil, mergedBy: WebhookPullRequestUnlabeledPullRequestMergedBy? = nil, rebaseable: Bool? = nil, reviewComments: Int? = nil, stack: PullRequestStack? = nil) throws {
+    public init(links: WebhookPullRequestUnlabeledPullRequestLinks, activeLockReason: WebhookPullRequestUnlabeledPullRequestActiveLockReason?, assignee: WebhookPullRequestUnlabeledPullRequestAssignee?, assignees: [WebhookPullRequestUnlabeledPullRequestAssigneesItem?], authorAssociation: WebhookPullRequestUnlabeledPullRequestAuthorAssociation, autoMerge: WebhookPullRequestUnlabeledPullRequestAutoMerge?, base: WebhookPullRequestUnlabeledPullRequestBase, body: String?, closedAt: Date?, commentsUrl: String, commitsUrl: String, createdAt: Date, diffUrl: String, draft: Bool, head: WebhookPullRequestUnlabeledPullRequestHead, htmlUrl: String, id: Int, issueUrl: String, labels: [WebhookPullRequestUnlabeledPullRequestLabelsItem], locked: Bool, mergeCommitSha: String?, mergedAt: Date?, milestone: WebhookPullRequestUnlabeledPullRequestMilestone?, nodeId: String, number: Int, patchUrl: String, requestedReviewers: WebhookPullRequestUnlabeledPullRequestRequestedReviewersList, requestedTeams: [WebhookPullRequestUnlabeledPullRequestRequestedTeamsItem], reviewCommentUrl: String, reviewCommentsUrl: String, state: WebhookPullRequestUnlabeledPullRequestState, statusesUrl: String, title: String, updatedAt: Date, url: String, user: WebhookPullRequestUnlabeledPullRequestUser?, additions: Int? = nil, changedFiles: Int? = nil, comments: Int? = nil, commits: Int? = nil, deletions: Int? = nil, maintainerCanModify: Bool? = nil, mergeable: Bool? = nil, mergeableState: String? = nil, merged: Bool? = nil, mergedBy: WebhookPullRequestUnlabeledPullRequestMergedBy? = nil, rebaseable: Bool? = nil, reviewComments: Int? = nil, stack: PullRequestStack? = nil) throws {
         (self.links, self.activeLockReason) = (links, activeLockReason)
         (self.assignee, self.assignees) = (assignee, assignees)
         (self.authorAssociation, self.autoMerge) = (authorAssociation, autoMerge)

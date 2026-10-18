@@ -73,7 +73,7 @@ struct IssuesCreateRequestBody: Encodable {
     var body: String?
     var assignee: SdkOptional<String>?
     var milestone: SdkOptional<IssuesCreateRequestBodyMilestone>?
-    var labels: [IssuesCreateRequestBodyLabelsItem]?
+    var labels: [IssuesCreateRequestLabelsItem]?
     var assignees: [String]?
     var issueFieldValues: [IssuesCreateRequestBodyIssueFieldValuesItem]?
     var type: SdkOptional<String>?
@@ -122,10 +122,10 @@ struct IssuesUpdateRequestBody: Encodable {
     var stateReason: SdkOptional<IssuesUpdateRequestBodyStateReason>?
     var duplicateIssueId: Int?
     var milestone: SdkOptional<IssuesUpdateRequestBodyMilestone>?
-    var labels: [IssuesUpdateRequestBodyLabelsItem]?
-    var assignees: [IssuesUpdateRequestBodyAssigneesItem]?
+    var labels: [IssuesUpdateRequestLabelsItem]?
+    var assignees: [IssuesUpdateRequestAssigneesItem]?
     var issueFieldValues: [IssuesUpdateRequestBodyIssueFieldValuesItem]?
-    var type: SdkOptional<IssuesUpdateRequestBodyType>?
+    var type: SdkOptional<IssuesUpdateRequestType>?
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
@@ -158,7 +158,7 @@ struct IssuesUpdateRequestBody: Encodable {
 }
 
 struct IssuesAddAssigneesRequestBody: Encodable {
-    var assignees: [IssuesAddAssigneesRequestBodyAssigneesItem]?
+    var assignees: [IssuesAddAssigneesRequestAssigneesItem]?
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)

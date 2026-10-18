@@ -6,6 +6,45 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
+/// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
+/// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
+public struct AgentAutomationsListRepoAutomationsResponseAutomationsItemTriXc7441fea4a: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let trigger = AgentAutomationsListRepoAutomationsResponseAutomationsItemTriXc7441fea4a(rawValue: "trigger")
+    public static let repository = AgentAutomationsListRepoAutomationsResponseAutomationsItemTriXc7441fea4a(rawValue: "repository")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// The policy controlling who can create pull requests: all or collaborators_only.
+public struct AppsListInstallationReposForAuthenticatedUserResponseRepositoX7d8fa4489f: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let all = AppsListInstallationReposForAuthenticatedUserResponseRepositoX7d8fa4489f(rawValue: "all")
+    public static let collaboratorsOnly = AppsListInstallationReposForAuthenticatedUserResponseRepositoX7d8fa4489f(rawValue: "collaborators_only")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
 public struct CodeQualityListFindingsForRepoParameter: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
@@ -151,48 +190,6 @@ public struct CopilotSpacesUpdateForUserRequestBodyResourcesAttributesItemResour
     public static let githubPullRequest = CopilotSpacesUpdateForUserRequestBodyResourcesAttributesItemResourceType(rawValue: "github_pull_request")
     public static let mediaContent = CopilotSpacesUpdateForUserRequestBodyResourcesAttributesItemResourceType(rawValue: "media_content")
     public static let uploadedTextFile = CopilotSpacesUpdateForUserRequestBodyResourcesAttributesItemResourceType(rawValue: "uploaded_text_file")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-public struct ChecksListForSuiteParameter: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let queued = ChecksListForSuiteParameter(rawValue: "queued")
-    public static let inProgress = ChecksListForSuiteParameter(rawValue: "in_progress")
-    public static let completed = ChecksListForSuiteParameter(rawValue: "completed")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// Machine-readable error code
-public struct AgentAutomationsListAutomationsResponseErrorsItemCodeXce0d67e7: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let missing = AgentAutomationsListAutomationsResponseErrorsItemCodeXce0d67e7(rawValue: "missing")
-    public static let missingField = AgentAutomationsListAutomationsResponseErrorsItemCodeXce0d67e7(rawValue: "missing_field")
-    public static let invalid = AgentAutomationsListAutomationsResponseErrorsItemCodeXce0d67e7(rawValue: "invalid")
-    public static let alreadyExists = AgentAutomationsListAutomationsResponseErrorsItemCodeXce0d67e7(rawValue: "already_exists")
-    public static let unprocessable = AgentAutomationsListAutomationsResponseErrorsItemCodeXce0d67e7(rawValue: "unprocessable")
-    public static let custom = AgentAutomationsListAutomationsResponseErrorsItemCodeXce0d67e7(rawValue: "custom")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

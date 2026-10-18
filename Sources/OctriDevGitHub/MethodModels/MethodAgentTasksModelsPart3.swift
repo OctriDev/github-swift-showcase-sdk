@@ -8,62 +8,6 @@ import Foundation
 #endif
 
 // Canonical agentTasks operation model declarations
-/// The owner of the repository
-public struct AgentTasksGetTaskByIdResponseVariant1SessionsItemOwner: Codable {
-    /// The unique identifier of the user
-    public var id: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-    }
-
-    init() {
-        self.id = nil
-    }
-}
-
-extension AgentTasksGetTaskByIdResponseVariant1SessionsItemOwner {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeIfPresent(.id)
-    }
-}
-
-extension AgentTasksGetTaskByIdResponseVariant1SessionsItemOwner {
-    public init(id: Int? = nil) {
-        self.init()
-        self.id = id
-    }
-}
-
-/// The owner of the repository
-public struct AgentTasksCreateTaskInRepoResponseOwner: Codable {
-    /// The unique identifier of the user
-    public var id: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-    }
-
-    init() {
-        self.id = nil
-    }
-}
-
-extension AgentTasksCreateTaskInRepoResponseOwner {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeIfPresent(.id)
-    }
-}
-
-extension AgentTasksCreateTaskInRepoResponseOwner {
-    public init(id: Int? = nil) {
-        self.init()
-        self.id = id
-    }
-}
-
 /// Structured error response following GitHub REST API conventions. For 422 Unprocessable Entity the errors array
 /// contains validation details; for other error status codes only message and documentation_url are returned.
 public struct AgentTasksGetTaskByIdResponseX144de210: Codable {
@@ -181,7 +125,7 @@ public struct AgentTasksCreateTaskInRepoResponseArtifactsItem: Codable {
     /// Type of artifact. Available Values: `pull`, `branch`.
     public var type: AgentTasksCreateTaskInRepoResponseArtifactsItemType
     /// Resource data (shape depends on type)
-    public var data: ArtifactsItemData
+    public var data: AgentTasksCreateTaskInRepoResponseArtifactsItemData
 
     enum CodingKeys: String, CodingKey {
         case provider
@@ -211,7 +155,7 @@ extension AgentTasksCreateTaskInRepoResponseArtifactsItem {
 }
 
 extension AgentTasksCreateTaskInRepoResponseArtifactsItem {
-    public init(provider: AgentTasksCreateTaskInRepoResponseArtifactsItemProvider, type: AgentTasksCreateTaskInRepoResponseArtifactsItemType, data: ArtifactsItemData) {
+    public init(provider: AgentTasksCreateTaskInRepoResponseArtifactsItemProvider, type: AgentTasksCreateTaskInRepoResponseArtifactsItemType, data: AgentTasksCreateTaskInRepoResponseArtifactsItemData) {
         (self.provider, self.type) = (provider, type)
         self.data = data
     }
@@ -290,6 +234,41 @@ extension AgentTasksListTasksForRepoResponseErrorsItemXa9cb6595 {
     }
 }
 
+/// A Git branch reference
+public struct AgentTasksGetTaskByIdResponseVariant0ArtifactsItemDataVariant1: Codable {
+    /// Head branch name
+    public var headRef: String
+    /// Base branch name
+    public var baseRef: String
+
+    enum CodingKeys: String, CodingKey {
+        case headRef = "head_ref"
+        case baseRef = "base_ref"
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension AgentTasksGetTaskByIdResponseVariant0ArtifactsItemDataVariant1 {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.headRef) else {
+            throw SdkValidationError(field: "head_ref", code: "required", message: "Validation failed for 'head_ref': value is required")
+        }
+        guard container.contains(.baseRef) else {
+            throw SdkValidationError(field: "base_ref", code: "required", message: "Validation failed for 'base_ref': value is required")
+        }
+        self.headRef = try container.sdkDecodeRequired(.headRef)
+        self.baseRef = try container.sdkDecodeRequired(.baseRef)
+    }
+}
+
+extension AgentTasksGetTaskByIdResponseVariant0ArtifactsItemDataVariant1 {
+    public init(headRef: String, baseRef: String) {
+        (self.headRef, self.baseRef) = (headRef, baseRef)
+    }
+}
+
 /// Structured error response following GitHub REST API conventions. For 422 Unprocessable Entity the errors array
 /// contains validation details; for other error status codes only message and documentation_url are returned.
 public struct AgentTasksGetTaskByRepoAndIdResponseX1c1200f8: Codable {
@@ -363,40 +342,31 @@ extension AgentTasksGetTaskByRepoAndIdResponseErrorsItemXed499668 {
     }
 }
 
-public indirect enum AgentTasksGetTaskByIdResponseVariant0Creator {
-    case agentTasksGetTaskByIdResponseVariant0CreatorVariant0(AgentTasksGetTaskByIdResponseVariant0CreatorVariant0)
+/// The entity who created this task
+public struct AgentTasksGetTaskByIdResponseVariant0Creator: Codable {
+    /// The unique identifier of the user
+    public var id: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+    }
+
+    init() {
+        self.id = nil
+    }
 }
 
-extension AgentTasksGetTaskByIdResponseVariant0Creator: Codable {
-
+extension AgentTasksGetTaskByIdResponseVariant0Creator {
     public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for AgentTasksGetTaskByIdResponseVariant0Creator")
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.sdkDecodeIfPresent(.id)
     }
 }
 
 extension AgentTasksGetTaskByIdResponseVariant0Creator {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(
-            AgentTasksGetTaskByIdResponseVariant0CreatorVariant0.self
-        ) {
-            return             .agentTasksGetTaskByIdResponseVariant0CreatorVariant0(value)
-        }
-        return nil
-    }
-}
-
-extension AgentTasksGetTaskByIdResponseVariant0Creator {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .agentTasksGetTaskByIdResponseVariant0CreatorVariant0(value): try container.encode(value); return true
-        }
+    public init(id: Int? = nil) {
+        self.init()
+        self.id = id
     }
 }
 
@@ -515,5 +485,33 @@ extension AgentTasksCreateTaskInRepoResponseXef9d8a6c {
     public init(message: String, documentationUrl: String, errors: [AgentTasksCreateTaskInRepoResponseErrorsItemX14c9c624]? = nil) {
         (self.message, self.documentationUrl) = (message, documentationUrl)
         self.errors = errors
+    }
+}
+
+/// The repository this task belongs to
+public struct AgentTasksCreateTaskInRepoResponseRepository: Codable {
+    /// The unique identifier of the repository
+    public var id: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+    }
+
+    init() {
+        self.id = nil
+    }
+}
+
+extension AgentTasksCreateTaskInRepoResponseRepository {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.sdkDecodeIfPresent(.id)
+    }
+}
+
+extension AgentTasksCreateTaskInRepoResponseRepository {
+    public init(id: Int? = nil) {
+        self.init()
+        self.id = id
     }
 }

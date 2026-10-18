@@ -6,48 +6,6 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-/// Machine-readable error code
-public struct AgentAutomationsListRepoAutomationsResponseErrorsItemCodeX972f2d44: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let missing = AgentAutomationsListRepoAutomationsResponseErrorsItemCodeX972f2d44(rawValue: "missing")
-    public static let missingField = AgentAutomationsListRepoAutomationsResponseErrorsItemCodeX972f2d44(rawValue: "missing_field")
-    public static let invalid = AgentAutomationsListRepoAutomationsResponseErrorsItemCodeX972f2d44(rawValue: "invalid")
-    public static let alreadyExists = AgentAutomationsListRepoAutomationsResponseErrorsItemCodeX972f2d44(rawValue: "already_exists")
-    public static let unprocessable = AgentAutomationsListRepoAutomationsResponseErrorsItemCodeX972f2d44(rawValue: "unprocessable")
-    public static let custom = AgentAutomationsListRepoAutomationsResponseErrorsItemCodeX972f2d44(rawValue: "custom")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// The level at which the comment is targeted.
-public struct PullsCreateReviewCommentRequestBodySubjectType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let line = PullsCreateReviewCommentRequestBodySubjectType(rawValue: "line")
-    public static let file = PullsCreateReviewCommentRequestBodySubjectType(rawValue: "file")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
 public struct AgentAutomationsCreateRepoAutomationResponseTriggersPullRequeX652df72aef: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
@@ -194,6 +152,44 @@ public struct AgentAutomationsCreateRepoAutomationRequestBodyTriggersPullReX37e0
     public init(rawValue: String) { self.rawValue = rawValue }
     public static let trigger = AgentAutomationsCreateRepoAutomationRequestBodyTriggersPullReX37e07a4769(rawValue: "trigger")
     public static let repository = AgentAutomationsCreateRepoAutomationRequestBodyTriggersPullReX37e07a4769(rawValue: "repository")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Action to apply to the request.
+public struct OrgsReviewPatGrantRequestRequestBodyAction: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let approve = OrgsReviewPatGrantRequestRequestBodyAction(rawValue: "approve")
+    public static let deny = OrgsReviewPatGrantRequestRequestBodyAction(rawValue: "deny")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// The deployment status of the artifact.
+public struct OrgsSetClusterDeploymentRecordsRequestBodyDeploymentsItemStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let deployed = OrgsSetClusterDeploymentRecordsRequestBodyDeploymentsItemStatus(rawValue: "deployed")
+    public static let decommissioned = OrgsSetClusterDeploymentRecordsRequestBodyDeploymentsItemStatus(rawValue: "decommissioned")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

@@ -143,6 +143,6 @@ extension SecretScanningMethods {
             SdkQueryParameter("is_bypassed", value: options.isBypassed),
             SdkQueryParameter("included_metadata", value: options.includedMetadata),
             SdkQueryParameter("owner_email_hash", value: options.ownerEmailHash),
-        ], decoder: .json, operationId: "secretScanningListAlertsForRepo", options: requestOptions)).data
+        ], decoder: .json, operationId: "secretScanningListAlertsForRepo", options: requestOptions, errors: ["503": ServiceUnavailable.self])).data
     }
 }

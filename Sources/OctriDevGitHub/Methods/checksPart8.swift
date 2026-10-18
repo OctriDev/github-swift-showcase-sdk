@@ -7,24 +7,7 @@ import Foundation
     import FoundationNetworking
 #endif
 extension ChecksMethods {
-    public struct ChecksListForSuiteOptions: Codable {
-        public var owner: String
-        public var repo: String
-        public var checkSuiteId: Int
-        public var checkName: String?
-        public var status: ChecksListForSuiteParameter?
-        public var filter: ChecksListForSuiteParameterX2c07543f?
-        public var perPage: Int?
-        public var page: Int?
-
-        public init(owner: String, repo: String, checkSuiteId: Int) {
-            self.owner = owner
-            self.repo = repo
-            self.checkSuiteId = checkSuiteId
-        }
-    }
-
-    /// Lists check runs for a check suite using its `id`. > [!NOTE] > The endpoints to manage checks only look for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint on a private repository.
+    /// Triggers GitHub to rerequest an existing check suite, without pushing new code to a repository. This endpoint will trigger the [`check_suite` webhook](https://docs.github.com/webhooks/event-payloads/#check_suite) event with the action `rerequested`. When a check suite is `rerequested`, its `status` is reset to `queued` and the `conclusion` is cleared.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -32,25 +15,7 @@ extension ChecksMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - checkSuiteId: The unique identifier of the check suite.
-    /// - checkName: Returns check runs with the specified `name`.
-    /// - status: Returns check runs with the specified `status`.
-    /// - filter: Filters check runs by their `completed_at` timestamp. `latest`
-    ///   returns the most recent check runs.
-    /// - perPage: The number of results per page (max 100). For more information,
-    ///   see "[Using pagination in the REST
-    ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
-    ///   -rest-api)."
-    /// - page: The page number of the results to fetch. For more information, see
-    ///   "[Using pagination in the REST
-    ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
-    ///   -rest-api)."
-    public static func checksListForSuite(config: ClientConfig, options: ChecksListForSuiteOptions, requestOptions: RequestOptions? = nil) async throws -> ChecksListForSuiteResponse {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(options.owner)), "/", sdkEncodePathSegment(sdkWireString(options.repo)), "/check-suites/", sdkEncodePathSegment(sdkWireString(options.checkSuiteId)), "/check-runs"].joined(), config: config, query: [
-            SdkQueryParameter("check_name", value: options.checkName),
-            SdkQueryParameter("status", value: options.status),
-            SdkQueryParameter("filter", value: options.filter),
-            SdkQueryParameter("per_page", value: options.perPage),
-            SdkQueryParameter("page", value: options.page),
-        ], decoder: .json, operationId: "checksListForSuite", options: requestOptions)).data
+    public static func checksRerequestSuite(config: ClientConfig, owner: String, repo: String, checkSuiteId: Int, requestOptions: RequestOptions? = nil) async throws -> EmptyObject {
+        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/check-suites/", sdkEncodePathSegment(sdkWireString(checkSuiteId)), "/rerequest"].joined(), config: config, decoder: .json, operationId: "checksRerequestSuite", options: requestOptions)).data
     }
 }

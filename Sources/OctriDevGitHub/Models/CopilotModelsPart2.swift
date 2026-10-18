@@ -5,6 +5,38 @@ import Foundation
 
 // Copilot domain models
 extension CopilotSeatDetails {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.createdAt) else {
+            throw SdkValidationError(field: "created_at", code: "required", message: "Validation failed for 'created_at': value is required")
+        }
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.assignee = try container.sdkDecodeIfPresent(.assignee)
+        self.organization = try container.sdkDecodeIfPresent(.organization)
+        self.assigningTeam = try container.sdkDecodeIfPresent(.assigningTeam)
+        self.pendingCancellationDate = try container.sdkDecodeIfPresent(.pendingCancellationDate)
+        self.lastActivityAt = try container.sdkDecodeIfPresent(.lastActivityAt)
+        self.lastActivityEditor = try container.sdkDecodeIfPresent(.lastActivityEditor)
+        self.lastAuthenticatedAt = try container.sdkDecodeIfPresent(.lastAuthenticatedAt)
+        self.updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
+        self.planType = try container.sdkDecodeIfPresent(.planType)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        if let value = self.pendingCancellationDate {
+            try sdkValidateDate("pending_cancellation_date", value)
+        }
+        if let value = self.lastActivityAt {
+            try sdkValidateDateTime("last_activity_at", sdkWireString(value))
+        }
+        if let value = self.lastAuthenticatedAt {
+            try sdkValidateDateTime("last_authenticated_at", sdkWireString(value))
+        }
+        if let value = self.updatedAt {
+            try sdkValidateDateTime("updated_at", sdkWireString(value))
+        }
+    }
+}
+
+extension CopilotSeatDetails {
     public init(createdAt: Date, assignee: NullableSimpleUser? = nil, organization: NullableOrganizationSimple? = nil, assigningTeam: CopilotSeatDetailsAssigningTeam? = nil, pendingCancellationDate: String? = nil, lastActivityAt: Date? = nil, lastActivityEditor: String? = nil, lastAuthenticatedAt: Date? = nil, updatedAt: Date? = nil, planType: CopilotSeatDetailsPlanType? = nil) throws {
         (self.createdAt, self.assignee) = (createdAt, assignee)
         (self.organization, self.assigningTeam) = (organization, assigningTeam)

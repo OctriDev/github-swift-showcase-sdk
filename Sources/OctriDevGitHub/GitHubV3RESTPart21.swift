@@ -5,7 +5,7 @@ import Foundation
 
 extension IssuesNamespace {
 /// Adds up to 10 assignees to an issue. Users already assigned to an issue are not replaced.
-    public func addAssignees(owner: String, repo: String, issueNumber: Int, assignees: [IssuesAddAssigneesRequestBodyAssigneesItem]? = nil, requestOptions: RequestOptions? = nil) async throws -> Issue {
+    public func addAssignees(owner: String, repo: String, issueNumber: Int, assignees: [IssuesAddAssigneesRequestAssigneesItem]? = nil, requestOptions: RequestOptions? = nil) async throws -> Issue {
         return try await IssuesMethods.issuesAddAssignees(config: config, owner: owner, repo: repo, issueNumber: issueNumber, assignees: assignees, requestOptions: requestOptions)
     }
 

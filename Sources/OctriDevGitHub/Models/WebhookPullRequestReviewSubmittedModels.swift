@@ -4,7 +4,7 @@
 import Foundation
 
 // WebhookPullRequestReviewSubmitted domain models
-public typealias WebhookPullRequestReviewSubmittedPullRequestRequestedReviewersList = [WebhookPullRequestReviewSubmittedPullRequestRequestedReviewersItem]
+public typealias WebhookPullRequestReviewSubmittedPullRequestRequestedReviewersList = [WebhookPullRequestReviewSubmittedPullRequestRequestedReviewersItem?]
 
 public typealias WebhookPullRequestReviewSubmittedPullRequestRequestedTeamsList = [WebhookPullRequestReviewSubmittedPullRequestRequestedTeamsItem]
 

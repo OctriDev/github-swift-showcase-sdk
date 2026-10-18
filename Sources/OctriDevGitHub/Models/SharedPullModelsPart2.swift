@@ -461,7 +461,7 @@ public struct PullRequestSimpleLabelsItem: Codable {
     /// Required `boolean` value serialized in the `default` wire field.
     public var `default`: Bool
     /// The user who archived the label, or `null` if it has not been archived.
-    public var archivedBy: PullRequestSimpleLabelsItemArchivedBy?
+    public var archivedBy: SimpleUser?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -492,7 +492,7 @@ extension PullRequestSimpleLabelsItem {
 }
 
 extension PullRequestSimpleLabelsItem {
-    public init(id: Int, nodeId: String, url: String, name: String, description: String, color: String, `default`: Bool, archivedBy: PullRequestSimpleLabelsItemArchivedBy?) {
+    public init(id: Int, nodeId: String, url: String, name: String, description: String, color: String, `default`: Bool, archivedBy: SimpleUser?) {
         (self.id, self.nodeId) = (id, nodeId)
         (self.url, self.name) = (url, name)
         (self.description, self.color) = (description, color)

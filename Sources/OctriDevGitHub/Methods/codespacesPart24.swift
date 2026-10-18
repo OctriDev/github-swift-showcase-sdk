@@ -31,6 +31,6 @@ extension CodespacesMethods {
     ///
     /// Creates a new codespace, owned by the authenticated user. This endpoint requires either a `repository_id` OR a `pull_request` but not both. OAuth app tokens and personal access tokens (classic) need the `codespace` scope to use this endpoint.
     public static func codespacesCreateForAuthenticatedUser(config: ClientConfig, body: CodespacesCreateForAuthenticatedUserRequestBody, requestOptions: RequestOptions? = nil) async throws -> Codespace {
-        return try (await sdkRequest("POST", "/user/codespaces", config: config, rawBody: (try sdkEncodeBody(body, contentType: "application/json")), decoder: .json, operationId: "codespacesCreateForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
+        return try (await sdkRequest("POST", "/user/codespaces", config: config, rawBody: (try sdkEncodeBody(body, contentType: "application/json")), decoder: .json, operationId: "codespacesCreateForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

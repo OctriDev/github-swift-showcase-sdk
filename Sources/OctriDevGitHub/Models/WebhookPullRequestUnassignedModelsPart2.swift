@@ -368,7 +368,7 @@ extension WebhookPullRequestUnassignedPullRequestBaseRepoPermissions {
     }
 }
 
-public typealias WebhookPullRequestUnassignedPullRequestRequestedReviewersList = [WebhookPullRequestUnassignedPullRequestRequestedReviewersItem]
+public typealias WebhookPullRequestUnassignedPullRequestRequestedReviewersList = [WebhookPullRequestUnassignedPullRequestRequestedReviewersItem?]
 
 /// Required object value serialized in the `pull_request` wire field.
 public struct WebhookPullRequestUnassignedPullRequest: Codable {

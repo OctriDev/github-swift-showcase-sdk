@@ -6,6 +6,34 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
+struct ActionsSetPrivateRepoForkPrWorkflowsSettingsOrganizationRequestBody: Encodable {
+    let runWorkflowsFromForkPullRequests: Bool
+    var sendWriteTokensToWorkflows: Bool?
+    var sendSecretsAndVariables: Bool?
+    var requireApprovalForForkPrWorkflows: Bool?
+
+    func encode(to encoder: Encoder) throws {
+        var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
+        try keyedContainer.encode(self.runWorkflowsFromForkPullRequests, forKey: SdkCodingKey("run_workflows_from_fork_pull_requests"))
+        try keyedContainer.encodeIfPresent(self.sendWriteTokensToWorkflows, forKey: SdkCodingKey("send_write_tokens_to_workflows"))
+        try keyedContainer.encodeIfPresent(self.sendSecretsAndVariables, forKey: SdkCodingKey("send_secrets_and_variables"))
+        try keyedContainer.encodeIfPresent(self.requireApprovalForForkPrWorkflows, forKey: SdkCodingKey("require_approval_for_fork_pr_workflows"))
+    }
+}
+
+struct ActionsSetAllowedActionsOrganizationRequestBody: Encodable {
+    var githubOwnedAllowed: Bool?
+    var verifiedAllowed: Bool?
+    var patternsAllowed: [String]?
+
+    func encode(to encoder: Encoder) throws {
+        var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
+        try keyedContainer.encodeIfPresent(self.githubOwnedAllowed, forKey: SdkCodingKey("github_owned_allowed"))
+        try keyedContainer.encodeIfPresent(self.verifiedAllowed, forKey: SdkCodingKey("verified_allowed"))
+        try keyedContainer.encodeIfPresent(self.patternsAllowed, forKey: SdkCodingKey("patterns_allowed"))
+    }
+}
+
 struct ActionsSetSelfHostedRunnersPermissionsOrganizationRequestBody: Encodable {
     let enabledRepositories: ActionsSetSelfHostedRunnersPermissionsOrganizationRequestBodyX6ae5d89570
 
@@ -175,29 +203,5 @@ struct ActionsSetCustomLabelsForSelfHostedRunnerForOrgRequestBody: Encodable {
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
         try keyedContainer.encode(self.labels, forKey: SdkCodingKey("labels"))
-    }
-}
-
-struct ActionsCreateOrUpdateOrgSecretRequestBody: Encodable {
-    let encryptedValue: String
-    let keyId: String
-    let visibility: ActionsCreateOrUpdateOrgSecretRequestBodyVisibility
-    var selectedRepositoryIds: [Int]?
-
-    func encode(to encoder: Encoder) throws {
-        var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.encryptedValue, forKey: SdkCodingKey("encrypted_value"))
-        try keyedContainer.encode(self.keyId, forKey: SdkCodingKey("key_id"))
-        try keyedContainer.encode(self.visibility, forKey: SdkCodingKey("visibility"))
-        try keyedContainer.encodeIfPresent(self.selectedRepositoryIds, forKey: SdkCodingKey("selected_repository_ids"))
-    }
-}
-
-struct ActionsSetSelectedReposForOrgSecretRequestBody: Encodable {
-    let selectedRepositoryIds: [Int]
-
-    func encode(to encoder: Encoder) throws {
-        var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.selectedRepositoryIds, forKey: SdkCodingKey("selected_repository_ids"))
     }
 }

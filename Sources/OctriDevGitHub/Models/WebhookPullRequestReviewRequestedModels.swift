@@ -13,12 +13,27 @@ extension WebhookPullRequestReviewRequested: Codable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
+        }
         if let value = Self.decodeGroup1(from: container) { self = value; return }
         throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for WebhookPullRequestReviewRequested")
     }
 
     public func encode(to encoder: Encoder) throws {
         if try encodeGroup1(to: encoder) { return }
+    }
+}
+
+extension WebhookPullRequestReviewRequested {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(WebhookPullRequestReviewRequestedVariant0.self), sdkKeepsEveryKey(value, of: raw) {
+            return .webhookPullRequestReviewRequestedVariant0(value)
+        }
+        if let value = try? container.decode(WebhookPullRequestReviewRequestedVariant1.self), sdkKeepsEveryKey(value, of: raw) {
+            return .webhookPullRequestReviewRequestedVariant1(value)
+        }
+        return nil
     }
 }
 
@@ -471,20 +486,6 @@ extension WebhookPullRequestReviewRequestedVariant0PullRequestRequestedX284e32f9
         self.repositoriesUrl = try container.sdkDecodeRequired(.repositoriesUrl)
         self.slug = try container.sdkDecodeRequired(.slug)
         self.url = try container.sdkDecodeRequired(.url)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("repositories_url", self.repositoriesUrl)
-            try sdkValidateUri("url", self.url)
-    }
-}
-
-extension WebhookPullRequestReviewRequestedVariant0PullRequestRequestedX284e32f947 {
-    public init(description: String?, htmlUrl: String, id: Int, membersUrl: String, name: String, nodeId: String, permission: String, privacy: WebhookPullRequestReviewRequestedVariant0PullRequestRequestedX5793e9a656, repositoriesUrl: String, slug: String, url: String) throws {
-        (self.description, self.htmlUrl) = (description, htmlUrl)
-        (self.id, self.membersUrl) = (id, membersUrl)
-        (self.name, self.nodeId) = (name, nodeId)
-        (self.permission, self.privacy) = (permission, privacy)
-        (self.repositoriesUrl, self.slug) = (repositoriesUrl, slug)
-        self.url = url
             try sdkValidateUri("html_url", self.htmlUrl)
             try sdkValidateUri("repositories_url", self.repositoriesUrl)
             try sdkValidateUri("url", self.url)

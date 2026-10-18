@@ -30,6 +30,6 @@ extension BillingMethods {
             SdkQueryParameter("day", value: day),
             SdkQueryParameter("model", value: model),
             SdkQueryParameter("product", value: product),
-        ], decoder: .json, operationId: "billingGetGithubBillingPremiumRequestUsageReportUser", options: requestOptions, errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self])).data
+        ], decoder: .json, operationId: "billingGetGithubBillingPremiumRequestUsageReportUser", options: requestOptions, errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

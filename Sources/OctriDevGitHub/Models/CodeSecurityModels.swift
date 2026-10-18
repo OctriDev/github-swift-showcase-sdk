@@ -205,7 +205,7 @@ extension CodeSecurityConfigurationSecretScanningDelegatedBypassOptionsX30443c4e
 public struct CodeSecurityDefaultConfigurationsItem: Codable {
     /// The visibility of newly created repositories for which the code security configuration will be applied to by
     /// default
-    public var defaultForNewRepos: JSONValue?
+    public var defaultForNewRepos: CodeSecurityDefaultConfigurationsItemDefaultForNewRepos?
     /// A code security configuration
     public var configuration: CodeSecurityConfiguration?
 
@@ -228,7 +228,7 @@ extension CodeSecurityDefaultConfigurationsItem {
 }
 
 extension CodeSecurityDefaultConfigurationsItem {
-    public init(defaultForNewRepos: JSONValue? = nil, configuration: CodeSecurityConfiguration? = nil) {
+    public init(defaultForNewRepos: CodeSecurityDefaultConfigurationsItemDefaultForNewRepos? = nil, configuration: CodeSecurityConfiguration? = nil) {
         self.init()
         (self.defaultForNewRepos, self.configuration) = (defaultForNewRepos, configuration)
     }

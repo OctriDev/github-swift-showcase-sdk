@@ -6,6 +6,36 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
+struct ActionsUpdateRepoActionsPolicyRequestBody: Encodable {
+    var name: String?
+    var enforcement: RepositoryRuleEnforcement?
+    var conditions: ActionsPolicyRepoConditions?
+    var rules: [ActionsRule]?
+
+    func encode(to encoder: Encoder) throws {
+        var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
+        try keyedContainer.encodeIfPresent(self.name, forKey: SdkCodingKey("name"))
+        try keyedContainer.encodeIfPresent(self.enforcement, forKey: SdkCodingKey("enforcement"))
+        try keyedContainer.encodeIfPresent(self.conditions, forKey: SdkCodingKey("conditions"))
+        try keyedContainer.encodeIfPresent(self.rules, forKey: SdkCodingKey("rules"))
+    }
+}
+
+struct ActionsGenerateRunnerJitconfigForRepoRequestBody: Encodable {
+    let name: String
+    let runnerGroupId: Int
+    let labels: [String]
+    var workFolder: String?
+
+    func encode(to encoder: Encoder) throws {
+        var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
+        try keyedContainer.encode(self.name, forKey: SdkCodingKey("name"))
+        try keyedContainer.encode(self.runnerGroupId, forKey: SdkCodingKey("runner_group_id"))
+        try keyedContainer.encode(self.labels, forKey: SdkCodingKey("labels"))
+        try keyedContainer.encodeIfPresent(self.workFolder, forKey: SdkCodingKey("work_folder"))
+    }
+}
+
 struct ActionsAddCustomLabelsToSelfHostedRunnerForRepoRequestBody: Encodable {
     let labels: [String]
 

@@ -6,30 +6,6 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-/// The current status of the check run. Only GitHub Actions can set a status of `waiting`, `pending`, or
-/// `requested`.
-public struct ChecksUpdateRequestBodyStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let queued = ChecksUpdateRequestBodyStatus(rawValue: "queued")
-    public static let inProgress = ChecksUpdateRequestBodyStatus(rawValue: "in_progress")
-    public static let completed = ChecksUpdateRequestBodyStatus(rawValue: "completed")
-    public static let waiting = ChecksUpdateRequestBodyStatus(rawValue: "waiting")
-    public static let requested = ChecksUpdateRequestBodyStatus(rawValue: "requested")
-    public static let pending = ChecksUpdateRequestBodyStatus(rawValue: "pending")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
 /// The enablement status of GitHub Code Security features.
 public struct CodeSecurityUpdateEnterpriseConfigurationRequestBodyCodeSecurity: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
@@ -197,6 +173,24 @@ public struct CodeSecurityCreateConfigurationForEnterpriseRequestBodySecretX2319
     public static let enabled = CodeSecurityCreateConfigurationForEnterpriseRequestBodySecretX2319a65f6d(rawValue: "enabled")
     public static let disabled = CodeSecurityCreateConfigurationForEnterpriseRequestBodySecretX2319a65f6d(rawValue: "disabled")
     public static let notSet = CodeSecurityCreateConfigurationForEnterpriseRequestBodySecretX2319a65f6d(rawValue: "not_set")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Provider namespace
+public struct AgentTasksListTasksResponseTasksItemArtifactsItemProvider: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let github = AgentTasksListTasksResponseTasksItemArtifactsItemProvider(rawValue: "github")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

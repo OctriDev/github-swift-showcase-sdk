@@ -77,6 +77,6 @@ extension CodeScanningMethods {
 
         let requestBody = CodeScanningUploadSarifRequestBody(options: options)
 
-        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(options.owner)), "/", sdkEncodePathSegment(sdkWireString(options.repo)), "/code-scanning/sarifs"].joined(), config: config, body: requestBody, decoder: .json, operationId: "codeScanningUploadSarif", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(options.owner)), "/", sdkEncodePathSegment(sdkWireString(options.repo)), "/code-scanning/sarifs"].joined(), config: config, body: requestBody, decoder: .json, operationId: "codeScanningUploadSarif", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

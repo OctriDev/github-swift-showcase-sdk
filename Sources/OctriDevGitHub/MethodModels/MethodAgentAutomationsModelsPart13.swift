@@ -8,15 +8,6 @@ import Foundation
 #endif
 
 // Canonical agentAutomations operation model declarations
-extension AgentAutomationsListAutomationTasksResponseTasksItemCreatorVariant0 {
-    public init(id: Int? = nil) {
-        self.init()
-        self.id = id
-    }
-}
-
-public typealias AgentAutomationsListAutomationsResponseItemTriggersIntervalCadenceList = [AgentAutomationsListAutomationsResponseItemTriggersIntervalCadenceItem]
-
 public struct AgentAutomationsListAutomationsResponseItemTriggersInterval: Codable {
     /// One or more schedules on which the Automation runs.
     public var cadence: AgentAutomationsListAutomationsResponseItemTriggersIntervalCadenceList

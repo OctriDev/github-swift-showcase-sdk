@@ -26,6 +26,6 @@ extension CodespacesMethods {
         return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/codespaces/permissions_check"].joined(), config: config, query: [
             SdkQueryParameter("ref", value: ref),
             SdkQueryParameter("devcontainer_path", value: devcontainerPath),
-        ], decoder: .json, operationId: "codespacesCheckPermissionsForDevcontainer", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
+        ], decoder: .json, operationId: "codespacesCheckPermissionsForDevcontainer", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "422": ValidationError.self, "503": ServiceUnavailable.self])).data
     }
 }

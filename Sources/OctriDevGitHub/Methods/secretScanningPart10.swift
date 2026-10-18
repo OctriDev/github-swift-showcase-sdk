@@ -30,6 +30,6 @@ extension SecretScanningMethods {
         return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/secret-scanning/alerts/", sdkEncodePathSegment(sdkWireString(alertNumber)), "/locations"].joined(), config: config, query: [
             SdkQueryParameter("page", value: page),
             SdkQueryParameter("per_page", value: perPage),
-        ], decoder: .json, operationId: "secretScanningListLocationsForAlert", options: requestOptions)).data
+        ], decoder: .json, operationId: "secretScanningListLocationsForAlert", options: requestOptions, errors: ["503": ServiceUnavailable.self])).data
     }
 }

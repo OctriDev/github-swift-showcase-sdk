@@ -31,6 +31,6 @@ extension ReposMethods {
         return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/compare/", sdkEncodePathSegment(sdkWireString(basehead))].joined(), config: config, query: [
             SdkQueryParameter("page", value: page),
             SdkQueryParameter("per_page", value: perPage),
-        ], decoder: .json, operationId: "reposCompareCommits", options: requestOptions, errors: ["404": BasicError.self, "422": ValidationError.self, "500": BasicError.self])).data
+        ], decoder: .json, operationId: "reposCompareCommits", options: requestOptions, errors: ["404": BasicError.self, "422": ValidationError.self, "500": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

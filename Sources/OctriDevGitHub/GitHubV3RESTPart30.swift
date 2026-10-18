@@ -152,7 +152,7 @@ public class BillingNamespace {
 /// Updates an existing budget for an organization. Supply the budget fields you want to change; expiration updates are supported only for existing user-scoped budgets, and setting `expires_at` to `0` removes the expiration date. The authenticated user must be an organization admin or billing manager.
     ///
     /// Updates an existing budget for an organization. The authenticated user must be an organization admin or billing manager.
-    public func updateBudgetOrg(org: String, budgetId: String, budgetAmount: Int? = nil, preventFurtherUsage: Bool? = nil, budgetAlerting: BillingUpdateBudgetOrgRequestBodyBudgetAlerting? = nil, expiresAt: BillingUpdateBudgetOrgRequestBodyExpiresAt? = nil, requestOptions: RequestOptions? = nil) async throws -> UpdateBudget {
+    public func updateBudgetOrg(org: String, budgetId: String, budgetAmount: Int? = nil, preventFurtherUsage: Bool? = nil, budgetAlerting: BillingUpdateBudgetOrgRequestBodyBudgetAlerting? = nil, expiresAt: SdkOptional<BillingUpdateBudgetOrgRequestBodyExpiresAt>? = nil, requestOptions: RequestOptions? = nil) async throws -> UpdateBudget {
         return try await BillingMethods.billingUpdateBudgetOrg(config: config, org: org, budgetId: budgetId, budgetAmount: budgetAmount, preventFurtherUsage: preventFurtherUsage, budgetAlerting: budgetAlerting, expiresAt: expiresAt, requestOptions: requestOptions)
     }
 

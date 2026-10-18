@@ -66,6 +66,6 @@ extension CodeScanningMethods {
             SdkQueryParameter("sarif_id", value: options.sarifId),
             SdkQueryParameter("direction", value: options.direction),
             SdkQueryParameter("sort", value: options.sort),
-        ], decoder: .json, operationId: "codeScanningListRecentAnalyses", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+        ], decoder: .json, operationId: "codeScanningListRecentAnalyses", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

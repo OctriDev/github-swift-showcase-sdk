@@ -4,101 +4,6 @@
 import Foundation
 
 // WebhookDeploymentStatusCreated domain models
-/// Optional enumerated value serialized in the `repository_hooks` wire field.
-public struct WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX8d91436485: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let read = WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX8d91436485(rawValue: "read")
-    public static let write = WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX8d91436485(rawValue: "write")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// Optional enumerated value serialized in the `emails` wire field.
-public struct WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXdfa5a34308: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let read = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXdfa5a34308(rawValue: "read")
-    public static let write = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXdfa5a34308(rawValue: "write")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// Optional enumerated value serialized in the `metadata` wire field.
-public struct WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX271975333b: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let read = WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX271975333b(rawValue: "read")
-    public static let write = WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX271975333b(rawValue: "write")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// Optional enumerated value serialized in the `organization_plan` wire field.
-public struct WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitX89b420dc49: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let read = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitX89b420dc49(rawValue: "read")
-    public static let write = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitX89b420dc49(rawValue: "write")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// Optional enumerated value serialized in the `repository_hooks` wire field.
-public struct WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitX06800013a4: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let read = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitX06800013a4(rawValue: "read")
-    public static let write = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitX06800013a4(rawValue: "write")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
 /// Required enumerated value serialized in the `conclusion` wire field.
 public struct WebhookDeploymentStatusCreatedWorkflowRunConclusion: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
@@ -359,6 +264,73 @@ public struct WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitX2658
     public init(rawValue: String) { self.rawValue = rawValue }
     public static let read = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitX2658c1c862(rawValue: "read")
     public static let write = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitX2658c1c862(rawValue: "write")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Required enumerated value serialized in the `events[]` wire field.
+public struct WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let branchProtectionRule = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "branch_protection_rule")
+    public static let checkRun = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "check_run")
+    public static let checkSuite = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "check_suite")
+    public static let codeScanningAlert = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "code_scanning_alert")
+    public static let commitComment = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "commit_comment")
+    public static let contentReference = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "content_reference")
+    public static let create = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "create")
+    public static let delete = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "delete")
+    public static let deployment = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "deployment")
+    public static let deploymentReview = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "deployment_review")
+    public static let deploymentStatus = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "deployment_status")
+    public static let deployKey = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "deploy_key")
+    public static let discussion = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "discussion")
+    public static let discussionComment = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "discussion_comment")
+    public static let fork = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "fork")
+    public static let gollum = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "gollum")
+    public static let issues = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "issues")
+    public static let issueComment = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "issue_comment")
+    public static let label = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "label")
+    public static let member = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "member")
+    public static let membership = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "membership")
+    public static let milestone = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "milestone")
+    public static let organization = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "organization")
+    public static let orgBlock = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "org_block")
+    public static let pageBuild = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "page_build")
+    public static let project = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "project")
+    public static let projectCard = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "project_card")
+    public static let projectColumn = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "project_column")
+    public static let `public` = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "public")
+    public static let pullRequest = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "pull_request")
+    public static let pullRequestReview = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "pull_request_review")
+    public static let pullRequestReviewComment = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "pull_request_review_comment")
+    public static let push = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "push")
+    public static let registryPackage = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "registry_package")
+    public static let release = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "release")
+    public static let repository = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "repository")
+    public static let repositoryDispatch = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "repository_dispatch")
+    public static let secretScanningAlert = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "secret_scanning_alert")
+    public static let star = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "star")
+    public static let status = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "status")
+    public static let team = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "team")
+    public static let teamAdd = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "team_add")
+    public static let watch = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "watch")
+    public static let workflowDispatch = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "workflow_dispatch")
+    public static let workflowRun = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "workflow_run")
+    public static let pullRequestReviewThread = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "pull_request_review_thread")
+    public static let mergeQueueEntry = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "merge_queue_entry")
+    public static let workflowJob = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "workflow_job")
+    public static let mergeGroup = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "merge_group")
+    public static let secretScanningAlertLocation = WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitXc2e90146dc(rawValue: "secret_scanning_alert_location")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

@@ -4,80 +4,6 @@
 import Foundation
 
 // WebhookPackagePublished domain models
-/// Optional object value serialized in the `release` wire field.
-public struct WebhookPackagePublishedPackagePackageVersionRelease: Codable {
-    /// Required object value serialized in the `author` wire field.
-    public var author: WebhookPackagePublishedPackagePackageVersionReleaseAuthor?
-    /// Required `string` value serialized in the `created_at` wire field.
-    public var createdAt: String
-    /// Required `boolean` value serialized in the `draft` wire field.
-    public var draft: Bool
-    /// Required `uri`-formatted value serialized in the `html_url` wire field.
-    public var htmlUrl: String
-    /// Required `integer` value serialized in the `id` wire field.
-    public var id: Int
-    /// Required `string` value serialized in the `name` wire field.
-    public var name: String?
-    /// Required `boolean` value serialized in the `prerelease` wire field.
-    public var prerelease: Bool
-    /// Required `string` value serialized in the `published_at` wire field.
-    public var publishedAt: String
-    /// Required `string` value serialized in the `tag_name` wire field.
-    public var tagName: String
-    /// Required `string` value serialized in the `target_commitish` wire field.
-    public var targetCommitish: String
-    /// Required `uri`-formatted value serialized in the `url` wire field.
-    public var url: String
-
-    enum CodingKeys: String, CodingKey {
-        case author
-        case createdAt = "created_at"
-        case draft
-        case htmlUrl = "html_url"
-        case id
-        case name
-        case prerelease
-        case publishedAt = "published_at"
-        case tagName = "tag_name"
-        case targetCommitish = "target_commitish"
-        case url
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookPackagePublishedPackagePackageVersionRelease {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.author = try container.sdkDecodeNullable(.author)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.draft = try container.sdkDecodeRequired(.draft)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.name = try container.sdkDecodeNullable(.name)
-        self.prerelease = try container.sdkDecodeRequired(.prerelease)
-        self.publishedAt = try container.sdkDecodeRequired(.publishedAt)
-        self.tagName = try container.sdkDecodeRequired(.tagName)
-        self.targetCommitish = try container.sdkDecodeRequired(.targetCommitish)
-        self.url = try container.sdkDecodeRequired(.url)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("url", self.url)
-    }
-}
-
-extension WebhookPackagePublishedPackagePackageVersionRelease {
-    public init(author: WebhookPackagePublishedPackagePackageVersionReleaseAuthor?, createdAt: String, draft: Bool, htmlUrl: String, id: Int, name: String?, prerelease: Bool, publishedAt: String, tagName: String, targetCommitish: String, url: String) throws {
-        (self.author, self.createdAt) = (author, createdAt)
-        (self.draft, self.htmlUrl) = (draft, htmlUrl)
-        (self.id, self.name) = (id, name)
-        (self.prerelease, self.publishedAt) = (prerelease, publishedAt)
-        (self.tagName, self.targetCommitish) = (tagName, targetCommitish)
-        self.url = url
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("url", self.url)
-    }
-}
-
 /// Optional object value serialized in the `npm_metadata` wire field.
 public struct WebhookPackagePublishedPackagePackageVersionNpmMetadata: Codable {
     /// Optional `string` value serialized in the `name` wire field.
@@ -490,5 +416,63 @@ extension WebhookPackagePublishedPackagePackageVersionAuthor {
         if let value = self.url {
             try sdkValidateUri("url", value)
         }
+    }
+}
+
+/// Required enumerated value serialized in the `action` wire field.
+public struct WebhookPackagePublishedAction: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let published = WebhookPackagePublishedAction(rawValue: "published")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Optional enumerated value serialized in the `type` wire field.
+public struct WebhookPackagePublishedPackagePackageVersionReleaseAuthorType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let bot = WebhookPackagePublishedPackagePackageVersionReleaseAuthorType(rawValue: "Bot")
+    public static let user = WebhookPackagePublishedPackagePackageVersionReleaseAuthorType(rawValue: "User")
+    public static let organization = WebhookPackagePublishedPackagePackageVersionReleaseAuthorType(rawValue: "Organization")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Optional enumerated value serialized in the `type` wire field.
+public struct WebhookPackagePublishedPackageOwnerType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let bot = WebhookPackagePublishedPackageOwnerType(rawValue: "Bot")
+    public static let user = WebhookPackagePublishedPackageOwnerType(rawValue: "User")
+    public static let organization = WebhookPackagePublishedPackageOwnerType(rawValue: "Organization")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
     }
 }

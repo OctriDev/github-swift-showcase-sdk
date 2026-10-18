@@ -65,6 +65,6 @@ extension CampaignsMethods {
 
         let requestBody = CampaignsUpdateCampaignRequestBody(options: options)
 
-        return try (await sdkRequest("PATCH", ["/orgs/", sdkEncodePathSegment(sdkWireString(options.org)), "/campaigns/", sdkEncodePathSegment(sdkWireString(options.campaignNumber))].joined(), config: config, body: requestBody, decoder: .json, operationId: "campaignsUpdateCampaign", options: requestOptions, errors: ["400": BasicError.self, "404": BasicError.self, "422": BasicError.self])).data
+        return try (await sdkRequest("PATCH", ["/orgs/", sdkEncodePathSegment(sdkWireString(options.org)), "/campaigns/", sdkEncodePathSegment(sdkWireString(options.campaignNumber))].joined(), config: config, body: requestBody, decoder: .json, operationId: "campaignsUpdateCampaign", options: requestOptions, errors: ["400": BasicError.self, "404": BasicError.self, "422": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

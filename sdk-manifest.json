@@ -55,11 +55,11 @@
           "statusCode": "200",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ActionsRunnerLabels",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ActionsRunnerLabels",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -228,11 +228,11 @@
           "statusCode": "200",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ActionsRunnerLabels",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ActionsRunnerLabels",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -7766,11 +7766,11 @@
           "statusCode": "201",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ActionsRunnerJitconfig",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ActionsRunnerJitconfig",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -8027,11 +8027,11 @@
           "statusCode": "201",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ActionsRunnerJitconfig",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ActionsRunnerJitconfig",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -16380,11 +16380,11 @@
           "statusCode": "200",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ActionsRunnerLabels",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ActionsRunnerLabels",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -16487,11 +16487,11 @@
           "statusCode": "200",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ActionsRunnerLabels",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ActionsRunnerLabels",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -19741,11 +19741,11 @@
           "statusCode": "200",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ActionsRunnerLabelsReadonly",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ActionsRunnerLabelsReadonly",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -19848,11 +19848,11 @@
           "statusCode": "200",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ActionsRunnerLabelsReadonly",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ActionsRunnerLabelsReadonly",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -19977,11 +19977,11 @@
           "statusCode": "200",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ActionsRunnerLabels",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ActionsRunnerLabels",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -20123,11 +20123,11 @@
           "statusCode": "200",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ActionsRunnerLabels",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ActionsRunnerLabels",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -23599,11 +23599,11 @@
           "statusCode": "200",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ActionsRunnerLabels",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ActionsRunnerLabels",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -23772,11 +23772,11 @@
           "statusCode": "200",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ActionsRunnerLabels",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ActionsRunnerLabels",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -30434,11 +30434,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -48320,11 +48320,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -48719,11 +48719,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -48911,11 +48911,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -49213,11 +49213,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -49493,11 +49493,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -49795,11 +49795,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -50058,11 +50058,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -50277,11 +50277,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -50496,11 +50496,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -50798,11 +50798,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -51217,7 +51217,7 @@
           "name": "expires_at",
           "in": "body",
           "required": false,
-          "nullable": false,
+          "nullable": true,
           "type": "oneOf",
           "wireType": null,
           "declaredValue": 0,
@@ -51312,7 +51312,7 @@
           "name": "expires_at",
           "in": "body",
           "required": false,
-          "nullable": false,
+          "nullable": true,
           "type": "oneOf",
           "wireType": null,
           "declaredValue": 0,
@@ -51353,26 +51353,7 @@
             "nullable": false,
             "items": null,
             "mapValue": null,
-            "variants": [
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              }
-            ]
+            "variants": null
           },
           "bodyShape": "fields",
           "fields": [
@@ -51526,11 +51507,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -51819,11 +51800,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -51960,11 +51941,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -52092,11 +52073,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -52405,11 +52386,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -54739,72 +54720,8 @@
               }
             ]
           },
-          "bodyShape": "fields",
-          "fields": [
-            {
-              "name": "name",
-              "required": false,
-              "repeated": false,
-              "partKind": "scalar",
-              "contentType": null
-            },
-            {
-              "name": "details_url",
-              "required": false,
-              "repeated": false,
-              "partKind": "scalar",
-              "contentType": null
-            },
-            {
-              "name": "external_id",
-              "required": false,
-              "repeated": false,
-              "partKind": "scalar",
-              "contentType": null
-            },
-            {
-              "name": "started_at",
-              "required": false,
-              "repeated": false,
-              "partKind": "scalar",
-              "contentType": null
-            },
-            {
-              "name": "status",
-              "required": false,
-              "repeated": false,
-              "partKind": "scalar",
-              "contentType": null
-            },
-            {
-              "name": "conclusion",
-              "required": false,
-              "repeated": false,
-              "partKind": "scalar",
-              "contentType": null
-            },
-            {
-              "name": "completed_at",
-              "required": false,
-              "repeated": false,
-              "partKind": "scalar",
-              "contentType": null
-            },
-            {
-              "name": "output",
-              "required": false,
-              "repeated": false,
-              "partKind": "json",
-              "contentType": null
-            },
-            {
-              "name": "actions",
-              "required": false,
-              "repeated": true,
-              "partKind": "json",
-              "contentType": null
-            }
-          ]
+          "bodyShape": "whole",
+          "fields": []
         }
       ],
       "responseModes": [
@@ -54829,12 +54746,12 @@
       "errorResponseModes": [],
       "params": [
         {
-          "name": "actions",
+          "name": "body",
           "in": "body",
-          "required": false,
+          "required": true,
           "nullable": false,
-          "type": "array",
-          "wireType": "array",
+          "type": "anyOf",
+          "wireType": "object",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -54850,78 +54767,6 @@
           "declaredValue": null,
           "style": "simple",
           "explode": false
-        },
-        {
-          "name": "completed_at",
-          "in": "body",
-          "required": false,
-          "nullable": false,
-          "type": "string",
-          "wireType": "string",
-          "declaredValue": null,
-          "mediaTypes": [
-            "application/json"
-          ]
-        },
-        {
-          "name": "conclusion",
-          "in": "body",
-          "required": false,
-          "nullable": false,
-          "type": "string",
-          "wireType": "string",
-          "declaredValue": "action_required",
-          "mediaTypes": [
-            "application/json"
-          ]
-        },
-        {
-          "name": "details_url",
-          "in": "body",
-          "required": false,
-          "nullable": false,
-          "type": "string",
-          "wireType": "string",
-          "declaredValue": null,
-          "mediaTypes": [
-            "application/json"
-          ]
-        },
-        {
-          "name": "external_id",
-          "in": "body",
-          "required": false,
-          "nullable": false,
-          "type": "string",
-          "wireType": "string",
-          "declaredValue": null,
-          "mediaTypes": [
-            "application/json"
-          ]
-        },
-        {
-          "name": "name",
-          "in": "body",
-          "required": false,
-          "nullable": false,
-          "type": "string",
-          "wireType": "string",
-          "declaredValue": null,
-          "mediaTypes": [
-            "application/json"
-          ]
-        },
-        {
-          "name": "output",
-          "in": "body",
-          "required": false,
-          "nullable": false,
-          "type": "object",
-          "wireType": "object",
-          "declaredValue": null,
-          "mediaTypes": [
-            "application/json"
-          ]
         },
         {
           "name": "owner",
@@ -54944,30 +54789,6 @@
           "declaredValue": null,
           "style": "simple",
           "explode": false
-        },
-        {
-          "name": "started_at",
-          "in": "body",
-          "required": false,
-          "nullable": false,
-          "type": "string",
-          "wireType": "string",
-          "declaredValue": null,
-          "mediaTypes": [
-            "application/json"
-          ]
-        },
-        {
-          "name": "status",
-          "in": "body",
-          "required": false,
-          "nullable": false,
-          "type": "string",
-          "wireType": "string",
-          "declaredValue": "queued",
-          "mediaTypes": [
-            "application/json"
-          ]
         }
       ],
       "bindings": [
@@ -55005,108 +54826,12 @@
           "explode": false
         },
         {
-          "name": "name",
+          "name": "body",
           "in": "body",
-          "required": false,
+          "required": true,
           "nullable": false,
-          "type": "string",
-          "wireType": "string",
-          "declaredValue": null,
-          "mediaTypes": [
-            "application/json"
-          ]
-        },
-        {
-          "name": "details_url",
-          "in": "body",
-          "required": false,
-          "nullable": false,
-          "type": "string",
-          "wireType": "string",
-          "declaredValue": null,
-          "mediaTypes": [
-            "application/json"
-          ]
-        },
-        {
-          "name": "external_id",
-          "in": "body",
-          "required": false,
-          "nullable": false,
-          "type": "string",
-          "wireType": "string",
-          "declaredValue": null,
-          "mediaTypes": [
-            "application/json"
-          ]
-        },
-        {
-          "name": "started_at",
-          "in": "body",
-          "required": false,
-          "nullable": false,
-          "type": "string",
-          "wireType": "string",
-          "declaredValue": null,
-          "mediaTypes": [
-            "application/json"
-          ]
-        },
-        {
-          "name": "status",
-          "in": "body",
-          "required": false,
-          "nullable": false,
-          "type": "string",
-          "wireType": "string",
-          "declaredValue": "queued",
-          "mediaTypes": [
-            "application/json"
-          ]
-        },
-        {
-          "name": "conclusion",
-          "in": "body",
-          "required": false,
-          "nullable": false,
-          "type": "string",
-          "wireType": "string",
-          "declaredValue": "action_required",
-          "mediaTypes": [
-            "application/json"
-          ]
-        },
-        {
-          "name": "completed_at",
-          "in": "body",
-          "required": false,
-          "nullable": false,
-          "type": "string",
-          "wireType": "string",
-          "declaredValue": null,
-          "mediaTypes": [
-            "application/json"
-          ]
-        },
-        {
-          "name": "output",
-          "in": "body",
-          "required": false,
-          "nullable": false,
-          "type": "object",
+          "type": "anyOf",
           "wireType": "object",
-          "declaredValue": null,
-          "mediaTypes": [
-            "application/json"
-          ]
-        },
-        {
-          "name": "actions",
-          "in": "body",
-          "required": false,
-          "nullable": false,
-          "type": "array",
-          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -55540,11 +55265,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -55703,11 +55428,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -55852,11 +55577,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -56056,53 +55781,7 @@
             "nullable": false,
             "items": null,
             "mapValue": null,
-            "variants": [
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              }
-            ]
+            "variants": null
           },
           "bodyShape": "fields",
           "fields": [
@@ -56253,11 +55932,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -56579,11 +56258,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -56956,35 +56635,7 @@
             "nullable": false,
             "items": null,
             "mapValue": null,
-            "variants": [
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              }
-            ]
+            "variants": null
           },
           "bodyShape": "fields",
           "fields": [
@@ -57084,11 +56735,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -57379,11 +57030,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -57563,11 +57214,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -57968,11 +57619,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -58165,11 +57816,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -58524,11 +58175,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -58687,11 +58338,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -58827,11 +58478,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -58973,11 +58624,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -59119,11 +58770,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -59334,11 +58985,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -59576,11 +59227,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -59961,11 +59612,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -60396,11 +60047,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -60545,11 +60196,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -61195,26 +60846,7 @@
             "nullable": false,
             "items": null,
             "mapValue": null,
-            "variants": [
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              }
-            ]
+            "variants": null
           },
           "bodyShape": "fields",
           "fields": [
@@ -61348,11 +60980,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -61742,11 +61374,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -62126,11 +61758,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -69631,11 +69263,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -70038,11 +69670,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -70999,11 +70631,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -71565,11 +71197,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -92702,26 +92334,7 @@
             "nullable": false,
             "items": null,
             "mapValue": null,
-            "variants": [
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              }
-            ]
+            "variants": null
           },
           "bodyShape": "fields",
           "fields": [
@@ -93940,11 +93553,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -95483,11 +95096,11 @@
           "statusCode": "403",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ForbiddenGist",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ForbiddenGist",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -95601,11 +95214,11 @@
           "statusCode": "403",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ForbiddenGist",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ForbiddenGist",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -104071,11 +103684,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -105649,11 +105262,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -106862,11 +106475,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -115261,11 +114874,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -115580,11 +115193,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -116236,11 +115849,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -116545,11 +116158,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -116718,7 +116331,7 @@
           "in": "body",
           "required": false,
           "nullable": true,
-          "type": "oneOf",
+          "type": "IssuesUpdateRequestType",
           "wireType": null,
           "declaredValue": null,
           "mediaTypes": [
@@ -116885,7 +116498,7 @@
           "in": "body",
           "required": false,
           "nullable": true,
-          "type": "oneOf",
+          "type": "IssuesUpdateRequestType",
           "wireType": null,
           "declaredValue": null,
           "mediaTypes": [
@@ -148581,26 +148194,7 @@
             "nullable": false,
             "items": null,
             "mapValue": null,
-            "variants": [
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              }
-            ]
+            "variants": null
           },
           "bodyShape": "fields",
           "fields": [
@@ -148913,26 +148507,7 @@
             "nullable": false,
             "items": null,
             "mapValue": null,
-            "variants": [
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              }
-            ]
+            "variants": null
           },
           "bodyShape": "fields",
           "fields": [
@@ -157190,11 +156765,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -158476,11 +158051,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -160312,26 +159887,7 @@
             "nullable": false,
             "items": null,
             "mapValue": null,
-            "variants": [
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              }
-            ]
+            "variants": null
           },
           "bodyShape": "fields",
           "fields": [
@@ -160409,11 +159965,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -160573,26 +160129,7 @@
             "nullable": false,
             "items": null,
             "mapValue": null,
-            "variants": [
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              }
-            ]
+            "variants": null
           },
           "bodyShape": "fields",
           "fields": [
@@ -166783,11 +166320,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -168416,7 +167953,7 @@
           "in": "body",
           "required": false,
           "nullable": false,
-          "type": "oneOf",
+          "type": "ReposCreateDeploymentRequestPayload",
           "wireType": null,
           "declaredValue": null,
           "mediaTypes": [
@@ -168571,7 +168108,7 @@
           "in": "body",
           "required": false,
           "nullable": false,
-          "type": "oneOf",
+          "type": "ReposCreateDeploymentRequestPayload",
           "wireType": null,
           "declaredValue": null,
           "mediaTypes": [
@@ -173014,26 +172551,7 @@
             "nullable": true,
             "items": null,
             "mapValue": null,
-            "variants": [
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              }
-            ]
+            "variants": null
           },
           "bodyShape": "fields",
           "fields": [
@@ -176524,11 +176042,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -181761,11 +181279,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -199917,53 +199435,7 @@
             "nullable": false,
             "items": null,
             "mapValue": null,
-            "variants": [
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              }
-            ]
+            "variants": null
           },
           "bodyShape": "fields",
           "fields": [
@@ -200150,7 +199622,7 @@
           "in": "body",
           "required": false,
           "nullable": false,
-          "type": "anyOf",
+          "type": "ReposUpdateInformationAboutPagesSiteRequestSource",
           "wireType": null,
           "declaredValue": "gh-pages",
           "mediaTypes": [
@@ -200222,7 +199694,7 @@
           "in": "body",
           "required": false,
           "nullable": false,
-          "type": "anyOf",
+          "type": "ReposUpdateInformationAboutPagesSiteRequestSource",
           "wireType": null,
           "declaredValue": "gh-pages",
           "mediaTypes": [
@@ -203189,11 +202661,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -203601,11 +203073,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -204096,11 +203568,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -204430,11 +203902,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -205595,11 +205067,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -205782,11 +205254,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -205949,11 +205421,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -206081,11 +205553,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -206630,11 +206102,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -207201,11 +206673,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -207969,35 +207441,7 @@
             "nullable": false,
             "items": null,
             "mapValue": null,
-            "variants": [
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              }
-            ]
+            "variants": null
           },
           "bodyShape": "fields",
           "fields": [
@@ -208127,11 +207571,11 @@
           "statusCode": "503",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ServiceUnavailable",
           "schemaType": {
-            "type": "object",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ServiceUnavailable",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -208363,53 +207807,7 @@
             "nullable": false,
             "items": null,
             "mapValue": null,
-            "variants": [
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              }
-            ]
+            "variants": null
           },
           "bodyShape": "fields",
           "fields": [
@@ -209086,53 +208484,7 @@
             "nullable": false,
             "items": null,
             "mapValue": null,
-            "variants": [
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              {
-                "type": "any",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              }
-            ]
+            "variants": null
           },
           "bodyShape": "fields",
           "fields": [
@@ -226249,7 +225601,7 @@
                   "variants": null
                 },
                 {
-                  "type": "any",
+                  "type": "object",
                   "format": null,
                   "ref": null,
                   "nullable": false,
@@ -226531,7 +225883,7 @@
                 "variants": null
               },
               {
-                "type": "any",
+                "type": "object",
                 "format": null,
                 "ref": null,
                 "nullable": false,
@@ -226781,7 +226133,7 @@
             "variants": null
           },
           {
-            "type": "any",
+            "type": "object",
             "format": null,
             "ref": null,
             "nullable": false,
@@ -227101,6 +226453,136 @@
           "name": "type",
           "required": true,
           "type": "string",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": null,
+          "mapValue": null,
+          "variants": null
+        }
+      ],
+      "values": []
+    },
+    {
+      "name": "ActionsRunnerJitconfig",
+      "kind": "object",
+      "type": {
+        "type": "object",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": null
+      },
+      "properties": [
+        {
+          "name": "encoded_jit_config",
+          "required": true,
+          "type": "string",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": null,
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "runner",
+          "required": true,
+          "type": "ref",
+          "format": null,
+          "ref": "Runner",
+          "nullable": false,
+          "items": null,
+          "mapValue": null,
+          "variants": null
+        }
+      ],
+      "values": []
+    },
+    {
+      "name": "ActionsRunnerLabels",
+      "kind": "object",
+      "type": {
+        "type": "object",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": null
+      },
+      "properties": [
+        {
+          "name": "labels",
+          "required": true,
+          "type": "array",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": {
+            "type": "ref",
+            "format": null,
+            "ref": "RunnerLabel",
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "total_count",
+          "required": true,
+          "type": "integer",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": null,
+          "mapValue": null,
+          "variants": null
+        }
+      ],
+      "values": []
+    },
+    {
+      "name": "ActionsRunnerLabelsReadonly",
+      "kind": "object",
+      "type": {
+        "type": "object",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": null
+      },
+      "properties": [
+        {
+          "name": "labels",
+          "required": true,
+          "type": "array",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": {
+            "type": "ref",
+            "format": null,
+            "ref": "RunnerLabel",
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "total_count",
+          "required": true,
+          "type": "integer",
           "format": null,
           "ref": null,
           "nullable": false,
@@ -227595,6 +227077,185 @@
           "variants": null
         }
       ],
+      "values": []
+    },
+    {
+      "name": "AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemData",
+      "kind": "union",
+      "type": {
+        "type": "oneOf",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": [
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          }
+        ]
+      },
+      "properties": [],
+      "values": []
+    },
+    {
+      "name": "AgentAutomationsListAvailableAutomationTriggersResponseItemFieldsItemSchema",
+      "kind": "union",
+      "type": {
+        "type": "oneOf",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": [
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          }
+        ]
+      },
+      "properties": [],
+      "values": []
+    },
+    {
+      "name": "AgentTasksCreateTaskInRepoResponseArtifactsItemData",
+      "kind": "union",
+      "type": {
+        "type": "oneOf",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": [
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          }
+        ]
+      },
+      "properties": [],
+      "values": []
+    },
+    {
+      "name": "AgentTasksListTasksForRepoResponseTasksItemArtifactsItemData",
+      "kind": "union",
+      "type": {
+        "type": "oneOf",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": [
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          }
+        ]
+      },
+      "properties": [],
+      "values": []
+    },
+    {
+      "name": "AgentTasksListTasksResponseTasksItemArtifactsItemData",
+      "kind": "union",
+      "type": {
+        "type": "oneOf",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": [
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          }
+        ]
+      },
+      "properties": [],
       "values": []
     },
     {
@@ -229157,108 +228818,6 @@
           "variants": null
         }
       ],
-      "values": []
-    },
-    {
-      "name": "ArtifactsItemData",
-      "kind": "union",
-      "type": {
-        "type": "oneOf",
-        "format": null,
-        "ref": null,
-        "nullable": false,
-        "items": null,
-        "mapValue": null,
-        "variants": [
-          {
-            "type": "object",
-            "format": null,
-            "ref": null,
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          },
-          {
-            "type": "object",
-            "format": null,
-            "ref": null,
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          }
-        ]
-      },
-      "properties": [],
-      "values": []
-    },
-    {
-      "name": "ArtifactsItemData2",
-      "kind": "union",
-      "type": {
-        "type": "oneOf",
-        "format": null,
-        "ref": null,
-        "nullable": false,
-        "items": null,
-        "mapValue": null,
-        "variants": [
-          {
-            "type": "object",
-            "format": null,
-            "ref": null,
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          },
-          {
-            "type": "object",
-            "format": null,
-            "ref": null,
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          }
-        ]
-      },
-      "properties": [],
-      "values": []
-    },
-    {
-      "name": "ArtifactsItemData3",
-      "kind": "union",
-      "type": {
-        "type": "oneOf",
-        "format": null,
-        "ref": null,
-        "nullable": false,
-        "items": null,
-        "mapValue": null,
-        "variants": [
-          {
-            "type": "object",
-            "format": null,
-            "ref": null,
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          },
-          {
-            "type": "object",
-            "format": null,
-            "ref": null,
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          }
-        ]
-      },
-      "properties": [],
       "values": []
     },
     {
@@ -233724,53 +233283,7 @@
         "nullable": false,
         "items": null,
         "mapValue": null,
-        "variants": [
-          {
-            "type": "any",
-            "format": null,
-            "ref": null,
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          },
-          {
-            "type": "any",
-            "format": null,
-            "ref": null,
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          },
-          {
-            "type": "any",
-            "format": null,
-            "ref": null,
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          },
-          {
-            "type": "any",
-            "format": null,
-            "ref": null,
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          },
-          {
-            "type": "any",
-            "format": null,
-            "ref": null,
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          }
-        ]
+        "variants": null
       },
       "properties": [
         {
@@ -242691,7 +242204,7 @@
               "type": "string",
               "format": null,
               "ref": null,
-              "nullable": true,
+              "nullable": false,
               "items": null,
               "mapValue": null,
               "variants": null
@@ -242811,7 +242324,7 @@
               "type": "string",
               "format": null,
               "ref": null,
-              "nullable": true,
+              "nullable": false,
               "items": null,
               "mapValue": null,
               "variants": null
@@ -244533,9 +244046,9 @@
         {
           "name": "payload",
           "required": true,
-          "type": "oneOf",
+          "type": "ref",
           "format": null,
-          "ref": null,
+          "ref": "DeploymentPayload",
           "nullable": false,
           "items": null,
           "mapValue": null,
@@ -244834,6 +244347,40 @@
           "variants": null
         }
       ],
+      "values": []
+    },
+    {
+      "name": "DeploymentPayload",
+      "kind": "union",
+      "type": {
+        "type": "oneOf",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": [
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          }
+        ]
+      },
+      "properties": [],
       "values": []
     },
     {
@@ -247204,49 +246751,6 @@
       "values": []
     },
     {
-      "name": "FieldsItemSchema",
-      "kind": "union",
-      "type": {
-        "type": "oneOf",
-        "format": null,
-        "ref": null,
-        "nullable": false,
-        "items": null,
-        "mapValue": null,
-        "variants": [
-          {
-            "type": "object",
-            "format": null,
-            "ref": null,
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          },
-          {
-            "type": "object",
-            "format": null,
-            "ref": null,
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          },
-          {
-            "type": "object",
-            "format": null,
-            "ref": null,
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          }
-        ]
-      },
-      "properties": [],
-      "values": []
-    },
-    {
       "name": "FileCommit",
       "kind": "object",
       "type": {
@@ -247277,6 +246781,55 @@
           "format": null,
           "ref": null,
           "nullable": true,
+          "items": null,
+          "mapValue": null,
+          "variants": null
+        }
+      ],
+      "values": []
+    },
+    {
+      "name": "ForbiddenGist",
+      "kind": "object",
+      "type": {
+        "type": "object",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": null
+      },
+      "properties": [
+        {
+          "name": "block",
+          "required": false,
+          "type": "object",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": null,
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "documentation_url",
+          "required": false,
+          "type": "string",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": null,
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "message",
+          "required": false,
+          "type": "string",
+          "format": null,
+          "ref": null,
+          "nullable": false,
           "items": null,
           "mapValue": null,
           "variants": null
@@ -252338,9 +251891,9 @@
           "ref": null,
           "nullable": false,
           "items": {
-            "type": "oneOf",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "IssueLabelsItem",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -253986,6 +253539,40 @@
       "values": []
     },
     {
+      "name": "IssueLabelsItem",
+      "kind": "union",
+      "type": {
+        "type": "oneOf",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": [
+          {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          }
+        ]
+      },
+      "properties": [],
+      "values": []
+    },
+    {
       "name": "IssueReference",
       "kind": "object",
       "type": {
@@ -254065,6 +253652,74 @@
           "variants": null
         }
       ],
+      "values": []
+    },
+    {
+      "name": "IssuesAddAssigneesRequestAssigneesItem",
+      "kind": "union",
+      "type": {
+        "type": "oneOf",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": [
+          {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          }
+        ]
+      },
+      "properties": [],
+      "values": []
+    },
+    {
+      "name": "IssuesCreateRequestLabelsItem",
+      "kind": "union",
+      "type": {
+        "type": "oneOf",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": [
+          {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          }
+        ]
+      },
+      "properties": [],
       "values": []
     },
     {
@@ -254847,6 +254502,108 @@
           "variants": null
         }
       ],
+      "values": []
+    },
+    {
+      "name": "IssuesUpdateRequestAssigneesItem",
+      "kind": "union",
+      "type": {
+        "type": "oneOf",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": [
+          {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          }
+        ]
+      },
+      "properties": [],
+      "values": []
+    },
+    {
+      "name": "IssuesUpdateRequestLabelsItem",
+      "kind": "union",
+      "type": {
+        "type": "oneOf",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": [
+          {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          }
+        ]
+      },
+      "properties": [],
+      "values": []
+    },
+    {
+      "name": "IssuesUpdateRequestType",
+      "kind": "union",
+      "type": {
+        "type": "oneOf",
+        "format": null,
+        "ref": null,
+        "nullable": true,
+        "items": null,
+        "mapValue": null,
+        "variants": [
+          {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          }
+        ]
+      },
+      "properties": [],
       "values": []
     },
     {
@@ -255900,9 +255657,9 @@
         {
           "name": "archived_by",
           "required": true,
-          "type": "any",
+          "type": "ref",
           "format": null,
-          "ref": null,
+          "ref": "SimpleUser",
           "nullable": true,
           "items": null,
           "mapValue": null,
@@ -256152,9 +255909,9 @@
         {
           "name": "archived_by",
           "required": true,
-          "type": "any",
+          "type": "ref",
           "format": null,
-          "ref": null,
+          "ref": "SimpleUser",
           "nullable": true,
           "items": null,
           "mapValue": null,
@@ -260063,9 +259820,9 @@
         {
           "name": "payload",
           "required": true,
-          "type": "oneOf",
+          "type": "ref",
           "format": null,
-          "ref": null,
+          "ref": "NullableDeploymentPayload",
           "nullable": false,
           "items": null,
           "mapValue": null,
@@ -260201,6 +259958,40 @@
           "variants": null
         }
       ],
+      "values": []
+    },
+    {
+      "name": "NullableDeploymentPayload",
+      "kind": "union",
+      "type": {
+        "type": "oneOf",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": [
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          }
+        ]
+      },
+      "properties": [],
       "values": []
     },
     {
@@ -260726,9 +260517,9 @@
           "ref": null,
           "nullable": false,
           "items": {
-            "type": "oneOf",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "NullableIssueLabelsItem",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -261245,6 +261036,40 @@
           "variants": null
         }
       ],
+      "values": []
+    },
+    {
+      "name": "NullableIssueLabelsItem",
+      "kind": "union",
+      "type": {
+        "type": "oneOf",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": [
+          {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          }
+        ]
+      },
+      "properties": [],
       "values": []
     },
     {
@@ -274064,9 +273889,9 @@
         {
           "name": "creator",
           "required": true,
-          "type": "any",
+          "type": "ref",
           "format": null,
-          "ref": null,
+          "ref": "SimpleUser",
           "nullable": false,
           "items": null,
           "mapValue": null,
@@ -276126,142 +275951,6 @@
           "variants": null
         }
       ],
-      "values": []
-    },
-    {
-      "name": "PullRequestRequestedReviewersItem",
-      "kind": "union",
-      "type": {
-        "type": "oneOf",
-        "format": null,
-        "ref": null,
-        "nullable": false,
-        "items": null,
-        "mapValue": null,
-        "variants": [
-          {
-            "type": "object",
-            "format": null,
-            "ref": null,
-            "nullable": true,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          },
-          {
-            "type": "object",
-            "format": null,
-            "ref": null,
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          }
-        ]
-      },
-      "properties": [],
-      "values": []
-    },
-    {
-      "name": "PullRequestRequestedReviewersItem2",
-      "kind": "union",
-      "type": {
-        "type": "oneOf",
-        "format": null,
-        "ref": null,
-        "nullable": false,
-        "items": null,
-        "mapValue": null,
-        "variants": [
-          {
-            "type": "object",
-            "format": null,
-            "ref": null,
-            "nullable": true,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          },
-          {
-            "type": "object",
-            "format": null,
-            "ref": null,
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          }
-        ]
-      },
-      "properties": [],
-      "values": []
-    },
-    {
-      "name": "PullRequestRequestedReviewersItem3",
-      "kind": "union",
-      "type": {
-        "type": "oneOf",
-        "format": null,
-        "ref": null,
-        "nullable": false,
-        "items": null,
-        "mapValue": null,
-        "variants": [
-          {
-            "type": "object",
-            "format": null,
-            "ref": null,
-            "nullable": true,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          },
-          {
-            "type": "object",
-            "format": null,
-            "ref": null,
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          }
-        ]
-      },
-      "properties": [],
-      "values": []
-    },
-    {
-      "name": "PullRequestRequestedReviewersItem4",
-      "kind": "union",
-      "type": {
-        "type": "oneOf",
-        "format": null,
-        "ref": null,
-        "nullable": false,
-        "items": null,
-        "mapValue": null,
-        "variants": [
-          {
-            "type": "object",
-            "format": null,
-            "ref": null,
-            "nullable": true,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          },
-          {
-            "type": "object",
-            "format": null,
-            "ref": null,
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          }
-        ]
-      },
-      "properties": [],
       "values": []
     },
     {
@@ -279331,7 +279020,7 @@
         {
           "name": "release",
           "required": true,
-          "type": "any",
+          "type": "object",
           "format": null,
           "ref": null,
           "nullable": false,
@@ -279679,6 +279368,40 @@
           "variants": null
         }
       ],
+      "values": []
+    },
+    {
+      "name": "ReposCreateDeploymentRequestPayload",
+      "kind": "union",
+      "type": {
+        "type": "oneOf",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": [
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          }
+        ]
+      },
+      "properties": [],
       "values": []
     },
     {
@@ -281824,9 +281547,9 @@
         {
           "name": "author",
           "required": true,
-          "type": "any",
+          "type": "ref",
           "format": null,
-          "ref": null,
+          "ref": "SimpleUser",
           "nullable": true,
           "items": null,
           "mapValue": null,
@@ -282056,9 +281779,9 @@
         {
           "name": "private_fork",
           "required": true,
-          "type": "any",
+          "type": "ref",
           "format": null,
-          "ref": null,
+          "ref": "SimpleRepository",
           "nullable": true,
           "items": null,
           "mapValue": null,
@@ -282078,9 +281801,9 @@
         {
           "name": "publisher",
           "required": true,
-          "type": "any",
+          "type": "ref",
           "format": null,
-          "ref": null,
+          "ref": "SimpleUser",
           "nullable": true,
           "items": null,
           "mapValue": null,
@@ -286764,6 +286487,40 @@
       "values": []
     },
     {
+      "name": "ReposUpdateInformationAboutPagesSiteRequestSource",
+      "kind": "union",
+      "type": {
+        "type": "anyOf",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": [
+          {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          }
+        ]
+      },
+      "properties": [],
+      "values": []
+    },
+    {
       "name": "ReviewComment",
       "kind": "object",
       "type": {
@@ -287309,40 +287066,6 @@
           "variants": null
         }
       ],
-      "values": []
-    },
-    {
-      "name": "ReviewersItemReviewer",
-      "kind": "union",
-      "type": {
-        "type": "anyOf",
-        "format": null,
-        "ref": null,
-        "nullable": false,
-        "items": null,
-        "mapValue": null,
-        "variants": [
-          {
-            "type": "ref",
-            "format": null,
-            "ref": "SimpleUser",
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          },
-          {
-            "type": "ref",
-            "format": null,
-            "ref": "Team",
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          }
-        ]
-      },
-      "properties": [],
       "values": []
     },
     {
@@ -288308,6 +288031,17 @@
           "items": null,
           "mapValue": null,
           "variants": null
+        },
+        {
+          "name": "rule_type",
+          "required": false,
+          "type": "string",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": null,
+          "mapValue": null,
+          "variants": null
         }
       ],
       "values": []
@@ -288341,6 +288075,17 @@
             "mapValue": null,
             "variants": null
           },
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "rule_type",
+          "required": false,
+          "type": "string",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": null,
           "mapValue": null,
           "variants": null
         }
@@ -290734,53 +290479,7 @@
         "nullable": false,
         "items": null,
         "mapValue": null,
-        "variants": [
-          {
-            "type": "any",
-            "format": null,
-            "ref": null,
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          },
-          {
-            "type": "any",
-            "format": null,
-            "ref": null,
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          },
-          {
-            "type": "any",
-            "format": null,
-            "ref": null,
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          },
-          {
-            "type": "any",
-            "format": null,
-            "ref": null,
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          },
-          {
-            "type": "any",
-            "format": null,
-            "ref": null,
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          }
-        ]
+        "variants": null
       },
       "properties": [
         {
@@ -292232,7 +291931,7 @@
           "ref": null,
           "nullable": false,
           "items": {
-            "type": "any",
+            "type": "object",
             "format": null,
             "ref": null,
             "nullable": false,
@@ -292620,6 +292319,55 @@
         },
         {
           "name": "selected_repositories_url",
+          "required": false,
+          "type": "string",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": null,
+          "mapValue": null,
+          "variants": null
+        }
+      ],
+      "values": []
+    },
+    {
+      "name": "ServiceUnavailable",
+      "kind": "object",
+      "type": {
+        "type": "object",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": null
+      },
+      "properties": [
+        {
+          "name": "code",
+          "required": false,
+          "type": "string",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": null,
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "documentation_url",
+          "required": false,
+          "type": "string",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": null,
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "message",
           "required": false,
           "type": "string",
           "format": null,
@@ -295045,108 +294793,6 @@
           "variants": null
         }
       ],
-      "values": []
-    },
-    {
-      "name": "TasksItemArtifactsItemData",
-      "kind": "union",
-      "type": {
-        "type": "oneOf",
-        "format": null,
-        "ref": null,
-        "nullable": false,
-        "items": null,
-        "mapValue": null,
-        "variants": [
-          {
-            "type": "object",
-            "format": null,
-            "ref": null,
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          },
-          {
-            "type": "object",
-            "format": null,
-            "ref": null,
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          }
-        ]
-      },
-      "properties": [],
-      "values": []
-    },
-    {
-      "name": "TasksItemArtifactsItemData2",
-      "kind": "union",
-      "type": {
-        "type": "oneOf",
-        "format": null,
-        "ref": null,
-        "nullable": false,
-        "items": null,
-        "mapValue": null,
-        "variants": [
-          {
-            "type": "object",
-            "format": null,
-            "ref": null,
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          },
-          {
-            "type": "object",
-            "format": null,
-            "ref": null,
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          }
-        ]
-      },
-      "properties": [],
-      "values": []
-    },
-    {
-      "name": "TasksItemArtifactsItemData3",
-      "kind": "union",
-      "type": {
-        "type": "oneOf",
-        "format": null,
-        "ref": null,
-        "nullable": false,
-        "items": null,
-        "mapValue": null,
-        "variants": [
-          {
-            "type": "object",
-            "format": null,
-            "ref": null,
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          },
-          {
-            "type": "object",
-            "format": null,
-            "ref": null,
-            "nullable": false,
-            "items": null,
-            "mapValue": null,
-            "variants": null
-          }
-        ]
-      },
-      "properties": [],
       "values": []
     },
     {
@@ -305506,6 +305152,40 @@
       "values": []
     },
     {
+      "name": "WebhookDeploymentCreatedDeploymentPayload",
+      "kind": "union",
+      "type": {
+        "type": "oneOf",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": [
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          }
+        ]
+      },
+      "properties": [],
+      "values": []
+    },
+    {
       "name": "WebhookDeploymentProtectionRuleRequested",
       "kind": "object",
       "type": {
@@ -306286,6 +305966,40 @@
           "variants": null
         }
       ],
+      "values": []
+    },
+    {
+      "name": "WebhookDeploymentStatusCreatedDeploymentPayload",
+      "kind": "union",
+      "type": {
+        "type": "oneOf",
+        "format": null,
+        "ref": null,
+        "nullable": true,
+        "items": null,
+        "mapValue": null,
+        "variants": [
+          {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          }
+        ]
+      },
+      "properties": [],
       "values": []
     },
     {
@@ -308088,7 +307802,7 @@
         {
           "name": "forkee",
           "required": true,
-          "type": "any",
+          "type": "object",
           "format": null,
           "ref": null,
           "nullable": false,
@@ -309234,7 +308948,7 @@
         {
           "name": "issue",
           "required": true,
-          "type": "any",
+          "type": "object",
           "format": null,
           "ref": null,
           "nullable": false,
@@ -309338,7 +309052,7 @@
         {
           "name": "issue",
           "required": true,
-          "type": "any",
+          "type": "object",
           "format": null,
           "ref": null,
           "nullable": false,
@@ -309453,7 +309167,7 @@
         {
           "name": "issue",
           "required": true,
-          "type": "any",
+          "type": "object",
           "format": null,
           "ref": null,
           "nullable": false,
@@ -309557,7 +309271,7 @@
         {
           "name": "issue",
           "required": true,
-          "type": "any",
+          "type": "object",
           "format": null,
           "ref": null,
           "nullable": false,
@@ -309661,7 +309375,7 @@
         {
           "name": "issue",
           "required": true,
-          "type": "any",
+          "type": "object",
           "format": null,
           "ref": null,
           "nullable": false,
@@ -310592,7 +310306,7 @@
         {
           "name": "issue",
           "required": true,
-          "type": "any",
+          "type": "object",
           "format": null,
           "ref": null,
           "nullable": false,
@@ -315590,6 +315304,92 @@
       "values": []
     },
     {
+      "name": "WebhookPackagePublishedPackagePackageVersionBody",
+      "kind": "union",
+      "type": {
+        "type": "oneOf",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": [
+          {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          }
+        ]
+      },
+      "properties": [],
+      "values": []
+    },
+    {
+      "name": "WebhookPackagePublishedPackagePackageVersionNugetMetadataItemValue",
+      "kind": "union",
+      "type": {
+        "type": "oneOf",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": [
+          {
+            "type": "boolean",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "integer",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          }
+        ]
+      },
+      "properties": [],
+      "values": []
+    },
+    {
       "name": "WebhookPackageUpdated",
       "kind": "object",
       "type": {
@@ -316677,7 +316477,7 @@
         {
           "name": "project_card",
           "required": true,
-          "type": "any",
+          "type": "object",
           "format": null,
           "ref": null,
           "nullable": false,
@@ -318957,7 +318757,7 @@
         "type": "oneOf",
         "format": null,
         "ref": null,
-        "nullable": false,
+        "nullable": true,
         "items": null,
         "mapValue": null,
         "variants": [
@@ -318965,7 +318765,7 @@
             "type": "object",
             "format": null,
             "ref": null,
-            "nullable": true,
+            "nullable": false,
             "items": null,
             "mapValue": null,
             "variants": null
@@ -319106,7 +318906,7 @@
         "type": "oneOf",
         "format": null,
         "ref": null,
-        "nullable": false,
+        "nullable": true,
         "items": null,
         "mapValue": null,
         "variants": [
@@ -319114,7 +318914,7 @@
             "type": "object",
             "format": null,
             "ref": null,
-            "nullable": true,
+            "nullable": false,
             "items": null,
             "mapValue": null,
             "variants": null
@@ -319255,7 +319055,7 @@
         "type": "oneOf",
         "format": null,
         "ref": null,
-        "nullable": false,
+        "nullable": true,
         "items": null,
         "mapValue": null,
         "variants": [
@@ -319263,7 +319063,7 @@
             "type": "object",
             "format": null,
             "ref": null,
-            "nullable": true,
+            "nullable": false,
             "items": null,
             "mapValue": null,
             "variants": null
@@ -319727,7 +319527,7 @@
         "type": "oneOf",
         "format": null,
         "ref": null,
-        "nullable": false,
+        "nullable": true,
         "items": null,
         "mapValue": null,
         "variants": [
@@ -319735,7 +319535,7 @@
             "type": "object",
             "format": null,
             "ref": null,
-            "nullable": true,
+            "nullable": false,
             "items": null,
             "mapValue": null,
             "variants": null
@@ -319980,7 +319780,7 @@
         "type": "oneOf",
         "format": null,
         "ref": null,
-        "nullable": false,
+        "nullable": true,
         "items": null,
         "mapValue": null,
         "variants": [
@@ -319988,7 +319788,7 @@
             "type": "object",
             "format": null,
             "ref": null,
-            "nullable": true,
+            "nullable": false,
             "items": null,
             "mapValue": null,
             "variants": null
@@ -320129,7 +319929,7 @@
         "type": "oneOf",
         "format": null,
         "ref": null,
-        "nullable": false,
+        "nullable": true,
         "items": null,
         "mapValue": null,
         "variants": [
@@ -320137,7 +319937,7 @@
             "type": "object",
             "format": null,
             "ref": null,
-            "nullable": true,
+            "nullable": false,
             "items": null,
             "mapValue": null,
             "variants": null
@@ -320267,7 +320067,7 @@
         "type": "oneOf",
         "format": null,
         "ref": null,
-        "nullable": false,
+        "nullable": true,
         "items": null,
         "mapValue": null,
         "variants": [
@@ -320275,7 +320075,7 @@
             "type": "object",
             "format": null,
             "ref": null,
-            "nullable": true,
+            "nullable": false,
             "items": null,
             "mapValue": null,
             "variants": null
@@ -320832,7 +320632,7 @@
         "type": "oneOf",
         "format": null,
         "ref": null,
-        "nullable": false,
+        "nullable": true,
         "items": null,
         "mapValue": null,
         "variants": [
@@ -320840,7 +320640,7 @@
             "type": "object",
             "format": null,
             "ref": null,
-            "nullable": true,
+            "nullable": false,
             "items": null,
             "mapValue": null,
             "variants": null
@@ -320970,7 +320770,7 @@
         "type": "oneOf",
         "format": null,
         "ref": null,
-        "nullable": false,
+        "nullable": true,
         "items": null,
         "mapValue": null,
         "variants": [
@@ -320978,7 +320778,7 @@
             "type": "object",
             "format": null,
             "ref": null,
-            "nullable": true,
+            "nullable": false,
             "items": null,
             "mapValue": null,
             "variants": null
@@ -321119,7 +320919,7 @@
         "type": "oneOf",
         "format": null,
         "ref": null,
-        "nullable": false,
+        "nullable": true,
         "items": null,
         "mapValue": null,
         "variants": [
@@ -321127,7 +320927,7 @@
             "type": "object",
             "format": null,
             "ref": null,
-            "nullable": true,
+            "nullable": false,
             "items": null,
             "mapValue": null,
             "variants": null
@@ -321257,7 +321057,7 @@
         "type": "oneOf",
         "format": null,
         "ref": null,
-        "nullable": false,
+        "nullable": true,
         "items": null,
         "mapValue": null,
         "variants": [
@@ -321265,7 +321065,7 @@
             "type": "object",
             "format": null,
             "ref": null,
-            "nullable": true,
+            "nullable": false,
             "items": null,
             "mapValue": null,
             "variants": null
@@ -321406,7 +321206,7 @@
         "type": "oneOf",
         "format": null,
         "ref": null,
-        "nullable": false,
+        "nullable": true,
         "items": null,
         "mapValue": null,
         "variants": [
@@ -321414,7 +321214,7 @@
             "type": "object",
             "format": null,
             "ref": null,
-            "nullable": true,
+            "nullable": false,
             "items": null,
             "mapValue": null,
             "variants": null
@@ -321612,7 +321412,7 @@
         "type": "oneOf",
         "format": null,
         "ref": null,
-        "nullable": false,
+        "nullable": true,
         "items": null,
         "mapValue": null,
         "variants": [
@@ -321620,7 +321420,7 @@
             "type": "object",
             "format": null,
             "ref": null,
-            "nullable": true,
+            "nullable": false,
             "items": null,
             "mapValue": null,
             "variants": null
@@ -321761,7 +321561,7 @@
         "type": "oneOf",
         "format": null,
         "ref": null,
-        "nullable": false,
+        "nullable": true,
         "items": null,
         "mapValue": null,
         "variants": [
@@ -321769,7 +321569,7 @@
             "type": "object",
             "format": null,
             "ref": null,
-            "nullable": true,
+            "nullable": false,
             "items": null,
             "mapValue": null,
             "variants": null
@@ -321910,7 +321710,7 @@
         "type": "oneOf",
         "format": null,
         "ref": null,
-        "nullable": false,
+        "nullable": true,
         "items": null,
         "mapValue": null,
         "variants": [
@@ -321918,7 +321718,7 @@
             "type": "object",
             "format": null,
             "ref": null,
-            "nullable": true,
+            "nullable": false,
             "items": null,
             "mapValue": null,
             "variants": null
@@ -322059,7 +321859,7 @@
         "type": "oneOf",
         "format": null,
         "ref": null,
-        "nullable": false,
+        "nullable": true,
         "items": null,
         "mapValue": null,
         "variants": [
@@ -322067,7 +321867,7 @@
             "type": "object",
             "format": null,
             "ref": null,
-            "nullable": true,
+            "nullable": false,
             "items": null,
             "mapValue": null,
             "variants": null
@@ -322219,7 +322019,7 @@
         "type": "oneOf",
         "format": null,
         "ref": null,
-        "nullable": false,
+        "nullable": true,
         "items": null,
         "mapValue": null,
         "variants": [
@@ -322227,7 +322027,7 @@
             "type": "object",
             "format": null,
             "ref": null,
-            "nullable": true,
+            "nullable": false,
             "items": null,
             "mapValue": null,
             "variants": null
@@ -322368,7 +322168,7 @@
         "type": "oneOf",
         "format": null,
         "ref": null,
-        "nullable": false,
+        "nullable": true,
         "items": null,
         "mapValue": null,
         "variants": [
@@ -322376,7 +322176,7 @@
             "type": "object",
             "format": null,
             "ref": null,
-            "nullable": true,
+            "nullable": false,
             "items": null,
             "mapValue": null,
             "variants": null
@@ -322517,7 +322317,7 @@
         "type": "oneOf",
         "format": null,
         "ref": null,
-        "nullable": false,
+        "nullable": true,
         "items": null,
         "mapValue": null,
         "variants": [
@@ -322525,7 +322325,7 @@
             "type": "object",
             "format": null,
             "ref": null,
-            "nullable": true,
+            "nullable": false,
             "items": null,
             "mapValue": null,
             "variants": null
@@ -322655,7 +322455,7 @@
         "type": "oneOf",
         "format": null,
         "ref": null,
-        "nullable": false,
+        "nullable": true,
         "items": null,
         "mapValue": null,
         "variants": [
@@ -322663,7 +322463,7 @@
             "type": "object",
             "format": null,
             "ref": null,
-            "nullable": true,
+            "nullable": false,
             "items": null,
             "mapValue": null,
             "variants": null
@@ -322973,6 +322773,305 @@
           "variants": null
         }
       ],
+      "values": []
+    },
+    {
+      "name": "WebhookRegistryPackagePublishedRegistryPackagePackageVersionBody",
+      "kind": "union",
+      "type": {
+        "type": "oneOf",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": [
+          {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          }
+        ]
+      },
+      "properties": [],
+      "values": []
+    },
+    {
+      "name": "WebhookRegistryPackagePublishedRegistryPackagePackageVersionNpmMetadataAuthor",
+      "kind": "union",
+      "type": {
+        "type": "oneOf",
+        "format": null,
+        "ref": null,
+        "nullable": true,
+        "items": null,
+        "mapValue": null,
+        "variants": [
+          {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          }
+        ]
+      },
+      "properties": [],
+      "values": []
+    },
+    {
+      "name": "WebhookRegistryPackagePublishedRegistryPackagePackageVersionNpmMetadataBugs",
+      "kind": "union",
+      "type": {
+        "type": "oneOf",
+        "format": null,
+        "ref": null,
+        "nullable": true,
+        "items": null,
+        "mapValue": null,
+        "variants": [
+          {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          }
+        ]
+      },
+      "properties": [],
+      "values": []
+    },
+    {
+      "name": "WebhookRegistryPackagePublishedRegistryPackagePackageVersionNpmMetadataDirectories",
+      "kind": "union",
+      "type": {
+        "type": "oneOf",
+        "format": null,
+        "ref": null,
+        "nullable": true,
+        "items": null,
+        "mapValue": null,
+        "variants": [
+          {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          }
+        ]
+      },
+      "properties": [],
+      "values": []
+    },
+    {
+      "name": "WebhookRegistryPackagePublishedRegistryPackagePackageVersionNpmMetadataDist",
+      "kind": "union",
+      "type": {
+        "type": "oneOf",
+        "format": null,
+        "ref": null,
+        "nullable": true,
+        "items": null,
+        "mapValue": null,
+        "variants": [
+          {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          }
+        ]
+      },
+      "properties": [],
+      "values": []
+    },
+    {
+      "name": "WebhookRegistryPackagePublishedRegistryPackagePackageVersionNpmMetadataRepository",
+      "kind": "union",
+      "type": {
+        "type": "oneOf",
+        "format": null,
+        "ref": null,
+        "nullable": true,
+        "items": null,
+        "mapValue": null,
+        "variants": [
+          {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          }
+        ]
+      },
+      "properties": [],
+      "values": []
+    },
+    {
+      "name": "WebhookRegistryPackagePublishedRegistryPackagePackageVersionNugetMetadataItemId",
+      "kind": "union",
+      "type": {
+        "type": "oneOf",
+        "format": null,
+        "ref": null,
+        "nullable": true,
+        "items": null,
+        "mapValue": null,
+        "variants": [
+          {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "integer",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          }
+        ]
+      },
+      "properties": [],
+      "values": []
+    },
+    {
+      "name": "WebhookRegistryPackagePublishedRegistryPackagePackageVersionNugetMetadataItemValue",
+      "kind": "union",
+      "type": {
+        "type": "oneOf",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": [
+          {
+            "type": "boolean",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "integer",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          {
+            "type": "object",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          }
+        ]
+      },
+      "properties": [],
       "values": []
     },
     {
@@ -329225,9 +329324,9 @@
         {
           "name": "archived_by",
           "required": true,
-          "type": "any",
+          "type": "ref",
           "format": null,
-          "ref": null,
+          "ref": "SimpleUser",
           "nullable": true,
           "items": null,
           "mapValue": null,
@@ -329340,9 +329439,9 @@
         {
           "name": "archived_by",
           "required": true,
-          "type": "any",
+          "type": "ref",
           "format": null,
-          "ref": null,
+          "ref": "SimpleUser",
           "nullable": false,
           "items": null,
           "mapValue": null,
@@ -329455,9 +329554,9 @@
         {
           "name": "archived_by",
           "required": true,
-          "type": "any",
+          "type": "ref",
           "format": null,
-          "ref": null,
+          "ref": "SimpleUser",
           "nullable": true,
           "items": null,
           "mapValue": null,
@@ -331764,7 +331863,7 @@
             "type": "ref",
             "format": null,
             "ref": "WebhooksPullRequest5RequestedReviewersItem",
-            "nullable": false,
+            "nullable": true,
             "items": null,
             "mapValue": null,
             "variants": [
@@ -331772,7 +331871,7 @@
                 "type": "object",
                 "format": null,
                 "ref": null,
-                "nullable": true,
+                "nullable": false,
                 "items": null,
                 "mapValue": null,
                 "variants": null
@@ -331930,7 +332029,7 @@
         "type": "oneOf",
         "format": null,
         "ref": null,
-        "nullable": false,
+        "nullable": true,
         "items": null,
         "mapValue": null,
         "variants": [
@@ -331938,7 +332037,7 @@
             "type": "object",
             "format": null,
             "ref": null,
-            "nullable": true,
+            "nullable": false,
             "items": null,
             "mapValue": null,
             "variants": null
@@ -336566,7 +336665,7 @@
         {
           "name": "workflow_job",
           "required": true,
-          "type": "any",
+          "type": "object",
           "format": null,
           "ref": null,
           "nullable": false,
@@ -336670,7 +336769,7 @@
         {
           "name": "workflow_job",
           "required": true,
-          "type": "any",
+          "type": "object",
           "format": null,
           "ref": null,
           "nullable": false,
@@ -337921,7 +338020,6 @@
       "ActionsForkPrContributorApproval",
       "ActionsForkPrWorkflowsPrivateRepos",
       "ActionsForkPrWorkflowsPrivateReposRequest",
-      "ActionsGenerateRunnerJitconfigForOrgResponse",
       "ActionsGetActionsCacheUsageByRepoForOrgResponse",
       "ActionsGetDefaultWorkflowPermissions",
       "ActionsGetHostedRunnersGithubOwnedImagesForOrgResponse",
@@ -337982,17 +338080,19 @@
       "ActionsPolicyOrgConditionsVariant1",
       "ActionsPolicyOrgConditionsVariant2",
       "ActionsPolicyRepoConditionsVariant1",
+      "ActionsPolicyRepoConditionsVariant1WorkflowPath",
       "ActionsPolicyWorkflowPathCondition",
       "ActionsPolicyWorkflowPathConditionWorkflowPath",
       "ActionsPublicKey",
-      "ActionsRemoveAllCustomLabelsFromSelfHostedRunnerForOrgResponse",
-      "ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgResponse",
       "ActionsRepositoryPermissions",
       "ActionsRuleParamsActor",
       "ActionsRuleRestrictActionEvents",
       "ActionsRuleRestrictActionEventsParameters",
       "ActionsRuleRestrictActionsActors",
       "ActionsRuleRestrictActionsActorsParameters",
+      "ActionsRunnerJitconfig",
+      "ActionsRunnerLabels",
+      "ActionsRunnerLabelsReadonly",
       "ActionsSecret",
       "ActionsSetDefaultWorkflowPermissions",
       "ActionsVariable",
@@ -338187,7 +338287,9 @@
       "AgentAutomationsListAutomationTasksResponseErrorsItemXebfbe80f",
       "AgentAutomationsListAutomationTasksResponseTasksItem",
       "AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItem",
-      "AgentAutomationsListAutomationTasksResponseTasksItemCreatorVariant0",
+      "AgentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4",
+      "AgentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a",
+      "AgentAutomationsListAutomationTasksResponseTasksItemCreator",
       "AgentAutomationsListAutomationTasksResponseTasksItemCustomAgent",
       "AgentAutomationsListAutomationTasksResponseTasksItemOwner",
       "AgentAutomationsListAutomationTasksResponseTasksItemRepository",
@@ -338231,6 +338333,10 @@
       "AgentAutomationsListAvailableAutomationTriggersResponse",
       "AgentAutomationsListAvailableAutomationTriggersResponseErrorsItem",
       "AgentAutomationsListAvailableAutomationTriggersResponseItem",
+      "AgentAutomationsListAvailableAutomationTriggersResponseItemFiX2732c6430f",
+      "AgentAutomationsListAvailableAutomationTriggersResponseItemFiX33c1ad0172",
+      "AgentAutomationsListAvailableAutomationTriggersResponseItemFiX3c0c1332cb",
+      "AgentAutomationsListAvailableAutomationTriggersResponseItemFiXe26621da0f",
       "AgentAutomationsListAvailableAutomationTriggersResponseItemFieldsItem",
       "AgentAutomationsListRepoAutomationsResponse",
       "AgentAutomationsListRepoAutomationsResponseAutomationsItem",
@@ -338265,7 +338371,9 @@
       "AgentAutomationsListRepoAutomationsResponseXf654b9de",
       "AgentTasksCreateTaskInRepoResponse",
       "AgentTasksCreateTaskInRepoResponseArtifactsItem",
-      "AgentTasksCreateTaskInRepoResponseCreatorVariant0",
+      "AgentTasksCreateTaskInRepoResponseArtifactsItemDataVariant0",
+      "AgentTasksCreateTaskInRepoResponseArtifactsItemDataVariant1",
+      "AgentTasksCreateTaskInRepoResponseCreator",
       "AgentTasksCreateTaskInRepoResponseCustomAgent",
       "AgentTasksCreateTaskInRepoResponseErrorsItem",
       "AgentTasksCreateTaskInRepoResponseErrorsItemX14c9c624",
@@ -338286,7 +338394,9 @@
       "AgentTasksGetTaskByIdResponseErrorsItemXfdaf8a7b",
       "AgentTasksGetTaskByIdResponseVariant0",
       "AgentTasksGetTaskByIdResponseVariant0ArtifactsItem",
-      "AgentTasksGetTaskByIdResponseVariant0CreatorVariant0",
+      "AgentTasksGetTaskByIdResponseVariant0ArtifactsItemDataVariant0",
+      "AgentTasksGetTaskByIdResponseVariant0ArtifactsItemDataVariant1",
+      "AgentTasksGetTaskByIdResponseVariant0Creator",
       "AgentTasksGetTaskByIdResponseVariant0CustomAgent",
       "AgentTasksGetTaskByIdResponseVariant0Owner",
       "AgentTasksGetTaskByIdResponseVariant0Repository",
@@ -338311,7 +338421,9 @@
       "AgentTasksGetTaskByRepoAndIdResponseErrorsItemXed499668",
       "AgentTasksGetTaskByRepoAndIdResponseVariant0",
       "AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItem",
-      "AgentTasksGetTaskByRepoAndIdResponseVariant0CreatorVariant0",
+      "AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemDataVariant0",
+      "AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemDataVariant1",
+      "AgentTasksGetTaskByRepoAndIdResponseVariant0Creator",
       "AgentTasksGetTaskByRepoAndIdResponseVariant0CustomAgent",
       "AgentTasksGetTaskByRepoAndIdResponseVariant0Owner",
       "AgentTasksGetTaskByRepoAndIdResponseVariant0Repository",
@@ -338336,7 +338448,9 @@
       "AgentTasksListTasksForRepoResponseErrorsItemXb462efe3",
       "AgentTasksListTasksForRepoResponseTasksItem",
       "AgentTasksListTasksForRepoResponseTasksItemArtifactsItem",
-      "AgentTasksListTasksForRepoResponseTasksItemCreatorVariant0",
+      "AgentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant0",
+      "AgentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant1",
+      "AgentTasksListTasksForRepoResponseTasksItemCreator",
       "AgentTasksListTasksForRepoResponseTasksItemCustomAgent",
       "AgentTasksListTasksForRepoResponseTasksItemOwner",
       "AgentTasksListTasksForRepoResponseTasksItemRepository",
@@ -338353,7 +338467,9 @@
       "AgentTasksListTasksResponseErrorsItemXf05f8a44",
       "AgentTasksListTasksResponseTasksItem",
       "AgentTasksListTasksResponseTasksItemArtifactsItem",
-      "AgentTasksListTasksResponseTasksItemCreatorVariant0",
+      "AgentTasksListTasksResponseTasksItemArtifactsItemDataVariant0",
+      "AgentTasksListTasksResponseTasksItemArtifactsItemDataVariant1",
+      "AgentTasksListTasksResponseTasksItemCreator",
       "AgentTasksListTasksResponseTasksItemCustomAgent",
       "AgentTasksListTasksResponseTasksItemOwner",
       "AgentTasksListTasksResponseTasksItemRepository",
@@ -338384,21 +338500,17 @@
       "AppsCreateFromManifestResponse",
       "AppsCreateFromManifestResponseVariant1",
       "AppsListInstallationReposForAuthenticatedUserResponse",
-      "AppsListInstallationReposForAuthenticatedUserResponseRepositoXbb6993d784",
+      "AppsListInstallationReposForAuthenticatedUserResponseRepositoXace4d6c012",
+      "AppsListInstallationReposForAuthenticatedUserResponseRepositoXfbc57dcb02",
       "AppsListInstallationReposForAuthenticatedUserResponseRepositoriesItem",
       "AppsListInstallationsForAuthenticatedUserResponse",
       "AppsListReposAccessibleToInstallationResponse",
       "AppsListReposAccessibleToInstallationResponseRepositoriesItem",
-      "AppsListReposAccessibleToInstallationResponseRepositoriesItemVariant1",
+      "AppsListReposAccessibleToInstallationResponseRepositoriesItemPermissions",
+      "AppsListReposAccessibleToInstallationResponseRepositoriesItemXbc571f6d86",
       "Artifact",
       "ArtifactDeploymentRecord",
       "ArtifactWorkflowRun",
-      "ArtifactsItemData2Variant0",
-      "ArtifactsItemData2Variant1",
-      "ArtifactsItemData3Variant0",
-      "ArtifactsItemData3Variant1",
-      "ArtifactsItemDataVariant0",
-      "ArtifactsItemDataVariant1",
       "AssignedIssueEvent",
       "AuthenticationToken",
       "Authorization",
@@ -338415,7 +338527,6 @@
       "BillingAiCreditUsageReportUserTimePeriod",
       "BillingAiCreditUsageReportUserUsageItemsItem",
       "BillingCreateOrganizationBudgetRequestBodyBudgetAlerting",
-      "BillingDeleteBudgetOrgResponse",
       "BillingPremiumRequestUsageReportOrg",
       "BillingPremiumRequestUsageReportOrgTimePeriod",
       "BillingPremiumRequestUsageReportOrgUsageItemsItem",
@@ -338483,12 +338594,16 @@
       "ChecksListForSuiteResponse",
       "ChecksListSuitesForRefResponse",
       "ChecksSetSuitesPreferencesRequestBodyAutoTriggerChecksItem",
-      "ChecksUpdateRequestBodyActionsItem",
-      "ChecksUpdateRequestBodyOutput",
-      "ChecksUpdateRequestBodyOutputAnnotationsItem",
-      "ChecksUpdateRequestBodyOutputImagesItem",
       "ChecksUpdateRequestBodyVariant0",
+      "ChecksUpdateRequestBodyVariant0ActionsItem",
+      "ChecksUpdateRequestBodyVariant0Output",
+      "ChecksUpdateRequestBodyVariant0OutputAnnotationsItem",
+      "ChecksUpdateRequestBodyVariant0OutputImagesItem",
       "ChecksUpdateRequestBodyVariant1",
+      "ChecksUpdateRequestBodyVariant1ActionsItem",
+      "ChecksUpdateRequestBodyVariant1Output",
+      "ChecksUpdateRequestBodyVariant1OutputAnnotationsItem",
+      "ChecksUpdateRequestBodyVariant1OutputImagesItem",
       "CloneTraffic",
       "CodeOfConduct",
       "CodeOfConductSimple",
@@ -338497,6 +338612,7 @@
       "CodeQualityFindingMessage",
       "CodeQualityFindingRule",
       "CodeQualitySetup",
+      "CodeQualitySetupUpdate",
       "CodeQualitySetupUpdateResponse",
       "CodeScanningAiScanEnablement",
       "CodeScanningAiScanEnablementUpdate",
@@ -338761,10 +338877,6 @@
       "ExternalProperty",
       "Feed",
       "FeedLinks",
-      "FieldsItemSchemaVariant0",
-      "FieldsItemSchemaVariant1",
-      "FieldsItemSchemaVariant1Items",
-      "FieldsItemSchemaVariant2",
       "FileCommit",
       "FileCommitCommit",
       "FileCommitCommitAuthor",
@@ -338774,6 +338886,8 @@
       "FileCommitCommitVerification",
       "FileCommitContent",
       "FileCommitContentLinks",
+      "ForbiddenGist",
+      "ForbiddenGistBlock",
       "ForkEvent",
       "ForkEventForkee",
       "FullRepository",
@@ -338794,8 +338908,6 @@
       "GistSimpleForksItem",
       "GistsCheckIsStarredResponse",
       "GistsCreateRequestBodyFilesValue",
-      "GistsGetResponse",
-      "GistsGetResponseBlock",
       "GistsUpdateRequestBodyFilesValue",
       "GitCommit",
       "GitCommitAuthor",
@@ -338870,13 +338982,11 @@
       "IssueFieldValueMultiSelectOptionsItem",
       "IssueFieldValueSingleSelectOption",
       "IssueLabelsItemVariant1",
-      "IssueLabelsItemVariant1ArchivedBy",
       "IssuePullRequest",
       "IssueReference",
       "IssueReferenceIssueType",
       "IssueSearchResultItem",
       "IssueSearchResultItemLabelsItem",
-      "IssueSearchResultItemLabelsItemArchivedBy",
       "IssueSearchResultItemPullRequest",
       "IssueSuggestion",
       "IssueType",
@@ -338884,23 +338994,23 @@
       "IssueTypeChangedIssueEvent",
       "IssueTypeRemovedIssueEvent",
       "IssueTypeWebhook",
-      "IssuesAddAssigneesRequestBodyAssigneesItemVariant1",
+      "IssuesAddAssigneesRequestAssigneesItemVariant1",
       "IssuesAddIssueFieldValuesRequestBodyIssueFieldValuesItem",
       "IssuesAddLabelsRequestBodyVariant0",
       "IssuesAddLabelsRequestBodyVariant0LabelsItemVariant1",
       "IssuesAddLabelsRequestBodyVariant2Item",
       "IssuesCreateRequestBodyIssueFieldValuesItem",
-      "IssuesCreateRequestBodyLabelsItemVariant1",
+      "IssuesCreateRequestLabelsItemVariant1",
       "IssuesEvent",
       "IssuesSetIssueFieldValuesRequestBodyIssueFieldValuesItem",
       "IssuesSetLabelsRequestBodyVariant0",
       "IssuesSetLabelsRequestBodyVariant2",
       "IssuesSetLabelsRequestBodyVariant2LabelsItem",
       "IssuesSetLabelsRequestBodyVariant3Item",
-      "IssuesUpdateRequestBodyAssigneesItemVariant1",
+      "IssuesUpdateRequestAssigneesItemVariant1",
       "IssuesUpdateRequestBodyIssueFieldValuesItem",
-      "IssuesUpdateRequestBodyLabelsItemVariant1",
-      "IssuesUpdateRequestBodyTypeVariant1",
+      "IssuesUpdateRequestLabelsItemVariant1",
+      "IssuesUpdateRequestTypeVariant1",
       "IssuesUpdateResponse",
       "IssuesUpdateResponseVariant1",
       "IssuesUpdateResponseVariant1Suggestions",
@@ -338914,9 +339024,7 @@
       "Key",
       "KeySimple",
       "Label",
-      "LabelArchivedBy",
       "LabelSearchResultItem",
-      "LabelSearchResultItemArchivedBy",
       "LabeledIssueEvent",
       "LabeledIssueEventLabel",
       "License",
@@ -338962,7 +339070,6 @@
       "NullableIssueCommentMinimized",
       "NullableIssueEventIntent",
       "NullableIssueLabelsItemVariant1",
-      "NullableIssueLabelsItemVariant1ArchivedBy",
       "NullableIssuePullRequest",
       "NullableIssueReference",
       "NullableIssueReferenceIssueType",
@@ -339120,7 +339227,6 @@
       "ProjectsV2SingleSelectOptionsName",
       "ProjectsV2StatusUpdate",
       "ProjectsV2View",
-      "ProjectsV2ViewCreator",
       "ProtectedBranch",
       "ProtectedBranchAdminEnforced",
       "ProtectedBranchAllowDeletions",
@@ -339148,7 +339254,6 @@
       "PullRequestEvent",
       "PullRequestHead",
       "PullRequestLabelsItem",
-      "PullRequestLabelsItemArchivedBy",
       "PullRequestLinks",
       "PullRequestMergeAsyncResult",
       "PullRequestMergeAsyncResultDetailsVariant0",
@@ -339161,18 +339266,6 @@
       "PullRequestMinimalBaseRepo",
       "PullRequestMinimalHead",
       "PullRequestMinimalHeadRepo",
-      "PullRequestRequestedReviewersItem2Variant0",
-      "PullRequestRequestedReviewersItem2Variant1",
-      "PullRequestRequestedReviewersItem2Variant1Parent",
-      "PullRequestRequestedReviewersItem3Variant0",
-      "PullRequestRequestedReviewersItem3Variant1",
-      "PullRequestRequestedReviewersItem3Variant1Parent",
-      "PullRequestRequestedReviewersItem4Variant0",
-      "PullRequestRequestedReviewersItem4Variant1",
-      "PullRequestRequestedReviewersItem4Variant1Parent",
-      "PullRequestRequestedReviewersItemVariant0",
-      "PullRequestRequestedReviewersItemVariant1",
-      "PullRequestRequestedReviewersItemVariant1Parent",
       "PullRequestReview",
       "PullRequestReviewComment",
       "PullRequestReviewCommentEvent",
@@ -339200,7 +339293,6 @@
       "PullRequestSimpleBase",
       "PullRequestSimpleHead",
       "PullRequestSimpleLabelsItem",
-      "PullRequestSimpleLabelsItemArchivedBy",
       "PullRequestSimpleLinks",
       "PullRequestStack",
       "PullRequestStackBase",
@@ -339240,7 +339332,6 @@
       "ReleaseAsset",
       "ReleaseEvent",
       "ReleaseEventRelease",
-      "ReleaseEventReleaseVariant1",
       "ReleaseNotesContent",
       "RemovedFromProjectIssueEvent",
       "RemovedFromProjectIssueEventProjectCard",
@@ -339280,7 +339371,7 @@
       "ReposUpdateBranchProtectionRequestBodyRequiredStatusChecks",
       "ReposUpdateBranchProtectionRequestBodyRequiredStatusChecksChecksItem",
       "ReposUpdateBranchProtectionRequestBodyRestrictions",
-      "ReposUpdateInformationAboutPagesSiteRequestBodySourceVariant1",
+      "ReposUpdateInformationAboutPagesSiteRequestSourceVariant1",
       "ReposUpdatePullRequestReviewProtectionRequestBodyBypassPullReX4b5a4bd7de",
       "ReposUpdatePullRequestReviewProtectionRequestBodyDismissalRestrictions",
       "ReposUpdateRequestBodySecurityAndAnalysis",
@@ -339297,7 +339388,6 @@
       "ReposUpdateStatusCheckProtectionRequestBodyChecksItem",
       "Repository",
       "RepositoryAdvisory",
-      "RepositoryAdvisoryAuthor",
       "RepositoryAdvisoryCreate",
       "RepositoryAdvisoryCreateCreditsItem",
       "RepositoryAdvisoryCreateVulnerabilitiesItem",
@@ -339309,8 +339399,6 @@
       "RepositoryAdvisoryDescriptionValidationError",
       "RepositoryAdvisoryDescriptionValidationErrorErrorsItem",
       "RepositoryAdvisoryIdentifiersItem",
-      "RepositoryAdvisoryPrivateFork",
-      "RepositoryAdvisoryPublisher",
       "RepositoryAdvisorySubmission",
       "RepositoryAdvisoryUpdate",
       "RepositoryAdvisoryUpdateCreditsItem",
@@ -339481,6 +339569,7 @@
       "SecretScanningCustomPattern",
       "SecretScanningCustomPatternToCreate",
       "SecretScanningCustomPatternToDelete",
+      "SecretScanningCustomPatternToUpdate",
       "SecretScanningCustomPatternValidationError",
       "SecretScanningLocation",
       "SecretScanningLocationCommit",
@@ -339502,7 +339591,6 @@
       "SecretScanningScan",
       "SecretScanningScanHistory",
       "SecretScanningScanHistoryCustomPatternBackfillScansItem",
-      "SecretScanningScanHistoryCustomPatternBackfillScansItemVariant1",
       "SecretScanningUpdateOrgPatternConfigsRequestBodyCustomPatternX60fe54664b",
       "SecretScanningUpdateOrgPatternConfigsRequestBodyProviderPatteX496d235208",
       "SecretScanningUpdateOrgPatternConfigsResponse",
@@ -339521,6 +339609,7 @@
       "SecurityAndAnalysisSecretScanningPushProtection",
       "SelectedActions",
       "SelfHostedRunnersSettings",
+      "ServiceUnavailable",
       "ShortBlob",
       "ShortBranch",
       "ShortBranchCommit",
@@ -339549,12 +339638,6 @@
       "SubIssuesSummary",
       "Tag",
       "TagCommit",
-      "TasksItemArtifactsItemData2Variant0",
-      "TasksItemArtifactsItemData2Variant1",
-      "TasksItemArtifactsItemData3Variant0",
-      "TasksItemArtifactsItemData3Variant1",
-      "TasksItemArtifactsItemDataVariant0",
-      "TasksItemArtifactsItemDataVariant1",
       "Team",
       "TeamFull",
       "TeamMember",
@@ -339888,12 +339971,8 @@
       "WebhookDiscussionUnpinned",
       "WebhookFork",
       "WebhookForkForkee",
-      "WebhookForkForkeeVariant0",
-      "WebhookForkForkeeVariant0License",
-      "WebhookForkForkeeVariant0Owner",
-      "WebhookForkForkeeVariant0Permissions",
-      "WebhookForkForkeeVariant1",
-      "WebhookForkForkeeVariant1Owner",
+      "WebhookForkForkeeOwner",
+      "WebhookForkForkeePermissions",
       "WebhookGithubAppAuthorizationRevoked",
       "WebhookGollum",
       "WebhookGollumPagesItem",
@@ -339916,99 +339995,39 @@
       "WebhookIssueCommentCreatedCommentReactions",
       "WebhookIssueCommentCreatedCommentUser",
       "WebhookIssueCommentCreatedIssue",
-      "WebhookIssueCommentCreatedIssueVariant0",
-      "WebhookIssueCommentCreatedIssueVariant0Assignee",
-      "WebhookIssueCommentCreatedIssueVariant0AssigneesItem",
-      "WebhookIssueCommentCreatedIssueVariant0LabelsItem",
-      "WebhookIssueCommentCreatedIssueVariant0Milestone",
-      "WebhookIssueCommentCreatedIssueVariant0MilestoneCreator",
-      "WebhookIssueCommentCreatedIssueVariant0PerformedViaGithubApp",
-      "WebhookIssueCommentCreatedIssueVariant0PerformedViaGithubAppOwner",
-      "WebhookIssueCommentCreatedIssueVariant0PerformedViaGithubAppPermissions",
-      "WebhookIssueCommentCreatedIssueVariant0PullRequest",
-      "WebhookIssueCommentCreatedIssueVariant0Reactions",
-      "WebhookIssueCommentCreatedIssueVariant0User",
-      "WebhookIssueCommentCreatedIssueVariant1",
-      "WebhookIssueCommentCreatedIssueVariant1Assignee",
-      "WebhookIssueCommentCreatedIssueVariant1LabelsItem",
-      "WebhookIssueCommentCreatedIssueVariant1Reactions",
-      "WebhookIssueCommentCreatedIssueVariant1User",
+      "WebhookIssueCommentCreatedIssueAssignee",
+      "WebhookIssueCommentCreatedIssueLabelsItem",
+      "WebhookIssueCommentCreatedIssuePullRequest",
+      "WebhookIssueCommentCreatedIssueReactions",
+      "WebhookIssueCommentCreatedIssueUser",
       "WebhookIssueCommentDeleted",
       "WebhookIssueCommentDeletedIssue",
-      "WebhookIssueCommentDeletedIssueVariant0",
-      "WebhookIssueCommentDeletedIssueVariant0Assignee",
-      "WebhookIssueCommentDeletedIssueVariant0AssigneesItem",
-      "WebhookIssueCommentDeletedIssueVariant0LabelsItem",
-      "WebhookIssueCommentDeletedIssueVariant0Milestone",
-      "WebhookIssueCommentDeletedIssueVariant0MilestoneCreator",
-      "WebhookIssueCommentDeletedIssueVariant0PerformedViaGithubApp",
-      "WebhookIssueCommentDeletedIssueVariant0PerformedViaGithubAppOwner",
-      "WebhookIssueCommentDeletedIssueVariant0PerformedViaGithubAppPermissions",
-      "WebhookIssueCommentDeletedIssueVariant0PullRequest",
-      "WebhookIssueCommentDeletedIssueVariant0Reactions",
-      "WebhookIssueCommentDeletedIssueVariant0User",
-      "WebhookIssueCommentDeletedIssueVariant1",
-      "WebhookIssueCommentDeletedIssueVariant1Assignee",
-      "WebhookIssueCommentDeletedIssueVariant1LabelsItem",
-      "WebhookIssueCommentDeletedIssueVariant1Reactions",
-      "WebhookIssueCommentDeletedIssueVariant1User",
+      "WebhookIssueCommentDeletedIssueAssignee",
+      "WebhookIssueCommentDeletedIssueLabelsItem",
+      "WebhookIssueCommentDeletedIssuePullRequest",
+      "WebhookIssueCommentDeletedIssueReactions",
+      "WebhookIssueCommentDeletedIssueUser",
       "WebhookIssueCommentEdited",
       "WebhookIssueCommentEditedIssue",
-      "WebhookIssueCommentEditedIssueVariant0",
-      "WebhookIssueCommentEditedIssueVariant0Assignee",
-      "WebhookIssueCommentEditedIssueVariant0AssigneesItem",
-      "WebhookIssueCommentEditedIssueVariant0LabelsItem",
-      "WebhookIssueCommentEditedIssueVariant0Milestone",
-      "WebhookIssueCommentEditedIssueVariant0MilestoneCreator",
-      "WebhookIssueCommentEditedIssueVariant0PerformedViaGithubApp",
-      "WebhookIssueCommentEditedIssueVariant0PerformedViaGithubAppOwner",
-      "WebhookIssueCommentEditedIssueVariant0PerformedViaGithubAppPermissions",
-      "WebhookIssueCommentEditedIssueVariant0PullRequest",
-      "WebhookIssueCommentEditedIssueVariant0Reactions",
-      "WebhookIssueCommentEditedIssueVariant0User",
-      "WebhookIssueCommentEditedIssueVariant1",
-      "WebhookIssueCommentEditedIssueVariant1Assignee",
-      "WebhookIssueCommentEditedIssueVariant1LabelsItem",
-      "WebhookIssueCommentEditedIssueVariant1Reactions",
-      "WebhookIssueCommentEditedIssueVariant1User",
+      "WebhookIssueCommentEditedIssueAssignee",
+      "WebhookIssueCommentEditedIssueLabelsItem",
+      "WebhookIssueCommentEditedIssuePullRequest",
+      "WebhookIssueCommentEditedIssueReactions",
+      "WebhookIssueCommentEditedIssueUser",
       "WebhookIssueCommentPinned",
       "WebhookIssueCommentPinnedIssue",
-      "WebhookIssueCommentPinnedIssueVariant0",
-      "WebhookIssueCommentPinnedIssueVariant0Assignee",
-      "WebhookIssueCommentPinnedIssueVariant0AssigneesItem",
-      "WebhookIssueCommentPinnedIssueVariant0LabelsItem",
-      "WebhookIssueCommentPinnedIssueVariant0Milestone",
-      "WebhookIssueCommentPinnedIssueVariant0MilestoneCreator",
-      "WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubApp",
-      "WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppOwner",
-      "WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPermissions",
-      "WebhookIssueCommentPinnedIssueVariant0PullRequest",
-      "WebhookIssueCommentPinnedIssueVariant0Reactions",
-      "WebhookIssueCommentPinnedIssueVariant0User",
-      "WebhookIssueCommentPinnedIssueVariant1",
-      "WebhookIssueCommentPinnedIssueVariant1Assignee",
-      "WebhookIssueCommentPinnedIssueVariant1LabelsItem",
-      "WebhookIssueCommentPinnedIssueVariant1Reactions",
-      "WebhookIssueCommentPinnedIssueVariant1User",
+      "WebhookIssueCommentPinnedIssueAssignee",
+      "WebhookIssueCommentPinnedIssueLabelsItem",
+      "WebhookIssueCommentPinnedIssuePullRequest",
+      "WebhookIssueCommentPinnedIssueReactions",
+      "WebhookIssueCommentPinnedIssueUser",
       "WebhookIssueCommentUnpinned",
       "WebhookIssueCommentUnpinnedIssue",
-      "WebhookIssueCommentUnpinnedIssueVariant0",
-      "WebhookIssueCommentUnpinnedIssueVariant0Assignee",
-      "WebhookIssueCommentUnpinnedIssueVariant0AssigneesItem",
-      "WebhookIssueCommentUnpinnedIssueVariant0LabelsItem",
-      "WebhookIssueCommentUnpinnedIssueVariant0Milestone",
-      "WebhookIssueCommentUnpinnedIssueVariant0MilestoneCreator",
-      "WebhookIssueCommentUnpinnedIssueVariant0PerformedViaGithubApp",
-      "WebhookIssueCommentUnpinnedIssueVariant0PerformedViaGithubAppOwner",
-      "WebhookIssueCommentUnpinnedIssueVariant0PerformedViaGithubAppPermissions",
-      "WebhookIssueCommentUnpinnedIssueVariant0PullRequest",
-      "WebhookIssueCommentUnpinnedIssueVariant0Reactions",
-      "WebhookIssueCommentUnpinnedIssueVariant0User",
-      "WebhookIssueCommentUnpinnedIssueVariant1",
-      "WebhookIssueCommentUnpinnedIssueVariant1Assignee",
-      "WebhookIssueCommentUnpinnedIssueVariant1LabelsItem",
-      "WebhookIssueCommentUnpinnedIssueVariant1Reactions",
-      "WebhookIssueCommentUnpinnedIssueVariant1User",
+      "WebhookIssueCommentUnpinnedIssueAssignee",
+      "WebhookIssueCommentUnpinnedIssueLabelsItem",
+      "WebhookIssueCommentUnpinnedIssuePullRequest",
+      "WebhookIssueCommentUnpinnedIssueReactions",
+      "WebhookIssueCommentUnpinnedIssueUser",
       "WebhookIssueDependenciesBlockedByAdded",
       "WebhookIssueDependenciesBlockedByRemoved",
       "WebhookIssueDependenciesBlockingAdded",
@@ -340018,21 +340037,9 @@
       "WebhookIssuesAssigned",
       "WebhookIssuesClosed",
       "WebhookIssuesClosedIssue",
-      "WebhookIssuesClosedIssueVariant0",
-      "WebhookIssuesClosedIssueVariant0Assignee",
-      "WebhookIssuesClosedIssueVariant0AssigneesItem",
-      "WebhookIssuesClosedIssueVariant0LabelsItem",
-      "WebhookIssuesClosedIssueVariant0Milestone",
-      "WebhookIssuesClosedIssueVariant0MilestoneCreator",
-      "WebhookIssuesClosedIssueVariant0PerformedViaGithubApp",
-      "WebhookIssuesClosedIssueVariant0PerformedViaGithubAppOwner",
-      "WebhookIssuesClosedIssueVariant0PerformedViaGithubAppPermissions",
-      "WebhookIssuesClosedIssueVariant0PullRequest",
-      "WebhookIssuesClosedIssueVariant0Reactions",
-      "WebhookIssuesClosedIssueVariant0User",
-      "WebhookIssuesClosedIssueVariant1",
-      "WebhookIssuesClosedIssueVariant1Reactions",
-      "WebhookIssuesClosedIssueVariant1User",
+      "WebhookIssuesClosedIssuePullRequest",
+      "WebhookIssuesClosedIssueReactions",
+      "WebhookIssuesClosedIssueUser",
       "WebhookIssuesDeleted",
       "WebhookIssuesDeletedIssue",
       "WebhookIssuesDeletedIssueAssignee",
@@ -340095,7 +340102,6 @@
       "WebhookIssuesLabeledIssueAssignee",
       "WebhookIssuesLabeledIssueAssigneesItem",
       "WebhookIssuesLabeledIssueLabelsItem",
-      "WebhookIssuesLabeledIssueLabelsItemArchivedBy",
       "WebhookIssuesLabeledIssueMilestone",
       "WebhookIssuesLabeledIssueMilestoneCreator",
       "WebhookIssuesLabeledIssuePerformedViaGithubApp",
@@ -340322,10 +340328,7 @@
       "WebhookProjectCardMovedChanges",
       "WebhookProjectCardMovedChangesColumnId",
       "WebhookProjectCardMovedProjectCard",
-      "WebhookProjectCardMovedProjectCardVariant0",
-      "WebhookProjectCardMovedProjectCardVariant0Creator",
-      "WebhookProjectCardMovedProjectCardVariant1",
-      "WebhookProjectCardMovedProjectCardVariant1Creator",
+      "WebhookProjectCardMovedProjectCardCreator",
       "WebhookProjectClosed",
       "WebhookProjectColumnCreated",
       "WebhookProjectColumnDeleted",
@@ -340588,7 +340591,6 @@
       "WebhookPullRequestLabeledPullRequestHeadRepoPermissions",
       "WebhookPullRequestLabeledPullRequestHeadUser",
       "WebhookPullRequestLabeledPullRequestLabelsItem",
-      "WebhookPullRequestLabeledPullRequestLabelsItemArchivedBy",
       "WebhookPullRequestLabeledPullRequestLinks",
       "WebhookPullRequestLabeledPullRequestLinksComments",
       "WebhookPullRequestLabeledPullRequestLinksCommits",
@@ -340873,7 +340875,10 @@
       "WebhookPullRequestReviewRequestRemovedVariant0PullRequestMergedBy",
       "WebhookPullRequestReviewRequestRemovedVariant0PullRequestMileXc5ab24bec0",
       "WebhookPullRequestReviewRequestRemovedVariant0PullRequestMilestone",
+      "WebhookPullRequestReviewRequestRemovedVariant0PullRequestRequX02474f1c47",
+      "WebhookPullRequestReviewRequestRemovedVariant0PullRequestRequX1ee61e7af4",
       "WebhookPullRequestReviewRequestRemovedVariant0PullRequestRequX36fa3bd019",
+      "WebhookPullRequestReviewRequestRemovedVariant0PullRequestRequX5b7dbd2b16",
       "WebhookPullRequestReviewRequestRemovedVariant0PullRequestRequX6d5ba9d0cf",
       "WebhookPullRequestReviewRequestRemovedVariant0PullRequestUser",
       "WebhookPullRequestReviewRequestRemovedVariant0RequestedReviewer",
@@ -340909,7 +340914,10 @@
       "WebhookPullRequestReviewRequestRemovedVariant1PullRequestMileX5f358ecf03",
       "WebhookPullRequestReviewRequestRemovedVariant1PullRequestMilestone",
       "WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequX02ea3666cd",
+      "WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequX0cb6de2b18",
+      "WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequX497214deaf",
       "WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequXdcc9c9326f",
+      "WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequXf899adbc58",
       "WebhookPullRequestReviewRequestRemovedVariant1PullRequestUser",
       "WebhookPullRequestReviewRequestRemovedVariant1RequestedTeam",
       "WebhookPullRequestReviewRequestRemovedVariant1RequestedTeamParent",
@@ -340945,7 +340953,10 @@
       "WebhookPullRequestReviewRequestedVariant0PullRequestMilestone",
       "WebhookPullRequestReviewRequestedVariant0PullRequestMilestoneCreator",
       "WebhookPullRequestReviewRequestedVariant0PullRequestRequestedTeamsItem",
+      "WebhookPullRequestReviewRequestedVariant0PullRequestRequestedX262e9a9d0e",
       "WebhookPullRequestReviewRequestedVariant0PullRequestRequestedX284e32f947",
+      "WebhookPullRequestReviewRequestedVariant0PullRequestRequestedXac20b0f837",
+      "WebhookPullRequestReviewRequestedVariant0PullRequestRequestedXf2473eedbd",
       "WebhookPullRequestReviewRequestedVariant0PullRequestUser",
       "WebhookPullRequestReviewRequestedVariant0RequestedReviewer",
       "WebhookPullRequestReviewRequestedVariant1",
@@ -340980,6 +340991,9 @@
       "WebhookPullRequestReviewRequestedVariant1PullRequestMilestone",
       "WebhookPullRequestReviewRequestedVariant1PullRequestMilestoneCreator",
       "WebhookPullRequestReviewRequestedVariant1PullRequestRequestedTeamsItem",
+      "WebhookPullRequestReviewRequestedVariant1PullRequestRequestedX19a0fad03e",
+      "WebhookPullRequestReviewRequestedVariant1PullRequestRequestedX4a015153ad",
+      "WebhookPullRequestReviewRequestedVariant1PullRequestRequestedX86112ee270",
       "WebhookPullRequestReviewRequestedVariant1PullRequestRequestedXf3db1dd6da",
       "WebhookPullRequestReviewRequestedVariant1PullRequestUser",
       "WebhookPullRequestReviewRequestedVariant1RequestedTeam",
@@ -341444,11 +341458,7 @@
       "WebhookStatusCommitAuthor",
       "WebhookStatusCommitCommit",
       "WebhookStatusCommitCommitAuthor",
-      "WebhookStatusCommitCommitAuthorVariant0",
-      "WebhookStatusCommitCommitAuthorVariant1",
       "WebhookStatusCommitCommitCommitter",
-      "WebhookStatusCommitCommitCommitterVariant0",
-      "WebhookStatusCommitCommitCommitterVariant1",
       "WebhookStatusCommitCommitTree",
       "WebhookStatusCommitCommitVerification",
       "WebhookStatusCommitCommitter",
@@ -341495,15 +341505,9 @@
       "WebhookWorkflowDispatch",
       "WebhookWorkflowJobCompleted",
       "WebhookWorkflowJobCompletedWorkflowJob",
-      "WebhookWorkflowJobCompletedWorkflowJobVariant0",
-      "WebhookWorkflowJobCompletedWorkflowJobVariant0StepsItem",
-      "WebhookWorkflowJobCompletedWorkflowJobVariant1",
       "WebhookWorkflowJobInProgress",
       "WebhookWorkflowJobInProgressWorkflowJob",
-      "WebhookWorkflowJobInProgressWorkflowJobVariant0",
-      "WebhookWorkflowJobInProgressWorkflowJobVariant0StepsItem",
-      "WebhookWorkflowJobInProgressWorkflowJobVariant1",
-      "WebhookWorkflowJobInProgressWorkflowJobVariant1StepsItem",
+      "WebhookWorkflowJobInProgressWorkflowJobStepsItem",
       "WebhookWorkflowJobQueued",
       "WebhookWorkflowJobQueuedWorkflowJob",
       "WebhookWorkflowJobQueuedWorkflowJobStepsItem",
@@ -341605,12 +341609,9 @@
       "WebhooksIssueUser",
       "WebhooksLabel",
       "WebhooksLabelArchived",
-      "WebhooksLabelArchivedBy",
       "WebhooksLabelArchivedVariant1",
-      "WebhooksLabelArchivedVariant1ArchivedBy",
       "WebhooksLabelUnarchived",
       "WebhooksLabelUnarchivedVariant1",
-      "WebhooksLabelUnarchivedVariant1ArchivedBy",
       "WebhooksMarketplacePurchase",
       "WebhooksMarketplacePurchaseAccount",
       "WebhooksMarketplacePurchasePlan",
@@ -377444,6 +377445,54 @@
         ]
       },
       {
+        "name": "ActionsRunnerJitconfig",
+        "kind": "model",
+        "description": "Typed representation of the `ActionsRunnerJitconfig` API schema.",
+        "values": [],
+        "properties": [
+          {
+            "name": "runner",
+            "description": "A self hosted runner"
+          },
+          {
+            "name": "encoded_jit_config",
+            "description": "The base64 encoded runner configuration."
+          }
+        ]
+      },
+      {
+        "name": "ActionsRunnerLabels",
+        "kind": "model",
+        "description": "Typed representation of the `ActionsRunnerLabels` API schema.",
+        "values": [],
+        "properties": [
+          {
+            "name": "total_count",
+            "description": "Required `integer` value serialized in the `total_count` wire field."
+          },
+          {
+            "name": "labels",
+            "description": "Required array value serialized in the `labels` wire field."
+          }
+        ]
+      },
+      {
+        "name": "ActionsRunnerLabelsReadonly",
+        "kind": "model",
+        "description": "Typed representation of the `ActionsRunnerLabelsReadonly` API schema.",
+        "values": [],
+        "properties": [
+          {
+            "name": "total_count",
+            "description": "Required `integer` value serialized in the `total_count` wire field."
+          },
+          {
+            "name": "labels",
+            "description": "Required array value serialized in the `labels` wire field."
+          }
+        ]
+      },
+      {
         "name": "ActionsSecret",
         "kind": "model",
         "description": "Set secrets for GitHub Actions.",
@@ -377634,6 +377683,41 @@
             "description": "Optional object value serialized in the `project_card` wire field."
           }
         ]
+      },
+      {
+        "name": "AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemData",
+        "kind": "model",
+        "description": "Resource data (shape depends on type)",
+        "values": [],
+        "properties": []
+      },
+      {
+        "name": "AgentAutomationsListAvailableAutomationTriggersResponseItemFieldsItemSchema",
+        "kind": "model",
+        "description": "A restricted JSON Schema fragment describing the field value accepted by Automation create and update requests.",
+        "values": [],
+        "properties": []
+      },
+      {
+        "name": "AgentTasksCreateTaskInRepoResponseArtifactsItemData",
+        "kind": "model",
+        "description": "Resource data (shape depends on type)",
+        "values": [],
+        "properties": []
+      },
+      {
+        "name": "AgentTasksListTasksForRepoResponseTasksItemArtifactsItemData",
+        "kind": "model",
+        "description": "Resource data (shape depends on type)",
+        "values": [],
+        "properties": []
+      },
+      {
+        "name": "AgentTasksListTasksResponseTasksItemArtifactsItemData",
+        "kind": "model",
+        "description": "Resource data (shape depends on type)",
+        "values": [],
+        "properties": []
       },
       {
         "name": "AlertAutoDismissedAt",
@@ -378176,27 +378260,6 @@
             "description": "The ID of the provenance attestation associated with the deployment record."
           }
         ]
-      },
-      {
-        "name": "ArtifactsItemData",
-        "kind": "model",
-        "description": "Resource data (shape depends on type)",
-        "values": [],
-        "properties": []
-      },
-      {
-        "name": "ArtifactsItemData2",
-        "kind": "model",
-        "description": "Resource data (shape depends on type)",
-        "values": [],
-        "properties": []
-      },
-      {
-        "name": "ArtifactsItemData3",
-        "kind": "model",
-        "description": "Resource data (shape depends on type)",
-        "values": [],
-        "properties": []
       },
       {
         "name": "AssignedIssueEvent",
@@ -383948,6 +384011,13 @@
         ]
       },
       {
+        "name": "DeploymentPayload",
+        "kind": "model",
+        "description": "Required API value serialized in the `payload` wire field.",
+        "values": [],
+        "properties": []
+      },
+      {
         "name": "DeploymentProtectionRule",
         "kind": "model",
         "description": "Deployment protection rule",
@@ -384722,13 +384792,6 @@
         ]
       },
       {
-        "name": "FieldsItemSchema",
-        "kind": "model",
-        "description": "A restricted JSON Schema fragment describing the field value accepted by Automation create and update requests.",
-        "values": [],
-        "properties": []
-      },
-      {
         "name": "FileCommit",
         "kind": "model",
         "description": "File Commit",
@@ -384741,6 +384804,26 @@
           {
             "name": "commit",
             "description": "Required object value serialized in the `commit` wire field."
+          }
+        ]
+      },
+      {
+        "name": "ForbiddenGist",
+        "kind": "model",
+        "description": "Typed representation of the `ForbiddenGist` API schema.",
+        "values": [],
+        "properties": [
+          {
+            "name": "block",
+            "description": "Optional object value serialized in the `block` wire field."
+          },
+          {
+            "name": "message",
+            "description": "Optional `string` value serialized in the `message` wire field."
+          },
+          {
+            "name": "documentation_url",
+            "description": "Optional `string` value serialized in the `documentation_url` wire field."
           }
         ]
       },
@@ -387053,6 +387136,13 @@
         ]
       },
       {
+        "name": "IssueLabelsItem",
+        "kind": "model",
+        "description": "Required API value serialized in the `labels[]` wire field.",
+        "values": [],
+        "properties": []
+      },
+      {
         "name": "IssueReference",
         "kind": "model",
         "description": "A minimal reference to an issue linked from a timeline event (e.g. sub-issue, parent-issue, or dependency events).",
@@ -387083,6 +387173,20 @@
             "description": "The type of the referenced issue."
           }
         ]
+      },
+      {
+        "name": "IssuesAddAssigneesRequestAssigneesItem",
+        "kind": "model",
+        "description": "Typed representation of the `IssuesAddAssigneesRequestAssigneesItem` API schema.",
+        "values": [],
+        "properties": []
+      },
+      {
+        "name": "IssuesCreateRequestLabelsItem",
+        "kind": "model",
+        "description": "Typed representation of the `IssuesCreateRequestLabelsItem` API schema.",
+        "values": [],
+        "properties": []
       },
       {
         "name": "IssueSearchResultItem",
@@ -387343,6 +387447,27 @@
             "description": "The time the suggestion was last updated."
           }
         ]
+      },
+      {
+        "name": "IssuesUpdateRequestAssigneesItem",
+        "kind": "model",
+        "description": "Typed representation of the `IssuesUpdateRequestAssigneesItem` API schema.",
+        "values": [],
+        "properties": []
+      },
+      {
+        "name": "IssuesUpdateRequestLabelsItem",
+        "kind": "model",
+        "description": "Typed representation of the `IssuesUpdateRequestLabelsItem` API schema.",
+        "values": [],
+        "properties": []
+      },
+      {
+        "name": "IssuesUpdateRequestType",
+        "kind": "model",
+        "description": "The issue type to associate with this issue. Only users with push access can set the type for issues. Without push access to the repository, type changes are silently dropped.",
+        "values": [],
+        "properties": []
       },
       {
         "name": "IssueType",
@@ -389321,6 +389446,13 @@
         ]
       },
       {
+        "name": "NullableDeploymentPayload",
+        "kind": "model",
+        "description": "Required API value serialized in the `payload` wire field.",
+        "values": [],
+        "properties": []
+      },
+      {
         "name": "NullableGitUser",
         "kind": "model",
         "description": "Metaproperties for Git author/committer information.",
@@ -389678,6 +389810,13 @@
             "description": "The confidence level the agent had when performing this action."
           }
         ]
+      },
+      {
+        "name": "NullableIssueLabelsItem",
+        "kind": "model",
+        "description": "Required API value serialized in the `labels[]` wire field.",
+        "values": [],
+        "properties": []
       },
       {
         "name": "NullableIssueReference",
@@ -394268,7 +394407,7 @@
           },
           {
             "name": "creator",
-            "description": "Required API value serialized in the `creator` wire field."
+            "description": "A GitHub user."
           },
           {
             "name": "created_at",
@@ -394949,34 +395088,6 @@
             "description": "Required object value serialized in the `base` wire field."
           }
         ]
-      },
-      {
-        "name": "PullRequestRequestedReviewersItem",
-        "kind": "model",
-        "description": "Typed representation of the `PullRequestRequestedReviewersItem` API schema.",
-        "values": [],
-        "properties": []
-      },
-      {
-        "name": "PullRequestRequestedReviewersItem2",
-        "kind": "model",
-        "description": "Typed representation of the `PullRequestRequestedReviewersItem2` API schema.",
-        "values": [],
-        "properties": []
-      },
-      {
-        "name": "PullRequestRequestedReviewersItem3",
-        "kind": "model",
-        "description": "Typed representation of the `PullRequestRequestedReviewersItem3` API schema.",
-        "values": [],
-        "properties": []
-      },
-      {
-        "name": "PullRequestRequestedReviewersItem4",
-        "kind": "model",
-        "description": "Typed representation of the `PullRequestRequestedReviewersItem4` API schema.",
-        "values": [],
-        "properties": []
       },
       {
         "name": "PullRequestReview",
@@ -395824,7 +395935,7 @@
           },
           {
             "name": "release",
-            "description": "Required API value serialized in the `release` wire field."
+            "description": "Required object value serialized in the `release` wire field."
           }
         ]
       },
@@ -395959,6 +396070,13 @@
             "description": "Required `date-time`-formatted value serialized in the `updated_at` wire field."
           }
         ]
+      },
+      {
+        "name": "ReposCreateDeploymentRequestPayload",
+        "kind": "model",
+        "description": "Typed representation of the `ReposCreateDeploymentRequestPayload` API schema.",
+        "values": [],
+        "properties": []
       },
       {
         "name": "RepoSearchResultItem",
@@ -398313,6 +398431,13 @@
         ]
       },
       {
+        "name": "ReposUpdateInformationAboutPagesSiteRequestSource",
+        "kind": "model",
+        "description": "Typed representation of the `ReposUpdateInformationAboutPagesSiteRequestSource` API schema.",
+        "values": [],
+        "properties": []
+      },
+      {
         "name": "ReviewComment",
         "kind": "model",
         "description": "Legacy Review Comment",
@@ -398519,13 +398644,6 @@
             "description": "Required object value serialized in the `dismissed_review` wire field."
           }
         ]
-      },
-      {
-        "name": "ReviewersItemReviewer",
-        "kind": "model",
-        "description": "Optional API value serialized in the `reviewer` wire field.",
-        "values": [],
-        "properties": []
       },
       {
         "name": "ReviewRequestedIssueEvent",
@@ -398871,6 +398989,10 @@
           {
             "name": "pull_request",
             "description": "The pull request associated with the rule evaluation."
+          },
+          {
+            "name": "rule_type",
+            "description": "Optional enumerated value serialized in the `rule_type` wire field."
           }
         ]
       },
@@ -398883,6 +399005,10 @@
           {
             "name": "checks",
             "description": "The status checks associated with the rule evaluation."
+          },
+          {
+            "name": "rule_type",
+            "description": "Optional enumerated value serialized in the `rule_type` wire field."
           }
         ]
       },
@@ -400323,6 +400449,26 @@
         ]
       },
       {
+        "name": "ServiceUnavailable",
+        "kind": "model",
+        "description": "Typed representation of the `ServiceUnavailable` API schema.",
+        "values": [],
+        "properties": [
+          {
+            "name": "code",
+            "description": "Optional `string` value serialized in the `code` wire field."
+          },
+          {
+            "name": "message",
+            "description": "Optional `string` value serialized in the `message` wire field."
+          },
+          {
+            "name": "documentation_url",
+            "description": "Optional `string` value serialized in the `documentation_url` wire field."
+          }
+        ]
+      },
+      {
         "name": "ShaPinningRequired",
         "kind": "model",
         "description": "Whether actions must be pinned to a full-length commit SHA.",
@@ -401232,27 +401378,6 @@
             "description": "Required `string` value serialized in the `node_id` wire field."
           }
         ]
-      },
-      {
-        "name": "TasksItemArtifactsItemData",
-        "kind": "model",
-        "description": "Resource data (shape depends on type)",
-        "values": [],
-        "properties": []
-      },
-      {
-        "name": "TasksItemArtifactsItemData2",
-        "kind": "model",
-        "description": "Resource data (shape depends on type)",
-        "values": [],
-        "properties": []
-      },
-      {
-        "name": "TasksItemArtifactsItemData3",
-        "kind": "model",
-        "description": "Resource data (shape depends on type)",
-        "values": [],
-        "properties": []
       },
       {
         "name": "Team",
@@ -405033,6 +405158,13 @@
         ]
       },
       {
+        "name": "WebhookDeploymentCreatedDeploymentPayload",
+        "kind": "model",
+        "description": "Required API value serialized in the `payload` wire field.",
+        "values": [],
+        "properties": []
+      },
+      {
         "name": "WebhookDeploymentProtectionRuleRequested",
         "kind": "model",
         "description": "Typed representation of the `WebhookDeploymentProtectionRuleRequested` API schema.",
@@ -405315,6 +405447,13 @@
             "description": "Optional object value serialized in the `workflow_run` wire field."
           }
         ]
+      },
+      {
+        "name": "WebhookDeploymentStatusCreatedDeploymentPayload",
+        "kind": "model",
+        "description": "Required API value serialized in the `payload` wire field.",
+        "values": [],
+        "properties": []
       },
       {
         "name": "WebhookDiscussionAnswered",
@@ -408889,6 +409028,20 @@
         ]
       },
       {
+        "name": "WebhookPackagePublishedPackagePackageVersionBody",
+        "kind": "model",
+        "description": "Optional API value serialized in the `body` wire field.",
+        "values": [],
+        "properties": []
+      },
+      {
+        "name": "WebhookPackagePublishedPackagePackageVersionNugetMetadataItemValue",
+        "kind": "model",
+        "description": "Optional API value serialized in the `value` wire field.",
+        "values": [],
+        "properties": []
+      },
+      {
         "name": "WebhookPackageUpdated",
         "kind": "model",
         "description": "Typed representation of the `WebhookPackageUpdated` API schema.",
@@ -409312,7 +409465,7 @@
           },
           {
             "name": "project_card",
-            "description": "Required API value serialized in the `project_card` wire field."
+            "description": "Required object value serialized in the `project_card` wire field."
           },
           {
             "name": "repository",
@@ -411588,6 +411741,62 @@
             "description": "A GitHub user."
           }
         ]
+      },
+      {
+        "name": "WebhookRegistryPackagePublishedRegistryPackagePackageVersionBody",
+        "kind": "model",
+        "description": "Optional API value serialized in the `body` wire field.",
+        "values": [],
+        "properties": []
+      },
+      {
+        "name": "WebhookRegistryPackagePublishedRegistryPackagePackageVersionNpmMetadataAuthor",
+        "kind": "model",
+        "description": "Optional API value serialized in the `author` wire field.",
+        "values": [],
+        "properties": []
+      },
+      {
+        "name": "WebhookRegistryPackagePublishedRegistryPackagePackageVersionNpmMetadataBugs",
+        "kind": "model",
+        "description": "Optional API value serialized in the `bugs` wire field.",
+        "values": [],
+        "properties": []
+      },
+      {
+        "name": "WebhookRegistryPackagePublishedRegistryPackagePackageVersionNpmMetadataDirectories",
+        "kind": "model",
+        "description": "Optional API value serialized in the `directories` wire field.",
+        "values": [],
+        "properties": []
+      },
+      {
+        "name": "WebhookRegistryPackagePublishedRegistryPackagePackageVersionNpmMetadataDist",
+        "kind": "model",
+        "description": "Optional API value serialized in the `dist` wire field.",
+        "values": [],
+        "properties": []
+      },
+      {
+        "name": "WebhookRegistryPackagePublishedRegistryPackagePackageVersionNpmMetadataRepository",
+        "kind": "model",
+        "description": "Optional API value serialized in the `repository` wire field.",
+        "values": [],
+        "properties": []
+      },
+      {
+        "name": "WebhookRegistryPackagePublishedRegistryPackagePackageVersionNugetMetadataItemId",
+        "kind": "model",
+        "description": "Optional API value serialized in the `id` wire field.",
+        "values": [],
+        "properties": []
+      },
+      {
+        "name": "WebhookRegistryPackagePublishedRegistryPackagePackageVersionNugetMetadataItemValue",
+        "kind": "model",
+        "description": "Optional API value serialized in the `value` wire field.",
+        "values": [],
+        "properties": []
       },
       {
         "name": "WebhookRegistryPackageUpdated",
@@ -416606,7 +416815,7 @@
           },
           {
             "name": "workflow_job",
-            "description": "Required API value serialized in the `workflow_job` wire field."
+            "description": "Required object value serialized in the `workflow_job` wire field."
           },
           {
             "name": "deployment",
@@ -416646,7 +416855,7 @@
           },
           {
             "name": "workflow_job",
-            "description": "Required API value serialized in the `workflow_job` wire field."
+            "description": "Required object value serialized in the `workflow_job` wire field."
           },
           {
             "name": "deployment",

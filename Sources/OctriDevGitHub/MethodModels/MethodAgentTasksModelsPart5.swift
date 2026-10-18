@@ -9,66 +9,6 @@ import Foundation
 
 // Canonical agentTasks operation model declarations
 /// A single validation error
-public struct AgentTasksListTasksForRepoResponseErrorsItem: Codable {
-    /// Machine-readable error code
-    public var code: AgentTasksListTasksForRepoResponseErrorsItemCode
-    /// Human-readable message (populated when code is "custom")
-    public var message: String?
-
-    enum CodingKeys: String, CodingKey {
-        case code
-        case message
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension AgentTasksListTasksForRepoResponseErrorsItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.code) else {
-            throw SdkValidationError(field: "code", code: "required", message: "Validation failed for 'code': value is required")
-        }
-        self.code = try container.sdkDecodeRequired(.code)
-        self.message = try container.sdkDecodeIfPresent(.message)
-    }
-}
-
-extension AgentTasksListTasksForRepoResponseErrorsItem {
-    public init(code: AgentTasksListTasksForRepoResponseErrorsItemCode, message: String? = nil) {
-        (self.code, self.message) = (code, message)
-    }
-}
-
-/// The owner of the repository
-public struct AgentTasksListTasksForRepoResponseTasksItemOwner: Codable {
-    /// The unique identifier of the user
-    public var id: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-    }
-
-    init() {
-        self.id = nil
-    }
-}
-
-extension AgentTasksListTasksForRepoResponseTasksItemOwner {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeIfPresent(.id)
-    }
-}
-
-extension AgentTasksListTasksForRepoResponseTasksItemOwner {
-    public init(id: Int? = nil) {
-        self.init()
-        self.id = id
-    }
-}
-
-/// A single validation error
 public struct AgentTasksListTasksForRepoResponseErrorsItemX180134e7: Codable {
     /// Machine-readable error code
     public var code: AgentTasksListTasksForRepoResponseErrorsItemCodeX99fc27bc
@@ -320,7 +260,7 @@ public struct AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItem: Codable
     /// Type of artifact. Available Values: `pull`, `branch`.
     public var type: AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemType
     /// Resource data (shape depends on type)
-    public var data: ArtifactsItemData2
+    public var data: AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemData
 
     enum CodingKeys: String, CodingKey {
         case provider
@@ -350,7 +290,7 @@ extension AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItem {
 }
 
 extension AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItem {
-    public init(provider: AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemProvider, type: AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemType, data: ArtifactsItemData2) {
+    public init(provider: AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemProvider, type: AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemType, data: AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemData) {
         (self.provider, self.type) = (provider, type)
         self.data = data
     }
@@ -515,5 +455,46 @@ extension AgentTasksGetTaskByRepoAndIdResponse {
         if let value = self.updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
+    }
+}
+
+/// Structured error response following GitHub REST API conventions. For 422 Unprocessable Entity the errors array
+/// contains validation details; for other error status codes only message and documentation_url are returned.
+public struct AgentTasksListTasksForRepoResponseX339e5b00: Codable {
+    /// Summary message (e.g. "Validation Failed", "Not Found")
+    public var message: String
+    /// URL to relevant API documentation
+    public var documentationUrl: String
+    /// List of validation errors (present only for 422 responses)
+    public var errors: [AgentTasksListTasksForRepoResponseErrorsItemX10a76a3f]?
+
+    enum CodingKeys: String, CodingKey {
+        case message
+        case documentationUrl = "documentation_url"
+        case errors
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension AgentTasksListTasksForRepoResponseX339e5b00 {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.message) else {
+            throw SdkValidationError(field: "message", code: "required", message: "Validation failed for 'message': value is required")
+        }
+        guard container.contains(.documentationUrl) else {
+            throw SdkValidationError(field: "documentation_url", code: "required", message: "Validation failed for 'documentation_url': value is required")
+        }
+        self.message = try container.sdkDecodeRequired(.message)
+        self.documentationUrl = try container.sdkDecodeRequired(.documentationUrl)
+        self.errors = try container.sdkDecodeIfPresent(.errors)
+    }
+}
+
+extension AgentTasksListTasksForRepoResponseX339e5b00 {
+    public init(message: String, documentationUrl: String, errors: [AgentTasksListTasksForRepoResponseErrorsItemX10a76a3f]? = nil) {
+        (self.message, self.documentationUrl) = (message, documentationUrl)
+        self.errors = errors
     }
 }

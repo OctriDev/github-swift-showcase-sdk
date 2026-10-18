@@ -4,14 +4,6 @@
 import Foundation
 
 // WebhookDeploymentCreated domain models
-extension WebhookDeploymentCreatedWorkflowRunPullRequestsItemBaseRepo {
-    public init(id: Int, name: String, url: String) throws {
-        (self.id, self.name) = (id, name)
-        self.url = url
-            try sdkValidateUri("url", self.url)
-    }
-}
-
 /// The set of permissions for the GitHub app
 public struct WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermissions: Codable {
     /// Optional enumerated value serialized in the `actions` wire field.
@@ -456,5 +448,15 @@ extension WebhookDeploymentCreatedWorkflowRunRepository {
         sdkSet8(`private`, pullsUrl, releasesUrl, stargazersUrl, statusesUrl)
         sdkSet9(subscribersUrl, subscriptionUrl, tagsUrl, teamsUrl, treesUrl)
         sdkSet10(url)
+    }
+}
+
+extension WebhookDeploymentCreatedWorkflowRunRepository {
+    mutating func sdkSet1(_ archiveUrl: String?, _ assigneesUrl: String?, _ blobsUrl: String?, _ branchesUrl: String?, _ collaboratorsUrl: String?) {
+        self.archiveUrl = archiveUrl
+        self.assigneesUrl = assigneesUrl
+        self.blobsUrl = blobsUrl
+        self.branchesUrl = branchesUrl
+        self.collaboratorsUrl = collaboratorsUrl
     }
 }

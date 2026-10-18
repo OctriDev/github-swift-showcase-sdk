@@ -4,6 +4,126 @@
 import Foundation
 
 // ReposRepositoryRule domain models
+extension RepositoryRuleRequiredDeploymentsParameters {
+    public init(requiredDeploymentEnvironments: [String]) {
+        self.requiredDeploymentEnvironments = requiredDeploymentEnvironments
+    }
+}
+
+public struct RepositoryRuleDetailedVariant12: Codable {
+    /// Required enumerated value serialized in the `type` wire field.
+    public var type: RepositoryRuleCommitterEmailPatternType
+    /// Optional object value serialized in the `parameters` wire field.
+    public var parameters: RepositoryRuleCommitterEmailPatternParameters?
+    /// The type of source for the ruleset that includes this rule.
+    public var rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType?
+    /// The name of the source of the ruleset that includes this rule.
+    public var rulesetSource: String?
+    /// The ID of the ruleset that includes this rule.
+    public var rulesetId: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case type
+        case parameters
+        case rulesetSourceType = "ruleset_source_type"
+        case rulesetSource = "ruleset_source"
+        case rulesetId = "ruleset_id"
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension RepositoryRuleDetailedVariant12 {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.type) else {
+            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
+        }
+        self.type = try container.sdkDecodeRequired(.type)
+        self.parameters = try container.sdkDecodeIfPresent(.parameters)
+        self.rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
+        self.rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
+        self.rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
+            try sdkValidateRawEnum("type", self.type, RepositoryRuleCommitterEmailPatternType.allCases.map(\.rawValue))
+    }
+}
+
+extension RepositoryRuleDetailedVariant12 {
+    public init(type: RepositoryRuleCommitterEmailPatternType, parameters: RepositoryRuleCommitterEmailPatternParameters? = nil, rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil, rulesetSource: String? = nil, rulesetId: Int? = nil) throws {
+        (self.type, self.parameters) = (type, parameters)
+        (self.rulesetSourceType, self.rulesetSource) = (rulesetSourceType, rulesetSource)
+        self.rulesetId = rulesetId
+            try sdkValidateRawEnum("type", self.type, RepositoryRuleCommitterEmailPatternType.allCases.map(\.rawValue))
+    }
+}
+
+public struct RepositoryRuleDetailedVariant22: Codable {
+    /// Required enumerated value serialized in the `type` wire field.
+    public var type: RepositoryRuleMaxFilePathLengthType
+    /// Optional object value serialized in the `parameters` wire field.
+    public var parameters: RepositoryRuleMaxFilePathLengthParameters?
+    /// The type of source for the ruleset that includes this rule.
+    public var rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType?
+    /// The name of the source of the ruleset that includes this rule.
+    public var rulesetSource: String?
+    /// The ID of the ruleset that includes this rule.
+    public var rulesetId: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case type
+        case parameters
+        case rulesetSourceType = "ruleset_source_type"
+        case rulesetSource = "ruleset_source"
+        case rulesetId = "ruleset_id"
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension RepositoryRuleDetailedVariant22 {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.type) else {
+            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
+        }
+        self.type = try container.sdkDecodeRequired(.type)
+        self.parameters = try container.sdkDecodeIfPresent(.parameters)
+        self.rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
+        self.rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
+        self.rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
+            try sdkValidateRawEnum("type", self.type, RepositoryRuleMaxFilePathLengthType.allCases.map(\.rawValue))
+    }
+}
+
+extension RepositoryRuleDetailedVariant22 {
+    public init(type: RepositoryRuleMaxFilePathLengthType, parameters: RepositoryRuleMaxFilePathLengthParameters? = nil, rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil, rulesetSource: String? = nil, rulesetId: Int? = nil) throws {
+        (self.type, self.parameters) = (type, parameters)
+        (self.rulesetSourceType, self.rulesetSource) = (rulesetSourceType, rulesetSource)
+        self.rulesetId = rulesetId
+            try sdkValidateRawEnum("type", self.type, RepositoryRuleMaxFilePathLengthType.allCases.map(\.rawValue))
+    }
+}
+
+public struct RepositoryRuleDetailedVariant9: Codable {
+    /// Required enumerated value serialized in the `type` wire field.
+    public var type: RepositoryRuleNonFastForwardType
+    /// The type of source for the ruleset that includes this rule.
+    public var rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType?
+    /// The name of the source of the ruleset that includes this rule.
+    public var rulesetSource: String?
+    /// The ID of the ruleset that includes this rule.
+    public var rulesetId: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case type
+        case rulesetSourceType = "ruleset_source_type"
+        case rulesetSource = "ruleset_source"
+        case rulesetId = "ruleset_id"
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
 extension RepositoryRuleDetailedVariant9 {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -352,128 +472,5 @@ extension RepositoryRuleDeletion {
     public init(type: RepositoryRuleDeletionType) throws {
         self.type = type
             try sdkValidateRawEnum("type", self.type, RepositoryRuleDeletionType.allCases.map(\.rawValue))
-    }
-}
-
-public struct RepositoryRuleDetailedVariant5: Codable {
-    /// Required enumerated value serialized in the `type` wire field.
-    public var type: RepositoryRuleRequiredDeploymentsType
-    /// Optional object value serialized in the `parameters` wire field.
-    public var parameters: RepositoryRuleRequiredDeploymentsParameters?
-    /// The type of source for the ruleset that includes this rule.
-    public var rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType?
-    /// The name of the source of the ruleset that includes this rule.
-    public var rulesetSource: String?
-    /// The ID of the ruleset that includes this rule.
-    public var rulesetId: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case type
-        case parameters
-        case rulesetSourceType = "ruleset_source_type"
-        case rulesetSource = "ruleset_source"
-        case rulesetId = "ruleset_id"
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryRuleDetailedVariant5 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        self.type = try container.sdkDecodeRequired(.type)
-        self.parameters = try container.sdkDecodeIfPresent(.parameters)
-        self.rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
-        self.rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
-        self.rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleRequiredDeploymentsType.allCases.map(\.rawValue))
-    }
-}
-
-extension RepositoryRuleDetailedVariant5 {
-    public init(type: RepositoryRuleRequiredDeploymentsType, parameters: RepositoryRuleRequiredDeploymentsParameters? = nil, rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil, rulesetSource: String? = nil, rulesetId: Int? = nil) throws {
-        (self.type, self.parameters) = (type, parameters)
-        (self.rulesetSourceType, self.rulesetSource) = (rulesetSourceType, rulesetSource)
-        self.rulesetId = rulesetId
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleRequiredDeploymentsType.allCases.map(\.rawValue))
-    }
-}
-
-/// Parameters to be used for the branch_name_pattern rule
-public struct RepositoryRuleBranchNamePattern: Codable {
-    /// Required enumerated value serialized in the `type` wire field.
-    public var type: RepositoryRuleBranchNamePatternType
-    /// Optional object value serialized in the `parameters` wire field.
-    public var parameters: RepositoryRuleBranchNamePatternParameters?
-
-    enum CodingKeys: String, CodingKey {
-        case type
-        case parameters
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryRuleBranchNamePattern {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        self.type = try container.sdkDecodeRequired(.type)
-        self.parameters = try container.sdkDecodeIfPresent(.parameters)
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleBranchNamePatternType.allCases.map(\.rawValue))
-    }
-}
-
-extension RepositoryRuleBranchNamePattern {
-    public init(type: RepositoryRuleBranchNamePatternType, parameters: RepositoryRuleBranchNamePatternParameters? = nil) throws {
-        (self.type, self.parameters) = (type, parameters)
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleBranchNamePatternType.allCases.map(\.rawValue))
-    }
-}
-
-/// Optional object value serialized in the `parameters` wire field.
-public struct RepositoryRuleRequiredStatusChecksParameters: Codable {
-    /// Status checks that are required.
-    public var requiredStatusChecks: [RepositoryRuleParamsStatusCheckConfiguration]
-    /// Whether pull requests targeting a matching branch must be tested with the latest code. This setting will not
-    /// take effect unless at least one status check is enabled.
-    public var strictRequiredStatusChecksPolicy: Bool
-    /// Allow repositories and branches to be created if a check would otherwise prohibit it.
-    public var doNotEnforceOnCreate: Bool?
-
-    enum CodingKeys: String, CodingKey {
-        case requiredStatusChecks = "required_status_checks"
-        case strictRequiredStatusChecksPolicy = "strict_required_status_checks_policy"
-        case doNotEnforceOnCreate = "do_not_enforce_on_create"
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryRuleRequiredStatusChecksParameters {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.requiredStatusChecks) else {
-            throw SdkValidationError(field: "required_status_checks", code: "required", message: "Validation failed for 'required_status_checks': value is required")
-        }
-        guard container.contains(.strictRequiredStatusChecksPolicy) else {
-            throw SdkValidationError(field: "strict_required_status_checks_policy", code: "required", message: "Validation failed for 'strict_required_status_checks_policy': value is required")
-        }
-        self.requiredStatusChecks = try container.sdkDecodeRequired(.requiredStatusChecks)
-        self.strictRequiredStatusChecksPolicy = try container.sdkDecodeRequired(.strictRequiredStatusChecksPolicy)
-        self.doNotEnforceOnCreate = try container.sdkDecodeIfPresent(.doNotEnforceOnCreate)
-    }
-}
-
-extension RepositoryRuleRequiredStatusChecksParameters {
-    public init(requiredStatusChecks: [RepositoryRuleParamsStatusCheckConfiguration], strictRequiredStatusChecksPolicy: Bool, doNotEnforceOnCreate: Bool? = nil) {
-        self.requiredStatusChecks = requiredStatusChecks
-        self.strictRequiredStatusChecksPolicy = strictRequiredStatusChecksPolicy
-        self.doNotEnforceOnCreate = doNotEnforceOnCreate
     }
 }

@@ -42,6 +42,6 @@ extension CodeScanningMethods {
     public static func codeScanningUpdateDefaultSetup(config: ClientConfig, options: CodeScanningUpdateDefaultSetupOptions, requestOptions: RequestOptions? = nil) async throws -> EmptyObject {
         let requestBody = CodeScanningUpdateDefaultSetupRequestBody(options: options)
 
-        return try (await sdkRequest("PATCH", ["/repos/", sdkEncodePathSegment(sdkWireString(options.owner)), "/", sdkEncodePathSegment(sdkWireString(options.repo)), "/code-scanning/default-setup"].joined(), config: config, body: requestBody, decoder: .json, operationId: "codeScanningUpdateDefaultSetup", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "409": BasicError.self, "422": BasicError.self])).data
+        return try (await sdkRequest("PATCH", ["/repos/", sdkEncodePathSegment(sdkWireString(options.owner)), "/", sdkEncodePathSegment(sdkWireString(options.repo)), "/code-scanning/default-setup"].joined(), config: config, body: requestBody, decoder: .json, operationId: "codeScanningUpdateDefaultSetup", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "409": BasicError.self, "422": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

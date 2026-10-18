@@ -6,6 +6,37 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
+struct SecurityAdvisoriesCreatePrivateVulnerabilityReportRequestBody: Encodable {
+    let summary: String
+    let description: String
+    var vulnerabilities: SdkOptional<[PrivateVulnerabilityReportCreateVulnerabilitiesItem]>?
+    var cweIds: SdkOptional<[String]>?
+    var severity: SdkOptional<PrivateVulnerabilityReportCreateSeverity>?
+    var cvssVectorString: SdkOptional<String>?
+    var startPrivateFork: Bool?
+
+    func encode(to encoder: Encoder) throws {
+        var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
+        try keyedContainer.encode(self.summary, forKey: SdkCodingKey("summary"))
+        try keyedContainer.encode(self.description, forKey: SdkCodingKey("description"))
+        try keyedContainer.encodeIfPresent(self.vulnerabilities, forKey: SdkCodingKey("vulnerabilities"))
+        try keyedContainer.encodeIfPresent(self.cweIds, forKey: SdkCodingKey("cwe_ids"))
+        try keyedContainer.encodeIfPresent(self.severity, forKey: SdkCodingKey("severity"))
+        try keyedContainer.encodeIfPresent(self.cvssVectorString, forKey: SdkCodingKey("cvss_vector_string"))
+        try keyedContainer.encodeIfPresent(self.startPrivateFork, forKey: SdkCodingKey("start_private_fork"))
+    }
+
+    init(options: SecurityAdvisoriesMethods.SecurityAdvisoriesCreatePrivateVulnerabilityReportOptions) {
+        self.summary = options.summary
+        self.description = options.description
+        self.vulnerabilities = options.vulnerabilities
+        self.cweIds = options.cweIds
+        self.severity = options.severity
+        self.cvssVectorString = options.cvssVectorString
+        self.startPrivateFork = options.startPrivateFork
+    }
+}
+
 struct SecurityAdvisoriesUpdateRepositoryAdvisoryRequestBody: Encodable {
     var summary: String?
     var description: String?
@@ -185,32 +216,5 @@ struct AppsCreateInstallationAccessTokenRequestBody: Encodable {
         try keyedContainer.encodeIfPresent(self.repositories, forKey: SdkCodingKey("repositories"))
         try keyedContainer.encodeIfPresent(self.repositoryIds, forKey: SdkCodingKey("repository_ids"))
         try keyedContainer.encodeIfPresent(self.permissions, forKey: SdkCodingKey("permissions"))
-    }
-}
-
-struct AppsDeleteAuthorizationRequestBody: Encodable {
-    let accessToken: String
-
-    func encode(to encoder: Encoder) throws {
-        var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.accessToken, forKey: SdkCodingKey("access_token"))
-    }
-}
-
-struct AppsCheckTokenRequestBody: Encodable {
-    let accessToken: String
-
-    func encode(to encoder: Encoder) throws {
-        var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.accessToken, forKey: SdkCodingKey("access_token"))
-    }
-}
-
-struct AppsResetTokenRequestBody: Encodable {
-    let accessToken: String
-
-    func encode(to encoder: Encoder) throws {
-        var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.accessToken, forKey: SdkCodingKey("access_token"))
     }
 }

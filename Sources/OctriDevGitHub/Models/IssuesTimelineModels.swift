@@ -46,6 +46,13 @@ extension TimelineIssueEvents: Codable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
+            if let value = Self.decodeLossless2(from: container, raw) { self = value; return }
+            if let value = Self.decodeLossless3(from: container, raw) { self = value; return }
+            if let value = Self.decodeLossless4(from: container, raw) { self = value; return }
+            if let value = Self.decodeLossless5(from: container, raw) { self = value; return }
+        }
         if let value = Self.decodeGroup1(from: container) { self = value; return }
         if let value = Self.decodeGroup2(from: container) { self = value; return }
         if let value = Self.decodeGroup3(from: container) { self = value; return }
@@ -56,6 +63,141 @@ extension TimelineIssueEvents: Codable {
         if try encodeGroup1(to: encoder) { return }
         if try encodeGroup2(to: encoder) { return }
         if try encodeGroup3(to: encoder) { return }
+    }
+}
+
+extension TimelineIssueEvents {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(LabeledIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .labeledIssueEvent(value)
+        }
+        if let value = try? container.decode(UnlabeledIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .unlabeledIssueEvent(value)
+        }
+        if let value = try? container.decode(MilestonedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .milestonedIssueEvent(value)
+        }
+        if let value = try? container.decode(DemilestonedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .demilestonedIssueEvent(value)
+        }
+        if let value = try? container.decode(RenamedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .renamedIssueEvent(value)
+        }
+        if let value = try? container.decode(ReviewRequestedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .reviewRequestedIssueEvent(value)
+        }
+        if let value = try? container.decode(ReviewRequestRemovedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .reviewRequestRemovedIssueEvent(value)
+        }
+        if let value = try? container.decode(ReviewDismissedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .reviewDismissedIssueEvent(value)
+        }
+        return nil
+    }
+}
+
+extension TimelineIssueEvents {
+    static func decodeLossless2(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(LockedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .lockedIssueEvent(value)
+        }
+        if let value = try? container.decode(AddedToProjectIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .addedToProjectIssueEvent(value)
+        }
+        if let value = try? container.decode(MovedColumnInProjectIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .movedColumnInProjectIssueEvent(value)
+        }
+        if let value = try? container.decode(RemovedFromProjectIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .removedFromProjectIssueEvent(value)
+        }
+        if let value = try? container.decode(ConvertedNoteToIssueIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .convertedNoteToIssueIssueEvent(value)
+        }
+        if let value = try? container.decode(TimelineCommentEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .timelineCommentEvent(value)
+        }
+        if let value = try? container.decode(TimelineCrossReferencedEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .timelineCrossReferencedEvent(value)
+        }
+        if let value = try? container.decode(TimelineCommittedEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .timelineCommittedEvent(value)
+        }
+        return nil
+    }
+}
+
+extension TimelineIssueEvents {
+    static func decodeLossless3(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(TimelineReviewedEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .timelineReviewedEvent(value)
+        }
+        if let value = try? container.decode(TimelineLineCommentedEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .timelineLineCommentedEvent(value)
+        }
+        if let value = try? container.decode(TimelineCommitCommentedEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .timelineCommitCommentedEvent(value)
+        }
+        if let value = try? container.decode(TimelineAssignedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .timelineAssignedIssueEvent(value)
+        }
+        if let value = try? container.decode(TimelineUnassignedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .timelineUnassignedIssueEvent(value)
+        }
+        if let value = try? container.decode(StateChangeIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .stateChangeIssueEvent(value)
+        }
+        if let value = try? container.decode(IssueTypeAddedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .issueTypeAddedIssueEvent(value)
+        }
+        if let value = try? container.decode(IssueTypeRemovedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .issueTypeRemovedIssueEvent(value)
+        }
+        return nil
+    }
+}
+
+extension TimelineIssueEvents {
+    static func decodeLossless4(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(IssueTypeChangedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .issueTypeChangedIssueEvent(value)
+        }
+        if let value = try? container.decode(SubIssueAddedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .subIssueAddedIssueEvent(value)
+        }
+        if let value = try? container.decode(SubIssueRemovedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .subIssueRemovedIssueEvent(value)
+        }
+        if let value = try? container.decode(ParentIssueAddedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .parentIssueAddedIssueEvent(value)
+        }
+        if let value = try? container.decode(ParentIssueRemovedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .parentIssueRemovedIssueEvent(value)
+        }
+        if let value = try? container.decode(BlockedByAddedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .blockedByAddedIssueEvent(value)
+        }
+        if let value = try? container.decode(BlockedByRemovedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .blockedByRemovedIssueEvent(value)
+        }
+        if let value = try? container.decode(BlockingAddedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .blockingAddedIssueEvent(value)
+        }
+        return nil
+    }
+}
+
+extension TimelineIssueEvents {
+    static func decodeLossless5(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(BlockingRemovedIssueEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .blockingRemovedIssueEvent(value)
+        }
+        if let value = try? container.decode(TimelineConnectedEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .timelineConnectedEvent(value)
+        }
+        if let value = try? container.decode(TimelineDisconnectedEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .timelineDisconnectedEvent(value)
+        }
+        return nil
     }
 }
 
@@ -287,134 +429,4 @@ public struct TimelineCommittedEventVerification: Codable {
     }
 
     private init(sdkCopy value: Self) { self = value }
-}
-
-extension TimelineCommittedEventVerification {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.verified) else {
-            throw SdkValidationError(field: "verified", code: "required", message: "Validation failed for 'verified': value is required")
-        }
-        guard container.contains(.reason) else {
-            throw SdkValidationError(field: "reason", code: "required", message: "Validation failed for 'reason': value is required")
-        }
-        guard container.contains(.signature) else {
-            throw SdkValidationError(field: "signature", code: "required", message: "Validation failed for 'signature': value is required")
-        }
-        guard container.contains(.payload) else {
-            throw SdkValidationError(field: "payload", code: "required", message: "Validation failed for 'payload': value is required")
-        }
-        guard container.contains(.verifiedAt) else {
-            throw SdkValidationError(field: "verified_at", code: "required", message: "Validation failed for 'verified_at': value is required")
-        }
-        self.verified = try container.sdkDecodeRequired(.verified)
-        self.reason = try container.sdkDecodeRequired(.reason)
-        self.signature = try container.sdkDecodeNullable(.signature)
-        self.payload = try container.sdkDecodeNullable(.payload)
-        self.verifiedAt = try container.sdkDecodeNullable(.verifiedAt)
-    }
-}
-
-extension TimelineCommittedEventVerification {
-    public init(verified: Bool, reason: String, signature: String?, payload: String?, verifiedAt: String?) {
-        (self.verified, self.reason) = (verified, reason)
-        (self.signature, self.payload) = (signature, payload)
-        self.verifiedAt = verifiedAt
-    }
-}
-
-/// Timeline Cross Referenced Event
-public struct TimelineCrossReferencedEvent: Codable {
-    /// Required `string` value serialized in the `event` wire field.
-    public var event: String
-    /// Required `date-time`-formatted value serialized in the `created_at` wire field.
-    public var createdAt: Date
-    /// Required `date-time`-formatted value serialized in the `updated_at` wire field.
-    public var updatedAt: Date
-    /// Required object value serialized in the `source` wire field.
-    public var source: TimelineCrossReferencedEventSource
-    /// A GitHub user.
-    public var actor: SimpleUser?
-
-    enum CodingKeys: String, CodingKey {
-        case event
-        case createdAt = "created_at"
-        case updatedAt = "updated_at"
-        case source
-        case actor
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension TimelineCrossReferencedEvent {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.event) else {
-            throw SdkValidationError(field: "event", code: "required", message: "Validation failed for 'event': value is required")
-        }
-        guard container.contains(.createdAt) else {
-            throw SdkValidationError(field: "created_at", code: "required", message: "Validation failed for 'created_at': value is required")
-        }
-        guard container.contains(.updatedAt) else {
-            throw SdkValidationError(field: "updated_at", code: "required", message: "Validation failed for 'updated_at': value is required")
-        }
-        guard container.contains(.source) else {
-            throw SdkValidationError(field: "source", code: "required", message: "Validation failed for 'source': value is required")
-        }
-        self.event = try container.sdkDecodeRequired(.event)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        self.source = try container.sdkDecodeRequired(.source)
-        self.actor = try container.sdkDecodeIfPresent(.actor)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-    }
-}
-
-extension TimelineCrossReferencedEvent {
-    public init(event: String, createdAt: Date, updatedAt: Date, source: TimelineCrossReferencedEventSource, actor: SimpleUser? = nil) throws {
-        (self.event, self.createdAt) = (event, createdAt)
-        (self.updatedAt, self.source) = (updatedAt, source)
-        self.actor = actor
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-    }
-}
-
-/// Timeline Line Commented Event
-public struct TimelineLineCommentedEvent: Codable {
-    /// Optional `string` value serialized in the `event` wire field.
-    public var event: String?
-    /// Optional `string` value serialized in the `node_id` wire field.
-    public var nodeId: String?
-    /// Optional array value serialized in the `comments` wire field.
-    public var comments: [PullRequestReviewComment]?
-
-    enum CodingKeys: String, CodingKey {
-        case event
-        case nodeId = "node_id"
-        case comments
-    }
-
-    init() {
-        (self.event, self.nodeId, self.comments) = (nil, nil, nil)
-    }
-}
-
-extension TimelineLineCommentedEvent {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.event = try container.sdkDecodeIfPresent(.event)
-        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        self.comments = try container.sdkDecodeIfPresent(.comments)
-    }
-}
-
-extension TimelineLineCommentedEvent {
-    public init(event: String? = nil, nodeId: String? = nil, comments: [PullRequestReviewComment]? = nil) {
-        self.init()
-        (self.event, self.nodeId) = (event, nodeId)
-        self.comments = comments
-    }
 }

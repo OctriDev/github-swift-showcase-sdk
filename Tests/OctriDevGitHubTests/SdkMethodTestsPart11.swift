@@ -6,104 +6,6 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testActionsSetPrivateRepoForkPrWorkflowsSettingsOrganizationActioXaa863b2ecfReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        _ = try await client.actions.setPrivateRepoForkPrWorkflowsSettingsOrganization(
-            org: decoded("\"org\""),
-            runWorkflowsFromForkPullRequests: decoded("true"),
-            sendWriteTokensToWorkflows: decoded("false"),
-            sendSecretsAndVariables: decoded("false"),
-            requireApprovalForForkPrWorkflows: decoded("true")
-        )
-        XCTAssertTrue(true)
-    }
-
-    func testActionsSetPrivateRepoForkPrWorkflowsSettingsOrganizationActioX8158c4bf4eReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture239Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.actions.setPrivateRepoForkPrWorkflowsSettingsOrganization(
-            org: decoded("\"org\""),
-            runWorkflowsFromForkPullRequests: decoded("true"),
-            sendWriteTokensToWorkflows: decoded("false"),
-            sendSecretsAndVariables: decoded("false"),
-            requireApprovalForForkPrWorkflows: decoded("true")
-        )
-            XCTFail("actionsSetPrivateRepoForkPrWorkflowsSettingsOrganization did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 403)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "actionsSetPrivateRepoForkPrWorkflowsSettingsOrganization decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "actionsSetPrivateRepoForkPrWorkflowsSettingsOrganization decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testActionsSetPrivateRepoForkPrWorkflowsSettingsRepositoryActionsX9400d5d241ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        _ = try await client.actions.setPrivateRepoForkPrWorkflowsSettingsRepository(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            runWorkflowsFromForkPullRequests: decoded("true"),
-            sendWriteTokensToWorkflows: decoded("false"),
-            sendSecretsAndVariables: decoded("false"),
-            requireApprovalForForkPrWorkflows: decoded("true")
-        )
-        XCTAssertTrue(true)
-    }
-
-    func testActionsSetPrivateRepoForkPrWorkflowsSettingsRepositoryActionsX71c5bd3e43ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture241Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.actions.setPrivateRepoForkPrWorkflowsSettingsRepository(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            runWorkflowsFromForkPullRequests: decoded("true"),
-            sendWriteTokensToWorkflows: decoded("false"),
-            sendSecretsAndVariables: decoded("false"),
-            requireApprovalForForkPrWorkflows: decoded("true")
-        )
-            XCTFail("actionsSetPrivateRepoForkPrWorkflowsSettingsRepository did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 404)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "actionsSetPrivateRepoForkPrWorkflowsSettingsRepository decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "actionsSetPrivateRepoForkPrWorkflowsSettingsRepository decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
     func testActionsSetRepoAccessToSelfHostedRunnerGroupInOrgActionsSetRepX82c83874b2ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
@@ -181,17 +83,16 @@ extension SdkMethodTests {
             org: decoded("\"org\""),
             selectedRepositoryIds: decoded("[1,2,3]")
         )
-            XCTFail("actionsSetSelectedRepositoriesSelfHostedRunnersOrganization did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "actionsSetSelectedRepositoriesSelfHostedRunnersOrganization decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "actionsSetSelectedRepositoriesSelfHostedRunnersOrganization decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
@@ -236,17 +137,16 @@ extension SdkMethodTests {
             org: decoded("\"org\""),
             enabledRepositories: decoded("\"all\"")
         )
-            XCTFail("actionsSetSelfHostedRunnersPermissionsOrganization did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "actionsSetSelfHostedRunnersPermissionsOrganization decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "actionsSetSelfHostedRunnersPermissionsOrganization decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
@@ -300,10 +200,10 @@ extension SdkMethodTests {
             _ = try await client.actions.updateHostedRunnerForOrg(
             options: options
         )
-            XCTFail("actionsUpdateHostedRunnerForOrg decoded a body its schema refuses")
+            XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
-            XCTFail("actionsUpdateHostedRunnerForOrg refused with \(error), not SdkResponseDecodeError")
+            XCTFail("refused with \(error), not SdkResponseDecodeError")
         }
         XCTAssertTrue(true)
     }
@@ -327,8 +227,7 @@ extension SdkMethodTests {
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "actionsUpdateOrgActionsPolicy decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
@@ -350,17 +249,16 @@ extension SdkMethodTests {
             conditions: decoded("null"),
             rules: decoded("null")
         )
-            XCTFail("actionsUpdateOrgActionsPolicy did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "actionsUpdateOrgActionsPolicy decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "actionsUpdateOrgActionsPolicy decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
@@ -402,8 +300,7 @@ extension SdkMethodTests {
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "actionsUpdateRepoActionsPolicy decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
@@ -426,17 +323,16 @@ extension SdkMethodTests {
             conditions: decoded("null"),
             rules: decoded("null")
         )
-            XCTFail("actionsUpdateRepoActionsPolicy did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "actionsUpdateRepoActionsPolicy decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "actionsUpdateRepoActionsPolicy decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
@@ -477,8 +373,7 @@ extension SdkMethodTests {
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "actionsUpdateSelfHostedRunnerGroupForOrg decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
@@ -492,5 +387,120 @@ extension SdkMethodTests {
             repo: decoded("\"repo\"")
         )
         XCTAssertTrue(true)
+    }
+
+    func testActivityCheckRepoIsStarredByAuthenticatedUserActivityCheckRepXe9f69afbdbReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture262Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.activity.checkRepoIsStarredByAuthenticatedUser(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\"")
+        )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 401)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testActivityDeleteRepoSubscriptionActivityDeleteRepoSubscriptionReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        _ = try await client.activity.deleteRepoSubscription(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\"")
+        )
+        XCTAssertTrue(true)
+    }
+
+    func testActivityDeleteThreadSubscriptionActivityDeleteThreadSubscriptionReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        _ = try await client.activity.deleteThreadSubscription(
+            threadId: decoded("1")
+        )
+        XCTAssertTrue(true)
+    }
+
+    func testActivityDeleteThreadSubscriptionActivityDeleteThreadSubscription401ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture265Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.activity.deleteThreadSubscription(
+            threadId: decoded("1")
+        )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 401)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testActivityGetFeedsActivityGetFeedsReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.activity.getFeeds()
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture266Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testActivityGetRepoSubscriptionActivityGetRepoSubscriptionReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.activity.getRepoSubscription(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\"")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture267Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
     }
 }

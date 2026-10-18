@@ -4,156 +4,7 @@
 import Foundation
 
 // WebhookFork domain models
-extension WebhookForkForkeeVariant0Owner {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.login) else {
-            throw SdkValidationError(field: "login", code: "required", message: "Validation failed for 'login': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.login = try container.sdkDecodeRequired(.login)
-        self.avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
-        self.deleted = try container.sdkDecodeIfPresent(.deleted)
-        self.email = try container.sdkDecodeIfPresent(.email)
-        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
-        self.followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
-        self.followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
-        self.gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
-        self.gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
-        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        self.organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
-        self.receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
-        self.reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
-        self.siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
-        self.starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
-        self.subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
-        self.type = try container.sdkDecodeIfPresent(.type)
-        self.url = try container.sdkDecodeIfPresent(.url)
-        self.userViewType = try container.sdkDecodeIfPresent(.userViewType)
-        try sdkValidateConstraints()
-    }
-}
-
-extension WebhookForkForkeeVariant0Owner {
-    public init(id: Int, login: String, avatarUrl: String? = nil, deleted: Bool? = nil, email: String? = nil, eventsUrl: String? = nil, followersUrl: String? = nil, followingUrl: String? = nil, gistsUrl: String? = nil, gravatarId: String? = nil, htmlUrl: String? = nil, name: String? = nil, nodeId: String? = nil, organizationsUrl: String? = nil, receivedEventsUrl: String? = nil, reposUrl: String? = nil, siteAdmin: Bool? = nil, starredUrl: String? = nil, subscriptionsUrl: String? = nil, type: WebhookForkForkeeVariant0OwnerType? = nil, url: String? = nil, userViewType: String? = nil) throws {
-        (self.id, self.login) = (id, login)
-        (self.avatarUrl, self.deleted) = (avatarUrl, deleted)
-        (self.email, self.eventsUrl) = (email, eventsUrl)
-        (self.followersUrl, self.followingUrl) = (followersUrl, followingUrl)
-        (self.gistsUrl, self.gravatarId) = (gistsUrl, gravatarId)
-        (self.htmlUrl, self.name) = (htmlUrl, name)
-        (self.nodeId, self.organizationsUrl) = (nodeId, organizationsUrl)
-        (self.receivedEventsUrl, self.reposUrl) = (receivedEventsUrl, reposUrl)
-        (self.siteAdmin, self.starredUrl) = (siteAdmin, starredUrl)
-        (self.subscriptionsUrl, self.type) = (subscriptionsUrl, type)
-        (self.url, self.userViewType) = (url, userViewType)
-        try sdkValidateConstraints()
-    }
-}
-
-extension WebhookForkForkeeVariant0Owner {
-    func sdkValidateConstraints() throws {
-        if let value = self.avatarUrl {
-            try sdkValidateUri("avatar_url", value)
-        }
-        if let value = self.followersUrl {
-            try sdkValidateUri("followers_url", value)
-        }
-        if let value = self.htmlUrl {
-            try sdkValidateUri("html_url", value)
-        }
-        if let value = self.organizationsUrl {
-            try sdkValidateUri("organizations_url", value)
-        }
-        if let value = self.receivedEventsUrl {
-            try sdkValidateUri("received_events_url", value)
-        }
-        if let value = self.reposUrl {
-            try sdkValidateUri("repos_url", value)
-        }
-        if let value = self.subscriptionsUrl {
-            try sdkValidateUri("subscriptions_url", value)
-        }
-        if let value = self.url {
-            try sdkValidateUri("url", value)
-        }
-    }
-}
-
-/// Optional object value serialized in the `owner` wire field.
-public struct WebhookForkForkeeVariant1Owner: Codable {
-    /// Optional `string` value serialized in the `avatar_url` wire field.
-    public var avatarUrl: String?
-    /// Optional `string` value serialized in the `events_url` wire field.
-    public var eventsUrl: String?
-    /// Optional `string` value serialized in the `followers_url` wire field.
-    public var followersUrl: String?
-    /// Optional `string` value serialized in the `following_url` wire field.
-    public var followingUrl: String?
-    /// Optional `string` value serialized in the `gists_url` wire field.
-    public var gistsUrl: String?
-    /// Optional `string` value serialized in the `gravatar_id` wire field.
-    public var gravatarId: String?
-    /// Optional `string` value serialized in the `html_url` wire field.
-    public var htmlUrl: String?
-    /// Optional `integer` value serialized in the `id` wire field.
-    public var id: Int?
-    /// Optional `string` value serialized in the `login` wire field.
-    public var login: String?
-    /// Optional `string` value serialized in the `node_id` wire field.
-    public var nodeId: String?
-    /// Optional `string` value serialized in the `organizations_url` wire field.
-    public var organizationsUrl: String?
-    /// Optional `string` value serialized in the `received_events_url` wire field.
-    public var receivedEventsUrl: String?
-    /// Optional `string` value serialized in the `repos_url` wire field.
-    public var reposUrl: String?
-    /// Optional `boolean` value serialized in the `site_admin` wire field.
-    public var siteAdmin: Bool?
-    /// Optional `string` value serialized in the `starred_url` wire field.
-    public var starredUrl: String?
-    /// Optional `string` value serialized in the `subscriptions_url` wire field.
-    public var subscriptionsUrl: String?
-    /// Optional `string` value serialized in the `type` wire field.
-    public var type: String?
-    /// Optional `string` value serialized in the `url` wire field.
-    public var url: String?
-
-    enum CodingKeys: String, CodingKey {
-        case avatarUrl = "avatar_url"
-        case eventsUrl = "events_url"
-        case followersUrl = "followers_url"
-        case followingUrl = "following_url"
-        case gistsUrl = "gists_url"
-        case gravatarId = "gravatar_id"
-        case htmlUrl = "html_url"
-        case id
-        case login
-        case nodeId = "node_id"
-        case organizationsUrl = "organizations_url"
-        case receivedEventsUrl = "received_events_url"
-        case reposUrl = "repos_url"
-        case siteAdmin = "site_admin"
-        case starredUrl = "starred_url"
-        case subscriptionsUrl = "subscriptions_url"
-        case type
-        case url
-    }
-
-    init() {
-        (self.avatarUrl, self.eventsUrl, self.followersUrl, self.followingUrl, self.gistsUrl) = (nil, nil, nil, nil, nil)
-        (self.gravatarId, self.htmlUrl, self.id, self.login, self.nodeId) = (nil, nil, nil, nil, nil)
-        (self.organizationsUrl, self.receivedEventsUrl, self.reposUrl, self.siteAdmin, self.starredUrl) = (nil, nil, nil, nil, nil)
-        (self.subscriptionsUrl, self.type, self.url) = (nil, nil, nil)
-    }
-}
-
-extension WebhookForkForkeeVariant1Owner {
+extension WebhookForkForkeeOwner {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
@@ -177,7 +28,7 @@ extension WebhookForkForkeeVariant1Owner {
     }
 }
 
-extension WebhookForkForkeeVariant1Owner {
+extension WebhookForkForkeeOwner {
     public init(avatarUrl: String? = nil, eventsUrl: String? = nil, followersUrl: String? = nil, followingUrl: String? = nil, gistsUrl: String? = nil, gravatarId: String? = nil, htmlUrl: String? = nil, id: Int? = nil, login: String? = nil, nodeId: String? = nil, organizationsUrl: String? = nil, receivedEventsUrl: String? = nil, reposUrl: String? = nil, siteAdmin: Bool? = nil, starredUrl: String? = nil, subscriptionsUrl: String? = nil, type: String? = nil, url: String? = nil) {
         self.init()
         (self.avatarUrl, self.eventsUrl) = (avatarUrl, eventsUrl)
@@ -192,8 +43,69 @@ extension WebhookForkForkeeVariant1Owner {
     }
 }
 
+/// A user forks a repository.
+public struct WebhookFork: Codable {
+    /// The created `repository` resource.
+    public var forkee: WebhookForkForkee
+    /// The repository on GitHub where the event occurred. Webhook payloads contain the `repository` property when
+    /// the event occurs from activity in a repository.
+    public var repository: RepositoryWebhooks
+    /// A GitHub user.
+    public var sender: SimpleUser
+    /// An enterprise on GitHub. Webhook payloads contain the `enterprise` property when the webhook is configured
+    /// on an enterprise account or an organization that's part of an enterprise account. For more information, see
+    /// "About enterprise accounts."
+    public var enterprise: EnterpriseWebhooks?
+    /// The GitHub App installation. Webhook payloads contain the `installation` property when the event is
+    /// configured for and sent to a GitHub App. For more information, see "Using webhooks with GitHub Apps."
+    public var installation: SimpleInstallation?
+    /// A GitHub organization. Webhook payloads contain the `organization` property when the webhook is configured
+    /// for an organization, or when the event occurs from activity in a repository owned by an organization.
+    public var organization: OrganizationSimpleWebhooks?
+
+    enum CodingKeys: String, CodingKey {
+        case forkee
+        case repository
+        case sender
+        case enterprise
+        case installation
+        case organization
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension WebhookFork {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.forkee) else {
+            throw SdkValidationError(field: "forkee", code: "required", message: "Validation failed for 'forkee': value is required")
+        }
+        guard container.contains(.repository) else {
+            throw SdkValidationError(field: "repository", code: "required", message: "Validation failed for 'repository': value is required")
+        }
+        guard container.contains(.sender) else {
+            throw SdkValidationError(field: "sender", code: "required", message: "Validation failed for 'sender': value is required")
+        }
+        self.forkee = try container.sdkDecodeRequired(.forkee)
+        self.repository = try container.sdkDecodeRequired(.repository)
+        self.sender = try container.sdkDecodeRequired(.sender)
+        self.enterprise = try container.sdkDecodeIfPresent(.enterprise)
+        self.installation = try container.sdkDecodeIfPresent(.installation)
+        self.organization = try container.sdkDecodeIfPresent(.organization)
+    }
+}
+
+extension WebhookFork {
+    public init(forkee: WebhookForkForkee, repository: RepositoryWebhooks, sender: SimpleUser, enterprise: EnterpriseWebhooks? = nil, installation: SimpleInstallation? = nil, organization: OrganizationSimpleWebhooks? = nil) {
+        (self.forkee, self.repository) = (forkee, repository)
+        (self.sender, self.enterprise) = (sender, enterprise)
+        (self.installation, self.organization) = (installation, organization)
+    }
+}
+
 /// Optional object value serialized in the `permissions` wire field.
-public struct WebhookForkForkeeVariant0Permissions: Codable {
+public struct WebhookForkForkeePermissions: Codable {
     /// Required `boolean` value serialized in the `admin` wire field.
     public var admin: Bool
     /// Required `boolean` value serialized in the `pull` wire field.
@@ -216,7 +128,7 @@ public struct WebhookForkForkeeVariant0Permissions: Codable {
     private init(sdkCopy value: Self) { self = value }
 }
 
-extension WebhookForkForkeeVariant0Permissions {
+extension WebhookForkForkeePermissions {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.admin) else {
@@ -236,269 +148,10 @@ extension WebhookForkForkeeVariant0Permissions {
     }
 }
 
-extension WebhookForkForkeeVariant0Permissions {
+extension WebhookForkForkeePermissions {
     public init(admin: Bool, pull: Bool, push: Bool, maintain: Bool? = nil, triage: Bool? = nil) {
         (self.admin, self.pull) = (admin, pull)
         (self.push, self.maintain) = (push, maintain)
         self.triage = triage
-    }
-}
-
-/// Required object value serialized in the `forkee` wire field.
-public struct WebhookForkForkeeVariant1: Codable {
-    /// Optional `boolean` value serialized in the `allow_forking` wire field.
-    public var allowForking: Bool? = .none
-    /// Optional `string` value serialized in the `archive_url` wire field.
-    public var archiveUrl: String? = .none
-    /// Optional `boolean` value serialized in the `archived` wire field.
-    public var archived: Bool? = .none
-    /// Optional `string` value serialized in the `assignees_url` wire field.
-    public var assigneesUrl: String? = .none
-    /// Optional `string` value serialized in the `blobs_url` wire field.
-    public var blobsUrl: String? = .none
-    /// Optional `string` value serialized in the `branches_url` wire field.
-    public var branchesUrl: String? = .none
-    /// Optional `string` value serialized in the `clone_url` wire field.
-    public var cloneUrl: String? = .none
-    /// Optional `string` value serialized in the `collaborators_url` wire field.
-    public var collaboratorsUrl: String? = .none
-    /// Optional `string` value serialized in the `comments_url` wire field.
-    public var commentsUrl: String? = .none
-    /// Optional `string` value serialized in the `commits_url` wire field.
-    public var commitsUrl: String? = .none
-    /// Optional `string` value serialized in the `compare_url` wire field.
-    public var compareUrl: String? = .none
-    /// Optional `string` value serialized in the `contents_url` wire field.
-    public var contentsUrl: String? = .none
-    /// Optional `string` value serialized in the `contributors_url` wire field.
-    public var contributorsUrl: String? = .none
-    /// Optional `string` value serialized in the `created_at` wire field.
-    public var createdAt: String? = .none
-    /// Optional `string` value serialized in the `default_branch` wire field.
-    public var defaultBranch: String? = .none
-    /// Optional `string` value serialized in the `deployments_url` wire field.
-    public var deploymentsUrl: String? = .none
-    /// Optional `string` value serialized in the `description` wire field.
-    public var description: String? = .none
-    /// Optional `boolean` value serialized in the `disabled` wire field.
-    public var disabled: Bool? = .none
-    /// Optional `string` value serialized in the `downloads_url` wire field.
-    public var downloadsUrl: String? = .none
-    /// Optional `string` value serialized in the `events_url` wire field.
-    public var eventsUrl: String? = .none
-    /// Optional enumerated value serialized in the `fork` wire field.
-    public var fork: Bool? = .none
-    /// Optional `integer` value serialized in the `forks` wire field.
-    public var forks: Int? = .none
-    /// Optional `integer` value serialized in the `forks_count` wire field.
-    public var forksCount: Int? = .none
-    /// Optional `string` value serialized in the `forks_url` wire field.
-    public var forksUrl: String? = .none
-    /// Optional `string` value serialized in the `full_name` wire field.
-    public var fullName: String? = .none
-    /// Optional `string` value serialized in the `git_commits_url` wire field.
-    public var gitCommitsUrl: String? = .none
-    /// Optional `string` value serialized in the `git_refs_url` wire field.
-    public var gitRefsUrl: String? = .none
-    /// Optional `string` value serialized in the `git_tags_url` wire field.
-    public var gitTagsUrl: String? = .none
-    /// Optional `string` value serialized in the `git_url` wire field.
-    public var gitUrl: String? = .none
-    /// Optional `boolean` value serialized in the `has_downloads` wire field.
-    public var hasDownloads: Bool? = .none
-    /// Optional `boolean` value serialized in the `has_issues` wire field.
-    public var hasIssues: Bool? = .none
-    /// Optional `boolean` value serialized in the `has_pages` wire field.
-    public var hasPages: Bool? = .none
-    /// Optional `boolean` value serialized in the `has_projects` wire field.
-    public var hasProjects: Bool? = .none
-    /// Optional `boolean` value serialized in the `has_wiki` wire field.
-    public var hasWiki: Bool? = .none
-    /// Optional `string` value serialized in the `homepage` wire field.
-    public var homepage: String? = .none
-    /// Optional `string` value serialized in the `hooks_url` wire field.
-    public var hooksUrl: String? = .none
-    /// Optional `string` value serialized in the `html_url` wire field.
-    public var htmlUrl: String? = .none
-    /// Optional `integer` value serialized in the `id` wire field.
-    public var id: Int? = .none
-    /// Optional `boolean` value serialized in the `is_template` wire field.
-    public var isTemplate: Bool? = .none
-    /// Optional `string` value serialized in the `issue_comment_url` wire field.
-    public var issueCommentUrl: String? = .none
-    /// Optional `string` value serialized in the `issue_events_url` wire field.
-    public var issueEventsUrl: String? = .none
-    /// Optional `string` value serialized in the `issues_url` wire field.
-    public var issuesUrl: String? = .none
-    /// Optional `string` value serialized in the `keys_url` wire field.
-    public var keysUrl: String? = .none
-    /// Optional `string` value serialized in the `labels_url` wire field.
-    public var labelsUrl: String? = .none
-    /// Optional API value serialized in the `language` wire field.
-    public var language: JSONValue? = .none
-    /// Optional `string` value serialized in the `languages_url` wire field.
-    public var languagesUrl: String? = .none
-    /// Optional object value serialized in the `license` wire field.
-    public var license: [String: JSONValue]? = .none
-    /// Optional `string` value serialized in the `merges_url` wire field.
-    public var mergesUrl: String? = .none
-    /// Optional `string` value serialized in the `milestones_url` wire field.
-    public var milestonesUrl: String? = .none
-    /// Optional API value serialized in the `mirror_url` wire field.
-    public var mirrorUrl: JSONValue? = .none
-    /// Optional `string` value serialized in the `name` wire field.
-    public var name: String? = .none
-    /// Optional `string` value serialized in the `node_id` wire field.
-    public var nodeId: String? = .none
-    /// Optional `string` value serialized in the `notifications_url` wire field.
-    public var notificationsUrl: String? = .none
-    /// Optional `integer` value serialized in the `open_issues` wire field.
-    public var openIssues: Int? = .none
-    /// Optional `integer` value serialized in the `open_issues_count` wire field.
-    public var openIssuesCount: Int? = .none
-    /// Optional object value serialized in the `owner` wire field.
-    public var owner: WebhookForkForkeeVariant1Owner? = .none
-    /// Optional `boolean` value serialized in the `private` wire field.
-    public var `private`: Bool? = .none
-    /// Optional `boolean` value serialized in the `public` wire field.
-    public var `public`: Bool? = .none
-    /// Optional `string` value serialized in the `pulls_url` wire field.
-    public var pullsUrl: String? = .none
-    /// Optional `string` value serialized in the `pushed_at` wire field.
-    public var pushedAt: String? = .none
-    /// Optional `string` value serialized in the `releases_url` wire field.
-    public var releasesUrl: String? = .none
-    /// Optional `integer` value serialized in the `size` wire field.
-    public var size: Int? = .none
-    /// Optional `string` value serialized in the `ssh_url` wire field.
-    public var sshUrl: String? = .none
-    /// Optional `integer` value serialized in the `stargazers_count` wire field.
-    public var stargazersCount: Int? = .none
-    /// Optional `string` value serialized in the `stargazers_url` wire field.
-    public var stargazersUrl: String? = .none
-    /// Optional `string` value serialized in the `statuses_url` wire field.
-    public var statusesUrl: String? = .none
-    /// Optional `string` value serialized in the `subscribers_url` wire field.
-    public var subscribersUrl: String? = .none
-    /// Optional `string` value serialized in the `subscription_url` wire field.
-    public var subscriptionUrl: String? = .none
-    /// Optional `string` value serialized in the `svn_url` wire field.
-    public var svnUrl: String? = .none
-    /// Optional `string` value serialized in the `tags_url` wire field.
-    public var tagsUrl: String? = .none
-    /// Optional `string` value serialized in the `teams_url` wire field.
-    public var teamsUrl: String? = .none
-    /// Optional array value serialized in the `topics` wire field.
-    public var topics: [JSONValue?]? = .none
-    /// Optional `string` value serialized in the `trees_url` wire field.
-    public var treesUrl: String? = .none
-    /// Optional `string` value serialized in the `updated_at` wire field.
-    public var updatedAt: String? = .none
-    /// Optional `string` value serialized in the `url` wire field.
-    public var url: String? = .none
-    /// Optional `string` value serialized in the `visibility` wire field.
-    public var visibility: String? = .none
-    /// Optional `integer` value serialized in the `watchers` wire field.
-    public var watchers: Int? = .none
-    /// Optional `integer` value serialized in the `watchers_count` wire field.
-    public var watchersCount: Int? = .none
-
-    init(sdkDefaults _: Void) {}
-}
-
-extension WebhookForkForkeeVariant1 {
-    enum CodingKeys: String, CodingKey {
-        case allowForking = "allow_forking"
-        case archiveUrl = "archive_url"
-        case archived
-        case assigneesUrl = "assignees_url"
-        case blobsUrl = "blobs_url"
-        case branchesUrl = "branches_url"
-        case cloneUrl = "clone_url"
-        case collaboratorsUrl = "collaborators_url"
-        case commentsUrl = "comments_url"
-        case commitsUrl = "commits_url"
-        case compareUrl = "compare_url"
-        case contentsUrl = "contents_url"
-        case contributorsUrl = "contributors_url"
-        case createdAt = "created_at"
-        case defaultBranch = "default_branch"
-        case deploymentsUrl = "deployments_url"
-        case description
-        case disabled
-        case downloadsUrl = "downloads_url"
-        case eventsUrl = "events_url"
-        case fork
-        case forks
-        case forksCount = "forks_count"
-        case forksUrl = "forks_url"
-        case fullName = "full_name"
-        case gitCommitsUrl = "git_commits_url"
-        case gitRefsUrl = "git_refs_url"
-        case gitTagsUrl = "git_tags_url"
-        case gitUrl = "git_url"
-        case hasDownloads = "has_downloads"
-        case hasIssues = "has_issues"
-        case hasPages = "has_pages"
-        case hasProjects = "has_projects"
-        case hasWiki = "has_wiki"
-        case homepage
-        case hooksUrl = "hooks_url"
-        case htmlUrl = "html_url"
-        case id
-        case isTemplate = "is_template"
-        case issueCommentUrl = "issue_comment_url"
-        case issueEventsUrl = "issue_events_url"
-        case issuesUrl = "issues_url"
-        case keysUrl = "keys_url"
-        case labelsUrl = "labels_url"
-        case language
-        case languagesUrl = "languages_url"
-        case license
-        case mergesUrl = "merges_url"
-        case milestonesUrl = "milestones_url"
-        case mirrorUrl = "mirror_url"
-        case name
-        case nodeId = "node_id"
-        case notificationsUrl = "notifications_url"
-        case openIssues = "open_issues"
-        case openIssuesCount = "open_issues_count"
-        case owner
-        case `private`
-        case `public`
-        case pullsUrl = "pulls_url"
-        case pushedAt = "pushed_at"
-        case releasesUrl = "releases_url"
-        case size
-        case sshUrl = "ssh_url"
-        case stargazersCount = "stargazers_count"
-        case stargazersUrl = "stargazers_url"
-        case statusesUrl = "statuses_url"
-        case subscribersUrl = "subscribers_url"
-        case subscriptionUrl = "subscription_url"
-        case svnUrl = "svn_url"
-        case tagsUrl = "tags_url"
-        case teamsUrl = "teams_url"
-        case topics
-        case treesUrl = "trees_url"
-        case updatedAt = "updated_at"
-        case url
-        case visibility
-        case watchers
-        case watchersCount = "watchers_count"
-    }
-}
-
-extension WebhookForkForkeeVariant1 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.init(sdkDefaults: ())
-        try sdkDecodeFieldsPart1(container)
-        try sdkDecodeFieldsPart2(container)
-        try sdkDecodeFieldsPart3(container)
-        try sdkDecodeFieldsPart4(container)
-        try sdkDecodeFieldsPart5(container)
-        try sdkDecodeFieldsPart6(container)
-        try sdkDecodeFieldsPart7(container)
     }
 }

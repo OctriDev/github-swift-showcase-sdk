@@ -4,6 +4,245 @@
 import Foundation
 
 // WebhookPullRequestReviewRequestRemoved domain models
+/// A git repository
+public struct WebhookPullRequestReviewRequestRemovedVariant0PullRequestHeadRepo: Codable {
+    public var archiveUrl: String
+    /// Whether the repository is archived.
+    public var archived: Bool
+    public var assigneesUrl: String
+    public var blobsUrl: String
+    public var branchesUrl: String
+    public var cloneUrl: String
+    public var collaboratorsUrl: String
+    public var commentsUrl: String
+    public var commitsUrl: String
+    public var compareUrl: String
+    public var contentsUrl: String
+    public var contributorsUrl: String
+    public var createdAt: WebhookPullRequestReviewRequestRemovedVariant0PullRequestHeadX80f89dd893
+    /// The default branch of the repository.
+    public var defaultBranch: String
+    public var deploymentsUrl: String
+    public var description: String?
+    public var downloadsUrl: String
+    public var eventsUrl: String
+    public var fork: Bool
+    public var forks: Int
+    public var forksCount: Int
+    public var forksUrl: String
+    public var fullName: String
+    public var gitCommitsUrl: String
+    public var gitRefsUrl: String
+    public var gitTagsUrl: String
+    public var gitUrl: String
+    /// Whether downloads are enabled.
+    public var hasDownloads: Bool
+    /// Whether issues are enabled.
+    public var hasIssues: Bool
+    public var hasPages: Bool
+    /// Whether projects are enabled.
+    public var hasProjects: Bool
+    /// Whether the wiki is enabled.
+    public var hasWiki: Bool
+    /// Whether discussions are enabled.
+    public var hasDiscussions: Bool
+    public var homepage: String?
+    public var hooksUrl: String
+    public var htmlUrl: String
+    /// Unique identifier of the repository
+    public var id: Int
+    public var issueCommentUrl: String
+    public var issueEventsUrl: String
+    public var issuesUrl: String
+    public var keysUrl: String
+    public var labelsUrl: String
+    public var language: String?
+    public var languagesUrl: String
+    /// License
+    public var license: WebhookPullRequestReviewRequestRemovedVariant0PullRequestHeadRepoLicense?
+    public var mergesUrl: String
+    public var milestonesUrl: String
+    public var mirrorUrl: String?
+    /// The name of the repository.
+    public var name: String
+    public var nodeId: String
+    public var notificationsUrl: String
+    public var openIssues: Int
+    public var openIssuesCount: Int
+    /// User
+    public var owner: WebhookPullRequestReviewRequestRemovedVariant0PullRequestHeadRepoOwner?
+    /// Whether the repository is private or public.
+    public var `private`: Bool
+    public var pullsUrl: String
+    public var pushedAt: WebhookPullRequestReviewRequestRemovedVariant0PullRequestHeadXe49d78684c?
+    public var releasesUrl: String
+    public var size: Int
+    public var sshUrl: String
+    public var stargazersCount: Int
+    public var stargazersUrl: String
+    public var statusesUrl: String
+    public var subscribersUrl: String
+    public var subscriptionUrl: String
+    public var svnUrl: String
+    public var tagsUrl: String
+    public var teamsUrl: String
+    public var topics: [String]
+    public var treesUrl: String
+    public var updatedAt: Date
+    public var url: String
+    public var visibility: WebhookPullRequestReviewRequestRemovedVariant0PullRequestHeadX5f9cd309d1
+    public var watchers: Int
+    public var watchersCount: Int
+    /// Whether to allow auto-merge for pull requests.
+    public var allowAutoMerge: Bool?
+    /// Whether to allow private forks
+    public var allowForking: Bool?
+    /// Whether to allow merge commits for pull requests.
+    public var allowMergeCommit: Bool?
+    /// Whether to allow rebase merges for pull requests.
+    public var allowRebaseMerge: Bool?
+    /// Whether to allow squash merges for pull requests.
+    public var allowSquashMerge: Bool?
+    public var allowUpdateBranch: Bool?
+    /// Whether to delete head branches when pull requests are merged
+    public var deleteBranchOnMerge: Bool?
+    /// Returns whether or not this repository is disabled.
+    public var disabled: Bool?
+    /// Whether pull requests are enabled.
+    public var hasPullRequests: Bool?
+    /// The policy controlling who can create pull requests: all or collaborators_only.
+    public var pullRequestCreationPolicy: WebhookPullRequestReviewRequestRemovedVariant0PullRequestHeadX5143f24797?
+    public var isTemplate: Bool?
+    public var primaryBranch: String?
+    /// The default value for a merge commit message. - `PR_TITLE` - default to the pull request's title. -
+    /// `PR_BODY` - default to the pull request's body. - `BLANK` - default to a blank commit message.
+    public var mergeCommitMessage: WebhookPullRequestReviewRequestRemovedVariant0PullRequestHeadX28f85e0c71?
+    /// The default value for a merge commit title. - `PR_TITLE` - default to the pull request's title. -
+    /// `MERGE_MESSAGE` - default to the classic title for a merge message (e.g., Merge pull request #123 from
+    /// branch-name).
+    public var mergeCommitTitle: WebhookPullRequestReviewRequestRemovedVariant0PullRequestHeadXe4b14c4e64?
+    public var organization: String?
+    public var permissions: WebhookPullRequestReviewRequestRemovedVariant0PullRequestHeadX22a105320c?
+    public var `public`: Bool?
+    public var roleName: String?
+    /// The default value for a squash merge commit message: - `PR_BODY` - default to the pull request's body. -
+    /// `COMMIT_MESSAGES` - default to the branch's commit messages. - `BLANK` - default to a blank commit message.
+    public var squashMergeCommitMessage: WebhookPullRequestReviewRequestRemovedVariant0PullRequestHeadX23e04b9611?
+    /// The default value for a squash merge commit title: - `PR_TITLE` - default to the pull request's title. -
+    /// `COMMIT_OR_PR_TITLE` - default to the commit's title (if only one commit) or the pull request's title (when
+    /// more than one commit).
+    public var squashMergeCommitTitle: WebhookPullRequestReviewRequestRemovedVariant0PullRequestHeadX7b6810c64b?
+    public var stargazers: Int?
+    /// Whether a squash merge commit can use the pull request title as default. **This property is closing down.
+    /// Please use `squash_merge_commit_title` instead.
+    public var useSquashPrTitleAsDefault: Bool?
+    /// Whether to require contributors to sign off on web-based commits
+    public var webCommitSignoffRequired: Bool?
+
+    enum CodingKeys: String, CodingKey {
+        case archiveUrl = "archive_url"
+        case archived
+        case assigneesUrl = "assignees_url"
+        case blobsUrl = "blobs_url"
+        case branchesUrl = "branches_url"
+        case cloneUrl = "clone_url"
+        case collaboratorsUrl = "collaborators_url"
+        case commentsUrl = "comments_url"
+        case commitsUrl = "commits_url"
+        case compareUrl = "compare_url"
+        case contentsUrl = "contents_url"
+        case contributorsUrl = "contributors_url"
+        case createdAt = "created_at"
+        case defaultBranch = "default_branch"
+        case deploymentsUrl = "deployments_url"
+        case description
+        case downloadsUrl = "downloads_url"
+        case eventsUrl = "events_url"
+        case fork
+        case forks
+        case forksCount = "forks_count"
+        case forksUrl = "forks_url"
+        case fullName = "full_name"
+        case gitCommitsUrl = "git_commits_url"
+        case gitRefsUrl = "git_refs_url"
+        case gitTagsUrl = "git_tags_url"
+        case gitUrl = "git_url"
+        case hasDownloads = "has_downloads"
+        case hasIssues = "has_issues"
+        case hasPages = "has_pages"
+        case hasProjects = "has_projects"
+        case hasWiki = "has_wiki"
+        case hasDiscussions = "has_discussions"
+        case homepage
+        case hooksUrl = "hooks_url"
+        case htmlUrl = "html_url"
+        case id
+        case issueCommentUrl = "issue_comment_url"
+        case issueEventsUrl = "issue_events_url"
+        case issuesUrl = "issues_url"
+        case keysUrl = "keys_url"
+        case labelsUrl = "labels_url"
+        case language
+        case languagesUrl = "languages_url"
+        case license
+        case mergesUrl = "merges_url"
+        case milestonesUrl = "milestones_url"
+        case mirrorUrl = "mirror_url"
+        case name
+        case nodeId = "node_id"
+        case notificationsUrl = "notifications_url"
+        case openIssues = "open_issues"
+        case openIssuesCount = "open_issues_count"
+        case owner
+        case `private`
+        case pullsUrl = "pulls_url"
+        case pushedAt = "pushed_at"
+        case releasesUrl = "releases_url"
+        case size
+        case sshUrl = "ssh_url"
+        case stargazersCount = "stargazers_count"
+        case stargazersUrl = "stargazers_url"
+        case statusesUrl = "statuses_url"
+        case subscribersUrl = "subscribers_url"
+        case subscriptionUrl = "subscription_url"
+        case svnUrl = "svn_url"
+        case tagsUrl = "tags_url"
+        case teamsUrl = "teams_url"
+        case topics
+        case treesUrl = "trees_url"
+        case updatedAt = "updated_at"
+        case url
+        case visibility
+        case watchers
+        case watchersCount = "watchers_count"
+        case allowAutoMerge = "allow_auto_merge"
+        case allowForking = "allow_forking"
+        case allowMergeCommit = "allow_merge_commit"
+        case allowRebaseMerge = "allow_rebase_merge"
+        case allowSquashMerge = "allow_squash_merge"
+        case allowUpdateBranch = "allow_update_branch"
+        case deleteBranchOnMerge = "delete_branch_on_merge"
+        case disabled
+        case hasPullRequests = "has_pull_requests"
+        case pullRequestCreationPolicy = "pull_request_creation_policy"
+        case isTemplate = "is_template"
+        case primaryBranch = "master_branch"
+        case mergeCommitMessage = "merge_commit_message"
+        case mergeCommitTitle = "merge_commit_title"
+        case organization
+        case permissions
+        case `public`
+        case roleName = "role_name"
+        case squashMergeCommitMessage = "squash_merge_commit_message"
+        case squashMergeCommitTitle = "squash_merge_commit_title"
+        case stargazers
+        case useSquashPrTitleAsDefault = "use_squash_pr_title_as_default"
+        case webCommitSignoffRequired = "web_commit_signoff_required"
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
 extension WebhookPullRequestReviewRequestRemovedVariant0PullRequestHeadRepo {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -255,200 +494,4 @@ extension WebhookPullRequestReviewRequestRemovedVariant1PullRequestHeadRepoLicen
             try sdkValidateUri("url", value)
         }
     }
-}
-
-public struct WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseUser: Codable {
-    public var id: Int
-    public var login: String
-    public var avatarUrl: String?
-    public var deleted: Bool?
-    public var email: String?
-    public var eventsUrl: String?
-    public var followersUrl: String?
-    public var followingUrl: String?
-    public var gistsUrl: String?
-    public var gravatarId: String?
-    public var htmlUrl: String?
-    public var name: String?
-    public var nodeId: String?
-    public var organizationsUrl: String?
-    public var receivedEventsUrl: String?
-    public var reposUrl: String?
-    public var siteAdmin: Bool?
-    public var starredUrl: String?
-    public var subscriptionsUrl: String?
-    public var type: WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseUserType?
-    public var url: String?
-    public var userViewType: String?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case login
-        case avatarUrl = "avatar_url"
-        case deleted
-        case email
-        case eventsUrl = "events_url"
-        case followersUrl = "followers_url"
-        case followingUrl = "following_url"
-        case gistsUrl = "gists_url"
-        case gravatarId = "gravatar_id"
-        case htmlUrl = "html_url"
-        case name
-        case nodeId = "node_id"
-        case organizationsUrl = "organizations_url"
-        case receivedEventsUrl = "received_events_url"
-        case reposUrl = "repos_url"
-        case siteAdmin = "site_admin"
-        case starredUrl = "starred_url"
-        case subscriptionsUrl = "subscriptions_url"
-        case type
-        case url
-        case userViewType = "user_view_type"
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseUser {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.login) else {
-            throw SdkValidationError(field: "login", code: "required", message: "Validation failed for 'login': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.login = try container.sdkDecodeRequired(.login)
-        self.avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
-        self.deleted = try container.sdkDecodeIfPresent(.deleted)
-        self.email = try container.sdkDecodeIfPresent(.email)
-        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
-        self.followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
-        self.followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
-        self.gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
-        self.gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
-        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        self.organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
-        self.receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
-        self.reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
-        self.siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
-        self.starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
-        self.subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
-        self.type = try container.sdkDecodeIfPresent(.type)
-        self.url = try container.sdkDecodeIfPresent(.url)
-        self.userViewType = try container.sdkDecodeIfPresent(.userViewType)
-        try sdkValidateConstraints()
-    }
-}
-
-extension WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseUser {
-    public init(id: Int, login: String, avatarUrl: String? = nil, deleted: Bool? = nil, email: String? = nil, eventsUrl: String? = nil, followersUrl: String? = nil, followingUrl: String? = nil, gistsUrl: String? = nil, gravatarId: String? = nil, htmlUrl: String? = nil, name: String? = nil, nodeId: String? = nil, organizationsUrl: String? = nil, receivedEventsUrl: String? = nil, reposUrl: String? = nil, siteAdmin: Bool? = nil, starredUrl: String? = nil, subscriptionsUrl: String? = nil, type: WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseUserType? = nil, url: String? = nil, userViewType: String? = nil) throws {
-        (self.id, self.login) = (id, login)
-        (self.avatarUrl, self.deleted) = (avatarUrl, deleted)
-        (self.email, self.eventsUrl) = (email, eventsUrl)
-        (self.followersUrl, self.followingUrl) = (followersUrl, followingUrl)
-        (self.gistsUrl, self.gravatarId) = (gistsUrl, gravatarId)
-        (self.htmlUrl, self.name) = (htmlUrl, name)
-        (self.nodeId, self.organizationsUrl) = (nodeId, organizationsUrl)
-        (self.receivedEventsUrl, self.reposUrl) = (receivedEventsUrl, reposUrl)
-        (self.siteAdmin, self.starredUrl) = (siteAdmin, starredUrl)
-        (self.subscriptionsUrl, self.type) = (subscriptionsUrl, type)
-        (self.url, self.userViewType) = (url, userViewType)
-        try sdkValidateConstraints()
-    }
-}
-
-extension WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseUser {
-    func sdkValidateConstraints() throws {
-        if let value = self.avatarUrl {
-            try sdkValidateUri("avatar_url", value)
-        }
-        if let value = self.followersUrl {
-            try sdkValidateUri("followers_url", value)
-        }
-        if let value = self.htmlUrl {
-            try sdkValidateUri("html_url", value)
-        }
-        if let value = self.organizationsUrl {
-            try sdkValidateUri("organizations_url", value)
-        }
-        if let value = self.receivedEventsUrl {
-            try sdkValidateUri("received_events_url", value)
-        }
-        if let value = self.reposUrl {
-            try sdkValidateUri("repos_url", value)
-        }
-        if let value = self.subscriptionsUrl {
-            try sdkValidateUri("subscriptions_url", value)
-        }
-        if let value = self.url {
-            try sdkValidateUri("url", value)
-        }
-    }
-}
-
-public indirect enum WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseX981d2f990b {
-    case intValue(Int)
-    case date(Date)
-}
-
-extension WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseX981d2f990b: Codable {
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseX981d2f990b")
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
-    }
-}
-
-extension WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseX981d2f990b {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(Int.self) { return .intValue(value) }
-        if let value = try? container.decode(Date.self) { return .date(value) }
-        return nil
-    }
-}
-
-extension WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseX981d2f990b {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .intValue(value): try container.encode(value); return true
-        case let .date(value): try container.encode(value); return true
-        }
-    }
-}
-
-extension WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseX981d2f990b: SdkNumericValueConvertible {
-    var sdkNumericValue: Double? {
-        switch self {
-        case let .intValue(value): Double(value)
-        default: nil
-        }
-    }
-}
-
-public struct WebhookPullRequestReviewRequestRemovedVariant0PullRequestHeadX22a105320c: Codable {
-    public var admin: Bool
-    public var pull: Bool
-    public var push: Bool
-    public var maintain: Bool?
-    public var triage: Bool?
-
-    enum CodingKeys: String, CodingKey {
-        case admin
-        case pull
-        case push
-        case maintain
-        case triage
-    }
-
-    private init(sdkCopy value: Self) { self = value }
 }

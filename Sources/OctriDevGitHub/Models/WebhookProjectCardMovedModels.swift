@@ -4,31 +4,31 @@
 import Foundation
 
 // WebhookProjectCardMoved domain models
-/// Required API value serialized in the `project_card` wire field.
+/// Required object value serialized in the `project_card` wire field.
 public struct WebhookProjectCardMovedProjectCard: Codable {
     /// Required `number` value serialized in the `after_id` wire field.
     public var afterId: Double?
-    /// Optional `boolean` value serialized in the `archived` wire field.
+    /// Required `boolean` value serialized in the `archived` wire field.
     public var archived: Bool
-    /// Optional `integer` value serialized in the `column_id` wire field.
+    /// Required `integer` value serialized in the `column_id` wire field.
     public var columnId: Int
-    /// Optional `string` value serialized in the `column_url` wire field.
+    /// Required `string` value serialized in the `column_url` wire field.
     public var columnUrl: String
-    /// Optional `string` value serialized in the `created_at` wire field.
+    /// Required `string` value serialized in the `created_at` wire field.
     public var createdAt: String
-    /// Optional object value serialized in the `creator` wire field.
-    public var creator: WebhookProjectCardMovedProjectCardVariant1Creator?
-    /// Optional `integer` value serialized in the `id` wire field.
+    /// Required object value serialized in the `creator` wire field.
+    public var creator: WebhookProjectCardMovedProjectCardCreator?
+    /// Required `integer` value serialized in the `id` wire field.
     public var id: Int
-    /// Optional `string` value serialized in the `node_id` wire field.
+    /// Required `string` value serialized in the `node_id` wire field.
     public var nodeId: String
-    /// Optional `string` value serialized in the `note` wire field.
+    /// Required `string` value serialized in the `note` wire field.
     public var note: String?
-    /// Optional `string` value serialized in the `project_url` wire field.
+    /// Required `string` value serialized in the `project_url` wire field.
     public var projectUrl: String
-    /// Optional `string` value serialized in the `updated_at` wire field.
+    /// Required `string` value serialized in the `updated_at` wire field.
     public var updatedAt: String
-    /// Optional `string` value serialized in the `url` wire field.
+    /// Required `string` value serialized in the `url` wire field.
     public var url: String
     /// Optional `uri`-formatted value serialized in the `content_url` wire field.
     public var contentUrl: String?
@@ -75,7 +75,7 @@ extension WebhookProjectCardMovedProjectCard {
 }
 
 extension WebhookProjectCardMovedProjectCard {
-    public init(afterId: Double?, archived: Bool, columnId: Int, columnUrl: String, createdAt: String, creator: WebhookProjectCardMovedProjectCardVariant1Creator?, id: Int, nodeId: String, note: String?, projectUrl: String, updatedAt: String, url: String, contentUrl: String? = nil) throws {
+    public init(afterId: Double?, archived: Bool, columnId: Int, columnUrl: String, createdAt: String, creator: WebhookProjectCardMovedProjectCardCreator?, id: Int, nodeId: String, note: String?, projectUrl: String, updatedAt: String, url: String, contentUrl: String? = nil) throws {
         (self.afterId, self.archived) = (afterId, archived)
         (self.columnId, self.columnUrl) = (columnId, columnUrl)
         (self.createdAt, self.creator) = (createdAt, creator)
@@ -89,88 +89,11 @@ extension WebhookProjectCardMovedProjectCard {
     }
 }
 
-/// Required object value serialized in the `project_card` wire field.
-public struct WebhookProjectCardMovedProjectCardVariant1: Codable {
-    /// Required `number` value serialized in the `after_id` wire field.
-    public var afterId: Double?
-    /// Optional `boolean` value serialized in the `archived` wire field.
-    public var archived: Bool?
-    /// Optional `integer` value serialized in the `column_id` wire field.
-    public var columnId: Int?
-    /// Optional `string` value serialized in the `column_url` wire field.
-    public var columnUrl: String?
-    /// Optional `string` value serialized in the `created_at` wire field.
-    public var createdAt: String?
-    /// Optional object value serialized in the `creator` wire field.
-    public var creator: WebhookProjectCardMovedProjectCardVariant1Creator?
-    /// Optional `integer` value serialized in the `id` wire field.
-    public var id: Int?
-    /// Optional `string` value serialized in the `node_id` wire field.
-    public var nodeId: String?
-    /// Optional `string` value serialized in the `note` wire field.
-    public var note: String?
-    /// Optional `string` value serialized in the `project_url` wire field.
-    public var projectUrl: String?
-    /// Optional `string` value serialized in the `updated_at` wire field.
-    public var updatedAt: String?
-    /// Optional `string` value serialized in the `url` wire field.
-    public var url: String?
-
-    enum CodingKeys: String, CodingKey {
-        case afterId = "after_id"
-        case archived
-        case columnId = "column_id"
-        case columnUrl = "column_url"
-        case createdAt = "created_at"
-        case creator
-        case id
-        case nodeId = "node_id"
-        case note
-        case projectUrl = "project_url"
-        case updatedAt = "updated_at"
-        case url
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookProjectCardMovedProjectCardVariant1 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.afterId) else {
-            throw SdkValidationError(field: "after_id", code: "required", message: "Validation failed for 'after_id': value is required")
-        }
-        self.afterId = try container.sdkDecodeNullable(.afterId)
-        self.archived = try container.sdkDecodeIfPresent(.archived)
-        self.columnId = try container.sdkDecodeIfPresent(.columnId)
-        self.columnUrl = try container.sdkDecodeIfPresent(.columnUrl)
-        self.createdAt = try container.sdkDecodeIfPresent(.createdAt)
-        self.creator = try container.sdkDecodeIfPresent(.creator)
-        self.id = try container.sdkDecodeIfPresent(.id)
-        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        self.note = try container.sdkDecodeIfPresent(.note)
-        self.projectUrl = try container.sdkDecodeIfPresent(.projectUrl)
-        self.updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
-        self.url = try container.sdkDecodeIfPresent(.url)
-    }
-}
-
-extension WebhookProjectCardMovedProjectCardVariant1 {
-    public init(afterId: Double?, archived: Bool? = nil, columnId: Int? = nil, columnUrl: String? = nil, createdAt: String? = nil, creator: WebhookProjectCardMovedProjectCardVariant1Creator? = nil, id: Int? = nil, nodeId: String? = nil, note: String? = nil, projectUrl: String? = nil, updatedAt: String? = nil, url: String? = nil) {
-        (self.afterId, self.archived) = (afterId, archived)
-        (self.columnId, self.columnUrl) = (columnId, columnUrl)
-        (self.createdAt, self.creator) = (createdAt, creator)
-        (self.id, self.nodeId) = (id, nodeId)
-        (self.note, self.projectUrl) = (note, projectUrl)
-        (self.updatedAt, self.url) = (updatedAt, url)
-    }
-}
-
 /// Typed representation of the `WebhookProjectCardMoved` API schema.
 public struct WebhookProjectCardMoved: Codable {
     /// Required enumerated value serialized in the `action` wire field.
     public var action: WebhookProjectCardMovedAction
-    /// Required API value serialized in the `project_card` wire field.
+    /// Required object value serialized in the `project_card` wire field.
     public var projectCard: WebhookProjectCardMovedProjectCard
     /// A GitHub user.
     public var sender: SimpleUser
@@ -236,8 +159,8 @@ extension WebhookProjectCardMoved {
     }
 }
 
-/// Optional object value serialized in the `creator` wire field.
-public struct WebhookProjectCardMovedProjectCardVariant1Creator: Codable {
+/// Required object value serialized in the `creator` wire field.
+public struct WebhookProjectCardMovedProjectCardCreator: Codable {
     /// Optional `string` value serialized in the `avatar_url` wire field.
     public var avatarUrl: String?
     /// Optional `string` value serialized in the `events_url` wire field.
@@ -304,7 +227,7 @@ public struct WebhookProjectCardMovedProjectCardVariant1Creator: Codable {
     }
 }
 
-extension WebhookProjectCardMovedProjectCardVariant1Creator {
+extension WebhookProjectCardMovedProjectCardCreator {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
@@ -328,7 +251,7 @@ extension WebhookProjectCardMovedProjectCardVariant1Creator {
     }
 }
 
-extension WebhookProjectCardMovedProjectCardVariant1Creator {
+extension WebhookProjectCardMovedProjectCardCreator {
     public init(avatarUrl: String? = nil, eventsUrl: String? = nil, followersUrl: String? = nil, followingUrl: String? = nil, gistsUrl: String? = nil, gravatarId: String? = nil, htmlUrl: String? = nil, id: Int? = nil, login: String? = nil, nodeId: String? = nil, organizationsUrl: String? = nil, receivedEventsUrl: String? = nil, reposUrl: String? = nil, siteAdmin: Bool? = nil, starredUrl: String? = nil, subscriptionsUrl: String? = nil, type: String? = nil, url: String? = nil) {
         self.init()
         (self.avatarUrl, self.eventsUrl) = (avatarUrl, eventsUrl)
@@ -343,172 +266,76 @@ extension WebhookProjectCardMovedProjectCardVariant1Creator {
     }
 }
 
-/// Required object value serialized in the `project_card` wire field.
-public struct WebhookProjectCardMovedProjectCardVariant0: Codable {
-    /// Whether or not the card is archived
-    public var archived: Bool
-    /// Required `integer` value serialized in the `column_id` wire field.
-    public var columnId: Int
-    /// Required `uri`-formatted value serialized in the `column_url` wire field.
-    public var columnUrl: String
-    /// Required `date-time`-formatted value serialized in the `created_at` wire field.
-    public var createdAt: Date
-    /// Required object value serialized in the `creator` wire field.
-    public var creator: WebhookProjectCardMovedProjectCardVariant0Creator?
-    /// The project card's ID
-    public var id: Int
-    /// Required `string` value serialized in the `node_id` wire field.
-    public var nodeId: String
-    /// Required `string` value serialized in the `note` wire field.
-    public var note: String?
-    /// Required `uri`-formatted value serialized in the `project_url` wire field.
-    public var projectUrl: String
-    /// Required `date-time`-formatted value serialized in the `updated_at` wire field.
-    public var updatedAt: Date
-    /// Required `uri`-formatted value serialized in the `url` wire field.
-    public var url: String
-    /// Optional `integer` value serialized in the `after_id` wire field.
-    public var afterId: Int?
-    /// Optional `uri`-formatted value serialized in the `content_url` wire field.
-    public var contentUrl: String?
+/// Optional object value serialized in the `changes` wire field.
+public struct WebhookProjectCardMovedChanges: Codable {
+    /// Required object value serialized in the `column_id` wire field.
+    public var columnId: WebhookProjectCardMovedChangesColumnId
 
     enum CodingKeys: String, CodingKey {
-        case archived
         case columnId = "column_id"
-        case columnUrl = "column_url"
-        case createdAt = "created_at"
-        case creator
-        case id
-        case nodeId = "node_id"
-        case note
-        case projectUrl = "project_url"
-        case updatedAt = "updated_at"
-        case url
-        case afterId = "after_id"
-        case contentUrl = "content_url"
     }
 
     private init(sdkCopy value: Self) { self = value }
 }
 
-extension WebhookProjectCardMovedProjectCardVariant0 {
+extension WebhookProjectCardMovedChanges {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.archived = try container.sdkDecodeRequired(.archived)
+        guard container.contains(.columnId) else {
+            throw SdkValidationError(field: "column_id", code: "required", message: "Validation failed for 'column_id': value is required")
+        }
         self.columnId = try container.sdkDecodeRequired(.columnId)
-        self.columnUrl = try container.sdkDecodeRequired(.columnUrl)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.creator = try container.sdkDecodeNullable(.creator)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.note = try container.sdkDecodeNullable(.note)
-        self.projectUrl = try container.sdkDecodeRequired(.projectUrl)
-        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.afterId = try container.sdkDecodeIfPresent(.afterId)
-        self.contentUrl = try container.sdkDecodeIfPresent(.contentUrl)
-            try sdkValidateUri("column_url", self.columnUrl)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateUri("project_url", self.projectUrl)
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-            try sdkValidateUri("url", self.url)
-        if let value = self.contentUrl {
-            try sdkValidateUri("content_url", value)
-        }
     }
 }
 
-extension WebhookProjectCardMovedProjectCardVariant0 {
-    public init(archived: Bool, columnId: Int, columnUrl: String, createdAt: Date, creator: WebhookProjectCardMovedProjectCardVariant0Creator?, id: Int, nodeId: String, note: String?, projectUrl: String, updatedAt: Date, url: String, afterId: Int? = nil, contentUrl: String? = nil) throws {
-        (self.archived, self.columnId) = (archived, columnId)
-        (self.columnUrl, self.createdAt) = (columnUrl, createdAt)
-        (self.creator, self.id) = (creator, id)
-        (self.nodeId, self.note) = (nodeId, note)
-        (self.projectUrl, self.updatedAt) = (projectUrl, updatedAt)
-        (self.url, self.afterId) = (url, afterId)
-        self.contentUrl = contentUrl
-            try sdkValidateUri("column_url", self.columnUrl)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateUri("project_url", self.projectUrl)
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-            try sdkValidateUri("url", self.url)
-        if let value = self.contentUrl {
-            try sdkValidateUri("content_url", value)
-        }
+extension WebhookProjectCardMovedChanges {
+    public init(columnId: WebhookProjectCardMovedChangesColumnId) {
+        self.columnId = columnId
     }
 }
 
-/// Required object value serialized in the `creator` wire field.
-public struct WebhookProjectCardMovedProjectCardVariant0Creator: Codable {
-    /// Required `integer` value serialized in the `id` wire field.
-    public var id: Int
-    /// Required `string` value serialized in the `login` wire field.
-    public var login: String
-    /// Optional `uri`-formatted value serialized in the `avatar_url` wire field.
-    public var avatarUrl: String?
-    /// Optional `boolean` value serialized in the `deleted` wire field.
-    public var deleted: Bool?
-    /// Optional `string` value serialized in the `email` wire field.
-    public var email: String?
-    /// Optional `uri-template`-formatted value serialized in the `events_url` wire field.
-    public var eventsUrl: String?
-    /// Optional `uri`-formatted value serialized in the `followers_url` wire field.
-    public var followersUrl: String?
-    /// Optional `uri-template`-formatted value serialized in the `following_url` wire field.
-    public var followingUrl: String?
-    /// Optional `uri-template`-formatted value serialized in the `gists_url` wire field.
-    public var gistsUrl: String?
-    /// Optional `string` value serialized in the `gravatar_id` wire field.
-    public var gravatarId: String?
-    /// Optional `uri`-formatted value serialized in the `html_url` wire field.
-    public var htmlUrl: String?
-    /// Optional `string` value serialized in the `name` wire field.
-    public var name: String?
-    /// Optional `string` value serialized in the `node_id` wire field.
-    public var nodeId: String?
-    /// Optional `uri`-formatted value serialized in the `organizations_url` wire field.
-    public var organizationsUrl: String?
-    /// Optional `uri`-formatted value serialized in the `received_events_url` wire field.
-    public var receivedEventsUrl: String?
-    /// Optional `uri`-formatted value serialized in the `repos_url` wire field.
-    public var reposUrl: String?
-    /// Optional `boolean` value serialized in the `site_admin` wire field.
-    public var siteAdmin: Bool?
-    /// Optional `uri-template`-formatted value serialized in the `starred_url` wire field.
-    public var starredUrl: String?
-    /// Optional `uri`-formatted value serialized in the `subscriptions_url` wire field.
-    public var subscriptionsUrl: String?
-    /// Optional enumerated value serialized in the `type` wire field.
-    public var type: WebhookProjectCardMovedProjectCardVariant0CreatorType?
-    /// Optional `uri`-formatted value serialized in the `url` wire field.
-    public var url: String?
-    /// Optional `string` value serialized in the `user_view_type` wire field.
-    public var userViewType: String?
+/// Required object value serialized in the `column_id` wire field.
+public struct WebhookProjectCardMovedChangesColumnId: Codable {
+    /// Required `integer` value serialized in the `from` wire field.
+    public var from: Int
 
     enum CodingKeys: String, CodingKey {
-        case id
-        case login
-        case avatarUrl = "avatar_url"
-        case deleted
-        case email
-        case eventsUrl = "events_url"
-        case followersUrl = "followers_url"
-        case followingUrl = "following_url"
-        case gistsUrl = "gists_url"
-        case gravatarId = "gravatar_id"
-        case htmlUrl = "html_url"
-        case name
-        case nodeId = "node_id"
-        case organizationsUrl = "organizations_url"
-        case receivedEventsUrl = "received_events_url"
-        case reposUrl = "repos_url"
-        case siteAdmin = "site_admin"
-        case starredUrl = "starred_url"
-        case subscriptionsUrl = "subscriptions_url"
-        case type
-        case url
-        case userViewType = "user_view_type"
+        case from
     }
 
     private init(sdkCopy value: Self) { self = value }
+}
+
+extension WebhookProjectCardMovedChangesColumnId {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.from) else {
+            throw SdkValidationError(field: "from", code: "required", message: "Validation failed for 'from': value is required")
+        }
+        self.from = try container.sdkDecodeRequired(.from)
+    }
+}
+
+extension WebhookProjectCardMovedChangesColumnId {
+    public init(from: Int) {
+        self.from = from
+    }
+}
+
+/// Required enumerated value serialized in the `action` wire field.
+public struct WebhookProjectCardMovedAction: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let moved = WebhookProjectCardMovedAction(rawValue: "moved")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
 }

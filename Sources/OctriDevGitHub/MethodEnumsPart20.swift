@@ -6,6 +6,43 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
+public struct IssuesUpdateResponseVariant1SuggestionsAssigneesItemConfidence: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let low = IssuesUpdateResponseVariant1SuggestionsAssigneesItemConfidence(rawValue: "low")
+    public static let medium = IssuesUpdateResponseVariant1SuggestionsAssigneesItemConfidence(rawValue: "medium")
+    public static let high = IssuesUpdateResponseVariant1SuggestionsAssigneesItemConfidence(rawValue: "high")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Provider namespace
+public struct AgentTasksGetTaskByIdResponseVariant0ArtifactsItemProvider: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let github = AgentTasksGetTaskByIdResponseVariant0ArtifactsItemProvider(rawValue: "github")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
 /// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
 /// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
 public struct AgentAutomationsCreateRepoAutomationRequestBodyTriggersIssueLX5da6481756: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
@@ -152,46 +189,6 @@ public struct AgentsCreateOrUpdateOrgSecretRequestBodyVisibility: RawRepresentab
     public static let all = AgentsCreateOrUpdateOrgSecretRequestBodyVisibility(rawValue: "all")
     public static let `private` = AgentsCreateOrUpdateOrgSecretRequestBodyVisibility(rawValue: "private")
     public static let selected = AgentsCreateOrUpdateOrgSecretRequestBodyVisibility(rawValue: "selected")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-public struct SecurityAdvisoriesListGlobalAdvisoriesParameterXf39a7485: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let updated = SecurityAdvisoriesListGlobalAdvisoriesParameterXf39a7485(rawValue: "updated")
-    public static let published = SecurityAdvisoriesListGlobalAdvisoriesParameterXf39a7485(rawValue: "published")
-    public static let epssPercentage = SecurityAdvisoriesListGlobalAdvisoriesParameterXf39a7485(rawValue: "epss_percentage")
-    public static let epssPercentile = SecurityAdvisoriesListGlobalAdvisoriesParameterXf39a7485(rawValue: "epss_percentile")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// The enablement status of secret scanning non provider patterns
-public struct CodeSecurityCreateConfigurationForEnterpriseRequestBodySecretX420f0f3b3c: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let enabled = CodeSecurityCreateConfigurationForEnterpriseRequestBodySecretX420f0f3b3c(rawValue: "enabled")
-    public static let disabled = CodeSecurityCreateConfigurationForEnterpriseRequestBodySecretX420f0f3b3c(rawValue: "disabled")
-    public static let notSet = CodeSecurityCreateConfigurationForEnterpriseRequestBodySecretX420f0f3b3c(rawValue: "not_set")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

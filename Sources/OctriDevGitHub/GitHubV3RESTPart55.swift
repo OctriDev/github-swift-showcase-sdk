@@ -20,8 +20,8 @@ public class ChecksNamespace {
     }
 
 /// Updates a check run for a specific commit in a repository. > [!NOTE] > The endpoints to manage checks only look for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array. OAuth apps and personal access tokens (classic) cannot use this endpoint.
-    public func update(options: ChecksMethods.ChecksUpdateOptions, requestOptions: RequestOptions? = nil) async throws -> CheckRun {
-        return try await ChecksMethods.checksUpdate(config: config, options: options, requestOptions: requestOptions)
+    public func update(owner: String, repo: String, checkRunId: Int, body: [String: JSONValue], requestOptions: RequestOptions? = nil) async throws -> CheckRun {
+        return try await ChecksMethods.checksUpdate(config: config, owner: owner, repo: repo, checkRunId: checkRunId, body: body, requestOptions: requestOptions)
     }
 
 /// Lists annotations for a check run using the annotation `id`. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint on a private repository.

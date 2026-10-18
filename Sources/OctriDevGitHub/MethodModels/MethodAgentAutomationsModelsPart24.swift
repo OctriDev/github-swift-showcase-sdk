@@ -8,23 +8,6 @@ import Foundation
 #endif
 
 // Canonical agentAutomations operation model declarations
-public struct AgentAutomationsListRepoAutomationsResponseAutomationsItemTriX0277499a33: Codable {
-    /// A GitHub issue or pull request search query.
-    public var query: String?
-    /// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
-    /// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
-    public var writeScope: AgentAutomationsListRepoAutomationsResponseAutomationsItemTriXa6d845a784?
-
-    enum CodingKeys: String, CodingKey {
-        case query
-        case writeScope = "write_scope"
-    }
-
-    init() {
-        (self.query, self.writeScope) = (nil, nil)
-    }
-}
-
 extension AgentAutomationsListRepoAutomationsResponseAutomationsItemTriX0277499a33 {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -523,5 +506,13 @@ extension AgentAutomationsCreateRepoAutomationRequestBodyReasoningEffort: Codabl
 
     public func encode(to encoder: Encoder) throws {
         if try encodeGroup1(to: encoder) { return }
+    }
+}
+
+extension AgentAutomationsCreateRepoAutomationRequestBodyReasoningEffort {
+    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
+        if let value = try? container.decode(String.self) { return .stringValue(value) }
+        if let value = try? container.decode(String.self) { return .stringValue1(value) }
+        return nil
     }
 }

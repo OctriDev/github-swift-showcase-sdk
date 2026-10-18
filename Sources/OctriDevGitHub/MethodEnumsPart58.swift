@@ -6,25 +6,6 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public struct IssuesUpdateResponseVariant1SuggestionsLabelsItemConfidence: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let low = IssuesUpdateResponseVariant1SuggestionsLabelsItemConfidence(rawValue: "low")
-    public static let medium = IssuesUpdateResponseVariant1SuggestionsLabelsItemConfidence(rawValue: "medium")
-    public static let high = IssuesUpdateResponseVariant1SuggestionsLabelsItemConfidence(rawValue: "high")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
 /// Machine-readable error code
 public struct AgentAutomationsCreateRepoAutomationResponseErrorsItemCodeX59282d73: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
@@ -195,6 +176,24 @@ public struct AgentAutomationsCreateRepoAutomationResponseTriggersWorkflowRXfdbc
 
     public init(rawValue: String) { self.rawValue = rawValue }
     public static let failure = AgentAutomationsCreateRepoAutomationResponseTriggersWorkflowRXfdbca9be96(rawValue: "failure")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+public struct AgentAutomationsGetRepoAutomationResponseTriggersPullRequestCX15b4780a96: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let timelineComment = AgentAutomationsGetRepoAutomationResponseTriggersPullRequestCX15b4780a96(rawValue: "timeline_comment")
+    public static let reviewComment = AgentAutomationsGetRepoAutomationResponseTriggersPullRequestCX15b4780a96(rawValue: "review_comment")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

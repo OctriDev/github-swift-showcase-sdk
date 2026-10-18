@@ -4,6 +4,25 @@
 import Foundation
 
 // Activity domain models
+extension Discussion {
+    public init(activeLockReason: String?, answerChosenAt: String?, answerChosenBy: DiscussionAnswerChosenBy?, answerHtmlUrl: String?, body: String, category: DiscussionCategory, comments: Int, createdAt: Date, htmlUrl: String, id: Int, locked: Bool, nodeId: String, number: Int, repositoryUrl: String, state: DiscussionState, stateReason: DiscussionStateReason?, title: String, updatedAt: Date, user: DiscussionUser?, authorAssociation: DiscussionAuthorAssociation? = nil, reactions: DiscussionReactions? = nil, timelineUrl: String? = nil, labels: [Label]? = nil) throws {
+        (self.activeLockReason, self.answerChosenAt) = (activeLockReason, answerChosenAt)
+        (self.answerChosenBy, self.answerHtmlUrl) = (answerChosenBy, answerHtmlUrl)
+        (self.body, self.category) = (body, category)
+        (self.comments, self.createdAt) = (comments, createdAt)
+        (self.htmlUrl, self.id) = (htmlUrl, id)
+        (self.locked, self.nodeId) = (locked, nodeId)
+        (self.number, self.repositoryUrl) = (number, repositoryUrl)
+        (self.state, self.stateReason) = (state, stateReason)
+        (self.title, self.updatedAt) = (title, updatedAt)
+        (self.user, self.authorAssociation) = (user, authorAssociation)
+        (self.reactions, self.timelineUrl) = (reactions, timelineUrl)
+        self.labels = labels
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+    }
+}
+
 /// Stargazer History
 public struct StargazerHistory: Codable {
     /// The number of stars created on each day of the week, starting on Sunday.
@@ -445,35 +464,5 @@ extension ForkEventForkee {
         self.description = description
         self.fork = fork
         self.url = url
-    }
-}
-
-extension ForkEventForkee {
-    mutating func sdkSet3(_ forksUrl: String?, _ keysUrl: String?, _ collaboratorsUrl: String?, _ teamsUrl: String?, _ hooksUrl: String?) {
-        self.forksUrl = forksUrl
-        self.keysUrl = keysUrl
-        self.collaboratorsUrl = collaboratorsUrl
-        self.teamsUrl = teamsUrl
-        self.hooksUrl = hooksUrl
-    }
-}
-
-extension ForkEventForkee {
-    mutating func sdkSet4(_ issueEventsUrl: String?, _ eventsUrl: String?, _ assigneesUrl: String?, _ branchesUrl: String?, _ tagsUrl: String?) {
-        self.issueEventsUrl = issueEventsUrl
-        self.eventsUrl = eventsUrl
-        self.assigneesUrl = assigneesUrl
-        self.branchesUrl = branchesUrl
-        self.tagsUrl = tagsUrl
-    }
-}
-
-extension ForkEventForkee {
-    mutating func sdkSet5(_ blobsUrl: String?, _ gitTagsUrl: String?, _ gitRefsUrl: String?, _ treesUrl: String?, _ statusesUrl: String?) {
-        self.blobsUrl = blobsUrl
-        self.gitTagsUrl = gitTagsUrl
-        self.gitRefsUrl = gitRefsUrl
-        self.treesUrl = treesUrl
-        self.statusesUrl = statusesUrl
     }
 }

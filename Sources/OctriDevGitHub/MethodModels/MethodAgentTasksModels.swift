@@ -145,34 +145,6 @@ extension AgentTasksListTasksResponseErrorsItemXc2e9a932 {
     }
 }
 
-/// A GitHub user
-public struct AgentTasksListTasksResponseTasksItemCreatorVariant0: Codable {
-    /// The unique identifier of the user
-    public var id: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-    }
-
-    init() {
-        self.id = nil
-    }
-}
-
-extension AgentTasksListTasksResponseTasksItemCreatorVariant0 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeIfPresent(.id)
-    }
-}
-
-extension AgentTasksListTasksResponseTasksItemCreatorVariant0 {
-    public init(id: Int? = nil) {
-        self.init()
-        self.id = id
-    }
-}
-
 /// Structured information about billing units consumed by the session.
 public struct AgentTasksGetTaskByIdResponseVariant1SessionsItemUsage: Codable {
     /// Billing unit used for this session. New sessions since June 1, 2026 use `ai_credits`, but older sessions use
@@ -220,7 +192,7 @@ public struct AgentTasksGetTaskByIdResponseVariant0ArtifactsItem: Codable {
     /// Type of artifact. Available Values: `pull`, `branch`.
     public var type: AgentTasksGetTaskByIdResponseVariant0ArtifactsItemType
     /// Resource data (shape depends on type)
-    public var data: ArtifactsItemData3
+    public var data: AgentTasksGetTaskByIdResponseVariant0ArtifactsItemData
 
     enum CodingKeys: String, CodingKey {
         case provider
@@ -250,7 +222,7 @@ extension AgentTasksGetTaskByIdResponseVariant0ArtifactsItem {
 }
 
 extension AgentTasksGetTaskByIdResponseVariant0ArtifactsItem {
-    public init(provider: AgentTasksGetTaskByIdResponseVariant0ArtifactsItemProvider, type: AgentTasksGetTaskByIdResponseVariant0ArtifactsItemType, data: ArtifactsItemData3) {
+    public init(provider: AgentTasksGetTaskByIdResponseVariant0ArtifactsItemProvider, type: AgentTasksGetTaskByIdResponseVariant0ArtifactsItemType, data: AgentTasksGetTaskByIdResponseVariant0ArtifactsItemData) {
         (self.provider, self.type) = (provider, type)
         self.data = data
     }
@@ -309,34 +281,6 @@ extension AgentTasksGetTaskByIdResponseVariant0CustomAgent {
 
 extension AgentTasksGetTaskByIdResponseVariant0CustomAgent {
     public init(id: String? = nil) {
-        self.init()
-        self.id = id
-    }
-}
-
-/// A GitHub user
-public struct AgentTasksListTasksForRepoResponseTasksItemCreatorVariant0: Codable {
-    /// The unique identifier of the user
-    public var id: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-    }
-
-    init() {
-        self.id = nil
-    }
-}
-
-extension AgentTasksListTasksForRepoResponseTasksItemCreatorVariant0 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeIfPresent(.id)
-    }
-}
-
-extension AgentTasksListTasksForRepoResponseTasksItemCreatorVariant0 {
-    public init(id: Int? = nil) {
         self.init()
         self.id = id
     }
@@ -530,4 +474,42 @@ public struct AgentTasksGetTaskByIdResponseVariant1SessionsItem: Codable {
     }
 
     private init(sdkCopy value: Self) { self = value }
+}
+
+extension AgentTasksGetTaskByIdResponseVariant1SessionsItem {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
+        }
+        guard container.contains(.state) else {
+            throw SdkValidationError(field: "state", code: "required", message: "Validation failed for 'state': value is required")
+        }
+        guard container.contains(.createdAt) else {
+            throw SdkValidationError(field: "created_at", code: "required", message: "Validation failed for 'created_at': value is required")
+        }
+        self.id = try container.sdkDecodeRequired(.id)
+        self.state = try container.sdkDecodeRequired(.state)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.name = try container.sdkDecodeIfPresent(.name)
+        self.user = try container.sdkDecodeIfPresent(.user)
+        self.owner = try container.sdkDecodeIfPresent(.owner)
+        self.repository = try container.sdkDecodeIfPresent(.repository)
+        self.taskId = try container.sdkDecodeIfPresent(.taskId)
+        self.updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
+        self.completedAt = try container.sdkDecodeIfPresent(.completedAt)
+        self.prompt = try container.sdkDecodeIfPresent(.prompt)
+        self.headRef = try container.sdkDecodeIfPresent(.headRef)
+        self.baseRef = try container.sdkDecodeIfPresent(.baseRef)
+        self.model = try container.sdkDecodeIfPresent(.model)
+        self.usage = try container.sdkDecodeIfPresent(.usage)
+        self.error = try container.sdkDecodeIfPresent(.error)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        if let value = self.updatedAt {
+            try sdkValidateDateTime("updated_at", sdkWireString(value))
+        }
+        if let value = self.completedAt {
+            try sdkValidateDateTime("completed_at", sdkWireString(value))
+        }
+    }
 }

@@ -181,330 +181,344 @@ extension PersonalAccessTokenRequestRepositoriesItem {
     }
 }
 
-/// The type of the referenced issue.
-public struct IssueReferenceIssueType: Codable {
-    /// The unique identifier of the issue type.
-    public var id: Int
-    /// The node identifier of the issue type.
-    public var nodeId: String
-    /// The name of the issue type.
-    public var name: String
-    /// The color of the issue type.
-    public var color: String?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case nodeId = "node_id"
-        case name
-        case color
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension IssueReferenceIssueType {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.nodeId) else {
-            throw SdkValidationError(field: "node_id", code: "required", message: "Validation failed for 'node_id': value is required")
-        }
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.color = try container.sdkDecodeIfPresent(.color)
-    }
-}
-
-extension IssueReferenceIssueType {
-    public init(id: Int, nodeId: String, name: String, color: String? = nil) {
-        (self.id, self.nodeId) = (id, nodeId)
-        (self.name, self.color) = (name, color)
-    }
-}
-
-/// A group of pull requests that the merge queue has grouped together to be merged.
-public struct MergeGroup: Codable {
-    /// The SHA of the merge group.
-    public var headSha: String
-    /// The full ref of the merge group.
-    public var headRef: String
-    /// The SHA of the merge group's parent commit.
-    public var baseSha: String
-    /// The full ref of the branch the merge group will be merged into.
-    public var baseRef: String
-    /// A commit.
-    public var headCommit: SimpleCommit
-
-    enum CodingKeys: String, CodingKey {
-        case headSha = "head_sha"
-        case headRef = "head_ref"
-        case baseSha = "base_sha"
-        case baseRef = "base_ref"
-        case headCommit = "head_commit"
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension MergeGroup {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.headSha) else {
-            throw SdkValidationError(field: "head_sha", code: "required", message: "Validation failed for 'head_sha': value is required")
-        }
-        guard container.contains(.headRef) else {
-            throw SdkValidationError(field: "head_ref", code: "required", message: "Validation failed for 'head_ref': value is required")
-        }
-        guard container.contains(.baseSha) else {
-            throw SdkValidationError(field: "base_sha", code: "required", message: "Validation failed for 'base_sha': value is required")
-        }
-        guard container.contains(.baseRef) else {
-            throw SdkValidationError(field: "base_ref", code: "required", message: "Validation failed for 'base_ref': value is required")
-        }
-        guard container.contains(.headCommit) else {
-            throw SdkValidationError(field: "head_commit", code: "required", message: "Validation failed for 'head_commit': value is required")
-        }
-        self.headSha = try container.sdkDecodeRequired(.headSha)
-        self.headRef = try container.sdkDecodeRequired(.headRef)
-        self.baseSha = try container.sdkDecodeRequired(.baseSha)
-        self.baseRef = try container.sdkDecodeRequired(.baseRef)
-        self.headCommit = try container.sdkDecodeRequired(.headCommit)
-    }
-}
-
-extension MergeGroup {
-    public init(headSha: String, headRef: String, baseSha: String, baseRef: String, headCommit: SimpleCommit) {
-        (self.headSha, self.headRef) = (headSha, headRef)
-        (self.baseSha, self.baseRef) = (baseSha, baseRef)
-        self.headCommit = headCommit
-    }
-}
-
-/// Details of a Personal Access Token Request.
-public struct PersonalAccessTokenRequest: Codable {
-    /// Unique identifier of the request for access via fine-grained personal access token. Used as the
-    /// `pat_request_id` parameter in the list and review API calls.
-    public var id: Int
-    /// A GitHub user.
-    public var owner: SimpleUser
-    /// New requested permissions, categorized by type of permission.
-    public var permissionsAdded: PersonalAccessTokenRequestPermissionsAdded
-    /// Requested permissions that elevate access for a previously approved request for access, categorized by type
-    /// of permission.
-    public var permissionsUpgraded: PersonalAccessTokenRequestPermissionsUpgraded
-    /// Permissions requested, categorized by type of permission. This field incorporates `permissions_added` and
-    /// `permissions_upgraded`.
-    public var permissionsResult: PersonalAccessTokenRequestPermissionsResult
-    /// Type of repository selection requested.
-    public var repositorySelection: PersonalAccessTokenRequestRepositorySelection
-    /// The number of repositories the token is requesting access to. This field is only populated when
-    /// `repository_selection` is `subset`.
-    public var repositoryCount: Int?
-    /// An array of repository objects the token is requesting access to. This field is only populated when
-    /// `repository_selection` is `subset`.
-    public var repositories: [PersonalAccessTokenRequestRepositoriesItem]?
-    /// Date and time when the request for access was created.
-    public var createdAt: String
-    /// Unique identifier of the user's token. This field can also be found in audit log events and the
-    /// organization's settings for their PAT grants.
-    public var tokenId: Int
-    /// The name given to the user's token. This field can also be found in an organization's settings page for
-    /// Active Tokens.
-    public var tokenName: String
-    /// Whether the associated fine-grained personal access token has expired.
-    public var tokenExpired: Bool
-    /// Date and time when the associated fine-grained personal access token expires.
-    public var tokenExpiresAt: String?
-    /// Date and time when the associated fine-grained personal access token was last used for authentication.
-    public var tokenLastUsedAt: String?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case owner
-        case permissionsAdded = "permissions_added"
-        case permissionsUpgraded = "permissions_upgraded"
-        case permissionsResult = "permissions_result"
-        case repositorySelection = "repository_selection"
-        case repositoryCount = "repository_count"
-        case repositories
-        case createdAt = "created_at"
-        case tokenId = "token_id"
-        case tokenName = "token_name"
-        case tokenExpired = "token_expired"
-        case tokenExpiresAt = "token_expires_at"
-        case tokenLastUsedAt = "token_last_used_at"
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension PersonalAccessTokenRequest {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.owner = try container.sdkDecodeRequired(.owner)
-        self.permissionsAdded = try container.sdkDecodeRequired(.permissionsAdded)
-        self.permissionsUpgraded = try container.sdkDecodeRequired(.permissionsUpgraded)
-        self.permissionsResult = try container.sdkDecodeRequired(.permissionsResult)
-        self.repositorySelection = try container.sdkDecodeRequired(.repositorySelection)
-        self.repositoryCount = try container.sdkDecodeNullable(.repositoryCount)
-        self.repositories = try container.sdkDecodeNullable(.repositories)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.tokenId = try container.sdkDecodeRequired(.tokenId)
-        self.tokenName = try container.sdkDecodeRequired(.tokenName)
-        self.tokenExpired = try container.sdkDecodeRequired(.tokenExpired)
-        self.tokenExpiresAt = try container.sdkDecodeNullable(.tokenExpiresAt)
-        self.tokenLastUsedAt = try container.sdkDecodeNullable(.tokenLastUsedAt)
-    }
-}
-
-extension PersonalAccessTokenRequest {
-    public init(id: Int, owner: SimpleUser, permissionsAdded: PersonalAccessTokenRequestPermissionsAdded, permissionsUpgraded: PersonalAccessTokenRequestPermissionsUpgraded, permissionsResult: PersonalAccessTokenRequestPermissionsResult, repositorySelection: PersonalAccessTokenRequestRepositorySelection, repositoryCount: Int?, repositories: [PersonalAccessTokenRequestRepositoriesItem]?, createdAt: String, tokenId: Int, tokenName: String, tokenExpired: Bool, tokenExpiresAt: String?, tokenLastUsedAt: String?) {
-        (self.id, self.owner) = (id, owner)
-        (self.permissionsAdded, self.permissionsUpgraded) = (permissionsAdded, permissionsUpgraded)
-        (self.permissionsResult, self.repositorySelection) = (permissionsResult, repositorySelection)
-        (self.repositoryCount, self.repositories) = (repositoryCount, repositories)
-        (self.createdAt, self.tokenId) = (createdAt, tokenId)
-        (self.tokenName, self.tokenExpired) = (tokenName, tokenExpired)
-        (self.tokenExpiresAt, self.tokenLastUsedAt) = (tokenExpiresAt, tokenLastUsedAt)
-    }
-}
-
-/// An enterprise on GitHub. Webhook payloads contain the `enterprise` property when the webhook is configured on an
-/// enterprise account or an organization that's part of an enterprise account. For more information, see "About
-/// enterprise accounts."
-public struct EnterpriseWebhooks: Codable {
-    /// Required `uri`-formatted value serialized in the `html_url` wire field.
-    /// - Example: "https://github.com/enterprises/octo-business"
-    public var htmlUrl: String
-    /// Unique identifier of the enterprise
-    /// - Example: 42
+/// Typed representation of the `PullRequestWebhook` API schema.
+public struct PullRequestWebhook: Codable {
+    /// Required `uri`-formatted value serialized in the `url` wire field.
+    /// - Example: "https://api.github.com/repos/octocat/Hello-World/pulls/1347"
+    public var url: String
+    /// Required `int64`-formatted value serialized in the `id` wire field.
+    /// - Example: 1
     public var id: Int
     /// Required `string` value serialized in the `node_id` wire field.
-    /// - Example: "MDEwOlJlcG9zaXRvcnkxMjk2MjY5"
+    /// - Example: "MDExOlB1bGxSZXF1ZXN0MQ=="
     public var nodeId: String
-    /// The name of the enterprise.
-    /// - Example: "Octo Business"
-    public var name: String
-    /// The slug url identifier for the enterprise.
-    /// - Example: "octo-business"
-    public var slug: String
+    /// Required `uri`-formatted value serialized in the `html_url` wire field.
+    /// - Example: "https://github.com/octocat/Hello-World/pull/1347"
+    public var htmlUrl: String
+    /// Required `uri`-formatted value serialized in the `diff_url` wire field.
+    /// - Example: "https://github.com/octocat/Hello-World/pull/1347.diff"
+    public var diffUrl: String
+    /// Required `uri`-formatted value serialized in the `patch_url` wire field.
+    /// - Example: "https://github.com/octocat/Hello-World/pull/1347.patch"
+    public var patchUrl: String
+    /// Required `uri`-formatted value serialized in the `issue_url` wire field.
+    /// - Example: "https://api.github.com/repos/octocat/Hello-World/issues/1347"
+    public var issueUrl: String
+    /// Required `uri`-formatted value serialized in the `commits_url` wire field.
+    /// - Example: "https://api.github.com/repos/octocat/Hello-World/pulls/1347/commits"
+    public var commitsUrl: String
+    /// Required `uri`-formatted value serialized in the `review_comments_url` wire field.
+    /// - Example: "https://api.github.com/repos/octocat/Hello-World/pulls/1347/comments"
+    public var reviewCommentsUrl: String
+    /// Required `string` value serialized in the `review_comment_url` wire field.
+    /// - Example: "https://api.github.com/repos/octocat/Hello-World/pulls/comments{/number}"
+    public var reviewCommentUrl: String
+    /// Required `uri`-formatted value serialized in the `comments_url` wire field.
+    /// - Example: "https://api.github.com/repos/octocat/Hello-World/issues/1347/comments"
+    public var commentsUrl: String
+    /// Required `uri`-formatted value serialized in the `statuses_url` wire field.
+    /// - Example:
+    /// "https://api.github.com/repos/octocat/Hello-World/statuses/6dcb09b5b57875f334f61aebed695e2e4193db5e"
+    public var statusesUrl: String
+    /// Number uniquely identifying the pull request within its repository.
+    /// - Example: 42
+    public var number: Int
+    /// State of this Pull Request. Either `open` or `closed`.
+    /// - Example: "open"
+    public var state: PullRequestState
+    /// Required `boolean` value serialized in the `locked` wire field.
+    /// - Example: true
+    public var locked: Bool
+    /// The title of the pull request.
+    /// - Example: "Amazing new feature"
+    public var title: String
+    /// A GitHub user.
+    public var user: SimpleUser
+    /// Required `string` value serialized in the `body` wire field.
+    /// - Example: "Please pull these awesome changes"
+    public var body: String?
+    /// Required array value serialized in the `labels` wire field.
+    public var labels: [PullRequestLabelsItem]
+    /// A collection of related issues and pull requests.
+    public var milestone: NullableMilestone?
     /// Required `date-time`-formatted value serialized in the `created_at` wire field.
-    /// - Example: "2019-01-26T19:01:12Z"
-    public var createdAt: Date?
+    /// - Example: "2011-01-26T19:01:12Z"
+    public var createdAt: Date
     /// Required `date-time`-formatted value serialized in the `updated_at` wire field.
-    /// - Example: "2019-01-26T19:14:43Z"
-    public var updatedAt: Date?
-    /// Required `uri`-formatted value serialized in the `avatar_url` wire field.
-    public var avatarUrl: String
-    /// A short description of the enterprise.
-    public var description: String?
-    /// The enterprise's website URL.
-    public var websiteUrl: String?
+    /// - Example: "2011-01-26T19:01:12Z"
+    public var updatedAt: Date
+    /// Required `date-time`-formatted value serialized in the `closed_at` wire field.
+    /// - Example: "2011-01-26T19:01:12Z"
+    public var closedAt: Date?
+    /// Required `date-time`-formatted value serialized in the `merged_at` wire field.
+    /// - Example: "2011-01-26T19:01:12Z"
+    public var mergedAt: Date?
+    /// Required `string` value serialized in the `merge_commit_sha` wire field.
+    /// - Example: "e5bd3914e2e596debea16f433f57875b5b90bcd6"
+    public var mergeCommitSha: String?
+    /// A GitHub user.
+    public var assignee: NullableSimpleUser?
+    /// Required object value serialized in the `head` wire field.
+    public var head: PullRequestHead
+    /// Required object value serialized in the `base` wire field.
+    public var base: PullRequestBase
+    /// Required object value serialized in the `_links` wire field.
+    public var links: PullRequestLinks
+    /// How the author is associated with the repository.
+    /// - Example: "OWNER"
+    public var authorAssociation: AuthorAssociation
+    /// The status of auto merging a pull request.
+    public var autoMerge: AutoMerge?
+    /// Required `boolean` value serialized in the `merged` wire field.
+    public var merged: Bool
+    /// Required `boolean` value serialized in the `mergeable` wire field.
+    /// - Example: true
+    public var mergeable: Bool?
+    /// Required `string` value serialized in the `mergeable_state` wire field.
+    /// - Example: "clean"
+    public var mergeableState: String
+    /// A GitHub user.
+    public var mergedBy: NullableSimpleUser?
+    /// Required `integer` value serialized in the `comments` wire field.
+    /// - Example: 10
+    public var comments: Int
+    /// Required `integer` value serialized in the `review_comments` wire field.
+    public var reviewComments: Int
+    /// Indicates whether maintainers can modify the pull request.
+    /// - Example: true
+    public var maintainerCanModify: Bool
+    /// Required `integer` value serialized in the `commits` wire field.
+    /// - Example: 3
+    public var commits: Int
+    /// Required `integer` value serialized in the `additions` wire field.
+    /// - Example: 100
+    public var additions: Int
+    /// Required `integer` value serialized in the `deletions` wire field.
+    /// - Example: 3
+    public var deletions: Int
+    /// Required `integer` value serialized in the `changed_files` wire field.
+    /// - Example: 5
+    public var changedFiles: Int
+    /// Optional `string` value serialized in the `active_lock_reason` wire field.
+    /// - Example: "too heated"
+    public var activeLockReason: String?
+    /// Optional array value serialized in the `assignees` wire field.
+    public var assignees: [SimpleUser]?
+    /// Optional array value serialized in the `requested_reviewers` wire field.
+    public var requestedReviewers: [SimpleUser]?
+    /// Optional array value serialized in the `requested_teams` wire field.
+    public var requestedTeams: [TeamSimple]?
+    /// The stack information associated with a pull request.
+    public var stack: PullRequestStack?
+    /// Indicates whether or not the pull request is a draft.
+    public var draft: Bool?
+    /// Optional `boolean` value serialized in the `rebaseable` wire field.
+    /// - Example: true
+    public var rebaseable: Bool?
+    /// Whether to allow auto-merge for pull requests.
+    public var allowAutoMerge: Bool?
+    /// Whether to allow updating the pull request's branch.
+    public var allowUpdateBranch: Bool?
+    /// Whether to delete head branches when pull requests are merged.
+    public var deleteBranchOnMerge: Bool?
+    /// The default value for a merge commit message. - `PR_TITLE` - default to the pull request's title. -
+    /// `PR_BODY` - default to the pull request's body. - `BLANK` - default to a blank commit message.
+    public var mergeCommitMessage: PullRequestWebhookVariant1MergeCommitMessage?
+    /// The default value for a merge commit title. - `PR_TITLE` - default to the pull request's title. -
+    /// `MERGE_MESSAGE` - default to the classic title for a merge message (e.g., "Merge pull request #123 from
+    /// branch-name").
+    public var mergeCommitTitle: PullRequestWebhookVariant1MergeCommitTitle?
+    /// The default value for a squash merge commit message: - `PR_BODY` - default to the pull request's body. -
+    /// `COMMIT_MESSAGES` - default to the branch's commit messages. - `BLANK` - default to a blank commit message.
+    public var squashMergeCommitMessage: PullRequestWebhookVariant1SquashMergeCommitMessage?
+    /// The default value for a squash merge commit title: - `PR_TITLE` - default to the pull request's title. -
+    /// `COMMIT_OR_PR_TITLE` - default to the commit's title (if only one commit) or the pull request's title (when
+    /// more than one commit).
+    public var squashMergeCommitTitle: PullRequestWebhookVariant1SquashMergeCommitTitle?
+    /// Whether a squash merge commit can use the pull request title as default. **This property is closing down.
+    /// Please use `squash_merge_commit_title` instead.**
+    public var useSquashPrTitleAsDefault: Bool?
 
     enum CodingKeys: String, CodingKey {
-        case htmlUrl = "html_url"
+        case url
         case id
         case nodeId = "node_id"
-        case name
-        case slug
+        case htmlUrl = "html_url"
+        case diffUrl = "diff_url"
+        case patchUrl = "patch_url"
+        case issueUrl = "issue_url"
+        case commitsUrl = "commits_url"
+        case reviewCommentsUrl = "review_comments_url"
+        case reviewCommentUrl = "review_comment_url"
+        case commentsUrl = "comments_url"
+        case statusesUrl = "statuses_url"
+        case number
+        case state
+        case locked
+        case title
+        case user
+        case body
+        case labels
+        case milestone
         case createdAt = "created_at"
         case updatedAt = "updated_at"
-        case avatarUrl = "avatar_url"
-        case description
-        case websiteUrl = "website_url"
+        case closedAt = "closed_at"
+        case mergedAt = "merged_at"
+        case mergeCommitSha = "merge_commit_sha"
+        case assignee
+        case head
+        case base
+        case links = "_links"
+        case authorAssociation = "author_association"
+        case autoMerge = "auto_merge"
+        case merged
+        case mergeable
+        case mergeableState = "mergeable_state"
+        case mergedBy = "merged_by"
+        case comments
+        case reviewComments = "review_comments"
+        case maintainerCanModify = "maintainer_can_modify"
+        case commits
+        case additions
+        case deletions
+        case changedFiles = "changed_files"
+        case activeLockReason = "active_lock_reason"
+        case assignees
+        case requestedReviewers = "requested_reviewers"
+        case requestedTeams = "requested_teams"
+        case stack
+        case draft
+        case rebaseable
+        case allowAutoMerge = "allow_auto_merge"
+        case allowUpdateBranch = "allow_update_branch"
+        case deleteBranchOnMerge = "delete_branch_on_merge"
+        case mergeCommitMessage = "merge_commit_message"
+        case mergeCommitTitle = "merge_commit_title"
+        case squashMergeCommitMessage = "squash_merge_commit_message"
+        case squashMergeCommitTitle = "squash_merge_commit_title"
+        case useSquashPrTitleAsDefault = "use_squash_pr_title_as_default"
     }
 
     private init(sdkCopy value: Self) { self = value }
 }
 
-extension EnterpriseWebhooks {
+extension PullRequestWebhook {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        self.url = try container.sdkDecodeRequired(.url)
         self.id = try container.sdkDecodeRequired(.id)
         self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.slug = try container.sdkDecodeRequired(.slug)
-        self.createdAt = try container.sdkDecodeNullable(.createdAt)
-        self.updatedAt = try container.sdkDecodeNullable(.updatedAt)
-        self.avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
-        self.description = try container.sdkDecodeIfPresent(.description)
-        self.websiteUrl = try container.sdkDecodeIfPresent(.websiteUrl)
+        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        self.diffUrl = try container.sdkDecodeRequired(.diffUrl)
+        self.patchUrl = try container.sdkDecodeRequired(.patchUrl)
+        self.issueUrl = try container.sdkDecodeRequired(.issueUrl)
+        self.commitsUrl = try container.sdkDecodeRequired(.commitsUrl)
+        self.reviewCommentsUrl = try container.sdkDecodeRequired(.reviewCommentsUrl)
+        self.reviewCommentUrl = try container.sdkDecodeRequired(.reviewCommentUrl)
+        self.commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
+        self.statusesUrl = try container.sdkDecodeRequired(.statusesUrl)
+        self.number = try container.sdkDecodeRequired(.number)
+        self.state = try container.sdkDecodeRequired(.state)
+        self.locked = try container.sdkDecodeRequired(.locked)
+        self.title = try container.sdkDecodeRequired(.title)
+        self.user = try container.sdkDecodeRequired(.user)
+        self.body = try container.sdkDecodeNullable(.body)
+        self.labels = try container.sdkDecodeRequired(.labels)
+        self.milestone = try container.sdkDecodeNullable(.milestone)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        self.closedAt = try container.sdkDecodeNullable(.closedAt)
+        self.mergedAt = try container.sdkDecodeNullable(.mergedAt)
+        self.mergeCommitSha = try container.sdkDecodeNullable(.mergeCommitSha)
+        self.assignee = try container.sdkDecodeNullable(.assignee)
+        self.head = try container.sdkDecodeRequired(.head)
+        self.base = try container.sdkDecodeRequired(.base)
+        self.links = try container.sdkDecodeRequired(.links)
+        self.authorAssociation = try container.sdkDecodeRequired(.authorAssociation)
+        self.autoMerge = try container.sdkDecodeNullable(.autoMerge)
+        self.merged = try container.sdkDecodeRequired(.merged)
+        self.mergeable = try container.sdkDecodeNullable(.mergeable)
+        self.mergeableState = try container.sdkDecodeRequired(.mergeableState)
+        self.mergedBy = try container.sdkDecodeNullable(.mergedBy)
+        self.comments = try container.sdkDecodeRequired(.comments)
+        self.reviewComments = try container.sdkDecodeRequired(.reviewComments)
+        self.maintainerCanModify = try container.sdkDecodeRequired(.maintainerCanModify)
+        self.commits = try container.sdkDecodeRequired(.commits)
+        self.additions = try container.sdkDecodeRequired(.additions)
+        self.deletions = try container.sdkDecodeRequired(.deletions)
+        self.changedFiles = try container.sdkDecodeRequired(.changedFiles)
+        self.activeLockReason = try container.sdkDecodeIfPresent(.activeLockReason)
+        self.assignees = try container.sdkDecodeIfPresent(.assignees)
+        self.requestedReviewers = try container.sdkDecodeIfPresent(.requestedReviewers)
+        self.requestedTeams = try container.sdkDecodeIfPresent(.requestedTeams)
+        self.stack = try container.sdkDecodeIfPresent(.stack)
+        self.draft = try container.sdkDecodeIfPresent(.draft)
+        self.rebaseable = try container.sdkDecodeIfPresent(.rebaseable)
+        self.allowAutoMerge = try container.sdkDecodeIfPresent(.allowAutoMerge)
+        self.allowUpdateBranch = try container.sdkDecodeIfPresent(.allowUpdateBranch)
+        self.deleteBranchOnMerge = try container.sdkDecodeIfPresent(.deleteBranchOnMerge)
+        self.mergeCommitMessage = try container.sdkDecodeIfPresent(.mergeCommitMessage)
+        self.mergeCommitTitle = try container.sdkDecodeIfPresent(.mergeCommitTitle)
+        self.squashMergeCommitMessage = try container.sdkDecodeIfPresent(.squashMergeCommitMessage)
+        self.squashMergeCommitTitle = try container.sdkDecodeIfPresent(.squashMergeCommitTitle)
+        self.useSquashPrTitleAsDefault = try container.sdkDecodeIfPresent(.useSquashPrTitleAsDefault)
+        try sdkValidateConstraintsPart1()
+        try sdkValidateConstraintsPart2()
+    }
+}
+
+extension PullRequestWebhook {
+    public init(url: String, id: Int, nodeId: String, htmlUrl: String, diffUrl: String, patchUrl: String, issueUrl: String, commitsUrl: String, reviewCommentsUrl: String, reviewCommentUrl: String, commentsUrl: String, statusesUrl: String, number: Int, state: PullRequestState, locked: Bool, title: String, user: SimpleUser, body: String?, labels: [PullRequestLabelsItem], milestone: NullableMilestone?, createdAt: Date, updatedAt: Date, closedAt: Date?, mergedAt: Date?, mergeCommitSha: String?, assignee: NullableSimpleUser?, head: PullRequestHead, base: PullRequestBase, links: PullRequestLinks, authorAssociation: AuthorAssociation, autoMerge: AutoMerge?, merged: Bool, mergeable: Bool?, mergeableState: String, mergedBy: NullableSimpleUser?, comments: Int, reviewComments: Int, maintainerCanModify: Bool, commits: Int, additions: Int, deletions: Int, changedFiles: Int, activeLockReason: String? = nil, assignees: [SimpleUser]? = nil, requestedReviewers: [SimpleUser]? = nil, requestedTeams: [TeamSimple]? = nil, stack: PullRequestStack? = nil, draft: Bool? = nil, rebaseable: Bool? = nil, allowAutoMerge: Bool? = nil, allowUpdateBranch: Bool? = nil, deleteBranchOnMerge: Bool? = nil, mergeCommitMessage: PullRequestWebhookVariant1MergeCommitMessage? = nil, mergeCommitTitle: PullRequestWebhookVariant1MergeCommitTitle? = nil, squashMergeCommitMessage: PullRequestWebhookVariant1SquashMergeCommitMessage? = nil, squashMergeCommitTitle: PullRequestWebhookVariant1SquashMergeCommitTitle? = nil, useSquashPrTitleAsDefault: Bool? = nil) throws {
+        (self.url, self.id) = (url, id)
+        (self.nodeId, self.htmlUrl) = (nodeId, htmlUrl)
+        (self.diffUrl, self.patchUrl) = (diffUrl, patchUrl)
+        (self.issueUrl, self.commitsUrl) = (issueUrl, commitsUrl)
+        (self.reviewCommentsUrl, self.reviewCommentUrl) = (reviewCommentsUrl, reviewCommentUrl)
+        (self.commentsUrl, self.statusesUrl) = (commentsUrl, statusesUrl)
+        (self.number, self.state) = (number, state)
+        (self.locked, self.title) = (locked, title)
+        (self.user, self.body) = (user, body)
+        (self.labels, self.milestone) = (labels, milestone)
+        (self.createdAt, self.updatedAt) = (createdAt, updatedAt)
+        (self.closedAt, self.mergedAt) = (closedAt, mergedAt)
+        (self.mergeCommitSha, self.assignee) = (mergeCommitSha, assignee)
+        (self.head, self.base) = (head, base)
+        (self.links, self.authorAssociation) = (links, authorAssociation)
+        (self.autoMerge, self.merged) = (autoMerge, merged)
+        (self.mergeable, self.mergeableState) = (mergeable, mergeableState)
+        (self.mergedBy, self.comments) = (mergedBy, comments)
+        (self.reviewComments, self.maintainerCanModify) = (reviewComments, maintainerCanModify)
+        (self.commits, self.additions) = (commits, additions)
+        (self.deletions, self.changedFiles) = (deletions, changedFiles)
+        (self.activeLockReason, self.assignees) = (activeLockReason, assignees)
+        (self.requestedReviewers, self.requestedTeams) = (requestedReviewers, requestedTeams)
+        (self.stack, self.draft) = (stack, draft)
+        (self.rebaseable, self.allowAutoMerge) = (rebaseable, allowAutoMerge)
+        (self.allowUpdateBranch, self.deleteBranchOnMerge) = (allowUpdateBranch, deleteBranchOnMerge)
+        (self.mergeCommitMessage, self.mergeCommitTitle) = (mergeCommitMessage, mergeCommitTitle)
+        self.squashMergeCommitMessage = squashMergeCommitMessage
+        self.squashMergeCommitTitle = squashMergeCommitTitle
+        self.useSquashPrTitleAsDefault = useSquashPrTitleAsDefault
+        try sdkValidateConstraintsPart1()
+        try sdkValidateConstraintsPart2()
+    }
+}
+
+extension PullRequestWebhook {
+    func sdkValidateConstraintsPart1() throws {
+            try sdkValidateUri("url", self.url)
             try sdkValidateUri("html_url", self.htmlUrl)
-        if let value = self.createdAt {
-            try sdkValidateDateTime("created_at", sdkWireString(value))
+            try sdkValidateUri("diff_url", self.diffUrl)
+            try sdkValidateUri("patch_url", self.patchUrl)
+            try sdkValidateUri("issue_url", self.issueUrl)
+            try sdkValidateUri("commits_url", self.commitsUrl)
+            try sdkValidateUri("review_comments_url", self.reviewCommentsUrl)
+            try sdkValidateUri("comments_url", self.commentsUrl)
+            try sdkValidateUri("statuses_url", self.statusesUrl)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+        if let value = self.closedAt {
+            try sdkValidateDateTime("closed_at", sdkWireString(value))
         }
-        if let value = self.updatedAt {
-            try sdkValidateDateTime("updated_at", sdkWireString(value))
-        }
-            try sdkValidateUri("avatar_url", self.avatarUrl)
-        if let value = self.websiteUrl {
-            try sdkValidateUri("website_url", value)
-        }
-    }
-}
-
-extension EnterpriseWebhooks {
-    public init(htmlUrl: String, id: Int, nodeId: String, name: String, slug: String, createdAt: Date?, updatedAt: Date?, avatarUrl: String, description: String? = nil, websiteUrl: String? = nil) throws {
-        (self.htmlUrl, self.id) = (htmlUrl, id)
-        (self.nodeId, self.name) = (nodeId, name)
-        (self.slug, self.createdAt) = (slug, createdAt)
-        (self.updatedAt, self.avatarUrl) = (updatedAt, avatarUrl)
-        (self.description, self.websiteUrl) = (description, websiteUrl)
-            try sdkValidateUri("html_url", self.htmlUrl)
-        if let value = self.createdAt {
-            try sdkValidateDateTime("created_at", sdkWireString(value))
-        }
-        if let value = self.updatedAt {
-            try sdkValidateDateTime("updated_at", sdkWireString(value))
-        }
-            try sdkValidateUri("avatar_url", self.avatarUrl)
-        if let value = self.websiteUrl {
-            try sdkValidateUri("website_url", value)
-        }
-    }
-}
-
-/// New requested permissions, categorized by type of permission.
-public struct PersonalAccessTokenRequestPermissionsAdded: Codable {
-    /// Optional object value serialized in the `organization` wire field.
-    public var organization: [String: String]?
-    /// Optional object value serialized in the `repository` wire field.
-    public var repository: [String: String]?
-    /// Optional object value serialized in the `other` wire field.
-    public var other: [String: String]?
-
-    enum CodingKeys: String, CodingKey {
-        case organization
-        case repository
-        case other
-    }
-
-    init() {
-        (self.organization, self.repository, self.other) = (nil, nil, nil)
-    }
-}
-
-extension PersonalAccessTokenRequestPermissionsAdded {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.organization = try container.sdkDecodeIfPresent(.organization)
-        self.repository = try container.sdkDecodeIfPresent(.repository)
-        self.other = try container.sdkDecodeIfPresent(.other)
-    }
-}
-
-extension PersonalAccessTokenRequestPermissionsAdded {
-    public init(organization: [String: String]? = nil, repository: [String: String]? = nil, other: [String: String]? = nil) {
-        self.init()
-        (self.organization, self.repository) = (organization, repository)
-        self.other = other
     }
 }

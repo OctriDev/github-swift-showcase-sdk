@@ -286,7 +286,7 @@ extension WebhookPullRequestReviewDismissedReview {
     }
 }
 
-public typealias WebhookPullRequestReviewDismissedPullRequestRequestedReviewersList = [WebhookPullRequestReviewDismissedPullRequestRequestedReviewersItem]
+public typealias WebhookPullRequestReviewDismissedPullRequestRequestedReviewersList = [WebhookPullRequestReviewDismissedPullRequestRequestedReviewersItem?]
 
 public typealias WebhookPullRequestReviewDismissedPullRequestRequestedTeamsList = [WebhookPullRequestReviewDismissedPullRequestRequestedTeamsItem]
 

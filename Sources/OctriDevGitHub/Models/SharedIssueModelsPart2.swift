@@ -4,164 +4,6 @@
 import Foundation
 
 // SharedIssue domain models
-/// Required object value serialized in the `labels[]` wire field.
-public struct IssueLabelsItemVariant1: Codable {
-    /// Optional `int64`-formatted value serialized in the `id` wire field.
-    public var id: Int?
-    /// Optional `string` value serialized in the `node_id` wire field.
-    public var nodeId: String?
-    /// Optional `uri`-formatted value serialized in the `url` wire field.
-    public var url: String?
-    /// Optional `string` value serialized in the `name` wire field.
-    public var name: String?
-    /// Optional `string` value serialized in the `description` wire field.
-    public var description: String?
-    /// Optional `string` value serialized in the `color` wire field.
-    public var color: String?
-    /// Optional `boolean` value serialized in the `default` wire field.
-    public var `default`: Bool?
-    /// The user who archived the label, or `null` if it has not been archived.
-    public var archivedBy: IssueLabelsItemVariant1ArchivedBy?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case nodeId = "node_id"
-        case url
-        case name
-        case description
-        case color
-        case `default`
-        case archivedBy = "archived_by"
-    }
-
-    init() {
-        (self.id, self.nodeId, self.url, self.name, self.description) = (nil, nil, nil, nil, nil)
-        (self.color, self.`default`, self.archivedBy) = (nil, nil, nil)
-    }
-}
-
-extension IssueLabelsItemVariant1 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeIfPresent(.id)
-        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        self.url = try container.sdkDecodeIfPresent(.url)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.description = try container.sdkDecodeIfPresent(.description)
-        self.color = try container.sdkDecodeIfPresent(.color)
-        self.`default` = try container.sdkDecodeIfPresent(.`default`)
-        self.archivedBy = try container.sdkDecodeIfPresent(.archivedBy)
-        if let value = self.url {
-            try sdkValidateUri("url", value)
-        }
-    }
-}
-
-extension IssueLabelsItemVariant1 {
-    public init(id: Int? = nil, nodeId: String? = nil, url: String? = nil, name: String? = nil, description: String? = nil, color: String? = nil, `default`: Bool? = nil, archivedBy: IssueLabelsItemVariant1ArchivedBy? = nil) throws {
-        self.init()
-        (self.id, self.nodeId) = (id, nodeId)
-        (self.url, self.name) = (url, name)
-        (self.description, self.color) = (description, color)
-        (self.`default`, self.archivedBy) = (`default`, archivedBy)
-        if let value = self.url {
-            try sdkValidateUri("url", value)
-        }
-    }
-}
-
-public indirect enum IssueLabelsItem {
-    case stringValue(String)
-    case issueLabelsItemVariant1(IssueLabelsItemVariant1)
-}
-
-extension IssueLabelsItem: Codable {
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for IssueLabelsItem")
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
-    }
-}
-
-extension IssueLabelsItem {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) { return .stringValue(value) }
-        if let value = try? container.decode(IssueLabelsItemVariant1.self) { return .issueLabelsItemVariant1(value) }
-        return nil
-    }
-}
-
-extension IssueLabelsItem {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .stringValue(value): try container.encode(value); return true
-        case let .issueLabelsItemVariant1(value): try container.encode(value); return true
-        }
-    }
-}
-
-/// Typed representation of the `IssueDependenciesSummary` API schema.
-public struct IssueDependenciesSummary: Codable {
-    /// Required `integer` value serialized in the `blocked_by` wire field.
-    public var blockedBy: Int
-    /// Required `integer` value serialized in the `blocking` wire field.
-    public var blocking: Int
-    /// Required `integer` value serialized in the `total_blocked_by` wire field.
-    public var totalBlockedBy: Int
-    /// Required `integer` value serialized in the `total_blocking` wire field.
-    public var totalBlocking: Int
-
-    enum CodingKeys: String, CodingKey {
-        case blockedBy = "blocked_by"
-        case blocking
-        case totalBlockedBy = "total_blocked_by"
-        case totalBlocking = "total_blocking"
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension IssueDependenciesSummary {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.blockedBy) else {
-            throw SdkValidationError(field: "blocked_by", code: "required", message: "Validation failed for 'blocked_by': value is required")
-        }
-        guard container.contains(.blocking) else {
-            throw SdkValidationError(field: "blocking", code: "required", message: "Validation failed for 'blocking': value is required")
-        }
-        guard container.contains(.totalBlockedBy) else {
-            throw SdkValidationError(field: "total_blocked_by", code: "required", message: "Validation failed for 'total_blocked_by': value is required")
-        }
-        guard container.contains(.totalBlocking) else {
-            throw SdkValidationError(field: "total_blocking", code: "required", message: "Validation failed for 'total_blocking': value is required")
-        }
-        self.blockedBy = try container.sdkDecodeRequired(.blockedBy)
-        self.blocking = try container.sdkDecodeRequired(.blocking)
-        self.totalBlockedBy = try container.sdkDecodeRequired(.totalBlockedBy)
-        self.totalBlocking = try container.sdkDecodeRequired(.totalBlocking)
-    }
-}
-
-extension IssueDependenciesSummary {
-    public init(blockedBy: Int, blocking: Int, totalBlockedBy: Int, totalBlocking: Int) {
-        (self.blockedBy, self.blocking) = (blockedBy, blocking)
-        (self.totalBlockedBy, self.totalBlocking) = (totalBlockedBy, totalBlocking)
-    }
-}
-
-public indirect enum IssueFieldValueValue {
-    case stringValue(String)
-    case doubleValue(Double)
-    case intValue(Int)
-}
-
 extension IssueFieldValueValue: Codable {
 
     public init(from decoder: Decoder) throws {
@@ -502,5 +344,121 @@ extension Issue {
         self.issueDependenciesSummary = try container.sdkDecodeIfPresent(.issueDependenciesSummary)
         self.issueFieldValues = try container.sdkDecodeIfPresent(.issueFieldValues)
         try sdkValidateConstraints()
+    }
+}
+
+extension Issue {
+    public init(id: Int, nodeId: String, url: String, repositoryUrl: String, labelsUrl: String, commentsUrl: String, eventsUrl: String, htmlUrl: String, number: Int, state: String, title: String, user: NullableSimpleUser?, labels: [IssueLabelsItem], assignee: NullableSimpleUser?, milestone: NullableMilestone?, locked: Bool, comments: Int, closedAt: Date?, createdAt: Date, updatedAt: Date, stateReason: IssueStateReason? = nil, body: String? = nil, assignees: [SimpleUser]? = nil, activeLockReason: String? = nil, pullRequest: IssuePullRequest? = nil, draft: Bool? = nil, closedBy: NullableSimpleUser? = nil, bodyHtml: String? = nil, bodyText: String? = nil, timelineUrl: String? = nil, type: IssueType? = nil, repository: Repository? = nil, performedViaGithubApp: NullableIntegration? = nil, authorAssociation: AuthorAssociation? = nil, reactions: ReactionRollup? = nil, subIssuesSummary: SubIssuesSummary? = nil, parentIssueUrl: String? = nil, pinnedComment: NullableIssueComment? = nil, issueDependenciesSummary: IssueDependenciesSummary? = nil, issueFieldValues: [IssueFieldValue]? = nil) throws {
+        (self.id, self.nodeId) = (id, nodeId)
+        (self.url, self.repositoryUrl) = (url, repositoryUrl)
+        (self.labelsUrl, self.commentsUrl) = (labelsUrl, commentsUrl)
+        (self.eventsUrl, self.htmlUrl) = (eventsUrl, htmlUrl)
+        (self.number, self.state) = (number, state)
+        (self.title, self.user) = (title, user)
+        (self.labels, self.assignee) = (labels, assignee)
+        (self.milestone, self.locked) = (milestone, locked)
+        (self.comments, self.closedAt) = (comments, closedAt)
+        (self.createdAt, self.updatedAt) = (createdAt, updatedAt)
+        (self.stateReason, self.body) = (stateReason, body)
+        (self.assignees, self.activeLockReason) = (assignees, activeLockReason)
+        (self.pullRequest, self.draft) = (pullRequest, draft)
+        (self.closedBy, self.bodyHtml) = (closedBy, bodyHtml)
+        (self.bodyText, self.timelineUrl) = (bodyText, timelineUrl)
+        (self.type, self.repository) = (type, repository)
+        (self.performedViaGithubApp, self.authorAssociation) = (performedViaGithubApp, authorAssociation)
+        (self.reactions, self.subIssuesSummary) = (reactions, subIssuesSummary)
+        (self.parentIssueUrl, self.pinnedComment) = (parentIssueUrl, pinnedComment)
+        self.issueDependenciesSummary = issueDependenciesSummary
+        self.issueFieldValues = issueFieldValues
+        try sdkValidateConstraints()
+    }
+}
+
+extension Issue {
+    func sdkValidateConstraints() throws {
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("repository_url", self.repositoryUrl)
+            try sdkValidateUri("comments_url", self.commentsUrl)
+            try sdkValidateUri("events_url", self.eventsUrl)
+            try sdkValidateUri("html_url", self.htmlUrl)
+        if let value = self.closedAt {
+            try sdkValidateDateTime("closed_at", sdkWireString(value))
+        }
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+        if let value = self.timelineUrl {
+            try sdkValidateUri("timeline_url", value)
+        }
+        if let value = self.parentIssueUrl {
+            try sdkValidateUri("parent_issue_url", value)
+        }
+    }
+}
+
+/// The color of the issue type.
+public struct IssueTypeColor: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let gray = IssueTypeColor(rawValue: "gray")
+    public static let blue = IssueTypeColor(rawValue: "blue")
+    public static let green = IssueTypeColor(rawValue: "green")
+    public static let yellow = IssueTypeColor(rawValue: "yellow")
+    public static let orange = IssueTypeColor(rawValue: "orange")
+    public static let red = IssueTypeColor(rawValue: "red")
+    public static let pink = IssueTypeColor(rawValue: "pink")
+    public static let purple = IssueTypeColor(rawValue: "purple")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// The reason for the current state
+public struct IssueStateReason: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let completed = IssueStateReason(rawValue: "completed")
+    public static let reopened = IssueStateReason(rawValue: "reopened")
+    public static let notPlanned = IssueStateReason(rawValue: "not_planned")
+    public static let duplicate = IssueStateReason(rawValue: "duplicate")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// The data type of the issue field
+public struct IssueFieldValueDataType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let text = IssueFieldValueDataType(rawValue: "text")
+    public static let singleSelect = IssueFieldValueDataType(rawValue: "single_select")
+    public static let multiSelect = IssueFieldValueDataType(rawValue: "multi_select")
+    public static let number = IssueFieldValueDataType(rawValue: "number")
+    public static let date = IssueFieldValueDataType(rawValue: "date")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
     }
 }

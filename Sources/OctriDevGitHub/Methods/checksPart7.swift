@@ -7,22 +7,24 @@ import Foundation
     import FoundationNetworking
 #endif
 extension ChecksMethods {
-    /// Changes the default automatic flow when creating check suites. By default, a check suite is automatically created each time code is pushed to a repository. When you disable the automatic creation of check suites, you can manually [Create a check suite](https://docs.github.com/rest/checks/suites#create-a-check-suite). You must have admin permissions in the repository to set preferences for check suites.
-    ///
-    /// - Parameters:
-    /// - owner: The account owner of the repository. The name is not case
-    ///   sensitive.
-    /// - repo: The name of the repository without the `.git` extension. The name is
-    ///   not case sensitive.
-    /// - autoTriggerChecks: Enables or disables automatic creation of CheckSuite
-    ///   events upon pushes to the repository. Enabled by default.
-    public static func checksSetSuitesPreferences(config: ClientConfig, owner: String, repo: String, autoTriggerChecks: [ChecksSetSuitesPreferencesRequestBodyAutoTriggerChecksItem]? = nil, requestOptions: RequestOptions? = nil) async throws -> CheckSuitePreference {
-        let requestBody = ChecksSetSuitesPreferencesRequestBody(autoTriggerChecks: autoTriggerChecks)
+    public struct ChecksListForSuiteOptions: Codable {
+        public var owner: String
+        public var repo: String
+        public var checkSuiteId: Int
+        public var checkName: String?
+        public var status: ChecksListForSuiteParameter?
+        public var filter: ChecksListForSuiteParameterX2c07543f?
+        public var perPage: Int?
+        public var page: Int?
 
-        return try (await sdkRequest("PATCH", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/check-suites/preferences"].joined(), config: config, body: requestBody, decoder: .json, operationId: "checksSetSuitesPreferences", options: requestOptions)).data
+        public init(owner: String, repo: String, checkSuiteId: Int) {
+            self.owner = owner
+            self.repo = repo
+            self.checkSuiteId = checkSuiteId
+        }
     }
 
-    /// Gets a single check suite using its `id`. > [!NOTE] > The Checks API only looks for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array and a `null` value for `head_branch`. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint on a private repository.
+    /// Lists check runs for a check suite using its `id`. > [!NOTE] > The endpoints to manage checks only look for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint on a private repository.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -30,7 +32,25 @@ extension ChecksMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - checkSuiteId: The unique identifier of the check suite.
-    public static func checksGetSuite(config: ClientConfig, owner: String, repo: String, checkSuiteId: Int, requestOptions: RequestOptions? = nil) async throws -> CheckSuite {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/check-suites/", sdkEncodePathSegment(sdkWireString(checkSuiteId))].joined(), config: config, decoder: .json, operationId: "checksGetSuite", options: requestOptions)).data
+    /// - checkName: Returns check runs with the specified `name`.
+    /// - status: Returns check runs with the specified `status`.
+    /// - filter: Filters check runs by their `completed_at` timestamp. `latest`
+    ///   returns the most recent check runs.
+    /// - perPage: The number of results per page (max 100). For more information,
+    ///   see "[Using pagination in the REST
+    ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
+    ///   -rest-api)."
+    /// - page: The page number of the results to fetch. For more information, see
+    ///   "[Using pagination in the REST
+    ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
+    ///   -rest-api)."
+    public static func checksListForSuite(config: ClientConfig, options: ChecksListForSuiteOptions, requestOptions: RequestOptions? = nil) async throws -> ChecksListForSuiteResponse {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(options.owner)), "/", sdkEncodePathSegment(sdkWireString(options.repo)), "/check-suites/", sdkEncodePathSegment(sdkWireString(options.checkSuiteId)), "/check-runs"].joined(), config: config, query: [
+            SdkQueryParameter("check_name", value: options.checkName),
+            SdkQueryParameter("status", value: options.status),
+            SdkQueryParameter("filter", value: options.filter),
+            SdkQueryParameter("per_page", value: options.perPage),
+            SdkQueryParameter("page", value: options.page),
+        ], decoder: .json, operationId: "checksListForSuite", options: requestOptions)).data
     }
 }

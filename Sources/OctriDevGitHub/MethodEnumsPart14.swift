@@ -6,19 +6,15 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-/// Current state of a session
-public struct AgentTasksGetTaskByRepoAndIdResponseVariant1SessionsItemState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+/// The default value for a squash merge commit message: - `PR_BODY` - default to the pull request's body. -
+/// `COMMIT_MESSAGES` - default to the branch's commit messages. - `BLANK` - default to a blank commit message.
+public struct ReposCreateInOrgRequestBodySquashMergeCommitMessage: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
     public init(rawValue: String) { self.rawValue = rawValue }
-    public static let queued = AgentTasksGetTaskByRepoAndIdResponseVariant1SessionsItemState(rawValue: "queued")
-    public static let inProgress = AgentTasksGetTaskByRepoAndIdResponseVariant1SessionsItemState(rawValue: "in_progress")
-    public static let completed = AgentTasksGetTaskByRepoAndIdResponseVariant1SessionsItemState(rawValue: "completed")
-    public static let failed = AgentTasksGetTaskByRepoAndIdResponseVariant1SessionsItemState(rawValue: "failed")
-    public static let idle = AgentTasksGetTaskByRepoAndIdResponseVariant1SessionsItemState(rawValue: "idle")
-    public static let waitingForUser = AgentTasksGetTaskByRepoAndIdResponseVariant1SessionsItemState(rawValue: "waiting_for_user")
-    public static let timedOut = AgentTasksGetTaskByRepoAndIdResponseVariant1SessionsItemState(rawValue: "timed_out")
-    public static let cancelled = AgentTasksGetTaskByRepoAndIdResponseVariant1SessionsItemState(rawValue: "cancelled")
+    public static let prBody = ReposCreateInOrgRequestBodySquashMergeCommitMessage(rawValue: "PR_BODY")
+    public static let commitMessages = ReposCreateInOrgRequestBodySquashMergeCommitMessage(rawValue: "COMMIT_MESSAGES")
+    public static let blank = ReposCreateInOrgRequestBodySquashMergeCommitMessage(rawValue: "BLANK")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
@@ -31,15 +27,14 @@ public struct AgentTasksGetTaskByRepoAndIdResponseVariant1SessionsItemState: Raw
     }
 }
 
-/// The default value for a squash merge commit message: - `PR_BODY` - default to the pull request's body. -
-/// `COMMIT_MESSAGES` - default to the branch's commit messages. - `BLANK` - default to a blank commit message.
-public struct ReposCreateInOrgRequestBodySquashMergeCommitMessage: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+/// The level of the annotation.
+public struct ChecksUpdateRequestBodyVariant0OutputAnnotationsItemAnnotationLevel: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
     public init(rawValue: String) { self.rawValue = rawValue }
-    public static let prBody = ReposCreateInOrgRequestBodySquashMergeCommitMessage(rawValue: "PR_BODY")
-    public static let commitMessages = ReposCreateInOrgRequestBodySquashMergeCommitMessage(rawValue: "COMMIT_MESSAGES")
-    public static let blank = ReposCreateInOrgRequestBodySquashMergeCommitMessage(rawValue: "BLANK")
+    public static let notice = ChecksUpdateRequestBodyVariant0OutputAnnotationsItemAnnotationLevel(rawValue: "notice")
+    public static let warning = ChecksUpdateRequestBodyVariant0OutputAnnotationsItemAnnotationLevel(rawValue: "warning")
+    public static let failure = ChecksUpdateRequestBodyVariant0OutputAnnotationsItemAnnotationLevel(rawValue: "failure")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

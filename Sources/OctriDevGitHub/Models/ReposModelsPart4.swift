@@ -4,80 +4,6 @@
 import Foundation
 
 // Repos domain models
-extension CodeownersErrorsErrorsItem {
-    public init(line: Int, column: Int, kind: String, message: String, path: String, source: String? = nil, suggestion: String? = nil) {
-        (self.line, self.column) = (line, column)
-        (self.kind, self.message) = (kind, message)
-        (self.path, self.source) = (path, source)
-        self.suggestion = suggestion
-    }
-}
-
-/// Optional object value serialized in the `author` wire field.
-public struct FileCommitCommitAuthor: Codable {
-    /// Optional `string` value serialized in the `date` wire field.
-    public var date: String?
-    /// Optional `string` value serialized in the `name` wire field.
-    public var name: String?
-    /// Optional `string` value serialized in the `email` wire field.
-    public var email: String?
-
-    enum CodingKeys: String, CodingKey {
-        case date
-        case name
-        case email
-    }
-
-    init() {
-        (self.date, self.name, self.email) = (nil, nil, nil)
-    }
-}
-
-extension FileCommitCommitAuthor {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.date = try container.sdkDecodeIfPresent(.date)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.email = try container.sdkDecodeIfPresent(.email)
-    }
-}
-
-extension FileCommitCommitAuthor {
-    public init(date: String? = nil, name: String? = nil, email: String? = nil) {
-        self.init()
-        (self.date, self.name) = (date, name)
-        self.email = email
-    }
-}
-
-/// A topic aggregates entities that are related to a subject.
-public struct Topic: Codable {
-    /// Required array value serialized in the `names` wire field.
-    public var names: [String]
-
-    enum CodingKeys: String, CodingKey {
-        case names
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension Topic {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.names) else {
-            throw SdkValidationError(field: "names", code: "required", message: "Validation failed for 'names': value is required")
-        }
-        self.names = try container.sdkDecodeRequired(.names)
-    }
-}
-
-extension Topic {
-    public init(names: [String]) {
-        self.names = names
-    }
-}
-
 /// Collaborator
 public struct Collaborator: Codable {
     /// Required `string` value serialized in the `login` wire field.
@@ -302,42 +228,6 @@ extension FileCommitCommit {
         (self.author, self.committer) = (author, committer)
         (self.message, self.tree) = (message, tree)
         (self.parents, self.verification) = (parents, verification)
-    }
-}
-
-/// Generated name and body describing a release
-public struct ReleaseNotesContent: Codable {
-    /// The generated name of the release
-    /// - Example: "Release v1.0.0 is now available!"
-    public var name: String
-    /// The generated body describing the contents of the release supporting markdown formatting
-    public var body: String
-
-    enum CodingKeys: String, CodingKey {
-        case name
-        case body
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ReleaseNotesContent {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        guard container.contains(.body) else {
-            throw SdkValidationError(field: "body", code: "required", message: "Validation failed for 'body': value is required")
-        }
-        self.name = try container.sdkDecodeRequired(.name)
-        self.body = try container.sdkDecodeRequired(.body)
-    }
-}
-
-extension ReleaseNotesContent {
-    public init(name: String, body: String) {
-        (self.name, self.body) = (name, body)
     }
 }
 

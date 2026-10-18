@@ -4,6 +4,20 @@
 import Foundation
 
 // Gists domain models
+extension BaseGist {
+    func sdkValidateConstraints() throws {
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("forks_url", self.forksUrl)
+            try sdkValidateUri("commits_url", self.commitsUrl)
+            try sdkValidateUri("git_pull_url", self.gitPullUrl)
+            try sdkValidateUri("git_push_url", self.gitPushUrl)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateUri("comments_url", self.commentsUrl)
+    }
+}
+
 /// A comment made to a gist.
 public struct GistComment: Codable {
     /// Required `integer` value serialized in the `id` wire field.
@@ -346,5 +360,42 @@ extension GistSimpleForkOfFilesValue {
         (self.filename, self.type) = (filename, type)
         (self.language, self.rawUrl) = (language, rawUrl)
         self.size = size
+    }
+}
+
+/// Typed representation of the `ForbiddenGist` API schema.
+public struct ForbiddenGist: Codable {
+    /// Optional object value serialized in the `block` wire field.
+    public var block: ForbiddenGistBlock?
+    /// Optional `string` value serialized in the `message` wire field.
+    public var message: String?
+    /// Optional `string` value serialized in the `documentation_url` wire field.
+    public var documentationUrl: String?
+
+    enum CodingKeys: String, CodingKey {
+        case block
+        case message
+        case documentationUrl = "documentation_url"
+    }
+
+    init() {
+        (self.block, self.message, self.documentationUrl) = (nil, nil, nil)
+    }
+}
+
+extension ForbiddenGist {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.block = try container.sdkDecodeIfPresent(.block)
+        self.message = try container.sdkDecodeIfPresent(.message)
+        self.documentationUrl = try container.sdkDecodeIfPresent(.documentationUrl)
+    }
+}
+
+extension ForbiddenGist {
+    public init(block: ForbiddenGistBlock? = nil, message: String? = nil, documentationUrl: String? = nil) {
+        self.init()
+        (self.block, self.message) = (block, message)
+        self.documentationUrl = documentationUrl
     }
 }

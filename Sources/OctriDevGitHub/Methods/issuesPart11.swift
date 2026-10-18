@@ -18,6 +18,6 @@ extension IssuesMethods {
     ///   not case sensitive.
     /// - commentId: The unique identifier of the comment.
     public static func issuesUnpinComment(config: ClientConfig, owner: String, repo: String, commentId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/issues/comments/", sdkEncodePathSegment(sdkWireString(commentId)), "/pin"].joined(), config: config, decoder: .empty, operationId: "issuesUnpinComment", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "410": BasicError.self])).data
+        return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/issues/comments/", sdkEncodePathSegment(sdkWireString(commentId)), "/pin"].joined(), config: config, decoder: .empty, operationId: "issuesUnpinComment", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "410": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

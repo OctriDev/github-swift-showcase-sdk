@@ -5,6 +5,41 @@ import Foundation
 
 // Activity domain models
 extension DiscussionUser {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
+        }
+        guard container.contains(.login) else {
+            throw SdkValidationError(field: "login", code: "required", message: "Validation failed for 'login': value is required")
+        }
+        self.id = try container.sdkDecodeRequired(.id)
+        self.login = try container.sdkDecodeRequired(.login)
+        self.avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
+        self.deleted = try container.sdkDecodeIfPresent(.deleted)
+        self.email = try container.sdkDecodeIfPresent(.email)
+        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        self.followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
+        self.followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
+        self.gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
+        self.gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        self.name = try container.sdkDecodeIfPresent(.name)
+        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        self.organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
+        self.receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
+        self.reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
+        self.siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
+        self.starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
+        self.subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
+        self.type = try container.sdkDecodeIfPresent(.type)
+        self.url = try container.sdkDecodeIfPresent(.url)
+        self.userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        try sdkValidateConstraints()
+    }
+}
+
+extension DiscussionUser {
     public init(id: Int, login: String, avatarUrl: String? = nil, deleted: Bool? = nil, email: String? = nil, eventsUrl: String? = nil, followersUrl: String? = nil, followingUrl: String? = nil, gistsUrl: String? = nil, gravatarId: String? = nil, htmlUrl: String? = nil, name: String? = nil, nodeId: String? = nil, organizationsUrl: String? = nil, receivedEventsUrl: String? = nil, reposUrl: String? = nil, siteAdmin: Bool? = nil, starredUrl: String? = nil, subscriptionsUrl: String? = nil, type: DiscussionUserType? = nil, url: String? = nil, userViewType: String? = nil) throws {
         (self.id, self.login) = (id, login)
         (self.avatarUrl, self.deleted) = (avatarUrl, deleted)
@@ -450,43 +485,4 @@ extension LinkWithType {
     public init(href: String, type: String) {
         (self.href, self.type) = (href, type)
     }
-}
-
-/// Required object value serialized in the `category` wire field.
-public struct DiscussionCategory: Codable {
-    /// Required `date-time`-formatted value serialized in the `created_at` wire field.
-    public var createdAt: Date
-    /// Required `string` value serialized in the `description` wire field.
-    public var description: String
-    /// Required `string` value serialized in the `emoji` wire field.
-    public var emoji: String
-    /// Required `integer` value serialized in the `id` wire field.
-    public var id: Int
-    /// Required `boolean` value serialized in the `is_answerable` wire field.
-    public var isAnswerable: Bool
-    /// Required `string` value serialized in the `name` wire field.
-    public var name: String
-    /// Required `integer` value serialized in the `repository_id` wire field.
-    public var repositoryId: Int
-    /// Required `string` value serialized in the `slug` wire field.
-    public var slug: String
-    /// Required `string` value serialized in the `updated_at` wire field.
-    public var updatedAt: String
-    /// Optional `string` value serialized in the `node_id` wire field.
-    public var nodeId: String?
-
-    enum CodingKeys: String, CodingKey {
-        case createdAt = "created_at"
-        case description
-        case emoji
-        case id
-        case isAnswerable = "is_answerable"
-        case name
-        case repositoryId = "repository_id"
-        case slug
-        case updatedAt = "updated_at"
-        case nodeId = "node_id"
-    }
-
-    private init(sdkCopy value: Self) { self = value }
 }

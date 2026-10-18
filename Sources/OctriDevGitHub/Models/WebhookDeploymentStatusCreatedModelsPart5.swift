@@ -4,125 +4,6 @@
 import Foundation
 
 // WebhookDeploymentStatusCreated domain models
-/// The set of permissions for the GitHub app
-public struct WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppPermissions: Codable {
-    /// Optional enumerated value serialized in the `actions` wire field.
-    public var actions: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppXbf92372f10?
-    /// Optional enumerated value serialized in the `administration` wire field.
-    public var administration: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX92246321eb?
-    /// Optional enumerated value serialized in the `checks` wire field.
-    public var checks: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppXa5476d35fc?
-    /// Optional enumerated value serialized in the `content_references` wire field.
-    public var contentReferences: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppXceb111ee62?
-    /// Optional enumerated value serialized in the `contents` wire field.
-    public var contents: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX21ff4a3682?
-    /// Optional enumerated value serialized in the `deployments` wire field.
-    public var deployments: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX4db3945a1d?
-    /// Optional enumerated value serialized in the `discussions` wire field.
-    public var discussions: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppXc1841b0ec3?
-    /// Optional enumerated value serialized in the `emails` wire field.
-    public var emails: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppXe7948c53bb?
-    /// Optional enumerated value serialized in the `environments` wire field.
-    public var environments: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX32ea8e977c?
-    /// Optional enumerated value serialized in the `issues` wire field.
-    public var issues: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX517cf66bdb?
-    /// Optional enumerated value serialized in the `keys` wire field.
-    public var keys: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX9325bc207d?
-    /// Optional enumerated value serialized in the `members` wire field.
-    public var members: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppXffe0039ed9?
-    /// Optional enumerated value serialized in the `metadata` wire field.
-    public var metadata: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX271975333b?
-    /// Optional enumerated value serialized in the `organization_administration` wire field.
-    public var organizationAdministration: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppXad9c4dea9b?
-    /// Optional enumerated value serialized in the `organization_hooks` wire field.
-    public var organizationHooks: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX641a860151?
-    /// Optional enumerated value serialized in the `organization_packages` wire field.
-    public var organizationPackages: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppXdc86e7d0f4?
-    /// Optional enumerated value serialized in the `organization_plan` wire field.
-    public var organizationPlan: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX0e1f8c5ab8?
-    /// Optional enumerated value serialized in the `organization_projects` wire field.
-    public var organizationProjects: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX11c949099c?
-    /// Optional enumerated value serialized in the `organization_secrets` wire field.
-    public var organizationSecrets: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX6d4602aaf3?
-    /// Optional enumerated value serialized in the `organization_self_hosted_runners` wire field.
-    public var organizationSelfHostedRunners: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX88259b08f4?
-    /// Optional enumerated value serialized in the `organization_user_blocking` wire field.
-    public var organizationUserBlocking: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX9e23a53f17?
-    /// Optional enumerated value serialized in the `packages` wire field.
-    public var packages: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppXcdf42dd468?
-    /// Optional enumerated value serialized in the `pages` wire field.
-    public var pages: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX0f78d37bb8?
-    /// Optional enumerated value serialized in the `pull_requests` wire field.
-    public var pullRequests: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX041a475832?
-    /// Optional enumerated value serialized in the `repository_hooks` wire field.
-    public var repositoryHooks: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX8d91436485?
-    /// Optional enumerated value serialized in the `repository_projects` wire field.
-    public var repositoryProjects: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX864c5141c7?
-    /// Optional enumerated value serialized in the `secret_scanning_alerts` wire field.
-    public var secretScanningAlerts: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppXc2e025883d?
-    /// Optional enumerated value serialized in the `secrets` wire field.
-    public var secrets: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX1970c52c52?
-    /// Optional enumerated value serialized in the `security_events` wire field.
-    public var securityEvents: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX541711f0d9?
-    /// Optional enumerated value serialized in the `security_scanning_alert` wire field.
-    public var securityScanningAlert: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppXe64388e241?
-    /// Optional enumerated value serialized in the `single_file` wire field.
-    public var singleFile: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppXd6cfa9529f?
-    /// Optional enumerated value serialized in the `statuses` wire field.
-    public var statuses: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX609bda877d?
-    /// Optional enumerated value serialized in the `vulnerability_alerts` wire field.
-    public var vulnerabilityAlerts: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX8e5da854e7?
-    /// Optional enumerated value serialized in the `workflows` wire field.
-    public var workflows: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppXf7c9a7101d?
-
-    enum CodingKeys: String, CodingKey {
-        case actions
-        case administration
-        case checks
-        case contentReferences = "content_references"
-        case contents
-        case deployments
-        case discussions
-        case emails
-        case environments
-        case issues
-        case keys
-        case members
-        case metadata
-        case organizationAdministration = "organization_administration"
-        case organizationHooks = "organization_hooks"
-        case organizationPackages = "organization_packages"
-        case organizationPlan = "organization_plan"
-        case organizationProjects = "organization_projects"
-        case organizationSecrets = "organization_secrets"
-        case organizationSelfHostedRunners = "organization_self_hosted_runners"
-        case organizationUserBlocking = "organization_user_blocking"
-        case packages
-        case pages
-        case pullRequests = "pull_requests"
-        case repositoryHooks = "repository_hooks"
-        case repositoryProjects = "repository_projects"
-        case secretScanningAlerts = "secret_scanning_alerts"
-        case secrets
-        case securityEvents = "security_events"
-        case securityScanningAlert = "security_scanning_alert"
-        case singleFile = "single_file"
-        case statuses
-        case vulnerabilityAlerts = "vulnerability_alerts"
-        case workflows
-    }
-
-    init() {
-        (self.actions, self.administration, self.checks, self.contentReferences, self.contents) = (nil, nil, nil, nil, nil)
-        (self.deployments, self.discussions, self.emails, self.environments, self.issues) = (nil, nil, nil, nil, nil)
-        (self.keys, self.members, self.metadata, self.organizationAdministration, self.organizationHooks) = (nil, nil, nil, nil, nil)
-        (self.organizationPackages, self.organizationPlan, self.organizationProjects, self.organizationSecrets, self.organizationSelfHostedRunners) = (nil, nil, nil, nil, nil)
-        (self.organizationUserBlocking, self.packages, self.pages, self.pullRequests, self.repositoryHooks) = (nil, nil, nil, nil, nil)
-        (self.repositoryProjects, self.secretScanningAlerts, self.secrets, self.securityEvents, self.securityScanningAlert) = (nil, nil, nil, nil, nil)
-        (self.singleFile, self.statuses, self.vulnerabilityAlerts, self.workflows) = (nil, nil, nil, nil)
-    }
-}
-
 extension WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppPermissions {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -465,4 +346,139 @@ public struct WebhookDeploymentStatusCreatedCheckRun: Codable {
     }
 
     private init(sdkCopy value: Self) { self = value }
+}
+
+extension WebhookDeploymentStatusCreatedCheckRun {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.completedAt = try container.sdkDecodeNullable(.completedAt)
+        self.conclusion = try container.sdkDecodeNullable(.conclusion)
+        self.detailsUrl = try container.sdkDecodeRequired(.detailsUrl)
+        self.externalId = try container.sdkDecodeRequired(.externalId)
+        self.headSha = try container.sdkDecodeRequired(.headSha)
+        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.startedAt = try container.sdkDecodeRequired(.startedAt)
+        self.status = try container.sdkDecodeRequired(.status)
+        self.url = try container.sdkDecodeRequired(.url)
+        if let value = self.completedAt {
+            try sdkValidateDateTime("completed_at", sdkWireString(value))
+        }
+            try sdkValidateUri("details_url", self.detailsUrl)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateDateTime("started_at", sdkWireString(self.startedAt))
+            try sdkValidateUri("url", self.url)
+    }
+}
+
+extension WebhookDeploymentStatusCreatedCheckRun {
+    public init(completedAt: Date?, conclusion: WebhookDeploymentStatusCreatedCheckRunConclusion?, detailsUrl: String, externalId: String, headSha: String, htmlUrl: String, id: Int, name: String, nodeId: String, startedAt: Date, status: WebhookDeploymentStatusCreatedCheckRunStatus, url: String) throws {
+        (self.completedAt, self.conclusion) = (completedAt, conclusion)
+        (self.detailsUrl, self.externalId) = (detailsUrl, externalId)
+        (self.headSha, self.htmlUrl) = (headSha, htmlUrl)
+        (self.id, self.name) = (id, name)
+        (self.nodeId, self.startedAt) = (nodeId, startedAt)
+        (self.status, self.url) = (status, url)
+        if let value = self.completedAt {
+            try sdkValidateDateTime("completed_at", sdkWireString(value))
+        }
+            try sdkValidateUri("details_url", self.detailsUrl)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateDateTime("started_at", sdkWireString(self.startedAt))
+            try sdkValidateUri("url", self.url)
+    }
+}
+
+/// Optional object value serialized in the `owner` wire field.
+public struct WebhookDeploymentStatusCreatedWorkflowRunRepositoryOwner: Codable {
+    /// Optional `string` value serialized in the `avatar_url` wire field.
+    public var avatarUrl: String?
+    /// Optional `string` value serialized in the `events_url` wire field.
+    public var eventsUrl: String?
+    /// Optional `string` value serialized in the `followers_url` wire field.
+    public var followersUrl: String?
+    /// Optional `string` value serialized in the `following_url` wire field.
+    public var followingUrl: String?
+    /// Optional `string` value serialized in the `gists_url` wire field.
+    public var gistsUrl: String?
+    /// Optional `string` value serialized in the `gravatar_id` wire field.
+    public var gravatarId: String?
+    /// Optional `string` value serialized in the `html_url` wire field.
+    public var htmlUrl: String?
+    /// Optional `integer` value serialized in the `id` wire field.
+    public var id: Int?
+    /// Optional `string` value serialized in the `login` wire field.
+    public var login: String?
+    /// Optional `string` value serialized in the `node_id` wire field.
+    public var nodeId: String?
+    /// Optional `string` value serialized in the `organizations_url` wire field.
+    public var organizationsUrl: String?
+    /// Optional `string` value serialized in the `received_events_url` wire field.
+    public var receivedEventsUrl: String?
+    /// Optional `string` value serialized in the `repos_url` wire field.
+    public var reposUrl: String?
+    /// Optional `boolean` value serialized in the `site_admin` wire field.
+    public var siteAdmin: Bool?
+    /// Optional `string` value serialized in the `starred_url` wire field.
+    public var starredUrl: String?
+    /// Optional `string` value serialized in the `subscriptions_url` wire field.
+    public var subscriptionsUrl: String?
+    /// Optional `string` value serialized in the `type` wire field.
+    public var type: String?
+    /// Optional `string` value serialized in the `url` wire field.
+    public var url: String?
+
+    enum CodingKeys: String, CodingKey {
+        case avatarUrl = "avatar_url"
+        case eventsUrl = "events_url"
+        case followersUrl = "followers_url"
+        case followingUrl = "following_url"
+        case gistsUrl = "gists_url"
+        case gravatarId = "gravatar_id"
+        case htmlUrl = "html_url"
+        case id
+        case login
+        case nodeId = "node_id"
+        case organizationsUrl = "organizations_url"
+        case receivedEventsUrl = "received_events_url"
+        case reposUrl = "repos_url"
+        case siteAdmin = "site_admin"
+        case starredUrl = "starred_url"
+        case subscriptionsUrl = "subscriptions_url"
+        case type
+        case url
+    }
+
+    init() {
+        (self.avatarUrl, self.eventsUrl, self.followersUrl, self.followingUrl, self.gistsUrl) = (nil, nil, nil, nil, nil)
+        (self.gravatarId, self.htmlUrl, self.id, self.login, self.nodeId) = (nil, nil, nil, nil, nil)
+        (self.organizationsUrl, self.receivedEventsUrl, self.reposUrl, self.siteAdmin, self.starredUrl) = (nil, nil, nil, nil, nil)
+        (self.subscriptionsUrl, self.type, self.url) = (nil, nil, nil)
+    }
+}
+
+extension WebhookDeploymentStatusCreatedWorkflowRunRepositoryOwner {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
+        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        self.followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
+        self.followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
+        self.gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
+        self.gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        self.id = try container.sdkDecodeIfPresent(.id)
+        self.login = try container.sdkDecodeIfPresent(.login)
+        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        self.organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
+        self.receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
+        self.reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
+        self.siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
+        self.starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
+        self.subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
+        self.type = try container.sdkDecodeIfPresent(.type)
+        self.url = try container.sdkDecodeIfPresent(.url)
+    }
 }

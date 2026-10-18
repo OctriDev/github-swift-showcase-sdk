@@ -4,141 +4,6 @@
 import Foundation
 
 // WebhookDeploymentStatusCreated domain models
-extension WebhookDeploymentStatusCreatedCheckRun {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.completedAt = try container.sdkDecodeNullable(.completedAt)
-        self.conclusion = try container.sdkDecodeNullable(.conclusion)
-        self.detailsUrl = try container.sdkDecodeRequired(.detailsUrl)
-        self.externalId = try container.sdkDecodeRequired(.externalId)
-        self.headSha = try container.sdkDecodeRequired(.headSha)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.startedAt = try container.sdkDecodeRequired(.startedAt)
-        self.status = try container.sdkDecodeRequired(.status)
-        self.url = try container.sdkDecodeRequired(.url)
-        if let value = self.completedAt {
-            try sdkValidateDateTime("completed_at", sdkWireString(value))
-        }
-            try sdkValidateUri("details_url", self.detailsUrl)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateDateTime("started_at", sdkWireString(self.startedAt))
-            try sdkValidateUri("url", self.url)
-    }
-}
-
-extension WebhookDeploymentStatusCreatedCheckRun {
-    public init(completedAt: Date?, conclusion: WebhookDeploymentStatusCreatedCheckRunConclusion?, detailsUrl: String, externalId: String, headSha: String, htmlUrl: String, id: Int, name: String, nodeId: String, startedAt: Date, status: WebhookDeploymentStatusCreatedCheckRunStatus, url: String) throws {
-        (self.completedAt, self.conclusion) = (completedAt, conclusion)
-        (self.detailsUrl, self.externalId) = (detailsUrl, externalId)
-        (self.headSha, self.htmlUrl) = (headSha, htmlUrl)
-        (self.id, self.name) = (id, name)
-        (self.nodeId, self.startedAt) = (nodeId, startedAt)
-        (self.status, self.url) = (status, url)
-        if let value = self.completedAt {
-            try sdkValidateDateTime("completed_at", sdkWireString(value))
-        }
-            try sdkValidateUri("details_url", self.detailsUrl)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateDateTime("started_at", sdkWireString(self.startedAt))
-            try sdkValidateUri("url", self.url)
-    }
-}
-
-/// Optional object value serialized in the `owner` wire field.
-public struct WebhookDeploymentStatusCreatedWorkflowRunRepositoryOwner: Codable {
-    /// Optional `string` value serialized in the `avatar_url` wire field.
-    public var avatarUrl: String?
-    /// Optional `string` value serialized in the `events_url` wire field.
-    public var eventsUrl: String?
-    /// Optional `string` value serialized in the `followers_url` wire field.
-    public var followersUrl: String?
-    /// Optional `string` value serialized in the `following_url` wire field.
-    public var followingUrl: String?
-    /// Optional `string` value serialized in the `gists_url` wire field.
-    public var gistsUrl: String?
-    /// Optional `string` value serialized in the `gravatar_id` wire field.
-    public var gravatarId: String?
-    /// Optional `string` value serialized in the `html_url` wire field.
-    public var htmlUrl: String?
-    /// Optional `integer` value serialized in the `id` wire field.
-    public var id: Int?
-    /// Optional `string` value serialized in the `login` wire field.
-    public var login: String?
-    /// Optional `string` value serialized in the `node_id` wire field.
-    public var nodeId: String?
-    /// Optional `string` value serialized in the `organizations_url` wire field.
-    public var organizationsUrl: String?
-    /// Optional `string` value serialized in the `received_events_url` wire field.
-    public var receivedEventsUrl: String?
-    /// Optional `string` value serialized in the `repos_url` wire field.
-    public var reposUrl: String?
-    /// Optional `boolean` value serialized in the `site_admin` wire field.
-    public var siteAdmin: Bool?
-    /// Optional `string` value serialized in the `starred_url` wire field.
-    public var starredUrl: String?
-    /// Optional `string` value serialized in the `subscriptions_url` wire field.
-    public var subscriptionsUrl: String?
-    /// Optional `string` value serialized in the `type` wire field.
-    public var type: String?
-    /// Optional `string` value serialized in the `url` wire field.
-    public var url: String?
-
-    enum CodingKeys: String, CodingKey {
-        case avatarUrl = "avatar_url"
-        case eventsUrl = "events_url"
-        case followersUrl = "followers_url"
-        case followingUrl = "following_url"
-        case gistsUrl = "gists_url"
-        case gravatarId = "gravatar_id"
-        case htmlUrl = "html_url"
-        case id
-        case login
-        case nodeId = "node_id"
-        case organizationsUrl = "organizations_url"
-        case receivedEventsUrl = "received_events_url"
-        case reposUrl = "repos_url"
-        case siteAdmin = "site_admin"
-        case starredUrl = "starred_url"
-        case subscriptionsUrl = "subscriptions_url"
-        case type
-        case url
-    }
-
-    init() {
-        (self.avatarUrl, self.eventsUrl, self.followersUrl, self.followingUrl, self.gistsUrl) = (nil, nil, nil, nil, nil)
-        (self.gravatarId, self.htmlUrl, self.id, self.login, self.nodeId) = (nil, nil, nil, nil, nil)
-        (self.organizationsUrl, self.receivedEventsUrl, self.reposUrl, self.siteAdmin, self.starredUrl) = (nil, nil, nil, nil, nil)
-        (self.subscriptionsUrl, self.type, self.url) = (nil, nil, nil)
-    }
-}
-
-extension WebhookDeploymentStatusCreatedWorkflowRunRepositoryOwner {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
-        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
-        self.followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
-        self.followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
-        self.gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
-        self.gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
-        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        self.id = try container.sdkDecodeIfPresent(.id)
-        self.login = try container.sdkDecodeIfPresent(.login)
-        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        self.organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
-        self.receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
-        self.reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
-        self.siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
-        self.starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
-        self.subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
-        self.type = try container.sdkDecodeIfPresent(.type)
-        self.url = try container.sdkDecodeIfPresent(.url)
-    }
-}
-
 extension WebhookDeploymentStatusCreatedWorkflowRunRepositoryOwner {
     public init(avatarUrl: String? = nil, eventsUrl: String? = nil, followersUrl: String? = nil, followingUrl: String? = nil, gistsUrl: String? = nil, gravatarId: String? = nil, htmlUrl: String? = nil, id: Int? = nil, login: String? = nil, nodeId: String? = nil, organizationsUrl: String? = nil, receivedEventsUrl: String? = nil, reposUrl: String? = nil, siteAdmin: Bool? = nil, starredUrl: String? = nil, subscriptionsUrl: String? = nil, type: String? = nil, url: String? = nil) {
         self.init()
@@ -451,5 +316,136 @@ extension WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGithubApp {
         if let value = self.updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
+    }
+}
+
+extension WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGithubApp {
+    public init(createdAt: Date?, description: String?, externalUrl: String?, htmlUrl: String, id: Int?, name: String, nodeId: String, owner: WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGithubAppOwner?, updatedAt: Date?, events: WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitX5af7b6d60c? = nil, permissions: WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitX47fcff5bc2? = nil, slug: String? = nil) throws {
+        (self.createdAt, self.description) = (createdAt, description)
+        (self.externalUrl, self.htmlUrl) = (externalUrl, htmlUrl)
+        (self.id, self.name) = (id, name)
+        (self.nodeId, self.owner) = (nodeId, owner)
+        (self.updatedAt, self.events) = (updatedAt, events)
+        (self.permissions, self.slug) = (permissions, slug)
+        if let value = self.createdAt {
+            try sdkValidateDateTime("created_at", sdkWireString(value))
+        }
+        if let value = self.externalUrl {
+            try sdkValidateUri("external_url", value)
+        }
+            try sdkValidateUri("html_url", self.htmlUrl)
+        if let value = self.updatedAt {
+            try sdkValidateDateTime("updated_at", sdkWireString(value))
+        }
+    }
+}
+
+/// Required object value serialized in the `owner` wire field.
+public struct WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGithubAppOwner: Codable {
+    /// Required `integer` value serialized in the `id` wire field.
+    public var id: Int
+    /// Required `string` value serialized in the `login` wire field.
+    public var login: String
+    /// Optional `uri`-formatted value serialized in the `avatar_url` wire field.
+    public var avatarUrl: String?
+    /// Optional `boolean` value serialized in the `deleted` wire field.
+    public var deleted: Bool?
+    /// Optional `string` value serialized in the `email` wire field.
+    public var email: String?
+    /// Optional `uri-template`-formatted value serialized in the `events_url` wire field.
+    public var eventsUrl: String?
+    /// Optional `uri`-formatted value serialized in the `followers_url` wire field.
+    public var followersUrl: String?
+    /// Optional `uri-template`-formatted value serialized in the `following_url` wire field.
+    public var followingUrl: String?
+    /// Optional `uri-template`-formatted value serialized in the `gists_url` wire field.
+    public var gistsUrl: String?
+    /// Optional `string` value serialized in the `gravatar_id` wire field.
+    public var gravatarId: String?
+    /// Optional `uri`-formatted value serialized in the `html_url` wire field.
+    public var htmlUrl: String?
+    /// Optional `string` value serialized in the `name` wire field.
+    public var name: String?
+    /// Optional `string` value serialized in the `node_id` wire field.
+    public var nodeId: String?
+    /// Optional `uri`-formatted value serialized in the `organizations_url` wire field.
+    public var organizationsUrl: String?
+    /// Optional `uri`-formatted value serialized in the `received_events_url` wire field.
+    public var receivedEventsUrl: String?
+    /// Optional `uri`-formatted value serialized in the `repos_url` wire field.
+    public var reposUrl: String?
+    /// Optional `boolean` value serialized in the `site_admin` wire field.
+    public var siteAdmin: Bool?
+    /// Optional `uri-template`-formatted value serialized in the `starred_url` wire field.
+    public var starredUrl: String?
+    /// Optional `uri`-formatted value serialized in the `subscriptions_url` wire field.
+    public var subscriptionsUrl: String?
+    /// Optional enumerated value serialized in the `type` wire field.
+    public var type: WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGitX2259aa3980?
+    /// Optional `uri`-formatted value serialized in the `url` wire field.
+    public var url: String?
+    /// Optional `string` value serialized in the `user_view_type` wire field.
+    public var userViewType: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case login
+        case avatarUrl = "avatar_url"
+        case deleted
+        case email
+        case eventsUrl = "events_url"
+        case followersUrl = "followers_url"
+        case followingUrl = "following_url"
+        case gistsUrl = "gists_url"
+        case gravatarId = "gravatar_id"
+        case htmlUrl = "html_url"
+        case name
+        case nodeId = "node_id"
+        case organizationsUrl = "organizations_url"
+        case receivedEventsUrl = "received_events_url"
+        case reposUrl = "repos_url"
+        case siteAdmin = "site_admin"
+        case starredUrl = "starred_url"
+        case subscriptionsUrl = "subscriptions_url"
+        case type
+        case url
+        case userViewType = "user_view_type"
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension WebhookDeploymentStatusCreatedDeploymentStatusPerformedViaGithubAppOwner {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
+        }
+        guard container.contains(.login) else {
+            throw SdkValidationError(field: "login", code: "required", message: "Validation failed for 'login': value is required")
+        }
+        self.id = try container.sdkDecodeRequired(.id)
+        self.login = try container.sdkDecodeRequired(.login)
+        self.avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
+        self.deleted = try container.sdkDecodeIfPresent(.deleted)
+        self.email = try container.sdkDecodeIfPresent(.email)
+        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        self.followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
+        self.followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
+        self.gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
+        self.gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        self.name = try container.sdkDecodeIfPresent(.name)
+        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        self.organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
+        self.receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
+        self.reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
+        self.siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
+        self.starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
+        self.subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
+        self.type = try container.sdkDecodeIfPresent(.type)
+        self.url = try container.sdkDecodeIfPresent(.url)
+        self.userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        try sdkValidateConstraints()
     }
 }

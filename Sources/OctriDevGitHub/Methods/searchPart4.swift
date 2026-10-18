@@ -52,6 +52,6 @@ extension SearchMethods {
             SdkQueryParameter("page", value: page),
             SdkQueryParameter("advanced_search", value: advancedSearch),
             SdkQueryParameter("search_type", value: searchType),
-        ], decoder: .json, operationId: "searchIssuesAndPullRequests", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "422": ValidationError.self])).data
+        ], decoder: .json, operationId: "searchIssuesAndPullRequests", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "422": ValidationError.self, "503": ServiceUnavailable.self])).data
     }
 }

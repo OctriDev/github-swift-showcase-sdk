@@ -6,153 +6,153 @@ import Foundation
 // WebhookFork domain models
 /// The created `repository` resource.
 public struct WebhookForkForkee: Codable {
-    /// Optional `string` value serialized in the `archive_url` wire field.
+    /// Required `string` value serialized in the `archive_url` wire field.
     public var archiveUrl: String
-    /// Optional `boolean` value serialized in the `archived` wire field.
+    /// Required `boolean` value serialized in the `archived` wire field.
     public var archived: Bool
-    /// Optional `string` value serialized in the `assignees_url` wire field.
+    /// Required `string` value serialized in the `assignees_url` wire field.
     public var assigneesUrl: String
-    /// Optional `string` value serialized in the `blobs_url` wire field.
+    /// Required `string` value serialized in the `blobs_url` wire field.
     public var blobsUrl: String
-    /// Optional `string` value serialized in the `branches_url` wire field.
+    /// Required `string` value serialized in the `branches_url` wire field.
     public var branchesUrl: String
-    /// Optional `string` value serialized in the `clone_url` wire field.
+    /// Required `string` value serialized in the `clone_url` wire field.
     public var cloneUrl: String
-    /// Optional `string` value serialized in the `collaborators_url` wire field.
+    /// Required `string` value serialized in the `collaborators_url` wire field.
     public var collaboratorsUrl: String
-    /// Optional `string` value serialized in the `comments_url` wire field.
+    /// Required `string` value serialized in the `comments_url` wire field.
     public var commentsUrl: String
-    /// Optional `string` value serialized in the `commits_url` wire field.
+    /// Required `string` value serialized in the `commits_url` wire field.
     public var commitsUrl: String
-    /// Optional `string` value serialized in the `compare_url` wire field.
+    /// Required `string` value serialized in the `compare_url` wire field.
     public var compareUrl: String
-    /// Optional `string` value serialized in the `contents_url` wire field.
+    /// Required `string` value serialized in the `contents_url` wire field.
     public var contentsUrl: String
-    /// Optional `string` value serialized in the `contributors_url` wire field.
+    /// Required `string` value serialized in the `contributors_url` wire field.
     public var contributorsUrl: String
-    /// Optional `string` value serialized in the `created_at` wire field.
+    /// Required `string` value serialized in the `created_at` wire field.
     public var createdAt: String
-    /// Optional `string` value serialized in the `default_branch` wire field.
+    /// Required `string` value serialized in the `default_branch` wire field.
     public var defaultBranch: String
-    /// Optional `string` value serialized in the `deployments_url` wire field.
+    /// Required `string` value serialized in the `deployments_url` wire field.
     public var deploymentsUrl: String
-    /// Optional `string` value serialized in the `description` wire field.
+    /// Required `string` value serialized in the `description` wire field.
     public var description: String?
-    /// Optional `string` value serialized in the `downloads_url` wire field.
+    /// Required `string` value serialized in the `downloads_url` wire field.
     public var downloadsUrl: String
-    /// Optional `string` value serialized in the `events_url` wire field.
+    /// Required `string` value serialized in the `events_url` wire field.
     public var eventsUrl: String
-    /// Optional enumerated value serialized in the `fork` wire field.
+    /// Required enumerated value serialized in the `fork` wire field.
     public var fork: Bool
-    /// Optional `integer` value serialized in the `forks` wire field.
+    /// Required `integer` value serialized in the `forks` wire field.
     public var forks: Int
-    /// Optional `integer` value serialized in the `forks_count` wire field.
+    /// Required `integer` value serialized in the `forks_count` wire field.
     public var forksCount: Int
-    /// Optional `string` value serialized in the `forks_url` wire field.
+    /// Required `string` value serialized in the `forks_url` wire field.
     public var forksUrl: String
-    /// Optional `string` value serialized in the `full_name` wire field.
+    /// Required `string` value serialized in the `full_name` wire field.
     public var fullName: String
-    /// Optional `string` value serialized in the `git_commits_url` wire field.
+    /// Required `string` value serialized in the `git_commits_url` wire field.
     public var gitCommitsUrl: String
-    /// Optional `string` value serialized in the `git_refs_url` wire field.
+    /// Required `string` value serialized in the `git_refs_url` wire field.
     public var gitRefsUrl: String
-    /// Optional `string` value serialized in the `git_tags_url` wire field.
+    /// Required `string` value serialized in the `git_tags_url` wire field.
     public var gitTagsUrl: String
-    /// Optional `string` value serialized in the `git_url` wire field.
+    /// Required `string` value serialized in the `git_url` wire field.
     public var gitUrl: String
-    /// Optional `boolean` value serialized in the `has_downloads` wire field.
+    /// Required `boolean` value serialized in the `has_downloads` wire field.
     public var hasDownloads: Bool
-    /// Optional `boolean` value serialized in the `has_issues` wire field.
+    /// Required `boolean` value serialized in the `has_issues` wire field.
     public var hasIssues: Bool
-    /// Optional `boolean` value serialized in the `has_pages` wire field.
+    /// Required `boolean` value serialized in the `has_pages` wire field.
     public var hasPages: Bool
-    /// Optional `boolean` value serialized in the `has_projects` wire field.
+    /// Required `boolean` value serialized in the `has_projects` wire field.
     public var hasProjects: Bool
-    /// Optional `boolean` value serialized in the `has_wiki` wire field.
+    /// Required `boolean` value serialized in the `has_wiki` wire field.
     public var hasWiki: Bool
-    /// Optional `string` value serialized in the `homepage` wire field.
+    /// Required `string` value serialized in the `homepage` wire field.
     public var homepage: String?
-    /// Optional `string` value serialized in the `hooks_url` wire field.
+    /// Required `string` value serialized in the `hooks_url` wire field.
     public var hooksUrl: String
-    /// Optional `string` value serialized in the `html_url` wire field.
+    /// Required `string` value serialized in the `html_url` wire field.
     public var htmlUrl: String
-    /// Optional `integer` value serialized in the `id` wire field.
+    /// Required `integer` value serialized in the `id` wire field.
     public var id: Int
-    /// Optional `string` value serialized in the `issue_comment_url` wire field.
+    /// Required `string` value serialized in the `issue_comment_url` wire field.
     public var issueCommentUrl: String
-    /// Optional `string` value serialized in the `issue_events_url` wire field.
+    /// Required `string` value serialized in the `issue_events_url` wire field.
     public var issueEventsUrl: String
-    /// Optional `string` value serialized in the `issues_url` wire field.
+    /// Required `string` value serialized in the `issues_url` wire field.
     public var issuesUrl: String
-    /// Optional `string` value serialized in the `keys_url` wire field.
+    /// Required `string` value serialized in the `keys_url` wire field.
     public var keysUrl: String
-    /// Optional `string` value serialized in the `labels_url` wire field.
+    /// Required `string` value serialized in the `labels_url` wire field.
     public var labelsUrl: String
-    /// Optional API value serialized in the `language` wire field.
+    /// Required API value serialized in the `language` wire field.
     public var language: JSONValue?
-    /// Optional `string` value serialized in the `languages_url` wire field.
+    /// Required `string` value serialized in the `languages_url` wire field.
     public var languagesUrl: String
-    /// Optional object value serialized in the `license` wire field.
+    /// Required object value serialized in the `license` wire field.
     public var license: [String: JSONValue]?
-    /// Optional `string` value serialized in the `merges_url` wire field.
+    /// Required `string` value serialized in the `merges_url` wire field.
     public var mergesUrl: String
-    /// Optional `string` value serialized in the `milestones_url` wire field.
+    /// Required `string` value serialized in the `milestones_url` wire field.
     public var milestonesUrl: String
-    /// Optional API value serialized in the `mirror_url` wire field.
+    /// Required API value serialized in the `mirror_url` wire field.
     public var mirrorUrl: JSONValue?
-    /// Optional `string` value serialized in the `name` wire field.
+    /// Required `string` value serialized in the `name` wire field.
     public var name: String
-    /// Optional `string` value serialized in the `node_id` wire field.
+    /// Required `string` value serialized in the `node_id` wire field.
     public var nodeId: String
-    /// Optional `string` value serialized in the `notifications_url` wire field.
+    /// Required `string` value serialized in the `notifications_url` wire field.
     public var notificationsUrl: String
-    /// Optional `integer` value serialized in the `open_issues` wire field.
+    /// Required `integer` value serialized in the `open_issues` wire field.
     public var openIssues: Int
-    /// Optional `integer` value serialized in the `open_issues_count` wire field.
+    /// Required `integer` value serialized in the `open_issues_count` wire field.
     public var openIssuesCount: Int
-    /// Optional object value serialized in the `owner` wire field.
-    public var owner: WebhookForkForkeeVariant1Owner
-    /// Optional `boolean` value serialized in the `private` wire field.
+    /// Required object value serialized in the `owner` wire field.
+    public var owner: WebhookForkForkeeOwner
+    /// Required `boolean` value serialized in the `private` wire field.
     public var `private`: Bool
-    /// Optional `string` value serialized in the `pulls_url` wire field.
+    /// Required `string` value serialized in the `pulls_url` wire field.
     public var pullsUrl: String
-    /// Optional `string` value serialized in the `pushed_at` wire field.
+    /// Required `string` value serialized in the `pushed_at` wire field.
     public var pushedAt: String
-    /// Optional `string` value serialized in the `releases_url` wire field.
+    /// Required `string` value serialized in the `releases_url` wire field.
     public var releasesUrl: String
-    /// Optional `integer` value serialized in the `size` wire field.
+    /// Required `integer` value serialized in the `size` wire field.
     public var size: Int
-    /// Optional `string` value serialized in the `ssh_url` wire field.
+    /// Required `string` value serialized in the `ssh_url` wire field.
     public var sshUrl: String
-    /// Optional `integer` value serialized in the `stargazers_count` wire field.
+    /// Required `integer` value serialized in the `stargazers_count` wire field.
     public var stargazersCount: Int
-    /// Optional `string` value serialized in the `stargazers_url` wire field.
+    /// Required `string` value serialized in the `stargazers_url` wire field.
     public var stargazersUrl: String
-    /// Optional `string` value serialized in the `statuses_url` wire field.
+    /// Required `string` value serialized in the `statuses_url` wire field.
     public var statusesUrl: String
-    /// Optional `string` value serialized in the `subscribers_url` wire field.
+    /// Required `string` value serialized in the `subscribers_url` wire field.
     public var subscribersUrl: String
-    /// Optional `string` value serialized in the `subscription_url` wire field.
+    /// Required `string` value serialized in the `subscription_url` wire field.
     public var subscriptionUrl: String
-    /// Optional `string` value serialized in the `svn_url` wire field.
+    /// Required `string` value serialized in the `svn_url` wire field.
     public var svnUrl: String
-    /// Optional `string` value serialized in the `tags_url` wire field.
+    /// Required `string` value serialized in the `tags_url` wire field.
     public var tagsUrl: String
-    /// Optional `string` value serialized in the `teams_url` wire field.
+    /// Required `string` value serialized in the `teams_url` wire field.
     public var teamsUrl: String
-    /// Optional array value serialized in the `topics` wire field.
+    /// Required array value serialized in the `topics` wire field.
     public var topics: [JSONValue?]
-    /// Optional `string` value serialized in the `trees_url` wire field.
+    /// Required `string` value serialized in the `trees_url` wire field.
     public var treesUrl: String
-    /// Optional `string` value serialized in the `updated_at` wire field.
+    /// Required `string` value serialized in the `updated_at` wire field.
     public var updatedAt: String
-    /// Optional `string` value serialized in the `url` wire field.
+    /// Required `string` value serialized in the `url` wire field.
     public var url: String
-    /// Optional `string` value serialized in the `visibility` wire field.
+    /// Required `string` value serialized in the `visibility` wire field.
     public var visibility: String
-    /// Optional `integer` value serialized in the `watchers` wire field.
+    /// Required `integer` value serialized in the `watchers` wire field.
     public var watchers: Int
-    /// Optional `integer` value serialized in the `watchers_count` wire field.
+    /// Required `integer` value serialized in the `watchers_count` wire field.
     public var watchersCount: Int
     /// Whether to allow auto-merge for pull requests.
     public var allowAutoMerge: Bool?
@@ -177,7 +177,7 @@ public struct WebhookForkForkee: Codable {
     /// Optional `string` value serialized in the `organization` wire field.
     public var organization: String?
     /// Optional object value serialized in the `permissions` wire field.
-    public var permissions: WebhookForkForkeeVariant0Permissions?
+    public var permissions: WebhookForkForkeePermissions?
     /// Optional `boolean` value serialized in the `public` wire field.
     public var `public`: Bool?
     /// Optional `string` value serialized in the `role_name` wire field.
@@ -380,7 +380,7 @@ extension WebhookForkForkee {
 }
 
 extension WebhookForkForkee {
-    public init(archiveUrl: String, archived: Bool, assigneesUrl: String, blobsUrl: String, branchesUrl: String, cloneUrl: String, collaboratorsUrl: String, commentsUrl: String, commitsUrl: String, compareUrl: String, contentsUrl: String, contributorsUrl: String, createdAt: String, defaultBranch: String, deploymentsUrl: String, description: String?, downloadsUrl: String, eventsUrl: String, fork: Bool, forks: Int, forksCount: Int, forksUrl: String, fullName: String, gitCommitsUrl: String, gitRefsUrl: String, gitTagsUrl: String, gitUrl: String, hasDownloads: Bool, hasIssues: Bool, hasPages: Bool, hasProjects: Bool, hasWiki: Bool, homepage: String?, hooksUrl: String, htmlUrl: String, id: Int, issueCommentUrl: String, issueEventsUrl: String, issuesUrl: String, keysUrl: String, labelsUrl: String, language: JSONValue?, languagesUrl: String, license: [String: JSONValue]?, mergesUrl: String, milestonesUrl: String, mirrorUrl: JSONValue?, name: String, nodeId: String, notificationsUrl: String, openIssues: Int, openIssuesCount: Int, owner: WebhookForkForkeeVariant1Owner, `private`: Bool, pullsUrl: String, pushedAt: String, releasesUrl: String, size: Int, sshUrl: String, stargazersCount: Int, stargazersUrl: String, statusesUrl: String, subscribersUrl: String, subscriptionUrl: String, svnUrl: String, tagsUrl: String, teamsUrl: String, topics: [JSONValue?], treesUrl: String, updatedAt: String, url: String, visibility: String, watchers: Int, watchersCount: Int, allowAutoMerge: Bool? = nil, allowForking: Bool? = nil, allowMergeCommit: Bool? = nil, allowRebaseMerge: Bool? = nil, allowSquashMerge: Bool? = nil, allowUpdateBranch: Bool? = nil, deleteBranchOnMerge: Bool? = nil, disabled: Bool? = nil, isTemplate: Bool? = nil, primaryBranch: String? = nil, organization: String? = nil, permissions: WebhookForkForkeeVariant0Permissions? = nil, `public`: Bool? = nil, roleName: String? = nil, stargazers: Int? = nil, webCommitSignoffRequired: Bool? = nil) {
+    public init(archiveUrl: String, archived: Bool, assigneesUrl: String, blobsUrl: String, branchesUrl: String, cloneUrl: String, collaboratorsUrl: String, commentsUrl: String, commitsUrl: String, compareUrl: String, contentsUrl: String, contributorsUrl: String, createdAt: String, defaultBranch: String, deploymentsUrl: String, description: String?, downloadsUrl: String, eventsUrl: String, fork: Bool, forks: Int, forksCount: Int, forksUrl: String, fullName: String, gitCommitsUrl: String, gitRefsUrl: String, gitTagsUrl: String, gitUrl: String, hasDownloads: Bool, hasIssues: Bool, hasPages: Bool, hasProjects: Bool, hasWiki: Bool, homepage: String?, hooksUrl: String, htmlUrl: String, id: Int, issueCommentUrl: String, issueEventsUrl: String, issuesUrl: String, keysUrl: String, labelsUrl: String, language: JSONValue?, languagesUrl: String, license: [String: JSONValue]?, mergesUrl: String, milestonesUrl: String, mirrorUrl: JSONValue?, name: String, nodeId: String, notificationsUrl: String, openIssues: Int, openIssuesCount: Int, owner: WebhookForkForkeeOwner, `private`: Bool, pullsUrl: String, pushedAt: String, releasesUrl: String, size: Int, sshUrl: String, stargazersCount: Int, stargazersUrl: String, statusesUrl: String, subscribersUrl: String, subscriptionUrl: String, svnUrl: String, tagsUrl: String, teamsUrl: String, topics: [JSONValue?], treesUrl: String, updatedAt: String, url: String, visibility: String, watchers: Int, watchersCount: Int, allowAutoMerge: Bool? = nil, allowForking: Bool? = nil, allowMergeCommit: Bool? = nil, allowRebaseMerge: Bool? = nil, allowSquashMerge: Bool? = nil, allowUpdateBranch: Bool? = nil, deleteBranchOnMerge: Bool? = nil, disabled: Bool? = nil, isTemplate: Bool? = nil, primaryBranch: String? = nil, organization: String? = nil, permissions: WebhookForkForkeePermissions? = nil, `public`: Bool? = nil, roleName: String? = nil, stargazers: Int? = nil, webCommitSignoffRequired: Bool? = nil) {
         (self.archiveUrl, self.archived) = (archiveUrl, archived)
         (self.assigneesUrl, self.blobsUrl) = (assigneesUrl, blobsUrl)
         (self.branchesUrl, self.cloneUrl) = (branchesUrl, cloneUrl)
@@ -430,65 +430,54 @@ extension WebhookForkForkee {
 }
 
 /// Required object value serialized in the `owner` wire field.
-public struct WebhookForkForkeeVariant0Owner: Codable {
-    /// Required `integer` value serialized in the `id` wire field.
-    public var id: Int
-    /// Required `string` value serialized in the `login` wire field.
-    public var login: String
-    /// Optional `uri`-formatted value serialized in the `avatar_url` wire field.
+public struct WebhookForkForkeeOwner: Codable {
+    /// Optional `string` value serialized in the `avatar_url` wire field.
     public var avatarUrl: String?
-    /// Optional `boolean` value serialized in the `deleted` wire field.
-    public var deleted: Bool?
-    /// Optional `string` value serialized in the `email` wire field.
-    public var email: String?
-    /// Optional `uri-template`-formatted value serialized in the `events_url` wire field.
+    /// Optional `string` value serialized in the `events_url` wire field.
     public var eventsUrl: String?
-    /// Optional `uri`-formatted value serialized in the `followers_url` wire field.
+    /// Optional `string` value serialized in the `followers_url` wire field.
     public var followersUrl: String?
-    /// Optional `uri-template`-formatted value serialized in the `following_url` wire field.
+    /// Optional `string` value serialized in the `following_url` wire field.
     public var followingUrl: String?
-    /// Optional `uri-template`-formatted value serialized in the `gists_url` wire field.
+    /// Optional `string` value serialized in the `gists_url` wire field.
     public var gistsUrl: String?
     /// Optional `string` value serialized in the `gravatar_id` wire field.
     public var gravatarId: String?
-    /// Optional `uri`-formatted value serialized in the `html_url` wire field.
+    /// Optional `string` value serialized in the `html_url` wire field.
     public var htmlUrl: String?
-    /// Optional `string` value serialized in the `name` wire field.
-    public var name: String?
+    /// Optional `integer` value serialized in the `id` wire field.
+    public var id: Int?
+    /// Optional `string` value serialized in the `login` wire field.
+    public var login: String?
     /// Optional `string` value serialized in the `node_id` wire field.
     public var nodeId: String?
-    /// Optional `uri`-formatted value serialized in the `organizations_url` wire field.
+    /// Optional `string` value serialized in the `organizations_url` wire field.
     public var organizationsUrl: String?
-    /// Optional `uri`-formatted value serialized in the `received_events_url` wire field.
+    /// Optional `string` value serialized in the `received_events_url` wire field.
     public var receivedEventsUrl: String?
-    /// Optional `uri`-formatted value serialized in the `repos_url` wire field.
+    /// Optional `string` value serialized in the `repos_url` wire field.
     public var reposUrl: String?
     /// Optional `boolean` value serialized in the `site_admin` wire field.
     public var siteAdmin: Bool?
-    /// Optional `uri-template`-formatted value serialized in the `starred_url` wire field.
+    /// Optional `string` value serialized in the `starred_url` wire field.
     public var starredUrl: String?
-    /// Optional `uri`-formatted value serialized in the `subscriptions_url` wire field.
+    /// Optional `string` value serialized in the `subscriptions_url` wire field.
     public var subscriptionsUrl: String?
-    /// Optional enumerated value serialized in the `type` wire field.
-    public var type: WebhookForkForkeeVariant0OwnerType?
-    /// Optional `uri`-formatted value serialized in the `url` wire field.
+    /// Optional `string` value serialized in the `type` wire field.
+    public var type: String?
+    /// Optional `string` value serialized in the `url` wire field.
     public var url: String?
-    /// Optional `string` value serialized in the `user_view_type` wire field.
-    public var userViewType: String?
 
     enum CodingKeys: String, CodingKey {
-        case id
-        case login
         case avatarUrl = "avatar_url"
-        case deleted
-        case email
         case eventsUrl = "events_url"
         case followersUrl = "followers_url"
         case followingUrl = "following_url"
         case gistsUrl = "gists_url"
         case gravatarId = "gravatar_id"
         case htmlUrl = "html_url"
-        case name
+        case id
+        case login
         case nodeId = "node_id"
         case organizationsUrl = "organizations_url"
         case receivedEventsUrl = "received_events_url"
@@ -498,8 +487,12 @@ public struct WebhookForkForkeeVariant0Owner: Codable {
         case subscriptionsUrl = "subscriptions_url"
         case type
         case url
-        case userViewType = "user_view_type"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    init() {
+        (self.avatarUrl, self.eventsUrl, self.followersUrl, self.followingUrl, self.gistsUrl) = (nil, nil, nil, nil, nil)
+        (self.gravatarId, self.htmlUrl, self.id, self.login, self.nodeId) = (nil, nil, nil, nil, nil)
+        (self.organizationsUrl, self.receivedEventsUrl, self.reposUrl, self.siteAdmin, self.starredUrl) = (nil, nil, nil, nil, nil)
+        (self.subscriptionsUrl, self.type, self.url) = (nil, nil, nil)
+    }
 }

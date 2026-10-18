@@ -6,24 +6,6 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public struct AgentAutomationsGetRepoAutomationResponseTriggersDiscussionCoX72210de70a: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let comment = AgentAutomationsGetRepoAutomationResponseTriggersDiscussionCoX72210de70a(rawValue: "comment")
-    public static let reply = AgentAutomationsGetRepoAutomationResponseTriggersDiscussionCoX72210de70a(rawValue: "reply")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
 /// Visibility of a runner group. You can select all repositories, select individual repositories, or limit
 /// access to private repositories.
 public struct ActionsCreateSelfHostedRunnerGroupForOrgRequestBodyVisibility: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
@@ -95,6 +77,33 @@ public struct AgentAutomationsEditRepoAutomationResponseTriggersWorkflowRunWrite
     public init(rawValue: String) { self.rawValue = rawValue }
     public static let trigger = AgentAutomationsEditRepoAutomationResponseTriggersWorkflowRunWriteScope(rawValue: "trigger")
     public static let repository = AgentAutomationsEditRepoAutomationResponseTriggersWorkflowRunWriteScope(rawValue: "repository")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check.
+/// **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot
+/// change a check run conclusion to `stale`, only GitHub can set this.
+public struct ChecksUpdateRequestBodyVariant0Conclusion: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let actionRequired = ChecksUpdateRequestBodyVariant0Conclusion(rawValue: "action_required")
+    public static let cancelled = ChecksUpdateRequestBodyVariant0Conclusion(rawValue: "cancelled")
+    public static let failure = ChecksUpdateRequestBodyVariant0Conclusion(rawValue: "failure")
+    public static let neutral = ChecksUpdateRequestBodyVariant0Conclusion(rawValue: "neutral")
+    public static let success = ChecksUpdateRequestBodyVariant0Conclusion(rawValue: "success")
+    public static let skipped = ChecksUpdateRequestBodyVariant0Conclusion(rawValue: "skipped")
+    public static let stale = ChecksUpdateRequestBodyVariant0Conclusion(rawValue: "stale")
+    public static let timedOut = ChecksUpdateRequestBodyVariant0Conclusion(rawValue: "timed_out")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

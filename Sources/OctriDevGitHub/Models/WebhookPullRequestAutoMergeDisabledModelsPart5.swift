@@ -325,7 +325,7 @@ extension WebhookPullRequestAutoMergeDisabledPullRequestHeadRepoPushedAt: SdkNum
     }
 }
 
-public typealias WebhookPullRequestAutoMergeDisabledPullRequestRequestedReviewersList = [WebhookPullRequestAutoMergeDisabledPullRequestRequestedReviewersItem]
+public typealias WebhookPullRequestAutoMergeDisabledPullRequestRequestedReviewersList = [WebhookPullRequestAutoMergeDisabledPullRequestRequestedReviewersItem?]
 
 public typealias WebhookPullRequestAutoMergeDisabledPullRequestRequestedTeamsList = [WebhookPullRequestAutoMergeDisabledPullRequestRequestedTeamsItem]
 

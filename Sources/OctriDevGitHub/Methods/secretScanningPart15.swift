@@ -20,7 +20,7 @@ extension SecretScanningMethods {
     public static func secretScanningCreatePushProtectionBypass(config: ClientConfig, owner: String, repo: String, reason: SecretScanningPushProtectionBypassReason, placeholderId: SecretScanningPushProtectionBypassPlaceholderId, requestOptions: RequestOptions? = nil) async throws -> SecretScanningPushProtectionBypass {
         let requestBody = SecretScanningCreatePushProtectionBypassRequestBody(reason: reason, placeholderId: placeholderId)
 
-        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/secret-scanning/push-protection-bypasses"].joined(), config: config, body: requestBody, decoder: .json, operationId: "secretScanningCreatePushProtectionBypass", options: requestOptions)).data
+        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/secret-scanning/push-protection-bypasses"].joined(), config: config, body: requestBody, decoder: .json, operationId: "secretScanningCreatePushProtectionBypass", options: requestOptions, errors: ["503": ServiceUnavailable.self])).data
     }
 
     /// Lists the latest default incremental and backfill scans by type for a repository. > [!NOTE] > This endpoint requires [GitHub Advanced Security](https://docs.github.com/get-started/learning-about-github/about-github-advanced-security). OAuth app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
@@ -31,6 +31,6 @@ extension SecretScanningMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     public static func secretScanningGetScanHistory(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> SecretScanningScanHistory {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/secret-scanning/scan-history"].joined(), config: config, decoder: .json, operationId: "secretScanningGetScanHistory", options: requestOptions)).data
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/secret-scanning/scan-history"].joined(), config: config, decoder: .json, operationId: "secretScanningGetScanHistory", options: requestOptions, errors: ["503": ServiceUnavailable.self])).data
     }
 }

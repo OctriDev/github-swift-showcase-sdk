@@ -6,6 +6,26 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
+/// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
+/// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
+public struct AgentAutomationsListRepoAutomationsResponseAutomationsItemTriX830ecc8566: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let trigger = AgentAutomationsListRepoAutomationsResponseAutomationsItemTriX830ecc8566(rawValue: "trigger")
+    public static let repository = AgentAutomationsListRepoAutomationsResponseAutomationsItemTriX830ecc8566(rawValue: "repository")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
 /// Specifies which types of repository this security configuration is applied to by default.
 public struct CodeSecuritySetConfigurationAsDefaultResponseDefaultForNewRepos: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
@@ -176,29 +196,6 @@ public struct CodeSecurityUpdateConfigurationRequestBodyDependabotAlerts: RawRep
     public static let enabled = CodeSecurityUpdateConfigurationRequestBodyDependabotAlerts(rawValue: "enabled")
     public static let disabled = CodeSecurityUpdateConfigurationRequestBodyDependabotAlerts(rawValue: "disabled")
     public static let notSet = CodeSecurityUpdateConfigurationRequestBodyDependabotAlerts(rawValue: "not_set")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or
-/// `COMMENT`. When you leave this blank, the API returns _HTTP 422 (Unrecognizable entity)_ and sets the review
-/// action state to `PENDING`, which means you will need to re-submit the pull request review using a review
-/// action.
-public struct PullsSubmitReviewRequestBodyEvent: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let approve = PullsSubmitReviewRequestBodyEvent(rawValue: "APPROVE")
-    public static let requestChanges = PullsSubmitReviewRequestBodyEvent(rawValue: "REQUEST_CHANGES")
-    public static let comment = PullsSubmitReviewRequestBodyEvent(rawValue: "COMMENT")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

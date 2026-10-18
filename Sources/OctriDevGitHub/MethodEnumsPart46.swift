@@ -6,27 +6,6 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-/// Update the source for the repository. Must include the branch name, and may optionally specify the
-/// subdirectory `/docs`. Possible values are `"gh-pages"`, `"master"`, and `"master /docs"`.
-public struct ReposUpdateInformationAboutPagesSiteRequestBodySourceVariant0: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let ghPages = ReposUpdateInformationAboutPagesSiteRequestBodySourceVariant0(rawValue: "gh-pages")
-    public static let primary = ReposUpdateInformationAboutPagesSiteRequestBodySourceVariant0(rawValue: "master")
-    public static let primaryDocs = ReposUpdateInformationAboutPagesSiteRequestBodySourceVariant0(rawValue: "master /docs")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
 /// The hosted compute service to use for the network configuration.
 public struct HostedComputeUpdateNetworkConfigurationForOrgRequestBodyComputeService: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
@@ -199,6 +178,26 @@ public struct AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemType: Raw
     public init(rawValue: String) { self.rawValue = rawValue }
     public static let pull = AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemType(rawValue: "pull")
     public static let branch = AgentTasksGetTaskByRepoAndIdResponseVariant0ArtifactsItemType(rawValue: "branch")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// The enablement status of Automatic dependency submission
+public struct CodeSecurityCreateConfigurationForEnterpriseRequestBodyDependXdc9fc5a48a: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let enabled = CodeSecurityCreateConfigurationForEnterpriseRequestBodyDependXdc9fc5a48a(rawValue: "enabled")
+    public static let disabled = CodeSecurityCreateConfigurationForEnterpriseRequestBodyDependXdc9fc5a48a(rawValue: "disabled")
+    public static let notSet = CodeSecurityCreateConfigurationForEnterpriseRequestBodyDependXdc9fc5a48a(rawValue: "not_set")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

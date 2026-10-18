@@ -6,49 +6,6 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-/// Machine-readable error code
-public struct AgentTasksGetTaskByIdResponseErrorsItemCode: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let missing = AgentTasksGetTaskByIdResponseErrorsItemCode(rawValue: "missing")
-    public static let missingField = AgentTasksGetTaskByIdResponseErrorsItemCode(rawValue: "missing_field")
-    public static let invalid = AgentTasksGetTaskByIdResponseErrorsItemCode(rawValue: "invalid")
-    public static let alreadyExists = AgentTasksGetTaskByIdResponseErrorsItemCode(rawValue: "already_exists")
-    public static let unprocessable = AgentTasksGetTaskByIdResponseErrorsItemCode(rawValue: "unprocessable")
-    public static let custom = AgentTasksGetTaskByIdResponseErrorsItemCode(rawValue: "custom")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
-/// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
-public struct AgentAutomationsListAutomationsResponseItemTriggersPullRequesX0b712d6354: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let trigger = AgentAutomationsListAutomationsResponseItemTriggersPullRequesX0b712d6354(rawValue: "trigger")
-    public static let repository = AgentAutomationsListAutomationsResponseItemTriggersPullRequesX0b712d6354(rawValue: "repository")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
 public struct IssuesListForRepoParameterX1f53ffcf: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
@@ -198,6 +155,49 @@ public struct AgentAutomationsEditRepoAutomationResponseTriggersIntervalCadenceI
     public static let hourly = AgentAutomationsEditRepoAutomationResponseTriggersIntervalCadenceItem(rawValue: "hourly")
     public static let daily = AgentAutomationsEditRepoAutomationResponseTriggersIntervalCadenceItem(rawValue: "daily")
     public static let weekly = AgentAutomationsEditRepoAutomationResponseTriggersIntervalCadenceItem(rawValue: "weekly")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Machine-readable error code
+public struct AgentTasksGetTaskByIdResponseErrorsItemCodeX1aa4c709: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let missing = AgentTasksGetTaskByIdResponseErrorsItemCodeX1aa4c709(rawValue: "missing")
+    public static let missingField = AgentTasksGetTaskByIdResponseErrorsItemCodeX1aa4c709(rawValue: "missing_field")
+    public static let invalid = AgentTasksGetTaskByIdResponseErrorsItemCodeX1aa4c709(rawValue: "invalid")
+    public static let alreadyExists = AgentTasksGetTaskByIdResponseErrorsItemCodeX1aa4c709(rawValue: "already_exists")
+    public static let unprocessable = AgentTasksGetTaskByIdResponseErrorsItemCodeX1aa4c709(rawValue: "unprocessable")
+    public static let custom = AgentTasksGetTaskByIdResponseErrorsItemCodeX1aa4c709(rawValue: "custom")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// The level of the annotation.
+public struct ChecksUpdateRequestBodyVariant1OutputAnnotationsItemAnnotationLevel: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let notice = ChecksUpdateRequestBodyVariant1OutputAnnotationsItemAnnotationLevel(rawValue: "notice")
+    public static let warning = ChecksUpdateRequestBodyVariant1OutputAnnotationsItemAnnotationLevel(rawValue: "warning")
+    public static let failure = ChecksUpdateRequestBodyVariant1OutputAnnotationsItemAnnotationLevel(rawValue: "failure")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

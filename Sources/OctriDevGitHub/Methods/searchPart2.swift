@@ -40,6 +40,6 @@ extension SearchMethods {
             SdkQueryParameter("order", value: order),
             SdkQueryParameter("per_page", value: perPage),
             SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "searchCode", options: requestOptions, errors: ["403": BasicError.self, "422": ValidationError.self])).data
+        ], decoder: .json, operationId: "searchCode", options: requestOptions, errors: ["403": BasicError.self, "422": ValidationError.self, "503": ServiceUnavailable.self])).data
     }
 }

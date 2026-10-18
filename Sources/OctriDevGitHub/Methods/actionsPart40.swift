@@ -13,7 +13,7 @@ extension ActionsMethods {
     /// - org: The organization name. The name is not case sensitive.
     /// - runnerId: Unique identifier of the self-hosted runner.
     /// - name: The name of a self-hosted runner's custom label.
-    public static func actionsRemoveCustomLabelFromSelfHostedRunnerForOrg(config: ClientConfig, org: String, runnerId: Int, name: String, requestOptions: RequestOptions? = nil) async throws -> ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgResponse {
+    public static func actionsRemoveCustomLabelFromSelfHostedRunnerForOrg(config: ClientConfig, org: String, runnerId: Int, name: String, requestOptions: RequestOptions? = nil) async throws -> ActionsRunnerLabels {
         return try (await sdkRequest("DELETE", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/actions/runners/", sdkEncodePathSegment(sdkWireString(runnerId)), "/labels/", sdkEncodePathSegment(sdkWireString(name))].joined(), config: config, decoder: .json, operationId: "actionsRemoveCustomLabelFromSelfHostedRunnerForOrg", options: requestOptions, errors: ["404": BasicError.self, "422": ValidationErrorSimple.self])).data
     }
 

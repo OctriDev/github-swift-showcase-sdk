@@ -4,64 +4,6 @@
 import Foundation
 
 // WebhookPackagePublished domain models
-/// Required enumerated value serialized in the `action` wire field.
-public struct WebhookPackagePublishedAction: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let published = WebhookPackagePublishedAction(rawValue: "published")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// Optional enumerated value serialized in the `type` wire field.
-public struct WebhookPackagePublishedPackagePackageVersionReleaseAuthorType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let bot = WebhookPackagePublishedPackagePackageVersionReleaseAuthorType(rawValue: "Bot")
-    public static let user = WebhookPackagePublishedPackagePackageVersionReleaseAuthorType(rawValue: "User")
-    public static let organization = WebhookPackagePublishedPackagePackageVersionReleaseAuthorType(rawValue: "Organization")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// Optional enumerated value serialized in the `type` wire field.
-public struct WebhookPackagePublishedPackageOwnerType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let bot = WebhookPackagePublishedPackageOwnerType(rawValue: "Bot")
-    public static let user = WebhookPackagePublishedPackageOwnerType(rawValue: "User")
-    public static let organization = WebhookPackagePublishedPackageOwnerType(rawValue: "Organization")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
 /// Optional enumerated value serialized in the `type` wire field.
 public struct WebhookPackagePublishedPackagePackageVersionAuthorType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String

@@ -4,6 +4,338 @@
 import Foundation
 
 // Shared domain models
+/// Typed representation of the `ServiceUnavailable` API schema.
+public struct ServiceUnavailable: Codable {
+    /// Optional `string` value serialized in the `code` wire field.
+    public var code: String?
+    /// Optional `string` value serialized in the `message` wire field.
+    public var message: String?
+    /// Optional `string` value serialized in the `documentation_url` wire field.
+    public var documentationUrl: String?
+
+    enum CodingKeys: String, CodingKey {
+        case code
+        case message
+        case documentationUrl = "documentation_url"
+    }
+
+    init() {
+        (self.code, self.message, self.documentationUrl) = (nil, nil, nil)
+    }
+}
+
+extension ServiceUnavailable {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.code = try container.sdkDecodeIfPresent(.code)
+        self.message = try container.sdkDecodeIfPresent(.message)
+        self.documentationUrl = try container.sdkDecodeIfPresent(.documentationUrl)
+    }
+}
+
+extension ServiceUnavailable {
+    public init(code: String? = nil, message: String? = nil, documentationUrl: String? = nil) {
+        self.init()
+        (self.code, self.message) = (code, message)
+        self.documentationUrl = documentationUrl
+    }
+}
+
+/// Typed representation of the `ReactionRollup` API schema.
+public struct ReactionRollup: Codable {
+    /// Required `uri`-formatted value serialized in the `url` wire field.
+    public var url: String
+    /// Required `integer` value serialized in the `total_count` wire field.
+    public var totalCount: Int
+    /// Required `integer` value serialized in the `+1` wire field.
+    public var plus1: Int
+    /// Required `integer` value serialized in the `-1` wire field.
+    public var minus1: Int
+    /// Required `integer` value serialized in the `laugh` wire field.
+    public var laugh: Int
+    /// Required `integer` value serialized in the `confused` wire field.
+    public var confused: Int
+    /// Required `integer` value serialized in the `heart` wire field.
+    public var heart: Int
+    /// Required `integer` value serialized in the `hooray` wire field.
+    public var hooray: Int
+    /// Required `integer` value serialized in the `eyes` wire field.
+    public var eyes: Int
+    /// Required `integer` value serialized in the `rocket` wire field.
+    public var rocket: Int
+
+    enum CodingKeys: String, CodingKey {
+        case url
+        case totalCount = "total_count"
+        case plus1 = "+1"
+        case minus1 = "-1"
+        case laugh
+        case confused
+        case heart
+        case hooray
+        case eyes
+        case rocket
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension ReactionRollup {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.totalCount = try container.sdkDecodeRequired(.totalCount)
+        self.plus1 = try container.sdkDecodeRequired(.plus1)
+        self.minus1 = try container.sdkDecodeRequired(.minus1)
+        self.laugh = try container.sdkDecodeRequired(.laugh)
+        self.confused = try container.sdkDecodeRequired(.confused)
+        self.heart = try container.sdkDecodeRequired(.heart)
+        self.hooray = try container.sdkDecodeRequired(.hooray)
+        self.eyes = try container.sdkDecodeRequired(.eyes)
+        self.rocket = try container.sdkDecodeRequired(.rocket)
+            try sdkValidateUri("url", self.url)
+    }
+}
+
+extension ReactionRollup {
+    public init(url: String, totalCount: Int, plus1: Int, minus1: Int, laugh: Int, confused: Int, heart: Int, hooray: Int, eyes: Int, rocket: Int) throws {
+        (self.url, self.totalCount) = (url, totalCount)
+        (self.plus1, self.minus1) = (plus1, minus1)
+        (self.laugh, self.confused) = (laugh, confused)
+        (self.heart, self.hooray) = (heart, hooray)
+        (self.eyes, self.rocket) = (eyes, rocket)
+            try sdkValidateUri("url", self.url)
+    }
+}
+
+/// Public User
+public struct PublicUser: Codable {
+    /// Required `string` value serialized in the `login` wire field.
+    public var login: String
+    /// Required `int64`-formatted value serialized in the `id` wire field.
+    public var id: Int
+    /// Required `string` value serialized in the `node_id` wire field.
+    public var nodeId: String
+    /// Required `uri`-formatted value serialized in the `avatar_url` wire field.
+    public var avatarUrl: String
+    /// Required `string` value serialized in the `gravatar_id` wire field.
+    public var gravatarId: String?
+    /// Required `uri`-formatted value serialized in the `url` wire field.
+    public var url: String
+    /// Required `uri`-formatted value serialized in the `html_url` wire field.
+    public var htmlUrl: String
+    /// Required `uri`-formatted value serialized in the `followers_url` wire field.
+    public var followersUrl: String
+    /// Required `string` value serialized in the `following_url` wire field.
+    public var followingUrl: String
+    /// Required `string` value serialized in the `gists_url` wire field.
+    public var gistsUrl: String
+    /// Required `string` value serialized in the `starred_url` wire field.
+    public var starredUrl: String
+    /// Required `uri`-formatted value serialized in the `subscriptions_url` wire field.
+    public var subscriptionsUrl: String
+    /// Required `uri`-formatted value serialized in the `organizations_url` wire field.
+    public var organizationsUrl: String
+    /// Required `uri`-formatted value serialized in the `repos_url` wire field.
+    public var reposUrl: String
+    /// Required `string` value serialized in the `events_url` wire field.
+    public var eventsUrl: String
+    /// Required `uri`-formatted value serialized in the `received_events_url` wire field.
+    public var receivedEventsUrl: String
+    /// Required `string` value serialized in the `type` wire field.
+    public var type: String
+    /// Required `boolean` value serialized in the `site_admin` wire field.
+    public var siteAdmin: Bool
+    /// Required `string` value serialized in the `name` wire field.
+    public var name: String?
+    /// Required `string` value serialized in the `company` wire field.
+    public var company: String?
+    /// Required `string` value serialized in the `blog` wire field.
+    public var blog: String?
+    /// Required `string` value serialized in the `location` wire field.
+    public var location: String?
+    /// Required `email`-formatted value serialized in the `email` wire field.
+    public var email: String?
+    /// Required `boolean` value serialized in the `hireable` wire field.
+    public var hireable: Bool?
+    /// Required `string` value serialized in the `bio` wire field.
+    public var bio: String?
+    /// Required `integer` value serialized in the `public_repos` wire field.
+    public var publicRepos: Int
+    /// Required `integer` value serialized in the `public_gists` wire field.
+    public var publicGists: Int
+    /// Required `integer` value serialized in the `followers` wire field.
+    public var followers: Int
+    /// Required `integer` value serialized in the `following` wire field.
+    public var following: Int
+    /// Required `date-time`-formatted value serialized in the `created_at` wire field.
+    public var createdAt: Date
+    /// Required `date-time`-formatted value serialized in the `updated_at` wire field.
+    public var updatedAt: Date
+    /// Optional `string` value serialized in the `user_view_type` wire field.
+    public var userViewType: String?
+    /// Optional `email`-formatted value serialized in the `notification_email` wire field.
+    public var notificationEmail: String?
+    /// Optional `string` value serialized in the `twitter_username` wire field.
+    public var twitterUsername: String?
+    /// Optional object value serialized in the `plan` wire field.
+    public var plan: PublicUserPlan?
+    /// Optional `integer` value serialized in the `private_gists` wire field.
+    /// - Example: 1
+    public var privateGists: Int?
+    /// Optional `integer` value serialized in the `total_private_repos` wire field.
+    /// - Example: 2
+    public var totalPrivateRepos: Int?
+    /// Optional `integer` value serialized in the `owned_private_repos` wire field.
+    /// - Example: 2
+    public var ownedPrivateRepos: Int?
+    /// Optional `integer` value serialized in the `disk_usage` wire field.
+    /// - Example: 1
+    public var diskUsage: Int?
+    /// Optional `integer` value serialized in the `collaborators` wire field.
+    /// - Example: 3
+    public var collaborators: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case login
+        case id
+        case nodeId = "node_id"
+        case avatarUrl = "avatar_url"
+        case gravatarId = "gravatar_id"
+        case url
+        case htmlUrl = "html_url"
+        case followersUrl = "followers_url"
+        case followingUrl = "following_url"
+        case gistsUrl = "gists_url"
+        case starredUrl = "starred_url"
+        case subscriptionsUrl = "subscriptions_url"
+        case organizationsUrl = "organizations_url"
+        case reposUrl = "repos_url"
+        case eventsUrl = "events_url"
+        case receivedEventsUrl = "received_events_url"
+        case type
+        case siteAdmin = "site_admin"
+        case name
+        case company
+        case blog
+        case location
+        case email
+        case hireable
+        case bio
+        case publicRepos = "public_repos"
+        case publicGists = "public_gists"
+        case followers
+        case following
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+        case userViewType = "user_view_type"
+        case notificationEmail = "notification_email"
+        case twitterUsername = "twitter_username"
+        case plan
+        case privateGists = "private_gists"
+        case totalPrivateRepos = "total_private_repos"
+        case ownedPrivateRepos = "owned_private_repos"
+        case diskUsage = "disk_usage"
+        case collaborators
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension PublicUser {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.login = try container.sdkDecodeRequired(.login)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
+        self.gravatarId = try container.sdkDecodeNullable(.gravatarId)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        self.followersUrl = try container.sdkDecodeRequired(.followersUrl)
+        self.followingUrl = try container.sdkDecodeRequired(.followingUrl)
+        self.gistsUrl = try container.sdkDecodeRequired(.gistsUrl)
+        self.starredUrl = try container.sdkDecodeRequired(.starredUrl)
+        self.subscriptionsUrl = try container.sdkDecodeRequired(.subscriptionsUrl)
+        self.organizationsUrl = try container.sdkDecodeRequired(.organizationsUrl)
+        self.reposUrl = try container.sdkDecodeRequired(.reposUrl)
+        self.eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
+        self.receivedEventsUrl = try container.sdkDecodeRequired(.receivedEventsUrl)
+        self.type = try container.sdkDecodeRequired(.type)
+        self.siteAdmin = try container.sdkDecodeRequired(.siteAdmin)
+        self.name = try container.sdkDecodeNullable(.name)
+        self.company = try container.sdkDecodeNullable(.company)
+        self.blog = try container.sdkDecodeNullable(.blog)
+        self.location = try container.sdkDecodeNullable(.location)
+        self.email = try container.sdkDecodeNullable(.email)
+        self.hireable = try container.sdkDecodeNullable(.hireable)
+        self.bio = try container.sdkDecodeNullable(.bio)
+        self.publicRepos = try container.sdkDecodeRequired(.publicRepos)
+        self.publicGists = try container.sdkDecodeRequired(.publicGists)
+        self.followers = try container.sdkDecodeRequired(.followers)
+        self.following = try container.sdkDecodeRequired(.following)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        self.userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        self.notificationEmail = try container.sdkDecodeIfPresent(.notificationEmail)
+        self.twitterUsername = try container.sdkDecodeIfPresent(.twitterUsername)
+        self.plan = try container.sdkDecodeIfPresent(.plan)
+        self.privateGists = try container.sdkDecodeIfPresent(.privateGists)
+        self.totalPrivateRepos = try container.sdkDecodeIfPresent(.totalPrivateRepos)
+        self.ownedPrivateRepos = try container.sdkDecodeIfPresent(.ownedPrivateRepos)
+        self.diskUsage = try container.sdkDecodeIfPresent(.diskUsage)
+        self.collaborators = try container.sdkDecodeIfPresent(.collaborators)
+        try sdkValidateConstraints()
+    }
+}
+
+extension PublicUser {
+    public init(login: String, id: Int, nodeId: String, avatarUrl: String, gravatarId: String?, url: String, htmlUrl: String, followersUrl: String, followingUrl: String, gistsUrl: String, starredUrl: String, subscriptionsUrl: String, organizationsUrl: String, reposUrl: String, eventsUrl: String, receivedEventsUrl: String, type: String, siteAdmin: Bool, name: String?, company: String?, blog: String?, location: String?, email: String?, hireable: Bool?, bio: String?, publicRepos: Int, publicGists: Int, followers: Int, following: Int, createdAt: Date, updatedAt: Date, userViewType: String? = nil, notificationEmail: String? = nil, twitterUsername: String? = nil, plan: PublicUserPlan? = nil, privateGists: Int? = nil, totalPrivateRepos: Int? = nil, ownedPrivateRepos: Int? = nil, diskUsage: Int? = nil, collaborators: Int? = nil) throws {
+        (self.login, self.id) = (login, id)
+        (self.nodeId, self.avatarUrl) = (nodeId, avatarUrl)
+        (self.gravatarId, self.url) = (gravatarId, url)
+        (self.htmlUrl, self.followersUrl) = (htmlUrl, followersUrl)
+        (self.followingUrl, self.gistsUrl) = (followingUrl, gistsUrl)
+        (self.starredUrl, self.subscriptionsUrl) = (starredUrl, subscriptionsUrl)
+        (self.organizationsUrl, self.reposUrl) = (organizationsUrl, reposUrl)
+        (self.eventsUrl, self.receivedEventsUrl) = (eventsUrl, receivedEventsUrl)
+        (self.type, self.siteAdmin) = (type, siteAdmin)
+        (self.name, self.company) = (name, company)
+        (self.blog, self.location) = (blog, location)
+        (self.email, self.hireable) = (email, hireable)
+        (self.bio, self.publicRepos) = (bio, publicRepos)
+        (self.publicGists, self.followers) = (publicGists, followers)
+        (self.following, self.createdAt) = (following, createdAt)
+        (self.updatedAt, self.userViewType) = (updatedAt, userViewType)
+        (self.notificationEmail, self.twitterUsername) = (notificationEmail, twitterUsername)
+        (self.plan, self.privateGists) = (plan, privateGists)
+        (self.totalPrivateRepos, self.ownedPrivateRepos) = (totalPrivateRepos, ownedPrivateRepos)
+        (self.diskUsage, self.collaborators) = (diskUsage, collaborators)
+        try sdkValidateConstraints()
+    }
+}
+
+extension PublicUser {
+    func sdkValidateConstraints() throws {
+            try sdkValidateUri("avatar_url", self.avatarUrl)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("followers_url", self.followersUrl)
+            try sdkValidateUri("subscriptions_url", self.subscriptionsUrl)
+            try sdkValidateUri("organizations_url", self.organizationsUrl)
+            try sdkValidateUri("repos_url", self.reposUrl)
+            try sdkValidateUri("received_events_url", self.receivedEventsUrl)
+        if let value = self.email {
+            try sdkValidateEmail("email", value)
+        }
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+        if let value = self.notificationEmail {
+            try sdkValidateEmail("notification_email", value)
+        }
+    }
+}
+
 /// The permissions granted to the fine-grained access token.
 public struct AppPermissions: Codable {
     /// The level of permission to grant the access token for GitHub Actions workflows, workflow runs, and
@@ -218,252 +550,5 @@ extension AppPermissions {
         try sdkDecodeFieldsPart3(container)
         try sdkDecodeFieldsPart4(container)
         try sdkDecodeFieldsPart5(container)
-    }
-}
-
-extension AppPermissions {
-    public init(actions: AppPermissionsActions? = nil, administration: AppPermissionsAdministration? = nil, artifactMetadata: AppPermissionsArtifactMetadata? = nil, attestations: AppPermissionsAttestations? = nil, checks: AppPermissionsChecks? = nil, codeQuality: AppPermissionsCodeQuality? = nil, codespaces: AppPermissionsCodespaces? = nil, contents: AppPermissionsContents? = nil, dependabotSecrets: AppPermissionsDependabotSecrets? = nil, deployments: AppPermissionsDeployments? = nil, discussions: AppPermissionsDiscussions? = nil, environments: AppPermissionsEnvironments? = nil, issues: AppPermissionsIssues? = nil, mergeQueues: AppPermissionsMergeQueues? = nil, metadata: AppPermissionsMetadata? = nil, packages: AppPermissionsPackages? = nil, pages: AppPermissionsPages? = nil, pullRequests: AppPermissionsPullRequests? = nil, repositoryCustomProperties: AppPermissionsRepositoryCustomProperties? = nil, repositoryHooks: AppPermissionsRepositoryHooks? = nil, repositoryProjects: AppPermissionsRepositoryProjects? = nil, secretScanningAlerts: AppPermissionsSecretScanningAlerts? = nil, secrets: AppPermissionsSecrets? = nil, securityEvents: AppPermissionsSecurityEvents? = nil, singleFile: AppPermissionsSingleFile? = nil, statuses: AppPermissionsStatuses? = nil, vulnerabilityAlerts: AppPermissionsVulnerabilityAlerts? = nil, workflows: AppPermissionsWorkflows? = nil, customPropertiesForOrganizations: AppPermissionsCustomPropertiesForOrganizations? = nil, members: AppPermissionsMembers? = nil, organizationAdministration: AppPermissionsOrganizationAdministration? = nil, organizationCustomRoles: AppPermissionsOrganizationCustomRoles? = nil, organizationCustomOrgRoles: AppPermissionsOrganizationCustomOrgRoles? = nil, organizationCustomProperties: AppPermissionsOrganizationCustomProperties? = nil, organizationCopilotSeatManagement: AppPermissionsOrganizationCopilotSeatManagement? = nil, organizationCopilotAgentSettings: AppPermissionsOrganizationCopilotAgentSettings? = nil, organizationCopilotRequests: AppPermissionsOrganizationCopilotRequests? = nil, organizationExternalPropertiesForRepos: AppPermissionsOrganizationExternalPropertiesForRepos? = nil, organizationAnnouncementBanners: AppPermissionsOrganizationAnnouncementBanners? = nil, organizationEvents: AppPermissionsOrganizationEvents? = nil, organizationHooks: AppPermissionsOrganizationHooks? = nil, organizationPersonalAccessTokens: AppPermissionsOrganizationPersonalAccessTokens? = nil, organizationPersonalAccessTokenRequests: AppPermissionsOrganizationPersonalAccessTokenRequests? = nil, organizationPlan: AppPermissionsOrganizationPlan? = nil, organizationProjects: AppPermissionsOrganizationProjects? = nil, organizationPackages: AppPermissionsOrganizationPackages? = nil, organizationSecrets: AppPermissionsOrganizationSecrets? = nil, organizationSelfHostedRunners: AppPermissionsOrganizationSelfHostedRunners? = nil, organizationUserBlocking: AppPermissionsOrganizationUserBlocking? = nil, emailAddresses: AppPermissionsEmailAddresses? = nil, followers: AppPermissionsFollowers? = nil, gitSshKeys: AppPermissionsGitSshKeys? = nil, gpgKeys: AppPermissionsGpgKeys? = nil, interactionLimits: AppPermissionsInteractionLimits? = nil, profile: AppPermissionsProfile? = nil, starring: AppPermissionsStarring? = nil, enterpriseCustomPropertiesForOrganizations: AppPermissionsEnterpriseCustomPropertiesForOrganizations? = nil) {
-        self.init(sdkDefaults: ())
-        sdkSet1(actions, administration, artifactMetadata, attestations, checks)
-        sdkSet2(codeQuality, codespaces, contents, dependabotSecrets, deployments)
-        sdkSet3(discussions, environments, issues, mergeQueues, metadata)
-        sdkSet4(packages, pages, pullRequests, repositoryCustomProperties, repositoryHooks)
-        sdkSet5(repositoryProjects, secretScanningAlerts, secrets, securityEvents, singleFile)
-        sdkSet6(statuses, vulnerabilityAlerts, workflows, customPropertiesForOrganizations, members)
-        sdkSet7(organizationAdministration, organizationCustomRoles, organizationCustomOrgRoles)
-        sdkSet8(organizationCustomProperties, organizationCopilotSeatManagement, organizationCopilotAgentSettings)
-        sdkSet9(organizationCopilotRequests, organizationExternalPropertiesForRepos, organizationAnnouncementBanners)
-        sdkSet10(organizationEvents, organizationHooks, organizationPersonalAccessTokens)
-        sdkSet11(organizationPersonalAccessTokenRequests, organizationPlan, organizationProjects)
-        sdkSet12(organizationPackages, organizationSecrets, organizationSelfHostedRunners, organizationUserBlocking)
-        sdkSet13(emailAddresses, followers, gitSshKeys, gpgKeys, interactionLimits)
-        sdkSet14(profile, starring, enterpriseCustomPropertiesForOrganizations)
-    }
-}
-
-extension AppPermissions {
-    mutating func sdkSet1(_ actions: AppPermissionsActions?, _ administration: AppPermissionsAdministration?, _ artifactMetadata: AppPermissionsArtifactMetadata?, _ attestations: AppPermissionsAttestations?, _ checks: AppPermissionsChecks?) {
-        self.actions = actions
-        self.administration = administration
-        self.artifactMetadata = artifactMetadata
-        self.attestations = attestations
-        self.checks = checks
-    }
-}
-
-extension AppPermissions {
-    mutating func sdkSet2(_ codeQuality: AppPermissionsCodeQuality?, _ codespaces: AppPermissionsCodespaces?, _ contents: AppPermissionsContents?, _ dependabotSecrets: AppPermissionsDependabotSecrets?, _ deployments: AppPermissionsDeployments?) {
-        self.codeQuality = codeQuality
-        self.codespaces = codespaces
-        self.contents = contents
-        self.dependabotSecrets = dependabotSecrets
-        self.deployments = deployments
-    }
-}
-
-extension AppPermissions {
-    mutating func sdkSet3(_ discussions: AppPermissionsDiscussions?, _ environments: AppPermissionsEnvironments?, _ issues: AppPermissionsIssues?, _ mergeQueues: AppPermissionsMergeQueues?, _ metadata: AppPermissionsMetadata?) {
-        self.discussions = discussions
-        self.environments = environments
-        self.issues = issues
-        self.mergeQueues = mergeQueues
-        self.metadata = metadata
-    }
-}
-
-extension AppPermissions {
-    mutating func sdkSet4(_ packages: AppPermissionsPackages?, _ pages: AppPermissionsPages?, _ pullRequests: AppPermissionsPullRequests?, _ repositoryCustomProperties: AppPermissionsRepositoryCustomProperties?, _ repositoryHooks: AppPermissionsRepositoryHooks?) {
-        self.packages = packages
-        self.pages = pages
-        self.pullRequests = pullRequests
-        self.repositoryCustomProperties = repositoryCustomProperties
-        self.repositoryHooks = repositoryHooks
-    }
-}
-
-extension AppPermissions {
-    mutating func sdkSet5(_ repositoryProjects: AppPermissionsRepositoryProjects?, _ secretScanningAlerts: AppPermissionsSecretScanningAlerts?, _ secrets: AppPermissionsSecrets?, _ securityEvents: AppPermissionsSecurityEvents?, _ singleFile: AppPermissionsSingleFile?) {
-        self.repositoryProjects = repositoryProjects
-        self.secretScanningAlerts = secretScanningAlerts
-        self.secrets = secrets
-        self.securityEvents = securityEvents
-        self.singleFile = singleFile
-    }
-}
-
-extension AppPermissions {
-    mutating func sdkSet6(_ statuses: AppPermissionsStatuses?, _ vulnerabilityAlerts: AppPermissionsVulnerabilityAlerts?, _ workflows: AppPermissionsWorkflows?, _ customPropertiesForOrganizations: AppPermissionsCustomPropertiesForOrganizations?, _ members: AppPermissionsMembers?) {
-        self.statuses = statuses
-        self.vulnerabilityAlerts = vulnerabilityAlerts
-        self.workflows = workflows
-        self.customPropertiesForOrganizations = customPropertiesForOrganizations
-        self.members = members
-    }
-}
-
-extension AppPermissions {
-    mutating func sdkSet7(_ organizationAdministration: AppPermissionsOrganizationAdministration?, _ organizationCustomRoles: AppPermissionsOrganizationCustomRoles?, _ organizationCustomOrgRoles: AppPermissionsOrganizationCustomOrgRoles?) {
-        self.organizationAdministration = organizationAdministration
-        self.organizationCustomRoles = organizationCustomRoles
-        self.organizationCustomOrgRoles = organizationCustomOrgRoles
-    }
-}
-
-extension AppPermissions {
-    mutating func sdkSet8(_ organizationCustomProperties: AppPermissionsOrganizationCustomProperties?, _ organizationCopilotSeatManagement: AppPermissionsOrganizationCopilotSeatManagement?, _ organizationCopilotAgentSettings: AppPermissionsOrganizationCopilotAgentSettings?) {
-        self.organizationCustomProperties = organizationCustomProperties
-        self.organizationCopilotSeatManagement = organizationCopilotSeatManagement
-        self.organizationCopilotAgentSettings = organizationCopilotAgentSettings
-    }
-}
-
-extension AppPermissions {
-    mutating func sdkSet9(_ organizationCopilotRequests: AppPermissionsOrganizationCopilotRequests?, _ organizationExternalPropertiesForRepos: AppPermissionsOrganizationExternalPropertiesForRepos?, _ organizationAnnouncementBanners: AppPermissionsOrganizationAnnouncementBanners?) {
-        self.organizationCopilotRequests = organizationCopilotRequests
-        self.organizationExternalPropertiesForRepos = organizationExternalPropertiesForRepos
-        self.organizationAnnouncementBanners = organizationAnnouncementBanners
-    }
-}
-
-extension AppPermissions {
-    mutating func sdkSet10(_ organizationEvents: AppPermissionsOrganizationEvents?, _ organizationHooks: AppPermissionsOrganizationHooks?, _ organizationPersonalAccessTokens: AppPermissionsOrganizationPersonalAccessTokens?) {
-        self.organizationEvents = organizationEvents
-        self.organizationHooks = organizationHooks
-        self.organizationPersonalAccessTokens = organizationPersonalAccessTokens
-    }
-}
-
-extension AppPermissions {
-    mutating func sdkSet11(_ organizationPersonalAccessTokenRequests: AppPermissionsOrganizationPersonalAccessTokenRequests?, _ organizationPlan: AppPermissionsOrganizationPlan?, _ organizationProjects: AppPermissionsOrganizationProjects?) {
-        self.organizationPersonalAccessTokenRequests = organizationPersonalAccessTokenRequests
-        self.organizationPlan = organizationPlan
-        self.organizationProjects = organizationProjects
-    }
-}
-
-extension AppPermissions {
-    mutating func sdkSet12(_ organizationPackages: AppPermissionsOrganizationPackages?, _ organizationSecrets: AppPermissionsOrganizationSecrets?, _ organizationSelfHostedRunners: AppPermissionsOrganizationSelfHostedRunners?, _ organizationUserBlocking: AppPermissionsOrganizationUserBlocking?) {
-        self.organizationPackages = organizationPackages
-        self.organizationSecrets = organizationSecrets
-        self.organizationSelfHostedRunners = organizationSelfHostedRunners
-        self.organizationUserBlocking = organizationUserBlocking
-    }
-}
-
-extension AppPermissions {
-    mutating func sdkSet13(_ emailAddresses: AppPermissionsEmailAddresses?, _ followers: AppPermissionsFollowers?, _ gitSshKeys: AppPermissionsGitSshKeys?, _ gpgKeys: AppPermissionsGpgKeys?, _ interactionLimits: AppPermissionsInteractionLimits?) {
-        self.emailAddresses = emailAddresses
-        self.followers = followers
-        self.gitSshKeys = gitSshKeys
-        self.gpgKeys = gpgKeys
-        self.interactionLimits = interactionLimits
-    }
-}
-
-extension AppPermissions {
-    mutating func sdkSet14(_ profile: AppPermissionsProfile?, _ starring: AppPermissionsStarring?, _ enterpriseCustomPropertiesForOrganizations: AppPermissionsEnterpriseCustomPropertiesForOrganizations?) {
-        self.profile = profile
-        self.starring = starring
-        self.enterpriseCustomPropertiesForOrganizations = enterpriseCustomPropertiesForOrganizations
-    }
-}
-
-extension AppPermissions {
-    mutating func sdkDecodeFieldsPart1(_ container: KeyedDecodingContainer<CodingKeys>) throws {
-        self.actions = try container.sdkDecodeIfPresent(.actions)
-        self.administration = try container.sdkDecodeIfPresent(.administration)
-        self.artifactMetadata = try container.sdkDecodeIfPresent(.artifactMetadata)
-        self.attestations = try container.sdkDecodeIfPresent(.attestations)
-        self.checks = try container.sdkDecodeIfPresent(.checks)
-        self.codeQuality = try container.sdkDecodeIfPresent(.codeQuality)
-        self.codespaces = try container.sdkDecodeIfPresent(.codespaces)
-        self.contents = try container.sdkDecodeIfPresent(.contents)
-        self.dependabotSecrets = try container.sdkDecodeIfPresent(.dependabotSecrets)
-        self.deployments = try container.sdkDecodeIfPresent(.deployments)
-        self.discussions = try container.sdkDecodeIfPresent(.discussions)
-        self.environments = try container.sdkDecodeIfPresent(.environments)
-    }
-}
-
-extension AppPermissions {
-    mutating func sdkDecodeFieldsPart2(_ container: KeyedDecodingContainer<CodingKeys>) throws {
-        self.issues = try container.sdkDecodeIfPresent(.issues)
-        self.mergeQueues = try container.sdkDecodeIfPresent(.mergeQueues)
-        self.metadata = try container.sdkDecodeIfPresent(.metadata)
-        self.packages = try container.sdkDecodeIfPresent(.packages)
-        self.pages = try container.sdkDecodeIfPresent(.pages)
-        self.pullRequests = try container.sdkDecodeIfPresent(.pullRequests)
-        self.repositoryCustomProperties = try container.sdkDecodeIfPresent(.repositoryCustomProperties)
-        self.repositoryHooks = try container.sdkDecodeIfPresent(.repositoryHooks)
-        self.repositoryProjects = try container.sdkDecodeIfPresent(.repositoryProjects)
-        self.secretScanningAlerts = try container.sdkDecodeIfPresent(.secretScanningAlerts)
-        self.secrets = try container.sdkDecodeIfPresent(.secrets)
-        self.securityEvents = try container.sdkDecodeIfPresent(.securityEvents)
-    }
-}
-
-extension AppPermissions {
-    mutating func sdkDecodeFieldsPart3(_ container: KeyedDecodingContainer<CodingKeys>) throws {
-        self.singleFile = try container.sdkDecodeIfPresent(.singleFile)
-        self.statuses = try container.sdkDecodeIfPresent(.statuses)
-        self.vulnerabilityAlerts = try container.sdkDecodeIfPresent(.vulnerabilityAlerts)
-        self.workflows = try container.sdkDecodeIfPresent(.workflows)
-        self.customPropertiesForOrganizations = try container.sdkDecodeIfPresent(.customPropertiesForOrganizations)
-        self.members = try container.sdkDecodeIfPresent(.members)
-        self.organizationAdministration = try container.sdkDecodeIfPresent(.organizationAdministration)
-        self.organizationCustomRoles = try container.sdkDecodeIfPresent(.organizationCustomRoles)
-        self.organizationCustomOrgRoles = try container.sdkDecodeIfPresent(.organizationCustomOrgRoles)
-        self.organizationCustomProperties = try container.sdkDecodeIfPresent(.organizationCustomProperties)
-        self.organizationCopilotSeatManagement = try container.sdkDecodeIfPresent(.organizationCopilotSeatManagement)
-        self.organizationCopilotAgentSettings = try container.sdkDecodeIfPresent(.organizationCopilotAgentSettings)
-    }
-}
-
-extension AppPermissions {
-    mutating func sdkDecodeFieldsPart4(_ container: KeyedDecodingContainer<CodingKeys>) throws {
-        self.organizationCopilotRequests = try container.sdkDecodeIfPresent(.organizationCopilotRequests)
-        self.organizationExternalPropertiesForRepos = try container.sdkDecodeIfPresent(.organizationExternalPropertiesForRepos)
-        self.organizationAnnouncementBanners = try container.sdkDecodeIfPresent(.organizationAnnouncementBanners)
-        self.organizationEvents = try container.sdkDecodeIfPresent(.organizationEvents)
-        self.organizationHooks = try container.sdkDecodeIfPresent(.organizationHooks)
-        self.organizationPersonalAccessTokens = try container.sdkDecodeIfPresent(.organizationPersonalAccessTokens)
-        self.organizationPersonalAccessTokenRequests = try container.sdkDecodeIfPresent(.organizationPersonalAccessTokenRequests)
-        self.organizationPlan = try container.sdkDecodeIfPresent(.organizationPlan)
-        self.organizationProjects = try container.sdkDecodeIfPresent(.organizationProjects)
-        self.organizationPackages = try container.sdkDecodeIfPresent(.organizationPackages)
-        self.organizationSecrets = try container.sdkDecodeIfPresent(.organizationSecrets)
-        self.organizationSelfHostedRunners = try container.sdkDecodeIfPresent(.organizationSelfHostedRunners)
-    }
-}
-
-extension AppPermissions {
-    mutating func sdkDecodeFieldsPart5(_ container: KeyedDecodingContainer<CodingKeys>) throws {
-        self.organizationUserBlocking = try container.sdkDecodeIfPresent(.organizationUserBlocking)
-        self.emailAddresses = try container.sdkDecodeIfPresent(.emailAddresses)
-        self.followers = try container.sdkDecodeIfPresent(.followers)
-        self.gitSshKeys = try container.sdkDecodeIfPresent(.gitSshKeys)
-        self.gpgKeys = try container.sdkDecodeIfPresent(.gpgKeys)
-        self.interactionLimits = try container.sdkDecodeIfPresent(.interactionLimits)
-        self.profile = try container.sdkDecodeIfPresent(.profile)
-        self.starring = try container.sdkDecodeIfPresent(.starring)
-        self.enterpriseCustomPropertiesForOrganizations = try container.sdkDecodeIfPresent(.enterpriseCustomPropertiesForOrganizations)
-    }
-}
-
-public indirect enum CustomPropertyValueValue {
-    case stringValue(String)
-    case stringList([String])
-}
-
-extension CustomPropertyValueValue: Codable {
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for CustomPropertyValueValue")
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
     }
 }

@@ -6,47 +6,6 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-/// The enablement status of Copilot secret scanning
-public struct CodeSecurityUpdateEnterpriseConfigurationRequestBodySecretScaXc4cc0ea98d: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let enabled = CodeSecurityUpdateEnterpriseConfigurationRequestBodySecretScaXc4cc0ea98d(rawValue: "enabled")
-    public static let disabled = CodeSecurityUpdateEnterpriseConfigurationRequestBodySecretScaXc4cc0ea98d(rawValue: "disabled")
-    public static let notSet = CodeSecurityUpdateEnterpriseConfigurationRequestBodySecretScaXc4cc0ea98d(rawValue: "not_set")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// Who owns the automation. `user` keeps it private to its creator and its runs act as that user. `repository`
-/// makes it belong to the repository, visible to anyone with read access to the repository, and its runs act as
-/// the Copilot app rather than as a person.
-public struct AgentAutomationsCreateRepoAutomationResponseOwnerType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let user = AgentAutomationsCreateRepoAutomationResponseOwnerType(rawValue: "user")
-    public static let repository = AgentAutomationsCreateRepoAutomationResponseOwnerType(rawValue: "repository")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
 /// Machine-readable error code
 public struct AgentAutomationsEditRepoAutomationResponseErrorsItemCodeXce1214b7: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
@@ -160,26 +119,6 @@ public struct AgentTasksListTasksForRepoResponseErrorsItemCodeX99fc27bc: RawRepr
     }
 }
 
-/// The confidence level for this type choice.
-public struct IssuesUpdateRequestBodyTypeVariant1Confidence: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let low = IssuesUpdateRequestBodyTypeVariant1Confidence(rawValue: "low")
-    public static let medium = IssuesUpdateRequestBodyTypeVariant1Confidence(rawValue: "medium")
-    public static let high = IssuesUpdateRequestBodyTypeVariant1Confidence(rawValue: "high")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
 public struct CodeSecurityGetConfigurationsForOrgParameter: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
@@ -206,6 +145,65 @@ public struct AgentAutomationsEditRepoAutomationRequestBodyTriggersPullRequX0759
     public init(rawValue: String) { self.rawValue = rawValue }
     public static let trigger = AgentAutomationsEditRepoAutomationRequestBodyTriggersPullRequX07597c9e9b(rawValue: "trigger")
     public static let repository = AgentAutomationsEditRepoAutomationRequestBodyTriggersPullRequX07597c9e9b(rawValue: "repository")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check.
+/// **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot
+/// change a check run conclusion to `stale`, only GitHub can set this.
+public struct ChecksUpdateRequestBodyVariant1Conclusion: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let actionRequired = ChecksUpdateRequestBodyVariant1Conclusion(rawValue: "action_required")
+    public static let cancelled = ChecksUpdateRequestBodyVariant1Conclusion(rawValue: "cancelled")
+    public static let failure = ChecksUpdateRequestBodyVariant1Conclusion(rawValue: "failure")
+    public static let neutral = ChecksUpdateRequestBodyVariant1Conclusion(rawValue: "neutral")
+    public static let success = ChecksUpdateRequestBodyVariant1Conclusion(rawValue: "success")
+    public static let skipped = ChecksUpdateRequestBodyVariant1Conclusion(rawValue: "skipped")
+    public static let stale = ChecksUpdateRequestBodyVariant1Conclusion(rawValue: "stale")
+    public static let timedOut = ChecksUpdateRequestBodyVariant1Conclusion(rawValue: "timed_out")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// The registry type.
+public struct PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let mavenRepository = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "maven_repository")
+    public static let nugetFeed = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "nuget_feed")
+    public static let goproxyServer = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "goproxy_server")
+    public static let npmRegistry = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "npm_registry")
+    public static let rubygemsServer = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "rubygems_server")
+    public static let cargoRegistry = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "cargo_registry")
+    public static let composerRepository = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "composer_repository")
+    public static let dockerRegistry = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "docker_registry")
+    public static let gitSource = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "git_source")
+    public static let helmRegistry = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "helm_registry")
+    public static let hexOrganization = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "hex_organization")
+    public static let hexRepository = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "hex_repository")
+    public static let pubRepository = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "pub_repository")
+    public static let pythonIndex = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "python_index")
+    public static let terraformRegistry = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "terraform_registry")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

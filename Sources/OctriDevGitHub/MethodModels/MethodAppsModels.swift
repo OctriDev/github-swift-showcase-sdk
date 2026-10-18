@@ -188,31 +188,35 @@ extension AppsListReposAccessibleToInstallationResponse {
     }
 }
 
-public struct AppsListReposAccessibleToInstallationResponseRepositoriesItemVariant1: Codable {
-    /// The custom properties that were defined for the repository. The keys are the custom property names, and the
-    /// values are the corresponding custom property values. Present for org repos only.
-    public var customProperties: [String: JSONValue]?
+/// The status of the code search index for this repository
+public struct AppsListInstallationReposForAuthenticatedUserResponseRepositoXace4d6c012: Codable {
+    /// Optional `boolean` value serialized in the `lexical_search_ok` wire field.
+    public var lexicalSearchOk: Bool?
+    /// Optional `string` value serialized in the `lexical_commit_sha` wire field.
+    public var lexicalCommitSha: String?
 
     enum CodingKeys: String, CodingKey {
-        case customProperties = "custom_properties"
+        case lexicalSearchOk = "lexical_search_ok"
+        case lexicalCommitSha = "lexical_commit_sha"
     }
 
     init() {
-        self.customProperties = nil
+        (self.lexicalSearchOk, self.lexicalCommitSha) = (nil, nil)
     }
 }
 
-extension AppsListReposAccessibleToInstallationResponseRepositoriesItemVariant1 {
+extension AppsListInstallationReposForAuthenticatedUserResponseRepositoXace4d6c012 {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.customProperties = try container.sdkDecodeIfPresent(.customProperties)
+        self.lexicalSearchOk = try container.sdkDecodeIfPresent(.lexicalSearchOk)
+        self.lexicalCommitSha = try container.sdkDecodeIfPresent(.lexicalCommitSha)
     }
 }
 
-extension AppsListReposAccessibleToInstallationResponseRepositoriesItemVariant1 {
-    public init(customProperties: [String: JSONValue]? = nil) {
+extension AppsListInstallationReposForAuthenticatedUserResponseRepositoXace4d6c012 {
+    public init(lexicalSearchOk: Bool? = nil, lexicalCommitSha: String? = nil) {
         self.init()
-        self.customProperties = customProperties
+        (self.lexicalSearchOk, self.lexicalCommitSha) = (lexicalSearchOk, lexicalCommitSha)
     }
 }
 
@@ -245,6 +249,110 @@ extension AppsListInstallationsForAuthenticatedUserResponse {
 extension AppsListInstallationsForAuthenticatedUserResponse {
     public init(totalCount: Int, installations: [Installation]) {
         (self.totalCount, self.installations) = (totalCount, installations)
+    }
+}
+
+/// Optional object value serialized in the `permissions` wire field.
+public struct AppsListReposAccessibleToInstallationResponseRepositoriesItemPermissions: Codable {
+    /// Required `boolean` value serialized in the `admin` wire field.
+    public var admin: Bool
+    /// Required `boolean` value serialized in the `pull` wire field.
+    public var pull: Bool
+    /// Required `boolean` value serialized in the `push` wire field.
+    public var push: Bool
+    /// Optional `boolean` value serialized in the `triage` wire field.
+    public var triage: Bool?
+    /// Optional `boolean` value serialized in the `maintain` wire field.
+    public var maintain: Bool?
+
+    enum CodingKeys: String, CodingKey {
+        case admin
+        case pull
+        case push
+        case triage
+        case maintain
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension AppsListReposAccessibleToInstallationResponseRepositoriesItemPermissions {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.admin) else {
+            throw SdkValidationError(field: "admin", code: "required", message: "Validation failed for 'admin': value is required")
+        }
+        guard container.contains(.pull) else {
+            throw SdkValidationError(field: "pull", code: "required", message: "Validation failed for 'pull': value is required")
+        }
+        guard container.contains(.push) else {
+            throw SdkValidationError(field: "push", code: "required", message: "Validation failed for 'push': value is required")
+        }
+        self.admin = try container.sdkDecodeRequired(.admin)
+        self.pull = try container.sdkDecodeRequired(.pull)
+        self.push = try container.sdkDecodeRequired(.push)
+        self.triage = try container.sdkDecodeIfPresent(.triage)
+        self.maintain = try container.sdkDecodeIfPresent(.maintain)
+    }
+}
+
+extension AppsListReposAccessibleToInstallationResponseRepositoriesItemPermissions {
+    public init(admin: Bool, pull: Bool, push: Bool, triage: Bool? = nil, maintain: Bool? = nil) {
+        (self.admin, self.pull) = (admin, pull)
+        (self.push, self.triage) = (push, triage)
+        self.maintain = maintain
+    }
+}
+
+/// Optional object value serialized in the `permissions` wire field.
+public struct AppsListInstallationReposForAuthenticatedUserResponseRepositoXfbc57dcb02: Codable {
+    /// Required `boolean` value serialized in the `admin` wire field.
+    public var admin: Bool
+    /// Required `boolean` value serialized in the `pull` wire field.
+    public var pull: Bool
+    /// Required `boolean` value serialized in the `push` wire field.
+    public var push: Bool
+    /// Optional `boolean` value serialized in the `triage` wire field.
+    public var triage: Bool?
+    /// Optional `boolean` value serialized in the `maintain` wire field.
+    public var maintain: Bool?
+
+    enum CodingKeys: String, CodingKey {
+        case admin
+        case pull
+        case push
+        case triage
+        case maintain
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension AppsListInstallationReposForAuthenticatedUserResponseRepositoXfbc57dcb02 {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.admin) else {
+            throw SdkValidationError(field: "admin", code: "required", message: "Validation failed for 'admin': value is required")
+        }
+        guard container.contains(.pull) else {
+            throw SdkValidationError(field: "pull", code: "required", message: "Validation failed for 'pull': value is required")
+        }
+        guard container.contains(.push) else {
+            throw SdkValidationError(field: "push", code: "required", message: "Validation failed for 'push': value is required")
+        }
+        self.admin = try container.sdkDecodeRequired(.admin)
+        self.pull = try container.sdkDecodeRequired(.pull)
+        self.push = try container.sdkDecodeRequired(.push)
+        self.triage = try container.sdkDecodeIfPresent(.triage)
+        self.maintain = try container.sdkDecodeIfPresent(.maintain)
+    }
+}
+
+extension AppsListInstallationReposForAuthenticatedUserResponseRepositoXfbc57dcb02 {
+    public init(admin: Bool, pull: Bool, push: Bool, triage: Bool? = nil, maintain: Bool? = nil) {
+        (self.admin, self.pull) = (admin, pull)
+        (self.push, self.triage) = (push, triage)
+        self.maintain = maintain
     }
 }
 
@@ -307,6 +415,38 @@ extension AppsCreateFromManifestResponseVariant1 {
     }
 }
 
+/// The status of the code search index for this repository
+public struct AppsListReposAccessibleToInstallationResponseRepositoriesItemXbc571f6d86: Codable {
+    /// Optional `boolean` value serialized in the `lexical_search_ok` wire field.
+    public var lexicalSearchOk: Bool?
+    /// Optional `string` value serialized in the `lexical_commit_sha` wire field.
+    public var lexicalCommitSha: String?
+
+    enum CodingKeys: String, CodingKey {
+        case lexicalSearchOk = "lexical_search_ok"
+        case lexicalCommitSha = "lexical_commit_sha"
+    }
+
+    init() {
+        (self.lexicalSearchOk, self.lexicalCommitSha) = (nil, nil)
+    }
+}
+
+extension AppsListReposAccessibleToInstallationResponseRepositoriesItemXbc571f6d86 {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.lexicalSearchOk = try container.sdkDecodeIfPresent(.lexicalSearchOk)
+        self.lexicalCommitSha = try container.sdkDecodeIfPresent(.lexicalCommitSha)
+    }
+}
+
+extension AppsListReposAccessibleToInstallationResponseRepositoriesItemXbc571f6d86 {
+    public init(lexicalSearchOk: Bool? = nil, lexicalCommitSha: String? = nil) {
+        self.init()
+        (self.lexicalSearchOk, self.lexicalCommitSha) = (lexicalSearchOk, lexicalCommitSha)
+    }
+}
+
 public typealias AppsListInstallationReposForAuthenticatedUserResponseRepositoriesList = [AppsListInstallationReposForAuthenticatedUserResponseRepositoriesItem]
 
 public struct AppsListInstallationReposForAuthenticatedUserResponse: Codable {
@@ -342,33 +482,5 @@ extension AppsListInstallationReposForAuthenticatedUserResponse {
     public init(totalCount: Int, repositories: AppsListInstallationReposForAuthenticatedUserResponseRepositoriesList, repositorySelection: String? = nil) {
         (self.totalCount, self.repositories) = (totalCount, repositories)
         self.repositorySelection = repositorySelection
-    }
-}
-
-public struct AppsListInstallationReposForAuthenticatedUserResponseRepositoXbb6993d784: Codable {
-    /// The custom properties that were defined for the repository. The keys are the custom property names, and the
-    /// values are the corresponding custom property values. Present for org repos only.
-    public var customProperties: [String: JSONValue]?
-
-    enum CodingKeys: String, CodingKey {
-        case customProperties = "custom_properties"
-    }
-
-    init() {
-        self.customProperties = nil
-    }
-}
-
-extension AppsListInstallationReposForAuthenticatedUserResponseRepositoXbb6993d784 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.customProperties = try container.sdkDecodeIfPresent(.customProperties)
-    }
-}
-
-extension AppsListInstallationReposForAuthenticatedUserResponseRepositoXbb6993d784 {
-    public init(customProperties: [String: JSONValue]? = nil) {
-        self.init()
-        self.customProperties = customProperties
     }
 }

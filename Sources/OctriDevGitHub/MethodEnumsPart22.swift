@@ -6,6 +6,45 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
+public struct SearchCommitsParameterX4b556b74: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let authorDate = SearchCommitsParameterX4b556b74(rawValue: "author-date")
+    public static let committerDate = SearchCommitsParameterX4b556b74(rawValue: "committer-date")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+public struct IssuesListSuggestionsParameterXd58506f8: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let setType = IssuesListSuggestionsParameterXd58506f8(rawValue: "set_type")
+    public static let addLabel = IssuesListSuggestionsParameterXd58506f8(rawValue: "add_label")
+    public static let addField = IssuesListSuggestionsParameterXd58506f8(rawValue: "add_field")
+    public static let addAssignee = IssuesListSuggestionsParameterXd58506f8(rawValue: "add_assignee")
+    public static let closeIssue = IssuesListSuggestionsParameterXd58506f8(rawValue: "close_issue")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
 /// The role that this user should have in the team.
 public struct TeamsAddOrUpdateMembershipForUserLegacyRequestBodyRole: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
@@ -150,46 +189,6 @@ public struct AgentAutomationsListAutomationsResponseItemTriggersPullRequesXdb80
     public init(rawValue: String) { self.rawValue = rawValue }
     public static let trigger = AgentAutomationsListAutomationsResponseItemTriggersPullRequesXdb80558f74(rawValue: "trigger")
     public static let repository = AgentAutomationsListAutomationsResponseItemTriggersPullRequesXdb80558f74(rawValue: "repository")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// Type of the task creator
-public struct AgentTasksGetTaskByIdResponseVariant0CreatorType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let user = AgentTasksGetTaskByIdResponseVariant0CreatorType(rawValue: "user")
-    public static let organization = AgentTasksGetTaskByIdResponseVariant0CreatorType(rawValue: "organization")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// Controls which repository resources a run may modify. `trigger` limits writes to the resource that started
-/// the run, when one exists, and resources created during the run; `repository` allows writes to any resource
-/// in the repository. Supported values: `trigger`, `repository`.
-public struct AgentAutomationsListRepoAutomationsResponseAutomationsItemWriteScope: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let trigger = AgentAutomationsListRepoAutomationsResponseAutomationsItemWriteScope(rawValue: "trigger")
-    public static let repository = AgentAutomationsListRepoAutomationsResponseAutomationsItemWriteScope(rawValue: "repository")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

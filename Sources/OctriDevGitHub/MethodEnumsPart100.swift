@@ -6,31 +6,6 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-struct PullsUpdateRequestBody: Encodable {
-    var title: String?
-    var body: String?
-    var state: PullsUpdateRequestBodyState?
-    var base: String?
-    var maintainerCanModify: Bool?
-
-    func encode(to encoder: Encoder) throws {
-        var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.title, forKey: SdkCodingKey("title"))
-        try keyedContainer.encodeIfPresent(self.body, forKey: SdkCodingKey("body"))
-        try keyedContainer.encodeIfPresent(self.state, forKey: SdkCodingKey("state"))
-        try keyedContainer.encodeIfPresent(self.base, forKey: SdkCodingKey("base"))
-        try keyedContainer.encodeIfPresent(self.maintainerCanModify, forKey: SdkCodingKey("maintainer_can_modify"))
-    }
-
-    init(options: PullsMethods.PullsUpdateOptions) {
-        self.title = options.title
-        self.body = options.body
-        self.state = options.state
-        self.base = options.base
-        self.maintainerCanModify = options.maintainerCanModify
-    }
-}
-
 struct PullsCreateReviewCommentRequestBody: Encodable {
     let body: String
     let commitId: String
@@ -208,5 +183,23 @@ struct PullsUpdateBranchRequestBody: Encodable {
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
         try keyedContainer.encodeIfPresent(self.expectedHeadSha, forKey: SdkCodingKey("expected_head_sha"))
+    }
+}
+
+struct PullRequestStacksCreateRequestBody: Encodable {
+    let pullRequests: [Int]
+
+    func encode(to encoder: Encoder) throws {
+        var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
+        try keyedContainer.encode(self.pullRequests, forKey: SdkCodingKey("pull_requests"))
+    }
+}
+
+struct PullRequestStacksAddRequestBody: Encodable {
+    let pullRequests: [Int]
+
+    func encode(to encoder: Encoder) throws {
+        var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
+        try keyedContainer.encode(self.pullRequests, forKey: SdkCodingKey("pull_requests"))
     }
 }

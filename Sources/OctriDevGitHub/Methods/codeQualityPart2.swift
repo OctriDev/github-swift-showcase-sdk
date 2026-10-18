@@ -40,6 +40,6 @@ extension CodeQualityMethods {
             SdkQueryParameter("before", value: before),
             SdkQueryParameter("after", value: after),
             SdkQueryParameter("state", value: state),
-        ], decoder: .json, operationId: "codeQualityListFindingsForRepo", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+        ], decoder: .json, operationId: "codeQualityListFindingsForRepo", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

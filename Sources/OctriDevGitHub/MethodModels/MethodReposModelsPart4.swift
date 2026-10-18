@@ -8,90 +8,6 @@ import Foundation
 #endif
 
 // Canonical repos operation model declarations
-extension ReposUpdateBranchProtectionRequestBodyRequiredStatusChecksChecksItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.context) else {
-            throw SdkValidationError(field: "context", code: "required", message: "Validation failed for 'context': value is required")
-        }
-        self.context = try container.sdkDecodeRequired(.context)
-        self.appId = try container.sdkDecodeIfPresent(.appId)
-    }
-}
-
-extension ReposUpdateBranchProtectionRequestBodyRequiredStatusChecksChecksItem {
-    public init(context: String, appId: Int? = nil) {
-        (self.context, self.appId) = (context, appId)
-    }
-}
-
-/// The source branch and directory used to publish your Pages site.
-public struct ReposCreatePagesSiteRequestBodySource: Codable {
-    /// The repository branch used to publish your site's source files.
-    public var branch: String
-    /// The repository directory that includes the source files for the Pages site. Allowed paths are `/` or
-    /// `/docs`. Default: `/`
-    public var path: ReposCreatePagesSiteRequestBodySourcePath?
-
-    enum CodingKeys: String, CodingKey {
-        case branch
-        case path
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ReposCreatePagesSiteRequestBodySource {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.branch) else {
-            throw SdkValidationError(field: "branch", code: "required", message: "Validation failed for 'branch': value is required")
-        }
-        self.branch = try container.sdkDecodeRequired(.branch)
-        self.path = try container.sdkDecodeIfPresent(.path)
-    }
-}
-
-extension ReposCreatePagesSiteRequestBodySource {
-    public init(branch: String, path: ReposCreatePagesSiteRequestBodySourcePath? = nil) {
-        (self.branch, self.path) = (branch, path)
-    }
-}
-
-/// The attestation's Sigstore Bundle. Refer to the Sigstore Bundle Specification for more information.
-public struct ReposListAttestationsResponseAttestationsItemBundle: Codable {
-    public var mediaType: String?
-    public var verificationMaterial: [String: JSONValue]?
-    public var dsseEnvelope: [String: JSONValue]?
-
-    enum CodingKeys: String, CodingKey {
-        case mediaType
-        case verificationMaterial
-        case dsseEnvelope
-    }
-
-    init() {
-        (self.mediaType, self.verificationMaterial, self.dsseEnvelope) = (nil, nil, nil)
-    }
-}
-
-extension ReposListAttestationsResponseAttestationsItemBundle {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.mediaType = try container.sdkDecodeIfPresent(.mediaType)
-        self.verificationMaterial = try container.sdkDecodeIfPresent(.verificationMaterial)
-        self.dsseEnvelope = try container.sdkDecodeIfPresent(.dsseEnvelope)
-    }
-}
-
-extension ReposListAttestationsResponseAttestationsItemBundle {
-    public init(mediaType: String? = nil, verificationMaterial: [String: JSONValue]? = nil, dsseEnvelope: [String: JSONValue]? = nil) {
-        self.init()
-        (self.mediaType, self.verificationMaterial) = (mediaType, verificationMaterial)
-        self.dsseEnvelope = dsseEnvelope
-    }
-}
-
 /// Specify which security and analysis features to enable or disable for the repository. To use this parameter, you
 /// must have admin permissions for the repository or be an owner or security manager for the organization that owns
 /// the repository. For more information, see "Managing security managers in your organization." For example, to
@@ -251,12 +167,27 @@ extension ReposCreateOrUpdateFileContentsResponse: Codable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
+        }
         if let value = Self.decodeGroup1(from: container) { self = value; return }
         throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ReposCreateOrUpdateFileContentsResponse")
     }
 
     public func encode(to encoder: Encoder) throws {
         if try encodeGroup1(to: encoder) { return }
+    }
+}
+
+extension ReposCreateOrUpdateFileContentsResponse {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(BasicError.self), sdkKeepsEveryKey(value, of: raw) {
+            return .basicError(value)
+        }
+        if let value = try? container.decode(RepositoryRuleViolationError.self), sdkKeepsEveryKey(value, of: raw) {
+            return .repositoryRuleViolationError(value)
+        }
+        return nil
     }
 }
 

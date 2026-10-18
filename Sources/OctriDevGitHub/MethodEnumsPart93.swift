@@ -173,7 +173,7 @@ struct ReposCreateDeploymentRequestBody: Encodable {
     var task: String?
     var autoMerge: Bool?
     var requiredContexts: [String]?
-    var payload: ReposCreateDeploymentRequestBodyPayload?
+    var payload: ReposCreateDeploymentRequestPayload?
     var environment: String?
     var description: SdkOptional<String>?
     var transientEnvironment: Bool?

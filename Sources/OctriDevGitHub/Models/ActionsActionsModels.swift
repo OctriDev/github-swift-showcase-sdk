@@ -8,313 +8,6 @@ public typealias ActionsCanApprovePullRequestReviews = Bool
 
 public typealias ActionsEnabled = Bool
 
-public indirect enum ActionsPolicyConditions {
-    case actionsPolicyRepoConditions(ActionsPolicyRepoConditions)
-    case actionsPolicyOrgConditions(ActionsPolicyOrgConditions)
-    case actionsPolicyEnterpriseConditions(ActionsPolicyEnterpriseConditions)
-}
-
-extension ActionsPolicyConditions: Codable {
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ActionsPolicyConditions")
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
-    }
-}
-
-extension ActionsPolicyConditions {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(ActionsPolicyRepoConditions.self) { return .actionsPolicyRepoConditions(value) }
-        if let value = try? container.decode(ActionsPolicyOrgConditions.self) { return .actionsPolicyOrgConditions(value) }
-        if let value = try? container.decode(ActionsPolicyEnterpriseConditions.self) { return .actionsPolicyEnterpriseConditions(value) }
-        return nil
-    }
-}
-
-extension ActionsPolicyConditions {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .actionsPolicyRepoConditions(value): try container.encode(value); return true
-        case let .actionsPolicyOrgConditions(value): try container.encode(value); return true
-        case let .actionsPolicyEnterpriseConditions(value): try container.encode(value); return true
-        }
-    }
-}
-
-public indirect enum ActionsPolicyEnterpriseConditions {
-    case jsonValue([String: JSONValue])
-    case jsonValue1([String: JSONValue])
-    case jsonValue2([String: JSONValue])
-    case jsonValue3([String: JSONValue])
-    case jsonValue4([String: JSONValue])
-    case jsonValue5([String: JSONValue])
-}
-
-extension ActionsPolicyEnterpriseConditions: Codable {
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ActionsPolicyEnterpriseConditions")
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
-    }
-}
-
-extension ActionsPolicyEnterpriseConditions {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode([String: JSONValue].self) { return .jsonValue(value) }
-        if let value = try? container.decode([String: JSONValue].self) { return .jsonValue1(value) }
-        if let value = try? container.decode([String: JSONValue].self) { return .jsonValue2(value) }
-        if let value = try? container.decode([String: JSONValue].self) { return .jsonValue3(value) }
-        if let value = try? container.decode([String: JSONValue].self) { return .jsonValue4(value) }
-        if let value = try? container.decode([String: JSONValue].self) { return .jsonValue5(value) }
-        return nil
-    }
-}
-
-extension ActionsPolicyEnterpriseConditions {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .jsonValue(value): try container.encode(value); return true
-        case let .jsonValue1(value): try container.encode(value); return true
-        case let .jsonValue2(value): try container.encode(value); return true
-        case let .jsonValue3(value): try container.encode(value); return true
-        case let .jsonValue4(value): try container.encode(value); return true
-        case let .jsonValue5(value): try container.encode(value); return true
-        }
-    }
-}
-
-public indirect enum ActionsPolicyOrgConditions {
-    case actionsPolicyOrgConditionsVariant0(ActionsPolicyOrgConditionsVariant0)
-    case actionsPolicyOrgConditionsVariant1(ActionsPolicyOrgConditionsVariant1)
-    case actionsPolicyOrgConditionsVariant2(ActionsPolicyOrgConditionsVariant2)
-}
-
-extension ActionsPolicyOrgConditions: Codable {
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ActionsPolicyOrgConditions")
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
-    }
-}
-
-extension ActionsPolicyOrgConditions {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(ActionsPolicyOrgConditionsVariant0.self) { return .actionsPolicyOrgConditionsVariant0(value) }
-        if let value = try? container.decode(ActionsPolicyOrgConditionsVariant1.self) { return .actionsPolicyOrgConditionsVariant1(value) }
-        if let value = try? container.decode(ActionsPolicyOrgConditionsVariant2.self) { return .actionsPolicyOrgConditionsVariant2(value) }
-        return nil
-    }
-}
-
-extension ActionsPolicyOrgConditions {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .actionsPolicyOrgConditionsVariant0(value): try container.encode(value); return true
-        case let .actionsPolicyOrgConditionsVariant1(value): try container.encode(value); return true
-        case let .actionsPolicyOrgConditionsVariant2(value): try container.encode(value); return true
-        }
-    }
-}
-
-public indirect enum ActionsPolicyRepoConditions {
-    case jsonValue([String: JSONValue])
-    case actionsPolicyRepoConditionsVariant1(ActionsPolicyRepoConditionsVariant1)
-}
-
-extension ActionsPolicyRepoConditions: Codable {
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ActionsPolicyRepoConditions")
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
-    }
-}
-
-extension ActionsPolicyRepoConditions {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode([String: JSONValue].self) { return .jsonValue(value) }
-        if let value = try? container.decode(
-            ActionsPolicyRepoConditionsVariant1.self
-        ) {
-            return             .actionsPolicyRepoConditionsVariant1(value)
-        }
-        return nil
-    }
-}
-
-extension ActionsPolicyRepoConditions {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .jsonValue(value): try container.encode(value); return true
-        case let .actionsPolicyRepoConditionsVariant1(value): try container.encode(value); return true
-        }
-    }
-}
-
-public indirect enum ActionsRule {
-    case actionsRuleRestrictActionsActors(ActionsRuleRestrictActionsActors)
-    case actionsRuleRestrictActionEvents(ActionsRuleRestrictActionEvents)
-    /// A member whose `type` names no branch this SDK knows, kept as received.
-    case unknown(tag: String, raw: JSONValue)
-}
-
-extension ActionsRule: Codable {
-
-    private enum CodingKeys: String, CodingKey {
-        case discriminator = "type"
-    }
-
-    public init(from decoder: Decoder) throws {
-        let tagged = try decoder.container(keyedBy: CodingKeys.self)
-        let discriminator = try tagged.decode(String.self, forKey: .discriminator)
-        if let value = try Self.decodeGroup1(discriminator, from: decoder) { self = value; return }
-        self = try .unknown(tag: discriminator, raw: JSONValue(from: decoder))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
-        if case let .unknown(_, raw) = self {
-            var container = encoder.singleValueContainer()
-            try container.encode(raw)
-        }
-    }
-}
-
-extension ActionsRule {
-    static func decodeGroup1(_ discriminator: String, from decoder: Decoder) throws -> Self? {
-        switch discriminator {
-        case "restrict_actions_actors": return .actionsRuleRestrictActionsActors(try ActionsRuleRestrictActionsActors(from: decoder))
-        case "restrict_action_events": return .actionsRuleRestrictActionEvents(try ActionsRuleRestrictActionEvents(from: decoder))
-        default: return nil
-        }
-    }
-}
-
-extension ActionsRule {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .actionsRuleRestrictActionsActors(value): try container.encode(value); return true
-        case let .actionsRuleRestrictActionEvents(value): try container.encode(value); return true
-        default: return false
-        }
-    }
-}
-
-/// Typed representation of the `ActionsCacheUsageOrgEnterprise` API schema.
-public struct ActionsCacheUsageOrgEnterprise: Codable {
-    /// The count of active caches across all repositories of an enterprise or an organization.
-    public var totalActiveCachesCount: Int
-    /// The total size in bytes of all active cache items across all repositories of an enterprise or an
-    /// organization.
-    public var totalActiveCachesSizeInBytes: Int
-
-    enum CodingKeys: String, CodingKey {
-        case totalActiveCachesCount = "total_active_caches_count"
-        case totalActiveCachesSizeInBytes = "total_active_caches_size_in_bytes"
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsCacheUsageOrgEnterprise {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.totalActiveCachesCount) else {
-            throw SdkValidationError(field: "total_active_caches_count", code: "required", message: "Validation failed for 'total_active_caches_count': value is required")
-        }
-        guard container.contains(.totalActiveCachesSizeInBytes) else {
-            throw SdkValidationError(field: "total_active_caches_size_in_bytes", code: "required", message: "Validation failed for 'total_active_caches_size_in_bytes': value is required")
-        }
-        self.totalActiveCachesCount = try container.sdkDecodeRequired(.totalActiveCachesCount)
-        self.totalActiveCachesSizeInBytes = try container.sdkDecodeRequired(.totalActiveCachesSizeInBytes)
-    }
-}
-
-extension ActionsCacheUsageOrgEnterprise {
-    public init(totalActiveCachesCount: Int, totalActiveCachesSizeInBytes: Int) {
-        self.totalActiveCachesCount = totalActiveCachesCount
-        self.totalActiveCachesSizeInBytes = totalActiveCachesSizeInBytes
-    }
-}
-
-/// Provides details of a particular machine spec.
-public struct ActionsHostedRunnerMachineSpec: Codable {
-    /// The ID used for the `size` parameter when creating a new runner.
-    /// - Example: "8-core"
-    public var id: String
-    /// The number of cores.
-    /// - Example: 8
-    public var cpuCores: Int
-    /// The available RAM for the machine spec.
-    /// - Example: 32
-    public var memoryGb: Int
-    /// The available SSD storage for the machine spec.
-    /// - Example: 300
-    public var storageGb: Int
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case cpuCores = "cpu_cores"
-        case memoryGb = "memory_gb"
-        case storageGb = "storage_gb"
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsHostedRunnerMachineSpec {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.cpuCores) else {
-            throw SdkValidationError(field: "cpu_cores", code: "required", message: "Validation failed for 'cpu_cores': value is required")
-        }
-        guard container.contains(.memoryGb) else {
-            throw SdkValidationError(field: "memory_gb", code: "required", message: "Validation failed for 'memory_gb': value is required")
-        }
-        guard container.contains(.storageGb) else {
-            throw SdkValidationError(field: "storage_gb", code: "required", message: "Validation failed for 'storage_gb': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.cpuCores = try container.sdkDecodeRequired(.cpuCores)
-        self.memoryGb = try container.sdkDecodeRequired(.memoryGb)
-        self.storageGb = try container.sdkDecodeRequired(.storageGb)
-    }
-}
-
-extension ActionsHostedRunnerMachineSpec {
-    public init(id: String, cpuCores: Int, memoryGb: Int, storageGb: Int) {
-        (self.id, self.cpuCores) = (id, cpuCores)
-        (self.memoryGb, self.storageGb) = (memoryGb, storageGb)
-    }
-}
-
 /// Typed representation of the `ActionsRepositoryPermissions` API schema.
 public struct ActionsRepositoryPermissions: Codable {
     /// Whether GitHub Actions is enabled on the repository.
@@ -357,119 +50,192 @@ extension ActionsRepositoryPermissions {
     }
 }
 
-/// GitHub Actions cache retention policy for a repository.
-public struct ActionsCacheRetentionLimitForRepository: Codable {
-    /// The maximum number of days to keep caches in this repository.
-    /// - Example: 14
-    public var maxCacheRetentionDays: Int?
+/// Typed representation of the `ActionsGetDefaultWorkflowPermissions` API schema.
+public struct ActionsGetDefaultWorkflowPermissions: Codable {
+    /// The default workflow permissions granted to the GITHUB_TOKEN when running workflows.
+    public var defaultWorkflowPermissions: ActionsDefaultWorkflowPermissions
+    /// Whether GitHub Actions can approve pull requests. Enabling this can be a security risk.
+    public var canApprovePullRequestReviews: ActionsCanApprovePullRequestReviews
 
     enum CodingKeys: String, CodingKey {
-        case maxCacheRetentionDays = "max_cache_retention_days"
+        case defaultWorkflowPermissions = "default_workflow_permissions"
+        case canApprovePullRequestReviews = "can_approve_pull_request_reviews"
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension ActionsGetDefaultWorkflowPermissions {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.defaultWorkflowPermissions) else {
+            throw SdkValidationError(field: "default_workflow_permissions", code: "required", message: "Validation failed for 'default_workflow_permissions': value is required")
+        }
+        guard container.contains(.canApprovePullRequestReviews) else {
+            throw SdkValidationError(field: "can_approve_pull_request_reviews", code: "required", message: "Validation failed for 'can_approve_pull_request_reviews': value is required")
+        }
+        self.defaultWorkflowPermissions = try container.sdkDecodeRequired(.defaultWorkflowPermissions)
+        self.canApprovePullRequestReviews = try container.sdkDecodeRequired(.canApprovePullRequestReviews)
+    }
+}
+
+extension ActionsGetDefaultWorkflowPermissions {
+    public init(defaultWorkflowPermissions: ActionsDefaultWorkflowPermissions, canApprovePullRequestReviews: ActionsCanApprovePullRequestReviews) {
+        self.defaultWorkflowPermissions = defaultWorkflowPermissions
+        self.canApprovePullRequestReviews = canApprovePullRequestReviews
+    }
+}
+
+/// Typed representation of the `ActionsOrganizationPermissions` API schema.
+public struct ActionsOrganizationPermissions: Codable {
+    /// The policy that controls the repositories in the organization that are allowed to run GitHub Actions.
+    public var enabledRepositories: EnabledRepositories
+    /// The API URL to use to get or set the selected repositories that are allowed to run GitHub Actions, when
+    /// `enabled_repositories` is set to `selected`.
+    public var selectedRepositoriesUrl: String?
+    /// The permissions policy that controls the actions and reusable workflows that are allowed to run.
+    public var allowedActions: AllowedActions?
+    /// The API URL to use to get or set the actions and reusable workflows that are allowed to run, when
+    /// `allowed_actions` is set to `selected`.
+    public var selectedActionsUrl: SelectedActionsUrl?
+    /// Whether actions must be pinned to a full-length commit SHA.
+    public var shaPinningRequired: ShaPinningRequired?
+
+    enum CodingKeys: String, CodingKey {
+        case enabledRepositories = "enabled_repositories"
+        case selectedRepositoriesUrl = "selected_repositories_url"
+        case allowedActions = "allowed_actions"
+        case selectedActionsUrl = "selected_actions_url"
+        case shaPinningRequired = "sha_pinning_required"
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension ActionsOrganizationPermissions {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.enabledRepositories) else {
+            throw SdkValidationError(field: "enabled_repositories", code: "required", message: "Validation failed for 'enabled_repositories': value is required")
+        }
+        self.enabledRepositories = try container.sdkDecodeRequired(.enabledRepositories)
+        self.selectedRepositoriesUrl = try container.sdkDecodeIfPresent(.selectedRepositoriesUrl)
+        self.allowedActions = try container.sdkDecodeIfPresent(.allowedActions)
+        self.selectedActionsUrl = try container.sdkDecodeIfPresent(.selectedActionsUrl)
+        self.shaPinningRequired = try container.sdkDecodeIfPresent(.shaPinningRequired)
+    }
+}
+
+extension ActionsOrganizationPermissions {
+    public init(enabledRepositories: EnabledRepositories, selectedRepositoriesUrl: String? = nil, allowedActions: AllowedActions? = nil, selectedActionsUrl: SelectedActionsUrl? = nil, shaPinningRequired: ShaPinningRequired? = nil) {
+        self.enabledRepositories = enabledRepositories
+        (self.selectedRepositoriesUrl, self.allowedActions) = (selectedRepositoriesUrl, allowedActions)
+        (self.selectedActionsUrl, self.shaPinningRequired) = (selectedActionsUrl, shaPinningRequired)
+    }
+}
+
+/// Typed representation of the `ActionsSetDefaultWorkflowPermissions` API schema.
+public struct ActionsSetDefaultWorkflowPermissions: Codable {
+    /// The default workflow permissions granted to the GITHUB_TOKEN when running workflows.
+    public var defaultWorkflowPermissions: ActionsDefaultWorkflowPermissions?
+    /// Whether GitHub Actions can approve pull requests. Enabling this can be a security risk.
+    public var canApprovePullRequestReviews: ActionsCanApprovePullRequestReviews?
+
+    enum CodingKeys: String, CodingKey {
+        case defaultWorkflowPermissions = "default_workflow_permissions"
+        case canApprovePullRequestReviews = "can_approve_pull_request_reviews"
     }
 
     init() {
-        self.maxCacheRetentionDays = nil
+        (self.defaultWorkflowPermissions, self.canApprovePullRequestReviews) = (nil, nil)
     }
 }
 
-extension ActionsCacheRetentionLimitForRepository {
+extension ActionsSetDefaultWorkflowPermissions {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.maxCacheRetentionDays = try container.sdkDecodeIfPresent(.maxCacheRetentionDays)
+        self.defaultWorkflowPermissions = try container.sdkDecodeIfPresent(.defaultWorkflowPermissions)
+        self.canApprovePullRequestReviews = try container.sdkDecodeIfPresent(.canApprovePullRequestReviews)
     }
 }
 
-extension ActionsCacheRetentionLimitForRepository {
-    public init(maxCacheRetentionDays: Int? = nil) {
+extension ActionsSetDefaultWorkflowPermissions {
+    public init(defaultWorkflowPermissions: ActionsDefaultWorkflowPermissions? = nil, canApprovePullRequestReviews: ActionsCanApprovePullRequestReviews? = nil) {
         self.init()
-        self.maxCacheRetentionDays = maxCacheRetentionDays
+        self.defaultWorkflowPermissions = defaultWorkflowPermissions
+        self.canApprovePullRequestReviews = canApprovePullRequestReviews
     }
 }
 
-/// Provides details of a hosted runner image
-public struct ActionsHostedRunnerCuratedImage: Codable {
-    /// The ID of the image. Use this ID for the `image` parameter when creating a new larger runner.
-    /// - Example: "ubuntu-20.04"
-    public var id: String
-    /// The operating system of the image.
-    /// - Example: "linux-x64"
-    public var platform: String
-    /// Image size in GB.
-    /// - Example: 86
-    public var sizeGb: Int
-    /// Display name for this image.
-    /// - Example: 20.04
-    public var displayName: String
-    /// The image provider.
-    public var source: ActionsHostedRunnerCuratedImageSource
+/// Typed representation of the `ActionsWorkflowAccessToRepository` API schema.
+public struct ActionsWorkflowAccessToRepository: Codable {
+    /// Defines the level of access that workflows outside of the repository have to actions and reusable workflows
+    /// within the repository. `none` means the access is only possible from workflows in this repository. `user`
+    /// level access allows sharing across user owned private repositories only. `organization` level access allows
+    /// sharing across the organization.
+    public var accessLevel: ActionsWorkflowAccessToRepositoryAccessLevel
 
     enum CodingKeys: String, CodingKey {
-        case id
-        case platform
-        case sizeGb = "size_gb"
-        case displayName = "display_name"
-        case source
+        case accessLevel = "access_level"
     }
 
     private init(sdkCopy value: Self) { self = value }
 }
 
-extension ActionsHostedRunnerCuratedImage {
+extension ActionsWorkflowAccessToRepository {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
+        guard container.contains(.accessLevel) else {
+            throw SdkValidationError(field: "access_level", code: "required", message: "Validation failed for 'access_level': value is required")
         }
-        guard container.contains(.platform) else {
-            throw SdkValidationError(field: "platform", code: "required", message: "Validation failed for 'platform': value is required")
-        }
-        guard container.contains(.sizeGb) else {
-            throw SdkValidationError(field: "size_gb", code: "required", message: "Validation failed for 'size_gb': value is required")
-        }
-        guard container.contains(.displayName) else {
-            throw SdkValidationError(field: "display_name", code: "required", message: "Validation failed for 'display_name': value is required")
-        }
-        guard container.contains(.source) else {
-            throw SdkValidationError(field: "source", code: "required", message: "Validation failed for 'source': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.platform = try container.sdkDecodeRequired(.platform)
-        self.sizeGb = try container.sdkDecodeRequired(.sizeGb)
-        self.displayName = try container.sdkDecodeRequired(.displayName)
-        self.source = try container.sdkDecodeRequired(.source)
+        self.accessLevel = try container.sdkDecodeRequired(.accessLevel)
     }
 }
 
-extension ActionsHostedRunnerCuratedImage {
-    public init(id: String, platform: String, sizeGb: Int, displayName: String, source: ActionsHostedRunnerCuratedImageSource) {
-        (self.id, self.platform) = (id, platform)
-        (self.sizeGb, self.displayName) = (sizeGb, displayName)
-        self.source = source
+extension ActionsWorkflowAccessToRepository {
+    public init(accessLevel: ActionsWorkflowAccessToRepositoryAccessLevel) {
+        self.accessLevel = accessLevel
     }
 }
 
-/// Optional API value serialized in the `conditions` wire field.
-public struct ActionsPolicyOrgConditionsVariant1: Codable {
-    /// Required object value serialized in the `repository_id` wire field.
-    public var repositoryId: RepositoryRulesetConditionsRepositoryIdTargetRepositoryId
-    /// Optional object value serialized in the `workflow_path` wire field.
-    public var workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath?
+/// Defines the level of access that workflows outside of the repository have to actions and reusable workflows
+/// within the repository. `none` means the access is only possible from workflows in this repository. `user`
+/// level access allows sharing across user owned private repositories only. `organization` level access allows
+/// sharing across the organization.
+public struct ActionsWorkflowAccessToRepositoryAccessLevel: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
 
-    enum CodingKeys: String, CodingKey {
-        case repositoryId = "repository_id"
-        case workflowPath = "workflow_path"
-    }
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let none = ActionsWorkflowAccessToRepositoryAccessLevel(rawValue: "none")
+    public static let user = ActionsWorkflowAccessToRepositoryAccessLevel(rawValue: "user")
+    public static let organization = ActionsWorkflowAccessToRepositoryAccessLevel(rawValue: "organization")
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsPolicyOrgConditionsVariant1 {
     public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.repositoryId) else {
-            throw SdkValidationError(field: "repository_id", code: "required", message: "Validation failed for 'repository_id': value is required")
-        }
-        self.repositoryId = try container.sdkDecodeRequired(.repositoryId)
-        self.workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// The default workflow permissions granted to the GITHUB_TOKEN when running workflows.
+public struct ActionsDefaultWorkflowPermissions: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let read = ActionsDefaultWorkflowPermissions(rawValue: "read")
+    public static let write = ActionsDefaultWorkflowPermissions(rawValue: "write")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.init(rawValue: try container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
     }
 }

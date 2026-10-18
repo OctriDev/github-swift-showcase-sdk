@@ -17,12 +17,29 @@ extension WebhookPullRequestReviewCommentCreatedPullRequestRequestedReviewersIte
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
+        }
         if let value = Self.decodeGroup1(from: container) { self = value; return }
         throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for WebhookPullRequestReviewCommentCreatedPullRequestRequestedReviewersItem")
     }
 
     public func encode(to encoder: Encoder) throws {
         if try encodeGroup1(to: encoder) { return }
+    }
+}
+
+extension WebhookPullRequestReviewCommentCreatedPullRequestRequestedReviewersItem {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(WebhookPullRequestReviewCommentCreatedPullRequestRequestedRevX2460c58226.self),
+           sdkKeepsEveryKey(value, of: raw) {
+            return .webhookPullRequestReviewCommentCreatedPullRequestRequestedRevX2460c58226(value)
+        }
+        if let value = try? container.decode(WebhookPullRequestReviewCommentCreatedPullRequestRequestedRevXce645bc49a.self),
+           sdkKeepsEveryKey(value, of: raw) {
+            return .webhookPullRequestReviewCommentCreatedPullRequestRequestedRevXce645bc49a(value)
+        }
+        return nil
     }
 }
 

@@ -16,6 +16,6 @@ extension CodeScanningMethods {
     ///   not case sensitive.
     /// - sarifId: The SARIF ID obtained after uploading.
     public static func codeScanningGetSarif(config: ClientConfig, owner: String, repo: String, sarifId: String, requestOptions: RequestOptions? = nil) async throws -> CodeScanningSarifsStatus {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/code-scanning/sarifs/", sdkEncodePathSegment(sdkWireString(sarifId))].joined(), config: config, decoder: .json, operationId: "codeScanningGetSarif", options: requestOptions, errors: ["403": BasicError.self])).data
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/code-scanning/sarifs/", sdkEncodePathSegment(sdkWireString(sarifId))].joined(), config: config, decoder: .json, operationId: "codeScanningGetSarif", options: requestOptions, errors: ["403": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

@@ -30,6 +30,6 @@ extension PullsMethods {
     ///   not case sensitive.
     /// - pullNumber: The number that identifies the pull request.
     public static func pullsGet(config: ClientConfig, owner: String, repo: String, pullNumber: Int, requestOptions: RequestOptions? = nil) async throws -> PullRequest {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/pulls/", sdkEncodePathSegment(sdkWireString(pullNumber))].joined(), config: config, decoder: .json, operationId: "pullsGet", options: requestOptions, errors: ["404": BasicError.self, "406": BasicError.self, "422": ValidationError.self, "500": BasicError.self])).data
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/pulls/", sdkEncodePathSegment(sdkWireString(pullNumber))].joined(), config: config, decoder: .json, operationId: "pullsGet", options: requestOptions, errors: ["404": BasicError.self, "406": BasicError.self, "422": ValidationError.self, "500": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

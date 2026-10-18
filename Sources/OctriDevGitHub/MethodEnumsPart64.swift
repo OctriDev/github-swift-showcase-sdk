@@ -6,14 +6,15 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-/// The source of the runner image.
-public struct ActionsCreateHostedRunnerForOrgRequestBodyImageSource: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+/// The default value for a squash merge commit message: - `PR_BODY` - default to the pull request's body. -
+/// `COMMIT_MESSAGES` - default to the branch's commit messages. - `BLANK` - default to a blank commit message.
+public struct AppsListInstallationReposForAuthenticatedUserResponseRepositoX6003e45528: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
     public init(rawValue: String) { self.rawValue = rawValue }
-    public static let github = ActionsCreateHostedRunnerForOrgRequestBodyImageSource(rawValue: "github")
-    public static let partner = ActionsCreateHostedRunnerForOrgRequestBodyImageSource(rawValue: "partner")
-    public static let custom = ActionsCreateHostedRunnerForOrgRequestBodyImageSource(rawValue: "custom")
+    public static let prBody = AppsListInstallationReposForAuthenticatedUserResponseRepositoX6003e45528(rawValue: "PR_BODY")
+    public static let commitMessages = AppsListInstallationReposForAuthenticatedUserResponseRepositoX6003e45528(rawValue: "COMMIT_MESSAGES")
+    public static let blank = AppsListInstallationReposForAuthenticatedUserResponseRepositoX6003e45528(rawValue: "BLANK")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

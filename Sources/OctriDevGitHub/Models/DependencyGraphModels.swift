@@ -6,7 +6,7 @@ import Foundation
 // DependencyGraph domain models
 public typealias DependencyGraphDiff = [DependencyGraphDiffItem]
 
-public typealias Metadata = [String: MetadataValue]
+public typealias Metadata = [String: MetadataValue?]
 
 /// Typed representation of the `Manifest` API schema.
 public struct Manifest: Codable {

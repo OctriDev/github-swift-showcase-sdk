@@ -4,6 +4,113 @@
 import Foundation
 
 // ReposRepositoryRule domain models
+/// A tool that must provide code scanning results for this rule to pass.
+public struct RepositoryRuleParamsCodeScanningTool: Codable {
+    /// The severity level at which code scanning results that raise alerts block a reference update. For more
+    /// information on alert severity levels, see "About code scanning alerts."
+    public var alertsThreshold: RepositoryRuleParamsCodeScanningToolAlertsThreshold
+    /// The severity level at which code scanning results that raise security alerts block a reference update. For
+    /// more information on security severity levels, see "About code scanning alerts."
+    public var securityAlertsThreshold: RepositoryRuleParamsCodeScanningToolSecurityAlertsThreshold
+    /// The name of a code scanning tool
+    public var tool: String
+
+    enum CodingKeys: String, CodingKey {
+        case alertsThreshold = "alerts_threshold"
+        case securityAlertsThreshold = "security_alerts_threshold"
+        case tool
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension RepositoryRuleParamsCodeScanningTool {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.alertsThreshold) else {
+            throw SdkValidationError(field: "alerts_threshold", code: "required", message: "Validation failed for 'alerts_threshold': value is required")
+        }
+        guard container.contains(.securityAlertsThreshold) else {
+            throw SdkValidationError(field: "security_alerts_threshold", code: "required", message: "Validation failed for 'security_alerts_threshold': value is required")
+        }
+        guard container.contains(.tool) else {
+            throw SdkValidationError(field: "tool", code: "required", message: "Validation failed for 'tool': value is required")
+        }
+        self.alertsThreshold = try container.sdkDecodeRequired(.alertsThreshold)
+        self.securityAlertsThreshold = try container.sdkDecodeRequired(.securityAlertsThreshold)
+        self.tool = try container.sdkDecodeRequired(.tool)
+    }
+}
+
+extension RepositoryRuleParamsCodeScanningTool {
+    public init(alertsThreshold: RepositoryRuleParamsCodeScanningToolAlertsThreshold, securityAlertsThreshold: RepositoryRuleParamsCodeScanningToolSecurityAlertsThreshold, tool: String) {
+        (self.alertsThreshold, self.securityAlertsThreshold) = (alertsThreshold, securityAlertsThreshold)
+        self.tool = tool
+    }
+}
+
+/// Optional object value serialized in the `parameters` wire field.
+public struct RepositoryRuleFileExtensionRestrictionParameters: Codable {
+    /// The file extensions that are restricted from being pushed to the commit graph.
+    public var restrictedFileExtensions: [String]
+
+    enum CodingKeys: String, CodingKey {
+        case restrictedFileExtensions = "restricted_file_extensions"
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension RepositoryRuleFileExtensionRestrictionParameters {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.restrictedFileExtensions) else {
+            throw SdkValidationError(field: "restricted_file_extensions", code: "required", message: "Validation failed for 'restricted_file_extensions': value is required")
+        }
+        self.restrictedFileExtensions = try container.sdkDecodeRequired(.restrictedFileExtensions)
+    }
+}
+
+extension RepositoryRuleFileExtensionRestrictionParameters {
+    public init(restrictedFileExtensions: [String]) {
+        self.restrictedFileExtensions = restrictedFileExtensions
+    }
+}
+
+/// Require all commits be made to a non-target branch and submitted via a pull request before they can be merged.
+public struct RepositoryRulePullRequest: Codable {
+    /// Required enumerated value serialized in the `type` wire field.
+    public var type: RepositoryRulePullRequestType
+    /// Optional object value serialized in the `parameters` wire field.
+    public var parameters: RepositoryRulePullRequestParameters?
+
+    enum CodingKeys: String, CodingKey {
+        case type
+        case parameters
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension RepositoryRulePullRequest {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.type) else {
+            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
+        }
+        self.type = try container.sdkDecodeRequired(.type)
+        self.parameters = try container.sdkDecodeIfPresent(.parameters)
+            try sdkValidateRawEnum("type", self.type, RepositoryRulePullRequestType.allCases.map(\.rawValue))
+    }
+}
+
+extension RepositoryRulePullRequest {
+    public init(type: RepositoryRulePullRequestType, parameters: RepositoryRulePullRequestParameters? = nil) throws {
+        (self.type, self.parameters) = (type, parameters)
+            try sdkValidateRawEnum("type", self.type, RepositoryRulePullRequestType.allCases.map(\.rawValue))
+    }
+}
+
 public struct RepositoryRuleDetailedVariant20: Codable {
     /// Required enumerated value serialized in the `type` wire field.
     public var type: RepositoryRuleLicenseComplianceScanningType
@@ -377,122 +484,5 @@ extension RepositoryRuleCodeCoverageParameters {
         if let value = self.minimumCoverage {
             try validateRange("minimum_coverage", Double(value), min: 0, max: 100, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
         }
-    }
-}
-
-extension RepositoryRuleCodeCoverageParameters {
-    public init(maxCoverageDrop: Double? = nil, minimumCoverage: Double? = nil) throws {
-        self.init()
-        (self.maxCoverageDrop, self.minimumCoverage) = (maxCoverageDrop, minimumCoverage)
-        if let value = self.maxCoverageDrop {
-            try validateRange("max_coverage_drop", Double(value), min: 0, max: 100, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
-        }
-        if let value = self.minimumCoverage {
-            try validateRange("minimum_coverage", Double(value), min: 0, max: 100, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
-        }
-    }
-}
-
-public struct RepositoryRuleDetailedVariant18: Codable {
-    /// Required enumerated value serialized in the `type` wire field.
-    public var type: RepositoryRuleCodeCoverageType
-    /// Optional object value serialized in the `parameters` wire field.
-    public var parameters: RepositoryRuleCodeCoverageParameters?
-    /// The type of source for the ruleset that includes this rule.
-    public var rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType?
-    /// The name of the source of the ruleset that includes this rule.
-    public var rulesetSource: String?
-    /// The ID of the ruleset that includes this rule.
-    public var rulesetId: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case type
-        case parameters
-        case rulesetSourceType = "ruleset_source_type"
-        case rulesetSource = "ruleset_source"
-        case rulesetId = "ruleset_id"
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryRuleDetailedVariant18 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        self.type = try container.sdkDecodeRequired(.type)
-        self.parameters = try container.sdkDecodeIfPresent(.parameters)
-        self.rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
-        self.rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
-        self.rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleCodeCoverageType.allCases.map(\.rawValue))
-    }
-}
-
-extension RepositoryRuleDetailedVariant18 {
-    public init(type: RepositoryRuleCodeCoverageType, parameters: RepositoryRuleCodeCoverageParameters? = nil, rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil, rulesetSource: String? = nil, rulesetId: Int? = nil) throws {
-        (self.type, self.parameters) = (type, parameters)
-        (self.rulesetSourceType, self.rulesetSource) = (rulesetSourceType, rulesetSource)
-        self.rulesetId = rulesetId
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleCodeCoverageType.allCases.map(\.rawValue))
-    }
-}
-
-/// Prevent commits with individual files that exceed the specified limit from being pushed to the commit graph.
-public struct RepositoryRuleMaxFileSize: Codable {
-    /// Required enumerated value serialized in the `type` wire field.
-    public var type: RepositoryRuleMaxFileSizeType
-    /// Optional object value serialized in the `parameters` wire field.
-    public var parameters: RepositoryRuleMaxFileSizeParameters?
-
-    enum CodingKeys: String, CodingKey {
-        case type
-        case parameters
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryRuleMaxFileSize {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        self.type = try container.sdkDecodeRequired(.type)
-        self.parameters = try container.sdkDecodeIfPresent(.parameters)
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleMaxFileSizeType.allCases.map(\.rawValue))
-    }
-}
-
-extension RepositoryRuleMaxFileSize {
-    public init(type: RepositoryRuleMaxFileSizeType, parameters: RepositoryRuleMaxFileSizeParameters? = nil) throws {
-        (self.type, self.parameters) = (type, parameters)
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleMaxFileSizeType.allCases.map(\.rawValue))
-    }
-}
-
-/// Only allow users with bypass permission to create matching refs.
-public struct RepositoryRuleCreation: Codable {
-    /// Required enumerated value serialized in the `type` wire field.
-    public var type: RepositoryRuleCreationType
-
-    enum CodingKeys: String, CodingKey {
-        case type
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryRuleCreation {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        self.type = try container.sdkDecodeRequired(.type)
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleCreationType.allCases.map(\.rawValue))
     }
 }

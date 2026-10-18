@@ -16,6 +16,6 @@ extension CodeScanningMethods {
     ///   not case sensitive.
     /// - language: The language of the CodeQL database.
     public static func codeScanningDeleteCodeqlDatabase(config: ClientConfig, owner: String, repo: String, language: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/code-scanning/codeql/databases/", sdkEncodePathSegment(sdkWireString(language))].joined(), config: config, decoder: .empty, operationId: "codeScanningDeleteCodeqlDatabase", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+        return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/code-scanning/codeql/databases/", sdkEncodePathSegment(sdkWireString(language))].joined(), config: config, decoder: .empty, operationId: "codeScanningDeleteCodeqlDatabase", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

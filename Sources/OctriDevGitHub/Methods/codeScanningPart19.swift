@@ -15,6 +15,6 @@ extension CodeScanningMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     public static func codeScanningGetDefaultSetup(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> CodeScanningDefaultSetup {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/code-scanning/default-setup"].joined(), config: config, decoder: .json, operationId: "codeScanningGetDefaultSetup", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/code-scanning/default-setup"].joined(), config: config, decoder: .json, operationId: "codeScanningGetDefaultSetup", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

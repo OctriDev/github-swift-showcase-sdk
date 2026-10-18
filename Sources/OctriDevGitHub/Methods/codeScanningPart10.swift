@@ -26,6 +26,6 @@ extension CodeScanningMethods {
     public static func codeScanningCommitAutofix(config: ClientConfig, owner: String, repo: String, alertNumber: AlertNumber, targetRef: String? = nil, message: String? = nil, requestOptions: RequestOptions? = nil) async throws -> CodeScanningAutofixCommitsResponse {
         let requestBody = CodeScanningCommitAutofixRequestBody(targetRef: targetRef, message: message)
 
-        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/code-scanning/alerts/", sdkEncodePathSegment(sdkWireString(alertNumber)), "/autofix/commits"].joined(), config: config, body: requestBody, decoder: .json, operationId: "codeScanningCommitAutofix", options: requestOptions, errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
+        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/code-scanning/alerts/", sdkEncodePathSegment(sdkWireString(alertNumber)), "/autofix/commits"].joined(), config: config, body: requestBody, decoder: .json, operationId: "codeScanningCommitAutofix", options: requestOptions, errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

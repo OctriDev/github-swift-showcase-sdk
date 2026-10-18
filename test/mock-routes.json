@@ -3077,7 +3077,8 @@
       "400": true,
       "403": true,
       "404": true,
-      "500": true
+      "500": true,
+      "503": true
     }
   },
   {
@@ -4566,7 +4567,8 @@
       "400": true,
       "403": true,
       "404": true,
-      "500": true
+      "500": true,
+      "503": true
     }
   },
   {
@@ -4947,7 +4949,8 @@
     "errorModels": {
       "400": true,
       "403": true,
-      "500": true
+      "500": true,
+      "503": true
     }
   },
   {
@@ -5193,7 +5196,8 @@
       "400": true,
       "403": true,
       "404": true,
-      "500": true
+      "500": true,
+      "503": true
     }
   },
   {
@@ -5886,7 +5890,8 @@
       "400": true,
       "403": true,
       "404": true,
-      "500": true
+      "500": true,
+      "503": true
     }
   },
   {
@@ -6143,7 +6148,8 @@
       "400": true,
       "403": true,
       "404": true,
-      "500": true
+      "500": true,
+      "503": true
     }
   },
   {
@@ -10609,7 +10615,8 @@
     "errorModels": {
       "400": true,
       "403": true,
-      "404": true
+      "404": true,
+      "503": true
     }
   },
   {
@@ -11401,7 +11408,8 @@
       ]
     },
     "errorModels": {
-      "404": true
+      "404": true,
+      "503": true
     }
   },
   {
@@ -17834,7 +17842,8 @@
     "errorModels": {
       "400": true,
       "403": true,
-      "500": true
+      "500": true,
+      "503": true
     }
   },
   {
@@ -18685,8 +18694,8 @@
         ],
         "example": {
           "selected_repository_ids": [
-            1296269,
-            1296280
+            1,
+            1
           ]
         },
         "expectsArray": false
@@ -20732,7 +20741,8 @@
     "errorModels": {
       "400": true,
       "403": true,
-      "500": true
+      "500": true,
+      "503": true
     }
   },
   {
@@ -23471,7 +23481,8 @@
     },
     "errorModels": {
       "404": true,
-      "422": true
+      "422": true,
+      "503": true
     }
   },
   {
@@ -26532,7 +26543,8 @@
       "400": true,
       "403": true,
       "404": true,
-      "500": true
+      "500": true,
+      "503": true
     }
   },
   {
@@ -26726,7 +26738,8 @@
       "400": true,
       "403": true,
       "404": true,
-      "500": true
+      "500": true,
+      "503": true
     }
   },
   {
@@ -28484,7 +28497,8 @@
     },
     "errorModels": {
       "403": true,
-      "404": true
+      "404": true,
+      "503": true
     }
   },
   {
@@ -34714,7 +34728,8 @@
       ]
     },
     "errorModels": {
-      "404": true
+      "404": true,
+      "503": true
     }
   },
   {
@@ -37183,7 +37198,9 @@
         }
       ]
     },
-    "errorModels": {}
+    "errorModels": {
+      "503": true
+    }
   },
   {
     "operationId": "reposDeleteAccessRestrictions",
@@ -38638,7 +38655,8 @@
     },
     "errorModels": {
       "403": true,
-      "404": true
+      "404": true,
+      "503": true
     }
   },
   {
@@ -39466,7 +39484,8 @@
     },
     "errorModels": {
       "403": true,
-      "404": true
+      "404": true,
+      "503": true
     }
   },
   {
@@ -39646,7 +39665,8 @@
     },
     "errorModels": {
       "403": true,
-      "404": true
+      "404": true,
+      "503": true
     }
   },
   {
@@ -41838,7 +41858,8 @@
     "errorModels": {
       "403": true,
       "404": true,
-      "422": true
+      "422": true,
+      "503": true
     }
   },
   {
@@ -46822,7 +46843,8 @@
       "401": true,
       "403": true,
       "404": true,
-      "410": true
+      "410": true,
+      "503": true
     }
   },
   {
@@ -60400,7 +60422,8 @@
       ]
     },
     "errorModels": {
-      "404": true
+      "404": true,
+      "503": true
     }
   },
   {
@@ -61663,7 +61686,8 @@
       ]
     },
     "errorModels": {
-      "404": true
+      "404": true,
+      "503": true
     }
   },
   {
@@ -66209,6 +66233,28 @@
             ]
           }
         ],
+        "wireExample": [
+          {
+            "repository_id": 1296269,
+            "repository_name": "Hello-World",
+            "repository_full_name": "octocat/Hello-World",
+            "properties": [
+              {
+                "property_name": "environment",
+                "value": "production"
+              },
+              {
+                "property_name": "service",
+                "value": "web"
+              },
+              {
+                "property_name": "team",
+                "value": "octocat"
+              }
+            ],
+            "type": "object"
+          }
+        ],
         "bodyBase64": null,
         "exampleSource": "authored",
         "authoredExampleSource": "media-examples",
@@ -69896,7 +69942,9 @@
         }
       ]
     },
-    "errorModels": {}
+    "errorModels": {
+      "503": true
+    }
   },
   {
     "operationId": "codeSecurityDeleteConfigurationForEnterprise",
@@ -71605,7 +71653,8 @@
             "updated_secret_1234567890ABCDEF"
           ],
           "custom_pattern_version": "0ujsswThIGTUYm2K8FjOOfXtY1K"
-        }
+        },
+        "expectsArray": false
       }
     ],
     "responseModes": [
@@ -73036,7 +73085,8 @@
       "401": true,
       "403": true,
       "404": true,
-      "422": true
+      "422": true,
+      "503": true
     }
   },
   {
@@ -73259,7 +73309,9 @@
         }
       ]
     },
-    "errorModels": {}
+    "errorModels": {
+      "503": true
+    }
   },
   {
     "operationId": "codeSecurityDeleteConfiguration",
@@ -74670,7 +74722,8 @@
     },
     "errorModels": {
       "403": true,
-      "404": true
+      "404": true,
+      "503": true
     }
   },
   {
@@ -74895,7 +74948,8 @@
       "403": true,
       "404": true,
       "409": true,
-      "422": true
+      "422": true,
+      "503": true
     }
   },
   {
@@ -78602,7 +78656,8 @@
     },
     "errorModels": {
       "403": true,
-      "404": true
+      "404": true,
+      "503": true
     }
   },
   {
@@ -79059,7 +79114,9 @@
         }
       ]
     },
-    "errorModels": {}
+    "errorModels": {
+      "503": true
+    }
   },
   {
     "operationId": "actionsDeleteHostedRunnerForOrg",
@@ -79721,7 +79778,8 @@
     },
     "errorModels": {
       "403": true,
-      "404": true
+      "404": true,
+      "503": true
     }
   },
   {
@@ -80964,7 +81022,8 @@
     },
     "errorModels": {
       "403": true,
-      "404": true
+      "404": true,
+      "503": true
     }
   },
   {
@@ -81178,7 +81237,8 @@
     },
     "errorModels": {
       "403": true,
-      "404": true
+      "404": true,
+      "503": true
     }
   },
   {
@@ -83135,7 +83195,8 @@
     },
     "errorModels": {
       "403": true,
-      "404": true
+      "404": true,
+      "503": true
     }
   },
   {
@@ -83358,7 +83419,8 @@
       "403": true,
       "404": true,
       "409": true,
-      "422": true
+      "422": true,
+      "503": true
     }
   },
   {
@@ -89299,8 +89361,7 @@
         "fields": [],
         "example": {
           "name": "Team notes",
-          "data_type": "text",
-          "issue_field_id": 1
+          "data_type": "text"
         }
       }
     ],
@@ -101507,7 +101568,8 @@
             "updated_secret_1234567890ABCDEF"
           ],
           "custom_pattern_version": "0ujsswThIGTUYm2K8FjOOfXtY1K"
-        }
+        },
+        "expectsArray": false
       }
     ],
     "responseModes": [
@@ -102493,7 +102555,8 @@
       "400": true,
       "403": true,
       "404": true,
-      "422": true
+      "422": true,
+      "503": true
     }
   },
   {
@@ -102781,7 +102844,8 @@
       "400": true,
       "403": true,
       "404": true,
-      "422": true
+      "422": true,
+      "503": true
     }
   },
   {
@@ -105456,7 +105520,8 @@
       ]
     },
     "errorModels": {
-      "403": true
+      "403": true,
+      "503": true
     }
   },
   {
@@ -107538,7 +107603,8 @@
       "400": true,
       "403": true,
       "404": true,
-      "500": true
+      "500": true,
+      "503": true
     }
   },
   {
@@ -109181,7 +109247,8 @@
     "errorModels": {
       "400": true,
       "403": true,
-      "404": true
+      "404": true,
+      "503": true
     }
   },
   {
@@ -109327,7 +109394,8 @@
                     {
                       "github/alertUrl": "https://api.github.com/repos/monalisa/monalisa/code-scanning/alerts/2"
                     }
-                  ]
+                  ],
+                  "type": "object"
                 }
               ]
             }
@@ -109414,7 +109482,8 @@
     "errorModels": {
       "403": true,
       "404": true,
-      "422": true
+      "422": true,
+      "503": true
     }
   },
   {
@@ -109583,7 +109652,9 @@
         }
       ]
     },
-    "errorModels": {}
+    "errorModels": {
+      "503": true
+    }
   },
   {
     "operationId": "secretScanningUpdateAlert",
@@ -109847,7 +109918,9 @@
         }
       ]
     },
-    "errorModels": {}
+    "errorModels": {
+      "503": true
+    }
   },
   {
     "operationId": "actionsListEnvironmentVariables",
@@ -110248,7 +110321,8 @@
     },
     "errorModels": {
       "403": true,
-      "404": true
+      "404": true,
+      "503": true
     }
   },
   {
@@ -110609,7 +110683,8 @@
     },
     "errorModels": {
       "403": true,
-      "404": true
+      "404": true,
+      "503": true
     }
   },
   {
@@ -110903,7 +110978,8 @@
     "errorModels": {
       "400": true,
       "403": true,
-      "404": true
+      "404": true,
+      "503": true
     }
   },
   {
@@ -111589,7 +111665,8 @@
       ]
     },
     "errorModels": {
-      "403": true
+      "403": true,
+      "503": true
     }
   },
   {
@@ -124709,7 +124786,8 @@
     "errorModels": {
       "401": true,
       "403": true,
-      "404": true
+      "404": true,
+      "503": true
     }
   },
   {
@@ -138979,7 +139057,8 @@
     },
     "errorModels": {
       "422": true,
-      "500": true
+      "500": true,
+      "503": true
     }
   },
   {
@@ -142153,7 +142232,8 @@
     "errorModels": {
       "403": true,
       "404": true,
-      "422": true
+      "422": true,
+      "503": true
     }
   },
   {
@@ -148451,7 +148531,8 @@
       ]
     },
     "errorModels": {
-      "422": true
+      "422": true,
+      "503": true
     }
   },
   {
@@ -151244,7 +151325,8 @@
     "errorModels": {
       "401": true,
       "403": true,
-      "404": true
+      "404": true,
+      "503": true
     }
   },
   {
@@ -153202,7 +153284,8 @@
     "errorModels": {
       "401": true,
       "403": true,
-      "422": true
+      "422": true,
+      "503": true
     }
   },
   {
@@ -154831,7 +154914,8 @@
       ]
     },
     "errorModels": {
-      "422": true
+      "422": true,
+      "503": true
     }
   },
   {
@@ -155734,7 +155818,8 @@
     },
     "errorModels": {
       "403": true,
-      "422": true
+      "422": true,
+      "503": true
     }
   },
   {
@@ -173156,7 +173241,8 @@
       ]
     },
     "errorModels": {
-      "404": true
+      "404": true,
+      "503": true
     }
   },
   {
@@ -173454,7 +173540,8 @@
     "errorModels": {
       "400": true,
       "404": true,
-      "422": true
+      "422": true,
+      "503": true
     }
   },
   {
@@ -195658,7 +195745,8 @@
       "400": true,
       "401": true,
       "403": true,
-      "404": true
+      "404": true,
+      "503": true
     }
   },
   {
@@ -197954,6 +198042,7 @@
       ]
     },
     "errorModels": {
+      "403": true,
       "404": true
     }
   },
@@ -198201,7 +198290,8 @@
       ]
     },
     "errorModels": {
-      "404": true
+      "404": true,
+      "503": true
     }
   },
   {
@@ -198402,7 +198492,8 @@
     },
     "errorModels": {
       "404": true,
-      "422": true
+      "422": true,
+      "503": true
     }
   },
   {
@@ -198678,7 +198769,8 @@
     "errorModels": {
       "400": true,
       "404": true,
-      "422": true
+      "422": true,
+      "503": true
     }
   },
   {
@@ -205227,7 +205319,8 @@
       "403": true,
       "404": true,
       "410": true,
-      "422": true
+      "422": true,
+      "503": true
     }
   },
   {
@@ -217926,65 +218019,10 @@
         "mediaType": "application/json",
         "encoderKind": "json",
         "required": true,
-        "bodyShape": "fields",
+        "bodyShape": "whole",
         "requiredFields": [],
         "readOnlyFields": [],
-        "fields": [
-          {
-            "wireName": "name",
-            "repeated": false,
-            "partKind": "scalar",
-            "contentType": null
-          },
-          {
-            "wireName": "details_url",
-            "repeated": false,
-            "partKind": "scalar",
-            "contentType": null
-          },
-          {
-            "wireName": "external_id",
-            "repeated": false,
-            "partKind": "scalar",
-            "contentType": null
-          },
-          {
-            "wireName": "started_at",
-            "repeated": false,
-            "partKind": "scalar",
-            "contentType": null
-          },
-          {
-            "wireName": "status",
-            "repeated": false,
-            "partKind": "scalar",
-            "contentType": null
-          },
-          {
-            "wireName": "conclusion",
-            "repeated": false,
-            "partKind": "scalar",
-            "contentType": null
-          },
-          {
-            "wireName": "completed_at",
-            "repeated": false,
-            "partKind": "scalar",
-            "contentType": null
-          },
-          {
-            "wireName": "output",
-            "repeated": false,
-            "partKind": "json",
-            "contentType": null
-          },
-          {
-            "wireName": "actions",
-            "repeated": true,
-            "partKind": "json",
-            "contentType": null
-          }
-        ],
+        "fields": [],
         "example": {
           "name": "mighty_readme",
           "started_at": "2018-05-04T01:14:52Z",
@@ -221152,7 +221190,8 @@
     "errorModels": {
       "404": true,
       "409": true,
-      "422": true
+      "422": true,
+      "503": true
     }
   },
   {
@@ -222537,7 +222576,8 @@
       "409": true,
       "422": true,
       "429": true,
-      "500": true
+      "500": true,
+      "503": true
     }
   },
   {
@@ -223009,7 +223049,8 @@
     "errorModels": {
       "404": true,
       "422": true,
-      "500": true
+      "500": true,
+      "503": true
     }
   },
   {
@@ -224065,7 +224106,8 @@
       "403": true,
       "404": true,
       "410": true,
-      "422": true
+      "422": true,
+      "503": true
     }
   },
   {
@@ -226506,7 +226548,8 @@
       "404": true,
       "406": true,
       "422": true,
-      "500": true
+      "500": true,
+      "503": true
     }
   },
   {
@@ -232285,7 +232328,8 @@
       ]
     },
     "errorModels": {
-      "403": true
+      "403": true,
+      "503": true
     }
   },
   {
@@ -235736,6 +235780,7 @@
       ]
     },
     "errorModels": {
+      "403": true,
       "404": true
     }
   },
@@ -240029,7 +240074,8 @@
         ],
         "example": {
           "query_suite": "default"
-        }
+        },
+        "expectsArray": false
       }
     ],
     "responseModes": [

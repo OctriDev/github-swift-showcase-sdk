@@ -4,42 +4,6 @@
 import Foundation
 
 // Nullable domain models
-public indirect enum NullableDeploymentPayload {
-    case jsonValue([String: JSONValue])
-    case stringValue(String)
-}
-
-extension NullableDeploymentPayload: Codable {
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for NullableDeploymentPayload")
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
-    }
-}
-
-extension NullableDeploymentPayload {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode([String: JSONValue].self) { return .jsonValue(value) }
-        if let value = try? container.decode(String.self) { return .stringValue(value) }
-        return nil
-    }
-}
-
-extension NullableDeploymentPayload {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .jsonValue(value): try container.encode(value); return true
-        case let .stringValue(value): try container.encode(value); return true
-        }
-    }
-}
-
 /// Optional object value serialized in the `template_repository` wire field.
 public struct NullableRepositoryWebhooksTemplateRepository: Codable {
     /// Optional `integer` value serialized in the `id` wire field.
@@ -454,5 +418,35 @@ extension NullableRepositoryWebhooksTemplateRepository {
         self.cloneUrl = cloneUrl
         self.mirrorUrl = mirrorUrl
         self.hooksUrl = hooksUrl
+    }
+}
+
+extension NullableRepositoryWebhooksTemplateRepository {
+    mutating func sdkSet11(_ svnUrl: String?, _ homepage: String?, _ language: String?, _ forksCount: Int?, _ stargazersCount: Int?) {
+        self.svnUrl = svnUrl
+        self.homepage = homepage
+        self.language = language
+        self.forksCount = forksCount
+        self.stargazersCount = stargazersCount
+    }
+}
+
+extension NullableRepositoryWebhooksTemplateRepository {
+    mutating func sdkSet12(_ watchersCount: Int?, _ size: Int?, _ defaultBranch: String?, _ openIssuesCount: Int?, _ isTemplate: Bool?) {
+        self.watchersCount = watchersCount
+        self.size = size
+        self.defaultBranch = defaultBranch
+        self.openIssuesCount = openIssuesCount
+        self.isTemplate = isTemplate
+    }
+}
+
+extension NullableRepositoryWebhooksTemplateRepository {
+    mutating func sdkSet13(_ topics: [String]?, _ hasIssues: Bool?, _ hasProjects: Bool?, _ hasWiki: Bool?, _ hasPages: Bool?) {
+        self.topics = topics
+        self.hasIssues = hasIssues
+        self.hasProjects = hasProjects
+        self.hasWiki = hasWiki
+        self.hasPages = hasPages
     }
 }

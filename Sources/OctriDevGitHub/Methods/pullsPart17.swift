@@ -20,6 +20,6 @@ extension PullsMethods {
     public static func pullsRequestReviewers(config: ClientConfig, owner: String, repo: String, pullNumber: Int, reviewers: [String]? = nil, teamReviewers: [String]? = nil, requestOptions: RequestOptions? = nil) async throws -> PullRequestSimple {
         let requestBody = PullsRequestReviewersRequestBody(reviewers: reviewers, teamReviewers: teamReviewers)
 
-        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/pulls/", sdkEncodePathSegment(sdkWireString(pullNumber)), "/requested_reviewers"].joined(), config: config, body: requestBody, decoder: .json, operationId: "pullsRequestReviewers", options: requestOptions, errors: ["403": BasicError.self])).data
+        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/pulls/", sdkEncodePathSegment(sdkWireString(pullNumber)), "/requested_reviewers"].joined(), config: config, body: requestBody, decoder: .json, operationId: "pullsRequestReviewers", options: requestOptions, errors: ["403": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

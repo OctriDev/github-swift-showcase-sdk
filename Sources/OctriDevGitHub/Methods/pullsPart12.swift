@@ -27,6 +27,6 @@ extension PullsMethods {
         return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/pulls/", sdkEncodePathSegment(sdkWireString(pullNumber)), "/files"].joined(), config: config, query: [
             SdkQueryParameter("per_page", value: perPage),
             SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "pullsListFiles", options: requestOptions, errors: ["422": ValidationError.self, "500": BasicError.self])).data
+        ], decoder: .json, operationId: "pullsListFiles", options: requestOptions, errors: ["422": ValidationError.self, "500": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

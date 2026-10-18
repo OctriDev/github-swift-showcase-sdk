@@ -4,6 +4,26 @@
 import Foundation
 
 // WebhookPullRequestReviewRequested domain models
+public struct WebhookPullRequestReviewRequestedVariant0PullRequestLinksReviewComment: Codable {
+    public var href: String
+
+    enum CodingKeys: String, CodingKey {
+        case href
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension WebhookPullRequestReviewRequestedVariant0PullRequestLinksReviewComment {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.href) else {
+            throw SdkValidationError(field: "href", code: "required", message: "Validation failed for 'href': value is required")
+        }
+        self.href = try container.sdkDecodeRequired(.href)
+    }
+}
+
 extension WebhookPullRequestReviewRequestedVariant0PullRequestLinksReviewComment {
     public init(href: String) {
         self.href = href
@@ -13,6 +33,8 @@ extension WebhookPullRequestReviewRequestedVariant0PullRequestLinksReviewComment
 public typealias WebhookPullRequestReviewRequestedVariant1PullRequestAssigneesList = [WebhookPullRequestReviewRequestedVariant1PullRequestAssigneesItem?]
 
 public typealias WebhookPullRequestReviewRequestedVariant1PullRequestLabelsList = [WebhookPullRequestReviewRequestedVariant1PullRequestLabelsItem]
+
+public typealias WebhookPullRequestReviewRequestedVariant1PullRequestRequestedX916c64bd33 = [WebhookPullRequestReviewRequestedVariant1PullRequestRequestedXeeadc93bc2?]
 
 public typealias WebhookPullRequestReviewRequestedVariant1PullRequestRequestedTeamsList = [WebhookPullRequestReviewRequestedVariant1PullRequestRequestedTeamsItem]
 
@@ -49,7 +71,7 @@ public struct WebhookPullRequestReviewRequestedVariant1PullRequest: Codable {
     /// Number uniquely identifying the pull request within its repository.
     public var number: Int
     public var patchUrl: String
-    public var requestedReviewers: [PullRequestRequestedReviewersItem4]
+    public var requestedReviewers: WebhookPullRequestReviewRequestedVariant1PullRequestRequestedX916c64bd33
     public var requestedTeams: WebhookPullRequestReviewRequestedVariant1PullRequestRequestedTeamsList
     public var reviewCommentUrl: String
     public var reviewCommentsUrl: String
@@ -192,7 +214,7 @@ extension WebhookPullRequestReviewRequestedVariant1PullRequest {
 }
 
 extension WebhookPullRequestReviewRequestedVariant1PullRequest {
-    public init(links: WebhookPullRequestReviewRequestedVariant1PullRequestLinks, activeLockReason: WebhookPullRequestReviewRequestedVariant1PullRequestActiveLockReason?, assignee: WebhookPullRequestReviewRequestedVariant1PullRequestAssignee?, assignees: WebhookPullRequestReviewRequestedVariant1PullRequestAssigneesList, authorAssociation: WebhookPullRequestReviewRequestedVariant1PullRequestAuthorAssociation, autoMerge: WebhookPullRequestReviewRequestedVariant1PullRequestAutoMerge?, base: WebhookPullRequestReviewRequestedVariant1PullRequestBase, body: String?, closedAt: Date?, commentsUrl: String, commitsUrl: String, createdAt: Date, diffUrl: String, draft: Bool, head: WebhookPullRequestReviewRequestedVariant1PullRequestHead, htmlUrl: String, id: Int, issueUrl: String, labels: WebhookPullRequestReviewRequestedVariant1PullRequestLabelsList, locked: Bool, mergeCommitSha: String?, mergedAt: Date?, milestone: WebhookPullRequestReviewRequestedVariant1PullRequestMilestone?, nodeId: String, number: Int, patchUrl: String, requestedReviewers: [PullRequestRequestedReviewersItem4], requestedTeams: WebhookPullRequestReviewRequestedVariant1PullRequestRequestedTeamsList, reviewCommentUrl: String, reviewCommentsUrl: String, state: WebhookPullRequestReviewRequestedVariant1PullRequestState, statusesUrl: String, title: String, updatedAt: Date, url: String, user: WebhookPullRequestReviewRequestedVariant1PullRequestUser?, additions: Int? = nil, changedFiles: Int? = nil, comments: Int? = nil, commits: Int? = nil, deletions: Int? = nil, maintainerCanModify: Bool? = nil, mergeable: Bool? = nil, mergeableState: String? = nil, merged: Bool? = nil, mergedBy: WebhookPullRequestReviewRequestedVariant1PullRequestMergedBy? = nil, rebaseable: Bool? = nil, reviewComments: Int? = nil, stack: PullRequestStack? = nil) throws {
+    public init(links: WebhookPullRequestReviewRequestedVariant1PullRequestLinks, activeLockReason: WebhookPullRequestReviewRequestedVariant1PullRequestActiveLockReason?, assignee: WebhookPullRequestReviewRequestedVariant1PullRequestAssignee?, assignees: WebhookPullRequestReviewRequestedVariant1PullRequestAssigneesList, authorAssociation: WebhookPullRequestReviewRequestedVariant1PullRequestAuthorAssociation, autoMerge: WebhookPullRequestReviewRequestedVariant1PullRequestAutoMerge?, base: WebhookPullRequestReviewRequestedVariant1PullRequestBase, body: String?, closedAt: Date?, commentsUrl: String, commitsUrl: String, createdAt: Date, diffUrl: String, draft: Bool, head: WebhookPullRequestReviewRequestedVariant1PullRequestHead, htmlUrl: String, id: Int, issueUrl: String, labels: WebhookPullRequestReviewRequestedVariant1PullRequestLabelsList, locked: Bool, mergeCommitSha: String?, mergedAt: Date?, milestone: WebhookPullRequestReviewRequestedVariant1PullRequestMilestone?, nodeId: String, number: Int, patchUrl: String, requestedReviewers: WebhookPullRequestReviewRequestedVariant1PullRequestRequestedX916c64bd33, requestedTeams: WebhookPullRequestReviewRequestedVariant1PullRequestRequestedTeamsList, reviewCommentUrl: String, reviewCommentsUrl: String, state: WebhookPullRequestReviewRequestedVariant1PullRequestState, statusesUrl: String, title: String, updatedAt: Date, url: String, user: WebhookPullRequestReviewRequestedVariant1PullRequestUser?, additions: Int? = nil, changedFiles: Int? = nil, comments: Int? = nil, commits: Int? = nil, deletions: Int? = nil, maintainerCanModify: Bool? = nil, mergeable: Bool? = nil, mergeableState: String? = nil, merged: Bool? = nil, mergedBy: WebhookPullRequestReviewRequestedVariant1PullRequestMergedBy? = nil, rebaseable: Bool? = nil, reviewComments: Int? = nil, stack: PullRequestStack? = nil) throws {
         (self.links, self.activeLockReason) = (links, activeLockReason)
         (self.assignee, self.assignees) = (assignee, assignees)
         (self.authorAssociation, self.autoMerge) = (authorAssociation, autoMerge)
@@ -473,38 +495,4 @@ extension WebhookPullRequestReviewRequestedVariant0PullRequestBaseRepoOwner {
         (self.url, self.userViewType) = (url, userViewType)
         try sdkValidateConstraints()
     }
-}
-
-extension WebhookPullRequestReviewRequestedVariant0PullRequestBaseRepoOwner {
-    func sdkValidateConstraints() throws {
-        if let value = self.avatarUrl {
-            try sdkValidateUri("avatar_url", value)
-        }
-        if let value = self.followersUrl {
-            try sdkValidateUri("followers_url", value)
-        }
-        if let value = self.htmlUrl {
-            try sdkValidateUri("html_url", value)
-        }
-        if let value = self.organizationsUrl {
-            try sdkValidateUri("organizations_url", value)
-        }
-        if let value = self.receivedEventsUrl {
-            try sdkValidateUri("received_events_url", value)
-        }
-        if let value = self.reposUrl {
-            try sdkValidateUri("repos_url", value)
-        }
-        if let value = self.subscriptionsUrl {
-            try sdkValidateUri("subscriptions_url", value)
-        }
-        if let value = self.url {
-            try sdkValidateUri("url", value)
-        }
-    }
-}
-
-public indirect enum WebhookPullRequestReviewRequestedVariant0PullRequestHeadRepoCreatedAt {
-    case intValue(Int)
-    case date(Date)
 }

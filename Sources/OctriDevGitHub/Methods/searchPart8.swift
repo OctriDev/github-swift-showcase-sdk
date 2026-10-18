@@ -39,6 +39,6 @@ extension SearchMethods {
             SdkQueryParameter("order", value: order),
             SdkQueryParameter("per_page", value: perPage),
             SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "searchUsers", options: requestOptions, errors: ["422": ValidationError.self])).data
+        ], decoder: .json, operationId: "searchUsers", options: requestOptions, errors: ["422": ValidationError.self, "503": ServiceUnavailable.self])).data
     }
 }

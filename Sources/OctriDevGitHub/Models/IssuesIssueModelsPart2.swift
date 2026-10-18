@@ -4,6 +4,73 @@
 import Foundation
 
 // IssuesIssue domain models
+extension IssueEventLabel {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.name) else {
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
+        }
+        guard container.contains(.color) else {
+            throw SdkValidationError(field: "color", code: "required", message: "Validation failed for 'color': value is required")
+        }
+        self.name = try container.sdkDecodeNullable(.name)
+        self.color = try container.sdkDecodeNullable(.color)
+    }
+}
+
+extension IssueEventLabel {
+    public init(name: String?, color: String?) {
+        (self.name, self.color) = (name, color)
+    }
+}
+
+/// Typed representation of the `IssueEventDismissedReview` API schema.
+public struct IssueEventDismissedReview: Codable {
+    /// Required `string` value serialized in the `state` wire field.
+    public var state: String
+    /// Required `integer` value serialized in the `review_id` wire field.
+    public var reviewId: Int
+    /// Required `string` value serialized in the `dismissal_message` wire field.
+    public var dismissalMessage: String?
+    /// Optional `string` value serialized in the `dismissal_commit_id` wire field.
+    public var dismissalCommitId: String?
+
+    enum CodingKeys: String, CodingKey {
+        case state
+        case reviewId = "review_id"
+        case dismissalMessage = "dismissal_message"
+        case dismissalCommitId = "dismissal_commit_id"
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension IssueEventDismissedReview {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.state) else {
+            throw SdkValidationError(field: "state", code: "required", message: "Validation failed for 'state': value is required")
+        }
+        guard container.contains(.reviewId) else {
+            throw SdkValidationError(field: "review_id", code: "required", message: "Validation failed for 'review_id': value is required")
+        }
+        guard container.contains(.dismissalMessage) else {
+            throw SdkValidationError(field: "dismissal_message", code: "required", message: "Validation failed for 'dismissal_message': value is required")
+        }
+        self.state = try container.sdkDecodeRequired(.state)
+        self.reviewId = try container.sdkDecodeRequired(.reviewId)
+        self.dismissalMessage = try container.sdkDecodeNullable(.dismissalMessage)
+        self.dismissalCommitId = try container.sdkDecodeIfPresent(.dismissalCommitId)
+    }
+}
+
+extension IssueEventDismissedReview {
+    public init(state: String, reviewId: Int, dismissalMessage: String?, dismissalCommitId: String? = nil) {
+        (self.state, self.reviewId) = (state, reviewId)
+        (self.dismissalMessage, self.dismissalCommitId) = (dismissalMessage, dismissalCommitId)
+    }
+}
+
 /// Issue Type Added Issue Event
 public struct IssueTypeAddedIssueEvent: Codable {
     /// Required `integer` value serialized in the `id` wire field.
@@ -460,67 +527,5 @@ extension IssueEvent {
         self.performedViaGithubApp = try container.sdkDecodeIfPresent(.performedViaGithubApp)
             try sdkValidateUri("url", self.url)
             try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-    }
-}
-
-extension IssueEvent {
-    public init(id: Int, nodeId: String, url: String, actor: NullableSimpleUser?, event: String, commitId: String?, commitUrl: String?, createdAt: Date, issue: NullableIssue? = nil, label: IssueEventLabel? = nil, assignee: NullableSimpleUser? = nil, assigner: NullableSimpleUser? = nil, reviewRequester: NullableSimpleUser? = nil, requestedReviewer: NullableSimpleUser? = nil, requestedTeam: Team? = nil, dismissedReview: IssueEventDismissedReview? = nil, milestone: IssueEventMilestone? = nil, projectCard: IssueEventProjectCard? = nil, rename: IssueEventRename? = nil, issueType: IssueTypeWebhook? = nil, prevIssueType: IssueTypeWebhook? = nil, subIssue: NullableIssueReference? = nil, parentIssue: NullableIssueReference? = nil, blockedBy: NullableIssueReference? = nil, blocking: NullableIssueReference? = nil, intent: NullableIssueEventIntent? = nil, authorAssociation: AuthorAssociation? = nil, lockReason: String? = nil, performedViaGithubApp: NullableIntegration? = nil) throws {
-        (self.id, self.nodeId) = (id, nodeId)
-        (self.url, self.actor) = (url, actor)
-        (self.event, self.commitId) = (event, commitId)
-        (self.commitUrl, self.createdAt) = (commitUrl, createdAt)
-        (self.issue, self.label) = (issue, label)
-        (self.assignee, self.assigner) = (assignee, assigner)
-        (self.reviewRequester, self.requestedReviewer) = (reviewRequester, requestedReviewer)
-        (self.requestedTeam, self.dismissedReview) = (requestedTeam, dismissedReview)
-        (self.milestone, self.projectCard) = (milestone, projectCard)
-        (self.rename, self.issueType) = (rename, issueType)
-        (self.prevIssueType, self.subIssue) = (prevIssueType, subIssue)
-        (self.parentIssue, self.blockedBy) = (parentIssue, blockedBy)
-        (self.blocking, self.intent) = (blocking, intent)
-        (self.authorAssociation, self.lockReason) = (authorAssociation, lockReason)
-        self.performedViaGithubApp = performedViaGithubApp
-            try sdkValidateUri("url", self.url)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-    }
-}
-
-/// The type of issue.
-public struct IssueTypeWebhook: Codable {
-    /// The unique identifier of the issue type.
-    public var id: Int
-    /// The name of the issue type.
-    public var name: String
-    /// The color of the issue type.
-    public var color: IssueTypeWebhookColor?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case name
-        case color
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension IssueTypeWebhook {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.color = try container.sdkDecodeIfPresent(.color)
-    }
-}
-
-extension IssueTypeWebhook {
-    public init(id: Int, name: String, color: IssueTypeWebhookColor? = nil) {
-        (self.id, self.name) = (id, name)
-        self.color = color
     }
 }

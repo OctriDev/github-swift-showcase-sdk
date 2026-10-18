@@ -24268,73 +24268,56 @@
         "owner": "owner",
         "repo": "repo",
         "checkRunId": 1,
-        "name": "mighty_readme",
-        "detailsUrl": null,
-        "externalId": null,
-        "startedAt": "2018-05-04T01:14:52Z",
-        "status": "completed",
-        "conclusion": "success",
-        "completedAt": "2018-05-04T01:14:52Z",
-        "output": {
-          "title": "Mighty Readme report",
-          "summary": "There are 0 failures, 2 warnings, and 1 notices.",
-          "text": "You may have some misspelled words on lines 2 and 4. You also may want to add a section in your README about how to install your app.",
-          "annotations": [
-            {
-              "path": "README.md",
-              "annotation_level": "warning",
-              "title": "Spell Checker",
-              "message": "Check your spelling for 'banaas'.",
-              "raw_details": "Do you mean 'bananas' or 'banana'?",
-              "start_line": 2,
-              "end_line": 2
-            },
-            {
-              "path": "README.md",
-              "annotation_level": "warning",
-              "title": "Spell Checker",
-              "message": "Check your spelling for 'aples'",
-              "raw_details": "Do you mean 'apples' or 'Naples'",
-              "start_line": 4,
-              "end_line": 4
-            }
-          ],
-          "images": [
-            {
-              "alt": "Super bananas",
-              "image_url": "http://example.com/images/42"
-            }
-          ]
-        },
-        "actions": null
+        "body": {
+          "name": "mighty_readme",
+          "started_at": "2018-05-04T01:14:52Z",
+          "status": "completed",
+          "conclusion": "success",
+          "completed_at": "2018-05-04T01:14:52Z",
+          "output": {
+            "title": "Mighty Readme report",
+            "summary": "There are 0 failures, 2 warnings, and 1 notices.",
+            "text": "You may have some misspelled words on lines 2 and 4. You also may want to add a section in your README about how to install your app.",
+            "annotations": [
+              {
+                "path": "README.md",
+                "annotation_level": "warning",
+                "title": "Spell Checker",
+                "message": "Check your spelling for 'banaas'.",
+                "raw_details": "Do you mean 'bananas' or 'banana'?",
+                "start_line": 2,
+                "end_line": 2
+              },
+              {
+                "path": "README.md",
+                "annotation_level": "warning",
+                "title": "Spell Checker",
+                "message": "Check your spelling for 'aples'",
+                "raw_details": "Do you mean 'apples' or 'Naples'",
+                "start_line": 4,
+                "end_line": 4
+              }
+            ],
+            "images": [
+              {
+                "alt": "Super bananas",
+                "image_url": "http://example.com/images/42"
+              }
+            ]
+          }
+        }
       },
       "wireNames": {
         "owner": "owner",
         "repo": "repo",
         "checkRunId": "check_run_id",
-        "name": "name",
-        "detailsUrl": "details_url",
-        "externalId": "external_id",
-        "startedAt": "started_at",
-        "status": "status",
-        "conclusion": "conclusion",
-        "completedAt": "completed_at",
-        "output": "output",
-        "actions": "actions"
+        "body": "body"
       },
       "argumentOrder": [
         "owner",
         "repo",
         "checkRunId",
-        "name",
-        "detailsUrl",
-        "externalId",
-        "startedAt",
-        "status",
-        "conclusion",
-        "completedAt",
-        "output",
-        "actions"
+        "body"
       ],
       "response": {
         "kind": "json",
@@ -32787,8 +32770,8 @@
       "arguments": {
         "secretName": "Example Name",
         "selectedRepositoryIds": [
-          1296269,
-          1296280
+          1,
+          1
         ]
       },
       "wireNames": {
@@ -32817,8 +32800,8 @@
       "arguments": {
         "secretName": "Example Name",
         "selectedRepositoryIds": [
-          1296269,
-          1296280
+          1,
+          1
         ]
       },
       "wireNames": {
@@ -44205,7 +44188,7 @@
       }
     },
     {
-      "id": "gistsGet:gistsGet:404",
+      "id": "gistsGet:gistsGet:403",
       "operationId": "gistsGet",
       "methodName": "gistsGet",
       "namespace": [
@@ -44224,12 +44207,15 @@
       ],
       "response": {
         "kind": "error",
-        "status": 404,
+        "status": 403,
         "expected": {
+          "block": {
+            "reason": "reason",
+            "created_at": "2024-01-01T00:00:00Z",
+            "html_url": "https://example.com"
+          },
           "message": "example text",
-          "documentation_url": "https://example.com",
-          "url": "https://example.com",
-          "status": "active"
+          "documentation_url": "https://example.com"
         },
         "byteLength": 0
       }
@@ -44290,7 +44276,7 @@
       }
     },
     {
-      "id": "gistsGetComment:gistsGetComment:404",
+      "id": "gistsGetComment:gistsGetComment:403",
       "operationId": "gistsGetComment",
       "methodName": "gistsGetComment",
       "namespace": [
@@ -44312,12 +44298,15 @@
       ],
       "response": {
         "kind": "error",
-        "status": 404,
+        "status": 403,
         "expected": {
+          "block": {
+            "reason": "reason",
+            "created_at": "2024-01-01T00:00:00Z",
+            "html_url": "https://example.com"
+          },
           "message": "example text",
-          "documentation_url": "https://example.com",
-          "url": "https://example.com",
-          "status": "active"
+          "documentation_url": "https://example.com"
         },
         "byteLength": 0
       }
@@ -57743,7 +57732,8 @@
         "kind": "text",
         "expected": "<p>Hello <strong>world</strong></p>",
         "byteLength": 0
-      }
+      },
+      "bodyKind": "text"
     },
     {
       "id": "markdownRenderRaw:markdownRenderRaw:text/x-markdown",
@@ -71206,8 +71196,7 @@
         "org": "org",
         "body": {
           "name": "Team notes",
-          "data_type": "text",
-          "issue_field_id": 1
+          "data_type": "text"
         }
       },
       "wireNames": {
@@ -71248,8 +71237,7 @@
         "org": "org",
         "body": {
           "name": "Team notes",
-          "data_type": "text",
-          "issue_field_id": 1
+          "data_type": "text"
         }
       },
       "wireNames": {
@@ -100692,7 +100680,8 @@
           }
         },
         "byteLength": 0
-      }
+      },
+      "bodyKind": "bytes"
     },
     {
       "id": "searchCode:searchCode",

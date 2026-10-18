@@ -13,7 +13,7 @@ extension GistsMethods {
     /// - gistId: The unique identifier of the gist.
     /// - commentId: The unique identifier of the comment.
     public static func gistsGetComment(config: ClientConfig, gistId: String, commentId: Int, requestOptions: RequestOptions? = nil) async throws -> GistComment {
-        return try (await sdkRequest("GET", ["/gists/", sdkEncodePathSegment(sdkWireString(gistId)), "/comments/", sdkEncodePathSegment(sdkWireString(commentId))].joined(), config: config, decoder: .json, operationId: "gistsGetComment", options: requestOptions, errors: ["404": BasicError.self])).data
+        return try (await sdkRequest("GET", ["/gists/", sdkEncodePathSegment(sdkWireString(gistId)), "/comments/", sdkEncodePathSegment(sdkWireString(commentId))].joined(), config: config, decoder: .json, operationId: "gistsGetComment", options: requestOptions, errors: ["403": ForbiddenGist.self, "404": BasicError.self])).data
     }
 
     /// Updates a comment on a gist. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.raw+json`**: Returns the raw markdown. This is the default if you do not pass any specific media type.

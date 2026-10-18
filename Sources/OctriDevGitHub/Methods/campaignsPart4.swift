@@ -13,6 +13,6 @@ extension CampaignsMethods {
     /// - org: The organization name. The name is not case sensitive.
     /// - campaignNumber: The campaign number.
     public static func campaignsGetCampaignSummary(config: ClientConfig, org: String, campaignNumber: Int, requestOptions: RequestOptions? = nil) async throws -> CampaignSummary {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/campaigns/", sdkEncodePathSegment(sdkWireString(campaignNumber))].joined(), config: config, decoder: .json, operationId: "campaignsGetCampaignSummary", options: requestOptions, errors: ["404": BasicError.self, "422": BasicError.self])).data
+        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/campaigns/", sdkEncodePathSegment(sdkWireString(campaignNumber))].joined(), config: config, decoder: .json, operationId: "campaignsGetCampaignSummary", options: requestOptions, errors: ["404": BasicError.self, "422": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

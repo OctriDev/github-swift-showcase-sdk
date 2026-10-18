@@ -16,7 +16,7 @@ extension ActionsMethods {
     ///   not case sensitive.
     /// - runnerId: Unique identifier of the self-hosted runner.
     /// - name: The name of a self-hosted runner's custom label.
-    public static func actionsRemoveCustomLabelFromSelfHostedRunnerForRepo(config: ClientConfig, owner: String, repo: String, runnerId: Int, name: String, requestOptions: RequestOptions? = nil) async throws -> ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgResponse {
+    public static func actionsRemoveCustomLabelFromSelfHostedRunnerForRepo(config: ClientConfig, owner: String, repo: String, runnerId: Int, name: String, requestOptions: RequestOptions? = nil) async throws -> ActionsRunnerLabels {
         return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/actions/runners/", sdkEncodePathSegment(sdkWireString(runnerId)), "/labels/", sdkEncodePathSegment(sdkWireString(name))].joined(), config: config, decoder: .json, operationId: "actionsRemoveCustomLabelFromSelfHostedRunnerForRepo", options: requestOptions, errors: ["404": BasicError.self, "422": ValidationErrorSimple.self])).data
     }
 }

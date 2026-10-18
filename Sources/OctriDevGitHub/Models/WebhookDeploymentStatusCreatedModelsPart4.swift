@@ -4,27 +4,6 @@
 import Foundation
 
 // WebhookDeploymentStatusCreated domain models
-extension WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubApp {
-    public init(createdAt: Date?, description: String?, externalUrl: String?, htmlUrl: String, id: Int?, name: String, nodeId: String, owner: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppOwner?, updatedAt: Date?, events: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppEventsList? = nil, permissions: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppPermissions? = nil, slug: String? = nil) throws {
-        (self.createdAt, self.description) = (createdAt, description)
-        (self.externalUrl, self.htmlUrl) = (externalUrl, htmlUrl)
-        (self.id, self.name) = (id, name)
-        (self.nodeId, self.owner) = (nodeId, owner)
-        (self.updatedAt, self.events) = (updatedAt, events)
-        (self.permissions, self.slug) = (permissions, slug)
-        if let value = self.createdAt {
-            try sdkValidateDateTime("created_at", sdkWireString(value))
-        }
-        if let value = self.externalUrl {
-            try sdkValidateUri("external_url", value)
-        }
-            try sdkValidateUri("html_url", self.htmlUrl)
-        if let value = self.updatedAt {
-            try sdkValidateDateTime("updated_at", sdkWireString(value))
-        }
-    }
-}
-
 /// Typed representation of the `WebhookDeploymentStatusCreated` API schema.
 public struct WebhookDeploymentStatusCreated: Codable {
     /// Required enumerated value serialized in the `action` wire field.
@@ -373,5 +352,124 @@ extension WebhookDeploymentStatusCreatedWorkflowRunPullRequestsItem {
         (self.id, self.number) = (id, number)
         self.url = url
             try sdkValidateUri("url", self.url)
+    }
+}
+
+/// The set of permissions for the GitHub app
+public struct WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppPermissions: Codable {
+    /// Optional enumerated value serialized in the `actions` wire field.
+    public var actions: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppXbf92372f10?
+    /// Optional enumerated value serialized in the `administration` wire field.
+    public var administration: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX92246321eb?
+    /// Optional enumerated value serialized in the `checks` wire field.
+    public var checks: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppXa5476d35fc?
+    /// Optional enumerated value serialized in the `content_references` wire field.
+    public var contentReferences: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppXceb111ee62?
+    /// Optional enumerated value serialized in the `contents` wire field.
+    public var contents: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX21ff4a3682?
+    /// Optional enumerated value serialized in the `deployments` wire field.
+    public var deployments: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX4db3945a1d?
+    /// Optional enumerated value serialized in the `discussions` wire field.
+    public var discussions: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppXc1841b0ec3?
+    /// Optional enumerated value serialized in the `emails` wire field.
+    public var emails: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppXe7948c53bb?
+    /// Optional enumerated value serialized in the `environments` wire field.
+    public var environments: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX32ea8e977c?
+    /// Optional enumerated value serialized in the `issues` wire field.
+    public var issues: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX517cf66bdb?
+    /// Optional enumerated value serialized in the `keys` wire field.
+    public var keys: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX9325bc207d?
+    /// Optional enumerated value serialized in the `members` wire field.
+    public var members: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppXffe0039ed9?
+    /// Optional enumerated value serialized in the `metadata` wire field.
+    public var metadata: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX271975333b?
+    /// Optional enumerated value serialized in the `organization_administration` wire field.
+    public var organizationAdministration: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppXad9c4dea9b?
+    /// Optional enumerated value serialized in the `organization_hooks` wire field.
+    public var organizationHooks: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX641a860151?
+    /// Optional enumerated value serialized in the `organization_packages` wire field.
+    public var organizationPackages: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppXdc86e7d0f4?
+    /// Optional enumerated value serialized in the `organization_plan` wire field.
+    public var organizationPlan: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX0e1f8c5ab8?
+    /// Optional enumerated value serialized in the `organization_projects` wire field.
+    public var organizationProjects: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX11c949099c?
+    /// Optional enumerated value serialized in the `organization_secrets` wire field.
+    public var organizationSecrets: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX6d4602aaf3?
+    /// Optional enumerated value serialized in the `organization_self_hosted_runners` wire field.
+    public var organizationSelfHostedRunners: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX88259b08f4?
+    /// Optional enumerated value serialized in the `organization_user_blocking` wire field.
+    public var organizationUserBlocking: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX9e23a53f17?
+    /// Optional enumerated value serialized in the `packages` wire field.
+    public var packages: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppXcdf42dd468?
+    /// Optional enumerated value serialized in the `pages` wire field.
+    public var pages: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX0f78d37bb8?
+    /// Optional enumerated value serialized in the `pull_requests` wire field.
+    public var pullRequests: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX041a475832?
+    /// Optional enumerated value serialized in the `repository_hooks` wire field.
+    public var repositoryHooks: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX8d91436485?
+    /// Optional enumerated value serialized in the `repository_projects` wire field.
+    public var repositoryProjects: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX864c5141c7?
+    /// Optional enumerated value serialized in the `secret_scanning_alerts` wire field.
+    public var secretScanningAlerts: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppXc2e025883d?
+    /// Optional enumerated value serialized in the `secrets` wire field.
+    public var secrets: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX1970c52c52?
+    /// Optional enumerated value serialized in the `security_events` wire field.
+    public var securityEvents: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX541711f0d9?
+    /// Optional enumerated value serialized in the `security_scanning_alert` wire field.
+    public var securityScanningAlert: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppXe64388e241?
+    /// Optional enumerated value serialized in the `single_file` wire field.
+    public var singleFile: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppXd6cfa9529f?
+    /// Optional enumerated value serialized in the `statuses` wire field.
+    public var statuses: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX609bda877d?
+    /// Optional enumerated value serialized in the `vulnerability_alerts` wire field.
+    public var vulnerabilityAlerts: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppX8e5da854e7?
+    /// Optional enumerated value serialized in the `workflows` wire field.
+    public var workflows: WebhookDeploymentStatusCreatedDeploymentPerformedViaGithubAppXf7c9a7101d?
+
+    enum CodingKeys: String, CodingKey {
+        case actions
+        case administration
+        case checks
+        case contentReferences = "content_references"
+        case contents
+        case deployments
+        case discussions
+        case emails
+        case environments
+        case issues
+        case keys
+        case members
+        case metadata
+        case organizationAdministration = "organization_administration"
+        case organizationHooks = "organization_hooks"
+        case organizationPackages = "organization_packages"
+        case organizationPlan = "organization_plan"
+        case organizationProjects = "organization_projects"
+        case organizationSecrets = "organization_secrets"
+        case organizationSelfHostedRunners = "organization_self_hosted_runners"
+        case organizationUserBlocking = "organization_user_blocking"
+        case packages
+        case pages
+        case pullRequests = "pull_requests"
+        case repositoryHooks = "repository_hooks"
+        case repositoryProjects = "repository_projects"
+        case secretScanningAlerts = "secret_scanning_alerts"
+        case secrets
+        case securityEvents = "security_events"
+        case securityScanningAlert = "security_scanning_alert"
+        case singleFile = "single_file"
+        case statuses
+        case vulnerabilityAlerts = "vulnerability_alerts"
+        case workflows
+    }
+
+    init() {
+        (self.actions, self.administration, self.checks, self.contentReferences, self.contents) = (nil, nil, nil, nil, nil)
+        (self.deployments, self.discussions, self.emails, self.environments, self.issues) = (nil, nil, nil, nil, nil)
+        (self.keys, self.members, self.metadata, self.organizationAdministration, self.organizationHooks) = (nil, nil, nil, nil, nil)
+        (self.organizationPackages, self.organizationPlan, self.organizationProjects, self.organizationSecrets, self.organizationSelfHostedRunners) = (nil, nil, nil, nil, nil)
+        (self.organizationUserBlocking, self.packages, self.pages, self.pullRequests, self.repositoryHooks) = (nil, nil, nil, nil, nil)
+        (self.repositoryProjects, self.secretScanningAlerts, self.secrets, self.securityEvents, self.securityScanningAlert) = (nil, nil, nil, nil, nil)
+        (self.singleFile, self.statuses, self.vulnerabilityAlerts, self.workflows) = (nil, nil, nil, nil)
     }
 }

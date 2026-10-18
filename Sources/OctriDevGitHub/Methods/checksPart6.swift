@@ -7,29 +7,30 @@ import Foundation
     import FoundationNetworking
 #endif
 extension ChecksMethods {
-    /// Triggers GitHub to rerequest an existing check run, without pushing new code to a repository. This endpoint will trigger the [`check_run` webhook](https://docs.github.com/webhooks/event-payloads/#check_run) event with the action `rerequested`. When a check run is `rerequested`, the `status` of the check suite it belongs to is reset to `queued` and the `conclusion` is cleared. The check run itself is not updated. GitHub apps recieving the [`check_run` webhook](https://docs.github.com/webhooks/event-payloads/#check_run) with the `rerequested` action should then decide if the check run should be reset or updated and call the [update `check_run` endpoint](https://docs.github.com/rest/checks/runs#update-a-check-run) to update the check_run if desired. For more information about how to re-run GitHub Actions jobs, see "[Re-run a job from a workflow run](https://docs.github.com/rest/actions/workflow-runs#re-run-a-job-from-a-workflow-run)".
+    /// Changes the default automatic flow when creating check suites. By default, a check suite is automatically created each time code is pushed to a repository. When you disable the automatic creation of check suites, you can manually [Create a check suite](https://docs.github.com/rest/checks/suites#create-a-check-suite). You must have admin permissions in the repository to set preferences for check suites.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    /// - checkRunId: The unique identifier of the check run.
-    public static func checksRerequestRun(config: ClientConfig, owner: String, repo: String, checkRunId: Int, requestOptions: RequestOptions? = nil) async throws -> EmptyObject {
-        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/check-runs/", sdkEncodePathSegment(sdkWireString(checkRunId)), "/rerequest"].joined(), config: config, decoder: .json, operationId: "checksRerequestRun", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "422": BasicError.self])).data
+    /// - autoTriggerChecks: Enables or disables automatic creation of CheckSuite
+    ///   events upon pushes to the repository. Enabled by default.
+    public static func checksSetSuitesPreferences(config: ClientConfig, owner: String, repo: String, autoTriggerChecks: [ChecksSetSuitesPreferencesRequestBodyAutoTriggerChecksItem]? = nil, requestOptions: RequestOptions? = nil) async throws -> CheckSuitePreference {
+        let requestBody = ChecksSetSuitesPreferencesRequestBody(autoTriggerChecks: autoTriggerChecks)
+
+        return try (await sdkRequest("PATCH", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/check-suites/preferences"].joined(), config: config, body: requestBody, decoder: .json, operationId: "checksSetSuitesPreferences", options: requestOptions)).data
     }
 
-    /// Creates a check suite manually. By default, check suites are automatically created when you create a [check run](https://docs.github.com/rest/checks/runs). You only need to use this endpoint for manually creating check suites when you've disabled automatic creation using "[Update repository preferences for check suites](https://docs.github.com/rest/checks/suites#update-repository-preferences-for-check-suites)". > [!NOTE] > The Checks API only looks for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array and a `null` value for `head_branch`. OAuth apps and personal access tokens (classic) cannot use this endpoint.
+    /// Gets a single check suite using its `id`. > [!NOTE] > The Checks API only looks for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array and a `null` value for `head_branch`. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint on a private repository.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    /// - headSha: The sha of the head commit.
-    public static func checksCreateSuite(config: ClientConfig, owner: String, repo: String, headSha: String, requestOptions: RequestOptions? = nil) async throws -> CheckSuite {
-        let requestBody = ChecksCreateSuiteRequestBody(headSha: headSha)
-
-        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/check-suites"].joined(), config: config, body: requestBody, decoder: .json, operationId: "checksCreateSuite", options: requestOptions)).data
+    /// - checkSuiteId: The unique identifier of the check suite.
+    public static func checksGetSuite(config: ClientConfig, owner: String, repo: String, checkSuiteId: Int, requestOptions: RequestOptions? = nil) async throws -> CheckSuite {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/check-suites/", sdkEncodePathSegment(sdkWireString(checkSuiteId))].joined(), config: config, decoder: .json, operationId: "checksGetSuite", options: requestOptions)).data
     }
 }

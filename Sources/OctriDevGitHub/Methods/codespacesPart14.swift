@@ -55,6 +55,6 @@ extension CodespacesMethods {
     public static func codespacesCreateWithRepoForAuthenticatedUser(config: ClientConfig, options: CodespacesCreateWithRepoForAuthenticatedUserOptions, requestOptions: RequestOptions? = nil) async throws -> Codespace {
         let requestBody = CodespacesCreateWithRepoForAuthenticatedUserRequestBody(options: options)
 
-        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(options.owner)), "/", sdkEncodePathSegment(sdkWireString(options.repo)), "/codespaces"].joined(), config: config, body: requestBody, decoder: .json, operationId: "codespacesCreateWithRepoForAuthenticatedUser", options: requestOptions, errors: ["400": BasicError.self, "401": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
+        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(options.owner)), "/", sdkEncodePathSegment(sdkWireString(options.repo)), "/codespaces"].joined(), config: config, body: requestBody, decoder: .json, operationId: "codespacesCreateWithRepoForAuthenticatedUser", options: requestOptions, errors: ["400": BasicError.self, "401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

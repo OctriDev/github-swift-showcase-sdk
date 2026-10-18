@@ -17,7 +17,7 @@ extension ActionsMethods {
     /// - runnerId: Unique identifier of the self-hosted runner.
     /// - labels: The names of the custom labels to set for the runner. You can pass
     ///   an empty array to remove all custom labels.
-    public static func actionsSetCustomLabelsForSelfHostedRunnerForRepo(config: ClientConfig, owner: String, repo: String, runnerId: Int, labels: [String], requestOptions: RequestOptions? = nil) async throws -> ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgResponse {
+    public static func actionsSetCustomLabelsForSelfHostedRunnerForRepo(config: ClientConfig, owner: String, repo: String, runnerId: Int, labels: [String], requestOptions: RequestOptions? = nil) async throws -> ActionsRunnerLabels {
         try validateItems("labels", labels, min: 0, max: 100)
 
         let requestBody = ActionsSetCustomLabelsForSelfHostedRunnerForRepoRequestBody(labels: labels)
@@ -33,7 +33,7 @@ extension ActionsMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - runnerId: Unique identifier of the self-hosted runner.
-    public static func actionsRemoveAllCustomLabelsFromSelfHostedRunnerForRepo(config: ClientConfig, owner: String, repo: String, runnerId: Int, requestOptions: RequestOptions? = nil) async throws -> ActionsRemoveAllCustomLabelsFromSelfHostedRunnerForOrgResponse {
+    public static func actionsRemoveAllCustomLabelsFromSelfHostedRunnerForRepo(config: ClientConfig, owner: String, repo: String, runnerId: Int, requestOptions: RequestOptions? = nil) async throws -> ActionsRunnerLabelsReadonly {
         return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/actions/runners/", sdkEncodePathSegment(sdkWireString(runnerId)), "/labels"].joined(), config: config, decoder: .json, operationId: "actionsRemoveAllCustomLabelsFromSelfHostedRunnerForRepo", options: requestOptions, errors: ["404": BasicError.self])).data
     }
 }

@@ -17,6 +17,6 @@ extension IssuesMethods {
     /// - issueNumber: The number that identifies the issue.
     /// - issueFieldId: The unique identifier of the issue field.
     public static func issuesDeleteIssueFieldValue(config: ClientConfig, owner: String, repo: String, issueNumber: Int, issueFieldId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/issues/", sdkEncodePathSegment(sdkWireString(issueNumber)), "/issue-field-values/", sdkEncodePathSegment(sdkWireString(issueFieldId))].joined(), config: config, decoder: .empty, operationId: "issuesDeleteIssueFieldValue", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
+        return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/issues/", sdkEncodePathSegment(sdkWireString(issueNumber)), "/issue-field-values/", sdkEncodePathSegment(sdkWireString(issueFieldId))].joined(), config: config, decoder: .empty, operationId: "issuesDeleteIssueFieldValue", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self, "503": ServiceUnavailable.self])).data
     }
 }

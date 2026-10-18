@@ -48,6 +48,6 @@ extension SecretScanningMethods {
     public static func secretScanningUpdateAlert(config: ClientConfig, options: SecretScanningUpdateAlertOptions, requestOptions: RequestOptions? = nil) async throws -> SecretScanningAlertWithMetadata {
         let requestBody = SecretScanningUpdateAlertRequestBody(options: options)
 
-        return try (await sdkRequest("PATCH", ["/repos/", sdkEncodePathSegment(sdkWireString(options.owner)), "/", sdkEncodePathSegment(sdkWireString(options.repo)), "/secret-scanning/alerts/", sdkEncodePathSegment(sdkWireString(options.alertNumber))].joined(), config: config, body: requestBody, decoder: .json, operationId: "secretScanningUpdateAlert", options: requestOptions)).data
+        return try (await sdkRequest("PATCH", ["/repos/", sdkEncodePathSegment(sdkWireString(options.owner)), "/", sdkEncodePathSegment(sdkWireString(options.repo)), "/secret-scanning/alerts/", sdkEncodePathSegment(sdkWireString(options.alertNumber))].joined(), config: config, body: requestBody, decoder: .json, operationId: "secretScanningUpdateAlert", options: requestOptions, errors: ["503": ServiceUnavailable.self])).data
     }
 }

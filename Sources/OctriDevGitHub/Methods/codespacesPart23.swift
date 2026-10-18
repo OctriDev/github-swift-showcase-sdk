@@ -56,6 +56,6 @@ extension CodespacesMethods {
     public static func codespacesCreateWithPrForAuthenticatedUser(config: ClientConfig, options: CodespacesCreateWithPrForAuthenticatedUserOptions, requestOptions: RequestOptions? = nil) async throws -> Codespace {
         let requestBody = CodespacesCreateWithPrForAuthenticatedUserRequestBody(options: options)
 
-        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(options.owner)), "/", sdkEncodePathSegment(sdkWireString(options.repo)), "/pulls/", sdkEncodePathSegment(sdkWireString(options.pullNumber)), "/codespaces"].joined(), config: config, body: requestBody, decoder: .json, operationId: "codespacesCreateWithPrForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
+        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(options.owner)), "/", sdkEncodePathSegment(sdkWireString(options.repo)), "/pulls/", sdkEncodePathSegment(sdkWireString(options.pullNumber)), "/codespaces"].joined(), config: config, body: requestBody, decoder: .json, operationId: "codespacesCreateWithPrForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

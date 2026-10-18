@@ -15,7 +15,7 @@ extension ActionsMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - runnerId: Unique identifier of the self-hosted runner.
-    public static func actionsListLabelsForSelfHostedRunnerForRepo(config: ClientConfig, owner: String, repo: String, runnerId: Int, requestOptions: RequestOptions? = nil) async throws -> ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgResponse {
+    public static func actionsListLabelsForSelfHostedRunnerForRepo(config: ClientConfig, owner: String, repo: String, runnerId: Int, requestOptions: RequestOptions? = nil) async throws -> ActionsRunnerLabels {
         return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/actions/runners/", sdkEncodePathSegment(sdkWireString(runnerId)), "/labels"].joined(), config: config, decoder: .json, operationId: "actionsListLabelsForSelfHostedRunnerForRepo", options: requestOptions, errors: ["404": BasicError.self])).data
     }
 
@@ -28,7 +28,7 @@ extension ActionsMethods {
     ///   not case sensitive.
     /// - runnerId: Unique identifier of the self-hosted runner.
     /// - labels: The names of the custom labels to add to the runner.
-    public static func actionsAddCustomLabelsToSelfHostedRunnerForRepo(config: ClientConfig, owner: String, repo: String, runnerId: Int, labels: [String], requestOptions: RequestOptions? = nil) async throws -> ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgResponse {
+    public static func actionsAddCustomLabelsToSelfHostedRunnerForRepo(config: ClientConfig, owner: String, repo: String, runnerId: Int, labels: [String], requestOptions: RequestOptions? = nil) async throws -> ActionsRunnerLabels {
         try validateItems("labels", labels, min: 1, max: 100)
 
         let requestBody = ActionsAddCustomLabelsToSelfHostedRunnerForRepoRequestBody(labels: labels)

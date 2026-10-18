@@ -7,28 +7,7 @@ import Foundation
     import FoundationNetworking
 #endif
 extension ChecksMethods {
-    public struct ChecksUpdateOptions: Codable {
-        public var owner: String
-        public var repo: String
-        public var checkRunId: Int
-        public var name: String?
-        public var detailsUrl: String?
-        public var externalId: String?
-        public var startedAt: Date?
-        public var status: ChecksUpdateRequestBodyStatus?
-        public var conclusion: ChecksUpdateRequestBodyConclusion?
-        public var completedAt: Date?
-        public var output: ChecksUpdateRequestBodyOutput?
-        public var actions: [ChecksUpdateRequestBodyActionsItem]?
-
-        public init(owner: String, repo: String, checkRunId: Int) {
-            self.owner = owner
-            self.repo = repo
-            self.checkRunId = checkRunId
-        }
-    }
-
-    /// Updates a check run for a specific commit in a repository. > [!NOTE] > The endpoints to manage checks only look for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array. OAuth apps and personal access tokens (classic) cannot use this endpoint.
+    /// Lists annotations for a check run using the annotation `id`. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint on a private repository.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -36,47 +15,18 @@ extension ChecksMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - checkRunId: The unique identifier of the check run.
-    /// - name: The name of the check. For example, "code-coverage".
-    /// - detailsUrl: The URL of the integrator's site that has the full details of
-    ///   the check.
-    /// - externalId: A reference for the run on the integrator's system.
-    /// - startedAt: This is a timestamp in [ISO
-    ///   8601](https://en.wikipedia.org/wiki/ISO_8601) format:
-    ///   `YYYY-MM-DDTHH:MM:SSZ`.
-    /// - status: The current status of the check run. Only GitHub Actions can set a
-    ///   status of `waiting`, `pending`, or `requested`.
-    /// - conclusion: **Required if you provide `completed_at` or a `status` of
-    ///   `completed`**. The final conclusion of the check. **Note:** Providing
-    ///   `conclusion` will automatically set the `status` parameter to `completed`.
-    ///   You cannot change a check run conclusion to `stale`, only GitHub can set
-    ///   this.
-    /// - completedAt: The time the check completed. This is a timestamp in [ISO
-    ///   8601](https://en.wikipedia.org/wiki/ISO_8601) format:
-    ///   `YYYY-MM-DDTHH:MM:SSZ`.
-    /// - output: Check runs can accept a variety of data in the `output` object,
-    ///   including a `title` and `summary` and can optionally provide descriptive
-    ///   details about the run.
-    /// - actions: Possible further actions the integrator can perform, which a user
-    ///   may trigger. Each action includes a `label`, `identifier` and `description`.
-    ///   A maximum of three actions are accepted. To learn more about check runs and
-    ///   requested actions, see "[Check runs and requested
-    ///   actions](https://docs.github.com/rest/guides/using-the-rest-api-to-interact-
-    ///   with-checks#check-runs-and-requested-actions)."
-    public static func checksUpdate(config: ClientConfig, options: ChecksUpdateOptions, requestOptions: RequestOptions? = nil) async throws -> CheckRun {
-        if let startedAt = options.startedAt {
-            try sdkValidateDateTime("started_at", startedAt)
-        }
-
-        if let completedAt = options.completedAt {
-            try sdkValidateDateTime("completed_at", completedAt)
-        }
-
-        if let actions = options.actions {
-            try validateItems("actions", actions, max: 3)
-        }
-
-        let requestBody = ChecksUpdateRequestBody(options: options)
-
-        return try (await sdkRequest("PATCH", ["/repos/", sdkEncodePathSegment(sdkWireString(options.owner)), "/", sdkEncodePathSegment(sdkWireString(options.repo)), "/check-runs/", sdkEncodePathSegment(sdkWireString(options.checkRunId))].joined(), config: config, body: requestBody, decoder: .json, operationId: "checksUpdate", options: requestOptions)).data
+    /// - perPage: The number of results per page (max 100). For more information,
+    ///   see "[Using pagination in the REST
+    ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
+    ///   -rest-api)."
+    /// - page: The page number of the results to fetch. For more information, see
+    ///   "[Using pagination in the REST
+    ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
+    ///   -rest-api)."
+    public static func checksListAnnotations(config: ClientConfig, owner: String, repo: String, checkRunId: Int, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [CheckAnnotation] {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/check-runs/", sdkEncodePathSegment(sdkWireString(checkRunId)), "/annotations"].joined(), config: config, query: [
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("page", value: page),
+        ], decoder: .json, operationId: "checksListAnnotations", options: requestOptions)).data
     }
 }
