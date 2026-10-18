@@ -6,33 +6,79 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension UsersMethods {
-    /// Adds a public SSH key to the authenticated user's GitHub account. OAuth app tokens and personal access tokens (classic) need the `write:public_key` scope to use this endpoint.
+public extension UsersMethods {
+    /// Adds a public SSH key to the authenticated user's GitHub account. OAuth app tokens and personal access tokens
+    /// (classic) need the `write:public_key` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - key: The public SSH key to add to your GitHub account.
     /// - title: A descriptive name for the new key.
-    public static func usersCreatePublicSshKeyForAuthenticatedUser(config: ClientConfig, key: String, title: String? = nil, requestOptions: RequestOptions? = nil) async throws -> Key {
+    static func usersCreatePublicSshKeyForAuthenticatedUser(
+        config: ClientConfig,
+        key: String,
+        title: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Key {
         try sdkValidatePattern("key", key, sdkPattern0856c743b1f8)
 
         let requestBody = UsersCreatePublicSshKeyForAuthenticatedUserRequestBody(key: key, title: title)
 
-        return try (await sdkRequest("POST", "/user/keys", config: config, body: requestBody, decoder: .json, operationId: "usersCreatePublicSshKeyForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
+        return try await (sdkRequest(
+            "POST",
+            "/user/keys",
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "usersCreatePublicSshKeyForAuthenticatedUser",
+            options: requestOptions,
+            errors: [
+                "401": BasicError.self,
+                "403": BasicError.self,
+                "404": BasicError.self,
+                "422": ValidationError.self,
+            ]
+        )).data
     }
 
-    /// View extended details for a single public SSH key. OAuth app tokens and personal access tokens (classic) need the `read:public_key` scope to use this endpoint.
+    /// View extended details for a single public SSH key. OAuth app tokens and personal access tokens (classic) need
+    /// the `read:public_key` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - keyId: The unique identifier of the key.
-    public static func usersGetPublicSshKeyForAuthenticatedUser(config: ClientConfig, keyId: Int, requestOptions: RequestOptions? = nil) async throws -> Key {
-        return try (await sdkRequest("GET", ["/user/keys/", sdkEncodePathSegment(sdkWireString(keyId))].joined(), config: config, decoder: .json, operationId: "usersGetPublicSshKeyForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
+    static func usersGetPublicSshKeyForAuthenticatedUser(
+        config: ClientConfig,
+        keyId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Key {
+        try await (sdkRequest(
+            "GET",
+            ["/user/keys/", sdkEncodePathSegment(sdkWireString(keyId))].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "usersGetPublicSshKeyForAuthenticatedUser",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 
-    /// Removes a public SSH key from the authenticated user's GitHub account. OAuth app tokens and personal access tokens (classic) need the `admin:public_key` scope to use this endpoint.
+    /// Removes a public SSH key from the authenticated user's GitHub account. OAuth app tokens and personal access
+    /// tokens (classic) need the `admin:public_key` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - keyId: The unique identifier of the key.
-    public static func usersDeletePublicSshKeyForAuthenticatedUser(config: ClientConfig, keyId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/user/keys/", sdkEncodePathSegment(sdkWireString(keyId))].joined(), config: config, decoder: .empty, operationId: "usersDeletePublicSshKeyForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
+    static func usersDeletePublicSshKeyForAuthenticatedUser(
+        config: ClientConfig,
+        keyId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            ["/user/keys/", sdkEncodePathSegment(sdkWireString(keyId))].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "usersDeletePublicSshKeyForAuthenticatedUser",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 }

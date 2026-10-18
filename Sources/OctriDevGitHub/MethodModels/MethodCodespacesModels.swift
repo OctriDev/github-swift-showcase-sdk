@@ -7,25 +7,37 @@ import Foundation
     import FoundationNetworking
 #endif
 
-// Canonical codespaces operation model declarations
+/// Canonical codespaces operation model declarations
 public indirect enum CodespacesCreateForAuthenticatedUserRequestBody {
-    case codespacesCreateForAuthenticatedUserRequestBodyVariant0(CodespacesCreateForAuthenticatedUserRequestBodyVariant0)
-    case codespacesCreateForAuthenticatedUserRequestBodyVariant1(CodespacesCreateForAuthenticatedUserRequestBodyVariant1)
+    case codespacesCreateForAuthenticatedUserRequestBodyVariant0(
+        CodespacesCreateForAuthenticatedUserRequestBodyVariant0
+    )
+    case codespacesCreateForAuthenticatedUserRequestBodyVariant1(
+        CodespacesCreateForAuthenticatedUserRequestBodyVariant1
+    )
 }
 
 extension CodespacesCreateForAuthenticatedUserRequestBody: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let raw = try? container.decode(JSONValue.self) {
-            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
+            if let value = Self.decodeLossless1(from: container, raw) {
+                self = value; return
+            }
         }
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for CodespacesCreateForAuthenticatedUserRequestBody")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for CodespacesCreateForAuthenticatedUserRequestBody"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
@@ -48,12 +60,12 @@ extension CodespacesCreateForAuthenticatedUserRequestBody {
         if let value = try? container.decode(
             CodespacesCreateForAuthenticatedUserRequestBodyVariant0.self
         ) {
-            return             .codespacesCreateForAuthenticatedUserRequestBodyVariant0(value)
+            return .codespacesCreateForAuthenticatedUserRequestBodyVariant0(value)
         }
         if let value = try? container.decode(
             CodespacesCreateForAuthenticatedUserRequestBodyVariant1.self
         ) {
-            return             .codespacesCreateForAuthenticatedUserRequestBodyVariant1(value)
+            return .codespacesCreateForAuthenticatedUserRequestBodyVariant1(value)
         }
         return nil
     }
@@ -63,8 +75,10 @@ extension CodespacesCreateForAuthenticatedUserRequestBody {
     func encodeGroup1(to encoder: Encoder) throws -> Bool {
         var container = encoder.singleValueContainer()
         switch self {
-        case let .codespacesCreateForAuthenticatedUserRequestBodyVariant0(value): try container.encode(value); return true
-        case let .codespacesCreateForAuthenticatedUserRequestBodyVariant1(value): try container.encode(value); return true
+        case let .codespacesCreateForAuthenticatedUserRequestBodyVariant0(value): try container
+            .encode(value); return true
+        case let .codespacesCreateForAuthenticatedUserRequestBodyVariant1(value): try container
+            .encode(value); return true
         }
     }
 }
@@ -81,25 +95,35 @@ public struct CodespacesCreateForAuthenticatedUserRequestBodyVariant1PullRequest
         case repositoryId = "repository_id"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension CodespacesCreateForAuthenticatedUserRequestBodyVariant1PullRequest {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.pullRequestNumber) else {
-            throw SdkValidationError(field: "pull_request_number", code: "required", message: "Validation failed for 'pull_request_number': value is required")
-        }
-        guard container.contains(.repositoryId) else {
-            throw SdkValidationError(field: "repository_id", code: "required", message: "Validation failed for 'repository_id': value is required")
-        }
-        self.pullRequestNumber = try container.sdkDecodeRequired(.pullRequestNumber)
-        self.repositoryId = try container.sdkDecodeRequired(.repositoryId)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension CodespacesCreateForAuthenticatedUserRequestBodyVariant1PullRequest {
-    public init(pullRequestNumber: Int, repositoryId: Int) {
+public extension CodespacesCreateForAuthenticatedUserRequestBodyVariant1PullRequest {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.pullRequestNumber) else {
+            throw SdkValidationError(
+                field: "pull_request_number",
+                code: "required",
+                message: "Validation failed for 'pull_request_number': value is required"
+            )
+        }
+        guard container.contains(.repositoryId) else {
+            throw SdkValidationError(
+                field: "repository_id",
+                code: "required",
+                message: "Validation failed for 'repository_id': value is required"
+            )
+        }
+        pullRequestNumber = try container.sdkDecodeRequired(.pullRequestNumber)
+        repositoryId = try container.sdkDecodeRequired(.repositoryId)
+    }
+}
+
+public extension CodespacesCreateForAuthenticatedUserRequestBodyVariant1PullRequest {
+    init(pullRequestNumber: Int, repositoryId: Int) {
         (self.pullRequestNumber, self.repositoryId) = (pullRequestNumber, repositoryId)
     }
 }
@@ -113,25 +137,35 @@ public struct CodespacesListOrgSecretsResponse: Codable {
         case secrets
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension CodespacesListOrgSecretsResponse {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.totalCount) else {
-            throw SdkValidationError(field: "total_count", code: "required", message: "Validation failed for 'total_count': value is required")
-        }
-        guard container.contains(.secrets) else {
-            throw SdkValidationError(field: "secrets", code: "required", message: "Validation failed for 'secrets': value is required")
-        }
-        self.totalCount = try container.sdkDecodeRequired(.totalCount)
-        self.secrets = try container.sdkDecodeRequired(.secrets)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension CodespacesListOrgSecretsResponse {
-    public init(totalCount: Int, secrets: [CodespacesOrgSecret]) {
+public extension CodespacesListOrgSecretsResponse {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.totalCount) else {
+            throw SdkValidationError(
+                field: "total_count",
+                code: "required",
+                message: "Validation failed for 'total_count': value is required"
+            )
+        }
+        guard container.contains(.secrets) else {
+            throw SdkValidationError(
+                field: "secrets",
+                code: "required",
+                message: "Validation failed for 'secrets': value is required"
+            )
+        }
+        totalCount = try container.sdkDecodeRequired(.totalCount)
+        secrets = try container.sdkDecodeRequired(.secrets)
+    }
+}
+
+public extension CodespacesListOrgSecretsResponse {
+    init(totalCount: Int, secrets: [CodespacesOrgSecret]) {
         (self.totalCount, self.secrets) = (totalCount, secrets)
     }
 }
@@ -145,25 +179,35 @@ public struct CodespacesListRepoSecretsResponse: Codable {
         case secrets
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension CodespacesListRepoSecretsResponse {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.totalCount) else {
-            throw SdkValidationError(field: "total_count", code: "required", message: "Validation failed for 'total_count': value is required")
-        }
-        guard container.contains(.secrets) else {
-            throw SdkValidationError(field: "secrets", code: "required", message: "Validation failed for 'secrets': value is required")
-        }
-        self.totalCount = try container.sdkDecodeRequired(.totalCount)
-        self.secrets = try container.sdkDecodeRequired(.secrets)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension CodespacesListRepoSecretsResponse {
-    public init(totalCount: Int, secrets: [RepoCodespacesSecret]) {
+public extension CodespacesListRepoSecretsResponse {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.totalCount) else {
+            throw SdkValidationError(
+                field: "total_count",
+                code: "required",
+                message: "Validation failed for 'total_count': value is required"
+            )
+        }
+        guard container.contains(.secrets) else {
+            throw SdkValidationError(
+                field: "secrets",
+                code: "required",
+                message: "Validation failed for 'secrets': value is required"
+            )
+        }
+        totalCount = try container.sdkDecodeRequired(.totalCount)
+        secrets = try container.sdkDecodeRequired(.secrets)
+    }
+}
+
+public extension CodespacesListRepoSecretsResponse {
+    init(totalCount: Int, secrets: [RepoCodespacesSecret]) {
         (self.totalCount, self.secrets) = (totalCount, secrets)
     }
 }
@@ -177,25 +221,35 @@ public struct CodespacesGetCodespacesForUserInOrgResponse: Codable {
         case codespaces
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension CodespacesGetCodespacesForUserInOrgResponse {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.totalCount) else {
-            throw SdkValidationError(field: "total_count", code: "required", message: "Validation failed for 'total_count': value is required")
-        }
-        guard container.contains(.codespaces) else {
-            throw SdkValidationError(field: "codespaces", code: "required", message: "Validation failed for 'codespaces': value is required")
-        }
-        self.totalCount = try container.sdkDecodeRequired(.totalCount)
-        self.codespaces = try container.sdkDecodeRequired(.codespaces)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension CodespacesGetCodespacesForUserInOrgResponse {
-    public init(totalCount: Int, codespaces: [Codespace]) {
+public extension CodespacesGetCodespacesForUserInOrgResponse {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.totalCount) else {
+            throw SdkValidationError(
+                field: "total_count",
+                code: "required",
+                message: "Validation failed for 'total_count': value is required"
+            )
+        }
+        guard container.contains(.codespaces) else {
+            throw SdkValidationError(
+                field: "codespaces",
+                code: "required",
+                message: "Validation failed for 'codespaces': value is required"
+            )
+        }
+        totalCount = try container.sdkDecodeRequired(.totalCount)
+        codespaces = try container.sdkDecodeRequired(.codespaces)
+    }
+}
+
+public extension CodespacesGetCodespacesForUserInOrgResponse {
+    init(totalCount: Int, codespaces: [Codespace]) {
         (self.totalCount, self.codespaces) = (totalCount, codespaces)
     }
 }
@@ -211,20 +265,23 @@ public struct CodespacesPreFlightWithRepoForAuthenticatedUserResponse: Codable {
     }
 
     init() {
-        (self.billableOwner, self.defaults) = (nil, nil)
+        (billableOwner, defaults) = (nil, nil)
     }
 }
 
-extension CodespacesPreFlightWithRepoForAuthenticatedUserResponse {
-    public init(from decoder: Decoder) throws {
+public extension CodespacesPreFlightWithRepoForAuthenticatedUserResponse {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.billableOwner = try container.sdkDecodeIfPresent(.billableOwner)
-        self.defaults = try container.sdkDecodeIfPresent(.defaults)
+        billableOwner = try container.sdkDecodeIfPresent(.billableOwner)
+        defaults = try container.sdkDecodeIfPresent(.defaults)
     }
 }
 
-extension CodespacesPreFlightWithRepoForAuthenticatedUserResponse {
-    public init(billableOwner: SimpleUser? = nil, defaults: CodespacesPreFlightWithRepoForAuthenticatedUserResponseDefaults? = nil) {
+public extension CodespacesPreFlightWithRepoForAuthenticatedUserResponse {
+    init(
+        billableOwner: SimpleUser? = nil,
+        defaults: CodespacesPreFlightWithRepoForAuthenticatedUserResponseDefaults? = nil
+    ) {
         self.init()
         (self.billableOwner, self.defaults) = (billableOwner, defaults)
     }
@@ -239,25 +296,35 @@ public struct CodespacesListRepositoriesForSecretForAuthenticatedUserResponse: C
         case repositories
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension CodespacesListRepositoriesForSecretForAuthenticatedUserResponse {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.totalCount) else {
-            throw SdkValidationError(field: "total_count", code: "required", message: "Validation failed for 'total_count': value is required")
-        }
-        guard container.contains(.repositories) else {
-            throw SdkValidationError(field: "repositories", code: "required", message: "Validation failed for 'repositories': value is required")
-        }
-        self.totalCount = try container.sdkDecodeRequired(.totalCount)
-        self.repositories = try container.sdkDecodeRequired(.repositories)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension CodespacesListRepositoriesForSecretForAuthenticatedUserResponse {
-    public init(totalCount: Int, repositories: [MinimalRepository]) {
+public extension CodespacesListRepositoriesForSecretForAuthenticatedUserResponse {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.totalCount) else {
+            throw SdkValidationError(
+                field: "total_count",
+                code: "required",
+                message: "Validation failed for 'total_count': value is required"
+            )
+        }
+        guard container.contains(.repositories) else {
+            throw SdkValidationError(
+                field: "repositories",
+                code: "required",
+                message: "Validation failed for 'repositories': value is required"
+            )
+        }
+        totalCount = try container.sdkDecodeRequired(.totalCount)
+        repositories = try container.sdkDecodeRequired(.repositories)
+    }
+}
+
+public extension CodespacesListRepositoriesForSecretForAuthenticatedUserResponse {
+    init(totalCount: Int, repositories: [MinimalRepository]) {
         (self.totalCount, self.repositories) = (totalCount, repositories)
     }
 }
@@ -271,25 +338,35 @@ public struct CodespacesListSelectedReposForOrgSecretResponse: Codable {
         case repositories
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension CodespacesListSelectedReposForOrgSecretResponse {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.totalCount) else {
-            throw SdkValidationError(field: "total_count", code: "required", message: "Validation failed for 'total_count': value is required")
-        }
-        guard container.contains(.repositories) else {
-            throw SdkValidationError(field: "repositories", code: "required", message: "Validation failed for 'repositories': value is required")
-        }
-        self.totalCount = try container.sdkDecodeRequired(.totalCount)
-        self.repositories = try container.sdkDecodeRequired(.repositories)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension CodespacesListSelectedReposForOrgSecretResponse {
-    public init(totalCount: Int, repositories: [MinimalRepository]) {
+public extension CodespacesListSelectedReposForOrgSecretResponse {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.totalCount) else {
+            throw SdkValidationError(
+                field: "total_count",
+                code: "required",
+                message: "Validation failed for 'total_count': value is required"
+            )
+        }
+        guard container.contains(.repositories) else {
+            throw SdkValidationError(
+                field: "repositories",
+                code: "required",
+                message: "Validation failed for 'repositories': value is required"
+            )
+        }
+        totalCount = try container.sdkDecodeRequired(.totalCount)
+        repositories = try container.sdkDecodeRequired(.repositories)
+    }
+}
+
+public extension CodespacesListSelectedReposForOrgSecretResponse {
+    init(totalCount: Int, repositories: [MinimalRepository]) {
         (self.totalCount, self.repositories) = (totalCount, repositories)
     }
 }
@@ -303,25 +380,35 @@ public struct CodespacesListInOrganizationResponse: Codable {
         case codespaces
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension CodespacesListInOrganizationResponse {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.totalCount) else {
-            throw SdkValidationError(field: "total_count", code: "required", message: "Validation failed for 'total_count': value is required")
-        }
-        guard container.contains(.codespaces) else {
-            throw SdkValidationError(field: "codespaces", code: "required", message: "Validation failed for 'codespaces': value is required")
-        }
-        self.totalCount = try container.sdkDecodeRequired(.totalCount)
-        self.codespaces = try container.sdkDecodeRequired(.codespaces)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension CodespacesListInOrganizationResponse {
-    public init(totalCount: Int, codespaces: [Codespace]) {
+public extension CodespacesListInOrganizationResponse {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.totalCount) else {
+            throw SdkValidationError(
+                field: "total_count",
+                code: "required",
+                message: "Validation failed for 'total_count': value is required"
+            )
+        }
+        guard container.contains(.codespaces) else {
+            throw SdkValidationError(
+                field: "codespaces",
+                code: "required",
+                message: "Validation failed for 'codespaces': value is required"
+            )
+        }
+        totalCount = try container.sdkDecodeRequired(.totalCount)
+        codespaces = try container.sdkDecodeRequired(.codespaces)
+    }
+}
+
+public extension CodespacesListInOrganizationResponse {
+    init(totalCount: Int, codespaces: [Codespace]) {
         (self.totalCount, self.codespaces) = (totalCount, codespaces)
     }
 }
@@ -370,32 +457,51 @@ public struct CodespacesCreateForAuthenticatedUserRequestBodyVariant0: Codable {
         case retentionPeriodMinutes = "retention_period_minutes"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension CodespacesCreateForAuthenticatedUserRequestBodyVariant0 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.repositoryId) else {
-            throw SdkValidationError(field: "repository_id", code: "required", message: "Validation failed for 'repository_id': value is required")
-        }
-        self.repositoryId = try container.sdkDecodeRequired(.repositoryId)
-        self.ref = try container.sdkDecodeIfPresent(.ref)
-        self.location = try container.sdkDecodeIfPresent(.location)
-        self.geo = try container.sdkDecodeIfPresent(.geo)
-        self.clientIp = try container.sdkDecodeIfPresent(.clientIp)
-        self.machine = try container.sdkDecodeIfPresent(.machine)
-        self.devcontainerPath = try container.sdkDecodeIfPresent(.devcontainerPath)
-        self.multiRepoPermissionsOptOut = try container.sdkDecodeIfPresent(.multiRepoPermissionsOptOut)
-        self.workingDirectory = try container.sdkDecodeIfPresent(.workingDirectory)
-        self.idleTimeoutMinutes = try container.sdkDecodeIfPresent(.idleTimeoutMinutes)
-        self.displayName = try container.sdkDecodeIfPresent(.displayName)
-        self.retentionPeriodMinutes = try container.sdkDecodeIfPresent(.retentionPeriodMinutes)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension CodespacesCreateForAuthenticatedUserRequestBodyVariant0 {
-    public init(repositoryId: Int, ref: String? = nil, location: String? = nil, geo: CodespacesCreateForAuthenticatedUserRequestBodyVariant0Geo? = nil, clientIp: String? = nil, machine: String? = nil, devcontainerPath: String? = nil, multiRepoPermissionsOptOut: Bool? = nil, workingDirectory: String? = nil, idleTimeoutMinutes: Int? = nil, displayName: String? = nil, retentionPeriodMinutes: Int? = nil) {
+public extension CodespacesCreateForAuthenticatedUserRequestBodyVariant0 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.repositoryId) else {
+            throw SdkValidationError(
+                field: "repository_id",
+                code: "required",
+                message: "Validation failed for 'repository_id': value is required"
+            )
+        }
+        repositoryId = try container.sdkDecodeRequired(.repositoryId)
+        ref = try container.sdkDecodeIfPresent(.ref)
+        location = try container.sdkDecodeIfPresent(.location)
+        geo = try container.sdkDecodeIfPresent(.geo)
+        clientIp = try container.sdkDecodeIfPresent(.clientIp)
+        machine = try container.sdkDecodeIfPresent(.machine)
+        devcontainerPath = try container.sdkDecodeIfPresent(.devcontainerPath)
+        multiRepoPermissionsOptOut = try container.sdkDecodeIfPresent(.multiRepoPermissionsOptOut)
+        workingDirectory = try container.sdkDecodeIfPresent(.workingDirectory)
+        idleTimeoutMinutes = try container.sdkDecodeIfPresent(.idleTimeoutMinutes)
+        displayName = try container.sdkDecodeIfPresent(.displayName)
+        retentionPeriodMinutes = try container.sdkDecodeIfPresent(.retentionPeriodMinutes)
+    }
+}
+
+public extension CodespacesCreateForAuthenticatedUserRequestBodyVariant0 {
+    init(
+        repositoryId: Int,
+        ref: String? = nil,
+        location: String? = nil,
+        geo: CodespacesCreateForAuthenticatedUserRequestBodyVariant0Geo? = nil,
+        clientIp: String? = nil,
+        machine: String? = nil,
+        devcontainerPath: String? = nil,
+        multiRepoPermissionsOptOut: Bool? = nil,
+        workingDirectory: String? = nil,
+        idleTimeoutMinutes: Int? = nil,
+        displayName: String? = nil,
+        retentionPeriodMinutes: Int? = nil
+    ) {
         (self.repositoryId, self.ref) = (repositoryId, ref)
         (self.location, self.geo) = (location, geo)
         (self.clientIp, self.machine) = (clientIp, machine)
@@ -415,25 +521,35 @@ public struct CodespacesListSecretsForAuthenticatedUserResponse: Codable {
         case secrets
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension CodespacesListSecretsForAuthenticatedUserResponse {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.totalCount) else {
-            throw SdkValidationError(field: "total_count", code: "required", message: "Validation failed for 'total_count': value is required")
-        }
-        guard container.contains(.secrets) else {
-            throw SdkValidationError(field: "secrets", code: "required", message: "Validation failed for 'secrets': value is required")
-        }
-        self.totalCount = try container.sdkDecodeRequired(.totalCount)
-        self.secrets = try container.sdkDecodeRequired(.secrets)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension CodespacesListSecretsForAuthenticatedUserResponse {
-    public init(totalCount: Int, secrets: [CodespacesSecret]) {
+public extension CodespacesListSecretsForAuthenticatedUserResponse {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.totalCount) else {
+            throw SdkValidationError(
+                field: "total_count",
+                code: "required",
+                message: "Validation failed for 'total_count': value is required"
+            )
+        }
+        guard container.contains(.secrets) else {
+            throw SdkValidationError(
+                field: "secrets",
+                code: "required",
+                message: "Validation failed for 'secrets': value is required"
+            )
+        }
+        totalCount = try container.sdkDecodeRequired(.totalCount)
+        secrets = try container.sdkDecodeRequired(.secrets)
+    }
+}
+
+public extension CodespacesListSecretsForAuthenticatedUserResponse {
+    init(totalCount: Int, secrets: [CodespacesSecret]) {
         (self.totalCount, self.secrets) = (totalCount, secrets)
     }
 }
@@ -466,27 +582,41 @@ public struct CodespacesCreateForAuthenticatedUserRequestBodyVariant1: Codable {
         case idleTimeoutMinutes = "idle_timeout_minutes"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension CodespacesCreateForAuthenticatedUserRequestBodyVariant1 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.pullRequest) else {
-            throw SdkValidationError(field: "pull_request", code: "required", message: "Validation failed for 'pull_request': value is required")
-        }
-        self.pullRequest = try container.sdkDecodeRequired(.pullRequest)
-        self.location = try container.sdkDecodeIfPresent(.location)
-        self.geo = try container.sdkDecodeIfPresent(.geo)
-        self.machine = try container.sdkDecodeIfPresent(.machine)
-        self.devcontainerPath = try container.sdkDecodeIfPresent(.devcontainerPath)
-        self.workingDirectory = try container.sdkDecodeIfPresent(.workingDirectory)
-        self.idleTimeoutMinutes = try container.sdkDecodeIfPresent(.idleTimeoutMinutes)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension CodespacesCreateForAuthenticatedUserRequestBodyVariant1 {
-    public init(pullRequest: CodespacesCreateForAuthenticatedUserRequestBodyVariant1PullRequest, location: String? = nil, geo: CodespacesCreateForAuthenticatedUserRequestBodyVariant1Geo? = nil, machine: String? = nil, devcontainerPath: String? = nil, workingDirectory: String? = nil, idleTimeoutMinutes: Int? = nil) {
+public extension CodespacesCreateForAuthenticatedUserRequestBodyVariant1 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.pullRequest) else {
+            throw SdkValidationError(
+                field: "pull_request",
+                code: "required",
+                message: "Validation failed for 'pull_request': value is required"
+            )
+        }
+        pullRequest = try container.sdkDecodeRequired(.pullRequest)
+        location = try container.sdkDecodeIfPresent(.location)
+        geo = try container.sdkDecodeIfPresent(.geo)
+        machine = try container.sdkDecodeIfPresent(.machine)
+        devcontainerPath = try container.sdkDecodeIfPresent(.devcontainerPath)
+        workingDirectory = try container.sdkDecodeIfPresent(.workingDirectory)
+        idleTimeoutMinutes = try container.sdkDecodeIfPresent(.idleTimeoutMinutes)
+    }
+}
+
+public extension CodespacesCreateForAuthenticatedUserRequestBodyVariant1 {
+    init(
+        pullRequest: CodespacesCreateForAuthenticatedUserRequestBodyVariant1PullRequest,
+        location: String? = nil,
+        geo: CodespacesCreateForAuthenticatedUserRequestBodyVariant1Geo? = nil,
+        machine: String? = nil,
+        devcontainerPath: String? = nil,
+        workingDirectory: String? = nil,
+        idleTimeoutMinutes: Int? = nil
+    ) {
         (self.pullRequest, self.location) = (pullRequest, location)
         (self.geo, self.machine) = (geo, machine)
         (self.devcontainerPath, self.workingDirectory) = (devcontainerPath, workingDirectory)
@@ -503,5 +633,7 @@ public struct CodespacesRepoMachinesForAuthenticatedUserResponse: Codable {
         case machines
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }

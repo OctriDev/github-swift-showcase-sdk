@@ -14,10 +14,10 @@ struct ActionsCreateOrUpdateOrgSecretRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.encryptedValue, forKey: SdkCodingKey("encrypted_value"))
-        try keyedContainer.encode(self.keyId, forKey: SdkCodingKey("key_id"))
-        try keyedContainer.encode(self.visibility, forKey: SdkCodingKey("visibility"))
-        try keyedContainer.encodeIfPresent(self.selectedRepositoryIds, forKey: SdkCodingKey("selected_repository_ids"))
+        try keyedContainer.encode(encryptedValue, forKey: SdkCodingKey("encrypted_value"))
+        try keyedContainer.encode(keyId, forKey: SdkCodingKey("key_id"))
+        try keyedContainer.encode(visibility, forKey: SdkCodingKey("visibility"))
+        try keyedContainer.encodeIfPresent(selectedRepositoryIds, forKey: SdkCodingKey("selected_repository_ids"))
     }
 }
 
@@ -26,7 +26,7 @@ struct ActionsSetSelectedReposForOrgSecretRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.selectedRepositoryIds, forKey: SdkCodingKey("selected_repository_ids"))
+        try keyedContainer.encode(selectedRepositoryIds, forKey: SdkCodingKey("selected_repository_ids"))
     }
 }
 
@@ -38,10 +38,10 @@ struct ActionsCreateOrgVariableRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.name, forKey: SdkCodingKey("name"))
-        try keyedContainer.encode(self.value, forKey: SdkCodingKey("value"))
-        try keyedContainer.encode(self.visibility, forKey: SdkCodingKey("visibility"))
-        try keyedContainer.encodeIfPresent(self.selectedRepositoryIds, forKey: SdkCodingKey("selected_repository_ids"))
+        try keyedContainer.encode(name, forKey: SdkCodingKey("name"))
+        try keyedContainer.encode(value, forKey: SdkCodingKey("value"))
+        try keyedContainer.encode(visibility, forKey: SdkCodingKey("visibility"))
+        try keyedContainer.encodeIfPresent(selectedRepositoryIds, forKey: SdkCodingKey("selected_repository_ids"))
     }
 }
 
@@ -53,10 +53,10 @@ struct ActionsUpdateOrgVariableRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.name2, forKey: SdkCodingKey("name"))
-        try keyedContainer.encodeIfPresent(self.value, forKey: SdkCodingKey("value"))
-        try keyedContainer.encodeIfPresent(self.visibility, forKey: SdkCodingKey("visibility"))
-        try keyedContainer.encodeIfPresent(self.selectedRepositoryIds, forKey: SdkCodingKey("selected_repository_ids"))
+        try keyedContainer.encodeIfPresent(name2, forKey: SdkCodingKey("name"))
+        try keyedContainer.encodeIfPresent(value, forKey: SdkCodingKey("value"))
+        try keyedContainer.encodeIfPresent(visibility, forKey: SdkCodingKey("visibility"))
+        try keyedContainer.encodeIfPresent(selectedRepositoryIds, forKey: SdkCodingKey("selected_repository_ids"))
     }
 }
 
@@ -65,7 +65,7 @@ struct ActionsSetSelectedReposForOrgVariableRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.selectedRepositoryIds, forKey: SdkCodingKey("selected_repository_ids"))
+        try keyedContainer.encode(selectedRepositoryIds, forKey: SdkCodingKey("selected_repository_ids"))
     }
 }
 
@@ -74,7 +74,7 @@ struct ActionsSetActionsCacheRetentionLimitForRepositoryRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.maxCacheRetentionDays, forKey: SdkCodingKey("max_cache_retention_days"))
+        try keyedContainer.encodeIfPresent(maxCacheRetentionDays, forKey: SdkCodingKey("max_cache_retention_days"))
     }
 }
 
@@ -83,7 +83,7 @@ struct ActionsSetActionsCacheStorageLimitForRepositoryRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.maxCacheSizeGb, forKey: SdkCodingKey("max_cache_size_gb"))
+        try keyedContainer.encodeIfPresent(maxCacheSizeGb, forKey: SdkCodingKey("max_cache_size_gb"))
     }
 }
 
@@ -93,8 +93,8 @@ struct ActionsReRunJobForWorkflowRunRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.enableDebugLogging, forKey: SdkCodingKey("enable_debug_logging"))
-        try keyedContainer.encodeIfPresent(self.enableDebugger, forKey: SdkCodingKey("enable_debugger"))
+        try keyedContainer.encodeIfPresent(enableDebugLogging, forKey: SdkCodingKey("enable_debug_logging"))
+        try keyedContainer.encodeIfPresent(enableDebugger, forKey: SdkCodingKey("enable_debugger"))
     }
 }
 
@@ -105,9 +105,9 @@ struct ActionsSetCustomOidcSubClaimForRepoRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.useDefault, forKey: SdkCodingKey("use_default"))
-        try keyedContainer.encodeIfPresent(self.includeClaimKeys, forKey: SdkCodingKey("include_claim_keys"))
-        try keyedContainer.encodeIfPresent(self.useImmutableSubject, forKey: SdkCodingKey("use_immutable_subject"))
+        try keyedContainer.encode(useDefault, forKey: SdkCodingKey("use_default"))
+        try keyedContainer.encodeIfPresent(includeClaimKeys, forKey: SdkCodingKey("include_claim_keys"))
+        try keyedContainer.encodeIfPresent(useImmutableSubject, forKey: SdkCodingKey("use_immutable_subject"))
     }
 }
 
@@ -118,9 +118,9 @@ struct ActionsSetGithubActionsPermissionsRepositoryRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.enabled, forKey: SdkCodingKey("enabled"))
-        try keyedContainer.encodeIfPresent(self.allowedActions, forKey: SdkCodingKey("allowed_actions"))
-        try keyedContainer.encodeIfPresent(self.shaPinningRequired, forKey: SdkCodingKey("sha_pinning_required"))
+        try keyedContainer.encode(enabled, forKey: SdkCodingKey("enabled"))
+        try keyedContainer.encodeIfPresent(allowedActions, forKey: SdkCodingKey("allowed_actions"))
+        try keyedContainer.encodeIfPresent(shaPinningRequired, forKey: SdkCodingKey("sha_pinning_required"))
     }
 }
 
@@ -129,7 +129,7 @@ struct ActionsSetWorkflowAccessToRepositoryRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.accessLevel, forKey: SdkCodingKey("access_level"))
+        try keyedContainer.encode(accessLevel, forKey: SdkCodingKey("access_level"))
     }
 }
 
@@ -138,7 +138,7 @@ struct ActionsSetArtifactAndLogRetentionSettingsRepositoryRequestBody: Encodable
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.days, forKey: SdkCodingKey("days"))
+        try keyedContainer.encode(days, forKey: SdkCodingKey("days"))
     }
 }
 
@@ -147,7 +147,7 @@ struct ActionsSetForkPrContributorApprovalPermissionsRepositoryRequestBody: Enco
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.approvalPolicy, forKey: SdkCodingKey("approval_policy"))
+        try keyedContainer.encode(approvalPolicy, forKey: SdkCodingKey("approval_policy"))
     }
 }
 
@@ -159,10 +159,19 @@ struct ActionsSetPrivateRepoForkPrWorkflowsSettingsRepositoryRequestBody: Encoda
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.runWorkflowsFromForkPullRequests, forKey: SdkCodingKey("run_workflows_from_fork_pull_requests"))
-        try keyedContainer.encodeIfPresent(self.sendWriteTokensToWorkflows, forKey: SdkCodingKey("send_write_tokens_to_workflows"))
-        try keyedContainer.encodeIfPresent(self.sendSecretsAndVariables, forKey: SdkCodingKey("send_secrets_and_variables"))
-        try keyedContainer.encodeIfPresent(self.requireApprovalForForkPrWorkflows, forKey: SdkCodingKey("require_approval_for_fork_pr_workflows"))
+        try keyedContainer.encode(
+            runWorkflowsFromForkPullRequests,
+            forKey: SdkCodingKey("run_workflows_from_fork_pull_requests")
+        )
+        try keyedContainer.encodeIfPresent(
+            sendWriteTokensToWorkflows,
+            forKey: SdkCodingKey("send_write_tokens_to_workflows")
+        )
+        try keyedContainer.encodeIfPresent(sendSecretsAndVariables, forKey: SdkCodingKey("send_secrets_and_variables"))
+        try keyedContainer.encodeIfPresent(
+            requireApprovalForForkPrWorkflows,
+            forKey: SdkCodingKey("require_approval_for_fork_pr_workflows")
+        )
     }
 }
 
@@ -173,9 +182,9 @@ struct ActionsSetAllowedActionsRepositoryRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.githubOwnedAllowed, forKey: SdkCodingKey("github_owned_allowed"))
-        try keyedContainer.encodeIfPresent(self.verifiedAllowed, forKey: SdkCodingKey("verified_allowed"))
-        try keyedContainer.encodeIfPresent(self.patternsAllowed, forKey: SdkCodingKey("patterns_allowed"))
+        try keyedContainer.encodeIfPresent(githubOwnedAllowed, forKey: SdkCodingKey("github_owned_allowed"))
+        try keyedContainer.encodeIfPresent(verifiedAllowed, forKey: SdkCodingKey("verified_allowed"))
+        try keyedContainer.encodeIfPresent(patternsAllowed, forKey: SdkCodingKey("patterns_allowed"))
     }
 }
 
@@ -185,8 +194,14 @@ struct ActionsSetGithubActionsDefaultWorkflowPermissionsRepositoryRequestBody: E
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.defaultWorkflowPermissions, forKey: SdkCodingKey("default_workflow_permissions"))
-        try keyedContainer.encodeIfPresent(self.canApprovePullRequestReviews, forKey: SdkCodingKey("can_approve_pull_request_reviews"))
+        try keyedContainer.encodeIfPresent(
+            defaultWorkflowPermissions,
+            forKey: SdkCodingKey("default_workflow_permissions")
+        )
+        try keyedContainer.encodeIfPresent(
+            canApprovePullRequestReviews,
+            forKey: SdkCodingKey("can_approve_pull_request_reviews")
+        )
     }
 }
 
@@ -198,9 +213,9 @@ struct ActionsCreateRepoActionsPolicyRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.name, forKey: SdkCodingKey("name"))
-        try keyedContainer.encode(self.enforcement, forKey: SdkCodingKey("enforcement"))
-        try keyedContainer.encodeIfPresent(self.conditions, forKey: SdkCodingKey("conditions"))
-        try keyedContainer.encodeIfPresent(self.rules, forKey: SdkCodingKey("rules"))
+        try keyedContainer.encode(name, forKey: SdkCodingKey("name"))
+        try keyedContainer.encode(enforcement, forKey: SdkCodingKey("enforcement"))
+        try keyedContainer.encodeIfPresent(conditions, forKey: SdkCodingKey("conditions"))
+        try keyedContainer.encodeIfPresent(rules, forKey: SdkCodingKey("rules"))
     }
 }

@@ -6,19 +6,44 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ProjectsMethods {
-    /// Creates a field in a project owned by the specified user. Choose a `data_type` of text, number, date, single_select, or iteration and provide the configuration required for that type. A 201 response returns the created field, including its identifier and project URL.
+public extension ProjectsMethods {
+    /// Creates a field in a project owned by the specified user. Choose a `data_type` of text, number, date,
+    /// single_select, or iteration and provide the configuration required for that type. A 201 response returns the
+    /// created field, including its identifier and project URL.
     ///
     /// Add a field to a specified user owned project.
     ///
     /// - Parameters:
     /// - username: The handle for the GitHub user account.
     /// - projectNumber: The project's number.
-    public static func projectsAddFieldForUser(config: ClientConfig, username: String, projectNumber: Int, body: ProjectsAddFieldForUserRequestBody, requestOptions: RequestOptions? = nil) async throws -> ProjectsV2Field {
-        return try (await sdkRequest("POST", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/projectsV2/", sdkEncodePathSegment(sdkWireString(projectNumber)), "/fields"].joined(), config: config, rawBody: (try sdkEncodeBody(body, contentType: "application/json")), decoder: .json, operationId: "projectsAddFieldForUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "422": ValidationError.self])).data
+    static func projectsAddFieldForUser(
+        config: ClientConfig,
+        username: String,
+        projectNumber: Int,
+        body: ProjectsAddFieldForUserRequestBody,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ProjectsV2Field {
+        try await (sdkRequest(
+            "POST",
+            [
+                "/users/",
+                sdkEncodePathSegment(sdkWireString(username)),
+                "/projectsV2/",
+                sdkEncodePathSegment(sdkWireString(projectNumber)),
+                "/fields",
+            ].joined(),
+            config: config,
+            rawBody: sdkEncodeBody(body, contentType: "application/json"),
+            decoder: .json,
+            operationId: "projectsAddFieldForUser",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self, "422": ValidationError.self]
+        )).data
     }
 
-    /// Retrieves a specific field from a project owned by the specified user. Use the project number and field identifier to select the field to inspect. The response includes the field's name, data type, project URL, and any field configuration.
+    /// Retrieves a specific field from a project owned by the specified user. Use the project number and field
+    /// identifier to select the field to inspect. The response includes the field's name, data type, project URL, and
+    /// any field configuration.
     ///
     /// Get a specific field for a user-owned project.
     ///
@@ -26,7 +51,28 @@ extension ProjectsMethods {
     /// - projectNumber: The project's number.
     /// - fieldId: The unique identifier of the field.
     /// - username: The handle for the GitHub user account.
-    public static func projectsGetFieldForUser(config: ClientConfig, projectNumber: Int, fieldId: Int, username: String, requestOptions: RequestOptions? = nil) async throws -> ProjectsV2Field {
-        return try (await sdkRequest("GET", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/projectsV2/", sdkEncodePathSegment(sdkWireString(projectNumber)), "/fields/", sdkEncodePathSegment(sdkWireString(fieldId))].joined(), config: config, decoder: .json, operationId: "projectsGetFieldForUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self])).data
+    static func projectsGetFieldForUser(
+        config: ClientConfig,
+        projectNumber: Int,
+        fieldId: Int,
+        username: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ProjectsV2Field {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/users/",
+                sdkEncodePathSegment(sdkWireString(username)),
+                "/projectsV2/",
+                sdkEncodePathSegment(sdkWireString(projectNumber)),
+                "/fields/",
+                sdkEncodePathSegment(sdkWireString(fieldId)),
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "projectsGetFieldForUser",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self]
+        )).data
     }
 }

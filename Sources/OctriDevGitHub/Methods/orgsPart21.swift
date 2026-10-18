@@ -6,24 +6,63 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension OrgsMethods {
-    /// Delete a webhook for an organization. The authenticated user must be an organization owner to use this endpoint. OAuth app tokens and personal access tokens (classic) need `admin:org_hook` scope. OAuth apps cannot list, view, or edit webhooks that they did not create and users cannot list, view, or edit webhooks that were created by OAuth apps.
+public extension OrgsMethods {
+    /// Delete a webhook for an organization. The authenticated user must be an organization owner to use this endpoint.
+    /// OAuth app tokens and personal access tokens (classic) need `admin:org_hook` scope. OAuth apps cannot list, view,
+    /// or edit webhooks that they did not create and users cannot list, view, or edit webhooks that were created by
+    /// OAuth apps.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - hookId: The unique identifier of the hook. You can find this value in the
     ///   `X-GitHub-Hook-ID` header of a webhook delivery.
-    public static func orgsDeleteWebhook(config: ClientConfig, org: String, hookId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/hooks/", sdkEncodePathSegment(sdkWireString(hookId))].joined(), config: config, decoder: .empty, operationId: "orgsDeleteWebhook", options: requestOptions, errors: ["404": BasicError.self])).data
+    static func orgsDeleteWebhook(
+        config: ClientConfig,
+        org: String,
+        hookId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/hooks/", sdkEncodePathSegment(sdkWireString(hookId))]
+                .joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "orgsDeleteWebhook",
+            options: requestOptions,
+            errors: ["404": BasicError.self]
+        )).data
     }
 
-    /// Returns the webhook configuration for an organization. To get more information about the webhook, including the `active` state and `events`, use "Get an organization webhook ." You must be an organization owner to use this endpoint. OAuth app tokens and personal access tokens (classic) need `admin:org_hook` scope. OAuth apps cannot list, view, or edit webhooks that they did not create and users cannot list, view, or edit webhooks that were created by OAuth apps.
+    /// Returns the webhook configuration for an organization. To get more information about the webhook, including the
+    /// `active` state and `events`, use "Get an organization webhook ." You must be an organization owner to use this
+    /// endpoint. OAuth app tokens and personal access tokens (classic) need `admin:org_hook` scope. OAuth apps cannot
+    /// list, view, or edit webhooks that they did not create and users cannot list, view, or edit webhooks that were
+    /// created by OAuth apps.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - hookId: The unique identifier of the hook. You can find this value in the
     ///   `X-GitHub-Hook-ID` header of a webhook delivery.
-    public static func orgsGetWebhookConfigForOrg(config: ClientConfig, org: String, hookId: Int, requestOptions: RequestOptions? = nil) async throws -> WebhookConfig {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/hooks/", sdkEncodePathSegment(sdkWireString(hookId)), "/config"].joined(), config: config, decoder: .json, operationId: "orgsGetWebhookConfigForOrg", options: requestOptions)).data
+    static func orgsGetWebhookConfigForOrg(
+        config: ClientConfig,
+        org: String,
+        hookId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> WebhookConfig {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/orgs/",
+                sdkEncodePathSegment(sdkWireString(org)),
+                "/hooks/",
+                sdkEncodePathSegment(sdkWireString(hookId)),
+                "/config",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "orgsGetWebhookConfigForOrg",
+            options: requestOptions
+        )).data
     }
 }

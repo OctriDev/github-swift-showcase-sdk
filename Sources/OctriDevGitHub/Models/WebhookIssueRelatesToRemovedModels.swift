@@ -3,7 +3,7 @@
 
 import Foundation
 
-// WebhookIssueRelatesToRemoved domain models
+/// WebhookIssueRelatesToRemoved domain models
 /// Typed representation of the `WebhookIssueRelatesToRemoved` API schema.
 public struct WebhookIssueRelatesToRemoved: Codable {
     /// Required enumerated value serialized in the `action` wire field.
@@ -40,38 +40,66 @@ public struct WebhookIssueRelatesToRemoved: Codable {
         case installation
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookIssueRelatesToRemoved {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.action) else {
-            throw SdkValidationError(field: "action", code: "required", message: "Validation failed for 'action': value is required")
-        }
-        guard container.contains(.organization) else {
-            throw SdkValidationError(field: "organization", code: "required", message: "Validation failed for 'organization': value is required")
-        }
-        guard container.contains(.repository) else {
-            throw SdkValidationError(field: "repository", code: "required", message: "Validation failed for 'repository': value is required")
-        }
-        guard container.contains(.sender) else {
-            throw SdkValidationError(field: "sender", code: "required", message: "Validation failed for 'sender': value is required")
-        }
-        self.action = try container.sdkDecodeRequired(.action)
-        self.organization = try container.sdkDecodeRequired(.organization)
-        self.repository = try container.sdkDecodeRequired(.repository)
-        self.sender = try container.sdkDecodeRequired(.sender)
-        self.issueId = try container.sdkDecodeIfPresent(.issueId)
-        self.issue = try container.sdkDecodeIfPresent(.issue)
-        self.relatedIssueId = try container.sdkDecodeIfPresent(.relatedIssueId)
-        self.relatedIssue = try container.sdkDecodeIfPresent(.relatedIssue)
-        self.installation = try container.sdkDecodeIfPresent(.installation)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WebhookIssueRelatesToRemoved {
-    public init(action: WebhookIssueRelatesToRemovedAction, organization: OrganizationSimpleWebhooks, repository: RepositoryWebhooks, sender: SimpleUser, issueId: Double? = nil, issue: Issue? = nil, relatedIssueId: Double? = nil, relatedIssue: Issue? = nil, installation: SimpleInstallation? = nil) {
+public extension WebhookIssueRelatesToRemoved {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.action) else {
+            throw SdkValidationError(
+                field: "action",
+                code: "required",
+                message: "Validation failed for 'action': value is required"
+            )
+        }
+        guard container.contains(.organization) else {
+            throw SdkValidationError(
+                field: "organization",
+                code: "required",
+                message: "Validation failed for 'organization': value is required"
+            )
+        }
+        guard container.contains(.repository) else {
+            throw SdkValidationError(
+                field: "repository",
+                code: "required",
+                message: "Validation failed for 'repository': value is required"
+            )
+        }
+        guard container.contains(.sender) else {
+            throw SdkValidationError(
+                field: "sender",
+                code: "required",
+                message: "Validation failed for 'sender': value is required"
+            )
+        }
+        action = try container.sdkDecodeRequired(.action)
+        organization = try container.sdkDecodeRequired(.organization)
+        repository = try container.sdkDecodeRequired(.repository)
+        sender = try container.sdkDecodeRequired(.sender)
+        issueId = try container.sdkDecodeIfPresent(.issueId)
+        issue = try container.sdkDecodeIfPresent(.issue)
+        relatedIssueId = try container.sdkDecodeIfPresent(.relatedIssueId)
+        relatedIssue = try container.sdkDecodeIfPresent(.relatedIssue)
+        installation = try container.sdkDecodeIfPresent(.installation)
+    }
+}
+
+public extension WebhookIssueRelatesToRemoved {
+    init(
+        action: WebhookIssueRelatesToRemovedAction,
+        organization: OrganizationSimpleWebhooks,
+        repository: RepositoryWebhooks,
+        sender: SimpleUser,
+        issueId: Double? = nil,
+        issue: Issue? = nil,
+        relatedIssueId: Double? = nil,
+        relatedIssue: Issue? = nil,
+        installation: SimpleInstallation? = nil
+    ) {
         (self.action, self.organization) = (action, organization)
         (self.repository, self.sender) = (repository, sender)
         (self.issueId, self.issue) = (issueId, issue)
@@ -84,12 +112,15 @@ extension WebhookIssueRelatesToRemoved {
 public struct WebhookIssueRelatesToRemovedAction: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let relatesToRemoved = WebhookIssueRelatesToRemovedAction(rawValue: "relates_to_removed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

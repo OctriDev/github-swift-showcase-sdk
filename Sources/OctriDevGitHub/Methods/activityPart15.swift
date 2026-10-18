@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ActivityMethods {
+public extension ActivityMethods {
     /// Lists the people watching the specified repository.
     ///
     /// - Parameters:
@@ -22,11 +22,32 @@ extension ActivityMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func activityListWatchersForRepo(config: ClientConfig, owner: String, repo: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [SimpleUser] {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/subscribers"].joined(), config: config, query: [
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "activityListWatchersForRepo", options: requestOptions)).data
+    static func activityListWatchersForRepo(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [SimpleUser] {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/subscribers",
+            ].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "activityListWatchersForRepo",
+            options: requestOptions
+        )).data
     }
 
     /// Gets information about whether the authenticated user is subscribed to the repository.
@@ -36,7 +57,26 @@ extension ActivityMethods {
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    public static func activityGetRepoSubscription(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> RepositorySubscription {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/subscription"].joined(), config: config, decoder: .json, operationId: "activityGetRepoSubscription", options: requestOptions, errors: ["403": BasicError.self])).data
+    static func activityGetRepoSubscription(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> RepositorySubscription {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/subscription",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "activityGetRepoSubscription",
+            options: requestOptions,
+            errors: ["403": BasicError.self]
+        )).data
     }
 }

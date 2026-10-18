@@ -3,25 +3,33 @@
 
 import Foundation
 
-// ReposRepositoryRuleset domain models
+/// ReposRepositoryRuleset domain models
 public indirect enum RepositoryRulesetConditions2 {
     case repositoryRulesetConditions(RepositoryRulesetConditions)
     case orgRulesetConditions(OrgRulesetConditions)
 }
 
 extension RepositoryRulesetConditions2: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let raw = try? container.decode(JSONValue.self) {
-            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
+            if let value = Self.decodeLossless1(from: container, raw) {
+                self = value; return
+            }
         }
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for RepositoryRulesetConditions2")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for RepositoryRulesetConditions2"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
@@ -39,8 +47,13 @@ extension RepositoryRulesetConditions2 {
 
 extension RepositoryRulesetConditions2 {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(RepositoryRulesetConditions.self) { return .repositoryRulesetConditions(value) }
-        if let value = try? container.decode(OrgRulesetConditions.self) { return .orgRulesetConditions(value) }
+        if let value = try? container
+            .decode(RepositoryRulesetConditions.self) {
+            return .repositoryRulesetConditions(value)
+        }
+        if let value = try? container.decode(OrgRulesetConditions.self) {
+            return .orgRulesetConditions(value)
+        }
         return nil
     }
 }
@@ -68,30 +81,24 @@ public struct RepositoryRulesetLinks: Codable {
     }
 
     init() {
-        (self.`self`, self.html) = (nil, nil)
+        (self.`self`, html) = (nil, nil)
     }
 }
 
-extension RepositoryRulesetLinks {
-    public init(from decoder: Decoder) throws {
+public extension RepositoryRulesetLinks {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.`self` = try container.sdkDecodeIfPresent(.`self`)
-        self.html = try container.sdkDecodeIfPresent(.html)
+        html = try container.sdkDecodeIfPresent(.html)
     }
 }
 
-extension RepositoryRulesetLinks {
-    public init(`self` selfValue: RepositoryRulesetLinksSelf? = nil, html: RepositoryRulesetLinksHtml? = nil) {
+public extension RepositoryRulesetLinks {
+    init(self selfValue: RepositoryRulesetLinksSelf? = nil, html: RepositoryRulesetLinksHtml? = nil) {
         self.init()
         (self.`self`, self.html) = (selfValue, html)
     }
 }
-
-
-
-
-
-
 
 /// A set of rules to apply when specified conditions are met.
 public struct RepositoryRuleset: Codable {
@@ -143,49 +150,82 @@ public struct RepositoryRuleset: Codable {
         case updatedAt = "updated_at"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension RepositoryRuleset {
-    public init(from decoder: Decoder) throws {
+public extension RepositoryRuleset {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
         }
         guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
         }
         guard container.contains(.source) else {
-            throw SdkValidationError(field: "source", code: "required", message: "Validation failed for 'source': value is required")
+            throw SdkValidationError(
+                field: "source",
+                code: "required",
+                message: "Validation failed for 'source': value is required"
+            )
         }
         guard container.contains(.enforcement) else {
-            throw SdkValidationError(field: "enforcement", code: "required", message: "Validation failed for 'enforcement': value is required")
+            throw SdkValidationError(
+                field: "enforcement",
+                code: "required",
+                message: "Validation failed for 'enforcement': value is required"
+            )
         }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.source = try container.sdkDecodeRequired(.source)
-        self.enforcement = try container.sdkDecodeRequired(.enforcement)
-        self.target = try container.sdkDecodeIfPresent(.target)
-        self.sourceType = try container.sdkDecodeIfPresent(.sourceType)
-        self.bypassActors = try container.sdkDecodeIfPresent(.bypassActors)
-        self.currentUserCanBypass = try container.sdkDecodeIfPresent(.currentUserCanBypass)
-        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        self.links = try container.sdkDecodeIfPresent(.links)
-        self.conditions = try container.sdkDecodeIfPresent(.conditions)
-        self.rules = try container.sdkDecodeIfPresent(.rules)
-        self.createdAt = try container.sdkDecodeIfPresent(.createdAt)
-        self.updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
-        if let value = self.createdAt {
+        id = try container.sdkDecodeRequired(.id)
+        name = try container.sdkDecodeRequired(.name)
+        source = try container.sdkDecodeRequired(.source)
+        enforcement = try container.sdkDecodeRequired(.enforcement)
+        target = try container.sdkDecodeIfPresent(.target)
+        sourceType = try container.sdkDecodeIfPresent(.sourceType)
+        bypassActors = try container.sdkDecodeIfPresent(.bypassActors)
+        currentUserCanBypass = try container.sdkDecodeIfPresent(.currentUserCanBypass)
+        nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        links = try container.sdkDecodeIfPresent(.links)
+        conditions = try container.sdkDecodeIfPresent(.conditions)
+        rules = try container.sdkDecodeIfPresent(.rules)
+        createdAt = try container.sdkDecodeIfPresent(.createdAt)
+        updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
+        if let value = createdAt {
             try sdkValidateDateTime("created_at", sdkWireString(value))
         }
-        if let value = self.updatedAt {
+        if let value = updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
     }
 }
 
-extension RepositoryRuleset {
-    public init(id: Int, name: String, source: String, enforcement: RepositoryRuleEnforcement, target: RepositoryRulesetTarget? = nil, sourceType: RepositoryRulesetSourceType? = nil, bypassActors: [RepositoryRulesetBypassActor]? = nil, currentUserCanBypass: RepositoryRulesetCurrentUserCanBypass? = nil, nodeId: String? = nil, links: RepositoryRulesetLinks? = nil, conditions: RepositoryRulesetConditions2? = nil, rules: [RepositoryRule]? = nil, createdAt: Date? = nil, updatedAt: Date? = nil) throws {
+public extension RepositoryRuleset {
+    init(
+        id: Int,
+        name: String,
+        source: String,
+        enforcement: RepositoryRuleEnforcement,
+        target: RepositoryRulesetTarget? = nil,
+        sourceType: RepositoryRulesetSourceType? = nil,
+        bypassActors: [RepositoryRulesetBypassActor]? = nil,
+        currentUserCanBypass: RepositoryRulesetCurrentUserCanBypass? = nil,
+        nodeId: String? = nil,
+        links: RepositoryRulesetLinks? = nil,
+        conditions: RepositoryRulesetConditions2? = nil,
+        rules: [RepositoryRule]? = nil,
+        createdAt: Date? = nil,
+        updatedAt: Date? = nil
+    ) throws {
         (self.id, self.name) = (id, name)
         (self.source, self.enforcement) = (source, enforcement)
         (self.target, self.sourceType) = (target, sourceType)
@@ -216,20 +256,20 @@ public struct RepositoryRulesetConditionsRefName: Codable {
     }
 
     init() {
-        (self.include, self.exclude) = (nil, nil)
+        (include, exclude) = (nil, nil)
     }
 }
 
-extension RepositoryRulesetConditionsRefName {
-    public init(from decoder: Decoder) throws {
+public extension RepositoryRulesetConditionsRefName {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.include = try container.sdkDecodeIfPresent(.include)
-        self.exclude = try container.sdkDecodeIfPresent(.exclude)
+        include = try container.sdkDecodeIfPresent(.include)
+        exclude = try container.sdkDecodeIfPresent(.exclude)
     }
 }
 
-extension RepositoryRulesetConditionsRefName {
-    public init(include: [String]? = nil, exclude: [String]? = nil) {
+public extension RepositoryRulesetConditionsRefName {
+    init(include: [String]? = nil, exclude: [String]? = nil) {
         self.init()
         (self.include, self.exclude) = (include, exclude)
     }
@@ -245,19 +285,19 @@ public struct RepositoryRulesetLinksSelf: Codable {
     }
 
     init() {
-        self.href = nil
+        href = nil
     }
 }
 
-extension RepositoryRulesetLinksSelf {
-    public init(from decoder: Decoder) throws {
+public extension RepositoryRulesetLinksSelf {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.href = try container.sdkDecodeIfPresent(.href)
+        href = try container.sdkDecodeIfPresent(.href)
     }
 }
 
-extension RepositoryRulesetLinksSelf {
-    public init(href: String? = nil) {
+public extension RepositoryRulesetLinksSelf {
+    init(href: String? = nil) {
         self.init()
         self.href = href
     }
@@ -273,19 +313,19 @@ public struct RepositoryRulesetConditions: Codable {
     }
 
     init() {
-        self.refName = nil
+        refName = nil
     }
 }
 
-extension RepositoryRulesetConditions {
-    public init(from decoder: Decoder) throws {
+public extension RepositoryRulesetConditions {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.refName = try container.sdkDecodeIfPresent(.refName)
+        refName = try container.sdkDecodeIfPresent(.refName)
     }
 }
 
-extension RepositoryRulesetConditions {
-    public init(refName: RepositoryRulesetConditionsRefName? = nil) {
+public extension RepositoryRulesetConditions {
+    init(refName: RepositoryRulesetConditionsRefName? = nil) {
         self.init()
         self.refName = refName
     }
@@ -301,27 +341,23 @@ public struct RepositoryRulesetLinksHtml: Codable {
     }
 
     init() {
-        self.href = nil
+        href = nil
     }
 }
 
-extension RepositoryRulesetLinksHtml {
-    public init(from decoder: Decoder) throws {
+public extension RepositoryRulesetLinksHtml {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.href = try container.sdkDecodeIfPresent(.href)
+        href = try container.sdkDecodeIfPresent(.href)
     }
 }
 
-extension RepositoryRulesetLinksHtml {
-    public init(href: String? = nil) {
+public extension RepositoryRulesetLinksHtml {
+    init(href: String? = nil) {
         self.init()
         self.href = href
     }
 }
-
-
-
-
 
 /// An actor that can bypass rules in a ruleset
 public struct RepositoryRulesetBypassActor: Codable {
@@ -343,23 +379,33 @@ public struct RepositoryRulesetBypassActor: Codable {
         case bypassMode = "bypass_mode"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryRulesetBypassActor {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.actorType) else {
-            throw SdkValidationError(field: "actor_type", code: "required", message: "Validation failed for 'actor_type': value is required")
-        }
-        self.actorType = try container.sdkDecodeRequired(.actorType)
-        self.actorId = try container.sdkDecodeIfPresent(.actorId)
-        self.bypassMode = try container.sdkDecodeIfPresent(.bypassMode)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension RepositoryRulesetBypassActor {
-    public init(actorType: RepositoryRulesetBypassActorActorType, actorId: Int? = nil, bypassMode: RepositoryRulesetBypassActorBypassMode? = nil) {
+public extension RepositoryRulesetBypassActor {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.actorType) else {
+            throw SdkValidationError(
+                field: "actor_type",
+                code: "required",
+                message: "Validation failed for 'actor_type': value is required"
+            )
+        }
+        actorType = try container.sdkDecodeRequired(.actorType)
+        actorId = try container.sdkDecodeIfPresent(.actorId)
+        bypassMode = try container.sdkDecodeIfPresent(.bypassMode)
+    }
+}
+
+public extension RepositoryRulesetBypassActor {
+    init(
+        actorType: RepositoryRulesetBypassActorActorType,
+        actorId: Int? = nil,
+        bypassMode: RepositoryRulesetBypassActorBypassMode? = nil
+    ) {
         (self.actorType, self.actorId) = (actorType, actorId)
         self.bypassMode = bypassMode
     }
@@ -369,17 +415,21 @@ extension RepositoryRulesetBypassActor {
 /// pull requests. `pull_request` is not applicable for the `DeployKey` actor type. Also, `pull_request` is only
 /// applicable to branch rulesets. When `bypass_mode` is `exempt`, rules will not be run for that actor and a
 /// bypass audit entry will not be created.
-public struct RepositoryRulesetBypassActorBypassMode: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct RepositoryRulesetBypassActorBypassMode: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let always = RepositoryRulesetBypassActorBypassMode(rawValue: "always")
     public static let pullRequest = RepositoryRulesetBypassActorBypassMode(rawValue: "pull_request")
     public static let exempt = RepositoryRulesetBypassActorBypassMode(rawValue: "exempt")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -392,7 +442,10 @@ public struct RepositoryRulesetBypassActorBypassMode: RawRepresentable, Hashable
 public struct RepositoryRulesetTarget: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let branch = RepositoryRulesetTarget(rawValue: "branch")
     public static let tag = RepositoryRulesetTarget(rawValue: "tag")
     public static let push = RepositoryRulesetTarget(rawValue: "push")
@@ -400,7 +453,7 @@ public struct RepositoryRulesetTarget: RawRepresentable, Hashable, Codable, Send
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -414,7 +467,10 @@ public struct RepositoryRulesetTarget: RawRepresentable, Hashable, Codable, Send
 public struct RepositoryRulesetCurrentUserCanBypass: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let always = RepositoryRulesetCurrentUserCanBypass(rawValue: "always")
     public static let pullRequestsOnly = RepositoryRulesetCurrentUserCanBypass(rawValue: "pull_requests_only")
     public static let never = RepositoryRulesetCurrentUserCanBypass(rawValue: "never")
@@ -422,7 +478,7 @@ public struct RepositoryRulesetCurrentUserCanBypass: RawRepresentable, Hashable,
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -435,7 +491,10 @@ public struct RepositoryRulesetCurrentUserCanBypass: RawRepresentable, Hashable,
 public struct RepositoryRulesetBypassActorActorType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let integration = RepositoryRulesetBypassActorActorType(rawValue: "Integration")
     public static let organizationAdmin = RepositoryRulesetBypassActorActorType(rawValue: "OrganizationAdmin")
     public static let repositoryRole = RepositoryRulesetBypassActorActorType(rawValue: "RepositoryRole")
@@ -445,7 +504,7 @@ public struct RepositoryRulesetBypassActorActorType: RawRepresentable, Hashable,
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -458,14 +517,17 @@ public struct RepositoryRulesetBypassActorActorType: RawRepresentable, Hashable,
 public struct RepositoryRulesetSourceType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let repository = RepositoryRulesetSourceType(rawValue: "Repository")
     public static let organization = RepositoryRulesetSourceType(rawValue: "Organization")
     public static let enterprise = RepositoryRulesetSourceType(rawValue: "Enterprise")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

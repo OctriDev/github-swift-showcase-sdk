@@ -3,7 +3,7 @@
 
 import Foundation
 
-// WebhookDeploymentCreated domain models
+/// WebhookDeploymentCreated domain models
 /// The set of permissions for the GitHub app
 public struct WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermissions: Codable {
     /// Optional enumerated value serialized in the `actions` wire field.
@@ -113,58 +113,105 @@ public struct WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermissions
     }
 
     init() {
-        (self.actions, self.administration, self.checks, self.contentReferences, self.contents) = (nil, nil, nil, nil, nil)
-        (self.deployments, self.discussions, self.emails, self.environments, self.issues) = (nil, nil, nil, nil, nil)
-        (self.keys, self.members, self.metadata, self.organizationAdministration, self.organizationHooks) = (nil, nil, nil, nil, nil)
-        (self.organizationPackages, self.organizationPlan, self.organizationProjects, self.organizationSecrets, self.organizationSelfHostedRunners) = (nil, nil, nil, nil, nil)
-        (self.organizationUserBlocking, self.packages, self.pages, self.pullRequests, self.repositoryHooks) = (nil, nil, nil, nil, nil)
-        (self.repositoryProjects, self.secretScanningAlerts, self.secrets, self.securityEvents, self.securityScanningAlert) = (nil, nil, nil, nil, nil)
-        (self.singleFile, self.statuses, self.vulnerabilityAlerts, self.workflows) = (nil, nil, nil, nil)
+        (actions, administration, checks, contentReferences, contents) = (nil, nil, nil, nil, nil)
+        (deployments, discussions, emails, environments, issues) = (nil, nil, nil, nil, nil)
+        (keys, members, metadata, organizationAdministration, organizationHooks) = (nil, nil, nil, nil, nil)
+        (
+            organizationPackages,
+            organizationPlan,
+            organizationProjects,
+            organizationSecrets,
+            organizationSelfHostedRunners
+        ) = (nil, nil, nil, nil, nil)
+        (organizationUserBlocking, packages, pages, pullRequests, repositoryHooks) = (nil, nil, nil, nil, nil)
+        (repositoryProjects, secretScanningAlerts, secrets, securityEvents, securityScanningAlert) = (
+            nil,
+            nil,
+            nil,
+            nil,
+            nil
+        )
+        (singleFile, statuses, vulnerabilityAlerts, workflows) = (nil, nil, nil, nil)
     }
 }
 
-extension WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermissions {
-    public init(from decoder: Decoder) throws {
+public extension WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermissions {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.actions = try container.sdkDecodeIfPresent(.actions)
-        self.administration = try container.sdkDecodeIfPresent(.administration)
-        self.checks = try container.sdkDecodeIfPresent(.checks)
-        self.contentReferences = try container.sdkDecodeIfPresent(.contentReferences)
-        self.contents = try container.sdkDecodeIfPresent(.contents)
-        self.deployments = try container.sdkDecodeIfPresent(.deployments)
-        self.discussions = try container.sdkDecodeIfPresent(.discussions)
-        self.emails = try container.sdkDecodeIfPresent(.emails)
-        self.environments = try container.sdkDecodeIfPresent(.environments)
-        self.issues = try container.sdkDecodeIfPresent(.issues)
-        self.keys = try container.sdkDecodeIfPresent(.keys)
-        self.members = try container.sdkDecodeIfPresent(.members)
-        self.metadata = try container.sdkDecodeIfPresent(.metadata)
-        self.organizationAdministration = try container.sdkDecodeIfPresent(.organizationAdministration)
-        self.organizationHooks = try container.sdkDecodeIfPresent(.organizationHooks)
-        self.organizationPackages = try container.sdkDecodeIfPresent(.organizationPackages)
-        self.organizationPlan = try container.sdkDecodeIfPresent(.organizationPlan)
-        self.organizationProjects = try container.sdkDecodeIfPresent(.organizationProjects)
-        self.organizationSecrets = try container.sdkDecodeIfPresent(.organizationSecrets)
-        self.organizationSelfHostedRunners = try container.sdkDecodeIfPresent(.organizationSelfHostedRunners)
-        self.organizationUserBlocking = try container.sdkDecodeIfPresent(.organizationUserBlocking)
-        self.packages = try container.sdkDecodeIfPresent(.packages)
-        self.pages = try container.sdkDecodeIfPresent(.pages)
-        self.pullRequests = try container.sdkDecodeIfPresent(.pullRequests)
-        self.repositoryHooks = try container.sdkDecodeIfPresent(.repositoryHooks)
-        self.repositoryProjects = try container.sdkDecodeIfPresent(.repositoryProjects)
-        self.secretScanningAlerts = try container.sdkDecodeIfPresent(.secretScanningAlerts)
-        self.secrets = try container.sdkDecodeIfPresent(.secrets)
-        self.securityEvents = try container.sdkDecodeIfPresent(.securityEvents)
-        self.securityScanningAlert = try container.sdkDecodeIfPresent(.securityScanningAlert)
-        self.singleFile = try container.sdkDecodeIfPresent(.singleFile)
-        self.statuses = try container.sdkDecodeIfPresent(.statuses)
-        self.vulnerabilityAlerts = try container.sdkDecodeIfPresent(.vulnerabilityAlerts)
-        self.workflows = try container.sdkDecodeIfPresent(.workflows)
+        actions = try container.sdkDecodeIfPresent(.actions)
+        administration = try container.sdkDecodeIfPresent(.administration)
+        checks = try container.sdkDecodeIfPresent(.checks)
+        contentReferences = try container.sdkDecodeIfPresent(.contentReferences)
+        contents = try container.sdkDecodeIfPresent(.contents)
+        deployments = try container.sdkDecodeIfPresent(.deployments)
+        discussions = try container.sdkDecodeIfPresent(.discussions)
+        emails = try container.sdkDecodeIfPresent(.emails)
+        environments = try container.sdkDecodeIfPresent(.environments)
+        issues = try container.sdkDecodeIfPresent(.issues)
+        keys = try container.sdkDecodeIfPresent(.keys)
+        members = try container.sdkDecodeIfPresent(.members)
+        metadata = try container.sdkDecodeIfPresent(.metadata)
+        organizationAdministration = try container.sdkDecodeIfPresent(.organizationAdministration)
+        organizationHooks = try container.sdkDecodeIfPresent(.organizationHooks)
+        organizationPackages = try container.sdkDecodeIfPresent(.organizationPackages)
+        organizationPlan = try container.sdkDecodeIfPresent(.organizationPlan)
+        organizationProjects = try container.sdkDecodeIfPresent(.organizationProjects)
+        organizationSecrets = try container.sdkDecodeIfPresent(.organizationSecrets)
+        organizationSelfHostedRunners = try container.sdkDecodeIfPresent(.organizationSelfHostedRunners)
+        organizationUserBlocking = try container.sdkDecodeIfPresent(.organizationUserBlocking)
+        packages = try container.sdkDecodeIfPresent(.packages)
+        pages = try container.sdkDecodeIfPresent(.pages)
+        pullRequests = try container.sdkDecodeIfPresent(.pullRequests)
+        repositoryHooks = try container.sdkDecodeIfPresent(.repositoryHooks)
+        repositoryProjects = try container.sdkDecodeIfPresent(.repositoryProjects)
+        secretScanningAlerts = try container.sdkDecodeIfPresent(.secretScanningAlerts)
+        secrets = try container.sdkDecodeIfPresent(.secrets)
+        securityEvents = try container.sdkDecodeIfPresent(.securityEvents)
+        securityScanningAlert = try container.sdkDecodeIfPresent(.securityScanningAlert)
+        singleFile = try container.sdkDecodeIfPresent(.singleFile)
+        statuses = try container.sdkDecodeIfPresent(.statuses)
+        vulnerabilityAlerts = try container.sdkDecodeIfPresent(.vulnerabilityAlerts)
+        workflows = try container.sdkDecodeIfPresent(.workflows)
     }
 }
 
-extension WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermissions {
-    public init(actions: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXabac86940e? = nil, administration: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXb2e4e214ea? = nil, checks: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermissionsChecks? = nil, contentReferences: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX7b02e240a9? = nil, contents: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXa472c7a9b7? = nil, deployments: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXf425d64b53? = nil, discussions: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX0640c342ac? = nil, emails: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermissionsEmails? = nil, environments: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX67ad088bff? = nil, issues: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermissionsIssues? = nil, keys: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermissionsKeys? = nil, members: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX47cc859cb7? = nil, metadata: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXfc4addf8e7? = nil, organizationAdministration: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXc83e0c24c2? = nil, organizationHooks: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX5393364a56? = nil, organizationPackages: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX6f8c3fbecd? = nil, organizationPlan: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXcea895f9f8? = nil, organizationProjects: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX724649161c? = nil, organizationSecrets: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX4bfd526562? = nil, organizationSelfHostedRunners: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXcb559a4c78? = nil, organizationUserBlocking: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXfe62bebc30? = nil, packages: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX4d0094b878? = nil, pages: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermissionsPages? = nil, pullRequests: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX0251d53d00? = nil, repositoryHooks: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXe4e08fd967? = nil, repositoryProjects: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXc2d1d4b4af? = nil, secretScanningAlerts: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXdc186e7dbf? = nil, secrets: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX714902169f? = nil, securityEvents: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX30a11584f9? = nil, securityScanningAlert: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX895a21d0c8? = nil, singleFile: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXd1296c950e? = nil, statuses: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX836e5507db? = nil, vulnerabilityAlerts: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX347b955579? = nil, workflows: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX733f6fe6b1? = nil) {
+public extension WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermissions {
+    init(
+        actions: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXabac86940e? = nil,
+        administration: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXb2e4e214ea? = nil,
+        checks: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermissionsChecks? = nil,
+        contentReferences: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX7b02e240a9? = nil,
+        contents: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXa472c7a9b7? = nil,
+        deployments: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXf425d64b53? = nil,
+        discussions: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX0640c342ac? = nil,
+        emails: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermissionsEmails? = nil,
+        environments: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX67ad088bff? = nil,
+        issues: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermissionsIssues? = nil,
+        keys: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermissionsKeys? = nil,
+        members: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX47cc859cb7? = nil,
+        metadata: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXfc4addf8e7? = nil,
+        organizationAdministration: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXc83e0c24c2? = nil,
+        organizationHooks: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX5393364a56? = nil,
+        organizationPackages: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX6f8c3fbecd? = nil,
+        organizationPlan: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXcea895f9f8? = nil,
+        organizationProjects: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX724649161c? = nil,
+        organizationSecrets: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX4bfd526562? = nil,
+        organizationSelfHostedRunners: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXcb559a4c78? = nil,
+        organizationUserBlocking: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXfe62bebc30? = nil,
+        packages: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX4d0094b878? = nil,
+        pages: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermissionsPages? = nil,
+        pullRequests: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX0251d53d00? = nil,
+        repositoryHooks: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXe4e08fd967? = nil,
+        repositoryProjects: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXc2d1d4b4af? = nil,
+        secretScanningAlerts: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXdc186e7dbf? = nil,
+        secrets: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX714902169f? = nil,
+        securityEvents: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX30a11584f9? = nil,
+        securityScanningAlert: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX895a21d0c8? = nil,
+        singleFile: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXd1296c950e? = nil,
+        statuses: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX836e5507db? = nil,
+        vulnerabilityAlerts: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX347b955579? = nil,
+        workflows: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisX733f6fe6b1? = nil
+    ) {
         self.init()
         (self.actions, self.administration) = (actions, administration)
         (self.checks, self.contentReferences) = (checks, contentReferences)
@@ -202,29 +249,43 @@ public struct WebhookDeploymentCreatedWorkflowRunPullRequestsItemHead: Codable {
         case sha
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookDeploymentCreatedWorkflowRunPullRequestsItemHead {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.ref) else {
-            throw SdkValidationError(field: "ref", code: "required", message: "Validation failed for 'ref': value is required")
-        }
-        guard container.contains(.repo) else {
-            throw SdkValidationError(field: "repo", code: "required", message: "Validation failed for 'repo': value is required")
-        }
-        guard container.contains(.sha) else {
-            throw SdkValidationError(field: "sha", code: "required", message: "Validation failed for 'sha': value is required")
-        }
-        self.ref = try container.sdkDecodeRequired(.ref)
-        self.repo = try container.sdkDecodeRequired(.repo)
-        self.sha = try container.sdkDecodeRequired(.sha)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WebhookDeploymentCreatedWorkflowRunPullRequestsItemHead {
-    public init(ref: String, repo: WebhookDeploymentCreatedWorkflowRunPullRequestsItemHeadRepo, sha: String) {
+public extension WebhookDeploymentCreatedWorkflowRunPullRequestsItemHead {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.ref) else {
+            throw SdkValidationError(
+                field: "ref",
+                code: "required",
+                message: "Validation failed for 'ref': value is required"
+            )
+        }
+        guard container.contains(.repo) else {
+            throw SdkValidationError(
+                field: "repo",
+                code: "required",
+                message: "Validation failed for 'repo': value is required"
+            )
+        }
+        guard container.contains(.sha) else {
+            throw SdkValidationError(
+                field: "sha",
+                code: "required",
+                message: "Validation failed for 'sha': value is required"
+            )
+        }
+        ref = try container.sdkDecodeRequired(.ref)
+        repo = try container.sdkDecodeRequired(.repo)
+        sha = try container.sdkDecodeRequired(.sha)
+    }
+}
+
+public extension WebhookDeploymentCreatedWorkflowRunPullRequestsItemHead {
+    init(ref: String, repo: WebhookDeploymentCreatedWorkflowRunPullRequestsItemHeadRepo, sha: String) {
         (self.ref, self.repo) = (ref, repo)
         self.sha = sha
     }
@@ -245,33 +306,47 @@ public struct WebhookDeploymentCreatedWorkflowRunPullRequestsItemHeadRepo: Codab
         case url
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookDeploymentCreatedWorkflowRunPullRequestsItemHeadRepo {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        guard container.contains(.url) else {
-            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.url = try container.sdkDecodeRequired(.url)
-            try sdkValidateUri("url", self.url)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WebhookDeploymentCreatedWorkflowRunPullRequestsItemHeadRepo {
-    public init(id: Int, name: String, url: String) throws {
+public extension WebhookDeploymentCreatedWorkflowRunPullRequestsItemHeadRepo {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        guard container.contains(.url) else {
+            throw SdkValidationError(
+                field: "url",
+                code: "required",
+                message: "Validation failed for 'url': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        name = try container.sdkDecodeRequired(.name)
+        url = try container.sdkDecodeRequired(.url)
+        try sdkValidateUri("url", url)
+    }
+}
+
+public extension WebhookDeploymentCreatedWorkflowRunPullRequestsItemHeadRepo {
+    init(id: Int, name: String, url: String) throws {
         (self.id, self.name) = (id, name)
         self.url = url
-            try sdkValidateUri("url", self.url)
+        try sdkValidateUri("url", self.url)
     }
 }
 
@@ -424,8 +499,8 @@ extension WebhookDeploymentCreatedWorkflowRunRepository {
     }
 }
 
-extension WebhookDeploymentCreatedWorkflowRunRepository {
-    public init(from decoder: Decoder) throws {
+public extension WebhookDeploymentCreatedWorkflowRunRepository {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.init(sdkDefaults: ())
         try sdkDecodeFieldsPart1(container)
@@ -435,8 +510,55 @@ extension WebhookDeploymentCreatedWorkflowRunRepository {
     }
 }
 
-extension WebhookDeploymentCreatedWorkflowRunRepository {
-    public init(archiveUrl: String? = nil, assigneesUrl: String? = nil, blobsUrl: String? = nil, branchesUrl: String? = nil, collaboratorsUrl: String? = nil, commentsUrl: String? = nil, commitsUrl: String? = nil, compareUrl: String? = nil, contentsUrl: String? = nil, contributorsUrl: String? = nil, deploymentsUrl: String? = nil, description: JSONValue? = nil, downloadsUrl: String? = nil, eventsUrl: String? = nil, fork: Bool? = nil, forksUrl: String? = nil, fullName: String? = nil, gitCommitsUrl: String? = nil, gitRefsUrl: String? = nil, gitTagsUrl: String? = nil, hooksUrl: String? = nil, htmlUrl: String? = nil, id: Int? = nil, issueCommentUrl: String? = nil, issueEventsUrl: String? = nil, issuesUrl: String? = nil, keysUrl: String? = nil, labelsUrl: String? = nil, languagesUrl: String? = nil, mergesUrl: String? = nil, milestonesUrl: String? = nil, name: String? = nil, nodeId: String? = nil, notificationsUrl: String? = nil, owner: WebhookDeploymentCreatedWorkflowRunRepositoryOwner? = nil, `private`: Bool? = nil, pullsUrl: String? = nil, releasesUrl: String? = nil, stargazersUrl: String? = nil, statusesUrl: String? = nil, subscribersUrl: String? = nil, subscriptionUrl: String? = nil, tagsUrl: String? = nil, teamsUrl: String? = nil, treesUrl: String? = nil, url: String? = nil) {
+public extension WebhookDeploymentCreatedWorkflowRunRepository {
+    init(
+        archiveUrl: String? = nil,
+        assigneesUrl: String? = nil,
+        blobsUrl: String? = nil,
+        branchesUrl: String? = nil,
+        collaboratorsUrl: String? = nil,
+        commentsUrl: String? = nil,
+        commitsUrl: String? = nil,
+        compareUrl: String? = nil,
+        contentsUrl: String? = nil,
+        contributorsUrl: String? = nil,
+        deploymentsUrl: String? = nil,
+        description: JSONValue? = nil,
+        downloadsUrl: String? = nil,
+        eventsUrl: String? = nil,
+        fork: Bool? = nil,
+        forksUrl: String? = nil,
+        fullName: String? = nil,
+        gitCommitsUrl: String? = nil,
+        gitRefsUrl: String? = nil,
+        gitTagsUrl: String? = nil,
+        hooksUrl: String? = nil,
+        htmlUrl: String? = nil,
+        id: Int? = nil,
+        issueCommentUrl: String? = nil,
+        issueEventsUrl: String? = nil,
+        issuesUrl: String? = nil,
+        keysUrl: String? = nil,
+        labelsUrl: String? = nil,
+        languagesUrl: String? = nil,
+        mergesUrl: String? = nil,
+        milestonesUrl: String? = nil,
+        name: String? = nil,
+        nodeId: String? = nil,
+        notificationsUrl: String? = nil,
+        owner: WebhookDeploymentCreatedWorkflowRunRepositoryOwner? = nil,
+        private: Bool? = nil,
+        pullsUrl: String? = nil,
+        releasesUrl: String? = nil,
+        stargazersUrl: String? = nil,
+        statusesUrl: String? = nil,
+        subscribersUrl: String? = nil,
+        subscriptionUrl: String? = nil,
+        tagsUrl: String? = nil,
+        teamsUrl: String? = nil,
+        treesUrl: String? = nil,
+        url: String? = nil
+    ) {
         self.init(sdkDefaults: ())
         sdkSet1(archiveUrl, assigneesUrl, blobsUrl, branchesUrl, collaboratorsUrl)
         sdkSet2(commentsUrl, commitsUrl, compareUrl, contentsUrl, contributorsUrl)
@@ -452,7 +574,13 @@ extension WebhookDeploymentCreatedWorkflowRunRepository {
 }
 
 extension WebhookDeploymentCreatedWorkflowRunRepository {
-    mutating func sdkSet1(_ archiveUrl: String?, _ assigneesUrl: String?, _ blobsUrl: String?, _ branchesUrl: String?, _ collaboratorsUrl: String?) {
+    mutating func sdkSet1(
+        _ archiveUrl: String?,
+        _ assigneesUrl: String?,
+        _ blobsUrl: String?,
+        _ branchesUrl: String?,
+        _ collaboratorsUrl: String?
+    ) {
         self.archiveUrl = archiveUrl
         self.assigneesUrl = assigneesUrl
         self.blobsUrl = blobsUrl

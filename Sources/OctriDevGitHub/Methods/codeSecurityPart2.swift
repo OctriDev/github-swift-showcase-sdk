@@ -6,8 +6,10 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension CodeSecurityMethods {
-    /// Lists all code security configurations available in an enterprise. The authenticated user must be an administrator of the enterprise in order to use this endpoint. OAuth app tokens and personal access tokens (classic) need the `read:enterprise` scope to use this endpoint.
+public extension CodeSecurityMethods {
+    /// Lists all code security configurations available in an enterprise. The authenticated user must be an
+    /// administrator of the enterprise in order to use this endpoint. OAuth app tokens and personal access tokens
+    /// (classic) need the `read:enterprise` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - enterprise: The slug version of the enterprise name.
@@ -27,11 +29,28 @@ extension CodeSecurityMethods {
     ///   after this cursor. For more information, see "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func codeSecurityGetConfigurationsForEnterprise(config: ClientConfig, enterprise: String, perPage: Int? = nil, before: String? = nil, after: String? = nil, requestOptions: RequestOptions? = nil) async throws -> [CodeSecurityConfiguration] {
-        return try (await sdkRequest("GET", ["/enterprises/", sdkEncodePathSegment(sdkWireString(enterprise)), "/code-security/configurations"].joined(), config: config, query: [
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("before", value: before),
-            SdkQueryParameter("after", value: after),
-        ], decoder: .json, operationId: "codeSecurityGetConfigurationsForEnterprise", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+    static func codeSecurityGetConfigurationsForEnterprise(
+        config: ClientConfig,
+        enterprise: String,
+        perPage: Int? = nil,
+        before: String? = nil,
+        after: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [CodeSecurityConfiguration] {
+        try await (sdkRequest(
+            "GET",
+            ["/enterprises/", sdkEncodePathSegment(sdkWireString(enterprise)), "/code-security/configurations"]
+                .joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("before", value: before),
+                SdkQueryParameter("after", value: after),
+            ],
+            decoder: .json,
+            operationId: "codeSecurityGetConfigurationsForEnterprise",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 }

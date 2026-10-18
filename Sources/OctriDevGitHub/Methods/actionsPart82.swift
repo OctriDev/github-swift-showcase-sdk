@@ -6,8 +6,10 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ActionsMethods {
-    /// Generates a configuration that can be passed to the runner application at startup. The authenticated user must have admin access to the repository. OAuth tokens and personal access tokens (classic) need the`repo` scope to use this endpoint.
+public extension ActionsMethods {
+    /// Generates a configuration that can be passed to the runner application at startup. The authenticated user must
+    /// have admin access to the repository. OAuth tokens and personal access tokens (classic) need the`repo` scope to
+    /// use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -20,11 +22,40 @@ extension ActionsMethods {
     ///   items**: 1. **Maximum items**: 100.
     /// - workFolder: The working directory to be used for job execution, relative
     ///   to the runner install directory.
-    public static func actionsGenerateRunnerJitconfigForRepo(config: ClientConfig, owner: String, repo: String, name: String, runnerGroupId: Int, labels: [String], workFolder: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ActionsRunnerJitconfig {
+    static func actionsGenerateRunnerJitconfigForRepo(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        name: String,
+        runnerGroupId: Int,
+        labels: [String],
+        workFolder: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ActionsRunnerJitconfig {
         try validateItems("labels", labels, min: 1, max: 100)
 
-        let requestBody = ActionsGenerateRunnerJitconfigForRepoRequestBody(name: name, runnerGroupId: runnerGroupId, labels: labels, workFolder: workFolder)
+        let requestBody = ActionsGenerateRunnerJitconfigForRepoRequestBody(
+            name: name,
+            runnerGroupId: runnerGroupId,
+            labels: labels,
+            workFolder: workFolder
+        )
 
-        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/actions/runners/generate-jitconfig"].joined(), config: config, body: requestBody, decoder: .json, operationId: "actionsGenerateRunnerJitconfigForRepo", options: requestOptions, errors: ["404": BasicError.self, "409": BasicError.self, "422": ValidationErrorSimple.self])).data
+        return try await (sdkRequest(
+            "POST",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/actions/runners/generate-jitconfig",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "actionsGenerateRunnerJitconfigForRepo",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "409": BasicError.self, "422": ValidationErrorSimple.self]
+        )).data
     }
 }

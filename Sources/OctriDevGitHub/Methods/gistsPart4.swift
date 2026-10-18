@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension GistsMethods {
-    /// Lists gists starred by the authenticated user. Use `since` to filter by the last-updated timestamp and `page` with `per_page` to paginate the results.
+public extension GistsMethods {
+    /// Lists gists starred by the authenticated user. Use `since` to filter by the last-updated timestamp and `page`
+    /// with `per_page` to paginate the results.
     ///
     /// List the authenticated user's starred gists:
     ///
@@ -23,23 +24,53 @@ extension GistsMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func gistsListStarred(config: ClientConfig, since: Date? = nil, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [BaseGist] {
-        if let since = since {
+    static func gistsListStarred(
+        config: ClientConfig,
+        since: Date? = nil,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [BaseGist] {
+        if let since {
             try sdkValidateDateTime("since", since)
         }
 
-        return try (await sdkRequest("GET", "/gists/starred", config: config, query: [
-            SdkQueryParameter("since", value: since),
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "gistsListStarred", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self])).data
+        return try await (sdkRequest(
+            "GET",
+            "/gists/starred",
+            config: config,
+            query: [
+                SdkQueryParameter("since", value: since),
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "gistsListStarred",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self]
+        )).data
     }
 
-    /// Gets a specified gist. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.raw+json`**: Returns the raw markdown. This is the default if you do not pass any specific media type.
+    /// Gets a specified gist. This endpoint supports the following custom media types. For more information, see
+    /// "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)."
+    /// - **`application/vnd.github.raw+json`**: Returns the raw markdown. This is the default if you do not pass any
+    /// specific media type.
     ///
     /// - Parameters:
     /// - gistId: The unique identifier of the gist.
-    public static func gistsGet(config: ClientConfig, gistId: String, requestOptions: RequestOptions? = nil) async throws -> GistSimple {
-        return try (await sdkRequest("GET", ["/gists/", sdkEncodePathSegment(sdkWireString(gistId))].joined(), config: config, decoder: .json, operationId: "gistsGet", options: requestOptions, errors: ["403": ForbiddenGist.self, "404": BasicError.self])).data
+    static func gistsGet(
+        config: ClientConfig,
+        gistId: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> GistSimple {
+        try await (sdkRequest(
+            "GET",
+            ["/gists/", sdkEncodePathSegment(sdkWireString(gistId))].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "gistsGet",
+            options: requestOptions,
+            errors: ["403": ForbiddenGist.self, "404": BasicError.self]
+        )).data
     }
 }

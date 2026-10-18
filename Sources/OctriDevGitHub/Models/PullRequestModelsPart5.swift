@@ -3,18 +3,22 @@
 
 import Foundation
 
-// PullRequest domain models
-public struct PullRequestRequestedReviewersItem3Variant1Privacy: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+/// PullRequest domain models
+public struct PullRequestRequestedReviewersItem3Variant1Privacy: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let open = PullRequestRequestedReviewersItem3Variant1Privacy(rawValue: "open")
     public static let closed = PullRequestRequestedReviewersItem3Variant1Privacy(rawValue: "closed")
     public static let secret = PullRequestRequestedReviewersItem3Variant1Privacy(rawValue: "secret")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -23,17 +27,21 @@ public struct PullRequestRequestedReviewersItem3Variant1Privacy: RawRepresentabl
     }
 }
 
-public struct PullRequestRequestedReviewersItem2Variant1ParentPrivacy: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct PullRequestRequestedReviewersItem2Variant1ParentPrivacy: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let open = PullRequestRequestedReviewersItem2Variant1ParentPrivacy(rawValue: "open")
     public static let closed = PullRequestRequestedReviewersItem2Variant1ParentPrivacy(rawValue: "closed")
     public static let secret = PullRequestRequestedReviewersItem2Variant1ParentPrivacy(rawValue: "secret")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

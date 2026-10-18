@@ -6,7 +6,8 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testActionsGetActionsCacheStorageLimitForEnterpriseActionsGetActiX4671fae76dReachesMockAndDecodesResponse() async throws {
+    func testActionsGetActionsCacheStorageLimitForEnterpriseActionsGetActiX4671fae76dReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -17,8 +18,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.actions.getActionsCacheStorageLimitForEnterprise(
-            enterprise: decoded("\"enterprise\"")
-        )
+                enterprise: decoded("\"enterprise\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -34,7 +35,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsGetActionsCacheStorageLimitForOrganizationActionsGetAcXb987fcefacReachesMockAndDecodesResponse() async throws {
+    func testActionsGetActionsCacheStorageLimitForOrganizationActionsGetAcXb987fcefacReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -52,7 +54,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsGetActionsCacheStorageLimitForOrganizationActionsGetAcX2272b48b1eReachesMockAndDecodesResponse() async throws {
+    func testActionsGetActionsCacheStorageLimitForOrganizationActionsGetAcX2272b48b1eReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -63,8 +66,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.actions.getActionsCacheStorageLimitForOrganization(
-            org: decoded("\"org\"")
-        )
+                org: decoded("\"org\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -80,7 +83,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsGetActionsCacheStorageLimitForRepositoryActionsGetActiX986184af0bReachesMockAndDecodesResponse() async throws {
+    func testActionsGetActionsCacheStorageLimitForRepositoryActionsGetActiX986184af0bReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -99,7 +103,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsGetActionsCacheStorageLimitForRepositoryActionsGetActiX756f129175ReachesMockAndDecodesResponse() async throws {
+    func testActionsGetActionsCacheStorageLimitForRepositoryActionsGetActiX756f129175ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -110,9 +115,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.actions.getActionsCacheStorageLimitForRepository(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -147,7 +152,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsGetActionsCacheUsageByRepoForOrgActionsGetActionsCacheXb0536ecb8fReachesMockAndDecodesResponse() async throws {
+    func testActionsGetActionsCacheUsageByRepoForOrgActionsGetActionsCacheXb0536ecb8fReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -167,7 +173,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsGetActionsCacheUsageForOrgActionsGetActionsCacheUsageForOrgReachesMockAndDecodesResponse() async throws {
+    func testActionsGetActionsCacheUsageForOrgActionsGetActionsCacheUsageForOrgReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -185,7 +192,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsGetAllowedActionsOrganizationActionsGetAllowedActionsOrganizationReachesMockAndDecodesResponse() async throws {
+    func testActionsGetAllowedActionsOrganizationActionsGetAllowedActionsOrganizationReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -203,7 +211,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsGetAllowedActionsRepositoryActionsGetAllowedActionsRepositoryReachesMockAndDecodesResponse() async throws {
+    func testActionsGetAllowedActionsRepositoryActionsGetAllowedActionsRepositoryReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -242,7 +251,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsGetArtifactAndLogRetentionSettingsOrganizationActionsGXcf0b877511ReachesMockAndDecodesResponse() async throws {
+    func testActionsGetArtifactAndLogRetentionSettingsOrganizationActionsGXcf0b877511ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -260,7 +270,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsGetArtifactAndLogRetentionSettingsOrganizationActionsGXee48d3679aReachesMockAndDecodesResponse() async throws {
+    func testActionsGetArtifactAndLogRetentionSettingsOrganizationActionsGXee48d3679aReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -271,8 +282,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.actions.getArtifactAndLogRetentionSettingsOrganization(
-            org: decoded("\"org\"")
-        )
+                org: decoded("\"org\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -288,7 +299,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsGetArtifactAndLogRetentionSettingsRepositoryActionsGetXc557a9c3a2ReachesMockAndDecodesResponse() async throws {
+    func testActionsGetArtifactAndLogRetentionSettingsRepositoryActionsGetXc557a9c3a2ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -307,7 +319,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsGetArtifactAndLogRetentionSettingsRepositoryActionsGetXd9fa39a9e0ReachesMockAndDecodesResponse() async throws {
+    func testActionsGetArtifactAndLogRetentionSettingsRepositoryActionsGetXd9fa39a9e0ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -318,9 +331,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.actions.getArtifactAndLogRetentionSettingsRepository(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -336,7 +349,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsGetConcurrencyGroupForRepositoryActionsGetConcurrencyGX19ba5244c8ReachesMockAndDecodesResponse() async throws {
+    func testActionsGetConcurrencyGroupForRepositoryActionsGetConcurrencyGX19ba5244c8ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -358,7 +372,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsGetConcurrencyGroupForRepositoryActionsGetConcurrencyGXc3b04270cdReachesMockAndDecodesResponse() async throws {
+    func testActionsGetConcurrencyGroupForRepositoryActionsGetConcurrencyGXc3b04270cdReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -369,12 +384,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.actions.getConcurrencyGroupForRepository(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            concurrencyGroupName: decoded("\"Example Name\""),
-            aheadOfRun: decoded("1"),
-            aheadOfJob: decoded("1")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                concurrencyGroupName: decoded("\"Example Name\""),
+                aheadOfRun: decoded("1"),
+                aheadOfJob: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -409,17 +424,18 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsGetCustomImageVersionForOrgActionsGetCustomImageVersionForOrgReachesMockAndDecodesResponse() async throws {
+    func testActionsGetCustomImageVersionForOrgActionsGetCustomImageVersionForOrgReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
         do {
             _ = try await client.actions.getCustomImageVersionForOrg(
-            org: decoded("\"org\""),
-            imageDefinitionId: decoded("30"),
-            version: decoded("\"0.0.0\"")
-        )
+                org: decoded("\"org\""),
+                imageDefinitionId: decoded("30"),
+                version: decoded("\"0.0.0\"")
+            )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -428,7 +444,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsGetCustomOidcSubClaimForRepoActionsGetCustomOidcSubClaimForRepoReachesMockAndDecodesResponse() async throws {
+    func testActionsGetCustomOidcSubClaimForRepoActionsGetCustomOidcSubClaimForRepoReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -447,7 +464,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsGetCustomOidcSubClaimForRepoActionsGetCustomOidcSubClaX686bbba85aReachesMockAndDecodesResponse() async throws {
+    func testActionsGetCustomOidcSubClaimForRepoActionsGetCustomOidcSubClaX686bbba85aReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
             return
         }
@@ -458,9 +476,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.actions.getCustomOidcSubClaimForRepo(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)

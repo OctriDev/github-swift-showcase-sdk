@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension LicensesMethods {
-    /// Lists commonly used licenses available on GitHub. Use `featured` to filter the results to featured licenses, and use `page` and `per_page` to paginate the results.
+public extension LicensesMethods {
+    /// Lists commonly used licenses available on GitHub. Use `featured` to filter the results to featured licenses, and
+    /// use `page` and `per_page` to paginate the results.
     ///
     /// Lists the most commonly used licenses on GitHub. For more information, see "[Licensing a repository ](https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository)."
     ///
@@ -20,18 +21,37 @@ extension LicensesMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func licensesGetAllCommonlyUsed(config: ClientConfig, featured: Bool? = nil, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [LicenseSimple] {
-        return try (await sdkRequest("GET", "/licenses", config: config, query: [
+    static func licensesGetAllCommonlyUsed(
+        config: ClientConfig,
+        featured: Bool? = nil,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [LicenseSimple] {
+        try await (sdkRequest("GET", "/licenses", config: config, query: [
             SdkQueryParameter("featured", value: featured),
             SdkQueryParameter("per_page", value: perPage),
             SdkQueryParameter("page", value: page),
         ], decoder: .json, operationId: "licensesGetAllCommonlyUsed", options: requestOptions)).data
     }
 
-    /// Retrieves information about a specific license. Use `license` to identify the license whose details you need, including its permissions, conditions, limitations, and license text.
+    /// Retrieves information about a specific license. Use `license` to identify the license whose details you need,
+    /// including its permissions, conditions, limitations, and license text.
     ///
     /// Gets information about a specific license. For more information, see "[Licensing a repository ](https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository)."
-    public static func licensesGet(config: ClientConfig, license: String, requestOptions: RequestOptions? = nil) async throws -> License {
-        return try (await sdkRequest("GET", ["/licenses/", sdkEncodePathSegment(sdkWireString(license))].joined(), config: config, decoder: .json, operationId: "licensesGet", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+    static func licensesGet(
+        config: ClientConfig,
+        license: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> License {
+        try await (sdkRequest(
+            "GET",
+            ["/licenses/", sdkEncodePathSegment(sdkWireString(license))].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "licensesGet",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 }

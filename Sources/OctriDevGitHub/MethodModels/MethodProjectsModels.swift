@@ -7,29 +7,39 @@ import Foundation
     import FoundationNetworking
 #endif
 
-// Canonical projects operation model declarations
+/// Canonical projects operation model declarations
 public indirect enum ProjectsCreateViewForOrgRequestBodySortByItemItem {
     case intValue(Int)
     case stringValue(String)
 }
 
 extension ProjectsCreateViewForOrgRequestBodySortByItemItem: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ProjectsCreateViewForOrgRequestBodySortByItemItem")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for ProjectsCreateViewForOrgRequestBodySortByItemItem"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension ProjectsCreateViewForOrgRequestBodySortByItemItem {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(Int.self) { return .intValue(value) }
-        if let value = try? container.decode(String.self) { return .stringValue(value) }
+        if let value = try? container.decode(Int.self) {
+            return .intValue(value)
+        }
+        if let value = try? container.decode(String.self) {
+            return .stringValue(value)
+        }
         return nil
     }
 }
@@ -59,22 +69,32 @@ public indirect enum ProjectsListViewItemsForOrgParameter {
 }
 
 extension ProjectsListViewItemsForOrgParameter: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ProjectsListViewItemsForOrgParameter")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for ProjectsListViewItemsForOrgParameter"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension ProjectsListViewItemsForOrgParameter {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) { return .stringValue(value) }
-        if let value = try? container.decode([String].self) { return .stringList(value) }
+        if let value = try? container.decode(String.self) {
+            return .stringValue(value)
+        }
+        if let value = try? container.decode([String].self) {
+            return .stringList(value)
+        }
         return nil
     }
 }
@@ -96,30 +116,47 @@ public indirect enum ProjectsAddFieldForUserRequestBody {
 }
 
 extension ProjectsAddFieldForUserRequestBody: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let raw = try? container.decode(JSONValue.self) {
-            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
+            if let value = Self.decodeLossless1(from: container, raw) {
+                self = value; return
+            }
         }
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ProjectsAddFieldForUserRequestBody")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for ProjectsAddFieldForUserRequestBody"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension ProjectsAddFieldForUserRequestBody {
     static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
-        if let value = try? container.decode(ProjectsAddFieldForUserRequestBodyVariant0.self), sdkKeepsEveryKey(value, of: raw) {
+        if let value = try? container.decode(ProjectsAddFieldForUserRequestBodyVariant0.self), sdkKeepsEveryKey(
+            value,
+            of: raw
+        ) {
             return .projectsAddFieldForUserRequestBodyVariant0(value)
         }
-        if let value = try? container.decode(ProjectsAddFieldForUserRequestBodyVariant1.self), sdkKeepsEveryKey(value, of: raw) {
+        if let value = try? container.decode(ProjectsAddFieldForUserRequestBodyVariant1.self), sdkKeepsEveryKey(
+            value,
+            of: raw
+        ) {
             return .projectsAddFieldForUserRequestBodyVariant1(value)
         }
-        if let value = try? container.decode(ProjectsAddFieldForUserRequestBodyVariant2.self), sdkKeepsEveryKey(value, of: raw) {
+        if let value = try? container.decode(ProjectsAddFieldForUserRequestBodyVariant2.self), sdkKeepsEveryKey(
+            value,
+            of: raw
+        ) {
             return .projectsAddFieldForUserRequestBodyVariant2(value)
         }
         return nil
@@ -131,17 +168,17 @@ extension ProjectsAddFieldForUserRequestBody {
         if let value = try? container.decode(
             ProjectsAddFieldForUserRequestBodyVariant0.self
         ) {
-            return             .projectsAddFieldForUserRequestBodyVariant0(value)
+            return .projectsAddFieldForUserRequestBodyVariant0(value)
         }
         if let value = try? container.decode(
             ProjectsAddFieldForUserRequestBodyVariant1.self
         ) {
-            return             .projectsAddFieldForUserRequestBodyVariant1(value)
+            return .projectsAddFieldForUserRequestBodyVariant1(value)
         }
         if let value = try? container.decode(
             ProjectsAddFieldForUserRequestBodyVariant2.self
         ) {
-            return             .projectsAddFieldForUserRequestBodyVariant2(value)
+            return .projectsAddFieldForUserRequestBodyVariant2(value)
         }
         return nil
     }
@@ -169,25 +206,35 @@ public struct ProjectsAddFieldForUserRequestBodyVariant0: Codable {
         case dataType = "data_type"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ProjectsAddFieldForUserRequestBodyVariant0 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        guard container.contains(.dataType) else {
-            throw SdkValidationError(field: "data_type", code: "required", message: "Validation failed for 'data_type': value is required")
-        }
-        self.name = try container.sdkDecodeRequired(.name)
-        self.dataType = try container.sdkDecodeRequired(.dataType)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ProjectsAddFieldForUserRequestBodyVariant0 {
-    public init(name: String, dataType: ProjectsAddFieldForUserRequestBodyVariant0DataType) {
+public extension ProjectsAddFieldForUserRequestBodyVariant0 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        guard container.contains(.dataType) else {
+            throw SdkValidationError(
+                field: "data_type",
+                code: "required",
+                message: "Validation failed for 'data_type': value is required"
+            )
+        }
+        name = try container.sdkDecodeRequired(.name)
+        dataType = try container.sdkDecodeRequired(.dataType)
+    }
+}
+
+public extension ProjectsAddFieldForUserRequestBodyVariant0 {
+    init(name: String, dataType: ProjectsAddFieldForUserRequestBodyVariant0DataType) {
         (self.name, self.dataType) = (name, dataType)
     }
 }
@@ -198,22 +245,32 @@ public indirect enum ProjectsListItemsForOrgParameter {
 }
 
 extension ProjectsListItemsForOrgParameter: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ProjectsListItemsForOrgParameter")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for ProjectsListItemsForOrgParameter"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension ProjectsListItemsForOrgParameter {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) { return .stringValue(value) }
-        if let value = try? container.decode([String].self) { return .stringList(value) }
+        if let value = try? container.decode(String.self) {
+            return .stringValue(value)
+        }
+        if let value = try? container.decode([String].self) {
+            return .stringList(value)
+        }
         return nil
     }
 }
@@ -234,22 +291,32 @@ public indirect enum ProjectsListViewItemsForUserParameter {
 }
 
 extension ProjectsListViewItemsForUserParameter: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ProjectsListViewItemsForUserParameter")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for ProjectsListViewItemsForUserParameter"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension ProjectsListViewItemsForUserParameter {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) { return .stringValue(value) }
-        if let value = try? container.decode([String].self) { return .stringList(value) }
+        if let value = try? container.decode(String.self) {
+            return .stringValue(value)
+        }
+        if let value = try? container.decode([String].self) {
+            return .stringList(value)
+        }
         return nil
     }
 }
@@ -277,25 +344,35 @@ public struct ProjectsUpdateItemForUserRequestBodyFieldsItem: Codable {
         case value
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ProjectsUpdateItemForUserRequestBodyFieldsItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.value) else {
-            throw SdkValidationError(field: "value", code: "required", message: "Validation failed for 'value': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.value = try container.sdkDecodeNullable(.value)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ProjectsUpdateItemForUserRequestBodyFieldsItem {
-    public init(id: Int, value: ProjectsUpdateItemForUserRequestBodyFieldsItemValue?) {
+public extension ProjectsUpdateItemForUserRequestBodyFieldsItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.value) else {
+            throw SdkValidationError(
+                field: "value",
+                code: "required",
+                message: "Validation failed for 'value': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        value = try container.sdkDecodeNullable(.value)
+    }
+}
+
+public extension ProjectsUpdateItemForUserRequestBodyFieldsItem {
+    init(id: Int, value: ProjectsUpdateItemForUserRequestBodyFieldsItemValue?) {
         (self.id, self.value) = (id, value)
     }
 }
@@ -306,22 +383,32 @@ public indirect enum ProjectsUpdateItemForOrgRequestBodyFieldsItemValue {
 }
 
 extension ProjectsUpdateItemForOrgRequestBodyFieldsItemValue: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ProjectsUpdateItemForOrgRequestBodyFieldsItemValue")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for ProjectsUpdateItemForOrgRequestBodyFieldsItemValue"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension ProjectsUpdateItemForOrgRequestBodyFieldsItemValue {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) { return .stringValue(value) }
-        if let value = try? container.decode(Double.self) { return .doubleValue(value) }
+        if let value = try? container.decode(String.self) {
+            return .stringValue(value)
+        }
+        if let value = try? container.decode(Double.self) {
+            return .doubleValue(value)
+        }
         return nil
     }
 }
@@ -351,22 +438,32 @@ public indirect enum ProjectsGetOrgItemParameter {
 }
 
 extension ProjectsGetOrgItemParameter: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ProjectsGetOrgItemParameter")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for ProjectsGetOrgItemParameter"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension ProjectsGetOrgItemParameter {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) { return .stringValue(value) }
-        if let value = try? container.decode([String].self) { return .stringList(value) }
+        if let value = try? container.decode(String.self) {
+            return .stringValue(value)
+        }
+        if let value = try? container.decode([String].self) {
+            return .stringList(value)
+        }
         return nil
     }
 }
@@ -389,33 +486,53 @@ public indirect enum ProjectsAddFieldForOrgRequestBody {
 }
 
 extension ProjectsAddFieldForOrgRequestBody: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let raw = try? container.decode(JSONValue.self) {
-            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
+            if let value = Self.decodeLossless1(from: container, raw) {
+                self = value; return
+            }
         }
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ProjectsAddFieldForOrgRequestBody")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for ProjectsAddFieldForOrgRequestBody"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension ProjectsAddFieldForOrgRequestBody {
     static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
-        if let value = try? container.decode(ProjectsAddFieldForOrgRequestBodyVariant0.self), sdkKeepsEveryKey(value, of: raw) {
+        if let value = try? container.decode(ProjectsAddFieldForOrgRequestBodyVariant0.self), sdkKeepsEveryKey(
+            value,
+            of: raw
+        ) {
             return .projectsAddFieldForOrgRequestBodyVariant0(value)
         }
-        if let value = try? container.decode(ProjectsAddFieldForOrgRequestBodyVariant1.self), sdkKeepsEveryKey(value, of: raw) {
+        if let value = try? container.decode(ProjectsAddFieldForOrgRequestBodyVariant1.self), sdkKeepsEveryKey(
+            value,
+            of: raw
+        ) {
             return .projectsAddFieldForOrgRequestBodyVariant1(value)
         }
-        if let value = try? container.decode(ProjectsAddFieldForOrgRequestBodyVariant2.self), sdkKeepsEveryKey(value, of: raw) {
+        if let value = try? container.decode(ProjectsAddFieldForOrgRequestBodyVariant2.self), sdkKeepsEveryKey(
+            value,
+            of: raw
+        ) {
             return .projectsAddFieldForOrgRequestBodyVariant2(value)
         }
-        if let value = try? container.decode(ProjectsAddFieldForOrgRequestBodyVariant3.self), sdkKeepsEveryKey(value, of: raw) {
+        if let value = try? container.decode(ProjectsAddFieldForOrgRequestBodyVariant3.self), sdkKeepsEveryKey(
+            value,
+            of: raw
+        ) {
             return .projectsAddFieldForOrgRequestBodyVariant3(value)
         }
         return nil
@@ -427,22 +544,22 @@ extension ProjectsAddFieldForOrgRequestBody {
         if let value = try? container.decode(
             ProjectsAddFieldForOrgRequestBodyVariant0.self
         ) {
-            return             .projectsAddFieldForOrgRequestBodyVariant0(value)
+            return .projectsAddFieldForOrgRequestBodyVariant0(value)
         }
         if let value = try? container.decode(
             ProjectsAddFieldForOrgRequestBodyVariant1.self
         ) {
-            return             .projectsAddFieldForOrgRequestBodyVariant1(value)
+            return .projectsAddFieldForOrgRequestBodyVariant1(value)
         }
         if let value = try? container.decode(
             ProjectsAddFieldForOrgRequestBodyVariant2.self
         ) {
-            return             .projectsAddFieldForOrgRequestBodyVariant2(value)
+            return .projectsAddFieldForOrgRequestBodyVariant2(value)
         }
         if let value = try? container.decode(
             ProjectsAddFieldForOrgRequestBodyVariant3.self
         ) {
-            return             .projectsAddFieldForOrgRequestBodyVariant3(value)
+            return .projectsAddFieldForOrgRequestBodyVariant3(value)
         }
         return nil
     }
@@ -475,5 +592,7 @@ public struct ProjectsAddFieldForUserRequestBodyVariant1: Codable {
         case singleSelectOptions = "single_select_options"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }

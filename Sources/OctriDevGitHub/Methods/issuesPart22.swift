@@ -6,10 +6,23 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension IssuesMethods {
-    /// Adds a “blocked by” dependency between an issue and another issue in a repository. Provide the blocking issue's ID in `issue_id`; creating content too quickly may result in secondary rate limiting.
+public extension IssuesMethods {
+    /// Adds a “blocked by” dependency between an issue and another issue in a repository. Provide the blocking issue's
+    /// ID in `issue_id`; creating content too quickly may result in secondary rate limiting.
     ///
-    /// You can use the REST API to add a 'blocked by' relationship to an issue. Creating content too quickly using this endpoint may result in secondary rate limiting. For more information, see [Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits) and [Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api). This endpoint supports the following custom media types. For more information, see [Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types). - **`application/vnd.github.raw+json`**: Returns the raw Markdown body. Response will include `body`. This is the default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text only representation of the Markdown body. Response will include `body_text`. - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's Markdown. Response will include `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    /// You can use the REST API to add a 'blocked by' relationship to an issue. Creating content too quickly using this
+    /// endpoint may result in secondary rate limiting. For more information, see [Rate limits for the
+    /// API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)
+    /// and [Best practices for using the REST
+    /// API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api). This endpoint supports the
+    /// following custom media types. For more information, see [Media
+    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types). -
+    /// **`application/vnd.github.raw+json`**: Returns the raw Markdown body. Response will include `body`. This is the
+    /// default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text
+    /// only representation of the Markdown body. Response will include `body_text`. -
+    /// **`application/vnd.github.html+json`**: Returns HTML rendered from the body's Markdown. Response will include
+    /// `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response
+    /// will include `body`, `body_text`, and `body_html`.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -18,9 +31,39 @@ extension IssuesMethods {
     ///   not case sensitive.
     /// - issueNumber: The number that identifies the issue.
     /// - issueId: The id of the issue that blocks the current issue
-    public static func issuesAddBlockedByDependency(config: ClientConfig, owner: String, repo: String, issueNumber: Int, issueId: Int, requestOptions: RequestOptions? = nil) async throws -> Issue {
+    static func issuesAddBlockedByDependency(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        issueNumber: Int,
+        issueId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Issue {
         let requestBody = IssuesAddBlockedByDependencyRequestBody(issueId: issueId)
 
-        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/issues/", sdkEncodePathSegment(sdkWireString(issueNumber)), "/dependencies/blocked_by"].joined(), config: config, body: requestBody, decoder: .json, operationId: "issuesAddBlockedByDependency", options: requestOptions, errors: ["301": BasicError.self, "403": BasicError.self, "404": BasicError.self, "410": BasicError.self, "422": ValidationError.self])).data
+        return try await (sdkRequest(
+            "POST",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/issues/",
+                sdkEncodePathSegment(sdkWireString(issueNumber)),
+                "/dependencies/blocked_by",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "issuesAddBlockedByDependency",
+            options: requestOptions,
+            errors: [
+                "301": BasicError.self,
+                "403": BasicError.self,
+                "404": BasicError.self,
+                "410": BasicError.self,
+                "422": ValidationError.self,
+            ]
+        )).data
     }
 }

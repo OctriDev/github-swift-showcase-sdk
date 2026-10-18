@@ -6,28 +6,72 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension UsersMethods {
-    /// Verifies whether the authenticated user follows a specified GitHub user account. Use `username` to identify the account whose follow status you want to check; the response distinguishes followed from not followed.
+public extension UsersMethods {
+    /// Verifies whether the authenticated user follows a specified GitHub user account. Use `username` to identify the
+    /// account whose follow status you want to check; the response distinguishes followed from not followed.
     ///
     /// - Parameters:
     /// - username: The handle for the GitHub user account.
-    public static func usersCheckPersonIsFollowedByAuthenticated(config: ClientConfig, username: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("GET", ["/user/following/", sdkEncodePathSegment(sdkWireString(username))].joined(), config: config, decoder: .empty, operationId: "usersCheckPersonIsFollowedByAuthenticated", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
+    static func usersCheckPersonIsFollowedByAuthenticated(
+        config: ClientConfig,
+        username: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "GET",
+            ["/user/following/", sdkEncodePathSegment(sdkWireString(username))].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "usersCheckPersonIsFollowedByAuthenticated",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 
-    /// Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/guides/getting-started-with-the-rest-api#http-method)." OAuth app tokens and personal access tokens (classic) need the `user:follow` scope to use this endpoint.
+    /// Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information,
+    /// see "[HTTP verbs](https://docs.github.com/rest/guides/getting-started-with-the-rest-api#http-method)." OAuth app
+    /// tokens and personal access tokens (classic) need the `user:follow` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - username: The handle for the GitHub user account.
-    public static func usersFollow(config: ClientConfig, username: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("PUT", ["/user/following/", sdkEncodePathSegment(sdkWireString(username))].joined(), config: config, decoder: .empty, operationId: "usersFollow", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
+    static func usersFollow(
+        config: ClientConfig,
+        username: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "PUT",
+            ["/user/following/", sdkEncodePathSegment(sdkWireString(username))].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "usersFollow",
+            options: requestOptions,
+            errors: [
+                "401": BasicError.self,
+                "403": BasicError.self,
+                "404": BasicError.self,
+                "422": ValidationError.self,
+            ]
+        )).data
     }
 
     /// OAuth app tokens and personal access tokens (classic) need the `user:follow` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - username: The handle for the GitHub user account.
-    public static func usersUnfollow(config: ClientConfig, username: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/user/following/", sdkEncodePathSegment(sdkWireString(username))].joined(), config: config, decoder: .empty, operationId: "usersUnfollow", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
+    static func usersUnfollow(
+        config: ClientConfig,
+        username: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            ["/user/following/", sdkEncodePathSegment(sdkWireString(username))].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "usersUnfollow",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 }

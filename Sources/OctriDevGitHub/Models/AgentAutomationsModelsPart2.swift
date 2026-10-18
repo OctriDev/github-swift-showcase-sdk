@@ -3,7 +3,7 @@
 
 import Foundation
 
-// AgentAutomations domain models
+/// AgentAutomations domain models
 public enum AgentAutomationsListAvailableAutomationTriggersResponseItemFiX453baec979: String, CaseIterable, Codable {
     case integer
     public init(from decoder: Decoder) throws {

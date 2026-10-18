@@ -3,46 +3,171 @@
 
 import Foundation
 
-extension ActionsNamespace {
-/// Removes a repository from an organization secret's selected repository list. Use this operation when the secret's `visibility` is set to `selected`; the authenticated user must have collaborator access to the repository. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope, plus the `repo` scope for private repositories.
+public extension ActionsNamespace {
+    /// Removes a repository from an organization secret's selected repository list. Use this operation when the
+    /// secret's `visibility` is set to `selected`; the authenticated user must have collaborator access to the
+    /// repository. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope, plus the `repo`
+    /// scope for private repositories.
     ///
-    /// Removes a repository from an organization secret when the `visibility` for repository access is set to `selected`. The visibility is set when you [Create or update an organization secret](https://docs.github.com/rest/actions/secrets#create-or-update-an-organization-secret). Authenticated users must have collaborator access to a repository to create, update, or read secrets. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint. If the repository is private, the `repo` scope is also required.
-    public func removeSelectedRepoFromOrgSecret(org: String, secretName: String, repositoryId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await ActionsMethods.actionsRemoveSelectedRepoFromOrgSecret(config: config, org: org, secretName: secretName, repositoryId: repositoryId, requestOptions: requestOptions)
+    /// Removes a repository from an organization secret when the `visibility` for repository access is set to
+    /// `selected`. The visibility is set when you [Create or update an organization
+    /// secret](https://docs.github.com/rest/actions/secrets#create-or-update-an-organization-secret). Authenticated
+    /// users must have collaborator access to a repository to create, update, or read secrets. OAuth app tokens and
+    /// personal access tokens (classic) need the `admin:org` scope to use this endpoint. If the repository is private,
+    /// the `repo` scope is also required.
+    func removeSelectedRepoFromOrgSecret(
+        org: String,
+        secretName: String,
+        repositoryId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await ActionsMethods.actionsRemoveSelectedRepoFromOrgSecret(
+            config: config,
+            org: org,
+            secretName: secretName,
+            repositoryId: repositoryId,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists all organization variables. Authenticated users must have collaborator access to a repository to create, update, or read variables. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint. If the repository is private, the `repo` scope is also required.
-    public func listOrgVariables(org: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> ActionsListOrgVariablesResponse {
-        return try await ActionsMethods.actionsListOrgVariables(config: config, org: org, perPage: perPage, page: page, requestOptions: requestOptions)
+    /// Lists all organization variables. Authenticated users must have collaborator access to a repository to create,
+    /// update, or read variables. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to
+    /// use this endpoint. If the repository is private, the `repo` scope is also required.
+    func listOrgVariables(
+        org: String,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ActionsListOrgVariablesResponse {
+        try await ActionsMethods.actionsListOrgVariables(
+            config: config,
+            org: org,
+            perPage: perPage,
+            page: page,
+            requestOptions: requestOptions
+        )
     }
 
-/// Creates an organization variable that you can reference in a GitHub Actions workflow. Authenticated users must have collaborator access to a repository to create, update, or read variables. OAuth tokens and personal access tokens (classic) need the`admin:org` scope to use this endpoint. If the repository is private, OAuth tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
-    public func createOrgVariable(org: String, name: String, value: String, visibility: ActionsCreateOrgVariableRequestBodyVisibility, selectedRepositoryIds: [Int]? = nil, requestOptions: RequestOptions? = nil) async throws -> EmptyObject {
-        return try await ActionsMethods.actionsCreateOrgVariable(config: config, org: org, name: name, value: value, visibility: visibility, selectedRepositoryIds: selectedRepositoryIds, requestOptions: requestOptions)
+    /// Creates an organization variable that you can reference in a GitHub Actions workflow. Authenticated users must
+    /// have collaborator access to a repository to create, update, or read variables. OAuth tokens and personal access
+    /// tokens (classic) need the`admin:org` scope to use this endpoint. If the repository is private, OAuth tokens and
+    /// personal access tokens (classic) need the `repo` scope to use this endpoint.
+    func createOrgVariable(
+        org: String,
+        name: String,
+        value: String,
+        visibility: ActionsCreateOrgVariableRequestBodyVisibility,
+        selectedRepositoryIds: [Int]? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> EmptyObject {
+        try await ActionsMethods.actionsCreateOrgVariable(
+            config: config,
+            org: org,
+            name: name,
+            value: value,
+            visibility: visibility,
+            selectedRepositoryIds: selectedRepositoryIds,
+            requestOptions: requestOptions
+        )
     }
 
-/// Gets a specific variable in an organization. The authenticated user must have collaborator access to a repository to create, update, or read variables. OAuth tokens and personal access tokens (classic) need the`admin:org` scope to use this endpoint. If the repository is private, OAuth tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
-    public func getOrgVariable(org: String, name: String, requestOptions: RequestOptions? = nil) async throws -> OrganizationActionsVariable {
-        return try await ActionsMethods.actionsGetOrgVariable(config: config, org: org, name: name, requestOptions: requestOptions)
+    /// Gets a specific variable in an organization. The authenticated user must have collaborator access to a
+    /// repository to create, update, or read variables. OAuth tokens and personal access tokens (classic) need
+    /// the`admin:org` scope to use this endpoint. If the repository is private, OAuth tokens and personal access tokens
+    /// (classic) need the `repo` scope to use this endpoint.
+    func getOrgVariable(
+        org: String,
+        name: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> OrganizationActionsVariable {
+        try await ActionsMethods.actionsGetOrgVariable(
+            config: config,
+            org: org,
+            name: name,
+            requestOptions: requestOptions
+        )
     }
 
-/// Updates an organization variable that you can reference in a GitHub Actions workflow. Authenticated users must have collaborator access to a repository to create, update, or read variables. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint. If the repository is private, the `repo` scope is also required.
-    public func updateOrgVariable(org: String, name: String, name2: String? = nil, value: String? = nil, visibility: ActionsUpdateOrgVariableRequestBodyVisibility? = nil, selectedRepositoryIds: [Int]? = nil, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await ActionsMethods.actionsUpdateOrgVariable(config: config, org: org, name: name, name2: name2, value: value, visibility: visibility, selectedRepositoryIds: selectedRepositoryIds, requestOptions: requestOptions)
+    /// Updates an organization variable that you can reference in a GitHub Actions workflow. Authenticated users must
+    /// have collaborator access to a repository to create, update, or read variables. OAuth app tokens and personal
+    /// access tokens (classic) need the `admin:org` scope to use this endpoint. If the repository is private, the
+    /// `repo` scope is also required.
+    func updateOrgVariable(
+        org: String,
+        name: String,
+        name2: String? = nil,
+        value: String? = nil,
+        visibility: ActionsUpdateOrgVariableRequestBodyVisibility? = nil,
+        selectedRepositoryIds: [Int]? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await ActionsMethods.actionsUpdateOrgVariable(
+            config: config,
+            org: org,
+            name: name,
+            name2: name2,
+            value: value,
+            visibility: visibility,
+            selectedRepositoryIds: selectedRepositoryIds,
+            requestOptions: requestOptions
+        )
     }
 
-/// Deletes an organization variable using the variable name. Authenticated users must have collaborator access to a repository to create, update, or read variables. OAuth tokens and personal access tokens (classic) need the`admin:org` scope to use this endpoint. If the repository is private, OAuth tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
-    public func deleteOrgVariable(org: String, name: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await ActionsMethods.actionsDeleteOrgVariable(config: config, org: org, name: name, requestOptions: requestOptions)
+    /// Deletes an organization variable using the variable name. Authenticated users must have collaborator access to a
+    /// repository to create, update, or read variables. OAuth tokens and personal access tokens (classic) need
+    /// the`admin:org` scope to use this endpoint. If the repository is private, OAuth tokens and personal access tokens
+    /// (classic) need the `repo` scope to use this endpoint.
+    func deleteOrgVariable(
+        org: String,
+        name: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await ActionsMethods.actionsDeleteOrgVariable(
+            config: config,
+            org: org,
+            name: name,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists all repositories that can access an organization variable that is available to selected repositories. Authenticated users must have collaborator access to a repository to create, update, or read variables. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint. If the repository is private, the `repo` scope is also required.
-    public func listSelectedReposForOrgVariable(org: String, name: String, page: Int? = nil, perPage: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> ActionsListSelectedReposForOrgVariableResponse {
-        return try await ActionsMethods.actionsListSelectedReposForOrgVariable(config: config, org: org, name: name, page: page, perPage: perPage, requestOptions: requestOptions)
+    /// Lists all repositories that can access an organization variable that is available to selected repositories.
+    /// Authenticated users must have collaborator access to a repository to create, update, or read variables. OAuth
+    /// app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint. If the
+    /// repository is private, the `repo` scope is also required.
+    func listSelectedReposForOrgVariable(
+        org: String,
+        name: String,
+        page: Int? = nil,
+        perPage: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ActionsListSelectedReposForOrgVariableResponse {
+        try await ActionsMethods.actionsListSelectedReposForOrgVariable(
+            config: config,
+            org: org,
+            name: name,
+            page: page,
+            perPage: perPage,
+            requestOptions: requestOptions
+        )
     }
 
-/// Replaces all repositories for an organization variable that is available to selected repositories. Organization variables that are available to selected repositories have their `visibility` field set to `selected`. Authenticated users must have collaborator access to a repository to create, update, or read variables. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint. If the repository is private, the `repo` scope is also required.
-    public func setSelectedReposForOrgVariable(org: String, name: String, selectedRepositoryIds: [Int], requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await ActionsMethods.actionsSetSelectedReposForOrgVariable(config: config, org: org, name: name, selectedRepositoryIds: selectedRepositoryIds, requestOptions: requestOptions)
+    /// Replaces all repositories for an organization variable that is available to selected repositories. Organization
+    /// variables that are available to selected repositories have their `visibility` field set to `selected`.
+    /// Authenticated users must have collaborator access to a repository to create, update, or read variables. OAuth
+    /// app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint. If the
+    /// repository is private, the `repo` scope is also required.
+    func setSelectedReposForOrgVariable(
+        org: String,
+        name: String,
+        selectedRepositoryIds: [Int],
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await ActionsMethods.actionsSetSelectedReposForOrgVariable(
+            config: config,
+            org: org,
+            name: name,
+            selectedRepositoryIds: selectedRepositoryIds,
+            requestOptions: requestOptions
+        )
     }
 }

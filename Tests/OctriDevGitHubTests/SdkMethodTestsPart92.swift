@@ -6,7 +6,8 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testUsersGetPublicSshKeyForAuthenticatedUserUsersGetPublicSshKeyFXa894b92cedReachesMockAndDecodesResponse() async throws {
+    func testUsersGetPublicSshKeyForAuthenticatedUserUsersGetPublicSshKeyFXa894b92cedReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -17,8 +18,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.users.getPublicSshKeyForAuthenticatedUser(
-            keyId: decoded("1")
-        )
+                keyId: decoded("1")
+            )
             XCTFail("usersGetPublicSshKeyForAuthenticatedUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -35,7 +36,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testUsersGetSshSigningKeyForAuthenticatedUserUsersGetSshSigningKeXfc995d9fa6ReachesMockAndDecodesResponse() async throws {
+    func testUsersGetSshSigningKeyForAuthenticatedUserUsersGetSshSigningKeXfc995d9fa6ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -54,7 +56,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testUsersGetSshSigningKeyForAuthenticatedUserUsersGetSshSigningKeX2e6461c434ReachesMockAndDecodesResponse() async throws {
+    func testUsersGetSshSigningKeyForAuthenticatedUserUsersGetSshSigningKeX2e6461c434ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -65,8 +68,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.users.getSshSigningKeyForAuthenticatedUser(
-            sshSigningKeyId: decoded("1")
-        )
+                sshSigningKeyId: decoded("1")
+            )
             XCTFail("usersGetSshSigningKeyForAuthenticatedUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -138,13 +141,13 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.users.listAttestations(
-            username: decoded("\"Example Name\""),
-            subjectDigest: decoded("\"subject_digest\""),
-            perPage: decoded("30"),
-            before: decoded("\"before\""),
-            after: decoded("\"after\""),
-            predicateType: decoded("\"predicate_type\"")
-        )
+                username: decoded("\"Example Name\""),
+                subjectDigest: decoded("\"subject_digest\""),
+                perPage: decoded("30"),
+                before: decoded("\"before\""),
+                after: decoded("\"after\""),
+                predicateType: decoded("\"predicate_type\"")
+            )
             XCTFail("usersListAttestations did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -185,7 +188,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testUsersListBlockedByAuthenticatedUserUsersListBlockedByAuthenticatedUserReachesMockAndDecodesResponse() async throws {
+    func testUsersListBlockedByAuthenticatedUserUsersListBlockedByAuthenticatedUserReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -205,7 +209,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testUsersListBlockedByAuthenticatedUserUsersListBlockedByAuthentiX5087a0d95bReachesMockAndDecodesResponse() async throws {
+    func testUsersListBlockedByAuthenticatedUserUsersListBlockedByAuthentiX5087a0d95bReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -216,9 +221,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.users.listBlockedByAuthenticatedUser(
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("usersListBlockedByAuthenticatedUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -235,7 +240,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testUsersListEmailsForAuthenticatedUserUsersListEmailsForAuthenticatedUserReachesMockAndDecodesResponse() async throws {
+    func testUsersListEmailsForAuthenticatedUserUsersListEmailsForAuthenticatedUserReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -255,7 +261,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testUsersListEmailsForAuthenticatedUserUsersListEmailsForAuthentiX2440859d24ReachesMockAndDecodesResponse() async throws {
+    func testUsersListEmailsForAuthenticatedUserUsersListEmailsForAuthentiX2440859d24ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -266,9 +273,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.users.listEmailsForAuthenticatedUser(
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("usersListEmailsForAuthenticatedUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -285,7 +292,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testUsersListFollowedByAuthenticatedUserUsersListFollowedByAuthenticatedUserReachesMockAndDecodesResponse() async throws {
+    func testUsersListFollowedByAuthenticatedUserUsersListFollowedByAuthenticatedUserReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -305,7 +313,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testUsersListFollowedByAuthenticatedUserUsersListFollowedByAuthenXd497759f29ReachesMockAndDecodesResponse() async throws {
+    func testUsersListFollowedByAuthenticatedUserUsersListFollowedByAuthenXd497759f29ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -316,9 +325,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.users.listFollowedByAuthenticatedUser(
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("usersListFollowedByAuthenticatedUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -335,7 +344,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testUsersListFollowersForAuthenticatedUserUsersListFollowersForAuXa4ca047ad9ReachesMockAndDecodesResponse() async throws {
+    func testUsersListFollowersForAuthenticatedUserUsersListFollowersForAuXa4ca047ad9ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -355,7 +365,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testUsersListFollowersForAuthenticatedUserUsersListFollowersForAuXb8319b1c91ReachesMockAndDecodesResponse() async throws {
+    func testUsersListFollowersForAuthenticatedUserUsersListFollowersForAuXb8319b1c91ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -366,9 +377,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.users.listFollowersForAuthenticatedUser(
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("usersListFollowersForAuthenticatedUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -427,7 +438,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testUsersListGpgKeysForAuthenticatedUserUsersListGpgKeysForAuthenticatedUserReachesMockAndDecodesResponse() async throws {
+    func testUsersListGpgKeysForAuthenticatedUserUsersListGpgKeysForAuthenticatedUserReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -447,7 +459,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testUsersListGpgKeysForAuthenticatedUserUsersListGpgKeysForAuthenXe261a7ad2eReachesMockAndDecodesResponse() async throws {
+    func testUsersListGpgKeysForAuthenticatedUserUsersListGpgKeysForAuthenXe261a7ad2eReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -458,9 +471,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.users.listGpgKeysForAuthenticatedUser(
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("usersListGpgKeysForAuthenticatedUser did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -498,7 +511,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testUsersListPublicEmailsForAuthenticatedUserUsersListPublicEmailX2ffa58cfb6ReachesMockAndDecodesResponse() async throws {
+    func testUsersListPublicEmailsForAuthenticatedUserUsersListPublicEmailX2ffa58cfb6ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }

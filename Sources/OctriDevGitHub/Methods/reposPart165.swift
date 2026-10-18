@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ReposMethods {
-    /// Lists public repositories for the specified GitHub user. Filter by repository `type` and sort by `sort` and `direction`; use `page` and `per_page` to paginate the results.
+public extension ReposMethods {
+    /// Lists public repositories for the specified GitHub user. Filter by repository `type` and sort by `sort` and
+    /// `direction`; use `page` and `per_page` to paginate the results.
     ///
     /// Lists public repositories for the specified user.
     ///
@@ -25,13 +26,30 @@ extension ReposMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func reposListForUser(config: ClientConfig, username: String, type: ReposListForUserParameter? = nil, sort: ReposListForUserParameterX089fad86? = nil, direction: ReposListForUserParameterX6f083e9f? = nil, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [MinimalRepository] {
-        return try (await sdkRequest("GET", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/repos"].joined(), config: config, query: [
-            SdkQueryParameter("type", value: type),
-            SdkQueryParameter("sort", value: sort),
-            SdkQueryParameter("direction", value: direction),
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "reposListForUser", options: requestOptions)).data
+    static func reposListForUser(
+        config: ClientConfig,
+        username: String,
+        type: ReposListForUserParameter? = nil,
+        sort: ReposListForUserParameterX089fad86? = nil,
+        direction: ReposListForUserParameterX6f083e9f? = nil,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [MinimalRepository] {
+        try await (sdkRequest(
+            "GET",
+            ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/repos"].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("type", value: type),
+                SdkQueryParameter("sort", value: sort),
+                SdkQueryParameter("direction", value: direction),
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "reposListForUser",
+            options: requestOptions
+        )).data
     }
 }

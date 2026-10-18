@@ -6,8 +6,13 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ReposMethods {
-    /// Gets the README from a repository directory. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.raw+json`**: Returns the raw file contents. This is the default if you do not specify a media type. - **`application/vnd.github.html+json`**: Returns the README in HTML. Markup languages are rendered to HTML using GitHub's open-source [Markup library](https://github.com/github/markup).
+public extension ReposMethods {
+    /// Gets the README from a repository directory. This endpoint supports the following custom media types. For more
+    /// information, see "[Media
+    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
+    /// **`application/vnd.github.raw+json`**: Returns the raw file contents. This is the default if you do not specify
+    /// a media type. - **`application/vnd.github.html+json`**: Returns the README in HTML. Markup languages are
+    /// rendered to HTML using GitHub's open-source [Markup library](https://github.com/github/markup).
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -17,9 +22,32 @@ extension ReposMethods {
     /// - dir: The alternate path to look for a README file
     /// - ref: The name of the commit/branch/tag. Default: the repository’s default
     ///   branch.
-    public static func reposGetReadmeInDirectory(config: ClientConfig, owner: String, repo: String, dir: String, ref: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ContentFile {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/readme/", sdkEncodePathSegment(sdkWireString(dir))].joined(), config: config, query: [
-            SdkQueryParameter("ref", value: ref),
-        ], decoder: .json, operationId: "reposGetReadmeInDirectory", options: requestOptions, errors: ["404": BasicError.self, "422": ValidationError.self])).data
+    static func reposGetReadmeInDirectory(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        dir: String,
+        ref: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ContentFile {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/readme/",
+                sdkEncodePathSegment(sdkWireString(dir)),
+            ].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("ref", value: ref),
+            ],
+            decoder: .json,
+            operationId: "reposGetReadmeInDirectory",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "422": ValidationError.self]
+        )).data
     }
 }

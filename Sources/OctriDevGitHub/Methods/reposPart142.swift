@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ReposMethods {
-    /// Gets information about a suite of rule evaluations from within a repository. For more information, see "[Managing rulesets for a repository](https://docs.github.com/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/managing-rulesets-for-a-repository#viewing-insights-for-rulesets)."
+public extension ReposMethods {
+    /// Gets information about a suite of rule evaluations from within a repository. For more information, see
+    /// "[Managing rulesets for a repository](https://docs.github.com/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/managing-rulesets-for-a-repository#viewing-insights-for-rulesets)."
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -23,9 +24,32 @@ extension ReposMethods {
     /// - includeMetadata: When set to `true`, the response will include additional
     ///   metadata for pull request and required status check rule evaluation. Results
     ///   are capped at 50 entries.
-    public static func reposGetRepoRuleSuite(config: ClientConfig, owner: String, repo: String, ruleSuiteId: Int, includeMetadata: Bool? = nil, requestOptions: RequestOptions? = nil) async throws -> RuleSuite {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/rulesets/rule-suites/", sdkEncodePathSegment(sdkWireString(ruleSuiteId))].joined(), config: config, query: [
-            SdkQueryParameter("include_metadata", value: includeMetadata),
-        ], decoder: .json, operationId: "reposGetRepoRuleSuite", options: requestOptions, errors: ["404": BasicError.self, "500": BasicError.self])).data
+    static func reposGetRepoRuleSuite(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        ruleSuiteId: Int,
+        includeMetadata: Bool? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> RuleSuite {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/rulesets/rule-suites/",
+                sdkEncodePathSegment(sdkWireString(ruleSuiteId)),
+            ].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("include_metadata", value: includeMetadata),
+            ],
+            decoder: .json,
+            operationId: "reposGetRepoRuleSuite",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "500": BasicError.self]
+        )).data
     }
 }

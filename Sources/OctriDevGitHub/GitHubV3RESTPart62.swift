@@ -5,51 +5,51 @@ import Foundation
 
 public class GitHubV3REST {
     var config: ClientConfig
-    public internal(set) lazy var meta: MetaNamespace = MetaNamespace(config: config)
-    public internal(set) lazy var securityAdvisories: SecurityAdvisoriesNamespace = SecurityAdvisoriesNamespace(config: config)
-    public internal(set) lazy var agentAutomations: AgentAutomationsNamespace = AgentAutomationsNamespace(config: config)
-    public internal(set) lazy var agentTasks: AgentTasksNamespace = AgentTasksNamespace(config: config)
-    public internal(set) lazy var apps: AppsNamespace = AppsNamespace(config: config)
-    public internal(set) lazy var classroom: ClassroomNamespace = ClassroomNamespace(config: config)
-    public internal(set) lazy var codesOfConduct: CodesOfConductNamespace = CodesOfConductNamespace(config: config)
-    public internal(set) lazy var credentials: CredentialsNamespace = CredentialsNamespace(config: config)
-    public internal(set) lazy var emojis: EmojisNamespace = EmojisNamespace(config: config)
-    public internal(set) lazy var actions: ActionsNamespace = ActionsNamespace(config: config)
-    public internal(set) lazy var oidc: OidcNamespace = OidcNamespace(config: config)
-    public internal(set) lazy var codeSecurity: CodeSecurityNamespace = CodeSecurityNamespace(config: config)
-    public internal(set) lazy var copilot: CopilotNamespace = CopilotNamespace(config: config)
-    public internal(set) lazy var dependabot: DependabotNamespace = DependabotNamespace(config: config)
-    public internal(set) lazy var activity: ActivityNamespace = ActivityNamespace(config: config)
-    public internal(set) lazy var gists: GistsNamespace = GistsNamespace(config: config)
-    public internal(set) lazy var gitignore: GitignoreNamespace = GitignoreNamespace(config: config)
-    public internal(set) lazy var issues: IssuesNamespace = IssuesNamespace(config: config)
-    public internal(set) lazy var licenses: LicensesNamespace = LicensesNamespace(config: config)
-    public internal(set) lazy var markdown: MarkdownNamespace = MarkdownNamespace(config: config)
-    public internal(set) lazy var orgs: OrgsNamespace = OrgsNamespace(config: config)
-    public internal(set) lazy var billing: BillingNamespace = BillingNamespace(config: config)
-    public internal(set) lazy var agents: AgentsNamespace = AgentsNamespace(config: config)
-    public internal(set) lazy var campaigns: CampaignsNamespace = CampaignsNamespace(config: config)
-    public internal(set) lazy var codeScanning: CodeScanningNamespace = CodeScanningNamespace(config: config)
-    public internal(set) lazy var codespaces: CodespacesNamespace = CodespacesNamespace(config: config)
-    public internal(set) lazy var copilotSpaces: CopilotSpacesNamespace = CopilotSpacesNamespace(config: config)
-    public internal(set) lazy var packages: PackagesNamespace = PackagesNamespace(config: config)
-    public internal(set) lazy var interactions: InteractionsNamespace = InteractionsNamespace(config: config)
-    public internal(set) lazy var migrations: MigrationsNamespace = MigrationsNamespace(config: config)
-    public internal(set) lazy var privateRegistries: PrivateRegistriesNamespace = PrivateRegistriesNamespace(config: config)
-    public internal(set) lazy var projects: ProjectsNamespace = ProjectsNamespace(config: config)
-    public internal(set) lazy var repos: ReposNamespace = ReposNamespace(config: config)
-    public internal(set) lazy var secretScanning: SecretScanningNamespace = SecretScanningNamespace(config: config)
-    public internal(set) lazy var hostedCompute: HostedComputeNamespace = HostedComputeNamespace(config: config)
-    public internal(set) lazy var teams: TeamsNamespace = TeamsNamespace(config: config)
-    public internal(set) lazy var rateLimit: RateLimitNamespace = RateLimitNamespace(config: config)
-    public internal(set) lazy var checks: ChecksNamespace = ChecksNamespace(config: config)
-    public internal(set) lazy var codeQuality: CodeQualityNamespace = CodeQualityNamespace(config: config)
-    public internal(set) lazy var reactions: ReactionsNamespace = ReactionsNamespace(config: config)
-    public internal(set) lazy var dependencyGraph: DependencyGraphNamespace = DependencyGraphNamespace(config: config)
-    public internal(set) lazy var git: GitNamespace = GitNamespace(config: config)
-    public internal(set) lazy var pulls: PullsNamespace = PullsNamespace(config: config)
-    public internal(set) lazy var search: SearchNamespace = SearchNamespace(config: config)
-    public internal(set) lazy var users: UsersNamespace = UsersNamespace(config: config)
+    public internal(set) lazy var meta: MetaNamespace = .init(config: config)
+    public internal(set) lazy var securityAdvisories: SecurityAdvisoriesNamespace = .init(config: config)
+    public internal(set) lazy var agentAutomations: AgentAutomationsNamespace = .init(config: config)
+    public internal(set) lazy var agentTasks: AgentTasksNamespace = .init(config: config)
+    public internal(set) lazy var apps: AppsNamespace = .init(config: config)
+    public internal(set) lazy var classroom: ClassroomNamespace = .init(config: config)
+    public internal(set) lazy var codesOfConduct: CodesOfConductNamespace = .init(config: config)
+    public internal(set) lazy var credentials: CredentialsNamespace = .init(config: config)
+    public internal(set) lazy var emojis: EmojisNamespace = .init(config: config)
+    public internal(set) lazy var actions: ActionsNamespace = .init(config: config)
+    public internal(set) lazy var oidc: OidcNamespace = .init(config: config)
+    public internal(set) lazy var codeSecurity: CodeSecurityNamespace = .init(config: config)
+    public internal(set) lazy var copilot: CopilotNamespace = .init(config: config)
+    public internal(set) lazy var dependabot: DependabotNamespace = .init(config: config)
+    public internal(set) lazy var activity: ActivityNamespace = .init(config: config)
+    public internal(set) lazy var gists: GistsNamespace = .init(config: config)
+    public internal(set) lazy var gitignore: GitignoreNamespace = .init(config: config)
+    public internal(set) lazy var issues: IssuesNamespace = .init(config: config)
+    public internal(set) lazy var licenses: LicensesNamespace = .init(config: config)
+    public internal(set) lazy var markdown: MarkdownNamespace = .init(config: config)
+    public internal(set) lazy var orgs: OrgsNamespace = .init(config: config)
+    public internal(set) lazy var billing: BillingNamespace = .init(config: config)
+    public internal(set) lazy var agents: AgentsNamespace = .init(config: config)
+    public internal(set) lazy var campaigns: CampaignsNamespace = .init(config: config)
+    public internal(set) lazy var codeScanning: CodeScanningNamespace = .init(config: config)
+    public internal(set) lazy var codespaces: CodespacesNamespace = .init(config: config)
+    public internal(set) lazy var copilotSpaces: CopilotSpacesNamespace = .init(config: config)
+    public internal(set) lazy var packages: PackagesNamespace = .init(config: config)
+    public internal(set) lazy var interactions: InteractionsNamespace = .init(config: config)
+    public internal(set) lazy var migrations: MigrationsNamespace = .init(config: config)
+    public internal(set) lazy var privateRegistries: PrivateRegistriesNamespace = .init(config: config)
+    public internal(set) lazy var projects: ProjectsNamespace = .init(config: config)
+    public internal(set) lazy var repos: ReposNamespace = .init(config: config)
+    public internal(set) lazy var secretScanning: SecretScanningNamespace = .init(config: config)
+    public internal(set) lazy var hostedCompute: HostedComputeNamespace = .init(config: config)
+    public internal(set) lazy var teams: TeamsNamespace = .init(config: config)
+    public internal(set) lazy var rateLimit: RateLimitNamespace = .init(config: config)
+    public internal(set) lazy var checks: ChecksNamespace = .init(config: config)
+    public internal(set) lazy var codeQuality: CodeQualityNamespace = .init(config: config)
+    public internal(set) lazy var reactions: ReactionsNamespace = .init(config: config)
+    public internal(set) lazy var dependencyGraph: DependencyGraphNamespace = .init(config: config)
+    public internal(set) lazy var git: GitNamespace = .init(config: config)
+    public internal(set) lazy var pulls: PullsNamespace = .init(config: config)
+    public internal(set) lazy var search: SearchNamespace = .init(config: config)
+    public internal(set) lazy var users: UsersNamespace = .init(config: config)
     public init(config: ClientConfig) {
         self.config = config
         sdkRebuildNamespaces()
@@ -64,12 +64,24 @@ public class GitHubV3REST {
     public func setLoggingConfig(_ logging: LoggingConfig? = nil) -> LoggingConfig {
         var current = config.logging ?? LoggingConfig()
         if let overrides = logging {
-            if let endpoint = overrides.endpoint { current.endpoint = endpoint }
-            if let apiKey = overrides.apiKey { current.apiKey = apiKey }
-            if let environment = overrides.environment { current.environment = environment }
-            if let release = overrides.release { current.release = release }
-            if let user = overrides.user { current.user = user }
-            if let tags = overrides.tags { current.tags = tags }
+            if let endpoint = overrides.endpoint {
+                current.endpoint = endpoint
+            }
+            if let apiKey = overrides.apiKey {
+                current.apiKey = apiKey
+            }
+            if let environment = overrides.environment {
+                current.environment = environment
+            }
+            if let release = overrides.release {
+                current.release = release
+            }
+            if let user = overrides.user {
+                current.user = user
+            }
+            if let tags = overrides.tags {
+                current.tags = tags
+            }
             current.filterPii = overrides.filterPii
         }
         // Opting in IS the point of this call, so enabled flips to true unless the
@@ -88,55 +100,55 @@ public class GitHubV3REST {
 
 extension GitHubV3REST {
     func sdkRebuildNamespacesPart1() {
-        self.meta = MetaNamespace(config: self.config)
-        self.securityAdvisories = SecurityAdvisoriesNamespace(config: self.config)
-        self.agentAutomations = AgentAutomationsNamespace(config: self.config)
-        self.agentTasks = AgentTasksNamespace(config: self.config)
-        self.apps = AppsNamespace(config: self.config)
-        self.classroom = ClassroomNamespace(config: self.config)
-        self.codesOfConduct = CodesOfConductNamespace(config: self.config)
-        self.credentials = CredentialsNamespace(config: self.config)
-        self.emojis = EmojisNamespace(config: self.config)
-        self.actions = ActionsNamespace(config: self.config)
-        self.oidc = OidcNamespace(config: self.config)
-        self.codeSecurity = CodeSecurityNamespace(config: self.config)
-        self.copilot = CopilotNamespace(config: self.config)
-        self.dependabot = DependabotNamespace(config: self.config)
-        self.activity = ActivityNamespace(config: self.config)
-        self.gists = GistsNamespace(config: self.config)
-        self.gitignore = GitignoreNamespace(config: self.config)
-        self.issues = IssuesNamespace(config: self.config)
-        self.licenses = LicensesNamespace(config: self.config)
-        self.markdown = MarkdownNamespace(config: self.config)
-        self.orgs = OrgsNamespace(config: self.config)
-        self.billing = BillingNamespace(config: self.config)
-        self.agents = AgentsNamespace(config: self.config)
-        self.campaigns = CampaignsNamespace(config: self.config)
-        self.codeScanning = CodeScanningNamespace(config: self.config)
-        self.codespaces = CodespacesNamespace(config: self.config)
-        self.copilotSpaces = CopilotSpacesNamespace(config: self.config)
-        self.packages = PackagesNamespace(config: self.config)
-        self.interactions = InteractionsNamespace(config: self.config)
-        self.migrations = MigrationsNamespace(config: self.config)
-        self.privateRegistries = PrivateRegistriesNamespace(config: self.config)
-        self.projects = ProjectsNamespace(config: self.config)
+        meta = MetaNamespace(config: config)
+        securityAdvisories = SecurityAdvisoriesNamespace(config: config)
+        agentAutomations = AgentAutomationsNamespace(config: config)
+        agentTasks = AgentTasksNamespace(config: config)
+        apps = AppsNamespace(config: config)
+        classroom = ClassroomNamespace(config: config)
+        codesOfConduct = CodesOfConductNamespace(config: config)
+        credentials = CredentialsNamespace(config: config)
+        emojis = EmojisNamespace(config: config)
+        actions = ActionsNamespace(config: config)
+        oidc = OidcNamespace(config: config)
+        codeSecurity = CodeSecurityNamespace(config: config)
+        copilot = CopilotNamespace(config: config)
+        dependabot = DependabotNamespace(config: config)
+        activity = ActivityNamespace(config: config)
+        gists = GistsNamespace(config: config)
+        gitignore = GitignoreNamespace(config: config)
+        issues = IssuesNamespace(config: config)
+        licenses = LicensesNamespace(config: config)
+        markdown = MarkdownNamespace(config: config)
+        orgs = OrgsNamespace(config: config)
+        billing = BillingNamespace(config: config)
+        agents = AgentsNamespace(config: config)
+        campaigns = CampaignsNamespace(config: config)
+        codeScanning = CodeScanningNamespace(config: config)
+        codespaces = CodespacesNamespace(config: config)
+        copilotSpaces = CopilotSpacesNamespace(config: config)
+        packages = PackagesNamespace(config: config)
+        interactions = InteractionsNamespace(config: config)
+        migrations = MigrationsNamespace(config: config)
+        privateRegistries = PrivateRegistriesNamespace(config: config)
+        projects = ProjectsNamespace(config: config)
     }
 }
 
 extension GitHubV3REST {
     func sdkRebuildNamespacesPart2() {
-        self.repos = ReposNamespace(config: self.config)
-        self.secretScanning = SecretScanningNamespace(config: self.config)
-        self.hostedCompute = HostedComputeNamespace(config: self.config)
-        self.teams = TeamsNamespace(config: self.config)
-        self.rateLimit = RateLimitNamespace(config: self.config)
-        self.checks = ChecksNamespace(config: self.config)
-        self.codeQuality = CodeQualityNamespace(config: self.config)
-        self.reactions = ReactionsNamespace(config: self.config)
-        self.dependencyGraph = DependencyGraphNamespace(config: self.config)
-        self.git = GitNamespace(config: self.config)
-        self.pulls = PullsNamespace(config: self.config)
-        self.search = SearchNamespace(config: self.config)
-        self.users = UsersNamespace(config: self.config)
+        repos = ReposNamespace(config: config)
+        secretScanning = SecretScanningNamespace(config: config)
+        hostedCompute = HostedComputeNamespace(config: config)
+        teams = TeamsNamespace(config: config)
+        rateLimit = RateLimitNamespace(config: config)
+        checks = ChecksNamespace(config: config)
+        codeQuality = CodeQualityNamespace(config: config)
+        reactions = ReactionsNamespace(config: config)
+        dependencyGraph = DependencyGraphNamespace(config: config)
+        git = GitNamespace(config: config)
+        pulls = PullsNamespace(config: config)
+        search = SearchNamespace(config: config)
+        users = UsersNamespace(config: config)
     }
 }

@@ -6,33 +6,86 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ActionsMethods {
-    /// Gets GitHub Actions cache retention limit for an enterprise. All organizations and repositories under this enterprise may not set a higher cache retention limit. OAuth tokens and personal access tokens (classic) need the `admin:enterprise` scope to use this endpoint. > [!NOTE] > The "Enterprise administration" fine-grained permission is not available to callers. To use this API, you must use an OAuth app token or a personal access token (classic).
+public extension ActionsMethods {
+    /// Gets GitHub Actions cache retention limit for an enterprise. All organizations and repositories under this
+    /// enterprise may not set a higher cache retention limit. OAuth tokens and personal access tokens (classic) need
+    /// the `admin:enterprise` scope to use this endpoint. > [!NOTE] > The "Enterprise administration" fine-grained
+    /// permission is not available to callers. To use this API, you must use an OAuth app token or a personal access
+    /// token (classic).
     ///
     /// - Parameters:
     /// - enterprise: The slug version of the enterprise name.
-    public static func actionsGetActionsCacheRetentionLimitForEnterprise(config: ClientConfig, enterprise: String, requestOptions: RequestOptions? = nil) async throws -> ActionsCacheRetentionLimitForEnterprise {
-        return try (await sdkRequest("GET", ["/enterprises/", sdkEncodePathSegment(sdkWireString(enterprise)), "/actions/cache/retention-limit"].joined(), config: config, decoder: .json, operationId: "actionsGetActionsCacheRetentionLimitForEnterprise", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+    static func actionsGetActionsCacheRetentionLimitForEnterprise(
+        config: ClientConfig,
+        enterprise: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ActionsCacheRetentionLimitForEnterprise {
+        try await (sdkRequest(
+            "GET",
+            ["/enterprises/", sdkEncodePathSegment(sdkWireString(enterprise)), "/actions/cache/retention-limit"]
+                .joined(),
+            config: config,
+            decoder: .json,
+            operationId: "actionsGetActionsCacheRetentionLimitForEnterprise",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 
-    /// Sets GitHub Actions cache retention limit for an enterprise. All organizations and repositories under this enterprise may not set a higher cache retention limit. OAuth tokens and personal access tokens (classic) need the `admin:enterprise` scope to use this endpoint. > [!NOTE] > The "Enterprise administration" fine-grained permission is not available to callers. To use this API, you must use an OAuth app token or a personal access token (classic).
+    /// Sets GitHub Actions cache retention limit for an enterprise. All organizations and repositories under this
+    /// enterprise may not set a higher cache retention limit. OAuth tokens and personal access tokens (classic) need
+    /// the `admin:enterprise` scope to use this endpoint. > [!NOTE] > The "Enterprise administration" fine-grained
+    /// permission is not available to callers. To use this API, you must use an OAuth app token or a personal access
+    /// token (classic).
     ///
     /// - Parameters:
     /// - enterprise: The slug version of the enterprise name.
     /// - maxCacheRetentionDays: For repositories & organizations in an enterprise,
     ///   the maximum duration, in days, for which caches in a repository may be
     ///   retained.
-    public static func actionsSetActionsCacheRetentionLimitForEnterprise(config: ClientConfig, enterprise: String, maxCacheRetentionDays: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        let requestBody = ActionsSetActionsCacheRetentionLimitForEnterpriseRequestBody(maxCacheRetentionDays: maxCacheRetentionDays)
+    static func actionsSetActionsCacheRetentionLimitForEnterprise(
+        config: ClientConfig,
+        enterprise: String,
+        maxCacheRetentionDays: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        let requestBody =
+            ActionsSetActionsCacheRetentionLimitForEnterpriseRequestBody(maxCacheRetentionDays: maxCacheRetentionDays)
 
-        return try (await sdkRequest("PUT", ["/enterprises/", sdkEncodePathSegment(sdkWireString(enterprise)), "/actions/cache/retention-limit"].joined(), config: config, body: requestBody, decoder: .empty, operationId: "actionsSetActionsCacheRetentionLimitForEnterprise", options: requestOptions, errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
+        return try await (sdkRequest(
+            "PUT",
+            ["/enterprises/", sdkEncodePathSegment(sdkWireString(enterprise)), "/actions/cache/retention-limit"]
+                .joined(),
+            config: config,
+            body: requestBody,
+            decoder: .empty,
+            operationId: "actionsSetActionsCacheRetentionLimitForEnterprise",
+            options: requestOptions,
+            errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 
-    /// Gets GitHub Actions cache storage limit for an enterprise. All organizations and repositories under this enterprise may not set a higher cache storage limit. OAuth tokens and personal access tokens (classic) need the `admin:enterprise` scope to use this endpoint. > [!NOTE] > The "Enterprise administration" fine-grained permission is not available to callers. To use this API, you must use an OAuth app token or a personal access token (classic).
+    /// Gets GitHub Actions cache storage limit for an enterprise. All organizations and repositories under this
+    /// enterprise may not set a higher cache storage limit. OAuth tokens and personal access tokens (classic) need the
+    /// `admin:enterprise` scope to use this endpoint. > [!NOTE] > The "Enterprise administration" fine-grained
+    /// permission is not available to callers. To use this API, you must use an OAuth app token or a personal access
+    /// token (classic).
     ///
     /// - Parameters:
     /// - enterprise: The slug version of the enterprise name.
-    public static func actionsGetActionsCacheStorageLimitForEnterprise(config: ClientConfig, enterprise: String, requestOptions: RequestOptions? = nil) async throws -> ActionsCacheStorageLimitForEnterprise {
-        return try (await sdkRequest("GET", ["/enterprises/", sdkEncodePathSegment(sdkWireString(enterprise)), "/actions/cache/storage-limit"].joined(), config: config, decoder: .json, operationId: "actionsGetActionsCacheStorageLimitForEnterprise", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+    static func actionsGetActionsCacheStorageLimitForEnterprise(
+        config: ClientConfig,
+        enterprise: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ActionsCacheStorageLimitForEnterprise {
+        try await (sdkRequest(
+            "GET",
+            ["/enterprises/", sdkEncodePathSegment(sdkWireString(enterprise)), "/actions/cache/storage-limit"].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "actionsGetActionsCacheStorageLimitForEnterprise",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 }
