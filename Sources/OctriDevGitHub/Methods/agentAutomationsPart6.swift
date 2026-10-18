@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension AgentAutomationsMethods {
-    struct AgentAutomationsCreateRepoAutomationOptions: Codable {
+extension AgentAutomationsMethods {
+    public struct AgentAutomationsCreateRepoAutomationOptions: Codable {
         public var owner: String
         public var repo: String
         public var name: String
@@ -30,15 +30,7 @@ public extension AgentAutomationsMethods {
         }
     }
 
-    /// Creates a new automation in a repository. User-owned automations remain private to their creator.
-    /// Repository-owned automations are visible to anyone with read access to the repository and manageable by anyone
-    /// with write access to the repository. **Fine-grained access tokens for "Create an automation for a repository"**
-    /// This endpoint works with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app)
-    /// * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token)
-    /// The fine-grained token must have one of the following permission sets for each repository accessed by this
-    /// request: * "Agent tasks" repository permissions (read and write) * "Contents" repository permissions (read and
-    /// write) The required permission set depends on each repository's Automation permission configuration. GitHub App
-    /// installation access tokens are not supported for this endpoint.
+    /// Creates a new automation in a repository. User-owned automations remain private to their creator. Repository-owned automations are visible to anyone with read access to the repository and manageable by anyone with write access to the repository. **Fine-grained access tokens for "Create an automation for a repository"** This endpoint works with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app) * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) The fine-grained token must have one of the following permission sets for each repository accessed by this request: * "Agent tasks" repository permissions (read and write) * "Contents" repository permissions (read and write) The required permission set depends on each repository's Automation permission configuration. GitHub App installation access tokens are not supported for this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -75,27 +67,9 @@ public extension AgentAutomationsMethods {
     ///   allow_read_access_triggers policy is enabled. Does not apply to
     ///   interval-scheduled runs, which always run as the automation owner. Defaults
     ///   to false.
-    static func agentAutomationsCreateRepoAutomation(
-        config: ClientConfig,
-        options: AgentAutomationsCreateRepoAutomationOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> AgentAutomationsCreateRepoAutomationResponse {
+    public static func agentAutomationsCreateRepoAutomation(config: ClientConfig, options: AgentAutomationsCreateRepoAutomationOptions, requestOptions: RequestOptions? = nil) async throws -> AgentAutomationsCreateRepoAutomationResponse {
         let requestBody = AgentAutomationsCreateRepoAutomationRequestBody(options: options)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/agents/repos/",
-                sdkEncodePathSegment(sdkWireString(options.owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(options.repo)),
-                "/automations",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "agentAutomationsCreateRepoAutomation",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/agents/repos/", sdkEncodePathSegment(sdkWireString(options.owner)), "/", sdkEncodePathSegment(sdkWireString(options.repo)), "/automations"].joined(), config: config, body: requestBody, decoder: .json, operationId: "agentAutomationsCreateRepoAutomation", options: requestOptions)).data
     }
 }

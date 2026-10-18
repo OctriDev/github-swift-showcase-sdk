@@ -3,111 +3,62 @@
 
 import Foundation
 
-/// CopilotSpaces domain models
-public extension CopilotSpaceCollaboratorVariant1 {
-    init(from decoder: Decoder) throws {
+// CopilotSpaces domain models
+extension CopilotSpaceCollaboratorVariant1 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.actorType) else {
-            throw SdkValidationError(
-                field: "actor_type",
-                code: "required",
-                message: "Validation failed for 'actor_type': value is required"
-            )
+            throw SdkValidationError(field: "actor_type", code: "required", message: "Validation failed for 'actor_type': value is required")
         }
         guard container.contains(.role) else {
-            throw SdkValidationError(
-                field: "role",
-                code: "required",
-                message: "Validation failed for 'role': value is required"
-            )
+            throw SdkValidationError(field: "role", code: "required", message: "Validation failed for 'role': value is required")
         }
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
         guard container.contains(.nodeId) else {
-            throw SdkValidationError(
-                field: "node_id",
-                code: "required",
-                message: "Validation failed for 'node_id': value is required"
-            )
+            throw SdkValidationError(field: "node_id", code: "required", message: "Validation failed for 'node_id': value is required")
         }
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.slug) else {
-            throw SdkValidationError(
-                field: "slug",
-                code: "required",
-                message: "Validation failed for 'slug': value is required"
-            )
+            throw SdkValidationError(field: "slug", code: "required", message: "Validation failed for 'slug': value is required")
         }
         guard container.contains(.type) else {
-            throw SdkValidationError(
-                field: "type",
-                code: "required",
-                message: "Validation failed for 'type': value is required"
-            )
+            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
         }
-        actorType = try container.sdkDecodeRequired(.actorType)
-        role = try container.sdkDecodeRequired(.role)
-        id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        name = try container.sdkDecodeRequired(.name)
-        slug = try container.sdkDecodeRequired(.slug)
-        type = try container.sdkDecodeRequired(.type)
-        description = try container.sdkDecodeIfPresent(.description)
-        privacy = try container.sdkDecodeIfPresent(.privacy)
-        notificationSetting = try container.sdkDecodeIfPresent(.notificationSetting)
-        url = try container.sdkDecodeIfPresent(.url)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        membersUrl = try container.sdkDecodeIfPresent(.membersUrl)
-        repositoriesUrl = try container.sdkDecodeIfPresent(.repositoriesUrl)
-        organizationId = try container.sdkDecodeIfPresent(.organizationId)
-        parent = try container.sdkDecodeIfPresent(.parent)
-        try sdkValidateRawEnum(
-            "actor_type",
-            actorType,
-            CopilotSpaceCollaboratorVariant1ActorType.allCases.map(\.rawValue)
-        )
-        if let value = url {
+        self.actorType = try container.sdkDecodeRequired(.actorType)
+        self.role = try container.sdkDecodeRequired(.role)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.slug = try container.sdkDecodeRequired(.slug)
+        self.type = try container.sdkDecodeRequired(.type)
+        self.description = try container.sdkDecodeIfPresent(.description)
+        self.privacy = try container.sdkDecodeIfPresent(.privacy)
+        self.notificationSetting = try container.sdkDecodeIfPresent(.notificationSetting)
+        self.url = try container.sdkDecodeIfPresent(.url)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        self.membersUrl = try container.sdkDecodeIfPresent(.membersUrl)
+        self.repositoriesUrl = try container.sdkDecodeIfPresent(.repositoriesUrl)
+        self.organizationId = try container.sdkDecodeIfPresent(.organizationId)
+        self.parent = try container.sdkDecodeIfPresent(.parent)
+            try sdkValidateRawEnum("actor_type", self.actorType, CopilotSpaceCollaboratorVariant1ActorType.allCases.map(\.rawValue))
+        if let value = self.url {
             try sdkValidateUri("url", value)
         }
-        if let value = htmlUrl {
+        if let value = self.htmlUrl {
             try sdkValidateUri("html_url", value)
         }
-        if let value = repositoriesUrl {
+        if let value = self.repositoriesUrl {
             try sdkValidateUri("repositories_url", value)
         }
     }
 }
 
-public extension CopilotSpaceCollaboratorVariant1 {
-    init(
-        actorType: CopilotSpaceCollaboratorVariant1ActorType,
-        role: CopilotSpaceCollaboratorVariant1Role,
-        id: Int,
-        nodeId: String,
-        name: String,
-        slug: String,
-        type: CopilotSpaceCollaboratorVariant1Type,
-        description: String? = nil,
-        privacy: String? = nil,
-        notificationSetting: String? = nil,
-        url: String? = nil,
-        htmlUrl: String? = nil,
-        membersUrl: String? = nil,
-        repositoriesUrl: String? = nil,
-        organizationId: Int? = nil,
-        parent: JSONValue? = nil
-    ) throws {
+extension CopilotSpaceCollaboratorVariant1 {
+    public init(actorType: CopilotSpaceCollaboratorVariant1ActorType, role: CopilotSpaceCollaboratorVariant1Role, id: Int, nodeId: String, name: String, slug: String, type: CopilotSpaceCollaboratorVariant1Type, description: String? = nil, privacy: String? = nil, notificationSetting: String? = nil, url: String? = nil, htmlUrl: String? = nil, membersUrl: String? = nil, repositoriesUrl: String? = nil, organizationId: Int? = nil, parent: JSONValue? = nil) throws {
         (self.actorType, self.role) = (actorType, role)
         (self.id, self.nodeId) = (id, nodeId)
         (self.name, self.slug) = (name, slug)
@@ -116,11 +67,7 @@ public extension CopilotSpaceCollaboratorVariant1 {
         (self.url, self.htmlUrl) = (url, htmlUrl)
         (self.membersUrl, self.repositoriesUrl) = (membersUrl, repositoriesUrl)
         (self.organizationId, self.parent) = (organizationId, parent)
-        try sdkValidateRawEnum(
-            "actor_type",
-            self.actorType,
-            CopilotSpaceCollaboratorVariant1ActorType.allCases.map(\.rawValue)
-        )
+            try sdkValidateRawEnum("actor_type", self.actorType, CopilotSpaceCollaboratorVariant1ActorType.allCases.map(\.rawValue))
         if let value = self.url {
             try sdkValidateUri("url", value)
         }
@@ -170,40 +117,29 @@ public struct CopilotSpaceResourcesAttributesItemMetadata: Codable {
     }
 
     init() {
-        (repositoryId, filePath, text, name, number) = (nil, nil, nil, nil, nil)
-        (copilotChatAttachmentId, mediaType, url, height, width) = (nil, nil, nil, nil, nil)
+        (self.repositoryId, self.filePath, self.text, self.name, self.number) = (nil, nil, nil, nil, nil)
+        (self.copilotChatAttachmentId, self.mediaType, self.url, self.height, self.width) = (nil, nil, nil, nil, nil)
     }
 }
 
-public extension CopilotSpaceResourcesAttributesItemMetadata {
-    init(from decoder: Decoder) throws {
+extension CopilotSpaceResourcesAttributesItemMetadata {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        repositoryId = try container.sdkDecodeIfPresent(.repositoryId)
-        filePath = try container.sdkDecodeIfPresent(.filePath)
-        text = try container.sdkDecodeIfPresent(.text)
-        name = try container.sdkDecodeIfPresent(.name)
-        number = try container.sdkDecodeIfPresent(.number)
-        copilotChatAttachmentId = try container.sdkDecodeIfPresent(.copilotChatAttachmentId)
-        mediaType = try container.sdkDecodeIfPresent(.mediaType)
-        url = try container.sdkDecodeIfPresent(.url)
-        height = try container.sdkDecodeIfPresent(.height)
-        width = try container.sdkDecodeIfPresent(.width)
+        self.repositoryId = try container.sdkDecodeIfPresent(.repositoryId)
+        self.filePath = try container.sdkDecodeIfPresent(.filePath)
+        self.text = try container.sdkDecodeIfPresent(.text)
+        self.name = try container.sdkDecodeIfPresent(.name)
+        self.number = try container.sdkDecodeIfPresent(.number)
+        self.copilotChatAttachmentId = try container.sdkDecodeIfPresent(.copilotChatAttachmentId)
+        self.mediaType = try container.sdkDecodeIfPresent(.mediaType)
+        self.url = try container.sdkDecodeIfPresent(.url)
+        self.height = try container.sdkDecodeIfPresent(.height)
+        self.width = try container.sdkDecodeIfPresent(.width)
     }
 }
 
-public extension CopilotSpaceResourcesAttributesItemMetadata {
-    init(
-        repositoryId: Int? = nil,
-        filePath: String? = nil,
-        text: String? = nil,
-        name: String? = nil,
-        number: Int? = nil,
-        copilotChatAttachmentId: Int? = nil,
-        mediaType: String? = nil,
-        url: String? = nil,
-        height: Int? = nil,
-        width: Int? = nil
-    ) {
+extension CopilotSpaceResourcesAttributesItemMetadata {
+    public init(repositoryId: Int? = nil, filePath: String? = nil, text: String? = nil, name: String? = nil, number: Int? = nil, copilotChatAttachmentId: Int? = nil, mediaType: String? = nil, url: String? = nil, height: Int? = nil, width: Int? = nil) {
         self.init()
         (self.repositoryId, self.filePath) = (repositoryId, filePath)
         (self.text, self.name) = (text, name)
@@ -270,53 +206,37 @@ public struct CopilotSpace: Codable {
         case resourcesAttributes = "resources_attributes"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension CopilotSpace {
-    init(from decoder: Decoder) throws {
+extension CopilotSpace {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeRequired(.id)
-        number = try container.sdkDecodeRequired(.number)
-        name = try container.sdkDecodeRequired(.name)
-        baseRole = try container.sdkDecodeRequired(.baseRole)
-        owner = try container.sdkDecodeRequired(.owner)
-        creator = try container.sdkDecodeRequired(.creator)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        apiUrl = try container.sdkDecodeRequired(.apiUrl)
-        description = try container.sdkDecodeIfPresent(.description)
-        generalInstructions = try container.sdkDecodeIfPresent(.generalInstructions)
-        resourcesAttributes = try container.sdkDecodeIfPresent(.resourcesAttributes)
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateUri("api_url", apiUrl)
-        if let value = generalInstructions {
+        self.id = try container.sdkDecodeRequired(.id)
+        self.number = try container.sdkDecodeRequired(.number)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.baseRole = try container.sdkDecodeRequired(.baseRole)
+        self.owner = try container.sdkDecodeRequired(.owner)
+        self.creator = try container.sdkDecodeRequired(.creator)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        self.apiUrl = try container.sdkDecodeRequired(.apiUrl)
+        self.description = try container.sdkDecodeIfPresent(.description)
+        self.generalInstructions = try container.sdkDecodeIfPresent(.generalInstructions)
+        self.resourcesAttributes = try container.sdkDecodeIfPresent(.resourcesAttributes)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("api_url", self.apiUrl)
+        if let value = self.generalInstructions {
             try validateLength("general_instructions", value, min: nil, max: 4000)
         }
     }
 }
 
-public extension CopilotSpace {
-    init(
-        id: Int,
-        number: Int,
-        name: String,
-        baseRole: CopilotSpaceBaseRole,
-        owner: CopilotSpaceOwner,
-        creator: SimpleUser,
-        createdAt: Date,
-        updatedAt: Date,
-        htmlUrl: String,
-        apiUrl: String,
-        description: String? = nil,
-        generalInstructions: String? = nil,
-        resourcesAttributes: [CopilotSpaceResourcesAttributesItem]? = nil
-    ) throws {
+extension CopilotSpace {
+    public init(id: Int, number: Int, name: String, baseRole: CopilotSpaceBaseRole, owner: CopilotSpaceOwner, creator: SimpleUser, createdAt: Date, updatedAt: Date, htmlUrl: String, apiUrl: String, description: String? = nil, generalInstructions: String? = nil, resourcesAttributes: [CopilotSpaceResourcesAttributesItem]? = nil) throws {
         (self.id, self.number) = (id, number)
         (self.name, self.baseRole) = (name, baseRole)
         (self.owner, self.creator) = (owner, creator)
@@ -324,10 +244,10 @@ public extension CopilotSpace {
         (self.htmlUrl, self.apiUrl) = (htmlUrl, apiUrl)
         (self.description, self.generalInstructions) = (description, generalInstructions)
         self.resourcesAttributes = resourcesAttributes
-        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-        try sdkValidateUri("html_url", self.htmlUrl)
-        try sdkValidateUri("api_url", self.apiUrl)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("api_url", self.apiUrl)
         if let value = self.generalInstructions {
             try validateLength("general_instructions", value, min: nil, max: 4000)
         }
@@ -356,10 +276,7 @@ public enum CopilotSpaceCollaboratorVariant1ActorType: String, CaseIterable, Cod
 public struct CopilotSpaceResourceResourceType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let repository = CopilotSpaceResourceResourceType(rawValue: "repository")
     public static let githubFile = CopilotSpaceResourceResourceType(rawValue: "github_file")
     public static let freeText = CopilotSpaceResourceResourceType(rawValue: "free_text")
@@ -370,7 +287,7 @@ public struct CopilotSpaceResourceResourceType: RawRepresentable, Hashable, Coda
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -380,26 +297,21 @@ public struct CopilotSpaceResourceResourceType: RawRepresentable, Hashable, Coda
 }
 
 /// The type of resource.
-public struct CopilotSpaceResourcesAttributesItemResourceType: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct CopilotSpaceResourcesAttributesItemResourceType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let repository = CopilotSpaceResourcesAttributesItemResourceType(rawValue: "repository")
     public static let githubFile = CopilotSpaceResourcesAttributesItemResourceType(rawValue: "github_file")
     public static let freeText = CopilotSpaceResourcesAttributesItemResourceType(rawValue: "free_text")
     public static let githubIssue = CopilotSpaceResourcesAttributesItemResourceType(rawValue: "github_issue")
-    public static let githubPullRequest =
-        CopilotSpaceResourcesAttributesItemResourceType(rawValue: "github_pull_request")
+    public static let githubPullRequest = CopilotSpaceResourcesAttributesItemResourceType(rawValue: "github_pull_request")
     public static let mediaContent = CopilotSpaceResourcesAttributesItemResourceType(rawValue: "media_content")
     public static let uploadedTextFile = CopilotSpaceResourcesAttributesItemResourceType(rawValue: "uploaded_text_file")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -430,17 +342,14 @@ public enum CopilotSpaceCollaboratorVariant0Variant1ActorType: String, CaseItera
 public struct CopilotSpaceCollaboratorVariant1Role: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let reader = CopilotSpaceCollaboratorVariant1Role(rawValue: "reader")
     public static let writer = CopilotSpaceCollaboratorVariant1Role(rawValue: "writer")
     public static let admin = CopilotSpaceCollaboratorVariant1Role(rawValue: "admin")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -450,21 +359,17 @@ public struct CopilotSpaceCollaboratorVariant1Role: RawRepresentable, Hashable, 
 }
 
 /// The role granted to the collaborator
-public struct CopilotSpaceCollaboratorVariant0Variant1Role: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct CopilotSpaceCollaboratorVariant0Variant1Role: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let reader = CopilotSpaceCollaboratorVariant0Variant1Role(rawValue: "reader")
     public static let writer = CopilotSpaceCollaboratorVariant0Variant1Role(rawValue: "writer")
     public static let admin = CopilotSpaceCollaboratorVariant0Variant1Role(rawValue: "admin")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -479,10 +384,7 @@ public struct CopilotSpaceCollaboratorVariant0Variant1Role: RawRepresentable, Ha
 public struct CopilotSpaceBaseRole: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let reader = CopilotSpaceBaseRole(rawValue: "reader")
     public static let writer = CopilotSpaceBaseRole(rawValue: "writer")
     public static let admin = CopilotSpaceBaseRole(rawValue: "admin")
@@ -490,7 +392,7 @@ public struct CopilotSpaceBaseRole: RawRepresentable, Hashable, Codable, Sendabl
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -502,15 +404,12 @@ public struct CopilotSpaceBaseRole: RawRepresentable, Hashable, Codable, Sendabl
 public struct CopilotSpaceCollaboratorVariant1Type: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let team = CopilotSpaceCollaboratorVariant1Type(rawValue: "Team")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

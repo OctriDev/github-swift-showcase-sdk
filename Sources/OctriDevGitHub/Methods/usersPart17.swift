@@ -6,10 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension UsersMethods {
-    /// Deletes artifact attestations for a user in bulk, identifying them by subject digest or unique attestation ID.
-    /// Provide either `subject_digests` or `attestation_ids`, but not both; the selected list must contain between 1
-    /// and 1,024 entries.
+extension UsersMethods {
+    /// Deletes artifact attestations for a user in bulk, identifying them by subject digest or unique attestation ID. Provide either `subject_digests` or `attestation_ids`, but not both; the selected list must contain between 1 and 1,024 entries.
     ///
     /// Delete artifact attestations in bulk by either subject digests or unique ID.
     ///
@@ -17,52 +15,18 @@ public extension UsersMethods {
     /// - username: The handle for the GitHub user account.
     /// - body: The request body must include either `subject_digests` or
     ///   `attestation_ids`, but not both.
-    static func usersDeleteAttestationsBulk(
-        config: ClientConfig,
-        username: String,
-        body: [String: JSONValue],
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "POST",
-            ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/attestations/delete-request"].joined(),
-            config: config,
-            rawBody: sdkEncodeBody(body, contentType: "application/json"),
-            decoder: .empty,
-            operationId: "usersDeleteAttestationsBulk",
-            options: requestOptions,
-            errors: ["404": BasicError.self]
-        )).data
+    public static func usersDeleteAttestationsBulk(config: ClientConfig, username: String, body: [String: JSONValue], requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("POST", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/attestations/delete-request"].joined(), config: config, rawBody: (try sdkEncodeBody(body, contentType: "application/json")), decoder: .empty, operationId: "usersDeleteAttestationsBulk", options: requestOptions, errors: ["404": BasicError.self])).data
     }
 
-    /// Deletes artifact attestations associated with a subject digest for a GitHub user account. Use `username` and
-    /// `subject_digest` to identify the account and the attestation subject; a successful response confirms the
-    /// deletion.
+    /// Deletes artifact attestations associated with a subject digest for a GitHub user account. Use `username` and `subject_digest` to identify the account and the attestation subject; a successful response confirms the deletion.
     ///
     /// Delete an artifact attestation by subject digest.
     ///
     /// - Parameters:
     /// - username: The handle for the GitHub user account.
     /// - subjectDigest: Subject Digest
-    static func usersDeleteAttestationsBySubjectDigest(
-        config: ClientConfig,
-        username: String,
-        subjectDigest: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "DELETE",
-            [
-                "/users/",
-                sdkEncodePathSegment(sdkWireString(username)),
-                "/attestations/digest/",
-                sdkEncodePathSegment(sdkWireString(subjectDigest)),
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "usersDeleteAttestationsBySubjectDigest",
-            options: requestOptions,
-            errors: ["404": BasicError.self]
-        )).data
+    public static func usersDeleteAttestationsBySubjectDigest(config: ClientConfig, username: String, subjectDigest: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("DELETE", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/attestations/digest/", sdkEncodePathSegment(sdkWireString(subjectDigest))].joined(), config: config, decoder: .empty, operationId: "usersDeleteAttestationsBySubjectDigest", options: requestOptions, errors: ["404": BasicError.self])).data
     }
 }

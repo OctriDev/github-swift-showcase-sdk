@@ -6,45 +6,17 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension CopilotMethods {
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Replaces the list of selected
-    /// repositories that are enabled for Copilot cloud agent in an organization. This method can only be called when
-    /// the cloud agent repository policy is set to `selected`. OAuth app tokens and personal access tokens (classic)
-    /// need the `admin:org` scope to use this endpoint.
+extension CopilotMethods {
+    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Replaces the list of selected repositories that are enabled for Copilot cloud agent in an organization. This method can only be called when the cloud agent repository policy is set to `selected`. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - selectedRepositoryIds: List of repository IDs to enable for Copilot cloud
     ///   agent.
-    static func copilotSetCopilotCodingAgentSelectedRepositoriesForOrganization(
-        config: ClientConfig,
-        org: String,
-        selectedRepositoryIds: [Int],
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        let requestBody =
-            CopilotSetCopilotCodingAgentSelectedRepositoriesForOrganizatiX33f7099af4(
-                selectedRepositoryIds: selectedRepositoryIds
-            )
+    public static func copilotSetCopilotCodingAgentSelectedRepositoriesForOrganization(config: ClientConfig, org: String, selectedRepositoryIds: [Int], requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        let requestBody = CopilotSetCopilotCodingAgentSelectedRepositoriesForOrganizatiX33f7099af4(selectedRepositoryIds: selectedRepositoryIds)
 
-        return try await (sdkRequest(
-            "PUT",
-            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/copilot/coding-agent/permissions/repositories"]
-                .joined(),
-            config: config,
-            body: requestBody,
-            decoder: .empty,
-            operationId: "copilotSetCopilotCodingAgentSelectedRepositoriesForOrganization",
-            options: requestOptions,
-            errors: [
-                "401": BasicError.self,
-                "403": BasicError.self,
-                "404": BasicError.self,
-                "409": BasicError.self,
-                "422": ValidationError.self,
-                "500": BasicError.self,
-            ]
-        )).data
+        return try (await sdkRequest("PUT", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/copilot/coding-agent/permissions/repositories"].joined(), config: config, body: requestBody, decoder: .empty, operationId: "copilotSetCopilotCodingAgentSelectedRepositoriesForOrganization", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "409": BasicError.self, "422": ValidationError.self, "500": BasicError.self])).data
     }
 
     private struct CopilotSetCopilotCodingAgentSelectedRepositoriesForOrganizatiX33f7099af4: Encodable {
@@ -52,44 +24,16 @@ public extension CopilotMethods {
 
         func encode(to encoder: Encoder) throws {
             var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-            try keyedContainer.encode(selectedRepositoryIds, forKey: SdkCodingKey("selected_repository_ids"))
+            try keyedContainer.encode(self.selectedRepositoryIds, forKey: SdkCodingKey("selected_repository_ids"))
         }
     }
 
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Adds a repository to the list of
-    /// selected repositories enabled for Copilot cloud agent in an organization. This method can only be called when
-    /// the cloud agent repository policy is set to `selected`. OAuth app tokens and personal access tokens (classic)
-    /// need the `admin:org` scope to use this endpoint.
+    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Adds a repository to the list of selected repositories enabled for Copilot cloud agent in an organization. This method can only be called when the cloud agent repository policy is set to `selected`. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - repositoryId: The unique identifier of the repository.
-    static func copilotEnableCopilotCodingAgentForRepositoryInOrganization(
-        config: ClientConfig,
-        org: String,
-        repositoryId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "PUT",
-            [
-                "/orgs/",
-                sdkEncodePathSegment(sdkWireString(org)),
-                "/copilot/coding-agent/permissions/repositories/",
-                sdkEncodePathSegment(sdkWireString(repositoryId)),
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "copilotEnableCopilotCodingAgentForRepositoryInOrganization",
-            options: requestOptions,
-            errors: [
-                "401": BasicError.self,
-                "403": BasicError.self,
-                "404": BasicError.self,
-                "409": BasicError.self,
-                "422": ValidationError.self,
-                "500": BasicError.self,
-            ]
-        )).data
+    public static func copilotEnableCopilotCodingAgentForRepositoryInOrganization(config: ClientConfig, org: String, repositoryId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("PUT", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/copilot/coding-agent/permissions/repositories/", sdkEncodePathSegment(sdkWireString(repositoryId))].joined(), config: config, decoder: .empty, operationId: "copilotEnableCopilotCodingAgentForRepositoryInOrganization", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "409": BasicError.self, "422": ValidationError.self, "500": BasicError.self])).data
     }
 }

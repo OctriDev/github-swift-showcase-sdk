@@ -6,11 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension OrgsMethods {
-    /// List webhooks for an organization. The authenticated user must be an organization owner to use this endpoint.
-    /// OAuth app tokens and personal access tokens (classic) need `admin:org_hook` scope. OAuth apps cannot list, view,
-    /// or edit webhooks that they did not create and users cannot list, view, or edit webhooks that were created by
-    /// OAuth apps.
+extension OrgsMethods {
+    /// List webhooks for an organization. The authenticated user must be an organization owner to use this endpoint. OAuth app tokens and personal access tokens (classic) need `admin:org_hook` scope. OAuth apps cannot list, view, or edit webhooks that they did not create and users cannot list, view, or edit webhooks that were created by OAuth apps.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
@@ -22,26 +19,10 @@ public extension OrgsMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    static func orgsListWebhooks(
-        config: ClientConfig,
-        org: String,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [OrgHook] {
-        try await (sdkRequest(
-            "GET",
-            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/hooks"].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("page", value: page),
-            ],
-            decoder: .json,
-            operationId: "orgsListWebhooks",
-            options: requestOptions,
-            errors: ["404": BasicError.self]
-        ))
-        .data
+    public static func orgsListWebhooks(config: ClientConfig, org: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [OrgHook] {
+        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/hooks"].joined(), config: config, query: [
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("page", value: page),
+        ], decoder: .json, operationId: "orgsListWebhooks", options: requestOptions, errors: ["404": BasicError.self])).data
     }
 }

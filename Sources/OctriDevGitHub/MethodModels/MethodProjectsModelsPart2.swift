@@ -7,43 +7,27 @@ import Foundation
     import FoundationNetworking
 #endif
 
-/// Canonical projects operation model declarations
-public extension ProjectsAddFieldForUserRequestBodyVariant1 {
-    init(from decoder: Decoder) throws {
+// Canonical projects operation model declarations
+extension ProjectsAddFieldForUserRequestBodyVariant1 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.dataType) else {
-            throw SdkValidationError(
-                field: "data_type",
-                code: "required",
-                message: "Validation failed for 'data_type': value is required"
-            )
+            throw SdkValidationError(field: "data_type", code: "required", message: "Validation failed for 'data_type': value is required")
         }
         guard container.contains(.singleSelectOptions) else {
-            throw SdkValidationError(
-                field: "single_select_options",
-                code: "required",
-                message: "Validation failed for 'single_select_options': value is required"
-            )
+            throw SdkValidationError(field: "single_select_options", code: "required", message: "Validation failed for 'single_select_options': value is required")
         }
-        name = try container.sdkDecodeRequired(.name)
-        dataType = try container.sdkDecodeRequired(.dataType)
-        singleSelectOptions = try container.sdkDecodeRequired(.singleSelectOptions)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.dataType = try container.sdkDecodeRequired(.dataType)
+        self.singleSelectOptions = try container.sdkDecodeRequired(.singleSelectOptions)
     }
 }
 
-public extension ProjectsAddFieldForUserRequestBodyVariant1 {
-    init(
-        name: String,
-        dataType: ProjectsAddFieldForUserRequestBodyVariant1DataType,
-        singleSelectOptions: [ProjectsV2FieldSingleSelectOption]
-    ) {
+extension ProjectsAddFieldForUserRequestBodyVariant1 {
+    public init(name: String, dataType: ProjectsAddFieldForUserRequestBodyVariant1DataType, singleSelectOptions: [ProjectsV2FieldSingleSelectOption]) {
         (self.name, self.dataType) = (name, dataType)
         self.singleSelectOptions = singleSelectOptions
     }
@@ -55,32 +39,22 @@ public indirect enum ProjectsCreateViewForUserRequestBodySortByItemItem {
 }
 
 extension ProjectsCreateViewForUserRequestBodySortByItemItem: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for ProjectsCreateViewForUserRequestBodySortByItemItem"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ProjectsCreateViewForUserRequestBodySortByItemItem")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
 extension ProjectsCreateViewForUserRequestBodySortByItemItem {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(Int.self) {
-            return .intValue(value)
-        }
-        if let value = try? container.decode(String.self) {
-            return .stringValue(value)
-        }
+        if let value = try? container.decode(Int.self) { return .intValue(value) }
+        if let value = try? container.decode(String.self) { return .stringValue(value) }
         return nil
     }
 }
@@ -118,47 +92,29 @@ public struct ProjectsAddFieldForUserRequestBodyVariant2: Codable {
         case iterationConfiguration = "iteration_configuration"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ProjectsAddFieldForUserRequestBodyVariant2 {
-    init(from decoder: Decoder) throws {
+extension ProjectsAddFieldForUserRequestBodyVariant2 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.dataType) else {
-            throw SdkValidationError(
-                field: "data_type",
-                code: "required",
-                message: "Validation failed for 'data_type': value is required"
-            )
+            throw SdkValidationError(field: "data_type", code: "required", message: "Validation failed for 'data_type': value is required")
         }
         guard container.contains(.iterationConfiguration) else {
-            throw SdkValidationError(
-                field: "iteration_configuration",
-                code: "required",
-                message: "Validation failed for 'iteration_configuration': value is required"
-            )
+            throw SdkValidationError(field: "iteration_configuration", code: "required", message: "Validation failed for 'iteration_configuration': value is required")
         }
-        name = try container.sdkDecodeRequired(.name)
-        dataType = try container.sdkDecodeRequired(.dataType)
-        iterationConfiguration = try container.sdkDecodeRequired(.iterationConfiguration)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.dataType = try container.sdkDecodeRequired(.dataType)
+        self.iterationConfiguration = try container.sdkDecodeRequired(.iterationConfiguration)
     }
 }
 
-public extension ProjectsAddFieldForUserRequestBodyVariant2 {
-    init(
-        name: String,
-        dataType: ProjectsAddFieldForUserRequestBodyVariant2DataType,
-        iterationConfiguration: ProjectsV2FieldIterationConfiguration
-    ) {
+extension ProjectsAddFieldForUserRequestBodyVariant2 {
+    public init(name: String, dataType: ProjectsAddFieldForUserRequestBodyVariant2DataType, iterationConfiguration: ProjectsV2FieldIterationConfiguration) {
         (self.name, self.dataType) = (name, dataType)
         self.iterationConfiguration = iterationConfiguration
     }
@@ -175,35 +131,25 @@ public struct ProjectsAddFieldForOrgRequestBodyVariant1: Codable {
         case dataType = "data_type"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ProjectsAddFieldForOrgRequestBodyVariant1 {
-    init(from decoder: Decoder) throws {
+extension ProjectsAddFieldForOrgRequestBodyVariant1 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.dataType) else {
-            throw SdkValidationError(
-                field: "data_type",
-                code: "required",
-                message: "Validation failed for 'data_type': value is required"
-            )
+            throw SdkValidationError(field: "data_type", code: "required", message: "Validation failed for 'data_type': value is required")
         }
-        name = try container.sdkDecodeRequired(.name)
-        dataType = try container.sdkDecodeRequired(.dataType)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.dataType = try container.sdkDecodeRequired(.dataType)
     }
 }
 
-public extension ProjectsAddFieldForOrgRequestBodyVariant1 {
-    init(name: String, dataType: ProjectsAddFieldForOrgRequestBodyVariant1DataType) {
+extension ProjectsAddFieldForOrgRequestBodyVariant1 {
+    public init(name: String, dataType: ProjectsAddFieldForOrgRequestBodyVariant1DataType) {
         (self.name, self.dataType) = (name, dataType)
     }
 }
@@ -223,47 +169,29 @@ public struct ProjectsAddFieldForOrgRequestBodyVariant2: Codable {
         case singleSelectOptions = "single_select_options"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ProjectsAddFieldForOrgRequestBodyVariant2 {
-    init(from decoder: Decoder) throws {
+extension ProjectsAddFieldForOrgRequestBodyVariant2 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.dataType) else {
-            throw SdkValidationError(
-                field: "data_type",
-                code: "required",
-                message: "Validation failed for 'data_type': value is required"
-            )
+            throw SdkValidationError(field: "data_type", code: "required", message: "Validation failed for 'data_type': value is required")
         }
         guard container.contains(.singleSelectOptions) else {
-            throw SdkValidationError(
-                field: "single_select_options",
-                code: "required",
-                message: "Validation failed for 'single_select_options': value is required"
-            )
+            throw SdkValidationError(field: "single_select_options", code: "required", message: "Validation failed for 'single_select_options': value is required")
         }
-        name = try container.sdkDecodeRequired(.name)
-        dataType = try container.sdkDecodeRequired(.dataType)
-        singleSelectOptions = try container.sdkDecodeRequired(.singleSelectOptions)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.dataType = try container.sdkDecodeRequired(.dataType)
+        self.singleSelectOptions = try container.sdkDecodeRequired(.singleSelectOptions)
     }
 }
 
-public extension ProjectsAddFieldForOrgRequestBodyVariant2 {
-    init(
-        name: String,
-        dataType: ProjectsAddFieldForOrgRequestBodyVariant2DataType,
-        singleSelectOptions: [ProjectsV2FieldSingleSelectOption]
-    ) {
+extension ProjectsAddFieldForOrgRequestBodyVariant2 {
+    public init(name: String, dataType: ProjectsAddFieldForOrgRequestBodyVariant2DataType, singleSelectOptions: [ProjectsV2FieldSingleSelectOption]) {
         (self.name, self.dataType) = (name, dataType)
         self.singleSelectOptions = singleSelectOptions
     }
@@ -275,32 +203,22 @@ public indirect enum ProjectsUpdateItemForUserRequestBodyFieldsItemValue {
 }
 
 extension ProjectsUpdateItemForUserRequestBodyFieldsItemValue: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for ProjectsUpdateItemForUserRequestBodyFieldsItemValue"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ProjectsUpdateItemForUserRequestBodyFieldsItemValue")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
 extension ProjectsUpdateItemForUserRequestBodyFieldsItemValue {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) {
-            return .stringValue(value)
-        }
-        if let value = try? container.decode(Double.self) {
-            return .doubleValue(value)
-        }
+        if let value = try? container.decode(String.self) { return .stringValue(value) }
+        if let value = try? container.decode(Double.self) { return .doubleValue(value) }
         return nil
     }
 }
@@ -330,32 +248,22 @@ public indirect enum ProjectsListItemsForUserParameter {
 }
 
 extension ProjectsListItemsForUserParameter: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for ProjectsListItemsForUserParameter"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ProjectsListItemsForUserParameter")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
 extension ProjectsListItemsForUserParameter {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) {
-            return .stringValue(value)
-        }
-        if let value = try? container.decode([String].self) {
-            return .stringList(value)
-        }
+        if let value = try? container.decode(String.self) { return .stringValue(value) }
+        if let value = try? container.decode([String].self) { return .stringList(value) }
         return nil
     }
 }
@@ -378,27 +286,21 @@ public struct ProjectsAddFieldForOrgRequestBodyVariant0: Codable {
         case issueFieldId = "issue_field_id"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ProjectsAddFieldForOrgRequestBodyVariant0 {
-    init(from decoder: Decoder) throws {
+extension ProjectsAddFieldForOrgRequestBodyVariant0 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.issueFieldId) else {
-            throw SdkValidationError(
-                field: "issue_field_id",
-                code: "required",
-                message: "Validation failed for 'issue_field_id': value is required"
-            )
+            throw SdkValidationError(field: "issue_field_id", code: "required", message: "Validation failed for 'issue_field_id': value is required")
         }
-        issueFieldId = try container.sdkDecodeRequired(.issueFieldId)
+        self.issueFieldId = try container.sdkDecodeRequired(.issueFieldId)
     }
 }
 
-public extension ProjectsAddFieldForOrgRequestBodyVariant0 {
-    init(issueFieldId: Int) {
+extension ProjectsAddFieldForOrgRequestBodyVariant0 {
+    public init(issueFieldId: Int) {
         self.issueFieldId = issueFieldId
     }
 }
@@ -416,35 +318,25 @@ public struct ProjectsUpdateItemForOrgRequestBodyFieldsItem: Codable {
         case value
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ProjectsUpdateItemForOrgRequestBodyFieldsItem {
-    init(from decoder: Decoder) throws {
+extension ProjectsUpdateItemForOrgRequestBodyFieldsItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
         guard container.contains(.value) else {
-            throw SdkValidationError(
-                field: "value",
-                code: "required",
-                message: "Validation failed for 'value': value is required"
-            )
+            throw SdkValidationError(field: "value", code: "required", message: "Validation failed for 'value': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
-        value = try container.sdkDecodeNullable(.value)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.value = try container.sdkDecodeNullable(.value)
     }
 }
 
-public extension ProjectsUpdateItemForOrgRequestBodyFieldsItem {
-    init(id: Int, value: ProjectsUpdateItemForOrgRequestBodyFieldsItemValue?) {
+extension ProjectsUpdateItemForOrgRequestBodyFieldsItem {
+    public init(id: Int, value: ProjectsUpdateItemForOrgRequestBodyFieldsItemValue?) {
         (self.id, self.value) = (id, value)
     }
 }
@@ -463,47 +355,29 @@ public struct ProjectsAddFieldForOrgRequestBodyVariant3: Codable {
         case iterationConfiguration = "iteration_configuration"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ProjectsAddFieldForOrgRequestBodyVariant3 {
-    init(from decoder: Decoder) throws {
+extension ProjectsAddFieldForOrgRequestBodyVariant3 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.dataType) else {
-            throw SdkValidationError(
-                field: "data_type",
-                code: "required",
-                message: "Validation failed for 'data_type': value is required"
-            )
+            throw SdkValidationError(field: "data_type", code: "required", message: "Validation failed for 'data_type': value is required")
         }
         guard container.contains(.iterationConfiguration) else {
-            throw SdkValidationError(
-                field: "iteration_configuration",
-                code: "required",
-                message: "Validation failed for 'iteration_configuration': value is required"
-            )
+            throw SdkValidationError(field: "iteration_configuration", code: "required", message: "Validation failed for 'iteration_configuration': value is required")
         }
-        name = try container.sdkDecodeRequired(.name)
-        dataType = try container.sdkDecodeRequired(.dataType)
-        iterationConfiguration = try container.sdkDecodeRequired(.iterationConfiguration)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.dataType = try container.sdkDecodeRequired(.dataType)
+        self.iterationConfiguration = try container.sdkDecodeRequired(.iterationConfiguration)
     }
 }
 
-public extension ProjectsAddFieldForOrgRequestBodyVariant3 {
-    init(
-        name: String,
-        dataType: ProjectsAddFieldForOrgRequestBodyVariant3DataType,
-        iterationConfiguration: ProjectsV2FieldIterationConfiguration
-    ) {
+extension ProjectsAddFieldForOrgRequestBodyVariant3 {
+    public init(name: String, dataType: ProjectsAddFieldForOrgRequestBodyVariant3DataType, iterationConfiguration: ProjectsV2FieldIterationConfiguration) {
         (self.name, self.dataType) = (name, dataType)
         self.iterationConfiguration = iterationConfiguration
     }
@@ -515,32 +389,22 @@ public indirect enum ProjectsGetUserItemParameter {
 }
 
 extension ProjectsGetUserItemParameter: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for ProjectsGetUserItemParameter"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ProjectsGetUserItemParameter")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
 extension ProjectsGetUserItemParameter {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) {
-            return .stringValue(value)
-        }
-        if let value = try? container.decode([String].self) {
-            return .stringList(value)
-        }
+        if let value = try? container.decode(String.self) { return .stringValue(value) }
+        if let value = try? container.decode([String].self) { return .stringList(value) }
         return nil
     }
 }

@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// ReposContent domain models
+// ReposContent domain models
 public typealias ContentDirectory = [ContentDirectoryItem]
 
 /// Required object value serialized in the `_links` wire field.
@@ -21,50 +21,36 @@ public struct ContentSymlinkLinks: Codable {
         case `self`
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ContentSymlinkLinks {
-    init(from decoder: Decoder) throws {
+extension ContentSymlinkLinks {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.git) else {
-            throw SdkValidationError(
-                field: "git",
-                code: "required",
-                message: "Validation failed for 'git': value is required"
-            )
+            throw SdkValidationError(field: "git", code: "required", message: "Validation failed for 'git': value is required")
         }
         guard container.contains(.html) else {
-            throw SdkValidationError(
-                field: "html",
-                code: "required",
-                message: "Validation failed for 'html': value is required"
-            )
+            throw SdkValidationError(field: "html", code: "required", message: "Validation failed for 'html': value is required")
         }
         guard container.contains(.`self`) else {
-            throw SdkValidationError(
-                field: "self",
-                code: "required",
-                message: "Validation failed for 'self': value is required"
-            )
+            throw SdkValidationError(field: "self", code: "required", message: "Validation failed for 'self': value is required")
         }
-        git = try container.sdkDecodeNullable(.git)
-        html = try container.sdkDecodeNullable(.html)
+        self.git = try container.sdkDecodeNullable(.git)
+        self.html = try container.sdkDecodeNullable(.html)
         self.`self` = try container.sdkDecodeRequired(.`self`)
-        if let value = git {
+        if let value = self.git {
             try sdkValidateUri("git", value)
         }
-        if let value = html {
+        if let value = self.html {
             try sdkValidateUri("html", value)
         }
-        try sdkValidateUri("self", self.`self`)
+            try sdkValidateUri("self", self.`self`)
     }
 }
 
-public extension ContentSymlinkLinks {
-    init(git: String?, html: String?, self selfValue: String) throws {
+extension ContentSymlinkLinks {
+    public init(git: String?, html: String?, `self` selfValue: String) throws {
         (self.git, self.html) = (git, html)
         self.`self` = selfValue
         if let value = self.git {
@@ -73,7 +59,7 @@ public extension ContentSymlinkLinks {
         if let value = self.html {
             try sdkValidateUri("html", value)
         }
-        try sdkValidateUri("self", self.`self`)
+            try sdkValidateUri("self", self.`self`)
     }
 }
 
@@ -104,59 +90,45 @@ public struct ContentDirectoryItem: Codable {
         case content
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ContentDirectoryItem {
-    init(from decoder: Decoder) throws {
+extension ContentDirectoryItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        type = try container.sdkDecodeRequired(.type)
-        size = try container.sdkDecodeRequired(.size)
-        name = try container.sdkDecodeRequired(.name)
-        path = try container.sdkDecodeRequired(.path)
-        sha = try container.sdkDecodeRequired(.sha)
-        url = try container.sdkDecodeRequired(.url)
-        gitUrl = try container.sdkDecodeNullable(.gitUrl)
-        htmlUrl = try container.sdkDecodeNullable(.htmlUrl)
-        downloadUrl = try container.sdkDecodeNullable(.downloadUrl)
-        links = try container.sdkDecodeRequired(.links)
-        content = try container.sdkDecodeIfPresent(.content)
-        try sdkValidateUri("url", url)
-        if let value = gitUrl {
+        self.type = try container.sdkDecodeRequired(.type)
+        self.size = try container.sdkDecodeRequired(.size)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.path = try container.sdkDecodeRequired(.path)
+        self.sha = try container.sdkDecodeRequired(.sha)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.gitUrl = try container.sdkDecodeNullable(.gitUrl)
+        self.htmlUrl = try container.sdkDecodeNullable(.htmlUrl)
+        self.downloadUrl = try container.sdkDecodeNullable(.downloadUrl)
+        self.links = try container.sdkDecodeRequired(.links)
+        self.content = try container.sdkDecodeIfPresent(.content)
+            try sdkValidateUri("url", self.url)
+        if let value = self.gitUrl {
             try sdkValidateUri("git_url", value)
         }
-        if let value = htmlUrl {
+        if let value = self.htmlUrl {
             try sdkValidateUri("html_url", value)
         }
-        if let value = downloadUrl {
+        if let value = self.downloadUrl {
             try sdkValidateUri("download_url", value)
         }
     }
 }
 
-public extension ContentDirectoryItem {
-    init(
-        type: ContentDirectoryItemType,
-        size: Int,
-        name: String,
-        path: String,
-        sha: String,
-        url: String,
-        gitUrl: String?,
-        htmlUrl: String?,
-        downloadUrl: String?,
-        links: ContentDirectoryItemLinks,
-        content: String? = nil
-    ) throws {
+extension ContentDirectoryItem {
+    public init(type: ContentDirectoryItemType, size: Int, name: String, path: String, sha: String, url: String, gitUrl: String?, htmlUrl: String?, downloadUrl: String?, links: ContentDirectoryItemLinks, content: String? = nil) throws {
         (self.type, self.size) = (type, size)
         (self.name, self.path) = (name, path)
         (self.sha, self.url) = (sha, url)
         (self.gitUrl, self.htmlUrl) = (gitUrl, htmlUrl)
         (self.downloadUrl, self.links) = (downloadUrl, links)
         self.content = content
-        try sdkValidateUri("url", self.url)
+            try sdkValidateUri("url", self.url)
         if let value = self.gitUrl {
             try sdkValidateUri("git_url", value)
         }
@@ -184,50 +156,36 @@ public struct ContentFileLinks: Codable {
         case `self`
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ContentFileLinks {
-    init(from decoder: Decoder) throws {
+extension ContentFileLinks {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.git) else {
-            throw SdkValidationError(
-                field: "git",
-                code: "required",
-                message: "Validation failed for 'git': value is required"
-            )
+            throw SdkValidationError(field: "git", code: "required", message: "Validation failed for 'git': value is required")
         }
         guard container.contains(.html) else {
-            throw SdkValidationError(
-                field: "html",
-                code: "required",
-                message: "Validation failed for 'html': value is required"
-            )
+            throw SdkValidationError(field: "html", code: "required", message: "Validation failed for 'html': value is required")
         }
         guard container.contains(.`self`) else {
-            throw SdkValidationError(
-                field: "self",
-                code: "required",
-                message: "Validation failed for 'self': value is required"
-            )
+            throw SdkValidationError(field: "self", code: "required", message: "Validation failed for 'self': value is required")
         }
-        git = try container.sdkDecodeNullable(.git)
-        html = try container.sdkDecodeNullable(.html)
+        self.git = try container.sdkDecodeNullable(.git)
+        self.html = try container.sdkDecodeNullable(.html)
         self.`self` = try container.sdkDecodeRequired(.`self`)
-        if let value = git {
+        if let value = self.git {
             try sdkValidateUri("git", value)
         }
-        if let value = html {
+        if let value = self.html {
             try sdkValidateUri("html", value)
         }
-        try sdkValidateUri("self", self.`self`)
+            try sdkValidateUri("self", self.`self`)
     }
 }
 
-public extension ContentFileLinks {
-    init(git: String?, html: String?, self selfValue: String) throws {
+extension ContentFileLinks {
+    public init(git: String?, html: String?, `self` selfValue: String) throws {
         (self.git, self.html) = (git, html)
         self.`self` = selfValue
         if let value = self.git {
@@ -236,7 +194,7 @@ public extension ContentFileLinks {
         if let value = self.html {
             try sdkValidateUri("html", value)
         }
-        try sdkValidateUri("self", self.`self`)
+            try sdkValidateUri("self", self.`self`)
     }
 }
 
@@ -290,59 +248,42 @@ public struct ContentFile: Codable {
         case submoduleGitUrl = "submodule_git_url"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ContentFile {
-    init(from decoder: Decoder) throws {
+extension ContentFile {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        type = try container.sdkDecodeRequired(.type)
-        encoding = try container.sdkDecodeRequired(.encoding)
-        size = try container.sdkDecodeRequired(.size)
-        name = try container.sdkDecodeRequired(.name)
-        path = try container.sdkDecodeRequired(.path)
-        content = try container.sdkDecodeRequired(.content)
-        sha = try container.sdkDecodeRequired(.sha)
-        url = try container.sdkDecodeRequired(.url)
-        gitUrl = try container.sdkDecodeNullable(.gitUrl)
-        htmlUrl = try container.sdkDecodeNullable(.htmlUrl)
-        downloadUrl = try container.sdkDecodeNullable(.downloadUrl)
-        links = try container.sdkDecodeRequired(.links)
-        target = try container.sdkDecodeIfPresent(.target)
-        submoduleGitUrl = try container.sdkDecodeIfPresent(.submoduleGitUrl)
-        try sdkValidateRawEnum("type", type, ContentFileType.allCases.map(\.rawValue))
-        try sdkValidateUri("url", url)
-        if let value = gitUrl {
+        self.type = try container.sdkDecodeRequired(.type)
+        self.encoding = try container.sdkDecodeRequired(.encoding)
+        self.size = try container.sdkDecodeRequired(.size)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.path = try container.sdkDecodeRequired(.path)
+        self.content = try container.sdkDecodeRequired(.content)
+        self.sha = try container.sdkDecodeRequired(.sha)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.gitUrl = try container.sdkDecodeNullable(.gitUrl)
+        self.htmlUrl = try container.sdkDecodeNullable(.htmlUrl)
+        self.downloadUrl = try container.sdkDecodeNullable(.downloadUrl)
+        self.links = try container.sdkDecodeRequired(.links)
+        self.target = try container.sdkDecodeIfPresent(.target)
+        self.submoduleGitUrl = try container.sdkDecodeIfPresent(.submoduleGitUrl)
+            try sdkValidateRawEnum("type", self.type, ContentFileType.allCases.map(\.rawValue))
+            try sdkValidateUri("url", self.url)
+        if let value = self.gitUrl {
             try sdkValidateUri("git_url", value)
         }
-        if let value = htmlUrl {
+        if let value = self.htmlUrl {
             try sdkValidateUri("html_url", value)
         }
-        if let value = downloadUrl {
+        if let value = self.downloadUrl {
             try sdkValidateUri("download_url", value)
         }
     }
 }
 
-public extension ContentFile {
-    init(
-        type: ContentFileType,
-        encoding: String,
-        size: Int,
-        name: String,
-        path: String,
-        content: String,
-        sha: String,
-        url: String,
-        gitUrl: String?,
-        htmlUrl: String?,
-        downloadUrl: String?,
-        links: ContentFileLinks,
-        target: String? = nil,
-        submoduleGitUrl: String? = nil
-    ) throws {
+extension ContentFile {
+    public init(type: ContentFileType, encoding: String, size: Int, name: String, path: String, content: String, sha: String, url: String, gitUrl: String?, htmlUrl: String?, downloadUrl: String?, links: ContentFileLinks, target: String? = nil, submoduleGitUrl: String? = nil) throws {
         (self.type, self.encoding) = (type, encoding)
         (self.size, self.name) = (size, name)
         (self.path, self.content) = (path, content)
@@ -350,8 +291,8 @@ public extension ContentFile {
         (self.gitUrl, self.htmlUrl) = (gitUrl, htmlUrl)
         (self.downloadUrl, self.links) = (downloadUrl, links)
         (self.target, self.submoduleGitUrl) = (target, submoduleGitUrl)
-        try sdkValidateRawEnum("type", self.type, ContentFileType.allCases.map(\.rawValue))
-        try sdkValidateUri("url", self.url)
+            try sdkValidateRawEnum("type", self.type, ContentFileType.allCases.map(\.rawValue))
+            try sdkValidateUri("url", self.url)
         if let value = self.gitUrl {
             try sdkValidateUri("git_url", value)
         }
@@ -386,51 +327,33 @@ public struct ContentTraffic: Codable {
         case uniques
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ContentTraffic {
-    init(from decoder: Decoder) throws {
+extension ContentTraffic {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.path) else {
-            throw SdkValidationError(
-                field: "path",
-                code: "required",
-                message: "Validation failed for 'path': value is required"
-            )
+            throw SdkValidationError(field: "path", code: "required", message: "Validation failed for 'path': value is required")
         }
         guard container.contains(.title) else {
-            throw SdkValidationError(
-                field: "title",
-                code: "required",
-                message: "Validation failed for 'title': value is required"
-            )
+            throw SdkValidationError(field: "title", code: "required", message: "Validation failed for 'title': value is required")
         }
         guard container.contains(.count) else {
-            throw SdkValidationError(
-                field: "count",
-                code: "required",
-                message: "Validation failed for 'count': value is required"
-            )
+            throw SdkValidationError(field: "count", code: "required", message: "Validation failed for 'count': value is required")
         }
         guard container.contains(.uniques) else {
-            throw SdkValidationError(
-                field: "uniques",
-                code: "required",
-                message: "Validation failed for 'uniques': value is required"
-            )
+            throw SdkValidationError(field: "uniques", code: "required", message: "Validation failed for 'uniques': value is required")
         }
-        path = try container.sdkDecodeRequired(.path)
-        title = try container.sdkDecodeRequired(.title)
-        count = try container.sdkDecodeRequired(.count)
-        uniques = try container.sdkDecodeRequired(.uniques)
+        self.path = try container.sdkDecodeRequired(.path)
+        self.title = try container.sdkDecodeRequired(.title)
+        self.count = try container.sdkDecodeRequired(.count)
+        self.uniques = try container.sdkDecodeRequired(.uniques)
     }
 }
 
-public extension ContentTraffic {
-    init(path: String, title: String, count: Int, uniques: Int) {
+extension ContentTraffic {
+    public init(path: String, title: String, count: Int, uniques: Int) {
         (self.path, self.title) = (path, title)
         (self.count, self.uniques) = (count, uniques)
     }
@@ -475,63 +398,49 @@ public struct ContentSubmodule: Codable {
         case links = "_links"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ContentSubmodule {
-    init(from decoder: Decoder) throws {
+extension ContentSubmodule {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        type = try container.sdkDecodeRequired(.type)
-        submoduleGitUrl = try container.sdkDecodeRequired(.submoduleGitUrl)
-        size = try container.sdkDecodeRequired(.size)
-        name = try container.sdkDecodeRequired(.name)
-        path = try container.sdkDecodeRequired(.path)
-        sha = try container.sdkDecodeRequired(.sha)
-        url = try container.sdkDecodeRequired(.url)
-        gitUrl = try container.sdkDecodeNullable(.gitUrl)
-        htmlUrl = try container.sdkDecodeNullable(.htmlUrl)
-        downloadUrl = try container.sdkDecodeNullable(.downloadUrl)
-        links = try container.sdkDecodeRequired(.links)
-        try sdkValidateRawEnum("type", type, ContentSubmoduleType.allCases.map(\.rawValue))
-        try sdkValidateUri("submodule_git_url", submoduleGitUrl)
-        try sdkValidateUri("url", url)
-        if let value = gitUrl {
+        self.type = try container.sdkDecodeRequired(.type)
+        self.submoduleGitUrl = try container.sdkDecodeRequired(.submoduleGitUrl)
+        self.size = try container.sdkDecodeRequired(.size)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.path = try container.sdkDecodeRequired(.path)
+        self.sha = try container.sdkDecodeRequired(.sha)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.gitUrl = try container.sdkDecodeNullable(.gitUrl)
+        self.htmlUrl = try container.sdkDecodeNullable(.htmlUrl)
+        self.downloadUrl = try container.sdkDecodeNullable(.downloadUrl)
+        self.links = try container.sdkDecodeRequired(.links)
+            try sdkValidateRawEnum("type", self.type, ContentSubmoduleType.allCases.map(\.rawValue))
+            try sdkValidateUri("submodule_git_url", self.submoduleGitUrl)
+            try sdkValidateUri("url", self.url)
+        if let value = self.gitUrl {
             try sdkValidateUri("git_url", value)
         }
-        if let value = htmlUrl {
+        if let value = self.htmlUrl {
             try sdkValidateUri("html_url", value)
         }
-        if let value = downloadUrl {
+        if let value = self.downloadUrl {
             try sdkValidateUri("download_url", value)
         }
     }
 }
 
-public extension ContentSubmodule {
-    init(
-        type: ContentSubmoduleType,
-        submoduleGitUrl: String,
-        size: Int,
-        name: String,
-        path: String,
-        sha: String,
-        url: String,
-        gitUrl: String?,
-        htmlUrl: String?,
-        downloadUrl: String?,
-        links: ContentSubmoduleLinks
-    ) throws {
+extension ContentSubmodule {
+    public init(type: ContentSubmoduleType, submoduleGitUrl: String, size: Int, name: String, path: String, sha: String, url: String, gitUrl: String?, htmlUrl: String?, downloadUrl: String?, links: ContentSubmoduleLinks) throws {
         (self.type, self.submoduleGitUrl) = (type, submoduleGitUrl)
         (self.size, self.name) = (size, name)
         (self.path, self.sha) = (path, sha)
         (self.url, self.gitUrl) = (url, gitUrl)
         (self.htmlUrl, self.downloadUrl) = (htmlUrl, downloadUrl)
         self.links = links
-        try sdkValidateRawEnum("type", self.type, ContentSubmoduleType.allCases.map(\.rawValue))
-        try sdkValidateUri("submodule_git_url", self.submoduleGitUrl)
-        try sdkValidateUri("url", self.url)
+            try sdkValidateRawEnum("type", self.type, ContentSubmoduleType.allCases.map(\.rawValue))
+            try sdkValidateUri("submodule_git_url", self.submoduleGitUrl)
+            try sdkValidateUri("url", self.url)
         if let value = self.gitUrl {
             try sdkValidateUri("git_url", value)
         }
@@ -555,50 +464,36 @@ public struct ContentDirectoryItemLinks: Codable {
         case `self`
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ContentDirectoryItemLinks {
-    init(from decoder: Decoder) throws {
+extension ContentDirectoryItemLinks {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.git) else {
-            throw SdkValidationError(
-                field: "git",
-                code: "required",
-                message: "Validation failed for 'git': value is required"
-            )
+            throw SdkValidationError(field: "git", code: "required", message: "Validation failed for 'git': value is required")
         }
         guard container.contains(.html) else {
-            throw SdkValidationError(
-                field: "html",
-                code: "required",
-                message: "Validation failed for 'html': value is required"
-            )
+            throw SdkValidationError(field: "html", code: "required", message: "Validation failed for 'html': value is required")
         }
         guard container.contains(.`self`) else {
-            throw SdkValidationError(
-                field: "self",
-                code: "required",
-                message: "Validation failed for 'self': value is required"
-            )
+            throw SdkValidationError(field: "self", code: "required", message: "Validation failed for 'self': value is required")
         }
-        git = try container.sdkDecodeNullable(.git)
-        html = try container.sdkDecodeNullable(.html)
+        self.git = try container.sdkDecodeNullable(.git)
+        self.html = try container.sdkDecodeNullable(.html)
         self.`self` = try container.sdkDecodeRequired(.`self`)
-        if let value = git {
+        if let value = self.git {
             try sdkValidateUri("git", value)
         }
-        if let value = html {
+        if let value = self.html {
             try sdkValidateUri("html", value)
         }
-        try sdkValidateUri("self", self.`self`)
+            try sdkValidateUri("self", self.`self`)
     }
 }
 
-public extension ContentDirectoryItemLinks {
-    init(git: String?, html: String?, self selfValue: String) throws {
+extension ContentDirectoryItemLinks {
+    public init(git: String?, html: String?, `self` selfValue: String) throws {
         (self.git, self.html) = (git, html)
         self.`self` = selfValue
         if let value = self.git {
@@ -607,6 +502,6 @@ public extension ContentDirectoryItemLinks {
         if let value = self.html {
             try sdkValidateUri("html", value)
         }
-        try sdkValidateUri("self", self.`self`)
+            try sdkValidateUri("self", self.`self`)
     }
 }

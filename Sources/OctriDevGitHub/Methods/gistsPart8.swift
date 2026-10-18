@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension GistsMethods {
-    /// Lists commits in a gist, including each commit's version, author, timestamp, and change counts. Use `page` and
-    /// `per_page` to paginate the results.
+extension GistsMethods {
+    /// Lists commits in a gist, including each commit's version, author, timestamp, and change counts. Use `page` and `per_page` to paginate the results.
     ///
     /// - Parameters:
     /// - gistId: The unique identifier of the gist.
@@ -20,25 +19,10 @@ public extension GistsMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    static func gistsListCommits(
-        config: ClientConfig,
-        gistId: String,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [GistCommit] {
-        try await (sdkRequest(
-            "GET",
-            ["/gists/", sdkEncodePathSegment(sdkWireString(gistId)), "/commits"].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("page", value: page),
-            ],
-            decoder: .json,
-            operationId: "gistsListCommits",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self]
-        )).data
+    public static func gistsListCommits(config: ClientConfig, gistId: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [GistCommit] {
+        return try (await sdkRequest("GET", ["/gists/", sdkEncodePathSegment(sdkWireString(gistId)), "/commits"].joined(), config: config, query: [
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("page", value: page),
+        ], decoder: .json, operationId: "gistsListCommits", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
     }
 }

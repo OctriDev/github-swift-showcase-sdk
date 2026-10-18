@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension PullsMethods {
-    struct PullsMergeAsyncOptions: Codable {
+extension PullsMethods {
+    public struct PullsMergeAsyncOptions: Codable {
         public var owner: String
         public var repo: String
         public var pullNumber: Int
@@ -25,19 +25,7 @@ public extension PullsMethods {
         }
     }
 
-    /// Merges a pull request into the base branch in the background or adds it to a merge queue. Background processing
-    /// allows certain types of errors to be retried and reduces the risk of timeouts for complex merges. This is the
-    /// required API for merging stacked pull requests. For a stacked pull request, the operation includes all open
-    /// downstack pull requests. A new asynchronous merge request returns a `202` response with a UUID that can be used
-    /// to [fetch the result of the
-    /// merge](https://docs.github.com/rest/pulls/pulls#get-the-result-of-an-asynchronous-merge). If another
-    /// asynchronous merge request is already pending for this pull request, a `409` response returns that request's
-    /// UUID and merge options instead. If the pull request is already merged or already in a merge queue, a `200`
-    /// response is returned immediately. A `merged` result includes the merge commit OID. An `enqueued` result means
-    /// the pull request was added to the merge queue, not that it has merged. If the pull request cannot be merged
-    /// (e.g. because it is closed, or still a draft) this result will be returned immediately with a `400` response
-    /// status. Branch protection rules and repository rules are not run at this stage, only basic pull request state
-    /// checks are performed.
+    /// Merges a pull request into the base branch in the background or adds it to a merge queue. Background processing allows certain types of errors to be retried and reduces the risk of timeouts for complex merges. This is the required API for merging stacked pull requests. For a stacked pull request, the operation includes all open downstack pull requests. A new asynchronous merge request returns a `202` response with a UUID that can be used to [fetch the result of the merge](https://docs.github.com/rest/pulls/pulls#get-the-result-of-an-asynchronous-merge). If another asynchronous merge request is already pending for this pull request, a `409` response returns that request's UUID and merge options instead. If the pull request is already merged or already in a merge queue, a `200` response is returned immediately. A `merged` result includes the merge commit OID. An `enqueued` result means the pull request was added to the merge queue, not that it has merged. If the pull request cannot be merged (e.g. because it is closed, or still a draft) this result will be returned immediately with a `400` response status. Branch protection rules and repository rules are not run at this stage, only basic pull request state checks are performed.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -62,36 +50,9 @@ public extension PullsMethods {
     ///   otherwise. If omitted, defaults to `default`.
     /// - bypassRules: Whether to bypass repository rules that the authenticated
     ///   actor is permitted to bypass.
-    static func pullsMergeAsync(
-        config: ClientConfig,
-        options: PullsMergeAsyncOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> PullRequestMergeAsyncResult {
+    public static func pullsMergeAsync(config: ClientConfig, options: PullsMergeAsyncOptions, requestOptions: RequestOptions? = nil) async throws -> PullRequestMergeAsyncResult {
         let requestBody = PullsMergeAsyncRequestBody(options: options)
 
-        return try await (sdkRequest(
-            "PUT",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(options.owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(options.repo)),
-                "/pulls/",
-                sdkEncodePathSegment(sdkWireString(options.pullNumber)),
-                "/merge-async",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "pullsMergeAsync",
-            options: requestOptions,
-            errors: [
-                "400": PullRequestMergeAsyncResult.self,
-                "403": BasicError.self,
-                "404": BasicError.self,
-                "409": PullRequestMergeAsyncResult.self,
-                "422": ValidationError.self,
-            ]
-        )).data
+        return try (await sdkRequest("PUT", ["/repos/", sdkEncodePathSegment(sdkWireString(options.owner)), "/", sdkEncodePathSegment(sdkWireString(options.repo)), "/pulls/", sdkEncodePathSegment(sdkWireString(options.pullNumber)), "/merge-async"].joined(), config: config, body: requestBody, decoder: .json, operationId: "pullsMergeAsync", options: requestOptions, errors: ["400": PullRequestMergeAsyncResult.self, "403": BasicError.self, "404": BasicError.self, "409": PullRequestMergeAsyncResult.self, "422": ValidationError.self])).data
     }
 }

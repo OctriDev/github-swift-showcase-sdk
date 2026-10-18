@@ -6,14 +6,10 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension AppsMethods {
-    /// Updates the webhook configuration for a GitHub App, including its payload URL and delivery settings. Supply
-    /// `url` as a URI; `content_type` defaults to `form`, and `insecure_ssl` defaults to `0`. Authenticate with a
-    /// GitHub App JWT to access this endpoint.
+extension AppsMethods {
+    /// Updates the webhook configuration for a GitHub App, including its payload URL and delivery settings. Supply `url` as a URI; `content_type` defaults to `form`, and `insecure_ssl` defaults to `0`. Authenticate with a GitHub App JWT to access this endpoint.
     ///
-    /// Updates the webhook configuration for a GitHub App. For more information about configuring a webhook for your
-    /// app, see "Creating a GitHub App." You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
-    /// to access this endpoint.
+    /// Updates the webhook configuration for a GitHub App. For more information about configuring a webhook for your app, see "Creating a GitHub App." You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
     ///
     /// - Parameters:
     /// - url: The URL to which the payloads will be delivered.
@@ -22,33 +18,13 @@ public extension AppsMethods {
     /// - secret: If provided, the `secret` will be used as the `key` to generate
     ///   the HMAC hex digest value for [delivery signature
     ///   headers](https://docs.github.com/webhooks/event-payloads/#delivery-headers).
-    static func appsUpdateWebhookConfigForApp(
-        config: ClientConfig,
-        url: WebhookConfigUrl? = nil,
-        contentType: WebhookConfigContentType? = nil,
-        secret: WebhookConfigSecret? = nil,
-        insecureSsl: WebhookConfigInsecureSsl? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> WebhookConfig {
-        if let url {
+    public static func appsUpdateWebhookConfigForApp(config: ClientConfig, url: WebhookConfigUrl? = nil, contentType: WebhookConfigContentType? = nil, secret: WebhookConfigSecret? = nil, insecureSsl: WebhookConfigInsecureSsl? = nil, requestOptions: RequestOptions? = nil) async throws -> WebhookConfig {
+        if let url = url {
             try sdkValidateUri("url", url)
         }
 
-        let requestBody = AppsUpdateWebhookConfigForAppRequestBody(
-            url: url,
-            contentType: contentType,
-            secret: secret,
-            insecureSsl: insecureSsl
-        )
+        let requestBody = AppsUpdateWebhookConfigForAppRequestBody(url: url, contentType: contentType, secret: secret, insecureSsl: insecureSsl)
 
-        return try await (sdkRequest(
-            "PATCH",
-            "/app/hook/config",
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "appsUpdateWebhookConfigForApp",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("PATCH", "/app/hook/config", config: config, body: requestBody, decoder: .json, operationId: "appsUpdateWebhookConfigForApp", options: requestOptions)).data
     }
 }

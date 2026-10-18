@@ -17,14 +17,14 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.pulls.merge(
-                owner: decoded("\"owner\""),
-                repo: decoded("\"repo\""),
-                pullNumber: decoded("1"),
-                commitTitle: decoded("\"Expand enum\""),
-                commitMessage: decoded("\"Add a new value to the merge_method enum\""),
-                sha: decoded("null"),
-                mergeMethod: decoded("null")
-            )
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            pullNumber: decoded("1"),
+            commitTitle: decoded("\"Expand enum\""),
+            commitMessage: decoded("\"Add a new value to the merge_method enum\""),
+            sha: decoded("null"),
+            mergeMethod: decoded("null")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -45,11 +45,7 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try PullsMethods.PullsMergeAsyncOptions(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            pullNumber: decoded("1")
-        )
+        var options = try PullsMethods.PullsMergeAsyncOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), pullNumber: decoded("1"))
         options.commitTitle = try decoded("\"Fix race condition\"")
         options.commitMessage = try decoded(sdkMethodFixture1446Value1)
         options.sha = try decoded("\"6358cd125586d9def8c3e5943f23506202da81cc\"")
@@ -74,11 +70,7 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try PullsMethods.PullsMergeAsyncOptions(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            pullNumber: decoded("1")
-        )
+        var options = try PullsMethods.PullsMergeAsyncOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), pullNumber: decoded("1"))
         options.commitTitle = try decoded("\"Fix race condition\"")
         options.commitMessage = try decoded(sdkMethodFixture1447Value1)
         options.sha = try decoded("\"6358cd125586d9def8c3e5943f23506202da81cc\"")
@@ -91,8 +83,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.pulls.mergeAsync(
-                options: options
-            )
+            options: options
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -115,12 +107,12 @@ extension SdkMethodTests {
         _ = client
         do {
             _ = try await client.pulls.removeRequestedReviewers(
-                owner: decoded("\"owner\""),
-                repo: decoded("\"repo\""),
-                pullNumber: decoded("1"),
-                reviewers: decoded("[\"octocat\",\"hubot\",\"other_user\"]"),
-                teamReviewers: decoded("[\"justice-league\"]")
-            )
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            pullNumber: decoded("1"),
+            reviewers: decoded("[\"octocat\",\"hubot\",\"other_user\"]"),
+            teamReviewers: decoded("[\"justice-league\"]")
+        )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -140,12 +132,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.pulls.removeRequestedReviewers(
-                owner: decoded("\"owner\""),
-                repo: decoded("\"repo\""),
-                pullNumber: decoded("1"),
-                reviewers: decoded("[\"octocat\",\"hubot\",\"other_user\"]"),
-                teamReviewers: decoded("[\"justice-league\"]")
-            )
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            pullNumber: decoded("1"),
+            reviewers: decoded("[\"octocat\",\"hubot\",\"other_user\"]"),
+            teamReviewers: decoded("[\"justice-league\"]")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 422)
@@ -168,12 +160,12 @@ extension SdkMethodTests {
         _ = client
         do {
             _ = try await client.pulls.requestReviewers(
-                owner: decoded("\"owner\""),
-                repo: decoded("\"repo\""),
-                pullNumber: decoded("1"),
-                reviewers: decoded("[\"octocat\",\"hubot\",\"other_user\"]"),
-                teamReviewers: decoded("[\"justice-league\"]")
-            )
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            pullNumber: decoded("1"),
+            reviewers: decoded("[\"octocat\",\"hubot\",\"other_user\"]"),
+            teamReviewers: decoded("[\"justice-league\"]")
+        )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -193,12 +185,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.pulls.requestReviewers(
-                owner: decoded("\"owner\""),
-                repo: decoded("\"repo\""),
-                pullNumber: decoded("1"),
-                reviewers: decoded("[\"octocat\",\"hubot\",\"other_user\"]"),
-                teamReviewers: decoded("[\"justice-league\"]")
-            )
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            pullNumber: decoded("1"),
+            reviewers: decoded("[\"octocat\",\"hubot\",\"other_user\"]"),
+            teamReviewers: decoded("[\"justice-league\"]")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -221,12 +213,12 @@ extension SdkMethodTests {
         _ = client
         do {
             _ = try await client.pulls.rerequestReviewers(
-                owner: decoded("\"owner\""),
-                repo: decoded("\"repo\""),
-                pullNumber: decoded("1"),
-                reviewers: decoded("[\"octocat\",\"hubot\",\"other_user\"]"),
-                teamReviewers: decoded("[\"justice-league\"]")
-            )
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            pullNumber: decoded("1"),
+            reviewers: decoded("[\"octocat\",\"hubot\",\"other_user\"]"),
+            teamReviewers: decoded("[\"justice-league\"]")
+        )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -246,12 +238,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.pulls.rerequestReviewers(
-                owner: decoded("\"owner\""),
-                repo: decoded("\"repo\""),
-                pullNumber: decoded("1"),
-                reviewers: decoded("[\"octocat\",\"hubot\",\"other_user\"]"),
-                teamReviewers: decoded("[\"justice-league\"]")
-            )
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            pullNumber: decoded("1"),
+            reviewers: decoded("[\"octocat\",\"hubot\",\"other_user\"]"),
+            teamReviewers: decoded("[\"justice-league\"]")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -301,13 +293,13 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.pulls.submitReview(
-                owner: decoded("\"owner\""),
-                repo: decoded("\"repo\""),
-                pullNumber: decoded("1"),
-                reviewId: decoded("1"),
-                event: decoded("\"REQUEST_CHANGES\""),
-                body: decoded("\"Here is the body for the review.\"")
-            )
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            pullNumber: decoded("1"),
+            reviewId: decoded("1"),
+            event: decoded("\"REQUEST_CHANGES\""),
+            body: decoded("\"Here is the body for the review.\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -328,11 +320,7 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try PullsMethods.PullsUpdateOptions(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            pullNumber: decoded("1")
-        )
+        var options = try PullsMethods.PullsUpdateOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), pullNumber: decoded("1"))
         options.title = try decoded("\"new title\"")
         options.body = try decoded("\"updated body\"")
         options.state = try decoded("\"open\"")
@@ -340,8 +328,8 @@ extension SdkMethodTests {
         options.maintainerCanModify = try decoded("null")
         do {
             _ = try await client.pulls.update(
-                options: options
-            )
+            options: options
+        )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -355,11 +343,7 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try PullsMethods.PullsUpdateOptions(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            pullNumber: decoded("1")
-        )
+        var options = try PullsMethods.PullsUpdateOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), pullNumber: decoded("1"))
         options.title = try decoded("\"new title\"")
         options.body = try decoded("\"updated body\"")
         options.state = try decoded("\"open\"")
@@ -371,8 +355,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.pulls.update(
-                options: options
-            )
+            options: options
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -420,11 +404,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.pulls.updateBranch(
-                owner: decoded("\"owner\""),
-                repo: decoded("\"repo\""),
-                pullNumber: decoded("1"),
-                expectedHeadSha: decoded("\"6dcb09b5b57875f334f61aebed695e2e4193db5e\"")
-            )
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            pullNumber: decoded("1"),
+            expectedHeadSha: decoded("\"6dcb09b5b57875f334f61aebed695e2e4193db5e\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -473,12 +457,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.pulls.updateReview(
-                owner: decoded("\"owner\""),
-                repo: decoded("\"repo\""),
-                pullNumber: decoded("1"),
-                reviewId: decoded("1"),
-                body: decoded(sdkMethodFixture1461Value1)
-            )
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            pullNumber: decoded("1"),
+            reviewId: decoded("1"),
+            body: decoded(sdkMethodFixture1461Value1)
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 422)

@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ReposMethods {
-    /// Get the total number of views and breakdown per day or week for the last 14 days. Timestamps are aligned to UTC
-    /// midnight of the beginning of the day or week. Week begins on Monday.
+extension ReposMethods {
+    /// Get the total number of views and breakdown per day or week for the last 14 days. Timestamps are aligned to UTC midnight of the beginning of the day or week. Week begins on Monday.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -16,29 +15,13 @@ public extension ReposMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - per: The time frame to display results for.
-    static func reposGetViews(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        per: ReposGetClonesParameter? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ViewTraffic {
-        try await (sdkRequest("GET", [
-            "/repos/",
-            sdkEncodePathSegment(sdkWireString(owner)),
-            "/",
-            sdkEncodePathSegment(sdkWireString(repo)),
-            "/traffic/views",
-        ].joined(), config: config, query: [
+    public static func reposGetViews(config: ClientConfig, owner: String, repo: String, per: ReposGetClonesParameter? = nil, requestOptions: RequestOptions? = nil) async throws -> ViewTraffic {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/traffic/views"].joined(), config: config, query: [
             SdkQueryParameter("per", value: per),
-        ], decoder: .json, operationId: "reposGetViews", options: requestOptions, errors: ["403": BasicError.self]))
-            .data
+        ], decoder: .json, operationId: "reposGetViews", options: requestOptions, errors: ["403": BasicError.self])).data
     }
 
-    /// A transfer request will need to be accepted by the new owner when transferring a personal repository to another
-    /// user. The response will contain the original `owner`, and the transfer will continue asynchronously. For more
-    /// details on the requirements to transfer personal and organization-owned repositories, see [about repository
-    /// transfers](https://docs.github.com/articles/about-repository-transfers/).
+    /// A transfer request will need to be accepted by the new owner when transferring a personal repository to another user. The response will contain the original `owner`, and the transfer will continue asynchronously. For more details on the requirements to transfer personal and organization-owned repositories, see [about repository transfers](https://docs.github.com/articles/about-repository-transfers/).
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -50,31 +33,9 @@ public extension ReposMethods {
     /// - newName: The new name to be given to the repository.
     /// - teamIds: ID of the team or teams to add to the repository. Teams can only
     ///   be added to organization-owned repositories.
-    static func reposTransfer(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        newOwner: String,
-        newName: String? = nil,
-        teamIds: [Int]? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> MinimalRepository {
+    public static func reposTransfer(config: ClientConfig, owner: String, repo: String, newOwner: String, newName: String? = nil, teamIds: [Int]? = nil, requestOptions: RequestOptions? = nil) async throws -> MinimalRepository {
         let requestBody = ReposTransferRequestBody(newOwner: newOwner, newName: newName, teamIds: teamIds)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/transfer",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "reposTransfer",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/transfer"].joined(), config: config, body: requestBody, decoder: .json, operationId: "reposTransfer", options: requestOptions)).data
     }
 }

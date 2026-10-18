@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension BillingMethods {
-    /// Gets a report of the total usage for a user. **Note:** This endpoint is only available to users with access to
-    /// the enhanced billing platform.
+extension BillingMethods {
+    /// Gets a report of the total usage for a user. **Note:** This endpoint is only available to users with access to the enhanced billing platform.
     ///
     /// - Parameters:
     /// - username: The handle for the GitHub user account.
@@ -21,32 +20,11 @@ public extension BillingMethods {
     /// - day: If specified, only return results for a single day. The value of
     ///   `day` is an integer between `1` and `31`. If no `year` or `month` is
     ///   specified, the default `year` and `month` are used.
-    static func billingGetGithubBillingUsageReportUser(
-        config: ClientConfig,
-        username: String,
-        year: Int? = nil,
-        month: Int? = nil,
-        day: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> BillingUsageReportUser {
-        try await (sdkRequest(
-            "GET",
-            ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/settings/billing/usage"].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("year", value: year),
-                SdkQueryParameter("month", value: month),
-                SdkQueryParameter("day", value: day),
-            ],
-            decoder: .json,
-            operationId: "billingGetGithubBillingUsageReportUser",
-            options: requestOptions,
-            errors: [
-                "400": BasicError.self,
-                "403": BasicError.self,
-                "500": BasicError.self,
-                "503": ServiceUnavailable.self,
-            ]
-        )).data
+    public static func billingGetGithubBillingUsageReportUser(config: ClientConfig, username: String, year: Int? = nil, month: Int? = nil, day: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> BillingUsageReportUser {
+        return try (await sdkRequest("GET", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/settings/billing/usage"].joined(), config: config, query: [
+            SdkQueryParameter("year", value: year),
+            SdkQueryParameter("month", value: month),
+            SdkQueryParameter("day", value: day),
+        ], decoder: .json, operationId: "billingGetGithubBillingUsageReportUser", options: requestOptions, errors: ["400": BasicError.self, "403": BasicError.self, "500": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

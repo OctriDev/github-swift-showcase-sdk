@@ -6,26 +6,10 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension IssuesMethods {
-    /// Creates a comment on an issue or pull request in a repository. Provide the comment contents in `body`; creating
-    /// a comment triggers notifications, and creating content too quickly may result in secondary rate limiting. The
-    /// response can include raw Markdown, plain text, or rendered HTML according to the requested media type.
+extension IssuesMethods {
+    /// Creates a comment on an issue or pull request in a repository. Provide the comment contents in `body`; creating a comment triggers notifications, and creating content too quickly may result in secondary rate limiting. The response can include raw Markdown, plain text, or rendered HTML according to the requested media type.
     ///
-    /// You can use the REST API to create comments on issues and pull requests. Every pull request is an issue, but not
-    /// every issue is a pull request. This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications).
-    /// Creating content too quickly using this endpoint may result in secondary rate limiting. For more information,
-    /// see "[Rate limits for the
-    /// API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)"
-    /// and "[Best practices for using the REST
-    /// API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)." This endpoint supports the
-    /// following custom media types. For more information, see "[Media
-    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
-    /// **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the
-    /// default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text
-    /// only representation of the markdown body. Response will include `body_text`. -
-    /// **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include
-    /// `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response
-    /// will include `body`, `body_text`, and `body_html`.
+    /// You can use the REST API to create comments on issues and pull requests. Every pull request is an issue, but not every issue is a pull request. This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. For more information, see "[Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)" and "[Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)." This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text only representation of the markdown body. Response will include `body_text`. - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -34,38 +18,9 @@ public extension IssuesMethods {
     ///   not case sensitive.
     /// - issueNumber: The number that identifies the issue.
     /// - body: The contents of the comment.
-    static func issuesCreateComment(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        issueNumber: Int,
-        body: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> IssueComment {
+    public static func issuesCreateComment(config: ClientConfig, owner: String, repo: String, issueNumber: Int, body: String, requestOptions: RequestOptions? = nil) async throws -> IssueComment {
         let requestBody = IssuesCreateCommentRequestBody(body: body)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/issues/",
-                sdkEncodePathSegment(sdkWireString(issueNumber)),
-                "/comments",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "issuesCreateComment",
-            options: requestOptions,
-            errors: [
-                "403": BasicError.self,
-                "404": BasicError.self,
-                "410": BasicError.self,
-                "422": ValidationError.self,
-            ]
-        )).data
+        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/issues/", sdkEncodePathSegment(sdkWireString(issueNumber)), "/comments"].joined(), config: config, body: requestBody, decoder: .json, operationId: "issuesCreateComment", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "410": BasicError.self, "422": ValidationError.self])).data
     }
 }

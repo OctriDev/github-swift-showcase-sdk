@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ProjectsMethods {
+extension ProjectsMethods {
     /// List all items for a specific organization-owned project accessible by the authenticated user.
     ///
     /// - Parameters:
@@ -34,38 +34,13 @@ public extension ProjectsMethods {
     ///   see "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    static func projectsListItemsForOrg(
-        config: ClientConfig,
-        projectNumber: Int,
-        org: String,
-        q: String? = nil,
-        fields: ProjectsListItemsForOrgParameter? = nil,
-        before: String? = nil,
-        after: String? = nil,
-        perPage: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [ProjectsV2ItemWithContent] {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/orgs/",
-                sdkEncodePathSegment(sdkWireString(org)),
-                "/projectsV2/",
-                sdkEncodePathSegment(sdkWireString(projectNumber)),
-                "/items",
-            ].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("q", value: q),
-                SdkQueryParameter("fields", value: fields),
-                SdkQueryParameter("before", value: before),
-                SdkQueryParameter("after", value: after),
-                SdkQueryParameter("per_page", value: perPage),
-            ],
-            decoder: .json,
-            operationId: "projectsListItemsForOrg",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self]
-        )).data
+    public static func projectsListItemsForOrg(config: ClientConfig, projectNumber: Int, org: String, q: String? = nil, fields: ProjectsListItemsForOrgParameter? = nil, before: String? = nil, after: String? = nil, perPage: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [ProjectsV2ItemWithContent] {
+        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/projectsV2/", sdkEncodePathSegment(sdkWireString(projectNumber)), "/items"].joined(), config: config, query: [
+            SdkQueryParameter("q", value: q),
+            SdkQueryParameter("fields", value: fields),
+            SdkQueryParameter("before", value: before),
+            SdkQueryParameter("after", value: after),
+            SdkQueryParameter("per_page", value: perPage),
+        ], decoder: .json, operationId: "projectsListItemsForOrg", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self])).data
     }
 }

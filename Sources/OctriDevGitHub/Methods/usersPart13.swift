@@ -6,38 +6,18 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension UsersMethods {
-    /// Deletes one or more social accounts from the authenticated user's profile. OAuth app tokens and personal access
-    /// tokens (classic) need the `user` scope to use this endpoint.
+extension UsersMethods {
+    /// Deletes one or more social accounts from the authenticated user's profile. OAuth app tokens and personal access tokens (classic) need the `user` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - accountUrls: Full URLs for the social media profiles to delete.
-    static func usersDeleteSocialAccountForAuthenticatedUser(
-        config: ClientConfig,
-        accountUrls: [String],
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
+    public static func usersDeleteSocialAccountForAuthenticatedUser(config: ClientConfig, accountUrls: [String], requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
         let requestBody = UsersDeleteSocialAccountForAuthenticatedUserRequestBody(accountUrls: accountUrls)
 
-        return try await (sdkRequest(
-            "DELETE",
-            "/user/social_accounts",
-            config: config,
-            body: requestBody,
-            decoder: .empty,
-            operationId: "usersDeleteSocialAccountForAuthenticatedUser",
-            options: requestOptions,
-            errors: [
-                "401": BasicError.self,
-                "403": BasicError.self,
-                "404": BasicError.self,
-                "422": ValidationError.self,
-            ]
-        )).data
+        return try (await sdkRequest("DELETE", "/user/social_accounts", config: config, body: requestBody, decoder: .empty, operationId: "usersDeleteSocialAccountForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
     }
 
-    /// Lists the SSH signing keys for the authenticated user's GitHub account. OAuth app tokens and personal access
-    /// tokens (classic) need the `read:ssh_signing_key` scope to use this endpoint.
+    /// Lists the SSH signing keys for the authenticated user's GitHub account. OAuth app tokens and personal access tokens (classic) need the `read:ssh_signing_key` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - perPage: The number of results per page (max 100). For more information,
@@ -48,24 +28,10 @@ public extension UsersMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    static func usersListSshSigningKeysForAuthenticatedUser(
-        config: ClientConfig,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [SshSigningKey] {
-        try await (sdkRequest(
-            "GET",
-            "/user/ssh_signing_keys",
-            config: config,
-            query: [
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("page", value: page),
-            ],
-            decoder: .json,
-            operationId: "usersListSshSigningKeysForAuthenticatedUser",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self]
-        )).data
+    public static func usersListSshSigningKeysForAuthenticatedUser(config: ClientConfig, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [SshSigningKey] {
+        return try (await sdkRequest("GET", "/user/ssh_signing_keys", config: config, query: [
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("page", value: page),
+        ], decoder: .json, operationId: "usersListSshSigningKeysForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
     }
 }

@@ -6,10 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension GitMethods {
-    /// Creates a Git blob in a repository from the supplied content. Provide `content` and, if needed, set `encoding`
-    /// to control how the content is decoded; the default encoding is UTF-8. A 201 response returns the blob's URL and
-    /// SHA.
+extension GitMethods {
+    /// Creates a Git blob in a repository from the supplied content. Provide `content` and, if needed, set `encoding` to control how the content is decoded; the default encoding is UTF-8. A 201 response returns the blob's URL and SHA.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -19,76 +17,22 @@ public extension GitMethods {
     /// - content: The new blob's content.
     /// - encoding: The encoding used for `content`. Currently, `"utf-8"` and
     ///   `"base64"` are supported.
-    static func gitCreateBlob(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        content: String,
-        encoding: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ShortBlob {
+    public static func gitCreateBlob(config: ClientConfig, owner: String, repo: String, content: String, encoding: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ShortBlob {
         let requestBody = GitCreateBlobRequestBody(content: content, encoding: encoding)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/git/blobs",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "gitCreateBlob",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self, "409": BasicError.self]
-        )).data
+        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/git/blobs"].joined(), config: config, body: requestBody, decoder: .json, operationId: "gitCreateBlob", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "409": BasicError.self])).data
     }
 
-    /// Retrieves a Git blob from a repository using its file SHA. The JSON response encodes `content` as Base64;
-    /// request `application/vnd.github.raw+json` for raw blob data instead. Blobs can be up to 100 megabytes.
+    /// Retrieves a Git blob from a repository using its file SHA. The JSON response encodes `content` as Base64; request `application/vnd.github.raw+json` for raw blob data instead. Blobs can be up to 100 megabytes.
     ///
-    /// The `content` in the response will always be Base64 encoded. This endpoint supports the following custom media
-    /// types. For more information, see "[Media
-    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
-    /// **`application/vnd.github.raw+json`**: Returns the raw blob data. - **`application/vnd.github+json`**: Returns a
-    /// JSON representation of the blob with `content` as a base64 encoded string. This is the default if no media type
-    /// is specified. **Note** This endpoint supports blobs up to 100 megabytes in size.
+    /// The `content` in the response will always be Base64 encoded. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.raw+json`**: Returns the raw blob data. - **`application/vnd.github+json`**: Returns a JSON representation of the blob with `content` as a base64 encoded string. This is the default if no media type is specified. **Note** This endpoint supports blobs up to 100 megabytes in size.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    static func gitGetBlob(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        fileSha: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> Blob {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/git/blobs/",
-                sdkEncodePathSegment(sdkWireString(fileSha)),
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "gitGetBlob",
-            options: requestOptions,
-            errors: [
-                "403": BasicError.self,
-                "404": BasicError.self,
-                "409": BasicError.self,
-                "422": ValidationError.self,
-            ]
-        )).data
+    public static func gitGetBlob(config: ClientConfig, owner: String, repo: String, fileSha: String, requestOptions: RequestOptions? = nil) async throws -> Blob {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/git/blobs/", sdkEncodePathSegment(sdkWireString(fileSha))].joined(), config: config, decoder: .json, operationId: "gitGetBlob", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "409": BasicError.self, "422": ValidationError.self])).data
     }
 }

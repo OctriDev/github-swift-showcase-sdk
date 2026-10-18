@@ -6,10 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ActionsMethods {
-    /// Approve or reject pending deployments that are waiting on approval by a required reviewer. Required reviewers
-    /// with read access to the repository contents and deployments can use this endpoint. OAuth app tokens and personal
-    /// access tokens (classic) need the `repo` scope to use this endpoint.
+extension ActionsMethods {
+    /// Approve or reject pending deployments that are waiting on approval by a required reviewer. Required reviewers with read access to the repository contents and deployments can use this endpoint. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -21,38 +19,9 @@ public extension ActionsMethods {
     /// - state: Whether to approve or reject deployment to the specified
     ///   environments.
     /// - comment: A comment to accompany the deployment review
-    static func actionsReviewPendingDeploymentsForRun(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        runId: Int,
-        environmentIds: [Int],
-        state: ActionsReviewPendingDeploymentsForRunRequestBodyState,
-        comment: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [Deployment] {
-        let requestBody = ActionsReviewPendingDeploymentsForRunRequestBody(
-            environmentIds: environmentIds,
-            state: state,
-            comment: comment
-        )
+    public static func actionsReviewPendingDeploymentsForRun(config: ClientConfig, owner: String, repo: String, runId: Int, environmentIds: [Int], state: ActionsReviewPendingDeploymentsForRunRequestBodyState, comment: String, requestOptions: RequestOptions? = nil) async throws -> [Deployment] {
+        let requestBody = ActionsReviewPendingDeploymentsForRunRequestBody(environmentIds: environmentIds, state: state, comment: comment)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/actions/runs/",
-                sdkEncodePathSegment(sdkWireString(runId)),
-                "/pending_deployments",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "actionsReviewPendingDeploymentsForRun",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/actions/runs/", sdkEncodePathSegment(sdkWireString(runId)), "/pending_deployments"].joined(), config: config, body: requestBody, decoder: .json, operationId: "actionsReviewPendingDeploymentsForRun", options: requestOptions)).data
     }
 }

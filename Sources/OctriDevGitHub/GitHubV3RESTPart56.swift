@@ -3,84 +3,27 @@
 
 import Foundation
 
-public extension ChecksNamespace {
-    /// Lists check runs for a check suite using its `id`. > [!NOTE] > The endpoints to manage checks only look for
-    /// pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked
-    /// repository are not detected and return an empty `pull_requests` array. OAuth app tokens and personal access
-    /// tokens (classic) need the `repo` scope to use this endpoint on a private repository.
-    func listForSuite(
-        options: ChecksMethods.ChecksListForSuiteOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ChecksListForSuiteResponse {
-        try await ChecksMethods.checksListForSuite(config: config, options: options, requestOptions: requestOptions)
+extension ChecksNamespace {
+/// Lists check runs for a check suite using its `id`. > [!NOTE] > The endpoints to manage checks only look for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint on a private repository.
+    public func listForSuite(options: ChecksMethods.ChecksListForSuiteOptions, requestOptions: RequestOptions? = nil) async throws -> ChecksListForSuiteResponse {
+        return try await ChecksMethods.checksListForSuite(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Triggers GitHub to rerequest an existing check suite, without pushing new code to a repository. This endpoint
-    /// will trigger the [`check_suite` webhook](https://docs.github.com/webhooks/event-payloads/#check_suite) event
-    /// with the action `rerequested`. When a check suite is `rerequested`, its `status` is reset to `queued` and the
-    /// `conclusion` is cleared.
-    func rerequestSuite(
-        owner: String,
-        repo: String,
-        checkSuiteId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> EmptyObject {
-        try await ChecksMethods.checksRerequestSuite(
-            config: config,
-            owner: owner,
-            repo: repo,
-            checkSuiteId: checkSuiteId,
-            requestOptions: requestOptions
-        )
+/// Triggers GitHub to rerequest an existing check suite, without pushing new code to a repository. This endpoint will trigger the [`check_suite` webhook](https://docs.github.com/webhooks/event-payloads/#check_suite) event with the action `rerequested`. When a check suite is `rerequested`, its `status` is reset to `queued` and the `conclusion` is cleared.
+    public func rerequestSuite(owner: String, repo: String, checkSuiteId: Int, requestOptions: RequestOptions? = nil) async throws -> EmptyObject {
+        return try await ChecksMethods.checksRerequestSuite(config: config, owner: owner, repo: repo, checkSuiteId: checkSuiteId, requestOptions: requestOptions)
     }
 
-    /// Lists check runs for a Git reference in a repository. Set `ref` to a commit SHA, branch name, or tag name, and
-    /// use `check_name`, `status`, `filter`, or `app_id` to narrow the results; use `page` and `per_page` to paginate
-    /// the results. If the reference has more than 1,000 check suites, results are limited to the 1,000 most recent
-    /// suites; use the check-suite endpoints to retrieve additional runs.
+/// Lists check runs for a Git reference in a repository. Set `ref` to a commit SHA, branch name, or tag name, and use `check_name`, `status`, `filter`, or `app_id` to narrow the results; use `page` and `per_page` to paginate the results. If the reference has more than 1,000 check suites, results are limited to the 1,000 most recent suites; use the check-suite endpoints to retrieve additional runs.
     ///
-    /// Lists check runs for a commit ref. The `ref` can be a SHA, branch name, or a tag name. > [!NOTE] > The endpoints
-    /// to manage checks only look for pushes in the repository where the check suite or check run were created. Pushes
-    /// to a branch in a forked repository are not detected and return an empty `pull_requests` array. If there are more
-    /// than 1000 check suites on a single git reference, this endpoint will limit check runs to the 1000 most recent
-    /// check suites. To iterate over all possible check runs, use the [List check suites for a Git
-    /// reference](https://docs.github.com/rest/reference/checks#list-check-suites-for-a-git-reference) endpoint and
-    /// provide the `check_suite_id` parameter to the [List check runs in a check
-    /// suite](https://docs.github.com/rest/reference/checks#list-check-runs-in-a-check-suite) endpoint. OAuth app
-    /// tokens and personal access tokens (classic) need the `repo` scope to use this endpoint on a private repository.
-    func listForRef(
-        options: ChecksMethods.ChecksListForRefOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ChecksListForRefResponse {
-        try await ChecksMethods.checksListForRef(config: config, options: options, requestOptions: requestOptions)
+    /// Lists check runs for a commit ref. The `ref` can be a SHA, branch name, or a tag name. > [!NOTE] > The endpoints to manage checks only look for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array. If there are more than 1000 check suites on a single git reference, this endpoint will limit check runs to the 1000 most recent check suites. To iterate over all possible check runs, use the [List check suites for a Git reference](https://docs.github.com/rest/reference/checks#list-check-suites-for-a-git-reference) endpoint and provide the `check_suite_id` parameter to the [List check runs in a check suite](https://docs.github.com/rest/reference/checks#list-check-runs-in-a-check-suite) endpoint. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint on a private repository.
+    public func listForRef(options: ChecksMethods.ChecksListForRefOptions, requestOptions: RequestOptions? = nil) async throws -> ChecksListForRefResponse {
+        return try await ChecksMethods.checksListForRef(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Lists check suites for a commit `ref`. The `ref` can be a SHA, branch name, or a tag name. > [!NOTE] > The
-    /// endpoints to manage checks only look for pushes in the repository where the check suite or check run were
-    /// created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array
-    /// and a `null` value for `head_branch`. OAuth app tokens and personal access tokens (classic) need the `repo`
-    /// scope to use this endpoint on a private repository.
-    func listSuitesForRef(
-        owner: String,
-        repo: String,
-        ref: String,
-        appId: Int? = nil,
-        checkName: String? = nil,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ChecksListSuitesForRefResponse {
-        try await ChecksMethods.checksListSuitesForRef(
-            config: config,
-            owner: owner,
-            repo: repo,
-            ref: ref,
-            appId: appId,
-            checkName: checkName,
-            perPage: perPage,
-            page: page,
-            requestOptions: requestOptions
-        )
+/// Lists check suites for a commit `ref`. The `ref` can be a SHA, branch name, or a tag name. > [!NOTE] > The endpoints to manage checks only look for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array and a `null` value for `head_branch`. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint on a private repository.
+    public func listSuitesForRef(owner: String, repo: String, ref: String, appId: Int? = nil, checkName: String? = nil, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> ChecksListSuitesForRefResponse {
+        return try await ChecksMethods.checksListSuitesForRef(config: config, owner: owner, repo: repo, ref: ref, appId: appId, checkName: checkName, perPage: perPage, page: page, requestOptions: requestOptions)
     }
 }
 
@@ -90,90 +33,24 @@ public class CodeQualityNamespace {
         self.config = config
     }
 
-    /// Lists code quality findings for a repository. OAuth app tokens and personal access tokens (classic) need the
-    /// `repo` scope to use this endpoint with private or public repositories, or the `public_repo` scope to use this
-    /// endpoint with only public repositories.
-    public func listFindingsForRepo(
-        owner: String,
-        repo: String,
-        perPage: Int? = nil,
-        direction: SecurityAdvisoriesListGlobalAdvisoriesParameter? = nil,
-        before: String? = nil,
-        after: String? = nil,
-        state: CodeQualityListFindingsForRepoParameter? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [CodeQualityFinding] {
-        try await CodeQualityMethods.codeQualityListFindingsForRepo(
-            config: config,
-            owner: owner,
-            repo: repo,
-            perPage: perPage,
-            direction: direction,
-            before: before,
-            after: after,
-            state: state,
-            requestOptions: requestOptions
-        )
+/// Lists code quality findings for a repository. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with private or public repositories, or the `public_repo` scope to use this endpoint with only public repositories.
+    public func listFindingsForRepo(owner: String, repo: String, perPage: Int? = nil, direction: SecurityAdvisoriesListGlobalAdvisoriesParameter? = nil, before: String? = nil, after: String? = nil, state: CodeQualityListFindingsForRepoParameter? = nil, requestOptions: RequestOptions? = nil) async throws -> [CodeQualityFinding] {
+        return try await CodeQualityMethods.codeQualityListFindingsForRepo(config: config, owner: owner, repo: repo, perPage: perPage, direction: direction, before: before, after: after, state: state, requestOptions: requestOptions)
     }
 
-    /// Gets a single code quality finding. OAuth app tokens and personal access tokens (classic) need the `repo` scope
-    /// to use this endpoint with private or public repositories, or the `public_repo` scope to use this endpoint with
-    /// only public repositories.
-    public func getFinding(
-        owner: String,
-        repo: String,
-        findingNumber: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CodeQualityFinding {
-        try await CodeQualityMethods.codeQualityGetFinding(
-            config: config,
-            owner: owner,
-            repo: repo,
-            findingNumber: findingNumber,
-            requestOptions: requestOptions
-        )
+/// Gets a single code quality finding. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with private or public repositories, or the `public_repo` scope to use this endpoint with only public repositories.
+    public func getFinding(owner: String, repo: String, findingNumber: Int, requestOptions: RequestOptions? = nil) async throws -> CodeQualityFinding {
+        return try await CodeQualityMethods.codeQualityGetFinding(config: config, owner: owner, repo: repo, findingNumber: findingNumber, requestOptions: requestOptions)
     }
 
-    /// Gets a code quality setup configuration. OAuth app tokens and personal access tokens (classic) need the `repo`
-    /// scope to use this endpoint with private or public repositories, or the `public_repo` scope to use this endpoint
-    /// with only public repositories.
-    public func getSetup(
-        owner: String,
-        repo: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CodeQualitySetup {
-        try await CodeQualityMethods.codeQualityGetSetup(
-            config: config,
-            owner: owner,
-            repo: repo,
-            requestOptions: requestOptions
-        )
+/// Gets a code quality setup configuration. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with private or public repositories, or the `public_repo` scope to use this endpoint with only public repositories.
+    public func getSetup(owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> CodeQualitySetup {
+        return try await CodeQualityMethods.codeQualityGetSetup(config: config, owner: owner, repo: repo, requestOptions: requestOptions)
     }
 
-    /// Updates a code quality setup configuration. OAuth app tokens and personal access tokens (classic) need the
-    /// `repo` scope to use this endpoint with private or public repositories, or the `public_repo` scope to use this
-    /// endpoint with only public repositories.
-    public func updateSetup(
-        owner: String,
-        repo: String,
-        state: CodeQualitySetupUpdateState? = nil,
-        runnerType: CodeQualitySetupUpdateRunnerType? = nil,
-        runnerLabel: SdkOptional<String>? = nil,
-        languages: [CodeQualitySetupUpdateLanguagesItem]? = nil,
-        aiFindingsOption: CodeQualitySetupUpdateAiFindingsOption? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> EmptyObject {
-        try await CodeQualityMethods.codeQualityUpdateSetup(
-            config: config,
-            owner: owner,
-            repo: repo,
-            state: state,
-            runnerType: runnerType,
-            runnerLabel: runnerLabel,
-            languages: languages,
-            aiFindingsOption: aiFindingsOption,
-            requestOptions: requestOptions
-        )
+/// Updates a code quality setup configuration. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with private or public repositories, or the `public_repo` scope to use this endpoint with only public repositories.
+    public func updateSetup(owner: String, repo: String, state: CodeQualitySetupUpdateState? = nil, runnerType: CodeQualitySetupUpdateRunnerType? = nil, runnerLabel: SdkOptional<String>? = nil, languages: [CodeQualitySetupUpdateLanguagesItem]? = nil, aiFindingsOption: CodeQualitySetupUpdateAiFindingsOption? = nil, requestOptions: RequestOptions? = nil) async throws -> EmptyObject {
+        return try await CodeQualityMethods.codeQualityUpdateSetup(config: config, owner: owner, repo: repo, state: state, runnerType: runnerType, runnerLabel: runnerLabel, languages: languages, aiFindingsOption: aiFindingsOption, requestOptions: requestOptions)
     }
 }
 
@@ -183,316 +60,83 @@ public class ReactionsNamespace {
         self.config = config
     }
 
-    /// List the reactions to a [commit comment](https://docs.github.com/rest/commits/comments#get-a-commit-comment).
-    public func listForCommitComment(
-        owner: String,
-        repo: String,
-        commentId: Int,
-        content: ReactionsListForCommitCommentParameter? = nil,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [Reaction] {
-        try await ReactionsMethods.reactionsListForCommitComment(
-            config: config,
-            owner: owner,
-            repo: repo,
-            commentId: commentId,
-            content: content,
-            perPage: perPage,
-            page: page,
-            requestOptions: requestOptions
-        )
+/// List the reactions to a [commit comment](https://docs.github.com/rest/commits/comments#get-a-commit-comment).
+    public func listForCommitComment(owner: String, repo: String, commentId: Int, content: ReactionsListForCommitCommentParameter? = nil, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [Reaction] {
+        return try await ReactionsMethods.reactionsListForCommitComment(config: config, owner: owner, repo: repo, commentId: commentId, content: content, perPage: perPage, page: page, requestOptions: requestOptions)
     }
 
-    /// Create a reaction to a [commit comment](https://docs.github.com/rest/commits/comments#get-a-commit-comment). A
-    /// response with an HTTP `200` status means that you already added the reaction type to this commit comment.
-    public func createForCommitComment(
-        owner: String,
-        repo: String,
-        commentId: Int,
-        content: ReactionsCreateForCommitCommentRequestBodyContent,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> Reaction {
-        try await ReactionsMethods.reactionsCreateForCommitComment(
-            config: config,
-            owner: owner,
-            repo: repo,
-            commentId: commentId,
-            content: content,
-            requestOptions: requestOptions
-        )
+/// Create a reaction to a [commit comment](https://docs.github.com/rest/commits/comments#get-a-commit-comment). A response with an HTTP `200` status means that you already added the reaction type to this commit comment.
+    public func createForCommitComment(owner: String, repo: String, commentId: Int, content: ReactionsCreateForCommitCommentRequestBodyContent, requestOptions: RequestOptions? = nil) async throws -> Reaction {
+        return try await ReactionsMethods.reactionsCreateForCommitComment(config: config, owner: owner, repo: repo, commentId: commentId, content: content, requestOptions: requestOptions)
     }
 
-    /// > [!NOTE] > You can also specify a repository by `repository_id` using the route `DELETE
-    /// /repositories/:repository_id/comments/:comment_id/reactions/:reaction_id`. Delete a reaction to a [commit
-    /// comment](https://docs.github.com/rest/commits/comments#get-a-commit-comment).
-    public func deleteForCommitComment(
-        owner: String,
-        repo: String,
-        commentId: Int,
-        reactionId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await ReactionsMethods.reactionsDeleteForCommitComment(
-            config: config,
-            owner: owner,
-            repo: repo,
-            commentId: commentId,
-            reactionId: reactionId,
-            requestOptions: requestOptions
-        )
+/// > [!NOTE] > You can also specify a repository by `repository_id` using the route `DELETE /repositories/:repository_id/comments/:comment_id/reactions/:reaction_id`. Delete a reaction to a [commit comment](https://docs.github.com/rest/commits/comments#get-a-commit-comment).
+    public func deleteForCommitComment(owner: String, repo: String, commentId: Int, reactionId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await ReactionsMethods.reactionsDeleteForCommitComment(config: config, owner: owner, repo: repo, commentId: commentId, reactionId: reactionId, requestOptions: requestOptions)
     }
 
-    /// List the reactions to an [issue comment](https://docs.github.com/rest/issues/comments#get-an-issue-comment).
-    public func listForIssueComment(
-        owner: String,
-        repo: String,
-        commentId: Int,
-        content: ReactionsListForIssueCommentParameter? = nil,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [Reaction] {
-        try await ReactionsMethods.reactionsListForIssueComment(
-            config: config,
-            owner: owner,
-            repo: repo,
-            commentId: commentId,
-            content: content,
-            perPage: perPage,
-            page: page,
-            requestOptions: requestOptions
-        )
+/// List the reactions to an [issue comment](https://docs.github.com/rest/issues/comments#get-an-issue-comment).
+    public func listForIssueComment(owner: String, repo: String, commentId: Int, content: ReactionsListForIssueCommentParameter? = nil, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [Reaction] {
+        return try await ReactionsMethods.reactionsListForIssueComment(config: config, owner: owner, repo: repo, commentId: commentId, content: content, perPage: perPage, page: page, requestOptions: requestOptions)
     }
 
-    /// Create a reaction to an [issue comment](https://docs.github.com/rest/issues/comments#get-an-issue-comment). A
-    /// response with an HTTP `200` status means that you already added the reaction type to this issue comment.
-    public func createForIssueComment(
-        owner: String,
-        repo: String,
-        commentId: Int,
-        content: ReactionsCreateForIssueCommentRequestBodyContent,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> Reaction {
-        try await ReactionsMethods.reactionsCreateForIssueComment(
-            config: config,
-            owner: owner,
-            repo: repo,
-            commentId: commentId,
-            content: content,
-            requestOptions: requestOptions
-        )
+/// Create a reaction to an [issue comment](https://docs.github.com/rest/issues/comments#get-an-issue-comment). A response with an HTTP `200` status means that you already added the reaction type to this issue comment.
+    public func createForIssueComment(owner: String, repo: String, commentId: Int, content: ReactionsCreateForIssueCommentRequestBodyContent, requestOptions: RequestOptions? = nil) async throws -> Reaction {
+        return try await ReactionsMethods.reactionsCreateForIssueComment(config: config, owner: owner, repo: repo, commentId: commentId, content: content, requestOptions: requestOptions)
     }
 
-    /// > [!NOTE] > You can also specify a repository by `repository_id` using the route `DELETE delete
-    /// /repositories/:repository_id/issues/comments/:comment_id/reactions/:reaction_id`. Delete a reaction to an [issue
-    /// comment](https://docs.github.com/rest/issues/comments#get-an-issue-comment).
-    public func deleteForIssueComment(
-        owner: String,
-        repo: String,
-        commentId: Int,
-        reactionId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await ReactionsMethods.reactionsDeleteForIssueComment(
-            config: config,
-            owner: owner,
-            repo: repo,
-            commentId: commentId,
-            reactionId: reactionId,
-            requestOptions: requestOptions
-        )
+/// > [!NOTE] > You can also specify a repository by `repository_id` using the route `DELETE delete /repositories/:repository_id/issues/comments/:comment_id/reactions/:reaction_id`. Delete a reaction to an [issue comment](https://docs.github.com/rest/issues/comments#get-an-issue-comment).
+    public func deleteForIssueComment(owner: String, repo: String, commentId: Int, reactionId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await ReactionsMethods.reactionsDeleteForIssueComment(config: config, owner: owner, repo: repo, commentId: commentId, reactionId: reactionId, requestOptions: requestOptions)
     }
 
-    /// Lists reactions to an issue in a repository. Use `content` to filter the results to one reaction type, or omit
-    /// it to list all reactions; use `page` and `per_page` to paginate the results.
+/// Lists reactions to an issue in a repository. Use `content` to filter the results to one reaction type, or omit it to list all reactions; use `page` and `per_page` to paginate the results.
     ///
     /// List the reactions to an [issue](https://docs.github.com/rest/issues/issues#get-an-issue).
-    public func listForIssue(
-        owner: String,
-        repo: String,
-        issueNumber: Int,
-        content: ReactionsListForIssueParameter? = nil,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [Reaction] {
-        try await ReactionsMethods.reactionsListForIssue(
-            config: config,
-            owner: owner,
-            repo: repo,
-            issueNumber: issueNumber,
-            content: content,
-            perPage: perPage,
-            page: page,
-            requestOptions: requestOptions
-        )
+    public func listForIssue(owner: String, repo: String, issueNumber: Int, content: ReactionsListForIssueParameter? = nil, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [Reaction] {
+        return try await ReactionsMethods.reactionsListForIssue(config: config, owner: owner, repo: repo, issueNumber: issueNumber, content: content, perPage: perPage, page: page, requestOptions: requestOptions)
     }
 
-    /// Create a reaction to an [issue](https://docs.github.com/rest/issues/issues#get-an-issue). A response with an
-    /// HTTP `200` status means that you already added the reaction type to this issue.
-    public func createForIssue(
-        owner: String,
-        repo: String,
-        issueNumber: Int,
-        content: ReactionsCreateForIssueRequestBodyContent,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> Reaction {
-        try await ReactionsMethods.reactionsCreateForIssue(
-            config: config,
-            owner: owner,
-            repo: repo,
-            issueNumber: issueNumber,
-            content: content,
-            requestOptions: requestOptions
-        )
+/// Create a reaction to an [issue](https://docs.github.com/rest/issues/issues#get-an-issue). A response with an HTTP `200` status means that you already added the reaction type to this issue.
+    public func createForIssue(owner: String, repo: String, issueNumber: Int, content: ReactionsCreateForIssueRequestBodyContent, requestOptions: RequestOptions? = nil) async throws -> Reaction {
+        return try await ReactionsMethods.reactionsCreateForIssue(config: config, owner: owner, repo: repo, issueNumber: issueNumber, content: content, requestOptions: requestOptions)
     }
 }
 
-public extension ReactionsNamespace {
-    /// > [!NOTE] > You can also specify a repository by `repository_id` using the route `DELETE
-    /// /repositories/:repository_id/issues/:issue_number/reactions/:reaction_id`. Delete a reaction to an
-    /// [issue](https://docs.github.com/rest/issues/issues#get-an-issue).
-    func deleteForIssue(
-        owner: String,
-        repo: String,
-        issueNumber: Int,
-        reactionId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await ReactionsMethods.reactionsDeleteForIssue(
-            config: config,
-            owner: owner,
-            repo: repo,
-            issueNumber: issueNumber,
-            reactionId: reactionId,
-            requestOptions: requestOptions
-        )
+extension ReactionsNamespace {
+/// > [!NOTE] > You can also specify a repository by `repository_id` using the route `DELETE /repositories/:repository_id/issues/:issue_number/reactions/:reaction_id`. Delete a reaction to an [issue](https://docs.github.com/rest/issues/issues#get-an-issue).
+    public func deleteForIssue(owner: String, repo: String, issueNumber: Int, reactionId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await ReactionsMethods.reactionsDeleteForIssue(config: config, owner: owner, repo: repo, issueNumber: issueNumber, reactionId: reactionId, requestOptions: requestOptions)
     }
 
-    /// List the reactions to a [pull request review
-    /// comment](https://docs.github.com/rest/pulls/comments#get-a-review-comment-for-a-pull-request).
-    func listForPullRequestReviewComment(
-        owner: String,
-        repo: String,
-        commentId: Int,
-        content: ReactionsListForPullRequestReviewCommentParameter? = nil,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [Reaction] {
-        try await ReactionsMethods.reactionsListForPullRequestReviewComment(
-            config: config,
-            owner: owner,
-            repo: repo,
-            commentId: commentId,
-            content: content,
-            perPage: perPage,
-            page: page,
-            requestOptions: requestOptions
-        )
+/// List the reactions to a [pull request review comment](https://docs.github.com/rest/pulls/comments#get-a-review-comment-for-a-pull-request).
+    public func listForPullRequestReviewComment(owner: String, repo: String, commentId: Int, content: ReactionsListForPullRequestReviewCommentParameter? = nil, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [Reaction] {
+        return try await ReactionsMethods.reactionsListForPullRequestReviewComment(config: config, owner: owner, repo: repo, commentId: commentId, content: content, perPage: perPage, page: page, requestOptions: requestOptions)
     }
 
-    /// Create a reaction to a [pull request review
-    /// comment](https://docs.github.com/rest/pulls/comments#get-a-review-comment-for-a-pull-request). A response with
-    /// an HTTP `200` status means that you already added the reaction type to this pull request review comment.
-    func createForPullRequestReviewComment(
-        owner: String,
-        repo: String,
-        commentId: Int,
-        content: ReactionsCreateForPullRequestReviewCommentRequestBodyContent,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> Reaction {
-        try await ReactionsMethods.reactionsCreateForPullRequestReviewComment(
-            config: config,
-            owner: owner,
-            repo: repo,
-            commentId: commentId,
-            content: content,
-            requestOptions: requestOptions
-        )
+/// Create a reaction to a [pull request review comment](https://docs.github.com/rest/pulls/comments#get-a-review-comment-for-a-pull-request). A response with an HTTP `200` status means that you already added the reaction type to this pull request review comment.
+    public func createForPullRequestReviewComment(owner: String, repo: String, commentId: Int, content: ReactionsCreateForPullRequestReviewCommentRequestBodyContent, requestOptions: RequestOptions? = nil) async throws -> Reaction {
+        return try await ReactionsMethods.reactionsCreateForPullRequestReviewComment(config: config, owner: owner, repo: repo, commentId: commentId, content: content, requestOptions: requestOptions)
     }
 
-    /// > [!NOTE] > You can also specify a repository by `repository_id` using the route `DELETE
-    /// /repositories/:repository_id/pulls/comments/:comment_id/reactions/:reaction_id.` Delete a reaction to a [pull
-    /// request review comment](https://docs.github.com/rest/pulls/comments#get-a-review-comment-for-a-pull-request).
-    func deleteForPullRequestComment(
-        owner: String,
-        repo: String,
-        commentId: Int,
-        reactionId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await ReactionsMethods.reactionsDeleteForPullRequestComment(
-            config: config,
-            owner: owner,
-            repo: repo,
-            commentId: commentId,
-            reactionId: reactionId,
-            requestOptions: requestOptions
-        )
+/// > [!NOTE] > You can also specify a repository by `repository_id` using the route `DELETE /repositories/:repository_id/pulls/comments/:comment_id/reactions/:reaction_id.` Delete a reaction to a [pull request review comment](https://docs.github.com/rest/pulls/comments#get-a-review-comment-for-a-pull-request).
+    public func deleteForPullRequestComment(owner: String, repo: String, commentId: Int, reactionId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await ReactionsMethods.reactionsDeleteForPullRequestComment(config: config, owner: owner, repo: repo, commentId: commentId, reactionId: reactionId, requestOptions: requestOptions)
     }
 
-    /// List the reactions to a [release](https://docs.github.com/rest/releases/releases#get-a-release).
-    func listForRelease(
-        owner: String,
-        repo: String,
-        releaseId: Int,
-        content: ReactionsListForReleaseParameter? = nil,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [Reaction] {
-        try await ReactionsMethods.reactionsListForRelease(
-            config: config,
-            owner: owner,
-            repo: repo,
-            releaseId: releaseId,
-            content: content,
-            perPage: perPage,
-            page: page,
-            requestOptions: requestOptions
-        )
+/// List the reactions to a [release](https://docs.github.com/rest/releases/releases#get-a-release).
+    public func listForRelease(owner: String, repo: String, releaseId: Int, content: ReactionsListForReleaseParameter? = nil, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [Reaction] {
+        return try await ReactionsMethods.reactionsListForRelease(config: config, owner: owner, repo: repo, releaseId: releaseId, content: content, perPage: perPage, page: page, requestOptions: requestOptions)
     }
 
-    /// Create a reaction to a [release](https://docs.github.com/rest/releases/releases#get-a-release). A response with
-    /// a `Status: 200 OK` means that you already added the reaction type to this release.
-    func createForRelease(
-        owner: String,
-        repo: String,
-        releaseId: Int,
-        content: ReactionsCreateForReleaseRequestBodyContent,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> Reaction {
-        try await ReactionsMethods.reactionsCreateForRelease(
-            config: config,
-            owner: owner,
-            repo: repo,
-            releaseId: releaseId,
-            content: content,
-            requestOptions: requestOptions
-        )
+/// Create a reaction to a [release](https://docs.github.com/rest/releases/releases#get-a-release). A response with a `Status: 200 OK` means that you already added the reaction type to this release.
+    public func createForRelease(owner: String, repo: String, releaseId: Int, content: ReactionsCreateForReleaseRequestBodyContent, requestOptions: RequestOptions? = nil) async throws -> Reaction {
+        return try await ReactionsMethods.reactionsCreateForRelease(config: config, owner: owner, repo: repo, releaseId: releaseId, content: content, requestOptions: requestOptions)
     }
 
-    /// > [!NOTE] > You can also specify a repository by `repository_id` using the route `DELETE delete
-    /// /repositories/:repository_id/releases/:release_id/reactions/:reaction_id`. Delete a reaction to a
-    /// [release](https://docs.github.com/rest/releases/releases#get-a-release).
-    func deleteForRelease(
-        owner: String,
-        repo: String,
-        releaseId: Int,
-        reactionId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await ReactionsMethods.reactionsDeleteForRelease(
-            config: config,
-            owner: owner,
-            repo: repo,
-            releaseId: releaseId,
-            reactionId: reactionId,
-            requestOptions: requestOptions
-        )
+/// > [!NOTE] > You can also specify a repository by `repository_id` using the route `DELETE delete /repositories/:repository_id/releases/:release_id/reactions/:reaction_id`. Delete a reaction to a [release](https://docs.github.com/rest/releases/releases#get-a-release).
+    public func deleteForRelease(owner: String, repo: String, releaseId: Int, reactionId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await ReactionsMethods.reactionsDeleteForRelease(config: config, owner: owner, repo: repo, releaseId: releaseId, reactionId: reactionId, requestOptions: requestOptions)
     }
 }
 
@@ -502,95 +146,32 @@ public class DependencyGraphNamespace {
         self.config = config
     }
 
-    /// Gets the diff of the dependency changes between two commits of a repository, based on the changes to the
-    /// dependency manifests made in those commits.
-    public func diffRange(
-        owner: String,
-        repo: String,
-        basehead: String,
-        name: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> DependencyGraphDiff {
-        try await DependencyGraphMethods.dependencyGraphDiffRange(
-            config: config,
-            owner: owner,
-            repo: repo,
-            basehead: basehead,
-            name: name,
-            requestOptions: requestOptions
-        )
+/// Gets the diff of the dependency changes between two commits of a repository, based on the changes to the dependency manifests made in those commits.
+    public func diffRange(owner: String, repo: String, basehead: String, name: String? = nil, requestOptions: RequestOptions? = nil) async throws -> DependencyGraphDiff {
+        return try await DependencyGraphMethods.dependencyGraphDiffRange(config: config, owner: owner, repo: repo, basehead: basehead, name: name, requestOptions: requestOptions)
     }
 
-    /// > [!WARNING] > **Closing down notice:** This operation is closing down and will not be accessible after November
-    /// 13, 2026. Please migrate to the asynchronous flow. Use "[Request generation of a software bill of materials
-    /// (SBOM) for a repository](https://docs.github.com/rest/dependency-graph/sboms#request-generation-of-a-software-bill-of-materials-sbom-for-a-repository)"
-    /// to trigger the report, then "[Fetch a software bill of materials (SBOM) for a repository](https://docs.github.com/rest/dependency-graph/sboms#fetch-a-software-bill-of-materials-sbom-for-a-repository)"
-    /// to retrieve it. For more information, see the
-    /// [changelog](https://github.blog/changelog/2026-05-12-synchronous-sbom-api-deprecated/). Exports the software
-    /// bill of materials (SBOM) for a repository in SPDX JSON format.
+/// > [!WARNING] > **Closing down notice:** This operation is closing down and will not be accessible after November 13, 2026. Please migrate to the asynchronous flow. Use "[Request generation of a software bill of materials (SBOM) for a repository](https://docs.github.com/rest/dependency-graph/sboms#request-generation-of-a-software-bill-of-materials-sbom-for-a-repository)" to trigger the report, then "[Fetch a software bill of materials (SBOM) for a repository](https://docs.github.com/rest/dependency-graph/sboms#fetch-a-software-bill-of-materials-sbom-for-a-repository)" to retrieve it. For more information, see the [changelog](https://github.blog/changelog/2026-05-12-synchronous-sbom-api-deprecated/). Exports the software bill of materials (SBOM) for a repository in SPDX JSON format.
     ///
     /// - Warning: This operation is deprecated and may be removed in a future release.
-    public func exportSbom(
-        owner: String,
-        repo: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> DependencyGraphSpdxSbom {
-        try await DependencyGraphMethods.dependencyGraphExportSbom(
-            config: config,
-            owner: owner,
-            repo: repo,
-            requestOptions: requestOptions
-        )
+    public func exportSbom(owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> DependencyGraphSpdxSbom {
+        return try await DependencyGraphMethods.dependencyGraphExportSbom(config: config, owner: owner, repo: repo, requestOptions: requestOptions)
     }
 
-    /// Fetches a previously generated software bill of materials (SBOM) for a repository. When the SBOM is ready, the
-    /// response is a 302 redirect to a temporary download URL for the SBOM in SPDX JSON format. The generated SBOM
-    /// report may be retained for up to one week from the original request. The temporary download URL returned by this
-    /// endpoint expires separately, and its expiry is set when the fetch request is made.
-    public func fetchSbomReport(
-        owner: String,
-        repo: String,
-        sbomUuid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await DependencyGraphMethods.dependencyGraphFetchSbomReport(
-            config: config,
-            owner: owner,
-            repo: repo,
-            sbomUuid: sbomUuid,
-            requestOptions: requestOptions
-        )
+/// Fetches a previously generated software bill of materials (SBOM) for a repository. When the SBOM is ready, the response is a 302 redirect to a temporary download URL for the SBOM in SPDX JSON format. The generated SBOM report may be retained for up to one week from the original request. The temporary download URL returned by this endpoint expires separately, and its expiry is set when the fetch request is made.
+    public func fetchSbomReport(owner: String, repo: String, sbomUuid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await DependencyGraphMethods.dependencyGraphFetchSbomReport(config: config, owner: owner, repo: repo, sbomUuid: sbomUuid, requestOptions: requestOptions)
     }
 
-    /// Triggers a job to generate a software bill of materials (SBOM) for a repository in SPDX JSON format.
-    public func generateSbomReport(
-        owner: String,
-        repo: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> DependencyGraphGenerateSbomReportResponse {
-        try await DependencyGraphMethods.dependencyGraphGenerateSbomReport(
-            config: config,
-            owner: owner,
-            repo: repo,
-            requestOptions: requestOptions
-        )
+/// Triggers a job to generate a software bill of materials (SBOM) for a repository in SPDX JSON format.
+    public func generateSbomReport(owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> DependencyGraphGenerateSbomReportResponse {
+        return try await DependencyGraphMethods.dependencyGraphGenerateSbomReport(config: config, owner: owner, repo: repo, requestOptions: requestOptions)
     }
 
-    /// Creates a dependency snapshot for a repository, recording the dependencies detected at a specific commit and
-    /// ref. Supply the required `detector`, `version`, `ref`, `sha`, `job`, and `scanned` fields; `ref` must begin with
-    /// `refs/`, and `sha` must be 40–64 characters. Add `manifests` and up to eight scalar-valued `metadata` entries
-    /// when you need to include dependency details or domain-specific information.
+/// Creates a dependency snapshot for a repository, recording the dependencies detected at a specific commit and ref. Supply the required `detector`, `version`, `ref`, `sha`, `job`, and `scanned` fields; `ref` must begin with `refs/`, and `sha` must be 40–64 characters. Add `manifests` and up to eight scalar-valued `metadata` entries when you need to include dependency details or domain-specific information.
     ///
-    /// Create a new snapshot of a repository's dependencies. The authenticated user must have access to the repository.
-    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
-    public func createRepositorySnapshot(
-        options: DependencyGraphMethods.DependencyGraphCreateRepositorySnapshotOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> DependencyGraphCreateRepositorySnapshotResponse {
-        try await DependencyGraphMethods.dependencyGraphCreateRepositorySnapshot(
-            config: config,
-            options: options,
-            requestOptions: requestOptions
-        )
+    /// Create a new snapshot of a repository's dependencies. The authenticated user must have access to the repository. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func createRepositorySnapshot(options: DependencyGraphMethods.DependencyGraphCreateRepositorySnapshotOptions, requestOptions: RequestOptions? = nil) async throws -> DependencyGraphCreateRepositorySnapshotResponse {
+        return try await DependencyGraphMethods.dependencyGraphCreateRepositorySnapshot(config: config, options: options, requestOptions: requestOptions)
     }
 }

@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension UsersMethods {
+extension UsersMethods {
     /// Lists the people following the authenticated user.
     ///
     /// - Parameters:
@@ -18,25 +18,11 @@ public extension UsersMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    static func usersListFollowersForAuthenticatedUser(
-        config: ClientConfig,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [SimpleUser] {
-        try await (sdkRequest(
-            "GET",
-            "/user/followers",
-            config: config,
-            query: [
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("page", value: page),
-            ],
-            decoder: .json,
-            operationId: "usersListFollowersForAuthenticatedUser",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self]
-        )).data
+    public static func usersListFollowersForAuthenticatedUser(config: ClientConfig, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [SimpleUser] {
+        return try (await sdkRequest("GET", "/user/followers", config: config, query: [
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("page", value: page),
+        ], decoder: .json, operationId: "usersListFollowersForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self])).data
     }
 
     /// Lists the people who the authenticated user follows.
@@ -50,24 +36,10 @@ public extension UsersMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    static func usersListFollowedByAuthenticatedUser(
-        config: ClientConfig,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [SimpleUser] {
-        try await (sdkRequest(
-            "GET",
-            "/user/following",
-            config: config,
-            query: [
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("page", value: page),
-            ],
-            decoder: .json,
-            operationId: "usersListFollowedByAuthenticatedUser",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self]
-        )).data
+    public static func usersListFollowedByAuthenticatedUser(config: ClientConfig, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [SimpleUser] {
+        return try (await sdkRequest("GET", "/user/following", config: config, query: [
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("page", value: page),
+        ], decoder: .json, operationId: "usersListFollowedByAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self])).data
     }
 }

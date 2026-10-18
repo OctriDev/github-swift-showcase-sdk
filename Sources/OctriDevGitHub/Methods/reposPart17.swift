@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ReposMethods {
-    /// This returns a single autolink reference by ID that was configured for the given repository. Information about
-    /// autolinks are only available to repository administrators.
+extension ReposMethods {
+    /// This returns a single autolink reference by ID that was configured for the given repository. Information about autolinks are only available to repository administrators.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -16,33 +15,11 @@ public extension ReposMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - autolinkId: The unique identifier of the autolink.
-    static func reposGetAutolink(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        autolinkId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> Autolink {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/autolinks/",
-                sdkEncodePathSegment(sdkWireString(autolinkId)),
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "reposGetAutolink",
-            options: requestOptions,
-            errors: ["404": BasicError.self]
-        )).data
+    public static func reposGetAutolink(config: ClientConfig, owner: String, repo: String, autolinkId: Int, requestOptions: RequestOptions? = nil) async throws -> Autolink {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/autolinks/", sdkEncodePathSegment(sdkWireString(autolinkId))].joined(), config: config, decoder: .json, operationId: "reposGetAutolink", options: requestOptions, errors: ["404": BasicError.self])).data
     }
 
-    /// This deletes a single autolink reference by ID that was configured for the given repository. Information about
-    /// autolinks are only available to repository administrators.
+    /// This deletes a single autolink reference by ID that was configured for the given repository. Information about autolinks are only available to repository administrators.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -50,28 +27,7 @@ public extension ReposMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - autolinkId: The unique identifier of the autolink.
-    static func reposDeleteAutolink(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        autolinkId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "DELETE",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/autolinks/",
-                sdkEncodePathSegment(sdkWireString(autolinkId)),
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "reposDeleteAutolink",
-            options: requestOptions,
-            errors: ["404": BasicError.self]
-        )).data
+    public static func reposDeleteAutolink(config: ClientConfig, owner: String, repo: String, autolinkId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/autolinks/", sdkEncodePathSegment(sdkWireString(autolinkId))].joined(), config: config, decoder: .empty, operationId: "reposDeleteAutolink", options: requestOptions, errors: ["404": BasicError.self])).data
     }
 }

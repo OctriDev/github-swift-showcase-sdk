@@ -3,116 +3,66 @@
 
 import Foundation
 
-/// WebhookPullRequestAutoMergeDisabled domain models
-public extension WebhookPullRequestAutoMergeDisabledPullRequest {
-    init(from decoder: Decoder) throws {
+// WebhookPullRequestAutoMergeDisabled domain models
+extension WebhookPullRequestAutoMergeDisabledPullRequest {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        links = try container.sdkDecodeRequired(.links)
-        activeLockReason = try container.sdkDecodeNullable(.activeLockReason)
-        assignee = try container.sdkDecodeNullable(.assignee)
-        assignees = try container.sdkDecodeRequired(.assignees)
-        authorAssociation = try container.sdkDecodeRequired(.authorAssociation)
-        autoMerge = try container.sdkDecodeNullable(.autoMerge)
-        base = try container.sdkDecodeRequired(.base)
-        body = try container.sdkDecodeNullable(.body)
-        closedAt = try container.sdkDecodeNullable(.closedAt)
-        commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
-        commitsUrl = try container.sdkDecodeRequired(.commitsUrl)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        diffUrl = try container.sdkDecodeRequired(.diffUrl)
-        draft = try container.sdkDecodeRequired(.draft)
-        head = try container.sdkDecodeRequired(.head)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        id = try container.sdkDecodeRequired(.id)
-        issueUrl = try container.sdkDecodeRequired(.issueUrl)
-        labels = try container.sdkDecodeRequired(.labels)
-        locked = try container.sdkDecodeRequired(.locked)
-        mergeCommitSha = try container.sdkDecodeNullable(.mergeCommitSha)
-        mergedAt = try container.sdkDecodeNullable(.mergedAt)
-        milestone = try container.sdkDecodeNullable(.milestone)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        number = try container.sdkDecodeRequired(.number)
-        patchUrl = try container.sdkDecodeRequired(.patchUrl)
-        requestedReviewers = try container.sdkDecodeRequired(.requestedReviewers)
-        requestedTeams = try container.sdkDecodeRequired(.requestedTeams)
-        reviewCommentUrl = try container.sdkDecodeRequired(.reviewCommentUrl)
-        reviewCommentsUrl = try container.sdkDecodeRequired(.reviewCommentsUrl)
-        state = try container.sdkDecodeRequired(.state)
-        statusesUrl = try container.sdkDecodeRequired(.statusesUrl)
-        title = try container.sdkDecodeRequired(.title)
-        updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        url = try container.sdkDecodeRequired(.url)
-        user = try container.sdkDecodeNullable(.user)
-        additions = try container.sdkDecodeIfPresent(.additions)
-        changedFiles = try container.sdkDecodeIfPresent(.changedFiles)
-        comments = try container.sdkDecodeIfPresent(.comments)
-        commits = try container.sdkDecodeIfPresent(.commits)
-        deletions = try container.sdkDecodeIfPresent(.deletions)
-        maintainerCanModify = try container.sdkDecodeIfPresent(.maintainerCanModify)
-        mergeable = try container.sdkDecodeIfPresent(.mergeable)
-        mergeableState = try container.sdkDecodeIfPresent(.mergeableState)
-        merged = try container.sdkDecodeIfPresent(.merged)
-        mergedBy = try container.sdkDecodeIfPresent(.mergedBy)
-        rebaseable = try container.sdkDecodeIfPresent(.rebaseable)
-        reviewComments = try container.sdkDecodeIfPresent(.reviewComments)
-        stack = try container.sdkDecodeIfPresent(.stack)
+        self.links = try container.sdkDecodeRequired(.links)
+        self.activeLockReason = try container.sdkDecodeNullable(.activeLockReason)
+        self.assignee = try container.sdkDecodeNullable(.assignee)
+        self.assignees = try container.sdkDecodeRequired(.assignees)
+        self.authorAssociation = try container.sdkDecodeRequired(.authorAssociation)
+        self.autoMerge = try container.sdkDecodeNullable(.autoMerge)
+        self.base = try container.sdkDecodeRequired(.base)
+        self.body = try container.sdkDecodeNullable(.body)
+        self.closedAt = try container.sdkDecodeNullable(.closedAt)
+        self.commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
+        self.commitsUrl = try container.sdkDecodeRequired(.commitsUrl)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.diffUrl = try container.sdkDecodeRequired(.diffUrl)
+        self.draft = try container.sdkDecodeRequired(.draft)
+        self.head = try container.sdkDecodeRequired(.head)
+        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.issueUrl = try container.sdkDecodeRequired(.issueUrl)
+        self.labels = try container.sdkDecodeRequired(.labels)
+        self.locked = try container.sdkDecodeRequired(.locked)
+        self.mergeCommitSha = try container.sdkDecodeNullable(.mergeCommitSha)
+        self.mergedAt = try container.sdkDecodeNullable(.mergedAt)
+        self.milestone = try container.sdkDecodeNullable(.milestone)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.number = try container.sdkDecodeRequired(.number)
+        self.patchUrl = try container.sdkDecodeRequired(.patchUrl)
+        self.requestedReviewers = try container.sdkDecodeRequired(.requestedReviewers)
+        self.requestedTeams = try container.sdkDecodeRequired(.requestedTeams)
+        self.reviewCommentUrl = try container.sdkDecodeRequired(.reviewCommentUrl)
+        self.reviewCommentsUrl = try container.sdkDecodeRequired(.reviewCommentsUrl)
+        self.state = try container.sdkDecodeRequired(.state)
+        self.statusesUrl = try container.sdkDecodeRequired(.statusesUrl)
+        self.title = try container.sdkDecodeRequired(.title)
+        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.user = try container.sdkDecodeNullable(.user)
+        self.additions = try container.sdkDecodeIfPresent(.additions)
+        self.changedFiles = try container.sdkDecodeIfPresent(.changedFiles)
+        self.comments = try container.sdkDecodeIfPresent(.comments)
+        self.commits = try container.sdkDecodeIfPresent(.commits)
+        self.deletions = try container.sdkDecodeIfPresent(.deletions)
+        self.maintainerCanModify = try container.sdkDecodeIfPresent(.maintainerCanModify)
+        self.mergeable = try container.sdkDecodeIfPresent(.mergeable)
+        self.mergeableState = try container.sdkDecodeIfPresent(.mergeableState)
+        self.merged = try container.sdkDecodeIfPresent(.merged)
+        self.mergedBy = try container.sdkDecodeIfPresent(.mergedBy)
+        self.rebaseable = try container.sdkDecodeIfPresent(.rebaseable)
+        self.reviewComments = try container.sdkDecodeIfPresent(.reviewComments)
+        self.stack = try container.sdkDecodeIfPresent(.stack)
         try sdkValidateConstraintsPart1()
         try sdkValidateConstraintsPart2()
     }
 }
 
-public extension WebhookPullRequestAutoMergeDisabledPullRequest {
-    init(
-        links: WebhookPullRequestAutoMergeDisabledPullRequestLinks,
-        activeLockReason: WebhookPullRequestAutoMergeDisabledPullRequestActiveLockReason?,
-        assignee: WebhookPullRequestAutoMergeDisabledPullRequestAssignee?,
-        assignees: [WebhookPullRequestAutoMergeDisabledPullRequestAssigneesItem?],
-        authorAssociation: WebhookPullRequestAutoMergeDisabledPullRequestAuthorAssociation,
-        autoMerge: WebhookPullRequestAutoMergeDisabledPullRequestAutoMerge?,
-        base: WebhookPullRequestAutoMergeDisabledPullRequestBase,
-        body: String?,
-        closedAt: Date?,
-        commentsUrl: String,
-        commitsUrl: String,
-        createdAt: Date,
-        diffUrl: String,
-        draft: Bool,
-        head: WebhookPullRequestAutoMergeDisabledPullRequestHead,
-        htmlUrl: String,
-        id: Int,
-        issueUrl: String,
-        labels: [WebhookPullRequestAutoMergeDisabledPullRequestLabelsItem],
-        locked: Bool,
-        mergeCommitSha: String?,
-        mergedAt: Date?,
-        milestone: WebhookPullRequestAutoMergeDisabledPullRequestMilestone?,
-        nodeId: String,
-        number: Int,
-        patchUrl: String,
-        requestedReviewers: WebhookPullRequestAutoMergeDisabledPullRequestRequestedReviewersList,
-        requestedTeams: WebhookPullRequestAutoMergeDisabledPullRequestRequestedTeamsList,
-        reviewCommentUrl: String,
-        reviewCommentsUrl: String,
-        state: WebhookPullRequestAutoMergeDisabledPullRequestState,
-        statusesUrl: String,
-        title: String,
-        updatedAt: Date,
-        url: String,
-        user: WebhookPullRequestAutoMergeDisabledPullRequestUser?,
-        additions: Int? = nil,
-        changedFiles: Int? = nil,
-        comments: Int? = nil,
-        commits: Int? = nil,
-        deletions: Int? = nil,
-        maintainerCanModify: Bool? = nil,
-        mergeable: Bool? = nil,
-        mergeableState: String? = nil,
-        merged: Bool? = nil,
-        mergedBy: WebhookPullRequestAutoMergeDisabledPullRequestMergedBy? = nil,
-        rebaseable: Bool? = nil,
-        reviewComments: Int? = nil,
-        stack: PullRequestStack? = nil
-    ) throws {
+extension WebhookPullRequestAutoMergeDisabledPullRequest {
+    public init(links: WebhookPullRequestAutoMergeDisabledPullRequestLinks, activeLockReason: WebhookPullRequestAutoMergeDisabledPullRequestActiveLockReason?, assignee: WebhookPullRequestAutoMergeDisabledPullRequestAssignee?, assignees: [WebhookPullRequestAutoMergeDisabledPullRequestAssigneesItem?], authorAssociation: WebhookPullRequestAutoMergeDisabledPullRequestAuthorAssociation, autoMerge: WebhookPullRequestAutoMergeDisabledPullRequestAutoMerge?, base: WebhookPullRequestAutoMergeDisabledPullRequestBase, body: String?, closedAt: Date?, commentsUrl: String, commitsUrl: String, createdAt: Date, diffUrl: String, draft: Bool, head: WebhookPullRequestAutoMergeDisabledPullRequestHead, htmlUrl: String, id: Int, issueUrl: String, labels: [WebhookPullRequestAutoMergeDisabledPullRequestLabelsItem], locked: Bool, mergeCommitSha: String?, mergedAt: Date?, milestone: WebhookPullRequestAutoMergeDisabledPullRequestMilestone?, nodeId: String, number: Int, patchUrl: String, requestedReviewers: WebhookPullRequestAutoMergeDisabledPullRequestRequestedReviewersList, requestedTeams: WebhookPullRequestAutoMergeDisabledPullRequestRequestedTeamsList, reviewCommentUrl: String, reviewCommentsUrl: String, state: WebhookPullRequestAutoMergeDisabledPullRequestState, statusesUrl: String, title: String, updatedAt: Date, url: String, user: WebhookPullRequestAutoMergeDisabledPullRequestUser?, additions: Int? = nil, changedFiles: Int? = nil, comments: Int? = nil, commits: Int? = nil, deletions: Int? = nil, maintainerCanModify: Bool? = nil, mergeable: Bool? = nil, mergeableState: String? = nil, merged: Bool? = nil, mergedBy: WebhookPullRequestAutoMergeDisabledPullRequestMergedBy? = nil, rebaseable: Bool? = nil, reviewComments: Int? = nil, stack: PullRequestStack? = nil) throws {
         (self.links, self.activeLockReason) = (links, activeLockReason)
         (self.assignee, self.assignees) = (assignee, assignees)
         (self.authorAssociation, self.autoMerge) = (authorAssociation, autoMerge)
@@ -145,28 +95,28 @@ public extension WebhookPullRequestAutoMergeDisabledPullRequest {
 
 extension WebhookPullRequestAutoMergeDisabledPullRequest {
     func sdkValidateConstraintsPart1() throws {
-        if let value = closedAt {
+        if let value = self.closedAt {
             try sdkValidateDateTime("closed_at", sdkWireString(value))
         }
-        try sdkValidateUri("comments_url", commentsUrl)
-        try sdkValidateUri("commits_url", commitsUrl)
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
-        try sdkValidateUri("diff_url", diffUrl)
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateUri("issue_url", issueUrl)
-        if let value = mergedAt {
+            try sdkValidateUri("comments_url", self.commentsUrl)
+            try sdkValidateUri("commits_url", self.commitsUrl)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateUri("diff_url", self.diffUrl)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("issue_url", self.issueUrl)
+        if let value = self.mergedAt {
             try sdkValidateDateTime("merged_at", sdkWireString(value))
         }
-        try sdkValidateUri("patch_url", patchUrl)
-        try sdkValidateUri("review_comments_url", reviewCommentsUrl)
-        try sdkValidateUri("statuses_url", statusesUrl)
-        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+            try sdkValidateUri("patch_url", self.patchUrl)
+            try sdkValidateUri("review_comments_url", self.reviewCommentsUrl)
+            try sdkValidateUri("statuses_url", self.statusesUrl)
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
     }
 }
 
 extension WebhookPullRequestAutoMergeDisabledPullRequest {
     func sdkValidateConstraintsPart2() throws {
-        try sdkValidateUri("url", url)
+            try sdkValidateUri("url", self.url)
     }
 }
 
@@ -208,80 +158,44 @@ public struct WebhookPullRequestAutoMergeDisabled: Codable {
         case organization
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookPullRequestAutoMergeDisabled {
-    init(from decoder: Decoder) throws {
+extension WebhookPullRequestAutoMergeDisabled {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.action) else {
-            throw SdkValidationError(
-                field: "action",
-                code: "required",
-                message: "Validation failed for 'action': value is required"
-            )
+            throw SdkValidationError(field: "action", code: "required", message: "Validation failed for 'action': value is required")
         }
         guard container.contains(.number) else {
-            throw SdkValidationError(
-                field: "number",
-                code: "required",
-                message: "Validation failed for 'number': value is required"
-            )
+            throw SdkValidationError(field: "number", code: "required", message: "Validation failed for 'number': value is required")
         }
         guard container.contains(.pullRequest) else {
-            throw SdkValidationError(
-                field: "pull_request",
-                code: "required",
-                message: "Validation failed for 'pull_request': value is required"
-            )
+            throw SdkValidationError(field: "pull_request", code: "required", message: "Validation failed for 'pull_request': value is required")
         }
         guard container.contains(.reason) else {
-            throw SdkValidationError(
-                field: "reason",
-                code: "required",
-                message: "Validation failed for 'reason': value is required"
-            )
+            throw SdkValidationError(field: "reason", code: "required", message: "Validation failed for 'reason': value is required")
         }
         guard container.contains(.repository) else {
-            throw SdkValidationError(
-                field: "repository",
-                code: "required",
-                message: "Validation failed for 'repository': value is required"
-            )
+            throw SdkValidationError(field: "repository", code: "required", message: "Validation failed for 'repository': value is required")
         }
         guard container.contains(.sender) else {
-            throw SdkValidationError(
-                field: "sender",
-                code: "required",
-                message: "Validation failed for 'sender': value is required"
-            )
+            throw SdkValidationError(field: "sender", code: "required", message: "Validation failed for 'sender': value is required")
         }
-        action = try container.sdkDecodeRequired(.action)
-        number = try container.sdkDecodeRequired(.number)
-        pullRequest = try container.sdkDecodeRequired(.pullRequest)
-        reason = try container.sdkDecodeRequired(.reason)
-        repository = try container.sdkDecodeRequired(.repository)
-        sender = try container.sdkDecodeRequired(.sender)
-        enterprise = try container.sdkDecodeIfPresent(.enterprise)
-        installation = try container.sdkDecodeIfPresent(.installation)
-        organization = try container.sdkDecodeIfPresent(.organization)
+        self.action = try container.sdkDecodeRequired(.action)
+        self.number = try container.sdkDecodeRequired(.number)
+        self.pullRequest = try container.sdkDecodeRequired(.pullRequest)
+        self.reason = try container.sdkDecodeRequired(.reason)
+        self.repository = try container.sdkDecodeRequired(.repository)
+        self.sender = try container.sdkDecodeRequired(.sender)
+        self.enterprise = try container.sdkDecodeIfPresent(.enterprise)
+        self.installation = try container.sdkDecodeIfPresent(.installation)
+        self.organization = try container.sdkDecodeIfPresent(.organization)
     }
 }
 
-public extension WebhookPullRequestAutoMergeDisabled {
-    init(
-        action: WebhookPullRequestAutoMergeDisabledAction,
-        number: WebhooksNumber,
-        pullRequest: WebhookPullRequestAutoMergeDisabledPullRequest,
-        reason: String,
-        repository: RepositoryWebhooks,
-        sender: SimpleUser,
-        enterprise: EnterpriseWebhooks? = nil,
-        installation: SimpleInstallation? = nil,
-        organization: OrganizationSimpleWebhooks? = nil
-    ) {
+extension WebhookPullRequestAutoMergeDisabled {
+    public init(action: WebhookPullRequestAutoMergeDisabledAction, number: WebhooksNumber, pullRequest: WebhookPullRequestAutoMergeDisabledPullRequest, reason: String, repository: RepositoryWebhooks, sender: SimpleUser, enterprise: EnterpriseWebhooks? = nil, installation: SimpleInstallation? = nil, organization: OrganizationSimpleWebhooks? = nil) {
         (self.action, self.number) = (action, number)
         (self.pullRequest, self.reason) = (pullRequest, reason)
         (self.repository, self.sender) = (repository, sender)
@@ -299,27 +213,21 @@ public struct WebhookPullRequestAutoMergeDisabledPullRequestLinksReviewComments:
         case href
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookPullRequestAutoMergeDisabledPullRequestLinksReviewComments {
-    init(from decoder: Decoder) throws {
+extension WebhookPullRequestAutoMergeDisabledPullRequestLinksReviewComments {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.href) else {
-            throw SdkValidationError(
-                field: "href",
-                code: "required",
-                message: "Validation failed for 'href': value is required"
-            )
+            throw SdkValidationError(field: "href", code: "required", message: "Validation failed for 'href': value is required")
         }
-        href = try container.sdkDecodeRequired(.href)
+        self.href = try container.sdkDecodeRequired(.href)
     }
 }
 
-public extension WebhookPullRequestAutoMergeDisabledPullRequestLinksReviewComments {
-    init(href: String) {
+extension WebhookPullRequestAutoMergeDisabledPullRequestLinksReviewComments {
+    public init(href: String) {
         self.href = href
     }
 }
@@ -333,27 +241,21 @@ public struct WebhookPullRequestAutoMergeDisabledPullRequestLinksHtml: Codable {
         case href
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookPullRequestAutoMergeDisabledPullRequestLinksHtml {
-    init(from decoder: Decoder) throws {
+extension WebhookPullRequestAutoMergeDisabledPullRequestLinksHtml {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.href) else {
-            throw SdkValidationError(
-                field: "href",
-                code: "required",
-                message: "Validation failed for 'href': value is required"
-            )
+            throw SdkValidationError(field: "href", code: "required", message: "Validation failed for 'href': value is required")
         }
-        href = try container.sdkDecodeRequired(.href)
+        self.href = try container.sdkDecodeRequired(.href)
     }
 }
 
-public extension WebhookPullRequestAutoMergeDisabledPullRequestLinksHtml {
-    init(href: String) {
+extension WebhookPullRequestAutoMergeDisabledPullRequestLinksHtml {
+    public init(href: String) {
         self.href = href
     }
 }
@@ -388,36 +290,25 @@ public struct WebhookPullRequestAutoMergeDisabledPullRequestLinks: Codable {
         case statuses
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookPullRequestAutoMergeDisabledPullRequestLinks {
-    init(from decoder: Decoder) throws {
+extension WebhookPullRequestAutoMergeDisabledPullRequestLinks {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        comments = try container.sdkDecodeRequired(.comments)
-        commits = try container.sdkDecodeRequired(.commits)
-        html = try container.sdkDecodeRequired(.html)
-        issue = try container.sdkDecodeRequired(.issue)
-        reviewComment = try container.sdkDecodeRequired(.reviewComment)
-        reviewComments = try container.sdkDecodeRequired(.reviewComments)
+        self.comments = try container.sdkDecodeRequired(.comments)
+        self.commits = try container.sdkDecodeRequired(.commits)
+        self.html = try container.sdkDecodeRequired(.html)
+        self.issue = try container.sdkDecodeRequired(.issue)
+        self.reviewComment = try container.sdkDecodeRequired(.reviewComment)
+        self.reviewComments = try container.sdkDecodeRequired(.reviewComments)
         self.`self` = try container.sdkDecodeRequired(.`self`)
-        statuses = try container.sdkDecodeRequired(.statuses)
+        self.statuses = try container.sdkDecodeRequired(.statuses)
     }
 }
 
-public extension WebhookPullRequestAutoMergeDisabledPullRequestLinks {
-    init(
-        comments: WebhookPullRequestAutoMergeDisabledPullRequestLinksComments,
-        commits: WebhookPullRequestAutoMergeDisabledPullRequestLinksCommits,
-        html: WebhookPullRequestAutoMergeDisabledPullRequestLinksHtml,
-        issue: WebhookPullRequestAutoMergeDisabledPullRequestLinksIssue,
-        reviewComment: WebhookPullRequestAutoMergeDisabledPullRequestLinksReviewComment,
-        reviewComments: WebhookPullRequestAutoMergeDisabledPullRequestLinksReviewComments,
-        self selfValue: WebhookPullRequestAutoMergeDisabledPullRequestLinksSelf,
-        statuses: WebhookPullRequestAutoMergeDisabledPullRequestLinksStatuses
-    ) {
+extension WebhookPullRequestAutoMergeDisabledPullRequestLinks {
+    public init(comments: WebhookPullRequestAutoMergeDisabledPullRequestLinksComments, commits: WebhookPullRequestAutoMergeDisabledPullRequestLinksCommits, html: WebhookPullRequestAutoMergeDisabledPullRequestLinksHtml, issue: WebhookPullRequestAutoMergeDisabledPullRequestLinksIssue, reviewComment: WebhookPullRequestAutoMergeDisabledPullRequestLinksReviewComment, reviewComments: WebhookPullRequestAutoMergeDisabledPullRequestLinksReviewComments, `self` selfValue: WebhookPullRequestAutoMergeDisabledPullRequestLinksSelf, statuses: WebhookPullRequestAutoMergeDisabledPullRequestLinksStatuses) {
         (self.comments, self.commits) = (comments, commits)
         (self.html, self.issue) = (html, issue)
         (self.reviewComment, self.reviewComments) = (reviewComment, reviewComments)
@@ -446,65 +337,37 @@ public struct WebhookPullRequestAutoMergeDisabledPullRequestBase: Codable {
         case user
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookPullRequestAutoMergeDisabledPullRequestBase {
-    init(from decoder: Decoder) throws {
+extension WebhookPullRequestAutoMergeDisabledPullRequestBase {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.label) else {
-            throw SdkValidationError(
-                field: "label",
-                code: "required",
-                message: "Validation failed for 'label': value is required"
-            )
+            throw SdkValidationError(field: "label", code: "required", message: "Validation failed for 'label': value is required")
         }
         guard container.contains(.ref) else {
-            throw SdkValidationError(
-                field: "ref",
-                code: "required",
-                message: "Validation failed for 'ref': value is required"
-            )
+            throw SdkValidationError(field: "ref", code: "required", message: "Validation failed for 'ref': value is required")
         }
         guard container.contains(.repo) else {
-            throw SdkValidationError(
-                field: "repo",
-                code: "required",
-                message: "Validation failed for 'repo': value is required"
-            )
+            throw SdkValidationError(field: "repo", code: "required", message: "Validation failed for 'repo': value is required")
         }
         guard container.contains(.sha) else {
-            throw SdkValidationError(
-                field: "sha",
-                code: "required",
-                message: "Validation failed for 'sha': value is required"
-            )
+            throw SdkValidationError(field: "sha", code: "required", message: "Validation failed for 'sha': value is required")
         }
         guard container.contains(.user) else {
-            throw SdkValidationError(
-                field: "user",
-                code: "required",
-                message: "Validation failed for 'user': value is required"
-            )
+            throw SdkValidationError(field: "user", code: "required", message: "Validation failed for 'user': value is required")
         }
-        label = try container.sdkDecodeRequired(.label)
-        ref = try container.sdkDecodeRequired(.ref)
-        repo = try container.sdkDecodeRequired(.repo)
-        sha = try container.sdkDecodeRequired(.sha)
-        user = try container.sdkDecodeNullable(.user)
+        self.label = try container.sdkDecodeRequired(.label)
+        self.ref = try container.sdkDecodeRequired(.ref)
+        self.repo = try container.sdkDecodeRequired(.repo)
+        self.sha = try container.sdkDecodeRequired(.sha)
+        self.user = try container.sdkDecodeNullable(.user)
     }
 }
 
-public extension WebhookPullRequestAutoMergeDisabledPullRequestBase {
-    init(
-        label: String,
-        ref: String,
-        repo: WebhookPullRequestAutoMergeDisabledPullRequestBaseRepo,
-        sha: String,
-        user: WebhookPullRequestAutoMergeDisabledPullRequestBaseUser?
-    ) {
+extension WebhookPullRequestAutoMergeDisabledPullRequestBase {
+    public init(label: String, ref: String, repo: WebhookPullRequestAutoMergeDisabledPullRequestBaseRepo, sha: String, user: WebhookPullRequestAutoMergeDisabledPullRequestBaseUser?) {
         (self.label, self.ref) = (label, ref)
         (self.repo, self.sha) = (repo, sha)
         self.user = user
@@ -550,54 +413,40 @@ public struct WebhookPullRequestAutoMergeDisabledPullRequestRequestedTeamsItemPa
         case url
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookPullRequestAutoMergeDisabledPullRequestRequestedTeamsItemParent {
-    init(from decoder: Decoder) throws {
+extension WebhookPullRequestAutoMergeDisabledPullRequestRequestedTeamsItemParent {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        description = try container.sdkDecodeNullable(.description)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        id = try container.sdkDecodeRequired(.id)
-        membersUrl = try container.sdkDecodeRequired(.membersUrl)
-        name = try container.sdkDecodeRequired(.name)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        permission = try container.sdkDecodeRequired(.permission)
-        privacy = try container.sdkDecodeRequired(.privacy)
-        repositoriesUrl = try container.sdkDecodeRequired(.repositoriesUrl)
-        slug = try container.sdkDecodeRequired(.slug)
-        url = try container.sdkDecodeRequired(.url)
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateUri("repositories_url", repositoriesUrl)
-        try sdkValidateUri("url", url)
+        self.description = try container.sdkDecodeNullable(.description)
+        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.membersUrl = try container.sdkDecodeRequired(.membersUrl)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.permission = try container.sdkDecodeRequired(.permission)
+        self.privacy = try container.sdkDecodeRequired(.privacy)
+        self.repositoriesUrl = try container.sdkDecodeRequired(.repositoriesUrl)
+        self.slug = try container.sdkDecodeRequired(.slug)
+        self.url = try container.sdkDecodeRequired(.url)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("repositories_url", self.repositoriesUrl)
+            try sdkValidateUri("url", self.url)
     }
 }
 
-public extension WebhookPullRequestAutoMergeDisabledPullRequestRequestedTeamsItemParent {
-    init(
-        description: String?,
-        htmlUrl: String,
-        id: Int,
-        membersUrl: String,
-        name: String,
-        nodeId: String,
-        permission: String,
-        privacy: WebhookPullRequestAutoMergeDisabledPullRequestRequestedTeamsIXa9a6195a77,
-        repositoriesUrl: String,
-        slug: String,
-        url: String
-    ) throws {
+extension WebhookPullRequestAutoMergeDisabledPullRequestRequestedTeamsItemParent {
+    public init(description: String?, htmlUrl: String, id: Int, membersUrl: String, name: String, nodeId: String, permission: String, privacy: WebhookPullRequestAutoMergeDisabledPullRequestRequestedTeamsIXa9a6195a77, repositoriesUrl: String, slug: String, url: String) throws {
         (self.description, self.htmlUrl) = (description, htmlUrl)
         (self.id, self.membersUrl) = (id, membersUrl)
         (self.name, self.nodeId) = (name, nodeId)
         (self.permission, self.privacy) = (permission, privacy)
         (self.repositoriesUrl, self.slug) = (repositoriesUrl, slug)
         self.url = url
-        try sdkValidateUri("html_url", self.htmlUrl)
-        try sdkValidateUri("repositories_url", self.repositoriesUrl)
-        try sdkValidateUri("url", self.url)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("repositories_url", self.repositoriesUrl)
+            try sdkValidateUri("url", self.url)
     }
 }
 
@@ -610,27 +459,21 @@ public struct WebhookPullRequestAutoMergeDisabledPullRequestLinksCommits: Codabl
         case href
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookPullRequestAutoMergeDisabledPullRequestLinksCommits {
-    init(from decoder: Decoder) throws {
+extension WebhookPullRequestAutoMergeDisabledPullRequestLinksCommits {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.href) else {
-            throw SdkValidationError(
-                field: "href",
-                code: "required",
-                message: "Validation failed for 'href': value is required"
-            )
+            throw SdkValidationError(field: "href", code: "required", message: "Validation failed for 'href': value is required")
         }
-        href = try container.sdkDecodeRequired(.href)
+        self.href = try container.sdkDecodeRequired(.href)
     }
 }
 
-public extension WebhookPullRequestAutoMergeDisabledPullRequestLinksCommits {
-    init(href: String) {
+extension WebhookPullRequestAutoMergeDisabledPullRequestLinksCommits {
+    public init(href: String) {
         self.href = href
     }
 }

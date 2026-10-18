@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ReposMethods {
-    /// Creates a deploy key that grants access to a repository. Provide the public key in `key` and optionally set
-    /// `title` and `read_only` to name the key and control its access. A 201 response returns the created deploy key.
+extension ReposMethods {
+    /// Creates a deploy key that grants access to a repository. Provide the public key in `key` and optionally set `title` and `read_only` to name the key and control its access. A 201 response returns the created deploy key.
     ///
     /// You can create a read-only deploy key.
     ///
@@ -28,32 +27,9 @@ public extension ReposMethods {
     ///   for-an-organization/)" and "[Permission levels for a user account
     ///   repository](https://docs.github.com/articles/permission-levels-for-a-user-ac
     ///   count-repository/)."
-    static func reposCreateDeployKey(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        key: String,
-        title: String? = nil,
-        readOnly: Bool? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> DeployKey {
+    public static func reposCreateDeployKey(config: ClientConfig, owner: String, repo: String, key: String, title: String? = nil, readOnly: Bool? = nil, requestOptions: RequestOptions? = nil) async throws -> DeployKey {
         let requestBody = ReposCreateDeployKeyRequestBody(key: key, title: title, readOnly: readOnly)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/keys",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "reposCreateDeployKey",
-            options: requestOptions,
-            errors: ["422": ValidationError.self]
-        )).data
+        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/keys"].joined(), config: config, body: requestBody, decoder: .json, operationId: "reposCreateDeployKey", options: requestOptions, errors: ["422": ValidationError.self])).data
     }
 }

@@ -17,9 +17,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.activity.getRepoSubscription(
-                owner: decoded("\"owner\""),
-                repo: decoded("\"repo\"")
-            )
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -35,8 +35,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActivityGetStargazerCountForRepoActivityGetStargazerCountForRepoReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActivityGetStargazerCountForRepoActivityGetStargazerCountForRepoReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -55,8 +54,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testActivityGetStargazerCountForRepoActivityGetStargazerCountForRepo404ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActivityGetStargazerCountForRepoActivityGetStargazerCountForRepo404ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -67,9 +65,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.activity.getStargazerCountForRepo(
-                owner: decoded("\"owner\""),
-                repo: decoded("\"repo\"")
-            )
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -85,8 +83,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActivityGetStargazerHistoryForRepoActivityGetStargazerHistoryForRepoReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActivityGetStargazerHistoryForRepoActivityGetStargazerHistoryForRepoReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -107,8 +104,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testActivityGetStargazerHistoryForRepoActivityGetStargazerHistoryForRepo422ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActivityGetStargazerHistoryForRepoActivityGetStargazerHistoryForRepo422ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/422") else {
             return
         }
@@ -119,11 +115,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.activity.getStargazerHistoryForRepo(
-                owner: decoded("\"owner\""),
-                repo: decoded("\"repo\""),
-                perPage: decoded("30"),
-                page: decoded("1")
-            )
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            perPage: decoded("30"),
+            page: decoded("1")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 422)
@@ -168,8 +164,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.activity.getThread(
-                threadId: decoded("1")
-            )
+            threadId: decoded("1")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -185,8 +181,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActivityGetThreadSubscriptionForAuthenticatedUserActivityGetTXd20f60f231ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActivityGetThreadSubscriptionForAuthenticatedUserActivityGetTXd20f60f231ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -204,8 +199,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testActivityGetThreadSubscriptionForAuthenticatedUserActivityGetTXd676645b29ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActivityGetThreadSubscriptionForAuthenticatedUserActivityGetTXd676645b29ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -216,8 +210,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.activity.getThreadSubscriptionForAuthenticatedUser(
-                threadId: decoded("1")
-            )
+            threadId: decoded("1")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -233,8 +227,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActivityListEventsForAuthenticatedUserActivityListEventsForAuX659253862bReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActivityListEventsForAuthenticatedUserActivityListEventsForAuX659253862bReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -254,8 +247,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testActivityListNotificationsForAuthenticatedUserActivityListNotiX831bc9d8ceReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActivityListNotificationsForAuthenticatedUserActivityListNotiX831bc9d8ceReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -278,8 +270,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testActivityListNotificationsForAuthenticatedUserActivityListNotiXa3ba9d13c8ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActivityListNotificationsForAuthenticatedUserActivityListNotiXa3ba9d13c8ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -290,13 +281,13 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.activity.listNotificationsForAuthenticatedUser(
-                all: decoded("false"),
-                participating: decoded("false"),
-                since: decoded("\"2024-01-01T00:00:00Z\""),
-                before: decoded("\"2024-01-01T00:00:00Z\""),
-                page: decoded("1"),
-                perPage: decoded("50")
-            )
+            all: decoded("false"),
+            participating: decoded("false"),
+            since: decoded("\"2024-01-01T00:00:00Z\""),
+            before: decoded("\"2024-01-01T00:00:00Z\""),
+            page: decoded("1"),
+            perPage: decoded("50")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -312,8 +303,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActivityListOrgEventsForAuthenticatedUserActivityListOrgEventXee27165d9aReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActivityListOrgEventsForAuthenticatedUserActivityListOrgEventXee27165d9aReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -364,9 +354,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.activity.listPublicEvents(
-                perPage: decoded("15"),
-                page: decoded("1")
-            )
+            perPage: decoded("15"),
+            page: decoded("1")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -382,8 +372,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActivityListPublicEventsForRepoNetworkActivityListPublicEventX2ddba86091ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActivityListPublicEventsForRepoNetworkActivityListPublicEventX2ddba86091ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -404,8 +393,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testActivityListPublicEventsForRepoNetworkActivityListPublicEventX93abe106c6ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActivityListPublicEventsForRepoNetworkActivityListPublicEventX93abe106c6ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/301") else {
             return
         }
@@ -416,11 +404,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.activity.listPublicEventsForRepoNetwork(
-                owner: decoded("\"owner\""),
-                repo: decoded("\"repo\""),
-                perPage: decoded("30"),
-                page: decoded("1")
-            )
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            perPage: decoded("30"),
+            page: decoded("1")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 301)
@@ -476,8 +464,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testActivityListReceivedEventsForUserActivityListReceivedEventsForUserReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActivityListReceivedEventsForUserActivityListReceivedEventsForUserReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -497,8 +484,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testActivityListReceivedPublicEventsForUserActivityListReceivedPuX42bf15f5d8ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActivityListReceivedPublicEventsForUserActivityListReceivedPuX42bf15f5d8ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }

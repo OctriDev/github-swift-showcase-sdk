@@ -6,42 +6,17 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension CopilotSpacesMethods {
-    /// Lists all collaborators for a specific Copilot Space owned by a user. The authenticated user must be the owner
-    /// of the space or have admin access to the space. Each collaborator entry specifies which user has access to the
-    /// space and at what level (reader, writer, or admin). The space owner is excluded from this list. Team
-    /// collaborators are not supported for user-owned Copilot Spaces. OAuth app tokens and personal access tokens
-    /// (classic) need the `user` scope to use this endpoint.
+extension CopilotSpacesMethods {
+    /// Lists all collaborators for a specific Copilot Space owned by a user. The authenticated user must be the owner of the space or have admin access to the space. Each collaborator entry specifies which user has access to the space and at what level (reader, writer, or admin). The space owner is excluded from this list. Team collaborators are not supported for user-owned Copilot Spaces. OAuth app tokens and personal access tokens (classic) need the `user` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - username: The handle for the GitHub user account.
     /// - spaceNumber: The unique identifier of the Copilot Space.
-    static func copilotSpacesListCollaboratorsForUser(
-        config: ClientConfig,
-        username: String,
-        spaceNumber: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CopilotSpacesListCollaboratorsForUserResponse {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/users/",
-                sdkEncodePathSegment(sdkWireString(username)),
-                "/copilot-spaces/",
-                sdkEncodePathSegment(sdkWireString(spaceNumber)),
-                "/collaborators",
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "copilotSpacesListCollaboratorsForUser",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self]
-        )).data
+    public static func copilotSpacesListCollaboratorsForUser(config: ClientConfig, username: String, spaceNumber: Int, requestOptions: RequestOptions? = nil) async throws -> CopilotSpacesListCollaboratorsForUserResponse {
+        return try (await sdkRequest("GET", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/copilot-spaces/", sdkEncodePathSegment(sdkWireString(spaceNumber)), "/collaborators"].joined(), config: config, decoder: .json, operationId: "copilotSpacesListCollaboratorsForUser", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
     }
 
-    /// Adds a collaborator to a specific Copilot Space owned by a user. The authenticated user must be the owner of the
-    /// space or have admin access to the space. Team collaborators are not supported for user-owned Copilot Spaces.
-    /// OAuth app tokens and personal access tokens (classic) need the `user` scope to use this endpoint.
+    /// Adds a collaborator to a specific Copilot Space owned by a user. The authenticated user must be the owner of the space or have admin access to the space. Team collaborators are not supported for user-owned Copilot Spaces. OAuth app tokens and personal access tokens (classic) need the `user` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - username: The handle for the GitHub user account.
@@ -51,36 +26,9 @@ public extension CopilotSpacesMethods {
     /// - actorIdentifier: The username of the collaborator. The numeric user ID is
     ///   also accepted.
     /// - role: The role to grant to the collaborator.
-    static func copilotSpacesAddCollaboratorForUser(
-        config: ClientConfig,
-        username: String,
-        spaceNumber: Int,
-        actorType: CopilotSpacesAddCollaboratorForUserRequestBodyActorType,
-        actorIdentifier: String,
-        role: CopilotSpacesAddCollaboratorForUserRequestBodyRole,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CopilotSpaceCollaborator {
-        let requestBody = CopilotSpacesAddCollaboratorForUserRequestBody(
-            actorType: actorType,
-            actorIdentifier: actorIdentifier,
-            role: role
-        )
+    public static func copilotSpacesAddCollaboratorForUser(config: ClientConfig, username: String, spaceNumber: Int, actorType: CopilotSpacesAddCollaboratorForUserRequestBodyActorType, actorIdentifier: String, role: CopilotSpacesAddCollaboratorForUserRequestBodyRole, requestOptions: RequestOptions? = nil) async throws -> CopilotSpaceCollaborator {
+        let requestBody = CopilotSpacesAddCollaboratorForUserRequestBody(actorType: actorType, actorIdentifier: actorIdentifier, role: role)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/users/",
-                sdkEncodePathSegment(sdkWireString(username)),
-                "/copilot-spaces/",
-                sdkEncodePathSegment(sdkWireString(spaceNumber)),
-                "/collaborators",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "copilotSpacesAddCollaboratorForUser",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self]
-        )).data
+        return try (await sdkRequest("POST", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/copilot-spaces/", sdkEncodePathSegment(sdkWireString(spaceNumber)), "/collaborators"].joined(), config: config, body: requestBody, decoder: .json, operationId: "copilotSpacesAddCollaboratorForUser", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
     }
 }

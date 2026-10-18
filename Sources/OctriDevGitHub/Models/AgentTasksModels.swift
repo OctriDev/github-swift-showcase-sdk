@@ -3,37 +3,25 @@
 
 import Foundation
 
-/// AgentTasks domain models
+// AgentTasks domain models
 public indirect enum AgentTasksCreateTaskInRepoResponseArtifactsItemData {
-    case agentTasksCreateTaskInRepoResponseArtifactsItemDataVariant0(
-        AgentTasksCreateTaskInRepoResponseArtifactsItemDataVariant0
-    )
-    case agentTasksCreateTaskInRepoResponseArtifactsItemDataVariant1(
-        AgentTasksCreateTaskInRepoResponseArtifactsItemDataVariant1
-    )
+    case agentTasksCreateTaskInRepoResponseArtifactsItemDataVariant0(AgentTasksCreateTaskInRepoResponseArtifactsItemDataVariant0)
+    case agentTasksCreateTaskInRepoResponseArtifactsItemDataVariant1(AgentTasksCreateTaskInRepoResponseArtifactsItemDataVariant1)
 }
 
 extension AgentTasksCreateTaskInRepoResponseArtifactsItemData: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let raw = try? container.decode(JSONValue.self) {
-            if let value = Self.decodeLossless1(from: container, raw) {
-                self = value; return
-            }
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
         }
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for AgentTasksCreateTaskInRepoResponseArtifactsItemData"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for AgentTasksCreateTaskInRepoResponseArtifactsItemData")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
@@ -56,12 +44,12 @@ extension AgentTasksCreateTaskInRepoResponseArtifactsItemData {
         if let value = try? container.decode(
             AgentTasksCreateTaskInRepoResponseArtifactsItemDataVariant0.self
         ) {
-            return .agentTasksCreateTaskInRepoResponseArtifactsItemDataVariant0(value)
+            return             .agentTasksCreateTaskInRepoResponseArtifactsItemDataVariant0(value)
         }
         if let value = try? container.decode(
             AgentTasksCreateTaskInRepoResponseArtifactsItemDataVariant1.self
         ) {
-            return .agentTasksCreateTaskInRepoResponseArtifactsItemDataVariant1(value)
+            return             .agentTasksCreateTaskInRepoResponseArtifactsItemDataVariant1(value)
         }
         return nil
     }
@@ -71,10 +59,8 @@ extension AgentTasksCreateTaskInRepoResponseArtifactsItemData {
     func encodeGroup1(to encoder: Encoder) throws -> Bool {
         var container = encoder.singleValueContainer()
         switch self {
-        case let .agentTasksCreateTaskInRepoResponseArtifactsItemDataVariant0(value): try container
-            .encode(value); return true
-        case let .agentTasksCreateTaskInRepoResponseArtifactsItemDataVariant1(value): try container
-            .encode(value); return true
+        case let .agentTasksCreateTaskInRepoResponseArtifactsItemDataVariant0(value): try container.encode(value); return true
+        case let .agentTasksCreateTaskInRepoResponseArtifactsItemDataVariant1(value): try container.encode(value); return true
         }
     }
 }
@@ -89,26 +75,18 @@ public indirect enum AgentTasksListTasksForRepoResponseTasksItemArtifactsItemDat
 }
 
 extension AgentTasksListTasksForRepoResponseTasksItemArtifactsItemData: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let raw = try? container.decode(JSONValue.self) {
-            if let value = Self.decodeLossless1(from: container, raw) {
-                self = value; return
-            }
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
         }
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for AgentTasksListTasksForRepoResponseTasksItemArtifactsItemData"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for AgentTasksListTasksForRepoResponseTasksItemArtifactsItemData")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
@@ -131,12 +109,12 @@ extension AgentTasksListTasksForRepoResponseTasksItemArtifactsItemData {
         if let value = try? container.decode(
             AgentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant0.self
         ) {
-            return .agentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant0(value)
+            return             .agentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant0(value)
         }
         if let value = try? container.decode(
             AgentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant1.self
         ) {
-            return .agentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant1(value)
+            return             .agentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant1(value)
         }
         return nil
     }
@@ -146,44 +124,30 @@ extension AgentTasksListTasksForRepoResponseTasksItemArtifactsItemData {
     func encodeGroup1(to encoder: Encoder) throws -> Bool {
         var container = encoder.singleValueContainer()
         switch self {
-        case let .agentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant0(value): try container
-            .encode(value); return true
-        case let .agentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant1(value): try container
-            .encode(value); return true
+        case let .agentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant0(value): try container.encode(value); return true
+        case let .agentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant1(value): try container.encode(value); return true
         }
     }
 }
 
 public indirect enum AgentTasksListTasksResponseTasksItemArtifactsItemData {
-    case agentTasksListTasksResponseTasksItemArtifactsItemDataVariant0(
-        AgentTasksListTasksResponseTasksItemArtifactsItemDataVariant0
-    )
-    case agentTasksListTasksResponseTasksItemArtifactsItemDataVariant1(
-        AgentTasksListTasksResponseTasksItemArtifactsItemDataVariant1
-    )
+    case agentTasksListTasksResponseTasksItemArtifactsItemDataVariant0(AgentTasksListTasksResponseTasksItemArtifactsItemDataVariant0)
+    case agentTasksListTasksResponseTasksItemArtifactsItemDataVariant1(AgentTasksListTasksResponseTasksItemArtifactsItemDataVariant1)
 }
 
 extension AgentTasksListTasksResponseTasksItemArtifactsItemData: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let raw = try? container.decode(JSONValue.self) {
-            if let value = Self.decodeLossless1(from: container, raw) {
-                self = value; return
-            }
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
         }
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for AgentTasksListTasksResponseTasksItemArtifactsItemData"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for AgentTasksListTasksResponseTasksItemArtifactsItemData")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
@@ -206,12 +170,12 @@ extension AgentTasksListTasksResponseTasksItemArtifactsItemData {
         if let value = try? container.decode(
             AgentTasksListTasksResponseTasksItemArtifactsItemDataVariant0.self
         ) {
-            return .agentTasksListTasksResponseTasksItemArtifactsItemDataVariant0(value)
+            return             .agentTasksListTasksResponseTasksItemArtifactsItemDataVariant0(value)
         }
         if let value = try? container.decode(
             AgentTasksListTasksResponseTasksItemArtifactsItemDataVariant1.self
         ) {
-            return .agentTasksListTasksResponseTasksItemArtifactsItemDataVariant1(value)
+            return             .agentTasksListTasksResponseTasksItemArtifactsItemDataVariant1(value)
         }
         return nil
     }
@@ -221,10 +185,8 @@ extension AgentTasksListTasksResponseTasksItemArtifactsItemData {
     func encodeGroup1(to encoder: Encoder) throws -> Bool {
         var container = encoder.singleValueContainer()
         switch self {
-        case let .agentTasksListTasksResponseTasksItemArtifactsItemDataVariant0(value): try container
-            .encode(value); return true
-        case let .agentTasksListTasksResponseTasksItemArtifactsItemDataVariant1(value): try container
-            .encode(value); return true
+        case let .agentTasksListTasksResponseTasksItemArtifactsItemDataVariant0(value): try container.encode(value); return true
+        case let .agentTasksListTasksResponseTasksItemArtifactsItemDataVariant1(value): try container.encode(value); return true
         }
     }
 }
@@ -241,28 +203,22 @@ public struct AgentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVarian
         case globalId = "global_id"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension AgentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant0 {
-    init(from decoder: Decoder) throws {
+extension AgentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant0 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
-        globalId = try container.sdkDecodeIfPresent(.globalId)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.globalId = try container.sdkDecodeIfPresent(.globalId)
     }
 }
 
-public extension AgentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant0 {
-    init(id: Int, globalId: String? = nil) {
+extension AgentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant0 {
+    public init(id: Int, globalId: String? = nil) {
         (self.id, self.globalId) = (id, globalId)
     }
 }
@@ -279,28 +235,22 @@ public struct AgentTasksListTasksResponseTasksItemArtifactsItemDataVariant0: Cod
         case globalId = "global_id"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension AgentTasksListTasksResponseTasksItemArtifactsItemDataVariant0 {
-    init(from decoder: Decoder) throws {
+extension AgentTasksListTasksResponseTasksItemArtifactsItemDataVariant0 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
-        globalId = try container.sdkDecodeIfPresent(.globalId)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.globalId = try container.sdkDecodeIfPresent(.globalId)
     }
 }
 
-public extension AgentTasksListTasksResponseTasksItemArtifactsItemDataVariant0 {
-    init(id: Int, globalId: String? = nil) {
+extension AgentTasksListTasksResponseTasksItemArtifactsItemDataVariant0 {
+    public init(id: Int, globalId: String? = nil) {
         (self.id, self.globalId) = (id, globalId)
     }
 }
@@ -317,35 +267,25 @@ public struct AgentTasksListTasksResponseTasksItemArtifactsItemDataVariant1: Cod
         case baseRef = "base_ref"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension AgentTasksListTasksResponseTasksItemArtifactsItemDataVariant1 {
-    init(from decoder: Decoder) throws {
+extension AgentTasksListTasksResponseTasksItemArtifactsItemDataVariant1 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.headRef) else {
-            throw SdkValidationError(
-                field: "head_ref",
-                code: "required",
-                message: "Validation failed for 'head_ref': value is required"
-            )
+            throw SdkValidationError(field: "head_ref", code: "required", message: "Validation failed for 'head_ref': value is required")
         }
         guard container.contains(.baseRef) else {
-            throw SdkValidationError(
-                field: "base_ref",
-                code: "required",
-                message: "Validation failed for 'base_ref': value is required"
-            )
+            throw SdkValidationError(field: "base_ref", code: "required", message: "Validation failed for 'base_ref': value is required")
         }
-        headRef = try container.sdkDecodeRequired(.headRef)
-        baseRef = try container.sdkDecodeRequired(.baseRef)
+        self.headRef = try container.sdkDecodeRequired(.headRef)
+        self.baseRef = try container.sdkDecodeRequired(.baseRef)
     }
 }
 
-public extension AgentTasksListTasksResponseTasksItemArtifactsItemDataVariant1 {
-    init(headRef: String, baseRef: String) {
+extension AgentTasksListTasksResponseTasksItemArtifactsItemDataVariant1 {
+    public init(headRef: String, baseRef: String) {
         (self.headRef, self.baseRef) = (headRef, baseRef)
     }
 }
@@ -362,28 +302,22 @@ public struct AgentTasksCreateTaskInRepoResponseArtifactsItemDataVariant0: Codab
         case globalId = "global_id"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension AgentTasksCreateTaskInRepoResponseArtifactsItemDataVariant0 {
-    init(from decoder: Decoder) throws {
+extension AgentTasksCreateTaskInRepoResponseArtifactsItemDataVariant0 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
-        globalId = try container.sdkDecodeIfPresent(.globalId)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.globalId = try container.sdkDecodeIfPresent(.globalId)
     }
 }
 
-public extension AgentTasksCreateTaskInRepoResponseArtifactsItemDataVariant0 {
-    init(id: Int, globalId: String? = nil) {
+extension AgentTasksCreateTaskInRepoResponseArtifactsItemDataVariant0 {
+    public init(id: Int, globalId: String? = nil) {
         (self.id, self.globalId) = (id, globalId)
     }
 }
@@ -400,35 +334,25 @@ public struct AgentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVarian
         case baseRef = "base_ref"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension AgentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant1 {
-    init(from decoder: Decoder) throws {
+extension AgentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant1 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.headRef) else {
-            throw SdkValidationError(
-                field: "head_ref",
-                code: "required",
-                message: "Validation failed for 'head_ref': value is required"
-            )
+            throw SdkValidationError(field: "head_ref", code: "required", message: "Validation failed for 'head_ref': value is required")
         }
         guard container.contains(.baseRef) else {
-            throw SdkValidationError(
-                field: "base_ref",
-                code: "required",
-                message: "Validation failed for 'base_ref': value is required"
-            )
+            throw SdkValidationError(field: "base_ref", code: "required", message: "Validation failed for 'base_ref': value is required")
         }
-        headRef = try container.sdkDecodeRequired(.headRef)
-        baseRef = try container.sdkDecodeRequired(.baseRef)
+        self.headRef = try container.sdkDecodeRequired(.headRef)
+        self.baseRef = try container.sdkDecodeRequired(.baseRef)
     }
 }
 
-public extension AgentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant1 {
-    init(headRef: String, baseRef: String) {
+extension AgentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant1 {
+    public init(headRef: String, baseRef: String) {
         (self.headRef, self.baseRef) = (headRef, baseRef)
     }
 }
@@ -445,35 +369,25 @@ public struct AgentTasksCreateTaskInRepoResponseArtifactsItemDataVariant1: Codab
         case baseRef = "base_ref"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension AgentTasksCreateTaskInRepoResponseArtifactsItemDataVariant1 {
-    init(from decoder: Decoder) throws {
+extension AgentTasksCreateTaskInRepoResponseArtifactsItemDataVariant1 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.headRef) else {
-            throw SdkValidationError(
-                field: "head_ref",
-                code: "required",
-                message: "Validation failed for 'head_ref': value is required"
-            )
+            throw SdkValidationError(field: "head_ref", code: "required", message: "Validation failed for 'head_ref': value is required")
         }
         guard container.contains(.baseRef) else {
-            throw SdkValidationError(
-                field: "base_ref",
-                code: "required",
-                message: "Validation failed for 'base_ref': value is required"
-            )
+            throw SdkValidationError(field: "base_ref", code: "required", message: "Validation failed for 'base_ref': value is required")
         }
-        headRef = try container.sdkDecodeRequired(.headRef)
-        baseRef = try container.sdkDecodeRequired(.baseRef)
+        self.headRef = try container.sdkDecodeRequired(.headRef)
+        self.baseRef = try container.sdkDecodeRequired(.baseRef)
     }
 }
 
-public extension AgentTasksCreateTaskInRepoResponseArtifactsItemDataVariant1 {
-    init(headRef: String, baseRef: String) {
+extension AgentTasksCreateTaskInRepoResponseArtifactsItemDataVariant1 {
+    public init(headRef: String, baseRef: String) {
         (self.headRef, self.baseRef) = (headRef, baseRef)
     }
 }

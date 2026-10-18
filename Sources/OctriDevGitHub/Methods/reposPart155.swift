@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ReposMethods {
-    /// Replaces all topics associated with a repository. Supply `names` with the complete topic list; send an empty
-    /// array to clear all topics, and note that topic names are saved as lowercase.
+extension ReposMethods {
+    /// Replaces all topics associated with a repository. Supply `names` with the complete topic list; send an empty array to clear all topics, and note that topic names are saved as lowercase.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -19,35 +18,13 @@ public extension ReposMethods {
     ///   topics to _replace_ the set of existing topics. Send an empty array (`[]`)
     ///   to clear all topics from the repository. **Note:** Topic `names` will be
     ///   saved as lowercase.
-    static func reposReplaceAllTopics(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        names: [String],
-        requestOptions: RequestOptions? = nil
-    ) async throws -> Topic {
+    public static func reposReplaceAllTopics(config: ClientConfig, owner: String, repo: String, names: [String], requestOptions: RequestOptions? = nil) async throws -> Topic {
         let requestBody = ReposReplaceAllTopicsRequestBody(names: names)
 
-        return try await (sdkRequest(
-            "PUT",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/topics",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "reposReplaceAllTopics",
-            options: requestOptions,
-            errors: ["404": BasicError.self, "422": ValidationErrorSimple.self]
-        )).data
+        return try (await sdkRequest("PUT", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/topics"].joined(), config: config, body: requestBody, decoder: .json, operationId: "reposReplaceAllTopics", options: requestOptions, errors: ["404": BasicError.self, "422": ValidationErrorSimple.self])).data
     }
 
-    /// Get the total number of clones and breakdown per day or week for the last 14 days. Timestamps are aligned to UTC
-    /// midnight of the beginning of the day or week. Week begins on Monday.
+    /// Get the total number of clones and breakdown per day or week for the last 14 days. Timestamps are aligned to UTC midnight of the beginning of the day or week. Week begins on Monday.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -55,22 +32,9 @@ public extension ReposMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - per: The time frame to display results for.
-    static func reposGetClones(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        per: ReposGetClonesParameter? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CloneTraffic {
-        try await (sdkRequest("GET", [
-            "/repos/",
-            sdkEncodePathSegment(sdkWireString(owner)),
-            "/",
-            sdkEncodePathSegment(sdkWireString(repo)),
-            "/traffic/clones",
-        ].joined(), config: config, query: [
+    public static func reposGetClones(config: ClientConfig, owner: String, repo: String, per: ReposGetClonesParameter? = nil, requestOptions: RequestOptions? = nil) async throws -> CloneTraffic {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/traffic/clones"].joined(), config: config, query: [
             SdkQueryParameter("per", value: per),
-        ], decoder: .json, operationId: "reposGetClones", options: requestOptions, errors: ["403": BasicError.self]))
-            .data
+        ], decoder: .json, operationId: "reposGetClones", options: requestOptions, errors: ["403": BasicError.self])).data
     }
 }

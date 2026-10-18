@@ -6,8 +6,7 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testOidcUpdateOidcCustomSubTemplateForOrgOidcUpdateOidcCustomSubTX3af5a65e40ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOidcUpdateOidcCustomSubTemplateForOrgOidcUpdateOidcCustomSubTX3af5a65e40ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -27,8 +26,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testOidcUpdateOidcCustomSubTemplateForOrgOidcUpdateOidcCustomSubTXdee3f9fc4fReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOidcUpdateOidcCustomSubTemplateForOrgOidcUpdateOidcCustomSubTXdee3f9fc4fReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -39,10 +37,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.oidc.updateOidcCustomSubTemplateForOrg(
-                org: decoded("\"org\""),
-                includeClaimKeys: decoded("[\"repo\",\"context\"]"),
-                useImmutableSubject: decoded("null")
-            )
+            org: decoded("\"org\""),
+            includeClaimKeys: decoded("[\"repo\",\"context\"]"),
+            useImmutableSubject: decoded("null")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -119,9 +117,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.blockUser(
-                org: decoded("\"org\""),
-                username: decoded("\"Example Name\"")
-            )
+            org: decoded("\"org\""),
+            username: decoded("\"Example Name\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 422)
@@ -160,9 +158,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.cancelInvitation(
-                org: decoded("\"org\""),
-                invitationId: decoded("1")
-            )
+            org: decoded("\"org\""),
+            invitationId: decoded("1")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -201,9 +199,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.checkBlockedUser(
-                org: decoded("\"org\""),
-                username: decoded("\"Example Name\"")
-            )
+            org: decoded("\"org\""),
+            username: decoded("\"Example Name\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -231,8 +229,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOrgsCheckPublicMembershipForUserOrgsCheckPublicMembershipForUserReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOrgsCheckPublicMembershipForUserOrgsCheckPublicMembershipForUserReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -244,8 +241,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOrgsConvertMemberToOutsideCollaboratorOrgsConvertMemberToOutsX417c213574ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOrgsConvertMemberToOutsideCollaboratorOrgsConvertMemberToOutsX417c213574ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -265,8 +261,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testOrgsConvertMemberToOutsideCollaboratorOrgsConvertMemberToOutsX748289474bReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOrgsConvertMemberToOutsideCollaboratorOrgsConvertMemberToOutsX748289474bReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -277,10 +272,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.convertMemberToOutsideCollaborator(
-                org: decoded("\"org\""),
-                username: decoded("\"Example Name\""),
-                async: decoded("true")
-            )
+            org: decoded("\"org\""),
+            username: decoded("\"Example Name\""),
+            async: decoded("true")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -296,20 +291,12 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOrgsCreateArtifactDeploymentRecordOrgsCreateArtifactDeploymentRecordReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOrgsCreateArtifactDeploymentRecordOrgsCreateArtifactDeploymentRecordReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        var options = try OrgsMethods.OrgsCreateArtifactDeploymentRecordOptions(
-            org: decoded("\"org\""),
-            name: decoded("\"awesome-image\""),
-            digest: decoded(sdkMethodFixture1125Value1),
-            status: decoded("\"deployed\""),
-            logicalEnvironment: decoded("\"prod\""),
-            deploymentName: decoded("\"deployment-pod\"")
-        )
+        var options = try OrgsMethods.OrgsCreateArtifactDeploymentRecordOptions(org: decoded("\"org\""), name: decoded("\"awesome-image\""), digest: decoded(sdkMethodFixture1125Value1), status: decoded("\"deployed\""), logicalEnvironment: decoded("\"prod\""), deploymentName: decoded("\"deployment-pod\""))
         options.version = try decoded("null")
         options.physicalEnvironment = try decoded("\"pacific-east\"")
         options.cluster = try decoded("\"moda-1\"")
@@ -330,20 +317,12 @@ extension SdkMethodTests {
         )
     }
 
-    func testOrgsCreateArtifactDeploymentRecordOrgsCreateArtifactDeploymentRecord403ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOrgsCreateArtifactDeploymentRecordOrgsCreateArtifactDeploymentRecord403ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
         _ = client
-        var options = try OrgsMethods.OrgsCreateArtifactDeploymentRecordOptions(
-            org: decoded("\"org\""),
-            name: decoded("\"awesome-image\""),
-            digest: decoded(sdkMethodFixture1126Value1),
-            status: decoded("\"deployed\""),
-            logicalEnvironment: decoded("\"prod\""),
-            deploymentName: decoded("\"deployment-pod\"")
-        )
+        var options = try OrgsMethods.OrgsCreateArtifactDeploymentRecordOptions(org: decoded("\"org\""), name: decoded("\"awesome-image\""), digest: decoded(sdkMethodFixture1126Value1), status: decoded("\"deployed\""), logicalEnvironment: decoded("\"prod\""), deploymentName: decoded("\"deployment-pod\""))
         options.version = try decoded("null")
         options.physicalEnvironment = try decoded("\"pacific-east\"")
         options.cluster = try decoded("\"moda-1\"")
@@ -357,8 +336,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.createArtifactDeploymentRecord(
-                options: options
-            )
+            options: options
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -379,12 +358,7 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try OrgsMethods.OrgsCreateArtifactStorageRecordOptions(
-            org: decoded("\"org\""),
-            name: decoded("\"libfoo\""),
-            digest: decoded(sdkMethodFixture1127Value1),
-            registryUrl: decoded("\"https://reg.example.com/artifactory/\"")
-        )
+        var options = try OrgsMethods.OrgsCreateArtifactStorageRecordOptions(org: decoded("\"org\""), name: decoded("\"libfoo\""), digest: decoded(sdkMethodFixture1127Value1), registryUrl: decoded("\"https://reg.example.com/artifactory/\""))
         options.version = try decoded("\"1.2.3\"")
         options.artifactUrl = try decoded("\"https://reg.example.com/artifactory/bar/libfoo-1.2.3\"")
         options.path = try decoded("null")
@@ -405,18 +379,12 @@ extension SdkMethodTests {
         )
     }
 
-    func testOrgsCreateArtifactStorageRecordOrgsCreateArtifactStorageRecord403ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOrgsCreateArtifactStorageRecordOrgsCreateArtifactStorageRecord403ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
         _ = client
-        var options = try OrgsMethods.OrgsCreateArtifactStorageRecordOptions(
-            org: decoded("\"org\""),
-            name: decoded("\"libfoo\""),
-            digest: decoded(sdkMethodFixture1128Value1),
-            registryUrl: decoded("\"https://reg.example.com/artifactory/\"")
-        )
+        var options = try OrgsMethods.OrgsCreateArtifactStorageRecordOptions(org: decoded("\"org\""), name: decoded("\"libfoo\""), digest: decoded(sdkMethodFixture1128Value1), registryUrl: decoded("\"https://reg.example.com/artifactory/\""))
         options.version = try decoded("\"1.2.3\"")
         options.artifactUrl = try decoded("\"https://reg.example.com/artifactory/bar/libfoo-1.2.3\"")
         options.path = try decoded("null")
@@ -430,8 +398,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.createArtifactStorageRecord(
-                options: options
-            )
+            options: options
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -447,8 +415,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOrgsCreateClusterDeploymentRecordsJobOrgsCreateClusterDeploymX410ffa5721ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOrgsCreateClusterDeploymentRecordsJobOrgsCreateClusterDeploymX410ffa5721ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -470,8 +437,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testOrgsCreateClusterDeploymentRecordsJobOrgsCreateClusterDeploymXe572fe6e7eReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOrgsCreateClusterDeploymentRecordsJobOrgsCreateClusterDeploymXe572fe6e7eReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
             return
         }
@@ -482,12 +448,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.createClusterDeploymentRecordsJob(
-                org: decoded("\"org\""),
-                cluster: decoded("\"a\""),
-                logicalEnvironment: decoded("\"prod\""),
-                deployments: decoded(sdkMethodFixture1130Value1),
-                physicalEnvironment: decoded("\"pacific-east\"")
-            )
+            org: decoded("\"org\""),
+            cluster: decoded("\"a\""),
+            logicalEnvironment: decoded("\"prod\""),
+            deployments: decoded(sdkMethodFixture1130Value1),
+            physicalEnvironment: decoded("\"pacific-east\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -536,12 +502,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.createInvitation(
-                org: decoded("\"org\""),
-                inviteeId: decoded("null"),
-                email: decoded("\"octocat@github.com\""),
-                role: decoded("\"direct_member\""),
-                teamIds: decoded("[12,26]")
-            )
+            org: decoded("\"org\""),
+            inviteeId: decoded("null"),
+            email: decoded("\"octocat@github.com\""),
+            role: decoded("\"direct_member\""),
+            teamIds: decoded("[12,26]")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)

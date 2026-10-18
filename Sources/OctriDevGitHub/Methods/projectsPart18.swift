@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ProjectsMethods {
+extension ProjectsMethods {
     /// List all items for a specific user-owned project accessible by the authenticated user.
     ///
     /// - Parameters:
@@ -34,38 +34,13 @@ public extension ProjectsMethods {
     /// - fields: Limit results to specific fields, by their IDs. If not specified,
     ///   the title field will be returned. Example:
     ///   `fields[]=123&fields[]=456&fields[]=789` or `fields=123,456,789`
-    static func projectsListItemsForUser(
-        config: ClientConfig,
-        projectNumber: Int,
-        username: String,
-        before: String? = nil,
-        after: String? = nil,
-        perPage: Int? = nil,
-        q: String? = nil,
-        fields: ProjectsListItemsForUserParameter? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [ProjectsV2ItemWithContent] {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/users/",
-                sdkEncodePathSegment(sdkWireString(username)),
-                "/projectsV2/",
-                sdkEncodePathSegment(sdkWireString(projectNumber)),
-                "/items",
-            ].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("before", value: before),
-                SdkQueryParameter("after", value: after),
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("q", value: q),
-                SdkQueryParameter("fields", value: fields),
-            ],
-            decoder: .json,
-            operationId: "projectsListItemsForUser",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self]
-        )).data
+    public static func projectsListItemsForUser(config: ClientConfig, projectNumber: Int, username: String, before: String? = nil, after: String? = nil, perPage: Int? = nil, q: String? = nil, fields: ProjectsListItemsForUserParameter? = nil, requestOptions: RequestOptions? = nil) async throws -> [ProjectsV2ItemWithContent] {
+        return try (await sdkRequest("GET", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/projectsV2/", sdkEncodePathSegment(sdkWireString(projectNumber)), "/items"].joined(), config: config, query: [
+            SdkQueryParameter("before", value: before),
+            SdkQueryParameter("after", value: after),
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("q", value: q),
+            SdkQueryParameter("fields", value: fields),
+        ], decoder: .json, operationId: "projectsListItemsForUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self])).data
     }
 }

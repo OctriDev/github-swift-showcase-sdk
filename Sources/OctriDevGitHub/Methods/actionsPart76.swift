@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ActionsMethods {
-    /// Create an Actions policy for a repository. Omitting `workflow_path` targets all workflows without storing an
-    /// explicit condition.
+extension ActionsMethods {
+    /// Create an Actions policy for a repository. Omitting `workflow_path` targets all workflows without storing an explicit condition.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -23,38 +22,9 @@ public extension ActionsMethods {
     ///   empty to preserve or use the default workflow targeting, or contain only
     ///   `workflow_path`.
     /// - rules: An array of rules within the policy.
-    static func actionsCreateRepoActionsPolicy(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        name: String,
-        enforcement: RepositoryRuleEnforcement,
-        conditions: ActionsPolicyRepoConditions? = nil,
-        rules: [ActionsRule]? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsPolicy {
-        let requestBody = ActionsCreateRepoActionsPolicyRequestBody(
-            name: name,
-            enforcement: enforcement,
-            conditions: conditions,
-            rules: rules
-        )
+    public static func actionsCreateRepoActionsPolicy(config: ClientConfig, owner: String, repo: String, name: String, enforcement: RepositoryRuleEnforcement, conditions: ActionsPolicyRepoConditions? = nil, rules: [ActionsRule]? = nil, requestOptions: RequestOptions? = nil) async throws -> ActionsPolicy {
+        let requestBody = ActionsCreateRepoActionsPolicyRequestBody(name: name, enforcement: enforcement, conditions: conditions, rules: rules)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/actions/policies",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "actionsCreateRepoActionsPolicy",
-            options: requestOptions,
-            errors: ["404": BasicError.self, "422": ValidationError.self, "500": BasicError.self]
-        )).data
+        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/actions/policies"].joined(), config: config, body: requestBody, decoder: .json, operationId: "actionsCreateRepoActionsPolicy", options: requestOptions, errors: ["404": BasicError.self, "422": ValidationError.self, "500": BasicError.self])).data
     }
 }

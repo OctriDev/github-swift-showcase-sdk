@@ -6,85 +6,32 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension MigrationsMethods {
-    /// Retrieves the status and details of a user migration. Use `migration_id` to identify the migration, and check
-    /// `state` to see whether it is pending, exporting, exported, or failed. Once the migration is exported, download
-    /// its archive using the user migration archive endpoint.
+extension MigrationsMethods {
+    /// Retrieves the status and details of a user migration. Use `migration_id` to identify the migration, and check `state` to see whether it is pending, exporting, exported, or failed. Once the migration is exported, download its archive using the user migration archive endpoint.
     ///
-    /// Fetches a single user migration. The response includes the `state` of the migration, which can be one of the
-    /// following values: * `pending` - the migration hasn't started yet. * `exporting` - the migration is in progress.
-    /// * `exported` - the migration finished successfully. * `failed` - the migration failed. Once the migration has
-    /// been `exported` you can [download the migration
-    /// archive](https://docs.github.com/rest/migrations/users#download-a-user-migration-archive).
+    /// Fetches a single user migration. The response includes the `state` of the migration, which can be one of the following values: * `pending` - the migration hasn't started yet. * `exporting` - the migration is in progress. * `exported` - the migration finished successfully. * `failed` - the migration failed. Once the migration has been `exported` you can [download the migration archive](https://docs.github.com/rest/migrations/users#download-a-user-migration-archive).
     ///
     /// - Parameters:
     /// - migrationId: The unique identifier of the migration.
-    static func migrationsGetStatusForAuthenticatedUser(
-        config: ClientConfig,
-        migrationId: Int,
-        exclude: [String]? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> Migration {
-        try await (sdkRequest(
-            "GET",
-            ["/user/migrations/", sdkEncodePathSegment(sdkWireString(migrationId))].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("exclude", values: exclude, style: "form", explode: true),
-            ],
-            decoder: .json,
-            operationId: "migrationsGetStatusForAuthenticatedUser",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self]
-        )).data
+    public static func migrationsGetStatusForAuthenticatedUser(config: ClientConfig, migrationId: Int, exclude: [String]? = nil, requestOptions: RequestOptions? = nil) async throws -> Migration {
+        return try (await sdkRequest("GET", ["/user/migrations/", sdkEncodePathSegment(sdkWireString(migrationId))].joined(), config: config, query: [
+            SdkQueryParameter("exclude", values: exclude, style: "form", explode: true),
+        ], decoder: .json, operationId: "migrationsGetStatusForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
     }
 
-    /// Fetches the URL to download the migration archive as a `tar.gz` file. Depending on the resources your repository
-    /// uses, the migration archive can contain JSON files with data for these objects: * attachments * bases *
-    /// commit\_comments * issue\_comments * issue\_events * issues * milestones * organizations * projects *
-    /// protected\_branches * pull\_request\_reviews * pull\_requests * releases * repositories * review\_comments *
-    /// schema * users The archive will also contain an `attachments` directory that includes all attachment files
-    /// uploaded to GitHub.com and a `repositories` directory that contains the repository's Git data.
+    /// Fetches the URL to download the migration archive as a `tar.gz` file. Depending on the resources your repository uses, the migration archive can contain JSON files with data for these objects: * attachments * bases * commit\_comments * issue\_comments * issue\_events * issues * milestones * organizations * projects * protected\_branches * pull\_request\_reviews * pull\_requests * releases * repositories * review\_comments * schema * users The archive will also contain an `attachments` directory that includes all attachment files uploaded to GitHub.com and a `repositories` directory that contains the repository's Git data.
     ///
     /// - Parameters:
     /// - migrationId: The unique identifier of the migration.
-    static func migrationsGetArchiveForAuthenticatedUser(
-        config: ClientConfig,
-        migrationId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "GET",
-            ["/user/migrations/", sdkEncodePathSegment(sdkWireString(migrationId)), "/archive"].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "migrationsGetArchiveForAuthenticatedUser",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self]
-        )).data
+    public static func migrationsGetArchiveForAuthenticatedUser(config: ClientConfig, migrationId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("GET", ["/user/migrations/", sdkEncodePathSegment(sdkWireString(migrationId)), "/archive"].joined(), config: config, decoder: .empty, operationId: "migrationsGetArchiveForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self])).data
     }
 
-    /// Deletes a previous migration archive. Downloadable migration archives are automatically deleted after seven
-    /// days. Migration metadata, which is returned in the [List user
-    /// migrations](https://docs.github.com/rest/migrations/users#list-user-migrations) and [Get a user migration
-    /// status](https://docs.github.com/rest/migrations/users#get-a-user-migration-status) endpoints, will continue to
-    /// be available even after an archive is deleted.
+    /// Deletes a previous migration archive. Downloadable migration archives are automatically deleted after seven days. Migration metadata, which is returned in the [List user migrations](https://docs.github.com/rest/migrations/users#list-user-migrations) and [Get a user migration status](https://docs.github.com/rest/migrations/users#get-a-user-migration-status) endpoints, will continue to be available even after an archive is deleted.
     ///
     /// - Parameters:
     /// - migrationId: The unique identifier of the migration.
-    static func migrationsDeleteArchiveForAuthenticatedUser(
-        config: ClientConfig,
-        migrationId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "DELETE",
-            ["/user/migrations/", sdkEncodePathSegment(sdkWireString(migrationId)), "/archive"].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "migrationsDeleteArchiveForAuthenticatedUser",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self]
-        )).data
+    public static func migrationsDeleteArchiveForAuthenticatedUser(config: ClientConfig, migrationId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("DELETE", ["/user/migrations/", sdkEncodePathSegment(sdkWireString(migrationId)), "/archive"].joined(), config: config, decoder: .empty, operationId: "migrationsDeleteArchiveForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
     }
 }

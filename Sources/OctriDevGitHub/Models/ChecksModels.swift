@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Checks domain models
+// Checks domain models
 /// A deployment created as the result of an Actions check run from a workflow that references an environment
 public struct DeploymentSimple: Codable {
     /// Required `uri`-formatted value serialized in the `url` wire field.
@@ -67,53 +67,36 @@ public struct DeploymentSimple: Codable {
         case performedViaGithubApp = "performed_via_github_app"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension DeploymentSimple {
-    init(from decoder: Decoder) throws {
+extension DeploymentSimple {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        url = try container.sdkDecodeRequired(.url)
-        id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        task = try container.sdkDecodeRequired(.task)
-        environment = try container.sdkDecodeRequired(.environment)
-        description = try container.sdkDecodeNullable(.description)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        statusesUrl = try container.sdkDecodeRequired(.statusesUrl)
-        repositoryUrl = try container.sdkDecodeRequired(.repositoryUrl)
-        originalEnvironment = try container.sdkDecodeIfPresent(.originalEnvironment)
-        transientEnvironment = try container.sdkDecodeIfPresent(.transientEnvironment)
-        productionEnvironment = try container.sdkDecodeIfPresent(.productionEnvironment)
-        performedViaGithubApp = try container.sdkDecodeIfPresent(.performedViaGithubApp)
-        try sdkValidateUri("url", url)
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
-        try sdkValidateUri("statuses_url", statusesUrl)
-        try sdkValidateUri("repository_url", repositoryUrl)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.task = try container.sdkDecodeRequired(.task)
+        self.environment = try container.sdkDecodeRequired(.environment)
+        self.description = try container.sdkDecodeNullable(.description)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        self.statusesUrl = try container.sdkDecodeRequired(.statusesUrl)
+        self.repositoryUrl = try container.sdkDecodeRequired(.repositoryUrl)
+        self.originalEnvironment = try container.sdkDecodeIfPresent(.originalEnvironment)
+        self.transientEnvironment = try container.sdkDecodeIfPresent(.transientEnvironment)
+        self.productionEnvironment = try container.sdkDecodeIfPresent(.productionEnvironment)
+        self.performedViaGithubApp = try container.sdkDecodeIfPresent(.performedViaGithubApp)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateUri("statuses_url", self.statusesUrl)
+            try sdkValidateUri("repository_url", self.repositoryUrl)
     }
 }
 
-public extension DeploymentSimple {
-    init(
-        url: String,
-        id: Int,
-        nodeId: String,
-        task: String,
-        environment: String,
-        description: String?,
-        createdAt: Date,
-        updatedAt: Date,
-        statusesUrl: String,
-        repositoryUrl: String,
-        originalEnvironment: String? = nil,
-        transientEnvironment: Bool? = nil,
-        productionEnvironment: Bool? = nil,
-        performedViaGithubApp: NullableIntegration? = nil
-    ) throws {
+extension DeploymentSimple {
+    public init(url: String, id: Int, nodeId: String, task: String, environment: String, description: String?, createdAt: Date, updatedAt: Date, statusesUrl: String, repositoryUrl: String, originalEnvironment: String? = nil, transientEnvironment: Bool? = nil, productionEnvironment: Bool? = nil, performedViaGithubApp: NullableIntegration? = nil) throws {
         (self.url, self.id) = (url, id)
         (self.nodeId, self.task) = (nodeId, task)
         (self.environment, self.description) = (environment, description)
@@ -122,11 +105,11 @@ public extension DeploymentSimple {
         (self.originalEnvironment, self.transientEnvironment) = (originalEnvironment, transientEnvironment)
         self.productionEnvironment = productionEnvironment
         self.performedViaGithubApp = performedViaGithubApp
-        try sdkValidateUri("url", self.url)
-        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-        try sdkValidateUri("statuses_url", self.statusesUrl)
-        try sdkValidateUri("repository_url", self.repositoryUrl)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateUri("statuses_url", self.statusesUrl)
+            try sdkValidateUri("repository_url", self.repositoryUrl)
     }
 }
 
@@ -140,19 +123,19 @@ public struct CheckSuitePreferencePreferences: Codable {
     }
 
     init() {
-        autoTriggerChecks = nil
+        self.autoTriggerChecks = nil
     }
 }
 
-public extension CheckSuitePreferencePreferences {
-    init(from decoder: Decoder) throws {
+extension CheckSuitePreferencePreferences {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        autoTriggerChecks = try container.sdkDecodeIfPresent(.autoTriggerChecks)
+        self.autoTriggerChecks = try container.sdkDecodeIfPresent(.autoTriggerChecks)
     }
 }
 
-public extension CheckSuitePreferencePreferences {
-    init(autoTriggerChecks: [CheckSuitePreferencePreferencesAutoTriggerChecksItem]? = nil) {
+extension CheckSuitePreferencePreferences {
+    public init(autoTriggerChecks: [CheckSuitePreferencePreferencesAutoTriggerChecksItem]? = nil) {
         self.init()
         self.autoTriggerChecks = autoTriggerChecks
     }
@@ -167,27 +150,21 @@ public struct CheckRunCheckSuite: Codable {
         case id
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension CheckRunCheckSuite {
-    init(from decoder: Decoder) throws {
+extension CheckRunCheckSuite {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
+        self.id = try container.sdkDecodeRequired(.id)
     }
 }
 
-public extension CheckRunCheckSuite {
-    init(id: Int) {
+extension CheckRunCheckSuite {
+    public init(id: Int) {
         self.id = id
     }
 }
@@ -267,64 +244,42 @@ public struct CheckSuite: Codable {
         case runsRerequestable = "runs_rerequestable"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension CheckSuite {
-    init(from decoder: Decoder) throws {
+extension CheckSuite {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        headBranch = try container.sdkDecodeNullable(.headBranch)
-        headSha = try container.sdkDecodeRequired(.headSha)
-        status = try container.sdkDecodeNullable(.status)
-        conclusion = try container.sdkDecodeNullable(.conclusion)
-        url = try container.sdkDecodeNullable(.url)
-        before = try container.sdkDecodeNullable(.before)
-        after = try container.sdkDecodeNullable(.after)
-        pullRequests = try container.sdkDecodeNullable(.pullRequests)
-        app = try container.sdkDecodeNullable(.app)
-        repository = try container.sdkDecodeRequired(.repository)
-        createdAt = try container.sdkDecodeNullable(.createdAt)
-        updatedAt = try container.sdkDecodeNullable(.updatedAt)
-        headCommit = try container.sdkDecodeRequired(.headCommit)
-        latestCheckRunsCount = try container.sdkDecodeRequired(.latestCheckRunsCount)
-        checkRunsUrl = try container.sdkDecodeRequired(.checkRunsUrl)
-        rerequestable = try container.sdkDecodeIfPresent(.rerequestable)
-        runsRerequestable = try container.sdkDecodeIfPresent(.runsRerequestable)
-        if let value = createdAt {
+        self.id = try container.sdkDecodeRequired(.id)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.headBranch = try container.sdkDecodeNullable(.headBranch)
+        self.headSha = try container.sdkDecodeRequired(.headSha)
+        self.status = try container.sdkDecodeNullable(.status)
+        self.conclusion = try container.sdkDecodeNullable(.conclusion)
+        self.url = try container.sdkDecodeNullable(.url)
+        self.before = try container.sdkDecodeNullable(.before)
+        self.after = try container.sdkDecodeNullable(.after)
+        self.pullRequests = try container.sdkDecodeNullable(.pullRequests)
+        self.app = try container.sdkDecodeNullable(.app)
+        self.repository = try container.sdkDecodeRequired(.repository)
+        self.createdAt = try container.sdkDecodeNullable(.createdAt)
+        self.updatedAt = try container.sdkDecodeNullable(.updatedAt)
+        self.headCommit = try container.sdkDecodeRequired(.headCommit)
+        self.latestCheckRunsCount = try container.sdkDecodeRequired(.latestCheckRunsCount)
+        self.checkRunsUrl = try container.sdkDecodeRequired(.checkRunsUrl)
+        self.rerequestable = try container.sdkDecodeIfPresent(.rerequestable)
+        self.runsRerequestable = try container.sdkDecodeIfPresent(.runsRerequestable)
+        if let value = self.createdAt {
             try sdkValidateDateTime("created_at", sdkWireString(value))
         }
-        if let value = updatedAt {
+        if let value = self.updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
     }
 }
 
-public extension CheckSuite {
-    init(
-        id: Int,
-        nodeId: String,
-        headBranch: String?,
-        headSha: String,
-        status: CheckSuiteStatus?,
-        conclusion: CheckSuiteConclusion?,
-        url: String?,
-        before: String?,
-        after: String?,
-        pullRequests: [PullRequestMinimal]?,
-        app: NullableIntegration?,
-        repository: MinimalRepository,
-        createdAt: Date?,
-        updatedAt: Date?,
-        headCommit: SimpleCommit,
-        latestCheckRunsCount: Int,
-        checkRunsUrl: String,
-        rerequestable: Bool? = nil,
-        runsRerequestable: Bool? = nil
-    ) throws {
+extension CheckSuite {
+    public init(id: Int, nodeId: String, headBranch: String?, headSha: String, status: CheckSuiteStatus?, conclusion: CheckSuiteConclusion?, url: String?, before: String?, after: String?, pullRequests: [PullRequestMinimal]?, app: NullableIntegration?, repository: MinimalRepository, createdAt: Date?, updatedAt: Date?, headCommit: SimpleCommit, latestCheckRunsCount: Int, checkRunsUrl: String, rerequestable: Bool? = nil, runsRerequestable: Bool? = nil) throws {
         (self.id, self.nodeId) = (id, nodeId)
         (self.headBranch, self.headSha) = (headBranch, headSha)
         (self.status, self.conclusion) = (status, conclusion)
@@ -417,60 +372,40 @@ public struct CheckRun: Codable {
         case deployment
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension CheckRun {
-    init(from decoder: Decoder) throws {
+extension CheckRun {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeRequired(.id)
-        headSha = try container.sdkDecodeRequired(.headSha)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        externalId = try container.sdkDecodeNullable(.externalId)
-        url = try container.sdkDecodeRequired(.url)
-        htmlUrl = try container.sdkDecodeNullable(.htmlUrl)
-        detailsUrl = try container.sdkDecodeNullable(.detailsUrl)
-        status = try container.sdkDecodeRequired(.status)
-        conclusion = try container.sdkDecodeNullable(.conclusion)
-        startedAt = try container.sdkDecodeNullable(.startedAt)
-        completedAt = try container.sdkDecodeNullable(.completedAt)
-        output = try container.sdkDecodeRequired(.output)
-        name = try container.sdkDecodeRequired(.name)
-        checkSuite = try container.sdkDecodeNullable(.checkSuite)
-        app = try container.sdkDecodeNullable(.app)
-        pullRequests = try container.sdkDecodeRequired(.pullRequests)
-        deployment = try container.sdkDecodeIfPresent(.deployment)
-        if let value = startedAt {
+        self.id = try container.sdkDecodeRequired(.id)
+        self.headSha = try container.sdkDecodeRequired(.headSha)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.externalId = try container.sdkDecodeNullable(.externalId)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.htmlUrl = try container.sdkDecodeNullable(.htmlUrl)
+        self.detailsUrl = try container.sdkDecodeNullable(.detailsUrl)
+        self.status = try container.sdkDecodeRequired(.status)
+        self.conclusion = try container.sdkDecodeNullable(.conclusion)
+        self.startedAt = try container.sdkDecodeNullable(.startedAt)
+        self.completedAt = try container.sdkDecodeNullable(.completedAt)
+        self.output = try container.sdkDecodeRequired(.output)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.checkSuite = try container.sdkDecodeNullable(.checkSuite)
+        self.app = try container.sdkDecodeNullable(.app)
+        self.pullRequests = try container.sdkDecodeRequired(.pullRequests)
+        self.deployment = try container.sdkDecodeIfPresent(.deployment)
+        if let value = self.startedAt {
             try sdkValidateDateTime("started_at", sdkWireString(value))
         }
-        if let value = completedAt {
+        if let value = self.completedAt {
             try sdkValidateDateTime("completed_at", sdkWireString(value))
         }
     }
 }
 
-public extension CheckRun {
-    init(
-        id: Int,
-        headSha: String,
-        nodeId: String,
-        externalId: String?,
-        url: String,
-        htmlUrl: String?,
-        detailsUrl: String?,
-        status: CheckRunStatus,
-        conclusion: CheckRunConclusion?,
-        startedAt: Date?,
-        completedAt: Date?,
-        output: CheckRunOutput,
-        name: String,
-        checkSuite: CheckRunCheckSuite?,
-        app: NullableIntegration?,
-        pullRequests: [PullRequestMinimal],
-        deployment: DeploymentSimple? = nil
-    ) throws {
+extension CheckRun {
+    public init(id: Int, headSha: String, nodeId: String, externalId: String?, url: String, htmlUrl: String?, detailsUrl: String?, status: CheckRunStatus, conclusion: CheckRunConclusion?, startedAt: Date?, completedAt: Date?, output: CheckRunOutput, name: String, checkSuite: CheckRunCheckSuite?, app: NullableIntegration?, pullRequests: [PullRequestMinimal], deployment: DeploymentSimple? = nil) throws {
         (self.id, self.headSha) = (id, headSha)
         (self.nodeId, self.externalId) = (nodeId, externalId)
         (self.url, self.htmlUrl) = (url, htmlUrl)
@@ -516,79 +451,46 @@ public struct SimpleCommit: Codable {
         case committer
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension SimpleCommit {
-    init(from decoder: Decoder) throws {
+extension SimpleCommit {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
         guard container.contains(.treeId) else {
-            throw SdkValidationError(
-                field: "tree_id",
-                code: "required",
-                message: "Validation failed for 'tree_id': value is required"
-            )
+            throw SdkValidationError(field: "tree_id", code: "required", message: "Validation failed for 'tree_id': value is required")
         }
         guard container.contains(.message) else {
-            throw SdkValidationError(
-                field: "message",
-                code: "required",
-                message: "Validation failed for 'message': value is required"
-            )
+            throw SdkValidationError(field: "message", code: "required", message: "Validation failed for 'message': value is required")
         }
         guard container.contains(.timestamp) else {
-            throw SdkValidationError(
-                field: "timestamp",
-                code: "required",
-                message: "Validation failed for 'timestamp': value is required"
-            )
+            throw SdkValidationError(field: "timestamp", code: "required", message: "Validation failed for 'timestamp': value is required")
         }
         guard container.contains(.author) else {
-            throw SdkValidationError(
-                field: "author",
-                code: "required",
-                message: "Validation failed for 'author': value is required"
-            )
+            throw SdkValidationError(field: "author", code: "required", message: "Validation failed for 'author': value is required")
         }
         guard container.contains(.committer) else {
-            throw SdkValidationError(
-                field: "committer",
-                code: "required",
-                message: "Validation failed for 'committer': value is required"
-            )
+            throw SdkValidationError(field: "committer", code: "required", message: "Validation failed for 'committer': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
-        treeId = try container.sdkDecodeRequired(.treeId)
-        message = try container.sdkDecodeRequired(.message)
-        timestamp = try container.sdkDecodeRequired(.timestamp)
-        author = try container.sdkDecodeNullable(.author)
-        committer = try container.sdkDecodeNullable(.committer)
-        try sdkValidateDateTime("timestamp", sdkWireString(timestamp))
+        self.id = try container.sdkDecodeRequired(.id)
+        self.treeId = try container.sdkDecodeRequired(.treeId)
+        self.message = try container.sdkDecodeRequired(.message)
+        self.timestamp = try container.sdkDecodeRequired(.timestamp)
+        self.author = try container.sdkDecodeNullable(.author)
+        self.committer = try container.sdkDecodeNullable(.committer)
+            try sdkValidateDateTime("timestamp", sdkWireString(self.timestamp))
     }
 }
 
-public extension SimpleCommit {
-    init(
-        id: String,
-        treeId: String,
-        message: String,
-        timestamp: Date,
-        author: SimpleCommitAuthor?,
-        committer: SimpleCommitCommitter?
-    ) throws {
+extension SimpleCommit {
+    public init(id: String, treeId: String, message: String, timestamp: Date, author: SimpleCommitAuthor?, committer: SimpleCommitCommitter?) throws {
         (self.id, self.treeId) = (id, treeId)
         (self.message, self.timestamp) = (message, timestamp)
         (self.author, self.committer) = (author, committer)
-        try sdkValidateDateTime("timestamp", sdkWireString(self.timestamp))
+            try sdkValidateDateTime("timestamp", sdkWireString(self.timestamp))
     }
 }
 
@@ -606,30 +508,20 @@ public struct SimpleCommitAuthor: Codable {
         case email
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension SimpleCommitAuthor {
-    init(from decoder: Decoder) throws {
+extension SimpleCommitAuthor {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.email) else {
-            throw SdkValidationError(
-                field: "email",
-                code: "required",
-                message: "Validation failed for 'email': value is required"
-            )
+            throw SdkValidationError(field: "email", code: "required", message: "Validation failed for 'email': value is required")
         }
-        name = try container.sdkDecodeRequired(.name)
-        email = try container.sdkDecodeRequired(.email)
-        try sdkValidateEmail("email", email)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.email = try container.sdkDecodeRequired(.email)
+            try sdkValidateEmail("email", self.email)
     }
 }

@@ -3,39 +3,29 @@
 
 import Foundation
 
-/// WebhookDeploymentCreatedDeploymentPayload domain models
+// WebhookDeploymentCreatedDeploymentPayload domain models
 public indirect enum WebhookDeploymentCreatedDeploymentPayload {
     case jsonValue([String: JSONValue])
     case stringValue(String)
 }
 
 extension WebhookDeploymentCreatedDeploymentPayload: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for WebhookDeploymentCreatedDeploymentPayload"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for WebhookDeploymentCreatedDeploymentPayload")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
 extension WebhookDeploymentCreatedDeploymentPayload {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode([String: JSONValue].self) {
-            return .jsonValue(value)
-        }
-        if let value = try? container.decode(String.self) {
-            return .stringValue(value)
-        }
+        if let value = try? container.decode([String: JSONValue].self) { return .jsonValue(value) }
+        if let value = try? container.decode(String.self) { return .stringValue(value) }
         return nil
     }
 }

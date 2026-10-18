@@ -6,51 +6,25 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ClassroomMethods {
-    /// Retrieves grades for a classroom assignment. Supply the `assignment_id` to identify the assignment whose grades
-    /// you need. This operation is no longer available as of August 28, 2026.
+extension ClassroomMethods {
+    /// Retrieves grades for a classroom assignment. Supply the `assignment_id` to identify the assignment whose grades you need. This operation is no longer available as of August 28, 2026.
     ///
-    /// > [!WARNING] > **Closed notice:** This operation is no longer available as of August 28, 2026. > For more
-    /// information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
+    /// > [!WARNING] > **Closed notice:** This operation is no longer available as of August 28, 2026. > For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
     ///
     /// - Parameters:
     /// - assignmentId: The unique identifier of the classroom assignment.
     ///
     /// - Warning: This operation is deprecated and may be removed in a future release.
-    static func classroomGetAssignmentGrades(
-        config: ClientConfig,
-        assignmentId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "GET",
-            ["/assignments/", sdkEncodePathSegment(sdkWireString(assignmentId)), "/grades"].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "classroomGetAssignmentGrades",
-            options: requestOptions,
-            errors: ["410": BasicError.self]
-        )).data
+    public static func classroomGetAssignmentGrades(config: ClientConfig, assignmentId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("GET", ["/assignments/", sdkEncodePathSegment(sdkWireString(assignmentId)), "/grades"].joined(), config: config, decoder: .empty, operationId: "classroomGetAssignmentGrades", options: requestOptions, errors: ["410": BasicError.self])).data
     }
 
     /// Lists classrooms. This operation is no longer available as of August 28, 2026.
     ///
-    /// > [!WARNING] > **Closed notice:** This operation is no longer available as of August 28, 2026. > For more
-    /// information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
+    /// > [!WARNING] > **Closed notice:** This operation is no longer available as of August 28, 2026. > For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
     ///
     /// - Warning: This operation is deprecated and may be removed in a future release.
-    static func classroomListClassrooms(
-        config: ClientConfig,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "GET",
-            "/classrooms",
-            config: config,
-            decoder: .empty,
-            operationId: "classroomListClassrooms",
-            options: requestOptions,
-            errors: ["410": BasicError.self]
-        )).data
+    public static func classroomListClassrooms(config: ClientConfig, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("GET", "/classrooms", config: config, decoder: .empty, operationId: "classroomListClassrooms", options: requestOptions, errors: ["410": BasicError.self])).data
     }
 }

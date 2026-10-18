@@ -6,18 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension AgentAutomationsMethods {
-    /// Returns a list of tasks triggered by the specified automation. User-owned automation history is available only
-    /// to its creator, while repository-owned automation history is available to anyone with read access to the
-    /// repository. Deleted and unlisted tasks are excluded. Tasks produced by private-session agents are excluded
-    /// unless the caller created the task, is a task collaborator, or the task is shared. **Fine-grained access tokens
-    /// for "List tasks for an automation"** This endpoint works with the following fine-grained token types: * [GitHub
-    /// App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app)
-    /// * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token)
-    /// The fine-grained token must have one of the following permission sets for each repository accessed by this
-    /// request: * "Agent tasks" repository permissions (read) * "Contents" repository permissions (read) The required
-    /// permission set depends on each repository's Automation permission configuration. GitHub App installation access
-    /// tokens are not supported for this endpoint.
+extension AgentAutomationsMethods {
+    /// Returns a list of tasks triggered by the specified automation. User-owned automation history is available only to its creator, while repository-owned automation history is available to anyone with read access to the repository. Deleted and unlisted tasks are excluded. Tasks produced by private-session agents are excluded unless the caller created the task, is a task collaborator, or the task is shared. **Fine-grained access tokens for "List tasks for an automation"** This endpoint works with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app) * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) The fine-grained token must have one of the following permission sets for each repository accessed by this request: * "Agent tasks" repository permissions (read) * "Contents" repository permissions (read) The required permission set depends on each repository's Automation permission configuration. GitHub App installation access tokens are not supported for this endpoint.
     ///
     /// - Parameters:
     /// - automationId: The unique identifier of the automation.
@@ -31,40 +21,22 @@ public extension AgentAutomationsMethods {
     /// - isArchived: Filter by archived status. When `true`, returns only archived
     ///   tasks. When `false` or omitted, returns only non-archived tasks. Defaults to
     ///   `false`.
-    static func agentAutomationsListAutomationTasks(
-        config: ClientConfig,
-        automationId: String,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        sort: AgentAutomationsListAutomationTasksParameter? = nil,
-        direction: AgentAutomationsListAutomationTasksParameterXa11df8cb? = nil,
-        state: String? = nil,
-        isArchived: Bool? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> AgentAutomationsListAutomationTasksResponse {
-        if let perPage {
+    public static func agentAutomationsListAutomationTasks(config: ClientConfig, automationId: String, perPage: Int? = nil, page: Int? = nil, sort: AgentAutomationsListAutomationTasksParameter? = nil, direction: AgentAutomationsListAutomationTasksParameterXa11df8cb? = nil, state: String? = nil, isArchived: Bool? = nil, requestOptions: RequestOptions? = nil) async throws -> AgentAutomationsListAutomationTasksResponse {
+        if let perPage = perPage {
             try validateRange("per_page", Double(perPage), min: 1, max: 100)
         }
 
-        if let page {
+        if let page = page {
             try validateRange("page", Double(page), min: 1)
         }
 
-        return try await (sdkRequest(
-            "GET",
-            ["/agents/automations/", sdkEncodePathSegment(sdkWireString(automationId)), "/tasks"].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("page", value: page),
-                SdkQueryParameter("sort", value: sort),
-                SdkQueryParameter("direction", value: direction),
-                SdkQueryParameter("state", value: state),
-                SdkQueryParameter("is_archived", value: isArchived),
-            ],
-            decoder: .json,
-            operationId: "agentAutomationsListAutomationTasks",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("GET", ["/agents/automations/", sdkEncodePathSegment(sdkWireString(automationId)), "/tasks"].joined(), config: config, query: [
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("page", value: page),
+            SdkQueryParameter("sort", value: sort),
+            SdkQueryParameter("direction", value: direction),
+            SdkQueryParameter("state", value: state),
+            SdkQueryParameter("is_archived", value: isArchived),
+        ], decoder: .json, operationId: "agentAutomationsListAutomationTasks", options: requestOptions)).data
     }
 }

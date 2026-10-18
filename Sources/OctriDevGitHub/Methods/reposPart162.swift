@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ReposMethods {
-    struct ReposListForAuthenticatedUserOptions: Codable {
+extension ReposMethods {
+    public struct ReposListForAuthenticatedUserOptions: Codable {
         public var visibility: ReposListForAuthenticatedUserParameter?
         public var affiliation: String?
         public var type: ReposListForAuthenticatedUserParameterX68ee8e50?
@@ -21,9 +21,7 @@ public extension ReposMethods {
         public init() {}
     }
 
-    /// Lists repositories that the authenticated user has explicit permission (`:read`, `:write`, or `:admin`) to
-    /// access. The authenticated user has explicit permission to access repositories they own, repositories where they
-    /// are a collaborator, and repositories that they can access through an organization membership.
+    /// Lists repositories that the authenticated user has explicit permission (`:read`, `:write`, or `:admin`) to access. The authenticated user has explicit permission to access repositories they own, repositories where they are a collaborator, and repositories that they can access through an organization membership.
     ///
     /// - Parameters:
     /// - visibility: Limit results to repositories with the specified visibility.
@@ -53,11 +51,7 @@ public extension ReposMethods {
     /// - before: Only show repositories updated before the given time. This is a
     ///   timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format:
     ///   `YYYY-MM-DDTHH:MM:SSZ`.
-    static func reposListForAuthenticatedUser(
-        config: ClientConfig,
-        options: ReposListForAuthenticatedUserOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [Repository] {
+    public static func reposListForAuthenticatedUser(config: ClientConfig, options: ReposListForAuthenticatedUserOptions, requestOptions: RequestOptions? = nil) async throws -> [Repository] {
         if let since = options.since {
             try sdkValidateDateTime("since", since)
         }
@@ -66,25 +60,16 @@ public extension ReposMethods {
             try sdkValidateDateTime("before", before)
         }
 
-        return try await (sdkRequest(
-            "GET",
-            "/user/repos",
-            config: config,
-            query: [
-                SdkQueryParameter("visibility", value: options.visibility),
-                SdkQueryParameter("affiliation", value: options.affiliation),
-                SdkQueryParameter("type", value: options.type),
-                SdkQueryParameter("sort", value: options.sort),
-                SdkQueryParameter("direction", value: options.direction),
-                SdkQueryParameter("per_page", value: options.perPage),
-                SdkQueryParameter("page", value: options.page),
-                SdkQueryParameter("since", value: options.since),
-                SdkQueryParameter("before", value: options.before),
-            ],
-            decoder: .json,
-            operationId: "reposListForAuthenticatedUser",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self, "422": ValidationError.self]
-        )).data
+        return try (await sdkRequest("GET", "/user/repos", config: config, query: [
+            SdkQueryParameter("visibility", value: options.visibility),
+            SdkQueryParameter("affiliation", value: options.affiliation),
+            SdkQueryParameter("type", value: options.type),
+            SdkQueryParameter("sort", value: options.sort),
+            SdkQueryParameter("direction", value: options.direction),
+            SdkQueryParameter("per_page", value: options.perPage),
+            SdkQueryParameter("page", value: options.page),
+            SdkQueryParameter("since", value: options.since),
+            SdkQueryParameter("before", value: options.before),
+        ], decoder: .json, operationId: "reposListForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "422": ValidationError.self])).data
     }
 }

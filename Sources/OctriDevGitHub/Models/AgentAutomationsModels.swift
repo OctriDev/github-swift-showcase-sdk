@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// AgentAutomations domain models
+// AgentAutomations domain models
 public indirect enum AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemData {
     case agentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a(
         AgentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a
@@ -14,39 +14,29 @@ public indirect enum AgentAutomationsListAutomationTasksResponseTasksItemArtifac
 }
 
 extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemData: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let raw = try? container.decode(JSONValue.self) {
-            if let value = Self.decodeLossless1(from: container, raw) {
-                self = value; return
-            }
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
         }
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemData"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemData")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
 extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemData {
     static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
-        if let value = try? container
-            .decode(AgentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a.self),
-            sdkKeepsEveryKey(value, of: raw) {
+        if let value = try? container.decode(AgentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a.self),
+           sdkKeepsEveryKey(value, of: raw) {
             return .agentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a(value)
         }
-        if let value = try? container
-            .decode(AgentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4.self),
-            sdkKeepsEveryKey(value, of: raw) {
+        if let value = try? container.decode(AgentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4.self),
+           sdkKeepsEveryKey(value, of: raw) {
             return .agentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4(value)
         }
         return nil
@@ -58,12 +48,12 @@ extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemData 
         if let value = try? container.decode(
             AgentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a.self
         ) {
-            return .agentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a(value)
+            return             .agentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a(value)
         }
         if let value = try? container.decode(
             AgentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4.self
         ) {
-            return .agentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4(value)
+            return             .agentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4(value)
         }
         return nil
     }
@@ -73,10 +63,8 @@ extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemData 
     func encodeGroup1(to encoder: Encoder) throws -> Bool {
         var container = encoder.singleValueContainer()
         switch self {
-        case let .agentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a(value): try container
-            .encode(value); return true
-        case let .agentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4(value): try container
-            .encode(value); return true
+        case let .agentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a(value): try container.encode(value); return true
+        case let .agentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4(value): try container.encode(value); return true
         }
     }
 }
@@ -94,44 +82,33 @@ public indirect enum AgentAutomationsListAvailableAutomationTriggersResponseItem
 }
 
 extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiX8d60f6fda7: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let raw = try? container.decode(JSONValue.self) {
-            if let value = Self.decodeLossless1(from: container, raw) {
-                self = value; return
-            }
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
         }
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for AgentAutomationsListAvailableAutomationTriggersResponseItemFiX8d60f6fda7"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for AgentAutomationsListAvailableAutomationTriggersResponseItemFiX8d60f6fda7")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
 extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiX8d60f6fda7 {
     static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
-        if let value = try? container
-            .decode(AgentAutomationsListAvailableAutomationTriggersResponseItemFiX2732c6430f.self),
-            sdkKeepsEveryKey(value, of: raw) {
+        if let value = try? container.decode(AgentAutomationsListAvailableAutomationTriggersResponseItemFiX2732c6430f.self),
+           sdkKeepsEveryKey(value, of: raw) {
             return .agentAutomationsListAvailableAutomationTriggersResponseItemFiX2732c6430f(value)
         }
-        if let value = try? container
-            .decode(AgentAutomationsListAvailableAutomationTriggersResponseItemFiX33c1ad0172.self),
-            sdkKeepsEveryKey(value, of: raw) {
+        if let value = try? container.decode(AgentAutomationsListAvailableAutomationTriggersResponseItemFiX33c1ad0172.self),
+           sdkKeepsEveryKey(value, of: raw) {
             return .agentAutomationsListAvailableAutomationTriggersResponseItemFiX33c1ad0172(value)
         }
-        if let value = try? container
-            .decode(AgentAutomationsListAvailableAutomationTriggersResponseItemFiXe26621da0f.self),
-            sdkKeepsEveryKey(value, of: raw) {
+        if let value = try? container.decode(AgentAutomationsListAvailableAutomationTriggersResponseItemFiXe26621da0f.self),
+           sdkKeepsEveryKey(value, of: raw) {
             return .agentAutomationsListAvailableAutomationTriggersResponseItemFiXe26621da0f(value)
         }
         return nil
@@ -143,17 +120,17 @@ extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiX8d60f6fd
         if let value = try? container.decode(
             AgentAutomationsListAvailableAutomationTriggersResponseItemFiX2732c6430f.self
         ) {
-            return .agentAutomationsListAvailableAutomationTriggersResponseItemFiX2732c6430f(value)
+            return             .agentAutomationsListAvailableAutomationTriggersResponseItemFiX2732c6430f(value)
         }
         if let value = try? container.decode(
             AgentAutomationsListAvailableAutomationTriggersResponseItemFiX33c1ad0172.self
         ) {
-            return .agentAutomationsListAvailableAutomationTriggersResponseItemFiX33c1ad0172(value)
+            return             .agentAutomationsListAvailableAutomationTriggersResponseItemFiX33c1ad0172(value)
         }
         if let value = try? container.decode(
             AgentAutomationsListAvailableAutomationTriggersResponseItemFiXe26621da0f.self
         ) {
-            return .agentAutomationsListAvailableAutomationTriggersResponseItemFiXe26621da0f(value)
+            return             .agentAutomationsListAvailableAutomationTriggersResponseItemFiXe26621da0f(value)
         }
         return nil
     }
@@ -163,12 +140,9 @@ extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiX8d60f6fd
     func encodeGroup1(to encoder: Encoder) throws -> Bool {
         var container = encoder.singleValueContainer()
         switch self {
-        case let .agentAutomationsListAvailableAutomationTriggersResponseItemFiX2732c6430f(value): try container
-            .encode(value); return true
-        case let .agentAutomationsListAvailableAutomationTriggersResponseItemFiX33c1ad0172(value): try container
-            .encode(value); return true
-        case let .agentAutomationsListAvailableAutomationTriggersResponseItemFiXe26621da0f(value): try container
-            .encode(value); return true
+        case let .agentAutomationsListAvailableAutomationTriggersResponseItemFiX2732c6430f(value): try container.encode(value); return true
+        case let .agentAutomationsListAvailableAutomationTriggersResponseItemFiX33c1ad0172(value): try container.encode(value); return true
+        case let .agentAutomationsListAvailableAutomationTriggersResponseItemFiXe26621da0f(value): try container.encode(value); return true
         }
     }
 }
@@ -185,28 +159,22 @@ public struct AgentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12
         case globalId = "global_id"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a {
-    init(from decoder: Decoder) throws {
+extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
-        globalId = try container.sdkDecodeIfPresent(.globalId)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.globalId = try container.sdkDecodeIfPresent(.globalId)
     }
 }
 
-public extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a {
-    init(id: Int, globalId: String? = nil) {
+extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a {
+    public init(id: Int, globalId: String? = nil) {
         (self.id, self.globalId) = (id, globalId)
     }
 }
@@ -223,35 +191,25 @@ public struct AgentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37
         case baseRef = "base_ref"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4 {
-    init(from decoder: Decoder) throws {
+extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.headRef) else {
-            throw SdkValidationError(
-                field: "head_ref",
-                code: "required",
-                message: "Validation failed for 'head_ref': value is required"
-            )
+            throw SdkValidationError(field: "head_ref", code: "required", message: "Validation failed for 'head_ref': value is required")
         }
         guard container.contains(.baseRef) else {
-            throw SdkValidationError(
-                field: "base_ref",
-                code: "required",
-                message: "Validation failed for 'base_ref': value is required"
-            )
+            throw SdkValidationError(field: "base_ref", code: "required", message: "Validation failed for 'base_ref': value is required")
         }
-        headRef = try container.sdkDecodeRequired(.headRef)
-        baseRef = try container.sdkDecodeRequired(.baseRef)
+        self.headRef = try container.sdkDecodeRequired(.headRef)
+        self.baseRef = try container.sdkDecodeRequired(.baseRef)
     }
 }
 
-public extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4 {
-    init(headRef: String, baseRef: String) {
+extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4 {
+    public init(headRef: String, baseRef: String) {
         (self.headRef, self.baseRef) = (headRef, baseRef)
     }
 }
@@ -263,38 +221,24 @@ public struct AgentAutomationsListAvailableAutomationTriggersResponseItemFiXe266
         case type
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiXe26621da0f {
-    init(from decoder: Decoder) throws {
+extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiXe26621da0f {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.type) else {
-            throw SdkValidationError(
-                field: "type",
-                code: "required",
-                message: "Validation failed for 'type': value is required"
-            )
+            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
         }
-        type = try container.sdkDecodeRequired(.type)
-        try sdkValidateRawEnum(
-            "type",
-            type,
-            AgentAutomationsListAvailableAutomationTriggersResponseItemFiX453baec979.allCases.map(\.rawValue)
-        )
+        self.type = try container.sdkDecodeRequired(.type)
+            try sdkValidateRawEnum("type", self.type, AgentAutomationsListAvailableAutomationTriggersResponseItemFiX453baec979.allCases.map(\.rawValue))
     }
 }
 
-public extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiXe26621da0f {
-    init(type: AgentAutomationsListAvailableAutomationTriggersResponseItemFiX453baec979) throws {
+extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiXe26621da0f {
+    public init(type: AgentAutomationsListAvailableAutomationTriggersResponseItemFiX453baec979) throws {
         self.type = type
-        try sdkValidateRawEnum(
-            "type",
-            self.type,
-            AgentAutomationsListAvailableAutomationTriggersResponseItemFiX453baec979.allCases.map(\.rawValue)
-        )
+            try sdkValidateRawEnum("type", self.type, AgentAutomationsListAvailableAutomationTriggersResponseItemFiX453baec979.allCases.map(\.rawValue))
     }
 }
 
@@ -308,50 +252,28 @@ public struct AgentAutomationsListAvailableAutomationTriggersResponseItemFiX3c0c
         case minLength
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiX3c0c1332cb {
-    init(from decoder: Decoder) throws {
+extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiX3c0c1332cb {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.type) else {
-            throw SdkValidationError(
-                field: "type",
-                code: "required",
-                message: "Validation failed for 'type': value is required"
-            )
+            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
         }
-        type = try container.sdkDecodeRequired(.type)
-        minLength = try container.sdkDecodeIfPresent(.minLength)
-        if let value = minLength {
-            try validateRange(
-                "minLength",
-                Double(value),
-                min: 0,
-                max: nil,
-                exclusiveMin: nil,
-                exclusiveMax: nil,
-                multipleOf: nil
-            )
+        self.type = try container.sdkDecodeRequired(.type)
+        self.minLength = try container.sdkDecodeIfPresent(.minLength)
+        if let value = self.minLength {
+            try validateRange("minLength", Double(value), min: 0, max: nil, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
         }
     }
 }
 
-public extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiX3c0c1332cb {
-    init(type: AgentAutomationsListAvailableAutomationTriggersResponseItemFiX6da060e0f6, minLength: Int? = nil) throws {
+extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiX3c0c1332cb {
+    public init(type: AgentAutomationsListAvailableAutomationTriggersResponseItemFiX6da060e0f6, minLength: Int? = nil) throws {
         (self.type, self.minLength) = (type, minLength)
         if let value = self.minLength {
-            try validateRange(
-                "minLength",
-                Double(value),
-                min: 0,
-                max: nil,
-                exclusiveMin: nil,
-                exclusiveMax: nil,
-                multipleOf: nil
-            )
+            try validateRange("minLength", Double(value), min: 0, max: nil, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
         }
     }
 }
@@ -366,60 +288,30 @@ public struct AgentAutomationsListAvailableAutomationTriggersResponseItemFiX2732
         case minLength
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiX2732c6430f {
-    init(from decoder: Decoder) throws {
+extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiX2732c6430f {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.type) else {
-            throw SdkValidationError(
-                field: "type",
-                code: "required",
-                message: "Validation failed for 'type': value is required"
-            )
+            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
         }
-        type = try container.sdkDecodeRequired(.type)
-        minLength = try container.sdkDecodeIfPresent(.minLength)
-        try sdkValidateRawEnum(
-            "type",
-            type,
-            AgentAutomationsListAvailableAutomationTriggersResponseItemFiX6c461ef13f.allCases.map(\.rawValue)
-        )
-        if let value = minLength {
-            try validateRange(
-                "minLength",
-                Double(value),
-                min: 0,
-                max: nil,
-                exclusiveMin: nil,
-                exclusiveMax: nil,
-                multipleOf: nil
-            )
+        self.type = try container.sdkDecodeRequired(.type)
+        self.minLength = try container.sdkDecodeIfPresent(.minLength)
+            try sdkValidateRawEnum("type", self.type, AgentAutomationsListAvailableAutomationTriggersResponseItemFiX6c461ef13f.allCases.map(\.rawValue))
+        if let value = self.minLength {
+            try validateRange("minLength", Double(value), min: 0, max: nil, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
         }
     }
 }
 
-public extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiX2732c6430f {
-    init(type: AgentAutomationsListAvailableAutomationTriggersResponseItemFiX6c461ef13f, minLength: Int? = nil) throws {
+extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiX2732c6430f {
+    public init(type: AgentAutomationsListAvailableAutomationTriggersResponseItemFiX6c461ef13f, minLength: Int? = nil) throws {
         (self.type, self.minLength) = (type, minLength)
-        try sdkValidateRawEnum(
-            "type",
-            self.type,
-            AgentAutomationsListAvailableAutomationTriggersResponseItemFiX6c461ef13f.allCases.map(\.rawValue)
-        )
+            try sdkValidateRawEnum("type", self.type, AgentAutomationsListAvailableAutomationTriggersResponseItemFiX6c461ef13f.allCases.map(\.rawValue))
         if let value = self.minLength {
-            try validateRange(
-                "minLength",
-                Double(value),
-                min: 0,
-                max: nil,
-                exclusiveMin: nil,
-                exclusiveMax: nil,
-                multipleOf: nil
-            )
+            try validateRange("minLength", Double(value), min: 0, max: nil, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
         }
     }
 }
@@ -442,118 +334,57 @@ public struct AgentAutomationsListAvailableAutomationTriggersResponseItemFiX33c1
         case uniqueItems
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiX33c1ad0172 {
-    init(from decoder: Decoder) throws {
+extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiX33c1ad0172 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.type) else {
-            throw SdkValidationError(
-                field: "type",
-                code: "required",
-                message: "Validation failed for 'type': value is required"
-            )
+            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
         }
         guard container.contains(.items) else {
-            throw SdkValidationError(
-                field: "items",
-                code: "required",
-                message: "Validation failed for 'items': value is required"
-            )
+            throw SdkValidationError(field: "items", code: "required", message: "Validation failed for 'items': value is required")
         }
-        type = try container.sdkDecodeRequired(.type)
-        items = try container.sdkDecodeRequired(.items)
-        minItems = try container.sdkDecodeIfPresent(.minItems)
-        maxItems = try container.sdkDecodeIfPresent(.maxItems)
-        uniqueItems = try container.sdkDecodeIfPresent(.uniqueItems)
-        try sdkValidateRawEnum(
-            "type",
-            type,
-            AgentAutomationsListAvailableAutomationTriggersResponseItemFiXf26f7efb5e.allCases.map(\.rawValue)
-        )
-        if let value = minItems {
-            try validateRange(
-                "minItems",
-                Double(value),
-                min: 0,
-                max: nil,
-                exclusiveMin: nil,
-                exclusiveMax: nil,
-                multipleOf: nil
-            )
+        self.type = try container.sdkDecodeRequired(.type)
+        self.items = try container.sdkDecodeRequired(.items)
+        self.minItems = try container.sdkDecodeIfPresent(.minItems)
+        self.maxItems = try container.sdkDecodeIfPresent(.maxItems)
+        self.uniqueItems = try container.sdkDecodeIfPresent(.uniqueItems)
+            try sdkValidateRawEnum("type", self.type, AgentAutomationsListAvailableAutomationTriggersResponseItemFiXf26f7efb5e.allCases.map(\.rawValue))
+        if let value = self.minItems {
+            try validateRange("minItems", Double(value), min: 0, max: nil, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
         }
-        if let value = maxItems {
-            try validateRange(
-                "maxItems",
-                Double(value),
-                min: 0,
-                max: nil,
-                exclusiveMin: nil,
-                exclusiveMax: nil,
-                multipleOf: nil
-            )
+        if let value = self.maxItems {
+            try validateRange("maxItems", Double(value), min: 0, max: nil, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
         }
     }
 }
 
-public extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiX33c1ad0172 {
-    init(
-        type: AgentAutomationsListAvailableAutomationTriggersResponseItemFiXf26f7efb5e,
-        items: AgentAutomationsListAvailableAutomationTriggersResponseItemFiX3c0c1332cb,
-        minItems: Int? = nil,
-        maxItems: Int? = nil,
-        uniqueItems: Bool? = nil
-    ) throws {
+extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiX33c1ad0172 {
+    public init(type: AgentAutomationsListAvailableAutomationTriggersResponseItemFiXf26f7efb5e, items: AgentAutomationsListAvailableAutomationTriggersResponseItemFiX3c0c1332cb, minItems: Int? = nil, maxItems: Int? = nil, uniqueItems: Bool? = nil) throws {
         (self.type, self.items) = (type, items)
         (self.minItems, self.maxItems) = (minItems, maxItems)
         self.uniqueItems = uniqueItems
-        try sdkValidateRawEnum(
-            "type",
-            self.type,
-            AgentAutomationsListAvailableAutomationTriggersResponseItemFiXf26f7efb5e.allCases.map(\.rawValue)
-        )
+            try sdkValidateRawEnum("type", self.type, AgentAutomationsListAvailableAutomationTriggersResponseItemFiXf26f7efb5e.allCases.map(\.rawValue))
         if let value = self.minItems {
-            try validateRange(
-                "minItems",
-                Double(value),
-                min: 0,
-                max: nil,
-                exclusiveMin: nil,
-                exclusiveMax: nil,
-                multipleOf: nil
-            )
+            try validateRange("minItems", Double(value), min: 0, max: nil, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
         }
         if let value = self.maxItems {
-            try validateRange(
-                "maxItems",
-                Double(value),
-                min: 0,
-                max: nil,
-                exclusiveMin: nil,
-                exclusiveMax: nil,
-                multipleOf: nil
-            )
+            try validateRange("maxItems", Double(value), min: 0, max: nil, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
         }
     }
 }
 
-public struct AgentAutomationsListAvailableAutomationTriggersResponseItemFiX6da060e0f6: RawRepresentable, Hashable,
-    Codable, Sendable, SdkWireConvertible {
+public struct AgentAutomationsListAvailableAutomationTriggersResponseItemFiX6da060e0f6: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let string =
-        AgentAutomationsListAvailableAutomationTriggersResponseItemFiX6da060e0f6(rawValue: "string")
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let string = AgentAutomationsListAvailableAutomationTriggersResponseItemFiX6da060e0f6(rawValue: "string")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

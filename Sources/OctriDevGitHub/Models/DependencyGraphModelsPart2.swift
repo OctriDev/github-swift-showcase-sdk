@@ -3,25 +3,16 @@
 
 import Foundation
 
-/// DependencyGraph domain models
-public extension Snapshot {
-    init(
-        version: Int,
-        job: SnapshotJob,
-        sha: String,
-        ref: String,
-        detector: SnapshotDetector,
-        scanned: Date,
-        metadata: Metadata? = nil,
-        manifests: [String: Manifest]? = nil
-    ) throws {
+// DependencyGraph domain models
+extension Snapshot {
+    public init(version: Int, job: SnapshotJob, sha: String, ref: String, detector: SnapshotDetector, scanned: Date, metadata: Metadata? = nil, manifests: [String: Manifest]? = nil) throws {
         (self.version, self.job) = (version, job)
         (self.sha, self.ref) = (sha, ref)
         (self.detector, self.scanned) = (detector, scanned)
         (self.metadata, self.manifests) = (metadata, manifests)
-        try validateLength("sha", self.sha, min: 40, max: 64)
-        try sdkValidatePattern("ref", self.ref, sdkPattern4ca596ae636f)
-        try sdkValidateDateTime("scanned", sdkWireString(self.scanned))
+            try validateLength("sha", self.sha, min: 40, max: 64)
+            try sdkValidatePattern("ref", self.ref, sdkPattern4ca596ae636f)
+            try sdkValidateDateTime("scanned", sdkWireString(self.scanned))
     }
 }
 
@@ -47,36 +38,26 @@ public struct SnapshotJob: Codable {
         case htmlUrl = "html_url"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension SnapshotJob {
-    init(from decoder: Decoder) throws {
+extension SnapshotJob {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
         guard container.contains(.correlator) else {
-            throw SdkValidationError(
-                field: "correlator",
-                code: "required",
-                message: "Validation failed for 'correlator': value is required"
-            )
+            throw SdkValidationError(field: "correlator", code: "required", message: "Validation failed for 'correlator': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
-        correlator = try container.sdkDecodeRequired(.correlator)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.correlator = try container.sdkDecodeRequired(.correlator)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
     }
 }
 
-public extension SnapshotJob {
-    init(id: String, correlator: String, htmlUrl: String? = nil) {
+extension SnapshotJob {
+    public init(id: String, correlator: String, htmlUrl: String? = nil) {
         (self.id, self.correlator) = (id, correlator)
         self.htmlUrl = htmlUrl
     }
@@ -100,43 +81,29 @@ public struct DependencyGraphSpdxSbomSbomPackagesItemExternalRefsItem: Codable {
         case referenceType
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension DependencyGraphSpdxSbomSbomPackagesItemExternalRefsItem {
-    init(from decoder: Decoder) throws {
+extension DependencyGraphSpdxSbomSbomPackagesItemExternalRefsItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.referenceCategory) else {
-            throw SdkValidationError(
-                field: "referenceCategory",
-                code: "required",
-                message: "Validation failed for 'referenceCategory': value is required"
-            )
+            throw SdkValidationError(field: "referenceCategory", code: "required", message: "Validation failed for 'referenceCategory': value is required")
         }
         guard container.contains(.referenceLocator) else {
-            throw SdkValidationError(
-                field: "referenceLocator",
-                code: "required",
-                message: "Validation failed for 'referenceLocator': value is required"
-            )
+            throw SdkValidationError(field: "referenceLocator", code: "required", message: "Validation failed for 'referenceLocator': value is required")
         }
         guard container.contains(.referenceType) else {
-            throw SdkValidationError(
-                field: "referenceType",
-                code: "required",
-                message: "Validation failed for 'referenceType': value is required"
-            )
+            throw SdkValidationError(field: "referenceType", code: "required", message: "Validation failed for 'referenceType': value is required")
         }
-        referenceCategory = try container.sdkDecodeRequired(.referenceCategory)
-        referenceLocator = try container.sdkDecodeRequired(.referenceLocator)
-        referenceType = try container.sdkDecodeRequired(.referenceType)
+        self.referenceCategory = try container.sdkDecodeRequired(.referenceCategory)
+        self.referenceLocator = try container.sdkDecodeRequired(.referenceLocator)
+        self.referenceType = try container.sdkDecodeRequired(.referenceType)
     }
 }
 
-public extension DependencyGraphSpdxSbomSbomPackagesItemExternalRefsItem {
-    init(referenceCategory: String, referenceLocator: String, referenceType: String) {
+extension DependencyGraphSpdxSbomSbomPackagesItemExternalRefsItem {
+    public init(referenceCategory: String, referenceLocator: String, referenceType: String) {
         (self.referenceCategory, self.referenceLocator) = (referenceCategory, referenceLocator)
         self.referenceType = referenceType
     }
@@ -159,51 +126,33 @@ public struct DependencyGraphDiffItemVulnerabilitiesItem: Codable {
         case advisoryUrl = "advisory_url"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension DependencyGraphDiffItemVulnerabilitiesItem {
-    init(from decoder: Decoder) throws {
+extension DependencyGraphDiffItemVulnerabilitiesItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.severity) else {
-            throw SdkValidationError(
-                field: "severity",
-                code: "required",
-                message: "Validation failed for 'severity': value is required"
-            )
+            throw SdkValidationError(field: "severity", code: "required", message: "Validation failed for 'severity': value is required")
         }
         guard container.contains(.advisoryGhsaId) else {
-            throw SdkValidationError(
-                field: "advisory_ghsa_id",
-                code: "required",
-                message: "Validation failed for 'advisory_ghsa_id': value is required"
-            )
+            throw SdkValidationError(field: "advisory_ghsa_id", code: "required", message: "Validation failed for 'advisory_ghsa_id': value is required")
         }
         guard container.contains(.advisorySummary) else {
-            throw SdkValidationError(
-                field: "advisory_summary",
-                code: "required",
-                message: "Validation failed for 'advisory_summary': value is required"
-            )
+            throw SdkValidationError(field: "advisory_summary", code: "required", message: "Validation failed for 'advisory_summary': value is required")
         }
         guard container.contains(.advisoryUrl) else {
-            throw SdkValidationError(
-                field: "advisory_url",
-                code: "required",
-                message: "Validation failed for 'advisory_url': value is required"
-            )
+            throw SdkValidationError(field: "advisory_url", code: "required", message: "Validation failed for 'advisory_url': value is required")
         }
-        severity = try container.sdkDecodeRequired(.severity)
-        advisoryGhsaId = try container.sdkDecodeRequired(.advisoryGhsaId)
-        advisorySummary = try container.sdkDecodeRequired(.advisorySummary)
-        advisoryUrl = try container.sdkDecodeRequired(.advisoryUrl)
+        self.severity = try container.sdkDecodeRequired(.severity)
+        self.advisoryGhsaId = try container.sdkDecodeRequired(.advisoryGhsaId)
+        self.advisorySummary = try container.sdkDecodeRequired(.advisorySummary)
+        self.advisoryUrl = try container.sdkDecodeRequired(.advisoryUrl)
     }
 }
 
-public extension DependencyGraphDiffItemVulnerabilitiesItem {
-    init(severity: String, advisoryGhsaId: String, advisorySummary: String, advisoryUrl: String) {
+extension DependencyGraphDiffItemVulnerabilitiesItem {
+    public init(severity: String, advisoryGhsaId: String, advisorySummary: String, advisoryUrl: String) {
         (self.severity, self.advisoryGhsaId) = (severity, advisoryGhsaId)
         (self.advisorySummary, self.advisoryUrl) = (advisorySummary, advisoryUrl)
     }
@@ -249,87 +198,47 @@ public struct DependencyGraphSpdxSbomSbom: Codable {
         case relationships
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension DependencyGraphSpdxSbomSbom {
-    init(from decoder: Decoder) throws {
+extension DependencyGraphSpdxSbomSbom {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.spdxid) else {
-            throw SdkValidationError(
-                field: "SPDXID",
-                code: "required",
-                message: "Validation failed for 'SPDXID': value is required"
-            )
+            throw SdkValidationError(field: "SPDXID", code: "required", message: "Validation failed for 'SPDXID': value is required")
         }
         guard container.contains(.spdxVersion) else {
-            throw SdkValidationError(
-                field: "spdxVersion",
-                code: "required",
-                message: "Validation failed for 'spdxVersion': value is required"
-            )
+            throw SdkValidationError(field: "spdxVersion", code: "required", message: "Validation failed for 'spdxVersion': value is required")
         }
         guard container.contains(.creationInfo) else {
-            throw SdkValidationError(
-                field: "creationInfo",
-                code: "required",
-                message: "Validation failed for 'creationInfo': value is required"
-            )
+            throw SdkValidationError(field: "creationInfo", code: "required", message: "Validation failed for 'creationInfo': value is required")
         }
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.dataLicense) else {
-            throw SdkValidationError(
-                field: "dataLicense",
-                code: "required",
-                message: "Validation failed for 'dataLicense': value is required"
-            )
+            throw SdkValidationError(field: "dataLicense", code: "required", message: "Validation failed for 'dataLicense': value is required")
         }
         guard container.contains(.documentNamespace) else {
-            throw SdkValidationError(
-                field: "documentNamespace",
-                code: "required",
-                message: "Validation failed for 'documentNamespace': value is required"
-            )
+            throw SdkValidationError(field: "documentNamespace", code: "required", message: "Validation failed for 'documentNamespace': value is required")
         }
         guard container.contains(.packages) else {
-            throw SdkValidationError(
-                field: "packages",
-                code: "required",
-                message: "Validation failed for 'packages': value is required"
-            )
+            throw SdkValidationError(field: "packages", code: "required", message: "Validation failed for 'packages': value is required")
         }
-        spdxid = try container.sdkDecodeRequired(.spdxid)
-        spdxVersion = try container.sdkDecodeRequired(.spdxVersion)
-        creationInfo = try container.sdkDecodeRequired(.creationInfo)
-        name = try container.sdkDecodeRequired(.name)
-        dataLicense = try container.sdkDecodeRequired(.dataLicense)
-        documentNamespace = try container.sdkDecodeRequired(.documentNamespace)
-        packages = try container.sdkDecodeRequired(.packages)
-        comment = try container.sdkDecodeIfPresent(.comment)
-        relationships = try container.sdkDecodeIfPresent(.relationships)
+        self.spdxid = try container.sdkDecodeRequired(.spdxid)
+        self.spdxVersion = try container.sdkDecodeRequired(.spdxVersion)
+        self.creationInfo = try container.sdkDecodeRequired(.creationInfo)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.dataLicense = try container.sdkDecodeRequired(.dataLicense)
+        self.documentNamespace = try container.sdkDecodeRequired(.documentNamespace)
+        self.packages = try container.sdkDecodeRequired(.packages)
+        self.comment = try container.sdkDecodeIfPresent(.comment)
+        self.relationships = try container.sdkDecodeIfPresent(.relationships)
     }
 }
 
-public extension DependencyGraphSpdxSbomSbom {
-    init(
-        spdxid: String,
-        spdxVersion: String,
-        creationInfo: DependencyGraphSpdxSbomSbomCreationInfo,
-        name: String,
-        dataLicense: String,
-        documentNamespace: String,
-        packages: [DependencyGraphSpdxSbomSbomPackagesItem],
-        comment: String? = nil,
-        relationships: [DependencyGraphSpdxSbomSbomRelationshipsItem]? = nil
-    ) {
+extension DependencyGraphSpdxSbomSbom {
+    public init(spdxid: String, spdxVersion: String, creationInfo: DependencyGraphSpdxSbomSbomCreationInfo, name: String, dataLicense: String, documentNamespace: String, packages: [DependencyGraphSpdxSbomSbomPackagesItem], comment: String? = nil, relationships: [DependencyGraphSpdxSbomSbomRelationshipsItem]? = nil) {
         (self.spdxid, self.spdxVersion) = (spdxid, spdxVersion)
         (self.creationInfo, self.name) = (creationInfo, name)
         (self.dataLicense, self.documentNamespace) = (dataLicense, documentNamespace)
@@ -351,35 +260,25 @@ public struct DependencyGraphSpdxSbomSbomCreationInfo: Codable {
         case creators
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension DependencyGraphSpdxSbomSbomCreationInfo {
-    init(from decoder: Decoder) throws {
+extension DependencyGraphSpdxSbomSbomCreationInfo {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.created) else {
-            throw SdkValidationError(
-                field: "created",
-                code: "required",
-                message: "Validation failed for 'created': value is required"
-            )
+            throw SdkValidationError(field: "created", code: "required", message: "Validation failed for 'created': value is required")
         }
         guard container.contains(.creators) else {
-            throw SdkValidationError(
-                field: "creators",
-                code: "required",
-                message: "Validation failed for 'creators': value is required"
-            )
+            throw SdkValidationError(field: "creators", code: "required", message: "Validation failed for 'creators': value is required")
         }
-        created = try container.sdkDecodeRequired(.created)
-        creators = try container.sdkDecodeRequired(.creators)
+        self.created = try container.sdkDecodeRequired(.created)
+        self.creators = try container.sdkDecodeRequired(.creators)
     }
 }
 
-public extension DependencyGraphSpdxSbomSbomCreationInfo {
-    init(created: String, creators: [String]) {
+extension DependencyGraphSpdxSbomSbomCreationInfo {
+    public init(created: String, creators: [String]) {
         (self.created, self.creators) = (created, creators)
     }
 }
@@ -389,16 +288,13 @@ public extension DependencyGraphSpdxSbomSbomCreationInfo {
 public struct DependencyScope: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let runtime = DependencyScope(rawValue: "runtime")
     public static let development = DependencyScope(rawValue: "development")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -410,16 +306,13 @@ public struct DependencyScope: RawRepresentable, Hashable, Codable, Sendable, Sd
 public struct DependencyGraphDiffItemChangeType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let added = DependencyGraphDiffItemChangeType(rawValue: "added")
     public static let removed = DependencyGraphDiffItemChangeType(rawValue: "removed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -434,17 +327,14 @@ public struct DependencyGraphDiffItemChangeType: RawRepresentable, Hashable, Cod
 public struct DependencyGraphDiffItemScope: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let unknown = DependencyGraphDiffItemScope(rawValue: "unknown")
     public static let runtime = DependencyGraphDiffItemScope(rawValue: "runtime")
     public static let development = DependencyGraphDiffItemScope(rawValue: "development")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -458,16 +348,13 @@ public struct DependencyGraphDiffItemScope: RawRepresentable, Hashable, Codable,
 public struct DependencyRelationship: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let direct = DependencyRelationship(rawValue: "direct")
     public static let indirect = DependencyRelationship(rawValue: "indirect")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

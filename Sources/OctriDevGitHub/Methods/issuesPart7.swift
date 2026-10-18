@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension IssuesMethods {
-    struct IssuesCreateOptions: Codable {
+extension IssuesMethods {
+    public struct IssuesCreateOptions: Codable {
         public var owner: String
         public var repo: String
         public var title: IssuesCreateRequestBodyTitle
@@ -27,26 +27,9 @@ public extension IssuesMethods {
         }
     }
 
-    /// Creates an issue in a repository. Provide a `title`; you can also include a body, labels, assignees, milestone,
-    /// issue type, parent issue, or issue field values. Creating an issue triggers notifications, and creating content
-    /// too quickly may result in secondary rate limiting.
+    /// Creates an issue in a repository. Provide a `title`; you can also include a body, labels, assignees, milestone, issue type, parent issue, or issue field values. Creating an issue triggers notifications, and creating content too quickly may result in secondary rate limiting.
     ///
-    /// Any user with pull access to a repository can create an issue. If [issues are disabled in the
-    /// repository](https://docs.github.com/articles/disabling-issues/), the API returns a `410 Gone` status. This
-    /// endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications).
-    /// Creating content too quickly using this endpoint may result in secondary rate limiting. For more information,
-    /// see "[Rate limits for the
-    /// API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)"
-    /// and "[Best practices for using the REST
-    /// API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)." This endpoint supports the
-    /// following custom media types. For more information, see "[Media
-    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
-    /// **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the
-    /// default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text
-    /// only representation of the markdown body. Response will include `body_text`. -
-    /// **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include
-    /// `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response
-    /// will include `body`, `body_text`, and `body_html`.
+    /// Any user with pull access to a repository can create an issue. If [issues are disabled in the repository](https://docs.github.com/articles/disabling-issues/), the API returns a `410 Gone` status. This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. For more information, see "[Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)" and "[Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)." This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text only representation of the markdown body. Response will include `body_text`. - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -74,35 +57,9 @@ public extension IssuesMethods {
     /// - parentIssueId: The id of the parent issue to add this issue to as a
     ///   sub-issue. _NOTE: Only users with triage access to both the parent issue's
     ///   repository and this repository can set the parent issue._
-    static func issuesCreate(
-        config: ClientConfig,
-        options: IssuesCreateOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> Issue {
+    public static func issuesCreate(config: ClientConfig, options: IssuesCreateOptions, requestOptions: RequestOptions? = nil) async throws -> Issue {
         let requestBody = IssuesCreateRequestBody(options: options)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(options.owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(options.repo)),
-                "/issues",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "issuesCreate",
-            options: requestOptions,
-            errors: [
-                "400": BasicError.self,
-                "403": BasicError.self,
-                "404": BasicError.self,
-                "410": BasicError.self,
-                "422": ValidationError.self,
-                "503": ServiceUnavailable.self,
-            ]
-        )).data
+        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(options.owner)), "/", sdkEncodePathSegment(sdkWireString(options.repo)), "/issues"].joined(), config: config, body: requestBody, decoder: .json, operationId: "issuesCreate", options: requestOptions, errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self, "410": BasicError.self, "422": ValidationError.self, "503": ServiceUnavailable.self])).data
     }
 }

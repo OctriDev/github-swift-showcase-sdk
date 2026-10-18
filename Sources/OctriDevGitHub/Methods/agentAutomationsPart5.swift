@@ -6,18 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension AgentAutomationsMethods {
-    /// Returns a paginated list of the authenticated user's automations for a repository, together with every
-    /// repository-owned automation in it. `total_count` is the number of caller-visible automations matching the
-    /// supplied filters across all pages. Repository-owned automations are visible to anyone with read access to the
-    /// repository, so the results are not limited to automations the caller created. Use the `owner_type` field on each
-    /// automation to tell the two apart. **Fine-grained access tokens for "List automations for a repository"** This
-    /// endpoint works with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app)
-    /// * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token)
-    /// The fine-grained token must have one of the following permission sets for each repository accessed by this
-    /// request: * "Agent tasks" repository permissions (read) * "Contents" repository permissions (read) The required
-    /// permission set depends on each repository's Automation permission configuration. GitHub App installation access
-    /// tokens are not supported for this endpoint.
+extension AgentAutomationsMethods {
+    /// Returns a paginated list of the authenticated user's automations for a repository, together with every repository-owned automation in it. `total_count` is the number of caller-visible automations matching the supplied filters across all pages. Repository-owned automations are visible to anyone with read access to the repository, so the results are not limited to automations the caller created. Use the `owner_type` field on each automation to tell the two apart. **Fine-grained access tokens for "List automations for a repository"** This endpoint works with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app) * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) The fine-grained token must have one of the following permission sets for each repository accessed by this request: * "Agent tasks" repository permissions (read) * "Contents" repository permissions (read) The required permission set depends on each repository's Automation permission configuration. GitHub App installation access tokens are not supported for this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -28,41 +18,19 @@ public extension AgentAutomationsMethods {
     /// - ownerType: Filter automations by owner type. `user` returns automations
     ///   owned by their creator, `repository` returns automations owned by the
     ///   repository. Omit to return both.
-    static func agentAutomationsListRepoAutomations(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        page: Int? = nil,
-        perPage: Int? = nil,
-        ownerType: AgentAutomationsListRepoAutomationsParameter? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> AgentAutomationsListRepoAutomationsResponse {
-        if let page {
+    public static func agentAutomationsListRepoAutomations(config: ClientConfig, owner: String, repo: String, page: Int? = nil, perPage: Int? = nil, ownerType: AgentAutomationsListRepoAutomationsParameter? = nil, requestOptions: RequestOptions? = nil) async throws -> AgentAutomationsListRepoAutomationsResponse {
+        if let page = page {
             try validateRange("page", Double(page), min: 1)
         }
 
-        if let perPage {
+        if let perPage = perPage {
             try validateRange("per_page", Double(perPage), min: 1, max: 100)
         }
 
-        return try await (sdkRequest(
-            "GET",
-            [
-                "/agents/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/automations",
-            ].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("page", value: page),
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("owner_type", value: ownerType),
-            ],
-            decoder: .json,
-            operationId: "agentAutomationsListRepoAutomations",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("GET", ["/agents/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/automations"].joined(), config: config, query: [
+            SdkQueryParameter("page", value: page),
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("owner_type", value: ownerType),
+        ], decoder: .json, operationId: "agentAutomationsListRepoAutomations", options: requestOptions)).data
     }
 }

@@ -3,21 +3,9 @@
 
 import Foundation
 
-/// Billing domain models
-public extension BillingUsageReportUsageItemsItem {
-    init(
-        date: String,
-        product: String,
-        sku: String,
-        quantity: Int,
-        unitType: String,
-        pricePerUnit: Double,
-        grossAmount: Double,
-        discountAmount: Double,
-        netAmount: Double,
-        organizationName: String,
-        repositoryName: String? = nil
-    ) {
+// Billing domain models
+extension BillingUsageReportUsageItemsItem {
+    public init(date: String, product: String, sku: String, quantity: Int, unitType: String, pricePerUnit: Double, grossAmount: Double, discountAmount: Double, netAmount: Double, organizationName: String, repositoryName: String? = nil) {
         (self.date, self.product) = (date, product)
         (self.sku, self.quantity) = (sku, quantity)
         (self.unitType, self.pricePerUnit) = (unitType, pricePerUnit)
@@ -39,35 +27,25 @@ public struct CreateBudget: Codable {
         case budget
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension CreateBudget {
-    init(from decoder: Decoder) throws {
+extension CreateBudget {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.message) else {
-            throw SdkValidationError(
-                field: "message",
-                code: "required",
-                message: "Validation failed for 'message': value is required"
-            )
+            throw SdkValidationError(field: "message", code: "required", message: "Validation failed for 'message': value is required")
         }
         guard container.contains(.budget) else {
-            throw SdkValidationError(
-                field: "budget",
-                code: "required",
-                message: "Validation failed for 'budget': value is required"
-            )
+            throw SdkValidationError(field: "budget", code: "required", message: "Validation failed for 'budget': value is required")
         }
-        message = try container.sdkDecodeRequired(.message)
-        budget = try container.sdkDecodeRequired(.budget)
+        self.message = try container.sdkDecodeRequired(.message)
+        self.budget = try container.sdkDecodeRequired(.budget)
     }
 }
 
-public extension CreateBudget {
-    init(message: String, budget: CreateBudgetBudget) {
+extension CreateBudget {
+    public init(message: String, budget: CreateBudgetBudget) {
         (self.message, self.budget) = (message, budget)
     }
 }
@@ -93,51 +71,31 @@ public struct BillingPremiumRequestUsageReportUser: Codable {
         case model
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension BillingPremiumRequestUsageReportUser {
-    init(from decoder: Decoder) throws {
+extension BillingPremiumRequestUsageReportUser {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.timePeriod) else {
-            throw SdkValidationError(
-                field: "timePeriod",
-                code: "required",
-                message: "Validation failed for 'timePeriod': value is required"
-            )
+            throw SdkValidationError(field: "timePeriod", code: "required", message: "Validation failed for 'timePeriod': value is required")
         }
         guard container.contains(.user) else {
-            throw SdkValidationError(
-                field: "user",
-                code: "required",
-                message: "Validation failed for 'user': value is required"
-            )
+            throw SdkValidationError(field: "user", code: "required", message: "Validation failed for 'user': value is required")
         }
         guard container.contains(.usageItems) else {
-            throw SdkValidationError(
-                field: "usageItems",
-                code: "required",
-                message: "Validation failed for 'usageItems': value is required"
-            )
+            throw SdkValidationError(field: "usageItems", code: "required", message: "Validation failed for 'usageItems': value is required")
         }
-        timePeriod = try container.sdkDecodeRequired(.timePeriod)
-        user = try container.sdkDecodeRequired(.user)
-        usageItems = try container.sdkDecodeRequired(.usageItems)
-        product = try container.sdkDecodeIfPresent(.product)
-        model = try container.sdkDecodeIfPresent(.model)
+        self.timePeriod = try container.sdkDecodeRequired(.timePeriod)
+        self.user = try container.sdkDecodeRequired(.user)
+        self.usageItems = try container.sdkDecodeRequired(.usageItems)
+        self.product = try container.sdkDecodeIfPresent(.product)
+        self.model = try container.sdkDecodeIfPresent(.model)
     }
 }
 
-public extension BillingPremiumRequestUsageReportUser {
-    init(
-        timePeriod: BillingPremiumRequestUsageReportUserTimePeriod,
-        user: String,
-        usageItems: [BillingPremiumRequestUsageReportUserUsageItemsItem],
-        product: String? = nil,
-        model: String? = nil
-    ) {
+extension BillingPremiumRequestUsageReportUser {
+    public init(timePeriod: BillingPremiumRequestUsageReportUserTimePeriod, user: String, usageItems: [BillingPremiumRequestUsageReportUserUsageItemsItem], product: String? = nil, model: String? = nil) {
         (self.timePeriod, self.user) = (timePeriod, user)
         (self.usageItems, self.product) = (usageItems, product)
         self.model = model
@@ -159,29 +117,23 @@ public struct BillingAiCreditUsageReportUserTimePeriod: Codable {
         case day
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension BillingAiCreditUsageReportUserTimePeriod {
-    init(from decoder: Decoder) throws {
+extension BillingAiCreditUsageReportUserTimePeriod {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.year) else {
-            throw SdkValidationError(
-                field: "year",
-                code: "required",
-                message: "Validation failed for 'year': value is required"
-            )
+            throw SdkValidationError(field: "year", code: "required", message: "Validation failed for 'year': value is required")
         }
-        year = try container.sdkDecodeRequired(.year)
-        month = try container.sdkDecodeIfPresent(.month)
-        day = try container.sdkDecodeIfPresent(.day)
+        self.year = try container.sdkDecodeRequired(.year)
+        self.month = try container.sdkDecodeIfPresent(.month)
+        self.day = try container.sdkDecodeIfPresent(.day)
     }
 }
 
-public extension BillingAiCreditUsageReportUserTimePeriod {
-    init(year: Int, month: Int? = nil, day: Int? = nil) {
+extension BillingAiCreditUsageReportUserTimePeriod {
+    public init(year: Int, month: Int? = nil, day: Int? = nil) {
         (self.year, self.month) = (year, month)
         self.day = day
     }
@@ -208,51 +160,31 @@ public struct BillingAiCreditUsageReportUser: Codable {
         case model
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension BillingAiCreditUsageReportUser {
-    init(from decoder: Decoder) throws {
+extension BillingAiCreditUsageReportUser {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.timePeriod) else {
-            throw SdkValidationError(
-                field: "timePeriod",
-                code: "required",
-                message: "Validation failed for 'timePeriod': value is required"
-            )
+            throw SdkValidationError(field: "timePeriod", code: "required", message: "Validation failed for 'timePeriod': value is required")
         }
         guard container.contains(.user) else {
-            throw SdkValidationError(
-                field: "user",
-                code: "required",
-                message: "Validation failed for 'user': value is required"
-            )
+            throw SdkValidationError(field: "user", code: "required", message: "Validation failed for 'user': value is required")
         }
         guard container.contains(.usageItems) else {
-            throw SdkValidationError(
-                field: "usageItems",
-                code: "required",
-                message: "Validation failed for 'usageItems': value is required"
-            )
+            throw SdkValidationError(field: "usageItems", code: "required", message: "Validation failed for 'usageItems': value is required")
         }
-        timePeriod = try container.sdkDecodeRequired(.timePeriod)
-        user = try container.sdkDecodeRequired(.user)
-        usageItems = try container.sdkDecodeRequired(.usageItems)
-        product = try container.sdkDecodeIfPresent(.product)
-        model = try container.sdkDecodeIfPresent(.model)
+        self.timePeriod = try container.sdkDecodeRequired(.timePeriod)
+        self.user = try container.sdkDecodeRequired(.user)
+        self.usageItems = try container.sdkDecodeRequired(.usageItems)
+        self.product = try container.sdkDecodeIfPresent(.product)
+        self.model = try container.sdkDecodeIfPresent(.model)
     }
 }
 
-public extension BillingAiCreditUsageReportUser {
-    init(
-        timePeriod: BillingAiCreditUsageReportUserTimePeriod,
-        user: String,
-        usageItems: [BillingAiCreditUsageReportUserUsageItemsItem],
-        product: String? = nil,
-        model: String? = nil
-    ) {
+extension BillingAiCreditUsageReportUser {
+    public init(timePeriod: BillingAiCreditUsageReportUserTimePeriod, user: String, usageItems: [BillingAiCreditUsageReportUserUsageItemsItem], product: String? = nil, model: String? = nil) {
         (self.timePeriod, self.user) = (timePeriod, user)
         (self.usageItems, self.product) = (usageItems, product)
         self.model = model
@@ -283,53 +215,32 @@ public struct BillingAiCreditUsageReportOrg: Codable {
         case model
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension BillingAiCreditUsageReportOrg {
-    init(from decoder: Decoder) throws {
+extension BillingAiCreditUsageReportOrg {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.timePeriod) else {
-            throw SdkValidationError(
-                field: "timePeriod",
-                code: "required",
-                message: "Validation failed for 'timePeriod': value is required"
-            )
+            throw SdkValidationError(field: "timePeriod", code: "required", message: "Validation failed for 'timePeriod': value is required")
         }
         guard container.contains(.organization) else {
-            throw SdkValidationError(
-                field: "organization",
-                code: "required",
-                message: "Validation failed for 'organization': value is required"
-            )
+            throw SdkValidationError(field: "organization", code: "required", message: "Validation failed for 'organization': value is required")
         }
         guard container.contains(.usageItems) else {
-            throw SdkValidationError(
-                field: "usageItems",
-                code: "required",
-                message: "Validation failed for 'usageItems': value is required"
-            )
+            throw SdkValidationError(field: "usageItems", code: "required", message: "Validation failed for 'usageItems': value is required")
         }
-        timePeriod = try container.sdkDecodeRequired(.timePeriod)
-        organization = try container.sdkDecodeRequired(.organization)
-        usageItems = try container.sdkDecodeRequired(.usageItems)
-        user = try container.sdkDecodeIfPresent(.user)
-        product = try container.sdkDecodeIfPresent(.product)
-        model = try container.sdkDecodeIfPresent(.model)
+        self.timePeriod = try container.sdkDecodeRequired(.timePeriod)
+        self.organization = try container.sdkDecodeRequired(.organization)
+        self.usageItems = try container.sdkDecodeRequired(.usageItems)
+        self.user = try container.sdkDecodeIfPresent(.user)
+        self.product = try container.sdkDecodeIfPresent(.product)
+        self.model = try container.sdkDecodeIfPresent(.model)
     }
 }
 
-public extension BillingAiCreditUsageReportOrg {
-    init(
-        timePeriod: BillingAiCreditUsageReportOrgTimePeriod,
-        organization: String,
-        usageItems: [BillingAiCreditUsageReportOrgUsageItemsItem],
-        user: String? = nil,
-        product: String? = nil,
-        model: String? = nil
-    ) {
+extension BillingAiCreditUsageReportOrg {
+    public init(timePeriod: BillingAiCreditUsageReportOrgTimePeriod, organization: String, usageItems: [BillingAiCreditUsageReportOrgUsageItemsItem], user: String? = nil, product: String? = nil, model: String? = nil) {
         (self.timePeriod, self.organization) = (timePeriod, organization)
         (self.usageItems, self.user) = (usageItems, user)
         (self.product, self.model) = (product, model)
@@ -375,42 +286,28 @@ public struct BillingPremiumRequestUsageReportOrgUsageItemsItem: Codable {
         case netAmount
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension BillingPremiumRequestUsageReportOrgUsageItemsItem {
-    init(from decoder: Decoder) throws {
+extension BillingPremiumRequestUsageReportOrgUsageItemsItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        product = try container.sdkDecodeRequired(.product)
-        sku = try container.sdkDecodeRequired(.sku)
-        model = try container.sdkDecodeRequired(.model)
-        unitType = try container.sdkDecodeRequired(.unitType)
-        pricePerUnit = try container.sdkDecodeRequired(.pricePerUnit)
-        grossQuantity = try container.sdkDecodeRequired(.grossQuantity)
-        grossAmount = try container.sdkDecodeRequired(.grossAmount)
-        discountQuantity = try container.sdkDecodeRequired(.discountQuantity)
-        discountAmount = try container.sdkDecodeRequired(.discountAmount)
-        netQuantity = try container.sdkDecodeRequired(.netQuantity)
-        netAmount = try container.sdkDecodeRequired(.netAmount)
+        self.product = try container.sdkDecodeRequired(.product)
+        self.sku = try container.sdkDecodeRequired(.sku)
+        self.model = try container.sdkDecodeRequired(.model)
+        self.unitType = try container.sdkDecodeRequired(.unitType)
+        self.pricePerUnit = try container.sdkDecodeRequired(.pricePerUnit)
+        self.grossQuantity = try container.sdkDecodeRequired(.grossQuantity)
+        self.grossAmount = try container.sdkDecodeRequired(.grossAmount)
+        self.discountQuantity = try container.sdkDecodeRequired(.discountQuantity)
+        self.discountAmount = try container.sdkDecodeRequired(.discountAmount)
+        self.netQuantity = try container.sdkDecodeRequired(.netQuantity)
+        self.netAmount = try container.sdkDecodeRequired(.netAmount)
     }
 }
 
-public extension BillingPremiumRequestUsageReportOrgUsageItemsItem {
-    init(
-        product: String,
-        sku: String,
-        model: String,
-        unitType: String,
-        pricePerUnit: Double,
-        grossQuantity: Double,
-        grossAmount: Double,
-        discountQuantity: Double,
-        discountAmount: Double,
-        netQuantity: Double,
-        netAmount: Double
-    ) {
+extension BillingPremiumRequestUsageReportOrgUsageItemsItem {
+    public init(product: String, sku: String, model: String, unitType: String, pricePerUnit: Double, grossQuantity: Double, grossAmount: Double, discountQuantity: Double, discountAmount: Double, netQuantity: Double, netAmount: Double) {
         (self.product, self.sku) = (product, sku)
         (self.model, self.unitType) = (model, unitType)
         (self.pricePerUnit, self.grossQuantity) = (pricePerUnit, grossQuantity)
@@ -436,20 +333,20 @@ public struct CreateBudgetBudgetBudgetAlerting: Codable {
     }
 
     init() {
-        (willAlert, alertRecipients) = (nil, nil)
+        (self.willAlert, self.alertRecipients) = (nil, nil)
     }
 }
 
-public extension CreateBudgetBudgetBudgetAlerting {
-    init(from decoder: Decoder) throws {
+extension CreateBudgetBudgetBudgetAlerting {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        willAlert = try container.sdkDecodeIfPresent(.willAlert)
-        alertRecipients = try container.sdkDecodeIfPresent(.alertRecipients)
+        self.willAlert = try container.sdkDecodeIfPresent(.willAlert)
+        self.alertRecipients = try container.sdkDecodeIfPresent(.alertRecipients)
     }
 }
 
-public extension CreateBudgetBudgetBudgetAlerting {
-    init(willAlert: Bool? = nil, alertRecipients: [String]? = nil) {
+extension CreateBudgetBudgetBudgetAlerting {
+    public init(willAlert: Bool? = nil, alertRecipients: [String]? = nil) {
         self.init()
         (self.willAlert, self.alertRecipients) = (willAlert, alertRecipients)
     }
@@ -467,35 +364,25 @@ public struct DeleteBudget: Codable {
         case id
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension DeleteBudget {
-    init(from decoder: Decoder) throws {
+extension DeleteBudget {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.message) else {
-            throw SdkValidationError(
-                field: "message",
-                code: "required",
-                message: "Validation failed for 'message': value is required"
-            )
+            throw SdkValidationError(field: "message", code: "required", message: "Validation failed for 'message': value is required")
         }
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
-        message = try container.sdkDecodeRequired(.message)
-        id = try container.sdkDecodeRequired(.id)
+        self.message = try container.sdkDecodeRequired(.message)
+        self.id = try container.sdkDecodeRequired(.id)
     }
 }
 
-public extension DeleteBudget {
-    init(message: String, id: String) {
+extension DeleteBudget {
+    public init(message: String, id: String) {
         (self.message, self.id) = (message, id)
     }
 }
@@ -515,43 +402,29 @@ public struct GetAllBudgetsEffectiveBudget: Codable {
         case consumedAmount = "consumed_amount"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension GetAllBudgetsEffectiveBudget {
-    init(from decoder: Decoder) throws {
+extension GetAllBudgetsEffectiveBudget {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
         guard container.contains(.budgetAmount) else {
-            throw SdkValidationError(
-                field: "budget_amount",
-                code: "required",
-                message: "Validation failed for 'budget_amount': value is required"
-            )
+            throw SdkValidationError(field: "budget_amount", code: "required", message: "Validation failed for 'budget_amount': value is required")
         }
         guard container.contains(.consumedAmount) else {
-            throw SdkValidationError(
-                field: "consumed_amount",
-                code: "required",
-                message: "Validation failed for 'consumed_amount': value is required"
-            )
+            throw SdkValidationError(field: "consumed_amount", code: "required", message: "Validation failed for 'consumed_amount': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
-        budgetAmount = try container.sdkDecodeRequired(.budgetAmount)
-        consumedAmount = try container.sdkDecodeRequired(.consumedAmount)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.budgetAmount = try container.sdkDecodeRequired(.budgetAmount)
+        self.consumedAmount = try container.sdkDecodeRequired(.consumedAmount)
     }
 }
 
-public extension GetAllBudgetsEffectiveBudget {
-    init(id: String, budgetAmount: Int, consumedAmount: Double) {
+extension GetAllBudgetsEffectiveBudget {
+    public init(id: String, budgetAmount: Int, consumedAmount: Double) {
         (self.id, self.budgetAmount) = (id, budgetAmount)
         self.consumedAmount = consumedAmount
     }
@@ -593,40 +466,27 @@ public struct BillingUsageSummaryReportUserUsageItemsItem: Codable {
         case netAmount
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension BillingUsageSummaryReportUserUsageItemsItem {
-    init(from decoder: Decoder) throws {
+extension BillingUsageSummaryReportUserUsageItemsItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        product = try container.sdkDecodeRequired(.product)
-        sku = try container.sdkDecodeRequired(.sku)
-        unitType = try container.sdkDecodeRequired(.unitType)
-        pricePerUnit = try container.sdkDecodeRequired(.pricePerUnit)
-        grossQuantity = try container.sdkDecodeRequired(.grossQuantity)
-        grossAmount = try container.sdkDecodeRequired(.grossAmount)
-        discountQuantity = try container.sdkDecodeRequired(.discountQuantity)
-        discountAmount = try container.sdkDecodeRequired(.discountAmount)
-        netQuantity = try container.sdkDecodeRequired(.netQuantity)
-        netAmount = try container.sdkDecodeRequired(.netAmount)
+        self.product = try container.sdkDecodeRequired(.product)
+        self.sku = try container.sdkDecodeRequired(.sku)
+        self.unitType = try container.sdkDecodeRequired(.unitType)
+        self.pricePerUnit = try container.sdkDecodeRequired(.pricePerUnit)
+        self.grossQuantity = try container.sdkDecodeRequired(.grossQuantity)
+        self.grossAmount = try container.sdkDecodeRequired(.grossAmount)
+        self.discountQuantity = try container.sdkDecodeRequired(.discountQuantity)
+        self.discountAmount = try container.sdkDecodeRequired(.discountAmount)
+        self.netQuantity = try container.sdkDecodeRequired(.netQuantity)
+        self.netAmount = try container.sdkDecodeRequired(.netAmount)
     }
 }
 
-public extension BillingUsageSummaryReportUserUsageItemsItem {
-    init(
-        product: String,
-        sku: String,
-        unitType: String,
-        pricePerUnit: Double,
-        grossQuantity: Double,
-        grossAmount: Double,
-        discountQuantity: Double,
-        discountAmount: Double,
-        netQuantity: Double,
-        netAmount: Double
-    ) {
+extension BillingUsageSummaryReportUserUsageItemsItem {
+    public init(product: String, sku: String, unitType: String, pricePerUnit: Double, grossQuantity: Double, grossAmount: Double, discountQuantity: Double, discountAmount: Double, netQuantity: Double, netAmount: Double) {
         (self.product, self.sku) = (product, sku)
         (self.unitType, self.pricePerUnit) = (unitType, pricePerUnit)
         (self.grossQuantity, self.grossAmount) = (grossQuantity, grossAmount)

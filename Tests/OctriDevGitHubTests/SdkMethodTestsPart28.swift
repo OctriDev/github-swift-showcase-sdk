@@ -6,8 +6,7 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testCodespacesGetForAuthenticatedUserCodespacesGetForAuthenticatedUser401ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testCodespacesGetForAuthenticatedUserCodespacesGetForAuthenticatedUser401ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -18,8 +17,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codespaces.getForAuthenticatedUser(
-                codespaceName: decoded("\"Example Name\"")
-            )
+            codespaceName: decoded("\"Example Name\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -72,8 +71,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testCodespacesGetPublicKeyForAuthenticatedUserCodespacesGetPublicX2db05f9b5fReachesMockAndDecodesResponse(
-    ) async throws {
+    func testCodespacesGetPublicKeyForAuthenticatedUserCodespacesGetPublicX2db05f9b5fReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -128,8 +126,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testCodespacesGetSecretForAuthenticatedUserCodespacesGetSecretForX58ae54fb54ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testCodespacesGetSecretForAuthenticatedUserCodespacesGetSecretForX58ae54fb54ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -147,8 +144,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testCodespacesListDevcontainersInRepositoryForAuthenticatedUserCoX9c57a6b345ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testCodespacesListDevcontainersInRepositoryForAuthenticatedUserCoX9c57a6b345ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -169,8 +165,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testCodespacesListDevcontainersInRepositoryForAuthenticatedUserCoX6937f3865cReachesMockAndDecodesResponse(
-    ) async throws {
+    func testCodespacesListDevcontainersInRepositoryForAuthenticatedUserCoX6937f3865cReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
             return
         }
@@ -181,11 +176,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codespaces.listDevcontainersInRepositoryForAuthenticatedUser(
-                owner: decoded("\"owner\""),
-                repo: decoded("\"repo\""),
-                perPage: decoded("30"),
-                page: decoded("1")
-            )
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            perPage: decoded("30"),
+            page: decoded("1")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -201,18 +196,17 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCodespacesListForAuthenticatedUserCodespacesListForAuthenticatedUserReachesMockAndDecodesResponse(
-    ) async throws {
+    func testCodespacesListForAuthenticatedUserCodespacesListForAuthenticatedUserReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
         do {
             _ = try await client.codespaces.listForAuthenticatedUser(
-                perPage: decoded("30"),
-                page: decoded("1"),
-                repositoryId: decoded("1")
-            )
+            perPage: decoded("30"),
+            page: decoded("1"),
+            repositoryId: decoded("1")
+        )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -221,8 +215,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCodespacesListForAuthenticatedUserCodespacesListForAuthenticatedUser401ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testCodespacesListForAuthenticatedUserCodespacesListForAuthenticatedUser401ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -233,10 +226,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codespaces.listForAuthenticatedUser(
-                perPage: decoded("30"),
-                page: decoded("1"),
-                repositoryId: decoded("1")
-            )
+            perPage: decoded("30"),
+            page: decoded("1"),
+            repositoryId: decoded("1")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -259,10 +252,10 @@ extension SdkMethodTests {
         _ = client
         do {
             _ = try await client.codespaces.listInOrganization(
-                org: decoded("\"org\""),
-                perPage: decoded("30"),
-                page: decoded("1")
-            )
+            org: decoded("\"org\""),
+            perPage: decoded("30"),
+            page: decoded("1")
+        )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -282,10 +275,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codespaces.listInOrganization(
-                org: decoded("\"org\""),
-                perPage: decoded("30"),
-                page: decoded("1")
-            )
+            org: decoded("\"org\""),
+            perPage: decoded("30"),
+            page: decoded("1")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -301,19 +294,18 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCodespacesListInRepositoryForAuthenticatedUserCodespacesListIXb34f8bd84eReachesMockAndDecodesResponse(
-    ) async throws {
+    func testCodespacesListInRepositoryForAuthenticatedUserCodespacesListIXb34f8bd84eReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
         do {
             _ = try await client.codespaces.listInRepositoryForAuthenticatedUser(
-                owner: decoded("\"owner\""),
-                repo: decoded("\"repo\""),
-                perPage: decoded("30"),
-                page: decoded("1")
-            )
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            perPage: decoded("30"),
+            page: decoded("1")
+        )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -322,8 +314,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCodespacesListInRepositoryForAuthenticatedUserCodespacesListIX6c2c2e4068ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testCodespacesListInRepositoryForAuthenticatedUserCodespacesListIX6c2c2e4068ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -334,11 +325,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codespaces.listInRepositoryForAuthenticatedUser(
-                owner: decoded("\"owner\""),
-                repo: decoded("\"repo\""),
-                perPage: decoded("30"),
-                page: decoded("1")
-            )
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            perPage: decoded("30"),
+            page: decoded("1")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -395,8 +386,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testCodespacesListRepositoriesForSecretForAuthenticatedUserCodespX1e872c5225ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testCodespacesListRepositoriesForSecretForAuthenticatedUserCodespX1e872c5225ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -414,8 +404,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testCodespacesListRepositoriesForSecretForAuthenticatedUserCodespX1662c6507aReachesMockAndDecodesResponse(
-    ) async throws {
+    func testCodespacesListRepositoriesForSecretForAuthenticatedUserCodespX1662c6507aReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -426,8 +415,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codespaces.listRepositoriesForSecretForAuthenticatedUser(
-                secretName: decoded("\"Example Name\"")
-            )
+            secretName: decoded("\"Example Name\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -443,17 +432,16 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCodespacesListSecretsForAuthenticatedUserCodespacesListSecretX510f9daa36ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testCodespacesListSecretsForAuthenticatedUserCodespacesListSecretX510f9daa36ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
         do {
             _ = try await client.codespaces.listSecretsForAuthenticatedUser(
-                perPage: decoded("30"),
-                page: decoded("1")
-            )
+            perPage: decoded("30"),
+            page: decoded("1")
+        )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -462,8 +450,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCodespacesListSelectedReposForOrgSecretCodespacesListSelectedX8184bbb6a2ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testCodespacesListSelectedReposForOrgSecretCodespacesListSelectedX8184bbb6a2ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -484,8 +471,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testCodespacesListSelectedReposForOrgSecretCodespacesListSelectedX3e2aa17c59ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testCodespacesListSelectedReposForOrgSecretCodespacesListSelectedX3e2aa17c59ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -496,11 +482,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codespaces.listSelectedReposForOrgSecret(
-                org: decoded("\"org\""),
-                secretName: decoded("\"Example Name\""),
-                page: decoded("1"),
-                perPage: decoded("30")
-            )
+            org: decoded("\"org\""),
+            secretName: decoded("\"Example Name\""),
+            page: decoded("1"),
+            perPage: decoded("30")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -516,8 +502,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCodespacesPreFlightWithRepoForAuthenticatedUserCodespacesPreFXc77d6ebf15ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testCodespacesPreFlightWithRepoForAuthenticatedUserCodespacesPreFXc77d6ebf15ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }

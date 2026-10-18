@@ -3,108 +3,9 @@
 
 import Foundation
 
-/// WebhookPullRequestAssigned domain models
-public extension WebhookPullRequestAssignedPullRequestBaseRepo {
-    init(
-        archiveUrl: String,
-        archived: Bool,
-        assigneesUrl: String,
-        blobsUrl: String,
-        branchesUrl: String,
-        cloneUrl: String,
-        collaboratorsUrl: String,
-        commentsUrl: String,
-        commitsUrl: String,
-        compareUrl: String,
-        contentsUrl: String,
-        contributorsUrl: String,
-        createdAt: WebhookPullRequestAssignedPullRequestBaseRepoCreatedAt,
-        defaultBranch: String,
-        deploymentsUrl: String,
-        description: String?,
-        downloadsUrl: String,
-        eventsUrl: String,
-        fork: Bool,
-        forks: Int,
-        forksCount: Int,
-        forksUrl: String,
-        fullName: String,
-        gitCommitsUrl: String,
-        gitRefsUrl: String,
-        gitTagsUrl: String,
-        gitUrl: String,
-        hasDownloads: Bool,
-        hasIssues: Bool,
-        hasPages: Bool,
-        hasProjects: Bool,
-        hasWiki: Bool,
-        hasDiscussions: Bool,
-        homepage: String?,
-        hooksUrl: String,
-        htmlUrl: String,
-        id: Int,
-        issueCommentUrl: String,
-        issueEventsUrl: String,
-        issuesUrl: String,
-        keysUrl: String,
-        labelsUrl: String,
-        language: String?,
-        languagesUrl: String,
-        license: WebhookPullRequestAssignedPullRequestBaseRepoLicense?,
-        mergesUrl: String,
-        milestonesUrl: String,
-        mirrorUrl: String?,
-        name: String,
-        nodeId: String,
-        notificationsUrl: String,
-        openIssues: Int,
-        openIssuesCount: Int,
-        owner: WebhookPullRequestAssignedPullRequestBaseRepoOwner?,
-        private: Bool,
-        pullsUrl: String,
-        pushedAt: WebhookPullRequestAssignedPullRequestBaseRepoPushedAt?,
-        releasesUrl: String,
-        size: Int,
-        sshUrl: String,
-        stargazersCount: Int,
-        stargazersUrl: String,
-        statusesUrl: String,
-        subscribersUrl: String,
-        subscriptionUrl: String,
-        svnUrl: String,
-        tagsUrl: String,
-        teamsUrl: String,
-        topics: [String],
-        treesUrl: String,
-        updatedAt: Date,
-        url: String,
-        visibility: WebhookPullRequestAssignedPullRequestBaseRepoVisibility,
-        watchers: Int,
-        watchersCount: Int,
-        allowAutoMerge: Bool? = nil,
-        allowForking: Bool? = nil,
-        allowMergeCommit: Bool? = nil,
-        allowRebaseMerge: Bool? = nil,
-        allowSquashMerge: Bool? = nil,
-        allowUpdateBranch: Bool? = nil,
-        deleteBranchOnMerge: Bool? = nil,
-        disabled: Bool? = nil,
-        hasPullRequests: Bool? = nil,
-        pullRequestCreationPolicy: WebhookPullRequestAssignedPullRequestBaseRepoPullRequestCreationPolicy? = nil,
-        isTemplate: Bool? = nil,
-        primaryBranch: String? = nil,
-        mergeCommitMessage: WebhookPullRequestAssignedPullRequestBaseRepoMergeCommitMessage? = nil,
-        mergeCommitTitle: WebhookPullRequestAssignedPullRequestBaseRepoMergeCommitTitle? = nil,
-        organization: String? = nil,
-        permissions: WebhookPullRequestAssignedPullRequestBaseRepoPermissions? = nil,
-        public: Bool? = nil,
-        roleName: String? = nil,
-        squashMergeCommitMessage: WebhookPullRequestAssignedPullRequestBaseRepoSquashMergeCommitMessage? = nil,
-        squashMergeCommitTitle: WebhookPullRequestAssignedPullRequestBaseRepoSquashMergeCommitTitle? = nil,
-        stargazers: Int? = nil,
-        useSquashPrTitleAsDefault: Bool? = nil,
-        webCommitSignoffRequired: Bool? = nil
-    ) throws {
+// WebhookPullRequestAssigned domain models
+extension WebhookPullRequestAssignedPullRequestBaseRepo {
+    public init(archiveUrl: String, archived: Bool, assigneesUrl: String, blobsUrl: String, branchesUrl: String, cloneUrl: String, collaboratorsUrl: String, commentsUrl: String, commitsUrl: String, compareUrl: String, contentsUrl: String, contributorsUrl: String, createdAt: WebhookPullRequestAssignedPullRequestBaseRepoCreatedAt, defaultBranch: String, deploymentsUrl: String, description: String?, downloadsUrl: String, eventsUrl: String, fork: Bool, forks: Int, forksCount: Int, forksUrl: String, fullName: String, gitCommitsUrl: String, gitRefsUrl: String, gitTagsUrl: String, gitUrl: String, hasDownloads: Bool, hasIssues: Bool, hasPages: Bool, hasProjects: Bool, hasWiki: Bool, hasDiscussions: Bool, homepage: String?, hooksUrl: String, htmlUrl: String, id: Int, issueCommentUrl: String, issueEventsUrl: String, issuesUrl: String, keysUrl: String, labelsUrl: String, language: String?, languagesUrl: String, license: WebhookPullRequestAssignedPullRequestBaseRepoLicense?, mergesUrl: String, milestonesUrl: String, mirrorUrl: String?, name: String, nodeId: String, notificationsUrl: String, openIssues: Int, openIssuesCount: Int, owner: WebhookPullRequestAssignedPullRequestBaseRepoOwner?, `private`: Bool, pullsUrl: String, pushedAt: WebhookPullRequestAssignedPullRequestBaseRepoPushedAt?, releasesUrl: String, size: Int, sshUrl: String, stargazersCount: Int, stargazersUrl: String, statusesUrl: String, subscribersUrl: String, subscriptionUrl: String, svnUrl: String, tagsUrl: String, teamsUrl: String, topics: [String], treesUrl: String, updatedAt: Date, url: String, visibility: WebhookPullRequestAssignedPullRequestBaseRepoVisibility, watchers: Int, watchersCount: Int, allowAutoMerge: Bool? = nil, allowForking: Bool? = nil, allowMergeCommit: Bool? = nil, allowRebaseMerge: Bool? = nil, allowSquashMerge: Bool? = nil, allowUpdateBranch: Bool? = nil, deleteBranchOnMerge: Bool? = nil, disabled: Bool? = nil, hasPullRequests: Bool? = nil, pullRequestCreationPolicy: WebhookPullRequestAssignedPullRequestBaseRepoPullRequestCreationPolicy? = nil, isTemplate: Bool? = nil, primaryBranch: String? = nil, mergeCommitMessage: WebhookPullRequestAssignedPullRequestBaseRepoMergeCommitMessage? = nil, mergeCommitTitle: WebhookPullRequestAssignedPullRequestBaseRepoMergeCommitTitle? = nil, organization: String? = nil, permissions: WebhookPullRequestAssignedPullRequestBaseRepoPermissions? = nil, `public`: Bool? = nil, roleName: String? = nil, squashMergeCommitMessage: WebhookPullRequestAssignedPullRequestBaseRepoSquashMergeCommitMessage? = nil, squashMergeCommitTitle: WebhookPullRequestAssignedPullRequestBaseRepoSquashMergeCommitTitle? = nil, stargazers: Int? = nil, useSquashPrTitleAsDefault: Bool? = nil, webCommitSignoffRequired: Bool? = nil) throws {
         (self.archiveUrl, self.archived) = (archiveUrl, archived)
         (self.assigneesUrl, self.blobsUrl) = (assigneesUrl, blobsUrl)
         (self.branchesUrl, self.cloneUrl) = (branchesUrl, cloneUrl)
@@ -132,7 +33,7 @@ public extension WebhookPullRequestAssignedPullRequestBaseRepo {
         (self.name, self.nodeId) = (name, nodeId)
         (self.notificationsUrl, self.openIssues) = (notificationsUrl, openIssues)
         (self.openIssuesCount, self.owner) = (openIssuesCount, owner)
-        (self.private, self.pullsUrl) = (`private`, pullsUrl)
+        (self.`private`, self.pullsUrl) = (`private`, pullsUrl)
         (self.pushedAt, self.releasesUrl) = (pushedAt, releasesUrl)
         (self.size, self.sshUrl) = (size, sshUrl)
         (self.stargazersCount, self.stargazersUrl) = (stargazersCount, stargazersUrl)
@@ -150,7 +51,7 @@ public extension WebhookPullRequestAssignedPullRequestBaseRepo {
         (self.pullRequestCreationPolicy, self.isTemplate) = (pullRequestCreationPolicy, isTemplate)
         (self.primaryBranch, self.mergeCommitMessage) = (primaryBranch, mergeCommitMessage)
         (self.mergeCommitTitle, self.organization) = (mergeCommitTitle, organization)
-        (self.permissions, self.public) = (permissions, `public`)
+        (self.permissions, self.`public`) = (permissions, `public`)
         (self.roleName, self.squashMergeCommitMessage) = (roleName, squashMergeCommitMessage)
         (self.squashMergeCommitTitle, self.stargazers) = (squashMergeCommitTitle, stargazers)
         self.useSquashPrTitleAsDefault = useSquashPrTitleAsDefault
@@ -162,18 +63,18 @@ public extension WebhookPullRequestAssignedPullRequestBaseRepo {
 
 extension WebhookPullRequestAssignedPullRequestBaseRepo {
     func sdkValidateConstraintsPart1() throws {
-        try sdkValidateUri("clone_url", cloneUrl)
-        try sdkValidateUri("contributors_url", contributorsUrl)
-        try sdkValidateUri("deployments_url", deploymentsUrl)
-        try sdkValidateUri("downloads_url", downloadsUrl)
-        try sdkValidateUri("events_url", eventsUrl)
-        try sdkValidateUri("forks_url", forksUrl)
-        try sdkValidateUri("git_url", gitUrl)
-        try sdkValidateUri("hooks_url", hooksUrl)
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateUri("languages_url", languagesUrl)
-        try sdkValidateUri("merges_url", mergesUrl)
-        if let value = mirrorUrl {
+            try sdkValidateUri("clone_url", self.cloneUrl)
+            try sdkValidateUri("contributors_url", self.contributorsUrl)
+            try sdkValidateUri("deployments_url", self.deploymentsUrl)
+            try sdkValidateUri("downloads_url", self.downloadsUrl)
+            try sdkValidateUri("events_url", self.eventsUrl)
+            try sdkValidateUri("forks_url", self.forksUrl)
+            try sdkValidateUri("git_url", self.gitUrl)
+            try sdkValidateUri("hooks_url", self.hooksUrl)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("languages_url", self.languagesUrl)
+            try sdkValidateUri("merges_url", self.mergesUrl)
+        if let value = self.mirrorUrl {
             try sdkValidateUri("mirror_url", value)
         }
     }
@@ -181,14 +82,14 @@ extension WebhookPullRequestAssignedPullRequestBaseRepo {
 
 extension WebhookPullRequestAssignedPullRequestBaseRepo {
     func sdkValidateConstraintsPart2() throws {
-        try sdkValidateUri("stargazers_url", stargazersUrl)
-        try sdkValidateUri("subscribers_url", subscribersUrl)
-        try sdkValidateUri("subscription_url", subscriptionUrl)
-        try sdkValidateUri("svn_url", svnUrl)
-        try sdkValidateUri("tags_url", tagsUrl)
-        try sdkValidateUri("teams_url", teamsUrl)
-        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
-        try sdkValidateUri("url", url)
+            try sdkValidateUri("stargazers_url", self.stargazersUrl)
+            try sdkValidateUri("subscribers_url", self.subscribersUrl)
+            try sdkValidateUri("subscription_url", self.subscriptionUrl)
+            try sdkValidateUri("svn_url", self.svnUrl)
+            try sdkValidateUri("tags_url", self.tagsUrl)
+            try sdkValidateUri("teams_url", self.teamsUrl)
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateUri("url", self.url)
     }
 }
 
@@ -264,79 +165,46 @@ public struct WebhookPullRequestAssignedPullRequestAssignee: Codable {
         case userViewType = "user_view_type"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookPullRequestAssignedPullRequestAssignee {
-    init(from decoder: Decoder) throws {
+extension WebhookPullRequestAssignedPullRequestAssignee {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
         guard container.contains(.login) else {
-            throw SdkValidationError(
-                field: "login",
-                code: "required",
-                message: "Validation failed for 'login': value is required"
-            )
+            throw SdkValidationError(field: "login", code: "required", message: "Validation failed for 'login': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
-        login = try container.sdkDecodeRequired(.login)
-        avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
-        deleted = try container.sdkDecodeIfPresent(.deleted)
-        email = try container.sdkDecodeIfPresent(.email)
-        eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
-        followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
-        followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
-        gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
-        gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        name = try container.sdkDecodeIfPresent(.name)
-        nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
-        receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
-        reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
-        siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
-        starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
-        subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
-        type = try container.sdkDecodeIfPresent(.type)
-        url = try container.sdkDecodeIfPresent(.url)
-        userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.login = try container.sdkDecodeRequired(.login)
+        self.avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
+        self.deleted = try container.sdkDecodeIfPresent(.deleted)
+        self.email = try container.sdkDecodeIfPresent(.email)
+        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        self.followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
+        self.followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
+        self.gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
+        self.gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        self.name = try container.sdkDecodeIfPresent(.name)
+        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        self.organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
+        self.receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
+        self.reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
+        self.siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
+        self.starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
+        self.subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
+        self.type = try container.sdkDecodeIfPresent(.type)
+        self.url = try container.sdkDecodeIfPresent(.url)
+        self.userViewType = try container.sdkDecodeIfPresent(.userViewType)
         try sdkValidateConstraints()
     }
 }
 
-public extension WebhookPullRequestAssignedPullRequestAssignee {
-    init(
-        id: Int,
-        login: String,
-        avatarUrl: String? = nil,
-        deleted: Bool? = nil,
-        email: String? = nil,
-        eventsUrl: String? = nil,
-        followersUrl: String? = nil,
-        followingUrl: String? = nil,
-        gistsUrl: String? = nil,
-        gravatarId: String? = nil,
-        htmlUrl: String? = nil,
-        name: String? = nil,
-        nodeId: String? = nil,
-        organizationsUrl: String? = nil,
-        receivedEventsUrl: String? = nil,
-        reposUrl: String? = nil,
-        siteAdmin: Bool? = nil,
-        starredUrl: String? = nil,
-        subscriptionsUrl: String? = nil,
-        type: WebhookPullRequestAssignedPullRequestAssigneeType? = nil,
-        url: String? = nil,
-        userViewType: String? = nil
-    ) throws {
+extension WebhookPullRequestAssignedPullRequestAssignee {
+    public init(id: Int, login: String, avatarUrl: String? = nil, deleted: Bool? = nil, email: String? = nil, eventsUrl: String? = nil, followersUrl: String? = nil, followingUrl: String? = nil, gistsUrl: String? = nil, gravatarId: String? = nil, htmlUrl: String? = nil, name: String? = nil, nodeId: String? = nil, organizationsUrl: String? = nil, receivedEventsUrl: String? = nil, reposUrl: String? = nil, siteAdmin: Bool? = nil, starredUrl: String? = nil, subscriptionsUrl: String? = nil, type: WebhookPullRequestAssignedPullRequestAssigneeType? = nil, url: String? = nil, userViewType: String? = nil) throws {
         (self.id, self.login) = (id, login)
         (self.avatarUrl, self.deleted) = (avatarUrl, deleted)
         (self.email, self.eventsUrl) = (email, eventsUrl)
@@ -354,28 +222,28 @@ public extension WebhookPullRequestAssignedPullRequestAssignee {
 
 extension WebhookPullRequestAssignedPullRequestAssignee {
     func sdkValidateConstraints() throws {
-        if let value = avatarUrl {
+        if let value = self.avatarUrl {
             try sdkValidateUri("avatar_url", value)
         }
-        if let value = followersUrl {
+        if let value = self.followersUrl {
             try sdkValidateUri("followers_url", value)
         }
-        if let value = htmlUrl {
+        if let value = self.htmlUrl {
             try sdkValidateUri("html_url", value)
         }
-        if let value = organizationsUrl {
+        if let value = self.organizationsUrl {
             try sdkValidateUri("organizations_url", value)
         }
-        if let value = receivedEventsUrl {
+        if let value = self.receivedEventsUrl {
             try sdkValidateUri("received_events_url", value)
         }
-        if let value = reposUrl {
+        if let value = self.reposUrl {
             try sdkValidateUri("repos_url", value)
         }
-        if let value = subscriptionsUrl {
+        if let value = self.subscriptionsUrl {
             try sdkValidateUri("subscriptions_url", value)
         }
-        if let value = url {
+        if let value = self.url {
             try sdkValidateUri("url", value)
         }
     }
@@ -384,22 +252,16 @@ extension WebhookPullRequestAssignedPullRequestAssignee {
 /// The default value for a squash merge commit title: - `PR_TITLE` - default to the pull request's title. -
 /// `COMMIT_OR_PR_TITLE` - default to the commit's title (if only one commit) or the pull request's title (when
 /// more than one commit).
-public struct WebhookPullRequestAssignedPullRequestBaseRepoSquashMergeCommitTitle: RawRepresentable, Hashable, Codable,
-    Sendable, SdkWireConvertible {
+public struct WebhookPullRequestAssignedPullRequestBaseRepoSquashMergeCommitTitle: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let prTitle =
-        WebhookPullRequestAssignedPullRequestBaseRepoSquashMergeCommitTitle(rawValue: "PR_TITLE")
-    public static let commitOrPrTitle =
-        WebhookPullRequestAssignedPullRequestBaseRepoSquashMergeCommitTitle(rawValue: "COMMIT_OR_PR_TITLE")
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let prTitle = WebhookPullRequestAssignedPullRequestBaseRepoSquashMergeCommitTitle(rawValue: "PR_TITLE")
+    public static let commitOrPrTitle = WebhookPullRequestAssignedPullRequestBaseRepoSquashMergeCommitTitle(rawValue: "COMMIT_OR_PR_TITLE")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -409,14 +271,10 @@ public struct WebhookPullRequestAssignedPullRequestBaseRepoSquashMergeCommitTitl
 }
 
 /// Optional enumerated value serialized in the `type` wire field.
-public struct WebhookPullRequestAssignedPullRequestMilestoneCreatorType: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct WebhookPullRequestAssignedPullRequestMilestoneCreatorType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let bot = WebhookPullRequestAssignedPullRequestMilestoneCreatorType(rawValue: "Bot")
     public static let user = WebhookPullRequestAssignedPullRequestMilestoneCreatorType(rawValue: "User")
     public static let organization = WebhookPullRequestAssignedPullRequestMilestoneCreatorType(rawValue: "Organization")
@@ -424,7 +282,7 @@ public struct WebhookPullRequestAssignedPullRequestMilestoneCreatorType: RawRepr
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -434,23 +292,17 @@ public struct WebhookPullRequestAssignedPullRequestMilestoneCreatorType: RawRepr
 }
 
 /// Optional enumerated value serialized in the `type` wire field.
-public struct WebhookPullRequestAssignedPullRequestAutoMergeEnabledByType: RawRepresentable, Hashable, Codable,
-    Sendable,
-    SdkWireConvertible {
+public struct WebhookPullRequestAssignedPullRequestAutoMergeEnabledByType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let bot = WebhookPullRequestAssignedPullRequestAutoMergeEnabledByType(rawValue: "Bot")
     public static let user = WebhookPullRequestAssignedPullRequestAutoMergeEnabledByType(rawValue: "User")
-    public static let organization =
-        WebhookPullRequestAssignedPullRequestAutoMergeEnabledByType(rawValue: "Organization")
+    public static let organization = WebhookPullRequestAssignedPullRequestAutoMergeEnabledByType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -460,21 +312,17 @@ public struct WebhookPullRequestAssignedPullRequestAutoMergeEnabledByType: RawRe
 }
 
 /// Required enumerated value serialized in the `privacy` wire field.
-public struct WebhookPullRequestAssignedPullRequestRequestedTeamsItemParentPrivacy: RawRepresentable, Hashable, Codable,
-    Sendable, SdkWireConvertible {
+public struct WebhookPullRequestAssignedPullRequestRequestedTeamsItemParentPrivacy: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let open = WebhookPullRequestAssignedPullRequestRequestedTeamsItemParentPrivacy(rawValue: "open")
     public static let closed = WebhookPullRequestAssignedPullRequestRequestedTeamsItemParentPrivacy(rawValue: "closed")
     public static let secret = WebhookPullRequestAssignedPullRequestRequestedTeamsItemParentPrivacy(rawValue: "secret")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -486,21 +334,16 @@ public struct WebhookPullRequestAssignedPullRequestRequestedTeamsItemParentPriva
 /// The default value for a merge commit title. - `PR_TITLE` - default to the pull request's title. -
 /// `MERGE_MESSAGE` - default to the classic title for a merge message (e.g., Merge pull request #123 from
 /// branch-name).
-public struct WebhookPullRequestAssignedPullRequestHeadRepoMergeCommitTitle: RawRepresentable, Hashable, Codable,
-    Sendable, SdkWireConvertible {
+public struct WebhookPullRequestAssignedPullRequestHeadRepoMergeCommitTitle: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let prTitle = WebhookPullRequestAssignedPullRequestHeadRepoMergeCommitTitle(rawValue: "PR_TITLE")
-    public static let mergeMessage =
-        WebhookPullRequestAssignedPullRequestHeadRepoMergeCommitTitle(rawValue: "MERGE_MESSAGE")
+    public static let mergeMessage = WebhookPullRequestAssignedPullRequestHeadRepoMergeCommitTitle(rawValue: "MERGE_MESSAGE")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -510,14 +353,10 @@ public struct WebhookPullRequestAssignedPullRequestHeadRepoMergeCommitTitle: Raw
 }
 
 /// Required enumerated value serialized in the `active_lock_reason` wire field.
-public struct WebhookPullRequestAssignedPullRequestActiveLockReason: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct WebhookPullRequestAssignedPullRequestActiveLockReason: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let resolved = WebhookPullRequestAssignedPullRequestActiveLockReason(rawValue: "resolved")
     public static let offTopic = WebhookPullRequestAssignedPullRequestActiveLockReason(rawValue: "off-topic")
     public static let tooHeated = WebhookPullRequestAssignedPullRequestActiveLockReason(rawValue: "too heated")
@@ -525,7 +364,7 @@ public struct WebhookPullRequestAssignedPullRequestActiveLockReason: RawRepresen
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -538,15 +377,12 @@ public struct WebhookPullRequestAssignedPullRequestActiveLockReason: RawRepresen
 public struct WebhookPullRequestAssignedAction: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let assigned = WebhookPullRequestAssignedAction(rawValue: "assigned")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -556,21 +392,17 @@ public struct WebhookPullRequestAssignedAction: RawRepresentable, Hashable, Coda
 }
 
 /// The merge method to use.
-public struct WebhookPullRequestAssignedPullRequestAutoMergeMergeMethod: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct WebhookPullRequestAssignedPullRequestAutoMergeMergeMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let merge = WebhookPullRequestAssignedPullRequestAutoMergeMergeMethod(rawValue: "merge")
     public static let squash = WebhookPullRequestAssignedPullRequestAutoMergeMergeMethod(rawValue: "squash")
     public static let rebase = WebhookPullRequestAssignedPullRequestAutoMergeMergeMethod(rawValue: "rebase")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -580,20 +412,16 @@ public struct WebhookPullRequestAssignedPullRequestAutoMergeMergeMethod: RawRepr
 }
 
 /// State of this Pull Request. Either `open` or `closed`.
-public struct WebhookPullRequestAssignedPullRequestState: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct WebhookPullRequestAssignedPullRequestState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let open = WebhookPullRequestAssignedPullRequestState(rawValue: "open")
     public static let closed = WebhookPullRequestAssignedPullRequestState(rawValue: "closed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

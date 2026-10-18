@@ -6,81 +6,30 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension CopilotMethods {
-    /// Use this endpoint to retrieve download links for the Copilot enterprise repository report for a specific day.
-    /// The report provides per-repository pull request metrics for Copilot across the enterprise, with one entry per
-    /// repository. The report contains repository-level pull request activity for the specified day, including the
-    /// Copilot Coding Agent (CCA) and Copilot Code Review (CCR) breakdowns. Only repositories that had activity on the
-    /// specified day are included. Reports are generated daily and made available for download through signed URLs with
-    /// a limited expiration time. The response includes download links to the report files, along with the specific
-    /// date of the report. The report covers a complete day for which data has been processed. Enterprise owners,
-    /// billing managers, and authorized users with fine-grained "View Enterprise Copilot Metrics" permission can
-    /// retrieve Copilot metrics reports for the enterprise. OAuth app tokens and personal access tokens (classic) need
-    /// either the `manage_billing:copilot` or `read:enterprise` scopes to use this endpoint.
+extension CopilotMethods {
+    /// Use this endpoint to retrieve download links for the Copilot enterprise repository report for a specific day. The report provides per-repository pull request metrics for Copilot across the enterprise, with one entry per repository. The report contains repository-level pull request activity for the specified day, including the Copilot Coding Agent (CCA) and Copilot Code Review (CCR) breakdowns. Only repositories that had activity on the specified day are included. Reports are generated daily and made available for download through signed URLs with a limited expiration time. The response includes download links to the report files, along with the specific date of the report. The report covers a complete day for which data has been processed. Enterprise owners, billing managers, and authorized users with fine-grained "View Enterprise Copilot Metrics" permission can retrieve Copilot metrics reports for the enterprise. OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `read:enterprise` scopes to use this endpoint.
     ///
     /// - Parameters:
     /// - enterprise: The slug version of the enterprise name.
     /// - day: The day to request data for, in `YYYY-MM-DD` format.
-    static func copilotCopilotEnterpriseReposOneDayReport(
-        config: ClientConfig,
-        enterprise: String,
-        day: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CopilotUsageMetrics1DayReport {
+    public static func copilotCopilotEnterpriseReposOneDayReport(config: ClientConfig, enterprise: String, day: String, requestOptions: RequestOptions? = nil) async throws -> CopilotUsageMetrics1DayReport {
         try sdkValidateDate("day", day)
 
-        return try await (sdkRequest(
-            "GET",
-            ["/enterprises/", sdkEncodePathSegment(sdkWireString(enterprise)), "/copilot/metrics/reports/repos-1-day"]
-                .joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("day", value: day),
-            ],
-            decoder: .json,
-            operationId: "copilotCopilotEnterpriseReposOneDayReport",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self, "500": BasicError.self]
-        )).data
+        return try (await sdkRequest("GET", ["/enterprises/", sdkEncodePathSegment(sdkWireString(enterprise)), "/copilot/metrics/reports/repos-1-day"].joined(), config: config, query: [
+            SdkQueryParameter("day", value: day),
+        ], decoder: .json, operationId: "copilotCopilotEnterpriseReposOneDayReport", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "500": BasicError.self])).data
     }
 
-    /// Use this endpoint to retrieve download links for the Copilot enterprise user-teams report for a specific day.
-    /// The report provides user-team join data for Copilot across the enterprise, with one entry per user-team pair.
-    /// The report contains user-team membership data for the specified day, enabling consumers to join with the
-    /// existing enterprise user reports to compute team-level usage metrics. Reports are generated daily and made
-    /// available for download through signed URLs with a limited expiration time. The response includes download links
-    /// to the report files, along with the specific date of the report. The report covers a complete day for which data
-    /// has been processed. Enterprise owners, billing managers, and authorized users with fine-grained "View Enterprise
-    /// Copilot Metrics" permission can retrieve Copilot metrics reports for the enterprise. OAuth app tokens and
-    /// personal access tokens (classic) need either the `manage_billing:copilot` or `read:enterprise` scopes to use
-    /// this endpoint.
+    /// Use this endpoint to retrieve download links for the Copilot enterprise user-teams report for a specific day. The report provides user-team join data for Copilot across the enterprise, with one entry per user-team pair. The report contains user-team membership data for the specified day, enabling consumers to join with the existing enterprise user reports to compute team-level usage metrics. Reports are generated daily and made available for download through signed URLs with a limited expiration time. The response includes download links to the report files, along with the specific date of the report. The report covers a complete day for which data has been processed. Enterprise owners, billing managers, and authorized users with fine-grained "View Enterprise Copilot Metrics" permission can retrieve Copilot metrics reports for the enterprise. OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `read:enterprise` scopes to use this endpoint.
     ///
     /// - Parameters:
     /// - enterprise: The slug version of the enterprise name.
     /// - day: The day to request data for, in `YYYY-MM-DD` format.
-    static func copilotCopilotEnterpriseUserTeamsOneDayReport(
-        config: ClientConfig,
-        enterprise: String,
-        day: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CopilotUsageMetrics1DayReport {
+    public static func copilotCopilotEnterpriseUserTeamsOneDayReport(config: ClientConfig, enterprise: String, day: String, requestOptions: RequestOptions? = nil) async throws -> CopilotUsageMetrics1DayReport {
         try sdkValidateDate("day", day)
 
-        return try await (sdkRequest(
-            "GET",
-            [
-                "/enterprises/",
-                sdkEncodePathSegment(sdkWireString(enterprise)),
-                "/copilot/metrics/reports/user-teams-1-day",
-            ].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("day", value: day),
-            ],
-            decoder: .json,
-            operationId: "copilotCopilotEnterpriseUserTeamsOneDayReport",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self, "500": BasicError.self]
-        )).data
+        return try (await sdkRequest("GET", ["/enterprises/", sdkEncodePathSegment(sdkWireString(enterprise)), "/copilot/metrics/reports/user-teams-1-day"].joined(), config: config, query: [
+            SdkQueryParameter("day", value: day),
+        ], decoder: .json, operationId: "copilotCopilotEnterpriseUserTeamsOneDayReport", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "500": BasicError.self])).data
     }
 }

@@ -6,13 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension SecurityAdvisoriesMethods {
-    /// Get a repository security advisory using its GitHub Security Advisory (GHSA) identifier. Anyone can access any
-    /// published security advisory on a public repository. The authenticated user can access an unpublished security
-    /// advisory from a repository if they are a security manager or administrator of that repository, or if they are a
-    /// collaborator on the security advisory. OAuth app tokens and personal access tokens (classic) need the `repo` or
-    /// `repository_advisories:read` scope to to get a published security advisory in a private repository, or any
-    /// unpublished security advisory that the authenticated user has access to.
+extension SecurityAdvisoriesMethods {
+    /// Get a repository security advisory using its GitHub Security Advisory (GHSA) identifier. Anyone can access any published security advisory on a public repository. The authenticated user can access an unpublished security advisory from a repository if they are a security manager or administrator of that repository, or if they are a collaborator on the security advisory. OAuth app tokens and personal access tokens (classic) need the `repo` or `repository_advisories:read` scope to to get a published security advisory in a private repository, or any unpublished security advisory that the authenticated user has access to.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -20,28 +15,7 @@ public extension SecurityAdvisoriesMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - ghsaId: The GHSA (GitHub Security Advisory) identifier of the advisory.
-    static func securityAdvisoriesGetRepositoryAdvisory(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        ghsaId: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> RepositoryAdvisory {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/security-advisories/",
-                sdkEncodePathSegment(sdkWireString(ghsaId)),
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "securityAdvisoriesGetRepositoryAdvisory",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self]
-        )).data
+    public static func securityAdvisoriesGetRepositoryAdvisory(config: ClientConfig, owner: String, repo: String, ghsaId: String, requestOptions: RequestOptions? = nil) async throws -> RepositoryAdvisory {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/security-advisories/", sdkEncodePathSegment(sdkWireString(ghsaId))].joined(), config: config, decoder: .json, operationId: "securityAdvisoriesGetRepositoryAdvisory", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
     }
 }

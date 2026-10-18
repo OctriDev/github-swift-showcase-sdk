@@ -3,218 +3,119 @@
 
 import Foundation
 
-/// SharedRepository domain models
-public extension Repository {
-    init(from decoder: Decoder) throws {
+// SharedRepository domain models
+extension Repository {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        name = try container.sdkDecodeRequired(.name)
-        fullName = try container.sdkDecodeRequired(.fullName)
-        license = try container.sdkDecodeNullable(.license)
-        forks = try container.sdkDecodeRequired(.forks)
-        owner = try container.sdkDecodeRequired(.owner)
-        self.private = try container.sdkDecodeRequired(.private)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        description = try container.sdkDecodeNullable(.description)
-        fork = try container.sdkDecodeRequired(.fork)
-        url = try container.sdkDecodeRequired(.url)
-        archiveUrl = try container.sdkDecodeRequired(.archiveUrl)
-        assigneesUrl = try container.sdkDecodeRequired(.assigneesUrl)
-        blobsUrl = try container.sdkDecodeRequired(.blobsUrl)
-        branchesUrl = try container.sdkDecodeRequired(.branchesUrl)
-        collaboratorsUrl = try container.sdkDecodeRequired(.collaboratorsUrl)
-        commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
-        commitsUrl = try container.sdkDecodeRequired(.commitsUrl)
-        compareUrl = try container.sdkDecodeRequired(.compareUrl)
-        contentsUrl = try container.sdkDecodeRequired(.contentsUrl)
-        contributorsUrl = try container.sdkDecodeRequired(.contributorsUrl)
-        deploymentsUrl = try container.sdkDecodeRequired(.deploymentsUrl)
-        downloadsUrl = try container.sdkDecodeRequired(.downloadsUrl)
-        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        forksUrl = try container.sdkDecodeRequired(.forksUrl)
-        gitCommitsUrl = try container.sdkDecodeRequired(.gitCommitsUrl)
-        gitRefsUrl = try container.sdkDecodeRequired(.gitRefsUrl)
-        gitTagsUrl = try container.sdkDecodeRequired(.gitTagsUrl)
-        gitUrl = try container.sdkDecodeRequired(.gitUrl)
-        issueCommentUrl = try container.sdkDecodeRequired(.issueCommentUrl)
-        issueEventsUrl = try container.sdkDecodeRequired(.issueEventsUrl)
-        issuesUrl = try container.sdkDecodeRequired(.issuesUrl)
-        keysUrl = try container.sdkDecodeRequired(.keysUrl)
-        labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
-        languagesUrl = try container.sdkDecodeRequired(.languagesUrl)
-        mergesUrl = try container.sdkDecodeRequired(.mergesUrl)
-        milestonesUrl = try container.sdkDecodeRequired(.milestonesUrl)
-        notificationsUrl = try container.sdkDecodeRequired(.notificationsUrl)
-        pullsUrl = try container.sdkDecodeRequired(.pullsUrl)
-        releasesUrl = try container.sdkDecodeRequired(.releasesUrl)
-        sshUrl = try container.sdkDecodeRequired(.sshUrl)
-        stargazersUrl = try container.sdkDecodeRequired(.stargazersUrl)
-        statusesUrl = try container.sdkDecodeRequired(.statusesUrl)
-        subscribersUrl = try container.sdkDecodeRequired(.subscribersUrl)
-        subscriptionUrl = try container.sdkDecodeRequired(.subscriptionUrl)
-        tagsUrl = try container.sdkDecodeRequired(.tagsUrl)
-        teamsUrl = try container.sdkDecodeRequired(.teamsUrl)
-        treesUrl = try container.sdkDecodeRequired(.treesUrl)
-        cloneUrl = try container.sdkDecodeRequired(.cloneUrl)
-        mirrorUrl = try container.sdkDecodeNullable(.mirrorUrl)
-        hooksUrl = try container.sdkDecodeRequired(.hooksUrl)
-        svnUrl = try container.sdkDecodeRequired(.svnUrl)
-        homepage = try container.sdkDecodeNullable(.homepage)
-        language = try container.sdkDecodeNullable(.language)
-        forksCount = try container.sdkDecodeRequired(.forksCount)
-        stargazersCount = try container.sdkDecodeRequired(.stargazersCount)
-        watchersCount = try container.sdkDecodeRequired(.watchersCount)
-        size = try container.sdkDecodeRequired(.size)
-        defaultBranch = try container.sdkDecodeRequired(.defaultBranch)
-        openIssuesCount = try container.sdkDecodeRequired(.openIssuesCount)
-        hasIssues = try container.sdkDecodeRequired(.hasIssues)
-        hasProjects = try container.sdkDecodeRequired(.hasProjects)
-        hasWiki = try container.sdkDecodeRequired(.hasWiki)
-        hasPages = try container.sdkDecodeRequired(.hasPages)
-        hasDownloads = try container.sdkDecodeRequired(.hasDownloads)
-        archived = try container.sdkDecodeRequired(.archived)
-        disabled = try container.sdkDecodeRequired(.disabled)
-        pushedAt = try container.sdkDecodeNullable(.pushedAt)
-        createdAt = try container.sdkDecodeNullable(.createdAt)
-        updatedAt = try container.sdkDecodeNullable(.updatedAt)
-        openIssues = try container.sdkDecodeRequired(.openIssues)
-        watchers = try container.sdkDecodeRequired(.watchers)
-        permissions = try container.sdkDecodeIfPresent(.permissions)
-        isTemplate = try container.sdkDecodeIfPresent(.isTemplate)
-        topics = try container.sdkDecodeIfPresent(.topics)
-        hasDiscussions = try container.sdkDecodeIfPresent(.hasDiscussions)
-        hasPullRequests = try container.sdkDecodeIfPresent(.hasPullRequests)
-        pullRequestCreationPolicy = try container.sdkDecodeIfPresent(.pullRequestCreationPolicy)
-        visibility = try container.sdkDecodeIfPresent(.visibility)
-        allowRebaseMerge = try container.sdkDecodeIfPresent(.allowRebaseMerge)
-        tempCloneToken = try container.sdkDecodeIfPresent(.tempCloneToken)
-        allowSquashMerge = try container.sdkDecodeIfPresent(.allowSquashMerge)
-        allowAutoMerge = try container.sdkDecodeIfPresent(.allowAutoMerge)
-        deleteBranchOnMerge = try container.sdkDecodeIfPresent(.deleteBranchOnMerge)
-        allowUpdateBranch = try container.sdkDecodeIfPresent(.allowUpdateBranch)
-        useSquashPrTitleAsDefault = try container.sdkDecodeIfPresent(.useSquashPrTitleAsDefault)
-        squashMergeCommitTitle = try container.sdkDecodeIfPresent(.squashMergeCommitTitle)
-        squashMergeCommitMessage = try container.sdkDecodeIfPresent(.squashMergeCommitMessage)
-        mergeCommitTitle = try container.sdkDecodeIfPresent(.mergeCommitTitle)
-        mergeCommitMessage = try container.sdkDecodeIfPresent(.mergeCommitMessage)
-        allowMergeCommit = try container.sdkDecodeIfPresent(.allowMergeCommit)
-        allowForking = try container.sdkDecodeIfPresent(.allowForking)
-        webCommitSignoffRequired = try container.sdkDecodeIfPresent(.webCommitSignoffRequired)
-        primaryBranch = try container.sdkDecodeIfPresent(.primaryBranch)
-        starredAt = try container.sdkDecodeIfPresent(.starredAt)
-        anonymousAccessEnabled = try container.sdkDecodeIfPresent(.anonymousAccessEnabled)
-        codeSearchIndexStatus = try container.sdkDecodeIfPresent(.codeSearchIndexStatus)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.fullName = try container.sdkDecodeRequired(.fullName)
+        self.license = try container.sdkDecodeNullable(.license)
+        self.forks = try container.sdkDecodeRequired(.forks)
+        self.owner = try container.sdkDecodeRequired(.owner)
+        self.`private` = try container.sdkDecodeRequired(.`private`)
+        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        self.description = try container.sdkDecodeNullable(.description)
+        self.fork = try container.sdkDecodeRequired(.fork)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.archiveUrl = try container.sdkDecodeRequired(.archiveUrl)
+        self.assigneesUrl = try container.sdkDecodeRequired(.assigneesUrl)
+        self.blobsUrl = try container.sdkDecodeRequired(.blobsUrl)
+        self.branchesUrl = try container.sdkDecodeRequired(.branchesUrl)
+        self.collaboratorsUrl = try container.sdkDecodeRequired(.collaboratorsUrl)
+        self.commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
+        self.commitsUrl = try container.sdkDecodeRequired(.commitsUrl)
+        self.compareUrl = try container.sdkDecodeRequired(.compareUrl)
+        self.contentsUrl = try container.sdkDecodeRequired(.contentsUrl)
+        self.contributorsUrl = try container.sdkDecodeRequired(.contributorsUrl)
+        self.deploymentsUrl = try container.sdkDecodeRequired(.deploymentsUrl)
+        self.downloadsUrl = try container.sdkDecodeRequired(.downloadsUrl)
+        self.eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
+        self.forksUrl = try container.sdkDecodeRequired(.forksUrl)
+        self.gitCommitsUrl = try container.sdkDecodeRequired(.gitCommitsUrl)
+        self.gitRefsUrl = try container.sdkDecodeRequired(.gitRefsUrl)
+        self.gitTagsUrl = try container.sdkDecodeRequired(.gitTagsUrl)
+        self.gitUrl = try container.sdkDecodeRequired(.gitUrl)
+        self.issueCommentUrl = try container.sdkDecodeRequired(.issueCommentUrl)
+        self.issueEventsUrl = try container.sdkDecodeRequired(.issueEventsUrl)
+        self.issuesUrl = try container.sdkDecodeRequired(.issuesUrl)
+        self.keysUrl = try container.sdkDecodeRequired(.keysUrl)
+        self.labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
+        self.languagesUrl = try container.sdkDecodeRequired(.languagesUrl)
+        self.mergesUrl = try container.sdkDecodeRequired(.mergesUrl)
+        self.milestonesUrl = try container.sdkDecodeRequired(.milestonesUrl)
+        self.notificationsUrl = try container.sdkDecodeRequired(.notificationsUrl)
+        self.pullsUrl = try container.sdkDecodeRequired(.pullsUrl)
+        self.releasesUrl = try container.sdkDecodeRequired(.releasesUrl)
+        self.sshUrl = try container.sdkDecodeRequired(.sshUrl)
+        self.stargazersUrl = try container.sdkDecodeRequired(.stargazersUrl)
+        self.statusesUrl = try container.sdkDecodeRequired(.statusesUrl)
+        self.subscribersUrl = try container.sdkDecodeRequired(.subscribersUrl)
+        self.subscriptionUrl = try container.sdkDecodeRequired(.subscriptionUrl)
+        self.tagsUrl = try container.sdkDecodeRequired(.tagsUrl)
+        self.teamsUrl = try container.sdkDecodeRequired(.teamsUrl)
+        self.treesUrl = try container.sdkDecodeRequired(.treesUrl)
+        self.cloneUrl = try container.sdkDecodeRequired(.cloneUrl)
+        self.mirrorUrl = try container.sdkDecodeNullable(.mirrorUrl)
+        self.hooksUrl = try container.sdkDecodeRequired(.hooksUrl)
+        self.svnUrl = try container.sdkDecodeRequired(.svnUrl)
+        self.homepage = try container.sdkDecodeNullable(.homepage)
+        self.language = try container.sdkDecodeNullable(.language)
+        self.forksCount = try container.sdkDecodeRequired(.forksCount)
+        self.stargazersCount = try container.sdkDecodeRequired(.stargazersCount)
+        self.watchersCount = try container.sdkDecodeRequired(.watchersCount)
+        self.size = try container.sdkDecodeRequired(.size)
+        self.defaultBranch = try container.sdkDecodeRequired(.defaultBranch)
+        self.openIssuesCount = try container.sdkDecodeRequired(.openIssuesCount)
+        self.hasIssues = try container.sdkDecodeRequired(.hasIssues)
+        self.hasProjects = try container.sdkDecodeRequired(.hasProjects)
+        self.hasWiki = try container.sdkDecodeRequired(.hasWiki)
+        self.hasPages = try container.sdkDecodeRequired(.hasPages)
+        self.hasDownloads = try container.sdkDecodeRequired(.hasDownloads)
+        self.archived = try container.sdkDecodeRequired(.archived)
+        self.disabled = try container.sdkDecodeRequired(.disabled)
+        self.pushedAt = try container.sdkDecodeNullable(.pushedAt)
+        self.createdAt = try container.sdkDecodeNullable(.createdAt)
+        self.updatedAt = try container.sdkDecodeNullable(.updatedAt)
+        self.openIssues = try container.sdkDecodeRequired(.openIssues)
+        self.watchers = try container.sdkDecodeRequired(.watchers)
+        self.permissions = try container.sdkDecodeIfPresent(.permissions)
+        self.isTemplate = try container.sdkDecodeIfPresent(.isTemplate)
+        self.topics = try container.sdkDecodeIfPresent(.topics)
+        self.hasDiscussions = try container.sdkDecodeIfPresent(.hasDiscussions)
+        self.hasPullRequests = try container.sdkDecodeIfPresent(.hasPullRequests)
+        self.pullRequestCreationPolicy = try container.sdkDecodeIfPresent(.pullRequestCreationPolicy)
+        self.visibility = try container.sdkDecodeIfPresent(.visibility)
+        self.allowRebaseMerge = try container.sdkDecodeIfPresent(.allowRebaseMerge)
+        self.tempCloneToken = try container.sdkDecodeIfPresent(.tempCloneToken)
+        self.allowSquashMerge = try container.sdkDecodeIfPresent(.allowSquashMerge)
+        self.allowAutoMerge = try container.sdkDecodeIfPresent(.allowAutoMerge)
+        self.deleteBranchOnMerge = try container.sdkDecodeIfPresent(.deleteBranchOnMerge)
+        self.allowUpdateBranch = try container.sdkDecodeIfPresent(.allowUpdateBranch)
+        self.useSquashPrTitleAsDefault = try container.sdkDecodeIfPresent(.useSquashPrTitleAsDefault)
+        self.squashMergeCommitTitle = try container.sdkDecodeIfPresent(.squashMergeCommitTitle)
+        self.squashMergeCommitMessage = try container.sdkDecodeIfPresent(.squashMergeCommitMessage)
+        self.mergeCommitTitle = try container.sdkDecodeIfPresent(.mergeCommitTitle)
+        self.mergeCommitMessage = try container.sdkDecodeIfPresent(.mergeCommitMessage)
+        self.allowMergeCommit = try container.sdkDecodeIfPresent(.allowMergeCommit)
+        self.allowForking = try container.sdkDecodeIfPresent(.allowForking)
+        self.webCommitSignoffRequired = try container.sdkDecodeIfPresent(.webCommitSignoffRequired)
+        self.primaryBranch = try container.sdkDecodeIfPresent(.primaryBranch)
+        self.starredAt = try container.sdkDecodeIfPresent(.starredAt)
+        self.anonymousAccessEnabled = try container.sdkDecodeIfPresent(.anonymousAccessEnabled)
+        self.codeSearchIndexStatus = try container.sdkDecodeIfPresent(.codeSearchIndexStatus)
         try sdkValidateConstraintsPart1()
         try sdkValidateConstraintsPart2()
     }
 }
 
-public extension Repository {
-    init(
-        id: Int,
-        nodeId: String,
-        name: String,
-        fullName: String,
-        license: NullableLicenseSimple?,
-        forks: Int,
-        owner: SimpleUser,
-        private: Bool,
-        htmlUrl: String,
-        description: String?,
-        fork: Bool,
-        url: String,
-        archiveUrl: String,
-        assigneesUrl: String,
-        blobsUrl: String,
-        branchesUrl: String,
-        collaboratorsUrl: String,
-        commentsUrl: String,
-        commitsUrl: String,
-        compareUrl: String,
-        contentsUrl: String,
-        contributorsUrl: String,
-        deploymentsUrl: String,
-        downloadsUrl: String,
-        eventsUrl: String,
-        forksUrl: String,
-        gitCommitsUrl: String,
-        gitRefsUrl: String,
-        gitTagsUrl: String,
-        gitUrl: String,
-        issueCommentUrl: String,
-        issueEventsUrl: String,
-        issuesUrl: String,
-        keysUrl: String,
-        labelsUrl: String,
-        languagesUrl: String,
-        mergesUrl: String,
-        milestonesUrl: String,
-        notificationsUrl: String,
-        pullsUrl: String,
-        releasesUrl: String,
-        sshUrl: String,
-        stargazersUrl: String,
-        statusesUrl: String,
-        subscribersUrl: String,
-        subscriptionUrl: String,
-        tagsUrl: String,
-        teamsUrl: String,
-        treesUrl: String,
-        cloneUrl: String,
-        mirrorUrl: String?,
-        hooksUrl: String,
-        svnUrl: String,
-        homepage: String?,
-        language: String?,
-        forksCount: Int,
-        stargazersCount: Int,
-        watchersCount: Int,
-        size: Int,
-        defaultBranch: String,
-        openIssuesCount: Int,
-        hasIssues: Bool,
-        hasProjects: Bool,
-        hasWiki: Bool,
-        hasPages: Bool,
-        hasDownloads: Bool,
-        archived: Bool,
-        disabled: Bool,
-        pushedAt: Date?,
-        createdAt: Date?,
-        updatedAt: Date?,
-        openIssues: Int,
-        watchers: Int,
-        permissions: RepositoryPermissions? = nil,
-        isTemplate: Bool? = nil,
-        topics: [String]? = nil,
-        hasDiscussions: Bool? = nil,
-        hasPullRequests: Bool? = nil,
-        pullRequestCreationPolicy: RepositoryPullRequestCreationPolicy? = nil,
-        visibility: String? = nil,
-        allowRebaseMerge: Bool? = nil,
-        tempCloneToken: String? = nil,
-        allowSquashMerge: Bool? = nil,
-        allowAutoMerge: Bool? = nil,
-        deleteBranchOnMerge: Bool? = nil,
-        allowUpdateBranch: Bool? = nil,
-        useSquashPrTitleAsDefault: Bool? = nil,
-        squashMergeCommitTitle: RepositorySquashMergeCommitTitle? = nil,
-        squashMergeCommitMessage: RepositorySquashMergeCommitMessage? = nil,
-        mergeCommitTitle: RepositoryMergeCommitTitle? = nil,
-        mergeCommitMessage: RepositoryMergeCommitMessage? = nil,
-        allowMergeCommit: Bool? = nil,
-        allowForking: Bool? = nil,
-        webCommitSignoffRequired: Bool? = nil,
-        primaryBranch: String? = nil,
-        starredAt: String? = nil,
-        anonymousAccessEnabled: Bool? = nil,
-        codeSearchIndexStatus: RepositoryCodeSearchIndexStatus? = nil
-    ) throws {
+extension Repository {
+    public init(id: Int, nodeId: String, name: String, fullName: String, license: NullableLicenseSimple?, forks: Int, owner: SimpleUser, `private`: Bool, htmlUrl: String, description: String?, fork: Bool, url: String, archiveUrl: String, assigneesUrl: String, blobsUrl: String, branchesUrl: String, collaboratorsUrl: String, commentsUrl: String, commitsUrl: String, compareUrl: String, contentsUrl: String, contributorsUrl: String, deploymentsUrl: String, downloadsUrl: String, eventsUrl: String, forksUrl: String, gitCommitsUrl: String, gitRefsUrl: String, gitTagsUrl: String, gitUrl: String, issueCommentUrl: String, issueEventsUrl: String, issuesUrl: String, keysUrl: String, labelsUrl: String, languagesUrl: String, mergesUrl: String, milestonesUrl: String, notificationsUrl: String, pullsUrl: String, releasesUrl: String, sshUrl: String, stargazersUrl: String, statusesUrl: String, subscribersUrl: String, subscriptionUrl: String, tagsUrl: String, teamsUrl: String, treesUrl: String, cloneUrl: String, mirrorUrl: String?, hooksUrl: String, svnUrl: String, homepage: String?, language: String?, forksCount: Int, stargazersCount: Int, watchersCount: Int, size: Int, defaultBranch: String, openIssuesCount: Int, hasIssues: Bool, hasProjects: Bool, hasWiki: Bool, hasPages: Bool, hasDownloads: Bool, archived: Bool, disabled: Bool, pushedAt: Date?, createdAt: Date?, updatedAt: Date?, openIssues: Int, watchers: Int, permissions: RepositoryPermissions? = nil, isTemplate: Bool? = nil, topics: [String]? = nil, hasDiscussions: Bool? = nil, hasPullRequests: Bool? = nil, pullRequestCreationPolicy: RepositoryPullRequestCreationPolicy? = nil, visibility: String? = nil, allowRebaseMerge: Bool? = nil, tempCloneToken: String? = nil, allowSquashMerge: Bool? = nil, allowAutoMerge: Bool? = nil, deleteBranchOnMerge: Bool? = nil, allowUpdateBranch: Bool? = nil, useSquashPrTitleAsDefault: Bool? = nil, squashMergeCommitTitle: RepositorySquashMergeCommitTitle? = nil, squashMergeCommitMessage: RepositorySquashMergeCommitMessage? = nil, mergeCommitTitle: RepositoryMergeCommitTitle? = nil, mergeCommitMessage: RepositoryMergeCommitMessage? = nil, allowMergeCommit: Bool? = nil, allowForking: Bool? = nil, webCommitSignoffRequired: Bool? = nil, primaryBranch: String? = nil, starredAt: String? = nil, anonymousAccessEnabled: Bool? = nil, codeSearchIndexStatus: RepositoryCodeSearchIndexStatus? = nil) throws {
         (self.id, self.nodeId) = (id, nodeId)
         (self.name, self.fullName) = (name, fullName)
         (self.license, self.forks) = (license, forks)
-        (self.owner, self.private) = (owner, `private`)
+        (self.owner, self.`private`) = (owner, `private`)
         (self.htmlUrl, self.description) = (htmlUrl, description)
         (self.fork, self.url) = (fork, url)
         (self.archiveUrl, self.assigneesUrl) = (archiveUrl, assigneesUrl)
@@ -269,40 +170,40 @@ public extension Repository {
 
 extension Repository {
     func sdkValidateConstraintsPart1() throws {
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateUri("url", url)
-        try sdkValidateUri("contributors_url", contributorsUrl)
-        try sdkValidateUri("deployments_url", deploymentsUrl)
-        try sdkValidateUri("downloads_url", downloadsUrl)
-        try sdkValidateUri("events_url", eventsUrl)
-        try sdkValidateUri("forks_url", forksUrl)
-        try sdkValidateUri("languages_url", languagesUrl)
-        try sdkValidateUri("merges_url", mergesUrl)
-        try sdkValidateUri("stargazers_url", stargazersUrl)
-        try sdkValidateUri("subscribers_url", subscribersUrl)
-        try sdkValidateUri("subscription_url", subscriptionUrl)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("contributors_url", self.contributorsUrl)
+            try sdkValidateUri("deployments_url", self.deploymentsUrl)
+            try sdkValidateUri("downloads_url", self.downloadsUrl)
+            try sdkValidateUri("events_url", self.eventsUrl)
+            try sdkValidateUri("forks_url", self.forksUrl)
+            try sdkValidateUri("languages_url", self.languagesUrl)
+            try sdkValidateUri("merges_url", self.mergesUrl)
+            try sdkValidateUri("stargazers_url", self.stargazersUrl)
+            try sdkValidateUri("subscribers_url", self.subscribersUrl)
+            try sdkValidateUri("subscription_url", self.subscriptionUrl)
     }
 }
 
 extension Repository {
     func sdkValidateConstraintsPart2() throws {
-        try sdkValidateUri("tags_url", tagsUrl)
-        try sdkValidateUri("teams_url", teamsUrl)
-        if let value = mirrorUrl {
+            try sdkValidateUri("tags_url", self.tagsUrl)
+            try sdkValidateUri("teams_url", self.teamsUrl)
+        if let value = self.mirrorUrl {
             try sdkValidateUri("mirror_url", value)
         }
-        try sdkValidateUri("hooks_url", hooksUrl)
-        try sdkValidateUri("svn_url", svnUrl)
-        if let value = homepage {
+            try sdkValidateUri("hooks_url", self.hooksUrl)
+            try sdkValidateUri("svn_url", self.svnUrl)
+        if let value = self.homepage {
             try sdkValidateUri("homepage", value)
         }
-        if let value = pushedAt {
+        if let value = self.pushedAt {
             try sdkValidateDateTime("pushed_at", sdkWireString(value))
         }
-        if let value = createdAt {
+        if let value = self.createdAt {
             try sdkValidateDateTime("created_at", sdkWireString(value))
         }
-        if let value = updatedAt {
+        if let value = self.updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
     }
@@ -321,20 +222,20 @@ public struct RepositoryCodeSearchIndexStatus: Codable {
     }
 
     init() {
-        (lexicalSearchOk, lexicalCommitSha) = (nil, nil)
+        (self.lexicalSearchOk, self.lexicalCommitSha) = (nil, nil)
     }
 }
 
-public extension RepositoryCodeSearchIndexStatus {
-    init(from decoder: Decoder) throws {
+extension RepositoryCodeSearchIndexStatus {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        lexicalSearchOk = try container.sdkDecodeIfPresent(.lexicalSearchOk)
-        lexicalCommitSha = try container.sdkDecodeIfPresent(.lexicalCommitSha)
+        self.lexicalSearchOk = try container.sdkDecodeIfPresent(.lexicalSearchOk)
+        self.lexicalCommitSha = try container.sdkDecodeIfPresent(.lexicalCommitSha)
     }
 }
 
-public extension RepositoryCodeSearchIndexStatus {
-    init(lexicalSearchOk: Bool? = nil, lexicalCommitSha: String? = nil) {
+extension RepositoryCodeSearchIndexStatus {
+    public init(lexicalSearchOk: Bool? = nil, lexicalCommitSha: String? = nil) {
         self.init()
         (self.lexicalSearchOk, self.lexicalCommitSha) = (lexicalSearchOk, lexicalCommitSha)
     }
@@ -358,21 +259,21 @@ public struct RepositoryRulesetConditionsRepositoryNameTargetRepositoryName: Cod
     }
 
     init() {
-        (include, exclude, protected) = (nil, nil, nil)
+        (self.include, self.exclude, self.protected) = (nil, nil, nil)
     }
 }
 
-public extension RepositoryRulesetConditionsRepositoryNameTargetRepositoryName {
-    init(from decoder: Decoder) throws {
+extension RepositoryRulesetConditionsRepositoryNameTargetRepositoryName {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        include = try container.sdkDecodeIfPresent(.include)
-        exclude = try container.sdkDecodeIfPresent(.exclude)
-        protected = try container.sdkDecodeIfPresent(.protected)
+        self.include = try container.sdkDecodeIfPresent(.include)
+        self.exclude = try container.sdkDecodeIfPresent(.exclude)
+        self.protected = try container.sdkDecodeIfPresent(.protected)
     }
 }
 
-public extension RepositoryRulesetConditionsRepositoryNameTargetRepositoryName {
-    init(include: [String]? = nil, exclude: [String]? = nil, protected: Bool? = nil) {
+extension RepositoryRulesetConditionsRepositoryNameTargetRepositoryName {
+    public init(include: [String]? = nil, exclude: [String]? = nil, protected: Bool? = nil) {
         self.init()
         (self.include, self.exclude) = (include, exclude)
         self.protected = protected
@@ -388,27 +289,21 @@ public struct RepositoryRulesetConditionsRepositoryPropertyTarget: Codable {
         case repositoryProperty = "repository_property"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension RepositoryRulesetConditionsRepositoryPropertyTarget {
-    init(from decoder: Decoder) throws {
+extension RepositoryRulesetConditionsRepositoryPropertyTarget {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.repositoryProperty) else {
-            throw SdkValidationError(
-                field: "repository_property",
-                code: "required",
-                message: "Validation failed for 'repository_property': value is required"
-            )
+            throw SdkValidationError(field: "repository_property", code: "required", message: "Validation failed for 'repository_property': value is required")
         }
-        repositoryProperty = try container.sdkDecodeRequired(.repositoryProperty)
+        self.repositoryProperty = try container.sdkDecodeRequired(.repositoryProperty)
     }
 }
 
-public extension RepositoryRulesetConditionsRepositoryPropertyTarget {
-    init(repositoryProperty: RepositoryRulesetConditionsRepositoryPropertyTargetRepositoryProperty) {
+extension RepositoryRulesetConditionsRepositoryPropertyTarget {
+    public init(repositoryProperty: RepositoryRulesetConditionsRepositoryPropertyTargetRepositoryProperty) {
         self.repositoryProperty = repositoryProperty
     }
 }
@@ -432,27 +327,22 @@ public struct RepositoryRuleViolationError: Codable {
     }
 
     init() {
-        (message, documentationUrl, status, metadata) = (nil, nil, nil, nil)
+        (self.message, self.documentationUrl, self.status, self.metadata) = (nil, nil, nil, nil)
     }
 }
 
-public extension RepositoryRuleViolationError {
-    init(from decoder: Decoder) throws {
+extension RepositoryRuleViolationError {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        message = try container.sdkDecodeIfPresent(.message)
-        documentationUrl = try container.sdkDecodeIfPresent(.documentationUrl)
-        status = try container.sdkDecodeIfPresent(.status)
-        metadata = try container.sdkDecodeIfPresent(.metadata)
+        self.message = try container.sdkDecodeIfPresent(.message)
+        self.documentationUrl = try container.sdkDecodeIfPresent(.documentationUrl)
+        self.status = try container.sdkDecodeIfPresent(.status)
+        self.metadata = try container.sdkDecodeIfPresent(.metadata)
     }
 }
 
-public extension RepositoryRuleViolationError {
-    init(
-        message: String? = nil,
-        documentationUrl: String? = nil,
-        status: String? = nil,
-        metadata: RepositoryRuleViolationErrorMetadata? = nil
-    ) {
+extension RepositoryRuleViolationError {
+    public init(message: String? = nil, documentationUrl: String? = nil, status: String? = nil, metadata: RepositoryRuleViolationErrorMetadata? = nil) {
         self.init()
         (self.message, self.documentationUrl) = (message, documentationUrl)
         (self.status, self.metadata) = (status, metadata)
@@ -468,27 +358,21 @@ public struct RepositoryRulesetConditionsRepositoryNameTarget: Codable {
         case repositoryName = "repository_name"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension RepositoryRulesetConditionsRepositoryNameTarget {
-    init(from decoder: Decoder) throws {
+extension RepositoryRulesetConditionsRepositoryNameTarget {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.repositoryName) else {
-            throw SdkValidationError(
-                field: "repository_name",
-                code: "required",
-                message: "Validation failed for 'repository_name': value is required"
-            )
+            throw SdkValidationError(field: "repository_name", code: "required", message: "Validation failed for 'repository_name': value is required")
         }
-        repositoryName = try container.sdkDecodeRequired(.repositoryName)
+        self.repositoryName = try container.sdkDecodeRequired(.repositoryName)
     }
 }
 
-public extension RepositoryRulesetConditionsRepositoryNameTarget {
-    init(repositoryName: RepositoryRulesetConditionsRepositoryNameTargetRepositoryName) {
+extension RepositoryRulesetConditionsRepositoryNameTarget {
+    public init(repositoryName: RepositoryRulesetConditionsRepositoryNameTargetRepositoryName) {
         self.repositoryName = repositoryName
     }
 }
@@ -508,47 +392,32 @@ public struct RepositoryRulesetConditionsRepositoryPropertySpec: Codable {
         case source
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension RepositoryRulesetConditionsRepositoryPropertySpec {
-    init(from decoder: Decoder) throws {
+extension RepositoryRulesetConditionsRepositoryPropertySpec {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.propertyValues) else {
-            throw SdkValidationError(
-                field: "property_values",
-                code: "required",
-                message: "Validation failed for 'property_values': value is required"
-            )
+            throw SdkValidationError(field: "property_values", code: "required", message: "Validation failed for 'property_values': value is required")
         }
-        name = try container.sdkDecodeRequired(.name)
-        propertyValues = try container.sdkDecodeRequired(.propertyValues)
-        source = try container.sdkDecodeIfPresent(.source)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.propertyValues = try container.sdkDecodeRequired(.propertyValues)
+        self.source = try container.sdkDecodeIfPresent(.source)
     }
 }
 
-public extension RepositoryRulesetConditionsRepositoryPropertySpec {
-    init(
-        name: String,
-        propertyValues: [String],
-        source: RepositoryRulesetConditionsRepositoryPropertySpecSource? = nil
-    ) {
+extension RepositoryRulesetConditionsRepositoryPropertySpec {
+    public init(name: String, propertyValues: [String], source: RepositoryRulesetConditionsRepositoryPropertySpecSource? = nil) {
         (self.name, self.propertyValues) = (name, propertyValues)
         self.source = source
     }
 }
 
-public typealias RepositoryRuleViolationErrorMetadataSecretScanningBypassPlaceholdersList =
-    [RepositoryRuleViolationErrorMetadataSecretScanningBypassPlaceholdersItem]
+public typealias RepositoryRuleViolationErrorMetadataSecretScanningBypassPlaceholdersList = [RepositoryRuleViolationErrorMetadataSecretScanningBypassPlaceholdersItem]
 
 /// Optional object value serialized in the `secret_scanning` wire field.
 public struct RepositoryRuleViolationErrorMetadataSecretScanning: Codable {
@@ -560,39 +429,35 @@ public struct RepositoryRuleViolationErrorMetadataSecretScanning: Codable {
     }
 
     init() {
-        bypassPlaceholders = nil
+        self.bypassPlaceholders = nil
     }
 }
 
-public extension RepositoryRuleViolationErrorMetadataSecretScanning {
-    init(from decoder: Decoder) throws {
+extension RepositoryRuleViolationErrorMetadataSecretScanning {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        bypassPlaceholders = try container.sdkDecodeIfPresent(.bypassPlaceholders)
+        self.bypassPlaceholders = try container.sdkDecodeIfPresent(.bypassPlaceholders)
     }
 }
 
-public extension RepositoryRuleViolationErrorMetadataSecretScanning {
-    init(bypassPlaceholders: RepositoryRuleViolationErrorMetadataSecretScanningBypassPlaceholdersList? = nil) {
+extension RepositoryRuleViolationErrorMetadataSecretScanning {
+    public init(bypassPlaceholders: RepositoryRuleViolationErrorMetadataSecretScanningBypassPlaceholdersList? = nil) {
         self.init()
         self.bypassPlaceholders = bypassPlaceholders
     }
 }
 
 /// The source of the repository property. Defaults to 'custom' if not specified.
-public struct RepositoryRulesetConditionsRepositoryPropertySpecSource: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct RepositoryRulesetConditionsRepositoryPropertySpecSource: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let custom = RepositoryRulesetConditionsRepositoryPropertySpecSource(rawValue: "custom")
     public static let system = RepositoryRulesetConditionsRepositoryPropertySpecSource(rawValue: "system")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -606,17 +471,14 @@ public struct RepositoryRulesetConditionsRepositoryPropertySpecSource: RawRepres
 public struct RepositoryMergeCommitMessage: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let prBody = RepositoryMergeCommitMessage(rawValue: "PR_BODY")
     public static let prTitle = RepositoryMergeCommitMessage(rawValue: "PR_TITLE")
     public static let blank = RepositoryMergeCommitMessage(rawValue: "BLANK")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

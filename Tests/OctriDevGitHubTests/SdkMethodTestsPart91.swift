@@ -17,8 +17,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.users.unfollow(
-                username: decoded("\"Example Name\"")
-            )
+            username: decoded("\"Example Name\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -81,8 +81,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.users.updateAuthenticated(
-                options: options
-            )
+            options: options
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)

@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Copilot domain models
+// Copilot domain models
 public typealias CopilotOrganizationContentExclusionDetails = [String: [String]]
 
 public indirect enum CopilotSeatDetailsAssigningTeam {
@@ -12,26 +12,18 @@ public indirect enum CopilotSeatDetailsAssigningTeam {
 }
 
 extension CopilotSeatDetailsAssigningTeam: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let raw = try? container.decode(JSONValue.self) {
-            if let value = Self.decodeLossless1(from: container, raw) {
-                self = value; return
-            }
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
         }
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for CopilotSeatDetailsAssigningTeam"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for CopilotSeatDetailsAssigningTeam")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
@@ -49,12 +41,8 @@ extension CopilotSeatDetailsAssigningTeam {
 
 extension CopilotSeatDetailsAssigningTeam {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(Team.self) {
-            return .team(value)
-        }
-        if let value = try? container.decode(EnterpriseTeam.self) {
-            return .enterpriseTeam(value)
-        }
+        if let value = try? container.decode(Team.self) { return .team(value) }
+        if let value = try? container.decode(EnterpriseTeam.self) { return .enterpriseTeam(value) }
         return nil
     }
 }
@@ -84,49 +72,35 @@ public struct CopilotUsageMetrics28DayReport: Codable {
         case reportEndDay = "report_end_day"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension CopilotUsageMetrics28DayReport {
-    init(from decoder: Decoder) throws {
+extension CopilotUsageMetrics28DayReport {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.downloadLinks) else {
-            throw SdkValidationError(
-                field: "download_links",
-                code: "required",
-                message: "Validation failed for 'download_links': value is required"
-            )
+            throw SdkValidationError(field: "download_links", code: "required", message: "Validation failed for 'download_links': value is required")
         }
         guard container.contains(.reportStartDay) else {
-            throw SdkValidationError(
-                field: "report_start_day",
-                code: "required",
-                message: "Validation failed for 'report_start_day': value is required"
-            )
+            throw SdkValidationError(field: "report_start_day", code: "required", message: "Validation failed for 'report_start_day': value is required")
         }
         guard container.contains(.reportEndDay) else {
-            throw SdkValidationError(
-                field: "report_end_day",
-                code: "required",
-                message: "Validation failed for 'report_end_day': value is required"
-            )
+            throw SdkValidationError(field: "report_end_day", code: "required", message: "Validation failed for 'report_end_day': value is required")
         }
-        downloadLinks = try container.sdkDecodeRequired(.downloadLinks)
-        reportStartDay = try container.sdkDecodeRequired(.reportStartDay)
-        reportEndDay = try container.sdkDecodeRequired(.reportEndDay)
-        try sdkValidateDate("report_start_day", reportStartDay)
-        try sdkValidateDate("report_end_day", reportEndDay)
+        self.downloadLinks = try container.sdkDecodeRequired(.downloadLinks)
+        self.reportStartDay = try container.sdkDecodeRequired(.reportStartDay)
+        self.reportEndDay = try container.sdkDecodeRequired(.reportEndDay)
+            try sdkValidateDate("report_start_day", self.reportStartDay)
+            try sdkValidateDate("report_end_day", self.reportEndDay)
     }
 }
 
-public extension CopilotUsageMetrics28DayReport {
-    init(downloadLinks: [String], reportStartDay: String, reportEndDay: String) throws {
+extension CopilotUsageMetrics28DayReport {
+    public init(downloadLinks: [String], reportStartDay: String, reportEndDay: String) throws {
         (self.downloadLinks, self.reportStartDay) = (downloadLinks, reportStartDay)
         self.reportEndDay = reportEndDay
-        try sdkValidateDate("report_start_day", self.reportStartDay)
-        try sdkValidateDate("report_end_day", self.reportEndDay)
+            try sdkValidateDate("report_start_day", self.reportStartDay)
+            try sdkValidateDate("report_end_day", self.reportEndDay)
     }
 }
 
@@ -161,56 +135,34 @@ public struct CopilotOrganizationDetails: Codable {
         case planType = "plan_type"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension CopilotOrganizationDetails {
-    init(from decoder: Decoder) throws {
+extension CopilotOrganizationDetails {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.seatBreakdown) else {
-            throw SdkValidationError(
-                field: "seat_breakdown",
-                code: "required",
-                message: "Validation failed for 'seat_breakdown': value is required"
-            )
+            throw SdkValidationError(field: "seat_breakdown", code: "required", message: "Validation failed for 'seat_breakdown': value is required")
         }
         guard container.contains(.publicCodeSuggestions) else {
-            throw SdkValidationError(
-                field: "public_code_suggestions",
-                code: "required",
-                message: "Validation failed for 'public_code_suggestions': value is required"
-            )
+            throw SdkValidationError(field: "public_code_suggestions", code: "required", message: "Validation failed for 'public_code_suggestions': value is required")
         }
         guard container.contains(.seatManagementSetting) else {
-            throw SdkValidationError(
-                field: "seat_management_setting",
-                code: "required",
-                message: "Validation failed for 'seat_management_setting': value is required"
-            )
+            throw SdkValidationError(field: "seat_management_setting", code: "required", message: "Validation failed for 'seat_management_setting': value is required")
         }
-        seatBreakdown = try container.sdkDecodeRequired(.seatBreakdown)
-        publicCodeSuggestions = try container.sdkDecodeRequired(.publicCodeSuggestions)
-        seatManagementSetting = try container.sdkDecodeRequired(.seatManagementSetting)
-        ideChat = try container.sdkDecodeIfPresent(.ideChat)
-        platformChat = try container.sdkDecodeIfPresent(.platformChat)
-        cli = try container.sdkDecodeIfPresent(.cli)
-        planType = try container.sdkDecodeIfPresent(.planType)
+        self.seatBreakdown = try container.sdkDecodeRequired(.seatBreakdown)
+        self.publicCodeSuggestions = try container.sdkDecodeRequired(.publicCodeSuggestions)
+        self.seatManagementSetting = try container.sdkDecodeRequired(.seatManagementSetting)
+        self.ideChat = try container.sdkDecodeIfPresent(.ideChat)
+        self.platformChat = try container.sdkDecodeIfPresent(.platformChat)
+        self.cli = try container.sdkDecodeIfPresent(.cli)
+        self.planType = try container.sdkDecodeIfPresent(.planType)
         additionalProperties = try decoder.sdkAdditionalProperties(besides: CodingKeys.self)
     }
 }
 
-public extension CopilotOrganizationDetails {
-    init(
-        seatBreakdown: CopilotOrganizationSeatBreakdown,
-        publicCodeSuggestions: CopilotOrganizationDetailsPublicCodeSuggestions,
-        seatManagementSetting: CopilotOrganizationDetailsSeatManagementSetting,
-        ideChat: CopilotOrganizationDetailsIdeChat? = nil,
-        platformChat: CopilotOrganizationDetailsPlatformChat? = nil,
-        cli: CopilotOrganizationDetailsCli? = nil,
-        planType: CopilotOrganizationDetailsPlanType? = nil
-    ) {
+extension CopilotOrganizationDetails {
+    public init(seatBreakdown: CopilotOrganizationSeatBreakdown, publicCodeSuggestions: CopilotOrganizationDetailsPublicCodeSuggestions, seatManagementSetting: CopilotOrganizationDetailsSeatManagementSetting, ideChat: CopilotOrganizationDetailsIdeChat? = nil, platformChat: CopilotOrganizationDetailsPlatformChat? = nil, cli: CopilotOrganizationDetailsCli? = nil, planType: CopilotOrganizationDetailsPlanType? = nil) {
         (self.seatBreakdown, self.publicCodeSuggestions) = (seatBreakdown, publicCodeSuggestions)
         (self.seatManagementSetting, self.ideChat) = (seatManagementSetting, ideChat)
         (self.platformChat, self.cli) = (platformChat, cli)
@@ -218,8 +170,8 @@ public extension CopilotOrganizationDetails {
     }
 }
 
-public extension CopilotOrganizationDetails {
-    func encode(to encoder: Encoder) throws {
+extension CopilotOrganizationDetails {
+    public func encode(to encoder: Encoder) throws {
         try encoder.sdkEncodeAdditionalProperties(additionalProperties)
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(seatBreakdown, forKey: .seatBreakdown)
@@ -286,52 +238,35 @@ public struct EnterpriseTeam: Codable {
         case notificationSetting = "notification_setting"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension EnterpriseTeam {
-    init(from decoder: Decoder) throws {
+extension EnterpriseTeam {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeRequired(.id)
-        name = try container.sdkDecodeRequired(.name)
-        slug = try container.sdkDecodeRequired(.slug)
-        url = try container.sdkDecodeRequired(.url)
-        groupId = try container.sdkDecodeNullable(.groupId)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        membersUrl = try container.sdkDecodeRequired(.membersUrl)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        description = try container.sdkDecodeIfPresent(.description)
-        syncToOrganizations = try container.sdkDecodeIfPresent(.syncToOrganizations)
-        organizationSelectionType = try container.sdkDecodeIfPresent(.organizationSelectionType)
-        groupName = try container.sdkDecodeIfPresent(.groupName)
-        notificationSetting = try container.sdkDecodeIfPresent(.notificationSetting)
-        try sdkValidateUri("url", url)
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+        self.id = try container.sdkDecodeRequired(.id)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.slug = try container.sdkDecodeRequired(.slug)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.groupId = try container.sdkDecodeNullable(.groupId)
+        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        self.membersUrl = try container.sdkDecodeRequired(.membersUrl)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        self.description = try container.sdkDecodeIfPresent(.description)
+        self.syncToOrganizations = try container.sdkDecodeIfPresent(.syncToOrganizations)
+        self.organizationSelectionType = try container.sdkDecodeIfPresent(.organizationSelectionType)
+        self.groupName = try container.sdkDecodeIfPresent(.groupName)
+        self.notificationSetting = try container.sdkDecodeIfPresent(.notificationSetting)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
     }
 }
 
-public extension EnterpriseTeam {
-    init(
-        id: Int,
-        name: String,
-        slug: String,
-        url: String,
-        groupId: String?,
-        htmlUrl: String,
-        membersUrl: String,
-        createdAt: Date,
-        updatedAt: Date,
-        description: String? = nil,
-        syncToOrganizations: String? = nil,
-        organizationSelectionType: String? = nil,
-        groupName: String? = nil,
-        notificationSetting: EnterpriseTeamNotificationSetting? = nil
-    ) throws {
+extension EnterpriseTeam {
+    public init(id: Int, name: String, slug: String, url: String, groupId: String?, htmlUrl: String, membersUrl: String, createdAt: Date, updatedAt: Date, description: String? = nil, syncToOrganizations: String? = nil, organizationSelectionType: String? = nil, groupName: String? = nil, notificationSetting: EnterpriseTeamNotificationSetting? = nil) throws {
         (self.id, self.name) = (id, name)
         (self.slug, self.url) = (slug, url)
         (self.groupId, self.htmlUrl) = (groupId, htmlUrl)
@@ -340,10 +275,10 @@ public extension EnterpriseTeam {
         self.syncToOrganizations = syncToOrganizations
         (self.organizationSelectionType, self.groupName) = (organizationSelectionType, groupName)
         self.notificationSetting = notificationSetting
-        try sdkValidateUri("url", self.url)
-        try sdkValidateUri("html_url", self.htmlUrl)
-        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
     }
 }
 
@@ -372,32 +307,25 @@ public struct CopilotOrganizationSeatBreakdown: Codable {
     }
 
     init() {
-        (total, addedThisCycle, pendingCancellation, pendingInvitation, activeThisCycle) = (nil, nil, nil, nil, nil)
-        inactiveThisCycle = nil
+        (self.total, self.addedThisCycle, self.pendingCancellation, self.pendingInvitation, self.activeThisCycle) = (nil, nil, nil, nil, nil)
+        self.inactiveThisCycle = nil
     }
 }
 
-public extension CopilotOrganizationSeatBreakdown {
-    init(from decoder: Decoder) throws {
+extension CopilotOrganizationSeatBreakdown {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        total = try container.sdkDecodeIfPresent(.total)
-        addedThisCycle = try container.sdkDecodeIfPresent(.addedThisCycle)
-        pendingCancellation = try container.sdkDecodeIfPresent(.pendingCancellation)
-        pendingInvitation = try container.sdkDecodeIfPresent(.pendingInvitation)
-        activeThisCycle = try container.sdkDecodeIfPresent(.activeThisCycle)
-        inactiveThisCycle = try container.sdkDecodeIfPresent(.inactiveThisCycle)
+        self.total = try container.sdkDecodeIfPresent(.total)
+        self.addedThisCycle = try container.sdkDecodeIfPresent(.addedThisCycle)
+        self.pendingCancellation = try container.sdkDecodeIfPresent(.pendingCancellation)
+        self.pendingInvitation = try container.sdkDecodeIfPresent(.pendingInvitation)
+        self.activeThisCycle = try container.sdkDecodeIfPresent(.activeThisCycle)
+        self.inactiveThisCycle = try container.sdkDecodeIfPresent(.inactiveThisCycle)
     }
 }
 
-public extension CopilotOrganizationSeatBreakdown {
-    init(
-        total: Int? = nil,
-        addedThisCycle: Int? = nil,
-        pendingCancellation: Int? = nil,
-        pendingInvitation: Int? = nil,
-        activeThisCycle: Int? = nil,
-        inactiveThisCycle: Int? = nil
-    ) {
+extension CopilotOrganizationSeatBreakdown {
+    public init(total: Int? = nil, addedThisCycle: Int? = nil, pendingCancellation: Int? = nil, pendingInvitation: Int? = nil, activeThisCycle: Int? = nil, inactiveThisCycle: Int? = nil) {
         self.init()
         (self.total, self.addedThisCycle) = (total, addedThisCycle)
         (self.pendingCancellation, self.pendingInvitation) = (pendingCancellation, pendingInvitation)
@@ -417,38 +345,28 @@ public struct CopilotUsageMetrics1DayReport: Codable {
         case reportDay = "report_day"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension CopilotUsageMetrics1DayReport {
-    init(from decoder: Decoder) throws {
+extension CopilotUsageMetrics1DayReport {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.downloadLinks) else {
-            throw SdkValidationError(
-                field: "download_links",
-                code: "required",
-                message: "Validation failed for 'download_links': value is required"
-            )
+            throw SdkValidationError(field: "download_links", code: "required", message: "Validation failed for 'download_links': value is required")
         }
         guard container.contains(.reportDay) else {
-            throw SdkValidationError(
-                field: "report_day",
-                code: "required",
-                message: "Validation failed for 'report_day': value is required"
-            )
+            throw SdkValidationError(field: "report_day", code: "required", message: "Validation failed for 'report_day': value is required")
         }
-        downloadLinks = try container.sdkDecodeRequired(.downloadLinks)
-        reportDay = try container.sdkDecodeRequired(.reportDay)
-        try sdkValidateDate("report_day", reportDay)
+        self.downloadLinks = try container.sdkDecodeRequired(.downloadLinks)
+        self.reportDay = try container.sdkDecodeRequired(.reportDay)
+            try sdkValidateDate("report_day", self.reportDay)
     }
 }
 
-public extension CopilotUsageMetrics1DayReport {
-    init(downloadLinks: [String], reportDay: String) throws {
+extension CopilotUsageMetrics1DayReport {
+    public init(downloadLinks: [String], reportDay: String) throws {
         (self.downloadLinks, self.reportDay) = (downloadLinks, reportDay)
-        try sdkValidateDate("report_day", self.reportDay)
+            try sdkValidateDate("report_day", self.reportDay)
     }
 }
 
@@ -506,56 +424,41 @@ public struct NullableOrganizationSimple: Codable {
         case description
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension NullableOrganizationSimple {
-    init(from decoder: Decoder) throws {
+extension NullableOrganizationSimple {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        login = try container.sdkDecodeRequired(.login)
-        id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        url = try container.sdkDecodeRequired(.url)
-        reposUrl = try container.sdkDecodeRequired(.reposUrl)
-        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        hooksUrl = try container.sdkDecodeRequired(.hooksUrl)
-        issuesUrl = try container.sdkDecodeRequired(.issuesUrl)
-        membersUrl = try container.sdkDecodeRequired(.membersUrl)
-        publicMembersUrl = try container.sdkDecodeRequired(.publicMembersUrl)
-        avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
-        description = try container.sdkDecodeNullable(.description)
-        try sdkValidateUri("url", url)
-        try sdkValidateUri("repos_url", reposUrl)
-        try sdkValidateUri("events_url", eventsUrl)
+        self.login = try container.sdkDecodeRequired(.login)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.reposUrl = try container.sdkDecodeRequired(.reposUrl)
+        self.eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
+        self.hooksUrl = try container.sdkDecodeRequired(.hooksUrl)
+        self.issuesUrl = try container.sdkDecodeRequired(.issuesUrl)
+        self.membersUrl = try container.sdkDecodeRequired(.membersUrl)
+        self.publicMembersUrl = try container.sdkDecodeRequired(.publicMembersUrl)
+        self.avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
+        self.description = try container.sdkDecodeNullable(.description)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("repos_url", self.reposUrl)
+            try sdkValidateUri("events_url", self.eventsUrl)
     }
 }
 
-public extension NullableOrganizationSimple {
-    init(
-        login: String,
-        id: Int,
-        nodeId: String,
-        url: String,
-        reposUrl: String,
-        eventsUrl: String,
-        hooksUrl: String,
-        issuesUrl: String,
-        membersUrl: String,
-        publicMembersUrl: String,
-        avatarUrl: String,
-        description: String?
-    ) throws {
+extension NullableOrganizationSimple {
+    public init(login: String, id: Int, nodeId: String, url: String, reposUrl: String, eventsUrl: String, hooksUrl: String, issuesUrl: String, membersUrl: String, publicMembersUrl: String, avatarUrl: String, description: String?) throws {
         (self.login, self.id) = (login, id)
         (self.nodeId, self.url) = (nodeId, url)
         (self.reposUrl, self.eventsUrl) = (reposUrl, eventsUrl)
         (self.hooksUrl, self.issuesUrl) = (hooksUrl, issuesUrl)
         (self.membersUrl, self.publicMembersUrl) = (membersUrl, publicMembersUrl)
         (self.avatarUrl, self.description) = (avatarUrl, description)
-        try sdkValidateUri("url", self.url)
-        try sdkValidateUri("repos_url", self.reposUrl)
-        try sdkValidateUri("events_url", self.eventsUrl)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("repos_url", self.reposUrl)
+            try sdkValidateUri("events_url", self.eventsUrl)
     }
 }
 
@@ -599,7 +502,5 @@ public struct CopilotSeatDetails: Codable {
         case planType = "plan_type"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }

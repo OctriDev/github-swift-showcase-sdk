@@ -6,37 +6,14 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension MigrationsMethods {
-    /// Unlocks a repository. You can lock repositories when you [start a user
-    /// migration](https://docs.github.com/rest/migrations/users#start-a-user-migration). Once the migration is complete
-    /// you can unlock each repository to begin using it again or [delete the
-    /// repository](https://docs.github.com/rest/repos/repos#delete-a-repository) if you no longer need the source data.
-    /// Returns a status of `404 Not Found` if the repository is not locked.
+extension MigrationsMethods {
+    /// Unlocks a repository. You can lock repositories when you [start a user migration](https://docs.github.com/rest/migrations/users#start-a-user-migration). Once the migration is complete you can unlock each repository to begin using it again or [delete the repository](https://docs.github.com/rest/repos/repos#delete-a-repository) if you no longer need the source data. Returns a status of `404 Not Found` if the repository is not locked.
     ///
     /// - Parameters:
     /// - migrationId: The unique identifier of the migration.
     /// - repoName: repo_name parameter
-    static func migrationsUnlockRepoForAuthenticatedUser(
-        config: ClientConfig,
-        migrationId: Int,
-        repoName: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "DELETE",
-            [
-                "/user/migrations/",
-                sdkEncodePathSegment(sdkWireString(migrationId)),
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(repoName)),
-                "/lock",
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "migrationsUnlockRepoForAuthenticatedUser",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self]
-        )).data
+    public static func migrationsUnlockRepoForAuthenticatedUser(config: ClientConfig, migrationId: Int, repoName: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("DELETE", ["/user/migrations/", sdkEncodePathSegment(sdkWireString(migrationId)), "/repos/", sdkEncodePathSegment(sdkWireString(repoName)), "/lock"].joined(), config: config, decoder: .empty, operationId: "migrationsUnlockRepoForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
     }
 
     /// Lists all the repositories for this user migration.
@@ -51,25 +28,10 @@ public extension MigrationsMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    static func migrationsListReposForAuthenticatedUser(
-        config: ClientConfig,
-        migrationId: Int,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [MinimalRepository] {
-        try await (sdkRequest(
-            "GET",
-            ["/user/migrations/", sdkEncodePathSegment(sdkWireString(migrationId)), "/repositories"].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("page", value: page),
-            ],
-            decoder: .json,
-            operationId: "migrationsListReposForAuthenticatedUser",
-            options: requestOptions,
-            errors: ["404": BasicError.self]
-        )).data
+    public static func migrationsListReposForAuthenticatedUser(config: ClientConfig, migrationId: Int, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [MinimalRepository] {
+        return try (await sdkRequest("GET", ["/user/migrations/", sdkEncodePathSegment(sdkWireString(migrationId)), "/repositories"].joined(), config: config, query: [
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("page", value: page),
+        ], decoder: .json, operationId: "migrationsListReposForAuthenticatedUser", options: requestOptions, errors: ["404": BasicError.self])).data
     }
 }

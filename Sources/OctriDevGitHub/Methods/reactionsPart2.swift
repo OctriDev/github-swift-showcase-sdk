@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ReactionsMethods {
+extension ReactionsMethods {
     /// List the reactions to a [commit comment](https://docs.github.com/rest/commits/comments#get-a-commit-comment).
     ///
     /// - Parameters:
@@ -26,37 +26,11 @@ public extension ReactionsMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    static func reactionsListForCommitComment(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        commentId: Int,
-        content: ReactionsListForCommitCommentParameter? = nil,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [Reaction] {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/comments/",
-                sdkEncodePathSegment(sdkWireString(commentId)),
-                "/reactions",
-            ].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("content", value: content),
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("page", value: page),
-            ],
-            decoder: .json,
-            operationId: "reactionsListForCommitComment",
-            options: requestOptions,
-            errors: ["404": BasicError.self]
-        )).data
+    public static func reactionsListForCommitComment(config: ClientConfig, owner: String, repo: String, commentId: Int, content: ReactionsListForCommitCommentParameter? = nil, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [Reaction] {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/comments/", sdkEncodePathSegment(sdkWireString(commentId)), "/reactions"].joined(), config: config, query: [
+            SdkQueryParameter("content", value: content),
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("page", value: page),
+        ], decoder: .json, operationId: "reactionsListForCommitComment", options: requestOptions, errors: ["404": BasicError.self])).data
     }
 }

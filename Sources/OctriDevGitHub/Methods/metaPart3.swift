@@ -6,19 +6,11 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension MetaMethods {
-    /// Returns a random sentence from the Zen of GitHub. Use it when you want a brief, randomly selected phrase; the
-    /// response is plain text.
+extension MetaMethods {
+    /// Returns a random sentence from the Zen of GitHub. Use it when you want a brief, randomly selected phrase; the response is plain text.
     ///
     /// Get a random sentence from the Zen of GitHub
-    static func metaGetZen(config: ClientConfig, requestOptions: RequestOptions? = nil) async throws -> String {
-        try await (sdkRequest(
-            "GET",
-            "/zen",
-            config: config,
-            decoder: .text,
-            operationId: "metaGetZen",
-            options: requestOptions
-        )).data
+    public static func metaGetZen(config: ClientConfig, requestOptions: RequestOptions? = nil) async throws -> String {
+        return try (await sdkRequest("GET", "/zen", config: config, decoder: .text, operationId: "metaGetZen", options: requestOptions)).data
     }
 }

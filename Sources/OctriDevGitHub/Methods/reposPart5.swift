@@ -6,10 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ReposMethods {
-    /// Creates a repository ruleset for an organization. Set the required `name` and `enforcement`, and optionally
-    /// configure the target, bypass actors, conditions, and rules. Use `evaluate` to test rules before enforcing them;
-    /// this enforcement level is available only with GitHub Enterprise.
+extension ReposMethods {
+    /// Creates a repository ruleset for an organization. Set the required `name` and `enforcement`, and optionally configure the target, bypass actors, conditions, and rules. Use `evaluate` to test rules before enforcing them; this enforcement level is available only with GitHub Enterprise.
     ///
     /// Create a repository ruleset for an organization.
     ///
@@ -29,35 +27,9 @@ public extension ReposMethods {
     ///   policy rulesets, the conditions object should only contain the
     ///   `repository_name`, the `repository_id`, or the `repository_property`.
     /// - rules: An array of rules within the ruleset.
-    static func reposCreateOrgRuleset(
-        config: ClientConfig,
-        org: String,
-        name: String,
-        enforcement: RepositoryRuleEnforcement,
-        target: ReposCreateOrgRulesetRequestBodyTarget? = nil,
-        bypassActors: [RepositoryRulesetBypassActor]? = nil,
-        conditions: OrgRulesetConditions? = nil,
-        rules: [OrgRules]? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> RepositoryRuleset {
-        let requestBody = ReposCreateOrgRulesetRequestBody(
-            name: name,
-            enforcement: enforcement,
-            target: target,
-            bypassActors: bypassActors,
-            conditions: conditions,
-            rules: rules
-        )
+    public static func reposCreateOrgRuleset(config: ClientConfig, org: String, name: String, enforcement: RepositoryRuleEnforcement, target: ReposCreateOrgRulesetRequestBodyTarget? = nil, bypassActors: [RepositoryRulesetBypassActor]? = nil, conditions: OrgRulesetConditions? = nil, rules: [OrgRules]? = nil, requestOptions: RequestOptions? = nil) async throws -> RepositoryRuleset {
+        let requestBody = ReposCreateOrgRulesetRequestBody(name: name, enforcement: enforcement, target: target, bypassActors: bypassActors, conditions: conditions, rules: rules)
 
-        return try await (sdkRequest(
-            "POST",
-            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/rulesets"].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "reposCreateOrgRuleset",
-            options: requestOptions,
-            errors: ["404": BasicError.self, "422": ValidationError.self, "500": BasicError.self]
-        )).data
+        return try (await sdkRequest("POST", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/rulesets"].joined(), config: config, body: requestBody, decoder: .json, operationId: "reposCreateOrgRuleset", options: requestOptions, errors: ["404": BasicError.self, "422": ValidationError.self, "500": BasicError.self])).data
     }
 }

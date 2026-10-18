@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ReposMethods {
-    /// Lists the rulesets for a repository. Use `includes_parents` to include rulesets configured at higher levels and
-    /// `targets` to filter by a comma-separated list of rule targets.
+extension ReposMethods {
+    /// Lists the rulesets for a repository. Use `includes_parents` to include rulesets configured at higher levels and `targets` to filter by a comma-separated list of rule targets.
     ///
     /// Get all the rulesets for a repository.
     ///
@@ -30,36 +29,12 @@ public extension ReposMethods {
     /// - targets: A comma-separated list of rule targets to filter by. If provided,
     ///   only rulesets that apply to the specified targets will be returned. For
     ///   example, `branch,tag,push`.
-    static func reposGetRepoRulesets(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        includesParents: Bool? = nil,
-        targets: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [RepositoryRuleset] {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/rulesets",
-            ].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("page", value: page),
-                SdkQueryParameter("includes_parents", value: includesParents),
-                SdkQueryParameter("targets", value: targets),
-            ],
-            decoder: .json,
-            operationId: "reposGetRepoRulesets",
-            options: requestOptions,
-            errors: ["404": BasicError.self, "500": BasicError.self]
-        )).data
+    public static func reposGetRepoRulesets(config: ClientConfig, owner: String, repo: String, perPage: Int? = nil, page: Int? = nil, includesParents: Bool? = nil, targets: String? = nil, requestOptions: RequestOptions? = nil) async throws -> [RepositoryRuleset] {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/rulesets"].joined(), config: config, query: [
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("page", value: page),
+            SdkQueryParameter("includes_parents", value: includesParents),
+            SdkQueryParameter("targets", value: targets),
+        ], decoder: .json, operationId: "reposGetRepoRulesets", options: requestOptions, errors: ["404": BasicError.self, "500": BasicError.self])).data
     }
 }

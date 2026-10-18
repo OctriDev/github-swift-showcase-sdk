@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension IssuesMethods {
-    /// Retrieves a label from a repository by its name. Use `owner` and `repo` to identify the repository and `name` to
-    /// specify the label.
+extension IssuesMethods {
+    /// Retrieves a label from a repository by its name. Use `owner` and `repo` to identify the repository and `name` to specify the label.
     ///
     /// Gets a label using the given name.
     ///
@@ -17,28 +16,7 @@ public extension IssuesMethods {
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    static func issuesGetLabel(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        name: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> Label {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/labels/",
-                sdkEncodePathSegment(sdkWireString(name)),
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "issuesGetLabel",
-            options: requestOptions,
-            errors: ["404": BasicError.self]
-        )).data
+    public static func issuesGetLabel(config: ClientConfig, owner: String, repo: String, name: String, requestOptions: RequestOptions? = nil) async throws -> Label {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/labels/", sdkEncodePathSegment(sdkWireString(name))].joined(), config: config, decoder: .json, operationId: "issuesGetLabel", options: requestOptions, errors: ["404": BasicError.self])).data
     }
 }

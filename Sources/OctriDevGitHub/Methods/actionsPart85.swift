@@ -6,10 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ActionsMethods {
-    /// Lists all labels for a self-hosted runner configured in a repository. Authenticated users must have admin access
-    /// to the repository to use this endpoint. OAuth app tokens and personal access tokens (classic) need the `repo`
-    /// scope to use this endpoint.
+extension ActionsMethods {
+    /// Lists all labels for a self-hosted runner configured in a repository. Authenticated users must have admin access to the repository to use this endpoint. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -17,35 +15,11 @@ public extension ActionsMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - runnerId: Unique identifier of the self-hosted runner.
-    static func actionsListLabelsForSelfHostedRunnerForRepo(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        runnerId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsRunnerLabels {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/actions/runners/",
-                sdkEncodePathSegment(sdkWireString(runnerId)),
-                "/labels",
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "actionsListLabelsForSelfHostedRunnerForRepo",
-            options: requestOptions,
-            errors: ["404": BasicError.self]
-        )).data
+    public static func actionsListLabelsForSelfHostedRunnerForRepo(config: ClientConfig, owner: String, repo: String, runnerId: Int, requestOptions: RequestOptions? = nil) async throws -> ActionsRunnerLabels {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/actions/runners/", sdkEncodePathSegment(sdkWireString(runnerId)), "/labels"].joined(), config: config, decoder: .json, operationId: "actionsListLabelsForSelfHostedRunnerForRepo", options: requestOptions, errors: ["404": BasicError.self])).data
     }
 
-    /// Adds custom labels to a self-hosted runner configured in a repository. Authenticated users must have admin
-    /// access to the organization to use this endpoint. OAuth tokens and personal access tokens (classic) need the
-    /// `repo` scope to use this endpoint.
+    /// Adds custom labels to a self-hosted runner configured in a repository. Authenticated users must have admin access to the organization to use this endpoint. OAuth tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -54,35 +28,11 @@ public extension ActionsMethods {
     ///   not case sensitive.
     /// - runnerId: Unique identifier of the self-hosted runner.
     /// - labels: The names of the custom labels to add to the runner.
-    static func actionsAddCustomLabelsToSelfHostedRunnerForRepo(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        runnerId: Int,
-        labels: [String],
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsRunnerLabels {
+    public static func actionsAddCustomLabelsToSelfHostedRunnerForRepo(config: ClientConfig, owner: String, repo: String, runnerId: Int, labels: [String], requestOptions: RequestOptions? = nil) async throws -> ActionsRunnerLabels {
         try validateItems("labels", labels, min: 1, max: 100)
 
         let requestBody = ActionsAddCustomLabelsToSelfHostedRunnerForRepoRequestBody(labels: labels)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/actions/runners/",
-                sdkEncodePathSegment(sdkWireString(runnerId)),
-                "/labels",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "actionsAddCustomLabelsToSelfHostedRunnerForRepo",
-            options: requestOptions,
-            errors: ["404": BasicError.self, "422": ValidationErrorSimple.self]
-        )).data
+        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/actions/runners/", sdkEncodePathSegment(sdkWireString(runnerId)), "/labels"].joined(), config: config, body: requestBody, decoder: .json, operationId: "actionsAddCustomLabelsToSelfHostedRunnerForRepo", options: requestOptions, errors: ["404": BasicError.self, "422": ValidationErrorSimple.self])).data
     }
 }

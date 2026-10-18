@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// ActionsActions domain models
+// ActionsActions domain models
 public typealias ActionsCanApprovePullRequestReviews = Bool
 
 public typealias ActionsEnabled = Bool
@@ -27,35 +27,24 @@ public struct ActionsRepositoryPermissions: Codable {
         case shaPinningRequired = "sha_pinning_required"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsRepositoryPermissions {
-    init(from decoder: Decoder) throws {
+extension ActionsRepositoryPermissions {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.enabled) else {
-            throw SdkValidationError(
-                field: "enabled",
-                code: "required",
-                message: "Validation failed for 'enabled': value is required"
-            )
+            throw SdkValidationError(field: "enabled", code: "required", message: "Validation failed for 'enabled': value is required")
         }
-        enabled = try container.sdkDecodeRequired(.enabled)
-        allowedActions = try container.sdkDecodeIfPresent(.allowedActions)
-        selectedActionsUrl = try container.sdkDecodeIfPresent(.selectedActionsUrl)
-        shaPinningRequired = try container.sdkDecodeIfPresent(.shaPinningRequired)
+        self.enabled = try container.sdkDecodeRequired(.enabled)
+        self.allowedActions = try container.sdkDecodeIfPresent(.allowedActions)
+        self.selectedActionsUrl = try container.sdkDecodeIfPresent(.selectedActionsUrl)
+        self.shaPinningRequired = try container.sdkDecodeIfPresent(.shaPinningRequired)
     }
 }
 
-public extension ActionsRepositoryPermissions {
-    init(
-        enabled: ActionsEnabled,
-        allowedActions: AllowedActions? = nil,
-        selectedActionsUrl: SelectedActionsUrl? = nil,
-        shaPinningRequired: ShaPinningRequired? = nil
-    ) {
+extension ActionsRepositoryPermissions {
+    public init(enabled: ActionsEnabled, allowedActions: AllowedActions? = nil, selectedActionsUrl: SelectedActionsUrl? = nil, shaPinningRequired: ShaPinningRequired? = nil) {
         (self.enabled, self.allowedActions) = (enabled, allowedActions)
         (self.selectedActionsUrl, self.shaPinningRequired) = (selectedActionsUrl, shaPinningRequired)
     }
@@ -73,38 +62,25 @@ public struct ActionsGetDefaultWorkflowPermissions: Codable {
         case canApprovePullRequestReviews = "can_approve_pull_request_reviews"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsGetDefaultWorkflowPermissions {
-    init(from decoder: Decoder) throws {
+extension ActionsGetDefaultWorkflowPermissions {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.defaultWorkflowPermissions) else {
-            throw SdkValidationError(
-                field: "default_workflow_permissions",
-                code: "required",
-                message: "Validation failed for 'default_workflow_permissions': value is required"
-            )
+            throw SdkValidationError(field: "default_workflow_permissions", code: "required", message: "Validation failed for 'default_workflow_permissions': value is required")
         }
         guard container.contains(.canApprovePullRequestReviews) else {
-            throw SdkValidationError(
-                field: "can_approve_pull_request_reviews",
-                code: "required",
-                message: "Validation failed for 'can_approve_pull_request_reviews': value is required"
-            )
+            throw SdkValidationError(field: "can_approve_pull_request_reviews", code: "required", message: "Validation failed for 'can_approve_pull_request_reviews': value is required")
         }
-        defaultWorkflowPermissions = try container.sdkDecodeRequired(.defaultWorkflowPermissions)
-        canApprovePullRequestReviews = try container.sdkDecodeRequired(.canApprovePullRequestReviews)
+        self.defaultWorkflowPermissions = try container.sdkDecodeRequired(.defaultWorkflowPermissions)
+        self.canApprovePullRequestReviews = try container.sdkDecodeRequired(.canApprovePullRequestReviews)
     }
 }
 
-public extension ActionsGetDefaultWorkflowPermissions {
-    init(
-        defaultWorkflowPermissions: ActionsDefaultWorkflowPermissions,
-        canApprovePullRequestReviews: ActionsCanApprovePullRequestReviews
-    ) {
+extension ActionsGetDefaultWorkflowPermissions {
+    public init(defaultWorkflowPermissions: ActionsDefaultWorkflowPermissions, canApprovePullRequestReviews: ActionsCanApprovePullRequestReviews) {
         self.defaultWorkflowPermissions = defaultWorkflowPermissions
         self.canApprovePullRequestReviews = canApprovePullRequestReviews
     }
@@ -133,37 +109,25 @@ public struct ActionsOrganizationPermissions: Codable {
         case shaPinningRequired = "sha_pinning_required"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsOrganizationPermissions {
-    init(from decoder: Decoder) throws {
+extension ActionsOrganizationPermissions {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.enabledRepositories) else {
-            throw SdkValidationError(
-                field: "enabled_repositories",
-                code: "required",
-                message: "Validation failed for 'enabled_repositories': value is required"
-            )
+            throw SdkValidationError(field: "enabled_repositories", code: "required", message: "Validation failed for 'enabled_repositories': value is required")
         }
-        enabledRepositories = try container.sdkDecodeRequired(.enabledRepositories)
-        selectedRepositoriesUrl = try container.sdkDecodeIfPresent(.selectedRepositoriesUrl)
-        allowedActions = try container.sdkDecodeIfPresent(.allowedActions)
-        selectedActionsUrl = try container.sdkDecodeIfPresent(.selectedActionsUrl)
-        shaPinningRequired = try container.sdkDecodeIfPresent(.shaPinningRequired)
+        self.enabledRepositories = try container.sdkDecodeRequired(.enabledRepositories)
+        self.selectedRepositoriesUrl = try container.sdkDecodeIfPresent(.selectedRepositoriesUrl)
+        self.allowedActions = try container.sdkDecodeIfPresent(.allowedActions)
+        self.selectedActionsUrl = try container.sdkDecodeIfPresent(.selectedActionsUrl)
+        self.shaPinningRequired = try container.sdkDecodeIfPresent(.shaPinningRequired)
     }
 }
 
-public extension ActionsOrganizationPermissions {
-    init(
-        enabledRepositories: EnabledRepositories,
-        selectedRepositoriesUrl: String? = nil,
-        allowedActions: AllowedActions? = nil,
-        selectedActionsUrl: SelectedActionsUrl? = nil,
-        shaPinningRequired: ShaPinningRequired? = nil
-    ) {
+extension ActionsOrganizationPermissions {
+    public init(enabledRepositories: EnabledRepositories, selectedRepositoriesUrl: String? = nil, allowedActions: AllowedActions? = nil, selectedActionsUrl: SelectedActionsUrl? = nil, shaPinningRequired: ShaPinningRequired? = nil) {
         self.enabledRepositories = enabledRepositories
         (self.selectedRepositoriesUrl, self.allowedActions) = (selectedRepositoriesUrl, allowedActions)
         (self.selectedActionsUrl, self.shaPinningRequired) = (selectedActionsUrl, shaPinningRequired)
@@ -183,23 +147,20 @@ public struct ActionsSetDefaultWorkflowPermissions: Codable {
     }
 
     init() {
-        (defaultWorkflowPermissions, canApprovePullRequestReviews) = (nil, nil)
+        (self.defaultWorkflowPermissions, self.canApprovePullRequestReviews) = (nil, nil)
     }
 }
 
-public extension ActionsSetDefaultWorkflowPermissions {
-    init(from decoder: Decoder) throws {
+extension ActionsSetDefaultWorkflowPermissions {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        defaultWorkflowPermissions = try container.sdkDecodeIfPresent(.defaultWorkflowPermissions)
-        canApprovePullRequestReviews = try container.sdkDecodeIfPresent(.canApprovePullRequestReviews)
+        self.defaultWorkflowPermissions = try container.sdkDecodeIfPresent(.defaultWorkflowPermissions)
+        self.canApprovePullRequestReviews = try container.sdkDecodeIfPresent(.canApprovePullRequestReviews)
     }
 }
 
-public extension ActionsSetDefaultWorkflowPermissions {
-    init(
-        defaultWorkflowPermissions: ActionsDefaultWorkflowPermissions? = nil,
-        canApprovePullRequestReviews: ActionsCanApprovePullRequestReviews? = nil
-    ) {
+extension ActionsSetDefaultWorkflowPermissions {
+    public init(defaultWorkflowPermissions: ActionsDefaultWorkflowPermissions? = nil, canApprovePullRequestReviews: ActionsCanApprovePullRequestReviews? = nil) {
         self.init()
         self.defaultWorkflowPermissions = defaultWorkflowPermissions
         self.canApprovePullRequestReviews = canApprovePullRequestReviews
@@ -218,27 +179,21 @@ public struct ActionsWorkflowAccessToRepository: Codable {
         case accessLevel = "access_level"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsWorkflowAccessToRepository {
-    init(from decoder: Decoder) throws {
+extension ActionsWorkflowAccessToRepository {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.accessLevel) else {
-            throw SdkValidationError(
-                field: "access_level",
-                code: "required",
-                message: "Validation failed for 'access_level': value is required"
-            )
+            throw SdkValidationError(field: "access_level", code: "required", message: "Validation failed for 'access_level': value is required")
         }
-        accessLevel = try container.sdkDecodeRequired(.accessLevel)
+        self.accessLevel = try container.sdkDecodeRequired(.accessLevel)
     }
 }
 
-public extension ActionsWorkflowAccessToRepository {
-    init(accessLevel: ActionsWorkflowAccessToRepositoryAccessLevel) {
+extension ActionsWorkflowAccessToRepository {
+    public init(accessLevel: ActionsWorkflowAccessToRepositoryAccessLevel) {
         self.accessLevel = accessLevel
     }
 }
@@ -247,21 +202,17 @@ public extension ActionsWorkflowAccessToRepository {
 /// within the repository. `none` means the access is only possible from workflows in this repository. `user`
 /// level access allows sharing across user owned private repositories only. `organization` level access allows
 /// sharing across the organization.
-public struct ActionsWorkflowAccessToRepositoryAccessLevel: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct ActionsWorkflowAccessToRepositoryAccessLevel: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let none = ActionsWorkflowAccessToRepositoryAccessLevel(rawValue: "none")
     public static let user = ActionsWorkflowAccessToRepositoryAccessLevel(rawValue: "user")
     public static let organization = ActionsWorkflowAccessToRepositoryAccessLevel(rawValue: "organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -274,16 +225,13 @@ public struct ActionsWorkflowAccessToRepositoryAccessLevel: RawRepresentable, Ha
 public struct ActionsDefaultWorkflowPermissions: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let read = ActionsDefaultWorkflowPermissions(rawValue: "read")
     public static let write = ActionsDefaultWorkflowPermissions(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

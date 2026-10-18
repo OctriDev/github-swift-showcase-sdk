@@ -6,36 +6,17 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ActionsMethods {
-    /// Deletes a self-hosted runner group for an organization. OAuth tokens and personal access tokens (classic) need
-    /// the `admin:org` scope to use this endpoint.
+extension ActionsMethods {
+    /// Deletes a self-hosted runner group for an organization. OAuth tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - runnerGroupId: Unique identifier of the self-hosted runner group.
-    static func actionsDeleteSelfHostedRunnerGroupFromOrg(
-        config: ClientConfig,
-        org: String,
-        runnerGroupId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "DELETE",
-            [
-                "/orgs/",
-                sdkEncodePathSegment(sdkWireString(org)),
-                "/actions/runner-groups/",
-                sdkEncodePathSegment(sdkWireString(runnerGroupId)),
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "actionsDeleteSelfHostedRunnerGroupFromOrg",
-            options: requestOptions
-        )).data
+    public static func actionsDeleteSelfHostedRunnerGroupFromOrg(config: ClientConfig, org: String, runnerGroupId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("DELETE", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/actions/runner-groups/", sdkEncodePathSegment(sdkWireString(runnerGroupId))].joined(), config: config, decoder: .empty, operationId: "actionsDeleteSelfHostedRunnerGroupFromOrg", options: requestOptions)).data
     }
 
-    /// Lists the GitHub-hosted runners in an organization group. OAuth app tokens and personal access tokens (classic)
-    /// need the `admin:org` scope to use this endpoint.
+    /// Lists the GitHub-hosted runners in an organization group. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
@@ -48,31 +29,10 @@ public extension ActionsMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    static func actionsListGithubHostedRunnersInGroupForOrg(
-        config: ClientConfig,
-        org: String,
-        runnerGroupId: Int,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsListGithubHostedRunnersInGroupForOrgResponse {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/orgs/",
-                sdkEncodePathSegment(sdkWireString(org)),
-                "/actions/runner-groups/",
-                sdkEncodePathSegment(sdkWireString(runnerGroupId)),
-                "/hosted-runners",
-            ].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("page", value: page),
-            ],
-            decoder: .json,
-            operationId: "actionsListGithubHostedRunnersInGroupForOrg",
-            options: requestOptions
-        )).data
+    public static func actionsListGithubHostedRunnersInGroupForOrg(config: ClientConfig, org: String, runnerGroupId: Int, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> ActionsListGithubHostedRunnersInGroupForOrgResponse {
+        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/actions/runner-groups/", sdkEncodePathSegment(sdkWireString(runnerGroupId)), "/hosted-runners"].joined(), config: config, query: [
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("page", value: page),
+        ], decoder: .json, operationId: "actionsListGithubHostedRunnersInGroupForOrg", options: requestOptions)).data
     }
 }

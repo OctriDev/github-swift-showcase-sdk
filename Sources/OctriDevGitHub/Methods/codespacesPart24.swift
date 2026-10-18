@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension CodespacesMethods {
-    /// Lists the authenticated user's codespaces. OAuth app tokens and personal access tokens (classic) need the
-    /// `codespace` scope to use this endpoint.
+extension CodespacesMethods {
+    /// Lists the authenticated user's codespaces. OAuth app tokens and personal access tokens (classic) need the `codespace` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - perPage: The number of results per page (max 100). For more information,
@@ -20,55 +19,18 @@ public extension CodespacesMethods {
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
     /// - repositoryId: ID of the Repository to filter on
-    static func codespacesListForAuthenticatedUser(
-        config: ClientConfig,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        repositoryId: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CodespacesListForAuthenticatedUserResponse {
-        try await (sdkRequest(
-            "GET",
-            "/user/codespaces",
-            config: config,
-            query: [
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("page", value: page),
-                SdkQueryParameter("repository_id", value: repositoryId),
-            ],
-            decoder: .json,
-            operationId: "codespacesListForAuthenticatedUser",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self]
-        )).data
+    public static func codespacesListForAuthenticatedUser(config: ClientConfig, perPage: Int? = nil, page: Int? = nil, repositoryId: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> CodespacesListForAuthenticatedUserResponse {
+        return try (await sdkRequest("GET", "/user/codespaces", config: config, query: [
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("page", value: page),
+            SdkQueryParameter("repository_id", value: repositoryId),
+        ], decoder: .json, operationId: "codespacesListForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self])).data
     }
 
-    /// Creates a codespace owned by the authenticated user for a repository or pull request. Provide either
-    /// `repository_id` or `pull_request`, but not both, and use `geo` to select a region when needed. A 202 response
-    /// indicates that creation partially failed and is being retried in the background.
+    /// Creates a codespace owned by the authenticated user for a repository or pull request. Provide either `repository_id` or `pull_request`, but not both, and use `geo` to select a region when needed. A 202 response indicates that creation partially failed and is being retried in the background.
     ///
-    /// Creates a new codespace, owned by the authenticated user. This endpoint requires either a `repository_id` OR a
-    /// `pull_request` but not both. OAuth app tokens and personal access tokens (classic) need the `codespace` scope to
-    /// use this endpoint.
-    static func codespacesCreateForAuthenticatedUser(
-        config: ClientConfig,
-        body: CodespacesCreateForAuthenticatedUserRequestBody,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> Codespace {
-        try await (sdkRequest(
-            "POST",
-            "/user/codespaces",
-            config: config,
-            rawBody: sdkEncodeBody(body, contentType: "application/json"),
-            decoder: .json,
-            operationId: "codespacesCreateForAuthenticatedUser",
-            options: requestOptions,
-            errors: [
-                "401": BasicError.self,
-                "403": BasicError.self,
-                "404": BasicError.self,
-                "503": ServiceUnavailable.self,
-            ]
-        )).data
+    /// Creates a new codespace, owned by the authenticated user. This endpoint requires either a `repository_id` OR a `pull_request` but not both. OAuth app tokens and personal access tokens (classic) need the `codespace` scope to use this endpoint.
+    public static func codespacesCreateForAuthenticatedUser(config: ClientConfig, body: CodespacesCreateForAuthenticatedUserRequestBody, requestOptions: RequestOptions? = nil) async throws -> Codespace {
+        return try (await sdkRequest("POST", "/user/codespaces", config: config, rawBody: (try sdkEncodeBody(body, contentType: "application/json")), decoder: .json, operationId: "codespacesCreateForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

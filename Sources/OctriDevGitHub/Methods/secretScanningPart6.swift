@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension SecretScanningMethods {
-    /// Updates the secret scanning pattern configurations for an organization. Personal access tokens (classic) need
-    /// the `write:org` scope to use this endpoint.
+extension SecretScanningMethods {
+    /// Updates the secret scanning pattern configurations for an organization. Personal access tokens (classic) need the `write:org` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
@@ -17,35 +16,9 @@ public extension SecretScanningMethods {
     ///   unintentionally overriding someone else's update.
     /// - providerPatternSettings: Pattern settings for provider patterns.
     /// - customPatternSettings: Pattern settings for custom patterns.
-    static func secretScanningUpdateOrgPatternConfigs(
-        config: ClientConfig,
-        org: String,
-        patternConfigVersion: SdkOptional<SecretScanningRowVersion>? = nil,
-        providerPatternSettings: SecretScanningUpdateOrgPatternConfigsProviderPatternSettingsList? = nil,
-        customPatternSettings: SecretScanningUpdateOrgPatternConfigsCustomPatternSettingsList? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SecretScanningUpdateOrgPatternConfigsResponse {
-        let requestBody = SecretScanningUpdateOrgPatternConfigsRequestBody(
-            patternConfigVersion: patternConfigVersion,
-            providerPatternSettings: providerPatternSettings,
-            customPatternSettings: customPatternSettings
-        )
+    public static func secretScanningUpdateOrgPatternConfigs(config: ClientConfig, org: String, patternConfigVersion: SdkOptional<SecretScanningRowVersion>? = nil, providerPatternSettings: SecretScanningUpdateOrgPatternConfigsProviderPatternSettingsList? = nil, customPatternSettings: SecretScanningUpdateOrgPatternConfigsCustomPatternSettingsList? = nil, requestOptions: RequestOptions? = nil) async throws -> SecretScanningUpdateOrgPatternConfigsResponse {
+        let requestBody = SecretScanningUpdateOrgPatternConfigsRequestBody(patternConfigVersion: patternConfigVersion, providerPatternSettings: providerPatternSettings, customPatternSettings: customPatternSettings)
 
-        return try await (sdkRequest(
-            "PATCH",
-            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/secret-scanning/pattern-configurations"].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "secretScanningUpdateOrgPatternConfigs",
-            options: requestOptions,
-            errors: [
-                "400": BasicError.self,
-                "403": BasicError.self,
-                "404": BasicError.self,
-                "409": BasicError.self,
-                "422": ValidationError.self,
-            ]
-        )).data
+        return try (await sdkRequest("PATCH", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/secret-scanning/pattern-configurations"].joined(), config: config, body: requestBody, decoder: .json, operationId: "secretScanningUpdateOrgPatternConfigs", options: requestOptions, errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self, "409": BasicError.self, "422": ValidationError.self])).data
     }
 }

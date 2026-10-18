@@ -6,13 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension CopilotSpacesMethods {
-    /// Updates a Copilot Space owned by an organization. The authenticated user must have permissions to update spaces
-    /// in the organization. Organization members with appropriate permissions can update Copilot Spaces owned by their
-    /// organization. OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this
-    /// endpoint. Fine-grained tokens and GitHub App user access tokens must have been granted access to the
-    /// organization that owns the space. They must also have been granted access to every repository referenced by
-    /// resources in the space, including any being added or updated.
+extension CopilotSpacesMethods {
+    /// Updates a Copilot Space owned by an organization. The authenticated user must have permissions to update spaces in the organization. Organization members with appropriate permissions can update Copilot Spaces owned by their organization. OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint. Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space, including any being added or updated.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
@@ -26,43 +21,13 @@ public extension CopilotSpacesMethods {
     ///   can read the space - `writer`: Organization members can read and edit the
     ///   space - `admin`: Organization members have full admin access to the space
     /// - resourcesAttributes: Resources to attach to the space.
-    static func copilotSpacesUpdateForOrg(
-        config: ClientConfig,
-        org: String,
-        spaceNumber: Int,
-        name: String? = nil,
-        description: String? = nil,
-        generalInstructions: String? = nil,
-        baseRole: CopilotSpacesUpdateForOrgRequestBodyBaseRole? = nil,
-        resourcesAttributes: [CopilotSpacesUpdateForOrgRequestBodyResourcesAttributesItem]? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CopilotSpace {
-        if let generalInstructions {
+    public static func copilotSpacesUpdateForOrg(config: ClientConfig, org: String, spaceNumber: Int, name: String? = nil, description: String? = nil, generalInstructions: String? = nil, baseRole: CopilotSpacesUpdateForOrgRequestBodyBaseRole? = nil, resourcesAttributes: [CopilotSpacesUpdateForOrgRequestBodyResourcesAttributesItem]? = nil, requestOptions: RequestOptions? = nil) async throws -> CopilotSpace {
+        if let generalInstructions = generalInstructions {
             try validateLength("general_instructions", generalInstructions, max: 4000)
         }
 
-        let requestBody = CopilotSpacesUpdateForOrgRequestBody(
-            name: name,
-            description: description,
-            generalInstructions: generalInstructions,
-            baseRole: baseRole,
-            resourcesAttributes: resourcesAttributes
-        )
+        let requestBody = CopilotSpacesUpdateForOrgRequestBody(name: name, description: description, generalInstructions: generalInstructions, baseRole: baseRole, resourcesAttributes: resourcesAttributes)
 
-        return try await (sdkRequest(
-            "PUT",
-            [
-                "/orgs/",
-                sdkEncodePathSegment(sdkWireString(org)),
-                "/copilot-spaces/",
-                sdkEncodePathSegment(sdkWireString(spaceNumber)),
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "copilotSpacesUpdateForOrg",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self]
-        )).data
+        return try (await sdkRequest("PUT", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/copilot-spaces/", sdkEncodePathSegment(sdkWireString(spaceNumber))].joined(), config: config, body: requestBody, decoder: .json, operationId: "copilotSpacesUpdateForOrg", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
     }
 }

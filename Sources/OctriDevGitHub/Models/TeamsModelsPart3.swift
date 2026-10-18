@@ -3,103 +3,13 @@
 
 import Foundation
 
-/// Teams domain models
-public extension TeamRepository {
-    init(
-        id: Int,
-        nodeId: String,
-        name: String,
-        fullName: String,
-        license: NullableLicenseSimple?,
-        forks: Int,
-        owner: NullableSimpleUser?,
-        private: Bool,
-        htmlUrl: String,
-        description: String?,
-        fork: Bool,
-        url: String,
-        archiveUrl: String,
-        assigneesUrl: String,
-        blobsUrl: String,
-        branchesUrl: String,
-        collaboratorsUrl: String,
-        commentsUrl: String,
-        commitsUrl: String,
-        compareUrl: String,
-        contentsUrl: String,
-        contributorsUrl: String,
-        deploymentsUrl: String,
-        downloadsUrl: String,
-        eventsUrl: String,
-        forksUrl: String,
-        gitCommitsUrl: String,
-        gitRefsUrl: String,
-        gitTagsUrl: String,
-        gitUrl: String,
-        issueCommentUrl: String,
-        issueEventsUrl: String,
-        issuesUrl: String,
-        keysUrl: String,
-        labelsUrl: String,
-        languagesUrl: String,
-        mergesUrl: String,
-        milestonesUrl: String,
-        notificationsUrl: String,
-        pullsUrl: String,
-        releasesUrl: String,
-        sshUrl: String,
-        stargazersUrl: String,
-        statusesUrl: String,
-        subscribersUrl: String,
-        subscriptionUrl: String,
-        tagsUrl: String,
-        teamsUrl: String,
-        treesUrl: String,
-        cloneUrl: String,
-        mirrorUrl: String?,
-        hooksUrl: String,
-        svnUrl: String,
-        homepage: String?,
-        language: String?,
-        forksCount: Int,
-        stargazersCount: Int,
-        watchersCount: Int,
-        size: Int,
-        defaultBranch: String,
-        openIssuesCount: Int,
-        hasIssues: Bool,
-        hasProjects: Bool,
-        hasWiki: Bool,
-        hasPages: Bool,
-        hasDownloads: Bool,
-        archived: Bool,
-        disabled: Bool,
-        pushedAt: Date?,
-        createdAt: Date?,
-        updatedAt: Date?,
-        openIssues: Int,
-        watchers: Int,
-        permissions: TeamRepositoryPermissions? = nil,
-        roleName: String? = nil,
-        isTemplate: Bool? = nil,
-        topics: [String]? = nil,
-        visibility: String? = nil,
-        allowRebaseMerge: Bool? = nil,
-        tempCloneToken: String? = nil,
-        allowSquashMerge: Bool? = nil,
-        allowAutoMerge: Bool? = nil,
-        deleteBranchOnMerge: Bool? = nil,
-        allowMergeCommit: Bool? = nil,
-        allowForking: Bool? = nil,
-        webCommitSignoffRequired: Bool? = nil,
-        subscribersCount: Int? = nil,
-        networkCount: Int? = nil,
-        primaryBranch: String? = nil
-    ) throws {
+// Teams domain models
+extension TeamRepository {
+    public init(id: Int, nodeId: String, name: String, fullName: String, license: NullableLicenseSimple?, forks: Int, owner: NullableSimpleUser?, `private`: Bool, htmlUrl: String, description: String?, fork: Bool, url: String, archiveUrl: String, assigneesUrl: String, blobsUrl: String, branchesUrl: String, collaboratorsUrl: String, commentsUrl: String, commitsUrl: String, compareUrl: String, contentsUrl: String, contributorsUrl: String, deploymentsUrl: String, downloadsUrl: String, eventsUrl: String, forksUrl: String, gitCommitsUrl: String, gitRefsUrl: String, gitTagsUrl: String, gitUrl: String, issueCommentUrl: String, issueEventsUrl: String, issuesUrl: String, keysUrl: String, labelsUrl: String, languagesUrl: String, mergesUrl: String, milestonesUrl: String, notificationsUrl: String, pullsUrl: String, releasesUrl: String, sshUrl: String, stargazersUrl: String, statusesUrl: String, subscribersUrl: String, subscriptionUrl: String, tagsUrl: String, teamsUrl: String, treesUrl: String, cloneUrl: String, mirrorUrl: String?, hooksUrl: String, svnUrl: String, homepage: String?, language: String?, forksCount: Int, stargazersCount: Int, watchersCount: Int, size: Int, defaultBranch: String, openIssuesCount: Int, hasIssues: Bool, hasProjects: Bool, hasWiki: Bool, hasPages: Bool, hasDownloads: Bool, archived: Bool, disabled: Bool, pushedAt: Date?, createdAt: Date?, updatedAt: Date?, openIssues: Int, watchers: Int, permissions: TeamRepositoryPermissions? = nil, roleName: String? = nil, isTemplate: Bool? = nil, topics: [String]? = nil, visibility: String? = nil, allowRebaseMerge: Bool? = nil, tempCloneToken: String? = nil, allowSquashMerge: Bool? = nil, allowAutoMerge: Bool? = nil, deleteBranchOnMerge: Bool? = nil, allowMergeCommit: Bool? = nil, allowForking: Bool? = nil, webCommitSignoffRequired: Bool? = nil, subscribersCount: Int? = nil, networkCount: Int? = nil, primaryBranch: String? = nil) throws {
         (self.id, self.nodeId) = (id, nodeId)
         (self.name, self.fullName) = (name, fullName)
         (self.license, self.forks) = (license, forks)
-        (self.owner, self.private) = (owner, `private`)
+        (self.owner, self.`private`) = (owner, `private`)
         (self.htmlUrl, self.description) = (htmlUrl, description)
         (self.fork, self.url) = (fork, url)
         (self.archiveUrl, self.assigneesUrl) = (archiveUrl, assigneesUrl)
@@ -148,40 +58,40 @@ public extension TeamRepository {
 
 extension TeamRepository {
     func sdkValidateConstraintsPart1() throws {
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateUri("url", url)
-        try sdkValidateUri("contributors_url", contributorsUrl)
-        try sdkValidateUri("deployments_url", deploymentsUrl)
-        try sdkValidateUri("downloads_url", downloadsUrl)
-        try sdkValidateUri("events_url", eventsUrl)
-        try sdkValidateUri("forks_url", forksUrl)
-        try sdkValidateUri("languages_url", languagesUrl)
-        try sdkValidateUri("merges_url", mergesUrl)
-        try sdkValidateUri("stargazers_url", stargazersUrl)
-        try sdkValidateUri("subscribers_url", subscribersUrl)
-        try sdkValidateUri("subscription_url", subscriptionUrl)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("contributors_url", self.contributorsUrl)
+            try sdkValidateUri("deployments_url", self.deploymentsUrl)
+            try sdkValidateUri("downloads_url", self.downloadsUrl)
+            try sdkValidateUri("events_url", self.eventsUrl)
+            try sdkValidateUri("forks_url", self.forksUrl)
+            try sdkValidateUri("languages_url", self.languagesUrl)
+            try sdkValidateUri("merges_url", self.mergesUrl)
+            try sdkValidateUri("stargazers_url", self.stargazersUrl)
+            try sdkValidateUri("subscribers_url", self.subscribersUrl)
+            try sdkValidateUri("subscription_url", self.subscriptionUrl)
     }
 }
 
 extension TeamRepository {
     func sdkValidateConstraintsPart2() throws {
-        try sdkValidateUri("tags_url", tagsUrl)
-        try sdkValidateUri("teams_url", teamsUrl)
-        if let value = mirrorUrl {
+            try sdkValidateUri("tags_url", self.tagsUrl)
+            try sdkValidateUri("teams_url", self.teamsUrl)
+        if let value = self.mirrorUrl {
             try sdkValidateUri("mirror_url", value)
         }
-        try sdkValidateUri("hooks_url", hooksUrl)
-        try sdkValidateUri("svn_url", svnUrl)
-        if let value = homepage {
+            try sdkValidateUri("hooks_url", self.hooksUrl)
+            try sdkValidateUri("svn_url", self.svnUrl)
+        if let value = self.homepage {
             try sdkValidateUri("homepage", value)
         }
-        if let value = pushedAt {
+        if let value = self.pushedAt {
             try sdkValidateDateTime("pushed_at", sdkWireString(value))
         }
-        if let value = createdAt {
+        if let value = self.createdAt {
             try sdkValidateDateTime("created_at", sdkWireString(value))
         }
-        if let value = updatedAt {
+        if let value = self.updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
     }
@@ -278,69 +188,44 @@ public struct TeamFull: Codable {
         case enterpriseId = "enterprise_id"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension TeamFull {
-    init(from decoder: Decoder) throws {
+extension TeamFull {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        url = try container.sdkDecodeRequired(.url)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        name = try container.sdkDecodeRequired(.name)
-        slug = try container.sdkDecodeRequired(.slug)
-        description = try container.sdkDecodeNullable(.description)
-        permission = try container.sdkDecodeRequired(.permission)
-        membersUrl = try container.sdkDecodeRequired(.membersUrl)
-        repositoriesUrl = try container.sdkDecodeRequired(.repositoriesUrl)
-        membersCount = try container.sdkDecodeRequired(.membersCount)
-        reposCount = try container.sdkDecodeRequired(.reposCount)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        organization = try container.sdkDecodeRequired(.organization)
-        type = try container.sdkDecodeRequired(.type)
-        privacy = try container.sdkDecodeIfPresent(.privacy)
-        notificationSetting = try container.sdkDecodeIfPresent(.notificationSetting)
-        parent = try container.sdkDecodeIfPresent(.parent)
-        ldapDn = try container.sdkDecodeIfPresent(.ldapDn)
-        organizationId = try container.sdkDecodeIfPresent(.organizationId)
-        enterpriseId = try container.sdkDecodeIfPresent(.enterpriseId)
-        try sdkValidateUri("url", url)
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateUri("repositories_url", repositoriesUrl)
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+        self.id = try container.sdkDecodeRequired(.id)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.slug = try container.sdkDecodeRequired(.slug)
+        self.description = try container.sdkDecodeNullable(.description)
+        self.permission = try container.sdkDecodeRequired(.permission)
+        self.membersUrl = try container.sdkDecodeRequired(.membersUrl)
+        self.repositoriesUrl = try container.sdkDecodeRequired(.repositoriesUrl)
+        self.membersCount = try container.sdkDecodeRequired(.membersCount)
+        self.reposCount = try container.sdkDecodeRequired(.reposCount)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        self.organization = try container.sdkDecodeRequired(.organization)
+        self.type = try container.sdkDecodeRequired(.type)
+        self.privacy = try container.sdkDecodeIfPresent(.privacy)
+        self.notificationSetting = try container.sdkDecodeIfPresent(.notificationSetting)
+        self.parent = try container.sdkDecodeIfPresent(.parent)
+        self.ldapDn = try container.sdkDecodeIfPresent(.ldapDn)
+        self.organizationId = try container.sdkDecodeIfPresent(.organizationId)
+        self.enterpriseId = try container.sdkDecodeIfPresent(.enterpriseId)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("repositories_url", self.repositoriesUrl)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
     }
 }
 
-public extension TeamFull {
-    init(
-        id: Int,
-        nodeId: String,
-        url: String,
-        htmlUrl: String,
-        name: String,
-        slug: String,
-        description: String?,
-        permission: String,
-        membersUrl: String,
-        repositoriesUrl: String,
-        membersCount: Int,
-        reposCount: Int,
-        createdAt: Date,
-        updatedAt: Date,
-        organization: TeamOrganization,
-        type: TeamFullType,
-        privacy: TeamFullPrivacy? = nil,
-        notificationSetting: TeamFullNotificationSetting? = nil,
-        parent: NullableTeamSimple? = nil,
-        ldapDn: LdapDn? = nil,
-        organizationId: Int? = nil,
-        enterpriseId: Int? = nil
-    ) throws {
+extension TeamFull {
+    public init(id: Int, nodeId: String, url: String, htmlUrl: String, name: String, slug: String, description: String?, permission: String, membersUrl: String, repositoriesUrl: String, membersCount: Int, reposCount: Int, createdAt: Date, updatedAt: Date, organization: TeamOrganization, type: TeamFullType, privacy: TeamFullPrivacy? = nil, notificationSetting: TeamFullNotificationSetting? = nil, parent: NullableTeamSimple? = nil, ldapDn: LdapDn? = nil, organizationId: Int? = nil, enterpriseId: Int? = nil) throws {
         (self.id, self.nodeId) = (id, nodeId)
         (self.url, self.htmlUrl) = (url, htmlUrl)
         (self.name, self.slug) = (name, slug)
@@ -352,11 +237,11 @@ public extension TeamFull {
         (self.privacy, self.notificationSetting) = (privacy, notificationSetting)
         (self.parent, self.ldapDn) = (parent, ldapDn)
         (self.organizationId, self.enterpriseId) = (organizationId, enterpriseId)
-        try sdkValidateUri("url", self.url)
-        try sdkValidateUri("html_url", self.htmlUrl)
-        try sdkValidateUri("repositories_url", self.repositoriesUrl)
-        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("repositories_url", self.repositoriesUrl)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
     }
 }
 
@@ -364,16 +249,13 @@ public extension TeamFull {
 public struct TeamFullType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let enterprise = TeamFullType(rawValue: "enterprise")
     public static let organization = TeamFullType(rawValue: "organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -386,16 +268,13 @@ public struct TeamFullType: RawRepresentable, Hashable, Codable, Sendable, SdkWi
 public struct TeamFullNotificationSetting: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let notificationsEnabled = TeamFullNotificationSetting(rawValue: "notifications_enabled")
     public static let notificationsDisabled = TeamFullNotificationSetting(rawValue: "notifications_disabled")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -408,16 +287,13 @@ public struct TeamFullNotificationSetting: RawRepresentable, Hashable, Codable, 
 public struct TeamMembershipState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let active = TeamMembershipState(rawValue: "active")
     public static let pending = TeamMembershipState(rawValue: "pending")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -431,16 +307,13 @@ public struct TeamMembershipState: RawRepresentable, Hashable, Codable, Sendable
 public struct TeamMemberRole: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let member = TeamMemberRole(rawValue: "member")
     public static let maintainer = TeamMemberRole(rawValue: "maintainer")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -453,16 +326,13 @@ public struct TeamMemberRole: RawRepresentable, Hashable, Codable, Sendable, Sdk
 public struct TeamFullPrivacy: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let closed = TeamFullPrivacy(rawValue: "closed")
     public static let secret = TeamFullPrivacy(rawValue: "secret")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -475,16 +345,13 @@ public struct TeamFullPrivacy: RawRepresentable, Hashable, Codable, Sendable, Sd
 public struct TeamMembershipRole: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let member = TeamMembershipRole(rawValue: "member")
     public static let maintainer = TeamMembershipRole(rawValue: "maintainer")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

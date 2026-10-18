@@ -6,16 +6,10 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ReposMethods {
-    /// Adds status check contexts to a protected branch in a repository. Supply the context names in `contexts`, either
-    /// in an object or as a top-level array; the request body can be omitted. The `branch` name cannot contain wildcard
-    /// characters.
+extension ReposMethods {
+    /// Adds status check contexts to a protected branch in a repository. Supply the context names in `contexts`, either in an object or as a top-level array; the request body can be omitted. The `branch` name cannot contain wildcard characters.
     ///
-    /// Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and
-    /// in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise
-    /// Server. For more information, see [GitHub's
-    /// products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help
-    /// documentation.
+    /// Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -25,31 +19,7 @@ public extension ReposMethods {
     /// - branch: The name of the branch. Cannot contain wildcard characters. To use
     ///   wildcard characters in branch names, use [the GraphQL
     ///   API](https://docs.github.com/graphql).
-    static func reposAddStatusCheckContexts(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        branch: String,
-        body: ReposAddStatusCheckContextsRequestBody? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [String] {
-        try await (sdkRequest(
-            "POST",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/branches/",
-                sdkEncodePathSegment(sdkWireString(branch)),
-                "/protection/required_status_checks/contexts",
-            ].joined(),
-            config: config,
-            rawBody: (body.map { try sdkEncodeBody($0, contentType: "application/json") }),
-            decoder: .json,
-            operationId: "reposAddStatusCheckContexts",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self]
-        )).data
+    public static func reposAddStatusCheckContexts(config: ClientConfig, owner: String, repo: String, branch: String, body: ReposAddStatusCheckContextsRequestBody? = nil, requestOptions: RequestOptions? = nil) async throws -> [String] {
+        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/branches/", sdkEncodePathSegment(sdkWireString(branch)), "/protection/required_status_checks/contexts"].joined(), config: config, rawBody: (try body.map { try sdkEncodeBody($0, contentType: "application/json") }), decoder: .json, operationId: "reposAddStatusCheckContexts", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
     }
 }

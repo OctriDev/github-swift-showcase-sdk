@@ -7,14 +7,9 @@ import Foundation
     import FoundationNetworking
 #endif
 
-/// Canonical issues operation model declarations
-public extension IssuesAddLabelsRequestBodyVariant0LabelsItemVariant1 {
-    init(
-        name: String,
-        rationale: String? = nil,
-        suggest: Bool? = nil,
-        confidence: IssuesAddLabelsRequestBodyVariant0LabelsItemVariant1Confidence? = nil
-    ) {
+// Canonical issues operation model declarations
+extension IssuesAddLabelsRequestBodyVariant0LabelsItemVariant1 {
+    public init(name: String, rationale: String? = nil, suggest: Bool? = nil, confidence: IssuesAddLabelsRequestBodyVariant0LabelsItemVariant1Confidence? = nil) {
         (self.name, self.rationale) = (name, rationale)
         (self.suggest, self.confidence) = (suggest, confidence)
     }
@@ -36,35 +31,25 @@ public struct IssuesAddIssueFieldValuesRequestBodyIssueFieldValuesItem: Codable 
         case value
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension IssuesAddIssueFieldValuesRequestBodyIssueFieldValuesItem {
-    init(from decoder: Decoder) throws {
+extension IssuesAddIssueFieldValuesRequestBodyIssueFieldValuesItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.fieldId) else {
-            throw SdkValidationError(
-                field: "field_id",
-                code: "required",
-                message: "Validation failed for 'field_id': value is required"
-            )
+            throw SdkValidationError(field: "field_id", code: "required", message: "Validation failed for 'field_id': value is required")
         }
         guard container.contains(.value) else {
-            throw SdkValidationError(
-                field: "value",
-                code: "required",
-                message: "Validation failed for 'value': value is required"
-            )
+            throw SdkValidationError(field: "value", code: "required", message: "Validation failed for 'value': value is required")
         }
-        fieldId = try container.sdkDecodeRequired(.fieldId)
-        value = try container.sdkDecodeRequired(.value)
+        self.fieldId = try container.sdkDecodeRequired(.fieldId)
+        self.value = try container.sdkDecodeRequired(.value)
     }
 }
 
-public extension IssuesAddIssueFieldValuesRequestBodyIssueFieldValuesItem {
-    init(fieldId: Int, value: IssuesAddIssueFieldValuesRequestBodyIssueFieldValuesItemValue) {
+extension IssuesAddIssueFieldValuesRequestBodyIssueFieldValuesItem {
+    public init(fieldId: Int, value: IssuesAddIssueFieldValuesRequestBodyIssueFieldValuesItemValue) {
         (self.fieldId, self.value) = (fieldId, value)
     }
 }
@@ -76,35 +61,23 @@ public indirect enum IssuesCreateRequestBodyIssueFieldValuesItemValue {
 }
 
 extension IssuesCreateRequestBodyIssueFieldValuesItemValue: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for IssuesCreateRequestBodyIssueFieldValuesItemValue"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for IssuesCreateRequestBodyIssueFieldValuesItemValue")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
 extension IssuesCreateRequestBodyIssueFieldValuesItemValue {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) {
-            return .stringValue(value)
-        }
-        if let value = try? container.decode(Double.self) {
-            return .doubleValue(value)
-        }
-        if let value = try? container.decode([String].self) {
-            return .stringList(value)
-        }
+        if let value = try? container.decode(String.self) { return .stringValue(value) }
+        if let value = try? container.decode(Double.self) { return .doubleValue(value) }
+        if let value = try? container.decode([String].self) { return .stringList(value) }
         return nil
     }
 }
@@ -136,35 +109,23 @@ public indirect enum IssuesAddIssueFieldValuesRequestBodyIssueFieldValuesItemVal
 }
 
 extension IssuesAddIssueFieldValuesRequestBodyIssueFieldValuesItemValue: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for IssuesAddIssueFieldValuesRequestBodyIssueFieldValuesItemValue"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for IssuesAddIssueFieldValuesRequestBodyIssueFieldValuesItemValue")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
 extension IssuesAddIssueFieldValuesRequestBodyIssueFieldValuesItemValue {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) {
-            return .stringValue(value)
-        }
-        if let value = try? container.decode(Double.self) {
-            return .doubleValue(value)
-        }
-        if let value = try? container.decode([String].self) {
-            return .stringList(value)
-        }
+        if let value = try? container.decode(String.self) { return .stringValue(value) }
+        if let value = try? container.decode(Double.self) { return .doubleValue(value) }
+        if let value = try? container.decode([String].self) { return .stringList(value) }
         return nil
     }
 }
@@ -207,32 +168,25 @@ public struct IssuesUpdateResponseVariant1SuggestionsAssigneesItem: Codable {
     }
 
     init() {
-        (login, rationale, suggest, confidence, ignored) = (nil, nil, nil, nil, nil)
-        ignoredReason = nil
+        (self.login, self.rationale, self.suggest, self.confidence, self.ignored) = (nil, nil, nil, nil, nil)
+        self.ignoredReason = nil
     }
 }
 
-public extension IssuesUpdateResponseVariant1SuggestionsAssigneesItem {
-    init(from decoder: Decoder) throws {
+extension IssuesUpdateResponseVariant1SuggestionsAssigneesItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        login = try container.sdkDecodeIfPresent(.login)
-        rationale = try container.sdkDecodeIfPresent(.rationale)
-        suggest = try container.sdkDecodeIfPresent(.suggest)
-        confidence = try container.sdkDecodeIfPresent(.confidence)
-        ignored = try container.sdkDecodeIfPresent(.ignored)
-        ignoredReason = try container.sdkDecodeIfPresent(.ignoredReason)
+        self.login = try container.sdkDecodeIfPresent(.login)
+        self.rationale = try container.sdkDecodeIfPresent(.rationale)
+        self.suggest = try container.sdkDecodeIfPresent(.suggest)
+        self.confidence = try container.sdkDecodeIfPresent(.confidence)
+        self.ignored = try container.sdkDecodeIfPresent(.ignored)
+        self.ignoredReason = try container.sdkDecodeIfPresent(.ignoredReason)
     }
 }
 
-public extension IssuesUpdateResponseVariant1SuggestionsAssigneesItem {
-    init(
-        login: String? = nil,
-        rationale: String? = nil,
-        suggest: Bool? = nil,
-        confidence: IssuesUpdateResponseVariant1SuggestionsAssigneesItemConfidence? = nil,
-        ignored: Bool? = nil,
-        ignoredReason: IssuesUpdateResponseVariant1SuggestionsAssigneesItemIgnoredReason? = nil
-    ) {
+extension IssuesUpdateResponseVariant1SuggestionsAssigneesItem {
+    public init(login: String? = nil, rationale: String? = nil, suggest: Bool? = nil, confidence: IssuesUpdateResponseVariant1SuggestionsAssigneesItemConfidence? = nil, ignored: Bool? = nil, ignoredReason: IssuesUpdateResponseVariant1SuggestionsAssigneesItemIgnoredReason? = nil) {
         self.init()
         (self.login, self.rationale) = (login, rationale)
         (self.suggest, self.confidence) = (suggest, confidence)
@@ -247,37 +201,26 @@ public indirect enum IssuesAddLabelsRequestBody {
 }
 
 extension IssuesAddLabelsRequestBody: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for IssuesAddLabelsRequestBody"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for IssuesAddLabelsRequestBody")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
 extension IssuesAddLabelsRequestBody {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container
-            .decode(IssuesAddLabelsRequestBodyVariant0.self) {
-            return .issuesAddLabelsRequestBodyVariant0(value)
-        }
-        if let value = try? container.decode([String].self) {
-            return .stringList(value)
-        }
+        if let value = try? container.decode(IssuesAddLabelsRequestBodyVariant0.self) { return .issuesAddLabelsRequestBodyVariant0(value) }
+        if let value = try? container.decode([String].self) { return .stringList(value) }
         if let value = try? container.decode(
             [IssuesAddLabelsRequestBodyVariant2Item].self
         ) {
-            return .issuesAddLabelsRequestBodyVariant2ItemList(value)
+            return             .issuesAddLabelsRequestBodyVariant2ItemList(value)
         }
         return nil
     }
@@ -306,19 +249,19 @@ public struct IssuesUpdateResponseVariant1: Codable {
     }
 
     init() {
-        suggestions = nil
+        self.suggestions = nil
     }
 }
 
-public extension IssuesUpdateResponseVariant1 {
-    init(from decoder: Decoder) throws {
+extension IssuesUpdateResponseVariant1 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        suggestions = try container.sdkDecodeIfPresent(.suggestions)
+        self.suggestions = try container.sdkDecodeIfPresent(.suggestions)
     }
 }
 
-public extension IssuesUpdateResponseVariant1 {
-    init(suggestions: IssuesUpdateResponseVariant1Suggestions? = nil) {
+extension IssuesUpdateResponseVariant1 {
+    public init(suggestions: IssuesUpdateResponseVariant1Suggestions? = nil) {
         self.init()
         self.suggestions = suggestions
     }
@@ -330,32 +273,22 @@ public indirect enum IssuesCreateRequestBodyMilestone {
 }
 
 extension IssuesCreateRequestBodyMilestone: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for IssuesCreateRequestBodyMilestone"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for IssuesCreateRequestBodyMilestone")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
 extension IssuesCreateRequestBodyMilestone {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) {
-            return .stringValue(value)
-        }
-        if let value = try? container.decode(Int.self) {
-            return .intValue(value)
-        }
+        if let value = try? container.decode(String.self) { return .stringValue(value) }
+        if let value = try? container.decode(Int.self) { return .intValue(value) }
         return nil
     }
 }
@@ -386,35 +319,23 @@ public indirect enum IssuesUpdateResponseVariant1SuggestionsIssueFieldValuesItem
 }
 
 extension IssuesUpdateResponseVariant1SuggestionsIssueFieldValuesItemValue: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for IssuesUpdateResponseVariant1SuggestionsIssueFieldValuesItemValue"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for IssuesUpdateResponseVariant1SuggestionsIssueFieldValuesItemValue")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
 extension IssuesUpdateResponseVariant1SuggestionsIssueFieldValuesItemValue {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) {
-            return .stringValue(value)
-        }
-        if let value = try? container.decode(Double.self) {
-            return .doubleValue(value)
-        }
-        if let value = try? container.decode([String].self) {
-            return .stringList(value)
-        }
+        if let value = try? container.decode(String.self) { return .stringValue(value) }
+        if let value = try? container.decode(Double.self) { return .doubleValue(value) }
+        if let value = try? container.decode([String].self) { return .stringList(value) }
         return nil
     }
 }
@@ -461,36 +382,27 @@ public struct IssuesUpdateResponseVariant1SuggestionsStateItem: Codable {
     }
 
     init() {
-        (value, stateReason, duplicateIssueId, rationale, suggest) = (nil, nil, nil, nil, nil)
-        (confidence, ignored, ignoredReason) = (nil, nil, nil)
+        (self.value, self.stateReason, self.duplicateIssueId, self.rationale, self.suggest) = (nil, nil, nil, nil, nil)
+        (self.confidence, self.ignored, self.ignoredReason) = (nil, nil, nil)
     }
 }
 
-public extension IssuesUpdateResponseVariant1SuggestionsStateItem {
-    init(from decoder: Decoder) throws {
+extension IssuesUpdateResponseVariant1SuggestionsStateItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        value = try container.sdkDecodeIfPresent(.value)
-        stateReason = try container.sdkDecodeIfPresent(.stateReason)
-        duplicateIssueId = try container.sdkDecodeIfPresent(.duplicateIssueId)
-        rationale = try container.sdkDecodeIfPresent(.rationale)
-        suggest = try container.sdkDecodeIfPresent(.suggest)
-        confidence = try container.sdkDecodeIfPresent(.confidence)
-        ignored = try container.sdkDecodeIfPresent(.ignored)
-        ignoredReason = try container.sdkDecodeIfPresent(.ignoredReason)
+        self.value = try container.sdkDecodeIfPresent(.value)
+        self.stateReason = try container.sdkDecodeIfPresent(.stateReason)
+        self.duplicateIssueId = try container.sdkDecodeIfPresent(.duplicateIssueId)
+        self.rationale = try container.sdkDecodeIfPresent(.rationale)
+        self.suggest = try container.sdkDecodeIfPresent(.suggest)
+        self.confidence = try container.sdkDecodeIfPresent(.confidence)
+        self.ignored = try container.sdkDecodeIfPresent(.ignored)
+        self.ignoredReason = try container.sdkDecodeIfPresent(.ignoredReason)
     }
 }
 
-public extension IssuesUpdateResponseVariant1SuggestionsStateItem {
-    init(
-        value: String? = nil,
-        stateReason: String? = nil,
-        duplicateIssueId: Int? = nil,
-        rationale: String? = nil,
-        suggest: Bool? = nil,
-        confidence: IssuesUpdateResponseVariant1SuggestionsStateItemConfidence? = nil,
-        ignored: Bool? = nil,
-        ignoredReason: IssuesUpdateResponseVariant1SuggestionsStateItemIgnoredReason? = nil
-    ) {
+extension IssuesUpdateResponseVariant1SuggestionsStateItem {
+    public init(value: String? = nil, stateReason: String? = nil, duplicateIssueId: Int? = nil, rationale: String? = nil, suggest: Bool? = nil, confidence: IssuesUpdateResponseVariant1SuggestionsStateItemConfidence? = nil, ignored: Bool? = nil, ignoredReason: IssuesUpdateResponseVariant1SuggestionsStateItemIgnoredReason? = nil) {
         self.init()
         (self.value, self.stateReason) = (value, stateReason)
         (self.duplicateIssueId, self.rationale) = (duplicateIssueId, rationale)

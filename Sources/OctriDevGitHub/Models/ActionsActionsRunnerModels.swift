@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// ActionsActionsRunner domain models
+// ActionsActionsRunner domain models
 /// Typed representation of the `ActionsRunnerJitconfig` API schema.
 public struct ActionsRunnerJitconfig: Codable {
     /// A self hosted runner
@@ -16,35 +16,25 @@ public struct ActionsRunnerJitconfig: Codable {
         case encodedJitConfig = "encoded_jit_config"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsRunnerJitconfig {
-    init(from decoder: Decoder) throws {
+extension ActionsRunnerJitconfig {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.runner) else {
-            throw SdkValidationError(
-                field: "runner",
-                code: "required",
-                message: "Validation failed for 'runner': value is required"
-            )
+            throw SdkValidationError(field: "runner", code: "required", message: "Validation failed for 'runner': value is required")
         }
         guard container.contains(.encodedJitConfig) else {
-            throw SdkValidationError(
-                field: "encoded_jit_config",
-                code: "required",
-                message: "Validation failed for 'encoded_jit_config': value is required"
-            )
+            throw SdkValidationError(field: "encoded_jit_config", code: "required", message: "Validation failed for 'encoded_jit_config': value is required")
         }
-        runner = try container.sdkDecodeRequired(.runner)
-        encodedJitConfig = try container.sdkDecodeRequired(.encodedJitConfig)
+        self.runner = try container.sdkDecodeRequired(.runner)
+        self.encodedJitConfig = try container.sdkDecodeRequired(.encodedJitConfig)
     }
 }
 
-public extension ActionsRunnerJitconfig {
-    init(runner: Runner, encodedJitConfig: String) {
+extension ActionsRunnerJitconfig {
+    public init(runner: Runner, encodedJitConfig: String) {
         (self.runner, self.encodedJitConfig) = (runner, encodedJitConfig)
     }
 }
@@ -61,35 +51,25 @@ public struct ActionsRunnerLabels: Codable {
         case labels
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsRunnerLabels {
-    init(from decoder: Decoder) throws {
+extension ActionsRunnerLabels {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.totalCount) else {
-            throw SdkValidationError(
-                field: "total_count",
-                code: "required",
-                message: "Validation failed for 'total_count': value is required"
-            )
+            throw SdkValidationError(field: "total_count", code: "required", message: "Validation failed for 'total_count': value is required")
         }
         guard container.contains(.labels) else {
-            throw SdkValidationError(
-                field: "labels",
-                code: "required",
-                message: "Validation failed for 'labels': value is required"
-            )
+            throw SdkValidationError(field: "labels", code: "required", message: "Validation failed for 'labels': value is required")
         }
-        totalCount = try container.sdkDecodeRequired(.totalCount)
-        labels = try container.sdkDecodeRequired(.labels)
+        self.totalCount = try container.sdkDecodeRequired(.totalCount)
+        self.labels = try container.sdkDecodeRequired(.labels)
     }
 }
 
-public extension ActionsRunnerLabels {
-    init(totalCount: Int, labels: [RunnerLabel]) {
+extension ActionsRunnerLabels {
+    public init(totalCount: Int, labels: [RunnerLabel]) {
         (self.totalCount, self.labels) = (totalCount, labels)
     }
 }
@@ -106,35 +86,25 @@ public struct ActionsRunnerLabelsReadonly: Codable {
         case labels
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsRunnerLabelsReadonly {
-    init(from decoder: Decoder) throws {
+extension ActionsRunnerLabelsReadonly {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.totalCount) else {
-            throw SdkValidationError(
-                field: "total_count",
-                code: "required",
-                message: "Validation failed for 'total_count': value is required"
-            )
+            throw SdkValidationError(field: "total_count", code: "required", message: "Validation failed for 'total_count': value is required")
         }
         guard container.contains(.labels) else {
-            throw SdkValidationError(
-                field: "labels",
-                code: "required",
-                message: "Validation failed for 'labels': value is required"
-            )
+            throw SdkValidationError(field: "labels", code: "required", message: "Validation failed for 'labels': value is required")
         }
-        totalCount = try container.sdkDecodeRequired(.totalCount)
-        labels = try container.sdkDecodeRequired(.labels)
+        self.totalCount = try container.sdkDecodeRequired(.totalCount)
+        self.labels = try container.sdkDecodeRequired(.labels)
     }
 }
 
-public extension ActionsRunnerLabelsReadonly {
-    init(totalCount: Int, labels: [RunnerLabel]) {
+extension ActionsRunnerLabelsReadonly {
+    public init(totalCount: Int, labels: [RunnerLabel]) {
         (self.totalCount, self.labels) = (totalCount, labels)
     }
 }

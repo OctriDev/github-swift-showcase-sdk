@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ReposMethods {
-    /// Deletes a ruleset from a repository. Identify the repository with `owner` and `repo`, and specify the ruleset
-    /// with `ruleset_id`. The operation returns no content when the ruleset is deleted.
+extension ReposMethods {
+    /// Deletes a ruleset from a repository. Identify the repository with `owner` and `repo`, and specify the ruleset with `ruleset_id`. The operation returns no content when the ruleset is deleted.
     ///
     /// Delete a ruleset for a repository.
     ///
@@ -18,28 +17,7 @@ public extension ReposMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - rulesetId: The ID of the ruleset.
-    static func reposDeleteRepoRuleset(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        rulesetId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "DELETE",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/rulesets/",
-                sdkEncodePathSegment(sdkWireString(rulesetId)),
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "reposDeleteRepoRuleset",
-            options: requestOptions,
-            errors: ["404": BasicError.self, "500": BasicError.self]
-        )).data
+    public static func reposDeleteRepoRuleset(config: ClientConfig, owner: String, repo: String, rulesetId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/rulesets/", sdkEncodePathSegment(sdkWireString(rulesetId))].joined(), config: config, decoder: .empty, operationId: "reposDeleteRepoRuleset", options: requestOptions, errors: ["404": BasicError.self, "500": BasicError.self])).data
     }
 }

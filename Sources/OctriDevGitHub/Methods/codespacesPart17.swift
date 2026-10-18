@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension CodespacesMethods {
-    /// Gets the default attributes for codespaces created by the user with the repository. OAuth app tokens and
-    /// personal access tokens (classic) need the `codespace` scope to use this endpoint.
+extension CodespacesMethods {
+    /// Gets the default attributes for codespaces created by the user with the repository. OAuth app tokens and personal access tokens (classic) need the `codespace` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -19,32 +18,10 @@ public extension CodespacesMethods {
     ///   specified, the default branch will be checked.
     /// - clientIp: An alternative IP for default location auto-detection, such as
     ///   when proxying a request.
-    static func codespacesPreFlightWithRepoForAuthenticatedUser(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        ref: String? = nil,
-        clientIp: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CodespacesPreFlightWithRepoForAuthenticatedUserResponse {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/codespaces/new",
-            ].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("ref", value: ref),
-                SdkQueryParameter("client_ip", value: clientIp),
-            ],
-            decoder: .json,
-            operationId: "codespacesPreFlightWithRepoForAuthenticatedUser",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self]
-        )).data
+    public static func codespacesPreFlightWithRepoForAuthenticatedUser(config: ClientConfig, owner: String, repo: String, ref: String? = nil, clientIp: String? = nil, requestOptions: RequestOptions? = nil) async throws -> CodespacesPreFlightWithRepoForAuthenticatedUserResponse {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/codespaces/new"].joined(), config: config, query: [
+            SdkQueryParameter("ref", value: ref),
+            SdkQueryParameter("client_ip", value: clientIp),
+        ], decoder: .json, operationId: "codespacesPreFlightWithRepoForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
     }
 }

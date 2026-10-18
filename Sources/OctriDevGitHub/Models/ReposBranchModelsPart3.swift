@@ -3,79 +3,46 @@
 
 import Foundation
 
-/// ReposBranch domain models
-public extension BranchWithProtection {
-    init(from decoder: Decoder) throws {
+// ReposBranch domain models
+extension BranchWithProtection {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.commit) else {
-            throw SdkValidationError(
-                field: "commit",
-                code: "required",
-                message: "Validation failed for 'commit': value is required"
-            )
+            throw SdkValidationError(field: "commit", code: "required", message: "Validation failed for 'commit': value is required")
         }
         guard container.contains(.links) else {
-            throw SdkValidationError(
-                field: "_links",
-                code: "required",
-                message: "Validation failed for '_links': value is required"
-            )
+            throw SdkValidationError(field: "_links", code: "required", message: "Validation failed for '_links': value is required")
         }
         guard container.contains(.protected) else {
-            throw SdkValidationError(
-                field: "protected",
-                code: "required",
-                message: "Validation failed for 'protected': value is required"
-            )
+            throw SdkValidationError(field: "protected", code: "required", message: "Validation failed for 'protected': value is required")
         }
         guard container.contains(.protection) else {
-            throw SdkValidationError(
-                field: "protection",
-                code: "required",
-                message: "Validation failed for 'protection': value is required"
-            )
+            throw SdkValidationError(field: "protection", code: "required", message: "Validation failed for 'protection': value is required")
         }
         guard container.contains(.protectionUrl) else {
-            throw SdkValidationError(
-                field: "protection_url",
-                code: "required",
-                message: "Validation failed for 'protection_url': value is required"
-            )
+            throw SdkValidationError(field: "protection_url", code: "required", message: "Validation failed for 'protection_url': value is required")
         }
-        name = try container.sdkDecodeRequired(.name)
-        commit = try container.sdkDecodeRequired(.commit)
-        links = try container.sdkDecodeRequired(.links)
-        protected = try container.sdkDecodeRequired(.protected)
-        protection = try container.sdkDecodeRequired(.protection)
-        protectionUrl = try container.sdkDecodeRequired(.protectionUrl)
-        pattern = try container.sdkDecodeIfPresent(.pattern)
-        requiredApprovingReviewCount = try container.sdkDecodeIfPresent(.requiredApprovingReviewCount)
-        try sdkValidateUri("protection_url", protectionUrl)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.commit = try container.sdkDecodeRequired(.commit)
+        self.links = try container.sdkDecodeRequired(.links)
+        self.protected = try container.sdkDecodeRequired(.protected)
+        self.protection = try container.sdkDecodeRequired(.protection)
+        self.protectionUrl = try container.sdkDecodeRequired(.protectionUrl)
+        self.pattern = try container.sdkDecodeIfPresent(.pattern)
+        self.requiredApprovingReviewCount = try container.sdkDecodeIfPresent(.requiredApprovingReviewCount)
+            try sdkValidateUri("protection_url", self.protectionUrl)
     }
 }
 
-public extension BranchWithProtection {
-    init(
-        name: String,
-        commit: Commit,
-        links: BranchWithProtectionLinks,
-        protected: Bool,
-        protection: BranchProtection,
-        protectionUrl: String,
-        pattern: String? = nil,
-        requiredApprovingReviewCount: Int? = nil
-    ) throws {
+extension BranchWithProtection {
+    public init(name: String, commit: Commit, links: BranchWithProtectionLinks, protected: Bool, protection: BranchProtection, protectionUrl: String, pattern: String? = nil, requiredApprovingReviewCount: Int? = nil) throws {
         (self.name, self.commit) = (name, commit)
         (self.links, self.protected) = (links, protected)
         (self.protection, self.protectionUrl) = (protection, protectionUrl)
         (self.pattern, self.requiredApprovingReviewCount) = (pattern, requiredApprovingReviewCount)
-        try sdkValidateUri("protection_url", self.protectionUrl)
+            try sdkValidateUri("protection_url", self.protectionUrl)
     }
 }

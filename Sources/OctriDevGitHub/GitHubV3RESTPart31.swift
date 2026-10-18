@@ -3,120 +3,29 @@
 
 import Foundation
 
-public extension BillingNamespace {
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Gets a summary report of usage for an
-    /// organization. To use this endpoint, you must be an administrator of an organization within an enterprise or an
-    /// organization account. **Note:** Only data from the past 24 months is accessible via this endpoint.
-    func getGithubBillingUsageSummaryReportOrg(
-        org: String,
-        year: Int? = nil,
-        month: Int? = nil,
-        day: Int? = nil,
-        repository: String? = nil,
-        product: String? = nil,
-        sku: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> BillingUsageSummaryReportOrg {
-        try await BillingMethods.billingGetGithubBillingUsageSummaryReportOrg(
-            config: config,
-            org: org,
-            year: year,
-            month: month,
-            day: day,
-            repository: repository,
-            product: product,
-            sku: sku,
-            requestOptions: requestOptions
-        )
+extension BillingNamespace {
+/// > [!NOTE] > This endpoint is in public preview and is subject to change. Gets a summary report of usage for an organization. To use this endpoint, you must be an administrator of an organization within an enterprise or an organization account. **Note:** Only data from the past 24 months is accessible via this endpoint.
+    public func getGithubBillingUsageSummaryReportOrg(org: String, year: Int? = nil, month: Int? = nil, day: Int? = nil, repository: String? = nil, product: String? = nil, sku: String? = nil, requestOptions: RequestOptions? = nil) async throws -> BillingUsageSummaryReportOrg {
+        return try await BillingMethods.billingGetGithubBillingUsageSummaryReportOrg(config: config, org: org, year: year, month: month, day: day, repository: repository, product: product, sku: sku, requestOptions: requestOptions)
     }
 
-    /// Gets a report of AI credit usage for a user. **Note:** Only data from the past 24 months is accessible via this
-    /// endpoint.
-    func getGithubBillingAiCreditUsageReportUser(
-        username: String,
-        year: Int? = nil,
-        month: Int? = nil,
-        day: Int? = nil,
-        model: String? = nil,
-        product: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> BillingAiCreditUsageReportUser {
-        try await BillingMethods.billingGetGithubBillingAiCreditUsageReportUser(
-            config: config,
-            username: username,
-            year: year,
-            month: month,
-            day: day,
-            model: model,
-            product: product,
-            requestOptions: requestOptions
-        )
+/// Gets a report of AI credit usage for a user. **Note:** Only data from the past 24 months is accessible via this endpoint.
+    public func getGithubBillingAiCreditUsageReportUser(username: String, year: Int? = nil, month: Int? = nil, day: Int? = nil, model: String? = nil, product: String? = nil, requestOptions: RequestOptions? = nil) async throws -> BillingAiCreditUsageReportUser {
+        return try await BillingMethods.billingGetGithubBillingAiCreditUsageReportUser(config: config, username: username, year: year, month: month, day: day, model: model, product: product, requestOptions: requestOptions)
     }
 
-    /// Gets a report of premium request usage for a user. **Note:** Only data from the past 24 months is accessible via
-    /// this endpoint.
-    func getGithubBillingPremiumRequestUsageReportUser(
-        username: String,
-        year: Int? = nil,
-        month: Int? = nil,
-        day: Int? = nil,
-        model: String? = nil,
-        product: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> BillingPremiumRequestUsageReportUser {
-        try await BillingMethods.billingGetGithubBillingPremiumRequestUsageReportUser(
-            config: config,
-            username: username,
-            year: year,
-            month: month,
-            day: day,
-            model: model,
-            product: product,
-            requestOptions: requestOptions
-        )
+/// Gets a report of premium request usage for a user. **Note:** Only data from the past 24 months is accessible via this endpoint.
+    public func getGithubBillingPremiumRequestUsageReportUser(username: String, year: Int? = nil, month: Int? = nil, day: Int? = nil, model: String? = nil, product: String? = nil, requestOptions: RequestOptions? = nil) async throws -> BillingPremiumRequestUsageReportUser {
+        return try await BillingMethods.billingGetGithubBillingPremiumRequestUsageReportUser(config: config, username: username, year: year, month: month, day: day, model: model, product: product, requestOptions: requestOptions)
     }
 
-    /// Gets a report of the total usage for a user. **Note:** This endpoint is only available to users with access to
-    /// the enhanced billing platform.
-    func getGithubBillingUsageReportUser(
-        username: String,
-        year: Int? = nil,
-        month: Int? = nil,
-        day: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> BillingUsageReportUser {
-        try await BillingMethods.billingGetGithubBillingUsageReportUser(
-            config: config,
-            username: username,
-            year: year,
-            month: month,
-            day: day,
-            requestOptions: requestOptions
-        )
+/// Gets a report of the total usage for a user. **Note:** This endpoint is only available to users with access to the enhanced billing platform.
+    public func getGithubBillingUsageReportUser(username: String, year: Int? = nil, month: Int? = nil, day: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> BillingUsageReportUser {
+        return try await BillingMethods.billingGetGithubBillingUsageReportUser(config: config, username: username, year: year, month: month, day: day, requestOptions: requestOptions)
     }
 
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Gets a summary report of usage for a
-    /// user. **Note:** Only data from the past 24 months is accessible via this endpoint.
-    func getGithubBillingUsageSummaryReportUser(
-        username: String,
-        year: Int? = nil,
-        month: Int? = nil,
-        day: Int? = nil,
-        repository: String? = nil,
-        product: String? = nil,
-        sku: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> BillingUsageSummaryReportUser {
-        try await BillingMethods.billingGetGithubBillingUsageSummaryReportUser(
-            config: config,
-            username: username,
-            year: year,
-            month: month,
-            day: day,
-            repository: repository,
-            product: product,
-            sku: sku,
-            requestOptions: requestOptions
-        )
+/// > [!NOTE] > This endpoint is in public preview and is subject to change. Gets a summary report of usage for a user. **Note:** Only data from the past 24 months is accessible via this endpoint.
+    public func getGithubBillingUsageSummaryReportUser(username: String, year: Int? = nil, month: Int? = nil, day: Int? = nil, repository: String? = nil, product: String? = nil, sku: String? = nil, requestOptions: RequestOptions? = nil) async throws -> BillingUsageSummaryReportUser {
+        return try await BillingMethods.billingGetGithubBillingUsageSummaryReportUser(config: config, username: username, year: year, month: month, day: day, repository: repository, product: product, sku: sku, requestOptions: requestOptions)
     }
 }
