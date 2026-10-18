@@ -40,7 +40,13 @@ public extension IssuesMethods {
             decoder: .empty,
             operationId: "issuesUnpinComment",
             options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "410": BasicError.self]
+            errors: [
+                "401": BasicError.self,
+                "403": BasicError.self,
+                "404": BasicError.self,
+                "410": BasicError.self,
+                "503": ServiceUnavailable.self,
+            ]
         )).data
     }
 }

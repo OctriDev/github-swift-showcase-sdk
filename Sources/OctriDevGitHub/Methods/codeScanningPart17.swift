@@ -71,7 +71,7 @@ public extension CodeScanningMethods {
             decoder: .json,
             operationId: "codeScanningCreateVariantAnalysis",
             options: requestOptions,
-            errors: ["404": BasicError.self, "422": BasicError.self]
+            errors: ["404": BasicError.self, "422": BasicError.self, "503": ServiceUnavailable.self]
         )).data
     }
 }

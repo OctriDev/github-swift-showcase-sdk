@@ -4,89 +4,6 @@
 import Foundation
 
 /// Repos domain models
-public extension CombinedCommitStatus {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.state) else {
-            throw SdkValidationError(
-                field: "state",
-                code: "required",
-                message: "Validation failed for 'state': value is required"
-            )
-        }
-        guard container.contains(.statuses) else {
-            throw SdkValidationError(
-                field: "statuses",
-                code: "required",
-                message: "Validation failed for 'statuses': value is required"
-            )
-        }
-        guard container.contains(.sha) else {
-            throw SdkValidationError(
-                field: "sha",
-                code: "required",
-                message: "Validation failed for 'sha': value is required"
-            )
-        }
-        guard container.contains(.totalCount) else {
-            throw SdkValidationError(
-                field: "total_count",
-                code: "required",
-                message: "Validation failed for 'total_count': value is required"
-            )
-        }
-        guard container.contains(.repository) else {
-            throw SdkValidationError(
-                field: "repository",
-                code: "required",
-                message: "Validation failed for 'repository': value is required"
-            )
-        }
-        guard container.contains(.commitUrl) else {
-            throw SdkValidationError(
-                field: "commit_url",
-                code: "required",
-                message: "Validation failed for 'commit_url': value is required"
-            )
-        }
-        guard container.contains(.url) else {
-            throw SdkValidationError(
-                field: "url",
-                code: "required",
-                message: "Validation failed for 'url': value is required"
-            )
-        }
-        state = try container.sdkDecodeRequired(.state)
-        statuses = try container.sdkDecodeRequired(.statuses)
-        sha = try container.sdkDecodeRequired(.sha)
-        totalCount = try container.sdkDecodeRequired(.totalCount)
-        repository = try container.sdkDecodeRequired(.repository)
-        commitUrl = try container.sdkDecodeRequired(.commitUrl)
-        url = try container.sdkDecodeRequired(.url)
-        try sdkValidateUri("commit_url", commitUrl)
-        try sdkValidateUri("url", url)
-    }
-}
-
-public extension CombinedCommitStatus {
-    init(
-        state: String,
-        statuses: [SimpleCommitStatus],
-        sha: String,
-        totalCount: Int,
-        repository: MinimalRepository,
-        commitUrl: String,
-        url: String
-    ) throws {
-        (self.state, self.statuses) = (state, statuses)
-        (self.sha, self.totalCount) = (sha, totalCount)
-        (self.repository, self.commitUrl) = (repository, commitUrl)
-        self.url = url
-        try sdkValidateUri("commit_url", self.commitUrl)
-        try sdkValidateUri("url", self.url)
-    }
-}
-
 /// Optional object value serialized in the `_links` wire field.
 public struct FileCommitContentLinks: Codable {
     /// Optional `string` value serialized in the `self` wire field.
@@ -619,5 +536,100 @@ public extension TagCommit {
     init(sha: String, url: String) throws {
         (self.sha, self.url) = (sha, url)
         try sdkValidateUri("url", self.url)
+    }
+}
+
+/// Required object value serialized in the `parents[]` wire field.
+public struct FileCommitCommitParentsItem: Codable {
+    /// Optional `string` value serialized in the `url` wire field.
+    public var url: String?
+    /// Optional `string` value serialized in the `html_url` wire field.
+    public var htmlUrl: String?
+    /// Optional `string` value serialized in the `sha` wire field.
+    public var sha: String?
+
+    enum CodingKeys: String, CodingKey {
+        case url
+        case htmlUrl = "html_url"
+        case sha
+    }
+
+    init() {
+        (url, htmlUrl, sha) = (nil, nil, nil)
+    }
+}
+
+public extension FileCommitCommitParentsItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        url = try container.sdkDecodeIfPresent(.url)
+        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        sha = try container.sdkDecodeIfPresent(.sha)
+    }
+}
+
+public extension FileCommitCommitParentsItem {
+    init(url: String? = nil, htmlUrl: String? = nil, sha: String? = nil) {
+        self.init()
+        (self.url, self.htmlUrl) = (url, htmlUrl)
+        self.sha = sha
+    }
+}
+
+/// Optional object value serialized in the `permissions` wire field.
+public struct CollaboratorPermissions: Codable {
+    /// Required `boolean` value serialized in the `pull` wire field.
+    public var pull: Bool
+    /// Required `boolean` value serialized in the `push` wire field.
+    public var push: Bool
+    /// Required `boolean` value serialized in the `admin` wire field.
+    public var admin: Bool
+    /// Optional `boolean` value serialized in the `triage` wire field.
+    public var triage: Bool?
+    /// Optional `boolean` value serialized in the `maintain` wire field.
+    public var maintain: Bool?
+
+    enum CodingKeys: String, CodingKey {
+        case pull
+        case push
+        case admin
+        case triage
+        case maintain
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension CollaboratorPermissions {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.pull) else {
+            throw SdkValidationError(
+                field: "pull",
+                code: "required",
+                message: "Validation failed for 'pull': value is required"
+            )
+        }
+        guard container.contains(.push) else {
+            throw SdkValidationError(
+                field: "push",
+                code: "required",
+                message: "Validation failed for 'push': value is required"
+            )
+        }
+        guard container.contains(.admin) else {
+            throw SdkValidationError(
+                field: "admin",
+                code: "required",
+                message: "Validation failed for 'admin': value is required"
+            )
+        }
+        pull = try container.sdkDecodeRequired(.pull)
+        push = try container.sdkDecodeRequired(.push)
+        admin = try container.sdkDecodeRequired(.admin)
+        triage = try container.sdkDecodeIfPresent(.triage)
+        maintain = try container.sdkDecodeIfPresent(.maintain)
     }
 }

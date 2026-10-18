@@ -117,7 +117,7 @@ extension WebhookPullRequestSynchronizePullRequestMergedBy {
 }
 
 public typealias WebhookPullRequestSynchronizePullRequestRequestedReviewersList =
-    [WebhookPullRequestSynchronizePullRequestRequestedReviewersItem]
+    [WebhookPullRequestSynchronizePullRequestRequestedReviewersItem?]
 
 /// Required object value serialized in the `pull_request` wire field.
 public struct WebhookPullRequestSynchronizePullRequest: Codable {

@@ -85,7 +85,7 @@ struct BillingUpdateBudgetOrgRequestBody: Encodable {
     var budgetAmount: Int?
     var preventFurtherUsage: Bool?
     var budgetAlerting: BillingUpdateBudgetOrgRequestBodyBudgetAlerting?
-    var expiresAt: BillingUpdateBudgetOrgRequestBodyExpiresAt?
+    var expiresAt: SdkOptional<BillingUpdateBudgetOrgRequestBodyExpiresAt>?
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)

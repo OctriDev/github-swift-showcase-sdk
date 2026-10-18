@@ -49,7 +49,7 @@ public extension ActionsMethods {
         labels: [String],
         workFolder: String? = nil,
         requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsGenerateRunnerJitconfigForOrgResponse {
+    ) async throws -> ActionsRunnerJitconfig {
         try validateItems("labels", labels, min: 1, max: 100)
 
         let requestBody = ActionsGenerateRunnerJitconfigForOrgRequestBody(

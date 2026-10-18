@@ -6,6 +6,56 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
+/// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
+/// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
+public struct AgentAutomationsListAutomationsResponseItemTriggersWorkflowRunWriteScope: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let trigger =
+        AgentAutomationsListAutomationsResponseItemTriggersWorkflowRunWriteScope(rawValue: "trigger")
+    public static let repository =
+        AgentAutomationsListAutomationsResponseItemTriggersWorkflowRunWriteScope(rawValue: "repository")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// The enablement status of GitHub Secret Protection features.
+public struct CodeSecurityCreateConfigurationRequestBodySecretProtection: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let enabled = CodeSecurityCreateConfigurationRequestBodySecretProtection(rawValue: "enabled")
+    public static let disabled = CodeSecurityCreateConfigurationRequestBodySecretProtection(rawValue: "disabled")
+    public static let notSet = CodeSecurityCreateConfigurationRequestBodySecretProtection(rawValue: "not_set")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
 public struct SearchLabelsParameter: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
@@ -184,57 +234,6 @@ public struct AgentAutomationsEditRepoAutomationRequestBodyTriggersPullRequX92b1
         AgentAutomationsEditRepoAutomationRequestBodyTriggersPullRequX92b1cb9c03(rawValue: "trigger")
     public static let repository =
         AgentAutomationsEditRepoAutomationRequestBodyTriggersPullRequX92b1cb9c03(rawValue: "repository")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
-/// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
-public struct AgentAutomationsCreateRepoAutomationResponseTriggersIntervalWriteScope: RawRepresentable, Hashable,
-    Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let trigger =
-        AgentAutomationsCreateRepoAutomationResponseTriggersIntervalWriteScope(rawValue: "trigger")
-    public static let repository =
-        AgentAutomationsCreateRepoAutomationResponseTriggersIntervalWriteScope(rawValue: "repository")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// The bypass mode for the reviewer
-public struct CodeSecurityUpdateConfigurationRequestBodySecretScanningDelegXb8ce035c88: RawRepresentable, Hashable,
-    Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let always =
-        CodeSecurityUpdateConfigurationRequestBodySecretScanningDelegXb8ce035c88(rawValue: "ALWAYS")
-    public static let exempt =
-        CodeSecurityUpdateConfigurationRequestBodySecretScanningDelegXb8ce035c88(rawValue: "EXEMPT")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

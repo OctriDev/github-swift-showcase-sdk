@@ -12,6 +12,11 @@ public indirect enum RepositoryRulesetConditions2 {
 extension RepositoryRulesetConditions2: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) {
+                self = value; return
+            }
+        }
         if let value = Self.decodeGroup1(from: container) {
             self = value; return
         }
@@ -25,6 +30,18 @@ extension RepositoryRulesetConditions2: Codable {
         if try encodeGroup1(to: encoder) {
             return
         }
+    }
+}
+
+extension RepositoryRulesetConditions2 {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(RepositoryRulesetConditions.self), sdkKeepsEveryKey(value, of: raw) {
+            return .repositoryRulesetConditions(value)
+        }
+        if let value = try? container.decode(OrgRulesetConditions.self), sdkKeepsEveryKey(value, of: raw) {
+            return .orgRulesetConditions(value)
+        }
+        return nil
     }
 }
 

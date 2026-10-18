@@ -128,30 +128,6 @@ public struct CopilotGetCopilotCodingAgentPermissionsOrganizationResponseEnX3894
     }
 }
 
-/// The repository directory that includes the source files for the Pages site. Allowed paths are `/` or
-/// `/docs`.
-public struct ReposUpdateInformationAboutPagesSiteRequestBodySourceVariant1Path: RawRepresentable, Hashable, Codable,
-    Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let unknown = ReposUpdateInformationAboutPagesSiteRequestBodySourceVariant1Path(rawValue: "/")
-    public static let docs = ReposUpdateInformationAboutPagesSiteRequestBodySourceVariant1Path(rawValue: "/docs")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
 /// The enablement status of code scanning delegated alert dismissal
 public struct CodeSecurityUpdateConfigurationRequestBodyCodeScanningDelegatX0ecaeaf3b9: RawRepresentable, Hashable,
     Codable, Sendable, SdkWireConvertible {
@@ -224,9 +200,37 @@ public struct AgentAutomationsListAutomationsResponseItemTriggersWorkflowRuXbffa
     }
 }
 
-/// The level of the annotation.
-public struct ChecksUpdateRequestBodyOutputAnnotationsItemAnnotationLevel: RawRepresentable, Hashable, Codable,
-    Sendable,
+/// The enablement status of Copilot secret scanning
+public struct CodeSecurityUpdateEnterpriseConfigurationRequestBodySecretScaXc4cc0ea98d: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let enabled =
+        CodeSecurityUpdateEnterpriseConfigurationRequestBodySecretScaXc4cc0ea98d(rawValue: "enabled")
+    public static let disabled =
+        CodeSecurityUpdateEnterpriseConfigurationRequestBodySecretScaXc4cc0ea98d(rawValue: "disabled")
+    public static let notSet =
+        CodeSecurityUpdateEnterpriseConfigurationRequestBodySecretScaXc4cc0ea98d(rawValue: "not_set")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Who owns the automation. `user` keeps it private to its creator and its runs act as that user. `repository`
+/// makes it belong to the repository, visible to anyone with read access to the repository, and its runs act as
+/// the Copilot app rather than as a person.
+public struct AgentAutomationsCreateRepoAutomationResponseOwnerType: RawRepresentable, Hashable, Codable, Sendable,
     SdkWireConvertible {
     public let rawValue: String
 
@@ -234,9 +238,8 @@ public struct ChecksUpdateRequestBodyOutputAnnotationsItemAnnotationLevel: RawRe
         self.rawValue = rawValue
     }
 
-    public static let notice = ChecksUpdateRequestBodyOutputAnnotationsItemAnnotationLevel(rawValue: "notice")
-    public static let warning = ChecksUpdateRequestBodyOutputAnnotationsItemAnnotationLevel(rawValue: "warning")
-    public static let failure = ChecksUpdateRequestBodyOutputAnnotationsItemAnnotationLevel(rawValue: "failure")
+    public static let user = AgentAutomationsCreateRepoAutomationResponseOwnerType(rawValue: "user")
+    public static let repository = AgentAutomationsCreateRepoAutomationResponseOwnerType(rawValue: "repository")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

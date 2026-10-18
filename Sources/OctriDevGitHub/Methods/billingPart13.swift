@@ -41,7 +41,12 @@ public extension BillingMethods {
             decoder: .json,
             operationId: "billingGetGithubBillingUsageReportUser",
             options: requestOptions,
-            errors: ["400": BasicError.self, "403": BasicError.self, "500": BasicError.self]
+            errors: [
+                "400": BasicError.self,
+                "403": BasicError.self,
+                "500": BasicError.self,
+                "503": ServiceUnavailable.self,
+            ]
         )).data
     }
 }

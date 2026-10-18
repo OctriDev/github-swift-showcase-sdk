@@ -52,7 +52,12 @@ public extension IssuesMethods {
             decoder: .json,
             operationId: "issuesReprioritizeSubIssue",
             options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationErrorSimple.self]
+            errors: [
+                "403": BasicError.self,
+                "404": BasicError.self,
+                "422": ValidationErrorSimple.self,
+                "503": ServiceUnavailable.self,
+            ]
         )).data
     }
 }

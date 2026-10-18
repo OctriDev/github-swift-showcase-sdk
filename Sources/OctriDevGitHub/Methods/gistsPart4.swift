@@ -70,7 +70,7 @@ public extension GistsMethods {
             decoder: .json,
             operationId: "gistsGet",
             options: requestOptions,
-            errors: ["404": BasicError.self]
+            errors: ["403": ForbiddenGist.self, "404": BasicError.self]
         )).data
     }
 }

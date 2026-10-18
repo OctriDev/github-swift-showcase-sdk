@@ -4,6 +4,53 @@
 import Foundation
 
 /// IssuesNullable domain models
+public indirect enum NullableIssueLabelsItem {
+    case stringValue(String)
+    case nullableIssueLabelsItemVariant1(NullableIssueLabelsItemVariant1)
+}
+
+extension NullableIssueLabelsItem: Codable {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for NullableIssueLabelsItem"
+        )
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        if try encodeGroup1(to: encoder) {
+            return
+        }
+    }
+}
+
+extension NullableIssueLabelsItem {
+    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
+        if let value = try? container.decode(String.self) {
+            return .stringValue(value)
+        }
+        if let value = try? container
+            .decode(NullableIssueLabelsItemVariant1.self) {
+            return .nullableIssueLabelsItemVariant1(value)
+        }
+        return nil
+    }
+}
+
+extension NullableIssueLabelsItem {
+    func encodeGroup1(to encoder: Encoder) throws -> Bool {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case let .stringValue(value): try container.encode(value); return true
+        case let .nullableIssueLabelsItemVariant1(value): try container.encode(value); return true
+        }
+    }
+}
+
 /// The type of the referenced issue.
 public struct NullableIssueReferenceIssueType: Codable {
     /// The unique identifier of the issue type.
@@ -62,53 +109,6 @@ public extension NullableIssueReferenceIssueType {
     init(id: Int, nodeId: String, name: String, color: String? = nil) {
         (self.id, self.nodeId) = (id, nodeId)
         (self.name, self.color) = (name, color)
-    }
-}
-
-public indirect enum NullableIssueLabelsItem {
-    case stringValue(String)
-    case nullableIssueLabelsItemVariant1(NullableIssueLabelsItemVariant1)
-}
-
-extension NullableIssueLabelsItem: Codable {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for NullableIssueLabelsItem"
-        )
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
-    }
-}
-
-extension NullableIssueLabelsItem {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) {
-            return .stringValue(value)
-        }
-        if let value = try? container
-            .decode(NullableIssueLabelsItemVariant1.self) {
-            return .nullableIssueLabelsItemVariant1(value)
-        }
-        return nil
-    }
-}
-
-extension NullableIssueLabelsItem {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .stringValue(value): try container.encode(value); return true
-        case let .nullableIssueLabelsItemVariant1(value): try container.encode(value); return true
-        }
     }
 }
 
@@ -211,6 +211,81 @@ public extension NullableIssuePullRequest {
         }
         if let value = self.mergedAt {
             try sdkValidateDateTime("merged_at", sdkWireString(value))
+        }
+    }
+}
+
+/// Required object value serialized in the `labels[]` wire field.
+public struct NullableIssueLabelsItemVariant1: Codable {
+    /// Optional `int64`-formatted value serialized in the `id` wire field.
+    public var id: Int?
+    /// Optional `string` value serialized in the `node_id` wire field.
+    public var nodeId: String?
+    /// Optional `uri`-formatted value serialized in the `url` wire field.
+    public var url: String?
+    /// Optional `string` value serialized in the `name` wire field.
+    public var name: String?
+    /// Optional `string` value serialized in the `description` wire field.
+    public var description: String?
+    /// Optional `string` value serialized in the `color` wire field.
+    public var color: String?
+    /// Optional `boolean` value serialized in the `default` wire field.
+    public var `default`: Bool?
+    /// The user who archived the label, or `null` if it has not been archived.
+    public var archivedBy: SimpleUser?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case nodeId = "node_id"
+        case url
+        case name
+        case description
+        case color
+        case `default`
+        case archivedBy = "archived_by"
+    }
+
+    init() {
+        (id, nodeId, url, name, description) = (nil, nil, nil, nil, nil)
+        (color, self.default, archivedBy) = (nil, nil, nil)
+    }
+}
+
+public extension NullableIssueLabelsItemVariant1 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.sdkDecodeIfPresent(.id)
+        nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        url = try container.sdkDecodeIfPresent(.url)
+        name = try container.sdkDecodeIfPresent(.name)
+        description = try container.sdkDecodeIfPresent(.description)
+        color = try container.sdkDecodeIfPresent(.color)
+        self.default = try container.sdkDecodeIfPresent(.default)
+        archivedBy = try container.sdkDecodeIfPresent(.archivedBy)
+        if let value = url {
+            try sdkValidateUri("url", value)
+        }
+    }
+}
+
+public extension NullableIssueLabelsItemVariant1 {
+    init(
+        id: Int? = nil,
+        nodeId: String? = nil,
+        url: String? = nil,
+        name: String? = nil,
+        description: String? = nil,
+        color: String? = nil,
+        default: Bool? = nil,
+        archivedBy: SimpleUser? = nil
+    ) throws {
+        self.init()
+        (self.id, self.nodeId) = (id, nodeId)
+        (self.url, self.name) = (url, name)
+        (self.description, self.color) = (description, color)
+        (self.default, self.archivedBy) = (`default`, archivedBy)
+        if let value = self.url {
+            try sdkValidateUri("url", value)
         }
     }
 }
@@ -342,95 +417,144 @@ public extension NullableIssueReference {
     }
 }
 
-/// The user who archived the label, or `null` if it has not been archived.
-public struct NullableIssueLabelsItemVariant1ArchivedBy: Codable {
-    /// Required `string` value serialized in the `login` wire field.
-    /// - Example: "octocat"
-    public var login: String
+/// Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
+public struct NullableIssue: Codable {
     /// Required `int64`-formatted value serialized in the `id` wire field.
-    /// - Example: 1
     public var id: Int
     /// Required `string` value serialized in the `node_id` wire field.
-    /// - Example: "MDQ6VXNlcjE="
     public var nodeId: String
-    /// Required `uri`-formatted value serialized in the `avatar_url` wire field.
-    /// - Example: "https://github.com/images/error/octocat_happy.gif"
-    public var avatarUrl: String
-    /// Required `string` value serialized in the `gravatar_id` wire field.
-    /// - Example: "41d064eb2195891e12d0413f63227ea7"
-    public var gravatarId: String?
-    /// Required `uri`-formatted value serialized in the `url` wire field.
-    /// - Example: "https://api.github.com/users/octocat"
+    /// URL for the issue
+    /// - Example: "https://api.github.com/repositories/42/issues/1"
     public var url: String
-    /// Required `uri`-formatted value serialized in the `html_url` wire field.
-    /// - Example: "https://github.com/octocat"
-    public var htmlUrl: String
-    /// Required `uri`-formatted value serialized in the `followers_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/followers"
-    public var followersUrl: String
-    /// Required `string` value serialized in the `following_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/following{/other_user}"
-    public var followingUrl: String
-    /// Required `string` value serialized in the `gists_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/gists{/gist_id}"
-    public var gistsUrl: String
-    /// Required `string` value serialized in the `starred_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/starred{/owner}{/repo}"
-    public var starredUrl: String
-    /// Required `uri`-formatted value serialized in the `subscriptions_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/subscriptions"
-    public var subscriptionsUrl: String
-    /// Required `uri`-formatted value serialized in the `organizations_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/orgs"
-    public var organizationsUrl: String
-    /// Required `uri`-formatted value serialized in the `repos_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/repos"
-    public var reposUrl: String
-    /// Required `string` value serialized in the `events_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/events{/privacy}"
+    /// Required `uri`-formatted value serialized in the `repository_url` wire field.
+    public var repositoryUrl: String
+    /// Required `string` value serialized in the `labels_url` wire field.
+    public var labelsUrl: String
+    /// Required `uri`-formatted value serialized in the `comments_url` wire field.
+    public var commentsUrl: String
+    /// Required `uri`-formatted value serialized in the `events_url` wire field.
     public var eventsUrl: String
-    /// Required `uri`-formatted value serialized in the `received_events_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/received_events"
-    public var receivedEventsUrl: String
-    /// Required `string` value serialized in the `type` wire field.
-    /// - Example: "User"
-    public var type: String
-    /// Required `boolean` value serialized in the `site_admin` wire field.
-    public var siteAdmin: Bool
-    /// Optional `string` value serialized in the `name` wire field.
-    public var name: String?
-    /// Optional `string` value serialized in the `email` wire field.
-    public var email: String?
-    /// Optional `string` value serialized in the `starred_at` wire field.
-    /// - Example: "\"2020-07-09T00:17:55Z\""
-    public var starredAt: String?
-    /// Optional `string` value serialized in the `user_view_type` wire field.
-    /// - Example: "public"
-    public var userViewType: String?
+    /// Required `uri`-formatted value serialized in the `html_url` wire field.
+    public var htmlUrl: String
+    /// Number uniquely identifying the issue within its repository
+    /// - Example: 42
+    public var number: Int
+    /// State of the issue; either 'open' or 'closed'
+    /// - Example: "open"
+    public var state: String
+    /// Title of the issue
+    /// - Example: "Widget creation fails in Safari on OS X 10.8"
+    public var title: String
+    /// A GitHub user.
+    public var user: NullableSimpleUser?
+    /// Labels to associate with this issue; pass one or more label names to replace the set of labels on this
+    /// issue; send an empty array to clear all labels from the issue; note that the labels are silently dropped for
+    /// users without push access to the repository
+    /// - Example: ["bug","registration"]
+    public var labels: [NullableIssueLabelsItem]
+    /// A GitHub user.
+    public var assignee: NullableSimpleUser?
+    /// A collection of related issues and pull requests.
+    public var milestone: NullableMilestone?
+    /// Required `boolean` value serialized in the `locked` wire field.
+    public var locked: Bool
+    /// Required `integer` value serialized in the `comments` wire field.
+    public var comments: Int
+    /// Required `date-time`-formatted value serialized in the `closed_at` wire field.
+    public var closedAt: Date?
+    /// Required `date-time`-formatted value serialized in the `created_at` wire field.
+    public var createdAt: Date
+    /// Required `date-time`-formatted value serialized in the `updated_at` wire field.
+    public var updatedAt: Date
+    /// The reason for the current state
+    /// - Example: "not_planned"
+    public var stateReason: NullableIssueStateReason?
+    /// Contents of the issue
+    /// - Example: "It looks like the new widget form is broken on Safari. When I try and create the widget, Safari
+    /// crashes. This is reproducible on 10.8, but not 10.9. Maybe a browser bug?"
+    public var body: String?
+    /// Optional array value serialized in the `assignees` wire field.
+    public var assignees: [SimpleUser]?
+    /// Optional `string` value serialized in the `active_lock_reason` wire field.
+    public var activeLockReason: String?
+    /// Optional object value serialized in the `pull_request` wire field.
+    public var pullRequest: NullableIssuePullRequest?
+    /// Optional `boolean` value serialized in the `draft` wire field.
+    public var draft: Bool?
+    /// A GitHub user.
+    public var closedBy: NullableSimpleUser?
+    /// Optional `string` value serialized in the `body_html` wire field.
+    public var bodyHtml: String?
+    /// Optional `string` value serialized in the `body_text` wire field.
+    public var bodyText: String?
+    /// Optional `uri`-formatted value serialized in the `timeline_url` wire field.
+    public var timelineUrl: String?
+    /// The type assigned to the issue. This is only present for issues in repositories where issue types are
+    /// supported.
+    public var type: IssueType?
+    /// A repository on GitHub.
+    public var repository: Repository?
+    /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user
+    /// accounts and granted access to specific repositories. They come with granular permissions and built-in
+    /// webhooks. GitHub apps are first class actors within GitHub.
+    public var performedViaGithubApp: NullableIntegration?
+    /// How the author is associated with the repository.
+    /// - Example: "OWNER"
+    public var authorAssociation: AuthorAssociation?
+    /// Optional object value serialized in the `reactions` wire field.
+    public var reactions: ReactionRollup?
+    /// Optional object value serialized in the `sub_issues_summary` wire field.
+    public var subIssuesSummary: SubIssuesSummary?
+    /// URL to get the parent issue of this issue, if it is a sub-issue
+    public var parentIssueUrl: String?
+    /// Comments provide a way for people to collaborate on an issue.
+    public var pinnedComment: NullableIssueComment?
+    /// Optional object value serialized in the `issue_dependencies_summary` wire field.
+    public var issueDependenciesSummary: IssueDependenciesSummary?
+    /// Optional array value serialized in the `issue_field_values` wire field.
+    public var issueFieldValues: [IssueFieldValue]?
 
     enum CodingKeys: String, CodingKey {
-        case login
         case id
         case nodeId = "node_id"
-        case avatarUrl = "avatar_url"
-        case gravatarId = "gravatar_id"
         case url
-        case htmlUrl = "html_url"
-        case followersUrl = "followers_url"
-        case followingUrl = "following_url"
-        case gistsUrl = "gists_url"
-        case starredUrl = "starred_url"
-        case subscriptionsUrl = "subscriptions_url"
-        case organizationsUrl = "organizations_url"
-        case reposUrl = "repos_url"
+        case repositoryUrl = "repository_url"
+        case labelsUrl = "labels_url"
+        case commentsUrl = "comments_url"
         case eventsUrl = "events_url"
-        case receivedEventsUrl = "received_events_url"
+        case htmlUrl = "html_url"
+        case number
+        case state
+        case title
+        case user
+        case labels
+        case assignee
+        case milestone
+        case locked
+        case comments
+        case closedAt = "closed_at"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+        case stateReason = "state_reason"
+        case body
+        case assignees
+        case activeLockReason = "active_lock_reason"
+        case pullRequest = "pull_request"
+        case draft
+        case closedBy = "closed_by"
+        case bodyHtml = "body_html"
+        case bodyText = "body_text"
+        case timelineUrl = "timeline_url"
         case type
-        case siteAdmin = "site_admin"
-        case name
-        case email
-        case starredAt = "starred_at"
-        case userViewType = "user_view_type"
+        case repository
+        case performedViaGithubApp = "performed_via_github_app"
+        case authorAssociation = "author_association"
+        case reactions
+        case subIssuesSummary = "sub_issues_summary"
+        case parentIssueUrl = "parent_issue_url"
+        case pinnedComment = "pinned_comment"
+        case issueDependenciesSummary = "issue_dependencies_summary"
+        case issueFieldValues = "issue_field_values"
     }
 
     private init(sdkCopy value: Self) {
@@ -438,84 +562,49 @@ public struct NullableIssueLabelsItemVariant1ArchivedBy: Codable {
     }
 }
 
-public extension NullableIssueLabelsItemVariant1ArchivedBy {
+public extension NullableIssue {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        login = try container.sdkDecodeRequired(.login)
         id = try container.sdkDecodeRequired(.id)
         nodeId = try container.sdkDecodeRequired(.nodeId)
-        avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
-        gravatarId = try container.sdkDecodeNullable(.gravatarId)
         url = try container.sdkDecodeRequired(.url)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        followersUrl = try container.sdkDecodeRequired(.followersUrl)
-        followingUrl = try container.sdkDecodeRequired(.followingUrl)
-        gistsUrl = try container.sdkDecodeRequired(.gistsUrl)
-        starredUrl = try container.sdkDecodeRequired(.starredUrl)
-        subscriptionsUrl = try container.sdkDecodeRequired(.subscriptionsUrl)
-        organizationsUrl = try container.sdkDecodeRequired(.organizationsUrl)
-        reposUrl = try container.sdkDecodeRequired(.reposUrl)
+        repositoryUrl = try container.sdkDecodeRequired(.repositoryUrl)
+        labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
+        commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
         eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        receivedEventsUrl = try container.sdkDecodeRequired(.receivedEventsUrl)
-        type = try container.sdkDecodeRequired(.type)
-        siteAdmin = try container.sdkDecodeRequired(.siteAdmin)
-        name = try container.sdkDecodeIfPresent(.name)
-        email = try container.sdkDecodeIfPresent(.email)
-        starredAt = try container.sdkDecodeIfPresent(.starredAt)
-        userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        number = try container.sdkDecodeRequired(.number)
+        state = try container.sdkDecodeRequired(.state)
+        title = try container.sdkDecodeRequired(.title)
+        user = try container.sdkDecodeNullable(.user)
+        labels = try container.sdkDecodeRequired(.labels)
+        assignee = try container.sdkDecodeNullable(.assignee)
+        milestone = try container.sdkDecodeNullable(.milestone)
+        locked = try container.sdkDecodeRequired(.locked)
+        comments = try container.sdkDecodeRequired(.comments)
+        closedAt = try container.sdkDecodeNullable(.closedAt)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        stateReason = try container.sdkDecodeIfPresent(.stateReason)
+        body = try container.sdkDecodeIfPresent(.body)
+        assignees = try container.sdkDecodeIfPresent(.assignees)
+        activeLockReason = try container.sdkDecodeIfPresent(.activeLockReason)
+        pullRequest = try container.sdkDecodeIfPresent(.pullRequest)
+        draft = try container.sdkDecodeIfPresent(.draft)
+        closedBy = try container.sdkDecodeIfPresent(.closedBy)
+        bodyHtml = try container.sdkDecodeIfPresent(.bodyHtml)
+        bodyText = try container.sdkDecodeIfPresent(.bodyText)
+        timelineUrl = try container.sdkDecodeIfPresent(.timelineUrl)
+        type = try container.sdkDecodeIfPresent(.type)
+        repository = try container.sdkDecodeIfPresent(.repository)
+        performedViaGithubApp = try container.sdkDecodeIfPresent(.performedViaGithubApp)
+        authorAssociation = try container.sdkDecodeIfPresent(.authorAssociation)
+        reactions = try container.sdkDecodeIfPresent(.reactions)
+        subIssuesSummary = try container.sdkDecodeIfPresent(.subIssuesSummary)
+        parentIssueUrl = try container.sdkDecodeIfPresent(.parentIssueUrl)
+        pinnedComment = try container.sdkDecodeIfPresent(.pinnedComment)
+        issueDependenciesSummary = try container.sdkDecodeIfPresent(.issueDependenciesSummary)
+        issueFieldValues = try container.sdkDecodeIfPresent(.issueFieldValues)
         try sdkValidateConstraints()
-    }
-}
-
-public extension NullableIssueLabelsItemVariant1ArchivedBy {
-    init(
-        login: String,
-        id: Int,
-        nodeId: String,
-        avatarUrl: String,
-        gravatarId: String?,
-        url: String,
-        htmlUrl: String,
-        followersUrl: String,
-        followingUrl: String,
-        gistsUrl: String,
-        starredUrl: String,
-        subscriptionsUrl: String,
-        organizationsUrl: String,
-        reposUrl: String,
-        eventsUrl: String,
-        receivedEventsUrl: String,
-        type: String,
-        siteAdmin: Bool,
-        name: String? = nil,
-        email: String? = nil,
-        starredAt: String? = nil,
-        userViewType: String? = nil
-    ) throws {
-        (self.login, self.id) = (login, id)
-        (self.nodeId, self.avatarUrl) = (nodeId, avatarUrl)
-        (self.gravatarId, self.url) = (gravatarId, url)
-        (self.htmlUrl, self.followersUrl) = (htmlUrl, followersUrl)
-        (self.followingUrl, self.gistsUrl) = (followingUrl, gistsUrl)
-        (self.starredUrl, self.subscriptionsUrl) = (starredUrl, subscriptionsUrl)
-        (self.organizationsUrl, self.reposUrl) = (organizationsUrl, reposUrl)
-        (self.eventsUrl, self.receivedEventsUrl) = (eventsUrl, receivedEventsUrl)
-        (self.type, self.siteAdmin) = (type, siteAdmin)
-        (self.name, self.email) = (name, email)
-        (self.starredAt, self.userViewType) = (starredAt, userViewType)
-        try sdkValidateConstraints()
-    }
-}
-
-extension NullableIssueLabelsItemVariant1ArchivedBy {
-    func sdkValidateConstraints() throws {
-        try sdkValidateUri("avatar_url", avatarUrl)
-        try sdkValidateUri("url", url)
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateUri("followers_url", followersUrl)
-        try sdkValidateUri("subscriptions_url", subscriptionsUrl)
-        try sdkValidateUri("organizations_url", organizationsUrl)
-        try sdkValidateUri("repos_url", reposUrl)
-        try sdkValidateUri("received_events_url", receivedEventsUrl)
     }
 }

@@ -6,6 +6,58 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
+/// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
+/// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
+public struct AgentAutomationsGetRepoAutomationResponseTriggersDiscussionOpXa592250054: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let trigger =
+        AgentAutomationsGetRepoAutomationResponseTriggersDiscussionOpXa592250054(rawValue: "trigger")
+    public static let repository =
+        AgentAutomationsGetRepoAutomationResponseTriggersDiscussionOpXa592250054(rawValue: "repository")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
+/// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
+public struct AgentAutomationsGetRepoAutomationResponseTriggersPullRequestLXd36782e4e1: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let trigger =
+        AgentAutomationsGetRepoAutomationResponseTriggersPullRequestLXd36782e4e1(rawValue: "trigger")
+    public static let repository =
+        AgentAutomationsGetRepoAutomationResponseTriggersPullRequestLXd36782e4e1(rawValue: "repository")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
 public struct IssuesUpdateResponseVariant1SuggestionsTypeItemConfidence: RawRepresentable, Hashable, Codable, Sendable,
     SdkWireConvertible {
     public let rawValue: String
@@ -181,37 +233,6 @@ struct SecurityAdvisoriesCreateRepositoryAdvisoryRequestBody: Encodable {
         cveId = options.cveId
         cweIds = options.cweIds
         credits = options.credits
-        severity = options.severity
-        cvssVectorString = options.cvssVectorString
-        startPrivateFork = options.startPrivateFork
-    }
-}
-
-struct SecurityAdvisoriesCreatePrivateVulnerabilityReportRequestBody: Encodable {
-    let summary: String
-    let description: String
-    var vulnerabilities: SdkOptional<[PrivateVulnerabilityReportCreateVulnerabilitiesItem]>?
-    var cweIds: SdkOptional<[String]>?
-    var severity: SdkOptional<PrivateVulnerabilityReportCreateSeverity>?
-    var cvssVectorString: SdkOptional<String>?
-    var startPrivateFork: Bool?
-
-    func encode(to encoder: Encoder) throws {
-        var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(summary, forKey: SdkCodingKey("summary"))
-        try keyedContainer.encode(description, forKey: SdkCodingKey("description"))
-        try keyedContainer.encodeIfPresent(vulnerabilities, forKey: SdkCodingKey("vulnerabilities"))
-        try keyedContainer.encodeIfPresent(cweIds, forKey: SdkCodingKey("cwe_ids"))
-        try keyedContainer.encodeIfPresent(severity, forKey: SdkCodingKey("severity"))
-        try keyedContainer.encodeIfPresent(cvssVectorString, forKey: SdkCodingKey("cvss_vector_string"))
-        try keyedContainer.encodeIfPresent(startPrivateFork, forKey: SdkCodingKey("start_private_fork"))
-    }
-
-    init(options: SecurityAdvisoriesMethods.SecurityAdvisoriesCreatePrivateVulnerabilityReportOptions) {
-        summary = options.summary
-        description = options.description
-        vulnerabilities = options.vulnerabilities
-        cweIds = options.cweIds
         severity = options.severity
         cvssVectorString = options.cvssVectorString
         startPrivateFork = options.startPrivateFork

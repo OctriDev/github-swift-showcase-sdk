@@ -6,6 +6,32 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
+/// The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or
+/// `COMMENT`. When you leave this blank, the API returns _HTTP 422 (Unrecognizable entity)_ and sets the review
+/// action state to `PENDING`, which means you will need to re-submit the pull request review using a review
+/// action.
+public struct PullsSubmitReviewRequestBodyEvent: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let approve = PullsSubmitReviewRequestBodyEvent(rawValue: "APPROVE")
+    public static let requestChanges = PullsSubmitReviewRequestBodyEvent(rawValue: "REQUEST_CHANGES")
+    public static let comment = PullsSubmitReviewRequestBodyEvent(rawValue: "COMMENT")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
 /// The type of repositories in the organization that can access the variable. `selected` means only the
 /// repositories specified by `selected_repository_ids` can access the variable.
 public struct AgentsCreateOrgVariableRequestBodyVisibility: RawRepresentable, Hashable, Codable, Sendable,
@@ -213,31 +239,6 @@ public struct CopilotSetCopilotCodingAgentPermissionsOrganizationRequestBodXd3a1
     public static let selected =
         CopilotSetCopilotCodingAgentPermissionsOrganizationRequestBodXd3a141df41(rawValue: "selected")
     public static let none = CopilotSetCopilotCodingAgentPermissionsOrganizationRequestBodXd3a141df41(rawValue: "none")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// The current status of the job.
-public struct OrgsGetClusterDeploymentRecordsJobResponseStatus: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let pending = OrgsGetClusterDeploymentRecordsJobResponseStatus(rawValue: "pending")
-    public static let processing = OrgsGetClusterDeploymentRecordsJobResponseStatus(rawValue: "processing")
-    public static let completed = OrgsGetClusterDeploymentRecordsJobResponseStatus(rawValue: "completed")
-    public static let failed = OrgsGetClusterDeploymentRecordsJobResponseStatus(rawValue: "failed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

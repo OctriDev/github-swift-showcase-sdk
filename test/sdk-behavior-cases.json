@@ -13704,7 +13704,14 @@
         "body": {
           "name": "Example Name",
           "description": "example text",
+          "managers": [
+            "managers"
+          ],
+          "team_managers": [
+            "team_managers"
+          ],
           "ends_at": "2024-01-01T00:00:00Z",
+          "contact_link": "https://example.com",
           "code_scanning_alerts": [
             {
               "repository_id": 1,
@@ -13712,7 +13719,8 @@
                 1
               ]
             }
-          ]
+          ],
+          "generate_issues": false
         },
         "bodyKind": "json",
         "contentType": "application/json",
@@ -13726,7 +13734,7 @@
         "headers": {
           "content-type": "application/json"
         },
-        "bodyText": "{\"name\":\"Example Name\",\"description\":\"example text\",\"ends_at\":\"2024-01-01T00:00:00Z\",\"code_scanning_alerts\":[{\"repository_id\":1,\"alert_numbers\":[1]}]}",
+        "bodyText": "{\"name\":\"Example Name\",\"description\":\"example text\",\"managers\":[\"managers\"],\"team_managers\":[\"team_managers\"],\"ends_at\":\"2024-01-01T00:00:00Z\",\"contact_link\":\"https://example.com\",\"code_scanning_alerts\":[{\"repository_id\":1,\"alert_numbers\":[1]}],\"generate_issues\":false}",
         "multipartFields": null
       },
       "response": {
@@ -24454,6 +24462,14 @@
         "headers": {},
         "body": {
           "pattern": "pattern",
+          "start_delimiter": "start_delimiter",
+          "end_delimiter": "end_delimiter",
+          "must_match": [
+            "must_match"
+          ],
+          "must_not_match": [
+            "must_not_match"
+          ],
           "custom_pattern_version": "custom_pattern_version"
         },
         "bodyKind": "json",
@@ -24468,7 +24484,7 @@
         "headers": {
           "content-type": "application/json"
         },
-        "bodyText": "{\"pattern\":\"pattern\",\"custom_pattern_version\":\"custom_pattern_version\"}",
+        "bodyText": "{\"pattern\":\"pattern\",\"start_delimiter\":\"start_delimiter\",\"end_delimiter\":\"end_delimiter\",\"must_match\":[\"must_match\"],\"must_not_match\":[\"must_not_match\"],\"custom_pattern_version\":\"custom_pattern_version\"}",
         "multipartFields": null
       },
       "response": {
@@ -31268,7 +31284,45 @@
         "query": [],
         "headers": {},
         "body": {
-          "status": "completed"
+          "name": "Example Name",
+          "details_url": "https://example.com",
+          "external_id": "external-1",
+          "started_at": "2024-01-01T00:00:00Z",
+          "status": "completed",
+          "conclusion": "action_required",
+          "completed_at": "2024-01-01T00:00:00Z",
+          "output": {
+            "title": "title",
+            "summary": "example text",
+            "text": "text",
+            "annotations": [
+              {
+                "path": "path",
+                "start_line": 1,
+                "end_line": 1,
+                "start_column": 1,
+                "end_column": 1,
+                "annotation_level": "notice",
+                "message": "example text",
+                "title": "title",
+                "raw_details": "raw_details"
+              }
+            ],
+            "images": [
+              {
+                "alt": "alt",
+                "image_url": "https://example.com",
+                "caption": "caption"
+              }
+            ]
+          },
+          "actions": [
+            {
+              "label": "label",
+              "description": "example text",
+              "identifier": "identifier"
+            }
+          ]
         },
         "bodyKind": "json",
         "contentType": "application/json",
@@ -31282,7 +31336,7 @@
         "headers": {
           "content-type": "application/json"
         },
-        "bodyText": "{\"status\":\"completed\"}",
+        "bodyText": "{\"name\":\"Example Name\",\"details_url\":\"https://example.com\",\"external_id\":\"external-1\",\"started_at\":\"2024-01-01T00:00:00Z\",\"status\":\"completed\",\"conclusion\":\"action_required\",\"completed_at\":\"2024-01-01T00:00:00Z\",\"output\":{\"title\":\"title\",\"summary\":\"example text\",\"text\":\"text\",\"annotations\":[{\"path\":\"path\",\"start_line\":1,\"end_line\":1,\"start_column\":1,\"end_column\":1,\"annotation_level\":\"notice\",\"message\":\"example text\",\"title\":\"title\",\"raw_details\":\"raw_details\"}],\"images\":[{\"alt\":\"alt\",\"image_url\":\"https://example.com\",\"caption\":\"caption\"}]},\"actions\":[{\"label\":\"label\",\"description\":\"example text\",\"identifier\":\"identifier\"}]}",
         "multipartFields": null
       },
       "response": {
@@ -32181,7 +32235,13 @@
         "query": [],
         "headers": {},
         "body": {
-          "state": "configured"
+          "state": "configured",
+          "runner_type": "standard",
+          "runner_label": "code-scanning",
+          "languages": [
+            "csharp"
+          ],
+          "ai_findings_option": "disabled"
         },
         "bodyKind": "json",
         "contentType": "application/json",
@@ -32195,7 +32255,7 @@
         "headers": {
           "content-type": "application/json"
         },
-        "bodyText": "{\"state\":\"configured\"}",
+        "bodyText": "{\"state\":\"configured\",\"runner_type\":\"standard\",\"runner_label\":\"code-scanning\",\"languages\":[\"csharp\"],\"ai_findings_option\":\"disabled\"}",
         "multipartFields": null
       },
       "response": {
@@ -33354,7 +33414,13 @@
         "query": [],
         "headers": {},
         "body": {
-          "state": "open"
+          "state": "open",
+          "dismissed_reason": "false positive",
+          "dismissed_comment": "dismissed_comment",
+          "create_request": false,
+          "assignees": [
+            "assignees"
+          ]
         },
         "bodyKind": "json",
         "contentType": "application/json",
@@ -33368,7 +33434,7 @@
         "headers": {
           "content-type": "application/json"
         },
-        "bodyText": "{\"state\":\"open\"}",
+        "bodyText": "{\"state\":\"open\",\"dismissed_reason\":\"false positive\",\"dismissed_comment\":\"dismissed_comment\",\"create_request\":false,\"assignees\":[\"assignees\"]}",
         "multipartFields": null
       },
       "response": {
@@ -38909,7 +38975,17 @@
         "query": [],
         "headers": {},
         "body": {
-          "state": "dismissed"
+          "state": "dismissed",
+          "dismissed_reason": "fix_started",
+          "dismissed_comment": "dismissed_comment",
+          "assignees": [
+            "assignees"
+          ],
+          "agent_assignment": {
+            "custom_instructions": "custom_instructions",
+            "custom_agent": "custom_agent",
+            "model": "model"
+          }
         },
         "bodyKind": "json",
         "contentType": "application/json",
@@ -38923,7 +38999,7 @@
         "headers": {
           "content-type": "application/json"
         },
-        "bodyText": "{\"state\":\"dismissed\"}",
+        "bodyText": "{\"state\":\"dismissed\",\"dismissed_reason\":\"fix_started\",\"dismissed_comment\":\"dismissed_comment\",\"assignees\":[\"assignees\"],\"agent_assignment\":{\"custom_instructions\":\"custom_instructions\",\"custom_agent\":\"custom_agent\",\"model\":\"model\"}}",
         "multipartFields": null
       },
       "response": {
@@ -48298,6 +48374,7 @@
         "query": [],
         "headers": {},
         "body": {
+          "build_type": "legacy",
           "source": {
             "branch": "branch",
             "path": "/"
@@ -48315,7 +48392,7 @@
         "headers": {
           "content-type": "application/json"
         },
-        "bodyText": "{\"source\":{\"branch\":\"branch\",\"path\":\"/\"}}",
+        "bodyText": "{\"build_type\":\"legacy\",\"source\":{\"branch\":\"branch\",\"path\":\"/\"}}",
         "multipartFields": null
       },
       "response": {
@@ -50825,6 +50902,9 @@
         "body": {
           "reviewers": [
             "reviewers"
+          ],
+          "team_reviewers": [
+            "team_reviewers"
           ]
         },
         "bodyKind": "json",
@@ -50839,7 +50919,7 @@
         "headers": {
           "content-type": "application/json"
         },
-        "bodyText": "{\"reviewers\":[\"reviewers\"]}",
+        "bodyText": "{\"reviewers\":[\"reviewers\"],\"team_reviewers\":[\"team_reviewers\"]}",
         "multipartFields": null
       },
       "response": {
@@ -51524,6 +51604,9 @@
         "body": {
           "reviewers": [
             "reviewers"
+          ],
+          "team_reviewers": [
+            "team_reviewers"
           ]
         },
         "bodyKind": "json",
@@ -51538,7 +51621,7 @@
         "headers": {
           "content-type": "application/json"
         },
-        "bodyText": "{\"reviewers\":[\"reviewers\"]}",
+        "bodyText": "{\"reviewers\":[\"reviewers\"],\"team_reviewers\":[\"team_reviewers\"]}",
         "multipartFields": null
       },
       "response": {
@@ -53606,7 +53689,11 @@
         "query": [],
         "headers": {},
         "body": {
-          "state": "open"
+          "state": "open",
+          "resolution": "false_positive",
+          "resolution_comment": "resolution_comment",
+          "assignee": "assignee",
+          "validity": "active"
         },
         "bodyKind": "json",
         "contentType": "application/json",
@@ -53620,7 +53707,7 @@
         "headers": {
           "content-type": "application/json"
         },
-        "bodyText": "{\"state\":\"open\"}",
+        "bodyText": "{\"state\":\"open\",\"resolution\":\"false_positive\",\"resolution_comment\":\"resolution_comment\",\"assignee\":\"assignee\",\"validity\":\"active\"}",
         "multipartFields": null
       },
       "response": {
@@ -95207,7 +95294,7 @@
         "kind": "json",
         "status": 200,
         "mediaType": "application/sarif+json",
-        "body": "{\"runs\":[{\"tool\":{\"driver\":{\"name\":\"CodeQL\",\"organization\":\"GitHub\",\"semanticVersion\":\"1.0.0\",\"rules\":[{\"id\":\"js/unused-local-variable\",\"name\":\"js/unused-local-variable\"}]}},\"results\":[{\"guid\":\"326aa09f-9af8-13cf-9851-3d0e5183ec38\",\"message\":{\"text\":\"Unused variable foo.\"},\"locations\":[{\"physicalLocation\":{\"artifactLocation\":{\"uri\":\"file1.js\"},\"region\":{\"startLine\":1}}}],\"ruleId\":\"js/unused-local-variable\",\"properties\":[{\"github/alertNumber\":2},{\"github/alertUrl\":\"https://api.github.com/repos/monalisa/monalisa/code-scanning/alerts/2\"}]}]}]}",
+        "body": "{\"runs\":[{\"tool\":{\"driver\":{\"name\":\"CodeQL\",\"organization\":\"GitHub\",\"semanticVersion\":\"1.0.0\",\"rules\":[{\"id\":\"js/unused-local-variable\",\"name\":\"js/unused-local-variable\"}]}},\"results\":[{\"guid\":\"326aa09f-9af8-13cf-9851-3d0e5183ec38\",\"message\":{\"text\":\"Unused variable foo.\"},\"locations\":[{\"physicalLocation\":{\"artifactLocation\":{\"uri\":\"file1.js\"},\"region\":{\"startLine\":1}}}],\"ruleId\":\"js/unused-local-variable\",\"properties\":[{\"github/alertNumber\":2},{\"github/alertUrl\":\"https://api.github.com/repos/monalisa/monalisa/code-scanning/alerts/2\"}],\"type\":\"object\"}]}]}",
         "value": {
           "runs": [
             {
@@ -95250,7 +95337,8 @@
                     {
                       "github/alertUrl": "https://api.github.com/repos/monalisa/monalisa/code-scanning/alerts/2"
                     }
-                  ]
+                  ],
+                  "type": "object"
                 }
               ]
             }

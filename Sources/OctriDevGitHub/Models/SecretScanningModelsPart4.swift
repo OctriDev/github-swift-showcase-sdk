@@ -4,6 +4,112 @@
 import Foundation
 
 /// SecretScanning domain models
+public extension OrganizationSecretScanningAlert {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        number = try container.sdkDecodeIfPresent(.number)
+        createdAt = try container.sdkDecodeIfPresent(.createdAt)
+        updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
+        url = try container.sdkDecodeIfPresent(.url)
+        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        locationsUrl = try container.sdkDecodeIfPresent(.locationsUrl)
+        state = try container.sdkDecodeIfPresent(.state)
+        resolution = try container.sdkDecodeIfPresent(.resolution)
+        resolvedAt = try container.sdkDecodeIfPresent(.resolvedAt)
+        resolvedBy = try container.sdkDecodeIfPresent(.resolvedBy)
+        secretType = try container.sdkDecodeIfPresent(.secretType)
+        secretTypeDisplayName = try container.sdkDecodeIfPresent(.secretTypeDisplayName)
+        provider = try container.sdkDecodeIfPresent(.provider)
+        providerSlug = try container.sdkDecodeIfPresent(.providerSlug)
+        secret = try container.sdkDecodeIfPresent(.secret)
+        repository = try container.sdkDecodeIfPresent(.repository)
+        pushProtectionBypassed = try container.sdkDecodeIfPresent(.pushProtectionBypassed)
+        pushProtectionBypassedBy = try container.sdkDecodeIfPresent(.pushProtectionBypassedBy)
+        pushProtectionBypassedAt = try container.sdkDecodeIfPresent(.pushProtectionBypassedAt)
+        pushProtectionBypassRequestReviewer = try container.sdkDecodeIfPresent(.pushProtectionBypassRequestReviewer)
+        pushProtectionBypassRequestReviewerComment = try container
+            .sdkDecodeIfPresent(.pushProtectionBypassRequestReviewerComment)
+        pushProtectionBypassRequestComment = try container.sdkDecodeIfPresent(.pushProtectionBypassRequestComment)
+        pushProtectionBypassRequestHtmlUrl = try container.sdkDecodeIfPresent(.pushProtectionBypassRequestHtmlUrl)
+        resolutionComment = try container.sdkDecodeIfPresent(.resolutionComment)
+        validity = try container.sdkDecodeIfPresent(.validity)
+        publiclyLeaked = try container.sdkDecodeIfPresent(.publiclyLeaked)
+        multiRepo = try container.sdkDecodeIfPresent(.multiRepo)
+        isBase64Encoded = try container.sdkDecodeIfPresent(.isBase64Encoded)
+        firstLocationDetected = try container.sdkDecodeIfPresent(.firstLocationDetected)
+        hasMoreLocations = try container.sdkDecodeIfPresent(.hasMoreLocations)
+        assignedTo = try container.sdkDecodeIfPresent(.assignedTo)
+        closureRequestComment = try container.sdkDecodeIfPresent(.closureRequestComment)
+        closureRequestReviewerComment = try container.sdkDecodeIfPresent(.closureRequestReviewerComment)
+        closureRequestReviewer = try container.sdkDecodeIfPresent(.closureRequestReviewer)
+        try sdkValidateConstraints()
+    }
+}
+
+public extension OrganizationSecretScanningAlert {
+    init(
+        number: AlertNumber? = nil,
+        createdAt: AlertCreatedAt? = nil,
+        updatedAt: NullableAlertUpdatedAt? = nil,
+        url: AlertUrl? = nil,
+        htmlUrl: AlertHtmlUrl? = nil,
+        locationsUrl: String? = nil,
+        state: SecretScanningAlertState? = nil,
+        resolution: SecretScanningAlertResolution? = nil,
+        resolvedAt: Date? = nil,
+        resolvedBy: NullableSimpleUser? = nil,
+        secretType: String? = nil,
+        secretTypeDisplayName: String? = nil,
+        provider: String? = nil,
+        providerSlug: String? = nil,
+        secret: String? = nil,
+        repository: SimpleRepository? = nil,
+        pushProtectionBypassed: Bool? = nil,
+        pushProtectionBypassedBy: NullableSimpleUser? = nil,
+        pushProtectionBypassedAt: Date? = nil,
+        pushProtectionBypassRequestReviewer: NullableSimpleUser? = nil,
+        pushProtectionBypassRequestReviewerComment: String? = nil,
+        pushProtectionBypassRequestComment: String? = nil,
+        pushProtectionBypassRequestHtmlUrl: String? = nil,
+        resolutionComment: String? = nil,
+        validity: OrganizationSecretScanningAlertValidity? = nil,
+        publiclyLeaked: Bool? = nil,
+        multiRepo: Bool? = nil,
+        isBase64Encoded: Bool? = nil,
+        firstLocationDetected: NullableSecretScanningFirstDetectedLocation? = nil,
+        hasMoreLocations: Bool? = nil,
+        assignedTo: NullableSimpleUser? = nil,
+        closureRequestComment: String? = nil,
+        closureRequestReviewerComment: String? = nil,
+        closureRequestReviewer: NullableSimpleUser? = nil
+    ) throws {
+        self.init()
+        (self.number, self.createdAt) = (number, createdAt)
+        (self.updatedAt, self.url) = (updatedAt, url)
+        (self.htmlUrl, self.locationsUrl) = (htmlUrl, locationsUrl)
+        (self.state, self.resolution) = (state, resolution)
+        (self.resolvedAt, self.resolvedBy) = (resolvedAt, resolvedBy)
+        (self.secretType, self.secretTypeDisplayName) = (secretType, secretTypeDisplayName)
+        (self.provider, self.providerSlug) = (provider, providerSlug)
+        (self.secret, self.repository) = (secret, repository)
+        self.pushProtectionBypassed = pushProtectionBypassed
+        self.pushProtectionBypassedBy = pushProtectionBypassedBy
+        self.pushProtectionBypassedAt = pushProtectionBypassedAt
+        self.pushProtectionBypassRequestReviewer = pushProtectionBypassRequestReviewer
+        self.pushProtectionBypassRequestReviewerComment = pushProtectionBypassRequestReviewerComment
+        self.pushProtectionBypassRequestComment = pushProtectionBypassRequestComment
+        self.pushProtectionBypassRequestHtmlUrl = pushProtectionBypassRequestHtmlUrl
+        (self.resolutionComment, self.validity) = (resolutionComment, validity)
+        (self.publiclyLeaked, self.multiRepo) = (publiclyLeaked, multiRepo)
+        (self.isBase64Encoded, self.firstLocationDetected) = (isBase64Encoded, firstLocationDetected)
+        (self.hasMoreLocations, self.assignedTo) = (hasMoreLocations, assignedTo)
+        self.closureRequestComment = closureRequestComment
+        self.closureRequestReviewerComment = closureRequestReviewerComment
+        self.closureRequestReviewer = closureRequestReviewer
+        try sdkValidateConstraints()
+    }
+}
+
 extension OrganizationSecretScanningAlert {
     func sdkValidateConstraints() throws {
         if let value = createdAt {
@@ -155,38 +261,6 @@ public extension SecretScanningLocationWikiCommit {
     }
 }
 
-/// Required object value serialized in the `custom_pattern_backfill_scans[]` wire field.
-public struct SecretScanningScanHistoryCustomPatternBackfillScansItemVariant1: Codable {
-    /// Name of the custom pattern for custom pattern scans
-    public var patternName: String?
-    /// Level at which the custom pattern is defined, one of "repository", "organization", or "enterprise"
-    public var patternScope: String?
-
-    enum CodingKeys: String, CodingKey {
-        case patternName = "pattern_name"
-        case patternScope = "pattern_scope"
-    }
-
-    init() {
-        (patternName, patternScope) = (nil, nil)
-    }
-}
-
-public extension SecretScanningScanHistoryCustomPatternBackfillScansItemVariant1 {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        patternName = try container.sdkDecodeIfPresent(.patternName)
-        patternScope = try container.sdkDecodeIfPresent(.patternScope)
-    }
-}
-
-public extension SecretScanningScanHistoryCustomPatternBackfillScansItemVariant1 {
-    init(patternName: String? = nil, patternScope: String? = nil) {
-        self.init()
-        (self.patternName, self.patternScope) = (patternName, patternScope)
-    }
-}
-
 /// Typed representation of the `SecretScanningLocation` API schema.
 public struct SecretScanningLocation: Codable {
     /// The location type. Because secrets may be found in different types of resources (ie. code, comments, issues,
@@ -221,7 +295,7 @@ public extension SecretScanningLocation {
     }
 }
 
-/// Required API value serialized in the `custom_pattern_backfill_scans[]` wire field.
+/// Required object value serialized in the `custom_pattern_backfill_scans[]` wire field.
 public struct SecretScanningScanHistoryCustomPatternBackfillScansItem: Codable {
     /// The type of scan
     public var type: String?
@@ -410,178 +484,5 @@ public extension SecretScanningCustomPatternToCreate {
         (self.name, self.pattern) = (name, pattern)
         (self.startDelimiter, self.endDelimiter) = (startDelimiter, endDelimiter)
         (self.mustMatch, self.mustNotMatch) = (mustMatch, mustNotMatch)
-    }
-}
-
-/// Typed representation of the `SecretScanningAlert` API schema.
-public struct SecretScanningAlert: Codable {
-    /// The security alert number.
-    public var number: AlertNumber?
-    /// The time that the alert was created in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
-    public var createdAt: AlertCreatedAt?
-    /// The time that the alert was last updated in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
-    public var updatedAt: NullableAlertUpdatedAt?
-    /// The REST API URL of the alert resource.
-    public var url: AlertUrl?
-    /// The GitHub URL of the alert resource.
-    public var htmlUrl: AlertHtmlUrl?
-    /// The REST API URL of the code locations for this alert.
-    public var locationsUrl: String?
-    /// Sets the state of the secret scanning alert. You must provide `resolution` when you set the state to
-    /// `resolved`.
-    public var state: SecretScanningAlertState?
-    /// **Required when the `state` is `resolved`.** The reason for resolving the alert.
-    public var resolution: SecretScanningAlertResolution?
-    /// The time that the alert was resolved in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
-    public var resolvedAt: Date?
-    /// A GitHub user.
-    public var resolvedBy: NullableSimpleUser?
-    /// An optional comment to resolve an alert.
-    public var resolutionComment: String?
-    /// The type of secret that secret scanning detected.
-    public var secretType: String?
-    /// User-friendly name for the detected secret, matching the `secret_type`. For a list of built-in patterns, see
-    /// "Supported secret scanning patterns."
-    public var secretTypeDisplayName: String?
-    /// The provider of the secret that was detected.
-    public var provider: String?
-    /// The slug identifier for the provider of the secret that was detected. Use this value for filtering by
-    /// provider with the `providers` or `exclude_providers` parameters.
-    public var providerSlug: String?
-    /// The secret that was detected.
-    public var secret: String?
-    /// Whether push protection was bypassed for the detected secret.
-    public var pushProtectionBypassed: Bool?
-    /// A GitHub user.
-    public var pushProtectionBypassedBy: NullableSimpleUser?
-    /// The time that push protection was bypassed in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
-    public var pushProtectionBypassedAt: Date?
-    /// A GitHub user.
-    public var pushProtectionBypassRequestReviewer: NullableSimpleUser?
-    /// An optional comment when reviewing a push protection bypass.
-    public var pushProtectionBypassRequestReviewerComment: String?
-    /// An optional comment when requesting a push protection bypass.
-    public var pushProtectionBypassRequestComment: String?
-    /// The URL to a push protection bypass request.
-    public var pushProtectionBypassRequestHtmlUrl: String?
-    /// The token status as of the latest validity check.
-    public var validity: SecretScanningAlertValidity?
-    /// Whether the detected secret was publicly leaked.
-    public var publiclyLeaked: Bool?
-    /// Whether the detected secret was found in multiple repositories under the same organization or enterprise.
-    public var multiRepo: Bool?
-    /// A boolean value representing whether or not alert is base64 encoded
-    public var isBase64Encoded: Bool?
-    /// Details on the location where the token was initially detected. This can be a commit, wiki commit, issue,
-    /// discussion, pull request.
-    public var firstLocationDetected: NullableSecretScanningFirstDetectedLocation?
-    /// A boolean value representing whether or not the token in the alert was detected in more than one location.
-    public var hasMoreLocations: Bool?
-    /// A GitHub user.
-    public var assignedTo: NullableSimpleUser?
-    /// An optional comment from the closure request author.
-    public var closureRequestComment: String?
-    /// An optional comment from the closure request reviewer.
-    public var closureRequestReviewerComment: String?
-    /// A GitHub user.
-    public var closureRequestReviewer: NullableSimpleUser?
-
-    enum CodingKeys: String, CodingKey {
-        case number
-        case createdAt = "created_at"
-        case updatedAt = "updated_at"
-        case url
-        case htmlUrl = "html_url"
-        case locationsUrl = "locations_url"
-        case state
-        case resolution
-        case resolvedAt = "resolved_at"
-        case resolvedBy = "resolved_by"
-        case resolutionComment = "resolution_comment"
-        case secretType = "secret_type"
-        case secretTypeDisplayName = "secret_type_display_name"
-        case provider
-        case providerSlug = "provider_slug"
-        case secret
-        case pushProtectionBypassed = "push_protection_bypassed"
-        case pushProtectionBypassedBy = "push_protection_bypassed_by"
-        case pushProtectionBypassedAt = "push_protection_bypassed_at"
-        case pushProtectionBypassRequestReviewer = "push_protection_bypass_request_reviewer"
-        case pushProtectionBypassRequestReviewerComment = "push_protection_bypass_request_reviewer_comment"
-        case pushProtectionBypassRequestComment = "push_protection_bypass_request_comment"
-        case pushProtectionBypassRequestHtmlUrl = "push_protection_bypass_request_html_url"
-        case validity
-        case publiclyLeaked = "publicly_leaked"
-        case multiRepo = "multi_repo"
-        case isBase64Encoded = "is_base64_encoded"
-        case firstLocationDetected = "first_location_detected"
-        case hasMoreLocations = "has_more_locations"
-        case assignedTo = "assigned_to"
-        case closureRequestComment = "closure_request_comment"
-        case closureRequestReviewerComment = "closure_request_reviewer_comment"
-        case closureRequestReviewer = "closure_request_reviewer"
-    }
-
-    init() {
-        (number, createdAt, updatedAt, url, htmlUrl) = (nil, nil, nil, nil, nil)
-        (locationsUrl, state, resolution, resolvedAt, resolvedBy) = (nil, nil, nil, nil, nil)
-        (resolutionComment, secretType, secretTypeDisplayName, provider, providerSlug) = (nil, nil, nil, nil, nil)
-        (
-            secret,
-            pushProtectionBypassed,
-            pushProtectionBypassedBy,
-            pushProtectionBypassedAt,
-            pushProtectionBypassRequestReviewer
-        ) = (nil, nil, nil, nil, nil)
-        (
-            pushProtectionBypassRequestReviewerComment,
-            pushProtectionBypassRequestComment,
-            pushProtectionBypassRequestHtmlUrl,
-            validity,
-            publiclyLeaked
-        ) = (nil, nil, nil, nil, nil)
-        (multiRepo, isBase64Encoded, firstLocationDetected, hasMoreLocations, assignedTo) = (nil, nil, nil, nil, nil)
-        (closureRequestComment, closureRequestReviewerComment, closureRequestReviewer) = (nil, nil, nil)
-    }
-}
-
-public extension SecretScanningAlert {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        number = try container.sdkDecodeIfPresent(.number)
-        createdAt = try container.sdkDecodeIfPresent(.createdAt)
-        updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
-        url = try container.sdkDecodeIfPresent(.url)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        locationsUrl = try container.sdkDecodeIfPresent(.locationsUrl)
-        state = try container.sdkDecodeIfPresent(.state)
-        resolution = try container.sdkDecodeIfPresent(.resolution)
-        resolvedAt = try container.sdkDecodeIfPresent(.resolvedAt)
-        resolvedBy = try container.sdkDecodeIfPresent(.resolvedBy)
-        resolutionComment = try container.sdkDecodeIfPresent(.resolutionComment)
-        secretType = try container.sdkDecodeIfPresent(.secretType)
-        secretTypeDisplayName = try container.sdkDecodeIfPresent(.secretTypeDisplayName)
-        provider = try container.sdkDecodeIfPresent(.provider)
-        providerSlug = try container.sdkDecodeIfPresent(.providerSlug)
-        secret = try container.sdkDecodeIfPresent(.secret)
-        pushProtectionBypassed = try container.sdkDecodeIfPresent(.pushProtectionBypassed)
-        pushProtectionBypassedBy = try container.sdkDecodeIfPresent(.pushProtectionBypassedBy)
-        pushProtectionBypassedAt = try container.sdkDecodeIfPresent(.pushProtectionBypassedAt)
-        pushProtectionBypassRequestReviewer = try container.sdkDecodeIfPresent(.pushProtectionBypassRequestReviewer)
-        pushProtectionBypassRequestReviewerComment = try container
-            .sdkDecodeIfPresent(.pushProtectionBypassRequestReviewerComment)
-        pushProtectionBypassRequestComment = try container.sdkDecodeIfPresent(.pushProtectionBypassRequestComment)
-        pushProtectionBypassRequestHtmlUrl = try container.sdkDecodeIfPresent(.pushProtectionBypassRequestHtmlUrl)
-        validity = try container.sdkDecodeIfPresent(.validity)
-        publiclyLeaked = try container.sdkDecodeIfPresent(.publiclyLeaked)
-        multiRepo = try container.sdkDecodeIfPresent(.multiRepo)
-        isBase64Encoded = try container.sdkDecodeIfPresent(.isBase64Encoded)
-        firstLocationDetected = try container.sdkDecodeIfPresent(.firstLocationDetected)
-        hasMoreLocations = try container.sdkDecodeIfPresent(.hasMoreLocations)
-        assignedTo = try container.sdkDecodeIfPresent(.assignedTo)
-        closureRequestComment = try container.sdkDecodeIfPresent(.closureRequestComment)
-        closureRequestReviewerComment = try container.sdkDecodeIfPresent(.closureRequestReviewerComment)
-        closureRequestReviewer = try container.sdkDecodeIfPresent(.closureRequestReviewer)
-        try sdkValidateConstraints()
     }
 }

@@ -6,6 +6,28 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
+public struct IssuesListParameterX0cd8f15d: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let created = IssuesListParameterX0cd8f15d(rawValue: "created")
+    public static let updated = IssuesListParameterX0cd8f15d(rawValue: "updated")
+    public static let comments = IssuesListParameterX0cd8f15d(rawValue: "comments")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
 /// The state of the status. When you set a transient deployment to `inactive`, the deployment will be shown as
 /// `destroyed` in GitHub.
 public struct ReposCreateDeploymentStatusRequestBodyState: RawRepresentable, Hashable, Codable, Sendable,
@@ -226,34 +248,6 @@ public struct SecurityAdvisoriesListOrgRepositoryAdvisoriesParameterX737430cc: R
     public static let draft = SecurityAdvisoriesListOrgRepositoryAdvisoriesParameterX737430cc(rawValue: "draft")
     public static let published = SecurityAdvisoriesListOrgRepositoryAdvisoriesParameterX737430cc(rawValue: "published")
     public static let closed = SecurityAdvisoriesListOrgRepositoryAdvisoriesParameterX737430cc(rawValue: "closed")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-public struct OrgsSetClusterDeploymentRecordsRequestBodyDeploymentsItemRuntXd81b427d92: RawRepresentable, Hashable,
-    Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let criticalResource =
-        OrgsSetClusterDeploymentRecordsRequestBodyDeploymentsItemRuntXd81b427d92(rawValue: "critical-resource")
-    public static let internetExposed =
-        OrgsSetClusterDeploymentRecordsRequestBodyDeploymentsItemRuntXd81b427d92(rawValue: "internet-exposed")
-    public static let lateralMovement =
-        OrgsSetClusterDeploymentRecordsRequestBodyDeploymentsItemRuntXd81b427d92(rawValue: "lateral-movement")
-    public static let sensitiveData =
-        OrgsSetClusterDeploymentRecordsRequestBodyDeploymentsItemRuntXd81b427d92(rawValue: "sensitive-data")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

@@ -6,30 +6,6 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-/// The role to grant to the collaborator.
-public struct CopilotSpacesAddCollaboratorForOrgRequestBodyRole: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let reader = CopilotSpacesAddCollaboratorForOrgRequestBodyRole(rawValue: "reader")
-    public static let writer = CopilotSpacesAddCollaboratorForOrgRequestBodyRole(rawValue: "writer")
-    public static let admin = CopilotSpacesAddCollaboratorForOrgRequestBodyRole(rawValue: "admin")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
 public struct IssuesListSuggestionsParameter: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
@@ -254,6 +230,32 @@ public struct AgentAutomationsEditRepoAutomationResponseTriggersPullRequestXa324
         AgentAutomationsEditRepoAutomationResponseTriggersPullRequestXa32447f775(rawValue: "trigger")
     public static let repository =
         AgentAutomationsEditRepoAutomationResponseTriggersPullRequestXa32447f775(rawValue: "repository")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
+/// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
+public struct AgentAutomationsCreateRepoAutomationRequestBodyTriggersIssueOX1055dcf1c1: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let trigger =
+        AgentAutomationsCreateRepoAutomationRequestBodyTriggersIssueOX1055dcf1c1(rawValue: "trigger")
+    public static let repository =
+        AgentAutomationsCreateRepoAutomationRequestBodyTriggersIssueOX1055dcf1c1(rawValue: "repository")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

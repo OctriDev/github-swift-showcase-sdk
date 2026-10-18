@@ -48,7 +48,12 @@ public extension IssuesMethods {
             decoder: .empty,
             operationId: "issuesDeleteIssueFieldValue",
             options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self]
+            errors: [
+                "403": BasicError.self,
+                "404": BasicError.self,
+                "422": ValidationError.self,
+                "503": ServiceUnavailable.self,
+            ]
         )).data
     }
 }

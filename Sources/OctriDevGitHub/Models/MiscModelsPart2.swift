@@ -4,6 +4,492 @@
 import Foundation
 
 /// Misc domain models
+extension PullRequestWebhook {
+    func sdkValidateConstraintsPart2() throws {
+        if let value = mergedAt {
+            try sdkValidateDateTime("merged_at", sdkWireString(value))
+        }
+    }
+}
+
+/// The type of the referenced issue.
+public struct IssueReferenceIssueType: Codable {
+    /// The unique identifier of the issue type.
+    public var id: Int
+    /// The node identifier of the issue type.
+    public var nodeId: String
+    /// The name of the issue type.
+    public var name: String
+    /// The color of the issue type.
+    public var color: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case nodeId = "node_id"
+        case name
+        case color
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension IssueReferenceIssueType {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.nodeId) else {
+            throw SdkValidationError(
+                field: "node_id",
+                code: "required",
+                message: "Validation failed for 'node_id': value is required"
+            )
+        }
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        name = try container.sdkDecodeRequired(.name)
+        color = try container.sdkDecodeIfPresent(.color)
+    }
+}
+
+public extension IssueReferenceIssueType {
+    init(id: Int, nodeId: String, name: String, color: String? = nil) {
+        (self.id, self.nodeId) = (id, nodeId)
+        (self.name, self.color) = (name, color)
+    }
+}
+
+/// A group of pull requests that the merge queue has grouped together to be merged.
+public struct MergeGroup: Codable {
+    /// The SHA of the merge group.
+    public var headSha: String
+    /// The full ref of the merge group.
+    public var headRef: String
+    /// The SHA of the merge group's parent commit.
+    public var baseSha: String
+    /// The full ref of the branch the merge group will be merged into.
+    public var baseRef: String
+    /// A commit.
+    public var headCommit: SimpleCommit
+
+    enum CodingKeys: String, CodingKey {
+        case headSha = "head_sha"
+        case headRef = "head_ref"
+        case baseSha = "base_sha"
+        case baseRef = "base_ref"
+        case headCommit = "head_commit"
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension MergeGroup {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.headSha) else {
+            throw SdkValidationError(
+                field: "head_sha",
+                code: "required",
+                message: "Validation failed for 'head_sha': value is required"
+            )
+        }
+        guard container.contains(.headRef) else {
+            throw SdkValidationError(
+                field: "head_ref",
+                code: "required",
+                message: "Validation failed for 'head_ref': value is required"
+            )
+        }
+        guard container.contains(.baseSha) else {
+            throw SdkValidationError(
+                field: "base_sha",
+                code: "required",
+                message: "Validation failed for 'base_sha': value is required"
+            )
+        }
+        guard container.contains(.baseRef) else {
+            throw SdkValidationError(
+                field: "base_ref",
+                code: "required",
+                message: "Validation failed for 'base_ref': value is required"
+            )
+        }
+        guard container.contains(.headCommit) else {
+            throw SdkValidationError(
+                field: "head_commit",
+                code: "required",
+                message: "Validation failed for 'head_commit': value is required"
+            )
+        }
+        headSha = try container.sdkDecodeRequired(.headSha)
+        headRef = try container.sdkDecodeRequired(.headRef)
+        baseSha = try container.sdkDecodeRequired(.baseSha)
+        baseRef = try container.sdkDecodeRequired(.baseRef)
+        headCommit = try container.sdkDecodeRequired(.headCommit)
+    }
+}
+
+public extension MergeGroup {
+    init(headSha: String, headRef: String, baseSha: String, baseRef: String, headCommit: SimpleCommit) {
+        (self.headSha, self.headRef) = (headSha, headRef)
+        (self.baseSha, self.baseRef) = (baseSha, baseRef)
+        self.headCommit = headCommit
+    }
+}
+
+/// Details of a Personal Access Token Request.
+public struct PersonalAccessTokenRequest: Codable {
+    /// Unique identifier of the request for access via fine-grained personal access token. Used as the
+    /// `pat_request_id` parameter in the list and review API calls.
+    public var id: Int
+    /// A GitHub user.
+    public var owner: SimpleUser
+    /// New requested permissions, categorized by type of permission.
+    public var permissionsAdded: PersonalAccessTokenRequestPermissionsAdded
+    /// Requested permissions that elevate access for a previously approved request for access, categorized by type
+    /// of permission.
+    public var permissionsUpgraded: PersonalAccessTokenRequestPermissionsUpgraded
+    /// Permissions requested, categorized by type of permission. This field incorporates `permissions_added` and
+    /// `permissions_upgraded`.
+    public var permissionsResult: PersonalAccessTokenRequestPermissionsResult
+    /// Type of repository selection requested.
+    public var repositorySelection: PersonalAccessTokenRequestRepositorySelection
+    /// The number of repositories the token is requesting access to. This field is only populated when
+    /// `repository_selection` is `subset`.
+    public var repositoryCount: Int?
+    /// An array of repository objects the token is requesting access to. This field is only populated when
+    /// `repository_selection` is `subset`.
+    public var repositories: [PersonalAccessTokenRequestRepositoriesItem]?
+    /// Date and time when the request for access was created.
+    public var createdAt: String
+    /// Unique identifier of the user's token. This field can also be found in audit log events and the
+    /// organization's settings for their PAT grants.
+    public var tokenId: Int
+    /// The name given to the user's token. This field can also be found in an organization's settings page for
+    /// Active Tokens.
+    public var tokenName: String
+    /// Whether the associated fine-grained personal access token has expired.
+    public var tokenExpired: Bool
+    /// Date and time when the associated fine-grained personal access token expires.
+    public var tokenExpiresAt: String?
+    /// Date and time when the associated fine-grained personal access token was last used for authentication.
+    public var tokenLastUsedAt: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case owner
+        case permissionsAdded = "permissions_added"
+        case permissionsUpgraded = "permissions_upgraded"
+        case permissionsResult = "permissions_result"
+        case repositorySelection = "repository_selection"
+        case repositoryCount = "repository_count"
+        case repositories
+        case createdAt = "created_at"
+        case tokenId = "token_id"
+        case tokenName = "token_name"
+        case tokenExpired = "token_expired"
+        case tokenExpiresAt = "token_expires_at"
+        case tokenLastUsedAt = "token_last_used_at"
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension PersonalAccessTokenRequest {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.sdkDecodeRequired(.id)
+        owner = try container.sdkDecodeRequired(.owner)
+        permissionsAdded = try container.sdkDecodeRequired(.permissionsAdded)
+        permissionsUpgraded = try container.sdkDecodeRequired(.permissionsUpgraded)
+        permissionsResult = try container.sdkDecodeRequired(.permissionsResult)
+        repositorySelection = try container.sdkDecodeRequired(.repositorySelection)
+        repositoryCount = try container.sdkDecodeNullable(.repositoryCount)
+        repositories = try container.sdkDecodeNullable(.repositories)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        tokenId = try container.sdkDecodeRequired(.tokenId)
+        tokenName = try container.sdkDecodeRequired(.tokenName)
+        tokenExpired = try container.sdkDecodeRequired(.tokenExpired)
+        tokenExpiresAt = try container.sdkDecodeNullable(.tokenExpiresAt)
+        tokenLastUsedAt = try container.sdkDecodeNullable(.tokenLastUsedAt)
+    }
+}
+
+public extension PersonalAccessTokenRequest {
+    init(
+        id: Int,
+        owner: SimpleUser,
+        permissionsAdded: PersonalAccessTokenRequestPermissionsAdded,
+        permissionsUpgraded: PersonalAccessTokenRequestPermissionsUpgraded,
+        permissionsResult: PersonalAccessTokenRequestPermissionsResult,
+        repositorySelection: PersonalAccessTokenRequestRepositorySelection,
+        repositoryCount: Int?,
+        repositories: [PersonalAccessTokenRequestRepositoriesItem]?,
+        createdAt: String,
+        tokenId: Int,
+        tokenName: String,
+        tokenExpired: Bool,
+        tokenExpiresAt: String?,
+        tokenLastUsedAt: String?
+    ) {
+        (self.id, self.owner) = (id, owner)
+        (self.permissionsAdded, self.permissionsUpgraded) = (permissionsAdded, permissionsUpgraded)
+        (self.permissionsResult, self.repositorySelection) = (permissionsResult, repositorySelection)
+        (self.repositoryCount, self.repositories) = (repositoryCount, repositories)
+        (self.createdAt, self.tokenId) = (createdAt, tokenId)
+        (self.tokenName, self.tokenExpired) = (tokenName, tokenExpired)
+        (self.tokenExpiresAt, self.tokenLastUsedAt) = (tokenExpiresAt, tokenLastUsedAt)
+    }
+}
+
+/// An enterprise on GitHub. Webhook payloads contain the `enterprise` property when the webhook is configured on an
+/// enterprise account or an organization that's part of an enterprise account. For more information, see "About
+/// enterprise accounts."
+public struct EnterpriseWebhooks: Codable {
+    /// Required `uri`-formatted value serialized in the `html_url` wire field.
+    /// - Example: "https://github.com/enterprises/octo-business"
+    public var htmlUrl: String
+    /// Unique identifier of the enterprise
+    /// - Example: 42
+    public var id: Int
+    /// Required `string` value serialized in the `node_id` wire field.
+    /// - Example: "MDEwOlJlcG9zaXRvcnkxMjk2MjY5"
+    public var nodeId: String
+    /// The name of the enterprise.
+    /// - Example: "Octo Business"
+    public var name: String
+    /// The slug url identifier for the enterprise.
+    /// - Example: "octo-business"
+    public var slug: String
+    /// Required `date-time`-formatted value serialized in the `created_at` wire field.
+    /// - Example: "2019-01-26T19:01:12Z"
+    public var createdAt: Date?
+    /// Required `date-time`-formatted value serialized in the `updated_at` wire field.
+    /// - Example: "2019-01-26T19:14:43Z"
+    public var updatedAt: Date?
+    /// Required `uri`-formatted value serialized in the `avatar_url` wire field.
+    public var avatarUrl: String
+    /// A short description of the enterprise.
+    public var description: String?
+    /// The enterprise's website URL.
+    public var websiteUrl: String?
+
+    enum CodingKeys: String, CodingKey {
+        case htmlUrl = "html_url"
+        case id
+        case nodeId = "node_id"
+        case name
+        case slug
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+        case avatarUrl = "avatar_url"
+        case description
+        case websiteUrl = "website_url"
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension EnterpriseWebhooks {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        name = try container.sdkDecodeRequired(.name)
+        slug = try container.sdkDecodeRequired(.slug)
+        createdAt = try container.sdkDecodeNullable(.createdAt)
+        updatedAt = try container.sdkDecodeNullable(.updatedAt)
+        avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
+        description = try container.sdkDecodeIfPresent(.description)
+        websiteUrl = try container.sdkDecodeIfPresent(.websiteUrl)
+        try sdkValidateUri("html_url", htmlUrl)
+        if let value = createdAt {
+            try sdkValidateDateTime("created_at", sdkWireString(value))
+        }
+        if let value = updatedAt {
+            try sdkValidateDateTime("updated_at", sdkWireString(value))
+        }
+        try sdkValidateUri("avatar_url", avatarUrl)
+        if let value = websiteUrl {
+            try sdkValidateUri("website_url", value)
+        }
+    }
+}
+
+public extension EnterpriseWebhooks {
+    init(
+        htmlUrl: String,
+        id: Int,
+        nodeId: String,
+        name: String,
+        slug: String,
+        createdAt: Date?,
+        updatedAt: Date?,
+        avatarUrl: String,
+        description: String? = nil,
+        websiteUrl: String? = nil
+    ) throws {
+        (self.htmlUrl, self.id) = (htmlUrl, id)
+        (self.nodeId, self.name) = (nodeId, name)
+        (self.slug, self.createdAt) = (slug, createdAt)
+        (self.updatedAt, self.avatarUrl) = (updatedAt, avatarUrl)
+        (self.description, self.websiteUrl) = (description, websiteUrl)
+        try sdkValidateUri("html_url", self.htmlUrl)
+        if let value = self.createdAt {
+            try sdkValidateDateTime("created_at", sdkWireString(value))
+        }
+        if let value = self.updatedAt {
+            try sdkValidateDateTime("updated_at", sdkWireString(value))
+        }
+        try sdkValidateUri("avatar_url", self.avatarUrl)
+        if let value = self.websiteUrl {
+            try sdkValidateUri("website_url", value)
+        }
+    }
+}
+
+/// Required object value serialized in the `pull_request` wire field.
+public struct PullRequestWebhookVariant1: Codable {
+    /// Whether to allow auto-merge for pull requests.
+    public var allowAutoMerge: Bool?
+    /// Whether to allow updating the pull request's branch.
+    public var allowUpdateBranch: Bool?
+    /// Whether to delete head branches when pull requests are merged.
+    public var deleteBranchOnMerge: Bool?
+    /// The default value for a merge commit message. - `PR_TITLE` - default to the pull request's title. -
+    /// `PR_BODY` - default to the pull request's body. - `BLANK` - default to a blank commit message.
+    public var mergeCommitMessage: PullRequestWebhookVariant1MergeCommitMessage?
+    /// The default value for a merge commit title. - `PR_TITLE` - default to the pull request's title. -
+    /// `MERGE_MESSAGE` - default to the classic title for a merge message (e.g., "Merge pull request #123 from
+    /// branch-name").
+    public var mergeCommitTitle: PullRequestWebhookVariant1MergeCommitTitle?
+    /// The default value for a squash merge commit message: - `PR_BODY` - default to the pull request's body. -
+    /// `COMMIT_MESSAGES` - default to the branch's commit messages. - `BLANK` - default to a blank commit message.
+    public var squashMergeCommitMessage: PullRequestWebhookVariant1SquashMergeCommitMessage?
+    /// The default value for a squash merge commit title: - `PR_TITLE` - default to the pull request's title. -
+    /// `COMMIT_OR_PR_TITLE` - default to the commit's title (if only one commit) or the pull request's title (when
+    /// more than one commit).
+    public var squashMergeCommitTitle: PullRequestWebhookVariant1SquashMergeCommitTitle?
+    /// Whether a squash merge commit can use the pull request title as default. **This property is closing down.
+    /// Please use `squash_merge_commit_title` instead.**
+    public var useSquashPrTitleAsDefault: Bool?
+
+    enum CodingKeys: String, CodingKey {
+        case allowAutoMerge = "allow_auto_merge"
+        case allowUpdateBranch = "allow_update_branch"
+        case deleteBranchOnMerge = "delete_branch_on_merge"
+        case mergeCommitMessage = "merge_commit_message"
+        case mergeCommitTitle = "merge_commit_title"
+        case squashMergeCommitMessage = "squash_merge_commit_message"
+        case squashMergeCommitTitle = "squash_merge_commit_title"
+        case useSquashPrTitleAsDefault = "use_squash_pr_title_as_default"
+    }
+
+    init() {
+        (allowAutoMerge, allowUpdateBranch, deleteBranchOnMerge, mergeCommitMessage, mergeCommitTitle) = (
+            nil,
+            nil,
+            nil,
+            nil,
+            nil
+        )
+        (squashMergeCommitMessage, squashMergeCommitTitle, useSquashPrTitleAsDefault) = (nil, nil, nil)
+    }
+}
+
+public extension PullRequestWebhookVariant1 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        allowAutoMerge = try container.sdkDecodeIfPresent(.allowAutoMerge)
+        allowUpdateBranch = try container.sdkDecodeIfPresent(.allowUpdateBranch)
+        deleteBranchOnMerge = try container.sdkDecodeIfPresent(.deleteBranchOnMerge)
+        mergeCommitMessage = try container.sdkDecodeIfPresent(.mergeCommitMessage)
+        mergeCommitTitle = try container.sdkDecodeIfPresent(.mergeCommitTitle)
+        squashMergeCommitMessage = try container.sdkDecodeIfPresent(.squashMergeCommitMessage)
+        squashMergeCommitTitle = try container.sdkDecodeIfPresent(.squashMergeCommitTitle)
+        useSquashPrTitleAsDefault = try container.sdkDecodeIfPresent(.useSquashPrTitleAsDefault)
+    }
+}
+
+public extension PullRequestWebhookVariant1 {
+    init(
+        allowAutoMerge: Bool? = nil,
+        allowUpdateBranch: Bool? = nil,
+        deleteBranchOnMerge: Bool? = nil,
+        mergeCommitMessage: PullRequestWebhookVariant1MergeCommitMessage? = nil,
+        mergeCommitTitle: PullRequestWebhookVariant1MergeCommitTitle? = nil,
+        squashMergeCommitMessage: PullRequestWebhookVariant1SquashMergeCommitMessage? = nil,
+        squashMergeCommitTitle: PullRequestWebhookVariant1SquashMergeCommitTitle? = nil,
+        useSquashPrTitleAsDefault: Bool? = nil
+    ) {
+        self.init()
+        (self.allowAutoMerge, self.allowUpdateBranch) = (allowAutoMerge, allowUpdateBranch)
+        (self.deleteBranchOnMerge, self.mergeCommitMessage) = (deleteBranchOnMerge, mergeCommitMessage)
+        self.mergeCommitTitle = mergeCommitTitle
+        self.squashMergeCommitMessage = squashMergeCommitMessage
+        self.squashMergeCommitTitle = squashMergeCommitTitle
+        self.useSquashPrTitleAsDefault = useSquashPrTitleAsDefault
+    }
+}
+
+/// New requested permissions, categorized by type of permission.
+public struct PersonalAccessTokenRequestPermissionsAdded: Codable {
+    /// Optional object value serialized in the `organization` wire field.
+    public var organization: [String: String]?
+    /// Optional object value serialized in the `repository` wire field.
+    public var repository: [String: String]?
+    /// Optional object value serialized in the `other` wire field.
+    public var other: [String: String]?
+
+    enum CodingKeys: String, CodingKey {
+        case organization
+        case repository
+        case other
+    }
+
+    init() {
+        (organization, repository, other) = (nil, nil, nil)
+    }
+}
+
+public extension PersonalAccessTokenRequestPermissionsAdded {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        organization = try container.sdkDecodeIfPresent(.organization)
+        repository = try container.sdkDecodeIfPresent(.repository)
+        other = try container.sdkDecodeIfPresent(.other)
+    }
+}
+
+public extension PersonalAccessTokenRequestPermissionsAdded {
+    init(organization: [String: String]? = nil, repository: [String: String]? = nil, other: [String: String]? = nil) {
+        self.init()
+        (self.organization, self.repository) = (organization, repository)
+        self.other = other
+    }
+}
+
 /// A minimal reference to an issue linked from a timeline event (e.g. sub-issue, parent-issue, or dependency
 /// events).
 public struct IssueReference: Codable {
@@ -119,347 +605,5 @@ public struct CheckRunWithSimpleCheckSuiteOutput: Codable {
 
     private init(sdkCopy value: Self) {
         self = value
-    }
-}
-
-public extension CheckRunWithSimpleCheckSuiteOutput {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.annotationsCount) else {
-            throw SdkValidationError(
-                field: "annotations_count",
-                code: "required",
-                message: "Validation failed for 'annotations_count': value is required"
-            )
-        }
-        guard container.contains(.annotationsUrl) else {
-            throw SdkValidationError(
-                field: "annotations_url",
-                code: "required",
-                message: "Validation failed for 'annotations_url': value is required"
-            )
-        }
-        guard container.contains(.summary) else {
-            throw SdkValidationError(
-                field: "summary",
-                code: "required",
-                message: "Validation failed for 'summary': value is required"
-            )
-        }
-        guard container.contains(.text) else {
-            throw SdkValidationError(
-                field: "text",
-                code: "required",
-                message: "Validation failed for 'text': value is required"
-            )
-        }
-        guard container.contains(.title) else {
-            throw SdkValidationError(
-                field: "title",
-                code: "required",
-                message: "Validation failed for 'title': value is required"
-            )
-        }
-        annotationsCount = try container.sdkDecodeRequired(.annotationsCount)
-        annotationsUrl = try container.sdkDecodeRequired(.annotationsUrl)
-        summary = try container.sdkDecodeNullable(.summary)
-        text = try container.sdkDecodeNullable(.text)
-        title = try container.sdkDecodeNullable(.title)
-        try sdkValidateUri("annotations_url", annotationsUrl)
-    }
-}
-
-public extension CheckRunWithSimpleCheckSuiteOutput {
-    init(annotationsCount: Int, annotationsUrl: String, summary: String?, text: String?, title: String?) throws {
-        (self.annotationsCount, self.annotationsUrl) = (annotationsCount, annotationsUrl)
-        (self.summary, self.text) = (summary, text)
-        self.title = title
-        try sdkValidateUri("annotations_url", self.annotationsUrl)
-    }
-}
-
-/// Permissions requested, categorized by type of permission. This field incorporates `permissions_added` and
-/// `permissions_upgraded`.
-public struct PersonalAccessTokenRequestPermissionsResult: Codable {
-    /// Optional object value serialized in the `organization` wire field.
-    public var organization: [String: String]?
-    /// Optional object value serialized in the `repository` wire field.
-    public var repository: [String: String]?
-    /// Optional object value serialized in the `other` wire field.
-    public var other: [String: String]?
-
-    enum CodingKeys: String, CodingKey {
-        case organization
-        case repository
-        case other
-    }
-
-    init() {
-        (organization, repository, other) = (nil, nil, nil)
-    }
-}
-
-public extension PersonalAccessTokenRequestPermissionsResult {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        organization = try container.sdkDecodeIfPresent(.organization)
-        repository = try container.sdkDecodeIfPresent(.repository)
-        other = try container.sdkDecodeIfPresent(.other)
-    }
-}
-
-public extension PersonalAccessTokenRequestPermissionsResult {
-    init(organization: [String: String]? = nil, repository: [String: String]? = nil, other: [String: String]? = nil) {
-        self.init()
-        (self.organization, self.repository) = (organization, repository)
-        self.other = other
-    }
-}
-
-/// A GitHub organization. Webhook payloads contain the `organization` property when the webhook is configured for
-/// an organization, or when the event occurs from activity in a repository owned by an organization.
-public struct OrganizationSimpleWebhooks: Codable {
-    /// Required `string` value serialized in the `login` wire field.
-    /// - Example: "github"
-    public var login: String
-    /// Required `integer` value serialized in the `id` wire field.
-    /// - Example: 1
-    public var id: Int
-    /// Required `string` value serialized in the `node_id` wire field.
-    /// - Example: "MDEyOk9yZ2FuaXphdGlvbjE="
-    public var nodeId: String
-    /// Required `uri`-formatted value serialized in the `url` wire field.
-    /// - Example: "https://api.github.com/orgs/github"
-    public var url: String
-    /// Required `uri`-formatted value serialized in the `repos_url` wire field.
-    /// - Example: "https://api.github.com/orgs/github/repos"
-    public var reposUrl: String
-    /// Required `uri`-formatted value serialized in the `events_url` wire field.
-    /// - Example: "https://api.github.com/orgs/github/events"
-    public var eventsUrl: String
-    /// Required `string` value serialized in the `hooks_url` wire field.
-    /// - Example: "https://api.github.com/orgs/github/hooks"
-    public var hooksUrl: String
-    /// Required `string` value serialized in the `issues_url` wire field.
-    /// - Example: "https://api.github.com/orgs/github/issues"
-    public var issuesUrl: String
-    /// Required `string` value serialized in the `members_url` wire field.
-    /// - Example: "https://api.github.com/orgs/github/members{/member}"
-    public var membersUrl: String
-    /// Required `string` value serialized in the `public_members_url` wire field.
-    /// - Example: "https://api.github.com/orgs/github/public_members{/member}"
-    public var publicMembersUrl: String
-    /// Required `string` value serialized in the `avatar_url` wire field.
-    /// - Example: "https://github.com/images/error/octocat_happy.gif"
-    public var avatarUrl: String
-    /// Required `string` value serialized in the `description` wire field.
-    /// - Example: "A great organization"
-    public var description: String?
-
-    enum CodingKeys: String, CodingKey {
-        case login
-        case id
-        case nodeId = "node_id"
-        case url
-        case reposUrl = "repos_url"
-        case eventsUrl = "events_url"
-        case hooksUrl = "hooks_url"
-        case issuesUrl = "issues_url"
-        case membersUrl = "members_url"
-        case publicMembersUrl = "public_members_url"
-        case avatarUrl = "avatar_url"
-        case description
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension OrganizationSimpleWebhooks {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        login = try container.sdkDecodeRequired(.login)
-        id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        url = try container.sdkDecodeRequired(.url)
-        reposUrl = try container.sdkDecodeRequired(.reposUrl)
-        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        hooksUrl = try container.sdkDecodeRequired(.hooksUrl)
-        issuesUrl = try container.sdkDecodeRequired(.issuesUrl)
-        membersUrl = try container.sdkDecodeRequired(.membersUrl)
-        publicMembersUrl = try container.sdkDecodeRequired(.publicMembersUrl)
-        avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
-        description = try container.sdkDecodeNullable(.description)
-        try sdkValidateUri("url", url)
-        try sdkValidateUri("repos_url", reposUrl)
-        try sdkValidateUri("events_url", eventsUrl)
-    }
-}
-
-public extension OrganizationSimpleWebhooks {
-    init(
-        login: String,
-        id: Int,
-        nodeId: String,
-        url: String,
-        reposUrl: String,
-        eventsUrl: String,
-        hooksUrl: String,
-        issuesUrl: String,
-        membersUrl: String,
-        publicMembersUrl: String,
-        avatarUrl: String,
-        description: String?
-    ) throws {
-        (self.login, self.id) = (login, id)
-        (self.nodeId, self.url) = (nodeId, url)
-        (self.reposUrl, self.eventsUrl) = (reposUrl, eventsUrl)
-        (self.hooksUrl, self.issuesUrl) = (hooksUrl, issuesUrl)
-        (self.membersUrl, self.publicMembersUrl) = (membersUrl, publicMembersUrl)
-        (self.avatarUrl, self.description) = (avatarUrl, description)
-        try sdkValidateUri("url", self.url)
-        try sdkValidateUri("repos_url", self.reposUrl)
-        try sdkValidateUri("events_url", self.eventsUrl)
-    }
-}
-
-/// Requested permissions that elevate access for a previously approved request for access, categorized by type of
-/// permission.
-public struct PersonalAccessTokenRequestPermissionsUpgraded: Codable {
-    /// Optional object value serialized in the `organization` wire field.
-    public var organization: [String: String]?
-    /// Optional object value serialized in the `repository` wire field.
-    public var repository: [String: String]?
-    /// Optional object value serialized in the `other` wire field.
-    public var other: [String: String]?
-
-    enum CodingKeys: String, CodingKey {
-        case organization
-        case repository
-        case other
-    }
-
-    init() {
-        (organization, repository, other) = (nil, nil, nil)
-    }
-}
-
-public extension PersonalAccessTokenRequestPermissionsUpgraded {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        organization = try container.sdkDecodeIfPresent(.organization)
-        repository = try container.sdkDecodeIfPresent(.repository)
-        other = try container.sdkDecodeIfPresent(.other)
-    }
-}
-
-public extension PersonalAccessTokenRequestPermissionsUpgraded {
-    init(organization: [String: String]? = nil, repository: [String: String]? = nil, other: [String: String]? = nil) {
-        self.init()
-        (self.organization, self.repository) = (organization, repository)
-        self.other = other
-    }
-}
-
-/// The phase of the lifecycle that the check is currently in.
-public struct CheckRunWithSimpleCheckSuiteStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let queued = CheckRunWithSimpleCheckSuiteStatus(rawValue: "queued")
-    public static let inProgress = CheckRunWithSimpleCheckSuiteStatus(rawValue: "in_progress")
-    public static let completed = CheckRunWithSimpleCheckSuiteStatus(rawValue: "completed")
-    public static let pending = CheckRunWithSimpleCheckSuiteStatus(rawValue: "pending")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// Required enumerated value serialized in the `conclusion` wire field.
-public struct CheckRunWithSimpleCheckSuiteConclusion: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let waiting = CheckRunWithSimpleCheckSuiteConclusion(rawValue: "waiting")
-    public static let pending = CheckRunWithSimpleCheckSuiteConclusion(rawValue: "pending")
-    public static let startupFailure = CheckRunWithSimpleCheckSuiteConclusion(rawValue: "startup_failure")
-    public static let stale = CheckRunWithSimpleCheckSuiteConclusion(rawValue: "stale")
-    public static let success = CheckRunWithSimpleCheckSuiteConclusion(rawValue: "success")
-    public static let failure = CheckRunWithSimpleCheckSuiteConclusion(rawValue: "failure")
-    public static let neutral = CheckRunWithSimpleCheckSuiteConclusion(rawValue: "neutral")
-    public static let cancelled = CheckRunWithSimpleCheckSuiteConclusion(rawValue: "cancelled")
-    public static let skipped = CheckRunWithSimpleCheckSuiteConclusion(rawValue: "skipped")
-    public static let timedOut = CheckRunWithSimpleCheckSuiteConclusion(rawValue: "timed_out")
-    public static let actionRequired = CheckRunWithSimpleCheckSuiteConclusion(rawValue: "action_required")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// Type of repository selection requested.
-public struct PersonalAccessTokenRequestRepositorySelection: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let none = PersonalAccessTokenRequestRepositorySelection(rawValue: "none")
-    public static let all = PersonalAccessTokenRequestRepositorySelection(rawValue: "all")
-    public static let subset = PersonalAccessTokenRequestRepositorySelection(rawValue: "subset")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// Indicates the alert type of a campaign
-public struct CampaignAlertType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let codeScanning = CampaignAlertType(rawValue: "code_scanning")
-    public static let secretScanning = CampaignAlertType(rawValue: "secret_scanning")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
     }
 }

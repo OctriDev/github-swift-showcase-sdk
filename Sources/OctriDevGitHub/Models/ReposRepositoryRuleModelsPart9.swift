@@ -4,6 +4,147 @@
 import Foundation
 
 /// ReposRepositoryRule domain models
+/// Required enumerated value serialized in the `type` wire field.
+public enum RepositoryRuleBranchNamePatternType: String, CaseIterable, Codable {
+    case branchNamePattern = "branch_name_pattern"
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let rawValue = try container.decode(String.self)
+        guard let value = Self(rawValue: rawValue) else {
+            let field = decoder.codingPath.last?.stringValue ?? "RepositoryRuleBranchNamePatternType"
+            throw SdkValidationError(
+                field: field,
+                code: "enum",
+                message: "Validation failed for '\(field)': enum value '\(rawValue)' is not declared"
+            )
+        }
+        self = value
+    }
+}
+
+/// The severity level at which code scanning results that raise alerts block a reference update. For more
+/// information on alert severity levels, see "About code scanning alerts."
+public struct RepositoryRuleParamsCodeScanningToolAlertsThreshold: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let none = RepositoryRuleParamsCodeScanningToolAlertsThreshold(rawValue: "none")
+    public static let errors = RepositoryRuleParamsCodeScanningToolAlertsThreshold(rawValue: "errors")
+    public static let errorsAndWarnings =
+        RepositoryRuleParamsCodeScanningToolAlertsThreshold(rawValue: "errors_and_warnings")
+    public static let all = RepositoryRuleParamsCodeScanningToolAlertsThreshold(rawValue: "all")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Required enumerated value serialized in the `type` wire field.
+public enum RepositoryRuleCodeQualityType: String, CaseIterable, Codable {
+    case codeQuality = "code_quality"
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let rawValue = try container.decode(String.self)
+        guard let value = Self(rawValue: rawValue) else {
+            let field = decoder.codingPath.last?.stringValue ?? "RepositoryRuleCodeQualityType"
+            throw SdkValidationError(
+                field: field,
+                code: "enum",
+                message: "Validation failed for '\(field)': enum value '\(rawValue)' is not declared"
+            )
+        }
+        self = value
+    }
+}
+
+/// Required enumerated value serialized in the `type` wire field.
+public enum RepositoryRuleDeletionType: String, CaseIterable, Codable {
+    case deletion
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let rawValue = try container.decode(String.self)
+        guard let value = Self(rawValue: rawValue) else {
+            let field = decoder.codingPath.last?.stringValue ?? "RepositoryRuleDeletionType"
+            throw SdkValidationError(
+                field: field,
+                code: "enum",
+                message: "Validation failed for '\(field)': enum value '\(rawValue)' is not declared"
+            )
+        }
+        self = value
+    }
+}
+
+/// The type of the actor
+public struct RepositoryRuleParamsActorType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let user = RepositoryRuleParamsActorType(rawValue: "User")
+    public static let team = RepositoryRuleParamsActorType(rawValue: "Team")
+    public static let integrationInstallation = RepositoryRuleParamsActorType(rawValue: "IntegrationInstallation")
+    public static let repositoryRole = RepositoryRuleParamsActorType(rawValue: "RepositoryRole")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Required enumerated value serialized in the `type` wire field.
+public enum RepositoryRuleCreationType: String, CaseIterable, Codable {
+    case creation
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let rawValue = try container.decode(String.self)
+        guard let value = Self(rawValue: rawValue) else {
+            let field = decoder.codingPath.last?.stringValue ?? "RepositoryRuleCreationType"
+            throw SdkValidationError(
+                field: field,
+                code: "enum",
+                message: "Validation failed for '\(field)': enum value '\(rawValue)' is not declared"
+            )
+        }
+        self = value
+    }
+}
+
+/// Required enumerated value serialized in the `type` wire field.
+public enum RepositoryRuleCommitterEmailPatternType: String, CaseIterable, Codable {
+    case committerEmailPattern = "committer_email_pattern"
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let rawValue = try container.decode(String.self)
+        guard let value = Self(rawValue: rawValue) else {
+            let field = decoder.codingPath.last?.stringValue ?? "RepositoryRuleCommitterEmailPatternType"
+            throw SdkValidationError(
+                field: field,
+                code: "enum",
+                message: "Validation failed for '\(field)': enum value '\(rawValue)' is not declared"
+            )
+        }
+        self = value
+    }
+}
+
 /// The operator to use for matching.
 public struct RepositoryRuleCommitterEmailPatternParametersOperator: RawRepresentable, Hashable, Codable, Sendable,
     SdkWireConvertible {

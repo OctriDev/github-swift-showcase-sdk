@@ -60,7 +60,7 @@ public extension PullsMethods {
             decoder: .json,
             operationId: "pullsListFiles",
             options: requestOptions,
-            errors: ["422": ValidationError.self, "500": BasicError.self]
+            errors: ["422": ValidationError.self, "500": BasicError.self, "503": ServiceUnavailable.self]
         )).data
     }
 }

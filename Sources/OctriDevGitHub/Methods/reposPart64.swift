@@ -78,6 +78,7 @@ public extension ReposMethods {
                 "422": ValidationError.self,
                 "429": BasicError.self,
                 "500": BasicError.self,
+                "503": ServiceUnavailable.self,
             ]
         )).data
     }

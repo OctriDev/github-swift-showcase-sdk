@@ -95,43 +95,6 @@ struct ChecksCreateRequestBody: Encodable {
     }
 }
 
-struct ChecksUpdateRequestBody: Encodable {
-    var name: String?
-    var detailsUrl: String?
-    var externalId: String?
-    var startedAt: Date?
-    var status: ChecksUpdateRequestBodyStatus?
-    var conclusion: ChecksUpdateRequestBodyConclusion?
-    var completedAt: Date?
-    var output: ChecksUpdateRequestBodyOutput?
-    var actions: [ChecksUpdateRequestBodyActionsItem]?
-
-    func encode(to encoder: Encoder) throws {
-        var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(name, forKey: SdkCodingKey("name"))
-        try keyedContainer.encodeIfPresent(detailsUrl, forKey: SdkCodingKey("details_url"))
-        try keyedContainer.encodeIfPresent(externalId, forKey: SdkCodingKey("external_id"))
-        try keyedContainer.encodeIfPresent(startedAt, forKey: SdkCodingKey("started_at"))
-        try keyedContainer.encodeIfPresent(status, forKey: SdkCodingKey("status"))
-        try keyedContainer.encodeIfPresent(conclusion, forKey: SdkCodingKey("conclusion"))
-        try keyedContainer.encodeIfPresent(completedAt, forKey: SdkCodingKey("completed_at"))
-        try keyedContainer.encodeIfPresent(output, forKey: SdkCodingKey("output"))
-        try keyedContainer.encodeIfPresent(actions, forKey: SdkCodingKey("actions"))
-    }
-
-    init(options: ChecksMethods.ChecksUpdateOptions) {
-        name = options.name
-        detailsUrl = options.detailsUrl
-        externalId = options.externalId
-        startedAt = options.startedAt
-        status = options.status
-        conclusion = options.conclusion
-        completedAt = options.completedAt
-        output = options.output
-        actions = options.actions
-    }
-}
-
 struct ChecksCreateSuiteRequestBody: Encodable {
     let headSha: String
 
@@ -209,5 +172,41 @@ struct ReactionsCreateForReleaseRequestBody: Encodable {
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
         try keyedContainer.encode(content, forKey: SdkCodingKey("content"))
+    }
+}
+
+public struct DependencyGraphCreateRepositorySnapshotOptionsRequired1: Codable {
+    public let owner: String
+    public let repo: String
+    public let version: Int
+    public let job: SnapshotJob
+    public let sha: String
+    public let ref: String
+    public let detector: SnapshotDetector
+
+    public init(
+        owner: String,
+        repo: String,
+        version: Int,
+        job: SnapshotJob,
+        sha: String,
+        ref: String,
+        detector: SnapshotDetector
+    ) {
+        self.owner = owner
+        self.repo = repo
+        self.version = version
+        self.job = job
+        self.sha = sha
+        self.ref = ref
+        self.detector = detector
+    }
+}
+
+public struct DependencyGraphCreateRepositorySnapshotOptionsRequired2: Codable {
+    public let scanned: Date
+
+    public init(scanned: Date) {
+        self.scanned = scanned
     }
 }

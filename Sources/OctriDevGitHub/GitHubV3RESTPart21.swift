@@ -9,7 +9,7 @@ public extension IssuesNamespace {
         owner: String,
         repo: String,
         issueNumber: Int,
-        assignees: [IssuesAddAssigneesRequestBodyAssigneesItem]? = nil,
+        assignees: [IssuesAddAssigneesRequestAssigneesItem]? = nil,
         requestOptions: RequestOptions? = nil
     ) async throws -> Issue {
         try await IssuesMethods.issuesAddAssignees(

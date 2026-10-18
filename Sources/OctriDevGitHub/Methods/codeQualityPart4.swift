@@ -55,7 +55,13 @@ public extension CodeQualityMethods {
             decoder: .json,
             operationId: "codeQualityUpdateSetup",
             options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self, "409": BasicError.self, "422": BasicError.self]
+            errors: [
+                "403": BasicError.self,
+                "404": BasicError.self,
+                "409": BasicError.self,
+                "422": BasicError.self,
+                "503": ServiceUnavailable.self,
+            ]
         )).data
     }
 }

@@ -4,101 +4,6 @@
 import Foundation
 
 /// Repos domain models
-/// Required object value serialized in the `parents[]` wire field.
-public struct FileCommitCommitParentsItem: Codable {
-    /// Optional `string` value serialized in the `url` wire field.
-    public var url: String?
-    /// Optional `string` value serialized in the `html_url` wire field.
-    public var htmlUrl: String?
-    /// Optional `string` value serialized in the `sha` wire field.
-    public var sha: String?
-
-    enum CodingKeys: String, CodingKey {
-        case url
-        case htmlUrl = "html_url"
-        case sha
-    }
-
-    init() {
-        (url, htmlUrl, sha) = (nil, nil, nil)
-    }
-}
-
-public extension FileCommitCommitParentsItem {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        url = try container.sdkDecodeIfPresent(.url)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        sha = try container.sdkDecodeIfPresent(.sha)
-    }
-}
-
-public extension FileCommitCommitParentsItem {
-    init(url: String? = nil, htmlUrl: String? = nil, sha: String? = nil) {
-        self.init()
-        (self.url, self.htmlUrl) = (url, htmlUrl)
-        self.sha = sha
-    }
-}
-
-/// Optional object value serialized in the `permissions` wire field.
-public struct CollaboratorPermissions: Codable {
-    /// Required `boolean` value serialized in the `pull` wire field.
-    public var pull: Bool
-    /// Required `boolean` value serialized in the `push` wire field.
-    public var push: Bool
-    /// Required `boolean` value serialized in the `admin` wire field.
-    public var admin: Bool
-    /// Optional `boolean` value serialized in the `triage` wire field.
-    public var triage: Bool?
-    /// Optional `boolean` value serialized in the `maintain` wire field.
-    public var maintain: Bool?
-
-    enum CodingKeys: String, CodingKey {
-        case pull
-        case push
-        case admin
-        case triage
-        case maintain
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension CollaboratorPermissions {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.pull) else {
-            throw SdkValidationError(
-                field: "pull",
-                code: "required",
-                message: "Validation failed for 'pull': value is required"
-            )
-        }
-        guard container.contains(.push) else {
-            throw SdkValidationError(
-                field: "push",
-                code: "required",
-                message: "Validation failed for 'push': value is required"
-            )
-        }
-        guard container.contains(.admin) else {
-            throw SdkValidationError(
-                field: "admin",
-                code: "required",
-                message: "Validation failed for 'admin': value is required"
-            )
-        }
-        pull = try container.sdkDecodeRequired(.pull)
-        push = try container.sdkDecodeRequired(.push)
-        admin = try container.sdkDecodeRequired(.admin)
-        triage = try container.sdkDecodeIfPresent(.triage)
-        maintain = try container.sdkDecodeIfPresent(.maintain)
-    }
-}
-
 public extension CollaboratorPermissions {
     init(pull: Bool, push: Bool, admin: Bool, triage: Bool? = nil, maintain: Bool? = nil) {
         (self.pull, self.push) = (pull, push)
@@ -636,5 +541,93 @@ public extension CodeownersErrorsErrorsItem {
         path = try container.sdkDecodeRequired(.path)
         source = try container.sdkDecodeIfPresent(.source)
         suggestion = try container.sdkDecodeIfPresent(.suggestion)
+    }
+}
+
+public extension CodeownersErrorsErrorsItem {
+    init(
+        line: Int,
+        column: Int,
+        kind: String,
+        message: String,
+        path: String,
+        source: String? = nil,
+        suggestion: String? = nil
+    ) {
+        (self.line, self.column) = (line, column)
+        (self.kind, self.message) = (kind, message)
+        (self.path, self.source) = (path, source)
+        self.suggestion = suggestion
+    }
+}
+
+/// Optional object value serialized in the `author` wire field.
+public struct FileCommitCommitAuthor: Codable {
+    /// Optional `string` value serialized in the `date` wire field.
+    public var date: String?
+    /// Optional `string` value serialized in the `name` wire field.
+    public var name: String?
+    /// Optional `string` value serialized in the `email` wire field.
+    public var email: String?
+
+    enum CodingKeys: String, CodingKey {
+        case date
+        case name
+        case email
+    }
+
+    init() {
+        (date, name, email) = (nil, nil, nil)
+    }
+}
+
+public extension FileCommitCommitAuthor {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        date = try container.sdkDecodeIfPresent(.date)
+        name = try container.sdkDecodeIfPresent(.name)
+        email = try container.sdkDecodeIfPresent(.email)
+    }
+}
+
+public extension FileCommitCommitAuthor {
+    init(date: String? = nil, name: String? = nil, email: String? = nil) {
+        self.init()
+        (self.date, self.name) = (date, name)
+        self.email = email
+    }
+}
+
+/// A topic aggregates entities that are related to a subject.
+public struct Topic: Codable {
+    /// Required array value serialized in the `names` wire field.
+    public var names: [String]
+
+    enum CodingKeys: String, CodingKey {
+        case names
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension Topic {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.names) else {
+            throw SdkValidationError(
+                field: "names",
+                code: "required",
+                message: "Validation failed for 'names': value is required"
+            )
+        }
+        names = try container.sdkDecodeRequired(.names)
+    }
+}
+
+public extension Topic {
+    init(names: [String]) {
+        self.names = names
     }
 }

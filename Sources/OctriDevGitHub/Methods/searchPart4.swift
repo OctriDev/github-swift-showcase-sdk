@@ -83,7 +83,12 @@ public extension SearchMethods {
             decoder: .json,
             operationId: "searchIssuesAndPullRequests",
             options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self, "422": ValidationError.self]
+            errors: [
+                "401": BasicError.self,
+                "403": BasicError.self,
+                "422": ValidationError.self,
+                "503": ServiceUnavailable.self,
+            ]
         )).data
     }
 }

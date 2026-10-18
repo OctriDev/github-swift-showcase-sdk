@@ -16,6 +16,11 @@ public indirect enum WebhookPullRequestReviewEditedPullRequestRequestedReviewers
 extension WebhookPullRequestReviewEditedPullRequestRequestedReviewersItem: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) {
+                self = value; return
+            }
+        }
         if let value = Self.decodeGroup1(from: container) {
             self = value; return
         }
@@ -29,6 +34,22 @@ extension WebhookPullRequestReviewEditedPullRequestRequestedReviewersItem: Codab
         if try encodeGroup1(to: encoder) {
             return
         }
+    }
+}
+
+extension WebhookPullRequestReviewEditedPullRequestRequestedReviewersItem {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container
+            .decode(WebhookPullRequestReviewEditedPullRequestRequestedReviewersItemVariant0.self),
+            sdkKeepsEveryKey(value, of: raw) {
+            return .webhookPullRequestReviewEditedPullRequestRequestedReviewersItemVariant0(value)
+        }
+        if let value = try? container
+            .decode(WebhookPullRequestReviewEditedPullRequestRequestedReviewersItemVariant1.self),
+            sdkKeepsEveryKey(value, of: raw) {
+            return .webhookPullRequestReviewEditedPullRequestRequestedReviewersItemVariant1(value)
+        }
+        return nil
     }
 }
 

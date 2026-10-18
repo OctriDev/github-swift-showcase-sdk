@@ -4,6 +4,103 @@
 import Foundation
 
 /// WebhookPullRequestReviewRequestRemoved domain models
+public struct WebhookPullRequestReviewRequestRemovedVariant1PullRequestAssigneesItem: Codable {
+    public var id: Int
+    public var login: String
+    public var avatarUrl: String?
+    public var deleted: Bool?
+    public var email: String?
+    public var eventsUrl: String?
+    public var followersUrl: String?
+    public var followingUrl: String?
+    public var gistsUrl: String?
+    public var gravatarId: String?
+    public var htmlUrl: String?
+    public var name: String?
+    public var nodeId: String?
+    public var organizationsUrl: String?
+    public var receivedEventsUrl: String?
+    public var reposUrl: String?
+    public var siteAdmin: Bool?
+    public var starredUrl: String?
+    public var subscriptionsUrl: String?
+    public var type: WebhookPullRequestReviewRequestRemovedVariant1PullRequestAssiX01e63b5417?
+    public var url: String?
+    public var userViewType: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case login
+        case avatarUrl = "avatar_url"
+        case deleted
+        case email
+        case eventsUrl = "events_url"
+        case followersUrl = "followers_url"
+        case followingUrl = "following_url"
+        case gistsUrl = "gists_url"
+        case gravatarId = "gravatar_id"
+        case htmlUrl = "html_url"
+        case name
+        case nodeId = "node_id"
+        case organizationsUrl = "organizations_url"
+        case receivedEventsUrl = "received_events_url"
+        case reposUrl = "repos_url"
+        case siteAdmin = "site_admin"
+        case starredUrl = "starred_url"
+        case subscriptionsUrl = "subscriptions_url"
+        case type
+        case url
+        case userViewType = "user_view_type"
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension WebhookPullRequestReviewRequestRemovedVariant1PullRequestAssigneesItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.login) else {
+            throw SdkValidationError(
+                field: "login",
+                code: "required",
+                message: "Validation failed for 'login': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        login = try container.sdkDecodeRequired(.login)
+        avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
+        deleted = try container.sdkDecodeIfPresent(.deleted)
+        email = try container.sdkDecodeIfPresent(.email)
+        eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
+        followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
+        gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
+        gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
+        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        name = try container.sdkDecodeIfPresent(.name)
+        nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
+        receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
+        reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
+        siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
+        starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
+        subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
+        type = try container.sdkDecodeIfPresent(.type)
+        url = try container.sdkDecodeIfPresent(.url)
+        userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        try sdkValidateConstraints()
+    }
+}
+
 public extension WebhookPullRequestReviewRequestRemovedVariant1PullRequestAssigneesItem {
     init(
         id: Int,
@@ -520,102 +617,5 @@ extension WebhookPullRequestReviewRequestRemovedVariant1PullRequestAssignee {
         if let value = url {
             try sdkValidateUri("url", value)
         }
-    }
-}
-
-public struct WebhookPullRequestReviewRequestRemovedVariant0RequestedReviewer: Codable {
-    public var id: Int
-    public var login: String
-    public var avatarUrl: String?
-    public var deleted: Bool?
-    public var email: String?
-    public var eventsUrl: String?
-    public var followersUrl: String?
-    public var followingUrl: String?
-    public var gistsUrl: String?
-    public var gravatarId: String?
-    public var htmlUrl: String?
-    public var name: String?
-    public var nodeId: String?
-    public var organizationsUrl: String?
-    public var receivedEventsUrl: String?
-    public var reposUrl: String?
-    public var siteAdmin: Bool?
-    public var starredUrl: String?
-    public var subscriptionsUrl: String?
-    public var type: WebhookPullRequestReviewRequestRemovedVariant0RequestedReviewerType?
-    public var url: String?
-    public var userViewType: String?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case login
-        case avatarUrl = "avatar_url"
-        case deleted
-        case email
-        case eventsUrl = "events_url"
-        case followersUrl = "followers_url"
-        case followingUrl = "following_url"
-        case gistsUrl = "gists_url"
-        case gravatarId = "gravatar_id"
-        case htmlUrl = "html_url"
-        case name
-        case nodeId = "node_id"
-        case organizationsUrl = "organizations_url"
-        case receivedEventsUrl = "received_events_url"
-        case reposUrl = "repos_url"
-        case siteAdmin = "site_admin"
-        case starredUrl = "starred_url"
-        case subscriptionsUrl = "subscriptions_url"
-        case type
-        case url
-        case userViewType = "user_view_type"
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension WebhookPullRequestReviewRequestRemovedVariant0RequestedReviewer {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
-        }
-        guard container.contains(.login) else {
-            throw SdkValidationError(
-                field: "login",
-                code: "required",
-                message: "Validation failed for 'login': value is required"
-            )
-        }
-        id = try container.sdkDecodeRequired(.id)
-        login = try container.sdkDecodeRequired(.login)
-        avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
-        deleted = try container.sdkDecodeIfPresent(.deleted)
-        email = try container.sdkDecodeIfPresent(.email)
-        eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
-        followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
-        followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
-        gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
-        gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        name = try container.sdkDecodeIfPresent(.name)
-        nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
-        receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
-        reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
-        siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
-        starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
-        subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
-        type = try container.sdkDecodeIfPresent(.type)
-        url = try container.sdkDecodeIfPresent(.url)
-        userViewType = try container.sdkDecodeIfPresent(.userViewType)
-        try sdkValidateConstraints()
     }
 }

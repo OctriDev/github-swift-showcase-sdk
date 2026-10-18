@@ -134,6 +134,33 @@ public struct ApiInsightsGetSubjectStatsParameterItem: RawRepresentable, Hashabl
     }
 }
 
+/// The default value for a squash merge commit title: - `PR_TITLE` - default to the pull request's title. -
+/// `COMMIT_OR_PR_TITLE` - default to the commit's title (if only one commit) or the pull request's title (when
+/// more than one commit).
+public struct AppsListInstallationReposForAuthenticatedUserResponseRepositoXe6dfe6af0c: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let prTitle =
+        AppsListInstallationReposForAuthenticatedUserResponseRepositoXe6dfe6af0c(rawValue: "PR_TITLE")
+    public static let commitOrPrTitle =
+        AppsListInstallationReposForAuthenticatedUserResponseRepositoXe6dfe6af0c(rawValue: "COMMIT_OR_PR_TITLE")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
 /// The target of the ruleset
 public struct ReposUpdateRepoRulesetRequestBodyTarget: RawRepresentable, Hashable, Codable, Sendable,
     SdkWireConvertible {
@@ -221,29 +248,6 @@ public struct AgentAutomationsGetRepoAutomationResponseTriggersPullRequestCXa715
         AgentAutomationsGetRepoAutomationResponseTriggersPullRequestCXa715cf23bd(rawValue: "trigger")
     public static let repository =
         AgentAutomationsGetRepoAutomationResponseTriggersPullRequestCXa715cf23bd(rawValue: "repository")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// Provider namespace
-public struct AgentAutomationsListAutomationTasksResponseTasksItemArtifactsX2d6ddf400f: RawRepresentable, Hashable,
-    Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let github =
-        AgentAutomationsListAutomationTasksResponseTasksItemArtifactsX2d6ddf400f(rawValue: "github")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

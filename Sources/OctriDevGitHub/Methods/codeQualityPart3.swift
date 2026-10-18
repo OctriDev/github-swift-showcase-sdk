@@ -38,7 +38,7 @@ public extension CodeQualityMethods {
             decoder: .json,
             operationId: "codeQualityGetFinding",
             options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self]
+            errors: ["403": BasicError.self, "404": BasicError.self, "503": ServiceUnavailable.self]
         )).data
     }
 
@@ -70,7 +70,7 @@ public extension CodeQualityMethods {
             decoder: .json,
             operationId: "codeQualityGetSetup",
             options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self]
+            errors: ["403": BasicError.self, "404": BasicError.self, "503": ServiceUnavailable.self]
         )).data
     }
 }

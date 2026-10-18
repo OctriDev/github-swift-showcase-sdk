@@ -6,30 +6,6 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public struct AgentAutomationsCreateRepoAutomationResponseTriggersPullRequeX0f31056c53: RawRepresentable, Hashable,
-    Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let timelineComment =
-        AgentAutomationsCreateRepoAutomationResponseTriggersPullRequeX0f31056c53(rawValue: "timeline_comment")
-    public static let reviewComment =
-        AgentAutomationsCreateRepoAutomationResponseTriggersPullRequeX0f31056c53(rawValue: "review_comment")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
 public struct AppsListWebhookDeliveriesParameter: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
@@ -233,6 +209,32 @@ public struct AgentAutomationsGetAutomationResponseTriggersPullRequestSynchX73ec
         AgentAutomationsGetAutomationResponseTriggersPullRequestSynchX73ec5da5ff(rawValue: "trigger")
     public static let repository =
         AgentAutomationsGetAutomationResponseTriggersPullRequestSynchX73ec5da5ff(rawValue: "repository")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
+/// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
+public struct AgentAutomationsEditRepoAutomationResponseTriggersPullRequestXccd3b0475f: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let trigger =
+        AgentAutomationsEditRepoAutomationResponseTriggersPullRequestXccd3b0475f(rawValue: "trigger")
+    public static let repository =
+        AgentAutomationsEditRepoAutomationResponseTriggersPullRequestXccd3b0475f(rawValue: "repository")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

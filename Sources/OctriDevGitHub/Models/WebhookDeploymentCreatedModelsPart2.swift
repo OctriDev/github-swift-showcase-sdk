@@ -192,52 +192,6 @@ public extension WebhookDeploymentCreatedWorkflowRunRepositoryOwner {
     }
 }
 
-public indirect enum WebhookDeploymentCreatedDeploymentPayload {
-    case jsonValue([String: JSONValue])
-    case stringValue(String)
-}
-
-extension WebhookDeploymentCreatedDeploymentPayload: Codable {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for WebhookDeploymentCreatedDeploymentPayload"
-        )
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
-    }
-}
-
-extension WebhookDeploymentCreatedDeploymentPayload {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode([String: JSONValue].self) {
-            return .jsonValue(value)
-        }
-        if let value = try? container.decode(String.self) {
-            return .stringValue(value)
-        }
-        return nil
-    }
-}
-
-extension WebhookDeploymentCreatedDeploymentPayload {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .jsonValue(value): try container.encode(value); return true
-        case let .stringValue(value): try container.encode(value); return true
-        }
-    }
-}
-
 /// Required object value serialized in the `base` wire field.
 public struct WebhookDeploymentCreatedWorkflowRunPullRequestsItemBase: Codable {
     /// Required `string` value serialized in the `ref` wire field.
@@ -583,5 +537,13 @@ public extension WebhookDeploymentCreatedWorkflowRunPullRequestsItemBaseRepo {
         name = try container.sdkDecodeRequired(.name)
         url = try container.sdkDecodeRequired(.url)
         try sdkValidateUri("url", url)
+    }
+}
+
+public extension WebhookDeploymentCreatedWorkflowRunPullRequestsItemBaseRepo {
+    init(id: Int, name: String, url: String) throws {
+        (self.id, self.name) = (id, name)
+        self.url = url
+        try sdkValidateUri("url", self.url)
     }
 }

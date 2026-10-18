@@ -77,7 +77,12 @@ public extension CodespacesMethods {
             decoder: .json,
             operationId: "codespacesCreateWithPrForAuthenticatedUser",
             options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self]
+            errors: [
+                "401": BasicError.self,
+                "403": BasicError.self,
+                "404": BasicError.self,
+                "503": ServiceUnavailable.self,
+            ]
         )).data
     }
 }

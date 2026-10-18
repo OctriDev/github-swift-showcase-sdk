@@ -4,6 +4,83 @@
 import Foundation
 
 /// WebhookPullRequestReviewRequestRemoved domain models
+public extension WebhookPullRequestReviewRequestRemovedVariant1 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.action) else {
+            throw SdkValidationError(
+                field: "action",
+                code: "required",
+                message: "Validation failed for 'action': value is required"
+            )
+        }
+        guard container.contains(.number) else {
+            throw SdkValidationError(
+                field: "number",
+                code: "required",
+                message: "Validation failed for 'number': value is required"
+            )
+        }
+        guard container.contains(.pullRequest) else {
+            throw SdkValidationError(
+                field: "pull_request",
+                code: "required",
+                message: "Validation failed for 'pull_request': value is required"
+            )
+        }
+        guard container.contains(.repository) else {
+            throw SdkValidationError(
+                field: "repository",
+                code: "required",
+                message: "Validation failed for 'repository': value is required"
+            )
+        }
+        guard container.contains(.requestedTeam) else {
+            throw SdkValidationError(
+                field: "requested_team",
+                code: "required",
+                message: "Validation failed for 'requested_team': value is required"
+            )
+        }
+        guard container.contains(.sender) else {
+            throw SdkValidationError(
+                field: "sender",
+                code: "required",
+                message: "Validation failed for 'sender': value is required"
+            )
+        }
+        action = try container.sdkDecodeRequired(.action)
+        number = try container.sdkDecodeRequired(.number)
+        pullRequest = try container.sdkDecodeRequired(.pullRequest)
+        repository = try container.sdkDecodeRequired(.repository)
+        requestedTeam = try container.sdkDecodeRequired(.requestedTeam)
+        sender = try container.sdkDecodeRequired(.sender)
+        enterprise = try container.sdkDecodeIfPresent(.enterprise)
+        installation = try container.sdkDecodeIfPresent(.installation)
+        organization = try container.sdkDecodeIfPresent(.organization)
+    }
+}
+
+public extension WebhookPullRequestReviewRequestRemovedVariant1 {
+    init(
+        action: WebhookPullRequestReviewRequestRemovedVariant1Action,
+        number: Int,
+        pullRequest: WebhookPullRequestReviewRequestRemovedVariant1PullRequest,
+        repository: RepositoryWebhooks,
+        requestedTeam: WebhookPullRequestReviewRequestRemovedVariant1RequestedTeam,
+        sender: SimpleUser,
+        enterprise: EnterpriseWebhooks? = nil,
+        installation: SimpleInstallation? = nil,
+        organization: OrganizationSimpleWebhooks? = nil
+    ) {
+        (self.action, self.number) = (action, number)
+        (self.pullRequest, self.repository) = (pullRequest, repository)
+        (self.requestedTeam, self.sender) = (requestedTeam, sender)
+        (self.enterprise, self.installation) = (enterprise, installation)
+        self.organization = organization
+    }
+}
+
 public struct WebhookPullRequestReviewRequestRemovedVariant0PullRequestAssignee: Codable {
     public var id: Int
     public var login: String
@@ -523,74 +600,5 @@ public extension WebhookPullRequestReviewRequestRemovedVariant0PullRequestMileXc
         url = try container.sdkDecodeIfPresent(.url)
         userViewType = try container.sdkDecodeIfPresent(.userViewType)
         try sdkValidateConstraints()
-    }
-}
-
-public extension WebhookPullRequestReviewRequestRemovedVariant0PullRequestMileXc5ab24bec0 {
-    init(
-        id: Int,
-        login: String,
-        avatarUrl: String? = nil,
-        deleted: Bool? = nil,
-        email: String? = nil,
-        eventsUrl: String? = nil,
-        followersUrl: String? = nil,
-        followingUrl: String? = nil,
-        gistsUrl: String? = nil,
-        gravatarId: String? = nil,
-        htmlUrl: String? = nil,
-        name: String? = nil,
-        nodeId: String? = nil,
-        organizationsUrl: String? = nil,
-        receivedEventsUrl: String? = nil,
-        reposUrl: String? = nil,
-        siteAdmin: Bool? = nil,
-        starredUrl: String? = nil,
-        subscriptionsUrl: String? = nil,
-        type: WebhookPullRequestReviewRequestRemovedVariant0PullRequestMileX06ea1cf1e2? = nil,
-        url: String? = nil,
-        userViewType: String? = nil
-    ) throws {
-        (self.id, self.login) = (id, login)
-        (self.avatarUrl, self.deleted) = (avatarUrl, deleted)
-        (self.email, self.eventsUrl) = (email, eventsUrl)
-        (self.followersUrl, self.followingUrl) = (followersUrl, followingUrl)
-        (self.gistsUrl, self.gravatarId) = (gistsUrl, gravatarId)
-        (self.htmlUrl, self.name) = (htmlUrl, name)
-        (self.nodeId, self.organizationsUrl) = (nodeId, organizationsUrl)
-        (self.receivedEventsUrl, self.reposUrl) = (receivedEventsUrl, reposUrl)
-        (self.siteAdmin, self.starredUrl) = (siteAdmin, starredUrl)
-        (self.subscriptionsUrl, self.type) = (subscriptionsUrl, type)
-        (self.url, self.userViewType) = (url, userViewType)
-        try sdkValidateConstraints()
-    }
-}
-
-extension WebhookPullRequestReviewRequestRemovedVariant0PullRequestMileXc5ab24bec0 {
-    func sdkValidateConstraints() throws {
-        if let value = avatarUrl {
-            try sdkValidateUri("avatar_url", value)
-        }
-        if let value = followersUrl {
-            try sdkValidateUri("followers_url", value)
-        }
-        if let value = htmlUrl {
-            try sdkValidateUri("html_url", value)
-        }
-        if let value = organizationsUrl {
-            try sdkValidateUri("organizations_url", value)
-        }
-        if let value = receivedEventsUrl {
-            try sdkValidateUri("received_events_url", value)
-        }
-        if let value = reposUrl {
-            try sdkValidateUri("repos_url", value)
-        }
-        if let value = subscriptionsUrl {
-            try sdkValidateUri("subscriptions_url", value)
-        }
-        if let value = url {
-            try sdkValidateUri("url", value)
-        }
     }
 }

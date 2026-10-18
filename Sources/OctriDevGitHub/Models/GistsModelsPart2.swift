@@ -4,6 +4,20 @@
 import Foundation
 
 /// Gists domain models
+extension BaseGist {
+    func sdkValidateConstraints() throws {
+        try sdkValidateUri("url", url)
+        try sdkValidateUri("forks_url", forksUrl)
+        try sdkValidateUri("commits_url", commitsUrl)
+        try sdkValidateUri("git_pull_url", gitPullUrl)
+        try sdkValidateUri("git_push_url", gitPushUrl)
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+        try sdkValidateUri("comments_url", commentsUrl)
+    }
+}
+
 /// A comment made to a gist.
 public struct GistComment: Codable {
     /// Required `integer` value serialized in the `id` wire field.
@@ -400,5 +414,42 @@ public extension GistSimpleForkOfFilesValue {
         (self.filename, self.type) = (filename, type)
         (self.language, self.rawUrl) = (language, rawUrl)
         self.size = size
+    }
+}
+
+/// Typed representation of the `ForbiddenGist` API schema.
+public struct ForbiddenGist: Codable {
+    /// Optional object value serialized in the `block` wire field.
+    public var block: ForbiddenGistBlock?
+    /// Optional `string` value serialized in the `message` wire field.
+    public var message: String?
+    /// Optional `string` value serialized in the `documentation_url` wire field.
+    public var documentationUrl: String?
+
+    enum CodingKeys: String, CodingKey {
+        case block
+        case message
+        case documentationUrl = "documentation_url"
+    }
+
+    init() {
+        (block, message, documentationUrl) = (nil, nil, nil)
+    }
+}
+
+public extension ForbiddenGist {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        block = try container.sdkDecodeIfPresent(.block)
+        message = try container.sdkDecodeIfPresent(.message)
+        documentationUrl = try container.sdkDecodeIfPresent(.documentationUrl)
+    }
+}
+
+public extension ForbiddenGist {
+    init(block: ForbiddenGistBlock? = nil, message: String? = nil, documentationUrl: String? = nil) {
+        self.init()
+        (self.block, self.message) = (block, message)
+        self.documentationUrl = documentationUrl
     }
 }

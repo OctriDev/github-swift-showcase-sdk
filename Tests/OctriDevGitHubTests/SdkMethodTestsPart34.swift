@@ -6,510 +6,6 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testCopilotSpacesCreateForOrgCopilotSpacesCreateForOrgReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.copilotSpaces.createForOrg(
-            org: decoded("\"org\""),
-            name: decoded("\"Team Planning Space\""),
-            description: decoded("\"Organization space for team planning and coordination\""),
-            generalInstructions: decoded("\"Help the team with planning and coordination tasks\""),
-            baseRole: decoded("null"),
-            resourcesAttributes: decoded(sdkMethodFixture733Value1)
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture733Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "copilotSpacesCreateForOrg decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testCopilotSpacesCreateForOrgCopilotSpacesCreateForOrg403ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture734Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.copilotSpaces.createForOrg(
-                org: decoded("\"org\""),
-                name: decoded("\"Team Planning Space\""),
-                description: decoded("\"Organization space for team planning and coordination\""),
-                generalInstructions: decoded("\"Help the team with planning and coordination tasks\""),
-                baseRole: decoded("null"),
-                resourcesAttributes: decoded(sdkMethodFixture734Value1)
-            )
-            XCTFail("copilotSpacesCreateForOrg did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 403)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "copilotSpacesCreateForOrg decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "copilotSpacesCreateForOrg decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testCopilotSpacesCreateForUserCopilotSpacesCreateForUserReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.copilotSpaces.createForUser(
-            username: decoded("\"Example Name\""),
-            name: decoded("\"My Development Space\""),
-            description: decoded("\"Personal space for development assistance\""),
-            generalInstructions: decoded("\"Help me with React development patterns and best practices\""),
-            baseRole: decoded("null"),
-            resourcesAttributes: decoded(sdkMethodFixture735Value1)
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture735Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "copilotSpacesCreateForUser decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testCopilotSpacesCreateForUserCopilotSpacesCreateForUser403ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture736Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.copilotSpaces.createForUser(
-                username: decoded("\"Example Name\""),
-                name: decoded("\"My Development Space\""),
-                description: decoded("\"Personal space for development assistance\""),
-                generalInstructions: decoded("\"Help me with React development patterns and best practices\""),
-                baseRole: decoded("null"),
-                resourcesAttributes: decoded(sdkMethodFixture736Value1)
-            )
-            XCTFail("copilotSpacesCreateForUser did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 403)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "copilotSpacesCreateForUser decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "copilotSpacesCreateForUser decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testCopilotSpacesCreateResourceForOrgCopilotSpacesCreateResourceForOrgReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.copilotSpaces.createResourceForOrg(
-            org: decoded("\"org\""),
-            spaceNumber: decoded("1"),
-            resourceType: decoded("\"free_text\""),
-            metadata: decoded("{\"name\":\"notes.txt\",\"text\":\"Some helpful notes\"}")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture737Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "copilotSpacesCreateResourceForOrg decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testCopilotSpacesCreateResourceForOrgCopilotSpacesCreateResourceForOrg403ReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture738Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.copilotSpaces.createResourceForOrg(
-                org: decoded("\"org\""),
-                spaceNumber: decoded("1"),
-                resourceType: decoded("\"free_text\""),
-                metadata: decoded("{\"name\":\"notes.txt\",\"text\":\"Some helpful notes\"}")
-            )
-            XCTFail("copilotSpacesCreateResourceForOrg did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 403)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "copilotSpacesCreateResourceForOrg decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "copilotSpacesCreateResourceForOrg decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testCopilotSpacesCreateResourceForUserCopilotSpacesCreateResourceForUserReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.copilotSpaces.createResourceForUser(
-            username: decoded("\"Example Name\""),
-            spaceNumber: decoded("1"),
-            resourceType: decoded("\"free_text\""),
-            metadata: decoded("{\"name\":\"notes.txt\",\"text\":\"Some helpful notes\"}")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture739Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "copilotSpacesCreateResourceForUser decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testCopilotSpacesCreateResourceForUserCopilotSpacesCreateResourceForUser403ReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture740Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.copilotSpaces.createResourceForUser(
-                username: decoded("\"Example Name\""),
-                spaceNumber: decoded("1"),
-                resourceType: decoded("\"free_text\""),
-                metadata: decoded("{\"name\":\"notes.txt\",\"text\":\"Some helpful notes\"}")
-            )
-            XCTFail("copilotSpacesCreateResourceForUser did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 403)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "copilotSpacesCreateResourceForUser decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "copilotSpacesCreateResourceForUser decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testCopilotSpacesDeleteForOrgCopilotSpacesDeleteForOrgReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        _ = try await client.copilotSpaces.deleteForOrg(
-            org: decoded("\"org\""),
-            spaceNumber: decoded("1")
-        )
-        XCTAssertTrue(true)
-    }
-
-    func testCopilotSpacesDeleteForOrgCopilotSpacesDeleteForOrg404ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture742Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.copilotSpaces.deleteForOrg(
-                org: decoded("\"org\""),
-                spaceNumber: decoded("1")
-            )
-            XCTFail("copilotSpacesDeleteForOrg did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 404)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "copilotSpacesDeleteForOrg decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "copilotSpacesDeleteForOrg decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testCopilotSpacesDeleteForUserCopilotSpacesDeleteForUserReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        _ = try await client.copilotSpaces.deleteForUser(
-            username: decoded("\"Example Name\""),
-            spaceNumber: decoded("1")
-        )
-        XCTAssertTrue(true)
-    }
-
-    func testCopilotSpacesDeleteForUserCopilotSpacesDeleteForUser404ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture744Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.copilotSpaces.deleteForUser(
-                username: decoded("\"Example Name\""),
-                spaceNumber: decoded("1")
-            )
-            XCTFail("copilotSpacesDeleteForUser did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 404)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "copilotSpacesDeleteForUser decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "copilotSpacesDeleteForUser decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testCopilotSpacesDeleteResourceForOrgCopilotSpacesDeleteResourceForOrgReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        _ = try await client.copilotSpaces.deleteResourceForOrg(
-            org: decoded("\"org\""),
-            spaceNumber: decoded("1"),
-            spaceResourceId: decoded("1")
-        )
-        XCTAssertTrue(true)
-    }
-
-    func testCopilotSpacesDeleteResourceForOrgCopilotSpacesDeleteResourceForOrg403ReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture746Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.copilotSpaces.deleteResourceForOrg(
-                org: decoded("\"org\""),
-                spaceNumber: decoded("1"),
-                spaceResourceId: decoded("1")
-            )
-            XCTFail("copilotSpacesDeleteResourceForOrg did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 403)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "copilotSpacesDeleteResourceForOrg decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "copilotSpacesDeleteResourceForOrg decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testCopilotSpacesDeleteResourceForUserCopilotSpacesDeleteResourceForUserReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        _ = try await client.copilotSpaces.deleteResourceForUser(
-            username: decoded("\"Example Name\""),
-            spaceNumber: decoded("1"),
-            spaceResourceId: decoded("1")
-        )
-        XCTAssertTrue(true)
-    }
-
-    func testCopilotSpacesDeleteResourceForUserCopilotSpacesDeleteResourceForUser403ReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture748Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.copilotSpaces.deleteResourceForUser(
-                username: decoded("\"Example Name\""),
-                spaceNumber: decoded("1"),
-                spaceResourceId: decoded("1")
-            )
-            XCTFail("copilotSpacesDeleteResourceForUser did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 403)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "copilotSpacesDeleteResourceForUser decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "copilotSpacesDeleteResourceForUser decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testCopilotSpacesGetForOrgCopilotSpacesGetForOrgReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.copilotSpaces.getForOrg(
-            org: decoded("\"org\""),
-            spaceNumber: decoded("1")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture749Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "copilotSpacesGetForOrg decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testCopilotSpacesGetForOrgCopilotSpacesGetForOrg403ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture750Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.copilotSpaces.getForOrg(
-                org: decoded("\"org\""),
-                spaceNumber: decoded("1")
-            )
-            XCTFail("copilotSpacesGetForOrg did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 403)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "copilotSpacesGetForOrg decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "copilotSpacesGetForOrg decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testCopilotSpacesGetForUserCopilotSpacesGetForUserReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.copilotSpaces.getForUser(
-            username: decoded("\"Example Name\""),
-            spaceNumber: decoded("1")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture751Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "copilotSpacesGetForUser decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testCopilotSpacesGetForUserCopilotSpacesGetForUser403ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture752Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.copilotSpaces.getForUser(
-                username: decoded("\"Example Name\""),
-                spaceNumber: decoded("1")
-            )
-            XCTFail("copilotSpacesGetForUser did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 403)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "copilotSpacesGetForUser decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "copilotSpacesGetForUser decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
     func testCopilotSpacesGetResourceForOrgCopilotSpacesGetResourceForOrgReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
@@ -526,8 +22,7 @@ extension SdkMethodTests {
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "copilotSpacesGetResourceForOrg decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
@@ -547,19 +42,487 @@ extension SdkMethodTests {
                 spaceNumber: decoded("1"),
                 spaceResourceId: decoded("1")
             )
-            XCTFail("copilotSpacesGetResourceForOrg did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "copilotSpacesGetResourceForOrg decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "copilotSpacesGetResourceForOrg decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
+    }
+
+    func testCopilotSpacesGetResourceForUserCopilotSpacesGetResourceForUserReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.copilotSpaces.getResourceForUser(
+            username: decoded("\"Example Name\""),
+            spaceNumber: decoded("1"),
+            spaceResourceId: decoded("1")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture755Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testCopilotSpacesGetResourceForUserCopilotSpacesGetResourceForUser403ReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture756Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.copilotSpaces.getResourceForUser(
+                username: decoded("\"Example Name\""),
+                spaceNumber: decoded("1"),
+                spaceResourceId: decoded("1")
+            )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 403)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testCopilotSpacesListCollaboratorsForOrgCopilotSpacesListCollaboratorsForOrgReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        do {
+            _ = try await client.copilotSpaces.listCollaboratorsForOrg(
+                org: decoded("\"org\""),
+                spaceNumber: decoded("1")
+            )
+            XCTFail("decoded a body its schema refuses")
+        } catch is SdkResponseDecodeError {
+        } catch {
+            XCTFail("refused with \(error), not SdkResponseDecodeError")
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testCopilotSpacesListCollaboratorsForOrgCopilotSpacesListCollaborXc368a26b28ReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture758Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.copilotSpaces.listCollaboratorsForOrg(
+                org: decoded("\"org\""),
+                spaceNumber: decoded("1")
+            )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 403)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testCopilotSpacesListCollaboratorsForUserCopilotSpacesListCollaboX558fcea5a7ReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.copilotSpaces.listCollaboratorsForUser(
+            username: decoded("\"Example Name\""),
+            spaceNumber: decoded("1")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture759Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testCopilotSpacesListCollaboratorsForUserCopilotSpacesListCollaboX9fad8e3369ReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture760Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.copilotSpaces.listCollaboratorsForUser(
+                username: decoded("\"Example Name\""),
+                spaceNumber: decoded("1")
+            )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 403)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testCopilotSpacesListForOrgCopilotSpacesListForOrgReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        do {
+            _ = try await client.copilotSpaces.listForOrg(
+                org: decoded("\"org\""),
+                perPage: decoded("30"),
+                before: decoded("\"before\""),
+                after: decoded("\"after\"")
+            )
+            XCTFail("decoded a body its schema refuses")
+        } catch is SdkResponseDecodeError {
+        } catch {
+            XCTFail("refused with \(error), not SdkResponseDecodeError")
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testCopilotSpacesListForOrgCopilotSpacesListForOrg403ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture762Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.copilotSpaces.listForOrg(
+                org: decoded("\"org\""),
+                perPage: decoded("30"),
+                before: decoded("\"before\""),
+                after: decoded("\"after\"")
+            )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 403)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testCopilotSpacesListForUserCopilotSpacesListForUserReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        do {
+            _ = try await client.copilotSpaces.listForUser(
+                username: decoded("\"Example Name\""),
+                perPage: decoded("30"),
+                before: decoded("\"before\""),
+                after: decoded("\"after\"")
+            )
+            XCTFail("decoded a body its schema refuses")
+        } catch is SdkResponseDecodeError {
+        } catch {
+            XCTFail("refused with \(error), not SdkResponseDecodeError")
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testCopilotSpacesListForUserCopilotSpacesListForUser403ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture764Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.copilotSpaces.listForUser(
+                username: decoded("\"Example Name\""),
+                perPage: decoded("30"),
+                before: decoded("\"before\""),
+                after: decoded("\"after\"")
+            )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 403)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testCopilotSpacesListResourcesForOrgCopilotSpacesListResourcesForOrgReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.copilotSpaces.listResourcesForOrg(
+            org: decoded("\"org\""),
+            spaceNumber: decoded("1")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture765Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testCopilotSpacesListResourcesForOrgCopilotSpacesListResourcesForOrg403ReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture766Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.copilotSpaces.listResourcesForOrg(
+                org: decoded("\"org\""),
+                spaceNumber: decoded("1")
+            )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 403)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testCopilotSpacesListResourcesForUserCopilotSpacesListResourcesForUserReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.copilotSpaces.listResourcesForUser(
+            username: decoded("\"Example Name\""),
+            spaceNumber: decoded("1")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture767Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testCopilotSpacesListResourcesForUserCopilotSpacesListResourcesForUser403ReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture768Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.copilotSpaces.listResourcesForUser(
+                username: decoded("\"Example Name\""),
+                spaceNumber: decoded("1")
+            )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 403)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testCopilotSpacesRemoveCollaboratorForOrgCopilotSpacesRemoveCollaXc04f9f5ff4ReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        _ = try await client.copilotSpaces.removeCollaboratorForOrg(
+            org: decoded("\"org\""),
+            spaceNumber: decoded("1"),
+            actorType: decoded("\"User\""),
+            actorIdentifier: decoded("\"actor_identifier\"")
+        )
+        XCTAssertTrue(true)
+    }
+
+    func testCopilotSpacesRemoveCollaboratorForOrgCopilotSpacesRemoveCollaXac3cd1279fReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture770Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.copilotSpaces.removeCollaboratorForOrg(
+                org: decoded("\"org\""),
+                spaceNumber: decoded("1"),
+                actorType: decoded("\"User\""),
+                actorIdentifier: decoded("\"actor_identifier\"")
+            )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 403)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testCopilotSpacesRemoveCollaboratorForUserCopilotSpacesRemoveCollX874eda9647ReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        _ = try await client.copilotSpaces.removeCollaboratorForUser(
+            username: decoded("\"Example Name\""),
+            spaceNumber: decoded("1"),
+            actorType: decoded("\"User\""),
+            actorIdentifier: decoded("\"actor_identifier\"")
+        )
+        XCTAssertTrue(true)
+    }
+
+    func testCopilotSpacesRemoveCollaboratorForUserCopilotSpacesRemoveCollX7dd905e06cReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture772Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.copilotSpaces.removeCollaboratorForUser(
+                username: decoded("\"Example Name\""),
+                spaceNumber: decoded("1"),
+                actorType: decoded("\"User\""),
+                actorIdentifier: decoded("\"actor_identifier\"")
+            )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 403)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testCopilotSpacesUpdateCollaboratorForOrgCopilotSpacesUpdateCollaXd5f6b47801ReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.copilotSpaces.updateCollaboratorForOrg(
+            org: decoded("\"org\""),
+            spaceNumber: decoded("1"),
+            actorType: decoded("\"User\""),
+            actorIdentifier: decoded("\"actor_identifier\""),
+            role: decoded("\"admin\"")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture773Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
     }
 }

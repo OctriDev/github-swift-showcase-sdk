@@ -6,19 +6,6 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testActionsDeleteWorkflowRunLogsActionsDeleteWorkflowRunLogsReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        _ = try await client.actions.deleteWorkflowRunLogs(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            runId: decoded("1")
-        )
-        XCTAssertTrue(true)
-    }
-
     func testActionsDeleteWorkflowRunLogsActionsDeleteWorkflowRunLogs403ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
@@ -34,17 +21,16 @@ extension SdkMethodTests {
                 repo: decoded("\"repo\""),
                 runId: decoded("1")
             )
-            XCTFail("actionsDeleteWorkflowRunLogs did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "actionsDeleteWorkflowRunLogs decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "actionsDeleteWorkflowRunLogs decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
@@ -91,17 +77,16 @@ extension SdkMethodTests {
                 org: decoded("\"org\""),
                 repositoryId: decoded("1")
             )
-            XCTFail("actionsDisableSelectedRepositorySelfHostedRunnersOrganization did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "actionsDisableSelectedRepositorySelfHostedRunnersOrganization decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "actionsDisableSelectedRepositorySelfHostedRunnersOrganization decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
@@ -161,17 +146,16 @@ extension SdkMethodTests {
                 org: decoded("\"org\""),
                 repositoryId: decoded("1")
             )
-            XCTFail("actionsEnableSelectedRepositorySelfHostedRunnersOrganization did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "actionsEnableSelectedRepositorySelfHostedRunnersOrganization decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "actionsEnableSelectedRepositorySelfHostedRunnersOrganization decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
@@ -206,8 +190,7 @@ extension SdkMethodTests {
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "actionsForceCancelWorkflowRun decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
@@ -226,17 +209,16 @@ extension SdkMethodTests {
                 repo: decoded("\"repo\""),
                 runId: decoded("1")
             )
-            XCTFail("actionsForceCancelWorkflowRun did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 409)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "actionsForceCancelWorkflowRun decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "actionsForceCancelWorkflowRun decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
@@ -261,8 +243,7 @@ extension SdkMethodTests {
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "actionsGenerateRunnerJitconfigForOrg decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
@@ -284,17 +265,16 @@ extension SdkMethodTests {
                 labels: decoded("[\"self-hosted\",\"X64\",\"macOS\",\"no-gpu\"]"),
                 workFolder: decoded("\"_work\"")
             )
-            XCTFail("actionsGenerateRunnerJitconfigForOrg did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "actionsGenerateRunnerJitconfigForOrg decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "actionsGenerateRunnerJitconfigForOrg decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
@@ -320,8 +300,7 @@ extension SdkMethodTests {
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "actionsGenerateRunnerJitconfigForRepo decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
@@ -344,17 +323,16 @@ extension SdkMethodTests {
                 labels: decoded("[\"self-hosted\",\"X64\",\"macOS\",\"no-gpu\"]"),
                 workFolder: decoded("\"_work\"")
             )
-            XCTFail("actionsGenerateRunnerJitconfigForRepo did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "actionsGenerateRunnerJitconfigForRepo decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "actionsGenerateRunnerJitconfigForRepo decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
@@ -384,8 +362,7 @@ extension SdkMethodTests {
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "actionsGetActionsCacheList decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
@@ -404,8 +381,7 @@ extension SdkMethodTests {
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "actionsGetActionsCacheRetentionLimitForEnterprise decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
@@ -423,17 +399,16 @@ extension SdkMethodTests {
             _ = try await client.actions.getActionsCacheRetentionLimitForEnterprise(
                 enterprise: decoded("\"enterprise\"")
             )
-            XCTFail("actionsGetActionsCacheRetentionLimitForEnterprise did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "actionsGetActionsCacheRetentionLimitForEnterprise decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "actionsGetActionsCacheRetentionLimitForEnterprise decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
@@ -454,8 +429,7 @@ extension SdkMethodTests {
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "actionsGetActionsCacheRetentionLimitForOrganization decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
@@ -473,17 +447,16 @@ extension SdkMethodTests {
             _ = try await client.actions.getActionsCacheRetentionLimitForOrganization(
                 org: decoded("\"org\"")
             )
-            XCTFail("actionsGetActionsCacheRetentionLimitForOrganization did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "actionsGetActionsCacheRetentionLimitForOrganization decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "actionsGetActionsCacheRetentionLimitForOrganization decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
@@ -505,8 +478,7 @@ extension SdkMethodTests {
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "actionsGetActionsCacheRetentionLimitForRepository decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
@@ -525,19 +497,37 @@ extension SdkMethodTests {
                 owner: decoded("\"owner\""),
                 repo: decoded("\"repo\"")
             )
-            XCTFail("actionsGetActionsCacheRetentionLimitForRepository did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "actionsGetActionsCacheRetentionLimitForRepository decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "actionsGetActionsCacheRetentionLimitForRepository decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
+    }
+
+    func testActionsGetActionsCacheStorageLimitForEnterpriseActionsGetActiX1ebe86e444ReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.actions.getActionsCacheStorageLimitForEnterprise(
+            enterprise: decoded("\"enterprise\"")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture75Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
     }
 }

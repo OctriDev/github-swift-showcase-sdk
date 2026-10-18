@@ -207,52 +207,6 @@ public extension WebhookPackagePublishedPackagePackageVersionContainerMetadataTa
     }
 }
 
-public indirect enum WebhookPackagePublishedPackagePackageVersionBody {
-    case stringValue(String)
-    case jsonValue([String: JSONValue])
-}
-
-extension WebhookPackagePublishedPackagePackageVersionBody: Codable {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for WebhookPackagePublishedPackagePackageVersionBody"
-        )
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
-    }
-}
-
-extension WebhookPackagePublishedPackagePackageVersionBody {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) {
-            return .stringValue(value)
-        }
-        if let value = try? container.decode([String: JSONValue].self) {
-            return .jsonValue(value)
-        }
-        return nil
-    }
-}
-
-extension WebhookPackagePublishedPackagePackageVersionBody {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .stringValue(value): try container.encode(value); return true
-        case let .jsonValue(value): try container.encode(value); return true
-        }
-    }
-}
-
 /// Required object value serialized in the `nuget_metadata[]` wire field.
 public struct WebhookPackagePublishedPackagePackageVersionNugetMetadataItem: Codable {
     /// Optional API value serialized in the `id` wire field.
@@ -483,47 +437,6 @@ extension WebhookPackagePublishedPackagePackageVersionReleaseAuthor {
     }
 }
 
-/// Optional object value serialized in the `value` wire field.
-public struct WebhookPackagePublishedPackagePackageVersionNugetMetadataItemX69135351c1: Codable {
-    /// Optional `string` value serialized in the `url` wire field.
-    public var url: String?
-    /// Optional `string` value serialized in the `branch` wire field.
-    public var branch: String?
-    /// Optional `string` value serialized in the `commit` wire field.
-    public var commit: String?
-    /// Optional `string` value serialized in the `type` wire field.
-    public var type: String?
-
-    enum CodingKeys: String, CodingKey {
-        case url
-        case branch
-        case commit
-        case type
-    }
-
-    init() {
-        (url, branch, commit, type) = (nil, nil, nil, nil)
-    }
-}
-
-public extension WebhookPackagePublishedPackagePackageVersionNugetMetadataItemX69135351c1 {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        url = try container.sdkDecodeIfPresent(.url)
-        branch = try container.sdkDecodeIfPresent(.branch)
-        commit = try container.sdkDecodeIfPresent(.commit)
-        type = try container.sdkDecodeIfPresent(.type)
-    }
-}
-
-public extension WebhookPackagePublishedPackagePackageVersionNugetMetadataItemX69135351c1 {
-    init(url: String? = nil, branch: String? = nil, commit: String? = nil, type: String? = nil) {
-        self.init()
-        (self.url, self.branch) = (url, branch)
-        (self.commit, self.type) = (commit, type)
-    }
-}
-
 /// Optional object value serialized in the `container_metadata` wire field.
 public struct WebhookPackagePublishedPackagePackageVersionContainerMetadata: Codable {
     /// Optional object value serialized in the `labels` wire field.
@@ -570,3 +483,133 @@ public typealias WebhookPackagePublishedPackagePackageVersionDockerMetadataList 
 
 public typealias WebhookPackagePublishedPackagePackageVersionNugetMetadataList =
     [WebhookPackagePublishedPackagePackageVersionNugetMetadataItem]
+
+/// Required object value serialized in the `package_version` wire field.
+public struct WebhookPackagePublishedPackagePackageVersion: Codable {
+    /// Required `string` value serialized in the `description` wire field.
+    public var description: String
+    /// Required `uri`-formatted value serialized in the `html_url` wire field.
+    public var htmlUrl: String
+    /// Required `integer` value serialized in the `id` wire field.
+    public var id: Int
+    /// Required `string` value serialized in the `installation_command` wire field.
+    public var installationCommand: String
+    /// Required array value serialized in the `metadata` wire field.
+    public var metadata: [[String: JSONValue]]
+    /// Required `string` value serialized in the `name` wire field.
+    public var name: String
+    /// Required array value serialized in the `package_files` wire field.
+    public var packageFiles: [WebhookPackagePublishedPackagePackageVersionPackageFilesItem]
+    /// Required `string` value serialized in the `summary` wire field.
+    public var summary: String
+    /// Required `string` value serialized in the `version` wire field.
+    public var version: String
+    /// Optional object value serialized in the `author` wire field.
+    public var author: WebhookPackagePublishedPackagePackageVersionAuthor?
+    /// Optional API value serialized in the `body` wire field.
+    public var body: WebhookPackagePublishedPackagePackageVersionBody?
+    /// Optional `string` value serialized in the `body_html` wire field.
+    public var bodyHtml: String?
+    /// Optional object value serialized in the `container_metadata` wire field.
+    public var containerMetadata: WebhookPackagePublishedPackagePackageVersionContainerMetadata?
+    /// Optional `string` value serialized in the `created_at` wire field.
+    public var createdAt: String?
+    /// Optional array value serialized in the `docker_metadata` wire field.
+    public var dockerMetadata: WebhookPackagePublishedPackagePackageVersionDockerMetadataList?
+    /// Optional `boolean` value serialized in the `draft` wire field.
+    public var draft: Bool?
+    /// Optional `string` value serialized in the `manifest` wire field.
+    public var manifest: String?
+    /// Optional object value serialized in the `npm_metadata` wire field.
+    public var npmMetadata: WebhookPackagePublishedPackagePackageVersionNpmMetadata?
+    /// Optional array value serialized in the `nuget_metadata` wire field.
+    public var nugetMetadata: WebhookPackagePublishedPackagePackageVersionNugetMetadataList?
+    /// Optional `string` value serialized in the `package_url` wire field.
+    public var packageUrl: String?
+    /// Optional `boolean` value serialized in the `prerelease` wire field.
+    public var prerelease: Bool?
+    /// Optional object value serialized in the `release` wire field.
+    public var release: WebhookPackagePublishedPackagePackageVersionRelease?
+    /// Optional array value serialized in the `rubygems_metadata` wire field.
+    public var rubygemsMetadata: [WebhookRubygemsMetadata]?
+    /// Optional `string` value serialized in the `source_url` wire field.
+    public var sourceUrl: String?
+    /// Optional `string` value serialized in the `tag_name` wire field.
+    public var tagName: String?
+    /// Optional `string` value serialized in the `target_commitish` wire field.
+    public var targetCommitish: String?
+    /// Optional `string` value serialized in the `target_oid` wire field.
+    public var targetOid: String?
+    /// Optional `string` value serialized in the `updated_at` wire field.
+    public var updatedAt: String?
+
+    enum CodingKeys: String, CodingKey {
+        case description
+        case htmlUrl = "html_url"
+        case id
+        case installationCommand = "installation_command"
+        case metadata
+        case name
+        case packageFiles = "package_files"
+        case summary
+        case version
+        case author
+        case body
+        case bodyHtml = "body_html"
+        case containerMetadata = "container_metadata"
+        case createdAt = "created_at"
+        case dockerMetadata = "docker_metadata"
+        case draft
+        case manifest
+        case npmMetadata = "npm_metadata"
+        case nugetMetadata = "nuget_metadata"
+        case packageUrl = "package_url"
+        case prerelease
+        case release
+        case rubygemsMetadata = "rubygems_metadata"
+        case sourceUrl = "source_url"
+        case tagName = "tag_name"
+        case targetCommitish = "target_commitish"
+        case targetOid = "target_oid"
+        case updatedAt = "updated_at"
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension WebhookPackagePublishedPackagePackageVersion {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        description = try container.sdkDecodeRequired(.description)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        id = try container.sdkDecodeRequired(.id)
+        installationCommand = try container.sdkDecodeRequired(.installationCommand)
+        metadata = try container.sdkDecodeRequired(.metadata)
+        name = try container.sdkDecodeRequired(.name)
+        packageFiles = try container.sdkDecodeRequired(.packageFiles)
+        summary = try container.sdkDecodeRequired(.summary)
+        version = try container.sdkDecodeRequired(.version)
+        author = try container.sdkDecodeIfPresent(.author)
+        body = try container.sdkDecodeIfPresent(.body)
+        bodyHtml = try container.sdkDecodeIfPresent(.bodyHtml)
+        containerMetadata = try container.sdkDecodeIfPresent(.containerMetadata)
+        createdAt = try container.sdkDecodeIfPresent(.createdAt)
+        dockerMetadata = try container.sdkDecodeIfPresent(.dockerMetadata)
+        draft = try container.sdkDecodeIfPresent(.draft)
+        manifest = try container.sdkDecodeIfPresent(.manifest)
+        npmMetadata = try container.sdkDecodeIfPresent(.npmMetadata)
+        nugetMetadata = try container.sdkDecodeIfPresent(.nugetMetadata)
+        packageUrl = try container.sdkDecodeIfPresent(.packageUrl)
+        prerelease = try container.sdkDecodeIfPresent(.prerelease)
+        release = try container.sdkDecodeIfPresent(.release)
+        rubygemsMetadata = try container.sdkDecodeIfPresent(.rubygemsMetadata)
+        sourceUrl = try container.sdkDecodeIfPresent(.sourceUrl)
+        tagName = try container.sdkDecodeIfPresent(.tagName)
+        targetCommitish = try container.sdkDecodeIfPresent(.targetCommitish)
+        targetOid = try container.sdkDecodeIfPresent(.targetOid)
+        updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
+        try sdkValidateUri("html_url", htmlUrl)
+    }
+}

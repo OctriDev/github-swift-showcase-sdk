@@ -4,6 +4,32 @@
 import Foundation
 
 /// WebhookPullRequestReviewRequested domain models
+public extension WebhookPullRequestReviewRequestedVariant0PullRequestRequestedX284e32f947 {
+    init(
+        description: String?,
+        htmlUrl: String,
+        id: Int,
+        membersUrl: String,
+        name: String,
+        nodeId: String,
+        permission: String,
+        privacy: WebhookPullRequestReviewRequestedVariant0PullRequestRequestedX5793e9a656,
+        repositoriesUrl: String,
+        slug: String,
+        url: String
+    ) throws {
+        (self.description, self.htmlUrl) = (description, htmlUrl)
+        (self.id, self.membersUrl) = (id, membersUrl)
+        (self.name, self.nodeId) = (name, nodeId)
+        (self.permission, self.privacy) = (permission, privacy)
+        (self.repositoriesUrl, self.slug) = (repositoriesUrl, slug)
+        self.url = url
+        try sdkValidateUri("html_url", self.htmlUrl)
+        try sdkValidateUri("repositories_url", self.repositoriesUrl)
+        try sdkValidateUri("url", self.url)
+    }
+}
+
 /// A git repository
 public struct WebhookPullRequestReviewRequestedVariant0PullRequestHeadRepo: Codable {
     public var archiveUrl: String
@@ -600,31 +626,5 @@ public extension WebhookPullRequestReviewRequestedVariant1PullRequestLinksCommit
 public extension WebhookPullRequestReviewRequestedVariant1PullRequestLinksCommits {
     init(href: String) {
         self.href = href
-    }
-}
-
-public struct WebhookPullRequestReviewRequestedVariant0PullRequestLinksReviewComment: Codable {
-    public var href: String
-
-    enum CodingKeys: String, CodingKey {
-        case href
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension WebhookPullRequestReviewRequestedVariant0PullRequestLinksReviewComment {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.href) else {
-            throw SdkValidationError(
-                field: "href",
-                code: "required",
-                message: "Validation failed for 'href': value is required"
-            )
-        }
-        href = try container.sdkDecodeRequired(.href)
     }
 }

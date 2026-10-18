@@ -4,20 +4,29 @@
 import Foundation
 
 /// AgentTasks domain models
-public indirect enum ArtifactsItemData {
-    case artifactsItemDataVariant0(ArtifactsItemDataVariant0)
-    case artifactsItemDataVariant1(ArtifactsItemDataVariant1)
+public indirect enum AgentTasksCreateTaskInRepoResponseArtifactsItemData {
+    case agentTasksCreateTaskInRepoResponseArtifactsItemDataVariant0(
+        AgentTasksCreateTaskInRepoResponseArtifactsItemDataVariant0
+    )
+    case agentTasksCreateTaskInRepoResponseArtifactsItemDataVariant1(
+        AgentTasksCreateTaskInRepoResponseArtifactsItemDataVariant1
+    )
 }
 
-extension ArtifactsItemData: Codable {
+extension AgentTasksCreateTaskInRepoResponseArtifactsItemData: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) {
+                self = value; return
+            }
+        }
         if let value = Self.decodeGroup1(from: container) {
             self = value; return
         }
         throw DecodingError.dataCorruptedError(
             in: container,
-            debugDescription: "No variant matched for ArtifactsItemData"
+            debugDescription: "No variant matched for AgentTasksCreateTaskInRepoResponseArtifactsItemData"
         )
     }
 
@@ -28,190 +37,71 @@ extension ArtifactsItemData: Codable {
     }
 }
 
-extension ArtifactsItemData {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container
-            .decode(ArtifactsItemDataVariant0.self) {
-            return .artifactsItemDataVariant0(value)
+extension AgentTasksCreateTaskInRepoResponseArtifactsItemData {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(AgentTasksCreateTaskInRepoResponseArtifactsItemDataVariant0.self),
+           sdkKeepsEveryKey(value, of: raw) {
+            return .agentTasksCreateTaskInRepoResponseArtifactsItemDataVariant0(value)
         }
-        if let value = try? container
-            .decode(ArtifactsItemDataVariant1.self) {
-            return .artifactsItemDataVariant1(value)
+        if let value = try? container.decode(AgentTasksCreateTaskInRepoResponseArtifactsItemDataVariant1.self),
+           sdkKeepsEveryKey(value, of: raw) {
+            return .agentTasksCreateTaskInRepoResponseArtifactsItemDataVariant1(value)
         }
         return nil
     }
 }
 
-extension ArtifactsItemData {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .artifactsItemDataVariant0(value): try container.encode(value); return true
-        case let .artifactsItemDataVariant1(value): try container.encode(value); return true
-        }
-    }
-}
-
-public indirect enum ArtifactsItemData2 {
-    case artifactsItemData2Variant0(ArtifactsItemData2Variant0)
-    case artifactsItemData2Variant1(ArtifactsItemData2Variant1)
-}
-
-extension ArtifactsItemData2: Codable {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for ArtifactsItemData2"
-        )
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
-    }
-}
-
-extension ArtifactsItemData2 {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container
-            .decode(ArtifactsItemData2Variant0.self) {
-            return .artifactsItemData2Variant0(value)
-        }
-        if let value = try? container
-            .decode(ArtifactsItemData2Variant1.self) {
-            return .artifactsItemData2Variant1(value)
-        }
-        return nil
-    }
-}
-
-extension ArtifactsItemData2 {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .artifactsItemData2Variant0(value): try container.encode(value); return true
-        case let .artifactsItemData2Variant1(value): try container.encode(value); return true
-        }
-    }
-}
-
-public indirect enum ArtifactsItemData3 {
-    case artifactsItemData3Variant0(ArtifactsItemData3Variant0)
-    case artifactsItemData3Variant1(ArtifactsItemData3Variant1)
-}
-
-extension ArtifactsItemData3: Codable {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for ArtifactsItemData3"
-        )
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
-    }
-}
-
-extension ArtifactsItemData3 {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container
-            .decode(ArtifactsItemData3Variant0.self) {
-            return .artifactsItemData3Variant0(value)
-        }
-        if let value = try? container
-            .decode(ArtifactsItemData3Variant1.self) {
-            return .artifactsItemData3Variant1(value)
-        }
-        return nil
-    }
-}
-
-extension ArtifactsItemData3 {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .artifactsItemData3Variant0(value): try container.encode(value); return true
-        case let .artifactsItemData3Variant1(value): try container.encode(value); return true
-        }
-    }
-}
-
-public indirect enum TasksItemArtifactsItemData2 {
-    case tasksItemArtifactsItemData2Variant0(TasksItemArtifactsItemData2Variant0)
-    case tasksItemArtifactsItemData2Variant1(TasksItemArtifactsItemData2Variant1)
-}
-
-extension TasksItemArtifactsItemData2: Codable {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for TasksItemArtifactsItemData2"
-        )
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
-    }
-}
-
-extension TasksItemArtifactsItemData2 {
+extension AgentTasksCreateTaskInRepoResponseArtifactsItemData {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
         if let value = try? container.decode(
-            TasksItemArtifactsItemData2Variant0.self
+            AgentTasksCreateTaskInRepoResponseArtifactsItemDataVariant0.self
         ) {
-            return .tasksItemArtifactsItemData2Variant0(value)
+            return .agentTasksCreateTaskInRepoResponseArtifactsItemDataVariant0(value)
         }
         if let value = try? container.decode(
-            TasksItemArtifactsItemData2Variant1.self
+            AgentTasksCreateTaskInRepoResponseArtifactsItemDataVariant1.self
         ) {
-            return .tasksItemArtifactsItemData2Variant1(value)
+            return .agentTasksCreateTaskInRepoResponseArtifactsItemDataVariant1(value)
         }
         return nil
     }
 }
 
-extension TasksItemArtifactsItemData2 {
+extension AgentTasksCreateTaskInRepoResponseArtifactsItemData {
     func encodeGroup1(to encoder: Encoder) throws -> Bool {
         var container = encoder.singleValueContainer()
         switch self {
-        case let .tasksItemArtifactsItemData2Variant0(value): try container.encode(value); return true
-        case let .tasksItemArtifactsItemData2Variant1(value): try container.encode(value); return true
+        case let .agentTasksCreateTaskInRepoResponseArtifactsItemDataVariant0(value): try container
+            .encode(value); return true
+        case let .agentTasksCreateTaskInRepoResponseArtifactsItemDataVariant1(value): try container
+            .encode(value); return true
         }
     }
 }
 
-public indirect enum TasksItemArtifactsItemData3 {
-    case tasksItemArtifactsItemData3Variant0(TasksItemArtifactsItemData3Variant0)
-    case tasksItemArtifactsItemData3Variant1(TasksItemArtifactsItemData3Variant1)
+public indirect enum AgentTasksListTasksForRepoResponseTasksItemArtifactsItemData {
+    case agentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant0(
+        AgentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant0
+    )
+    case agentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant1(
+        AgentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant1
+    )
 }
 
-extension TasksItemArtifactsItemData3: Codable {
+extension AgentTasksListTasksForRepoResponseTasksItemArtifactsItemData: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) {
+                self = value; return
+            }
+        }
         if let value = Self.decodeGroup1(from: container) {
             self = value; return
         }
         throw DecodingError.dataCorruptedError(
             in: container,
-            debugDescription: "No variant matched for TasksItemArtifactsItemData3"
+            debugDescription: "No variant matched for AgentTasksListTasksForRepoResponseTasksItemArtifactsItemData"
         )
     }
 
@@ -222,34 +112,201 @@ extension TasksItemArtifactsItemData3: Codable {
     }
 }
 
-extension TasksItemArtifactsItemData3 {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(
-            TasksItemArtifactsItemData3Variant0.self
-        ) {
-            return .tasksItemArtifactsItemData3Variant0(value)
+extension AgentTasksListTasksForRepoResponseTasksItemArtifactsItemData {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(AgentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant0.self),
+           sdkKeepsEveryKey(value, of: raw) {
+            return .agentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant0(value)
         }
-        if let value = try? container.decode(
-            TasksItemArtifactsItemData3Variant1.self
-        ) {
-            return .tasksItemArtifactsItemData3Variant1(value)
+        if let value = try? container.decode(AgentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant1.self),
+           sdkKeepsEveryKey(value, of: raw) {
+            return .agentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant1(value)
         }
         return nil
     }
 }
 
-extension TasksItemArtifactsItemData3 {
+extension AgentTasksListTasksForRepoResponseTasksItemArtifactsItemData {
+    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
+        if let value = try? container.decode(
+            AgentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant0.self
+        ) {
+            return .agentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant0(value)
+        }
+        if let value = try? container.decode(
+            AgentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant1.self
+        ) {
+            return .agentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant1(value)
+        }
+        return nil
+    }
+}
+
+extension AgentTasksListTasksForRepoResponseTasksItemArtifactsItemData {
     func encodeGroup1(to encoder: Encoder) throws -> Bool {
         var container = encoder.singleValueContainer()
         switch self {
-        case let .tasksItemArtifactsItemData3Variant0(value): try container.encode(value); return true
-        case let .tasksItemArtifactsItemData3Variant1(value): try container.encode(value); return true
+        case let .agentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant0(value): try container
+            .encode(value); return true
+        case let .agentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant1(value): try container
+            .encode(value); return true
         }
+    }
+}
+
+public indirect enum AgentTasksListTasksResponseTasksItemArtifactsItemData {
+    case agentTasksListTasksResponseTasksItemArtifactsItemDataVariant0(
+        AgentTasksListTasksResponseTasksItemArtifactsItemDataVariant0
+    )
+    case agentTasksListTasksResponseTasksItemArtifactsItemDataVariant1(
+        AgentTasksListTasksResponseTasksItemArtifactsItemDataVariant1
+    )
+}
+
+extension AgentTasksListTasksResponseTasksItemArtifactsItemData: Codable {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) {
+                self = value; return
+            }
+        }
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for AgentTasksListTasksResponseTasksItemArtifactsItemData"
+        )
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        if try encodeGroup1(to: encoder) {
+            return
+        }
+    }
+}
+
+extension AgentTasksListTasksResponseTasksItemArtifactsItemData {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(AgentTasksListTasksResponseTasksItemArtifactsItemDataVariant0.self),
+           sdkKeepsEveryKey(value, of: raw) {
+            return .agentTasksListTasksResponseTasksItemArtifactsItemDataVariant0(value)
+        }
+        if let value = try? container.decode(AgentTasksListTasksResponseTasksItemArtifactsItemDataVariant1.self),
+           sdkKeepsEveryKey(value, of: raw) {
+            return .agentTasksListTasksResponseTasksItemArtifactsItemDataVariant1(value)
+        }
+        return nil
+    }
+}
+
+extension AgentTasksListTasksResponseTasksItemArtifactsItemData {
+    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
+        if let value = try? container.decode(
+            AgentTasksListTasksResponseTasksItemArtifactsItemDataVariant0.self
+        ) {
+            return .agentTasksListTasksResponseTasksItemArtifactsItemDataVariant0(value)
+        }
+        if let value = try? container.decode(
+            AgentTasksListTasksResponseTasksItemArtifactsItemDataVariant1.self
+        ) {
+            return .agentTasksListTasksResponseTasksItemArtifactsItemDataVariant1(value)
+        }
+        return nil
+    }
+}
+
+extension AgentTasksListTasksResponseTasksItemArtifactsItemData {
+    func encodeGroup1(to encoder: Encoder) throws -> Bool {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case let .agentTasksListTasksResponseTasksItemArtifactsItemDataVariant0(value): try container
+            .encode(value); return true
+        case let .agentTasksListTasksResponseTasksItemArtifactsItemDataVariant1(value): try container
+            .encode(value); return true
+        }
+    }
+}
+
+/// A GitHub resource (pull request, issue, etc.)
+public struct AgentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant0: Codable {
+    /// GitHub resource ID
+    public var id: Int
+    /// GraphQL global ID
+    public var globalId: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case globalId = "global_id"
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension AgentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant0 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        globalId = try container.sdkDecodeIfPresent(.globalId)
+    }
+}
+
+public extension AgentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant0 {
+    init(id: Int, globalId: String? = nil) {
+        (self.id, self.globalId) = (id, globalId)
+    }
+}
+
+/// A GitHub resource (pull request, issue, etc.)
+public struct AgentTasksListTasksResponseTasksItemArtifactsItemDataVariant0: Codable {
+    /// GitHub resource ID
+    public var id: Int
+    /// GraphQL global ID
+    public var globalId: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case globalId = "global_id"
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension AgentTasksListTasksResponseTasksItemArtifactsItemDataVariant0 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        globalId = try container.sdkDecodeIfPresent(.globalId)
+    }
+}
+
+public extension AgentTasksListTasksResponseTasksItemArtifactsItemDataVariant0 {
+    init(id: Int, globalId: String? = nil) {
+        (self.id, self.globalId) = (id, globalId)
     }
 }
 
 /// A Git branch reference
-public struct TasksItemArtifactsItemData2Variant1: Codable {
+public struct AgentTasksListTasksResponseTasksItemArtifactsItemDataVariant1: Codable {
     /// Head branch name
     public var headRef: String
     /// Base branch name
@@ -265,7 +322,7 @@ public struct TasksItemArtifactsItemData2Variant1: Codable {
     }
 }
 
-public extension TasksItemArtifactsItemData2Variant1 {
+public extension AgentTasksListTasksResponseTasksItemArtifactsItemDataVariant1 {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.headRef) else {
@@ -287,14 +344,14 @@ public extension TasksItemArtifactsItemData2Variant1 {
     }
 }
 
-public extension TasksItemArtifactsItemData2Variant1 {
+public extension AgentTasksListTasksResponseTasksItemArtifactsItemDataVariant1 {
     init(headRef: String, baseRef: String) {
         (self.headRef, self.baseRef) = (headRef, baseRef)
     }
 }
 
 /// A GitHub resource (pull request, issue, etc.)
-public struct TasksItemArtifactsItemData2Variant0: Codable {
+public struct AgentTasksCreateTaskInRepoResponseArtifactsItemDataVariant0: Codable {
     /// GitHub resource ID
     public var id: Int
     /// GraphQL global ID
@@ -310,7 +367,7 @@ public struct TasksItemArtifactsItemData2Variant0: Codable {
     }
 }
 
-public extension TasksItemArtifactsItemData2Variant0 {
+public extension AgentTasksCreateTaskInRepoResponseArtifactsItemDataVariant0 {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
@@ -325,14 +382,14 @@ public extension TasksItemArtifactsItemData2Variant0 {
     }
 }
 
-public extension TasksItemArtifactsItemData2Variant0 {
+public extension AgentTasksCreateTaskInRepoResponseArtifactsItemDataVariant0 {
     init(id: Int, globalId: String? = nil) {
         (self.id, self.globalId) = (id, globalId)
     }
 }
 
 /// A Git branch reference
-public struct ArtifactsItemData2Variant1: Codable {
+public struct AgentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant1: Codable {
     /// Head branch name
     public var headRef: String
     /// Base branch name
@@ -348,7 +405,7 @@ public struct ArtifactsItemData2Variant1: Codable {
     }
 }
 
-public extension ArtifactsItemData2Variant1 {
+public extension AgentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant1 {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.headRef) else {
@@ -370,52 +427,14 @@ public extension ArtifactsItemData2Variant1 {
     }
 }
 
-public extension ArtifactsItemData2Variant1 {
+public extension AgentTasksListTasksForRepoResponseTasksItemArtifactsItemDataVariant1 {
     init(headRef: String, baseRef: String) {
         (self.headRef, self.baseRef) = (headRef, baseRef)
     }
 }
 
-/// A GitHub resource (pull request, issue, etc.)
-public struct ArtifactsItemDataVariant0: Codable {
-    /// GitHub resource ID
-    public var id: Int
-    /// GraphQL global ID
-    public var globalId: String?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case globalId = "global_id"
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension ArtifactsItemDataVariant0 {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
-        }
-        id = try container.sdkDecodeRequired(.id)
-        globalId = try container.sdkDecodeIfPresent(.globalId)
-    }
-}
-
-public extension ArtifactsItemDataVariant0 {
-    init(id: Int, globalId: String? = nil) {
-        (self.id, self.globalId) = (id, globalId)
-    }
-}
-
 /// A Git branch reference
-public struct TasksItemArtifactsItemData3Variant1: Codable {
+public struct AgentTasksCreateTaskInRepoResponseArtifactsItemDataVariant1: Codable {
     /// Head branch name
     public var headRef: String
     /// Base branch name
@@ -431,7 +450,7 @@ public struct TasksItemArtifactsItemData3Variant1: Codable {
     }
 }
 
-public extension TasksItemArtifactsItemData3Variant1 {
+public extension AgentTasksCreateTaskInRepoResponseArtifactsItemDataVariant1 {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.headRef) else {
@@ -453,167 +472,8 @@ public extension TasksItemArtifactsItemData3Variant1 {
     }
 }
 
-public extension TasksItemArtifactsItemData3Variant1 {
+public extension AgentTasksCreateTaskInRepoResponseArtifactsItemDataVariant1 {
     init(headRef: String, baseRef: String) {
         (self.headRef, self.baseRef) = (headRef, baseRef)
-    }
-}
-
-/// A GitHub resource (pull request, issue, etc.)
-public struct TasksItemArtifactsItemData3Variant0: Codable {
-    /// GitHub resource ID
-    public var id: Int
-    /// GraphQL global ID
-    public var globalId: String?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case globalId = "global_id"
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension TasksItemArtifactsItemData3Variant0 {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
-        }
-        id = try container.sdkDecodeRequired(.id)
-        globalId = try container.sdkDecodeIfPresent(.globalId)
-    }
-}
-
-public extension TasksItemArtifactsItemData3Variant0 {
-    init(id: Int, globalId: String? = nil) {
-        (self.id, self.globalId) = (id, globalId)
-    }
-}
-
-/// A GitHub resource (pull request, issue, etc.)
-public struct ArtifactsItemData2Variant0: Codable {
-    /// GitHub resource ID
-    public var id: Int
-    /// GraphQL global ID
-    public var globalId: String?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case globalId = "global_id"
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension ArtifactsItemData2Variant0 {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
-        }
-        id = try container.sdkDecodeRequired(.id)
-        globalId = try container.sdkDecodeIfPresent(.globalId)
-    }
-}
-
-public extension ArtifactsItemData2Variant0 {
-    init(id: Int, globalId: String? = nil) {
-        (self.id, self.globalId) = (id, globalId)
-    }
-}
-
-/// A Git branch reference
-public struct ArtifactsItemData3Variant1: Codable {
-    /// Head branch name
-    public var headRef: String
-    /// Base branch name
-    public var baseRef: String
-
-    enum CodingKeys: String, CodingKey {
-        case headRef = "head_ref"
-        case baseRef = "base_ref"
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension ArtifactsItemData3Variant1 {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.headRef) else {
-            throw SdkValidationError(
-                field: "head_ref",
-                code: "required",
-                message: "Validation failed for 'head_ref': value is required"
-            )
-        }
-        guard container.contains(.baseRef) else {
-            throw SdkValidationError(
-                field: "base_ref",
-                code: "required",
-                message: "Validation failed for 'base_ref': value is required"
-            )
-        }
-        headRef = try container.sdkDecodeRequired(.headRef)
-        baseRef = try container.sdkDecodeRequired(.baseRef)
-    }
-}
-
-public extension ArtifactsItemData3Variant1 {
-    init(headRef: String, baseRef: String) {
-        (self.headRef, self.baseRef) = (headRef, baseRef)
-    }
-}
-
-/// A GitHub resource (pull request, issue, etc.)
-public struct ArtifactsItemData3Variant0: Codable {
-    /// GitHub resource ID
-    public var id: Int
-    /// GraphQL global ID
-    public var globalId: String?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case globalId = "global_id"
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension ArtifactsItemData3Variant0 {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
-        }
-        id = try container.sdkDecodeRequired(.id)
-        globalId = try container.sdkDecodeIfPresent(.globalId)
-    }
-}
-
-public extension ArtifactsItemData3Variant0 {
-    init(id: Int, globalId: String? = nil) {
-        (self.id, self.globalId) = (id, globalId)
     }
 }

@@ -582,7 +582,7 @@ public extension ReposNamespace {
         cname: SdkOptional<String>? = nil,
         httpsEnforced: Bool? = nil,
         buildType: ReposUpdateInformationAboutPagesSiteRequestBodyBuildType? = nil,
-        source: ReposUpdateInformationAboutPagesSiteRequestBodySource? = nil,
+        source: ReposUpdateInformationAboutPagesSiteRequestSource? = nil,
         requestOptions: RequestOptions? = nil
     ) async throws -> SdkEmptyResponse {
         try await ReposMethods.reposUpdateInformationAboutPagesSite(

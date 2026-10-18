@@ -4,21 +4,29 @@
 import Foundation
 
 /// AgentAutomations domain models
-public indirect enum FieldsItemSchema {
-    case fieldsItemSchemaVariant0(FieldsItemSchemaVariant0)
-    case fieldsItemSchemaVariant1(FieldsItemSchemaVariant1)
-    case fieldsItemSchemaVariant2(FieldsItemSchemaVariant2)
+public indirect enum AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemData {
+    case agentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a(
+        AgentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a
+    )
+    case agentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4(
+        AgentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4
+    )
 }
 
-extension FieldsItemSchema: Codable {
+extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemData: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) {
+                self = value; return
+            }
+        }
         if let value = Self.decodeGroup1(from: container) {
             self = value; return
         }
         throw DecodingError.dataCorruptedError(
             in: container,
-            debugDescription: "No variant matched for FieldsItemSchema"
+            debugDescription: "No variant matched for AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemData"
         )
     }
 
@@ -29,46 +37,76 @@ extension FieldsItemSchema: Codable {
     }
 }
 
-extension FieldsItemSchema {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(FieldsItemSchemaVariant0.self) {
-            return .fieldsItemSchemaVariant0(value)
+extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemData {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container
+            .decode(AgentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a.self),
+            sdkKeepsEveryKey(value, of: raw) {
+            return .agentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a(value)
         }
-        if let value = try? container.decode(FieldsItemSchemaVariant1.self) {
-            return .fieldsItemSchemaVariant1(value)
-        }
-        if let value = try? container.decode(FieldsItemSchemaVariant2.self) {
-            return .fieldsItemSchemaVariant2(value)
+        if let value = try? container
+            .decode(AgentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4.self),
+            sdkKeepsEveryKey(value, of: raw) {
+            return .agentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4(value)
         }
         return nil
     }
 }
 
-extension FieldsItemSchema {
+extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemData {
+    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
+        if let value = try? container.decode(
+            AgentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a.self
+        ) {
+            return .agentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a(value)
+        }
+        if let value = try? container.decode(
+            AgentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4.self
+        ) {
+            return .agentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4(value)
+        }
+        return nil
+    }
+}
+
+extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemData {
     func encodeGroup1(to encoder: Encoder) throws -> Bool {
         var container = encoder.singleValueContainer()
         switch self {
-        case let .fieldsItemSchemaVariant0(value): try container.encode(value); return true
-        case let .fieldsItemSchemaVariant1(value): try container.encode(value); return true
-        case let .fieldsItemSchemaVariant2(value): try container.encode(value); return true
+        case let .agentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a(value): try container
+            .encode(value); return true
+        case let .agentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4(value): try container
+            .encode(value); return true
         }
     }
 }
 
-public indirect enum TasksItemArtifactsItemData {
-    case tasksItemArtifactsItemDataVariant0(TasksItemArtifactsItemDataVariant0)
-    case tasksItemArtifactsItemDataVariant1(TasksItemArtifactsItemDataVariant1)
+public indirect enum AgentAutomationsListAvailableAutomationTriggersResponseItemFiX8d60f6fda7 {
+    case agentAutomationsListAvailableAutomationTriggersResponseItemFiX2732c6430f(
+        AgentAutomationsListAvailableAutomationTriggersResponseItemFiX2732c6430f
+    )
+    case agentAutomationsListAvailableAutomationTriggersResponseItemFiX33c1ad0172(
+        AgentAutomationsListAvailableAutomationTriggersResponseItemFiX33c1ad0172
+    )
+    case agentAutomationsListAvailableAutomationTriggersResponseItemFiXe26621da0f(
+        AgentAutomationsListAvailableAutomationTriggersResponseItemFiXe26621da0f
+    )
 }
 
-extension TasksItemArtifactsItemData: Codable {
+extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiX8d60f6fda7: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) {
+                self = value; return
+            }
+        }
         if let value = Self.decodeGroup1(from: container) {
             self = value; return
         }
         throw DecodingError.dataCorruptedError(
             in: container,
-            debugDescription: "No variant matched for TasksItemArtifactsItemData"
+            debugDescription: "No variant matched for AgentAutomationsListAvailableAutomationTriggersResponseItemFiX8d60f6fda7"
         )
     }
 
@@ -79,32 +117,64 @@ extension TasksItemArtifactsItemData: Codable {
     }
 }
 
-extension TasksItemArtifactsItemData {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
+extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiX8d60f6fda7 {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
         if let value = try? container
-            .decode(TasksItemArtifactsItemDataVariant0.self) {
-            return .tasksItemArtifactsItemDataVariant0(value)
+            .decode(AgentAutomationsListAvailableAutomationTriggersResponseItemFiX2732c6430f.self),
+            sdkKeepsEveryKey(value, of: raw) {
+            return .agentAutomationsListAvailableAutomationTriggersResponseItemFiX2732c6430f(value)
         }
         if let value = try? container
-            .decode(TasksItemArtifactsItemDataVariant1.self) {
-            return .tasksItemArtifactsItemDataVariant1(value)
+            .decode(AgentAutomationsListAvailableAutomationTriggersResponseItemFiX33c1ad0172.self),
+            sdkKeepsEveryKey(value, of: raw) {
+            return .agentAutomationsListAvailableAutomationTriggersResponseItemFiX33c1ad0172(value)
+        }
+        if let value = try? container
+            .decode(AgentAutomationsListAvailableAutomationTriggersResponseItemFiXe26621da0f.self),
+            sdkKeepsEveryKey(value, of: raw) {
+            return .agentAutomationsListAvailableAutomationTriggersResponseItemFiXe26621da0f(value)
         }
         return nil
     }
 }
 
-extension TasksItemArtifactsItemData {
+extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiX8d60f6fda7 {
+    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
+        if let value = try? container.decode(
+            AgentAutomationsListAvailableAutomationTriggersResponseItemFiX2732c6430f.self
+        ) {
+            return .agentAutomationsListAvailableAutomationTriggersResponseItemFiX2732c6430f(value)
+        }
+        if let value = try? container.decode(
+            AgentAutomationsListAvailableAutomationTriggersResponseItemFiX33c1ad0172.self
+        ) {
+            return .agentAutomationsListAvailableAutomationTriggersResponseItemFiX33c1ad0172(value)
+        }
+        if let value = try? container.decode(
+            AgentAutomationsListAvailableAutomationTriggersResponseItemFiXe26621da0f.self
+        ) {
+            return .agentAutomationsListAvailableAutomationTriggersResponseItemFiXe26621da0f(value)
+        }
+        return nil
+    }
+}
+
+extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiX8d60f6fda7 {
     func encodeGroup1(to encoder: Encoder) throws -> Bool {
         var container = encoder.singleValueContainer()
         switch self {
-        case let .tasksItemArtifactsItemDataVariant0(value): try container.encode(value); return true
-        case let .tasksItemArtifactsItemDataVariant1(value): try container.encode(value); return true
+        case let .agentAutomationsListAvailableAutomationTriggersResponseItemFiX2732c6430f(value): try container
+            .encode(value); return true
+        case let .agentAutomationsListAvailableAutomationTriggersResponseItemFiX33c1ad0172(value): try container
+            .encode(value); return true
+        case let .agentAutomationsListAvailableAutomationTriggersResponseItemFiXe26621da0f(value): try container
+            .encode(value); return true
         }
     }
 }
 
 /// A GitHub resource (pull request, issue, etc.)
-public struct TasksItemArtifactsItemDataVariant0: Codable {
+public struct AgentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a: Codable {
     /// GitHub resource ID
     public var id: Int
     /// GraphQL global ID
@@ -120,7 +190,7 @@ public struct TasksItemArtifactsItemDataVariant0: Codable {
     }
 }
 
-public extension TasksItemArtifactsItemDataVariant0 {
+public extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
@@ -135,14 +205,101 @@ public extension TasksItemArtifactsItemDataVariant0 {
     }
 }
 
-public extension TasksItemArtifactsItemDataVariant0 {
+public extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a {
     init(id: Int, globalId: String? = nil) {
         (self.id, self.globalId) = (id, globalId)
     }
 }
 
-public struct FieldsItemSchemaVariant1Items: Codable {
-    public var type: FieldsItemSchemaVariant1ItemsType
+/// A Git branch reference
+public struct AgentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4: Codable {
+    /// Head branch name
+    public var headRef: String
+    /// Base branch name
+    public var baseRef: String
+
+    enum CodingKeys: String, CodingKey {
+        case headRef = "head_ref"
+        case baseRef = "base_ref"
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.headRef) else {
+            throw SdkValidationError(
+                field: "head_ref",
+                code: "required",
+                message: "Validation failed for 'head_ref': value is required"
+            )
+        }
+        guard container.contains(.baseRef) else {
+            throw SdkValidationError(
+                field: "base_ref",
+                code: "required",
+                message: "Validation failed for 'base_ref': value is required"
+            )
+        }
+        headRef = try container.sdkDecodeRequired(.headRef)
+        baseRef = try container.sdkDecodeRequired(.baseRef)
+    }
+}
+
+public extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4 {
+    init(headRef: String, baseRef: String) {
+        (self.headRef, self.baseRef) = (headRef, baseRef)
+    }
+}
+
+public struct AgentAutomationsListAvailableAutomationTriggersResponseItemFiXe26621da0f: Codable {
+    public var type: AgentAutomationsListAvailableAutomationTriggersResponseItemFiX453baec979
+
+    enum CodingKeys: String, CodingKey {
+        case type
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiXe26621da0f {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.type) else {
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
+        }
+        type = try container.sdkDecodeRequired(.type)
+        try sdkValidateRawEnum(
+            "type",
+            type,
+            AgentAutomationsListAvailableAutomationTriggersResponseItemFiX453baec979.allCases.map(\.rawValue)
+        )
+    }
+}
+
+public extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiXe26621da0f {
+    init(type: AgentAutomationsListAvailableAutomationTriggersResponseItemFiX453baec979) throws {
+        self.type = type
+        try sdkValidateRawEnum(
+            "type",
+            self.type,
+            AgentAutomationsListAvailableAutomationTriggersResponseItemFiX453baec979.allCases.map(\.rawValue)
+        )
+    }
+}
+
+public struct AgentAutomationsListAvailableAutomationTriggersResponseItemFiX3c0c1332cb: Codable {
+    public var type: AgentAutomationsListAvailableAutomationTriggersResponseItemFiX6da060e0f6
     /// The minimum accepted string item length.
     public var minLength: Int?
 
@@ -156,7 +313,7 @@ public struct FieldsItemSchemaVariant1Items: Codable {
     }
 }
 
-public extension FieldsItemSchemaVariant1Items {
+public extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiX3c0c1332cb {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.type) else {
@@ -182,8 +339,8 @@ public extension FieldsItemSchemaVariant1Items {
     }
 }
 
-public extension FieldsItemSchemaVariant1Items {
-    init(type: FieldsItemSchemaVariant1ItemsType, minLength: Int? = nil) throws {
+public extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiX3c0c1332cb {
+    init(type: AgentAutomationsListAvailableAutomationTriggersResponseItemFiX6da060e0f6, minLength: Int? = nil) throws {
         (self.type, self.minLength) = (type, minLength)
         if let value = self.minLength {
             try validateRange(
@@ -199,11 +356,14 @@ public extension FieldsItemSchemaVariant1Items {
     }
 }
 
-public struct FieldsItemSchemaVariant2: Codable {
-    public var type: FieldsItemSchemaVariant2Type
+public struct AgentAutomationsListAvailableAutomationTriggersResponseItemFiX2732c6430f: Codable {
+    public var type: AgentAutomationsListAvailableAutomationTriggersResponseItemFiX6c461ef13f
+    /// The minimum accepted string length.
+    public var minLength: Int?
 
     enum CodingKeys: String, CodingKey {
         case type
+        case minLength
     }
 
     private init(sdkCopy value: Self) {
@@ -211,7 +371,7 @@ public struct FieldsItemSchemaVariant2: Codable {
     }
 }
 
-public extension FieldsItemSchemaVariant2 {
+public extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiX2732c6430f {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.type) else {
@@ -222,20 +382,51 @@ public extension FieldsItemSchemaVariant2 {
             )
         }
         type = try container.sdkDecodeRequired(.type)
-        try sdkValidateRawEnum("type", type, FieldsItemSchemaVariant2Type.allCases.map(\.rawValue))
+        minLength = try container.sdkDecodeIfPresent(.minLength)
+        try sdkValidateRawEnum(
+            "type",
+            type,
+            AgentAutomationsListAvailableAutomationTriggersResponseItemFiX6c461ef13f.allCases.map(\.rawValue)
+        )
+        if let value = minLength {
+            try validateRange(
+                "minLength",
+                Double(value),
+                min: 0,
+                max: nil,
+                exclusiveMin: nil,
+                exclusiveMax: nil,
+                multipleOf: nil
+            )
+        }
     }
 }
 
-public extension FieldsItemSchemaVariant2 {
-    init(type: FieldsItemSchemaVariant2Type) throws {
-        self.type = type
-        try sdkValidateRawEnum("type", self.type, FieldsItemSchemaVariant2Type.allCases.map(\.rawValue))
+public extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiX2732c6430f {
+    init(type: AgentAutomationsListAvailableAutomationTriggersResponseItemFiX6c461ef13f, minLength: Int? = nil) throws {
+        (self.type, self.minLength) = (type, minLength)
+        try sdkValidateRawEnum(
+            "type",
+            self.type,
+            AgentAutomationsListAvailableAutomationTriggersResponseItemFiX6c461ef13f.allCases.map(\.rawValue)
+        )
+        if let value = self.minLength {
+            try validateRange(
+                "minLength",
+                Double(value),
+                min: 0,
+                max: nil,
+                exclusiveMin: nil,
+                exclusiveMax: nil,
+                multipleOf: nil
+            )
+        }
     }
 }
 
-public struct FieldsItemSchemaVariant1: Codable {
-    public var type: FieldsItemSchemaVariant1Type
-    public var items: FieldsItemSchemaVariant1Items
+public struct AgentAutomationsListAvailableAutomationTriggersResponseItemFiX33c1ad0172: Codable {
+    public var type: AgentAutomationsListAvailableAutomationTriggersResponseItemFiXf26f7efb5e
+    public var items: AgentAutomationsListAvailableAutomationTriggersResponseItemFiX3c0c1332cb
     /// The minimum accepted number of array items.
     public var minItems: Int?
     /// The maximum accepted number of array items.
@@ -256,7 +447,7 @@ public struct FieldsItemSchemaVariant1: Codable {
     }
 }
 
-public extension FieldsItemSchemaVariant1 {
+public extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiX33c1ad0172 {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.type) else {
@@ -278,7 +469,11 @@ public extension FieldsItemSchemaVariant1 {
         minItems = try container.sdkDecodeIfPresent(.minItems)
         maxItems = try container.sdkDecodeIfPresent(.maxItems)
         uniqueItems = try container.sdkDecodeIfPresent(.uniqueItems)
-        try sdkValidateRawEnum("type", type, FieldsItemSchemaVariant1Type.allCases.map(\.rawValue))
+        try sdkValidateRawEnum(
+            "type",
+            type,
+            AgentAutomationsListAvailableAutomationTriggersResponseItemFiXf26f7efb5e.allCases.map(\.rawValue)
+        )
         if let value = minItems {
             try validateRange(
                 "minItems",
@@ -304,10 +499,10 @@ public extension FieldsItemSchemaVariant1 {
     }
 }
 
-public extension FieldsItemSchemaVariant1 {
+public extension AgentAutomationsListAvailableAutomationTriggersResponseItemFiX33c1ad0172 {
     init(
-        type: FieldsItemSchemaVariant1Type,
-        items: FieldsItemSchemaVariant1Items,
+        type: AgentAutomationsListAvailableAutomationTriggersResponseItemFiXf26f7efb5e,
+        items: AgentAutomationsListAvailableAutomationTriggersResponseItemFiX3c0c1332cb,
         minItems: Int? = nil,
         maxItems: Int? = nil,
         uniqueItems: Bool? = nil
@@ -315,7 +510,11 @@ public extension FieldsItemSchemaVariant1 {
         (self.type, self.items) = (type, items)
         (self.minItems, self.maxItems) = (minItems, maxItems)
         self.uniqueItems = uniqueItems
-        try sdkValidateRawEnum("type", self.type, FieldsItemSchemaVariant1Type.allCases.map(\.rawValue))
+        try sdkValidateRawEnum(
+            "type",
+            self.type,
+            AgentAutomationsListAvailableAutomationTriggersResponseItemFiXf26f7efb5e.allCases.map(\.rawValue)
+        )
         if let value = self.minItems {
             try validateRange(
                 "minItems",
@@ -341,136 +540,16 @@ public extension FieldsItemSchemaVariant1 {
     }
 }
 
-public struct FieldsItemSchemaVariant0: Codable {
-    public var type: FieldsItemSchemaVariant0Type
-    /// The minimum accepted string length.
-    public var minLength: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case type
-        case minLength
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension FieldsItemSchemaVariant0 {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.type) else {
-            throw SdkValidationError(
-                field: "type",
-                code: "required",
-                message: "Validation failed for 'type': value is required"
-            )
-        }
-        type = try container.sdkDecodeRequired(.type)
-        minLength = try container.sdkDecodeIfPresent(.minLength)
-        try sdkValidateRawEnum("type", type, FieldsItemSchemaVariant0Type.allCases.map(\.rawValue))
-        if let value = minLength {
-            try validateRange(
-                "minLength",
-                Double(value),
-                min: 0,
-                max: nil,
-                exclusiveMin: nil,
-                exclusiveMax: nil,
-                multipleOf: nil
-            )
-        }
-    }
-}
-
-public extension FieldsItemSchemaVariant0 {
-    init(type: FieldsItemSchemaVariant0Type, minLength: Int? = nil) throws {
-        (self.type, self.minLength) = (type, minLength)
-        try sdkValidateRawEnum("type", self.type, FieldsItemSchemaVariant0Type.allCases.map(\.rawValue))
-        if let value = self.minLength {
-            try validateRange(
-                "minLength",
-                Double(value),
-                min: 0,
-                max: nil,
-                exclusiveMin: nil,
-                exclusiveMax: nil,
-                multipleOf: nil
-            )
-        }
-    }
-}
-
-/// A Git branch reference
-public struct TasksItemArtifactsItemDataVariant1: Codable {
-    /// Head branch name
-    public var headRef: String
-    /// Base branch name
-    public var baseRef: String
-
-    enum CodingKeys: String, CodingKey {
-        case headRef = "head_ref"
-        case baseRef = "base_ref"
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension TasksItemArtifactsItemDataVariant1 {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.headRef) else {
-            throw SdkValidationError(
-                field: "head_ref",
-                code: "required",
-                message: "Validation failed for 'head_ref': value is required"
-            )
-        }
-        guard container.contains(.baseRef) else {
-            throw SdkValidationError(
-                field: "base_ref",
-                code: "required",
-                message: "Validation failed for 'base_ref': value is required"
-            )
-        }
-        headRef = try container.sdkDecodeRequired(.headRef)
-        baseRef = try container.sdkDecodeRequired(.baseRef)
-    }
-}
-
-public extension TasksItemArtifactsItemDataVariant1 {
-    init(headRef: String, baseRef: String) {
-        (self.headRef, self.baseRef) = (headRef, baseRef)
-    }
-}
-
-public enum FieldsItemSchemaVariant2Type: String, CaseIterable, Codable {
-    case integer
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        let rawValue = try container.decode(String.self)
-        guard let value = Self(rawValue: rawValue) else {
-            let field = decoder.codingPath.last?.stringValue ?? "FieldsItemSchemaVariant2Type"
-            throw SdkValidationError(
-                field: field,
-                code: "enum",
-                message: "Validation failed for '\(field)': enum value '\(rawValue)' is not declared"
-            )
-        }
-        self = value
-    }
-}
-
-public struct FieldsItemSchemaVariant1ItemsType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct AgentAutomationsListAvailableAutomationTriggersResponseItemFiX6da060e0f6: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
     public init(rawValue: String) {
         self.rawValue = rawValue
     }
 
-    public static let string = FieldsItemSchemaVariant1ItemsType(rawValue: "string")
+    public static let string =
+        AgentAutomationsListAvailableAutomationTriggersResponseItemFiX6da060e0f6(rawValue: "string")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
@@ -483,13 +562,13 @@ public struct FieldsItemSchemaVariant1ItemsType: RawRepresentable, Hashable, Cod
     }
 }
 
-public enum FieldsItemSchemaVariant0Type: String, CaseIterable, Codable {
+public enum AgentAutomationsListAvailableAutomationTriggersResponseItemFiX6c461ef13f: String, CaseIterable, Codable {
     case string
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         let rawValue = try container.decode(String.self)
         guard let value = Self(rawValue: rawValue) else {
-            let field = decoder.codingPath.last?.stringValue ?? "FieldsItemSchemaVariant0Type"
+            let field = decoder.codingPath.last?.stringValue ?? "AgentAutomationsListAvailableAutomationTriggersResponseItemFiX6c461ef13f"
             throw SdkValidationError(
                 field: field,
                 code: "enum",
@@ -500,13 +579,13 @@ public enum FieldsItemSchemaVariant0Type: String, CaseIterable, Codable {
     }
 }
 
-public enum FieldsItemSchemaVariant1Type: String, CaseIterable, Codable {
+public enum AgentAutomationsListAvailableAutomationTriggersResponseItemFiXf26f7efb5e: String, CaseIterable, Codable {
     case array
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         let rawValue = try container.decode(String.self)
         guard let value = Self(rawValue: rawValue) else {
-            let field = decoder.codingPath.last?.stringValue ?? "FieldsItemSchemaVariant1Type"
+            let field = decoder.codingPath.last?.stringValue ?? "AgentAutomationsListAvailableAutomationTriggersResponseItemFiXf26f7efb5e"
             throw SdkValidationError(
                 field: field,
                 code: "enum",

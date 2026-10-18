@@ -26,6 +26,14 @@ public indirect enum EventPayload {
 extension EventPayload: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) {
+                self = value; return
+            }
+            if let value = Self.decodeLossless2(from: container, raw) {
+                self = value; return
+            }
+        }
         if let value = Self.decodeGroup1(from: container) {
             self = value; return
         }
@@ -42,6 +50,66 @@ extension EventPayload: Codable {
         if try encodeGroup2(to: encoder) {
             return
         }
+    }
+}
+
+extension EventPayload {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(CreateEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .createEvent(value)
+        }
+        if let value = try? container.decode(DeleteEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .deleteEvent(value)
+        }
+        if let value = try? container.decode(DiscussionEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .discussionEvent(value)
+        }
+        if let value = try? container.decode(IssuesEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .issuesEvent(value)
+        }
+        if let value = try? container.decode(IssueCommentEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .issueCommentEvent(value)
+        }
+        if let value = try? container.decode(ForkEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .forkEvent(value)
+        }
+        if let value = try? container.decode(GollumEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .gollumEvent(value)
+        }
+        if let value = try? container.decode(MemberEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .memberEvent(value)
+        }
+        return nil
+    }
+}
+
+extension EventPayload {
+    static func decodeLossless2(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(PublicEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .publicEvent(value)
+        }
+        if let value = try? container.decode(PushEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .pushEvent(value)
+        }
+        if let value = try? container.decode(PullRequestEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .pullRequestEvent(value)
+        }
+        if let value = try? container.decode(PullRequestReviewCommentEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .pullRequestReviewCommentEvent(value)
+        }
+        if let value = try? container.decode(PullRequestReviewEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .pullRequestReviewEvent(value)
+        }
+        if let value = try? container.decode(CommitCommentEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .commitCommentEvent(value)
+        }
+        if let value = try? container.decode(ReleaseEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .releaseEvent(value)
+        }
+        if let value = try? container.decode(WatchEvent.self), sdkKeepsEveryKey(value, of: raw) {
+            return .watchEvent(value)
+        }
+        return nil
     }
 }
 
@@ -241,39 +309,6 @@ public extension PullRequestReviewCommentEvent {
     init(action: String, pullRequest: PullRequestMinimal, comment: PullRequestReviewCommentEventComment) {
         (self.action, self.pullRequest) = (action, pullRequest)
         self.comment = comment
-    }
-}
-
-/// Required object value serialized in the `release` wire field.
-public struct ReleaseEventReleaseVariant1: Codable {
-    /// Optional `boolean` value serialized in the `is_short_description_html_truncated` wire field.
-    public var isShortDescriptionHtmlTruncated: Bool?
-    /// Optional `string` value serialized in the `short_description_html` wire field.
-    public var shortDescriptionHtml: String?
-
-    enum CodingKeys: String, CodingKey {
-        case isShortDescriptionHtmlTruncated = "is_short_description_html_truncated"
-        case shortDescriptionHtml = "short_description_html"
-    }
-
-    init() {
-        (isShortDescriptionHtmlTruncated, shortDescriptionHtml) = (nil, nil)
-    }
-}
-
-public extension ReleaseEventReleaseVariant1 {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        isShortDescriptionHtmlTruncated = try container.sdkDecodeIfPresent(.isShortDescriptionHtmlTruncated)
-        shortDescriptionHtml = try container.sdkDecodeIfPresent(.shortDescriptionHtml)
-    }
-}
-
-public extension ReleaseEventReleaseVariant1 {
-    init(isShortDescriptionHtmlTruncated: Bool? = nil, shortDescriptionHtml: String? = nil) {
-        self.init()
-        self.isShortDescriptionHtmlTruncated = isShortDescriptionHtmlTruncated
-        self.shortDescriptionHtml = shortDescriptionHtml
     }
 }
 
@@ -584,48 +619,5 @@ public struct DiscussionUser: Codable {
 
     private init(sdkCopy value: Self) {
         self = value
-    }
-}
-
-public extension DiscussionUser {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
-        }
-        guard container.contains(.login) else {
-            throw SdkValidationError(
-                field: "login",
-                code: "required",
-                message: "Validation failed for 'login': value is required"
-            )
-        }
-        id = try container.sdkDecodeRequired(.id)
-        login = try container.sdkDecodeRequired(.login)
-        avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
-        deleted = try container.sdkDecodeIfPresent(.deleted)
-        email = try container.sdkDecodeIfPresent(.email)
-        eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
-        followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
-        followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
-        gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
-        gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        name = try container.sdkDecodeIfPresent(.name)
-        nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
-        receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
-        reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
-        siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
-        starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
-        subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
-        type = try container.sdkDecodeIfPresent(.type)
-        url = try container.sdkDecodeIfPresent(.url)
-        userViewType = try container.sdkDecodeIfPresent(.userViewType)
-        try sdkValidateConstraints()
     }
 }

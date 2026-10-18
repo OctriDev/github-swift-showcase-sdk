@@ -23,7 +23,7 @@ public extension IssuesMethods {
         owner: String,
         repo: String,
         issueNumber: Int,
-        assignees: [IssuesAddAssigneesRequestBodyAssigneesItem]? = nil,
+        assignees: [IssuesAddAssigneesRequestAssigneesItem]? = nil,
         requestOptions: RequestOptions? = nil
     ) async throws -> Issue {
         let requestBody = IssuesAddAssigneesRequestBody(assignees: assignees)

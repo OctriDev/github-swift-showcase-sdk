@@ -6,42 +6,6 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public struct DependencyGraphCreateRepositorySnapshotOptionsRequired1: Codable {
-    public let owner: String
-    public let repo: String
-    public let version: Int
-    public let job: SnapshotJob
-    public let sha: String
-    public let ref: String
-    public let detector: SnapshotDetector
-
-    public init(
-        owner: String,
-        repo: String,
-        version: Int,
-        job: SnapshotJob,
-        sha: String,
-        ref: String,
-        detector: SnapshotDetector
-    ) {
-        self.owner = owner
-        self.repo = repo
-        self.version = version
-        self.job = job
-        self.sha = sha
-        self.ref = ref
-        self.detector = detector
-    }
-}
-
-public struct DependencyGraphCreateRepositorySnapshotOptionsRequired2: Codable {
-    public let scanned: Date
-
-    public init(scanned: Date) {
-        self.scanned = scanned
-    }
-}
-
 struct DependencyGraphCreateRepositorySnapshotRequestBody: Encodable {
     let version: Int
     let job: SnapshotJob
@@ -205,5 +169,30 @@ struct PullsUpdateReviewCommentRequestBody: Encodable {
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
         try keyedContainer.encode(body, forKey: SdkCodingKey("body"))
+    }
+}
+
+struct PullsUpdateRequestBody: Encodable {
+    var title: String?
+    var body: String?
+    var state: PullsUpdateRequestBodyState?
+    var base: String?
+    var maintainerCanModify: Bool?
+
+    func encode(to encoder: Encoder) throws {
+        var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
+        try keyedContainer.encodeIfPresent(title, forKey: SdkCodingKey("title"))
+        try keyedContainer.encodeIfPresent(body, forKey: SdkCodingKey("body"))
+        try keyedContainer.encodeIfPresent(state, forKey: SdkCodingKey("state"))
+        try keyedContainer.encodeIfPresent(base, forKey: SdkCodingKey("base"))
+        try keyedContainer.encodeIfPresent(maintainerCanModify, forKey: SdkCodingKey("maintainer_can_modify"))
+    }
+
+    init(options: PullsMethods.PullsUpdateOptions) {
+        title = options.title
+        body = options.body
+        state = options.state
+        base = options.base
+        maintainerCanModify = options.maintainerCanModify
     }
 }

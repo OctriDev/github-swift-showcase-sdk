@@ -4,6 +4,137 @@
 import Foundation
 
 /// ReposRepositoryRule domain models
+public extension RepositoryRuleDetailedVariant8 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.type) else {
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
+        }
+        type = try container.sdkDecodeRequired(.type)
+        parameters = try container.sdkDecodeIfPresent(.parameters)
+        rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
+        rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
+        rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
+        try sdkValidateRawEnum("type", type, RepositoryRuleRequiredStatusChecksType.allCases.map(\.rawValue))
+    }
+}
+
+public extension RepositoryRuleDetailedVariant8 {
+    init(
+        type: RepositoryRuleRequiredStatusChecksType,
+        parameters: RepositoryRuleRequiredStatusChecksParameters? = nil,
+        rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil,
+        rulesetSource: String? = nil,
+        rulesetId: Int? = nil
+    ) throws {
+        (self.type, self.parameters) = (type, parameters)
+        (self.rulesetSourceType, self.rulesetSource) = (rulesetSourceType, rulesetSource)
+        self.rulesetId = rulesetId
+        try sdkValidateRawEnum("type", self.type, RepositoryRuleRequiredStatusChecksType.allCases.map(\.rawValue))
+    }
+}
+
+/// Optional object value serialized in the `parameters` wire field.
+public struct RepositoryRuleBranchNamePatternParameters: Codable {
+    /// The operator to use for matching.
+    public var `operator`: RepositoryRuleBranchNamePatternParametersOperator
+    /// The pattern to match with.
+    public var pattern: String
+    /// How this rule appears when configuring it.
+    public var name: String?
+    /// If true, the rule will fail if the pattern matches.
+    public var negate: Bool?
+
+    enum CodingKeys: String, CodingKey {
+        case `operator`
+        case pattern
+        case name
+        case negate
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension RepositoryRuleBranchNamePatternParameters {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.operator) else {
+            throw SdkValidationError(
+                field: "operator",
+                code: "required",
+                message: "Validation failed for 'operator': value is required"
+            )
+        }
+        guard container.contains(.pattern) else {
+            throw SdkValidationError(
+                field: "pattern",
+                code: "required",
+                message: "Validation failed for 'pattern': value is required"
+            )
+        }
+        self.operator = try container.sdkDecodeRequired(.operator)
+        pattern = try container.sdkDecodeRequired(.pattern)
+        name = try container.sdkDecodeIfPresent(.name)
+        negate = try container.sdkDecodeIfPresent(.negate)
+    }
+}
+
+public extension RepositoryRuleBranchNamePatternParameters {
+    init(
+        operator: RepositoryRuleBranchNamePatternParametersOperator,
+        pattern: String,
+        name: String? = nil,
+        negate: Bool? = nil
+    ) {
+        (self.operator, self.pattern) = (`operator`, pattern)
+        (self.name, self.negate) = (name, negate)
+    }
+}
+
+/// Optional object value serialized in the `parameters` wire field.
+public struct RepositoryRuleWorkflowsParameters: Codable {
+    /// Workflows that must pass for this rule to pass.
+    public var workflows: [RepositoryRuleParamsWorkflowFileReference]
+    /// Allow repositories and branches to be created if a check would otherwise prohibit it.
+    public var doNotEnforceOnCreate: Bool?
+
+    enum CodingKeys: String, CodingKey {
+        case workflows
+        case doNotEnforceOnCreate = "do_not_enforce_on_create"
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension RepositoryRuleWorkflowsParameters {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.workflows) else {
+            throw SdkValidationError(
+                field: "workflows",
+                code: "required",
+                message: "Validation failed for 'workflows': value is required"
+            )
+        }
+        workflows = try container.sdkDecodeRequired(.workflows)
+        doNotEnforceOnCreate = try container.sdkDecodeIfPresent(.doNotEnforceOnCreate)
+    }
+}
+
+public extension RepositoryRuleWorkflowsParameters {
+    init(workflows: [RepositoryRuleParamsWorkflowFileReference], doNotEnforceOnCreate: Bool? = nil) {
+        (self.workflows, self.doNotEnforceOnCreate) = (workflows, doNotEnforceOnCreate)
+    }
+}
+
 /// Optional object value serialized in the `parameters` wire field.
 public struct RepositoryRuleUpdateParameters: Codable {
     /// Branch can pull changes from its upstream repository
@@ -495,142 +626,5 @@ public extension RepositoryRuleCommitAuthorEmailPatternParameters {
     ) {
         (self.operator, self.pattern) = (`operator`, pattern)
         (self.name, self.negate) = (name, negate)
-    }
-}
-
-/// A tool that must provide code scanning results for this rule to pass.
-public struct RepositoryRuleParamsCodeScanningTool: Codable {
-    /// The severity level at which code scanning results that raise alerts block a reference update. For more
-    /// information on alert severity levels, see "About code scanning alerts."
-    public var alertsThreshold: RepositoryRuleParamsCodeScanningToolAlertsThreshold
-    /// The severity level at which code scanning results that raise security alerts block a reference update. For
-    /// more information on security severity levels, see "About code scanning alerts."
-    public var securityAlertsThreshold: RepositoryRuleParamsCodeScanningToolSecurityAlertsThreshold
-    /// The name of a code scanning tool
-    public var tool: String
-
-    enum CodingKeys: String, CodingKey {
-        case alertsThreshold = "alerts_threshold"
-        case securityAlertsThreshold = "security_alerts_threshold"
-        case tool
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension RepositoryRuleParamsCodeScanningTool {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.alertsThreshold) else {
-            throw SdkValidationError(
-                field: "alerts_threshold",
-                code: "required",
-                message: "Validation failed for 'alerts_threshold': value is required"
-            )
-        }
-        guard container.contains(.securityAlertsThreshold) else {
-            throw SdkValidationError(
-                field: "security_alerts_threshold",
-                code: "required",
-                message: "Validation failed for 'security_alerts_threshold': value is required"
-            )
-        }
-        guard container.contains(.tool) else {
-            throw SdkValidationError(
-                field: "tool",
-                code: "required",
-                message: "Validation failed for 'tool': value is required"
-            )
-        }
-        alertsThreshold = try container.sdkDecodeRequired(.alertsThreshold)
-        securityAlertsThreshold = try container.sdkDecodeRequired(.securityAlertsThreshold)
-        tool = try container.sdkDecodeRequired(.tool)
-    }
-}
-
-public extension RepositoryRuleParamsCodeScanningTool {
-    init(
-        alertsThreshold: RepositoryRuleParamsCodeScanningToolAlertsThreshold,
-        securityAlertsThreshold: RepositoryRuleParamsCodeScanningToolSecurityAlertsThreshold,
-        tool: String
-    ) {
-        (self.alertsThreshold, self.securityAlertsThreshold) = (alertsThreshold, securityAlertsThreshold)
-        self.tool = tool
-    }
-}
-
-/// Optional object value serialized in the `parameters` wire field.
-public struct RepositoryRuleFileExtensionRestrictionParameters: Codable {
-    /// The file extensions that are restricted from being pushed to the commit graph.
-    public var restrictedFileExtensions: [String]
-
-    enum CodingKeys: String, CodingKey {
-        case restrictedFileExtensions = "restricted_file_extensions"
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension RepositoryRuleFileExtensionRestrictionParameters {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.restrictedFileExtensions) else {
-            throw SdkValidationError(
-                field: "restricted_file_extensions",
-                code: "required",
-                message: "Validation failed for 'restricted_file_extensions': value is required"
-            )
-        }
-        restrictedFileExtensions = try container.sdkDecodeRequired(.restrictedFileExtensions)
-    }
-}
-
-public extension RepositoryRuleFileExtensionRestrictionParameters {
-    init(restrictedFileExtensions: [String]) {
-        self.restrictedFileExtensions = restrictedFileExtensions
-    }
-}
-
-/// Require all commits be made to a non-target branch and submitted via a pull request before they can be merged.
-public struct RepositoryRulePullRequest: Codable {
-    /// Required enumerated value serialized in the `type` wire field.
-    public var type: RepositoryRulePullRequestType
-    /// Optional object value serialized in the `parameters` wire field.
-    public var parameters: RepositoryRulePullRequestParameters?
-
-    enum CodingKeys: String, CodingKey {
-        case type
-        case parameters
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension RepositoryRulePullRequest {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.type) else {
-            throw SdkValidationError(
-                field: "type",
-                code: "required",
-                message: "Validation failed for 'type': value is required"
-            )
-        }
-        type = try container.sdkDecodeRequired(.type)
-        parameters = try container.sdkDecodeIfPresent(.parameters)
-        try sdkValidateRawEnum("type", type, RepositoryRulePullRequestType.allCases.map(\.rawValue))
-    }
-}
-
-public extension RepositoryRulePullRequest {
-    init(type: RepositoryRulePullRequestType, parameters: RepositoryRulePullRequestParameters? = nil) throws {
-        (self.type, self.parameters) = (type, parameters)
-        try sdkValidateRawEnum("type", self.type, RepositoryRulePullRequestType.allCases.map(\.rawValue))
     }
 }

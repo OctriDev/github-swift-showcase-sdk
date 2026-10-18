@@ -6,241 +6,6 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testBillingGetGithubBillingPremiumRequestUsageReportUserBillingGeXa24d9d62e8ReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture449Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.billing.getGithubBillingPremiumRequestUsageReportUser(
-                username: decoded("\"Example Name\""),
-                year: decoded("1"),
-                month: decoded("1"),
-                day: decoded("1"),
-                model: decoded("\"model\""),
-                product: decoded("\"product\"")
-            )
-            XCTFail("billingGetGithubBillingPremiumRequestUsageReportUser did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 400)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "billingGetGithubBillingPremiumRequestUsageReportUser decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "billingGetGithubBillingPremiumRequestUsageReportUser decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testBillingGetGithubBillingUsageReportOrgBillingGetGithubBillingUXdb1f75481cReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.billing.getGithubBillingUsageReportOrg(
-            org: decoded("\"org\""),
-            year: decoded("1"),
-            month: decoded("1"),
-            day: decoded("1")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture450Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "billingGetGithubBillingUsageReportOrg decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testBillingGetGithubBillingUsageReportOrgBillingGetGithubBillingUX287af99ae7ReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture451Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.billing.getGithubBillingUsageReportOrg(
-                org: decoded("\"org\""),
-                year: decoded("1"),
-                month: decoded("1"),
-                day: decoded("1")
-            )
-            XCTFail("billingGetGithubBillingUsageReportOrg did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 400)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "billingGetGithubBillingUsageReportOrg decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "billingGetGithubBillingUsageReportOrg decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testBillingGetGithubBillingUsageReportUserBillingGetGithubBillingXb5246615d0ReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.billing.getGithubBillingUsageReportUser(
-            username: decoded("\"Example Name\""),
-            year: decoded("1"),
-            month: decoded("1"),
-            day: decoded("1")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture452Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "billingGetGithubBillingUsageReportUser decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testBillingGetGithubBillingUsageReportUserBillingGetGithubBillingXc4052fff09ReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture453Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.billing.getGithubBillingUsageReportUser(
-                username: decoded("\"Example Name\""),
-                year: decoded("1"),
-                month: decoded("1"),
-                day: decoded("1")
-            )
-            XCTFail("billingGetGithubBillingUsageReportUser did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 400)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "billingGetGithubBillingUsageReportUser decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "billingGetGithubBillingUsageReportUser decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testBillingGetGithubBillingUsageSummaryReportOrgBillingGetGithubBXf6f6b645f5ReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.billing.getGithubBillingUsageSummaryReportOrg(
-            org: decoded("\"org\""),
-            year: decoded("1"),
-            month: decoded("1"),
-            day: decoded("1"),
-            repository: decoded("\"repository\""),
-            product: decoded("\"product\""),
-            sku: decoded("\"sku\"")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture454Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "billingGetGithubBillingUsageSummaryReportOrg decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testBillingGetGithubBillingUsageSummaryReportOrgBillingGetGithubBX10d9a0aa18ReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture455Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.billing.getGithubBillingUsageSummaryReportOrg(
-                org: decoded("\"org\""),
-                year: decoded("1"),
-                month: decoded("1"),
-                day: decoded("1"),
-                repository: decoded("\"repository\""),
-                product: decoded("\"product\""),
-                sku: decoded("\"sku\"")
-            )
-            XCTFail("billingGetGithubBillingUsageSummaryReportOrg did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 400)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "billingGetGithubBillingUsageSummaryReportOrg decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "billingGetGithubBillingUsageSummaryReportOrg decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testBillingGetGithubBillingUsageSummaryReportUserBillingGetGithubX5eb8bb63ceReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.billing.getGithubBillingUsageSummaryReportUser(
-            username: decoded("\"Example Name\""),
-            year: decoded("1"),
-            month: decoded("1"),
-            day: decoded("1"),
-            repository: decoded("\"repository\""),
-            product: decoded("\"product\""),
-            sku: decoded("\"sku\"")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture456Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "billingGetGithubBillingUsageSummaryReportUser decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
     func testBillingGetGithubBillingUsageSummaryReportUserBillingGetGithubX3edba4ba33ReachesMockAndDecodesResponse(
     ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
@@ -261,17 +26,16 @@ extension SdkMethodTests {
                 product: decoded("\"product\""),
                 sku: decoded("\"sku\"")
             )
-            XCTFail("billingGetGithubBillingUsageSummaryReportUser did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "billingGetGithubBillingUsageSummaryReportUser decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "billingGetGithubBillingUsageSummaryReportUser decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
@@ -296,8 +60,7 @@ extension SdkMethodTests {
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "billingUpdateBudgetOrg decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
@@ -319,17 +82,16 @@ extension SdkMethodTests {
                 budgetAlerting: decoded("{\"will_alert\":false,\"alert_recipients\":[]}"),
                 expiresAt: decoded("null")
             )
-            XCTFail("billingUpdateBudgetOrg did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "billingUpdateBudgetOrg decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "billingUpdateBudgetOrg decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
@@ -355,10 +117,10 @@ extension SdkMethodTests {
             _ = try await client.campaigns.createCampaign(
                 options: options
             )
-            XCTFail("campaignsCreateCampaign decoded a body its schema refuses")
+            XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
-            XCTFail("campaignsCreateCampaign refused with \(error), not SdkResponseDecodeError")
+            XCTFail("refused with \(error), not SdkResponseDecodeError")
         }
         XCTAssertTrue(true)
     }
@@ -387,17 +149,16 @@ extension SdkMethodTests {
             _ = try await client.campaigns.createCampaign(
                 options: options
             )
-            XCTFail("campaignsCreateCampaign did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "campaignsCreateCampaign decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "campaignsCreateCampaign decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
@@ -429,17 +190,16 @@ extension SdkMethodTests {
                 org: decoded("\"org\""),
                 campaignNumber: decoded("1")
             )
-            XCTFail("campaignsDeleteCampaign did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "campaignsDeleteCampaign decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "campaignsDeleteCampaign decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
@@ -455,10 +215,10 @@ extension SdkMethodTests {
                 org: decoded("\"org\""),
                 campaignNumber: decoded("1")
             )
-            XCTFail("campaignsGetCampaignSummary decoded a body its schema refuses")
+            XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
-            XCTFail("campaignsGetCampaignSummary refused with \(error), not SdkResponseDecodeError")
+            XCTFail("refused with \(error), not SdkResponseDecodeError")
         }
         XCTAssertTrue(true)
     }
@@ -477,17 +237,16 @@ extension SdkMethodTests {
                 org: decoded("\"org\""),
                 campaignNumber: decoded("1")
             )
-            XCTFail("campaignsGetCampaignSummary did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "campaignsGetCampaignSummary decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "campaignsGetCampaignSummary decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
@@ -507,10 +266,10 @@ extension SdkMethodTests {
                 state: decoded("\"open\""),
                 sort: decoded("\"created\"")
             )
-            XCTFail("campaignsListOrgCampaigns decoded a body its schema refuses")
+            XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
-            XCTFail("campaignsListOrgCampaigns refused with \(error), not SdkResponseDecodeError")
+            XCTFail("refused with \(error), not SdkResponseDecodeError")
         }
         XCTAssertTrue(true)
     }
@@ -533,17 +292,16 @@ extension SdkMethodTests {
                 state: decoded("\"open\""),
                 sort: decoded("\"created\"")
             )
-            XCTFail("campaignsListOrgCampaigns did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "campaignsListOrgCampaigns decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "campaignsListOrgCampaigns decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
@@ -569,11 +327,265 @@ extension SdkMethodTests {
             _ = try await client.campaigns.updateCampaign(
                 options: options
             )
-            XCTFail("campaignsUpdateCampaign decoded a body its schema refuses")
+            XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
-            XCTFail("campaignsUpdateCampaign refused with \(error), not SdkResponseDecodeError")
+            XCTFail("refused with \(error), not SdkResponseDecodeError")
         }
         XCTAssertTrue(true)
+    }
+
+    func testCampaignsUpdateCampaignCampaignsUpdateCampaign400ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
+            return
+        }
+        _ = client
+        var options = try CampaignsMethods.CampaignsUpdateCampaignOptions(
+            org: decoded("\"org\""),
+            campaignNumber: decoded("1")
+        )
+        options.name = try decoded("\"Critical CodeQL alerts\"")
+        options.description = try decoded("null")
+        options.managers = try decoded("null")
+        options.teamManagers = try decoded("null")
+        options.endsAt = try decoded("null")
+        options.contactLink = try decoded("null")
+        options.state = try decoded("null")
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture469Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.campaigns.updateCampaign(
+                options: options
+            )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 400)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testChecksCreateChecksCreateReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        var options = try ChecksMethods.ChecksCreateOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            name: decoded("\"mighty_readme\""),
+            headSha: decoded("\"ce587453ced02b1526dfb4cb910479d431683101\"")
+        )
+        options.detailsUrl = try decoded("null")
+        options.externalId = try decoded("\"42\"")
+        options.status = try decoded("\"in_progress\"")
+        options.startedAt = try decoded("\"2018-05-04T01:14:52Z\"")
+        options.conclusion = try decoded("null")
+        options.completedAt = try decoded("null")
+        options.output = try decoded("{\"title\":\"Mighty Readme report\",\"summary\":\"\",\"text\":\"\"}")
+        options.actions = try decoded("null")
+        let actual = try await client.checks.create(
+            options: options
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture470Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testChecksCreateSuiteChecksCreateSuiteReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.checks.createSuite(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            headSha: decoded("\"d6fde92930d4715a2b49857d24b940956b26d2d3\"")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture471Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testChecksGetChecksGetReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.checks.get(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            checkRunId: decoded("1")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture472Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testChecksGetSuiteChecksGetSuiteReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.checks.getSuite(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            checkSuiteId: decoded("1")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture473Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testChecksListAnnotationsChecksListAnnotationsReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.checks.listAnnotations(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            checkRunId: decoded("1"),
+            perPage: decoded("30"),
+            page: decoded("1")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture474Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testChecksListForRefChecksListForRefReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        var options = try ChecksMethods.ChecksListForRefOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            ref: decoded("\"ref\"")
+        )
+        options.checkName = try decoded("\"Example Name\"")
+        options.status = try decoded("\"queued\"")
+        options.filter = try decoded("\"latest\"")
+        options.perPage = try decoded("30")
+        options.page = try decoded("1")
+        options.appId = try decoded("1")
+        let actual = try await client.checks.listForRef(
+            options: options
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture475Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testChecksListForSuiteChecksListForSuiteReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        var options = try ChecksMethods.ChecksListForSuiteOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            checkSuiteId: decoded("1")
+        )
+        options.checkName = try decoded("\"Example Name\"")
+        options.status = try decoded("\"queued\"")
+        options.filter = try decoded("\"latest\"")
+        options.perPage = try decoded("30")
+        options.page = try decoded("1")
+        let actual = try await client.checks.listForSuite(
+            options: options
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture476Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testChecksListSuitesForRefChecksListSuitesForRefReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.checks.listSuitesForRef(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            ref: decoded("\"ref\""),
+            appId: decoded("1"),
+            checkName: decoded("\"Example Name\""),
+            perPage: decoded("30"),
+            page: decoded("1")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture477Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testChecksRerequestRunChecksRerequestRunReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.checks.rerequestRun(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            checkRunId: decoded("1")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture478Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
     }
 }

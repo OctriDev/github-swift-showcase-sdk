@@ -4,7 +4,113 @@
 import Foundation
 
 /// WebhookPullRequestReviewRequestRemoved domain models
-public extension WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseRepo {
+public extension WebhookPullRequestReviewRequestRemovedVariant1PullRequestHeadRepo {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        archiveUrl = try container.sdkDecodeRequired(.archiveUrl)
+        archived = try container.sdkDecodeRequired(.archived)
+        assigneesUrl = try container.sdkDecodeRequired(.assigneesUrl)
+        blobsUrl = try container.sdkDecodeRequired(.blobsUrl)
+        branchesUrl = try container.sdkDecodeRequired(.branchesUrl)
+        cloneUrl = try container.sdkDecodeRequired(.cloneUrl)
+        collaboratorsUrl = try container.sdkDecodeRequired(.collaboratorsUrl)
+        commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
+        commitsUrl = try container.sdkDecodeRequired(.commitsUrl)
+        compareUrl = try container.sdkDecodeRequired(.compareUrl)
+        contentsUrl = try container.sdkDecodeRequired(.contentsUrl)
+        contributorsUrl = try container.sdkDecodeRequired(.contributorsUrl)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        defaultBranch = try container.sdkDecodeRequired(.defaultBranch)
+        deploymentsUrl = try container.sdkDecodeRequired(.deploymentsUrl)
+        description = try container.sdkDecodeNullable(.description)
+        downloadsUrl = try container.sdkDecodeRequired(.downloadsUrl)
+        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
+        fork = try container.sdkDecodeRequired(.fork)
+        forks = try container.sdkDecodeRequired(.forks)
+        forksCount = try container.sdkDecodeRequired(.forksCount)
+        forksUrl = try container.sdkDecodeRequired(.forksUrl)
+        fullName = try container.sdkDecodeRequired(.fullName)
+        gitCommitsUrl = try container.sdkDecodeRequired(.gitCommitsUrl)
+        gitRefsUrl = try container.sdkDecodeRequired(.gitRefsUrl)
+        gitTagsUrl = try container.sdkDecodeRequired(.gitTagsUrl)
+        gitUrl = try container.sdkDecodeRequired(.gitUrl)
+        hasDownloads = try container.sdkDecodeRequired(.hasDownloads)
+        hasIssues = try container.sdkDecodeRequired(.hasIssues)
+        hasPages = try container.sdkDecodeRequired(.hasPages)
+        hasProjects = try container.sdkDecodeRequired(.hasProjects)
+        hasWiki = try container.sdkDecodeRequired(.hasWiki)
+        hasDiscussions = try container.sdkDecodeRequired(.hasDiscussions)
+        homepage = try container.sdkDecodeNullable(.homepage)
+        hooksUrl = try container.sdkDecodeRequired(.hooksUrl)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        id = try container.sdkDecodeRequired(.id)
+        issueCommentUrl = try container.sdkDecodeRequired(.issueCommentUrl)
+        issueEventsUrl = try container.sdkDecodeRequired(.issueEventsUrl)
+        issuesUrl = try container.sdkDecodeRequired(.issuesUrl)
+        keysUrl = try container.sdkDecodeRequired(.keysUrl)
+        labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
+        language = try container.sdkDecodeNullable(.language)
+        languagesUrl = try container.sdkDecodeRequired(.languagesUrl)
+        license = try container.sdkDecodeNullable(.license)
+        mergesUrl = try container.sdkDecodeRequired(.mergesUrl)
+        milestonesUrl = try container.sdkDecodeRequired(.milestonesUrl)
+        mirrorUrl = try container.sdkDecodeNullable(.mirrorUrl)
+        name = try container.sdkDecodeRequired(.name)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        notificationsUrl = try container.sdkDecodeRequired(.notificationsUrl)
+        openIssues = try container.sdkDecodeRequired(.openIssues)
+        openIssuesCount = try container.sdkDecodeRequired(.openIssuesCount)
+        owner = try container.sdkDecodeNullable(.owner)
+        self.private = try container.sdkDecodeRequired(.private)
+        pullsUrl = try container.sdkDecodeRequired(.pullsUrl)
+        pushedAt = try container.sdkDecodeNullable(.pushedAt)
+        releasesUrl = try container.sdkDecodeRequired(.releasesUrl)
+        size = try container.sdkDecodeRequired(.size)
+        sshUrl = try container.sdkDecodeRequired(.sshUrl)
+        stargazersCount = try container.sdkDecodeRequired(.stargazersCount)
+        stargazersUrl = try container.sdkDecodeRequired(.stargazersUrl)
+        statusesUrl = try container.sdkDecodeRequired(.statusesUrl)
+        subscribersUrl = try container.sdkDecodeRequired(.subscribersUrl)
+        subscriptionUrl = try container.sdkDecodeRequired(.subscriptionUrl)
+        svnUrl = try container.sdkDecodeRequired(.svnUrl)
+        tagsUrl = try container.sdkDecodeRequired(.tagsUrl)
+        teamsUrl = try container.sdkDecodeRequired(.teamsUrl)
+        topics = try container.sdkDecodeRequired(.topics)
+        treesUrl = try container.sdkDecodeRequired(.treesUrl)
+        updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        url = try container.sdkDecodeRequired(.url)
+        visibility = try container.sdkDecodeRequired(.visibility)
+        watchers = try container.sdkDecodeRequired(.watchers)
+        watchersCount = try container.sdkDecodeRequired(.watchersCount)
+        allowAutoMerge = try container.sdkDecodeIfPresent(.allowAutoMerge)
+        allowForking = try container.sdkDecodeIfPresent(.allowForking)
+        allowMergeCommit = try container.sdkDecodeIfPresent(.allowMergeCommit)
+        allowRebaseMerge = try container.sdkDecodeIfPresent(.allowRebaseMerge)
+        allowSquashMerge = try container.sdkDecodeIfPresent(.allowSquashMerge)
+        allowUpdateBranch = try container.sdkDecodeIfPresent(.allowUpdateBranch)
+        deleteBranchOnMerge = try container.sdkDecodeIfPresent(.deleteBranchOnMerge)
+        disabled = try container.sdkDecodeIfPresent(.disabled)
+        hasPullRequests = try container.sdkDecodeIfPresent(.hasPullRequests)
+        pullRequestCreationPolicy = try container.sdkDecodeIfPresent(.pullRequestCreationPolicy)
+        isTemplate = try container.sdkDecodeIfPresent(.isTemplate)
+        primaryBranch = try container.sdkDecodeIfPresent(.primaryBranch)
+        mergeCommitMessage = try container.sdkDecodeIfPresent(.mergeCommitMessage)
+        mergeCommitTitle = try container.sdkDecodeIfPresent(.mergeCommitTitle)
+        organization = try container.sdkDecodeIfPresent(.organization)
+        permissions = try container.sdkDecodeIfPresent(.permissions)
+        self.public = try container.sdkDecodeIfPresent(.public)
+        roleName = try container.sdkDecodeIfPresent(.roleName)
+        squashMergeCommitMessage = try container.sdkDecodeIfPresent(.squashMergeCommitMessage)
+        squashMergeCommitTitle = try container.sdkDecodeIfPresent(.squashMergeCommitTitle)
+        stargazers = try container.sdkDecodeIfPresent(.stargazers)
+        useSquashPrTitleAsDefault = try container.sdkDecodeIfPresent(.useSquashPrTitleAsDefault)
+        webCommitSignoffRequired = try container.sdkDecodeIfPresent(.webCommitSignoffRequired)
+        try sdkValidateConstraintsPart1()
+        try sdkValidateConstraintsPart2()
+    }
+}
+
+public extension WebhookPullRequestReviewRequestRemovedVariant1PullRequestHeadRepo {
     init(
         archiveUrl: String,
         archived: Bool,
@@ -18,7 +124,7 @@ public extension WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseRe
         compareUrl: String,
         contentsUrl: String,
         contributorsUrl: String,
-        createdAt: WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseXc9f1091d31,
+        createdAt: WebhookPullRequestReviewRequestRemovedVariant1PullRequestHeadX06d56803a2,
         defaultBranch: String,
         deploymentsUrl: String,
         description: String?,
@@ -50,7 +156,7 @@ public extension WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseRe
         labelsUrl: String,
         language: String?,
         languagesUrl: String,
-        license: WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseRepoLicense?,
+        license: WebhookPullRequestReviewRequestRemovedVariant1PullRequestHeadRepoLicense?,
         mergesUrl: String,
         milestonesUrl: String,
         mirrorUrl: String?,
@@ -59,10 +165,10 @@ public extension WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseRe
         notificationsUrl: String,
         openIssues: Int,
         openIssuesCount: Int,
-        owner: WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseRepoOwner?,
+        owner: WebhookPullRequestReviewRequestRemovedVariant1PullRequestHeadRepoOwner?,
         private: Bool,
         pullsUrl: String,
-        pushedAt: WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseX188e616e10?,
+        pushedAt: WebhookPullRequestReviewRequestRemovedVariant1PullRequestHeadXbe4927a7a0?,
         releasesUrl: String,
         size: Int,
         sshUrl: String,
@@ -78,7 +184,7 @@ public extension WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseRe
         treesUrl: String,
         updatedAt: Date,
         url: String,
-        visibility: WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseXf289b22bc2,
+        visibility: WebhookPullRequestReviewRequestRemovedVariant1PullRequestHeadX62b0c2ba5d,
         watchers: Int,
         watchersCount: Int,
         allowAutoMerge: Bool? = nil,
@@ -90,17 +196,17 @@ public extension WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseRe
         deleteBranchOnMerge: Bool? = nil,
         disabled: Bool? = nil,
         hasPullRequests: Bool? = nil,
-        pullRequestCreationPolicy: WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseX395ef42e84? = nil,
+        pullRequestCreationPolicy: WebhookPullRequestReviewRequestRemovedVariant1PullRequestHeadXa5f1b86786? = nil,
         isTemplate: Bool? = nil,
         primaryBranch: String? = nil,
-        mergeCommitMessage: WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseX6b85112056? = nil,
-        mergeCommitTitle: WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseX9eb750dae1? = nil,
+        mergeCommitMessage: WebhookPullRequestReviewRequestRemovedVariant1PullRequestHeadX701d14d8a5? = nil,
+        mergeCommitTitle: WebhookPullRequestReviewRequestRemovedVariant1PullRequestHeadX8452b34a6b? = nil,
         organization: String? = nil,
-        permissions: WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseX7b5f9c17c9? = nil,
+        permissions: WebhookPullRequestReviewRequestRemovedVariant1PullRequestHeadX1ceb0eec6e? = nil,
         public: Bool? = nil,
         roleName: String? = nil,
-        squashMergeCommitMessage: WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseX236e9d4c32? = nil,
-        squashMergeCommitTitle: WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseX93011ef4aa? = nil,
+        squashMergeCommitMessage: WebhookPullRequestReviewRequestRemovedVariant1PullRequestHeadXae330905ad? = nil,
+        squashMergeCommitTitle: WebhookPullRequestReviewRequestRemovedVariant1PullRequestHeadXcf1bf72a97? = nil,
         stargazers: Int? = nil,
         useSquashPrTitleAsDefault: Bool? = nil,
         webCommitSignoffRequired: Bool? = nil
@@ -160,7 +266,7 @@ public extension WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseRe
     }
 }
 
-extension WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseRepo {
+extension WebhookPullRequestReviewRequestRemovedVariant1PullRequestHeadRepo {
     func sdkValidateConstraintsPart1() throws {
         try sdkValidateUri("clone_url", cloneUrl)
         try sdkValidateUri("contributors_url", contributorsUrl)
@@ -179,7 +285,7 @@ extension WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseRepo {
     }
 }
 
-extension WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseRepo {
+extension WebhookPullRequestReviewRequestRemovedVariant1PullRequestHeadRepo {
     func sdkValidateConstraintsPart2() throws {
         try sdkValidateUri("stargazers_url", stargazersUrl)
         try sdkValidateUri("subscribers_url", subscribersUrl)
@@ -192,8 +298,91 @@ extension WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseRepo {
     }
 }
 
+public struct WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequX02ea3666cd: Codable {
+    /// Description of the team
+    public var description: String?
+    public var htmlUrl: String
+    /// Unique identifier of the team
+    public var id: Int
+    public var membersUrl: String
+    /// Name of the team
+    public var name: String
+    public var nodeId: String
+    /// Permission that the team will have for its repositories
+    public var permission: String
+    public var privacy: WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequXc8c1c9801c
+    public var repositoriesUrl: String
+    public var slug: String
+    /// URL for the team
+    public var url: String
+
+    enum CodingKeys: String, CodingKey {
+        case description
+        case htmlUrl = "html_url"
+        case id
+        case membersUrl = "members_url"
+        case name
+        case nodeId = "node_id"
+        case permission
+        case privacy
+        case repositoriesUrl = "repositories_url"
+        case slug
+        case url
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequX02ea3666cd {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        description = try container.sdkDecodeNullable(.description)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        id = try container.sdkDecodeRequired(.id)
+        membersUrl = try container.sdkDecodeRequired(.membersUrl)
+        name = try container.sdkDecodeRequired(.name)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        permission = try container.sdkDecodeRequired(.permission)
+        privacy = try container.sdkDecodeRequired(.privacy)
+        repositoriesUrl = try container.sdkDecodeRequired(.repositoriesUrl)
+        slug = try container.sdkDecodeRequired(.slug)
+        url = try container.sdkDecodeRequired(.url)
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateUri("repositories_url", repositoriesUrl)
+        try sdkValidateUri("url", url)
+    }
+}
+
+public extension WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequX02ea3666cd {
+    init(
+        description: String?,
+        htmlUrl: String,
+        id: Int,
+        membersUrl: String,
+        name: String,
+        nodeId: String,
+        permission: String,
+        privacy: WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequXc8c1c9801c,
+        repositoriesUrl: String,
+        slug: String,
+        url: String
+    ) throws {
+        (self.description, self.htmlUrl) = (description, htmlUrl)
+        (self.id, self.membersUrl) = (id, membersUrl)
+        (self.name, self.nodeId) = (name, nodeId)
+        (self.permission, self.privacy) = (permission, privacy)
+        (self.repositoriesUrl, self.slug) = (repositoriesUrl, slug)
+        self.url = url
+        try sdkValidateUri("html_url", self.htmlUrl)
+        try sdkValidateUri("repositories_url", self.repositoriesUrl)
+        try sdkValidateUri("url", self.url)
+    }
+}
+
 /// A git repository
-public struct WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseRepo: Codable {
+public struct WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseRepo: Codable {
     public var archiveUrl: String
     /// Whether the repository is archived.
     public var archived: Bool
@@ -207,7 +396,7 @@ public struct WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseRepo:
     public var compareUrl: String
     public var contentsUrl: String
     public var contributorsUrl: String
-    public var createdAt: WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseX443a9e1efe
+    public var createdAt: WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseXc9f1091d31
     /// The default branch of the repository.
     public var defaultBranch: String
     public var deploymentsUrl: String
@@ -247,7 +436,7 @@ public struct WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseRepo:
     public var language: String?
     public var languagesUrl: String
     /// License
-    public var license: WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseRepoLicense?
+    public var license: WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseRepoLicense?
     public var mergesUrl: String
     public var milestonesUrl: String
     public var mirrorUrl: String?
@@ -258,11 +447,11 @@ public struct WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseRepo:
     public var openIssues: Int
     public var openIssuesCount: Int
     /// User
-    public var owner: WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseRepoOwner?
+    public var owner: WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseRepoOwner?
     /// Whether the repository is private or public.
     public var `private`: Bool
     public var pullsUrl: String
-    public var pushedAt: WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseX981d2f990b?
+    public var pushedAt: WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseX188e616e10?
     public var releasesUrl: String
     public var size: Int
     public var sshUrl: String
@@ -278,7 +467,7 @@ public struct WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseRepo:
     public var treesUrl: String
     public var updatedAt: Date
     public var url: String
-    public var visibility: WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseX4e3d4ae2d7
+    public var visibility: WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseXf289b22bc2
     public var watchers: Int
     public var watchersCount: Int
     /// Whether to allow auto-merge for pull requests.
@@ -299,24 +488,27 @@ public struct WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseRepo:
     /// Whether pull requests are enabled.
     public var hasPullRequests: Bool?
     /// The policy controlling who can create pull requests: all or collaborators_only.
-    public var pullRequestCreationPolicy: WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseXa52b96bade?
+    public var pullRequestCreationPolicy: WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseX395ef42e84?
     public var isTemplate: Bool?
     public var primaryBranch: String?
     /// The default value for a merge commit message. - `PR_TITLE` - default to the pull request's title. -
     /// `PR_BODY` - default to the pull request's body. - `BLANK` - default to a blank commit message.
-    public var mergeCommitMessage: WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseX8e02344e30?
+    public var mergeCommitMessage: WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseX6b85112056?
     /// The default value for a merge commit title. - `PR_TITLE` - default to the pull request's title. -
     /// `MERGE_MESSAGE` - default to the classic title for a merge message (e.g., Merge pull request #123 from
     /// branch-name).
-    public var mergeCommitTitle: WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseXdb1ef21990?
+    public var mergeCommitTitle: WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseX9eb750dae1?
     public var organization: String?
-    public var permissions: WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseXa7a71cbb40?
+    public var permissions: WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseX7b5f9c17c9?
     public var `public`: Bool?
     public var roleName: String?
-    /// The default value for a squash merge commit message.
-    public var squashMergeCommitMessage: WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseXeece0c3f14?
-    /// The default value for a squash merge commit title.
-    public var squashMergeCommitTitle: WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseXea638df693?
+    /// The default value for a squash merge commit message: - `PR_BODY` - default to the pull request's body. -
+    /// `COMMIT_MESSAGES` - default to the branch's commit messages. - `BLANK` - default to a blank commit message.
+    public var squashMergeCommitMessage: WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseX236e9d4c32?
+    /// The default value for a squash merge commit title: - `PR_TITLE` - default to the pull request's title. -
+    /// `COMMIT_OR_PR_TITLE` - default to the commit's title (if only one commit) or the pull request's title (when
+    /// more than one commit).
+    public var squashMergeCommitTitle: WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseX93011ef4aa?
     public var stargazers: Int?
     /// Whether a squash merge commit can use the pull request title as default. **This property is closing down.
     /// Please use `squash_merge_commit_title` instead.
@@ -427,111 +619,5 @@ public struct WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseRepo:
 
     private init(sdkCopy value: Self) {
         self = value
-    }
-}
-
-public extension WebhookPullRequestReviewRequestRemovedVariant0PullRequestBaseRepo {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        archiveUrl = try container.sdkDecodeRequired(.archiveUrl)
-        archived = try container.sdkDecodeRequired(.archived)
-        assigneesUrl = try container.sdkDecodeRequired(.assigneesUrl)
-        blobsUrl = try container.sdkDecodeRequired(.blobsUrl)
-        branchesUrl = try container.sdkDecodeRequired(.branchesUrl)
-        cloneUrl = try container.sdkDecodeRequired(.cloneUrl)
-        collaboratorsUrl = try container.sdkDecodeRequired(.collaboratorsUrl)
-        commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
-        commitsUrl = try container.sdkDecodeRequired(.commitsUrl)
-        compareUrl = try container.sdkDecodeRequired(.compareUrl)
-        contentsUrl = try container.sdkDecodeRequired(.contentsUrl)
-        contributorsUrl = try container.sdkDecodeRequired(.contributorsUrl)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        defaultBranch = try container.sdkDecodeRequired(.defaultBranch)
-        deploymentsUrl = try container.sdkDecodeRequired(.deploymentsUrl)
-        description = try container.sdkDecodeNullable(.description)
-        downloadsUrl = try container.sdkDecodeRequired(.downloadsUrl)
-        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        fork = try container.sdkDecodeRequired(.fork)
-        forks = try container.sdkDecodeRequired(.forks)
-        forksCount = try container.sdkDecodeRequired(.forksCount)
-        forksUrl = try container.sdkDecodeRequired(.forksUrl)
-        fullName = try container.sdkDecodeRequired(.fullName)
-        gitCommitsUrl = try container.sdkDecodeRequired(.gitCommitsUrl)
-        gitRefsUrl = try container.sdkDecodeRequired(.gitRefsUrl)
-        gitTagsUrl = try container.sdkDecodeRequired(.gitTagsUrl)
-        gitUrl = try container.sdkDecodeRequired(.gitUrl)
-        hasDownloads = try container.sdkDecodeRequired(.hasDownloads)
-        hasIssues = try container.sdkDecodeRequired(.hasIssues)
-        hasPages = try container.sdkDecodeRequired(.hasPages)
-        hasProjects = try container.sdkDecodeRequired(.hasProjects)
-        hasWiki = try container.sdkDecodeRequired(.hasWiki)
-        hasDiscussions = try container.sdkDecodeRequired(.hasDiscussions)
-        homepage = try container.sdkDecodeNullable(.homepage)
-        hooksUrl = try container.sdkDecodeRequired(.hooksUrl)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        id = try container.sdkDecodeRequired(.id)
-        issueCommentUrl = try container.sdkDecodeRequired(.issueCommentUrl)
-        issueEventsUrl = try container.sdkDecodeRequired(.issueEventsUrl)
-        issuesUrl = try container.sdkDecodeRequired(.issuesUrl)
-        keysUrl = try container.sdkDecodeRequired(.keysUrl)
-        labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
-        language = try container.sdkDecodeNullable(.language)
-        languagesUrl = try container.sdkDecodeRequired(.languagesUrl)
-        license = try container.sdkDecodeNullable(.license)
-        mergesUrl = try container.sdkDecodeRequired(.mergesUrl)
-        milestonesUrl = try container.sdkDecodeRequired(.milestonesUrl)
-        mirrorUrl = try container.sdkDecodeNullable(.mirrorUrl)
-        name = try container.sdkDecodeRequired(.name)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        notificationsUrl = try container.sdkDecodeRequired(.notificationsUrl)
-        openIssues = try container.sdkDecodeRequired(.openIssues)
-        openIssuesCount = try container.sdkDecodeRequired(.openIssuesCount)
-        owner = try container.sdkDecodeNullable(.owner)
-        self.private = try container.sdkDecodeRequired(.private)
-        pullsUrl = try container.sdkDecodeRequired(.pullsUrl)
-        pushedAt = try container.sdkDecodeNullable(.pushedAt)
-        releasesUrl = try container.sdkDecodeRequired(.releasesUrl)
-        size = try container.sdkDecodeRequired(.size)
-        sshUrl = try container.sdkDecodeRequired(.sshUrl)
-        stargazersCount = try container.sdkDecodeRequired(.stargazersCount)
-        stargazersUrl = try container.sdkDecodeRequired(.stargazersUrl)
-        statusesUrl = try container.sdkDecodeRequired(.statusesUrl)
-        subscribersUrl = try container.sdkDecodeRequired(.subscribersUrl)
-        subscriptionUrl = try container.sdkDecodeRequired(.subscriptionUrl)
-        svnUrl = try container.sdkDecodeRequired(.svnUrl)
-        tagsUrl = try container.sdkDecodeRequired(.tagsUrl)
-        teamsUrl = try container.sdkDecodeRequired(.teamsUrl)
-        topics = try container.sdkDecodeRequired(.topics)
-        treesUrl = try container.sdkDecodeRequired(.treesUrl)
-        updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        url = try container.sdkDecodeRequired(.url)
-        visibility = try container.sdkDecodeRequired(.visibility)
-        watchers = try container.sdkDecodeRequired(.watchers)
-        watchersCount = try container.sdkDecodeRequired(.watchersCount)
-        allowAutoMerge = try container.sdkDecodeIfPresent(.allowAutoMerge)
-        allowForking = try container.sdkDecodeIfPresent(.allowForking)
-        allowMergeCommit = try container.sdkDecodeIfPresent(.allowMergeCommit)
-        allowRebaseMerge = try container.sdkDecodeIfPresent(.allowRebaseMerge)
-        allowSquashMerge = try container.sdkDecodeIfPresent(.allowSquashMerge)
-        allowUpdateBranch = try container.sdkDecodeIfPresent(.allowUpdateBranch)
-        deleteBranchOnMerge = try container.sdkDecodeIfPresent(.deleteBranchOnMerge)
-        disabled = try container.sdkDecodeIfPresent(.disabled)
-        hasPullRequests = try container.sdkDecodeIfPresent(.hasPullRequests)
-        pullRequestCreationPolicy = try container.sdkDecodeIfPresent(.pullRequestCreationPolicy)
-        isTemplate = try container.sdkDecodeIfPresent(.isTemplate)
-        primaryBranch = try container.sdkDecodeIfPresent(.primaryBranch)
-        mergeCommitMessage = try container.sdkDecodeIfPresent(.mergeCommitMessage)
-        mergeCommitTitle = try container.sdkDecodeIfPresent(.mergeCommitTitle)
-        organization = try container.sdkDecodeIfPresent(.organization)
-        permissions = try container.sdkDecodeIfPresent(.permissions)
-        self.public = try container.sdkDecodeIfPresent(.public)
-        roleName = try container.sdkDecodeIfPresent(.roleName)
-        squashMergeCommitMessage = try container.sdkDecodeIfPresent(.squashMergeCommitMessage)
-        squashMergeCommitTitle = try container.sdkDecodeIfPresent(.squashMergeCommitTitle)
-        stargazers = try container.sdkDecodeIfPresent(.stargazers)
-        useSquashPrTitleAsDefault = try container.sdkDecodeIfPresent(.useSquashPrTitleAsDefault)
-        webCommitSignoffRequired = try container.sdkDecodeIfPresent(.webCommitSignoffRequired)
-        try sdkValidateConstraintsPart1()
-        try sdkValidateConstraintsPart2()
     }
 }

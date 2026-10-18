@@ -96,6 +96,7 @@ public extension PullsMethods {
                 "406": BasicError.self,
                 "422": ValidationError.self,
                 "500": BasicError.self,
+                "503": ServiceUnavailable.self,
             ]
         )).data
     }

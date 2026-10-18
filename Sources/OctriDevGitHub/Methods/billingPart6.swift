@@ -33,7 +33,7 @@ public extension BillingMethods {
         budgetAmount: Int? = nil,
         preventFurtherUsage: Bool? = nil,
         budgetAlerting: BillingUpdateBudgetOrgRequestBodyBudgetAlerting? = nil,
-        expiresAt: BillingUpdateBudgetOrgRequestBodyExpiresAt? = nil,
+        expiresAt: SdkOptional<BillingUpdateBudgetOrgRequestBodyExpiresAt>? = nil,
         requestOptions: RequestOptions? = nil
     ) async throws -> UpdateBudget {
         let requestBody = BillingUpdateBudgetOrgRequestBody(

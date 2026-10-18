@@ -406,7 +406,7 @@ public extension WebhookPullRequestAutoMergeEnabledPullRequestRequestedTeamsItem
 }
 
 public typealias WebhookPullRequestAutoMergeEnabledPullRequestRequestedReviewersList =
-    [WebhookPullRequestAutoMergeEnabledPullRequestRequestedReviewersItem]
+    [WebhookPullRequestAutoMergeEnabledPullRequestRequestedReviewersItem?]
 
 public typealias WebhookPullRequestAutoMergeEnabledPullRequestRequestedTeamsList =
     [WebhookPullRequestAutoMergeEnabledPullRequestRequestedTeamsItem]

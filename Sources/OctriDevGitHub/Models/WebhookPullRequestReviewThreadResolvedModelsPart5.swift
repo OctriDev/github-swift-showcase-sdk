@@ -249,7 +249,7 @@ public typealias WebhookPullRequestReviewThreadResolvedPullRequestAssigneesList 
     [WebhookPullRequestReviewThreadResolvedPullRequestAssigneesItem?]
 
 public typealias WebhookPullRequestReviewThreadResolvedPullRequestRequestedReviewersList =
-    [WebhookPullRequestReviewThreadResolvedPullRequestRequestedReviewersItem]
+    [WebhookPullRequestReviewThreadResolvedPullRequestRequestedReviewersItem?]
 
 public typealias WebhookPullRequestReviewThreadResolvedPullRequestRequestedTeamsList =
     [WebhookPullRequestReviewThreadResolvedPullRequestRequestedTeamsItem]

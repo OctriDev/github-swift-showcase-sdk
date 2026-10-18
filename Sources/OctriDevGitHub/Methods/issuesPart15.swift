@@ -18,10 +18,10 @@ public extension IssuesMethods {
         public var stateReason: SdkOptional<IssuesUpdateRequestBodyStateReason>?
         public var duplicateIssueId: Int?
         public var milestone: SdkOptional<IssuesUpdateRequestBodyMilestone>?
-        public var labels: [IssuesUpdateRequestBodyLabelsItem]?
-        public var assignees: [IssuesUpdateRequestBodyAssigneesItem]?
+        public var labels: [IssuesUpdateRequestLabelsItem]?
+        public var assignees: [IssuesUpdateRequestAssigneesItem]?
         public var issueFieldValues: [IssuesUpdateRequestBodyIssueFieldValuesItem]?
-        public var type: SdkOptional<IssuesUpdateRequestBodyType>?
+        public var type: SdkOptional<IssuesUpdateRequestType>?
 
         public init(owner: String, repo: String, issueNumber: Int) {
             self.owner = owner
@@ -105,6 +105,7 @@ public extension IssuesMethods {
                 "404": BasicError.self,
                 "410": BasicError.self,
                 "422": ValidationError.self,
+                "503": ServiceUnavailable.self,
             ]
         )).data
     }

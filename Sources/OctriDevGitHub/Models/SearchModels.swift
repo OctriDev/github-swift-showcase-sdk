@@ -72,362 +72,6 @@ public extension RepoSearchResultItemPermissions {
     }
 }
 
-/// The user who archived the label, or `null` if it has not been archived.
-public struct LabelSearchResultItemArchivedBy: Codable {
-    /// Required `string` value serialized in the `login` wire field.
-    /// - Example: "octocat"
-    public var login: String
-    /// Required `int64`-formatted value serialized in the `id` wire field.
-    /// - Example: 1
-    public var id: Int
-    /// Required `string` value serialized in the `node_id` wire field.
-    /// - Example: "MDQ6VXNlcjE="
-    public var nodeId: String
-    /// Required `uri`-formatted value serialized in the `avatar_url` wire field.
-    /// - Example: "https://github.com/images/error/octocat_happy.gif"
-    public var avatarUrl: String
-    /// Required `string` value serialized in the `gravatar_id` wire field.
-    /// - Example: "41d064eb2195891e12d0413f63227ea7"
-    public var gravatarId: String?
-    /// Required `uri`-formatted value serialized in the `url` wire field.
-    /// - Example: "https://api.github.com/users/octocat"
-    public var url: String
-    /// Required `uri`-formatted value serialized in the `html_url` wire field.
-    /// - Example: "https://github.com/octocat"
-    public var htmlUrl: String
-    /// Required `uri`-formatted value serialized in the `followers_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/followers"
-    public var followersUrl: String
-    /// Required `string` value serialized in the `following_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/following{/other_user}"
-    public var followingUrl: String
-    /// Required `string` value serialized in the `gists_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/gists{/gist_id}"
-    public var gistsUrl: String
-    /// Required `string` value serialized in the `starred_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/starred{/owner}{/repo}"
-    public var starredUrl: String
-    /// Required `uri`-formatted value serialized in the `subscriptions_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/subscriptions"
-    public var subscriptionsUrl: String
-    /// Required `uri`-formatted value serialized in the `organizations_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/orgs"
-    public var organizationsUrl: String
-    /// Required `uri`-formatted value serialized in the `repos_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/repos"
-    public var reposUrl: String
-    /// Required `string` value serialized in the `events_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/events{/privacy}"
-    public var eventsUrl: String
-    /// Required `uri`-formatted value serialized in the `received_events_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/received_events"
-    public var receivedEventsUrl: String
-    /// Required `string` value serialized in the `type` wire field.
-    /// - Example: "User"
-    public var type: String
-    /// Required `boolean` value serialized in the `site_admin` wire field.
-    public var siteAdmin: Bool
-    /// Optional `string` value serialized in the `name` wire field.
-    public var name: String?
-    /// Optional `string` value serialized in the `email` wire field.
-    public var email: String?
-    /// Optional `string` value serialized in the `starred_at` wire field.
-    /// - Example: "\"2020-07-09T00:17:55Z\""
-    public var starredAt: String?
-    /// Optional `string` value serialized in the `user_view_type` wire field.
-    /// - Example: "public"
-    public var userViewType: String?
-
-    enum CodingKeys: String, CodingKey {
-        case login
-        case id
-        case nodeId = "node_id"
-        case avatarUrl = "avatar_url"
-        case gravatarId = "gravatar_id"
-        case url
-        case htmlUrl = "html_url"
-        case followersUrl = "followers_url"
-        case followingUrl = "following_url"
-        case gistsUrl = "gists_url"
-        case starredUrl = "starred_url"
-        case subscriptionsUrl = "subscriptions_url"
-        case organizationsUrl = "organizations_url"
-        case reposUrl = "repos_url"
-        case eventsUrl = "events_url"
-        case receivedEventsUrl = "received_events_url"
-        case type
-        case siteAdmin = "site_admin"
-        case name
-        case email
-        case starredAt = "starred_at"
-        case userViewType = "user_view_type"
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension LabelSearchResultItemArchivedBy {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        login = try container.sdkDecodeRequired(.login)
-        id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
-        gravatarId = try container.sdkDecodeNullable(.gravatarId)
-        url = try container.sdkDecodeRequired(.url)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        followersUrl = try container.sdkDecodeRequired(.followersUrl)
-        followingUrl = try container.sdkDecodeRequired(.followingUrl)
-        gistsUrl = try container.sdkDecodeRequired(.gistsUrl)
-        starredUrl = try container.sdkDecodeRequired(.starredUrl)
-        subscriptionsUrl = try container.sdkDecodeRequired(.subscriptionsUrl)
-        organizationsUrl = try container.sdkDecodeRequired(.organizationsUrl)
-        reposUrl = try container.sdkDecodeRequired(.reposUrl)
-        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        receivedEventsUrl = try container.sdkDecodeRequired(.receivedEventsUrl)
-        type = try container.sdkDecodeRequired(.type)
-        siteAdmin = try container.sdkDecodeRequired(.siteAdmin)
-        name = try container.sdkDecodeIfPresent(.name)
-        email = try container.sdkDecodeIfPresent(.email)
-        starredAt = try container.sdkDecodeIfPresent(.starredAt)
-        userViewType = try container.sdkDecodeIfPresent(.userViewType)
-        try sdkValidateConstraints()
-    }
-}
-
-public extension LabelSearchResultItemArchivedBy {
-    init(
-        login: String,
-        id: Int,
-        nodeId: String,
-        avatarUrl: String,
-        gravatarId: String?,
-        url: String,
-        htmlUrl: String,
-        followersUrl: String,
-        followingUrl: String,
-        gistsUrl: String,
-        starredUrl: String,
-        subscriptionsUrl: String,
-        organizationsUrl: String,
-        reposUrl: String,
-        eventsUrl: String,
-        receivedEventsUrl: String,
-        type: String,
-        siteAdmin: Bool,
-        name: String? = nil,
-        email: String? = nil,
-        starredAt: String? = nil,
-        userViewType: String? = nil
-    ) throws {
-        (self.login, self.id) = (login, id)
-        (self.nodeId, self.avatarUrl) = (nodeId, avatarUrl)
-        (self.gravatarId, self.url) = (gravatarId, url)
-        (self.htmlUrl, self.followersUrl) = (htmlUrl, followersUrl)
-        (self.followingUrl, self.gistsUrl) = (followingUrl, gistsUrl)
-        (self.starredUrl, self.subscriptionsUrl) = (starredUrl, subscriptionsUrl)
-        (self.organizationsUrl, self.reposUrl) = (organizationsUrl, reposUrl)
-        (self.eventsUrl, self.receivedEventsUrl) = (eventsUrl, receivedEventsUrl)
-        (self.type, self.siteAdmin) = (type, siteAdmin)
-        (self.name, self.email) = (name, email)
-        (self.starredAt, self.userViewType) = (starredAt, userViewType)
-        try sdkValidateConstraints()
-    }
-}
-
-extension LabelSearchResultItemArchivedBy {
-    func sdkValidateConstraints() throws {
-        try sdkValidateUri("avatar_url", avatarUrl)
-        try sdkValidateUri("url", url)
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateUri("followers_url", followersUrl)
-        try sdkValidateUri("subscriptions_url", subscriptionsUrl)
-        try sdkValidateUri("organizations_url", organizationsUrl)
-        try sdkValidateUri("repos_url", reposUrl)
-        try sdkValidateUri("received_events_url", receivedEventsUrl)
-    }
-}
-
-/// The user who archived the label, or `null` if it has not been archived.
-public struct IssueSearchResultItemLabelsItemArchivedBy: Codable {
-    /// Required `string` value serialized in the `login` wire field.
-    /// - Example: "octocat"
-    public var login: String
-    /// Required `int64`-formatted value serialized in the `id` wire field.
-    /// - Example: 1
-    public var id: Int
-    /// Required `string` value serialized in the `node_id` wire field.
-    /// - Example: "MDQ6VXNlcjE="
-    public var nodeId: String
-    /// Required `uri`-formatted value serialized in the `avatar_url` wire field.
-    /// - Example: "https://github.com/images/error/octocat_happy.gif"
-    public var avatarUrl: String
-    /// Required `string` value serialized in the `gravatar_id` wire field.
-    /// - Example: "41d064eb2195891e12d0413f63227ea7"
-    public var gravatarId: String?
-    /// Required `uri`-formatted value serialized in the `url` wire field.
-    /// - Example: "https://api.github.com/users/octocat"
-    public var url: String
-    /// Required `uri`-formatted value serialized in the `html_url` wire field.
-    /// - Example: "https://github.com/octocat"
-    public var htmlUrl: String
-    /// Required `uri`-formatted value serialized in the `followers_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/followers"
-    public var followersUrl: String
-    /// Required `string` value serialized in the `following_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/following{/other_user}"
-    public var followingUrl: String
-    /// Required `string` value serialized in the `gists_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/gists{/gist_id}"
-    public var gistsUrl: String
-    /// Required `string` value serialized in the `starred_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/starred{/owner}{/repo}"
-    public var starredUrl: String
-    /// Required `uri`-formatted value serialized in the `subscriptions_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/subscriptions"
-    public var subscriptionsUrl: String
-    /// Required `uri`-formatted value serialized in the `organizations_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/orgs"
-    public var organizationsUrl: String
-    /// Required `uri`-formatted value serialized in the `repos_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/repos"
-    public var reposUrl: String
-    /// Required `string` value serialized in the `events_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/events{/privacy}"
-    public var eventsUrl: String
-    /// Required `uri`-formatted value serialized in the `received_events_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/received_events"
-    public var receivedEventsUrl: String
-    /// Required `string` value serialized in the `type` wire field.
-    /// - Example: "User"
-    public var type: String
-    /// Required `boolean` value serialized in the `site_admin` wire field.
-    public var siteAdmin: Bool
-    /// Optional `string` value serialized in the `name` wire field.
-    public var name: String?
-    /// Optional `string` value serialized in the `email` wire field.
-    public var email: String?
-    /// Optional `string` value serialized in the `starred_at` wire field.
-    /// - Example: "\"2020-07-09T00:17:55Z\""
-    public var starredAt: String?
-    /// Optional `string` value serialized in the `user_view_type` wire field.
-    /// - Example: "public"
-    public var userViewType: String?
-
-    enum CodingKeys: String, CodingKey {
-        case login
-        case id
-        case nodeId = "node_id"
-        case avatarUrl = "avatar_url"
-        case gravatarId = "gravatar_id"
-        case url
-        case htmlUrl = "html_url"
-        case followersUrl = "followers_url"
-        case followingUrl = "following_url"
-        case gistsUrl = "gists_url"
-        case starredUrl = "starred_url"
-        case subscriptionsUrl = "subscriptions_url"
-        case organizationsUrl = "organizations_url"
-        case reposUrl = "repos_url"
-        case eventsUrl = "events_url"
-        case receivedEventsUrl = "received_events_url"
-        case type
-        case siteAdmin = "site_admin"
-        case name
-        case email
-        case starredAt = "starred_at"
-        case userViewType = "user_view_type"
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension IssueSearchResultItemLabelsItemArchivedBy {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        login = try container.sdkDecodeRequired(.login)
-        id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
-        gravatarId = try container.sdkDecodeNullable(.gravatarId)
-        url = try container.sdkDecodeRequired(.url)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        followersUrl = try container.sdkDecodeRequired(.followersUrl)
-        followingUrl = try container.sdkDecodeRequired(.followingUrl)
-        gistsUrl = try container.sdkDecodeRequired(.gistsUrl)
-        starredUrl = try container.sdkDecodeRequired(.starredUrl)
-        subscriptionsUrl = try container.sdkDecodeRequired(.subscriptionsUrl)
-        organizationsUrl = try container.sdkDecodeRequired(.organizationsUrl)
-        reposUrl = try container.sdkDecodeRequired(.reposUrl)
-        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        receivedEventsUrl = try container.sdkDecodeRequired(.receivedEventsUrl)
-        type = try container.sdkDecodeRequired(.type)
-        siteAdmin = try container.sdkDecodeRequired(.siteAdmin)
-        name = try container.sdkDecodeIfPresent(.name)
-        email = try container.sdkDecodeIfPresent(.email)
-        starredAt = try container.sdkDecodeIfPresent(.starredAt)
-        userViewType = try container.sdkDecodeIfPresent(.userViewType)
-        try sdkValidateConstraints()
-    }
-}
-
-public extension IssueSearchResultItemLabelsItemArchivedBy {
-    init(
-        login: String,
-        id: Int,
-        nodeId: String,
-        avatarUrl: String,
-        gravatarId: String?,
-        url: String,
-        htmlUrl: String,
-        followersUrl: String,
-        followingUrl: String,
-        gistsUrl: String,
-        starredUrl: String,
-        subscriptionsUrl: String,
-        organizationsUrl: String,
-        reposUrl: String,
-        eventsUrl: String,
-        receivedEventsUrl: String,
-        type: String,
-        siteAdmin: Bool,
-        name: String? = nil,
-        email: String? = nil,
-        starredAt: String? = nil,
-        userViewType: String? = nil
-    ) throws {
-        (self.login, self.id) = (login, id)
-        (self.nodeId, self.avatarUrl) = (nodeId, avatarUrl)
-        (self.gravatarId, self.url) = (gravatarId, url)
-        (self.htmlUrl, self.followersUrl) = (htmlUrl, followersUrl)
-        (self.followingUrl, self.gistsUrl) = (followingUrl, gistsUrl)
-        (self.starredUrl, self.subscriptionsUrl) = (starredUrl, subscriptionsUrl)
-        (self.organizationsUrl, self.reposUrl) = (organizationsUrl, reposUrl)
-        (self.eventsUrl, self.receivedEventsUrl) = (eventsUrl, receivedEventsUrl)
-        (self.type, self.siteAdmin) = (type, siteAdmin)
-        (self.name, self.email) = (name, email)
-        (self.starredAt, self.userViewType) = (starredAt, userViewType)
-        try sdkValidateConstraints()
-    }
-}
-
-extension IssueSearchResultItemLabelsItemArchivedBy {
-    func sdkValidateConstraints() throws {
-        try sdkValidateUri("avatar_url", avatarUrl)
-        try sdkValidateUri("url", url)
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateUri("followers_url", followersUrl)
-        try sdkValidateUri("subscriptions_url", subscriptionsUrl)
-        try sdkValidateUri("organizations_url", organizationsUrl)
-        try sdkValidateUri("repos_url", reposUrl)
-        try sdkValidateUri("received_events_url", receivedEventsUrl)
-    }
-}
-
 /// Code Search Result Item
 public struct CodeSearchResultItem: Codable {
     /// Required `string` value serialized in the `name` wire field.
@@ -607,7 +251,7 @@ public struct LabelSearchResultItem: Codable {
     /// Timestamp indicating when the label was archived, or `null` if it has not been archived.
     public var archivedAt: Date?
     /// The user who archived the label, or `null` if it has not been archived.
-    public var archivedBy: LabelSearchResultItemArchivedBy?
+    public var archivedBy: SimpleUser?
     /// Required `number` value serialized in the `score` wire field.
     public var score: Double
     /// Optional array value serialized in the `text_matches` wire field.
@@ -629,5 +273,353 @@ public struct LabelSearchResultItem: Codable {
 
     private init(sdkCopy value: Self) {
         self = value
+    }
+}
+
+public extension LabelSearchResultItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        url = try container.sdkDecodeRequired(.url)
+        name = try container.sdkDecodeRequired(.name)
+        color = try container.sdkDecodeRequired(.color)
+        self.default = try container.sdkDecodeRequired(.default)
+        description = try container.sdkDecodeNullable(.description)
+        archivedAt = try container.sdkDecodeNullable(.archivedAt)
+        archivedBy = try container.sdkDecodeNullable(.archivedBy)
+        score = try container.sdkDecodeRequired(.score)
+        textMatches = try container.sdkDecodeIfPresent(.textMatches)
+        try sdkValidateUri("url", url)
+        if let value = archivedAt {
+            try sdkValidateDateTime("archived_at", sdkWireString(value))
+        }
+    }
+}
+
+public extension LabelSearchResultItem {
+    init(
+        id: Int,
+        nodeId: String,
+        url: String,
+        name: String,
+        color: String,
+        default: Bool,
+        description: String?,
+        archivedAt: Date?,
+        archivedBy: SimpleUser?,
+        score: Double,
+        textMatches: SearchResultTextMatches? = nil
+    ) throws {
+        (self.id, self.nodeId) = (id, nodeId)
+        (self.url, self.name) = (url, name)
+        (self.color, self.default) = (color, `default`)
+        (self.description, self.archivedAt) = (description, archivedAt)
+        (self.archivedBy, self.score) = (archivedBy, score)
+        self.textMatches = textMatches
+        try sdkValidateUri("url", self.url)
+        if let value = self.archivedAt {
+            try sdkValidateDateTime("archived_at", sdkWireString(value))
+        }
+    }
+}
+
+/// Required object value serialized in the `matches[]` wire field.
+public struct SearchResultTextMatchesItemMatchesItem: Codable {
+    /// Optional `string` value serialized in the `text` wire field.
+    public var text: String?
+    /// Optional array value serialized in the `indices` wire field.
+    public var indices: [Int]?
+
+    enum CodingKeys: String, CodingKey {
+        case text
+        case indices
+    }
+
+    init() {
+        (text, indices) = (nil, nil)
+    }
+}
+
+public extension SearchResultTextMatchesItemMatchesItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        text = try container.sdkDecodeIfPresent(.text)
+        indices = try container.sdkDecodeIfPresent(.indices)
+    }
+}
+
+public extension SearchResultTextMatchesItemMatchesItem {
+    init(text: String? = nil, indices: [Int]? = nil) {
+        self.init()
+        (self.text, self.indices) = (text, indices)
+    }
+}
+
+/// Issue Search Result Item
+public struct IssueSearchResultItem: Codable {
+    /// Required `uri`-formatted value serialized in the `url` wire field.
+    public var url: String
+    /// Required `uri`-formatted value serialized in the `repository_url` wire field.
+    public var repositoryUrl: String
+    /// Required `string` value serialized in the `labels_url` wire field.
+    public var labelsUrl: String
+    /// Required `uri`-formatted value serialized in the `comments_url` wire field.
+    public var commentsUrl: String
+    /// Required `uri`-formatted value serialized in the `events_url` wire field.
+    public var eventsUrl: String
+    /// Required `uri`-formatted value serialized in the `html_url` wire field.
+    public var htmlUrl: String
+    /// Required `int64`-formatted value serialized in the `id` wire field.
+    public var id: Int
+    /// Required `string` value serialized in the `node_id` wire field.
+    public var nodeId: String
+    /// Required `integer` value serialized in the `number` wire field.
+    public var number: Int
+    /// Required `string` value serialized in the `title` wire field.
+    public var title: String
+    /// Required `boolean` value serialized in the `locked` wire field.
+    public var locked: Bool
+    /// A GitHub user.
+    public var user: NullableSimpleUser?
+    /// Required array value serialized in the `labels` wire field.
+    public var labels: [IssueSearchResultItemLabelsItem]
+    /// Required `string` value serialized in the `state` wire field.
+    public var state: String
+    /// A GitHub user.
+    public var assignee: NullableSimpleUser?
+    /// A collection of related issues and pull requests.
+    public var milestone: NullableMilestone?
+    /// Required `integer` value serialized in the `comments` wire field.
+    public var comments: Int
+    /// Required `date-time`-formatted value serialized in the `created_at` wire field.
+    public var createdAt: Date
+    /// Required `date-time`-formatted value serialized in the `updated_at` wire field.
+    public var updatedAt: Date
+    /// Required `date-time`-formatted value serialized in the `closed_at` wire field.
+    public var closedAt: Date?
+    /// Required `number` value serialized in the `score` wire field.
+    public var score: Double
+    /// How the author is associated with the repository.
+    /// - Example: "OWNER"
+    public var authorAssociation: AuthorAssociation
+    /// Optional `string` value serialized in the `active_lock_reason` wire field.
+    public var activeLockReason: String?
+    /// Optional array value serialized in the `assignees` wire field.
+    public var assignees: [SimpleUser]?
+    /// Optional object value serialized in the `sub_issues_summary` wire field.
+    public var subIssuesSummary: SubIssuesSummary?
+    /// Optional object value serialized in the `issue_dependencies_summary` wire field.
+    public var issueDependenciesSummary: IssueDependenciesSummary?
+    /// Optional array value serialized in the `issue_field_values` wire field.
+    public var issueFieldValues: [IssueFieldValue]?
+    /// Optional `string` value serialized in the `state_reason` wire field.
+    public var stateReason: String?
+    /// Optional array value serialized in the `text_matches` wire field.
+    public var textMatches: SearchResultTextMatches?
+    /// Optional object value serialized in the `pull_request` wire field.
+    public var pullRequest: IssueSearchResultItemPullRequest?
+    /// Optional `string` value serialized in the `body` wire field.
+    public var body: String?
+    /// Optional `boolean` value serialized in the `draft` wire field.
+    public var draft: Bool?
+    /// A repository on GitHub.
+    public var repository: Repository?
+    /// Optional `string` value serialized in the `body_html` wire field.
+    public var bodyHtml: String?
+    /// Optional `string` value serialized in the `body_text` wire field.
+    public var bodyText: String?
+    /// Optional `uri`-formatted value serialized in the `timeline_url` wire field.
+    public var timelineUrl: String?
+    /// The type assigned to the issue. This is only present for issues in repositories where issue types are
+    /// supported.
+    public var type: IssueType?
+    /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user
+    /// accounts and granted access to specific repositories. They come with granular permissions and built-in
+    /// webhooks. GitHub apps are first class actors within GitHub.
+    public var performedViaGithubApp: NullableIntegration?
+    /// Comments provide a way for people to collaborate on an issue.
+    public var pinnedComment: NullableIssueComment?
+    /// Optional object value serialized in the `reactions` wire field.
+    public var reactions: ReactionRollup?
+
+    enum CodingKeys: String, CodingKey {
+        case url
+        case repositoryUrl = "repository_url"
+        case labelsUrl = "labels_url"
+        case commentsUrl = "comments_url"
+        case eventsUrl = "events_url"
+        case htmlUrl = "html_url"
+        case id
+        case nodeId = "node_id"
+        case number
+        case title
+        case locked
+        case user
+        case labels
+        case state
+        case assignee
+        case milestone
+        case comments
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+        case closedAt = "closed_at"
+        case score
+        case authorAssociation = "author_association"
+        case activeLockReason = "active_lock_reason"
+        case assignees
+        case subIssuesSummary = "sub_issues_summary"
+        case issueDependenciesSummary = "issue_dependencies_summary"
+        case issueFieldValues = "issue_field_values"
+        case stateReason = "state_reason"
+        case textMatches = "text_matches"
+        case pullRequest = "pull_request"
+        case body
+        case draft
+        case repository
+        case bodyHtml = "body_html"
+        case bodyText = "body_text"
+        case timelineUrl = "timeline_url"
+        case type
+        case performedViaGithubApp = "performed_via_github_app"
+        case pinnedComment = "pinned_comment"
+        case reactions
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension IssueSearchResultItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        url = try container.sdkDecodeRequired(.url)
+        repositoryUrl = try container.sdkDecodeRequired(.repositoryUrl)
+        labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
+        commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
+        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        number = try container.sdkDecodeRequired(.number)
+        title = try container.sdkDecodeRequired(.title)
+        locked = try container.sdkDecodeRequired(.locked)
+        user = try container.sdkDecodeNullable(.user)
+        labels = try container.sdkDecodeRequired(.labels)
+        state = try container.sdkDecodeRequired(.state)
+        assignee = try container.sdkDecodeNullable(.assignee)
+        milestone = try container.sdkDecodeNullable(.milestone)
+        comments = try container.sdkDecodeRequired(.comments)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        closedAt = try container.sdkDecodeNullable(.closedAt)
+        score = try container.sdkDecodeRequired(.score)
+        authorAssociation = try container.sdkDecodeRequired(.authorAssociation)
+        activeLockReason = try container.sdkDecodeIfPresent(.activeLockReason)
+        assignees = try container.sdkDecodeIfPresent(.assignees)
+        subIssuesSummary = try container.sdkDecodeIfPresent(.subIssuesSummary)
+        issueDependenciesSummary = try container.sdkDecodeIfPresent(.issueDependenciesSummary)
+        issueFieldValues = try container.sdkDecodeIfPresent(.issueFieldValues)
+        stateReason = try container.sdkDecodeIfPresent(.stateReason)
+        textMatches = try container.sdkDecodeIfPresent(.textMatches)
+        pullRequest = try container.sdkDecodeIfPresent(.pullRequest)
+        body = try container.sdkDecodeIfPresent(.body)
+        draft = try container.sdkDecodeIfPresent(.draft)
+        repository = try container.sdkDecodeIfPresent(.repository)
+        bodyHtml = try container.sdkDecodeIfPresent(.bodyHtml)
+        bodyText = try container.sdkDecodeIfPresent(.bodyText)
+        timelineUrl = try container.sdkDecodeIfPresent(.timelineUrl)
+        type = try container.sdkDecodeIfPresent(.type)
+        performedViaGithubApp = try container.sdkDecodeIfPresent(.performedViaGithubApp)
+        pinnedComment = try container.sdkDecodeIfPresent(.pinnedComment)
+        reactions = try container.sdkDecodeIfPresent(.reactions)
+        try sdkValidateConstraints()
+    }
+}
+
+public extension IssueSearchResultItem {
+    init(
+        url: String,
+        repositoryUrl: String,
+        labelsUrl: String,
+        commentsUrl: String,
+        eventsUrl: String,
+        htmlUrl: String,
+        id: Int,
+        nodeId: String,
+        number: Int,
+        title: String,
+        locked: Bool,
+        user: NullableSimpleUser?,
+        labels: [IssueSearchResultItemLabelsItem],
+        state: String,
+        assignee: NullableSimpleUser?,
+        milestone: NullableMilestone?,
+        comments: Int,
+        createdAt: Date,
+        updatedAt: Date,
+        closedAt: Date?,
+        score: Double,
+        authorAssociation: AuthorAssociation,
+        activeLockReason: String? = nil,
+        assignees: [SimpleUser]? = nil,
+        subIssuesSummary: SubIssuesSummary? = nil,
+        issueDependenciesSummary: IssueDependenciesSummary? = nil,
+        issueFieldValues: [IssueFieldValue]? = nil,
+        stateReason: String? = nil,
+        textMatches: SearchResultTextMatches? = nil,
+        pullRequest: IssueSearchResultItemPullRequest? = nil,
+        body: String? = nil,
+        draft: Bool? = nil,
+        repository: Repository? = nil,
+        bodyHtml: String? = nil,
+        bodyText: String? = nil,
+        timelineUrl: String? = nil,
+        type: IssueType? = nil,
+        performedViaGithubApp: NullableIntegration? = nil,
+        pinnedComment: NullableIssueComment? = nil,
+        reactions: ReactionRollup? = nil
+    ) throws {
+        (self.url, self.repositoryUrl) = (url, repositoryUrl)
+        (self.labelsUrl, self.commentsUrl) = (labelsUrl, commentsUrl)
+        (self.eventsUrl, self.htmlUrl) = (eventsUrl, htmlUrl)
+        (self.id, self.nodeId) = (id, nodeId)
+        (self.number, self.title) = (number, title)
+        (self.locked, self.user) = (locked, user)
+        (self.labels, self.state) = (labels, state)
+        (self.assignee, self.milestone) = (assignee, milestone)
+        (self.comments, self.createdAt) = (comments, createdAt)
+        (self.updatedAt, self.closedAt) = (updatedAt, closedAt)
+        (self.score, self.authorAssociation) = (score, authorAssociation)
+        (self.activeLockReason, self.assignees) = (activeLockReason, assignees)
+        self.subIssuesSummary = subIssuesSummary
+        self.issueDependenciesSummary = issueDependenciesSummary
+        (self.issueFieldValues, self.stateReason) = (issueFieldValues, stateReason)
+        (self.textMatches, self.pullRequest) = (textMatches, pullRequest)
+        (self.body, self.draft) = (body, draft)
+        (self.repository, self.bodyHtml) = (repository, bodyHtml)
+        (self.bodyText, self.timelineUrl) = (bodyText, timelineUrl)
+        (self.type, self.performedViaGithubApp) = (type, performedViaGithubApp)
+        (self.pinnedComment, self.reactions) = (pinnedComment, reactions)
+        try sdkValidateConstraints()
+    }
+}
+
+extension IssueSearchResultItem {
+    func sdkValidateConstraints() throws {
+        try sdkValidateUri("url", url)
+        try sdkValidateUri("repository_url", repositoryUrl)
+        try sdkValidateUri("comments_url", commentsUrl)
+        try sdkValidateUri("events_url", eventsUrl)
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+        if let value = closedAt {
+            try sdkValidateDateTime("closed_at", sdkWireString(value))
+        }
+        if let value = timelineUrl {
+            try sdkValidateUri("timeline_url", value)
+        }
     }
 }

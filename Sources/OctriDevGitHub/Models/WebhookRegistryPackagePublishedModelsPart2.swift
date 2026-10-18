@@ -4,233 +4,6 @@
 import Foundation
 
 /// WebhookRegistryPackagePublished domain models
-public extension WebhookRegistryPackagePublishedRegistryPackagePackageVersionPXf8565afa09 {
-    init(
-        contentType: String,
-        createdAt: String,
-        downloadUrl: String,
-        id: Int,
-        md5: String?,
-        name: String,
-        sha1: String?,
-        sha256: String?,
-        size: Int,
-        state: String?,
-        updatedAt: String
-    ) {
-        (self.contentType, self.createdAt) = (contentType, createdAt)
-        (self.downloadUrl, self.id) = (downloadUrl, id)
-        (self.md5, self.name) = (md5, name)
-        (self.sha1, self.sha256) = (sha1, sha256)
-        (self.size, self.state) = (size, state)
-        self.updatedAt = updatedAt
-    }
-}
-
-/// Required object value serialized in the `nuget_metadata[]` wire field.
-public struct WebhookRegistryPackagePublishedRegistryPackagePackageVersionNX85336b7650: Codable {
-    /// Optional API value serialized in the `id` wire field.
-    public var id: WebhookRegistryPackagePublishedRegistryPackagePackageVersionNX29b0f8b1a2?
-    /// Optional `string` value serialized in the `name` wire field.
-    public var name: String?
-    /// Optional API value serialized in the `value` wire field.
-    public var value: WebhookRegistryPackagePublishedRegistryPackagePackageVersionNX502324e7f1?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case name
-        case value
-    }
-
-    init() {
-        (id, name, value) = (nil, nil, nil)
-    }
-}
-
-public extension WebhookRegistryPackagePublishedRegistryPackagePackageVersionNX85336b7650 {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeIfPresent(.id)
-        name = try container.sdkDecodeIfPresent(.name)
-        value = try container.sdkDecodeIfPresent(.value)
-    }
-}
-
-public extension WebhookRegistryPackagePublishedRegistryPackagePackageVersionNX85336b7650 {
-    init(
-        id: WebhookRegistryPackagePublishedRegistryPackagePackageVersionNX29b0f8b1a2? = nil,
-        name: String? = nil,
-        value: WebhookRegistryPackagePublishedRegistryPackagePackageVersionNX502324e7f1? = nil
-    ) {
-        self.init()
-        (self.id, self.name) = (id, name)
-        self.value = value
-    }
-}
-
-public indirect enum WebhookRegistryPackagePublishedRegistryPackagePackageVersionNX0959bd7628 {
-    case stringValue(String)
-    case jsonValue([String: JSONValue])
-}
-
-extension WebhookRegistryPackagePublishedRegistryPackagePackageVersionNX0959bd7628: Codable {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for WebhookRegistryPackagePublishedRegistryPackagePackageVersionNX0959bd7628"
-        )
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
-    }
-}
-
-extension WebhookRegistryPackagePublishedRegistryPackagePackageVersionNX0959bd7628 {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) {
-            return .stringValue(value)
-        }
-        if let value = try? container.decode([String: JSONValue].self) {
-            return .jsonValue(value)
-        }
-        return nil
-    }
-}
-
-extension WebhookRegistryPackagePublishedRegistryPackagePackageVersionNX0959bd7628 {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .stringValue(value): try container.encode(value); return true
-        case let .jsonValue(value): try container.encode(value); return true
-        }
-    }
-}
-
-/// Required object value serialized in the `docker_metadata[]` wire field.
-public struct WebhookRegistryPackagePublishedRegistryPackagePackageVersionDXe8dcea64e3: Codable {
-    /// Optional array value serialized in the `tags` wire field.
-    public var tags: [String]?
-
-    enum CodingKeys: String, CodingKey {
-        case tags
-    }
-
-    init() {
-        tags = nil
-    }
-}
-
-public extension WebhookRegistryPackagePublishedRegistryPackagePackageVersionDXe8dcea64e3 {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        tags = try container.sdkDecodeIfPresent(.tags)
-    }
-}
-
-public extension WebhookRegistryPackagePublishedRegistryPackagePackageVersionDXe8dcea64e3 {
-    init(tags: [String]? = nil) {
-        self.init()
-        self.tags = tags
-    }
-}
-
-/// Required object value serialized in the `registry_package` wire field.
-public struct WebhookRegistryPackagePublishedRegistryPackage: Codable {
-    /// Required `string` value serialized in the `created_at` wire field.
-    public var createdAt: String?
-    /// Required `string` value serialized in the `description` wire field.
-    public var description: String?
-    /// Required `string` value serialized in the `ecosystem` wire field.
-    public var ecosystem: String
-    /// Required `string` value serialized in the `html_url` wire field.
-    public var htmlUrl: String
-    /// Required `integer` value serialized in the `id` wire field.
-    public var id: Int
-    /// Required `string` value serialized in the `name` wire field.
-    public var name: String
-    /// Required `string` value serialized in the `namespace` wire field.
-    public var namespace: String
-    /// Required object value serialized in the `owner` wire field.
-    public var owner: WebhookRegistryPackagePublishedRegistryPackageOwner
-    /// Required `string` value serialized in the `package_type` wire field.
-    public var packageType: String
-    /// Required object value serialized in the `package_version` wire field.
-    public var packageVersion: WebhookRegistryPackagePublishedRegistryPackagePackageVersion?
-    /// Required object value serialized in the `registry` wire field.
-    public var registry: WebhookRegistryPackagePublishedRegistryPackageRegistry?
-    /// Required `string` value serialized in the `updated_at` wire field.
-    public var updatedAt: String?
-
-    enum CodingKeys: String, CodingKey {
-        case createdAt = "created_at"
-        case description
-        case ecosystem
-        case htmlUrl = "html_url"
-        case id
-        case name
-        case namespace
-        case owner
-        case packageType = "package_type"
-        case packageVersion = "package_version"
-        case registry
-        case updatedAt = "updated_at"
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension WebhookRegistryPackagePublishedRegistryPackage {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        createdAt = try container.sdkDecodeNullable(.createdAt)
-        description = try container.sdkDecodeNullable(.description)
-        ecosystem = try container.sdkDecodeRequired(.ecosystem)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        id = try container.sdkDecodeRequired(.id)
-        name = try container.sdkDecodeRequired(.name)
-        namespace = try container.sdkDecodeRequired(.namespace)
-        owner = try container.sdkDecodeRequired(.owner)
-        packageType = try container.sdkDecodeRequired(.packageType)
-        packageVersion = try container.sdkDecodeNullable(.packageVersion)
-        registry = try container.sdkDecodeNullable(.registry)
-        updatedAt = try container.sdkDecodeNullable(.updatedAt)
-    }
-}
-
-public extension WebhookRegistryPackagePublishedRegistryPackage {
-    init(
-        createdAt: String?,
-        description: String?,
-        ecosystem: String,
-        htmlUrl: String,
-        id: Int,
-        name: String,
-        namespace: String,
-        owner: WebhookRegistryPackagePublishedRegistryPackageOwner,
-        packageType: String,
-        packageVersion: WebhookRegistryPackagePublishedRegistryPackagePackageVersion?,
-        registry: WebhookRegistryPackagePublishedRegistryPackageRegistry?,
-        updatedAt: String?
-    ) {
-        (self.createdAt, self.description) = (createdAt, description)
-        (self.ecosystem, self.htmlUrl) = (ecosystem, htmlUrl)
-        (self.id, self.name) = (id, name)
-        (self.namespace, self.owner) = (namespace, owner)
-        (self.packageType, self.packageVersion) = (packageType, packageVersion)
-        (self.registry, self.updatedAt) = (registry, updatedAt)
-    }
-}
-
 /// Optional object value serialized in the `release` wire field.
 public struct WebhookRegistryPackagePublishedRegistryPackagePackageVersionRelease: Codable {
     /// Optional object value serialized in the `author` wire field.
@@ -356,66 +129,6 @@ public extension WebhookRegistryPackagePublishedRegistryPackagePackageVersionCXb
         self.init()
         (self.labels, self.manifest) = (labels, manifest)
         self.tag = tag
-    }
-}
-
-public indirect enum WebhookRegistryPackagePublishedRegistryPackagePackageVersionNX29b0f8b1a2 {
-    case stringValue(String)
-    case jsonValue([String: JSONValue])
-    case intValue(Int)
-}
-
-extension WebhookRegistryPackagePublishedRegistryPackagePackageVersionNX29b0f8b1a2: Codable {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for WebhookRegistryPackagePublishedRegistryPackagePackageVersionNX29b0f8b1a2"
-        )
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
-    }
-}
-
-extension WebhookRegistryPackagePublishedRegistryPackagePackageVersionNX29b0f8b1a2 {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) {
-            return .stringValue(value)
-        }
-        if let value = try? container.decode([String: JSONValue].self) {
-            return .jsonValue(value)
-        }
-        if let value = try? container.decode(Int.self) {
-            return .intValue(value)
-        }
-        return nil
-    }
-}
-
-extension WebhookRegistryPackagePublishedRegistryPackagePackageVersionNX29b0f8b1a2 {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .stringValue(value): try container.encode(value); return true
-        case let .jsonValue(value): try container.encode(value); return true
-        case let .intValue(value): try container.encode(value); return true
-        }
-    }
-}
-
-extension WebhookRegistryPackagePublishedRegistryPackagePackageVersionNX29b0f8b1a2: SdkNumericValueConvertible {
-    var sdkNumericValue: Double? {
-        switch self {
-        case let .intValue(value): Double(value)
-        default: nil
-        }
     }
 }
 
@@ -600,11 +313,262 @@ public extension WebhookRegistryPackagePublishedRegistryPackagePackageVersion {
     }
 }
 
-public indirect enum WebhookRegistryPackagePublishedRegistryPackagePackageVersionNX502324e7f1 {
-    case boolValue(Bool)
-    case stringValue(String)
-    case intValue(Int)
-    case webhookRegistryPackagePublishedRegistryPackagePackageVersionNx186d4d5aaa(
-        WebhookRegistryPackagePublishedRegistryPackagePackageVersionNX186d4d5aaa
-    )
+/// Typed representation of the `WebhookRegistryPackagePublished` API schema.
+public struct WebhookRegistryPackagePublished: Codable {
+    /// Required enumerated value serialized in the `action` wire field.
+    public var action: WebhookRegistryPackagePublishedAction
+    /// Required object value serialized in the `registry_package` wire field.
+    public var registryPackage: WebhookRegistryPackagePublishedRegistryPackage
+    /// A GitHub user.
+    public var sender: SimpleUser
+    /// An enterprise on GitHub. Webhook payloads contain the `enterprise` property when the webhook is configured
+    /// on an enterprise account or an organization that's part of an enterprise account. For more information, see
+    /// "About enterprise accounts."
+    public var enterprise: EnterpriseWebhooks?
+    /// The GitHub App installation. Webhook payloads contain the `installation` property when the event is
+    /// configured for and sent to a GitHub App. For more information, see "Using webhooks with GitHub Apps."
+    public var installation: SimpleInstallation?
+    /// A GitHub organization. Webhook payloads contain the `organization` property when the webhook is configured
+    /// for an organization, or when the event occurs from activity in a repository owned by an organization.
+    public var organization: OrganizationSimpleWebhooks?
+    /// The repository on GitHub where the event occurred. Webhook payloads contain the `repository` property when
+    /// the event occurs from activity in a repository.
+    public var repository: RepositoryWebhooks?
+
+    enum CodingKeys: String, CodingKey {
+        case action
+        case registryPackage = "registry_package"
+        case sender
+        case enterprise
+        case installation
+        case organization
+        case repository
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension WebhookRegistryPackagePublished {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.action) else {
+            throw SdkValidationError(
+                field: "action",
+                code: "required",
+                message: "Validation failed for 'action': value is required"
+            )
+        }
+        guard container.contains(.registryPackage) else {
+            throw SdkValidationError(
+                field: "registry_package",
+                code: "required",
+                message: "Validation failed for 'registry_package': value is required"
+            )
+        }
+        guard container.contains(.sender) else {
+            throw SdkValidationError(
+                field: "sender",
+                code: "required",
+                message: "Validation failed for 'sender': value is required"
+            )
+        }
+        action = try container.sdkDecodeRequired(.action)
+        registryPackage = try container.sdkDecodeRequired(.registryPackage)
+        sender = try container.sdkDecodeRequired(.sender)
+        enterprise = try container.sdkDecodeIfPresent(.enterprise)
+        installation = try container.sdkDecodeIfPresent(.installation)
+        organization = try container.sdkDecodeIfPresent(.organization)
+        repository = try container.sdkDecodeIfPresent(.repository)
+    }
+}
+
+public extension WebhookRegistryPackagePublished {
+    init(
+        action: WebhookRegistryPackagePublishedAction,
+        registryPackage: WebhookRegistryPackagePublishedRegistryPackage,
+        sender: SimpleUser,
+        enterprise: EnterpriseWebhooks? = nil,
+        installation: SimpleInstallation? = nil,
+        organization: OrganizationSimpleWebhooks? = nil,
+        repository: RepositoryWebhooks? = nil
+    ) {
+        (self.action, self.registryPackage) = (action, registryPackage)
+        (self.sender, self.enterprise) = (sender, enterprise)
+        (self.installation, self.organization) = (installation, organization)
+        self.repository = repository
+    }
+}
+
+/// Optional object value serialized in the `npm_metadata` wire field.
+public struct WebhookRegistryPackagePublishedRegistryPackagePackageVersionNpmMetadata: Codable {
+    /// Optional `string` value serialized in the `name` wire field.
+    public var name: String?
+    /// Optional `string` value serialized in the `version` wire field.
+    public var version: String?
+    /// Optional `string` value serialized in the `npm_user` wire field.
+    public var npmUser: String?
+    /// Optional API value serialized in the `author` wire field.
+    public var author: WebhookRegistryPackagePublishedRegistryPackagePackageVersionNX4f18e8fc66?
+    /// Optional API value serialized in the `bugs` wire field.
+    public var bugs: WebhookRegistryPackagePublishedRegistryPackagePackageVersionNX0959bd7628?
+    /// Optional object value serialized in the `dependencies` wire field.
+    public var dependencies: [String: JSONValue]?
+    /// Optional object value serialized in the `dev_dependencies` wire field.
+    public var devDependencies: [String: JSONValue]?
+    /// Optional object value serialized in the `peer_dependencies` wire field.
+    public var peerDependencies: [String: JSONValue]?
+    /// Optional object value serialized in the `optional_dependencies` wire field.
+    public var optionalDependencies: [String: JSONValue]?
+    /// Optional `string` value serialized in the `description` wire field.
+    public var description: String?
+    /// Optional API value serialized in the `dist` wire field.
+    public var dist: WebhookRegistryPackagePublishedRegistryPackagePackageVersionNXe481105674?
+    /// Optional `string` value serialized in the `git_head` wire field.
+    public var gitHead: String?
+    /// Optional `string` value serialized in the `homepage` wire field.
+    public var homepage: String?
+    /// Optional `string` value serialized in the `license` wire field.
+    public var license: String?
+    /// Optional `string` value serialized in the `main` wire field.
+    public var main: String?
+    /// Optional API value serialized in the `repository` wire field.
+    public var repository: WebhookRegistryPackagePublishedRegistryPackagePackageVersionNX92a977cccf?
+    /// Optional object value serialized in the `scripts` wire field.
+    public var scripts: [String: JSONValue]?
+    /// Optional `string` value serialized in the `id` wire field.
+    public var id: String?
+    /// Optional `string` value serialized in the `node_version` wire field.
+    public var nodeVersion: String?
+    /// Optional `string` value serialized in the `npm_version` wire field.
+    public var npmVersion: String?
+    /// Optional `boolean` value serialized in the `has_shrinkwrap` wire field.
+    public var hasShrinkwrap: Bool?
+    /// Optional array value serialized in the `maintainers` wire field.
+    public var maintainers: [String]?
+    /// Optional array value serialized in the `contributors` wire field.
+    public var contributors: [String]?
+    /// Optional object value serialized in the `engines` wire field.
+    public var engines: [String: JSONValue]?
+    /// Optional array value serialized in the `keywords` wire field.
+    public var keywords: [String]?
+    /// Optional array value serialized in the `files` wire field.
+    public var files: [String]?
+    /// Optional object value serialized in the `bin` wire field.
+    public var bin: [String: JSONValue]?
+    /// Optional object value serialized in the `man` wire field.
+    public var man: [String: JSONValue]?
+    /// Optional API value serialized in the `directories` wire field.
+    public var directories: WebhookRegistryPackagePublishedRegistryPackagePackageVersionNXe064aa3855?
+    /// Optional array value serialized in the `os` wire field.
+    public var os: [String]?
+    /// Optional array value serialized in the `cpu` wire field.
+    public var cpu: [String]?
+    /// Optional `string` value serialized in the `readme` wire field.
+    public var readme: String?
+    /// Optional `string` value serialized in the `installation_command` wire field.
+    public var installationCommand: String?
+    /// Optional `integer` value serialized in the `release_id` wire field.
+    public var releaseId: Int?
+    /// Optional `string` value serialized in the `commit_oid` wire field.
+    public var commitOid: String?
+    /// Optional `boolean` value serialized in the `published_via_actions` wire field.
+    public var publishedViaActions: Bool?
+    /// Optional `integer` value serialized in the `deleted_by_id` wire field.
+    public var deletedById: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case name
+        case version
+        case npmUser = "npm_user"
+        case author
+        case bugs
+        case dependencies
+        case devDependencies = "dev_dependencies"
+        case peerDependencies = "peer_dependencies"
+        case optionalDependencies = "optional_dependencies"
+        case description
+        case dist
+        case gitHead = "git_head"
+        case homepage
+        case license
+        case main
+        case repository
+        case scripts
+        case id
+        case nodeVersion = "node_version"
+        case npmVersion = "npm_version"
+        case hasShrinkwrap = "has_shrinkwrap"
+        case maintainers
+        case contributors
+        case engines
+        case keywords
+        case files
+        case bin
+        case man
+        case directories
+        case os
+        case cpu
+        case readme
+        case installationCommand = "installation_command"
+        case releaseId = "release_id"
+        case commitOid = "commit_oid"
+        case publishedViaActions = "published_via_actions"
+        case deletedById = "deleted_by_id"
+    }
+
+    init() {
+        (name, version, npmUser, author, bugs) = (nil, nil, nil, nil, nil)
+        (dependencies, devDependencies, peerDependencies, optionalDependencies, description) = (nil, nil, nil, nil, nil)
+        (dist, gitHead, homepage, license, main) = (nil, nil, nil, nil, nil)
+        (repository, scripts, id, nodeVersion, npmVersion) = (nil, nil, nil, nil, nil)
+        (hasShrinkwrap, maintainers, contributors, engines, keywords) = (nil, nil, nil, nil, nil)
+        (files, bin, man, directories, os) = (nil, nil, nil, nil, nil)
+        (cpu, readme, installationCommand, releaseId, commitOid) = (nil, nil, nil, nil, nil)
+        (publishedViaActions, deletedById) = (nil, nil)
+    }
+}
+
+public extension WebhookRegistryPackagePublishedRegistryPackagePackageVersionNpmMetadata {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        name = try container.sdkDecodeIfPresent(.name)
+        version = try container.sdkDecodeIfPresent(.version)
+        npmUser = try container.sdkDecodeIfPresent(.npmUser)
+        author = try container.sdkDecodeIfPresent(.author)
+        bugs = try container.sdkDecodeIfPresent(.bugs)
+        dependencies = try container.sdkDecodeIfPresent(.dependencies)
+        devDependencies = try container.sdkDecodeIfPresent(.devDependencies)
+        peerDependencies = try container.sdkDecodeIfPresent(.peerDependencies)
+        optionalDependencies = try container.sdkDecodeIfPresent(.optionalDependencies)
+        description = try container.sdkDecodeIfPresent(.description)
+        dist = try container.sdkDecodeIfPresent(.dist)
+        gitHead = try container.sdkDecodeIfPresent(.gitHead)
+        homepage = try container.sdkDecodeIfPresent(.homepage)
+        license = try container.sdkDecodeIfPresent(.license)
+        main = try container.sdkDecodeIfPresent(.main)
+        repository = try container.sdkDecodeIfPresent(.repository)
+        scripts = try container.sdkDecodeIfPresent(.scripts)
+        id = try container.sdkDecodeIfPresent(.id)
+        nodeVersion = try container.sdkDecodeIfPresent(.nodeVersion)
+        npmVersion = try container.sdkDecodeIfPresent(.npmVersion)
+        hasShrinkwrap = try container.sdkDecodeIfPresent(.hasShrinkwrap)
+        maintainers = try container.sdkDecodeIfPresent(.maintainers)
+        contributors = try container.sdkDecodeIfPresent(.contributors)
+        engines = try container.sdkDecodeIfPresent(.engines)
+        keywords = try container.sdkDecodeIfPresent(.keywords)
+        files = try container.sdkDecodeIfPresent(.files)
+        bin = try container.sdkDecodeIfPresent(.bin)
+        man = try container.sdkDecodeIfPresent(.man)
+        directories = try container.sdkDecodeIfPresent(.directories)
+        os = try container.sdkDecodeIfPresent(.os)
+        cpu = try container.sdkDecodeIfPresent(.cpu)
+        readme = try container.sdkDecodeIfPresent(.readme)
+        installationCommand = try container.sdkDecodeIfPresent(.installationCommand)
+        releaseId = try container.sdkDecodeIfPresent(.releaseId)
+        commitOid = try container.sdkDecodeIfPresent(.commitOid)
+        publishedViaActions = try container.sdkDecodeIfPresent(.publishedViaActions)
+        deletedById = try container.sdkDecodeIfPresent(.deletedById)
+    }
 }

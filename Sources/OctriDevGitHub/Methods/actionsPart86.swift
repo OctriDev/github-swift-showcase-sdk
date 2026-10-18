@@ -26,7 +26,7 @@ public extension ActionsMethods {
         runnerId: Int,
         labels: [String],
         requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgResponse {
+    ) async throws -> ActionsRunnerLabels {
         try validateItems("labels", labels, min: 0, max: 100)
 
         let requestBody = ActionsSetCustomLabelsForSelfHostedRunnerForRepoRequestBody(labels: labels)
@@ -67,7 +67,7 @@ public extension ActionsMethods {
         repo: String,
         runnerId: Int,
         requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsRemoveAllCustomLabelsFromSelfHostedRunnerForOrgResponse {
+    ) async throws -> ActionsRunnerLabelsReadonly {
         try await (sdkRequest(
             "DELETE",
             [

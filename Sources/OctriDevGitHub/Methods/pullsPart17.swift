@@ -49,7 +49,7 @@ public extension PullsMethods {
             decoder: .json,
             operationId: "pullsRequestReviewers",
             options: requestOptions,
-            errors: ["403": BasicError.self]
+            errors: ["403": BasicError.self, "503": ServiceUnavailable.self]
         )).data
     }
 }

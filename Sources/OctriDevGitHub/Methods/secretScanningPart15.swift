@@ -45,7 +45,8 @@ public extension SecretScanningMethods {
             body: requestBody,
             decoder: .json,
             operationId: "secretScanningCreatePushProtectionBypass",
-            options: requestOptions
+            options: requestOptions,
+            errors: ["503": ServiceUnavailable.self]
         )).data
     }
 
@@ -78,7 +79,8 @@ public extension SecretScanningMethods {
             config: config,
             decoder: .json,
             operationId: "secretScanningGetScanHistory",
-            options: requestOptions
+            options: requestOptions,
+            errors: ["503": ServiceUnavailable.self]
         )).data
     }
 }

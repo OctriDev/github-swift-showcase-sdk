@@ -51,13 +51,21 @@ public extension SearchMethods {
         page: Int? = nil,
         requestOptions: RequestOptions? = nil
     ) async throws -> SearchReposResponse {
-        try await (sdkRequest("GET", "/search/repositories", config: config, query: [
-            SdkQueryParameter("q", value: q),
-            SdkQueryParameter("sort", value: sort),
-            SdkQueryParameter("order", value: order),
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "searchRepos", options: requestOptions, errors: ["422": ValidationError.self]))
-            .data
+        try await (sdkRequest(
+            "GET",
+            "/search/repositories",
+            config: config,
+            query: [
+                SdkQueryParameter("q", value: q),
+                SdkQueryParameter("sort", value: sort),
+                SdkQueryParameter("order", value: order),
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "searchRepos",
+            options: requestOptions,
+            errors: ["422": ValidationError.self, "503": ServiceUnavailable.self]
+        )).data
     }
 }

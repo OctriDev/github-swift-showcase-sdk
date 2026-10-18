@@ -4,6 +4,32 @@
 import Foundation
 
 /// WebhookPullRequestReviewRequested domain models
+public struct WebhookPullRequestReviewRequestedVariant0PullRequestLinksReviewComment: Codable {
+    public var href: String
+
+    enum CodingKeys: String, CodingKey {
+        case href
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension WebhookPullRequestReviewRequestedVariant0PullRequestLinksReviewComment {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.href) else {
+            throw SdkValidationError(
+                field: "href",
+                code: "required",
+                message: "Validation failed for 'href': value is required"
+            )
+        }
+        href = try container.sdkDecodeRequired(.href)
+    }
+}
+
 public extension WebhookPullRequestReviewRequestedVariant0PullRequestLinksReviewComment {
     init(href: String) {
         self.href = href
@@ -15,6 +41,9 @@ public typealias WebhookPullRequestReviewRequestedVariant1PullRequestAssigneesLi
 
 public typealias WebhookPullRequestReviewRequestedVariant1PullRequestLabelsList =
     [WebhookPullRequestReviewRequestedVariant1PullRequestLabelsItem]
+
+public typealias WebhookPullRequestReviewRequestedVariant1PullRequestRequestedX916c64bd33 =
+    [WebhookPullRequestReviewRequestedVariant1PullRequestRequestedXeeadc93bc2?]
 
 public typealias WebhookPullRequestReviewRequestedVariant1PullRequestRequestedTeamsList =
     [WebhookPullRequestReviewRequestedVariant1PullRequestRequestedTeamsItem]
@@ -52,7 +81,7 @@ public struct WebhookPullRequestReviewRequestedVariant1PullRequest: Codable {
     /// Number uniquely identifying the pull request within its repository.
     public var number: Int
     public var patchUrl: String
-    public var requestedReviewers: [PullRequestRequestedReviewersItem4]
+    public var requestedReviewers: WebhookPullRequestReviewRequestedVariant1PullRequestRequestedX916c64bd33
     public var requestedTeams: WebhookPullRequestReviewRequestedVariant1PullRequestRequestedTeamsList
     public var reviewCommentUrl: String
     public var reviewCommentsUrl: String
@@ -224,7 +253,7 @@ public extension WebhookPullRequestReviewRequestedVariant1PullRequest {
         nodeId: String,
         number: Int,
         patchUrl: String,
-        requestedReviewers: [PullRequestRequestedReviewersItem4],
+        requestedReviewers: WebhookPullRequestReviewRequestedVariant1PullRequestRequestedX916c64bd33,
         requestedTeams: WebhookPullRequestReviewRequestedVariant1PullRequestRequestedTeamsList,
         reviewCommentUrl: String,
         reviewCommentsUrl: String,
@@ -587,38 +616,4 @@ public extension WebhookPullRequestReviewRequestedVariant0PullRequestBaseRepoOwn
         (self.url, self.userViewType) = (url, userViewType)
         try sdkValidateConstraints()
     }
-}
-
-extension WebhookPullRequestReviewRequestedVariant0PullRequestBaseRepoOwner {
-    func sdkValidateConstraints() throws {
-        if let value = avatarUrl {
-            try sdkValidateUri("avatar_url", value)
-        }
-        if let value = followersUrl {
-            try sdkValidateUri("followers_url", value)
-        }
-        if let value = htmlUrl {
-            try sdkValidateUri("html_url", value)
-        }
-        if let value = organizationsUrl {
-            try sdkValidateUri("organizations_url", value)
-        }
-        if let value = receivedEventsUrl {
-            try sdkValidateUri("received_events_url", value)
-        }
-        if let value = reposUrl {
-            try sdkValidateUri("repos_url", value)
-        }
-        if let value = subscriptionsUrl {
-            try sdkValidateUri("subscriptions_url", value)
-        }
-        if let value = url {
-            try sdkValidateUri("url", value)
-        }
-    }
-}
-
-public indirect enum WebhookPullRequestReviewRequestedVariant0PullRequestHeadRepoCreatedAt {
-    case intValue(Int)
-    case date(Date)
 }

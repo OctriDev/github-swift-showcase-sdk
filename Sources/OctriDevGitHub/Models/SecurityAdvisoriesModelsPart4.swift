@@ -4,191 +4,16 @@
 import Foundation
 
 /// SecurityAdvisories domain models
-/// A temporary private fork of the advisory's repository for collaborating on a fix.
-public struct RepositoryAdvisoryPrivateFork: Codable {
-    /// A unique identifier of the repository.
-    /// - Example: 1296269
-    public var id: Int
-    /// The GraphQL identifier of the repository.
-    /// - Example: "MDEwOlJlcG9zaXRvcnkxMjk2MjY5"
-    public var nodeId: String
-    /// The name of the repository.
-    /// - Example: "Hello-World"
+/// Required object value serialized in the `cwes[]` wire field.
+public struct RepositoryAdvisoryCwesItem: Codable {
+    /// The Common Weakness Enumeration (CWE) identifier.
+    public var cweId: String
+    /// The name of the CWE.
     public var name: String
-    /// The full, globally unique, name of the repository.
-    /// - Example: "octocat/Hello-World"
-    public var fullName: String
-    /// A GitHub user.
-    public var owner: SimpleUser
-    /// Whether the repository is private.
-    public var `private`: Bool
-    /// The URL to view the repository on GitHub.com.
-    /// - Example: "https://github.com/octocat/Hello-World"
-    public var htmlUrl: String
-    /// The repository description.
-    /// - Example: "This your first repo!"
-    public var description: String?
-    /// Whether the repository is a fork.
-    public var fork: Bool
-    /// The URL to get more information about the repository from the GitHub API.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World"
-    public var url: String
-    /// A template for the API URL to download the repository as an archive.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/{archive_format}{/ref}"
-    public var archiveUrl: String
-    /// A template for the API URL to list the available assignees for issues in the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/assignees{/user}"
-    public var assigneesUrl: String
-    /// A template for the API URL to create or retrieve a raw Git blob in the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/git/blobs{/sha}"
-    public var blobsUrl: String
-    /// A template for the API URL to get information about branches in the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/branches{/branch}"
-    public var branchesUrl: String
-    /// A template for the API URL to get information about collaborators of the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/collaborators{/collaborator}"
-    public var collaboratorsUrl: String
-    /// A template for the API URL to get information about comments on the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/comments{/number}"
-    public var commentsUrl: String
-    /// A template for the API URL to get information about commits on the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/commits{/sha}"
-    public var commitsUrl: String
-    /// A template for the API URL to compare two commits or refs.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/compare/{base}...{head}"
-    public var compareUrl: String
-    /// A template for the API URL to get the contents of the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/contents/{+path}"
-    public var contentsUrl: String
-    /// A template for the API URL to list the contributors to the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/contributors"
-    public var contributorsUrl: String
-    /// The API URL to list the deployments of the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/deployments"
-    public var deploymentsUrl: String
-    /// The API URL to list the downloads on the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/downloads"
-    public var downloadsUrl: String
-    /// The API URL to list the events of the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/events"
-    public var eventsUrl: String
-    /// The API URL to list the forks of the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/forks"
-    public var forksUrl: String
-    /// A template for the API URL to get information about Git commits of the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/git/commits{/sha}"
-    public var gitCommitsUrl: String
-    /// A template for the API URL to get information about Git refs of the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/git/refs{/sha}"
-    public var gitRefsUrl: String
-    /// A template for the API URL to get information about Git tags of the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/git/tags{/sha}"
-    public var gitTagsUrl: String
-    /// A template for the API URL to get information about issue comments on the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/issues/comments{/number}"
-    public var issueCommentUrl: String
-    /// A template for the API URL to get information about issue events on the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/issues/events{/number}"
-    public var issueEventsUrl: String
-    /// A template for the API URL to get information about issues on the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/issues{/number}"
-    public var issuesUrl: String
-    /// A template for the API URL to get information about deploy keys on the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/keys{/key_id}"
-    public var keysUrl: String
-    /// A template for the API URL to get information about labels of the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/labels{/name}"
-    public var labelsUrl: String
-    /// The API URL to get information about the languages of the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/languages"
-    public var languagesUrl: String
-    /// The API URL to merge branches in the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/merges"
-    public var mergesUrl: String
-    /// A template for the API URL to get information about milestones of the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/milestones{/number}"
-    public var milestonesUrl: String
-    /// A template for the API URL to get information about notifications on the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/notifications{?since,all,participating}"
-    public var notificationsUrl: String
-    /// A template for the API URL to get information about pull requests on the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/pulls{/number}"
-    public var pullsUrl: String
-    /// A template for the API URL to get information about releases on the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/releases{/id}"
-    public var releasesUrl: String
-    /// The API URL to list the stargazers on the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/stargazers"
-    public var stargazersUrl: String
-    /// A template for the API URL to get information about statuses of a commit.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/statuses/{sha}"
-    public var statusesUrl: String
-    /// The API URL to list the subscribers on the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/subscribers"
-    public var subscribersUrl: String
-    /// The API URL to subscribe to notifications for this repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/subscription"
-    public var subscriptionUrl: String
-    /// The API URL to get information about tags on the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/tags"
-    public var tagsUrl: String
-    /// The API URL to list the teams on the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/teams"
-    public var teamsUrl: String
-    /// A template for the API URL to create or retrieve a raw Git tree of the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/git/trees{/sha}"
-    public var treesUrl: String
-    /// The API URL to list the hooks on the repository.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World/hooks"
-    public var hooksUrl: String
 
     enum CodingKeys: String, CodingKey {
-        case id
-        case nodeId = "node_id"
+        case cweId = "cwe_id"
         case name
-        case fullName = "full_name"
-        case owner
-        case `private`
-        case htmlUrl = "html_url"
-        case description
-        case fork
-        case url
-        case archiveUrl = "archive_url"
-        case assigneesUrl = "assignees_url"
-        case blobsUrl = "blobs_url"
-        case branchesUrl = "branches_url"
-        case collaboratorsUrl = "collaborators_url"
-        case commentsUrl = "comments_url"
-        case commitsUrl = "commits_url"
-        case compareUrl = "compare_url"
-        case contentsUrl = "contents_url"
-        case contributorsUrl = "contributors_url"
-        case deploymentsUrl = "deployments_url"
-        case downloadsUrl = "downloads_url"
-        case eventsUrl = "events_url"
-        case forksUrl = "forks_url"
-        case gitCommitsUrl = "git_commits_url"
-        case gitRefsUrl = "git_refs_url"
-        case gitTagsUrl = "git_tags_url"
-        case issueCommentUrl = "issue_comment_url"
-        case issueEventsUrl = "issue_events_url"
-        case issuesUrl = "issues_url"
-        case keysUrl = "keys_url"
-        case labelsUrl = "labels_url"
-        case languagesUrl = "languages_url"
-        case mergesUrl = "merges_url"
-        case milestonesUrl = "milestones_url"
-        case notificationsUrl = "notifications_url"
-        case pullsUrl = "pulls_url"
-        case releasesUrl = "releases_url"
-        case stargazersUrl = "stargazers_url"
-        case statusesUrl = "statuses_url"
-        case subscribersUrl = "subscribers_url"
-        case subscriptionUrl = "subscription_url"
-        case tagsUrl = "tags_url"
-        case teamsUrl = "teams_url"
-        case treesUrl = "trees_url"
-        case hooksUrl = "hooks_url"
     }
 
     private init(sdkCopy value: Self) {
@@ -196,429 +21,353 @@ public struct RepositoryAdvisoryPrivateFork: Codable {
     }
 }
 
-public extension RepositoryAdvisoryPrivateFork {
+public extension RepositoryAdvisoryCwesItem {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
+        guard container.contains(.cweId) else {
+            throw SdkValidationError(
+                field: "cwe_id",
+                code: "required",
+                message: "Validation failed for 'cwe_id': value is required"
+            )
+        }
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        cweId = try container.sdkDecodeRequired(.cweId)
         name = try container.sdkDecodeRequired(.name)
-        fullName = try container.sdkDecodeRequired(.fullName)
-        owner = try container.sdkDecodeRequired(.owner)
-        self.private = try container.sdkDecodeRequired(.private)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        description = try container.sdkDecodeNullable(.description)
-        fork = try container.sdkDecodeRequired(.fork)
-        url = try container.sdkDecodeRequired(.url)
-        archiveUrl = try container.sdkDecodeRequired(.archiveUrl)
-        assigneesUrl = try container.sdkDecodeRequired(.assigneesUrl)
-        blobsUrl = try container.sdkDecodeRequired(.blobsUrl)
-        branchesUrl = try container.sdkDecodeRequired(.branchesUrl)
-        collaboratorsUrl = try container.sdkDecodeRequired(.collaboratorsUrl)
-        commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
-        commitsUrl = try container.sdkDecodeRequired(.commitsUrl)
-        compareUrl = try container.sdkDecodeRequired(.compareUrl)
-        contentsUrl = try container.sdkDecodeRequired(.contentsUrl)
-        contributorsUrl = try container.sdkDecodeRequired(.contributorsUrl)
-        deploymentsUrl = try container.sdkDecodeRequired(.deploymentsUrl)
-        downloadsUrl = try container.sdkDecodeRequired(.downloadsUrl)
-        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        forksUrl = try container.sdkDecodeRequired(.forksUrl)
-        gitCommitsUrl = try container.sdkDecodeRequired(.gitCommitsUrl)
-        gitRefsUrl = try container.sdkDecodeRequired(.gitRefsUrl)
-        gitTagsUrl = try container.sdkDecodeRequired(.gitTagsUrl)
-        issueCommentUrl = try container.sdkDecodeRequired(.issueCommentUrl)
-        issueEventsUrl = try container.sdkDecodeRequired(.issueEventsUrl)
-        issuesUrl = try container.sdkDecodeRequired(.issuesUrl)
-        keysUrl = try container.sdkDecodeRequired(.keysUrl)
-        labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
-        languagesUrl = try container.sdkDecodeRequired(.languagesUrl)
-        mergesUrl = try container.sdkDecodeRequired(.mergesUrl)
-        milestonesUrl = try container.sdkDecodeRequired(.milestonesUrl)
-        notificationsUrl = try container.sdkDecodeRequired(.notificationsUrl)
-        pullsUrl = try container.sdkDecodeRequired(.pullsUrl)
-        releasesUrl = try container.sdkDecodeRequired(.releasesUrl)
-        stargazersUrl = try container.sdkDecodeRequired(.stargazersUrl)
-        statusesUrl = try container.sdkDecodeRequired(.statusesUrl)
-        subscribersUrl = try container.sdkDecodeRequired(.subscribersUrl)
-        subscriptionUrl = try container.sdkDecodeRequired(.subscriptionUrl)
-        tagsUrl = try container.sdkDecodeRequired(.tagsUrl)
-        teamsUrl = try container.sdkDecodeRequired(.teamsUrl)
-        treesUrl = try container.sdkDecodeRequired(.treesUrl)
-        hooksUrl = try container.sdkDecodeRequired(.hooksUrl)
-        try sdkValidateConstraintsPart1()
-        try sdkValidateConstraintsPart2()
     }
 }
 
-public extension RepositoryAdvisoryPrivateFork {
-    init(
-        id: Int,
-        nodeId: String,
-        name: String,
-        fullName: String,
-        owner: SimpleUser,
-        private: Bool,
-        htmlUrl: String,
-        description: String?,
-        fork: Bool,
-        url: String,
-        archiveUrl: String,
-        assigneesUrl: String,
-        blobsUrl: String,
-        branchesUrl: String,
-        collaboratorsUrl: String,
-        commentsUrl: String,
-        commitsUrl: String,
-        compareUrl: String,
-        contentsUrl: String,
-        contributorsUrl: String,
-        deploymentsUrl: String,
-        downloadsUrl: String,
-        eventsUrl: String,
-        forksUrl: String,
-        gitCommitsUrl: String,
-        gitRefsUrl: String,
-        gitTagsUrl: String,
-        issueCommentUrl: String,
-        issueEventsUrl: String,
-        issuesUrl: String,
-        keysUrl: String,
-        labelsUrl: String,
-        languagesUrl: String,
-        mergesUrl: String,
-        milestonesUrl: String,
-        notificationsUrl: String,
-        pullsUrl: String,
-        releasesUrl: String,
-        stargazersUrl: String,
-        statusesUrl: String,
-        subscribersUrl: String,
-        subscriptionUrl: String,
-        tagsUrl: String,
-        teamsUrl: String,
-        treesUrl: String,
-        hooksUrl: String
-    ) throws {
-        (self.id, self.nodeId) = (id, nodeId)
-        (self.name, self.fullName) = (name, fullName)
-        (self.owner, self.private) = (owner, `private`)
-        (self.htmlUrl, self.description) = (htmlUrl, description)
-        (self.fork, self.url) = (fork, url)
-        (self.archiveUrl, self.assigneesUrl) = (archiveUrl, assigneesUrl)
-        (self.blobsUrl, self.branchesUrl) = (blobsUrl, branchesUrl)
-        (self.collaboratorsUrl, self.commentsUrl) = (collaboratorsUrl, commentsUrl)
-        (self.commitsUrl, self.compareUrl) = (commitsUrl, compareUrl)
-        (self.contentsUrl, self.contributorsUrl) = (contentsUrl, contributorsUrl)
-        (self.deploymentsUrl, self.downloadsUrl) = (deploymentsUrl, downloadsUrl)
-        (self.eventsUrl, self.forksUrl) = (eventsUrl, forksUrl)
-        (self.gitCommitsUrl, self.gitRefsUrl) = (gitCommitsUrl, gitRefsUrl)
-        (self.gitTagsUrl, self.issueCommentUrl) = (gitTagsUrl, issueCommentUrl)
-        (self.issueEventsUrl, self.issuesUrl) = (issueEventsUrl, issuesUrl)
-        (self.keysUrl, self.labelsUrl) = (keysUrl, labelsUrl)
-        (self.languagesUrl, self.mergesUrl) = (languagesUrl, mergesUrl)
-        (self.milestonesUrl, self.notificationsUrl) = (milestonesUrl, notificationsUrl)
-        (self.pullsUrl, self.releasesUrl) = (pullsUrl, releasesUrl)
-        (self.stargazersUrl, self.statusesUrl) = (stargazersUrl, statusesUrl)
-        (self.subscribersUrl, self.subscriptionUrl) = (subscribersUrl, subscriptionUrl)
-        (self.tagsUrl, self.teamsUrl) = (tagsUrl, teamsUrl)
-        (self.treesUrl, self.hooksUrl) = (treesUrl, hooksUrl)
-        try sdkValidateConstraintsPart1()
-        try sdkValidateConstraintsPart2()
+public extension RepositoryAdvisoryCwesItem {
+    init(cweId: String, name: String) {
+        (self.cweId, self.name) = (cweId, name)
     }
 }
 
-extension RepositoryAdvisoryPrivateFork {
-    func sdkValidateConstraintsPart1() throws {
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateUri("url", url)
-        try sdkValidateUri("contributors_url", contributorsUrl)
-        try sdkValidateUri("deployments_url", deploymentsUrl)
-        try sdkValidateUri("downloads_url", downloadsUrl)
-        try sdkValidateUri("events_url", eventsUrl)
-        try sdkValidateUri("forks_url", forksUrl)
-        try sdkValidateUri("languages_url", languagesUrl)
-        try sdkValidateUri("merges_url", mergesUrl)
-        try sdkValidateUri("stargazers_url", stargazersUrl)
-        try sdkValidateUri("subscribers_url", subscribersUrl)
-        try sdkValidateUri("subscription_url", subscriptionUrl)
+/// The package's language or package management ecosystem.
+public struct SecurityAdvisoryEcosystems: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let rubygems = SecurityAdvisoryEcosystems(rawValue: "rubygems")
+    public static let npm = SecurityAdvisoryEcosystems(rawValue: "npm")
+    public static let pip = SecurityAdvisoryEcosystems(rawValue: "pip")
+    public static let maven = SecurityAdvisoryEcosystems(rawValue: "maven")
+    public static let nuget = SecurityAdvisoryEcosystems(rawValue: "nuget")
+    public static let composer = SecurityAdvisoryEcosystems(rawValue: "composer")
+    public static let go = SecurityAdvisoryEcosystems(rawValue: "go")
+    public static let rust = SecurityAdvisoryEcosystems(rawValue: "rust")
+    public static let erlang = SecurityAdvisoryEcosystems(rawValue: "erlang")
+    public static let actions = SecurityAdvisoryEcosystems(rawValue: "actions")
+    public static let pub = SecurityAdvisoryEcosystems(rawValue: "pub")
+    public static let other = SecurityAdvisoryEcosystems(rawValue: "other")
+    public static let swift = SecurityAdvisoryEcosystems(rawValue: "swift")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
     }
 }
 
-extension RepositoryAdvisoryPrivateFork {
-    func sdkValidateConstraintsPart2() throws {
-        try sdkValidateUri("tags_url", tagsUrl)
-        try sdkValidateUri("teams_url", teamsUrl)
-        try sdkValidateUri("hooks_url", hooksUrl)
+/// The state of the advisory.
+public struct RepositoryAdvisoryUpdateState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let published = RepositoryAdvisoryUpdateState(rawValue: "published")
+    public static let closed = RepositoryAdvisoryUpdateState(rawValue: "closed")
+    public static let draft = RepositoryAdvisoryUpdateState(rawValue: "draft")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
     }
 }
 
-/// The description does not answer the repository's report template.
-public struct RepositoryAdvisoryDescriptionValidationError: Codable {
-    /// Required `string` value serialized in the `message` wire field.
-    public var message: String
-    /// Required `string` value serialized in the `documentation_url` wire field.
-    public var documentationUrl: String
-    /// Optional array value serialized in the `errors` wire field.
-    public var errors: [RepositoryAdvisoryDescriptionValidationErrorErrorsItem]?
+/// The type of credit the user is receiving.
+public struct SecurityAdvisoryCreditTypes: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
 
-    enum CodingKeys: String, CodingKey {
-        case message
-        case documentationUrl = "documentation_url"
-        case errors
+    public init(rawValue: String) {
+        self.rawValue = rawValue
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
+    public static let analyst = SecurityAdvisoryCreditTypes(rawValue: "analyst")
+    public static let finder = SecurityAdvisoryCreditTypes(rawValue: "finder")
+    public static let reporter = SecurityAdvisoryCreditTypes(rawValue: "reporter")
+    public static let coordinator = SecurityAdvisoryCreditTypes(rawValue: "coordinator")
+    public static let remediationDeveloper = SecurityAdvisoryCreditTypes(rawValue: "remediation_developer")
+    public static let remediationReviewer = SecurityAdvisoryCreditTypes(rawValue: "remediation_reviewer")
+    public static let remediationVerifier = SecurityAdvisoryCreditTypes(rawValue: "remediation_verifier")
+    public static let tool = SecurityAdvisoryCreditTypes(rawValue: "tool")
+    public static let sponsor = SecurityAdvisoryCreditTypes(rawValue: "sponsor")
+    public static let other = SecurityAdvisoryCreditTypes(rawValue: "other")
 
-public extension RepositoryAdvisoryDescriptionValidationError {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.message) else {
-            throw SdkValidationError(
-                field: "message",
-                code: "required",
-                message: "Validation failed for 'message': value is required"
-            )
-        }
-        guard container.contains(.documentationUrl) else {
-            throw SdkValidationError(
-                field: "documentation_url",
-                code: "required",
-                message: "Validation failed for 'documentation_url': value is required"
-            )
-        }
-        message = try container.sdkDecodeRequired(.message)
-        documentationUrl = try container.sdkDecodeRequired(.documentationUrl)
-        errors = try container.sdkDecodeIfPresent(.errors)
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
     }
 }
 
-public extension RepositoryAdvisoryDescriptionValidationError {
-    init(
-        message: String,
-        documentationUrl: String,
-        errors: [RepositoryAdvisoryDescriptionValidationErrorErrorsItem]? = nil
-    ) {
-        (self.message, self.documentationUrl) = (message, documentationUrl)
-        self.errors = errors
+/// The state of the user's acceptance of the credit.
+public struct RepositoryAdvisoryCreditState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let accepted = RepositoryAdvisoryCreditState(rawValue: "accepted")
+    public static let declined = RepositoryAdvisoryCreditState(rawValue: "declined")
+    public static let pending = RepositoryAdvisoryCreditState(rawValue: "pending")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
     }
 }
 
-/// Typed representation of the `RepositoryAdvisoryUpdate` API schema.
-public struct RepositoryAdvisoryUpdate: Codable {
-    /// A short summary of the advisory.
-    public var summary: String?
-    /// A detailed description of what the advisory impacts.
-    public var description: String?
-    /// The Common Vulnerabilities and Exposures (CVE) ID.
-    public var cveId: String?
-    /// A product affected by the vulnerability detailed in a repository security advisory.
-    public var vulnerabilities: [RepositoryAdvisoryUpdateVulnerabilitiesItem]?
-    /// A list of Common Weakness Enumeration (CWE) IDs.
-    public var cweIds: [String]?
-    /// A list of users receiving credit for their participation in the security advisory.
-    public var credits: [RepositoryAdvisoryUpdateCreditsItem]?
-    /// The severity of the advisory. You must choose between setting this field or `cvss_vector_string`.
-    public var severity: RepositoryAdvisoryUpdateSeverity?
-    /// The CVSS vector that calculates the severity of the advisory. You must choose between setting this field or
-    /// `severity`.
-    public var cvssVectorString: String?
-    /// The state of the advisory.
-    public var state: RepositoryAdvisoryUpdateState?
-    /// A list of usernames who have been granted write access to the advisory.
-    public var collaboratingUsers: [String]?
-    /// A list of team slugs which have been granted write access to the advisory.
-    public var collaboratingTeams: [String]?
+/// The severity of the advisory.
+public struct RepositoryAdvisorySeverity: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
 
-    enum CodingKeys: String, CodingKey {
-        case summary
-        case description
-        case cveId = "cve_id"
-        case vulnerabilities
-        case cweIds = "cwe_ids"
-        case credits
-        case severity
-        case cvssVectorString = "cvss_vector_string"
-        case state
-        case collaboratingUsers = "collaborating_users"
-        case collaboratingTeams = "collaborating_teams"
+    public init(rawValue: String) {
+        self.rawValue = rawValue
     }
 
-    init() {
-        (summary, description, cveId, vulnerabilities, cweIds) = (nil, nil, nil, nil, nil)
-        (credits, severity, cvssVectorString, state, collaboratingUsers) = (nil, nil, nil, nil, nil)
-        collaboratingTeams = nil
+    public static let critical = RepositoryAdvisorySeverity(rawValue: "critical")
+    public static let high = RepositoryAdvisorySeverity(rawValue: "high")
+    public static let medium = RepositoryAdvisorySeverity(rawValue: "medium")
+    public static let low = RepositoryAdvisorySeverity(rawValue: "low")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
     }
 }
 
-public extension RepositoryAdvisoryUpdate {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        summary = try container.sdkDecodeIfPresent(.summary)
-        description = try container.sdkDecodeIfPresent(.description)
-        cveId = try container.sdkDecodeIfPresent(.cveId)
-        vulnerabilities = try container.sdkDecodeIfPresent(.vulnerabilities)
-        cweIds = try container.sdkDecodeIfPresent(.cweIds)
-        credits = try container.sdkDecodeIfPresent(.credits)
-        severity = try container.sdkDecodeIfPresent(.severity)
-        cvssVectorString = try container.sdkDecodeIfPresent(.cvssVectorString)
-        state = try container.sdkDecodeIfPresent(.state)
-        collaboratingUsers = try container.sdkDecodeIfPresent(.collaboratingUsers)
-        collaboratingTeams = try container.sdkDecodeIfPresent(.collaboratingTeams)
-        if let value = summary {
-            try validateLength("summary", value, min: nil, max: 1024)
-        }
-        if let value = description {
-            try validateLength("description", value, min: nil, max: 65535)
-        }
+/// The type of identifier.
+public struct GlobalAdvisoryIdentifiersItemType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let cve = GlobalAdvisoryIdentifiersItemType(rawValue: "CVE")
+    public static let ghsa = GlobalAdvisoryIdentifiersItemType(rawValue: "GHSA")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
     }
 }
 
-public extension RepositoryAdvisoryUpdate {
-    init(
-        summary: String? = nil,
-        description: String? = nil,
-        cveId: String? = nil,
-        vulnerabilities: [RepositoryAdvisoryUpdateVulnerabilitiesItem]? = nil,
-        cweIds: [String]? = nil,
-        credits: [RepositoryAdvisoryUpdateCreditsItem]? = nil,
-        severity: RepositoryAdvisoryUpdateSeverity? = nil,
-        cvssVectorString: String? = nil,
-        state: RepositoryAdvisoryUpdateState? = nil,
-        collaboratingUsers: [String]? = nil,
-        collaboratingTeams: [String]? = nil
-    ) throws {
-        self.init()
-        (self.summary, self.description) = (summary, description)
-        (self.cveId, self.vulnerabilities) = (cveId, vulnerabilities)
-        (self.cweIds, self.credits) = (cweIds, credits)
-        (self.severity, self.cvssVectorString) = (severity, cvssVectorString)
-        (self.state, self.collaboratingUsers) = (state, collaboratingUsers)
-        self.collaboratingTeams = collaboratingTeams
-        if let value = self.summary {
-            try validateLength("summary", value, min: nil, max: 1024)
-        }
-        if let value = self.description {
-            try validateLength("description", value, min: nil, max: 65535)
-        }
+/// The severity of the advisory. You must choose between setting this field or `cvss_vector_string`.
+public struct RepositoryAdvisoryCreateSeverity: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let critical = RepositoryAdvisoryCreateSeverity(rawValue: "critical")
+    public static let high = RepositoryAdvisoryCreateSeverity(rawValue: "high")
+    public static let medium = RepositoryAdvisoryCreateSeverity(rawValue: "medium")
+    public static let low = RepositoryAdvisoryCreateSeverity(rawValue: "low")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
     }
 }
 
-/// A vulnerability describing the product and its affected versions within a GitHub Security Advisory.
-public struct Vulnerability: Codable {
-    /// The name of the package affected by the vulnerability.
-    public var package: VulnerabilityPackage?
-    /// The range of the package versions affected by the vulnerability.
-    public var vulnerableVersionRange: String?
-    /// The package version that resolves the vulnerability.
-    public var firstPatchedVersion: String?
-    /// The functions in the package that are affected by the vulnerability.
-    public var vulnerableFunctions: [String]?
+/// The type of identifier.
+public struct RepositoryAdvisoryIdentifiersItemType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
 
-    enum CodingKeys: String, CodingKey {
-        case package
-        case vulnerableVersionRange = "vulnerable_version_range"
-        case firstPatchedVersion = "first_patched_version"
-        case vulnerableFunctions = "vulnerable_functions"
+    public init(rawValue: String) {
+        self.rawValue = rawValue
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
+    public static let cve = RepositoryAdvisoryIdentifiersItemType(rawValue: "CVE")
+    public static let ghsa = RepositoryAdvisoryIdentifiersItemType(rawValue: "GHSA")
 
-public extension Vulnerability {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.package) else {
-            throw SdkValidationError(
-                field: "package",
-                code: "required",
-                message: "Validation failed for 'package': value is required"
-            )
-        }
-        guard container.contains(.vulnerableVersionRange) else {
-            throw SdkValidationError(
-                field: "vulnerable_version_range",
-                code: "required",
-                message: "Validation failed for 'vulnerable_version_range': value is required"
-            )
-        }
-        guard container.contains(.firstPatchedVersion) else {
-            throw SdkValidationError(
-                field: "first_patched_version",
-                code: "required",
-                message: "Validation failed for 'first_patched_version': value is required"
-            )
-        }
-        guard container.contains(.vulnerableFunctions) else {
-            throw SdkValidationError(
-                field: "vulnerable_functions",
-                code: "required",
-                message: "Validation failed for 'vulnerable_functions': value is required"
-            )
-        }
-        package = try container.sdkDecodeNullable(.package)
-        vulnerableVersionRange = try container.sdkDecodeNullable(.vulnerableVersionRange)
-        firstPatchedVersion = try container.sdkDecodeNullable(.firstPatchedVersion)
-        vulnerableFunctions = try container.sdkDecodeNullable(.vulnerableFunctions)
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
     }
 }
 
-public extension Vulnerability {
-    init(
-        package: VulnerabilityPackage?,
-        vulnerableVersionRange: String?,
-        firstPatchedVersion: String?,
-        vulnerableFunctions: [String]?
-    ) {
-        (self.package, self.vulnerableVersionRange) = (package, vulnerableVersionRange)
-        (self.firstPatchedVersion, self.vulnerableFunctions) = (firstPatchedVersion, vulnerableFunctions)
+/// The severity of the advisory. You must choose between setting this field or `cvss_vector_string`.
+public struct RepositoryAdvisoryUpdateSeverity: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let critical = RepositoryAdvisoryUpdateSeverity(rawValue: "critical")
+    public static let high = RepositoryAdvisoryUpdateSeverity(rawValue: "high")
+    public static let medium = RepositoryAdvisoryUpdateSeverity(rawValue: "medium")
+    public static let low = RepositoryAdvisoryUpdateSeverity(rawValue: "low")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
     }
 }
 
-/// The name of the package affected by the vulnerability.
-public struct RepositoryAdvisoryCreateVulnerabilitiesItemPackage: Codable {
-    /// The package's language or package management ecosystem.
-    public var ecosystem: SecurityAdvisoryEcosystems
-    /// The unique package name within its ecosystem.
-    public var name: String?
+/// The state of the advisory.
+public struct RepositoryAdvisoryState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
 
-    enum CodingKeys: String, CodingKey {
-        case ecosystem
-        case name
+    public init(rawValue: String) {
+        self.rawValue = rawValue
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
+    public static let published = RepositoryAdvisoryState(rawValue: "published")
+    public static let closed = RepositoryAdvisoryState(rawValue: "closed")
+    public static let withdrawn = RepositoryAdvisoryState(rawValue: "withdrawn")
+    public static let draft = RepositoryAdvisoryState(rawValue: "draft")
+    public static let triage = RepositoryAdvisoryState(rawValue: "triage")
 
-public extension RepositoryAdvisoryCreateVulnerabilitiesItemPackage {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.ecosystem) else {
-            throw SdkValidationError(
-                field: "ecosystem",
-                code: "required",
-                message: "Validation failed for 'ecosystem': value is required"
-            )
-        }
-        ecosystem = try container.sdkDecodeRequired(.ecosystem)
-        name = try container.sdkDecodeIfPresent(.name)
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
     }
 }
 
-public extension RepositoryAdvisoryCreateVulnerabilitiesItemPackage {
-    init(ecosystem: SecurityAdvisoryEcosystems, name: String? = nil) {
-        (self.ecosystem, self.name) = (ecosystem, name)
+/// The type of advisory.
+public struct GlobalAdvisoryType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let reviewed = GlobalAdvisoryType(rawValue: "reviewed")
+    public static let unreviewed = GlobalAdvisoryType(rawValue: "unreviewed")
+    public static let malware = GlobalAdvisoryType(rawValue: "malware")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
     }
 }
 
-public indirect enum RepositoryAdvisoryDescriptionValidationErrorErrorsItemValue {
-    case stringValue(String)
-    case intValue(Int)
-    case stringList([String])
+/// The severity of the advisory.
+public struct GlobalAdvisorySeverity: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let critical = GlobalAdvisorySeverity(rawValue: "critical")
+    public static let high = GlobalAdvisorySeverity(rawValue: "high")
+    public static let medium = GlobalAdvisorySeverity(rawValue: "medium")
+    public static let low = GlobalAdvisorySeverity(rawValue: "low")
+    public static let unknown = GlobalAdvisorySeverity(rawValue: "unknown")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// The severity of the advisory. You must choose between setting this field or `cvss_vector_string`.
+public struct PrivateVulnerabilityReportCreateSeverity: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let critical = PrivateVulnerabilityReportCreateSeverity(rawValue: "critical")
+    public static let high = PrivateVulnerabilityReportCreateSeverity(rawValue: "high")
+    public static let medium = PrivateVulnerabilityReportCreateSeverity(rawValue: "medium")
+    public static let low = PrivateVulnerabilityReportCreateSeverity(rawValue: "low")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
 }

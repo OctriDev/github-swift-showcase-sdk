@@ -4,6 +4,74 @@
 import Foundation
 
 /// SecretScanning domain models
+public extension SecretScanningLocationPullRequestTitle {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.pullRequestTitleUrl) else {
+            throw SdkValidationError(
+                field: "pull_request_title_url",
+                code: "required",
+                message: "Validation failed for 'pull_request_title_url': value is required"
+            )
+        }
+        pullRequestTitleUrl = try container.sdkDecodeRequired(.pullRequestTitleUrl)
+        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        try sdkValidateUri("pull_request_title_url", pullRequestTitleUrl)
+        if let value = htmlUrl {
+            try sdkValidateUri("html_url", value)
+        }
+    }
+}
+
+public extension SecretScanningLocationPullRequestTitle {
+    init(pullRequestTitleUrl: String, htmlUrl: String? = nil) throws {
+        (self.pullRequestTitleUrl, self.htmlUrl) = (pullRequestTitleUrl, htmlUrl)
+        try sdkValidateUri("pull_request_title_url", self.pullRequestTitleUrl)
+        if let value = self.htmlUrl {
+            try sdkValidateUri("html_url", value)
+        }
+    }
+}
+
+/// A custom pattern to delete in a bulk operation.
+public struct SecretScanningCustomPatternToDelete: Codable {
+    /// The ID of the custom pattern to delete.
+    public var patternId: Int
+    /// The version of the entity. This is used to confirm you're updating the current version of the entity and
+    /// mitigate unintentionally overriding someone else's update.
+    public var customPatternVersion: SecretScanningRowVersion?
+
+    enum CodingKeys: String, CodingKey {
+        case patternId = "pattern_id"
+        case customPatternVersion = "custom_pattern_version"
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension SecretScanningCustomPatternToDelete {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.patternId) else {
+            throw SdkValidationError(
+                field: "pattern_id",
+                code: "required",
+                message: "Validation failed for 'pattern_id': value is required"
+            )
+        }
+        patternId = try container.sdkDecodeRequired(.patternId)
+        customPatternVersion = try container.sdkDecodeIfPresent(.customPatternVersion)
+    }
+}
+
+public extension SecretScanningCustomPatternToDelete {
+    init(patternId: Int, customPatternVersion: SecretScanningRowVersion? = nil) {
+        (self.patternId, self.customPatternVersion) = (patternId, customPatternVersion)
+    }
+}
+
 /// Typed representation of the `SecretScanningAlertWebhook` API schema.
 public struct SecretScanningAlertWebhook: Codable {
     /// The security alert number.
@@ -399,6 +467,71 @@ public extension SecretScanningLocationCommit {
     }
 }
 
+/// Fields to update on a custom pattern. At least one updatable field (`pattern`, `start_delimiter`,
+/// `end_delimiter`, `must_match`, or `must_not_match`) must also be provided. Only provided fields will be updated.
+public struct SecretScanningCustomPatternToUpdate: Codable {
+    /// The version of the entity. This is used to confirm you're updating the current version of the entity and
+    /// mitigate unintentionally overriding someone else's update.
+    public var customPatternVersion: SecretScanningRowVersion?
+    /// The updated regular expression of the custom pattern.
+    public var pattern: String?
+    /// The updated start delimiter regex for the custom pattern.
+    public var startDelimiter: String?
+    /// The updated end delimiter regex for the custom pattern.
+    public var endDelimiter: String?
+    /// Updated list of regexes that the secret must match.
+    public var mustMatch: [String]?
+    /// Updated list of regexes that the secret must not match.
+    public var mustNotMatch: [String]?
+
+    enum CodingKeys: String, CodingKey {
+        case customPatternVersion = "custom_pattern_version"
+        case pattern
+        case startDelimiter = "start_delimiter"
+        case endDelimiter = "end_delimiter"
+        case mustMatch = "must_match"
+        case mustNotMatch = "must_not_match"
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension SecretScanningCustomPatternToUpdate {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.customPatternVersion) else {
+            throw SdkValidationError(
+                field: "custom_pattern_version",
+                code: "required",
+                message: "Validation failed for 'custom_pattern_version': value is required"
+            )
+        }
+        customPatternVersion = try container.sdkDecodeNullable(.customPatternVersion)
+        pattern = try container.sdkDecodeIfPresent(.pattern)
+        startDelimiter = try container.sdkDecodeIfPresent(.startDelimiter)
+        endDelimiter = try container.sdkDecodeIfPresent(.endDelimiter)
+        mustMatch = try container.sdkDecodeIfPresent(.mustMatch)
+        mustNotMatch = try container.sdkDecodeIfPresent(.mustNotMatch)
+    }
+}
+
+public extension SecretScanningCustomPatternToUpdate {
+    init(
+        customPatternVersion: SecretScanningRowVersion?,
+        pattern: String? = nil,
+        startDelimiter: String? = nil,
+        endDelimiter: String? = nil,
+        mustMatch: [String]? = nil,
+        mustNotMatch: [String]? = nil
+    ) {
+        (self.customPatternVersion, self.pattern) = (customPatternVersion, pattern)
+        (self.startDelimiter, self.endDelimiter) = (startDelimiter, endDelimiter)
+        (self.mustMatch, self.mustNotMatch) = (mustMatch, mustNotMatch)
+    }
+}
+
 /// A custom pattern for secret scanning.
 public struct SecretScanningCustomPattern: Codable {
     /// The ID of the custom pattern.
@@ -447,142 +580,5 @@ public struct SecretScanningCustomPattern: Codable {
 
     private init(sdkCopy value: Self) {
         self = value
-    }
-}
-
-public extension SecretScanningCustomPattern {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
-        }
-        guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
-        }
-        guard container.contains(.pattern) else {
-            throw SdkValidationError(
-                field: "pattern",
-                code: "required",
-                message: "Validation failed for 'pattern': value is required"
-            )
-        }
-        guard container.contains(.slug) else {
-            throw SdkValidationError(
-                field: "slug",
-                code: "required",
-                message: "Validation failed for 'slug': value is required"
-            )
-        }
-        guard container.contains(.state) else {
-            throw SdkValidationError(
-                field: "state",
-                code: "required",
-                message: "Validation failed for 'state': value is required"
-            )
-        }
-        guard container.contains(.pushProtectionEnabled) else {
-            throw SdkValidationError(
-                field: "push_protection_enabled",
-                code: "required",
-                message: "Validation failed for 'push_protection_enabled': value is required"
-            )
-        }
-        id = try container.sdkDecodeRequired(.id)
-        name = try container.sdkDecodeRequired(.name)
-        pattern = try container.sdkDecodeRequired(.pattern)
-        slug = try container.sdkDecodeRequired(.slug)
-        state = try container.sdkDecodeRequired(.state)
-        pushProtectionEnabled = try container.sdkDecodeRequired(.pushProtectionEnabled)
-        startDelimiter = try container.sdkDecodeIfPresent(.startDelimiter)
-        endDelimiter = try container.sdkDecodeIfPresent(.endDelimiter)
-        mustMatch = try container.sdkDecodeIfPresent(.mustMatch)
-        mustNotMatch = try container.sdkDecodeIfPresent(.mustNotMatch)
-        customPatternVersion = try container.sdkDecodeIfPresent(.customPatternVersion)
-        createdAt = try container.sdkDecodeIfPresent(.createdAt)
-        updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
-        if let value = createdAt {
-            try sdkValidateDateTime("created_at", sdkWireString(value))
-        }
-        if let value = updatedAt {
-            try sdkValidateDateTime("updated_at", sdkWireString(value))
-        }
-    }
-}
-
-public extension SecretScanningCustomPattern {
-    init(
-        id: Int,
-        name: String,
-        pattern: String,
-        slug: String,
-        state: SecretScanningCustomPatternState,
-        pushProtectionEnabled: Bool,
-        startDelimiter: String? = nil,
-        endDelimiter: String? = nil,
-        mustMatch: [String]? = nil,
-        mustNotMatch: [String]? = nil,
-        customPatternVersion: SecretScanningRowVersion? = nil,
-        createdAt: Date? = nil,
-        updatedAt: Date? = nil
-    ) throws {
-        (self.id, self.name) = (id, name)
-        (self.pattern, self.slug) = (pattern, slug)
-        (self.state, self.pushProtectionEnabled) = (state, pushProtectionEnabled)
-        (self.startDelimiter, self.endDelimiter) = (startDelimiter, endDelimiter)
-        (self.mustMatch, self.mustNotMatch) = (mustMatch, mustNotMatch)
-        (self.customPatternVersion, self.createdAt) = (customPatternVersion, createdAt)
-        self.updatedAt = updatedAt
-        if let value = self.createdAt {
-            try sdkValidateDateTime("created_at", sdkWireString(value))
-        }
-        if let value = self.updatedAt {
-            try sdkValidateDateTime("updated_at", sdkWireString(value))
-        }
-    }
-}
-
-/// Represents a 'discussion_body' secret scanning location type. This location type shows that a secret was
-/// detected in the body of a discussion.
-public struct SecretScanningLocationDiscussionBody: Codable {
-    /// The URL to the discussion where the secret was detected.
-    /// - Example: "https://github.com/community/community/discussions/39082#discussion-4566270"
-    public var discussionBodyUrl: String
-
-    enum CodingKeys: String, CodingKey {
-        case discussionBodyUrl = "discussion_body_url"
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension SecretScanningLocationDiscussionBody {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.discussionBodyUrl) else {
-            throw SdkValidationError(
-                field: "discussion_body_url",
-                code: "required",
-                message: "Validation failed for 'discussion_body_url': value is required"
-            )
-        }
-        discussionBodyUrl = try container.sdkDecodeRequired(.discussionBodyUrl)
-        try sdkValidateUri("discussion_body_url", discussionBodyUrl)
-    }
-}
-
-public extension SecretScanningLocationDiscussionBody {
-    init(discussionBodyUrl: String) throws {
-        self.discussionBodyUrl = discussionBodyUrl
-        try sdkValidateUri("discussion_body_url", self.discussionBodyUrl)
     }
 }

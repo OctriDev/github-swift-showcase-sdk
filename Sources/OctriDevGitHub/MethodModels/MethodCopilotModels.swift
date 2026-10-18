@@ -588,6 +588,11 @@ public indirect enum CopilotSetCopilotContentExclusionForOrganizationRequestBody
 extension CopilotSetCopilotContentExclusionForOrganizationRequestBodyValueItem: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) {
+                self = value; return
+            }
+        }
         if let value = Self.decodeGroup1(from: container) {
             self = value; return
         }
@@ -605,33 +610,17 @@ extension CopilotSetCopilotContentExclusionForOrganizationRequestBodyValueItem: 
 }
 
 extension CopilotSetCopilotContentExclusionForOrganizationRequestBodyValueItem {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) {
-            return .stringValue(value)
-        }
-        if let value = try? container.decode(
-            CopilotSetCopilotContentExclusionForOrganizationRequestBodyVaXc7be48290e.self
-        ) {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container
+            .decode(CopilotSetCopilotContentExclusionForOrganizationRequestBodyVaXc7be48290e.self),
+            sdkKeepsEveryKey(value, of: raw) {
             return .copilotSetCopilotContentExclusionForOrganizationRequestBodyVaXc7be48290e(value)
         }
-        if let value = try? container.decode(
-            CopilotSetCopilotContentExclusionForOrganizationRequestBodyVaXcdbbf05214.self
-        ) {
+        if let value = try? container
+            .decode(CopilotSetCopilotContentExclusionForOrganizationRequestBodyVaXcdbbf05214.self),
+            sdkKeepsEveryKey(value, of: raw) {
             return .copilotSetCopilotContentExclusionForOrganizationRequestBodyVaXcdbbf05214(value)
         }
         return nil
-    }
-}
-
-extension CopilotSetCopilotContentExclusionForOrganizationRequestBodyValueItem {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .stringValue(value): try container.encode(value); return true
-        case let .copilotSetCopilotContentExclusionForOrganizationRequestBodyVaXc7be48290e(value): try container
-            .encode(value); return true
-        case let .copilotSetCopilotContentExclusionForOrganizationRequestBodyVaXcdbbf05214(value): try container
-            .encode(value); return true
-        }
     }
 }

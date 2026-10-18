@@ -6,27 +6,6 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public struct ReposGetClonesParameter: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let day = ReposGetClonesParameter(rawValue: "day")
-    public static let week = ReposGetClonesParameter(rawValue: "week")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
 public struct ChecksListForRefParameter: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
@@ -236,6 +215,30 @@ public struct AgentTasksListTasksForRepoResponseErrorsItemCodeXf6c75144: RawRepr
     public static let unprocessable =
         AgentTasksListTasksForRepoResponseErrorsItemCodeXf6c75144(rawValue: "unprocessable")
     public static let custom = AgentTasksListTasksForRepoResponseErrorsItemCodeXf6c75144(rawValue: "custom")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+public struct AgentAutomationsGetRepoAutomationResponseTriggersDiscussionCoX72210de70a: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let comment =
+        AgentAutomationsGetRepoAutomationResponseTriggersDiscussionCoX72210de70a(rawValue: "comment")
+    public static let reply =
+        AgentAutomationsGetRepoAutomationResponseTriggersDiscussionCoX72210de70a(rawValue: "reply")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

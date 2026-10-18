@@ -83,7 +83,7 @@ public typealias WebhookPullRequestReviewCommentDeletedPullRequestAssigneesList 
     [WebhookPullRequestReviewCommentDeletedPullRequestAssigneesItem?]
 
 public typealias WebhookPullRequestReviewCommentDeletedPullRequestRequestedReviewersList =
-    [WebhookPullRequestReviewCommentDeletedPullRequestRequestedReviewersItem]
+    [WebhookPullRequestReviewCommentDeletedPullRequestRequestedReviewersItem?]
 
 public typealias WebhookPullRequestReviewCommentDeletedPullRequestRequestedTeamsList =
     [WebhookPullRequestReviewCommentDeletedPullRequestRequestedTeamsItem]

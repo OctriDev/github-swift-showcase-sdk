@@ -14,6 +14,11 @@ public indirect enum PullRequestMergeAsyncResultDetails {
 extension PullRequestMergeAsyncResultDetails: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) {
+                self = value; return
+            }
+        }
         if let value = Self.decodeGroup1(from: container) {
             self = value; return
         }
@@ -27,6 +32,36 @@ extension PullRequestMergeAsyncResultDetails: Codable {
         if try encodeGroup1(to: encoder) {
             return
         }
+    }
+}
+
+extension PullRequestMergeAsyncResultDetails {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(PullRequestMergeAsyncResultDetailsVariant0.self), sdkKeepsEveryKey(
+            value,
+            of: raw
+        ) {
+            return .pullRequestMergeAsyncResultDetailsVariant0(value)
+        }
+        if let value = try? container.decode(PullRequestMergeAsyncResultDetailsVariant1.self), sdkKeepsEveryKey(
+            value,
+            of: raw
+        ) {
+            return .pullRequestMergeAsyncResultDetailsVariant1(value)
+        }
+        if let value = try? container.decode(PullRequestMergeAsyncResultDetailsVariant2.self), sdkKeepsEveryKey(
+            value,
+            of: raw
+        ) {
+            return .pullRequestMergeAsyncResultDetailsVariant2(value)
+        }
+        if let value = try? container.decode(PullRequestMergeAsyncResultDetailsVariant3.self), sdkKeepsEveryKey(
+            value,
+            of: raw
+        ) {
+            return .pullRequestMergeAsyncResultDetailsVariant3(value)
+        }
+        return nil
     }
 }
 
@@ -438,7 +473,7 @@ public struct PullRequestLabelsItem: Codable {
     /// Required `boolean` value serialized in the `default` wire field.
     public var `default`: Bool
     /// The user who archived the label, or `null` if it has not been archived.
-    public var archivedBy: PullRequestLabelsItemArchivedBy?
+    public var archivedBy: SimpleUser?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -479,7 +514,7 @@ public extension PullRequestLabelsItem {
         description: String?,
         color: String,
         default: Bool,
-        archivedBy: PullRequestLabelsItemArchivedBy?
+        archivedBy: SimpleUser?
     ) {
         (self.id, self.nodeId) = (id, nodeId)
         (self.url, self.name) = (url, name)
@@ -576,60 +611,5 @@ public extension PullRequestStackPullRequestVariant1 {
             try sdkValidateDateTime("merged_at", sdkWireString(value))
         }
         try sdkValidateUri("html_url", htmlUrl)
-    }
-}
-
-public extension PullRequestStackPullRequestVariant1 {
-    init(
-        nodeId: String,
-        title: String,
-        state: PullRequestStackPullRequestVariant1State,
-        mergedAt: Date?,
-        draft: Bool,
-        htmlUrl: String,
-        user: NullableSimpleUser?
-    ) throws {
-        (self.nodeId, self.title) = (nodeId, title)
-        (self.state, self.mergedAt) = (state, mergedAt)
-        (self.draft, self.htmlUrl) = (draft, htmlUrl)
-        self.user = user
-        if let value = self.mergedAt {
-            try sdkValidateDateTime("merged_at", sdkWireString(value))
-        }
-        try sdkValidateUri("html_url", self.htmlUrl)
-    }
-}
-
-/// Required object value serialized in the `base` wire field.
-public struct PullRequestStackMinimalBase: Codable {
-    /// Required `string` value serialized in the `ref` wire field.
-    public var ref: String
-
-    enum CodingKeys: String, CodingKey {
-        case ref
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension PullRequestStackMinimalBase {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.ref) else {
-            throw SdkValidationError(
-                field: "ref",
-                code: "required",
-                message: "Validation failed for 'ref': value is required"
-            )
-        }
-        ref = try container.sdkDecodeRequired(.ref)
-    }
-}
-
-public extension PullRequestStackMinimalBase {
-    init(ref: String) {
-        self.ref = ref
     }
 }

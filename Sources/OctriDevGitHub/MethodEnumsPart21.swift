@@ -6,6 +6,59 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
+public struct SecurityAdvisoriesListGlobalAdvisoriesParameterXf39a7485: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let updated = SecurityAdvisoriesListGlobalAdvisoriesParameterXf39a7485(rawValue: "updated")
+    public static let published = SecurityAdvisoriesListGlobalAdvisoriesParameterXf39a7485(rawValue: "published")
+    public static let epssPercentage =
+        SecurityAdvisoriesListGlobalAdvisoriesParameterXf39a7485(rawValue: "epss_percentage")
+    public static let epssPercentile =
+        SecurityAdvisoriesListGlobalAdvisoriesParameterXf39a7485(rawValue: "epss_percentile")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// The enablement status of secret scanning non provider patterns
+public struct CodeSecurityCreateConfigurationForEnterpriseRequestBodySecretX420f0f3b3c: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let enabled =
+        CodeSecurityCreateConfigurationForEnterpriseRequestBodySecretX420f0f3b3c(rawValue: "enabled")
+    public static let disabled =
+        CodeSecurityCreateConfigurationForEnterpriseRequestBodySecretX420f0f3b3c(rawValue: "disabled")
+    public static let notSet =
+        CodeSecurityCreateConfigurationForEnterpriseRequestBodySecretX420f0f3b3c(rawValue: "not_set")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
 /// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
 /// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
 public struct AgentAutomationsGetRepoAutomationResponseTriggersPullRequestOX6e1a2be11e: RawRepresentable, Hashable,
@@ -203,52 +256,6 @@ public struct AgentAutomationsEditRepoAutomationRequestBodyTriggersIssueComX1ff9
         AgentAutomationsEditRepoAutomationRequestBodyTriggersIssueComX1ff909e984(rawValue: "trigger")
     public static let repository =
         AgentAutomationsEditRepoAutomationRequestBodyTriggersIssueComX1ff909e984(rawValue: "repository")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-public struct SearchCommitsParameterX4b556b74: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let authorDate = SearchCommitsParameterX4b556b74(rawValue: "author-date")
-    public static let committerDate = SearchCommitsParameterX4b556b74(rawValue: "committer-date")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-public struct IssuesListSuggestionsParameterXd58506f8: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let setType = IssuesListSuggestionsParameterXd58506f8(rawValue: "set_type")
-    public static let addLabel = IssuesListSuggestionsParameterXd58506f8(rawValue: "add_label")
-    public static let addField = IssuesListSuggestionsParameterXd58506f8(rawValue: "add_field")
-    public static let addAssignee = IssuesListSuggestionsParameterXd58506f8(rawValue: "add_assignee")
-    public static let closeIssue = IssuesListSuggestionsParameterXd58506f8(rawValue: "close_issue")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

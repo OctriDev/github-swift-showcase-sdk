@@ -9,6 +9,28 @@ import Foundation
 
 /// Canonical codespaces operation model declarations
 public extension CodespacesRepoMachinesForAuthenticatedUserResponse {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.totalCount) else {
+            throw SdkValidationError(
+                field: "total_count",
+                code: "required",
+                message: "Validation failed for 'total_count': value is required"
+            )
+        }
+        guard container.contains(.machines) else {
+            throw SdkValidationError(
+                field: "machines",
+                code: "required",
+                message: "Validation failed for 'machines': value is required"
+            )
+        }
+        totalCount = try container.sdkDecodeRequired(.totalCount)
+        machines = try container.sdkDecodeRequired(.machines)
+    }
+}
+
+public extension CodespacesRepoMachinesForAuthenticatedUserResponse {
     init(totalCount: Int, machines: [CodespaceMachine]) {
         (self.totalCount, self.machines) = (totalCount, machines)
     }

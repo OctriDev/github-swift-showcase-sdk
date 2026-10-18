@@ -5,6 +5,49 @@ import Foundation
 
 /// Activity domain models
 public extension DiscussionUser {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.login) else {
+            throw SdkValidationError(
+                field: "login",
+                code: "required",
+                message: "Validation failed for 'login': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        login = try container.sdkDecodeRequired(.login)
+        avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
+        deleted = try container.sdkDecodeIfPresent(.deleted)
+        email = try container.sdkDecodeIfPresent(.email)
+        eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
+        followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
+        gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
+        gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
+        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        name = try container.sdkDecodeIfPresent(.name)
+        nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
+        receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
+        reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
+        siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
+        starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
+        subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
+        type = try container.sdkDecodeIfPresent(.type)
+        url = try container.sdkDecodeIfPresent(.url)
+        userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        try sdkValidateConstraints()
+    }
+}
+
+public extension DiscussionUser {
     init(
         id: Int,
         login: String,
@@ -580,46 +623,5 @@ public extension LinkWithType {
 public extension LinkWithType {
     init(href: String, type: String) {
         (self.href, self.type) = (href, type)
-    }
-}
-
-/// Required object value serialized in the `category` wire field.
-public struct DiscussionCategory: Codable {
-    /// Required `date-time`-formatted value serialized in the `created_at` wire field.
-    public var createdAt: Date
-    /// Required `string` value serialized in the `description` wire field.
-    public var description: String
-    /// Required `string` value serialized in the `emoji` wire field.
-    public var emoji: String
-    /// Required `integer` value serialized in the `id` wire field.
-    public var id: Int
-    /// Required `boolean` value serialized in the `is_answerable` wire field.
-    public var isAnswerable: Bool
-    /// Required `string` value serialized in the `name` wire field.
-    public var name: String
-    /// Required `integer` value serialized in the `repository_id` wire field.
-    public var repositoryId: Int
-    /// Required `string` value serialized in the `slug` wire field.
-    public var slug: String
-    /// Required `string` value serialized in the `updated_at` wire field.
-    public var updatedAt: String
-    /// Optional `string` value serialized in the `node_id` wire field.
-    public var nodeId: String?
-
-    enum CodingKeys: String, CodingKey {
-        case createdAt = "created_at"
-        case description
-        case emoji
-        case id
-        case isAnswerable = "is_answerable"
-        case name
-        case repositoryId = "repository_id"
-        case slug
-        case updatedAt = "updated_at"
-        case nodeId = "node_id"
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
     }
 }

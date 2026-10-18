@@ -8,32 +8,6 @@ import Foundation
 #endif
 /// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
 /// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
-public struct AgentAutomationsEditRepoAutomationRequestBodyTriggersIntervalWriteScope: RawRepresentable, Hashable,
-    Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let trigger =
-        AgentAutomationsEditRepoAutomationRequestBodyTriggersIntervalWriteScope(rawValue: "trigger")
-    public static let repository =
-        AgentAutomationsEditRepoAutomationRequestBodyTriggersIntervalWriteScope(rawValue: "repository")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
-/// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
 public struct AgentAutomationsGetAutomationResponseTriggersIssueAssignedWriteScope: RawRepresentable, Hashable, Codable,
     Sendable, SdkWireConvertible {
     public let rawValue: String
@@ -213,6 +187,33 @@ public struct ReactionsCreateForReleaseRequestBodyContent: RawRepresentable, Has
     public static let hooray = ReactionsCreateForReleaseRequestBodyContent(rawValue: "hooray")
     public static let rocket = ReactionsCreateForReleaseRequestBodyContent(rawValue: "rocket")
     public static let eyes = ReactionsCreateForReleaseRequestBodyContent(rawValue: "eyes")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// The default value for a squash merge commit title: - `PR_TITLE` - default to the pull request's title. -
+/// `COMMIT_OR_PR_TITLE` - default to the commit's title (if only one commit) or the pull request's title (when
+/// more than one commit).
+public struct AppsListReposAccessibleToInstallationResponseRepositoriesItemX5dafed43da: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let prTitle =
+        AppsListReposAccessibleToInstallationResponseRepositoriesItemX5dafed43da(rawValue: "PR_TITLE")
+    public static let commitOrPrTitle =
+        AppsListReposAccessibleToInstallationResponseRepositoriesItemX5dafed43da(rawValue: "COMMIT_OR_PR_TITLE")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

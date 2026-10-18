@@ -5,6 +5,42 @@ import Foundation
 
 /// Copilot domain models
 public extension CopilotSeatDetails {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.createdAt) else {
+            throw SdkValidationError(
+                field: "created_at",
+                code: "required",
+                message: "Validation failed for 'created_at': value is required"
+            )
+        }
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        assignee = try container.sdkDecodeIfPresent(.assignee)
+        organization = try container.sdkDecodeIfPresent(.organization)
+        assigningTeam = try container.sdkDecodeIfPresent(.assigningTeam)
+        pendingCancellationDate = try container.sdkDecodeIfPresent(.pendingCancellationDate)
+        lastActivityAt = try container.sdkDecodeIfPresent(.lastActivityAt)
+        lastActivityEditor = try container.sdkDecodeIfPresent(.lastActivityEditor)
+        lastAuthenticatedAt = try container.sdkDecodeIfPresent(.lastAuthenticatedAt)
+        updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
+        planType = try container.sdkDecodeIfPresent(.planType)
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        if let value = pendingCancellationDate {
+            try sdkValidateDate("pending_cancellation_date", value)
+        }
+        if let value = lastActivityAt {
+            try sdkValidateDateTime("last_activity_at", sdkWireString(value))
+        }
+        if let value = lastAuthenticatedAt {
+            try sdkValidateDateTime("last_authenticated_at", sdkWireString(value))
+        }
+        if let value = updatedAt {
+            try sdkValidateDateTime("updated_at", sdkWireString(value))
+        }
+    }
+}
+
+public extension CopilotSeatDetails {
     init(
         createdAt: Date,
         assignee: NullableSimpleUser? = nil,

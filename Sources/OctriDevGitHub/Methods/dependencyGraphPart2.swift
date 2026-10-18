@@ -46,7 +46,13 @@ public extension DependencyGraphMethods {
             decoder: .json,
             operationId: "dependencyGraphDiffRange",
             options: requestOptions,
-            errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self]
+            errors: [
+                "400": BasicError.self,
+                "403": BasicError.self,
+                "404": BasicError.self,
+                "500": BasicError.self,
+                "503": ServiceUnavailable.self,
+            ]
         )).data
     }
 }

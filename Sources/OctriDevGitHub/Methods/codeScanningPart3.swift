@@ -96,7 +96,7 @@ public extension CodeScanningMethods {
             decoder: .json,
             operationId: "codeScanningListAlertsForOrg",
             options: requestOptions,
-            errors: ["404": BasicError.self]
+            errors: ["404": BasicError.self, "503": ServiceUnavailable.self]
         )).data
     }
 }

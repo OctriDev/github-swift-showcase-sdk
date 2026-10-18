@@ -46,10 +46,20 @@ public class ChecksNamespace {
     /// repository are not detected and return an empty `pull_requests` array. OAuth apps and personal access tokens
     /// (classic) cannot use this endpoint.
     public func update(
-        options: ChecksMethods.ChecksUpdateOptions,
+        owner: String,
+        repo: String,
+        checkRunId: Int,
+        body: [String: JSONValue],
         requestOptions: RequestOptions? = nil
     ) async throws -> CheckRun {
-        try await ChecksMethods.checksUpdate(config: config, options: options, requestOptions: requestOptions)
+        try await ChecksMethods.checksUpdate(
+            config: config,
+            owner: owner,
+            repo: repo,
+            checkRunId: checkRunId,
+            body: body,
+            requestOptions: requestOptions
+        )
     }
 
     /// Lists annotations for a check run using the annotation `id`. OAuth app tokens and personal access tokens

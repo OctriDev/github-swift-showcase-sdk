@@ -6,33 +6,6 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-/// The enablement status of Automatic dependency submission
-public struct CodeSecurityCreateConfigurationForEnterpriseRequestBodyDependXdc9fc5a48a: RawRepresentable, Hashable,
-    Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let enabled =
-        CodeSecurityCreateConfigurationForEnterpriseRequestBodyDependXdc9fc5a48a(rawValue: "enabled")
-    public static let disabled =
-        CodeSecurityCreateConfigurationForEnterpriseRequestBodyDependXdc9fc5a48a(rawValue: "disabled")
-    public static let notSet =
-        CodeSecurityCreateConfigurationForEnterpriseRequestBodyDependXdc9fc5a48a(rawValue: "not_set")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
 public struct ReposListForAuthenticatedUserParameterXf052b28c: RawRepresentable, Hashable, Codable, Sendable,
     SdkWireConvertible {
     public let rawValue: String
@@ -246,6 +219,32 @@ public struct UsersGetContextForUserParameter: RawRepresentable, Hashable, Codab
     public static let repository = UsersGetContextForUserParameter(rawValue: "repository")
     public static let issue = UsersGetContextForUserParameter(rawValue: "issue")
     public static let pullRequest = UsersGetContextForUserParameter(rawValue: "pull_request")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
+/// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
+public struct AgentAutomationsEditRepoAutomationRequestBodyTriggersIntervalWriteScope: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let trigger =
+        AgentAutomationsEditRepoAutomationRequestBodyTriggersIntervalWriteScope(rawValue: "trigger")
+    public static let repository =
+        AgentAutomationsEditRepoAutomationRequestBodyTriggersIntervalWriteScope(rawValue: "repository")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

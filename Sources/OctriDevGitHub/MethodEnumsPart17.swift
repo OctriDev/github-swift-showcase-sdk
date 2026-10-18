@@ -6,6 +6,56 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
+/// The policy controlling who can create pull requests: all or collaborators_only.
+public struct AppsListReposAccessibleToInstallationResponseRepositoriesItemXd3df6a5cde: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let all = AppsListReposAccessibleToInstallationResponseRepositoriesItemXd3df6a5cde(rawValue: "all")
+    public static let collaboratorsOnly =
+        AppsListReposAccessibleToInstallationResponseRepositoriesItemXd3df6a5cde(rawValue: "collaborators_only")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
+/// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
+public struct AgentAutomationsCreateRepoAutomationRequestBodyTriggersAutomaX31adc9fed4: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let trigger =
+        AgentAutomationsCreateRepoAutomationRequestBodyTriggersAutomaX31adc9fed4(rawValue: "trigger")
+    public static let repository =
+        AgentAutomationsCreateRepoAutomationRequestBodyTriggersAutomaX31adc9fed4(rawValue: "repository")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
 /// Which type of organization repositories have access to the organization secret. `selected` means only the
 /// repositories specified by `selected_repository_ids` can access the secret.
 public struct CodespacesCreateOrUpdateOrgSecretRequestBodyVisibility: RawRepresentable, Hashable, Codable, Sendable,
@@ -206,33 +256,6 @@ public struct ReactionsListForIssueParameter: RawRepresentable, Hashable, Codabl
     public static let hooray = ReactionsListForIssueParameter(rawValue: "hooray")
     public static let rocket = ReactionsListForIssueParameter(rawValue: "rocket")
     public static let eyes = ReactionsListForIssueParameter(rawValue: "eyes")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// The enablement status of Automatic dependency submission
-public struct CodeSecurityCreateConfigurationRequestBodyDependencyGraphAutoX4e91881a23: RawRepresentable, Hashable,
-    Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let enabled =
-        CodeSecurityCreateConfigurationRequestBodyDependencyGraphAutoX4e91881a23(rawValue: "enabled")
-    public static let disabled =
-        CodeSecurityCreateConfigurationRequestBodyDependencyGraphAutoX4e91881a23(rawValue: "disabled")
-    public static let notSet =
-        CodeSecurityCreateConfigurationRequestBodyDependencyGraphAutoX4e91881a23(rawValue: "not_set")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

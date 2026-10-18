@@ -104,184 +104,6 @@ public extension WebhookIssuesLabeled {
     }
 }
 
-/// The user who archived the label, or `null` if it has not been archived.
-public struct WebhookIssuesLabeledIssueLabelsItemArchivedBy: Codable {
-    /// Required `string` value serialized in the `login` wire field.
-    /// - Example: "octocat"
-    public var login: String
-    /// Required `int64`-formatted value serialized in the `id` wire field.
-    /// - Example: 1
-    public var id: Int
-    /// Required `string` value serialized in the `node_id` wire field.
-    /// - Example: "MDQ6VXNlcjE="
-    public var nodeId: String
-    /// Required `uri`-formatted value serialized in the `avatar_url` wire field.
-    /// - Example: "https://github.com/images/error/octocat_happy.gif"
-    public var avatarUrl: String
-    /// Required `string` value serialized in the `gravatar_id` wire field.
-    /// - Example: "41d064eb2195891e12d0413f63227ea7"
-    public var gravatarId: String?
-    /// Required `uri`-formatted value serialized in the `url` wire field.
-    /// - Example: "https://api.github.com/users/octocat"
-    public var url: String
-    /// Required `uri`-formatted value serialized in the `html_url` wire field.
-    /// - Example: "https://github.com/octocat"
-    public var htmlUrl: String
-    /// Required `uri`-formatted value serialized in the `followers_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/followers"
-    public var followersUrl: String
-    /// Required `string` value serialized in the `following_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/following{/other_user}"
-    public var followingUrl: String
-    /// Required `string` value serialized in the `gists_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/gists{/gist_id}"
-    public var gistsUrl: String
-    /// Required `string` value serialized in the `starred_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/starred{/owner}{/repo}"
-    public var starredUrl: String
-    /// Required `uri`-formatted value serialized in the `subscriptions_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/subscriptions"
-    public var subscriptionsUrl: String
-    /// Required `uri`-formatted value serialized in the `organizations_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/orgs"
-    public var organizationsUrl: String
-    /// Required `uri`-formatted value serialized in the `repos_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/repos"
-    public var reposUrl: String
-    /// Required `string` value serialized in the `events_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/events{/privacy}"
-    public var eventsUrl: String
-    /// Required `uri`-formatted value serialized in the `received_events_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/received_events"
-    public var receivedEventsUrl: String
-    /// Required `string` value serialized in the `type` wire field.
-    /// - Example: "User"
-    public var type: String
-    /// Required `boolean` value serialized in the `site_admin` wire field.
-    public var siteAdmin: Bool
-    /// Optional `string` value serialized in the `name` wire field.
-    public var name: String?
-    /// Optional `string` value serialized in the `email` wire field.
-    public var email: String?
-    /// Optional `string` value serialized in the `starred_at` wire field.
-    /// - Example: "\"2020-07-09T00:17:55Z\""
-    public var starredAt: String?
-    /// Optional `string` value serialized in the `user_view_type` wire field.
-    /// - Example: "public"
-    public var userViewType: String?
-
-    enum CodingKeys: String, CodingKey {
-        case login
-        case id
-        case nodeId = "node_id"
-        case avatarUrl = "avatar_url"
-        case gravatarId = "gravatar_id"
-        case url
-        case htmlUrl = "html_url"
-        case followersUrl = "followers_url"
-        case followingUrl = "following_url"
-        case gistsUrl = "gists_url"
-        case starredUrl = "starred_url"
-        case subscriptionsUrl = "subscriptions_url"
-        case organizationsUrl = "organizations_url"
-        case reposUrl = "repos_url"
-        case eventsUrl = "events_url"
-        case receivedEventsUrl = "received_events_url"
-        case type
-        case siteAdmin = "site_admin"
-        case name
-        case email
-        case starredAt = "starred_at"
-        case userViewType = "user_view_type"
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension WebhookIssuesLabeledIssueLabelsItemArchivedBy {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        login = try container.sdkDecodeRequired(.login)
-        id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
-        gravatarId = try container.sdkDecodeNullable(.gravatarId)
-        url = try container.sdkDecodeRequired(.url)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        followersUrl = try container.sdkDecodeRequired(.followersUrl)
-        followingUrl = try container.sdkDecodeRequired(.followingUrl)
-        gistsUrl = try container.sdkDecodeRequired(.gistsUrl)
-        starredUrl = try container.sdkDecodeRequired(.starredUrl)
-        subscriptionsUrl = try container.sdkDecodeRequired(.subscriptionsUrl)
-        organizationsUrl = try container.sdkDecodeRequired(.organizationsUrl)
-        reposUrl = try container.sdkDecodeRequired(.reposUrl)
-        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        receivedEventsUrl = try container.sdkDecodeRequired(.receivedEventsUrl)
-        type = try container.sdkDecodeRequired(.type)
-        siteAdmin = try container.sdkDecodeRequired(.siteAdmin)
-        name = try container.sdkDecodeIfPresent(.name)
-        email = try container.sdkDecodeIfPresent(.email)
-        starredAt = try container.sdkDecodeIfPresent(.starredAt)
-        userViewType = try container.sdkDecodeIfPresent(.userViewType)
-        try sdkValidateConstraints()
-    }
-}
-
-public extension WebhookIssuesLabeledIssueLabelsItemArchivedBy {
-    init(
-        login: String,
-        id: Int,
-        nodeId: String,
-        avatarUrl: String,
-        gravatarId: String?,
-        url: String,
-        htmlUrl: String,
-        followersUrl: String,
-        followingUrl: String,
-        gistsUrl: String,
-        starredUrl: String,
-        subscriptionsUrl: String,
-        organizationsUrl: String,
-        reposUrl: String,
-        eventsUrl: String,
-        receivedEventsUrl: String,
-        type: String,
-        siteAdmin: Bool,
-        name: String? = nil,
-        email: String? = nil,
-        starredAt: String? = nil,
-        userViewType: String? = nil
-    ) throws {
-        (self.login, self.id) = (login, id)
-        (self.nodeId, self.avatarUrl) = (nodeId, avatarUrl)
-        (self.gravatarId, self.url) = (gravatarId, url)
-        (self.htmlUrl, self.followersUrl) = (htmlUrl, followersUrl)
-        (self.followingUrl, self.gistsUrl) = (followingUrl, gistsUrl)
-        (self.starredUrl, self.subscriptionsUrl) = (starredUrl, subscriptionsUrl)
-        (self.organizationsUrl, self.reposUrl) = (organizationsUrl, reposUrl)
-        (self.eventsUrl, self.receivedEventsUrl) = (eventsUrl, receivedEventsUrl)
-        (self.type, self.siteAdmin) = (type, siteAdmin)
-        (self.name, self.email) = (name, email)
-        (self.starredAt, self.userViewType) = (starredAt, userViewType)
-        try sdkValidateConstraints()
-    }
-}
-
-extension WebhookIssuesLabeledIssueLabelsItemArchivedBy {
-    func sdkValidateConstraints() throws {
-        try sdkValidateUri("avatar_url", avatarUrl)
-        try sdkValidateUri("url", url)
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateUri("followers_url", followersUrl)
-        try sdkValidateUri("subscriptions_url", subscriptionsUrl)
-        try sdkValidateUri("organizations_url", organizationsUrl)
-        try sdkValidateUri("repos_url", reposUrl)
-        try sdkValidateUri("received_events_url", receivedEventsUrl)
-    }
-}
-
 /// Required object value serialized in the `creator` wire field.
 public struct WebhookIssuesLabeledIssueMilestoneCreator: Codable {
     /// Required `integer` value serialized in the `id` wire field.
@@ -627,5 +449,117 @@ public struct WebhookIssuesLabeledIssueAssignee: Codable {
 
     private init(sdkCopy value: Self) {
         self = value
+    }
+}
+
+public extension WebhookIssuesLabeledIssueAssignee {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.login) else {
+            throw SdkValidationError(
+                field: "login",
+                code: "required",
+                message: "Validation failed for 'login': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        login = try container.sdkDecodeRequired(.login)
+        avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
+        deleted = try container.sdkDecodeIfPresent(.deleted)
+        email = try container.sdkDecodeIfPresent(.email)
+        eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
+        followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
+        gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
+        gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
+        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        name = try container.sdkDecodeIfPresent(.name)
+        nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
+        receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
+        reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
+        siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
+        starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
+        subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
+        type = try container.sdkDecodeIfPresent(.type)
+        url = try container.sdkDecodeIfPresent(.url)
+        userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        try sdkValidateConstraints()
+    }
+}
+
+public extension WebhookIssuesLabeledIssueAssignee {
+    init(
+        id: Int,
+        login: String,
+        avatarUrl: String? = nil,
+        deleted: Bool? = nil,
+        email: String? = nil,
+        eventsUrl: String? = nil,
+        followersUrl: String? = nil,
+        followingUrl: String? = nil,
+        gistsUrl: String? = nil,
+        gravatarId: String? = nil,
+        htmlUrl: String? = nil,
+        name: String? = nil,
+        nodeId: String? = nil,
+        organizationsUrl: String? = nil,
+        receivedEventsUrl: String? = nil,
+        reposUrl: String? = nil,
+        siteAdmin: Bool? = nil,
+        starredUrl: String? = nil,
+        subscriptionsUrl: String? = nil,
+        type: WebhookIssuesLabeledIssueAssigneeType? = nil,
+        url: String? = nil,
+        userViewType: String? = nil
+    ) throws {
+        (self.id, self.login) = (id, login)
+        (self.avatarUrl, self.deleted) = (avatarUrl, deleted)
+        (self.email, self.eventsUrl) = (email, eventsUrl)
+        (self.followersUrl, self.followingUrl) = (followersUrl, followingUrl)
+        (self.gistsUrl, self.gravatarId) = (gistsUrl, gravatarId)
+        (self.htmlUrl, self.name) = (htmlUrl, name)
+        (self.nodeId, self.organizationsUrl) = (nodeId, organizationsUrl)
+        (self.receivedEventsUrl, self.reposUrl) = (receivedEventsUrl, reposUrl)
+        (self.siteAdmin, self.starredUrl) = (siteAdmin, starredUrl)
+        (self.subscriptionsUrl, self.type) = (subscriptionsUrl, type)
+        (self.url, self.userViewType) = (url, userViewType)
+        try sdkValidateConstraints()
+    }
+}
+
+extension WebhookIssuesLabeledIssueAssignee {
+    func sdkValidateConstraints() throws {
+        if let value = avatarUrl {
+            try sdkValidateUri("avatar_url", value)
+        }
+        if let value = followersUrl {
+            try sdkValidateUri("followers_url", value)
+        }
+        if let value = htmlUrl {
+            try sdkValidateUri("html_url", value)
+        }
+        if let value = organizationsUrl {
+            try sdkValidateUri("organizations_url", value)
+        }
+        if let value = receivedEventsUrl {
+            try sdkValidateUri("received_events_url", value)
+        }
+        if let value = reposUrl {
+            try sdkValidateUri("repos_url", value)
+        }
+        if let value = subscriptionsUrl {
+            try sdkValidateUri("subscriptions_url", value)
+        }
+        if let value = url {
+            try sdkValidateUri("url", value)
+        }
     }
 }

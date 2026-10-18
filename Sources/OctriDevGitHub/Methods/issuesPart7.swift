@@ -14,7 +14,7 @@ public extension IssuesMethods {
         public var body: String?
         public var assignee: SdkOptional<String>?
         public var milestone: SdkOptional<IssuesCreateRequestBodyMilestone>?
-        public var labels: [IssuesCreateRequestBodyLabelsItem]?
+        public var labels: [IssuesCreateRequestLabelsItem]?
         public var assignees: [String]?
         public var issueFieldValues: [IssuesCreateRequestBodyIssueFieldValuesItem]?
         public var type: SdkOptional<String>?
@@ -101,6 +101,7 @@ public extension IssuesMethods {
                 "404": BasicError.self,
                 "410": BasicError.self,
                 "422": ValidationError.self,
+                "503": ServiceUnavailable.self,
             ]
         )).data
     }

@@ -6,24 +6,6 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-struct PullRequestStacksCreateRequestBody: Encodable {
-    let pullRequests: [Int]
-
-    func encode(to encoder: Encoder) throws {
-        var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(pullRequests, forKey: SdkCodingKey("pull_requests"))
-    }
-}
-
-struct PullRequestStacksAddRequestBody: Encodable {
-    let pullRequests: [Int]
-
-    func encode(to encoder: Encoder) throws {
-        var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(pullRequests, forKey: SdkCodingKey("pull_requests"))
-    }
-}
-
 struct UsersUpdateAuthenticatedRequestBody: Encodable {
     var name: String?
     var email: String?

@@ -59,7 +59,7 @@ public struct WebhookPullRequestDequeuedPullRequest: Codable {
     /// Required `uri`-formatted value serialized in the `patch_url` wire field.
     public var patchUrl: String
     /// Required array value serialized in the `requested_reviewers` wire field.
-    public var requestedReviewers: [WebhookPullRequestDequeuedPullRequestRequestedReviewersItem]
+    public var requestedReviewers: [WebhookPullRequestDequeuedPullRequestRequestedReviewersItem?]
     /// Required array value serialized in the `requested_teams` wire field.
     public var requestedTeams: [WebhookPullRequestDequeuedPullRequestRequestedTeamsItem]
     /// Required `uri-template`-formatted value serialized in the `review_comment_url` wire field.
@@ -247,7 +247,7 @@ public extension WebhookPullRequestDequeuedPullRequest {
         nodeId: String,
         number: Int,
         patchUrl: String,
-        requestedReviewers: [WebhookPullRequestDequeuedPullRequestRequestedReviewersItem],
+        requestedReviewers: [WebhookPullRequestDequeuedPullRequestRequestedReviewersItem?],
         requestedTeams: [WebhookPullRequestDequeuedPullRequestRequestedTeamsItem],
         reviewCommentUrl: String,
         reviewCommentsUrl: String,

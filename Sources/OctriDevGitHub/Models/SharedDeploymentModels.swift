@@ -4,6 +4,52 @@
 import Foundation
 
 /// SharedDeployment domain models
+public indirect enum DeploymentPayload {
+    case jsonValue([String: JSONValue])
+    case stringValue(String)
+}
+
+extension DeploymentPayload: Codable {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for DeploymentPayload"
+        )
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        if try encodeGroup1(to: encoder) {
+            return
+        }
+    }
+}
+
+extension DeploymentPayload {
+    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
+        if let value = try? container.decode([String: JSONValue].self) {
+            return .jsonValue(value)
+        }
+        if let value = try? container.decode(String.self) {
+            return .stringValue(value)
+        }
+        return nil
+    }
+}
+
+extension DeploymentPayload {
+    func encodeGroup1(to encoder: Encoder) throws -> Bool {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case let .jsonValue(value): try container.encode(value); return true
+        case let .stringValue(value): try container.encode(value); return true
+        }
+    }
+}
+
 /// A request for a specific ref(branch,sha,tag) to be deployed
 public struct Deployment: Codable {
     /// Required `uri`-formatted value serialized in the `url` wire field.
@@ -151,52 +197,6 @@ public extension Deployment {
         try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
         try sdkValidateUri("statuses_url", self.statusesUrl)
         try sdkValidateUri("repository_url", self.repositoryUrl)
-    }
-}
-
-public indirect enum DeploymentPayload {
-    case jsonValue([String: JSONValue])
-    case stringValue(String)
-}
-
-extension DeploymentPayload: Codable {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for DeploymentPayload"
-        )
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
-    }
-}
-
-extension DeploymentPayload {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode([String: JSONValue].self) {
-            return .jsonValue(value)
-        }
-        if let value = try? container.decode(String.self) {
-            return .stringValue(value)
-        }
-        return nil
-    }
-}
-
-extension DeploymentPayload {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .jsonValue(value): try container.encode(value); return true
-        case let .stringValue(value): try container.encode(value); return true
-        }
     }
 }
 

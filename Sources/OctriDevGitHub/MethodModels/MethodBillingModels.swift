@@ -127,39 +127,6 @@ public extension BillingCreateOrganizationBudgetRequestBodyBudgetAlerting {
     }
 }
 
-public struct BillingDeleteBudgetOrgResponse: Codable {
-    public var code: String?
-    public var message: String?
-    public var documentationUrl: String?
-
-    enum CodingKeys: String, CodingKey {
-        case code
-        case message
-        case documentationUrl = "documentation_url"
-    }
-
-    init() {
-        (code, message, documentationUrl) = (nil, nil, nil)
-    }
-}
-
-public extension BillingDeleteBudgetOrgResponse {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        code = try container.sdkDecodeIfPresent(.code)
-        message = try container.sdkDecodeIfPresent(.message)
-        documentationUrl = try container.sdkDecodeIfPresent(.documentationUrl)
-    }
-}
-
-public extension BillingDeleteBudgetOrgResponse {
-    init(code: String? = nil, message: String? = nil, documentationUrl: String? = nil) {
-        self.init()
-        (self.code, self.message) = (code, message)
-        self.documentationUrl = documentationUrl
-    }
-}
-
 public indirect enum BillingCreateOrganizationBudgetRequestBodyBudgetType {
     case stringValue(String)
     case stringValue1(String)

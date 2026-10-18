@@ -173,34 +173,6 @@ public extension AgentTasksListTasksResponseErrorsItemXc2e9a932 {
     }
 }
 
-/// A GitHub user
-public struct AgentTasksListTasksResponseTasksItemCreatorVariant0: Codable {
-    /// The unique identifier of the user
-    public var id: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-    }
-
-    init() {
-        id = nil
-    }
-}
-
-public extension AgentTasksListTasksResponseTasksItemCreatorVariant0 {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeIfPresent(.id)
-    }
-}
-
-public extension AgentTasksListTasksResponseTasksItemCreatorVariant0 {
-    init(id: Int? = nil) {
-        self.init()
-        self.id = id
-    }
-}
-
 /// Structured information about billing units consumed by the session.
 public struct AgentTasksGetTaskByIdResponseVariant1SessionsItemUsage: Codable {
     /// Billing unit used for this session. New sessions since June 1, 2026 use `ai_credits`, but older sessions use
@@ -258,7 +230,7 @@ public struct AgentTasksGetTaskByIdResponseVariant0ArtifactsItem: Codable {
     /// Type of artifact. Available Values: `pull`, `branch`.
     public var type: AgentTasksGetTaskByIdResponseVariant0ArtifactsItemType
     /// Resource data (shape depends on type)
-    public var data: ArtifactsItemData3
+    public var data: AgentTasksGetTaskByIdResponseVariant0ArtifactsItemData
 
     enum CodingKeys: String, CodingKey {
         case provider
@@ -305,7 +277,7 @@ public extension AgentTasksGetTaskByIdResponseVariant0ArtifactsItem {
     init(
         provider: AgentTasksGetTaskByIdResponseVariant0ArtifactsItemProvider,
         type: AgentTasksGetTaskByIdResponseVariant0ArtifactsItemType,
-        data: ArtifactsItemData3
+        data: AgentTasksGetTaskByIdResponseVariant0ArtifactsItemData
     ) {
         (self.provider, self.type) = (provider, type)
         self.data = data
@@ -365,34 +337,6 @@ public extension AgentTasksGetTaskByIdResponseVariant0CustomAgent {
 
 public extension AgentTasksGetTaskByIdResponseVariant0CustomAgent {
     init(id: String? = nil) {
-        self.init()
-        self.id = id
-    }
-}
-
-/// A GitHub user
-public struct AgentTasksListTasksForRepoResponseTasksItemCreatorVariant0: Codable {
-    /// The unique identifier of the user
-    public var id: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-    }
-
-    init() {
-        id = nil
-    }
-}
-
-public extension AgentTasksListTasksForRepoResponseTasksItemCreatorVariant0 {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeIfPresent(.id)
-    }
-}
-
-public extension AgentTasksListTasksForRepoResponseTasksItemCreatorVariant0 {
-    init(id: Int? = nil) {
         self.init()
         self.id = id
     }
@@ -609,5 +553,55 @@ public struct AgentTasksGetTaskByIdResponseVariant1SessionsItem: Codable {
 
     private init(sdkCopy value: Self) {
         self = value
+    }
+}
+
+public extension AgentTasksGetTaskByIdResponseVariant1SessionsItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.state) else {
+            throw SdkValidationError(
+                field: "state",
+                code: "required",
+                message: "Validation failed for 'state': value is required"
+            )
+        }
+        guard container.contains(.createdAt) else {
+            throw SdkValidationError(
+                field: "created_at",
+                code: "required",
+                message: "Validation failed for 'created_at': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        state = try container.sdkDecodeRequired(.state)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        name = try container.sdkDecodeIfPresent(.name)
+        user = try container.sdkDecodeIfPresent(.user)
+        owner = try container.sdkDecodeIfPresent(.owner)
+        repository = try container.sdkDecodeIfPresent(.repository)
+        taskId = try container.sdkDecodeIfPresent(.taskId)
+        updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
+        completedAt = try container.sdkDecodeIfPresent(.completedAt)
+        prompt = try container.sdkDecodeIfPresent(.prompt)
+        headRef = try container.sdkDecodeIfPresent(.headRef)
+        baseRef = try container.sdkDecodeIfPresent(.baseRef)
+        model = try container.sdkDecodeIfPresent(.model)
+        usage = try container.sdkDecodeIfPresent(.usage)
+        error = try container.sdkDecodeIfPresent(.error)
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        if let value = updatedAt {
+            try sdkValidateDateTime("updated_at", sdkWireString(value))
+        }
+        if let value = completedAt {
+            try sdkValidateDateTime("completed_at", sdkWireString(value))
+        }
     }
 }

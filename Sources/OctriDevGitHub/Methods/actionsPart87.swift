@@ -26,7 +26,7 @@ public extension ActionsMethods {
         runnerId: Int,
         name: String,
         requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgResponse {
+    ) async throws -> ActionsRunnerLabels {
         try await (sdkRequest(
             "DELETE",
             [

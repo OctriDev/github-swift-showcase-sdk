@@ -226,7 +226,7 @@ public struct WebhooksPullRequest5: Codable {
     /// Required `uri`-formatted value serialized in the `patch_url` wire field.
     public var patchUrl: String
     /// Required array value serialized in the `requested_reviewers` wire field.
-    public var requestedReviewers: [WebhooksPullRequest5RequestedReviewersItem]
+    public var requestedReviewers: [WebhooksPullRequest5RequestedReviewersItem?]
     /// Required array value serialized in the `requested_teams` wire field.
     public var requestedTeams: [WebhooksPullRequest5RequestedTeamsItem]
     /// Required `uri-template`-formatted value serialized in the `review_comment_url` wire field.
@@ -414,7 +414,7 @@ public extension WebhooksPullRequest5 {
         nodeId: String,
         number: Int,
         patchUrl: String,
-        requestedReviewers: [WebhooksPullRequest5RequestedReviewersItem],
+        requestedReviewers: [WebhooksPullRequest5RequestedReviewersItem?],
         requestedTeams: [WebhooksPullRequest5RequestedTeamsItem],
         reviewCommentUrl: String,
         reviewCommentsUrl: String,

@@ -427,7 +427,7 @@ public typealias WebhookPullRequestReviewThreadUnresolvedPullRequestLabelsList =
     [WebhookPullRequestReviewThreadUnresolvedPullRequestLabelsItem]
 
 public typealias WebhookPullRequestReviewThreadUnresolvedPullRequestRequestedRX137f776d29 =
-    [WebhookPullRequestReviewThreadUnresolvedPullRequestRequestedRX0bac14bff6]
+    [WebhookPullRequestReviewThreadUnresolvedPullRequestRequestedRX0bac14bff6?]
 
 public typealias WebhookPullRequestReviewThreadUnresolvedPullRequestRequestedTeamsList =
     [WebhookPullRequestReviewThreadUnresolvedPullRequestRequestedTeamsItem]

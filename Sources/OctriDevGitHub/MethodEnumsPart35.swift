@@ -8,6 +8,32 @@ import Foundation
 #endif
 /// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
 /// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
+public struct AgentAutomationsCreateRepoAutomationResponseTriggersDiscussioX31a7e78e24: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let trigger =
+        AgentAutomationsCreateRepoAutomationResponseTriggersDiscussioX31a7e78e24(rawValue: "trigger")
+    public static let repository =
+        AgentAutomationsCreateRepoAutomationResponseTriggersDiscussioX31a7e78e24(rawValue: "repository")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
+/// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
 public struct AgentAutomationsGetAutomationResponseTriggersPullRequestAssigXe62609098e: RawRepresentable, Hashable,
     Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
@@ -45,30 +71,6 @@ public struct ReposUpdateInformationAboutPagesSiteRequestBodyBuildType: RawRepre
 
     public static let legacy = ReposUpdateInformationAboutPagesSiteRequestBodyBuildType(rawValue: "legacy")
     public static let workflow = ReposUpdateInformationAboutPagesSiteRequestBodyBuildType(rawValue: "workflow")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// The confidence level for this assignee choice.
-public struct IssuesUpdateRequestBodyAssigneesItemVariant1Confidence: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let low = IssuesUpdateRequestBodyAssigneesItemVariant1Confidence(rawValue: "low")
-    public static let medium = IssuesUpdateRequestBodyAssigneesItemVariant1Confidence(rawValue: "medium")
-    public static let high = IssuesUpdateRequestBodyAssigneesItemVariant1Confidence(rawValue: "high")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

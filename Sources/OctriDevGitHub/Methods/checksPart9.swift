@@ -7,38 +7,88 @@ import Foundation
     import FoundationNetworking
 #endif
 public extension ChecksMethods {
-    /// Triggers GitHub to rerequest an existing check suite, without pushing new code to a repository. This endpoint
-    /// will trigger the [`check_suite` webhook](https://docs.github.com/webhooks/event-payloads/#check_suite) event
-    /// with the action `rerequested`. When a check suite is `rerequested`, its `status` is reset to `queued` and the
-    /// `conclusion` is cleared.
+    struct ChecksListForRefOptions: Codable {
+        public var owner: String
+        public var repo: String
+        public var ref: String
+        public var checkName: String?
+        public var status: ChecksListForSuiteParameter?
+        public var filter: ChecksListForRefParameter?
+        public var perPage: Int?
+        public var page: Int?
+        public var appId: Int?
+
+        public init(owner: String, repo: String, ref: String) {
+            self.owner = owner
+            self.repo = repo
+            self.ref = ref
+        }
+    }
+
+    /// Lists check runs for a Git reference in a repository. Set `ref` to a commit SHA, branch name, or tag name, and
+    /// use `check_name`, `status`, `filter`, or `app_id` to narrow the results; use `page` and `per_page` to paginate
+    /// the results. If the reference has more than 1,000 check suites, results are limited to the 1,000 most recent
+    /// suites; use the check-suite endpoints to retrieve additional runs.
+    ///
+    /// Lists check runs for a commit ref. The `ref` can be a SHA, branch name, or a tag name. > [!NOTE] > The endpoints
+    /// to manage checks only look for pushes in the repository where the check suite or check run were created. Pushes
+    /// to a branch in a forked repository are not detected and return an empty `pull_requests` array. If there are more
+    /// than 1000 check suites on a single git reference, this endpoint will limit check runs to the 1000 most recent
+    /// check suites. To iterate over all possible check runs, use the [List check suites for a Git
+    /// reference](https://docs.github.com/rest/reference/checks#list-check-suites-for-a-git-reference) endpoint and
+    /// provide the `check_suite_id` parameter to the [List check runs in a check
+    /// suite](https://docs.github.com/rest/reference/checks#list-check-runs-in-a-check-suite) endpoint. OAuth app
+    /// tokens and personal access tokens (classic) need the `repo` scope to use this endpoint on a private repository.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    /// - checkSuiteId: The unique identifier of the check suite.
-    static func checksRerequestSuite(
+    /// - ref: The commit reference. Can be a commit SHA, branch name
+    ///   (`heads/BRANCH_NAME`), or tag name (`tags/TAG_NAME`). For more information,
+    ///   see "[Git
+    ///   References](https://git-scm.com/book/en/v2/Git-Internals-Git-References)" in
+    ///   the Git documentation.
+    /// - checkName: Returns check runs with the specified `name`.
+    /// - status: Returns check runs with the specified `status`.
+    /// - filter: Filters check runs by their `completed_at` timestamp. `latest`
+    ///   returns the most recent check runs.
+    /// - perPage: The number of results per page (max 100). For more information,
+    ///   see "[Using pagination in the REST
+    ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
+    ///   -rest-api)."
+    /// - page: The page number of the results to fetch. For more information, see
+    ///   "[Using pagination in the REST
+    ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
+    ///   -rest-api)."
+    static func checksListForRef(
         config: ClientConfig,
-        owner: String,
-        repo: String,
-        checkSuiteId: Int,
+        options: ChecksListForRefOptions,
         requestOptions: RequestOptions? = nil
-    ) async throws -> EmptyObject {
+    ) async throws -> ChecksListForRefResponse {
         try await (sdkRequest(
-            "POST",
+            "GET",
             [
                 "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
+                sdkEncodePathSegment(sdkWireString(options.owner)),
                 "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/check-suites/",
-                sdkEncodePathSegment(sdkWireString(checkSuiteId)),
-                "/rerequest",
+                sdkEncodePathSegment(sdkWireString(options.repo)),
+                "/commits/",
+                sdkEncodePathSegment(sdkWireString(options.ref)),
+                "/check-runs",
             ].joined(),
             config: config,
+            query: [
+                SdkQueryParameter("check_name", value: options.checkName),
+                SdkQueryParameter("status", value: options.status),
+                SdkQueryParameter("filter", value: options.filter),
+                SdkQueryParameter("per_page", value: options.perPage),
+                SdkQueryParameter("page", value: options.page),
+                SdkQueryParameter("app_id", value: options.appId),
+            ],
             decoder: .json,
-            operationId: "checksRerequestSuite",
+            operationId: "checksListForRef",
             options: requestOptions
         )).data
     }

@@ -5,6 +5,49 @@ import Foundation
 
 /// Activity domain models
 public extension DiscussionAnswerChosenBy {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.login) else {
+            throw SdkValidationError(
+                field: "login",
+                code: "required",
+                message: "Validation failed for 'login': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        login = try container.sdkDecodeRequired(.login)
+        avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
+        deleted = try container.sdkDecodeIfPresent(.deleted)
+        email = try container.sdkDecodeIfPresent(.email)
+        eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
+        followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
+        gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
+        gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
+        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        name = try container.sdkDecodeIfPresent(.name)
+        nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
+        receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
+        reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
+        siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
+        starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
+        subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
+        type = try container.sdkDecodeIfPresent(.type)
+        url = try container.sdkDecodeIfPresent(.url)
+        userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        try sdkValidateConstraints()
+    }
+}
+
+public extension DiscussionAnswerChosenBy {
     init(
         id: Int,
         login: String,
@@ -573,62 +616,5 @@ public struct RepositorySubscription: Codable {
 
     private init(sdkCopy value: Self) {
         self = value
-    }
-}
-
-public extension RepositorySubscription {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.subscribed) else {
-            throw SdkValidationError(
-                field: "subscribed",
-                code: "required",
-                message: "Validation failed for 'subscribed': value is required"
-            )
-        }
-        guard container.contains(.ignored) else {
-            throw SdkValidationError(
-                field: "ignored",
-                code: "required",
-                message: "Validation failed for 'ignored': value is required"
-            )
-        }
-        guard container.contains(.reason) else {
-            throw SdkValidationError(
-                field: "reason",
-                code: "required",
-                message: "Validation failed for 'reason': value is required"
-            )
-        }
-        guard container.contains(.createdAt) else {
-            throw SdkValidationError(
-                field: "created_at",
-                code: "required",
-                message: "Validation failed for 'created_at': value is required"
-            )
-        }
-        guard container.contains(.url) else {
-            throw SdkValidationError(
-                field: "url",
-                code: "required",
-                message: "Validation failed for 'url': value is required"
-            )
-        }
-        guard container.contains(.repositoryUrl) else {
-            throw SdkValidationError(
-                field: "repository_url",
-                code: "required",
-                message: "Validation failed for 'repository_url': value is required"
-            )
-        }
-        subscribed = try container.sdkDecodeRequired(.subscribed)
-        ignored = try container.sdkDecodeRequired(.ignored)
-        reason = try container.sdkDecodeNullable(.reason)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        url = try container.sdkDecodeRequired(.url)
-        repositoryUrl = try container.sdkDecodeRequired(.repositoryUrl)
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
-        try sdkValidateUri("url", url)
-        try sdkValidateUri("repository_url", repositoryUrl)
     }
 }

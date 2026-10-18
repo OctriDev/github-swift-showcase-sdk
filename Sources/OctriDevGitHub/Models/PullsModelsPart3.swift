@@ -4,6 +4,57 @@
 import Foundation
 
 /// Pulls domain models
+public extension PullRequestStackMinimalPullRequestsItemHead {
+    init(ref: String, sha: String) {
+        (self.ref, self.sha) = (ref, sha)
+    }
+}
+
+/// Pull Request Merge Async Result
+public struct PullRequestMergeAsyncResult: Codable {
+    /// Required enumerated value serialized in the `status` wire field.
+    public var status: PullRequestMergeAsyncResultStatus
+    /// Required API value serialized in the `details` wire field.
+    public var details: PullRequestMergeAsyncResultDetails
+
+    enum CodingKeys: String, CodingKey {
+        case status
+        case details
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension PullRequestMergeAsyncResult {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.status) else {
+            throw SdkValidationError(
+                field: "status",
+                code: "required",
+                message: "Validation failed for 'status': value is required"
+            )
+        }
+        guard container.contains(.details) else {
+            throw SdkValidationError(
+                field: "details",
+                code: "required",
+                message: "Validation failed for 'details': value is required"
+            )
+        }
+        status = try container.sdkDecodeRequired(.status)
+        details = try container.sdkDecodeRequired(.details)
+    }
+}
+
+public extension PullRequestMergeAsyncResult {
+    init(status: PullRequestMergeAsyncResultStatus, details: PullRequestMergeAsyncResultDetails) {
+        (self.status, self.details) = (status, details)
+    }
+}
+
 /// Required object value serialized in the `pull_requests[]` wire field.
 public struct PullRequestStackMinimalPullRequestsItem: Codable {
     /// Required `integer` value serialized in the `number` wire field.
@@ -448,184 +499,6 @@ public extension PullRequestHead {
     }
 }
 
-/// The user who archived the label, or `null` if it has not been archived.
-public struct PullRequestLabelsItemArchivedBy: Codable {
-    /// Required `string` value serialized in the `login` wire field.
-    /// - Example: "octocat"
-    public var login: String
-    /// Required `int64`-formatted value serialized in the `id` wire field.
-    /// - Example: 1
-    public var id: Int
-    /// Required `string` value serialized in the `node_id` wire field.
-    /// - Example: "MDQ6VXNlcjE="
-    public var nodeId: String
-    /// Required `uri`-formatted value serialized in the `avatar_url` wire field.
-    /// - Example: "https://github.com/images/error/octocat_happy.gif"
-    public var avatarUrl: String
-    /// Required `string` value serialized in the `gravatar_id` wire field.
-    /// - Example: "41d064eb2195891e12d0413f63227ea7"
-    public var gravatarId: String?
-    /// Required `uri`-formatted value serialized in the `url` wire field.
-    /// - Example: "https://api.github.com/users/octocat"
-    public var url: String
-    /// Required `uri`-formatted value serialized in the `html_url` wire field.
-    /// - Example: "https://github.com/octocat"
-    public var htmlUrl: String
-    /// Required `uri`-formatted value serialized in the `followers_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/followers"
-    public var followersUrl: String
-    /// Required `string` value serialized in the `following_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/following{/other_user}"
-    public var followingUrl: String
-    /// Required `string` value serialized in the `gists_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/gists{/gist_id}"
-    public var gistsUrl: String
-    /// Required `string` value serialized in the `starred_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/starred{/owner}{/repo}"
-    public var starredUrl: String
-    /// Required `uri`-formatted value serialized in the `subscriptions_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/subscriptions"
-    public var subscriptionsUrl: String
-    /// Required `uri`-formatted value serialized in the `organizations_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/orgs"
-    public var organizationsUrl: String
-    /// Required `uri`-formatted value serialized in the `repos_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/repos"
-    public var reposUrl: String
-    /// Required `string` value serialized in the `events_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/events{/privacy}"
-    public var eventsUrl: String
-    /// Required `uri`-formatted value serialized in the `received_events_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/received_events"
-    public var receivedEventsUrl: String
-    /// Required `string` value serialized in the `type` wire field.
-    /// - Example: "User"
-    public var type: String
-    /// Required `boolean` value serialized in the `site_admin` wire field.
-    public var siteAdmin: Bool
-    /// Optional `string` value serialized in the `name` wire field.
-    public var name: String?
-    /// Optional `string` value serialized in the `email` wire field.
-    public var email: String?
-    /// Optional `string` value serialized in the `starred_at` wire field.
-    /// - Example: "\"2020-07-09T00:17:55Z\""
-    public var starredAt: String?
-    /// Optional `string` value serialized in the `user_view_type` wire field.
-    /// - Example: "public"
-    public var userViewType: String?
-
-    enum CodingKeys: String, CodingKey {
-        case login
-        case id
-        case nodeId = "node_id"
-        case avatarUrl = "avatar_url"
-        case gravatarId = "gravatar_id"
-        case url
-        case htmlUrl = "html_url"
-        case followersUrl = "followers_url"
-        case followingUrl = "following_url"
-        case gistsUrl = "gists_url"
-        case starredUrl = "starred_url"
-        case subscriptionsUrl = "subscriptions_url"
-        case organizationsUrl = "organizations_url"
-        case reposUrl = "repos_url"
-        case eventsUrl = "events_url"
-        case receivedEventsUrl = "received_events_url"
-        case type
-        case siteAdmin = "site_admin"
-        case name
-        case email
-        case starredAt = "starred_at"
-        case userViewType = "user_view_type"
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension PullRequestLabelsItemArchivedBy {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        login = try container.sdkDecodeRequired(.login)
-        id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
-        gravatarId = try container.sdkDecodeNullable(.gravatarId)
-        url = try container.sdkDecodeRequired(.url)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        followersUrl = try container.sdkDecodeRequired(.followersUrl)
-        followingUrl = try container.sdkDecodeRequired(.followingUrl)
-        gistsUrl = try container.sdkDecodeRequired(.gistsUrl)
-        starredUrl = try container.sdkDecodeRequired(.starredUrl)
-        subscriptionsUrl = try container.sdkDecodeRequired(.subscriptionsUrl)
-        organizationsUrl = try container.sdkDecodeRequired(.organizationsUrl)
-        reposUrl = try container.sdkDecodeRequired(.reposUrl)
-        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        receivedEventsUrl = try container.sdkDecodeRequired(.receivedEventsUrl)
-        type = try container.sdkDecodeRequired(.type)
-        siteAdmin = try container.sdkDecodeRequired(.siteAdmin)
-        name = try container.sdkDecodeIfPresent(.name)
-        email = try container.sdkDecodeIfPresent(.email)
-        starredAt = try container.sdkDecodeIfPresent(.starredAt)
-        userViewType = try container.sdkDecodeIfPresent(.userViewType)
-        try sdkValidateConstraints()
-    }
-}
-
-public extension PullRequestLabelsItemArchivedBy {
-    init(
-        login: String,
-        id: Int,
-        nodeId: String,
-        avatarUrl: String,
-        gravatarId: String?,
-        url: String,
-        htmlUrl: String,
-        followersUrl: String,
-        followingUrl: String,
-        gistsUrl: String,
-        starredUrl: String,
-        subscriptionsUrl: String,
-        organizationsUrl: String,
-        reposUrl: String,
-        eventsUrl: String,
-        receivedEventsUrl: String,
-        type: String,
-        siteAdmin: Bool,
-        name: String? = nil,
-        email: String? = nil,
-        starredAt: String? = nil,
-        userViewType: String? = nil
-    ) throws {
-        (self.login, self.id) = (login, id)
-        (self.nodeId, self.avatarUrl) = (nodeId, avatarUrl)
-        (self.gravatarId, self.url) = (gravatarId, url)
-        (self.htmlUrl, self.followersUrl) = (htmlUrl, followersUrl)
-        (self.followingUrl, self.gistsUrl) = (followingUrl, gistsUrl)
-        (self.starredUrl, self.subscriptionsUrl) = (starredUrl, subscriptionsUrl)
-        (self.organizationsUrl, self.reposUrl) = (organizationsUrl, reposUrl)
-        (self.eventsUrl, self.receivedEventsUrl) = (eventsUrl, receivedEventsUrl)
-        (self.type, self.siteAdmin) = (type, siteAdmin)
-        (self.name, self.email) = (name, email)
-        (self.starredAt, self.userViewType) = (starredAt, userViewType)
-        try sdkValidateConstraints()
-    }
-}
-
-extension PullRequestLabelsItemArchivedBy {
-    func sdkValidateConstraints() throws {
-        try sdkValidateUri("avatar_url", avatarUrl)
-        try sdkValidateUri("url", url)
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateUri("followers_url", followersUrl)
-        try sdkValidateUri("subscriptions_url", subscriptionsUrl)
-        try sdkValidateUri("organizations_url", organizationsUrl)
-        try sdkValidateUri("repos_url", reposUrl)
-        try sdkValidateUri("received_events_url", receivedEventsUrl)
-    }
-}
-
 /// Required object value serialized in the `_links` wire field.
 public struct PullRequestReviewLinks: Codable {
     /// Required object value serialized in the `html` wire field.
@@ -640,5 +513,124 @@ public struct PullRequestReviewLinks: Codable {
 
     private init(sdkCopy value: Self) {
         self = value
+    }
+}
+
+public extension PullRequestReviewLinks {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.html) else {
+            throw SdkValidationError(
+                field: "html",
+                code: "required",
+                message: "Validation failed for 'html': value is required"
+            )
+        }
+        guard container.contains(.pullRequest) else {
+            throw SdkValidationError(
+                field: "pull_request",
+                code: "required",
+                message: "Validation failed for 'pull_request': value is required"
+            )
+        }
+        html = try container.sdkDecodeRequired(.html)
+        pullRequest = try container.sdkDecodeRequired(.pullRequest)
+    }
+}
+
+public extension PullRequestReviewLinks {
+    init(html: PullRequestReviewLinksHtml, pullRequest: PullRequestReviewLinksPullRequest) {
+        (self.html, self.pullRequest) = (html, pullRequest)
+    }
+}
+
+/// Typed representation of the `PullRequestStackPullRequest` API schema.
+public struct PullRequestStackPullRequest: Codable {
+    /// Required `int64`-formatted value serialized in the `id` wire field.
+    public var id: Int
+    /// Required `integer` value serialized in the `number` wire field.
+    public var number: Int
+    /// Required `string` value serialized in the `url` wire field.
+    public var url: String
+    /// Required object value serialized in the `head` wire field.
+    public var head: PullRequestMinimalHead
+    /// Required object value serialized in the `base` wire field.
+    public var base: PullRequestMinimalBase
+    public var nodeId: String
+    public var title: String
+    public var state: PullRequestStackPullRequestVariant1State
+    public var mergedAt: Date?
+    public var draft: Bool
+    public var htmlUrl: String
+    /// A GitHub user.
+    public var user: NullableSimpleUser?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case number
+        case url
+        case head
+        case base
+        case nodeId = "node_id"
+        case title
+        case state
+        case mergedAt = "merged_at"
+        case draft
+        case htmlUrl = "html_url"
+        case user
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension PullRequestStackPullRequest {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.sdkDecodeRequired(.id)
+        number = try container.sdkDecodeRequired(.number)
+        url = try container.sdkDecodeRequired(.url)
+        head = try container.sdkDecodeRequired(.head)
+        base = try container.sdkDecodeRequired(.base)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        title = try container.sdkDecodeRequired(.title)
+        state = try container.sdkDecodeRequired(.state)
+        mergedAt = try container.sdkDecodeNullable(.mergedAt)
+        draft = try container.sdkDecodeRequired(.draft)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        user = try container.sdkDecodeNullable(.user)
+        if let value = mergedAt {
+            try sdkValidateDateTime("merged_at", sdkWireString(value))
+        }
+        try sdkValidateUri("html_url", htmlUrl)
+    }
+}
+
+public extension PullRequestStackPullRequest {
+    init(
+        id: Int,
+        number: Int,
+        url: String,
+        head: PullRequestMinimalHead,
+        base: PullRequestMinimalBase,
+        nodeId: String,
+        title: String,
+        state: PullRequestStackPullRequestVariant1State,
+        mergedAt: Date?,
+        draft: Bool,
+        htmlUrl: String,
+        user: NullableSimpleUser?
+    ) throws {
+        (self.id, self.number) = (id, number)
+        (self.url, self.head) = (url, head)
+        (self.base, self.nodeId) = (base, nodeId)
+        (self.title, self.state) = (title, state)
+        (self.mergedAt, self.draft) = (mergedAt, draft)
+        (self.htmlUrl, self.user) = (htmlUrl, user)
+        if let value = self.mergedAt {
+            try sdkValidateDateTime("merged_at", sdkWireString(value))
+        }
+        try sdkValidateUri("html_url", self.htmlUrl)
     }
 }

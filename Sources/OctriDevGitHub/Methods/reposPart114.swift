@@ -32,6 +32,8 @@ public extension ReposMethods {
     ///   `workflow` means that the site is built by a custom GitHub Actions workflow.
     ///   `legacy` means that the site is built by GitHub when changes are pushed to a
     ///   specific branch.
+    /// - source: Typed representation of the
+    ///   `ReposUpdateInformationAboutPagesSiteRequestSource` API schema.
     static func reposUpdateInformationAboutPagesSite(
         config: ClientConfig,
         owner: String,
@@ -39,7 +41,7 @@ public extension ReposMethods {
         cname: SdkOptional<String>? = nil,
         httpsEnforced: Bool? = nil,
         buildType: ReposUpdateInformationAboutPagesSiteRequestBodyBuildType? = nil,
-        source: ReposUpdateInformationAboutPagesSiteRequestBodySource? = nil,
+        source: ReposUpdateInformationAboutPagesSiteRequestSource? = nil,
         requestOptions: RequestOptions? = nil
     ) async throws -> SdkEmptyResponse {
         let requestBody = ReposUpdateInformationAboutPagesSiteRequestBody(

@@ -272,54 +272,6 @@ public extension IssuesUpdateResponseVariant1SuggestionsIssueFieldValuesItem {
     }
 }
 
-public indirect enum IssuesAddAssigneesRequestBodyAssigneesItem {
-    case stringValue(String)
-    case issuesAddAssigneesRequestBodyAssigneesItemVariant1(IssuesAddAssigneesRequestBodyAssigneesItemVariant1)
-}
-
-extension IssuesAddAssigneesRequestBodyAssigneesItem: Codable {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for IssuesAddAssigneesRequestBodyAssigneesItem"
-        )
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
-    }
-}
-
-extension IssuesAddAssigneesRequestBodyAssigneesItem {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) {
-            return .stringValue(value)
-        }
-        if let value = try? container.decode(
-            IssuesAddAssigneesRequestBodyAssigneesItemVariant1.self
-        ) {
-            return .issuesAddAssigneesRequestBodyAssigneesItemVariant1(value)
-        }
-        return nil
-    }
-}
-
-extension IssuesAddAssigneesRequestBodyAssigneesItem {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .stringValue(value): try container.encode(value); return true
-        case let .issuesAddAssigneesRequestBodyAssigneesItemVariant1(value): try container.encode(value); return true
-        }
-    }
-}
-
 public indirect enum IssuesSetLabelsRequestBody {
     case issuesSetLabelsRequestBodyVariant0(IssuesSetLabelsRequestBodyVariant0)
     case stringList([String])
@@ -331,6 +283,11 @@ public indirect enum IssuesSetLabelsRequestBody {
 extension IssuesSetLabelsRequestBody: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) {
+                self = value; return
+            }
+        }
         if let value = Self.decodeGroup1(from: container) {
             self = value; return
         }
@@ -344,6 +301,20 @@ extension IssuesSetLabelsRequestBody: Codable {
         if try encodeGroup1(to: encoder) {
             return
         }
+    }
+}
+
+extension IssuesSetLabelsRequestBody {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(IssuesSetLabelsRequestBodyVariant0.self),
+           sdkKeepsEveryKey(value, of: raw) {
+            return .issuesSetLabelsRequestBodyVariant0(value)
+        }
+        if let value = try? container.decode(IssuesSetLabelsRequestBodyVariant2.self),
+           sdkKeepsEveryKey(value, of: raw) {
+            return .issuesSetLabelsRequestBodyVariant2(value)
+        }
+        return nil
     }
 }
 
@@ -382,50 +353,6 @@ extension IssuesSetLabelsRequestBody {
         case let .issuesSetLabelsRequestBodyVariant3ItemList(value): try container.encode(value); return true
         case let .stringValue(value): try container.encode(value); return true
         }
-    }
-}
-
-public struct IssuesUpdateRequestBodyAssigneesItemVariant1: Codable {
-    public var login: String?
-    /// Optional reasoning for selecting this assignee.
-    public var rationale: String?
-    /// If `true`, the change is stored as a pending suggestion for human review rather than applied directly.
-    public var suggest: Bool?
-    /// The confidence level for this assignee choice.
-    public var confidence: IssuesUpdateRequestBodyAssigneesItemVariant1Confidence?
-
-    enum CodingKeys: String, CodingKey {
-        case login
-        case rationale
-        case suggest
-        case confidence
-    }
-
-    init() {
-        (login, rationale, suggest, confidence) = (nil, nil, nil, nil)
-    }
-}
-
-public extension IssuesUpdateRequestBodyAssigneesItemVariant1 {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        login = try container.sdkDecodeIfPresent(.login)
-        rationale = try container.sdkDecodeIfPresent(.rationale)
-        suggest = try container.sdkDecodeIfPresent(.suggest)
-        confidence = try container.sdkDecodeIfPresent(.confidence)
-    }
-}
-
-public extension IssuesUpdateRequestBodyAssigneesItemVariant1 {
-    init(
-        login: String? = nil,
-        rationale: String? = nil,
-        suggest: Bool? = nil,
-        confidence: IssuesUpdateRequestBodyAssigneesItemVariant1Confidence? = nil
-    ) {
-        self.init()
-        (self.login, self.rationale) = (login, rationale)
-        (self.suggest, self.confidence) = (suggest, confidence)
     }
 }
 
@@ -534,54 +461,6 @@ public extension IssuesAddLabelsRequestBodyVariant2Item {
     }
 }
 
-public indirect enum IssuesUpdateRequestBodyLabelsItem {
-    case stringValue(String)
-    case issuesUpdateRequestBodyLabelsItemVariant1(IssuesUpdateRequestBodyLabelsItemVariant1)
-}
-
-extension IssuesUpdateRequestBodyLabelsItem: Codable {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for IssuesUpdateRequestBodyLabelsItem"
-        )
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
-    }
-}
-
-extension IssuesUpdateRequestBodyLabelsItem {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) {
-            return .stringValue(value)
-        }
-        if let value = try? container.decode(
-            IssuesUpdateRequestBodyLabelsItemVariant1.self
-        ) {
-            return .issuesUpdateRequestBodyLabelsItemVariant1(value)
-        }
-        return nil
-    }
-}
-
-extension IssuesUpdateRequestBodyLabelsItem {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .stringValue(value): try container.encode(value); return true
-        case let .issuesUpdateRequestBodyLabelsItemVariant1(value): try container.encode(value); return true
-        }
-    }
-}
-
 public struct IssuesSetLabelsRequestBodyVariant0: Codable {
     /// The names of the labels to set for the issue. The labels you set replace any existing labels. You can pass
     /// an empty array to remove all labels. Alternatively, you can pass a single label as a `string` or an `array`
@@ -615,5 +494,124 @@ public extension IssuesSetLabelsRequestBodyVariant0 {
         if let value = self.labels {
             try validateItems("labels", value, min: 1, max: nil)
         }
+    }
+}
+
+public struct IssuesSetIssueFieldValuesRequestBodyIssueFieldValuesItem: Codable {
+    /// The ID of the issue field to set
+    /// - Example: 123
+    public var fieldId: Int
+    /// The value to set for the field. The type depends on the field's data type: - For text fields: provide a
+    /// string value - For single_select fields: provide the option name as a string (must match an existing option)
+    /// - For number fields: provide a numeric value - For date fields: provide an ISO 8601 date string
+    /// - Example: "Critical"
+    public var value: IssuesSetIssueFieldValuesRequestBodyIssueFieldValuesItemValue
+
+    enum CodingKeys: String, CodingKey {
+        case fieldId = "field_id"
+        case value
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension IssuesSetIssueFieldValuesRequestBodyIssueFieldValuesItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.fieldId) else {
+            throw SdkValidationError(
+                field: "field_id",
+                code: "required",
+                message: "Validation failed for 'field_id': value is required"
+            )
+        }
+        guard container.contains(.value) else {
+            throw SdkValidationError(
+                field: "value",
+                code: "required",
+                message: "Validation failed for 'value': value is required"
+            )
+        }
+        fieldId = try container.sdkDecodeRequired(.fieldId)
+        value = try container.sdkDecodeRequired(.value)
+    }
+}
+
+public extension IssuesSetIssueFieldValuesRequestBodyIssueFieldValuesItem {
+    init(fieldId: Int, value: IssuesSetIssueFieldValuesRequestBodyIssueFieldValuesItemValue) {
+        (self.fieldId, self.value) = (fieldId, value)
+    }
+}
+
+public struct IssuesSetLabelsRequestBodyVariant2: Codable {
+    public var labels: [IssuesSetLabelsRequestBodyVariant2LabelsItem]?
+
+    enum CodingKeys: String, CodingKey {
+        case labels
+    }
+
+    init() {
+        labels = nil
+    }
+}
+
+public extension IssuesSetLabelsRequestBodyVariant2 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        labels = try container.sdkDecodeIfPresent(.labels)
+        if let value = labels {
+            try validateItems("labels", value, min: 1, max: nil)
+        }
+    }
+}
+
+public extension IssuesSetLabelsRequestBodyVariant2 {
+    init(labels: [IssuesSetLabelsRequestBodyVariant2LabelsItem]? = nil) throws {
+        self.init()
+        self.labels = labels
+        if let value = self.labels {
+            try validateItems("labels", value, min: 1, max: nil)
+        }
+    }
+}
+
+public struct IssuesAddLabelsRequestBodyVariant0LabelsItemVariant1: Codable {
+    /// The name of the label to add.
+    public var name: String
+    /// Optional reasoning for adding this label.
+    public var rationale: String?
+    /// If `true`, the label is stored as a pending suggestion for human review rather than applied directly.
+    public var suggest: Bool?
+    /// The confidence level for this label choice.
+    public var confidence: IssuesAddLabelsRequestBodyVariant0LabelsItemVariant1Confidence?
+
+    enum CodingKeys: String, CodingKey {
+        case name
+        case rationale
+        case suggest
+        case confidence
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension IssuesAddLabelsRequestBodyVariant0LabelsItemVariant1 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        name = try container.sdkDecodeRequired(.name)
+        rationale = try container.sdkDecodeIfPresent(.rationale)
+        suggest = try container.sdkDecodeIfPresent(.suggest)
+        confidence = try container.sdkDecodeIfPresent(.confidence)
     }
 }

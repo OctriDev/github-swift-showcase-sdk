@@ -69,7 +69,12 @@ public extension ReposMethods {
             decoder: .json,
             operationId: "reposDeleteFile",
             options: requestOptions,
-            errors: ["404": BasicError.self, "409": BasicError.self, "422": ValidationError.self]
+            errors: [
+                "404": BasicError.self,
+                "409": BasicError.self,
+                "422": ValidationError.self,
+                "503": ServiceUnavailable.self,
+            ]
         )).data
     }
 }

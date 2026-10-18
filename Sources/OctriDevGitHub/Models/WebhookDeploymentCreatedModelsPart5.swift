@@ -4,122 +4,6 @@
 import Foundation
 
 /// WebhookDeploymentCreated domain models
-/// Required object value serialized in the `workflow_run` wire field.
-public struct WebhookDeploymentCreatedWorkflowRun: Codable {
-    /// Required object value serialized in the `actor` wire field.
-    public var actor: WebhookDeploymentCreatedWorkflowRunActor?
-    /// Required `integer` value serialized in the `check_suite_id` wire field.
-    public var checkSuiteId: Int
-    /// Required `string` value serialized in the `check_suite_node_id` wire field.
-    public var checkSuiteNodeId: String
-    /// Required enumerated value serialized in the `conclusion` wire field.
-    public var conclusion: WebhookDeploymentCreatedWorkflowRunConclusion?
-    /// Required `date-time`-formatted value serialized in the `created_at` wire field.
-    public var createdAt: Date
-    /// Required `string` value serialized in the `display_title` wire field.
-    public var displayTitle: String
-    /// Required `string` value serialized in the `event` wire field.
-    public var event: String
-    /// Required `string` value serialized in the `head_branch` wire field.
-    public var headBranch: String
-    /// Required `string` value serialized in the `head_sha` wire field.
-    public var headSha: String
-    /// Required `uri`-formatted value serialized in the `html_url` wire field.
-    public var htmlUrl: String
-    /// Required `integer` value serialized in the `id` wire field.
-    public var id: Int
-    /// Required `string` value serialized in the `name` wire field.
-    public var name: String
-    /// Required `string` value serialized in the `node_id` wire field.
-    public var nodeId: String
-    /// Required `string` value serialized in the `path` wire field.
-    public var path: String
-    /// Required array value serialized in the `pull_requests` wire field.
-    public var pullRequests: [WebhookDeploymentCreatedWorkflowRunPullRequestsItem]
-    /// Required `integer` value serialized in the `run_attempt` wire field.
-    public var runAttempt: Int
-    /// Required `integer` value serialized in the `run_number` wire field.
-    public var runNumber: Int
-    /// Required `date-time`-formatted value serialized in the `run_started_at` wire field.
-    public var runStartedAt: Date
-    /// Required enumerated value serialized in the `status` wire field.
-    public var status: WebhookDeploymentCreatedWorkflowRunStatus
-    /// Required `date-time`-formatted value serialized in the `updated_at` wire field.
-    public var updatedAt: Date
-    /// Required `uri`-formatted value serialized in the `url` wire field.
-    public var url: String
-    /// Required `integer` value serialized in the `workflow_id` wire field.
-    public var workflowId: Int
-    /// Optional `string` value serialized in the `artifacts_url` wire field.
-    public var artifactsUrl: String?
-    /// Optional `string` value serialized in the `cancel_url` wire field.
-    public var cancelUrl: String?
-    /// Optional `string` value serialized in the `check_suite_url` wire field.
-    public var checkSuiteUrl: String?
-    /// Optional API value serialized in the `head_commit` wire field.
-    public var headCommit: JSONValue?
-    /// Optional object value serialized in the `head_repository` wire field.
-    public var headRepository: WebhookDeploymentCreatedWorkflowRunHeadRepository?
-    /// Optional `string` value serialized in the `jobs_url` wire field.
-    public var jobsUrl: String?
-    /// Optional `string` value serialized in the `logs_url` wire field.
-    public var logsUrl: String?
-    /// Optional API value serialized in the `previous_attempt_url` wire field.
-    public var previousAttemptUrl: JSONValue?
-    /// Optional array value serialized in the `referenced_workflows` wire field.
-    public var referencedWorkflows: [WebhookDeploymentCreatedWorkflowRunReferencedWorkflowsItem]?
-    /// Optional object value serialized in the `repository` wire field.
-    public var repository: WebhookDeploymentCreatedWorkflowRunRepository?
-    /// Optional `string` value serialized in the `rerun_url` wire field.
-    public var rerunUrl: String?
-    /// Optional object value serialized in the `triggering_actor` wire field.
-    public var triggeringActor: WebhookDeploymentCreatedWorkflowRunTriggeringActor?
-    /// Optional `string` value serialized in the `workflow_url` wire field.
-    public var workflowUrl: String?
-
-    enum CodingKeys: String, CodingKey {
-        case actor
-        case checkSuiteId = "check_suite_id"
-        case checkSuiteNodeId = "check_suite_node_id"
-        case conclusion
-        case createdAt = "created_at"
-        case displayTitle = "display_title"
-        case event
-        case headBranch = "head_branch"
-        case headSha = "head_sha"
-        case htmlUrl = "html_url"
-        case id
-        case name
-        case nodeId = "node_id"
-        case path
-        case pullRequests = "pull_requests"
-        case runAttempt = "run_attempt"
-        case runNumber = "run_number"
-        case runStartedAt = "run_started_at"
-        case status
-        case updatedAt = "updated_at"
-        case url
-        case workflowId = "workflow_id"
-        case artifactsUrl = "artifacts_url"
-        case cancelUrl = "cancel_url"
-        case checkSuiteUrl = "check_suite_url"
-        case headCommit = "head_commit"
-        case headRepository = "head_repository"
-        case jobsUrl = "jobs_url"
-        case logsUrl = "logs_url"
-        case previousAttemptUrl = "previous_attempt_url"
-        case referencedWorkflows = "referenced_workflows"
-        case repository
-        case rerunUrl = "rerun_url"
-        case triggeringActor = "triggering_actor"
-        case workflowUrl = "workflow_url"
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
 public extension WebhookDeploymentCreatedWorkflowRun {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -621,6 +505,113 @@ public struct WebhookDeploymentCreatedWorkflowRunReferencedWorkflowsItem: Codabl
         case path
         case sha
         case ref
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension WebhookDeploymentCreatedWorkflowRunReferencedWorkflowsItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.path) else {
+            throw SdkValidationError(
+                field: "path",
+                code: "required",
+                message: "Validation failed for 'path': value is required"
+            )
+        }
+        guard container.contains(.sha) else {
+            throw SdkValidationError(
+                field: "sha",
+                code: "required",
+                message: "Validation failed for 'sha': value is required"
+            )
+        }
+        path = try container.sdkDecodeRequired(.path)
+        sha = try container.sdkDecodeRequired(.sha)
+        ref = try container.sdkDecodeIfPresent(.ref)
+    }
+}
+
+public extension WebhookDeploymentCreatedWorkflowRunReferencedWorkflowsItem {
+    init(path: String, sha: String, ref: String? = nil) {
+        (self.path, self.sha) = (path, sha)
+        self.ref = ref
+    }
+}
+
+/// Required object value serialized in the `actor` wire field.
+public struct WebhookDeploymentCreatedWorkflowRunActor: Codable {
+    /// Required `integer` value serialized in the `id` wire field.
+    public var id: Int
+    /// Required `string` value serialized in the `login` wire field.
+    public var login: String
+    /// Optional `uri`-formatted value serialized in the `avatar_url` wire field.
+    public var avatarUrl: String?
+    /// Optional `boolean` value serialized in the `deleted` wire field.
+    public var deleted: Bool?
+    /// Optional `string` value serialized in the `email` wire field.
+    public var email: String?
+    /// Optional `uri-template`-formatted value serialized in the `events_url` wire field.
+    public var eventsUrl: String?
+    /// Optional `uri`-formatted value serialized in the `followers_url` wire field.
+    public var followersUrl: String?
+    /// Optional `uri-template`-formatted value serialized in the `following_url` wire field.
+    public var followingUrl: String?
+    /// Optional `uri-template`-formatted value serialized in the `gists_url` wire field.
+    public var gistsUrl: String?
+    /// Optional `string` value serialized in the `gravatar_id` wire field.
+    public var gravatarId: String?
+    /// Optional `uri`-formatted value serialized in the `html_url` wire field.
+    public var htmlUrl: String?
+    /// Optional `string` value serialized in the `name` wire field.
+    public var name: String?
+    /// Optional `string` value serialized in the `node_id` wire field.
+    public var nodeId: String?
+    /// Optional `uri`-formatted value serialized in the `organizations_url` wire field.
+    public var organizationsUrl: String?
+    /// Optional `uri`-formatted value serialized in the `received_events_url` wire field.
+    public var receivedEventsUrl: String?
+    /// Optional `uri`-formatted value serialized in the `repos_url` wire field.
+    public var reposUrl: String?
+    /// Optional `boolean` value serialized in the `site_admin` wire field.
+    public var siteAdmin: Bool?
+    /// Optional `uri-template`-formatted value serialized in the `starred_url` wire field.
+    public var starredUrl: String?
+    /// Optional `uri`-formatted value serialized in the `subscriptions_url` wire field.
+    public var subscriptionsUrl: String?
+    /// Optional enumerated value serialized in the `type` wire field.
+    public var type: WebhookDeploymentCreatedWorkflowRunActorType?
+    /// Optional `uri`-formatted value serialized in the `url` wire field.
+    public var url: String?
+    /// Optional `string` value serialized in the `user_view_type` wire field.
+    public var userViewType: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case login
+        case avatarUrl = "avatar_url"
+        case deleted
+        case email
+        case eventsUrl = "events_url"
+        case followersUrl = "followers_url"
+        case followingUrl = "following_url"
+        case gistsUrl = "gists_url"
+        case gravatarId = "gravatar_id"
+        case htmlUrl = "html_url"
+        case name
+        case nodeId = "node_id"
+        case organizationsUrl = "organizations_url"
+        case receivedEventsUrl = "received_events_url"
+        case reposUrl = "repos_url"
+        case siteAdmin = "site_admin"
+        case starredUrl = "starred_url"
+        case subscriptionsUrl = "subscriptions_url"
+        case type
+        case url
+        case userViewType = "user_view_type"
     }
 
     private init(sdkCopy value: Self) {

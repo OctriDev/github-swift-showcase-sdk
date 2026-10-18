@@ -6,521 +6,575 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testPackagesRestorePackageForUserPackagesRestorePackageForUser401ReachesMockAndDecodesResponse() async throws {
+    func testProjectsCreateDraftItemForOrgProjectsCreateDraftItemForOrg401ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
         _ = client
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1329Expected.utf8),
+            with: Data(sdkMethodFixture1359Expected.utf8),
             options: [.fragmentsAllowed]
         )
         do {
-            _ = try await client.packages.restorePackageForUser(
-                packageType: decoded("\"npm\""),
-                packageName: decoded("\"Example Name\""),
-                username: decoded("\"Example Name\""),
-                token: decoded("\"token\"")
-            )
-            XCTFail("packagesRestorePackageForUser did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 401)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "packagesRestorePackageForUser decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "packagesRestorePackageForUser decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testPackagesRestorePackageVersionForAuthenticatedUserPackagesRestX40384d40c8ReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        _ = try await client.packages.restorePackageVersionForAuthenticatedUser(
-            packageType: decoded("\"npm\""),
-            packageName: decoded("\"Example Name\""),
-            packageVersionId: decoded("30")
-        )
-        XCTAssertTrue(true)
-    }
-
-    func testPackagesRestorePackageVersionForAuthenticatedUserPackagesRestXa2c38ff2d5ReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1331Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.packages.restorePackageVersionForAuthenticatedUser(
-                packageType: decoded("\"npm\""),
-                packageName: decoded("\"Example Name\""),
-                packageVersionId: decoded("30")
-            )
-            XCTFail("packagesRestorePackageVersionForAuthenticatedUser did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 401)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "packagesRestorePackageVersionForAuthenticatedUser decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "packagesRestorePackageVersionForAuthenticatedUser decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testPackagesRestorePackageVersionForOrgPackagesRestorePackageVersionForOrgReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        _ = try await client.packages.restorePackageVersionForOrg(
-            packageType: decoded("\"npm\""),
-            packageName: decoded("\"Example Name\""),
-            org: decoded("\"org\""),
-            packageVersionId: decoded("30")
-        )
-        XCTAssertTrue(true)
-    }
-
-    func testPackagesRestorePackageVersionForOrgPackagesRestorePackageVersX32aa7c575eReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1333Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.packages.restorePackageVersionForOrg(
-                packageType: decoded("\"npm\""),
-                packageName: decoded("\"Example Name\""),
+            _ = try await client.projects.createDraftItemForOrg(
                 org: decoded("\"org\""),
-                packageVersionId: decoded("30")
+                projectNumber: decoded("1"),
+                title: decoded("\"Sample Draft Issue Title\""),
+                body: decoded("null")
             )
-            XCTFail("packagesRestorePackageVersionForOrg did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "packagesRestorePackageVersionForOrg decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "packagesRestorePackageVersionForOrg decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
     }
 
-    func testPackagesRestorePackageVersionForUserPackagesRestorePackageVersionForUserReachesMockAndDecodesResponse(
-    ) async throws {
+    func testProjectsCreateViewForOrgProjectsCreateViewForOrgReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        _ = try await client.packages.restorePackageVersionForUser(
-            packageType: decoded("\"npm\""),
-            packageName: decoded("\"Example Name\""),
-            username: decoded("\"Example Name\""),
-            packageVersionId: decoded("30")
-        )
-        XCTAssertTrue(true)
-    }
-
-    func testPackagesRestorePackageVersionForUserPackagesRestorePackageVerX242baacf7eReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1335Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.packages.restorePackageVersionForUser(
-                packageType: decoded("\"npm\""),
-                packageName: decoded("\"Example Name\""),
-                username: decoded("\"Example Name\""),
-                packageVersionId: decoded("30")
-            )
-            XCTFail("packagesRestorePackageVersionForUser did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 401)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "packagesRestorePackageVersionForUser decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "packagesRestorePackageVersionForUser decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testPrivateRegistriesCreateOrgPrivateRegistryPrivateRegistriesCreX2219737b01ReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        var options = try PrivateRegistriesMethods.PrivateRegistriesCreateOrgPrivateRegistryOptions(
+        var options = try ProjectsMethods.ProjectsCreateViewForOrgOptions(
             org: decoded("\"org\""),
-            registryType: decoded("\"maven_repository\""),
-            url: decoded("\"https://maven.pkg.github.com/organization/\""),
-            visibility: decoded("\"private\"")
+            projectNumber: decoded("1"),
+            name: decoded("\"All Issues\""),
+            layout: decoded("\"table\"")
         )
-        options.username = try decoded("\"monalisa\"")
-        options.replacesBase = try decoded("true")
-        options.encryptedValue = try decoded("\"c2VjcmV0\"")
-        options.keyId = try decoded("\"012345678912345678\"")
-        options.selectedRepositoryIds = try decoded("null")
-        options.authType = try decoded("null")
-        options.tenantId = try decoded("null")
-        options.clientId = try decoded("null")
-        options.awsRegion = try decoded("null")
-        options.accountId = try decoded("null")
-        options.roleName = try decoded("null")
-        options.domain = try decoded("null")
-        options.domainOwner = try decoded("null")
-        options.jfrogOidcProviderName = try decoded("null")
-        options.audience = try decoded("null")
-        options.identityMappingName = try decoded("null")
-        options.namespace = try decoded("null")
-        options.serviceSlug = try decoded("null")
-        options.apiHost = try decoded("null")
-        options.workloadIdentityProvider = try decoded("null")
-        options.serviceAccount = try decoded("null")
-        let actual = try await client.privateRegistries.createOrgPrivateRegistry(
-            options: options
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1336Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "privateRegistriesCreateOrgPrivateRegistry decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testPrivateRegistriesCreateOrgPrivateRegistryPrivateRegistriesCreX25b563e8cfReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
-            return
-        }
-        _ = client
-        var options = try PrivateRegistriesMethods.PrivateRegistriesCreateOrgPrivateRegistryOptions(
-            org: decoded("\"org\""),
-            registryType: decoded("\"maven_repository\""),
-            url: decoded("\"https://maven.pkg.github.com/organization/\""),
-            visibility: decoded("\"private\"")
-        )
-        options.username = try decoded("\"monalisa\"")
-        options.replacesBase = try decoded("true")
-        options.encryptedValue = try decoded("\"c2VjcmV0\"")
-        options.keyId = try decoded("\"012345678912345678\"")
-        options.selectedRepositoryIds = try decoded("null")
-        options.authType = try decoded("null")
-        options.tenantId = try decoded("null")
-        options.clientId = try decoded("null")
-        options.awsRegion = try decoded("null")
-        options.accountId = try decoded("null")
-        options.roleName = try decoded("null")
-        options.domain = try decoded("null")
-        options.domainOwner = try decoded("null")
-        options.jfrogOidcProviderName = try decoded("null")
-        options.audience = try decoded("null")
-        options.identityMappingName = try decoded("null")
-        options.namespace = try decoded("null")
-        options.serviceSlug = try decoded("null")
-        options.apiHost = try decoded("null")
-        options.workloadIdentityProvider = try decoded("null")
-        options.serviceAccount = try decoded("null")
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1337Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
+        options.filter = try decoded("\"is:issue\"")
+        options.visibleFields = try decoded("[123,456,789]")
+        options.sortBy = try decoded("null")
+        options.groupBy = try decoded("null")
+        options.verticalGroupBy = try decoded("null")
         do {
-            _ = try await client.privateRegistries.createOrgPrivateRegistry(
+            _ = try await client.projects.createViewForOrg(
                 options: options
             )
-            XCTFail("privateRegistriesCreateOrgPrivateRegistry did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 404)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "privateRegistriesCreateOrgPrivateRegistry decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "privateRegistriesCreateOrgPrivateRegistry decoded an error body " +
-                    "that differs from the mock"
-            )
+            XCTFail("decoded a body its schema refuses")
+        } catch is SdkResponseDecodeError {
+        } catch {
+            XCTFail("refused with \(error), not SdkResponseDecodeError")
         }
         XCTAssertTrue(true)
     }
 
-    func testPrivateRegistriesDeleteOrgPrivateRegistryPrivateRegistriesDelX2a00aaee6dReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient() else {
+    func testProjectsCreateViewForOrgProjectsCreateViewForOrg401ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
         _ = client
-        _ = try await client.privateRegistries.deleteOrgPrivateRegistry(
+        var options = try ProjectsMethods.ProjectsCreateViewForOrgOptions(
             org: decoded("\"org\""),
-            secretName: decoded("\"Example Name\"")
+            projectNumber: decoded("1"),
+            name: decoded("\"All Issues\""),
+            layout: decoded("\"table\"")
         )
-        XCTAssertTrue(true)
-    }
-
-    func testPrivateRegistriesDeleteOrgPrivateRegistryPrivateRegistriesDelX25d7e2c927ReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
-            return
-        }
-        _ = client
+        options.filter = try decoded("\"is:issue\"")
+        options.visibleFields = try decoded("[123,456,789]")
+        options.sortBy = try decoded("null")
+        options.groupBy = try decoded("null")
+        options.verticalGroupBy = try decoded("null")
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1339Expected.utf8),
+            with: Data(sdkMethodFixture1361Expected.utf8),
             options: [.fragmentsAllowed]
         )
         do {
-            _ = try await client.privateRegistries.deleteOrgPrivateRegistry(
-                org: decoded("\"org\""),
-                secretName: decoded("\"Example Name\"")
+            _ = try await client.projects.createViewForOrg(
+                options: options
             )
-            XCTFail("privateRegistriesDeleteOrgPrivateRegistry did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 400)
+            XCTAssertEqual(error.statusCode, 401)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "privateRegistriesDeleteOrgPrivateRegistry decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "privateRegistriesDeleteOrgPrivateRegistry decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
     }
 
-    func testPrivateRegistriesGetOrgPrivateRegistryPrivateRegistriesGetOrgX28d9b36725ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testProjectsCreateViewForUserProjectsCreateViewForUserReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        let actual = try await client.privateRegistries.getOrgPrivateRegistry(
-            org: decoded("\"org\""),
-            secretName: decoded("\"Example Name\"")
+        var options = try ProjectsMethods.ProjectsCreateViewForUserOptions(
+            userId: decoded("\"user-1\""),
+            projectNumber: decoded("1"),
+            name: decoded("\"All Issues\""),
+            layout: decoded("\"table\"")
         )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1340Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "privateRegistriesGetOrgPrivateRegistry decoded a response " +
-                "that differs from the mock"
-        )
+        options.filter = try decoded("\"is:issue\"")
+        options.visibleFields = try decoded("[123,456,789]")
+        options.sortBy = try decoded("null")
+        options.groupBy = try decoded("null")
+        options.verticalGroupBy = try decoded("null")
+        do {
+            _ = try await client.projects.createViewForUser(
+                options: options
+            )
+            XCTFail("decoded a body its schema refuses")
+        } catch is SdkResponseDecodeError {
+        } catch {
+            XCTFail("refused with \(error), not SdkResponseDecodeError")
+        }
+        XCTAssertTrue(true)
     }
 
-    func testPrivateRegistriesGetOrgPrivateRegistryPrivateRegistriesGetOrgX0e37048066ReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
+    func testProjectsCreateViewForUserProjectsCreateViewForUser401ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
         _ = client
+        var options = try ProjectsMethods.ProjectsCreateViewForUserOptions(
+            userId: decoded("\"user-1\""),
+            projectNumber: decoded("1"),
+            name: decoded("\"All Issues\""),
+            layout: decoded("\"table\"")
+        )
+        options.filter = try decoded("\"is:issue\"")
+        options.visibleFields = try decoded("[123,456,789]")
+        options.sortBy = try decoded("null")
+        options.groupBy = try decoded("null")
+        options.verticalGroupBy = try decoded("null")
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1341Expected.utf8),
+            with: Data(sdkMethodFixture1363Expected.utf8),
             options: [.fragmentsAllowed]
         )
         do {
-            _ = try await client.privateRegistries.getOrgPrivateRegistry(
-                org: decoded("\"org\""),
-                secretName: decoded("\"Example Name\"")
+            _ = try await client.projects.createViewForUser(
+                options: options
             )
-            XCTFail("privateRegistriesGetOrgPrivateRegistry did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 404)
+            XCTAssertEqual(error.statusCode, 401)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "privateRegistriesGetOrgPrivateRegistry decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "privateRegistriesGetOrgPrivateRegistry decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
     }
 
-    func testPrivateRegistriesGetOrgPublicKeyPrivateRegistriesGetOrgPublicKeyReachesMockAndDecodesResponse(
-    ) async throws {
+    func testProjectsDeleteItemForOrgProjectsDeleteItemForOrgReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        let actual = try await client.privateRegistries.getOrgPublicKey(
+        _ = try await client.projects.deleteItemForOrg(
+            projectNumber: decoded("1"),
+            org: decoded("\"org\""),
+            itemId: decoded("1")
+        )
+        XCTAssertTrue(true)
+    }
+
+    func testProjectsDeleteItemForOrgProjectsDeleteItemForOrg401ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1365Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.projects.deleteItemForOrg(
+                projectNumber: decoded("1"),
+                org: decoded("\"org\""),
+                itemId: decoded("1")
+            )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 401)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testProjectsDeleteItemForUserProjectsDeleteItemForUserReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        _ = try await client.projects.deleteItemForUser(
+            projectNumber: decoded("1"),
+            username: decoded("\"Example Name\""),
+            itemId: decoded("1")
+        )
+        XCTAssertTrue(true)
+    }
+
+    func testProjectsDeleteItemForUserProjectsDeleteItemForUser401ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1367Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.projects.deleteItemForUser(
+                projectNumber: decoded("1"),
+                username: decoded("\"Example Name\""),
+                itemId: decoded("1")
+            )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 401)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testProjectsGetFieldForOrgProjectsGetFieldForOrgReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.projects.getFieldForOrg(
+            projectNumber: decoded("1"),
+            fieldId: decoded("1"),
             org: decoded("\"org\"")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1342Expected.utf8),
+            with: Data(sdkMethodFixture1368Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "privateRegistriesGetOrgPublicKey decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
-    func testPrivateRegistriesGetOrgPublicKeyPrivateRegistriesGetOrgPublicKey404ReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
+    func testProjectsGetFieldForOrgProjectsGetFieldForOrg401ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
         _ = client
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1343Expected.utf8),
+            with: Data(sdkMethodFixture1369Expected.utf8),
             options: [.fragmentsAllowed]
         )
         do {
-            _ = try await client.privateRegistries.getOrgPublicKey(
+            _ = try await client.projects.getFieldForOrg(
+                projectNumber: decoded("1"),
+                fieldId: decoded("1"),
                 org: decoded("\"org\"")
             )
-            XCTFail("privateRegistriesGetOrgPublicKey did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 404)
+            XCTAssertEqual(error.statusCode, 401)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "privateRegistriesGetOrgPublicKey decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "privateRegistriesGetOrgPublicKey decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
     }
 
-    func testPrivateRegistriesListOrgPrivateRegistriesPrivateRegistriesLisX797d49a037ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testProjectsGetFieldForUserProjectsGetFieldForUserReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        let actual = try await client.privateRegistries.listOrgPrivateRegistries(
-            org: decoded("\"org\""),
-            perPage: decoded("30"),
-            page: decoded("1")
+        let actual = try await client.projects.getFieldForUser(
+            projectNumber: decoded("1"),
+            fieldId: decoded("1"),
+            username: decoded("\"Example Name\"")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1344Expected.utf8),
+            with: Data(sdkMethodFixture1370Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "privateRegistriesListOrgPrivateRegistries decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
-    func testPrivateRegistriesListOrgPrivateRegistriesPrivateRegistriesLisXc6ea1fb1baReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
+    func testProjectsGetFieldForUserProjectsGetFieldForUser401ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
         _ = client
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1345Expected.utf8),
+            with: Data(sdkMethodFixture1371Expected.utf8),
             options: [.fragmentsAllowed]
         )
         do {
-            _ = try await client.privateRegistries.listOrgPrivateRegistries(
-                org: decoded("\"org\""),
-                perPage: decoded("30"),
-                page: decoded("1")
+            _ = try await client.projects.getFieldForUser(
+                projectNumber: decoded("1"),
+                fieldId: decoded("1"),
+                username: decoded("\"Example Name\"")
             )
-            XCTFail("privateRegistriesListOrgPrivateRegistries did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 400)
+            XCTAssertEqual(error.statusCode, 401)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "privateRegistriesListOrgPrivateRegistries decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "privateRegistriesListOrgPrivateRegistries decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
     }
 
-    func testPrivateRegistriesUpdateOrgPrivateRegistryPrivateRegistriesUpdXb694917a13ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testProjectsGetForOrgProjectsGetForOrgReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        var options = try PrivateRegistriesMethods.PrivateRegistriesUpdateOrgPrivateRegistryOptions(
+        let actual = try await client.projects.getForOrg(
+            projectNumber: decoded("1"),
+            org: decoded("\"org\"")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1372Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testProjectsGetForOrgProjectsGetForOrg401ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1373Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.projects.getForOrg(
+                projectNumber: decoded("1"),
+                org: decoded("\"org\"")
+            )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 401)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testProjectsGetForUserProjectsGetForUserReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.projects.getForUser(
+            projectNumber: decoded("1"),
+            username: decoded("\"Example Name\"")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1374Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testProjectsGetForUserProjectsGetForUser401ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1375Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.projects.getForUser(
+                projectNumber: decoded("1"),
+                username: decoded("\"Example Name\"")
+            )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 401)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testProjectsGetOrgItemProjectsGetOrgItemReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.projects.getOrgItem(
+            projectNumber: decoded("1"),
             org: decoded("\"org\""),
-            secretName: decoded("\"Example Name\"")
+            itemId: decoded("1"),
+            fields: decoded("\"fields\"")
         )
-        options.registryType = try decoded("null")
-        options.url = try decoded("null")
-        options.username = try decoded("\"monalisa\"")
-        options.replacesBase = try decoded("null")
-        options.encryptedValue = try decoded("\"c2VjcmV0\"")
-        options.keyId = try decoded("\"012345678912345678\"")
-        options.visibility = try decoded("null")
-        options.selectedRepositoryIds = try decoded("null")
-        options.authType = try decoded("null")
-        options.tenantId = try decoded("null")
-        options.clientId = try decoded("null")
-        options.awsRegion = try decoded("null")
-        options.accountId = try decoded("null")
-        options.roleName = try decoded("null")
-        options.domain = try decoded("null")
-        options.domainOwner = try decoded("null")
-        options.jfrogOidcProviderName = try decoded("null")
-        options.audience = try decoded("null")
-        options.identityMappingName = try decoded("null")
-        options.namespace = try decoded("null")
-        options.serviceSlug = try decoded("null")
-        options.apiHost = try decoded("null")
-        options.workloadIdentityProvider = try decoded("null")
-        options.serviceAccount = try decoded("null")
-        _ = try await client.privateRegistries.updateOrgPrivateRegistry(
-            options: options
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1376Expected.utf8),
+            options: [.fragmentsAllowed]
         )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testProjectsGetOrgItemProjectsGetOrgItem401ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1377Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.projects.getOrgItem(
+                projectNumber: decoded("1"),
+                org: decoded("\"org\""),
+                itemId: decoded("1"),
+                fields: decoded("\"fields\"")
+            )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 401)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testProjectsGetUserItemProjectsGetUserItemReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.projects.getUserItem(
+            projectNumber: decoded("1"),
+            username: decoded("\"Example Name\""),
+            itemId: decoded("1"),
+            fields: decoded("\"fields\"")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1378Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testProjectsGetUserItemProjectsGetUserItem401ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1379Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.projects.getUserItem(
+                projectNumber: decoded("1"),
+                username: decoded("\"Example Name\""),
+                itemId: decoded("1"),
+                fields: decoded("\"fields\"")
+            )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 401)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testProjectsListFieldsForOrgProjectsListFieldsForOrgReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        do {
+            _ = try await client.projects.listFieldsForOrg(
+                projectNumber: decoded("1"),
+                org: decoded("\"org\""),
+                perPage: decoded("30"),
+                before: decoded("\"before\""),
+                after: decoded("\"after\"")
+            )
+            XCTFail("decoded a body its schema refuses")
+        } catch is SdkResponseDecodeError {
+        } catch {
+            XCTFail("refused with \(error), not SdkResponseDecodeError")
+        }
         XCTAssertTrue(true)
     }
 }

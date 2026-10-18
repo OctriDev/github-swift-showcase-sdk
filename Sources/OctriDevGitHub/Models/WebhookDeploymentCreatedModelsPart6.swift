@@ -4,113 +4,6 @@
 import Foundation
 
 /// WebhookDeploymentCreated domain models
-public extension WebhookDeploymentCreatedWorkflowRunReferencedWorkflowsItem {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.path) else {
-            throw SdkValidationError(
-                field: "path",
-                code: "required",
-                message: "Validation failed for 'path': value is required"
-            )
-        }
-        guard container.contains(.sha) else {
-            throw SdkValidationError(
-                field: "sha",
-                code: "required",
-                message: "Validation failed for 'sha': value is required"
-            )
-        }
-        path = try container.sdkDecodeRequired(.path)
-        sha = try container.sdkDecodeRequired(.sha)
-        ref = try container.sdkDecodeIfPresent(.ref)
-    }
-}
-
-public extension WebhookDeploymentCreatedWorkflowRunReferencedWorkflowsItem {
-    init(path: String, sha: String, ref: String? = nil) {
-        (self.path, self.sha) = (path, sha)
-        self.ref = ref
-    }
-}
-
-/// Required object value serialized in the `actor` wire field.
-public struct WebhookDeploymentCreatedWorkflowRunActor: Codable {
-    /// Required `integer` value serialized in the `id` wire field.
-    public var id: Int
-    /// Required `string` value serialized in the `login` wire field.
-    public var login: String
-    /// Optional `uri`-formatted value serialized in the `avatar_url` wire field.
-    public var avatarUrl: String?
-    /// Optional `boolean` value serialized in the `deleted` wire field.
-    public var deleted: Bool?
-    /// Optional `string` value serialized in the `email` wire field.
-    public var email: String?
-    /// Optional `uri-template`-formatted value serialized in the `events_url` wire field.
-    public var eventsUrl: String?
-    /// Optional `uri`-formatted value serialized in the `followers_url` wire field.
-    public var followersUrl: String?
-    /// Optional `uri-template`-formatted value serialized in the `following_url` wire field.
-    public var followingUrl: String?
-    /// Optional `uri-template`-formatted value serialized in the `gists_url` wire field.
-    public var gistsUrl: String?
-    /// Optional `string` value serialized in the `gravatar_id` wire field.
-    public var gravatarId: String?
-    /// Optional `uri`-formatted value serialized in the `html_url` wire field.
-    public var htmlUrl: String?
-    /// Optional `string` value serialized in the `name` wire field.
-    public var name: String?
-    /// Optional `string` value serialized in the `node_id` wire field.
-    public var nodeId: String?
-    /// Optional `uri`-formatted value serialized in the `organizations_url` wire field.
-    public var organizationsUrl: String?
-    /// Optional `uri`-formatted value serialized in the `received_events_url` wire field.
-    public var receivedEventsUrl: String?
-    /// Optional `uri`-formatted value serialized in the `repos_url` wire field.
-    public var reposUrl: String?
-    /// Optional `boolean` value serialized in the `site_admin` wire field.
-    public var siteAdmin: Bool?
-    /// Optional `uri-template`-formatted value serialized in the `starred_url` wire field.
-    public var starredUrl: String?
-    /// Optional `uri`-formatted value serialized in the `subscriptions_url` wire field.
-    public var subscriptionsUrl: String?
-    /// Optional enumerated value serialized in the `type` wire field.
-    public var type: WebhookDeploymentCreatedWorkflowRunActorType?
-    /// Optional `uri`-formatted value serialized in the `url` wire field.
-    public var url: String?
-    /// Optional `string` value serialized in the `user_view_type` wire field.
-    public var userViewType: String?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case login
-        case avatarUrl = "avatar_url"
-        case deleted
-        case email
-        case eventsUrl = "events_url"
-        case followersUrl = "followers_url"
-        case followingUrl = "following_url"
-        case gistsUrl = "gists_url"
-        case gravatarId = "gravatar_id"
-        case htmlUrl = "html_url"
-        case name
-        case nodeId = "node_id"
-        case organizationsUrl = "organizations_url"
-        case receivedEventsUrl = "received_events_url"
-        case reposUrl = "repos_url"
-        case siteAdmin = "site_admin"
-        case starredUrl = "starred_url"
-        case subscriptionsUrl = "subscriptions_url"
-        case type
-        case url
-        case userViewType = "user_view_type"
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
 public extension WebhookDeploymentCreatedWorkflowRunActor {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -424,6 +317,184 @@ public struct WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXa472
     public static let read = WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXa472c7a9b7(rawValue: "read")
     public static let write =
         WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXa472c7a9b7(rawValue: "write")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Required enumerated value serialized in the `events[]` wire field.
+public struct WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem: RawRepresentable, Hashable, Codable,
+    Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let branchProtectionRule =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "branch_protection_rule")
+    public static let checkRun =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "check_run")
+    public static let checkSuite =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "check_suite")
+    public static let codeScanningAlert =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "code_scanning_alert")
+    public static let commitComment =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "commit_comment")
+    public static let contentReference =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "content_reference")
+    public static let create = WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "create")
+    public static let delete = WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "delete")
+    public static let deployment =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "deployment")
+    public static let deploymentReview =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "deployment_review")
+    public static let deploymentStatus =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "deployment_status")
+    public static let deployKey =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "deploy_key")
+    public static let discussion =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "discussion")
+    public static let discussionComment =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "discussion_comment")
+    public static let fork = WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "fork")
+    public static let gollum = WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "gollum")
+    public static let issues = WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "issues")
+    public static let issueComment =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "issue_comment")
+    public static let label = WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "label")
+    public static let member = WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "member")
+    public static let membership =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "membership")
+    public static let milestone =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "milestone")
+    public static let organization =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "organization")
+    public static let orgBlock =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "org_block")
+    public static let pageBuild =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "page_build")
+    public static let project = WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "project")
+    public static let projectCard =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "project_card")
+    public static let projectColumn =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "project_column")
+    public static let `public` = WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "public")
+    public static let pullRequest =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "pull_request")
+    public static let pullRequestReview =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "pull_request_review")
+    public static let pullRequestReviewComment =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "pull_request_review_comment")
+    public static let push = WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "push")
+    public static let registryPackage =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "registry_package")
+    public static let release = WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "release")
+    public static let repository =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "repository")
+    public static let repositoryDispatch =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "repository_dispatch")
+    public static let secretScanningAlert =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "secret_scanning_alert")
+    public static let star = WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "star")
+    public static let status = WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "status")
+    public static let team = WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "team")
+    public static let teamAdd = WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "team_add")
+    public static let watch = WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "watch")
+    public static let workflowDispatch =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "workflow_dispatch")
+    public static let workflowRun =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "workflow_run")
+    public static let workflowJob =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "workflow_job")
+    public static let pullRequestReviewThread =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "pull_request_review_thread")
+    public static let mergeQueueEntry =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "merge_queue_entry")
+    public static let secretScanningAlertLocation =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "secret_scanning_alert_location")
+    public static let mergeGroup =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem(rawValue: "merge_group")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Optional enumerated value serialized in the `secret_scanning_alerts` wire field.
+public struct WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXdc186e7dbf: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let read = WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXdc186e7dbf(rawValue: "read")
+    public static let write =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermisXdc186e7dbf(rawValue: "write")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Optional enumerated value serialized in the `type` wire field.
+public struct WebhookDeploymentCreatedWorkflowRunActorType: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let bot = WebhookDeploymentCreatedWorkflowRunActorType(rawValue: "Bot")
+    public static let user = WebhookDeploymentCreatedWorkflowRunActorType(rawValue: "User")
+    public static let organization = WebhookDeploymentCreatedWorkflowRunActorType(rawValue: "Organization")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Optional enumerated value serialized in the `type` wire field.
+public struct WebhookDeploymentCreatedDeploymentPerformedViaGithubAppOwnerType: RawRepresentable, Hashable, Codable,
+    Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let bot = WebhookDeploymentCreatedDeploymentPerformedViaGithubAppOwnerType(rawValue: "Bot")
+    public static let user = WebhookDeploymentCreatedDeploymentPerformedViaGithubAppOwnerType(rawValue: "User")
+    public static let organization =
+        WebhookDeploymentCreatedDeploymentPerformedViaGithubAppOwnerType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

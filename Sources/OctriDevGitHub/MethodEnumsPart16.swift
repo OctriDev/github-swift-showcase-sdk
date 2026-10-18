@@ -6,6 +6,29 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
+/// Provider namespace
+public struct AgentAutomationsListAutomationTasksResponseTasksItemArtifactsX2d6ddf400f: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let github =
+        AgentAutomationsListAutomationTasksResponseTasksItemArtifactsX2d6ddf400f(rawValue: "github")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
 /// The enablement status of Dependabot delegated alert dismissal. Requires Dependabot alerts to be enabled.
 public struct CodeSecurityUpdateConfigurationRequestBodyDependabotDelegatedXa424ae5d95: RawRepresentable, Hashable,
     Codable, Sendable, SdkWireConvertible {
@@ -223,32 +246,6 @@ public struct AgentAutomationsGetAutomationResponseErrorsItemCodeX892ff321: RawR
     public static let unprocessable =
         AgentAutomationsGetAutomationResponseErrorsItemCodeX892ff321(rawValue: "unprocessable")
     public static let custom = AgentAutomationsGetAutomationResponseErrorsItemCodeX892ff321(rawValue: "custom")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
-/// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
-public struct AgentAutomationsCreateRepoAutomationRequestBodyTriggersAutomaX31adc9fed4: RawRepresentable, Hashable,
-    Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let trigger =
-        AgentAutomationsCreateRepoAutomationRequestBodyTriggersAutomaX31adc9fed4(rawValue: "trigger")
-    public static let repository =
-        AgentAutomationsCreateRepoAutomationRequestBodyTriggersAutomaX31adc9fed4(rawValue: "repository")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

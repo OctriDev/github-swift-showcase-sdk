@@ -4,118 +4,6 @@
 import Foundation
 
 /// WebhookIssuesLabeled domain models
-public extension WebhookIssuesLabeledIssueAssignee {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
-        }
-        guard container.contains(.login) else {
-            throw SdkValidationError(
-                field: "login",
-                code: "required",
-                message: "Validation failed for 'login': value is required"
-            )
-        }
-        id = try container.sdkDecodeRequired(.id)
-        login = try container.sdkDecodeRequired(.login)
-        avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
-        deleted = try container.sdkDecodeIfPresent(.deleted)
-        email = try container.sdkDecodeIfPresent(.email)
-        eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
-        followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
-        followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
-        gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
-        gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        name = try container.sdkDecodeIfPresent(.name)
-        nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
-        receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
-        reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
-        siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
-        starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
-        subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
-        type = try container.sdkDecodeIfPresent(.type)
-        url = try container.sdkDecodeIfPresent(.url)
-        userViewType = try container.sdkDecodeIfPresent(.userViewType)
-        try sdkValidateConstraints()
-    }
-}
-
-public extension WebhookIssuesLabeledIssueAssignee {
-    init(
-        id: Int,
-        login: String,
-        avatarUrl: String? = nil,
-        deleted: Bool? = nil,
-        email: String? = nil,
-        eventsUrl: String? = nil,
-        followersUrl: String? = nil,
-        followingUrl: String? = nil,
-        gistsUrl: String? = nil,
-        gravatarId: String? = nil,
-        htmlUrl: String? = nil,
-        name: String? = nil,
-        nodeId: String? = nil,
-        organizationsUrl: String? = nil,
-        receivedEventsUrl: String? = nil,
-        reposUrl: String? = nil,
-        siteAdmin: Bool? = nil,
-        starredUrl: String? = nil,
-        subscriptionsUrl: String? = nil,
-        type: WebhookIssuesLabeledIssueAssigneeType? = nil,
-        url: String? = nil,
-        userViewType: String? = nil
-    ) throws {
-        (self.id, self.login) = (id, login)
-        (self.avatarUrl, self.deleted) = (avatarUrl, deleted)
-        (self.email, self.eventsUrl) = (email, eventsUrl)
-        (self.followersUrl, self.followingUrl) = (followersUrl, followingUrl)
-        (self.gistsUrl, self.gravatarId) = (gistsUrl, gravatarId)
-        (self.htmlUrl, self.name) = (htmlUrl, name)
-        (self.nodeId, self.organizationsUrl) = (nodeId, organizationsUrl)
-        (self.receivedEventsUrl, self.reposUrl) = (receivedEventsUrl, reposUrl)
-        (self.siteAdmin, self.starredUrl) = (siteAdmin, starredUrl)
-        (self.subscriptionsUrl, self.type) = (subscriptionsUrl, type)
-        (self.url, self.userViewType) = (url, userViewType)
-        try sdkValidateConstraints()
-    }
-}
-
-extension WebhookIssuesLabeledIssueAssignee {
-    func sdkValidateConstraints() throws {
-        if let value = avatarUrl {
-            try sdkValidateUri("avatar_url", value)
-        }
-        if let value = followersUrl {
-            try sdkValidateUri("followers_url", value)
-        }
-        if let value = htmlUrl {
-            try sdkValidateUri("html_url", value)
-        }
-        if let value = organizationsUrl {
-            try sdkValidateUri("organizations_url", value)
-        }
-        if let value = receivedEventsUrl {
-            try sdkValidateUri("received_events_url", value)
-        }
-        if let value = reposUrl {
-            try sdkValidateUri("repos_url", value)
-        }
-        if let value = subscriptionsUrl {
-            try sdkValidateUri("subscriptions_url", value)
-        }
-        if let value = url {
-            try sdkValidateUri("url", value)
-        }
-    }
-}
-
 /// The set of permissions for the GitHub app
 public struct WebhookIssuesLabeledIssuePerformedViaGithubAppPermissions: Codable {
     /// Optional enumerated value serialized in the `actions` wire field.
@@ -573,5 +461,125 @@ public struct WebhookIssuesLabeledIssueReactions: Codable {
 
     private init(sdkCopy value: Self) {
         self = value
+    }
+}
+
+public extension WebhookIssuesLabeledIssueReactions {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        plus1 = try container.sdkDecodeRequired(.plus1)
+        minus1 = try container.sdkDecodeRequired(.minus1)
+        confused = try container.sdkDecodeRequired(.confused)
+        eyes = try container.sdkDecodeRequired(.eyes)
+        heart = try container.sdkDecodeRequired(.heart)
+        hooray = try container.sdkDecodeRequired(.hooray)
+        laugh = try container.sdkDecodeRequired(.laugh)
+        rocket = try container.sdkDecodeRequired(.rocket)
+        totalCount = try container.sdkDecodeRequired(.totalCount)
+        url = try container.sdkDecodeRequired(.url)
+        try sdkValidateUri("url", url)
+    }
+}
+
+public extension WebhookIssuesLabeledIssueReactions {
+    init(
+        plus1: Int,
+        minus1: Int,
+        confused: Int,
+        eyes: Int,
+        heart: Int,
+        hooray: Int,
+        laugh: Int,
+        rocket: Int,
+        totalCount: Int,
+        url: String
+    ) throws {
+        (self.plus1, self.minus1) = (plus1, minus1)
+        (self.confused, self.eyes) = (confused, eyes)
+        (self.heart, self.hooray) = (heart, hooray)
+        (self.laugh, self.rocket) = (laugh, rocket)
+        (self.totalCount, self.url) = (totalCount, url)
+        try sdkValidateUri("url", self.url)
+    }
+}
+
+/// Required object value serialized in the `labels[]` wire field.
+public struct WebhookIssuesLabeledIssueLabelsItem: Codable {
+    /// 6-character hex code, without the leading #, identifying the color
+    public var color: String
+    /// Required `boolean` value serialized in the `default` wire field.
+    public var `default`: Bool
+    /// Required `string` value serialized in the `description` wire field.
+    public var description: String?
+    /// Timestamp indicating when the label was archived, or `null` if it has not been archived.
+    public var archivedAt: Date?
+    /// The user who archived the label, or `null` if it has not been archived.
+    public var archivedBy: SimpleUser?
+    /// Required `integer` value serialized in the `id` wire field.
+    public var id: Int
+    /// The name of the label.
+    public var name: String
+    /// Required `string` value serialized in the `node_id` wire field.
+    public var nodeId: String
+    /// URL for the label
+    public var url: String
+
+    enum CodingKeys: String, CodingKey {
+        case color
+        case `default`
+        case description
+        case archivedAt = "archived_at"
+        case archivedBy = "archived_by"
+        case id
+        case name
+        case nodeId = "node_id"
+        case url
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension WebhookIssuesLabeledIssueLabelsItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        color = try container.sdkDecodeRequired(.color)
+        self.default = try container.sdkDecodeRequired(.default)
+        description = try container.sdkDecodeNullable(.description)
+        archivedAt = try container.sdkDecodeNullable(.archivedAt)
+        archivedBy = try container.sdkDecodeNullable(.archivedBy)
+        id = try container.sdkDecodeRequired(.id)
+        name = try container.sdkDecodeRequired(.name)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        url = try container.sdkDecodeRequired(.url)
+        if let value = archivedAt {
+            try sdkValidateDateTime("archived_at", sdkWireString(value))
+        }
+        try sdkValidateUri("url", url)
+    }
+}
+
+public extension WebhookIssuesLabeledIssueLabelsItem {
+    init(
+        color: String,
+        default: Bool,
+        description: String?,
+        archivedAt: Date?,
+        archivedBy: SimpleUser?,
+        id: Int,
+        name: String,
+        nodeId: String,
+        url: String
+    ) throws {
+        (self.color, self.default) = (color, `default`)
+        (self.description, self.archivedAt) = (description, archivedAt)
+        (self.archivedBy, self.id) = (archivedBy, id)
+        (self.name, self.nodeId) = (name, nodeId)
+        self.url = url
+        if let value = self.archivedAt {
+            try sdkValidateDateTime("archived_at", sdkWireString(value))
+        }
+        try sdkValidateUri("url", self.url)
     }
 }

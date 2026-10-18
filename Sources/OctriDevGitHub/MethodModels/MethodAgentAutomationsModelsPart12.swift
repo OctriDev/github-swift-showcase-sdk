@@ -610,23 +610,5 @@ public extension AgentAutomationsListRepoAutomationsResponseAutomationsItem {
     }
 }
 
-/// A GitHub user
-public struct AgentAutomationsListAutomationTasksResponseTasksItemCreatorVariant0: Codable {
-    /// The unique identifier of the user
-    public var id: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-    }
-
-    init() {
-        id = nil
-    }
-}
-
-public extension AgentAutomationsListAutomationTasksResponseTasksItemCreatorVariant0 {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeIfPresent(.id)
-    }
-}
+public typealias AgentAutomationsListAutomationsResponseItemTriggersIntervalCadenceList =
+    [AgentAutomationsListAutomationsResponseItemTriggersIntervalCadenceItem]

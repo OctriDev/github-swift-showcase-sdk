@@ -12,6 +12,11 @@ public indirect enum WebhookProjectsV2ItemEditedChanges {
 extension WebhookProjectsV2ItemEditedChanges: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) {
+                self = value; return
+            }
+        }
         if let value = Self.decodeGroup1(from: container) {
             self = value; return
         }
@@ -25,6 +30,24 @@ extension WebhookProjectsV2ItemEditedChanges: Codable {
         if try encodeGroup1(to: encoder) {
             return
         }
+    }
+}
+
+extension WebhookProjectsV2ItemEditedChanges {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(WebhookProjectsV2ItemEditedChangesVariant0.self), sdkKeepsEveryKey(
+            value,
+            of: raw
+        ) {
+            return .webhookProjectsV2ItemEditedChangesVariant0(value)
+        }
+        if let value = try? container.decode(WebhookProjectsV2ItemEditedChangesVariant1.self), sdkKeepsEveryKey(
+            value,
+            of: raw
+        ) {
+            return .webhookProjectsV2ItemEditedChangesVariant1(value)
+        }
+        return nil
     }
 }
 
@@ -98,6 +121,11 @@ public indirect enum WebhookProjectsV2ItemEditedChangesVariant0FieldValueTo {
 extension WebhookProjectsV2ItemEditedChangesVariant0FieldValueTo: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) {
+                self = value; return
+            }
+        }
         if let value = Self.decodeGroup1(from: container) {
             self = value; return
         }
@@ -111,6 +139,18 @@ extension WebhookProjectsV2ItemEditedChangesVariant0FieldValueTo: Codable {
         if try encodeGroup1(to: encoder) {
             return
         }
+    }
+}
+
+extension WebhookProjectsV2ItemEditedChangesVariant0FieldValueTo {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(ProjectsV2SingleSelectOption.self), sdkKeepsEveryKey(value, of: raw) {
+            return .projectsV2SingleSelectOption(value)
+        }
+        if let value = try? container.decode(ProjectsV2IterationSetting.self), sdkKeepsEveryKey(value, of: raw) {
+            return .projectsV2IterationSetting(value)
+        }
+        return nil
     }
 }
 
@@ -289,6 +329,11 @@ public indirect enum WebhookProjectsV2ItemEditedChangesVariant0FieldValueFrom {
 extension WebhookProjectsV2ItemEditedChangesVariant0FieldValueFrom: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) {
+                self = value; return
+            }
+        }
         if let value = Self.decodeGroup1(from: container) {
             self = value; return
         }
@@ -302,6 +347,18 @@ extension WebhookProjectsV2ItemEditedChangesVariant0FieldValueFrom: Codable {
         if try encodeGroup1(to: encoder) {
             return
         }
+    }
+}
+
+extension WebhookProjectsV2ItemEditedChangesVariant0FieldValueFrom {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(ProjectsV2SingleSelectOption.self), sdkKeepsEveryKey(value, of: raw) {
+            return .projectsV2SingleSelectOption(value)
+        }
+        if let value = try? container.decode(ProjectsV2IterationSetting.self), sdkKeepsEveryKey(value, of: raw) {
+            return .projectsV2IterationSetting(value)
+        }
+        return nil
     }
 }
 

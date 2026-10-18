@@ -584,7 +584,7 @@ public struct AgentAutomationsListAvailableAutomationTriggersResponseItemFieldsI
     public var required: Bool
     /// A restricted JSON Schema fragment describing the field value accepted by Automation create and update
     /// requests.
-    public var schema: FieldsItemSchema
+    public var schema: AgentAutomationsListAvailableAutomationTriggersResponseItemFiX8d60f6fda7
     /// Markdown guidance for configuring the field.
     public var description: String?
 

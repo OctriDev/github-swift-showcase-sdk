@@ -13,6 +13,11 @@ public indirect enum ProjectsV2ItemSimpleContent {
 extension ProjectsV2ItemSimpleContent: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) {
+                self = value; return
+            }
+        }
         if let value = Self.decodeGroup1(from: container) {
             self = value; return
         }
@@ -26,6 +31,21 @@ extension ProjectsV2ItemSimpleContent: Codable {
         if try encodeGroup1(to: encoder) {
             return
         }
+    }
+}
+
+extension ProjectsV2ItemSimpleContent {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(Issue.self), sdkKeepsEveryKey(value, of: raw) {
+            return .issue(value)
+        }
+        if let value = try? container.decode(PullRequestSimple.self), sdkKeepsEveryKey(value, of: raw) {
+            return .pullRequestSimple(value)
+        }
+        if let value = try? container.decode(ProjectsV2DraftIssue.self), sdkKeepsEveryKey(value, of: raw) {
+            return .projectsV2DraftIssue(value)
+        }
+        return nil
     }
 }
 
@@ -474,95 +494,43 @@ public extension ProjectsV2SingleSelectOptionsDescription {
     }
 }
 
-/// Required API value serialized in the `creator` wire field.
-public struct ProjectsV2ViewCreator: Codable {
-    /// Required `string` value serialized in the `login` wire field.
-    /// - Example: "octocat"
-    public var login: String
-    /// Required `int64`-formatted value serialized in the `id` wire field.
-    /// - Example: 1
-    public var id: Int
-    /// Required `string` value serialized in the `node_id` wire field.
-    /// - Example: "MDQ6VXNlcjE="
-    public var nodeId: String
-    /// Required `uri`-formatted value serialized in the `avatar_url` wire field.
-    /// - Example: "https://github.com/images/error/octocat_happy.gif"
-    public var avatarUrl: String
-    /// Required `string` value serialized in the `gravatar_id` wire field.
-    /// - Example: "41d064eb2195891e12d0413f63227ea7"
-    public var gravatarId: String?
-    /// Required `uri`-formatted value serialized in the `url` wire field.
-    /// - Example: "https://api.github.com/users/octocat"
-    public var url: String
-    /// Required `uri`-formatted value serialized in the `html_url` wire field.
-    /// - Example: "https://github.com/octocat"
-    public var htmlUrl: String
-    /// Required `uri`-formatted value serialized in the `followers_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/followers"
-    public var followersUrl: String
-    /// Required `string` value serialized in the `following_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/following{/other_user}"
-    public var followingUrl: String
-    /// Required `string` value serialized in the `gists_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/gists{/gist_id}"
-    public var gistsUrl: String
-    /// Required `string` value serialized in the `starred_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/starred{/owner}{/repo}"
-    public var starredUrl: String
-    /// Required `uri`-formatted value serialized in the `subscriptions_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/subscriptions"
-    public var subscriptionsUrl: String
-    /// Required `uri`-formatted value serialized in the `organizations_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/orgs"
-    public var organizationsUrl: String
-    /// Required `uri`-formatted value serialized in the `repos_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/repos"
-    public var reposUrl: String
-    /// Required `string` value serialized in the `events_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/events{/privacy}"
-    public var eventsUrl: String
-    /// Required `uri`-formatted value serialized in the `received_events_url` wire field.
-    /// - Example: "https://api.github.com/users/octocat/received_events"
-    public var receivedEventsUrl: String
-    /// Required `string` value serialized in the `type` wire field.
-    /// - Example: "User"
-    public var type: String
-    /// Required `boolean` value serialized in the `site_admin` wire field.
-    public var siteAdmin: Bool
-    /// Optional `string` value serialized in the `name` wire field.
-    public var name: String?
-    /// Optional `string` value serialized in the `email` wire field.
-    public var email: String?
-    /// Optional `string` value serialized in the `starred_at` wire field.
-    /// - Example: "\"2020-07-09T00:17:55Z\""
-    public var starredAt: String?
-    /// Optional `string` value serialized in the `user_view_type` wire field.
-    /// - Example: "public"
-    public var userViewType: String?
+/// An item belonging to a project
+public struct ProjectsV2ItemSimple: Codable {
+    /// The unique identifier of the project item.
+    public var id: Double
+    /// The type of content tracked in a project item
+    public var contentType: ProjectsV2ItemContentType
+    /// The time when the item was created.
+    /// - Example: "2022-04-28T12:00:00Z"
+    public var createdAt: Date
+    /// The time when the item was last updated.
+    /// - Example: "2022-04-28T12:00:00Z"
+    public var updatedAt: Date
+    /// The time when the item was archived.
+    /// - Example: "2022-04-28T12:00:00Z"
+    public var archivedAt: Date?
+    /// The node ID of the project item.
+    public var nodeId: String?
+    /// The content represented by the item.
+    public var content: ProjectsV2ItemSimpleContent?
+    /// A GitHub user.
+    public var creator: SimpleUser?
+    /// The URL of the project this item belongs to.
+    public var projectUrl: String?
+    /// The URL of the item in the project.
+    public var itemUrl: String?
 
     enum CodingKeys: String, CodingKey {
-        case login
         case id
+        case contentType = "content_type"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+        case archivedAt = "archived_at"
         case nodeId = "node_id"
-        case avatarUrl = "avatar_url"
-        case gravatarId = "gravatar_id"
-        case url
-        case htmlUrl = "html_url"
-        case followersUrl = "followers_url"
-        case followingUrl = "following_url"
-        case gistsUrl = "gists_url"
-        case starredUrl = "starred_url"
-        case subscriptionsUrl = "subscriptions_url"
-        case organizationsUrl = "organizations_url"
-        case reposUrl = "repos_url"
-        case eventsUrl = "events_url"
-        case receivedEventsUrl = "received_events_url"
-        case type
-        case siteAdmin = "site_admin"
-        case name
-        case email
-        case starredAt = "starred_at"
-        case userViewType = "user_view_type"
+        case content
+        case creator
+        case projectUrl = "project_url"
+        case itemUrl = "item_url"
     }
 
     private init(sdkCopy value: Self) {
@@ -570,31 +538,96 @@ public struct ProjectsV2ViewCreator: Codable {
     }
 }
 
-public extension ProjectsV2ViewCreator {
+public extension ProjectsV2ItemSimple {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        login = try container.sdkDecodeRequired(.login)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.contentType) else {
+            throw SdkValidationError(
+                field: "content_type",
+                code: "required",
+                message: "Validation failed for 'content_type': value is required"
+            )
+        }
+        guard container.contains(.createdAt) else {
+            throw SdkValidationError(
+                field: "created_at",
+                code: "required",
+                message: "Validation failed for 'created_at': value is required"
+            )
+        }
+        guard container.contains(.updatedAt) else {
+            throw SdkValidationError(
+                field: "updated_at",
+                code: "required",
+                message: "Validation failed for 'updated_at': value is required"
+            )
+        }
+        guard container.contains(.archivedAt) else {
+            throw SdkValidationError(
+                field: "archived_at",
+                code: "required",
+                message: "Validation failed for 'archived_at': value is required"
+            )
+        }
         id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
-        gravatarId = try container.sdkDecodeNullable(.gravatarId)
-        url = try container.sdkDecodeRequired(.url)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        followersUrl = try container.sdkDecodeRequired(.followersUrl)
-        followingUrl = try container.sdkDecodeRequired(.followingUrl)
-        gistsUrl = try container.sdkDecodeRequired(.gistsUrl)
-        starredUrl = try container.sdkDecodeRequired(.starredUrl)
-        subscriptionsUrl = try container.sdkDecodeRequired(.subscriptionsUrl)
-        organizationsUrl = try container.sdkDecodeRequired(.organizationsUrl)
-        reposUrl = try container.sdkDecodeRequired(.reposUrl)
-        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        receivedEventsUrl = try container.sdkDecodeRequired(.receivedEventsUrl)
-        type = try container.sdkDecodeRequired(.type)
-        siteAdmin = try container.sdkDecodeRequired(.siteAdmin)
-        name = try container.sdkDecodeIfPresent(.name)
-        email = try container.sdkDecodeIfPresent(.email)
-        starredAt = try container.sdkDecodeIfPresent(.starredAt)
-        userViewType = try container.sdkDecodeIfPresent(.userViewType)
-        try sdkValidateConstraints()
+        contentType = try container.sdkDecodeRequired(.contentType)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        archivedAt = try container.sdkDecodeNullable(.archivedAt)
+        nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        content = try container.sdkDecodeIfPresent(.content)
+        creator = try container.sdkDecodeIfPresent(.creator)
+        projectUrl = try container.sdkDecodeIfPresent(.projectUrl)
+        itemUrl = try container.sdkDecodeIfPresent(.itemUrl)
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+        if let value = archivedAt {
+            try sdkValidateDateTime("archived_at", sdkWireString(value))
+        }
+        if let value = projectUrl {
+            try sdkValidateUri("project_url", value)
+        }
+        if let value = itemUrl {
+            try sdkValidateUri("item_url", value)
+        }
+    }
+}
+
+public extension ProjectsV2ItemSimple {
+    init(
+        id: Double,
+        contentType: ProjectsV2ItemContentType,
+        createdAt: Date,
+        updatedAt: Date,
+        archivedAt: Date?,
+        nodeId: String? = nil,
+        content: ProjectsV2ItemSimpleContent? = nil,
+        creator: SimpleUser? = nil,
+        projectUrl: String? = nil,
+        itemUrl: String? = nil
+    ) throws {
+        (self.id, self.contentType) = (id, contentType)
+        (self.createdAt, self.updatedAt) = (createdAt, updatedAt)
+        (self.archivedAt, self.nodeId) = (archivedAt, nodeId)
+        (self.content, self.creator) = (content, creator)
+        (self.projectUrl, self.itemUrl) = (projectUrl, itemUrl)
+        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+        if let value = self.archivedAt {
+            try sdkValidateDateTime("archived_at", sdkWireString(value))
+        }
+        if let value = self.projectUrl {
+            try sdkValidateUri("project_url", value)
+        }
+        if let value = self.itemUrl {
+            try sdkValidateUri("item_url", value)
+        }
     }
 }

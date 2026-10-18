@@ -34,7 +34,7 @@ extension WebhookPullRequestReviewEditedPullRequestAssigneesItem {
 }
 
 public typealias WebhookPullRequestReviewEditedPullRequestRequestedReviewersList =
-    [WebhookPullRequestReviewEditedPullRequestRequestedReviewersItem]
+    [WebhookPullRequestReviewEditedPullRequestRequestedReviewersItem?]
 
 /// Required object value serialized in the `pull_request` wire field.
 public struct WebhookPullRequestReviewEditedPullRequest: Codable {

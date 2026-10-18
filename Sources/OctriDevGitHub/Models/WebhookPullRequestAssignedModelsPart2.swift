@@ -89,7 +89,7 @@ public extension WebhookPullRequestAssignedPullRequest {
         nodeId: String,
         number: Int,
         patchUrl: String,
-        requestedReviewers: [WebhookPullRequestAssignedPullRequestRequestedReviewersItem],
+        requestedReviewers: [WebhookPullRequestAssignedPullRequestRequestedReviewersItem?],
         requestedTeams: [WebhookPullRequestAssignedPullRequestRequestedTeamsItem],
         reviewCommentUrl: String,
         reviewCommentsUrl: String,

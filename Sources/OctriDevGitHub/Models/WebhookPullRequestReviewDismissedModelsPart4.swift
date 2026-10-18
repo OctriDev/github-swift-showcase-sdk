@@ -355,7 +355,7 @@ public extension WebhookPullRequestReviewDismissedReview {
 }
 
 public typealias WebhookPullRequestReviewDismissedPullRequestRequestedReviewersList =
-    [WebhookPullRequestReviewDismissedPullRequestRequestedReviewersItem]
+    [WebhookPullRequestReviewDismissedPullRequestRequestedReviewersItem?]
 
 public typealias WebhookPullRequestReviewDismissedPullRequestRequestedTeamsList =
     [WebhookPullRequestReviewDismissedPullRequestRequestedTeamsItem]

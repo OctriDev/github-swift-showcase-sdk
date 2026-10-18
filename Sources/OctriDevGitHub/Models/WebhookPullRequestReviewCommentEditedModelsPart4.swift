@@ -606,7 +606,7 @@ public typealias WebhookPullRequestReviewCommentEditedPullRequestAssigneesList =
     [WebhookPullRequestReviewCommentEditedPullRequestAssigneesItem?]
 
 public typealias WebhookPullRequestReviewCommentEditedPullRequestRequestedReviewersList =
-    [WebhookPullRequestReviewCommentEditedPullRequestRequestedReviewersItem]
+    [WebhookPullRequestReviewCommentEditedPullRequestRequestedReviewersItem?]
 
 public typealias WebhookPullRequestReviewCommentEditedPullRequestRequestedTeamsList =
     [WebhookPullRequestReviewCommentEditedPullRequestRequestedTeamsItem]

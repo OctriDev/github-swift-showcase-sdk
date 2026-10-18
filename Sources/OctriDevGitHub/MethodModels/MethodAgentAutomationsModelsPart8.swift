@@ -133,7 +133,7 @@ public struct AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItem:
     /// Type of artifact. Available Values: `pull`, `branch`.
     public var type: AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemType
     /// Resource data (shape depends on type)
-    public var data: TasksItemArtifactsItemData
+    public var data: AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemData
 
     enum CodingKeys: String, CodingKey {
         case provider
@@ -180,7 +180,7 @@ public extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsIt
     init(
         provider: AgentAutomationsListAutomationTasksResponseTasksItemArtifactsX2d6ddf400f,
         type: AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemType,
-        data: TasksItemArtifactsItemData
+        data: AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemData
     ) {
         (self.provider, self.type) = (provider, type)
         self.data = data

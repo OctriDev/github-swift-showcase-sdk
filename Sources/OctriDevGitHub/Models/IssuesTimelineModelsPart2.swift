@@ -4,6 +4,180 @@
 import Foundation
 
 /// IssuesTimeline domain models
+public extension TimelineCommittedEventVerification {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.verified) else {
+            throw SdkValidationError(
+                field: "verified",
+                code: "required",
+                message: "Validation failed for 'verified': value is required"
+            )
+        }
+        guard container.contains(.reason) else {
+            throw SdkValidationError(
+                field: "reason",
+                code: "required",
+                message: "Validation failed for 'reason': value is required"
+            )
+        }
+        guard container.contains(.signature) else {
+            throw SdkValidationError(
+                field: "signature",
+                code: "required",
+                message: "Validation failed for 'signature': value is required"
+            )
+        }
+        guard container.contains(.payload) else {
+            throw SdkValidationError(
+                field: "payload",
+                code: "required",
+                message: "Validation failed for 'payload': value is required"
+            )
+        }
+        guard container.contains(.verifiedAt) else {
+            throw SdkValidationError(
+                field: "verified_at",
+                code: "required",
+                message: "Validation failed for 'verified_at': value is required"
+            )
+        }
+        verified = try container.sdkDecodeRequired(.verified)
+        reason = try container.sdkDecodeRequired(.reason)
+        signature = try container.sdkDecodeNullable(.signature)
+        payload = try container.sdkDecodeNullable(.payload)
+        verifiedAt = try container.sdkDecodeNullable(.verifiedAt)
+    }
+}
+
+public extension TimelineCommittedEventVerification {
+    init(verified: Bool, reason: String, signature: String?, payload: String?, verifiedAt: String?) {
+        (self.verified, self.reason) = (verified, reason)
+        (self.signature, self.payload) = (signature, payload)
+        self.verifiedAt = verifiedAt
+    }
+}
+
+/// Timeline Cross Referenced Event
+public struct TimelineCrossReferencedEvent: Codable {
+    /// Required `string` value serialized in the `event` wire field.
+    public var event: String
+    /// Required `date-time`-formatted value serialized in the `created_at` wire field.
+    public var createdAt: Date
+    /// Required `date-time`-formatted value serialized in the `updated_at` wire field.
+    public var updatedAt: Date
+    /// Required object value serialized in the `source` wire field.
+    public var source: TimelineCrossReferencedEventSource
+    /// A GitHub user.
+    public var actor: SimpleUser?
+
+    enum CodingKeys: String, CodingKey {
+        case event
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+        case source
+        case actor
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension TimelineCrossReferencedEvent {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.event) else {
+            throw SdkValidationError(
+                field: "event",
+                code: "required",
+                message: "Validation failed for 'event': value is required"
+            )
+        }
+        guard container.contains(.createdAt) else {
+            throw SdkValidationError(
+                field: "created_at",
+                code: "required",
+                message: "Validation failed for 'created_at': value is required"
+            )
+        }
+        guard container.contains(.updatedAt) else {
+            throw SdkValidationError(
+                field: "updated_at",
+                code: "required",
+                message: "Validation failed for 'updated_at': value is required"
+            )
+        }
+        guard container.contains(.source) else {
+            throw SdkValidationError(
+                field: "source",
+                code: "required",
+                message: "Validation failed for 'source': value is required"
+            )
+        }
+        event = try container.sdkDecodeRequired(.event)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        source = try container.sdkDecodeRequired(.source)
+        actor = try container.sdkDecodeIfPresent(.actor)
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+    }
+}
+
+public extension TimelineCrossReferencedEvent {
+    init(
+        event: String,
+        createdAt: Date,
+        updatedAt: Date,
+        source: TimelineCrossReferencedEventSource,
+        actor: SimpleUser? = nil
+    ) throws {
+        (self.event, self.createdAt) = (event, createdAt)
+        (self.updatedAt, self.source) = (updatedAt, source)
+        self.actor = actor
+        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+    }
+}
+
+/// Timeline Line Commented Event
+public struct TimelineLineCommentedEvent: Codable {
+    /// Optional `string` value serialized in the `event` wire field.
+    public var event: String?
+    /// Optional `string` value serialized in the `node_id` wire field.
+    public var nodeId: String?
+    /// Optional array value serialized in the `comments` wire field.
+    public var comments: [PullRequestReviewComment]?
+
+    enum CodingKeys: String, CodingKey {
+        case event
+        case nodeId = "node_id"
+        case comments
+    }
+
+    init() {
+        (event, nodeId, comments) = (nil, nil, nil)
+    }
+}
+
+public extension TimelineLineCommentedEvent {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        event = try container.sdkDecodeIfPresent(.event)
+        nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        comments = try container.sdkDecodeIfPresent(.comments)
+    }
+}
+
+public extension TimelineLineCommentedEvent {
+    init(event: String? = nil, nodeId: String? = nil, comments: [PullRequestReviewComment]? = nil) {
+        self.init()
+        (self.event, self.nodeId) = (event, nodeId)
+        self.comments = comments
+    }
+}
+
 /// Timeline Committed Event
 public struct TimelineCommittedEvent: Codable {
     /// SHA for the commit
@@ -442,190 +616,5 @@ public extension TimelineReviewedEvent {
         if let value = self.updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
-    }
-}
-
-/// Timeline Commit Commented Event
-public struct TimelineCommitCommentedEvent: Codable {
-    /// Optional `string` value serialized in the `event` wire field.
-    public var event: String?
-    /// Optional `string` value serialized in the `node_id` wire field.
-    public var nodeId: String?
-    /// Optional `string` value serialized in the `commit_id` wire field.
-    public var commitId: String?
-    /// Optional array value serialized in the `comments` wire field.
-    public var comments: [CommitComment]?
-
-    enum CodingKeys: String, CodingKey {
-        case event
-        case nodeId = "node_id"
-        case commitId = "commit_id"
-        case comments
-    }
-
-    init() {
-        (event, nodeId, commitId, comments) = (nil, nil, nil, nil)
-    }
-}
-
-public extension TimelineCommitCommentedEvent {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        event = try container.sdkDecodeIfPresent(.event)
-        nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        commitId = try container.sdkDecodeIfPresent(.commitId)
-        comments = try container.sdkDecodeIfPresent(.comments)
-    }
-}
-
-public extension TimelineCommitCommentedEvent {
-    init(event: String? = nil, nodeId: String? = nil, commitId: String? = nil, comments: [CommitComment]? = nil) {
-        self.init()
-        (self.event, self.nodeId) = (event, nodeId)
-        (self.commitId, self.comments) = (commitId, comments)
-    }
-}
-
-/// Timeline Assigned Issue Event
-public struct TimelineAssignedIssueEvent: Codable {
-    /// Required `integer` value serialized in the `id` wire field.
-    public var id: Int
-    /// Required `string` value serialized in the `node_id` wire field.
-    public var nodeId: String
-    /// Required `string` value serialized in the `url` wire field.
-    public var url: String
-    /// A GitHub user.
-    public var actor: SimpleUser
-    /// Required `string` value serialized in the `event` wire field.
-    public var event: String
-    /// Required `string` value serialized in the `commit_id` wire field.
-    public var commitId: String?
-    /// Required `string` value serialized in the `commit_url` wire field.
-    public var commitUrl: String?
-    /// Required `string` value serialized in the `created_at` wire field.
-    public var createdAt: String
-    /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user
-    /// accounts and granted access to specific repositories. They come with granular permissions and built-in
-    /// webhooks. GitHub apps are first class actors within GitHub.
-    public var performedViaGithubApp: NullableIntegration?
-    /// A GitHub user.
-    public var assignee: SimpleUser
-    /// The intent behind an agent's action on an issue, including the rationale and confidence. Present (and `null`
-    /// when the event carried no agent intent) on supported event types while the issue suggestions feature is
-    /// enabled for the repository; the property is omitted entirely when the feature is disabled or the event type
-    /// does not support intent.
-    public var intent: NullableIssueEventIntent?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case nodeId = "node_id"
-        case url
-        case actor
-        case event
-        case commitId = "commit_id"
-        case commitUrl = "commit_url"
-        case createdAt = "created_at"
-        case performedViaGithubApp = "performed_via_github_app"
-        case assignee
-        case intent
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension TimelineAssignedIssueEvent {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        url = try container.sdkDecodeRequired(.url)
-        actor = try container.sdkDecodeRequired(.actor)
-        event = try container.sdkDecodeRequired(.event)
-        commitId = try container.sdkDecodeNullable(.commitId)
-        commitUrl = try container.sdkDecodeNullable(.commitUrl)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        performedViaGithubApp = try container.sdkDecodeNullable(.performedViaGithubApp)
-        assignee = try container.sdkDecodeRequired(.assignee)
-        intent = try container.sdkDecodeIfPresent(.intent)
-    }
-}
-
-public extension TimelineAssignedIssueEvent {
-    init(
-        id: Int,
-        nodeId: String,
-        url: String,
-        actor: SimpleUser,
-        event: String,
-        commitId: String?,
-        commitUrl: String?,
-        createdAt: String,
-        performedViaGithubApp: NullableIntegration?,
-        assignee: SimpleUser,
-        intent: NullableIssueEventIntent? = nil
-    ) {
-        (self.id, self.nodeId) = (id, nodeId)
-        (self.url, self.actor) = (url, actor)
-        (self.event, self.commitId) = (event, commitId)
-        (self.commitUrl, self.createdAt) = (commitUrl, createdAt)
-        (self.performedViaGithubApp, self.assignee) = (performedViaGithubApp, assignee)
-        self.intent = intent
-    }
-}
-
-/// Timeline Connected Event
-public struct TimelineConnectedEvent: Codable {
-    /// Required `integer` value serialized in the `id` wire field.
-    public var id: Int
-    /// Required `string` value serialized in the `node_id` wire field.
-    public var nodeId: String
-    /// Required `string` value serialized in the `url` wire field.
-    public var url: String
-    /// A GitHub user.
-    public var actor: SimpleUser
-    /// Required `string` value serialized in the `event` wire field.
-    public var event: String
-    /// Required `string` value serialized in the `commit_id` wire field.
-    public var commitId: String?
-    /// Required `string` value serialized in the `commit_url` wire field.
-    public var commitUrl: String?
-    /// Required `string` value serialized in the `created_at` wire field.
-    public var createdAt: String
-    /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user
-    /// accounts and granted access to specific repositories. They come with granular permissions and built-in
-    /// webhooks. GitHub apps are first class actors within GitHub.
-    public var performedViaGithubApp: NullableIntegration?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case nodeId = "node_id"
-        case url
-        case actor
-        case event
-        case commitId = "commit_id"
-        case commitUrl = "commit_url"
-        case createdAt = "created_at"
-        case performedViaGithubApp = "performed_via_github_app"
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension TimelineConnectedEvent {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        url = try container.sdkDecodeRequired(.url)
-        actor = try container.sdkDecodeRequired(.actor)
-        event = try container.sdkDecodeRequired(.event)
-        commitId = try container.sdkDecodeNullable(.commitId)
-        commitUrl = try container.sdkDecodeNullable(.commitUrl)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        performedViaGithubApp = try container.sdkDecodeNullable(.performedViaGithubApp)
     }
 }

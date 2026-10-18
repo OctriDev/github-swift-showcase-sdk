@@ -4,228 +4,6 @@
 import Foundation
 
 /// Projects domain models
-public extension ProjectsV2DraftIssue {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
-        }
-        guard container.contains(.nodeId) else {
-            throw SdkValidationError(
-                field: "node_id",
-                code: "required",
-                message: "Validation failed for 'node_id': value is required"
-            )
-        }
-        guard container.contains(.title) else {
-            throw SdkValidationError(
-                field: "title",
-                code: "required",
-                message: "Validation failed for 'title': value is required"
-            )
-        }
-        guard container.contains(.user) else {
-            throw SdkValidationError(
-                field: "user",
-                code: "required",
-                message: "Validation failed for 'user': value is required"
-            )
-        }
-        guard container.contains(.createdAt) else {
-            throw SdkValidationError(
-                field: "created_at",
-                code: "required",
-                message: "Validation failed for 'created_at': value is required"
-            )
-        }
-        guard container.contains(.updatedAt) else {
-            throw SdkValidationError(
-                field: "updated_at",
-                code: "required",
-                message: "Validation failed for 'updated_at': value is required"
-            )
-        }
-        id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        title = try container.sdkDecodeRequired(.title)
-        user = try container.sdkDecodeNullable(.user)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        body = try container.sdkDecodeIfPresent(.body)
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
-    }
-}
-
-public extension ProjectsV2DraftIssue {
-    init(
-        id: Double,
-        nodeId: String,
-        title: String,
-        user: NullableSimpleUser?,
-        createdAt: Date,
-        updatedAt: Date,
-        body: String? = nil
-    ) throws {
-        (self.id, self.nodeId) = (id, nodeId)
-        (self.title, self.user) = (title, user)
-        (self.createdAt, self.updatedAt) = (createdAt, updatedAt)
-        self.body = body
-        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-    }
-}
-
-/// An item belonging to a project
-public struct ProjectsV2ItemWithContent: Codable {
-    /// The unique identifier of the project item.
-    public var id: Double
-    /// The type of content tracked in a project item
-    public var contentType: ProjectsV2ItemContentType
-    /// The time when the item was created.
-    /// - Example: "2022-04-28T12:00:00Z"
-    public var createdAt: Date
-    /// The time when the item was last updated.
-    /// - Example: "2022-04-28T12:00:00Z"
-    public var updatedAt: Date
-    /// The time when the item was archived.
-    /// - Example: "2022-04-28T12:00:00Z"
-    public var archivedAt: Date?
-    /// The node ID of the project item.
-    public var nodeId: String?
-    /// The API URL of the project that contains this item.
-    /// - Example: "https://api.github.com/users/monalisa/2/projectsV2/3"
-    public var projectUrl: String?
-    /// The content of the item, which varies by content type.
-    public var content: [String: JSONValue]?
-    /// A GitHub user.
-    public var creator: SimpleUser?
-    /// The API URL of this item.
-    /// - Example: "https://api.github.com/users/monalisa/2/projectsV2/items/3"
-    public var itemUrl: String?
-    /// The fields and values associated with this item.
-    public var fields: [[String: JSONValue]]?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case contentType = "content_type"
-        case createdAt = "created_at"
-        case updatedAt = "updated_at"
-        case archivedAt = "archived_at"
-        case nodeId = "node_id"
-        case projectUrl = "project_url"
-        case content
-        case creator
-        case itemUrl = "item_url"
-        case fields
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension ProjectsV2ItemWithContent {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
-        }
-        guard container.contains(.contentType) else {
-            throw SdkValidationError(
-                field: "content_type",
-                code: "required",
-                message: "Validation failed for 'content_type': value is required"
-            )
-        }
-        guard container.contains(.createdAt) else {
-            throw SdkValidationError(
-                field: "created_at",
-                code: "required",
-                message: "Validation failed for 'created_at': value is required"
-            )
-        }
-        guard container.contains(.updatedAt) else {
-            throw SdkValidationError(
-                field: "updated_at",
-                code: "required",
-                message: "Validation failed for 'updated_at': value is required"
-            )
-        }
-        guard container.contains(.archivedAt) else {
-            throw SdkValidationError(
-                field: "archived_at",
-                code: "required",
-                message: "Validation failed for 'archived_at': value is required"
-            )
-        }
-        id = try container.sdkDecodeRequired(.id)
-        contentType = try container.sdkDecodeRequired(.contentType)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        archivedAt = try container.sdkDecodeNullable(.archivedAt)
-        nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        projectUrl = try container.sdkDecodeIfPresent(.projectUrl)
-        content = try container.sdkDecodeIfPresent(.content)
-        creator = try container.sdkDecodeIfPresent(.creator)
-        itemUrl = try container.sdkDecodeIfPresent(.itemUrl)
-        fields = try container.sdkDecodeIfPresent(.fields)
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
-        if let value = archivedAt {
-            try sdkValidateDateTime("archived_at", sdkWireString(value))
-        }
-        if let value = projectUrl {
-            try sdkValidateUri("project_url", value)
-        }
-        if let value = itemUrl {
-            try sdkValidateUri("item_url", value)
-        }
-    }
-}
-
-public extension ProjectsV2ItemWithContent {
-    init(
-        id: Double,
-        contentType: ProjectsV2ItemContentType,
-        createdAt: Date,
-        updatedAt: Date,
-        archivedAt: Date?,
-        nodeId: String? = nil,
-        projectUrl: String? = nil,
-        content: [String: JSONValue]? = nil,
-        creator: SimpleUser? = nil,
-        itemUrl: String? = nil,
-        fields: [[String: JSONValue]]? = nil
-    ) throws {
-        (self.id, self.contentType) = (id, contentType)
-        (self.createdAt, self.updatedAt) = (createdAt, updatedAt)
-        (self.archivedAt, self.nodeId) = (archivedAt, nodeId)
-        (self.projectUrl, self.content) = (projectUrl, content)
-        (self.creator, self.itemUrl) = (creator, itemUrl)
-        self.fields = fields
-        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-        if let value = self.archivedAt {
-            try sdkValidateDateTime("archived_at", sdkWireString(value))
-        }
-        if let value = self.projectUrl {
-            try sdkValidateUri("project_url", value)
-        }
-        if let value = self.itemUrl {
-            try sdkValidateUri("item_url", value)
-        }
-    }
-}
-
 /// An status update belonging to a project
 public struct NullableProjectsV2StatusUpdate: Codable {
     /// The unique identifier of the status update.
@@ -627,5 +405,228 @@ public extension ProjectsV2SingleSelectOptions {
         name = try container.sdkDecodeRequired(.name)
         description = try container.sdkDecodeRequired(.description)
         color = try container.sdkDecodeRequired(.color)
+    }
+}
+
+public extension ProjectsV2SingleSelectOptions {
+    init(
+        id: String,
+        name: ProjectsV2SingleSelectOptionsName,
+        description: ProjectsV2SingleSelectOptionsDescription,
+        color: String
+    ) {
+        (self.id, self.name) = (id, name)
+        (self.description, self.color) = (description, color)
+    }
+}
+
+/// Configuration for iteration fields.
+public struct ProjectsV2FieldConfiguration: Codable {
+    /// The day of the week when the iteration starts.
+    public var startDay: Int?
+    /// The duration of the iteration in days.
+    public var duration: Int?
+    /// Optional array value serialized in the `iterations` wire field.
+    public var iterations: [ProjectsV2IterationSettings]?
+
+    enum CodingKeys: String, CodingKey {
+        case startDay = "start_day"
+        case duration
+        case iterations
+    }
+
+    init() {
+        (startDay, duration, iterations) = (nil, nil, nil)
+    }
+}
+
+public extension ProjectsV2FieldConfiguration {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        startDay = try container.sdkDecodeIfPresent(.startDay)
+        duration = try container.sdkDecodeIfPresent(.duration)
+        iterations = try container.sdkDecodeIfPresent(.iterations)
+    }
+}
+
+public extension ProjectsV2FieldConfiguration {
+    init(startDay: Int? = nil, duration: Int? = nil, iterations: [ProjectsV2IterationSettings]? = nil) {
+        self.init()
+        (self.startDay, self.duration) = (startDay, duration)
+        self.iterations = iterations
+    }
+}
+
+/// An iteration setting for an iteration field
+public struct ProjectsV2IterationSetting: Codable {
+    /// The unique identifier of the iteration setting.
+    public var id: String
+    /// The iteration title.
+    public var title: String
+    /// The iteration title, rendered as HTML.
+    public var titleHtml: String?
+    /// The duration of the iteration in days.
+    public var duration: Double?
+    /// The start date of the iteration.
+    public var startDate: String?
+    /// Whether the iteration has been completed.
+    public var completed: Bool?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case title
+        case titleHtml = "title_html"
+        case duration
+        case startDate = "start_date"
+        case completed
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension ProjectsV2IterationSetting {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.title) else {
+            throw SdkValidationError(
+                field: "title",
+                code: "required",
+                message: "Validation failed for 'title': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        title = try container.sdkDecodeRequired(.title)
+        titleHtml = try container.sdkDecodeIfPresent(.titleHtml)
+        duration = try container.sdkDecodeIfPresent(.duration)
+        startDate = try container.sdkDecodeIfPresent(.startDate)
+        completed = try container.sdkDecodeIfPresent(.completed)
+    }
+}
+
+public extension ProjectsV2IterationSetting {
+    init(
+        id: String,
+        title: String,
+        titleHtml: String? = nil,
+        duration: Double? = nil,
+        startDate: String? = nil,
+        completed: Bool? = nil
+    ) {
+        (self.id, self.title) = (id, title)
+        (self.titleHtml, self.duration) = (titleHtml, duration)
+        (self.startDate, self.completed) = (startDate, completed)
+    }
+}
+
+/// A field inside a projects v2 project
+public struct ProjectsV2Field: Codable {
+    /// The unique identifier of the field.
+    public var id: Int
+    /// The API URL of the project that contains the field.
+    /// - Example: "https://api.github.com/projects/1"
+    public var projectUrl: String
+    /// The name of the field.
+    public var name: String
+    /// The field's data type.
+    public var dataType: ProjectsV2FieldDataType
+    /// The time when the field was created.
+    /// - Example: "2022-04-28T12:00:00Z"
+    public var createdAt: Date
+    /// The time when the field was last updated.
+    /// - Example: "2022-04-28T12:00:00Z"
+    public var updatedAt: Date
+    /// The ID of the issue field.
+    public var issueFieldId: Int?
+    /// The node ID of the field.
+    public var nodeId: String?
+    /// The options available for single select fields.
+    public var options: [ProjectsV2SingleSelectOptions]?
+    /// Configuration for iteration fields.
+    public var configuration: ProjectsV2FieldConfiguration?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case projectUrl = "project_url"
+        case name
+        case dataType = "data_type"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+        case issueFieldId = "issue_field_id"
+        case nodeId = "node_id"
+        case options
+        case configuration
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension ProjectsV2Field {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.projectUrl) else {
+            throw SdkValidationError(
+                field: "project_url",
+                code: "required",
+                message: "Validation failed for 'project_url': value is required"
+            )
+        }
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        guard container.contains(.dataType) else {
+            throw SdkValidationError(
+                field: "data_type",
+                code: "required",
+                message: "Validation failed for 'data_type': value is required"
+            )
+        }
+        guard container.contains(.createdAt) else {
+            throw SdkValidationError(
+                field: "created_at",
+                code: "required",
+                message: "Validation failed for 'created_at': value is required"
+            )
+        }
+        guard container.contains(.updatedAt) else {
+            throw SdkValidationError(
+                field: "updated_at",
+                code: "required",
+                message: "Validation failed for 'updated_at': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        projectUrl = try container.sdkDecodeRequired(.projectUrl)
+        name = try container.sdkDecodeRequired(.name)
+        dataType = try container.sdkDecodeRequired(.dataType)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        issueFieldId = try container.sdkDecodeIfPresent(.issueFieldId)
+        nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        options = try container.sdkDecodeIfPresent(.options)
+        configuration = try container.sdkDecodeIfPresent(.configuration)
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
     }
 }

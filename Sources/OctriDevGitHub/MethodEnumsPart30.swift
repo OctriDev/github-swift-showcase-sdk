@@ -6,6 +6,34 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
+public struct OrgsSetClusterDeploymentRecordsRequestBodyDeploymentsItemRuntXd81b427d92: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let criticalResource =
+        OrgsSetClusterDeploymentRecordsRequestBodyDeploymentsItemRuntXd81b427d92(rawValue: "critical-resource")
+    public static let internetExposed =
+        OrgsSetClusterDeploymentRecordsRequestBodyDeploymentsItemRuntXd81b427d92(rawValue: "internet-exposed")
+    public static let lateralMovement =
+        OrgsSetClusterDeploymentRecordsRequestBodyDeploymentsItemRuntXd81b427d92(rawValue: "lateral-movement")
+    public static let sensitiveData =
+        OrgsSetClusterDeploymentRecordsRequestBodyDeploymentsItemRuntXd81b427d92(rawValue: "sensitive-data")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
 /// Type of artifact. Available Values: `pull`, `branch`.
 public struct AgentTasksListTasksForRepoResponseTasksItemArtifactsItemType: RawRepresentable, Hashable, Codable,
     Sendable, SdkWireConvertible {
@@ -227,33 +255,6 @@ public struct CodeSecurityCreateConfigurationRequestBodySecretScanningGenericSec
         CodeSecurityCreateConfigurationRequestBodySecretScanningGenericSecrets(rawValue: "disabled")
     public static let notSet =
         CodeSecurityCreateConfigurationRequestBodySecretScanningGenericSecrets(rawValue: "not_set")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// Machine-readable error code
-public struct AgentTasksListTasksForRepoResponseErrorsItemCode: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let missing = AgentTasksListTasksForRepoResponseErrorsItemCode(rawValue: "missing")
-    public static let missingField = AgentTasksListTasksForRepoResponseErrorsItemCode(rawValue: "missing_field")
-    public static let invalid = AgentTasksListTasksForRepoResponseErrorsItemCode(rawValue: "invalid")
-    public static let alreadyExists = AgentTasksListTasksForRepoResponseErrorsItemCode(rawValue: "already_exists")
-    public static let unprocessable = AgentTasksListTasksForRepoResponseErrorsItemCode(rawValue: "unprocessable")
-    public static let custom = AgentTasksListTasksForRepoResponseErrorsItemCode(rawValue: "custom")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

@@ -4,46 +4,6 @@
 import Foundation
 
 /// Nullable domain models
-public extension NullableRepositoryWebhooksPermissions {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.admin) else {
-            throw SdkValidationError(
-                field: "admin",
-                code: "required",
-                message: "Validation failed for 'admin': value is required"
-            )
-        }
-        guard container.contains(.pull) else {
-            throw SdkValidationError(
-                field: "pull",
-                code: "required",
-                message: "Validation failed for 'pull': value is required"
-            )
-        }
-        guard container.contains(.push) else {
-            throw SdkValidationError(
-                field: "push",
-                code: "required",
-                message: "Validation failed for 'push': value is required"
-            )
-        }
-        admin = try container.sdkDecodeRequired(.admin)
-        pull = try container.sdkDecodeRequired(.pull)
-        push = try container.sdkDecodeRequired(.push)
-        triage = try container.sdkDecodeIfPresent(.triage)
-        maintain = try container.sdkDecodeIfPresent(.maintain)
-    }
-}
-
-public extension NullableRepositoryWebhooksPermissions {
-    init(admin: Bool, pull: Bool, push: Bool, triage: Bool? = nil, maintain: Bool? = nil) {
-        (self.admin, self.pull) = (admin, pull)
-        (self.push, self.triage) = (push, triage)
-        self.maintain = maintain
-    }
-}
-
 /// The repository on GitHub where the event occurred. Webhook payloads contain the `repository` property when the
 /// event occurs from activity in a repository.
 public struct NullableRepositoryWebhooks: Codable {

@@ -169,6 +169,34 @@ public struct ReposCreateInOrgRequestBodyMergeCommitTitle: RawRepresentable, Has
     }
 }
 
+/// The default value for a squash merge commit message: - `PR_BODY` - default to the pull request's body. -
+/// `COMMIT_MESSAGES` - default to the branch's commit messages. - `BLANK` - default to a blank commit message.
+public struct AppsListReposAccessibleToInstallationResponseRepositoriesItemX553368913c: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let prBody =
+        AppsListReposAccessibleToInstallationResponseRepositoriesItemX553368913c(rawValue: "PR_BODY")
+    public static let commitMessages =
+        AppsListReposAccessibleToInstallationResponseRepositoriesItemX553368913c(rawValue: "COMMIT_MESSAGES")
+    public static let blank =
+        AppsListReposAccessibleToInstallationResponseRepositoriesItemX553368913c(rawValue: "BLANK")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
 /// Required when using `merge_commit_message`. The default value for a merge commit title. - `PR_TITLE` -
 /// default to the pull request's title. - `MERGE_MESSAGE` - default to the classic title for a merge message
 /// (e.g., Merge pull request #123 from branch-name).
@@ -229,28 +257,6 @@ public struct AgentTasksListTasksForRepoResponseTasksItemCreatorType: RawReprese
 
     public static let user = AgentTasksListTasksForRepoResponseTasksItemCreatorType(rawValue: "user")
     public static let organization = AgentTasksListTasksForRepoResponseTasksItemCreatorType(rawValue: "organization")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-public struct AppsListAccountsForPlanStubbedParameter: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let asc = AppsListAccountsForPlanStubbedParameter(rawValue: "asc")
-    public static let desc = AppsListAccountsForPlanStubbedParameter(rawValue: "desc")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

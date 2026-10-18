@@ -8,6 +8,93 @@ import Foundation
 #endif
 
 /// Canonical projects operation model declarations
+public extension ProjectsAddFieldForUserRequestBodyVariant1 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        guard container.contains(.dataType) else {
+            throw SdkValidationError(
+                field: "data_type",
+                code: "required",
+                message: "Validation failed for 'data_type': value is required"
+            )
+        }
+        guard container.contains(.singleSelectOptions) else {
+            throw SdkValidationError(
+                field: "single_select_options",
+                code: "required",
+                message: "Validation failed for 'single_select_options': value is required"
+            )
+        }
+        name = try container.sdkDecodeRequired(.name)
+        dataType = try container.sdkDecodeRequired(.dataType)
+        singleSelectOptions = try container.sdkDecodeRequired(.singleSelectOptions)
+    }
+}
+
+public extension ProjectsAddFieldForUserRequestBodyVariant1 {
+    init(
+        name: String,
+        dataType: ProjectsAddFieldForUserRequestBodyVariant1DataType,
+        singleSelectOptions: [ProjectsV2FieldSingleSelectOption]
+    ) {
+        (self.name, self.dataType) = (name, dataType)
+        self.singleSelectOptions = singleSelectOptions
+    }
+}
+
+public indirect enum ProjectsCreateViewForUserRequestBodySortByItemItem {
+    case intValue(Int)
+    case stringValue(String)
+}
+
+extension ProjectsCreateViewForUserRequestBodySortByItemItem: Codable {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for ProjectsCreateViewForUserRequestBodySortByItemItem"
+        )
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        if try encodeGroup1(to: encoder) {
+            return
+        }
+    }
+}
+
+extension ProjectsCreateViewForUserRequestBodySortByItemItem {
+    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
+        if let value = try? container.decode(Int.self) {
+            return .intValue(value)
+        }
+        if let value = try? container.decode(String.self) {
+            return .stringValue(value)
+        }
+        return nil
+    }
+}
+
+extension ProjectsCreateViewForUserRequestBodySortByItemItem {
+    func encodeGroup1(to encoder: Encoder) throws -> Bool {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case let .intValue(value): try container.encode(value); return true
+        case let .stringValue(value): try container.encode(value); return true
+        }
+    }
+}
+
 extension ProjectsCreateViewForUserRequestBodySortByItemItem: SdkNumericValueConvertible {
     var sdkNumericValue: Double? {
         switch self {

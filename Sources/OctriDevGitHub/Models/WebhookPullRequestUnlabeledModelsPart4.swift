@@ -114,6 +114,9 @@ extension WebhookPullRequestUnlabeledPullRequestAssigneesItem {
     }
 }
 
+public typealias WebhookPullRequestUnlabeledPullRequestRequestedReviewersList =
+    [WebhookPullRequestUnlabeledPullRequestRequestedReviewersItem?]
+
 /// Required object value serialized in the `pull_request` wire field.
 public struct WebhookPullRequestUnlabeledPullRequest: Codable {
     /// Required object value serialized in the `_links` wire field.
@@ -169,7 +172,7 @@ public struct WebhookPullRequestUnlabeledPullRequest: Codable {
     /// Required `uri`-formatted value serialized in the `patch_url` wire field.
     public var patchUrl: String
     /// Required array value serialized in the `requested_reviewers` wire field.
-    public var requestedReviewers: [WebhookPullRequestUnlabeledPullRequestRequestedReviewersItem]
+    public var requestedReviewers: WebhookPullRequestUnlabeledPullRequestRequestedReviewersList
     /// Required array value serialized in the `requested_teams` wire field.
     public var requestedTeams: [WebhookPullRequestUnlabeledPullRequestRequestedTeamsItem]
     /// Required `uri-template`-formatted value serialized in the `review_comment_url` wire field.
@@ -357,7 +360,7 @@ public extension WebhookPullRequestUnlabeledPullRequest {
         nodeId: String,
         number: Int,
         patchUrl: String,
-        requestedReviewers: [WebhookPullRequestUnlabeledPullRequestRequestedReviewersItem],
+        requestedReviewers: WebhookPullRequestUnlabeledPullRequestRequestedReviewersList,
         requestedTeams: [WebhookPullRequestUnlabeledPullRequestRequestedTeamsItem],
         reviewCommentUrl: String,
         reviewCommentsUrl: String,

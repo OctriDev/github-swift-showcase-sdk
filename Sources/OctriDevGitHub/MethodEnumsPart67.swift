@@ -212,18 +212,21 @@ public struct AgentAutomationsListRepoAutomationsResponseAutomationsItemTriX863e
     }
 }
 
-/// The field's data type.
-public struct ProjectsAddFieldForOrgRequestBodyVariant1DataType: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+/// The default value for a merge commit title. - `PR_TITLE` - default to the pull request's title. -
+/// `MERGE_MESSAGE` - default to the classic title for a merge message (e.g., Merge pull request #123 from
+/// branch-name).
+public struct AppsListInstallationReposForAuthenticatedUserResponseRepositoX55612d4937: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
     public init(rawValue: String) {
         self.rawValue = rawValue
     }
 
-    public static let text = ProjectsAddFieldForOrgRequestBodyVariant1DataType(rawValue: "text")
-    public static let number = ProjectsAddFieldForOrgRequestBodyVariant1DataType(rawValue: "number")
-    public static let date = ProjectsAddFieldForOrgRequestBodyVariant1DataType(rawValue: "date")
+    public static let prTitle =
+        AppsListInstallationReposForAuthenticatedUserResponseRepositoX55612d4937(rawValue: "PR_TITLE")
+    public static let mergeMessage =
+        AppsListInstallationReposForAuthenticatedUserResponseRepositoX55612d4937(rawValue: "MERGE_MESSAGE")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
@@ -236,20 +239,18 @@ public struct ProjectsAddFieldForOrgRequestBodyVariant1DataType: RawRepresentabl
     }
 }
 
-/// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
-/// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
-public struct AgentAutomationsListRepoAutomationsResponseAutomationsItemTriXc7441fea4a: RawRepresentable, Hashable,
-    Codable, Sendable, SdkWireConvertible {
+/// The field's data type.
+public struct ProjectsAddFieldForOrgRequestBodyVariant1DataType: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
     public init(rawValue: String) {
         self.rawValue = rawValue
     }
 
-    public static let trigger =
-        AgentAutomationsListRepoAutomationsResponseAutomationsItemTriXc7441fea4a(rawValue: "trigger")
-    public static let repository =
-        AgentAutomationsListRepoAutomationsResponseAutomationsItemTriXc7441fea4a(rawValue: "repository")
+    public static let text = ProjectsAddFieldForOrgRequestBodyVariant1DataType(rawValue: "text")
+    public static let number = ProjectsAddFieldForOrgRequestBodyVariant1DataType(rawValue: "number")
+    public static let date = ProjectsAddFieldForOrgRequestBodyVariant1DataType(rawValue: "date")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

@@ -8,6 +8,57 @@ import Foundation
 #endif
 
 /// Canonical agentTasks operation model declarations
+/// Structured error response following GitHub REST API conventions. For 422 Unprocessable Entity the errors array
+/// contains validation details; for other error status codes only message and documentation_url are returned.
+public struct AgentTasksGetTaskByIdResponseXfbc13e2e: Codable {
+    /// Summary message (e.g. "Validation Failed", "Not Found")
+    public var message: String
+    /// URL to relevant API documentation
+    public var documentationUrl: String
+    /// List of validation errors (present only for 422 responses)
+    public var errors: [AgentTasksGetTaskByIdResponseErrorsItem]?
+
+    enum CodingKeys: String, CodingKey {
+        case message
+        case documentationUrl = "documentation_url"
+        case errors
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension AgentTasksGetTaskByIdResponseXfbc13e2e {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.message) else {
+            throw SdkValidationError(
+                field: "message",
+                code: "required",
+                message: "Validation failed for 'message': value is required"
+            )
+        }
+        guard container.contains(.documentationUrl) else {
+            throw SdkValidationError(
+                field: "documentation_url",
+                code: "required",
+                message: "Validation failed for 'documentation_url': value is required"
+            )
+        }
+        message = try container.sdkDecodeRequired(.message)
+        documentationUrl = try container.sdkDecodeRequired(.documentationUrl)
+        errors = try container.sdkDecodeIfPresent(.errors)
+    }
+}
+
+public extension AgentTasksGetTaskByIdResponseXfbc13e2e {
+    init(message: String, documentationUrl: String, errors: [AgentTasksGetTaskByIdResponseErrorsItem]? = nil) {
+        (self.message, self.documentationUrl) = (message, documentationUrl)
+        self.errors = errors
+    }
+}
+
 public struct AgentTasksListTasksResponseTasksItem: Codable {
     /// Unique task identifier
     public var id: String
@@ -205,5 +256,43 @@ public extension AgentTasksGetTaskByIdResponseVariant1 {
     init(sessions: [AgentTasksGetTaskByIdResponseVariant1SessionsItem]? = nil) {
         self.init()
         self.sessions = sessions
+    }
+}
+
+/// A GitHub resource (pull request, issue, etc.)
+public struct AgentTasksGetTaskByIdResponseVariant0ArtifactsItemDataVariant0: Codable {
+    /// GitHub resource ID
+    public var id: Int
+    /// GraphQL global ID
+    public var globalId: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case globalId = "global_id"
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension AgentTasksGetTaskByIdResponseVariant0ArtifactsItemDataVariant0 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        globalId = try container.sdkDecodeIfPresent(.globalId)
+    }
+}
+
+public extension AgentTasksGetTaskByIdResponseVariant0ArtifactsItemDataVariant0 {
+    init(id: Int, globalId: String? = nil) {
+        (self.id, self.globalId) = (id, globalId)
     }
 }

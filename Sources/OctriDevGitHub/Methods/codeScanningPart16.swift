@@ -38,7 +38,7 @@ public extension CodeScanningMethods {
             decoder: .empty,
             operationId: "codeScanningDeleteCodeqlDatabase",
             options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self]
+            errors: ["403": BasicError.self, "404": BasicError.self, "503": ServiceUnavailable.self]
         )).data
     }
 }

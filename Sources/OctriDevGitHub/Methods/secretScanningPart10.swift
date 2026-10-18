@@ -56,7 +56,8 @@ public extension SecretScanningMethods {
             ],
             decoder: .json,
             operationId: "secretScanningListLocationsForAlert",
-            options: requestOptions
+            options: requestOptions,
+            errors: ["503": ServiceUnavailable.self]
         )).data
     }
 }

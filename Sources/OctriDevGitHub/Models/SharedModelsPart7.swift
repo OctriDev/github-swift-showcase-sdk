@@ -4,6 +4,391 @@
 import Foundation
 
 /// Shared domain models
+public extension AppPermissions {
+    init(
+        actions: AppPermissionsActions? = nil,
+        administration: AppPermissionsAdministration? = nil,
+        artifactMetadata: AppPermissionsArtifactMetadata? = nil,
+        attestations: AppPermissionsAttestations? = nil,
+        checks: AppPermissionsChecks? = nil,
+        codeQuality: AppPermissionsCodeQuality? = nil,
+        codespaces: AppPermissionsCodespaces? = nil,
+        contents: AppPermissionsContents? = nil,
+        dependabotSecrets: AppPermissionsDependabotSecrets? = nil,
+        deployments: AppPermissionsDeployments? = nil,
+        discussions: AppPermissionsDiscussions? = nil,
+        environments: AppPermissionsEnvironments? = nil,
+        issues: AppPermissionsIssues? = nil,
+        mergeQueues: AppPermissionsMergeQueues? = nil,
+        metadata: AppPermissionsMetadata? = nil,
+        packages: AppPermissionsPackages? = nil,
+        pages: AppPermissionsPages? = nil,
+        pullRequests: AppPermissionsPullRequests? = nil,
+        repositoryCustomProperties: AppPermissionsRepositoryCustomProperties? = nil,
+        repositoryHooks: AppPermissionsRepositoryHooks? = nil,
+        repositoryProjects: AppPermissionsRepositoryProjects? = nil,
+        secretScanningAlerts: AppPermissionsSecretScanningAlerts? = nil,
+        secrets: AppPermissionsSecrets? = nil,
+        securityEvents: AppPermissionsSecurityEvents? = nil,
+        singleFile: AppPermissionsSingleFile? = nil,
+        statuses: AppPermissionsStatuses? = nil,
+        vulnerabilityAlerts: AppPermissionsVulnerabilityAlerts? = nil,
+        workflows: AppPermissionsWorkflows? = nil,
+        customPropertiesForOrganizations: AppPermissionsCustomPropertiesForOrganizations? = nil,
+        members: AppPermissionsMembers? = nil,
+        organizationAdministration: AppPermissionsOrganizationAdministration? = nil,
+        organizationCustomRoles: AppPermissionsOrganizationCustomRoles? = nil,
+        organizationCustomOrgRoles: AppPermissionsOrganizationCustomOrgRoles? = nil,
+        organizationCustomProperties: AppPermissionsOrganizationCustomProperties? = nil,
+        organizationCopilotSeatManagement: AppPermissionsOrganizationCopilotSeatManagement? = nil,
+        organizationCopilotAgentSettings: AppPermissionsOrganizationCopilotAgentSettings? = nil,
+        organizationCopilotRequests: AppPermissionsOrganizationCopilotRequests? = nil,
+        organizationExternalPropertiesForRepos: AppPermissionsOrganizationExternalPropertiesForRepos? = nil,
+        organizationAnnouncementBanners: AppPermissionsOrganizationAnnouncementBanners? = nil,
+        organizationEvents: AppPermissionsOrganizationEvents? = nil,
+        organizationHooks: AppPermissionsOrganizationHooks? = nil,
+        organizationPersonalAccessTokens: AppPermissionsOrganizationPersonalAccessTokens? = nil,
+        organizationPersonalAccessTokenRequests: AppPermissionsOrganizationPersonalAccessTokenRequests? = nil,
+        organizationPlan: AppPermissionsOrganizationPlan? = nil,
+        organizationProjects: AppPermissionsOrganizationProjects? = nil,
+        organizationPackages: AppPermissionsOrganizationPackages? = nil,
+        organizationSecrets: AppPermissionsOrganizationSecrets? = nil,
+        organizationSelfHostedRunners: AppPermissionsOrganizationSelfHostedRunners? = nil,
+        organizationUserBlocking: AppPermissionsOrganizationUserBlocking? = nil,
+        emailAddresses: AppPermissionsEmailAddresses? = nil,
+        followers: AppPermissionsFollowers? = nil,
+        gitSshKeys: AppPermissionsGitSshKeys? = nil,
+        gpgKeys: AppPermissionsGpgKeys? = nil,
+        interactionLimits: AppPermissionsInteractionLimits? = nil,
+        profile: AppPermissionsProfile? = nil,
+        starring: AppPermissionsStarring? = nil,
+        enterpriseCustomPropertiesForOrganizations: AppPermissionsEnterpriseCustomPropertiesForOrganizations? = nil
+    ) {
+        self.init(sdkDefaults: ())
+        sdkSet1(actions, administration, artifactMetadata, attestations, checks)
+        sdkSet2(codeQuality, codespaces, contents, dependabotSecrets, deployments)
+        sdkSet3(discussions, environments, issues, mergeQueues, metadata)
+        sdkSet4(packages, pages, pullRequests, repositoryCustomProperties, repositoryHooks)
+        sdkSet5(repositoryProjects, secretScanningAlerts, secrets, securityEvents, singleFile)
+        sdkSet6(statuses, vulnerabilityAlerts, workflows, customPropertiesForOrganizations, members)
+        sdkSet7(organizationAdministration, organizationCustomRoles, organizationCustomOrgRoles)
+        sdkSet8(organizationCustomProperties, organizationCopilotSeatManagement, organizationCopilotAgentSettings)
+        sdkSet9(organizationCopilotRequests, organizationExternalPropertiesForRepos, organizationAnnouncementBanners)
+        sdkSet10(organizationEvents, organizationHooks, organizationPersonalAccessTokens)
+        sdkSet11(organizationPersonalAccessTokenRequests, organizationPlan, organizationProjects)
+        sdkSet12(organizationPackages, organizationSecrets, organizationSelfHostedRunners, organizationUserBlocking)
+        sdkSet13(emailAddresses, followers, gitSshKeys, gpgKeys, interactionLimits)
+        sdkSet14(profile, starring, enterpriseCustomPropertiesForOrganizations)
+    }
+}
+
+extension AppPermissions {
+    mutating func sdkSet1(
+        _ actions: AppPermissionsActions?,
+        _ administration: AppPermissionsAdministration?,
+        _ artifactMetadata: AppPermissionsArtifactMetadata?,
+        _ attestations: AppPermissionsAttestations?,
+        _ checks: AppPermissionsChecks?
+    ) {
+        self.actions = actions
+        self.administration = administration
+        self.artifactMetadata = artifactMetadata
+        self.attestations = attestations
+        self.checks = checks
+    }
+}
+
+extension AppPermissions {
+    mutating func sdkSet2(
+        _ codeQuality: AppPermissionsCodeQuality?,
+        _ codespaces: AppPermissionsCodespaces?,
+        _ contents: AppPermissionsContents?,
+        _ dependabotSecrets: AppPermissionsDependabotSecrets?,
+        _ deployments: AppPermissionsDeployments?
+    ) {
+        self.codeQuality = codeQuality
+        self.codespaces = codespaces
+        self.contents = contents
+        self.dependabotSecrets = dependabotSecrets
+        self.deployments = deployments
+    }
+}
+
+extension AppPermissions {
+    mutating func sdkSet3(
+        _ discussions: AppPermissionsDiscussions?,
+        _ environments: AppPermissionsEnvironments?,
+        _ issues: AppPermissionsIssues?,
+        _ mergeQueues: AppPermissionsMergeQueues?,
+        _ metadata: AppPermissionsMetadata?
+    ) {
+        self.discussions = discussions
+        self.environments = environments
+        self.issues = issues
+        self.mergeQueues = mergeQueues
+        self.metadata = metadata
+    }
+}
+
+extension AppPermissions {
+    mutating func sdkSet4(
+        _ packages: AppPermissionsPackages?,
+        _ pages: AppPermissionsPages?,
+        _ pullRequests: AppPermissionsPullRequests?,
+        _ repositoryCustomProperties: AppPermissionsRepositoryCustomProperties?,
+        _ repositoryHooks: AppPermissionsRepositoryHooks?
+    ) {
+        self.packages = packages
+        self.pages = pages
+        self.pullRequests = pullRequests
+        self.repositoryCustomProperties = repositoryCustomProperties
+        self.repositoryHooks = repositoryHooks
+    }
+}
+
+extension AppPermissions {
+    mutating func sdkSet5(
+        _ repositoryProjects: AppPermissionsRepositoryProjects?,
+        _ secretScanningAlerts: AppPermissionsSecretScanningAlerts?,
+        _ secrets: AppPermissionsSecrets?,
+        _ securityEvents: AppPermissionsSecurityEvents?,
+        _ singleFile: AppPermissionsSingleFile?
+    ) {
+        self.repositoryProjects = repositoryProjects
+        self.secretScanningAlerts = secretScanningAlerts
+        self.secrets = secrets
+        self.securityEvents = securityEvents
+        self.singleFile = singleFile
+    }
+}
+
+extension AppPermissions {
+    mutating func sdkSet6(
+        _ statuses: AppPermissionsStatuses?,
+        _ vulnerabilityAlerts: AppPermissionsVulnerabilityAlerts?,
+        _ workflows: AppPermissionsWorkflows?,
+        _ customPropertiesForOrganizations: AppPermissionsCustomPropertiesForOrganizations?,
+        _ members: AppPermissionsMembers?
+    ) {
+        self.statuses = statuses
+        self.vulnerabilityAlerts = vulnerabilityAlerts
+        self.workflows = workflows
+        self.customPropertiesForOrganizations = customPropertiesForOrganizations
+        self.members = members
+    }
+}
+
+extension AppPermissions {
+    mutating func sdkSet7(
+        _ organizationAdministration: AppPermissionsOrganizationAdministration?,
+        _ organizationCustomRoles: AppPermissionsOrganizationCustomRoles?,
+        _ organizationCustomOrgRoles: AppPermissionsOrganizationCustomOrgRoles?
+    ) {
+        self.organizationAdministration = organizationAdministration
+        self.organizationCustomRoles = organizationCustomRoles
+        self.organizationCustomOrgRoles = organizationCustomOrgRoles
+    }
+}
+
+extension AppPermissions {
+    mutating func sdkSet8(
+        _ organizationCustomProperties: AppPermissionsOrganizationCustomProperties?,
+        _ organizationCopilotSeatManagement: AppPermissionsOrganizationCopilotSeatManagement?,
+        _ organizationCopilotAgentSettings: AppPermissionsOrganizationCopilotAgentSettings?
+    ) {
+        self.organizationCustomProperties = organizationCustomProperties
+        self.organizationCopilotSeatManagement = organizationCopilotSeatManagement
+        self.organizationCopilotAgentSettings = organizationCopilotAgentSettings
+    }
+}
+
+extension AppPermissions {
+    mutating func sdkSet9(
+        _ organizationCopilotRequests: AppPermissionsOrganizationCopilotRequests?,
+        _ organizationExternalPropertiesForRepos: AppPermissionsOrganizationExternalPropertiesForRepos?,
+        _ organizationAnnouncementBanners: AppPermissionsOrganizationAnnouncementBanners?
+    ) {
+        self.organizationCopilotRequests = organizationCopilotRequests
+        self.organizationExternalPropertiesForRepos = organizationExternalPropertiesForRepos
+        self.organizationAnnouncementBanners = organizationAnnouncementBanners
+    }
+}
+
+extension AppPermissions {
+    mutating func sdkSet10(
+        _ organizationEvents: AppPermissionsOrganizationEvents?,
+        _ organizationHooks: AppPermissionsOrganizationHooks?,
+        _ organizationPersonalAccessTokens: AppPermissionsOrganizationPersonalAccessTokens?
+    ) {
+        self.organizationEvents = organizationEvents
+        self.organizationHooks = organizationHooks
+        self.organizationPersonalAccessTokens = organizationPersonalAccessTokens
+    }
+}
+
+extension AppPermissions {
+    mutating func sdkSet11(
+        _ organizationPersonalAccessTokenRequests: AppPermissionsOrganizationPersonalAccessTokenRequests?,
+        _ organizationPlan: AppPermissionsOrganizationPlan?,
+        _ organizationProjects: AppPermissionsOrganizationProjects?
+    ) {
+        self.organizationPersonalAccessTokenRequests = organizationPersonalAccessTokenRequests
+        self.organizationPlan = organizationPlan
+        self.organizationProjects = organizationProjects
+    }
+}
+
+extension AppPermissions {
+    mutating func sdkSet12(
+        _ organizationPackages: AppPermissionsOrganizationPackages?,
+        _ organizationSecrets: AppPermissionsOrganizationSecrets?,
+        _ organizationSelfHostedRunners: AppPermissionsOrganizationSelfHostedRunners?,
+        _ organizationUserBlocking: AppPermissionsOrganizationUserBlocking?
+    ) {
+        self.organizationPackages = organizationPackages
+        self.organizationSecrets = organizationSecrets
+        self.organizationSelfHostedRunners = organizationSelfHostedRunners
+        self.organizationUserBlocking = organizationUserBlocking
+    }
+}
+
+extension AppPermissions {
+    mutating func sdkSet13(
+        _ emailAddresses: AppPermissionsEmailAddresses?,
+        _ followers: AppPermissionsFollowers?,
+        _ gitSshKeys: AppPermissionsGitSshKeys?,
+        _ gpgKeys: AppPermissionsGpgKeys?,
+        _ interactionLimits: AppPermissionsInteractionLimits?
+    ) {
+        self.emailAddresses = emailAddresses
+        self.followers = followers
+        self.gitSshKeys = gitSshKeys
+        self.gpgKeys = gpgKeys
+        self.interactionLimits = interactionLimits
+    }
+}
+
+extension AppPermissions {
+    mutating func sdkSet14(
+        _ profile: AppPermissionsProfile?,
+        _ starring: AppPermissionsStarring?,
+        _ enterpriseCustomPropertiesForOrganizations: AppPermissionsEnterpriseCustomPropertiesForOrganizations?
+    ) {
+        self.profile = profile
+        self.starring = starring
+        self.enterpriseCustomPropertiesForOrganizations = enterpriseCustomPropertiesForOrganizations
+    }
+}
+
+extension AppPermissions {
+    mutating func sdkDecodeFieldsPart1(_ container: KeyedDecodingContainer<CodingKeys>) throws {
+        actions = try container.sdkDecodeIfPresent(.actions)
+        administration = try container.sdkDecodeIfPresent(.administration)
+        artifactMetadata = try container.sdkDecodeIfPresent(.artifactMetadata)
+        attestations = try container.sdkDecodeIfPresent(.attestations)
+        checks = try container.sdkDecodeIfPresent(.checks)
+        codeQuality = try container.sdkDecodeIfPresent(.codeQuality)
+        codespaces = try container.sdkDecodeIfPresent(.codespaces)
+        contents = try container.sdkDecodeIfPresent(.contents)
+        dependabotSecrets = try container.sdkDecodeIfPresent(.dependabotSecrets)
+        deployments = try container.sdkDecodeIfPresent(.deployments)
+        discussions = try container.sdkDecodeIfPresent(.discussions)
+        environments = try container.sdkDecodeIfPresent(.environments)
+    }
+}
+
+extension AppPermissions {
+    mutating func sdkDecodeFieldsPart2(_ container: KeyedDecodingContainer<CodingKeys>) throws {
+        issues = try container.sdkDecodeIfPresent(.issues)
+        mergeQueues = try container.sdkDecodeIfPresent(.mergeQueues)
+        metadata = try container.sdkDecodeIfPresent(.metadata)
+        packages = try container.sdkDecodeIfPresent(.packages)
+        pages = try container.sdkDecodeIfPresent(.pages)
+        pullRequests = try container.sdkDecodeIfPresent(.pullRequests)
+        repositoryCustomProperties = try container.sdkDecodeIfPresent(.repositoryCustomProperties)
+        repositoryHooks = try container.sdkDecodeIfPresent(.repositoryHooks)
+        repositoryProjects = try container.sdkDecodeIfPresent(.repositoryProjects)
+        secretScanningAlerts = try container.sdkDecodeIfPresent(.secretScanningAlerts)
+        secrets = try container.sdkDecodeIfPresent(.secrets)
+        securityEvents = try container.sdkDecodeIfPresent(.securityEvents)
+    }
+}
+
+extension AppPermissions {
+    mutating func sdkDecodeFieldsPart3(_ container: KeyedDecodingContainer<CodingKeys>) throws {
+        singleFile = try container.sdkDecodeIfPresent(.singleFile)
+        statuses = try container.sdkDecodeIfPresent(.statuses)
+        vulnerabilityAlerts = try container.sdkDecodeIfPresent(.vulnerabilityAlerts)
+        workflows = try container.sdkDecodeIfPresent(.workflows)
+        customPropertiesForOrganizations = try container.sdkDecodeIfPresent(.customPropertiesForOrganizations)
+        members = try container.sdkDecodeIfPresent(.members)
+        organizationAdministration = try container.sdkDecodeIfPresent(.organizationAdministration)
+        organizationCustomRoles = try container.sdkDecodeIfPresent(.organizationCustomRoles)
+        organizationCustomOrgRoles = try container.sdkDecodeIfPresent(.organizationCustomOrgRoles)
+        organizationCustomProperties = try container.sdkDecodeIfPresent(.organizationCustomProperties)
+        organizationCopilotSeatManagement = try container.sdkDecodeIfPresent(.organizationCopilotSeatManagement)
+        organizationCopilotAgentSettings = try container.sdkDecodeIfPresent(.organizationCopilotAgentSettings)
+    }
+}
+
+extension AppPermissions {
+    mutating func sdkDecodeFieldsPart4(_ container: KeyedDecodingContainer<CodingKeys>) throws {
+        organizationCopilotRequests = try container.sdkDecodeIfPresent(.organizationCopilotRequests)
+        organizationExternalPropertiesForRepos = try container
+            .sdkDecodeIfPresent(.organizationExternalPropertiesForRepos)
+        organizationAnnouncementBanners = try container.sdkDecodeIfPresent(.organizationAnnouncementBanners)
+        organizationEvents = try container.sdkDecodeIfPresent(.organizationEvents)
+        organizationHooks = try container.sdkDecodeIfPresent(.organizationHooks)
+        organizationPersonalAccessTokens = try container.sdkDecodeIfPresent(.organizationPersonalAccessTokens)
+        organizationPersonalAccessTokenRequests = try container
+            .sdkDecodeIfPresent(.organizationPersonalAccessTokenRequests)
+        organizationPlan = try container.sdkDecodeIfPresent(.organizationPlan)
+        organizationProjects = try container.sdkDecodeIfPresent(.organizationProjects)
+        organizationPackages = try container.sdkDecodeIfPresent(.organizationPackages)
+        organizationSecrets = try container.sdkDecodeIfPresent(.organizationSecrets)
+        organizationSelfHostedRunners = try container.sdkDecodeIfPresent(.organizationSelfHostedRunners)
+    }
+}
+
+extension AppPermissions {
+    mutating func sdkDecodeFieldsPart5(_ container: KeyedDecodingContainer<CodingKeys>) throws {
+        organizationUserBlocking = try container.sdkDecodeIfPresent(.organizationUserBlocking)
+        emailAddresses = try container.sdkDecodeIfPresent(.emailAddresses)
+        followers = try container.sdkDecodeIfPresent(.followers)
+        gitSshKeys = try container.sdkDecodeIfPresent(.gitSshKeys)
+        gpgKeys = try container.sdkDecodeIfPresent(.gpgKeys)
+        interactionLimits = try container.sdkDecodeIfPresent(.interactionLimits)
+        profile = try container.sdkDecodeIfPresent(.profile)
+        starring = try container.sdkDecodeIfPresent(.starring)
+        enterpriseCustomPropertiesForOrganizations = try container
+            .sdkDecodeIfPresent(.enterpriseCustomPropertiesForOrganizations)
+    }
+}
+
+public indirect enum CustomPropertyValueValue {
+    case stringValue(String)
+    case stringList([String])
+}
+
+extension CustomPropertyValueValue: Codable {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for CustomPropertyValueValue"
+        )
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        if try encodeGroup1(to: encoder) {
+            return
+        }
+    }
+}
+
 extension CustomPropertyValueValue {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
         if let value = try? container.decode(String.self) {
@@ -207,433 +592,6 @@ public struct AppPermissionsDiscussions: RawRepresentable, Hashable, Codable, Se
 
     public static let read = AppPermissionsDiscussions(rawValue: "read")
     public static let write = AppPermissionsDiscussions(rawValue: "write")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// The level of permission to grant the access token for deployments and deployment statuses.
-public struct AppPermissionsDeployments: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let read = AppPermissionsDeployments(rawValue: "read")
-    public static let write = AppPermissionsDeployments(rawValue: "write")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// The level of permission to grant the access token to retrieve Pages statuses, configuration, and builds, as
-/// well as create new builds.
-public struct AppPermissionsPages: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let read = AppPermissionsPages(rawValue: "read")
-    public static let write = AppPermissionsPages(rawValue: "write")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// The level of permission to grant the access token for checks on code.
-public struct AppPermissionsChecks: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let read = AppPermissionsChecks(rawValue: "read")
-    public static let write = AppPermissionsChecks(rawValue: "write")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// The level of permission to grant the access token to manage the post-receive hooks for a repository.
-public struct AppPermissionsRepositoryHooks: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let read = AppPermissionsRepositoryHooks(rawValue: "read")
-    public static let write = AppPermissionsRepositoryHooks(rawValue: "write")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// The level of permission to grant the access token to manage the merge queues for a repository.
-public struct AppPermissionsMergeQueues: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let read = AppPermissionsMergeQueues(rawValue: "read")
-    public static let write = AppPermissionsMergeQueues(rawValue: "write")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// The level of permission to grant the access token for viewing and managing fine-grained personal access
-/// token requests to an organization.
-public struct AppPermissionsOrganizationPersonalAccessTokens: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let read = AppPermissionsOrganizationPersonalAccessTokens(rawValue: "read")
-    public static let write = AppPermissionsOrganizationPersonalAccessTokens(rawValue: "write")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// The level of permission to grant the access token for pull requests and related comments, assignees, labels,
-/// milestones, and merges.
-public struct AppPermissionsPullRequests: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let read = AppPermissionsPullRequests(rawValue: "read")
-    public static let write = AppPermissionsPullRequests(rawValue: "write")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// The level of permission to grant the access token for packages published to GitHub Packages.
-public struct AppPermissionsPackages: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let read = AppPermissionsPackages(rawValue: "read")
-    public static let write = AppPermissionsPackages(rawValue: "write")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// The level of permission to grant the access token to update GitHub Actions workflow files.
-public struct AppPermissionsWorkflows: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let write = AppPermissionsWorkflows(rawValue: "write")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// The default value for a squash merge commit message: - `PR_BODY` - default to the pull request's body. -
-/// `COMMIT_MESSAGES` - default to the branch's commit messages. - `BLANK` - default to a blank commit message.
-public struct FullRepositorySquashMergeCommitMessage: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let prBody = FullRepositorySquashMergeCommitMessage(rawValue: "PR_BODY")
-    public static let commitMessages = FullRepositorySquashMergeCommitMessage(rawValue: "COMMIT_MESSAGES")
-    public static let blank = FullRepositorySquashMergeCommitMessage(rawValue: "BLANK")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// The level of permission to grant the access token to view and manage secret scanning alerts.
-public struct AppPermissionsSecretScanningAlerts: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let read = AppPermissionsSecretScanningAlerts(rawValue: "read")
-    public static let write = AppPermissionsSecretScanningAlerts(rawValue: "write")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// The level of permission to grant the access token to view and manage code quality data.
-public struct AppPermissionsCodeQuality: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let read = AppPermissionsCodeQuality(rawValue: "read")
-    public static let write = AppPermissionsCodeQuality(rawValue: "write")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// The level of permission to grant the access token for managing repository environments.
-public struct AppPermissionsEnvironments: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let read = AppPermissionsEnvironments(rawValue: "read")
-    public static let write = AppPermissionsEnvironments(rawValue: "write")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// The level of permission to grant the access token to manage organization secrets.
-public struct AppPermissionsOrganizationSecrets: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let read = AppPermissionsOrganizationSecrets(rawValue: "read")
-    public static let write = AppPermissionsOrganizationSecrets(rawValue: "write")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// The policy controlling who can create pull requests: all or collaborators_only.
-public struct MinimalRepositoryPullRequestCreationPolicy: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let all = MinimalRepositoryPullRequestCreationPolicy(rawValue: "all")
-    public static let collaboratorsOnly = MinimalRepositoryPullRequestCreationPolicy(rawValue: "collaborators_only")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// The level of permission to grant the access token to manage the post-receive hooks for an organization.
-public struct AppPermissionsOrganizationHooks: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let read = AppPermissionsOrganizationHooks(rawValue: "read")
-    public static let write = AppPermissionsOrganizationHooks(rawValue: "write")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// The level of permission to grant the access token for GitHub Actions workflows, workflow runs, and
-/// artifacts.
-public struct AppPermissionsActions: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let read = AppPermissionsActions(rawValue: "read")
-    public static let write = AppPermissionsActions(rawValue: "write")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// The level of permission to grant the access token for custom organization roles management.
-public struct AppPermissionsOrganizationCustomOrgRoles: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let read = AppPermissionsOrganizationCustomOrgRoles(rawValue: "read")
-    public static let write = AppPermissionsOrganizationCustomOrgRoles(rawValue: "write")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// The level of permission to create and retrieve the access token for repository attestations.
-public struct AppPermissionsAttestations: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let read = AppPermissionsAttestations(rawValue: "read")
-    public static let write = AppPermissionsAttestations(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

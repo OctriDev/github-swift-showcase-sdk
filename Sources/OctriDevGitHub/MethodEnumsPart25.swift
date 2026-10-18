@@ -6,6 +6,55 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
+public struct ReposListForOrgParameterX0727468a: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let created = ReposListForOrgParameterX0727468a(rawValue: "created")
+    public static let updated = ReposListForOrgParameterX0727468a(rawValue: "updated")
+    public static let pushed = ReposListForOrgParameterX0727468a(rawValue: "pushed")
+    public static let fullName = ReposListForOrgParameterX0727468a(rawValue: "full_name")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
+/// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
+public struct AgentAutomationsListAutomationsResponseItemTriggersPullRequesXc47ff36cb0: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let trigger =
+        AgentAutomationsListAutomationsResponseItemTriggersPullRequesXc47ff36cb0(rawValue: "trigger")
+    public static let repository =
+        AgentAutomationsListAutomationsResponseItemTriggersPullRequesXc47ff36cb0(rawValue: "repository")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
 /// The merge method to use for a direct merge. Only supported for direct merges.
 public struct PullsMergeAsyncRequestBodyMergeMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
@@ -180,65 +229,6 @@ public struct AgentAutomationsListAutomationsResponseItemTriggersIssueAssigX0256
         AgentAutomationsListAutomationsResponseItemTriggersIssueAssigX025640c3b5(rawValue: "trigger")
     public static let repository =
         AgentAutomationsListAutomationsResponseItemTriggersIssueAssigX025640c3b5(rawValue: "repository")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// The reaction type to add to the issue.
-public struct ReactionsCreateForIssueRequestBodyContent: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let plus1 = ReactionsCreateForIssueRequestBodyContent(rawValue: "+1")
-    public static let minus1 = ReactionsCreateForIssueRequestBodyContent(rawValue: "-1")
-    public static let laugh = ReactionsCreateForIssueRequestBodyContent(rawValue: "laugh")
-    public static let confused = ReactionsCreateForIssueRequestBodyContent(rawValue: "confused")
-    public static let heart = ReactionsCreateForIssueRequestBodyContent(rawValue: "heart")
-    public static let hooray = ReactionsCreateForIssueRequestBodyContent(rawValue: "hooray")
-    public static let rocket = ReactionsCreateForIssueRequestBodyContent(rawValue: "rocket")
-    public static let eyes = ReactionsCreateForIssueRequestBodyContent(rawValue: "eyes")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// Machine-readable error code
-public struct AgentAutomationsListRepoAutomationsResponseErrorsItemCode: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let missing = AgentAutomationsListRepoAutomationsResponseErrorsItemCode(rawValue: "missing")
-    public static let missingField =
-        AgentAutomationsListRepoAutomationsResponseErrorsItemCode(rawValue: "missing_field")
-    public static let invalid = AgentAutomationsListRepoAutomationsResponseErrorsItemCode(rawValue: "invalid")
-    public static let alreadyExists =
-        AgentAutomationsListRepoAutomationsResponseErrorsItemCode(rawValue: "already_exists")
-    public static let unprocessable =
-        AgentAutomationsListRepoAutomationsResponseErrorsItemCode(rawValue: "unprocessable")
-    public static let custom = AgentAutomationsListRepoAutomationsResponseErrorsItemCode(rawValue: "custom")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

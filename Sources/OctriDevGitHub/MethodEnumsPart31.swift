@@ -6,6 +6,33 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
+/// Machine-readable error code
+public struct AgentTasksListTasksForRepoResponseErrorsItemCode: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let missing = AgentTasksListTasksForRepoResponseErrorsItemCode(rawValue: "missing")
+    public static let missingField = AgentTasksListTasksForRepoResponseErrorsItemCode(rawValue: "missing_field")
+    public static let invalid = AgentTasksListTasksForRepoResponseErrorsItemCode(rawValue: "invalid")
+    public static let alreadyExists = AgentTasksListTasksForRepoResponseErrorsItemCode(rawValue: "already_exists")
+    public static let unprocessable = AgentTasksListTasksForRepoResponseErrorsItemCode(rawValue: "unprocessable")
+    public static let custom = AgentTasksListTasksForRepoResponseErrorsItemCode(rawValue: "custom")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
 /// The role to give the user in the organization. Can be one of: * `admin` - The user will become an owner of
 /// the organization. * `member` - The user will become a non-owner member of the organization.
 public struct OrgsSetMembershipForUserRequestBodyRole: RawRepresentable, Hashable, Codable, Sendable,
@@ -221,32 +248,6 @@ public struct PullsCreateReviewCommentRequestBodySide: RawRepresentable, Hashabl
 
     public static let left = PullsCreateReviewCommentRequestBodySide(rawValue: "LEFT")
     public static let right = PullsCreateReviewCommentRequestBodySide(rawValue: "RIGHT")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
-/// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
-public struct AgentAutomationsListRepoAutomationsResponseAutomationsItemTriX830ecc8566: RawRepresentable, Hashable,
-    Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let trigger =
-        AgentAutomationsListRepoAutomationsResponseAutomationsItemTriX830ecc8566(rawValue: "trigger")
-    public static let repository =
-        AgentAutomationsListRepoAutomationsResponseAutomationsItemTriX830ecc8566(rawValue: "repository")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

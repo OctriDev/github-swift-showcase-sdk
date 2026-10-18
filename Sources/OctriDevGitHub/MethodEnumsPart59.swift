@@ -6,30 +6,6 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public struct AgentAutomationsGetRepoAutomationResponseTriggersPullRequestCX15b4780a96: RawRepresentable, Hashable,
-    Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let timelineComment =
-        AgentAutomationsGetRepoAutomationResponseTriggersPullRequestCX15b4780a96(rawValue: "timeline_comment")
-    public static let reviewComment =
-        AgentAutomationsGetRepoAutomationResponseTriggersPullRequestCX15b4780a96(rawValue: "review_comment")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
 /// The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or
 /// `COMMENT`. By leaving this blank, you set the review action state to `PENDING`, which means you will need to
 /// submit the pull request review when you are ready.
@@ -243,6 +219,33 @@ public struct CodeSecurityCreateConfigurationRequestBodyCodeScanningDefaultSetup
     public static let disabled =
         CodeSecurityCreateConfigurationRequestBodyCodeScanningDefaultSetup(rawValue: "disabled")
     public static let notSet = CodeSecurityCreateConfigurationRequestBodyCodeScanningDefaultSetup(rawValue: "not_set")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// The enablement status of secret scanning extended metadata
+public struct CodeSecurityUpdateConfigurationRequestBodySecretScanningExtendedMetadata: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let enabled =
+        CodeSecurityUpdateConfigurationRequestBodySecretScanningExtendedMetadata(rawValue: "enabled")
+    public static let disabled =
+        CodeSecurityUpdateConfigurationRequestBodySecretScanningExtendedMetadata(rawValue: "disabled")
+    public static let notSet =
+        CodeSecurityUpdateConfigurationRequestBodySecretScanningExtendedMetadata(rawValue: "not_set")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

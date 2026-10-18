@@ -40,7 +40,7 @@ public extension CodeScanningMethods {
             decoder: .json,
             operationId: "codeScanningGetSarif",
             options: requestOptions,
-            errors: ["403": BasicError.self]
+            errors: ["403": BasicError.self, "503": ServiceUnavailable.self]
         )).data
     }
 }

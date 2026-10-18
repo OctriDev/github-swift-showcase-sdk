@@ -70,7 +70,7 @@ public extension SearchMethods {
             decoder: .json,
             operationId: "searchCode",
             options: requestOptions,
-            errors: ["403": BasicError.self, "422": ValidationError.self]
+            errors: ["403": BasicError.self, "422": ValidationError.self, "503": ServiceUnavailable.self]
         )).data
     }
 }

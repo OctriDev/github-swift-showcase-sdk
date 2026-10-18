@@ -86,6 +86,83 @@ public extension WebhookPullRequestReviewRequestedVariant1PullRequestHead {
     }
 }
 
+public indirect enum WebhookPullRequestReviewRequestedVariant0PullRequestRequestedX0cdce265c4 {
+    case webhookPullRequestReviewRequestedVariant0PullRequestRequestedX262e9a9d0e(
+        WebhookPullRequestReviewRequestedVariant0PullRequestRequestedX262e9a9d0e
+    )
+    case webhookPullRequestReviewRequestedVariant0PullRequestRequestedXac20b0f837(
+        WebhookPullRequestReviewRequestedVariant0PullRequestRequestedXac20b0f837
+    )
+}
+
+extension WebhookPullRequestReviewRequestedVariant0PullRequestRequestedX0cdce265c4: Codable {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) {
+                self = value; return
+            }
+        }
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for WebhookPullRequestReviewRequestedVariant0PullRequestRequestedX0cdce265c4"
+        )
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        if try encodeGroup1(to: encoder) {
+            return
+        }
+    }
+}
+
+extension WebhookPullRequestReviewRequestedVariant0PullRequestRequestedX0cdce265c4 {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container
+            .decode(WebhookPullRequestReviewRequestedVariant0PullRequestRequestedX262e9a9d0e.self),
+            sdkKeepsEveryKey(value, of: raw) {
+            return .webhookPullRequestReviewRequestedVariant0PullRequestRequestedX262e9a9d0e(value)
+        }
+        if let value = try? container
+            .decode(WebhookPullRequestReviewRequestedVariant0PullRequestRequestedXac20b0f837.self),
+            sdkKeepsEveryKey(value, of: raw) {
+            return .webhookPullRequestReviewRequestedVariant0PullRequestRequestedXac20b0f837(value)
+        }
+        return nil
+    }
+}
+
+extension WebhookPullRequestReviewRequestedVariant0PullRequestRequestedX0cdce265c4 {
+    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
+        if let value = try? container.decode(
+            WebhookPullRequestReviewRequestedVariant0PullRequestRequestedX262e9a9d0e.self
+        ) {
+            return .webhookPullRequestReviewRequestedVariant0PullRequestRequestedX262e9a9d0e(value)
+        }
+        if let value = try? container.decode(
+            WebhookPullRequestReviewRequestedVariant0PullRequestRequestedXac20b0f837.self
+        ) {
+            return .webhookPullRequestReviewRequestedVariant0PullRequestRequestedXac20b0f837(value)
+        }
+        return nil
+    }
+}
+
+extension WebhookPullRequestReviewRequestedVariant0PullRequestRequestedX0cdce265c4 {
+    func encodeGroup1(to encoder: Encoder) throws -> Bool {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case let .webhookPullRequestReviewRequestedVariant0PullRequestRequestedX262e9a9d0e(value): try container
+            .encode(value); return true
+        case let .webhookPullRequestReviewRequestedVariant0PullRequestRequestedXac20b0f837(value): try container
+            .encode(value); return true
+        }
+    }
+}
+
 public struct WebhookPullRequestReviewRequestedVariant0PullRequestAssigneesItem: Codable {
     public var id: Int
     public var login: String
@@ -403,89 +480,7 @@ public extension WebhookPullRequestReviewRequestedVariant0PullRequestLinksReview
     }
 }
 
-public struct WebhookPullRequestReviewRequestedVariant1PullRequestBase: Codable {
-    public var label: String
-    public var ref: String
-    /// A git repository
-    public var repo: WebhookPullRequestReviewRequestedVariant1PullRequestBaseRepo
-    public var sha: String
-    /// User
-    public var user: WebhookPullRequestReviewRequestedVariant1PullRequestBaseUser?
-
-    enum CodingKeys: String, CodingKey {
-        case label
-        case ref
-        case repo
-        case sha
-        case user
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension WebhookPullRequestReviewRequestedVariant1PullRequestBase {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.label) else {
-            throw SdkValidationError(
-                field: "label",
-                code: "required",
-                message: "Validation failed for 'label': value is required"
-            )
-        }
-        guard container.contains(.ref) else {
-            throw SdkValidationError(
-                field: "ref",
-                code: "required",
-                message: "Validation failed for 'ref': value is required"
-            )
-        }
-        guard container.contains(.repo) else {
-            throw SdkValidationError(
-                field: "repo",
-                code: "required",
-                message: "Validation failed for 'repo': value is required"
-            )
-        }
-        guard container.contains(.sha) else {
-            throw SdkValidationError(
-                field: "sha",
-                code: "required",
-                message: "Validation failed for 'sha': value is required"
-            )
-        }
-        guard container.contains(.user) else {
-            throw SdkValidationError(
-                field: "user",
-                code: "required",
-                message: "Validation failed for 'user': value is required"
-            )
-        }
-        label = try container.sdkDecodeRequired(.label)
-        ref = try container.sdkDecodeRequired(.ref)
-        repo = try container.sdkDecodeRequired(.repo)
-        sha = try container.sdkDecodeRequired(.sha)
-        user = try container.sdkDecodeNullable(.user)
-    }
-}
-
-public extension WebhookPullRequestReviewRequestedVariant1PullRequestBase {
-    init(
-        label: String,
-        ref: String,
-        repo: WebhookPullRequestReviewRequestedVariant1PullRequestBaseRepo,
-        sha: String,
-        user: WebhookPullRequestReviewRequestedVariant1PullRequestBaseUser?
-    ) {
-        (self.label, self.ref) = (label, ref)
-        (self.repo, self.sha) = (repo, sha)
-        self.user = user
-    }
-}
-
-public struct WebhookPullRequestReviewRequestedVariant1PullRequestAssigneesItem: Codable {
+public struct WebhookPullRequestReviewRequestedVariant0PullRequestRequestedX262e9a9d0e: Codable {
     public var id: Int
     public var login: String
     public var avatarUrl: String?
@@ -505,7 +500,7 @@ public struct WebhookPullRequestReviewRequestedVariant1PullRequestAssigneesItem:
     public var siteAdmin: Bool?
     public var starredUrl: String?
     public var subscriptionsUrl: String?
-    public var type: WebhookPullRequestReviewRequestedVariant1PullRequestAssigneesItemType?
+    public var type: WebhookPullRequestReviewRequestedVariant0PullRequestRequestedX5177f61575?
     public var url: String?
     public var userViewType: String?
 
@@ -539,7 +534,7 @@ public struct WebhookPullRequestReviewRequestedVariant1PullRequestAssigneesItem:
     }
 }
 
-public extension WebhookPullRequestReviewRequestedVariant1PullRequestAssigneesItem {
+public extension WebhookPullRequestReviewRequestedVariant0PullRequestRequestedX262e9a9d0e {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
@@ -582,7 +577,7 @@ public extension WebhookPullRequestReviewRequestedVariant1PullRequestAssigneesIt
     }
 }
 
-public extension WebhookPullRequestReviewRequestedVariant1PullRequestAssigneesItem {
+public extension WebhookPullRequestReviewRequestedVariant0PullRequestRequestedX262e9a9d0e {
     init(
         id: Int,
         login: String,
@@ -603,7 +598,7 @@ public extension WebhookPullRequestReviewRequestedVariant1PullRequestAssigneesIt
         siteAdmin: Bool? = nil,
         starredUrl: String? = nil,
         subscriptionsUrl: String? = nil,
-        type: WebhookPullRequestReviewRequestedVariant1PullRequestAssigneesItemType? = nil,
+        type: WebhookPullRequestReviewRequestedVariant0PullRequestRequestedX5177f61575? = nil,
         url: String? = nil,
         userViewType: String? = nil
     ) throws {

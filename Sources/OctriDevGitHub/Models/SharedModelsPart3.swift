@@ -426,7 +426,7 @@ public struct Label: Codable {
     /// - Example: "2023-01-01T12:00:00Z"
     public var archivedAt: Date?
     /// The user who archived the label, or `null` if it has not been archived.
-    public var archivedBy: LabelArchivedBy?
+    public var archivedBy: SimpleUser?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -474,7 +474,7 @@ public extension Label {
         color: String,
         default: Bool,
         archivedAt: Date?,
-        archivedBy: LabelArchivedBy?
+        archivedBy: SimpleUser?
     ) throws {
         (self.id, self.nodeId) = (id, nodeId)
         (self.url, self.name) = (url, name)

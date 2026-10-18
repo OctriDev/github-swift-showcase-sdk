@@ -4,55 +4,8 @@
 import Foundation
 
 /// WebhookIssueCommentCreated domain models
-public extension WebhookIssueCommentCreatedIssueVariant0Milestone {
-    init(
-        closedAt: Date?,
-        closedIssues: Int,
-        createdAt: Date,
-        creator: WebhookIssueCommentCreatedIssueVariant0MilestoneCreator?,
-        description: String?,
-        dueOn: Date?,
-        htmlUrl: String,
-        id: Int,
-        labelsUrl: String,
-        nodeId: String,
-        number: Int,
-        openIssues: Int,
-        state: WebhookIssueCommentCreatedIssueVariant0MilestoneState,
-        title: String,
-        updatedAt: Date,
-        url: String
-    ) throws {
-        (self.closedAt, self.closedIssues) = (closedAt, closedIssues)
-        (self.createdAt, self.creator) = (createdAt, creator)
-        (self.description, self.dueOn) = (description, dueOn)
-        (self.htmlUrl, self.id) = (htmlUrl, id)
-        (self.labelsUrl, self.nodeId) = (labelsUrl, nodeId)
-        (self.number, self.openIssues) = (number, openIssues)
-        (self.state, self.title) = (state, title)
-        (self.updatedAt, self.url) = (updatedAt, url)
-        try sdkValidateConstraints()
-    }
-}
-
-extension WebhookIssueCommentCreatedIssueVariant0Milestone {
-    func sdkValidateConstraints() throws {
-        if let value = closedAt {
-            try sdkValidateDateTime("closed_at", sdkWireString(value))
-        }
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
-        if let value = dueOn {
-            try sdkValidateDateTime("due_on", sdkWireString(value))
-        }
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateUri("labels_url", labelsUrl)
-        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
-        try sdkValidateUri("url", url)
-    }
-}
-
-/// Optional object value serialized in the `assignee` wire field.
-public struct WebhookIssueCommentCreatedIssueVariant0Assignee: Codable {
+/// Required object value serialized in the `assignee` wire field.
+public struct WebhookIssueCommentCreatedIssueAssignee: Codable {
     /// Required `integer` value serialized in the `id` wire field.
     public var id: Int
     /// Required `string` value serialized in the `login` wire field.
@@ -92,7 +45,7 @@ public struct WebhookIssueCommentCreatedIssueVariant0Assignee: Codable {
     /// Optional `uri`-formatted value serialized in the `subscriptions_url` wire field.
     public var subscriptionsUrl: String?
     /// Optional enumerated value serialized in the `type` wire field.
-    public var type: WebhookIssueCommentCreatedIssueVariant0AssigneeType?
+    public var type: WebhookIssueCommentCreatedIssueAssigneeType?
     /// Optional `uri`-formatted value serialized in the `url` wire field.
     public var url: String?
     /// Optional `string` value serialized in the `user_view_type` wire field.
@@ -128,7 +81,7 @@ public struct WebhookIssueCommentCreatedIssueVariant0Assignee: Codable {
     }
 }
 
-public extension WebhookIssueCommentCreatedIssueVariant0Assignee {
+public extension WebhookIssueCommentCreatedIssueAssignee {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
@@ -171,7 +124,7 @@ public extension WebhookIssueCommentCreatedIssueVariant0Assignee {
     }
 }
 
-public extension WebhookIssueCommentCreatedIssueVariant0Assignee {
+public extension WebhookIssueCommentCreatedIssueAssignee {
     init(
         id: Int,
         login: String,
@@ -192,7 +145,7 @@ public extension WebhookIssueCommentCreatedIssueVariant0Assignee {
         siteAdmin: Bool? = nil,
         starredUrl: String? = nil,
         subscriptionsUrl: String? = nil,
-        type: WebhookIssueCommentCreatedIssueVariant0AssigneeType? = nil,
+        type: WebhookIssueCommentCreatedIssueAssigneeType? = nil,
         url: String? = nil,
         userViewType: String? = nil
     ) throws {
@@ -211,7 +164,7 @@ public extension WebhookIssueCommentCreatedIssueVariant0Assignee {
     }
 }
 
-extension WebhookIssueCommentCreatedIssueVariant0Assignee {
+extension WebhookIssueCommentCreatedIssueAssignee {
     func sdkValidateConstraints() throws {
         if let value = avatarUrl {
             try sdkValidateUri("avatar_url", value)
@@ -240,8 +193,120 @@ extension WebhookIssueCommentCreatedIssueVariant0Assignee {
     }
 }
 
+/// The comment itself.
+public struct WebhookIssueCommentCreatedComment: Codable {
+    /// How the author is associated with the repository.
+    public var authorAssociation: WebhookIssueCommentCreatedCommentAuthorAssociation
+    /// Contents of the issue comment
+    public var body: String
+    /// Required `date-time`-formatted value serialized in the `created_at` wire field.
+    public var createdAt: Date
+    /// Required `uri`-formatted value serialized in the `html_url` wire field.
+    public var htmlUrl: String
+    /// Unique identifier of the issue comment
+    public var id: Int
+    /// Required `uri`-formatted value serialized in the `issue_url` wire field.
+    public var issueUrl: String
+    /// Required `string` value serialized in the `node_id` wire field.
+    public var nodeId: String
+    /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user
+    /// accounts and granted access to specific repositories. They come with granular permissions and built-in
+    /// webhooks. GitHub apps are first class actors within GitHub.
+    public var performedViaGithubApp: NullableIntegration?
+    /// Required object value serialized in the `reactions` wire field.
+    public var reactions: WebhookIssueCommentCreatedCommentReactions
+    /// Required `date-time`-formatted value serialized in the `updated_at` wire field.
+    public var updatedAt: Date
+    /// URL for the issue comment
+    public var url: String
+    /// Required object value serialized in the `user` wire field.
+    public var user: WebhookIssueCommentCreatedCommentUser?
+    /// Context around who pinned an issue comment and when it was pinned.
+    public var pin: NullablePinnedIssueComment?
+    /// Details about why an issue comment was minimized.
+    public var minimized: NullableIssueCommentMinimized?
+
+    enum CodingKeys: String, CodingKey {
+        case authorAssociation = "author_association"
+        case body
+        case createdAt = "created_at"
+        case htmlUrl = "html_url"
+        case id
+        case issueUrl = "issue_url"
+        case nodeId = "node_id"
+        case performedViaGithubApp = "performed_via_github_app"
+        case reactions
+        case updatedAt = "updated_at"
+        case url
+        case user
+        case pin
+        case minimized
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension WebhookIssueCommentCreatedComment {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        authorAssociation = try container.sdkDecodeRequired(.authorAssociation)
+        body = try container.sdkDecodeRequired(.body)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        id = try container.sdkDecodeRequired(.id)
+        issueUrl = try container.sdkDecodeRequired(.issueUrl)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        performedViaGithubApp = try container.sdkDecodeNullable(.performedViaGithubApp)
+        reactions = try container.sdkDecodeRequired(.reactions)
+        updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        url = try container.sdkDecodeRequired(.url)
+        user = try container.sdkDecodeNullable(.user)
+        pin = try container.sdkDecodeIfPresent(.pin)
+        minimized = try container.sdkDecodeIfPresent(.minimized)
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateUri("issue_url", issueUrl)
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+        try sdkValidateUri("url", url)
+    }
+}
+
+public extension WebhookIssueCommentCreatedComment {
+    init(
+        authorAssociation: WebhookIssueCommentCreatedCommentAuthorAssociation,
+        body: String,
+        createdAt: Date,
+        htmlUrl: String,
+        id: Int,
+        issueUrl: String,
+        nodeId: String,
+        performedViaGithubApp: NullableIntegration?,
+        reactions: WebhookIssueCommentCreatedCommentReactions,
+        updatedAt: Date,
+        url: String,
+        user: WebhookIssueCommentCreatedCommentUser?,
+        pin: NullablePinnedIssueComment? = nil,
+        minimized: NullableIssueCommentMinimized? = nil
+    ) throws {
+        (self.authorAssociation, self.body) = (authorAssociation, body)
+        (self.createdAt, self.htmlUrl) = (createdAt, htmlUrl)
+        (self.id, self.issueUrl) = (id, issueUrl)
+        (self.nodeId, self.performedViaGithubApp) = (nodeId, performedViaGithubApp)
+        (self.reactions, self.updatedAt) = (reactions, updatedAt)
+        (self.url, self.user) = (url, user)
+        (self.pin, self.minimized) = (pin, minimized)
+        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        try sdkValidateUri("html_url", self.htmlUrl)
+        try sdkValidateUri("issue_url", self.issueUrl)
+        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+        try sdkValidateUri("url", self.url)
+    }
+}
+
 /// Optional object value serialized in the `pull_request` wire field.
-public struct WebhookIssueCommentCreatedIssueVariant0PullRequest: Codable {
+public struct WebhookIssueCommentCreatedIssuePullRequest: Codable {
     /// Optional `uri`-formatted value serialized in the `diff_url` wire field.
     public var diffUrl: String?
     /// Optional `uri`-formatted value serialized in the `html_url` wire field.
@@ -266,7 +331,7 @@ public struct WebhookIssueCommentCreatedIssueVariant0PullRequest: Codable {
     }
 }
 
-public extension WebhookIssueCommentCreatedIssueVariant0PullRequest {
+public extension WebhookIssueCommentCreatedIssuePullRequest {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         diffUrl = try container.sdkDecodeIfPresent(.diffUrl)
@@ -292,7 +357,7 @@ public extension WebhookIssueCommentCreatedIssueVariant0PullRequest {
     }
 }
 
-public extension WebhookIssueCommentCreatedIssueVariant0PullRequest {
+public extension WebhookIssueCommentCreatedIssuePullRequest {
     init(
         diffUrl: String? = nil,
         htmlUrl: String? = nil,
@@ -322,66 +387,55 @@ public extension WebhookIssueCommentCreatedIssueVariant0PullRequest {
     }
 }
 
-/// Required object value serialized in the `creator` wire field.
-public struct WebhookIssueCommentCreatedIssueVariant0MilestoneCreator: Codable {
-    /// Required `integer` value serialized in the `id` wire field.
-    public var id: Int
-    /// Required `string` value serialized in the `login` wire field.
-    public var login: String
-    /// Optional `uri`-formatted value serialized in the `avatar_url` wire field.
+/// Required object value serialized in the `user` wire field.
+public struct WebhookIssueCommentCreatedIssueUser: Codable {
+    /// Optional `string` value serialized in the `avatar_url` wire field.
     public var avatarUrl: String?
-    /// Optional `boolean` value serialized in the `deleted` wire field.
-    public var deleted: Bool?
-    /// Optional `string` value serialized in the `email` wire field.
-    public var email: String?
-    /// Optional `uri-template`-formatted value serialized in the `events_url` wire field.
+    /// Optional `string` value serialized in the `events_url` wire field.
     public var eventsUrl: String?
-    /// Optional `uri`-formatted value serialized in the `followers_url` wire field.
+    /// Optional `string` value serialized in the `followers_url` wire field.
     public var followersUrl: String?
-    /// Optional `uri-template`-formatted value serialized in the `following_url` wire field.
+    /// Optional `string` value serialized in the `following_url` wire field.
     public var followingUrl: String?
-    /// Optional `uri-template`-formatted value serialized in the `gists_url` wire field.
+    /// Optional `string` value serialized in the `gists_url` wire field.
     public var gistsUrl: String?
     /// Optional `string` value serialized in the `gravatar_id` wire field.
     public var gravatarId: String?
-    /// Optional `uri`-formatted value serialized in the `html_url` wire field.
+    /// Optional `string` value serialized in the `html_url` wire field.
     public var htmlUrl: String?
-    /// Optional `string` value serialized in the `name` wire field.
-    public var name: String?
+    /// Optional `int64`-formatted value serialized in the `id` wire field.
+    public var id: Int?
+    /// Optional `string` value serialized in the `login` wire field.
+    public var login: String?
     /// Optional `string` value serialized in the `node_id` wire field.
     public var nodeId: String?
-    /// Optional `uri`-formatted value serialized in the `organizations_url` wire field.
+    /// Optional `string` value serialized in the `organizations_url` wire field.
     public var organizationsUrl: String?
-    /// Optional `uri`-formatted value serialized in the `received_events_url` wire field.
+    /// Optional `string` value serialized in the `received_events_url` wire field.
     public var receivedEventsUrl: String?
-    /// Optional `uri`-formatted value serialized in the `repos_url` wire field.
+    /// Optional `string` value serialized in the `repos_url` wire field.
     public var reposUrl: String?
     /// Optional `boolean` value serialized in the `site_admin` wire field.
     public var siteAdmin: Bool?
-    /// Optional `uri-template`-formatted value serialized in the `starred_url` wire field.
+    /// Optional `string` value serialized in the `starred_url` wire field.
     public var starredUrl: String?
-    /// Optional `uri`-formatted value serialized in the `subscriptions_url` wire field.
+    /// Optional `string` value serialized in the `subscriptions_url` wire field.
     public var subscriptionsUrl: String?
-    /// Optional enumerated value serialized in the `type` wire field.
-    public var type: WebhookIssueCommentCreatedIssueVariant0MilestoneCreatorType?
-    /// Optional `uri`-formatted value serialized in the `url` wire field.
+    /// Optional `string` value serialized in the `type` wire field.
+    public var type: String?
+    /// Optional `string` value serialized in the `url` wire field.
     public var url: String?
-    /// Optional `string` value serialized in the `user_view_type` wire field.
-    public var userViewType: String?
 
     enum CodingKeys: String, CodingKey {
-        case id
-        case login
         case avatarUrl = "avatar_url"
-        case deleted
-        case email
         case eventsUrl = "events_url"
         case followersUrl = "followers_url"
         case followingUrl = "following_url"
         case gistsUrl = "gists_url"
         case gravatarId = "gravatar_id"
         case htmlUrl = "html_url"
-        case name
+        case id
+        case login
         case nodeId = "node_id"
         case organizationsUrl = "organizations_url"
         case receivedEventsUrl = "received_events_url"
@@ -391,43 +445,28 @@ public struct WebhookIssueCommentCreatedIssueVariant0MilestoneCreator: Codable {
         case subscriptionsUrl = "subscriptions_url"
         case type
         case url
-        case userViewType = "user_view_type"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
+    init() {
+        (avatarUrl, eventsUrl, followersUrl, followingUrl, gistsUrl) = (nil, nil, nil, nil, nil)
+        (gravatarId, htmlUrl, id, login, nodeId) = (nil, nil, nil, nil, nil)
+        (organizationsUrl, receivedEventsUrl, reposUrl, siteAdmin, starredUrl) = (nil, nil, nil, nil, nil)
+        (subscriptionsUrl, type, url) = (nil, nil, nil)
     }
 }
 
-public extension WebhookIssueCommentCreatedIssueVariant0MilestoneCreator {
+public extension WebhookIssueCommentCreatedIssueUser {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
-        }
-        guard container.contains(.login) else {
-            throw SdkValidationError(
-                field: "login",
-                code: "required",
-                message: "Validation failed for 'login': value is required"
-            )
-        }
-        id = try container.sdkDecodeRequired(.id)
-        login = try container.sdkDecodeRequired(.login)
         avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
-        deleted = try container.sdkDecodeIfPresent(.deleted)
-        email = try container.sdkDecodeIfPresent(.email)
         eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
         followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
         followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
         gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
         gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
         htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        name = try container.sdkDecodeIfPresent(.name)
+        id = try container.sdkDecodeIfPresent(.id)
+        login = try container.sdkDecodeIfPresent(.login)
         nodeId = try container.sdkDecodeIfPresent(.nodeId)
         organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
         receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
@@ -437,25 +476,20 @@ public extension WebhookIssueCommentCreatedIssueVariant0MilestoneCreator {
         subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
         type = try container.sdkDecodeIfPresent(.type)
         url = try container.sdkDecodeIfPresent(.url)
-        userViewType = try container.sdkDecodeIfPresent(.userViewType)
-        try sdkValidateConstraints()
     }
 }
 
-public extension WebhookIssueCommentCreatedIssueVariant0MilestoneCreator {
+public extension WebhookIssueCommentCreatedIssueUser {
     init(
-        id: Int,
-        login: String,
         avatarUrl: String? = nil,
-        deleted: Bool? = nil,
-        email: String? = nil,
         eventsUrl: String? = nil,
         followersUrl: String? = nil,
         followingUrl: String? = nil,
         gistsUrl: String? = nil,
         gravatarId: String? = nil,
         htmlUrl: String? = nil,
-        name: String? = nil,
+        id: Int? = nil,
+        login: String? = nil,
         nodeId: String? = nil,
         organizationsUrl: String? = nil,
         receivedEventsUrl: String? = nil,
@@ -463,56 +497,24 @@ public extension WebhookIssueCommentCreatedIssueVariant0MilestoneCreator {
         siteAdmin: Bool? = nil,
         starredUrl: String? = nil,
         subscriptionsUrl: String? = nil,
-        type: WebhookIssueCommentCreatedIssueVariant0MilestoneCreatorType? = nil,
-        url: String? = nil,
-        userViewType: String? = nil
-    ) throws {
-        (self.id, self.login) = (id, login)
-        (self.avatarUrl, self.deleted) = (avatarUrl, deleted)
-        (self.email, self.eventsUrl) = (email, eventsUrl)
+        type: String? = nil,
+        url: String? = nil
+    ) {
+        self.init()
+        (self.avatarUrl, self.eventsUrl) = (avatarUrl, eventsUrl)
         (self.followersUrl, self.followingUrl) = (followersUrl, followingUrl)
         (self.gistsUrl, self.gravatarId) = (gistsUrl, gravatarId)
-        (self.htmlUrl, self.name) = (htmlUrl, name)
-        (self.nodeId, self.organizationsUrl) = (nodeId, organizationsUrl)
-        (self.receivedEventsUrl, self.reposUrl) = (receivedEventsUrl, reposUrl)
-        (self.siteAdmin, self.starredUrl) = (siteAdmin, starredUrl)
-        (self.subscriptionsUrl, self.type) = (subscriptionsUrl, type)
-        (self.url, self.userViewType) = (url, userViewType)
-        try sdkValidateConstraints()
-    }
-}
-
-extension WebhookIssueCommentCreatedIssueVariant0MilestoneCreator {
-    func sdkValidateConstraints() throws {
-        if let value = avatarUrl {
-            try sdkValidateUri("avatar_url", value)
-        }
-        if let value = followersUrl {
-            try sdkValidateUri("followers_url", value)
-        }
-        if let value = htmlUrl {
-            try sdkValidateUri("html_url", value)
-        }
-        if let value = organizationsUrl {
-            try sdkValidateUri("organizations_url", value)
-        }
-        if let value = receivedEventsUrl {
-            try sdkValidateUri("received_events_url", value)
-        }
-        if let value = reposUrl {
-            try sdkValidateUri("repos_url", value)
-        }
-        if let value = subscriptionsUrl {
-            try sdkValidateUri("subscriptions_url", value)
-        }
-        if let value = url {
-            try sdkValidateUri("url", value)
-        }
+        (self.htmlUrl, self.id) = (htmlUrl, id)
+        (self.login, self.nodeId) = (login, nodeId)
+        (self.organizationsUrl, self.receivedEventsUrl) = (organizationsUrl, receivedEventsUrl)
+        (self.reposUrl, self.siteAdmin) = (reposUrl, siteAdmin)
+        (self.starredUrl, self.subscriptionsUrl) = (starredUrl, subscriptionsUrl)
+        (self.type, self.url) = (type, url)
     }
 }
 
 /// Required object value serialized in the `user` wire field.
-public struct WebhookIssueCommentCreatedIssueVariant0User: Codable {
+public struct WebhookIssueCommentCreatedCommentUser: Codable {
     /// Required `int64`-formatted value serialized in the `id` wire field.
     public var id: Int
     /// Required `string` value serialized in the `login` wire field.
@@ -552,7 +554,7 @@ public struct WebhookIssueCommentCreatedIssueVariant0User: Codable {
     /// Optional `uri`-formatted value serialized in the `subscriptions_url` wire field.
     public var subscriptionsUrl: String?
     /// Optional enumerated value serialized in the `type` wire field.
-    public var type: WebhookIssueCommentCreatedIssueVariant0UserType?
+    public var type: WebhookIssueCommentCreatedCommentUserType?
     /// Optional `uri`-formatted value serialized in the `url` wire field.
     public var url: String?
     /// Optional `string` value serialized in the `user_view_type` wire field.
@@ -585,48 +587,5 @@ public struct WebhookIssueCommentCreatedIssueVariant0User: Codable {
 
     private init(sdkCopy value: Self) {
         self = value
-    }
-}
-
-public extension WebhookIssueCommentCreatedIssueVariant0User {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
-        }
-        guard container.contains(.login) else {
-            throw SdkValidationError(
-                field: "login",
-                code: "required",
-                message: "Validation failed for 'login': value is required"
-            )
-        }
-        id = try container.sdkDecodeRequired(.id)
-        login = try container.sdkDecodeRequired(.login)
-        avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
-        deleted = try container.sdkDecodeIfPresent(.deleted)
-        email = try container.sdkDecodeIfPresent(.email)
-        eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
-        followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
-        followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
-        gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
-        gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        name = try container.sdkDecodeIfPresent(.name)
-        nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
-        receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
-        reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
-        siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
-        starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
-        subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
-        type = try container.sdkDecodeIfPresent(.type)
-        url = try container.sdkDecodeIfPresent(.url)
-        userViewType = try container.sdkDecodeIfPresent(.userViewType)
-        try sdkValidateConstraints()
     }
 }

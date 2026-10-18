@@ -14,7 +14,7 @@ public extension ReposMethods {
         public var task: String?
         public var autoMerge: Bool?
         public var requiredContexts: [String]?
-        public var payload: ReposCreateDeploymentRequestBodyPayload?
+        public var payload: ReposCreateDeploymentRequestPayload?
         public var environment: String?
         public var description: SdkOptional<String>?
         public var transientEnvironment: Bool?
@@ -66,6 +66,8 @@ public extension ReposMethods {
     ///   against commit status checks. If you omit this parameter, GitHub verifies
     ///   all unique contexts before creating a deployment. To bypass checking
     ///   entirely, pass an empty array. Defaults to all unique contexts.
+    /// - payload: Typed representation of the `ReposCreateDeploymentRequestPayload`
+    ///   API schema.
     /// - environment: Name for the target deployment environment (e.g.,
     ///   `production`, `staging`, `qa`).
     /// - description: Short description of the deployment.

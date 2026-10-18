@@ -6,169 +6,6 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testAgentsGetOrgPublicKeyAgentsGetOrgPublicKeyReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.agents.getOrgPublicKey(
-            org: decoded("\"org\"")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture333Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "agentsGetOrgPublicKey decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testAgentsGetOrgSecretAgentsGetOrgSecretReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.agents.getOrgSecret(
-            org: decoded("\"org\""),
-            secretName: decoded("\"Example Name\"")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture334Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "agentsGetOrgSecret decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testAgentsGetOrgVariableAgentsGetOrgVariableReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.agents.getOrgVariable(
-            org: decoded("\"org\""),
-            name: decoded("\"Example Name\"")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture335Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "agentsGetOrgVariable decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testAgentsGetRepoPublicKeyAgentsGetRepoPublicKeyReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.agents.getRepoPublicKey(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\"")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture336Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "agentsGetRepoPublicKey decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testAgentsGetRepoSecretAgentsGetRepoSecretReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.agents.getRepoSecret(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            secretName: decoded("\"Example Name\"")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture337Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "agentsGetRepoSecret decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testAgentsGetRepoVariableAgentsGetRepoVariableReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.agents.getRepoVariable(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            name: decoded("\"Example Name\"")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture338Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "agentsGetRepoVariable decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testAgentsListOrgSecretsAgentsListOrgSecretsReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.agents.listOrgSecrets(
-            org: decoded("\"org\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture339Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "agentsListOrgSecrets decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testAgentsListOrgVariablesAgentsListOrgVariablesReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.agents.listOrgVariables(
-            org: decoded("\"org\""),
-            perPage: decoded("10"),
-            page: decoded("1")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture340Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "agentsListOrgVariables decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
     func testAgentsListRepoOrganizationSecretsAgentsListRepoOrganizationSecretsReachesMockAndDecodesResponse(
     ) async throws {
         guard let client = configuredClient() else {
@@ -187,8 +24,7 @@ extension SdkMethodTests {
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "agentsListRepoOrganizationSecrets decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
@@ -210,8 +46,7 @@ extension SdkMethodTests {
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "agentsListRepoOrganizationVariables decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
@@ -232,8 +67,7 @@ extension SdkMethodTests {
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "agentsListRepoSecrets decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
@@ -254,8 +88,7 @@ extension SdkMethodTests {
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "agentsListRepoVariables decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
@@ -277,8 +110,7 @@ extension SdkMethodTests {
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "agentsListSelectedReposForOrgSecret decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
@@ -300,8 +132,7 @@ extension SdkMethodTests {
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "agentsListSelectedReposForOrgVariable decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
@@ -416,8 +247,7 @@ extension SdkMethodTests {
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "agentTasksCreateTaskInRepo decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
@@ -435,8 +265,7 @@ extension SdkMethodTests {
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "agentTasksGetTaskById decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
@@ -456,8 +285,7 @@ extension SdkMethodTests {
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "agentTasksGetTaskByRepoAndId decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
@@ -481,8 +309,7 @@ extension SdkMethodTests {
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "agentTasksListTasks decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
@@ -512,8 +339,7 @@ extension SdkMethodTests {
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "agentTasksListTasksForRepo decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
@@ -543,8 +369,166 @@ extension SdkMethodTests {
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "apiInsightsGetRouteStatsByActor decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testApiInsightsGetSubjectStatsApiInsightsGetSubjectStatsReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        var options = try OrgsMethods.ApiInsightsGetSubjectStatsOptions(
+            org: decoded("\"org\""),
+            minTimestamp: decoded("\"2024-01-01T00:00:00Z\"")
+        )
+        options.maxTimestamp = try decoded("\"2024-01-01T00:00:00Z\"")
+        options.page = try decoded("1")
+        options.perPage = try decoded("30")
+        options.direction = try decoded("\"desc\"")
+        options.sort = try decoded("[\"total_request_count\"]")
+        options.subjectNameSubstring = try decoded("\"Example Name\"")
+        let actual = try await client.orgs.apiInsightsGetSubjectStats(
+            options: options
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture359Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testApiInsightsGetSummaryStatsApiInsightsGetSummaryStatsReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.orgs.apiInsightsGetSummaryStats(
+            org: decoded("\"org\""),
+            minTimestamp: decoded("\"2024-01-01T00:00:00Z\""),
+            maxTimestamp: decoded("\"2024-01-01T00:00:00Z\"")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture360Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testApiInsightsGetSummaryStatsByActorApiInsightsGetSummaryStatsByActorReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.orgs.apiInsightsGetSummaryStatsByActor(
+            org: decoded("\"org\""),
+            actorType: decoded("\"installation\""),
+            actorId: decoded("1"),
+            minTimestamp: decoded("\"2024-01-01T00:00:00Z\""),
+            maxTimestamp: decoded("\"2024-01-01T00:00:00Z\"")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture361Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testApiInsightsGetSummaryStatsByUserApiInsightsGetSummaryStatsByUserReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.orgs.apiInsightsGetSummaryStatsByUser(
+            org: decoded("\"org\""),
+            userId: decoded("\"user-1\""),
+            minTimestamp: decoded("\"2024-01-01T00:00:00Z\""),
+            maxTimestamp: decoded("\"2024-01-01T00:00:00Z\"")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture362Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testApiInsightsGetTimeStatsApiInsightsGetTimeStatsReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.orgs.apiInsightsGetTimeStats(
+            org: decoded("\"org\""),
+            minTimestamp: decoded("\"2024-01-01T00:00:00Z\""),
+            timestampIncrement: decoded("\"2024-01-01T00:00:00Z\""),
+            maxTimestamp: decoded("\"2024-01-01T00:00:00Z\"")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture363Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testApiInsightsGetTimeStatsByActorApiInsightsGetTimeStatsByActorReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.orgs.apiInsightsGetTimeStatsByActor(
+            org: decoded("\"org\""),
+            actorType: decoded("\"installation\""),
+            actorId: decoded("1"),
+            minTimestamp: decoded("\"2024-01-01T00:00:00Z\""),
+            timestampIncrement: decoded("\"2024-01-01T00:00:00Z\""),
+            maxTimestamp: decoded("\"2024-01-01T00:00:00Z\"")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture364Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testApiInsightsGetTimeStatsByUserApiInsightsGetTimeStatsByUserReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.orgs.apiInsightsGetTimeStatsByUser(
+            org: decoded("\"org\""),
+            userId: decoded("\"user-1\""),
+            minTimestamp: decoded("\"2024-01-01T00:00:00Z\""),
+            timestampIncrement: decoded("\"2024-01-01T00:00:00Z\""),
+            maxTimestamp: decoded("\"2024-01-01T00:00:00Z\"")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture365Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
         )
     }
 }

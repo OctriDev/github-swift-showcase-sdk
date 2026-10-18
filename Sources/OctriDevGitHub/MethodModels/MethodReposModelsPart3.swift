@@ -8,145 +8,6 @@ import Foundation
 #endif
 
 /// Canonical repos operation model declarations
-/// Feature options for secret scanning delegated bypass. This object is only honored when
-/// `security_and_analysis.secret_scanning_delegated_bypass.status` is set to `enabled`. You can send this object in
-/// the same request as `secret_scanning_delegated_bypass`, or update just the options in a separate request.
-public struct ReposUpdateRequestBodySecurityAndAnalysisSecretScanningDelegaX7a6907f880: Codable {
-    /// The bypass reviewers for secret scanning delegated bypass. If you omit this field, the existing set of
-    /// reviewers is unchanged.
-    public var reviewers: ReposUpdateRequestBodySecurityAndAnalysisSecretScanningDelegaX6bcbdeac6b?
-
-    enum CodingKeys: String, CodingKey {
-        case reviewers
-    }
-
-    init() {
-        reviewers = nil
-    }
-}
-
-public extension ReposUpdateRequestBodySecurityAndAnalysisSecretScanningDelegaX7a6907f880 {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        reviewers = try container.sdkDecodeIfPresent(.reviewers)
-    }
-}
-
-public extension ReposUpdateRequestBodySecurityAndAnalysisSecretScanningDelegaX7a6907f880 {
-    init(reviewers: ReposUpdateRequestBodySecurityAndAnalysisSecretScanningDelegaX6bcbdeac6b? = nil) {
-        self.init()
-        self.reviewers = reviewers
-    }
-}
-
-/// Update the source for the repository. Must include the branch name and path.
-public struct ReposUpdateInformationAboutPagesSiteRequestBodySourceVariant1: Codable {
-    /// The repository branch used to publish your site's source files.
-    public var branch: String
-    /// The repository directory that includes the source files for the Pages site. Allowed paths are `/` or
-    /// `/docs`.
-    public var path: ReposUpdateInformationAboutPagesSiteRequestBodySourceVariant1Path
-
-    enum CodingKeys: String, CodingKey {
-        case branch
-        case path
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension ReposUpdateInformationAboutPagesSiteRequestBodySourceVariant1 {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.branch) else {
-            throw SdkValidationError(
-                field: "branch",
-                code: "required",
-                message: "Validation failed for 'branch': value is required"
-            )
-        }
-        guard container.contains(.path) else {
-            throw SdkValidationError(
-                field: "path",
-                code: "required",
-                message: "Validation failed for 'path': value is required"
-            )
-        }
-        branch = try container.sdkDecodeRequired(.branch)
-        path = try container.sdkDecodeRequired(.path)
-    }
-}
-
-public extension ReposUpdateInformationAboutPagesSiteRequestBodySourceVariant1 {
-    init(branch: String, path: ReposUpdateInformationAboutPagesSiteRequestBodySourceVariant1Path) {
-        (self.branch, self.path) = (branch, path)
-    }
-}
-
-/// Use the `status` property to enable or disable secret scanning for this repository. For more information, see
-/// "About secret scanning."
-public struct ReposUpdateRequestBodySecurityAndAnalysisSecretScanning: Codable {
-    /// Can be `enabled` or `disabled`.
-    public var status: String?
-
-    enum CodingKeys: String, CodingKey {
-        case status
-    }
-
-    init() {
-        status = nil
-    }
-}
-
-public extension ReposUpdateRequestBodySecurityAndAnalysisSecretScanning {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        status = try container.sdkDecodeIfPresent(.status)
-    }
-}
-
-public extension ReposUpdateRequestBodySecurityAndAnalysisSecretScanning {
-    init(status: String? = nil) {
-        self.init()
-        self.status = status
-    }
-}
-
-public struct ReposCreateOrUpdateEnvironmentRequestBodyReviewersItem: Codable {
-    /// The type of reviewer.
-    /// - Example: "User"
-    public var type: DeploymentReviewerType?
-    /// The id of the user or team who can review the deployment
-    /// - Example: 4532992
-    public var id: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case type
-        case id
-    }
-
-    init() {
-        (type, id) = (nil, nil)
-    }
-}
-
-public extension ReposCreateOrUpdateEnvironmentRequestBodyReviewersItem {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        type = try container.sdkDecodeIfPresent(.type)
-        id = try container.sdkDecodeIfPresent(.id)
-    }
-}
-
-public extension ReposCreateOrUpdateEnvironmentRequestBodyReviewersItem {
-    init(type: DeploymentReviewerType? = nil, id: Int? = nil) {
-        self.init()
-        (self.type, self.id) = (type, id)
-    }
-}
-
 /// Key/value pairs to provide settings for this webhook.
 public struct ReposCreateWebhookRequestBodyConfig: Codable {
     /// The URL to which the payloads will be delivered.
@@ -619,5 +480,103 @@ public struct ReposUpdateBranchProtectionRequestBodyRequiredStatusChecksChecksIt
 
     private init(sdkCopy value: Self) {
         self = value
+    }
+}
+
+public extension ReposUpdateBranchProtectionRequestBodyRequiredStatusChecksChecksItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.context) else {
+            throw SdkValidationError(
+                field: "context",
+                code: "required",
+                message: "Validation failed for 'context': value is required"
+            )
+        }
+        context = try container.sdkDecodeRequired(.context)
+        appId = try container.sdkDecodeIfPresent(.appId)
+    }
+}
+
+public extension ReposUpdateBranchProtectionRequestBodyRequiredStatusChecksChecksItem {
+    init(context: String, appId: Int? = nil) {
+        (self.context, self.appId) = (context, appId)
+    }
+}
+
+/// The source branch and directory used to publish your Pages site.
+public struct ReposCreatePagesSiteRequestBodySource: Codable {
+    /// The repository branch used to publish your site's source files.
+    public var branch: String
+    /// The repository directory that includes the source files for the Pages site. Allowed paths are `/` or
+    /// `/docs`. Default: `/`
+    public var path: ReposCreatePagesSiteRequestBodySourcePath?
+
+    enum CodingKeys: String, CodingKey {
+        case branch
+        case path
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension ReposCreatePagesSiteRequestBodySource {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.branch) else {
+            throw SdkValidationError(
+                field: "branch",
+                code: "required",
+                message: "Validation failed for 'branch': value is required"
+            )
+        }
+        branch = try container.sdkDecodeRequired(.branch)
+        path = try container.sdkDecodeIfPresent(.path)
+    }
+}
+
+public extension ReposCreatePagesSiteRequestBodySource {
+    init(branch: String, path: ReposCreatePagesSiteRequestBodySourcePath? = nil) {
+        (self.branch, self.path) = (branch, path)
+    }
+}
+
+/// The attestation's Sigstore Bundle. Refer to the Sigstore Bundle Specification for more information.
+public struct ReposListAttestationsResponseAttestationsItemBundle: Codable {
+    public var mediaType: String?
+    public var verificationMaterial: [String: JSONValue]?
+    public var dsseEnvelope: [String: JSONValue]?
+
+    enum CodingKeys: String, CodingKey {
+        case mediaType
+        case verificationMaterial
+        case dsseEnvelope
+    }
+
+    init() {
+        (mediaType, verificationMaterial, dsseEnvelope) = (nil, nil, nil)
+    }
+}
+
+public extension ReposListAttestationsResponseAttestationsItemBundle {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        mediaType = try container.sdkDecodeIfPresent(.mediaType)
+        verificationMaterial = try container.sdkDecodeIfPresent(.verificationMaterial)
+        dsseEnvelope = try container.sdkDecodeIfPresent(.dsseEnvelope)
+    }
+}
+
+public extension ReposListAttestationsResponseAttestationsItemBundle {
+    init(
+        mediaType: String? = nil,
+        verificationMaterial: [String: JSONValue]? = nil,
+        dsseEnvelope: [String: JSONValue]? = nil
+    ) {
+        self.init()
+        (self.mediaType, self.verificationMaterial) = (mediaType, verificationMaterial)
+        self.dsseEnvelope = dsseEnvelope
     }
 }

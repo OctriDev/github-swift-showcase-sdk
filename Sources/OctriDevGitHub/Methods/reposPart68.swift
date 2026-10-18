@@ -72,7 +72,12 @@ public extension ReposMethods {
             decoder: .json,
             operationId: "reposCompareCommits",
             options: requestOptions,
-            errors: ["404": BasicError.self, "422": ValidationError.self, "500": BasicError.self]
+            errors: [
+                "404": BasicError.self,
+                "422": ValidationError.self,
+                "500": BasicError.self,
+                "503": ServiceUnavailable.self,
+            ]
         )).data
     }
 }

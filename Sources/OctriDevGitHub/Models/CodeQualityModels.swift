@@ -4,67 +4,6 @@
 import Foundation
 
 /// CodeQuality domain models
-public indirect enum CodeQualitySetupUpdate {
-    case jsonValue(JSONValue)
-    case jsonValue1(JSONValue)
-    case jsonValue2(JSONValue)
-    case jsonValue3(JSONValue)
-    case jsonValue4(JSONValue)
-}
-
-extension CodeQualitySetupUpdate: Codable {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for CodeQualitySetupUpdate"
-        )
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
-    }
-}
-
-extension CodeQualitySetupUpdate {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(JSONValue.self) {
-            return .jsonValue(value)
-        }
-        if let value = try? container.decode(JSONValue.self) {
-            return .jsonValue1(value)
-        }
-        if let value = try? container.decode(JSONValue.self) {
-            return .jsonValue2(value)
-        }
-        if let value = try? container.decode(JSONValue.self) {
-            return .jsonValue3(value)
-        }
-        if let value = try? container.decode(JSONValue.self) {
-            return .jsonValue4(value)
-        }
-        return nil
-    }
-}
-
-extension CodeQualitySetupUpdate {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .jsonValue(value): try container.encode(value); return true
-        case let .jsonValue1(value): try container.encode(value); return true
-        case let .jsonValue2(value): try container.encode(value); return true
-        case let .jsonValue3(value): try container.encode(value); return true
-        case let .jsonValue4(value): try container.encode(value); return true
-        }
-    }
-}
-
 /// Configuration for code quality setup.
 public struct CodeQualitySetup: Codable {
     /// Code quality setup has been configured or not.
@@ -167,6 +106,59 @@ public extension CodeQualitySetupUpdateResponse {
     init(runId: Int? = nil, runUrl: String? = nil) {
         self.init()
         (self.runId, self.runUrl) = (runId, runUrl)
+    }
+}
+
+/// Configuration for code quality setup.
+public struct CodeQualitySetupUpdate: Codable {
+    /// The desired state of code quality setup.
+    public var state: CodeQualitySetupUpdateState?
+    /// Runner type to be used.
+    public var runnerType: CodeQualitySetupUpdateRunnerType?
+    /// Runner label to be used if the runner type is labeled.
+    /// - Example: "code-scanning"
+    public var runnerLabel: String?
+    /// Languages to be analyzed.
+    public var languages: [CodeQualitySetupUpdateLanguagesItem]?
+    /// Whether AI findings run for Code Quality on this repository.
+    public var aiFindingsOption: CodeQualitySetupUpdateAiFindingsOption?
+
+    enum CodingKeys: String, CodingKey {
+        case state
+        case runnerType = "runner_type"
+        case runnerLabel = "runner_label"
+        case languages
+        case aiFindingsOption = "ai_findings_option"
+    }
+
+    init() {
+        (state, runnerType, runnerLabel, languages, aiFindingsOption) = (nil, nil, nil, nil, nil)
+    }
+}
+
+public extension CodeQualitySetupUpdate {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        state = try container.sdkDecodeIfPresent(.state)
+        runnerType = try container.sdkDecodeIfPresent(.runnerType)
+        runnerLabel = try container.sdkDecodeIfPresent(.runnerLabel)
+        languages = try container.sdkDecodeIfPresent(.languages)
+        aiFindingsOption = try container.sdkDecodeIfPresent(.aiFindingsOption)
+    }
+}
+
+public extension CodeQualitySetupUpdate {
+    init(
+        state: CodeQualitySetupUpdateState? = nil,
+        runnerType: CodeQualitySetupUpdateRunnerType? = nil,
+        runnerLabel: String? = nil,
+        languages: [CodeQualitySetupUpdateLanguagesItem]? = nil,
+        aiFindingsOption: CodeQualitySetupUpdateAiFindingsOption? = nil
+    ) {
+        self.init()
+        (self.state, self.runnerType) = (state, runnerType)
+        (self.runnerLabel, self.languages) = (runnerLabel, languages)
+        self.aiFindingsOption = aiFindingsOption
     }
 }
 

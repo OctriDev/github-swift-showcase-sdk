@@ -6,6 +6,59 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
+/// The current status of the job.
+public struct OrgsGetClusterDeploymentRecordsJobResponseStatus: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let pending = OrgsGetClusterDeploymentRecordsJobResponseStatus(rawValue: "pending")
+    public static let processing = OrgsGetClusterDeploymentRecordsJobResponseStatus(rawValue: "processing")
+    public static let completed = OrgsGetClusterDeploymentRecordsJobResponseStatus(rawValue: "completed")
+    public static let failed = OrgsGetClusterDeploymentRecordsJobResponseStatus(rawValue: "failed")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// The default value for a merge commit message. - `PR_TITLE` - default to the pull request's title. -
+/// `PR_BODY` - default to the pull request's body. - `BLANK` - default to a blank commit message.
+public struct AppsListInstallationReposForAuthenticatedUserResponseRepositoX58478254fe: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let prBody =
+        AppsListInstallationReposForAuthenticatedUserResponseRepositoX58478254fe(rawValue: "PR_BODY")
+    public static let prTitle =
+        AppsListInstallationReposForAuthenticatedUserResponseRepositoX58478254fe(rawValue: "PR_TITLE")
+    public static let blank =
+        AppsListInstallationReposForAuthenticatedUserResponseRepositoX58478254fe(rawValue: "BLANK")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
 public struct MigrationsStartForOrgRequestBodyExcludeItem: RawRepresentable, Hashable, Codable, Sendable,
     SdkWireConvertible {
     public let rawValue: String
@@ -185,56 +238,6 @@ public struct AgentAutomationsGetAutomationResponseTriggersAutomationCompleX4d69
         AgentAutomationsGetAutomationResponseTriggersAutomationCompleX4d69bcd022(rawValue: "trigger")
     public static let repository =
         AgentAutomationsGetAutomationResponseTriggersAutomationCompleX4d69bcd022(rawValue: "repository")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// The confidence level for this label choice.
-public struct IssuesUpdateRequestBodyLabelsItemVariant1Confidence: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let low = IssuesUpdateRequestBodyLabelsItemVariant1Confidence(rawValue: "low")
-    public static let medium = IssuesUpdateRequestBodyLabelsItemVariant1Confidence(rawValue: "medium")
-    public static let high = IssuesUpdateRequestBodyLabelsItemVariant1Confidence(rawValue: "high")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
-/// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
-public struct AgentAutomationsCreateRepoAutomationResponseTriggersDiscussioX31a7e78e24: RawRepresentable, Hashable,
-    Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let trigger =
-        AgentAutomationsCreateRepoAutomationResponseTriggersDiscussioX31a7e78e24(rawValue: "trigger")
-    public static let repository =
-        AgentAutomationsCreateRepoAutomationResponseTriggersDiscussioX31a7e78e24(rawValue: "repository")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

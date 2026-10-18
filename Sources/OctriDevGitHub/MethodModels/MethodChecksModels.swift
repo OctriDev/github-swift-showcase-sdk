@@ -8,94 +8,102 @@ import Foundation
 #endif
 
 /// Canonical checks operation model declarations
-public struct ChecksUpdateRequestBodyActionsItem: Codable {
-    /// The text to be displayed on a button in the web UI. The maximum size is 20 characters.
-    public var label: String
-    /// A short explanation of what this action would do. The maximum size is 40 characters.
-    public var description: String
-    /// A reference for the action on the integrator's system. The maximum size is 20 characters.
-    public var identifier: String
-
-    enum CodingKeys: String, CodingKey {
-        case label
-        case description
-        case identifier
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension ChecksUpdateRequestBodyActionsItem {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.label) else {
-            throw SdkValidationError(
-                field: "label",
-                code: "required",
-                message: "Validation failed for 'label': value is required"
-            )
-        }
-        guard container.contains(.description) else {
-            throw SdkValidationError(
-                field: "description",
-                code: "required",
-                message: "Validation failed for 'description': value is required"
-            )
-        }
-        guard container.contains(.identifier) else {
-            throw SdkValidationError(
-                field: "identifier",
-                code: "required",
-                message: "Validation failed for 'identifier': value is required"
-            )
-        }
-        label = try container.sdkDecodeRequired(.label)
-        description = try container.sdkDecodeRequired(.description)
-        identifier = try container.sdkDecodeRequired(.identifier)
-        try validateLength("label", label, min: nil, max: 20)
-        try validateLength("description", description, min: nil, max: 40)
-        try validateLength("identifier", identifier, min: nil, max: 20)
-    }
-}
-
-public extension ChecksUpdateRequestBodyActionsItem {
-    init(label: String, description: String, identifier: String) throws {
-        (self.label, self.description) = (label, description)
-        self.identifier = identifier
-        try validateLength("label", self.label, min: nil, max: 20)
-        try validateLength("description", self.description, min: nil, max: 40)
-        try validateLength("identifier", self.identifier, min: nil, max: 20)
-    }
-}
-
 public struct ChecksUpdateRequestBodyVariant1: Codable {
-    public var status: JSONValue?
+    /// The name of the check. For example, "code-coverage".
+    public var name: String?
+    /// The URL of the integrator's site that has the full details of the check.
+    public var detailsUrl: String?
+    /// A reference for the run on the integrator's system.
+    public var externalId: String?
+    /// This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+    public var startedAt: Date?
+    public var status: ChecksUpdateRequestBodyVariant1Status?
+    /// **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check.
+    /// **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot
+    /// change a check run conclusion to `stale`, only GitHub can set this.
+    public var conclusion: ChecksUpdateRequestBodyVariant1Conclusion?
+    /// The time the check completed. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+    public var completedAt: Date?
+    /// Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can
+    /// optionally provide descriptive details about the run.
+    public var output: ChecksUpdateRequestBodyVariant1Output?
+    /// Possible further actions the integrator can perform, which a user may trigger. Each action includes a
+    /// `label`, `identifier` and `description`. A maximum of three actions are accepted. To learn more about check
+    /// runs and requested actions, see "Check runs and requested actions."
+    public var actions: [ChecksUpdateRequestBodyVariant1ActionsItem]?
     /// Keys the schema admits beside the declared fields.
     public var additionalProperties: [String: JSONValue] = [:]
 
     enum CodingKeys: String, CodingKey {
+        case name
+        case detailsUrl = "details_url"
+        case externalId = "external_id"
+        case startedAt = "started_at"
         case status
+        case conclusion
+        case completedAt = "completed_at"
+        case output
+        case actions
     }
 
     init() {
-        status = nil
+        (name, detailsUrl, externalId, startedAt, status) = (nil, nil, nil, nil, nil)
+        (conclusion, completedAt, output, actions) = (nil, nil, nil, nil)
     }
 }
 
 public extension ChecksUpdateRequestBodyVariant1 {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        name = try container.sdkDecodeIfPresent(.name)
+        detailsUrl = try container.sdkDecodeIfPresent(.detailsUrl)
+        externalId = try container.sdkDecodeIfPresent(.externalId)
+        startedAt = try container.sdkDecodeIfPresent(.startedAt)
         status = try container.sdkDecodeIfPresent(.status)
+        conclusion = try container.sdkDecodeIfPresent(.conclusion)
+        completedAt = try container.sdkDecodeIfPresent(.completedAt)
+        output = try container.sdkDecodeIfPresent(.output)
+        actions = try container.sdkDecodeIfPresent(.actions)
         additionalProperties = try decoder.sdkAdditionalProperties(besides: CodingKeys.self)
+        if let value = startedAt {
+            try sdkValidateDateTime("started_at", sdkWireString(value))
+        }
+        if let value = completedAt {
+            try sdkValidateDateTime("completed_at", sdkWireString(value))
+        }
+        if let value = actions {
+            try validateItems("actions", value, min: nil, max: 3)
+        }
     }
 }
 
 public extension ChecksUpdateRequestBodyVariant1 {
-    init(status: JSONValue? = nil) {
+    init(
+        name: String? = nil,
+        detailsUrl: String? = nil,
+        externalId: String? = nil,
+        startedAt: Date? = nil,
+        status: ChecksUpdateRequestBodyVariant1Status? = nil,
+        conclusion: ChecksUpdateRequestBodyVariant1Conclusion? = nil,
+        completedAt: Date? = nil,
+        output: ChecksUpdateRequestBodyVariant1Output? = nil,
+        actions: [ChecksUpdateRequestBodyVariant1ActionsItem]? = nil
+    ) throws {
         self.init()
-        self.status = status
+        (self.name, self.detailsUrl) = (name, detailsUrl)
+        (self.externalId, self.startedAt) = (externalId, startedAt)
+        (self.status, self.conclusion) = (status, conclusion)
+        (self.completedAt, self.output) = (completedAt, output)
+        self.actions = actions
+        if let value = self.startedAt {
+            try sdkValidateDateTime("started_at", sdkWireString(value))
+        }
+        if let value = self.completedAt {
+            try sdkValidateDateTime("completed_at", sdkWireString(value))
+        }
+        if let value = self.actions {
+            try validateItems("actions", value, min: nil, max: 3)
+        }
     }
 }
 
@@ -103,7 +111,92 @@ public extension ChecksUpdateRequestBodyVariant1 {
     func encode(to encoder: Encoder) throws {
         try encoder.sdkEncodeAdditionalProperties(additionalProperties)
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(name, forKey: .name)
+        try container.encodeIfPresent(detailsUrl, forKey: .detailsUrl)
+        try container.encodeIfPresent(externalId, forKey: .externalId)
+        try container.encodeIfPresent(startedAt, forKey: .startedAt)
         try container.encodeIfPresent(status, forKey: .status)
+        try container.encodeIfPresent(conclusion, forKey: .conclusion)
+        try container.encodeIfPresent(completedAt, forKey: .completedAt)
+        try container.encodeIfPresent(output, forKey: .output)
+        try container.encodeIfPresent(actions, forKey: .actions)
+    }
+}
+
+/// Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can
+/// optionally provide descriptive details about the run.
+public struct ChecksUpdateRequestBodyVariant1Output: Codable {
+    /// Can contain Markdown.
+    public var summary: String
+    /// **Required**.
+    public var title: String?
+    /// Can contain Markdown.
+    public var text: String?
+    /// Adds information from your analysis to specific lines of code. Annotations are visible in GitHub's pull
+    /// request UI. Annotations are visible in GitHub's pull request UI. The Checks API limits the number of
+    /// annotations to a maximum of 50 per API request. To create more than 50 annotations, you have to make
+    /// multiple requests to the Update a check run endpoint. Each time you update the check run, annotations are
+    /// appended to the list of annotations that already exist for the…
+    public var annotations: [ChecksUpdateRequestBodyVariant1OutputAnnotationsItem]?
+    /// Adds images to the output displayed in the GitHub pull request UI.
+    public var images: [ChecksUpdateRequestBodyVariant1OutputImagesItem]?
+
+    enum CodingKeys: String, CodingKey {
+        case summary
+        case title
+        case text
+        case annotations
+        case images
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension ChecksUpdateRequestBodyVariant1Output {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.summary) else {
+            throw SdkValidationError(
+                field: "summary",
+                code: "required",
+                message: "Validation failed for 'summary': value is required"
+            )
+        }
+        summary = try container.sdkDecodeRequired(.summary)
+        title = try container.sdkDecodeIfPresent(.title)
+        text = try container.sdkDecodeIfPresent(.text)
+        annotations = try container.sdkDecodeIfPresent(.annotations)
+        images = try container.sdkDecodeIfPresent(.images)
+        try validateLength("summary", summary, min: nil, max: 65535)
+        if let value = text {
+            try validateLength("text", value, min: nil, max: 65535)
+        }
+        if let value = annotations {
+            try validateItems("annotations", value, min: nil, max: 50)
+        }
+    }
+}
+
+public extension ChecksUpdateRequestBodyVariant1Output {
+    init(
+        summary: String,
+        title: String? = nil,
+        text: String? = nil,
+        annotations: [ChecksUpdateRequestBodyVariant1OutputAnnotationsItem]? = nil,
+        images: [ChecksUpdateRequestBodyVariant1OutputImagesItem]? = nil
+    ) throws {
+        (self.summary, self.title) = (summary, title)
+        (self.text, self.annotations) = (text, annotations)
+        self.images = images
+        try validateLength("summary", self.summary, min: nil, max: 65535)
+        if let value = self.text {
+            try validateLength("text", value, min: nil, max: 65535)
+        }
+        if let value = self.annotations {
+            try validateItems("annotations", value, min: nil, max: 50)
+        }
     }
 }
 
@@ -198,55 +291,6 @@ public extension ChecksListForRefResponse {
     }
 }
 
-public struct ChecksUpdateRequestBodyOutputImagesItem: Codable {
-    /// The alternative text for the image.
-    public var alt: String
-    /// The full URL of the image.
-    public var imageUrl: String
-    /// A short image description.
-    public var caption: String?
-
-    enum CodingKeys: String, CodingKey {
-        case alt
-        case imageUrl = "image_url"
-        case caption
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension ChecksUpdateRequestBodyOutputImagesItem {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.alt) else {
-            throw SdkValidationError(
-                field: "alt",
-                code: "required",
-                message: "Validation failed for 'alt': value is required"
-            )
-        }
-        guard container.contains(.imageUrl) else {
-            throw SdkValidationError(
-                field: "image_url",
-                code: "required",
-                message: "Validation failed for 'image_url': value is required"
-            )
-        }
-        alt = try container.sdkDecodeRequired(.alt)
-        imageUrl = try container.sdkDecodeRequired(.imageUrl)
-        caption = try container.sdkDecodeIfPresent(.caption)
-    }
-}
-
-public extension ChecksUpdateRequestBodyOutputImagesItem {
-    init(alt: String, imageUrl: String, caption: String? = nil) {
-        (self.alt, self.imageUrl) = (alt, imageUrl)
-        self.caption = caption
-    }
-}
-
 /// Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can
 /// optionally provide descriptive details about the run.
 public struct ChecksCreateRequestBodyOutput: Codable {
@@ -331,6 +375,115 @@ public extension ChecksCreateRequestBodyOutput {
     }
 }
 
+public struct ChecksUpdateRequestBodyVariant0OutputAnnotationsItem: Codable {
+    /// The path of the file to add an annotation to. For example, `assets/css/main.css`.
+    public var path: String
+    /// The start line of the annotation. Line numbers start at 1.
+    public var startLine: Int
+    /// The end line of the annotation.
+    public var endLine: Int
+    /// The level of the annotation.
+    public var annotationLevel: ChecksUpdateRequestBodyVariant0OutputAnnotationsItemAnnotationLevel
+    /// A short description of the feedback for these lines of code. The maximum size is 64 KB.
+    public var message: String
+    /// The start column of the annotation. Annotations only support `start_column` and `end_column` on the same
+    /// line. Omit this parameter if `start_line` and `end_line` have different values. Column numbers start at 1.
+    public var startColumn: Int?
+    /// The end column of the annotation. Annotations only support `start_column` and `end_column` on the same line.
+    /// Omit this parameter if `start_line` and `end_line` have different values.
+    public var endColumn: Int?
+    /// The title that represents the annotation. The maximum size is 255 characters.
+    public var title: String?
+    /// Details about this annotation. The maximum size is 64 KB.
+    public var rawDetails: String?
+
+    enum CodingKeys: String, CodingKey {
+        case path
+        case startLine = "start_line"
+        case endLine = "end_line"
+        case annotationLevel = "annotation_level"
+        case message
+        case startColumn = "start_column"
+        case endColumn = "end_column"
+        case title
+        case rawDetails = "raw_details"
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension ChecksUpdateRequestBodyVariant0OutputAnnotationsItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.path) else {
+            throw SdkValidationError(
+                field: "path",
+                code: "required",
+                message: "Validation failed for 'path': value is required"
+            )
+        }
+        guard container.contains(.startLine) else {
+            throw SdkValidationError(
+                field: "start_line",
+                code: "required",
+                message: "Validation failed for 'start_line': value is required"
+            )
+        }
+        guard container.contains(.endLine) else {
+            throw SdkValidationError(
+                field: "end_line",
+                code: "required",
+                message: "Validation failed for 'end_line': value is required"
+            )
+        }
+        guard container.contains(.annotationLevel) else {
+            throw SdkValidationError(
+                field: "annotation_level",
+                code: "required",
+                message: "Validation failed for 'annotation_level': value is required"
+            )
+        }
+        guard container.contains(.message) else {
+            throw SdkValidationError(
+                field: "message",
+                code: "required",
+                message: "Validation failed for 'message': value is required"
+            )
+        }
+        path = try container.sdkDecodeRequired(.path)
+        startLine = try container.sdkDecodeRequired(.startLine)
+        endLine = try container.sdkDecodeRequired(.endLine)
+        annotationLevel = try container.sdkDecodeRequired(.annotationLevel)
+        message = try container.sdkDecodeRequired(.message)
+        startColumn = try container.sdkDecodeIfPresent(.startColumn)
+        endColumn = try container.sdkDecodeIfPresent(.endColumn)
+        title = try container.sdkDecodeIfPresent(.title)
+        rawDetails = try container.sdkDecodeIfPresent(.rawDetails)
+    }
+}
+
+public extension ChecksUpdateRequestBodyVariant0OutputAnnotationsItem {
+    init(
+        path: String,
+        startLine: Int,
+        endLine: Int,
+        annotationLevel: ChecksUpdateRequestBodyVariant0OutputAnnotationsItemAnnotationLevel,
+        message: String,
+        startColumn: Int? = nil,
+        endColumn: Int? = nil,
+        title: String? = nil,
+        rawDetails: String? = nil
+    ) {
+        (self.path, self.startLine) = (path, startLine)
+        (self.endLine, self.annotationLevel) = (endLine, annotationLevel)
+        (self.message, self.startColumn) = (message, startColumn)
+        (self.endColumn, self.title) = (endColumn, title)
+        self.rawDetails = rawDetails
+    }
+}
+
 public struct ChecksSetSuitesPreferencesRequestBodyAutoTriggerChecksItem: Codable {
     /// The `id` of the GitHub App.
     public var appId: Int
@@ -377,262 +530,105 @@ public extension ChecksSetSuitesPreferencesRequestBodyAutoTriggerChecksItem {
 }
 
 public struct ChecksUpdateRequestBodyVariant0: Codable {
-    public var status: JSONValue?
+    /// **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check.
+    /// **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot
+    /// change a check run conclusion to `stale`, only GitHub can set this.
+    public var conclusion: ChecksUpdateRequestBodyVariant0Conclusion
+    /// The name of the check. For example, "code-coverage".
+    public var name: String?
+    /// The URL of the integrator's site that has the full details of the check.
+    public var detailsUrl: String?
+    /// A reference for the run on the integrator's system.
+    public var externalId: String?
+    /// This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+    public var startedAt: Date?
+    public var status: ChecksUpdateRequestBodyVariant0Status?
+    /// The time the check completed. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+    public var completedAt: Date?
+    /// Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can
+    /// optionally provide descriptive details about the run.
+    public var output: ChecksUpdateRequestBodyVariant0Output?
+    /// Possible further actions the integrator can perform, which a user may trigger. Each action includes a
+    /// `label`, `identifier` and `description`. A maximum of three actions are accepted. To learn more about check
+    /// runs and requested actions, see "Check runs and requested actions."
+    public var actions: [ChecksUpdateRequestBodyVariant0ActionsItem]?
     /// Keys the schema admits beside the declared fields.
     public var additionalProperties: [String: JSONValue] = [:]
 
     enum CodingKeys: String, CodingKey {
+        case conclusion
+        case name
+        case detailsUrl = "details_url"
+        case externalId = "external_id"
+        case startedAt = "started_at"
         case status
+        case completedAt = "completed_at"
+        case output
+        case actions
     }
 
-    init() {
-        status = nil
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
 public extension ChecksUpdateRequestBodyVariant0 {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.conclusion) else {
+            throw SdkValidationError(
+                field: "conclusion",
+                code: "required",
+                message: "Validation failed for 'conclusion': value is required"
+            )
+        }
+        conclusion = try container.sdkDecodeRequired(.conclusion)
+        name = try container.sdkDecodeIfPresent(.name)
+        detailsUrl = try container.sdkDecodeIfPresent(.detailsUrl)
+        externalId = try container.sdkDecodeIfPresent(.externalId)
+        startedAt = try container.sdkDecodeIfPresent(.startedAt)
         status = try container.sdkDecodeIfPresent(.status)
+        completedAt = try container.sdkDecodeIfPresent(.completedAt)
+        output = try container.sdkDecodeIfPresent(.output)
+        actions = try container.sdkDecodeIfPresent(.actions)
         additionalProperties = try decoder.sdkAdditionalProperties(besides: CodingKeys.self)
+        if let value = startedAt {
+            try sdkValidateDateTime("started_at", sdkWireString(value))
+        }
+        if let value = completedAt {
+            try sdkValidateDateTime("completed_at", sdkWireString(value))
+        }
+        if let value = actions {
+            try validateItems("actions", value, min: nil, max: 3)
+        }
     }
 }
 
 public extension ChecksUpdateRequestBodyVariant0 {
-    init(status: JSONValue? = nil) {
-        self.init()
-        self.status = status
-    }
-}
-
-public extension ChecksUpdateRequestBodyVariant0 {
-    func encode(to encoder: Encoder) throws {
-        try encoder.sdkEncodeAdditionalProperties(additionalProperties)
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(status, forKey: .status)
-    }
-}
-
-public struct ChecksListForSuiteResponse: Codable {
-    public var totalCount: Int
-    public var checkRuns: [CheckRun]
-
-    enum CodingKeys: String, CodingKey {
-        case totalCount = "total_count"
-        case checkRuns = "check_runs"
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension ChecksListForSuiteResponse {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.totalCount) else {
-            throw SdkValidationError(
-                field: "total_count",
-                code: "required",
-                message: "Validation failed for 'total_count': value is required"
-            )
-        }
-        guard container.contains(.checkRuns) else {
-            throw SdkValidationError(
-                field: "check_runs",
-                code: "required",
-                message: "Validation failed for 'check_runs': value is required"
-            )
-        }
-        totalCount = try container.sdkDecodeRequired(.totalCount)
-        checkRuns = try container.sdkDecodeRequired(.checkRuns)
-    }
-}
-
-public extension ChecksListForSuiteResponse {
-    init(totalCount: Int, checkRuns: [CheckRun]) {
-        (self.totalCount, self.checkRuns) = (totalCount, checkRuns)
-    }
-}
-
-/// Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can
-/// optionally provide descriptive details about the run.
-public struct ChecksUpdateRequestBodyOutput: Codable {
-    /// Can contain Markdown.
-    public var summary: String
-    /// **Required**.
-    public var title: String?
-    /// Can contain Markdown.
-    public var text: String?
-    /// Adds information from your analysis to specific lines of code. Annotations are visible in GitHub's pull
-    /// request UI. Annotations are visible in GitHub's pull request UI. The Checks API limits the number of
-    /// annotations to a maximum of 50 per API request. To create more than 50 annotations, you have to make
-    /// multiple requests to the Update a check run endpoint. Each time you update the check run, annotations are
-    /// appended to the list of annotations that already exist for the…
-    public var annotations: [ChecksUpdateRequestBodyOutputAnnotationsItem]?
-    /// Adds images to the output displayed in the GitHub pull request UI.
-    public var images: [ChecksUpdateRequestBodyOutputImagesItem]?
-
-    enum CodingKeys: String, CodingKey {
-        case summary
-        case title
-        case text
-        case annotations
-        case images
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension ChecksUpdateRequestBodyOutput {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.summary) else {
-            throw SdkValidationError(
-                field: "summary",
-                code: "required",
-                message: "Validation failed for 'summary': value is required"
-            )
-        }
-        summary = try container.sdkDecodeRequired(.summary)
-        title = try container.sdkDecodeIfPresent(.title)
-        text = try container.sdkDecodeIfPresent(.text)
-        annotations = try container.sdkDecodeIfPresent(.annotations)
-        images = try container.sdkDecodeIfPresent(.images)
-        try validateLength("summary", summary, min: nil, max: 65535)
-        if let value = text {
-            try validateLength("text", value, min: nil, max: 65535)
-        }
-        if let value = annotations {
-            try validateItems("annotations", value, min: nil, max: 50)
-        }
-    }
-}
-
-public extension ChecksUpdateRequestBodyOutput {
     init(
-        summary: String,
-        title: String? = nil,
-        text: String? = nil,
-        annotations: [ChecksUpdateRequestBodyOutputAnnotationsItem]? = nil,
-        images: [ChecksUpdateRequestBodyOutputImagesItem]? = nil
+        conclusion: ChecksUpdateRequestBodyVariant0Conclusion,
+        name: String? = nil,
+        detailsUrl: String? = nil,
+        externalId: String? = nil,
+        startedAt: Date? = nil,
+        status: ChecksUpdateRequestBodyVariant0Status? = nil,
+        completedAt: Date? = nil,
+        output: ChecksUpdateRequestBodyVariant0Output? = nil,
+        actions: [ChecksUpdateRequestBodyVariant0ActionsItem]? = nil
     ) throws {
-        (self.summary, self.title) = (summary, title)
-        (self.text, self.annotations) = (text, annotations)
-        self.images = images
-        try validateLength("summary", self.summary, min: nil, max: 65535)
-        if let value = self.text {
-            try validateLength("text", value, min: nil, max: 65535)
+        (self.conclusion, self.name) = (conclusion, name)
+        (self.detailsUrl, self.externalId) = (detailsUrl, externalId)
+        (self.startedAt, self.status) = (startedAt, status)
+        (self.completedAt, self.output) = (completedAt, output)
+        self.actions = actions
+        if let value = self.startedAt {
+            try sdkValidateDateTime("started_at", sdkWireString(value))
         }
-        if let value = self.annotations {
-            try validateItems("annotations", value, min: nil, max: 50)
+        if let value = self.completedAt {
+            try sdkValidateDateTime("completed_at", sdkWireString(value))
         }
-    }
-}
-
-public struct ChecksCreateRequestBodyActionsItem: Codable {
-    /// The text to be displayed on a button in the web UI. The maximum size is 20 characters.
-    public var label: String
-    /// A short explanation of what this action would do. The maximum size is 40 characters.
-    public var description: String
-    /// A reference for the action on the integrator's system. The maximum size is 20 characters.
-    public var identifier: String
-
-    enum CodingKeys: String, CodingKey {
-        case label
-        case description
-        case identifier
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension ChecksCreateRequestBodyActionsItem {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.label) else {
-            throw SdkValidationError(
-                field: "label",
-                code: "required",
-                message: "Validation failed for 'label': value is required"
-            )
+        if let value = self.actions {
+            try validateItems("actions", value, min: nil, max: 3)
         }
-        guard container.contains(.description) else {
-            throw SdkValidationError(
-                field: "description",
-                code: "required",
-                message: "Validation failed for 'description': value is required"
-            )
-        }
-        guard container.contains(.identifier) else {
-            throw SdkValidationError(
-                field: "identifier",
-                code: "required",
-                message: "Validation failed for 'identifier': value is required"
-            )
-        }
-        label = try container.sdkDecodeRequired(.label)
-        description = try container.sdkDecodeRequired(.description)
-        identifier = try container.sdkDecodeRequired(.identifier)
-        try validateLength("label", label, min: nil, max: 20)
-        try validateLength("description", description, min: nil, max: 40)
-        try validateLength("identifier", identifier, min: nil, max: 20)
-    }
-}
-
-public extension ChecksCreateRequestBodyActionsItem {
-    init(label: String, description: String, identifier: String) throws {
-        (self.label, self.description) = (label, description)
-        self.identifier = identifier
-        try validateLength("label", self.label, min: nil, max: 20)
-        try validateLength("description", self.description, min: nil, max: 40)
-        try validateLength("identifier", self.identifier, min: nil, max: 20)
-    }
-}
-
-public struct ChecksCreateRequestBodyVariant1: Codable {
-    public var status: JSONValue?
-    /// Keys the schema admits beside the declared fields.
-    public var additionalProperties: [String: JSONValue] = [:]
-
-    enum CodingKeys: String, CodingKey {
-        case status
-    }
-
-    init() {
-        status = nil
-    }
-}
-
-public extension ChecksCreateRequestBodyVariant1 {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        status = try container.sdkDecodeIfPresent(.status)
-        additionalProperties = try decoder.sdkAdditionalProperties(besides: CodingKeys.self)
-        if let value = status {
-            try sdkValidateEnum("status", sdkWireString(value), ["queued", "in_progress"])
-        }
-    }
-}
-
-public extension ChecksCreateRequestBodyVariant1 {
-    init(status: JSONValue? = nil) throws {
-        self.init()
-        self.status = status
-        if let value = self.status {
-            try sdkValidateEnum("status", sdkWireString(value), ["queued", "in_progress"])
-        }
-    }
-}
-
-public extension ChecksCreateRequestBodyVariant1 {
-    func encode(to encoder: Encoder) throws {
-        try encoder.sdkEncodeAdditionalProperties(additionalProperties)
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(status, forKey: .status)
     }
 }

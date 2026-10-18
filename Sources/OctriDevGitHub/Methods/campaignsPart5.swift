@@ -84,7 +84,12 @@ public extension CampaignsMethods {
             decoder: .json,
             operationId: "campaignsUpdateCampaign",
             options: requestOptions,
-            errors: ["400": BasicError.self, "404": BasicError.self, "422": BasicError.self]
+            errors: [
+                "400": BasicError.self,
+                "404": BasicError.self,
+                "422": BasicError.self,
+                "503": ServiceUnavailable.self,
+            ]
         )).data
     }
 }

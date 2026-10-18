@@ -54,6 +54,7 @@ public extension CodespacesMethods {
                 "403": BasicError.self,
                 "404": BasicError.self,
                 "422": ValidationError.self,
+                "503": ServiceUnavailable.self,
             ]
         )).data
     }

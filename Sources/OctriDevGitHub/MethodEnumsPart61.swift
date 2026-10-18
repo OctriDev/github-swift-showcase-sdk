@@ -6,32 +6,6 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-/// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
-/// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
-public struct AgentAutomationsGetRepoAutomationResponseTriggersPullRequestRX0a001ef48b: RawRepresentable, Hashable,
-    Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let trigger =
-        AgentAutomationsGetRepoAutomationResponseTriggersPullRequestRX0a001ef48b(rawValue: "trigger")
-    public static let repository =
-        AgentAutomationsGetRepoAutomationResponseTriggersPullRequestRX0a001ef48b(rawValue: "repository")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
 /// Required when using `merge_commit_message`. The default value for a merge commit title. - `PR_TITLE` -
 /// default to the pull request's title. - `MERGE_MESSAGE` - default to the classic title for a merge message
 /// (e.g., Merge pull request #123 from branch-name).
@@ -243,6 +217,30 @@ public struct CodeScanningListAlertsForRepoParameter: RawRepresentable, Hashable
 
     public static let created = CodeScanningListAlertsForRepoParameter(rawValue: "created")
     public static let updated = CodeScanningListAlertsForRepoParameter(rawValue: "updated")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// The role to grant to the collaborator.
+public struct CopilotSpacesAddCollaboratorForOrgRequestBodyRole: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let reader = CopilotSpacesAddCollaboratorForOrgRequestBodyRole(rawValue: "reader")
+    public static let writer = CopilotSpacesAddCollaboratorForOrgRequestBodyRole(rawValue: "writer")
+    public static let admin = CopilotSpacesAddCollaboratorForOrgRequestBodyRole(rawValue: "admin")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

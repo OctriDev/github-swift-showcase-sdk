@@ -4,6 +4,108 @@
 import Foundation
 
 /// IssuesIssue domain models
+public extension IssueEvent {
+    init(
+        id: Int,
+        nodeId: String,
+        url: String,
+        actor: NullableSimpleUser?,
+        event: String,
+        commitId: String?,
+        commitUrl: String?,
+        createdAt: Date,
+        issue: NullableIssue? = nil,
+        label: IssueEventLabel? = nil,
+        assignee: NullableSimpleUser? = nil,
+        assigner: NullableSimpleUser? = nil,
+        reviewRequester: NullableSimpleUser? = nil,
+        requestedReviewer: NullableSimpleUser? = nil,
+        requestedTeam: Team? = nil,
+        dismissedReview: IssueEventDismissedReview? = nil,
+        milestone: IssueEventMilestone? = nil,
+        projectCard: IssueEventProjectCard? = nil,
+        rename: IssueEventRename? = nil,
+        issueType: IssueTypeWebhook? = nil,
+        prevIssueType: IssueTypeWebhook? = nil,
+        subIssue: NullableIssueReference? = nil,
+        parentIssue: NullableIssueReference? = nil,
+        blockedBy: NullableIssueReference? = nil,
+        blocking: NullableIssueReference? = nil,
+        intent: NullableIssueEventIntent? = nil,
+        authorAssociation: AuthorAssociation? = nil,
+        lockReason: String? = nil,
+        performedViaGithubApp: NullableIntegration? = nil
+    ) throws {
+        (self.id, self.nodeId) = (id, nodeId)
+        (self.url, self.actor) = (url, actor)
+        (self.event, self.commitId) = (event, commitId)
+        (self.commitUrl, self.createdAt) = (commitUrl, createdAt)
+        (self.issue, self.label) = (issue, label)
+        (self.assignee, self.assigner) = (assignee, assigner)
+        (self.reviewRequester, self.requestedReviewer) = (reviewRequester, requestedReviewer)
+        (self.requestedTeam, self.dismissedReview) = (requestedTeam, dismissedReview)
+        (self.milestone, self.projectCard) = (milestone, projectCard)
+        (self.rename, self.issueType) = (rename, issueType)
+        (self.prevIssueType, self.subIssue) = (prevIssueType, subIssue)
+        (self.parentIssue, self.blockedBy) = (parentIssue, blockedBy)
+        (self.blocking, self.intent) = (blocking, intent)
+        (self.authorAssociation, self.lockReason) = (authorAssociation, lockReason)
+        self.performedViaGithubApp = performedViaGithubApp
+        try sdkValidateUri("url", self.url)
+        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+    }
+}
+
+/// The type of issue.
+public struct IssueTypeWebhook: Codable {
+    /// The unique identifier of the issue type.
+    public var id: Int
+    /// The name of the issue type.
+    public var name: String
+    /// The color of the issue type.
+    public var color: IssueTypeWebhookColor?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case color
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension IssueTypeWebhook {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        name = try container.sdkDecodeRequired(.name)
+        color = try container.sdkDecodeIfPresent(.color)
+    }
+}
+
+public extension IssueTypeWebhook {
+    init(id: Int, name: String, color: IssueTypeWebhookColor? = nil) {
+        (self.id, self.name) = (id, name)
+        self.color = color
+    }
+}
+
 /// The suggestion's lifecycle state.
 public struct IssueSuggestionState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String

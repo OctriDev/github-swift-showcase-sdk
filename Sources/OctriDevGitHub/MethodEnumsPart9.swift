@@ -6,53 +6,6 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-/// Action to apply to the request.
-public struct OrgsReviewPatGrantRequestRequestBodyAction: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let approve = OrgsReviewPatGrantRequestRequestBodyAction(rawValue: "approve")
-    public static let deny = OrgsReviewPatGrantRequestRequestBodyAction(rawValue: "deny")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// The deployment status of the artifact.
-public struct OrgsSetClusterDeploymentRecordsRequestBodyDeploymentsItemStatus: RawRepresentable, Hashable, Codable,
-    Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let deployed = OrgsSetClusterDeploymentRecordsRequestBodyDeploymentsItemStatus(rawValue: "deployed")
-    public static let decommissioned =
-        OrgsSetClusterDeploymentRecordsRequestBodyDeploymentsItemStatus(rawValue: "decommissioned")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
 /// Push protection setting to set for the pattern.
 public struct SecretScanningUpdateOrgPatternConfigsRequestBodyCustomPatternX9f28d27bde: RawRepresentable, Hashable,
     Codable, Sendable, SdkWireConvertible {
@@ -243,6 +196,56 @@ public struct AgentAutomationsEditRepoAutomationRequestBodyTriggersWorkflowX6fbb
         AgentAutomationsEditRepoAutomationRequestBodyTriggersWorkflowX6fbbbfe665(rawValue: "trigger")
     public static let repository =
         AgentAutomationsEditRepoAutomationRequestBodyTriggersWorkflowX6fbbbfe665(rawValue: "repository")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// The tool's behavior level. `read` tools only retrieve data. `write` tools can change data. This describes
+/// tool behavior, not a specific GitHub token permission.
+public struct AgentAutomationsListAvailableAutomationToolsResponseItemToolsItemScope: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let read = AgentAutomationsListAvailableAutomationToolsResponseItemToolsItemScope(rawValue: "read")
+    public static let write = AgentAutomationsListAvailableAutomationToolsResponseItemToolsItemScope(rawValue: "write")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
+/// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
+public struct AgentAutomationsCreateRepoAutomationRequestBodyTriggersPullReXd531298880: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let trigger =
+        AgentAutomationsCreateRepoAutomationRequestBodyTriggersPullReXd531298880(rawValue: "trigger")
+    public static let repository =
+        AgentAutomationsCreateRepoAutomationRequestBodyTriggersPullReXd531298880(rawValue: "repository")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

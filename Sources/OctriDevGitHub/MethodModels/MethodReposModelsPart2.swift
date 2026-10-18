@@ -8,102 +8,6 @@ import Foundation
 #endif
 
 /// Canonical repos operation model declarations
-public extension ReposAddTeamAccessRestrictionsRequestBodyVariant0 {
-    init(teams: [String]) {
-        self.teams = teams
-    }
-}
-
-public indirect enum ReposUpdateInformationAboutPagesSiteRequestBodySource {
-    case stringValue(String)
-    case reposUpdateInformationAboutPagesSiteRequestBodySourceVariant1(
-        ReposUpdateInformationAboutPagesSiteRequestBodySourceVariant1
-    )
-}
-
-extension ReposUpdateInformationAboutPagesSiteRequestBodySource: Codable {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for ReposUpdateInformationAboutPagesSiteRequestBodySource"
-        )
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
-    }
-}
-
-extension ReposUpdateInformationAboutPagesSiteRequestBodySource {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) {
-            return .stringValue(value)
-        }
-        if let value = try? container.decode(
-            ReposUpdateInformationAboutPagesSiteRequestBodySourceVariant1.self
-        ) {
-            return .reposUpdateInformationAboutPagesSiteRequestBodySourceVariant1(value)
-        }
-        return nil
-    }
-}
-
-extension ReposUpdateInformationAboutPagesSiteRequestBodySource {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .stringValue(value): try container.encode(value); return true
-        case let .reposUpdateInformationAboutPagesSiteRequestBodySourceVariant1(value): try container
-            .encode(value); return true
-        }
-    }
-}
-
-public struct ReposUpdateStatusCheckProtectionRequestBodyChecksItem: Codable {
-    /// The name of the required check
-    public var context: String
-    /// The ID of the GitHub App that must provide this check. Omit this field to automatically select the GitHub
-    /// App that has recently provided this check, or any app if it was not set by a GitHub App. Pass -1 to
-    /// explicitly allow any app to set the status.
-    public var appId: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case context
-        case appId = "app_id"
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension ReposUpdateStatusCheckProtectionRequestBodyChecksItem {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.context) else {
-            throw SdkValidationError(
-                field: "context",
-                code: "required",
-                message: "Validation failed for 'context': value is required"
-            )
-        }
-        context = try container.sdkDecodeRequired(.context)
-        appId = try container.sdkDecodeIfPresent(.appId)
-    }
-}
-
-public extension ReposUpdateStatusCheckProtectionRequestBodyChecksItem {
-    init(context: String, appId: Int? = nil) {
-        (self.context, self.appId) = (context, appId)
-    }
-}
-
 /// Use the `status` property to enable or disable secret scanning AI detection for this repository. For more
 /// information, see "Responsible detection of generic secrets with AI."
 public struct ReposUpdateRequestBodySecurityAndAnalysisSecretScanningAiDetection: Codable {
@@ -621,3 +525,96 @@ public extension ReposUpdateBranchProtectionRequestBodyRestrictions {
 
 public typealias ReposUpdateRequestBodySecurityAndAnalysisSecretScanningDelegaX6bcbdeac6b =
     [ReposUpdateRequestBodySecurityAndAnalysisSecretScanningDelegaX6956b891d7]
+
+/// Feature options for secret scanning delegated bypass. This object is only honored when
+/// `security_and_analysis.secret_scanning_delegated_bypass.status` is set to `enabled`. You can send this object in
+/// the same request as `secret_scanning_delegated_bypass`, or update just the options in a separate request.
+public struct ReposUpdateRequestBodySecurityAndAnalysisSecretScanningDelegaX7a6907f880: Codable {
+    /// The bypass reviewers for secret scanning delegated bypass. If you omit this field, the existing set of
+    /// reviewers is unchanged.
+    public var reviewers: ReposUpdateRequestBodySecurityAndAnalysisSecretScanningDelegaX6bcbdeac6b?
+
+    enum CodingKeys: String, CodingKey {
+        case reviewers
+    }
+
+    init() {
+        reviewers = nil
+    }
+}
+
+public extension ReposUpdateRequestBodySecurityAndAnalysisSecretScanningDelegaX7a6907f880 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        reviewers = try container.sdkDecodeIfPresent(.reviewers)
+    }
+}
+
+public extension ReposUpdateRequestBodySecurityAndAnalysisSecretScanningDelegaX7a6907f880 {
+    init(reviewers: ReposUpdateRequestBodySecurityAndAnalysisSecretScanningDelegaX6bcbdeac6b? = nil) {
+        self.init()
+        self.reviewers = reviewers
+    }
+}
+
+/// Use the `status` property to enable or disable secret scanning for this repository. For more information, see
+/// "About secret scanning."
+public struct ReposUpdateRequestBodySecurityAndAnalysisSecretScanning: Codable {
+    /// Can be `enabled` or `disabled`.
+    public var status: String?
+
+    enum CodingKeys: String, CodingKey {
+        case status
+    }
+
+    init() {
+        status = nil
+    }
+}
+
+public extension ReposUpdateRequestBodySecurityAndAnalysisSecretScanning {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        status = try container.sdkDecodeIfPresent(.status)
+    }
+}
+
+public extension ReposUpdateRequestBodySecurityAndAnalysisSecretScanning {
+    init(status: String? = nil) {
+        self.init()
+        self.status = status
+    }
+}
+
+public struct ReposCreateOrUpdateEnvironmentRequestBodyReviewersItem: Codable {
+    /// The type of reviewer.
+    /// - Example: "User"
+    public var type: DeploymentReviewerType?
+    /// The id of the user or team who can review the deployment
+    /// - Example: 4532992
+    public var id: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case type
+        case id
+    }
+
+    init() {
+        (type, id) = (nil, nil)
+    }
+}
+
+public extension ReposCreateOrUpdateEnvironmentRequestBodyReviewersItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        type = try container.sdkDecodeIfPresent(.type)
+        id = try container.sdkDecodeIfPresent(.id)
+    }
+}
+
+public extension ReposCreateOrUpdateEnvironmentRequestBodyReviewersItem {
+    init(type: DeploymentReviewerType? = nil, id: Int? = nil) {
+        self.init()
+        (self.type, self.id) = (type, id)
+    }
+}

@@ -5,6 +5,63 @@ import Foundation
 
 /// Activity domain models
 public extension RepositorySubscription {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.subscribed) else {
+            throw SdkValidationError(
+                field: "subscribed",
+                code: "required",
+                message: "Validation failed for 'subscribed': value is required"
+            )
+        }
+        guard container.contains(.ignored) else {
+            throw SdkValidationError(
+                field: "ignored",
+                code: "required",
+                message: "Validation failed for 'ignored': value is required"
+            )
+        }
+        guard container.contains(.reason) else {
+            throw SdkValidationError(
+                field: "reason",
+                code: "required",
+                message: "Validation failed for 'reason': value is required"
+            )
+        }
+        guard container.contains(.createdAt) else {
+            throw SdkValidationError(
+                field: "created_at",
+                code: "required",
+                message: "Validation failed for 'created_at': value is required"
+            )
+        }
+        guard container.contains(.url) else {
+            throw SdkValidationError(
+                field: "url",
+                code: "required",
+                message: "Validation failed for 'url': value is required"
+            )
+        }
+        guard container.contains(.repositoryUrl) else {
+            throw SdkValidationError(
+                field: "repository_url",
+                code: "required",
+                message: "Validation failed for 'repository_url': value is required"
+            )
+        }
+        subscribed = try container.sdkDecodeRequired(.subscribed)
+        ignored = try container.sdkDecodeRequired(.ignored)
+        reason = try container.sdkDecodeNullable(.reason)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        url = try container.sdkDecodeRequired(.url)
+        repositoryUrl = try container.sdkDecodeRequired(.repositoryUrl)
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        try sdkValidateUri("url", url)
+        try sdkValidateUri("repository_url", repositoryUrl)
+    }
+}
+
+public extension RepositorySubscription {
     init(subscribed: Bool, ignored: Bool, reason: String?, createdAt: Date, url: String, repositoryUrl: String) throws {
         (self.subscribed, self.ignored) = (subscribed, ignored)
         (self.reason, self.createdAt) = (reason, createdAt)
@@ -342,7 +399,7 @@ public extension GollumEvent {
 public struct ReleaseEvent: Codable {
     /// Required `string` value serialized in the `action` wire field.
     public var action: String
-    /// Required API value serialized in the `release` wire field.
+    /// Required object value serialized in the `release` wire field.
     public var release: ReleaseEventRelease
 
     enum CodingKeys: String, CodingKey {
@@ -572,48 +629,5 @@ public extension Discussion {
         labels = try container.sdkDecodeIfPresent(.labels)
         try sdkValidateDateTime("created_at", sdkWireString(createdAt))
         try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
-    }
-}
-
-public extension Discussion {
-    init(
-        activeLockReason: String?,
-        answerChosenAt: String?,
-        answerChosenBy: DiscussionAnswerChosenBy?,
-        answerHtmlUrl: String?,
-        body: String,
-        category: DiscussionCategory,
-        comments: Int,
-        createdAt: Date,
-        htmlUrl: String,
-        id: Int,
-        locked: Bool,
-        nodeId: String,
-        number: Int,
-        repositoryUrl: String,
-        state: DiscussionState,
-        stateReason: DiscussionStateReason?,
-        title: String,
-        updatedAt: Date,
-        user: DiscussionUser?,
-        authorAssociation: DiscussionAuthorAssociation? = nil,
-        reactions: DiscussionReactions? = nil,
-        timelineUrl: String? = nil,
-        labels: [Label]? = nil
-    ) throws {
-        (self.activeLockReason, self.answerChosenAt) = (activeLockReason, answerChosenAt)
-        (self.answerChosenBy, self.answerHtmlUrl) = (answerChosenBy, answerHtmlUrl)
-        (self.body, self.category) = (body, category)
-        (self.comments, self.createdAt) = (comments, createdAt)
-        (self.htmlUrl, self.id) = (htmlUrl, id)
-        (self.locked, self.nodeId) = (locked, nodeId)
-        (self.number, self.repositoryUrl) = (number, repositoryUrl)
-        (self.state, self.stateReason) = (state, stateReason)
-        (self.title, self.updatedAt) = (title, updatedAt)
-        (self.user, self.authorAssociation) = (user, authorAssociation)
-        (self.reactions, self.timelineUrl) = (reactions, timelineUrl)
-        self.labels = labels
-        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
     }
 }

@@ -299,7 +299,7 @@ public extension ActionsNamespace {
         labels: [String],
         workFolder: String? = nil,
         requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsGenerateRunnerJitconfigForOrgResponse {
+    ) async throws -> ActionsRunnerJitconfig {
         try await ActionsMethods.actionsGenerateRunnerJitconfigForRepo(
             config: config,
             owner: owner,
@@ -395,7 +395,7 @@ public extension ActionsNamespace {
         repo: String,
         runnerId: Int,
         requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgResponse {
+    ) async throws -> ActionsRunnerLabels {
         try await ActionsMethods.actionsListLabelsForSelfHostedRunnerForRepo(
             config: config,
             owner: owner,
@@ -414,7 +414,7 @@ public extension ActionsNamespace {
         runnerId: Int,
         labels: [String],
         requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgResponse {
+    ) async throws -> ActionsRunnerLabels {
         try await ActionsMethods.actionsAddCustomLabelsToSelfHostedRunnerForRepo(
             config: config,
             owner: owner,
@@ -434,7 +434,7 @@ public extension ActionsNamespace {
         runnerId: Int,
         labels: [String],
         requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgResponse {
+    ) async throws -> ActionsRunnerLabels {
         try await ActionsMethods.actionsSetCustomLabelsForSelfHostedRunnerForRepo(
             config: config,
             owner: owner,
@@ -453,7 +453,7 @@ public extension ActionsNamespace {
         repo: String,
         runnerId: Int,
         requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsRemoveAllCustomLabelsFromSelfHostedRunnerForOrgResponse {
+    ) async throws -> ActionsRunnerLabelsReadonly {
         try await ActionsMethods.actionsRemoveAllCustomLabelsFromSelfHostedRunnerForRepo(
             config: config,
             owner: owner,
@@ -473,7 +473,7 @@ public extension ActionsNamespace {
         runnerId: Int,
         name: String,
         requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgResponse {
+    ) async throws -> ActionsRunnerLabels {
         try await ActionsMethods.actionsRemoveCustomLabelFromSelfHostedRunnerForRepo(
             config: config,
             owner: owner,

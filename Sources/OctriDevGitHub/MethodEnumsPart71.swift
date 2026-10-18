@@ -6,6 +6,58 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
+/// The file mode; one of `100644` for file (blob), `100755` for executable (blob), `040000` for subdirectory
+/// (tree), `160000` for submodule (commit), or `120000` for a blob that specifies the path of a symlink.
+public struct GitCreateTreeRequestBodyTreeItemMode: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let value100644 = GitCreateTreeRequestBodyTreeItemMode(rawValue: "100644")
+    public static let value100755 = GitCreateTreeRequestBodyTreeItemMode(rawValue: "100755")
+    public static let value040000 = GitCreateTreeRequestBodyTreeItemMode(rawValue: "040000")
+    public static let value160000 = GitCreateTreeRequestBodyTreeItemMode(rawValue: "160000")
+    public static let value120000 = GitCreateTreeRequestBodyTreeItemMode(rawValue: "120000")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+public struct AgentAutomationsEditRepoAutomationRequestBodyReasoningEffortVariant1: RawRepresentable, Hashable, Codable,
+    Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let none = AgentAutomationsEditRepoAutomationRequestBodyReasoningEffortVariant1(rawValue: "none")
+    public static let low = AgentAutomationsEditRepoAutomationRequestBodyReasoningEffortVariant1(rawValue: "low")
+    public static let medium = AgentAutomationsEditRepoAutomationRequestBodyReasoningEffortVariant1(rawValue: "medium")
+    public static let high = AgentAutomationsEditRepoAutomationRequestBodyReasoningEffortVariant1(rawValue: "high")
+    public static let xhigh = AgentAutomationsEditRepoAutomationRequestBodyReasoningEffortVariant1(rawValue: "xhigh")
+    public static let max = AgentAutomationsEditRepoAutomationRequestBodyReasoningEffortVariant1(rawValue: "max")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
 public struct SecurityAdvisoriesListGlobalAdvisoriesParameterX59a803a1: RawRepresentable, Hashable, Codable, Sendable,
     SdkWireConvertible {
     public let rawValue: String
@@ -206,58 +258,6 @@ public struct ReactionsListForCommitCommentParameter: RawRepresentable, Hashable
     public static let hooray = ReactionsListForCommitCommentParameter(rawValue: "hooray")
     public static let rocket = ReactionsListForCommitCommentParameter(rawValue: "rocket")
     public static let eyes = ReactionsListForCommitCommentParameter(rawValue: "eyes")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
-/// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
-public struct AgentAutomationsGetRepoAutomationResponseTriggersDiscussionOpXa592250054: RawRepresentable, Hashable,
-    Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let trigger =
-        AgentAutomationsGetRepoAutomationResponseTriggersDiscussionOpXa592250054(rawValue: "trigger")
-    public static let repository =
-        AgentAutomationsGetRepoAutomationResponseTriggersDiscussionOpXa592250054(rawValue: "repository")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
-/// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
-public struct AgentAutomationsGetRepoAutomationResponseTriggersPullRequestLXd36782e4e1: RawRepresentable, Hashable,
-    Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let trigger =
-        AgentAutomationsGetRepoAutomationResponseTriggersPullRequestLXd36782e4e1(rawValue: "trigger")
-    public static let repository =
-        AgentAutomationsGetRepoAutomationResponseTriggersPullRequestLXd36782e4e1(rawValue: "repository")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

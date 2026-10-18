@@ -4,43 +4,6 @@
 import Foundation
 
 /// WebhookStatus domain models
-public extension WebhookStatusBranchesItem {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.commit) else {
-            throw SdkValidationError(
-                field: "commit",
-                code: "required",
-                message: "Validation failed for 'commit': value is required"
-            )
-        }
-        guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
-        }
-        guard container.contains(.protected) else {
-            throw SdkValidationError(
-                field: "protected",
-                code: "required",
-                message: "Validation failed for 'protected': value is required"
-            )
-        }
-        commit = try container.sdkDecodeRequired(.commit)
-        name = try container.sdkDecodeRequired(.name)
-        protected = try container.sdkDecodeRequired(.protected)
-    }
-}
-
-public extension WebhookStatusBranchesItem {
-    init(commit: WebhookStatusBranchesItemCommit, name: String, protected: Bool) {
-        (self.commit, self.name) = (commit, name)
-        self.protected = protected
-    }
-}
-
 /// Required object value serialized in the `author` wire field.
 public struct WebhookStatusCommitAuthor: Codable {
     /// Optional `uri`-formatted value serialized in the `avatar_url` wire field.
@@ -216,13 +179,13 @@ extension WebhookStatusCommitAuthor {
     }
 }
 
-/// Required API value serialized in the `committer` wire field.
+/// Required object value serialized in the `committer` wire field.
 public struct WebhookStatusCommitCommitCommitter: Codable {
     /// Required `string` value serialized in the `date` wire field.
     public var date: String
-    /// Optional `string` value serialized in the `email` wire field.
+    /// Required `string` value serialized in the `email` wire field.
     public var email: String
-    /// Optional `string` value serialized in the `name` wire field.
+    /// Required `string` value serialized in the `name` wire field.
     public var name: String
     /// Optional `string` value serialized in the `username` wire field.
     public var username: String?
@@ -452,49 +415,6 @@ extension WebhookStatusCommitCommitter {
     }
 }
 
-/// Required object value serialized in the `committer` wire field.
-public struct WebhookStatusCommitCommitCommitterVariant1: Codable {
-    /// Required `string` value serialized in the `date` wire field.
-    public var date: String
-    /// Optional `string` value serialized in the `email` wire field.
-    public var email: String?
-    /// Optional `string` value serialized in the `name` wire field.
-    public var name: String?
-
-    enum CodingKeys: String, CodingKey {
-        case date
-        case email
-        case name
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension WebhookStatusCommitCommitCommitterVariant1 {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.date) else {
-            throw SdkValidationError(
-                field: "date",
-                code: "required",
-                message: "Validation failed for 'date': value is required"
-            )
-        }
-        date = try container.sdkDecodeRequired(.date)
-        email = try container.sdkDecodeIfPresent(.email)
-        name = try container.sdkDecodeIfPresent(.name)
-    }
-}
-
-public extension WebhookStatusCommitCommitCommitterVariant1 {
-    init(date: String, email: String? = nil, name: String? = nil) {
-        (self.date, self.email) = (date, email)
-        self.name = name
-    }
-}
-
 /// Required object value serialized in the `tree` wire field.
 public struct WebhookStatusCommitCommitTree: Codable {
     /// Required `string` value serialized in the `sha` wire field.
@@ -542,22 +462,37 @@ public extension WebhookStatusCommitCommitTree {
     }
 }
 
-/// Metaproperties for Git author/committer information.
-public struct WebhookStatusCommitCommitAuthorVariant0: Codable {
-    /// Required `email`-formatted value serialized in the `email` wire field.
-    public var email: String?
-    /// The git author's name.
-    public var name: String
-    /// Optional `date-time`-formatted value serialized in the `date` wire field.
-    public var date: Date?
-    /// Optional `string` value serialized in the `username` wire field.
-    public var username: String?
+/// Required object value serialized in the `commit` wire field.
+public struct WebhookStatusCommit: Codable {
+    /// Required object value serialized in the `author` wire field.
+    public var author: WebhookStatusCommitAuthor?
+    /// Required `uri`-formatted value serialized in the `comments_url` wire field.
+    public var commentsUrl: String
+    /// Required object value serialized in the `commit` wire field.
+    public var commit: WebhookStatusCommitCommit
+    /// Required object value serialized in the `committer` wire field.
+    public var committer: WebhookStatusCommitCommitter?
+    /// Required `uri`-formatted value serialized in the `html_url` wire field.
+    public var htmlUrl: String
+    /// Required `string` value serialized in the `node_id` wire field.
+    public var nodeId: String
+    /// Required array value serialized in the `parents` wire field.
+    public var parents: [WebhookStatusCommitParentsItem]
+    /// Required `string` value serialized in the `sha` wire field.
+    public var sha: String
+    /// Required `uri`-formatted value serialized in the `url` wire field.
+    public var url: String
 
     enum CodingKeys: String, CodingKey {
-        case email
-        case name
-        case date
-        case username
+        case author
+        case commentsUrl = "comments_url"
+        case commit
+        case committer
+        case htmlUrl = "html_url"
+        case nodeId = "node_id"
+        case parents
+        case sha
+        case url
     }
 
     private init(sdkCopy value: Self) {
@@ -565,45 +500,128 @@ public struct WebhookStatusCommitCommitAuthorVariant0: Codable {
     }
 }
 
-public extension WebhookStatusCommitCommitAuthorVariant0 {
+public extension WebhookStatusCommit {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.email) else {
-            throw SdkValidationError(
-                field: "email",
-                code: "required",
-                message: "Validation failed for 'email': value is required"
-            )
-        }
-        guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
-        }
-        email = try container.sdkDecodeNullable(.email)
-        name = try container.sdkDecodeRequired(.name)
-        date = try container.sdkDecodeIfPresent(.date)
-        username = try container.sdkDecodeIfPresent(.username)
-        if let value = email {
-            try sdkValidateEmail("email", value)
-        }
-        if let value = date {
-            try sdkValidateDateTime("date", sdkWireString(value))
-        }
+        author = try container.sdkDecodeNullable(.author)
+        commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
+        commit = try container.sdkDecodeRequired(.commit)
+        committer = try container.sdkDecodeNullable(.committer)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        parents = try container.sdkDecodeRequired(.parents)
+        sha = try container.sdkDecodeRequired(.sha)
+        url = try container.sdkDecodeRequired(.url)
+        try sdkValidateUri("comments_url", commentsUrl)
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateUri("url", url)
     }
 }
 
-public extension WebhookStatusCommitCommitAuthorVariant0 {
-    init(email: String?, name: String, date: Date? = nil, username: String? = nil) throws {
-        (self.email, self.name) = (email, name)
-        (self.date, self.username) = (date, username)
-        if let value = self.email {
-            try sdkValidateEmail("email", value)
-        }
-        if let value = self.date {
-            try sdkValidateDateTime("date", sdkWireString(value))
-        }
+public extension WebhookStatusCommit {
+    init(
+        author: WebhookStatusCommitAuthor?,
+        commentsUrl: String,
+        commit: WebhookStatusCommitCommit,
+        committer: WebhookStatusCommitCommitter?,
+        htmlUrl: String,
+        nodeId: String,
+        parents: [WebhookStatusCommitParentsItem],
+        sha: String,
+        url: String
+    ) throws {
+        (self.author, self.commentsUrl) = (author, commentsUrl)
+        (self.commit, self.committer) = (commit, committer)
+        (self.htmlUrl, self.nodeId) = (htmlUrl, nodeId)
+        (self.parents, self.sha) = (parents, sha)
+        self.url = url
+        try sdkValidateUri("comments_url", self.commentsUrl)
+        try sdkValidateUri("html_url", self.htmlUrl)
+        try sdkValidateUri("url", self.url)
+    }
+}
+
+/// Required enumerated value serialized in the `reason` wire field.
+public struct WebhookStatusCommitCommitVerificationReason: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let expiredKey = WebhookStatusCommitCommitVerificationReason(rawValue: "expired_key")
+    public static let notSigningKey = WebhookStatusCommitCommitVerificationReason(rawValue: "not_signing_key")
+    public static let gpgverifyError = WebhookStatusCommitCommitVerificationReason(rawValue: "gpgverify_error")
+    public static let gpgverifyUnavailable =
+        WebhookStatusCommitCommitVerificationReason(rawValue: "gpgverify_unavailable")
+    public static let unsigned = WebhookStatusCommitCommitVerificationReason(rawValue: "unsigned")
+    public static let unknownSignatureType =
+        WebhookStatusCommitCommitVerificationReason(rawValue: "unknown_signature_type")
+    public static let noUser = WebhookStatusCommitCommitVerificationReason(rawValue: "no_user")
+    public static let unverifiedEmail = WebhookStatusCommitCommitVerificationReason(rawValue: "unverified_email")
+    public static let badEmail = WebhookStatusCommitCommitVerificationReason(rawValue: "bad_email")
+    public static let unknownKey = WebhookStatusCommitCommitVerificationReason(rawValue: "unknown_key")
+    public static let malformedSignature = WebhookStatusCommitCommitVerificationReason(rawValue: "malformed_signature")
+    public static let invalid = WebhookStatusCommitCommitVerificationReason(rawValue: "invalid")
+    public static let valid = WebhookStatusCommitCommitVerificationReason(rawValue: "valid")
+    public static let badCert = WebhookStatusCommitCommitVerificationReason(rawValue: "bad_cert")
+    public static let ocspPending = WebhookStatusCommitCommitVerificationReason(rawValue: "ocsp_pending")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// The new state. Can be `pending`, `success`, `failure`, or `error`.
+public struct WebhookStatusState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let pending = WebhookStatusState(rawValue: "pending")
+    public static let success = WebhookStatusState(rawValue: "success")
+    public static let failure = WebhookStatusState(rawValue: "failure")
+    public static let error = WebhookStatusState(rawValue: "error")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Optional enumerated value serialized in the `type` wire field.
+public struct WebhookStatusCommitCommitterType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let bot = WebhookStatusCommitCommitterType(rawValue: "Bot")
+    public static let user = WebhookStatusCommitCommitterType(rawValue: "User")
+    public static let organization = WebhookStatusCommitCommitterType(rawValue: "Organization")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
     }
 }

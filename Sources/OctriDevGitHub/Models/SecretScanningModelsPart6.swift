@@ -4,6 +4,198 @@
 import Foundation
 
 /// SecretScanning domain models
+public extension SecretScanningAlertWithMetadata {
+    init(
+        number: AlertNumber? = nil,
+        createdAt: AlertCreatedAt? = nil,
+        updatedAt: NullableAlertUpdatedAt? = nil,
+        url: AlertUrl? = nil,
+        htmlUrl: AlertHtmlUrl? = nil,
+        locationsUrl: String? = nil,
+        state: SecretScanningAlertState? = nil,
+        resolution: SecretScanningAlertResolution? = nil,
+        resolvedAt: Date? = nil,
+        resolvedBy: NullableSimpleUser? = nil,
+        resolutionComment: String? = nil,
+        secretType: String? = nil,
+        secretTypeDisplayName: String? = nil,
+        provider: String? = nil,
+        providerSlug: String? = nil,
+        secret: String? = nil,
+        pushProtectionBypassed: Bool? = nil,
+        pushProtectionBypassedBy: NullableSimpleUser? = nil,
+        pushProtectionBypassedAt: Date? = nil,
+        pushProtectionBypassRequestReviewer: NullableSimpleUser? = nil,
+        pushProtectionBypassRequestReviewerComment: String? = nil,
+        pushProtectionBypassRequestComment: String? = nil,
+        pushProtectionBypassRequestHtmlUrl: String? = nil,
+        validity: SecretScanningAlertWithMetadataValidity? = nil,
+        publiclyLeaked: Bool? = nil,
+        multiRepo: Bool? = nil,
+        isBase64Encoded: Bool? = nil,
+        firstLocationDetected: NullableSecretScanningFirstDetectedLocation? = nil,
+        hasMoreLocations: Bool? = nil,
+        assignedTo: NullableSimpleUser? = nil,
+        closureRequestComment: String? = nil,
+        closureRequestReviewerComment: String? = nil,
+        closureRequestReviewer: NullableSimpleUser? = nil,
+        metadata: SecretScanningAlertMetadata? = nil
+    ) throws {
+        self.init()
+        (self.number, self.createdAt) = (number, createdAt)
+        (self.updatedAt, self.url) = (updatedAt, url)
+        (self.htmlUrl, self.locationsUrl) = (htmlUrl, locationsUrl)
+        (self.state, self.resolution) = (state, resolution)
+        (self.resolvedAt, self.resolvedBy) = (resolvedAt, resolvedBy)
+        (self.resolutionComment, self.secretType) = (resolutionComment, secretType)
+        (self.secretTypeDisplayName, self.provider) = (secretTypeDisplayName, provider)
+        (self.providerSlug, self.secret) = (providerSlug, secret)
+        self.pushProtectionBypassed = pushProtectionBypassed
+        self.pushProtectionBypassedBy = pushProtectionBypassedBy
+        self.pushProtectionBypassedAt = pushProtectionBypassedAt
+        self.pushProtectionBypassRequestReviewer = pushProtectionBypassRequestReviewer
+        self.pushProtectionBypassRequestReviewerComment = pushProtectionBypassRequestReviewerComment
+        self.pushProtectionBypassRequestComment = pushProtectionBypassRequestComment
+        self.pushProtectionBypassRequestHtmlUrl = pushProtectionBypassRequestHtmlUrl
+        (self.validity, self.publiclyLeaked) = (validity, publiclyLeaked)
+        (self.multiRepo, self.isBase64Encoded) = (multiRepo, isBase64Encoded)
+        (self.firstLocationDetected, self.hasMoreLocations) = (firstLocationDetected, hasMoreLocations)
+        (self.assignedTo, self.closureRequestComment) = (assignedTo, closureRequestComment)
+        self.closureRequestReviewerComment = closureRequestReviewerComment
+        (self.closureRequestReviewer, self.metadata) = (closureRequestReviewer, metadata)
+        try sdkValidateConstraints()
+    }
+}
+
+extension SecretScanningAlertWithMetadata {
+    func sdkValidateConstraints() throws {
+        if let value = createdAt {
+            try sdkValidateDateTime("created_at", sdkWireString(value))
+        }
+        if let value = updatedAt {
+            try sdkValidateDateTime("updated_at", sdkWireString(value))
+        }
+        if let value = url {
+            try sdkValidateUri("url", sdkWireString(value))
+        }
+        if let value = htmlUrl {
+            try sdkValidateUri("html_url", sdkWireString(value))
+        }
+        if let value = locationsUrl {
+            try sdkValidateUri("locations_url", value)
+        }
+        if let value = resolvedAt {
+            try sdkValidateDateTime("resolved_at", sdkWireString(value))
+        }
+        if let value = pushProtectionBypassedAt {
+            try sdkValidateDateTime("push_protection_bypassed_at", sdkWireString(value))
+        }
+        if let value = pushProtectionBypassRequestHtmlUrl {
+            try sdkValidateUri("push_protection_bypass_request_html_url", value)
+        }
+    }
+}
+
+/// Typed representation of the `SecretScanningPatternOverride` API schema.
+public struct SecretScanningPatternOverride: Codable {
+    /// The ID of the pattern.
+    public var tokenType: String?
+    /// The version of this pattern if it's a custom pattern.
+    public var customPatternVersion: String?
+    /// The slug of the pattern.
+    public var slug: String?
+    /// The user-friendly name for the pattern.
+    public var displayName: String?
+    /// The total number of alerts generated by this pattern.
+    public var alertTotal: Int?
+    /// The percentage of all alerts that this pattern represents, rounded to the nearest integer.
+    public var alertTotalPercentage: Int?
+    /// The number of false positive alerts generated by this pattern.
+    public var falsePositives: Int?
+    /// The percentage of alerts from this pattern that are false positives, rounded to the nearest integer.
+    public var falsePositiveRate: Int?
+    /// The percentage of blocks for this pattern that were bypassed, rounded to the nearest integer.
+    public var bypassRate: Int?
+    /// The default push protection setting for this pattern.
+    public var defaultSetting: SecretScanningPatternOverrideDefaultSetting?
+    /// The push protection setting for this pattern set at the enterprise level. Only present for partner patterns
+    /// when the organization has a parent enterprise.
+    public var enterpriseSetting: SecretScanningPatternOverrideEnterpriseSetting?
+    /// The current push protection setting for this pattern. If this is `not-set`, then it inherits either the
+    /// enterprise setting if it exists or the default setting.
+    public var setting: SecretScanningPatternOverrideSetting?
+
+    enum CodingKeys: String, CodingKey {
+        case tokenType = "token_type"
+        case customPatternVersion = "custom_pattern_version"
+        case slug
+        case displayName = "display_name"
+        case alertTotal = "alert_total"
+        case alertTotalPercentage = "alert_total_percentage"
+        case falsePositives = "false_positives"
+        case falsePositiveRate = "false_positive_rate"
+        case bypassRate = "bypass_rate"
+        case defaultSetting = "default_setting"
+        case enterpriseSetting = "enterprise_setting"
+        case setting
+    }
+
+    init() {
+        (tokenType, customPatternVersion, slug, displayName, alertTotal) = (nil, nil, nil, nil, nil)
+        (alertTotalPercentage, falsePositives, falsePositiveRate, bypassRate, defaultSetting) = (
+            nil,
+            nil,
+            nil,
+            nil,
+            nil
+        )
+        (enterpriseSetting, setting) = (nil, nil)
+    }
+}
+
+public extension SecretScanningPatternOverride {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        tokenType = try container.sdkDecodeIfPresent(.tokenType)
+        customPatternVersion = try container.sdkDecodeIfPresent(.customPatternVersion)
+        slug = try container.sdkDecodeIfPresent(.slug)
+        displayName = try container.sdkDecodeIfPresent(.displayName)
+        alertTotal = try container.sdkDecodeIfPresent(.alertTotal)
+        alertTotalPercentage = try container.sdkDecodeIfPresent(.alertTotalPercentage)
+        falsePositives = try container.sdkDecodeIfPresent(.falsePositives)
+        falsePositiveRate = try container.sdkDecodeIfPresent(.falsePositiveRate)
+        bypassRate = try container.sdkDecodeIfPresent(.bypassRate)
+        defaultSetting = try container.sdkDecodeIfPresent(.defaultSetting)
+        enterpriseSetting = try container.sdkDecodeIfPresent(.enterpriseSetting)
+        setting = try container.sdkDecodeIfPresent(.setting)
+    }
+}
+
+public extension SecretScanningPatternOverride {
+    init(
+        tokenType: String? = nil,
+        customPatternVersion: String? = nil,
+        slug: String? = nil,
+        displayName: String? = nil,
+        alertTotal: Int? = nil,
+        alertTotalPercentage: Int? = nil,
+        falsePositives: Int? = nil,
+        falsePositiveRate: Int? = nil,
+        bypassRate: Int? = nil,
+        defaultSetting: SecretScanningPatternOverrideDefaultSetting? = nil,
+        enterpriseSetting: SecretScanningPatternOverrideEnterpriseSetting? = nil,
+        setting: SecretScanningPatternOverrideSetting? = nil
+    ) {
+        self.init()
+        (self.tokenType, self.customPatternVersion) = (tokenType, customPatternVersion)
+        (self.slug, self.displayName) = (slug, displayName)
+        (self.alertTotal, self.alertTotalPercentage) = (alertTotal, alertTotalPercentage)
+        (self.falsePositives, self.falsePositiveRate) = (falsePositives, falsePositiveRate)
+        (self.bypassRate, self.defaultSetting) = (bypassRate, defaultSetting)
+        (self.enterpriseSetting, self.setting) = (enterpriseSetting, setting)
+    }
+}
+
 /// Represents a 'pull_request_comment' secret scanning location type. This location type shows that a secret was
 /// detected in a comment on a pull request.
 public struct SecretScanningLocationPullRequestComment: Codable {

@@ -70,7 +70,8 @@ public extension SecretScanningMethods {
             body: requestBody,
             decoder: .json,
             operationId: "secretScanningUpdateAlert",
-            options: requestOptions
+            options: requestOptions,
+            errors: ["503": ServiceUnavailable.self]
         )).data
     }
 }

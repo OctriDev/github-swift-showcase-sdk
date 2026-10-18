@@ -4,6 +4,103 @@
 import Foundation
 
 /// WebhookPullRequestReviewRequestRemoved domain models
+public struct WebhookPullRequestReviewRequestRemovedVariant0RequestedReviewer: Codable {
+    public var id: Int
+    public var login: String
+    public var avatarUrl: String?
+    public var deleted: Bool?
+    public var email: String?
+    public var eventsUrl: String?
+    public var followersUrl: String?
+    public var followingUrl: String?
+    public var gistsUrl: String?
+    public var gravatarId: String?
+    public var htmlUrl: String?
+    public var name: String?
+    public var nodeId: String?
+    public var organizationsUrl: String?
+    public var receivedEventsUrl: String?
+    public var reposUrl: String?
+    public var siteAdmin: Bool?
+    public var starredUrl: String?
+    public var subscriptionsUrl: String?
+    public var type: WebhookPullRequestReviewRequestRemovedVariant0RequestedReviewerType?
+    public var url: String?
+    public var userViewType: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case login
+        case avatarUrl = "avatar_url"
+        case deleted
+        case email
+        case eventsUrl = "events_url"
+        case followersUrl = "followers_url"
+        case followingUrl = "following_url"
+        case gistsUrl = "gists_url"
+        case gravatarId = "gravatar_id"
+        case htmlUrl = "html_url"
+        case name
+        case nodeId = "node_id"
+        case organizationsUrl = "organizations_url"
+        case receivedEventsUrl = "received_events_url"
+        case reposUrl = "repos_url"
+        case siteAdmin = "site_admin"
+        case starredUrl = "starred_url"
+        case subscriptionsUrl = "subscriptions_url"
+        case type
+        case url
+        case userViewType = "user_view_type"
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension WebhookPullRequestReviewRequestRemovedVariant0RequestedReviewer {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.login) else {
+            throw SdkValidationError(
+                field: "login",
+                code: "required",
+                message: "Validation failed for 'login': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        login = try container.sdkDecodeRequired(.login)
+        avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
+        deleted = try container.sdkDecodeIfPresent(.deleted)
+        email = try container.sdkDecodeIfPresent(.email)
+        eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
+        followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
+        gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
+        gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
+        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        name = try container.sdkDecodeIfPresent(.name)
+        nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
+        receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
+        reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
+        siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
+        starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
+        subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
+        type = try container.sdkDecodeIfPresent(.type)
+        url = try container.sdkDecodeIfPresent(.url)
+        userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        try sdkValidateConstraints()
+    }
+}
+
 public extension WebhookPullRequestReviewRequestRemovedVariant0RequestedReviewer {
     init(
         id: Int,
@@ -172,6 +269,9 @@ public typealias WebhookPullRequestReviewRequestRemovedVariant1PullRequestAssign
 public typealias WebhookPullRequestReviewRequestRemovedVariant1PullRequestLabelsList =
     [WebhookPullRequestReviewRequestRemovedVariant1PullRequestLabelsItem]
 
+public typealias WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequX2fda12f6f2 =
+    [WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequX3f05b114b8?]
+
 public typealias WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequXeb95827519 =
     [WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequXdcc9c9326f]
 
@@ -208,7 +308,7 @@ public struct WebhookPullRequestReviewRequestRemovedVariant1PullRequest: Codable
     /// Number uniquely identifying the pull request within its repository.
     public var number: Int
     public var patchUrl: String
-    public var requestedReviewers: [PullRequestRequestedReviewersItem2]
+    public var requestedReviewers: WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequX2fda12f6f2
     public var requestedTeams: WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequXeb95827519
     public var reviewCommentUrl: String
     public var reviewCommentsUrl: String
@@ -380,7 +480,7 @@ public extension WebhookPullRequestReviewRequestRemovedVariant1PullRequest {
         nodeId: String,
         number: Int,
         patchUrl: String,
-        requestedReviewers: [PullRequestRequestedReviewersItem2],
+        requestedReviewers: WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequX2fda12f6f2,
         requestedTeams: WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequXeb95827519,
         reviewCommentUrl: String,
         reviewCommentsUrl: String,
@@ -499,82 +599,5 @@ public struct WebhookPullRequestReviewRequestRemovedVariant1: Codable {
 
     private init(sdkCopy value: Self) {
         self = value
-    }
-}
-
-public extension WebhookPullRequestReviewRequestRemovedVariant1 {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.action) else {
-            throw SdkValidationError(
-                field: "action",
-                code: "required",
-                message: "Validation failed for 'action': value is required"
-            )
-        }
-        guard container.contains(.number) else {
-            throw SdkValidationError(
-                field: "number",
-                code: "required",
-                message: "Validation failed for 'number': value is required"
-            )
-        }
-        guard container.contains(.pullRequest) else {
-            throw SdkValidationError(
-                field: "pull_request",
-                code: "required",
-                message: "Validation failed for 'pull_request': value is required"
-            )
-        }
-        guard container.contains(.repository) else {
-            throw SdkValidationError(
-                field: "repository",
-                code: "required",
-                message: "Validation failed for 'repository': value is required"
-            )
-        }
-        guard container.contains(.requestedTeam) else {
-            throw SdkValidationError(
-                field: "requested_team",
-                code: "required",
-                message: "Validation failed for 'requested_team': value is required"
-            )
-        }
-        guard container.contains(.sender) else {
-            throw SdkValidationError(
-                field: "sender",
-                code: "required",
-                message: "Validation failed for 'sender': value is required"
-            )
-        }
-        action = try container.sdkDecodeRequired(.action)
-        number = try container.sdkDecodeRequired(.number)
-        pullRequest = try container.sdkDecodeRequired(.pullRequest)
-        repository = try container.sdkDecodeRequired(.repository)
-        requestedTeam = try container.sdkDecodeRequired(.requestedTeam)
-        sender = try container.sdkDecodeRequired(.sender)
-        enterprise = try container.sdkDecodeIfPresent(.enterprise)
-        installation = try container.sdkDecodeIfPresent(.installation)
-        organization = try container.sdkDecodeIfPresent(.organization)
-    }
-}
-
-public extension WebhookPullRequestReviewRequestRemovedVariant1 {
-    init(
-        action: WebhookPullRequestReviewRequestRemovedVariant1Action,
-        number: Int,
-        pullRequest: WebhookPullRequestReviewRequestRemovedVariant1PullRequest,
-        repository: RepositoryWebhooks,
-        requestedTeam: WebhookPullRequestReviewRequestRemovedVariant1RequestedTeam,
-        sender: SimpleUser,
-        enterprise: EnterpriseWebhooks? = nil,
-        installation: SimpleInstallation? = nil,
-        organization: OrganizationSimpleWebhooks? = nil
-    ) {
-        (self.action, self.number) = (action, number)
-        (self.pullRequest, self.repository) = (pullRequest, repository)
-        (self.requestedTeam, self.sender) = (requestedTeam, sender)
-        (self.enterprise, self.installation) = (enterprise, installation)
-        self.organization = organization
     }
 }

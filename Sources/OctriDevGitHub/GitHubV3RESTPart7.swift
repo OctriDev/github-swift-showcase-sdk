@@ -260,7 +260,7 @@ public extension ActionsNamespace {
         labels: [String],
         workFolder: String? = nil,
         requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsGenerateRunnerJitconfigForOrgResponse {
+    ) async throws -> ActionsRunnerJitconfig {
         try await ActionsMethods.actionsGenerateRunnerJitconfigForOrg(
             config: config,
             org: org,
@@ -350,8 +350,7 @@ public extension ActionsNamespace {
         org: String,
         runnerId: Int,
         requestOptions: RequestOptions? = nil
-    ) async throws
-        -> ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgResponse {
+    ) async throws -> ActionsRunnerLabels {
         try await ActionsMethods.actionsListLabelsForSelfHostedRunnerForOrg(
             config: config,
             org: org,
@@ -368,7 +367,7 @@ public extension ActionsNamespace {
         runnerId: Int,
         labels: [String],
         requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgResponse {
+    ) async throws -> ActionsRunnerLabels {
         try await ActionsMethods.actionsAddCustomLabelsToSelfHostedRunnerForOrg(
             config: config,
             org: org,
@@ -387,7 +386,7 @@ public extension ActionsNamespace {
         runnerId: Int,
         labels: [String],
         requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgResponse {
+    ) async throws -> ActionsRunnerLabels {
         try await ActionsMethods.actionsSetCustomLabelsForSelfHostedRunnerForOrg(
             config: config,
             org: org,
@@ -405,7 +404,7 @@ public extension ActionsNamespace {
         org: String,
         runnerId: Int,
         requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsRemoveAllCustomLabelsFromSelfHostedRunnerForOrgResponse {
+    ) async throws -> ActionsRunnerLabelsReadonly {
         try await ActionsMethods.actionsRemoveAllCustomLabelsFromSelfHostedRunnerForOrg(
             config: config,
             org: org,
@@ -424,7 +423,7 @@ public extension ActionsNamespace {
         runnerId: Int,
         name: String,
         requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgResponse {
+    ) async throws -> ActionsRunnerLabels {
         try await ActionsMethods.actionsRemoveCustomLabelFromSelfHostedRunnerForOrg(
             config: config,
             org: org,

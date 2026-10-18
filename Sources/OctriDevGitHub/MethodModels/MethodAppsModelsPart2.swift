@@ -218,7 +218,7 @@ public struct AppsListInstallationReposForAuthenticatedUserResponseRepositoriesI
     /// Required `integer` value serialized in the `watchers` wire field.
     public var watchers: Int
     /// Optional object value serialized in the `permissions` wire field.
-    public var permissions: RepositoryPermissions?
+    public var permissions: AppsListInstallationReposForAuthenticatedUserResponseRepositoXfbc57dcb02?
     /// Whether this repository acts as a template that can be used to generate new repositories.
     /// - Example: true
     public var isTemplate: Bool?
@@ -232,7 +232,7 @@ public struct AppsListInstallationReposForAuthenticatedUserResponseRepositoriesI
     public var hasPullRequests: Bool?
     /// The policy controlling who can create pull requests: all or collaborators_only.
     /// - Example: "all"
-    public var pullRequestCreationPolicy: RepositoryPullRequestCreationPolicy?
+    public var pullRequestCreationPolicy: AppsListInstallationReposForAuthenticatedUserResponseRepositoX7d8fa4489f?
     /// The repository visibility: public, private, or internal.
     public var visibility: String?
     /// Whether to allow rebase merges for pull requests.
@@ -256,17 +256,17 @@ public struct AppsListInstallationReposForAuthenticatedUserResponseRepositoriesI
     /// The default value for a squash merge commit title: - `PR_TITLE` - default to the pull request's title. -
     /// `COMMIT_OR_PR_TITLE` - default to the commit's title (if only one commit) or the pull request's title (when
     /// more than one commit).
-    public var squashMergeCommitTitle: RepositorySquashMergeCommitTitle?
+    public var squashMergeCommitTitle: AppsListInstallationReposForAuthenticatedUserResponseRepositoXe6dfe6af0c?
     /// The default value for a squash merge commit message: - `PR_BODY` - default to the pull request's body. -
     /// `COMMIT_MESSAGES` - default to the branch's commit messages. - `BLANK` - default to a blank commit message.
-    public var squashMergeCommitMessage: RepositorySquashMergeCommitMessage?
+    public var squashMergeCommitMessage: AppsListInstallationReposForAuthenticatedUserResponseRepositoX6003e45528?
     /// The default value for a merge commit title. - `PR_TITLE` - default to the pull request's title. -
     /// `MERGE_MESSAGE` - default to the classic title for a merge message (e.g., Merge pull request #123 from
     /// branch-name).
-    public var mergeCommitTitle: RepositoryMergeCommitTitle?
+    public var mergeCommitTitle: AppsListInstallationReposForAuthenticatedUserResponseRepositoX55612d4937?
     /// The default value for a merge commit message. - `PR_TITLE` - default to the pull request's title. -
     /// `PR_BODY` - default to the pull request's body. - `BLANK` - default to a blank commit message.
-    public var mergeCommitMessage: RepositoryMergeCommitMessage?
+    public var mergeCommitMessage: AppsListInstallationReposForAuthenticatedUserResponseRepositoX58478254fe?
     /// Whether to allow merge commits for pull requests.
     /// - Example: true
     public var allowMergeCommit: Bool?
@@ -282,7 +282,7 @@ public struct AppsListInstallationReposForAuthenticatedUserResponseRepositoriesI
     /// Whether anonymous git access is enabled for this repository
     public var anonymousAccessEnabled: Bool?
     /// The status of the code search index for this repository
-    public var codeSearchIndexStatus: RepositoryCodeSearchIndexStatus?
+    public var codeSearchIndexStatus: AppsListInstallationReposForAuthenticatedUserResponseRepositoXace4d6c012?
     /// The custom properties that were defined for the repository. The keys are the custom property names, and the
     /// values are the corresponding custom property values. Present for org repos only.
     public var customProperties: [String: JSONValue]?

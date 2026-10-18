@@ -4,6 +4,202 @@
 import Foundation
 
 /// WebhookPullRequestReviewRequested domain models
+public extension WebhookPullRequestReviewRequestedVariant1PullRequestAssignee {
+    init(
+        id: Int,
+        login: String,
+        avatarUrl: String? = nil,
+        deleted: Bool? = nil,
+        email: String? = nil,
+        eventsUrl: String? = nil,
+        followersUrl: String? = nil,
+        followingUrl: String? = nil,
+        gistsUrl: String? = nil,
+        gravatarId: String? = nil,
+        htmlUrl: String? = nil,
+        name: String? = nil,
+        nodeId: String? = nil,
+        organizationsUrl: String? = nil,
+        receivedEventsUrl: String? = nil,
+        reposUrl: String? = nil,
+        siteAdmin: Bool? = nil,
+        starredUrl: String? = nil,
+        subscriptionsUrl: String? = nil,
+        type: WebhookPullRequestReviewRequestedVariant1PullRequestAssigneeType? = nil,
+        url: String? = nil,
+        userViewType: String? = nil
+    ) throws {
+        (self.id, self.login) = (id, login)
+        (self.avatarUrl, self.deleted) = (avatarUrl, deleted)
+        (self.email, self.eventsUrl) = (email, eventsUrl)
+        (self.followersUrl, self.followingUrl) = (followersUrl, followingUrl)
+        (self.gistsUrl, self.gravatarId) = (gistsUrl, gravatarId)
+        (self.htmlUrl, self.name) = (htmlUrl, name)
+        (self.nodeId, self.organizationsUrl) = (nodeId, organizationsUrl)
+        (self.receivedEventsUrl, self.reposUrl) = (receivedEventsUrl, reposUrl)
+        (self.siteAdmin, self.starredUrl) = (siteAdmin, starredUrl)
+        (self.subscriptionsUrl, self.type) = (subscriptionsUrl, type)
+        (self.url, self.userViewType) = (url, userViewType)
+        try sdkValidateConstraints()
+    }
+}
+
+extension WebhookPullRequestReviewRequestedVariant1PullRequestAssignee {
+    func sdkValidateConstraints() throws {
+        if let value = avatarUrl {
+            try sdkValidateUri("avatar_url", value)
+        }
+        if let value = followersUrl {
+            try sdkValidateUri("followers_url", value)
+        }
+        if let value = htmlUrl {
+            try sdkValidateUri("html_url", value)
+        }
+        if let value = organizationsUrl {
+            try sdkValidateUri("organizations_url", value)
+        }
+        if let value = receivedEventsUrl {
+            try sdkValidateUri("received_events_url", value)
+        }
+        if let value = reposUrl {
+            try sdkValidateUri("repos_url", value)
+        }
+        if let value = subscriptionsUrl {
+            try sdkValidateUri("subscriptions_url", value)
+        }
+        if let value = url {
+            try sdkValidateUri("url", value)
+        }
+    }
+}
+
+public struct WebhookPullRequestReviewRequestedVariant0PullRequestHeadRepoLicense: Codable {
+    public var key: String
+    public var name: String
+    public var nodeId: String
+    public var spdxId: String
+    public var url: String?
+
+    enum CodingKeys: String, CodingKey {
+        case key
+        case name
+        case nodeId = "node_id"
+        case spdxId = "spdx_id"
+        case url
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension WebhookPullRequestReviewRequestedVariant0PullRequestHeadRepoLicense {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.key) else {
+            throw SdkValidationError(
+                field: "key",
+                code: "required",
+                message: "Validation failed for 'key': value is required"
+            )
+        }
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        guard container.contains(.nodeId) else {
+            throw SdkValidationError(
+                field: "node_id",
+                code: "required",
+                message: "Validation failed for 'node_id': value is required"
+            )
+        }
+        guard container.contains(.spdxId) else {
+            throw SdkValidationError(
+                field: "spdx_id",
+                code: "required",
+                message: "Validation failed for 'spdx_id': value is required"
+            )
+        }
+        guard container.contains(.url) else {
+            throw SdkValidationError(
+                field: "url",
+                code: "required",
+                message: "Validation failed for 'url': value is required"
+            )
+        }
+        key = try container.sdkDecodeRequired(.key)
+        name = try container.sdkDecodeRequired(.name)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        spdxId = try container.sdkDecodeRequired(.spdxId)
+        url = try container.sdkDecodeNullable(.url)
+        if let value = url {
+            try sdkValidateUri("url", value)
+        }
+    }
+}
+
+public extension WebhookPullRequestReviewRequestedVariant0PullRequestHeadRepoLicense {
+    init(key: String, name: String, nodeId: String, spdxId: String, url: String?) throws {
+        (self.key, self.name) = (key, name)
+        (self.nodeId, self.spdxId) = (nodeId, spdxId)
+        self.url = url
+        if let value = self.url {
+            try sdkValidateUri("url", value)
+        }
+    }
+}
+
+/// A collection of related issues and pull requests.
+public struct WebhookPullRequestReviewRequestedVariant1PullRequestMilestone: Codable {
+    public var closedAt: Date?
+    public var closedIssues: Int
+    public var createdAt: Date
+    /// User
+    public var creator: WebhookPullRequestReviewRequestedVariant1PullRequestMilestoneCreator?
+    public var description: String?
+    public var dueOn: Date?
+    public var htmlUrl: String
+    public var id: Int
+    public var labelsUrl: String
+    public var nodeId: String
+    /// The number of the milestone.
+    public var number: Int
+    public var openIssues: Int
+    /// The state of the milestone.
+    public var state: WebhookPullRequestReviewRequestedVariant1PullRequestMilestoneState
+    /// The title of the milestone.
+    public var title: String
+    public var updatedAt: Date
+    public var url: String
+
+    enum CodingKeys: String, CodingKey {
+        case closedAt = "closed_at"
+        case closedIssues = "closed_issues"
+        case createdAt = "created_at"
+        case creator
+        case description
+        case dueOn = "due_on"
+        case htmlUrl = "html_url"
+        case id
+        case labelsUrl = "labels_url"
+        case nodeId = "node_id"
+        case number
+        case openIssues = "open_issues"
+        case state
+        case title
+        case updatedAt = "updated_at"
+        case url
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
 public extension WebhookPullRequestReviewRequestedVariant1PullRequestMilestone {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -405,34 +601,5 @@ public extension WebhookPullRequestReviewRequestedVariant0PullRequestBaseUser {
         (self.subscriptionsUrl, self.type) = (subscriptionsUrl, type)
         (self.url, self.userViewType) = (url, userViewType)
         try sdkValidateConstraints()
-    }
-}
-
-extension WebhookPullRequestReviewRequestedVariant0PullRequestBaseUser {
-    func sdkValidateConstraints() throws {
-        if let value = avatarUrl {
-            try sdkValidateUri("avatar_url", value)
-        }
-        if let value = followersUrl {
-            try sdkValidateUri("followers_url", value)
-        }
-        if let value = htmlUrl {
-            try sdkValidateUri("html_url", value)
-        }
-        if let value = organizationsUrl {
-            try sdkValidateUri("organizations_url", value)
-        }
-        if let value = receivedEventsUrl {
-            try sdkValidateUri("received_events_url", value)
-        }
-        if let value = reposUrl {
-            try sdkValidateUri("repos_url", value)
-        }
-        if let value = subscriptionsUrl {
-            try sdkValidateUri("subscriptions_url", value)
-        }
-        if let value = url {
-            try sdkValidateUri("url", value)
-        }
     }
 }

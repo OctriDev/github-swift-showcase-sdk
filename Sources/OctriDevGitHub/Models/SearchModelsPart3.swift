@@ -4,283 +4,123 @@
 import Foundation
 
 /// Search domain models
-/// Repo Search Result Item
-public struct RepoSearchResultItem: Codable {
-    /// Required `integer` value serialized in the `id` wire field.
-    public var id: Int
-    /// Required `string` value serialized in the `node_id` wire field.
-    public var nodeId: String
+public extension IssueSearchResultItemLabelsItem {
+    init(
+        id: Int? = nil,
+        nodeId: String? = nil,
+        url: String? = nil,
+        name: String? = nil,
+        color: String? = nil,
+        default: Bool? = nil,
+        description: String? = nil,
+        archivedAt: Date? = nil,
+        archivedBy: SimpleUser? = nil
+    ) throws {
+        self.init()
+        (self.id, self.nodeId) = (id, nodeId)
+        (self.url, self.name) = (url, name)
+        (self.color, self.default) = (color, `default`)
+        (self.description, self.archivedAt) = (description, archivedAt)
+        self.archivedBy = archivedBy
+        if let value = self.archivedAt {
+            try sdkValidateDateTime("archived_at", sdkWireString(value))
+        }
+    }
+}
+
+/// Optional object value serialized in the `topic_relation` wire field.
+public struct TopicSearchResultItemRelatedItemTopicRelation: Codable {
+    /// Optional `integer` value serialized in the `id` wire field.
+    public var id: Int?
+    /// Optional `string` value serialized in the `name` wire field.
+    public var name: String?
+    /// Optional `integer` value serialized in the `topic_id` wire field.
+    public var topicId: Int?
+    /// Optional `string` value serialized in the `relation_type` wire field.
+    public var relationType: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case topicId = "topic_id"
+        case relationType = "relation_type"
+    }
+
+    init() {
+        (id, name, topicId, relationType) = (nil, nil, nil, nil)
+    }
+}
+
+public extension TopicSearchResultItemRelatedItemTopicRelation {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.sdkDecodeIfPresent(.id)
+        name = try container.sdkDecodeIfPresent(.name)
+        topicId = try container.sdkDecodeIfPresent(.topicId)
+        relationType = try container.sdkDecodeIfPresent(.relationType)
+    }
+}
+
+public extension TopicSearchResultItemRelatedItemTopicRelation {
+    init(id: Int? = nil, name: String? = nil, topicId: Int? = nil, relationType: String? = nil) {
+        self.init()
+        (self.id, self.name) = (id, name)
+        (self.topicId, self.relationType) = (topicId, relationType)
+    }
+}
+
+/// Topic Search Result Item
+public struct TopicSearchResultItem: Codable {
     /// Required `string` value serialized in the `name` wire field.
     public var name: String
-    /// Required `string` value serialized in the `full_name` wire field.
-    public var fullName: String
-    /// A GitHub user.
-    public var owner: NullableSimpleUser?
-    /// Required `boolean` value serialized in the `private` wire field.
-    public var `private`: Bool
-    /// Required `uri`-formatted value serialized in the `html_url` wire field.
-    public var htmlUrl: String
+    /// Required `string` value serialized in the `display_name` wire field.
+    public var displayName: String?
+    /// Required `string` value serialized in the `short_description` wire field.
+    public var shortDescription: String?
     /// Required `string` value serialized in the `description` wire field.
     public var description: String?
-    /// Required `boolean` value serialized in the `fork` wire field.
-    public var fork: Bool
-    /// Required `uri`-formatted value serialized in the `url` wire field.
-    public var url: String
+    /// Required `string` value serialized in the `created_by` wire field.
+    public var createdBy: String?
+    /// Required `string` value serialized in the `released` wire field.
+    public var released: String?
     /// Required `date-time`-formatted value serialized in the `created_at` wire field.
     public var createdAt: Date
     /// Required `date-time`-formatted value serialized in the `updated_at` wire field.
     public var updatedAt: Date
-    /// Required `date-time`-formatted value serialized in the `pushed_at` wire field.
-    public var pushedAt: Date
-    /// Required `uri`-formatted value serialized in the `homepage` wire field.
-    public var homepage: String?
-    /// Required `integer` value serialized in the `size` wire field.
-    public var size: Int
-    /// Required `integer` value serialized in the `stargazers_count` wire field.
-    public var stargazersCount: Int
-    /// Required `integer` value serialized in the `watchers_count` wire field.
-    public var watchersCount: Int
-    /// Required `string` value serialized in the `language` wire field.
-    public var language: String?
-    /// Required `integer` value serialized in the `forks_count` wire field.
-    public var forksCount: Int
-    /// Required `integer` value serialized in the `open_issues_count` wire field.
-    public var openIssuesCount: Int
-    /// Required `string` value serialized in the `default_branch` wire field.
-    public var defaultBranch: String
+    /// Required `boolean` value serialized in the `featured` wire field.
+    public var featured: Bool
+    /// Required `boolean` value serialized in the `curated` wire field.
+    public var curated: Bool
     /// Required `number` value serialized in the `score` wire field.
     public var score: Double
-    /// Required `uri`-formatted value serialized in the `forks_url` wire field.
-    public var forksUrl: String
-    /// Required `string` value serialized in the `keys_url` wire field.
-    public var keysUrl: String
-    /// Required `string` value serialized in the `collaborators_url` wire field.
-    public var collaboratorsUrl: String
-    /// Required `uri`-formatted value serialized in the `teams_url` wire field.
-    public var teamsUrl: String
-    /// Required `uri`-formatted value serialized in the `hooks_url` wire field.
-    public var hooksUrl: String
-    /// Required `string` value serialized in the `issue_events_url` wire field.
-    public var issueEventsUrl: String
-    /// Required `uri`-formatted value serialized in the `events_url` wire field.
-    public var eventsUrl: String
-    /// Required `string` value serialized in the `assignees_url` wire field.
-    public var assigneesUrl: String
-    /// Required `string` value serialized in the `branches_url` wire field.
-    public var branchesUrl: String
-    /// Required `uri`-formatted value serialized in the `tags_url` wire field.
-    public var tagsUrl: String
-    /// Required `string` value serialized in the `blobs_url` wire field.
-    public var blobsUrl: String
-    /// Required `string` value serialized in the `git_tags_url` wire field.
-    public var gitTagsUrl: String
-    /// Required `string` value serialized in the `git_refs_url` wire field.
-    public var gitRefsUrl: String
-    /// Required `string` value serialized in the `trees_url` wire field.
-    public var treesUrl: String
-    /// Required `string` value serialized in the `statuses_url` wire field.
-    public var statusesUrl: String
-    /// Required `uri`-formatted value serialized in the `languages_url` wire field.
-    public var languagesUrl: String
-    /// Required `uri`-formatted value serialized in the `stargazers_url` wire field.
-    public var stargazersUrl: String
-    /// Required `uri`-formatted value serialized in the `contributors_url` wire field.
-    public var contributorsUrl: String
-    /// Required `uri`-formatted value serialized in the `subscribers_url` wire field.
-    public var subscribersUrl: String
-    /// Required `uri`-formatted value serialized in the `subscription_url` wire field.
-    public var subscriptionUrl: String
-    /// Required `string` value serialized in the `commits_url` wire field.
-    public var commitsUrl: String
-    /// Required `string` value serialized in the `git_commits_url` wire field.
-    public var gitCommitsUrl: String
-    /// Required `string` value serialized in the `comments_url` wire field.
-    public var commentsUrl: String
-    /// Required `string` value serialized in the `issue_comment_url` wire field.
-    public var issueCommentUrl: String
-    /// Required `string` value serialized in the `contents_url` wire field.
-    public var contentsUrl: String
-    /// Required `string` value serialized in the `compare_url` wire field.
-    public var compareUrl: String
-    /// Required `uri`-formatted value serialized in the `merges_url` wire field.
-    public var mergesUrl: String
-    /// Required `string` value serialized in the `archive_url` wire field.
-    public var archiveUrl: String
-    /// Required `uri`-formatted value serialized in the `downloads_url` wire field.
-    public var downloadsUrl: String
-    /// Required `string` value serialized in the `issues_url` wire field.
-    public var issuesUrl: String
-    /// Required `string` value serialized in the `pulls_url` wire field.
-    public var pullsUrl: String
-    /// Required `string` value serialized in the `milestones_url` wire field.
-    public var milestonesUrl: String
-    /// Required `string` value serialized in the `notifications_url` wire field.
-    public var notificationsUrl: String
-    /// Required `string` value serialized in the `labels_url` wire field.
-    public var labelsUrl: String
-    /// Required `string` value serialized in the `releases_url` wire field.
-    public var releasesUrl: String
-    /// Required `uri`-formatted value serialized in the `deployments_url` wire field.
-    public var deploymentsUrl: String
-    /// Required `string` value serialized in the `git_url` wire field.
-    public var gitUrl: String
-    /// Required `string` value serialized in the `ssh_url` wire field.
-    public var sshUrl: String
-    /// Required `string` value serialized in the `clone_url` wire field.
-    public var cloneUrl: String
-    /// Required `uri`-formatted value serialized in the `svn_url` wire field.
-    public var svnUrl: String
-    /// Required `integer` value serialized in the `forks` wire field.
-    public var forks: Int
-    /// Required `integer` value serialized in the `open_issues` wire field.
-    public var openIssues: Int
-    /// Required `integer` value serialized in the `watchers` wire field.
-    public var watchers: Int
-    /// Required `uri`-formatted value serialized in the `mirror_url` wire field.
-    public var mirrorUrl: String?
-    /// Required `boolean` value serialized in the `has_issues` wire field.
-    public var hasIssues: Bool
-    /// Required `boolean` value serialized in the `has_projects` wire field.
-    public var hasProjects: Bool
-    /// Required `boolean` value serialized in the `has_pages` wire field.
-    public var hasPages: Bool
-    /// Required `boolean` value serialized in the `has_wiki` wire field.
-    public var hasWiki: Bool
-    /// Required `boolean` value serialized in the `has_downloads` wire field.
-    public var hasDownloads: Bool
-    /// Required `boolean` value serialized in the `archived` wire field.
-    public var archived: Bool
-    /// Returns whether or not this repository disabled.
-    public var disabled: Bool
-    /// License Simple
-    public var license: NullableLicenseSimple?
-    /// Optional `string` value serialized in the `master_branch` wire field.
-    public var primaryBranch: String?
-    /// Optional array value serialized in the `topics` wire field.
-    public var topics: [String]?
-    /// Optional `boolean` value serialized in the `has_discussions` wire field.
-    public var hasDiscussions: Bool?
-    /// Optional `boolean` value serialized in the `has_pull_requests` wire field.
-    public var hasPullRequests: Bool?
-    /// The policy controlling who can create pull requests: all or collaborators_only.
-    public var pullRequestCreationPolicy: RepoSearchResultItemPullRequestCreationPolicy?
-    /// The repository visibility: public, private, or internal.
-    public var visibility: String?
-    /// Optional object value serialized in the `permissions` wire field.
-    public var permissions: RepoSearchResultItemPermissions?
+    /// Optional `integer` value serialized in the `repository_count` wire field.
+    public var repositoryCount: Int?
+    /// Optional `uri`-formatted value serialized in the `logo_url` wire field.
+    public var logoUrl: String?
     /// Optional array value serialized in the `text_matches` wire field.
     public var textMatches: SearchResultTextMatches?
-    /// Optional `string` value serialized in the `temp_clone_token` wire field.
-    public var tempCloneToken: String?
-    /// Optional `boolean` value serialized in the `allow_merge_commit` wire field.
-    public var allowMergeCommit: Bool?
-    /// Optional `boolean` value serialized in the `allow_squash_merge` wire field.
-    public var allowSquashMerge: Bool?
-    /// Optional `boolean` value serialized in the `allow_rebase_merge` wire field.
-    public var allowRebaseMerge: Bool?
-    /// Optional `boolean` value serialized in the `allow_auto_merge` wire field.
-    public var allowAutoMerge: Bool?
-    /// Optional `boolean` value serialized in the `delete_branch_on_merge` wire field.
-    public var deleteBranchOnMerge: Bool?
-    /// Optional `boolean` value serialized in the `allow_forking` wire field.
-    public var allowForking: Bool?
-    /// Optional `boolean` value serialized in the `is_template` wire field.
-    public var isTemplate: Bool?
-    /// Optional `boolean` value serialized in the `web_commit_signoff_required` wire field.
-    public var webCommitSignoffRequired: Bool?
+    /// Optional array value serialized in the `related` wire field.
+    public var related: [TopicSearchResultItemRelatedItem]?
+    /// Optional array value serialized in the `aliases` wire field.
+    public var aliases: [TopicSearchResultItemAliasesItem]?
 
     enum CodingKeys: String, CodingKey {
-        case id
-        case nodeId = "node_id"
         case name
-        case fullName = "full_name"
-        case owner
-        case `private`
-        case htmlUrl = "html_url"
+        case displayName = "display_name"
+        case shortDescription = "short_description"
         case description
-        case fork
-        case url
+        case createdBy = "created_by"
+        case released
         case createdAt = "created_at"
         case updatedAt = "updated_at"
-        case pushedAt = "pushed_at"
-        case homepage
-        case size
-        case stargazersCount = "stargazers_count"
-        case watchersCount = "watchers_count"
-        case language
-        case forksCount = "forks_count"
-        case openIssuesCount = "open_issues_count"
-        case defaultBranch = "default_branch"
+        case featured
+        case curated
         case score
-        case forksUrl = "forks_url"
-        case keysUrl = "keys_url"
-        case collaboratorsUrl = "collaborators_url"
-        case teamsUrl = "teams_url"
-        case hooksUrl = "hooks_url"
-        case issueEventsUrl = "issue_events_url"
-        case eventsUrl = "events_url"
-        case assigneesUrl = "assignees_url"
-        case branchesUrl = "branches_url"
-        case tagsUrl = "tags_url"
-        case blobsUrl = "blobs_url"
-        case gitTagsUrl = "git_tags_url"
-        case gitRefsUrl = "git_refs_url"
-        case treesUrl = "trees_url"
-        case statusesUrl = "statuses_url"
-        case languagesUrl = "languages_url"
-        case stargazersUrl = "stargazers_url"
-        case contributorsUrl = "contributors_url"
-        case subscribersUrl = "subscribers_url"
-        case subscriptionUrl = "subscription_url"
-        case commitsUrl = "commits_url"
-        case gitCommitsUrl = "git_commits_url"
-        case commentsUrl = "comments_url"
-        case issueCommentUrl = "issue_comment_url"
-        case contentsUrl = "contents_url"
-        case compareUrl = "compare_url"
-        case mergesUrl = "merges_url"
-        case archiveUrl = "archive_url"
-        case downloadsUrl = "downloads_url"
-        case issuesUrl = "issues_url"
-        case pullsUrl = "pulls_url"
-        case milestonesUrl = "milestones_url"
-        case notificationsUrl = "notifications_url"
-        case labelsUrl = "labels_url"
-        case releasesUrl = "releases_url"
-        case deploymentsUrl = "deployments_url"
-        case gitUrl = "git_url"
-        case sshUrl = "ssh_url"
-        case cloneUrl = "clone_url"
-        case svnUrl = "svn_url"
-        case forks
-        case openIssues = "open_issues"
-        case watchers
-        case mirrorUrl = "mirror_url"
-        case hasIssues = "has_issues"
-        case hasProjects = "has_projects"
-        case hasPages = "has_pages"
-        case hasWiki = "has_wiki"
-        case hasDownloads = "has_downloads"
-        case archived
-        case disabled
-        case license
-        case primaryBranch = "master_branch"
-        case topics
-        case hasDiscussions = "has_discussions"
-        case hasPullRequests = "has_pull_requests"
-        case pullRequestCreationPolicy = "pull_request_creation_policy"
-        case visibility
-        case permissions
+        case repositoryCount = "repository_count"
+        case logoUrl = "logo_url"
         case textMatches = "text_matches"
-        case tempCloneToken = "temp_clone_token"
-        case allowMergeCommit = "allow_merge_commit"
-        case allowSquashMerge = "allow_squash_merge"
-        case allowRebaseMerge = "allow_rebase_merge"
-        case allowAutoMerge = "allow_auto_merge"
-        case deleteBranchOnMerge = "delete_branch_on_merge"
-        case allowForking = "allow_forking"
-        case isTemplate = "is_template"
-        case webCommitSignoffRequired = "web_commit_signoff_required"
+        case related
+        case aliases
     }
 
     private init(sdkCopy value: Self) {
@@ -288,338 +128,497 @@ public struct RepoSearchResultItem: Codable {
     }
 }
 
-public extension RepoSearchResultItem {
+public extension TopicSearchResultItem {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
         name = try container.sdkDecodeRequired(.name)
-        fullName = try container.sdkDecodeRequired(.fullName)
-        owner = try container.sdkDecodeNullable(.owner)
-        self.private = try container.sdkDecodeRequired(.private)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        displayName = try container.sdkDecodeNullable(.displayName)
+        shortDescription = try container.sdkDecodeNullable(.shortDescription)
         description = try container.sdkDecodeNullable(.description)
-        fork = try container.sdkDecodeRequired(.fork)
-        url = try container.sdkDecodeRequired(.url)
+        createdBy = try container.sdkDecodeNullable(.createdBy)
+        released = try container.sdkDecodeNullable(.released)
         createdAt = try container.sdkDecodeRequired(.createdAt)
         updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        pushedAt = try container.sdkDecodeRequired(.pushedAt)
-        homepage = try container.sdkDecodeNullable(.homepage)
-        size = try container.sdkDecodeRequired(.size)
-        stargazersCount = try container.sdkDecodeRequired(.stargazersCount)
-        watchersCount = try container.sdkDecodeRequired(.watchersCount)
-        language = try container.sdkDecodeNullable(.language)
-        forksCount = try container.sdkDecodeRequired(.forksCount)
-        openIssuesCount = try container.sdkDecodeRequired(.openIssuesCount)
-        defaultBranch = try container.sdkDecodeRequired(.defaultBranch)
+        featured = try container.sdkDecodeRequired(.featured)
+        curated = try container.sdkDecodeRequired(.curated)
         score = try container.sdkDecodeRequired(.score)
-        forksUrl = try container.sdkDecodeRequired(.forksUrl)
-        keysUrl = try container.sdkDecodeRequired(.keysUrl)
-        collaboratorsUrl = try container.sdkDecodeRequired(.collaboratorsUrl)
-        teamsUrl = try container.sdkDecodeRequired(.teamsUrl)
-        hooksUrl = try container.sdkDecodeRequired(.hooksUrl)
-        issueEventsUrl = try container.sdkDecodeRequired(.issueEventsUrl)
-        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        assigneesUrl = try container.sdkDecodeRequired(.assigneesUrl)
-        branchesUrl = try container.sdkDecodeRequired(.branchesUrl)
-        tagsUrl = try container.sdkDecodeRequired(.tagsUrl)
-        blobsUrl = try container.sdkDecodeRequired(.blobsUrl)
-        gitTagsUrl = try container.sdkDecodeRequired(.gitTagsUrl)
-        gitRefsUrl = try container.sdkDecodeRequired(.gitRefsUrl)
-        treesUrl = try container.sdkDecodeRequired(.treesUrl)
-        statusesUrl = try container.sdkDecodeRequired(.statusesUrl)
-        languagesUrl = try container.sdkDecodeRequired(.languagesUrl)
-        stargazersUrl = try container.sdkDecodeRequired(.stargazersUrl)
-        contributorsUrl = try container.sdkDecodeRequired(.contributorsUrl)
-        subscribersUrl = try container.sdkDecodeRequired(.subscribersUrl)
-        subscriptionUrl = try container.sdkDecodeRequired(.subscriptionUrl)
-        commitsUrl = try container.sdkDecodeRequired(.commitsUrl)
-        gitCommitsUrl = try container.sdkDecodeRequired(.gitCommitsUrl)
-        commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
-        issueCommentUrl = try container.sdkDecodeRequired(.issueCommentUrl)
-        contentsUrl = try container.sdkDecodeRequired(.contentsUrl)
-        compareUrl = try container.sdkDecodeRequired(.compareUrl)
-        mergesUrl = try container.sdkDecodeRequired(.mergesUrl)
-        archiveUrl = try container.sdkDecodeRequired(.archiveUrl)
-        downloadsUrl = try container.sdkDecodeRequired(.downloadsUrl)
-        issuesUrl = try container.sdkDecodeRequired(.issuesUrl)
-        pullsUrl = try container.sdkDecodeRequired(.pullsUrl)
-        milestonesUrl = try container.sdkDecodeRequired(.milestonesUrl)
-        notificationsUrl = try container.sdkDecodeRequired(.notificationsUrl)
-        labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
-        releasesUrl = try container.sdkDecodeRequired(.releasesUrl)
-        deploymentsUrl = try container.sdkDecodeRequired(.deploymentsUrl)
-        gitUrl = try container.sdkDecodeRequired(.gitUrl)
-        sshUrl = try container.sdkDecodeRequired(.sshUrl)
-        cloneUrl = try container.sdkDecodeRequired(.cloneUrl)
-        svnUrl = try container.sdkDecodeRequired(.svnUrl)
-        forks = try container.sdkDecodeRequired(.forks)
-        openIssues = try container.sdkDecodeRequired(.openIssues)
-        watchers = try container.sdkDecodeRequired(.watchers)
-        mirrorUrl = try container.sdkDecodeNullable(.mirrorUrl)
-        hasIssues = try container.sdkDecodeRequired(.hasIssues)
-        hasProjects = try container.sdkDecodeRequired(.hasProjects)
-        hasPages = try container.sdkDecodeRequired(.hasPages)
-        hasWiki = try container.sdkDecodeRequired(.hasWiki)
-        hasDownloads = try container.sdkDecodeRequired(.hasDownloads)
-        archived = try container.sdkDecodeRequired(.archived)
-        disabled = try container.sdkDecodeRequired(.disabled)
-        license = try container.sdkDecodeNullable(.license)
-        primaryBranch = try container.sdkDecodeIfPresent(.primaryBranch)
-        topics = try container.sdkDecodeIfPresent(.topics)
-        hasDiscussions = try container.sdkDecodeIfPresent(.hasDiscussions)
-        hasPullRequests = try container.sdkDecodeIfPresent(.hasPullRequests)
-        pullRequestCreationPolicy = try container.sdkDecodeIfPresent(.pullRequestCreationPolicy)
-        visibility = try container.sdkDecodeIfPresent(.visibility)
-        permissions = try container.sdkDecodeIfPresent(.permissions)
+        repositoryCount = try container.sdkDecodeIfPresent(.repositoryCount)
+        logoUrl = try container.sdkDecodeIfPresent(.logoUrl)
         textMatches = try container.sdkDecodeIfPresent(.textMatches)
-        tempCloneToken = try container.sdkDecodeIfPresent(.tempCloneToken)
-        allowMergeCommit = try container.sdkDecodeIfPresent(.allowMergeCommit)
-        allowSquashMerge = try container.sdkDecodeIfPresent(.allowSquashMerge)
-        allowRebaseMerge = try container.sdkDecodeIfPresent(.allowRebaseMerge)
-        allowAutoMerge = try container.sdkDecodeIfPresent(.allowAutoMerge)
-        deleteBranchOnMerge = try container.sdkDecodeIfPresent(.deleteBranchOnMerge)
-        allowForking = try container.sdkDecodeIfPresent(.allowForking)
-        isTemplate = try container.sdkDecodeIfPresent(.isTemplate)
-        webCommitSignoffRequired = try container.sdkDecodeIfPresent(.webCommitSignoffRequired)
-        try sdkValidateConstraintsPart1()
-        try sdkValidateConstraintsPart2()
-    }
-}
-
-public extension RepoSearchResultItem {
-    init(
-        id: Int,
-        nodeId: String,
-        name: String,
-        fullName: String,
-        owner: NullableSimpleUser?,
-        private: Bool,
-        htmlUrl: String,
-        description: String?,
-        fork: Bool,
-        url: String,
-        createdAt: Date,
-        updatedAt: Date,
-        pushedAt: Date,
-        homepage: String?,
-        size: Int,
-        stargazersCount: Int,
-        watchersCount: Int,
-        language: String?,
-        forksCount: Int,
-        openIssuesCount: Int,
-        defaultBranch: String,
-        score: Double,
-        forksUrl: String,
-        keysUrl: String,
-        collaboratorsUrl: String,
-        teamsUrl: String,
-        hooksUrl: String,
-        issueEventsUrl: String,
-        eventsUrl: String,
-        assigneesUrl: String,
-        branchesUrl: String,
-        tagsUrl: String,
-        blobsUrl: String,
-        gitTagsUrl: String,
-        gitRefsUrl: String,
-        treesUrl: String,
-        statusesUrl: String,
-        languagesUrl: String,
-        stargazersUrl: String,
-        contributorsUrl: String,
-        subscribersUrl: String,
-        subscriptionUrl: String,
-        commitsUrl: String,
-        gitCommitsUrl: String,
-        commentsUrl: String,
-        issueCommentUrl: String,
-        contentsUrl: String,
-        compareUrl: String,
-        mergesUrl: String,
-        archiveUrl: String,
-        downloadsUrl: String,
-        issuesUrl: String,
-        pullsUrl: String,
-        milestonesUrl: String,
-        notificationsUrl: String,
-        labelsUrl: String,
-        releasesUrl: String,
-        deploymentsUrl: String,
-        gitUrl: String,
-        sshUrl: String,
-        cloneUrl: String,
-        svnUrl: String,
-        forks: Int,
-        openIssues: Int,
-        watchers: Int,
-        mirrorUrl: String?,
-        hasIssues: Bool,
-        hasProjects: Bool,
-        hasPages: Bool,
-        hasWiki: Bool,
-        hasDownloads: Bool,
-        archived: Bool,
-        disabled: Bool,
-        license: NullableLicenseSimple?,
-        primaryBranch: String? = nil,
-        topics: [String]? = nil,
-        hasDiscussions: Bool? = nil,
-        hasPullRequests: Bool? = nil,
-        pullRequestCreationPolicy: RepoSearchResultItemPullRequestCreationPolicy? = nil,
-        visibility: String? = nil,
-        permissions: RepoSearchResultItemPermissions? = nil,
-        textMatches: SearchResultTextMatches? = nil,
-        tempCloneToken: String? = nil,
-        allowMergeCommit: Bool? = nil,
-        allowSquashMerge: Bool? = nil,
-        allowRebaseMerge: Bool? = nil,
-        allowAutoMerge: Bool? = nil,
-        deleteBranchOnMerge: Bool? = nil,
-        allowForking: Bool? = nil,
-        isTemplate: Bool? = nil,
-        webCommitSignoffRequired: Bool? = nil
-    ) throws {
-        (self.id, self.nodeId) = (id, nodeId)
-        (self.name, self.fullName) = (name, fullName)
-        (self.owner, self.private) = (owner, `private`)
-        (self.htmlUrl, self.description) = (htmlUrl, description)
-        (self.fork, self.url) = (fork, url)
-        (self.createdAt, self.updatedAt) = (createdAt, updatedAt)
-        (self.pushedAt, self.homepage) = (pushedAt, homepage)
-        (self.size, self.stargazersCount) = (size, stargazersCount)
-        (self.watchersCount, self.language) = (watchersCount, language)
-        (self.forksCount, self.openIssuesCount) = (forksCount, openIssuesCount)
-        (self.defaultBranch, self.score) = (defaultBranch, score)
-        (self.forksUrl, self.keysUrl) = (forksUrl, keysUrl)
-        (self.collaboratorsUrl, self.teamsUrl) = (collaboratorsUrl, teamsUrl)
-        (self.hooksUrl, self.issueEventsUrl) = (hooksUrl, issueEventsUrl)
-        (self.eventsUrl, self.assigneesUrl) = (eventsUrl, assigneesUrl)
-        (self.branchesUrl, self.tagsUrl) = (branchesUrl, tagsUrl)
-        (self.blobsUrl, self.gitTagsUrl) = (blobsUrl, gitTagsUrl)
-        (self.gitRefsUrl, self.treesUrl) = (gitRefsUrl, treesUrl)
-        (self.statusesUrl, self.languagesUrl) = (statusesUrl, languagesUrl)
-        (self.stargazersUrl, self.contributorsUrl) = (stargazersUrl, contributorsUrl)
-        (self.subscribersUrl, self.subscriptionUrl) = (subscribersUrl, subscriptionUrl)
-        (self.commitsUrl, self.gitCommitsUrl) = (commitsUrl, gitCommitsUrl)
-        (self.commentsUrl, self.issueCommentUrl) = (commentsUrl, issueCommentUrl)
-        (self.contentsUrl, self.compareUrl) = (contentsUrl, compareUrl)
-        (self.mergesUrl, self.archiveUrl) = (mergesUrl, archiveUrl)
-        (self.downloadsUrl, self.issuesUrl) = (downloadsUrl, issuesUrl)
-        (self.pullsUrl, self.milestonesUrl) = (pullsUrl, milestonesUrl)
-        (self.notificationsUrl, self.labelsUrl) = (notificationsUrl, labelsUrl)
-        (self.releasesUrl, self.deploymentsUrl) = (releasesUrl, deploymentsUrl)
-        (self.gitUrl, self.sshUrl) = (gitUrl, sshUrl)
-        (self.cloneUrl, self.svnUrl) = (cloneUrl, svnUrl)
-        (self.forks, self.openIssues) = (forks, openIssues)
-        (self.watchers, self.mirrorUrl) = (watchers, mirrorUrl)
-        (self.hasIssues, self.hasProjects) = (hasIssues, hasProjects)
-        (self.hasPages, self.hasWiki) = (hasPages, hasWiki)
-        (self.hasDownloads, self.archived) = (hasDownloads, archived)
-        (self.disabled, self.license) = (disabled, license)
-        (self.primaryBranch, self.topics) = (primaryBranch, topics)
-        (self.hasDiscussions, self.hasPullRequests) = (hasDiscussions, hasPullRequests)
-        (self.pullRequestCreationPolicy, self.visibility) = (pullRequestCreationPolicy, visibility)
-        (self.permissions, self.textMatches) = (permissions, textMatches)
-        (self.tempCloneToken, self.allowMergeCommit) = (tempCloneToken, allowMergeCommit)
-        (self.allowSquashMerge, self.allowRebaseMerge) = (allowSquashMerge, allowRebaseMerge)
-        (self.allowAutoMerge, self.deleteBranchOnMerge) = (allowAutoMerge, deleteBranchOnMerge)
-        (self.allowForking, self.isTemplate) = (allowForking, isTemplate)
-        self.webCommitSignoffRequired = webCommitSignoffRequired
-        try sdkValidateConstraintsPart1()
-        try sdkValidateConstraintsPart2()
-    }
-}
-
-extension RepoSearchResultItem {
-    func sdkValidateConstraintsPart1() throws {
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateUri("url", url)
+        related = try container.sdkDecodeIfPresent(.related)
+        aliases = try container.sdkDecodeIfPresent(.aliases)
         try sdkValidateDateTime("created_at", sdkWireString(createdAt))
         try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
-        try sdkValidateDateTime("pushed_at", sdkWireString(pushedAt))
-        if let value = homepage {
-            try sdkValidateUri("homepage", value)
-        }
-        try sdkValidateUri("forks_url", forksUrl)
-        try sdkValidateUri("teams_url", teamsUrl)
-        try sdkValidateUri("hooks_url", hooksUrl)
-        try sdkValidateUri("events_url", eventsUrl)
-        try sdkValidateUri("tags_url", tagsUrl)
-        try sdkValidateUri("languages_url", languagesUrl)
-    }
-}
-
-extension RepoSearchResultItem {
-    func sdkValidateConstraintsPart2() throws {
-        try sdkValidateUri("stargazers_url", stargazersUrl)
-        try sdkValidateUri("contributors_url", contributorsUrl)
-        try sdkValidateUri("subscribers_url", subscribersUrl)
-        try sdkValidateUri("subscription_url", subscriptionUrl)
-        try sdkValidateUri("merges_url", mergesUrl)
-        try sdkValidateUri("downloads_url", downloadsUrl)
-        try sdkValidateUri("deployments_url", deploymentsUrl)
-        try sdkValidateUri("svn_url", svnUrl)
-        if let value = mirrorUrl {
-            try sdkValidateUri("mirror_url", value)
+        if let value = logoUrl {
+            try sdkValidateUri("logo_url", value)
         }
     }
 }
 
-/// Required object value serialized in the `labels[]` wire field.
-public struct IssueSearchResultItemLabelsItem: Codable {
-    /// Optional `int64`-formatted value serialized in the `id` wire field.
-    public var id: Int?
-    /// Optional `string` value serialized in the `node_id` wire field.
-    public var nodeId: String?
-    /// Optional `string` value serialized in the `url` wire field.
-    public var url: String?
-    /// Optional `string` value serialized in the `name` wire field.
-    public var name: String?
-    /// Optional `string` value serialized in the `color` wire field.
-    public var color: String?
-    /// Optional `boolean` value serialized in the `default` wire field.
-    public var `default`: Bool?
-    /// Optional `string` value serialized in the `description` wire field.
-    public var description: String?
-    /// Timestamp indicating when the label was archived, or `null` if it has not been archived.
-    public var archivedAt: Date?
-    /// The user who archived the label, or `null` if it has not been archived.
-    public var archivedBy: IssueSearchResultItemLabelsItemArchivedBy?
+public extension TopicSearchResultItem {
+    init(
+        name: String,
+        displayName: String?,
+        shortDescription: String?,
+        description: String?,
+        createdBy: String?,
+        released: String?,
+        createdAt: Date,
+        updatedAt: Date,
+        featured: Bool,
+        curated: Bool,
+        score: Double,
+        repositoryCount: Int? = nil,
+        logoUrl: String? = nil,
+        textMatches: SearchResultTextMatches? = nil,
+        related: [TopicSearchResultItemRelatedItem]? = nil,
+        aliases: [TopicSearchResultItemAliasesItem]? = nil
+    ) throws {
+        (self.name, self.displayName) = (name, displayName)
+        (self.shortDescription, self.description) = (shortDescription, description)
+        (self.createdBy, self.released) = (createdBy, released)
+        (self.createdAt, self.updatedAt) = (createdAt, updatedAt)
+        (self.featured, self.curated) = (featured, curated)
+        (self.score, self.repositoryCount) = (score, repositoryCount)
+        (self.logoUrl, self.textMatches) = (logoUrl, textMatches)
+        (self.related, self.aliases) = (related, aliases)
+        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+        if let value = self.logoUrl {
+            try sdkValidateUri("logo_url", value)
+        }
+    }
+}
+
+/// Required object value serialized in the `related[]` wire field.
+public struct TopicSearchResultItemRelatedItem: Codable {
+    /// Optional object value serialized in the `topic_relation` wire field.
+    public var topicRelation: TopicSearchResultItemRelatedItemTopicRelation?
 
     enum CodingKeys: String, CodingKey {
-        case id
-        case nodeId = "node_id"
-        case url
-        case name
-        case color
-        case `default`
-        case description
-        case archivedAt = "archived_at"
-        case archivedBy = "archived_by"
+        case topicRelation = "topic_relation"
     }
 
     init() {
-        (id, nodeId, url, name, color) = (nil, nil, nil, nil, nil)
-        (self.default, description, archivedAt, archivedBy) = (nil, nil, nil, nil)
+        topicRelation = nil
     }
 }
 
-public extension IssueSearchResultItemLabelsItem {
+public extension TopicSearchResultItemRelatedItem {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeIfPresent(.id)
-        nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        url = try container.sdkDecodeIfPresent(.url)
+        topicRelation = try container.sdkDecodeIfPresent(.topicRelation)
+    }
+}
+
+public extension TopicSearchResultItemRelatedItem {
+    init(topicRelation: TopicSearchResultItemRelatedItemTopicRelation? = nil) {
+        self.init()
+        self.topicRelation = topicRelation
+    }
+}
+
+/// Required object value serialized in the `author` wire field.
+public struct CommitSearchResultItemCommitAuthor: Codable {
+    /// Required `string` value serialized in the `name` wire field.
+    public var name: String
+    /// Required `string` value serialized in the `email` wire field.
+    public var email: String
+    /// Required `date-time`-formatted value serialized in the `date` wire field.
+    public var date: Date
+
+    enum CodingKeys: String, CodingKey {
+        case name
+        case email
+        case date
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension CommitSearchResultItemCommitAuthor {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        guard container.contains(.email) else {
+            throw SdkValidationError(
+                field: "email",
+                code: "required",
+                message: "Validation failed for 'email': value is required"
+            )
+        }
+        guard container.contains(.date) else {
+            throw SdkValidationError(
+                field: "date",
+                code: "required",
+                message: "Validation failed for 'date': value is required"
+            )
+        }
+        name = try container.sdkDecodeRequired(.name)
+        email = try container.sdkDecodeRequired(.email)
+        date = try container.sdkDecodeRequired(.date)
+        try sdkValidateDateTime("date", sdkWireString(date))
+    }
+}
+
+public extension CommitSearchResultItemCommitAuthor {
+    init(name: String, email: String, date: Date) throws {
+        (self.name, self.email) = (name, email)
+        self.date = date
+        try sdkValidateDateTime("date", sdkWireString(self.date))
+    }
+}
+
+/// Optional object value serialized in the `pull_request` wire field.
+public struct IssueSearchResultItemPullRequest: Codable {
+    /// Required `uri`-formatted value serialized in the `diff_url` wire field.
+    public var diffUrl: String?
+    /// Required `uri`-formatted value serialized in the `html_url` wire field.
+    public var htmlUrl: String?
+    /// Required `uri`-formatted value serialized in the `patch_url` wire field.
+    public var patchUrl: String?
+    /// Required `uri`-formatted value serialized in the `url` wire field.
+    public var url: String?
+    /// Optional `date-time`-formatted value serialized in the `merged_at` wire field.
+    public var mergedAt: Date?
+
+    enum CodingKeys: String, CodingKey {
+        case diffUrl = "diff_url"
+        case htmlUrl = "html_url"
+        case patchUrl = "patch_url"
+        case url
+        case mergedAt = "merged_at"
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension IssueSearchResultItemPullRequest {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.diffUrl) else {
+            throw SdkValidationError(
+                field: "diff_url",
+                code: "required",
+                message: "Validation failed for 'diff_url': value is required"
+            )
+        }
+        guard container.contains(.htmlUrl) else {
+            throw SdkValidationError(
+                field: "html_url",
+                code: "required",
+                message: "Validation failed for 'html_url': value is required"
+            )
+        }
+        guard container.contains(.patchUrl) else {
+            throw SdkValidationError(
+                field: "patch_url",
+                code: "required",
+                message: "Validation failed for 'patch_url': value is required"
+            )
+        }
+        guard container.contains(.url) else {
+            throw SdkValidationError(
+                field: "url",
+                code: "required",
+                message: "Validation failed for 'url': value is required"
+            )
+        }
+        diffUrl = try container.sdkDecodeNullable(.diffUrl)
+        htmlUrl = try container.sdkDecodeNullable(.htmlUrl)
+        patchUrl = try container.sdkDecodeNullable(.patchUrl)
+        url = try container.sdkDecodeNullable(.url)
+        mergedAt = try container.sdkDecodeIfPresent(.mergedAt)
+        if let value = diffUrl {
+            try sdkValidateUri("diff_url", value)
+        }
+        if let value = htmlUrl {
+            try sdkValidateUri("html_url", value)
+        }
+        if let value = patchUrl {
+            try sdkValidateUri("patch_url", value)
+        }
+        if let value = url {
+            try sdkValidateUri("url", value)
+        }
+        if let value = mergedAt {
+            try sdkValidateDateTime("merged_at", sdkWireString(value))
+        }
+    }
+}
+
+public extension IssueSearchResultItemPullRequest {
+    init(diffUrl: String?, htmlUrl: String?, patchUrl: String?, url: String?, mergedAt: Date? = nil) throws {
+        (self.diffUrl, self.htmlUrl) = (diffUrl, htmlUrl)
+        (self.patchUrl, self.url) = (patchUrl, url)
+        self.mergedAt = mergedAt
+        if let value = self.diffUrl {
+            try sdkValidateUri("diff_url", value)
+        }
+        if let value = self.htmlUrl {
+            try sdkValidateUri("html_url", value)
+        }
+        if let value = self.patchUrl {
+            try sdkValidateUri("patch_url", value)
+        }
+        if let value = self.url {
+            try sdkValidateUri("url", value)
+        }
+        if let value = self.mergedAt {
+            try sdkValidateDateTime("merged_at", sdkWireString(value))
+        }
+    }
+}
+
+/// User Search Result Item
+public struct UserSearchResultItem: Codable {
+    /// Required `string` value serialized in the `login` wire field.
+    public var login: String
+    /// Required `int64`-formatted value serialized in the `id` wire field.
+    public var id: Int
+    /// Required `string` value serialized in the `node_id` wire field.
+    public var nodeId: String
+    /// Required `uri`-formatted value serialized in the `avatar_url` wire field.
+    public var avatarUrl: String
+    /// Required `string` value serialized in the `gravatar_id` wire field.
+    public var gravatarId: String?
+    /// Required `uri`-formatted value serialized in the `url` wire field.
+    public var url: String
+    /// Required `uri`-formatted value serialized in the `html_url` wire field.
+    public var htmlUrl: String
+    /// Required `uri`-formatted value serialized in the `followers_url` wire field.
+    public var followersUrl: String
+    /// Required `uri`-formatted value serialized in the `subscriptions_url` wire field.
+    public var subscriptionsUrl: String
+    /// Required `uri`-formatted value serialized in the `organizations_url` wire field.
+    public var organizationsUrl: String
+    /// Required `uri`-formatted value serialized in the `repos_url` wire field.
+    public var reposUrl: String
+    /// Required `uri`-formatted value serialized in the `received_events_url` wire field.
+    public var receivedEventsUrl: String
+    /// Required `string` value serialized in the `type` wire field.
+    public var type: String
+    /// Required `number` value serialized in the `score` wire field.
+    public var score: Double
+    /// Required `string` value serialized in the `following_url` wire field.
+    public var followingUrl: String
+    /// Required `string` value serialized in the `gists_url` wire field.
+    public var gistsUrl: String
+    /// Required `string` value serialized in the `starred_url` wire field.
+    public var starredUrl: String
+    /// Required `string` value serialized in the `events_url` wire field.
+    public var eventsUrl: String
+    /// Required `boolean` value serialized in the `site_admin` wire field.
+    public var siteAdmin: Bool
+    /// Optional `integer` value serialized in the `public_repos` wire field.
+    public var publicRepos: Int?
+    /// Optional `integer` value serialized in the `public_gists` wire field.
+    public var publicGists: Int?
+    /// Optional `integer` value serialized in the `followers` wire field.
+    public var followers: Int?
+    /// Optional `integer` value serialized in the `following` wire field.
+    public var following: Int?
+    /// Optional `date-time`-formatted value serialized in the `created_at` wire field.
+    public var createdAt: Date?
+    /// Optional `date-time`-formatted value serialized in the `updated_at` wire field.
+    public var updatedAt: Date?
+    /// Optional `string` value serialized in the `name` wire field.
+    public var name: String?
+    /// Optional `string` value serialized in the `bio` wire field.
+    public var bio: String?
+    /// Optional `email`-formatted value serialized in the `email` wire field.
+    public var email: String?
+    /// Optional `string` value serialized in the `location` wire field.
+    public var location: String?
+    /// Optional `boolean` value serialized in the `hireable` wire field.
+    public var hireable: Bool?
+    /// Optional array value serialized in the `text_matches` wire field.
+    public var textMatches: SearchResultTextMatches?
+    /// Optional `string` value serialized in the `blog` wire field.
+    public var blog: String?
+    /// Optional `string` value serialized in the `company` wire field.
+    public var company: String?
+    /// Optional `date-time`-formatted value serialized in the `suspended_at` wire field.
+    public var suspendedAt: Date?
+    /// Optional `string` value serialized in the `user_view_type` wire field.
+    public var userViewType: String?
+
+    enum CodingKeys: String, CodingKey {
+        case login
+        case id
+        case nodeId = "node_id"
+        case avatarUrl = "avatar_url"
+        case gravatarId = "gravatar_id"
+        case url
+        case htmlUrl = "html_url"
+        case followersUrl = "followers_url"
+        case subscriptionsUrl = "subscriptions_url"
+        case organizationsUrl = "organizations_url"
+        case reposUrl = "repos_url"
+        case receivedEventsUrl = "received_events_url"
+        case type
+        case score
+        case followingUrl = "following_url"
+        case gistsUrl = "gists_url"
+        case starredUrl = "starred_url"
+        case eventsUrl = "events_url"
+        case siteAdmin = "site_admin"
+        case publicRepos = "public_repos"
+        case publicGists = "public_gists"
+        case followers
+        case following
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+        case name
+        case bio
+        case email
+        case location
+        case hireable
+        case textMatches = "text_matches"
+        case blog
+        case company
+        case suspendedAt = "suspended_at"
+        case userViewType = "user_view_type"
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension UserSearchResultItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        login = try container.sdkDecodeRequired(.login)
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
+        gravatarId = try container.sdkDecodeNullable(.gravatarId)
+        url = try container.sdkDecodeRequired(.url)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        followersUrl = try container.sdkDecodeRequired(.followersUrl)
+        subscriptionsUrl = try container.sdkDecodeRequired(.subscriptionsUrl)
+        organizationsUrl = try container.sdkDecodeRequired(.organizationsUrl)
+        reposUrl = try container.sdkDecodeRequired(.reposUrl)
+        receivedEventsUrl = try container.sdkDecodeRequired(.receivedEventsUrl)
+        type = try container.sdkDecodeRequired(.type)
+        score = try container.sdkDecodeRequired(.score)
+        followingUrl = try container.sdkDecodeRequired(.followingUrl)
+        gistsUrl = try container.sdkDecodeRequired(.gistsUrl)
+        starredUrl = try container.sdkDecodeRequired(.starredUrl)
+        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
+        siteAdmin = try container.sdkDecodeRequired(.siteAdmin)
+        publicRepos = try container.sdkDecodeIfPresent(.publicRepos)
+        publicGists = try container.sdkDecodeIfPresent(.publicGists)
+        followers = try container.sdkDecodeIfPresent(.followers)
+        following = try container.sdkDecodeIfPresent(.following)
+        createdAt = try container.sdkDecodeIfPresent(.createdAt)
+        updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
         name = try container.sdkDecodeIfPresent(.name)
-        color = try container.sdkDecodeIfPresent(.color)
-        self.default = try container.sdkDecodeIfPresent(.default)
-        description = try container.sdkDecodeIfPresent(.description)
-        archivedAt = try container.sdkDecodeIfPresent(.archivedAt)
-        archivedBy = try container.sdkDecodeIfPresent(.archivedBy)
-        if let value = archivedAt {
-            try sdkValidateDateTime("archived_at", sdkWireString(value))
+        bio = try container.sdkDecodeIfPresent(.bio)
+        email = try container.sdkDecodeIfPresent(.email)
+        location = try container.sdkDecodeIfPresent(.location)
+        hireable = try container.sdkDecodeIfPresent(.hireable)
+        textMatches = try container.sdkDecodeIfPresent(.textMatches)
+        blog = try container.sdkDecodeIfPresent(.blog)
+        company = try container.sdkDecodeIfPresent(.company)
+        suspendedAt = try container.sdkDecodeIfPresent(.suspendedAt)
+        userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        try sdkValidateConstraints()
+    }
+}
+
+public extension UserSearchResultItem {
+    init(
+        login: String,
+        id: Int,
+        nodeId: String,
+        avatarUrl: String,
+        gravatarId: String?,
+        url: String,
+        htmlUrl: String,
+        followersUrl: String,
+        subscriptionsUrl: String,
+        organizationsUrl: String,
+        reposUrl: String,
+        receivedEventsUrl: String,
+        type: String,
+        score: Double,
+        followingUrl: String,
+        gistsUrl: String,
+        starredUrl: String,
+        eventsUrl: String,
+        siteAdmin: Bool,
+        publicRepos: Int? = nil,
+        publicGists: Int? = nil,
+        followers: Int? = nil,
+        following: Int? = nil,
+        createdAt: Date? = nil,
+        updatedAt: Date? = nil,
+        name: String? = nil,
+        bio: String? = nil,
+        email: String? = nil,
+        location: String? = nil,
+        hireable: Bool? = nil,
+        textMatches: SearchResultTextMatches? = nil,
+        blog: String? = nil,
+        company: String? = nil,
+        suspendedAt: Date? = nil,
+        userViewType: String? = nil
+    ) throws {
+        (self.login, self.id) = (login, id)
+        (self.nodeId, self.avatarUrl) = (nodeId, avatarUrl)
+        (self.gravatarId, self.url) = (gravatarId, url)
+        (self.htmlUrl, self.followersUrl) = (htmlUrl, followersUrl)
+        (self.subscriptionsUrl, self.organizationsUrl) = (subscriptionsUrl, organizationsUrl)
+        (self.reposUrl, self.receivedEventsUrl) = (reposUrl, receivedEventsUrl)
+        (self.type, self.score) = (type, score)
+        (self.followingUrl, self.gistsUrl) = (followingUrl, gistsUrl)
+        (self.starredUrl, self.eventsUrl) = (starredUrl, eventsUrl)
+        (self.siteAdmin, self.publicRepos) = (siteAdmin, publicRepos)
+        (self.publicGists, self.followers) = (publicGists, followers)
+        (self.following, self.createdAt) = (following, createdAt)
+        (self.updatedAt, self.name) = (updatedAt, name)
+        (self.bio, self.email) = (bio, email)
+        (self.location, self.hireable) = (location, hireable)
+        (self.textMatches, self.blog) = (textMatches, blog)
+        (self.company, self.suspendedAt) = (company, suspendedAt)
+        self.userViewType = userViewType
+        try sdkValidateConstraints()
+    }
+}
+
+extension UserSearchResultItem {
+    func sdkValidateConstraints() throws {
+        try sdkValidateUri("avatar_url", avatarUrl)
+        try sdkValidateUri("url", url)
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateUri("followers_url", followersUrl)
+        try sdkValidateUri("subscriptions_url", subscriptionsUrl)
+        try sdkValidateUri("organizations_url", organizationsUrl)
+        try sdkValidateUri("repos_url", reposUrl)
+        try sdkValidateUri("received_events_url", receivedEventsUrl)
+        if let value = createdAt {
+            try sdkValidateDateTime("created_at", sdkWireString(value))
+        }
+        if let value = updatedAt {
+            try sdkValidateDateTime("updated_at", sdkWireString(value))
+        }
+        if let value = email {
+            try sdkValidateEmail("email", value)
+        }
+        if let value = suspendedAt {
+            try sdkValidateDateTime("suspended_at", sdkWireString(value))
         }
     }
 }

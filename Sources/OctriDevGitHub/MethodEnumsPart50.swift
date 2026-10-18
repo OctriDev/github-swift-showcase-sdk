@@ -6,6 +6,28 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
+public struct AppsListAccountsForPlanStubbedParameter: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let asc = AppsListAccountsForPlanStubbedParameter(rawValue: "asc")
+    public static let desc = AppsListAccountsForPlanStubbedParameter(rawValue: "desc")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
 /// The deployment status of the artifact.
 public struct OrgsCreateClusterDeploymentRecordsJobRequestBodyDeploymentsItemStatus: RawRepresentable, Hashable,
     Codable,
@@ -235,32 +257,6 @@ public struct AgentAutomationsListRepoAutomationsResponseAutomationsItemTriX02fa
         AgentAutomationsListRepoAutomationsResponseAutomationsItemTriX02fac249c5(rawValue: "trigger")
     public static let repository =
         AgentAutomationsListRepoAutomationsResponseAutomationsItemTriX02fac249c5(rawValue: "repository")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-/// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
-/// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
-public struct AgentAutomationsEditRepoAutomationRequestBodyTriggersPullRequX1322bdb9aa: RawRepresentable, Hashable,
-    Codable, Sendable, SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let trigger =
-        AgentAutomationsEditRepoAutomationRequestBodyTriggersPullRequX1322bdb9aa(rawValue: "trigger")
-    public static let repository =
-        AgentAutomationsEditRepoAutomationRequestBodyTriggersPullRequX1322bdb9aa(rawValue: "repository")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

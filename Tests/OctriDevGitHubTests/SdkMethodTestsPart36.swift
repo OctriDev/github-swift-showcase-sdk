@@ -6,519 +6,6 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testCopilotSpacesUpdateCollaboratorForUserCopilotSpacesUpdateCollX1c9fd3b25dReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture776Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.copilotSpaces.updateCollaboratorForUser(
-                username: decoded("\"Example Name\""),
-                spaceNumber: decoded("1"),
-                actorType: decoded("\"User\""),
-                actorIdentifier: decoded("\"actor_identifier\""),
-                role: decoded("\"admin\"")
-            )
-            XCTFail("copilotSpacesUpdateCollaboratorForUser did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 403)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "copilotSpacesUpdateCollaboratorForUser decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "copilotSpacesUpdateCollaboratorForUser decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testCopilotSpacesUpdateForOrgCopilotSpacesUpdateForOrgReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.copilotSpaces.updateForOrg(
-            org: decoded("\"org\""),
-            spaceNumber: decoded("1"),
-            name: decoded("\"Updated Team Planning Space\""),
-            description: decoded("\"Updated organization space for team planning and coordination\""),
-            generalInstructions: decoded(sdkMethodFixture777Value1),
-            baseRole: decoded("null"),
-            resourcesAttributes: decoded(sdkMethodFixture777Value2)
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture777Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "copilotSpacesUpdateForOrg decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testCopilotSpacesUpdateForOrgCopilotSpacesUpdateForOrg403ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture778Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.copilotSpaces.updateForOrg(
-                org: decoded("\"org\""),
-                spaceNumber: decoded("1"),
-                name: decoded("\"Updated Team Planning Space\""),
-                description: decoded("\"Updated organization space for team planning and coordination\""),
-                generalInstructions: decoded(sdkMethodFixture778Value1),
-                baseRole: decoded("null"),
-                resourcesAttributes: decoded(sdkMethodFixture778Value2)
-            )
-            XCTFail("copilotSpacesUpdateForOrg did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 403)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "copilotSpacesUpdateForOrg decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "copilotSpacesUpdateForOrg decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testCopilotSpacesUpdateForUserCopilotSpacesUpdateForUserReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.copilotSpaces.updateForUser(
-            username: decoded("\"Example Name\""),
-            spaceNumber: decoded("1"),
-            name: decoded("\"Updated Development Space\""),
-            description: decoded("\"Updated personal space for development assistance\""),
-            generalInstructions: decoded(sdkMethodFixture779Value1),
-            baseRole: decoded("null"),
-            resourcesAttributes: decoded(sdkMethodFixture779Value2)
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture779Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "copilotSpacesUpdateForUser decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testCopilotSpacesUpdateForUserCopilotSpacesUpdateForUser403ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture780Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.copilotSpaces.updateForUser(
-                username: decoded("\"Example Name\""),
-                spaceNumber: decoded("1"),
-                name: decoded("\"Updated Development Space\""),
-                description: decoded("\"Updated personal space for development assistance\""),
-                generalInstructions: decoded(sdkMethodFixture780Value1),
-                baseRole: decoded("null"),
-                resourcesAttributes: decoded(sdkMethodFixture780Value2)
-            )
-            XCTFail("copilotSpacesUpdateForUser did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 403)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "copilotSpacesUpdateForUser decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "copilotSpacesUpdateForUser decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testCopilotSpacesUpdateResourceForOrgCopilotSpacesUpdateResourceForOrgReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.copilotSpaces.updateResourceForOrg(
-            org: decoded("\"org\""),
-            spaceNumber: decoded("1"),
-            spaceResourceId: decoded("1"),
-            metadata: decoded("{\"name\":\"updated-notes.txt\",\"text\":\"Updated content\"}")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture781Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "copilotSpacesUpdateResourceForOrg decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testCopilotSpacesUpdateResourceForOrgCopilotSpacesUpdateResourceForOrg403ReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture782Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.copilotSpaces.updateResourceForOrg(
-                org: decoded("\"org\""),
-                spaceNumber: decoded("1"),
-                spaceResourceId: decoded("1"),
-                metadata: decoded("{\"name\":\"updated-notes.txt\",\"text\":\"Updated content\"}")
-            )
-            XCTFail("copilotSpacesUpdateResourceForOrg did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 403)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "copilotSpacesUpdateResourceForOrg decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "copilotSpacesUpdateResourceForOrg decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testCopilotSpacesUpdateResourceForUserCopilotSpacesUpdateResourceForUserReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.copilotSpaces.updateResourceForUser(
-            username: decoded("\"Example Name\""),
-            spaceNumber: decoded("1"),
-            spaceResourceId: decoded("1"),
-            metadata: decoded("{\"name\":\"updated-notes.txt\",\"text\":\"Updated content\"}")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture783Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "copilotSpacesUpdateResourceForUser decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testCopilotSpacesUpdateResourceForUserCopilotSpacesUpdateResourceForUser403ReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture784Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.copilotSpaces.updateResourceForUser(
-                username: decoded("\"Example Name\""),
-                spaceNumber: decoded("1"),
-                spaceResourceId: decoded("1"),
-                metadata: decoded("{\"name\":\"updated-notes.txt\",\"text\":\"Updated content\"}")
-            )
-            XCTFail("copilotSpacesUpdateResourceForUser did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 403)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "copilotSpacesUpdateResourceForUser decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "copilotSpacesUpdateResourceForUser decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testCredentialsRevokeCredentialsRevokeReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.credentials.revoke(
-            credentials: decoded(sdkMethodFixture785Value1)
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture785Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "credentialsRevoke decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testCredentialsRevokeCredentialsRevoke422ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/422") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture786Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.credentials.revoke(
-                credentials: decoded(sdkMethodFixture786Value1)
-            )
-            XCTFail("credentialsRevoke did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 422)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "credentialsRevoke decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "credentialsRevoke decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testDependabotAddSelectedRepoToOrgSecretDependabotAddSelectedRepoToOrgSecretReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        _ = try await client.dependabot.addSelectedRepoToOrgSecret(
-            org: decoded("\"org\""),
-            secretName: decoded("\"Example Name\""),
-            repositoryId: decoded("1")
-        )
-        XCTAssertTrue(true)
-    }
-
-    func testDependabotCreateOrUpdateOrgSecretDependabotCreateOrUpdateOrgSecretReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.dependabot.createOrUpdateOrgSecret(
-            org: decoded("\"org\""),
-            secretName: decoded("\"Example Name\""),
-            visibility: decoded("\"selected\""),
-            encryptedValue: decoded("\"c2VjcmV0\""),
-            keyId: decoded("\"012345678912345678\""),
-            selectedRepositoryIds: decoded("[1296269,1296280]")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture788Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "dependabotCreateOrUpdateOrgSecret decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testDependabotCreateOrUpdateRepoSecretDependabotCreateOrUpdateRepoSecretReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.dependabot.createOrUpdateRepoSecret(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            secretName: decoded("\"Example Name\""),
-            encryptedValue: decoded("\"c2VjcmV0\""),
-            keyId: decoded("\"012345678912345678\"")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture789Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "dependabotCreateOrUpdateRepoSecret decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testDependabotDeleteOrgSecretDependabotDeleteOrgSecretReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        _ = try await client.dependabot.deleteOrgSecret(
-            org: decoded("\"org\""),
-            secretName: decoded("\"Example Name\"")
-        )
-        XCTAssertTrue(true)
-    }
-
-    func testDependabotDeleteRepoSecretDependabotDeleteRepoSecretReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        _ = try await client.dependabot.deleteRepoSecret(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            secretName: decoded("\"Example Name\"")
-        )
-        XCTAssertTrue(true)
-    }
-
-    func testDependabotGetAlertDependabotGetAlertReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.dependabot.getAlert(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            alertNumber: decoded("1")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture792Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "dependabotGetAlert decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testDependabotGetAlertDependabotGetAlert403ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture793Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.dependabot.getAlert(
-                owner: decoded("\"owner\""),
-                repo: decoded("\"repo\""),
-                alertNumber: decoded("1")
-            )
-            XCTFail("dependabotGetAlert did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 403)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "dependabotGetAlert decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "dependabotGetAlert decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testDependabotGetOrgPublicKeyDependabotGetOrgPublicKeyReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.dependabot.getOrgPublicKey(
-            org: decoded("\"org\"")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture794Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "dependabotGetOrgPublicKey decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testDependabotGetOrgSecretDependabotGetOrgSecretReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.dependabot.getOrgSecret(
-            org: decoded("\"org\""),
-            secretName: decoded("\"Example Name\"")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture795Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "dependabotGetOrgSecret decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testDependabotGetRepoPublicKeyDependabotGetRepoPublicKeyReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.dependabot.getRepoPublicKey(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\"")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture796Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "dependabotGetRepoPublicKey decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
     func testDependabotGetRepoSecretDependabotGetRepoSecretReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
@@ -535,8 +22,540 @@ extension SdkMethodTests {
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "dependabotGetRepoSecret decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
+    }
+
+    func testDependabotListAlertsForEnterpriseDependabotListAlertsForEnterpriseReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        var options = try DependabotMethods
+            .DependabotListAlertsForEnterpriseOptions(enterprise: decoded("\"enterprise\""))
+        options.classification = try decoded("\"classification\"")
+        options.state = try decoded("\"state\"")
+        options.severity = try decoded("\"severity\"")
+        options.ecosystem = try decoded("\"ecosystem\"")
+        options.package = try decoded("\"package\"")
+        options.epssPercentage = try decoded("\"epss_percentage\"")
+        options.has = try decoded("\"has\"")
+        options.assignee = try decoded("\"assignee\"")
+        options.scope = try decoded("\"development\"")
+        options.relationship = try decoded("\"relationship\"")
+        options.sort = try decoded("\"created\"")
+        options.direction = try decoded("\"desc\"")
+        options.before = try decoded("\"before\"")
+        options.after = try decoded("\"after\"")
+        options.perPage = try decoded("30")
+        let actual = try await client.dependabot.listAlertsForEnterprise(
+            options: options
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture798Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testDependabotListAlertsForEnterpriseDependabotListAlertsForEnterprise403ReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
+            return
+        }
+        _ = client
+        var options = try DependabotMethods
+            .DependabotListAlertsForEnterpriseOptions(enterprise: decoded("\"enterprise\""))
+        options.classification = try decoded("\"classification\"")
+        options.state = try decoded("\"state\"")
+        options.severity = try decoded("\"severity\"")
+        options.ecosystem = try decoded("\"ecosystem\"")
+        options.package = try decoded("\"package\"")
+        options.epssPercentage = try decoded("\"epss_percentage\"")
+        options.has = try decoded("\"has\"")
+        options.assignee = try decoded("\"assignee\"")
+        options.scope = try decoded("\"development\"")
+        options.relationship = try decoded("\"relationship\"")
+        options.sort = try decoded("\"created\"")
+        options.direction = try decoded("\"desc\"")
+        options.before = try decoded("\"before\"")
+        options.after = try decoded("\"after\"")
+        options.perPage = try decoded("30")
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture799Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.dependabot.listAlertsForEnterprise(
+                options: options
+            )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 403)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testDependabotListAlertsForOrgDependabotListAlertsForOrgReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        var options = try DependabotMethods.DependabotListAlertsForOrgOptions(org: decoded("\"org\""))
+        options.classification = try decoded("\"classification\"")
+        options.state = try decoded("\"state\"")
+        options.severity = try decoded("\"severity\"")
+        options.ecosystem = try decoded("\"ecosystem\"")
+        options.package = try decoded("\"package\"")
+        options.epssPercentage = try decoded("\"epss_percentage\"")
+        options.artifactRegistryUrl = try decoded("\"https://example.com\"")
+        options.artifactRegistry = try decoded("\"artifact_registry\"")
+        options.has = try decoded("\"has\"")
+        options.assignee = try decoded("\"assignee\"")
+        options.runtimeRisk = try decoded("\"2024-01-01T00:00:00Z\"")
+        options.scope = try decoded("\"development\"")
+        options.relationship = try decoded("\"relationship\"")
+        options.sort = try decoded("\"created\"")
+        options.direction = try decoded("\"desc\"")
+        options.before = try decoded("\"before\"")
+        options.after = try decoded("\"after\"")
+        options.perPage = try decoded("30")
+        let actual = try await client.dependabot.listAlertsForOrg(
+            options: options
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture800Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testDependabotListAlertsForOrgDependabotListAlertsForOrg400ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
+            return
+        }
+        _ = client
+        var options = try DependabotMethods.DependabotListAlertsForOrgOptions(org: decoded("\"org\""))
+        options.classification = try decoded("\"classification\"")
+        options.state = try decoded("\"state\"")
+        options.severity = try decoded("\"severity\"")
+        options.ecosystem = try decoded("\"ecosystem\"")
+        options.package = try decoded("\"package\"")
+        options.epssPercentage = try decoded("\"epss_percentage\"")
+        options.artifactRegistryUrl = try decoded("\"https://example.com\"")
+        options.artifactRegistry = try decoded("\"artifact_registry\"")
+        options.has = try decoded("\"has\"")
+        options.assignee = try decoded("\"assignee\"")
+        options.runtimeRisk = try decoded("\"2024-01-01T00:00:00Z\"")
+        options.scope = try decoded("\"development\"")
+        options.relationship = try decoded("\"relationship\"")
+        options.sort = try decoded("\"created\"")
+        options.direction = try decoded("\"desc\"")
+        options.before = try decoded("\"before\"")
+        options.after = try decoded("\"after\"")
+        options.perPage = try decoded("30")
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture801Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.dependabot.listAlertsForOrg(
+                options: options
+            )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 400)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testDependabotListAlertsForRepoDependabotListAlertsForRepoReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        var options = try DependabotMethods.DependabotListAlertsForRepoOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\"")
+        )
+        options.classification = try decoded("\"classification\"")
+        options.state = try decoded("\"state\"")
+        options.severity = try decoded("\"severity\"")
+        options.ecosystem = try decoded("\"ecosystem\"")
+        options.package = try decoded("\"package\"")
+        options.manifest = try decoded("\"manifest\"")
+        options.epssPercentage = try decoded("\"epss_percentage\"")
+        options.has = try decoded("\"has\"")
+        options.assignee = try decoded("\"assignee\"")
+        options.scope = try decoded("\"development\"")
+        options.relationship = try decoded("\"relationship\"")
+        options.sort = try decoded("\"created\"")
+        options.direction = try decoded("\"desc\"")
+        options.before = try decoded("\"before\"")
+        options.after = try decoded("\"after\"")
+        options.perPage = try decoded("30")
+        let actual = try await client.dependabot.listAlertsForRepo(
+            options: options
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture802Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testDependabotListAlertsForRepoDependabotListAlertsForRepo400ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
+            return
+        }
+        _ = client
+        var options = try DependabotMethods.DependabotListAlertsForRepoOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\"")
+        )
+        options.classification = try decoded("\"classification\"")
+        options.state = try decoded("\"state\"")
+        options.severity = try decoded("\"severity\"")
+        options.ecosystem = try decoded("\"ecosystem\"")
+        options.package = try decoded("\"package\"")
+        options.manifest = try decoded("\"manifest\"")
+        options.epssPercentage = try decoded("\"epss_percentage\"")
+        options.has = try decoded("\"has\"")
+        options.assignee = try decoded("\"assignee\"")
+        options.scope = try decoded("\"development\"")
+        options.relationship = try decoded("\"relationship\"")
+        options.sort = try decoded("\"created\"")
+        options.direction = try decoded("\"desc\"")
+        options.before = try decoded("\"before\"")
+        options.after = try decoded("\"after\"")
+        options.perPage = try decoded("30")
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture803Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.dependabot.listAlertsForRepo(
+                options: options
+            )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 400)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testDependabotListOrgSecretsDependabotListOrgSecretsReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.dependabot.listOrgSecrets(
+            org: decoded("\"org\""),
+            perPage: decoded("30"),
+            page: decoded("1")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture804Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testDependabotListRepoSecretsDependabotListRepoSecretsReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.dependabot.listRepoSecrets(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            perPage: decoded("30"),
+            page: decoded("1")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture805Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testDependabotListSelectedReposForOrgSecretDependabotListSelectedX91aad6ca0fReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.dependabot.listSelectedReposForOrgSecret(
+            org: decoded("\"org\""),
+            secretName: decoded("\"Example Name\""),
+            page: decoded("1"),
+            perPage: decoded("30")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture806Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testDependabotRemoveSelectedRepoFromOrgSecretDependabotRemoveSeleX12af682b82ReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        _ = try await client.dependabot.removeSelectedRepoFromOrgSecret(
+            org: decoded("\"org\""),
+            secretName: decoded("\"Example Name\""),
+            repositoryId: decoded("1")
+        )
+        XCTAssertTrue(true)
+    }
+
+    func testDependabotRepositoryAccessForEnterpriseDependabotRepositoryAcXa6f34ed044ReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.dependabot.repositoryAccessForEnterprise(
+            enterprise: decoded("\"enterprise\""),
+            page: decoded("1"),
+            perPage: decoded("30")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture808Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testDependabotRepositoryAccessForEnterpriseDependabotRepositoryAcXef6346d175ReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture809Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.dependabot.repositoryAccessForEnterprise(
+                enterprise: decoded("\"enterprise\""),
+                page: decoded("1"),
+                perPage: decoded("30")
+            )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 403)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testDependabotRepositoryAccessForOrgDependabotRepositoryAccessForOrgReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.dependabot.repositoryAccessForOrg(
+            org: decoded("\"org\""),
+            page: decoded("1"),
+            perPage: decoded("30")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture810Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testDependabotRepositoryAccessForOrgDependabotRepositoryAccessForOrg403ReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture811Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.dependabot.repositoryAccessForOrg(
+                org: decoded("\"org\""),
+                page: decoded("1"),
+                perPage: decoded("30")
+            )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 403)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testDependabotSetRepositoryAccessDefaultLevelDependabotSetRepositX4784336337ReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        _ = try await client.dependabot.setRepositoryAccessDefaultLevel(
+            org: decoded("\"org\""),
+            defaultLevel: decoded("\"public\"")
+        )
+        XCTAssertTrue(true)
+    }
+
+    func testDependabotSetRepositoryAccessDefaultLevelDependabotSetRepositX80bcf9fe3cReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture813Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.dependabot.setRepositoryAccessDefaultLevel(
+                org: decoded("\"org\""),
+                defaultLevel: decoded("\"public\"")
+            )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 403)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testDependabotSetRepositoryAccessDefaultLevelForEnterpriseDependaX8e6cf8f080ReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        _ = try await client.dependabot.setRepositoryAccessDefaultLevelForEnterprise(
+            enterprise: decoded("\"enterprise\""),
+            defaultLevel: decoded("\"public\"")
+        )
+        XCTAssertTrue(true)
+    }
+
+    func testDependabotSetRepositoryAccessDefaultLevelForEnterpriseDependaXb1d254e14aReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture815Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.dependabot.setRepositoryAccessDefaultLevelForEnterprise(
+                enterprise: decoded("\"enterprise\""),
+                defaultLevel: decoded("\"public\"")
+            )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 403)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testDependabotSetSelectedReposForOrgSecretDependabotSetSelectedReX5277be0fc7ReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        _ = try await client.dependabot.setSelectedReposForOrgSecret(
+            org: decoded("\"org\""),
+            secretName: decoded("\"Example Name\""),
+            selectedRepositoryIds: decoded("[64780797]")
+        )
+        XCTAssertTrue(true)
     }
 }

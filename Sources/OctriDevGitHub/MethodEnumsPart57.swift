@@ -6,28 +6,6 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-/// Provider namespace
-public struct AgentTasksListTasksResponseTasksItemArtifactsItemProvider: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let github = AgentTasksListTasksResponseTasksItemArtifactsItemProvider(rawValue: "github")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
 public struct SearchIssuesAndPullRequestsParameterX0ca61b63: RawRepresentable, Hashable, Codable, Sendable,
     SdkWireConvertible {
     public let rawValue: String
@@ -247,6 +225,30 @@ public struct AgentAutomationsCreateRepoAutomationRequestBodyTriggersPullReXd995
         AgentAutomationsCreateRepoAutomationRequestBodyTriggersPullReXd9953312b5(rawValue: "trigger")
     public static let repository =
         AgentAutomationsCreateRepoAutomationRequestBodyTriggersPullReXd9953312b5(rawValue: "repository")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+public struct IssuesUpdateResponseVariant1SuggestionsLabelsItemConfidence: RawRepresentable, Hashable, Codable,
+    Sendable,
+    SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let low = IssuesUpdateResponseVariant1SuggestionsLabelsItemConfidence(rawValue: "low")
+    public static let medium = IssuesUpdateResponseVariant1SuggestionsLabelsItemConfidence(rawValue: "medium")
+    public static let high = IssuesUpdateResponseVariant1SuggestionsLabelsItemConfidence(rawValue: "high")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

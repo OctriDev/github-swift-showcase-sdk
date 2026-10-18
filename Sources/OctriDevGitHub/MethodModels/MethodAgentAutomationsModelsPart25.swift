@@ -9,18 +9,6 @@ import Foundation
 
 /// Canonical agentAutomations operation model declarations
 extension AgentAutomationsCreateRepoAutomationRequestBodyReasoningEffort {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) {
-            return .stringValue(value)
-        }
-        if let value = try? container.decode(String.self) {
-            return .stringValue1(value)
-        }
-        return nil
-    }
-}
-
-extension AgentAutomationsCreateRepoAutomationRequestBodyReasoningEffort {
     func encodeGroup1(to encoder: Encoder) throws -> Bool {
         var container = encoder.singleValueContainer()
         switch self {

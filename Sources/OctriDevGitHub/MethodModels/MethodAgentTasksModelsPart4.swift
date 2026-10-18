@@ -8,34 +8,6 @@ import Foundation
 #endif
 
 /// Canonical agentTasks operation model declarations
-/// The repository this task belongs to
-public struct AgentTasksCreateTaskInRepoResponseRepository: Codable {
-    /// The unique identifier of the repository
-    public var id: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-    }
-
-    init() {
-        id = nil
-    }
-}
-
-public extension AgentTasksCreateTaskInRepoResponseRepository {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeIfPresent(.id)
-    }
-}
-
-public extension AgentTasksCreateTaskInRepoResponseRepository {
-    init(id: Int? = nil) {
-        self.init()
-        self.id = id
-    }
-}
-
 /// A single validation error
 public struct AgentTasksListTasksForRepoResponseErrorsItemXb462efe3: Codable {
     /// Machine-readable error code
@@ -71,34 +43,6 @@ public extension AgentTasksListTasksForRepoResponseErrorsItemXb462efe3 {
 public extension AgentTasksListTasksForRepoResponseErrorsItemXb462efe3 {
     init(code: AgentTasksListTasksForRepoResponseErrorsItemCodeX77a155b3, message: String? = nil) {
         (self.code, self.message) = (code, message)
-    }
-}
-
-/// A GitHub user
-public struct AgentTasksGetTaskByIdResponseVariant0CreatorVariant0: Codable {
-    /// The unique identifier of the user
-    public var id: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-    }
-
-    init() {
-        id = nil
-    }
-}
-
-public extension AgentTasksGetTaskByIdResponseVariant0CreatorVariant0 {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeIfPresent(.id)
-    }
-}
-
-public extension AgentTasksGetTaskByIdResponseVariant0CreatorVariant0 {
-    init(id: Int? = nil) {
-        self.init()
-        self.id = id
     }
 }
 
@@ -589,45 +533,96 @@ public extension AgentTasksCreateTaskInRepoResponseX5211c444 {
     }
 }
 
-public indirect enum AgentTasksListTasksResponseTasksItemCreator {
-    case agentTasksListTasksResponseTasksItemCreatorVariant0(AgentTasksListTasksResponseTasksItemCreatorVariant0)
-}
+/// The entity who created this task
+public struct AgentTasksListTasksResponseTasksItemCreator: Codable {
+    /// The unique identifier of the user
+    public var id: Int?
 
-extension AgentTasksListTasksResponseTasksItemCreator: Codable {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for AgentTasksListTasksResponseTasksItemCreator"
-        )
+    enum CodingKeys: String, CodingKey {
+        case id
     }
 
-    public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+    init() {
+        id = nil
     }
 }
 
-extension AgentTasksListTasksResponseTasksItemCreator {
-    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(
-            AgentTasksListTasksResponseTasksItemCreatorVariant0.self
-        ) {
-            return .agentTasksListTasksResponseTasksItemCreatorVariant0(value)
-        }
-        return nil
+public extension AgentTasksListTasksResponseTasksItemCreator {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.sdkDecodeIfPresent(.id)
     }
 }
 
-extension AgentTasksListTasksResponseTasksItemCreator {
-    func encodeGroup1(to encoder: Encoder) throws -> Bool {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case let .agentTasksListTasksResponseTasksItemCreatorVariant0(value): try container.encode(value); return true
+public extension AgentTasksListTasksResponseTasksItemCreator {
+    init(id: Int? = nil) {
+        self.init()
+        self.id = id
+    }
+}
+
+/// A single validation error
+public struct AgentTasksListTasksForRepoResponseErrorsItem: Codable {
+    /// Machine-readable error code
+    public var code: AgentTasksListTasksForRepoResponseErrorsItemCode
+    /// Human-readable message (populated when code is "custom")
+    public var message: String?
+
+    enum CodingKeys: String, CodingKey {
+        case code
+        case message
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension AgentTasksListTasksForRepoResponseErrorsItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.code) else {
+            throw SdkValidationError(
+                field: "code",
+                code: "required",
+                message: "Validation failed for 'code': value is required"
+            )
         }
+        code = try container.sdkDecodeRequired(.code)
+        message = try container.sdkDecodeIfPresent(.message)
+    }
+}
+
+public extension AgentTasksListTasksForRepoResponseErrorsItem {
+    init(code: AgentTasksListTasksForRepoResponseErrorsItemCode, message: String? = nil) {
+        (self.code, self.message) = (code, message)
+    }
+}
+
+/// The owner of the repository
+public struct AgentTasksListTasksForRepoResponseTasksItemOwner: Codable {
+    /// The unique identifier of the user
+    public var id: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+    }
+
+    init() {
+        id = nil
+    }
+}
+
+public extension AgentTasksListTasksForRepoResponseTasksItemOwner {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.sdkDecodeIfPresent(.id)
+    }
+}
+
+public extension AgentTasksListTasksForRepoResponseTasksItemOwner {
+    init(id: Int? = nil) {
+        self.init()
+        self.id = id
     }
 }

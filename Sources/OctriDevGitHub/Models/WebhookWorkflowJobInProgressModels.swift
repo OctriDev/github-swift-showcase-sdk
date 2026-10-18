@@ -4,53 +4,53 @@
 import Foundation
 
 /// WebhookWorkflowJobInProgress domain models
-/// Required API value serialized in the `workflow_job` wire field.
+/// Required object value serialized in the `workflow_job` wire field.
 public struct WebhookWorkflowJobInProgressWorkflowJob: Codable {
-    /// Optional `string` value serialized in the `check_run_url` wire field.
+    /// Required `string` value serialized in the `check_run_url` wire field.
     public var checkRunUrl: String
-    /// Optional `string` value serialized in the `completed_at` wire field.
+    /// Required `string` value serialized in the `completed_at` wire field.
     public var completedAt: String?
-    /// Optional `string` value serialized in the `conclusion` wire field.
+    /// Required `string` value serialized in the `conclusion` wire field.
     public var conclusion: String?
     /// The time that the job created.
     public var createdAt: String
-    /// Optional `string` value serialized in the `head_sha` wire field.
+    /// Required `string` value serialized in the `head_sha` wire field.
     public var headSha: String
-    /// Optional `string` value serialized in the `html_url` wire field.
+    /// Required `string` value serialized in the `html_url` wire field.
     public var htmlUrl: String
-    /// Optional `integer` value serialized in the `id` wire field.
+    /// Required `integer` value serialized in the `id` wire field.
     public var id: Int
-    /// Optional array value serialized in the `labels` wire field.
+    /// Required array value serialized in the `labels` wire field.
     public var labels: [String]
-    /// Optional `string` value serialized in the `name` wire field.
+    /// Required `string` value serialized in the `name` wire field.
     public var name: String
-    /// Optional `string` value serialized in the `node_id` wire field.
+    /// Required `string` value serialized in the `node_id` wire field.
     public var nodeId: String
-    /// Optional `integer` value serialized in the `run_attempt` wire field.
+    /// Required `integer` value serialized in the `run_attempt` wire field.
     public var runAttempt: Int
-    /// Optional `integer` value serialized in the `run_id` wire field.
+    /// Required `integer` value serialized in the `run_id` wire field.
     public var runId: Int
-    /// Optional `string` value serialized in the `run_url` wire field.
+    /// Required `string` value serialized in the `run_url` wire field.
     public var runUrl: String
-    /// Optional `number` value serialized in the `runner_group_id` wire field.
+    /// Required `number` value serialized in the `runner_group_id` wire field.
     public var runnerGroupId: Double?
-    /// Optional `string` value serialized in the `runner_group_name` wire field.
+    /// Required `string` value serialized in the `runner_group_name` wire field.
     public var runnerGroupName: String?
-    /// Optional `number` value serialized in the `runner_id` wire field.
+    /// Required `number` value serialized in the `runner_id` wire field.
     public var runnerId: Double?
-    /// Optional `string` value serialized in the `runner_name` wire field.
+    /// Required `string` value serialized in the `runner_name` wire field.
     public var runnerName: String?
-    /// Optional `string` value serialized in the `started_at` wire field.
+    /// Required `string` value serialized in the `started_at` wire field.
     public var startedAt: String
     /// Required enumerated value serialized in the `status` wire field.
-    public var status: WebhookWorkflowJobInProgressWorkflowJobVariant1Status
+    public var status: WebhookWorkflowJobInProgressWorkflowJobStatus
     /// The name of the current branch.
     public var headBranch: String?
     /// The name of the workflow.
     public var workflowName: String?
     /// Required array value serialized in the `steps` wire field.
-    public var steps: [WebhookWorkflowJobInProgressWorkflowJobVariant1StepsItem]
-    /// Optional `string` value serialized in the `url` wire field.
+    public var steps: [WebhookWorkflowJobInProgressWorkflowJobStepsItem]
+    /// Required `string` value serialized in the `url` wire field.
     public var url: String
 
     enum CodingKeys: String, CodingKey {
@@ -133,10 +133,10 @@ public extension WebhookWorkflowJobInProgressWorkflowJob {
         runnerId: Double?,
         runnerName: String?,
         startedAt: String,
-        status: WebhookWorkflowJobInProgressWorkflowJobVariant1Status,
+        status: WebhookWorkflowJobInProgressWorkflowJobStatus,
         headBranch: String?,
         workflowName: String?,
-        steps: [WebhookWorkflowJobInProgressWorkflowJobVariant1StepsItem],
+        steps: [WebhookWorkflowJobInProgressWorkflowJobStepsItem],
         url: String
     ) {
         (self.checkRunUrl, self.completedAt) = (checkRunUrl, completedAt)
@@ -163,7 +163,7 @@ public struct WebhookWorkflowJobInProgress: Codable {
     public var repository: RepositoryWebhooks
     /// A GitHub user.
     public var sender: SimpleUser
-    /// Required API value serialized in the `workflow_job` wire field.
+    /// Required object value serialized in the `workflow_job` wire field.
     public var workflowJob: WebhookWorkflowJobInProgressWorkflowJob
     /// An enterprise on GitHub. Webhook payloads contain the `enterprise` property when the webhook is configured
     /// on an enterprise account or an organization that's part of an enterprise account. For more information, see
@@ -254,339 +254,12 @@ public extension WebhookWorkflowJobInProgress {
     }
 }
 
-/// Required object value serialized in the `workflow_job` wire field.
-public struct WebhookWorkflowJobInProgressWorkflowJobVariant1: Codable {
-    /// Required enumerated value serialized in the `status` wire field.
-    public var status: WebhookWorkflowJobInProgressWorkflowJobVariant1Status
-    /// Required array value serialized in the `steps` wire field.
-    public var steps: [WebhookWorkflowJobInProgressWorkflowJobVariant1StepsItem]
-    /// Optional `string` value serialized in the `check_run_url` wire field.
-    public var checkRunUrl: String?
-    /// Optional `string` value serialized in the `completed_at` wire field.
-    public var completedAt: String?
-    /// Optional `string` value serialized in the `conclusion` wire field.
-    public var conclusion: String?
-    /// The time that the job created.
-    public var createdAt: String?
-    /// Optional `string` value serialized in the `head_sha` wire field.
-    public var headSha: String?
-    /// Optional `string` value serialized in the `html_url` wire field.
-    public var htmlUrl: String?
-    /// Optional `integer` value serialized in the `id` wire field.
-    public var id: Int?
-    /// Optional array value serialized in the `labels` wire field.
-    public var labels: [String]?
-    /// Optional `string` value serialized in the `name` wire field.
-    public var name: String?
-    /// Optional `string` value serialized in the `node_id` wire field.
-    public var nodeId: String?
-    /// Optional `integer` value serialized in the `run_attempt` wire field.
-    public var runAttempt: Int?
-    /// Optional `integer` value serialized in the `run_id` wire field.
-    public var runId: Int?
-    /// Optional `string` value serialized in the `run_url` wire field.
-    public var runUrl: String?
-    /// Optional `number` value serialized in the `runner_group_id` wire field.
-    public var runnerGroupId: Double?
-    /// Optional `string` value serialized in the `runner_group_name` wire field.
-    public var runnerGroupName: String?
-    /// Optional `number` value serialized in the `runner_id` wire field.
-    public var runnerId: Double?
-    /// Optional `string` value serialized in the `runner_name` wire field.
-    public var runnerName: String?
-    /// Optional `string` value serialized in the `started_at` wire field.
-    public var startedAt: String?
-    /// The name of the current branch.
-    public var headBranch: String?
-    /// The name of the workflow.
-    public var workflowName: String?
-    /// Optional `string` value serialized in the `url` wire field.
-    public var url: String?
-
-    enum CodingKeys: String, CodingKey {
-        case status
-        case steps
-        case checkRunUrl = "check_run_url"
-        case completedAt = "completed_at"
-        case conclusion
-        case createdAt = "created_at"
-        case headSha = "head_sha"
-        case htmlUrl = "html_url"
-        case id
-        case labels
-        case name
-        case nodeId = "node_id"
-        case runAttempt = "run_attempt"
-        case runId = "run_id"
-        case runUrl = "run_url"
-        case runnerGroupId = "runner_group_id"
-        case runnerGroupName = "runner_group_name"
-        case runnerId = "runner_id"
-        case runnerName = "runner_name"
-        case startedAt = "started_at"
-        case headBranch = "head_branch"
-        case workflowName = "workflow_name"
-        case url
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension WebhookWorkflowJobInProgressWorkflowJobVariant1 {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.status) else {
-            throw SdkValidationError(
-                field: "status",
-                code: "required",
-                message: "Validation failed for 'status': value is required"
-            )
-        }
-        guard container.contains(.steps) else {
-            throw SdkValidationError(
-                field: "steps",
-                code: "required",
-                message: "Validation failed for 'steps': value is required"
-            )
-        }
-        status = try container.sdkDecodeRequired(.status)
-        steps = try container.sdkDecodeRequired(.steps)
-        checkRunUrl = try container.sdkDecodeIfPresent(.checkRunUrl)
-        completedAt = try container.sdkDecodeIfPresent(.completedAt)
-        conclusion = try container.sdkDecodeIfPresent(.conclusion)
-        createdAt = try container.sdkDecodeIfPresent(.createdAt)
-        headSha = try container.sdkDecodeIfPresent(.headSha)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        id = try container.sdkDecodeIfPresent(.id)
-        labels = try container.sdkDecodeIfPresent(.labels)
-        name = try container.sdkDecodeIfPresent(.name)
-        nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        runAttempt = try container.sdkDecodeIfPresent(.runAttempt)
-        runId = try container.sdkDecodeIfPresent(.runId)
-        runUrl = try container.sdkDecodeIfPresent(.runUrl)
-        runnerGroupId = try container.sdkDecodeIfPresent(.runnerGroupId)
-        runnerGroupName = try container.sdkDecodeIfPresent(.runnerGroupName)
-        runnerId = try container.sdkDecodeIfPresent(.runnerId)
-        runnerName = try container.sdkDecodeIfPresent(.runnerName)
-        startedAt = try container.sdkDecodeIfPresent(.startedAt)
-        headBranch = try container.sdkDecodeIfPresent(.headBranch)
-        workflowName = try container.sdkDecodeIfPresent(.workflowName)
-        url = try container.sdkDecodeIfPresent(.url)
-    }
-}
-
-public extension WebhookWorkflowJobInProgressWorkflowJobVariant1 {
-    init(
-        status: WebhookWorkflowJobInProgressWorkflowJobVariant1Status,
-        steps: [WebhookWorkflowJobInProgressWorkflowJobVariant1StepsItem],
-        checkRunUrl: String? = nil,
-        completedAt: String? = nil,
-        conclusion: String? = nil,
-        createdAt: String? = nil,
-        headSha: String? = nil,
-        htmlUrl: String? = nil,
-        id: Int? = nil,
-        labels: [String]? = nil,
-        name: String? = nil,
-        nodeId: String? = nil,
-        runAttempt: Int? = nil,
-        runId: Int? = nil,
-        runUrl: String? = nil,
-        runnerGroupId: Double? = nil,
-        runnerGroupName: String? = nil,
-        runnerId: Double? = nil,
-        runnerName: String? = nil,
-        startedAt: String? = nil,
-        headBranch: String? = nil,
-        workflowName: String? = nil,
-        url: String? = nil
-    ) {
-        (self.status, self.steps) = (status, steps)
-        (self.checkRunUrl, self.completedAt) = (checkRunUrl, completedAt)
-        (self.conclusion, self.createdAt) = (conclusion, createdAt)
-        (self.headSha, self.htmlUrl) = (headSha, htmlUrl)
-        (self.id, self.labels) = (id, labels)
-        (self.name, self.nodeId) = (name, nodeId)
-        (self.runAttempt, self.runId) = (runAttempt, runId)
-        (self.runUrl, self.runnerGroupId) = (runUrl, runnerGroupId)
-        (self.runnerGroupName, self.runnerId) = (runnerGroupName, runnerId)
-        (self.runnerName, self.startedAt) = (runnerName, startedAt)
-        (self.headBranch, self.workflowName) = (headBranch, workflowName)
-        self.url = url
-    }
-}
-
-/// The workflow job. Many `workflow_job` keys, such as `head_sha`, `conclusion`, and `started_at` are the same as
-/// those in a `check_run` object.
-public struct WebhookWorkflowJobInProgressWorkflowJobVariant0: Codable {
-    /// Required `uri`-formatted value serialized in the `check_run_url` wire field.
-    public var checkRunUrl: String
-    /// Required `string` value serialized in the `completed_at` wire field.
-    public var completedAt: String?
-    /// Required enumerated value serialized in the `conclusion` wire field.
-    public var conclusion: WebhookWorkflowJobInProgressWorkflowJobVariant0Conclusion?
-    /// The time that the job created.
-    public var createdAt: String
-    /// Required `string` value serialized in the `head_sha` wire field.
-    public var headSha: String
-    /// Required `uri`-formatted value serialized in the `html_url` wire field.
-    public var htmlUrl: String
-    /// Required `integer` value serialized in the `id` wire field.
-    public var id: Int
-    /// Custom labels for the job. Specified by the `"runs-on"` attribute in the workflow YAML.
-    public var labels: [String]
-    /// Required `string` value serialized in the `name` wire field.
-    public var name: String
-    /// Required `string` value serialized in the `node_id` wire field.
-    public var nodeId: String
-    /// Required `integer` value serialized in the `run_attempt` wire field.
-    public var runAttempt: Int
-    /// Required `number` value serialized in the `run_id` wire field.
-    public var runId: Double
-    /// Required `uri`-formatted value serialized in the `run_url` wire field.
-    public var runUrl: String
-    /// The ID of the runner group that is running this job. This will be `null` as long as `workflow_job[status]`
-    /// is `queued`.
-    public var runnerGroupId: Int?
-    /// The name of the runner group that is running this job. This will be `null` as long as `workflow_job[status]`
-    /// is `queued`.
-    public var runnerGroupName: String?
-    /// The ID of the runner that is running this job. This will be `null` as long as `workflow_job[status]` is
-    /// `queued`.
-    public var runnerId: Int?
-    /// The name of the runner that is running this job. This will be `null` as long as `workflow_job[status]` is
-    /// `queued`.
-    public var runnerName: String?
-    /// Required `string` value serialized in the `started_at` wire field.
-    public var startedAt: String
-    /// The current status of the job. Can be `queued`, `in_progress`, or `completed`.
-    public var status: WebhookWorkflowJobInProgressWorkflowJobVariant0Status
-    /// The name of the current branch.
-    public var headBranch: String?
-    /// The name of the workflow.
-    public var workflowName: String?
-    /// Required array value serialized in the `steps` wire field.
-    public var steps: [WebhookWorkflowJobInProgressWorkflowJobVariant0StepsItem]
-    /// Required `uri`-formatted value serialized in the `url` wire field.
-    public var url: String
-
-    enum CodingKeys: String, CodingKey {
-        case checkRunUrl = "check_run_url"
-        case completedAt = "completed_at"
-        case conclusion
-        case createdAt = "created_at"
-        case headSha = "head_sha"
-        case htmlUrl = "html_url"
-        case id
-        case labels
-        case name
-        case nodeId = "node_id"
-        case runAttempt = "run_attempt"
-        case runId = "run_id"
-        case runUrl = "run_url"
-        case runnerGroupId = "runner_group_id"
-        case runnerGroupName = "runner_group_name"
-        case runnerId = "runner_id"
-        case runnerName = "runner_name"
-        case startedAt = "started_at"
-        case status
-        case headBranch = "head_branch"
-        case workflowName = "workflow_name"
-        case steps
-        case url
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension WebhookWorkflowJobInProgressWorkflowJobVariant0 {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        checkRunUrl = try container.sdkDecodeRequired(.checkRunUrl)
-        completedAt = try container.sdkDecodeNullable(.completedAt)
-        conclusion = try container.sdkDecodeNullable(.conclusion)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        headSha = try container.sdkDecodeRequired(.headSha)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        id = try container.sdkDecodeRequired(.id)
-        labels = try container.sdkDecodeRequired(.labels)
-        name = try container.sdkDecodeRequired(.name)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        runAttempt = try container.sdkDecodeRequired(.runAttempt)
-        runId = try container.sdkDecodeRequired(.runId)
-        runUrl = try container.sdkDecodeRequired(.runUrl)
-        runnerGroupId = try container.sdkDecodeNullable(.runnerGroupId)
-        runnerGroupName = try container.sdkDecodeNullable(.runnerGroupName)
-        runnerId = try container.sdkDecodeNullable(.runnerId)
-        runnerName = try container.sdkDecodeNullable(.runnerName)
-        startedAt = try container.sdkDecodeRequired(.startedAt)
-        status = try container.sdkDecodeRequired(.status)
-        headBranch = try container.sdkDecodeNullable(.headBranch)
-        workflowName = try container.sdkDecodeNullable(.workflowName)
-        steps = try container.sdkDecodeRequired(.steps)
-        url = try container.sdkDecodeRequired(.url)
-        try sdkValidateUri("check_run_url", checkRunUrl)
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateUri("run_url", runUrl)
-        try sdkValidateUri("url", url)
-    }
-}
-
-public extension WebhookWorkflowJobInProgressWorkflowJobVariant0 {
-    init(
-        checkRunUrl: String,
-        completedAt: String?,
-        conclusion: WebhookWorkflowJobInProgressWorkflowJobVariant0Conclusion?,
-        createdAt: String,
-        headSha: String,
-        htmlUrl: String,
-        id: Int,
-        labels: [String],
-        name: String,
-        nodeId: String,
-        runAttempt: Int,
-        runId: Double,
-        runUrl: String,
-        runnerGroupId: Int?,
-        runnerGroupName: String?,
-        runnerId: Int?,
-        runnerName: String?,
-        startedAt: String,
-        status: WebhookWorkflowJobInProgressWorkflowJobVariant0Status,
-        headBranch: String?,
-        workflowName: String?,
-        steps: [WebhookWorkflowJobInProgressWorkflowJobVariant0StepsItem],
-        url: String
-    ) throws {
-        (self.checkRunUrl, self.completedAt) = (checkRunUrl, completedAt)
-        (self.conclusion, self.createdAt) = (conclusion, createdAt)
-        (self.headSha, self.htmlUrl) = (headSha, htmlUrl)
-        (self.id, self.labels) = (id, labels)
-        (self.name, self.nodeId) = (name, nodeId)
-        (self.runAttempt, self.runId) = (runAttempt, runId)
-        (self.runUrl, self.runnerGroupId) = (runUrl, runnerGroupId)
-        (self.runnerGroupName, self.runnerId) = (runnerGroupName, runnerId)
-        (self.runnerName, self.startedAt) = (runnerName, startedAt)
-        (self.status, self.headBranch) = (status, headBranch)
-        (self.workflowName, self.steps) = (workflowName, steps)
-        self.url = url
-        try sdkValidateUri("check_run_url", self.checkRunUrl)
-        try sdkValidateUri("html_url", self.htmlUrl)
-        try sdkValidateUri("run_url", self.runUrl)
-        try sdkValidateUri("url", self.url)
-    }
-}
-
 /// Required object value serialized in the `steps[]` wire field.
-public struct WebhookWorkflowJobInProgressWorkflowJobVariant0StepsItem: Codable {
+public struct WebhookWorkflowJobInProgressWorkflowJobStepsItem: Codable {
     /// Required `string` value serialized in the `completed_at` wire field.
     public var completedAt: String?
-    /// Required enumerated value serialized in the `conclusion` wire field.
-    public var conclusion: WebhookWorkflowJobInProgressWorkflowJobVariant0StepsItemConclusion?
+    /// Required `string` value serialized in the `conclusion` wire field.
+    public var conclusion: String?
     /// Required `string` value serialized in the `name` wire field.
     public var name: String
     /// Required `integer` value serialized in the `number` wire field.
@@ -594,7 +267,7 @@ public struct WebhookWorkflowJobInProgressWorkflowJobVariant0StepsItem: Codable 
     /// Required `string` value serialized in the `started_at` wire field.
     public var startedAt: String?
     /// Required enumerated value serialized in the `status` wire field.
-    public var status: WebhookWorkflowJobInProgressWorkflowJobVariant0StepsItemStatus
+    public var status: WebhookWorkflowJobInProgressWorkflowJobStepsItemStatus
 
     enum CodingKeys: String, CodingKey {
         case completedAt = "completed_at"
@@ -607,5 +280,144 @@ public struct WebhookWorkflowJobInProgressWorkflowJobVariant0StepsItem: Codable 
 
     private init(sdkCopy value: Self) {
         self = value
+    }
+}
+
+public extension WebhookWorkflowJobInProgressWorkflowJobStepsItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.completedAt) else {
+            throw SdkValidationError(
+                field: "completed_at",
+                code: "required",
+                message: "Validation failed for 'completed_at': value is required"
+            )
+        }
+        guard container.contains(.conclusion) else {
+            throw SdkValidationError(
+                field: "conclusion",
+                code: "required",
+                message: "Validation failed for 'conclusion': value is required"
+            )
+        }
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        guard container.contains(.number) else {
+            throw SdkValidationError(
+                field: "number",
+                code: "required",
+                message: "Validation failed for 'number': value is required"
+            )
+        }
+        guard container.contains(.startedAt) else {
+            throw SdkValidationError(
+                field: "started_at",
+                code: "required",
+                message: "Validation failed for 'started_at': value is required"
+            )
+        }
+        guard container.contains(.status) else {
+            throw SdkValidationError(
+                field: "status",
+                code: "required",
+                message: "Validation failed for 'status': value is required"
+            )
+        }
+        completedAt = try container.sdkDecodeNullable(.completedAt)
+        conclusion = try container.sdkDecodeNullable(.conclusion)
+        name = try container.sdkDecodeRequired(.name)
+        number = try container.sdkDecodeRequired(.number)
+        startedAt = try container.sdkDecodeNullable(.startedAt)
+        status = try container.sdkDecodeRequired(.status)
+    }
+}
+
+public extension WebhookWorkflowJobInProgressWorkflowJobStepsItem {
+    init(
+        completedAt: String?,
+        conclusion: String?,
+        name: String,
+        number: Int,
+        startedAt: String?,
+        status: WebhookWorkflowJobInProgressWorkflowJobStepsItemStatus
+    ) {
+        (self.completedAt, self.conclusion) = (completedAt, conclusion)
+        (self.name, self.number) = (name, number)
+        (self.startedAt, self.status) = (startedAt, status)
+    }
+}
+
+/// Required enumerated value serialized in the `status` wire field.
+public struct WebhookWorkflowJobInProgressWorkflowJobStepsItemStatus: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let inProgress = WebhookWorkflowJobInProgressWorkflowJobStepsItemStatus(rawValue: "in_progress")
+    public static let completed = WebhookWorkflowJobInProgressWorkflowJobStepsItemStatus(rawValue: "completed")
+    public static let pending = WebhookWorkflowJobInProgressWorkflowJobStepsItemStatus(rawValue: "pending")
+    public static let queued = WebhookWorkflowJobInProgressWorkflowJobStepsItemStatus(rawValue: "queued")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Required enumerated value serialized in the `status` wire field.
+public struct WebhookWorkflowJobInProgressWorkflowJobStatus: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let inProgress = WebhookWorkflowJobInProgressWorkflowJobStatus(rawValue: "in_progress")
+    public static let completed = WebhookWorkflowJobInProgressWorkflowJobStatus(rawValue: "completed")
+    public static let queued = WebhookWorkflowJobInProgressWorkflowJobStatus(rawValue: "queued")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Required enumerated value serialized in the `action` wire field.
+public struct WebhookWorkflowJobInProgressAction: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let inProgress = WebhookWorkflowJobInProgressAction(rawValue: "in_progress")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
     }
 }

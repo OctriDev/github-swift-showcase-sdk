@@ -4,6 +4,61 @@
 import Foundation
 
 /// Pulls domain models
+public extension PullRequestStackPullRequestVariant1 {
+    init(
+        nodeId: String,
+        title: String,
+        state: PullRequestStackPullRequestVariant1State,
+        mergedAt: Date?,
+        draft: Bool,
+        htmlUrl: String,
+        user: NullableSimpleUser?
+    ) throws {
+        (self.nodeId, self.title) = (nodeId, title)
+        (self.state, self.mergedAt) = (state, mergedAt)
+        (self.draft, self.htmlUrl) = (draft, htmlUrl)
+        self.user = user
+        if let value = self.mergedAt {
+            try sdkValidateDateTime("merged_at", sdkWireString(value))
+        }
+        try sdkValidateUri("html_url", self.htmlUrl)
+    }
+}
+
+/// Required object value serialized in the `base` wire field.
+public struct PullRequestStackMinimalBase: Codable {
+    /// Required `string` value serialized in the `ref` wire field.
+    public var ref: String
+
+    enum CodingKeys: String, CodingKey {
+        case ref
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension PullRequestStackMinimalBase {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.ref) else {
+            throw SdkValidationError(
+                field: "ref",
+                code: "required",
+                message: "Validation failed for 'ref': value is required"
+            )
+        }
+        ref = try container.sdkDecodeRequired(.ref)
+    }
+}
+
+public extension PullRequestStackMinimalBase {
+    init(ref: String) {
+        self.ref = ref
+    }
+}
+
 /// When the asynchronous merge request is pending
 public struct PullRequestMergeAsyncResultDetailsVariant0: Codable {
     /// Required `string` value serialized in the `message` wire field.
@@ -572,56 +627,5 @@ public extension PullRequestStackMinimalPullRequestsItemHead {
         }
         ref = try container.sdkDecodeRequired(.ref)
         sha = try container.sdkDecodeRequired(.sha)
-    }
-}
-
-public extension PullRequestStackMinimalPullRequestsItemHead {
-    init(ref: String, sha: String) {
-        (self.ref, self.sha) = (ref, sha)
-    }
-}
-
-/// Pull Request Merge Async Result
-public struct PullRequestMergeAsyncResult: Codable {
-    /// Required enumerated value serialized in the `status` wire field.
-    public var status: PullRequestMergeAsyncResultStatus
-    /// Required API value serialized in the `details` wire field.
-    public var details: PullRequestMergeAsyncResultDetails
-
-    enum CodingKeys: String, CodingKey {
-        case status
-        case details
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension PullRequestMergeAsyncResult {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.status) else {
-            throw SdkValidationError(
-                field: "status",
-                code: "required",
-                message: "Validation failed for 'status': value is required"
-            )
-        }
-        guard container.contains(.details) else {
-            throw SdkValidationError(
-                field: "details",
-                code: "required",
-                message: "Validation failed for 'details': value is required"
-            )
-        }
-        status = try container.sdkDecodeRequired(.status)
-        details = try container.sdkDecodeRequired(.details)
-    }
-}
-
-public extension PullRequestMergeAsyncResult {
-    init(status: PullRequestMergeAsyncResultStatus, details: PullRequestMergeAsyncResultDetails) {
-        (self.status, self.details) = (status, details)
     }
 }

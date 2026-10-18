@@ -14,6 +14,11 @@ public indirect enum CopilotSeatDetailsAssigningTeam {
 extension CopilotSeatDetailsAssigningTeam: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
+        if let raw = try? container.decode(JSONValue.self) {
+            if let value = Self.decodeLossless1(from: container, raw) {
+                self = value; return
+            }
+        }
         if let value = Self.decodeGroup1(from: container) {
             self = value; return
         }
@@ -27,6 +32,18 @@ extension CopilotSeatDetailsAssigningTeam: Codable {
         if try encodeGroup1(to: encoder) {
             return
         }
+    }
+}
+
+extension CopilotSeatDetailsAssigningTeam {
+    static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
+        if let value = try? container.decode(Team.self), sdkKeepsEveryKey(value, of: raw) {
+            return .team(value)
+        }
+        if let value = try? container.decode(EnterpriseTeam.self), sdkKeepsEveryKey(value, of: raw) {
+            return .enterpriseTeam(value)
+        }
+        return nil
     }
 }
 
@@ -584,41 +601,5 @@ public struct CopilotSeatDetails: Codable {
 
     private init(sdkCopy value: Self) {
         self = value
-    }
-}
-
-public extension CopilotSeatDetails {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.createdAt) else {
-            throw SdkValidationError(
-                field: "created_at",
-                code: "required",
-                message: "Validation failed for 'created_at': value is required"
-            )
-        }
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        assignee = try container.sdkDecodeIfPresent(.assignee)
-        organization = try container.sdkDecodeIfPresent(.organization)
-        assigningTeam = try container.sdkDecodeIfPresent(.assigningTeam)
-        pendingCancellationDate = try container.sdkDecodeIfPresent(.pendingCancellationDate)
-        lastActivityAt = try container.sdkDecodeIfPresent(.lastActivityAt)
-        lastActivityEditor = try container.sdkDecodeIfPresent(.lastActivityEditor)
-        lastAuthenticatedAt = try container.sdkDecodeIfPresent(.lastAuthenticatedAt)
-        updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
-        planType = try container.sdkDecodeIfPresent(.planType)
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
-        if let value = pendingCancellationDate {
-            try sdkValidateDate("pending_cancellation_date", value)
-        }
-        if let value = lastActivityAt {
-            try sdkValidateDateTime("last_activity_at", sdkWireString(value))
-        }
-        if let value = lastAuthenticatedAt {
-            try sdkValidateDateTime("last_authenticated_at", sdkWireString(value))
-        }
-        if let value = updatedAt {
-            try sdkValidateDateTime("updated_at", sdkWireString(value))
-        }
     }
 }

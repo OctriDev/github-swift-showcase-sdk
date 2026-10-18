@@ -6,33 +6,6 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-/// Machine-readable error code
-public struct AgentTasksGetTaskByIdResponseErrorsItemCodeX1aa4c709: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let missing = AgentTasksGetTaskByIdResponseErrorsItemCodeX1aa4c709(rawValue: "missing")
-    public static let missingField = AgentTasksGetTaskByIdResponseErrorsItemCodeX1aa4c709(rawValue: "missing_field")
-    public static let invalid = AgentTasksGetTaskByIdResponseErrorsItemCodeX1aa4c709(rawValue: "invalid")
-    public static let alreadyExists = AgentTasksGetTaskByIdResponseErrorsItemCodeX1aa4c709(rawValue: "already_exists")
-    public static let unprocessable = AgentTasksGetTaskByIdResponseErrorsItemCodeX1aa4c709(rawValue: "unprocessable")
-    public static let custom = AgentTasksGetTaskByIdResponseErrorsItemCodeX1aa4c709(rawValue: "custom")
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
 /// **Required when using multi-line comments unless using `in_reply_to`**. The `start_side` is the starting
 /// side of the diff that the comment applies to. Can be `LEFT` or `RIGHT`. To learn more about multi-line
 /// comments, see "Commenting on a pull request" in the GitHub Help documentation. See `side` in this table for
@@ -226,6 +199,59 @@ public struct OrgsCreateArtifactDeploymentRecordRequestBodyStatus: RawRepresenta
 
     public static let deployed = OrgsCreateArtifactDeploymentRecordRequestBodyStatus(rawValue: "deployed")
     public static let decommissioned = OrgsCreateArtifactDeploymentRecordRequestBodyStatus(rawValue: "decommissioned")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// Machine-readable error code
+public struct AgentAutomationsListRepoAutomationsResponseErrorsItemCodeX972f2d44: RawRepresentable, Hashable, Codable,
+    Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let missing = AgentAutomationsListRepoAutomationsResponseErrorsItemCodeX972f2d44(rawValue: "missing")
+    public static let missingField =
+        AgentAutomationsListRepoAutomationsResponseErrorsItemCodeX972f2d44(rawValue: "missing_field")
+    public static let invalid = AgentAutomationsListRepoAutomationsResponseErrorsItemCodeX972f2d44(rawValue: "invalid")
+    public static let alreadyExists =
+        AgentAutomationsListRepoAutomationsResponseErrorsItemCodeX972f2d44(rawValue: "already_exists")
+    public static let unprocessable =
+        AgentAutomationsListRepoAutomationsResponseErrorsItemCodeX972f2d44(rawValue: "unprocessable")
+    public static let custom = AgentAutomationsListRepoAutomationsResponseErrorsItemCodeX972f2d44(rawValue: "custom")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// The level at which the comment is targeted.
+public struct PullsCreateReviewCommentRequestBodySubjectType: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let line = PullsCreateReviewCommentRequestBodySubjectType(rawValue: "line")
+    public static let file = PullsCreateReviewCommentRequestBodySubjectType(rawValue: "file")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

@@ -441,7 +441,7 @@ public class BillingNamespace {
         budgetAmount: Int? = nil,
         preventFurtherUsage: Bool? = nil,
         budgetAlerting: BillingUpdateBudgetOrgRequestBodyBudgetAlerting? = nil,
-        expiresAt: BillingUpdateBudgetOrgRequestBodyExpiresAt? = nil,
+        expiresAt: SdkOptional<BillingUpdateBudgetOrgRequestBodyExpiresAt>? = nil,
         requestOptions: RequestOptions? = nil
     ) async throws -> UpdateBudget {
         try await BillingMethods.billingUpdateBudgetOrg(

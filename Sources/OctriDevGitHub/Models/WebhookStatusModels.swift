@@ -90,49 +90,6 @@ public extension WebhookStatusCommitCommitVerification {
     }
 }
 
-/// Required object value serialized in the `author` wire field.
-public struct WebhookStatusCommitCommitAuthorVariant1: Codable {
-    /// Required `string` value serialized in the `date` wire field.
-    public var date: String
-    /// Optional `string` value serialized in the `email` wire field.
-    public var email: String?
-    /// Optional `string` value serialized in the `name` wire field.
-    public var name: String?
-
-    enum CodingKeys: String, CodingKey {
-        case date
-        case email
-        case name
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension WebhookStatusCommitCommitAuthorVariant1 {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.date) else {
-            throw SdkValidationError(
-                field: "date",
-                code: "required",
-                message: "Validation failed for 'date': value is required"
-            )
-        }
-        date = try container.sdkDecodeRequired(.date)
-        email = try container.sdkDecodeIfPresent(.email)
-        name = try container.sdkDecodeIfPresent(.name)
-    }
-}
-
-public extension WebhookStatusCommitCommitAuthorVariant1 {
-    init(date: String, email: String? = nil, name: String? = nil) {
-        (self.date, self.email) = (date, email)
-        self.name = name
-    }
-}
-
 /// Required object value serialized in the `parents[]` wire field.
 public struct WebhookStatusCommitParentsItem: Codable {
     /// Required `uri`-formatted value serialized in the `html_url` wire field.
@@ -247,11 +204,11 @@ public extension WebhookStatusBranchesItemCommit {
 
 /// Required object value serialized in the `commit` wire field.
 public struct WebhookStatusCommitCommit: Codable {
-    /// Required API value serialized in the `author` wire field.
+    /// Required object value serialized in the `author` wire field.
     public var author: WebhookStatusCommitCommitAuthor
     /// Required `integer` value serialized in the `comment_count` wire field.
     public var commentCount: Int
-    /// Required API value serialized in the `committer` wire field.
+    /// Required object value serialized in the `committer` wire field.
     public var committer: WebhookStatusCommitCommitCommitter
     /// Required `string` value serialized in the `message` wire field.
     public var message: String
@@ -355,72 +312,6 @@ public extension WebhookStatusCommitCommit {
         (self.tree, self.url) = (tree, url)
         self.verification = verification
         try sdkValidateUri("url", self.url)
-    }
-}
-
-/// Metaproperties for Git author/committer information.
-public struct WebhookStatusCommitCommitCommitterVariant0: Codable {
-    /// Required `email`-formatted value serialized in the `email` wire field.
-    public var email: String?
-    /// The git author's name.
-    public var name: String
-    /// Optional `date-time`-formatted value serialized in the `date` wire field.
-    public var date: Date?
-    /// Optional `string` value serialized in the `username` wire field.
-    public var username: String?
-
-    enum CodingKeys: String, CodingKey {
-        case email
-        case name
-        case date
-        case username
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension WebhookStatusCommitCommitCommitterVariant0 {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.email) else {
-            throw SdkValidationError(
-                field: "email",
-                code: "required",
-                message: "Validation failed for 'email': value is required"
-            )
-        }
-        guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
-        }
-        email = try container.sdkDecodeNullable(.email)
-        name = try container.sdkDecodeRequired(.name)
-        date = try container.sdkDecodeIfPresent(.date)
-        username = try container.sdkDecodeIfPresent(.username)
-        if let value = email {
-            try sdkValidateEmail("email", value)
-        }
-        if let value = date {
-            try sdkValidateDateTime("date", sdkWireString(value))
-        }
-    }
-}
-
-public extension WebhookStatusCommitCommitCommitterVariant0 {
-    init(email: String?, name: String, date: Date? = nil, username: String? = nil) throws {
-        (self.email, self.name) = (email, name)
-        (self.date, self.username) = (date, username)
-        if let value = self.email {
-            try sdkValidateEmail("email", value)
-        }
-        if let value = self.date {
-            try sdkValidateDateTime("date", sdkWireString(value))
-        }
     }
 }
 
@@ -553,13 +444,13 @@ public extension WebhookStatus {
     }
 }
 
-/// Required API value serialized in the `author` wire field.
+/// Required object value serialized in the `author` wire field.
 public struct WebhookStatusCommitCommitAuthor: Codable {
     /// Required `string` value serialized in the `date` wire field.
     public var date: String
-    /// Optional `string` value serialized in the `email` wire field.
+    /// Required `string` value serialized in the `email` wire field.
     public var email: String
-    /// Optional `string` value serialized in the `name` wire field.
+    /// Required `string` value serialized in the `name` wire field.
     public var name: String
     /// Optional `string` value serialized in the `username` wire field.
     public var username: String?
@@ -631,5 +522,42 @@ public struct WebhookStatusBranchesItem: Codable {
 
     private init(sdkCopy value: Self) {
         self = value
+    }
+}
+
+public extension WebhookStatusBranchesItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.commit) else {
+            throw SdkValidationError(
+                field: "commit",
+                code: "required",
+                message: "Validation failed for 'commit': value is required"
+            )
+        }
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        guard container.contains(.protected) else {
+            throw SdkValidationError(
+                field: "protected",
+                code: "required",
+                message: "Validation failed for 'protected': value is required"
+            )
+        }
+        commit = try container.sdkDecodeRequired(.commit)
+        name = try container.sdkDecodeRequired(.name)
+        protected = try container.sdkDecodeRequired(.protected)
+    }
+}
+
+public extension WebhookStatusBranchesItem {
+    init(commit: WebhookStatusBranchesItemCommit, name: String, protected: Bool) {
+        (self.commit, self.name) = (commit, name)
+        self.protected = protected
     }
 }

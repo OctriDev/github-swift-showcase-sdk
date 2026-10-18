@@ -6,554 +6,533 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testTeamsGetMembershipForUserLegacyTeamsGetMembershipForUserLegacyReachesMockAndDecodesResponse() async throws {
+    func testUsersGetAuthenticatedUsersGetAuthenticated401ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1974Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.users.getAuthenticated()
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 401)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testUsersGetByIdUsersGetByIdReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        let actual = try await client.teams.getMembershipForUserLegacy(
-            teamId: decoded("1"),
-            username: decoded("\"Example Name\"")
+        let actual = try await client.users.getById(
+            accountId: decoded("1")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1912Expected.utf8),
+            with: Data(sdkMethodFixture1975Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "teamsGetMembershipForUserLegacy decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
-    func testTeamsGetMembershipForUserLegacyTeamsGetMembershipForUserLegacy404ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testUsersGetByIdUsersGetById404ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
         _ = client
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1913Expected.utf8),
+            with: Data(sdkMethodFixture1976Expected.utf8),
             options: [.fragmentsAllowed]
         )
         do {
-            _ = try await client.teams.getMembershipForUserLegacy(
-                teamId: decoded("1"),
+            _ = try await client.users.getById(
+                accountId: decoded("1")
+            )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 404)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testUsersGetByUsernameUsersGetByUsernameReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.users.getByUsername(
+            username: decoded("\"Example Name\"")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1977Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testUsersGetByUsernameUsersGetByUsername404ReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1978Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.users.getByUsername(
                 username: decoded("\"Example Name\"")
             )
-            XCTFail("teamsGetMembershipForUserLegacy did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "teamsGetMembershipForUserLegacy decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "teamsGetMembershipForUserLegacy decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
     }
 
-    func testTeamsListTeamsListReachesMockAndDecodesResponse() async throws {
+    func testUsersGetContextForUserUsersGetContextForUserReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        do {
-            _ = try await client.teams.list(
-                org: decoded("\"org\""),
-                perPage: decoded("30"),
-                page: decoded("1"),
-                teamType: decoded("\"all\"")
-            )
-            XCTFail("teamsList decoded a body its schema refuses")
-        } catch is SdkResponseDecodeError {
-        } catch {
-            XCTFail("teamsList refused with \(error), not SdkResponseDecodeError")
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testTeamsListTeamsList403ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1915Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.teams.list(
-                org: decoded("\"org\""),
-                perPage: decoded("30"),
-                page: decoded("1"),
-                teamType: decoded("\"all\"")
-            )
-            XCTFail("teamsList did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 403)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "teamsList decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "teamsList decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testTeamsListChildInOrgTeamsListChildInOrgReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        do {
-            _ = try await client.teams.listChildInOrg(
-                org: decoded("\"org\""),
-                teamSlug: decoded("\"team_slug\""),
-                perPage: decoded("30"),
-                page: decoded("1")
-            )
-            XCTFail("teamsListChildInOrg decoded a body its schema refuses")
-        } catch is SdkResponseDecodeError {
-        } catch {
-            XCTFail("teamsListChildInOrg refused with \(error), not SdkResponseDecodeError")
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testTeamsListChildLegacyTeamsListChildLegacyReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        do {
-            _ = try await client.teams.listChildLegacy(
-                teamId: decoded("1"),
-                perPage: decoded("30"),
-                page: decoded("1")
-            )
-            XCTFail("teamsListChildLegacy decoded a body its schema refuses")
-        } catch is SdkResponseDecodeError {
-        } catch {
-            XCTFail("teamsListChildLegacy refused with \(error), not SdkResponseDecodeError")
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testTeamsListChildLegacyTeamsListChildLegacy403ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1918Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.teams.listChildLegacy(
-                teamId: decoded("1"),
-                perPage: decoded("30"),
-                page: decoded("1")
-            )
-            XCTFail("teamsListChildLegacy did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 403)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "teamsListChildLegacy decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "teamsListChildLegacy decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testTeamsListForAuthenticatedUserTeamsListForAuthenticatedUserReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        do {
-            _ = try await client.teams.listForAuthenticatedUser(
-                perPage: decoded("30"),
-                page: decoded("1")
-            )
-            XCTFail("teamsListForAuthenticatedUser decoded a body its schema refuses")
-        } catch is SdkResponseDecodeError {
-        } catch {
-            XCTFail("teamsListForAuthenticatedUser refused with \(error), not SdkResponseDecodeError")
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testTeamsListForAuthenticatedUserTeamsListForAuthenticatedUser403ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
-            return
-        }
-        _ = client
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1920Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        do {
-            _ = try await client.teams.listForAuthenticatedUser(
-                perPage: decoded("30"),
-                page: decoded("1")
-            )
-            XCTFail("teamsListForAuthenticatedUser did not raise its declared error")
-        } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 403)
-            let data = try XCTUnwrap(
-                error.data as? any Encodable,
-                "teamsListForAuthenticatedUser decoded no error body"
-            )
-            XCTAssertNil(
-                try mismatch(jsonValue(data), expected),
-                "teamsListForAuthenticatedUser decoded an error body " +
-                    "that differs from the mock"
-            )
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testTeamsListMembersInOrgTeamsListMembersInOrgReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.teams.listMembersInOrg(
-            org: decoded("\"org\""),
-            teamSlug: decoded("\"team_slug\""),
-            role: decoded("\"all\""),
-            perPage: decoded("30"),
-            page: decoded("1")
+        let actual = try await client.users.getContextForUser(
+            username: decoded("\"Example Name\""),
+            subjectType: decoded("\"organization\""),
+            subjectId: decoded("\"subject-1\"")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1921Expected.utf8),
+            with: Data(sdkMethodFixture1979Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "teamsListMembersInOrg decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
-    func testTeamsListMembersLegacyTeamsListMembersLegacyReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.teams.listMembersLegacy(
-            teamId: decoded("1"),
-            role: decoded("\"all\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1922Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "teamsListMembersLegacy decoded a response " +
-                "that differs from the mock"
-        )
-    }
-
-    func testTeamsListMembersLegacyTeamsListMembersLegacy404ReachesMockAndDecodesResponse() async throws {
+    func testUsersGetContextForUserUsersGetContextForUser404ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
         _ = client
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1923Expected.utf8),
+            with: Data(sdkMethodFixture1980Expected.utf8),
             options: [.fragmentsAllowed]
         )
         do {
-            _ = try await client.teams.listMembersLegacy(
-                teamId: decoded("1"),
-                role: decoded("\"all\""),
-                perPage: decoded("30"),
-                page: decoded("1")
+            _ = try await client.users.getContextForUser(
+                username: decoded("\"Example Name\""),
+                subjectType: decoded("\"organization\""),
+                subjectId: decoded("\"subject-1\"")
             )
-            XCTFail("teamsListMembersLegacy did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "teamsListMembersLegacy decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "teamsListMembersLegacy decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
     }
 
-    func testTeamsListPendingInvitationsInOrgTeamsListPendingInvitationsInOrgReachesMockAndDecodesResponse(
+    func testUsersGetGpgKeyForAuthenticatedUserUsersGetGpgKeyForAuthenticatedUserReachesMockAndDecodesResponse(
     ) async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        let actual = try await client.teams.listPendingInvitationsInOrg(
-            org: decoded("\"org\""),
-            teamSlug: decoded("\"team_slug\""),
-            perPage: decoded("30"),
-            page: decoded("1")
+        let actual = try await client.users.getGpgKeyForAuthenticatedUser(
+            gpgKeyId: decoded("1")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1924Expected.utf8),
+            with: Data(sdkMethodFixture1981Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "teamsListPendingInvitationsInOrg decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
-    func testTeamsListPendingInvitationsLegacyTeamsListPendingInvitationsLegacyReachesMockAndDecodesResponse(
+    func testUsersGetGpgKeyForAuthenticatedUserUsersGetGpgKeyForAuthenticatedUser401ReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1982Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.users.getGpgKeyForAuthenticatedUser(
+                gpgKeyId: decoded("1")
+            )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 401)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testUsersGetPublicSshKeyForAuthenticatedUserUsersGetPublicSshKeyFX792550ec66ReachesMockAndDecodesResponse(
     ) async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        let actual = try await client.teams.listPendingInvitationsLegacy(
-            teamId: decoded("1"),
-            perPage: decoded("30"),
-            page: decoded("1")
+        let actual = try await client.users.getPublicSshKeyForAuthenticatedUser(
+            keyId: decoded("1")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1925Expected.utf8),
+            with: Data(sdkMethodFixture1983Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "teamsListPendingInvitationsLegacy decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
-    func testTeamsListReposInOrgTeamsListReposInOrgReachesMockAndDecodesResponse() async throws {
+    func testUsersGetPublicSshKeyForAuthenticatedUserUsersGetPublicSshKeyFXa894b92cedReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1984Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.users.getPublicSshKeyForAuthenticatedUser(
+                keyId: decoded("1")
+            )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 401)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testUsersGetSshSigningKeyForAuthenticatedUserUsersGetSshSigningKeXfc995d9fa6ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        let actual = try await client.teams.listReposInOrg(
-            org: decoded("\"org\""),
-            teamSlug: decoded("\"team_slug\""),
-            perPage: decoded("30"),
-            page: decoded("1")
+        let actual = try await client.users.getSshSigningKeyForAuthenticatedUser(
+            sshSigningKeyId: decoded("1")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1926Expected.utf8),
+            with: Data(sdkMethodFixture1985Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "teamsListReposInOrg decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
-    func testTeamsListReposLegacyTeamsListReposLegacyReachesMockAndDecodesResponse() async throws {
+    func testUsersGetSshSigningKeyForAuthenticatedUserUsersGetSshSigningKeX2e6461c434ReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1986Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.users.getSshSigningKeyForAuthenticatedUser(
+                sshSigningKeyId: decoded("1")
+            )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 401)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testUsersListUsersListReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        let actual = try await client.teams.listReposLegacy(
-            teamId: decoded("1"),
-            perPage: decoded("30"),
-            page: decoded("1")
+        let actual = try await client.users.list(
+            since: decoded("1"),
+            perPage: decoded("30")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1927Expected.utf8),
+            with: Data(sdkMethodFixture1987Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
-            "teamsListReposLegacy decoded a response " +
-                "that differs from the mock"
+            "decoded a response that differs from the mock"
         )
     }
 
-    func testTeamsListReposLegacyTeamsListReposLegacy404ReachesMockAndDecodesResponse() async throws {
+    func testUsersListAttestationsUsersListAttestationsReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.users.listAttestations(
+            username: decoded("\"Example Name\""),
+            subjectDigest: decoded("\"subject_digest\""),
+            perPage: decoded("30"),
+            before: decoded("\"before\""),
+            after: decoded("\"after\""),
+            predicateType: decoded("\"predicate_type\"")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1988Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testUsersListAttestationsUsersListAttestations404ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
         _ = client
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1928Expected.utf8),
+            with: Data(sdkMethodFixture1989Expected.utf8),
             options: [.fragmentsAllowed]
         )
         do {
-            _ = try await client.teams.listReposLegacy(
-                teamId: decoded("1"),
+            _ = try await client.users.listAttestations(
+                username: decoded("\"Example Name\""),
+                subjectDigest: decoded("\"subject_digest\""),
                 perPage: decoded("30"),
-                page: decoded("1")
+                before: decoded("\"before\""),
+                after: decoded("\"after\""),
+                predicateType: decoded("\"predicate_type\"")
             )
-            XCTFail("teamsListReposLegacy did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "teamsListReposLegacy decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "teamsListReposLegacy decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
     }
 
-    func testTeamsRemoveMemberLegacyTeamsRemoveMemberLegacyReachesMockAndDecodesResponse() async throws {
+    func testUsersListAttestationsBulkUsersListAttestationsBulkReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        _ = try await client.teams.removeMemberLegacy(
-            teamId: decoded("1"),
-            username: decoded("\"Example Name\"")
+        let actual = try await client.users.listAttestationsBulk(
+            username: decoded("\"Example Name\""),
+            subjectDigests: decoded("[\"sha256:abc123\",\"sha512:def456\"]"),
+            perPage: decoded("30"),
+            before: decoded("\"before\""),
+            after: decoded("\"after\""),
+            predicateType: decoded("null")
         )
-        XCTAssertTrue(true)
-    }
-
-    func testTeamsRemoveMembershipForUserInOrgTeamsRemoveMembershipForUserInOrgReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        _ = try await client.teams.removeMembershipForUserInOrg(
-            org: decoded("\"org\""),
-            teamSlug: decoded("\"team_slug\""),
-            username: decoded("\"Example Name\"")
-        )
-        XCTAssertTrue(true)
-    }
-
-    func testTeamsRemoveMembershipForUserLegacyTeamsRemoveMembershipForUserLegacyReachesMockAndDecodesResponse(
-    ) async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        _ = try await client.teams.removeMembershipForUserLegacy(
-            teamId: decoded("1"),
-            username: decoded("\"Example Name\"")
-        )
-        XCTAssertTrue(true)
-    }
-
-    func testTeamsRemoveRepoInOrgTeamsRemoveRepoInOrgReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        _ = try await client.teams.removeRepoInOrg(
-            org: decoded("\"org\""),
-            teamSlug: decoded("\"team_slug\""),
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\"")
-        )
-        XCTAssertTrue(true)
-    }
-
-    func testTeamsRemoveRepoLegacyTeamsRemoveRepoLegacyReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        _ = try await client.teams.removeRepoLegacy(
-            teamId: decoded("1"),
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\"")
-        )
-        XCTAssertTrue(true)
-    }
-
-    func testTeamsUpdateInOrgTeamsUpdateInOrgReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        var options = try TeamsMethods.TeamsUpdateInOrgOptions(
-            org: decoded("\"org\""),
-            teamSlug: decoded("\"team_slug\"")
-        )
-        options.name = try decoded("\"new team name\"")
-        options.description = try decoded("\"new team description\"")
-        options.privacy = try decoded("\"closed\"")
-        options.notificationSetting = try decoded("\"notifications_enabled\"")
-        options.permission = try decoded("null")
-        options.parentTeamId = try decoded("null")
-        options.parentTeamSlug = try decoded("null")
-        do {
-            _ = try await client.teams.updateInOrg(
-                options: options
-            )
-            XCTFail("teamsUpdateInOrg decoded a body its schema refuses")
-        } catch is SdkResponseDecodeError {
-        } catch {
-            XCTFail("teamsUpdateInOrg refused with \(error), not SdkResponseDecodeError")
-        }
-        XCTAssertTrue(true)
-    }
-
-    func testTeamsUpdateInOrgTeamsUpdateInOrg403ReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
-            return
-        }
-        _ = client
-        var options = try TeamsMethods.TeamsUpdateInOrgOptions(
-            org: decoded("\"org\""),
-            teamSlug: decoded("\"team_slug\"")
-        )
-        options.name = try decoded("\"new team name\"")
-        options.description = try decoded("\"new team description\"")
-        options.privacy = try decoded("\"closed\"")
-        options.notificationSetting = try decoded("\"notifications_enabled\"")
-        options.permission = try decoded("null")
-        options.parentTeamId = try decoded("null")
-        options.parentTeamSlug = try decoded("null")
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1935Expected.utf8),
+            with: Data(sdkMethodFixture1990Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testUsersListBlockedByAuthenticatedUserUsersListBlockedByAuthenticatedUserReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.users.listBlockedByAuthenticatedUser(
+            perPage: decoded("30"),
+            page: decoded("1")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1991Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testUsersListBlockedByAuthenticatedUserUsersListBlockedByAuthentiX5087a0d95bReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1992Expected.utf8),
             options: [.fragmentsAllowed]
         )
         do {
-            _ = try await client.teams.updateInOrg(
-                options: options
+            _ = try await client.users.listBlockedByAuthenticatedUser(
+                perPage: decoded("30"),
+                page: decoded("1")
             )
-            XCTFail("teamsUpdateInOrg did not raise its declared error")
+            XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
-            XCTAssertEqual(error.statusCode, 403)
+            XCTAssertEqual(error.statusCode, 401)
             let data = try XCTUnwrap(
                 error.data as? any Encodable,
-                "teamsUpdateInOrg decoded no error body"
+                "decoded no error body"
             )
             XCTAssertNil(
                 try mismatch(jsonValue(data), expected),
-                "teamsUpdateInOrg decoded an error body " +
-                    "that differs from the mock"
+                "decoded an error body that differs from the mock"
             )
         }
         XCTAssertTrue(true)
+    }
+
+    func testUsersListEmailsForAuthenticatedUserUsersListEmailsForAuthenticatedUserReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.users.listEmailsForAuthenticatedUser(
+            perPage: decoded("30"),
+            page: decoded("1")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1993Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
+    }
+
+    func testUsersListEmailsForAuthenticatedUserUsersListEmailsForAuthentiX2440859d24ReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1994Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.users.listEmailsForAuthenticatedUser(
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 401)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
+    }
+
+    func testUsersListFollowedByAuthenticatedUserUsersListFollowedByAuthenticatedUserReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.users.listFollowedByAuthenticatedUser(
+            perPage: decoded("30"),
+            page: decoded("1")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1995Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
     }
 }

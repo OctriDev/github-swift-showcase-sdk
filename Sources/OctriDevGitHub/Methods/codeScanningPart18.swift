@@ -38,7 +38,7 @@ public extension CodeScanningMethods {
             decoder: .json,
             operationId: "codeScanningGetVariantAnalysis",
             options: requestOptions,
-            errors: ["404": BasicError.self]
+            errors: ["404": BasicError.self, "503": ServiceUnavailable.self]
         )).data
     }
 
@@ -81,7 +81,7 @@ public extension CodeScanningMethods {
             decoder: .json,
             operationId: "codeScanningGetVariantAnalysisRepoTask",
             options: requestOptions,
-            errors: ["404": BasicError.self]
+            errors: ["404": BasicError.self, "503": ServiceUnavailable.self]
         )).data
     }
 }
