@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ActionsMethods {
-    /// Retrieves a specific Actions policy for a repository. Use `policy_id` to identify the policy and inspect its target, source, enforcement level, and rules.
+public extension ActionsMethods {
+    /// Retrieves a specific Actions policy for a repository. Use `policy_id` to identify the policy and inspect its
+    /// target, source, enforcement level, and rules.
     ///
     /// Get a specific Actions policy for a repository.
     ///
@@ -17,7 +18,28 @@ extension ActionsMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - policyId: The ID of the policy.
-    public static func actionsGetRepoActionsPolicy(config: ClientConfig, owner: String, repo: String, policyId: Int, requestOptions: RequestOptions? = nil) async throws -> ActionsPolicy {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/actions/policies/", sdkEncodePathSegment(sdkWireString(policyId))].joined(), config: config, decoder: .json, operationId: "actionsGetRepoActionsPolicy", options: requestOptions, errors: ["404": BasicError.self, "500": BasicError.self])).data
+    static func actionsGetRepoActionsPolicy(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        policyId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ActionsPolicy {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/actions/policies/",
+                sdkEncodePathSegment(sdkWireString(policyId)),
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "actionsGetRepoActionsPolicy",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "500": BasicError.self]
+        )).data
     }
 }

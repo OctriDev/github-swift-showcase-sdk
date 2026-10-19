@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Orgs domain models
+/// Orgs domain models
 /// Required object value serialized in the `options[]` wire field.
 public struct IssueFieldOptionsItem: Codable {
     /// The unique identifier of the option.
@@ -31,36 +31,54 @@ public struct IssueFieldOptionsItem: Codable {
         case updatedAt = "updated_at"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension IssueFieldOptionsItem {
-    public init(from decoder: Decoder) throws {
+public extension IssueFieldOptionsItem {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
         }
         guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
         }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.description = try container.sdkDecodeIfPresent(.description)
-        self.color = try container.sdkDecodeIfPresent(.color)
-        self.priority = try container.sdkDecodeIfPresent(.priority)
-        self.createdAt = try container.sdkDecodeIfPresent(.createdAt)
-        self.updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
-        if let value = self.createdAt {
+        id = try container.sdkDecodeRequired(.id)
+        name = try container.sdkDecodeRequired(.name)
+        description = try container.sdkDecodeIfPresent(.description)
+        color = try container.sdkDecodeIfPresent(.color)
+        priority = try container.sdkDecodeIfPresent(.priority)
+        createdAt = try container.sdkDecodeIfPresent(.createdAt)
+        updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
+        if let value = createdAt {
             try sdkValidateDateTime("created_at", sdkWireString(value))
         }
-        if let value = self.updatedAt {
+        if let value = updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
     }
 }
 
-extension IssueFieldOptionsItem {
-    public init(id: Int, name: String, description: String? = nil, color: IssueFieldOptionsItemColor? = nil, priority: Int? = nil, createdAt: Date? = nil, updatedAt: Date? = nil) throws {
+public extension IssueFieldOptionsItem {
+    init(
+        id: Int,
+        name: String,
+        description: String? = nil,
+        color: IssueFieldOptionsItemColor? = nil,
+        priority: Int? = nil,
+        createdAt: Date? = nil,
+        updatedAt: Date? = nil
+    ) throws {
         (self.id, self.name) = (id, name)
         (self.description, self.color) = (description, color)
         (self.priority, self.createdAt) = (priority, createdAt)
@@ -86,21 +104,21 @@ public struct ApiInsightsTimeStatsItem: Codable {
     }
 
     init() {
-        (self.timestamp, self.totalRequestCount, self.rateLimitedRequestCount) = (nil, nil, nil)
+        (timestamp, totalRequestCount, rateLimitedRequestCount) = (nil, nil, nil)
     }
 }
 
-extension ApiInsightsTimeStatsItem {
-    public init(from decoder: Decoder) throws {
+public extension ApiInsightsTimeStatsItem {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.timestamp = try container.sdkDecodeIfPresent(.timestamp)
-        self.totalRequestCount = try container.sdkDecodeIfPresent(.totalRequestCount)
-        self.rateLimitedRequestCount = try container.sdkDecodeIfPresent(.rateLimitedRequestCount)
+        timestamp = try container.sdkDecodeIfPresent(.timestamp)
+        totalRequestCount = try container.sdkDecodeIfPresent(.totalRequestCount)
+        rateLimitedRequestCount = try container.sdkDecodeIfPresent(.rateLimitedRequestCount)
     }
 }
 
-extension ApiInsightsTimeStatsItem {
-    public init(timestamp: String? = nil, totalRequestCount: Int? = nil, rateLimitedRequestCount: Int? = nil) {
+public extension ApiInsightsTimeStatsItem {
+    init(timestamp: String? = nil, totalRequestCount: Int? = nil, rateLimitedRequestCount: Int? = nil) {
         self.init()
         (self.timestamp, self.totalRequestCount) = (timestamp, totalRequestCount)
         self.rateLimitedRequestCount = rateLimitedRequestCount
@@ -116,21 +134,27 @@ public struct ExternalProperty: Codable {
         case propertyName = "property_name"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ExternalProperty {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.propertyName) else {
-            throw SdkValidationError(field: "property_name", code: "required", message: "Validation failed for 'property_name': value is required")
-        }
-        self.propertyName = try container.sdkDecodeRequired(.propertyName)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ExternalProperty {
-    public init(propertyName: String) {
+public extension ExternalProperty {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.propertyName) else {
+            throw SdkValidationError(
+                field: "property_name",
+                code: "required",
+                message: "Validation failed for 'property_name': value is required"
+            )
+        }
+        propertyName = try container.sdkDecodeRequired(.propertyName)
+    }
+}
+
+public extension ExternalProperty {
+    init(propertyName: String) {
         self.propertyName = propertyName
     }
 }
@@ -409,79 +433,90 @@ public struct OrganizationFull: Codable {
         case deployKeysEnabledForRepositories = "deploy_keys_enabled_for_repositories"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension OrganizationFull {
-    public init(from decoder: Decoder) throws {
+public extension OrganizationFull {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.login = try container.sdkDecodeRequired(.login)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.reposUrl = try container.sdkDecodeRequired(.reposUrl)
-        self.eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        self.hooksUrl = try container.sdkDecodeRequired(.hooksUrl)
-        self.issuesUrl = try container.sdkDecodeRequired(.issuesUrl)
-        self.membersUrl = try container.sdkDecodeRequired(.membersUrl)
-        self.publicMembersUrl = try container.sdkDecodeRequired(.publicMembersUrl)
-        self.avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
-        self.description = try container.sdkDecodeNullable(.description)
-        self.hasOrganizationProjects = try container.sdkDecodeRequired(.hasOrganizationProjects)
-        self.hasRepositoryProjects = try container.sdkDecodeRequired(.hasRepositoryProjects)
-        self.publicRepos = try container.sdkDecodeRequired(.publicRepos)
-        self.publicGists = try container.sdkDecodeRequired(.publicGists)
-        self.followers = try container.sdkDecodeRequired(.followers)
-        self.following = try container.sdkDecodeRequired(.following)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.type = try container.sdkDecodeRequired(.type)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        self.archivedAt = try container.sdkDecodeNullable(.archivedAt)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.company = try container.sdkDecodeIfPresent(.company)
-        self.blog = try container.sdkDecodeIfPresent(.blog)
-        self.location = try container.sdkDecodeIfPresent(.location)
-        self.email = try container.sdkDecodeIfPresent(.email)
-        self.twitterUsername = try container.sdkDecodeIfPresent(.twitterUsername)
-        self.isVerified = try container.sdkDecodeIfPresent(.isVerified)
-        self.totalPrivateRepos = try container.sdkDecodeIfPresent(.totalPrivateRepos)
-        self.ownedPrivateRepos = try container.sdkDecodeIfPresent(.ownedPrivateRepos)
-        self.privateGists = try container.sdkDecodeIfPresent(.privateGists)
-        self.diskUsage = try container.sdkDecodeIfPresent(.diskUsage)
-        self.collaborators = try container.sdkDecodeIfPresent(.collaborators)
-        self.billingEmail = try container.sdkDecodeIfPresent(.billingEmail)
-        self.plan = try container.sdkDecodeIfPresent(.plan)
-        self.defaultRepositoryPermission = try container.sdkDecodeIfPresent(.defaultRepositoryPermission)
-        self.defaultRepositoryBranch = try container.sdkDecodeIfPresent(.defaultRepositoryBranch)
-        self.membersCanCreateRepositories = try container.sdkDecodeIfPresent(.membersCanCreateRepositories)
-        self.twoFactorRequirementEnabled = try container.sdkDecodeIfPresent(.twoFactorRequirementEnabled)
-        self.membersAllowedRepositoryCreationType = try container.sdkDecodeIfPresent(.membersAllowedRepositoryCreationType)
-        self.membersCanCreatePublicRepositories = try container.sdkDecodeIfPresent(.membersCanCreatePublicRepositories)
-        self.membersCanCreatePrivateRepositories = try container.sdkDecodeIfPresent(.membersCanCreatePrivateRepositories)
-        self.membersCanCreateInternalRepositories = try container.sdkDecodeIfPresent(.membersCanCreateInternalRepositories)
-        self.membersCanCreatePages = try container.sdkDecodeIfPresent(.membersCanCreatePages)
-        self.membersCanCreatePublicPages = try container.sdkDecodeIfPresent(.membersCanCreatePublicPages)
-        self.membersCanCreatePrivatePages = try container.sdkDecodeIfPresent(.membersCanCreatePrivatePages)
-        self.membersCanDeleteRepositories = try container.sdkDecodeIfPresent(.membersCanDeleteRepositories)
-        self.membersCanChangeRepoVisibility = try container.sdkDecodeIfPresent(.membersCanChangeRepoVisibility)
-        self.membersCanInviteOutsideCollaborators = try container.sdkDecodeIfPresent(.membersCanInviteOutsideCollaborators)
-        self.membersCanDeleteIssues = try container.sdkDecodeIfPresent(.membersCanDeleteIssues)
-        self.displayCommenterFullNameSettingEnabled = try container.sdkDecodeIfPresent(.displayCommenterFullNameSettingEnabled)
-        self.readersCanCreateDiscussions = try container.sdkDecodeIfPresent(.readersCanCreateDiscussions)
-        self.membersCanCreateTeams = try container.sdkDecodeIfPresent(.membersCanCreateTeams)
-        self.membersCanViewDependencyInsights = try container.sdkDecodeIfPresent(.membersCanViewDependencyInsights)
-        self.membersCanForkPrivateRepositories = try container.sdkDecodeIfPresent(.membersCanForkPrivateRepositories)
-        self.webCommitSignoffRequired = try container.sdkDecodeIfPresent(.webCommitSignoffRequired)
-        self.advancedSecurityEnabledForNewRepositories = try container.sdkDecodeIfPresent(.advancedSecurityEnabledForNewRepositories)
-        self.dependabotAlertsEnabledForNewRepositories = try container.sdkDecodeIfPresent(.dependabotAlertsEnabledForNewRepositories)
-        self.dependabotSecurityUpdatesEnabledForNewRepositories = try container.sdkDecodeIfPresent(.dependabotSecurityUpdatesEnabledForNewRepositories)
-        self.dependencyGraphEnabledForNewRepositories = try container.sdkDecodeIfPresent(.dependencyGraphEnabledForNewRepositories)
-        self.secretScanningEnabledForNewRepositories = try container.sdkDecodeIfPresent(.secretScanningEnabledForNewRepositories)
-        self.secretScanningPushProtectionEnabledForNewRepositories = try container.sdkDecodeIfPresent(.secretScanningPushProtectionEnabledForNewRepositories)
-        self.secretScanningPushProtectionCustomLinkEnabled = try container.sdkDecodeIfPresent(.secretScanningPushProtectionCustomLinkEnabled)
-        self.secretScanningPushProtectionCustomLink = try container.sdkDecodeIfPresent(.secretScanningPushProtectionCustomLink)
-        self.deployKeysEnabledForRepositories = try container.sdkDecodeIfPresent(.deployKeysEnabledForRepositories)
+        login = try container.sdkDecodeRequired(.login)
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        url = try container.sdkDecodeRequired(.url)
+        reposUrl = try container.sdkDecodeRequired(.reposUrl)
+        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
+        hooksUrl = try container.sdkDecodeRequired(.hooksUrl)
+        issuesUrl = try container.sdkDecodeRequired(.issuesUrl)
+        membersUrl = try container.sdkDecodeRequired(.membersUrl)
+        publicMembersUrl = try container.sdkDecodeRequired(.publicMembersUrl)
+        avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
+        description = try container.sdkDecodeNullable(.description)
+        hasOrganizationProjects = try container.sdkDecodeRequired(.hasOrganizationProjects)
+        hasRepositoryProjects = try container.sdkDecodeRequired(.hasRepositoryProjects)
+        publicRepos = try container.sdkDecodeRequired(.publicRepos)
+        publicGists = try container.sdkDecodeRequired(.publicGists)
+        followers = try container.sdkDecodeRequired(.followers)
+        following = try container.sdkDecodeRequired(.following)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        type = try container.sdkDecodeRequired(.type)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        archivedAt = try container.sdkDecodeNullable(.archivedAt)
+        name = try container.sdkDecodeIfPresent(.name)
+        company = try container.sdkDecodeIfPresent(.company)
+        blog = try container.sdkDecodeIfPresent(.blog)
+        location = try container.sdkDecodeIfPresent(.location)
+        email = try container.sdkDecodeIfPresent(.email)
+        twitterUsername = try container.sdkDecodeIfPresent(.twitterUsername)
+        isVerified = try container.sdkDecodeIfPresent(.isVerified)
+        totalPrivateRepos = try container.sdkDecodeIfPresent(.totalPrivateRepos)
+        ownedPrivateRepos = try container.sdkDecodeIfPresent(.ownedPrivateRepos)
+        privateGists = try container.sdkDecodeIfPresent(.privateGists)
+        diskUsage = try container.sdkDecodeIfPresent(.diskUsage)
+        collaborators = try container.sdkDecodeIfPresent(.collaborators)
+        billingEmail = try container.sdkDecodeIfPresent(.billingEmail)
+        plan = try container.sdkDecodeIfPresent(.plan)
+        defaultRepositoryPermission = try container.sdkDecodeIfPresent(.defaultRepositoryPermission)
+        defaultRepositoryBranch = try container.sdkDecodeIfPresent(.defaultRepositoryBranch)
+        membersCanCreateRepositories = try container.sdkDecodeIfPresent(.membersCanCreateRepositories)
+        twoFactorRequirementEnabled = try container.sdkDecodeIfPresent(.twoFactorRequirementEnabled)
+        membersAllowedRepositoryCreationType = try container.sdkDecodeIfPresent(.membersAllowedRepositoryCreationType)
+        membersCanCreatePublicRepositories = try container.sdkDecodeIfPresent(.membersCanCreatePublicRepositories)
+        membersCanCreatePrivateRepositories = try container.sdkDecodeIfPresent(.membersCanCreatePrivateRepositories)
+        membersCanCreateInternalRepositories = try container.sdkDecodeIfPresent(.membersCanCreateInternalRepositories)
+        membersCanCreatePages = try container.sdkDecodeIfPresent(.membersCanCreatePages)
+        membersCanCreatePublicPages = try container.sdkDecodeIfPresent(.membersCanCreatePublicPages)
+        membersCanCreatePrivatePages = try container.sdkDecodeIfPresent(.membersCanCreatePrivatePages)
+        membersCanDeleteRepositories = try container.sdkDecodeIfPresent(.membersCanDeleteRepositories)
+        membersCanChangeRepoVisibility = try container.sdkDecodeIfPresent(.membersCanChangeRepoVisibility)
+        membersCanInviteOutsideCollaborators = try container.sdkDecodeIfPresent(.membersCanInviteOutsideCollaborators)
+        membersCanDeleteIssues = try container.sdkDecodeIfPresent(.membersCanDeleteIssues)
+        displayCommenterFullNameSettingEnabled = try container
+            .sdkDecodeIfPresent(.displayCommenterFullNameSettingEnabled)
+        readersCanCreateDiscussions = try container.sdkDecodeIfPresent(.readersCanCreateDiscussions)
+        membersCanCreateTeams = try container.sdkDecodeIfPresent(.membersCanCreateTeams)
+        membersCanViewDependencyInsights = try container.sdkDecodeIfPresent(.membersCanViewDependencyInsights)
+        membersCanForkPrivateRepositories = try container.sdkDecodeIfPresent(.membersCanForkPrivateRepositories)
+        webCommitSignoffRequired = try container.sdkDecodeIfPresent(.webCommitSignoffRequired)
+        advancedSecurityEnabledForNewRepositories = try container
+            .sdkDecodeIfPresent(.advancedSecurityEnabledForNewRepositories)
+        dependabotAlertsEnabledForNewRepositories = try container
+            .sdkDecodeIfPresent(.dependabotAlertsEnabledForNewRepositories)
+        dependabotSecurityUpdatesEnabledForNewRepositories = try container
+            .sdkDecodeIfPresent(.dependabotSecurityUpdatesEnabledForNewRepositories)
+        dependencyGraphEnabledForNewRepositories = try container
+            .sdkDecodeIfPresent(.dependencyGraphEnabledForNewRepositories)
+        secretScanningEnabledForNewRepositories = try container
+            .sdkDecodeIfPresent(.secretScanningEnabledForNewRepositories)
+        secretScanningPushProtectionEnabledForNewRepositories = try container
+            .sdkDecodeIfPresent(.secretScanningPushProtectionEnabledForNewRepositories)
+        secretScanningPushProtectionCustomLinkEnabled = try container
+            .sdkDecodeIfPresent(.secretScanningPushProtectionCustomLinkEnabled)
+        secretScanningPushProtectionCustomLink = try container
+            .sdkDecodeIfPresent(.secretScanningPushProtectionCustomLink)
+        deployKeysEnabledForRepositories = try container.sdkDecodeIfPresent(.deployKeysEnabledForRepositories)
         try sdkValidateConstraints()
     }
 }

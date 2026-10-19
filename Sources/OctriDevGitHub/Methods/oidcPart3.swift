@@ -6,34 +6,85 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension OidcMethods {
-    /// Lists the repository custom properties that are included in the OIDC token for repository actions in an organization. OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
+public extension OidcMethods {
+    /// Lists the repository custom properties that are included in the OIDC token for repository actions in an
+    /// organization. OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this
+    /// endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
-    public static func oidcListOidcCustomPropertyInclusionsForOrg(config: ClientConfig, org: String, requestOptions: RequestOptions? = nil) async throws -> [OidcCustomPropertyInclusion] {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/actions/oidc/customization/properties/repo"].joined(), config: config, decoder: .json, operationId: "oidcListOidcCustomPropertyInclusionsForOrg", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+    static func oidcListOidcCustomPropertyInclusionsForOrg(
+        config: ClientConfig,
+        org: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [OidcCustomPropertyInclusion] {
+        try await (sdkRequest(
+            "GET",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/actions/oidc/customization/properties/repo"]
+                .joined(),
+            config: config,
+            decoder: .json,
+            operationId: "oidcListOidcCustomPropertyInclusionsForOrg",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 
-    /// Adds a repository custom property to be included in the OIDC token for repository actions in an organization. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    /// Adds a repository custom property to be included in the OIDC token for repository actions in an organization.
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - customPropertyName: The name of the custom property to include in the OIDC
     ///   token
-    public static func oidcCreateOidcCustomPropertyInclusionForOrg(config: ClientConfig, org: String, customPropertyName: String, requestOptions: RequestOptions? = nil) async throws -> OidcCustomPropertyInclusion {
+    static func oidcCreateOidcCustomPropertyInclusionForOrg(
+        config: ClientConfig,
+        org: String,
+        customPropertyName: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> OidcCustomPropertyInclusion {
         let requestBody = OidcCreateOidcCustomPropertyInclusionForOrgRequestBody(customPropertyName: customPropertyName)
 
-        return try (await sdkRequest("POST", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/actions/oidc/customization/properties/repo"].joined(), config: config, body: requestBody, decoder: .json, operationId: "oidcCreateOidcCustomPropertyInclusionForOrg", options: requestOptions, errors: ["403": BasicError.self])).data
+        return try await (sdkRequest(
+            "POST",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/actions/oidc/customization/properties/repo"]
+                .joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "oidcCreateOidcCustomPropertyInclusionForOrg",
+            options: requestOptions,
+            errors: ["403": BasicError.self]
+        )).data
     }
 
-    /// Removes a repository custom property from being included in the OIDC token for repository actions in an organization. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    /// Removes a repository custom property from being included in the OIDC token for repository actions in an
+    /// organization. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this
+    /// endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - customPropertyName: The name of the custom property to remove from OIDC
     ///   token inclusion
-    public static func oidcDeleteOidcCustomPropertyInclusionForOrg(config: ClientConfig, org: String, customPropertyName: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/actions/oidc/customization/properties/repo/", sdkEncodePathSegment(sdkWireString(customPropertyName))].joined(), config: config, decoder: .empty, operationId: "oidcDeleteOidcCustomPropertyInclusionForOrg", options: requestOptions, errors: ["403": BasicError.self])).data
+    static func oidcDeleteOidcCustomPropertyInclusionForOrg(
+        config: ClientConfig,
+        org: String,
+        customPropertyName: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            [
+                "/orgs/",
+                sdkEncodePathSegment(sdkWireString(org)),
+                "/actions/oidc/customization/properties/repo/",
+                sdkEncodePathSegment(sdkWireString(customPropertyName)),
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "oidcDeleteOidcCustomPropertyInclusionForOrg",
+            options: requestOptions,
+            errors: ["403": BasicError.self]
+        )).data
     }
 }

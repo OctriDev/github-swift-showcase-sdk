@@ -3,45 +3,129 @@
 
 import Foundation
 
-extension InteractionsNamespace {
-/// Lists the users that are on the pull request creation cap bypass list for a repository. Users on this list can create pull requests regardless of any configured pull request creation cap. Only users with maintainer permissions can view the bypass list.
-    public func getPullRequestBypassListForRepo(owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> [SimpleUser] {
-        return try await InteractionsMethods.interactionsGetPullRequestBypassListForRepo(config: config, owner: owner, repo: repo, requestOptions: requestOptions)
+public extension InteractionsNamespace {
+    /// Lists the users that are on the pull request creation cap bypass list for a repository. Users on this list can
+    /// create pull requests regardless of any configured pull request creation cap. Only users with maintainer
+    /// permissions can view the bypass list.
+    func getPullRequestBypassListForRepo(
+        owner: String,
+        repo: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [SimpleUser] {
+        try await InteractionsMethods.interactionsGetPullRequestBypassListForRepo(
+            config: config,
+            owner: owner,
+            repo: repo,
+            requestOptions: requestOptions
+        )
     }
 
-/// Adds users to the pull request creation cap bypass list for a repository. Users on this list can create pull requests regardless of any configured pull request creation cap. Only users with maintainer permissions can modify the bypass list. You can add a maximum of 100 users per request. The bypass list can only hold a maximum of 100 users.
-    public func setPullRequestBypassListForRepo(owner: String, repo: String, users: [String], requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await InteractionsMethods.interactionsSetPullRequestBypassListForRepo(config: config, owner: owner, repo: repo, users: users, requestOptions: requestOptions)
+    /// Adds users to the pull request creation cap bypass list for a repository. Users on this list can create pull
+    /// requests regardless of any configured pull request creation cap. Only users with maintainer permissions can
+    /// modify the bypass list. You can add a maximum of 100 users per request. The bypass list can only hold a maximum
+    /// of 100 users.
+    func setPullRequestBypassListForRepo(
+        owner: String,
+        repo: String,
+        users: [String],
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await InteractionsMethods.interactionsSetPullRequestBypassListForRepo(
+            config: config,
+            owner: owner,
+            repo: repo,
+            users: users,
+            requestOptions: requestOptions
+        )
     }
 
-/// Removes users from the pull request creation cap bypass list for a repository. Removed users will be subject to any configured pull request creation cap. Only users with maintainer permissions can modify the bypass list. You can remove a maximum of 100 users per request.
-    public func removePullRequestBypassListForRepo(owner: String, repo: String, users: [String], requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await InteractionsMethods.interactionsRemovePullRequestBypassListForRepo(config: config, owner: owner, repo: repo, users: users, requestOptions: requestOptions)
+    /// Removes users from the pull request creation cap bypass list for a repository. Removed users will be subject to
+    /// any configured pull request creation cap. Only users with maintainer permissions can modify the bypass list. You
+    /// can remove a maximum of 100 users per request.
+    func removePullRequestBypassListForRepo(
+        owner: String,
+        repo: String,
+        users: [String],
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await InteractionsMethods.interactionsRemovePullRequestBypassListForRepo(
+            config: config,
+            owner: owner,
+            repo: repo,
+            users: users,
+            requestOptions: requestOptions
+        )
     }
 
-/// Gets the pull request creation cap configuration for a repository. The cap limits the number of open pull requests a user can have at one time. Only users with admin access to the repository can view the cap configuration.
-    public func getPullRequestCreationCapForRepo(owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> InteractionsGetPullRequestCreationCapForRepoResponse {
-        return try await InteractionsMethods.interactionsGetPullRequestCreationCapForRepo(config: config, owner: owner, repo: repo, requestOptions: requestOptions)
+    /// Gets the pull request creation cap configuration for a repository. The cap limits the number of open pull
+    /// requests a user can have at one time. Only users with admin access to the repository can view the cap
+    /// configuration.
+    func getPullRequestCreationCapForRepo(
+        owner: String,
+        repo: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> InteractionsGetPullRequestCreationCapForRepoResponse {
+        try await InteractionsMethods.interactionsGetPullRequestCreationCapForRepo(
+            config: config,
+            owner: owner,
+            repo: repo,
+            requestOptions: requestOptions
+        )
     }
 
-/// Updates the pull request creation cap for a repository. The cap limits the number of open pull requests a user can have at one time. Only users with admin access to the repository can configure the cap.
-    public func updatePullRequestCreationCapForRepo(owner: String, repo: String, enabled: Bool, maxOpenPullRequests: Int? = nil, includeDrafts: Bool? = nil, requestOptions: RequestOptions? = nil) async throws -> InteractionsUpdatePullRequestCreationCapForRepoResponse {
-        return try await InteractionsMethods.interactionsUpdatePullRequestCreationCapForRepo(config: config, owner: owner, repo: repo, enabled: enabled, maxOpenPullRequests: maxOpenPullRequests, includeDrafts: includeDrafts, requestOptions: requestOptions)
+    /// Updates the pull request creation cap for a repository. The cap limits the number of open pull requests a user
+    /// can have at one time. Only users with admin access to the repository can configure the cap.
+    func updatePullRequestCreationCapForRepo(
+        owner: String,
+        repo: String,
+        enabled: Bool,
+        maxOpenPullRequests: Int? = nil,
+        includeDrafts: Bool? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> InteractionsUpdatePullRequestCreationCapForRepoResponse {
+        try await InteractionsMethods.interactionsUpdatePullRequestCreationCapForRepo(
+            config: config,
+            owner: owner,
+            repo: repo,
+            enabled: enabled,
+            maxOpenPullRequests: maxOpenPullRequests,
+            includeDrafts: includeDrafts,
+            requestOptions: requestOptions
+        )
     }
 
-/// Shows which type of GitHub user can interact with your public repositories and when the restriction expires.
-    public func getRestrictionsForAuthenticatedUser(requestOptions: RequestOptions? = nil) async throws -> InteractionsGetRestrictionsForAuthenticatedUserResponse {
-        return try await InteractionsMethods.interactionsGetRestrictionsForAuthenticatedUser(config: config, requestOptions: requestOptions)
+    /// Shows which type of GitHub user can interact with your public repositories and when the restriction expires.
+    func getRestrictionsForAuthenticatedUser(requestOptions: RequestOptions? = nil) async throws
+        -> InteractionsGetRestrictionsForAuthenticatedUserResponse {
+        try await InteractionsMethods.interactionsGetRestrictionsForAuthenticatedUser(
+            config: config,
+            requestOptions: requestOptions
+        )
     }
 
-/// Temporarily restricts which type of GitHub user can interact with your public repositories. Setting the interaction limit at the user level will overwrite any interaction limits that are set for individual repositories owned by the user.
-    public func setRestrictionsForAuthenticatedUser(limit: InteractionGroup, expiry: InteractionExpiry? = nil, requestOptions: RequestOptions? = nil) async throws -> InteractionLimitResponse {
-        return try await InteractionsMethods.interactionsSetRestrictionsForAuthenticatedUser(config: config, limit: limit, expiry: expiry, requestOptions: requestOptions)
+    /// Temporarily restricts which type of GitHub user can interact with your public repositories. Setting the
+    /// interaction limit at the user level will overwrite any interaction limits that are set for individual
+    /// repositories owned by the user.
+    func setRestrictionsForAuthenticatedUser(
+        limit: InteractionGroup,
+        expiry: InteractionExpiry? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> InteractionLimitResponse {
+        try await InteractionsMethods.interactionsSetRestrictionsForAuthenticatedUser(
+            config: config,
+            limit: limit,
+            expiry: expiry,
+            requestOptions: requestOptions
+        )
     }
 
-/// Removes any interaction restrictions from your public repositories.
-    public func removeRestrictionsForAuthenticatedUser(requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await InteractionsMethods.interactionsRemoveRestrictionsForAuthenticatedUser(config: config, requestOptions: requestOptions)
+    /// Removes any interaction restrictions from your public repositories.
+    func removeRestrictionsForAuthenticatedUser(requestOptions: RequestOptions? = nil) async throws
+        -> SdkEmptyResponse {
+        try await InteractionsMethods.interactionsRemoveRestrictionsForAuthenticatedUser(
+            config: config,
+            requestOptions: requestOptions
+        )
     }
 }
 
@@ -51,145 +135,463 @@ public class MigrationsNamespace {
         self.config = config
     }
 
-/// Lists the most recent migrations, including both exports (which can be started through the REST API) and imports (which cannot be started using the REST API). A list of `repositories` is only returned for export migrations.
-    public func listForOrg(org: String, perPage: Int? = nil, page: Int? = nil, exclude: [MigrationsListForOrgParameterItem]? = nil, requestOptions: RequestOptions? = nil) async throws -> [Migration] {
-        return try await MigrationsMethods.migrationsListForOrg(config: config, org: org, perPage: perPage, page: page, exclude: exclude, requestOptions: requestOptions)
+    /// Lists the most recent migrations, including both exports (which can be started through the REST API) and imports
+    /// (which cannot be started using the REST API). A list of `repositories` is only returned for export migrations.
+    public func listForOrg(
+        org: String,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        exclude: [MigrationsListForOrgParameterItem]? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [Migration] {
+        try await MigrationsMethods.migrationsListForOrg(
+            config: config,
+            org: org,
+            perPage: perPage,
+            page: page,
+            exclude: exclude,
+            requestOptions: requestOptions
+        )
     }
 
-/// Starts an organization migration to generate a migration archive. Supply `repositories` to select the repositories to include; the other boolean options default to false when omitted. Set `org_metadata_only` to true and provide an empty `repositories` list to include only organization metadata; a 201 response returns the migration record.
+    /// Starts an organization migration to generate a migration archive. Supply `repositories` to select the
+    /// repositories to include; the other boolean options default to false when omitted. Set `org_metadata_only` to
+    /// true and provide an empty `repositories` list to include only organization metadata; a 201 response returns the
+    /// migration record.
     ///
     /// Initiates the generation of a migration archive.
-    public func startForOrg(options: MigrationsMethods.MigrationsStartForOrgOptions, requestOptions: RequestOptions? = nil) async throws -> Migration {
-        return try await MigrationsMethods.migrationsStartForOrg(config: config, options: options, requestOptions: requestOptions)
+    public func startForOrg(
+        options: MigrationsMethods.MigrationsStartForOrgOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Migration {
+        try await MigrationsMethods.migrationsStartForOrg(
+            config: config,
+            options: options,
+            requestOptions: requestOptions
+        )
     }
 
-/// Fetches the status of a migration. The `state` of a migration can be one of the following values: * `pending`, which means the migration hasn't started yet. * `exporting`, which means the migration is in progress. * `exported`, which means the migration finished successfully. * `failed`, which means the migration failed.
-    public func getStatusForOrg(org: String, migrationId: Int, exclude: [MigrationsGetStatusForOrgParameterItem]? = nil, requestOptions: RequestOptions? = nil) async throws -> Migration {
-        return try await MigrationsMethods.migrationsGetStatusForOrg(config: config, org: org, migrationId: migrationId, exclude: exclude, requestOptions: requestOptions)
+    /// Fetches the status of a migration. The `state` of a migration can be one of the following values: * `pending`,
+    /// which means the migration hasn't started yet. * `exporting`, which means the migration is in progress. *
+    /// `exported`, which means the migration finished successfully. * `failed`, which means the migration failed.
+    public func getStatusForOrg(
+        org: String,
+        migrationId: Int,
+        exclude: [MigrationsGetStatusForOrgParameterItem]? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Migration {
+        try await MigrationsMethods.migrationsGetStatusForOrg(
+            config: config,
+            org: org,
+            migrationId: migrationId,
+            exclude: exclude,
+            requestOptions: requestOptions
+        )
     }
 
-/// Retrieves the download URL for an organization's migration archive. Identify the migration with `org` and `migration_id`; the response redirects to the archive URL.
+    /// Retrieves the download URL for an organization's migration archive. Identify the migration with `org` and
+    /// `migration_id`; the response redirects to the archive URL.
     ///
     /// Fetches the URL to a migration archive.
-    public func downloadArchiveForOrg(org: String, migrationId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await MigrationsMethods.migrationsDownloadArchiveForOrg(config: config, org: org, migrationId: migrationId, requestOptions: requestOptions)
+    public func downloadArchiveForOrg(
+        org: String,
+        migrationId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await MigrationsMethods.migrationsDownloadArchiveForOrg(
+            config: config,
+            org: org,
+            migrationId: migrationId,
+            requestOptions: requestOptions
+        )
     }
 
-/// Deletes a previous migration archive. Migration archives are automatically deleted after seven days.
-    public func deleteArchiveForOrg(org: String, migrationId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await MigrationsMethods.migrationsDeleteArchiveForOrg(config: config, org: org, migrationId: migrationId, requestOptions: requestOptions)
+    /// Deletes a previous migration archive. Migration archives are automatically deleted after seven days.
+    public func deleteArchiveForOrg(
+        org: String,
+        migrationId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await MigrationsMethods.migrationsDeleteArchiveForOrg(
+            config: config,
+            org: org,
+            migrationId: migrationId,
+            requestOptions: requestOptions
+        )
     }
 
-/// Unlocks a repository that was locked for migration. You should unlock each migrated repository and [delete them](https://docs.github.com/rest/repos/repos#delete-a-repository) when the migration is complete and you no longer need the source data.
-    public func unlockRepoForOrg(org: String, migrationId: Int, repoName: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await MigrationsMethods.migrationsUnlockRepoForOrg(config: config, org: org, migrationId: migrationId, repoName: repoName, requestOptions: requestOptions)
+    /// Unlocks a repository that was locked for migration. You should unlock each migrated repository and [delete
+    /// them](https://docs.github.com/rest/repos/repos#delete-a-repository) when the migration is complete and you no
+    /// longer need the source data.
+    public func unlockRepoForOrg(
+        org: String,
+        migrationId: Int,
+        repoName: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await MigrationsMethods.migrationsUnlockRepoForOrg(
+            config: config,
+            org: org,
+            migrationId: migrationId,
+            repoName: repoName,
+            requestOptions: requestOptions
+        )
     }
 
-/// List all the repositories for this organization migration.
-    public func listReposForOrg(org: String, migrationId: Int, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [MinimalRepository] {
-        return try await MigrationsMethods.migrationsListReposForOrg(config: config, org: org, migrationId: migrationId, perPage: perPage, page: page, requestOptions: requestOptions)
+    /// List all the repositories for this organization migration.
+    public func listReposForOrg(
+        org: String,
+        migrationId: Int,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [MinimalRepository] {
+        try await MigrationsMethods.migrationsListReposForOrg(
+            config: config,
+            org: org,
+            migrationId: migrationId,
+            perPage: perPage,
+            page: page,
+            requestOptions: requestOptions
+        )
     }
 
-/// View the progress of an import. > [!WARNING] > **Endpoint closing down notice:** Due to very low levels of usage and available alternatives, this endpoint is closing down and will no longer be available from 00:00 UTC on April 12, 2024. For more details and alternatives, see the [changelog](https://gh.io/source-imports-api-deprecation). **Import status** This section includes details about the possible values of the `status` field of the Import Progress response. An import that does not have errors will progress through these steps: * `detecting` - the "detection" step of the import is in progress because the request did not include a `vcs` parameter. The import is identifying the type of source control present at the URL. * `importing` - the "raw" step of the import is in progress. This is where commit data is fetched from the original repository. The import progress response will include `commit_count` (the total number of raw commits that will be imported) and `percent` (0 - 100, the current progress through the import). * `mapping` - the "rewrite" step of the import is in progress. This is where SVN branches are converted to Git branches, and where author updates are applied. The import progress response does not include progress information. * `pushing` - the "push" step of the import is in progress. This is where the importer updates the repository on GitHub. The import progress response will include `push_percent`, which is the percent value reported by `git push` when it is "Writing objects". * `complete` - the import is complete, and the repository is ready on GitHub. If there are problems, you will see one of these in the `status` field: * `auth_failed` - the import requires authentication in order to connect to the original repository. To update authentication for the import, please see the [Update an import](https://docs.github.com/rest/migrations/source-imports#update-an-import) section. * `error` - the import encountered an error. The import progress…
+    /// View the progress of an import. > [!WARNING] > **Endpoint closing down notice:** Due to very low levels of usage
+    /// and available alternatives, this endpoint is closing down and will no longer be available from 00:00 UTC on
+    /// April 12, 2024. For more details and alternatives, see the
+    /// [changelog](https://gh.io/source-imports-api-deprecation). **Import status** This section includes details about
+    /// the possible values of the `status` field of the Import Progress response. An import that does not have errors
+    /// will progress through these steps: * `detecting` - the "detection" step of the import is in progress because the
+    /// request did not include a `vcs` parameter. The import is identifying the type of source control present at the
+    /// URL. * `importing` - the "raw" step of the import is in progress. This is where commit data is fetched from the
+    /// original repository. The import progress response will include `commit_count` (the total number of raw commits
+    /// that will be imported) and `percent` (0 - 100, the current progress through the import). * `mapping` - the
+    /// "rewrite" step of the import is in progress. This is where SVN branches are converted to Git branches, and where
+    /// author updates are applied. The import progress response does not include progress information. * `pushing` -
+    /// the "push" step of the import is in progress. This is where the importer updates the repository on GitHub. The
+    /// import progress response will include `push_percent`, which is the percent value reported by `git push` when it
+    /// is "Writing objects". * `complete` - the import is complete, and the repository is ready on GitHub. If there are
+    /// problems, you will see one of these in the `status` field: * `auth_failed` - the import requires authentication
+    /// in order to connect to the original repository. To update authentication for the import, please see the [Update
+    /// an import](https://docs.github.com/rest/migrations/source-imports#update-an-import) section. * `error` - the
+    /// import encountered an error. The import progress…
     ///
     /// - Warning: This operation is deprecated and may be removed in a future release.
-    public func getImportStatus(owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> Import {
-        return try await MigrationsMethods.migrationsGetImportStatus(config: config, owner: owner, repo: repo, requestOptions: requestOptions)
+    public func getImportStatus(
+        owner: String,
+        repo: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Import {
+        try await MigrationsMethods.migrationsGetImportStatus(
+            config: config,
+            owner: owner,
+            repo: repo,
+            requestOptions: requestOptions
+        )
     }
 }
 
-extension MigrationsNamespace {
-/// Start a source import to a GitHub repository using GitHub Importer. Importing into a GitHub repository with GitHub Actions enabled is not supported and will return a status `422 Unprocessable Entity` response. > [!WARNING] > **Endpoint closing down notice:** Due to very low levels of usage and available alternatives, this endpoint is closing down and will no longer be available from 00:00 UTC on April 12, 2024. For more details and alternatives, see the [changelog](https://gh.io/source-imports-api-deprecation).
+public extension MigrationsNamespace {
+    /// Start a source import to a GitHub repository using GitHub Importer. Importing into a GitHub repository with
+    /// GitHub Actions enabled is not supported and will return a status `422 Unprocessable Entity` response. >
+    /// [!WARNING] > **Endpoint closing down notice:** Due to very low levels of usage and available alternatives, this
+    /// endpoint is closing down and will no longer be available from 00:00 UTC on April 12, 2024. For more details and
+    /// alternatives, see the [changelog](https://gh.io/source-imports-api-deprecation).
     ///
     /// - Warning: This operation is deprecated and may be removed in a future release.
-    public func startImport(owner: String, repo: String, vcsUrl: String, vcs: MigrationsStartImportRequestBodyVcs? = nil, vcsUsername: String? = nil, vcsPassword: String? = nil, tfvcProject: String? = nil, requestOptions: RequestOptions? = nil) async throws -> Import {
-        return try await MigrationsMethods.migrationsStartImport(config: config, owner: owner, repo: repo, vcsUrl: vcsUrl, vcs: vcs, vcsUsername: vcsUsername, vcsPassword: vcsPassword, tfvcProject: tfvcProject, requestOptions: requestOptions)
+    func startImport(
+        owner: String,
+        repo: String,
+        vcsUrl: String,
+        vcs: MigrationsStartImportRequestBodyVcs? = nil,
+        vcsUsername: String? = nil,
+        vcsPassword: String? = nil,
+        tfvcProject: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Import {
+        try await MigrationsMethods.migrationsStartImport(
+            config: config,
+            owner: owner,
+            repo: repo,
+            vcsUrl: vcsUrl,
+            vcs: vcs,
+            vcsUsername: vcsUsername,
+            vcsPassword: vcsPassword,
+            tfvcProject: tfvcProject,
+            requestOptions: requestOptions
+        )
     }
 
-/// An import can be updated with credentials or a project choice by passing in the appropriate parameters in this API request. If no parameters are provided, the import will be restarted. Some servers (e.g. TFS servers) can have several projects at a single URL. In those cases the import progress will have the status `detection_found_multiple` and the Import Progress response will include a `project_choices` array. You can select the project to import by providing one of the objects in the `project_choices` array in the update request. > [!WARNING] > **Endpoint closing down notice:** Due to very low levels of usage and available alternatives, this endpoint is closing down and will no longer be available from 00:00 UTC on April 12, 2024. For more details and alternatives, see the [changelog](https://gh.io/source-imports-api-deprecation).
+    /// An import can be updated with credentials or a project choice by passing in the appropriate parameters in this
+    /// API request. If no parameters are provided, the import will be restarted. Some servers (e.g. TFS servers) can
+    /// have several projects at a single URL. In those cases the import progress will have the status
+    /// `detection_found_multiple` and the Import Progress response will include a `project_choices` array. You can
+    /// select the project to import by providing one of the objects in the `project_choices` array in the update
+    /// request. > [!WARNING] > **Endpoint closing down notice:** Due to very low levels of usage and available
+    /// alternatives, this endpoint is closing down and will no longer be available from 00:00 UTC on April 12, 2024.
+    /// For more details and alternatives, see the [changelog](https://gh.io/source-imports-api-deprecation).
     ///
     /// - Warning: This operation is deprecated and may be removed in a future release.
-    public func updateImport(owner: String, repo: String, vcsUsername: String? = nil, vcsPassword: String? = nil, vcs: MigrationsUpdateImportRequestBodyVcs? = nil, tfvcProject: String? = nil, requestOptions: RequestOptions? = nil) async throws -> Import {
-        return try await MigrationsMethods.migrationsUpdateImport(config: config, owner: owner, repo: repo, vcsUsername: vcsUsername, vcsPassword: vcsPassword, vcs: vcs, tfvcProject: tfvcProject, requestOptions: requestOptions)
+    func updateImport(
+        owner: String,
+        repo: String,
+        vcsUsername: String? = nil,
+        vcsPassword: String? = nil,
+        vcs: MigrationsUpdateImportRequestBodyVcs? = nil,
+        tfvcProject: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Import {
+        try await MigrationsMethods.migrationsUpdateImport(
+            config: config,
+            owner: owner,
+            repo: repo,
+            vcsUsername: vcsUsername,
+            vcsPassword: vcsPassword,
+            vcs: vcs,
+            tfvcProject: tfvcProject,
+            requestOptions: requestOptions
+        )
     }
 
-/// Stop an import for a repository. > [!WARNING] > **Endpoint closing down notice:** Due to very low levels of usage and available alternatives, this endpoint is closing down and will no longer be available from 00:00 UTC on April 12, 2024. For more details and alternatives, see the [changelog](https://gh.io/source-imports-api-deprecation).
+    /// Stop an import for a repository. > [!WARNING] > **Endpoint closing down notice:** Due to very low levels of
+    /// usage and available alternatives, this endpoint is closing down and will no longer be available from 00:00 UTC
+    /// on April 12, 2024. For more details and alternatives, see the
+    /// [changelog](https://gh.io/source-imports-api-deprecation).
     ///
     /// - Warning: This operation is deprecated and may be removed in a future release.
-    public func cancelImport(owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await MigrationsMethods.migrationsCancelImport(config: config, owner: owner, repo: repo, requestOptions: requestOptions)
+    func cancelImport(
+        owner: String,
+        repo: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await MigrationsMethods.migrationsCancelImport(
+            config: config,
+            owner: owner,
+            repo: repo,
+            requestOptions: requestOptions
+        )
     }
 
-/// Each type of source control system represents authors in a different way. For example, a Git commit author has a display name and an email address, but a Subversion commit author just has a username. The GitHub Importer will make the author information valid, but the author might not be correct. For example, it will change the bare Subversion username `hubot` into something like `hubot <hubot@12341234-abab-fefe-8787-fedcba987654>`. This endpoint and the [Map a commit author](https://docs.github.com/rest/migrations/source-imports#map-a-commit-author) endpoint allow you to provide correct Git author information. > [!WARNING] > **Endpoint closing down notice:** Due to very low levels of usage and available alternatives, this endpoint is closing down and will no longer be available from 00:00 UTC on April 12, 2024. For more details and alternatives, see the [changelog](https://gh.io/source-imports-api-deprecation).
+    /// Each type of source control system represents authors in a different way. For example, a Git commit author has a
+    /// display name and an email address, but a Subversion commit author just has a username. The GitHub Importer will
+    /// make the author information valid, but the author might not be correct. For example, it will change the bare
+    /// Subversion username `hubot` into something like `hubot <hubot@12341234-abab-fefe-8787-fedcba987654>`. This
+    /// endpoint and the [Map a commit
+    /// author](https://docs.github.com/rest/migrations/source-imports#map-a-commit-author) endpoint allow you to
+    /// provide correct Git author information. > [!WARNING] > **Endpoint closing down notice:** Due to very low levels
+    /// of usage and available alternatives, this endpoint is closing down and will no longer be available from 00:00
+    /// UTC on April 12, 2024. For more details and alternatives, see the
+    /// [changelog](https://gh.io/source-imports-api-deprecation).
     ///
     /// - Warning: This operation is deprecated and may be removed in a future release.
-    public func getCommitAuthors(owner: String, repo: String, since: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [PorterAuthor] {
-        return try await MigrationsMethods.migrationsGetCommitAuthors(config: config, owner: owner, repo: repo, since: since, requestOptions: requestOptions)
+    func getCommitAuthors(
+        owner: String,
+        repo: String,
+        since: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [PorterAuthor] {
+        try await MigrationsMethods.migrationsGetCommitAuthors(
+            config: config,
+            owner: owner,
+            repo: repo,
+            since: since,
+            requestOptions: requestOptions
+        )
     }
 
-/// Updates the Git identity mapped to a commit author in an imported repository. Use `email` and `name` to change the author's identity before pushing new commits. This operation is closing down and will be removed on April 12, 2024.
+    /// Updates the Git identity mapped to a commit author in an imported repository. Use `email` and `name` to change
+    /// the author's identity before pushing new commits. This operation is closing down and will be removed on April
+    /// 12, 2024.
     ///
-    /// Update an author's identity for the import. Your application can continue updating authors any time before you push new commits to the repository. > [!WARNING] > **Endpoint closing down notice:** Due to very low levels of usage and available alternatives, this endpoint is closing down and will no longer be available from 00:00 UTC on April 12, 2024. For more details and alternatives, see the [changelog](https://gh.io/source-imports-api-deprecation).
+    /// Update an author's identity for the import. Your application can continue updating authors any time before you
+    /// push new commits to the repository. > [!WARNING] > **Endpoint closing down notice:** Due to very low levels of
+    /// usage and available alternatives, this endpoint is closing down and will no longer be available from 00:00 UTC
+    /// on April 12, 2024. For more details and alternatives, see the
+    /// [changelog](https://gh.io/source-imports-api-deprecation).
     ///
     /// - Warning: This operation is deprecated and may be removed in a future release.
-    public func mapCommitAuthor(owner: String, repo: String, authorId: Int, email: String? = nil, name: String? = nil, requestOptions: RequestOptions? = nil) async throws -> PorterAuthor {
-        return try await MigrationsMethods.migrationsMapCommitAuthor(config: config, owner: owner, repo: repo, authorId: authorId, email: email, name: name, requestOptions: requestOptions)
+    func mapCommitAuthor(
+        owner: String,
+        repo: String,
+        authorId: Int,
+        email: String? = nil,
+        name: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> PorterAuthor {
+        try await MigrationsMethods.migrationsMapCommitAuthor(
+            config: config,
+            owner: owner,
+            repo: repo,
+            authorId: authorId,
+            email: email,
+            name: name,
+            requestOptions: requestOptions
+        )
     }
 
-/// List files larger than 100MB found during the import > [!WARNING] > **Endpoint closing down notice:** Due to very low levels of usage and available alternatives, this endpoint is closing down and will no longer be available from 00:00 UTC on April 12, 2024. For more details and alternatives, see the [changelog](https://gh.io/source-imports-api-deprecation).
+    /// List files larger than 100MB found during the import > [!WARNING] > **Endpoint closing down notice:** Due to
+    /// very low levels of usage and available alternatives, this endpoint is closing down and will no longer be
+    /// available from 00:00 UTC on April 12, 2024. For more details and alternatives, see the
+    /// [changelog](https://gh.io/source-imports-api-deprecation).
     ///
     /// - Warning: This operation is deprecated and may be removed in a future release.
-    public func getLargeFiles(owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> [PorterLargeFile] {
-        return try await MigrationsMethods.migrationsGetLargeFiles(config: config, owner: owner, repo: repo, requestOptions: requestOptions)
+    func getLargeFiles(
+        owner: String,
+        repo: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [PorterLargeFile] {
+        try await MigrationsMethods.migrationsGetLargeFiles(
+            config: config,
+            owner: owner,
+            repo: repo,
+            requestOptions: requestOptions
+        )
     }
 
-/// You can import repositories from Subversion, Mercurial, and TFS that include files larger than 100MB. This ability is powered by [Git LFS](https://git-lfs.com). You can learn more about our LFS feature and working with large files [on our help site](https://docs.github.com/repositories/working-with-files/managing-large-files). > [!WARNING] > **Endpoint closing down notice:** Due to very low levels of usage and available alternatives, this endpoint is closing down and will no longer be available from 00:00 UTC on April 12, 2024. For more details and alternatives, see the [changelog](https://gh.io/source-imports-api-deprecation).
+    /// You can import repositories from Subversion, Mercurial, and TFS that include files larger than 100MB. This
+    /// ability is powered by [Git LFS](https://git-lfs.com). You can learn more about our LFS feature and working with
+    /// large files [on our help site](https://docs.github.com/repositories/working-with-files/managing-large-files). >
+    /// [!WARNING] > **Endpoint closing down notice:** Due to very low levels of usage and available alternatives, this
+    /// endpoint is closing down and will no longer be available from 00:00 UTC on April 12, 2024. For more details and
+    /// alternatives, see the [changelog](https://gh.io/source-imports-api-deprecation).
     ///
     /// - Warning: This operation is deprecated and may be removed in a future release.
-    public func setLfsPreference(owner: String, repo: String, useLfs: MigrationsSetLfsPreferenceRequestBodyUseLfs, requestOptions: RequestOptions? = nil) async throws -> Import {
-        return try await MigrationsMethods.migrationsSetLfsPreference(config: config, owner: owner, repo: repo, useLfs: useLfs, requestOptions: requestOptions)
+    func setLfsPreference(
+        owner: String,
+        repo: String,
+        useLfs: MigrationsSetLfsPreferenceRequestBodyUseLfs,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Import {
+        try await MigrationsMethods.migrationsSetLfsPreference(
+            config: config,
+            owner: owner,
+            repo: repo,
+            useLfs: useLfs,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists migrations started by the authenticated user, including their state and repository details when available. Use `page` and `per_page` to paginate the results; `per_page` defaults to 30 and is capped at 100.
+    /// Lists migrations started by the authenticated user, including their state and repository details when available.
+    /// Use `page` and `per_page` to paginate the results; `per_page` defaults to 30 and is capped at 100.
     ///
     /// Lists all migrations a user has started.
-    public func listForAuthenticatedUser(perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [Migration] {
-        return try await MigrationsMethods.migrationsListForAuthenticatedUser(config: config, perPage: perPage, page: page, requestOptions: requestOptions)
+    func listForAuthenticatedUser(
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [Migration] {
+        try await MigrationsMethods.migrationsListForAuthenticatedUser(
+            config: config,
+            perPage: perPage,
+            page: page,
+            requestOptions: requestOptions
+        )
     }
 }
 
-extension MigrationsNamespace {
-/// Starts a migration for the authenticated user using the specified repositories. Set `org_metadata_only` to true to include only organization metadata; in this mode, `repositories` must be empty and other flags are ignored. A 201 response returns the created migration record.
+public extension MigrationsNamespace {
+    /// Starts a migration for the authenticated user using the specified repositories. Set `org_metadata_only` to true
+    /// to include only organization metadata; in this mode, `repositories` must be empty and other flags are ignored. A
+    /// 201 response returns the created migration record.
     ///
     /// Initiates the generation of a user migration archive.
-    public func startForAuthenticatedUser(options: MigrationsMethods.MigrationsStartForAuthenticatedUserOptions, requestOptions: RequestOptions? = nil) async throws -> Migration {
-        return try await MigrationsMethods.migrationsStartForAuthenticatedUser(config: config, options: options, requestOptions: requestOptions)
+    func startForAuthenticatedUser(
+        options: MigrationsMethods.MigrationsStartForAuthenticatedUserOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Migration {
+        try await MigrationsMethods.migrationsStartForAuthenticatedUser(
+            config: config,
+            options: options,
+            requestOptions: requestOptions
+        )
     }
 
-/// Retrieves the status and details of a user migration. Use `migration_id` to identify the migration, and check `state` to see whether it is pending, exporting, exported, or failed. Once the migration is exported, download its archive using the user migration archive endpoint.
+    /// Retrieves the status and details of a user migration. Use `migration_id` to identify the migration, and check
+    /// `state` to see whether it is pending, exporting, exported, or failed. Once the migration is exported, download
+    /// its archive using the user migration archive endpoint.
     ///
-    /// Fetches a single user migration. The response includes the `state` of the migration, which can be one of the following values: * `pending` - the migration hasn't started yet. * `exporting` - the migration is in progress. * `exported` - the migration finished successfully. * `failed` - the migration failed. Once the migration has been `exported` you can [download the migration archive](https://docs.github.com/rest/migrations/users#download-a-user-migration-archive).
-    public func getStatusForAuthenticatedUser(migrationId: Int, exclude: [String]? = nil, requestOptions: RequestOptions? = nil) async throws -> Migration {
-        return try await MigrationsMethods.migrationsGetStatusForAuthenticatedUser(config: config, migrationId: migrationId, exclude: exclude, requestOptions: requestOptions)
+    /// Fetches a single user migration. The response includes the `state` of the migration, which can be one of the
+    /// following values: * `pending` - the migration hasn't started yet. * `exporting` - the migration is in progress.
+    /// * `exported` - the migration finished successfully. * `failed` - the migration failed. Once the migration has
+    /// been `exported` you can [download the migration
+    /// archive](https://docs.github.com/rest/migrations/users#download-a-user-migration-archive).
+    func getStatusForAuthenticatedUser(
+        migrationId: Int,
+        exclude: [String]? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Migration {
+        try await MigrationsMethods.migrationsGetStatusForAuthenticatedUser(
+            config: config,
+            migrationId: migrationId,
+            exclude: exclude,
+            requestOptions: requestOptions
+        )
     }
 
-/// Fetches the URL to download the migration archive as a `tar.gz` file. Depending on the resources your repository uses, the migration archive can contain JSON files with data for these objects: * attachments * bases * commit\_comments * issue\_comments * issue\_events * issues * milestones * organizations * projects * protected\_branches * pull\_request\_reviews * pull\_requests * releases * repositories * review\_comments * schema * users The archive will also contain an `attachments` directory that includes all attachment files uploaded to GitHub.com and a `repositories` directory that contains the repository's Git data.
-    public func getArchiveForAuthenticatedUser(migrationId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await MigrationsMethods.migrationsGetArchiveForAuthenticatedUser(config: config, migrationId: migrationId, requestOptions: requestOptions)
+    /// Fetches the URL to download the migration archive as a `tar.gz` file. Depending on the resources your repository
+    /// uses, the migration archive can contain JSON files with data for these objects: * attachments * bases *
+    /// commit\_comments * issue\_comments * issue\_events * issues * milestones * organizations * projects *
+    /// protected\_branches * pull\_request\_reviews * pull\_requests * releases * repositories * review\_comments *
+    /// schema * users The archive will also contain an `attachments` directory that includes all attachment files
+    /// uploaded to GitHub.com and a `repositories` directory that contains the repository's Git data.
+    func getArchiveForAuthenticatedUser(
+        migrationId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await MigrationsMethods.migrationsGetArchiveForAuthenticatedUser(
+            config: config,
+            migrationId: migrationId,
+            requestOptions: requestOptions
+        )
     }
 
-/// Deletes a previous migration archive. Downloadable migration archives are automatically deleted after seven days. Migration metadata, which is returned in the [List user migrations](https://docs.github.com/rest/migrations/users#list-user-migrations) and [Get a user migration status](https://docs.github.com/rest/migrations/users#get-a-user-migration-status) endpoints, will continue to be available even after an archive is deleted.
-    public func deleteArchiveForAuthenticatedUser(migrationId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await MigrationsMethods.migrationsDeleteArchiveForAuthenticatedUser(config: config, migrationId: migrationId, requestOptions: requestOptions)
+    /// Deletes a previous migration archive. Downloadable migration archives are automatically deleted after seven
+    /// days. Migration metadata, which is returned in the [List user
+    /// migrations](https://docs.github.com/rest/migrations/users#list-user-migrations) and [Get a user migration
+    /// status](https://docs.github.com/rest/migrations/users#get-a-user-migration-status) endpoints, will continue to
+    /// be available even after an archive is deleted.
+    func deleteArchiveForAuthenticatedUser(
+        migrationId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await MigrationsMethods.migrationsDeleteArchiveForAuthenticatedUser(
+            config: config,
+            migrationId: migrationId,
+            requestOptions: requestOptions
+        )
     }
 
-/// Unlocks a repository. You can lock repositories when you [start a user migration](https://docs.github.com/rest/migrations/users#start-a-user-migration). Once the migration is complete you can unlock each repository to begin using it again or [delete the repository](https://docs.github.com/rest/repos/repos#delete-a-repository) if you no longer need the source data. Returns a status of `404 Not Found` if the repository is not locked.
-    public func unlockRepoForAuthenticatedUser(migrationId: Int, repoName: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await MigrationsMethods.migrationsUnlockRepoForAuthenticatedUser(config: config, migrationId: migrationId, repoName: repoName, requestOptions: requestOptions)
+    /// Unlocks a repository. You can lock repositories when you [start a user
+    /// migration](https://docs.github.com/rest/migrations/users#start-a-user-migration). Once the migration is complete
+    /// you can unlock each repository to begin using it again or [delete the
+    /// repository](https://docs.github.com/rest/repos/repos#delete-a-repository) if you no longer need the source data.
+    /// Returns a status of `404 Not Found` if the repository is not locked.
+    func unlockRepoForAuthenticatedUser(
+        migrationId: Int,
+        repoName: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await MigrationsMethods.migrationsUnlockRepoForAuthenticatedUser(
+            config: config,
+            migrationId: migrationId,
+            repoName: repoName,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists all the repositories for this user migration.
-    public func listReposForAuthenticatedUser(migrationId: Int, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [MinimalRepository] {
-        return try await MigrationsMethods.migrationsListReposForAuthenticatedUser(config: config, migrationId: migrationId, perPage: perPage, page: page, requestOptions: requestOptions)
+    /// Lists all the repositories for this user migration.
+    func listReposForAuthenticatedUser(
+        migrationId: Int,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [MinimalRepository] {
+        try await MigrationsMethods.migrationsListReposForAuthenticatedUser(
+            config: config,
+            migrationId: migrationId,
+            perPage: perPage,
+            page: page,
+            requestOptions: requestOptions
+        )
     }
 }

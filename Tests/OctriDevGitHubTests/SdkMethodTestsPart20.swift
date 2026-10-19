@@ -6,7 +6,8 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testBillingGetGithubBillingUsageSummaryReportUserBillingGetGithubX3edba4ba33ReachesMockAndDecodesResponse() async throws {
+    func testBillingGetGithubBillingUsageSummaryReportUserBillingGetGithubX3edba4ba33ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
             return
         }
@@ -17,14 +18,14 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.billing.getGithubBillingUsageSummaryReportUser(
-            username: decoded("\"Example Name\""),
-            year: decoded("1"),
-            month: decoded("1"),
-            day: decoded("1"),
-            repository: decoded("\"repository\""),
-            product: decoded("\"product\""),
-            sku: decoded("\"sku\"")
-        )
+                username: decoded("\"Example Name\""),
+                year: decoded("1"),
+                month: decoded("1"),
+                day: decoded("1"),
+                repository: decoded("\"repository\""),
+                product: decoded("\"product\""),
+                sku: decoded("\"sku\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -74,13 +75,13 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.billing.updateBudgetOrg(
-            org: decoded("\"org\""),
-            budgetId: decoded("\"budget-1\""),
-            budgetAmount: decoded("10"),
-            preventFurtherUsage: decoded("false"),
-            budgetAlerting: decoded("{\"will_alert\":false,\"alert_recipients\":[]}"),
-            expiresAt: decoded("null")
-        )
+                org: decoded("\"org\""),
+                budgetId: decoded("\"budget-1\""),
+                budgetAmount: decoded("10"),
+                preventFurtherUsage: decoded("false"),
+                budgetAlerting: decoded("{\"will_alert\":false,\"alert_recipients\":[]}"),
+                expiresAt: decoded("null")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -101,7 +102,12 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try CampaignsMethods.CampaignsCreateCampaignOptions(org: decoded("\"org\""), name: decoded("\"Critical CodeQL alerts\""), description: decoded(sdkMethodFixture460Value1), endsAt: decoded("\"2024-03-14T00:00:00Z\""))
+        var options = try CampaignsMethods.CampaignsCreateCampaignOptions(
+            org: decoded("\"org\""),
+            name: decoded("\"Critical CodeQL alerts\""),
+            description: decoded(sdkMethodFixture460Value1),
+            endsAt: decoded("\"2024-03-14T00:00:00Z\"")
+        )
         options.managers = try decoded("[\"octocat\"]")
         options.teamManagers = try decoded("null")
         options.contactLink = try decoded("null")
@@ -109,8 +115,8 @@ extension SdkMethodTests {
         options.generateIssues = try decoded("null")
         do {
             _ = try await client.campaigns.createCampaign(
-            options: options
-        )
+                options: options
+            )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -124,7 +130,12 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try CampaignsMethods.CampaignsCreateCampaignOptions(org: decoded("\"org\""), name: decoded("\"Critical CodeQL alerts\""), description: decoded(sdkMethodFixture461Value1), endsAt: decoded("\"2024-03-14T00:00:00Z\""))
+        var options = try CampaignsMethods.CampaignsCreateCampaignOptions(
+            org: decoded("\"org\""),
+            name: decoded("\"Critical CodeQL alerts\""),
+            description: decoded(sdkMethodFixture461Value1),
+            endsAt: decoded("\"2024-03-14T00:00:00Z\"")
+        )
         options.managers = try decoded("[\"octocat\"]")
         options.teamManagers = try decoded("null")
         options.contactLink = try decoded("null")
@@ -136,8 +147,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.campaigns.createCampaign(
-            options: options
-        )
+                options: options
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -176,9 +187,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.campaigns.deleteCampaign(
-            org: decoded("\"org\""),
-            campaignNumber: decoded("1")
-        )
+                org: decoded("\"org\""),
+                campaignNumber: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -201,9 +212,9 @@ extension SdkMethodTests {
         _ = client
         do {
             _ = try await client.campaigns.getCampaignSummary(
-            org: decoded("\"org\""),
-            campaignNumber: decoded("1")
-        )
+                org: decoded("\"org\""),
+                campaignNumber: decoded("1")
+            )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -223,9 +234,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.campaigns.getCampaignSummary(
-            org: decoded("\"org\""),
-            campaignNumber: decoded("1")
-        )
+                org: decoded("\"org\""),
+                campaignNumber: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -248,13 +259,13 @@ extension SdkMethodTests {
         _ = client
         do {
             _ = try await client.campaigns.listOrgCampaigns(
-            org: decoded("\"org\""),
-            page: decoded("1"),
-            perPage: decoded("30"),
-            direction: decoded("\"desc\""),
-            state: decoded("\"open\""),
-            sort: decoded("\"created\"")
-        )
+                org: decoded("\"org\""),
+                page: decoded("1"),
+                perPage: decoded("30"),
+                direction: decoded("\"desc\""),
+                state: decoded("\"open\""),
+                sort: decoded("\"created\"")
+            )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -274,13 +285,13 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.campaigns.listOrgCampaigns(
-            org: decoded("\"org\""),
-            page: decoded("1"),
-            perPage: decoded("30"),
-            direction: decoded("\"desc\""),
-            state: decoded("\"open\""),
-            sort: decoded("\"created\"")
-        )
+                org: decoded("\"org\""),
+                page: decoded("1"),
+                perPage: decoded("30"),
+                direction: decoded("\"desc\""),
+                state: decoded("\"open\""),
+                sort: decoded("\"created\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -301,7 +312,10 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try CampaignsMethods.CampaignsUpdateCampaignOptions(org: decoded("\"org\""), campaignNumber: decoded("1"))
+        var options = try CampaignsMethods.CampaignsUpdateCampaignOptions(
+            org: decoded("\"org\""),
+            campaignNumber: decoded("1")
+        )
         options.name = try decoded("\"Critical CodeQL alerts\"")
         options.description = try decoded("null")
         options.managers = try decoded("null")
@@ -311,8 +325,8 @@ extension SdkMethodTests {
         options.state = try decoded("null")
         do {
             _ = try await client.campaigns.updateCampaign(
-            options: options
-        )
+                options: options
+            )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -326,7 +340,10 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try CampaignsMethods.CampaignsUpdateCampaignOptions(org: decoded("\"org\""), campaignNumber: decoded("1"))
+        var options = try CampaignsMethods.CampaignsUpdateCampaignOptions(
+            org: decoded("\"org\""),
+            campaignNumber: decoded("1")
+        )
         options.name = try decoded("\"Critical CodeQL alerts\"")
         options.description = try decoded("null")
         options.managers = try decoded("null")
@@ -340,8 +357,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.campaigns.updateCampaign(
-            options: options
-        )
+                options: options
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -362,7 +379,12 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try ChecksMethods.ChecksCreateOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), name: decoded("\"mighty_readme\""), headSha: decoded("\"ce587453ced02b1526dfb4cb910479d431683101\""))
+        var options = try ChecksMethods.ChecksCreateOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            name: decoded("\"mighty_readme\""),
+            headSha: decoded("\"ce587453ced02b1526dfb4cb910479d431683101\"")
+        )
         options.detailsUrl = try decoded("null")
         options.externalId = try decoded("\"42\"")
         options.status = try decoded("\"in_progress\"")
@@ -471,7 +493,11 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try ChecksMethods.ChecksListForRefOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), ref: decoded("\"ref\""))
+        var options = try ChecksMethods.ChecksListForRefOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            ref: decoded("\"ref\"")
+        )
         options.checkName = try decoded("\"Example Name\"")
         options.status = try decoded("\"queued\"")
         options.filter = try decoded("\"latest\"")
@@ -496,7 +522,11 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try ChecksMethods.ChecksListForSuiteOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), checkSuiteId: decoded("1"))
+        var options = try ChecksMethods.ChecksListForSuiteOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            checkSuiteId: decoded("1")
+        )
         options.checkName = try decoded("\"Example Name\"")
         options.status = try decoded("\"queued\"")
         options.filter = try decoded("\"latest\"")

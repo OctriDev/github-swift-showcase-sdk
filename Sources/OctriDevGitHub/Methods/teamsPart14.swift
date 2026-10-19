@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension TeamsMethods {
-    public struct TeamsUpdateLegacyOptions: Codable {
+public extension TeamsMethods {
+    struct TeamsUpdateLegacyOptions: Codable {
         public var teamId: Int
         public var name: String
         public var description: String?
@@ -23,7 +23,11 @@ extension TeamsMethods {
         }
     }
 
-    /// > [!WARNING] > **Endpoint closing down notice:** This endpoint route is closing down and will be removed from the Teams API. We recommend migrating your existing code to use the new [Update a team](https://docs.github.com/rest/teams/teams#update-a-team) endpoint. To edit a team, the authenticated user must either be an organization owner or a team maintainer. > [!NOTE] > With nested teams, the `privacy` for parent teams cannot be `secret`.
+    /// > [!WARNING] > **Endpoint closing down notice:** This endpoint route is closing down and will be removed from
+    /// the Teams API. We recommend migrating your existing code to use the new [Update a
+    /// team](https://docs.github.com/rest/teams/teams#update-a-team) endpoint. To edit a team, the authenticated user
+    /// must either be an organization owner or a team maintainer. > [!NOTE] > With nested teams, the `privacy` for
+    /// parent teams cannot be `secret`.
     ///
     /// - Parameters:
     /// - teamId: The unique identifier of the team.
@@ -47,9 +51,22 @@ extension TeamsMethods {
     ///   `parent_team_id` is also provided.
     ///
     /// - Warning: This operation is deprecated and may be removed in a future release.
-    public static func teamsUpdateLegacy(config: ClientConfig, options: TeamsUpdateLegacyOptions, requestOptions: RequestOptions? = nil) async throws -> TeamFull {
+    static func teamsUpdateLegacy(
+        config: ClientConfig,
+        options: TeamsUpdateLegacyOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> TeamFull {
         let requestBody = TeamsUpdateLegacyRequestBody(options: options)
 
-        return try (await sdkRequest("PATCH", ["/teams/", sdkEncodePathSegment(sdkWireString(options.teamId))].joined(), config: config, body: requestBody, decoder: .json, operationId: "teamsUpdateLegacy", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
+        return try await (sdkRequest(
+            "PATCH",
+            ["/teams/", sdkEncodePathSegment(sdkWireString(options.teamId))].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "teamsUpdateLegacy",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self]
+        )).data
     }
 }

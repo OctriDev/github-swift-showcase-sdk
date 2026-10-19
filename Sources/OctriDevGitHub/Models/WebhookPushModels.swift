@@ -3,7 +3,7 @@
 
 import Foundation
 
-// WebhookPush domain models
+/// WebhookPush domain models
 /// Required object value serialized in the `owner` wire field.
 public struct WebhookPushRepositoryOwner: Codable {
     /// Required `integer` value serialized in the `id` wire field.
@@ -76,46 +76,79 @@ public struct WebhookPushRepositoryOwner: Codable {
         case userViewType = "user_view_type"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension WebhookPushRepositoryOwner {
-    public init(from decoder: Decoder) throws {
+public extension WebhookPushRepositoryOwner {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
         }
         guard container.contains(.login) else {
-            throw SdkValidationError(field: "login", code: "required", message: "Validation failed for 'login': value is required")
+            throw SdkValidationError(
+                field: "login",
+                code: "required",
+                message: "Validation failed for 'login': value is required"
+            )
         }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.login = try container.sdkDecodeRequired(.login)
-        self.avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
-        self.deleted = try container.sdkDecodeIfPresent(.deleted)
-        self.email = try container.sdkDecodeIfPresent(.email)
-        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
-        self.followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
-        self.followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
-        self.gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
-        self.gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
-        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        self.organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
-        self.receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
-        self.reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
-        self.siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
-        self.starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
-        self.subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
-        self.type = try container.sdkDecodeIfPresent(.type)
-        self.url = try container.sdkDecodeIfPresent(.url)
-        self.userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        id = try container.sdkDecodeRequired(.id)
+        login = try container.sdkDecodeRequired(.login)
+        avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
+        deleted = try container.sdkDecodeIfPresent(.deleted)
+        email = try container.sdkDecodeIfPresent(.email)
+        eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
+        followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
+        gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
+        gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
+        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        name = try container.sdkDecodeIfPresent(.name)
+        nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
+        receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
+        reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
+        siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
+        starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
+        subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
+        type = try container.sdkDecodeIfPresent(.type)
+        url = try container.sdkDecodeIfPresent(.url)
+        userViewType = try container.sdkDecodeIfPresent(.userViewType)
         try sdkValidateConstraints()
     }
 }
 
-extension WebhookPushRepositoryOwner {
-    public init(id: Int, login: String, avatarUrl: String? = nil, deleted: Bool? = nil, email: String? = nil, eventsUrl: String? = nil, followersUrl: String? = nil, followingUrl: String? = nil, gistsUrl: String? = nil, gravatarId: String? = nil, htmlUrl: String? = nil, name: String? = nil, nodeId: String? = nil, organizationsUrl: String? = nil, receivedEventsUrl: String? = nil, reposUrl: String? = nil, siteAdmin: Bool? = nil, starredUrl: String? = nil, subscriptionsUrl: String? = nil, type: WebhookPushRepositoryOwnerType? = nil, url: String? = nil, userViewType: String? = nil) throws {
+public extension WebhookPushRepositoryOwner {
+    init(
+        id: Int,
+        login: String,
+        avatarUrl: String? = nil,
+        deleted: Bool? = nil,
+        email: String? = nil,
+        eventsUrl: String? = nil,
+        followersUrl: String? = nil,
+        followingUrl: String? = nil,
+        gistsUrl: String? = nil,
+        gravatarId: String? = nil,
+        htmlUrl: String? = nil,
+        name: String? = nil,
+        nodeId: String? = nil,
+        organizationsUrl: String? = nil,
+        receivedEventsUrl: String? = nil,
+        reposUrl: String? = nil,
+        siteAdmin: Bool? = nil,
+        starredUrl: String? = nil,
+        subscriptionsUrl: String? = nil,
+        type: WebhookPushRepositoryOwnerType? = nil,
+        url: String? = nil,
+        userViewType: String? = nil
+    ) throws {
         (self.id, self.login) = (id, login)
         (self.avatarUrl, self.deleted) = (avatarUrl, deleted)
         (self.email, self.eventsUrl) = (email, eventsUrl)
@@ -133,28 +166,28 @@ extension WebhookPushRepositoryOwner {
 
 extension WebhookPushRepositoryOwner {
     func sdkValidateConstraints() throws {
-        if let value = self.avatarUrl {
+        if let value = avatarUrl {
             try sdkValidateUri("avatar_url", value)
         }
-        if let value = self.followersUrl {
+        if let value = followersUrl {
             try sdkValidateUri("followers_url", value)
         }
-        if let value = self.htmlUrl {
+        if let value = htmlUrl {
             try sdkValidateUri("html_url", value)
         }
-        if let value = self.organizationsUrl {
+        if let value = organizationsUrl {
             try sdkValidateUri("organizations_url", value)
         }
-        if let value = self.receivedEventsUrl {
+        if let value = receivedEventsUrl {
             try sdkValidateUri("received_events_url", value)
         }
-        if let value = self.reposUrl {
+        if let value = reposUrl {
             try sdkValidateUri("repos_url", value)
         }
-        if let value = self.subscriptionsUrl {
+        if let value = subscriptionsUrl {
             try sdkValidateUri("subscriptions_url", value)
         }
-        if let value = self.url {
+        if let value = url {
             try sdkValidateUri("url", value)
         }
     }
@@ -222,33 +255,52 @@ public struct WebhookPush: Codable {
         case sender
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookPush {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.after = try container.sdkDecodeRequired(.after)
-        self.baseRef = try container.sdkDecodeNullable(.baseRef)
-        self.before = try container.sdkDecodeRequired(.before)
-        self.commits = try container.sdkDecodeRequired(.commits)
-        self.compare = try container.sdkDecodeRequired(.compare)
-        self.created = try container.sdkDecodeRequired(.created)
-        self.deleted = try container.sdkDecodeRequired(.deleted)
-        self.forced = try container.sdkDecodeRequired(.forced)
-        self.headCommit = try container.sdkDecodeNullable(.headCommit)
-        self.pusher = try container.sdkDecodeRequired(.pusher)
-        self.ref = try container.sdkDecodeRequired(.ref)
-        self.repository = try container.sdkDecodeRequired(.repository)
-        self.enterprise = try container.sdkDecodeIfPresent(.enterprise)
-        self.installation = try container.sdkDecodeIfPresent(.installation)
-        self.organization = try container.sdkDecodeIfPresent(.organization)
-        self.sender = try container.sdkDecodeIfPresent(.sender)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WebhookPush {
-    public init(after: String, baseRef: WebhooksNullableString?, before: String, commits: [WebhookPushCommitsItem], compare: String, created: Bool, deleted: Bool, forced: Bool, headCommit: WebhookPushHeadCommit?, pusher: WebhookPushPusher, ref: String, repository: WebhookPushRepository, enterprise: EnterpriseWebhooks? = nil, installation: SimpleInstallation? = nil, organization: OrganizationSimpleWebhooks? = nil, sender: SimpleUser? = nil) {
+public extension WebhookPush {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        after = try container.sdkDecodeRequired(.after)
+        baseRef = try container.sdkDecodeNullable(.baseRef)
+        before = try container.sdkDecodeRequired(.before)
+        commits = try container.sdkDecodeRequired(.commits)
+        compare = try container.sdkDecodeRequired(.compare)
+        created = try container.sdkDecodeRequired(.created)
+        deleted = try container.sdkDecodeRequired(.deleted)
+        forced = try container.sdkDecodeRequired(.forced)
+        headCommit = try container.sdkDecodeNullable(.headCommit)
+        pusher = try container.sdkDecodeRequired(.pusher)
+        ref = try container.sdkDecodeRequired(.ref)
+        repository = try container.sdkDecodeRequired(.repository)
+        enterprise = try container.sdkDecodeIfPresent(.enterprise)
+        installation = try container.sdkDecodeIfPresent(.installation)
+        organization = try container.sdkDecodeIfPresent(.organization)
+        sender = try container.sdkDecodeIfPresent(.sender)
+    }
+}
+
+public extension WebhookPush {
+    init(
+        after: String,
+        baseRef: WebhooksNullableString?,
+        before: String,
+        commits: [WebhookPushCommitsItem],
+        compare: String,
+        created: Bool,
+        deleted: Bool,
+        forced: Bool,
+        headCommit: WebhookPushHeadCommit?,
+        pusher: WebhookPushPusher,
+        ref: String,
+        repository: WebhookPushRepository,
+        enterprise: EnterpriseWebhooks? = nil,
+        installation: SimpleInstallation? = nil,
+        organization: OrganizationSimpleWebhooks? = nil,
+        sender: SimpleUser? = nil
+    ) {
         (self.after, self.baseRef) = (after, baseRef)
         (self.before, self.commits) = (before, commits)
         (self.compare, self.created) = (compare, created)
@@ -299,38 +351,52 @@ public struct WebhookPushHeadCommit: Codable {
         case removed
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookPushHeadCommit {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.author = try container.sdkDecodeRequired(.author)
-        self.committer = try container.sdkDecodeRequired(.committer)
-        self.distinct = try container.sdkDecodeRequired(.distinct)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.message = try container.sdkDecodeRequired(.message)
-        self.timestamp = try container.sdkDecodeRequired(.timestamp)
-        self.treeId = try container.sdkDecodeRequired(.treeId)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.added = try container.sdkDecodeIfPresent(.added)
-        self.modified = try container.sdkDecodeIfPresent(.modified)
-        self.removed = try container.sdkDecodeIfPresent(.removed)
-            try sdkValidateDateTime("timestamp", sdkWireString(self.timestamp))
-            try sdkValidateUri("url", self.url)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WebhookPushHeadCommit {
-    public init(author: WebhookPushHeadCommitAuthor, committer: WebhookPushHeadCommitCommitter, distinct: Bool, id: String, message: String, timestamp: Date, treeId: String, url: String, added: [String]? = nil, modified: [String]? = nil, removed: [String]? = nil) throws {
+public extension WebhookPushHeadCommit {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        author = try container.sdkDecodeRequired(.author)
+        committer = try container.sdkDecodeRequired(.committer)
+        distinct = try container.sdkDecodeRequired(.distinct)
+        id = try container.sdkDecodeRequired(.id)
+        message = try container.sdkDecodeRequired(.message)
+        timestamp = try container.sdkDecodeRequired(.timestamp)
+        treeId = try container.sdkDecodeRequired(.treeId)
+        url = try container.sdkDecodeRequired(.url)
+        added = try container.sdkDecodeIfPresent(.added)
+        modified = try container.sdkDecodeIfPresent(.modified)
+        removed = try container.sdkDecodeIfPresent(.removed)
+        try sdkValidateDateTime("timestamp", sdkWireString(timestamp))
+        try sdkValidateUri("url", url)
+    }
+}
+
+public extension WebhookPushHeadCommit {
+    init(
+        author: WebhookPushHeadCommitAuthor,
+        committer: WebhookPushHeadCommitCommitter,
+        distinct: Bool,
+        id: String,
+        message: String,
+        timestamp: Date,
+        treeId: String,
+        url: String,
+        added: [String]? = nil,
+        modified: [String]? = nil,
+        removed: [String]? = nil
+    ) throws {
         (self.author, self.committer) = (author, committer)
         (self.distinct, self.id) = (distinct, id)
         (self.message, self.timestamp) = (message, timestamp)
         (self.treeId, self.url) = (treeId, url)
         (self.added, self.modified) = (added, modified)
         self.removed = removed
-            try sdkValidateDateTime("timestamp", sdkWireString(self.timestamp))
-            try sdkValidateUri("url", self.url)
+        try sdkValidateDateTime("timestamp", sdkWireString(self.timestamp))
+        try sdkValidateUri("url", self.url)
     }
 }
 
@@ -340,22 +406,32 @@ public indirect enum WebhookPushRepositoryPushedAt {
 }
 
 extension WebhookPushRepositoryPushedAt: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for WebhookPushRepositoryPushedAt")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for WebhookPushRepositoryPushedAt"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension WebhookPushRepositoryPushedAt {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(Int.self) { return .intValue(value) }
-        if let value = try? container.decode(Date.self) { return .date(value) }
+        if let value = try? container.decode(Int.self) {
+            return .intValue(value)
+        }
+        if let value = try? container.decode(Date.self) {
+            return .date(value)
+        }
         return nil
     }
 }
@@ -397,33 +473,43 @@ public struct WebhookPushHeadCommitAuthor: Codable {
         case username
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension WebhookPushHeadCommitAuthor {
-    public init(from decoder: Decoder) throws {
+public extension WebhookPushHeadCommitAuthor {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.email) else {
-            throw SdkValidationError(field: "email", code: "required", message: "Validation failed for 'email': value is required")
+            throw SdkValidationError(
+                field: "email",
+                code: "required",
+                message: "Validation failed for 'email': value is required"
+            )
         }
         guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
         }
-        self.email = try container.sdkDecodeNullable(.email)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.date = try container.sdkDecodeIfPresent(.date)
-        self.username = try container.sdkDecodeIfPresent(.username)
-        if let value = self.email {
+        email = try container.sdkDecodeNullable(.email)
+        name = try container.sdkDecodeRequired(.name)
+        date = try container.sdkDecodeIfPresent(.date)
+        username = try container.sdkDecodeIfPresent(.username)
+        if let value = email {
             try sdkValidateEmail("email", value)
         }
-        if let value = self.date {
+        if let value = date {
             try sdkValidateDateTime("date", sdkWireString(value))
         }
     }
 }
 
-extension WebhookPushHeadCommitAuthor {
-    public init(email: String?, name: String, date: Date? = nil, username: String? = nil) throws {
+public extension WebhookPushHeadCommitAuthor {
+    init(email: String?, name: String, date: Date? = nil, username: String? = nil) throws {
         (self.email, self.name) = (email, name)
         (self.date, self.username) = (date, username)
         if let value = self.email {
@@ -474,38 +560,52 @@ public struct WebhookPushCommitsItem: Codable {
         case removed
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookPushCommitsItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.author = try container.sdkDecodeRequired(.author)
-        self.committer = try container.sdkDecodeRequired(.committer)
-        self.distinct = try container.sdkDecodeRequired(.distinct)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.message = try container.sdkDecodeRequired(.message)
-        self.timestamp = try container.sdkDecodeRequired(.timestamp)
-        self.treeId = try container.sdkDecodeRequired(.treeId)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.added = try container.sdkDecodeIfPresent(.added)
-        self.modified = try container.sdkDecodeIfPresent(.modified)
-        self.removed = try container.sdkDecodeIfPresent(.removed)
-            try sdkValidateDateTime("timestamp", sdkWireString(self.timestamp))
-            try sdkValidateUri("url", self.url)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WebhookPushCommitsItem {
-    public init(author: WebhookPushCommitsItemAuthor, committer: WebhookPushCommitsItemCommitter, distinct: Bool, id: String, message: String, timestamp: Date, treeId: String, url: String, added: [String]? = nil, modified: [String]? = nil, removed: [String]? = nil) throws {
+public extension WebhookPushCommitsItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        author = try container.sdkDecodeRequired(.author)
+        committer = try container.sdkDecodeRequired(.committer)
+        distinct = try container.sdkDecodeRequired(.distinct)
+        id = try container.sdkDecodeRequired(.id)
+        message = try container.sdkDecodeRequired(.message)
+        timestamp = try container.sdkDecodeRequired(.timestamp)
+        treeId = try container.sdkDecodeRequired(.treeId)
+        url = try container.sdkDecodeRequired(.url)
+        added = try container.sdkDecodeIfPresent(.added)
+        modified = try container.sdkDecodeIfPresent(.modified)
+        removed = try container.sdkDecodeIfPresent(.removed)
+        try sdkValidateDateTime("timestamp", sdkWireString(timestamp))
+        try sdkValidateUri("url", url)
+    }
+}
+
+public extension WebhookPushCommitsItem {
+    init(
+        author: WebhookPushCommitsItemAuthor,
+        committer: WebhookPushCommitsItemCommitter,
+        distinct: Bool,
+        id: String,
+        message: String,
+        timestamp: Date,
+        treeId: String,
+        url: String,
+        added: [String]? = nil,
+        modified: [String]? = nil,
+        removed: [String]? = nil
+    ) throws {
         (self.author, self.committer) = (author, committer)
         (self.distinct, self.id) = (distinct, id)
         (self.message, self.timestamp) = (message, timestamp)
         (self.treeId, self.url) = (treeId, url)
         (self.added, self.modified) = (added, modified)
         self.removed = removed
-            try sdkValidateDateTime("timestamp", sdkWireString(self.timestamp))
-            try sdkValidateUri("url", self.url)
+        try sdkValidateDateTime("timestamp", sdkWireString(self.timestamp))
+        try sdkValidateUri("url", self.url)
     }
 }
 
@@ -515,14 +615,20 @@ public indirect enum WebhookPushRepositoryCreatedAt {
 }
 
 extension WebhookPushRepositoryCreatedAt: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for WebhookPushRepositoryCreatedAt")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for WebhookPushRepositoryCreatedAt"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }

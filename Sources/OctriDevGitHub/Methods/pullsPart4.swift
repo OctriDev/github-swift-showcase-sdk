@@ -6,10 +6,22 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension PullsMethods {
-    /// Lists review comments across all pull requests in a repository, ordered by ID in ascending order by default. Use `sort`, `direction`, and `since` to control the results, and select a custom media type to receive the comment body as raw Markdown, plain text, rendered HTML, or all three. Use `page` and `per_page` to paginate the results.
+public extension PullsMethods {
+    /// Lists review comments across all pull requests in a repository, ordered by ID in ascending order by default. Use
+    /// `sort`, `direction`, and `since` to control the results, and select a custom media type to receive the comment
+    /// body as raw Markdown, plain text, rendered HTML, or all three. Use `page` and `per_page` to paginate the
+    /// results.
     ///
-    /// Lists review comments for all pull requests in a repository. By default, review comments are in ascending order by ID. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github-commitcomment.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the default if you do not pass any specific media type. - **`application/vnd.github-commitcomment.text+json`**: Returns a text only representation of the markdown body. Response will include `body_text`. - **`application/vnd.github-commitcomment.html+json`**: Returns HTML rendered from the body's markdown. Response will include `body_html`. - **`application/vnd.github-commitcomment.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    /// Lists review comments for all pull requests in a repository. By default, review comments are in ascending order
+    /// by ID. This endpoint supports the following custom media types. For more information, see "[Media
+    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
+    /// **`application/vnd.github-commitcomment.raw+json`**: Returns the raw markdown body. Response will include
+    /// `body`. This is the default if you do not pass any specific media type. -
+    /// **`application/vnd.github-commitcomment.text+json`**: Returns a text only representation of the markdown body.
+    /// Response will include `body_text`. - **`application/vnd.github-commitcomment.html+json`**: Returns HTML rendered
+    /// from the body's markdown. Response will include `body_html`. -
+    /// **`application/vnd.github-commitcomment.full+json`**: Returns raw, text, and HTML representations. Response will
+    /// include `body`, `body_text`, and `body_html`.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -29,17 +41,41 @@ extension PullsMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func pullsListReviewCommentsForRepo(config: ClientConfig, owner: String, repo: String, sort: PullsListReviewCommentsForRepoParameter? = nil, direction: PullsListReviewCommentsForRepoParameterXb8109f3c? = nil, since: Date? = nil, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [PullRequestReviewComment] {
-        if let since = since {
+    static func pullsListReviewCommentsForRepo(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        sort: PullsListReviewCommentsForRepoParameter? = nil,
+        direction: PullsListReviewCommentsForRepoParameterXb8109f3c? = nil,
+        since: Date? = nil,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [PullRequestReviewComment] {
+        if let since {
             try sdkValidateDateTime("since", since)
         }
 
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/pulls/comments"].joined(), config: config, query: [
-            SdkQueryParameter("sort", value: sort),
-            SdkQueryParameter("direction", value: direction),
-            SdkQueryParameter("since", value: since),
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "pullsListReviewCommentsForRepo", options: requestOptions)).data
+        return try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/pulls/comments",
+            ].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("sort", value: sort),
+                SdkQueryParameter("direction", value: direction),
+                SdkQueryParameter("since", value: since),
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "pullsListReviewCommentsForRepo",
+            options: requestOptions
+        )).data
     }
 }

@@ -6,10 +6,19 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension IssuesMethods {
-    /// Lists the sub-issues attached to an issue in a repository. Use `owner`, `repo`, and `issue_number` to select the parent issue, and `page` and `per_page` to paginate the results.
+public extension IssuesMethods {
+    /// Lists the sub-issues attached to an issue in a repository. Use `owner`, `repo`, and `issue_number` to select the
+    /// parent issue, and `page` and `per_page` to paginate the results.
     ///
-    /// You can use the REST API to list the sub-issues on an issue. This endpoint supports the following custom media types. For more information, see [Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types). - **`application/vnd.github.raw+json`**: Returns the raw Markdown body. Response will include `body`. This is the default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text only representation of the Markdown body. Response will include `body_text`. - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's Markdown. Response will include `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    /// You can use the REST API to list the sub-issues on an issue. This endpoint supports the following custom media
+    /// types. For more information, see [Media
+    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types). -
+    /// **`application/vnd.github.raw+json`**: Returns the raw Markdown body. Response will include `body`. This is the
+    /// default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text
+    /// only representation of the Markdown body. Response will include `body_text`. -
+    /// **`application/vnd.github.html+json`**: Returns HTML rendered from the body's Markdown. Response will include
+    /// `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response
+    /// will include `body`, `body_text`, and `body_html`.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -25,10 +34,35 @@ extension IssuesMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func issuesListSubIssues(config: ClientConfig, owner: String, repo: String, issueNumber: Int, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [Issue] {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/issues/", sdkEncodePathSegment(sdkWireString(issueNumber)), "/sub_issues"].joined(), config: config, query: [
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "issuesListSubIssues", options: requestOptions, errors: ["404": BasicError.self, "410": BasicError.self])).data
+    static func issuesListSubIssues(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        issueNumber: Int,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [Issue] {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/issues/",
+                sdkEncodePathSegment(sdkWireString(issueNumber)),
+                "/sub_issues",
+            ].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "issuesListSubIssues",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "410": BasicError.self]
+        )).data
     }
 }

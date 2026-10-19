@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ProjectsMethods {
+public extension ProjectsMethods {
     /// Add an issue or pull request item to the specified user owned project.
     ///
     /// - Parameters:
@@ -19,9 +19,40 @@ extension ProjectsMethods {
     /// - owner: The repository owner login.
     /// - repo: The repository name.
     /// - number: The issue or pull request number.
-    public static func projectsAddItemForUser(config: ClientConfig, username: String, projectNumber: Int, type: ProjectsAddItemForUserRequestBodyType, id: Int? = nil, owner: String? = nil, repo: String? = nil, number: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> ProjectsV2ItemSimple {
-        let requestBody = ProjectsAddItemForUserRequestBody(type: type, id: id, owner: owner, repo: repo, number: number)
+    static func projectsAddItemForUser(
+        config: ClientConfig,
+        username: String,
+        projectNumber: Int,
+        type: ProjectsAddItemForUserRequestBodyType,
+        id: Int? = nil,
+        owner: String? = nil,
+        repo: String? = nil,
+        number: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ProjectsV2ItemSimple {
+        let requestBody = ProjectsAddItemForUserRequestBody(
+            type: type,
+            id: id,
+            owner: owner,
+            repo: repo,
+            number: number
+        )
 
-        return try (await sdkRequest("POST", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/projectsV2/", sdkEncodePathSegment(sdkWireString(projectNumber)), "/items"].joined(), config: config, body: requestBody, decoder: .json, operationId: "projectsAddItemForUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self])).data
+        return try await (sdkRequest(
+            "POST",
+            [
+                "/users/",
+                sdkEncodePathSegment(sdkWireString(username)),
+                "/projectsV2/",
+                sdkEncodePathSegment(sdkWireString(projectNumber)),
+                "/items",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "projectsAddItemForUser",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self]
+        )).data
     }
 }

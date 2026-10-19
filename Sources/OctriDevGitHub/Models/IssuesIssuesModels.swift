@@ -3,32 +3,40 @@
 
 import Foundation
 
-// IssuesIssues domain models
+/// IssuesIssues domain models
 public indirect enum IssuesAddAssigneesRequestAssigneesItem {
     case stringValue(String)
     case issuesAddAssigneesRequestAssigneesItemVariant1(IssuesAddAssigneesRequestAssigneesItemVariant1)
 }
 
 extension IssuesAddAssigneesRequestAssigneesItem: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for IssuesAddAssigneesRequestAssigneesItem")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for IssuesAddAssigneesRequestAssigneesItem"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension IssuesAddAssigneesRequestAssigneesItem {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) { return .stringValue(value) }
+        if let value = try? container.decode(String.self) {
+            return .stringValue(value)
+        }
         if let value = try? container.decode(
             IssuesAddAssigneesRequestAssigneesItemVariant1.self
         ) {
-            return             .issuesAddAssigneesRequestAssigneesItemVariant1(value)
+            return .issuesAddAssigneesRequestAssigneesItemVariant1(value)
         }
         return nil
     }
@@ -50,25 +58,33 @@ public indirect enum IssuesCreateRequestLabelsItem {
 }
 
 extension IssuesCreateRequestLabelsItem: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for IssuesCreateRequestLabelsItem")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for IssuesCreateRequestLabelsItem"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension IssuesCreateRequestLabelsItem {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) { return .stringValue(value) }
+        if let value = try? container.decode(String.self) {
+            return .stringValue(value)
+        }
         if let value = try? container.decode(
             IssuesCreateRequestLabelsItemVariant1.self
         ) {
-            return             .issuesCreateRequestLabelsItemVariant1(value)
+            return .issuesCreateRequestLabelsItemVariant1(value)
         }
         return nil
     }
@@ -90,25 +106,33 @@ public indirect enum IssuesUpdateRequestAssigneesItem {
 }
 
 extension IssuesUpdateRequestAssigneesItem: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for IssuesUpdateRequestAssigneesItem")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for IssuesUpdateRequestAssigneesItem"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension IssuesUpdateRequestAssigneesItem {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) { return .stringValue(value) }
+        if let value = try? container.decode(String.self) {
+            return .stringValue(value)
+        }
         if let value = try? container.decode(
             IssuesUpdateRequestAssigneesItemVariant1.self
         ) {
-            return             .issuesUpdateRequestAssigneesItemVariant1(value)
+            return .issuesUpdateRequestAssigneesItemVariant1(value)
         }
         return nil
     }
@@ -130,25 +154,33 @@ public indirect enum IssuesUpdateRequestLabelsItem {
 }
 
 extension IssuesUpdateRequestLabelsItem: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for IssuesUpdateRequestLabelsItem")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for IssuesUpdateRequestLabelsItem"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension IssuesUpdateRequestLabelsItem {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) { return .stringValue(value) }
+        if let value = try? container.decode(String.self) {
+            return .stringValue(value)
+        }
         if let value = try? container.decode(
             IssuesUpdateRequestLabelsItemVariant1.self
         ) {
-            return             .issuesUpdateRequestLabelsItemVariant1(value)
+            return .issuesUpdateRequestLabelsItemVariant1(value)
         }
         return nil
     }
@@ -170,22 +202,33 @@ public indirect enum IssuesUpdateRequestType {
 }
 
 extension IssuesUpdateRequestType: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for IssuesUpdateRequestType")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for IssuesUpdateRequestType"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension IssuesUpdateRequestType {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) { return .stringValue(value) }
-        if let value = try? container.decode(IssuesUpdateRequestTypeVariant1.self) { return .issuesUpdateRequestTypeVariant1(value) }
+        if let value = try? container.decode(String.self) {
+            return .stringValue(value)
+        }
+        if let value = try? container
+            .decode(IssuesUpdateRequestTypeVariant1.self) {
+            return .issuesUpdateRequestTypeVariant1(value)
+        }
         return nil
     }
 }
@@ -223,26 +266,34 @@ public struct IssuesUpdateRequestLabelsItemVariant1: Codable {
     }
 
     init() {
-        (self.id, self.name, self.description, self.color, self.rationale) = (nil, nil, nil, nil, nil)
-        (self.suggest, self.confidence) = (nil, nil)
+        (id, name, description, color, rationale) = (nil, nil, nil, nil, nil)
+        (suggest, confidence) = (nil, nil)
     }
 }
 
-extension IssuesUpdateRequestLabelsItemVariant1 {
-    public init(from decoder: Decoder) throws {
+public extension IssuesUpdateRequestLabelsItemVariant1 {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeIfPresent(.id)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.description = try container.sdkDecodeIfPresent(.description)
-        self.color = try container.sdkDecodeIfPresent(.color)
-        self.rationale = try container.sdkDecodeIfPresent(.rationale)
-        self.suggest = try container.sdkDecodeIfPresent(.suggest)
-        self.confidence = try container.sdkDecodeIfPresent(.confidence)
+        id = try container.sdkDecodeIfPresent(.id)
+        name = try container.sdkDecodeIfPresent(.name)
+        description = try container.sdkDecodeIfPresent(.description)
+        color = try container.sdkDecodeIfPresent(.color)
+        rationale = try container.sdkDecodeIfPresent(.rationale)
+        suggest = try container.sdkDecodeIfPresent(.suggest)
+        confidence = try container.sdkDecodeIfPresent(.confidence)
     }
 }
 
-extension IssuesUpdateRequestLabelsItemVariant1 {
-    public init(id: Int? = nil, name: String? = nil, description: String? = nil, color: String? = nil, rationale: String? = nil, suggest: Bool? = nil, confidence: IssuesUpdateRequestLabelsItemVariant1Confidence? = nil) {
+public extension IssuesUpdateRequestLabelsItemVariant1 {
+    init(
+        id: Int? = nil,
+        name: String? = nil,
+        description: String? = nil,
+        color: String? = nil,
+        rationale: String? = nil,
+        suggest: Bool? = nil,
+        confidence: IssuesUpdateRequestLabelsItemVariant1Confidence? = nil
+    ) {
         self.init()
         (self.id, self.name) = (id, name)
         (self.description, self.color) = (description, color)
@@ -268,22 +319,27 @@ public struct IssuesUpdateRequestAssigneesItemVariant1: Codable {
     }
 
     init() {
-        (self.login, self.rationale, self.suggest, self.confidence) = (nil, nil, nil, nil)
+        (login, rationale, suggest, confidence) = (nil, nil, nil, nil)
     }
 }
 
-extension IssuesUpdateRequestAssigneesItemVariant1 {
-    public init(from decoder: Decoder) throws {
+public extension IssuesUpdateRequestAssigneesItemVariant1 {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.login = try container.sdkDecodeIfPresent(.login)
-        self.rationale = try container.sdkDecodeIfPresent(.rationale)
-        self.suggest = try container.sdkDecodeIfPresent(.suggest)
-        self.confidence = try container.sdkDecodeIfPresent(.confidence)
+        login = try container.sdkDecodeIfPresent(.login)
+        rationale = try container.sdkDecodeIfPresent(.rationale)
+        suggest = try container.sdkDecodeIfPresent(.suggest)
+        confidence = try container.sdkDecodeIfPresent(.confidence)
     }
 }
 
-extension IssuesUpdateRequestAssigneesItemVariant1 {
-    public init(login: String? = nil, rationale: String? = nil, suggest: Bool? = nil, confidence: IssuesUpdateRequestAssigneesItemVariant1Confidence? = nil) {
+public extension IssuesUpdateRequestAssigneesItemVariant1 {
+    init(
+        login: String? = nil,
+        rationale: String? = nil,
+        suggest: Bool? = nil,
+        confidence: IssuesUpdateRequestAssigneesItemVariant1Confidence? = nil
+    ) {
         self.init()
         (self.login, self.rationale) = (login, rationale)
         (self.suggest, self.confidence) = (suggest, confidence)
@@ -304,22 +360,22 @@ public struct IssuesCreateRequestLabelsItemVariant1: Codable {
     }
 
     init() {
-        (self.id, self.name, self.description, self.color) = (nil, nil, nil, nil)
+        (id, name, description, color) = (nil, nil, nil, nil)
     }
 }
 
-extension IssuesCreateRequestLabelsItemVariant1 {
-    public init(from decoder: Decoder) throws {
+public extension IssuesCreateRequestLabelsItemVariant1 {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeIfPresent(.id)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.description = try container.sdkDecodeIfPresent(.description)
-        self.color = try container.sdkDecodeIfPresent(.color)
+        id = try container.sdkDecodeIfPresent(.id)
+        name = try container.sdkDecodeIfPresent(.name)
+        description = try container.sdkDecodeIfPresent(.description)
+        color = try container.sdkDecodeIfPresent(.color)
     }
 }
 
-extension IssuesCreateRequestLabelsItemVariant1 {
-    public init(id: Int? = nil, name: String? = nil, description: String? = nil, color: String? = nil) {
+public extension IssuesCreateRequestLabelsItemVariant1 {
+    init(id: Int? = nil, name: String? = nil, description: String? = nil, color: String? = nil) {
         self.init()
         (self.id, self.name) = (id, name)
         (self.description, self.color) = (description, color)
@@ -343,24 +399,35 @@ public struct IssuesAddAssigneesRequestAssigneesItemVariant1: Codable {
         case confidence
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension IssuesAddAssigneesRequestAssigneesItemVariant1 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.login) else {
-            throw SdkValidationError(field: "login", code: "required", message: "Validation failed for 'login': value is required")
-        }
-        self.login = try container.sdkDecodeRequired(.login)
-        self.rationale = try container.sdkDecodeIfPresent(.rationale)
-        self.suggest = try container.sdkDecodeIfPresent(.suggest)
-        self.confidence = try container.sdkDecodeIfPresent(.confidence)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension IssuesAddAssigneesRequestAssigneesItemVariant1 {
-    public init(login: String, rationale: String? = nil, suggest: Bool? = nil, confidence: IssuesAddAssigneesRequestAssigneesItemVariant1Confidence? = nil) {
+public extension IssuesAddAssigneesRequestAssigneesItemVariant1 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.login) else {
+            throw SdkValidationError(
+                field: "login",
+                code: "required",
+                message: "Validation failed for 'login': value is required"
+            )
+        }
+        login = try container.sdkDecodeRequired(.login)
+        rationale = try container.sdkDecodeIfPresent(.rationale)
+        suggest = try container.sdkDecodeIfPresent(.suggest)
+        confidence = try container.sdkDecodeIfPresent(.confidence)
+    }
+}
+
+public extension IssuesAddAssigneesRequestAssigneesItemVariant1 {
+    init(
+        login: String,
+        rationale: String? = nil,
+        suggest: Bool? = nil,
+        confidence: IssuesAddAssigneesRequestAssigneesItemVariant1Confidence? = nil
+    ) {
         (self.login, self.rationale) = (login, rationale)
         (self.suggest, self.confidence) = (suggest, confidence)
     }
@@ -386,22 +453,27 @@ public struct IssuesUpdateRequestTypeVariant1: Codable {
     }
 
     init() {
-        (self.value, self.rationale, self.suggest, self.confidence) = (nil, nil, nil, nil)
+        (value, rationale, suggest, confidence) = (nil, nil, nil, nil)
     }
 }
 
-extension IssuesUpdateRequestTypeVariant1 {
-    public init(from decoder: Decoder) throws {
+public extension IssuesUpdateRequestTypeVariant1 {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.value = try container.sdkDecodeIfPresent(.value)
-        self.rationale = try container.sdkDecodeIfPresent(.rationale)
-        self.suggest = try container.sdkDecodeIfPresent(.suggest)
-        self.confidence = try container.sdkDecodeIfPresent(.confidence)
+        value = try container.sdkDecodeIfPresent(.value)
+        rationale = try container.sdkDecodeIfPresent(.rationale)
+        suggest = try container.sdkDecodeIfPresent(.suggest)
+        confidence = try container.sdkDecodeIfPresent(.confidence)
     }
 }
 
-extension IssuesUpdateRequestTypeVariant1 {
-    public init(value: String? = nil, rationale: String? = nil, suggest: Bool? = nil, confidence: IssuesUpdateRequestTypeVariant1Confidence? = nil) {
+public extension IssuesUpdateRequestTypeVariant1 {
+    init(
+        value: String? = nil,
+        rationale: String? = nil,
+        suggest: Bool? = nil,
+        confidence: IssuesUpdateRequestTypeVariant1Confidence? = nil
+    ) {
         self.init()
         (self.value, self.rationale) = (value, rationale)
         (self.suggest, self.confidence) = (suggest, confidence)
@@ -409,17 +481,21 @@ extension IssuesUpdateRequestTypeVariant1 {
 }
 
 /// The confidence level for this assignee choice.
-public struct IssuesUpdateRequestAssigneesItemVariant1Confidence: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct IssuesUpdateRequestAssigneesItemVariant1Confidence: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let low = IssuesUpdateRequestAssigneesItemVariant1Confidence(rawValue: "low")
     public static let medium = IssuesUpdateRequestAssigneesItemVariant1Confidence(rawValue: "medium")
     public static let high = IssuesUpdateRequestAssigneesItemVariant1Confidence(rawValue: "high")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -429,17 +505,21 @@ public struct IssuesUpdateRequestAssigneesItemVariant1Confidence: RawRepresentab
 }
 
 /// The confidence level for this assignee choice.
-public struct IssuesAddAssigneesRequestAssigneesItemVariant1Confidence: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct IssuesAddAssigneesRequestAssigneesItemVariant1Confidence: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let low = IssuesAddAssigneesRequestAssigneesItemVariant1Confidence(rawValue: "low")
     public static let medium = IssuesAddAssigneesRequestAssigneesItemVariant1Confidence(rawValue: "medium")
     public static let high = IssuesAddAssigneesRequestAssigneesItemVariant1Confidence(rawValue: "high")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -449,17 +529,21 @@ public struct IssuesAddAssigneesRequestAssigneesItemVariant1Confidence: RawRepre
 }
 
 /// The confidence level for this type choice.
-public struct IssuesUpdateRequestTypeVariant1Confidence: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct IssuesUpdateRequestTypeVariant1Confidence: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let low = IssuesUpdateRequestTypeVariant1Confidence(rawValue: "low")
     public static let medium = IssuesUpdateRequestTypeVariant1Confidence(rawValue: "medium")
     public static let high = IssuesUpdateRequestTypeVariant1Confidence(rawValue: "high")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -469,17 +553,21 @@ public struct IssuesUpdateRequestTypeVariant1Confidence: RawRepresentable, Hasha
 }
 
 /// The confidence level for this label choice.
-public struct IssuesUpdateRequestLabelsItemVariant1Confidence: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct IssuesUpdateRequestLabelsItemVariant1Confidence: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let low = IssuesUpdateRequestLabelsItemVariant1Confidence(rawValue: "low")
     public static let medium = IssuesUpdateRequestLabelsItemVariant1Confidence(rawValue: "medium")
     public static let high = IssuesUpdateRequestLabelsItemVariant1Confidence(rawValue: "high")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

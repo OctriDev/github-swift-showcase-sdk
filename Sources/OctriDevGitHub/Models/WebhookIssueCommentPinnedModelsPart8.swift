@@ -3,61 +3,99 @@
 
 import Foundation
 
-// WebhookIssueCommentPinned domain models
+/// WebhookIssueCommentPinned domain models
 /// Required enumerated value serialized in the `events[]` wire field.
-public struct WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem: RawRepresentable, Hashable,
+    Codable,
+    Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let branchProtectionRule = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "branch_protection_rule")
-    public static let checkRun = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "check_run")
-    public static let checkSuite = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "check_suite")
-    public static let codeScanningAlert = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "code_scanning_alert")
-    public static let commitComment = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "commit_comment")
-    public static let contentReference = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "content_reference")
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let branchProtectionRule =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "branch_protection_rule")
+    public static let checkRun =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "check_run")
+    public static let checkSuite =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "check_suite")
+    public static let codeScanningAlert =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "code_scanning_alert")
+    public static let commitComment =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "commit_comment")
+    public static let contentReference =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "content_reference")
     public static let create = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "create")
     public static let delete = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "delete")
-    public static let deployment = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "deployment")
-    public static let deploymentReview = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "deployment_review")
-    public static let deploymentStatus = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "deployment_status")
-    public static let deployKey = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "deploy_key")
-    public static let discussion = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "discussion")
-    public static let discussionComment = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "discussion_comment")
+    public static let deployment =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "deployment")
+    public static let deploymentReview =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "deployment_review")
+    public static let deploymentStatus =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "deployment_status")
+    public static let deployKey =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "deploy_key")
+    public static let discussion =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "discussion")
+    public static let discussionComment =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "discussion_comment")
     public static let fork = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "fork")
     public static let gollum = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "gollum")
     public static let issues = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "issues")
-    public static let issueComment = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "issue_comment")
+    public static let issueComment =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "issue_comment")
     public static let label = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "label")
     public static let member = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "member")
-    public static let membership = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "membership")
-    public static let milestone = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "milestone")
-    public static let organization = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "organization")
-    public static let orgBlock = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "org_block")
-    public static let pageBuild = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "page_build")
-    public static let project = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "project")
-    public static let projectCard = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "project_card")
-    public static let projectColumn = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "project_column")
-    public static let `public` = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "public")
-    public static let pullRequest = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "pull_request")
-    public static let pullRequestReview = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "pull_request_review")
-    public static let pullRequestReviewComment = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "pull_request_review_comment")
+    public static let membership =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "membership")
+    public static let milestone =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "milestone")
+    public static let organization =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "organization")
+    public static let orgBlock =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "org_block")
+    public static let pageBuild =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "page_build")
+    public static let project =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "project")
+    public static let projectCard =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "project_card")
+    public static let projectColumn =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "project_column")
+    public static let `public` =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "public")
+    public static let pullRequest =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "pull_request")
+    public static let pullRequestReview =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "pull_request_review")
+    public static let pullRequestReviewComment =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "pull_request_review_comment")
     public static let push = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "push")
-    public static let registryPackage = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "registry_package")
-    public static let release = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "release")
-    public static let repository = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "repository")
-    public static let repositoryDispatch = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "repository_dispatch")
-    public static let secretScanningAlert = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "secret_scanning_alert")
+    public static let registryPackage =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "registry_package")
+    public static let release =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "release")
+    public static let repository =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "repository")
+    public static let repositoryDispatch =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "repository_dispatch")
+    public static let secretScanningAlert =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "secret_scanning_alert")
     public static let star = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "star")
     public static let status = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "status")
     public static let team = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "team")
-    public static let teamAdd = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "team_add")
+    public static let teamAdd =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "team_add")
     public static let watch = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "watch")
-    public static let workflowDispatch = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "workflow_dispatch")
-    public static let workflowRun = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "workflow_run")
+    public static let workflowDispatch =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "workflow_dispatch")
+    public static let workflowRun =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsItem(rawValue: "workflow_run")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -67,16 +105,21 @@ public struct WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppEventsI
 }
 
 /// Optional enumerated value serialized in the `secret_scanning_alerts` wire field.
-public struct WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeX502474d96a: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeX502474d96a: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeX502474d96a(rawValue: "read")
-    public static let write = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeX502474d96a(rawValue: "write")
+    public static let write =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeX502474d96a(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -86,16 +129,21 @@ public struct WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeX5024
 }
 
 /// Optional enumerated value serialized in the `pull_requests` wire field.
-public struct WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeXb49e5a654a: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeXb49e5a654a: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeXb49e5a654a(rawValue: "read")
-    public static let write = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeXb49e5a654a(rawValue: "write")
+    public static let write =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeXb49e5a654a(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -105,10 +153,14 @@ public struct WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeXb49e
 }
 
 /// Optional enumerated value serialized in the `type` wire field.
-public struct WebhookIssueCommentPinnedIssueVariant0AssigneesItemType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookIssueCommentPinnedIssueVariant0AssigneesItemType: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = WebhookIssueCommentPinnedIssueVariant0AssigneesItemType(rawValue: "Bot")
     public static let user = WebhookIssueCommentPinnedIssueVariant0AssigneesItemType(rawValue: "User")
     public static let organization = WebhookIssueCommentPinnedIssueVariant0AssigneesItemType(rawValue: "Organization")
@@ -116,7 +168,7 @@ public struct WebhookIssueCommentPinnedIssueVariant0AssigneesItemType: RawRepres
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -126,16 +178,21 @@ public struct WebhookIssueCommentPinnedIssueVariant0AssigneesItemType: RawRepres
 }
 
 /// Optional enumerated value serialized in the `team_discussions` wire field.
-public struct WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeXfc95312a92: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeXfc95312a92: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeXfc95312a92(rawValue: "read")
-    public static let write = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeXfc95312a92(rawValue: "write")
+    public static let write =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeXfc95312a92(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -145,16 +202,21 @@ public struct WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeXfc95
 }
 
 /// Optional enumerated value serialized in the `organization_hooks` wire field.
-public struct WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeX6db42ec897: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeX6db42ec897: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeX6db42ec897(rawValue: "read")
-    public static let write = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeX6db42ec897(rawValue: "write")
+    public static let write =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeX6db42ec897(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -164,16 +226,21 @@ public struct WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeX6db4
 }
 
 /// Optional enumerated value serialized in the `issues` wire field.
-public struct WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeX53605695cf: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeX53605695cf: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeX53605695cf(rawValue: "read")
-    public static let write = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeX53605695cf(rawValue: "write")
+    public static let write =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeX53605695cf(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -183,16 +250,21 @@ public struct WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeX5360
 }
 
 /// Optional enumerated value serialized in the `repository_projects` wire field.
-public struct WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeX3c3347c879: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeX3c3347c879: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeX3c3347c879(rawValue: "read")
-    public static let write = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeX3c3347c879(rawValue: "write")
+    public static let write =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeX3c3347c879(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -202,10 +274,14 @@ public struct WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeX3c33
 }
 
 /// Optional enumerated value serialized in the `type` wire field.
-public struct WebhookIssueCommentPinnedIssueVariant0UserType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookIssueCommentPinnedIssueVariant0UserType: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = WebhookIssueCommentPinnedIssueVariant0UserType(rawValue: "Bot")
     public static let user = WebhookIssueCommentPinnedIssueVariant0UserType(rawValue: "User")
     public static let organization = WebhookIssueCommentPinnedIssueVariant0UserType(rawValue: "Organization")
@@ -213,7 +289,7 @@ public struct WebhookIssueCommentPinnedIssueVariant0UserType: RawRepresentable, 
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -223,16 +299,21 @@ public struct WebhookIssueCommentPinnedIssueVariant0UserType: RawRepresentable, 
 }
 
 /// Optional enumerated value serialized in the `organization_projects` wire field.
-public struct WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeXe0665023ea: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeXe0665023ea: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeXe0665023ea(rawValue: "read")
-    public static let write = WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeXe0665023ea(rawValue: "write")
+    public static let write =
+        WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeXe0665023ea(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -242,16 +323,20 @@ public struct WebhookIssueCommentPinnedIssueVariant0PerformedViaGithubAppPeXe066
 }
 
 /// The state of the milestone.
-public struct WebhookIssueCommentPinnedIssueVariant0MilestoneState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookIssueCommentPinnedIssueVariant0MilestoneState: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let open = WebhookIssueCommentPinnedIssueVariant0MilestoneState(rawValue: "open")
     public static let closed = WebhookIssueCommentPinnedIssueVariant0MilestoneState(rawValue: "closed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

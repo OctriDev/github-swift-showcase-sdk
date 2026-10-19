@@ -6,8 +6,12 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension GitMethods {
-    /// Returns a single reference from your Git database. The `:ref` in the URL must be formatted as `heads/<branch name>` for branches and `tags/<tag name>` for tags. If the `:ref` doesn't match an existing ref, a `404` is returned. > [!NOTE] > You need to explicitly [request a pull request](https://docs.github.com/rest/pulls/pulls#get-a-pull-request) to trigger a test merge commit, which checks the mergeability of pull requests. For more information, see "[Checking mergeability of pull requests](https://docs.github.com/rest/guides/getting-started-with-the-git-database-api#checking-mergeability-of-pull-requests)".
+public extension GitMethods {
+    /// Returns a single reference from your Git database. The `:ref` in the URL must be formatted as `heads/<branch
+    /// name>` for branches and `tags/<tag name>` for tags. If the `:ref` doesn't match an existing ref, a `404` is
+    /// returned. > [!NOTE] > You need to explicitly [request a pull
+    /// request](https://docs.github.com/rest/pulls/pulls#get-a-pull-request) to trigger a test merge commit, which
+    /// checks the mergeability of pull requests. For more information, see "[Checking mergeability of pull requests](https://docs.github.com/rest/guides/getting-started-with-the-git-database-api#checking-mergeability-of-pull-requests)".
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -17,7 +21,28 @@ extension GitMethods {
     /// - ref: The Git reference. For more information, see "[Git
     ///   References](https://git-scm.com/book/en/v2/Git-Internals-Git-References)" in
     ///   the Git documentation.
-    public static func gitGetRef(config: ClientConfig, owner: String, repo: String, ref: String, requestOptions: RequestOptions? = nil) async throws -> GitRef {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/git/ref/", sdkEncodePathSegment(sdkWireString(ref))].joined(), config: config, decoder: .json, operationId: "gitGetRef", options: requestOptions, errors: ["404": BasicError.self, "409": BasicError.self])).data
+    static func gitGetRef(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        ref: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> GitRef {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/git/ref/",
+                sdkEncodePathSegment(sdkWireString(ref)),
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "gitGetRef",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "409": BasicError.self]
+        )).data
     }
 }

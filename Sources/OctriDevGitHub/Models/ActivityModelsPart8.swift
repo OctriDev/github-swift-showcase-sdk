@@ -3,9 +3,30 @@
 
 import Foundation
 
-// Activity domain models
-extension PullRequestReviewCommentEventComment {
-    public init(id: Int, nodeId: String, url: String, pullRequestReviewId: Int?, diffHunk: String, path: String, position: Int?, originalPosition: Int, commitId: String, user: PullRequestReviewCommentEventCommentUser?, body: String, createdAt: Date, updatedAt: Date, htmlUrl: String, pullRequestUrl: String, links: PullRequestReviewCommentEventCommentLinks, originalCommitId: String, reactions: PullRequestReviewCommentEventCommentReactions, subjectType: String? = nil, inReplyToId: Int? = nil) throws {
+/// Activity domain models
+public extension PullRequestReviewCommentEventComment {
+    init(
+        id: Int,
+        nodeId: String,
+        url: String,
+        pullRequestReviewId: Int?,
+        diffHunk: String,
+        path: String,
+        position: Int?,
+        originalPosition: Int,
+        commitId: String,
+        user: PullRequestReviewCommentEventCommentUser?,
+        body: String,
+        createdAt: Date,
+        updatedAt: Date,
+        htmlUrl: String,
+        pullRequestUrl: String,
+        links: PullRequestReviewCommentEventCommentLinks,
+        originalCommitId: String,
+        reactions: PullRequestReviewCommentEventCommentReactions,
+        subjectType: String? = nil,
+        inReplyToId: Int? = nil
+    ) throws {
         (self.id, self.nodeId) = (id, nodeId)
         (self.url, self.pullRequestReviewId) = (url, pullRequestReviewId)
         (self.diffHunk, self.path) = (diffHunk, path)
@@ -16,11 +37,11 @@ extension PullRequestReviewCommentEventComment {
         (self.pullRequestUrl, self.links) = (pullRequestUrl, links)
         (self.originalCommitId, self.reactions) = (originalCommitId, reactions)
         (self.subjectType, self.inReplyToId) = (subjectType, inReplyToId)
-            try sdkValidateUri("url", self.url)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("pull_request_url", self.pullRequestUrl)
+        try sdkValidateUri("url", self.url)
+        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+        try sdkValidateUri("html_url", self.htmlUrl)
+        try sdkValidateUri("pull_request_url", self.pullRequestUrl)
     }
 }
 
@@ -33,21 +54,27 @@ public struct WatchEvent: Codable {
         case action
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WatchEvent {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.action) else {
-            throw SdkValidationError(field: "action", code: "required", message: "Validation failed for 'action': value is required")
-        }
-        self.action = try container.sdkDecodeRequired(.action)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WatchEvent {
-    public init(action: String) {
+public extension WatchEvent {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.action) else {
+            throw SdkValidationError(
+                field: "action",
+                code: "required",
+                message: "Validation failed for 'action': value is required"
+            )
+        }
+        action = try container.sdkDecodeRequired(.action)
+    }
+}
+
+public extension WatchEvent {
+    init(action: String) {
         self.action = action
     }
 }
@@ -141,45 +168,75 @@ public struct ReleaseEventRelease: Codable {
         case shortDescriptionHtml = "short_description_html"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension ReleaseEventRelease {
-    public init(from decoder: Decoder) throws {
+public extension ReleaseEventRelease {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.assetsUrl = try container.sdkDecodeRequired(.assetsUrl)
-        self.uploadUrl = try container.sdkDecodeRequired(.uploadUrl)
-        self.tarballUrl = try container.sdkDecodeNullable(.tarballUrl)
-        self.zipballUrl = try container.sdkDecodeNullable(.zipballUrl)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.tagName = try container.sdkDecodeRequired(.tagName)
-        self.targetCommitish = try container.sdkDecodeRequired(.targetCommitish)
-        self.name = try container.sdkDecodeNullable(.name)
-        self.draft = try container.sdkDecodeRequired(.draft)
-        self.prerelease = try container.sdkDecodeRequired(.prerelease)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.publishedAt = try container.sdkDecodeNullable(.publishedAt)
-        self.author = try container.sdkDecodeRequired(.author)
-        self.assets = try container.sdkDecodeRequired(.assets)
-        self.body = try container.sdkDecodeIfPresent(.body)
-        self.immutable = try container.sdkDecodeIfPresent(.immutable)
-        self.updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
-        self.bodyHtml = try container.sdkDecodeIfPresent(.bodyHtml)
-        self.bodyText = try container.sdkDecodeIfPresent(.bodyText)
-        self.mentionsCount = try container.sdkDecodeIfPresent(.mentionsCount)
-        self.discussionUrl = try container.sdkDecodeIfPresent(.discussionUrl)
-        self.reactions = try container.sdkDecodeIfPresent(.reactions)
-        self.isShortDescriptionHtmlTruncated = try container.sdkDecodeIfPresent(.isShortDescriptionHtmlTruncated)
-        self.shortDescriptionHtml = try container.sdkDecodeIfPresent(.shortDescriptionHtml)
+        url = try container.sdkDecodeRequired(.url)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        assetsUrl = try container.sdkDecodeRequired(.assetsUrl)
+        uploadUrl = try container.sdkDecodeRequired(.uploadUrl)
+        tarballUrl = try container.sdkDecodeNullable(.tarballUrl)
+        zipballUrl = try container.sdkDecodeNullable(.zipballUrl)
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        tagName = try container.sdkDecodeRequired(.tagName)
+        targetCommitish = try container.sdkDecodeRequired(.targetCommitish)
+        name = try container.sdkDecodeNullable(.name)
+        draft = try container.sdkDecodeRequired(.draft)
+        prerelease = try container.sdkDecodeRequired(.prerelease)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        publishedAt = try container.sdkDecodeNullable(.publishedAt)
+        author = try container.sdkDecodeRequired(.author)
+        assets = try container.sdkDecodeRequired(.assets)
+        body = try container.sdkDecodeIfPresent(.body)
+        immutable = try container.sdkDecodeIfPresent(.immutable)
+        updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
+        bodyHtml = try container.sdkDecodeIfPresent(.bodyHtml)
+        bodyText = try container.sdkDecodeIfPresent(.bodyText)
+        mentionsCount = try container.sdkDecodeIfPresent(.mentionsCount)
+        discussionUrl = try container.sdkDecodeIfPresent(.discussionUrl)
+        reactions = try container.sdkDecodeIfPresent(.reactions)
+        isShortDescriptionHtmlTruncated = try container.sdkDecodeIfPresent(.isShortDescriptionHtmlTruncated)
+        shortDescriptionHtml = try container.sdkDecodeIfPresent(.shortDescriptionHtml)
         try sdkValidateConstraints()
     }
 }
 
-extension ReleaseEventRelease {
-    public init(url: String, htmlUrl: String, assetsUrl: String, uploadUrl: String, tarballUrl: String?, zipballUrl: String?, id: Int, nodeId: String, tagName: String, targetCommitish: String, name: String?, draft: Bool, prerelease: Bool, createdAt: Date, publishedAt: Date?, author: SimpleUser, assets: [ReleaseAsset], body: String? = nil, immutable: Bool? = nil, updatedAt: Date? = nil, bodyHtml: String? = nil, bodyText: String? = nil, mentionsCount: Int? = nil, discussionUrl: String? = nil, reactions: ReactionRollup? = nil, isShortDescriptionHtmlTruncated: Bool? = nil, shortDescriptionHtml: String? = nil) throws {
+public extension ReleaseEventRelease {
+    init(
+        url: String,
+        htmlUrl: String,
+        assetsUrl: String,
+        uploadUrl: String,
+        tarballUrl: String?,
+        zipballUrl: String?,
+        id: Int,
+        nodeId: String,
+        tagName: String,
+        targetCommitish: String,
+        name: String?,
+        draft: Bool,
+        prerelease: Bool,
+        createdAt: Date,
+        publishedAt: Date?,
+        author: SimpleUser,
+        assets: [ReleaseAsset],
+        body: String? = nil,
+        immutable: Bool? = nil,
+        updatedAt: Date? = nil,
+        bodyHtml: String? = nil,
+        bodyText: String? = nil,
+        mentionsCount: Int? = nil,
+        discussionUrl: String? = nil,
+        reactions: ReactionRollup? = nil,
+        isShortDescriptionHtmlTruncated: Bool? = nil,
+        shortDescriptionHtml: String? = nil
+    ) throws {
         (self.url, self.htmlUrl) = (url, htmlUrl)
         (self.assetsUrl, self.uploadUrl) = (assetsUrl, uploadUrl)
         (self.tarballUrl, self.zipballUrl) = (tarballUrl, zipballUrl)
@@ -201,23 +258,23 @@ extension ReleaseEventRelease {
 
 extension ReleaseEventRelease {
     func sdkValidateConstraints() throws {
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("assets_url", self.assetsUrl)
-        if let value = self.tarballUrl {
+        try sdkValidateUri("url", url)
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateUri("assets_url", assetsUrl)
+        if let value = tarballUrl {
             try sdkValidateUri("tarball_url", value)
         }
-        if let value = self.zipballUrl {
+        if let value = zipballUrl {
             try sdkValidateUri("zipball_url", value)
         }
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-        if let value = self.publishedAt {
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        if let value = publishedAt {
             try sdkValidateDateTime("published_at", sdkWireString(value))
         }
-        if let value = self.updatedAt {
+        if let value = updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
-        if let value = self.discussionUrl {
+        if let value = discussionUrl {
             try sdkValidateUri("discussion_url", value)
         }
     }
@@ -247,38 +304,67 @@ public struct CreateEvent: Codable {
         case description
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension CreateEvent {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.ref) else {
-            throw SdkValidationError(field: "ref", code: "required", message: "Validation failed for 'ref': value is required")
-        }
-        guard container.contains(.refType) else {
-            throw SdkValidationError(field: "ref_type", code: "required", message: "Validation failed for 'ref_type': value is required")
-        }
-        guard container.contains(.fullRef) else {
-            throw SdkValidationError(field: "full_ref", code: "required", message: "Validation failed for 'full_ref': value is required")
-        }
-        guard container.contains(.primaryBranch) else {
-            throw SdkValidationError(field: "master_branch", code: "required", message: "Validation failed for 'master_branch': value is required")
-        }
-        guard container.contains(.pusherType) else {
-            throw SdkValidationError(field: "pusher_type", code: "required", message: "Validation failed for 'pusher_type': value is required")
-        }
-        self.ref = try container.sdkDecodeRequired(.ref)
-        self.refType = try container.sdkDecodeRequired(.refType)
-        self.fullRef = try container.sdkDecodeRequired(.fullRef)
-        self.primaryBranch = try container.sdkDecodeRequired(.primaryBranch)
-        self.pusherType = try container.sdkDecodeRequired(.pusherType)
-        self.description = try container.sdkDecodeIfPresent(.description)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension CreateEvent {
-    public init(ref: String, refType: String, fullRef: String, primaryBranch: String, pusherType: String, description: String? = nil) {
+public extension CreateEvent {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.ref) else {
+            throw SdkValidationError(
+                field: "ref",
+                code: "required",
+                message: "Validation failed for 'ref': value is required"
+            )
+        }
+        guard container.contains(.refType) else {
+            throw SdkValidationError(
+                field: "ref_type",
+                code: "required",
+                message: "Validation failed for 'ref_type': value is required"
+            )
+        }
+        guard container.contains(.fullRef) else {
+            throw SdkValidationError(
+                field: "full_ref",
+                code: "required",
+                message: "Validation failed for 'full_ref': value is required"
+            )
+        }
+        guard container.contains(.primaryBranch) else {
+            throw SdkValidationError(
+                field: "master_branch",
+                code: "required",
+                message: "Validation failed for 'master_branch': value is required"
+            )
+        }
+        guard container.contains(.pusherType) else {
+            throw SdkValidationError(
+                field: "pusher_type",
+                code: "required",
+                message: "Validation failed for 'pusher_type': value is required"
+            )
+        }
+        ref = try container.sdkDecodeRequired(.ref)
+        refType = try container.sdkDecodeRequired(.refType)
+        fullRef = try container.sdkDecodeRequired(.fullRef)
+        primaryBranch = try container.sdkDecodeRequired(.primaryBranch)
+        pusherType = try container.sdkDecodeRequired(.pusherType)
+        description = try container.sdkDecodeIfPresent(.description)
+    }
+}
+
+public extension CreateEvent {
+    init(
+        ref: String,
+        refType: String,
+        fullRef: String,
+        primaryBranch: String,
+        pusherType: String,
+        description: String? = nil
+    ) {
         (self.ref, self.refType) = (ref, refType)
         (self.fullRef, self.primaryBranch) = (fullRef, primaryBranch)
         (self.pusherType, self.description) = (pusherType, description)
@@ -294,21 +380,27 @@ public struct PullRequestReviewEventReviewLinksPullRequest: Codable {
         case href
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension PullRequestReviewEventReviewLinksPullRequest {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.href) else {
-            throw SdkValidationError(field: "href", code: "required", message: "Validation failed for 'href': value is required")
-        }
-        self.href = try container.sdkDecodeRequired(.href)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension PullRequestReviewEventReviewLinksPullRequest {
-    public init(href: String) {
+public extension PullRequestReviewEventReviewLinksPullRequest {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.href) else {
+            throw SdkValidationError(
+                field: "href",
+                code: "required",
+                message: "Validation failed for 'href': value is required"
+            )
+        }
+        href = try container.sdkDecodeRequired(.href)
+    }
+}
+
+public extension PullRequestReviewEventReviewLinksPullRequest {
+    init(href: String) {
         self.href = href
     }
 }
@@ -325,25 +417,35 @@ public struct MemberEvent: Codable {
         case member
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension MemberEvent {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.action) else {
-            throw SdkValidationError(field: "action", code: "required", message: "Validation failed for 'action': value is required")
-        }
-        guard container.contains(.member) else {
-            throw SdkValidationError(field: "member", code: "required", message: "Validation failed for 'member': value is required")
-        }
-        self.action = try container.sdkDecodeRequired(.action)
-        self.member = try container.sdkDecodeRequired(.member)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension MemberEvent {
-    public init(action: String, member: SimpleUser) {
+public extension MemberEvent {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.action) else {
+            throw SdkValidationError(
+                field: "action",
+                code: "required",
+                message: "Validation failed for 'action': value is required"
+            )
+        }
+        guard container.contains(.member) else {
+            throw SdkValidationError(
+                field: "member",
+                code: "required",
+                message: "Validation failed for 'member': value is required"
+            )
+        }
+        action = try container.sdkDecodeRequired(.action)
+        member = try container.sdkDecodeRequired(.member)
+    }
+}
+
+public extension MemberEvent {
+    init(action: String, member: SimpleUser) {
         (self.action, self.member) = (action, member)
     }
 }
@@ -353,7 +455,10 @@ extension MemberEvent {
 public struct DiscussionState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let open = DiscussionState(rawValue: "open")
     public static let closed = DiscussionState(rawValue: "closed")
     public static let locked = DiscussionState(rawValue: "locked")
@@ -362,7 +467,7 @@ public struct DiscussionState: RawRepresentable, Hashable, Codable, Sendable, Sd
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -375,7 +480,10 @@ public struct DiscussionState: RawRepresentable, Hashable, Codable, Sendable, Sd
 public struct DiscussionStateReason: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let resolved = DiscussionStateReason(rawValue: "resolved")
     public static let outdated = DiscussionStateReason(rawValue: "outdated")
     public static let duplicate = DiscussionStateReason(rawValue: "duplicate")
@@ -383,7 +491,7 @@ public struct DiscussionStateReason: RawRepresentable, Hashable, Codable, Sendab
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -393,17 +501,21 @@ public struct DiscussionStateReason: RawRepresentable, Hashable, Codable, Sendab
 }
 
 /// Optional enumerated value serialized in the `type` wire field.
-public struct PullRequestReviewCommentEventCommentUserType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct PullRequestReviewCommentEventCommentUserType: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = PullRequestReviewCommentEventCommentUserType(rawValue: "Bot")
     public static let user = PullRequestReviewCommentEventCommentUserType(rawValue: "User")
     public static let organization = PullRequestReviewCommentEventCommentUserType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -416,14 +528,17 @@ public struct PullRequestReviewCommentEventCommentUserType: RawRepresentable, Ha
 public struct DiscussionAnswerChosenByType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = DiscussionAnswerChosenByType(rawValue: "Bot")
     public static let user = DiscussionAnswerChosenByType(rawValue: "User")
     public static let organization = DiscussionAnswerChosenByType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -433,16 +548,20 @@ public struct DiscussionAnswerChosenByType: RawRepresentable, Hashable, Codable,
 }
 
 /// The policy controlling who can create pull requests: all or collaborators_only.
-public struct ForkEventForkeePullRequestCreationPolicy: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ForkEventForkeePullRequestCreationPolicy: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let all = ForkEventForkeePullRequestCreationPolicy(rawValue: "all")
     public static let collaboratorsOnly = ForkEventForkeePullRequestCreationPolicy(rawValue: "collaborators_only")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -455,14 +574,17 @@ public struct ForkEventForkeePullRequestCreationPolicy: RawRepresentable, Hashab
 public struct DiscussionUserType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = DiscussionUserType(rawValue: "Bot")
     public static let user = DiscussionUserType(rawValue: "User")
     public static let organization = DiscussionUserType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -475,7 +597,10 @@ public struct DiscussionUserType: RawRepresentable, Hashable, Codable, Sendable,
 public struct DiscussionAuthorAssociation: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let collaborator = DiscussionAuthorAssociation(rawValue: "COLLABORATOR")
     public static let contributor = DiscussionAuthorAssociation(rawValue: "CONTRIBUTOR")
     public static let firstTimer = DiscussionAuthorAssociation(rawValue: "FIRST_TIMER")
@@ -487,7 +612,7 @@ public struct DiscussionAuthorAssociation: RawRepresentable, Hashable, Codable, 
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

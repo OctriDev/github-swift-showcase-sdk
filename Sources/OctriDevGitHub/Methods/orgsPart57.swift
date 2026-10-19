@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension OrgsMethods {
-    public struct OrgsListPatGrantsOptions: Codable {
+public extension OrgsMethods {
+    struct OrgsListPatGrantsOptions: Codable {
         public var org: String
         public var perPage: Int?
         public var page: Int?
@@ -25,7 +25,8 @@ extension OrgsMethods {
         }
     }
 
-    /// Lists approved fine-grained personal access tokens owned by organization members that can access organization resources. Only GitHub Apps can use this endpoint.
+    /// Lists approved fine-grained personal access tokens owned by organization members that can access organization
+    /// resources. Only GitHub Apps can use this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
@@ -51,7 +52,11 @@ extension OrgsMethods {
     ///   8601](https://en.wikipedia.org/wiki/ISO_8601) format:
     ///   `YYYY-MM-DDTHH:MM:SSZ`.
     /// - tokenId: The ID of the token
-    public static func orgsListPatGrants(config: ClientConfig, options: OrgsListPatGrantsOptions, requestOptions: RequestOptions? = nil) async throws -> [OrganizationProgrammaticAccessGrant] {
+    static func orgsListPatGrants(
+        config: ClientConfig,
+        options: OrgsListPatGrantsOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [OrganizationProgrammaticAccessGrant] {
         if let owner = options.owner {
             try validateItems("owner", owner, max: 10)
         }
@@ -68,17 +73,31 @@ extension OrgsMethods {
             try validateItems("token_id", tokenId, max: 50)
         }
 
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(options.org)), "/personal-access-tokens"].joined(), config: config, query: [
-            SdkQueryParameter("per_page", value: options.perPage),
-            SdkQueryParameter("page", value: options.page),
-            SdkQueryParameter("sort", value: options.sort),
-            SdkQueryParameter("direction", value: options.direction),
-            SdkQueryParameter("owner", values: options.owner, style: "form", explode: true),
-            SdkQueryParameter("repository", value: options.repository),
-            SdkQueryParameter("permission", value: options.permission),
-            SdkQueryParameter("last_used_before", value: options.lastUsedBefore),
-            SdkQueryParameter("last_used_after", value: options.lastUsedAfter),
-            SdkQueryParameter("token_id", values: options.tokenId, style: "form", explode: true),
-        ], decoder: .json, operationId: "orgsListPatGrants", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self, "500": BasicError.self])).data
+        return try await (sdkRequest(
+            "GET",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(options.org)), "/personal-access-tokens"].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: options.perPage),
+                SdkQueryParameter("page", value: options.page),
+                SdkQueryParameter("sort", value: options.sort),
+                SdkQueryParameter("direction", value: options.direction),
+                SdkQueryParameter("owner", values: options.owner, style: "form", explode: true),
+                SdkQueryParameter("repository", value: options.repository),
+                SdkQueryParameter("permission", value: options.permission),
+                SdkQueryParameter("last_used_before", value: options.lastUsedBefore),
+                SdkQueryParameter("last_used_after", value: options.lastUsedAfter),
+                SdkQueryParameter("token_id", values: options.tokenId, style: "form", explode: true),
+            ],
+            decoder: .json,
+            operationId: "orgsListPatGrants",
+            options: requestOptions,
+            errors: [
+                "403": BasicError.self,
+                "404": BasicError.self,
+                "422": ValidationError.self,
+                "500": BasicError.self,
+            ]
+        )).data
     }
 }

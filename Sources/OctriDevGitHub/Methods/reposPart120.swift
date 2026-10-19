@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ReposMethods {
-    /// Gets the current status of a GitHub Pages deployment. The authenticated user must have read permission for the GitHub Pages site.
+public extension ReposMethods {
+    /// Gets the current status of a GitHub Pages deployment. The authenticated user must have read permission for the
+    /// GitHub Pages site.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -16,8 +17,29 @@ extension ReposMethods {
     ///   not case sensitive.
     /// - pagesDeploymentId: The ID of the Pages deployment. You can also give the
     ///   commit SHA of the deployment.
-    public static func reposGetPagesDeployment(config: ClientConfig, owner: String, repo: String, pagesDeploymentId: ReposGetPagesDeploymentParameter, requestOptions: RequestOptions? = nil) async throws -> PagesDeploymentStatus {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/pages/deployments/", sdkEncodePathSegment(sdkWireString(pagesDeploymentId))].joined(), config: config, decoder: .json, operationId: "reposGetPagesDeployment", options: requestOptions, errors: ["404": BasicError.self])).data
+    static func reposGetPagesDeployment(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        pagesDeploymentId: ReposGetPagesDeploymentParameter,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> PagesDeploymentStatus {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/pages/deployments/",
+                sdkEncodePathSegment(sdkWireString(pagesDeploymentId)),
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "reposGetPagesDeployment",
+            options: requestOptions,
+            errors: ["404": BasicError.self]
+        )).data
     }
 
     /// Cancels a GitHub Pages deployment. The authenticated user must have write permissions for the GitHub Pages site.
@@ -29,7 +51,29 @@ extension ReposMethods {
     ///   not case sensitive.
     /// - pagesDeploymentId: The ID of the Pages deployment. You can also give the
     ///   commit SHA of the deployment.
-    public static func reposCancelPagesDeployment(config: ClientConfig, owner: String, repo: String, pagesDeploymentId: ReposGetPagesDeploymentParameter, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/pages/deployments/", sdkEncodePathSegment(sdkWireString(pagesDeploymentId)), "/cancel"].joined(), config: config, decoder: .empty, operationId: "reposCancelPagesDeployment", options: requestOptions, errors: ["404": BasicError.self])).data
+    static func reposCancelPagesDeployment(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        pagesDeploymentId: ReposGetPagesDeploymentParameter,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "POST",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/pages/deployments/",
+                sdkEncodePathSegment(sdkWireString(pagesDeploymentId)),
+                "/cancel",
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "reposCancelPagesDeployment",
+            options: requestOptions,
+            errors: ["404": BasicError.self]
+        )).data
     }
 }

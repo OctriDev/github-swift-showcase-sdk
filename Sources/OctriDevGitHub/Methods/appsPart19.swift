@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension AppsMethods {
+public extension AppsMethods {
     /// Lists the active subscriptions for the authenticated user.
     ///
     /// - Parameters:
@@ -18,18 +18,44 @@ extension AppsMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func appsListSubscriptionsForAuthenticatedUserStubbed(config: ClientConfig, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [UserMarketplacePurchase] {
-        return try (await sdkRequest("GET", "/user/marketplace_purchases/stubbed", config: config, query: [
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "appsListSubscriptionsForAuthenticatedUserStubbed", options: requestOptions, errors: ["401": BasicError.self])).data
+    static func appsListSubscriptionsForAuthenticatedUserStubbed(
+        config: ClientConfig,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [UserMarketplacePurchase] {
+        try await (sdkRequest(
+            "GET",
+            "/user/marketplace_purchases/stubbed",
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "appsListSubscriptionsForAuthenticatedUserStubbed",
+            options: requestOptions,
+            errors: ["401": BasicError.self]
+        )).data
     }
 
-    /// Enables an authenticated GitHub App to find the user’s installation information. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
+    /// Enables an authenticated GitHub App to find the user’s installation information. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
+    /// to access this endpoint.
     ///
     /// - Parameters:
     /// - username: The handle for the GitHub user account.
-    public static func appsGetUserInstallation(config: ClientConfig, username: String, requestOptions: RequestOptions? = nil) async throws -> Installation {
-        return try (await sdkRequest("GET", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/installation"].joined(), config: config, decoder: .json, operationId: "appsGetUserInstallation", options: requestOptions)).data
+    static func appsGetUserInstallation(
+        config: ClientConfig,
+        username: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Installation {
+        try await (sdkRequest(
+            "GET",
+            ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/installation"].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "appsGetUserInstallation",
+            options: requestOptions
+        )).data
     }
 }

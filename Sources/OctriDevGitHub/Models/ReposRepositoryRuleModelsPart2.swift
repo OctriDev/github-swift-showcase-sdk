@@ -3,28 +3,38 @@
 
 import Foundation
 
-// ReposRepositoryRule domain models
-extension RepositoryRuleDetailedVariant8 {
-    public init(from decoder: Decoder) throws {
+/// ReposRepositoryRule domain models
+public extension RepositoryRuleDetailedVariant8 {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
         }
-        self.type = try container.sdkDecodeRequired(.type)
-        self.parameters = try container.sdkDecodeIfPresent(.parameters)
-        self.rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
-        self.rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
-        self.rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleRequiredStatusChecksType.allCases.map(\.rawValue))
+        type = try container.sdkDecodeRequired(.type)
+        parameters = try container.sdkDecodeIfPresent(.parameters)
+        rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
+        rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
+        rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
+        try sdkValidateRawEnum("type", type, RepositoryRuleRequiredStatusChecksType.allCases.map(\.rawValue))
     }
 }
 
-extension RepositoryRuleDetailedVariant8 {
-    public init(type: RepositoryRuleRequiredStatusChecksType, parameters: RepositoryRuleRequiredStatusChecksParameters? = nil, rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil, rulesetSource: String? = nil, rulesetId: Int? = nil) throws {
+public extension RepositoryRuleDetailedVariant8 {
+    init(
+        type: RepositoryRuleRequiredStatusChecksType,
+        parameters: RepositoryRuleRequiredStatusChecksParameters? = nil,
+        rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil,
+        rulesetSource: String? = nil,
+        rulesetId: Int? = nil
+    ) throws {
         (self.type, self.parameters) = (type, parameters)
         (self.rulesetSourceType, self.rulesetSource) = (rulesetSourceType, rulesetSource)
         self.rulesetId = rulesetId
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleRequiredStatusChecksType.allCases.map(\.rawValue))
+        try sdkValidateRawEnum("type", self.type, RepositoryRuleRequiredStatusChecksType.allCases.map(\.rawValue))
     }
 }
 
@@ -46,28 +56,43 @@ public struct RepositoryRuleBranchNamePatternParameters: Codable {
         case negate
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryRuleBranchNamePatternParameters {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.`operator`) else {
-            throw SdkValidationError(field: "operator", code: "required", message: "Validation failed for 'operator': value is required")
-        }
-        guard container.contains(.pattern) else {
-            throw SdkValidationError(field: "pattern", code: "required", message: "Validation failed for 'pattern': value is required")
-        }
-        self.`operator` = try container.sdkDecodeRequired(.`operator`)
-        self.pattern = try container.sdkDecodeRequired(.pattern)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.negate = try container.sdkDecodeIfPresent(.negate)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension RepositoryRuleBranchNamePatternParameters {
-    public init(`operator`: RepositoryRuleBranchNamePatternParametersOperator, pattern: String, name: String? = nil, negate: Bool? = nil) {
-        (self.`operator`, self.pattern) = (`operator`, pattern)
+public extension RepositoryRuleBranchNamePatternParameters {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.operator) else {
+            throw SdkValidationError(
+                field: "operator",
+                code: "required",
+                message: "Validation failed for 'operator': value is required"
+            )
+        }
+        guard container.contains(.pattern) else {
+            throw SdkValidationError(
+                field: "pattern",
+                code: "required",
+                message: "Validation failed for 'pattern': value is required"
+            )
+        }
+        self.operator = try container.sdkDecodeRequired(.operator)
+        pattern = try container.sdkDecodeRequired(.pattern)
+        name = try container.sdkDecodeIfPresent(.name)
+        negate = try container.sdkDecodeIfPresent(.negate)
+    }
+}
+
+public extension RepositoryRuleBranchNamePatternParameters {
+    init(
+        operator: RepositoryRuleBranchNamePatternParametersOperator,
+        pattern: String,
+        name: String? = nil,
+        negate: Bool? = nil
+    ) {
+        (self.operator, self.pattern) = (`operator`, pattern)
         (self.name, self.negate) = (name, negate)
     }
 }
@@ -84,22 +109,28 @@ public struct RepositoryRuleWorkflowsParameters: Codable {
         case doNotEnforceOnCreate = "do_not_enforce_on_create"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryRuleWorkflowsParameters {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.workflows) else {
-            throw SdkValidationError(field: "workflows", code: "required", message: "Validation failed for 'workflows': value is required")
-        }
-        self.workflows = try container.sdkDecodeRequired(.workflows)
-        self.doNotEnforceOnCreate = try container.sdkDecodeIfPresent(.doNotEnforceOnCreate)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension RepositoryRuleWorkflowsParameters {
-    public init(workflows: [RepositoryRuleParamsWorkflowFileReference], doNotEnforceOnCreate: Bool? = nil) {
+public extension RepositoryRuleWorkflowsParameters {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.workflows) else {
+            throw SdkValidationError(
+                field: "workflows",
+                code: "required",
+                message: "Validation failed for 'workflows': value is required"
+            )
+        }
+        workflows = try container.sdkDecodeRequired(.workflows)
+        doNotEnforceOnCreate = try container.sdkDecodeIfPresent(.doNotEnforceOnCreate)
+    }
+}
+
+public extension RepositoryRuleWorkflowsParameters {
+    init(workflows: [RepositoryRuleParamsWorkflowFileReference], doNotEnforceOnCreate: Bool? = nil) {
         (self.workflows, self.doNotEnforceOnCreate) = (workflows, doNotEnforceOnCreate)
     }
 }
@@ -113,21 +144,27 @@ public struct RepositoryRuleUpdateParameters: Codable {
         case updateAllowsFetchAndMerge = "update_allows_fetch_and_merge"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryRuleUpdateParameters {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.updateAllowsFetchAndMerge) else {
-            throw SdkValidationError(field: "update_allows_fetch_and_merge", code: "required", message: "Validation failed for 'update_allows_fetch_and_merge': value is required")
-        }
-        self.updateAllowsFetchAndMerge = try container.sdkDecodeRequired(.updateAllowsFetchAndMerge)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension RepositoryRuleUpdateParameters {
-    public init(updateAllowsFetchAndMerge: Bool) {
+public extension RepositoryRuleUpdateParameters {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.updateAllowsFetchAndMerge) else {
+            throw SdkValidationError(
+                field: "update_allows_fetch_and_merge",
+                code: "required",
+                message: "Validation failed for 'update_allows_fetch_and_merge': value is required"
+            )
+        }
+        updateAllowsFetchAndMerge = try container.sdkDecodeRequired(.updateAllowsFetchAndMerge)
+    }
+}
+
+public extension RepositoryRuleUpdateParameters {
+    init(updateAllowsFetchAndMerge: Bool) {
         self.updateAllowsFetchAndMerge = updateAllowsFetchAndMerge
     }
 }
@@ -152,30 +189,42 @@ public struct RepositoryRuleDetailedVariant23: Codable {
         case rulesetId = "ruleset_id"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryRuleDetailedVariant23 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        self.type = try container.sdkDecodeRequired(.type)
-        self.parameters = try container.sdkDecodeIfPresent(.parameters)
-        self.rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
-        self.rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
-        self.rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleFileExtensionRestrictionType.allCases.map(\.rawValue))
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension RepositoryRuleDetailedVariant23 {
-    public init(type: RepositoryRuleFileExtensionRestrictionType, parameters: RepositoryRuleFileExtensionRestrictionParameters? = nil, rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil, rulesetSource: String? = nil, rulesetId: Int? = nil) throws {
+public extension RepositoryRuleDetailedVariant23 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.type) else {
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
+        }
+        type = try container.sdkDecodeRequired(.type)
+        parameters = try container.sdkDecodeIfPresent(.parameters)
+        rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
+        rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
+        rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
+        try sdkValidateRawEnum("type", type, RepositoryRuleFileExtensionRestrictionType.allCases.map(\.rawValue))
+    }
+}
+
+public extension RepositoryRuleDetailedVariant23 {
+    init(
+        type: RepositoryRuleFileExtensionRestrictionType,
+        parameters: RepositoryRuleFileExtensionRestrictionParameters? = nil,
+        rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil,
+        rulesetSource: String? = nil,
+        rulesetId: Int? = nil
+    ) throws {
         (self.type, self.parameters) = (type, parameters)
         (self.rulesetSourceType, self.rulesetSource) = (rulesetSourceType, rulesetSource)
         self.rulesetId = rulesetId
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleFileExtensionRestrictionType.allCases.map(\.rawValue))
+        try sdkValidateRawEnum("type", self.type, RepositoryRuleFileExtensionRestrictionType.allCases.map(\.rawValue))
     }
 }
 
@@ -191,25 +240,34 @@ public struct RepositoryRuleCommitMessagePattern: Codable {
         case parameters
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryRuleCommitMessagePattern {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        self.type = try container.sdkDecodeRequired(.type)
-        self.parameters = try container.sdkDecodeIfPresent(.parameters)
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleCommitMessagePatternType.allCases.map(\.rawValue))
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension RepositoryRuleCommitMessagePattern {
-    public init(type: RepositoryRuleCommitMessagePatternType, parameters: RepositoryRuleCommitMessagePatternParameters? = nil) throws {
+public extension RepositoryRuleCommitMessagePattern {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.type) else {
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
+        }
+        type = try container.sdkDecodeRequired(.type)
+        parameters = try container.sdkDecodeIfPresent(.parameters)
+        try sdkValidateRawEnum("type", type, RepositoryRuleCommitMessagePatternType.allCases.map(\.rawValue))
+    }
+}
+
+public extension RepositoryRuleCommitMessagePattern {
+    init(
+        type: RepositoryRuleCommitMessagePatternType,
+        parameters: RepositoryRuleCommitMessagePatternParameters? = nil
+    ) throws {
         (self.type, self.parameters) = (type, parameters)
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleCommitMessagePatternType.allCases.map(\.rawValue))
+        try sdkValidateRawEnum("type", self.type, RepositoryRuleCommitMessagePatternType.allCases.map(\.rawValue))
     }
 }
 
@@ -233,30 +291,42 @@ public struct RepositoryRuleDetailedVariant17: Codable {
         case rulesetId = "ruleset_id"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryRuleDetailedVariant17 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        self.type = try container.sdkDecodeRequired(.type)
-        self.parameters = try container.sdkDecodeIfPresent(.parameters)
-        self.rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
-        self.rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
-        self.rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleCodeQualityType.allCases.map(\.rawValue))
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension RepositoryRuleDetailedVariant17 {
-    public init(type: RepositoryRuleCodeQualityType, parameters: RepositoryRuleCodeQualityParameters? = nil, rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil, rulesetSource: String? = nil, rulesetId: Int? = nil) throws {
+public extension RepositoryRuleDetailedVariant17 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.type) else {
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
+        }
+        type = try container.sdkDecodeRequired(.type)
+        parameters = try container.sdkDecodeIfPresent(.parameters)
+        rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
+        rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
+        rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
+        try sdkValidateRawEnum("type", type, RepositoryRuleCodeQualityType.allCases.map(\.rawValue))
+    }
+}
+
+public extension RepositoryRuleDetailedVariant17 {
+    init(
+        type: RepositoryRuleCodeQualityType,
+        parameters: RepositoryRuleCodeQualityParameters? = nil,
+        rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil,
+        rulesetSource: String? = nil,
+        rulesetId: Int? = nil
+    ) throws {
         (self.type, self.parameters) = (type, parameters)
         (self.rulesetSourceType, self.rulesetSource) = (rulesetSourceType, rulesetSource)
         self.rulesetId = rulesetId
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleCodeQualityType.allCases.map(\.rawValue))
+        try sdkValidateRawEnum("type", self.type, RepositoryRuleCodeQualityType.allCases.map(\.rawValue))
     }
 }
 
@@ -280,30 +350,42 @@ public struct RepositoryRuleDetailedVariant24: Codable {
         case rulesetId = "ruleset_id"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryRuleDetailedVariant24 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        self.type = try container.sdkDecodeRequired(.type)
-        self.parameters = try container.sdkDecodeIfPresent(.parameters)
-        self.rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
-        self.rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
-        self.rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleMaxFileSizeType.allCases.map(\.rawValue))
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension RepositoryRuleDetailedVariant24 {
-    public init(type: RepositoryRuleMaxFileSizeType, parameters: RepositoryRuleMaxFileSizeParameters? = nil, rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil, rulesetSource: String? = nil, rulesetId: Int? = nil) throws {
+public extension RepositoryRuleDetailedVariant24 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.type) else {
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
+        }
+        type = try container.sdkDecodeRequired(.type)
+        parameters = try container.sdkDecodeIfPresent(.parameters)
+        rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
+        rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
+        rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
+        try sdkValidateRawEnum("type", type, RepositoryRuleMaxFileSizeType.allCases.map(\.rawValue))
+    }
+}
+
+public extension RepositoryRuleDetailedVariant24 {
+    init(
+        type: RepositoryRuleMaxFileSizeType,
+        parameters: RepositoryRuleMaxFileSizeParameters? = nil,
+        rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil,
+        rulesetSource: String? = nil,
+        rulesetId: Int? = nil
+    ) throws {
         (self.type, self.parameters) = (type, parameters)
         (self.rulesetSourceType, self.rulesetSource) = (rulesetSourceType, rulesetSource)
         self.rulesetId = rulesetId
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleMaxFileSizeType.allCases.map(\.rawValue))
+        try sdkValidateRawEnum("type", self.type, RepositoryRuleMaxFileSizeType.allCases.map(\.rawValue))
     }
 }
 
@@ -316,24 +398,30 @@ public struct RepositoryRuleRequiredSignatures: Codable {
         case type
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryRuleRequiredSignatures {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        self.type = try container.sdkDecodeRequired(.type)
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleRequiredSignaturesType.allCases.map(\.rawValue))
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension RepositoryRuleRequiredSignatures {
-    public init(type: RepositoryRuleRequiredSignaturesType) throws {
+public extension RepositoryRuleRequiredSignatures {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.type) else {
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
+        }
+        type = try container.sdkDecodeRequired(.type)
+        try sdkValidateRawEnum("type", type, RepositoryRuleRequiredSignaturesType.allCases.map(\.rawValue))
+    }
+}
+
+public extension RepositoryRuleRequiredSignatures {
+    init(type: RepositoryRuleRequiredSignaturesType) throws {
         self.type = type
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleRequiredSignaturesType.allCases.map(\.rawValue))
+        try sdkValidateRawEnum("type", self.type, RepositoryRuleRequiredSignaturesType.allCases.map(\.rawValue))
     }
 }
 
@@ -357,30 +445,42 @@ public struct RepositoryRuleDetailedVariant4: Codable {
         case rulesetId = "ruleset_id"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryRuleDetailedVariant4 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        self.type = try container.sdkDecodeRequired(.type)
-        self.parameters = try container.sdkDecodeIfPresent(.parameters)
-        self.rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
-        self.rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
-        self.rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleMergeQueueType.allCases.map(\.rawValue))
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension RepositoryRuleDetailedVariant4 {
-    public init(type: RepositoryRuleMergeQueueType, parameters: RepositoryRuleMergeQueueParameters? = nil, rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil, rulesetSource: String? = nil, rulesetId: Int? = nil) throws {
+public extension RepositoryRuleDetailedVariant4 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.type) else {
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
+        }
+        type = try container.sdkDecodeRequired(.type)
+        parameters = try container.sdkDecodeIfPresent(.parameters)
+        rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
+        rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
+        rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
+        try sdkValidateRawEnum("type", type, RepositoryRuleMergeQueueType.allCases.map(\.rawValue))
+    }
+}
+
+public extension RepositoryRuleDetailedVariant4 {
+    init(
+        type: RepositoryRuleMergeQueueType,
+        parameters: RepositoryRuleMergeQueueParameters? = nil,
+        rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil,
+        rulesetSource: String? = nil,
+        rulesetId: Int? = nil
+    ) throws {
         (self.type, self.parameters) = (type, parameters)
         (self.rulesetSourceType, self.rulesetSource) = (rulesetSourceType, rulesetSource)
         self.rulesetId = rulesetId
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleMergeQueueType.allCases.map(\.rawValue))
+        try sdkValidateRawEnum("type", self.type, RepositoryRuleMergeQueueType.allCases.map(\.rawValue))
     }
 }
 
@@ -398,25 +498,31 @@ public struct RepositoryRuleCodeCoverage: Codable {
         case parameters
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryRuleCodeCoverage {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        self.type = try container.sdkDecodeRequired(.type)
-        self.parameters = try container.sdkDecodeIfPresent(.parameters)
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleCodeCoverageType.allCases.map(\.rawValue))
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension RepositoryRuleCodeCoverage {
-    public init(type: RepositoryRuleCodeCoverageType, parameters: RepositoryRuleCodeCoverageParameters? = nil) throws {
+public extension RepositoryRuleCodeCoverage {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.type) else {
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
+        }
+        type = try container.sdkDecodeRequired(.type)
+        parameters = try container.sdkDecodeIfPresent(.parameters)
+        try sdkValidateRawEnum("type", type, RepositoryRuleCodeCoverageType.allCases.map(\.rawValue))
+    }
+}
+
+public extension RepositoryRuleCodeCoverage {
+    init(type: RepositoryRuleCodeCoverageType, parameters: RepositoryRuleCodeCoverageParameters? = nil) throws {
         (self.type, self.parameters) = (type, parameters)
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleCodeCoverageType.allCases.map(\.rawValue))
+        try sdkValidateRawEnum("type", self.type, RepositoryRuleCodeCoverageType.allCases.map(\.rawValue))
     }
 }
 
@@ -433,25 +539,34 @@ public struct RepositoryRuleMaxFilePathLength: Codable {
         case parameters
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryRuleMaxFilePathLength {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        self.type = try container.sdkDecodeRequired(.type)
-        self.parameters = try container.sdkDecodeIfPresent(.parameters)
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleMaxFilePathLengthType.allCases.map(\.rawValue))
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension RepositoryRuleMaxFilePathLength {
-    public init(type: RepositoryRuleMaxFilePathLengthType, parameters: RepositoryRuleMaxFilePathLengthParameters? = nil) throws {
+public extension RepositoryRuleMaxFilePathLength {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.type) else {
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
+        }
+        type = try container.sdkDecodeRequired(.type)
+        parameters = try container.sdkDecodeIfPresent(.parameters)
+        try sdkValidateRawEnum("type", type, RepositoryRuleMaxFilePathLengthType.allCases.map(\.rawValue))
+    }
+}
+
+public extension RepositoryRuleMaxFilePathLength {
+    init(
+        type: RepositoryRuleMaxFilePathLengthType,
+        parameters: RepositoryRuleMaxFilePathLengthParameters? = nil
+    ) throws {
         (self.type, self.parameters) = (type, parameters)
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleMaxFilePathLengthType.allCases.map(\.rawValue))
+        try sdkValidateRawEnum("type", self.type, RepositoryRuleMaxFilePathLengthType.allCases.map(\.rawValue))
     }
 }
 
@@ -473,28 +588,43 @@ public struct RepositoryRuleCommitAuthorEmailPatternParameters: Codable {
         case negate
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryRuleCommitAuthorEmailPatternParameters {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.`operator`) else {
-            throw SdkValidationError(field: "operator", code: "required", message: "Validation failed for 'operator': value is required")
-        }
-        guard container.contains(.pattern) else {
-            throw SdkValidationError(field: "pattern", code: "required", message: "Validation failed for 'pattern': value is required")
-        }
-        self.`operator` = try container.sdkDecodeRequired(.`operator`)
-        self.pattern = try container.sdkDecodeRequired(.pattern)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.negate = try container.sdkDecodeIfPresent(.negate)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension RepositoryRuleCommitAuthorEmailPatternParameters {
-    public init(`operator`: RepositoryRuleCommitAuthorEmailPatternParametersOperator, pattern: String, name: String? = nil, negate: Bool? = nil) {
-        (self.`operator`, self.pattern) = (`operator`, pattern)
+public extension RepositoryRuleCommitAuthorEmailPatternParameters {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.operator) else {
+            throw SdkValidationError(
+                field: "operator",
+                code: "required",
+                message: "Validation failed for 'operator': value is required"
+            )
+        }
+        guard container.contains(.pattern) else {
+            throw SdkValidationError(
+                field: "pattern",
+                code: "required",
+                message: "Validation failed for 'pattern': value is required"
+            )
+        }
+        self.operator = try container.sdkDecodeRequired(.operator)
+        pattern = try container.sdkDecodeRequired(.pattern)
+        name = try container.sdkDecodeIfPresent(.name)
+        negate = try container.sdkDecodeIfPresent(.negate)
+    }
+}
+
+public extension RepositoryRuleCommitAuthorEmailPatternParameters {
+    init(
+        operator: RepositoryRuleCommitAuthorEmailPatternParametersOperator,
+        pattern: String,
+        name: String? = nil,
+        negate: Bool? = nil
+    ) {
+        (self.operator, self.pattern) = (`operator`, pattern)
         (self.name, self.negate) = (name, negate)
     }
 }
