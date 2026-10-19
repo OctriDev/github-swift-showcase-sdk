@@ -6,13 +6,31 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension OrgsMethods {
+public extension OrgsMethods {
     /// Gets a custom property that is defined for an organization. Organization members can read these properties.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - customPropertyName: The custom property name
-    public static func orgsCustomPropertiesForReposGetOrganizationDefinition(config: ClientConfig, org: String, customPropertyName: String, requestOptions: RequestOptions? = nil) async throws -> CustomProperty {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/properties/schema/", sdkEncodePathSegment(sdkWireString(customPropertyName))].joined(), config: config, decoder: .json, operationId: "orgsCustomPropertiesForReposGetOrganizationDefinition", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+    static func orgsCustomPropertiesForReposGetOrganizationDefinition(
+        config: ClientConfig,
+        org: String,
+        customPropertyName: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CustomProperty {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/orgs/",
+                sdkEncodePathSegment(sdkWireString(org)),
+                "/properties/schema/",
+                sdkEncodePathSegment(sdkWireString(customPropertyName)),
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "orgsCustomPropertiesForReposGetOrganizationDefinition",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 }

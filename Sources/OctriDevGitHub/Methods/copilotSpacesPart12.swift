@@ -6,8 +6,10 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension CopilotSpacesMethods {
-    /// Updates a Copilot Space owned by a user. Only the authenticated user can update spaces for their own account. Users can update their personal Copilot Spaces. OAuth app tokens and personal access tokens (classic) need the `read:user` scope to use this endpoint.
+public extension CopilotSpacesMethods {
+    /// Updates a Copilot Space owned by a user. Only the authenticated user can update spaces for their own account.
+    /// Users can update their personal Copilot Spaces. OAuth app tokens and personal access tokens (classic) need the
+    /// `read:user` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - username: The handle for the GitHub user account.
@@ -20,22 +22,73 @@ extension CopilotSpacesMethods {
     ///   access (default) - `reader`: Makes the space publicly readable Note: User
     ///   spaces do not support writer or admin base roles.
     /// - resourcesAttributes: Resources to attach to the space.
-    public static func copilotSpacesUpdateForUser(config: ClientConfig, username: String, spaceNumber: Int, name: String? = nil, description: String? = nil, generalInstructions: String? = nil, baseRole: CopilotSpacesUpdateForUserRequestBodyBaseRole? = nil, resourcesAttributes: [CopilotSpacesUpdateForUserRequestBodyResourcesAttributesItem]? = nil, requestOptions: RequestOptions? = nil) async throws -> CopilotSpace {
-        if let generalInstructions = generalInstructions {
+    static func copilotSpacesUpdateForUser(
+        config: ClientConfig,
+        username: String,
+        spaceNumber: Int,
+        name: String? = nil,
+        description: String? = nil,
+        generalInstructions: String? = nil,
+        baseRole: CopilotSpacesUpdateForUserRequestBodyBaseRole? = nil,
+        resourcesAttributes: [CopilotSpacesUpdateForUserRequestBodyResourcesAttributesItem]? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CopilotSpace {
+        if let generalInstructions {
             try validateLength("general_instructions", generalInstructions, max: 4000)
         }
 
-        let requestBody = CopilotSpacesUpdateForUserRequestBody(name: name, description: description, generalInstructions: generalInstructions, baseRole: baseRole, resourcesAttributes: resourcesAttributes)
+        let requestBody = CopilotSpacesUpdateForUserRequestBody(
+            name: name,
+            description: description,
+            generalInstructions: generalInstructions,
+            baseRole: baseRole,
+            resourcesAttributes: resourcesAttributes
+        )
 
-        return try (await sdkRequest("PUT", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/copilot-spaces/", sdkEncodePathSegment(sdkWireString(spaceNumber))].joined(), config: config, body: requestBody, decoder: .json, operationId: "copilotSpacesUpdateForUser", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
+        return try await (sdkRequest(
+            "PUT",
+            [
+                "/users/",
+                sdkEncodePathSegment(sdkWireString(username)),
+                "/copilot-spaces/",
+                sdkEncodePathSegment(sdkWireString(spaceNumber)),
+            ].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "copilotSpacesUpdateForUser",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self]
+        )).data
     }
 
-    /// Deletes a Copilot Space owned by a user. The authenticated user must be the owner of the space. **Warning:** This action is permanent and cannot be undone. Deleting a space will remove all associated resources and configurations. OAuth app tokens and personal access tokens (classic) need the `user` scope to use this endpoint.
+    /// Deletes a Copilot Space owned by a user. The authenticated user must be the owner of the space. **Warning:**
+    /// This action is permanent and cannot be undone. Deleting a space will remove all associated resources and
+    /// configurations. OAuth app tokens and personal access tokens (classic) need the `user` scope to use this
+    /// endpoint.
     ///
     /// - Parameters:
     /// - username: The handle for the GitHub user account.
     /// - spaceNumber: The unique identifier of the Copilot Space.
-    public static func copilotSpacesDeleteForUser(config: ClientConfig, username: String, spaceNumber: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/copilot-spaces/", sdkEncodePathSegment(sdkWireString(spaceNumber))].joined(), config: config, decoder: .empty, operationId: "copilotSpacesDeleteForUser", options: requestOptions, errors: ["404": BasicError.self, "422": ValidationError.self])).data
+    static func copilotSpacesDeleteForUser(
+        config: ClientConfig,
+        username: String,
+        spaceNumber: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            [
+                "/users/",
+                sdkEncodePathSegment(sdkWireString(username)),
+                "/copilot-spaces/",
+                sdkEncodePathSegment(sdkWireString(spaceNumber)),
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "copilotSpacesDeleteForUser",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "422": ValidationError.self]
+        )).data
     }
 }

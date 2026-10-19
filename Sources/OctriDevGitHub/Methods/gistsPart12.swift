@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension GistsMethods {
-    /// Lists public gists for the specified user. Use `since` to filter by last-updated time, and use `page` and `per_page` to paginate the results. `per_page` accepts up to 100 results per page.
+public extension GistsMethods {
+    /// Lists public gists for the specified user. Use `since` to filter by last-updated time, and use `page` and
+    /// `per_page` to paginate the results. `per_page` accepts up to 100 results per page.
     ///
     /// Lists public gists for the specified user:
     ///
@@ -24,15 +25,31 @@ extension GistsMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func gistsListForUser(config: ClientConfig, username: String, since: Date? = nil, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [BaseGist] {
-        if let since = since {
+    static func gistsListForUser(
+        config: ClientConfig,
+        username: String,
+        since: Date? = nil,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [BaseGist] {
+        if let since {
             try sdkValidateDateTime("since", since)
         }
 
-        return try (await sdkRequest("GET", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/gists"].joined(), config: config, query: [
-            SdkQueryParameter("since", value: since),
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "gistsListForUser", options: requestOptions, errors: ["422": ValidationError.self])).data
+        return try await (sdkRequest(
+            "GET",
+            ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/gists"].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("since", value: since),
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "gistsListForUser",
+            options: requestOptions,
+            errors: ["422": ValidationError.self]
+        )).data
     }
 }

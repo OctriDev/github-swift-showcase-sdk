@@ -6,8 +6,10 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension OrgsMethods {
-    /// Create a background job to set deployment records for a given cluster. Performs validation and permission checks synchronously, returning rejected deployments immediately, then enqueues a background job for the actual deployment updates. Use the companion GET endpoint to poll for job status.
+public extension OrgsMethods {
+    /// Create a background job to set deployment records for a given cluster. Performs validation and permission checks
+    /// synchronously, returning rejected deployments immediately, then enqueues a background job for the actual
+    /// deployment updates. Use the companion GET endpoint to poll for job status.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
@@ -15,7 +17,15 @@ extension OrgsMethods {
     /// - logicalEnvironment: The stage of the deployment.
     /// - deployments: The list of deployments to record.
     /// - physicalEnvironment: The physical region of the deployment.
-    public static func orgsCreateClusterDeploymentRecordsJob(config: ClientConfig, org: String, cluster: String, logicalEnvironment: String, deployments: OrgsCreateClusterDeploymentRecordsJobDeploymentsList, physicalEnvironment: String? = nil, requestOptions: RequestOptions? = nil) async throws -> OrgsCreateClusterDeploymentRecordsJobResponse {
+    static func orgsCreateClusterDeploymentRecordsJob(
+        config: ClientConfig,
+        org: String,
+        cluster: String,
+        logicalEnvironment: String,
+        deployments: OrgsCreateClusterDeploymentRecordsJobDeploymentsList,
+        physicalEnvironment: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> OrgsCreateClusterDeploymentRecordsJobResponse {
         try validateLength("cluster", cluster, min: 1, max: 128)
         try sdkValidatePattern("cluster", cluster, sdkPattern1f958ddfef10)
 
@@ -23,13 +33,32 @@ extension OrgsMethods {
 
         try validateItems("deployments", deployments, max: 5000)
 
-        if let physicalEnvironment = physicalEnvironment {
+        if let physicalEnvironment {
             try validateLength("physical_environment", physicalEnvironment, max: 128)
         }
 
-        let requestBody = OrgsCreateClusterDeploymentRecordsJobRequestBody(logicalEnvironment: logicalEnvironment, deployments: deployments, physicalEnvironment: physicalEnvironment)
+        let requestBody = OrgsCreateClusterDeploymentRecordsJobRequestBody(
+            logicalEnvironment: logicalEnvironment,
+            deployments: deployments,
+            physicalEnvironment: physicalEnvironment
+        )
 
-        return try (await sdkRequest("POST", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/artifacts/metadata/deployment-record/cluster/", sdkEncodePathSegment(sdkWireString(cluster)), "/jobs"].joined(), config: config, body: requestBody, decoder: .json, operationId: "orgsCreateClusterDeploymentRecordsJob", options: requestOptions, errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self, "409": BasicError.self])).data
+        return try await (sdkRequest(
+            "POST",
+            [
+                "/orgs/",
+                sdkEncodePathSegment(sdkWireString(org)),
+                "/artifacts/metadata/deployment-record/cluster/",
+                sdkEncodePathSegment(sdkWireString(cluster)),
+                "/jobs",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "orgsCreateClusterDeploymentRecordsJob",
+            options: requestOptions,
+            errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self, "409": BasicError.self]
+        )).data
     }
 
     /// Get the status and results of a previously created cluster deployment records job.
@@ -38,10 +67,31 @@ extension OrgsMethods {
     /// - org: The organization name. The name is not case sensitive.
     /// - cluster: The cluster name.
     /// - jobId: The ID of the job.
-    public static func orgsGetClusterDeploymentRecordsJob(config: ClientConfig, org: String, cluster: String, jobId: Int, requestOptions: RequestOptions? = nil) async throws -> OrgsGetClusterDeploymentRecordsJobResponse {
+    static func orgsGetClusterDeploymentRecordsJob(
+        config: ClientConfig,
+        org: String,
+        cluster: String,
+        jobId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> OrgsGetClusterDeploymentRecordsJobResponse {
         try validateLength("cluster", cluster, min: 1, max: 128)
         try sdkValidatePattern("cluster", cluster, sdkPattern1f958ddfef10)
 
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/artifacts/metadata/deployment-record/cluster/", sdkEncodePathSegment(sdkWireString(cluster)), "/jobs/", sdkEncodePathSegment(sdkWireString(jobId))].joined(), config: config, decoder: .json, operationId: "orgsGetClusterDeploymentRecordsJob", options: requestOptions, errors: ["404": BasicError.self])).data
+        return try await (sdkRequest(
+            "GET",
+            [
+                "/orgs/",
+                sdkEncodePathSegment(sdkWireString(org)),
+                "/artifacts/metadata/deployment-record/cluster/",
+                sdkEncodePathSegment(sdkWireString(cluster)),
+                "/jobs/",
+                sdkEncodePathSegment(sdkWireString(jobId)),
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "orgsGetClusterDeploymentRecordsJob",
+            options: requestOptions,
+            errors: ["404": BasicError.self]
+        )).data
     }
 }

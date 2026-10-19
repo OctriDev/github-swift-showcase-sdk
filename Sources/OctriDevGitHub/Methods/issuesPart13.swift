@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension IssuesMethods {
-    /// Retrieves a single issue event from a repository by its event identifier. Use `event_id` to select the event and `owner` and `repo` to identify the repository.
+public extension IssuesMethods {
+    /// Retrieves a single issue event from a repository by its event identifier. Use `event_id` to select the event and
+    /// `owner` and `repo` to identify the repository.
     ///
     /// Gets a single event by the event id.
     ///
@@ -16,7 +17,28 @@ extension IssuesMethods {
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    public static func issuesGetEvent(config: ClientConfig, owner: String, repo: String, eventId: Int, requestOptions: RequestOptions? = nil) async throws -> IssueEvent {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/issues/events/", sdkEncodePathSegment(sdkWireString(eventId))].joined(), config: config, decoder: .json, operationId: "issuesGetEvent", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "410": BasicError.self])).data
+    static func issuesGetEvent(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        eventId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> IssueEvent {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/issues/events/",
+                sdkEncodePathSegment(sdkWireString(eventId)),
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "issuesGetEvent",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self, "410": BasicError.self]
+        )).data
     }
 }

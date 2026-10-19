@@ -6,24 +6,56 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension UsersMethods {
-    /// View extended details for a single GPG key. OAuth app tokens and personal access tokens (classic) need the `read:gpg_key` scope to use this endpoint.
+public extension UsersMethods {
+    /// View extended details for a single GPG key. OAuth app tokens and personal access tokens (classic) need the
+    /// `read:gpg_key` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - gpgKeyId: The unique identifier of the GPG key.
-    public static func usersGetGpgKeyForAuthenticatedUser(config: ClientConfig, gpgKeyId: Int, requestOptions: RequestOptions? = nil) async throws -> GpgKey {
-        return try (await sdkRequest("GET", ["/user/gpg_keys/", sdkEncodePathSegment(sdkWireString(gpgKeyId))].joined(), config: config, decoder: .json, operationId: "usersGetGpgKeyForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
+    static func usersGetGpgKeyForAuthenticatedUser(
+        config: ClientConfig,
+        gpgKeyId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> GpgKey {
+        try await (sdkRequest(
+            "GET",
+            ["/user/gpg_keys/", sdkEncodePathSegment(sdkWireString(gpgKeyId))].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "usersGetGpgKeyForAuthenticatedUser",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 
-    /// Removes a GPG key from the authenticated user's GitHub account. OAuth app tokens and personal access tokens (classic) need the `admin:gpg_key` scope to use this endpoint.
+    /// Removes a GPG key from the authenticated user's GitHub account. OAuth app tokens and personal access tokens
+    /// (classic) need the `admin:gpg_key` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - gpgKeyId: The unique identifier of the GPG key.
-    public static func usersDeleteGpgKeyForAuthenticatedUser(config: ClientConfig, gpgKeyId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/user/gpg_keys/", sdkEncodePathSegment(sdkWireString(gpgKeyId))].joined(), config: config, decoder: .empty, operationId: "usersDeleteGpgKeyForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
+    static func usersDeleteGpgKeyForAuthenticatedUser(
+        config: ClientConfig,
+        gpgKeyId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            ["/user/gpg_keys/", sdkEncodePathSegment(sdkWireString(gpgKeyId))].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "usersDeleteGpgKeyForAuthenticatedUser",
+            options: requestOptions,
+            errors: [
+                "401": BasicError.self,
+                "403": BasicError.self,
+                "404": BasicError.self,
+                "422": ValidationError.self,
+            ]
+        )).data
     }
 
-    /// Lists the public SSH keys for the authenticated user's GitHub account. OAuth app tokens and personal access tokens (classic) need the `read:public_key` scope to use this endpoint.
+    /// Lists the public SSH keys for the authenticated user's GitHub account. OAuth app tokens and personal access
+    /// tokens (classic) need the `read:public_key` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - perPage: The number of results per page (max 100). For more information,
@@ -34,10 +66,24 @@ extension UsersMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func usersListPublicSshKeysForAuthenticatedUser(config: ClientConfig, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [Key] {
-        return try (await sdkRequest("GET", "/user/keys", config: config, query: [
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "usersListPublicSshKeysForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
+    static func usersListPublicSshKeysForAuthenticatedUser(
+        config: ClientConfig,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [Key] {
+        try await (sdkRequest(
+            "GET",
+            "/user/keys",
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "usersListPublicSshKeysForAuthenticatedUser",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 }

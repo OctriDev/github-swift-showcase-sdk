@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ReposMethods {
-    /// Retrieves a deployment from a repository by its deployment ID. Use this operation to inspect the deployment's ref, environment, task, and current record details.
+public extension ReposMethods {
+    /// Retrieves a deployment from a repository by its deployment ID. Use this operation to inspect the deployment's
+    /// ref, environment, task, and current record details.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -15,11 +16,40 @@ extension ReposMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - deploymentId: deployment_id parameter
-    public static func reposGetDeployment(config: ClientConfig, owner: String, repo: String, deploymentId: Int, requestOptions: RequestOptions? = nil) async throws -> Deployment {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/deployments/", sdkEncodePathSegment(sdkWireString(deploymentId))].joined(), config: config, decoder: .json, operationId: "reposGetDeployment", options: requestOptions, errors: ["404": BasicError.self])).data
+    static func reposGetDeployment(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        deploymentId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Deployment {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/deployments/",
+                sdkEncodePathSegment(sdkWireString(deploymentId)),
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "reposGetDeployment",
+            options: requestOptions,
+            errors: ["404": BasicError.self]
+        )).data
     }
 
-    /// If the repository only has one deployment, you can delete the deployment regardless of its status. If the repository has more than one deployment, you can only delete inactive deployments. This ensures that repositories with multiple deployments will always have an active deployment. To set a deployment as inactive, you must: * Create a new deployment that is active so that the system has a record of the current state, then delete the previously active deployment. * Mark the active deployment as inactive by adding any non-successful deployment status. For more information, see "[Create a deployment](https://docs.github.com/rest/deployments/deployments/#create-a-deployment)" and "[Create a deployment status](https://docs.github.com/rest/deployments/statuses#create-a-deployment-status)." OAuth app tokens and personal access tokens (classic) need the `repo` or `repo_deployment` scope to use this endpoint.
+    /// If the repository only has one deployment, you can delete the deployment regardless of its status. If the
+    /// repository has more than one deployment, you can only delete inactive deployments. This ensures that
+    /// repositories with multiple deployments will always have an active deployment. To set a deployment as inactive,
+    /// you must: * Create a new deployment that is active so that the system has a record of the current state, then
+    /// delete the previously active deployment. * Mark the active deployment as inactive by adding any non-successful
+    /// deployment status. For more information, see "[Create a
+    /// deployment](https://docs.github.com/rest/deployments/deployments/#create-a-deployment)" and "[Create a
+    /// deployment status](https://docs.github.com/rest/deployments/statuses#create-a-deployment-status)." OAuth app
+    /// tokens and personal access tokens (classic) need the `repo` or `repo_deployment` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -27,7 +57,28 @@ extension ReposMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - deploymentId: deployment_id parameter
-    public static func reposDeleteDeployment(config: ClientConfig, owner: String, repo: String, deploymentId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/deployments/", sdkEncodePathSegment(sdkWireString(deploymentId))].joined(), config: config, decoder: .empty, operationId: "reposDeleteDeployment", options: requestOptions, errors: ["404": BasicError.self, "422": ValidationErrorSimple.self])).data
+    static func reposDeleteDeployment(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        deploymentId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/deployments/",
+                sdkEncodePathSegment(sdkWireString(deploymentId)),
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "reposDeleteDeployment",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "422": ValidationErrorSimple.self]
+        )).data
     }
 }

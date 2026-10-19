@@ -3,7 +3,7 @@
 
 import Foundation
 
-// ActionsWorkflow domain models
+/// ActionsWorkflow domain models
 public typealias WorkflowRunId = Int
 
 /// Required object value serialized in the `job_runs[]` wire field.
@@ -18,25 +18,35 @@ public struct WorkflowRunUsageBillableWINDOWSJobRunsItem: Codable {
         case durationMs = "duration_ms"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WorkflowRunUsageBillableWINDOWSJobRunsItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.jobId) else {
-            throw SdkValidationError(field: "job_id", code: "required", message: "Validation failed for 'job_id': value is required")
-        }
-        guard container.contains(.durationMs) else {
-            throw SdkValidationError(field: "duration_ms", code: "required", message: "Validation failed for 'duration_ms': value is required")
-        }
-        self.jobId = try container.sdkDecodeRequired(.jobId)
-        self.durationMs = try container.sdkDecodeRequired(.durationMs)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WorkflowRunUsageBillableWINDOWSJobRunsItem {
-    public init(jobId: Int, durationMs: Int) {
+public extension WorkflowRunUsageBillableWINDOWSJobRunsItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.jobId) else {
+            throw SdkValidationError(
+                field: "job_id",
+                code: "required",
+                message: "Validation failed for 'job_id': value is required"
+            )
+        }
+        guard container.contains(.durationMs) else {
+            throw SdkValidationError(
+                field: "duration_ms",
+                code: "required",
+                message: "Validation failed for 'duration_ms': value is required"
+            )
+        }
+        jobId = try container.sdkDecodeRequired(.jobId)
+        durationMs = try container.sdkDecodeRequired(.durationMs)
+    }
+}
+
+public extension WorkflowRunUsageBillableWINDOWSJobRunsItem {
+    init(jobId: Int, durationMs: Int) {
         (self.jobId, self.durationMs) = (jobId, durationMs)
     }
 }
@@ -50,21 +60,27 @@ public struct WorkflowUsage: Codable {
         case billable
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WorkflowUsage {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.billable) else {
-            throw SdkValidationError(field: "billable", code: "required", message: "Validation failed for 'billable': value is required")
-        }
-        self.billable = try container.sdkDecodeRequired(.billable)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WorkflowUsage {
-    public init(billable: WorkflowUsageBillable) {
+public extension WorkflowUsage {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.billable) else {
+            throw SdkValidationError(
+                field: "billable",
+                code: "required",
+                message: "Validation failed for 'billable': value is required"
+            )
+        }
+        billable = try container.sdkDecodeRequired(.billable)
+    }
+}
+
+public extension WorkflowUsage {
+    init(billable: WorkflowUsageBillable) {
         self.billable = billable
     }
 }
@@ -79,19 +95,19 @@ public struct WorkflowUsageBillableMACOS: Codable {
     }
 
     init() {
-        self.totalMs = nil
+        totalMs = nil
     }
 }
 
-extension WorkflowUsageBillableMACOS {
-    public init(from decoder: Decoder) throws {
+public extension WorkflowUsageBillableMACOS {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.totalMs = try container.sdkDecodeIfPresent(.totalMs)
+        totalMs = try container.sdkDecodeIfPresent(.totalMs)
     }
 }
 
-extension WorkflowUsageBillableMACOS {
-    public init(totalMs: Int? = nil) {
+public extension WorkflowUsageBillableMACOS {
+    init(totalMs: Int? = nil) {
         self.init()
         self.totalMs = totalMs
     }
@@ -112,26 +128,36 @@ public struct WorkflowRunUsageBillableWINDOWS: Codable {
         case jobRuns = "job_runs"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WorkflowRunUsageBillableWINDOWS {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.totalMs) else {
-            throw SdkValidationError(field: "total_ms", code: "required", message: "Validation failed for 'total_ms': value is required")
-        }
-        guard container.contains(.jobs) else {
-            throw SdkValidationError(field: "jobs", code: "required", message: "Validation failed for 'jobs': value is required")
-        }
-        self.totalMs = try container.sdkDecodeRequired(.totalMs)
-        self.jobs = try container.sdkDecodeRequired(.jobs)
-        self.jobRuns = try container.sdkDecodeIfPresent(.jobRuns)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WorkflowRunUsageBillableWINDOWS {
-    public init(totalMs: Int, jobs: Int, jobRuns: [WorkflowRunUsageBillableWINDOWSJobRunsItem]? = nil) {
+public extension WorkflowRunUsageBillableWINDOWS {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.totalMs) else {
+            throw SdkValidationError(
+                field: "total_ms",
+                code: "required",
+                message: "Validation failed for 'total_ms': value is required"
+            )
+        }
+        guard container.contains(.jobs) else {
+            throw SdkValidationError(
+                field: "jobs",
+                code: "required",
+                message: "Validation failed for 'jobs': value is required"
+            )
+        }
+        totalMs = try container.sdkDecodeRequired(.totalMs)
+        jobs = try container.sdkDecodeRequired(.jobs)
+        jobRuns = try container.sdkDecodeIfPresent(.jobRuns)
+    }
+}
+
+public extension WorkflowRunUsageBillableWINDOWS {
+    init(totalMs: Int, jobs: Int, jobRuns: [WorkflowRunUsageBillableWINDOWSJobRunsItem]? = nil) {
         (self.totalMs, self.jobs) = (totalMs, jobs)
         self.jobRuns = jobRuns
     }
@@ -187,41 +213,55 @@ public struct Workflow: Codable {
         case deletedAt = "deleted_at"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension Workflow {
-    public init(from decoder: Decoder) throws {
+public extension Workflow {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.path = try container.sdkDecodeRequired(.path)
-        self.state = try container.sdkDecodeRequired(.state)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.badgeUrl = try container.sdkDecodeRequired(.badgeUrl)
-        self.deletedAt = try container.sdkDecodeIfPresent(.deletedAt)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-        if let value = self.deletedAt {
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        name = try container.sdkDecodeRequired(.name)
+        path = try container.sdkDecodeRequired(.path)
+        state = try container.sdkDecodeRequired(.state)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        url = try container.sdkDecodeRequired(.url)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        badgeUrl = try container.sdkDecodeRequired(.badgeUrl)
+        deletedAt = try container.sdkDecodeIfPresent(.deletedAt)
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+        if let value = deletedAt {
             try sdkValidateDateTime("deleted_at", sdkWireString(value))
         }
     }
 }
 
-extension Workflow {
-    public init(id: Int, nodeId: String, name: String, path: String, state: WorkflowState, createdAt: Date, updatedAt: Date, url: String, htmlUrl: String, badgeUrl: String, deletedAt: Date? = nil) throws {
+public extension Workflow {
+    init(
+        id: Int,
+        nodeId: String,
+        name: String,
+        path: String,
+        state: WorkflowState,
+        createdAt: Date,
+        updatedAt: Date,
+        url: String,
+        htmlUrl: String,
+        badgeUrl: String,
+        deletedAt: Date? = nil
+    ) throws {
         (self.id, self.nodeId) = (id, nodeId)
         (self.name, self.path) = (name, path)
         (self.state, self.createdAt) = (state, createdAt)
         (self.updatedAt, self.url) = (updatedAt, url)
         (self.htmlUrl, self.badgeUrl) = (htmlUrl, badgeUrl)
         self.deletedAt = deletedAt
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
         if let value = self.deletedAt {
             try sdkValidateDateTime("deleted_at", sdkWireString(value))
         }
@@ -243,26 +283,36 @@ public struct WorkflowRunUsageBillableUBUNTU: Codable {
         case jobRuns = "job_runs"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WorkflowRunUsageBillableUBUNTU {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.totalMs) else {
-            throw SdkValidationError(field: "total_ms", code: "required", message: "Validation failed for 'total_ms': value is required")
-        }
-        guard container.contains(.jobs) else {
-            throw SdkValidationError(field: "jobs", code: "required", message: "Validation failed for 'jobs': value is required")
-        }
-        self.totalMs = try container.sdkDecodeRequired(.totalMs)
-        self.jobs = try container.sdkDecodeRequired(.jobs)
-        self.jobRuns = try container.sdkDecodeIfPresent(.jobRuns)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WorkflowRunUsageBillableUBUNTU {
-    public init(totalMs: Int, jobs: Int, jobRuns: [WorkflowRunUsageBillableUBUNTUJobRunsItem]? = nil) {
+public extension WorkflowRunUsageBillableUBUNTU {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.totalMs) else {
+            throw SdkValidationError(
+                field: "total_ms",
+                code: "required",
+                message: "Validation failed for 'total_ms': value is required"
+            )
+        }
+        guard container.contains(.jobs) else {
+            throw SdkValidationError(
+                field: "jobs",
+                code: "required",
+                message: "Validation failed for 'jobs': value is required"
+            )
+        }
+        totalMs = try container.sdkDecodeRequired(.totalMs)
+        jobs = try container.sdkDecodeRequired(.jobs)
+        jobRuns = try container.sdkDecodeIfPresent(.jobRuns)
+    }
+}
+
+public extension WorkflowRunUsageBillableUBUNTU {
+    init(totalMs: Int, jobs: Int, jobRuns: [WorkflowRunUsageBillableUBUNTUJobRunsItem]? = nil) {
         (self.totalMs, self.jobs) = (totalMs, jobs)
         self.jobRuns = jobRuns
     }
@@ -283,26 +333,36 @@ public struct WorkflowRunUsageBillableMACOS: Codable {
         case jobRuns = "job_runs"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WorkflowRunUsageBillableMACOS {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.totalMs) else {
-            throw SdkValidationError(field: "total_ms", code: "required", message: "Validation failed for 'total_ms': value is required")
-        }
-        guard container.contains(.jobs) else {
-            throw SdkValidationError(field: "jobs", code: "required", message: "Validation failed for 'jobs': value is required")
-        }
-        self.totalMs = try container.sdkDecodeRequired(.totalMs)
-        self.jobs = try container.sdkDecodeRequired(.jobs)
-        self.jobRuns = try container.sdkDecodeIfPresent(.jobRuns)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WorkflowRunUsageBillableMACOS {
-    public init(totalMs: Int, jobs: Int, jobRuns: [WorkflowRunUsageBillableMACOSJobRunsItem]? = nil) {
+public extension WorkflowRunUsageBillableMACOS {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.totalMs) else {
+            throw SdkValidationError(
+                field: "total_ms",
+                code: "required",
+                message: "Validation failed for 'total_ms': value is required"
+            )
+        }
+        guard container.contains(.jobs) else {
+            throw SdkValidationError(
+                field: "jobs",
+                code: "required",
+                message: "Validation failed for 'jobs': value is required"
+            )
+        }
+        totalMs = try container.sdkDecodeRequired(.totalMs)
+        jobs = try container.sdkDecodeRequired(.jobs)
+        jobRuns = try container.sdkDecodeIfPresent(.jobRuns)
+    }
+}
+
+public extension WorkflowRunUsageBillableMACOS {
+    init(totalMs: Int, jobs: Int, jobRuns: [WorkflowRunUsageBillableMACOSJobRunsItem]? = nil) {
         (self.totalMs, self.jobs) = (totalMs, jobs)
         self.jobRuns = jobRuns
     }
@@ -320,25 +380,35 @@ public struct WorkflowRunUsageBillableUBUNTUJobRunsItem: Codable {
         case durationMs = "duration_ms"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WorkflowRunUsageBillableUBUNTUJobRunsItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.jobId) else {
-            throw SdkValidationError(field: "job_id", code: "required", message: "Validation failed for 'job_id': value is required")
-        }
-        guard container.contains(.durationMs) else {
-            throw SdkValidationError(field: "duration_ms", code: "required", message: "Validation failed for 'duration_ms': value is required")
-        }
-        self.jobId = try container.sdkDecodeRequired(.jobId)
-        self.durationMs = try container.sdkDecodeRequired(.durationMs)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WorkflowRunUsageBillableUBUNTUJobRunsItem {
-    public init(jobId: Int, durationMs: Int) {
+public extension WorkflowRunUsageBillableUBUNTUJobRunsItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.jobId) else {
+            throw SdkValidationError(
+                field: "job_id",
+                code: "required",
+                message: "Validation failed for 'job_id': value is required"
+            )
+        }
+        guard container.contains(.durationMs) else {
+            throw SdkValidationError(
+                field: "duration_ms",
+                code: "required",
+                message: "Validation failed for 'duration_ms': value is required"
+            )
+        }
+        jobId = try container.sdkDecodeRequired(.jobId)
+        durationMs = try container.sdkDecodeRequired(.durationMs)
+    }
+}
+
+public extension WorkflowRunUsageBillableUBUNTUJobRunsItem {
+    init(jobId: Int, durationMs: Int) {
         (self.jobId, self.durationMs) = (jobId, durationMs)
     }
 }
@@ -358,35 +428,49 @@ public struct WorkflowDispatchResponse: Codable {
         case htmlUrl = "html_url"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WorkflowDispatchResponse {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.workflowRunId) else {
-            throw SdkValidationError(field: "workflow_run_id", code: "required", message: "Validation failed for 'workflow_run_id': value is required")
-        }
-        guard container.contains(.runUrl) else {
-            throw SdkValidationError(field: "run_url", code: "required", message: "Validation failed for 'run_url': value is required")
-        }
-        guard container.contains(.htmlUrl) else {
-            throw SdkValidationError(field: "html_url", code: "required", message: "Validation failed for 'html_url': value is required")
-        }
-        self.workflowRunId = try container.sdkDecodeRequired(.workflowRunId)
-        self.runUrl = try container.sdkDecodeRequired(.runUrl)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-            try sdkValidateUri("run_url", self.runUrl)
-            try sdkValidateUri("html_url", self.htmlUrl)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WorkflowDispatchResponse {
-    public init(workflowRunId: WorkflowRunId, runUrl: String, htmlUrl: String) throws {
+public extension WorkflowDispatchResponse {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.workflowRunId) else {
+            throw SdkValidationError(
+                field: "workflow_run_id",
+                code: "required",
+                message: "Validation failed for 'workflow_run_id': value is required"
+            )
+        }
+        guard container.contains(.runUrl) else {
+            throw SdkValidationError(
+                field: "run_url",
+                code: "required",
+                message: "Validation failed for 'run_url': value is required"
+            )
+        }
+        guard container.contains(.htmlUrl) else {
+            throw SdkValidationError(
+                field: "html_url",
+                code: "required",
+                message: "Validation failed for 'html_url': value is required"
+            )
+        }
+        workflowRunId = try container.sdkDecodeRequired(.workflowRunId)
+        runUrl = try container.sdkDecodeRequired(.runUrl)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        try sdkValidateUri("run_url", runUrl)
+        try sdkValidateUri("html_url", htmlUrl)
+    }
+}
+
+public extension WorkflowDispatchResponse {
+    init(workflowRunId: WorkflowRunId, runUrl: String, htmlUrl: String) throws {
         (self.workflowRunId, self.runUrl) = (workflowRunId, runUrl)
         self.htmlUrl = htmlUrl
-            try sdkValidateUri("run_url", self.runUrl)
-            try sdkValidateUri("html_url", self.htmlUrl)
+        try sdkValidateUri("run_url", self.runUrl)
+        try sdkValidateUri("html_url", self.htmlUrl)
     }
 }
 
@@ -402,25 +486,35 @@ public struct WorkflowRunUsageBillableMACOSJobRunsItem: Codable {
         case durationMs = "duration_ms"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WorkflowRunUsageBillableMACOSJobRunsItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.jobId) else {
-            throw SdkValidationError(field: "job_id", code: "required", message: "Validation failed for 'job_id': value is required")
-        }
-        guard container.contains(.durationMs) else {
-            throw SdkValidationError(field: "duration_ms", code: "required", message: "Validation failed for 'duration_ms': value is required")
-        }
-        self.jobId = try container.sdkDecodeRequired(.jobId)
-        self.durationMs = try container.sdkDecodeRequired(.durationMs)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WorkflowRunUsageBillableMACOSJobRunsItem {
-    public init(jobId: Int, durationMs: Int) {
+public extension WorkflowRunUsageBillableMACOSJobRunsItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.jobId) else {
+            throw SdkValidationError(
+                field: "job_id",
+                code: "required",
+                message: "Validation failed for 'job_id': value is required"
+            )
+        }
+        guard container.contains(.durationMs) else {
+            throw SdkValidationError(
+                field: "duration_ms",
+                code: "required",
+                message: "Validation failed for 'duration_ms': value is required"
+            )
+        }
+        jobId = try container.sdkDecodeRequired(.jobId)
+        durationMs = try container.sdkDecodeRequired(.durationMs)
+    }
+}
+
+public extension WorkflowRunUsageBillableMACOSJobRunsItem {
+    init(jobId: Int, durationMs: Int) {
         (self.jobId, self.durationMs) = (jobId, durationMs)
     }
 }
@@ -435,19 +529,19 @@ public struct WorkflowUsageBillableUBUNTU: Codable {
     }
 
     init() {
-        self.totalMs = nil
+        totalMs = nil
     }
 }
 
-extension WorkflowUsageBillableUBUNTU {
-    public init(from decoder: Decoder) throws {
+public extension WorkflowUsageBillableUBUNTU {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.totalMs = try container.sdkDecodeIfPresent(.totalMs)
+        totalMs = try container.sdkDecodeIfPresent(.totalMs)
     }
 }
 
-extension WorkflowUsageBillableUBUNTU {
-    public init(totalMs: Int? = nil) {
+public extension WorkflowUsageBillableUBUNTU {
+    init(totalMs: Int? = nil) {
         self.init()
         self.totalMs = totalMs
     }
@@ -463,19 +557,19 @@ public struct WorkflowUsageBillableWINDOWS: Codable {
     }
 
     init() {
-        self.totalMs = nil
+        totalMs = nil
     }
 }
 
-extension WorkflowUsageBillableWINDOWS {
-    public init(from decoder: Decoder) throws {
+public extension WorkflowUsageBillableWINDOWS {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.totalMs = try container.sdkDecodeIfPresent(.totalMs)
+        totalMs = try container.sdkDecodeIfPresent(.totalMs)
     }
 }
 
-extension WorkflowUsageBillableWINDOWS {
-    public init(totalMs: Int? = nil) {
+public extension WorkflowUsageBillableWINDOWS {
+    init(totalMs: Int? = nil) {
         self.init()
         self.totalMs = totalMs
     }
@@ -497,21 +591,25 @@ public struct WorkflowRunUsageBillable: Codable {
     }
 
     init() {
-        (self.ubuntu, self.macos, self.windows) = (nil, nil, nil)
+        (ubuntu, macos, windows) = (nil, nil, nil)
     }
 }
 
-extension WorkflowRunUsageBillable {
-    public init(from decoder: Decoder) throws {
+public extension WorkflowRunUsageBillable {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.ubuntu = try container.sdkDecodeIfPresent(.ubuntu)
-        self.macos = try container.sdkDecodeIfPresent(.macos)
-        self.windows = try container.sdkDecodeIfPresent(.windows)
+        ubuntu = try container.sdkDecodeIfPresent(.ubuntu)
+        macos = try container.sdkDecodeIfPresent(.macos)
+        windows = try container.sdkDecodeIfPresent(.windows)
     }
 }
 
-extension WorkflowRunUsageBillable {
-    public init(ubuntu: WorkflowRunUsageBillableUBUNTU? = nil, macos: WorkflowRunUsageBillableMACOS? = nil, windows: WorkflowRunUsageBillableWINDOWS? = nil) {
+public extension WorkflowRunUsageBillable {
+    init(
+        ubuntu: WorkflowRunUsageBillableUBUNTU? = nil,
+        macos: WorkflowRunUsageBillableMACOS? = nil,
+        windows: WorkflowRunUsageBillableWINDOWS? = nil
+    ) {
         self.init()
         (self.ubuntu, self.macos) = (ubuntu, macos)
         self.windows = windows
@@ -530,5 +628,7 @@ public struct WorkflowRunUsage: Codable {
         case runDurationMs = "run_duration_ms"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }

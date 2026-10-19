@@ -3,9 +3,39 @@
 
 import Foundation
 
-// IssuesIssue domain models
-extension IssueEvent {
-    public init(id: Int, nodeId: String, url: String, actor: NullableSimpleUser?, event: String, commitId: String?, commitUrl: String?, createdAt: Date, issue: NullableIssue? = nil, label: IssueEventLabel? = nil, assignee: NullableSimpleUser? = nil, assigner: NullableSimpleUser? = nil, reviewRequester: NullableSimpleUser? = nil, requestedReviewer: NullableSimpleUser? = nil, requestedTeam: Team? = nil, dismissedReview: IssueEventDismissedReview? = nil, milestone: IssueEventMilestone? = nil, projectCard: IssueEventProjectCard? = nil, rename: IssueEventRename? = nil, issueType: IssueTypeWebhook? = nil, prevIssueType: IssueTypeWebhook? = nil, subIssue: NullableIssueReference? = nil, parentIssue: NullableIssueReference? = nil, blockedBy: NullableIssueReference? = nil, blocking: NullableIssueReference? = nil, intent: NullableIssueEventIntent? = nil, authorAssociation: AuthorAssociation? = nil, lockReason: String? = nil, performedViaGithubApp: NullableIntegration? = nil) throws {
+/// IssuesIssue domain models
+public extension IssueEvent {
+    init(
+        id: Int,
+        nodeId: String,
+        url: String,
+        actor: NullableSimpleUser?,
+        event: String,
+        commitId: String?,
+        commitUrl: String?,
+        createdAt: Date,
+        issue: NullableIssue? = nil,
+        label: IssueEventLabel? = nil,
+        assignee: NullableSimpleUser? = nil,
+        assigner: NullableSimpleUser? = nil,
+        reviewRequester: NullableSimpleUser? = nil,
+        requestedReviewer: NullableSimpleUser? = nil,
+        requestedTeam: Team? = nil,
+        dismissedReview: IssueEventDismissedReview? = nil,
+        milestone: IssueEventMilestone? = nil,
+        projectCard: IssueEventProjectCard? = nil,
+        rename: IssueEventRename? = nil,
+        issueType: IssueTypeWebhook? = nil,
+        prevIssueType: IssueTypeWebhook? = nil,
+        subIssue: NullableIssueReference? = nil,
+        parentIssue: NullableIssueReference? = nil,
+        blockedBy: NullableIssueReference? = nil,
+        blocking: NullableIssueReference? = nil,
+        intent: NullableIssueEventIntent? = nil,
+        authorAssociation: AuthorAssociation? = nil,
+        lockReason: String? = nil,
+        performedViaGithubApp: NullableIntegration? = nil
+    ) throws {
         (self.id, self.nodeId) = (id, nodeId)
         (self.url, self.actor) = (url, actor)
         (self.event, self.commitId) = (event, commitId)
@@ -21,8 +51,8 @@ extension IssueEvent {
         (self.blocking, self.intent) = (blocking, intent)
         (self.authorAssociation, self.lockReason) = (authorAssociation, lockReason)
         self.performedViaGithubApp = performedViaGithubApp
-            try sdkValidateUri("url", self.url)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        try sdkValidateUri("url", self.url)
+        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
     }
 }
 
@@ -41,26 +71,36 @@ public struct IssueTypeWebhook: Codable {
         case color
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension IssueTypeWebhook {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.color = try container.sdkDecodeIfPresent(.color)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension IssueTypeWebhook {
-    public init(id: Int, name: String, color: IssueTypeWebhookColor? = nil) {
+public extension IssueTypeWebhook {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        name = try container.sdkDecodeRequired(.name)
+        color = try container.sdkDecodeIfPresent(.color)
+    }
+}
+
+public extension IssueTypeWebhook {
+    init(id: Int, name: String, color: IssueTypeWebhookColor? = nil) {
         (self.id, self.name) = (id, name)
         self.color = color
     }
@@ -70,7 +110,10 @@ extension IssueTypeWebhook {
 public struct IssueSuggestionState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let pending = IssueSuggestionState(rawValue: "pending")
     public static let applied = IssueSuggestionState(rawValue: "applied")
     public static let approved = IssueSuggestionState(rawValue: "approved")
@@ -80,7 +123,7 @@ public struct IssueSuggestionState: RawRepresentable, Hashable, Codable, Sendabl
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -93,7 +136,10 @@ public struct IssueSuggestionState: RawRepresentable, Hashable, Codable, Sendabl
 public struct IssueTypeWebhookColor: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let gray = IssueTypeWebhookColor(rawValue: "gray")
     public static let blue = IssueTypeWebhookColor(rawValue: "blue")
     public static let green = IssueTypeWebhookColor(rawValue: "green")
@@ -105,7 +151,7 @@ public struct IssueTypeWebhookColor: RawRepresentable, Hashable, Codable, Sendab
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -118,14 +164,17 @@ public struct IssueTypeWebhookColor: RawRepresentable, Hashable, Codable, Sendab
 public struct IssueSuggestionConfidence: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let low = IssueSuggestionConfidence(rawValue: "LOW")
     public static let medium = IssueSuggestionConfidence(rawValue: "MEDIUM")
     public static let high = IssueSuggestionConfidence(rawValue: "HIGH")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -138,7 +187,10 @@ public struct IssueSuggestionConfidence: RawRepresentable, Hashable, Codable, Se
 public struct IssueSuggestionAction: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let setType = IssueSuggestionAction(rawValue: "set_type")
     public static let addLabel = IssueSuggestionAction(rawValue: "add_label")
     public static let addField = IssueSuggestionAction(rawValue: "add_field")
@@ -147,7 +199,7 @@ public struct IssueSuggestionAction: RawRepresentable, Hashable, Codable, Sendab
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

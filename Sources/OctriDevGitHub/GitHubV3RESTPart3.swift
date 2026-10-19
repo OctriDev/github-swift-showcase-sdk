@@ -3,29 +3,72 @@
 
 import Foundation
 
-extension AppsNamespace {
-/// Add a single repository to an installation. The authenticated user must have admin access to the repository.
-    public func addRepoToInstallationForAuthenticatedUser(installationId: Int, repositoryId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await AppsMethods.appsAddRepoToInstallationForAuthenticatedUser(config: config, installationId: installationId, repositoryId: repositoryId, requestOptions: requestOptions)
+public extension AppsNamespace {
+    /// Add a single repository to an installation. The authenticated user must have admin access to the repository.
+    func addRepoToInstallationForAuthenticatedUser(
+        installationId: Int,
+        repositoryId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await AppsMethods.appsAddRepoToInstallationForAuthenticatedUser(
+            config: config,
+            installationId: installationId,
+            repositoryId: repositoryId,
+            requestOptions: requestOptions
+        )
     }
 
-/// Remove a single repository from an installation. The authenticated user must have admin access to the repository. The installation must have the `repository_selection` of `selected`. To use a PAT (classic) with this endpoint, the `repo` scope is required
-    public func removeRepoFromInstallationForAuthenticatedUser(installationId: Int, repositoryId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await AppsMethods.appsRemoveRepoFromInstallationForAuthenticatedUser(config: config, installationId: installationId, repositoryId: repositoryId, requestOptions: requestOptions)
+    /// Remove a single repository from an installation. The authenticated user must have admin access to the
+    /// repository. The installation must have the `repository_selection` of `selected`. To use a PAT (classic) with
+    /// this endpoint, the `repo` scope is required
+    func removeRepoFromInstallationForAuthenticatedUser(
+        installationId: Int,
+        repositoryId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await AppsMethods.appsRemoveRepoFromInstallationForAuthenticatedUser(
+            config: config,
+            installationId: installationId,
+            repositoryId: repositoryId,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists the active subscriptions for the authenticated user.
-    public func listSubscriptionsForAuthenticatedUser(perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [UserMarketplacePurchase] {
-        return try await AppsMethods.appsListSubscriptionsForAuthenticatedUser(config: config, perPage: perPage, page: page, requestOptions: requestOptions)
+    /// Lists the active subscriptions for the authenticated user.
+    func listSubscriptionsForAuthenticatedUser(
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [UserMarketplacePurchase] {
+        try await AppsMethods.appsListSubscriptionsForAuthenticatedUser(
+            config: config,
+            perPage: perPage,
+            page: page,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists the active subscriptions for the authenticated user.
-    public func listSubscriptionsForAuthenticatedUserStubbed(perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [UserMarketplacePurchase] {
-        return try await AppsMethods.appsListSubscriptionsForAuthenticatedUserStubbed(config: config, perPage: perPage, page: page, requestOptions: requestOptions)
+    /// Lists the active subscriptions for the authenticated user.
+    func listSubscriptionsForAuthenticatedUserStubbed(
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [UserMarketplacePurchase] {
+        try await AppsMethods.appsListSubscriptionsForAuthenticatedUserStubbed(
+            config: config,
+            perPage: perPage,
+            page: page,
+            requestOptions: requestOptions
+        )
     }
 
-/// Enables an authenticated GitHub App to find the user’s installation information. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
-    public func getUserInstallation(username: String, requestOptions: RequestOptions? = nil) async throws -> Installation {
-        return try await AppsMethods.appsGetUserInstallation(config: config, username: username, requestOptions: requestOptions)
+    /// Enables an authenticated GitHub App to find the user’s installation information. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
+    /// to access this endpoint.
+    func getUserInstallation(username: String, requestOptions: RequestOptions? = nil) async throws -> Installation {
+        try await AppsMethods.appsGetUserInstallation(
+            config: config,
+            username: username,
+            requestOptions: requestOptions
+        )
     }
 }

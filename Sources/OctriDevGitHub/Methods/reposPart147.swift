@@ -6,8 +6,10 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ReposMethods {
-    /// Retrieves a specific historical version of a repository ruleset. Identify the repository and ruleset with `owner`, `repo`, and `ruleset_id`, then specify the version with `version_id`. The response includes the version details and the ruleset state for that version.
+public extension ReposMethods {
+    /// Retrieves a specific historical version of a repository ruleset. Identify the repository and ruleset with
+    /// `owner`, `repo`, and `ruleset_id`, then specify the version with `version_id`. The response includes the version
+    /// details and the ruleset state for that version.
     ///
     /// Get a version of a repository ruleset.
     ///
@@ -18,18 +20,62 @@ extension ReposMethods {
     ///   not case sensitive.
     /// - rulesetId: The ID of the ruleset.
     /// - versionId: The ID of the version
-    public static func reposGetRepoRulesetVersion(config: ClientConfig, owner: String, repo: String, rulesetId: Int, versionId: Int, requestOptions: RequestOptions? = nil) async throws -> RulesetVersionWithState {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/rulesets/", sdkEncodePathSegment(sdkWireString(rulesetId)), "/history/", sdkEncodePathSegment(sdkWireString(versionId))].joined(), config: config, decoder: .json, operationId: "reposGetRepoRulesetVersion", options: requestOptions, errors: ["404": BasicError.self, "500": BasicError.self])).data
+    static func reposGetRepoRulesetVersion(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        rulesetId: Int,
+        versionId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> RulesetVersionWithState {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/rulesets/",
+                sdkEncodePathSegment(sdkWireString(rulesetId)),
+                "/history/",
+                sdkEncodePathSegment(sdkWireString(versionId)),
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "reposGetRepoRulesetVersion",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "500": BasicError.self]
+        )).data
     }
 
-    /// Returns a weekly aggregate of the number of additions and deletions pushed to a repository. > [!NOTE] > This endpoint can only be used for repositories with fewer than 10,000 commits. If the repository contains 10,000 or more commits, a 422 status code will be returned.
+    /// Returns a weekly aggregate of the number of additions and deletions pushed to a repository. > [!NOTE] > This
+    /// endpoint can only be used for repositories with fewer than 10,000 commits. If the repository contains 10,000 or
+    /// more commits, a 422 status code will be returned.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    public static func reposGetCodeFrequencyStats(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> [CodeFrequencyStat] {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/stats/code_frequency"].joined(), config: config, decoder: .json, operationId: "reposGetCodeFrequencyStats", options: requestOptions)).data
+    static func reposGetCodeFrequencyStats(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [CodeFrequencyStat] {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/stats/code_frequency",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "reposGetCodeFrequencyStats",
+            options: requestOptions
+        )).data
     }
 }

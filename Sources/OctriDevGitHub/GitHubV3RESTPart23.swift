@@ -3,58 +3,189 @@
 
 import Foundation
 
-extension IssuesNamespace {
-/// Lists timeline events recorded for a repository issue. Use `exclude` to omit selected event types, and `page` and `per_page` to paginate the results.
+public extension IssuesNamespace {
+    /// Lists timeline events recorded for a repository issue. Use `exclude` to omit selected event types, and `page`
+    /// and `per_page` to paginate the results.
     ///
     /// List all timeline events for an issue.
-    public func listEventsForTimeline(owner: String, repo: String, issueNumber: Int, perPage: Int? = nil, page: Int? = nil, exclude: String? = nil, requestOptions: RequestOptions? = nil) async throws -> [TimelineIssueEvents] {
-        return try await IssuesMethods.issuesListEventsForTimeline(config: config, owner: owner, repo: repo, issueNumber: issueNumber, perPage: perPage, page: page, exclude: exclude, requestOptions: requestOptions)
+    func listEventsForTimeline(
+        owner: String,
+        repo: String,
+        issueNumber: Int,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        exclude: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [TimelineIssueEvents] {
+        try await IssuesMethods.issuesListEventsForTimeline(
+            config: config,
+            owner: owner,
+            repo: repo,
+            issueNumber: issueNumber,
+            perPage: perPage,
+            page: page,
+            exclude: exclude,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists labels in a repository. Use `owner` and `repo` to identify the repository, and use `page` and `per_page` to paginate the results.
+    /// Lists labels in a repository. Use `owner` and `repo` to identify the repository, and use `page` and `per_page`
+    /// to paginate the results.
     ///
     /// Lists all labels for a repository.
-    public func listLabelsForRepo(owner: String, repo: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [Label] {
-        return try await IssuesMethods.issuesListLabelsForRepo(config: config, owner: owner, repo: repo, perPage: perPage, page: page, requestOptions: requestOptions)
+    func listLabelsForRepo(
+        owner: String,
+        repo: String,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [Label] {
+        try await IssuesMethods.issuesListLabelsForRepo(
+            config: config,
+            owner: owner,
+            repo: repo,
+            perPage: perPage,
+            page: page,
+            requestOptions: requestOptions
+        )
     }
 
-/// Creates a label for the specified repository with the given name and color. The name and color parameters are required. The color must be a valid [hexadecimal color code](http://www.color-hex.com/).
-    public func createLabel(owner: String, repo: String, name: String, color: String? = nil, description: String? = nil, requestOptions: RequestOptions? = nil) async throws -> Label {
-        return try await IssuesMethods.issuesCreateLabel(config: config, owner: owner, repo: repo, name: name, color: color, description: description, requestOptions: requestOptions)
+    /// Creates a label for the specified repository with the given name and color. The name and color parameters are
+    /// required. The color must be a valid [hexadecimal color code](http://www.color-hex.com/).
+    func createLabel(
+        owner: String,
+        repo: String,
+        name: String,
+        color: String? = nil,
+        description: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Label {
+        try await IssuesMethods.issuesCreateLabel(
+            config: config,
+            owner: owner,
+            repo: repo,
+            name: name,
+            color: color,
+            description: description,
+            requestOptions: requestOptions
+        )
     }
 
-/// Retrieves a label from a repository by its name. Use `owner` and `repo` to identify the repository and `name` to specify the label.
+    /// Retrieves a label from a repository by its name. Use `owner` and `repo` to identify the repository and `name` to
+    /// specify the label.
     ///
     /// Gets a label using the given name.
-    public func getLabel(owner: String, repo: String, name: String, requestOptions: RequestOptions? = nil) async throws -> Label {
-        return try await IssuesMethods.issuesGetLabel(config: config, owner: owner, repo: repo, name: name, requestOptions: requestOptions)
+    func getLabel(
+        owner: String,
+        repo: String,
+        name: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Label {
+        try await IssuesMethods.issuesGetLabel(
+            config: config,
+            owner: owner,
+            repo: repo,
+            name: name,
+            requestOptions: requestOptions
+        )
     }
 
-/// Updates a label in a repository using its current name. Supply any fields you want to change; all body fields are optional, and `description` can contain at most 100 characters. Set `archived` to archive or unarchive the label.
+    /// Updates a label in a repository using its current name. Supply any fields you want to change; all body fields
+    /// are optional, and `description` can contain at most 100 characters. Set `archived` to archive or unarchive the
+    /// label.
     ///
     /// Updates a label using the given label name.
-    public func updateLabel(owner: String, repo: String, name: String, newName: String? = nil, color: String? = nil, description: String? = nil, archived: Bool? = nil, requestOptions: RequestOptions? = nil) async throws -> Label {
-        return try await IssuesMethods.issuesUpdateLabel(config: config, owner: owner, repo: repo, name: name, newName: newName, color: color, description: description, archived: archived, requestOptions: requestOptions)
+    func updateLabel(
+        owner: String,
+        repo: String,
+        name: String,
+        newName: String? = nil,
+        color: String? = nil,
+        description: String? = nil,
+        archived: Bool? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Label {
+        try await IssuesMethods.issuesUpdateLabel(
+            config: config,
+            owner: owner,
+            repo: repo,
+            name: name,
+            newName: newName,
+            color: color,
+            description: description,
+            archived: archived,
+            requestOptions: requestOptions
+        )
     }
 
-/// Deletes a label from a repository using its name. Identify the repository with `owner` and `repo`, and specify the label to remove with `name`.
+    /// Deletes a label from a repository using its name. Identify the repository with `owner` and `repo`, and specify
+    /// the label to remove with `name`.
     ///
     /// Deletes a label using the given label name.
-    public func deleteLabel(owner: String, repo: String, name: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await IssuesMethods.issuesDeleteLabel(config: config, owner: owner, repo: repo, name: name, requestOptions: requestOptions)
+    func deleteLabel(
+        owner: String,
+        repo: String,
+        name: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await IssuesMethods.issuesDeleteLabel(
+            config: config,
+            owner: owner,
+            repo: repo,
+            name: name,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists milestones for a repository. Filter by `state` and control ordering with `sort` and `direction`; use `page` and `per_page` to paginate the results.
+    /// Lists milestones for a repository. Filter by `state` and control ordering with `sort` and `direction`; use
+    /// `page` and `per_page` to paginate the results.
     ///
     /// Lists milestones for a repository.
-    public func listMilestones(owner: String, repo: String, state: IssuesListMilestonesParameter? = nil, sort: IssuesListMilestonesParameterX5ec18b58? = nil, direction: IssuesListMilestonesParameterX0a6da649? = nil, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [Milestone] {
-        return try await IssuesMethods.issuesListMilestones(config: config, owner: owner, repo: repo, state: state, sort: sort, direction: direction, perPage: perPage, page: page, requestOptions: requestOptions)
+    func listMilestones(
+        owner: String,
+        repo: String,
+        state: IssuesListMilestonesParameter? = nil,
+        sort: IssuesListMilestonesParameterX5ec18b58? = nil,
+        direction: IssuesListMilestonesParameterX0a6da649? = nil,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [Milestone] {
+        try await IssuesMethods.issuesListMilestones(
+            config: config,
+            owner: owner,
+            repo: repo,
+            state: state,
+            sort: sort,
+            direction: direction,
+            perPage: perPage,
+            page: page,
+            requestOptions: requestOptions
+        )
     }
 
-/// Creates a milestone in a repository. Provide a `title` and optionally set its `state`, `description`, and `due_on` date. A 201 response returns the created milestone with its generated identifier and milestone details.
+    /// Creates a milestone in a repository. Provide a `title` and optionally set its `state`, `description`, and
+    /// `due_on` date. A 201 response returns the created milestone with its generated identifier and milestone details.
     ///
     /// Creates a milestone.
-    public func createMilestone(owner: String, repo: String, title: String, state: IssuesCreateMilestoneRequestBodyState? = nil, description: String? = nil, dueOn: Date? = nil, requestOptions: RequestOptions? = nil) async throws -> Milestone {
-        return try await IssuesMethods.issuesCreateMilestone(config: config, owner: owner, repo: repo, title: title, state: state, description: description, dueOn: dueOn, requestOptions: requestOptions)
+    func createMilestone(
+        owner: String,
+        repo: String,
+        title: String,
+        state: IssuesCreateMilestoneRequestBodyState? = nil,
+        description: String? = nil,
+        dueOn: Date? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Milestone {
+        try await IssuesMethods.issuesCreateMilestone(
+            config: config,
+            owner: owner,
+            repo: repo,
+            title: title,
+            state: state,
+            description: description,
+            dueOn: dueOn,
+            requestOptions: requestOptions
+        )
     }
 }

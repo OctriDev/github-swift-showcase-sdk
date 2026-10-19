@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ActionsMethods {
-    /// Update an Actions policy for a repository. Omitting `workflow_path` preserves the policy's existing workflow targeting.
+public extension ActionsMethods {
+    /// Update an Actions policy for a repository. Omitting `workflow_path` preserves the policy's existing workflow
+    /// targeting.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -23,9 +24,40 @@ extension ActionsMethods {
     ///   empty to preserve or use the default workflow targeting, or contain only
     ///   `workflow_path`.
     /// - rules: An array of rules within the policy.
-    public static func actionsUpdateRepoActionsPolicy(config: ClientConfig, owner: String, repo: String, policyId: Int, name: String? = nil, enforcement: RepositoryRuleEnforcement? = nil, conditions: ActionsPolicyRepoConditions? = nil, rules: [ActionsRule]? = nil, requestOptions: RequestOptions? = nil) async throws -> ActionsPolicy {
-        let requestBody = ActionsUpdateRepoActionsPolicyRequestBody(name: name, enforcement: enforcement, conditions: conditions, rules: rules)
+    static func actionsUpdateRepoActionsPolicy(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        policyId: Int,
+        name: String? = nil,
+        enforcement: RepositoryRuleEnforcement? = nil,
+        conditions: ActionsPolicyRepoConditions? = nil,
+        rules: [ActionsRule]? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ActionsPolicy {
+        let requestBody = ActionsUpdateRepoActionsPolicyRequestBody(
+            name: name,
+            enforcement: enforcement,
+            conditions: conditions,
+            rules: rules
+        )
 
-        return try (await sdkRequest("PUT", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/actions/policies/", sdkEncodePathSegment(sdkWireString(policyId))].joined(), config: config, body: requestBody, decoder: .json, operationId: "actionsUpdateRepoActionsPolicy", options: requestOptions, errors: ["404": BasicError.self, "422": ValidationError.self, "500": BasicError.self])).data
+        return try await (sdkRequest(
+            "PUT",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/actions/policies/",
+                sdkEncodePathSegment(sdkWireString(policyId)),
+            ].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "actionsUpdateRepoActionsPolicy",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "422": ValidationError.self, "500": BasicError.self]
+        )).data
     }
 }

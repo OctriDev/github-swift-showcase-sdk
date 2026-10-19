@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension SecurityAdvisoriesMethods {
-    public struct SecurityAdvisoriesUpdateRepositoryAdvisoryOptions: Codable {
+public extension SecurityAdvisoriesMethods {
+    struct SecurityAdvisoriesUpdateRepositoryAdvisoryOptions: Codable {
         public var owner: String
         public var repo: String
         public var ghsaId: String
@@ -30,7 +30,10 @@ extension SecurityAdvisoriesMethods {
         }
     }
 
-    /// Update a repository security advisory using its GitHub Security Advisory (GHSA) identifier. In order to update any security advisory, the authenticated user must be a security manager or administrator of that repository, or a collaborator on the repository security advisory. OAuth app tokens and personal access tokens (classic) need the `repo` or `repository_advisories:write` scope to use this endpoint.
+    /// Update a repository security advisory using its GitHub Security Advisory (GHSA) identifier. In order to update
+    /// any security advisory, the authenticated user must be a security manager or administrator of that repository, or
+    /// a collaborator on the repository security advisory. OAuth app tokens and personal access tokens (classic) need
+    /// the `repo` or `repository_advisories:write` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -55,7 +58,11 @@ extension SecurityAdvisoriesMethods {
     ///   to the advisory.
     /// - collaboratingTeams: A list of team slugs which have been granted write
     ///   access to the advisory.
-    public static func securityAdvisoriesUpdateRepositoryAdvisory(config: ClientConfig, options: SecurityAdvisoriesUpdateRepositoryAdvisoryOptions, requestOptions: RequestOptions? = nil) async throws -> RepositoryAdvisory {
+    static func securityAdvisoriesUpdateRepositoryAdvisory(
+        config: ClientConfig,
+        options: SecurityAdvisoriesUpdateRepositoryAdvisoryOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> RepositoryAdvisory {
         if let summary = options.summary {
             try validateLength("summary", summary, max: 1024)
         }
@@ -66,6 +73,22 @@ extension SecurityAdvisoriesMethods {
 
         let requestBody = SecurityAdvisoriesUpdateRepositoryAdvisoryRequestBody(options: options)
 
-        return try (await sdkRequest("PATCH", ["/repos/", sdkEncodePathSegment(sdkWireString(options.owner)), "/", sdkEncodePathSegment(sdkWireString(options.repo)), "/security-advisories/", sdkEncodePathSegment(sdkWireString(options.ghsaId))].joined(), config: config, body: requestBody, decoder: .json, operationId: "securityAdvisoriesUpdateRepositoryAdvisory", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
+        return try await (sdkRequest(
+            "PATCH",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(options.owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(options.repo)),
+                "/security-advisories/",
+                sdkEncodePathSegment(sdkWireString(options.ghsaId)),
+            ].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "securityAdvisoriesUpdateRepositoryAdvisory",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self]
+        )).data
     }
 }

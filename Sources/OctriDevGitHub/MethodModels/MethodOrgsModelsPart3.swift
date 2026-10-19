@@ -7,7 +7,7 @@ import Foundation
     import FoundationNetworking
 #endif
 
-// Canonical orgs operation model declarations
+/// Canonical orgs operation model declarations
 public struct OrgsListArtifactStorageRecordsResponseStorageRecordsItem: Codable {
     public var id: Int?
     public var name: String?
@@ -32,28 +32,38 @@ public struct OrgsListArtifactStorageRecordsResponseStorageRecordsItem: Codable 
     }
 
     init() {
-        (self.id, self.name, self.digest, self.artifactUrl, self.registryUrl) = (nil, nil, nil, nil, nil)
-        (self.repository, self.status, self.createdAt, self.updatedAt) = (nil, nil, nil, nil)
+        (id, name, digest, artifactUrl, registryUrl) = (nil, nil, nil, nil, nil)
+        (repository, status, createdAt, updatedAt) = (nil, nil, nil, nil)
     }
 }
 
-extension OrgsListArtifactStorageRecordsResponseStorageRecordsItem {
-    public init(from decoder: Decoder) throws {
+public extension OrgsListArtifactStorageRecordsResponseStorageRecordsItem {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeIfPresent(.id)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.digest = try container.sdkDecodeIfPresent(.digest)
-        self.artifactUrl = try container.sdkDecodeIfPresent(.artifactUrl)
-        self.registryUrl = try container.sdkDecodeIfPresent(.registryUrl)
-        self.repository = try container.sdkDecodeIfPresent(.repository)
-        self.status = try container.sdkDecodeIfPresent(.status)
-        self.createdAt = try container.sdkDecodeIfPresent(.createdAt)
-        self.updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
+        id = try container.sdkDecodeIfPresent(.id)
+        name = try container.sdkDecodeIfPresent(.name)
+        digest = try container.sdkDecodeIfPresent(.digest)
+        artifactUrl = try container.sdkDecodeIfPresent(.artifactUrl)
+        registryUrl = try container.sdkDecodeIfPresent(.registryUrl)
+        repository = try container.sdkDecodeIfPresent(.repository)
+        status = try container.sdkDecodeIfPresent(.status)
+        createdAt = try container.sdkDecodeIfPresent(.createdAt)
+        updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
     }
 }
 
-extension OrgsListArtifactStorageRecordsResponseStorageRecordsItem {
-    public init(id: Int? = nil, name: String? = nil, digest: String? = nil, artifactUrl: String? = nil, registryUrl: String? = nil, repository: String? = nil, status: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
+public extension OrgsListArtifactStorageRecordsResponseStorageRecordsItem {
+    init(
+        id: Int? = nil,
+        name: String? = nil,
+        digest: String? = nil,
+        artifactUrl: String? = nil,
+        registryUrl: String? = nil,
+        repository: String? = nil,
+        status: String? = nil,
+        createdAt: String? = nil,
+        updatedAt: String? = nil
+    ) {
         self.init()
         (self.id, self.name) = (id, name)
         (self.digest, self.artifactUrl) = (digest, artifactUrl)
@@ -91,31 +101,44 @@ public struct OrgsCreateWebhookRequestBodyConfig: Codable {
         case password
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension OrgsCreateWebhookRequestBodyConfig {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.url) else {
-            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
-        }
-        self.url = try container.sdkDecodeRequired(.url)
-        self.contentType = try container.sdkDecodeIfPresent(.contentType)
-        self.secret = try container.sdkDecodeIfPresent(.secret)
-        self.insecureSsl = try container.sdkDecodeIfPresent(.insecureSsl)
-        self.username = try container.sdkDecodeIfPresent(.username)
-        self.password = try container.sdkDecodeIfPresent(.password)
-            try sdkValidateUri("url", sdkWireString(self.url))
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension OrgsCreateWebhookRequestBodyConfig {
-    public init(url: WebhookConfigUrl, contentType: WebhookConfigContentType? = nil, secret: WebhookConfigSecret? = nil, insecureSsl: WebhookConfigInsecureSsl? = nil, username: String? = nil, password: String? = nil) throws {
+public extension OrgsCreateWebhookRequestBodyConfig {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.url) else {
+            throw SdkValidationError(
+                field: "url",
+                code: "required",
+                message: "Validation failed for 'url': value is required"
+            )
+        }
+        url = try container.sdkDecodeRequired(.url)
+        contentType = try container.sdkDecodeIfPresent(.contentType)
+        secret = try container.sdkDecodeIfPresent(.secret)
+        insecureSsl = try container.sdkDecodeIfPresent(.insecureSsl)
+        username = try container.sdkDecodeIfPresent(.username)
+        password = try container.sdkDecodeIfPresent(.password)
+        try sdkValidateUri("url", sdkWireString(url))
+    }
+}
+
+public extension OrgsCreateWebhookRequestBodyConfig {
+    init(
+        url: WebhookConfigUrl,
+        contentType: WebhookConfigContentType? = nil,
+        secret: WebhookConfigSecret? = nil,
+        insecureSsl: WebhookConfigInsecureSsl? = nil,
+        username: String? = nil,
+        password: String? = nil
+    ) throws {
         (self.url, self.contentType) = (url, contentType)
         (self.secret, self.insecureSsl) = (secret, insecureSsl)
         (self.username, self.password) = (username, password)
-            try sdkValidateUri("url", sdkWireString(self.url))
+        try sdkValidateUri("url", sdkWireString(self.url))
     }
 }
 
@@ -132,21 +155,25 @@ public struct OrgsListAttestationsResponseAttestationsItemBundle: Codable {
     }
 
     init() {
-        (self.mediaType, self.verificationMaterial, self.dsseEnvelope) = (nil, nil, nil)
+        (mediaType, verificationMaterial, dsseEnvelope) = (nil, nil, nil)
     }
 }
 
-extension OrgsListAttestationsResponseAttestationsItemBundle {
-    public init(from decoder: Decoder) throws {
+public extension OrgsListAttestationsResponseAttestationsItemBundle {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.mediaType = try container.sdkDecodeIfPresent(.mediaType)
-        self.verificationMaterial = try container.sdkDecodeIfPresent(.verificationMaterial)
-        self.dsseEnvelope = try container.sdkDecodeIfPresent(.dsseEnvelope)
+        mediaType = try container.sdkDecodeIfPresent(.mediaType)
+        verificationMaterial = try container.sdkDecodeIfPresent(.verificationMaterial)
+        dsseEnvelope = try container.sdkDecodeIfPresent(.dsseEnvelope)
     }
 }
 
-extension OrgsListAttestationsResponseAttestationsItemBundle {
-    public init(mediaType: String? = nil, verificationMaterial: [String: JSONValue]? = nil, dsseEnvelope: [String: JSONValue]? = nil) {
+public extension OrgsListAttestationsResponseAttestationsItemBundle {
+    init(
+        mediaType: String? = nil,
+        verificationMaterial: [String: JSONValue]? = nil,
+        dsseEnvelope: [String: JSONValue]? = nil
+    ) {
         self.init()
         (self.mediaType, self.verificationMaterial) = (mediaType, verificationMaterial)
         self.dsseEnvelope = dsseEnvelope
@@ -164,22 +191,28 @@ public struct OrgsCreateClusterDeploymentRecordsJobResponse: Codable {
         case errors
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension OrgsCreateClusterDeploymentRecordsJobResponse {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.jobId) else {
-            throw SdkValidationError(field: "job_id", code: "required", message: "Validation failed for 'job_id': value is required")
-        }
-        self.jobId = try container.sdkDecodeRequired(.jobId)
-        self.errors = try container.sdkDecodeIfPresent(.errors)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension OrgsCreateClusterDeploymentRecordsJobResponse {
-    public init(jobId: Int, errors: [[String: JSONValue]]? = nil) {
+public extension OrgsCreateClusterDeploymentRecordsJobResponse {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.jobId) else {
+            throw SdkValidationError(
+                field: "job_id",
+                code: "required",
+                message: "Validation failed for 'job_id': value is required"
+            )
+        }
+        jobId = try container.sdkDecodeRequired(.jobId)
+        errors = try container.sdkDecodeIfPresent(.errors)
+    }
+}
+
+public extension OrgsCreateClusterDeploymentRecordsJobResponse {
+    init(jobId: Int, errors: [[String: JSONValue]]? = nil) {
         (self.jobId, self.errors) = (jobId, errors)
     }
 }
@@ -190,27 +223,41 @@ public indirect enum OrgsDeleteAttestationsBulkRequestBody {
 }
 
 extension OrgsDeleteAttestationsBulkRequestBody: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let raw = try? container.decode(JSONValue.self) {
-            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
+            if let value = Self.decodeLossless1(from: container, raw) {
+                self = value; return
+            }
         }
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for OrgsDeleteAttestationsBulkRequestBody")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for OrgsDeleteAttestationsBulkRequestBody"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension OrgsDeleteAttestationsBulkRequestBody {
     static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
-        if let value = try? container.decode(OrgsDeleteAttestationsBulkRequestBodyVariant0.self), sdkKeepsEveryKey(value, of: raw) {
+        if let value = try? container.decode(OrgsDeleteAttestationsBulkRequestBodyVariant0.self), sdkKeepsEveryKey(
+            value,
+            of: raw
+        ) {
             return .orgsDeleteAttestationsBulkRequestBodyVariant0(value)
         }
-        if let value = try? container.decode(OrgsDeleteAttestationsBulkRequestBodyVariant1.self), sdkKeepsEveryKey(value, of: raw) {
+        if let value = try? container.decode(OrgsDeleteAttestationsBulkRequestBodyVariant1.self), sdkKeepsEveryKey(
+            value,
+            of: raw
+        ) {
             return .orgsDeleteAttestationsBulkRequestBodyVariant1(value)
         }
         return nil
@@ -222,12 +269,12 @@ extension OrgsDeleteAttestationsBulkRequestBody {
         if let value = try? container.decode(
             OrgsDeleteAttestationsBulkRequestBodyVariant0.self
         ) {
-            return             .orgsDeleteAttestationsBulkRequestBodyVariant0(value)
+            return .orgsDeleteAttestationsBulkRequestBodyVariant0(value)
         }
         if let value = try? container.decode(
             OrgsDeleteAttestationsBulkRequestBodyVariant1.self
         ) {
-            return             .orgsDeleteAttestationsBulkRequestBodyVariant1(value)
+            return .orgsDeleteAttestationsBulkRequestBodyVariant1(value)
         }
         return nil
     }
@@ -252,25 +299,35 @@ public struct OrgsListAppInstallationsResponse: Codable {
         case installations
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension OrgsListAppInstallationsResponse {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.totalCount) else {
-            throw SdkValidationError(field: "total_count", code: "required", message: "Validation failed for 'total_count': value is required")
-        }
-        guard container.contains(.installations) else {
-            throw SdkValidationError(field: "installations", code: "required", message: "Validation failed for 'installations': value is required")
-        }
-        self.totalCount = try container.sdkDecodeRequired(.totalCount)
-        self.installations = try container.sdkDecodeRequired(.installations)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension OrgsListAppInstallationsResponse {
-    public init(totalCount: Int, installations: [Installation]) {
+public extension OrgsListAppInstallationsResponse {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.totalCount) else {
+            throw SdkValidationError(
+                field: "total_count",
+                code: "required",
+                message: "Validation failed for 'total_count': value is required"
+            )
+        }
+        guard container.contains(.installations) else {
+            throw SdkValidationError(
+                field: "installations",
+                code: "required",
+                message: "Validation failed for 'installations': value is required"
+            )
+        }
+        totalCount = try container.sdkDecodeRequired(.totalCount)
+        installations = try container.sdkDecodeRequired(.installations)
+    }
+}
+
+public extension OrgsListAppInstallationsResponse {
+    init(totalCount: Int, installations: [Installation]) {
         (self.totalCount, self.installations) = (totalCount, installations)
     }
 }

@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Webhooks domain models
+/// Webhooks domain models
 /// The release object.
 public struct WebhooksRelease1: Codable {
     /// Required array value serialized in the `assets` wire field.
@@ -76,40 +76,65 @@ public struct WebhooksRelease1: Codable {
         case reactions
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension WebhooksRelease1 {
-    public init(from decoder: Decoder) throws {
+public extension WebhooksRelease1 {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.assets = try container.sdkDecodeRequired(.assets)
-        self.assetsUrl = try container.sdkDecodeRequired(.assetsUrl)
-        self.author = try container.sdkDecodeNullable(.author)
-        self.body = try container.sdkDecodeNullable(.body)
-        self.createdAt = try container.sdkDecodeNullable(.createdAt)
-        self.draft = try container.sdkDecodeRequired(.draft)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.immutable = try container.sdkDecodeRequired(.immutable)
-        self.name = try container.sdkDecodeNullable(.name)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.prerelease = try container.sdkDecodeRequired(.prerelease)
-        self.publishedAt = try container.sdkDecodeNullable(.publishedAt)
-        self.tagName = try container.sdkDecodeRequired(.tagName)
-        self.tarballUrl = try container.sdkDecodeNullable(.tarballUrl)
-        self.targetCommitish = try container.sdkDecodeRequired(.targetCommitish)
-        self.updatedAt = try container.sdkDecodeNullable(.updatedAt)
-        self.uploadUrl = try container.sdkDecodeRequired(.uploadUrl)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.zipballUrl = try container.sdkDecodeNullable(.zipballUrl)
-        self.discussionUrl = try container.sdkDecodeIfPresent(.discussionUrl)
-        self.reactions = try container.sdkDecodeIfPresent(.reactions)
+        assets = try container.sdkDecodeRequired(.assets)
+        assetsUrl = try container.sdkDecodeRequired(.assetsUrl)
+        author = try container.sdkDecodeNullable(.author)
+        body = try container.sdkDecodeNullable(.body)
+        createdAt = try container.sdkDecodeNullable(.createdAt)
+        draft = try container.sdkDecodeRequired(.draft)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        id = try container.sdkDecodeRequired(.id)
+        immutable = try container.sdkDecodeRequired(.immutable)
+        name = try container.sdkDecodeNullable(.name)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        prerelease = try container.sdkDecodeRequired(.prerelease)
+        publishedAt = try container.sdkDecodeNullable(.publishedAt)
+        tagName = try container.sdkDecodeRequired(.tagName)
+        tarballUrl = try container.sdkDecodeNullable(.tarballUrl)
+        targetCommitish = try container.sdkDecodeRequired(.targetCommitish)
+        updatedAt = try container.sdkDecodeNullable(.updatedAt)
+        uploadUrl = try container.sdkDecodeRequired(.uploadUrl)
+        url = try container.sdkDecodeRequired(.url)
+        zipballUrl = try container.sdkDecodeNullable(.zipballUrl)
+        discussionUrl = try container.sdkDecodeIfPresent(.discussionUrl)
+        reactions = try container.sdkDecodeIfPresent(.reactions)
         try sdkValidateConstraints()
     }
 }
 
-extension WebhooksRelease1 {
-    public init(assets: [WebhooksRelease1AssetsItem?], assetsUrl: String, author: WebhooksRelease1Author?, body: String?, createdAt: Date?, draft: Bool, htmlUrl: String, id: Int, immutable: Bool, name: String?, nodeId: String, prerelease: Bool, publishedAt: Date?, tagName: String, tarballUrl: String?, targetCommitish: String, updatedAt: Date?, uploadUrl: String, url: String, zipballUrl: String?, discussionUrl: String? = nil, reactions: WebhooksRelease1Reactions? = nil) throws {
+public extension WebhooksRelease1 {
+    init(
+        assets: [WebhooksRelease1AssetsItem?],
+        assetsUrl: String,
+        author: WebhooksRelease1Author?,
+        body: String?,
+        createdAt: Date?,
+        draft: Bool,
+        htmlUrl: String,
+        id: Int,
+        immutable: Bool,
+        name: String?,
+        nodeId: String,
+        prerelease: Bool,
+        publishedAt: Date?,
+        tagName: String,
+        tarballUrl: String?,
+        targetCommitish: String,
+        updatedAt: Date?,
+        uploadUrl: String,
+        url: String,
+        zipballUrl: String?,
+        discussionUrl: String? = nil,
+        reactions: WebhooksRelease1Reactions? = nil
+    ) throws {
         (self.assets, self.assetsUrl) = (assets, assetsUrl)
         (self.author, self.body) = (author, body)
         (self.createdAt, self.draft) = (createdAt, draft)
@@ -127,25 +152,25 @@ extension WebhooksRelease1 {
 
 extension WebhooksRelease1 {
     func sdkValidateConstraints() throws {
-            try sdkValidateUri("assets_url", self.assetsUrl)
-        if let value = self.createdAt {
+        try sdkValidateUri("assets_url", assetsUrl)
+        if let value = createdAt {
             try sdkValidateDateTime("created_at", sdkWireString(value))
         }
-            try sdkValidateUri("html_url", self.htmlUrl)
-        if let value = self.publishedAt {
+        try sdkValidateUri("html_url", htmlUrl)
+        if let value = publishedAt {
             try sdkValidateDateTime("published_at", sdkWireString(value))
         }
-        if let value = self.tarballUrl {
+        if let value = tarballUrl {
             try sdkValidateUri("tarball_url", value)
         }
-        if let value = self.updatedAt {
+        if let value = updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
-            try sdkValidateUri("url", self.url)
-        if let value = self.zipballUrl {
+        try sdkValidateUri("url", url)
+        if let value = zipballUrl {
             try sdkValidateUri("zipball_url", value)
         }
-        if let value = self.discussionUrl {
+        if let value = discussionUrl {
             try sdkValidateUri("discussion_url", value)
         }
     }
@@ -223,40 +248,65 @@ public struct WebhooksRelease: Codable {
         case reactions
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension WebhooksRelease {
-    public init(from decoder: Decoder) throws {
+public extension WebhooksRelease {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.assets = try container.sdkDecodeRequired(.assets)
-        self.assetsUrl = try container.sdkDecodeRequired(.assetsUrl)
-        self.author = try container.sdkDecodeNullable(.author)
-        self.body = try container.sdkDecodeNullable(.body)
-        self.createdAt = try container.sdkDecodeNullable(.createdAt)
-        self.updatedAt = try container.sdkDecodeNullable(.updatedAt)
-        self.draft = try container.sdkDecodeRequired(.draft)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.immutable = try container.sdkDecodeRequired(.immutable)
-        self.name = try container.sdkDecodeNullable(.name)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.prerelease = try container.sdkDecodeRequired(.prerelease)
-        self.publishedAt = try container.sdkDecodeNullable(.publishedAt)
-        self.tagName = try container.sdkDecodeRequired(.tagName)
-        self.tarballUrl = try container.sdkDecodeNullable(.tarballUrl)
-        self.targetCommitish = try container.sdkDecodeRequired(.targetCommitish)
-        self.uploadUrl = try container.sdkDecodeRequired(.uploadUrl)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.zipballUrl = try container.sdkDecodeNullable(.zipballUrl)
-        self.discussionUrl = try container.sdkDecodeIfPresent(.discussionUrl)
-        self.reactions = try container.sdkDecodeIfPresent(.reactions)
+        assets = try container.sdkDecodeRequired(.assets)
+        assetsUrl = try container.sdkDecodeRequired(.assetsUrl)
+        author = try container.sdkDecodeNullable(.author)
+        body = try container.sdkDecodeNullable(.body)
+        createdAt = try container.sdkDecodeNullable(.createdAt)
+        updatedAt = try container.sdkDecodeNullable(.updatedAt)
+        draft = try container.sdkDecodeRequired(.draft)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        id = try container.sdkDecodeRequired(.id)
+        immutable = try container.sdkDecodeRequired(.immutable)
+        name = try container.sdkDecodeNullable(.name)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        prerelease = try container.sdkDecodeRequired(.prerelease)
+        publishedAt = try container.sdkDecodeNullable(.publishedAt)
+        tagName = try container.sdkDecodeRequired(.tagName)
+        tarballUrl = try container.sdkDecodeNullable(.tarballUrl)
+        targetCommitish = try container.sdkDecodeRequired(.targetCommitish)
+        uploadUrl = try container.sdkDecodeRequired(.uploadUrl)
+        url = try container.sdkDecodeRequired(.url)
+        zipballUrl = try container.sdkDecodeNullable(.zipballUrl)
+        discussionUrl = try container.sdkDecodeIfPresent(.discussionUrl)
+        reactions = try container.sdkDecodeIfPresent(.reactions)
         try sdkValidateConstraints()
     }
 }
 
-extension WebhooksRelease {
-    public init(assets: [WebhooksReleaseAssetsItem], assetsUrl: String, author: WebhooksReleaseAuthor?, body: String?, createdAt: Date?, updatedAt: Date?, draft: Bool, htmlUrl: String, id: Int, immutable: Bool, name: String?, nodeId: String, prerelease: Bool, publishedAt: Date?, tagName: String, tarballUrl: String?, targetCommitish: String, uploadUrl: String, url: String, zipballUrl: String?, discussionUrl: String? = nil, reactions: WebhooksReleaseReactions? = nil) throws {
+public extension WebhooksRelease {
+    init(
+        assets: [WebhooksReleaseAssetsItem],
+        assetsUrl: String,
+        author: WebhooksReleaseAuthor?,
+        body: String?,
+        createdAt: Date?,
+        updatedAt: Date?,
+        draft: Bool,
+        htmlUrl: String,
+        id: Int,
+        immutable: Bool,
+        name: String?,
+        nodeId: String,
+        prerelease: Bool,
+        publishedAt: Date?,
+        tagName: String,
+        tarballUrl: String?,
+        targetCommitish: String,
+        uploadUrl: String,
+        url: String,
+        zipballUrl: String?,
+        discussionUrl: String? = nil,
+        reactions: WebhooksReleaseReactions? = nil
+    ) throws {
         (self.assets, self.assetsUrl) = (assets, assetsUrl)
         (self.author, self.body) = (author, body)
         (self.createdAt, self.updatedAt) = (createdAt, updatedAt)
@@ -274,25 +324,25 @@ extension WebhooksRelease {
 
 extension WebhooksRelease {
     func sdkValidateConstraints() throws {
-            try sdkValidateUri("assets_url", self.assetsUrl)
-        if let value = self.createdAt {
+        try sdkValidateUri("assets_url", assetsUrl)
+        if let value = createdAt {
             try sdkValidateDateTime("created_at", sdkWireString(value))
         }
-        if let value = self.updatedAt {
+        if let value = updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
-            try sdkValidateUri("html_url", self.htmlUrl)
-        if let value = self.publishedAt {
+        try sdkValidateUri("html_url", htmlUrl)
+        if let value = publishedAt {
             try sdkValidateDateTime("published_at", sdkWireString(value))
         }
-        if let value = self.tarballUrl {
+        if let value = tarballUrl {
             try sdkValidateUri("tarball_url", value)
         }
-            try sdkValidateUri("url", self.url)
-        if let value = self.zipballUrl {
+        try sdkValidateUri("url", url)
+        if let value = zipballUrl {
             try sdkValidateUri("zipball_url", value)
         }
-        if let value = self.discussionUrl {
+        if let value = discussionUrl {
             try sdkValidateUri("discussion_url", value)
         }
     }
@@ -325,45 +375,83 @@ public struct WebhooksMarketplacePurchase: Codable {
         case unitCount = "unit_count"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhooksMarketplacePurchase {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.account) else {
-            throw SdkValidationError(field: "account", code: "required", message: "Validation failed for 'account': value is required")
-        }
-        guard container.contains(.billingCycle) else {
-            throw SdkValidationError(field: "billing_cycle", code: "required", message: "Validation failed for 'billing_cycle': value is required")
-        }
-        guard container.contains(.freeTrialEndsOn) else {
-            throw SdkValidationError(field: "free_trial_ends_on", code: "required", message: "Validation failed for 'free_trial_ends_on': value is required")
-        }
-        guard container.contains(.nextBillingDate) else {
-            throw SdkValidationError(field: "next_billing_date", code: "required", message: "Validation failed for 'next_billing_date': value is required")
-        }
-        guard container.contains(.onFreeTrial) else {
-            throw SdkValidationError(field: "on_free_trial", code: "required", message: "Validation failed for 'on_free_trial': value is required")
-        }
-        guard container.contains(.plan) else {
-            throw SdkValidationError(field: "plan", code: "required", message: "Validation failed for 'plan': value is required")
-        }
-        guard container.contains(.unitCount) else {
-            throw SdkValidationError(field: "unit_count", code: "required", message: "Validation failed for 'unit_count': value is required")
-        }
-        self.account = try container.sdkDecodeRequired(.account)
-        self.billingCycle = try container.sdkDecodeRequired(.billingCycle)
-        self.freeTrialEndsOn = try container.sdkDecodeNullable(.freeTrialEndsOn)
-        self.nextBillingDate = try container.sdkDecodeNullable(.nextBillingDate)
-        self.onFreeTrial = try container.sdkDecodeRequired(.onFreeTrial)
-        self.plan = try container.sdkDecodeRequired(.plan)
-        self.unitCount = try container.sdkDecodeRequired(.unitCount)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WebhooksMarketplacePurchase {
-    public init(account: WebhooksMarketplacePurchaseAccount, billingCycle: String, freeTrialEndsOn: String?, nextBillingDate: String?, onFreeTrial: Bool, plan: WebhooksMarketplacePurchasePlan, unitCount: Int) {
+public extension WebhooksMarketplacePurchase {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.account) else {
+            throw SdkValidationError(
+                field: "account",
+                code: "required",
+                message: "Validation failed for 'account': value is required"
+            )
+        }
+        guard container.contains(.billingCycle) else {
+            throw SdkValidationError(
+                field: "billing_cycle",
+                code: "required",
+                message: "Validation failed for 'billing_cycle': value is required"
+            )
+        }
+        guard container.contains(.freeTrialEndsOn) else {
+            throw SdkValidationError(
+                field: "free_trial_ends_on",
+                code: "required",
+                message: "Validation failed for 'free_trial_ends_on': value is required"
+            )
+        }
+        guard container.contains(.nextBillingDate) else {
+            throw SdkValidationError(
+                field: "next_billing_date",
+                code: "required",
+                message: "Validation failed for 'next_billing_date': value is required"
+            )
+        }
+        guard container.contains(.onFreeTrial) else {
+            throw SdkValidationError(
+                field: "on_free_trial",
+                code: "required",
+                message: "Validation failed for 'on_free_trial': value is required"
+            )
+        }
+        guard container.contains(.plan) else {
+            throw SdkValidationError(
+                field: "plan",
+                code: "required",
+                message: "Validation failed for 'plan': value is required"
+            )
+        }
+        guard container.contains(.unitCount) else {
+            throw SdkValidationError(
+                field: "unit_count",
+                code: "required",
+                message: "Validation failed for 'unit_count': value is required"
+            )
+        }
+        account = try container.sdkDecodeRequired(.account)
+        billingCycle = try container.sdkDecodeRequired(.billingCycle)
+        freeTrialEndsOn = try container.sdkDecodeNullable(.freeTrialEndsOn)
+        nextBillingDate = try container.sdkDecodeNullable(.nextBillingDate)
+        onFreeTrial = try container.sdkDecodeRequired(.onFreeTrial)
+        plan = try container.sdkDecodeRequired(.plan)
+        unitCount = try container.sdkDecodeRequired(.unitCount)
+    }
+}
+
+public extension WebhooksMarketplacePurchase {
+    init(
+        account: WebhooksMarketplacePurchaseAccount,
+        billingCycle: String,
+        freeTrialEndsOn: String?,
+        nextBillingDate: String?,
+        onFreeTrial: Bool,
+        plan: WebhooksMarketplacePurchasePlan,
+        unitCount: Int
+    ) {
         (self.account, self.billingCycle) = (account, billingCycle)
         (self.freeTrialEndsOn, self.nextBillingDate) = (freeTrialEndsOn, nextBillingDate)
         (self.onFreeTrial, self.plan) = (onFreeTrial, plan)
@@ -443,46 +531,79 @@ public struct WebhooksReleaseAuthor: Codable {
         case userViewType = "user_view_type"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension WebhooksReleaseAuthor {
-    public init(from decoder: Decoder) throws {
+public extension WebhooksReleaseAuthor {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
         }
         guard container.contains(.login) else {
-            throw SdkValidationError(field: "login", code: "required", message: "Validation failed for 'login': value is required")
+            throw SdkValidationError(
+                field: "login",
+                code: "required",
+                message: "Validation failed for 'login': value is required"
+            )
         }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.login = try container.sdkDecodeRequired(.login)
-        self.avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
-        self.deleted = try container.sdkDecodeIfPresent(.deleted)
-        self.email = try container.sdkDecodeIfPresent(.email)
-        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
-        self.followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
-        self.followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
-        self.gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
-        self.gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
-        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        self.organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
-        self.receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
-        self.reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
-        self.siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
-        self.starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
-        self.subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
-        self.type = try container.sdkDecodeIfPresent(.type)
-        self.url = try container.sdkDecodeIfPresent(.url)
-        self.userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        id = try container.sdkDecodeRequired(.id)
+        login = try container.sdkDecodeRequired(.login)
+        avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
+        deleted = try container.sdkDecodeIfPresent(.deleted)
+        email = try container.sdkDecodeIfPresent(.email)
+        eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
+        followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
+        gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
+        gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
+        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        name = try container.sdkDecodeIfPresent(.name)
+        nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
+        receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
+        reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
+        siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
+        starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
+        subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
+        type = try container.sdkDecodeIfPresent(.type)
+        url = try container.sdkDecodeIfPresent(.url)
+        userViewType = try container.sdkDecodeIfPresent(.userViewType)
         try sdkValidateConstraints()
     }
 }
 
-extension WebhooksReleaseAuthor {
-    public init(id: Int, login: String, avatarUrl: String? = nil, deleted: Bool? = nil, email: String? = nil, eventsUrl: String? = nil, followersUrl: String? = nil, followingUrl: String? = nil, gistsUrl: String? = nil, gravatarId: String? = nil, htmlUrl: String? = nil, name: String? = nil, nodeId: String? = nil, organizationsUrl: String? = nil, receivedEventsUrl: String? = nil, reposUrl: String? = nil, siteAdmin: Bool? = nil, starredUrl: String? = nil, subscriptionsUrl: String? = nil, type: WebhooksReleaseAuthorType? = nil, url: String? = nil, userViewType: String? = nil) throws {
+public extension WebhooksReleaseAuthor {
+    init(
+        id: Int,
+        login: String,
+        avatarUrl: String? = nil,
+        deleted: Bool? = nil,
+        email: String? = nil,
+        eventsUrl: String? = nil,
+        followersUrl: String? = nil,
+        followingUrl: String? = nil,
+        gistsUrl: String? = nil,
+        gravatarId: String? = nil,
+        htmlUrl: String? = nil,
+        name: String? = nil,
+        nodeId: String? = nil,
+        organizationsUrl: String? = nil,
+        receivedEventsUrl: String? = nil,
+        reposUrl: String? = nil,
+        siteAdmin: Bool? = nil,
+        starredUrl: String? = nil,
+        subscriptionsUrl: String? = nil,
+        type: WebhooksReleaseAuthorType? = nil,
+        url: String? = nil,
+        userViewType: String? = nil
+    ) throws {
         (self.id, self.login) = (id, login)
         (self.avatarUrl, self.deleted) = (avatarUrl, deleted)
         (self.email, self.eventsUrl) = (email, eventsUrl)
