@@ -3,38 +3,9 @@
 
 import Foundation
 
-/// Webhooks domain models
-public extension WebhooksRule {
-    init(
-        adminEnforced: Bool,
-        allowDeletionsEnforcementLevel: WebhooksRuleAllowDeletionsEnforcementLevel,
-        allowForcePushesEnforcementLevel: WebhooksRuleAllowForcePushesEnforcementLevel,
-        authorizedActorNames: [String],
-        authorizedActorsOnly: Bool,
-        authorizedDismissalActorsOnly: Bool,
-        createdAt: Date,
-        dismissStaleReviewsOnPush: Bool,
-        id: Int,
-        ignoreApprovalsFromContributors: Bool,
-        linearHistoryRequirementEnforcementLevel: WebhooksRuleLinearHistoryRequirementEnforcementLevel,
-        lockBranchEnforcementLevel: WebhooksRuleLockBranchEnforcementLevel,
-        mergeQueueEnforcementLevel: WebhooksRuleMergeQueueEnforcementLevel,
-        name: String,
-        pullRequestReviewsEnforcementLevel: WebhooksRulePullRequestReviewsEnforcementLevel,
-        repositoryId: Int,
-        requireCodeOwnerReview: Bool,
-        requiredApprovingReviewCount: Int,
-        requiredConversationResolutionLevel: WebhooksRuleRequiredConversationResolutionLevel,
-        requiredDeploymentsEnforcementLevel: WebhooksRuleRequiredDeploymentsEnforcementLevel,
-        requiredStatusChecks: [String],
-        requiredStatusChecksEnforcementLevel: WebhooksRuleRequiredStatusChecksEnforcementLevel,
-        signatureRequirementEnforcementLevel: WebhooksRuleSignatureRequirementEnforcementLevel,
-        strictRequiredStatusChecksPolicy: Bool,
-        updatedAt: Date,
-        createProtected: Bool? = nil,
-        lockAllowsForkSync: Bool? = nil,
-        requireLastPushApproval: Bool? = nil
-    ) throws {
+// Webhooks domain models
+extension WebhooksRule {
+    public init(adminEnforced: Bool, allowDeletionsEnforcementLevel: WebhooksRuleAllowDeletionsEnforcementLevel, allowForcePushesEnforcementLevel: WebhooksRuleAllowForcePushesEnforcementLevel, authorizedActorNames: [String], authorizedActorsOnly: Bool, authorizedDismissalActorsOnly: Bool, createdAt: Date, dismissStaleReviewsOnPush: Bool, id: Int, ignoreApprovalsFromContributors: Bool, linearHistoryRequirementEnforcementLevel: WebhooksRuleLinearHistoryRequirementEnforcementLevel, lockBranchEnforcementLevel: WebhooksRuleLockBranchEnforcementLevel, mergeQueueEnforcementLevel: WebhooksRuleMergeQueueEnforcementLevel, name: String, pullRequestReviewsEnforcementLevel: WebhooksRulePullRequestReviewsEnforcementLevel, repositoryId: Int, requireCodeOwnerReview: Bool, requiredApprovingReviewCount: Int, requiredConversationResolutionLevel: WebhooksRuleRequiredConversationResolutionLevel, requiredDeploymentsEnforcementLevel: WebhooksRuleRequiredDeploymentsEnforcementLevel, requiredStatusChecks: [String], requiredStatusChecksEnforcementLevel: WebhooksRuleRequiredStatusChecksEnforcementLevel, signatureRequirementEnforcementLevel: WebhooksRuleSignatureRequirementEnforcementLevel, strictRequiredStatusChecksPolicy: Bool, updatedAt: Date, createProtected: Bool? = nil, lockAllowsForkSync: Bool? = nil, requireLastPushApproval: Bool? = nil) throws {
         self.adminEnforced = adminEnforced
         self.allowDeletionsEnforcementLevel = allowDeletionsEnforcementLevel
         self.allowForcePushesEnforcementLevel = allowForcePushesEnforcementLevel
@@ -58,8 +29,8 @@ public extension WebhooksRule {
         (self.updatedAt, self.createProtected) = (updatedAt, createProtected)
         self.lockAllowsForkSync = lockAllowsForkSync
         self.requireLastPushApproval = requireLastPushApproval
-        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
     }
 }
 
@@ -135,79 +106,46 @@ public struct WebhooksCommentUser: Codable {
         case userViewType = "user_view_type"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhooksCommentUser {
-    init(from decoder: Decoder) throws {
+extension WebhooksCommentUser {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
         guard container.contains(.login) else {
-            throw SdkValidationError(
-                field: "login",
-                code: "required",
-                message: "Validation failed for 'login': value is required"
-            )
+            throw SdkValidationError(field: "login", code: "required", message: "Validation failed for 'login': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
-        login = try container.sdkDecodeRequired(.login)
-        avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
-        deleted = try container.sdkDecodeIfPresent(.deleted)
-        email = try container.sdkDecodeIfPresent(.email)
-        eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
-        followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
-        followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
-        gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
-        gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        name = try container.sdkDecodeIfPresent(.name)
-        nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
-        receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
-        reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
-        siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
-        starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
-        subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
-        type = try container.sdkDecodeIfPresent(.type)
-        url = try container.sdkDecodeIfPresent(.url)
-        userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.login = try container.sdkDecodeRequired(.login)
+        self.avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
+        self.deleted = try container.sdkDecodeIfPresent(.deleted)
+        self.email = try container.sdkDecodeIfPresent(.email)
+        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        self.followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
+        self.followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
+        self.gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
+        self.gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        self.name = try container.sdkDecodeIfPresent(.name)
+        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        self.organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
+        self.receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
+        self.reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
+        self.siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
+        self.starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
+        self.subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
+        self.type = try container.sdkDecodeIfPresent(.type)
+        self.url = try container.sdkDecodeIfPresent(.url)
+        self.userViewType = try container.sdkDecodeIfPresent(.userViewType)
         try sdkValidateConstraints()
     }
 }
 
-public extension WebhooksCommentUser {
-    init(
-        id: Int,
-        login: String,
-        avatarUrl: String? = nil,
-        deleted: Bool? = nil,
-        email: String? = nil,
-        eventsUrl: String? = nil,
-        followersUrl: String? = nil,
-        followingUrl: String? = nil,
-        gistsUrl: String? = nil,
-        gravatarId: String? = nil,
-        htmlUrl: String? = nil,
-        name: String? = nil,
-        nodeId: String? = nil,
-        organizationsUrl: String? = nil,
-        receivedEventsUrl: String? = nil,
-        reposUrl: String? = nil,
-        siteAdmin: Bool? = nil,
-        starredUrl: String? = nil,
-        subscriptionsUrl: String? = nil,
-        type: WebhooksCommentUserType? = nil,
-        url: String? = nil,
-        userViewType: String? = nil
-    ) throws {
+extension WebhooksCommentUser {
+    public init(id: Int, login: String, avatarUrl: String? = nil, deleted: Bool? = nil, email: String? = nil, eventsUrl: String? = nil, followersUrl: String? = nil, followingUrl: String? = nil, gistsUrl: String? = nil, gravatarId: String? = nil, htmlUrl: String? = nil, name: String? = nil, nodeId: String? = nil, organizationsUrl: String? = nil, receivedEventsUrl: String? = nil, reposUrl: String? = nil, siteAdmin: Bool? = nil, starredUrl: String? = nil, subscriptionsUrl: String? = nil, type: WebhooksCommentUserType? = nil, url: String? = nil, userViewType: String? = nil) throws {
         (self.id, self.login) = (id, login)
         (self.avatarUrl, self.deleted) = (avatarUrl, deleted)
         (self.email, self.eventsUrl) = (email, eventsUrl)
@@ -225,28 +163,28 @@ public extension WebhooksCommentUser {
 
 extension WebhooksCommentUser {
     func sdkValidateConstraints() throws {
-        if let value = avatarUrl {
+        if let value = self.avatarUrl {
             try sdkValidateUri("avatar_url", value)
         }
-        if let value = followersUrl {
+        if let value = self.followersUrl {
             try sdkValidateUri("followers_url", value)
         }
-        if let value = htmlUrl {
+        if let value = self.htmlUrl {
             try sdkValidateUri("html_url", value)
         }
-        if let value = organizationsUrl {
+        if let value = self.organizationsUrl {
             try sdkValidateUri("organizations_url", value)
         }
-        if let value = receivedEventsUrl {
+        if let value = self.receivedEventsUrl {
             try sdkValidateUri("received_events_url", value)
         }
-        if let value = reposUrl {
+        if let value = self.reposUrl {
             try sdkValidateUri("repos_url", value)
         }
-        if let value = subscriptionsUrl {
+        if let value = self.subscriptionsUrl {
             try sdkValidateUri("subscriptions_url", value)
         }
-        if let value = url {
+        if let value = self.url {
             try sdkValidateUri("url", value)
         }
     }
@@ -279,76 +217,42 @@ public struct WebhooksPreviousMarketplacePurchase: Codable {
         case nextBillingDate = "next_billing_date"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhooksPreviousMarketplacePurchase {
-    init(from decoder: Decoder) throws {
+extension WebhooksPreviousMarketplacePurchase {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.account) else {
-            throw SdkValidationError(
-                field: "account",
-                code: "required",
-                message: "Validation failed for 'account': value is required"
-            )
+            throw SdkValidationError(field: "account", code: "required", message: "Validation failed for 'account': value is required")
         }
         guard container.contains(.billingCycle) else {
-            throw SdkValidationError(
-                field: "billing_cycle",
-                code: "required",
-                message: "Validation failed for 'billing_cycle': value is required"
-            )
+            throw SdkValidationError(field: "billing_cycle", code: "required", message: "Validation failed for 'billing_cycle': value is required")
         }
         guard container.contains(.freeTrialEndsOn) else {
-            throw SdkValidationError(
-                field: "free_trial_ends_on",
-                code: "required",
-                message: "Validation failed for 'free_trial_ends_on': value is required"
-            )
+            throw SdkValidationError(field: "free_trial_ends_on", code: "required", message: "Validation failed for 'free_trial_ends_on': value is required")
         }
         guard container.contains(.onFreeTrial) else {
-            throw SdkValidationError(
-                field: "on_free_trial",
-                code: "required",
-                message: "Validation failed for 'on_free_trial': value is required"
-            )
+            throw SdkValidationError(field: "on_free_trial", code: "required", message: "Validation failed for 'on_free_trial': value is required")
         }
         guard container.contains(.plan) else {
-            throw SdkValidationError(
-                field: "plan",
-                code: "required",
-                message: "Validation failed for 'plan': value is required"
-            )
+            throw SdkValidationError(field: "plan", code: "required", message: "Validation failed for 'plan': value is required")
         }
         guard container.contains(.unitCount) else {
-            throw SdkValidationError(
-                field: "unit_count",
-                code: "required",
-                message: "Validation failed for 'unit_count': value is required"
-            )
+            throw SdkValidationError(field: "unit_count", code: "required", message: "Validation failed for 'unit_count': value is required")
         }
-        account = try container.sdkDecodeRequired(.account)
-        billingCycle = try container.sdkDecodeRequired(.billingCycle)
-        freeTrialEndsOn = try container.sdkDecodeNullable(.freeTrialEndsOn)
-        onFreeTrial = try container.sdkDecodeRequired(.onFreeTrial)
-        plan = try container.sdkDecodeRequired(.plan)
-        unitCount = try container.sdkDecodeRequired(.unitCount)
-        nextBillingDate = try container.sdkDecodeIfPresent(.nextBillingDate)
+        self.account = try container.sdkDecodeRequired(.account)
+        self.billingCycle = try container.sdkDecodeRequired(.billingCycle)
+        self.freeTrialEndsOn = try container.sdkDecodeNullable(.freeTrialEndsOn)
+        self.onFreeTrial = try container.sdkDecodeRequired(.onFreeTrial)
+        self.plan = try container.sdkDecodeRequired(.plan)
+        self.unitCount = try container.sdkDecodeRequired(.unitCount)
+        self.nextBillingDate = try container.sdkDecodeIfPresent(.nextBillingDate)
     }
 }
 
-public extension WebhooksPreviousMarketplacePurchase {
-    init(
-        account: WebhooksPreviousMarketplacePurchaseAccount,
-        billingCycle: String,
-        freeTrialEndsOn: JSONValue?,
-        onFreeTrial: Bool,
-        plan: WebhooksPreviousMarketplacePurchasePlan,
-        unitCount: Int,
-        nextBillingDate: String? = nil
-    ) {
+extension WebhooksPreviousMarketplacePurchase {
+    public init(account: WebhooksPreviousMarketplacePurchaseAccount, billingCycle: String, freeTrialEndsOn: JSONValue?, onFreeTrial: Bool, plan: WebhooksPreviousMarketplacePurchasePlan, unitCount: Int, nextBillingDate: String? = nil) {
         (self.account, self.billingCycle) = (account, billingCycle)
         (self.freeTrialEndsOn, self.onFreeTrial) = (freeTrialEndsOn, onFreeTrial)
         (self.plan, self.unitCount) = (plan, unitCount)
@@ -384,76 +288,42 @@ public struct WebhooksSponsorship: Codable {
         case maintainer
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhooksSponsorship {
-    init(from decoder: Decoder) throws {
+extension WebhooksSponsorship {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.createdAt) else {
-            throw SdkValidationError(
-                field: "created_at",
-                code: "required",
-                message: "Validation failed for 'created_at': value is required"
-            )
+            throw SdkValidationError(field: "created_at", code: "required", message: "Validation failed for 'created_at': value is required")
         }
         guard container.contains(.nodeId) else {
-            throw SdkValidationError(
-                field: "node_id",
-                code: "required",
-                message: "Validation failed for 'node_id': value is required"
-            )
+            throw SdkValidationError(field: "node_id", code: "required", message: "Validation failed for 'node_id': value is required")
         }
         guard container.contains(.privacyLevel) else {
-            throw SdkValidationError(
-                field: "privacy_level",
-                code: "required",
-                message: "Validation failed for 'privacy_level': value is required"
-            )
+            throw SdkValidationError(field: "privacy_level", code: "required", message: "Validation failed for 'privacy_level': value is required")
         }
         guard container.contains(.sponsor) else {
-            throw SdkValidationError(
-                field: "sponsor",
-                code: "required",
-                message: "Validation failed for 'sponsor': value is required"
-            )
+            throw SdkValidationError(field: "sponsor", code: "required", message: "Validation failed for 'sponsor': value is required")
         }
         guard container.contains(.sponsorable) else {
-            throw SdkValidationError(
-                field: "sponsorable",
-                code: "required",
-                message: "Validation failed for 'sponsorable': value is required"
-            )
+            throw SdkValidationError(field: "sponsorable", code: "required", message: "Validation failed for 'sponsorable': value is required")
         }
         guard container.contains(.tier) else {
-            throw SdkValidationError(
-                field: "tier",
-                code: "required",
-                message: "Validation failed for 'tier': value is required"
-            )
+            throw SdkValidationError(field: "tier", code: "required", message: "Validation failed for 'tier': value is required")
         }
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        privacyLevel = try container.sdkDecodeRequired(.privacyLevel)
-        sponsor = try container.sdkDecodeNullable(.sponsor)
-        sponsorable = try container.sdkDecodeNullable(.sponsorable)
-        tier = try container.sdkDecodeRequired(.tier)
-        maintainer = try container.sdkDecodeIfPresent(.maintainer)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.privacyLevel = try container.sdkDecodeRequired(.privacyLevel)
+        self.sponsor = try container.sdkDecodeNullable(.sponsor)
+        self.sponsorable = try container.sdkDecodeNullable(.sponsorable)
+        self.tier = try container.sdkDecodeRequired(.tier)
+        self.maintainer = try container.sdkDecodeIfPresent(.maintainer)
     }
 }
 
-public extension WebhooksSponsorship {
-    init(
-        createdAt: String,
-        nodeId: String,
-        privacyLevel: String,
-        sponsor: WebhooksSponsorshipSponsor?,
-        sponsorable: WebhooksSponsorshipSponsorable?,
-        tier: WebhooksSponsorshipTier,
-        maintainer: WebhooksSponsorshipMaintainer? = nil
-    ) {
+extension WebhooksSponsorship {
+    public init(createdAt: String, nodeId: String, privacyLevel: String, sponsor: WebhooksSponsorshipSponsor?, sponsorable: WebhooksSponsorshipSponsorable?, tier: WebhooksSponsorshipTier, maintainer: WebhooksSponsorshipMaintainer? = nil) {
         (self.createdAt, self.nodeId) = (createdAt, nodeId)
         (self.privacyLevel, self.sponsor) = (privacyLevel, sponsor)
         (self.sponsorable, self.tier) = (sponsorable, tier)
@@ -515,53 +385,34 @@ public struct WebhooksIssue2Milestone: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhooksIssue2Milestone {
-    init(from decoder: Decoder) throws {
+extension WebhooksIssue2Milestone {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        closedAt = try container.sdkDecodeNullable(.closedAt)
-        closedIssues = try container.sdkDecodeRequired(.closedIssues)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        creator = try container.sdkDecodeNullable(.creator)
-        description = try container.sdkDecodeNullable(.description)
-        dueOn = try container.sdkDecodeNullable(.dueOn)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        id = try container.sdkDecodeRequired(.id)
-        labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        number = try container.sdkDecodeRequired(.number)
-        openIssues = try container.sdkDecodeRequired(.openIssues)
-        state = try container.sdkDecodeRequired(.state)
-        title = try container.sdkDecodeRequired(.title)
-        updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        url = try container.sdkDecodeRequired(.url)
+        self.closedAt = try container.sdkDecodeNullable(.closedAt)
+        self.closedIssues = try container.sdkDecodeRequired(.closedIssues)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.creator = try container.sdkDecodeNullable(.creator)
+        self.description = try container.sdkDecodeNullable(.description)
+        self.dueOn = try container.sdkDecodeNullable(.dueOn)
+        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.number = try container.sdkDecodeRequired(.number)
+        self.openIssues = try container.sdkDecodeRequired(.openIssues)
+        self.state = try container.sdkDecodeRequired(.state)
+        self.title = try container.sdkDecodeRequired(.title)
+        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        self.url = try container.sdkDecodeRequired(.url)
         try sdkValidateConstraints()
     }
 }
 
-public extension WebhooksIssue2Milestone {
-    init(
-        closedAt: Date?,
-        closedIssues: Int,
-        createdAt: Date,
-        creator: WebhooksIssue2MilestoneCreator?,
-        description: String?,
-        dueOn: Date?,
-        htmlUrl: String,
-        id: Int,
-        labelsUrl: String,
-        nodeId: String,
-        number: Int,
-        openIssues: Int,
-        state: WebhooksIssue2MilestoneState,
-        title: String,
-        updatedAt: Date,
-        url: String
-    ) throws {
+extension WebhooksIssue2Milestone {
+    public init(closedAt: Date?, closedIssues: Int, createdAt: Date, creator: WebhooksIssue2MilestoneCreator?, description: String?, dueOn: Date?, htmlUrl: String, id: Int, labelsUrl: String, nodeId: String, number: Int, openIssues: Int, state: WebhooksIssue2MilestoneState, title: String, updatedAt: Date, url: String) throws {
         (self.closedAt, self.closedIssues) = (closedAt, closedIssues)
         (self.createdAt, self.creator) = (createdAt, creator)
         (self.description, self.dueOn) = (description, dueOn)
@@ -576,16 +427,16 @@ public extension WebhooksIssue2Milestone {
 
 extension WebhooksIssue2Milestone {
     func sdkValidateConstraints() throws {
-        if let value = closedAt {
+        if let value = self.closedAt {
             try sdkValidateDateTime("closed_at", sdkWireString(value))
         }
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
-        if let value = dueOn {
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        if let value = self.dueOn {
             try sdkValidateDateTime("due_on", sdkWireString(value))
         }
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateUri("labels_url", labelsUrl)
-        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
-        try sdkValidateUri("url", url)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("labels_url", self.labelsUrl)
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateUri("url", self.url)
     }
 }

@@ -3,108 +3,9 @@
 
 import Foundation
 
-/// WebhookPullRequestLocked domain models
-public extension WebhookPullRequestLockedPullRequestBaseRepo {
-    init(
-        archiveUrl: String,
-        archived: Bool,
-        assigneesUrl: String,
-        blobsUrl: String,
-        branchesUrl: String,
-        cloneUrl: String,
-        collaboratorsUrl: String,
-        commentsUrl: String,
-        commitsUrl: String,
-        compareUrl: String,
-        contentsUrl: String,
-        contributorsUrl: String,
-        createdAt: WebhookPullRequestLockedPullRequestBaseRepoCreatedAt,
-        defaultBranch: String,
-        deploymentsUrl: String,
-        description: String?,
-        downloadsUrl: String,
-        eventsUrl: String,
-        fork: Bool,
-        forks: Int,
-        forksCount: Int,
-        forksUrl: String,
-        fullName: String,
-        gitCommitsUrl: String,
-        gitRefsUrl: String,
-        gitTagsUrl: String,
-        gitUrl: String,
-        hasDownloads: Bool,
-        hasIssues: Bool,
-        hasPages: Bool,
-        hasProjects: Bool,
-        hasWiki: Bool,
-        hasDiscussions: Bool,
-        homepage: String?,
-        hooksUrl: String,
-        htmlUrl: String,
-        id: Int,
-        issueCommentUrl: String,
-        issueEventsUrl: String,
-        issuesUrl: String,
-        keysUrl: String,
-        labelsUrl: String,
-        language: String?,
-        languagesUrl: String,
-        license: WebhookPullRequestLockedPullRequestBaseRepoLicense?,
-        mergesUrl: String,
-        milestonesUrl: String,
-        mirrorUrl: String?,
-        name: String,
-        nodeId: String,
-        notificationsUrl: String,
-        openIssues: Int,
-        openIssuesCount: Int,
-        owner: WebhookPullRequestLockedPullRequestBaseRepoOwner?,
-        private: Bool,
-        pullsUrl: String,
-        pushedAt: WebhookPullRequestLockedPullRequestBaseRepoPushedAt?,
-        releasesUrl: String,
-        size: Int,
-        sshUrl: String,
-        stargazersCount: Int,
-        stargazersUrl: String,
-        statusesUrl: String,
-        subscribersUrl: String,
-        subscriptionUrl: String,
-        svnUrl: String,
-        tagsUrl: String,
-        teamsUrl: String,
-        topics: [String],
-        treesUrl: String,
-        updatedAt: Date,
-        url: String,
-        visibility: WebhookPullRequestLockedPullRequestBaseRepoVisibility,
-        watchers: Int,
-        watchersCount: Int,
-        allowAutoMerge: Bool? = nil,
-        allowForking: Bool? = nil,
-        allowMergeCommit: Bool? = nil,
-        allowRebaseMerge: Bool? = nil,
-        allowSquashMerge: Bool? = nil,
-        allowUpdateBranch: Bool? = nil,
-        deleteBranchOnMerge: Bool? = nil,
-        disabled: Bool? = nil,
-        hasPullRequests: Bool? = nil,
-        pullRequestCreationPolicy: WebhookPullRequestLockedPullRequestBaseRepoPullRequestCreationPolicy? = nil,
-        isTemplate: Bool? = nil,
-        primaryBranch: String? = nil,
-        mergeCommitMessage: WebhookPullRequestLockedPullRequestBaseRepoMergeCommitMessage? = nil,
-        mergeCommitTitle: WebhookPullRequestLockedPullRequestBaseRepoMergeCommitTitle? = nil,
-        organization: String? = nil,
-        permissions: WebhookPullRequestLockedPullRequestBaseRepoPermissions? = nil,
-        public: Bool? = nil,
-        roleName: String? = nil,
-        squashMergeCommitMessage: WebhookPullRequestLockedPullRequestBaseRepoSquashMergeCommitMessage? = nil,
-        squashMergeCommitTitle: WebhookPullRequestLockedPullRequestBaseRepoSquashMergeCommitTitle? = nil,
-        stargazers: Int? = nil,
-        useSquashPrTitleAsDefault: Bool? = nil,
-        webCommitSignoffRequired: Bool? = nil
-    ) throws {
+// WebhookPullRequestLocked domain models
+extension WebhookPullRequestLockedPullRequestBaseRepo {
+    public init(archiveUrl: String, archived: Bool, assigneesUrl: String, blobsUrl: String, branchesUrl: String, cloneUrl: String, collaboratorsUrl: String, commentsUrl: String, commitsUrl: String, compareUrl: String, contentsUrl: String, contributorsUrl: String, createdAt: WebhookPullRequestLockedPullRequestBaseRepoCreatedAt, defaultBranch: String, deploymentsUrl: String, description: String?, downloadsUrl: String, eventsUrl: String, fork: Bool, forks: Int, forksCount: Int, forksUrl: String, fullName: String, gitCommitsUrl: String, gitRefsUrl: String, gitTagsUrl: String, gitUrl: String, hasDownloads: Bool, hasIssues: Bool, hasPages: Bool, hasProjects: Bool, hasWiki: Bool, hasDiscussions: Bool, homepage: String?, hooksUrl: String, htmlUrl: String, id: Int, issueCommentUrl: String, issueEventsUrl: String, issuesUrl: String, keysUrl: String, labelsUrl: String, language: String?, languagesUrl: String, license: WebhookPullRequestLockedPullRequestBaseRepoLicense?, mergesUrl: String, milestonesUrl: String, mirrorUrl: String?, name: String, nodeId: String, notificationsUrl: String, openIssues: Int, openIssuesCount: Int, owner: WebhookPullRequestLockedPullRequestBaseRepoOwner?, `private`: Bool, pullsUrl: String, pushedAt: WebhookPullRequestLockedPullRequestBaseRepoPushedAt?, releasesUrl: String, size: Int, sshUrl: String, stargazersCount: Int, stargazersUrl: String, statusesUrl: String, subscribersUrl: String, subscriptionUrl: String, svnUrl: String, tagsUrl: String, teamsUrl: String, topics: [String], treesUrl: String, updatedAt: Date, url: String, visibility: WebhookPullRequestLockedPullRequestBaseRepoVisibility, watchers: Int, watchersCount: Int, allowAutoMerge: Bool? = nil, allowForking: Bool? = nil, allowMergeCommit: Bool? = nil, allowRebaseMerge: Bool? = nil, allowSquashMerge: Bool? = nil, allowUpdateBranch: Bool? = nil, deleteBranchOnMerge: Bool? = nil, disabled: Bool? = nil, hasPullRequests: Bool? = nil, pullRequestCreationPolicy: WebhookPullRequestLockedPullRequestBaseRepoPullRequestCreationPolicy? = nil, isTemplate: Bool? = nil, primaryBranch: String? = nil, mergeCommitMessage: WebhookPullRequestLockedPullRequestBaseRepoMergeCommitMessage? = nil, mergeCommitTitle: WebhookPullRequestLockedPullRequestBaseRepoMergeCommitTitle? = nil, organization: String? = nil, permissions: WebhookPullRequestLockedPullRequestBaseRepoPermissions? = nil, `public`: Bool? = nil, roleName: String? = nil, squashMergeCommitMessage: WebhookPullRequestLockedPullRequestBaseRepoSquashMergeCommitMessage? = nil, squashMergeCommitTitle: WebhookPullRequestLockedPullRequestBaseRepoSquashMergeCommitTitle? = nil, stargazers: Int? = nil, useSquashPrTitleAsDefault: Bool? = nil, webCommitSignoffRequired: Bool? = nil) throws {
         (self.archiveUrl, self.archived) = (archiveUrl, archived)
         (self.assigneesUrl, self.blobsUrl) = (assigneesUrl, blobsUrl)
         (self.branchesUrl, self.cloneUrl) = (branchesUrl, cloneUrl)
@@ -132,7 +33,7 @@ public extension WebhookPullRequestLockedPullRequestBaseRepo {
         (self.name, self.nodeId) = (name, nodeId)
         (self.notificationsUrl, self.openIssues) = (notificationsUrl, openIssues)
         (self.openIssuesCount, self.owner) = (openIssuesCount, owner)
-        (self.private, self.pullsUrl) = (`private`, pullsUrl)
+        (self.`private`, self.pullsUrl) = (`private`, pullsUrl)
         (self.pushedAt, self.releasesUrl) = (pushedAt, releasesUrl)
         (self.size, self.sshUrl) = (size, sshUrl)
         (self.stargazersCount, self.stargazersUrl) = (stargazersCount, stargazersUrl)
@@ -150,7 +51,7 @@ public extension WebhookPullRequestLockedPullRequestBaseRepo {
         (self.pullRequestCreationPolicy, self.isTemplate) = (pullRequestCreationPolicy, isTemplate)
         (self.primaryBranch, self.mergeCommitMessage) = (primaryBranch, mergeCommitMessage)
         (self.mergeCommitTitle, self.organization) = (mergeCommitTitle, organization)
-        (self.permissions, self.public) = (permissions, `public`)
+        (self.permissions, self.`public`) = (permissions, `public`)
         (self.roleName, self.squashMergeCommitMessage) = (roleName, squashMergeCommitMessage)
         (self.squashMergeCommitTitle, self.stargazers) = (squashMergeCommitTitle, stargazers)
         self.useSquashPrTitleAsDefault = useSquashPrTitleAsDefault
@@ -162,18 +63,18 @@ public extension WebhookPullRequestLockedPullRequestBaseRepo {
 
 extension WebhookPullRequestLockedPullRequestBaseRepo {
     func sdkValidateConstraintsPart1() throws {
-        try sdkValidateUri("clone_url", cloneUrl)
-        try sdkValidateUri("contributors_url", contributorsUrl)
-        try sdkValidateUri("deployments_url", deploymentsUrl)
-        try sdkValidateUri("downloads_url", downloadsUrl)
-        try sdkValidateUri("events_url", eventsUrl)
-        try sdkValidateUri("forks_url", forksUrl)
-        try sdkValidateUri("git_url", gitUrl)
-        try sdkValidateUri("hooks_url", hooksUrl)
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateUri("languages_url", languagesUrl)
-        try sdkValidateUri("merges_url", mergesUrl)
-        if let value = mirrorUrl {
+            try sdkValidateUri("clone_url", self.cloneUrl)
+            try sdkValidateUri("contributors_url", self.contributorsUrl)
+            try sdkValidateUri("deployments_url", self.deploymentsUrl)
+            try sdkValidateUri("downloads_url", self.downloadsUrl)
+            try sdkValidateUri("events_url", self.eventsUrl)
+            try sdkValidateUri("forks_url", self.forksUrl)
+            try sdkValidateUri("git_url", self.gitUrl)
+            try sdkValidateUri("hooks_url", self.hooksUrl)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("languages_url", self.languagesUrl)
+            try sdkValidateUri("merges_url", self.mergesUrl)
+        if let value = self.mirrorUrl {
             try sdkValidateUri("mirror_url", value)
         }
     }
@@ -181,14 +82,14 @@ extension WebhookPullRequestLockedPullRequestBaseRepo {
 
 extension WebhookPullRequestLockedPullRequestBaseRepo {
     func sdkValidateConstraintsPart2() throws {
-        try sdkValidateUri("stargazers_url", stargazersUrl)
-        try sdkValidateUri("subscribers_url", subscribersUrl)
-        try sdkValidateUri("subscription_url", subscriptionUrl)
-        try sdkValidateUri("svn_url", svnUrl)
-        try sdkValidateUri("tags_url", tagsUrl)
-        try sdkValidateUri("teams_url", teamsUrl)
-        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
-        try sdkValidateUri("url", url)
+            try sdkValidateUri("stargazers_url", self.stargazersUrl)
+            try sdkValidateUri("subscribers_url", self.subscribersUrl)
+            try sdkValidateUri("subscription_url", self.subscriptionUrl)
+            try sdkValidateUri("svn_url", self.svnUrl)
+            try sdkValidateUri("tags_url", self.tagsUrl)
+            try sdkValidateUri("teams_url", self.teamsUrl)
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateUri("url", self.url)
     }
 }
 
@@ -213,65 +114,37 @@ public struct WebhookPullRequestLockedPullRequestBase: Codable {
         case user
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookPullRequestLockedPullRequestBase {
-    init(from decoder: Decoder) throws {
+extension WebhookPullRequestLockedPullRequestBase {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.label) else {
-            throw SdkValidationError(
-                field: "label",
-                code: "required",
-                message: "Validation failed for 'label': value is required"
-            )
+            throw SdkValidationError(field: "label", code: "required", message: "Validation failed for 'label': value is required")
         }
         guard container.contains(.ref) else {
-            throw SdkValidationError(
-                field: "ref",
-                code: "required",
-                message: "Validation failed for 'ref': value is required"
-            )
+            throw SdkValidationError(field: "ref", code: "required", message: "Validation failed for 'ref': value is required")
         }
         guard container.contains(.repo) else {
-            throw SdkValidationError(
-                field: "repo",
-                code: "required",
-                message: "Validation failed for 'repo': value is required"
-            )
+            throw SdkValidationError(field: "repo", code: "required", message: "Validation failed for 'repo': value is required")
         }
         guard container.contains(.sha) else {
-            throw SdkValidationError(
-                field: "sha",
-                code: "required",
-                message: "Validation failed for 'sha': value is required"
-            )
+            throw SdkValidationError(field: "sha", code: "required", message: "Validation failed for 'sha': value is required")
         }
         guard container.contains(.user) else {
-            throw SdkValidationError(
-                field: "user",
-                code: "required",
-                message: "Validation failed for 'user': value is required"
-            )
+            throw SdkValidationError(field: "user", code: "required", message: "Validation failed for 'user': value is required")
         }
-        label = try container.sdkDecodeRequired(.label)
-        ref = try container.sdkDecodeRequired(.ref)
-        repo = try container.sdkDecodeRequired(.repo)
-        sha = try container.sdkDecodeRequired(.sha)
-        user = try container.sdkDecodeNullable(.user)
+        self.label = try container.sdkDecodeRequired(.label)
+        self.ref = try container.sdkDecodeRequired(.ref)
+        self.repo = try container.sdkDecodeRequired(.repo)
+        self.sha = try container.sdkDecodeRequired(.sha)
+        self.user = try container.sdkDecodeNullable(.user)
     }
 }
 
-public extension WebhookPullRequestLockedPullRequestBase {
-    init(
-        label: String,
-        ref: String,
-        repo: WebhookPullRequestLockedPullRequestBaseRepo,
-        sha: String,
-        user: WebhookPullRequestLockedPullRequestBaseUser?
-    ) {
+extension WebhookPullRequestLockedPullRequestBase {
+    public init(label: String, ref: String, repo: WebhookPullRequestLockedPullRequestBaseRepo, sha: String, user: WebhookPullRequestLockedPullRequestBaseUser?) {
         (self.label, self.ref) = (label, ref)
         (self.repo, self.sha) = (repo, sha)
         self.user = user
@@ -287,27 +160,21 @@ public struct WebhookPullRequestLockedPullRequestLinksReviewComments: Codable {
         case href
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookPullRequestLockedPullRequestLinksReviewComments {
-    init(from decoder: Decoder) throws {
+extension WebhookPullRequestLockedPullRequestLinksReviewComments {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.href) else {
-            throw SdkValidationError(
-                field: "href",
-                code: "required",
-                message: "Validation failed for 'href': value is required"
-            )
+            throw SdkValidationError(field: "href", code: "required", message: "Validation failed for 'href': value is required")
         }
-        href = try container.sdkDecodeRequired(.href)
+        self.href = try container.sdkDecodeRequired(.href)
     }
 }
 
-public extension WebhookPullRequestLockedPullRequestLinksReviewComments {
-    init(href: String) {
+extension WebhookPullRequestLockedPullRequestLinksReviewComments {
+    public init(href: String) {
         self.href = href
     }
 }
@@ -384,79 +251,46 @@ public struct WebhookPullRequestLockedPullRequestAssignee: Codable {
         case userViewType = "user_view_type"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookPullRequestLockedPullRequestAssignee {
-    init(from decoder: Decoder) throws {
+extension WebhookPullRequestLockedPullRequestAssignee {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
         guard container.contains(.login) else {
-            throw SdkValidationError(
-                field: "login",
-                code: "required",
-                message: "Validation failed for 'login': value is required"
-            )
+            throw SdkValidationError(field: "login", code: "required", message: "Validation failed for 'login': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
-        login = try container.sdkDecodeRequired(.login)
-        avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
-        deleted = try container.sdkDecodeIfPresent(.deleted)
-        email = try container.sdkDecodeIfPresent(.email)
-        eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
-        followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
-        followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
-        gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
-        gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        name = try container.sdkDecodeIfPresent(.name)
-        nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
-        receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
-        reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
-        siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
-        starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
-        subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
-        type = try container.sdkDecodeIfPresent(.type)
-        url = try container.sdkDecodeIfPresent(.url)
-        userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.login = try container.sdkDecodeRequired(.login)
+        self.avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
+        self.deleted = try container.sdkDecodeIfPresent(.deleted)
+        self.email = try container.sdkDecodeIfPresent(.email)
+        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        self.followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
+        self.followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
+        self.gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
+        self.gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        self.name = try container.sdkDecodeIfPresent(.name)
+        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        self.organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
+        self.receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
+        self.reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
+        self.siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
+        self.starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
+        self.subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
+        self.type = try container.sdkDecodeIfPresent(.type)
+        self.url = try container.sdkDecodeIfPresent(.url)
+        self.userViewType = try container.sdkDecodeIfPresent(.userViewType)
         try sdkValidateConstraints()
     }
 }
 
-public extension WebhookPullRequestLockedPullRequestAssignee {
-    init(
-        id: Int,
-        login: String,
-        avatarUrl: String? = nil,
-        deleted: Bool? = nil,
-        email: String? = nil,
-        eventsUrl: String? = nil,
-        followersUrl: String? = nil,
-        followingUrl: String? = nil,
-        gistsUrl: String? = nil,
-        gravatarId: String? = nil,
-        htmlUrl: String? = nil,
-        name: String? = nil,
-        nodeId: String? = nil,
-        organizationsUrl: String? = nil,
-        receivedEventsUrl: String? = nil,
-        reposUrl: String? = nil,
-        siteAdmin: Bool? = nil,
-        starredUrl: String? = nil,
-        subscriptionsUrl: String? = nil,
-        type: WebhookPullRequestLockedPullRequestAssigneeType? = nil,
-        url: String? = nil,
-        userViewType: String? = nil
-    ) throws {
+extension WebhookPullRequestLockedPullRequestAssignee {
+    public init(id: Int, login: String, avatarUrl: String? = nil, deleted: Bool? = nil, email: String? = nil, eventsUrl: String? = nil, followersUrl: String? = nil, followingUrl: String? = nil, gistsUrl: String? = nil, gravatarId: String? = nil, htmlUrl: String? = nil, name: String? = nil, nodeId: String? = nil, organizationsUrl: String? = nil, receivedEventsUrl: String? = nil, reposUrl: String? = nil, siteAdmin: Bool? = nil, starredUrl: String? = nil, subscriptionsUrl: String? = nil, type: WebhookPullRequestLockedPullRequestAssigneeType? = nil, url: String? = nil, userViewType: String? = nil) throws {
         (self.id, self.login) = (id, login)
         (self.avatarUrl, self.deleted) = (avatarUrl, deleted)
         (self.email, self.eventsUrl) = (email, eventsUrl)
@@ -474,28 +308,28 @@ public extension WebhookPullRequestLockedPullRequestAssignee {
 
 extension WebhookPullRequestLockedPullRequestAssignee {
     func sdkValidateConstraints() throws {
-        if let value = avatarUrl {
+        if let value = self.avatarUrl {
             try sdkValidateUri("avatar_url", value)
         }
-        if let value = followersUrl {
+        if let value = self.followersUrl {
             try sdkValidateUri("followers_url", value)
         }
-        if let value = htmlUrl {
+        if let value = self.htmlUrl {
             try sdkValidateUri("html_url", value)
         }
-        if let value = organizationsUrl {
+        if let value = self.organizationsUrl {
             try sdkValidateUri("organizations_url", value)
         }
-        if let value = receivedEventsUrl {
+        if let value = self.receivedEventsUrl {
             try sdkValidateUri("received_events_url", value)
         }
-        if let value = reposUrl {
+        if let value = self.reposUrl {
             try sdkValidateUri("repos_url", value)
         }
-        if let value = subscriptionsUrl {
+        if let value = self.subscriptionsUrl {
             try sdkValidateUri("subscriptions_url", value)
         }
-        if let value = url {
+        if let value = self.url {
             try sdkValidateUri("url", value)
         }
     }
@@ -570,49 +404,39 @@ public struct WebhookPullRequestLockedPullRequestAssigneesItem: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookPullRequestLockedPullRequestAssigneesItem {
-    init(from decoder: Decoder) throws {
+extension WebhookPullRequestLockedPullRequestAssigneesItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
         guard container.contains(.login) else {
-            throw SdkValidationError(
-                field: "login",
-                code: "required",
-                message: "Validation failed for 'login': value is required"
-            )
+            throw SdkValidationError(field: "login", code: "required", message: "Validation failed for 'login': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
-        login = try container.sdkDecodeRequired(.login)
-        avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
-        deleted = try container.sdkDecodeIfPresent(.deleted)
-        email = try container.sdkDecodeIfPresent(.email)
-        eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
-        followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
-        followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
-        gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
-        gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        name = try container.sdkDecodeIfPresent(.name)
-        nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
-        receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
-        reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
-        siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
-        starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
-        subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
-        type = try container.sdkDecodeIfPresent(.type)
-        url = try container.sdkDecodeIfPresent(.url)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.login = try container.sdkDecodeRequired(.login)
+        self.avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
+        self.deleted = try container.sdkDecodeIfPresent(.deleted)
+        self.email = try container.sdkDecodeIfPresent(.email)
+        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        self.followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
+        self.followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
+        self.gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
+        self.gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        self.name = try container.sdkDecodeIfPresent(.name)
+        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        self.organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
+        self.receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
+        self.reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
+        self.siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
+        self.starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
+        self.subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
+        self.type = try container.sdkDecodeIfPresent(.type)
+        self.url = try container.sdkDecodeIfPresent(.url)
         try sdkValidateConstraints()
     }
 }

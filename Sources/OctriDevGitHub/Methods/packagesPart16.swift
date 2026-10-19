@@ -6,13 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension PackagesMethods {
-    /// Deletes a specific package version for a package owned by the authenticated user. If the package is public and
-    /// the package version has more than 5,000 downloads, you cannot delete the package version. In this scenario,
-    /// contact GitHub support for further assistance. The authenticated user must have admin permissions in the
-    /// organization to use this endpoint. OAuth app tokens and personal access tokens (classic) need the
-    /// `read:packages` and `delete:packages` scopes to use this endpoint. For more information, see "[About permissions
-    /// for GitHub Packages](https://docs.github.com/packages/learn-github-packages/about-permissions-for-github-packages#permissions-for-repository-scoped-packages)."
+extension PackagesMethods {
+    /// Deletes a specific package version for a package owned by the authenticated user. If the package is public and the package version has more than 5,000 downloads, you cannot delete the package version. In this scenario, contact GitHub support for further assistance. The authenticated user must have admin permissions in the organization to use this endpoint. OAuth app tokens and personal access tokens (classic) need the `read:packages` and `delete:packages` scopes to use this endpoint. For more information, see "[About permissions for GitHub Packages](https://docs.github.com/packages/learn-github-packages/about-permissions-for-github-packages#permissions-for-repository-scoped-packages)."
     ///
     /// - Parameters:
     /// - packageType: The type of supported package. Packages in GitHub's Gradle
@@ -23,28 +18,7 @@ public extension PackagesMethods {
     ///   Container registry.
     /// - packageName: The name of the package.
     /// - packageVersionId: Unique identifier of the package version.
-    static func packagesDeletePackageVersionForAuthenticatedUser(
-        config: ClientConfig,
-        packageType: PackagesDeletePackageForOrgParameter,
-        packageName: String,
-        packageVersionId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "DELETE",
-            [
-                "/user/packages/",
-                sdkEncodePathSegment(sdkWireString(packageType)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(packageName)),
-                "/versions/",
-                sdkEncodePathSegment(sdkWireString(packageVersionId)),
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "packagesDeletePackageVersionForAuthenticatedUser",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self]
-        )).data
+    public static func packagesDeletePackageVersionForAuthenticatedUser(config: ClientConfig, packageType: PackagesDeletePackageForOrgParameter, packageName: String, packageVersionId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("DELETE", ["/user/packages/", sdkEncodePathSegment(sdkWireString(packageType)), "/", sdkEncodePathSegment(sdkWireString(packageName)), "/versions/", sdkEncodePathSegment(sdkWireString(packageVersionId))].joined(), config: config, decoder: .empty, operationId: "packagesDeletePackageVersionForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
     }
 }

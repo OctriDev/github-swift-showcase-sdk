@@ -7,18 +7,13 @@ import Foundation
     import FoundationNetworking
 #endif
 
-/// Canonical agentAutomations operation model declarations
-public extension AgentAutomationsGetRepoAutomationResponseTriggersWorkflowRun {
-    init(
-        workflows: [String],
-        conclusions: AgentAutomationsGetRepoAutomationResponseTriggersWorkflowRunCXe7aa777ca6,
-        query: String? = nil,
-        writeScope: AgentAutomationsGetRepoAutomationResponseTriggersWorkflowRunWriteScope? = nil
-    ) throws {
+// Canonical agentAutomations operation model declarations
+extension AgentAutomationsGetRepoAutomationResponseTriggersWorkflowRun {
+    public init(workflows: [String], conclusions: AgentAutomationsGetRepoAutomationResponseTriggersWorkflowRunCXe7aa777ca6, query: String? = nil, writeScope: AgentAutomationsGetRepoAutomationResponseTriggersWorkflowRunWriteScope? = nil) throws {
         (self.workflows, self.conclusions) = (workflows, conclusions)
         (self.query, self.writeScope) = (query, writeScope)
-        try validateItems("workflows", self.workflows, min: 1, max: nil)
-        try validateItems("conclusions", self.conclusions, min: 1, max: 1)
+            try validateItems("workflows", self.workflows, min: 1, max: nil)
+            try validateItems("conclusions", self.conclusions, min: 1, max: 1)
         if let value = self.query {
             try validateLength("query", value, min: 1, max: nil)
         }
@@ -41,31 +36,27 @@ public struct AgentAutomationsEditRepoAutomationRequestBodyTriggersPullRequestOp
     }
 
     init() {
-        (query, paths, writeScope) = (nil, nil, nil)
+        (self.query, self.paths, self.writeScope) = (nil, nil, nil)
     }
 }
 
-public extension AgentAutomationsEditRepoAutomationRequestBodyTriggersPullRequestOpened {
-    init(from decoder: Decoder) throws {
+extension AgentAutomationsEditRepoAutomationRequestBodyTriggersPullRequestOpened {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        query = try container.sdkDecodeIfPresent(.query)
-        paths = try container.sdkDecodeIfPresent(.paths)
-        writeScope = try container.sdkDecodeIfPresent(.writeScope)
-        if let value = query {
+        self.query = try container.sdkDecodeIfPresent(.query)
+        self.paths = try container.sdkDecodeIfPresent(.paths)
+        self.writeScope = try container.sdkDecodeIfPresent(.writeScope)
+        if let value = self.query {
             try validateLength("query", value, min: 1, max: nil)
         }
-        if let value = paths {
+        if let value = self.paths {
             try validateItems("paths", value, min: 1, max: nil)
         }
     }
 }
 
-public extension AgentAutomationsEditRepoAutomationRequestBodyTriggersPullRequestOpened {
-    init(
-        query: String? = nil,
-        paths: [String]? = nil,
-        writeScope: AgentAutomationsEditRepoAutomationRequestBodyTriggersPullRequX92b1cb9c03? = nil
-    ) throws {
+extension AgentAutomationsEditRepoAutomationRequestBodyTriggersPullRequestOpened {
+    public init(query: String? = nil, paths: [String]? = nil, writeScope: AgentAutomationsEditRepoAutomationRequestBodyTriggersPullRequX92b1cb9c03? = nil) throws {
         self.init()
         (self.query, self.paths) = (query, paths)
         self.writeScope = writeScope
@@ -90,28 +81,22 @@ public struct AgentAutomationsListAutomationTasksResponseErrorsItemX8269c4db: Co
         case message
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension AgentAutomationsListAutomationTasksResponseErrorsItemX8269c4db {
-    init(from decoder: Decoder) throws {
+extension AgentAutomationsListAutomationTasksResponseErrorsItemX8269c4db {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.code) else {
-            throw SdkValidationError(
-                field: "code",
-                code: "required",
-                message: "Validation failed for 'code': value is required"
-            )
+            throw SdkValidationError(field: "code", code: "required", message: "Validation failed for 'code': value is required")
         }
-        code = try container.sdkDecodeRequired(.code)
-        message = try container.sdkDecodeIfPresent(.message)
+        self.code = try container.sdkDecodeRequired(.code)
+        self.message = try container.sdkDecodeIfPresent(.message)
     }
 }
 
-public extension AgentAutomationsListAutomationTasksResponseErrorsItemX8269c4db {
-    init(code: AgentAutomationsListAutomationTasksResponseErrorsItemCodeXf4831980, message: String? = nil) {
+extension AgentAutomationsListAutomationTasksResponseErrorsItemX8269c4db {
+    public init(code: AgentAutomationsListAutomationTasksResponseErrorsItemCodeXf4831980, message: String? = nil) {
         (self.code, self.message) = (code, message)
     }
 }
@@ -135,36 +120,31 @@ public struct AgentAutomationsCreateRepoAutomationRequestBodyTriggersPullReX6270
     }
 
     init() {
-        (query, paths, assignees, writeScope) = (nil, nil, nil, nil)
+        (self.query, self.paths, self.assignees, self.writeScope) = (nil, nil, nil, nil)
     }
 }
 
-public extension AgentAutomationsCreateRepoAutomationRequestBodyTriggersPullReX6270059cb5 {
-    init(from decoder: Decoder) throws {
+extension AgentAutomationsCreateRepoAutomationRequestBodyTriggersPullReX6270059cb5 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        query = try container.sdkDecodeIfPresent(.query)
-        paths = try container.sdkDecodeIfPresent(.paths)
-        assignees = try container.sdkDecodeIfPresent(.assignees)
-        writeScope = try container.sdkDecodeIfPresent(.writeScope)
-        if let value = query {
+        self.query = try container.sdkDecodeIfPresent(.query)
+        self.paths = try container.sdkDecodeIfPresent(.paths)
+        self.assignees = try container.sdkDecodeIfPresent(.assignees)
+        self.writeScope = try container.sdkDecodeIfPresent(.writeScope)
+        if let value = self.query {
             try validateLength("query", value, min: 1, max: nil)
         }
-        if let value = paths {
+        if let value = self.paths {
             try validateItems("paths", value, min: 1, max: nil)
         }
-        if let value = assignees {
+        if let value = self.assignees {
             try validateItems("assignees", value, min: 1, max: nil)
         }
     }
 }
 
-public extension AgentAutomationsCreateRepoAutomationRequestBodyTriggersPullReX6270059cb5 {
-    init(
-        query: String? = nil,
-        paths: [String]? = nil,
-        assignees: [String]? = nil,
-        writeScope: AgentAutomationsCreateRepoAutomationRequestBodyTriggersPullReXf05c30e09d? = nil
-    ) throws {
+extension AgentAutomationsCreateRepoAutomationRequestBodyTriggersPullReX6270059cb5 {
+    public init(query: String? = nil, paths: [String]? = nil, assignees: [String]? = nil, writeScope: AgentAutomationsCreateRepoAutomationRequestBodyTriggersPullReXf05c30e09d? = nil) throws {
         self.init()
         (self.query, self.paths) = (query, paths)
         (self.assignees, self.writeScope) = (assignees, writeScope)
@@ -199,36 +179,31 @@ public struct AgentAutomationsEditRepoAutomationResponseTriggersPullRequestAssig
     }
 
     init() {
-        (query, paths, assignees, writeScope) = (nil, nil, nil, nil)
+        (self.query, self.paths, self.assignees, self.writeScope) = (nil, nil, nil, nil)
     }
 }
 
-public extension AgentAutomationsEditRepoAutomationResponseTriggersPullRequestAssigned {
-    init(from decoder: Decoder) throws {
+extension AgentAutomationsEditRepoAutomationResponseTriggersPullRequestAssigned {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        query = try container.sdkDecodeIfPresent(.query)
-        paths = try container.sdkDecodeIfPresent(.paths)
-        assignees = try container.sdkDecodeIfPresent(.assignees)
-        writeScope = try container.sdkDecodeIfPresent(.writeScope)
-        if let value = query {
+        self.query = try container.sdkDecodeIfPresent(.query)
+        self.paths = try container.sdkDecodeIfPresent(.paths)
+        self.assignees = try container.sdkDecodeIfPresent(.assignees)
+        self.writeScope = try container.sdkDecodeIfPresent(.writeScope)
+        if let value = self.query {
             try validateLength("query", value, min: 1, max: nil)
         }
-        if let value = paths {
+        if let value = self.paths {
             try validateItems("paths", value, min: 1, max: nil)
         }
-        if let value = assignees {
+        if let value = self.assignees {
             try validateItems("assignees", value, min: 1, max: nil)
         }
     }
 }
 
-public extension AgentAutomationsEditRepoAutomationResponseTriggersPullRequestAssigned {
-    init(
-        query: String? = nil,
-        paths: [String]? = nil,
-        assignees: [String]? = nil,
-        writeScope: AgentAutomationsEditRepoAutomationResponseTriggersPullRequestX4423258f06? = nil
-    ) throws {
+extension AgentAutomationsEditRepoAutomationResponseTriggersPullRequestAssigned {
+    public init(query: String? = nil, paths: [String]? = nil, assignees: [String]? = nil, writeScope: AgentAutomationsEditRepoAutomationResponseTriggersPullRequestX4423258f06? = nil) throws {
         self.init()
         (self.query, self.paths) = (query, paths)
         (self.assignees, self.writeScope) = (assignees, writeScope)
@@ -256,34 +231,27 @@ public struct AgentAutomationsEditRepoAutomationResponseErrorsItemXe621498b: Cod
         case message
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension AgentAutomationsEditRepoAutomationResponseErrorsItemXe621498b {
-    init(from decoder: Decoder) throws {
+extension AgentAutomationsEditRepoAutomationResponseErrorsItemXe621498b {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.code) else {
-            throw SdkValidationError(
-                field: "code",
-                code: "required",
-                message: "Validation failed for 'code': value is required"
-            )
+            throw SdkValidationError(field: "code", code: "required", message: "Validation failed for 'code': value is required")
         }
-        code = try container.sdkDecodeRequired(.code)
-        message = try container.sdkDecodeIfPresent(.message)
+        self.code = try container.sdkDecodeRequired(.code)
+        self.message = try container.sdkDecodeIfPresent(.message)
     }
 }
 
-public extension AgentAutomationsEditRepoAutomationResponseErrorsItemXe621498b {
-    init(code: AgentAutomationsEditRepoAutomationResponseErrorsItemCodeXce1214b7, message: String? = nil) {
+extension AgentAutomationsEditRepoAutomationResponseErrorsItemXe621498b {
+    public init(code: AgentAutomationsEditRepoAutomationResponseErrorsItemCodeXce1214b7, message: String? = nil) {
         (self.code, self.message) = (code, message)
     }
 }
 
-public typealias AgentAutomationsGetRepoAutomationResponseTriggersPullRequestCX8efce2d722 =
-    [AgentAutomationsGetRepoAutomationResponseTriggersPullRequestCX15b4780a96]
+public typealias AgentAutomationsGetRepoAutomationResponseTriggersPullRequestCX8efce2d722 = [AgentAutomationsGetRepoAutomationResponseTriggersPullRequestCX15b4780a96]
 
 public struct AgentAutomationsGetRepoAutomationResponseTriggersPullRequestComment: Codable {
     /// Pull request conversation and inline review comment types to match.
@@ -300,37 +268,27 @@ public struct AgentAutomationsGetRepoAutomationResponseTriggersPullRequestCommen
         case writeScope = "write_scope"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension AgentAutomationsGetRepoAutomationResponseTriggersPullRequestComment {
-    init(from decoder: Decoder) throws {
+extension AgentAutomationsGetRepoAutomationResponseTriggersPullRequestComment {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.commentTypes) else {
-            throw SdkValidationError(
-                field: "comment_types",
-                code: "required",
-                message: "Validation failed for 'comment_types': value is required"
-            )
+            throw SdkValidationError(field: "comment_types", code: "required", message: "Validation failed for 'comment_types': value is required")
         }
-        commentTypes = try container.sdkDecodeRequired(.commentTypes)
-        bodySubstring = try container.sdkDecodeIfPresent(.bodySubstring)
-        writeScope = try container.sdkDecodeIfPresent(.writeScope)
-        try validateItems("comment_types", commentTypes, min: 1, max: 2)
+        self.commentTypes = try container.sdkDecodeRequired(.commentTypes)
+        self.bodySubstring = try container.sdkDecodeIfPresent(.bodySubstring)
+        self.writeScope = try container.sdkDecodeIfPresent(.writeScope)
+            try validateItems("comment_types", self.commentTypes, min: 1, max: 2)
     }
 }
 
-public extension AgentAutomationsGetRepoAutomationResponseTriggersPullRequestComment {
-    init(
-        commentTypes: AgentAutomationsGetRepoAutomationResponseTriggersPullRequestCX8efce2d722,
-        bodySubstring: String? = nil,
-        writeScope: AgentAutomationsGetRepoAutomationResponseTriggersPullRequestCXa715cf23bd? = nil
-    ) throws {
+extension AgentAutomationsGetRepoAutomationResponseTriggersPullRequestComment {
+    public init(commentTypes: AgentAutomationsGetRepoAutomationResponseTriggersPullRequestCX8efce2d722, bodySubstring: String? = nil, writeScope: AgentAutomationsGetRepoAutomationResponseTriggersPullRequestCXa715cf23bd? = nil) throws {
         (self.commentTypes, self.bodySubstring) = (commentTypes, bodySubstring)
         self.writeScope = writeScope
-        try validateItems("comment_types", self.commentTypes, min: 1, max: 2)
+            try validateItems("comment_types", self.commentTypes, min: 1, max: 2)
     }
 }
 
@@ -347,26 +305,23 @@ public struct AgentAutomationsCreateRepoAutomationResponseTriggersIssueOpened: C
     }
 
     init() {
-        (query, writeScope) = (nil, nil)
+        (self.query, self.writeScope) = (nil, nil)
     }
 }
 
-public extension AgentAutomationsCreateRepoAutomationResponseTriggersIssueOpened {
-    init(from decoder: Decoder) throws {
+extension AgentAutomationsCreateRepoAutomationResponseTriggersIssueOpened {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        query = try container.sdkDecodeIfPresent(.query)
-        writeScope = try container.sdkDecodeIfPresent(.writeScope)
-        if let value = query {
+        self.query = try container.sdkDecodeIfPresent(.query)
+        self.writeScope = try container.sdkDecodeIfPresent(.writeScope)
+        if let value = self.query {
             try validateLength("query", value, min: 1, max: nil)
         }
     }
 }
 
-public extension AgentAutomationsCreateRepoAutomationResponseTriggersIssueOpened {
-    init(
-        query: String? = nil,
-        writeScope: AgentAutomationsCreateRepoAutomationResponseTriggersIssueOpenXd0af30c897? = nil
-    ) throws {
+extension AgentAutomationsCreateRepoAutomationResponseTriggersIssueOpened {
+    public init(query: String? = nil, writeScope: AgentAutomationsCreateRepoAutomationResponseTriggersIssueOpenXd0af30c897? = nil) throws {
         self.init()
         (self.query, self.writeScope) = (query, writeScope)
         if let value = self.query {
@@ -388,23 +343,20 @@ public struct AgentAutomationsListAutomationsResponseItemTriggersIssueComment: C
     }
 
     init() {
-        (bodySubstring, writeScope) = (nil, nil)
+        (self.bodySubstring, self.writeScope) = (nil, nil)
     }
 }
 
-public extension AgentAutomationsListAutomationsResponseItemTriggersIssueComment {
-    init(from decoder: Decoder) throws {
+extension AgentAutomationsListAutomationsResponseItemTriggersIssueComment {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        bodySubstring = try container.sdkDecodeIfPresent(.bodySubstring)
-        writeScope = try container.sdkDecodeIfPresent(.writeScope)
+        self.bodySubstring = try container.sdkDecodeIfPresent(.bodySubstring)
+        self.writeScope = try container.sdkDecodeIfPresent(.writeScope)
     }
 }
 
-public extension AgentAutomationsListAutomationsResponseItemTriggersIssueComment {
-    init(
-        bodySubstring: String? = nil,
-        writeScope: AgentAutomationsListAutomationsResponseItemTriggersIssueCommeXe1df0d3efd? = nil
-    ) {
+extension AgentAutomationsListAutomationsResponseItemTriggersIssueComment {
+    public init(bodySubstring: String? = nil, writeScope: AgentAutomationsListAutomationsResponseItemTriggersIssueCommeXe1df0d3efd? = nil) {
         self.init()
         (self.bodySubstring, self.writeScope) = (bodySubstring, writeScope)
     }
@@ -423,30 +375,26 @@ public struct AgentAutomationsEditRepoAutomationResponseTriggersIssueComment: Co
     }
 
     init() {
-        (bodySubstring, writeScope) = (nil, nil)
+        (self.bodySubstring, self.writeScope) = (nil, nil)
     }
 }
 
-public extension AgentAutomationsEditRepoAutomationResponseTriggersIssueComment {
-    init(from decoder: Decoder) throws {
+extension AgentAutomationsEditRepoAutomationResponseTriggersIssueComment {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        bodySubstring = try container.sdkDecodeIfPresent(.bodySubstring)
-        writeScope = try container.sdkDecodeIfPresent(.writeScope)
+        self.bodySubstring = try container.sdkDecodeIfPresent(.bodySubstring)
+        self.writeScope = try container.sdkDecodeIfPresent(.writeScope)
     }
 }
 
-public extension AgentAutomationsEditRepoAutomationResponseTriggersIssueComment {
-    init(
-        bodySubstring: String? = nil,
-        writeScope: AgentAutomationsEditRepoAutomationResponseTriggersIssueCommentWriteScope? = nil
-    ) {
+extension AgentAutomationsEditRepoAutomationResponseTriggersIssueComment {
+    public init(bodySubstring: String? = nil, writeScope: AgentAutomationsEditRepoAutomationResponseTriggersIssueCommentWriteScope? = nil) {
         self.init()
         (self.bodySubstring, self.writeScope) = (bodySubstring, writeScope)
     }
 }
 
-public typealias AgentAutomationsListAutomationTasksResponseX9ebd4434ErrorsList =
-    [AgentAutomationsListAutomationTasksResponseErrorsItemX8269c4db]
+public typealias AgentAutomationsListAutomationTasksResponseX9ebd4434ErrorsList = [AgentAutomationsListAutomationTasksResponseErrorsItemX8269c4db]
 
 /// Structured error response following GitHub REST API conventions. For 422 Unprocessable Entity the errors array
 /// contains validation details; for other error status codes only message and documentation_url are returned.
@@ -464,40 +412,26 @@ public struct AgentAutomationsListAutomationTasksResponseX9ebd4434: Codable {
         case errors
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension AgentAutomationsListAutomationTasksResponseX9ebd4434 {
-    init(from decoder: Decoder) throws {
+extension AgentAutomationsListAutomationTasksResponseX9ebd4434 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.message) else {
-            throw SdkValidationError(
-                field: "message",
-                code: "required",
-                message: "Validation failed for 'message': value is required"
-            )
+            throw SdkValidationError(field: "message", code: "required", message: "Validation failed for 'message': value is required")
         }
         guard container.contains(.documentationUrl) else {
-            throw SdkValidationError(
-                field: "documentation_url",
-                code: "required",
-                message: "Validation failed for 'documentation_url': value is required"
-            )
+            throw SdkValidationError(field: "documentation_url", code: "required", message: "Validation failed for 'documentation_url': value is required")
         }
-        message = try container.sdkDecodeRequired(.message)
-        documentationUrl = try container.sdkDecodeRequired(.documentationUrl)
-        errors = try container.sdkDecodeIfPresent(.errors)
+        self.message = try container.sdkDecodeRequired(.message)
+        self.documentationUrl = try container.sdkDecodeRequired(.documentationUrl)
+        self.errors = try container.sdkDecodeIfPresent(.errors)
     }
 }
 
-public extension AgentAutomationsListAutomationTasksResponseX9ebd4434 {
-    init(
-        message: String,
-        documentationUrl: String,
-        errors: AgentAutomationsListAutomationTasksResponseX9ebd4434ErrorsList? = nil
-    ) {
+extension AgentAutomationsListAutomationTasksResponseX9ebd4434 {
+    public init(message: String, documentationUrl: String, errors: AgentAutomationsListAutomationTasksResponseX9ebd4434ErrorsList? = nil) {
         (self.message, self.documentationUrl) = (message, documentationUrl)
         self.errors = errors
     }
@@ -519,31 +453,27 @@ public struct AgentAutomationsGetRepoAutomationResponseTriggersPullRequestMXf8c0
     }
 
     init() {
-        (query, paths, writeScope) = (nil, nil, nil)
+        (self.query, self.paths, self.writeScope) = (nil, nil, nil)
     }
 }
 
-public extension AgentAutomationsGetRepoAutomationResponseTriggersPullRequestMXf8c0418c3c {
-    init(from decoder: Decoder) throws {
+extension AgentAutomationsGetRepoAutomationResponseTriggersPullRequestMXf8c0418c3c {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        query = try container.sdkDecodeIfPresent(.query)
-        paths = try container.sdkDecodeIfPresent(.paths)
-        writeScope = try container.sdkDecodeIfPresent(.writeScope)
-        if let value = query {
+        self.query = try container.sdkDecodeIfPresent(.query)
+        self.paths = try container.sdkDecodeIfPresent(.paths)
+        self.writeScope = try container.sdkDecodeIfPresent(.writeScope)
+        if let value = self.query {
             try validateLength("query", value, min: 1, max: nil)
         }
-        if let value = paths {
+        if let value = self.paths {
             try validateItems("paths", value, min: 1, max: nil)
         }
     }
 }
 
-public extension AgentAutomationsGetRepoAutomationResponseTriggersPullRequestMXf8c0418c3c {
-    init(
-        query: String? = nil,
-        paths: [String]? = nil,
-        writeScope: AgentAutomationsGetRepoAutomationResponseTriggersPullRequestMXddd734eabb? = nil
-    ) throws {
+extension AgentAutomationsGetRepoAutomationResponseTriggersPullRequestMXf8c0418c3c {
+    public init(query: String? = nil, paths: [String]? = nil, writeScope: AgentAutomationsGetRepoAutomationResponseTriggersPullRequestMXddd734eabb? = nil) throws {
         self.init()
         (self.query, self.paths) = (query, paths)
         self.writeScope = writeScope
@@ -568,28 +498,22 @@ public struct AgentAutomationsCreateRepoAutomationResponseErrorsItemXd252a8af: C
         case message
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension AgentAutomationsCreateRepoAutomationResponseErrorsItemXd252a8af {
-    init(from decoder: Decoder) throws {
+extension AgentAutomationsCreateRepoAutomationResponseErrorsItemXd252a8af {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.code) else {
-            throw SdkValidationError(
-                field: "code",
-                code: "required",
-                message: "Validation failed for 'code': value is required"
-            )
+            throw SdkValidationError(field: "code", code: "required", message: "Validation failed for 'code': value is required")
         }
-        code = try container.sdkDecodeRequired(.code)
-        message = try container.sdkDecodeIfPresent(.message)
+        self.code = try container.sdkDecodeRequired(.code)
+        self.message = try container.sdkDecodeIfPresent(.message)
     }
 }
 
-public extension AgentAutomationsCreateRepoAutomationResponseErrorsItemXd252a8af {
-    init(code: AgentAutomationsCreateRepoAutomationResponseErrorsItemCodeX59282d73, message: String? = nil) {
+extension AgentAutomationsCreateRepoAutomationResponseErrorsItemXd252a8af {
+    public init(code: AgentAutomationsCreateRepoAutomationResponseErrorsItemCodeX59282d73, message: String? = nil) {
         (self.code, self.message) = (code, message)
     }
 }
@@ -610,17 +534,17 @@ public struct AgentAutomationsCreateRepoAutomationRequestBodyTriggersDiscussionO
     }
 
     init() {
-        (categories, bodySubstring, writeScope) = (nil, nil, nil)
+        (self.categories, self.bodySubstring, self.writeScope) = (nil, nil, nil)
     }
 }
 
-public extension AgentAutomationsCreateRepoAutomationRequestBodyTriggersDiscussionOpened {
-    init(from decoder: Decoder) throws {
+extension AgentAutomationsCreateRepoAutomationRequestBodyTriggersDiscussionOpened {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        categories = try container.sdkDecodeIfPresent(.categories)
-        bodySubstring = try container.sdkDecodeIfPresent(.bodySubstring)
-        writeScope = try container.sdkDecodeIfPresent(.writeScope)
-        if let value = categories {
+        self.categories = try container.sdkDecodeIfPresent(.categories)
+        self.bodySubstring = try container.sdkDecodeIfPresent(.bodySubstring)
+        self.writeScope = try container.sdkDecodeIfPresent(.writeScope)
+        if let value = self.categories {
             try validateItems("categories", value, min: 1, max: nil)
         }
     }

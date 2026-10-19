@@ -6,11 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension MigrationsMethods {
-    /// List files larger than 100MB found during the import > [!WARNING] > **Endpoint closing down notice:** Due to
-    /// very low levels of usage and available alternatives, this endpoint is closing down and will no longer be
-    /// available from 00:00 UTC on April 12, 2024. For more details and alternatives, see the
-    /// [changelog](https://gh.io/source-imports-api-deprecation).
+extension MigrationsMethods {
+    /// List files larger than 100MB found during the import > [!WARNING] > **Endpoint closing down notice:** Due to very low levels of usage and available alternatives, this endpoint is closing down and will no longer be available from 00:00 UTC on April 12, 2024. For more details and alternatives, see the [changelog](https://gh.io/source-imports-api-deprecation).
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -19,26 +16,7 @@ public extension MigrationsMethods {
     ///   not case sensitive.
     ///
     /// - Warning: This operation is deprecated and may be removed in a future release.
-    static func migrationsGetLargeFiles(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [PorterLargeFile] {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/import/large_files",
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "migrationsGetLargeFiles",
-            options: requestOptions,
-            errors: ["503": BasicError.self]
-        )).data
+    public static func migrationsGetLargeFiles(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> [PorterLargeFile] {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/import/large_files"].joined(), config: config, decoder: .json, operationId: "migrationsGetLargeFiles", options: requestOptions, errors: ["503": BasicError.self])).data
     }
 }

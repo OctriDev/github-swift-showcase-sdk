@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension AgentAutomationsMethods {
-    struct AgentAutomationsEditRepoAutomationOptions: Codable {
+extension AgentAutomationsMethods {
+    public struct AgentAutomationsEditRepoAutomationOptions: Codable {
         public var owner: String
         public var repo: String
         public var automationId: String
@@ -29,15 +29,7 @@ public extension AgentAutomationsMethods {
         }
     }
 
-    /// Edits specified fields on an existing automation in a repository. Omitted fields are left unchanged. The
-    /// automation's `owner_type` is immutable and cannot be changed by this operation. **Fine-grained access tokens for
-    /// "Edit an automation for a repository"** This endpoint works with the following fine-grained token types: *
-    /// [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app)
-    /// * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token)
-    /// The fine-grained token must have one of the following permission sets for each repository accessed by this
-    /// request: * "Agent tasks" repository permissions (read and write) * "Contents" repository permissions (read and
-    /// write) The required permission set depends on each repository's Automation permission configuration. GitHub App
-    /// installation access tokens are not supported for this endpoint.
+    /// Edits specified fields on an existing automation in a repository. Omitted fields are left unchanged. The automation's `owner_type` is immutable and cannot be changed by this operation. **Fine-grained access tokens for "Edit an automation for a repository"** This endpoint works with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app) * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) The fine-grained token must have one of the following permission sets for each repository accessed by this request: * "Agent tasks" repository permissions (read and write) * "Contents" repository permissions (read and write) The required permission set depends on each repository's Automation permission configuration. GitHub App installation access tokens are not supported for this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -71,28 +63,9 @@ public extension AgentAutomationsMethods {
     ///   all tools.
     /// - allowedCustomAgents: Custom agents (subagents) this automation is allowed
     ///   to invoke. Send an empty array to clear all custom agents.
-    static func agentAutomationsEditRepoAutomation(
-        config: ClientConfig,
-        options: AgentAutomationsEditRepoAutomationOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> AgentAutomationsEditRepoAutomationResponse {
+    public static func agentAutomationsEditRepoAutomation(config: ClientConfig, options: AgentAutomationsEditRepoAutomationOptions, requestOptions: RequestOptions? = nil) async throws -> AgentAutomationsEditRepoAutomationResponse {
         let requestBody = AgentAutomationsEditRepoAutomationRequestBody(options: options)
 
-        return try await (sdkRequest(
-            "PATCH",
-            [
-                "/agents/repos/",
-                sdkEncodePathSegment(sdkWireString(options.owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(options.repo)),
-                "/automations/",
-                sdkEncodePathSegment(sdkWireString(options.automationId)),
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "agentAutomationsEditRepoAutomation",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("PATCH", ["/agents/repos/", sdkEncodePathSegment(sdkWireString(options.owner)), "/", sdkEncodePathSegment(sdkWireString(options.repo)), "/automations/", sdkEncodePathSegment(sdkWireString(options.automationId))].joined(), config: config, body: requestBody, decoder: .json, operationId: "agentAutomationsEditRepoAutomation", options: requestOptions)).data
     }
 }

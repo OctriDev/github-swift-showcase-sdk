@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ProjectsMethods {
+extension ProjectsMethods {
     /// Get a specific item from an organization-owned project.
     ///
     /// - Parameters:
@@ -16,33 +16,10 @@ public extension ProjectsMethods {
     /// - fields: Limit results to specific fields, by their IDs. If not specified,
     ///   the title field will be returned. Example:
     ///   fields[]=123&fields[]=456&fields[]=789 or fields=123,456,789
-    static func projectsGetOrgItem(
-        config: ClientConfig,
-        projectNumber: Int,
-        org: String,
-        itemId: Int,
-        fields: ProjectsGetOrgItemParameter? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ProjectsV2ItemWithContent {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/orgs/",
-                sdkEncodePathSegment(sdkWireString(org)),
-                "/projectsV2/",
-                sdkEncodePathSegment(sdkWireString(projectNumber)),
-                "/items/",
-                sdkEncodePathSegment(sdkWireString(itemId)),
-            ].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("fields", value: fields),
-            ],
-            decoder: .json,
-            operationId: "projectsGetOrgItem",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self]
-        )).data
+    public static func projectsGetOrgItem(config: ClientConfig, projectNumber: Int, org: String, itemId: Int, fields: ProjectsGetOrgItemParameter? = nil, requestOptions: RequestOptions? = nil) async throws -> ProjectsV2ItemWithContent {
+        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/projectsV2/", sdkEncodePathSegment(sdkWireString(projectNumber)), "/items/", sdkEncodePathSegment(sdkWireString(itemId))].joined(), config: config, query: [
+            SdkQueryParameter("fields", value: fields),
+        ], decoder: .json, operationId: "projectsGetOrgItem", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self])).data
     }
 
     /// Update a specific item in an organization-owned project.
@@ -52,37 +29,9 @@ public extension ProjectsMethods {
     /// - org: The organization name. The name is not case sensitive.
     /// - itemId: The unique identifier of the project item.
     /// - fields: A list of field updates to apply.
-    static func projectsUpdateItemForOrg(
-        config: ClientConfig,
-        projectNumber: Int,
-        org: String,
-        itemId: Int,
-        fields: [ProjectsUpdateItemForOrgRequestBodyFieldsItem],
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ProjectsV2ItemWithContent {
+    public static func projectsUpdateItemForOrg(config: ClientConfig, projectNumber: Int, org: String, itemId: Int, fields: [ProjectsUpdateItemForOrgRequestBodyFieldsItem], requestOptions: RequestOptions? = nil) async throws -> ProjectsV2ItemWithContent {
         let requestBody = ProjectsUpdateItemForOrgRequestBody(fields: fields)
 
-        return try await (sdkRequest(
-            "PATCH",
-            [
-                "/orgs/",
-                sdkEncodePathSegment(sdkWireString(org)),
-                "/projectsV2/",
-                sdkEncodePathSegment(sdkWireString(projectNumber)),
-                "/items/",
-                sdkEncodePathSegment(sdkWireString(itemId)),
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "projectsUpdateItemForOrg",
-            options: requestOptions,
-            errors: [
-                "401": BasicError.self,
-                "403": BasicError.self,
-                "404": BasicError.self,
-                "422": ValidationError.self,
-            ]
-        )).data
+        return try (await sdkRequest("PATCH", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/projectsV2/", sdkEncodePathSegment(sdkWireString(projectNumber)), "/items/", sdkEncodePathSegment(sdkWireString(itemId))].joined(), config: config, body: requestBody, decoder: .json, operationId: "projectsUpdateItemForOrg", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
     }
 }

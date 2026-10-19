@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// ActionsActionsFork domain models
+// ActionsActionsFork domain models
 /// Typed representation of the `ActionsForkPrWorkflowsPrivateRepos` API schema.
 public struct ActionsForkPrWorkflowsPrivateRepos: Codable {
     /// Whether workflows triggered by pull requests from forks are allowed to run on private repositories.
@@ -24,56 +24,33 @@ public struct ActionsForkPrWorkflowsPrivateRepos: Codable {
         case requireApprovalForForkPrWorkflows = "require_approval_for_fork_pr_workflows"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsForkPrWorkflowsPrivateRepos {
-    init(from decoder: Decoder) throws {
+extension ActionsForkPrWorkflowsPrivateRepos {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.runWorkflowsFromForkPullRequests) else {
-            throw SdkValidationError(
-                field: "run_workflows_from_fork_pull_requests",
-                code: "required",
-                message: "Validation failed for 'run_workflows_from_fork_pull_requests': value is required"
-            )
+            throw SdkValidationError(field: "run_workflows_from_fork_pull_requests", code: "required", message: "Validation failed for 'run_workflows_from_fork_pull_requests': value is required")
         }
         guard container.contains(.sendWriteTokensToWorkflows) else {
-            throw SdkValidationError(
-                field: "send_write_tokens_to_workflows",
-                code: "required",
-                message: "Validation failed for 'send_write_tokens_to_workflows': value is required"
-            )
+            throw SdkValidationError(field: "send_write_tokens_to_workflows", code: "required", message: "Validation failed for 'send_write_tokens_to_workflows': value is required")
         }
         guard container.contains(.sendSecretsAndVariables) else {
-            throw SdkValidationError(
-                field: "send_secrets_and_variables",
-                code: "required",
-                message: "Validation failed for 'send_secrets_and_variables': value is required"
-            )
+            throw SdkValidationError(field: "send_secrets_and_variables", code: "required", message: "Validation failed for 'send_secrets_and_variables': value is required")
         }
         guard container.contains(.requireApprovalForForkPrWorkflows) else {
-            throw SdkValidationError(
-                field: "require_approval_for_fork_pr_workflows",
-                code: "required",
-                message: "Validation failed for 'require_approval_for_fork_pr_workflows': value is required"
-            )
+            throw SdkValidationError(field: "require_approval_for_fork_pr_workflows", code: "required", message: "Validation failed for 'require_approval_for_fork_pr_workflows': value is required")
         }
-        runWorkflowsFromForkPullRequests = try container.sdkDecodeRequired(.runWorkflowsFromForkPullRequests)
-        sendWriteTokensToWorkflows = try container.sdkDecodeRequired(.sendWriteTokensToWorkflows)
-        sendSecretsAndVariables = try container.sdkDecodeRequired(.sendSecretsAndVariables)
-        requireApprovalForForkPrWorkflows = try container.sdkDecodeRequired(.requireApprovalForForkPrWorkflows)
+        self.runWorkflowsFromForkPullRequests = try container.sdkDecodeRequired(.runWorkflowsFromForkPullRequests)
+        self.sendWriteTokensToWorkflows = try container.sdkDecodeRequired(.sendWriteTokensToWorkflows)
+        self.sendSecretsAndVariables = try container.sdkDecodeRequired(.sendSecretsAndVariables)
+        self.requireApprovalForForkPrWorkflows = try container.sdkDecodeRequired(.requireApprovalForForkPrWorkflows)
     }
 }
 
-public extension ActionsForkPrWorkflowsPrivateRepos {
-    init(
-        runWorkflowsFromForkPullRequests: Bool,
-        sendWriteTokensToWorkflows: Bool,
-        sendSecretsAndVariables: Bool,
-        requireApprovalForForkPrWorkflows: Bool
-    ) {
+extension ActionsForkPrWorkflowsPrivateRepos {
+    public init(runWorkflowsFromForkPullRequests: Bool, sendWriteTokensToWorkflows: Bool, sendSecretsAndVariables: Bool, requireApprovalForForkPrWorkflows: Bool) {
         self.runWorkflowsFromForkPullRequests = runWorkflowsFromForkPullRequests
         self.sendWriteTokensToWorkflows = sendWriteTokensToWorkflows
         self.sendSecretsAndVariables = sendSecretsAndVariables
@@ -90,27 +67,21 @@ public struct ActionsForkPrContributorApproval: Codable {
         case approvalPolicy = "approval_policy"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsForkPrContributorApproval {
-    init(from decoder: Decoder) throws {
+extension ActionsForkPrContributorApproval {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.approvalPolicy) else {
-            throw SdkValidationError(
-                field: "approval_policy",
-                code: "required",
-                message: "Validation failed for 'approval_policy': value is required"
-            )
+            throw SdkValidationError(field: "approval_policy", code: "required", message: "Validation failed for 'approval_policy': value is required")
         }
-        approvalPolicy = try container.sdkDecodeRequired(.approvalPolicy)
+        self.approvalPolicy = try container.sdkDecodeRequired(.approvalPolicy)
     }
 }
 
-public extension ActionsForkPrContributorApproval {
-    init(approvalPolicy: ActionsForkPrContributorApprovalApprovalPolicy) {
+extension ActionsForkPrContributorApproval {
+    public init(approvalPolicy: ActionsForkPrContributorApprovalApprovalPolicy) {
         self.approvalPolicy = approvalPolicy
     }
 }
@@ -135,35 +106,24 @@ public struct ActionsForkPrWorkflowsPrivateReposRequest: Codable {
         case requireApprovalForForkPrWorkflows = "require_approval_for_fork_pr_workflows"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsForkPrWorkflowsPrivateReposRequest {
-    init(from decoder: Decoder) throws {
+extension ActionsForkPrWorkflowsPrivateReposRequest {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.runWorkflowsFromForkPullRequests) else {
-            throw SdkValidationError(
-                field: "run_workflows_from_fork_pull_requests",
-                code: "required",
-                message: "Validation failed for 'run_workflows_from_fork_pull_requests': value is required"
-            )
+            throw SdkValidationError(field: "run_workflows_from_fork_pull_requests", code: "required", message: "Validation failed for 'run_workflows_from_fork_pull_requests': value is required")
         }
-        runWorkflowsFromForkPullRequests = try container.sdkDecodeRequired(.runWorkflowsFromForkPullRequests)
-        sendWriteTokensToWorkflows = try container.sdkDecodeIfPresent(.sendWriteTokensToWorkflows)
-        sendSecretsAndVariables = try container.sdkDecodeIfPresent(.sendSecretsAndVariables)
-        requireApprovalForForkPrWorkflows = try container.sdkDecodeIfPresent(.requireApprovalForForkPrWorkflows)
+        self.runWorkflowsFromForkPullRequests = try container.sdkDecodeRequired(.runWorkflowsFromForkPullRequests)
+        self.sendWriteTokensToWorkflows = try container.sdkDecodeIfPresent(.sendWriteTokensToWorkflows)
+        self.sendSecretsAndVariables = try container.sdkDecodeIfPresent(.sendSecretsAndVariables)
+        self.requireApprovalForForkPrWorkflows = try container.sdkDecodeIfPresent(.requireApprovalForForkPrWorkflows)
     }
 }
 
-public extension ActionsForkPrWorkflowsPrivateReposRequest {
-    init(
-        runWorkflowsFromForkPullRequests: Bool,
-        sendWriteTokensToWorkflows: Bool? = nil,
-        sendSecretsAndVariables: Bool? = nil,
-        requireApprovalForForkPrWorkflows: Bool? = nil
-    ) {
+extension ActionsForkPrWorkflowsPrivateReposRequest {
+    public init(runWorkflowsFromForkPullRequests: Bool, sendWriteTokensToWorkflows: Bool? = nil, sendSecretsAndVariables: Bool? = nil, requireApprovalForForkPrWorkflows: Bool? = nil) {
         self.runWorkflowsFromForkPullRequests = runWorkflowsFromForkPullRequests
         self.sendWriteTokensToWorkflows = sendWriteTokensToWorkflows
         self.sendSecretsAndVariables = sendSecretsAndVariables
@@ -172,24 +132,17 @@ public extension ActionsForkPrWorkflowsPrivateReposRequest {
 }
 
 /// The policy that controls when fork PR workflows require approval from a maintainer.
-public struct ActionsForkPrContributorApprovalApprovalPolicy: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct ActionsForkPrContributorApprovalApprovalPolicy: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let firstTimeContributorsNewToGithub =
-        ActionsForkPrContributorApprovalApprovalPolicy(rawValue: "first_time_contributors_new_to_github")
-    public static let firstTimeContributors =
-        ActionsForkPrContributorApprovalApprovalPolicy(rawValue: "first_time_contributors")
-    public static let allExternalContributors =
-        ActionsForkPrContributorApprovalApprovalPolicy(rawValue: "all_external_contributors")
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let firstTimeContributorsNewToGithub = ActionsForkPrContributorApprovalApprovalPolicy(rawValue: "first_time_contributors_new_to_github")
+    public static let firstTimeContributors = ActionsForkPrContributorApprovalApprovalPolicy(rawValue: "first_time_contributors")
+    public static let allExternalContributors = ActionsForkPrContributorApprovalApprovalPolicy(rawValue: "all_external_contributors")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

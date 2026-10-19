@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// SecretScanning domain models
+// SecretScanning domain models
 public typealias NullableAlertUpdatedAt = Date
 
 public indirect enum NullableSecretScanningFirstDetectedLocation {
@@ -23,35 +23,21 @@ public indirect enum NullableSecretScanningFirstDetectedLocation {
 }
 
 extension NullableSecretScanningFirstDetectedLocation: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let raw = try? container.decode(JSONValue.self) {
-            if let value = Self.decodeLossless1(from: container, raw) {
-                self = value; return
-            }
-            if let value = Self.decodeLossless2(from: container, raw) {
-                self = value; return
-            }
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
+            if let value = Self.decodeLossless2(from: container, raw) { self = value; return }
         }
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        if let value = Self.decodeGroup2(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for NullableSecretScanningFirstDetectedLocation"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        if let value = Self.decodeGroup2(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for NullableSecretScanningFirstDetectedLocation")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
-        if try encodeGroup2(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup2(to: encoder) { return }
     }
 }
 
@@ -69,26 +55,16 @@ extension NullableSecretScanningFirstDetectedLocation {
         if let value = try? container.decode(SecretScanningLocationIssueBody.self), sdkKeepsEveryKey(value, of: raw) {
             return .secretScanningLocationIssueBody(value)
         }
-        if let value = try? container.decode(SecretScanningLocationIssueComment.self),
-           sdkKeepsEveryKey(value, of: raw) {
+        if let value = try? container.decode(SecretScanningLocationIssueComment.self), sdkKeepsEveryKey(value, of: raw) {
             return .secretScanningLocationIssueComment(value)
         }
-        if let value = try? container.decode(SecretScanningLocationDiscussionTitle.self), sdkKeepsEveryKey(
-            value,
-            of: raw
-        ) {
+        if let value = try? container.decode(SecretScanningLocationDiscussionTitle.self), sdkKeepsEveryKey(value, of: raw) {
             return .secretScanningLocationDiscussionTitle(value)
         }
-        if let value = try? container.decode(SecretScanningLocationDiscussionBody.self), sdkKeepsEveryKey(
-            value,
-            of: raw
-        ) {
+        if let value = try? container.decode(SecretScanningLocationDiscussionBody.self), sdkKeepsEveryKey(value, of: raw) {
             return .secretScanningLocationDiscussionBody(value)
         }
-        if let value = try? container.decode(SecretScanningLocationDiscussionComment.self), sdkKeepsEveryKey(
-            value,
-            of: raw
-        ) {
+        if let value = try? container.decode(SecretScanningLocationDiscussionComment.self), sdkKeepsEveryKey(value, of: raw) {
             return .secretScanningLocationDiscussionComment(value)
         }
         return nil
@@ -97,34 +73,19 @@ extension NullableSecretScanningFirstDetectedLocation {
 
 extension NullableSecretScanningFirstDetectedLocation {
     static func decodeLossless2(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
-        if let value = try? container.decode(SecretScanningLocationPullRequestTitle.self), sdkKeepsEveryKey(
-            value,
-            of: raw
-        ) {
+        if let value = try? container.decode(SecretScanningLocationPullRequestTitle.self), sdkKeepsEveryKey(value, of: raw) {
             return .secretScanningLocationPullRequestTitle(value)
         }
-        if let value = try? container.decode(SecretScanningLocationPullRequestBody.self), sdkKeepsEveryKey(
-            value,
-            of: raw
-        ) {
+        if let value = try? container.decode(SecretScanningLocationPullRequestBody.self), sdkKeepsEveryKey(value, of: raw) {
             return .secretScanningLocationPullRequestBody(value)
         }
-        if let value = try? container.decode(SecretScanningLocationPullRequestComment.self), sdkKeepsEveryKey(
-            value,
-            of: raw
-        ) {
+        if let value = try? container.decode(SecretScanningLocationPullRequestComment.self), sdkKeepsEveryKey(value, of: raw) {
             return .secretScanningLocationPullRequestComment(value)
         }
-        if let value = try? container.decode(SecretScanningLocationPullRequestReview.self), sdkKeepsEveryKey(
-            value,
-            of: raw
-        ) {
+        if let value = try? container.decode(SecretScanningLocationPullRequestReview.self), sdkKeepsEveryKey(value, of: raw) {
             return .secretScanningLocationPullRequestReview(value)
         }
-        if let value = try? container.decode(SecretScanningLocationPullRequestReviewComment.self), sdkKeepsEveryKey(
-            value,
-            of: raw
-        ) {
+        if let value = try? container.decode(SecretScanningLocationPullRequestReviewComment.self), sdkKeepsEveryKey(value, of: raw) {
             return .secretScanningLocationPullRequestReviewComment(value)
         }
         return nil
@@ -133,60 +94,45 @@ extension NullableSecretScanningFirstDetectedLocation {
 
 extension NullableSecretScanningFirstDetectedLocation {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container
-            .decode(SecretScanningLocationCommit.self) {
-            return .secretScanningLocationCommit(value)
-        }
-        if let value = try? container
-            .decode(SecretScanningLocationWikiCommit.self) {
-            return .secretScanningLocationWikiCommit(value)
-        }
-        if let value = try? container
-            .decode(SecretScanningLocationIssueTitle.self) {
-            return .secretScanningLocationIssueTitle(value)
-        }
-        if let value = try? container
-            .decode(SecretScanningLocationIssueBody.self) {
-            return .secretScanningLocationIssueBody(value)
-        }
-        if let value = try? container
-            .decode(SecretScanningLocationIssueComment.self) {
-            return .secretScanningLocationIssueComment(value)
-        }
+        if let value = try? container.decode(SecretScanningLocationCommit.self) { return .secretScanningLocationCommit(value) }
+        if let value = try? container.decode(SecretScanningLocationWikiCommit.self) { return .secretScanningLocationWikiCommit(value) }
+        if let value = try? container.decode(SecretScanningLocationIssueTitle.self) { return .secretScanningLocationIssueTitle(value) }
+        if let value = try? container.decode(SecretScanningLocationIssueBody.self) { return .secretScanningLocationIssueBody(value) }
+        if let value = try? container.decode(SecretScanningLocationIssueComment.self) { return .secretScanningLocationIssueComment(value) }
         if let value = try? container.decode(
             SecretScanningLocationDiscussionTitle.self
         ) {
-            return .secretScanningLocationDiscussionTitle(value)
+            return             .secretScanningLocationDiscussionTitle(value)
         }
         if let value = try? container.decode(
             SecretScanningLocationDiscussionBody.self
         ) {
-            return .secretScanningLocationDiscussionBody(value)
+            return             .secretScanningLocationDiscussionBody(value)
         }
         if let value = try? container.decode(
             SecretScanningLocationDiscussionComment.self
         ) {
-            return .secretScanningLocationDiscussionComment(value)
+            return             .secretScanningLocationDiscussionComment(value)
         }
         if let value = try? container.decode(
             SecretScanningLocationPullRequestTitle.self
         ) {
-            return .secretScanningLocationPullRequestTitle(value)
+            return             .secretScanningLocationPullRequestTitle(value)
         }
         if let value = try? container.decode(
             SecretScanningLocationPullRequestBody.self
         ) {
-            return .secretScanningLocationPullRequestBody(value)
+            return             .secretScanningLocationPullRequestBody(value)
         }
         if let value = try? container.decode(
             SecretScanningLocationPullRequestComment.self
         ) {
-            return .secretScanningLocationPullRequestComment(value)
+            return             .secretScanningLocationPullRequestComment(value)
         }
         if let value = try? container.decode(
             SecretScanningLocationPullRequestReview.self
         ) {
-            return .secretScanningLocationPullRequestReview(value)
+            return             .secretScanningLocationPullRequestReview(value)
         }
         return nil
     }
@@ -197,7 +143,7 @@ extension NullableSecretScanningFirstDetectedLocation {
         if let value = try? container.decode(
             SecretScanningLocationPullRequestReviewComment.self
         ) {
-            return .secretScanningLocationPullRequestReviewComment(value)
+            return             .secretScanningLocationPullRequestReviewComment(value)
         }
         return nil
     }
@@ -257,35 +203,21 @@ public indirect enum SecretScanningLocationDetails {
 }
 
 extension SecretScanningLocationDetails: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let raw = try? container.decode(JSONValue.self) {
-            if let value = Self.decodeLossless1(from: container, raw) {
-                self = value; return
-            }
-            if let value = Self.decodeLossless2(from: container, raw) {
-                self = value; return
-            }
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
+            if let value = Self.decodeLossless2(from: container, raw) { self = value; return }
         }
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        if let value = Self.decodeGroup2(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for SecretScanningLocationDetails"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        if let value = Self.decodeGroup2(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for SecretScanningLocationDetails")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
-        if try encodeGroup2(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup2(to: encoder) { return }
     }
 }
 
@@ -303,26 +235,16 @@ extension SecretScanningLocationDetails {
         if let value = try? container.decode(SecretScanningLocationIssueBody.self), sdkKeepsEveryKey(value, of: raw) {
             return .secretScanningLocationIssueBody(value)
         }
-        if let value = try? container.decode(SecretScanningLocationIssueComment.self),
-           sdkKeepsEveryKey(value, of: raw) {
+        if let value = try? container.decode(SecretScanningLocationIssueComment.self), sdkKeepsEveryKey(value, of: raw) {
             return .secretScanningLocationIssueComment(value)
         }
-        if let value = try? container.decode(SecretScanningLocationDiscussionTitle.self), sdkKeepsEveryKey(
-            value,
-            of: raw
-        ) {
+        if let value = try? container.decode(SecretScanningLocationDiscussionTitle.self), sdkKeepsEveryKey(value, of: raw) {
             return .secretScanningLocationDiscussionTitle(value)
         }
-        if let value = try? container.decode(SecretScanningLocationDiscussionBody.self), sdkKeepsEveryKey(
-            value,
-            of: raw
-        ) {
+        if let value = try? container.decode(SecretScanningLocationDiscussionBody.self), sdkKeepsEveryKey(value, of: raw) {
             return .secretScanningLocationDiscussionBody(value)
         }
-        if let value = try? container.decode(SecretScanningLocationDiscussionComment.self), sdkKeepsEveryKey(
-            value,
-            of: raw
-        ) {
+        if let value = try? container.decode(SecretScanningLocationDiscussionComment.self), sdkKeepsEveryKey(value, of: raw) {
             return .secretScanningLocationDiscussionComment(value)
         }
         return nil
@@ -331,34 +253,19 @@ extension SecretScanningLocationDetails {
 
 extension SecretScanningLocationDetails {
     static func decodeLossless2(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
-        if let value = try? container.decode(SecretScanningLocationPullRequestTitle.self), sdkKeepsEveryKey(
-            value,
-            of: raw
-        ) {
+        if let value = try? container.decode(SecretScanningLocationPullRequestTitle.self), sdkKeepsEveryKey(value, of: raw) {
             return .secretScanningLocationPullRequestTitle(value)
         }
-        if let value = try? container.decode(SecretScanningLocationPullRequestBody.self), sdkKeepsEveryKey(
-            value,
-            of: raw
-        ) {
+        if let value = try? container.decode(SecretScanningLocationPullRequestBody.self), sdkKeepsEveryKey(value, of: raw) {
             return .secretScanningLocationPullRequestBody(value)
         }
-        if let value = try? container.decode(SecretScanningLocationPullRequestComment.self), sdkKeepsEveryKey(
-            value,
-            of: raw
-        ) {
+        if let value = try? container.decode(SecretScanningLocationPullRequestComment.self), sdkKeepsEveryKey(value, of: raw) {
             return .secretScanningLocationPullRequestComment(value)
         }
-        if let value = try? container.decode(SecretScanningLocationPullRequestReview.self), sdkKeepsEveryKey(
-            value,
-            of: raw
-        ) {
+        if let value = try? container.decode(SecretScanningLocationPullRequestReview.self), sdkKeepsEveryKey(value, of: raw) {
             return .secretScanningLocationPullRequestReview(value)
         }
-        if let value = try? container.decode(SecretScanningLocationPullRequestReviewComment.self), sdkKeepsEveryKey(
-            value,
-            of: raw
-        ) {
+        if let value = try? container.decode(SecretScanningLocationPullRequestReviewComment.self), sdkKeepsEveryKey(value, of: raw) {
             return .secretScanningLocationPullRequestReviewComment(value)
         }
         return nil
@@ -367,60 +274,45 @@ extension SecretScanningLocationDetails {
 
 extension SecretScanningLocationDetails {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container
-            .decode(SecretScanningLocationCommit.self) {
-            return .secretScanningLocationCommit(value)
-        }
-        if let value = try? container
-            .decode(SecretScanningLocationWikiCommit.self) {
-            return .secretScanningLocationWikiCommit(value)
-        }
-        if let value = try? container
-            .decode(SecretScanningLocationIssueTitle.self) {
-            return .secretScanningLocationIssueTitle(value)
-        }
-        if let value = try? container
-            .decode(SecretScanningLocationIssueBody.self) {
-            return .secretScanningLocationIssueBody(value)
-        }
-        if let value = try? container
-            .decode(SecretScanningLocationIssueComment.self) {
-            return .secretScanningLocationIssueComment(value)
-        }
+        if let value = try? container.decode(SecretScanningLocationCommit.self) { return .secretScanningLocationCommit(value) }
+        if let value = try? container.decode(SecretScanningLocationWikiCommit.self) { return .secretScanningLocationWikiCommit(value) }
+        if let value = try? container.decode(SecretScanningLocationIssueTitle.self) { return .secretScanningLocationIssueTitle(value) }
+        if let value = try? container.decode(SecretScanningLocationIssueBody.self) { return .secretScanningLocationIssueBody(value) }
+        if let value = try? container.decode(SecretScanningLocationIssueComment.self) { return .secretScanningLocationIssueComment(value) }
         if let value = try? container.decode(
             SecretScanningLocationDiscussionTitle.self
         ) {
-            return .secretScanningLocationDiscussionTitle(value)
+            return             .secretScanningLocationDiscussionTitle(value)
         }
         if let value = try? container.decode(
             SecretScanningLocationDiscussionBody.self
         ) {
-            return .secretScanningLocationDiscussionBody(value)
+            return             .secretScanningLocationDiscussionBody(value)
         }
         if let value = try? container.decode(
             SecretScanningLocationDiscussionComment.self
         ) {
-            return .secretScanningLocationDiscussionComment(value)
+            return             .secretScanningLocationDiscussionComment(value)
         }
         if let value = try? container.decode(
             SecretScanningLocationPullRequestTitle.self
         ) {
-            return .secretScanningLocationPullRequestTitle(value)
+            return             .secretScanningLocationPullRequestTitle(value)
         }
         if let value = try? container.decode(
             SecretScanningLocationPullRequestBody.self
         ) {
-            return .secretScanningLocationPullRequestBody(value)
+            return             .secretScanningLocationPullRequestBody(value)
         }
         if let value = try? container.decode(
             SecretScanningLocationPullRequestComment.self
         ) {
-            return .secretScanningLocationPullRequestComment(value)
+            return             .secretScanningLocationPullRequestComment(value)
         }
         if let value = try? container.decode(
             SecretScanningLocationPullRequestReview.self
         ) {
-            return .secretScanningLocationPullRequestReview(value)
+            return             .secretScanningLocationPullRequestReview(value)
         }
         return nil
     }
@@ -431,7 +323,7 @@ extension SecretScanningLocationDetails {
         if let value = try? container.decode(
             SecretScanningLocationPullRequestReviewComment.self
         ) {
-            return .secretScanningLocationPullRequestReviewComment(value)
+            return             .secretScanningLocationPullRequestReviewComment(value)
         }
         return nil
     }
@@ -485,34 +377,28 @@ public struct SecretScanningLocationPullRequestBody: Codable {
         case htmlUrl = "html_url"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension SecretScanningLocationPullRequestBody {
-    init(from decoder: Decoder) throws {
+extension SecretScanningLocationPullRequestBody {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.pullRequestBodyUrl) else {
-            throw SdkValidationError(
-                field: "pull_request_body_url",
-                code: "required",
-                message: "Validation failed for 'pull_request_body_url': value is required"
-            )
+            throw SdkValidationError(field: "pull_request_body_url", code: "required", message: "Validation failed for 'pull_request_body_url': value is required")
         }
-        pullRequestBodyUrl = try container.sdkDecodeRequired(.pullRequestBodyUrl)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        try sdkValidateUri("pull_request_body_url", pullRequestBodyUrl)
-        if let value = htmlUrl {
+        self.pullRequestBodyUrl = try container.sdkDecodeRequired(.pullRequestBodyUrl)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+            try sdkValidateUri("pull_request_body_url", self.pullRequestBodyUrl)
+        if let value = self.htmlUrl {
             try sdkValidateUri("html_url", value)
         }
     }
 }
 
-public extension SecretScanningLocationPullRequestBody {
-    init(pullRequestBodyUrl: String, htmlUrl: String? = nil) throws {
+extension SecretScanningLocationPullRequestBody {
+    public init(pullRequestBodyUrl: String, htmlUrl: String? = nil) throws {
         (self.pullRequestBodyUrl, self.htmlUrl) = (pullRequestBodyUrl, htmlUrl)
-        try sdkValidateUri("pull_request_body_url", self.pullRequestBodyUrl)
+            try sdkValidateUri("pull_request_body_url", self.pullRequestBodyUrl)
         if let value = self.htmlUrl {
             try sdkValidateUri("html_url", value)
         }
@@ -530,30 +416,24 @@ public struct SecretScanningLocationDiscussionComment: Codable {
         case discussionCommentUrl = "discussion_comment_url"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension SecretScanningLocationDiscussionComment {
-    init(from decoder: Decoder) throws {
+extension SecretScanningLocationDiscussionComment {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.discussionCommentUrl) else {
-            throw SdkValidationError(
-                field: "discussion_comment_url",
-                code: "required",
-                message: "Validation failed for 'discussion_comment_url': value is required"
-            )
+            throw SdkValidationError(field: "discussion_comment_url", code: "required", message: "Validation failed for 'discussion_comment_url': value is required")
         }
-        discussionCommentUrl = try container.sdkDecodeRequired(.discussionCommentUrl)
-        try sdkValidateUri("discussion_comment_url", discussionCommentUrl)
+        self.discussionCommentUrl = try container.sdkDecodeRequired(.discussionCommentUrl)
+            try sdkValidateUri("discussion_comment_url", self.discussionCommentUrl)
     }
 }
 
-public extension SecretScanningLocationDiscussionComment {
-    init(discussionCommentUrl: String) throws {
+extension SecretScanningLocationDiscussionComment {
+    public init(discussionCommentUrl: String) throws {
         self.discussionCommentUrl = discussionCommentUrl
-        try sdkValidateUri("discussion_comment_url", self.discussionCommentUrl)
+            try sdkValidateUri("discussion_comment_url", self.discussionCommentUrl)
     }
 }
 
@@ -572,7 +452,5 @@ public struct SecretScanningLocationPullRequestTitle: Codable {
         case htmlUrl = "html_url"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }

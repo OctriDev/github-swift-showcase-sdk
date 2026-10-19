@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ProjectsMethods {
-    struct ProjectsCreateViewForOrgOptions: Codable {
+extension ProjectsMethods {
+    public struct ProjectsCreateViewForOrgOptions: Codable {
         public var org: String
         public var projectNumber: Int
         public var name: String
@@ -26,8 +26,7 @@ public extension ProjectsMethods {
         }
     }
 
-    /// Create a new view in an organization-owned project. Views allow you to customize how items in a project are
-    /// displayed and filtered.
+    /// Create a new view in an organization-owned project. Views allow you to customize how items in a project are displayed and filtered.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
@@ -52,11 +51,7 @@ public extension ProjectsMethods {
     ///   (vertical grouping). Supports a single field. The field must support
     ///   grouping; fields such as `Title`, `Reviewers`, `Linked pull requests`,
     ///   `Sub-issues progress`, `Tracked by`, and `Tracks` cannot be grouped on.
-    static func projectsCreateViewForOrg(
-        config: ClientConfig,
-        options: ProjectsCreateViewForOrgOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ProjectsV2View {
+    public static func projectsCreateViewForOrg(config: ClientConfig, options: ProjectsCreateViewForOrgOptions, requestOptions: RequestOptions? = nil) async throws -> ProjectsV2View {
         if let groupBy = options.groupBy {
             try validateItems("group_by", groupBy, max: 1)
         }
@@ -67,27 +62,6 @@ public extension ProjectsMethods {
 
         let requestBody = ProjectsCreateViewForOrgRequestBody(options: options)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/orgs/",
-                sdkEncodePathSegment(sdkWireString(options.org)),
-                "/projectsV2/",
-                sdkEncodePathSegment(sdkWireString(options.projectNumber)),
-                "/views",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "projectsCreateViewForOrg",
-            options: requestOptions,
-            errors: [
-                "401": BasicError.self,
-                "403": BasicError.self,
-                "404": BasicError.self,
-                "422": ValidationError.self,
-                "503": BasicError.self,
-            ]
-        )).data
+        return try (await sdkRequest("POST", ["/orgs/", sdkEncodePathSegment(sdkWireString(options.org)), "/projectsV2/", sdkEncodePathSegment(sdkWireString(options.projectNumber)), "/views"].joined(), config: config, body: requestBody, decoder: .json, operationId: "projectsCreateViewForOrg", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "422": ValidationError.self, "503": BasicError.self])).data
     }
 }

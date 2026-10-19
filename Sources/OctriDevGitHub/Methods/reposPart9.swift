@@ -6,64 +6,26 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ReposMethods {
-    /// Deletes a ruleset from an organization. Use the `org` and `ruleset_id` path parameters to identify the
-    /// organization ruleset to remove. A 204 response confirms deletion and has no response body.
+extension ReposMethods {
+    /// Deletes a ruleset from an organization. Use the `org` and `ruleset_id` path parameters to identify the organization ruleset to remove. A 204 response confirms deletion and has no response body.
     ///
     /// Delete a ruleset for an organization.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - rulesetId: The ID of the ruleset.
-    static func reposDeleteOrgRuleset(
-        config: ClientConfig,
-        org: String,
-        rulesetId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "DELETE",
-            [
-                "/orgs/",
-                sdkEncodePathSegment(sdkWireString(org)),
-                "/rulesets/",
-                sdkEncodePathSegment(sdkWireString(rulesetId)),
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "reposDeleteOrgRuleset",
-            options: requestOptions,
-            errors: ["404": BasicError.self, "500": BasicError.self]
-        )).data
+    public static func reposDeleteOrgRuleset(config: ClientConfig, org: String, rulesetId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("DELETE", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/rulesets/", sdkEncodePathSegment(sdkWireString(rulesetId))].joined(), config: config, decoder: .empty, operationId: "reposDeleteOrgRuleset", options: requestOptions, errors: ["404": BasicError.self, "500": BasicError.self])).data
     }
 
-    /// The `parent` and `source` objects are present when the repository is a fork. `parent` is the repository this
-    /// repository was forked from, `source` is the ultimate source for the network. > [!NOTE] > - In order to see the
-    /// `security_and_analysis` block for a repository you must have admin permissions for the repository or be an owner
-    /// or security manager for the organization that owns the repository. For more information, see "[Managing security
-    /// managers in your organization](https://docs.github.com/organizations/managing-peoples-access-to-your-organization-with-roles/managing-security-managers-in-your-organization)."
-    /// > - To view merge-related settings, you must have the `contents:read` and `contents:write` permissions.
+    /// The `parent` and `source` objects are present when the repository is a fork. `parent` is the repository this repository was forked from, `source` is the ultimate source for the network. > [!NOTE] > - In order to see the `security_and_analysis` block for a repository you must have admin permissions for the repository or be an owner or security manager for the organization that owns the repository. For more information, see "[Managing security managers in your organization](https://docs.github.com/organizations/managing-peoples-access-to-your-organization-with-roles/managing-security-managers-in-your-organization)." > - To view merge-related settings, you must have the `contents:read` and `contents:write` permissions.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    static func reposGet(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> FullRepository {
-        try await (sdkRequest(
-            "GET",
-            ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo))]
-                .joined(),
-            config: config,
-            decoder: .json,
-            operationId: "reposGet",
-            options: requestOptions,
-            errors: ["301": BasicError.self, "403": BasicError.self, "404": BasicError.self]
-        )).data
+    public static func reposGet(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> FullRepository {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo))].joined(), config: config, decoder: .json, operationId: "reposGet", options: requestOptions, errors: ["301": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
     }
 }

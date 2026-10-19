@@ -6,11 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension AgentsMethods {
-    /// Lists all secrets available in an organization without revealing their encrypted values. Authenticated users
-    /// must have collaborator access to a repository to create, update, or read secrets. OAuth app tokens and personal
-    /// access tokens (classic) need the `admin:org` scope to use this endpoint. If the repository is private, the
-    /// `repo` scope is also required.
+extension AgentsMethods {
+    /// Lists all secrets available in an organization without revealing their encrypted values. Authenticated users must have collaborator access to a repository to create, update, or read secrets. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint. If the repository is private, the `repo` scope is also required.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
@@ -22,46 +19,18 @@ public extension AgentsMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    static func agentsListOrgSecrets(
-        config: ClientConfig,
-        org: String,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> AgentsListOrgSecretsResponse {
-        try await (sdkRequest(
-            "GET",
-            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/agents/secrets"].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("page", value: page),
-            ],
-            decoder: .json,
-            operationId: "agentsListOrgSecrets",
-            options: requestOptions
-        )).data
+    public static func agentsListOrgSecrets(config: ClientConfig, org: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> AgentsListOrgSecretsResponse {
+        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/agents/secrets"].joined(), config: config, query: [
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("page", value: page),
+        ], decoder: .json, operationId: "agentsListOrgSecrets", options: requestOptions)).data
     }
 
-    /// Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or
-    /// update secrets. Authenticated users must have collaborator access to a repository to create, update, or read
-    /// secrets. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
-    /// If the repository is private, the `repo` scope is also required.
+    /// Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or update secrets. Authenticated users must have collaborator access to a repository to create, update, or read secrets. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint. If the repository is private, the `repo` scope is also required.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
-    static func agentsGetOrgPublicKey(
-        config: ClientConfig,
-        org: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsPublicKey {
-        try await (sdkRequest(
-            "GET",
-            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/agents/secrets/public-key"].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "agentsGetOrgPublicKey",
-            options: requestOptions
-        )).data
+    public static func agentsGetOrgPublicKey(config: ClientConfig, org: String, requestOptions: RequestOptions? = nil) async throws -> ActionsPublicKey {
+        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/agents/secrets/public-key"].joined(), config: config, decoder: .json, operationId: "agentsGetOrgPublicKey", options: requestOptions)).data
     }
 }

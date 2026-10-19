@@ -6,10 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension CopilotSpacesMethods {
-    /// Creates a new Copilot Space owned by a user. Only the authenticated user can create spaces for their own
-    /// account. Users can create personal Copilot Spaces for their individual use. OAuth app tokens and personal access
-    /// tokens (classic) need the `read:user` scope to use this endpoint.
+extension CopilotSpacesMethods {
+    /// Creates a new Copilot Space owned by a user. Only the authenticated user can create spaces for their own account. Users can create personal Copilot Spaces for their individual use. OAuth app tokens and personal access tokens (classic) need the `read:user` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - username: The handle for the GitHub user account.
@@ -21,67 +19,22 @@ public extension CopilotSpacesMethods {
     ///   publicly readable Note: User spaces do not support writer or admin base
     ///   roles.
     /// - resourcesAttributes: Resources to attach to the space.
-    static func copilotSpacesCreateForUser(
-        config: ClientConfig,
-        username: String,
-        name: String,
-        description: String? = nil,
-        generalInstructions: String? = nil,
-        baseRole: CopilotSpacesCreateForUserRequestBodyBaseRole? = nil,
-        resourcesAttributes: [CopilotSpacesCreateForUserRequestBodyResourcesAttributesItem]? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CopilotSpace {
-        if let generalInstructions {
+    public static func copilotSpacesCreateForUser(config: ClientConfig, username: String, name: String, description: String? = nil, generalInstructions: String? = nil, baseRole: CopilotSpacesCreateForUserRequestBodyBaseRole? = nil, resourcesAttributes: [CopilotSpacesCreateForUserRequestBodyResourcesAttributesItem]? = nil, requestOptions: RequestOptions? = nil) async throws -> CopilotSpace {
+        if let generalInstructions = generalInstructions {
             try validateLength("general_instructions", generalInstructions, max: 4000)
         }
 
-        let requestBody = CopilotSpacesCreateForUserRequestBody(
-            name: name,
-            description: description,
-            generalInstructions: generalInstructions,
-            baseRole: baseRole,
-            resourcesAttributes: resourcesAttributes
-        )
+        let requestBody = CopilotSpacesCreateForUserRequestBody(name: name, description: description, generalInstructions: generalInstructions, baseRole: baseRole, resourcesAttributes: resourcesAttributes)
 
-        return try await (sdkRequest(
-            "POST",
-            ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/copilot-spaces"].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "copilotSpacesCreateForUser",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self]
-        )).data
+        return try (await sdkRequest("POST", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/copilot-spaces"].joined(), config: config, body: requestBody, decoder: .json, operationId: "copilotSpacesCreateForUser", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
     }
 
-    /// Gets details about a specific Copilot Space owned by a user. The authenticated user must have read access to the
-    /// Space. Private user spaces require the authenticated user to be the owner of the space. Public user spaces are
-    /// accessible to any authenticated user. OAuth app tokens and personal access tokens (classic) need the `repo`
-    /// scope to use this endpoint.
+    /// Gets details about a specific Copilot Space owned by a user. The authenticated user must have read access to the Space. Private user spaces require the authenticated user to be the owner of the space. Public user spaces are accessible to any authenticated user. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - username: The handle for the GitHub user account.
     /// - spaceNumber: The unique identifier of the Copilot Space.
-    static func copilotSpacesGetForUser(
-        config: ClientConfig,
-        username: String,
-        spaceNumber: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CopilotSpace {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/users/",
-                sdkEncodePathSegment(sdkWireString(username)),
-                "/copilot-spaces/",
-                sdkEncodePathSegment(sdkWireString(spaceNumber)),
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "copilotSpacesGetForUser",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self]
-        )).data
+    public static func copilotSpacesGetForUser(config: ClientConfig, username: String, spaceNumber: Int, requestOptions: RequestOptions? = nil) async throws -> CopilotSpace {
+        return try (await sdkRequest("GET", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/copilot-spaces/", sdkEncodePathSegment(sdkWireString(spaceNumber))].joined(), config: config, decoder: .json, operationId: "copilotSpacesGetForUser", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
     }
 }

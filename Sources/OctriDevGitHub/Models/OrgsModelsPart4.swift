@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Orgs domain models
+// Orgs domain models
 /// Minimal representation of an organization programmatic access grant request for enumerations
 public struct OrganizationProgrammaticAccessGrantRequest: Codable {
     /// Unique identifier of the request for access via fine-grained personal access token. The `pat_request_id`
@@ -50,44 +50,29 @@ public struct OrganizationProgrammaticAccessGrantRequest: Codable {
         case tokenLastUsedAt = "token_last_used_at"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension OrganizationProgrammaticAccessGrantRequest {
-    init(from decoder: Decoder) throws {
+extension OrganizationProgrammaticAccessGrantRequest {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeRequired(.id)
-        reason = try container.sdkDecodeNullable(.reason)
-        owner = try container.sdkDecodeRequired(.owner)
-        repositorySelection = try container.sdkDecodeRequired(.repositorySelection)
-        repositoriesUrl = try container.sdkDecodeRequired(.repositoriesUrl)
-        permissions = try container.sdkDecodeRequired(.permissions)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        tokenId = try container.sdkDecodeRequired(.tokenId)
-        tokenName = try container.sdkDecodeRequired(.tokenName)
-        tokenExpired = try container.sdkDecodeRequired(.tokenExpired)
-        tokenExpiresAt = try container.sdkDecodeNullable(.tokenExpiresAt)
-        tokenLastUsedAt = try container.sdkDecodeNullable(.tokenLastUsedAt)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.reason = try container.sdkDecodeNullable(.reason)
+        self.owner = try container.sdkDecodeRequired(.owner)
+        self.repositorySelection = try container.sdkDecodeRequired(.repositorySelection)
+        self.repositoriesUrl = try container.sdkDecodeRequired(.repositoriesUrl)
+        self.permissions = try container.sdkDecodeRequired(.permissions)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.tokenId = try container.sdkDecodeRequired(.tokenId)
+        self.tokenName = try container.sdkDecodeRequired(.tokenName)
+        self.tokenExpired = try container.sdkDecodeRequired(.tokenExpired)
+        self.tokenExpiresAt = try container.sdkDecodeNullable(.tokenExpiresAt)
+        self.tokenLastUsedAt = try container.sdkDecodeNullable(.tokenLastUsedAt)
     }
 }
 
-public extension OrganizationProgrammaticAccessGrantRequest {
-    init(
-        id: Int,
-        reason: String?,
-        owner: SimpleUser,
-        repositorySelection: OrganizationProgrammaticAccessGrantRequestRepositorySelection,
-        repositoriesUrl: String,
-        permissions: OrganizationProgrammaticAccessGrantRequestPermissions,
-        createdAt: String,
-        tokenId: Int,
-        tokenName: String,
-        tokenExpired: Bool,
-        tokenExpiresAt: String?,
-        tokenLastUsedAt: String?
-    ) {
+extension OrganizationProgrammaticAccessGrantRequest {
+    public init(id: Int, reason: String?, owner: SimpleUser, repositorySelection: OrganizationProgrammaticAccessGrantRequestRepositorySelection, repositoriesUrl: String, permissions: OrganizationProgrammaticAccessGrantRequestPermissions, createdAt: String, tokenId: Int, tokenName: String, tokenExpired: Bool, tokenExpiresAt: String?, tokenLastUsedAt: String?) {
         (self.id, self.reason) = (id, reason)
         (self.owner, self.repositorySelection) = (owner, repositorySelection)
         (self.repositoriesUrl, self.permissions) = (repositoriesUrl, permissions)
@@ -106,27 +91,21 @@ public struct OrgMembershipPermissions: Codable {
         case canCreateRepository = "can_create_repository"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension OrgMembershipPermissions {
-    init(from decoder: Decoder) throws {
+extension OrgMembershipPermissions {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.canCreateRepository) else {
-            throw SdkValidationError(
-                field: "can_create_repository",
-                code: "required",
-                message: "Validation failed for 'can_create_repository': value is required"
-            )
+            throw SdkValidationError(field: "can_create_repository", code: "required", message: "Validation failed for 'can_create_repository': value is required")
         }
-        canCreateRepository = try container.sdkDecodeRequired(.canCreateRepository)
+        self.canCreateRepository = try container.sdkDecodeRequired(.canCreateRepository)
     }
 }
 
-public extension OrgMembershipPermissions {
-    init(canCreateRepository: Bool) {
+extension OrgMembershipPermissions {
+    public init(canCreateRepository: Bool) {
         self.canCreateRepository = canCreateRepository
     }
 }
@@ -147,21 +126,21 @@ public struct OrganizationProgrammaticAccessGrantPermissions: Codable {
     }
 
     init() {
-        (organization, repository, other) = (nil, nil, nil)
+        (self.organization, self.repository, self.other) = (nil, nil, nil)
     }
 }
 
-public extension OrganizationProgrammaticAccessGrantPermissions {
-    init(from decoder: Decoder) throws {
+extension OrganizationProgrammaticAccessGrantPermissions {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        organization = try container.sdkDecodeIfPresent(.organization)
-        repository = try container.sdkDecodeIfPresent(.repository)
-        other = try container.sdkDecodeIfPresent(.other)
+        self.organization = try container.sdkDecodeIfPresent(.organization)
+        self.repository = try container.sdkDecodeIfPresent(.repository)
+        self.other = try container.sdkDecodeIfPresent(.other)
     }
 }
 
-public extension OrganizationProgrammaticAccessGrantPermissions {
-    init(organization: [String: String]? = nil, repository: [String: String]? = nil, other: [String: String]? = nil) {
+extension OrganizationProgrammaticAccessGrantPermissions {
+    public init(organization: [String: String]? = nil, repository: [String: String]? = nil, other: [String: String]? = nil) {
         self.init()
         (self.organization, self.repository) = (organization, repository)
         self.other = other
@@ -188,34 +167,26 @@ public struct ApiInsightsSubjectStatsItem: Codable {
     }
 
     init() {
-        (subjectType, subjectName, subjectId, totalRequestCount, rateLimitedRequestCount) = (nil, nil, nil, nil, nil)
-        (lastRateLimitedTimestamp, lastRequestTimestamp) = (nil, nil)
+        (self.subjectType, self.subjectName, self.subjectId, self.totalRequestCount, self.rateLimitedRequestCount) = (nil, nil, nil, nil, nil)
+        (self.lastRateLimitedTimestamp, self.lastRequestTimestamp) = (nil, nil)
     }
 }
 
-public extension ApiInsightsSubjectStatsItem {
-    init(from decoder: Decoder) throws {
+extension ApiInsightsSubjectStatsItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        subjectType = try container.sdkDecodeIfPresent(.subjectType)
-        subjectName = try container.sdkDecodeIfPresent(.subjectName)
-        subjectId = try container.sdkDecodeIfPresent(.subjectId)
-        totalRequestCount = try container.sdkDecodeIfPresent(.totalRequestCount)
-        rateLimitedRequestCount = try container.sdkDecodeIfPresent(.rateLimitedRequestCount)
-        lastRateLimitedTimestamp = try container.sdkDecodeIfPresent(.lastRateLimitedTimestamp)
-        lastRequestTimestamp = try container.sdkDecodeIfPresent(.lastRequestTimestamp)
+        self.subjectType = try container.sdkDecodeIfPresent(.subjectType)
+        self.subjectName = try container.sdkDecodeIfPresent(.subjectName)
+        self.subjectId = try container.sdkDecodeIfPresent(.subjectId)
+        self.totalRequestCount = try container.sdkDecodeIfPresent(.totalRequestCount)
+        self.rateLimitedRequestCount = try container.sdkDecodeIfPresent(.rateLimitedRequestCount)
+        self.lastRateLimitedTimestamp = try container.sdkDecodeIfPresent(.lastRateLimitedTimestamp)
+        self.lastRequestTimestamp = try container.sdkDecodeIfPresent(.lastRequestTimestamp)
     }
 }
 
-public extension ApiInsightsSubjectStatsItem {
-    init(
-        subjectType: String? = nil,
-        subjectName: String? = nil,
-        subjectId: Int? = nil,
-        totalRequestCount: Int? = nil,
-        rateLimitedRequestCount: Int? = nil,
-        lastRateLimitedTimestamp: String? = nil,
-        lastRequestTimestamp: String? = nil
-    ) {
+extension ApiInsightsSubjectStatsItem {
+    public init(subjectType: String? = nil, subjectName: String? = nil, subjectId: Int? = nil, totalRequestCount: Int? = nil, rateLimitedRequestCount: Int? = nil, lastRateLimitedTimestamp: String? = nil, lastRequestTimestamp: String? = nil) {
         self.init()
         (self.subjectType, self.subjectName) = (subjectType, subjectName)
         (self.subjectId, self.totalRequestCount) = (subjectId, totalRequestCount)
@@ -246,51 +217,33 @@ public struct OrgRepoCustomPropertyValues: Codable {
         case properties
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension OrgRepoCustomPropertyValues {
-    init(from decoder: Decoder) throws {
+extension OrgRepoCustomPropertyValues {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.repositoryId) else {
-            throw SdkValidationError(
-                field: "repository_id",
-                code: "required",
-                message: "Validation failed for 'repository_id': value is required"
-            )
+            throw SdkValidationError(field: "repository_id", code: "required", message: "Validation failed for 'repository_id': value is required")
         }
         guard container.contains(.repositoryName) else {
-            throw SdkValidationError(
-                field: "repository_name",
-                code: "required",
-                message: "Validation failed for 'repository_name': value is required"
-            )
+            throw SdkValidationError(field: "repository_name", code: "required", message: "Validation failed for 'repository_name': value is required")
         }
         guard container.contains(.repositoryFullName) else {
-            throw SdkValidationError(
-                field: "repository_full_name",
-                code: "required",
-                message: "Validation failed for 'repository_full_name': value is required"
-            )
+            throw SdkValidationError(field: "repository_full_name", code: "required", message: "Validation failed for 'repository_full_name': value is required")
         }
         guard container.contains(.properties) else {
-            throw SdkValidationError(
-                field: "properties",
-                code: "required",
-                message: "Validation failed for 'properties': value is required"
-            )
+            throw SdkValidationError(field: "properties", code: "required", message: "Validation failed for 'properties': value is required")
         }
-        repositoryId = try container.sdkDecodeRequired(.repositoryId)
-        repositoryName = try container.sdkDecodeRequired(.repositoryName)
-        repositoryFullName = try container.sdkDecodeRequired(.repositoryFullName)
-        properties = try container.sdkDecodeRequired(.properties)
+        self.repositoryId = try container.sdkDecodeRequired(.repositoryId)
+        self.repositoryName = try container.sdkDecodeRequired(.repositoryName)
+        self.repositoryFullName = try container.sdkDecodeRequired(.repositoryFullName)
+        self.properties = try container.sdkDecodeRequired(.properties)
     }
 }
 
-public extension OrgRepoCustomPropertyValues {
-    init(repositoryId: Int, repositoryName: String, repositoryFullName: String, properties: [CustomPropertyValue]) {
+extension OrgRepoCustomPropertyValues {
+    public init(repositoryId: Int, repositoryName: String, repositoryFullName: String, properties: [CustomPropertyValue]) {
         (self.repositoryId, self.repositoryName) = (repositoryId, repositoryName)
         (self.repositoryFullName, self.properties) = (repositoryFullName, properties)
     }
@@ -335,57 +288,36 @@ public struct CustomProperty: Codable {
         case requireExplicitValues = "require_explicit_values"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension CustomProperty {
-    init(from decoder: Decoder) throws {
+extension CustomProperty {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.propertyName) else {
-            throw SdkValidationError(
-                field: "property_name",
-                code: "required",
-                message: "Validation failed for 'property_name': value is required"
-            )
+            throw SdkValidationError(field: "property_name", code: "required", message: "Validation failed for 'property_name': value is required")
         }
         guard container.contains(.valueType) else {
-            throw SdkValidationError(
-                field: "value_type",
-                code: "required",
-                message: "Validation failed for 'value_type': value is required"
-            )
+            throw SdkValidationError(field: "value_type", code: "required", message: "Validation failed for 'value_type': value is required")
         }
-        propertyName = try container.sdkDecodeRequired(.propertyName)
-        valueType = try container.sdkDecodeRequired(.valueType)
-        url = try container.sdkDecodeIfPresent(.url)
-        sourceType = try container.sdkDecodeIfPresent(.sourceType)
-        required = try container.sdkDecodeIfPresent(.required)
-        defaultValue = try container.sdkDecodeIfPresent(.defaultValue)
-        description = try container.sdkDecodeIfPresent(.description)
-        allowedValues = try container.sdkDecodeIfPresent(.allowedValues)
-        valuesEditableBy = try container.sdkDecodeIfPresent(.valuesEditableBy)
-        requireExplicitValues = try container.sdkDecodeIfPresent(.requireExplicitValues)
-        if let value = url {
+        self.propertyName = try container.sdkDecodeRequired(.propertyName)
+        self.valueType = try container.sdkDecodeRequired(.valueType)
+        self.url = try container.sdkDecodeIfPresent(.url)
+        self.sourceType = try container.sdkDecodeIfPresent(.sourceType)
+        self.required = try container.sdkDecodeIfPresent(.required)
+        self.defaultValue = try container.sdkDecodeIfPresent(.defaultValue)
+        self.description = try container.sdkDecodeIfPresent(.description)
+        self.allowedValues = try container.sdkDecodeIfPresent(.allowedValues)
+        self.valuesEditableBy = try container.sdkDecodeIfPresent(.valuesEditableBy)
+        self.requireExplicitValues = try container.sdkDecodeIfPresent(.requireExplicitValues)
+        if let value = self.url {
             try sdkValidateUri("url", value)
         }
     }
 }
 
-public extension CustomProperty {
-    init(
-        propertyName: String,
-        valueType: CustomPropertyValueType,
-        url: String? = nil,
-        sourceType: CustomPropertySourceType? = nil,
-        required: Bool? = nil,
-        defaultValue: CustomPropertyDefaultValue? = nil,
-        description: String? = nil,
-        allowedValues: [String]? = nil,
-        valuesEditableBy: CustomPropertyValuesEditableBy? = nil,
-        requireExplicitValues: Bool? = nil
-    ) throws {
+extension CustomProperty {
+    public init(propertyName: String, valueType: CustomPropertyValueType, url: String? = nil, sourceType: CustomPropertySourceType? = nil, required: Bool? = nil, defaultValue: CustomPropertyDefaultValue? = nil, description: String? = nil, allowedValues: [String]? = nil, valuesEditableBy: CustomPropertyValuesEditableBy? = nil, requireExplicitValues: Bool? = nil) throws {
         (self.propertyName, self.valueType) = (propertyName, valueType)
         (self.url, self.sourceType) = (url, sourceType)
         (self.required, self.defaultValue) = (required, defaultValue)
@@ -418,59 +350,37 @@ public struct TeamRoleAssignmentPermissions: Codable {
         case admin
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension TeamRoleAssignmentPermissions {
-    init(from decoder: Decoder) throws {
+extension TeamRoleAssignmentPermissions {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.pull) else {
-            throw SdkValidationError(
-                field: "pull",
-                code: "required",
-                message: "Validation failed for 'pull': value is required"
-            )
+            throw SdkValidationError(field: "pull", code: "required", message: "Validation failed for 'pull': value is required")
         }
         guard container.contains(.triage) else {
-            throw SdkValidationError(
-                field: "triage",
-                code: "required",
-                message: "Validation failed for 'triage': value is required"
-            )
+            throw SdkValidationError(field: "triage", code: "required", message: "Validation failed for 'triage': value is required")
         }
         guard container.contains(.push) else {
-            throw SdkValidationError(
-                field: "push",
-                code: "required",
-                message: "Validation failed for 'push': value is required"
-            )
+            throw SdkValidationError(field: "push", code: "required", message: "Validation failed for 'push': value is required")
         }
         guard container.contains(.maintain) else {
-            throw SdkValidationError(
-                field: "maintain",
-                code: "required",
-                message: "Validation failed for 'maintain': value is required"
-            )
+            throw SdkValidationError(field: "maintain", code: "required", message: "Validation failed for 'maintain': value is required")
         }
         guard container.contains(.admin) else {
-            throw SdkValidationError(
-                field: "admin",
-                code: "required",
-                message: "Validation failed for 'admin': value is required"
-            )
+            throw SdkValidationError(field: "admin", code: "required", message: "Validation failed for 'admin': value is required")
         }
-        pull = try container.sdkDecodeRequired(.pull)
-        triage = try container.sdkDecodeRequired(.triage)
-        push = try container.sdkDecodeRequired(.push)
-        maintain = try container.sdkDecodeRequired(.maintain)
-        admin = try container.sdkDecodeRequired(.admin)
+        self.pull = try container.sdkDecodeRequired(.pull)
+        self.triage = try container.sdkDecodeRequired(.triage)
+        self.push = try container.sdkDecodeRequired(.push)
+        self.maintain = try container.sdkDecodeRequired(.maintain)
+        self.admin = try container.sdkDecodeRequired(.admin)
     }
 }
 
-public extension TeamRoleAssignmentPermissions {
-    init(pull: Bool, triage: Bool, push: Bool, maintain: Bool, admin: Bool) {
+extension TeamRoleAssignmentPermissions {
+    public init(pull: Bool, triage: Bool, push: Bool, maintain: Bool, admin: Bool) {
         (self.pull, self.triage) = (pull, triage)
         (self.push, self.maintain) = (push, maintain)
         self.admin = admin
@@ -517,46 +427,34 @@ public struct ArtifactDeploymentRecord: Codable {
     }
 
     init() {
-        (id, digest, logicalEnvironment, physicalEnvironment, cluster) = (nil, nil, nil, nil, nil)
-        (deploymentName, tags, runtimeRisks, createdAt, updatedAt) = (nil, nil, nil, nil, nil)
-        attestationId = nil
+        (self.id, self.digest, self.logicalEnvironment, self.physicalEnvironment, self.cluster) = (nil, nil, nil, nil, nil)
+        (self.deploymentName, self.tags, self.runtimeRisks, self.createdAt, self.updatedAt) = (nil, nil, nil, nil, nil)
+        self.attestationId = nil
     }
 }
 
-public extension ArtifactDeploymentRecord {
-    init(from decoder: Decoder) throws {
+extension ArtifactDeploymentRecord {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeIfPresent(.id)
-        digest = try container.sdkDecodeIfPresent(.digest)
-        logicalEnvironment = try container.sdkDecodeIfPresent(.logicalEnvironment)
-        physicalEnvironment = try container.sdkDecodeIfPresent(.physicalEnvironment)
-        cluster = try container.sdkDecodeIfPresent(.cluster)
-        deploymentName = try container.sdkDecodeIfPresent(.deploymentName)
-        tags = try container.sdkDecodeIfPresent(.tags)
-        runtimeRisks = try container.sdkDecodeIfPresent(.runtimeRisks)
-        createdAt = try container.sdkDecodeIfPresent(.createdAt)
-        updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
-        attestationId = try container.sdkDecodeIfPresent(.attestationId)
-        if let value = runtimeRisks {
+        self.id = try container.sdkDecodeIfPresent(.id)
+        self.digest = try container.sdkDecodeIfPresent(.digest)
+        self.logicalEnvironment = try container.sdkDecodeIfPresent(.logicalEnvironment)
+        self.physicalEnvironment = try container.sdkDecodeIfPresent(.physicalEnvironment)
+        self.cluster = try container.sdkDecodeIfPresent(.cluster)
+        self.deploymentName = try container.sdkDecodeIfPresent(.deploymentName)
+        self.tags = try container.sdkDecodeIfPresent(.tags)
+        self.runtimeRisks = try container.sdkDecodeIfPresent(.runtimeRisks)
+        self.createdAt = try container.sdkDecodeIfPresent(.createdAt)
+        self.updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
+        self.attestationId = try container.sdkDecodeIfPresent(.attestationId)
+        if let value = self.runtimeRisks {
             try validateItems("runtime_risks", value, min: nil, max: 4)
         }
     }
 }
 
-public extension ArtifactDeploymentRecord {
-    init(
-        id: Int? = nil,
-        digest: String? = nil,
-        logicalEnvironment: String? = nil,
-        physicalEnvironment: String? = nil,
-        cluster: String? = nil,
-        deploymentName: String? = nil,
-        tags: [String: String]? = nil,
-        runtimeRisks: [ArtifactDeploymentRecordRuntimeRisksItem]? = nil,
-        createdAt: String? = nil,
-        updatedAt: String? = nil,
-        attestationId: Int? = nil
-    ) throws {
+extension ArtifactDeploymentRecord {
+    public init(id: Int? = nil, digest: String? = nil, logicalEnvironment: String? = nil, physicalEnvironment: String? = nil, cluster: String? = nil, deploymentName: String? = nil, tags: [String: String]? = nil, runtimeRisks: [ArtifactDeploymentRecordRuntimeRisksItem]? = nil, createdAt: String? = nil, updatedAt: String? = nil, attestationId: Int? = nil) throws {
         self.init()
         (self.id, self.digest) = (id, digest)
         (self.logicalEnvironment, self.physicalEnvironment) = (logicalEnvironment, physicalEnvironment)
@@ -588,7 +486,5 @@ public struct OrganizationCreateIssueFieldOptionsItem: Codable {
         case description
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }

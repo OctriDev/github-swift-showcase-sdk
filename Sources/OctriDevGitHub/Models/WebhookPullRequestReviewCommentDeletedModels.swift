@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// WebhookPullRequestReviewCommentDeleted domain models
+// WebhookPullRequestReviewCommentDeleted domain models
 /// Groups of organization members that gives permissions on specified repositories.
 public struct WebhookPullRequestReviewCommentDeletedPullRequestRequestedTeamsItem: Codable {
     /// Unique identifier of the team
@@ -49,69 +49,45 @@ public struct WebhookPullRequestReviewCommentDeletedPullRequestRequestedTeamsIte
         case url
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookPullRequestReviewCommentDeletedPullRequestRequestedTeamsItem {
-    init(from decoder: Decoder) throws {
+extension WebhookPullRequestReviewCommentDeletedPullRequestRequestedTeamsItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
-        name = try container.sdkDecodeRequired(.name)
-        deleted = try container.sdkDecodeIfPresent(.deleted)
-        description = try container.sdkDecodeIfPresent(.description)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        membersUrl = try container.sdkDecodeIfPresent(.membersUrl)
-        nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        parent = try container.sdkDecodeIfPresent(.parent)
-        permission = try container.sdkDecodeIfPresent(.permission)
-        privacy = try container.sdkDecodeIfPresent(.privacy)
-        repositoriesUrl = try container.sdkDecodeIfPresent(.repositoriesUrl)
-        slug = try container.sdkDecodeIfPresent(.slug)
-        url = try container.sdkDecodeIfPresent(.url)
-        if let value = htmlUrl {
+        self.id = try container.sdkDecodeRequired(.id)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.deleted = try container.sdkDecodeIfPresent(.deleted)
+        self.description = try container.sdkDecodeIfPresent(.description)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        self.membersUrl = try container.sdkDecodeIfPresent(.membersUrl)
+        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        self.parent = try container.sdkDecodeIfPresent(.parent)
+        self.permission = try container.sdkDecodeIfPresent(.permission)
+        self.privacy = try container.sdkDecodeIfPresent(.privacy)
+        self.repositoriesUrl = try container.sdkDecodeIfPresent(.repositoriesUrl)
+        self.slug = try container.sdkDecodeIfPresent(.slug)
+        self.url = try container.sdkDecodeIfPresent(.url)
+        if let value = self.htmlUrl {
             try sdkValidateUri("html_url", value)
         }
-        if let value = repositoriesUrl {
+        if let value = self.repositoriesUrl {
             try sdkValidateUri("repositories_url", value)
         }
-        if let value = url {
+        if let value = self.url {
             try sdkValidateUri("url", value)
         }
     }
 }
 
-public extension WebhookPullRequestReviewCommentDeletedPullRequestRequestedTeamsItem {
-    init(
-        id: Int,
-        name: String,
-        deleted: Bool? = nil,
-        description: String? = nil,
-        htmlUrl: String? = nil,
-        membersUrl: String? = nil,
-        nodeId: String? = nil,
-        parent: WebhookPullRequestReviewCommentDeletedPullRequestRequestedTeaXcf2daefa0b? = nil,
-        permission: String? = nil,
-        privacy: WebhookPullRequestReviewCommentDeletedPullRequestRequestedTeaX24db703c1b? = nil,
-        repositoriesUrl: String? = nil,
-        slug: String? = nil,
-        url: String? = nil
-    ) throws {
+extension WebhookPullRequestReviewCommentDeletedPullRequestRequestedTeamsItem {
+    public init(id: Int, name: String, deleted: Bool? = nil, description: String? = nil, htmlUrl: String? = nil, membersUrl: String? = nil, nodeId: String? = nil, parent: WebhookPullRequestReviewCommentDeletedPullRequestRequestedTeaXcf2daefa0b? = nil, permission: String? = nil, privacy: WebhookPullRequestReviewCommentDeletedPullRequestRequestedTeaX24db703c1b? = nil, repositoriesUrl: String? = nil, slug: String? = nil, url: String? = nil) throws {
         (self.id, self.name) = (id, name)
         (self.deleted, self.description) = (deleted, description)
         (self.htmlUrl, self.membersUrl) = (htmlUrl, membersUrl)
@@ -140,27 +116,21 @@ public struct WebhookPullRequestReviewCommentDeletedPullRequestLinksComments: Co
         case href
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookPullRequestReviewCommentDeletedPullRequestLinksComments {
-    init(from decoder: Decoder) throws {
+extension WebhookPullRequestReviewCommentDeletedPullRequestLinksComments {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.href) else {
-            throw SdkValidationError(
-                field: "href",
-                code: "required",
-                message: "Validation failed for 'href': value is required"
-            )
+            throw SdkValidationError(field: "href", code: "required", message: "Validation failed for 'href': value is required")
         }
-        href = try container.sdkDecodeRequired(.href)
+        self.href = try container.sdkDecodeRequired(.href)
     }
 }
 
-public extension WebhookPullRequestReviewCommentDeletedPullRequestLinksComments {
-    init(href: String) {
+extension WebhookPullRequestReviewCommentDeletedPullRequestLinksComments {
+    public init(href: String) {
         self.href = href
     }
 }
@@ -219,53 +189,34 @@ public struct WebhookPullRequestReviewCommentDeletedPullRequestMilestone: Codabl
         case url
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookPullRequestReviewCommentDeletedPullRequestMilestone {
-    init(from decoder: Decoder) throws {
+extension WebhookPullRequestReviewCommentDeletedPullRequestMilestone {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        closedAt = try container.sdkDecodeNullable(.closedAt)
-        closedIssues = try container.sdkDecodeRequired(.closedIssues)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        creator = try container.sdkDecodeNullable(.creator)
-        description = try container.sdkDecodeNullable(.description)
-        dueOn = try container.sdkDecodeNullable(.dueOn)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        id = try container.sdkDecodeRequired(.id)
-        labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        number = try container.sdkDecodeRequired(.number)
-        openIssues = try container.sdkDecodeRequired(.openIssues)
-        state = try container.sdkDecodeRequired(.state)
-        title = try container.sdkDecodeRequired(.title)
-        updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        url = try container.sdkDecodeRequired(.url)
+        self.closedAt = try container.sdkDecodeNullable(.closedAt)
+        self.closedIssues = try container.sdkDecodeRequired(.closedIssues)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.creator = try container.sdkDecodeNullable(.creator)
+        self.description = try container.sdkDecodeNullable(.description)
+        self.dueOn = try container.sdkDecodeNullable(.dueOn)
+        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.number = try container.sdkDecodeRequired(.number)
+        self.openIssues = try container.sdkDecodeRequired(.openIssues)
+        self.state = try container.sdkDecodeRequired(.state)
+        self.title = try container.sdkDecodeRequired(.title)
+        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        self.url = try container.sdkDecodeRequired(.url)
         try sdkValidateConstraints()
     }
 }
 
-public extension WebhookPullRequestReviewCommentDeletedPullRequestMilestone {
-    init(
-        closedAt: Date?,
-        closedIssues: Int,
-        createdAt: Date,
-        creator: WebhookPullRequestReviewCommentDeletedPullRequestMilestoneCreator?,
-        description: String?,
-        dueOn: Date?,
-        htmlUrl: String,
-        id: Int,
-        labelsUrl: String,
-        nodeId: String,
-        number: Int,
-        openIssues: Int,
-        state: WebhookPullRequestReviewCommentDeletedPullRequestMilestoneState,
-        title: String,
-        updatedAt: Date,
-        url: String
-    ) throws {
+extension WebhookPullRequestReviewCommentDeletedPullRequestMilestone {
+    public init(closedAt: Date?, closedIssues: Int, createdAt: Date, creator: WebhookPullRequestReviewCommentDeletedPullRequestMilestoneCreator?, description: String?, dueOn: Date?, htmlUrl: String, id: Int, labelsUrl: String, nodeId: String, number: Int, openIssues: Int, state: WebhookPullRequestReviewCommentDeletedPullRequestMilestoneState, title: String, updatedAt: Date, url: String) throws {
         (self.closedAt, self.closedIssues) = (closedAt, closedIssues)
         (self.createdAt, self.creator) = (createdAt, creator)
         (self.description, self.dueOn) = (description, dueOn)
@@ -280,17 +231,17 @@ public extension WebhookPullRequestReviewCommentDeletedPullRequestMilestone {
 
 extension WebhookPullRequestReviewCommentDeletedPullRequestMilestone {
     func sdkValidateConstraints() throws {
-        if let value = closedAt {
+        if let value = self.closedAt {
             try sdkValidateDateTime("closed_at", sdkWireString(value))
         }
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
-        if let value = dueOn {
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        if let value = self.dueOn {
             try sdkValidateDateTime("due_on", sdkWireString(value))
         }
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateUri("labels_url", labelsUrl)
-        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
-        try sdkValidateUri("url", url)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("labels_url", self.labelsUrl)
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateUri("url", self.url)
     }
 }
 
@@ -601,7 +552,5 @@ public struct WebhookPullRequestReviewCommentDeletedPullRequestHeadRepo: Codable
         case webCommitSignoffRequired = "web_commit_signoff_required"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }

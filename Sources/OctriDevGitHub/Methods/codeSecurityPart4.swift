@@ -6,55 +6,21 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension CodeSecurityMethods {
-    /// Lists the default code security configurations for an enterprise. The authenticated user must be an
-    /// administrator of the enterprise in order to use this endpoint. OAuth app tokens and personal access tokens
-    /// (classic) need the `read:enterprise` scope to use this endpoint.
+extension CodeSecurityMethods {
+    /// Lists the default code security configurations for an enterprise. The authenticated user must be an administrator of the enterprise in order to use this endpoint. OAuth app tokens and personal access tokens (classic) need the `read:enterprise` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - enterprise: The slug version of the enterprise name.
-    static func codeSecurityGetDefaultConfigurationsForEnterprise(
-        config: ClientConfig,
-        enterprise: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CodeSecurityDefaultConfigurations {
-        try await (sdkRequest(
-            "GET",
-            ["/enterprises/", sdkEncodePathSegment(sdkWireString(enterprise)), "/code-security/configurations/defaults"]
-                .joined(),
-            config: config,
-            decoder: .json,
-            operationId: "codeSecurityGetDefaultConfigurationsForEnterprise",
-            options: requestOptions
-        )).data
+    public static func codeSecurityGetDefaultConfigurationsForEnterprise(config: ClientConfig, enterprise: String, requestOptions: RequestOptions? = nil) async throws -> CodeSecurityDefaultConfigurations {
+        return try (await sdkRequest("GET", ["/enterprises/", sdkEncodePathSegment(sdkWireString(enterprise)), "/code-security/configurations/defaults"].joined(), config: config, decoder: .json, operationId: "codeSecurityGetDefaultConfigurationsForEnterprise", options: requestOptions)).data
     }
 
-    /// Gets a code security configuration available in an enterprise. The authenticated user must be an administrator
-    /// of the enterprise in order to use this endpoint. OAuth app tokens and personal access tokens (classic) need the
-    /// `read:enterprise` scope to use this endpoint.
+    /// Gets a code security configuration available in an enterprise. The authenticated user must be an administrator of the enterprise in order to use this endpoint. OAuth app tokens and personal access tokens (classic) need the `read:enterprise` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - enterprise: The slug version of the enterprise name.
     /// - configurationId: The unique identifier of the code security configuration.
-    static func codeSecurityGetSingleConfigurationForEnterprise(
-        config: ClientConfig,
-        enterprise: String,
-        configurationId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CodeSecurityConfiguration {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/enterprises/",
-                sdkEncodePathSegment(sdkWireString(enterprise)),
-                "/code-security/configurations/",
-                sdkEncodePathSegment(sdkWireString(configurationId)),
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "codeSecurityGetSingleConfigurationForEnterprise",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self]
-        )).data
+    public static func codeSecurityGetSingleConfigurationForEnterprise(config: ClientConfig, enterprise: String, configurationId: Int, requestOptions: RequestOptions? = nil) async throws -> CodeSecurityConfiguration {
+        return try (await sdkRequest("GET", ["/enterprises/", sdkEncodePathSegment(sdkWireString(enterprise)), "/code-security/configurations/", sdkEncodePathSegment(sdkWireString(configurationId))].joined(), config: config, decoder: .json, operationId: "codeSecurityGetSingleConfigurationForEnterprise", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
     }
 }

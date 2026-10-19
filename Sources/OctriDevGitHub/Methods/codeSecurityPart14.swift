@@ -6,47 +6,17 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension CodeSecurityMethods {
-    /// Sets a code security configuration as a default to be applied to new repositories in your organization. This
-    /// configuration will be applied to the matching repository type (all, none, public, private and internal) by
-    /// default when they are created. The authenticated user must be an administrator or security manager for the
-    /// organization to use this endpoint. Setting an enterprise-enforced configuration as the default also requires
-    /// permission to manage the enterprise's code security settings. A default set with this endpoint is an
-    /// organization default, even if the configuration is owned or enforced by the enterprise. An enterprise-enforced
-    /// configuration set as an enterprise-level default for the same repository visibility takes precedence. OAuth app
-    /// tokens and classic PATs require the `write:org` scope; setting an enterprise-enforced configuration as the
-    /// default also requires `admin:enterprise`. Fine-grained PATs and GitHub App access tokens cannot perform that
-    /// action.
+extension CodeSecurityMethods {
+    /// Sets a code security configuration as a default to be applied to new repositories in your organization. This configuration will be applied to the matching repository type (all, none, public, private and internal) by default when they are created. The authenticated user must be an administrator or security manager for the organization to use this endpoint. Setting an enterprise-enforced configuration as the default also requires permission to manage the enterprise's code security settings. A default set with this endpoint is an organization default, even if the configuration is owned or enforced by the enterprise. An enterprise-enforced configuration set as an enterprise-level default for the same repository visibility takes precedence. OAuth app tokens and classic PATs require the `write:org` scope; setting an enterprise-enforced configuration as the default also requires `admin:enterprise`. Fine-grained PATs and GitHub App access tokens cannot perform that action.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - configurationId: The unique identifier of the code security configuration.
     /// - defaultForNewRepos: Specify which types of repository this security
     ///   configuration should be applied to by default.
-    static func codeSecuritySetConfigurationAsDefault(
-        config: ClientConfig,
-        org: String,
-        configurationId: Int,
-        defaultForNewRepos: CodeSecuritySetConfigurationAsDefaultRequestBodyDefaultForNewRepos? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CodeSecuritySetConfigurationAsDefaultResponse {
+    public static func codeSecuritySetConfigurationAsDefault(config: ClientConfig, org: String, configurationId: Int, defaultForNewRepos: CodeSecuritySetConfigurationAsDefaultRequestBodyDefaultForNewRepos? = nil, requestOptions: RequestOptions? = nil) async throws -> CodeSecuritySetConfigurationAsDefaultResponse {
         let requestBody = CodeSecuritySetConfigurationAsDefaultRequestBody(defaultForNewRepos: defaultForNewRepos)
 
-        return try await (sdkRequest(
-            "PUT",
-            [
-                "/orgs/",
-                sdkEncodePathSegment(sdkWireString(org)),
-                "/code-security/configurations/",
-                sdkEncodePathSegment(sdkWireString(configurationId)),
-                "/defaults",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "codeSecuritySetConfigurationAsDefault",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationErrorSimple.self]
-        )).data
+        return try (await sdkRequest("PUT", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/code-security/configurations/", sdkEncodePathSegment(sdkWireString(configurationId)), "/defaults"].joined(), config: config, body: requestBody, decoder: .json, operationId: "codeSecuritySetConfigurationAsDefault", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationErrorSimple.self])).data
     }
 }

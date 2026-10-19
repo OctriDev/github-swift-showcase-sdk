@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension IssuesMethods {
+extension IssuesMethods {
     /// Lists labels for issues in a milestone.
     ///
     /// - Parameters:
@@ -23,34 +23,10 @@ public extension IssuesMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    static func issuesListLabelsForMilestone(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        milestoneNumber: Int,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [Label] {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/milestones/",
-                sdkEncodePathSegment(sdkWireString(milestoneNumber)),
-                "/labels",
-            ].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("page", value: page),
-            ],
-            decoder: .json,
-            operationId: "issuesListLabelsForMilestone",
-            options: requestOptions
-        )).data
+    public static func issuesListLabelsForMilestone(config: ClientConfig, owner: String, repo: String, milestoneNumber: Int, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [Label] {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/milestones/", sdkEncodePathSegment(sdkWireString(milestoneNumber)), "/labels"].joined(), config: config, query: [
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("page", value: page),
+        ], decoder: .json, operationId: "issuesListLabelsForMilestone", options: requestOptions)).data
     }
 }

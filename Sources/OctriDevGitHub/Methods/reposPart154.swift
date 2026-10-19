@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ReposMethods {
+extension ReposMethods {
     /// Retrieves the topic names associated with a repository. Use `page` and `per_page` to paginate the results.
     ///
     /// - Parameters:
@@ -22,24 +22,10 @@ public extension ReposMethods {
     ///   see "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    static func reposGetAllTopics(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        page: Int? = nil,
-        perPage: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> Topic {
-        try await (sdkRequest("GET", [
-            "/repos/",
-            sdkEncodePathSegment(sdkWireString(owner)),
-            "/",
-            sdkEncodePathSegment(sdkWireString(repo)),
-            "/topics",
-        ].joined(), config: config, query: [
+    public static func reposGetAllTopics(config: ClientConfig, owner: String, repo: String, page: Int? = nil, perPage: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> Topic {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/topics"].joined(), config: config, query: [
             SdkQueryParameter("page", value: page),
             SdkQueryParameter("per_page", value: perPage),
-        ], decoder: .json, operationId: "reposGetAllTopics", options: requestOptions, errors: ["404": BasicError.self]))
-            .data
+        ], decoder: .json, operationId: "reposGetAllTopics", options: requestOptions, errors: ["404": BasicError.self])).data
     }
 }

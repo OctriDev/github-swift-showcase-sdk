@@ -3,60 +3,40 @@
 
 import Foundation
 
-/// Misc domain models
-public extension CheckRunWithSimpleCheckSuiteOutput {
-    init(from decoder: Decoder) throws {
+// Misc domain models
+extension CheckRunWithSimpleCheckSuiteOutput {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.annotationsCount) else {
-            throw SdkValidationError(
-                field: "annotations_count",
-                code: "required",
-                message: "Validation failed for 'annotations_count': value is required"
-            )
+            throw SdkValidationError(field: "annotations_count", code: "required", message: "Validation failed for 'annotations_count': value is required")
         }
         guard container.contains(.annotationsUrl) else {
-            throw SdkValidationError(
-                field: "annotations_url",
-                code: "required",
-                message: "Validation failed for 'annotations_url': value is required"
-            )
+            throw SdkValidationError(field: "annotations_url", code: "required", message: "Validation failed for 'annotations_url': value is required")
         }
         guard container.contains(.summary) else {
-            throw SdkValidationError(
-                field: "summary",
-                code: "required",
-                message: "Validation failed for 'summary': value is required"
-            )
+            throw SdkValidationError(field: "summary", code: "required", message: "Validation failed for 'summary': value is required")
         }
         guard container.contains(.text) else {
-            throw SdkValidationError(
-                field: "text",
-                code: "required",
-                message: "Validation failed for 'text': value is required"
-            )
+            throw SdkValidationError(field: "text", code: "required", message: "Validation failed for 'text': value is required")
         }
         guard container.contains(.title) else {
-            throw SdkValidationError(
-                field: "title",
-                code: "required",
-                message: "Validation failed for 'title': value is required"
-            )
+            throw SdkValidationError(field: "title", code: "required", message: "Validation failed for 'title': value is required")
         }
-        annotationsCount = try container.sdkDecodeRequired(.annotationsCount)
-        annotationsUrl = try container.sdkDecodeRequired(.annotationsUrl)
-        summary = try container.sdkDecodeNullable(.summary)
-        text = try container.sdkDecodeNullable(.text)
-        title = try container.sdkDecodeNullable(.title)
-        try sdkValidateUri("annotations_url", annotationsUrl)
+        self.annotationsCount = try container.sdkDecodeRequired(.annotationsCount)
+        self.annotationsUrl = try container.sdkDecodeRequired(.annotationsUrl)
+        self.summary = try container.sdkDecodeNullable(.summary)
+        self.text = try container.sdkDecodeNullable(.text)
+        self.title = try container.sdkDecodeNullable(.title)
+            try sdkValidateUri("annotations_url", self.annotationsUrl)
     }
 }
 
-public extension CheckRunWithSimpleCheckSuiteOutput {
-    init(annotationsCount: Int, annotationsUrl: String, summary: String?, text: String?, title: String?) throws {
+extension CheckRunWithSimpleCheckSuiteOutput {
+    public init(annotationsCount: Int, annotationsUrl: String, summary: String?, text: String?, title: String?) throws {
         (self.annotationsCount, self.annotationsUrl) = (annotationsCount, annotationsUrl)
         (self.summary, self.text) = (summary, text)
         self.title = title
-        try sdkValidateUri("annotations_url", self.annotationsUrl)
+            try sdkValidateUri("annotations_url", self.annotationsUrl)
     }
 }
 
@@ -77,21 +57,21 @@ public struct PersonalAccessTokenRequestPermissionsResult: Codable {
     }
 
     init() {
-        (organization, repository, other) = (nil, nil, nil)
+        (self.organization, self.repository, self.other) = (nil, nil, nil)
     }
 }
 
-public extension PersonalAccessTokenRequestPermissionsResult {
-    init(from decoder: Decoder) throws {
+extension PersonalAccessTokenRequestPermissionsResult {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        organization = try container.sdkDecodeIfPresent(.organization)
-        repository = try container.sdkDecodeIfPresent(.repository)
-        other = try container.sdkDecodeIfPresent(.other)
+        self.organization = try container.sdkDecodeIfPresent(.organization)
+        self.repository = try container.sdkDecodeIfPresent(.repository)
+        self.other = try container.sdkDecodeIfPresent(.other)
     }
 }
 
-public extension PersonalAccessTokenRequestPermissionsResult {
-    init(organization: [String: String]? = nil, repository: [String: String]? = nil, other: [String: String]? = nil) {
+extension PersonalAccessTokenRequestPermissionsResult {
+    public init(organization: [String: String]? = nil, repository: [String: String]? = nil, other: [String: String]? = nil) {
         self.init()
         (self.organization, self.repository) = (organization, repository)
         self.other = other
@@ -153,56 +133,41 @@ public struct OrganizationSimpleWebhooks: Codable {
         case description
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension OrganizationSimpleWebhooks {
-    init(from decoder: Decoder) throws {
+extension OrganizationSimpleWebhooks {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        login = try container.sdkDecodeRequired(.login)
-        id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        url = try container.sdkDecodeRequired(.url)
-        reposUrl = try container.sdkDecodeRequired(.reposUrl)
-        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        hooksUrl = try container.sdkDecodeRequired(.hooksUrl)
-        issuesUrl = try container.sdkDecodeRequired(.issuesUrl)
-        membersUrl = try container.sdkDecodeRequired(.membersUrl)
-        publicMembersUrl = try container.sdkDecodeRequired(.publicMembersUrl)
-        avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
-        description = try container.sdkDecodeNullable(.description)
-        try sdkValidateUri("url", url)
-        try sdkValidateUri("repos_url", reposUrl)
-        try sdkValidateUri("events_url", eventsUrl)
+        self.login = try container.sdkDecodeRequired(.login)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.reposUrl = try container.sdkDecodeRequired(.reposUrl)
+        self.eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
+        self.hooksUrl = try container.sdkDecodeRequired(.hooksUrl)
+        self.issuesUrl = try container.sdkDecodeRequired(.issuesUrl)
+        self.membersUrl = try container.sdkDecodeRequired(.membersUrl)
+        self.publicMembersUrl = try container.sdkDecodeRequired(.publicMembersUrl)
+        self.avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
+        self.description = try container.sdkDecodeNullable(.description)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("repos_url", self.reposUrl)
+            try sdkValidateUri("events_url", self.eventsUrl)
     }
 }
 
-public extension OrganizationSimpleWebhooks {
-    init(
-        login: String,
-        id: Int,
-        nodeId: String,
-        url: String,
-        reposUrl: String,
-        eventsUrl: String,
-        hooksUrl: String,
-        issuesUrl: String,
-        membersUrl: String,
-        publicMembersUrl: String,
-        avatarUrl: String,
-        description: String?
-    ) throws {
+extension OrganizationSimpleWebhooks {
+    public init(login: String, id: Int, nodeId: String, url: String, reposUrl: String, eventsUrl: String, hooksUrl: String, issuesUrl: String, membersUrl: String, publicMembersUrl: String, avatarUrl: String, description: String?) throws {
         (self.login, self.id) = (login, id)
         (self.nodeId, self.url) = (nodeId, url)
         (self.reposUrl, self.eventsUrl) = (reposUrl, eventsUrl)
         (self.hooksUrl, self.issuesUrl) = (hooksUrl, issuesUrl)
         (self.membersUrl, self.publicMembersUrl) = (membersUrl, publicMembersUrl)
         (self.avatarUrl, self.description) = (avatarUrl, description)
-        try sdkValidateUri("url", self.url)
-        try sdkValidateUri("repos_url", self.reposUrl)
-        try sdkValidateUri("events_url", self.eventsUrl)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("repos_url", self.reposUrl)
+            try sdkValidateUri("events_url", self.eventsUrl)
     }
 }
 
@@ -223,21 +188,21 @@ public struct PersonalAccessTokenRequestPermissionsUpgraded: Codable {
     }
 
     init() {
-        (organization, repository, other) = (nil, nil, nil)
+        (self.organization, self.repository, self.other) = (nil, nil, nil)
     }
 }
 
-public extension PersonalAccessTokenRequestPermissionsUpgraded {
-    init(from decoder: Decoder) throws {
+extension PersonalAccessTokenRequestPermissionsUpgraded {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        organization = try container.sdkDecodeIfPresent(.organization)
-        repository = try container.sdkDecodeIfPresent(.repository)
-        other = try container.sdkDecodeIfPresent(.other)
+        self.organization = try container.sdkDecodeIfPresent(.organization)
+        self.repository = try container.sdkDecodeIfPresent(.repository)
+        self.other = try container.sdkDecodeIfPresent(.other)
     }
 }
 
-public extension PersonalAccessTokenRequestPermissionsUpgraded {
-    init(organization: [String: String]? = nil, repository: [String: String]? = nil, other: [String: String]? = nil) {
+extension PersonalAccessTokenRequestPermissionsUpgraded {
+    public init(organization: [String: String]? = nil, repository: [String: String]? = nil, other: [String: String]? = nil) {
         self.init()
         (self.organization, self.repository) = (organization, repository)
         self.other = other
@@ -246,21 +211,17 @@ public extension PersonalAccessTokenRequestPermissionsUpgraded {
 
 /// The default value for a merge commit message. - `PR_TITLE` - default to the pull request's title. -
 /// `PR_BODY` - default to the pull request's body. - `BLANK` - default to a blank commit message.
-public struct PullRequestWebhookVariant1MergeCommitMessage: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct PullRequestWebhookVariant1MergeCommitMessage: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let prBody = PullRequestWebhookVariant1MergeCommitMessage(rawValue: "PR_BODY")
     public static let prTitle = PullRequestWebhookVariant1MergeCommitMessage(rawValue: "PR_TITLE")
     public static let blank = PullRequestWebhookVariant1MergeCommitMessage(rawValue: "BLANK")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -272,20 +233,16 @@ public struct PullRequestWebhookVariant1MergeCommitMessage: RawRepresentable, Ha
 /// The default value for a merge commit title. - `PR_TITLE` - default to the pull request's title. -
 /// `MERGE_MESSAGE` - default to the classic title for a merge message (e.g., "Merge pull request #123 from
 /// branch-name").
-public struct PullRequestWebhookVariant1MergeCommitTitle: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct PullRequestWebhookVariant1MergeCommitTitle: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let prTitle = PullRequestWebhookVariant1MergeCommitTitle(rawValue: "PR_TITLE")
     public static let mergeMessage = PullRequestWebhookVariant1MergeCommitTitle(rawValue: "MERGE_MESSAGE")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -298,10 +255,7 @@ public struct PullRequestWebhookVariant1MergeCommitTitle: RawRepresentable, Hash
 public struct CheckRunWithSimpleCheckSuiteStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let queued = CheckRunWithSimpleCheckSuiteStatus(rawValue: "queued")
     public static let inProgress = CheckRunWithSimpleCheckSuiteStatus(rawValue: "in_progress")
     public static let completed = CheckRunWithSimpleCheckSuiteStatus(rawValue: "completed")
@@ -309,7 +263,7 @@ public struct CheckRunWithSimpleCheckSuiteStatus: RawRepresentable, Hashable, Co
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -319,14 +273,10 @@ public struct CheckRunWithSimpleCheckSuiteStatus: RawRepresentable, Hashable, Co
 }
 
 /// Required enumerated value serialized in the `conclusion` wire field.
-public struct CheckRunWithSimpleCheckSuiteConclusion: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct CheckRunWithSimpleCheckSuiteConclusion: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let waiting = CheckRunWithSimpleCheckSuiteConclusion(rawValue: "waiting")
     public static let pending = CheckRunWithSimpleCheckSuiteConclusion(rawValue: "pending")
     public static let startupFailure = CheckRunWithSimpleCheckSuiteConclusion(rawValue: "startup_failure")
@@ -341,7 +291,7 @@ public struct CheckRunWithSimpleCheckSuiteConclusion: RawRepresentable, Hashable
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -353,20 +303,16 @@ public struct CheckRunWithSimpleCheckSuiteConclusion: RawRepresentable, Hashable
 /// The default value for a squash merge commit title: - `PR_TITLE` - default to the pull request's title. -
 /// `COMMIT_OR_PR_TITLE` - default to the commit's title (if only one commit) or the pull request's title (when
 /// more than one commit).
-public struct PullRequestWebhookVariant1SquashMergeCommitTitle: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct PullRequestWebhookVariant1SquashMergeCommitTitle: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let prTitle = PullRequestWebhookVariant1SquashMergeCommitTitle(rawValue: "PR_TITLE")
     public static let commitOrPrTitle = PullRequestWebhookVariant1SquashMergeCommitTitle(rawValue: "COMMIT_OR_PR_TITLE")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -376,21 +322,17 @@ public struct PullRequestWebhookVariant1SquashMergeCommitTitle: RawRepresentable
 }
 
 /// Type of repository selection requested.
-public struct PersonalAccessTokenRequestRepositorySelection: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct PersonalAccessTokenRequestRepositorySelection: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let none = PersonalAccessTokenRequestRepositorySelection(rawValue: "none")
     public static let all = PersonalAccessTokenRequestRepositorySelection(rawValue: "all")
     public static let subset = PersonalAccessTokenRequestRepositorySelection(rawValue: "subset")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -401,21 +343,17 @@ public struct PersonalAccessTokenRequestRepositorySelection: RawRepresentable, H
 
 /// The default value for a squash merge commit message: - `PR_BODY` - default to the pull request's body. -
 /// `COMMIT_MESSAGES` - default to the branch's commit messages. - `BLANK` - default to a blank commit message.
-public struct PullRequestWebhookVariant1SquashMergeCommitMessage: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct PullRequestWebhookVariant1SquashMergeCommitMessage: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let prBody = PullRequestWebhookVariant1SquashMergeCommitMessage(rawValue: "PR_BODY")
     public static let commitMessages = PullRequestWebhookVariant1SquashMergeCommitMessage(rawValue: "COMMIT_MESSAGES")
     public static let blank = PullRequestWebhookVariant1SquashMergeCommitMessage(rawValue: "BLANK")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -428,16 +366,13 @@ public struct PullRequestWebhookVariant1SquashMergeCommitMessage: RawRepresentab
 public struct CampaignAlertType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let codeScanning = CampaignAlertType(rawValue: "code_scanning")
     public static let secretScanning = CampaignAlertType(rawValue: "secret_scanning")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

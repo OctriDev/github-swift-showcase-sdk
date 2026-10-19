@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ReposMethods {
-    /// Deletes a release asset from a repository. Use this operation when you no longer want the asset associated with
-    /// the repository's release. The authenticated user must have permission to modify the repository.
+extension ReposMethods {
+    /// Deletes a release asset from a repository. Use this operation when you no longer want the asset associated with the repository's release. The authenticated user must have permission to modify the repository.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -16,28 +15,7 @@ public extension ReposMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - assetId: The unique identifier of the asset.
-    static func reposDeleteReleaseAsset(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        assetId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "DELETE",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/releases/assets/",
-                sdkEncodePathSegment(sdkWireString(assetId)),
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "reposDeleteReleaseAsset",
-            options: requestOptions,
-            errors: ["404": BasicError.self]
-        )).data
+    public static func reposDeleteReleaseAsset(config: ClientConfig, owner: String, repo: String, assetId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/releases/assets/", sdkEncodePathSegment(sdkWireString(assetId))].joined(), config: config, decoder: .empty, operationId: "reposDeleteReleaseAsset", options: requestOptions, errors: ["404": BasicError.self])).data
     }
 }

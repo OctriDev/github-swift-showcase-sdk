@@ -3,55 +3,35 @@
 
 import Foundation
 
-/// SharedPull domain models
-public extension PullRequestSimpleHead {
-    init(from decoder: Decoder) throws {
+// SharedPull domain models
+extension PullRequestSimpleHead {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.label) else {
-            throw SdkValidationError(
-                field: "label",
-                code: "required",
-                message: "Validation failed for 'label': value is required"
-            )
+            throw SdkValidationError(field: "label", code: "required", message: "Validation failed for 'label': value is required")
         }
         guard container.contains(.ref) else {
-            throw SdkValidationError(
-                field: "ref",
-                code: "required",
-                message: "Validation failed for 'ref': value is required"
-            )
+            throw SdkValidationError(field: "ref", code: "required", message: "Validation failed for 'ref': value is required")
         }
         guard container.contains(.repo) else {
-            throw SdkValidationError(
-                field: "repo",
-                code: "required",
-                message: "Validation failed for 'repo': value is required"
-            )
+            throw SdkValidationError(field: "repo", code: "required", message: "Validation failed for 'repo': value is required")
         }
         guard container.contains(.sha) else {
-            throw SdkValidationError(
-                field: "sha",
-                code: "required",
-                message: "Validation failed for 'sha': value is required"
-            )
+            throw SdkValidationError(field: "sha", code: "required", message: "Validation failed for 'sha': value is required")
         }
         guard container.contains(.user) else {
-            throw SdkValidationError(
-                field: "user",
-                code: "required",
-                message: "Validation failed for 'user': value is required"
-            )
+            throw SdkValidationError(field: "user", code: "required", message: "Validation failed for 'user': value is required")
         }
-        label = try container.sdkDecodeRequired(.label)
-        ref = try container.sdkDecodeRequired(.ref)
-        repo = try container.sdkDecodeRequired(.repo)
-        sha = try container.sdkDecodeRequired(.sha)
-        user = try container.sdkDecodeNullable(.user)
+        self.label = try container.sdkDecodeRequired(.label)
+        self.ref = try container.sdkDecodeRequired(.ref)
+        self.repo = try container.sdkDecodeRequired(.repo)
+        self.sha = try container.sdkDecodeRequired(.sha)
+        self.user = try container.sdkDecodeNullable(.user)
     }
 }
 
-public extension PullRequestSimpleHead {
-    init(label: String, ref: String, repo: Repository, sha: String, user: NullableSimpleUser?) {
+extension PullRequestSimpleHead {
+    public init(label: String, ref: String, repo: Repository, sha: String, user: NullableSimpleUser?) {
         (self.label, self.ref) = (label, ref)
         (self.repo, self.sha) = (repo, sha)
         self.user = user
@@ -73,47 +53,29 @@ public struct PullRequestReviewCommentLinks: Codable {
         case pullRequest = "pull_request"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension PullRequestReviewCommentLinks {
-    init(from decoder: Decoder) throws {
+extension PullRequestReviewCommentLinks {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.`self`) else {
-            throw SdkValidationError(
-                field: "self",
-                code: "required",
-                message: "Validation failed for 'self': value is required"
-            )
+            throw SdkValidationError(field: "self", code: "required", message: "Validation failed for 'self': value is required")
         }
         guard container.contains(.html) else {
-            throw SdkValidationError(
-                field: "html",
-                code: "required",
-                message: "Validation failed for 'html': value is required"
-            )
+            throw SdkValidationError(field: "html", code: "required", message: "Validation failed for 'html': value is required")
         }
         guard container.contains(.pullRequest) else {
-            throw SdkValidationError(
-                field: "pull_request",
-                code: "required",
-                message: "Validation failed for 'pull_request': value is required"
-            )
+            throw SdkValidationError(field: "pull_request", code: "required", message: "Validation failed for 'pull_request': value is required")
         }
         self.`self` = try container.sdkDecodeRequired(.`self`)
-        html = try container.sdkDecodeRequired(.html)
-        pullRequest = try container.sdkDecodeRequired(.pullRequest)
+        self.html = try container.sdkDecodeRequired(.html)
+        self.pullRequest = try container.sdkDecodeRequired(.pullRequest)
     }
 }
 
-public extension PullRequestReviewCommentLinks {
-    init(
-        self selfValue: PullRequestReviewCommentLinksSelf,
-        html: PullRequestReviewCommentLinksHtml,
-        pullRequest: PullRequestReviewCommentLinksPullRequest
-    ) {
+extension PullRequestReviewCommentLinks {
+    public init(`self` selfValue: PullRequestReviewCommentLinksSelf, html: PullRequestReviewCommentLinksHtml, pullRequest: PullRequestReviewCommentLinksPullRequest) {
         (self.`self`, self.html) = (selfValue, html)
         self.pullRequest = pullRequest
     }
@@ -134,43 +96,29 @@ public struct PullRequestMinimalHead: Codable {
         case repo
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension PullRequestMinimalHead {
-    init(from decoder: Decoder) throws {
+extension PullRequestMinimalHead {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.ref) else {
-            throw SdkValidationError(
-                field: "ref",
-                code: "required",
-                message: "Validation failed for 'ref': value is required"
-            )
+            throw SdkValidationError(field: "ref", code: "required", message: "Validation failed for 'ref': value is required")
         }
         guard container.contains(.sha) else {
-            throw SdkValidationError(
-                field: "sha",
-                code: "required",
-                message: "Validation failed for 'sha': value is required"
-            )
+            throw SdkValidationError(field: "sha", code: "required", message: "Validation failed for 'sha': value is required")
         }
         guard container.contains(.repo) else {
-            throw SdkValidationError(
-                field: "repo",
-                code: "required",
-                message: "Validation failed for 'repo': value is required"
-            )
+            throw SdkValidationError(field: "repo", code: "required", message: "Validation failed for 'repo': value is required")
         }
-        ref = try container.sdkDecodeRequired(.ref)
-        sha = try container.sdkDecodeRequired(.sha)
-        repo = try container.sdkDecodeRequired(.repo)
+        self.ref = try container.sdkDecodeRequired(.ref)
+        self.sha = try container.sdkDecodeRequired(.sha)
+        self.repo = try container.sdkDecodeRequired(.repo)
     }
 }
 
-public extension PullRequestMinimalHead {
-    init(ref: String, sha: String, repo: PullRequestMinimalHeadRepo) {
+extension PullRequestMinimalHead {
+    public init(ref: String, sha: String, repo: PullRequestMinimalHeadRepo) {
         (self.ref, self.sha) = (ref, sha)
         self.repo = repo
     }
@@ -186,30 +134,24 @@ public struct PullRequestReviewCommentLinksSelf: Codable {
         case href
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension PullRequestReviewCommentLinksSelf {
-    init(from decoder: Decoder) throws {
+extension PullRequestReviewCommentLinksSelf {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.href) else {
-            throw SdkValidationError(
-                field: "href",
-                code: "required",
-                message: "Validation failed for 'href': value is required"
-            )
+            throw SdkValidationError(field: "href", code: "required", message: "Validation failed for 'href': value is required")
         }
-        href = try container.sdkDecodeRequired(.href)
-        try sdkValidateUri("href", href)
+        self.href = try container.sdkDecodeRequired(.href)
+            try sdkValidateUri("href", self.href)
     }
 }
 
-public extension PullRequestReviewCommentLinksSelf {
-    init(href: String) throws {
+extension PullRequestReviewCommentLinksSelf {
+    public init(href: String) throws {
         self.href = href
-        try sdkValidateUri("href", self.href)
+            try sdkValidateUri("href", self.href)
     }
 }
 
@@ -234,31 +176,25 @@ public struct PullRequestStack: Codable {
         case number
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension PullRequestStack {
-    init(from decoder: Decoder) throws {
+extension PullRequestStack {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.base) else {
-            throw SdkValidationError(
-                field: "base",
-                code: "required",
-                message: "Validation failed for 'base': value is required"
-            )
+            throw SdkValidationError(field: "base", code: "required", message: "Validation failed for 'base': value is required")
         }
-        base = try container.sdkDecodeRequired(.base)
-        size = try container.sdkDecodeIfPresent(.size)
-        position = try container.sdkDecodeIfPresent(.position)
-        id = try container.sdkDecodeIfPresent(.id)
-        number = try container.sdkDecodeIfPresent(.number)
+        self.base = try container.sdkDecodeRequired(.base)
+        self.size = try container.sdkDecodeIfPresent(.size)
+        self.position = try container.sdkDecodeIfPresent(.position)
+        self.id = try container.sdkDecodeIfPresent(.id)
+        self.number = try container.sdkDecodeIfPresent(.number)
     }
 }
 
-public extension PullRequestStack {
-    init(base: PullRequestStackBase, size: Int? = nil, position: Int? = nil, id: Int? = nil, number: Int? = nil) {
+extension PullRequestStack {
+    public init(base: PullRequestStackBase, size: Int? = nil, position: Int? = nil, id: Int? = nil, number: Int? = nil) {
         (self.base, self.size) = (base, size)
         (self.position, self.id) = (position, id)
         self.number = number
@@ -407,96 +343,56 @@ public struct PullRequestSimple: Codable {
         case draft
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension PullRequestSimple {
-    init(from decoder: Decoder) throws {
+extension PullRequestSimple {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        url = try container.sdkDecodeRequired(.url)
-        id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        diffUrl = try container.sdkDecodeRequired(.diffUrl)
-        patchUrl = try container.sdkDecodeRequired(.patchUrl)
-        issueUrl = try container.sdkDecodeRequired(.issueUrl)
-        commitsUrl = try container.sdkDecodeRequired(.commitsUrl)
-        reviewCommentsUrl = try container.sdkDecodeRequired(.reviewCommentsUrl)
-        reviewCommentUrl = try container.sdkDecodeRequired(.reviewCommentUrl)
-        commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
-        statusesUrl = try container.sdkDecodeRequired(.statusesUrl)
-        number = try container.sdkDecodeRequired(.number)
-        state = try container.sdkDecodeRequired(.state)
-        locked = try container.sdkDecodeRequired(.locked)
-        title = try container.sdkDecodeRequired(.title)
-        user = try container.sdkDecodeNullable(.user)
-        body = try container.sdkDecodeNullable(.body)
-        labels = try container.sdkDecodeRequired(.labels)
-        milestone = try container.sdkDecodeNullable(.milestone)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        closedAt = try container.sdkDecodeNullable(.closedAt)
-        mergedAt = try container.sdkDecodeNullable(.mergedAt)
-        mergeCommitSha = try container.sdkDecodeNullable(.mergeCommitSha)
-        assignee = try container.sdkDecodeNullable(.assignee)
-        head = try container.sdkDecodeRequired(.head)
-        base = try container.sdkDecodeRequired(.base)
-        links = try container.sdkDecodeRequired(.links)
-        authorAssociation = try container.sdkDecodeRequired(.authorAssociation)
-        autoMerge = try container.sdkDecodeNullable(.autoMerge)
-        activeLockReason = try container.sdkDecodeIfPresent(.activeLockReason)
-        assignees = try container.sdkDecodeIfPresent(.assignees)
-        requestedReviewers = try container.sdkDecodeIfPresent(.requestedReviewers)
-        requestedTeams = try container.sdkDecodeIfPresent(.requestedTeams)
-        stack = try container.sdkDecodeIfPresent(.stack)
-        draft = try container.sdkDecodeIfPresent(.draft)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        self.diffUrl = try container.sdkDecodeRequired(.diffUrl)
+        self.patchUrl = try container.sdkDecodeRequired(.patchUrl)
+        self.issueUrl = try container.sdkDecodeRequired(.issueUrl)
+        self.commitsUrl = try container.sdkDecodeRequired(.commitsUrl)
+        self.reviewCommentsUrl = try container.sdkDecodeRequired(.reviewCommentsUrl)
+        self.reviewCommentUrl = try container.sdkDecodeRequired(.reviewCommentUrl)
+        self.commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
+        self.statusesUrl = try container.sdkDecodeRequired(.statusesUrl)
+        self.number = try container.sdkDecodeRequired(.number)
+        self.state = try container.sdkDecodeRequired(.state)
+        self.locked = try container.sdkDecodeRequired(.locked)
+        self.title = try container.sdkDecodeRequired(.title)
+        self.user = try container.sdkDecodeNullable(.user)
+        self.body = try container.sdkDecodeNullable(.body)
+        self.labels = try container.sdkDecodeRequired(.labels)
+        self.milestone = try container.sdkDecodeNullable(.milestone)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        self.closedAt = try container.sdkDecodeNullable(.closedAt)
+        self.mergedAt = try container.sdkDecodeNullable(.mergedAt)
+        self.mergeCommitSha = try container.sdkDecodeNullable(.mergeCommitSha)
+        self.assignee = try container.sdkDecodeNullable(.assignee)
+        self.head = try container.sdkDecodeRequired(.head)
+        self.base = try container.sdkDecodeRequired(.base)
+        self.links = try container.sdkDecodeRequired(.links)
+        self.authorAssociation = try container.sdkDecodeRequired(.authorAssociation)
+        self.autoMerge = try container.sdkDecodeNullable(.autoMerge)
+        self.activeLockReason = try container.sdkDecodeIfPresent(.activeLockReason)
+        self.assignees = try container.sdkDecodeIfPresent(.assignees)
+        self.requestedReviewers = try container.sdkDecodeIfPresent(.requestedReviewers)
+        self.requestedTeams = try container.sdkDecodeIfPresent(.requestedTeams)
+        self.stack = try container.sdkDecodeIfPresent(.stack)
+        self.draft = try container.sdkDecodeIfPresent(.draft)
         try sdkValidateConstraintsPart1()
         try sdkValidateConstraintsPart2()
     }
 }
 
-public extension PullRequestSimple {
-    init(
-        url: String,
-        id: Int,
-        nodeId: String,
-        htmlUrl: String,
-        diffUrl: String,
-        patchUrl: String,
-        issueUrl: String,
-        commitsUrl: String,
-        reviewCommentsUrl: String,
-        reviewCommentUrl: String,
-        commentsUrl: String,
-        statusesUrl: String,
-        number: Int,
-        state: String,
-        locked: Bool,
-        title: String,
-        user: NullableSimpleUser?,
-        body: String?,
-        labels: [PullRequestSimpleLabelsItem],
-        milestone: NullableMilestone?,
-        createdAt: Date,
-        updatedAt: Date,
-        closedAt: Date?,
-        mergedAt: Date?,
-        mergeCommitSha: String?,
-        assignee: NullableSimpleUser?,
-        head: PullRequestSimpleHead,
-        base: PullRequestSimpleBase,
-        links: PullRequestSimpleLinks,
-        authorAssociation: AuthorAssociation,
-        autoMerge: AutoMerge?,
-        activeLockReason: String? = nil,
-        assignees: [SimpleUser]? = nil,
-        requestedReviewers: [SimpleUser]? = nil,
-        requestedTeams: [Team]? = nil,
-        stack: PullRequestStack? = nil,
-        draft: Bool? = nil
-    ) throws {
+extension PullRequestSimple {
+    public init(url: String, id: Int, nodeId: String, htmlUrl: String, diffUrl: String, patchUrl: String, issueUrl: String, commitsUrl: String, reviewCommentsUrl: String, reviewCommentUrl: String, commentsUrl: String, statusesUrl: String, number: Int, state: String, locked: Bool, title: String, user: NullableSimpleUser?, body: String?, labels: [PullRequestSimpleLabelsItem], milestone: NullableMilestone?, createdAt: Date, updatedAt: Date, closedAt: Date?, mergedAt: Date?, mergeCommitSha: String?, assignee: NullableSimpleUser?, head: PullRequestSimpleHead, base: PullRequestSimpleBase, links: PullRequestSimpleLinks, authorAssociation: AuthorAssociation, autoMerge: AutoMerge?, activeLockReason: String? = nil, assignees: [SimpleUser]? = nil, requestedReviewers: [SimpleUser]? = nil, requestedTeams: [Team]? = nil, stack: PullRequestStack? = nil, draft: Bool? = nil) throws {
         (self.url, self.id) = (url, id)
         (self.nodeId, self.htmlUrl) = (nodeId, htmlUrl)
         (self.diffUrl, self.patchUrl) = (diffUrl, patchUrl)
@@ -523,18 +419,18 @@ public extension PullRequestSimple {
 
 extension PullRequestSimple {
     func sdkValidateConstraintsPart1() throws {
-        try sdkValidateUri("url", url)
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateUri("diff_url", diffUrl)
-        try sdkValidateUri("patch_url", patchUrl)
-        try sdkValidateUri("issue_url", issueUrl)
-        try sdkValidateUri("commits_url", commitsUrl)
-        try sdkValidateUri("review_comments_url", reviewCommentsUrl)
-        try sdkValidateUri("comments_url", commentsUrl)
-        try sdkValidateUri("statuses_url", statusesUrl)
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
-        if let value = closedAt {
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("diff_url", self.diffUrl)
+            try sdkValidateUri("patch_url", self.patchUrl)
+            try sdkValidateUri("issue_url", self.issueUrl)
+            try sdkValidateUri("commits_url", self.commitsUrl)
+            try sdkValidateUri("review_comments_url", self.reviewCommentsUrl)
+            try sdkValidateUri("comments_url", self.commentsUrl)
+            try sdkValidateUri("statuses_url", self.statusesUrl)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+        if let value = self.closedAt {
             try sdkValidateDateTime("closed_at", sdkWireString(value))
         }
     }
@@ -542,7 +438,7 @@ extension PullRequestSimple {
 
 extension PullRequestSimple {
     func sdkValidateConstraintsPart2() throws {
-        if let value = mergedAt {
+        if let value = self.mergedAt {
             try sdkValidateDateTime("merged_at", sdkWireString(value))
         }
     }
@@ -578,39 +474,28 @@ public struct PullRequestSimpleLabelsItem: Codable {
         case archivedBy = "archived_by"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension PullRequestSimpleLabelsItem {
-    init(from decoder: Decoder) throws {
+extension PullRequestSimpleLabelsItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        url = try container.sdkDecodeRequired(.url)
-        name = try container.sdkDecodeRequired(.name)
-        description = try container.sdkDecodeRequired(.description)
-        color = try container.sdkDecodeRequired(.color)
-        self.default = try container.sdkDecodeRequired(.default)
-        archivedBy = try container.sdkDecodeNullable(.archivedBy)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.description = try container.sdkDecodeRequired(.description)
+        self.color = try container.sdkDecodeRequired(.color)
+        self.`default` = try container.sdkDecodeRequired(.`default`)
+        self.archivedBy = try container.sdkDecodeNullable(.archivedBy)
     }
 }
 
-public extension PullRequestSimpleLabelsItem {
-    init(
-        id: Int,
-        nodeId: String,
-        url: String,
-        name: String,
-        description: String,
-        color: String,
-        default: Bool,
-        archivedBy: SimpleUser?
-    ) {
+extension PullRequestSimpleLabelsItem {
+    public init(id: Int, nodeId: String, url: String, name: String, description: String, color: String, `default`: Bool, archivedBy: SimpleUser?) {
         (self.id, self.nodeId) = (id, nodeId)
         (self.url, self.name) = (url, name)
         (self.description, self.color) = (description, color)
-        (self.default, self.archivedBy) = (`default`, archivedBy)
+        (self.`default`, self.archivedBy) = (`default`, archivedBy)
     }
 }

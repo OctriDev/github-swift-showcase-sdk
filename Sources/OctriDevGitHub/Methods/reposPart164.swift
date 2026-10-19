@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ReposMethods {
+extension ReposMethods {
     /// When authenticating as a user, this endpoint will list all currently open repository invitations for that user.
     ///
     /// - Parameters:
@@ -18,66 +18,26 @@ public extension ReposMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    static func reposListInvitationsForAuthenticatedUser(
-        config: ClientConfig,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [RepositoryInvitation] {
-        try await (sdkRequest(
-            "GET",
-            "/user/repository_invitations",
-            config: config,
-            query: [
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("page", value: page),
-            ],
-            decoder: .json,
-            operationId: "reposListInvitationsForAuthenticatedUser",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self]
-        )).data
+    public static func reposListInvitationsForAuthenticatedUser(config: ClientConfig, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [RepositoryInvitation] {
+        return try (await sdkRequest("GET", "/user/repository_invitations", config: config, query: [
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("page", value: page),
+        ], decoder: .json, operationId: "reposListInvitationsForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
     }
 
-    /// Accepts a repository invitation for the authenticated user. Use `invitation_id` to identify the invitation to
-    /// accept. A 204 response confirms acceptance without returning a response body.
+    /// Accepts a repository invitation for the authenticated user. Use `invitation_id` to identify the invitation to accept. A 204 response confirms acceptance without returning a response body.
     ///
     /// - Parameters:
     /// - invitationId: The unique identifier of the invitation.
-    static func reposAcceptInvitationForAuthenticatedUser(
-        config: ClientConfig,
-        invitationId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "PATCH",
-            ["/user/repository_invitations/", sdkEncodePathSegment(sdkWireString(invitationId))].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "reposAcceptInvitationForAuthenticatedUser",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self, "409": BasicError.self]
-        )).data
+    public static func reposAcceptInvitationForAuthenticatedUser(config: ClientConfig, invitationId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("PATCH", ["/user/repository_invitations/", sdkEncodePathSegment(sdkWireString(invitationId))].joined(), config: config, decoder: .empty, operationId: "reposAcceptInvitationForAuthenticatedUser", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "409": BasicError.self])).data
     }
 
-    /// Declines a repository invitation for the authenticated user. Use `invitation_id` to identify the invitation to
-    /// decline. A 204 response confirms the invitation was declined without returning a response body.
+    /// Declines a repository invitation for the authenticated user. Use `invitation_id` to identify the invitation to decline. A 204 response confirms the invitation was declined without returning a response body.
     ///
     /// - Parameters:
     /// - invitationId: The unique identifier of the invitation.
-    static func reposDeclineInvitationForAuthenticatedUser(
-        config: ClientConfig,
-        invitationId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "DELETE",
-            ["/user/repository_invitations/", sdkEncodePathSegment(sdkWireString(invitationId))].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "reposDeclineInvitationForAuthenticatedUser",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self, "409": BasicError.self]
-        )).data
+    public static func reposDeclineInvitationForAuthenticatedUser(config: ClientConfig, invitationId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("DELETE", ["/user/repository_invitations/", sdkEncodePathSegment(sdkWireString(invitationId))].joined(), config: config, decoder: .empty, operationId: "reposDeclineInvitationForAuthenticatedUser", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "409": BasicError.self])).data
     }
 }

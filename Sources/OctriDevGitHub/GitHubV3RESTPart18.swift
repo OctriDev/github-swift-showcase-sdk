@@ -3,322 +3,102 @@
 
 import Foundation
 
-public extension DependabotNamespace {
-    /// Lists all secrets available in an organization without revealing their encrypted values. OAuth app tokens and
-    /// personal access tokens (classic) need the `admin:org` scope to use this endpoint.
-    func listOrgSecrets(
-        org: String,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> DependabotListOrgSecretsResponse {
-        try await DependabotMethods.dependabotListOrgSecrets(
-            config: config,
-            org: org,
-            perPage: perPage,
-            page: page,
-            requestOptions: requestOptions
-        )
+extension DependabotNamespace {
+/// Lists all secrets available in an organization without revealing their encrypted values. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    public func listOrgSecrets(org: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> DependabotListOrgSecretsResponse {
+        return try await DependabotMethods.dependabotListOrgSecrets(config: config, org: org, perPage: perPage, page: page, requestOptions: requestOptions)
     }
 
-    /// Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or
-    /// update secrets. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this
-    /// endpoint.
-    func getOrgPublicKey(org: String, requestOptions: RequestOptions? = nil) async throws -> DependabotPublicKey {
-        try await DependabotMethods.dependabotGetOrgPublicKey(config: config, org: org, requestOptions: requestOptions)
+/// Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or update secrets. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    public func getOrgPublicKey(org: String, requestOptions: RequestOptions? = nil) async throws -> DependabotPublicKey {
+        return try await DependabotMethods.dependabotGetOrgPublicKey(config: config, org: org, requestOptions: requestOptions)
     }
 
-    /// Gets a single organization secret without revealing its encrypted value. OAuth app tokens and personal access
-    /// tokens (classic) need the `admin:org` scope to use this endpoint.
-    func getOrgSecret(
-        org: String,
-        secretName: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> OrganizationDependabotSecret {
-        try await DependabotMethods.dependabotGetOrgSecret(
-            config: config,
-            org: org,
-            secretName: secretName,
-            requestOptions: requestOptions
-        )
+/// Gets a single organization secret without revealing its encrypted value. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    public func getOrgSecret(org: String, secretName: String, requestOptions: RequestOptions? = nil) async throws -> OrganizationDependabotSecret {
+        return try await DependabotMethods.dependabotGetOrgSecret(config: config, org: org, secretName: secretName, requestOptions: requestOptions)
     }
 
-    /// Creates or updates an organization secret with an encrypted value. Encrypt your secret using
-    /// [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages). For more information, see
-    /// "[Encrypting secrets for the REST
-    /// API](https://docs.github.com/rest/guides/encrypting-secrets-for-the-rest-api)." OAuth app tokens and personal
-    /// access tokens (classic) need the `admin:org` scope to use this endpoint.
-    func createOrUpdateOrgSecret(
-        org: String,
-        secretName: String,
-        visibility: DependabotCreateOrUpdateOrgSecretRequestBodyVisibility,
-        encryptedValue: String? = nil,
-        keyId: String? = nil,
-        selectedRepositoryIds: [DependabotCreateOrUpdateOrgSecretRequestBodySelectedRepositoryIdsItem]? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> EmptyObject {
-        try await DependabotMethods.dependabotCreateOrUpdateOrgSecret(
-            config: config,
-            org: org,
-            secretName: secretName,
-            visibility: visibility,
-            encryptedValue: encryptedValue,
-            keyId: keyId,
-            selectedRepositoryIds: selectedRepositoryIds,
-            requestOptions: requestOptions
-        )
+/// Creates or updates an organization secret with an encrypted value. Encrypt your secret using [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages). For more information, see "[Encrypting secrets for the REST API](https://docs.github.com/rest/guides/encrypting-secrets-for-the-rest-api)." OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    public func createOrUpdateOrgSecret(org: String, secretName: String, visibility: DependabotCreateOrUpdateOrgSecretRequestBodyVisibility, encryptedValue: String? = nil, keyId: String? = nil, selectedRepositoryIds: [DependabotCreateOrUpdateOrgSecretRequestBodySelectedRepositoryIdsItem]? = nil, requestOptions: RequestOptions? = nil) async throws -> EmptyObject {
+        return try await DependabotMethods.dependabotCreateOrUpdateOrgSecret(config: config, org: org, secretName: secretName, visibility: visibility, encryptedValue: encryptedValue, keyId: keyId, selectedRepositoryIds: selectedRepositoryIds, requestOptions: requestOptions)
     }
 
-    /// Deletes a secret in an organization using the secret name. OAuth app tokens and personal access tokens (classic)
-    /// need the `admin:org` scope to use this endpoint.
-    func deleteOrgSecret(
-        org: String,
-        secretName: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await DependabotMethods.dependabotDeleteOrgSecret(
-            config: config,
-            org: org,
-            secretName: secretName,
-            requestOptions: requestOptions
-        )
+/// Deletes a secret in an organization using the secret name. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    public func deleteOrgSecret(org: String, secretName: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await DependabotMethods.dependabotDeleteOrgSecret(config: config, org: org, secretName: secretName, requestOptions: requestOptions)
     }
 
-    /// Lists all repositories that have been selected when the `visibility` for repository access to a secret is set to
-    /// `selected`. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this
-    /// endpoint.
-    func listSelectedReposForOrgSecret(
-        org: String,
-        secretName: String,
-        page: Int? = nil,
-        perPage: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> DependabotListSelectedReposForOrgSecretResponse {
-        try await DependabotMethods.dependabotListSelectedReposForOrgSecret(
-            config: config,
-            org: org,
-            secretName: secretName,
-            page: page,
-            perPage: perPage,
-            requestOptions: requestOptions
-        )
+/// Lists all repositories that have been selected when the `visibility` for repository access to a secret is set to `selected`. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    public func listSelectedReposForOrgSecret(org: String, secretName: String, page: Int? = nil, perPage: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> DependabotListSelectedReposForOrgSecretResponse {
+        return try await DependabotMethods.dependabotListSelectedReposForOrgSecret(config: config, org: org, secretName: secretName, page: page, perPage: perPage, requestOptions: requestOptions)
     }
 
-    /// Replaces all repositories for an organization secret when the `visibility` for repository access is set to
-    /// `selected`. The visibility is set when you [Create or update an organization
-    /// secret](https://docs.github.com/rest/dependabot/secrets#create-or-update-an-organization-secret). OAuth app
-    /// tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
-    func setSelectedReposForOrgSecret(
-        org: String,
-        secretName: String,
-        selectedRepositoryIds: [Int],
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await DependabotMethods.dependabotSetSelectedReposForOrgSecret(
-            config: config,
-            org: org,
-            secretName: secretName,
-            selectedRepositoryIds: selectedRepositoryIds,
-            requestOptions: requestOptions
-        )
+/// Replaces all repositories for an organization secret when the `visibility` for repository access is set to `selected`. The visibility is set when you [Create or update an organization secret](https://docs.github.com/rest/dependabot/secrets#create-or-update-an-organization-secret). OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    public func setSelectedReposForOrgSecret(org: String, secretName: String, selectedRepositoryIds: [Int], requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await DependabotMethods.dependabotSetSelectedReposForOrgSecret(config: config, org: org, secretName: secretName, selectedRepositoryIds: selectedRepositoryIds, requestOptions: requestOptions)
     }
 
-    /// Adds a repository to an organization secret's selected repository list. Use this operation when the secret's
-    /// repository `visibility` is set to `selected`; OAuth app tokens and personal access tokens (classic) need the
-    /// `admin:org` scope.
+/// Adds a repository to an organization secret's selected repository list. Use this operation when the secret's repository `visibility` is set to `selected`; OAuth app tokens and personal access tokens (classic) need the `admin:org` scope.
     ///
-    /// Adds a repository to an organization secret when the `visibility` for repository access is set to `selected`.
-    /// The visibility is set when you [Create or update an organization
-    /// secret](https://docs.github.com/rest/dependabot/secrets#create-or-update-an-organization-secret). OAuth app
-    /// tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
-    func addSelectedRepoToOrgSecret(
-        org: String,
-        secretName: String,
-        repositoryId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await DependabotMethods.dependabotAddSelectedRepoToOrgSecret(
-            config: config,
-            org: org,
-            secretName: secretName,
-            repositoryId: repositoryId,
-            requestOptions: requestOptions
-        )
+    /// Adds a repository to an organization secret when the `visibility` for repository access is set to `selected`. The visibility is set when you [Create or update an organization secret](https://docs.github.com/rest/dependabot/secrets#create-or-update-an-organization-secret). OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    public func addSelectedRepoToOrgSecret(org: String, secretName: String, repositoryId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await DependabotMethods.dependabotAddSelectedRepoToOrgSecret(config: config, org: org, secretName: secretName, repositoryId: repositoryId, requestOptions: requestOptions)
     }
 }
 
-public extension DependabotNamespace {
-    /// Removes a repository from an organization secret's selected repository list. Use this operation when the
-    /// secret's repository `visibility` is set to `selected`; OAuth app tokens and personal access tokens (classic)
-    /// need the `admin:org` scope.
+extension DependabotNamespace {
+/// Removes a repository from an organization secret's selected repository list. Use this operation when the secret's repository `visibility` is set to `selected`; OAuth app tokens and personal access tokens (classic) need the `admin:org` scope.
     ///
-    /// Removes a repository from an organization secret when the `visibility` for repository access is set to
-    /// `selected`. The visibility is set when you [Create or update an organization
-    /// secret](https://docs.github.com/rest/dependabot/secrets#create-or-update-an-organization-secret). OAuth app
-    /// tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
-    func removeSelectedRepoFromOrgSecret(
-        org: String,
-        secretName: String,
-        repositoryId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await DependabotMethods.dependabotRemoveSelectedRepoFromOrgSecret(
-            config: config,
-            org: org,
-            secretName: secretName,
-            repositoryId: repositoryId,
-            requestOptions: requestOptions
-        )
+    /// Removes a repository from an organization secret when the `visibility` for repository access is set to `selected`. The visibility is set when you [Create or update an organization secret](https://docs.github.com/rest/dependabot/secrets#create-or-update-an-organization-secret). OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    public func removeSelectedRepoFromOrgSecret(org: String, secretName: String, repositoryId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await DependabotMethods.dependabotRemoveSelectedRepoFromOrgSecret(config: config, org: org, secretName: secretName, repositoryId: repositoryId, requestOptions: requestOptions)
     }
 
-    /// OAuth app tokens and personal access tokens (classic) need the `security_events` scope to use this endpoint. If
-    /// this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
-    func listAlertsForRepo(
-        options: DependabotMethods.DependabotListAlertsForRepoOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [DependabotAlert] {
-        try await DependabotMethods.dependabotListAlertsForRepo(
-            config: config,
-            options: options,
-            requestOptions: requestOptions
-        )
+/// OAuth app tokens and personal access tokens (classic) need the `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
+    public func listAlertsForRepo(options: DependabotMethods.DependabotListAlertsForRepoOptions, requestOptions: RequestOptions? = nil) async throws -> [DependabotAlert] {
+        return try await DependabotMethods.dependabotListAlertsForRepo(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Retrieves a Dependabot alert from a repository by its alert number. Use the `alert_number` value returned by the
-    /// repository's Dependabot alerts listing, and provide a token with the required scope for the repository's
-    /// visibility.
+/// Retrieves a Dependabot alert from a repository by its alert number. Use the `alert_number` value returned by the repository's Dependabot alerts listing, and provide a token with the required scope for the repository's visibility.
     ///
-    /// OAuth app tokens and personal access tokens (classic) need the `security_events` scope to use this endpoint. If
-    /// this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
-    func getAlert(
-        owner: String,
-        repo: String,
-        alertNumber: AlertNumber,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> DependabotAlert {
-        try await DependabotMethods.dependabotGetAlert(
-            config: config,
-            owner: owner,
-            repo: repo,
-            alertNumber: alertNumber,
-            requestOptions: requestOptions
-        )
+    /// OAuth app tokens and personal access tokens (classic) need the `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
+    public func getAlert(owner: String, repo: String, alertNumber: AlertNumber, requestOptions: RequestOptions? = nil) async throws -> DependabotAlert {
+        return try await DependabotMethods.dependabotGetAlert(config: config, owner: owner, repo: repo, alertNumber: alertNumber, requestOptions: requestOptions)
     }
 
-    /// Updates a Dependabot alert in a repository, changing its state, dismissal details, assignees, or agent
-    /// assignment. Provide `state` or `assignees` at minimum; when dismissing an alert, include `dismissed_reason`, and
-    /// use `assignees` to replace or clear the existing assignments. The authenticated user needs access to repository
-    /// security alerts, and OAuth app tokens or classic personal access tokens need the `security_events` scope, or
-    /// `public_repo` for public repositories.
+/// Updates a Dependabot alert in a repository, changing its state, dismissal details, assignees, or agent assignment. Provide `state` or `assignees` at minimum; when dismissing an alert, include `dismissed_reason`, and use `assignees` to replace or clear the existing assignments. The authenticated user needs access to repository security alerts, and OAuth app tokens or classic personal access tokens need the `security_events` scope, or `public_repo` for public repositories.
     ///
-    /// The authenticated user must have access to security alerts for the repository to use this endpoint. For more
-    /// information, see "[Granting access to security alerts](https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-security-and-analysis-settings-for-your-repository#granting-access-to-security-alerts)."
-    /// OAuth app tokens and personal access tokens (classic) need the `security_events` scope to use this endpoint. If
-    /// this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
-    func updateAlert(
-        options: DependabotMethods.DependabotUpdateAlertOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> DependabotAlert {
-        try await DependabotMethods.dependabotUpdateAlert(
-            config: config,
-            options: options,
-            requestOptions: requestOptions
-        )
+    /// The authenticated user must have access to security alerts for the repository to use this endpoint. For more information, see "[Granting access to security alerts](https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-security-and-analysis-settings-for-your-repository#granting-access-to-security-alerts)." OAuth app tokens and personal access tokens (classic) need the `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
+    public func updateAlert(options: DependabotMethods.DependabotUpdateAlertOptions, requestOptions: RequestOptions? = nil) async throws -> DependabotAlert {
+        return try await DependabotMethods.dependabotUpdateAlert(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Lists all secrets available in a repository without revealing their encrypted values. OAuth app tokens and
-    /// personal access tokens (classic) need the `repo` scope to use this endpoint.
-    func listRepoSecrets(
-        owner: String,
-        repo: String,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> DependabotListRepoSecretsResponse {
-        try await DependabotMethods.dependabotListRepoSecrets(
-            config: config,
-            owner: owner,
-            repo: repo,
-            perPage: perPage,
-            page: page,
-            requestOptions: requestOptions
-        )
+/// Lists all secrets available in a repository without revealing their encrypted values. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func listRepoSecrets(owner: String, repo: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> DependabotListRepoSecretsResponse {
+        return try await DependabotMethods.dependabotListRepoSecrets(config: config, owner: owner, repo: repo, perPage: perPage, page: page, requestOptions: requestOptions)
     }
 
-    /// Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or
-    /// update secrets. Anyone with read access to the repository can use this endpoint. OAuth app tokens and personal
-    /// access tokens (classic) need the `repo` scope to use this endpoint if the repository is private.
-    func getRepoPublicKey(
-        owner: String,
-        repo: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> DependabotPublicKey {
-        try await DependabotMethods.dependabotGetRepoPublicKey(
-            config: config,
-            owner: owner,
-            repo: repo,
-            requestOptions: requestOptions
-        )
+/// Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or update secrets. Anyone with read access to the repository can use this endpoint. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint if the repository is private.
+    public func getRepoPublicKey(owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> DependabotPublicKey {
+        return try await DependabotMethods.dependabotGetRepoPublicKey(config: config, owner: owner, repo: repo, requestOptions: requestOptions)
     }
 
-    /// Gets a single repository secret without revealing its encrypted value. OAuth app tokens and personal access
-    /// tokens (classic) need the `repo` scope to use this endpoint.
-    func getRepoSecret(
-        owner: String,
-        repo: String,
-        secretName: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> DependabotSecret {
-        try await DependabotMethods.dependabotGetRepoSecret(
-            config: config,
-            owner: owner,
-            repo: repo,
-            secretName: secretName,
-            requestOptions: requestOptions
-        )
+/// Gets a single repository secret without revealing its encrypted value. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func getRepoSecret(owner: String, repo: String, secretName: String, requestOptions: RequestOptions? = nil) async throws -> DependabotSecret {
+        return try await DependabotMethods.dependabotGetRepoSecret(config: config, owner: owner, repo: repo, secretName: secretName, requestOptions: requestOptions)
     }
 
-    /// Creates or updates a repository secret with an encrypted value. Encrypt your secret using
-    /// [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages). For more information, see
-    /// "[Encrypting secrets for the REST
-    /// API](https://docs.github.com/rest/guides/encrypting-secrets-for-the-rest-api)." OAuth app tokens and personal
-    /// access tokens (classic) need the `repo` scope to use this endpoint.
-    func createOrUpdateRepoSecret(
-        owner: String,
-        repo: String,
-        secretName: String,
-        encryptedValue: String? = nil,
-        keyId: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> EmptyObject {
-        try await DependabotMethods.dependabotCreateOrUpdateRepoSecret(
-            config: config,
-            owner: owner,
-            repo: repo,
-            secretName: secretName,
-            encryptedValue: encryptedValue,
-            keyId: keyId,
-            requestOptions: requestOptions
-        )
+/// Creates or updates a repository secret with an encrypted value. Encrypt your secret using [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages). For more information, see "[Encrypting secrets for the REST API](https://docs.github.com/rest/guides/encrypting-secrets-for-the-rest-api)." OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func createOrUpdateRepoSecret(owner: String, repo: String, secretName: String, encryptedValue: String? = nil, keyId: String? = nil, requestOptions: RequestOptions? = nil) async throws -> EmptyObject {
+        return try await DependabotMethods.dependabotCreateOrUpdateRepoSecret(config: config, owner: owner, repo: repo, secretName: secretName, encryptedValue: encryptedValue, keyId: keyId, requestOptions: requestOptions)
     }
 }
 
-public extension DependabotNamespace {
-    /// Deletes a secret in a repository using the secret name. OAuth app tokens and personal access tokens (classic)
-    /// need the `repo` scope to use this endpoint.
-    func deleteRepoSecret(
-        owner: String,
-        repo: String,
-        secretName: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await DependabotMethods.dependabotDeleteRepoSecret(
-            config: config,
-            owner: owner,
-            repo: repo,
-            secretName: secretName,
-            requestOptions: requestOptions
-        )
+extension DependabotNamespace {
+/// Deletes a secret in a repository using the secret name. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func deleteRepoSecret(owner: String, repo: String, secretName: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await DependabotMethods.dependabotDeleteRepoSecret(config: config, owner: owner, repo: repo, secretName: secretName, requestOptions: requestOptions)
     }
 }
 
@@ -328,272 +108,87 @@ public class ActivityNamespace {
         self.config = config
     }
 
-    /// > [!NOTE] > This API is not built to serve real-time use cases. Depending on the time of day, event latency can
-    /// be anywhere from 30s to 6h.
-    public func listPublicEvents(
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [Event] {
-        try await ActivityMethods.activityListPublicEvents(
-            config: config,
-            perPage: perPage,
-            page: page,
-            requestOptions: requestOptions
-        )
+/// > [!NOTE] > This API is not built to serve real-time use cases. Depending on the time of day, event latency can be anywhere from 30s to 6h.
+    public func listPublicEvents(perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [Event] {
+        return try await ActivityMethods.activityListPublicEvents(config: config, perPage: perPage, page: page, requestOptions: requestOptions)
     }
 
-    /// Lists the feeds available to the authenticated user. The response provides a URL for each feed. You can then get
-    /// a specific feed by sending a request to one of the feed URLs. * **Timeline**: The GitHub global public timeline
-    /// * **User**: The public timeline for any user, using `uri_template`. For more information, see
-    /// "[Hypermedia](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#hypermedia)." *
-    /// **Current user public**: The public timeline for the authenticated user * **Current user**: The private timeline
-    /// for the authenticated user * **Current user actor**: The private timeline for activity created by the
-    /// authenticated user * **Current user organizations**: The private timeline for the organizations the
-    /// authenticated user is a member of. * **Security advisories**: A collection of public announcements that provide
-    /// information about security-related vulnerabilities in software on GitHub. By default, timeline resources are
-    /// returned in JSON. You can specify the `application/atom+xml` type in the `Accept` header to return timeline
-    /// resources in Atom format. For more information, see "[Media
-    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." >
-    /// [!NOTE] > Private feeds are only returned when [authenticating via Basic
-    /// Auth](https://docs.github.com/rest/authentication/authenticating-to-the-rest-api#using-basic-authentication)
-    /// since current feed URIs use the older, non revocable auth tokens.
+/// Lists the feeds available to the authenticated user. The response provides a URL for each feed. You can then get a specific feed by sending a request to one of the feed URLs. * **Timeline**: The GitHub global public timeline * **User**: The public timeline for any user, using `uri_template`. For more information, see "[Hypermedia](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#hypermedia)." * **Current user public**: The public timeline for the authenticated user * **Current user**: The private timeline for the authenticated user * **Current user actor**: The private timeline for activity created by the authenticated user * **Current user organizations**: The private timeline for the organizations the authenticated user is a member of. * **Security advisories**: A collection of public announcements that provide information about security-related vulnerabilities in software on GitHub. By default, timeline resources are returned in JSON. You can specify the `application/atom+xml` type in the `Accept` header to return timeline resources in Atom format. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." > [!NOTE] > Private feeds are only returned when [authenticating via Basic Auth](https://docs.github.com/rest/authentication/authenticating-to-the-rest-api#using-basic-authentication) since current feed URIs use the older, non revocable auth tokens.
     public func getFeeds(requestOptions: RequestOptions? = nil) async throws -> Feed {
-        try await ActivityMethods.activityGetFeeds(config: config, requestOptions: requestOptions)
+        return try await ActivityMethods.activityGetFeeds(config: config, requestOptions: requestOptions)
     }
 
-    /// > [!NOTE] > This API is not built to serve real-time use cases. Depending on the time of day, event latency can
-    /// be anywhere from 30s to 6h.
-    public func listPublicEventsForRepoNetwork(
-        owner: String,
-        repo: String,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [Event] {
-        try await ActivityMethods.activityListPublicEventsForRepoNetwork(
-            config: config,
-            owner: owner,
-            repo: repo,
-            perPage: perPage,
-            page: page,
-            requestOptions: requestOptions
-        )
+/// > [!NOTE] > This API is not built to serve real-time use cases. Depending on the time of day, event latency can be anywhere from 30s to 6h.
+    public func listPublicEventsForRepoNetwork(owner: String, repo: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [Event] {
+        return try await ActivityMethods.activityListPublicEventsForRepoNetwork(config: config, owner: owner, repo: repo, perPage: perPage, page: page, requestOptions: requestOptions)
     }
 
-    /// List all notifications for the current user, sorted by most recently updated.
-    public func listNotificationsForAuthenticatedUser(
-        all: Bool? = nil,
-        participating: Bool? = nil,
-        since: Date? = nil,
-        before: Date? = nil,
-        page: Int? = nil,
-        perPage: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [ThreadModel] {
-        try await ActivityMethods.activityListNotificationsForAuthenticatedUser(
-            config: config,
-            all: all,
-            participating: participating,
-            since: since,
-            before: before,
-            page: page,
-            perPage: perPage,
-            requestOptions: requestOptions
-        )
+/// List all notifications for the current user, sorted by most recently updated.
+    public func listNotificationsForAuthenticatedUser(all: Bool? = nil, participating: Bool? = nil, since: Date? = nil, before: Date? = nil, page: Int? = nil, perPage: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [ThreadModel] {
+        return try await ActivityMethods.activityListNotificationsForAuthenticatedUser(config: config, all: all, participating: participating, since: since, before: before, page: page, perPage: perPage, requestOptions: requestOptions)
     }
 
-    /// Marks all notifications as "read" for the current user. If the number of notifications is too large to complete
-    /// in one request, you will receive a `202 Accepted` status and GitHub will run an asynchronous process to mark
-    /// notifications as "read." To check whether any "unread" notifications remain, you can use the [List notifications
-    /// for the authenticated
-    /// user](https://docs.github.com/rest/activity/notifications#list-notifications-for-the-authenticated-user)
-    /// endpoint and pass the query parameter `all=false`.
-    public func markNotificationsAsRead(
-        lastReadAt: Date? = nil,
-        read: Bool? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ActivityMarkNotificationsAsReadResponse {
-        try await ActivityMethods.activityMarkNotificationsAsRead(
-            config: config,
-            lastReadAt: lastReadAt,
-            read: read,
-            requestOptions: requestOptions
-        )
+/// Marks all notifications as "read" for the current user. If the number of notifications is too large to complete in one request, you will receive a `202 Accepted` status and GitHub will run an asynchronous process to mark notifications as "read." To check whether any "unread" notifications remain, you can use the [List notifications for the authenticated user](https://docs.github.com/rest/activity/notifications#list-notifications-for-the-authenticated-user) endpoint and pass the query parameter `all=false`.
+    public func markNotificationsAsRead(lastReadAt: Date? = nil, read: Bool? = nil, requestOptions: RequestOptions? = nil) async throws -> ActivityMarkNotificationsAsReadResponse {
+        return try await ActivityMethods.activityMarkNotificationsAsRead(config: config, lastReadAt: lastReadAt, read: read, requestOptions: requestOptions)
     }
 
-    /// Retrieves a notification thread by its unique identifier. Use the `thread_id` value returned in a notification's
-    /// `id` field to inspect the thread's repository, subject, unread state, and subscription URL.
+/// Retrieves a notification thread by its unique identifier. Use the `thread_id` value returned in a notification's `id` field to inspect the thread's repository, subject, unread state, and subscription URL.
     ///
     /// Gets information about a notification thread.
     public func getThread(threadId: Int, requestOptions: RequestOptions? = nil) async throws -> ThreadModel {
-        try await ActivityMethods.activityGetThread(config: config, threadId: threadId, requestOptions: requestOptions)
+        return try await ActivityMethods.activityGetThread(config: config, threadId: threadId, requestOptions: requestOptions)
     }
 
-    /// Marks a thread as "read." Marking a thread as "read" is equivalent to clicking a notification in your
-    /// notification inbox on GitHub: https://github.com/notifications.
-    public func markThreadAsRead(
-        threadId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await ActivityMethods.activityMarkThreadAsRead(
-            config: config,
-            threadId: threadId,
-            requestOptions: requestOptions
-        )
+/// Marks a thread as "read." Marking a thread as "read" is equivalent to clicking a notification in your notification inbox on GitHub: https://github.com/notifications.
+    public func markThreadAsRead(threadId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await ActivityMethods.activityMarkThreadAsRead(config: config, threadId: threadId, requestOptions: requestOptions)
     }
 
-    /// Marks a thread as "done." Marking a thread as "done" is equivalent to marking a notification in your
-    /// notification inbox on GitHub as done: https://github.com/notifications.
-    public func markThreadAsDone(
-        threadId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await ActivityMethods.activityMarkThreadAsDone(
-            config: config,
-            threadId: threadId,
-            requestOptions: requestOptions
-        )
+/// Marks a thread as "done." Marking a thread as "done" is equivalent to marking a notification in your notification inbox on GitHub as done: https://github.com/notifications.
+    public func markThreadAsDone(threadId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await ActivityMethods.activityMarkThreadAsDone(config: config, threadId: threadId, requestOptions: requestOptions)
     }
 }
 
-public extension ActivityNamespace {
-    /// This checks to see if the current user is subscribed to a thread. You can also [get a repository
-    /// subscription](https://docs.github.com/rest/activity/watching#get-a-repository-subscription). Note that
-    /// subscriptions are only generated if a user is participating in a conversation--for example, they've replied to
-    /// the thread, were **@mentioned**, or manually subscribe to a thread.
-    func getThreadSubscriptionForAuthenticatedUser(
-        threadId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ThreadSubscription {
-        try await ActivityMethods.activityGetThreadSubscriptionForAuthenticatedUser(
-            config: config,
-            threadId: threadId,
-            requestOptions: requestOptions
-        )
+extension ActivityNamespace {
+/// This checks to see if the current user is subscribed to a thread. You can also [get a repository subscription](https://docs.github.com/rest/activity/watching#get-a-repository-subscription). Note that subscriptions are only generated if a user is participating in a conversation--for example, they've replied to the thread, were **@mentioned**, or manually subscribe to a thread.
+    public func getThreadSubscriptionForAuthenticatedUser(threadId: Int, requestOptions: RequestOptions? = nil) async throws -> ThreadSubscription {
+        return try await ActivityMethods.activityGetThreadSubscriptionForAuthenticatedUser(config: config, threadId: threadId, requestOptions: requestOptions)
     }
 
-    /// If you are watching a repository, you receive notifications for all threads by default. Use this endpoint to
-    /// ignore future notifications for threads until you comment on the thread or get an **@mention**. You can also use
-    /// this endpoint to subscribe to threads that you are currently not receiving notifications for or to subscribed to
-    /// threads that you have previously ignored. Unsubscribing from a conversation in a repository that you are not
-    /// watching is functionally equivalent to the [Delete a thread
-    /// subscription](https://docs.github.com/rest/activity/notifications#delete-a-thread-subscription) endpoint.
-    func setThreadSubscription(
-        threadId: Int,
-        ignored: Bool? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ThreadSubscription {
-        try await ActivityMethods.activitySetThreadSubscription(
-            config: config,
-            threadId: threadId,
-            ignored: ignored,
-            requestOptions: requestOptions
-        )
+/// If you are watching a repository, you receive notifications for all threads by default. Use this endpoint to ignore future notifications for threads until you comment on the thread or get an **@mention**. You can also use this endpoint to subscribe to threads that you are currently not receiving notifications for or to subscribed to threads that you have previously ignored. Unsubscribing from a conversation in a repository that you are not watching is functionally equivalent to the [Delete a thread subscription](https://docs.github.com/rest/activity/notifications#delete-a-thread-subscription) endpoint.
+    public func setThreadSubscription(threadId: Int, ignored: Bool? = nil, requestOptions: RequestOptions? = nil) async throws -> ThreadSubscription {
+        return try await ActivityMethods.activitySetThreadSubscription(config: config, threadId: threadId, ignored: ignored, requestOptions: requestOptions)
     }
 
-    /// Mutes all future notifications for a conversation until you comment on the thread or get an **@mention**. If you
-    /// are watching the repository of the thread, you will still receive notifications. To ignore future notifications
-    /// for a repository you are watching, use the [Set a thread
-    /// subscription](https://docs.github.com/rest/activity/notifications#set-a-thread-subscription) endpoint and set
-    /// `ignore` to `true`.
-    func deleteThreadSubscription(
-        threadId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await ActivityMethods.activityDeleteThreadSubscription(
-            config: config,
-            threadId: threadId,
-            requestOptions: requestOptions
-        )
+/// Mutes all future notifications for a conversation until you comment on the thread or get an **@mention**. If you are watching the repository of the thread, you will still receive notifications. To ignore future notifications for a repository you are watching, use the [Set a thread subscription](https://docs.github.com/rest/activity/notifications#set-a-thread-subscription) endpoint and set `ignore` to `true`.
+    public func deleteThreadSubscription(threadId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await ActivityMethods.activityDeleteThreadSubscription(config: config, threadId: threadId, requestOptions: requestOptions)
     }
 
-    /// > [!NOTE] > This API is not built to serve real-time use cases. Depending on the time of day, event latency can
-    /// be anywhere from 30s to 6h.
-    func listPublicOrgEvents(
-        org: String,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [Event] {
-        try await ActivityMethods.activityListPublicOrgEvents(
-            config: config,
-            org: org,
-            perPage: perPage,
-            page: page,
-            requestOptions: requestOptions
-        )
+/// > [!NOTE] > This API is not built to serve real-time use cases. Depending on the time of day, event latency can be anywhere from 30s to 6h.
+    public func listPublicOrgEvents(org: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [Event] {
+        return try await ActivityMethods.activityListPublicOrgEvents(config: config, org: org, perPage: perPage, page: page, requestOptions: requestOptions)
     }
 
-    /// > [!NOTE] > This API is not built to serve real-time use cases. Depending on the time of day, event latency can
-    /// be anywhere from 30s to 6h.
-    func listRepoEvents(
-        owner: String,
-        repo: String,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [Event] {
-        try await ActivityMethods.activityListRepoEvents(
-            config: config,
-            owner: owner,
-            repo: repo,
-            perPage: perPage,
-            page: page,
-            requestOptions: requestOptions
-        )
+/// > [!NOTE] > This API is not built to serve real-time use cases. Depending on the time of day, event latency can be anywhere from 30s to 6h.
+    public func listRepoEvents(owner: String, repo: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [Event] {
+        return try await ActivityMethods.activityListRepoEvents(config: config, owner: owner, repo: repo, perPage: perPage, page: page, requestOptions: requestOptions)
     }
 
-    /// Lists all notifications for the current user in the specified repository.
-    func listRepoNotificationsForAuthenticatedUser(
-        options: ActivityMethods.ActivityListRepoNotificationsForAuthenticatedUserOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [ThreadModel] {
-        try await ActivityMethods.activityListRepoNotificationsForAuthenticatedUser(
-            config: config,
-            options: options,
-            requestOptions: requestOptions
-        )
+/// Lists all notifications for the current user in the specified repository.
+    public func listRepoNotificationsForAuthenticatedUser(options: ActivityMethods.ActivityListRepoNotificationsForAuthenticatedUserOptions, requestOptions: RequestOptions? = nil) async throws -> [ThreadModel] {
+        return try await ActivityMethods.activityListRepoNotificationsForAuthenticatedUser(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Marks all notifications in a repository as "read" for the current user. If the number of notifications is too
-    /// large to complete in one request, you will receive a `202 Accepted` status and GitHub will run an asynchronous
-    /// process to mark notifications as "read." To check whether any "unread" notifications remain, you can use the
-    /// [List repository notifications for the authenticated user](https://docs.github.com/rest/activity/notifications#list-repository-notifications-for-the-authenticated-user)
-    /// endpoint and pass the query parameter `all=false`.
-    func markRepoNotificationsAsRead(
-        owner: String,
-        repo: String,
-        lastReadAt: Date? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ActivityMarkRepoNotificationsAsReadResponse {
-        try await ActivityMethods.activityMarkRepoNotificationsAsRead(
-            config: config,
-            owner: owner,
-            repo: repo,
-            lastReadAt: lastReadAt,
-            requestOptions: requestOptions
-        )
+/// Marks all notifications in a repository as "read" for the current user. If the number of notifications is too large to complete in one request, you will receive a `202 Accepted` status and GitHub will run an asynchronous process to mark notifications as "read." To check whether any "unread" notifications remain, you can use the [List repository notifications for the authenticated user](https://docs.github.com/rest/activity/notifications#list-repository-notifications-for-the-authenticated-user) endpoint and pass the query parameter `all=false`.
+    public func markRepoNotificationsAsRead(owner: String, repo: String, lastReadAt: Date? = nil, requestOptions: RequestOptions? = nil) async throws -> ActivityMarkRepoNotificationsAsReadResponse {
+        return try await ActivityMethods.activityMarkRepoNotificationsAsRead(config: config, owner: owner, repo: repo, lastReadAt: lastReadAt, requestOptions: requestOptions)
     }
 
-    /// Lists the people that have starred the repository. This endpoint supports the following custom media types. For
-    /// more information, see "[Media
-    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
-    /// **`application/vnd.github.star+json`**: Includes a timestamp of when the star was created.
-    func listStargazersForRepo(
-        owner: String,
-        repo: String,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ActivityListStargazersForRepoResponse {
-        try await ActivityMethods.activityListStargazersForRepo(
-            config: config,
-            owner: owner,
-            repo: repo,
-            perPage: perPage,
-            page: page,
-            requestOptions: requestOptions
-        )
+/// Lists the people that have starred the repository. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.star+json`**: Includes a timestamp of when the star was created.
+    public func listStargazersForRepo(owner: String, repo: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> ActivityListStargazersForRepoResponse {
+        return try await ActivityMethods.activityListStargazersForRepo(config: config, owner: owner, repo: repo, perPage: perPage, page: page, requestOptions: requestOptions)
     }
 }

@@ -7,7 +7,7 @@ import Foundation
     import FoundationNetworking
 #endif
 
-/// Canonical users operation model declarations
+// Canonical users operation model declarations
 public indirect enum UsersGetByUsernameResponse {
     case privateUser(PrivateUser)
     case publicUser(PublicUser)
@@ -16,6 +16,7 @@ public indirect enum UsersGetByUsernameResponse {
 }
 
 extension UsersGetByUsernameResponse: Codable {
+
     private enum CodingKeys: String, CodingKey {
         case discriminator = "user_view_type"
     }
@@ -23,29 +24,20 @@ extension UsersGetByUsernameResponse: Codable {
     public init(from decoder: Decoder) throws {
         if let tagged = try? decoder.container(keyedBy: CodingKeys.self),
            let discriminator = try? tagged.decode(String.self, forKey: .discriminator) {
-            if let value = try Self.decodeGroup1(discriminator, from: decoder) {
-                self = value; return
-            }
+            if let value = try Self.decodeGroup1(discriminator, from: decoder) { self = value; return }
         }
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeUntaggedGroup1(from: container) {
-            self = value; return
-        }
+        if let value = Self.decodeUntaggedGroup1(from: container) { self = value; return }
         if let tagged = try? decoder.container(keyedBy: CodingKeys.self),
            let discriminator = try? tagged.decode(String.self, forKey: .discriminator) {
             self = try .unknown(tag: discriminator, raw: JSONValue(from: decoder))
             return
         }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for UsersGetByUsernameResponse"
-        )
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for UsersGetByUsernameResponse")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
         if case let .unknown(_, raw) = self {
             var container = encoder.singleValueContainer()
             try container.encode(raw)
@@ -56,21 +48,17 @@ extension UsersGetByUsernameResponse: Codable {
 extension UsersGetByUsernameResponse {
     static func decodeGroup1(_ discriminator: String, from decoder: Decoder) throws -> Self? {
         switch discriminator {
-        case "private": try .privateUser(PrivateUser(from: decoder))
-        case "public": try .publicUser(PublicUser(from: decoder))
-        default: nil
+        case "private": return .privateUser(try PrivateUser(from: decoder))
+        case "public": return .publicUser(try PublicUser(from: decoder))
+        default: return nil
         }
     }
 }
 
 extension UsersGetByUsernameResponse {
     static func decodeUntaggedGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(PrivateUser.self) {
-            return .privateUser(value)
-        }
-        if let value = try? container.decode(PublicUser.self) {
-            return .publicUser(value)
-        }
+        if let value = try? container.decode(PrivateUser.self) { return .privateUser(value) }
+        if let value = try? container.decode(PublicUser.self) { return .publicUser(value) }
         return nil
     }
 }
@@ -97,30 +85,24 @@ public struct UsersDeleteEmailForAuthenticatedUserRequestBodyVariant0: Codable {
         case emails
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension UsersDeleteEmailForAuthenticatedUserRequestBodyVariant0 {
-    init(from decoder: Decoder) throws {
+extension UsersDeleteEmailForAuthenticatedUserRequestBodyVariant0 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.emails) else {
-            throw SdkValidationError(
-                field: "emails",
-                code: "required",
-                message: "Validation failed for 'emails': value is required"
-            )
+            throw SdkValidationError(field: "emails", code: "required", message: "Validation failed for 'emails': value is required")
         }
-        emails = try container.sdkDecodeRequired(.emails)
-        try validateItems("emails", emails, min: 1, max: nil)
+        self.emails = try container.sdkDecodeRequired(.emails)
+            try validateItems("emails", self.emails, min: 1, max: nil)
     }
 }
 
-public extension UsersDeleteEmailForAuthenticatedUserRequestBodyVariant0 {
-    init(emails: [String]) throws {
+extension UsersDeleteEmailForAuthenticatedUserRequestBodyVariant0 {
+    public init(emails: [String]) throws {
         self.emails = emails
-        try validateItems("emails", self.emails, min: 1, max: nil)
+            try validateItems("emails", self.emails, min: 1, max: nil)
     }
 }
 
@@ -130,41 +112,27 @@ public indirect enum UsersDeleteAttestationsBulkRequestBody {
 }
 
 extension UsersDeleteAttestationsBulkRequestBody: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let raw = try? container.decode(JSONValue.self) {
-            if let value = Self.decodeLossless1(from: container, raw) {
-                self = value; return
-            }
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
         }
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for UsersDeleteAttestationsBulkRequestBody"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for UsersDeleteAttestationsBulkRequestBody")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
 extension UsersDeleteAttestationsBulkRequestBody {
     static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
-        if let value = try? container.decode(UsersDeleteAttestationsBulkRequestBodyVariant0.self), sdkKeepsEveryKey(
-            value,
-            of: raw
-        ) {
+        if let value = try? container.decode(UsersDeleteAttestationsBulkRequestBodyVariant0.self), sdkKeepsEveryKey(value, of: raw) {
             return .usersDeleteAttestationsBulkRequestBodyVariant0(value)
         }
-        if let value = try? container.decode(UsersDeleteAttestationsBulkRequestBodyVariant1.self), sdkKeepsEveryKey(
-            value,
-            of: raw
-        ) {
+        if let value = try? container.decode(UsersDeleteAttestationsBulkRequestBodyVariant1.self), sdkKeepsEveryKey(value, of: raw) {
             return .usersDeleteAttestationsBulkRequestBodyVariant1(value)
         }
         return nil
@@ -176,12 +144,12 @@ extension UsersDeleteAttestationsBulkRequestBody {
         if let value = try? container.decode(
             UsersDeleteAttestationsBulkRequestBodyVariant0.self
         ) {
-            return .usersDeleteAttestationsBulkRequestBodyVariant0(value)
+            return             .usersDeleteAttestationsBulkRequestBodyVariant0(value)
         }
         if let value = try? container.decode(
             UsersDeleteAttestationsBulkRequestBodyVariant1.self
         ) {
-            return .usersDeleteAttestationsBulkRequestBodyVariant1(value)
+            return             .usersDeleteAttestationsBulkRequestBodyVariant1(value)
         }
         return nil
     }
@@ -205,19 +173,19 @@ public struct UsersListAttestationsResponse: Codable {
     }
 
     init() {
-        attestations = nil
+        self.attestations = nil
     }
 }
 
-public extension UsersListAttestationsResponse {
-    init(from decoder: Decoder) throws {
+extension UsersListAttestationsResponse {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        attestations = try container.sdkDecodeIfPresent(.attestations)
+        self.attestations = try container.sdkDecodeIfPresent(.attestations)
     }
 }
 
-public extension UsersListAttestationsResponse {
-    init(attestations: [UsersListAttestationsResponseAttestationsItem]? = nil) {
+extension UsersListAttestationsResponse {
+    public init(attestations: [UsersListAttestationsResponseAttestationsItem]? = nil) {
         self.init()
         self.attestations = attestations
     }
@@ -236,25 +204,21 @@ public struct UsersListAttestationsBulkResponseAttestationsSubjectDigestsVaX0ac5
     }
 
     init() {
-        (mediaType, verificationMaterial, dsseEnvelope) = (nil, nil, nil)
+        (self.mediaType, self.verificationMaterial, self.dsseEnvelope) = (nil, nil, nil)
     }
 }
 
-public extension UsersListAttestationsBulkResponseAttestationsSubjectDigestsVaX0ac5c521dd {
-    init(from decoder: Decoder) throws {
+extension UsersListAttestationsBulkResponseAttestationsSubjectDigestsVaX0ac5c521dd {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        mediaType = try container.sdkDecodeIfPresent(.mediaType)
-        verificationMaterial = try container.sdkDecodeIfPresent(.verificationMaterial)
-        dsseEnvelope = try container.sdkDecodeIfPresent(.dsseEnvelope)
+        self.mediaType = try container.sdkDecodeIfPresent(.mediaType)
+        self.verificationMaterial = try container.sdkDecodeIfPresent(.verificationMaterial)
+        self.dsseEnvelope = try container.sdkDecodeIfPresent(.dsseEnvelope)
     }
 }
 
-public extension UsersListAttestationsBulkResponseAttestationsSubjectDigestsVaX0ac5c521dd {
-    init(
-        mediaType: String? = nil,
-        verificationMaterial: [String: JSONValue]? = nil,
-        dsseEnvelope: [String: JSONValue]? = nil
-    ) {
+extension UsersListAttestationsBulkResponseAttestationsSubjectDigestsVaX0ac5c521dd {
+    public init(mediaType: String? = nil, verificationMaterial: [String: JSONValue]? = nil, dsseEnvelope: [String: JSONValue]? = nil) {
         self.init()
         (self.mediaType, self.verificationMaterial) = (mediaType, verificationMaterial)
         self.dsseEnvelope = dsseEnvelope
@@ -280,22 +244,22 @@ public struct UsersListAttestationsBulkResponsePageInfo: Codable {
     }
 
     init() {
-        (hasNext, hasPrevious, next, previous) = (nil, nil, nil, nil)
+        (self.hasNext, self.hasPrevious, self.next, self.previous) = (nil, nil, nil, nil)
     }
 }
 
-public extension UsersListAttestationsBulkResponsePageInfo {
-    init(from decoder: Decoder) throws {
+extension UsersListAttestationsBulkResponsePageInfo {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        hasNext = try container.sdkDecodeIfPresent(.hasNext)
-        hasPrevious = try container.sdkDecodeIfPresent(.hasPrevious)
-        next = try container.sdkDecodeIfPresent(.next)
-        previous = try container.sdkDecodeIfPresent(.previous)
+        self.hasNext = try container.sdkDecodeIfPresent(.hasNext)
+        self.hasPrevious = try container.sdkDecodeIfPresent(.hasPrevious)
+        self.next = try container.sdkDecodeIfPresent(.next)
+        self.previous = try container.sdkDecodeIfPresent(.previous)
     }
 }
 
-public extension UsersListAttestationsBulkResponsePageInfo {
-    init(hasNext: Bool? = nil, hasPrevious: Bool? = nil, next: String? = nil, previous: String? = nil) {
+extension UsersListAttestationsBulkResponsePageInfo {
+    public init(hasNext: Bool? = nil, hasPrevious: Bool? = nil, next: String? = nil, previous: String? = nil) {
         self.init()
         (self.hasNext, self.hasPrevious) = (hasNext, hasPrevious)
         (self.next, self.previous) = (next, previous)
@@ -315,24 +279,20 @@ public struct UsersListAttestationsBulkResponse: Codable {
     }
 
     init() {
-        (attestationsSubjectDigests, pageInfo) = (nil, nil)
+        (self.attestationsSubjectDigests, self.pageInfo) = (nil, nil)
     }
 }
 
-public extension UsersListAttestationsBulkResponse {
-    init(from decoder: Decoder) throws {
+extension UsersListAttestationsBulkResponse {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        attestationsSubjectDigests = try container.sdkDecodeIfPresent(.attestationsSubjectDigests)
-        pageInfo = try container.sdkDecodeIfPresent(.pageInfo)
+        self.attestationsSubjectDigests = try container.sdkDecodeIfPresent(.attestationsSubjectDigests)
+        self.pageInfo = try container.sdkDecodeIfPresent(.pageInfo)
     }
 }
 
-public extension UsersListAttestationsBulkResponse {
-    init(
-        attestationsSubjectDigests: [String: [UsersListAttestationsBulkResponseAttestationsSubjectDigestsValueItem]?]? =
-            nil,
-        pageInfo: UsersListAttestationsBulkResponsePageInfo? = nil
-    ) {
+extension UsersListAttestationsBulkResponse {
+    public init(attestationsSubjectDigests: [String: [UsersListAttestationsBulkResponseAttestationsSubjectDigestsValueItem]?]? = nil, pageInfo: UsersListAttestationsBulkResponsePageInfo? = nil) {
         self.init()
         (self.attestationsSubjectDigests, self.pageInfo) = (attestationsSubjectDigests, pageInfo)
     }
@@ -351,25 +311,21 @@ public struct UsersListAttestationsBulkResponseAttestationsSubjectDigestsValueIt
     }
 
     init() {
-        (bundle, repositoryId, bundleUrl) = (nil, nil, nil)
+        (self.bundle, self.repositoryId, self.bundleUrl) = (nil, nil, nil)
     }
 }
 
-public extension UsersListAttestationsBulkResponseAttestationsSubjectDigestsValueItem {
-    init(from decoder: Decoder) throws {
+extension UsersListAttestationsBulkResponseAttestationsSubjectDigestsValueItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        bundle = try container.sdkDecodeIfPresent(.bundle)
-        repositoryId = try container.sdkDecodeIfPresent(.repositoryId)
-        bundleUrl = try container.sdkDecodeIfPresent(.bundleUrl)
+        self.bundle = try container.sdkDecodeIfPresent(.bundle)
+        self.repositoryId = try container.sdkDecodeIfPresent(.repositoryId)
+        self.bundleUrl = try container.sdkDecodeIfPresent(.bundleUrl)
     }
 }
 
-public extension UsersListAttestationsBulkResponseAttestationsSubjectDigestsValueItem {
-    init(
-        bundle: UsersListAttestationsBulkResponseAttestationsSubjectDigestsVaX0ac5c521dd? = nil,
-        repositoryId: Int? = nil,
-        bundleUrl: String? = nil
-    ) {
+extension UsersListAttestationsBulkResponseAttestationsSubjectDigestsValueItem {
+    public init(bundle: UsersListAttestationsBulkResponseAttestationsSubjectDigestsVaX0ac5c521dd? = nil, repositoryId: Int? = nil, bundleUrl: String? = nil) {
         self.init()
         (self.bundle, self.repositoryId) = (bundle, repositoryId)
         self.bundleUrl = bundleUrl
@@ -384,6 +340,7 @@ public indirect enum UsersGetByIdResponse {
 }
 
 extension UsersGetByIdResponse: Codable {
+
     private enum CodingKeys: String, CodingKey {
         case discriminator = "user_view_type"
     }
@@ -391,29 +348,20 @@ extension UsersGetByIdResponse: Codable {
     public init(from decoder: Decoder) throws {
         if let tagged = try? decoder.container(keyedBy: CodingKeys.self),
            let discriminator = try? tagged.decode(String.self, forKey: .discriminator) {
-            if let value = try Self.decodeGroup1(discriminator, from: decoder) {
-                self = value; return
-            }
+            if let value = try Self.decodeGroup1(discriminator, from: decoder) { self = value; return }
         }
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeUntaggedGroup1(from: container) {
-            self = value; return
-        }
+        if let value = Self.decodeUntaggedGroup1(from: container) { self = value; return }
         if let tagged = try? decoder.container(keyedBy: CodingKeys.self),
            let discriminator = try? tagged.decode(String.self, forKey: .discriminator) {
             self = try .unknown(tag: discriminator, raw: JSONValue(from: decoder))
             return
         }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for UsersGetByIdResponse"
-        )
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for UsersGetByIdResponse")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
         if case let .unknown(_, raw) = self {
             var container = encoder.singleValueContainer()
             try container.encode(raw)
@@ -424,21 +372,17 @@ extension UsersGetByIdResponse: Codable {
 extension UsersGetByIdResponse {
     static func decodeGroup1(_ discriminator: String, from decoder: Decoder) throws -> Self? {
         switch discriminator {
-        case "private": try .privateUser(PrivateUser(from: decoder))
-        case "public": try .publicUser(PublicUser(from: decoder))
-        default: nil
+        case "private": return .privateUser(try PrivateUser(from: decoder))
+        case "public": return .publicUser(try PublicUser(from: decoder))
+        default: return nil
         }
     }
 }
 
 extension UsersGetByIdResponse {
     static func decodeUntaggedGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(PrivateUser.self) {
-            return .privateUser(value)
-        }
-        if let value = try? container.decode(PublicUser.self) {
-            return .publicUser(value)
-        }
+        if let value = try? container.decode(PrivateUser.self) { return .privateUser(value) }
+        if let value = try? container.decode(PublicUser.self) { return .publicUser(value) }
         return nil
     }
 }
@@ -467,25 +411,21 @@ public struct UsersListAttestationsResponseAttestationsItemBundle: Codable {
     }
 
     init() {
-        (mediaType, verificationMaterial, dsseEnvelope) = (nil, nil, nil)
+        (self.mediaType, self.verificationMaterial, self.dsseEnvelope) = (nil, nil, nil)
     }
 }
 
-public extension UsersListAttestationsResponseAttestationsItemBundle {
-    init(from decoder: Decoder) throws {
+extension UsersListAttestationsResponseAttestationsItemBundle {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        mediaType = try container.sdkDecodeIfPresent(.mediaType)
-        verificationMaterial = try container.sdkDecodeIfPresent(.verificationMaterial)
-        dsseEnvelope = try container.sdkDecodeIfPresent(.dsseEnvelope)
+        self.mediaType = try container.sdkDecodeIfPresent(.mediaType)
+        self.verificationMaterial = try container.sdkDecodeIfPresent(.verificationMaterial)
+        self.dsseEnvelope = try container.sdkDecodeIfPresent(.dsseEnvelope)
     }
 }
 
-public extension UsersListAttestationsResponseAttestationsItemBundle {
-    init(
-        mediaType: String? = nil,
-        verificationMaterial: [String: JSONValue]? = nil,
-        dsseEnvelope: [String: JSONValue]? = nil
-    ) {
+extension UsersListAttestationsResponseAttestationsItemBundle {
+    public init(mediaType: String? = nil, verificationMaterial: [String: JSONValue]? = nil, dsseEnvelope: [String: JSONValue]? = nil) {
         self.init()
         (self.mediaType, self.verificationMaterial) = (mediaType, verificationMaterial)
         self.dsseEnvelope = dsseEnvelope
@@ -499,21 +439,15 @@ public indirect enum UsersAddEmailForAuthenticatedUserRequestBody {
 }
 
 extension UsersAddEmailForAuthenticatedUserRequestBody: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for UsersAddEmailForAuthenticatedUserRequestBody"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for UsersAddEmailForAuthenticatedUserRequestBody")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
@@ -522,14 +456,10 @@ extension UsersAddEmailForAuthenticatedUserRequestBody {
         if let value = try? container.decode(
             UsersAddEmailForAuthenticatedUserRequestBodyVariant0.self
         ) {
-            return .usersAddEmailForAuthenticatedUserRequestBodyVariant0(value)
+            return             .usersAddEmailForAuthenticatedUserRequestBodyVariant0(value)
         }
-        if let value = try? container.decode([String].self) {
-            return .stringList(value)
-        }
-        if let value = try? container.decode(String.self) {
-            return .stringValue(value)
-        }
+        if let value = try? container.decode([String].self) { return .stringList(value) }
+        if let value = try? container.decode(String.self) { return .stringValue(value) }
         return nil
     }
 }
@@ -560,27 +490,22 @@ public struct UsersListAttestationsResponseAttestationsItem: Codable {
     }
 
     init() {
-        (bundle, repositoryId, bundleUrl, initiator) = (nil, nil, nil, nil)
+        (self.bundle, self.repositoryId, self.bundleUrl, self.initiator) = (nil, nil, nil, nil)
     }
 }
 
-public extension UsersListAttestationsResponseAttestationsItem {
-    init(from decoder: Decoder) throws {
+extension UsersListAttestationsResponseAttestationsItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        bundle = try container.sdkDecodeIfPresent(.bundle)
-        repositoryId = try container.sdkDecodeIfPresent(.repositoryId)
-        bundleUrl = try container.sdkDecodeIfPresent(.bundleUrl)
-        initiator = try container.sdkDecodeIfPresent(.initiator)
+        self.bundle = try container.sdkDecodeIfPresent(.bundle)
+        self.repositoryId = try container.sdkDecodeIfPresent(.repositoryId)
+        self.bundleUrl = try container.sdkDecodeIfPresent(.bundleUrl)
+        self.initiator = try container.sdkDecodeIfPresent(.initiator)
     }
 }
 
-public extension UsersListAttestationsResponseAttestationsItem {
-    init(
-        bundle: UsersListAttestationsResponseAttestationsItemBundle? = nil,
-        repositoryId: Int? = nil,
-        bundleUrl: String? = nil,
-        initiator: String? = nil
-    ) {
+extension UsersListAttestationsResponseAttestationsItem {
+    public init(bundle: UsersListAttestationsResponseAttestationsItemBundle? = nil, repositoryId: Int? = nil, bundleUrl: String? = nil, initiator: String? = nil) {
         self.init()
         (self.bundle, self.repositoryId) = (bundle, repositoryId)
         (self.bundleUrl, self.initiator) = (bundleUrl, initiator)
@@ -588,28 +513,20 @@ public extension UsersListAttestationsResponseAttestationsItem {
 }
 
 public indirect enum UsersDeleteEmailForAuthenticatedUserRequestBody {
-    case usersDeleteEmailForAuthenticatedUserRequestBodyVariant0(
-        UsersDeleteEmailForAuthenticatedUserRequestBodyVariant0
-    )
+    case usersDeleteEmailForAuthenticatedUserRequestBodyVariant0(UsersDeleteEmailForAuthenticatedUserRequestBodyVariant0)
     case stringList([String])
     case stringValue(String)
 }
 
 extension UsersDeleteEmailForAuthenticatedUserRequestBody: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for UsersDeleteEmailForAuthenticatedUserRequestBody"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for UsersDeleteEmailForAuthenticatedUserRequestBody")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }

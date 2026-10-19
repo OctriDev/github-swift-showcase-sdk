@@ -3,39 +3,29 @@
 
 import Foundation
 
-/// WebhookRegistryPackagePublishedRegistryPackagePackageVersionNpmMetadataRepository domain models
+// WebhookRegistryPackagePublishedRegistryPackagePackageVersionNpmMetadataRepository domain models
 public indirect enum WebhookRegistryPackagePublishedRegistryPackagePackageVersionNX92a977cccf {
     case stringValue(String)
     case jsonValue([String: JSONValue])
 }
 
 extension WebhookRegistryPackagePublishedRegistryPackagePackageVersionNX92a977cccf: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for WebhookRegistryPackagePublishedRegistryPackagePackageVersionNX92a977cccf"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for WebhookRegistryPackagePublishedRegistryPackagePackageVersionNX92a977cccf")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
 extension WebhookRegistryPackagePublishedRegistryPackagePackageVersionNX92a977cccf {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) {
-            return .stringValue(value)
-        }
-        if let value = try? container.decode([String: JSONValue].self) {
-            return .jsonValue(value)
-        }
+        if let value = try? container.decode(String.self) { return .stringValue(value) }
+        if let value = try? container.decode([String: JSONValue].self) { return .jsonValue(value) }
         return nil
     }
 }

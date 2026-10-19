@@ -7,21 +7,19 @@ import Foundation
     import FoundationNetworking
 #endif
 
-/// Canonical copilot operation model declarations
+// Canonical copilot operation model declarations
 extension CopilotSetCopilotContentExclusionForOrganizationRequestBodyValueItem {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) {
-            return .stringValue(value)
-        }
+        if let value = try? container.decode(String.self) { return .stringValue(value) }
         if let value = try? container.decode(
             CopilotSetCopilotContentExclusionForOrganizationRequestBodyVaXc7be48290e.self
         ) {
-            return .copilotSetCopilotContentExclusionForOrganizationRequestBodyVaXc7be48290e(value)
+            return             .copilotSetCopilotContentExclusionForOrganizationRequestBodyVaXc7be48290e(value)
         }
         if let value = try? container.decode(
             CopilotSetCopilotContentExclusionForOrganizationRequestBodyVaXcdbbf05214.self
         ) {
-            return .copilotSetCopilotContentExclusionForOrganizationRequestBodyVaXcdbbf05214(value)
+            return             .copilotSetCopilotContentExclusionForOrganizationRequestBodyVaXcdbbf05214(value)
         }
         return nil
     }
@@ -32,10 +30,8 @@ extension CopilotSetCopilotContentExclusionForOrganizationRequestBodyValueItem {
         var container = encoder.singleValueContainer()
         switch self {
         case let .stringValue(value): try container.encode(value); return true
-        case let .copilotSetCopilotContentExclusionForOrganizationRequestBodyVaXc7be48290e(value): try container
-            .encode(value); return true
-        case let .copilotSetCopilotContentExclusionForOrganizationRequestBodyVaXcdbbf05214(value): try container
-            .encode(value); return true
+        case let .copilotSetCopilotContentExclusionForOrganizationRequestBodyVaXc7be48290e(value): try container.encode(value); return true
+        case let .copilotSetCopilotContentExclusionForOrganizationRequestBodyVaXcdbbf05214(value): try container.encode(value); return true
         }
     }
 }

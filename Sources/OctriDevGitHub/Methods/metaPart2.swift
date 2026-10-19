@@ -6,70 +6,33 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension MetaMethods {
+extension MetaMethods {
     /// Get Hypermedia links to resources accessible in GitHub's REST API
-    static func metaRoot(config: ClientConfig, requestOptions: RequestOptions? = nil) async throws -> Root {
-        try await (sdkRequest(
-            "GET",
-            "/",
-            config: config,
-            decoder: .json,
-            operationId: "metaRoot",
-            options: requestOptions
-        )).data
+    public static func metaRoot(config: ClientConfig, requestOptions: RequestOptions? = nil) async throws -> Root {
+        return try (await sdkRequest("GET", "/", config: config, decoder: .json, operationId: "metaRoot", options: requestOptions)).data
     }
 
-    /// Returns meta information about GitHub, including a list of GitHub's IP addresses. For more information, see
-    /// "[About GitHub's IP addresses](https://docs.github.com/articles/about-github-s-ip-addresses/)." The API's
-    /// response also includes a list of GitHub's domain names, and the public keys used by GitHub to sign commits made
-    /// through the web UI. The values shown in the documentation's response are example values. You must always query
-    /// the API directly to get the latest values. > [!NOTE] > This endpoint returns both IPv4 and IPv6 addresses.
-    /// However, not all features support IPv6. You should refer to the specific documentation for each feature to
-    /// determine if IPv6 is supported.
-    static func metaGet(config: ClientConfig, requestOptions: RequestOptions? = nil) async throws -> ApiOverview {
-        try await (sdkRequest(
-            "GET",
-            "/meta",
-            config: config,
-            decoder: .json,
-            operationId: "metaGet",
-            options: requestOptions
-        )).data
+    /// Returns meta information about GitHub, including a list of GitHub's IP addresses. For more information, see "[About GitHub's IP addresses](https://docs.github.com/articles/about-github-s-ip-addresses/)." The API's response also includes a list of GitHub's domain names, and the public keys used by GitHub to sign commits made through the web UI. The values shown in the documentation's response are example values. You must always query the API directly to get the latest values. > [!NOTE] > This endpoint returns both IPv4 and IPv6 addresses. However, not all features support IPv6. You should refer to the specific documentation for each feature to determine if IPv6 is supported.
+    public static func metaGet(config: ClientConfig, requestOptions: RequestOptions? = nil) async throws -> ApiOverview {
+        return try (await sdkRequest("GET", "/meta", config: config, decoder: .json, operationId: "metaGet", options: requestOptions)).data
     }
 
-    /// Returns Octocat as ASCII art. Supply the optional `s` query parameter to set the words in Octocat's speech
-    /// bubble.
+    /// Returns Octocat as ASCII art. Supply the optional `s` query parameter to set the words in Octocat's speech bubble.
     ///
     /// Get the octocat as ASCII art
     ///
     /// - Parameters:
     /// - s: The words to show in Octocat's speech bubble
-    static func metaGetOctocat(
-        config: ClientConfig,
-        s: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> String {
-        try await (sdkRequest("GET", "/octocat", config: config, query: [
+    public static func metaGetOctocat(config: ClientConfig, s: String? = nil, requestOptions: RequestOptions? = nil) async throws -> String {
+        return try (await sdkRequest("GET", "/octocat", config: config, query: [
             SdkQueryParameter("s", value: s),
         ], decoder: .text, operationId: "metaGetOctocat", options: requestOptions)).data
     }
 
-    /// Lists the API versions supported by the service. Use this endpoint to discover the version strings available for
-    /// API requests; each value is formatted as a date.
+    /// Lists the API versions supported by the service. Use this endpoint to discover the version strings available for API requests; each value is formatted as a date.
     ///
     /// Get all supported GitHub API versions.
-    static func metaGetAllVersions(
-        config: ClientConfig,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [String] {
-        try await (sdkRequest(
-            "GET",
-            "/versions",
-            config: config,
-            decoder: .json,
-            operationId: "metaGetAllVersions",
-            options: requestOptions,
-            errors: ["404": BasicError.self]
-        )).data
+    public static func metaGetAllVersions(config: ClientConfig, requestOptions: RequestOptions? = nil) async throws -> [String] {
+        return try (await sdkRequest("GET", "/versions", config: config, decoder: .json, operationId: "metaGetAllVersions", options: requestOptions, errors: ["404": BasicError.self])).data
     }
 }

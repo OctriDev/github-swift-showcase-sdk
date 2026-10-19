@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ProjectsMethods {
+extension ProjectsMethods {
     /// Create draft issue item for the specified user owned project.
     ///
     /// - Parameters:
@@ -14,31 +14,9 @@ public extension ProjectsMethods {
     /// - projectNumber: The project's number.
     /// - title: The title of the draft issue item to create in the project.
     /// - body: The body content of the draft issue item to create in the project.
-    static func projectsCreateDraftItemForAuthenticatedUser(
-        config: ClientConfig,
-        userId: String,
-        projectNumber: Int,
-        title: String,
-        body: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ProjectsV2ItemSimple {
+    public static func projectsCreateDraftItemForAuthenticatedUser(config: ClientConfig, userId: String, projectNumber: Int, title: String, body: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ProjectsV2ItemSimple {
         let requestBody = ProjectsCreateDraftItemForAuthenticatedUserRequestBody(title: title, body: body)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/user/",
-                sdkEncodePathSegment(sdkWireString(userId)),
-                "/projectsV2/",
-                sdkEncodePathSegment(sdkWireString(projectNumber)),
-                "/drafts",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "projectsCreateDraftItemForAuthenticatedUser",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self]
-        )).data
+        return try (await sdkRequest("POST", ["/user/", sdkEncodePathSegment(sdkWireString(userId)), "/projectsV2/", sdkEncodePathSegment(sdkWireString(projectNumber)), "/drafts"].joined(), config: config, body: requestBody, decoder: .json, operationId: "projectsCreateDraftItemForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self])).data
     }
 }

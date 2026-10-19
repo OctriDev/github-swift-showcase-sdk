@@ -3,22 +3,19 @@
 
 import Foundation
 
-/// Orgs domain models
+// Orgs domain models
 /// Determines if the team has a direct, indirect, or mixed relationship to a role
 public struct TeamRoleAssignmentAssignment: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let direct = TeamRoleAssignmentAssignment(rawValue: "direct")
     public static let indirect = TeamRoleAssignmentAssignment(rawValue: "indirect")
     public static let mixed = TeamRoleAssignmentAssignment(rawValue: "mixed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -30,21 +27,16 @@ public struct TeamRoleAssignmentAssignment: RawRepresentable, Hashable, Codable,
 /// The visibility of the issue field. Can be `organization_members_only` (visible only within the organization)
 /// or `all` (visible to all users who can see issues). Only used when the visibility settings feature is
 /// enabled.
-public struct OrganizationUpdateIssueFieldVisibility: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct OrganizationUpdateIssueFieldVisibility: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let organizationMembersOnly =
-        OrganizationUpdateIssueFieldVisibility(rawValue: "organization_members_only")
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let organizationMembersOnly = OrganizationUpdateIssueFieldVisibility(rawValue: "organization_members_only")
     public static let all = OrganizationUpdateIssueFieldVisibility(rawValue: "all")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -57,10 +49,7 @@ public struct OrganizationUpdateIssueFieldVisibility: RawRepresentable, Hashable
 public struct OrganizationCreateIssueTypeColor: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let gray = OrganizationCreateIssueTypeColor(rawValue: "gray")
     public static let blue = OrganizationCreateIssueTypeColor(rawValue: "blue")
     public static let green = OrganizationCreateIssueTypeColor(rawValue: "green")
@@ -72,7 +61,7 @@ public struct OrganizationCreateIssueTypeColor: RawRepresentable, Hashable, Coda
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -85,10 +74,7 @@ public struct OrganizationCreateIssueTypeColor: RawRepresentable, Hashable, Coda
 public struct OrganizationUpdateIssueTypeColor: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let gray = OrganizationUpdateIssueTypeColor(rawValue: "gray")
     public static let blue = OrganizationUpdateIssueTypeColor(rawValue: "blue")
     public static let green = OrganizationUpdateIssueTypeColor(rawValue: "green")
@@ -100,7 +86,7 @@ public struct OrganizationUpdateIssueTypeColor: RawRepresentable, Hashable, Coda
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -110,14 +96,10 @@ public struct OrganizationUpdateIssueTypeColor: RawRepresentable, Hashable, Coda
 }
 
 /// Color for the option.
-public struct OrganizationUpdateIssueFieldOptionsItemColor: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct OrganizationUpdateIssueFieldOptionsItemColor: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let gray = OrganizationUpdateIssueFieldOptionsItemColor(rawValue: "gray")
     public static let blue = OrganizationUpdateIssueFieldOptionsItemColor(rawValue: "blue")
     public static let green = OrganizationUpdateIssueFieldOptionsItemColor(rawValue: "green")
@@ -129,7 +111,7 @@ public struct OrganizationUpdateIssueFieldOptionsItemColor: RawRepresentable, Ha
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -139,14 +121,10 @@ public struct OrganizationUpdateIssueFieldOptionsItemColor: RawRepresentable, Ha
 }
 
 /// Required enumerated value serialized in the `runtime_risks[]` wire field.
-public struct ArtifactDeploymentRecordRuntimeRisksItem: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct ArtifactDeploymentRecordRuntimeRisksItem: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let criticalResource = ArtifactDeploymentRecordRuntimeRisksItem(rawValue: "critical-resource")
     public static let internetExposed = ArtifactDeploymentRecordRuntimeRisksItem(rawValue: "internet-exposed")
     public static let lateralMovement = ArtifactDeploymentRecordRuntimeRisksItem(rawValue: "lateral-movement")
@@ -154,7 +132,7 @@ public struct ArtifactDeploymentRecordRuntimeRisksItem: RawRepresentable, Hashab
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -167,10 +145,7 @@ public struct ArtifactDeploymentRecordRuntimeRisksItem: RawRepresentable, Hashab
 public struct OrganizationCreateIssueFieldDataType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let text = OrganizationCreateIssueFieldDataType(rawValue: "text")
     public static let date = OrganizationCreateIssueFieldDataType(rawValue: "date")
     public static let singleSelect = OrganizationCreateIssueFieldDataType(rawValue: "single_select")
@@ -179,7 +154,7 @@ public struct OrganizationCreateIssueFieldDataType: RawRepresentable, Hashable, 
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -192,17 +167,14 @@ public struct OrganizationCreateIssueFieldDataType: RawRepresentable, Hashable, 
 public struct UserRoleAssignmentAssignment: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let direct = UserRoleAssignmentAssignment(rawValue: "direct")
     public static let indirect = UserRoleAssignmentAssignment(rawValue: "indirect")
     public static let mixed = UserRoleAssignmentAssignment(rawValue: "mixed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -215,17 +187,14 @@ public struct UserRoleAssignmentAssignment: RawRepresentable, Hashable, Codable,
 public struct OrgMembershipRole: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let admin = OrgMembershipRole(rawValue: "admin")
     public static let member = OrgMembershipRole(rawValue: "member")
     public static let billingManager = OrgMembershipRole(rawValue: "billing_manager")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

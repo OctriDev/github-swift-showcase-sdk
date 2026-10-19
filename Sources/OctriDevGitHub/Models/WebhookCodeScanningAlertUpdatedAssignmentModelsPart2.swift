@@ -3,62 +3,36 @@
 
 import Foundation
 
-/// WebhookCodeScanningAlertUpdatedAssignment domain models
-public extension WebhookCodeScanningAlertUpdatedAssignmentAlertMostRecentInstance {
-    init(from decoder: Decoder) throws {
+// WebhookCodeScanningAlertUpdatedAssignment domain models
+extension WebhookCodeScanningAlertUpdatedAssignmentAlertMostRecentInstance {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.analysisKey) else {
-            throw SdkValidationError(
-                field: "analysis_key",
-                code: "required",
-                message: "Validation failed for 'analysis_key': value is required"
-            )
+            throw SdkValidationError(field: "analysis_key", code: "required", message: "Validation failed for 'analysis_key': value is required")
         }
         guard container.contains(.environment) else {
-            throw SdkValidationError(
-                field: "environment",
-                code: "required",
-                message: "Validation failed for 'environment': value is required"
-            )
+            throw SdkValidationError(field: "environment", code: "required", message: "Validation failed for 'environment': value is required")
         }
         guard container.contains(.ref) else {
-            throw SdkValidationError(
-                field: "ref",
-                code: "required",
-                message: "Validation failed for 'ref': value is required"
-            )
+            throw SdkValidationError(field: "ref", code: "required", message: "Validation failed for 'ref': value is required")
         }
         guard container.contains(.state) else {
-            throw SdkValidationError(
-                field: "state",
-                code: "required",
-                message: "Validation failed for 'state': value is required"
-            )
+            throw SdkValidationError(field: "state", code: "required", message: "Validation failed for 'state': value is required")
         }
-        analysisKey = try container.sdkDecodeRequired(.analysisKey)
-        environment = try container.sdkDecodeRequired(.environment)
-        ref = try container.sdkDecodeRequired(.ref)
-        state = try container.sdkDecodeRequired(.state)
-        category = try container.sdkDecodeIfPresent(.category)
-        classifications = try container.sdkDecodeIfPresent(.classifications)
-        commitSha = try container.sdkDecodeIfPresent(.commitSha)
-        location = try container.sdkDecodeIfPresent(.location)
-        message = try container.sdkDecodeIfPresent(.message)
+        self.analysisKey = try container.sdkDecodeRequired(.analysisKey)
+        self.environment = try container.sdkDecodeRequired(.environment)
+        self.ref = try container.sdkDecodeRequired(.ref)
+        self.state = try container.sdkDecodeRequired(.state)
+        self.category = try container.sdkDecodeIfPresent(.category)
+        self.classifications = try container.sdkDecodeIfPresent(.classifications)
+        self.commitSha = try container.sdkDecodeIfPresent(.commitSha)
+        self.location = try container.sdkDecodeIfPresent(.location)
+        self.message = try container.sdkDecodeIfPresent(.message)
     }
 }
 
-public extension WebhookCodeScanningAlertUpdatedAssignmentAlertMostRecentInstance {
-    init(
-        analysisKey: String,
-        environment: String,
-        ref: String,
-        state: WebhookCodeScanningAlertUpdatedAssignmentAlertMostRecentInstanceState,
-        category: String? = nil,
-        classifications: [String]? = nil,
-        commitSha: String? = nil,
-        location: WebhookCodeScanningAlertUpdatedAssignmentAlertMostRecentInstanceLocation? = nil,
-        message: WebhookCodeScanningAlertUpdatedAssignmentAlertMostRecentInstanceMessage? = nil
-    ) {
+extension WebhookCodeScanningAlertUpdatedAssignmentAlertMostRecentInstance {
+    public init(analysisKey: String, environment: String, ref: String, state: WebhookCodeScanningAlertUpdatedAssignmentAlertMostRecentInstanceState, category: String? = nil, classifications: [String]? = nil, commitSha: String? = nil, location: WebhookCodeScanningAlertUpdatedAssignmentAlertMostRecentInstanceLocation? = nil, message: WebhookCodeScanningAlertUpdatedAssignmentAlertMostRecentInstanceMessage? = nil) {
         (self.analysisKey, self.environment) = (analysisKey, environment)
         (self.ref, self.state) = (ref, state)
         (self.category, self.classifications) = (category, classifications)
@@ -68,20 +42,15 @@ public extension WebhookCodeScanningAlertUpdatedAssignmentAlertMostRecentInstanc
 }
 
 /// Required enumerated value serialized in the `action` wire field.
-public struct WebhookCodeScanningAlertUpdatedAssignmentAction: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct WebhookCodeScanningAlertUpdatedAssignmentAction: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let updatedAssignment =
-        WebhookCodeScanningAlertUpdatedAssignmentAction(rawValue: "updated_assignment")
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let updatedAssignment = WebhookCodeScanningAlertUpdatedAssignmentAction(rawValue: "updated_assignment")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -91,24 +60,18 @@ public struct WebhookCodeScanningAlertUpdatedAssignmentAction: RawRepresentable,
 }
 
 /// The reason for dismissing or closing the alert.
-public struct WebhookCodeScanningAlertUpdatedAssignmentAlertDismissedReason: RawRepresentable, Hashable, Codable,
-    Sendable, SdkWireConvertible {
+public struct WebhookCodeScanningAlertUpdatedAssignmentAlertDismissedReason: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let falsePositive =
-        WebhookCodeScanningAlertUpdatedAssignmentAlertDismissedReason(rawValue: "false positive")
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let falsePositive = WebhookCodeScanningAlertUpdatedAssignmentAlertDismissedReason(rawValue: "false positive")
     public static let wonTFix = WebhookCodeScanningAlertUpdatedAssignmentAlertDismissedReason(rawValue: "won't fix")
-    public static let usedInTests =
-        WebhookCodeScanningAlertUpdatedAssignmentAlertDismissedReason(rawValue: "used in tests")
+    public static let usedInTests = WebhookCodeScanningAlertUpdatedAssignmentAlertDismissedReason(rawValue: "used in tests")
     public static let mitigated = WebhookCodeScanningAlertUpdatedAssignmentAlertDismissedReason(rawValue: "mitigated")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -118,22 +81,17 @@ public struct WebhookCodeScanningAlertUpdatedAssignmentAlertDismissedReason: Raw
 }
 
 /// Optional enumerated value serialized in the `type` wire field.
-public struct WebhookCodeScanningAlertUpdatedAssignmentAlertDismissedByType: RawRepresentable, Hashable, Codable,
-    Sendable, SdkWireConvertible {
+public struct WebhookCodeScanningAlertUpdatedAssignmentAlertDismissedByType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let bot = WebhookCodeScanningAlertUpdatedAssignmentAlertDismissedByType(rawValue: "Bot")
     public static let user = WebhookCodeScanningAlertUpdatedAssignmentAlertDismissedByType(rawValue: "User")
-    public static let organization =
-        WebhookCodeScanningAlertUpdatedAssignmentAlertDismissedByType(rawValue: "Organization")
+    public static let organization = WebhookCodeScanningAlertUpdatedAssignmentAlertDismissedByType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -144,21 +102,17 @@ public struct WebhookCodeScanningAlertUpdatedAssignmentAlertDismissedByType: Raw
 
 /// State of a code scanning alert. Events for alerts found outside the default branch will return a `null`
 /// value until they are dismissed or fixed.
-public struct WebhookCodeScanningAlertUpdatedAssignmentAlertState: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct WebhookCodeScanningAlertUpdatedAssignmentAlertState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let open = WebhookCodeScanningAlertUpdatedAssignmentAlertState(rawValue: "open")
     public static let dismissed = WebhookCodeScanningAlertUpdatedAssignmentAlertState(rawValue: "dismissed")
     public static let fixed = WebhookCodeScanningAlertUpdatedAssignmentAlertState(rawValue: "fixed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -168,14 +122,10 @@ public struct WebhookCodeScanningAlertUpdatedAssignmentAlertState: RawRepresenta
 }
 
 /// The severity of the alert.
-public struct WebhookCodeScanningAlertUpdatedAssignmentAlertRuleSeverity: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct WebhookCodeScanningAlertUpdatedAssignmentAlertRuleSeverity: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let none = WebhookCodeScanningAlertUpdatedAssignmentAlertRuleSeverity(rawValue: "none")
     public static let note = WebhookCodeScanningAlertUpdatedAssignmentAlertRuleSeverity(rawValue: "note")
     public static let warning = WebhookCodeScanningAlertUpdatedAssignmentAlertRuleSeverity(rawValue: "warning")
@@ -183,7 +133,7 @@ public struct WebhookCodeScanningAlertUpdatedAssignmentAlertRuleSeverity: RawRep
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -193,23 +143,17 @@ public struct WebhookCodeScanningAlertUpdatedAssignmentAlertRuleSeverity: RawRep
 }
 
 /// State of a code scanning alert.
-public struct WebhookCodeScanningAlertUpdatedAssignmentAlertMostRecentInstanceState: RawRepresentable, Hashable,
-    Codable,
-    Sendable, SdkWireConvertible {
+public struct WebhookCodeScanningAlertUpdatedAssignmentAlertMostRecentInstanceState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let open = WebhookCodeScanningAlertUpdatedAssignmentAlertMostRecentInstanceState(rawValue: "open")
-    public static let dismissed =
-        WebhookCodeScanningAlertUpdatedAssignmentAlertMostRecentInstanceState(rawValue: "dismissed")
+    public static let dismissed = WebhookCodeScanningAlertUpdatedAssignmentAlertMostRecentInstanceState(rawValue: "dismissed")
     public static let fixed = WebhookCodeScanningAlertUpdatedAssignmentAlertMostRecentInstanceState(rawValue: "fixed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

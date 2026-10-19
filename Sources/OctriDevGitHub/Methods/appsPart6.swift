@@ -6,13 +6,10 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension AppsMethods {
-    /// Lists installations for the authenticated GitHub App. Use `since` to filter for installations updated after a
-    /// timestamp, and use `page` and `per_page` to paginate the results. Each installation includes its granted
-    /// permissions; authenticate with a GitHub App JWT to access this endpoint.
+extension AppsMethods {
+    /// Lists installations for the authenticated GitHub App. Use `since` to filter for installations updated after a timestamp, and use `page` and `per_page` to paginate the results. Each installation includes its granted permissions; authenticate with a GitHub App JWT to access this endpoint.
     ///
-    /// The permissions the installation has are included under the `permissions` key. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
-    /// to access this endpoint.
+    /// The permissions the installation has are included under the `permissions` key. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
     ///
     /// - Parameters:
     /// - perPage: The number of results per page (max 100). For more information,
@@ -26,19 +23,12 @@ public extension AppsMethods {
     /// - since: Only show results that were last updated after the given time. This
     ///   is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format:
     ///   `YYYY-MM-DDTHH:MM:SSZ`.
-    static func appsListInstallations(
-        config: ClientConfig,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        since: Date? = nil,
-        outdated: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [Installation] {
-        if let since {
+    public static func appsListInstallations(config: ClientConfig, perPage: Int? = nil, page: Int? = nil, since: Date? = nil, outdated: String? = nil, requestOptions: RequestOptions? = nil) async throws -> [Installation] {
+        if let since = since {
             try sdkValidateDateTime("since", since)
         }
 
-        return try await (sdkRequest("GET", "/app/installations", config: config, query: [
+        return try (await sdkRequest("GET", "/app/installations", config: config, query: [
             SdkQueryParameter("per_page", value: perPage),
             SdkQueryParameter("page", value: page),
             SdkQueryParameter("since", value: since),
@@ -46,25 +36,11 @@ public extension AppsMethods {
         ], decoder: .json, operationId: "appsListInstallations", options: requestOptions)).data
     }
 
-    /// Enables an authenticated GitHub App to find an installation's information using the installation id. You must
-    /// use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
-    /// to access this endpoint.
+    /// Enables an authenticated GitHub App to find an installation's information using the installation id. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
     ///
     /// - Parameters:
     /// - installationId: The unique identifier of the installation.
-    static func appsGetInstallation(
-        config: ClientConfig,
-        installationId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> Installation {
-        try await (sdkRequest(
-            "GET",
-            ["/app/installations/", sdkEncodePathSegment(sdkWireString(installationId))].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "appsGetInstallation",
-            options: requestOptions,
-            errors: ["404": BasicError.self]
-        )).data
+    public static func appsGetInstallation(config: ClientConfig, installationId: Int, requestOptions: RequestOptions? = nil) async throws -> Installation {
+        return try (await sdkRequest("GET", ["/app/installations/", sdkEncodePathSegment(sdkWireString(installationId))].joined(), config: config, decoder: .json, operationId: "appsGetInstallation", options: requestOptions, errors: ["404": BasicError.self])).data
     }
 }

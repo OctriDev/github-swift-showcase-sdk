@@ -3,23 +3,13 @@
 
 import Foundation
 
-/// Search domain models
-public extension IssueSearchResultItemLabelsItem {
-    init(
-        id: Int? = nil,
-        nodeId: String? = nil,
-        url: String? = nil,
-        name: String? = nil,
-        color: String? = nil,
-        default: Bool? = nil,
-        description: String? = nil,
-        archivedAt: Date? = nil,
-        archivedBy: SimpleUser? = nil
-    ) throws {
+// Search domain models
+extension IssueSearchResultItemLabelsItem {
+    public init(id: Int? = nil, nodeId: String? = nil, url: String? = nil, name: String? = nil, color: String? = nil, `default`: Bool? = nil, description: String? = nil, archivedAt: Date? = nil, archivedBy: SimpleUser? = nil) throws {
         self.init()
         (self.id, self.nodeId) = (id, nodeId)
         (self.url, self.name) = (url, name)
-        (self.color, self.default) = (color, `default`)
+        (self.color, self.`default`) = (color, `default`)
         (self.description, self.archivedAt) = (description, archivedAt)
         self.archivedBy = archivedBy
         if let value = self.archivedAt {
@@ -47,22 +37,22 @@ public struct TopicSearchResultItemRelatedItemTopicRelation: Codable {
     }
 
     init() {
-        (id, name, topicId, relationType) = (nil, nil, nil, nil)
+        (self.id, self.name, self.topicId, self.relationType) = (nil, nil, nil, nil)
     }
 }
 
-public extension TopicSearchResultItemRelatedItemTopicRelation {
-    init(from decoder: Decoder) throws {
+extension TopicSearchResultItemRelatedItemTopicRelation {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeIfPresent(.id)
-        name = try container.sdkDecodeIfPresent(.name)
-        topicId = try container.sdkDecodeIfPresent(.topicId)
-        relationType = try container.sdkDecodeIfPresent(.relationType)
+        self.id = try container.sdkDecodeIfPresent(.id)
+        self.name = try container.sdkDecodeIfPresent(.name)
+        self.topicId = try container.sdkDecodeIfPresent(.topicId)
+        self.relationType = try container.sdkDecodeIfPresent(.relationType)
     }
 }
 
-public extension TopicSearchResultItemRelatedItemTopicRelation {
-    init(id: Int? = nil, name: String? = nil, topicId: Int? = nil, relationType: String? = nil) {
+extension TopicSearchResultItemRelatedItemTopicRelation {
+    public init(id: Int? = nil, name: String? = nil, topicId: Int? = nil, relationType: String? = nil) {
         self.init()
         (self.id, self.name) = (id, name)
         (self.topicId, self.relationType) = (topicId, relationType)
@@ -123,57 +113,38 @@ public struct TopicSearchResultItem: Codable {
         case aliases
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension TopicSearchResultItem {
-    init(from decoder: Decoder) throws {
+extension TopicSearchResultItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        name = try container.sdkDecodeRequired(.name)
-        displayName = try container.sdkDecodeNullable(.displayName)
-        shortDescription = try container.sdkDecodeNullable(.shortDescription)
-        description = try container.sdkDecodeNullable(.description)
-        createdBy = try container.sdkDecodeNullable(.createdBy)
-        released = try container.sdkDecodeNullable(.released)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        featured = try container.sdkDecodeRequired(.featured)
-        curated = try container.sdkDecodeRequired(.curated)
-        score = try container.sdkDecodeRequired(.score)
-        repositoryCount = try container.sdkDecodeIfPresent(.repositoryCount)
-        logoUrl = try container.sdkDecodeIfPresent(.logoUrl)
-        textMatches = try container.sdkDecodeIfPresent(.textMatches)
-        related = try container.sdkDecodeIfPresent(.related)
-        aliases = try container.sdkDecodeIfPresent(.aliases)
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
-        if let value = logoUrl {
+        self.name = try container.sdkDecodeRequired(.name)
+        self.displayName = try container.sdkDecodeNullable(.displayName)
+        self.shortDescription = try container.sdkDecodeNullable(.shortDescription)
+        self.description = try container.sdkDecodeNullable(.description)
+        self.createdBy = try container.sdkDecodeNullable(.createdBy)
+        self.released = try container.sdkDecodeNullable(.released)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        self.featured = try container.sdkDecodeRequired(.featured)
+        self.curated = try container.sdkDecodeRequired(.curated)
+        self.score = try container.sdkDecodeRequired(.score)
+        self.repositoryCount = try container.sdkDecodeIfPresent(.repositoryCount)
+        self.logoUrl = try container.sdkDecodeIfPresent(.logoUrl)
+        self.textMatches = try container.sdkDecodeIfPresent(.textMatches)
+        self.related = try container.sdkDecodeIfPresent(.related)
+        self.aliases = try container.sdkDecodeIfPresent(.aliases)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+        if let value = self.logoUrl {
             try sdkValidateUri("logo_url", value)
         }
     }
 }
 
-public extension TopicSearchResultItem {
-    init(
-        name: String,
-        displayName: String?,
-        shortDescription: String?,
-        description: String?,
-        createdBy: String?,
-        released: String?,
-        createdAt: Date,
-        updatedAt: Date,
-        featured: Bool,
-        curated: Bool,
-        score: Double,
-        repositoryCount: Int? = nil,
-        logoUrl: String? = nil,
-        textMatches: SearchResultTextMatches? = nil,
-        related: [TopicSearchResultItemRelatedItem]? = nil,
-        aliases: [TopicSearchResultItemAliasesItem]? = nil
-    ) throws {
+extension TopicSearchResultItem {
+    public init(name: String, displayName: String?, shortDescription: String?, description: String?, createdBy: String?, released: String?, createdAt: Date, updatedAt: Date, featured: Bool, curated: Bool, score: Double, repositoryCount: Int? = nil, logoUrl: String? = nil, textMatches: SearchResultTextMatches? = nil, related: [TopicSearchResultItemRelatedItem]? = nil, aliases: [TopicSearchResultItemAliasesItem]? = nil) throws {
         (self.name, self.displayName) = (name, displayName)
         (self.shortDescription, self.description) = (shortDescription, description)
         (self.createdBy, self.released) = (createdBy, released)
@@ -182,8 +153,8 @@ public extension TopicSearchResultItem {
         (self.score, self.repositoryCount) = (score, repositoryCount)
         (self.logoUrl, self.textMatches) = (logoUrl, textMatches)
         (self.related, self.aliases) = (related, aliases)
-        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
         if let value = self.logoUrl {
             try sdkValidateUri("logo_url", value)
         }
@@ -200,19 +171,19 @@ public struct TopicSearchResultItemRelatedItem: Codable {
     }
 
     init() {
-        topicRelation = nil
+        self.topicRelation = nil
     }
 }
 
-public extension TopicSearchResultItemRelatedItem {
-    init(from decoder: Decoder) throws {
+extension TopicSearchResultItemRelatedItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        topicRelation = try container.sdkDecodeIfPresent(.topicRelation)
+        self.topicRelation = try container.sdkDecodeIfPresent(.topicRelation)
     }
 }
 
-public extension TopicSearchResultItemRelatedItem {
-    init(topicRelation: TopicSearchResultItemRelatedItemTopicRelation? = nil) {
+extension TopicSearchResultItemRelatedItem {
+    public init(topicRelation: TopicSearchResultItemRelatedItemTopicRelation? = nil) {
         self.init()
         self.topicRelation = topicRelation
     }
@@ -233,47 +204,33 @@ public struct CommitSearchResultItemCommitAuthor: Codable {
         case date
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension CommitSearchResultItemCommitAuthor {
-    init(from decoder: Decoder) throws {
+extension CommitSearchResultItemCommitAuthor {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.email) else {
-            throw SdkValidationError(
-                field: "email",
-                code: "required",
-                message: "Validation failed for 'email': value is required"
-            )
+            throw SdkValidationError(field: "email", code: "required", message: "Validation failed for 'email': value is required")
         }
         guard container.contains(.date) else {
-            throw SdkValidationError(
-                field: "date",
-                code: "required",
-                message: "Validation failed for 'date': value is required"
-            )
+            throw SdkValidationError(field: "date", code: "required", message: "Validation failed for 'date': value is required")
         }
-        name = try container.sdkDecodeRequired(.name)
-        email = try container.sdkDecodeRequired(.email)
-        date = try container.sdkDecodeRequired(.date)
-        try sdkValidateDateTime("date", sdkWireString(date))
+        self.name = try container.sdkDecodeRequired(.name)
+        self.email = try container.sdkDecodeRequired(.email)
+        self.date = try container.sdkDecodeRequired(.date)
+            try sdkValidateDateTime("date", sdkWireString(self.date))
     }
 }
 
-public extension CommitSearchResultItemCommitAuthor {
-    init(name: String, email: String, date: Date) throws {
+extension CommitSearchResultItemCommitAuthor {
+    public init(name: String, email: String, date: Date) throws {
         (self.name, self.email) = (name, email)
         self.date = date
-        try sdkValidateDateTime("date", sdkWireString(self.date))
+            try sdkValidateDateTime("date", sdkWireString(self.date))
     }
 }
 
@@ -298,67 +255,49 @@ public struct IssueSearchResultItemPullRequest: Codable {
         case mergedAt = "merged_at"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension IssueSearchResultItemPullRequest {
-    init(from decoder: Decoder) throws {
+extension IssueSearchResultItemPullRequest {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.diffUrl) else {
-            throw SdkValidationError(
-                field: "diff_url",
-                code: "required",
-                message: "Validation failed for 'diff_url': value is required"
-            )
+            throw SdkValidationError(field: "diff_url", code: "required", message: "Validation failed for 'diff_url': value is required")
         }
         guard container.contains(.htmlUrl) else {
-            throw SdkValidationError(
-                field: "html_url",
-                code: "required",
-                message: "Validation failed for 'html_url': value is required"
-            )
+            throw SdkValidationError(field: "html_url", code: "required", message: "Validation failed for 'html_url': value is required")
         }
         guard container.contains(.patchUrl) else {
-            throw SdkValidationError(
-                field: "patch_url",
-                code: "required",
-                message: "Validation failed for 'patch_url': value is required"
-            )
+            throw SdkValidationError(field: "patch_url", code: "required", message: "Validation failed for 'patch_url': value is required")
         }
         guard container.contains(.url) else {
-            throw SdkValidationError(
-                field: "url",
-                code: "required",
-                message: "Validation failed for 'url': value is required"
-            )
+            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
         }
-        diffUrl = try container.sdkDecodeNullable(.diffUrl)
-        htmlUrl = try container.sdkDecodeNullable(.htmlUrl)
-        patchUrl = try container.sdkDecodeNullable(.patchUrl)
-        url = try container.sdkDecodeNullable(.url)
-        mergedAt = try container.sdkDecodeIfPresent(.mergedAt)
-        if let value = diffUrl {
+        self.diffUrl = try container.sdkDecodeNullable(.diffUrl)
+        self.htmlUrl = try container.sdkDecodeNullable(.htmlUrl)
+        self.patchUrl = try container.sdkDecodeNullable(.patchUrl)
+        self.url = try container.sdkDecodeNullable(.url)
+        self.mergedAt = try container.sdkDecodeIfPresent(.mergedAt)
+        if let value = self.diffUrl {
             try sdkValidateUri("diff_url", value)
         }
-        if let value = htmlUrl {
+        if let value = self.htmlUrl {
             try sdkValidateUri("html_url", value)
         }
-        if let value = patchUrl {
+        if let value = self.patchUrl {
             try sdkValidateUri("patch_url", value)
         }
-        if let value = url {
+        if let value = self.url {
             try sdkValidateUri("url", value)
         }
-        if let value = mergedAt {
+        if let value = self.mergedAt {
             try sdkValidateDateTime("merged_at", sdkWireString(value))
         }
     }
 }
 
-public extension IssueSearchResultItemPullRequest {
-    init(diffUrl: String?, htmlUrl: String?, patchUrl: String?, url: String?, mergedAt: Date? = nil) throws {
+extension IssueSearchResultItemPullRequest {
+    public init(diffUrl: String?, htmlUrl: String?, patchUrl: String?, url: String?, mergedAt: Date? = nil) throws {
         (self.diffUrl, self.htmlUrl) = (diffUrl, htmlUrl)
         (self.patchUrl, self.url) = (patchUrl, url)
         self.mergedAt = mergedAt
@@ -491,91 +430,53 @@ public struct UserSearchResultItem: Codable {
         case userViewType = "user_view_type"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension UserSearchResultItem {
-    init(from decoder: Decoder) throws {
+extension UserSearchResultItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        login = try container.sdkDecodeRequired(.login)
-        id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
-        gravatarId = try container.sdkDecodeNullable(.gravatarId)
-        url = try container.sdkDecodeRequired(.url)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        followersUrl = try container.sdkDecodeRequired(.followersUrl)
-        subscriptionsUrl = try container.sdkDecodeRequired(.subscriptionsUrl)
-        organizationsUrl = try container.sdkDecodeRequired(.organizationsUrl)
-        reposUrl = try container.sdkDecodeRequired(.reposUrl)
-        receivedEventsUrl = try container.sdkDecodeRequired(.receivedEventsUrl)
-        type = try container.sdkDecodeRequired(.type)
-        score = try container.sdkDecodeRequired(.score)
-        followingUrl = try container.sdkDecodeRequired(.followingUrl)
-        gistsUrl = try container.sdkDecodeRequired(.gistsUrl)
-        starredUrl = try container.sdkDecodeRequired(.starredUrl)
-        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        siteAdmin = try container.sdkDecodeRequired(.siteAdmin)
-        publicRepos = try container.sdkDecodeIfPresent(.publicRepos)
-        publicGists = try container.sdkDecodeIfPresent(.publicGists)
-        followers = try container.sdkDecodeIfPresent(.followers)
-        following = try container.sdkDecodeIfPresent(.following)
-        createdAt = try container.sdkDecodeIfPresent(.createdAt)
-        updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
-        name = try container.sdkDecodeIfPresent(.name)
-        bio = try container.sdkDecodeIfPresent(.bio)
-        email = try container.sdkDecodeIfPresent(.email)
-        location = try container.sdkDecodeIfPresent(.location)
-        hireable = try container.sdkDecodeIfPresent(.hireable)
-        textMatches = try container.sdkDecodeIfPresent(.textMatches)
-        blog = try container.sdkDecodeIfPresent(.blog)
-        company = try container.sdkDecodeIfPresent(.company)
-        suspendedAt = try container.sdkDecodeIfPresent(.suspendedAt)
-        userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        self.login = try container.sdkDecodeRequired(.login)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
+        self.gravatarId = try container.sdkDecodeNullable(.gravatarId)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        self.followersUrl = try container.sdkDecodeRequired(.followersUrl)
+        self.subscriptionsUrl = try container.sdkDecodeRequired(.subscriptionsUrl)
+        self.organizationsUrl = try container.sdkDecodeRequired(.organizationsUrl)
+        self.reposUrl = try container.sdkDecodeRequired(.reposUrl)
+        self.receivedEventsUrl = try container.sdkDecodeRequired(.receivedEventsUrl)
+        self.type = try container.sdkDecodeRequired(.type)
+        self.score = try container.sdkDecodeRequired(.score)
+        self.followingUrl = try container.sdkDecodeRequired(.followingUrl)
+        self.gistsUrl = try container.sdkDecodeRequired(.gistsUrl)
+        self.starredUrl = try container.sdkDecodeRequired(.starredUrl)
+        self.eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
+        self.siteAdmin = try container.sdkDecodeRequired(.siteAdmin)
+        self.publicRepos = try container.sdkDecodeIfPresent(.publicRepos)
+        self.publicGists = try container.sdkDecodeIfPresent(.publicGists)
+        self.followers = try container.sdkDecodeIfPresent(.followers)
+        self.following = try container.sdkDecodeIfPresent(.following)
+        self.createdAt = try container.sdkDecodeIfPresent(.createdAt)
+        self.updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
+        self.name = try container.sdkDecodeIfPresent(.name)
+        self.bio = try container.sdkDecodeIfPresent(.bio)
+        self.email = try container.sdkDecodeIfPresent(.email)
+        self.location = try container.sdkDecodeIfPresent(.location)
+        self.hireable = try container.sdkDecodeIfPresent(.hireable)
+        self.textMatches = try container.sdkDecodeIfPresent(.textMatches)
+        self.blog = try container.sdkDecodeIfPresent(.blog)
+        self.company = try container.sdkDecodeIfPresent(.company)
+        self.suspendedAt = try container.sdkDecodeIfPresent(.suspendedAt)
+        self.userViewType = try container.sdkDecodeIfPresent(.userViewType)
         try sdkValidateConstraints()
     }
 }
 
-public extension UserSearchResultItem {
-    init(
-        login: String,
-        id: Int,
-        nodeId: String,
-        avatarUrl: String,
-        gravatarId: String?,
-        url: String,
-        htmlUrl: String,
-        followersUrl: String,
-        subscriptionsUrl: String,
-        organizationsUrl: String,
-        reposUrl: String,
-        receivedEventsUrl: String,
-        type: String,
-        score: Double,
-        followingUrl: String,
-        gistsUrl: String,
-        starredUrl: String,
-        eventsUrl: String,
-        siteAdmin: Bool,
-        publicRepos: Int? = nil,
-        publicGists: Int? = nil,
-        followers: Int? = nil,
-        following: Int? = nil,
-        createdAt: Date? = nil,
-        updatedAt: Date? = nil,
-        name: String? = nil,
-        bio: String? = nil,
-        email: String? = nil,
-        location: String? = nil,
-        hireable: Bool? = nil,
-        textMatches: SearchResultTextMatches? = nil,
-        blog: String? = nil,
-        company: String? = nil,
-        suspendedAt: Date? = nil,
-        userViewType: String? = nil
-    ) throws {
+extension UserSearchResultItem {
+    public init(login: String, id: Int, nodeId: String, avatarUrl: String, gravatarId: String?, url: String, htmlUrl: String, followersUrl: String, subscriptionsUrl: String, organizationsUrl: String, reposUrl: String, receivedEventsUrl: String, type: String, score: Double, followingUrl: String, gistsUrl: String, starredUrl: String, eventsUrl: String, siteAdmin: Bool, publicRepos: Int? = nil, publicGists: Int? = nil, followers: Int? = nil, following: Int? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, name: String? = nil, bio: String? = nil, email: String? = nil, location: String? = nil, hireable: Bool? = nil, textMatches: SearchResultTextMatches? = nil, blog: String? = nil, company: String? = nil, suspendedAt: Date? = nil, userViewType: String? = nil) throws {
         (self.login, self.id) = (login, id)
         (self.nodeId, self.avatarUrl) = (nodeId, avatarUrl)
         (self.gravatarId, self.url) = (gravatarId, url)
@@ -600,24 +501,24 @@ public extension UserSearchResultItem {
 
 extension UserSearchResultItem {
     func sdkValidateConstraints() throws {
-        try sdkValidateUri("avatar_url", avatarUrl)
-        try sdkValidateUri("url", url)
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateUri("followers_url", followersUrl)
-        try sdkValidateUri("subscriptions_url", subscriptionsUrl)
-        try sdkValidateUri("organizations_url", organizationsUrl)
-        try sdkValidateUri("repos_url", reposUrl)
-        try sdkValidateUri("received_events_url", receivedEventsUrl)
-        if let value = createdAt {
+            try sdkValidateUri("avatar_url", self.avatarUrl)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("followers_url", self.followersUrl)
+            try sdkValidateUri("subscriptions_url", self.subscriptionsUrl)
+            try sdkValidateUri("organizations_url", self.organizationsUrl)
+            try sdkValidateUri("repos_url", self.reposUrl)
+            try sdkValidateUri("received_events_url", self.receivedEventsUrl)
+        if let value = self.createdAt {
             try sdkValidateDateTime("created_at", sdkWireString(value))
         }
-        if let value = updatedAt {
+        if let value = self.updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
-        if let value = email {
+        if let value = self.email {
             try sdkValidateEmail("email", value)
         }
-        if let value = suspendedAt {
+        if let value = self.suspendedAt {
             try sdkValidateDateTime("suspended_at", sdkWireString(value))
         }
     }

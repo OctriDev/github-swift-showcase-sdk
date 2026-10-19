@@ -9,151 +9,43 @@ public class DependabotNamespace {
         self.config = config
     }
 
-    /// Lists Dependabot alerts for repositories that are owned by the specified enterprise. The authenticated user must
-    /// be a member of the enterprise to use this endpoint. Alerts are only returned for organizations in the enterprise
-    /// for which you are an organization owner or a security manager. For more information about security managers, see
-    /// "[Managing security managers in your organization](https://docs.github.com/organizations/managing-peoples-access-to-your-organization-with-roles/managing-security-managers-in-your-organization)."
-    /// OAuth app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this
-    /// endpoint.
-    public func listAlertsForEnterprise(
-        options: DependabotMethods.DependabotListAlertsForEnterpriseOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [DependabotAlertWithRepository] {
-        try await DependabotMethods.dependabotListAlertsForEnterprise(
-            config: config,
-            options: options,
-            requestOptions: requestOptions
-        )
+/// Lists Dependabot alerts for repositories that are owned by the specified enterprise. The authenticated user must be a member of the enterprise to use this endpoint. Alerts are only returned for organizations in the enterprise for which you are an organization owner or a security manager. For more information about security managers, see "[Managing security managers in your organization](https://docs.github.com/organizations/managing-peoples-access-to-your-organization-with-roles/managing-security-managers-in-your-organization)." OAuth app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint.
+    public func listAlertsForEnterprise(options: DependabotMethods.DependabotListAlertsForEnterpriseOptions, requestOptions: RequestOptions? = nil) async throws -> [DependabotAlertWithRepository] {
+        return try await DependabotMethods.dependabotListAlertsForEnterprise(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Lists repositories that enterprise admins have allowed Dependabot to access when updating dependencies across
-    /// organizations in the enterprise. The authenticated user must be an enterprise owner to use this endpoint. >
-    /// [!NOTE] > The "Enterprise administration" fine-grained permission is not available to callers. To use this API,
-    /// you must use an OAuth app token or a personal access token (classic).
-    public func repositoryAccessForEnterprise(
-        enterprise: String,
-        page: Int? = nil,
-        perPage: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> DependabotRepositoryAccessDetails {
-        try await DependabotMethods.dependabotRepositoryAccessForEnterprise(
-            config: config,
-            enterprise: enterprise,
-            page: page,
-            perPage: perPage,
-            requestOptions: requestOptions
-        )
+/// Lists repositories that enterprise admins have allowed Dependabot to access when updating dependencies across organizations in the enterprise. The authenticated user must be an enterprise owner to use this endpoint. > [!NOTE] > The "Enterprise administration" fine-grained permission is not available to callers. To use this API, you must use an OAuth app token or a personal access token (classic).
+    public func repositoryAccessForEnterprise(enterprise: String, page: Int? = nil, perPage: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> DependabotRepositoryAccessDetails {
+        return try await DependabotMethods.dependabotRepositoryAccessForEnterprise(config: config, enterprise: enterprise, page: page, perPage: perPage, requestOptions: requestOptions)
     }
 
-    /// Updates repositories according to the list of repositories that enterprise admins have given Dependabot access
-    /// to when they've updated dependencies across organizations in the enterprise. The authenticated user must be an
-    /// enterprise owner to use this endpoint. **Example request body:** ```json { "repository_ids_to_add": [123, 456],
-    /// "repository_ids_to_remove": [789] } ``` > [!NOTE] > The "Enterprise administration" fine-grained permission is
-    /// not available to callers. To use this API, you must use an OAuth app token or a personal access token (classic).
-    public func updateRepositoryAccessForEnterprise(
-        enterprise: String,
-        repositoryIdsToAdd: [Int]? = nil,
-        repositoryIdsToRemove: [Int]? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await DependabotMethods.dependabotUpdateRepositoryAccessForEnterprise(
-            config: config,
-            enterprise: enterprise,
-            repositoryIdsToAdd: repositoryIdsToAdd,
-            repositoryIdsToRemove: repositoryIdsToRemove,
-            requestOptions: requestOptions
-        )
+/// Updates repositories according to the list of repositories that enterprise admins have given Dependabot access to when they've updated dependencies across organizations in the enterprise. The authenticated user must be an enterprise owner to use this endpoint. **Example request body:** ```json { "repository_ids_to_add": [123, 456], "repository_ids_to_remove": [789] } ``` > [!NOTE] > The "Enterprise administration" fine-grained permission is not available to callers. To use this API, you must use an OAuth app token or a personal access token (classic).
+    public func updateRepositoryAccessForEnterprise(enterprise: String, repositoryIdsToAdd: [Int]? = nil, repositoryIdsToRemove: [Int]? = nil, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await DependabotMethods.dependabotUpdateRepositoryAccessForEnterprise(config: config, enterprise: enterprise, repositoryIdsToAdd: repositoryIdsToAdd, repositoryIdsToRemove: repositoryIdsToRemove, requestOptions: requestOptions)
     }
 
-    /// Sets the default level of repository access Dependabot will have while performing an update across organizations
-    /// in the enterprise. Available values are: - 'public' - Dependabot will only have access to public repositories,
-    /// unless access is explicitly granted to non-public repositories. - 'internal' - Dependabot will only have access
-    /// to public and internal repositories, unless access is explicitly granted to private repositories. The
-    /// authenticated user must be an enterprise owner to use this endpoint. > [!NOTE] > The "Enterprise administration"
-    /// fine-grained permission is not available to callers. To use this API, you must use an OAuth app token or a
-    /// personal access token (classic).
-    public func setRepositoryAccessDefaultLevelForEnterprise(
-        enterprise: String,
-        defaultLevel: DependabotSetRepositoryAccessDefaultLevelForEnterpriseRequestX89bb5af3b7,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await DependabotMethods.dependabotSetRepositoryAccessDefaultLevelForEnterprise(
-            config: config,
-            enterprise: enterprise,
-            defaultLevel: defaultLevel,
-            requestOptions: requestOptions
-        )
+/// Sets the default level of repository access Dependabot will have while performing an update across organizations in the enterprise. Available values are: - 'public' - Dependabot will only have access to public repositories, unless access is explicitly granted to non-public repositories. - 'internal' - Dependabot will only have access to public and internal repositories, unless access is explicitly granted to private repositories. The authenticated user must be an enterprise owner to use this endpoint. > [!NOTE] > The "Enterprise administration" fine-grained permission is not available to callers. To use this API, you must use an OAuth app token or a personal access token (classic).
+    public func setRepositoryAccessDefaultLevelForEnterprise(enterprise: String, defaultLevel: DependabotSetRepositoryAccessDefaultLevelForEnterpriseRequestX89bb5af3b7, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await DependabotMethods.dependabotSetRepositoryAccessDefaultLevelForEnterprise(config: config, enterprise: enterprise, defaultLevel: defaultLevel, requestOptions: requestOptions)
     }
 
-    /// Lists Dependabot alerts for an organization. The authenticated user must be an owner or security manager for the
-    /// organization to use this endpoint. OAuth app tokens and personal access tokens (classic) need the
-    /// `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token
-    /// can use the `public_repo` scope instead.
-    public func listAlertsForOrg(
-        options: DependabotMethods.DependabotListAlertsForOrgOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [DependabotAlertWithRepository] {
-        try await DependabotMethods.dependabotListAlertsForOrg(
-            config: config,
-            options: options,
-            requestOptions: requestOptions
-        )
+/// Lists Dependabot alerts for an organization. The authenticated user must be an owner or security manager for the organization to use this endpoint. OAuth app tokens and personal access tokens (classic) need the `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
+    public func listAlertsForOrg(options: DependabotMethods.DependabotListAlertsForOrgOptions, requestOptions: RequestOptions? = nil) async throws -> [DependabotAlertWithRepository] {
+        return try await DependabotMethods.dependabotListAlertsForOrg(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Lists repositories that organization admins have allowed Dependabot to access when updating dependencies. >
-    /// [!NOTE] > This operation supports both server-to-server and user-to-server access. Unauthorized users will not
-    /// see the existence of this endpoint.
-    public func repositoryAccessForOrg(
-        org: String,
-        page: Int? = nil,
-        perPage: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> DependabotRepositoryAccessDetails {
-        try await DependabotMethods.dependabotRepositoryAccessForOrg(
-            config: config,
-            org: org,
-            page: page,
-            perPage: perPage,
-            requestOptions: requestOptions
-        )
+/// Lists repositories that organization admins have allowed Dependabot to access when updating dependencies. > [!NOTE] > This operation supports both server-to-server and user-to-server access. Unauthorized users will not see the existence of this endpoint.
+    public func repositoryAccessForOrg(org: String, page: Int? = nil, perPage: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> DependabotRepositoryAccessDetails {
+        return try await DependabotMethods.dependabotRepositoryAccessForOrg(config: config, org: org, page: page, perPage: perPage, requestOptions: requestOptions)
     }
 
-    /// Updates repositories according to the list of repositories that organization admins have given Dependabot access
-    /// to when they've updated dependencies. > [!NOTE] > This operation supports both server-to-server and
-    /// user-to-server access. Unauthorized users will not see the existence of this endpoint. OAuth app tokens and
-    /// personal access tokens (classic) need the `write:org` scope to use this endpoint. **Example request body:**
-    /// ```json { "repository_ids_to_add": [123, 456], "repository_ids_to_remove": [789] } ```
-    public func updateRepositoryAccessForOrg(
-        org: String,
-        repositoryIdsToAdd: [Int]? = nil,
-        repositoryIdsToRemove: [Int]? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await DependabotMethods.dependabotUpdateRepositoryAccessForOrg(
-            config: config,
-            org: org,
-            repositoryIdsToAdd: repositoryIdsToAdd,
-            repositoryIdsToRemove: repositoryIdsToRemove,
-            requestOptions: requestOptions
-        )
+/// Updates repositories according to the list of repositories that organization admins have given Dependabot access to when they've updated dependencies. > [!NOTE] > This operation supports both server-to-server and user-to-server access. Unauthorized users will not see the existence of this endpoint. OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint. **Example request body:** ```json { "repository_ids_to_add": [123, 456], "repository_ids_to_remove": [789] } ```
+    public func updateRepositoryAccessForOrg(org: String, repositoryIdsToAdd: [Int]? = nil, repositoryIdsToRemove: [Int]? = nil, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await DependabotMethods.dependabotUpdateRepositoryAccessForOrg(config: config, org: org, repositoryIdsToAdd: repositoryIdsToAdd, repositoryIdsToRemove: repositoryIdsToRemove, requestOptions: requestOptions)
     }
 
-    /// Sets the default level of repository access Dependabot will have while performing an update. Available values
-    /// are: - 'public' - Dependabot will only have access to public repositories, unless access is explicitly granted
-    /// to non-public repositories. - 'internal' - Dependabot will only have access to public and internal repositories,
-    /// unless access is explicitly granted to private repositories. Unauthorized users will not see the existence of
-    /// this endpoint. This operation supports both server-to-server and user-to-server access. OAuth app tokens and
-    /// personal access tokens (classic) need the `write:org` scope to use this endpoint.
-    public func setRepositoryAccessDefaultLevel(
-        org: String,
-        defaultLevel: DependabotSetRepositoryAccessDefaultLevelRequestBodyDefaultLevel,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await DependabotMethods.dependabotSetRepositoryAccessDefaultLevel(
-            config: config,
-            org: org,
-            defaultLevel: defaultLevel,
-            requestOptions: requestOptions
-        )
+/// Sets the default level of repository access Dependabot will have while performing an update. Available values are: - 'public' - Dependabot will only have access to public repositories, unless access is explicitly granted to non-public repositories. - 'internal' - Dependabot will only have access to public and internal repositories, unless access is explicitly granted to private repositories. Unauthorized users will not see the existence of this endpoint. This operation supports both server-to-server and user-to-server access. OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    public func setRepositoryAccessDefaultLevel(org: String, defaultLevel: DependabotSetRepositoryAccessDefaultLevelRequestBodyDefaultLevel, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await DependabotMethods.dependabotSetRepositoryAccessDefaultLevel(config: config, org: org, defaultLevel: defaultLevel, requestOptions: requestOptions)
     }
 }

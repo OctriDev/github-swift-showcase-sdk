@@ -18,25 +18,25 @@ struct DependencyGraphCreateRepositorySnapshotRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(version, forKey: SdkCodingKey("version"))
-        try keyedContainer.encode(job, forKey: SdkCodingKey("job"))
-        try keyedContainer.encode(sha, forKey: SdkCodingKey("sha"))
-        try keyedContainer.encode(ref, forKey: SdkCodingKey("ref"))
-        try keyedContainer.encode(detector, forKey: SdkCodingKey("detector"))
-        try keyedContainer.encode(scanned, forKey: SdkCodingKey("scanned"))
-        try keyedContainer.encodeIfPresent(metadata, forKey: SdkCodingKey("metadata"))
-        try keyedContainer.encodeIfPresent(manifests, forKey: SdkCodingKey("manifests"))
+        try keyedContainer.encode(self.version, forKey: SdkCodingKey("version"))
+        try keyedContainer.encode(self.job, forKey: SdkCodingKey("job"))
+        try keyedContainer.encode(self.sha, forKey: SdkCodingKey("sha"))
+        try keyedContainer.encode(self.ref, forKey: SdkCodingKey("ref"))
+        try keyedContainer.encode(self.detector, forKey: SdkCodingKey("detector"))
+        try keyedContainer.encode(self.scanned, forKey: SdkCodingKey("scanned"))
+        try keyedContainer.encodeIfPresent(self.metadata, forKey: SdkCodingKey("metadata"))
+        try keyedContainer.encodeIfPresent(self.manifests, forKey: SdkCodingKey("manifests"))
     }
 
     init(options: DependencyGraphMethods.DependencyGraphCreateRepositorySnapshotOptions) {
-        version = options.version
-        job = options.job
-        sha = options.sha
-        ref = options.ref
-        detector = options.detector
-        scanned = options.scanned
-        metadata = options.metadata
-        manifests = options.manifests
+        self.version = options.version
+        self.job = options.job
+        self.sha = options.sha
+        self.ref = options.ref
+        self.detector = options.detector
+        self.scanned = options.scanned
+        self.metadata = options.metadata
+        self.manifests = options.manifests
     }
 }
 
@@ -46,8 +46,8 @@ struct GitCreateBlobRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(content, forKey: SdkCodingKey("content"))
-        try keyedContainer.encodeIfPresent(encoding, forKey: SdkCodingKey("encoding"))
+        try keyedContainer.encode(self.content, forKey: SdkCodingKey("content"))
+        try keyedContainer.encodeIfPresent(self.encoding, forKey: SdkCodingKey("encoding"))
     }
 }
 
@@ -61,21 +61,21 @@ struct GitCreateCommitRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(message, forKey: SdkCodingKey("message"))
-        try keyedContainer.encode(tree, forKey: SdkCodingKey("tree"))
-        try keyedContainer.encodeIfPresent(parents, forKey: SdkCodingKey("parents"))
-        try keyedContainer.encodeIfPresent(author, forKey: SdkCodingKey("author"))
-        try keyedContainer.encodeIfPresent(committer, forKey: SdkCodingKey("committer"))
-        try keyedContainer.encodeIfPresent(signature, forKey: SdkCodingKey("signature"))
+        try keyedContainer.encode(self.message, forKey: SdkCodingKey("message"))
+        try keyedContainer.encode(self.tree, forKey: SdkCodingKey("tree"))
+        try keyedContainer.encodeIfPresent(self.parents, forKey: SdkCodingKey("parents"))
+        try keyedContainer.encodeIfPresent(self.author, forKey: SdkCodingKey("author"))
+        try keyedContainer.encodeIfPresent(self.committer, forKey: SdkCodingKey("committer"))
+        try keyedContainer.encodeIfPresent(self.signature, forKey: SdkCodingKey("signature"))
     }
 
     init(options: GitMethods.GitCreateCommitOptions) {
-        message = options.message
-        tree = options.tree
-        parents = options.parents
-        author = options.author
-        committer = options.committer
-        signature = options.signature
+        self.message = options.message
+        self.tree = options.tree
+        self.parents = options.parents
+        self.author = options.author
+        self.committer = options.committer
+        self.signature = options.signature
     }
 }
 
@@ -85,8 +85,8 @@ struct GitCreateRefRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(ref, forKey: SdkCodingKey("ref"))
-        try keyedContainer.encode(sha, forKey: SdkCodingKey("sha"))
+        try keyedContainer.encode(self.ref, forKey: SdkCodingKey("ref"))
+        try keyedContainer.encode(self.sha, forKey: SdkCodingKey("sha"))
     }
 }
 
@@ -96,8 +96,8 @@ struct GitUpdateRefRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(sha, forKey: SdkCodingKey("sha"))
-        try keyedContainer.encodeIfPresent(force, forKey: SdkCodingKey("force"))
+        try keyedContainer.encode(self.sha, forKey: SdkCodingKey("sha"))
+        try keyedContainer.encodeIfPresent(self.force, forKey: SdkCodingKey("force"))
     }
 }
 
@@ -110,11 +110,11 @@ struct GitCreateTagRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(tag, forKey: SdkCodingKey("tag"))
-        try keyedContainer.encode(message, forKey: SdkCodingKey("message"))
-        try keyedContainer.encode(object, forKey: SdkCodingKey("object"))
-        try keyedContainer.encode(type, forKey: SdkCodingKey("type"))
-        try keyedContainer.encodeIfPresent(tagger, forKey: SdkCodingKey("tagger"))
+        try keyedContainer.encode(self.tag, forKey: SdkCodingKey("tag"))
+        try keyedContainer.encode(self.message, forKey: SdkCodingKey("message"))
+        try keyedContainer.encode(self.object, forKey: SdkCodingKey("object"))
+        try keyedContainer.encode(self.type, forKey: SdkCodingKey("type"))
+        try keyedContainer.encodeIfPresent(self.tagger, forKey: SdkCodingKey("tagger"))
     }
 }
 
@@ -124,8 +124,8 @@ struct GitCreateTreeRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(tree, forKey: SdkCodingKey("tree"))
-        try keyedContainer.encodeIfPresent(baseTree, forKey: SdkCodingKey("base_tree"))
+        try keyedContainer.encode(self.tree, forKey: SdkCodingKey("tree"))
+        try keyedContainer.encodeIfPresent(self.baseTree, forKey: SdkCodingKey("base_tree"))
     }
 }
 
@@ -141,25 +141,25 @@ struct PullsCreateRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(head, forKey: SdkCodingKey("head"))
-        try keyedContainer.encode(base, forKey: SdkCodingKey("base"))
-        try keyedContainer.encodeIfPresent(title, forKey: SdkCodingKey("title"))
-        try keyedContainer.encodeIfPresent(headRepo, forKey: SdkCodingKey("head_repo"))
-        try keyedContainer.encodeIfPresent(body, forKey: SdkCodingKey("body"))
-        try keyedContainer.encodeIfPresent(maintainerCanModify, forKey: SdkCodingKey("maintainer_can_modify"))
-        try keyedContainer.encodeIfPresent(draft, forKey: SdkCodingKey("draft"))
-        try keyedContainer.encodeIfPresent(issue, forKey: SdkCodingKey("issue"))
+        try keyedContainer.encode(self.head, forKey: SdkCodingKey("head"))
+        try keyedContainer.encode(self.base, forKey: SdkCodingKey("base"))
+        try keyedContainer.encodeIfPresent(self.title, forKey: SdkCodingKey("title"))
+        try keyedContainer.encodeIfPresent(self.headRepo, forKey: SdkCodingKey("head_repo"))
+        try keyedContainer.encodeIfPresent(self.body, forKey: SdkCodingKey("body"))
+        try keyedContainer.encodeIfPresent(self.maintainerCanModify, forKey: SdkCodingKey("maintainer_can_modify"))
+        try keyedContainer.encodeIfPresent(self.draft, forKey: SdkCodingKey("draft"))
+        try keyedContainer.encodeIfPresent(self.issue, forKey: SdkCodingKey("issue"))
     }
 
     init(options: PullsMethods.PullsCreateOptions) {
-        head = options.head
-        base = options.base
-        title = options.title
-        headRepo = options.headRepo
-        body = options.body
-        maintainerCanModify = options.maintainerCanModify
-        draft = options.draft
-        issue = options.issue
+        self.head = options.head
+        self.base = options.base
+        self.title = options.title
+        self.headRepo = options.headRepo
+        self.body = options.body
+        self.maintainerCanModify = options.maintainerCanModify
+        self.draft = options.draft
+        self.issue = options.issue
     }
 }
 
@@ -168,7 +168,7 @@ struct PullsUpdateReviewCommentRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(body, forKey: SdkCodingKey("body"))
+        try keyedContainer.encode(self.body, forKey: SdkCodingKey("body"))
     }
 }
 
@@ -181,18 +181,18 @@ struct PullsUpdateRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(title, forKey: SdkCodingKey("title"))
-        try keyedContainer.encodeIfPresent(body, forKey: SdkCodingKey("body"))
-        try keyedContainer.encodeIfPresent(state, forKey: SdkCodingKey("state"))
-        try keyedContainer.encodeIfPresent(base, forKey: SdkCodingKey("base"))
-        try keyedContainer.encodeIfPresent(maintainerCanModify, forKey: SdkCodingKey("maintainer_can_modify"))
+        try keyedContainer.encodeIfPresent(self.title, forKey: SdkCodingKey("title"))
+        try keyedContainer.encodeIfPresent(self.body, forKey: SdkCodingKey("body"))
+        try keyedContainer.encodeIfPresent(self.state, forKey: SdkCodingKey("state"))
+        try keyedContainer.encodeIfPresent(self.base, forKey: SdkCodingKey("base"))
+        try keyedContainer.encodeIfPresent(self.maintainerCanModify, forKey: SdkCodingKey("maintainer_can_modify"))
     }
 
     init(options: PullsMethods.PullsUpdateOptions) {
-        title = options.title
-        body = options.body
-        state = options.state
-        base = options.base
-        maintainerCanModify = options.maintainerCanModify
+        self.title = options.title
+        self.body = options.body
+        self.state = options.state
+        self.base = options.base
+        self.maintainerCanModify = options.maintainerCanModify
     }
 }

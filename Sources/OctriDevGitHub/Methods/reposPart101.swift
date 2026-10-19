@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ReposMethods {
-    /// Retrieves a delivery record for a webhook configured in a repository. Use the repository owner, repository name,
-    /// hook ID, and delivery ID to inspect the delivery status, event metadata, and request and response details.
+extension ReposMethods {
+    /// Retrieves a delivery record for a webhook configured in a repository. Use the repository owner, repository name, hook ID, and delivery ID to inspect the delivery status, event metadata, and request and response details.
     ///
     /// Returns a delivery for a webhook configured in a repository.
     ///
@@ -19,31 +18,7 @@ public extension ReposMethods {
     ///   not case sensitive.
     /// - hookId: The unique identifier of the hook. You can find this value in the
     ///   `X-GitHub-Hook-ID` header of a webhook delivery.
-    static func reposGetWebhookDelivery(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        hookId: Int,
-        deliveryId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> HookDelivery {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/hooks/",
-                sdkEncodePathSegment(sdkWireString(hookId)),
-                "/deliveries/",
-                sdkEncodePathSegment(sdkWireString(deliveryId)),
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "reposGetWebhookDelivery",
-            options: requestOptions,
-            errors: ["400": BasicError.self, "422": ValidationError.self]
-        )).data
+    public static func reposGetWebhookDelivery(config: ClientConfig, owner: String, repo: String, hookId: Int, deliveryId: Int, requestOptions: RequestOptions? = nil) async throws -> HookDelivery {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/hooks/", sdkEncodePathSegment(sdkWireString(hookId)), "/deliveries/", sdkEncodePathSegment(sdkWireString(deliveryId))].joined(), config: config, decoder: .json, operationId: "reposGetWebhookDelivery", options: requestOptions, errors: ["400": BasicError.self, "422": ValidationError.self])).data
     }
 }

@@ -6,34 +6,15 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ProjectsMethods {
-    /// Retrieves a Projects v2 project owned by a specified GitHub user. Use `username` and `project_number` to
-    /// identify the user and project; the response includes project metadata and ownership details.
+extension ProjectsMethods {
+    /// Retrieves a Projects v2 project owned by a specified GitHub user. Use `username` and `project_number` to identify the user and project; the response includes project metadata and ownership details.
     ///
     /// Get a specific user-owned project.
     ///
     /// - Parameters:
     /// - projectNumber: The project's number.
     /// - username: The handle for the GitHub user account.
-    static func projectsGetForUser(
-        config: ClientConfig,
-        projectNumber: Int,
-        username: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ProjectsV2 {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/users/",
-                sdkEncodePathSegment(sdkWireString(username)),
-                "/projectsV2/",
-                sdkEncodePathSegment(sdkWireString(projectNumber)),
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "projectsGetForUser",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self]
-        )).data
+    public static func projectsGetForUser(config: ClientConfig, projectNumber: Int, username: String, requestOptions: RequestOptions? = nil) async throws -> ProjectsV2 {
+        return try (await sdkRequest("GET", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/projectsV2/", sdkEncodePathSegment(sdkWireString(projectNumber))].joined(), config: config, decoder: .json, operationId: "projectsGetForUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self])).data
     }
 }

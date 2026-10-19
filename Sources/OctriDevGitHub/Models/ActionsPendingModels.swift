@@ -3,33 +3,25 @@
 
 import Foundation
 
-/// ActionsPending domain models
+// ActionsPending domain models
 public indirect enum PendingDeploymentReviewersItemReviewer {
     case simpleUser(SimpleUser)
     case team(Team)
 }
 
 extension PendingDeploymentReviewersItemReviewer: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let raw = try? container.decode(JSONValue.self) {
-            if let value = Self.decodeLossless1(from: container, raw) {
-                self = value; return
-            }
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
         }
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for PendingDeploymentReviewersItemReviewer"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for PendingDeploymentReviewersItemReviewer")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
@@ -47,12 +39,8 @@ extension PendingDeploymentReviewersItemReviewer {
 
 extension PendingDeploymentReviewersItemReviewer {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(SimpleUser.self) {
-            return .simpleUser(value)
-        }
-        if let value = try? container.decode(Team.self) {
-            return .team(value)
-        }
+        if let value = try? container.decode(SimpleUser.self) { return .simpleUser(value) }
+        if let value = try? container.decode(Team.self) { return .team(value) }
         return nil
     }
 }
@@ -93,68 +81,40 @@ public struct PendingDeployment: Codable {
         case reviewers
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension PendingDeployment {
-    init(from decoder: Decoder) throws {
+extension PendingDeployment {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.environment) else {
-            throw SdkValidationError(
-                field: "environment",
-                code: "required",
-                message: "Validation failed for 'environment': value is required"
-            )
+            throw SdkValidationError(field: "environment", code: "required", message: "Validation failed for 'environment': value is required")
         }
         guard container.contains(.waitTimer) else {
-            throw SdkValidationError(
-                field: "wait_timer",
-                code: "required",
-                message: "Validation failed for 'wait_timer': value is required"
-            )
+            throw SdkValidationError(field: "wait_timer", code: "required", message: "Validation failed for 'wait_timer': value is required")
         }
         guard container.contains(.waitTimerStartedAt) else {
-            throw SdkValidationError(
-                field: "wait_timer_started_at",
-                code: "required",
-                message: "Validation failed for 'wait_timer_started_at': value is required"
-            )
+            throw SdkValidationError(field: "wait_timer_started_at", code: "required", message: "Validation failed for 'wait_timer_started_at': value is required")
         }
         guard container.contains(.currentUserCanApprove) else {
-            throw SdkValidationError(
-                field: "current_user_can_approve",
-                code: "required",
-                message: "Validation failed for 'current_user_can_approve': value is required"
-            )
+            throw SdkValidationError(field: "current_user_can_approve", code: "required", message: "Validation failed for 'current_user_can_approve': value is required")
         }
         guard container.contains(.reviewers) else {
-            throw SdkValidationError(
-                field: "reviewers",
-                code: "required",
-                message: "Validation failed for 'reviewers': value is required"
-            )
+            throw SdkValidationError(field: "reviewers", code: "required", message: "Validation failed for 'reviewers': value is required")
         }
-        environment = try container.sdkDecodeRequired(.environment)
-        waitTimer = try container.sdkDecodeRequired(.waitTimer)
-        waitTimerStartedAt = try container.sdkDecodeNullable(.waitTimerStartedAt)
-        currentUserCanApprove = try container.sdkDecodeRequired(.currentUserCanApprove)
-        reviewers = try container.sdkDecodeRequired(.reviewers)
-        if let value = waitTimerStartedAt {
+        self.environment = try container.sdkDecodeRequired(.environment)
+        self.waitTimer = try container.sdkDecodeRequired(.waitTimer)
+        self.waitTimerStartedAt = try container.sdkDecodeNullable(.waitTimerStartedAt)
+        self.currentUserCanApprove = try container.sdkDecodeRequired(.currentUserCanApprove)
+        self.reviewers = try container.sdkDecodeRequired(.reviewers)
+        if let value = self.waitTimerStartedAt {
             try sdkValidateDateTime("wait_timer_started_at", sdkWireString(value))
         }
     }
 }
 
-public extension PendingDeployment {
-    init(
-        environment: PendingDeploymentEnvironment,
-        waitTimer: Int,
-        waitTimerStartedAt: Date?,
-        currentUserCanApprove: Bool,
-        reviewers: [PendingDeploymentReviewersItem]
-    ) throws {
+extension PendingDeployment {
+    public init(environment: PendingDeploymentEnvironment, waitTimer: Int, waitTimerStartedAt: Date?, currentUserCanApprove: Bool, reviewers: [PendingDeploymentReviewersItem]) throws {
         (self.environment, self.waitTimer) = (environment, waitTimer)
         (self.waitTimerStartedAt, self.currentUserCanApprove) = (waitTimerStartedAt, currentUserCanApprove)
         self.reviewers = reviewers
@@ -191,23 +151,23 @@ public struct PendingDeploymentEnvironment: Codable {
     }
 
     init() {
-        (id, nodeId, name, url, htmlUrl) = (nil, nil, nil, nil, nil)
+        (self.id, self.nodeId, self.name, self.url, self.htmlUrl) = (nil, nil, nil, nil, nil)
     }
 }
 
-public extension PendingDeploymentEnvironment {
-    init(from decoder: Decoder) throws {
+extension PendingDeploymentEnvironment {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeIfPresent(.id)
-        nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        name = try container.sdkDecodeIfPresent(.name)
-        url = try container.sdkDecodeIfPresent(.url)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        self.id = try container.sdkDecodeIfPresent(.id)
+        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        self.name = try container.sdkDecodeIfPresent(.name)
+        self.url = try container.sdkDecodeIfPresent(.url)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
     }
 }
 
-public extension PendingDeploymentEnvironment {
-    init(id: Int? = nil, nodeId: String? = nil, name: String? = nil, url: String? = nil, htmlUrl: String? = nil) {
+extension PendingDeploymentEnvironment {
+    public init(id: Int? = nil, nodeId: String? = nil, name: String? = nil, url: String? = nil, htmlUrl: String? = nil) {
         self.init()
         (self.id, self.nodeId) = (id, nodeId)
         (self.name, self.url) = (name, url)
@@ -229,20 +189,20 @@ public struct PendingDeploymentReviewersItem: Codable {
     }
 
     init() {
-        (type, reviewer) = (nil, nil)
+        (self.type, self.reviewer) = (nil, nil)
     }
 }
 
-public extension PendingDeploymentReviewersItem {
-    init(from decoder: Decoder) throws {
+extension PendingDeploymentReviewersItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        type = try container.sdkDecodeIfPresent(.type)
-        reviewer = try container.sdkDecodeIfPresent(.reviewer)
+        self.type = try container.sdkDecodeIfPresent(.type)
+        self.reviewer = try container.sdkDecodeIfPresent(.reviewer)
     }
 }
 
-public extension PendingDeploymentReviewersItem {
-    init(type: DeploymentReviewerType? = nil, reviewer: PendingDeploymentReviewersItemReviewer? = nil) {
+extension PendingDeploymentReviewersItem {
+    public init(type: DeploymentReviewerType? = nil, reviewer: PendingDeploymentReviewersItemReviewer? = nil) {
         self.init()
         (self.type, self.reviewer) = (type, reviewer)
     }

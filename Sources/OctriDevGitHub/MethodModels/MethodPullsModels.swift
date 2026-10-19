@@ -7,7 +7,7 @@ import Foundation
     import FoundationNetworking
 #endif
 
-/// Canonical pulls operation model declarations
+// Canonical pulls operation model declarations
 public struct PullRequestStacksCreateResponseBase: Codable {
     public var ref: String
 
@@ -15,27 +15,21 @@ public struct PullRequestStacksCreateResponseBase: Codable {
         case ref
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension PullRequestStacksCreateResponseBase {
-    init(from decoder: Decoder) throws {
+extension PullRequestStacksCreateResponseBase {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.ref) else {
-            throw SdkValidationError(
-                field: "ref",
-                code: "required",
-                message: "Validation failed for 'ref': value is required"
-            )
+            throw SdkValidationError(field: "ref", code: "required", message: "Validation failed for 'ref': value is required")
         }
-        ref = try container.sdkDecodeRequired(.ref)
+        self.ref = try container.sdkDecodeRequired(.ref)
     }
 }
 
-public extension PullRequestStacksCreateResponseBase {
-    init(ref: String) {
+extension PullRequestStacksCreateResponseBase {
+    public init(ref: String) {
         self.ref = ref
     }
 }
@@ -50,20 +44,20 @@ public struct PullsMergeResponseX0e4bd8a9: Codable {
     }
 
     init() {
-        (message, documentationUrl) = (nil, nil)
+        (self.message, self.documentationUrl) = (nil, nil)
     }
 }
 
-public extension PullsMergeResponseX0e4bd8a9 {
-    init(from decoder: Decoder) throws {
+extension PullsMergeResponseX0e4bd8a9 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        message = try container.sdkDecodeIfPresent(.message)
-        documentationUrl = try container.sdkDecodeIfPresent(.documentationUrl)
+        self.message = try container.sdkDecodeIfPresent(.message)
+        self.documentationUrl = try container.sdkDecodeIfPresent(.documentationUrl)
     }
 }
 
-public extension PullsMergeResponseX0e4bd8a9 {
-    init(message: String? = nil, documentationUrl: String? = nil) {
+extension PullsMergeResponseX0e4bd8a9 {
+    public init(message: String? = nil, documentationUrl: String? = nil) {
         self.init()
         (self.message, self.documentationUrl) = (message, documentationUrl)
     }
@@ -91,44 +85,33 @@ public struct PullRequestStacksGetResponse: Codable {
         case pullRequests = "pull_requests"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension PullRequestStacksGetResponse {
-    init(from decoder: Decoder) throws {
+extension PullRequestStacksGetResponse {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeRequired(.id)
-        number = try container.sdkDecodeRequired(.number)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        url = try container.sdkDecodeRequired(.url)
-        base = try container.sdkDecodeRequired(.base)
-        open = try container.sdkDecodeRequired(.open)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        pullRequests = try container.sdkDecodeRequired(.pullRequests)
-        try sdkValidateUri("url", url)
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        self.id = try container.sdkDecodeRequired(.id)
+        self.number = try container.sdkDecodeRequired(.number)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.base = try container.sdkDecodeRequired(.base)
+        self.open = try container.sdkDecodeRequired(.open)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.pullRequests = try container.sdkDecodeRequired(.pullRequests)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
     }
 }
 
-public extension PullRequestStacksGetResponse {
-    init(
-        id: Int,
-        number: Int,
-        nodeId: String,
-        url: String,
-        base: PullRequestStacksGetResponseBase,
-        open: Bool,
-        createdAt: Date,
-        pullRequests: [PullRequestStackPullRequest]
-    ) throws {
+extension PullRequestStacksGetResponse {
+    public init(id: Int, number: Int, nodeId: String, url: String, base: PullRequestStacksGetResponseBase, open: Bool, createdAt: Date, pullRequests: [PullRequestStackPullRequest]) throws {
         (self.id, self.number) = (id, number)
         (self.nodeId, self.url) = (nodeId, url)
         (self.base, self.open) = (base, open)
         (self.createdAt, self.pullRequests) = (createdAt, pullRequests)
-        try sdkValidateUri("url", self.url)
-        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateUri("url", self.url)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
     }
 }
 
@@ -139,27 +122,21 @@ public struct PullRequestStacksUnstackResponseBase: Codable {
         case ref
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension PullRequestStacksUnstackResponseBase {
-    init(from decoder: Decoder) throws {
+extension PullRequestStacksUnstackResponseBase {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.ref) else {
-            throw SdkValidationError(
-                field: "ref",
-                code: "required",
-                message: "Validation failed for 'ref': value is required"
-            )
+            throw SdkValidationError(field: "ref", code: "required", message: "Validation failed for 'ref': value is required")
         }
-        ref = try container.sdkDecodeRequired(.ref)
+        self.ref = try container.sdkDecodeRequired(.ref)
     }
 }
 
-public extension PullRequestStacksUnstackResponseBase {
-    init(ref: String) {
+extension PullRequestStacksUnstackResponseBase {
+    public init(ref: String) {
         self.ref = ref
     }
 }
@@ -170,32 +147,22 @@ public indirect enum PullRequestStacksAddResponseErrorsItemValueVariant2Item {
 }
 
 extension PullRequestStacksAddResponseErrorsItemValueVariant2Item: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for PullRequestStacksAddResponseErrorsItemValueVariant2Item"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for PullRequestStacksAddResponseErrorsItemValueVariant2Item")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
 extension PullRequestStacksAddResponseErrorsItemValueVariant2Item {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) {
-            return .stringValue(value)
-        }
-        if let value = try? container.decode(Int.self) {
-            return .intValue(value)
-        }
+        if let value = try? container.decode(String.self) { return .stringValue(value) }
+        if let value = try? container.decode(Int.self) { return .intValue(value) }
         return nil
     }
 }
@@ -236,39 +203,26 @@ public struct PullRequestStacksCreateResponseErrorsItem: Codable {
         case value
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension PullRequestStacksCreateResponseErrorsItem {
-    init(from decoder: Decoder) throws {
+extension PullRequestStacksCreateResponseErrorsItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.code) else {
-            throw SdkValidationError(
-                field: "code",
-                code: "required",
-                message: "Validation failed for 'code': value is required"
-            )
+            throw SdkValidationError(field: "code", code: "required", message: "Validation failed for 'code': value is required")
         }
-        code = try container.sdkDecodeRequired(.code)
-        resource = try container.sdkDecodeIfPresent(.resource)
-        field = try container.sdkDecodeIfPresent(.field)
-        message = try container.sdkDecodeIfPresent(.message)
-        index = try container.sdkDecodeIfPresent(.index)
-        value = try container.sdkDecodeIfPresent(.value)
+        self.code = try container.sdkDecodeRequired(.code)
+        self.resource = try container.sdkDecodeIfPresent(.resource)
+        self.field = try container.sdkDecodeIfPresent(.field)
+        self.message = try container.sdkDecodeIfPresent(.message)
+        self.index = try container.sdkDecodeIfPresent(.index)
+        self.value = try container.sdkDecodeIfPresent(.value)
     }
 }
 
-public extension PullRequestStacksCreateResponseErrorsItem {
-    init(
-        code: String,
-        resource: String? = nil,
-        field: String? = nil,
-        message: String? = nil,
-        index: Int? = nil,
-        value: PullRequestStacksCreateResponseErrorsItemValue? = nil
-    ) {
+extension PullRequestStacksCreateResponseErrorsItem {
+    public init(code: String, resource: String? = nil, field: String? = nil, message: String? = nil, index: Int? = nil, value: PullRequestStacksCreateResponseErrorsItemValue? = nil) {
         (self.code, self.resource) = (code, resource)
         (self.field, self.message) = (field, message)
         (self.index, self.value) = (index, value)
@@ -285,20 +239,20 @@ public struct PullsMergeResponse: Codable {
     }
 
     init() {
-        (message, documentationUrl) = (nil, nil)
+        (self.message, self.documentationUrl) = (nil, nil)
     }
 }
 
-public extension PullsMergeResponse {
-    init(from decoder: Decoder) throws {
+extension PullsMergeResponse {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        message = try container.sdkDecodeIfPresent(.message)
-        documentationUrl = try container.sdkDecodeIfPresent(.documentationUrl)
+        self.message = try container.sdkDecodeIfPresent(.message)
+        self.documentationUrl = try container.sdkDecodeIfPresent(.documentationUrl)
     }
 }
 
-public extension PullsMergeResponse {
-    init(message: String? = nil, documentationUrl: String? = nil) {
+extension PullsMergeResponse {
+    public init(message: String? = nil, documentationUrl: String? = nil) {
         self.init()
         (self.message, self.documentationUrl) = (message, documentationUrl)
     }
@@ -326,44 +280,33 @@ public struct PullRequestStacksAddResponse: Codable {
         case pullRequests = "pull_requests"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension PullRequestStacksAddResponse {
-    init(from decoder: Decoder) throws {
+extension PullRequestStacksAddResponse {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeRequired(.id)
-        number = try container.sdkDecodeRequired(.number)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        url = try container.sdkDecodeRequired(.url)
-        base = try container.sdkDecodeRequired(.base)
-        open = try container.sdkDecodeRequired(.open)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        pullRequests = try container.sdkDecodeRequired(.pullRequests)
-        try sdkValidateUri("url", url)
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        self.id = try container.sdkDecodeRequired(.id)
+        self.number = try container.sdkDecodeRequired(.number)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.base = try container.sdkDecodeRequired(.base)
+        self.open = try container.sdkDecodeRequired(.open)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.pullRequests = try container.sdkDecodeRequired(.pullRequests)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
     }
 }
 
-public extension PullRequestStacksAddResponse {
-    init(
-        id: Int,
-        number: Int,
-        nodeId: String,
-        url: String,
-        base: PullRequestStacksAddResponseBase,
-        open: Bool,
-        createdAt: Date,
-        pullRequests: [PullRequestStackPullRequest]
-    ) throws {
+extension PullRequestStacksAddResponse {
+    public init(id: Int, number: Int, nodeId: String, url: String, base: PullRequestStacksAddResponseBase, open: Bool, createdAt: Date, pullRequests: [PullRequestStackPullRequest]) throws {
         (self.id, self.number) = (id, number)
         (self.nodeId, self.url) = (nodeId, url)
         (self.base, self.open) = (base, open)
         (self.createdAt, self.pullRequests) = (createdAt, pullRequests)
-        try sdkValidateUri("url", self.url)
-        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateUri("url", self.url)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
     }
 }
 
@@ -397,48 +340,30 @@ public struct PullsCreateReviewRequestBodyCommentsItem: Codable {
         case startSide = "start_side"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension PullsCreateReviewRequestBodyCommentsItem {
-    init(from decoder: Decoder) throws {
+extension PullsCreateReviewRequestBodyCommentsItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.path) else {
-            throw SdkValidationError(
-                field: "path",
-                code: "required",
-                message: "Validation failed for 'path': value is required"
-            )
+            throw SdkValidationError(field: "path", code: "required", message: "Validation failed for 'path': value is required")
         }
         guard container.contains(.body) else {
-            throw SdkValidationError(
-                field: "body",
-                code: "required",
-                message: "Validation failed for 'body': value is required"
-            )
+            throw SdkValidationError(field: "body", code: "required", message: "Validation failed for 'body': value is required")
         }
-        path = try container.sdkDecodeRequired(.path)
-        body = try container.sdkDecodeRequired(.body)
-        position = try container.sdkDecodeIfPresent(.position)
-        line = try container.sdkDecodeIfPresent(.line)
-        side = try container.sdkDecodeIfPresent(.side)
-        startLine = try container.sdkDecodeIfPresent(.startLine)
-        startSide = try container.sdkDecodeIfPresent(.startSide)
+        self.path = try container.sdkDecodeRequired(.path)
+        self.body = try container.sdkDecodeRequired(.body)
+        self.position = try container.sdkDecodeIfPresent(.position)
+        self.line = try container.sdkDecodeIfPresent(.line)
+        self.side = try container.sdkDecodeIfPresent(.side)
+        self.startLine = try container.sdkDecodeIfPresent(.startLine)
+        self.startSide = try container.sdkDecodeIfPresent(.startSide)
     }
 }
 
-public extension PullsCreateReviewRequestBodyCommentsItem {
-    init(
-        path: String,
-        body: String,
-        position: Int? = nil,
-        line: Int? = nil,
-        side: String? = nil,
-        startLine: Int? = nil,
-        startSide: String? = nil
-    ) {
+extension PullsCreateReviewRequestBodyCommentsItem {
+    public init(path: String, body: String, position: Int? = nil, line: Int? = nil, side: String? = nil, startLine: Int? = nil, startSide: String? = nil) {
         (self.path, self.body) = (path, body)
         (self.position, self.line) = (position, line)
         (self.side, self.startLine) = (side, startLine)
@@ -458,36 +383,26 @@ public struct PullRequestStacksCreateResponseX7b65ba7d: Codable {
         case errors
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension PullRequestStacksCreateResponseX7b65ba7d {
-    init(from decoder: Decoder) throws {
+extension PullRequestStacksCreateResponseX7b65ba7d {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.message) else {
-            throw SdkValidationError(
-                field: "message",
-                code: "required",
-                message: "Validation failed for 'message': value is required"
-            )
+            throw SdkValidationError(field: "message", code: "required", message: "Validation failed for 'message': value is required")
         }
         guard container.contains(.documentationUrl) else {
-            throw SdkValidationError(
-                field: "documentation_url",
-                code: "required",
-                message: "Validation failed for 'documentation_url': value is required"
-            )
+            throw SdkValidationError(field: "documentation_url", code: "required", message: "Validation failed for 'documentation_url': value is required")
         }
-        message = try container.sdkDecodeRequired(.message)
-        documentationUrl = try container.sdkDecodeRequired(.documentationUrl)
-        errors = try container.sdkDecodeIfPresent(.errors)
+        self.message = try container.sdkDecodeRequired(.message)
+        self.documentationUrl = try container.sdkDecodeRequired(.documentationUrl)
+        self.errors = try container.sdkDecodeIfPresent(.errors)
     }
 }
 
-public extension PullRequestStacksCreateResponseX7b65ba7d {
-    init(message: String, documentationUrl: String, errors: [PullRequestStacksCreateResponseErrorsItem]? = nil) {
+extension PullRequestStacksCreateResponseX7b65ba7d {
+    public init(message: String, documentationUrl: String, errors: [PullRequestStacksCreateResponseErrorsItem]? = nil) {
         (self.message, self.documentationUrl) = (message, documentationUrl)
         self.errors = errors
     }
@@ -499,32 +414,22 @@ public indirect enum PullRequestStacksCreateResponseErrorsItemValueVariant2Item 
 }
 
 extension PullRequestStacksCreateResponseErrorsItemValueVariant2Item: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for PullRequestStacksCreateResponseErrorsItemValueVariant2Item"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for PullRequestStacksCreateResponseErrorsItemValueVariant2Item")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
 extension PullRequestStacksCreateResponseErrorsItemValueVariant2Item {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) {
-            return .stringValue(value)
-        }
-        if let value = try? container.decode(Int.self) {
-            return .intValue(value)
-        }
+        if let value = try? container.decode(String.self) { return .stringValue(value) }
+        if let value = try? container.decode(Int.self) { return .intValue(value) }
         return nil
     }
 }
@@ -570,70 +475,51 @@ public struct PullRequestStacksCreateResponse: Codable {
         case pullRequests = "pull_requests"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension PullRequestStacksCreateResponse {
-    init(from decoder: Decoder) throws {
+extension PullRequestStacksCreateResponse {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeRequired(.id)
-        number = try container.sdkDecodeRequired(.number)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        url = try container.sdkDecodeRequired(.url)
-        base = try container.sdkDecodeRequired(.base)
-        open = try container.sdkDecodeRequired(.open)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        pullRequests = try container.sdkDecodeRequired(.pullRequests)
-        try sdkValidateUri("url", url)
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        self.id = try container.sdkDecodeRequired(.id)
+        self.number = try container.sdkDecodeRequired(.number)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.base = try container.sdkDecodeRequired(.base)
+        self.open = try container.sdkDecodeRequired(.open)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.pullRequests = try container.sdkDecodeRequired(.pullRequests)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
     }
 }
 
-public extension PullRequestStacksCreateResponse {
-    init(
-        id: Int,
-        number: Int,
-        nodeId: String,
-        url: String,
-        base: PullRequestStacksCreateResponseBase,
-        open: Bool,
-        createdAt: Date,
-        pullRequests: [PullRequestStackPullRequest]
-    ) throws {
+extension PullRequestStacksCreateResponse {
+    public init(id: Int, number: Int, nodeId: String, url: String, base: PullRequestStacksCreateResponseBase, open: Bool, createdAt: Date, pullRequests: [PullRequestStackPullRequest]) throws {
         (self.id, self.number) = (id, number)
         (self.nodeId, self.url) = (nodeId, url)
         (self.base, self.open) = (base, open)
         (self.createdAt, self.pullRequests) = (createdAt, pullRequests)
-        try sdkValidateUri("url", self.url)
-        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateUri("url", self.url)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
     }
 }
 
 public indirect enum PullRequestStacksCreateResponseErrorsItemValue {
     case stringValue(String)
     case intValue(Int)
-    case pullRequestStacksCreateResponseErrorsItemValueVariant2ItemList(
-        [PullRequestStacksCreateResponseErrorsItemValueVariant2Item]
-    )
+    case pullRequestStacksCreateResponseErrorsItemValueVariant2ItemList([PullRequestStacksCreateResponseErrorsItemValueVariant2Item])
 }
 
 extension PullRequestStacksCreateResponseErrorsItemValue: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for PullRequestStacksCreateResponseErrorsItemValue"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for PullRequestStacksCreateResponseErrorsItemValue")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }

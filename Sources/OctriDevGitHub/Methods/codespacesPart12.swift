@@ -6,37 +6,14 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension CodespacesMethods {
-    /// Stops a user's codespace. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to
-    /// use this endpoint.
+extension CodespacesMethods {
+    /// Stops a user's codespace. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - username: The handle for the GitHub user account.
     /// - codespaceName: The name of the codespace.
-    static func codespacesStopInOrganization(
-        config: ClientConfig,
-        org: String,
-        username: String,
-        codespaceName: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> Codespace {
-        try await (sdkRequest(
-            "POST",
-            [
-                "/orgs/",
-                sdkEncodePathSegment(sdkWireString(org)),
-                "/members/",
-                sdkEncodePathSegment(sdkWireString(username)),
-                "/codespaces/",
-                sdkEncodePathSegment(sdkWireString(codespaceName)),
-                "/stop",
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "codespacesStopInOrganization",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self]
-        )).data
+    public static func codespacesStopInOrganization(config: ClientConfig, org: String, username: String, codespaceName: String, requestOptions: RequestOptions? = nil) async throws -> Codespace {
+        return try (await sdkRequest("POST", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/members/", sdkEncodePathSegment(sdkWireString(username)), "/codespaces/", sdkEncodePathSegment(sdkWireString(codespaceName)), "/stop"].joined(), config: config, decoder: .json, operationId: "codespacesStopInOrganization", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self])).data
     }
 }

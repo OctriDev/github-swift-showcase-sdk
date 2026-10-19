@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension GitMethods {
-    /// Creates a reference for your repository. You are unable to create new references for empty repositories, even if
-    /// the commit SHA-1 hash used exists. Empty repositories are repositories without branches.
+extension GitMethods {
+    /// Creates a reference for your repository. You are unable to create new references for empty repositories, even if the commit SHA-1 hash used exists. Empty repositories are repositories without branches.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -19,31 +18,9 @@ public extension GitMethods {
     ///   If it doesn't start with 'refs' and have at least two slashes, it will be
     ///   rejected.
     /// - sha: The SHA1 value for this reference.
-    static func gitCreateRef(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        ref: String,
-        sha: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> GitRef {
+    public static func gitCreateRef(config: ClientConfig, owner: String, repo: String, ref: String, sha: String, requestOptions: RequestOptions? = nil) async throws -> GitRef {
         let requestBody = GitCreateRefRequestBody(ref: ref, sha: sha)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/git/refs",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "gitCreateRef",
-            options: requestOptions,
-            errors: ["409": BasicError.self, "422": ValidationError.self]
-        )).data
+        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/git/refs"].joined(), config: config, body: requestBody, decoder: .json, operationId: "gitCreateRef", options: requestOptions, errors: ["409": BasicError.self, "422": ValidationError.self])).data
     }
 }

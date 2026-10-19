@@ -6,78 +6,32 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension AppsMethods {
-    /// Suspends a GitHub App on a user, organization, or enterprise account, which blocks the app from accessing the
-    /// account's resources. When a GitHub App is suspended, the app's access to the GitHub API or webhook events is
-    /// blocked for that account. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
-    /// to access this endpoint.
+extension AppsMethods {
+    /// Suspends a GitHub App on a user, organization, or enterprise account, which blocks the app from accessing the account's resources. When a GitHub App is suspended, the app's access to the GitHub API or webhook events is blocked for that account. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
     ///
     /// - Parameters:
     /// - installationId: The unique identifier of the installation.
-    static func appsSuspendInstallation(
-        config: ClientConfig,
-        installationId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "PUT",
-            ["/app/installations/", sdkEncodePathSegment(sdkWireString(installationId)), "/suspended"].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "appsSuspendInstallation",
-            options: requestOptions,
-            errors: ["404": BasicError.self]
-        )).data
+    public static func appsSuspendInstallation(config: ClientConfig, installationId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("PUT", ["/app/installations/", sdkEncodePathSegment(sdkWireString(installationId)), "/suspended"].joined(), config: config, decoder: .empty, operationId: "appsSuspendInstallation", options: requestOptions, errors: ["404": BasicError.self])).data
     }
 
-    /// Removes a GitHub App installation suspension. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
-    /// to access this endpoint.
+    /// Removes a GitHub App installation suspension. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
     ///
     /// - Parameters:
     /// - installationId: The unique identifier of the installation.
-    static func appsUnsuspendInstallation(
-        config: ClientConfig,
-        installationId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "DELETE",
-            ["/app/installations/", sdkEncodePathSegment(sdkWireString(installationId)), "/suspended"].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "appsUnsuspendInstallation",
-            options: requestOptions,
-            errors: ["404": BasicError.self]
-        )).data
+    public static func appsUnsuspendInstallation(config: ClientConfig, installationId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("DELETE", ["/app/installations/", sdkEncodePathSegment(sdkWireString(installationId)), "/suspended"].joined(), config: config, decoder: .empty, operationId: "appsUnsuspendInstallation", options: requestOptions, errors: ["404": BasicError.self])).data
     }
 
-    /// OAuth and GitHub application owners can revoke a grant for their application and a specific user. You must
-    /// provide a valid OAuth `access_token` as an input parameter and the grant for the token's owner will be deleted.
-    /// Deleting an application's grant will also delete all OAuth tokens associated with the application for the user.
-    /// Once deleted, the application will have no access to the user's account and will no longer be listed on [the
-    /// application authorizations settings screen within GitHub](https://github.com/settings/applications#authorized).
+    /// OAuth and GitHub application owners can revoke a grant for their application and a specific user. You must provide a valid OAuth `access_token` as an input parameter and the grant for the token's owner will be deleted. Deleting an application's grant will also delete all OAuth tokens associated with the application for the user. Once deleted, the application will have no access to the user's account and will no longer be listed on [the application authorizations settings screen within GitHub](https://github.com/settings/applications#authorized).
     ///
     /// - Parameters:
     /// - clientId: The client ID of the GitHub app.
     /// - accessToken: The OAuth access token used to authenticate to the GitHub
     ///   API.
-    static func appsDeleteAuthorization(
-        config: ClientConfig,
-        clientId: String,
-        accessToken: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
+    public static func appsDeleteAuthorization(config: ClientConfig, clientId: String, accessToken: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
         let requestBody = AppsDeleteAuthorizationRequestBody(accessToken: accessToken)
 
-        return try await (sdkRequest(
-            "DELETE",
-            ["/applications/", sdkEncodePathSegment(sdkWireString(clientId)), "/grant"].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .empty,
-            operationId: "appsDeleteAuthorization",
-            options: requestOptions,
-            errors: ["422": ValidationError.self]
-        )).data
+        return try (await sdkRequest("DELETE", ["/applications/", sdkEncodePathSegment(sdkWireString(clientId)), "/grant"].joined(), config: config, body: requestBody, decoder: .empty, operationId: "appsDeleteAuthorization", options: requestOptions, errors: ["422": ValidationError.self])).data
     }
 }

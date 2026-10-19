@@ -6,10 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ActivityMethods {
-    /// This is the user's organization dashboard. You must be authenticated as the user to view this. > [!NOTE] > This
-    /// API is not built to serve real-time use cases. Depending on the time of day, event latency can be anywhere from
-    /// 30s to 6h.
+extension ActivityMethods {
+    /// This is the user's organization dashboard. You must be authenticated as the user to view this. > [!NOTE] > This API is not built to serve real-time use cases. Depending on the time of day, event latency can be anywhere from 30s to 6h.
     ///
     /// - Parameters:
     /// - username: The handle for the GitHub user account.
@@ -22,30 +20,10 @@ public extension ActivityMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    static func activityListOrgEventsForAuthenticatedUser(
-        config: ClientConfig,
-        username: String,
-        org: String,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [Event] {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/users/",
-                sdkEncodePathSegment(sdkWireString(username)),
-                "/events/orgs/",
-                sdkEncodePathSegment(sdkWireString(org)),
-            ].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("page", value: page),
-            ],
-            decoder: .json,
-            operationId: "activityListOrgEventsForAuthenticatedUser",
-            options: requestOptions
-        )).data
+    public static func activityListOrgEventsForAuthenticatedUser(config: ClientConfig, username: String, org: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [Event] {
+        return try (await sdkRequest("GET", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/events/orgs/", sdkEncodePathSegment(sdkWireString(org))].joined(), config: config, query: [
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("page", value: page),
+        ], decoder: .json, operationId: "activityListOrgEventsForAuthenticatedUser", options: requestOptions)).data
     }
 }

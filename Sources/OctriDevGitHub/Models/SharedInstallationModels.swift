@@ -3,33 +3,25 @@
 
 import Foundation
 
-/// SharedInstallation domain models
+// SharedInstallation domain models
 public indirect enum InstallationAccount {
     case simpleUser(SimpleUser)
     case enterprise(Enterprise)
 }
 
 extension InstallationAccount: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let raw = try? container.decode(JSONValue.self) {
-            if let value = Self.decodeLossless1(from: container, raw) {
-                self = value; return
-            }
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
         }
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for InstallationAccount"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for InstallationAccount")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
@@ -47,12 +39,8 @@ extension InstallationAccount {
 
 extension InstallationAccount {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(SimpleUser.self) {
-            return .simpleUser(value)
-        }
-        if let value = try? container.decode(Enterprise.self) {
-            return .enterprise(value)
-        }
+        if let value = try? container.decode(SimpleUser.self) { return .simpleUser(value) }
+        if let value = try? container.decode(Enterprise.self) { return .enterprise(value) }
         return nil
     }
 }
@@ -149,70 +137,46 @@ public struct Installation: Codable {
         case contactEmail = "contact_email"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension Installation {
-    init(from decoder: Decoder) throws {
+extension Installation {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeRequired(.id)
-        account = try container.sdkDecodeNullable(.account)
-        repositorySelection = try container.sdkDecodeRequired(.repositorySelection)
-        accessTokensUrl = try container.sdkDecodeRequired(.accessTokensUrl)
-        repositoriesUrl = try container.sdkDecodeRequired(.repositoriesUrl)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        appId = try container.sdkDecodeRequired(.appId)
-        targetId = try container.sdkDecodeRequired(.targetId)
-        targetType = try container.sdkDecodeRequired(.targetType)
-        permissions = try container.sdkDecodeRequired(.permissions)
-        events = try container.sdkDecodeRequired(.events)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        singleFileName = try container.sdkDecodeNullable(.singleFileName)
-        appSlug = try container.sdkDecodeRequired(.appSlug)
-        suspendedBy = try container.sdkDecodeNullable(.suspendedBy)
-        suspendedAt = try container.sdkDecodeNullable(.suspendedAt)
-        clientId = try container.sdkDecodeIfPresent(.clientId)
-        hasMultipleSingleFiles = try container.sdkDecodeIfPresent(.hasMultipleSingleFiles)
-        singleFilePaths = try container.sdkDecodeIfPresent(.singleFilePaths)
-        contactEmail = try container.sdkDecodeIfPresent(.contactEmail)
-        try sdkValidateUri("access_tokens_url", accessTokensUrl)
-        try sdkValidateUri("repositories_url", repositoriesUrl)
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
-        if let value = suspendedAt {
+        self.id = try container.sdkDecodeRequired(.id)
+        self.account = try container.sdkDecodeNullable(.account)
+        self.repositorySelection = try container.sdkDecodeRequired(.repositorySelection)
+        self.accessTokensUrl = try container.sdkDecodeRequired(.accessTokensUrl)
+        self.repositoriesUrl = try container.sdkDecodeRequired(.repositoriesUrl)
+        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        self.appId = try container.sdkDecodeRequired(.appId)
+        self.targetId = try container.sdkDecodeRequired(.targetId)
+        self.targetType = try container.sdkDecodeRequired(.targetType)
+        self.permissions = try container.sdkDecodeRequired(.permissions)
+        self.events = try container.sdkDecodeRequired(.events)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        self.singleFileName = try container.sdkDecodeNullable(.singleFileName)
+        self.appSlug = try container.sdkDecodeRequired(.appSlug)
+        self.suspendedBy = try container.sdkDecodeNullable(.suspendedBy)
+        self.suspendedAt = try container.sdkDecodeNullable(.suspendedAt)
+        self.clientId = try container.sdkDecodeIfPresent(.clientId)
+        self.hasMultipleSingleFiles = try container.sdkDecodeIfPresent(.hasMultipleSingleFiles)
+        self.singleFilePaths = try container.sdkDecodeIfPresent(.singleFilePaths)
+        self.contactEmail = try container.sdkDecodeIfPresent(.contactEmail)
+            try sdkValidateUri("access_tokens_url", self.accessTokensUrl)
+            try sdkValidateUri("repositories_url", self.repositoriesUrl)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+        if let value = self.suspendedAt {
             try sdkValidateDateTime("suspended_at", sdkWireString(value))
         }
     }
 }
 
-public extension Installation {
-    init(
-        id: Int,
-        account: InstallationAccount?,
-        repositorySelection: InstallationRepositorySelection,
-        accessTokensUrl: String,
-        repositoriesUrl: String,
-        htmlUrl: String,
-        appId: Int,
-        targetId: Int,
-        targetType: String,
-        permissions: AppPermissions,
-        events: [String],
-        createdAt: Date,
-        updatedAt: Date,
-        singleFileName: String?,
-        appSlug: String,
-        suspendedBy: NullableSimpleUser?,
-        suspendedAt: Date?,
-        clientId: String? = nil,
-        hasMultipleSingleFiles: Bool? = nil,
-        singleFilePaths: [String]? = nil,
-        contactEmail: String? = nil
-    ) throws {
+extension Installation {
+    public init(id: Int, account: InstallationAccount?, repositorySelection: InstallationRepositorySelection, accessTokensUrl: String, repositoriesUrl: String, htmlUrl: String, appId: Int, targetId: Int, targetType: String, permissions: AppPermissions, events: [String], createdAt: Date, updatedAt: Date, singleFileName: String?, appSlug: String, suspendedBy: NullableSimpleUser?, suspendedAt: Date?, clientId: String? = nil, hasMultipleSingleFiles: Bool? = nil, singleFilePaths: [String]? = nil, contactEmail: String? = nil) throws {
         (self.id, self.account) = (id, account)
         (self.repositorySelection, self.accessTokensUrl) = (repositorySelection, accessTokensUrl)
         (self.repositoriesUrl, self.htmlUrl) = (repositoriesUrl, htmlUrl)
@@ -224,11 +188,11 @@ public extension Installation {
         (self.suspendedAt, self.clientId) = (suspendedAt, clientId)
         (self.hasMultipleSingleFiles, self.singleFilePaths) = (hasMultipleSingleFiles, singleFilePaths)
         self.contactEmail = contactEmail
-        try sdkValidateUri("access_tokens_url", self.accessTokensUrl)
-        try sdkValidateUri("repositories_url", self.repositoriesUrl)
-        try sdkValidateUri("html_url", self.htmlUrl)
-        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateUri("access_tokens_url", self.accessTokensUrl)
+            try sdkValidateUri("repositories_url", self.repositoriesUrl)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
         if let value = self.suspendedAt {
             try sdkValidateDateTime("suspended_at", sdkWireString(value))
         }
@@ -239,16 +203,13 @@ public extension Installation {
 public struct InstallationRepositorySelection: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let all = InstallationRepositorySelection(rawValue: "all")
     public static let selected = InstallationRepositorySelection(rawValue: "selected")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

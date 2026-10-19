@@ -3,39 +3,29 @@
 
 import Foundation
 
-/// SharedIssue domain models
+// SharedIssue domain models
 public indirect enum IssueLabelsItem {
     case stringValue(String)
     case issueLabelsItemVariant1(IssueLabelsItemVariant1)
 }
 
 extension IssueLabelsItem: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for IssueLabelsItem"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for IssueLabelsItem")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
 extension IssueLabelsItem {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) {
-            return .stringValue(value)
-        }
-        if let value = try? container.decode(IssueLabelsItemVariant1.self) {
-            return .issueLabelsItemVariant1(value)
-        }
+        if let value = try? container.decode(String.self) { return .stringValue(value) }
+        if let value = try? container.decode(IssueLabelsItemVariant1.self) { return .issueLabelsItemVariant1(value) }
         return nil
     }
 }
@@ -68,43 +58,29 @@ public struct IssueFieldValueSingleSelectOption: Codable {
         case color
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension IssueFieldValueSingleSelectOption {
-    init(from decoder: Decoder) throws {
+extension IssueFieldValueSingleSelectOption {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.color) else {
-            throw SdkValidationError(
-                field: "color",
-                code: "required",
-                message: "Validation failed for 'color': value is required"
-            )
+            throw SdkValidationError(field: "color", code: "required", message: "Validation failed for 'color': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
-        name = try container.sdkDecodeRequired(.name)
-        color = try container.sdkDecodeRequired(.color)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.color = try container.sdkDecodeRequired(.color)
     }
 }
 
-public extension IssueFieldValueSingleSelectOption {
-    init(id: Int, name: String, color: String) {
+extension IssueFieldValueSingleSelectOption {
+    public init(id: Int, name: String, color: String) {
         (self.id, self.name) = (id, name)
         self.color = color
     }
@@ -141,44 +117,35 @@ public struct IssueLabelsItemVariant1: Codable {
     }
 
     init() {
-        (id, nodeId, url, name, description) = (nil, nil, nil, nil, nil)
-        (color, self.default, archivedBy) = (nil, nil, nil)
+        (self.id, self.nodeId, self.url, self.name, self.description) = (nil, nil, nil, nil, nil)
+        (self.color, self.`default`, self.archivedBy) = (nil, nil, nil)
     }
 }
 
-public extension IssueLabelsItemVariant1 {
-    init(from decoder: Decoder) throws {
+extension IssueLabelsItemVariant1 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeIfPresent(.id)
-        nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        url = try container.sdkDecodeIfPresent(.url)
-        name = try container.sdkDecodeIfPresent(.name)
-        description = try container.sdkDecodeIfPresent(.description)
-        color = try container.sdkDecodeIfPresent(.color)
-        self.default = try container.sdkDecodeIfPresent(.default)
-        archivedBy = try container.sdkDecodeIfPresent(.archivedBy)
-        if let value = url {
+        self.id = try container.sdkDecodeIfPresent(.id)
+        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        self.url = try container.sdkDecodeIfPresent(.url)
+        self.name = try container.sdkDecodeIfPresent(.name)
+        self.description = try container.sdkDecodeIfPresent(.description)
+        self.color = try container.sdkDecodeIfPresent(.color)
+        self.`default` = try container.sdkDecodeIfPresent(.`default`)
+        self.archivedBy = try container.sdkDecodeIfPresent(.archivedBy)
+        if let value = self.url {
             try sdkValidateUri("url", value)
         }
     }
 }
 
-public extension IssueLabelsItemVariant1 {
-    init(
-        id: Int? = nil,
-        nodeId: String? = nil,
-        url: String? = nil,
-        name: String? = nil,
-        description: String? = nil,
-        color: String? = nil,
-        default: Bool? = nil,
-        archivedBy: SimpleUser? = nil
-    ) throws {
+extension IssueLabelsItemVariant1 {
+    public init(id: Int? = nil, nodeId: String? = nil, url: String? = nil, name: String? = nil, description: String? = nil, color: String? = nil, `default`: Bool? = nil, archivedBy: SimpleUser? = nil) throws {
         self.init()
         (self.id, self.nodeId) = (id, nodeId)
         (self.url, self.name) = (url, name)
         (self.description, self.color) = (description, color)
-        (self.default, self.archivedBy) = (`default`, archivedBy)
+        (self.`default`, self.archivedBy) = (`default`, archivedBy)
         if let value = self.url {
             try sdkValidateUri("url", value)
         }
@@ -203,43 +170,29 @@ public struct IssueFieldValueMultiSelectOptionsItem: Codable {
         case color
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension IssueFieldValueMultiSelectOptionsItem {
-    init(from decoder: Decoder) throws {
+extension IssueFieldValueMultiSelectOptionsItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.color) else {
-            throw SdkValidationError(
-                field: "color",
-                code: "required",
-                message: "Validation failed for 'color': value is required"
-            )
+            throw SdkValidationError(field: "color", code: "required", message: "Validation failed for 'color': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
-        name = try container.sdkDecodeRequired(.name)
-        color = try container.sdkDecodeRequired(.color)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.color = try container.sdkDecodeRequired(.color)
     }
 }
 
-public extension IssueFieldValueMultiSelectOptionsItem {
-    init(id: Int, name: String, color: String) {
+extension IssueFieldValueMultiSelectOptionsItem {
+    public init(id: Int, name: String, color: String) {
         (self.id, self.name) = (id, name)
         self.color = color
     }
@@ -275,70 +228,43 @@ public struct IssueType: Codable {
         case isEnabled = "is_enabled"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension IssueType {
-    init(from decoder: Decoder) throws {
+extension IssueType {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
         guard container.contains(.nodeId) else {
-            throw SdkValidationError(
-                field: "node_id",
-                code: "required",
-                message: "Validation failed for 'node_id': value is required"
-            )
+            throw SdkValidationError(field: "node_id", code: "required", message: "Validation failed for 'node_id': value is required")
         }
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.description) else {
-            throw SdkValidationError(
-                field: "description",
-                code: "required",
-                message: "Validation failed for 'description': value is required"
-            )
+            throw SdkValidationError(field: "description", code: "required", message: "Validation failed for 'description': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        name = try container.sdkDecodeRequired(.name)
-        description = try container.sdkDecodeNullable(.description)
-        color = try container.sdkDecodeIfPresent(.color)
-        createdAt = try container.sdkDecodeIfPresent(.createdAt)
-        updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
-        isEnabled = try container.sdkDecodeIfPresent(.isEnabled)
-        if let value = createdAt {
+        self.id = try container.sdkDecodeRequired(.id)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.description = try container.sdkDecodeNullable(.description)
+        self.color = try container.sdkDecodeIfPresent(.color)
+        self.createdAt = try container.sdkDecodeIfPresent(.createdAt)
+        self.updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
+        self.isEnabled = try container.sdkDecodeIfPresent(.isEnabled)
+        if let value = self.createdAt {
             try sdkValidateDateTime("created_at", sdkWireString(value))
         }
-        if let value = updatedAt {
+        if let value = self.updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
     }
 }
 
-public extension IssueType {
-    init(
-        id: Int,
-        nodeId: String,
-        name: String,
-        description: String?,
-        color: IssueTypeColor? = nil,
-        createdAt: Date? = nil,
-        updatedAt: Date? = nil,
-        isEnabled: Bool? = nil
-    ) throws {
+extension IssueType {
+    public init(id: Int, nodeId: String, name: String, description: String?, color: IssueTypeColor? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, isEnabled: Bool? = nil) throws {
         (self.id, self.nodeId) = (id, nodeId)
         (self.name, self.description) = (name, description)
         (self.color, self.createdAt) = (color, createdAt)
@@ -373,67 +299,49 @@ public struct IssuePullRequest: Codable {
         case mergedAt = "merged_at"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension IssuePullRequest {
-    init(from decoder: Decoder) throws {
+extension IssuePullRequest {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.diffUrl) else {
-            throw SdkValidationError(
-                field: "diff_url",
-                code: "required",
-                message: "Validation failed for 'diff_url': value is required"
-            )
+            throw SdkValidationError(field: "diff_url", code: "required", message: "Validation failed for 'diff_url': value is required")
         }
         guard container.contains(.htmlUrl) else {
-            throw SdkValidationError(
-                field: "html_url",
-                code: "required",
-                message: "Validation failed for 'html_url': value is required"
-            )
+            throw SdkValidationError(field: "html_url", code: "required", message: "Validation failed for 'html_url': value is required")
         }
         guard container.contains(.patchUrl) else {
-            throw SdkValidationError(
-                field: "patch_url",
-                code: "required",
-                message: "Validation failed for 'patch_url': value is required"
-            )
+            throw SdkValidationError(field: "patch_url", code: "required", message: "Validation failed for 'patch_url': value is required")
         }
         guard container.contains(.url) else {
-            throw SdkValidationError(
-                field: "url",
-                code: "required",
-                message: "Validation failed for 'url': value is required"
-            )
+            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
         }
-        diffUrl = try container.sdkDecodeNullable(.diffUrl)
-        htmlUrl = try container.sdkDecodeNullable(.htmlUrl)
-        patchUrl = try container.sdkDecodeNullable(.patchUrl)
-        url = try container.sdkDecodeNullable(.url)
-        mergedAt = try container.sdkDecodeIfPresent(.mergedAt)
-        if let value = diffUrl {
+        self.diffUrl = try container.sdkDecodeNullable(.diffUrl)
+        self.htmlUrl = try container.sdkDecodeNullable(.htmlUrl)
+        self.patchUrl = try container.sdkDecodeNullable(.patchUrl)
+        self.url = try container.sdkDecodeNullable(.url)
+        self.mergedAt = try container.sdkDecodeIfPresent(.mergedAt)
+        if let value = self.diffUrl {
             try sdkValidateUri("diff_url", value)
         }
-        if let value = htmlUrl {
+        if let value = self.htmlUrl {
             try sdkValidateUri("html_url", value)
         }
-        if let value = patchUrl {
+        if let value = self.patchUrl {
             try sdkValidateUri("patch_url", value)
         }
-        if let value = url {
+        if let value = self.url {
             try sdkValidateUri("url", value)
         }
-        if let value = mergedAt {
+        if let value = self.mergedAt {
             try sdkValidateDateTime("merged_at", sdkWireString(value))
         }
     }
 }
 
-public extension IssuePullRequest {
-    init(diffUrl: String?, htmlUrl: String?, patchUrl: String?, url: String?, mergedAt: Date? = nil) throws {
+extension IssuePullRequest {
+    public init(diffUrl: String?, htmlUrl: String?, patchUrl: String?, url: String?, mergedAt: Date? = nil) throws {
         (self.diffUrl, self.htmlUrl) = (diffUrl, htmlUrl)
         (self.patchUrl, self.url) = (patchUrl, url)
         self.mergedAt = mergedAt
@@ -486,62 +394,36 @@ public struct IssueFieldValue: Codable {
         case multiSelectOptions = "multi_select_options"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension IssueFieldValue {
-    init(from decoder: Decoder) throws {
+extension IssueFieldValue {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.issueFieldId) else {
-            throw SdkValidationError(
-                field: "issue_field_id",
-                code: "required",
-                message: "Validation failed for 'issue_field_id': value is required"
-            )
+            throw SdkValidationError(field: "issue_field_id", code: "required", message: "Validation failed for 'issue_field_id': value is required")
         }
         guard container.contains(.nodeId) else {
-            throw SdkValidationError(
-                field: "node_id",
-                code: "required",
-                message: "Validation failed for 'node_id': value is required"
-            )
+            throw SdkValidationError(field: "node_id", code: "required", message: "Validation failed for 'node_id': value is required")
         }
         guard container.contains(.dataType) else {
-            throw SdkValidationError(
-                field: "data_type",
-                code: "required",
-                message: "Validation failed for 'data_type': value is required"
-            )
+            throw SdkValidationError(field: "data_type", code: "required", message: "Validation failed for 'data_type': value is required")
         }
         guard container.contains(.value) else {
-            throw SdkValidationError(
-                field: "value",
-                code: "required",
-                message: "Validation failed for 'value': value is required"
-            )
+            throw SdkValidationError(field: "value", code: "required", message: "Validation failed for 'value': value is required")
         }
-        issueFieldId = try container.sdkDecodeRequired(.issueFieldId)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        dataType = try container.sdkDecodeRequired(.dataType)
-        value = try container.sdkDecodeNullable(.value)
-        issueFieldName = try container.sdkDecodeIfPresent(.issueFieldName)
-        singleSelectOption = try container.sdkDecodeIfPresent(.singleSelectOption)
-        multiSelectOptions = try container.sdkDecodeIfPresent(.multiSelectOptions)
+        self.issueFieldId = try container.sdkDecodeRequired(.issueFieldId)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.dataType = try container.sdkDecodeRequired(.dataType)
+        self.value = try container.sdkDecodeNullable(.value)
+        self.issueFieldName = try container.sdkDecodeIfPresent(.issueFieldName)
+        self.singleSelectOption = try container.sdkDecodeIfPresent(.singleSelectOption)
+        self.multiSelectOptions = try container.sdkDecodeIfPresent(.multiSelectOptions)
     }
 }
 
-public extension IssueFieldValue {
-    init(
-        issueFieldId: Int,
-        nodeId: String,
-        dataType: IssueFieldValueDataType,
-        value: IssueFieldValueValue?,
-        issueFieldName: String? = nil,
-        singleSelectOption: IssueFieldValueSingleSelectOption? = nil,
-        multiSelectOptions: [IssueFieldValueMultiSelectOptionsItem]? = nil
-    ) {
+extension IssueFieldValue {
+    public init(issueFieldId: Int, nodeId: String, dataType: IssueFieldValueDataType, value: IssueFieldValueValue?, issueFieldName: String? = nil, singleSelectOption: IssueFieldValueSingleSelectOption? = nil, multiSelectOptions: [IssueFieldValueMultiSelectOptionsItem]? = nil) {
         (self.issueFieldId, self.nodeId) = (issueFieldId, nodeId)
         (self.dataType, self.value) = (dataType, value)
         (self.issueFieldName, self.singleSelectOption) = (issueFieldName, singleSelectOption)
@@ -567,51 +449,33 @@ public struct IssueDependenciesSummary: Codable {
         case totalBlocking = "total_blocking"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension IssueDependenciesSummary {
-    init(from decoder: Decoder) throws {
+extension IssueDependenciesSummary {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.blockedBy) else {
-            throw SdkValidationError(
-                field: "blocked_by",
-                code: "required",
-                message: "Validation failed for 'blocked_by': value is required"
-            )
+            throw SdkValidationError(field: "blocked_by", code: "required", message: "Validation failed for 'blocked_by': value is required")
         }
         guard container.contains(.blocking) else {
-            throw SdkValidationError(
-                field: "blocking",
-                code: "required",
-                message: "Validation failed for 'blocking': value is required"
-            )
+            throw SdkValidationError(field: "blocking", code: "required", message: "Validation failed for 'blocking': value is required")
         }
         guard container.contains(.totalBlockedBy) else {
-            throw SdkValidationError(
-                field: "total_blocked_by",
-                code: "required",
-                message: "Validation failed for 'total_blocked_by': value is required"
-            )
+            throw SdkValidationError(field: "total_blocked_by", code: "required", message: "Validation failed for 'total_blocked_by': value is required")
         }
         guard container.contains(.totalBlocking) else {
-            throw SdkValidationError(
-                field: "total_blocking",
-                code: "required",
-                message: "Validation failed for 'total_blocking': value is required"
-            )
+            throw SdkValidationError(field: "total_blocking", code: "required", message: "Validation failed for 'total_blocking': value is required")
         }
-        blockedBy = try container.sdkDecodeRequired(.blockedBy)
-        blocking = try container.sdkDecodeRequired(.blocking)
-        totalBlockedBy = try container.sdkDecodeRequired(.totalBlockedBy)
-        totalBlocking = try container.sdkDecodeRequired(.totalBlocking)
+        self.blockedBy = try container.sdkDecodeRequired(.blockedBy)
+        self.blocking = try container.sdkDecodeRequired(.blocking)
+        self.totalBlockedBy = try container.sdkDecodeRequired(.totalBlockedBy)
+        self.totalBlocking = try container.sdkDecodeRequired(.totalBlocking)
     }
 }
 
-public extension IssueDependenciesSummary {
-    init(blockedBy: Int, blocking: Int, totalBlockedBy: Int, totalBlocking: Int) {
+extension IssueDependenciesSummary {
+    public init(blockedBy: Int, blocking: Int, totalBlockedBy: Int, totalBlocking: Int) {
         (self.blockedBy, self.blocking) = (blockedBy, blocking)
         (self.totalBlockedBy, self.totalBlocking) = (totalBlockedBy, totalBlocking)
     }

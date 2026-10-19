@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension PullsMethods {
-    /// Lists pull request stacks in a repository. Use `pull_request` to filter for the stack containing a specific pull
-    /// request, and use `page` and `per_page` to paginate the results.
+extension PullsMethods {
+    /// Lists pull request stacks in a repository. Use `pull_request` to filter for the stack containing a specific pull request, and use `page` and `per_page` to paginate the results.
     ///
     /// Lists pull request stacks in a repository.
     ///
@@ -27,34 +26,11 @@ public extension PullsMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    static func pullRequestStacksList(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        pullRequest: Int? = nil,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [PullRequestStackMinimal] {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/stacks",
-            ].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("pull_request", value: pullRequest),
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("page", value: page),
-            ],
-            decoder: .json,
-            operationId: "pullRequestStacksList",
-            options: requestOptions,
-            errors: ["404": BasicError.self, "422": ValidationError.self]
-        )).data
+    public static func pullRequestStacksList(config: ClientConfig, owner: String, repo: String, pullRequest: Int? = nil, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [PullRequestStackMinimal] {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/stacks"].joined(), config: config, query: [
+            SdkQueryParameter("pull_request", value: pullRequest),
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("page", value: page),
+        ], decoder: .json, operationId: "pullRequestStacksList", options: requestOptions, errors: ["404": BasicError.self, "422": ValidationError.self])).data
     }
 }

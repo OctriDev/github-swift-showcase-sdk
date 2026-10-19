@@ -6,16 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension UsersMethods {
-    /// List a collection of artifact attestations with a given subject digest that are associated with repositories
-    /// owned by a user. The collection of attestations returned by this endpoint is filtered according to the
-    /// authenticated user's permissions; if the authenticated user cannot read a repository, the attestations
-    /// associated with that repository will not be included in the response. In addition, when using a fine-grained
-    /// access token the `attestations:read` permission is required. **Please note:** in order to offer meaningful
-    /// security benefits, an attestation's signature and timestamps **must** be cryptographically verified, and the
-    /// identity of the attestation signer **must** be validated. Attestations can be verified using the [GitHub CLI
-    /// `attestation verify` command](https://cli.github.com/manual/gh_attestation_verify). For more information, see
-    /// [our guide on how to use artifact attestations to establish a build's provenance](https://docs.github.com/actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds).
+extension UsersMethods {
+    /// List a collection of artifact attestations with a given subject digest that are associated with repositories owned by a user. The collection of attestations returned by this endpoint is filtered according to the authenticated user's permissions; if the authenticated user cannot read a repository, the attestations associated with that repository will not be included in the response. In addition, when using a fine-grained access token the `attestations:read` permission is required. **Please note:** in order to offer meaningful security benefits, an attestation's signature and timestamps **must** be cryptographically verified, and the identity of the attestation signer **must** be validated. Attestations can be verified using the [GitHub CLI `attestation verify` command](https://cli.github.com/manual/gh_attestation_verify). For more information, see [our guide on how to use artifact attestations to establish a build's provenance](https://docs.github.com/actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds).
     ///
     /// - Parameters:
     /// - username: The handle for the GitHub user account.
@@ -39,35 +31,12 @@ public extension UsersMethods {
     /// - predicateType: Optional filter for fetching attestations with a given
     ///   predicate type. This option accepts `provenance`, `sbom`, `release`, or
     ///   freeform text for custom predicate types.
-    static func usersListAttestations(
-        config: ClientConfig,
-        username: String,
-        subjectDigest: String,
-        perPage: Int? = nil,
-        before: String? = nil,
-        after: String? = nil,
-        predicateType: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> UsersListAttestationsResponse {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/users/",
-                sdkEncodePathSegment(sdkWireString(username)),
-                "/attestations/",
-                sdkEncodePathSegment(sdkWireString(subjectDigest)),
-            ].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("before", value: before),
-                SdkQueryParameter("after", value: after),
-                SdkQueryParameter("predicate_type", value: predicateType),
-            ],
-            decoder: .json,
-            operationId: "usersListAttestations",
-            options: requestOptions,
-            errors: ["404": BasicError.self]
-        )).data
+    public static func usersListAttestations(config: ClientConfig, username: String, subjectDigest: String, perPage: Int? = nil, before: String? = nil, after: String? = nil, predicateType: String? = nil, requestOptions: RequestOptions? = nil) async throws -> UsersListAttestationsResponse {
+        return try (await sdkRequest("GET", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/attestations/", sdkEncodePathSegment(sdkWireString(subjectDigest))].joined(), config: config, query: [
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("before", value: before),
+            SdkQueryParameter("after", value: after),
+            SdkQueryParameter("predicate_type", value: predicateType),
+        ], decoder: .json, operationId: "usersListAttestations", options: requestOptions, errors: ["404": BasicError.self])).data
     }
 }

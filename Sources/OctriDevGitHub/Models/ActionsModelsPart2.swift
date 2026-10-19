@@ -3,16 +3,9 @@
 
 import Foundation
 
-/// Actions domain models
-public extension JobStepsItem {
-    init(
-        status: JobStepsItemStatus,
-        conclusion: String?,
-        name: String,
-        number: Int,
-        startedAt: Date? = nil,
-        completedAt: Date? = nil
-    ) throws {
+// Actions domain models
+extension JobStepsItem {
+    public init(status: JobStepsItemStatus, conclusion: String?, name: String, number: Int, startedAt: Date? = nil, completedAt: Date? = nil) throws {
         (self.status, self.conclusion) = (status, conclusion)
         (self.name, self.number) = (name, number)
         (self.startedAt, self.completedAt) = (startedAt, completedAt)
@@ -40,36 +33,26 @@ public struct ReferencedWorkflow: Codable {
         case ref
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ReferencedWorkflow {
-    init(from decoder: Decoder) throws {
+extension ReferencedWorkflow {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.path) else {
-            throw SdkValidationError(
-                field: "path",
-                code: "required",
-                message: "Validation failed for 'path': value is required"
-            )
+            throw SdkValidationError(field: "path", code: "required", message: "Validation failed for 'path': value is required")
         }
         guard container.contains(.sha) else {
-            throw SdkValidationError(
-                field: "sha",
-                code: "required",
-                message: "Validation failed for 'sha': value is required"
-            )
+            throw SdkValidationError(field: "sha", code: "required", message: "Validation failed for 'sha': value is required")
         }
-        path = try container.sdkDecodeRequired(.path)
-        sha = try container.sdkDecodeRequired(.sha)
-        ref = try container.sdkDecodeIfPresent(.ref)
+        self.path = try container.sdkDecodeRequired(.path)
+        self.sha = try container.sdkDecodeRequired(.sha)
+        self.ref = try container.sdkDecodeIfPresent(.ref)
     }
 }
 
-public extension ReferencedWorkflow {
-    init(path: String, sha: String, ref: String? = nil) {
+extension ReferencedWorkflow {
+    public init(path: String, sha: String, ref: String? = nil) {
         (self.path, self.sha) = (path, sha)
         self.ref = ref
     }
@@ -176,71 +159,45 @@ public struct Job: Codable {
         case steps
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension Job {
-    init(from decoder: Decoder) throws {
+extension Job {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeRequired(.id)
-        runId = try container.sdkDecodeRequired(.runId)
-        runUrl = try container.sdkDecodeRequired(.runUrl)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        headSha = try container.sdkDecodeRequired(.headSha)
-        url = try container.sdkDecodeRequired(.url)
-        htmlUrl = try container.sdkDecodeNullable(.htmlUrl)
-        status = try container.sdkDecodeRequired(.status)
-        conclusion = try container.sdkDecodeNullable(.conclusion)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        startedAt = try container.sdkDecodeRequired(.startedAt)
-        completedAt = try container.sdkDecodeNullable(.completedAt)
-        name = try container.sdkDecodeRequired(.name)
-        checkRunUrl = try container.sdkDecodeRequired(.checkRunUrl)
-        labels = try container.sdkDecodeRequired(.labels)
-        runnerId = try container.sdkDecodeNullable(.runnerId)
-        runnerName = try container.sdkDecodeNullable(.runnerName)
-        runnerGroupId = try container.sdkDecodeNullable(.runnerGroupId)
-        runnerGroupName = try container.sdkDecodeNullable(.runnerGroupName)
-        workflowName = try container.sdkDecodeNullable(.workflowName)
-        headBranch = try container.sdkDecodeNullable(.headBranch)
-        runAttempt = try container.sdkDecodeIfPresent(.runAttempt)
-        steps = try container.sdkDecodeIfPresent(.steps)
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
-        try sdkValidateDateTime("started_at", sdkWireString(startedAt))
-        if let value = completedAt {
+        self.id = try container.sdkDecodeRequired(.id)
+        self.runId = try container.sdkDecodeRequired(.runId)
+        self.runUrl = try container.sdkDecodeRequired(.runUrl)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.headSha = try container.sdkDecodeRequired(.headSha)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.htmlUrl = try container.sdkDecodeNullable(.htmlUrl)
+        self.status = try container.sdkDecodeRequired(.status)
+        self.conclusion = try container.sdkDecodeNullable(.conclusion)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.startedAt = try container.sdkDecodeRequired(.startedAt)
+        self.completedAt = try container.sdkDecodeNullable(.completedAt)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.checkRunUrl = try container.sdkDecodeRequired(.checkRunUrl)
+        self.labels = try container.sdkDecodeRequired(.labels)
+        self.runnerId = try container.sdkDecodeNullable(.runnerId)
+        self.runnerName = try container.sdkDecodeNullable(.runnerName)
+        self.runnerGroupId = try container.sdkDecodeNullable(.runnerGroupId)
+        self.runnerGroupName = try container.sdkDecodeNullable(.runnerGroupName)
+        self.workflowName = try container.sdkDecodeNullable(.workflowName)
+        self.headBranch = try container.sdkDecodeNullable(.headBranch)
+        self.runAttempt = try container.sdkDecodeIfPresent(.runAttempt)
+        self.steps = try container.sdkDecodeIfPresent(.steps)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("started_at", sdkWireString(self.startedAt))
+        if let value = self.completedAt {
             try sdkValidateDateTime("completed_at", sdkWireString(value))
         }
     }
 }
 
-public extension Job {
-    init(
-        id: Int,
-        runId: Int,
-        runUrl: String,
-        nodeId: String,
-        headSha: String,
-        url: String,
-        htmlUrl: String?,
-        status: JobStatus,
-        conclusion: JobConclusion?,
-        createdAt: Date,
-        startedAt: Date,
-        completedAt: Date?,
-        name: String,
-        checkRunUrl: String,
-        labels: [String],
-        runnerId: Int?,
-        runnerName: String?,
-        runnerGroupId: Int?,
-        runnerGroupName: String?,
-        workflowName: String?,
-        headBranch: String?,
-        runAttempt: Int? = nil,
-        steps: [JobStepsItem]? = nil
-    ) throws {
+extension Job {
+    public init(id: Int, runId: Int, runUrl: String, nodeId: String, headSha: String, url: String, htmlUrl: String?, status: JobStatus, conclusion: JobConclusion?, createdAt: Date, startedAt: Date, completedAt: Date?, name: String, checkRunUrl: String, labels: [String], runnerId: Int?, runnerName: String?, runnerGroupId: Int?, runnerGroupName: String?, workflowName: String?, headBranch: String?, runAttempt: Int? = nil, steps: [JobStepsItem]? = nil) throws {
         (self.id, self.runId) = (id, runId)
         (self.runUrl, self.nodeId) = (runUrl, nodeId)
         (self.headSha, self.url) = (headSha, url)
@@ -253,8 +210,8 @@ public extension Job {
         (self.runnerGroupName, self.workflowName) = (runnerGroupName, workflowName)
         (self.headBranch, self.runAttempt) = (headBranch, runAttempt)
         self.steps = steps
-        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-        try sdkValidateDateTime("started_at", sdkWireString(self.startedAt))
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("started_at", sdkWireString(self.startedAt))
         if let value = self.completedAt {
             try sdkValidateDateTime("completed_at", sdkWireString(value))
         }
@@ -265,17 +222,14 @@ public extension Job {
 public struct EnabledRepositories: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let all = EnabledRepositories(rawValue: "all")
     public static let none = EnabledRepositories(rawValue: "none")
     public static let selected = EnabledRepositories(rawValue: "selected")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -288,17 +242,14 @@ public struct EnabledRepositories: RawRepresentable, Hashable, Codable, Sendable
 public struct AllowedActions: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let all = AllowedActions(rawValue: "all")
     public static let localOnly = AllowedActions(rawValue: "local_only")
     public static let selected = AllowedActions(rawValue: "selected")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -311,10 +262,7 @@ public struct AllowedActions: RawRepresentable, Hashable, Codable, Sendable, Sdk
 public struct JobConclusion: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let success = JobConclusion(rawValue: "success")
     public static let failure = JobConclusion(rawValue: "failure")
     public static let neutral = JobConclusion(rawValue: "neutral")
@@ -325,7 +273,7 @@ public struct JobConclusion: RawRepresentable, Hashable, Codable, Sendable, SdkW
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -338,17 +286,14 @@ public struct JobConclusion: RawRepresentable, Hashable, Codable, Sendable, SdkW
 public struct EnvironmentApprovalsState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let approved = EnvironmentApprovalsState(rawValue: "approved")
     public static let rejected = EnvironmentApprovalsState(rawValue: "rejected")
     public static let pending = EnvironmentApprovalsState(rawValue: "pending")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -361,10 +306,7 @@ public struct EnvironmentApprovalsState: RawRepresentable, Hashable, Codable, Se
 public struct JobStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let queued = JobStatus(rawValue: "queued")
     public static let inProgress = JobStatus(rawValue: "in_progress")
     public static let completed = JobStatus(rawValue: "completed")
@@ -374,7 +316,7 @@ public struct JobStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireC
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -384,21 +326,17 @@ public struct JobStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireC
 }
 
 /// The policy that controls whether self-hosted runners can be used by repositories in the organization
-public struct SelfHostedRunnersSettingsEnabledRepositories: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct SelfHostedRunnersSettingsEnabledRepositories: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let all = SelfHostedRunnersSettingsEnabledRepositories(rawValue: "all")
     public static let selected = SelfHostedRunnersSettingsEnabledRepositories(rawValue: "selected")
     public static let none = SelfHostedRunnersSettingsEnabledRepositories(rawValue: "none")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -411,17 +349,14 @@ public struct SelfHostedRunnersSettingsEnabledRepositories: RawRepresentable, Ha
 public struct JobStepsItemStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let queued = JobStepsItemStatus(rawValue: "queued")
     public static let inProgress = JobStepsItemStatus(rawValue: "in_progress")
     public static let completed = JobStepsItemStatus(rawValue: "completed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -431,20 +366,16 @@ public struct JobStepsItemStatus: RawRepresentable, Hashable, Codable, Sendable,
 }
 
 /// Describe whether all repositories have been selected or there's a selection involved
-public struct AuthenticationTokenRepositorySelection: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct AuthenticationTokenRepositorySelection: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let all = AuthenticationTokenRepositorySelection(rawValue: "all")
     public static let selected = AuthenticationTokenRepositorySelection(rawValue: "selected")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

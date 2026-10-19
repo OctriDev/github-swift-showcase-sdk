@@ -3,11 +3,11 @@
 
 import Foundation
 
-/// ReposRepositoryRule domain models
-public extension RepositoryRuleCodeQuality {
-    init(type: RepositoryRuleCodeQualityType, parameters: RepositoryRuleCodeQualityParameters? = nil) throws {
+// ReposRepositoryRule domain models
+extension RepositoryRuleCodeQuality {
+    public init(type: RepositoryRuleCodeQualityType, parameters: RepositoryRuleCodeQualityParameters? = nil) throws {
         (self.type, self.parameters) = (type, parameters)
-        try sdkValidateRawEnum("type", self.type, RepositoryRuleCodeQualityType.allCases.map(\.rawValue))
+            try sdkValidateRawEnum("type", self.type, RepositoryRuleCodeQualityType.allCases.map(\.rawValue))
     }
 }
 
@@ -20,30 +20,24 @@ public struct RepositoryRuleLicenseComplianceScanning: Codable {
         case type
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension RepositoryRuleLicenseComplianceScanning {
-    init(from decoder: Decoder) throws {
+extension RepositoryRuleLicenseComplianceScanning {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.type) else {
-            throw SdkValidationError(
-                field: "type",
-                code: "required",
-                message: "Validation failed for 'type': value is required"
-            )
+            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
         }
-        type = try container.sdkDecodeRequired(.type)
-        try sdkValidateRawEnum("type", type, RepositoryRuleLicenseComplianceScanningType.allCases.map(\.rawValue))
+        self.type = try container.sdkDecodeRequired(.type)
+            try sdkValidateRawEnum("type", self.type, RepositoryRuleLicenseComplianceScanningType.allCases.map(\.rawValue))
     }
 }
 
-public extension RepositoryRuleLicenseComplianceScanning {
-    init(type: RepositoryRuleLicenseComplianceScanningType) throws {
+extension RepositoryRuleLicenseComplianceScanning {
+    public init(type: RepositoryRuleLicenseComplianceScanningType) throws {
         self.type = type
-        try sdkValidateRawEnum("type", self.type, RepositoryRuleLicenseComplianceScanningType.allCases.map(\.rawValue))
+            try sdkValidateRawEnum("type", self.type, RepositoryRuleLicenseComplianceScanningType.allCases.map(\.rawValue))
     }
 }
 
@@ -64,43 +58,29 @@ public struct RepositoryRuleParamsRequiredReviewerConfiguration: Codable {
         case reviewer
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension RepositoryRuleParamsRequiredReviewerConfiguration {
-    init(from decoder: Decoder) throws {
+extension RepositoryRuleParamsRequiredReviewerConfiguration {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.filePatterns) else {
-            throw SdkValidationError(
-                field: "file_patterns",
-                code: "required",
-                message: "Validation failed for 'file_patterns': value is required"
-            )
+            throw SdkValidationError(field: "file_patterns", code: "required", message: "Validation failed for 'file_patterns': value is required")
         }
         guard container.contains(.minimumApprovals) else {
-            throw SdkValidationError(
-                field: "minimum_approvals",
-                code: "required",
-                message: "Validation failed for 'minimum_approvals': value is required"
-            )
+            throw SdkValidationError(field: "minimum_approvals", code: "required", message: "Validation failed for 'minimum_approvals': value is required")
         }
         guard container.contains(.reviewer) else {
-            throw SdkValidationError(
-                field: "reviewer",
-                code: "required",
-                message: "Validation failed for 'reviewer': value is required"
-            )
+            throw SdkValidationError(field: "reviewer", code: "required", message: "Validation failed for 'reviewer': value is required")
         }
-        filePatterns = try container.sdkDecodeRequired(.filePatterns)
-        minimumApprovals = try container.sdkDecodeRequired(.minimumApprovals)
-        reviewer = try container.sdkDecodeRequired(.reviewer)
+        self.filePatterns = try container.sdkDecodeRequired(.filePatterns)
+        self.minimumApprovals = try container.sdkDecodeRequired(.minimumApprovals)
+        self.reviewer = try container.sdkDecodeRequired(.reviewer)
     }
 }
 
-public extension RepositoryRuleParamsRequiredReviewerConfiguration {
-    init(filePatterns: [String], minimumApprovals: Int, reviewer: RepositoryRuleParamsReviewer) {
+extension RepositoryRuleParamsRequiredReviewerConfiguration {
+    public init(filePatterns: [String], minimumApprovals: Int, reviewer: RepositoryRuleParamsReviewer) {
         (self.filePatterns, self.minimumApprovals) = (filePatterns, minimumApprovals)
         self.reviewer = reviewer
     }
@@ -115,27 +95,21 @@ public struct RepositoryRuleCodeQualityParameters: Codable {
         case severity
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension RepositoryRuleCodeQualityParameters {
-    init(from decoder: Decoder) throws {
+extension RepositoryRuleCodeQualityParameters {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.severity) else {
-            throw SdkValidationError(
-                field: "severity",
-                code: "required",
-                message: "Validation failed for 'severity': value is required"
-            )
+            throw SdkValidationError(field: "severity", code: "required", message: "Validation failed for 'severity': value is required")
         }
-        severity = try container.sdkDecodeRequired(.severity)
+        self.severity = try container.sdkDecodeRequired(.severity)
     }
 }
 
-public extension RepositoryRuleCodeQualityParameters {
-    init(severity: RepositoryRuleCodeQualityParametersSeverity) {
+extension RepositoryRuleCodeQualityParameters {
+    public init(severity: RepositoryRuleCodeQualityParametersSeverity) {
         self.severity = severity
     }
 }
@@ -153,20 +127,20 @@ public struct RepositoryRuleCopilotCodeReviewParameters: Codable {
     }
 
     init() {
-        (reviewDraftPullRequests, reviewOnPush) = (nil, nil)
+        (self.reviewDraftPullRequests, self.reviewOnPush) = (nil, nil)
     }
 }
 
-public extension RepositoryRuleCopilotCodeReviewParameters {
-    init(from decoder: Decoder) throws {
+extension RepositoryRuleCopilotCodeReviewParameters {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        reviewDraftPullRequests = try container.sdkDecodeIfPresent(.reviewDraftPullRequests)
-        reviewOnPush = try container.sdkDecodeIfPresent(.reviewOnPush)
+        self.reviewDraftPullRequests = try container.sdkDecodeIfPresent(.reviewDraftPullRequests)
+        self.reviewOnPush = try container.sdkDecodeIfPresent(.reviewOnPush)
     }
 }
 
-public extension RepositoryRuleCopilotCodeReviewParameters {
-    init(reviewDraftPullRequests: Bool? = nil, reviewOnPush: Bool? = nil) {
+extension RepositoryRuleCopilotCodeReviewParameters {
+    public init(reviewDraftPullRequests: Bool? = nil, reviewOnPush: Bool? = nil) {
         self.init()
         (self.reviewDraftPullRequests, self.reviewOnPush) = (reviewDraftPullRequests, reviewOnPush)
     }
@@ -181,30 +155,24 @@ public struct RepositoryRuleRequiredLinearHistory: Codable {
         case type
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension RepositoryRuleRequiredLinearHistory {
-    init(from decoder: Decoder) throws {
+extension RepositoryRuleRequiredLinearHistory {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.type) else {
-            throw SdkValidationError(
-                field: "type",
-                code: "required",
-                message: "Validation failed for 'type': value is required"
-            )
+            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
         }
-        type = try container.sdkDecodeRequired(.type)
-        try sdkValidateRawEnum("type", type, RepositoryRuleRequiredLinearHistoryType.allCases.map(\.rawValue))
+        self.type = try container.sdkDecodeRequired(.type)
+            try sdkValidateRawEnum("type", self.type, RepositoryRuleRequiredLinearHistoryType.allCases.map(\.rawValue))
     }
 }
 
-public extension RepositoryRuleRequiredLinearHistory {
-    init(type: RepositoryRuleRequiredLinearHistoryType) throws {
+extension RepositoryRuleRequiredLinearHistory {
+    public init(type: RepositoryRuleRequiredLinearHistoryType) throws {
         self.type = type
-        try sdkValidateRawEnum("type", self.type, RepositoryRuleRequiredLinearHistoryType.allCases.map(\.rawValue))
+            try sdkValidateRawEnum("type", self.type, RepositoryRuleRequiredLinearHistoryType.allCases.map(\.rawValue))
     }
 }
 
@@ -245,14 +213,10 @@ public enum RepositoryRuleWorkflowsType: String, CaseIterable, Codable {
 }
 
 /// The operator to use for matching.
-public struct RepositoryRuleCommitMessagePatternParametersOperator: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct RepositoryRuleCommitMessagePatternParametersOperator: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let startsWith = RepositoryRuleCommitMessagePatternParametersOperator(rawValue: "starts_with")
     public static let endsWith = RepositoryRuleCommitMessagePatternParametersOperator(rawValue: "ends_with")
     public static let contains = RepositoryRuleCommitMessagePatternParametersOperator(rawValue: "contains")
@@ -260,7 +224,7 @@ public struct RepositoryRuleCommitMessagePatternParametersOperator: RawRepresent
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -342,14 +306,10 @@ public enum RepositoryRuleFileExtensionRestrictionType: String, CaseIterable, Co
 }
 
 /// The operator to use for matching.
-public struct RepositoryRuleCommitAuthorEmailPatternParametersOperator: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct RepositoryRuleCommitAuthorEmailPatternParametersOperator: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let startsWith = RepositoryRuleCommitAuthorEmailPatternParametersOperator(rawValue: "starts_with")
     public static let endsWith = RepositoryRuleCommitAuthorEmailPatternParametersOperator(rawValue: "ends_with")
     public static let contains = RepositoryRuleCommitAuthorEmailPatternParametersOperator(rawValue: "contains")
@@ -357,7 +317,7 @@ public struct RepositoryRuleCommitAuthorEmailPatternParametersOperator: RawRepre
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -405,20 +365,16 @@ public enum RepositoryRuleCommitAuthorEmailPatternType: String, CaseIterable, Co
 /// When set to ALLGREEN, the merge commit created by merge queue for each PR in the group must pass all
 /// required checks to merge. When set to HEADGREEN, only the commit at the head of the merge group, i.e. the
 /// commit containing changes from all of the PRs in the group, must pass its required checks to merge.
-public struct RepositoryRuleMergeQueueParametersGroupingStrategy: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct RepositoryRuleMergeQueueParametersGroupingStrategy: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let allgreen = RepositoryRuleMergeQueueParametersGroupingStrategy(rawValue: "ALLGREEN")
     public static let headgreen = RepositoryRuleMergeQueueParametersGroupingStrategy(rawValue: "HEADGREEN")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -482,14 +438,10 @@ public enum RepositoryRuleTagNamePatternType: String, CaseIterable, Codable {
 }
 
 /// The operator to use for matching.
-public struct RepositoryRuleTagNamePatternParametersOperator: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct RepositoryRuleTagNamePatternParametersOperator: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let startsWith = RepositoryRuleTagNamePatternParametersOperator(rawValue: "starts_with")
     public static let endsWith = RepositoryRuleTagNamePatternParametersOperator(rawValue: "ends_with")
     public static let contains = RepositoryRuleTagNamePatternParametersOperator(rawValue: "contains")
@@ -497,7 +449,7 @@ public struct RepositoryRuleTagNamePatternParametersOperator: RawRepresentable, 
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -507,14 +459,10 @@ public struct RepositoryRuleTagNamePatternParametersOperator: RawRepresentable, 
 }
 
 /// The operator to use for matching.
-public struct RepositoryRuleBranchNamePatternParametersOperator: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct RepositoryRuleBranchNamePatternParametersOperator: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let startsWith = RepositoryRuleBranchNamePatternParametersOperator(rawValue: "starts_with")
     public static let endsWith = RepositoryRuleBranchNamePatternParametersOperator(rawValue: "ends_with")
     public static let contains = RepositoryRuleBranchNamePatternParametersOperator(rawValue: "contains")
@@ -522,7 +470,7 @@ public struct RepositoryRuleBranchNamePatternParametersOperator: RawRepresentabl
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -532,14 +480,10 @@ public struct RepositoryRuleBranchNamePatternParametersOperator: RawRepresentabl
 }
 
 /// The lowest severity level at which code quality reviews need to be resolved before commits can be merged.
-public struct RepositoryRuleCodeQualityParametersSeverity: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct RepositoryRuleCodeQualityParametersSeverity: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let errors = RepositoryRuleCodeQualityParametersSeverity(rawValue: "errors")
     public static let warnings = RepositoryRuleCodeQualityParametersSeverity(rawValue: "warnings")
     public static let notes = RepositoryRuleCodeQualityParametersSeverity(rawValue: "notes")
@@ -547,7 +491,7 @@ public struct RepositoryRuleCodeQualityParametersSeverity: RawRepresentable, Has
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -557,21 +501,17 @@ public struct RepositoryRuleCodeQualityParametersSeverity: RawRepresentable, Has
 }
 
 /// Method to use when merging changes from queued pull requests.
-public struct RepositoryRuleMergeQueueParametersMergeMethod: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct RepositoryRuleMergeQueueParametersMergeMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let merge = RepositoryRuleMergeQueueParametersMergeMethod(rawValue: "MERGE")
     public static let squash = RepositoryRuleMergeQueueParametersMergeMethod(rawValue: "SQUASH")
     public static let rebase = RepositoryRuleMergeQueueParametersMergeMethod(rawValue: "REBASE")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

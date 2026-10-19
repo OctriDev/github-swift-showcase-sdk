@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// ActionsActionsCache domain models
+// ActionsActionsCache domain models
 /// Typed representation of the `ActionsCacheUsageOrgEnterprise` API schema.
 public struct ActionsCacheUsageOrgEnterprise: Codable {
     /// The count of active caches across all repositories of an enterprise or an organization.
@@ -17,35 +17,25 @@ public struct ActionsCacheUsageOrgEnterprise: Codable {
         case totalActiveCachesSizeInBytes = "total_active_caches_size_in_bytes"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsCacheUsageOrgEnterprise {
-    init(from decoder: Decoder) throws {
+extension ActionsCacheUsageOrgEnterprise {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.totalActiveCachesCount) else {
-            throw SdkValidationError(
-                field: "total_active_caches_count",
-                code: "required",
-                message: "Validation failed for 'total_active_caches_count': value is required"
-            )
+            throw SdkValidationError(field: "total_active_caches_count", code: "required", message: "Validation failed for 'total_active_caches_count': value is required")
         }
         guard container.contains(.totalActiveCachesSizeInBytes) else {
-            throw SdkValidationError(
-                field: "total_active_caches_size_in_bytes",
-                code: "required",
-                message: "Validation failed for 'total_active_caches_size_in_bytes': value is required"
-            )
+            throw SdkValidationError(field: "total_active_caches_size_in_bytes", code: "required", message: "Validation failed for 'total_active_caches_size_in_bytes': value is required")
         }
-        totalActiveCachesCount = try container.sdkDecodeRequired(.totalActiveCachesCount)
-        totalActiveCachesSizeInBytes = try container.sdkDecodeRequired(.totalActiveCachesSizeInBytes)
+        self.totalActiveCachesCount = try container.sdkDecodeRequired(.totalActiveCachesCount)
+        self.totalActiveCachesSizeInBytes = try container.sdkDecodeRequired(.totalActiveCachesSizeInBytes)
     }
 }
 
-public extension ActionsCacheUsageOrgEnterprise {
-    init(totalActiveCachesCount: Int, totalActiveCachesSizeInBytes: Int) {
+extension ActionsCacheUsageOrgEnterprise {
+    public init(totalActiveCachesCount: Int, totalActiveCachesSizeInBytes: Int) {
         self.totalActiveCachesCount = totalActiveCachesCount
         self.totalActiveCachesSizeInBytes = totalActiveCachesSizeInBytes
     }
@@ -62,19 +52,19 @@ public struct ActionsCacheRetentionLimitForRepository: Codable {
     }
 
     init() {
-        maxCacheRetentionDays = nil
+        self.maxCacheRetentionDays = nil
     }
 }
 
-public extension ActionsCacheRetentionLimitForRepository {
-    init(from decoder: Decoder) throws {
+extension ActionsCacheRetentionLimitForRepository {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        maxCacheRetentionDays = try container.sdkDecodeIfPresent(.maxCacheRetentionDays)
+        self.maxCacheRetentionDays = try container.sdkDecodeIfPresent(.maxCacheRetentionDays)
     }
 }
 
-public extension ActionsCacheRetentionLimitForRepository {
-    init(maxCacheRetentionDays: Int? = nil) {
+extension ActionsCacheRetentionLimitForRepository {
+    public init(maxCacheRetentionDays: Int? = nil) {
         self.init()
         self.maxCacheRetentionDays = maxCacheRetentionDays
     }
@@ -92,19 +82,19 @@ public struct ActionsCacheRetentionLimitForOrganization: Codable {
     }
 
     init() {
-        maxCacheRetentionDays = nil
+        self.maxCacheRetentionDays = nil
     }
 }
 
-public extension ActionsCacheRetentionLimitForOrganization {
-    init(from decoder: Decoder) throws {
+extension ActionsCacheRetentionLimitForOrganization {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        maxCacheRetentionDays = try container.sdkDecodeIfPresent(.maxCacheRetentionDays)
+        self.maxCacheRetentionDays = try container.sdkDecodeIfPresent(.maxCacheRetentionDays)
     }
 }
 
-public extension ActionsCacheRetentionLimitForOrganization {
-    init(maxCacheRetentionDays: Int? = nil) {
+extension ActionsCacheRetentionLimitForOrganization {
+    public init(maxCacheRetentionDays: Int? = nil) {
         self.init()
         self.maxCacheRetentionDays = maxCacheRetentionDays
     }
@@ -145,40 +135,32 @@ public struct ActionsCacheListActionsCachesItem: Codable {
     }
 
     init() {
-        (id, ref, key, version, lastAccessedAt) = (nil, nil, nil, nil, nil)
-        (createdAt, sizeInBytes) = (nil, nil)
+        (self.id, self.ref, self.key, self.version, self.lastAccessedAt) = (nil, nil, nil, nil, nil)
+        (self.createdAt, self.sizeInBytes) = (nil, nil)
     }
 }
 
-public extension ActionsCacheListActionsCachesItem {
-    init(from decoder: Decoder) throws {
+extension ActionsCacheListActionsCachesItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeIfPresent(.id)
-        ref = try container.sdkDecodeIfPresent(.ref)
-        key = try container.sdkDecodeIfPresent(.key)
-        version = try container.sdkDecodeIfPresent(.version)
-        lastAccessedAt = try container.sdkDecodeIfPresent(.lastAccessedAt)
-        createdAt = try container.sdkDecodeIfPresent(.createdAt)
-        sizeInBytes = try container.sdkDecodeIfPresent(.sizeInBytes)
-        if let value = lastAccessedAt {
+        self.id = try container.sdkDecodeIfPresent(.id)
+        self.ref = try container.sdkDecodeIfPresent(.ref)
+        self.key = try container.sdkDecodeIfPresent(.key)
+        self.version = try container.sdkDecodeIfPresent(.version)
+        self.lastAccessedAt = try container.sdkDecodeIfPresent(.lastAccessedAt)
+        self.createdAt = try container.sdkDecodeIfPresent(.createdAt)
+        self.sizeInBytes = try container.sdkDecodeIfPresent(.sizeInBytes)
+        if let value = self.lastAccessedAt {
             try sdkValidateDateTime("last_accessed_at", sdkWireString(value))
         }
-        if let value = createdAt {
+        if let value = self.createdAt {
             try sdkValidateDateTime("created_at", sdkWireString(value))
         }
     }
 }
 
-public extension ActionsCacheListActionsCachesItem {
-    init(
-        id: Int? = nil,
-        ref: String? = nil,
-        key: String? = nil,
-        version: String? = nil,
-        lastAccessedAt: Date? = nil,
-        createdAt: Date? = nil,
-        sizeInBytes: Int? = nil
-    ) throws {
+extension ActionsCacheListActionsCachesItem {
+    public init(id: Int? = nil, ref: String? = nil, key: String? = nil, version: String? = nil, lastAccessedAt: Date? = nil, createdAt: Date? = nil, sizeInBytes: Int? = nil) throws {
         self.init()
         (self.id, self.ref) = (id, ref)
         (self.key, self.version) = (key, version)
@@ -211,43 +193,29 @@ public struct ActionsCacheUsageByRepository: Codable {
         case activeCachesCount = "active_caches_count"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsCacheUsageByRepository {
-    init(from decoder: Decoder) throws {
+extension ActionsCacheUsageByRepository {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.fullName) else {
-            throw SdkValidationError(
-                field: "full_name",
-                code: "required",
-                message: "Validation failed for 'full_name': value is required"
-            )
+            throw SdkValidationError(field: "full_name", code: "required", message: "Validation failed for 'full_name': value is required")
         }
         guard container.contains(.activeCachesSizeInBytes) else {
-            throw SdkValidationError(
-                field: "active_caches_size_in_bytes",
-                code: "required",
-                message: "Validation failed for 'active_caches_size_in_bytes': value is required"
-            )
+            throw SdkValidationError(field: "active_caches_size_in_bytes", code: "required", message: "Validation failed for 'active_caches_size_in_bytes': value is required")
         }
         guard container.contains(.activeCachesCount) else {
-            throw SdkValidationError(
-                field: "active_caches_count",
-                code: "required",
-                message: "Validation failed for 'active_caches_count': value is required"
-            )
+            throw SdkValidationError(field: "active_caches_count", code: "required", message: "Validation failed for 'active_caches_count': value is required")
         }
-        fullName = try container.sdkDecodeRequired(.fullName)
-        activeCachesSizeInBytes = try container.sdkDecodeRequired(.activeCachesSizeInBytes)
-        activeCachesCount = try container.sdkDecodeRequired(.activeCachesCount)
+        self.fullName = try container.sdkDecodeRequired(.fullName)
+        self.activeCachesSizeInBytes = try container.sdkDecodeRequired(.activeCachesSizeInBytes)
+        self.activeCachesCount = try container.sdkDecodeRequired(.activeCachesCount)
     }
 }
 
-public extension ActionsCacheUsageByRepository {
-    init(fullName: String, activeCachesSizeInBytes: Int, activeCachesCount: Int) {
+extension ActionsCacheUsageByRepository {
+    public init(fullName: String, activeCachesSizeInBytes: Int, activeCachesCount: Int) {
         (self.fullName, self.activeCachesSizeInBytes) = (fullName, activeCachesSizeInBytes)
         self.activeCachesCount = activeCachesCount
     }
@@ -265,19 +233,19 @@ public struct ActionsCacheStorageLimitForEnterprise: Codable {
     }
 
     init() {
-        maxCacheSizeGb = nil
+        self.maxCacheSizeGb = nil
     }
 }
 
-public extension ActionsCacheStorageLimitForEnterprise {
-    init(from decoder: Decoder) throws {
+extension ActionsCacheStorageLimitForEnterprise {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        maxCacheSizeGb = try container.sdkDecodeIfPresent(.maxCacheSizeGb)
+        self.maxCacheSizeGb = try container.sdkDecodeIfPresent(.maxCacheSizeGb)
     }
 }
 
-public extension ActionsCacheStorageLimitForEnterprise {
-    init(maxCacheSizeGb: Int? = nil) {
+extension ActionsCacheStorageLimitForEnterprise {
+    public init(maxCacheSizeGb: Int? = nil) {
         self.init()
         self.maxCacheSizeGb = maxCacheSizeGb
     }
@@ -295,19 +263,19 @@ public struct ActionsCacheStorageLimitForOrganization: Codable {
     }
 
     init() {
-        maxCacheSizeGb = nil
+        self.maxCacheSizeGb = nil
     }
 }
 
-public extension ActionsCacheStorageLimitForOrganization {
-    init(from decoder: Decoder) throws {
+extension ActionsCacheStorageLimitForOrganization {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        maxCacheSizeGb = try container.sdkDecodeIfPresent(.maxCacheSizeGb)
+        self.maxCacheSizeGb = try container.sdkDecodeIfPresent(.maxCacheSizeGb)
     }
 }
 
-public extension ActionsCacheStorageLimitForOrganization {
-    init(maxCacheSizeGb: Int? = nil) {
+extension ActionsCacheStorageLimitForOrganization {
+    public init(maxCacheSizeGb: Int? = nil) {
         self.init()
         self.maxCacheSizeGb = maxCacheSizeGb
     }
@@ -325,19 +293,19 @@ public struct ActionsCacheRetentionLimitForEnterprise: Codable {
     }
 
     init() {
-        maxCacheRetentionDays = nil
+        self.maxCacheRetentionDays = nil
     }
 }
 
-public extension ActionsCacheRetentionLimitForEnterprise {
-    init(from decoder: Decoder) throws {
+extension ActionsCacheRetentionLimitForEnterprise {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        maxCacheRetentionDays = try container.sdkDecodeIfPresent(.maxCacheRetentionDays)
+        self.maxCacheRetentionDays = try container.sdkDecodeIfPresent(.maxCacheRetentionDays)
     }
 }
 
-public extension ActionsCacheRetentionLimitForEnterprise {
-    init(maxCacheRetentionDays: Int? = nil) {
+extension ActionsCacheRetentionLimitForEnterprise {
+    public init(maxCacheRetentionDays: Int? = nil) {
         self.init()
         self.maxCacheRetentionDays = maxCacheRetentionDays
     }
@@ -356,35 +324,25 @@ public struct ActionsCacheList: Codable {
         case actionsCaches = "actions_caches"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsCacheList {
-    init(from decoder: Decoder) throws {
+extension ActionsCacheList {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.totalCount) else {
-            throw SdkValidationError(
-                field: "total_count",
-                code: "required",
-                message: "Validation failed for 'total_count': value is required"
-            )
+            throw SdkValidationError(field: "total_count", code: "required", message: "Validation failed for 'total_count': value is required")
         }
         guard container.contains(.actionsCaches) else {
-            throw SdkValidationError(
-                field: "actions_caches",
-                code: "required",
-                message: "Validation failed for 'actions_caches': value is required"
-            )
+            throw SdkValidationError(field: "actions_caches", code: "required", message: "Validation failed for 'actions_caches': value is required")
         }
-        totalCount = try container.sdkDecodeRequired(.totalCount)
-        actionsCaches = try container.sdkDecodeRequired(.actionsCaches)
+        self.totalCount = try container.sdkDecodeRequired(.totalCount)
+        self.actionsCaches = try container.sdkDecodeRequired(.actionsCaches)
     }
 }
 
-public extension ActionsCacheList {
-    init(totalCount: Int, actionsCaches: [ActionsCacheListActionsCachesItem]) {
+extension ActionsCacheList {
+    public init(totalCount: Int, actionsCaches: [ActionsCacheListActionsCachesItem]) {
         (self.totalCount, self.actionsCaches) = (totalCount, actionsCaches)
     }
 }
@@ -400,19 +358,19 @@ public struct ActionsCacheStorageLimitForRepository: Codable {
     }
 
     init() {
-        maxCacheSizeGb = nil
+        self.maxCacheSizeGb = nil
     }
 }
 
-public extension ActionsCacheStorageLimitForRepository {
-    init(from decoder: Decoder) throws {
+extension ActionsCacheStorageLimitForRepository {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        maxCacheSizeGb = try container.sdkDecodeIfPresent(.maxCacheSizeGb)
+        self.maxCacheSizeGb = try container.sdkDecodeIfPresent(.maxCacheSizeGb)
     }
 }
 
-public extension ActionsCacheStorageLimitForRepository {
-    init(maxCacheSizeGb: Int? = nil) {
+extension ActionsCacheStorageLimitForRepository {
+    public init(maxCacheSizeGb: Int? = nil) {
         self.init()
         self.maxCacheSizeGb = maxCacheSizeGb
     }

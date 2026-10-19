@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Shared domain models
+// Shared domain models
 public typealias SecretScanningPushProtectionBypassPlaceholderId = String
 
 /// Optional object value serialized in the `permissions` wire field.
@@ -28,23 +28,23 @@ public struct MinimalRepositoryPermissions: Codable {
     }
 
     init() {
-        (admin, maintain, push, triage, pull) = (nil, nil, nil, nil, nil)
+        (self.admin, self.maintain, self.push, self.triage, self.pull) = (nil, nil, nil, nil, nil)
     }
 }
 
-public extension MinimalRepositoryPermissions {
-    init(from decoder: Decoder) throws {
+extension MinimalRepositoryPermissions {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        admin = try container.sdkDecodeIfPresent(.admin)
-        maintain = try container.sdkDecodeIfPresent(.maintain)
-        push = try container.sdkDecodeIfPresent(.push)
-        triage = try container.sdkDecodeIfPresent(.triage)
-        pull = try container.sdkDecodeIfPresent(.pull)
+        self.admin = try container.sdkDecodeIfPresent(.admin)
+        self.maintain = try container.sdkDecodeIfPresent(.maintain)
+        self.push = try container.sdkDecodeIfPresent(.push)
+        self.triage = try container.sdkDecodeIfPresent(.triage)
+        self.pull = try container.sdkDecodeIfPresent(.pull)
     }
 }
 
-public extension MinimalRepositoryPermissions {
-    init(admin: Bool? = nil, maintain: Bool? = nil, push: Bool? = nil, triage: Bool? = nil, pull: Bool? = nil) {
+extension MinimalRepositoryPermissions {
+    public init(admin: Bool? = nil, maintain: Bool? = nil, push: Bool? = nil, triage: Bool? = nil, pull: Bool? = nil) {
         self.init()
         (self.admin, self.maintain) = (admin, maintain)
         (self.push, self.triage) = (push, triage)
@@ -64,57 +64,31 @@ public struct CvssSeveritiesCvssV3: Codable {
         case score
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension CvssSeveritiesCvssV3 {
-    init(from decoder: Decoder) throws {
+extension CvssSeveritiesCvssV3 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.vectorString) else {
-            throw SdkValidationError(
-                field: "vector_string",
-                code: "required",
-                message: "Validation failed for 'vector_string': value is required"
-            )
+            throw SdkValidationError(field: "vector_string", code: "required", message: "Validation failed for 'vector_string': value is required")
         }
         guard container.contains(.score) else {
-            throw SdkValidationError(
-                field: "score",
-                code: "required",
-                message: "Validation failed for 'score': value is required"
-            )
+            throw SdkValidationError(field: "score", code: "required", message: "Validation failed for 'score': value is required")
         }
-        vectorString = try container.sdkDecodeNullable(.vectorString)
-        score = try container.sdkDecodeNullable(.score)
-        if let value = score {
-            try validateRange(
-                "score",
-                Double(value),
-                min: 0,
-                max: 10,
-                exclusiveMin: nil,
-                exclusiveMax: nil,
-                multipleOf: nil
-            )
+        self.vectorString = try container.sdkDecodeNullable(.vectorString)
+        self.score = try container.sdkDecodeNullable(.score)
+        if let value = self.score {
+            try validateRange("score", Double(value), min: 0, max: 10, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
         }
     }
 }
 
-public extension CvssSeveritiesCvssV3 {
-    init(vectorString: String?, score: Double?) throws {
+extension CvssSeveritiesCvssV3 {
+    public init(vectorString: String?, score: Double?) throws {
         (self.vectorString, self.score) = (vectorString, score)
         if let value = self.score {
-            try validateRange(
-                "score",
-                Double(value),
-                min: 0,
-                max: 10,
-                exclusiveMin: nil,
-                exclusiveMax: nil,
-                multipleOf: nil
-            )
+            try validateRange("score", Double(value), min: 0, max: 10, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
         }
     }
 }
@@ -162,64 +136,51 @@ public struct Enterprise: Codable {
         case websiteUrl = "website_url"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension Enterprise {
-    init(from decoder: Decoder) throws {
+extension Enterprise {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        name = try container.sdkDecodeRequired(.name)
-        slug = try container.sdkDecodeRequired(.slug)
-        createdAt = try container.sdkDecodeNullable(.createdAt)
-        updatedAt = try container.sdkDecodeNullable(.updatedAt)
-        avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
-        description = try container.sdkDecodeIfPresent(.description)
-        websiteUrl = try container.sdkDecodeIfPresent(.websiteUrl)
-        try sdkValidateUri("html_url", htmlUrl)
-        if let value = createdAt {
-            try sdkValidateDateTime("created_at", sdkWireString(value))
-        }
-        if let value = updatedAt {
-            try sdkValidateDateTime("updated_at", sdkWireString(value))
-        }
-        try sdkValidateUri("avatar_url", avatarUrl)
-        if let value = websiteUrl {
-            try sdkValidateUri("website_url", value)
-        }
-    }
-}
-
-public extension Enterprise {
-    init(
-        htmlUrl: String,
-        id: Int,
-        nodeId: String,
-        name: String,
-        slug: String,
-        createdAt: Date?,
-        updatedAt: Date?,
-        avatarUrl: String,
-        description: String? = nil,
-        websiteUrl: String? = nil
-    ) throws {
-        (self.htmlUrl, self.id) = (htmlUrl, id)
-        (self.nodeId, self.name) = (nodeId, name)
-        (self.slug, self.createdAt) = (slug, createdAt)
-        (self.updatedAt, self.avatarUrl) = (updatedAt, avatarUrl)
-        (self.description, self.websiteUrl) = (description, websiteUrl)
-        try sdkValidateUri("html_url", self.htmlUrl)
+        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.slug = try container.sdkDecodeRequired(.slug)
+        self.createdAt = try container.sdkDecodeNullable(.createdAt)
+        self.updatedAt = try container.sdkDecodeNullable(.updatedAt)
+        self.avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
+        self.description = try container.sdkDecodeIfPresent(.description)
+        self.websiteUrl = try container.sdkDecodeIfPresent(.websiteUrl)
+            try sdkValidateUri("html_url", self.htmlUrl)
         if let value = self.createdAt {
             try sdkValidateDateTime("created_at", sdkWireString(value))
         }
         if let value = self.updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
-        try sdkValidateUri("avatar_url", self.avatarUrl)
+            try sdkValidateUri("avatar_url", self.avatarUrl)
+        if let value = self.websiteUrl {
+            try sdkValidateUri("website_url", value)
+        }
+    }
+}
+
+extension Enterprise {
+    public init(htmlUrl: String, id: Int, nodeId: String, name: String, slug: String, createdAt: Date?, updatedAt: Date?, avatarUrl: String, description: String? = nil, websiteUrl: String? = nil) throws {
+        (self.htmlUrl, self.id) = (htmlUrl, id)
+        (self.nodeId, self.name) = (nodeId, name)
+        (self.slug, self.createdAt) = (slug, createdAt)
+        (self.updatedAt, self.avatarUrl) = (updatedAt, avatarUrl)
+        (self.description, self.websiteUrl) = (description, websiteUrl)
+            try sdkValidateUri("html_url", self.htmlUrl)
+        if let value = self.createdAt {
+            try sdkValidateDateTime("created_at", sdkWireString(value))
+        }
+        if let value = self.updatedAt {
+            try sdkValidateDateTime("updated_at", sdkWireString(value))
+        }
+            try sdkValidateUri("avatar_url", self.avatarUrl)
         if let value = self.websiteUrl {
             try sdkValidateUri("website_url", value)
         }
@@ -239,20 +200,20 @@ public struct CvssSeverities: Codable {
     }
 
     init() {
-        (cvssV3, cvssV4) = (nil, nil)
+        (self.cvssV3, self.cvssV4) = (nil, nil)
     }
 }
 
-public extension CvssSeverities {
-    init(from decoder: Decoder) throws {
+extension CvssSeverities {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        cvssV3 = try container.sdkDecodeIfPresent(.cvssV3)
-        cvssV4 = try container.sdkDecodeIfPresent(.cvssV4)
+        self.cvssV3 = try container.sdkDecodeIfPresent(.cvssV3)
+        self.cvssV4 = try container.sdkDecodeIfPresent(.cvssV4)
     }
 }
 
-public extension CvssSeverities {
-    init(cvssV3: CvssSeveritiesCvssV3? = nil, cvssV4: CvssSeveritiesCvssV4? = nil) {
+extension CvssSeverities {
+    public init(cvssV3: CvssSeveritiesCvssV3? = nil, cvssV4: CvssSeveritiesCvssV4? = nil) {
         self.init()
         (self.cvssV3, self.cvssV4) = (cvssV3, cvssV4)
     }
@@ -279,45 +240,31 @@ public struct FullRepositoryPermissions: Codable {
         case triage
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension FullRepositoryPermissions {
-    init(from decoder: Decoder) throws {
+extension FullRepositoryPermissions {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.admin) else {
-            throw SdkValidationError(
-                field: "admin",
-                code: "required",
-                message: "Validation failed for 'admin': value is required"
-            )
+            throw SdkValidationError(field: "admin", code: "required", message: "Validation failed for 'admin': value is required")
         }
         guard container.contains(.push) else {
-            throw SdkValidationError(
-                field: "push",
-                code: "required",
-                message: "Validation failed for 'push': value is required"
-            )
+            throw SdkValidationError(field: "push", code: "required", message: "Validation failed for 'push': value is required")
         }
         guard container.contains(.pull) else {
-            throw SdkValidationError(
-                field: "pull",
-                code: "required",
-                message: "Validation failed for 'pull': value is required"
-            )
+            throw SdkValidationError(field: "pull", code: "required", message: "Validation failed for 'pull': value is required")
         }
-        admin = try container.sdkDecodeRequired(.admin)
-        push = try container.sdkDecodeRequired(.push)
-        pull = try container.sdkDecodeRequired(.pull)
-        maintain = try container.sdkDecodeIfPresent(.maintain)
-        triage = try container.sdkDecodeIfPresent(.triage)
+        self.admin = try container.sdkDecodeRequired(.admin)
+        self.push = try container.sdkDecodeRequired(.push)
+        self.pull = try container.sdkDecodeRequired(.pull)
+        self.maintain = try container.sdkDecodeIfPresent(.maintain)
+        self.triage = try container.sdkDecodeIfPresent(.triage)
     }
 }
 
-public extension FullRepositoryPermissions {
-    init(admin: Bool, push: Bool, pull: Bool, maintain: Bool? = nil, triage: Bool? = nil) {
+extension FullRepositoryPermissions {
+    public init(admin: Bool, push: Bool, pull: Bool, maintain: Bool? = nil, triage: Bool? = nil) {
         (self.admin, self.push) = (admin, push)
         (self.pull, self.maintain) = (pull, maintain)
         self.triage = triage

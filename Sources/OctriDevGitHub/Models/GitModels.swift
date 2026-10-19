@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Git domain models
+// Git domain models
 /// Required object value serialized in the `object` wire field.
 public struct GitRefObject: Codable {
     /// Required `string` value serialized in the `type` wire field.
@@ -20,49 +20,35 @@ public struct GitRefObject: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension GitRefObject {
-    init(from decoder: Decoder) throws {
+extension GitRefObject {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.type) else {
-            throw SdkValidationError(
-                field: "type",
-                code: "required",
-                message: "Validation failed for 'type': value is required"
-            )
+            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
         }
         guard container.contains(.sha) else {
-            throw SdkValidationError(
-                field: "sha",
-                code: "required",
-                message: "Validation failed for 'sha': value is required"
-            )
+            throw SdkValidationError(field: "sha", code: "required", message: "Validation failed for 'sha': value is required")
         }
         guard container.contains(.url) else {
-            throw SdkValidationError(
-                field: "url",
-                code: "required",
-                message: "Validation failed for 'url': value is required"
-            )
+            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
         }
-        type = try container.sdkDecodeRequired(.type)
-        sha = try container.sdkDecodeRequired(.sha)
-        url = try container.sdkDecodeRequired(.url)
-        try validateLength("sha", sha, min: 40, max: 40)
-        try sdkValidateUri("url", url)
+        self.type = try container.sdkDecodeRequired(.type)
+        self.sha = try container.sdkDecodeRequired(.sha)
+        self.url = try container.sdkDecodeRequired(.url)
+            try validateLength("sha", self.sha, min: 40, max: 40)
+            try sdkValidateUri("url", self.url)
     }
 }
 
-public extension GitRefObject {
-    init(type: String, sha: String, url: String) throws {
+extension GitRefObject {
+    public init(type: String, sha: String, url: String) throws {
         (self.type, self.sha) = (type, sha)
         self.url = url
-        try validateLength("sha", self.sha, min: 40, max: 40)
-        try sdkValidateUri("url", self.url)
+            try validateLength("sha", self.sha, min: 40, max: 40)
+            try sdkValidateUri("url", self.url)
     }
 }
 
@@ -87,59 +73,37 @@ public struct GitCommitVerification: Codable {
         case verifiedAt = "verified_at"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension GitCommitVerification {
-    init(from decoder: Decoder) throws {
+extension GitCommitVerification {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.verified) else {
-            throw SdkValidationError(
-                field: "verified",
-                code: "required",
-                message: "Validation failed for 'verified': value is required"
-            )
+            throw SdkValidationError(field: "verified", code: "required", message: "Validation failed for 'verified': value is required")
         }
         guard container.contains(.reason) else {
-            throw SdkValidationError(
-                field: "reason",
-                code: "required",
-                message: "Validation failed for 'reason': value is required"
-            )
+            throw SdkValidationError(field: "reason", code: "required", message: "Validation failed for 'reason': value is required")
         }
         guard container.contains(.signature) else {
-            throw SdkValidationError(
-                field: "signature",
-                code: "required",
-                message: "Validation failed for 'signature': value is required"
-            )
+            throw SdkValidationError(field: "signature", code: "required", message: "Validation failed for 'signature': value is required")
         }
         guard container.contains(.payload) else {
-            throw SdkValidationError(
-                field: "payload",
-                code: "required",
-                message: "Validation failed for 'payload': value is required"
-            )
+            throw SdkValidationError(field: "payload", code: "required", message: "Validation failed for 'payload': value is required")
         }
         guard container.contains(.verifiedAt) else {
-            throw SdkValidationError(
-                field: "verified_at",
-                code: "required",
-                message: "Validation failed for 'verified_at': value is required"
-            )
+            throw SdkValidationError(field: "verified_at", code: "required", message: "Validation failed for 'verified_at': value is required")
         }
-        verified = try container.sdkDecodeRequired(.verified)
-        reason = try container.sdkDecodeRequired(.reason)
-        signature = try container.sdkDecodeNullable(.signature)
-        payload = try container.sdkDecodeNullable(.payload)
-        verifiedAt = try container.sdkDecodeNullable(.verifiedAt)
+        self.verified = try container.sdkDecodeRequired(.verified)
+        self.reason = try container.sdkDecodeRequired(.reason)
+        self.signature = try container.sdkDecodeNullable(.signature)
+        self.payload = try container.sdkDecodeNullable(.payload)
+        self.verifiedAt = try container.sdkDecodeNullable(.verifiedAt)
     }
 }
 
-public extension GitCommitVerification {
-    init(verified: Bool, reason: String, signature: String?, payload: String?, verifiedAt: String?) {
+extension GitCommitVerification {
+    public init(verified: Bool, reason: String, signature: String?, payload: String?, verifiedAt: String?) {
         (self.verified, self.reason) = (verified, reason)
         (self.signature, self.payload) = (signature, payload)
         self.verifiedAt = verifiedAt
@@ -161,47 +125,33 @@ public struct GitTagObject: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension GitTagObject {
-    init(from decoder: Decoder) throws {
+extension GitTagObject {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.sha) else {
-            throw SdkValidationError(
-                field: "sha",
-                code: "required",
-                message: "Validation failed for 'sha': value is required"
-            )
+            throw SdkValidationError(field: "sha", code: "required", message: "Validation failed for 'sha': value is required")
         }
         guard container.contains(.type) else {
-            throw SdkValidationError(
-                field: "type",
-                code: "required",
-                message: "Validation failed for 'type': value is required"
-            )
+            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
         }
         guard container.contains(.url) else {
-            throw SdkValidationError(
-                field: "url",
-                code: "required",
-                message: "Validation failed for 'url': value is required"
-            )
+            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
         }
-        sha = try container.sdkDecodeRequired(.sha)
-        type = try container.sdkDecodeRequired(.type)
-        url = try container.sdkDecodeRequired(.url)
-        try sdkValidateUri("url", url)
+        self.sha = try container.sdkDecodeRequired(.sha)
+        self.type = try container.sdkDecodeRequired(.type)
+        self.url = try container.sdkDecodeRequired(.url)
+            try sdkValidateUri("url", self.url)
     }
 }
 
-public extension GitTagObject {
-    init(sha: String, type: String, url: String) throws {
+extension GitTagObject {
+    public init(sha: String, type: String, url: String) throws {
         (self.sha, self.type) = (sha, type)
         self.url = url
-        try sdkValidateUri("url", self.url)
+            try sdkValidateUri("url", self.url)
     }
 }
 
@@ -232,82 +182,48 @@ public struct Blob: Codable {
         case highlightedContent = "highlighted_content"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension Blob {
-    init(from decoder: Decoder) throws {
+extension Blob {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.content) else {
-            throw SdkValidationError(
-                field: "content",
-                code: "required",
-                message: "Validation failed for 'content': value is required"
-            )
+            throw SdkValidationError(field: "content", code: "required", message: "Validation failed for 'content': value is required")
         }
         guard container.contains(.encoding) else {
-            throw SdkValidationError(
-                field: "encoding",
-                code: "required",
-                message: "Validation failed for 'encoding': value is required"
-            )
+            throw SdkValidationError(field: "encoding", code: "required", message: "Validation failed for 'encoding': value is required")
         }
         guard container.contains(.url) else {
-            throw SdkValidationError(
-                field: "url",
-                code: "required",
-                message: "Validation failed for 'url': value is required"
-            )
+            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
         }
         guard container.contains(.sha) else {
-            throw SdkValidationError(
-                field: "sha",
-                code: "required",
-                message: "Validation failed for 'sha': value is required"
-            )
+            throw SdkValidationError(field: "sha", code: "required", message: "Validation failed for 'sha': value is required")
         }
         guard container.contains(.size) else {
-            throw SdkValidationError(
-                field: "size",
-                code: "required",
-                message: "Validation failed for 'size': value is required"
-            )
+            throw SdkValidationError(field: "size", code: "required", message: "Validation failed for 'size': value is required")
         }
         guard container.contains(.nodeId) else {
-            throw SdkValidationError(
-                field: "node_id",
-                code: "required",
-                message: "Validation failed for 'node_id': value is required"
-            )
+            throw SdkValidationError(field: "node_id", code: "required", message: "Validation failed for 'node_id': value is required")
         }
-        content = try container.sdkDecodeRequired(.content)
-        encoding = try container.sdkDecodeRequired(.encoding)
-        url = try container.sdkDecodeRequired(.url)
-        sha = try container.sdkDecodeRequired(.sha)
-        size = try container.sdkDecodeNullable(.size)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        highlightedContent = try container.sdkDecodeIfPresent(.highlightedContent)
-        try sdkValidateUri("url", url)
+        self.content = try container.sdkDecodeRequired(.content)
+        self.encoding = try container.sdkDecodeRequired(.encoding)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.sha = try container.sdkDecodeRequired(.sha)
+        self.size = try container.sdkDecodeNullable(.size)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.highlightedContent = try container.sdkDecodeIfPresent(.highlightedContent)
+            try sdkValidateUri("url", self.url)
     }
 }
 
-public extension Blob {
-    init(
-        content: String,
-        encoding: String,
-        url: String,
-        sha: String,
-        size: Int?,
-        nodeId: String,
-        highlightedContent: String? = nil
-    ) throws {
+extension Blob {
+    public init(content: String, encoding: String, url: String, sha: String, size: Int?, nodeId: String, highlightedContent: String? = nil) throws {
         (self.content, self.encoding) = (content, encoding)
         (self.url, self.sha) = (url, sha)
         (self.size, self.nodeId) = (size, nodeId)
         self.highlightedContent = highlightedContent
-        try sdkValidateUri("url", self.url)
+            try sdkValidateUri("url", self.url)
     }
 }
 
@@ -349,49 +265,36 @@ public struct GitCommit: Codable {
         case htmlUrl = "html_url"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension GitCommit {
-    init(from decoder: Decoder) throws {
+extension GitCommit {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        sha = try container.sdkDecodeRequired(.sha)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        url = try container.sdkDecodeRequired(.url)
-        author = try container.sdkDecodeRequired(.author)
-        committer = try container.sdkDecodeRequired(.committer)
-        message = try container.sdkDecodeRequired(.message)
-        tree = try container.sdkDecodeRequired(.tree)
-        parents = try container.sdkDecodeRequired(.parents)
-        verification = try container.sdkDecodeRequired(.verification)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        try sdkValidateUri("url", url)
-        try sdkValidateUri("html_url", htmlUrl)
+        self.sha = try container.sdkDecodeRequired(.sha)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.author = try container.sdkDecodeRequired(.author)
+        self.committer = try container.sdkDecodeRequired(.committer)
+        self.message = try container.sdkDecodeRequired(.message)
+        self.tree = try container.sdkDecodeRequired(.tree)
+        self.parents = try container.sdkDecodeRequired(.parents)
+        self.verification = try container.sdkDecodeRequired(.verification)
+        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("html_url", self.htmlUrl)
     }
 }
 
-public extension GitCommit {
-    init(
-        sha: String,
-        nodeId: String,
-        url: String,
-        author: GitCommitAuthor,
-        committer: GitCommitCommitter,
-        message: String,
-        tree: GitCommitTree,
-        parents: [GitCommitParentsItem],
-        verification: GitCommitVerification,
-        htmlUrl: String
-    ) throws {
+extension GitCommit {
+    public init(sha: String, nodeId: String, url: String, author: GitCommitAuthor, committer: GitCommitCommitter, message: String, tree: GitCommitTree, parents: [GitCommitParentsItem], verification: GitCommitVerification, htmlUrl: String) throws {
         (self.sha, self.nodeId) = (sha, nodeId)
         (self.url, self.author) = (url, author)
         (self.committer, self.message) = (committer, message)
         (self.tree, self.parents) = (tree, parents)
         (self.verification, self.htmlUrl) = (verification, htmlUrl)
-        try sdkValidateUri("url", self.url)
-        try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("html_url", self.htmlUrl)
     }
 }
 
@@ -427,53 +330,35 @@ public struct GitTreeTreeItem: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension GitTreeTreeItem {
-    init(from decoder: Decoder) throws {
+extension GitTreeTreeItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.path) else {
-            throw SdkValidationError(
-                field: "path",
-                code: "required",
-                message: "Validation failed for 'path': value is required"
-            )
+            throw SdkValidationError(field: "path", code: "required", message: "Validation failed for 'path': value is required")
         }
         guard container.contains(.mode) else {
-            throw SdkValidationError(
-                field: "mode",
-                code: "required",
-                message: "Validation failed for 'mode': value is required"
-            )
+            throw SdkValidationError(field: "mode", code: "required", message: "Validation failed for 'mode': value is required")
         }
         guard container.contains(.type) else {
-            throw SdkValidationError(
-                field: "type",
-                code: "required",
-                message: "Validation failed for 'type': value is required"
-            )
+            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
         }
         guard container.contains(.sha) else {
-            throw SdkValidationError(
-                field: "sha",
-                code: "required",
-                message: "Validation failed for 'sha': value is required"
-            )
+            throw SdkValidationError(field: "sha", code: "required", message: "Validation failed for 'sha': value is required")
         }
-        path = try container.sdkDecodeRequired(.path)
-        mode = try container.sdkDecodeRequired(.mode)
-        type = try container.sdkDecodeRequired(.type)
-        sha = try container.sdkDecodeRequired(.sha)
-        size = try container.sdkDecodeIfPresent(.size)
-        url = try container.sdkDecodeIfPresent(.url)
+        self.path = try container.sdkDecodeRequired(.path)
+        self.mode = try container.sdkDecodeRequired(.mode)
+        self.type = try container.sdkDecodeRequired(.type)
+        self.sha = try container.sdkDecodeRequired(.sha)
+        self.size = try container.sdkDecodeIfPresent(.size)
+        self.url = try container.sdkDecodeIfPresent(.url)
     }
 }
 
-public extension GitTreeTreeItem {
-    init(path: String, mode: String, type: String, sha: String, size: Int? = nil, url: String? = nil) {
+extension GitTreeTreeItem {
+    public init(path: String, mode: String, type: String, sha: String, size: Int? = nil, url: String? = nil) {
         (self.path, self.mode) = (path, mode)
         (self.type, self.sha) = (type, sha)
         (self.size, self.url) = (size, url)
@@ -495,43 +380,29 @@ public struct GitTagTagger: Codable {
         case name
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension GitTagTagger {
-    init(from decoder: Decoder) throws {
+extension GitTagTagger {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.date) else {
-            throw SdkValidationError(
-                field: "date",
-                code: "required",
-                message: "Validation failed for 'date': value is required"
-            )
+            throw SdkValidationError(field: "date", code: "required", message: "Validation failed for 'date': value is required")
         }
         guard container.contains(.email) else {
-            throw SdkValidationError(
-                field: "email",
-                code: "required",
-                message: "Validation failed for 'email': value is required"
-            )
+            throw SdkValidationError(field: "email", code: "required", message: "Validation failed for 'email': value is required")
         }
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
-        date = try container.sdkDecodeRequired(.date)
-        email = try container.sdkDecodeRequired(.email)
-        name = try container.sdkDecodeRequired(.name)
+        self.date = try container.sdkDecodeRequired(.date)
+        self.email = try container.sdkDecodeRequired(.email)
+        self.name = try container.sdkDecodeRequired(.name)
     }
 }
 
-public extension GitTagTagger {
-    init(date: String, email: String, name: String) {
+extension GitTagTagger {
+    public init(date: String, email: String, name: String) {
         (self.date, self.email) = (date, email)
         self.name = name
     }
@@ -550,38 +421,28 @@ public struct GitCommitTree: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension GitCommitTree {
-    init(from decoder: Decoder) throws {
+extension GitCommitTree {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.sha) else {
-            throw SdkValidationError(
-                field: "sha",
-                code: "required",
-                message: "Validation failed for 'sha': value is required"
-            )
+            throw SdkValidationError(field: "sha", code: "required", message: "Validation failed for 'sha': value is required")
         }
         guard container.contains(.url) else {
-            throw SdkValidationError(
-                field: "url",
-                code: "required",
-                message: "Validation failed for 'url': value is required"
-            )
+            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
         }
-        sha = try container.sdkDecodeRequired(.sha)
-        url = try container.sdkDecodeRequired(.url)
-        try sdkValidateUri("url", url)
+        self.sha = try container.sdkDecodeRequired(.sha)
+        self.url = try container.sdkDecodeRequired(.url)
+            try sdkValidateUri("url", self.url)
     }
 }
 
-public extension GitCommitTree {
-    init(sha: String, url: String) throws {
+extension GitCommitTree {
+    public init(sha: String, url: String) throws {
         (self.sha, self.url) = (sha, url)
-        try sdkValidateUri("url", self.url)
+            try sdkValidateUri("url", self.url)
     }
 }
 
@@ -603,38 +464,24 @@ public struct GitCommitCommitter: Codable {
         case name
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension GitCommitCommitter {
-    init(from decoder: Decoder) throws {
+extension GitCommitCommitter {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.date) else {
-            throw SdkValidationError(
-                field: "date",
-                code: "required",
-                message: "Validation failed for 'date': value is required"
-            )
+            throw SdkValidationError(field: "date", code: "required", message: "Validation failed for 'date': value is required")
         }
         guard container.contains(.email) else {
-            throw SdkValidationError(
-                field: "email",
-                code: "required",
-                message: "Validation failed for 'email': value is required"
-            )
+            throw SdkValidationError(field: "email", code: "required", message: "Validation failed for 'email': value is required")
         }
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
-        date = try container.sdkDecodeRequired(.date)
-        email = try container.sdkDecodeRequired(.email)
-        name = try container.sdkDecodeRequired(.name)
-        try sdkValidateDateTime("date", sdkWireString(date))
+        self.date = try container.sdkDecodeRequired(.date)
+        self.email = try container.sdkDecodeRequired(.email)
+        self.name = try container.sdkDecodeRequired(.name)
+            try sdkValidateDateTime("date", sdkWireString(self.date))
     }
 }

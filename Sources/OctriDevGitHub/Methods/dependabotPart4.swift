@@ -6,39 +6,15 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension DependabotMethods {
-    /// Sets the default level of repository access Dependabot will have while performing an update across organizations
-    /// in the enterprise. Available values are: - 'public' - Dependabot will only have access to public repositories,
-    /// unless access is explicitly granted to non-public repositories. - 'internal' - Dependabot will only have access
-    /// to public and internal repositories, unless access is explicitly granted to private repositories. The
-    /// authenticated user must be an enterprise owner to use this endpoint. > [!NOTE] > The "Enterprise administration"
-    /// fine-grained permission is not available to callers. To use this API, you must use an OAuth app token or a
-    /// personal access token (classic).
+extension DependabotMethods {
+    /// Sets the default level of repository access Dependabot will have while performing an update across organizations in the enterprise. Available values are: - 'public' - Dependabot will only have access to public repositories, unless access is explicitly granted to non-public repositories. - 'internal' - Dependabot will only have access to public and internal repositories, unless access is explicitly granted to private repositories. The authenticated user must be an enterprise owner to use this endpoint. > [!NOTE] > The "Enterprise administration" fine-grained permission is not available to callers. To use this API, you must use an OAuth app token or a personal access token (classic).
     ///
     /// - Parameters:
     /// - enterprise: The slug version of the enterprise name.
     /// - defaultLevel: The default repository access level for Dependabot updates.
-    static func dependabotSetRepositoryAccessDefaultLevelForEnterprise(
-        config: ClientConfig,
-        enterprise: String,
-        defaultLevel: DependabotSetRepositoryAccessDefaultLevelForEnterpriseRequestX89bb5af3b7,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
+    public static func dependabotSetRepositoryAccessDefaultLevelForEnterprise(config: ClientConfig, enterprise: String, defaultLevel: DependabotSetRepositoryAccessDefaultLevelForEnterpriseRequestX89bb5af3b7, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
         let requestBody = DependabotSetRepositoryAccessDefaultLevelForEnterpriseRequestBody(defaultLevel: defaultLevel)
 
-        return try await (sdkRequest(
-            "PUT",
-            [
-                "/enterprises/",
-                sdkEncodePathSegment(sdkWireString(enterprise)),
-                "/dependabot/repository-access/default-level",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .empty,
-            operationId: "dependabotSetRepositoryAccessDefaultLevelForEnterprise",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self]
-        )).data
+        return try (await sdkRequest("PUT", ["/enterprises/", sdkEncodePathSegment(sdkWireString(enterprise)), "/dependabot/repository-access/default-level"].joined(), config: config, body: requestBody, decoder: .empty, operationId: "dependabotSetRepositoryAccessDefaultLevelForEnterprise", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
     }
 }

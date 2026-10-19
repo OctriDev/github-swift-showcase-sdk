@@ -3,506 +3,137 @@
 
 import Foundation
 
-public extension CopilotNamespace {
-    /// Disables Copilot cloud agent for the specified organizations within the enterprise. The enterprise's coding
-    /// agent policy must be set to `enabled_for_selected_orgs` before using this endpoint. Organizations can be
-    /// specified by login or matched via custom properties. Only organizations that have Copilot enabled and belong to
-    /// the enterprise will be affected. Only enterprise owners can remove organizations from the coding agent policy.
-    /// OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or
-    /// `admin:enterprise` scopes to use this endpoint.
-    func removeOrganizationsFromEnterpriseCodingAgentPolicy(
-        enterprise: String,
-        organizations: [String]? = nil,
-        customProperties: CopilotRemoveOrganizationsFromEnterpriseCodingAgentPolicyCustXd9c994a561? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await CopilotMethods.copilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy(
-            config: config,
-            enterprise: enterprise,
-            organizations: organizations,
-            customProperties: customProperties,
-            requestOptions: requestOptions
-        )
+extension CopilotNamespace {
+/// Disables Copilot cloud agent for the specified organizations within the enterprise. The enterprise's coding agent policy must be set to `enabled_for_selected_orgs` before using this endpoint. Organizations can be specified by login or matched via custom properties. Only organizations that have Copilot enabled and belong to the enterprise will be affected. Only enterprise owners can remove organizations from the coding agent policy. OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `admin:enterprise` scopes to use this endpoint.
+    public func removeOrganizationsFromEnterpriseCodingAgentPolicy(enterprise: String, organizations: [String]? = nil, customProperties: CopilotRemoveOrganizationsFromEnterpriseCodingAgentPolicyCustXd9c994a561? = nil, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await CopilotMethods.copilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy(config: config, enterprise: enterprise, organizations: organizations, customProperties: customProperties, requestOptions: requestOptions)
     }
 
-    /// Retrieves an organization's Copilot subscription details, including its seat breakdown and feature policies. Use
-    /// `org` to identify the organization; only organization owners can view these details. OAuth app tokens and
-    /// classic personal access tokens need the `manage_billing:copilot` or `read:org` scope.
+/// Retrieves an organization's Copilot subscription details, including its seat breakdown and feature policies. Use `org` to identify the organization; only organization owners can view these details. OAuth app tokens and classic personal access tokens need the `manage_billing:copilot` or `read:org` scope.
     ///
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Gets information about an
-    /// organization's Copilot subscription, including seat breakdown and feature policies. To configure these settings,
-    /// go to your organization's settings on GitHub.com. For more information, see "[Managing policies for Copilot in
-    /// your organization](https://docs.github.com/copilot/managing-copilot/managing-policies-for-copilot-business-in-your-organization)."
-    /// Only organization owners can view details about the organization's Copilot Business or Copilot Enterprise
-    /// subscription. OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or
-    /// `read:org` scopes to use this endpoint.
-    func getCopilotOrganizationDetails(
-        org: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CopilotOrganizationDetails {
-        try await CopilotMethods.copilotGetCopilotOrganizationDetails(
-            config: config,
-            org: org,
-            requestOptions: requestOptions
-        )
+    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Gets information about an organization's Copilot subscription, including seat breakdown and feature policies. To configure these settings, go to your organization's settings on GitHub.com. For more information, see "[Managing policies for Copilot in your organization](https://docs.github.com/copilot/managing-copilot/managing-policies-for-copilot-business-in-your-organization)." Only organization owners can view details about the organization's Copilot Business or Copilot Enterprise subscription. OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `read:org` scopes to use this endpoint.
+    public func getCopilotOrganizationDetails(org: String, requestOptions: RequestOptions? = nil) async throws -> CopilotOrganizationDetails {
+        return try await CopilotMethods.copilotGetCopilotOrganizationDetails(config: config, org: org, requestOptions: requestOptions)
     }
 
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Lists all Copilot seats for which an
-    /// organization with a Copilot Business or Copilot Enterprise subscription is currently being billed. Only
-    /// organization owners can view assigned seats. Each seat object contains information about the assigned user's
-    /// most recent Copilot activity. Users must have telemetry enabled in their IDE for Copilot in the IDE activity to
-    /// be reflected in `last_activity_at`. For more information about activity data, see [Metrics data properties for
-    /// GitHub Copilot](https://docs.github.com/copilot/reference/metrics-data). OAuth app tokens and personal access
-    /// tokens (classic) need either the `manage_billing:copilot` or `read:org` scopes to use this endpoint.
-    func listCopilotSeats(
-        org: String,
-        page: Int? = nil,
-        perPage: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CopilotListCopilotSeatsResponse {
-        try await CopilotMethods.copilotListCopilotSeats(
-            config: config,
-            org: org,
-            page: page,
-            perPage: perPage,
-            requestOptions: requestOptions
-        )
+/// > [!NOTE] > This endpoint is in public preview and is subject to change. Lists all Copilot seats for which an organization with a Copilot Business or Copilot Enterprise subscription is currently being billed. Only organization owners can view assigned seats. Each seat object contains information about the assigned user's most recent Copilot activity. Users must have telemetry enabled in their IDE for Copilot in the IDE activity to be reflected in `last_activity_at`. For more information about activity data, see [Metrics data properties for GitHub Copilot](https://docs.github.com/copilot/reference/metrics-data). OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `read:org` scopes to use this endpoint.
+    public func listCopilotSeats(org: String, page: Int? = nil, perPage: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> CopilotListCopilotSeatsResponse {
+        return try await CopilotMethods.copilotListCopilotSeats(config: config, org: org, page: page, perPage: perPage, requestOptions: requestOptions)
     }
 
-    /// Creates Copilot seats for users in the specified organization teams. Supply `selected_teams` with at least one
-    /// team name; the organization must have a Copilot Business or Copilot Enterprise subscription and a configured
-    /// public code suggestions policy. The organization is billed for each seat according to its Copilot plan.
+/// Creates Copilot seats for users in the specified organization teams. Supply `selected_teams` with at least one team name; the organization must have a Copilot Business or Copilot Enterprise subscription and a configured public code suggestions policy. The organization is billed for each seat according to its Copilot plan.
     ///
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Purchases a GitHub Copilot seat for all
-    /// users within each specified team. The organization will be billed for each seat based on the organization's
-    /// Copilot plan. For more information about Copilot pricing, see "[About billing for GitHub Copilot in your organization](https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization/managing-the-copilot-subscription-for-your-organization/about-billing-for-github-copilot-in-your-organization)."
-    /// Only organization owners can purchase Copilot seats for their organization members. The organization must have a
-    /// Copilot Business or Copilot Enterprise subscription and a configured suggestion matching policy. For more
-    /// information about setting up a Copilot subscription, see "[Subscribing to Copilot for your organization](https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization/managing-the-copilot-subscription-for-your-organization/subscribing-to-copilot-for-your-organization)."
-    /// For more information about setting a suggestion matching policy, see "[Managing policies for Copilot in your organization](https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization/setting-policies-for-copilot-in-your-organization/managing-policies-for-copilot-in-your-organization#policies-for-suggestion-matching)."
-    /// The response contains the total number of new seats that were created and existing seats that were refreshed.
-    /// OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `admin:org`
-    /// scopes to use this endpoint.
-    func addCopilotSeatsForTeams(
-        org: String,
-        selectedTeams: [String],
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CopilotAddCopilotSeatsForTeamsResponse {
-        try await CopilotMethods.copilotAddCopilotSeatsForTeams(
-            config: config,
-            org: org,
-            selectedTeams: selectedTeams,
-            requestOptions: requestOptions
-        )
+    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Purchases a GitHub Copilot seat for all users within each specified team. The organization will be billed for each seat based on the organization's Copilot plan. For more information about Copilot pricing, see "[About billing for GitHub Copilot in your organization](https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization/managing-the-copilot-subscription-for-your-organization/about-billing-for-github-copilot-in-your-organization)." Only organization owners can purchase Copilot seats for their organization members. The organization must have a Copilot Business or Copilot Enterprise subscription and a configured suggestion matching policy. For more information about setting up a Copilot subscription, see "[Subscribing to Copilot for your organization](https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization/managing-the-copilot-subscription-for-your-organization/subscribing-to-copilot-for-your-organization)." For more information about setting a suggestion matching policy, see "[Managing policies for Copilot in your organization](https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization/setting-policies-for-copilot-in-your-organization/managing-policies-for-copilot-in-your-organization#policies-for-suggestion-matching)." The response contains the total number of new seats that were created and existing seats that were refreshed. OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `admin:org` scopes to use this endpoint.
+    public func addCopilotSeatsForTeams(org: String, selectedTeams: [String], requestOptions: RequestOptions? = nil) async throws -> CopilotAddCopilotSeatsForTeamsResponse {
+        return try await CopilotMethods.copilotAddCopilotSeatsForTeams(config: config, org: org, selectedTeams: selectedTeams, requestOptions: requestOptions)
     }
 
-    /// Triggers cancellation of Copilot seats for users in the specified organization teams by setting those seats to
-    /// pending cancellation. Supply `selected_teams` with at least one team name; only organization owners can cancel
-    /// seats for organization members. Affected users lose Copilot access at the end of the current billing cycle
-    /// unless they retain access through another team.
+/// Triggers cancellation of Copilot seats for users in the specified organization teams by setting those seats to pending cancellation. Supply `selected_teams` with at least one team name; only organization owners can cancel seats for organization members. Affected users lose Copilot access at the end of the current billing cycle unless they retain access through another team.
     ///
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Sets seats for all members of each team
-    /// specified to "pending cancellation". This will cause the members of the specified team(s) to lose access to
-    /// GitHub Copilot at the end of the current billing cycle unless they retain access through another team. For more
-    /// information about disabling access to Copilot, see "[Revoking access to Copilot for members of your organization](https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization/managing-access-to-github-copilot-in-your-organization/revoking-access-to-copilot-for-members-of-your-organization)."
-    /// Only organization owners can cancel Copilot seats for their organization members. The response contains the
-    /// total number of seats set to "pending cancellation". OAuth app tokens and personal access tokens (classic) need
-    /// either the `manage_billing:copilot` or `admin:org` scopes to use this endpoint.
-    func cancelCopilotSeatAssignmentForTeams(
-        org: String,
-        selectedTeams: [String],
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CopilotCancelCopilotSeatAssignmentForTeamsResponse {
-        try await CopilotMethods.copilotCancelCopilotSeatAssignmentForTeams(
-            config: config,
-            org: org,
-            selectedTeams: selectedTeams,
-            requestOptions: requestOptions
-        )
+    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Sets seats for all members of each team specified to "pending cancellation". This will cause the members of the specified team(s) to lose access to GitHub Copilot at the end of the current billing cycle unless they retain access through another team. For more information about disabling access to Copilot, see "[Revoking access to Copilot for members of your organization](https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization/managing-access-to-github-copilot-in-your-organization/revoking-access-to-copilot-for-members-of-your-organization)." Only organization owners can cancel Copilot seats for their organization members. The response contains the total number of seats set to "pending cancellation". OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `admin:org` scopes to use this endpoint.
+    public func cancelCopilotSeatAssignmentForTeams(org: String, selectedTeams: [String], requestOptions: RequestOptions? = nil) async throws -> CopilotCancelCopilotSeatAssignmentForTeamsResponse {
+        return try await CopilotMethods.copilotCancelCopilotSeatAssignmentForTeams(config: config, org: org, selectedTeams: selectedTeams, requestOptions: requestOptions)
     }
 
-    /// Creates Copilot seats for organization members listed in `selected_usernames`. Submit at least one username; the
-    /// organization must have a Copilot Business or Copilot Enterprise subscription, billing configured, and a
-    /// suggestion matching policy set. The organization is billed for each seat, and only organization owners can
-    /// purchase seats.
+/// Creates Copilot seats for organization members listed in `selected_usernames`. Submit at least one username; the organization must have a Copilot Business or Copilot Enterprise subscription, billing configured, and a suggestion matching policy set. The organization is billed for each seat, and only organization owners can purchase seats.
     ///
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Purchases a GitHub Copilot seat for
-    /// each user specified. The organization will be billed for each seat based on the organization's Copilot plan. For
-    /// more information about Copilot pricing, see "[About billing for GitHub Copilot in your organization](https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization/managing-the-copilot-subscription-for-your-organization/about-billing-for-github-copilot-in-your-organization)."
-    /// Only organization owners can purchase Copilot seats for their organization members. The organization must have a
-    /// Copilot Business or Copilot Enterprise subscription and a configured suggestion matching policy. For more
-    /// information about setting up a Copilot subscription, see "[Subscribing to Copilot for your organization](https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization/managing-the-copilot-subscription-for-your-organization/subscribing-to-copilot-for-your-organization)."
-    /// For more information about setting a suggestion matching policy, see "[Managing policies for Copilot in your organization](https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization/setting-policies-for-copilot-in-your-organization/managing-policies-for-copilot-in-your-organization#policies-for-suggestion-matching)."
-    /// The response contains the total number of new seats that were created and existing seats that were refreshed.
-    /// OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `admin:org`
-    /// scopes to use this endpoint.
-    func addCopilotSeatsForUsers(
-        org: String,
-        selectedUsernames: [String],
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CopilotAddCopilotSeatsForUsersResponse {
-        try await CopilotMethods.copilotAddCopilotSeatsForUsers(
-            config: config,
-            org: org,
-            selectedUsernames: selectedUsernames,
-            requestOptions: requestOptions
-        )
+    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Purchases a GitHub Copilot seat for each user specified. The organization will be billed for each seat based on the organization's Copilot plan. For more information about Copilot pricing, see "[About billing for GitHub Copilot in your organization](https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization/managing-the-copilot-subscription-for-your-organization/about-billing-for-github-copilot-in-your-organization)." Only organization owners can purchase Copilot seats for their organization members. The organization must have a Copilot Business or Copilot Enterprise subscription and a configured suggestion matching policy. For more information about setting up a Copilot subscription, see "[Subscribing to Copilot for your organization](https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization/managing-the-copilot-subscription-for-your-organization/subscribing-to-copilot-for-your-organization)." For more information about setting a suggestion matching policy, see "[Managing policies for Copilot in your organization](https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization/setting-policies-for-copilot-in-your-organization/managing-policies-for-copilot-in-your-organization#policies-for-suggestion-matching)." The response contains the total number of new seats that were created and existing seats that were refreshed. OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `admin:org` scopes to use this endpoint.
+    public func addCopilotSeatsForUsers(org: String, selectedUsernames: [String], requestOptions: RequestOptions? = nil) async throws -> CopilotAddCopilotSeatsForUsersResponse {
+        return try await CopilotMethods.copilotAddCopilotSeatsForUsers(config: config, org: org, selectedUsernames: selectedUsernames, requestOptions: requestOptions)
     }
 
-    /// Cancels Copilot seat assignments for the organization members listed in `selected_usernames`. Their seats become
-    /// pending cancellation, and members lose access at the end of the current billing cycle unless they retain access
-    /// through team membership. Only organization owners can cancel seats for organization members.
+/// Cancels Copilot seat assignments for the organization members listed in `selected_usernames`. Their seats become pending cancellation, and members lose access at the end of the current billing cycle unless they retain access through team membership. Only organization owners can cancel seats for organization members.
     ///
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Sets seats for all users specified to
-    /// "pending cancellation". This will cause the specified users to lose access to GitHub Copilot at the end of the
-    /// current billing cycle unless they retain access through team membership. For more information about disabling
-    /// access to Copilot, see "[Revoking access to Copilot for members of your organization](https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization/managing-access-to-github-copilot-in-your-organization/revoking-access-to-copilot-for-members-of-your-organization)."
-    /// Only organization owners can cancel Copilot seats for their organization members. The response contains the
-    /// total number of seats set to "pending cancellation". OAuth app tokens and personal access tokens (classic) need
-    /// either the `manage_billing:copilot` or `admin:org` scopes to use this endpoint.
-    func cancelCopilotSeatAssignmentForUsers(
-        org: String,
-        selectedUsernames: [String],
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CopilotCancelCopilotSeatAssignmentForUsersResponse {
-        try await CopilotMethods.copilotCancelCopilotSeatAssignmentForUsers(
-            config: config,
-            org: org,
-            selectedUsernames: selectedUsernames,
-            requestOptions: requestOptions
-        )
+    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Sets seats for all users specified to "pending cancellation". This will cause the specified users to lose access to GitHub Copilot at the end of the current billing cycle unless they retain access through team membership. For more information about disabling access to Copilot, see "[Revoking access to Copilot for members of your organization](https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization/managing-access-to-github-copilot-in-your-organization/revoking-access-to-copilot-for-members-of-your-organization)." Only organization owners can cancel Copilot seats for their organization members. The response contains the total number of seats set to "pending cancellation". OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `admin:org` scopes to use this endpoint.
+    public func cancelCopilotSeatAssignmentForUsers(org: String, selectedUsernames: [String], requestOptions: RequestOptions? = nil) async throws -> CopilotCancelCopilotSeatAssignmentForUsersResponse {
+        return try await CopilotMethods.copilotCancelCopilotSeatAssignmentForUsers(config: config, org: org, selectedUsernames: selectedUsernames, requestOptions: requestOptions)
     }
 
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Gets information about which
-    /// repositories in an organization have been enabled or disabled for the Copilot cloud agent. Organization owners
-    /// can configure whether Copilot cloud agent is enabled for all repositories, selected repositories, or no
-    /// repositories owned by organization. OAuth app tokens and personal access tokens (classic) need the `admin:org`
-    /// scope to use this endpoint.
-    func getCopilotCodingAgentPermissionsOrganization(
-        org: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws
-        -> CopilotGetCopilotCodingAgentPermissionsOrganizationResponse {
-        try await CopilotMethods.copilotGetCopilotCodingAgentPermissionsOrganization(
-            config: config,
-            org: org,
-            requestOptions: requestOptions
-        )
+/// > [!NOTE] > This endpoint is in public preview and is subject to change. Gets information about which repositories in an organization have been enabled or disabled for the Copilot cloud agent. Organization owners can configure whether Copilot cloud agent is enabled for all repositories, selected repositories, or no repositories owned by organization. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    public func getCopilotCodingAgentPermissionsOrganization(org: String, requestOptions: RequestOptions? = nil) async throws -> CopilotGetCopilotCodingAgentPermissionsOrganizationResponse {
+        return try await CopilotMethods.copilotGetCopilotCodingAgentPermissionsOrganization(config: config, org: org, requestOptions: requestOptions)
     }
 }
 
-public extension CopilotNamespace {
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Sets the policy for which repositories
-    /// in an organization can use Copilot cloud agent. Organization owners can configure whether Copilot cloud agent is
-    /// enabled for all repositories, selected repositories, or no repositories owned by the organization. OAuth app
-    /// tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
-    func setCopilotCodingAgentPermissionsOrganization(
-        org: String,
-        enabledRepositories: CopilotSetCopilotCodingAgentPermissionsOrganizationRequestBodXd3a141df41,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await CopilotMethods.copilotSetCopilotCodingAgentPermissionsOrganization(
-            config: config,
-            org: org,
-            enabledRepositories: enabledRepositories,
-            requestOptions: requestOptions
-        )
+extension CopilotNamespace {
+/// > [!NOTE] > This endpoint is in public preview and is subject to change. Sets the policy for which repositories in an organization can use Copilot cloud agent. Organization owners can configure whether Copilot cloud agent is enabled for all repositories, selected repositories, or no repositories owned by the organization. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    public func setCopilotCodingAgentPermissionsOrganization(org: String, enabledRepositories: CopilotSetCopilotCodingAgentPermissionsOrganizationRequestBodXd3a141df41, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await CopilotMethods.copilotSetCopilotCodingAgentPermissionsOrganization(config: config, org: org, enabledRepositories: enabledRepositories, requestOptions: requestOptions)
     }
 
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Lists the selected repositories that
-    /// are enabled for Copilot cloud agent in an organization. Organization owners can use this endpoint when the
-    /// coding agent repository policy is set to `selected` to see which repositories have been enabled. OAuth app
-    /// tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
-    func listCopilotCodingAgentSelectedRepositoriesForOrganization(
-        org: String,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CopilotListCopilotCodingAgentSelectedRepositoriesForOrganizationResponse {
-        try await CopilotMethods.copilotListCopilotCodingAgentSelectedRepositoriesForOrganization(
-            config: config,
-            org: org,
-            perPage: perPage,
-            page: page,
-            requestOptions: requestOptions
-        )
+/// > [!NOTE] > This endpoint is in public preview and is subject to change. Lists the selected repositories that are enabled for Copilot cloud agent in an organization. Organization owners can use this endpoint when the coding agent repository policy is set to `selected` to see which repositories have been enabled. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    public func listCopilotCodingAgentSelectedRepositoriesForOrganization(org: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> CopilotListCopilotCodingAgentSelectedRepositoriesForOrganizationResponse {
+        return try await CopilotMethods.copilotListCopilotCodingAgentSelectedRepositoriesForOrganization(config: config, org: org, perPage: perPage, page: page, requestOptions: requestOptions)
     }
 
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Replaces the list of selected
-    /// repositories that are enabled for Copilot cloud agent in an organization. This method can only be called when
-    /// the cloud agent repository policy is set to `selected`. OAuth app tokens and personal access tokens (classic)
-    /// need the `admin:org` scope to use this endpoint.
-    func setCopilotCodingAgentSelectedRepositoriesForOrganization(
-        org: String,
-        selectedRepositoryIds: [Int],
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await CopilotMethods.copilotSetCopilotCodingAgentSelectedRepositoriesForOrganization(
-            config: config,
-            org: org,
-            selectedRepositoryIds: selectedRepositoryIds,
-            requestOptions: requestOptions
-        )
+/// > [!NOTE] > This endpoint is in public preview and is subject to change. Replaces the list of selected repositories that are enabled for Copilot cloud agent in an organization. This method can only be called when the cloud agent repository policy is set to `selected`. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    public func setCopilotCodingAgentSelectedRepositoriesForOrganization(org: String, selectedRepositoryIds: [Int], requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await CopilotMethods.copilotSetCopilotCodingAgentSelectedRepositoriesForOrganization(config: config, org: org, selectedRepositoryIds: selectedRepositoryIds, requestOptions: requestOptions)
     }
 
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Adds a repository to the list of
-    /// selected repositories enabled for Copilot cloud agent in an organization. This method can only be called when
-    /// the cloud agent repository policy is set to `selected`. OAuth app tokens and personal access tokens (classic)
-    /// need the `admin:org` scope to use this endpoint.
-    func enableCopilotCodingAgentForRepositoryInOrganization(
-        org: String,
-        repositoryId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await CopilotMethods.copilotEnableCopilotCodingAgentForRepositoryInOrganization(
-            config: config,
-            org: org,
-            repositoryId: repositoryId,
-            requestOptions: requestOptions
-        )
+/// > [!NOTE] > This endpoint is in public preview and is subject to change. Adds a repository to the list of selected repositories enabled for Copilot cloud agent in an organization. This method can only be called when the cloud agent repository policy is set to `selected`. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    public func enableCopilotCodingAgentForRepositoryInOrganization(org: String, repositoryId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await CopilotMethods.copilotEnableCopilotCodingAgentForRepositoryInOrganization(config: config, org: org, repositoryId: repositoryId, requestOptions: requestOptions)
     }
 
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Removes a repository from the list of
-    /// selected repositories enabled for Copilot cloud agent in an organization. This method can only be called when
-    /// the cloud agent repository policy is set to `selected`. OAuth app tokens and personal access tokens (classic)
-    /// need the `admin:org` scopes to use this endpoint.
-    func disableCopilotCodingAgentForRepositoryInOrganization(
-        org: String,
-        repositoryId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await CopilotMethods.copilotDisableCopilotCodingAgentForRepositoryInOrganization(
-            config: config,
-            org: org,
-            repositoryId: repositoryId,
-            requestOptions: requestOptions
-        )
+/// > [!NOTE] > This endpoint is in public preview and is subject to change. Removes a repository from the list of selected repositories enabled for Copilot cloud agent in an organization. This method can only be called when the cloud agent repository policy is set to `selected`. OAuth app tokens and personal access tokens (classic) need the `admin:org` scopes to use this endpoint.
+    public func disableCopilotCodingAgentForRepositoryInOrganization(org: String, repositoryId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await CopilotMethods.copilotDisableCopilotCodingAgentForRepositoryInOrganization(config: config, org: org, repositoryId: repositoryId, requestOptions: requestOptions)
     }
 
-    /// Retrieves the Copilot content exclusion rules configured for an organization. Use this endpoint to view the
-    /// organization's path rules; organization owners can view these details. The response does not include comments,
-    /// and duplicate keys are represented by their last occurrence.
+/// Retrieves the Copilot content exclusion rules configured for an organization. Use this endpoint to view the organization's path rules; organization owners can view these details. The response does not include comments, and duplicate keys are represented by their last occurrence.
     ///
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Gets information about an
-    /// organization's Copilot content exclusion path rules. To configure these settings, go to the organization's
-    /// settings on GitHub. For more information, see "[Excluding content from GitHub Copilot](https://docs.github.com/copilot/managing-copilot/configuring-and-auditing-content-exclusion/excluding-content-from-github-copilot#configuring-content-exclusions-for-your-organization)."
-    /// Organization owners can view details about Copilot content exclusion rules for the organization. OAuth app
-    /// tokens and personal access tokens (classic) need either the `copilot` or `read:org` scopes to use this endpoint.
-    /// > [!CAUTION] > * At this time, the API does not support comments. This endpoint will not return any comments in
-    /// the existing rules. > * At this time, the API does not support duplicate keys. If your content exclusion
-    /// configuration contains duplicate keys, the API will return only the last occurrence of that key. For example, if
-    /// duplicate entries are present, only the final value will be included in the response.
-    func copilotContentExclusionForOrganization(
-        org: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CopilotOrganizationContentExclusionDetails {
-        try await CopilotMethods.copilotCopilotContentExclusionForOrganization(
-            config: config,
-            org: org,
-            requestOptions: requestOptions
-        )
+    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Gets information about an organization's Copilot content exclusion path rules. To configure these settings, go to the organization's settings on GitHub. For more information, see "[Excluding content from GitHub Copilot](https://docs.github.com/copilot/managing-copilot/configuring-and-auditing-content-exclusion/excluding-content-from-github-copilot#configuring-content-exclusions-for-your-organization)." Organization owners can view details about Copilot content exclusion rules for the organization. OAuth app tokens and personal access tokens (classic) need either the `copilot` or `read:org` scopes to use this endpoint. > [!CAUTION] > * At this time, the API does not support comments. This endpoint will not return any comments in the existing rules. > * At this time, the API does not support duplicate keys. If your content exclusion configuration contains duplicate keys, the API will return only the last occurrence of that key. For example, if duplicate entries are present, only the final value will be included in the response.
+    public func copilotContentExclusionForOrganization(org: String, requestOptions: RequestOptions? = nil) async throws -> CopilotOrganizationContentExclusionDetails {
+        return try await CopilotMethods.copilotCopilotContentExclusionForOrganization(config: config, org: org, requestOptions: requestOptions)
     }
 
-    /// Sets Copilot content exclusion rules for an organization. Submit rule keys mapped to arrays of excluded paths or
-    /// conditional matching rules; duplicate keys overwrite earlier entries. Existing comments are deleted because the
-    /// API does not support comments.
+/// Sets Copilot content exclusion rules for an organization. Submit rule keys mapped to arrays of excluded paths or conditional matching rules; duplicate keys overwrite earlier entries. Existing comments are deleted because the API does not support comments.
     ///
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Sets Copilot content exclusion path
-    /// rules for an organization. To configure these settings, go to the organization's settings on GitHub. For more
-    /// information, see "[Excluding content from GitHub Copilot](https://docs.github.com/copilot/managing-copilot/configuring-and-auditing-content-exclusion/excluding-content-from-github-copilot#configuring-content-exclusions-for-your-organization)."
-    /// Organization owners can set Copilot content exclusion rules for the organization. OAuth app tokens and personal
-    /// access tokens (classic) need the `copilot` scope to use this endpoint. > [!CAUTION] > * At this time, the API
-    /// does not support comments. When using this endpoint, any existing comments in your rules will be deleted. > * At
-    /// this time, the API does not support duplicate keys. If you submit content exclusions through the API with
-    /// duplicate keys, only the last occurrence will be saved. Earlier entries with the same key will be overwritten.
-    func setCopilotContentExclusionForOrganization(
-        org: String,
-        body: [String: [CopilotSetCopilotContentExclusionForOrganizationRequestBodyValueItem]],
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CopilotSetCopilotContentExclusionForOrganizationResponse {
-        try await CopilotMethods.copilotSetCopilotContentExclusionForOrganization(
-            config: config,
-            org: org,
-            body: body,
-            requestOptions: requestOptions
-        )
+    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Sets Copilot content exclusion path rules for an organization. To configure these settings, go to the organization's settings on GitHub. For more information, see "[Excluding content from GitHub Copilot](https://docs.github.com/copilot/managing-copilot/configuring-and-auditing-content-exclusion/excluding-content-from-github-copilot#configuring-content-exclusions-for-your-organization)." Organization owners can set Copilot content exclusion rules for the organization. OAuth app tokens and personal access tokens (classic) need the `copilot` scope to use this endpoint. > [!CAUTION] > * At this time, the API does not support comments. When using this endpoint, any existing comments in your rules will be deleted. > * At this time, the API does not support duplicate keys. If you submit content exclusions through the API with duplicate keys, only the last occurrence will be saved. Earlier entries with the same key will be overwritten.
+    public func setCopilotContentExclusionForOrganization(org: String, body: [String: [CopilotSetCopilotContentExclusionForOrganizationRequestBodyValueItem]], requestOptions: RequestOptions? = nil) async throws -> CopilotSetCopilotContentExclusionForOrganizationResponse {
+        return try await CopilotMethods.copilotSetCopilotContentExclusionForOrganization(config: config, org: org, body: body, requestOptions: requestOptions)
     }
 
-    /// Use this endpoint to retrieve download links for the Copilot organization usage metrics report for a specific
-    /// day. The report provides comprehensive usage data for Copilot features across the organization. The report
-    /// contains aggregated metrics for the specified day, including usage statistics for various Copilot features, user
-    /// engagement data, and feature adoption metrics. Reports are generated daily and made available for download
-    /// through signed URLs with a limited expiration time. The response includes download links to the report files,
-    /// along with the specific date of the report. The report covers a complete day for which data has been processed.
-    /// Organization owners and authorized users with fine-grained "View Organization Copilot Metrics" permission can
-    /// retrieve Copilot metrics reports for the organization. OAuth app tokens and personal access tokens (classic)
-    /// need the `read:org` scope to use this endpoint. For more information about organization metrics attribution, see
-    /// [How are metrics attributed across organizations](https://docs.github.com/copilot/concepts/copilot-metrics#how-are-metrics-attributed-across-organizations).
-    func copilotOrganizationOneDayUsageMetrics(
-        org: String,
-        day: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CopilotUsageMetrics1DayReport {
-        try await CopilotMethods.copilotCopilotOrganizationOneDayUsageMetrics(
-            config: config,
-            org: org,
-            day: day,
-            requestOptions: requestOptions
-        )
+/// Use this endpoint to retrieve download links for the Copilot organization usage metrics report for a specific day. The report provides comprehensive usage data for Copilot features across the organization. The report contains aggregated metrics for the specified day, including usage statistics for various Copilot features, user engagement data, and feature adoption metrics. Reports are generated daily and made available for download through signed URLs with a limited expiration time. The response includes download links to the report files, along with the specific date of the report. The report covers a complete day for which data has been processed. Organization owners and authorized users with fine-grained "View Organization Copilot Metrics" permission can retrieve Copilot metrics reports for the organization. OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint. For more information about organization metrics attribution, see [How are metrics attributed across organizations](https://docs.github.com/copilot/concepts/copilot-metrics#how-are-metrics-attributed-across-organizations).
+    public func copilotOrganizationOneDayUsageMetrics(org: String, day: String, requestOptions: RequestOptions? = nil) async throws -> CopilotUsageMetrics1DayReport {
+        return try await CopilotMethods.copilotCopilotOrganizationOneDayUsageMetrics(config: config, org: org, day: day, requestOptions: requestOptions)
     }
 }
 
-public extension CopilotNamespace {
-    /// Use this endpoint to retrieve download links for the latest 28-day organization Copilot usage metrics report.
-    /// The report provides comprehensive usage data for Copilot features across the organization. The report contains
-    /// aggregated metrics for the previous 28 days, including usage statistics for various Copilot features, user
-    /// engagement data, and feature adoption metrics. Reports are generated daily and made available for download
-    /// through signed URLs with a limited expiration time. The response includes download links to the report files,
-    /// along with the specific date range covered by the report. The report covers a complete 28-day period ending on
-    /// the most recent day for which data has been processed. Organization owners and authorized users with
-    /// fine-grained "View Organization Copilot Metrics" permission can retrieve Copilot metrics reports for the
-    /// organization. OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this
-    /// endpoint. For more information about organization metrics attribution, see [How are metrics attributed across organizations](https://docs.github.com/copilot/concepts/copilot-metrics#how-are-metrics-attributed-across-organizations).
-    func copilotOrganizationUsageMetrics(
-        org: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CopilotUsageMetrics28DayReport {
-        try await CopilotMethods.copilotCopilotOrganizationUsageMetrics(
-            config: config,
-            org: org,
-            requestOptions: requestOptions
-        )
+extension CopilotNamespace {
+/// Use this endpoint to retrieve download links for the latest 28-day organization Copilot usage metrics report. The report provides comprehensive usage data for Copilot features across the organization. The report contains aggregated metrics for the previous 28 days, including usage statistics for various Copilot features, user engagement data, and feature adoption metrics. Reports are generated daily and made available for download through signed URLs with a limited expiration time. The response includes download links to the report files, along with the specific date range covered by the report. The report covers a complete 28-day period ending on the most recent day for which data has been processed. Organization owners and authorized users with fine-grained "View Organization Copilot Metrics" permission can retrieve Copilot metrics reports for the organization. OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint. For more information about organization metrics attribution, see [How are metrics attributed across organizations](https://docs.github.com/copilot/concepts/copilot-metrics#how-are-metrics-attributed-across-organizations).
+    public func copilotOrganizationUsageMetrics(org: String, requestOptions: RequestOptions? = nil) async throws -> CopilotUsageMetrics28DayReport {
+        return try await CopilotMethods.copilotCopilotOrganizationUsageMetrics(config: config, org: org, requestOptions: requestOptions)
     }
 
-    /// Use this endpoint to retrieve download links for the Copilot organization repository report for a specific day.
-    /// The report provides per-repository pull request metrics for Copilot across the organization, with one entry per
-    /// repository. The report contains repository-level pull request activity for the specified day, including the
-    /// Copilot Coding Agent (CCA) and Copilot Code Review (CCR) breakdowns. Only repositories that had activity on the
-    /// specified day are included. Reports are generated daily and made available for download through signed URLs with
-    /// a limited expiration time. The response includes download links to the report files, along with the specific
-    /// date of the report. The report covers a complete day for which data has been processed. Organization owners and
-    /// authorized users with fine-grained "View Organization Copilot Metrics" permission can retrieve Copilot metrics
-    /// reports for the organization. OAuth app tokens and personal access tokens (classic) need the `read:org` scope to
-    /// use this endpoint. For more information about organization metrics attribution, see [How are metrics attributed
-    /// across organizations](https://docs.github.com/copilot/concepts/copilot-metrics#how-are-metrics-attributed-across-organizations).
-    func copilotOrganizationReposOneDayReport(
-        org: String,
-        day: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CopilotUsageMetrics1DayReport {
-        try await CopilotMethods.copilotCopilotOrganizationReposOneDayReport(
-            config: config,
-            org: org,
-            day: day,
-            requestOptions: requestOptions
-        )
+/// Use this endpoint to retrieve download links for the Copilot organization repository report for a specific day. The report provides per-repository pull request metrics for Copilot across the organization, with one entry per repository. The report contains repository-level pull request activity for the specified day, including the Copilot Coding Agent (CCA) and Copilot Code Review (CCR) breakdowns. Only repositories that had activity on the specified day are included. Reports are generated daily and made available for download through signed URLs with a limited expiration time. The response includes download links to the report files, along with the specific date of the report. The report covers a complete day for which data has been processed. Organization owners and authorized users with fine-grained "View Organization Copilot Metrics" permission can retrieve Copilot metrics reports for the organization. OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint. For more information about organization metrics attribution, see [How are metrics attributed across organizations](https://docs.github.com/copilot/concepts/copilot-metrics#how-are-metrics-attributed-across-organizations).
+    public func copilotOrganizationReposOneDayReport(org: String, day: String, requestOptions: RequestOptions? = nil) async throws -> CopilotUsageMetrics1DayReport {
+        return try await CopilotMethods.copilotCopilotOrganizationReposOneDayReport(config: config, org: org, day: day, requestOptions: requestOptions)
     }
 
-    /// Use this endpoint to retrieve download links for the Copilot organization user-teams report for a specific day.
-    /// The report provides user-team join data for Copilot across the organization, with one entry per user-team pair.
-    /// The report contains user-team membership data for the specified day, enabling consumers to join with the
-    /// existing organization user reports to compute team-level usage metrics. Reports are generated daily and made
-    /// available for download through signed URLs with a limited expiration time. The response includes download links
-    /// to the report files, along with the specific date of the report. The report covers a complete day for which data
-    /// has been processed. Organization owners and authorized users with fine-grained "View Organization Copilot
-    /// Metrics" permission can retrieve Copilot metrics reports for the organization. OAuth app tokens and personal
-    /// access tokens (classic) need the `read:org` scope to use this endpoint. For more information about organization
-    /// metrics attribution, see [How are metrics attributed across organizations](https://docs.github.com/copilot/concepts/copilot-metrics#how-are-metrics-attributed-across-organizations).
-    func copilotOrganizationUserTeamsOneDayReport(
-        org: String,
-        day: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CopilotUsageMetrics1DayReport {
-        try await CopilotMethods.copilotCopilotOrganizationUserTeamsOneDayReport(
-            config: config,
-            org: org,
-            day: day,
-            requestOptions: requestOptions
-        )
+/// Use this endpoint to retrieve download links for the Copilot organization user-teams report for a specific day. The report provides user-team join data for Copilot across the organization, with one entry per user-team pair. The report contains user-team membership data for the specified day, enabling consumers to join with the existing organization user reports to compute team-level usage metrics. Reports are generated daily and made available for download through signed URLs with a limited expiration time. The response includes download links to the report files, along with the specific date of the report. The report covers a complete day for which data has been processed. Organization owners and authorized users with fine-grained "View Organization Copilot Metrics" permission can retrieve Copilot metrics reports for the organization. OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint. For more information about organization metrics attribution, see [How are metrics attributed across organizations](https://docs.github.com/copilot/concepts/copilot-metrics#how-are-metrics-attributed-across-organizations).
+    public func copilotOrganizationUserTeamsOneDayReport(org: String, day: String, requestOptions: RequestOptions? = nil) async throws -> CopilotUsageMetrics1DayReport {
+        return try await CopilotMethods.copilotCopilotOrganizationUserTeamsOneDayReport(config: config, org: org, day: day, requestOptions: requestOptions)
     }
 
-    /// Use this endpoint to retrieve download links for the Copilot organization user usage metrics report for a
-    /// specific day. The report provides detailed user-level usage data and engagement metrics for Copilot features
-    /// across the organization. The report contains user-specific metrics for the specified day, including individual
-    /// user engagement statistics, feature usage patterns, and adoption metrics broken down by user. This report allows
-    /// authorized users to analyze Copilot usage at the user level to understand adoption patterns and identify
-    /// opportunities for increased engagement. Reports are generated daily and made available for download through
-    /// signed URLs with a limited expiration time. The response includes download links to the report files, along with
-    /// the specific date of the report. The report covers a complete day for which data has been processed.
-    /// Organization owners and authorized users with fine-grained "View Organization Copilot Metrics" permission can
-    /// retrieve Copilot metrics reports for the organization. OAuth app tokens and personal access tokens (classic)
-    /// need the `read:org` scope to use this endpoint. For more information about organization metrics attribution, see
-    /// [How are metrics attributed across organizations](https://docs.github.com/copilot/concepts/copilot-metrics#how-are-metrics-attributed-across-organizations).
-    func copilotOrganizationUsersOneDayUsageMetrics(
-        org: String,
-        day: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CopilotUsageMetrics1DayReport {
-        try await CopilotMethods.copilotCopilotOrganizationUsersOneDayUsageMetrics(
-            config: config,
-            org: org,
-            day: day,
-            requestOptions: requestOptions
-        )
+/// Use this endpoint to retrieve download links for the Copilot organization user usage metrics report for a specific day. The report provides detailed user-level usage data and engagement metrics for Copilot features across the organization. The report contains user-specific metrics for the specified day, including individual user engagement statistics, feature usage patterns, and adoption metrics broken down by user. This report allows authorized users to analyze Copilot usage at the user level to understand adoption patterns and identify opportunities for increased engagement. Reports are generated daily and made available for download through signed URLs with a limited expiration time. The response includes download links to the report files, along with the specific date of the report. The report covers a complete day for which data has been processed. Organization owners and authorized users with fine-grained "View Organization Copilot Metrics" permission can retrieve Copilot metrics reports for the organization. OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint. For more information about organization metrics attribution, see [How are metrics attributed across organizations](https://docs.github.com/copilot/concepts/copilot-metrics#how-are-metrics-attributed-across-organizations).
+    public func copilotOrganizationUsersOneDayUsageMetrics(org: String, day: String, requestOptions: RequestOptions? = nil) async throws -> CopilotUsageMetrics1DayReport {
+        return try await CopilotMethods.copilotCopilotOrganizationUsersOneDayUsageMetrics(config: config, org: org, day: day, requestOptions: requestOptions)
     }
 
-    /// Use this endpoint to retrieve download links for the latest 28-day organization users Copilot usage metrics
-    /// report. The report provides detailed user-level usage data and engagement metrics for Copilot features across
-    /// the organization. The report contains user-specific metrics for the previous 28 days, including individual user
-    /// engagement statistics, feature usage patterns, and adoption metrics broken down by user. This report allows
-    /// authorized users to analyze Copilot usage at the user level to understand adoption patterns and identify
-    /// opportunities for increased engagement. Reports are generated daily and made available for download through
-    /// signed URLs with a limited expiration time. The response includes download links to the report files, along with
-    /// the specific date range covered by the report. The report covers a complete 28-day period ending on the most
-    /// recent day for which data has been processed. Organization owners and authorized users with fine-grained "View
-    /// Organization Copilot Metrics" permission can retrieve Copilot metrics reports for the organization. OAuth app
-    /// tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint. For more information
-    /// about organization metrics attribution, see [How are metrics attributed across organizations](https://docs.github.com/copilot/concepts/copilot-metrics#how-are-metrics-attributed-across-organizations).
-    func copilotOrganizationUsersUsageMetrics(
-        org: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CopilotUsageMetrics28DayReport {
-        try await CopilotMethods.copilotCopilotOrganizationUsersUsageMetrics(
-            config: config,
-            org: org,
-            requestOptions: requestOptions
-        )
+/// Use this endpoint to retrieve download links for the latest 28-day organization users Copilot usage metrics report. The report provides detailed user-level usage data and engagement metrics for Copilot features across the organization. The report contains user-specific metrics for the previous 28 days, including individual user engagement statistics, feature usage patterns, and adoption metrics broken down by user. This report allows authorized users to analyze Copilot usage at the user level to understand adoption patterns and identify opportunities for increased engagement. Reports are generated daily and made available for download through signed URLs with a limited expiration time. The response includes download links to the report files, along with the specific date range covered by the report. The report covers a complete 28-day period ending on the most recent day for which data has been processed. Organization owners and authorized users with fine-grained "View Organization Copilot Metrics" permission can retrieve Copilot metrics reports for the organization. OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint. For more information about organization metrics attribution, see [How are metrics attributed across organizations](https://docs.github.com/copilot/concepts/copilot-metrics#how-are-metrics-attributed-across-organizations).
+    public func copilotOrganizationUsersUsageMetrics(org: String, requestOptions: RequestOptions? = nil) async throws -> CopilotUsageMetrics28DayReport {
+        return try await CopilotMethods.copilotCopilotOrganizationUsersUsageMetrics(config: config, org: org, requestOptions: requestOptions)
     }
 
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Gets the GitHub Copilot seat details
-    /// for a member of an organization who currently has access to GitHub Copilot. The seat object contains information
-    /// about the user's most recent Copilot activity. Users must have telemetry enabled in their IDE for Copilot in the
-    /// IDE activity to be reflected in `last_activity_at`. For more information about activity data, see [Metrics data
-    /// properties for GitHub Copilot](https://docs.github.com/copilot/reference/metrics-data). Only organization owners
-    /// can view Copilot seat assignment details for members of their organization. OAuth app tokens and personal access
-    /// tokens (classic) need either the `manage_billing:copilot` or `read:org` scopes to use this endpoint.
-    func getCopilotSeatDetailsForUser(
-        org: String,
-        username: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CopilotSeatDetails {
-        try await CopilotMethods.copilotGetCopilotSeatDetailsForUser(
-            config: config,
-            org: org,
-            username: username,
-            requestOptions: requestOptions
-        )
+/// > [!NOTE] > This endpoint is in public preview and is subject to change. Gets the GitHub Copilot seat details for a member of an organization who currently has access to GitHub Copilot. The seat object contains information about the user's most recent Copilot activity. Users must have telemetry enabled in their IDE for Copilot in the IDE activity to be reflected in `last_activity_at`. For more information about activity data, see [Metrics data properties for GitHub Copilot](https://docs.github.com/copilot/reference/metrics-data). Only organization owners can view Copilot seat assignment details for members of their organization. OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `read:org` scopes to use this endpoint.
+    public func getCopilotSeatDetailsForUser(org: String, username: String, requestOptions: RequestOptions? = nil) async throws -> CopilotSeatDetails {
+        return try await CopilotMethods.copilotGetCopilotSeatDetailsForUser(config: config, org: org, username: username, requestOptions: requestOptions)
     }
 
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Gets the Copilot cloud agent
-    /// configuration for a repository, including MCP server configuration, enabled review tools, Actions workflow
-    /// approval settings, and firewall configuration. OAuth app tokens and personal access tokens (classic) need the
-    /// `repo` scope to use this endpoint.
-    func getCopilotCloudAgentConfiguration(
-        owner: String,
-        repo: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CopilotGetCopilotCloudAgentConfigurationResponse {
-        try await CopilotMethods.copilotGetCopilotCloudAgentConfiguration(
-            config: config,
-            owner: owner,
-            repo: repo,
-            requestOptions: requestOptions
-        )
+/// > [!NOTE] > This endpoint is in public preview and is subject to change. Gets the Copilot cloud agent configuration for a repository, including MCP server configuration, enabled review tools, Actions workflow approval settings, and firewall configuration. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func getCopilotCloudAgentConfiguration(owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> CopilotGetCopilotCloudAgentConfigurationResponse {
+        return try await CopilotMethods.copilotGetCopilotCloudAgentConfiguration(config: config, owner: owner, repo: repo, requestOptions: requestOptions)
     }
 }

@@ -3,66 +3,40 @@
 
 import Foundation
 
-/// WebhookDeploymentCreated domain models
-public extension WebhookDeploymentCreatedWorkflowRunPullRequestsItem {
-    init(from decoder: Decoder) throws {
+// WebhookDeploymentCreated domain models
+extension WebhookDeploymentCreatedWorkflowRunPullRequestsItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.base) else {
-            throw SdkValidationError(
-                field: "base",
-                code: "required",
-                message: "Validation failed for 'base': value is required"
-            )
+            throw SdkValidationError(field: "base", code: "required", message: "Validation failed for 'base': value is required")
         }
         guard container.contains(.head) else {
-            throw SdkValidationError(
-                field: "head",
-                code: "required",
-                message: "Validation failed for 'head': value is required"
-            )
+            throw SdkValidationError(field: "head", code: "required", message: "Validation failed for 'head': value is required")
         }
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
         guard container.contains(.number) else {
-            throw SdkValidationError(
-                field: "number",
-                code: "required",
-                message: "Validation failed for 'number': value is required"
-            )
+            throw SdkValidationError(field: "number", code: "required", message: "Validation failed for 'number': value is required")
         }
         guard container.contains(.url) else {
-            throw SdkValidationError(
-                field: "url",
-                code: "required",
-                message: "Validation failed for 'url': value is required"
-            )
+            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
         }
-        base = try container.sdkDecodeRequired(.base)
-        head = try container.sdkDecodeRequired(.head)
-        id = try container.sdkDecodeRequired(.id)
-        number = try container.sdkDecodeRequired(.number)
-        url = try container.sdkDecodeRequired(.url)
-        try sdkValidateUri("url", url)
+        self.base = try container.sdkDecodeRequired(.base)
+        self.head = try container.sdkDecodeRequired(.head)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.number = try container.sdkDecodeRequired(.number)
+        self.url = try container.sdkDecodeRequired(.url)
+            try sdkValidateUri("url", self.url)
     }
 }
 
-public extension WebhookDeploymentCreatedWorkflowRunPullRequestsItem {
-    init(
-        base: WebhookDeploymentCreatedWorkflowRunPullRequestsItemBase,
-        head: WebhookDeploymentCreatedWorkflowRunPullRequestsItemHead,
-        id: Int,
-        number: Int,
-        url: String
-    ) throws {
+extension WebhookDeploymentCreatedWorkflowRunPullRequestsItem {
+    public init(base: WebhookDeploymentCreatedWorkflowRunPullRequestsItemBase, head: WebhookDeploymentCreatedWorkflowRunPullRequestsItemHead, id: Int, number: Int, url: String) throws {
         (self.base, self.head) = (base, head)
         (self.id, self.number) = (id, number)
         self.url = url
-        try sdkValidateUri("url", self.url)
+            try sdkValidateUri("url", self.url)
     }
 }
 
@@ -127,58 +101,39 @@ public struct WebhookDeploymentCreatedWorkflowRunRepositoryOwner: Codable {
     }
 
     init() {
-        (avatarUrl, eventsUrl, followersUrl, followingUrl, gistsUrl) = (nil, nil, nil, nil, nil)
-        (gravatarId, htmlUrl, id, login, nodeId) = (nil, nil, nil, nil, nil)
-        (organizationsUrl, receivedEventsUrl, reposUrl, siteAdmin, starredUrl) = (nil, nil, nil, nil, nil)
-        (subscriptionsUrl, type, url) = (nil, nil, nil)
+        (self.avatarUrl, self.eventsUrl, self.followersUrl, self.followingUrl, self.gistsUrl) = (nil, nil, nil, nil, nil)
+        (self.gravatarId, self.htmlUrl, self.id, self.login, self.nodeId) = (nil, nil, nil, nil, nil)
+        (self.organizationsUrl, self.receivedEventsUrl, self.reposUrl, self.siteAdmin, self.starredUrl) = (nil, nil, nil, nil, nil)
+        (self.subscriptionsUrl, self.type, self.url) = (nil, nil, nil)
     }
 }
 
-public extension WebhookDeploymentCreatedWorkflowRunRepositoryOwner {
-    init(from decoder: Decoder) throws {
+extension WebhookDeploymentCreatedWorkflowRunRepositoryOwner {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
-        eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
-        followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
-        followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
-        gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
-        gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        id = try container.sdkDecodeIfPresent(.id)
-        login = try container.sdkDecodeIfPresent(.login)
-        nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
-        receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
-        reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
-        siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
-        starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
-        subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
-        type = try container.sdkDecodeIfPresent(.type)
-        url = try container.sdkDecodeIfPresent(.url)
+        self.avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
+        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        self.followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
+        self.followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
+        self.gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
+        self.gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        self.id = try container.sdkDecodeIfPresent(.id)
+        self.login = try container.sdkDecodeIfPresent(.login)
+        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        self.organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
+        self.receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
+        self.reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
+        self.siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
+        self.starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
+        self.subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
+        self.type = try container.sdkDecodeIfPresent(.type)
+        self.url = try container.sdkDecodeIfPresent(.url)
     }
 }
 
-public extension WebhookDeploymentCreatedWorkflowRunRepositoryOwner {
-    init(
-        avatarUrl: String? = nil,
-        eventsUrl: String? = nil,
-        followersUrl: String? = nil,
-        followingUrl: String? = nil,
-        gistsUrl: String? = nil,
-        gravatarId: String? = nil,
-        htmlUrl: String? = nil,
-        id: Int? = nil,
-        login: String? = nil,
-        nodeId: String? = nil,
-        organizationsUrl: String? = nil,
-        receivedEventsUrl: String? = nil,
-        reposUrl: String? = nil,
-        siteAdmin: Bool? = nil,
-        starredUrl: String? = nil,
-        subscriptionsUrl: String? = nil,
-        type: String? = nil,
-        url: String? = nil
-    ) {
+extension WebhookDeploymentCreatedWorkflowRunRepositoryOwner {
+    public init(avatarUrl: String? = nil, eventsUrl: String? = nil, followersUrl: String? = nil, followingUrl: String? = nil, gistsUrl: String? = nil, gravatarId: String? = nil, htmlUrl: String? = nil, id: Int? = nil, login: String? = nil, nodeId: String? = nil, organizationsUrl: String? = nil, receivedEventsUrl: String? = nil, reposUrl: String? = nil, siteAdmin: Bool? = nil, starredUrl: String? = nil, subscriptionsUrl: String? = nil, type: String? = nil, url: String? = nil) {
         self.init()
         (self.avatarUrl, self.eventsUrl) = (avatarUrl, eventsUrl)
         (self.followersUrl, self.followingUrl) = (followersUrl, followingUrl)
@@ -207,43 +162,29 @@ public struct WebhookDeploymentCreatedWorkflowRunPullRequestsItemBase: Codable {
         case sha
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookDeploymentCreatedWorkflowRunPullRequestsItemBase {
-    init(from decoder: Decoder) throws {
+extension WebhookDeploymentCreatedWorkflowRunPullRequestsItemBase {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.ref) else {
-            throw SdkValidationError(
-                field: "ref",
-                code: "required",
-                message: "Validation failed for 'ref': value is required"
-            )
+            throw SdkValidationError(field: "ref", code: "required", message: "Validation failed for 'ref': value is required")
         }
         guard container.contains(.repo) else {
-            throw SdkValidationError(
-                field: "repo",
-                code: "required",
-                message: "Validation failed for 'repo': value is required"
-            )
+            throw SdkValidationError(field: "repo", code: "required", message: "Validation failed for 'repo': value is required")
         }
         guard container.contains(.sha) else {
-            throw SdkValidationError(
-                field: "sha",
-                code: "required",
-                message: "Validation failed for 'sha': value is required"
-            )
+            throw SdkValidationError(field: "sha", code: "required", message: "Validation failed for 'sha': value is required")
         }
-        ref = try container.sdkDecodeRequired(.ref)
-        repo = try container.sdkDecodeRequired(.repo)
-        sha = try container.sdkDecodeRequired(.sha)
+        self.ref = try container.sdkDecodeRequired(.ref)
+        self.repo = try container.sdkDecodeRequired(.repo)
+        self.sha = try container.sdkDecodeRequired(.sha)
     }
 }
 
-public extension WebhookDeploymentCreatedWorkflowRunPullRequestsItemBase {
-    init(ref: String, repo: WebhookDeploymentCreatedWorkflowRunPullRequestsItemBaseRepo, sha: String) {
+extension WebhookDeploymentCreatedWorkflowRunPullRequestsItemBase {
+    public init(ref: String, repo: WebhookDeploymentCreatedWorkflowRunPullRequestsItemBaseRepo, sha: String) {
         (self.ref, self.repo) = (ref, repo)
         self.sha = sha
     }
@@ -310,58 +251,39 @@ public struct WebhookDeploymentCreatedWorkflowRunHeadRepositoryOwner: Codable {
     }
 
     init() {
-        (avatarUrl, eventsUrl, followersUrl, followingUrl, gistsUrl) = (nil, nil, nil, nil, nil)
-        (gravatarId, htmlUrl, id, login, nodeId) = (nil, nil, nil, nil, nil)
-        (organizationsUrl, receivedEventsUrl, reposUrl, siteAdmin, starredUrl) = (nil, nil, nil, nil, nil)
-        (subscriptionsUrl, type, url) = (nil, nil, nil)
+        (self.avatarUrl, self.eventsUrl, self.followersUrl, self.followingUrl, self.gistsUrl) = (nil, nil, nil, nil, nil)
+        (self.gravatarId, self.htmlUrl, self.id, self.login, self.nodeId) = (nil, nil, nil, nil, nil)
+        (self.organizationsUrl, self.receivedEventsUrl, self.reposUrl, self.siteAdmin, self.starredUrl) = (nil, nil, nil, nil, nil)
+        (self.subscriptionsUrl, self.type, self.url) = (nil, nil, nil)
     }
 }
 
-public extension WebhookDeploymentCreatedWorkflowRunHeadRepositoryOwner {
-    init(from decoder: Decoder) throws {
+extension WebhookDeploymentCreatedWorkflowRunHeadRepositoryOwner {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
-        eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
-        followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
-        followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
-        gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
-        gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        id = try container.sdkDecodeIfPresent(.id)
-        login = try container.sdkDecodeIfPresent(.login)
-        nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
-        receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
-        reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
-        siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
-        starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
-        subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
-        type = try container.sdkDecodeIfPresent(.type)
-        url = try container.sdkDecodeIfPresent(.url)
+        self.avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
+        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        self.followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
+        self.followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
+        self.gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
+        self.gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        self.id = try container.sdkDecodeIfPresent(.id)
+        self.login = try container.sdkDecodeIfPresent(.login)
+        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        self.organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
+        self.receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
+        self.reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
+        self.siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
+        self.starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
+        self.subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
+        self.type = try container.sdkDecodeIfPresent(.type)
+        self.url = try container.sdkDecodeIfPresent(.url)
     }
 }
 
-public extension WebhookDeploymentCreatedWorkflowRunHeadRepositoryOwner {
-    init(
-        avatarUrl: String? = nil,
-        eventsUrl: String? = nil,
-        followersUrl: String? = nil,
-        followingUrl: String? = nil,
-        gistsUrl: String? = nil,
-        gravatarId: String? = nil,
-        htmlUrl: String? = nil,
-        id: Int? = nil,
-        login: String? = nil,
-        nodeId: String? = nil,
-        organizationsUrl: String? = nil,
-        receivedEventsUrl: String? = nil,
-        reposUrl: String? = nil,
-        siteAdmin: Bool? = nil,
-        starredUrl: String? = nil,
-        subscriptionsUrl: String? = nil,
-        type: String? = nil,
-        url: String? = nil
-    ) {
+extension WebhookDeploymentCreatedWorkflowRunHeadRepositoryOwner {
+    public init(avatarUrl: String? = nil, eventsUrl: String? = nil, followersUrl: String? = nil, followingUrl: String? = nil, gistsUrl: String? = nil, gravatarId: String? = nil, htmlUrl: String? = nil, id: Int? = nil, login: String? = nil, nodeId: String? = nil, organizationsUrl: String? = nil, receivedEventsUrl: String? = nil, reposUrl: String? = nil, siteAdmin: Bool? = nil, starredUrl: String? = nil, subscriptionsUrl: String? = nil, type: String? = nil, url: String? = nil) {
         self.init()
         (self.avatarUrl, self.eventsUrl) = (avatarUrl, eventsUrl)
         (self.followersUrl, self.followingUrl) = (followersUrl, followingUrl)
@@ -375,8 +297,7 @@ public extension WebhookDeploymentCreatedWorkflowRunHeadRepositoryOwner {
     }
 }
 
-public typealias WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsList =
-    [WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem]
+public typealias WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsList = [WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsItem]
 
 /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts
 /// and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub
@@ -422,54 +343,39 @@ public struct WebhookDeploymentCreatedDeploymentPerformedViaGithubApp: Codable {
         case slug
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookDeploymentCreatedDeploymentPerformedViaGithubApp {
-    init(from decoder: Decoder) throws {
+extension WebhookDeploymentCreatedDeploymentPerformedViaGithubApp {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        createdAt = try container.sdkDecodeNullable(.createdAt)
-        description = try container.sdkDecodeNullable(.description)
-        externalUrl = try container.sdkDecodeNullable(.externalUrl)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        id = try container.sdkDecodeNullable(.id)
-        name = try container.sdkDecodeRequired(.name)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        owner = try container.sdkDecodeNullable(.owner)
-        updatedAt = try container.sdkDecodeNullable(.updatedAt)
-        events = try container.sdkDecodeIfPresent(.events)
-        permissions = try container.sdkDecodeIfPresent(.permissions)
-        slug = try container.sdkDecodeIfPresent(.slug)
-        if let value = createdAt {
+        self.createdAt = try container.sdkDecodeNullable(.createdAt)
+        self.description = try container.sdkDecodeNullable(.description)
+        self.externalUrl = try container.sdkDecodeNullable(.externalUrl)
+        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        self.id = try container.sdkDecodeNullable(.id)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.owner = try container.sdkDecodeNullable(.owner)
+        self.updatedAt = try container.sdkDecodeNullable(.updatedAt)
+        self.events = try container.sdkDecodeIfPresent(.events)
+        self.permissions = try container.sdkDecodeIfPresent(.permissions)
+        self.slug = try container.sdkDecodeIfPresent(.slug)
+        if let value = self.createdAt {
             try sdkValidateDateTime("created_at", sdkWireString(value))
         }
-        if let value = externalUrl {
+        if let value = self.externalUrl {
             try sdkValidateUri("external_url", value)
         }
-        try sdkValidateUri("html_url", htmlUrl)
-        if let value = updatedAt {
+            try sdkValidateUri("html_url", self.htmlUrl)
+        if let value = self.updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
     }
 }
 
-public extension WebhookDeploymentCreatedDeploymentPerformedViaGithubApp {
-    init(
-        createdAt: Date?,
-        description: String?,
-        externalUrl: String?,
-        htmlUrl: String,
-        id: Int?,
-        name: String,
-        nodeId: String,
-        owner: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppOwner?,
-        updatedAt: Date?,
-        events: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsList? = nil,
-        permissions: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermissions? = nil,
-        slug: String? = nil
-    ) throws {
+extension WebhookDeploymentCreatedDeploymentPerformedViaGithubApp {
+    public init(createdAt: Date?, description: String?, externalUrl: String?, htmlUrl: String, id: Int?, name: String, nodeId: String, owner: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppOwner?, updatedAt: Date?, events: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppEventsList? = nil, permissions: WebhookDeploymentCreatedDeploymentPerformedViaGithubAppPermissions? = nil, slug: String? = nil) throws {
         (self.createdAt, self.description) = (createdAt, description)
         (self.externalUrl, self.htmlUrl) = (externalUrl, htmlUrl)
         (self.id, self.name) = (id, name)
@@ -482,7 +388,7 @@ public extension WebhookDeploymentCreatedDeploymentPerformedViaGithubApp {
         if let value = self.externalUrl {
             try sdkValidateUri("external_url", value)
         }
-        try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("html_url", self.htmlUrl)
         if let value = self.updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
@@ -504,46 +410,32 @@ public struct WebhookDeploymentCreatedWorkflowRunPullRequestsItemBaseRepo: Codab
         case url
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookDeploymentCreatedWorkflowRunPullRequestsItemBaseRepo {
-    init(from decoder: Decoder) throws {
+extension WebhookDeploymentCreatedWorkflowRunPullRequestsItemBaseRepo {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.url) else {
-            throw SdkValidationError(
-                field: "url",
-                code: "required",
-                message: "Validation failed for 'url': value is required"
-            )
+            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
-        name = try container.sdkDecodeRequired(.name)
-        url = try container.sdkDecodeRequired(.url)
-        try sdkValidateUri("url", url)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.url = try container.sdkDecodeRequired(.url)
+            try sdkValidateUri("url", self.url)
     }
 }
 
-public extension WebhookDeploymentCreatedWorkflowRunPullRequestsItemBaseRepo {
-    init(id: Int, name: String, url: String) throws {
+extension WebhookDeploymentCreatedWorkflowRunPullRequestsItemBaseRepo {
+    public init(id: Int, name: String, url: String) throws {
         (self.id, self.name) = (id, name)
         self.url = url
-        try sdkValidateUri("url", self.url)
+            try sdkValidateUri("url", self.url)
     }
 }

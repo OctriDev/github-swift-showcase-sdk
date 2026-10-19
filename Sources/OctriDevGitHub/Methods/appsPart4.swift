@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension AppsMethods {
-    /// Returns a list of webhook deliveries for the webhook configured for a GitHub App. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
-    /// to access this endpoint.
+extension AppsMethods {
+    /// Returns a list of webhook deliveries for the webhook configured for a GitHub App. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
     ///
     /// - Parameters:
     /// - perPage: The number of results per page (max 100). For more information,
@@ -23,48 +22,18 @@ public extension AppsMethods {
     ///   deliveries with a `status_code` in the 200-399 range (inclusive). A `status`
     ///   of `failure` returns deliveries with a `status_code` in the 400-599 range
     ///   (inclusive).
-    static func appsListWebhookDeliveries(
-        config: ClientConfig,
-        perPage: Int? = nil,
-        cursor: String? = nil,
-        status: AppsListWebhookDeliveriesParameter? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [HookDeliveryItem] {
-        try await (sdkRequest(
-            "GET",
-            "/app/hook/deliveries",
-            config: config,
-            query: [
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("cursor", value: cursor),
-                SdkQueryParameter("status", value: status),
-            ],
-            decoder: .json,
-            operationId: "appsListWebhookDeliveries",
-            options: requestOptions,
-            errors: ["400": BasicError.self, "422": ValidationError.self]
-        )).data
+    public static func appsListWebhookDeliveries(config: ClientConfig, perPage: Int? = nil, cursor: String? = nil, status: AppsListWebhookDeliveriesParameter? = nil, requestOptions: RequestOptions? = nil) async throws -> [HookDeliveryItem] {
+        return try (await sdkRequest("GET", "/app/hook/deliveries", config: config, query: [
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("cursor", value: cursor),
+            SdkQueryParameter("status", value: status),
+        ], decoder: .json, operationId: "appsListWebhookDeliveries", options: requestOptions, errors: ["400": BasicError.self, "422": ValidationError.self])).data
     }
 
-    /// Retrieves a delivery for a webhook configured for a GitHub App. Use `delivery_id` to identify the delivery whose
-    /// request, response, and delivery status you need to inspect. Authenticate with a GitHub App JWT to access this
-    /// endpoint.
+    /// Retrieves a delivery for a webhook configured for a GitHub App. Use `delivery_id` to identify the delivery whose request, response, and delivery status you need to inspect. Authenticate with a GitHub App JWT to access this endpoint.
     ///
-    /// Returns a delivery for the webhook configured for a GitHub App. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
-    /// to access this endpoint.
-    static func appsGetWebhookDelivery(
-        config: ClientConfig,
-        deliveryId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> HookDelivery {
-        try await (sdkRequest(
-            "GET",
-            ["/app/hook/deliveries/", sdkEncodePathSegment(sdkWireString(deliveryId))].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "appsGetWebhookDelivery",
-            options: requestOptions,
-            errors: ["400": BasicError.self, "422": ValidationError.self]
-        )).data
+    /// Returns a delivery for the webhook configured for a GitHub App. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
+    public static func appsGetWebhookDelivery(config: ClientConfig, deliveryId: Int, requestOptions: RequestOptions? = nil) async throws -> HookDelivery {
+        return try (await sdkRequest("GET", ["/app/hook/deliveries/", sdkEncodePathSegment(sdkWireString(deliveryId))].joined(), config: config, decoder: .json, operationId: "appsGetWebhookDelivery", options: requestOptions, errors: ["400": BasicError.self, "422": ValidationError.self])).data
     }
 }

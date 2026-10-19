@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension MigrationsMethods {
-    /// Lists migrations started by the authenticated user, including their state and repository details when available.
-    /// Use `page` and `per_page` to paginate the results; `per_page` defaults to 30 and is capped at 100.
+extension MigrationsMethods {
+    /// Lists migrations started by the authenticated user, including their state and repository details when available. Use `page` and `per_page` to paginate the results; `per_page` defaults to 30 and is capped at 100.
     ///
     /// Lists all migrations a user has started.
     ///
@@ -21,24 +20,10 @@ public extension MigrationsMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    static func migrationsListForAuthenticatedUser(
-        config: ClientConfig,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [Migration] {
-        try await (sdkRequest(
-            "GET",
-            "/user/migrations",
-            config: config,
-            query: [
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("page", value: page),
-            ],
-            decoder: .json,
-            operationId: "migrationsListForAuthenticatedUser",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self]
-        )).data
+    public static func migrationsListForAuthenticatedUser(config: ClientConfig, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [Migration] {
+        return try (await sdkRequest("GET", "/user/migrations", config: config, query: [
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("page", value: page),
+        ], decoder: .json, operationId: "migrationsListForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self])).data
     }
 }

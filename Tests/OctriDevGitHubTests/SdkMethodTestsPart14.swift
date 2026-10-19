@@ -6,18 +6,12 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testAgentAutomationsCreateRepoAutomationAgentAutomationsCreateRepoAutomationReachesMockAndDecodesResponse(
-    ) async throws {
+    func testAgentAutomationsCreateRepoAutomationAgentAutomationsCreateRepoAutomationReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        var options = try AgentAutomationsMethods.AgentAutomationsCreateRepoAutomationOptions(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            name: decoded("\"Issue triage\""),
-            prompt: decoded(sdkMethodFixture313Value1)
-        )
+        var options = try AgentAutomationsMethods.AgentAutomationsCreateRepoAutomationOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), name: decoded("\"Issue triage\""), prompt: decoded(sdkMethodFixture313Value1))
         options.triggers = try decoded("{\"issue_opened\":{\"query\":\"is:open\"}}")
         options.model = try decoded("\"gpt-5.4\"")
         options.reasoningEffort = try decoded("\"\"")
@@ -40,8 +34,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testAgentAutomationsDeleteRepoAutomationAgentAutomationsDeleteRepoAutomationReachesMockAndDecodesResponse(
-    ) async throws {
+    func testAgentAutomationsDeleteRepoAutomationAgentAutomationsDeleteRepoAutomationReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -54,17 +47,12 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testAgentAutomationsEditRepoAutomationAgentAutomationsEditRepoAutomationReachesMockAndDecodesResponse(
-    ) async throws {
+    func testAgentAutomationsEditRepoAutomationAgentAutomationsEditRepoAutomationReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        var options = try AgentAutomationsMethods.AgentAutomationsEditRepoAutomationOptions(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            automationId: decoded("\"automation-1\"")
-        )
+        var options = try AgentAutomationsMethods.AgentAutomationsEditRepoAutomationOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), automationId: decoded("\"automation-1\""))
         options.name = try decoded("\"Issue triage and prioritization\"")
         options.enabled = try decoded("true")
         options.writeScope = try decoded("null")
@@ -106,8 +94,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testAgentAutomationsGetRepoAutomationAgentAutomationsGetRepoAutomationReachesMockAndDecodesResponse(
-    ) async throws {
+    func testAgentAutomationsGetRepoAutomationAgentAutomationsGetRepoAutomationReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -147,8 +134,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testAgentAutomationsListAutomationTasksAgentAutomationsListAutomationTasksReachesMockAndDecodesResponse(
-    ) async throws {
+    func testAgentAutomationsListAutomationTasksAgentAutomationsListAutomationTasksReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -172,8 +158,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testAgentAutomationsListAvailableAutomationToolsAgentAutomationsLX09093fb94bReachesMockAndDecodesResponse(
-    ) async throws {
+    func testAgentAutomationsListAvailableAutomationToolsAgentAutomationsLX09093fb94bReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -189,8 +174,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testAgentAutomationsListAvailableAutomationTriggersAgentAutomatioXdc732bf045ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testAgentAutomationsListAvailableAutomationTriggersAgentAutomatioXdc732bf045ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -206,8 +190,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testAgentAutomationsListRepoAutomationsAgentAutomationsListRepoAutomationsReachesMockAndDecodesResponse(
-    ) async throws {
+    func testAgentAutomationsListRepoAutomationsAgentAutomationsListRepoAutomationsReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -229,8 +212,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testAgentsAddSelectedRepoToOrgSecretAgentsAddSelectedRepoToOrgSecretReachesMockAndDecodesResponse(
-    ) async throws {
+    func testAgentsAddSelectedRepoToOrgSecretAgentsAddSelectedRepoToOrgSecretReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -243,8 +225,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testAgentsAddSelectedRepoToOrgVariableAgentsAddSelectedRepoToOrgVariableReachesMockAndDecodesResponse(
-    ) async throws {
+    func testAgentsAddSelectedRepoToOrgVariableAgentsAddSelectedRepoToOrgVariableReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }

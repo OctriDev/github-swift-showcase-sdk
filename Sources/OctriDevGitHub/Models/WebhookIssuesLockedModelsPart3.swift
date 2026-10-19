@@ -3,44 +3,9 @@
 
 import Foundation
 
-/// WebhookIssuesLocked domain models
-public extension WebhookIssuesLockedIssuePerformedViaGithubAppPermissions {
-    init(
-        actions: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsActions? = nil,
-        administration: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsAdministration? = nil,
-        checks: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsChecks? = nil,
-        contentReferences: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsConteX4fa76e54cc? = nil,
-        contents: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsContents? = nil,
-        deployments: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsDeployments? = nil,
-        discussions: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsDiscussions? = nil,
-        emails: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsEmails? = nil,
-        environments: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsEnvironments? = nil,
-        issues: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsIssues? = nil,
-        keys: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsKeys? = nil,
-        members: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsMembers? = nil,
-        metadata: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsMetadata? = nil,
-        organizationAdministration: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsOrganX911842a35b? = nil,
-        organizationHooks: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsOrganXc1a04a3c95? = nil,
-        organizationPackages: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsOrganX1ca13f8e5a? = nil,
-        organizationPlan: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsOrganizationPlan? = nil,
-        organizationProjects: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsOrganX6bb2ba9fba? = nil,
-        organizationSecrets: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsOrganX58ff7aad75? = nil,
-        organizationSelfHostedRunners: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsOrganXfc730dd3c7? = nil,
-        organizationUserBlocking: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsOrganXa9b891d7f7? = nil,
-        packages: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsPackages? = nil,
-        pages: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsPages? = nil,
-        pullRequests: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsPullRequests? = nil,
-        repositoryHooks: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsRepositoryHooks? = nil,
-        repositoryProjects: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsReposX46c3065bfb? = nil,
-        secretScanningAlerts: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsSecreXf293505b06? = nil,
-        secrets: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsSecrets? = nil,
-        securityEvents: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsSecurityEvents? = nil,
-        securityScanningAlert: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsSecurX27bc993d7b? = nil,
-        singleFile: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsSingleFile? = nil,
-        statuses: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsStatuses? = nil,
-        vulnerabilityAlerts: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsVulneX0f50207186? = nil,
-        workflows: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsWorkflows? = nil
-    ) {
+// WebhookIssuesLocked domain models
+extension WebhookIssuesLockedIssuePerformedViaGithubAppPermissions {
+    public init(actions: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsActions? = nil, administration: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsAdministration? = nil, checks: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsChecks? = nil, contentReferences: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsConteX4fa76e54cc? = nil, contents: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsContents? = nil, deployments: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsDeployments? = nil, discussions: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsDiscussions? = nil, emails: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsEmails? = nil, environments: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsEnvironments? = nil, issues: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsIssues? = nil, keys: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsKeys? = nil, members: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsMembers? = nil, metadata: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsMetadata? = nil, organizationAdministration: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsOrganX911842a35b? = nil, organizationHooks: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsOrganXc1a04a3c95? = nil, organizationPackages: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsOrganX1ca13f8e5a? = nil, organizationPlan: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsOrganizationPlan? = nil, organizationProjects: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsOrganX6bb2ba9fba? = nil, organizationSecrets: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsOrganX58ff7aad75? = nil, organizationSelfHostedRunners: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsOrganXfc730dd3c7? = nil, organizationUserBlocking: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsOrganXa9b891d7f7? = nil, packages: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsPackages? = nil, pages: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsPages? = nil, pullRequests: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsPullRequests? = nil, repositoryHooks: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsRepositoryHooks? = nil, repositoryProjects: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsReposX46c3065bfb? = nil, secretScanningAlerts: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsSecreXf293505b06? = nil, secrets: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsSecrets? = nil, securityEvents: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsSecurityEvents? = nil, securityScanningAlert: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsSecurX27bc993d7b? = nil, singleFile: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsSingleFile? = nil, statuses: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsStatuses? = nil, vulnerabilityAlerts: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsVulneX0f50207186? = nil, workflows: WebhookIssuesLockedIssuePerformedViaGithubAppPermissionsWorkflows? = nil) {
         self.init()
         (self.actions, self.administration) = (actions, administration)
         (self.checks, self.contentReferences) = (checks, contentReferences)
@@ -85,44 +50,38 @@ public struct WebhookIssuesLockedIssuePullRequest: Codable {
     }
 
     init() {
-        (diffUrl, htmlUrl, mergedAt, patchUrl, url) = (nil, nil, nil, nil, nil)
+        (self.diffUrl, self.htmlUrl, self.mergedAt, self.patchUrl, self.url) = (nil, nil, nil, nil, nil)
     }
 }
 
-public extension WebhookIssuesLockedIssuePullRequest {
-    init(from decoder: Decoder) throws {
+extension WebhookIssuesLockedIssuePullRequest {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        diffUrl = try container.sdkDecodeIfPresent(.diffUrl)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        mergedAt = try container.sdkDecodeIfPresent(.mergedAt)
-        patchUrl = try container.sdkDecodeIfPresent(.patchUrl)
-        url = try container.sdkDecodeIfPresent(.url)
-        if let value = diffUrl {
+        self.diffUrl = try container.sdkDecodeIfPresent(.diffUrl)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        self.mergedAt = try container.sdkDecodeIfPresent(.mergedAt)
+        self.patchUrl = try container.sdkDecodeIfPresent(.patchUrl)
+        self.url = try container.sdkDecodeIfPresent(.url)
+        if let value = self.diffUrl {
             try sdkValidateUri("diff_url", value)
         }
-        if let value = htmlUrl {
+        if let value = self.htmlUrl {
             try sdkValidateUri("html_url", value)
         }
-        if let value = mergedAt {
+        if let value = self.mergedAt {
             try sdkValidateDateTime("merged_at", sdkWireString(value))
         }
-        if let value = patchUrl {
+        if let value = self.patchUrl {
             try sdkValidateUri("patch_url", value)
         }
-        if let value = url {
+        if let value = self.url {
             try sdkValidateUri("url", value)
         }
     }
 }
 
-public extension WebhookIssuesLockedIssuePullRequest {
-    init(
-        diffUrl: String? = nil,
-        htmlUrl: String? = nil,
-        mergedAt: Date? = nil,
-        patchUrl: String? = nil,
-        url: String? = nil
-    ) throws {
+extension WebhookIssuesLockedIssuePullRequest {
+    public init(diffUrl: String? = nil, htmlUrl: String? = nil, mergedAt: Date? = nil, patchUrl: String? = nil, url: String? = nil) throws {
         self.init()
         (self.diffUrl, self.htmlUrl) = (diffUrl, htmlUrl)
         (self.mergedAt, self.patchUrl) = (mergedAt, patchUrl)
@@ -181,47 +140,34 @@ public struct WebhookIssuesLockedIssueReactions: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookIssuesLockedIssueReactions {
-    init(from decoder: Decoder) throws {
+extension WebhookIssuesLockedIssueReactions {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        plus1 = try container.sdkDecodeRequired(.plus1)
-        minus1 = try container.sdkDecodeRequired(.minus1)
-        confused = try container.sdkDecodeRequired(.confused)
-        eyes = try container.sdkDecodeRequired(.eyes)
-        heart = try container.sdkDecodeRequired(.heart)
-        hooray = try container.sdkDecodeRequired(.hooray)
-        laugh = try container.sdkDecodeRequired(.laugh)
-        rocket = try container.sdkDecodeRequired(.rocket)
-        totalCount = try container.sdkDecodeRequired(.totalCount)
-        url = try container.sdkDecodeRequired(.url)
-        try sdkValidateUri("url", url)
+        self.plus1 = try container.sdkDecodeRequired(.plus1)
+        self.minus1 = try container.sdkDecodeRequired(.minus1)
+        self.confused = try container.sdkDecodeRequired(.confused)
+        self.eyes = try container.sdkDecodeRequired(.eyes)
+        self.heart = try container.sdkDecodeRequired(.heart)
+        self.hooray = try container.sdkDecodeRequired(.hooray)
+        self.laugh = try container.sdkDecodeRequired(.laugh)
+        self.rocket = try container.sdkDecodeRequired(.rocket)
+        self.totalCount = try container.sdkDecodeRequired(.totalCount)
+        self.url = try container.sdkDecodeRequired(.url)
+            try sdkValidateUri("url", self.url)
     }
 }
 
-public extension WebhookIssuesLockedIssueReactions {
-    init(
-        plus1: Int,
-        minus1: Int,
-        confused: Int,
-        eyes: Int,
-        heart: Int,
-        hooray: Int,
-        laugh: Int,
-        rocket: Int,
-        totalCount: Int,
-        url: String
-    ) throws {
+extension WebhookIssuesLockedIssueReactions {
+    public init(plus1: Int, minus1: Int, confused: Int, eyes: Int, heart: Int, hooray: Int, laugh: Int, rocket: Int, totalCount: Int, url: String) throws {
         (self.plus1, self.minus1) = (plus1, minus1)
         (self.confused, self.eyes) = (confused, eyes)
         (self.heart, self.hooray) = (heart, hooray)
         (self.laugh, self.rocket) = (laugh, rocket)
         (self.totalCount, self.url) = (totalCount, url)
-        try sdkValidateUri("url", self.url)
+            try sdkValidateUri("url", self.url)
     }
 }
 
@@ -279,53 +225,34 @@ public struct WebhookIssuesLockedIssueMilestone: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookIssuesLockedIssueMilestone {
-    init(from decoder: Decoder) throws {
+extension WebhookIssuesLockedIssueMilestone {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        closedAt = try container.sdkDecodeNullable(.closedAt)
-        closedIssues = try container.sdkDecodeRequired(.closedIssues)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        creator = try container.sdkDecodeNullable(.creator)
-        description = try container.sdkDecodeNullable(.description)
-        dueOn = try container.sdkDecodeNullable(.dueOn)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        id = try container.sdkDecodeRequired(.id)
-        labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        number = try container.sdkDecodeRequired(.number)
-        openIssues = try container.sdkDecodeRequired(.openIssues)
-        state = try container.sdkDecodeRequired(.state)
-        title = try container.sdkDecodeRequired(.title)
-        updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        url = try container.sdkDecodeRequired(.url)
+        self.closedAt = try container.sdkDecodeNullable(.closedAt)
+        self.closedIssues = try container.sdkDecodeRequired(.closedIssues)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.creator = try container.sdkDecodeNullable(.creator)
+        self.description = try container.sdkDecodeNullable(.description)
+        self.dueOn = try container.sdkDecodeNullable(.dueOn)
+        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.number = try container.sdkDecodeRequired(.number)
+        self.openIssues = try container.sdkDecodeRequired(.openIssues)
+        self.state = try container.sdkDecodeRequired(.state)
+        self.title = try container.sdkDecodeRequired(.title)
+        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        self.url = try container.sdkDecodeRequired(.url)
         try sdkValidateConstraints()
     }
 }
 
-public extension WebhookIssuesLockedIssueMilestone {
-    init(
-        closedAt: Date?,
-        closedIssues: Int,
-        createdAt: Date,
-        creator: WebhookIssuesLockedIssueMilestoneCreator?,
-        description: String?,
-        dueOn: Date?,
-        htmlUrl: String,
-        id: Int,
-        labelsUrl: String,
-        nodeId: String,
-        number: Int,
-        openIssues: Int,
-        state: WebhookIssuesLockedIssueMilestoneState,
-        title: String,
-        updatedAt: Date,
-        url: String
-    ) throws {
+extension WebhookIssuesLockedIssueMilestone {
+    public init(closedAt: Date?, closedIssues: Int, createdAt: Date, creator: WebhookIssuesLockedIssueMilestoneCreator?, description: String?, dueOn: Date?, htmlUrl: String, id: Int, labelsUrl: String, nodeId: String, number: Int, openIssues: Int, state: WebhookIssuesLockedIssueMilestoneState, title: String, updatedAt: Date, url: String) throws {
         (self.closedAt, self.closedIssues) = (closedAt, closedIssues)
         (self.createdAt, self.creator) = (createdAt, creator)
         (self.description, self.dueOn) = (description, dueOn)
@@ -340,17 +267,17 @@ public extension WebhookIssuesLockedIssueMilestone {
 
 extension WebhookIssuesLockedIssueMilestone {
     func sdkValidateConstraints() throws {
-        if let value = closedAt {
+        if let value = self.closedAt {
             try sdkValidateDateTime("closed_at", sdkWireString(value))
         }
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
-        if let value = dueOn {
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        if let value = self.dueOn {
             try sdkValidateDateTime("due_on", sdkWireString(value))
         }
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateUri("labels_url", labelsUrl)
-        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
-        try sdkValidateUri("url", url)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("labels_url", self.labelsUrl)
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateUri("url", self.url)
     }
 }
 
@@ -468,91 +395,53 @@ public struct WebhookIssuesLockedIssue: Codable {
         case type
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookIssuesLockedIssue {
-    init(from decoder: Decoder) throws {
+extension WebhookIssuesLockedIssue {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        activeLockReason = try container.sdkDecodeNullable(.activeLockReason)
-        assignees = try container.sdkDecodeRequired(.assignees)
-        authorAssociation = try container.sdkDecodeRequired(.authorAssociation)
-        body = try container.sdkDecodeNullable(.body)
-        closedAt = try container.sdkDecodeNullable(.closedAt)
-        comments = try container.sdkDecodeRequired(.comments)
-        commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        id = try container.sdkDecodeRequired(.id)
-        labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
-        locked = try container.sdkDecodeRequired(.locked)
-        milestone = try container.sdkDecodeNullable(.milestone)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        number = try container.sdkDecodeRequired(.number)
-        reactions = try container.sdkDecodeRequired(.reactions)
-        repositoryUrl = try container.sdkDecodeRequired(.repositoryUrl)
-        title = try container.sdkDecodeRequired(.title)
-        updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        url = try container.sdkDecodeRequired(.url)
-        user = try container.sdkDecodeNullable(.user)
-        assignee = try container.sdkDecodeIfPresent(.assignee)
-        draft = try container.sdkDecodeIfPresent(.draft)
-        labels = try container.sdkDecodeIfPresent(.labels)
-        performedViaGithubApp = try container.sdkDecodeIfPresent(.performedViaGithubApp)
-        pullRequest = try container.sdkDecodeIfPresent(.pullRequest)
-        pinnedComment = try container.sdkDecodeIfPresent(.pinnedComment)
-        subIssuesSummary = try container.sdkDecodeIfPresent(.subIssuesSummary)
-        issueDependenciesSummary = try container.sdkDecodeIfPresent(.issueDependenciesSummary)
-        issueFieldValues = try container.sdkDecodeIfPresent(.issueFieldValues)
-        state = try container.sdkDecodeIfPresent(.state)
-        stateReason = try container.sdkDecodeIfPresent(.stateReason)
-        timelineUrl = try container.sdkDecodeIfPresent(.timelineUrl)
-        type = try container.sdkDecodeIfPresent(.type)
+        self.activeLockReason = try container.sdkDecodeNullable(.activeLockReason)
+        self.assignees = try container.sdkDecodeRequired(.assignees)
+        self.authorAssociation = try container.sdkDecodeRequired(.authorAssociation)
+        self.body = try container.sdkDecodeNullable(.body)
+        self.closedAt = try container.sdkDecodeNullable(.closedAt)
+        self.comments = try container.sdkDecodeRequired(.comments)
+        self.commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
+        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
+        self.locked = try container.sdkDecodeRequired(.locked)
+        self.milestone = try container.sdkDecodeNullable(.milestone)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.number = try container.sdkDecodeRequired(.number)
+        self.reactions = try container.sdkDecodeRequired(.reactions)
+        self.repositoryUrl = try container.sdkDecodeRequired(.repositoryUrl)
+        self.title = try container.sdkDecodeRequired(.title)
+        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.user = try container.sdkDecodeNullable(.user)
+        self.assignee = try container.sdkDecodeIfPresent(.assignee)
+        self.draft = try container.sdkDecodeIfPresent(.draft)
+        self.labels = try container.sdkDecodeIfPresent(.labels)
+        self.performedViaGithubApp = try container.sdkDecodeIfPresent(.performedViaGithubApp)
+        self.pullRequest = try container.sdkDecodeIfPresent(.pullRequest)
+        self.pinnedComment = try container.sdkDecodeIfPresent(.pinnedComment)
+        self.subIssuesSummary = try container.sdkDecodeIfPresent(.subIssuesSummary)
+        self.issueDependenciesSummary = try container.sdkDecodeIfPresent(.issueDependenciesSummary)
+        self.issueFieldValues = try container.sdkDecodeIfPresent(.issueFieldValues)
+        self.state = try container.sdkDecodeIfPresent(.state)
+        self.stateReason = try container.sdkDecodeIfPresent(.stateReason)
+        self.timelineUrl = try container.sdkDecodeIfPresent(.timelineUrl)
+        self.type = try container.sdkDecodeIfPresent(.type)
         try sdkValidateConstraints()
     }
 }
 
-public extension WebhookIssuesLockedIssue {
-    init(
-        activeLockReason: WebhookIssuesLockedIssueActiveLockReason?,
-        assignees: [WebhookIssuesLockedIssueAssigneesItem?],
-        authorAssociation: WebhookIssuesLockedIssueAuthorAssociation,
-        body: String?,
-        closedAt: Date?,
-        comments: Int,
-        commentsUrl: String,
-        createdAt: Date,
-        eventsUrl: String,
-        htmlUrl: String,
-        id: Int,
-        labelsUrl: String,
-        locked: Bool,
-        milestone: WebhookIssuesLockedIssueMilestone?,
-        nodeId: String,
-        number: Int,
-        reactions: WebhookIssuesLockedIssueReactions,
-        repositoryUrl: String,
-        title: String,
-        updatedAt: Date,
-        url: String,
-        user: WebhookIssuesLockedIssueUser?,
-        assignee: WebhookIssuesLockedIssueAssignee? = nil,
-        draft: Bool? = nil,
-        labels: [WebhookIssuesLockedIssueLabelsItem?]? = nil,
-        performedViaGithubApp: WebhookIssuesLockedIssuePerformedViaGithubApp? = nil,
-        pullRequest: WebhookIssuesLockedIssuePullRequest? = nil,
-        pinnedComment: NullableIssueComment? = nil,
-        subIssuesSummary: SubIssuesSummary? = nil,
-        issueDependenciesSummary: IssueDependenciesSummary? = nil,
-        issueFieldValues: [IssueFieldValue]? = nil,
-        state: WebhookIssuesLockedIssueState? = nil,
-        stateReason: String? = nil,
-        timelineUrl: String? = nil,
-        type: IssueType? = nil
-    ) throws {
+extension WebhookIssuesLockedIssue {
+    public init(activeLockReason: WebhookIssuesLockedIssueActiveLockReason?, assignees: [WebhookIssuesLockedIssueAssigneesItem?], authorAssociation: WebhookIssuesLockedIssueAuthorAssociation, body: String?, closedAt: Date?, comments: Int, commentsUrl: String, createdAt: Date, eventsUrl: String, htmlUrl: String, id: Int, labelsUrl: String, locked: Bool, milestone: WebhookIssuesLockedIssueMilestone?, nodeId: String, number: Int, reactions: WebhookIssuesLockedIssueReactions, repositoryUrl: String, title: String, updatedAt: Date, url: String, user: WebhookIssuesLockedIssueUser?, assignee: WebhookIssuesLockedIssueAssignee? = nil, draft: Bool? = nil, labels: [WebhookIssuesLockedIssueLabelsItem?]? = nil, performedViaGithubApp: WebhookIssuesLockedIssuePerformedViaGithubApp? = nil, pullRequest: WebhookIssuesLockedIssuePullRequest? = nil, pinnedComment: NullableIssueComment? = nil, subIssuesSummary: SubIssuesSummary? = nil, issueDependenciesSummary: IssueDependenciesSummary? = nil, issueFieldValues: [IssueFieldValue]? = nil, state: WebhookIssuesLockedIssueState? = nil, stateReason: String? = nil, timelineUrl: String? = nil, type: IssueType? = nil) throws {
         (self.activeLockReason, self.assignees) = (activeLockReason, assignees)
         (self.authorAssociation, self.body) = (authorAssociation, body)
         (self.closedAt, self.comments) = (closedAt, comments)
@@ -578,17 +467,17 @@ public extension WebhookIssuesLockedIssue {
 
 extension WebhookIssuesLockedIssue {
     func sdkValidateConstraints() throws {
-        if let value = closedAt {
+        if let value = self.closedAt {
             try sdkValidateDateTime("closed_at", sdkWireString(value))
         }
-        try sdkValidateUri("comments_url", commentsUrl)
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
-        try sdkValidateUri("events_url", eventsUrl)
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateUri("repository_url", repositoryUrl)
-        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
-        try sdkValidateUri("url", url)
-        if let value = timelineUrl {
+            try sdkValidateUri("comments_url", self.commentsUrl)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateUri("events_url", self.eventsUrl)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("repository_url", self.repositoryUrl)
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateUri("url", self.url)
+        if let value = self.timelineUrl {
             try sdkValidateUri("timeline_url", value)
         }
     }

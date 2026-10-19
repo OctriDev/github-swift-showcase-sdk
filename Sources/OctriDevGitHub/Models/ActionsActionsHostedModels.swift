@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// ActionsActionsHosted domain models
+// ActionsActionsHosted domain models
 /// Provides details of a particular machine spec.
 public struct ActionsHostedRunnerMachineSpec: Codable {
     /// The ID used for the `size` parameter when creating a new runner.
@@ -26,51 +26,33 @@ public struct ActionsHostedRunnerMachineSpec: Codable {
         case storageGb = "storage_gb"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsHostedRunnerMachineSpec {
-    init(from decoder: Decoder) throws {
+extension ActionsHostedRunnerMachineSpec {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
         guard container.contains(.cpuCores) else {
-            throw SdkValidationError(
-                field: "cpu_cores",
-                code: "required",
-                message: "Validation failed for 'cpu_cores': value is required"
-            )
+            throw SdkValidationError(field: "cpu_cores", code: "required", message: "Validation failed for 'cpu_cores': value is required")
         }
         guard container.contains(.memoryGb) else {
-            throw SdkValidationError(
-                field: "memory_gb",
-                code: "required",
-                message: "Validation failed for 'memory_gb': value is required"
-            )
+            throw SdkValidationError(field: "memory_gb", code: "required", message: "Validation failed for 'memory_gb': value is required")
         }
         guard container.contains(.storageGb) else {
-            throw SdkValidationError(
-                field: "storage_gb",
-                code: "required",
-                message: "Validation failed for 'storage_gb': value is required"
-            )
+            throw SdkValidationError(field: "storage_gb", code: "required", message: "Validation failed for 'storage_gb': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
-        cpuCores = try container.sdkDecodeRequired(.cpuCores)
-        memoryGb = try container.sdkDecodeRequired(.memoryGb)
-        storageGb = try container.sdkDecodeRequired(.storageGb)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.cpuCores = try container.sdkDecodeRequired(.cpuCores)
+        self.memoryGb = try container.sdkDecodeRequired(.memoryGb)
+        self.storageGb = try container.sdkDecodeRequired(.storageGb)
     }
 }
 
-public extension ActionsHostedRunnerMachineSpec {
-    init(id: String, cpuCores: Int, memoryGb: Int, storageGb: Int) {
+extension ActionsHostedRunnerMachineSpec {
+    public init(id: String, cpuCores: Int, memoryGb: Int, storageGb: Int) {
         (self.id, self.cpuCores) = (id, cpuCores)
         (self.memoryGb, self.storageGb) = (memoryGb, storageGb)
     }
@@ -101,65 +83,37 @@ public struct ActionsHostedRunnerCuratedImage: Codable {
         case source
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsHostedRunnerCuratedImage {
-    init(from decoder: Decoder) throws {
+extension ActionsHostedRunnerCuratedImage {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
         guard container.contains(.platform) else {
-            throw SdkValidationError(
-                field: "platform",
-                code: "required",
-                message: "Validation failed for 'platform': value is required"
-            )
+            throw SdkValidationError(field: "platform", code: "required", message: "Validation failed for 'platform': value is required")
         }
         guard container.contains(.sizeGb) else {
-            throw SdkValidationError(
-                field: "size_gb",
-                code: "required",
-                message: "Validation failed for 'size_gb': value is required"
-            )
+            throw SdkValidationError(field: "size_gb", code: "required", message: "Validation failed for 'size_gb': value is required")
         }
         guard container.contains(.displayName) else {
-            throw SdkValidationError(
-                field: "display_name",
-                code: "required",
-                message: "Validation failed for 'display_name': value is required"
-            )
+            throw SdkValidationError(field: "display_name", code: "required", message: "Validation failed for 'display_name': value is required")
         }
         guard container.contains(.source) else {
-            throw SdkValidationError(
-                field: "source",
-                code: "required",
-                message: "Validation failed for 'source': value is required"
-            )
+            throw SdkValidationError(field: "source", code: "required", message: "Validation failed for 'source': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
-        platform = try container.sdkDecodeRequired(.platform)
-        sizeGb = try container.sdkDecodeRequired(.sizeGb)
-        displayName = try container.sdkDecodeRequired(.displayName)
-        source = try container.sdkDecodeRequired(.source)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.platform = try container.sdkDecodeRequired(.platform)
+        self.sizeGb = try container.sdkDecodeRequired(.sizeGb)
+        self.displayName = try container.sdkDecodeRequired(.displayName)
+        self.source = try container.sdkDecodeRequired(.source)
     }
 }
 
-public extension ActionsHostedRunnerCuratedImage {
-    init(
-        id: String,
-        platform: String,
-        sizeGb: Int,
-        displayName: String,
-        source: ActionsHostedRunnerCuratedImageSource
-    ) {
+extension ActionsHostedRunnerCuratedImage {
+    public init(id: String, platform: String, sizeGb: Int, displayName: String, source: ActionsHostedRunnerCuratedImageSource) {
         (self.id, self.platform) = (id, platform)
         (self.sizeGb, self.displayName) = (sizeGb, displayName)
         self.source = source
@@ -217,96 +171,53 @@ public struct ActionsHostedRunner: Codable {
         case imageGen = "image_gen"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsHostedRunner {
-    init(from decoder: Decoder) throws {
+extension ActionsHostedRunner {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.imageDetails) else {
-            throw SdkValidationError(
-                field: "image_details",
-                code: "required",
-                message: "Validation failed for 'image_details': value is required"
-            )
+            throw SdkValidationError(field: "image_details", code: "required", message: "Validation failed for 'image_details': value is required")
         }
         guard container.contains(.machineSizeDetails) else {
-            throw SdkValidationError(
-                field: "machine_size_details",
-                code: "required",
-                message: "Validation failed for 'machine_size_details': value is required"
-            )
+            throw SdkValidationError(field: "machine_size_details", code: "required", message: "Validation failed for 'machine_size_details': value is required")
         }
         guard container.contains(.status) else {
-            throw SdkValidationError(
-                field: "status",
-                code: "required",
-                message: "Validation failed for 'status': value is required"
-            )
+            throw SdkValidationError(field: "status", code: "required", message: "Validation failed for 'status': value is required")
         }
         guard container.contains(.platform) else {
-            throw SdkValidationError(
-                field: "platform",
-                code: "required",
-                message: "Validation failed for 'platform': value is required"
-            )
+            throw SdkValidationError(field: "platform", code: "required", message: "Validation failed for 'platform': value is required")
         }
         guard container.contains(.publicIpEnabled) else {
-            throw SdkValidationError(
-                field: "public_ip_enabled",
-                code: "required",
-                message: "Validation failed for 'public_ip_enabled': value is required"
-            )
+            throw SdkValidationError(field: "public_ip_enabled", code: "required", message: "Validation failed for 'public_ip_enabled': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
-        name = try container.sdkDecodeRequired(.name)
-        imageDetails = try container.sdkDecodeNullable(.imageDetails)
-        machineSizeDetails = try container.sdkDecodeRequired(.machineSizeDetails)
-        status = try container.sdkDecodeRequired(.status)
-        platform = try container.sdkDecodeRequired(.platform)
-        publicIpEnabled = try container.sdkDecodeRequired(.publicIpEnabled)
-        runnerGroupId = try container.sdkDecodeIfPresent(.runnerGroupId)
-        maximumRunners = try container.sdkDecodeIfPresent(.maximumRunners)
-        publicIps = try container.sdkDecodeIfPresent(.publicIps)
-        lastActiveOn = try container.sdkDecodeIfPresent(.lastActiveOn)
-        imageGen = try container.sdkDecodeIfPresent(.imageGen)
-        if let value = lastActiveOn {
+        self.id = try container.sdkDecodeRequired(.id)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.imageDetails = try container.sdkDecodeNullable(.imageDetails)
+        self.machineSizeDetails = try container.sdkDecodeRequired(.machineSizeDetails)
+        self.status = try container.sdkDecodeRequired(.status)
+        self.platform = try container.sdkDecodeRequired(.platform)
+        self.publicIpEnabled = try container.sdkDecodeRequired(.publicIpEnabled)
+        self.runnerGroupId = try container.sdkDecodeIfPresent(.runnerGroupId)
+        self.maximumRunners = try container.sdkDecodeIfPresent(.maximumRunners)
+        self.publicIps = try container.sdkDecodeIfPresent(.publicIps)
+        self.lastActiveOn = try container.sdkDecodeIfPresent(.lastActiveOn)
+        self.imageGen = try container.sdkDecodeIfPresent(.imageGen)
+        if let value = self.lastActiveOn {
             try sdkValidateDateTime("last_active_on", sdkWireString(value))
         }
     }
 }
 
-public extension ActionsHostedRunner {
-    init(
-        id: Int,
-        name: String,
-        imageDetails: NullableActionsHostedRunnerPoolImage?,
-        machineSizeDetails: ActionsHostedRunnerMachineSpec,
-        status: ActionsHostedRunnerStatus,
-        platform: String,
-        publicIpEnabled: Bool,
-        runnerGroupId: Int? = nil,
-        maximumRunners: Int? = nil,
-        publicIps: [PublicIp]? = nil,
-        lastActiveOn: Date? = nil,
-        imageGen: Bool? = nil
-    ) throws {
+extension ActionsHostedRunner {
+    public init(id: Int, name: String, imageDetails: NullableActionsHostedRunnerPoolImage?, machineSizeDetails: ActionsHostedRunnerMachineSpec, status: ActionsHostedRunnerStatus, platform: String, publicIpEnabled: Bool, runnerGroupId: Int? = nil, maximumRunners: Int? = nil, publicIps: [PublicIp]? = nil, lastActiveOn: Date? = nil, imageGen: Bool? = nil) throws {
         (self.id, self.name) = (id, name)
         (self.imageDetails, self.machineSizeDetails) = (imageDetails, machineSizeDetails)
         (self.status, self.platform) = (status, platform)
@@ -345,59 +256,37 @@ public struct ActionsHostedRunnerCustomImageVersion: Codable {
         case stateDetails = "state_details"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsHostedRunnerCustomImageVersion {
-    init(from decoder: Decoder) throws {
+extension ActionsHostedRunnerCustomImageVersion {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.version) else {
-            throw SdkValidationError(
-                field: "version",
-                code: "required",
-                message: "Validation failed for 'version': value is required"
-            )
+            throw SdkValidationError(field: "version", code: "required", message: "Validation failed for 'version': value is required")
         }
         guard container.contains(.state) else {
-            throw SdkValidationError(
-                field: "state",
-                code: "required",
-                message: "Validation failed for 'state': value is required"
-            )
+            throw SdkValidationError(field: "state", code: "required", message: "Validation failed for 'state': value is required")
         }
         guard container.contains(.sizeGb) else {
-            throw SdkValidationError(
-                field: "size_gb",
-                code: "required",
-                message: "Validation failed for 'size_gb': value is required"
-            )
+            throw SdkValidationError(field: "size_gb", code: "required", message: "Validation failed for 'size_gb': value is required")
         }
         guard container.contains(.createdOn) else {
-            throw SdkValidationError(
-                field: "created_on",
-                code: "required",
-                message: "Validation failed for 'created_on': value is required"
-            )
+            throw SdkValidationError(field: "created_on", code: "required", message: "Validation failed for 'created_on': value is required")
         }
         guard container.contains(.stateDetails) else {
-            throw SdkValidationError(
-                field: "state_details",
-                code: "required",
-                message: "Validation failed for 'state_details': value is required"
-            )
+            throw SdkValidationError(field: "state_details", code: "required", message: "Validation failed for 'state_details': value is required")
         }
-        version = try container.sdkDecodeRequired(.version)
-        state = try container.sdkDecodeRequired(.state)
-        sizeGb = try container.sdkDecodeRequired(.sizeGb)
-        createdOn = try container.sdkDecodeRequired(.createdOn)
-        stateDetails = try container.sdkDecodeRequired(.stateDetails)
+        self.version = try container.sdkDecodeRequired(.version)
+        self.state = try container.sdkDecodeRequired(.state)
+        self.sizeGb = try container.sdkDecodeRequired(.sizeGb)
+        self.createdOn = try container.sdkDecodeRequired(.createdOn)
+        self.stateDetails = try container.sdkDecodeRequired(.stateDetails)
     }
 }
 
-public extension ActionsHostedRunnerCustomImageVersion {
-    init(version: String, state: String, sizeGb: Int, createdOn: String, stateDetails: String) {
+extension ActionsHostedRunnerCustomImageVersion {
+    public init(version: String, state: String, sizeGb: Int, createdOn: String, stateDetails: String) {
         (self.version, self.state) = (version, state)
         (self.sizeGb, self.createdOn) = (sizeGb, createdOn)
         self.stateDetails = stateDetails
@@ -413,27 +302,21 @@ public struct ActionsHostedRunnerLimits: Codable {
         case publicIps = "public_ips"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsHostedRunnerLimits {
-    init(from decoder: Decoder) throws {
+extension ActionsHostedRunnerLimits {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.publicIps) else {
-            throw SdkValidationError(
-                field: "public_ips",
-                code: "required",
-                message: "Validation failed for 'public_ips': value is required"
-            )
+            throw SdkValidationError(field: "public_ips", code: "required", message: "Validation failed for 'public_ips': value is required")
         }
-        publicIps = try container.sdkDecodeRequired(.publicIps)
+        self.publicIps = try container.sdkDecodeRequired(.publicIps)
     }
 }
 
-public extension ActionsHostedRunnerLimits {
-    init(publicIps: ActionsHostedRunnerLimitsPublicIps) {
+extension ActionsHostedRunnerLimits {
+    public init(publicIps: ActionsHostedRunnerLimitsPublicIps) {
         self.publicIps = publicIps
     }
 }
@@ -476,36 +359,25 @@ public struct ActionsHostedRunnerCustomImage: Codable {
         case state
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsHostedRunnerCustomImage {
-    init(from decoder: Decoder) throws {
+extension ActionsHostedRunnerCustomImage {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeRequired(.id)
-        platform = try container.sdkDecodeRequired(.platform)
-        totalVersionsSize = try container.sdkDecodeRequired(.totalVersionsSize)
-        name = try container.sdkDecodeRequired(.name)
-        source = try container.sdkDecodeRequired(.source)
-        versionsCount = try container.sdkDecodeRequired(.versionsCount)
-        latestVersion = try container.sdkDecodeRequired(.latestVersion)
-        state = try container.sdkDecodeRequired(.state)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.platform = try container.sdkDecodeRequired(.platform)
+        self.totalVersionsSize = try container.sdkDecodeRequired(.totalVersionsSize)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.source = try container.sdkDecodeRequired(.source)
+        self.versionsCount = try container.sdkDecodeRequired(.versionsCount)
+        self.latestVersion = try container.sdkDecodeRequired(.latestVersion)
+        self.state = try container.sdkDecodeRequired(.state)
     }
 }
 
-public extension ActionsHostedRunnerCustomImage {
-    init(
-        id: Int,
-        platform: String,
-        totalVersionsSize: Int,
-        name: String,
-        source: String,
-        versionsCount: Int,
-        latestVersion: String,
-        state: String
-    ) {
+extension ActionsHostedRunnerCustomImage {
+    public init(id: Int, platform: String, totalVersionsSize: Int, name: String, source: String, versionsCount: Int, latestVersion: String, state: String) {
         (self.id, self.platform) = (id, platform)
         (self.totalVersionsSize, self.name) = (totalVersionsSize, name)
         (self.source, self.versionsCount) = (source, versionsCount)
@@ -527,35 +399,25 @@ public struct ActionsHostedRunnerLimitsPublicIps: Codable {
         case currentUsage = "current_usage"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsHostedRunnerLimitsPublicIps {
-    init(from decoder: Decoder) throws {
+extension ActionsHostedRunnerLimitsPublicIps {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.maximum) else {
-            throw SdkValidationError(
-                field: "maximum",
-                code: "required",
-                message: "Validation failed for 'maximum': value is required"
-            )
+            throw SdkValidationError(field: "maximum", code: "required", message: "Validation failed for 'maximum': value is required")
         }
         guard container.contains(.currentUsage) else {
-            throw SdkValidationError(
-                field: "current_usage",
-                code: "required",
-                message: "Validation failed for 'current_usage': value is required"
-            )
+            throw SdkValidationError(field: "current_usage", code: "required", message: "Validation failed for 'current_usage': value is required")
         }
-        maximum = try container.sdkDecodeRequired(.maximum)
-        currentUsage = try container.sdkDecodeRequired(.currentUsage)
+        self.maximum = try container.sdkDecodeRequired(.maximum)
+        self.currentUsage = try container.sdkDecodeRequired(.currentUsage)
     }
 }
 
-public extension ActionsHostedRunnerLimitsPublicIps {
-    init(maximum: Int, currentUsage: Int) {
+extension ActionsHostedRunnerLimitsPublicIps {
+    public init(maximum: Int, currentUsage: Int) {
         (self.maximum, self.currentUsage) = (maximum, currentUsage)
     }
 }
@@ -564,10 +426,7 @@ public extension ActionsHostedRunnerLimitsPublicIps {
 public struct ActionsHostedRunnerStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let ready = ActionsHostedRunnerStatus(rawValue: "Ready")
     public static let provisioning = ActionsHostedRunnerStatus(rawValue: "Provisioning")
     public static let shutdown = ActionsHostedRunnerStatus(rawValue: "Shutdown")
@@ -576,7 +435,7 @@ public struct ActionsHostedRunnerStatus: RawRepresentable, Hashable, Codable, Se
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -589,17 +448,14 @@ public struct ActionsHostedRunnerStatus: RawRepresentable, Hashable, Codable, Se
 public struct ActionsHostedRunnerCuratedImageSource: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let github = ActionsHostedRunnerCuratedImageSource(rawValue: "github")
     public static let partner = ActionsHostedRunnerCuratedImageSource(rawValue: "partner")
     public static let custom = ActionsHostedRunnerCuratedImageSource(rawValue: "custom")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

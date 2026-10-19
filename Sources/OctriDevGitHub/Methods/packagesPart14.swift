@@ -6,10 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension PackagesMethods {
-    /// Lists package versions for a package owned by the authenticated user. OAuth app tokens and personal access
-    /// tokens (classic) need the `read:packages` scope to use this endpoint. For more information, see "[About
-    /// permissions for GitHub Packages](https://docs.github.com/packages/learn-github-packages/about-permissions-for-github-packages#permissions-for-repository-scoped-packages)."
+extension PackagesMethods {
+    /// Lists package versions for a package owned by the authenticated user. OAuth app tokens and personal access tokens (classic) need the `read:packages` scope to use this endpoint. For more information, see "[About permissions for GitHub Packages](https://docs.github.com/packages/learn-github-packages/about-permissions-for-github-packages#permissions-for-repository-scoped-packages)."
     ///
     /// - Parameters:
     /// - packageType: The type of supported package. Packages in GitHub's Gradle
@@ -28,34 +26,11 @@ public extension PackagesMethods {
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
     /// - state: The state of the package, either active or deleted.
-    static func packagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUser(
-        config: ClientConfig,
-        packageType: PackagesDeletePackageForOrgParameter,
-        packageName: String,
-        page: Int? = nil,
-        perPage: Int? = nil,
-        state: PackagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUserParameter? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [PackageVersion] {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/user/packages/",
-                sdkEncodePathSegment(sdkWireString(packageType)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(packageName)),
-                "/versions",
-            ].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("page", value: page),
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("state", value: state),
-            ],
-            decoder: .json,
-            operationId: "packagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUser",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self]
-        )).data
+    public static func packagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUser(config: ClientConfig, packageType: PackagesDeletePackageForOrgParameter, packageName: String, page: Int? = nil, perPage: Int? = nil, state: PackagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUserParameter? = nil, requestOptions: RequestOptions? = nil) async throws -> [PackageVersion] {
+        return try (await sdkRequest("GET", ["/user/packages/", sdkEncodePathSegment(sdkWireString(packageType)), "/", sdkEncodePathSegment(sdkWireString(packageName)), "/versions"].joined(), config: config, query: [
+            SdkQueryParameter("page", value: page),
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("state", value: state),
+        ], decoder: .json, operationId: "packagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
     }
 }

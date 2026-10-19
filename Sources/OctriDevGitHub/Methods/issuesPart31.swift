@@ -6,10 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension IssuesMethods {
-    /// Adds labels to an issue without removing its existing labels. Supply label names directly or use an object
-    /// payload with a `labels` array; label objects can include `rationale`, `suggest`, and `confidence`. A suggested
-    /// label is stored for human review rather than applied directly.
+extension IssuesMethods {
+    /// Adds labels to an issue without removing its existing labels. Supply label names directly or use an object payload with a `labels` array; label objects can include `rationale`, `suggest`, and `confidence`. A suggested label is stored for human review rather than applied directly.
     ///
     /// Adds labels to an issue.
     ///
@@ -19,36 +17,7 @@ public extension IssuesMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - issueNumber: The number that identifies the issue.
-    static func issuesAddLabels(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        issueNumber: Int,
-        body: IssuesAddLabelsRequestBody? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [Label] {
-        try await (sdkRequest(
-            "POST",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/issues/",
-                sdkEncodePathSegment(sdkWireString(issueNumber)),
-                "/labels",
-            ].joined(),
-            config: config,
-            rawBody: (body.map { try sdkEncodeBody($0, contentType: "application/json") }),
-            decoder: .json,
-            operationId: "issuesAddLabels",
-            options: requestOptions,
-            errors: [
-                "301": BasicError.self,
-                "404": BasicError.self,
-                "410": BasicError.self,
-                "422": ValidationError.self,
-            ]
-        )).data
+    public static func issuesAddLabels(config: ClientConfig, owner: String, repo: String, issueNumber: Int, body: IssuesAddLabelsRequestBody? = nil, requestOptions: RequestOptions? = nil) async throws -> [Label] {
+        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/issues/", sdkEncodePathSegment(sdkWireString(issueNumber)), "/labels"].joined(), config: config, rawBody: (try body.map { try sdkEncodeBody($0, contentType: "application/json") }), decoder: .json, operationId: "issuesAddLabels", options: requestOptions, errors: ["301": BasicError.self, "404": BasicError.self, "410": BasicError.self, "422": ValidationError.self])).data
     }
 }

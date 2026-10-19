@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ReposMethods {
-    /// Lists forks of a repository. Use `sort` to order forks by newest, oldest, stargazers, or watchers. Use `page`
-    /// and `per_page` to paginate the results.
+extension ReposMethods {
+    /// Lists forks of a repository. Use `sort` to order forks by newest, oldest, stargazers, or watchers. Use `page` and `per_page` to paginate the results.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -24,26 +23,11 @@ public extension ReposMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    static func reposListForks(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        sort: ReposListForksParameter? = nil,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [MinimalRepository] {
-        try await (sdkRequest("GET", [
-            "/repos/",
-            sdkEncodePathSegment(sdkWireString(owner)),
-            "/",
-            sdkEncodePathSegment(sdkWireString(repo)),
-            "/forks",
-        ].joined(), config: config, query: [
+    public static func reposListForks(config: ClientConfig, owner: String, repo: String, sort: ReposListForksParameter? = nil, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [MinimalRepository] {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/forks"].joined(), config: config, query: [
             SdkQueryParameter("sort", value: sort),
             SdkQueryParameter("per_page", value: perPage),
             SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "reposListForks", options: requestOptions, errors: ["400": BasicError.self]))
-            .data
+        ], decoder: .json, operationId: "reposListForks", options: requestOptions, errors: ["400": BasicError.self])).data
     }
 }

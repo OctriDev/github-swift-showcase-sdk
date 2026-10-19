@@ -6,40 +6,19 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension CodespacesMethods {
-    /// Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or
-    /// update secrets. If the repository is private, OAuth app tokens and personal access tokens (classic) need the
-    /// `repo` scope to use this endpoint.
+extension CodespacesMethods {
+    /// Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or update secrets. If the repository is private, OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    static func codespacesGetRepoPublicKey(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CodespacesPublicKey {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/codespaces/secrets/public-key",
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "codespacesGetRepoPublicKey",
-            options: requestOptions
-        )).data
+    public static func codespacesGetRepoPublicKey(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> CodespacesPublicKey {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/codespaces/secrets/public-key"].joined(), config: config, decoder: .json, operationId: "codespacesGetRepoPublicKey", options: requestOptions)).data
     }
 
-    /// Gets a single repository development environment secret without revealing its encrypted value. OAuth app tokens
-    /// and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    /// Gets a single repository development environment secret without revealing its encrypted value. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -47,27 +26,7 @@ public extension CodespacesMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - secretName: The name of the secret.
-    static func codespacesGetRepoSecret(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        secretName: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> RepoCodespacesSecret {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/codespaces/secrets/",
-                sdkEncodePathSegment(sdkWireString(secretName)),
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "codespacesGetRepoSecret",
-            options: requestOptions
-        )).data
+    public static func codespacesGetRepoSecret(config: ClientConfig, owner: String, repo: String, secretName: String, requestOptions: RequestOptions? = nil) async throws -> RepoCodespacesSecret {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/codespaces/secrets/", sdkEncodePathSegment(sdkWireString(secretName))].joined(), config: config, decoder: .json, operationId: "codespacesGetRepoSecret", options: requestOptions)).data
     }
 }

@@ -6,8 +6,7 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testActionsSetAllowedActionsOrganizationActionsSetAllowedActionsOrganizationReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActionsSetAllowedActionsOrganizationActionsSetAllowedActionsOrganizationReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -21,8 +20,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsSetAllowedActionsRepositoryActionsSetAllowedActionsRepositoryReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActionsSetAllowedActionsRepositoryActionsSetAllowedActionsRepositoryReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -37,8 +35,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsSetArtifactAndLogRetentionSettingsOrganizationActionsSX069129a222ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActionsSetArtifactAndLogRetentionSettingsOrganizationActionsSX069129a222ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -50,8 +47,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsSetArtifactAndLogRetentionSettingsOrganizationActionsSX37ac86d160ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActionsSetArtifactAndLogRetentionSettingsOrganizationActionsSX37ac86d160ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -62,9 +58,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.actions.setArtifactAndLogRetentionSettingsOrganization(
-                org: decoded("\"org\""),
-                days: decoded("100")
-            )
+            org: decoded("\"org\""),
+            days: decoded("100")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -80,8 +76,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsSetArtifactAndLogRetentionSettingsRepositoryActionsSetXe58e7134f4ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActionsSetArtifactAndLogRetentionSettingsRepositoryActionsSetXe58e7134f4ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -94,8 +89,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsSetArtifactAndLogRetentionSettingsRepositoryActionsSetXdb0fd87ad7ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActionsSetArtifactAndLogRetentionSettingsRepositoryActionsSetXdb0fd87ad7ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -106,10 +100,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.actions.setArtifactAndLogRetentionSettingsRepository(
-                owner: decoded("\"owner\""),
-                repo: decoded("\"repo\""),
-                days: decoded("90")
-            )
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            days: decoded("90")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -125,8 +119,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsSetCustomLabelsForSelfHostedRunnerForOrgActionsSetCustX567c9027eeReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActionsSetCustomLabelsForSelfHostedRunnerForOrgActionsSetCustX567c9027eeReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -146,8 +139,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsSetCustomLabelsForSelfHostedRunnerForOrgActionsSetCustX2fd62f0f1fReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActionsSetCustomLabelsForSelfHostedRunnerForOrgActionsSetCustX2fd62f0f1fReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -158,10 +150,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.actions.setCustomLabelsForSelfHostedRunnerForOrg(
-                org: decoded("\"org\""),
-                runnerId: decoded("1"),
-                labels: decoded("[\"gpu\",\"accelerated\"]")
-            )
+            org: decoded("\"org\""),
+            runnerId: decoded("1"),
+            labels: decoded("[\"gpu\",\"accelerated\"]")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -177,8 +169,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsSetCustomLabelsForSelfHostedRunnerForRepoActionsSetCusXa0d902149dReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActionsSetCustomLabelsForSelfHostedRunnerForRepoActionsSetCusXa0d902149dReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -199,8 +190,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsSetCustomLabelsForSelfHostedRunnerForRepoActionsSetCusX0074ea79acReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActionsSetCustomLabelsForSelfHostedRunnerForRepoActionsSetCusX0074ea79acReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -211,11 +201,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.actions.setCustomLabelsForSelfHostedRunnerForRepo(
-                owner: decoded("\"owner\""),
-                repo: decoded("\"repo\""),
-                runnerId: decoded("1"),
-                labels: decoded("[\"gpu\",\"accelerated\"]")
-            )
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            runnerId: decoded("1"),
+            labels: decoded("[\"gpu\",\"accelerated\"]")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -231,8 +221,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsSetCustomOidcSubClaimForRepoActionsSetCustomOidcSubClaimForRepoReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActionsSetCustomOidcSubClaimForRepoActionsSetCustomOidcSubClaimForRepoReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -254,8 +243,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsSetCustomOidcSubClaimForRepoActionsSetCustomOidcSubClaX8982235e8eReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActionsSetCustomOidcSubClaimForRepoActionsSetCustomOidcSubClaX8982235e8eReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
             return
         }
@@ -266,12 +254,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.actions.setCustomOidcSubClaimForRepo(
-                owner: decoded("\"owner\""),
-                repo: decoded("\"repo\""),
-                useDefault: decoded("false"),
-                includeClaimKeys: decoded("[\"repo\",\"context\"]"),
-                useImmutableSubject: decoded("null")
-            )
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            useDefault: decoded("false"),
+            includeClaimKeys: decoded("[\"repo\",\"context\"]"),
+            useImmutableSubject: decoded("null")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -287,8 +275,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsSetForkPrContributorApprovalPermissionsOrganizationActXc71ff2183cReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActionsSetForkPrContributorApprovalPermissionsOrganizationActXc71ff2183cReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -300,8 +287,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsSetForkPrContributorApprovalPermissionsOrganizationActX954bdce1dfReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActionsSetForkPrContributorApprovalPermissionsOrganizationActX954bdce1dfReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -312,9 +298,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.actions.setForkPrContributorApprovalPermissionsOrganization(
-                org: decoded("\"org\""),
-                approvalPolicy: decoded("\"first_time_contributors\"")
-            )
+            org: decoded("\"org\""),
+            approvalPolicy: decoded("\"first_time_contributors\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -330,8 +316,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsSetForkPrContributorApprovalPermissionsRepositoryActioX2b5c88aaebReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActionsSetForkPrContributorApprovalPermissionsRepositoryActioX2b5c88aaebReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -344,8 +329,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsSetForkPrContributorApprovalPermissionsRepositoryActioX5dc994486fReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActionsSetForkPrContributorApprovalPermissionsRepositoryActioX5dc994486fReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -356,10 +340,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.actions.setForkPrContributorApprovalPermissionsRepository(
-                owner: decoded("\"owner\""),
-                repo: decoded("\"repo\""),
-                approvalPolicy: decoded("\"first_time_contributors\"")
-            )
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            approvalPolicy: decoded("\"first_time_contributors\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -375,8 +359,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsSetGithubActionsDefaultWorkflowPermissionsOrganizationXf5065b03aaReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActionsSetGithubActionsDefaultWorkflowPermissionsOrganizationXf5065b03aaReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -389,8 +372,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsSetGithubActionsDefaultWorkflowPermissionsRepositoryAcX39c8d9f5dfReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActionsSetGithubActionsDefaultWorkflowPermissionsRepositoryAcX39c8d9f5dfReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -404,8 +386,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsSetGithubActionsPermissionsOrganizationActionsSetGithuX80fde669f1ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActionsSetGithubActionsPermissionsOrganizationActionsSetGithuX80fde669f1ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -419,8 +400,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsSetGithubActionsPermissionsRepositoryActionsSetGithubAX4358510e9aReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActionsSetGithubActionsPermissionsRepositoryActionsSetGithubAX4358510e9aReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -435,8 +415,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsSetPrivateRepoForkPrWorkflowsSettingsOrganizationActioXaa863b2ecfReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActionsSetPrivateRepoForkPrWorkflowsSettingsOrganizationActioXaa863b2ecfReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -451,8 +430,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsSetPrivateRepoForkPrWorkflowsSettingsOrganizationActioX8158c4bf4eReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActionsSetPrivateRepoForkPrWorkflowsSettingsOrganizationActioX8158c4bf4eReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -463,12 +441,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.actions.setPrivateRepoForkPrWorkflowsSettingsOrganization(
-                org: decoded("\"org\""),
-                runWorkflowsFromForkPullRequests: decoded("true"),
-                sendWriteTokensToWorkflows: decoded("false"),
-                sendSecretsAndVariables: decoded("false"),
-                requireApprovalForForkPrWorkflows: decoded("true")
-            )
+            org: decoded("\"org\""),
+            runWorkflowsFromForkPullRequests: decoded("true"),
+            sendWriteTokensToWorkflows: decoded("false"),
+            sendSecretsAndVariables: decoded("false"),
+            requireApprovalForForkPrWorkflows: decoded("true")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -484,8 +462,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsSetPrivateRepoForkPrWorkflowsSettingsRepositoryActionsX9400d5d241ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActionsSetPrivateRepoForkPrWorkflowsSettingsRepositoryActionsX9400d5d241ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -501,8 +478,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsSetPrivateRepoForkPrWorkflowsSettingsRepositoryActionsX71c5bd3e43ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testActionsSetPrivateRepoForkPrWorkflowsSettingsRepositoryActionsX71c5bd3e43ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -513,13 +489,13 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.actions.setPrivateRepoForkPrWorkflowsSettingsRepository(
-                owner: decoded("\"owner\""),
-                repo: decoded("\"repo\""),
-                runWorkflowsFromForkPullRequests: decoded("true"),
-                sendWriteTokensToWorkflows: decoded("false"),
-                sendSecretsAndVariables: decoded("false"),
-                requireApprovalForForkPrWorkflows: decoded("true")
-            )
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            runWorkflowsFromForkPullRequests: decoded("true"),
+            sendWriteTokensToWorkflows: decoded("false"),
+            sendSecretsAndVariables: decoded("false"),
+            requireApprovalForForkPrWorkflows: decoded("true")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)

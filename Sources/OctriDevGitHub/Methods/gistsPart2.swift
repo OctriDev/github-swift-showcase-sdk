@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension GistsMethods {
+extension GistsMethods {
     /// Lists the authenticated user's gists or if called anonymously, this endpoint returns all public gists:
     ///
     /// - Parameters:
@@ -21,51 +21,28 @@ public extension GistsMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    static func gistsList(
-        config: ClientConfig,
-        since: Date? = nil,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [BaseGist] {
-        if let since {
+    public static func gistsList(config: ClientConfig, since: Date? = nil, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [BaseGist] {
+        if let since = since {
             try sdkValidateDateTime("since", since)
         }
 
-        return try await (sdkRequest("GET", "/gists", config: config, query: [
+        return try (await sdkRequest("GET", "/gists", config: config, query: [
             SdkQueryParameter("since", value: since),
             SdkQueryParameter("per_page", value: perPage),
             SdkQueryParameter("page", value: page),
         ], decoder: .json, operationId: "gistsList", options: requestOptions, errors: ["403": BasicError.self])).data
     }
 
-    /// Creates a new gist containing one or more files. Supply file names and their `content` in `files`; `public`
-    /// defaults to false when omitted. Avoid names that match Gist’s automatic `gistfile` numbering pattern.
+    /// Creates a new gist containing one or more files. Supply file names and their `content` in `files`; `public` defaults to false when omitted. Avoid names that match Gist’s automatic `gistfile` numbering pattern.
     ///
-    /// Allows you to add a new gist with one or more files. > [!NOTE] > Don't name your files "gistfile" with a
-    /// numerical suffix. This is the format of the automatic naming scheme that Gist uses internally.
+    /// Allows you to add a new gist with one or more files. > [!NOTE] > Don't name your files "gistfile" with a numerical suffix. This is the format of the automatic naming scheme that Gist uses internally.
     ///
     /// - Parameters:
     /// - files: Names and content for the files that make up the gist
     /// - description: Description of the gist
-    static func gistsCreate(
-        config: ClientConfig,
-        files: [String: GistsCreateRequestBodyFilesValue],
-        description: String? = nil,
-        public: GistsCreateRequestBodyPublic? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> GistSimple {
+    public static func gistsCreate(config: ClientConfig, files: [String: GistsCreateRequestBodyFilesValue], description: String? = nil, public: GistsCreateRequestBodyPublic? = nil, requestOptions: RequestOptions? = nil) async throws -> GistSimple {
         let requestBody = GistsCreateRequestBody(files: files, description: description, public: `public`)
 
-        return try await (sdkRequest(
-            "POST",
-            "/gists",
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "gistsCreate",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self]
-        )).data
+        return try (await sdkRequest("POST", "/gists", config: config, body: requestBody, decoder: .json, operationId: "gistsCreate", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
     }
 }

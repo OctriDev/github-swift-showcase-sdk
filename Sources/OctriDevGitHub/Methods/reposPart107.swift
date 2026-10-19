@@ -6,36 +6,15 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ReposMethods {
-    /// Lists enabled issue types inherited from the repository owner. OAuth app tokens and personal access tokens
-    /// (classic) need the `repo` scope to use this endpoint. Fine-grained access tokens require the "Metadata"
-    /// repository permission (read).
+extension ReposMethods {
+    /// Lists enabled issue types inherited from the repository owner. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint. Fine-grained access tokens require the "Metadata" repository permission (read).
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    static func reposListIssueTypes(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [IssueType?] {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/issue-types",
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "reposListIssueTypes",
-            options: requestOptions,
-            errors: ["404": BasicError.self]
-        )).data
+    public static func reposListIssueTypes(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> [IssueType?] {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/issue-types"].joined(), config: config, decoder: .json, operationId: "reposListIssueTypes", options: requestOptions, errors: ["404": BasicError.self])).data
     }
 }

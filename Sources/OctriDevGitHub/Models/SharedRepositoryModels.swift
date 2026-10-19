@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// SharedRepository domain models
+// SharedRepository domain models
 /// Optional object value serialized in the `metadata` wire field.
 public struct RepositoryRuleViolationErrorMetadata: Codable {
     /// Optional object value serialized in the `secret_scanning` wire field.
@@ -14,19 +14,19 @@ public struct RepositoryRuleViolationErrorMetadata: Codable {
     }
 
     init() {
-        secretScanning = nil
+        self.secretScanning = nil
     }
 }
 
-public extension RepositoryRuleViolationErrorMetadata {
-    init(from decoder: Decoder) throws {
+extension RepositoryRuleViolationErrorMetadata {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        secretScanning = try container.sdkDecodeIfPresent(.secretScanning)
+        self.secretScanning = try container.sdkDecodeIfPresent(.secretScanning)
     }
 }
 
-public extension RepositoryRuleViolationErrorMetadata {
-    init(secretScanning: RepositoryRuleViolationErrorMetadataSecretScanning? = nil) {
+extension RepositoryRuleViolationErrorMetadata {
+    public init(secretScanning: RepositoryRuleViolationErrorMetadataSecretScanning? = nil) {
         self.init()
         self.secretScanning = secretScanning
     }
@@ -53,45 +53,31 @@ public struct RepositoryPermissions: Codable {
         case maintain
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension RepositoryPermissions {
-    init(from decoder: Decoder) throws {
+extension RepositoryPermissions {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.admin) else {
-            throw SdkValidationError(
-                field: "admin",
-                code: "required",
-                message: "Validation failed for 'admin': value is required"
-            )
+            throw SdkValidationError(field: "admin", code: "required", message: "Validation failed for 'admin': value is required")
         }
         guard container.contains(.pull) else {
-            throw SdkValidationError(
-                field: "pull",
-                code: "required",
-                message: "Validation failed for 'pull': value is required"
-            )
+            throw SdkValidationError(field: "pull", code: "required", message: "Validation failed for 'pull': value is required")
         }
         guard container.contains(.push) else {
-            throw SdkValidationError(
-                field: "push",
-                code: "required",
-                message: "Validation failed for 'push': value is required"
-            )
+            throw SdkValidationError(field: "push", code: "required", message: "Validation failed for 'push': value is required")
         }
-        admin = try container.sdkDecodeRequired(.admin)
-        pull = try container.sdkDecodeRequired(.pull)
-        push = try container.sdkDecodeRequired(.push)
-        triage = try container.sdkDecodeIfPresent(.triage)
-        maintain = try container.sdkDecodeIfPresent(.maintain)
+        self.admin = try container.sdkDecodeRequired(.admin)
+        self.pull = try container.sdkDecodeRequired(.pull)
+        self.push = try container.sdkDecodeRequired(.push)
+        self.triage = try container.sdkDecodeIfPresent(.triage)
+        self.maintain = try container.sdkDecodeIfPresent(.maintain)
     }
 }
 
-public extension RepositoryPermissions {
-    init(admin: Bool, pull: Bool, push: Bool, triage: Bool? = nil, maintain: Bool? = nil) {
+extension RepositoryPermissions {
+    public init(admin: Bool, pull: Bool, push: Bool, triage: Bool? = nil, maintain: Bool? = nil) {
         (self.admin, self.pull) = (admin, pull)
         (self.push, self.triage) = (push, triage)
         self.maintain = maintain
@@ -111,20 +97,20 @@ public struct RepositoryRuleViolationErrorMetadataSecretScanningBypassPlaceholde
     }
 
     init() {
-        (placeholderId, tokenType) = (nil, nil)
+        (self.placeholderId, self.tokenType) = (nil, nil)
     }
 }
 
-public extension RepositoryRuleViolationErrorMetadataSecretScanningBypassPlaceholdersItem {
-    init(from decoder: Decoder) throws {
+extension RepositoryRuleViolationErrorMetadataSecretScanningBypassPlaceholdersItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        placeholderId = try container.sdkDecodeIfPresent(.placeholderId)
-        tokenType = try container.sdkDecodeIfPresent(.tokenType)
+        self.placeholderId = try container.sdkDecodeIfPresent(.placeholderId)
+        self.tokenType = try container.sdkDecodeIfPresent(.tokenType)
     }
 }
 
-public extension RepositoryRuleViolationErrorMetadataSecretScanningBypassPlaceholdersItem {
-    init(placeholderId: SecretScanningPushProtectionBypassPlaceholderId? = nil, tokenType: String? = nil) {
+extension RepositoryRuleViolationErrorMetadataSecretScanningBypassPlaceholdersItem {
+    public init(placeholderId: SecretScanningPushProtectionBypassPlaceholderId? = nil, tokenType: String? = nil) {
         self.init()
         (self.placeholderId, self.tokenType) = (placeholderId, tokenType)
     }
@@ -140,19 +126,19 @@ public struct RepositoryRulesetConditionsRepositoryIdTargetRepositoryId: Codable
     }
 
     init() {
-        repositoryIds = nil
+        self.repositoryIds = nil
     }
 }
 
-public extension RepositoryRulesetConditionsRepositoryIdTargetRepositoryId {
-    init(from decoder: Decoder) throws {
+extension RepositoryRulesetConditionsRepositoryIdTargetRepositoryId {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        repositoryIds = try container.sdkDecodeIfPresent(.repositoryIds)
+        self.repositoryIds = try container.sdkDecodeIfPresent(.repositoryIds)
     }
 }
 
-public extension RepositoryRulesetConditionsRepositoryIdTargetRepositoryId {
-    init(repositoryIds: [Int]? = nil) {
+extension RepositoryRulesetConditionsRepositoryIdTargetRepositoryId {
+    public init(repositoryIds: [Int]? = nil) {
         self.init()
         self.repositoryIds = repositoryIds
     }
@@ -173,23 +159,20 @@ public struct RepositoryRulesetConditionsRepositoryPropertyTargetRepositoryPrope
     }
 
     init() {
-        (include, exclude) = (nil, nil)
+        (self.include, self.exclude) = (nil, nil)
     }
 }
 
-public extension RepositoryRulesetConditionsRepositoryPropertyTargetRepositoryProperty {
-    init(from decoder: Decoder) throws {
+extension RepositoryRulesetConditionsRepositoryPropertyTargetRepositoryProperty {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        include = try container.sdkDecodeIfPresent(.include)
-        exclude = try container.sdkDecodeIfPresent(.exclude)
+        self.include = try container.sdkDecodeIfPresent(.include)
+        self.exclude = try container.sdkDecodeIfPresent(.exclude)
     }
 }
 
-public extension RepositoryRulesetConditionsRepositoryPropertyTargetRepositoryProperty {
-    init(
-        include: [RepositoryRulesetConditionsRepositoryPropertySpec]? = nil,
-        exclude: [RepositoryRulesetConditionsRepositoryPropertySpec]? = nil
-    ) {
+extension RepositoryRulesetConditionsRepositoryPropertyTargetRepositoryProperty {
+    public init(include: [RepositoryRulesetConditionsRepositoryPropertySpec]? = nil, exclude: [RepositoryRulesetConditionsRepositoryPropertySpec]? = nil) {
         self.init()
         (self.include, self.exclude) = (include, exclude)
     }
@@ -204,27 +187,21 @@ public struct RepositoryRulesetConditionsRepositoryIdTarget: Codable {
         case repositoryId = "repository_id"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension RepositoryRulesetConditionsRepositoryIdTarget {
-    init(from decoder: Decoder) throws {
+extension RepositoryRulesetConditionsRepositoryIdTarget {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.repositoryId) else {
-            throw SdkValidationError(
-                field: "repository_id",
-                code: "required",
-                message: "Validation failed for 'repository_id': value is required"
-            )
+            throw SdkValidationError(field: "repository_id", code: "required", message: "Validation failed for 'repository_id': value is required")
         }
-        repositoryId = try container.sdkDecodeRequired(.repositoryId)
+        self.repositoryId = try container.sdkDecodeRequired(.repositoryId)
     }
 }
 
-public extension RepositoryRulesetConditionsRepositoryIdTarget {
-    init(repositoryId: RepositoryRulesetConditionsRepositoryIdTargetRepositoryId) {
+extension RepositoryRulesetConditionsRepositoryIdTarget {
+    public init(repositoryId: RepositoryRulesetConditionsRepositoryIdTargetRepositoryId) {
         self.repositoryId = repositoryId
     }
 }
@@ -607,7 +584,5 @@ public struct Repository: Codable {
         case codeSearchIndexStatus = "code_search_index_status"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }

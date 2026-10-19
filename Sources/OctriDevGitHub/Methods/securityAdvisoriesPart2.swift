@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension SecurityAdvisoriesMethods {
-    struct SecurityAdvisoriesListGlobalAdvisoriesOptions: Codable {
+extension SecurityAdvisoriesMethods {
+    public struct SecurityAdvisoriesListGlobalAdvisoriesOptions: Codable {
         public var ghsaId: String?
         public var type: SecurityAdvisoriesListGlobalAdvisoriesParameterXa768ab37?
         public var cveId: String?
@@ -30,11 +30,7 @@ public extension SecurityAdvisoriesMethods {
         public init() {}
     }
 
-    /// Lists all global security advisories that match the specified parameters. If no other parameters are defined,
-    /// the request will return only GitHub-reviewed advisories that are not malware. By default, all responses will
-    /// exclude advisories for malware, because malware are not standard vulnerabilities. To list advisories for
-    /// malware, you must include the `type` parameter in your request, with the value `malware`. For more information
-    /// about the different types of security advisories, see "[About the GitHub Advisory database](https://docs.github.com/code-security/security-advisories/global-security-advisories/about-the-github-advisory-database#about-types-of-security-advisories)."
+    /// Lists all global security advisories that match the specified parameters. If no other parameters are defined, the request will return only GitHub-reviewed advisories that are not malware. By default, all responses will exclude advisories for malware, because malware are not standard vulnerabilities. To list advisories for malware, you must include the `type` parameter in your request, with the value `malware`. For more information about the different types of security advisories, see "[About the GitHub Advisory database](https://docs.github.com/code-security/security-advisories/global-security-advisories/about-the-github-advisory-database#about-types-of-security-advisories)."
     ///
     /// - Parameters:
     /// - ghsaId: If specified, only advisories with this GHSA (GitHub Security
@@ -98,43 +94,30 @@ public extension SecurityAdvisoriesMethods {
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
     /// - sort: The property to sort the results by.
-    static func securityAdvisoriesListGlobalAdvisories(
-        config: ClientConfig,
-        options: SecurityAdvisoriesListGlobalAdvisoriesOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [GlobalAdvisory] {
+    public static func securityAdvisoriesListGlobalAdvisories(config: ClientConfig, options: SecurityAdvisoriesListGlobalAdvisoriesOptions, requestOptions: RequestOptions? = nil) async throws -> [GlobalAdvisory] {
         if let perPage = options.perPage {
             try validateRange("per_page", Double(perPage), min: 1, max: 100)
         }
 
-        return try await (sdkRequest(
-            "GET",
-            "/advisories",
-            config: config,
-            query: [
-                SdkQueryParameter("ghsa_id", value: options.ghsaId),
-                SdkQueryParameter("type", value: options.type),
-                SdkQueryParameter("cve_id", value: options.cveId),
-                SdkQueryParameter("ecosystem", value: options.ecosystem),
-                SdkQueryParameter("severity", value: options.severity),
-                SdkQueryParameter("cwes", value: options.cwes),
-                SdkQueryParameter("is_withdrawn", value: options.isWithdrawn),
-                SdkQueryParameter("affects", value: options.affects),
-                SdkQueryParameter("published", value: options.published),
-                SdkQueryParameter("updated", value: options.updated),
-                SdkQueryParameter("modified", value: options.modified),
-                SdkQueryParameter("epss_percentage", value: options.epssPercentage),
-                SdkQueryParameter("epss_percentile", value: options.epssPercentile),
-                SdkQueryParameter("before", value: options.before),
-                SdkQueryParameter("after", value: options.after),
-                SdkQueryParameter("direction", value: options.direction),
-                SdkQueryParameter("per_page", value: options.perPage),
-                SdkQueryParameter("sort", value: options.sort),
-            ],
-            decoder: .json,
-            operationId: "securityAdvisoriesListGlobalAdvisories",
-            options: requestOptions,
-            errors: ["422": ValidationErrorSimple.self, "429": BasicError.self]
-        )).data
+        return try (await sdkRequest("GET", "/advisories", config: config, query: [
+            SdkQueryParameter("ghsa_id", value: options.ghsaId),
+            SdkQueryParameter("type", value: options.type),
+            SdkQueryParameter("cve_id", value: options.cveId),
+            SdkQueryParameter("ecosystem", value: options.ecosystem),
+            SdkQueryParameter("severity", value: options.severity),
+            SdkQueryParameter("cwes", value: options.cwes),
+            SdkQueryParameter("is_withdrawn", value: options.isWithdrawn),
+            SdkQueryParameter("affects", value: options.affects),
+            SdkQueryParameter("published", value: options.published),
+            SdkQueryParameter("updated", value: options.updated),
+            SdkQueryParameter("modified", value: options.modified),
+            SdkQueryParameter("epss_percentage", value: options.epssPercentage),
+            SdkQueryParameter("epss_percentile", value: options.epssPercentile),
+            SdkQueryParameter("before", value: options.before),
+            SdkQueryParameter("after", value: options.after),
+            SdkQueryParameter("direction", value: options.direction),
+            SdkQueryParameter("per_page", value: options.perPage),
+            SdkQueryParameter("sort", value: options.sort),
+        ], decoder: .json, operationId: "securityAdvisoriesListGlobalAdvisories", options: requestOptions, errors: ["422": ValidationErrorSimple.self, "429": BasicError.self])).data
     }
 }

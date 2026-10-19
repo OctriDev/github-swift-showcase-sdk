@@ -3,623 +3,176 @@
 
 import Foundation
 
-public extension ActionsNamespace {
-    /// Adds a repository to an organization variable configured for selected repositories. Use `name` and
-    /// `repository_id` to identify the variable and repository to include; the variable must have `visibility` set to
-    /// `selected`. The authenticated user must have collaborator access to the repository, and the token must have the
-    /// required organization scope.
+extension ActionsNamespace {
+/// Adds a repository to an organization variable configured for selected repositories. Use `name` and `repository_id` to identify the variable and repository to include; the variable must have `visibility` set to `selected`. The authenticated user must have collaborator access to the repository, and the token must have the required organization scope.
     ///
-    /// Adds a repository to an organization variable that is available to selected repositories. Organization variables
-    /// that are available to selected repositories have their `visibility` field set to `selected`. Authenticated users
-    /// must have collaborator access to a repository to create, update, or read secrets. OAuth tokens and personal
-    /// access tokens (classic) need the `admin:org` scope to use this endpoint. If the repository is private, OAuth
-    /// tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
-    func addSelectedRepoToOrgVariable(
-        org: String,
-        name: String,
-        repositoryId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await ActionsMethods.actionsAddSelectedRepoToOrgVariable(
-            config: config,
-            org: org,
-            name: name,
-            repositoryId: repositoryId,
-            requestOptions: requestOptions
-        )
+    /// Adds a repository to an organization variable that is available to selected repositories. Organization variables that are available to selected repositories have their `visibility` field set to `selected`. Authenticated users must have collaborator access to a repository to create, update, or read secrets. OAuth tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint. If the repository is private, OAuth tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func addSelectedRepoToOrgVariable(org: String, name: String, repositoryId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await ActionsMethods.actionsAddSelectedRepoToOrgVariable(config: config, org: org, name: name, repositoryId: repositoryId, requestOptions: requestOptions)
     }
 
-    /// Removes a repository from an organization variable configured for selected repositories. Use `name` and
-    /// `repository_id` to identify the variable and repository to remove; the variable must have `visibility` set to
-    /// `selected`. The authenticated user must have collaborator access to the repository, and the token must have the
-    /// required organization scope.
+/// Removes a repository from an organization variable configured for selected repositories. Use `name` and `repository_id` to identify the variable and repository to remove; the variable must have `visibility` set to `selected`. The authenticated user must have collaborator access to the repository, and the token must have the required organization scope.
     ///
-    /// Removes a repository from an organization variable that is available to selected repositories. Organization
-    /// variables that are available to selected repositories have their `visibility` field set to `selected`.
-    /// Authenticated users must have collaborator access to a repository to create, update, or read variables. OAuth
-    /// app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint. If the
-    /// repository is private, the `repo` scope is also required.
-    func removeSelectedRepoFromOrgVariable(
-        org: String,
-        name: String,
-        repositoryId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await ActionsMethods.actionsRemoveSelectedRepoFromOrgVariable(
-            config: config,
-            org: org,
-            name: name,
-            repositoryId: repositoryId,
-            requestOptions: requestOptions
-        )
+    /// Removes a repository from an organization variable that is available to selected repositories. Organization variables that are available to selected repositories have their `visibility` field set to `selected`. Authenticated users must have collaborator access to a repository to create, update, or read variables. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint. If the repository is private, the `repo` scope is also required.
+    public func removeSelectedRepoFromOrgVariable(org: String, name: String, repositoryId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await ActionsMethods.actionsRemoveSelectedRepoFromOrgVariable(config: config, org: org, name: name, repositoryId: repositoryId, requestOptions: requestOptions)
     }
 
-    /// Lists all artifacts for a repository. Anyone with read access to the repository can use this endpoint. OAuth app
-    /// tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with a private
-    /// repository.
-    func listArtifactsForRepo(
-        owner: String,
-        repo: String,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        name: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsListArtifactsForRepoResponse {
-        try await ActionsMethods.actionsListArtifactsForRepo(
-            config: config,
-            owner: owner,
-            repo: repo,
-            perPage: perPage,
-            page: page,
-            name: name,
-            requestOptions: requestOptions
-        )
+/// Lists all artifacts for a repository. Anyone with read access to the repository can use this endpoint. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with a private repository.
+    public func listArtifactsForRepo(owner: String, repo: String, perPage: Int? = nil, page: Int? = nil, name: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ActionsListArtifactsForRepoResponse {
+        return try await ActionsMethods.actionsListArtifactsForRepo(config: config, owner: owner, repo: repo, perPage: perPage, page: page, name: name, requestOptions: requestOptions)
     }
 
-    /// Gets a specific artifact for a workflow run. Anyone with read access to the repository can use this endpoint. If
-    /// the repository is private, OAuth tokens and personal access tokens (classic) need the `repo` scope to use this
-    /// endpoint.
-    func getArtifact(
-        owner: String,
-        repo: String,
-        artifactId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> Artifact {
-        try await ActionsMethods.actionsGetArtifact(
-            config: config,
-            owner: owner,
-            repo: repo,
-            artifactId: artifactId,
-            requestOptions: requestOptions
-        )
+/// Gets a specific artifact for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private, OAuth tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func getArtifact(owner: String, repo: String, artifactId: Int, requestOptions: RequestOptions? = nil) async throws -> Artifact {
+        return try await ActionsMethods.actionsGetArtifact(config: config, owner: owner, repo: repo, artifactId: artifactId, requestOptions: requestOptions)
     }
 
-    /// Deletes an artifact for a workflow run. OAuth tokens and personal access tokens (classic) need the `repo` scope
-    /// to use this endpoint.
-    func deleteArtifact(
-        owner: String,
-        repo: String,
-        artifactId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await ActionsMethods.actionsDeleteArtifact(
-            config: config,
-            owner: owner,
-            repo: repo,
-            artifactId: artifactId,
-            requestOptions: requestOptions
-        )
+/// Deletes an artifact for a workflow run. OAuth tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func deleteArtifact(owner: String, repo: String, artifactId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await ActionsMethods.actionsDeleteArtifact(config: config, owner: owner, repo: repo, artifactId: artifactId, requestOptions: requestOptions)
     }
 
-    /// Retrieves a short-lived redirect URL for downloading an artifact archive from a repository. Use `owner`, `repo`,
-    /// and `artifact_id` to identify the repository and artifact; the download URL expires after one minute. Send
-    /// `archive_format` as `zip`, and use an OAuth token or personal access token (classic) with the `repo` scope.
+/// Retrieves a short-lived redirect URL for downloading an artifact archive from a repository. Use `owner`, `repo`, and `artifact_id` to identify the repository and artifact; the download URL expires after one minute. Send `archive_format` as `zip`, and use an OAuth token or personal access token (classic) with the `repo` scope.
     ///
-    /// Gets a redirect URL to download an archive for a repository. This URL expires after 1 minute. Look for
-    /// `Location:` in the response header to find the URL for the download. The `:archive_format` must be `zip`. OAuth
-    /// tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
-    func downloadArtifact(
-        owner: String,
-        repo: String,
-        artifactId: Int,
-        archiveFormat: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await ActionsMethods.actionsDownloadArtifact(
-            config: config,
-            owner: owner,
-            repo: repo,
-            artifactId: artifactId,
-            archiveFormat: archiveFormat,
-            requestOptions: requestOptions
-        )
+    /// Gets a redirect URL to download an archive for a repository. This URL expires after 1 minute. Look for `Location:` in the response header to find the URL for the download. The `:archive_format` must be `zip`. OAuth tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func downloadArtifact(owner: String, repo: String, artifactId: Int, archiveFormat: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await ActionsMethods.actionsDownloadArtifact(config: config, owner: owner, repo: repo, artifactId: artifactId, archiveFormat: archiveFormat, requestOptions: requestOptions)
     }
 
-    /// Gets GitHub Actions cache retention limit for a repository. This determines how long caches will be retained
-    /// for, if not manually removed or evicted due to size constraints. OAuth tokens and personal access tokens
-    /// (classic) need the `admin:repository` scope to use this endpoint.
-    func getActionsCacheRetentionLimitForRepository(
-        owner: String,
-        repo: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsCacheRetentionLimitForRepository {
-        try await ActionsMethods.actionsGetActionsCacheRetentionLimitForRepository(
-            config: config,
-            owner: owner,
-            repo: repo,
-            requestOptions: requestOptions
-        )
+/// Gets GitHub Actions cache retention limit for a repository. This determines how long caches will be retained for, if not manually removed or evicted due to size constraints. OAuth tokens and personal access tokens (classic) need the `admin:repository` scope to use this endpoint.
+    public func getActionsCacheRetentionLimitForRepository(owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> ActionsCacheRetentionLimitForRepository {
+        return try await ActionsMethods.actionsGetActionsCacheRetentionLimitForRepository(config: config, owner: owner, repo: repo, requestOptions: requestOptions)
     }
 
-    /// Sets GitHub Actions cache retention limit for a repository. This determines how long caches will be retained
-    /// for, if not manually removed or evicted due to size constraints. OAuth tokens and personal access tokens
-    /// (classic) need the `admin:repository` scope to use this endpoint.
-    func setActionsCacheRetentionLimitForRepository(
-        owner: String,
-        repo: String,
-        maxCacheRetentionDays: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await ActionsMethods.actionsSetActionsCacheRetentionLimitForRepository(
-            config: config,
-            owner: owner,
-            repo: repo,
-            maxCacheRetentionDays: maxCacheRetentionDays,
-            requestOptions: requestOptions
-        )
+/// Sets GitHub Actions cache retention limit for a repository. This determines how long caches will be retained for, if not manually removed or evicted due to size constraints. OAuth tokens and personal access tokens (classic) need the `admin:repository` scope to use this endpoint.
+    public func setActionsCacheRetentionLimitForRepository(owner: String, repo: String, maxCacheRetentionDays: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await ActionsMethods.actionsSetActionsCacheRetentionLimitForRepository(config: config, owner: owner, repo: repo, maxCacheRetentionDays: maxCacheRetentionDays, requestOptions: requestOptions)
     }
 }
 
-public extension ActionsNamespace {
-    /// Gets GitHub Actions cache storage limit for a repository. This determines the maximum size of caches that can be
-    /// stored before eviction occurs. OAuth tokens and personal access tokens (classic) need the `admin:repository`
-    /// scope to use this endpoint.
-    func getActionsCacheStorageLimitForRepository(
-        owner: String,
-        repo: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsCacheStorageLimitForRepository {
-        try await ActionsMethods.actionsGetActionsCacheStorageLimitForRepository(
-            config: config,
-            owner: owner,
-            repo: repo,
-            requestOptions: requestOptions
-        )
+extension ActionsNamespace {
+/// Gets GitHub Actions cache storage limit for a repository. This determines the maximum size of caches that can be stored before eviction occurs. OAuth tokens and personal access tokens (classic) need the `admin:repository` scope to use this endpoint.
+    public func getActionsCacheStorageLimitForRepository(owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> ActionsCacheStorageLimitForRepository {
+        return try await ActionsMethods.actionsGetActionsCacheStorageLimitForRepository(config: config, owner: owner, repo: repo, requestOptions: requestOptions)
     }
 
-    /// Sets GitHub Actions cache storage limit for a repository. This determines the maximum size of caches that can be
-    /// stored before eviction occurs. OAuth tokens and personal access tokens (classic) need the `admin:repository`
-    /// scope to use this endpoint.
-    func setActionsCacheStorageLimitForRepository(
-        owner: String,
-        repo: String,
-        maxCacheSizeGb: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await ActionsMethods.actionsSetActionsCacheStorageLimitForRepository(
-            config: config,
-            owner: owner,
-            repo: repo,
-            maxCacheSizeGb: maxCacheSizeGb,
-            requestOptions: requestOptions
-        )
+/// Sets GitHub Actions cache storage limit for a repository. This determines the maximum size of caches that can be stored before eviction occurs. OAuth tokens and personal access tokens (classic) need the `admin:repository` scope to use this endpoint.
+    public func setActionsCacheStorageLimitForRepository(owner: String, repo: String, maxCacheSizeGb: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await ActionsMethods.actionsSetActionsCacheStorageLimitForRepository(config: config, owner: owner, repo: repo, maxCacheSizeGb: maxCacheSizeGb, requestOptions: requestOptions)
     }
 
-    /// Gets GitHub Actions cache usage for a repository. The data fetched using this API is refreshed approximately
-    /// every 5 minutes, so values returned from this endpoint may take at least 5 minutes to get updated. Anyone with
-    /// read access to the repository can use this endpoint. If the repository is private, OAuth tokens and personal
-    /// access tokens (classic) need the `repo` scope to use this endpoint.
-    func getActionsCacheUsage(
-        owner: String,
-        repo: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsCacheUsageByRepository {
-        try await ActionsMethods.actionsGetActionsCacheUsage(
-            config: config,
-            owner: owner,
-            repo: repo,
-            requestOptions: requestOptions
-        )
+/// Gets GitHub Actions cache usage for a repository. The data fetched using this API is refreshed approximately every 5 minutes, so values returned from this endpoint may take at least 5 minutes to get updated. Anyone with read access to the repository can use this endpoint. If the repository is private, OAuth tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func getActionsCacheUsage(owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> ActionsCacheUsageByRepository {
+        return try await ActionsMethods.actionsGetActionsCacheUsage(config: config, owner: owner, repo: repo, requestOptions: requestOptions)
     }
 
-    /// Lists the GitHub Actions caches for a repository. OAuth tokens and personal access tokens (classic) need the
-    /// `repo` scope to use this endpoint.
-    func getActionsCacheList(
-        options: ActionsMethods.ActionsGetActionsCacheListOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsCacheList {
-        try await ActionsMethods.actionsGetActionsCacheList(
-            config: config,
-            options: options,
-            requestOptions: requestOptions
-        )
+/// Lists the GitHub Actions caches for a repository. OAuth tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func getActionsCacheList(options: ActionsMethods.ActionsGetActionsCacheListOptions, requestOptions: RequestOptions? = nil) async throws -> ActionsCacheList {
+        return try await ActionsMethods.actionsGetActionsCacheList(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Deletes one or more GitHub Actions caches for a repository, using a complete cache key. By default, all caches
-    /// that match the provided key are deleted, but you can optionally provide a Git ref to restrict deletions to
-    /// caches that match both the provided key and the Git ref. OAuth tokens and personal access tokens (classic) need
-    /// the `repo` scope to use this endpoint.
-    func deleteActionsCacheByKey(
-        owner: String,
-        repo: String,
-        key: String,
-        ref: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsCacheList {
-        try await ActionsMethods.actionsDeleteActionsCacheByKey(
-            config: config,
-            owner: owner,
-            repo: repo,
-            key: key,
-            ref: ref,
-            requestOptions: requestOptions
-        )
+/// Deletes one or more GitHub Actions caches for a repository, using a complete cache key. By default, all caches that match the provided key are deleted, but you can optionally provide a Git ref to restrict deletions to caches that match both the provided key and the Git ref. OAuth tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func deleteActionsCacheByKey(owner: String, repo: String, key: String, ref: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ActionsCacheList {
+        return try await ActionsMethods.actionsDeleteActionsCacheByKey(config: config, owner: owner, repo: repo, key: key, ref: ref, requestOptions: requestOptions)
     }
 
-    /// Deletes a GitHub Actions cache for a repository, using a cache ID. OAuth tokens and personal access tokens
-    /// (classic) need the `repo` scope to use this endpoint.
-    func deleteActionsCacheById(
-        owner: String,
-        repo: String,
-        cacheId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await ActionsMethods.actionsDeleteActionsCacheById(
-            config: config,
-            owner: owner,
-            repo: repo,
-            cacheId: cacheId,
-            requestOptions: requestOptions
-        )
+/// Deletes a GitHub Actions cache for a repository, using a cache ID. OAuth tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func deleteActionsCacheById(owner: String, repo: String, cacheId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await ActionsMethods.actionsDeleteActionsCacheById(config: config, owner: owner, repo: repo, cacheId: cacheId, requestOptions: requestOptions)
     }
 
-    /// Lists the active concurrency groups for a repository. OAuth app tokens and personal access tokens (classic) need
-    /// the `repo` scope to use this endpoint with a private repository.
-    func listConcurrencyGroupsForRepository(
-        owner: String,
-        repo: String,
-        perPage: Int? = nil,
-        after: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ConcurrencyGroupList {
-        try await ActionsMethods.actionsListConcurrencyGroupsForRepository(
-            config: config,
-            owner: owner,
-            repo: repo,
-            perPage: perPage,
-            after: after,
-            requestOptions: requestOptions
-        )
+/// Lists the active concurrency groups for a repository. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with a private repository.
+    public func listConcurrencyGroupsForRepository(owner: String, repo: String, perPage: Int? = nil, after: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ConcurrencyGroupList {
+        return try await ActionsMethods.actionsListConcurrencyGroupsForRepository(config: config, owner: owner, repo: repo, perPage: perPage, after: after, requestOptions: requestOptions)
     }
 
-    /// Gets a specific concurrency group for a repository, including all instances in the group's queue. Returns 404 if
-    /// the group is inactive or does not exist. Optionally, pass `ahead_of_run` or `ahead_of_job` to filter the results
-    /// to only the items ahead of the specified workflow run or job in the queue, plus the specified item itself
-    /// (returned as the last element). This is useful for determining what is blocking a particular run or job. Returns
-    /// 422 if the specified run or job is not in this concurrency group. When using `ahead_of_run`, this matches
-    /// workflow-level concurrency and any reusable-workflow leases held on behalf of that run. Job-level leases within
-    /// the run are not considered to block the run as a whole. Use `ahead_of_job` to match job-level concurrency and
-    /// reusable-workflow leases on the job's ancestor paths. OAuth app tokens and personal access tokens (classic) need
-    /// the `repo` scope to use this endpoint with a private repository.
-    func getConcurrencyGroupForRepository(
-        owner: String,
-        repo: String,
-        concurrencyGroupName: String,
-        aheadOfRun: Int? = nil,
-        aheadOfJob: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ConcurrencyGroup {
-        try await ActionsMethods.actionsGetConcurrencyGroupForRepository(
-            config: config,
-            owner: owner,
-            repo: repo,
-            concurrencyGroupName: concurrencyGroupName,
-            aheadOfRun: aheadOfRun,
-            aheadOfJob: aheadOfJob,
-            requestOptions: requestOptions
-        )
+/// Gets a specific concurrency group for a repository, including all instances in the group's queue. Returns 404 if the group is inactive or does not exist. Optionally, pass `ahead_of_run` or `ahead_of_job` to filter the results to only the items ahead of the specified workflow run or job in the queue, plus the specified item itself (returned as the last element). This is useful for determining what is blocking a particular run or job. Returns 422 if the specified run or job is not in this concurrency group. When using `ahead_of_run`, this matches workflow-level concurrency and any reusable-workflow leases held on behalf of that run. Job-level leases within the run are not considered to block the run as a whole. Use `ahead_of_job` to match job-level concurrency and reusable-workflow leases on the job's ancestor paths. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with a private repository.
+    public func getConcurrencyGroupForRepository(owner: String, repo: String, concurrencyGroupName: String, aheadOfRun: Int? = nil, aheadOfJob: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> ConcurrencyGroup {
+        return try await ActionsMethods.actionsGetConcurrencyGroupForRepository(config: config, owner: owner, repo: repo, concurrencyGroupName: concurrencyGroupName, aheadOfRun: aheadOfRun, aheadOfJob: aheadOfJob, requestOptions: requestOptions)
     }
 }
 
-public extension ActionsNamespace {
-    /// Gets a specific job in a workflow run. Anyone with read access to the repository can use this endpoint. If the
-    /// repository is private, OAuth tokens and personal access tokens (classic) need the `repo` scope to use this
-    /// endpoint.
-    func getJobForWorkflowRun(
-        owner: String,
-        repo: String,
-        jobId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> Job {
-        try await ActionsMethods.actionsGetJobForWorkflowRun(
-            config: config,
-            owner: owner,
-            repo: repo,
-            jobId: jobId,
-            requestOptions: requestOptions
-        )
+extension ActionsNamespace {
+/// Gets a specific job in a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private, OAuth tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func getJobForWorkflowRun(owner: String, repo: String, jobId: Int, requestOptions: RequestOptions? = nil) async throws -> Job {
+        return try await ActionsMethods.actionsGetJobForWorkflowRun(config: config, owner: owner, repo: repo, jobId: jobId, requestOptions: requestOptions)
     }
 
-    /// Gets a redirect URL to download a plain text file of logs for a workflow job. This link expires after 1 minute.
-    /// Look for `Location:` in the response header to find the URL for the download. Anyone with read access to the
-    /// repository can use this endpoint. If the repository is private, OAuth tokens and personal access tokens
-    /// (classic) need the `repo` scope to use this endpoint.
-    func downloadJobLogsForWorkflowRun(
-        owner: String,
-        repo: String,
-        jobId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await ActionsMethods.actionsDownloadJobLogsForWorkflowRun(
-            config: config,
-            owner: owner,
-            repo: repo,
-            jobId: jobId,
-            requestOptions: requestOptions
-        )
+/// Gets a redirect URL to download a plain text file of logs for a workflow job. This link expires after 1 minute. Look for `Location:` in the response header to find the URL for the download. Anyone with read access to the repository can use this endpoint. If the repository is private, OAuth tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func downloadJobLogsForWorkflowRun(owner: String, repo: String, jobId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await ActionsMethods.actionsDownloadJobLogsForWorkflowRun(config: config, owner: owner, repo: repo, jobId: jobId, requestOptions: requestOptions)
     }
 
-    /// Re-run a job and its dependent jobs in a workflow run. OAuth app tokens and personal access tokens (classic)
-    /// need the `repo` scope to use this endpoint.
-    func reRunJobForWorkflowRun(
-        owner: String,
-        repo: String,
-        jobId: Int,
-        enableDebugLogging: Bool? = nil,
-        enableDebugger: Bool? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> EmptyObject {
-        try await ActionsMethods.actionsReRunJobForWorkflowRun(
-            config: config,
-            owner: owner,
-            repo: repo,
-            jobId: jobId,
-            enableDebugLogging: enableDebugLogging,
-            enableDebugger: enableDebugger,
-            requestOptions: requestOptions
-        )
+/// Re-run a job and its dependent jobs in a workflow run. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func reRunJobForWorkflowRun(owner: String, repo: String, jobId: Int, enableDebugLogging: Bool? = nil, enableDebugger: Bool? = nil, requestOptions: RequestOptions? = nil) async throws -> EmptyObject {
+        return try await ActionsMethods.actionsReRunJobForWorkflowRun(config: config, owner: owner, repo: repo, jobId: jobId, enableDebugLogging: enableDebugLogging, enableDebugger: enableDebugger, requestOptions: requestOptions)
     }
 
-    /// Gets a redirect URL to download a plain text file of logs for a specific step of a workflow job. This link
-    /// expires after 1 minute. Look for `Location:` in the response header to find the URL for the download. This
-    /// endpoint is intended for selective retrieval of one step. To download complete job logs, use the [job logs
-    /// endpoint](https://docs.github.com/rest/actions/workflow-jobs#download-job-logs-for-a-workflow-run). Anyone with
-    /// read access to the repository can use this endpoint. If the repository is private, OAuth tokens and personal
-    /// access tokens (classic) need the `repo` scope to use this endpoint.
-    func downloadStepLogsForWorkflowRunJob(
-        owner: String,
-        repo: String,
-        jobId: Int,
-        stepNumber: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await ActionsMethods.actionsDownloadStepLogsForWorkflowRunJob(
-            config: config,
-            owner: owner,
-            repo: repo,
-            jobId: jobId,
-            stepNumber: stepNumber,
-            requestOptions: requestOptions
-        )
+/// Gets a redirect URL to download a plain text file of logs for a specific step of a workflow job. This link expires after 1 minute. Look for `Location:` in the response header to find the URL for the download. This endpoint is intended for selective retrieval of one step. To download complete job logs, use the [job logs endpoint](https://docs.github.com/rest/actions/workflow-jobs#download-job-logs-for-a-workflow-run). Anyone with read access to the repository can use this endpoint. If the repository is private, OAuth tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func downloadStepLogsForWorkflowRunJob(owner: String, repo: String, jobId: Int, stepNumber: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await ActionsMethods.actionsDownloadStepLogsForWorkflowRunJob(config: config, owner: owner, repo: repo, jobId: jobId, stepNumber: stepNumber, requestOptions: requestOptions)
     }
 
-    /// Gets the customization template for an OpenID Connect (OIDC) subject claim. OAuth tokens and personal access
-    /// tokens (classic) need the `repo` scope to use this endpoint.
-    func getCustomOidcSubClaimForRepo(
-        owner: String,
-        repo: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> OidcCustomSubRepo {
-        try await ActionsMethods.actionsGetCustomOidcSubClaimForRepo(
-            config: config,
-            owner: owner,
-            repo: repo,
-            requestOptions: requestOptions
-        )
+/// Gets the customization template for an OpenID Connect (OIDC) subject claim. OAuth tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func getCustomOidcSubClaimForRepo(owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> OidcCustomSubRepo {
+        return try await ActionsMethods.actionsGetCustomOidcSubClaimForRepo(config: config, owner: owner, repo: repo, requestOptions: requestOptions)
     }
 
-    /// Sets the customization template and `opt-in` or `opt-out` flag for an OpenID Connect (OIDC) subject claim for a
-    /// repository. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
-    func setCustomOidcSubClaimForRepo(
-        owner: String,
-        repo: String,
-        useDefault: Bool,
-        includeClaimKeys: [String]? = nil,
-        useImmutableSubject: Bool? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> EmptyObject {
-        try await ActionsMethods.actionsSetCustomOidcSubClaimForRepo(
-            config: config,
-            owner: owner,
-            repo: repo,
-            useDefault: useDefault,
-            includeClaimKeys: includeClaimKeys,
-            useImmutableSubject: useImmutableSubject,
-            requestOptions: requestOptions
-        )
+/// Sets the customization template and `opt-in` or `opt-out` flag for an OpenID Connect (OIDC) subject claim for a repository. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func setCustomOidcSubClaimForRepo(owner: String, repo: String, useDefault: Bool, includeClaimKeys: [String]? = nil, useImmutableSubject: Bool? = nil, requestOptions: RequestOptions? = nil) async throws -> EmptyObject {
+        return try await ActionsMethods.actionsSetCustomOidcSubClaimForRepo(config: config, owner: owner, repo: repo, useDefault: useDefault, includeClaimKeys: includeClaimKeys, useImmutableSubject: useImmutableSubject, requestOptions: requestOptions)
     }
 
-    /// Lists all organization secrets shared with a repository without revealing their encrypted values. Authenticated
-    /// users must have collaborator access to a repository to create, update, or read secrets. OAuth app tokens and
-    /// personal access tokens (classic) need the `repo` scope to use this endpoint.
-    func listRepoOrganizationSecrets(
-        owner: String,
-        repo: String,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsListRepoOrganizationSecretsResponse {
-        try await ActionsMethods.actionsListRepoOrganizationSecrets(
-            config: config,
-            owner: owner,
-            repo: repo,
-            perPage: perPage,
-            page: page,
-            requestOptions: requestOptions
-        )
+/// Lists all organization secrets shared with a repository without revealing their encrypted values. Authenticated users must have collaborator access to a repository to create, update, or read secrets. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func listRepoOrganizationSecrets(owner: String, repo: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> ActionsListRepoOrganizationSecretsResponse {
+        return try await ActionsMethods.actionsListRepoOrganizationSecrets(config: config, owner: owner, repo: repo, perPage: perPage, page: page, requestOptions: requestOptions)
     }
 
-    /// Lists all organization variables shared with a repository. Authenticated users must have collaborator access to
-    /// a repository to create, update, or read variables. OAuth app tokens and personal access tokens (classic) need
-    /// the `repo` scope to use this endpoint.
-    func listRepoOrganizationVariables(
-        owner: String,
-        repo: String,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsListRepoOrganizationVariablesResponse {
-        try await ActionsMethods.actionsListRepoOrganizationVariables(
-            config: config,
-            owner: owner,
-            repo: repo,
-            perPage: perPage,
-            page: page,
-            requestOptions: requestOptions
-        )
+/// Lists all organization variables shared with a repository. Authenticated users must have collaborator access to a repository to create, update, or read variables. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func listRepoOrganizationVariables(owner: String, repo: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> ActionsListRepoOrganizationVariablesResponse {
+        return try await ActionsMethods.actionsListRepoOrganizationVariables(config: config, owner: owner, repo: repo, perPage: perPage, page: page, requestOptions: requestOptions)
     }
 }
 
-public extension ActionsNamespace {
-    /// Gets the GitHub Actions permissions policy for a repository, including whether GitHub Actions is enabled and the
-    /// actions and reusable workflows allowed to run in the repository. OAuth tokens and personal access tokens
-    /// (classic) need the `repo` scope to use this endpoint.
-    func getGithubActionsPermissionsRepository(
-        owner: String,
-        repo: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsRepositoryPermissions {
-        try await ActionsMethods.actionsGetGithubActionsPermissionsRepository(
-            config: config,
-            owner: owner,
-            repo: repo,
-            requestOptions: requestOptions
-        )
+extension ActionsNamespace {
+/// Gets the GitHub Actions permissions policy for a repository, including whether GitHub Actions is enabled and the actions and reusable workflows allowed to run in the repository. OAuth tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func getGithubActionsPermissionsRepository(owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> ActionsRepositoryPermissions {
+        return try await ActionsMethods.actionsGetGithubActionsPermissionsRepository(config: config, owner: owner, repo: repo, requestOptions: requestOptions)
     }
 
-    /// Sets the GitHub Actions permissions policy for enabling GitHub Actions and allowed actions and reusable
-    /// workflows in the repository. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use
-    /// this endpoint.
-    func setGithubActionsPermissionsRepository(
-        owner: String,
-        repo: String,
-        enabled: ActionsEnabled,
-        allowedActions: AllowedActions? = nil,
-        shaPinningRequired: ShaPinningRequired? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await ActionsMethods.actionsSetGithubActionsPermissionsRepository(
-            config: config,
-            owner: owner,
-            repo: repo,
-            enabled: enabled,
-            allowedActions: allowedActions,
-            shaPinningRequired: shaPinningRequired,
-            requestOptions: requestOptions
-        )
+/// Sets the GitHub Actions permissions policy for enabling GitHub Actions and allowed actions and reusable workflows in the repository. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func setGithubActionsPermissionsRepository(owner: String, repo: String, enabled: ActionsEnabled, allowedActions: AllowedActions? = nil, shaPinningRequired: ShaPinningRequired? = nil, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await ActionsMethods.actionsSetGithubActionsPermissionsRepository(config: config, owner: owner, repo: repo, enabled: enabled, allowedActions: allowedActions, shaPinningRequired: shaPinningRequired, requestOptions: requestOptions)
     }
 
-    /// Gets the level of access that workflows outside of the repository have to actions and reusable workflows in the
-    /// repository. This endpoint only applies to private repositories. For more information, see "[Allowing access to
-    /// components in a private repository](https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#allowing-access-to-components-in-a-private-repository)."
-    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
-    func getWorkflowAccessToRepository(
-        owner: String,
-        repo: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsWorkflowAccessToRepository {
-        try await ActionsMethods.actionsGetWorkflowAccessToRepository(
-            config: config,
-            owner: owner,
-            repo: repo,
-            requestOptions: requestOptions
-        )
+/// Gets the level of access that workflows outside of the repository have to actions and reusable workflows in the repository. This endpoint only applies to private repositories. For more information, see "[Allowing access to components in a private repository](https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#allowing-access-to-components-in-a-private-repository)." OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func getWorkflowAccessToRepository(owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> ActionsWorkflowAccessToRepository {
+        return try await ActionsMethods.actionsGetWorkflowAccessToRepository(config: config, owner: owner, repo: repo, requestOptions: requestOptions)
     }
 
-    /// Sets the level of access that workflows outside of the repository have to actions and reusable workflows in the
-    /// repository. This endpoint only applies to private repositories. For more information, see "[Allowing access to
-    /// components in a private repository](https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#allowing-access-to-components-in-a-private-repository)".
-    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
-    func setWorkflowAccessToRepository(
-        owner: String,
-        repo: String,
-        accessLevel: ActionsWorkflowAccessToRepositoryAccessLevel,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await ActionsMethods.actionsSetWorkflowAccessToRepository(
-            config: config,
-            owner: owner,
-            repo: repo,
-            accessLevel: accessLevel,
-            requestOptions: requestOptions
-        )
+/// Sets the level of access that workflows outside of the repository have to actions and reusable workflows in the repository. This endpoint only applies to private repositories. For more information, see "[Allowing access to components in a private repository](https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#allowing-access-to-components-in-a-private-repository)". OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func setWorkflowAccessToRepository(owner: String, repo: String, accessLevel: ActionsWorkflowAccessToRepositoryAccessLevel, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await ActionsMethods.actionsSetWorkflowAccessToRepository(config: config, owner: owner, repo: repo, accessLevel: accessLevel, requestOptions: requestOptions)
     }
 
-    /// Gets retention settings for checks, workflow runs, commit statuses, artifacts, and logs for a repository. Checks
-    /// include check suites, check runs, and check annotations. These settings also apply to checks and commit statuses
-    /// created by third-party integrations, and are not limited to data created by GitHub Actions. OAuth app tokens and
-    /// personal access tokens (classic) need the `repo` scope to use this endpoint.
-    func getArtifactAndLogRetentionSettingsRepository(
-        owner: String,
-        repo: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsArtifactAndLogRetentionResponse {
-        try await ActionsMethods.actionsGetArtifactAndLogRetentionSettingsRepository(
-            config: config,
-            owner: owner,
-            repo: repo,
-            requestOptions: requestOptions
-        )
+/// Gets retention settings for checks, workflow runs, commit statuses, artifacts, and logs for a repository. Checks include check suites, check runs, and check annotations. These settings also apply to checks and commit statuses created by third-party integrations, and are not limited to data created by GitHub Actions. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func getArtifactAndLogRetentionSettingsRepository(owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> ActionsArtifactAndLogRetentionResponse {
+        return try await ActionsMethods.actionsGetArtifactAndLogRetentionSettingsRepository(config: config, owner: owner, repo: repo, requestOptions: requestOptions)
     }
 
-    /// Sets retention settings for checks, workflow runs, commit statuses, artifacts, and logs for a repository. Checks
-    /// include check suites, check runs, and check annotations. These settings also apply to checks and commit statuses
-    /// created by third-party integrations, and are not limited to data created by GitHub Actions. OAuth app tokens and
-    /// personal access tokens (classic) need the `repo` scope to use this endpoint.
-    func setArtifactAndLogRetentionSettingsRepository(
-        owner: String,
-        repo: String,
-        days: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await ActionsMethods.actionsSetArtifactAndLogRetentionSettingsRepository(
-            config: config,
-            owner: owner,
-            repo: repo,
-            days: days,
-            requestOptions: requestOptions
-        )
+/// Sets retention settings for checks, workflow runs, commit statuses, artifacts, and logs for a repository. Checks include check suites, check runs, and check annotations. These settings also apply to checks and commit statuses created by third-party integrations, and are not limited to data created by GitHub Actions. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func setArtifactAndLogRetentionSettingsRepository(owner: String, repo: String, days: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await ActionsMethods.actionsSetArtifactAndLogRetentionSettingsRepository(config: config, owner: owner, repo: repo, days: days, requestOptions: requestOptions)
     }
 
-    /// Gets the fork PR contributor approval policy for a repository. OAuth app tokens and personal access tokens
-    /// (classic) need the `repo` scope to use this endpoint.
-    func getForkPrContributorApprovalPermissionsRepository(
-        owner: String,
-        repo: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsForkPrContributorApproval {
-        try await ActionsMethods.actionsGetForkPrContributorApprovalPermissionsRepository(
-            config: config,
-            owner: owner,
-            repo: repo,
-            requestOptions: requestOptions
-        )
+/// Gets the fork PR contributor approval policy for a repository. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func getForkPrContributorApprovalPermissionsRepository(owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> ActionsForkPrContributorApproval {
+        return try await ActionsMethods.actionsGetForkPrContributorApprovalPermissionsRepository(config: config, owner: owner, repo: repo, requestOptions: requestOptions)
     }
 
-    /// Sets the fork PR contributor approval policy for a repository. OAuth app tokens and personal access tokens
-    /// (classic) need the `repo` scope to use this endpoint.
-    func setForkPrContributorApprovalPermissionsRepository(
-        owner: String,
-        repo: String,
-        approvalPolicy: ActionsForkPrContributorApprovalApprovalPolicy,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await ActionsMethods.actionsSetForkPrContributorApprovalPermissionsRepository(
-            config: config,
-            owner: owner,
-            repo: repo,
-            approvalPolicy: approvalPolicy,
-            requestOptions: requestOptions
-        )
+/// Sets the fork PR contributor approval policy for a repository. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func setForkPrContributorApprovalPermissionsRepository(owner: String, repo: String, approvalPolicy: ActionsForkPrContributorApprovalApprovalPolicy, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await ActionsMethods.actionsSetForkPrContributorApprovalPermissionsRepository(config: config, owner: owner, repo: repo, approvalPolicy: approvalPolicy, requestOptions: requestOptions)
     }
 }

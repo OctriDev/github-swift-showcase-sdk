@@ -6,11 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ActionsMethods {
-    /// Remove a custom label from a self-hosted runner configured in a repository. Returns the remaining labels from
-    /// the runner. This endpoint returns a `404 Not Found` status if the custom label is not present on the runner.
-    /// Authenticated users must have admin access to the repository to use this endpoint. OAuth app tokens and personal
-    /// access tokens (classic) need the `repo` scope to use this endpoint.
+extension ActionsMethods {
+    /// Remove a custom label from a self-hosted runner configured in a repository. Returns the remaining labels from the runner. This endpoint returns a `404 Not Found` status if the custom label is not present on the runner. Authenticated users must have admin access to the repository to use this endpoint. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -19,31 +16,7 @@ public extension ActionsMethods {
     ///   not case sensitive.
     /// - runnerId: Unique identifier of the self-hosted runner.
     /// - name: The name of a self-hosted runner's custom label.
-    static func actionsRemoveCustomLabelFromSelfHostedRunnerForRepo(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        runnerId: Int,
-        name: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsRunnerLabels {
-        try await (sdkRequest(
-            "DELETE",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/actions/runners/",
-                sdkEncodePathSegment(sdkWireString(runnerId)),
-                "/labels/",
-                sdkEncodePathSegment(sdkWireString(name)),
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "actionsRemoveCustomLabelFromSelfHostedRunnerForRepo",
-            options: requestOptions,
-            errors: ["404": BasicError.self, "422": ValidationErrorSimple.self]
-        )).data
+    public static func actionsRemoveCustomLabelFromSelfHostedRunnerForRepo(config: ClientConfig, owner: String, repo: String, runnerId: Int, name: String, requestOptions: RequestOptions? = nil) async throws -> ActionsRunnerLabels {
+        return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/actions/runners/", sdkEncodePathSegment(sdkWireString(runnerId)), "/labels/", sdkEncodePathSegment(sdkWireString(name))].joined(), config: config, decoder: .json, operationId: "actionsRemoveCustomLabelFromSelfHostedRunnerForRepo", options: requestOptions, errors: ["404": BasicError.self, "422": ValidationErrorSimple.self])).data
     }
 }
