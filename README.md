@@ -4,7 +4,7 @@
 
 GitHub's v3 REST API.
 
-> Package `Octridevgithub` · Version `1.1.4` · 1242 operations
+> Package `OctriDevGitHub` · Version `1.1.4` · 1242 operations
 
 ## Installation
 
@@ -18,7 +18,7 @@ The example calls `client.search.labels` (GET `/search/labels`) with example val
 
 ```swift
 import Foundation
-import Octridevgithub
+import OctriDevGitHub
 
 @main
 struct Example {
@@ -75,8 +75,8 @@ When the API declares a model for an error response, the SDK decodes the body in
 
 ## Project layout and API discovery
 
-- Operation implementations are grouped under `Sources/Octridevgithub/Methods/`.
-- 1068 component models are split by API domain under `Sources/Octridevgithub/Models/<Domain>Models.swift` or `Models/<Tag Path>/<TagPath>Models.swift` in the same Swift module.
+- Operation implementations are grouped under `Sources/OctriDevGitHub/Methods/`.
+- 1068 component models are split by API domain under `Sources/OctriDevGitHub/Models/<Domain>Models.swift` or `Models/<Tag Path>/<TagPath>Models.swift` in the same Swift module.
 - Component schemas can choose a nested model folder with `x-octri-sdk-tags: ["Billing/Invoices"]`; the first tag owns the model and `/` creates nesting.
 - [`sdk-manifest.json`](sdk-manifest.json) is the language-neutral public API index: operations, request/response modes, model properties, enum values, and generation settings.
 - Public barrel/module exports are the compatibility boundary. Import public model names from those exports; internal domain filenames may evolve without changing model names.
