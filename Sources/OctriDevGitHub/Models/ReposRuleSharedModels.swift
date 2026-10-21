@@ -3,7 +3,7 @@
 
 import Foundation
 
-// ReposRule domain models
+/// ReposRule domain models
 public indirect enum RuleSuiteRuleEvaluationsItemMetadata {
     case ruleSuitePullRequest(RuleSuitePullRequest)
     case ruleSuiteRequiredStatusChecks(RuleSuiteRequiredStatusChecks)
@@ -12,7 +12,6 @@ public indirect enum RuleSuiteRuleEvaluationsItemMetadata {
 }
 
 extension RuleSuiteRuleEvaluationsItemMetadata: Codable {
-
     private enum CodingKeys: String, CodingKey {
         case discriminator = "rule_type"
     }
@@ -20,20 +19,29 @@ extension RuleSuiteRuleEvaluationsItemMetadata: Codable {
     public init(from decoder: Decoder) throws {
         if let tagged = try? decoder.container(keyedBy: CodingKeys.self),
            let discriminator = try? tagged.decode(String.self, forKey: .discriminator) {
-            if let value = try Self.decodeGroup1(discriminator, from: decoder) { self = value; return }
+            if let value = try Self.decodeGroup1(discriminator, from: decoder) {
+                self = value; return
+            }
         }
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeUntaggedGroup1(from: container) { self = value; return }
+        if let value = Self.decodeUntaggedGroup1(from: container) {
+            self = value; return
+        }
         if let tagged = try? decoder.container(keyedBy: CodingKeys.self),
            let discriminator = try? tagged.decode(String.self, forKey: .discriminator) {
             self = try .unknown(tag: discriminator, raw: JSONValue(from: decoder))
             return
         }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for RuleSuiteRuleEvaluationsItemMetadata")
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for RuleSuiteRuleEvaluationsItemMetadata"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
         if case let .unknown(_, raw) = self {
             var container = encoder.singleValueContainer()
             try container.encode(raw)
@@ -44,17 +52,22 @@ extension RuleSuiteRuleEvaluationsItemMetadata: Codable {
 extension RuleSuiteRuleEvaluationsItemMetadata {
     static func decodeGroup1(_ discriminator: String, from decoder: Decoder) throws -> Self? {
         switch discriminator {
-        case "pull_request": return .ruleSuitePullRequest(try RuleSuitePullRequest(from: decoder))
-        case "required_status_checks": return .ruleSuiteRequiredStatusChecks(try RuleSuiteRequiredStatusChecks(from: decoder))
-        default: return nil
+        case "pull_request": try .ruleSuitePullRequest(RuleSuitePullRequest(from: decoder))
+        case "required_status_checks": try .ruleSuiteRequiredStatusChecks(RuleSuiteRequiredStatusChecks(from: decoder))
+        default: nil
         }
     }
 }
 
 extension RuleSuiteRuleEvaluationsItemMetadata {
     static func decodeUntaggedGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(RuleSuitePullRequest.self) { return .ruleSuitePullRequest(value) }
-        if let value = try? container.decode(RuleSuiteRequiredStatusChecks.self) { return .ruleSuiteRequiredStatusChecks(value) }
+        if let value = try? container.decode(RuleSuitePullRequest.self) {
+            return .ruleSuitePullRequest(value)
+        }
+        if let value = try? container
+            .decode(RuleSuiteRequiredStatusChecks.self) {
+            return .ruleSuiteRequiredStatusChecks(value)
+        }
         return nil
     }
 }
@@ -112,34 +125,46 @@ public struct RuleSuitesItem: Codable {
     }
 
     init() {
-        (self.id, self.actorId, self.actorName, self.beforeSha, self.afterSha) = (nil, nil, nil, nil, nil)
-        (self.ref, self.repositoryId, self.repositoryName, self.pushedAt, self.result) = (nil, nil, nil, nil, nil)
-        self.evaluationResult = nil
+        (id, actorId, actorName, beforeSha, afterSha) = (nil, nil, nil, nil, nil)
+        (ref, repositoryId, repositoryName, pushedAt, result) = (nil, nil, nil, nil, nil)
+        evaluationResult = nil
     }
 }
 
-extension RuleSuitesItem {
-    public init(from decoder: Decoder) throws {
+public extension RuleSuitesItem {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeIfPresent(.id)
-        self.actorId = try container.sdkDecodeIfPresent(.actorId)
-        self.actorName = try container.sdkDecodeIfPresent(.actorName)
-        self.beforeSha = try container.sdkDecodeIfPresent(.beforeSha)
-        self.afterSha = try container.sdkDecodeIfPresent(.afterSha)
-        self.ref = try container.sdkDecodeIfPresent(.ref)
-        self.repositoryId = try container.sdkDecodeIfPresent(.repositoryId)
-        self.repositoryName = try container.sdkDecodeIfPresent(.repositoryName)
-        self.pushedAt = try container.sdkDecodeIfPresent(.pushedAt)
-        self.result = try container.sdkDecodeIfPresent(.result)
-        self.evaluationResult = try container.sdkDecodeIfPresent(.evaluationResult)
-        if let value = self.pushedAt {
+        id = try container.sdkDecodeIfPresent(.id)
+        actorId = try container.sdkDecodeIfPresent(.actorId)
+        actorName = try container.sdkDecodeIfPresent(.actorName)
+        beforeSha = try container.sdkDecodeIfPresent(.beforeSha)
+        afterSha = try container.sdkDecodeIfPresent(.afterSha)
+        ref = try container.sdkDecodeIfPresent(.ref)
+        repositoryId = try container.sdkDecodeIfPresent(.repositoryId)
+        repositoryName = try container.sdkDecodeIfPresent(.repositoryName)
+        pushedAt = try container.sdkDecodeIfPresent(.pushedAt)
+        result = try container.sdkDecodeIfPresent(.result)
+        evaluationResult = try container.sdkDecodeIfPresent(.evaluationResult)
+        if let value = pushedAt {
             try sdkValidateDateTime("pushed_at", sdkWireString(value))
         }
     }
 }
 
-extension RuleSuitesItem {
-    public init(id: Int? = nil, actorId: Int? = nil, actorName: String? = nil, beforeSha: String? = nil, afterSha: String? = nil, ref: String? = nil, repositoryId: Int? = nil, repositoryName: String? = nil, pushedAt: Date? = nil, result: RuleSuitesItemResult? = nil, evaluationResult: RuleSuitesItemEvaluationResult? = nil) throws {
+public extension RuleSuitesItem {
+    init(
+        id: Int? = nil,
+        actorId: Int? = nil,
+        actorName: String? = nil,
+        beforeSha: String? = nil,
+        afterSha: String? = nil,
+        ref: String? = nil,
+        repositoryId: Int? = nil,
+        repositoryName: String? = nil,
+        pushedAt: Date? = nil,
+        result: RuleSuitesItemResult? = nil,
+        evaluationResult: RuleSuitesItemEvaluationResult? = nil
+    ) throws {
         self.init()
         (self.id, self.actorId) = (id, actorId)
         (self.actorName, self.beforeSha) = (actorName, beforeSha)
@@ -178,25 +203,32 @@ public struct RuleSuiteRuleEvaluationsItem: Codable {
     }
 
     init() {
-        (self.ruleSource, self.enforcement, self.result, self.ruleType, self.metadata) = (nil, nil, nil, nil, nil)
-        self.details = nil
+        (ruleSource, enforcement, result, ruleType, metadata) = (nil, nil, nil, nil, nil)
+        details = nil
     }
 }
 
-extension RuleSuiteRuleEvaluationsItem {
-    public init(from decoder: Decoder) throws {
+public extension RuleSuiteRuleEvaluationsItem {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.ruleSource = try container.sdkDecodeIfPresent(.ruleSource)
-        self.enforcement = try container.sdkDecodeIfPresent(.enforcement)
-        self.result = try container.sdkDecodeIfPresent(.result)
-        self.ruleType = try container.sdkDecodeIfPresent(.ruleType)
-        self.metadata = try container.sdkDecodeIfPresent(.metadata)
-        self.details = try container.sdkDecodeIfPresent(.details)
+        ruleSource = try container.sdkDecodeIfPresent(.ruleSource)
+        enforcement = try container.sdkDecodeIfPresent(.enforcement)
+        result = try container.sdkDecodeIfPresent(.result)
+        ruleType = try container.sdkDecodeIfPresent(.ruleType)
+        metadata = try container.sdkDecodeIfPresent(.metadata)
+        details = try container.sdkDecodeIfPresent(.details)
     }
 }
 
-extension RuleSuiteRuleEvaluationsItem {
-    public init(ruleSource: RuleSuiteRuleEvaluationsItemRuleSource? = nil, enforcement: RuleSuiteRuleEvaluationsItemEnforcement? = nil, result: RuleSuiteRuleEvaluationsItemResult? = nil, ruleType: String? = nil, metadata: RuleSuiteRuleEvaluationsItemMetadata? = nil, details: String? = nil) {
+public extension RuleSuiteRuleEvaluationsItem {
+    init(
+        ruleSource: RuleSuiteRuleEvaluationsItemRuleSource? = nil,
+        enforcement: RuleSuiteRuleEvaluationsItemEnforcement? = nil,
+        result: RuleSuiteRuleEvaluationsItemResult? = nil,
+        ruleType: String? = nil,
+        metadata: RuleSuiteRuleEvaluationsItemMetadata? = nil,
+        details: String? = nil
+    ) {
         self.init()
         (self.ruleSource, self.enforcement) = (ruleSource, enforcement)
         (self.result, self.ruleType) = (result, ruleType)
@@ -217,23 +249,23 @@ public struct RuleSuitePullRequest: Codable {
     }
 
     init() {
-        (self.pullRequest, self.ruleType) = (nil, nil)
+        (pullRequest, ruleType) = (nil, nil)
     }
 }
 
-extension RuleSuitePullRequest {
-    public init(from decoder: Decoder) throws {
+public extension RuleSuitePullRequest {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.pullRequest = try container.sdkDecodeIfPresent(.pullRequest)
-        self.ruleType = try container.sdkDecodeIfPresent(.ruleType)
-        if let value = self.ruleType {
+        pullRequest = try container.sdkDecodeIfPresent(.pullRequest)
+        ruleType = try container.sdkDecodeIfPresent(.ruleType)
+        if let value = ruleType {
             try sdkValidateRawEnum("rule_type", value, RuleSuitePullRequestRuleType.allCases.map(\.rawValue))
         }
     }
 }
 
-extension RuleSuitePullRequest {
-    public init(pullRequest: RuleSuitePullRequestPullRequest? = nil, ruleType: RuleSuitePullRequestRuleType? = nil) throws {
+public extension RuleSuitePullRequest {
+    init(pullRequest: RuleSuitePullRequestPullRequest? = nil, ruleType: RuleSuitePullRequestRuleType? = nil) throws {
         self.init()
         (self.pullRequest, self.ruleType) = (pullRequest, ruleType)
         if let value = self.ruleType {
@@ -258,21 +290,21 @@ public struct RuleSuitePullRequestPullRequestReviewsItemUser: Codable {
     }
 
     init() {
-        (self.id, self.login, self.type) = (nil, nil, nil)
+        (id, login, type) = (nil, nil, nil)
     }
 }
 
-extension RuleSuitePullRequestPullRequestReviewsItemUser {
-    public init(from decoder: Decoder) throws {
+public extension RuleSuitePullRequestPullRequestReviewsItemUser {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeIfPresent(.id)
-        self.login = try container.sdkDecodeIfPresent(.login)
-        self.type = try container.sdkDecodeIfPresent(.type)
+        id = try container.sdkDecodeIfPresent(.id)
+        login = try container.sdkDecodeIfPresent(.login)
+        type = try container.sdkDecodeIfPresent(.type)
     }
 }
 
-extension RuleSuitePullRequestPullRequestReviewsItemUser {
-    public init(id: Int? = nil, login: String? = nil, type: String? = nil) {
+public extension RuleSuitePullRequestPullRequestReviewsItemUser {
+    init(id: Int? = nil, login: String? = nil, type: String? = nil) {
         self.init()
         (self.id, self.login) = (id, login)
         self.type = type
@@ -301,23 +333,29 @@ public struct RuleSuiteRequiredStatusChecksChecksItem: Codable {
     }
 
     init() {
-        (self.id, self.context, self.state, self.type, self.app) = (nil, nil, nil, nil, nil)
+        (id, context, state, type, app) = (nil, nil, nil, nil, nil)
     }
 }
 
-extension RuleSuiteRequiredStatusChecksChecksItem {
-    public init(from decoder: Decoder) throws {
+public extension RuleSuiteRequiredStatusChecksChecksItem {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeIfPresent(.id)
-        self.context = try container.sdkDecodeIfPresent(.context)
-        self.state = try container.sdkDecodeIfPresent(.state)
-        self.type = try container.sdkDecodeIfPresent(.type)
-        self.app = try container.sdkDecodeIfPresent(.app)
+        id = try container.sdkDecodeIfPresent(.id)
+        context = try container.sdkDecodeIfPresent(.context)
+        state = try container.sdkDecodeIfPresent(.state)
+        type = try container.sdkDecodeIfPresent(.type)
+        app = try container.sdkDecodeIfPresent(.app)
     }
 }
 
-extension RuleSuiteRequiredStatusChecksChecksItem {
-    public init(id: Int? = nil, context: String? = nil, state: String? = nil, type: String? = nil, app: RuleSuiteRequiredStatusChecksChecksItemApp? = nil) {
+public extension RuleSuiteRequiredStatusChecksChecksItem {
+    init(
+        id: Int? = nil,
+        context: String? = nil,
+        state: String? = nil,
+        type: String? = nil,
+        app: RuleSuiteRequiredStatusChecksChecksItemApp? = nil
+    ) {
         self.init()
         (self.id, self.context) = (id, context)
         (self.state, self.type) = (state, type)
@@ -341,21 +379,21 @@ public struct RuleSuiteRequiredStatusChecksChecksItemApp: Codable {
     }
 
     init() {
-        (self.id, self.slug, self.name) = (nil, nil, nil)
+        (id, slug, name) = (nil, nil, nil)
     }
 }
 
-extension RuleSuiteRequiredStatusChecksChecksItemApp {
-    public init(from decoder: Decoder) throws {
+public extension RuleSuiteRequiredStatusChecksChecksItemApp {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeIfPresent(.id)
-        self.slug = try container.sdkDecodeIfPresent(.slug)
-        self.name = try container.sdkDecodeIfPresent(.name)
+        id = try container.sdkDecodeIfPresent(.id)
+        slug = try container.sdkDecodeIfPresent(.slug)
+        name = try container.sdkDecodeIfPresent(.name)
     }
 }
 
-extension RuleSuiteRequiredStatusChecksChecksItemApp {
-    public init(id: Int? = nil, slug: String? = nil, name: String? = nil) {
+public extension RuleSuiteRequiredStatusChecksChecksItemApp {
+    init(id: Int? = nil, slug: String? = nil, name: String? = nil) {
         self.init()
         (self.id, self.slug) = (id, slug)
         self.name = name
@@ -408,35 +446,48 @@ public struct RuleSuite: Codable {
     }
 
     init() {
-        (self.id, self.actorId, self.actorName, self.beforeSha, self.afterSha) = (nil, nil, nil, nil, nil)
-        (self.ref, self.repositoryId, self.repositoryName, self.pushedAt, self.result) = (nil, nil, nil, nil, nil)
-        (self.evaluationResult, self.ruleEvaluations) = (nil, nil)
+        (id, actorId, actorName, beforeSha, afterSha) = (nil, nil, nil, nil, nil)
+        (ref, repositoryId, repositoryName, pushedAt, result) = (nil, nil, nil, nil, nil)
+        (evaluationResult, ruleEvaluations) = (nil, nil)
     }
 }
 
-extension RuleSuite {
-    public init(from decoder: Decoder) throws {
+public extension RuleSuite {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeIfPresent(.id)
-        self.actorId = try container.sdkDecodeIfPresent(.actorId)
-        self.actorName = try container.sdkDecodeIfPresent(.actorName)
-        self.beforeSha = try container.sdkDecodeIfPresent(.beforeSha)
-        self.afterSha = try container.sdkDecodeIfPresent(.afterSha)
-        self.ref = try container.sdkDecodeIfPresent(.ref)
-        self.repositoryId = try container.sdkDecodeIfPresent(.repositoryId)
-        self.repositoryName = try container.sdkDecodeIfPresent(.repositoryName)
-        self.pushedAt = try container.sdkDecodeIfPresent(.pushedAt)
-        self.result = try container.sdkDecodeIfPresent(.result)
-        self.evaluationResult = try container.sdkDecodeIfPresent(.evaluationResult)
-        self.ruleEvaluations = try container.sdkDecodeIfPresent(.ruleEvaluations)
-        if let value = self.pushedAt {
+        id = try container.sdkDecodeIfPresent(.id)
+        actorId = try container.sdkDecodeIfPresent(.actorId)
+        actorName = try container.sdkDecodeIfPresent(.actorName)
+        beforeSha = try container.sdkDecodeIfPresent(.beforeSha)
+        afterSha = try container.sdkDecodeIfPresent(.afterSha)
+        ref = try container.sdkDecodeIfPresent(.ref)
+        repositoryId = try container.sdkDecodeIfPresent(.repositoryId)
+        repositoryName = try container.sdkDecodeIfPresent(.repositoryName)
+        pushedAt = try container.sdkDecodeIfPresent(.pushedAt)
+        result = try container.sdkDecodeIfPresent(.result)
+        evaluationResult = try container.sdkDecodeIfPresent(.evaluationResult)
+        ruleEvaluations = try container.sdkDecodeIfPresent(.ruleEvaluations)
+        if let value = pushedAt {
             try sdkValidateDateTime("pushed_at", sdkWireString(value))
         }
     }
 }
 
-extension RuleSuite {
-    public init(id: Int? = nil, actorId: Int? = nil, actorName: String? = nil, beforeSha: String? = nil, afterSha: String? = nil, ref: String? = nil, repositoryId: Int? = nil, repositoryName: String? = nil, pushedAt: Date? = nil, result: RuleSuiteResult? = nil, evaluationResult: RuleSuiteEvaluationResult? = nil, ruleEvaluations: [RuleSuiteRuleEvaluationsItem]? = nil) throws {
+public extension RuleSuite {
+    init(
+        id: Int? = nil,
+        actorId: Int? = nil,
+        actorName: String? = nil,
+        beforeSha: String? = nil,
+        afterSha: String? = nil,
+        ref: String? = nil,
+        repositoryId: Int? = nil,
+        repositoryName: String? = nil,
+        pushedAt: Date? = nil,
+        result: RuleSuiteResult? = nil,
+        evaluationResult: RuleSuiteEvaluationResult? = nil,
+        ruleEvaluations: [RuleSuiteRuleEvaluationsItem]? = nil
+    ) throws {
         self.init()
         (self.id, self.actorId) = (id, actorId)
         (self.actorName, self.beforeSha) = (actorName, beforeSha)
@@ -463,23 +514,26 @@ public struct RuleSuiteRequiredStatusChecks: Codable {
     }
 
     init() {
-        (self.checks, self.ruleType) = (nil, nil)
+        (checks, ruleType) = (nil, nil)
     }
 }
 
-extension RuleSuiteRequiredStatusChecks {
-    public init(from decoder: Decoder) throws {
+public extension RuleSuiteRequiredStatusChecks {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.checks = try container.sdkDecodeIfPresent(.checks)
-        self.ruleType = try container.sdkDecodeIfPresent(.ruleType)
-        if let value = self.ruleType {
+        checks = try container.sdkDecodeIfPresent(.checks)
+        ruleType = try container.sdkDecodeIfPresent(.ruleType)
+        if let value = ruleType {
             try sdkValidateRawEnum("rule_type", value, RuleSuiteRequiredStatusChecksRuleType.allCases.map(\.rawValue))
         }
     }
 }
 
-extension RuleSuiteRequiredStatusChecks {
-    public init(checks: [RuleSuiteRequiredStatusChecksChecksItem]? = nil, ruleType: RuleSuiteRequiredStatusChecksRuleType? = nil) throws {
+public extension RuleSuiteRequiredStatusChecks {
+    init(
+        checks: [RuleSuiteRequiredStatusChecksChecksItem]? = nil,
+        ruleType: RuleSuiteRequiredStatusChecksRuleType? = nil
+    ) throws {
         self.init()
         (self.checks, self.ruleType) = (checks, ruleType)
         if let value = self.ruleType {
@@ -504,21 +558,21 @@ public struct RuleSuitePullRequestPullRequestProofOfPresenceVerifier: Codable {
     }
 
     init() {
-        (self.id, self.login, self.type) = (nil, nil, nil)
+        (id, login, type) = (nil, nil, nil)
     }
 }
 
-extension RuleSuitePullRequestPullRequestProofOfPresenceVerifier {
-    public init(from decoder: Decoder) throws {
+public extension RuleSuitePullRequestPullRequestProofOfPresenceVerifier {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeIfPresent(.id)
-        self.login = try container.sdkDecodeIfPresent(.login)
-        self.type = try container.sdkDecodeIfPresent(.type)
+        id = try container.sdkDecodeIfPresent(.id)
+        login = try container.sdkDecodeIfPresent(.login)
+        type = try container.sdkDecodeIfPresent(.type)
     }
 }
 
-extension RuleSuitePullRequestPullRequestProofOfPresenceVerifier {
-    public init(id: Int? = nil, login: String? = nil, type: String? = nil) {
+public extension RuleSuitePullRequestPullRequestProofOfPresenceVerifier {
+    init(id: Int? = nil, login: String? = nil, type: String? = nil) {
         self.init()
         (self.id, self.login) = (id, login)
         self.type = type
@@ -541,21 +595,21 @@ public struct RuleSuitePullRequestPullRequestReviewsItem: Codable {
     }
 
     init() {
-        (self.id, self.user, self.state) = (nil, nil, nil)
+        (id, user, state) = (nil, nil, nil)
     }
 }
 
-extension RuleSuitePullRequestPullRequestReviewsItem {
-    public init(from decoder: Decoder) throws {
+public extension RuleSuitePullRequestPullRequestReviewsItem {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeIfPresent(.id)
-        self.user = try container.sdkDecodeIfPresent(.user)
-        self.state = try container.sdkDecodeIfPresent(.state)
+        id = try container.sdkDecodeIfPresent(.id)
+        user = try container.sdkDecodeIfPresent(.user)
+        state = try container.sdkDecodeIfPresent(.state)
     }
 }
 
-extension RuleSuitePullRequestPullRequestReviewsItem {
-    public init(id: Int? = nil, user: RuleSuitePullRequestPullRequestReviewsItemUser? = nil, state: String? = nil) {
+public extension RuleSuitePullRequestPullRequestReviewsItem {
+    init(id: Int? = nil, user: RuleSuitePullRequestPullRequestReviewsItemUser? = nil, state: String? = nil) {
         self.init()
         (self.id, self.user) = (id, user)
         self.state = state

@@ -6,16 +6,29 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension OrgsMethods {
-    /// Gets the immutable releases policy for repositories in an organization. OAuth tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+public extension OrgsMethods {
+    /// Gets the immutable releases policy for repositories in an organization. OAuth tokens and personal access tokens
+    /// (classic) need the `admin:org` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
-    public static func orgsGetImmutableReleasesSettings(config: ClientConfig, org: String, requestOptions: RequestOptions? = nil) async throws -> ImmutableReleasesOrganizationSettings {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/settings/immutable-releases"].joined(), config: config, decoder: .json, operationId: "orgsGetImmutableReleasesSettings", options: requestOptions)).data
+    static func orgsGetImmutableReleasesSettings(
+        config: ClientConfig,
+        org: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ImmutableReleasesOrganizationSettings {
+        try await (sdkRequest(
+            "GET",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/settings/immutable-releases"].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "orgsGetImmutableReleasesSettings",
+            options: requestOptions
+        )).data
     }
 
-    /// Sets the immutable releases policy for repositories in an organization. OAuth tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    /// Sets the immutable releases policy for repositories in an organization. OAuth tokens and personal access tokens
+    /// (classic) need the `admin:org` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
@@ -31,9 +44,26 @@ extension OrgsMethods {
     ///   repository for immutable releases in an
     ///   organization](https://docs.github.com/rest/orgs/orgs#disable-a-selected-repo
     ///   sitory-for-immutable-releases-in-an-organization) endpoints.
-    public static func orgsSetImmutableReleasesSettings(config: ClientConfig, org: String, enforcedRepositories: OrgsSetImmutableReleasesSettingsRequestBodyEnforcedRepositories, selectedRepositoryIds: [Int]? = nil, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        let requestBody = OrgsSetImmutableReleasesSettingsRequestBody(enforcedRepositories: enforcedRepositories, selectedRepositoryIds: selectedRepositoryIds)
+    static func orgsSetImmutableReleasesSettings(
+        config: ClientConfig,
+        org: String,
+        enforcedRepositories: OrgsSetImmutableReleasesSettingsRequestBodyEnforcedRepositories,
+        selectedRepositoryIds: [Int]? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        let requestBody = OrgsSetImmutableReleasesSettingsRequestBody(
+            enforcedRepositories: enforcedRepositories,
+            selectedRepositoryIds: selectedRepositoryIds
+        )
 
-        return try (await sdkRequest("PUT", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/settings/immutable-releases"].joined(), config: config, body: requestBody, decoder: .empty, operationId: "orgsSetImmutableReleasesSettings", options: requestOptions)).data
+        return try await (sdkRequest(
+            "PUT",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/settings/immutable-releases"].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .empty,
+            operationId: "orgsSetImmutableReleasesSettings",
+            options: requestOptions
+        )).data
     }
 }

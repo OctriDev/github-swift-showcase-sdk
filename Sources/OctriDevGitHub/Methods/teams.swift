@@ -8,7 +8,7 @@ import Foundation
 #endif
 public enum TeamsMethods {}
 
-extension TeamsMethods {
+public extension TeamsMethods {
     /// Lists all teams in an organization that are visible to the authenticated user.
     ///
     /// - Parameters:
@@ -25,11 +25,27 @@ extension TeamsMethods {
     ///   "[What kind of team should I
     ///   use?](https://docs.github.com/enterprise-cloud@latest/admin/concepts/enterpr
     ///   ise-fundamentals/teams-in-an-enterprise#what-kind-of-team-should-i-use)"
-    public static func teamsList(config: ClientConfig, org: String, perPage: Int? = nil, page: Int? = nil, teamType: TeamsListParameter? = nil, requestOptions: RequestOptions? = nil) async throws -> [Team] {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/teams"].joined(), config: config, query: [
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-            SdkQueryParameter("team_type", value: teamType),
-        ], decoder: .json, operationId: "teamsList", options: requestOptions, errors: ["403": BasicError.self])).data
+    static func teamsList(
+        config: ClientConfig,
+        org: String,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        teamType: TeamsListParameter? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [Team] {
+        try await (sdkRequest(
+            "GET",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/teams"].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+                SdkQueryParameter("team_type", value: teamType),
+            ],
+            decoder: .json,
+            operationId: "teamsList",
+            options: requestOptions,
+            errors: ["403": BasicError.self]
+        )).data
     }
 }

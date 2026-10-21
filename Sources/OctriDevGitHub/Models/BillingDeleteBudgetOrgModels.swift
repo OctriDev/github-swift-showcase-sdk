@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Billing domain models
+/// Billing domain models
 /// Typed representation of the `DeleteBudget` API schema.
 public struct DeleteBudget: Codable {
     /// A message indicating the result of the deletion operation
@@ -16,25 +16,35 @@ public struct DeleteBudget: Codable {
         case id
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension DeleteBudget {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.message) else {
-            throw SdkValidationError(field: "message", code: "required", message: "Validation failed for 'message': value is required")
-        }
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        self.message = try container.sdkDecodeRequired(.message)
-        self.id = try container.sdkDecodeRequired(.id)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension DeleteBudget {
-    public init(message: String, id: String) {
+public extension DeleteBudget {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.message) else {
+            throw SdkValidationError(
+                field: "message",
+                code: "required",
+                message: "Validation failed for 'message': value is required"
+            )
+        }
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        message = try container.sdkDecodeRequired(.message)
+        id = try container.sdkDecodeRequired(.id)
+    }
+}
+
+public extension DeleteBudget {
+    init(message: String, id: String) {
         (self.message, self.id) = (message, id)
     }
 }

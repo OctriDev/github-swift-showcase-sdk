@@ -6,26 +6,65 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ReposMethods {
-    /// Returns a weekly aggregate of the number of additions and deletions pushed to a repository. > [!NOTE] > This endpoint can only be used for repositories with fewer than 10,000 commits. If the repository contains 10,000 or more commits, a 422 status code will be returned.
+public extension ReposMethods {
+    /// Returns a weekly aggregate of the number of additions and deletions pushed to a repository. > [!NOTE] > This
+    /// endpoint can only be used for repositories with fewer than 10,000 commits. If the repository contains 10,000 or
+    /// more commits, a 422 status code will be returned.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    public static func reposGetCodeFrequencyStats(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> [CodeFrequencyStat] {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/stats/code_frequency"].joined(), config: config, decoder: .json, operationId: "reposGetCodeFrequencyStats", options: requestOptions)).data
+    static func reposGetCodeFrequencyStats(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [CodeFrequencyStat] {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/stats/code_frequency",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "reposGetCodeFrequencyStats",
+            options: requestOptions
+        )).data
     }
 
-    /// Returns the last year of commit activity grouped by week. The `days` array is a group of commits per day, starting on `Sunday`.
+    /// Returns the last year of commit activity grouped by week. The `days` array is a group of commits per day,
+    /// starting on `Sunday`.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    public static func reposGetCommitActivityStats(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> [CommitActivity] {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/stats/commit_activity"].joined(), config: config, decoder: .json, operationId: "reposGetCommitActivityStats", options: requestOptions)).data
+    static func reposGetCommitActivityStats(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [CommitActivity] {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/stats/commit_activity",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "reposGetCommitActivityStats",
+            options: requestOptions
+        )).data
     }
 }

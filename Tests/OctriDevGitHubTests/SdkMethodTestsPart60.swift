@@ -6,7 +6,8 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testPrivateRegistriesDeleteOrgPrivateRegistryPrivateRegistriesDelX25d7e2c927ReachesMockAndDecodesResponse() async throws {
+    func testPrivateRegistriesDeleteOrgPrivateRegistryPrivateRegistriesDelX25d7e2c927ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
             return
         }
@@ -17,9 +18,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.privateRegistries.deleteOrgPrivateRegistry(
-            org: decoded("\"org\""),
-            secretName: decoded("\"Example Name\"")
-        )
+                org: decoded("\"org\""),
+                secretName: decoded("\"Example Name\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -35,7 +36,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testPrivateRegistriesGetOrgPrivateRegistryPrivateRegistriesGetOrgX28d9b36725ReachesMockAndDecodesResponse() async throws {
+    func testPrivateRegistriesGetOrgPrivateRegistryPrivateRegistriesGetOrgX28d9b36725ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -54,7 +56,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testPrivateRegistriesGetOrgPrivateRegistryPrivateRegistriesGetOrgX0e37048066ReachesMockAndDecodesResponse() async throws {
+    func testPrivateRegistriesGetOrgPrivateRegistryPrivateRegistriesGetOrgX0e37048066ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -65,9 +68,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.privateRegistries.getOrgPrivateRegistry(
-            org: decoded("\"org\""),
-            secretName: decoded("\"Example Name\"")
-        )
+                org: decoded("\"org\""),
+                secretName: decoded("\"Example Name\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -83,7 +86,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testPrivateRegistriesGetOrgPublicKeyPrivateRegistriesGetOrgPublicKeyReachesMockAndDecodesResponse() async throws {
+    func testPrivateRegistriesGetOrgPublicKeyPrivateRegistriesGetOrgPublicKeyReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -101,7 +105,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testPrivateRegistriesGetOrgPublicKeyPrivateRegistriesGetOrgPublicKey404ReachesMockAndDecodesResponse() async throws {
+    func testPrivateRegistriesGetOrgPublicKeyPrivateRegistriesGetOrgPublicKey404ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -112,8 +117,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.privateRegistries.getOrgPublicKey(
-            org: decoded("\"org\"")
-        )
+                org: decoded("\"org\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -129,7 +134,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testPrivateRegistriesListOrgPrivateRegistriesPrivateRegistriesLisX797d49a037ReachesMockAndDecodesResponse() async throws {
+    func testPrivateRegistriesListOrgPrivateRegistriesPrivateRegistriesLisX797d49a037ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -149,7 +155,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testPrivateRegistriesListOrgPrivateRegistriesPrivateRegistriesLisXc6ea1fb1baReachesMockAndDecodesResponse() async throws {
+    func testPrivateRegistriesListOrgPrivateRegistriesPrivateRegistriesLisXc6ea1fb1baReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
             return
         }
@@ -160,10 +167,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.privateRegistries.listOrgPrivateRegistries(
-            org: decoded("\"org\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                org: decoded("\"org\""),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -179,12 +186,16 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testPrivateRegistriesUpdateOrgPrivateRegistryPrivateRegistriesUpdXb694917a13ReachesMockAndDecodesResponse() async throws {
+    func testPrivateRegistriesUpdateOrgPrivateRegistryPrivateRegistriesUpdXb694917a13ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        var options = try PrivateRegistriesMethods.PrivateRegistriesUpdateOrgPrivateRegistryOptions(org: decoded("\"org\""), secretName: decoded("\"Example Name\""))
+        var options = try PrivateRegistriesMethods.PrivateRegistriesUpdateOrgPrivateRegistryOptions(
+            org: decoded("\"org\""),
+            secretName: decoded("\"Example Name\"")
+        )
         options.registryType = try decoded("null")
         options.url = try decoded("null")
         options.username = try decoded("\"monalisa\"")
@@ -215,12 +226,16 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testPrivateRegistriesUpdateOrgPrivateRegistryPrivateRegistriesUpdXfc757f048aReachesMockAndDecodesResponse() async throws {
+    func testPrivateRegistriesUpdateOrgPrivateRegistryPrivateRegistriesUpdXfc757f048aReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
         _ = client
-        var options = try PrivateRegistriesMethods.PrivateRegistriesUpdateOrgPrivateRegistryOptions(org: decoded("\"org\""), secretName: decoded("\"Example Name\""))
+        var options = try PrivateRegistriesMethods.PrivateRegistriesUpdateOrgPrivateRegistryOptions(
+            org: decoded("\"org\""),
+            secretName: decoded("\"Example Name\"")
+        )
         options.registryType = try decoded("null")
         options.url = try decoded("null")
         options.username = try decoded("\"monalisa\"")
@@ -251,8 +266,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.privateRegistries.updateOrgPrivateRegistry(
-            options: options
-        )
+                options: options
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -299,10 +314,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.projects.addFieldForOrg(
-            projectNumber: decoded("1"),
-            org: decoded("\"org\""),
-            body: decoded("{\"name\":\"Team notes\",\"data_type\":\"text\"}")
-        )
+                projectNumber: decoded("1"),
+                org: decoded("\"org\""),
+                body: decoded("{\"name\":\"Team notes\",\"data_type\":\"text\"}")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -349,10 +364,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.projects.addFieldForUser(
-            username: decoded("\"Example Name\""),
-            projectNumber: decoded("1"),
-            body: decoded("{\"name\":\"Team notes\",\"data_type\":\"text\"}")
-        )
+                username: decoded("\"Example Name\""),
+                projectNumber: decoded("1"),
+                body: decoded("{\"name\":\"Team notes\",\"data_type\":\"text\"}")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -375,14 +390,14 @@ extension SdkMethodTests {
         _ = client
         do {
             _ = try await client.projects.addItemForOrg(
-            org: decoded("\"org\""),
-            projectNumber: decoded("1"),
-            type: decoded("\"Issue\""),
-            id: decoded("3"),
-            owner: decoded("null"),
-            repo: decoded("null"),
-            number: decoded("null")
-        )
+                org: decoded("\"org\""),
+                projectNumber: decoded("1"),
+                type: decoded("\"Issue\""),
+                id: decoded("3"),
+                owner: decoded("null"),
+                repo: decoded("null"),
+                number: decoded("null")
+            )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -402,14 +417,14 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.projects.addItemForOrg(
-            org: decoded("\"org\""),
-            projectNumber: decoded("1"),
-            type: decoded("\"Issue\""),
-            id: decoded("3"),
-            owner: decoded("null"),
-            repo: decoded("null"),
-            number: decoded("null")
-        )
+                org: decoded("\"org\""),
+                projectNumber: decoded("1"),
+                type: decoded("\"Issue\""),
+                id: decoded("3"),
+                owner: decoded("null"),
+                repo: decoded("null"),
+                number: decoded("null")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -432,14 +447,14 @@ extension SdkMethodTests {
         _ = client
         do {
             _ = try await client.projects.addItemForUser(
-            username: decoded("\"Example Name\""),
-            projectNumber: decoded("1"),
-            type: decoded("\"Issue\""),
-            id: decoded("3"),
-            owner: decoded("null"),
-            repo: decoded("null"),
-            number: decoded("null")
-        )
+                username: decoded("\"Example Name\""),
+                projectNumber: decoded("1"),
+                type: decoded("\"Issue\""),
+                id: decoded("3"),
+                owner: decoded("null"),
+                repo: decoded("null"),
+                number: decoded("null")
+            )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -459,14 +474,14 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.projects.addItemForUser(
-            username: decoded("\"Example Name\""),
-            projectNumber: decoded("1"),
-            type: decoded("\"Issue\""),
-            id: decoded("3"),
-            owner: decoded("null"),
-            repo: decoded("null"),
-            number: decoded("null")
-        )
+                username: decoded("\"Example Name\""),
+                projectNumber: decoded("1"),
+                type: decoded("\"Issue\""),
+                id: decoded("3"),
+                owner: decoded("null"),
+                repo: decoded("null"),
+                number: decoded("null")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -482,7 +497,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testProjectsCreateDraftItemForAuthenticatedUserProjectsCreateDrafXa2ca47ecd5ReachesMockAndDecodesResponse() async throws {
+    func testProjectsCreateDraftItemForAuthenticatedUserProjectsCreateDrafXa2ca47ecd5ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -503,7 +519,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testProjectsCreateDraftItemForAuthenticatedUserProjectsCreateDrafX3ca17a9cabReachesMockAndDecodesResponse() async throws {
+    func testProjectsCreateDraftItemForAuthenticatedUserProjectsCreateDrafX3ca17a9cabReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -514,11 +531,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.projects.createDraftItemForAuthenticatedUser(
-            userId: decoded("\"user-1\""),
-            projectNumber: decoded("1"),
-            title: decoded("\"Sample Draft Issue Title\""),
-            body: decoded("null")
-        )
+                userId: decoded("\"user-1\""),
+                projectNumber: decoded("1"),
+                title: decoded("\"Sample Draft Issue Title\""),
+                body: decoded("null")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)

@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ReposMethods {
+public extension ReposMethods {
     /// Sync a branch of a forked repository to keep it up-to-date with the upstream repository.
     ///
     /// - Parameters:
@@ -15,9 +15,29 @@ extension ReposMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - branch: The name of the branch which should be updated to match upstream.
-    public static func reposMergeUpstream(config: ClientConfig, owner: String, repo: String, branch: String, requestOptions: RequestOptions? = nil) async throws -> MergedUpstream {
+    static func reposMergeUpstream(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        branch: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> MergedUpstream {
         let requestBody = ReposMergeUpstreamRequestBody(branch: branch)
 
-        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/merge-upstream"].joined(), config: config, body: requestBody, decoder: .json, operationId: "reposMergeUpstream", options: requestOptions)).data
+        return try await (sdkRequest(
+            "POST",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/merge-upstream",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "reposMergeUpstream",
+            options: requestOptions
+        )).data
     }
 }

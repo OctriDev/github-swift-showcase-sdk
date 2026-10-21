@@ -38,11 +38,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.issues.addIssueFieldValues(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            issueNumber: decoded("1"),
-            issueFieldValues: decoded(sdkMethodFixture935Value1)
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                issueNumber: decoded("1"),
+                issueFieldValues: decoded(sdkMethodFixture935Value1)
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -90,11 +90,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.issues.addLabels(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            issueNumber: decoded("1"),
-            body: decoded("{\"labels\":[\"bug\",\"enhancement\"]}")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                issueNumber: decoded("1"),
+                body: decoded("{\"labels\":[\"bug\",\"enhancement\"]}")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 301)
@@ -142,11 +142,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.issues.addRelatesTo(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            issueNumber: decoded("1"),
-            issueId: decoded("1")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                issueNumber: decoded("1"),
+                issueId: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 301)
@@ -195,12 +195,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.issues.addSubIssue(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            issueNumber: decoded("1"),
-            subIssueId: decoded("1"),
-            replaceParent: decoded("null")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                issueNumber: decoded("1"),
+                subIssueId: decoded("1"),
+                replaceParent: decoded("null")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -248,11 +248,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.issues.approveSuggestion(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            issueNumber: decoded("1"),
-            suggestionId: decoded("1")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                issueNumber: decoded("1"),
+                suggestionId: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -292,10 +292,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.issues.checkUserCanBeAssigned(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            assignee: decoded("\"assignee\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                assignee: decoded("\"assignee\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -311,7 +311,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testIssuesCheckUserCanBeAssignedToIssueIssuesCheckUserCanBeAssignedToIssueReachesMockAndDecodesResponse() async throws {
+    func testIssuesCheckUserCanBeAssignedToIssueIssuesCheckUserCanBeAssignedToIssueReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -325,7 +326,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testIssuesCheckUserCanBeAssignedToIssueIssuesCheckUserCanBeAssignXc96183647eReachesMockAndDecodesResponse() async throws {
+    func testIssuesCheckUserCanBeAssignedToIssueIssuesCheckUserCanBeAssignXc96183647eReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -336,11 +338,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.issues.checkUserCanBeAssignedToIssue(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            issueNumber: decoded("1"),
-            assignee: decoded("\"assignee\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                issueNumber: decoded("1"),
+                assignee: decoded("\"assignee\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -361,7 +363,11 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try IssuesMethods.IssuesCreateOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), title: decoded("\"Found a bug\""))
+        var options = try IssuesMethods.IssuesCreateOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            title: decoded("\"Found a bug\"")
+        )
         options.body = try decoded("\"I'm having a problem with this.\"")
         options.assignee = try decoded("null")
         options.milestone = try decoded("1")
@@ -388,7 +394,11 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try IssuesMethods.IssuesCreateOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), title: decoded("\"Found a bug\""))
+        var options = try IssuesMethods.IssuesCreateOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            title: decoded("\"Found a bug\"")
+        )
         options.body = try decoded("\"I'm having a problem with this.\"")
         options.assignee = try decoded("null")
         options.milestone = try decoded("1")
@@ -403,8 +413,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.issues.create(
-            options: options
-        )
+                options: options
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -452,11 +462,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.issues.createComment(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            issueNumber: decoded("1"),
-            body: decoded("\"Me too\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                issueNumber: decoded("1"),
+                body: decoded("\"Me too\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -505,12 +515,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.issues.createLabel(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            name: decoded("\"bug\""),
-            color: decoded("\"f29513\""),
-            description: decoded("\"Something isn't working\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                name: decoded("\"bug\""),
+                color: decoded("\"f29513\""),
+                description: decoded("\"Something isn't working\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)

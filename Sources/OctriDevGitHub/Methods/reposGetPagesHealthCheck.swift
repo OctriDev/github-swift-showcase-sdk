@@ -6,15 +6,39 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ReposMethods {
-    /// Gets a health check of the DNS settings for the `CNAME` record configured for a repository's GitHub Pages. The first request to this endpoint returns a `202 Accepted` status and starts an asynchronous background task to get the results for the domain. After the background task completes, subsequent requests to this endpoint return a `200 OK` status with the health check results in the response. The authenticated user must be a repository administrator, maintainer, or have the 'manage GitHub Pages settings' permission to use this endpoint. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+public extension ReposMethods {
+    /// Gets a health check of the DNS settings for the `CNAME` record configured for a repository's GitHub Pages. The
+    /// first request to this endpoint returns a `202 Accepted` status and starts an asynchronous background task to get
+    /// the results for the domain. After the background task completes, subsequent requests to this endpoint return a
+    /// `200 OK` status with the health check results in the response. The authenticated user must be a repository
+    /// administrator, maintainer, or have the 'manage GitHub Pages settings' permission to use this endpoint. OAuth app
+    /// tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    public static func reposGetPagesHealthCheck(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> PagesHealthCheck {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/pages/health"].joined(), config: config, decoder: .json, operationId: "reposGetPagesHealthCheck", options: requestOptions, errors: ["404": BasicError.self])).data
+    static func reposGetPagesHealthCheck(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> PagesHealthCheck {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/pages/health",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "reposGetPagesHealthCheck",
+            options: requestOptions,
+            errors: ["404": BasicError.self]
+        )).data
     }
 }

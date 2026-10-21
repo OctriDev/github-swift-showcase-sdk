@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Nullable domain models
+/// Nullable domain models
 /// Optional object value serialized in the `template_repository` wire field.
 public struct NullableRepositoryWebhooksTemplateRepository: Codable {
     /// Optional `integer` value serialized in the `id` wire field.
@@ -282,8 +282,8 @@ extension NullableRepositoryWebhooksTemplateRepository {
     }
 }
 
-extension NullableRepositoryWebhooksTemplateRepository {
-    public init(from decoder: Decoder) throws {
+public extension NullableRepositoryWebhooksTemplateRepository {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.init(sdkDefaults: ())
         try sdkDecodeFieldsPart1(container)
@@ -297,8 +297,96 @@ extension NullableRepositoryWebhooksTemplateRepository {
     }
 }
 
-extension NullableRepositoryWebhooksTemplateRepository {
-    public init(id: Int? = nil, nodeId: String? = nil, name: String? = nil, fullName: String? = nil, owner: NullableRepositoryWebhooksTemplateRepositoryOwner? = nil, `private`: Bool? = nil, htmlUrl: String? = nil, description: String? = nil, fork: Bool? = nil, url: String? = nil, archiveUrl: String? = nil, assigneesUrl: String? = nil, blobsUrl: String? = nil, branchesUrl: String? = nil, collaboratorsUrl: String? = nil, commentsUrl: String? = nil, commitsUrl: String? = nil, compareUrl: String? = nil, contentsUrl: String? = nil, contributorsUrl: String? = nil, deploymentsUrl: String? = nil, downloadsUrl: String? = nil, eventsUrl: String? = nil, forksUrl: String? = nil, gitCommitsUrl: String? = nil, gitRefsUrl: String? = nil, gitTagsUrl: String? = nil, gitUrl: String? = nil, issueCommentUrl: String? = nil, issueEventsUrl: String? = nil, issuesUrl: String? = nil, keysUrl: String? = nil, labelsUrl: String? = nil, languagesUrl: String? = nil, mergesUrl: String? = nil, milestonesUrl: String? = nil, notificationsUrl: String? = nil, pullsUrl: String? = nil, releasesUrl: String? = nil, sshUrl: String? = nil, stargazersUrl: String? = nil, statusesUrl: String? = nil, subscribersUrl: String? = nil, subscriptionUrl: String? = nil, tagsUrl: String? = nil, teamsUrl: String? = nil, treesUrl: String? = nil, cloneUrl: String? = nil, mirrorUrl: String? = nil, hooksUrl: String? = nil, svnUrl: String? = nil, homepage: String? = nil, language: String? = nil, forksCount: Int? = nil, stargazersCount: Int? = nil, watchersCount: Int? = nil, size: Int? = nil, defaultBranch: String? = nil, openIssuesCount: Int? = nil, isTemplate: Bool? = nil, topics: [String]? = nil, hasIssues: Bool? = nil, hasProjects: Bool? = nil, hasWiki: Bool? = nil, hasPages: Bool? = nil, hasDownloads: Bool? = nil, archived: Bool? = nil, disabled: Bool? = nil, visibility: String? = nil, pushedAt: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, permissions: NullableRepositoryWebhooksTemplateRepositoryPermissions? = nil, allowRebaseMerge: Bool? = nil, tempCloneToken: String? = nil, allowSquashMerge: Bool? = nil, allowAutoMerge: Bool? = nil, deleteBranchOnMerge: Bool? = nil, allowUpdateBranch: Bool? = nil, useSquashPrTitleAsDefault: Bool? = nil, squashMergeCommitTitle: NullableRepositoryWebhooksTemplateRepositorySquashMergeCommitTitle? = nil, squashMergeCommitMessage: NullableRepositoryWebhooksTemplateRepositorySquashMergeCommitMessage? = nil, mergeCommitTitle: NullableRepositoryWebhooksTemplateRepositoryMergeCommitTitle? = nil, mergeCommitMessage: NullableRepositoryWebhooksTemplateRepositoryMergeCommitMessage? = nil, allowMergeCommit: Bool? = nil, subscribersCount: Int? = nil, networkCount: Int? = nil) {
+public extension NullableRepositoryWebhooksTemplateRepository {
+    init(
+        id: Int? = nil,
+        nodeId: String? = nil,
+        name: String? = nil,
+        fullName: String? = nil,
+        owner: NullableRepositoryWebhooksTemplateRepositoryOwner? = nil,
+        private: Bool? = nil,
+        htmlUrl: String? = nil,
+        description: String? = nil,
+        fork: Bool? = nil,
+        url: String? = nil,
+        archiveUrl: String? = nil,
+        assigneesUrl: String? = nil,
+        blobsUrl: String? = nil,
+        branchesUrl: String? = nil,
+        collaboratorsUrl: String? = nil,
+        commentsUrl: String? = nil,
+        commitsUrl: String? = nil,
+        compareUrl: String? = nil,
+        contentsUrl: String? = nil,
+        contributorsUrl: String? = nil,
+        deploymentsUrl: String? = nil,
+        downloadsUrl: String? = nil,
+        eventsUrl: String? = nil,
+        forksUrl: String? = nil,
+        gitCommitsUrl: String? = nil,
+        gitRefsUrl: String? = nil,
+        gitTagsUrl: String? = nil,
+        gitUrl: String? = nil,
+        issueCommentUrl: String? = nil,
+        issueEventsUrl: String? = nil,
+        issuesUrl: String? = nil,
+        keysUrl: String? = nil,
+        labelsUrl: String? = nil,
+        languagesUrl: String? = nil,
+        mergesUrl: String? = nil,
+        milestonesUrl: String? = nil,
+        notificationsUrl: String? = nil,
+        pullsUrl: String? = nil,
+        releasesUrl: String? = nil,
+        sshUrl: String? = nil,
+        stargazersUrl: String? = nil,
+        statusesUrl: String? = nil,
+        subscribersUrl: String? = nil,
+        subscriptionUrl: String? = nil,
+        tagsUrl: String? = nil,
+        teamsUrl: String? = nil,
+        treesUrl: String? = nil,
+        cloneUrl: String? = nil,
+        mirrorUrl: String? = nil,
+        hooksUrl: String? = nil,
+        svnUrl: String? = nil,
+        homepage: String? = nil,
+        language: String? = nil,
+        forksCount: Int? = nil,
+        stargazersCount: Int? = nil,
+        watchersCount: Int? = nil,
+        size: Int? = nil,
+        defaultBranch: String? = nil,
+        openIssuesCount: Int? = nil,
+        isTemplate: Bool? = nil,
+        topics: [String]? = nil,
+        hasIssues: Bool? = nil,
+        hasProjects: Bool? = nil,
+        hasWiki: Bool? = nil,
+        hasPages: Bool? = nil,
+        hasDownloads: Bool? = nil,
+        archived: Bool? = nil,
+        disabled: Bool? = nil,
+        visibility: String? = nil,
+        pushedAt: String? = nil,
+        createdAt: String? = nil,
+        updatedAt: String? = nil,
+        permissions: NullableRepositoryWebhooksTemplateRepositoryPermissions? = nil,
+        allowRebaseMerge: Bool? = nil,
+        tempCloneToken: String? = nil,
+        allowSquashMerge: Bool? = nil,
+        allowAutoMerge: Bool? = nil,
+        deleteBranchOnMerge: Bool? = nil,
+        allowUpdateBranch: Bool? = nil,
+        useSquashPrTitleAsDefault: Bool? = nil,
+        squashMergeCommitTitle: NullableRepositoryWebhooksTemplateRepositorySquashMergeCommitTitle? = nil,
+        squashMergeCommitMessage: NullableRepositoryWebhooksTemplateRepositorySquashMergeCommitMessage? = nil,
+        mergeCommitTitle: NullableRepositoryWebhooksTemplateRepositoryMergeCommitTitle? = nil,
+        mergeCommitMessage: NullableRepositoryWebhooksTemplateRepositoryMergeCommitMessage? = nil,
+        allowMergeCommit: Bool? = nil,
+        subscribersCount: Int? = nil,
+        networkCount: Int? = nil
+    ) {
         self.init(sdkDefaults: ())
         sdkSet1(id, nodeId, name, fullName, owner)
         sdkSet2(`private`, htmlUrl, description, fork, url)
@@ -322,7 +410,13 @@ extension NullableRepositoryWebhooksTemplateRepository {
 }
 
 extension NullableRepositoryWebhooksTemplateRepository {
-    mutating func sdkSet1(_ id: Int?, _ nodeId: String?, _ name: String?, _ fullName: String?, _ owner: NullableRepositoryWebhooksTemplateRepositoryOwner?) {
+    mutating func sdkSet1(
+        _ id: Int?,
+        _ nodeId: String?,
+        _ name: String?,
+        _ fullName: String?,
+        _ owner: NullableRepositoryWebhooksTemplateRepositoryOwner?
+    ) {
         self.id = id
         self.nodeId = nodeId
         self.name = name
@@ -332,8 +426,8 @@ extension NullableRepositoryWebhooksTemplateRepository {
 }
 
 extension NullableRepositoryWebhooksTemplateRepository {
-    mutating func sdkSet2(_ `private`: Bool?, _ htmlUrl: String?, _ description: String?, _ fork: Bool?, _ url: String?) {
-        self.`private` = `private`
+    mutating func sdkSet2(_ private: Bool?, _ htmlUrl: String?, _ description: String?, _ fork: Bool?, _ url: String?) {
+        self.private = `private`
         self.htmlUrl = htmlUrl
         self.description = description
         self.fork = fork
@@ -342,7 +436,13 @@ extension NullableRepositoryWebhooksTemplateRepository {
 }
 
 extension NullableRepositoryWebhooksTemplateRepository {
-    mutating func sdkSet3(_ archiveUrl: String?, _ assigneesUrl: String?, _ blobsUrl: String?, _ branchesUrl: String?, _ collaboratorsUrl: String?) {
+    mutating func sdkSet3(
+        _ archiveUrl: String?,
+        _ assigneesUrl: String?,
+        _ blobsUrl: String?,
+        _ branchesUrl: String?,
+        _ collaboratorsUrl: String?
+    ) {
         self.archiveUrl = archiveUrl
         self.assigneesUrl = assigneesUrl
         self.blobsUrl = blobsUrl
@@ -352,7 +452,13 @@ extension NullableRepositoryWebhooksTemplateRepository {
 }
 
 extension NullableRepositoryWebhooksTemplateRepository {
-    mutating func sdkSet4(_ commentsUrl: String?, _ commitsUrl: String?, _ compareUrl: String?, _ contentsUrl: String?, _ contributorsUrl: String?) {
+    mutating func sdkSet4(
+        _ commentsUrl: String?,
+        _ commitsUrl: String?,
+        _ compareUrl: String?,
+        _ contentsUrl: String?,
+        _ contributorsUrl: String?
+    ) {
         self.commentsUrl = commentsUrl
         self.commitsUrl = commitsUrl
         self.compareUrl = compareUrl
@@ -362,7 +468,13 @@ extension NullableRepositoryWebhooksTemplateRepository {
 }
 
 extension NullableRepositoryWebhooksTemplateRepository {
-    mutating func sdkSet5(_ deploymentsUrl: String?, _ downloadsUrl: String?, _ eventsUrl: String?, _ forksUrl: String?, _ gitCommitsUrl: String?) {
+    mutating func sdkSet5(
+        _ deploymentsUrl: String?,
+        _ downloadsUrl: String?,
+        _ eventsUrl: String?,
+        _ forksUrl: String?,
+        _ gitCommitsUrl: String?
+    ) {
         self.deploymentsUrl = deploymentsUrl
         self.downloadsUrl = downloadsUrl
         self.eventsUrl = eventsUrl
@@ -372,7 +484,13 @@ extension NullableRepositoryWebhooksTemplateRepository {
 }
 
 extension NullableRepositoryWebhooksTemplateRepository {
-    mutating func sdkSet6(_ gitRefsUrl: String?, _ gitTagsUrl: String?, _ gitUrl: String?, _ issueCommentUrl: String?, _ issueEventsUrl: String?) {
+    mutating func sdkSet6(
+        _ gitRefsUrl: String?,
+        _ gitTagsUrl: String?,
+        _ gitUrl: String?,
+        _ issueCommentUrl: String?,
+        _ issueEventsUrl: String?
+    ) {
         self.gitRefsUrl = gitRefsUrl
         self.gitTagsUrl = gitTagsUrl
         self.gitUrl = gitUrl
@@ -382,7 +500,13 @@ extension NullableRepositoryWebhooksTemplateRepository {
 }
 
 extension NullableRepositoryWebhooksTemplateRepository {
-    mutating func sdkSet7(_ issuesUrl: String?, _ keysUrl: String?, _ labelsUrl: String?, _ languagesUrl: String?, _ mergesUrl: String?) {
+    mutating func sdkSet7(
+        _ issuesUrl: String?,
+        _ keysUrl: String?,
+        _ labelsUrl: String?,
+        _ languagesUrl: String?,
+        _ mergesUrl: String?
+    ) {
         self.issuesUrl = issuesUrl
         self.keysUrl = keysUrl
         self.labelsUrl = labelsUrl
@@ -392,7 +516,13 @@ extension NullableRepositoryWebhooksTemplateRepository {
 }
 
 extension NullableRepositoryWebhooksTemplateRepository {
-    mutating func sdkSet8(_ milestonesUrl: String?, _ notificationsUrl: String?, _ pullsUrl: String?, _ releasesUrl: String?, _ sshUrl: String?) {
+    mutating func sdkSet8(
+        _ milestonesUrl: String?,
+        _ notificationsUrl: String?,
+        _ pullsUrl: String?,
+        _ releasesUrl: String?,
+        _ sshUrl: String?
+    ) {
         self.milestonesUrl = milestonesUrl
         self.notificationsUrl = notificationsUrl
         self.pullsUrl = pullsUrl
@@ -402,7 +532,13 @@ extension NullableRepositoryWebhooksTemplateRepository {
 }
 
 extension NullableRepositoryWebhooksTemplateRepository {
-    mutating func sdkSet9(_ stargazersUrl: String?, _ statusesUrl: String?, _ subscribersUrl: String?, _ subscriptionUrl: String?, _ tagsUrl: String?) {
+    mutating func sdkSet9(
+        _ stargazersUrl: String?,
+        _ statusesUrl: String?,
+        _ subscribersUrl: String?,
+        _ subscriptionUrl: String?,
+        _ tagsUrl: String?
+    ) {
         self.stargazersUrl = stargazersUrl
         self.statusesUrl = statusesUrl
         self.subscribersUrl = subscribersUrl
@@ -412,7 +548,13 @@ extension NullableRepositoryWebhooksTemplateRepository {
 }
 
 extension NullableRepositoryWebhooksTemplateRepository {
-    mutating func sdkSet10(_ teamsUrl: String?, _ treesUrl: String?, _ cloneUrl: String?, _ mirrorUrl: String?, _ hooksUrl: String?) {
+    mutating func sdkSet10(
+        _ teamsUrl: String?,
+        _ treesUrl: String?,
+        _ cloneUrl: String?,
+        _ mirrorUrl: String?,
+        _ hooksUrl: String?
+    ) {
         self.teamsUrl = teamsUrl
         self.treesUrl = treesUrl
         self.cloneUrl = cloneUrl
@@ -422,7 +564,13 @@ extension NullableRepositoryWebhooksTemplateRepository {
 }
 
 extension NullableRepositoryWebhooksTemplateRepository {
-    mutating func sdkSet11(_ svnUrl: String?, _ homepage: String?, _ language: String?, _ forksCount: Int?, _ stargazersCount: Int?) {
+    mutating func sdkSet11(
+        _ svnUrl: String?,
+        _ homepage: String?,
+        _ language: String?,
+        _ forksCount: Int?,
+        _ stargazersCount: Int?
+    ) {
         self.svnUrl = svnUrl
         self.homepage = homepage
         self.language = language
@@ -432,7 +580,13 @@ extension NullableRepositoryWebhooksTemplateRepository {
 }
 
 extension NullableRepositoryWebhooksTemplateRepository {
-    mutating func sdkSet12(_ watchersCount: Int?, _ size: Int?, _ defaultBranch: String?, _ openIssuesCount: Int?, _ isTemplate: Bool?) {
+    mutating func sdkSet12(
+        _ watchersCount: Int?,
+        _ size: Int?,
+        _ defaultBranch: String?,
+        _ openIssuesCount: Int?,
+        _ isTemplate: Bool?
+    ) {
         self.watchersCount = watchersCount
         self.size = size
         self.defaultBranch = defaultBranch
@@ -442,7 +596,13 @@ extension NullableRepositoryWebhooksTemplateRepository {
 }
 
 extension NullableRepositoryWebhooksTemplateRepository {
-    mutating func sdkSet13(_ topics: [String]?, _ hasIssues: Bool?, _ hasProjects: Bool?, _ hasWiki: Bool?, _ hasPages: Bool?) {
+    mutating func sdkSet13(
+        _ topics: [String]?,
+        _ hasIssues: Bool?,
+        _ hasProjects: Bool?,
+        _ hasWiki: Bool?,
+        _ hasPages: Bool?
+    ) {
         self.topics = topics
         self.hasIssues = hasIssues
         self.hasProjects = hasProjects

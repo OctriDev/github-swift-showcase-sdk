@@ -6,13 +6,37 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension OrgsMethods {
-    /// In order to remove a user's membership with an organization, the authenticated user must be an organization owner. If the specified user is an active member of the organization, this will remove them from the organization. If the specified user has been invited to the organization, this will cancel their invitation. The specified user will receive an email notification in both cases. > [!NOTE] > If a user has both direct membership in the organization as well as indirect membership via an enterprise team, only their direct membership will be removed. Their indirect membership via an enterprise team remains until the user is removed from the enterprise team.
+public extension OrgsMethods {
+    /// In order to remove a user's membership with an organization, the authenticated user must be an organization
+    /// owner. If the specified user is an active member of the organization, this will remove them from the
+    /// organization. If the specified user has been invited to the organization, this will cancel their invitation. The
+    /// specified user will receive an email notification in both cases. > [!NOTE] > If a user has both direct
+    /// membership in the organization as well as indirect membership via an enterprise team, only their direct
+    /// membership will be removed. Their indirect membership via an enterprise team remains until the user is removed
+    /// from the enterprise team.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - username: The handle for the GitHub user account.
-    public static func orgsRemoveMembershipForUser(config: ClientConfig, org: String, username: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/memberships/", sdkEncodePathSegment(sdkWireString(username))].joined(), config: config, decoder: .empty, operationId: "orgsRemoveMembershipForUser", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+    static func orgsRemoveMembershipForUser(
+        config: ClientConfig,
+        org: String,
+        username: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            [
+                "/orgs/",
+                sdkEncodePathSegment(sdkWireString(org)),
+                "/memberships/",
+                sdkEncodePathSegment(sdkWireString(username)),
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "orgsRemoveMembershipForUser",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 }

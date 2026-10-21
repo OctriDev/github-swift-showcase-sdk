@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Shared domain models
+/// Shared domain models
 /// Data related to a release.
 public struct ReleaseAsset: Codable {
     /// Required `uri`-formatted value serialized in the `url` wire field.
@@ -53,35 +53,52 @@ public struct ReleaseAsset: Codable {
         case uploader
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ReleaseAsset {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.browserDownloadUrl = try container.sdkDecodeRequired(.browserDownloadUrl)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.label = try container.sdkDecodeNullable(.label)
-        self.state = try container.sdkDecodeRequired(.state)
-        self.contentType = try container.sdkDecodeRequired(.contentType)
-        self.size = try container.sdkDecodeRequired(.size)
-        self.digest = try container.sdkDecodeNullable(.digest)
-        self.downloadCount = try container.sdkDecodeRequired(.downloadCount)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        self.uploader = try container.sdkDecodeNullable(.uploader)
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("browser_download_url", self.browserDownloadUrl)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ReleaseAsset {
-    public init(url: String, browserDownloadUrl: String, id: Int, nodeId: String, name: String, label: String?, state: ReleaseAssetState, contentType: String, size: Int, digest: String?, downloadCount: Int, createdAt: Date, updatedAt: Date, uploader: NullableSimpleUser?) throws {
+public extension ReleaseAsset {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        url = try container.sdkDecodeRequired(.url)
+        browserDownloadUrl = try container.sdkDecodeRequired(.browserDownloadUrl)
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        name = try container.sdkDecodeRequired(.name)
+        label = try container.sdkDecodeNullable(.label)
+        state = try container.sdkDecodeRequired(.state)
+        contentType = try container.sdkDecodeRequired(.contentType)
+        size = try container.sdkDecodeRequired(.size)
+        digest = try container.sdkDecodeNullable(.digest)
+        downloadCount = try container.sdkDecodeRequired(.downloadCount)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        uploader = try container.sdkDecodeNullable(.uploader)
+        try sdkValidateUri("url", url)
+        try sdkValidateUri("browser_download_url", browserDownloadUrl)
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+    }
+}
+
+public extension ReleaseAsset {
+    init(
+        url: String,
+        browserDownloadUrl: String,
+        id: Int,
+        nodeId: String,
+        name: String,
+        label: String?,
+        state: ReleaseAssetState,
+        contentType: String,
+        size: Int,
+        digest: String?,
+        downloadCount: Int,
+        createdAt: Date,
+        updatedAt: Date,
+        uploader: NullableSimpleUser?
+    ) throws {
         (self.url, self.browserDownloadUrl) = (url, browserDownloadUrl)
         (self.id, self.nodeId) = (id, nodeId)
         (self.name, self.label) = (name, label)
@@ -89,10 +106,10 @@ extension ReleaseAsset {
         (self.size, self.digest) = (size, digest)
         (self.downloadCount, self.createdAt) = (downloadCount, createdAt)
         (self.updatedAt, self.uploader) = (updatedAt, uploader)
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("browser_download_url", self.browserDownloadUrl)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+        try sdkValidateUri("url", self.url)
+        try sdkValidateUri("browser_download_url", self.browserDownloadUrl)
+        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
     }
 }
 
@@ -148,40 +165,54 @@ public struct DiffEntry: Codable {
         case previousFilename = "previous_filename"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension DiffEntry {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.sha = try container.sdkDecodeNullable(.sha)
-        self.filename = try container.sdkDecodeRequired(.filename)
-        self.status = try container.sdkDecodeRequired(.status)
-        self.additions = try container.sdkDecodeRequired(.additions)
-        self.deletions = try container.sdkDecodeRequired(.deletions)
-        self.changes = try container.sdkDecodeRequired(.changes)
-        self.blobUrl = try container.sdkDecodeRequired(.blobUrl)
-        self.rawUrl = try container.sdkDecodeRequired(.rawUrl)
-        self.contentsUrl = try container.sdkDecodeRequired(.contentsUrl)
-        self.patch = try container.sdkDecodeIfPresent(.patch)
-        self.previousFilename = try container.sdkDecodeIfPresent(.previousFilename)
-            try sdkValidateUri("blob_url", self.blobUrl)
-            try sdkValidateUri("raw_url", self.rawUrl)
-            try sdkValidateUri("contents_url", self.contentsUrl)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension DiffEntry {
-    public init(sha: String?, filename: String, status: DiffEntryStatus, additions: Int, deletions: Int, changes: Int, blobUrl: String, rawUrl: String, contentsUrl: String, patch: String? = nil, previousFilename: String? = nil) throws {
+public extension DiffEntry {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        sha = try container.sdkDecodeNullable(.sha)
+        filename = try container.sdkDecodeRequired(.filename)
+        status = try container.sdkDecodeRequired(.status)
+        additions = try container.sdkDecodeRequired(.additions)
+        deletions = try container.sdkDecodeRequired(.deletions)
+        changes = try container.sdkDecodeRequired(.changes)
+        blobUrl = try container.sdkDecodeRequired(.blobUrl)
+        rawUrl = try container.sdkDecodeRequired(.rawUrl)
+        contentsUrl = try container.sdkDecodeRequired(.contentsUrl)
+        patch = try container.sdkDecodeIfPresent(.patch)
+        previousFilename = try container.sdkDecodeIfPresent(.previousFilename)
+        try sdkValidateUri("blob_url", blobUrl)
+        try sdkValidateUri("raw_url", rawUrl)
+        try sdkValidateUri("contents_url", contentsUrl)
+    }
+}
+
+public extension DiffEntry {
+    init(
+        sha: String?,
+        filename: String,
+        status: DiffEntryStatus,
+        additions: Int,
+        deletions: Int,
+        changes: Int,
+        blobUrl: String,
+        rawUrl: String,
+        contentsUrl: String,
+        patch: String? = nil,
+        previousFilename: String? = nil
+    ) throws {
         (self.sha, self.filename) = (sha, filename)
         (self.status, self.additions) = (status, additions)
         (self.deletions, self.changes) = (deletions, changes)
         (self.blobUrl, self.rawUrl) = (blobUrl, rawUrl)
         (self.contentsUrl, self.patch) = (contentsUrl, patch)
         self.previousFilename = previousFilename
-            try sdkValidateUri("blob_url", self.blobUrl)
-            try sdkValidateUri("raw_url", self.rawUrl)
-            try sdkValidateUri("contents_url", self.contentsUrl)
+        try sdkValidateUri("blob_url", self.blobUrl)
+        try sdkValidateUri("raw_url", self.rawUrl)
+        try sdkValidateUri("contents_url", self.contentsUrl)
     }
 }
 
@@ -194,21 +225,27 @@ public struct Link: Codable {
         case href
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension Link {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.href) else {
-            throw SdkValidationError(field: "href", code: "required", message: "Validation failed for 'href': value is required")
-        }
-        self.href = try container.sdkDecodeRequired(.href)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension Link {
-    public init(href: String) {
+public extension Link {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.href) else {
+            throw SdkValidationError(
+                field: "href",
+                code: "required",
+                message: "Validation failed for 'href': value is required"
+            )
+        }
+        href = try container.sdkDecodeRequired(.href)
+    }
+}
+
+public extension Link {
+    init(href: String) {
         self.href = href
     }
 }
@@ -238,25 +275,32 @@ public struct ScimError: Codable {
     }
 
     init() {
-        (self.message, self.documentationUrl, self.detail, self.status, self.scimType) = (nil, nil, nil, nil, nil)
-        self.schemas = nil
+        (message, documentationUrl, detail, status, scimType) = (nil, nil, nil, nil, nil)
+        schemas = nil
     }
 }
 
-extension ScimError {
-    public init(from decoder: Decoder) throws {
+public extension ScimError {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.message = try container.sdkDecodeIfPresent(.message)
-        self.documentationUrl = try container.sdkDecodeIfPresent(.documentationUrl)
-        self.detail = try container.sdkDecodeIfPresent(.detail)
-        self.status = try container.sdkDecodeIfPresent(.status)
-        self.scimType = try container.sdkDecodeIfPresent(.scimType)
-        self.schemas = try container.sdkDecodeIfPresent(.schemas)
+        message = try container.sdkDecodeIfPresent(.message)
+        documentationUrl = try container.sdkDecodeIfPresent(.documentationUrl)
+        detail = try container.sdkDecodeIfPresent(.detail)
+        status = try container.sdkDecodeIfPresent(.status)
+        scimType = try container.sdkDecodeIfPresent(.scimType)
+        schemas = try container.sdkDecodeIfPresent(.schemas)
     }
 }
 
-extension ScimError {
-    public init(message: String? = nil, documentationUrl: String? = nil, detail: String? = nil, status: Int? = nil, scimType: String? = nil, schemas: [String]? = nil) {
+public extension ScimError {
+    init(
+        message: String? = nil,
+        documentationUrl: String? = nil,
+        detail: String? = nil,
+        status: Int? = nil,
+        scimType: String? = nil,
+        schemas: [String]? = nil
+    ) {
         self.init()
         (self.message, self.documentationUrl) = (message, documentationUrl)
         (self.detail, self.status) = (detail, status)

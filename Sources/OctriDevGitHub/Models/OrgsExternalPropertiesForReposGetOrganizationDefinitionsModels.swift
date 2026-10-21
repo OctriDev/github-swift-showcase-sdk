@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Orgs domain models
+/// Orgs domain models
 /// External custom property defined for a GitHub App installation
 public struct ExternalProperty: Codable {
     /// The name of the external property
@@ -13,21 +13,27 @@ public struct ExternalProperty: Codable {
         case propertyName = "property_name"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ExternalProperty {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.propertyName) else {
-            throw SdkValidationError(field: "property_name", code: "required", message: "Validation failed for 'property_name': value is required")
-        }
-        self.propertyName = try container.sdkDecodeRequired(.propertyName)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ExternalProperty {
-    public init(propertyName: String) {
+public extension ExternalProperty {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.propertyName) else {
+            throw SdkValidationError(
+                field: "property_name",
+                code: "required",
+                message: "Validation failed for 'property_name': value is required"
+            )
+        }
+        propertyName = try container.sdkDecodeRequired(.propertyName)
+    }
+}
+
+public extension ExternalProperty {
+    init(propertyName: String) {
         self.propertyName = propertyName
     }
 }

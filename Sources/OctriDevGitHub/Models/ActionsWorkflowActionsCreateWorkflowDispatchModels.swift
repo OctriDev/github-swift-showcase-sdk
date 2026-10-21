@@ -3,7 +3,7 @@
 
 import Foundation
 
-// ActionsWorkflow domain models
+/// ActionsWorkflow domain models
 public typealias WorkflowRunId = Int
 
 /// Response containing the workflow run ID and URLs.
@@ -21,34 +21,48 @@ public struct WorkflowDispatchResponse: Codable {
         case htmlUrl = "html_url"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WorkflowDispatchResponse {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.workflowRunId) else {
-            throw SdkValidationError(field: "workflow_run_id", code: "required", message: "Validation failed for 'workflow_run_id': value is required")
-        }
-        guard container.contains(.runUrl) else {
-            throw SdkValidationError(field: "run_url", code: "required", message: "Validation failed for 'run_url': value is required")
-        }
-        guard container.contains(.htmlUrl) else {
-            throw SdkValidationError(field: "html_url", code: "required", message: "Validation failed for 'html_url': value is required")
-        }
-        self.workflowRunId = try container.sdkDecodeRequired(.workflowRunId)
-        self.runUrl = try container.sdkDecodeRequired(.runUrl)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-            try sdkValidateUri("run_url", self.runUrl)
-            try sdkValidateUri("html_url", self.htmlUrl)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WorkflowDispatchResponse {
-    public init(workflowRunId: WorkflowRunId, runUrl: String, htmlUrl: String) throws {
+public extension WorkflowDispatchResponse {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.workflowRunId) else {
+            throw SdkValidationError(
+                field: "workflow_run_id",
+                code: "required",
+                message: "Validation failed for 'workflow_run_id': value is required"
+            )
+        }
+        guard container.contains(.runUrl) else {
+            throw SdkValidationError(
+                field: "run_url",
+                code: "required",
+                message: "Validation failed for 'run_url': value is required"
+            )
+        }
+        guard container.contains(.htmlUrl) else {
+            throw SdkValidationError(
+                field: "html_url",
+                code: "required",
+                message: "Validation failed for 'html_url': value is required"
+            )
+        }
+        workflowRunId = try container.sdkDecodeRequired(.workflowRunId)
+        runUrl = try container.sdkDecodeRequired(.runUrl)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        try sdkValidateUri("run_url", runUrl)
+        try sdkValidateUri("html_url", htmlUrl)
+    }
+}
+
+public extension WorkflowDispatchResponse {
+    init(workflowRunId: WorkflowRunId, runUrl: String, htmlUrl: String) throws {
         (self.workflowRunId, self.runUrl) = (workflowRunId, runUrl)
         self.htmlUrl = htmlUrl
-            try sdkValidateUri("run_url", self.runUrl)
-            try sdkValidateUri("html_url", self.htmlUrl)
+        try sdkValidateUri("run_url", self.runUrl)
+        try sdkValidateUri("html_url", self.htmlUrl)
     }
 }

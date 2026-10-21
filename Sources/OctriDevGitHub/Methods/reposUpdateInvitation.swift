@@ -6,8 +6,10 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ReposMethods {
-    /// Updates the permissions on a repository invitation. Supply `permissions` to set the invitee's access level; accepted values are read, write, maintain, triage, and admin. A 200 response returns the updated invitation, including its repository, invitee, inviter, and permissions.
+public extension ReposMethods {
+    /// Updates the permissions on a repository invitation. Supply `permissions` to set the invitee's access level;
+    /// accepted values are read, write, maintain, triage, and admin. A 200 response returns the updated invitation,
+    /// including its repository, invitee, inviter, and permissions.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -18,13 +20,37 @@ extension ReposMethods {
     /// - permissions: The permissions that the associated user will have on the
     ///   repository. Valid values are `read`, `write`, `maintain`, `triage`, and
     ///   `admin`.
-    public static func reposUpdateInvitation(config: ClientConfig, owner: String, repo: String, invitationId: Int, permissions: ReposUpdateInvitationRequestBodyPermissions? = nil, requestOptions: RequestOptions? = nil) async throws -> RepositoryInvitation {
+    static func reposUpdateInvitation(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        invitationId: Int,
+        permissions: ReposUpdateInvitationRequestBodyPermissions? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> RepositoryInvitation {
         let requestBody = ReposUpdateInvitationRequestBody(permissions: permissions)
 
-        return try (await sdkRequest("PATCH", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/invitations/", sdkEncodePathSegment(sdkWireString(invitationId))].joined(), config: config, body: requestBody, decoder: .json, operationId: "reposUpdateInvitation", options: requestOptions)).data
+        return try await (sdkRequest(
+            "PATCH",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/invitations/",
+                sdkEncodePathSegment(sdkWireString(invitationId)),
+            ].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "reposUpdateInvitation",
+            options: requestOptions
+        )).data
     }
 
-    /// Deletes a repository invitation from a repository. Use the repository owner, repository name, and invitation identifier to select the invitation to remove. A 204 response confirms the invitation was deleted and contains no response body.
+    /// Deletes a repository invitation from a repository. Use the repository owner, repository name, and invitation
+    /// identifier to select the invitation to remove. A 204 response confirms the invitation was deleted and contains
+    /// no response body.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -32,7 +58,27 @@ extension ReposMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - invitationId: The unique identifier of the invitation.
-    public static func reposDeleteInvitation(config: ClientConfig, owner: String, repo: String, invitationId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/invitations/", sdkEncodePathSegment(sdkWireString(invitationId))].joined(), config: config, decoder: .empty, operationId: "reposDeleteInvitation", options: requestOptions)).data
+    static func reposDeleteInvitation(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        invitationId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/invitations/",
+                sdkEncodePathSegment(sdkWireString(invitationId)),
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "reposDeleteInvitation",
+            options: requestOptions
+        )).data
     }
 }

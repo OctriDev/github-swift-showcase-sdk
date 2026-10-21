@@ -6,17 +6,44 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension CopilotSpacesMethods {
-    /// Deletes a Copilot Space owned by an organization. The authenticated user must have permissions to delete spaces in the organization. **Warning:** This action is permanent and cannot be undone. Deleting a Copilot Space will remove all associated resources and configurations. Organization members with appropriate permissions can delete Copilot Spaces owned by their organization. OAuth app tokens and personal access tokens (classic) need both the `read:org` and `repo` scopes to use this endpoint. Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
+public extension CopilotSpacesMethods {
+    /// Deletes a Copilot Space owned by an organization. The authenticated user must have permissions to delete spaces
+    /// in the organization. **Warning:** This action is permanent and cannot be undone. Deleting a Copilot Space will
+    /// remove all associated resources and configurations. Organization members with appropriate permissions can delete
+    /// Copilot Spaces owned by their organization. OAuth app tokens and personal access tokens (classic) need both the
+    /// `read:org` and `repo` scopes to use this endpoint. Fine-grained tokens and GitHub App user access tokens must
+    /// have been granted access to the organization that owns the space. They must also have been granted access to
+    /// every repository referenced by resources in the space.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - spaceNumber: The unique identifier of the Copilot Space.
-    public static func copilotSpacesDeleteForOrg(config: ClientConfig, org: String, spaceNumber: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/copilot-spaces/", sdkEncodePathSegment(sdkWireString(spaceNumber))].joined(), config: config, decoder: .empty, operationId: "copilotSpacesDeleteForOrg", options: requestOptions, errors: ["404": BasicError.self, "422": ValidationError.self])).data
+    static func copilotSpacesDeleteForOrg(
+        config: ClientConfig,
+        org: String,
+        spaceNumber: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            [
+                "/orgs/",
+                sdkEncodePathSegment(sdkWireString(org)),
+                "/copilot-spaces/",
+                sdkEncodePathSegment(sdkWireString(spaceNumber)),
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "copilotSpacesDeleteForOrg",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "422": ValidationError.self]
+        )).data
     }
 
-    /// Lists Copilot Spaces owned by a user. The authenticated user must have read access to the user's Copilot Spaces. Only Spaces that are readable by the authenticated user are returned. This includes the user's own spaces, and public user spaces when accessing another user's spaces. OAuth app tokens and personal access tokens (classic) need the `read:user` scope to use this endpoint.
+    /// Lists Copilot Spaces owned by a user. The authenticated user must have read access to the user's Copilot Spaces.
+    /// Only Spaces that are readable by the authenticated user are returned. This includes the user's own spaces, and
+    /// public user spaces when accessing another user's spaces. OAuth app tokens and personal access tokens (classic)
+    /// need the `read:user` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - username: The handle for the GitHub user account.
@@ -29,15 +56,31 @@ extension CopilotSpacesMethods {
     ///   header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api
     ///   #using-link-headers). If specified, the query only searches for results
     ///   after this cursor.
-    public static func copilotSpacesListForUser(config: ClientConfig, username: String, perPage: Int? = nil, before: String? = nil, after: String? = nil, requestOptions: RequestOptions? = nil) async throws -> CopilotSpacesListForUserResponse {
-        if let perPage = perPage {
+    static func copilotSpacesListForUser(
+        config: ClientConfig,
+        username: String,
+        perPage: Int? = nil,
+        before: String? = nil,
+        after: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CopilotSpacesListForUserResponse {
+        if let perPage {
             try validateRange("per_page", Double(perPage), min: 1, max: 100)
         }
 
-        return try (await sdkRequest("GET", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/copilot-spaces"].joined(), config: config, query: [
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("before", value: before),
-            SdkQueryParameter("after", value: after),
-        ], decoder: .json, operationId: "copilotSpacesListForUser", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+        return try await (sdkRequest(
+            "GET",
+            ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/copilot-spaces"].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("before", value: before),
+                SdkQueryParameter("after", value: after),
+            ],
+            decoder: .json,
+            operationId: "copilotSpacesListForUser",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 }

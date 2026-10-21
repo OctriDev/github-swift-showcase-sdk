@@ -3,7 +3,7 @@
 
 import Foundation
 
-// ActionsEnterprise domain models
+/// ActionsEnterprise domain models
 /// Parameters for an organization ID condition
 public struct EnterpriseRulesetConditionsOrganizationIdTarget: Codable {
     /// Required object value serialized in the `organization_id` wire field.
@@ -13,21 +13,27 @@ public struct EnterpriseRulesetConditionsOrganizationIdTarget: Codable {
         case organizationId = "organization_id"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension EnterpriseRulesetConditionsOrganizationIdTarget {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.organizationId) else {
-            throw SdkValidationError(field: "organization_id", code: "required", message: "Validation failed for 'organization_id': value is required")
-        }
-        self.organizationId = try container.sdkDecodeRequired(.organizationId)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension EnterpriseRulesetConditionsOrganizationIdTarget {
-    public init(organizationId: EnterpriseRulesetConditionsOrganizationIdTargetOrganizationId) {
+public extension EnterpriseRulesetConditionsOrganizationIdTarget {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.organizationId) else {
+            throw SdkValidationError(
+                field: "organization_id",
+                code: "required",
+                message: "Validation failed for 'organization_id': value is required"
+            )
+        }
+        organizationId = try container.sdkDecodeRequired(.organizationId)
+    }
+}
+
+public extension EnterpriseRulesetConditionsOrganizationIdTarget {
+    init(organizationId: EnterpriseRulesetConditionsOrganizationIdTargetOrganizationId) {
         self.organizationId = organizationId
     }
 }
@@ -41,21 +47,27 @@ public struct EnterpriseRulesetConditionsOrganizationNameTarget: Codable {
         case organizationName = "organization_name"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension EnterpriseRulesetConditionsOrganizationNameTarget {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.organizationName) else {
-            throw SdkValidationError(field: "organization_name", code: "required", message: "Validation failed for 'organization_name': value is required")
-        }
-        self.organizationName = try container.sdkDecodeRequired(.organizationName)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension EnterpriseRulesetConditionsOrganizationNameTarget {
-    public init(organizationName: EnterpriseRulesetConditionsOrganizationNameTargetOrganizationName) {
+public extension EnterpriseRulesetConditionsOrganizationNameTarget {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.organizationName) else {
+            throw SdkValidationError(
+                field: "organization_name",
+                code: "required",
+                message: "Validation failed for 'organization_name': value is required"
+            )
+        }
+        organizationName = try container.sdkDecodeRequired(.organizationName)
+    }
+}
+
+public extension EnterpriseRulesetConditionsOrganizationNameTarget {
+    init(organizationName: EnterpriseRulesetConditionsOrganizationNameTargetOrganizationName) {
         self.organizationName = organizationName
     }
 }
@@ -75,20 +87,23 @@ public struct EnterpriseRulesetConditionsOrganizationPropertyTargetOrganizaXfd81
     }
 
     init() {
-        (self.include, self.exclude) = (nil, nil)
+        (include, exclude) = (nil, nil)
     }
 }
 
-extension EnterpriseRulesetConditionsOrganizationPropertyTargetOrganizaXfd8187e868 {
-    public init(from decoder: Decoder) throws {
+public extension EnterpriseRulesetConditionsOrganizationPropertyTargetOrganizaXfd8187e868 {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.include = try container.sdkDecodeIfPresent(.include)
-        self.exclude = try container.sdkDecodeIfPresent(.exclude)
+        include = try container.sdkDecodeIfPresent(.include)
+        exclude = try container.sdkDecodeIfPresent(.exclude)
     }
 }
 
-extension EnterpriseRulesetConditionsOrganizationPropertyTargetOrganizaXfd8187e868 {
-    public init(include: [EnterpriseRulesetConditionsOrganizationPropertySpec]? = nil, exclude: [EnterpriseRulesetConditionsOrganizationPropertySpec]? = nil) {
+public extension EnterpriseRulesetConditionsOrganizationPropertyTargetOrganizaXfd8187e868 {
+    init(
+        include: [EnterpriseRulesetConditionsOrganizationPropertySpec]? = nil,
+        exclude: [EnterpriseRulesetConditionsOrganizationPropertySpec]? = nil
+    ) {
         self.init()
         (self.include, self.exclude) = (include, exclude)
     }
@@ -110,20 +125,20 @@ public struct EnterpriseRulesetConditionsOrganizationNameTargetOrganizationName:
     }
 
     init() {
-        (self.include, self.exclude) = (nil, nil)
+        (include, exclude) = (nil, nil)
     }
 }
 
-extension EnterpriseRulesetConditionsOrganizationNameTargetOrganizationName {
-    public init(from decoder: Decoder) throws {
+public extension EnterpriseRulesetConditionsOrganizationNameTargetOrganizationName {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.include = try container.sdkDecodeIfPresent(.include)
-        self.exclude = try container.sdkDecodeIfPresent(.exclude)
+        include = try container.sdkDecodeIfPresent(.include)
+        exclude = try container.sdkDecodeIfPresent(.exclude)
     }
 }
 
-extension EnterpriseRulesetConditionsOrganizationNameTargetOrganizationName {
-    public init(include: [String]? = nil, exclude: [String]? = nil) {
+public extension EnterpriseRulesetConditionsOrganizationNameTargetOrganizationName {
+    init(include: [String]? = nil, exclude: [String]? = nil) {
         self.init()
         (self.include, self.exclude) = (include, exclude)
     }
@@ -141,25 +156,35 @@ public struct EnterpriseRulesetConditionsOrganizationPropertySpec: Codable {
         case propertyValues = "property_values"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension EnterpriseRulesetConditionsOrganizationPropertySpec {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        guard container.contains(.propertyValues) else {
-            throw SdkValidationError(field: "property_values", code: "required", message: "Validation failed for 'property_values': value is required")
-        }
-        self.name = try container.sdkDecodeRequired(.name)
-        self.propertyValues = try container.sdkDecodeRequired(.propertyValues)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension EnterpriseRulesetConditionsOrganizationPropertySpec {
-    public init(name: String, propertyValues: [String]) {
+public extension EnterpriseRulesetConditionsOrganizationPropertySpec {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        guard container.contains(.propertyValues) else {
+            throw SdkValidationError(
+                field: "property_values",
+                code: "required",
+                message: "Validation failed for 'property_values': value is required"
+            )
+        }
+        name = try container.sdkDecodeRequired(.name)
+        propertyValues = try container.sdkDecodeRequired(.propertyValues)
+    }
+}
+
+public extension EnterpriseRulesetConditionsOrganizationPropertySpec {
+    init(name: String, propertyValues: [String]) {
         (self.name, self.propertyValues) = (name, propertyValues)
     }
 }
@@ -174,19 +199,19 @@ public struct EnterpriseRulesetConditionsOrganizationIdTargetOrganizationId: Cod
     }
 
     init() {
-        self.organizationIds = nil
+        organizationIds = nil
     }
 }
 
-extension EnterpriseRulesetConditionsOrganizationIdTargetOrganizationId {
-    public init(from decoder: Decoder) throws {
+public extension EnterpriseRulesetConditionsOrganizationIdTargetOrganizationId {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.organizationIds = try container.sdkDecodeIfPresent(.organizationIds)
+        organizationIds = try container.sdkDecodeIfPresent(.organizationIds)
     }
 }
 
-extension EnterpriseRulesetConditionsOrganizationIdTargetOrganizationId {
-    public init(organizationIds: [Int]? = nil) {
+public extension EnterpriseRulesetConditionsOrganizationIdTargetOrganizationId {
+    init(organizationIds: [Int]? = nil) {
         self.init()
         self.organizationIds = organizationIds
     }
@@ -201,21 +226,27 @@ public struct EnterpriseRulesetConditionsOrganizationPropertyTarget: Codable {
         case organizationProperty = "organization_property"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension EnterpriseRulesetConditionsOrganizationPropertyTarget {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.organizationProperty) else {
-            throw SdkValidationError(field: "organization_property", code: "required", message: "Validation failed for 'organization_property': value is required")
-        }
-        self.organizationProperty = try container.sdkDecodeRequired(.organizationProperty)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension EnterpriseRulesetConditionsOrganizationPropertyTarget {
-    public init(organizationProperty: EnterpriseRulesetConditionsOrganizationPropertyTargetOrganizaXfd8187e868) {
+public extension EnterpriseRulesetConditionsOrganizationPropertyTarget {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.organizationProperty) else {
+            throw SdkValidationError(
+                field: "organization_property",
+                code: "required",
+                message: "Validation failed for 'organization_property': value is required"
+            )
+        }
+        organizationProperty = try container.sdkDecodeRequired(.organizationProperty)
+    }
+}
+
+public extension EnterpriseRulesetConditionsOrganizationPropertyTarget {
+    init(organizationProperty: EnterpriseRulesetConditionsOrganizationPropertyTargetOrganizaXfd8187e868) {
         self.organizationProperty = organizationProperty
     }
 }

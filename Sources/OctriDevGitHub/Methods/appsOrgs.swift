@@ -6,12 +6,24 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension AppsMethods {
-    /// Enables an authenticated GitHub App to find the organization's installation information. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
+public extension AppsMethods {
+    /// Enables an authenticated GitHub App to find the organization's installation information. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
+    /// to access this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
-    public static func appsGetOrgInstallation(config: ClientConfig, org: String, requestOptions: RequestOptions? = nil) async throws -> Installation {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/installation"].joined(), config: config, decoder: .json, operationId: "appsGetOrgInstallation", options: requestOptions)).data
+    static func appsGetOrgInstallation(
+        config: ClientConfig,
+        org: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Installation {
+        try await (sdkRequest(
+            "GET",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/installation"].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "appsGetOrgInstallation",
+            options: requestOptions
+        )).data
     }
 }

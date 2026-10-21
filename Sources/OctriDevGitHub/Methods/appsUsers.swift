@@ -6,12 +6,24 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension AppsMethods {
-    /// Enables an authenticated GitHub App to find the user’s installation information. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
+public extension AppsMethods {
+    /// Enables an authenticated GitHub App to find the user’s installation information. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
+    /// to access this endpoint.
     ///
     /// - Parameters:
     /// - username: The handle for the GitHub user account.
-    public static func appsGetUserInstallation(config: ClientConfig, username: String, requestOptions: RequestOptions? = nil) async throws -> Installation {
-        return try (await sdkRequest("GET", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/installation"].joined(), config: config, decoder: .json, operationId: "appsGetUserInstallation", options: requestOptions)).data
+    static func appsGetUserInstallation(
+        config: ClientConfig,
+        username: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Installation {
+        try await (sdkRequest(
+            "GET",
+            ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/installation"].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "appsGetUserInstallation",
+            options: requestOptions
+        )).data
     }
 }

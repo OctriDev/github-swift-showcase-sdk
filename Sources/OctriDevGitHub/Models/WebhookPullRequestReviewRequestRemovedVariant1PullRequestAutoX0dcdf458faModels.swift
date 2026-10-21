@@ -3,19 +3,26 @@
 
 import Foundation
 
-// WebhookPullRequestReviewRequestRemoved domain models
+/// WebhookPullRequestReviewRequestRemoved domain models
 /// The merge method to use.
-public struct WebhookPullRequestReviewRequestRemovedVariant1PullRequestAutoX0dcdf458fa: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookPullRequestReviewRequestRemovedVariant1PullRequestAutoX0dcdf458fa: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let merge = WebhookPullRequestReviewRequestRemovedVariant1PullRequestAutoX0dcdf458fa(rawValue: "merge")
-    public static let squash = WebhookPullRequestReviewRequestRemovedVariant1PullRequestAutoX0dcdf458fa(rawValue: "squash")
-    public static let rebase = WebhookPullRequestReviewRequestRemovedVariant1PullRequestAutoX0dcdf458fa(rawValue: "rebase")
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let merge =
+        WebhookPullRequestReviewRequestRemovedVariant1PullRequestAutoX0dcdf458fa(rawValue: "merge")
+    public static let squash =
+        WebhookPullRequestReviewRequestRemovedVariant1PullRequestAutoX0dcdf458fa(rawValue: "squash")
+    public static let rebase =
+        WebhookPullRequestReviewRequestRemovedVariant1PullRequestAutoX0dcdf458fa(rawValue: "rebase")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -24,17 +31,22 @@ public struct WebhookPullRequestReviewRequestRemovedVariant1PullRequestAutoX0dcd
     }
 }
 
-public struct WebhookPullRequestReviewRequestRemovedVariant0PullRequestAutoXe2fd5a6baf: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookPullRequestReviewRequestRemovedVariant0PullRequestAutoXe2fd5a6baf: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = WebhookPullRequestReviewRequestRemovedVariant0PullRequestAutoXe2fd5a6baf(rawValue: "Bot")
     public static let user = WebhookPullRequestReviewRequestRemovedVariant0PullRequestAutoXe2fd5a6baf(rawValue: "User")
-    public static let organization = WebhookPullRequestReviewRequestRemovedVariant0PullRequestAutoXe2fd5a6baf(rawValue: "Organization")
+    public static let organization =
+        WebhookPullRequestReviewRequestRemovedVariant0PullRequestAutoXe2fd5a6baf(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

@@ -6,8 +6,10 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ReposMethods {
-    /// Lists branches in a repository, including each branch's commit and protection status. Use `protected` to filter for protected or unprotected branches, or omit it to include all branches; use `page` and `per_page` to paginate the results.
+public extension ReposMethods {
+    /// Lists branches in a repository, including each branch's commit and protection status. Use `protected` to filter
+    /// for protected or unprotected branches, or omit it to include all branches; use `page` and `per_page` to paginate
+    /// the results.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -25,11 +27,26 @@ extension ReposMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func reposListBranches(config: ClientConfig, owner: String, repo: String, protected: Bool? = nil, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [ShortBranch] {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/branches"].joined(), config: config, query: [
+    static func reposListBranches(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        protected: Bool? = nil,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [ShortBranch] {
+        try await (sdkRequest("GET", [
+            "/repos/",
+            sdkEncodePathSegment(sdkWireString(owner)),
+            "/",
+            sdkEncodePathSegment(sdkWireString(repo)),
+            "/branches",
+        ].joined(), config: config, query: [
             SdkQueryParameter("protected", value: protected),
             SdkQueryParameter("per_page", value: perPage),
             SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "reposListBranches", options: requestOptions, errors: ["404": BasicError.self])).data
+        ], decoder: .json, operationId: "reposListBranches", options: requestOptions, errors: ["404": BasicError.self]))
+            .data
     }
 }

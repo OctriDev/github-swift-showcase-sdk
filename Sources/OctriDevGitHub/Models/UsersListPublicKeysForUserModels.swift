@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Users domain models
+/// Users domain models
 /// Key Simple
 public struct KeySimple: Codable {
     /// Required `integer` value serialized in the `id` wire field.
@@ -22,33 +22,43 @@ public struct KeySimple: Codable {
         case lastUsed = "last_used"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension KeySimple {
-    public init(from decoder: Decoder) throws {
+public extension KeySimple {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
         }
         guard container.contains(.key) else {
-            throw SdkValidationError(field: "key", code: "required", message: "Validation failed for 'key': value is required")
+            throw SdkValidationError(
+                field: "key",
+                code: "required",
+                message: "Validation failed for 'key': value is required"
+            )
         }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.key = try container.sdkDecodeRequired(.key)
-        self.createdAt = try container.sdkDecodeIfPresent(.createdAt)
-        self.lastUsed = try container.sdkDecodeIfPresent(.lastUsed)
-        if let value = self.createdAt {
+        id = try container.sdkDecodeRequired(.id)
+        key = try container.sdkDecodeRequired(.key)
+        createdAt = try container.sdkDecodeIfPresent(.createdAt)
+        lastUsed = try container.sdkDecodeIfPresent(.lastUsed)
+        if let value = createdAt {
             try sdkValidateDateTime("created_at", sdkWireString(value))
         }
-        if let value = self.lastUsed {
+        if let value = lastUsed {
             try sdkValidateDateTime("last_used", sdkWireString(value))
         }
     }
 }
 
-extension KeySimple {
-    public init(id: Int, key: String, createdAt: Date? = nil, lastUsed: Date? = nil) throws {
+public extension KeySimple {
+    init(id: Int, key: String, createdAt: Date? = nil, lastUsed: Date? = nil) throws {
         (self.id, self.key) = (id, key)
         (self.createdAt, self.lastUsed) = (createdAt, lastUsed)
         if let value = self.createdAt {

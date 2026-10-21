@@ -3,7 +3,7 @@
 
 import Foundation
 
-// IssuesIssue domain models
+/// IssuesIssue domain models
 /// Issue Type Changed Issue Event
 public struct IssueTypeChangedIssueEvent: Codable {
     /// Required `integer` value serialized in the `id` wire field.
@@ -51,29 +51,44 @@ public struct IssueTypeChangedIssueEvent: Codable {
         case intent
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension IssueTypeChangedIssueEvent {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.actor = try container.sdkDecodeRequired(.actor)
-        self.event = try container.sdkDecodeRequired(.event)
-        self.commitId = try container.sdkDecodeNullable(.commitId)
-        self.commitUrl = try container.sdkDecodeNullable(.commitUrl)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.performedViaGithubApp = try container.sdkDecodeNullable(.performedViaGithubApp)
-        self.issueType = try container.sdkDecodeNullable(.issueType)
-        self.prevIssueType = try container.sdkDecodeNullable(.prevIssueType)
-        self.intent = try container.sdkDecodeIfPresent(.intent)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension IssueTypeChangedIssueEvent {
-    public init(id: Int, nodeId: String, url: String, actor: SimpleUser, event: String, commitId: String?, commitUrl: String?, createdAt: String, performedViaGithubApp: NullableIntegration?, issueType: IssueTypeWebhook?, prevIssueType: IssueTypeWebhook?, intent: NullableIssueEventIntent? = nil) {
+public extension IssueTypeChangedIssueEvent {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        url = try container.sdkDecodeRequired(.url)
+        actor = try container.sdkDecodeRequired(.actor)
+        event = try container.sdkDecodeRequired(.event)
+        commitId = try container.sdkDecodeNullable(.commitId)
+        commitUrl = try container.sdkDecodeNullable(.commitUrl)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        performedViaGithubApp = try container.sdkDecodeNullable(.performedViaGithubApp)
+        issueType = try container.sdkDecodeNullable(.issueType)
+        prevIssueType = try container.sdkDecodeNullable(.prevIssueType)
+        intent = try container.sdkDecodeIfPresent(.intent)
+    }
+}
+
+public extension IssueTypeChangedIssueEvent {
+    init(
+        id: Int,
+        nodeId: String,
+        url: String,
+        actor: SimpleUser,
+        event: String,
+        commitId: String?,
+        commitUrl: String?,
+        createdAt: String,
+        performedViaGithubApp: NullableIntegration?,
+        issueType: IssueTypeWebhook?,
+        prevIssueType: IssueTypeWebhook?,
+        intent: NullableIssueEventIntent? = nil
+    ) {
         (self.id, self.nodeId) = (id, nodeId)
         (self.url, self.actor) = (url, actor)
         (self.event, self.commitId) = (event, commitId)
@@ -194,48 +209,80 @@ public struct IssueEvent: Codable {
         case performedViaGithubApp = "performed_via_github_app"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension IssueEvent {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.actor = try container.sdkDecodeNullable(.actor)
-        self.event = try container.sdkDecodeRequired(.event)
-        self.commitId = try container.sdkDecodeNullable(.commitId)
-        self.commitUrl = try container.sdkDecodeNullable(.commitUrl)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.issue = try container.sdkDecodeIfPresent(.issue)
-        self.label = try container.sdkDecodeIfPresent(.label)
-        self.assignee = try container.sdkDecodeIfPresent(.assignee)
-        self.assigner = try container.sdkDecodeIfPresent(.assigner)
-        self.reviewRequester = try container.sdkDecodeIfPresent(.reviewRequester)
-        self.requestedReviewer = try container.sdkDecodeIfPresent(.requestedReviewer)
-        self.requestedTeam = try container.sdkDecodeIfPresent(.requestedTeam)
-        self.dismissedReview = try container.sdkDecodeIfPresent(.dismissedReview)
-        self.milestone = try container.sdkDecodeIfPresent(.milestone)
-        self.projectCard = try container.sdkDecodeIfPresent(.projectCard)
-        self.rename = try container.sdkDecodeIfPresent(.rename)
-        self.issueType = try container.sdkDecodeIfPresent(.issueType)
-        self.prevIssueType = try container.sdkDecodeIfPresent(.prevIssueType)
-        self.subIssue = try container.sdkDecodeIfPresent(.subIssue)
-        self.parentIssue = try container.sdkDecodeIfPresent(.parentIssue)
-        self.blockedBy = try container.sdkDecodeIfPresent(.blockedBy)
-        self.blocking = try container.sdkDecodeIfPresent(.blocking)
-        self.intent = try container.sdkDecodeIfPresent(.intent)
-        self.authorAssociation = try container.sdkDecodeIfPresent(.authorAssociation)
-        self.lockReason = try container.sdkDecodeIfPresent(.lockReason)
-        self.performedViaGithubApp = try container.sdkDecodeIfPresent(.performedViaGithubApp)
-            try sdkValidateUri("url", self.url)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension IssueEvent {
-    public init(id: Int, nodeId: String, url: String, actor: NullableSimpleUser?, event: String, commitId: String?, commitUrl: String?, createdAt: Date, issue: NullableIssue? = nil, label: IssueEventLabel? = nil, assignee: NullableSimpleUser? = nil, assigner: NullableSimpleUser? = nil, reviewRequester: NullableSimpleUser? = nil, requestedReviewer: NullableSimpleUser? = nil, requestedTeam: Team? = nil, dismissedReview: IssueEventDismissedReview? = nil, milestone: IssueEventMilestone? = nil, projectCard: IssueEventProjectCard? = nil, rename: IssueEventRename? = nil, issueType: IssueTypeWebhook? = nil, prevIssueType: IssueTypeWebhook? = nil, subIssue: NullableIssueReference? = nil, parentIssue: NullableIssueReference? = nil, blockedBy: NullableIssueReference? = nil, blocking: NullableIssueReference? = nil, intent: NullableIssueEventIntent? = nil, authorAssociation: AuthorAssociation? = nil, lockReason: String? = nil, performedViaGithubApp: NullableIntegration? = nil) throws {
+public extension IssueEvent {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        url = try container.sdkDecodeRequired(.url)
+        actor = try container.sdkDecodeNullable(.actor)
+        event = try container.sdkDecodeRequired(.event)
+        commitId = try container.sdkDecodeNullable(.commitId)
+        commitUrl = try container.sdkDecodeNullable(.commitUrl)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        issue = try container.sdkDecodeIfPresent(.issue)
+        label = try container.sdkDecodeIfPresent(.label)
+        assignee = try container.sdkDecodeIfPresent(.assignee)
+        assigner = try container.sdkDecodeIfPresent(.assigner)
+        reviewRequester = try container.sdkDecodeIfPresent(.reviewRequester)
+        requestedReviewer = try container.sdkDecodeIfPresent(.requestedReviewer)
+        requestedTeam = try container.sdkDecodeIfPresent(.requestedTeam)
+        dismissedReview = try container.sdkDecodeIfPresent(.dismissedReview)
+        milestone = try container.sdkDecodeIfPresent(.milestone)
+        projectCard = try container.sdkDecodeIfPresent(.projectCard)
+        rename = try container.sdkDecodeIfPresent(.rename)
+        issueType = try container.sdkDecodeIfPresent(.issueType)
+        prevIssueType = try container.sdkDecodeIfPresent(.prevIssueType)
+        subIssue = try container.sdkDecodeIfPresent(.subIssue)
+        parentIssue = try container.sdkDecodeIfPresent(.parentIssue)
+        blockedBy = try container.sdkDecodeIfPresent(.blockedBy)
+        blocking = try container.sdkDecodeIfPresent(.blocking)
+        intent = try container.sdkDecodeIfPresent(.intent)
+        authorAssociation = try container.sdkDecodeIfPresent(.authorAssociation)
+        lockReason = try container.sdkDecodeIfPresent(.lockReason)
+        performedViaGithubApp = try container.sdkDecodeIfPresent(.performedViaGithubApp)
+        try sdkValidateUri("url", url)
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+    }
+}
+
+public extension IssueEvent {
+    init(
+        id: Int,
+        nodeId: String,
+        url: String,
+        actor: NullableSimpleUser?,
+        event: String,
+        commitId: String?,
+        commitUrl: String?,
+        createdAt: Date,
+        issue: NullableIssue? = nil,
+        label: IssueEventLabel? = nil,
+        assignee: NullableSimpleUser? = nil,
+        assigner: NullableSimpleUser? = nil,
+        reviewRequester: NullableSimpleUser? = nil,
+        requestedReviewer: NullableSimpleUser? = nil,
+        requestedTeam: Team? = nil,
+        dismissedReview: IssueEventDismissedReview? = nil,
+        milestone: IssueEventMilestone? = nil,
+        projectCard: IssueEventProjectCard? = nil,
+        rename: IssueEventRename? = nil,
+        issueType: IssueTypeWebhook? = nil,
+        prevIssueType: IssueTypeWebhook? = nil,
+        subIssue: NullableIssueReference? = nil,
+        parentIssue: NullableIssueReference? = nil,
+        blockedBy: NullableIssueReference? = nil,
+        blocking: NullableIssueReference? = nil,
+        intent: NullableIssueEventIntent? = nil,
+        authorAssociation: AuthorAssociation? = nil,
+        lockReason: String? = nil,
+        performedViaGithubApp: NullableIntegration? = nil
+    ) throws {
         (self.id, self.nodeId) = (id, nodeId)
         (self.url, self.actor) = (url, actor)
         (self.event, self.commitId) = (event, commitId)
@@ -251,8 +298,8 @@ extension IssueEvent {
         (self.blocking, self.intent) = (blocking, intent)
         (self.authorAssociation, self.lockReason) = (authorAssociation, lockReason)
         self.performedViaGithubApp = performedViaGithubApp
-            try sdkValidateUri("url", self.url)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        try sdkValidateUri("url", self.url)
+        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
     }
 }
 
@@ -271,26 +318,36 @@ public struct IssueTypeWebhook: Codable {
         case color
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension IssueTypeWebhook {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.color = try container.sdkDecodeIfPresent(.color)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension IssueTypeWebhook {
-    public init(id: Int, name: String, color: IssueTypeWebhookColor? = nil) {
+public extension IssueTypeWebhook {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        name = try container.sdkDecodeRequired(.name)
+        color = try container.sdkDecodeIfPresent(.color)
+    }
+}
+
+public extension IssueTypeWebhook {
+    init(id: Int, name: String, color: IssueTypeWebhookColor? = nil) {
         (self.id, self.name) = (id, name)
         self.color = color
     }
@@ -300,7 +357,10 @@ extension IssueTypeWebhook {
 public struct IssueSuggestionState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let pending = IssueSuggestionState(rawValue: "pending")
     public static let applied = IssueSuggestionState(rawValue: "applied")
     public static let approved = IssueSuggestionState(rawValue: "approved")
@@ -310,7 +370,7 @@ public struct IssueSuggestionState: RawRepresentable, Hashable, Codable, Sendabl
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -323,7 +383,10 @@ public struct IssueSuggestionState: RawRepresentable, Hashable, Codable, Sendabl
 public struct IssueTypeWebhookColor: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let gray = IssueTypeWebhookColor(rawValue: "gray")
     public static let blue = IssueTypeWebhookColor(rawValue: "blue")
     public static let green = IssueTypeWebhookColor(rawValue: "green")
@@ -335,7 +398,7 @@ public struct IssueTypeWebhookColor: RawRepresentable, Hashable, Codable, Sendab
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -348,14 +411,17 @@ public struct IssueTypeWebhookColor: RawRepresentable, Hashable, Codable, Sendab
 public struct IssueSuggestionConfidence: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let low = IssueSuggestionConfidence(rawValue: "LOW")
     public static let medium = IssueSuggestionConfidence(rawValue: "MEDIUM")
     public static let high = IssueSuggestionConfidence(rawValue: "HIGH")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -368,7 +434,10 @@ public struct IssueSuggestionConfidence: RawRepresentable, Hashable, Codable, Se
 public struct IssueSuggestionAction: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let setType = IssueSuggestionAction(rawValue: "set_type")
     public static let addLabel = IssueSuggestionAction(rawValue: "add_label")
     public static let addField = IssueSuggestionAction(rawValue: "add_field")
@@ -377,7 +446,7 @@ public struct IssueSuggestionAction: RawRepresentable, Hashable, Codable, Sendab
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

@@ -6,26 +6,59 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension OrgsMethods {
+public extension OrgsMethods {
     /// Gets all custom properties defined for an organization. Organization members can read these properties.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
-    public static func orgsCustomPropertiesForReposGetOrganizationDefinitions(config: ClientConfig, org: String, requestOptions: RequestOptions? = nil) async throws -> [CustomProperty] {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/properties/schema"].joined(), config: config, decoder: .json, operationId: "orgsCustomPropertiesForReposGetOrganizationDefinitions", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+    static func orgsCustomPropertiesForReposGetOrganizationDefinitions(
+        config: ClientConfig,
+        org: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [CustomProperty] {
+        try await (sdkRequest(
+            "GET",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/properties/schema"].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "orgsCustomPropertiesForReposGetOrganizationDefinitions",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 
-    /// Creates new or updates existing custom properties defined for an organization in a batch. If the property already exists, the existing property will be replaced with the new values. Missing optional values will fall back to default values, previous values will be overwritten. E.g. if a property exists with `values_editable_by: org_and_repo_actors` and it's updated without specifying `values_editable_by`, it will be updated to default value `org_actors`. To use this endpoint, the authenticated user must be one of: - An administrator for the organization. - A user, or a user on a team, with the fine-grained permission of `custom_properties_org_definitions_manager` in the organization.
+    /// Creates new or updates existing custom properties defined for an organization in a batch. If the property
+    /// already exists, the existing property will be replaced with the new values. Missing optional values will fall
+    /// back to default values, previous values will be overwritten. E.g. if a property exists with `values_editable_by:
+    /// org_and_repo_actors` and it's updated without specifying `values_editable_by`, it will be updated to default
+    /// value `org_actors`. To use this endpoint, the authenticated user must be one of: - An administrator for the
+    /// organization. - A user, or a user on a team, with the fine-grained permission of
+    /// `custom_properties_org_definitions_manager` in the organization.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - properties: The array of custom properties to create or update.
-    public static func orgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions(config: ClientConfig, org: String, properties: [CustomProperty], requestOptions: RequestOptions? = nil) async throws -> [CustomProperty] {
+    static func orgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions(
+        config: ClientConfig,
+        org: String,
+        properties: [CustomProperty],
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [CustomProperty] {
         try validateItems("properties", properties, min: 1, max: 100)
 
-        let requestBody = OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitX69709c377a(properties: properties)
+        let requestBody =
+            OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitX69709c377a(properties: properties)
 
-        return try (await sdkRequest("PATCH", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/properties/schema"].joined(), config: config, body: requestBody, decoder: .json, operationId: "orgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+        return try await (sdkRequest(
+            "PATCH",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/properties/schema"].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "orgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 
     private struct OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitX69709c377a: Encodable {
@@ -33,7 +66,7 @@ extension OrgsMethods {
 
         func encode(to encoder: Encoder) throws {
             var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-            try keyedContainer.encode(self.properties, forKey: SdkCodingKey("properties"))
+            try keyedContainer.encode(properties, forKey: SdkCodingKey("properties"))
         }
     }
 
@@ -42,7 +75,25 @@ extension OrgsMethods {
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - customPropertyName: The custom property name
-    public static func orgsCustomPropertiesForReposGetOrganizationDefinition(config: ClientConfig, org: String, customPropertyName: String, requestOptions: RequestOptions? = nil) async throws -> CustomProperty {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/properties/schema/", sdkEncodePathSegment(sdkWireString(customPropertyName))].joined(), config: config, decoder: .json, operationId: "orgsCustomPropertiesForReposGetOrganizationDefinition", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+    static func orgsCustomPropertiesForReposGetOrganizationDefinition(
+        config: ClientConfig,
+        org: String,
+        customPropertyName: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CustomProperty {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/orgs/",
+                sdkEncodePathSegment(sdkWireString(org)),
+                "/properties/schema/",
+                sdkEncodePathSegment(sdkWireString(customPropertyName)),
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "orgsCustomPropertiesForReposGetOrganizationDefinition",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 }

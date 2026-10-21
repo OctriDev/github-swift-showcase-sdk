@@ -26,12 +26,14 @@ extension SdkMethodTests {
         )
     }
 
-    func testDependabotListAlertsForEnterpriseDependabotListAlertsForEnterpriseReachesMockAndDecodesResponse() async throws {
+    func testDependabotListAlertsForEnterpriseDependabotListAlertsForEnterpriseReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        var options = try DependabotMethods.DependabotListAlertsForEnterpriseOptions(enterprise: decoded("\"enterprise\""))
+        var options = try DependabotMethods
+            .DependabotListAlertsForEnterpriseOptions(enterprise: decoded("\"enterprise\""))
         options.classification = try decoded("\"classification\"")
         options.state = try decoded("\"state\"")
         options.severity = try decoded("\"severity\"")
@@ -60,12 +62,14 @@ extension SdkMethodTests {
         )
     }
 
-    func testDependabotListAlertsForEnterpriseDependabotListAlertsForEnterprise403ReachesMockAndDecodesResponse() async throws {
+    func testDependabotListAlertsForEnterpriseDependabotListAlertsForEnterprise403ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
         _ = client
-        var options = try DependabotMethods.DependabotListAlertsForEnterpriseOptions(enterprise: decoded("\"enterprise\""))
+        var options = try DependabotMethods
+            .DependabotListAlertsForEnterpriseOptions(enterprise: decoded("\"enterprise\""))
         options.classification = try decoded("\"classification\"")
         options.state = try decoded("\"state\"")
         options.severity = try decoded("\"severity\"")
@@ -87,8 +91,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.dependabot.listAlertsForEnterprise(
-            options: options
-        )
+                options: options
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -171,8 +175,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.dependabot.listAlertsForOrg(
-            options: options
-        )
+                options: options
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -193,7 +197,10 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try DependabotMethods.DependabotListAlertsForRepoOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""))
+        var options = try DependabotMethods.DependabotListAlertsForRepoOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\"")
+        )
         options.classification = try decoded("\"classification\"")
         options.state = try decoded("\"state\"")
         options.severity = try decoded("\"severity\"")
@@ -228,7 +235,10 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try DependabotMethods.DependabotListAlertsForRepoOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""))
+        var options = try DependabotMethods.DependabotListAlertsForRepoOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\"")
+        )
         options.classification = try decoded("\"classification\"")
         options.state = try decoded("\"state\"")
         options.severity = try decoded("\"severity\"")
@@ -251,8 +261,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.dependabot.listAlertsForRepo(
-            options: options
-        )
+                options: options
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -309,7 +319,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testDependabotListSelectedReposForOrgSecretDependabotListSelectedX91aad6ca0fReachesMockAndDecodesResponse() async throws {
+    func testDependabotListSelectedReposForOrgSecretDependabotListSelectedX91aad6ca0fReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -330,7 +341,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testDependabotRemoveSelectedRepoFromOrgSecretDependabotRemoveSeleX12af682b82ReachesMockAndDecodesResponse() async throws {
+    func testDependabotRemoveSelectedRepoFromOrgSecretDependabotRemoveSeleX12af682b82ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -343,7 +355,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testDependabotRepositoryAccessForEnterpriseDependabotRepositoryAcXa6f34ed044ReachesMockAndDecodesResponse() async throws {
+    func testDependabotRepositoryAccessForEnterpriseDependabotRepositoryAcXa6f34ed044ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -363,7 +376,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testDependabotRepositoryAccessForEnterpriseDependabotRepositoryAcXef6346d175ReachesMockAndDecodesResponse() async throws {
+    func testDependabotRepositoryAccessForEnterpriseDependabotRepositoryAcXef6346d175ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -374,10 +388,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.dependabot.repositoryAccessForEnterprise(
-            enterprise: decoded("\"enterprise\""),
-            page: decoded("1"),
-            perPage: decoded("30")
-        )
+                enterprise: decoded("\"enterprise\""),
+                page: decoded("1"),
+                perPage: decoded("30")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -393,7 +407,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testDependabotRepositoryAccessForOrgDependabotRepositoryAccessForOrgReachesMockAndDecodesResponse() async throws {
+    func testDependabotRepositoryAccessForOrgDependabotRepositoryAccessForOrgReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -413,7 +428,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testDependabotRepositoryAccessForOrgDependabotRepositoryAccessForOrg403ReachesMockAndDecodesResponse() async throws {
+    func testDependabotRepositoryAccessForOrgDependabotRepositoryAccessForOrg403ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -424,10 +440,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.dependabot.repositoryAccessForOrg(
-            org: decoded("\"org\""),
-            page: decoded("1"),
-            perPage: decoded("30")
-        )
+                org: decoded("\"org\""),
+                page: decoded("1"),
+                perPage: decoded("30")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -443,7 +459,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testDependabotSetRepositoryAccessDefaultLevelDependabotSetRepositX4784336337ReachesMockAndDecodesResponse() async throws {
+    func testDependabotSetRepositoryAccessDefaultLevelDependabotSetRepositX4784336337ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -455,7 +472,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testDependabotSetRepositoryAccessDefaultLevelDependabotSetRepositX80bcf9fe3cReachesMockAndDecodesResponse() async throws {
+    func testDependabotSetRepositoryAccessDefaultLevelDependabotSetRepositX80bcf9fe3cReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -466,9 +484,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.dependabot.setRepositoryAccessDefaultLevel(
-            org: decoded("\"org\""),
-            defaultLevel: decoded("\"public\"")
-        )
+                org: decoded("\"org\""),
+                defaultLevel: decoded("\"public\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -484,7 +502,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testDependabotSetRepositoryAccessDefaultLevelForEnterpriseDependaX8e6cf8f080ReachesMockAndDecodesResponse() async throws {
+    func testDependabotSetRepositoryAccessDefaultLevelForEnterpriseDependaX8e6cf8f080ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -496,7 +515,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testDependabotSetRepositoryAccessDefaultLevelForEnterpriseDependaXb1d254e14aReachesMockAndDecodesResponse() async throws {
+    func testDependabotSetRepositoryAccessDefaultLevelForEnterpriseDependaXb1d254e14aReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -507,9 +527,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.dependabot.setRepositoryAccessDefaultLevelForEnterprise(
-            enterprise: decoded("\"enterprise\""),
-            defaultLevel: decoded("\"public\"")
-        )
+                enterprise: decoded("\"enterprise\""),
+                defaultLevel: decoded("\"public\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -525,7 +545,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testDependabotSetSelectedReposForOrgSecretDependabotSetSelectedReX5277be0fc7ReachesMockAndDecodesResponse() async throws {
+    func testDependabotSetSelectedReposForOrgSecretDependabotSetSelectedReX5277be0fc7ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }

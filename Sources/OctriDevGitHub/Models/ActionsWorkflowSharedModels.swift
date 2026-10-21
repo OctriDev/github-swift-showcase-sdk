@@ -3,7 +3,7 @@
 
 import Foundation
 
-// ActionsWorkflow domain models
+/// ActionsWorkflow domain models
 /// A GitHub Actions workflow
 public struct Workflow: Codable {
     /// Required `integer` value serialized in the `id` wire field.
@@ -54,41 +54,55 @@ public struct Workflow: Codable {
         case deletedAt = "deleted_at"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension Workflow {
-    public init(from decoder: Decoder) throws {
+public extension Workflow {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.path = try container.sdkDecodeRequired(.path)
-        self.state = try container.sdkDecodeRequired(.state)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.badgeUrl = try container.sdkDecodeRequired(.badgeUrl)
-        self.deletedAt = try container.sdkDecodeIfPresent(.deletedAt)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-        if let value = self.deletedAt {
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        name = try container.sdkDecodeRequired(.name)
+        path = try container.sdkDecodeRequired(.path)
+        state = try container.sdkDecodeRequired(.state)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        url = try container.sdkDecodeRequired(.url)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        badgeUrl = try container.sdkDecodeRequired(.badgeUrl)
+        deletedAt = try container.sdkDecodeIfPresent(.deletedAt)
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+        if let value = deletedAt {
             try sdkValidateDateTime("deleted_at", sdkWireString(value))
         }
     }
 }
 
-extension Workflow {
-    public init(id: Int, nodeId: String, name: String, path: String, state: WorkflowState, createdAt: Date, updatedAt: Date, url: String, htmlUrl: String, badgeUrl: String, deletedAt: Date? = nil) throws {
+public extension Workflow {
+    init(
+        id: Int,
+        nodeId: String,
+        name: String,
+        path: String,
+        state: WorkflowState,
+        createdAt: Date,
+        updatedAt: Date,
+        url: String,
+        htmlUrl: String,
+        badgeUrl: String,
+        deletedAt: Date? = nil
+    ) throws {
         (self.id, self.nodeId) = (id, nodeId)
         (self.name, self.path) = (name, path)
         (self.state, self.createdAt) = (state, createdAt)
         (self.updatedAt, self.url) = (updatedAt, url)
         (self.htmlUrl, self.badgeUrl) = (htmlUrl, badgeUrl)
         self.deletedAt = deletedAt
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
         if let value = self.deletedAt {
             try sdkValidateDateTime("deleted_at", sdkWireString(value))
         }
@@ -237,58 +251,97 @@ public struct WorkflowRun: Codable {
         case headRepositoryId = "head_repository_id"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension WorkflowRun {
-    public init(from decoder: Decoder) throws {
+public extension WorkflowRun {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.headBranch = try container.sdkDecodeNullable(.headBranch)
-        self.headSha = try container.sdkDecodeRequired(.headSha)
-        self.path = try container.sdkDecodeRequired(.path)
-        self.runNumber = try container.sdkDecodeRequired(.runNumber)
-        self.event = try container.sdkDecodeRequired(.event)
-        self.status = try container.sdkDecodeNullable(.status)
-        self.conclusion = try container.sdkDecodeNullable(.conclusion)
-        self.workflowId = try container.sdkDecodeRequired(.workflowId)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.pullRequests = try container.sdkDecodeNullable(.pullRequests)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        self.jobsUrl = try container.sdkDecodeRequired(.jobsUrl)
-        self.logsUrl = try container.sdkDecodeRequired(.logsUrl)
-        self.checkSuiteUrl = try container.sdkDecodeRequired(.checkSuiteUrl)
-        self.artifactsUrl = try container.sdkDecodeRequired(.artifactsUrl)
-        self.cancelUrl = try container.sdkDecodeRequired(.cancelUrl)
-        self.rerunUrl = try container.sdkDecodeRequired(.rerunUrl)
-        self.workflowUrl = try container.sdkDecodeRequired(.workflowUrl)
-        self.headCommit = try container.sdkDecodeNullable(.headCommit)
-        self.repository = try container.sdkDecodeRequired(.repository)
-        self.headRepository = try container.sdkDecodeRequired(.headRepository)
-        self.displayTitle = try container.sdkDecodeRequired(.displayTitle)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.checkSuiteId = try container.sdkDecodeIfPresent(.checkSuiteId)
-        self.checkSuiteNodeId = try container.sdkDecodeIfPresent(.checkSuiteNodeId)
-        self.runAttempt = try container.sdkDecodeIfPresent(.runAttempt)
-        self.referencedWorkflows = try container.sdkDecodeIfPresent(.referencedWorkflows)
-        self.actor = try container.sdkDecodeIfPresent(.actor)
-        self.triggeringActor = try container.sdkDecodeIfPresent(.triggeringActor)
-        self.runStartedAt = try container.sdkDecodeIfPresent(.runStartedAt)
-        self.previousAttemptUrl = try container.sdkDecodeIfPresent(.previousAttemptUrl)
-        self.headRepositoryId = try container.sdkDecodeIfPresent(.headRepositoryId)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-        if let value = self.runStartedAt {
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        headBranch = try container.sdkDecodeNullable(.headBranch)
+        headSha = try container.sdkDecodeRequired(.headSha)
+        path = try container.sdkDecodeRequired(.path)
+        runNumber = try container.sdkDecodeRequired(.runNumber)
+        event = try container.sdkDecodeRequired(.event)
+        status = try container.sdkDecodeNullable(.status)
+        conclusion = try container.sdkDecodeNullable(.conclusion)
+        workflowId = try container.sdkDecodeRequired(.workflowId)
+        url = try container.sdkDecodeRequired(.url)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        pullRequests = try container.sdkDecodeNullable(.pullRequests)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        jobsUrl = try container.sdkDecodeRequired(.jobsUrl)
+        logsUrl = try container.sdkDecodeRequired(.logsUrl)
+        checkSuiteUrl = try container.sdkDecodeRequired(.checkSuiteUrl)
+        artifactsUrl = try container.sdkDecodeRequired(.artifactsUrl)
+        cancelUrl = try container.sdkDecodeRequired(.cancelUrl)
+        rerunUrl = try container.sdkDecodeRequired(.rerunUrl)
+        workflowUrl = try container.sdkDecodeRequired(.workflowUrl)
+        headCommit = try container.sdkDecodeNullable(.headCommit)
+        repository = try container.sdkDecodeRequired(.repository)
+        headRepository = try container.sdkDecodeRequired(.headRepository)
+        displayTitle = try container.sdkDecodeRequired(.displayTitle)
+        name = try container.sdkDecodeIfPresent(.name)
+        checkSuiteId = try container.sdkDecodeIfPresent(.checkSuiteId)
+        checkSuiteNodeId = try container.sdkDecodeIfPresent(.checkSuiteNodeId)
+        runAttempt = try container.sdkDecodeIfPresent(.runAttempt)
+        referencedWorkflows = try container.sdkDecodeIfPresent(.referencedWorkflows)
+        actor = try container.sdkDecodeIfPresent(.actor)
+        triggeringActor = try container.sdkDecodeIfPresent(.triggeringActor)
+        runStartedAt = try container.sdkDecodeIfPresent(.runStartedAt)
+        previousAttemptUrl = try container.sdkDecodeIfPresent(.previousAttemptUrl)
+        headRepositoryId = try container.sdkDecodeIfPresent(.headRepositoryId)
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+        if let value = runStartedAt {
             try sdkValidateDateTime("run_started_at", sdkWireString(value))
         }
     }
 }
 
-extension WorkflowRun {
-    public init(id: Int, nodeId: String, headBranch: String?, headSha: String, path: String, runNumber: Int, event: String, status: String?, conclusion: String?, workflowId: Int, url: String, htmlUrl: String, pullRequests: [PullRequestMinimal]?, createdAt: Date, updatedAt: Date, jobsUrl: String, logsUrl: String, checkSuiteUrl: String, artifactsUrl: String, cancelUrl: String, rerunUrl: String, workflowUrl: String, headCommit: NullableSimpleCommit?, repository: MinimalRepository, headRepository: MinimalRepository, displayTitle: String, name: String? = nil, checkSuiteId: Int? = nil, checkSuiteNodeId: String? = nil, runAttempt: Int? = nil, referencedWorkflows: [ReferencedWorkflow]? = nil, actor: SimpleUser? = nil, triggeringActor: SimpleUser? = nil, runStartedAt: Date? = nil, previousAttemptUrl: String? = nil, headRepositoryId: Int? = nil) throws {
+public extension WorkflowRun {
+    init(
+        id: Int,
+        nodeId: String,
+        headBranch: String?,
+        headSha: String,
+        path: String,
+        runNumber: Int,
+        event: String,
+        status: String?,
+        conclusion: String?,
+        workflowId: Int,
+        url: String,
+        htmlUrl: String,
+        pullRequests: [PullRequestMinimal]?,
+        createdAt: Date,
+        updatedAt: Date,
+        jobsUrl: String,
+        logsUrl: String,
+        checkSuiteUrl: String,
+        artifactsUrl: String,
+        cancelUrl: String,
+        rerunUrl: String,
+        workflowUrl: String,
+        headCommit: NullableSimpleCommit?,
+        repository: MinimalRepository,
+        headRepository: MinimalRepository,
+        displayTitle: String,
+        name: String? = nil,
+        checkSuiteId: Int? = nil,
+        checkSuiteNodeId: String? = nil,
+        runAttempt: Int? = nil,
+        referencedWorkflows: [ReferencedWorkflow]? = nil,
+        actor: SimpleUser? = nil,
+        triggeringActor: SimpleUser? = nil,
+        runStartedAt: Date? = nil,
+        previousAttemptUrl: String? = nil,
+        headRepositoryId: Int? = nil
+    ) throws {
         (self.id, self.nodeId) = (id, nodeId)
         (self.headBranch, self.headSha) = (headBranch, headSha)
         (self.path, self.runNumber) = (path, runNumber)
@@ -307,8 +360,8 @@ extension WorkflowRun {
         (self.referencedWorkflows, self.actor) = (referencedWorkflows, actor)
         (self.triggeringActor, self.runStartedAt) = (triggeringActor, runStartedAt)
         (self.previousAttemptUrl, self.headRepositoryId) = (previousAttemptUrl, headRepositoryId)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
         if let value = self.runStartedAt {
             try sdkValidateDateTime("run_started_at", sdkWireString(value))
         }
@@ -319,7 +372,10 @@ extension WorkflowRun {
 public struct WorkflowState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let active = WorkflowState(rawValue: "active")
     public static let deleted = WorkflowState(rawValue: "deleted")
     public static let disabledFork = WorkflowState(rawValue: "disabled_fork")
@@ -328,7 +384,7 @@ public struct WorkflowState: RawRepresentable, Hashable, Codable, Sendable, SdkW
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

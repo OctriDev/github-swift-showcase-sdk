@@ -6,8 +6,10 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension CodespacesMethods {
-    /// Deletes a development environment secret in a repository using the secret name. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint. The associated user must be a repository admin.
+public extension CodespacesMethods {
+    /// Deletes a development environment secret in a repository using the secret name. OAuth app tokens and personal
+    /// access tokens (classic) need the `repo` scope to use this endpoint. The associated user must be a repository
+    /// admin.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -15,11 +17,33 @@ extension CodespacesMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - secretName: The name of the secret.
-    public static func codespacesDeleteRepoSecret(config: ClientConfig, owner: String, repo: String, secretName: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/codespaces/secrets/", sdkEncodePathSegment(sdkWireString(secretName))].joined(), config: config, decoder: .empty, operationId: "codespacesDeleteRepoSecret", options: requestOptions)).data
+    static func codespacesDeleteRepoSecret(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        secretName: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/codespaces/secrets/",
+                sdkEncodePathSegment(sdkWireString(secretName)),
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "codespacesDeleteRepoSecret",
+            options: requestOptions
+        )).data
     }
 
-    /// Lists all development environment secrets available for a user's codespaces without revealing their encrypted values. The authenticated user must have Codespaces access to use this endpoint. OAuth app tokens and personal access tokens (classic) need the `codespace` or `codespace:secrets` scope to use this endpoint.
+    /// Lists all development environment secrets available for a user's codespaces without revealing their encrypted
+    /// values. The authenticated user must have Codespaces access to use this endpoint. OAuth app tokens and personal
+    /// access tokens (classic) need the `codespace` or `codespace:secrets` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - perPage: The number of results per page (max 100). For more information,
@@ -30,15 +54,32 @@ extension CodespacesMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func codespacesListSecretsForAuthenticatedUser(config: ClientConfig, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> CodespacesListSecretsForAuthenticatedUserResponse {
-        return try (await sdkRequest("GET", "/user/codespaces/secrets", config: config, query: [
+    static func codespacesListSecretsForAuthenticatedUser(
+        config: ClientConfig,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CodespacesListSecretsForAuthenticatedUserResponse {
+        try await (sdkRequest("GET", "/user/codespaces/secrets", config: config, query: [
             SdkQueryParameter("per_page", value: perPage),
             SdkQueryParameter("page", value: page),
         ], decoder: .json, operationId: "codespacesListSecretsForAuthenticatedUser", options: requestOptions)).data
     }
 
-    /// Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or update secrets. The authenticated user must have Codespaces access to use this endpoint. OAuth app tokens and personal access tokens (classic) need the `codespace` or `codespace:secrets` scope to use this endpoint.
-    public static func codespacesGetPublicKeyForAuthenticatedUser(config: ClientConfig, requestOptions: RequestOptions? = nil) async throws -> CodespacesUserPublicKey {
-        return try (await sdkRequest("GET", "/user/codespaces/secrets/public-key", config: config, decoder: .json, operationId: "codespacesGetPublicKeyForAuthenticatedUser", options: requestOptions)).data
+    /// Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or
+    /// update secrets. The authenticated user must have Codespaces access to use this endpoint. OAuth app tokens and
+    /// personal access tokens (classic) need the `codespace` or `codespace:secrets` scope to use this endpoint.
+    static func codespacesGetPublicKeyForAuthenticatedUser(
+        config: ClientConfig,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CodespacesUserPublicKey {
+        try await (sdkRequest(
+            "GET",
+            "/user/codespaces/secrets/public-key",
+            config: config,
+            decoder: .json,
+            operationId: "codespacesGetPublicKeyForAuthenticatedUser",
+            options: requestOptions
+        )).data
     }
 }

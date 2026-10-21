@@ -3,10 +3,10 @@
 
 import Foundation
 
-// ReposProtected domain models
-extension ProtectedBranchRequiredSignatures {
-    public init(url: String, enabled: Bool) throws {
+/// ReposProtected domain models
+public extension ProtectedBranchRequiredSignatures {
+    init(url: String, enabled: Bool) throws {
         (self.url, self.enabled) = (url, enabled)
-            try sdkValidateUri("url", self.url)
+        try sdkValidateUri("url", self.url)
     }
 }

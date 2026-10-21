@@ -3,48 +3,104 @@
 
 import Foundation
 
-extension UsersNamespace {
-/// Adds one or more email addresses to the authenticated user's account. Supply at least one address in `emails`; the request can also be a direct email string or array instead of an object. OAuth app tokens and personal access tokens (classic) need the `user` scope.
+public extension UsersNamespace {
+    /// Adds one or more email addresses to the authenticated user's account. Supply at least one address in `emails`;
+    /// the request can also be a direct email string or array instead of an object. OAuth app tokens and personal
+    /// access tokens (classic) need the `user` scope.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `user` scope to use this endpoint.
-    public func addEmailForAuthenticatedUser(body: UsersAddEmailForAuthenticatedUserRequestBody? = nil, requestOptions: RequestOptions? = nil) async throws -> [Email] {
-        return try await UsersMethods.usersAddEmailForAuthenticatedUser(config: config, body: body, requestOptions: requestOptions)
+    func addEmailForAuthenticatedUser(
+        body: UsersAddEmailForAuthenticatedUserRequestBody? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [Email] {
+        try await UsersMethods.usersAddEmailForAuthenticatedUser(
+            config: config,
+            body: body,
+            requestOptions: requestOptions
+        )
     }
 
-/// Removes one or more email addresses from the authenticated user's account. Supply at least one address in `emails`; the request can also be a direct email string or array instead of an object. OAuth app tokens and personal access tokens (classic) need the `user` scope.
+    /// Removes one or more email addresses from the authenticated user's account. Supply at least one address in
+    /// `emails`; the request can also be a direct email string or array instead of an object. OAuth app tokens and
+    /// personal access tokens (classic) need the `user` scope.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `user` scope to use this endpoint.
-    public func deleteEmailForAuthenticatedUser(body: UsersDeleteEmailForAuthenticatedUserRequestBody? = nil, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await UsersMethods.usersDeleteEmailForAuthenticatedUser(config: config, body: body, requestOptions: requestOptions)
+    func deleteEmailForAuthenticatedUser(
+        body: UsersDeleteEmailForAuthenticatedUserRequestBody? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await UsersMethods.usersDeleteEmailForAuthenticatedUser(
+            config: config,
+            body: body,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists the people following the authenticated user.
-    public func listFollowersForAuthenticatedUser(perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [SimpleUser] {
-        return try await UsersMethods.usersListFollowersForAuthenticatedUser(config: config, perPage: perPage, page: page, requestOptions: requestOptions)
+    /// Lists the people following the authenticated user.
+    func listFollowersForAuthenticatedUser(
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [SimpleUser] {
+        try await UsersMethods.usersListFollowersForAuthenticatedUser(
+            config: config,
+            perPage: perPage,
+            page: page,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists the people who the authenticated user follows.
-    public func listFollowedByAuthenticatedUser(perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [SimpleUser] {
-        return try await UsersMethods.usersListFollowedByAuthenticatedUser(config: config, perPage: perPage, page: page, requestOptions: requestOptions)
+    /// Lists the people who the authenticated user follows.
+    func listFollowedByAuthenticatedUser(
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [SimpleUser] {
+        try await UsersMethods.usersListFollowedByAuthenticatedUser(
+            config: config,
+            perPage: perPage,
+            page: page,
+            requestOptions: requestOptions
+        )
     }
 
-/// Verifies whether the authenticated user follows a specified GitHub user account. Use `username` to identify the account whose follow status you want to check; the response distinguishes followed from not followed.
-    public func checkPersonIsFollowedByAuthenticated(username: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await UsersMethods.usersCheckPersonIsFollowedByAuthenticated(config: config, username: username, requestOptions: requestOptions)
+    /// Verifies whether the authenticated user follows a specified GitHub user account. Use `username` to identify the
+    /// account whose follow status you want to check; the response distinguishes followed from not followed.
+    func checkPersonIsFollowedByAuthenticated(
+        username: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await UsersMethods.usersCheckPersonIsFollowedByAuthenticated(
+            config: config,
+            username: username,
+            requestOptions: requestOptions
+        )
     }
 
-/// Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/guides/getting-started-with-the-rest-api#http-method)." OAuth app tokens and personal access tokens (classic) need the `user:follow` scope to use this endpoint.
-    public func follow(username: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await UsersMethods.usersFollow(config: config, username: username, requestOptions: requestOptions)
+    /// Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information,
+    /// see "[HTTP verbs](https://docs.github.com/rest/guides/getting-started-with-the-rest-api#http-method)." OAuth app
+    /// tokens and personal access tokens (classic) need the `user:follow` scope to use this endpoint.
+    func follow(username: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        try await UsersMethods.usersFollow(config: config, username: username, requestOptions: requestOptions)
     }
 
-/// OAuth app tokens and personal access tokens (classic) need the `user:follow` scope to use this endpoint.
-    public func unfollow(username: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await UsersMethods.usersUnfollow(config: config, username: username, requestOptions: requestOptions)
+    /// OAuth app tokens and personal access tokens (classic) need the `user:follow` scope to use this endpoint.
+    func unfollow(username: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        try await UsersMethods.usersUnfollow(config: config, username: username, requestOptions: requestOptions)
     }
 
-/// Lists the current user's GPG keys. OAuth app tokens and personal access tokens (classic) need the `read:gpg_key` scope to use this endpoint.
-    public func listGpgKeysForAuthenticatedUser(perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [GpgKey] {
-        return try await UsersMethods.usersListGpgKeysForAuthenticatedUser(config: config, perPage: perPage, page: page, requestOptions: requestOptions)
+    /// Lists the current user's GPG keys. OAuth app tokens and personal access tokens (classic) need the `read:gpg_key`
+    /// scope to use this endpoint.
+    func listGpgKeysForAuthenticatedUser(
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [GpgKey] {
+        try await UsersMethods.usersListGpgKeysForAuthenticatedUser(
+            config: config,
+            perPage: perPage,
+            page: page,
+            requestOptions: requestOptions
+        )
     }
 }

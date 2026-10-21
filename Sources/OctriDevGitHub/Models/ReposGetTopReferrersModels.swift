@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Repos domain models
+/// Repos domain models
 /// Referrer Traffic
 public struct ReferrerTraffic: Codable {
     /// Required `string` value serialized in the `referrer` wire field.
@@ -22,29 +22,43 @@ public struct ReferrerTraffic: Codable {
         case uniques
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ReferrerTraffic {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.referrer) else {
-            throw SdkValidationError(field: "referrer", code: "required", message: "Validation failed for 'referrer': value is required")
-        }
-        guard container.contains(.count) else {
-            throw SdkValidationError(field: "count", code: "required", message: "Validation failed for 'count': value is required")
-        }
-        guard container.contains(.uniques) else {
-            throw SdkValidationError(field: "uniques", code: "required", message: "Validation failed for 'uniques': value is required")
-        }
-        self.referrer = try container.sdkDecodeRequired(.referrer)
-        self.count = try container.sdkDecodeRequired(.count)
-        self.uniques = try container.sdkDecodeRequired(.uniques)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ReferrerTraffic {
-    public init(referrer: String, count: Int, uniques: Int) {
+public extension ReferrerTraffic {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.referrer) else {
+            throw SdkValidationError(
+                field: "referrer",
+                code: "required",
+                message: "Validation failed for 'referrer': value is required"
+            )
+        }
+        guard container.contains(.count) else {
+            throw SdkValidationError(
+                field: "count",
+                code: "required",
+                message: "Validation failed for 'count': value is required"
+            )
+        }
+        guard container.contains(.uniques) else {
+            throw SdkValidationError(
+                field: "uniques",
+                code: "required",
+                message: "Validation failed for 'uniques': value is required"
+            )
+        }
+        referrer = try container.sdkDecodeRequired(.referrer)
+        count = try container.sdkDecodeRequired(.count)
+        uniques = try container.sdkDecodeRequired(.uniques)
+    }
+}
+
+public extension ReferrerTraffic {
+    init(referrer: String, count: Int, uniques: Int) {
         (self.referrer, self.count) = (referrer, count)
         self.uniques = uniques
     }

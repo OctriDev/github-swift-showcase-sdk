@@ -3,7 +3,7 @@
 
 import Foundation
 
-// ActionsConcurrency domain models
+/// ActionsConcurrency domain models
 /// A concurrency group with the workflow runs and jobs that are either currently holding or waiting for the
 /// concurrency group lease.
 public struct ConcurrencyGroup: Codable {
@@ -23,37 +23,60 @@ public struct ConcurrencyGroup: Codable {
         case groupMembers = "group_members"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ConcurrencyGroup {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.groupName) else {
-            throw SdkValidationError(field: "group_name", code: "required", message: "Validation failed for 'group_name': value is required")
-        }
-        guard container.contains(.groupUrl) else {
-            throw SdkValidationError(field: "group_url", code: "required", message: "Validation failed for 'group_url': value is required")
-        }
-        guard container.contains(.totalCount) else {
-            throw SdkValidationError(field: "total_count", code: "required", message: "Validation failed for 'total_count': value is required")
-        }
-        guard container.contains(.groupMembers) else {
-            throw SdkValidationError(field: "group_members", code: "required", message: "Validation failed for 'group_members': value is required")
-        }
-        self.groupName = try container.sdkDecodeRequired(.groupName)
-        self.groupUrl = try container.sdkDecodeRequired(.groupUrl)
-        self.totalCount = try container.sdkDecodeRequired(.totalCount)
-        self.groupMembers = try container.sdkDecodeRequired(.groupMembers)
-            try sdkValidateUri("group_url", self.groupUrl)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ConcurrencyGroup {
-    public init(groupName: String, groupUrl: String, totalCount: Int, groupMembers: [ConcurrencyGroupGroupMembersItem]) throws {
+public extension ConcurrencyGroup {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.groupName) else {
+            throw SdkValidationError(
+                field: "group_name",
+                code: "required",
+                message: "Validation failed for 'group_name': value is required"
+            )
+        }
+        guard container.contains(.groupUrl) else {
+            throw SdkValidationError(
+                field: "group_url",
+                code: "required",
+                message: "Validation failed for 'group_url': value is required"
+            )
+        }
+        guard container.contains(.totalCount) else {
+            throw SdkValidationError(
+                field: "total_count",
+                code: "required",
+                message: "Validation failed for 'total_count': value is required"
+            )
+        }
+        guard container.contains(.groupMembers) else {
+            throw SdkValidationError(
+                field: "group_members",
+                code: "required",
+                message: "Validation failed for 'group_members': value is required"
+            )
+        }
+        groupName = try container.sdkDecodeRequired(.groupName)
+        groupUrl = try container.sdkDecodeRequired(.groupUrl)
+        totalCount = try container.sdkDecodeRequired(.totalCount)
+        groupMembers = try container.sdkDecodeRequired(.groupMembers)
+        try sdkValidateUri("group_url", groupUrl)
+    }
+}
+
+public extension ConcurrencyGroup {
+    init(
+        groupName: String,
+        groupUrl: String,
+        totalCount: Int,
+        groupMembers: [ConcurrencyGroupGroupMembersItem]
+    ) throws {
         (self.groupName, self.groupUrl) = (groupName, groupUrl)
         (self.totalCount, self.groupMembers) = (totalCount, groupMembers)
-            try sdkValidateUri("group_url", self.groupUrl)
+        try sdkValidateUri("group_url", self.groupUrl)
     }
 }
 
@@ -90,53 +113,85 @@ public struct ConcurrencyGroupGroupMembersItem: Codable {
         case jobHtmlUrl = "job_html_url"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension ConcurrencyGroupGroupMembersItem {
-    public init(from decoder: Decoder) throws {
+public extension ConcurrencyGroupGroupMembersItem {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.runId) else {
-            throw SdkValidationError(field: "run_id", code: "required", message: "Validation failed for 'run_id': value is required")
+            throw SdkValidationError(
+                field: "run_id",
+                code: "required",
+                message: "Validation failed for 'run_id': value is required"
+            )
         }
         guard container.contains(.runName) else {
-            throw SdkValidationError(field: "run_name", code: "required", message: "Validation failed for 'run_name': value is required")
+            throw SdkValidationError(
+                field: "run_name",
+                code: "required",
+                message: "Validation failed for 'run_name': value is required"
+            )
         }
         guard container.contains(.runUrl) else {
-            throw SdkValidationError(field: "run_url", code: "required", message: "Validation failed for 'run_url': value is required")
+            throw SdkValidationError(
+                field: "run_url",
+                code: "required",
+                message: "Validation failed for 'run_url': value is required"
+            )
         }
         guard container.contains(.runHtmlUrl) else {
-            throw SdkValidationError(field: "run_html_url", code: "required", message: "Validation failed for 'run_html_url': value is required")
+            throw SdkValidationError(
+                field: "run_html_url",
+                code: "required",
+                message: "Validation failed for 'run_html_url': value is required"
+            )
         }
         guard container.contains(.status) else {
-            throw SdkValidationError(field: "status", code: "required", message: "Validation failed for 'status': value is required")
+            throw SdkValidationError(
+                field: "status",
+                code: "required",
+                message: "Validation failed for 'status': value is required"
+            )
         }
-        self.runId = try container.sdkDecodeRequired(.runId)
-        self.runName = try container.sdkDecodeRequired(.runName)
-        self.runUrl = try container.sdkDecodeNullable(.runUrl)
-        self.runHtmlUrl = try container.sdkDecodeNullable(.runHtmlUrl)
-        self.status = try container.sdkDecodeRequired(.status)
-        self.jobId = try container.sdkDecodeIfPresent(.jobId)
-        self.jobName = try container.sdkDecodeIfPresent(.jobName)
-        self.jobUrl = try container.sdkDecodeIfPresent(.jobUrl)
-        self.jobHtmlUrl = try container.sdkDecodeIfPresent(.jobHtmlUrl)
-        if let value = self.runUrl {
+        runId = try container.sdkDecodeRequired(.runId)
+        runName = try container.sdkDecodeRequired(.runName)
+        runUrl = try container.sdkDecodeNullable(.runUrl)
+        runHtmlUrl = try container.sdkDecodeNullable(.runHtmlUrl)
+        status = try container.sdkDecodeRequired(.status)
+        jobId = try container.sdkDecodeIfPresent(.jobId)
+        jobName = try container.sdkDecodeIfPresent(.jobName)
+        jobUrl = try container.sdkDecodeIfPresent(.jobUrl)
+        jobHtmlUrl = try container.sdkDecodeIfPresent(.jobHtmlUrl)
+        if let value = runUrl {
             try sdkValidateUri("run_url", value)
         }
-        if let value = self.runHtmlUrl {
+        if let value = runHtmlUrl {
             try sdkValidateUri("run_html_url", value)
         }
-        if let value = self.jobUrl {
+        if let value = jobUrl {
             try sdkValidateUri("job_url", value)
         }
-        if let value = self.jobHtmlUrl {
+        if let value = jobHtmlUrl {
             try sdkValidateUri("job_html_url", value)
         }
     }
 }
 
-extension ConcurrencyGroupGroupMembersItem {
-    public init(runId: Int, runName: String, runUrl: String?, runHtmlUrl: String?, status: ConcurrencyGroupGroupMembersItemStatus, jobId: Int? = nil, jobName: String? = nil, jobUrl: String? = nil, jobHtmlUrl: String? = nil) throws {
+public extension ConcurrencyGroupGroupMembersItem {
+    init(
+        runId: Int,
+        runName: String,
+        runUrl: String?,
+        runHtmlUrl: String?,
+        status: ConcurrencyGroupGroupMembersItemStatus,
+        jobId: Int? = nil,
+        jobName: String? = nil,
+        jobUrl: String? = nil,
+        jobHtmlUrl: String? = nil
+    ) throws {
         (self.runId, self.runName) = (runId, runName)
         (self.runUrl, self.runHtmlUrl) = (runUrl, runHtmlUrl)
         (self.status, self.jobId) = (status, jobId)
@@ -158,16 +213,20 @@ extension ConcurrencyGroupGroupMembersItem {
 }
 
 /// Required enumerated value serialized in the `status` wire field.
-public struct ConcurrencyGroupGroupMembersItemStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ConcurrencyGroupGroupMembersItemStatus: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let inProgress = ConcurrencyGroupGroupMembersItemStatus(rawValue: "in_progress")
     public static let pending = ConcurrencyGroupGroupMembersItemStatus(rawValue: "pending")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

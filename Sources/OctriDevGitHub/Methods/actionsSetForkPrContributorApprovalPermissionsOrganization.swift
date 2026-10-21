@@ -6,24 +6,55 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ActionsMethods {
-    /// Sets the fork PR contributor approval policy for an organization. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+public extension ActionsMethods {
+    /// Sets the fork PR contributor approval policy for an organization. OAuth app tokens and personal access tokens
+    /// (classic) need the `admin:org` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - approvalPolicy: The policy that controls when fork PR workflows require
     ///   approval from a maintainer.
-    public static func actionsSetForkPrContributorApprovalPermissionsOrganization(config: ClientConfig, org: String, approvalPolicy: ActionsForkPrContributorApprovalApprovalPolicy, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        let requestBody = ActionsSetForkPrContributorApprovalPermissionsOrganizationRequestBody(approvalPolicy: approvalPolicy)
+    static func actionsSetForkPrContributorApprovalPermissionsOrganization(
+        config: ClientConfig,
+        org: String,
+        approvalPolicy: ActionsForkPrContributorApprovalApprovalPolicy,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        let requestBody =
+            ActionsSetForkPrContributorApprovalPermissionsOrganizationRequestBody(approvalPolicy: approvalPolicy)
 
-        return try (await sdkRequest("PUT", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/actions/permissions/fork-pr-contributor-approval"].joined(), config: config, body: requestBody, decoder: .empty, operationId: "actionsSetForkPrContributorApprovalPermissionsOrganization", options: requestOptions, errors: ["404": BasicError.self, "422": ValidationError.self])).data
+        return try await (sdkRequest(
+            "PUT",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/actions/permissions/fork-pr-contributor-approval"]
+                .joined(),
+            config: config,
+            body: requestBody,
+            decoder: .empty,
+            operationId: "actionsSetForkPrContributorApprovalPermissionsOrganization",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "422": ValidationError.self]
+        )).data
     }
 
-    /// Gets the settings for whether workflows from fork pull requests can run on private repositories in an organization.
+    /// Gets the settings for whether workflows from fork pull requests can run on private repositories in an
+    /// organization.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
-    public static func actionsGetPrivateRepoForkPrWorkflowsSettingsOrganization(config: ClientConfig, org: String, requestOptions: RequestOptions? = nil) async throws -> ActionsForkPrWorkflowsPrivateRepos {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/actions/permissions/fork-pr-workflows-private-repos"].joined(), config: config, decoder: .json, operationId: "actionsGetPrivateRepoForkPrWorkflowsSettingsOrganization", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+    static func actionsGetPrivateRepoForkPrWorkflowsSettingsOrganization(
+        config: ClientConfig,
+        org: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ActionsForkPrWorkflowsPrivateRepos {
+        try await (sdkRequest(
+            "GET",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/actions/permissions/fork-pr-workflows-private-repos"]
+                .joined(),
+            config: config,
+            decoder: .json,
+            operationId: "actionsGetPrivateRepoForkPrWorkflowsSettingsOrganization",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 }

@@ -6,8 +6,11 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ActivityMethods {
-    /// Lists repositories the authenticated user has starred. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.star+json`**: Includes a timestamp of when the star was created.
+public extension ActivityMethods {
+    /// Lists repositories the authenticated user has starred. This endpoint supports the following custom media types.
+    /// For more information, see "[Media
+    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
+    /// **`application/vnd.github.star+json`**: Includes a timestamp of when the star was created.
     ///
     /// - Parameters:
     /// - sort: The property to sort the results by. `created` means when the
@@ -22,12 +25,28 @@ extension ActivityMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func activityListReposStarredByAuthenticatedUser(config: ClientConfig, sort: ActivityListReposStarredByAuthenticatedUserParameter? = nil, direction: SecurityAdvisoriesListGlobalAdvisoriesParameter? = nil, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [Repository] {
-        return try (await sdkRequest("GET", "/user/starred", config: config, query: [
-            SdkQueryParameter("sort", value: sort),
-            SdkQueryParameter("direction", value: direction),
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "activityListReposStarredByAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self])).data
+    static func activityListReposStarredByAuthenticatedUser(
+        config: ClientConfig,
+        sort: ActivityListReposStarredByAuthenticatedUserParameter? = nil,
+        direction: SecurityAdvisoriesListGlobalAdvisoriesParameter? = nil,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [Repository] {
+        try await (sdkRequest(
+            "GET",
+            "/user/starred",
+            config: config,
+            query: [
+                SdkQueryParameter("sort", value: sort),
+                SdkQueryParameter("direction", value: direction),
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "activityListReposStarredByAuthenticatedUser",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self]
+        )).data
     }
 }

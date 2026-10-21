@@ -6,8 +6,10 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension PullsMethods {
-    /// Deletes a review comment from a pull request in a repository. Supply `owner` and `repo` to identify the repository and `comment_id` to select the comment. A 204 response confirms deletion without returning a response body.
+public extension PullsMethods {
+    /// Deletes a review comment from a pull request in a repository. Supply `owner` and `repo` to identify the
+    /// repository and `comment_id` to select the comment. A 204 response confirms deletion without returning a response
+    /// body.
     ///
     /// Deletes a review comment.
     ///
@@ -17,7 +19,28 @@ extension PullsMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - commentId: The unique identifier of the comment.
-    public static func pullsDeleteReviewComment(config: ClientConfig, owner: String, repo: String, commentId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/pulls/comments/", sdkEncodePathSegment(sdkWireString(commentId))].joined(), config: config, decoder: .empty, operationId: "pullsDeleteReviewComment", options: requestOptions, errors: ["404": BasicError.self])).data
+    static func pullsDeleteReviewComment(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        commentId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/pulls/comments/",
+                sdkEncodePathSegment(sdkWireString(commentId)),
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "pullsDeleteReviewComment",
+            options: requestOptions,
+            errors: ["404": BasicError.self]
+        )).data
     }
 }

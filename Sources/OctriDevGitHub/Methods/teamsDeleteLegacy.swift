@@ -6,18 +6,36 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension TeamsMethods {
-    /// > [!WARNING] > **Endpoint closing down notice:** This endpoint route is closing down and will be removed from the Teams API. We recommend migrating your existing code to use the new [Delete a team](https://docs.github.com/rest/teams/teams#delete-a-team) endpoint. To delete a team, the authenticated user must be an organization owner or team maintainer. If you are an organization owner, deleting a parent team will delete all of its child teams as well.
+public extension TeamsMethods {
+    /// > [!WARNING] > **Endpoint closing down notice:** This endpoint route is closing down and will be removed from
+    /// the Teams API. We recommend migrating your existing code to use the new [Delete a
+    /// team](https://docs.github.com/rest/teams/teams#delete-a-team) endpoint. To delete a team, the authenticated user
+    /// must be an organization owner or team maintainer. If you are an organization owner, deleting a parent team will
+    /// delete all of its child teams as well.
     ///
     /// - Parameters:
     /// - teamId: The unique identifier of the team.
     ///
     /// - Warning: This operation is deprecated and may be removed in a future release.
-    public static func teamsDeleteLegacy(config: ClientConfig, teamId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/teams/", sdkEncodePathSegment(sdkWireString(teamId))].joined(), config: config, decoder: .empty, operationId: "teamsDeleteLegacy", options: requestOptions, errors: ["404": BasicError.self, "422": ValidationError.self])).data
+    static func teamsDeleteLegacy(
+        config: ClientConfig,
+        teamId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            ["/teams/", sdkEncodePathSegment(sdkWireString(teamId))].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "teamsDeleteLegacy",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "422": ValidationError.self]
+        )).data
     }
 
-    /// > [!WARNING] > **Endpoint closing down notice:** This endpoint route is closing down and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List child teams`](https://docs.github.com/rest/teams/teams#list-child-teams) endpoint.
+    /// > [!WARNING] > **Endpoint closing down notice:** This endpoint route is closing down and will be removed from
+    /// the Teams API. We recommend migrating your existing code to use the new [`List child
+    /// teams`](https://docs.github.com/rest/teams/teams#list-child-teams) endpoint.
     ///
     /// - Parameters:
     /// - teamId: The unique identifier of the team.
@@ -31,10 +49,25 @@ extension TeamsMethods {
     ///   -rest-api)."
     ///
     /// - Warning: This operation is deprecated and may be removed in a future release.
-    public static func teamsListChildLegacy(config: ClientConfig, teamId: Int, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [Team] {
-        return try (await sdkRequest("GET", ["/teams/", sdkEncodePathSegment(sdkWireString(teamId)), "/teams"].joined(), config: config, query: [
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "teamsListChildLegacy", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
+    static func teamsListChildLegacy(
+        config: ClientConfig,
+        teamId: Int,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [Team] {
+        try await (sdkRequest(
+            "GET",
+            ["/teams/", sdkEncodePathSegment(sdkWireString(teamId)), "/teams"].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "teamsListChildLegacy",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self]
+        )).data
     }
 }

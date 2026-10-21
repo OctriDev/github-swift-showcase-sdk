@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Checks domain models
+/// Checks domain models
 /// Check Annotation
 public struct CheckAnnotation: Codable {
     /// Required `string` value serialized in the `path` wire field.
@@ -49,27 +49,40 @@ public struct CheckAnnotation: Codable {
         case blobHref = "blob_href"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension CheckAnnotation {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.path = try container.sdkDecodeRequired(.path)
-        self.startLine = try container.sdkDecodeRequired(.startLine)
-        self.endLine = try container.sdkDecodeRequired(.endLine)
-        self.startColumn = try container.sdkDecodeNullable(.startColumn)
-        self.endColumn = try container.sdkDecodeNullable(.endColumn)
-        self.annotationLevel = try container.sdkDecodeNullable(.annotationLevel)
-        self.title = try container.sdkDecodeNullable(.title)
-        self.message = try container.sdkDecodeNullable(.message)
-        self.rawDetails = try container.sdkDecodeNullable(.rawDetails)
-        self.blobHref = try container.sdkDecodeRequired(.blobHref)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension CheckAnnotation {
-    public init(path: String, startLine: Int, endLine: Int, startColumn: Int?, endColumn: Int?, annotationLevel: String?, title: String?, message: String?, rawDetails: String?, blobHref: String) {
+public extension CheckAnnotation {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        path = try container.sdkDecodeRequired(.path)
+        startLine = try container.sdkDecodeRequired(.startLine)
+        endLine = try container.sdkDecodeRequired(.endLine)
+        startColumn = try container.sdkDecodeNullable(.startColumn)
+        endColumn = try container.sdkDecodeNullable(.endColumn)
+        annotationLevel = try container.sdkDecodeNullable(.annotationLevel)
+        title = try container.sdkDecodeNullable(.title)
+        message = try container.sdkDecodeNullable(.message)
+        rawDetails = try container.sdkDecodeNullable(.rawDetails)
+        blobHref = try container.sdkDecodeRequired(.blobHref)
+    }
+}
+
+public extension CheckAnnotation {
+    init(
+        path: String,
+        startLine: Int,
+        endLine: Int,
+        startColumn: Int?,
+        endColumn: Int?,
+        annotationLevel: String?,
+        title: String?,
+        message: String?,
+        rawDetails: String?,
+        blobHref: String
+    ) {
         (self.path, self.startLine) = (path, startLine)
         (self.endLine, self.startColumn) = (endLine, startColumn)
         (self.endColumn, self.annotationLevel) = (endColumn, annotationLevel)

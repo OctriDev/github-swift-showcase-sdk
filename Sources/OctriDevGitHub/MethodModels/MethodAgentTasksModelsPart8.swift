@@ -7,7 +7,7 @@ import Foundation
     import FoundationNetworking
 #endif
 
-// Canonical agentTasks operation model declarations
+/// Canonical agentTasks operation model declarations
 public struct AgentTasksGetTaskByIdResponse: Codable {
     /// Unique task identifier
     public var id: String
@@ -64,50 +64,82 @@ public struct AgentTasksGetTaskByIdResponse: Codable {
         case sessions
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension AgentTasksGetTaskByIdResponse {
-    public init(from decoder: Decoder) throws {
+public extension AgentTasksGetTaskByIdResponse {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
         }
         guard container.contains(.state) else {
-            throw SdkValidationError(field: "state", code: "required", message: "Validation failed for 'state': value is required")
+            throw SdkValidationError(
+                field: "state",
+                code: "required",
+                message: "Validation failed for 'state': value is required"
+            )
         }
         guard container.contains(.createdAt) else {
-            throw SdkValidationError(field: "created_at", code: "required", message: "Validation failed for 'created_at': value is required")
+            throw SdkValidationError(
+                field: "created_at",
+                code: "required",
+                message: "Validation failed for 'created_at': value is required"
+            )
         }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.state = try container.sdkDecodeRequired(.state)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.url = try container.sdkDecodeIfPresent(.url)
-        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.creator = try container.sdkDecodeIfPresent(.creator)
-        self.creatorType = try container.sdkDecodeIfPresent(.creatorType)
-        self.userCollaborators = try container.sdkDecodeIfPresent(.userCollaborators)
-        self.owner = try container.sdkDecodeIfPresent(.owner)
-        self.repository = try container.sdkDecodeIfPresent(.repository)
-        self.sessionCount = try container.sdkDecodeIfPresent(.sessionCount)
-        self.artifacts = try container.sdkDecodeIfPresent(.artifacts)
-        self.archivedAt = try container.sdkDecodeIfPresent(.archivedAt)
-        self.updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
-        self.customAgent = try container.sdkDecodeIfPresent(.customAgent)
-        self.sessions = try container.sdkDecodeIfPresent(.sessions)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-        if let value = self.archivedAt {
+        id = try container.sdkDecodeRequired(.id)
+        state = try container.sdkDecodeRequired(.state)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        url = try container.sdkDecodeIfPresent(.url)
+        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        name = try container.sdkDecodeIfPresent(.name)
+        creator = try container.sdkDecodeIfPresent(.creator)
+        creatorType = try container.sdkDecodeIfPresent(.creatorType)
+        userCollaborators = try container.sdkDecodeIfPresent(.userCollaborators)
+        owner = try container.sdkDecodeIfPresent(.owner)
+        repository = try container.sdkDecodeIfPresent(.repository)
+        sessionCount = try container.sdkDecodeIfPresent(.sessionCount)
+        artifacts = try container.sdkDecodeIfPresent(.artifacts)
+        archivedAt = try container.sdkDecodeIfPresent(.archivedAt)
+        updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
+        customAgent = try container.sdkDecodeIfPresent(.customAgent)
+        sessions = try container.sdkDecodeIfPresent(.sessions)
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        if let value = archivedAt {
             try sdkValidateDateTime("archived_at", sdkWireString(value))
         }
-        if let value = self.updatedAt {
+        if let value = updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
     }
 }
 
-extension AgentTasksGetTaskByIdResponse {
-    public init(id: String, state: AgentTasksGetTaskByIdResponseVariant0State, createdAt: Date, url: String? = nil, htmlUrl: String? = nil, name: String? = nil, creator: AgentTasksGetTaskByIdResponseVariant0Creator? = nil, creatorType: AgentTasksGetTaskByIdResponseVariant0CreatorType? = nil, userCollaborators: [AgentTasksGetTaskByIdResponseVariant0UserCollaboratorsItem]? = nil, owner: AgentTasksGetTaskByIdResponseVariant0Owner? = nil, repository: AgentTasksGetTaskByIdResponseVariant0Repository? = nil, sessionCount: Int? = nil, artifacts: [AgentTasksGetTaskByIdResponseVariant0ArtifactsItem]? = nil, archivedAt: Date? = nil, updatedAt: Date? = nil, customAgent: AgentTasksGetTaskByIdResponseVariant0CustomAgent? = nil, sessions: [AgentTasksGetTaskByIdResponseVariant1SessionsItem]? = nil) throws {
+public extension AgentTasksGetTaskByIdResponse {
+    init(
+        id: String,
+        state: AgentTasksGetTaskByIdResponseVariant0State,
+        createdAt: Date,
+        url: String? = nil,
+        htmlUrl: String? = nil,
+        name: String? = nil,
+        creator: AgentTasksGetTaskByIdResponseVariant0Creator? = nil,
+        creatorType: AgentTasksGetTaskByIdResponseVariant0CreatorType? = nil,
+        userCollaborators: [AgentTasksGetTaskByIdResponseVariant0UserCollaboratorsItem]? = nil,
+        owner: AgentTasksGetTaskByIdResponseVariant0Owner? = nil,
+        repository: AgentTasksGetTaskByIdResponseVariant0Repository? = nil,
+        sessionCount: Int? = nil,
+        artifacts: [AgentTasksGetTaskByIdResponseVariant0ArtifactsItem]? = nil,
+        archivedAt: Date? = nil,
+        updatedAt: Date? = nil,
+        customAgent: AgentTasksGetTaskByIdResponseVariant0CustomAgent? = nil,
+        sessions: [AgentTasksGetTaskByIdResponseVariant1SessionsItem]? = nil
+    ) throws {
         (self.id, self.state) = (id, state)
         (self.createdAt, self.url) = (createdAt, url)
         (self.htmlUrl, self.name) = (htmlUrl, name)
@@ -117,7 +149,7 @@ extension AgentTasksGetTaskByIdResponse {
         (self.artifacts, self.archivedAt) = (artifacts, archivedAt)
         (self.updatedAt, self.customAgent) = (updatedAt, customAgent)
         self.sessions = sessions
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
         if let value = self.archivedAt {
             try sdkValidateDateTime("archived_at", sdkWireString(value))
         }
@@ -137,19 +169,19 @@ public struct AgentTasksGetTaskByRepoAndIdResponseVariant1SessionsItemRepository
     }
 
     init() {
-        self.id = nil
+        id = nil
     }
 }
 
-extension AgentTasksGetTaskByRepoAndIdResponseVariant1SessionsItemRepository {
-    public init(from decoder: Decoder) throws {
+public extension AgentTasksGetTaskByRepoAndIdResponseVariant1SessionsItemRepository {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeIfPresent(.id)
+        id = try container.sdkDecodeIfPresent(.id)
     }
 }
 
-extension AgentTasksGetTaskByRepoAndIdResponseVariant1SessionsItemRepository {
-    public init(id: Int? = nil) {
+public extension AgentTasksGetTaskByRepoAndIdResponseVariant1SessionsItemRepository {
+    init(id: Int? = nil) {
         self.init()
         self.id = id
     }
@@ -167,22 +199,28 @@ public struct AgentTasksCreateTaskInRepoResponseErrorsItem: Codable {
         case message
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension AgentTasksCreateTaskInRepoResponseErrorsItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.code) else {
-            throw SdkValidationError(field: "code", code: "required", message: "Validation failed for 'code': value is required")
-        }
-        self.code = try container.sdkDecodeRequired(.code)
-        self.message = try container.sdkDecodeIfPresent(.message)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension AgentTasksCreateTaskInRepoResponseErrorsItem {
-    public init(code: AgentTasksCreateTaskInRepoResponseErrorsItemCode, message: String? = nil) {
+public extension AgentTasksCreateTaskInRepoResponseErrorsItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.code) else {
+            throw SdkValidationError(
+                field: "code",
+                code: "required",
+                message: "Validation failed for 'code': value is required"
+            )
+        }
+        code = try container.sdkDecodeRequired(.code)
+        message = try container.sdkDecodeIfPresent(.message)
+    }
+}
+
+public extension AgentTasksCreateTaskInRepoResponseErrorsItem {
+    init(code: AgentTasksCreateTaskInRepoResponseErrorsItemCode, message: String? = nil) {
         (self.code, self.message) = (code, message)
     }
 }
@@ -203,26 +241,36 @@ public struct AgentTasksListTasksResponseX2fa386b2: Codable {
         case errors
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension AgentTasksListTasksResponseX2fa386b2 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.message) else {
-            throw SdkValidationError(field: "message", code: "required", message: "Validation failed for 'message': value is required")
-        }
-        guard container.contains(.documentationUrl) else {
-            throw SdkValidationError(field: "documentation_url", code: "required", message: "Validation failed for 'documentation_url': value is required")
-        }
-        self.message = try container.sdkDecodeRequired(.message)
-        self.documentationUrl = try container.sdkDecodeRequired(.documentationUrl)
-        self.errors = try container.sdkDecodeIfPresent(.errors)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension AgentTasksListTasksResponseX2fa386b2 {
-    public init(message: String, documentationUrl: String, errors: [AgentTasksListTasksResponseErrorsItemX0d00ce32]? = nil) {
+public extension AgentTasksListTasksResponseX2fa386b2 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.message) else {
+            throw SdkValidationError(
+                field: "message",
+                code: "required",
+                message: "Validation failed for 'message': value is required"
+            )
+        }
+        guard container.contains(.documentationUrl) else {
+            throw SdkValidationError(
+                field: "documentation_url",
+                code: "required",
+                message: "Validation failed for 'documentation_url': value is required"
+            )
+        }
+        message = try container.sdkDecodeRequired(.message)
+        documentationUrl = try container.sdkDecodeRequired(.documentationUrl)
+        errors = try container.sdkDecodeIfPresent(.errors)
+    }
+}
+
+public extension AgentTasksListTasksResponseX2fa386b2 {
+    init(message: String, documentationUrl: String, errors: [AgentTasksListTasksResponseErrorsItemX0d00ce32]? = nil) {
         (self.message, self.documentationUrl) = (message, documentationUrl)
         self.errors = errors
     }
@@ -244,26 +292,36 @@ public struct AgentTasksListTasksForRepoResponseX254e9f40: Codable {
         case errors
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension AgentTasksListTasksForRepoResponseX254e9f40 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.message) else {
-            throw SdkValidationError(field: "message", code: "required", message: "Validation failed for 'message': value is required")
-        }
-        guard container.contains(.documentationUrl) else {
-            throw SdkValidationError(field: "documentation_url", code: "required", message: "Validation failed for 'documentation_url': value is required")
-        }
-        self.message = try container.sdkDecodeRequired(.message)
-        self.documentationUrl = try container.sdkDecodeRequired(.documentationUrl)
-        self.errors = try container.sdkDecodeIfPresent(.errors)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension AgentTasksListTasksForRepoResponseX254e9f40 {
-    public init(message: String, documentationUrl: String, errors: [AgentTasksListTasksForRepoResponseErrorsItem]? = nil) {
+public extension AgentTasksListTasksForRepoResponseX254e9f40 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.message) else {
+            throw SdkValidationError(
+                field: "message",
+                code: "required",
+                message: "Validation failed for 'message': value is required"
+            )
+        }
+        guard container.contains(.documentationUrl) else {
+            throw SdkValidationError(
+                field: "documentation_url",
+                code: "required",
+                message: "Validation failed for 'documentation_url': value is required"
+            )
+        }
+        message = try container.sdkDecodeRequired(.message)
+        documentationUrl = try container.sdkDecodeRequired(.documentationUrl)
+        errors = try container.sdkDecodeIfPresent(.errors)
+    }
+}
+
+public extension AgentTasksListTasksForRepoResponseX254e9f40 {
+    init(message: String, documentationUrl: String, errors: [AgentTasksListTasksForRepoResponseErrorsItem]? = nil) {
         (self.message, self.documentationUrl) = (message, documentationUrl)
         self.errors = errors
     }
@@ -281,22 +339,28 @@ public struct AgentTasksListTasksForRepoResponseErrorsItemX10a76a3f: Codable {
         case message
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension AgentTasksListTasksForRepoResponseErrorsItemX10a76a3f {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.code) else {
-            throw SdkValidationError(field: "code", code: "required", message: "Validation failed for 'code': value is required")
-        }
-        self.code = try container.sdkDecodeRequired(.code)
-        self.message = try container.sdkDecodeIfPresent(.message)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension AgentTasksListTasksForRepoResponseErrorsItemX10a76a3f {
-    public init(code: AgentTasksListTasksForRepoResponseErrorsItemCodeX11634714, message: String? = nil) {
+public extension AgentTasksListTasksForRepoResponseErrorsItemX10a76a3f {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.code) else {
+            throw SdkValidationError(
+                field: "code",
+                code: "required",
+                message: "Validation failed for 'code': value is required"
+            )
+        }
+        code = try container.sdkDecodeRequired(.code)
+        message = try container.sdkDecodeIfPresent(.message)
+    }
+}
+
+public extension AgentTasksListTasksForRepoResponseErrorsItemX10a76a3f {
+    init(code: AgentTasksListTasksForRepoResponseErrorsItemCodeX11634714, message: String? = nil) {
         (self.code, self.message) = (code, message)
     }
 }
@@ -311,19 +375,19 @@ public struct AgentTasksGetTaskByIdResponseVariant0Owner: Codable {
     }
 
     init() {
-        self.id = nil
+        id = nil
     }
 }
 
-extension AgentTasksGetTaskByIdResponseVariant0Owner {
-    public init(from decoder: Decoder) throws {
+public extension AgentTasksGetTaskByIdResponseVariant0Owner {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeIfPresent(.id)
+        id = try container.sdkDecodeIfPresent(.id)
     }
 }
 
-extension AgentTasksGetTaskByIdResponseVariant0Owner {
-    public init(id: Int? = nil) {
+public extension AgentTasksGetTaskByIdResponseVariant0Owner {
+    init(id: Int? = nil) {
         self.init()
         self.id = id
     }
@@ -344,29 +408,47 @@ public struct AgentTasksListTasksResponseTasksItemArtifactsItem: Codable {
         case data
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension AgentTasksListTasksResponseTasksItemArtifactsItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.provider) else {
-            throw SdkValidationError(field: "provider", code: "required", message: "Validation failed for 'provider': value is required")
-        }
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        guard container.contains(.data) else {
-            throw SdkValidationError(field: "data", code: "required", message: "Validation failed for 'data': value is required")
-        }
-        self.provider = try container.sdkDecodeRequired(.provider)
-        self.type = try container.sdkDecodeRequired(.type)
-        self.data = try container.sdkDecodeRequired(.data)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension AgentTasksListTasksResponseTasksItemArtifactsItem {
-    public init(provider: AgentTasksListTasksResponseTasksItemArtifactsItemProvider, type: AgentTasksListTasksResponseTasksItemArtifactsItemType, data: AgentTasksListTasksResponseTasksItemArtifactsItemData) {
+public extension AgentTasksListTasksResponseTasksItemArtifactsItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.provider) else {
+            throw SdkValidationError(
+                field: "provider",
+                code: "required",
+                message: "Validation failed for 'provider': value is required"
+            )
+        }
+        guard container.contains(.type) else {
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
+        }
+        guard container.contains(.data) else {
+            throw SdkValidationError(
+                field: "data",
+                code: "required",
+                message: "Validation failed for 'data': value is required"
+            )
+        }
+        provider = try container.sdkDecodeRequired(.provider)
+        type = try container.sdkDecodeRequired(.type)
+        data = try container.sdkDecodeRequired(.data)
+    }
+}
+
+public extension AgentTasksListTasksResponseTasksItemArtifactsItem {
+    init(
+        provider: AgentTasksListTasksResponseTasksItemArtifactsItemProvider,
+        type: AgentTasksListTasksResponseTasksItemArtifactsItemType,
+        data: AgentTasksListTasksResponseTasksItemArtifactsItemData
+    ) {
         (self.provider, self.type) = (provider, type)
         self.data = data
     }
@@ -386,23 +468,33 @@ public struct AgentTasksListTasksForRepoResponse: Codable {
         case totalArchivedCount = "total_archived_count"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension AgentTasksListTasksForRepoResponse {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.tasks) else {
-            throw SdkValidationError(field: "tasks", code: "required", message: "Validation failed for 'tasks': value is required")
-        }
-        self.tasks = try container.sdkDecodeRequired(.tasks)
-        self.totalActiveCount = try container.sdkDecodeIfPresent(.totalActiveCount)
-        self.totalArchivedCount = try container.sdkDecodeIfPresent(.totalArchivedCount)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension AgentTasksListTasksForRepoResponse {
-    public init(tasks: [AgentTasksListTasksForRepoResponseTasksItem], totalActiveCount: Int? = nil, totalArchivedCount: Int? = nil) {
+public extension AgentTasksListTasksForRepoResponse {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.tasks) else {
+            throw SdkValidationError(
+                field: "tasks",
+                code: "required",
+                message: "Validation failed for 'tasks': value is required"
+            )
+        }
+        tasks = try container.sdkDecodeRequired(.tasks)
+        totalActiveCount = try container.sdkDecodeIfPresent(.totalActiveCount)
+        totalArchivedCount = try container.sdkDecodeIfPresent(.totalArchivedCount)
+    }
+}
+
+public extension AgentTasksListTasksForRepoResponse {
+    init(
+        tasks: [AgentTasksListTasksForRepoResponseTasksItem],
+        totalActiveCount: Int? = nil,
+        totalArchivedCount: Int? = nil
+    ) {
         (self.tasks, self.totalActiveCount) = (tasks, totalActiveCount)
         self.totalArchivedCount = totalArchivedCount
     }
@@ -418,19 +510,19 @@ public struct AgentTasksListTasksForRepoResponseTasksItemRepository: Codable {
     }
 
     init() {
-        self.id = nil
+        id = nil
     }
 }
 
-extension AgentTasksListTasksForRepoResponseTasksItemRepository {
-    public init(from decoder: Decoder) throws {
+public extension AgentTasksListTasksForRepoResponseTasksItemRepository {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeIfPresent(.id)
+        id = try container.sdkDecodeIfPresent(.id)
     }
 }
 
-extension AgentTasksListTasksForRepoResponseTasksItemRepository {
-    public init(id: Int? = nil) {
+public extension AgentTasksListTasksForRepoResponseTasksItemRepository {
+    init(id: Int? = nil) {
         self.init()
         self.id = id
     }
@@ -447,19 +539,19 @@ public struct AgentTasksCreateTaskInRepoResponseCustomAgent: Codable {
     }
 
     init() {
-        self.id = nil
+        id = nil
     }
 }
 
-extension AgentTasksCreateTaskInRepoResponseCustomAgent {
-    public init(from decoder: Decoder) throws {
+public extension AgentTasksCreateTaskInRepoResponseCustomAgent {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeIfPresent(.id)
+        id = try container.sdkDecodeIfPresent(.id)
     }
 }
 
-extension AgentTasksCreateTaskInRepoResponseCustomAgent {
-    public init(id: String? = nil) {
+public extension AgentTasksCreateTaskInRepoResponseCustomAgent {
+    init(id: String? = nil) {
         self.init()
         self.id = id
     }
@@ -475,19 +567,19 @@ public struct AgentTasksGetTaskByRepoAndIdResponseVariant1SessionsItemUser: Coda
     }
 
     init() {
-        self.id = nil
+        id = nil
     }
 }
 
-extension AgentTasksGetTaskByRepoAndIdResponseVariant1SessionsItemUser {
-    public init(from decoder: Decoder) throws {
+public extension AgentTasksGetTaskByRepoAndIdResponseVariant1SessionsItemUser {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeIfPresent(.id)
+        id = try container.sdkDecodeIfPresent(.id)
     }
 }
 
-extension AgentTasksGetTaskByRepoAndIdResponseVariant1SessionsItemUser {
-    public init(id: Int? = nil) {
+public extension AgentTasksGetTaskByRepoAndIdResponseVariant1SessionsItemUser {
+    init(id: Int? = nil) {
         self.init()
         self.id = id
     }
@@ -505,22 +597,28 @@ public struct AgentTasksGetTaskByIdResponseErrorsItemXe7bb451d: Codable {
         case message
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension AgentTasksGetTaskByIdResponseErrorsItemXe7bb451d {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.code) else {
-            throw SdkValidationError(field: "code", code: "required", message: "Validation failed for 'code': value is required")
-        }
-        self.code = try container.sdkDecodeRequired(.code)
-        self.message = try container.sdkDecodeIfPresent(.message)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension AgentTasksGetTaskByIdResponseErrorsItemXe7bb451d {
-    public init(code: AgentTasksGetTaskByIdResponseErrorsItemCodeX1aa4c709, message: String? = nil) {
+public extension AgentTasksGetTaskByIdResponseErrorsItemXe7bb451d {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.code) else {
+            throw SdkValidationError(
+                field: "code",
+                code: "required",
+                message: "Validation failed for 'code': value is required"
+            )
+        }
+        code = try container.sdkDecodeRequired(.code)
+        message = try container.sdkDecodeIfPresent(.message)
+    }
+}
+
+public extension AgentTasksGetTaskByIdResponseErrorsItemXe7bb451d {
+    init(code: AgentTasksGetTaskByIdResponseErrorsItemCodeX1aa4c709, message: String? = nil) {
         (self.code, self.message) = (code, message)
     }
 }

@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Pulls domain models
+/// Pulls domain models
 /// Pull Request Review Request
 public struct PullRequestReviewRequest: Codable {
     /// Required array value serialized in the `users` wire field.
@@ -16,25 +16,35 @@ public struct PullRequestReviewRequest: Codable {
         case teams
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension PullRequestReviewRequest {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.users) else {
-            throw SdkValidationError(field: "users", code: "required", message: "Validation failed for 'users': value is required")
-        }
-        guard container.contains(.teams) else {
-            throw SdkValidationError(field: "teams", code: "required", message: "Validation failed for 'teams': value is required")
-        }
-        self.users = try container.sdkDecodeRequired(.users)
-        self.teams = try container.sdkDecodeRequired(.teams)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension PullRequestReviewRequest {
-    public init(users: [SimpleUser], teams: [Team]) {
+public extension PullRequestReviewRequest {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.users) else {
+            throw SdkValidationError(
+                field: "users",
+                code: "required",
+                message: "Validation failed for 'users': value is required"
+            )
+        }
+        guard container.contains(.teams) else {
+            throw SdkValidationError(
+                field: "teams",
+                code: "required",
+                message: "Validation failed for 'teams': value is required"
+            )
+        }
+        users = try container.sdkDecodeRequired(.users)
+        teams = try container.sdkDecodeRequired(.teams)
+    }
+}
+
+public extension PullRequestReviewRequest {
+    init(users: [SimpleUser], teams: [Team]) {
         (self.users, self.teams) = (users, teams)
     }
 }

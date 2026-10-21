@@ -6,38 +6,88 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension AppsMethods {
-    /// OAuth and GitHub application owners can revoke a grant for their application and a specific user. You must provide a valid OAuth `access_token` as an input parameter and the grant for the token's owner will be deleted. Deleting an application's grant will also delete all OAuth tokens associated with the application for the user. Once deleted, the application will have no access to the user's account and will no longer be listed on [the application authorizations settings screen within GitHub](https://github.com/settings/applications#authorized).
+public extension AppsMethods {
+    /// OAuth and GitHub application owners can revoke a grant for their application and a specific user. You must
+    /// provide a valid OAuth `access_token` as an input parameter and the grant for the token's owner will be deleted.
+    /// Deleting an application's grant will also delete all OAuth tokens associated with the application for the user.
+    /// Once deleted, the application will have no access to the user's account and will no longer be listed on [the
+    /// application authorizations settings screen within GitHub](https://github.com/settings/applications#authorized).
     ///
     /// - Parameters:
     /// - clientId: The client ID of the GitHub app.
     /// - accessToken: The OAuth access token used to authenticate to the GitHub
     ///   API.
-    public static func appsDeleteAuthorization(config: ClientConfig, clientId: String, accessToken: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+    static func appsDeleteAuthorization(
+        config: ClientConfig,
+        clientId: String,
+        accessToken: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
         let requestBody = AppsDeleteAuthorizationRequestBody(accessToken: accessToken)
 
-        return try (await sdkRequest("DELETE", ["/applications/", sdkEncodePathSegment(sdkWireString(clientId)), "/grant"].joined(), config: config, body: requestBody, decoder: .empty, operationId: "appsDeleteAuthorization", options: requestOptions, errors: ["422": ValidationError.self])).data
+        return try await (sdkRequest(
+            "DELETE",
+            ["/applications/", sdkEncodePathSegment(sdkWireString(clientId)), "/grant"].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .empty,
+            operationId: "appsDeleteAuthorization",
+            options: requestOptions,
+            errors: ["422": ValidationError.self]
+        )).data
     }
 
-    /// OAuth applications and GitHub applications with OAuth authorizations can use this API method for checking OAuth token validity without exceeding the normal rate limits for failed login attempts. Authentication works differently with this particular endpoint. Invalid tokens will return `404 NOT FOUND`.
+    /// OAuth applications and GitHub applications with OAuth authorizations can use this API method for checking OAuth
+    /// token validity without exceeding the normal rate limits for failed login attempts. Authentication works
+    /// differently with this particular endpoint. Invalid tokens will return `404 NOT FOUND`.
     ///
     /// - Parameters:
     /// - clientId: The client ID of the GitHub app.
     /// - accessToken: The access_token of the OAuth or GitHub application.
-    public static func appsCheckToken(config: ClientConfig, clientId: String, accessToken: String, requestOptions: RequestOptions? = nil) async throws -> Authorization {
+    static func appsCheckToken(
+        config: ClientConfig,
+        clientId: String,
+        accessToken: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Authorization {
         let requestBody = AppsCheckTokenRequestBody(accessToken: accessToken)
 
-        return try (await sdkRequest("POST", ["/applications/", sdkEncodePathSegment(sdkWireString(clientId)), "/token"].joined(), config: config, body: requestBody, decoder: .json, operationId: "appsCheckToken", options: requestOptions, errors: ["404": BasicError.self, "422": ValidationError.self])).data
+        return try await (sdkRequest(
+            "POST",
+            ["/applications/", sdkEncodePathSegment(sdkWireString(clientId)), "/token"].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "appsCheckToken",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "422": ValidationError.self]
+        )).data
     }
 
-    /// OAuth applications and GitHub applications with OAuth authorizations can use this API method to reset a valid OAuth token without end-user involvement. Applications must save the "token" property in the response because changes take effect immediately. Invalid tokens will return `404 NOT FOUND`.
+    /// OAuth applications and GitHub applications with OAuth authorizations can use this API method to reset a valid
+    /// OAuth token without end-user involvement. Applications must save the "token" property in the response because
+    /// changes take effect immediately. Invalid tokens will return `404 NOT FOUND`.
     ///
     /// - Parameters:
     /// - clientId: The client ID of the GitHub app.
     /// - accessToken: The access_token of the OAuth or GitHub application.
-    public static func appsResetToken(config: ClientConfig, clientId: String, accessToken: String, requestOptions: RequestOptions? = nil) async throws -> Authorization {
+    static func appsResetToken(
+        config: ClientConfig,
+        clientId: String,
+        accessToken: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Authorization {
         let requestBody = AppsResetTokenRequestBody(accessToken: accessToken)
 
-        return try (await sdkRequest("PATCH", ["/applications/", sdkEncodePathSegment(sdkWireString(clientId)), "/token"].joined(), config: config, body: requestBody, decoder: .json, operationId: "appsResetToken", options: requestOptions, errors: ["422": ValidationError.self])).data
+        return try await (sdkRequest(
+            "PATCH",
+            ["/applications/", sdkEncodePathSegment(sdkWireString(clientId)), "/token"].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "appsResetToken",
+            options: requestOptions,
+            errors: ["422": ValidationError.self]
+        )).data
     }
 }

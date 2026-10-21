@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Codespaces domain models
+/// Codespaces domain models
 /// Optional object value serialized in the `runtime_constraints` wire field.
 public struct CodespaceWithFullRepositoryRuntimeConstraints: Codable {
     /// The privacy settings a user can select from when forwarding a port.
@@ -14,19 +14,19 @@ public struct CodespaceWithFullRepositoryRuntimeConstraints: Codable {
     }
 
     init() {
-        self.allowedPortPrivacySettings = nil
+        allowedPortPrivacySettings = nil
     }
 }
 
-extension CodespaceWithFullRepositoryRuntimeConstraints {
-    public init(from decoder: Decoder) throws {
+public extension CodespaceWithFullRepositoryRuntimeConstraints {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.allowedPortPrivacySettings = try container.sdkDecodeIfPresent(.allowedPortPrivacySettings)
+        allowedPortPrivacySettings = try container.sdkDecodeIfPresent(.allowedPortPrivacySettings)
     }
 }
 
-extension CodespaceWithFullRepositoryRuntimeConstraints {
-    public init(allowedPortPrivacySettings: [String]? = nil) {
+public extension CodespaceWithFullRepositoryRuntimeConstraints {
+    init(allowedPortPrivacySettings: [String]? = nil) {
         self.init()
         self.allowedPortPrivacySettings = allowedPortPrivacySettings
     }
@@ -146,49 +146,83 @@ public struct CodespaceWithFullRepository: Codable {
         case retentionExpiresAt = "retention_expires_at"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension CodespaceWithFullRepository {
-    public init(from decoder: Decoder) throws {
+public extension CodespaceWithFullRepository {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.environmentId = try container.sdkDecodeNullable(.environmentId)
-        self.owner = try container.sdkDecodeRequired(.owner)
-        self.billableOwner = try container.sdkDecodeRequired(.billableOwner)
-        self.repository = try container.sdkDecodeRequired(.repository)
-        self.machine = try container.sdkDecodeNullable(.machine)
-        self.prebuild = try container.sdkDecodeNullable(.prebuild)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        self.lastUsedAt = try container.sdkDecodeRequired(.lastUsedAt)
-        self.state = try container.sdkDecodeRequired(.state)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.gitStatus = try container.sdkDecodeRequired(.gitStatus)
-        self.location = try container.sdkDecodeRequired(.location)
-        self.idleTimeoutMinutes = try container.sdkDecodeNullable(.idleTimeoutMinutes)
-        self.webUrl = try container.sdkDecodeRequired(.webUrl)
-        self.machinesUrl = try container.sdkDecodeRequired(.machinesUrl)
-        self.startUrl = try container.sdkDecodeRequired(.startUrl)
-        self.stopUrl = try container.sdkDecodeRequired(.stopUrl)
-        self.pullsUrl = try container.sdkDecodeNullable(.pullsUrl)
-        self.recentFolders = try container.sdkDecodeRequired(.recentFolders)
-        self.displayName = try container.sdkDecodeIfPresent(.displayName)
-        self.devcontainerPath = try container.sdkDecodeIfPresent(.devcontainerPath)
-        self.publishUrl = try container.sdkDecodeIfPresent(.publishUrl)
-        self.runtimeConstraints = try container.sdkDecodeIfPresent(.runtimeConstraints)
-        self.pendingOperation = try container.sdkDecodeIfPresent(.pendingOperation)
-        self.pendingOperationDisabledReason = try container.sdkDecodeIfPresent(.pendingOperationDisabledReason)
-        self.idleTimeoutNotice = try container.sdkDecodeIfPresent(.idleTimeoutNotice)
-        self.retentionPeriodMinutes = try container.sdkDecodeIfPresent(.retentionPeriodMinutes)
-        self.retentionExpiresAt = try container.sdkDecodeIfPresent(.retentionExpiresAt)
+        id = try container.sdkDecodeRequired(.id)
+        name = try container.sdkDecodeRequired(.name)
+        environmentId = try container.sdkDecodeNullable(.environmentId)
+        owner = try container.sdkDecodeRequired(.owner)
+        billableOwner = try container.sdkDecodeRequired(.billableOwner)
+        repository = try container.sdkDecodeRequired(.repository)
+        machine = try container.sdkDecodeNullable(.machine)
+        prebuild = try container.sdkDecodeNullable(.prebuild)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        lastUsedAt = try container.sdkDecodeRequired(.lastUsedAt)
+        state = try container.sdkDecodeRequired(.state)
+        url = try container.sdkDecodeRequired(.url)
+        gitStatus = try container.sdkDecodeRequired(.gitStatus)
+        location = try container.sdkDecodeRequired(.location)
+        idleTimeoutMinutes = try container.sdkDecodeNullable(.idleTimeoutMinutes)
+        webUrl = try container.sdkDecodeRequired(.webUrl)
+        machinesUrl = try container.sdkDecodeRequired(.machinesUrl)
+        startUrl = try container.sdkDecodeRequired(.startUrl)
+        stopUrl = try container.sdkDecodeRequired(.stopUrl)
+        pullsUrl = try container.sdkDecodeNullable(.pullsUrl)
+        recentFolders = try container.sdkDecodeRequired(.recentFolders)
+        displayName = try container.sdkDecodeIfPresent(.displayName)
+        devcontainerPath = try container.sdkDecodeIfPresent(.devcontainerPath)
+        publishUrl = try container.sdkDecodeIfPresent(.publishUrl)
+        runtimeConstraints = try container.sdkDecodeIfPresent(.runtimeConstraints)
+        pendingOperation = try container.sdkDecodeIfPresent(.pendingOperation)
+        pendingOperationDisabledReason = try container.sdkDecodeIfPresent(.pendingOperationDisabledReason)
+        idleTimeoutNotice = try container.sdkDecodeIfPresent(.idleTimeoutNotice)
+        retentionPeriodMinutes = try container.sdkDecodeIfPresent(.retentionPeriodMinutes)
+        retentionExpiresAt = try container.sdkDecodeIfPresent(.retentionExpiresAt)
         try sdkValidateConstraints()
     }
 }
 
-extension CodespaceWithFullRepository {
-    public init(id: Int, name: String, environmentId: String?, owner: SimpleUser, billableOwner: SimpleUser, repository: FullRepository, machine: NullableCodespaceMachine?, prebuild: Bool?, createdAt: Date, updatedAt: Date, lastUsedAt: Date, state: CodespaceWithFullRepositoryState, url: String, gitStatus: CodespaceWithFullRepositoryGitStatus, location: CodespaceWithFullRepositoryLocation, idleTimeoutMinutes: Int?, webUrl: String, machinesUrl: String, startUrl: String, stopUrl: String, pullsUrl: String?, recentFolders: [String], displayName: String? = nil, devcontainerPath: String? = nil, publishUrl: String? = nil, runtimeConstraints: CodespaceWithFullRepositoryRuntimeConstraints? = nil, pendingOperation: Bool? = nil, pendingOperationDisabledReason: String? = nil, idleTimeoutNotice: String? = nil, retentionPeriodMinutes: Int? = nil, retentionExpiresAt: Date? = nil) throws {
+public extension CodespaceWithFullRepository {
+    init(
+        id: Int,
+        name: String,
+        environmentId: String?,
+        owner: SimpleUser,
+        billableOwner: SimpleUser,
+        repository: FullRepository,
+        machine: NullableCodespaceMachine?,
+        prebuild: Bool?,
+        createdAt: Date,
+        updatedAt: Date,
+        lastUsedAt: Date,
+        state: CodespaceWithFullRepositoryState,
+        url: String,
+        gitStatus: CodespaceWithFullRepositoryGitStatus,
+        location: CodespaceWithFullRepositoryLocation,
+        idleTimeoutMinutes: Int?,
+        webUrl: String,
+        machinesUrl: String,
+        startUrl: String,
+        stopUrl: String,
+        pullsUrl: String?,
+        recentFolders: [String],
+        displayName: String? = nil,
+        devcontainerPath: String? = nil,
+        publishUrl: String? = nil,
+        runtimeConstraints: CodespaceWithFullRepositoryRuntimeConstraints? = nil,
+        pendingOperation: Bool? = nil,
+        pendingOperationDisabledReason: String? = nil,
+        idleTimeoutNotice: String? = nil,
+        retentionPeriodMinutes: Int? = nil,
+        retentionExpiresAt: Date? = nil
+    ) throws {
         (self.id, self.name) = (id, name)
         (self.environmentId, self.owner) = (environmentId, owner)
         (self.billableOwner, self.repository) = (billableOwner, repository)
@@ -212,21 +246,21 @@ extension CodespaceWithFullRepository {
 
 extension CodespaceWithFullRepository {
     func sdkValidateConstraints() throws {
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-            try sdkValidateDateTime("last_used_at", sdkWireString(self.lastUsedAt))
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("web_url", self.webUrl)
-            try sdkValidateUri("machines_url", self.machinesUrl)
-            try sdkValidateUri("start_url", self.startUrl)
-            try sdkValidateUri("stop_url", self.stopUrl)
-        if let value = self.pullsUrl {
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+        try sdkValidateDateTime("last_used_at", sdkWireString(lastUsedAt))
+        try sdkValidateUri("url", url)
+        try sdkValidateUri("web_url", webUrl)
+        try sdkValidateUri("machines_url", machinesUrl)
+        try sdkValidateUri("start_url", startUrl)
+        try sdkValidateUri("stop_url", stopUrl)
+        if let value = pullsUrl {
             try sdkValidateUri("pulls_url", value)
         }
-        if let value = self.publishUrl {
+        if let value = publishUrl {
             try sdkValidateUri("publish_url", value)
         }
-        if let value = self.retentionExpiresAt {
+        if let value = retentionExpiresAt {
             try sdkValidateDateTime("retention_expires_at", sdkWireString(value))
         }
     }
@@ -255,23 +289,29 @@ public struct CodespaceWithFullRepositoryGitStatus: Codable {
     }
 
     init() {
-        (self.ahead, self.behind, self.hasUnpushedChanges, self.hasUncommittedChanges, self.ref) = (nil, nil, nil, nil, nil)
+        (ahead, behind, hasUnpushedChanges, hasUncommittedChanges, ref) = (nil, nil, nil, nil, nil)
     }
 }
 
-extension CodespaceWithFullRepositoryGitStatus {
-    public init(from decoder: Decoder) throws {
+public extension CodespaceWithFullRepositoryGitStatus {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.ahead = try container.sdkDecodeIfPresent(.ahead)
-        self.behind = try container.sdkDecodeIfPresent(.behind)
-        self.hasUnpushedChanges = try container.sdkDecodeIfPresent(.hasUnpushedChanges)
-        self.hasUncommittedChanges = try container.sdkDecodeIfPresent(.hasUncommittedChanges)
-        self.ref = try container.sdkDecodeIfPresent(.ref)
+        ahead = try container.sdkDecodeIfPresent(.ahead)
+        behind = try container.sdkDecodeIfPresent(.behind)
+        hasUnpushedChanges = try container.sdkDecodeIfPresent(.hasUnpushedChanges)
+        hasUncommittedChanges = try container.sdkDecodeIfPresent(.hasUncommittedChanges)
+        ref = try container.sdkDecodeIfPresent(.ref)
     }
 }
 
-extension CodespaceWithFullRepositoryGitStatus {
-    public init(ahead: Int? = nil, behind: Int? = nil, hasUnpushedChanges: Bool? = nil, hasUncommittedChanges: Bool? = nil, ref: String? = nil) {
+public extension CodespaceWithFullRepositoryGitStatus {
+    init(
+        ahead: Int? = nil,
+        behind: Int? = nil,
+        hasUnpushedChanges: Bool? = nil,
+        hasUncommittedChanges: Bool? = nil,
+        ref: String? = nil
+    ) {
         self.init()
         (self.ahead, self.behind) = (ahead, behind)
         (self.hasUnpushedChanges, self.hasUncommittedChanges) = (hasUnpushedChanges, hasUncommittedChanges)
@@ -283,7 +323,10 @@ extension CodespaceWithFullRepositoryGitStatus {
 public struct CodespaceWithFullRepositoryState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let unknown = CodespaceWithFullRepositoryState(rawValue: "Unknown")
     public static let created = CodespaceWithFullRepositoryState(rawValue: "Created")
     public static let queued = CodespaceWithFullRepositoryState(rawValue: "Queued")
@@ -304,7 +347,7 @@ public struct CodespaceWithFullRepositoryState: RawRepresentable, Hashable, Coda
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -317,7 +360,10 @@ public struct CodespaceWithFullRepositoryState: RawRepresentable, Hashable, Coda
 public struct CodespaceWithFullRepositoryLocation: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let eastUs = CodespaceWithFullRepositoryLocation(rawValue: "EastUs")
     public static let southEastAsia = CodespaceWithFullRepositoryLocation(rawValue: "SouthEastAsia")
     public static let westEurope = CodespaceWithFullRepositoryLocation(rawValue: "WestEurope")
@@ -325,7 +371,7 @@ public struct CodespaceWithFullRepositoryLocation: RawRepresentable, Hashable, C
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

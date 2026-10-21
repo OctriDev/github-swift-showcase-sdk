@@ -6,8 +6,10 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension AppsMethods {
-    /// Use a non-scoped user access token to create a repository-scoped and/or permission-scoped user access token. You can specify which repositories the token can access and which permissions are granted to the token. Invalid tokens will return `404 NOT FOUND`.
+public extension AppsMethods {
+    /// Use a non-scoped user access token to create a repository-scoped and/or permission-scoped user access token. You
+    /// can specify which repositories the token can access and which permissions are granted to the token. Invalid
+    /// tokens will return `404 NOT FOUND`.
     ///
     /// - Parameters:
     /// - clientId: The client ID of the GitHub app.
@@ -21,9 +23,40 @@ extension AppsMethods {
     /// - repositoryIds: The list of repository IDs to scope the user access token
     ///   to. `repository_ids` may not be specified if `repositories` is specified.
     /// - permissions: The permissions granted to the fine-grained access token.
-    public static func appsScopeToken(config: ClientConfig, clientId: String, accessToken: String, target: String? = nil, targetId: Int? = nil, repositories: [String]? = nil, repositoryIds: [Int]? = nil, permissions: AppPermissions? = nil, requestOptions: RequestOptions? = nil) async throws -> Authorization {
-        let requestBody = AppsScopeTokenRequestBody(accessToken: accessToken, target: target, targetId: targetId, repositories: repositories, repositoryIds: repositoryIds, permissions: permissions)
+    static func appsScopeToken(
+        config: ClientConfig,
+        clientId: String,
+        accessToken: String,
+        target: String? = nil,
+        targetId: Int? = nil,
+        repositories: [String]? = nil,
+        repositoryIds: [Int]? = nil,
+        permissions: AppPermissions? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Authorization {
+        let requestBody = AppsScopeTokenRequestBody(
+            accessToken: accessToken,
+            target: target,
+            targetId: targetId,
+            repositories: repositories,
+            repositoryIds: repositoryIds,
+            permissions: permissions
+        )
 
-        return try (await sdkRequest("POST", ["/applications/", sdkEncodePathSegment(sdkWireString(clientId)), "/token/scoped"].joined(), config: config, body: requestBody, decoder: .json, operationId: "appsScopeToken", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
+        return try await (sdkRequest(
+            "POST",
+            ["/applications/", sdkEncodePathSegment(sdkWireString(clientId)), "/token/scoped"].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "appsScopeToken",
+            options: requestOptions,
+            errors: [
+                "401": BasicError.self,
+                "403": BasicError.self,
+                "404": BasicError.self,
+                "422": ValidationError.self,
+            ]
+        )).data
     }
 }

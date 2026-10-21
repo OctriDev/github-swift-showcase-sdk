@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Users domain models
+/// Users domain models
 /// A public SSH key used to sign Git commits
 public struct SshSigningKey: Codable {
     /// Required `string` value serialized in the `key` wire field.
@@ -22,37 +22,55 @@ public struct SshSigningKey: Codable {
         case createdAt = "created_at"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension SshSigningKey {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.key) else {
-            throw SdkValidationError(field: "key", code: "required", message: "Validation failed for 'key': value is required")
-        }
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.title) else {
-            throw SdkValidationError(field: "title", code: "required", message: "Validation failed for 'title': value is required")
-        }
-        guard container.contains(.createdAt) else {
-            throw SdkValidationError(field: "created_at", code: "required", message: "Validation failed for 'created_at': value is required")
-        }
-        self.key = try container.sdkDecodeRequired(.key)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.title = try container.sdkDecodeRequired(.title)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension SshSigningKey {
-    public init(key: String, id: Int, title: String, createdAt: Date) throws {
+public extension SshSigningKey {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.key) else {
+            throw SdkValidationError(
+                field: "key",
+                code: "required",
+                message: "Validation failed for 'key': value is required"
+            )
+        }
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.title) else {
+            throw SdkValidationError(
+                field: "title",
+                code: "required",
+                message: "Validation failed for 'title': value is required"
+            )
+        }
+        guard container.contains(.createdAt) else {
+            throw SdkValidationError(
+                field: "created_at",
+                code: "required",
+                message: "Validation failed for 'created_at': value is required"
+            )
+        }
+        key = try container.sdkDecodeRequired(.key)
+        id = try container.sdkDecodeRequired(.id)
+        title = try container.sdkDecodeRequired(.title)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+    }
+}
+
+public extension SshSigningKey {
+    init(key: String, id: Int, title: String, createdAt: Date) throws {
         (self.key, self.id) = (key, id)
         (self.title, self.createdAt) = (title, createdAt)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
     }
 }
 
@@ -69,20 +87,20 @@ public struct GpgKeyEmailsItem: Codable {
     }
 
     init() {
-        (self.email, self.verified) = (nil, nil)
+        (email, verified) = (nil, nil)
     }
 }
 
-extension GpgKeyEmailsItem {
-    public init(from decoder: Decoder) throws {
+public extension GpgKeyEmailsItem {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.email = try container.sdkDecodeIfPresent(.email)
-        self.verified = try container.sdkDecodeIfPresent(.verified)
+        email = try container.sdkDecodeIfPresent(.email)
+        verified = try container.sdkDecodeIfPresent(.verified)
     }
 }
 
-extension GpgKeyEmailsItem {
-    public init(email: String? = nil, verified: Bool? = nil) {
+public extension GpgKeyEmailsItem {
+    init(email: String? = nil, verified: Bool? = nil) {
         self.init()
         (self.email, self.verified) = (email, verified)
     }
@@ -118,55 +136,94 @@ public struct Key: Codable {
         case lastUsed = "last_used"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension Key {
-    public init(from decoder: Decoder) throws {
+public extension Key {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.key) else {
-            throw SdkValidationError(field: "key", code: "required", message: "Validation failed for 'key': value is required")
+            throw SdkValidationError(
+                field: "key",
+                code: "required",
+                message: "Validation failed for 'key': value is required"
+            )
         }
         guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
         }
         guard container.contains(.url) else {
-            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
+            throw SdkValidationError(
+                field: "url",
+                code: "required",
+                message: "Validation failed for 'url': value is required"
+            )
         }
         guard container.contains(.title) else {
-            throw SdkValidationError(field: "title", code: "required", message: "Validation failed for 'title': value is required")
+            throw SdkValidationError(
+                field: "title",
+                code: "required",
+                message: "Validation failed for 'title': value is required"
+            )
         }
         guard container.contains(.createdAt) else {
-            throw SdkValidationError(field: "created_at", code: "required", message: "Validation failed for 'created_at': value is required")
+            throw SdkValidationError(
+                field: "created_at",
+                code: "required",
+                message: "Validation failed for 'created_at': value is required"
+            )
         }
         guard container.contains(.verified) else {
-            throw SdkValidationError(field: "verified", code: "required", message: "Validation failed for 'verified': value is required")
+            throw SdkValidationError(
+                field: "verified",
+                code: "required",
+                message: "Validation failed for 'verified': value is required"
+            )
         }
         guard container.contains(.readOnly) else {
-            throw SdkValidationError(field: "read_only", code: "required", message: "Validation failed for 'read_only': value is required")
+            throw SdkValidationError(
+                field: "read_only",
+                code: "required",
+                message: "Validation failed for 'read_only': value is required"
+            )
         }
-        self.key = try container.sdkDecodeRequired(.key)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.title = try container.sdkDecodeRequired(.title)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.verified = try container.sdkDecodeRequired(.verified)
-        self.readOnly = try container.sdkDecodeRequired(.readOnly)
-        self.lastUsed = try container.sdkDecodeIfPresent(.lastUsed)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-        if let value = self.lastUsed {
+        key = try container.sdkDecodeRequired(.key)
+        id = try container.sdkDecodeRequired(.id)
+        url = try container.sdkDecodeRequired(.url)
+        title = try container.sdkDecodeRequired(.title)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        verified = try container.sdkDecodeRequired(.verified)
+        readOnly = try container.sdkDecodeRequired(.readOnly)
+        lastUsed = try container.sdkDecodeIfPresent(.lastUsed)
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        if let value = lastUsed {
             try sdkValidateDateTime("last_used", sdkWireString(value))
         }
     }
 }
 
-extension Key {
-    public init(key: String, id: Int, url: String, title: String, createdAt: Date, verified: Bool, readOnly: Bool, lastUsed: Date? = nil) throws {
+public extension Key {
+    init(
+        key: String,
+        id: Int,
+        url: String,
+        title: String,
+        createdAt: Date,
+        verified: Bool,
+        readOnly: Bool,
+        lastUsed: Date? = nil
+    ) throws {
         (self.key, self.id) = (key, id)
         (self.url, self.title) = (url, title)
         (self.createdAt, self.verified) = (createdAt, verified)
         (self.readOnly, self.lastUsed) = (readOnly, lastUsed)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
         if let value = self.lastUsed {
             try sdkValidateDateTime("last_used", sdkWireString(value))
         }
@@ -222,34 +279,49 @@ public struct GpgKeySubkeysItem: Codable {
     }
 
     init() {
-        (self.id, self.primaryKeyId, self.keyId, self.publicKey, self.emails) = (nil, nil, nil, nil, nil)
-        (self.subkeys, self.canSign, self.canEncryptComms, self.canEncryptStorage, self.canCertify) = (nil, nil, nil, nil, nil)
-        (self.createdAt, self.expiresAt, self.rawKey, self.revoked) = (nil, nil, nil, nil)
+        (id, primaryKeyId, keyId, publicKey, emails) = (nil, nil, nil, nil, nil)
+        (subkeys, canSign, canEncryptComms, canEncryptStorage, canCertify) = (nil, nil, nil, nil, nil)
+        (createdAt, expiresAt, rawKey, revoked) = (nil, nil, nil, nil)
     }
 }
 
-extension GpgKeySubkeysItem {
-    public init(from decoder: Decoder) throws {
+public extension GpgKeySubkeysItem {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeIfPresent(.id)
-        self.primaryKeyId = try container.sdkDecodeIfPresent(.primaryKeyId)
-        self.keyId = try container.sdkDecodeIfPresent(.keyId)
-        self.publicKey = try container.sdkDecodeIfPresent(.publicKey)
-        self.emails = try container.sdkDecodeIfPresent(.emails)
-        self.subkeys = try container.sdkDecodeIfPresent(.subkeys)
-        self.canSign = try container.sdkDecodeIfPresent(.canSign)
-        self.canEncryptComms = try container.sdkDecodeIfPresent(.canEncryptComms)
-        self.canEncryptStorage = try container.sdkDecodeIfPresent(.canEncryptStorage)
-        self.canCertify = try container.sdkDecodeIfPresent(.canCertify)
-        self.createdAt = try container.sdkDecodeIfPresent(.createdAt)
-        self.expiresAt = try container.sdkDecodeIfPresent(.expiresAt)
-        self.rawKey = try container.sdkDecodeIfPresent(.rawKey)
-        self.revoked = try container.sdkDecodeIfPresent(.revoked)
+        id = try container.sdkDecodeIfPresent(.id)
+        primaryKeyId = try container.sdkDecodeIfPresent(.primaryKeyId)
+        keyId = try container.sdkDecodeIfPresent(.keyId)
+        publicKey = try container.sdkDecodeIfPresent(.publicKey)
+        emails = try container.sdkDecodeIfPresent(.emails)
+        subkeys = try container.sdkDecodeIfPresent(.subkeys)
+        canSign = try container.sdkDecodeIfPresent(.canSign)
+        canEncryptComms = try container.sdkDecodeIfPresent(.canEncryptComms)
+        canEncryptStorage = try container.sdkDecodeIfPresent(.canEncryptStorage)
+        canCertify = try container.sdkDecodeIfPresent(.canCertify)
+        createdAt = try container.sdkDecodeIfPresent(.createdAt)
+        expiresAt = try container.sdkDecodeIfPresent(.expiresAt)
+        rawKey = try container.sdkDecodeIfPresent(.rawKey)
+        revoked = try container.sdkDecodeIfPresent(.revoked)
     }
 }
 
-extension GpgKeySubkeysItem {
-    public init(id: Int? = nil, primaryKeyId: Int? = nil, keyId: String? = nil, publicKey: String? = nil, emails: [GpgKeySubkeysItemEmailsItem]? = nil, subkeys: [JSONValue]? = nil, canSign: Bool? = nil, canEncryptComms: Bool? = nil, canEncryptStorage: Bool? = nil, canCertify: Bool? = nil, createdAt: String? = nil, expiresAt: String? = nil, rawKey: String? = nil, revoked: Bool? = nil) {
+public extension GpgKeySubkeysItem {
+    init(
+        id: Int? = nil,
+        primaryKeyId: Int? = nil,
+        keyId: String? = nil,
+        publicKey: String? = nil,
+        emails: [GpgKeySubkeysItemEmailsItem]? = nil,
+        subkeys: [JSONValue]? = nil,
+        canSign: Bool? = nil,
+        canEncryptComms: Bool? = nil,
+        canEncryptStorage: Bool? = nil,
+        canCertify: Bool? = nil,
+        createdAt: String? = nil,
+        expiresAt: String? = nil,
+        rawKey: String? = nil,
+        revoked: Bool? = nil
+    ) {
         self.init()
         (self.id, self.primaryKeyId) = (id, primaryKeyId)
         (self.keyId, self.publicKey) = (keyId, publicKey)
@@ -432,55 +504,57 @@ public struct PrivateUser: Codable {
         case ldapDn = "ldap_dn"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension PrivateUser {
-    public init(from decoder: Decoder) throws {
+public extension PrivateUser {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.login = try container.sdkDecodeRequired(.login)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
-        self.gravatarId = try container.sdkDecodeNullable(.gravatarId)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.followersUrl = try container.sdkDecodeRequired(.followersUrl)
-        self.followingUrl = try container.sdkDecodeRequired(.followingUrl)
-        self.gistsUrl = try container.sdkDecodeRequired(.gistsUrl)
-        self.starredUrl = try container.sdkDecodeRequired(.starredUrl)
-        self.subscriptionsUrl = try container.sdkDecodeRequired(.subscriptionsUrl)
-        self.organizationsUrl = try container.sdkDecodeRequired(.organizationsUrl)
-        self.reposUrl = try container.sdkDecodeRequired(.reposUrl)
-        self.eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        self.receivedEventsUrl = try container.sdkDecodeRequired(.receivedEventsUrl)
-        self.type = try container.sdkDecodeRequired(.type)
-        self.siteAdmin = try container.sdkDecodeRequired(.siteAdmin)
-        self.name = try container.sdkDecodeNullable(.name)
-        self.company = try container.sdkDecodeNullable(.company)
-        self.blog = try container.sdkDecodeNullable(.blog)
-        self.location = try container.sdkDecodeNullable(.location)
-        self.email = try container.sdkDecodeNullable(.email)
-        self.hireable = try container.sdkDecodeNullable(.hireable)
-        self.bio = try container.sdkDecodeNullable(.bio)
-        self.publicRepos = try container.sdkDecodeRequired(.publicRepos)
-        self.publicGists = try container.sdkDecodeRequired(.publicGists)
-        self.followers = try container.sdkDecodeRequired(.followers)
-        self.following = try container.sdkDecodeRequired(.following)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        self.privateGists = try container.sdkDecodeRequired(.privateGists)
-        self.totalPrivateRepos = try container.sdkDecodeRequired(.totalPrivateRepos)
-        self.ownedPrivateRepos = try container.sdkDecodeRequired(.ownedPrivateRepos)
-        self.diskUsage = try container.sdkDecodeRequired(.diskUsage)
-        self.collaborators = try container.sdkDecodeRequired(.collaborators)
-        self.twoFactorAuthentication = try container.sdkDecodeRequired(.twoFactorAuthentication)
-        self.userViewType = try container.sdkDecodeIfPresent(.userViewType)
-        self.notificationEmail = try container.sdkDecodeIfPresent(.notificationEmail)
-        self.twitterUsername = try container.sdkDecodeIfPresent(.twitterUsername)
-        self.plan = try container.sdkDecodeIfPresent(.plan)
-        self.businessPlus = try container.sdkDecodeIfPresent(.businessPlus)
-        self.ldapDn = try container.sdkDecodeIfPresent(.ldapDn)
+        login = try container.sdkDecodeRequired(.login)
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        avatarUrl = try container.sdkDecodeRequired(.avatarUrl)
+        gravatarId = try container.sdkDecodeNullable(.gravatarId)
+        url = try container.sdkDecodeRequired(.url)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        followersUrl = try container.sdkDecodeRequired(.followersUrl)
+        followingUrl = try container.sdkDecodeRequired(.followingUrl)
+        gistsUrl = try container.sdkDecodeRequired(.gistsUrl)
+        starredUrl = try container.sdkDecodeRequired(.starredUrl)
+        subscriptionsUrl = try container.sdkDecodeRequired(.subscriptionsUrl)
+        organizationsUrl = try container.sdkDecodeRequired(.organizationsUrl)
+        reposUrl = try container.sdkDecodeRequired(.reposUrl)
+        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
+        receivedEventsUrl = try container.sdkDecodeRequired(.receivedEventsUrl)
+        type = try container.sdkDecodeRequired(.type)
+        siteAdmin = try container.sdkDecodeRequired(.siteAdmin)
+        name = try container.sdkDecodeNullable(.name)
+        company = try container.sdkDecodeNullable(.company)
+        blog = try container.sdkDecodeNullable(.blog)
+        location = try container.sdkDecodeNullable(.location)
+        email = try container.sdkDecodeNullable(.email)
+        hireable = try container.sdkDecodeNullable(.hireable)
+        bio = try container.sdkDecodeNullable(.bio)
+        publicRepos = try container.sdkDecodeRequired(.publicRepos)
+        publicGists = try container.sdkDecodeRequired(.publicGists)
+        followers = try container.sdkDecodeRequired(.followers)
+        following = try container.sdkDecodeRequired(.following)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        privateGists = try container.sdkDecodeRequired(.privateGists)
+        totalPrivateRepos = try container.sdkDecodeRequired(.totalPrivateRepos)
+        ownedPrivateRepos = try container.sdkDecodeRequired(.ownedPrivateRepos)
+        diskUsage = try container.sdkDecodeRequired(.diskUsage)
+        collaborators = try container.sdkDecodeRequired(.collaborators)
+        twoFactorAuthentication = try container.sdkDecodeRequired(.twoFactorAuthentication)
+        userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        notificationEmail = try container.sdkDecodeIfPresent(.notificationEmail)
+        twitterUsername = try container.sdkDecodeIfPresent(.twitterUsername)
+        plan = try container.sdkDecodeIfPresent(.plan)
+        businessPlus = try container.sdkDecodeIfPresent(.businessPlus)
+        ldapDn = try container.sdkDecodeIfPresent(.ldapDn)
         try sdkValidateConstraints()
     }
 }

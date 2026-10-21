@@ -6,16 +6,32 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension CodespacesMethods {
-    /// Gets information about a user's codespace. OAuth app tokens and personal access tokens (classic) need the `codespace` scope to use this endpoint.
+public extension CodespacesMethods {
+    /// Gets information about a user's codespace. OAuth app tokens and personal access tokens (classic) need the
+    /// `codespace` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - codespaceName: The name of the codespace.
-    public static func codespacesGetForAuthenticatedUser(config: ClientConfig, codespaceName: String, requestOptions: RequestOptions? = nil) async throws -> Codespace {
-        return try (await sdkRequest("GET", ["/user/codespaces/", sdkEncodePathSegment(sdkWireString(codespaceName))].joined(), config: config, decoder: .json, operationId: "codespacesGetForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self])).data
+    static func codespacesGetForAuthenticatedUser(
+        config: ClientConfig,
+        codespaceName: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Codespace {
+        try await (sdkRequest(
+            "GET",
+            ["/user/codespaces/", sdkEncodePathSegment(sdkWireString(codespaceName))].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "codespacesGetForAuthenticatedUser",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self]
+        )).data
     }
 
-    /// Updates a codespace owned by the authenticated user. Currently only the codespace's machine type and recent folders can be modified using this endpoint. If you specify a new machine type it will be applied the next time your codespace is started. OAuth app tokens and personal access tokens (classic) need the `codespace` scope to use this endpoint.
+    /// Updates a codespace owned by the authenticated user. Currently only the codespace's machine type and recent
+    /// folders can be modified using this endpoint. If you specify a new machine type it will be applied the next time
+    /// your codespace is started. OAuth app tokens and personal access tokens (classic) need the `codespace` scope to
+    /// use this endpoint.
     ///
     /// - Parameters:
     /// - codespaceName: The name of the codespace.
@@ -24,17 +40,50 @@ extension CodespacesMethods {
     /// - recentFolders: Recently opened folders inside the codespace. It is
     ///   currently used by the clients to determine the folder path to load the
     ///   codespace in.
-    public static func codespacesUpdateForAuthenticatedUser(config: ClientConfig, codespaceName: String, machine: String? = nil, displayName: String? = nil, recentFolders: [String]? = nil, requestOptions: RequestOptions? = nil) async throws -> Codespace {
-        let requestBody = CodespacesUpdateForAuthenticatedUserRequestBody(machine: machine, displayName: displayName, recentFolders: recentFolders)
+    static func codespacesUpdateForAuthenticatedUser(
+        config: ClientConfig,
+        codespaceName: String,
+        machine: String? = nil,
+        displayName: String? = nil,
+        recentFolders: [String]? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Codespace {
+        let requestBody = CodespacesUpdateForAuthenticatedUserRequestBody(
+            machine: machine,
+            displayName: displayName,
+            recentFolders: recentFolders
+        )
 
-        return try (await sdkRequest("PATCH", ["/user/codespaces/", sdkEncodePathSegment(sdkWireString(codespaceName))].joined(), config: config, body: requestBody, decoder: .json, operationId: "codespacesUpdateForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
+        return try await (sdkRequest(
+            "PATCH",
+            ["/user/codespaces/", sdkEncodePathSegment(sdkWireString(codespaceName))].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "codespacesUpdateForAuthenticatedUser",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 
-    /// Deletes a user's codespace. OAuth app tokens and personal access tokens (classic) need the `codespace` scope to use this endpoint.
+    /// Deletes a user's codespace. OAuth app tokens and personal access tokens (classic) need the `codespace` scope to
+    /// use this endpoint.
     ///
     /// - Parameters:
     /// - codespaceName: The name of the codespace.
-    public static func codespacesDeleteForAuthenticatedUser(config: ClientConfig, codespaceName: String, requestOptions: RequestOptions? = nil) async throws -> [String: JSONValue] {
-        return try (await sdkRequest("DELETE", ["/user/codespaces/", sdkEncodePathSegment(sdkWireString(codespaceName))].joined(), config: config, decoder: .json, operationId: "codespacesDeleteForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self])).data
+    static func codespacesDeleteForAuthenticatedUser(
+        config: ClientConfig,
+        codespaceName: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [String: JSONValue] {
+        try await (sdkRequest(
+            "DELETE",
+            ["/user/codespaces/", sdkEncodePathSegment(sdkWireString(codespaceName))].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "codespacesDeleteForAuthenticatedUser",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self]
+        )).data
     }
 }

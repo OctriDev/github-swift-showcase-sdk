@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Activity domain models
+/// Activity domain models
 /// Required object value serialized in the `pull_request` wire field.
 public struct PullRequestReviewEventReviewLinksPullRequest: Codable {
     /// Required `string` value serialized in the `href` wire field.
@@ -13,21 +13,27 @@ public struct PullRequestReviewEventReviewLinksPullRequest: Codable {
         case href
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension PullRequestReviewEventReviewLinksPullRequest {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.href) else {
-            throw SdkValidationError(field: "href", code: "required", message: "Validation failed for 'href': value is required")
-        }
-        self.href = try container.sdkDecodeRequired(.href)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension PullRequestReviewEventReviewLinksPullRequest {
-    public init(href: String) {
+public extension PullRequestReviewEventReviewLinksPullRequest {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.href) else {
+            throw SdkValidationError(
+                field: "href",
+                code: "required",
+                message: "Validation failed for 'href': value is required"
+            )
+        }
+        href = try container.sdkDecodeRequired(.href)
+    }
+}
+
+public extension PullRequestReviewEventReviewLinksPullRequest {
+    init(href: String) {
         self.href = href
     }
 }
@@ -44,25 +50,35 @@ public struct MemberEvent: Codable {
         case member
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension MemberEvent {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.action) else {
-            throw SdkValidationError(field: "action", code: "required", message: "Validation failed for 'action': value is required")
-        }
-        guard container.contains(.member) else {
-            throw SdkValidationError(field: "member", code: "required", message: "Validation failed for 'member': value is required")
-        }
-        self.action = try container.sdkDecodeRequired(.action)
-        self.member = try container.sdkDecodeRequired(.member)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension MemberEvent {
-    public init(action: String, member: SimpleUser) {
+public extension MemberEvent {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.action) else {
+            throw SdkValidationError(
+                field: "action",
+                code: "required",
+                message: "Validation failed for 'action': value is required"
+            )
+        }
+        guard container.contains(.member) else {
+            throw SdkValidationError(
+                field: "member",
+                code: "required",
+                message: "Validation failed for 'member': value is required"
+            )
+        }
+        action = try container.sdkDecodeRequired(.action)
+        member = try container.sdkDecodeRequired(.member)
+    }
+}
+
+public extension MemberEvent {
+    init(action: String, member: SimpleUser) {
         (self.action, self.member) = (action, member)
     }
 }
@@ -72,7 +88,10 @@ extension MemberEvent {
 public struct DiscussionState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let open = DiscussionState(rawValue: "open")
     public static let closed = DiscussionState(rawValue: "closed")
     public static let locked = DiscussionState(rawValue: "locked")
@@ -81,7 +100,7 @@ public struct DiscussionState: RawRepresentable, Hashable, Codable, Sendable, Sd
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -94,7 +113,10 @@ public struct DiscussionState: RawRepresentable, Hashable, Codable, Sendable, Sd
 public struct DiscussionStateReason: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let resolved = DiscussionStateReason(rawValue: "resolved")
     public static let outdated = DiscussionStateReason(rawValue: "outdated")
     public static let duplicate = DiscussionStateReason(rawValue: "duplicate")
@@ -102,7 +124,7 @@ public struct DiscussionStateReason: RawRepresentable, Hashable, Codable, Sendab
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -112,17 +134,21 @@ public struct DiscussionStateReason: RawRepresentable, Hashable, Codable, Sendab
 }
 
 /// Optional enumerated value serialized in the `type` wire field.
-public struct PullRequestReviewCommentEventCommentUserType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct PullRequestReviewCommentEventCommentUserType: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = PullRequestReviewCommentEventCommentUserType(rawValue: "Bot")
     public static let user = PullRequestReviewCommentEventCommentUserType(rawValue: "User")
     public static let organization = PullRequestReviewCommentEventCommentUserType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -135,14 +161,17 @@ public struct PullRequestReviewCommentEventCommentUserType: RawRepresentable, Ha
 public struct DiscussionAnswerChosenByType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = DiscussionAnswerChosenByType(rawValue: "Bot")
     public static let user = DiscussionAnswerChosenByType(rawValue: "User")
     public static let organization = DiscussionAnswerChosenByType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -152,16 +181,20 @@ public struct DiscussionAnswerChosenByType: RawRepresentable, Hashable, Codable,
 }
 
 /// The policy controlling who can create pull requests: all or collaborators_only.
-public struct ForkEventForkeePullRequestCreationPolicy: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ForkEventForkeePullRequestCreationPolicy: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let all = ForkEventForkeePullRequestCreationPolicy(rawValue: "all")
     public static let collaboratorsOnly = ForkEventForkeePullRequestCreationPolicy(rawValue: "collaborators_only")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -174,14 +207,17 @@ public struct ForkEventForkeePullRequestCreationPolicy: RawRepresentable, Hashab
 public struct DiscussionUserType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = DiscussionUserType(rawValue: "Bot")
     public static let user = DiscussionUserType(rawValue: "User")
     public static let organization = DiscussionUserType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -194,7 +230,10 @@ public struct DiscussionUserType: RawRepresentable, Hashable, Codable, Sendable,
 public struct DiscussionAuthorAssociation: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let collaborator = DiscussionAuthorAssociation(rawValue: "COLLABORATOR")
     public static let contributor = DiscussionAuthorAssociation(rawValue: "CONTRIBUTOR")
     public static let firstTimer = DiscussionAuthorAssociation(rawValue: "FIRST_TIMER")
@@ -206,7 +245,7 @@ public struct DiscussionAuthorAssociation: RawRepresentable, Hashable, Codable, 
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

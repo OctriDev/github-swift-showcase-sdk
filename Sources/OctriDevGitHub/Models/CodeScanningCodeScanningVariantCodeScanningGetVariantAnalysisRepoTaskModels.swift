@@ -3,7 +3,7 @@
 
 import Foundation
 
-// CodeScanningCodeScanningVariant domain models
+/// CodeScanningCodeScanningVariant domain models
 /// Typed representation of the `CodeScanningVariantAnalysisRepoTask` API schema.
 public struct CodeScanningVariantAnalysisRepoTask: Codable {
     /// A GitHub repository.
@@ -34,31 +34,50 @@ public struct CodeScanningVariantAnalysisRepoTask: Codable {
         case artifactUrl = "artifact_url"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension CodeScanningVariantAnalysisRepoTask {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.repository) else {
-            throw SdkValidationError(field: "repository", code: "required", message: "Validation failed for 'repository': value is required")
-        }
-        guard container.contains(.analysisStatus) else {
-            throw SdkValidationError(field: "analysis_status", code: "required", message: "Validation failed for 'analysis_status': value is required")
-        }
-        self.repository = try container.sdkDecodeRequired(.repository)
-        self.analysisStatus = try container.sdkDecodeRequired(.analysisStatus)
-        self.artifactSizeInBytes = try container.sdkDecodeIfPresent(.artifactSizeInBytes)
-        self.resultCount = try container.sdkDecodeIfPresent(.resultCount)
-        self.failureMessage = try container.sdkDecodeIfPresent(.failureMessage)
-        self.databaseCommitSha = try container.sdkDecodeIfPresent(.databaseCommitSha)
-        self.sourceLocationPrefix = try container.sdkDecodeIfPresent(.sourceLocationPrefix)
-        self.artifactUrl = try container.sdkDecodeIfPresent(.artifactUrl)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension CodeScanningVariantAnalysisRepoTask {
-    public init(repository: SimpleRepository, analysisStatus: CodeScanningVariantAnalysisStatus, artifactSizeInBytes: Int? = nil, resultCount: Int? = nil, failureMessage: String? = nil, databaseCommitSha: String? = nil, sourceLocationPrefix: String? = nil, artifactUrl: String? = nil) {
+public extension CodeScanningVariantAnalysisRepoTask {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.repository) else {
+            throw SdkValidationError(
+                field: "repository",
+                code: "required",
+                message: "Validation failed for 'repository': value is required"
+            )
+        }
+        guard container.contains(.analysisStatus) else {
+            throw SdkValidationError(
+                field: "analysis_status",
+                code: "required",
+                message: "Validation failed for 'analysis_status': value is required"
+            )
+        }
+        repository = try container.sdkDecodeRequired(.repository)
+        analysisStatus = try container.sdkDecodeRequired(.analysisStatus)
+        artifactSizeInBytes = try container.sdkDecodeIfPresent(.artifactSizeInBytes)
+        resultCount = try container.sdkDecodeIfPresent(.resultCount)
+        failureMessage = try container.sdkDecodeIfPresent(.failureMessage)
+        databaseCommitSha = try container.sdkDecodeIfPresent(.databaseCommitSha)
+        sourceLocationPrefix = try container.sdkDecodeIfPresent(.sourceLocationPrefix)
+        artifactUrl = try container.sdkDecodeIfPresent(.artifactUrl)
+    }
+}
+
+public extension CodeScanningVariantAnalysisRepoTask {
+    init(
+        repository: SimpleRepository,
+        analysisStatus: CodeScanningVariantAnalysisStatus,
+        artifactSizeInBytes: Int? = nil,
+        resultCount: Int? = nil,
+        failureMessage: String? = nil,
+        databaseCommitSha: String? = nil,
+        sourceLocationPrefix: String? = nil,
+        artifactUrl: String? = nil
+    ) {
         (self.repository, self.analysisStatus) = (repository, analysisStatus)
         (self.artifactSizeInBytes, self.resultCount) = (artifactSizeInBytes, resultCount)
         (self.failureMessage, self.databaseCommitSha) = (failureMessage, databaseCommitSha)

@@ -3,7 +3,7 @@
 
 import Foundation
 
-// ActionsConcurrency domain models
+/// ActionsConcurrency domain models
 /// A list of active concurrency groups for a repository.
 public struct ConcurrencyGroupList: Codable {
     /// Required `integer` value serialized in the `total_count` wire field.
@@ -16,25 +16,35 @@ public struct ConcurrencyGroupList: Codable {
         case concurrencyGroups = "concurrency_groups"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ConcurrencyGroupList {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.totalCount) else {
-            throw SdkValidationError(field: "total_count", code: "required", message: "Validation failed for 'total_count': value is required")
-        }
-        guard container.contains(.concurrencyGroups) else {
-            throw SdkValidationError(field: "concurrency_groups", code: "required", message: "Validation failed for 'concurrency_groups': value is required")
-        }
-        self.totalCount = try container.sdkDecodeRequired(.totalCount)
-        self.concurrencyGroups = try container.sdkDecodeRequired(.concurrencyGroups)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ConcurrencyGroupList {
-    public init(totalCount: Int, concurrencyGroups: [ConcurrencyGroupListConcurrencyGroupsItem]) {
+public extension ConcurrencyGroupList {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.totalCount) else {
+            throw SdkValidationError(
+                field: "total_count",
+                code: "required",
+                message: "Validation failed for 'total_count': value is required"
+            )
+        }
+        guard container.contains(.concurrencyGroups) else {
+            throw SdkValidationError(
+                field: "concurrency_groups",
+                code: "required",
+                message: "Validation failed for 'concurrency_groups': value is required"
+            )
+        }
+        totalCount = try container.sdkDecodeRequired(.totalCount)
+        concurrencyGroups = try container.sdkDecodeRequired(.concurrencyGroups)
+    }
+}
+
+public extension ConcurrencyGroupList {
+    init(totalCount: Int, concurrencyGroups: [ConcurrencyGroupListConcurrencyGroupsItem]) {
         (self.totalCount, self.concurrencyGroups) = (totalCount, concurrencyGroups)
     }
 }
@@ -54,36 +64,50 @@ public struct ConcurrencyGroupListConcurrencyGroupsItem: Codable {
         case lastAcquiredAt = "last_acquired_at"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension ConcurrencyGroupListConcurrencyGroupsItem {
-    public init(from decoder: Decoder) throws {
+public extension ConcurrencyGroupListConcurrencyGroupsItem {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.groupName) else {
-            throw SdkValidationError(field: "group_name", code: "required", message: "Validation failed for 'group_name': value is required")
+            throw SdkValidationError(
+                field: "group_name",
+                code: "required",
+                message: "Validation failed for 'group_name': value is required"
+            )
         }
         guard container.contains(.groupUrl) else {
-            throw SdkValidationError(field: "group_url", code: "required", message: "Validation failed for 'group_url': value is required")
+            throw SdkValidationError(
+                field: "group_url",
+                code: "required",
+                message: "Validation failed for 'group_url': value is required"
+            )
         }
         guard container.contains(.lastAcquiredAt) else {
-            throw SdkValidationError(field: "last_acquired_at", code: "required", message: "Validation failed for 'last_acquired_at': value is required")
+            throw SdkValidationError(
+                field: "last_acquired_at",
+                code: "required",
+                message: "Validation failed for 'last_acquired_at': value is required"
+            )
         }
-        self.groupName = try container.sdkDecodeRequired(.groupName)
-        self.groupUrl = try container.sdkDecodeRequired(.groupUrl)
-        self.lastAcquiredAt = try container.sdkDecodeNullable(.lastAcquiredAt)
-            try sdkValidateUri("group_url", self.groupUrl)
-        if let value = self.lastAcquiredAt {
+        groupName = try container.sdkDecodeRequired(.groupName)
+        groupUrl = try container.sdkDecodeRequired(.groupUrl)
+        lastAcquiredAt = try container.sdkDecodeNullable(.lastAcquiredAt)
+        try sdkValidateUri("group_url", groupUrl)
+        if let value = lastAcquiredAt {
             try sdkValidateDateTime("last_acquired_at", sdkWireString(value))
         }
     }
 }
 
-extension ConcurrencyGroupListConcurrencyGroupsItem {
-    public init(groupName: String, groupUrl: String, lastAcquiredAt: Date?) throws {
+public extension ConcurrencyGroupListConcurrencyGroupsItem {
+    init(groupName: String, groupUrl: String, lastAcquiredAt: Date?) throws {
         (self.groupName, self.groupUrl) = (groupName, groupUrl)
         self.lastAcquiredAt = lastAcquiredAt
-            try sdkValidateUri("group_url", self.groupUrl)
+        try sdkValidateUri("group_url", self.groupUrl)
         if let value = self.lastAcquiredAt {
             try sdkValidateDateTime("last_acquired_at", sdkWireString(value))
         }

@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Actions domain models
+/// Actions domain models
 /// Typed representation of the `SelfHostedRunnersSettings` API schema.
 public struct SelfHostedRunnersSettings: Codable {
     /// The policy that controls whether self-hosted runners can be used by repositories in the organization
@@ -16,39 +16,49 @@ public struct SelfHostedRunnersSettings: Codable {
         case selectedRepositoriesUrl = "selected_repositories_url"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension SelfHostedRunnersSettings {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.enabledRepositories) else {
-            throw SdkValidationError(field: "enabled_repositories", code: "required", message: "Validation failed for 'enabled_repositories': value is required")
-        }
-        self.enabledRepositories = try container.sdkDecodeRequired(.enabledRepositories)
-        self.selectedRepositoriesUrl = try container.sdkDecodeIfPresent(.selectedRepositoriesUrl)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension SelfHostedRunnersSettings {
-    public init(enabledRepositories: SelfHostedRunnersSettingsEnabledRepositories, selectedRepositoriesUrl: String? = nil) {
+public extension SelfHostedRunnersSettings {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.enabledRepositories) else {
+            throw SdkValidationError(
+                field: "enabled_repositories",
+                code: "required",
+                message: "Validation failed for 'enabled_repositories': value is required"
+            )
+        }
+        enabledRepositories = try container.sdkDecodeRequired(.enabledRepositories)
+        selectedRepositoriesUrl = try container.sdkDecodeIfPresent(.selectedRepositoriesUrl)
+    }
+}
+
+public extension SelfHostedRunnersSettings {
+    init(enabledRepositories: SelfHostedRunnersSettingsEnabledRepositories, selectedRepositoriesUrl: String? = nil) {
         self.enabledRepositories = enabledRepositories
         self.selectedRepositoriesUrl = selectedRepositoriesUrl
     }
 }
 
 /// The policy that controls whether self-hosted runners can be used by repositories in the organization
-public struct SelfHostedRunnersSettingsEnabledRepositories: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct SelfHostedRunnersSettingsEnabledRepositories: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let all = SelfHostedRunnersSettingsEnabledRepositories(rawValue: "all")
     public static let selected = SelfHostedRunnersSettingsEnabledRepositories(rawValue: "selected")
     public static let none = SelfHostedRunnersSettingsEnabledRepositories(rawValue: "none")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

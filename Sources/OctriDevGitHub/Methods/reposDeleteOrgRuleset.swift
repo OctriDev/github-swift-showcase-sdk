@@ -6,15 +6,34 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ReposMethods {
-    /// Deletes a ruleset from an organization. Use the `org` and `ruleset_id` path parameters to identify the organization ruleset to remove. A 204 response confirms deletion and has no response body.
+public extension ReposMethods {
+    /// Deletes a ruleset from an organization. Use the `org` and `ruleset_id` path parameters to identify the
+    /// organization ruleset to remove. A 204 response confirms deletion and has no response body.
     ///
     /// Delete a ruleset for an organization.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - rulesetId: The ID of the ruleset.
-    public static func reposDeleteOrgRuleset(config: ClientConfig, org: String, rulesetId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/rulesets/", sdkEncodePathSegment(sdkWireString(rulesetId))].joined(), config: config, decoder: .empty, operationId: "reposDeleteOrgRuleset", options: requestOptions, errors: ["404": BasicError.self, "500": BasicError.self])).data
+    static func reposDeleteOrgRuleset(
+        config: ClientConfig,
+        org: String,
+        rulesetId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            [
+                "/orgs/",
+                sdkEncodePathSegment(sdkWireString(org)),
+                "/rulesets/",
+                sdkEncodePathSegment(sdkWireString(rulesetId)),
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "reposDeleteOrgRuleset",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "500": BasicError.self]
+        )).data
     }
 }

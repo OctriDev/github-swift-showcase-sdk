@@ -6,8 +6,10 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension CopilotSpacesMethods {
-    /// Removes a collaborator from a specific Copilot Space owned by a user. The authenticated user must be the owner of the space or have admin access to the space. OAuth app tokens and personal access tokens (classic) need the `user` scope to use this endpoint.
+public extension CopilotSpacesMethods {
+    /// Removes a collaborator from a specific Copilot Space owned by a user. The authenticated user must be the owner
+    /// of the space or have admin access to the space. OAuth app tokens and personal access tokens (classic) need the
+    /// `user` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - username: The handle for the GitHub user account.
@@ -16,7 +18,31 @@ extension CopilotSpacesMethods {
     ///   will be rejected).
     /// - actorIdentifier: The username of the collaborator. The numeric user ID is
     ///   also accepted.
-    public static func copilotSpacesRemoveCollaboratorForUser(config: ClientConfig, username: String, spaceNumber: Int, actorType: CopilotSpacesRemoveCollaboratorForUserParameter, actorIdentifier: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/copilot-spaces/", sdkEncodePathSegment(sdkWireString(spaceNumber)), "/collaborators/", sdkEncodePathSegment(sdkWireString(actorType)), "/", sdkEncodePathSegment(sdkWireString(actorIdentifier))].joined(), config: config, decoder: .empty, operationId: "copilotSpacesRemoveCollaboratorForUser", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+    static func copilotSpacesRemoveCollaboratorForUser(
+        config: ClientConfig,
+        username: String,
+        spaceNumber: Int,
+        actorType: CopilotSpacesRemoveCollaboratorForUserParameter,
+        actorIdentifier: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            [
+                "/users/",
+                sdkEncodePathSegment(sdkWireString(username)),
+                "/copilot-spaces/",
+                sdkEncodePathSegment(sdkWireString(spaceNumber)),
+                "/collaborators/",
+                sdkEncodePathSegment(sdkWireString(actorType)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(actorIdentifier)),
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "copilotSpacesRemoveCollaboratorForUser",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 }

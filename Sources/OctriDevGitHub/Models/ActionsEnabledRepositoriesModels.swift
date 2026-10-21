@@ -3,19 +3,22 @@
 
 import Foundation
 
-// Actions domain models
+/// Actions domain models
 /// The policy that controls the repositories in the organization that are allowed to run GitHub Actions.
 public struct EnabledRepositories: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let all = EnabledRepositories(rawValue: "all")
     public static let none = EnabledRepositories(rawValue: "none")
     public static let selected = EnabledRepositories(rawValue: "selected")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -28,14 +31,17 @@ public struct EnabledRepositories: RawRepresentable, Hashable, Codable, Sendable
 public struct AllowedActions: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let all = AllowedActions(rawValue: "all")
     public static let localOnly = AllowedActions(rawValue: "local_only")
     public static let selected = AllowedActions(rawValue: "selected")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -48,7 +54,10 @@ public struct AllowedActions: RawRepresentable, Hashable, Codable, Sendable, Sdk
 public struct JobConclusion: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let success = JobConclusion(rawValue: "success")
     public static let failure = JobConclusion(rawValue: "failure")
     public static let neutral = JobConclusion(rawValue: "neutral")
@@ -59,7 +68,7 @@ public struct JobConclusion: RawRepresentable, Hashable, Codable, Sendable, SdkW
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -72,7 +81,10 @@ public struct JobConclusion: RawRepresentable, Hashable, Codable, Sendable, SdkW
 public struct JobStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let queued = JobStatus(rawValue: "queued")
     public static let inProgress = JobStatus(rawValue: "in_progress")
     public static let completed = JobStatus(rawValue: "completed")
@@ -82,7 +94,7 @@ public struct JobStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireC
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -95,14 +107,17 @@ public struct JobStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireC
 public struct JobStepsItemStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let queued = JobStepsItemStatus(rawValue: "queued")
     public static let inProgress = JobStepsItemStatus(rawValue: "in_progress")
     public static let completed = JobStepsItemStatus(rawValue: "completed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -112,16 +127,20 @@ public struct JobStepsItemStatus: RawRepresentable, Hashable, Codable, Sendable,
 }
 
 /// Describe whether all repositories have been selected or there's a selection involved
-public struct AuthenticationTokenRepositorySelection: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct AuthenticationTokenRepositorySelection: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let all = AuthenticationTokenRepositorySelection(rawValue: "all")
     public static let selected = AuthenticationTokenRepositorySelection(rawValue: "selected")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

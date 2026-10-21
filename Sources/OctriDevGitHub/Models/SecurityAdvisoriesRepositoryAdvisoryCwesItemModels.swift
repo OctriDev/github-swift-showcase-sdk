@@ -3,7 +3,7 @@
 
 import Foundation
 
-// SecurityAdvisories domain models
+/// SecurityAdvisories domain models
 /// Required object value serialized in the `cwes[]` wire field.
 public struct RepositoryAdvisoryCwesItem: Codable {
     /// The Common Weakness Enumeration (CWE) identifier.
@@ -16,25 +16,35 @@ public struct RepositoryAdvisoryCwesItem: Codable {
         case name
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryAdvisoryCwesItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.cweId) else {
-            throw SdkValidationError(field: "cwe_id", code: "required", message: "Validation failed for 'cwe_id': value is required")
-        }
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        self.cweId = try container.sdkDecodeRequired(.cweId)
-        self.name = try container.sdkDecodeRequired(.name)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension RepositoryAdvisoryCwesItem {
-    public init(cweId: String, name: String) {
+public extension RepositoryAdvisoryCwesItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.cweId) else {
+            throw SdkValidationError(
+                field: "cwe_id",
+                code: "required",
+                message: "Validation failed for 'cwe_id': value is required"
+            )
+        }
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        cweId = try container.sdkDecodeRequired(.cweId)
+        name = try container.sdkDecodeRequired(.name)
+    }
+}
+
+public extension RepositoryAdvisoryCwesItem {
+    init(cweId: String, name: String) {
         (self.cweId, self.name) = (cweId, name)
     }
 }
@@ -43,7 +53,10 @@ extension RepositoryAdvisoryCwesItem {
 public struct SecurityAdvisoryEcosystems: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let rubygems = SecurityAdvisoryEcosystems(rawValue: "rubygems")
     public static let npm = SecurityAdvisoryEcosystems(rawValue: "npm")
     public static let pip = SecurityAdvisoryEcosystems(rawValue: "pip")
@@ -60,7 +73,7 @@ public struct SecurityAdvisoryEcosystems: RawRepresentable, Hashable, Codable, S
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -73,7 +86,10 @@ public struct SecurityAdvisoryEcosystems: RawRepresentable, Hashable, Codable, S
 public struct SecurityAdvisoryCreditTypes: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let analyst = SecurityAdvisoryCreditTypes(rawValue: "analyst")
     public static let finder = SecurityAdvisoryCreditTypes(rawValue: "finder")
     public static let reporter = SecurityAdvisoryCreditTypes(rawValue: "reporter")
@@ -87,7 +103,7 @@ public struct SecurityAdvisoryCreditTypes: RawRepresentable, Hashable, Codable, 
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -100,14 +116,17 @@ public struct SecurityAdvisoryCreditTypes: RawRepresentable, Hashable, Codable, 
 public struct RepositoryAdvisoryCreditState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let accepted = RepositoryAdvisoryCreditState(rawValue: "accepted")
     public static let declined = RepositoryAdvisoryCreditState(rawValue: "declined")
     public static let pending = RepositoryAdvisoryCreditState(rawValue: "pending")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -120,7 +139,10 @@ public struct RepositoryAdvisoryCreditState: RawRepresentable, Hashable, Codable
 public struct RepositoryAdvisorySeverity: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let critical = RepositoryAdvisorySeverity(rawValue: "critical")
     public static let high = RepositoryAdvisorySeverity(rawValue: "high")
     public static let medium = RepositoryAdvisorySeverity(rawValue: "medium")
@@ -128,7 +150,7 @@ public struct RepositoryAdvisorySeverity: RawRepresentable, Hashable, Codable, S
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -141,13 +163,16 @@ public struct RepositoryAdvisorySeverity: RawRepresentable, Hashable, Codable, S
 public struct GlobalAdvisoryIdentifiersItemType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let cve = GlobalAdvisoryIdentifiersItemType(rawValue: "CVE")
     public static let ghsa = GlobalAdvisoryIdentifiersItemType(rawValue: "GHSA")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -160,13 +185,16 @@ public struct GlobalAdvisoryIdentifiersItemType: RawRepresentable, Hashable, Cod
 public struct RepositoryAdvisoryIdentifiersItemType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let cve = RepositoryAdvisoryIdentifiersItemType(rawValue: "CVE")
     public static let ghsa = RepositoryAdvisoryIdentifiersItemType(rawValue: "GHSA")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -179,7 +207,10 @@ public struct RepositoryAdvisoryIdentifiersItemType: RawRepresentable, Hashable,
 public struct RepositoryAdvisoryState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let published = RepositoryAdvisoryState(rawValue: "published")
     public static let closed = RepositoryAdvisoryState(rawValue: "closed")
     public static let withdrawn = RepositoryAdvisoryState(rawValue: "withdrawn")
@@ -188,7 +219,7 @@ public struct RepositoryAdvisoryState: RawRepresentable, Hashable, Codable, Send
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -201,14 +232,17 @@ public struct RepositoryAdvisoryState: RawRepresentable, Hashable, Codable, Send
 public struct GlobalAdvisoryType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let reviewed = GlobalAdvisoryType(rawValue: "reviewed")
     public static let unreviewed = GlobalAdvisoryType(rawValue: "unreviewed")
     public static let malware = GlobalAdvisoryType(rawValue: "malware")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -221,7 +255,10 @@ public struct GlobalAdvisoryType: RawRepresentable, Hashable, Codable, Sendable,
 public struct GlobalAdvisorySeverity: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let critical = GlobalAdvisorySeverity(rawValue: "critical")
     public static let high = GlobalAdvisorySeverity(rawValue: "high")
     public static let medium = GlobalAdvisorySeverity(rawValue: "medium")
@@ -230,7 +267,7 @@ public struct GlobalAdvisorySeverity: RawRepresentable, Hashable, Codable, Senda
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

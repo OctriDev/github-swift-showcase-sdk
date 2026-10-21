@@ -27,7 +27,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsGetForkPrContributorApprovalPermissionsOrganizationActX09a68f7724ReachesMockAndDecodesResponse() async throws {
+    func testActionsGetForkPrContributorApprovalPermissionsOrganizationActX09a68f7724ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -45,7 +46,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsGetForkPrContributorApprovalPermissionsOrganizationActX00ee7d740aReachesMockAndDecodesResponse() async throws {
+    func testActionsGetForkPrContributorApprovalPermissionsOrganizationActX00ee7d740aReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -56,8 +58,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.actions.getForkPrContributorApprovalPermissionsOrganization(
-            org: decoded("\"org\"")
-        )
+                org: decoded("\"org\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -73,7 +75,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsGetForkPrContributorApprovalPermissionsRepositoryActioX1cdfc810b2ReachesMockAndDecodesResponse() async throws {
+    func testActionsGetForkPrContributorApprovalPermissionsRepositoryActioX1cdfc810b2ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -92,7 +95,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsGetForkPrContributorApprovalPermissionsRepositoryActioXa1f718d5e0ReachesMockAndDecodesResponse() async throws {
+    func testActionsGetForkPrContributorApprovalPermissionsRepositoryActioXa1f718d5e0ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -103,9 +107,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.actions.getForkPrContributorApprovalPermissionsRepository(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -121,7 +125,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsGetGithubActionsDefaultWorkflowPermissionsOrganizationXf2a0b4e099ReachesMockAndDecodesResponse() async throws {
+    func testActionsGetGithubActionsDefaultWorkflowPermissionsOrganizationXf2a0b4e099ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -139,7 +144,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsGetGithubActionsDefaultWorkflowPermissionsRepositoryAcX8fb1d81e4cReachesMockAndDecodesResponse() async throws {
+    func testActionsGetGithubActionsDefaultWorkflowPermissionsRepositoryAcX8fb1d81e4cReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -158,7 +164,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsGetGithubActionsPermissionsOrganizationActionsGetGithuX8e25b28075ReachesMockAndDecodesResponse() async throws {
+    func testActionsGetGithubActionsPermissionsOrganizationActionsGetGithuX8e25b28075ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -176,7 +183,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsGetGithubActionsPermissionsRepositoryActionsGetGithubAXe36e636c4cReachesMockAndDecodesResponse() async throws {
+    func testActionsGetGithubActionsPermissionsRepositoryActionsGetGithubAXe36e636c4cReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -202,9 +210,9 @@ extension SdkMethodTests {
         _ = client
         do {
             _ = try await client.actions.getHostedRunnerForOrg(
-            org: decoded("\"org\""),
-            hostedRunnerId: decoded("1")
-        )
+                org: decoded("\"org\""),
+                hostedRunnerId: decoded("1")
+            )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -213,15 +221,16 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsGetHostedRunnersGithubOwnedImagesForOrgActionsGetHosteX589dd64933ReachesMockAndDecodesResponse() async throws {
+    func testActionsGetHostedRunnersGithubOwnedImagesForOrgActionsGetHosteX589dd64933ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
         do {
             _ = try await client.actions.getHostedRunnersGithubOwnedImagesForOrg(
-            org: decoded("\"org\"")
-        )
+                org: decoded("\"org\"")
+            )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -230,7 +239,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsGetHostedRunnersLimitsForOrgActionsGetHostedRunnersLimitsForOrgReachesMockAndDecodesResponse() async throws {
+    func testActionsGetHostedRunnersLimitsForOrgActionsGetHostedRunnersLimitsForOrgReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -248,15 +258,16 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsGetHostedRunnersMachineSpecsForOrgActionsGetHostedRunnX073aac705eReachesMockAndDecodesResponse() async throws {
+    func testActionsGetHostedRunnersMachineSpecsForOrgActionsGetHostedRunnX073aac705eReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
         do {
             _ = try await client.actions.getHostedRunnersMachineSpecsForOrg(
-            org: decoded("\"org\"")
-        )
+                org: decoded("\"org\"")
+            )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -265,15 +276,16 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsGetHostedRunnersPartnerImagesForOrgActionsGetHostedRunX76542d8ee4ReachesMockAndDecodesResponse() async throws {
+    func testActionsGetHostedRunnersPartnerImagesForOrgActionsGetHostedRunX76542d8ee4ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
         do {
             _ = try await client.actions.getHostedRunnersPartnerImagesForOrg(
-            org: decoded("\"org\"")
-        )
+                org: decoded("\"org\"")
+            )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -282,7 +294,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsGetHostedRunnersPlatformsForOrgActionsGetHostedRunnersXe8d03c73baReachesMockAndDecodesResponse() async throws {
+    func testActionsGetHostedRunnersPlatformsForOrgActionsGetHostedRunnersXe8d03c73baReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -307,10 +320,10 @@ extension SdkMethodTests {
         _ = client
         do {
             _ = try await client.actions.getJobForWorkflowRun(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            jobId: decoded("1")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                jobId: decoded("1")
+            )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -351,11 +364,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.actions.getOrgActionsPolicies(
-            org: decoded("\"org\""),
-            perPage: decoded("30"),
-            page: decoded("1"),
-            hasParents: decoded("true")
-        )
+                org: decoded("\"org\""),
+                perPage: decoded("30"),
+                page: decoded("1"),
+                hasParents: decoded("true")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -401,9 +414,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.actions.getOrgActionsPolicy(
-            org: decoded("\"org\""),
-            policyId: decoded("1")
-        )
+                org: decoded("\"org\""),
+                policyId: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -475,17 +488,18 @@ extension SdkMethodTests {
         )
     }
 
-    func testActionsGetPendingDeploymentsForRunActionsGetPendingDeploymentsForRunReachesMockAndDecodesResponse() async throws {
+    func testActionsGetPendingDeploymentsForRunActionsGetPendingDeploymentsForRunReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
         do {
             _ = try await client.actions.getPendingDeploymentsForRun(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            runId: decoded("1")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                runId: decoded("1")
+            )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -494,7 +508,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testActionsGetPrivateRepoForkPrWorkflowsSettingsOrganizationActioX5200c36bbdReachesMockAndDecodesResponse() async throws {
+    func testActionsGetPrivateRepoForkPrWorkflowsSettingsOrganizationActioX5200c36bbdReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }

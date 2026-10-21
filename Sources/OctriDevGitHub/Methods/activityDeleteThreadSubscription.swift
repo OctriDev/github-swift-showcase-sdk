@@ -6,8 +6,12 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ActivityMethods {
-    /// Mutes all future notifications for a conversation until you comment on the thread or get an **@mention**. If you are watching the repository of the thread, you will still receive notifications. To ignore future notifications for a repository you are watching, use the [Set a thread subscription](https://docs.github.com/rest/activity/notifications#set-a-thread-subscription) endpoint and set `ignore` to `true`.
+public extension ActivityMethods {
+    /// Mutes all future notifications for a conversation until you comment on the thread or get an **@mention**. If you
+    /// are watching the repository of the thread, you will still receive notifications. To ignore future notifications
+    /// for a repository you are watching, use the [Set a thread
+    /// subscription](https://docs.github.com/rest/activity/notifications#set-a-thread-subscription) endpoint and set
+    /// `ignore` to `true`.
     ///
     /// - Parameters:
     /// - threadId: The unique identifier of the notification thread. This
@@ -15,7 +19,19 @@ extension ActivityMethods {
     ///   notifications (for example with the [`GET /notifications`
     ///   operation](https://docs.github.com/rest/activity/notifications#list-notifica
     ///   tions-for-the-authenticated-user)).
-    public static func activityDeleteThreadSubscription(config: ClientConfig, threadId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/notifications/threads/", sdkEncodePathSegment(sdkWireString(threadId)), "/subscription"].joined(), config: config, decoder: .empty, operationId: "activityDeleteThreadSubscription", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self])).data
+    static func activityDeleteThreadSubscription(
+        config: ClientConfig,
+        threadId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            ["/notifications/threads/", sdkEncodePathSegment(sdkWireString(threadId)), "/subscription"].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "activityDeleteThreadSubscription",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self]
+        )).data
     }
 }

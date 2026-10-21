@@ -11,7 +11,11 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try ReposMethods.ReposUpdateRepoRulesetOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), rulesetId: decoded("1"))
+        var options = try ReposMethods.ReposUpdateRepoRulesetOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            rulesetId: decoded("1")
+        )
         options.name = try decoded("\"super cool ruleset\"")
         options.target = try decoded("\"branch\"")
         options.enforcement = try decoded("\"active\"")
@@ -36,7 +40,11 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try ReposMethods.ReposUpdateRepoRulesetOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), rulesetId: decoded("1"))
+        var options = try ReposMethods.ReposUpdateRepoRulesetOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            rulesetId: decoded("1")
+        )
         options.name = try decoded("\"super cool ruleset\"")
         options.target = try decoded("\"branch\"")
         options.enforcement = try decoded("\"active\"")
@@ -49,8 +57,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.updateRepoRuleset(
-            options: options
-        )
+                options: options
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -66,20 +74,21 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testReposUpdateStatusCheckProtectionReposUpdateStatusCheckProtectionReachesMockAndDecodesResponse() async throws {
+    func testReposUpdateStatusCheckProtectionReposUpdateStatusCheckProtectionReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
         do {
             _ = try await client.repos.updateStatusCheckProtection(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            branch: decoded("\"branch\""),
-            strict: decoded("true"),
-            contexts: decoded("[\"continuous-integration/travis-ci\"]"),
-            checks: decoded("null")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                branch: decoded("\"branch\""),
+                strict: decoded("true"),
+                contexts: decoded("[\"continuous-integration/travis-ci\"]"),
+                checks: decoded("null")
+            )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -88,7 +97,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testReposUpdateStatusCheckProtectionReposUpdateStatusCheckProtection404ReachesMockAndDecodesResponse() async throws {
+    func testReposUpdateStatusCheckProtectionReposUpdateStatusCheckProtection404ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -99,13 +109,13 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.updateStatusCheckProtection(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            branch: decoded("\"branch\""),
-            strict: decoded("true"),
-            contexts: decoded("[\"continuous-integration/travis-ci\"]"),
-            checks: decoded("null")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                branch: decoded("\"branch\""),
+                strict: decoded("true"),
+                contexts: decoded("[\"continuous-integration/travis-ci\"]"),
+                checks: decoded("null")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -126,7 +136,11 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try ReposMethods.ReposUpdateWebhookOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), hookId: decoded("1"))
+        var options = try ReposMethods.ReposUpdateWebhookOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            hookId: decoded("1")
+        )
         options.config = try decoded("null")
         options.events = try decoded("null")
         options.addEvents = try decoded("[\"pull_request\"]")
@@ -150,7 +164,11 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try ReposMethods.ReposUpdateWebhookOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), hookId: decoded("1"))
+        var options = try ReposMethods.ReposUpdateWebhookOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            hookId: decoded("1")
+        )
         options.config = try decoded("null")
         options.events = try decoded("null")
         options.addEvents = try decoded("[\"pull_request\"]")
@@ -162,8 +180,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.updateWebhook(
-            options: options
-        )
+                options: options
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -214,7 +232,7 @@ extension SdkMethodTests {
             releaseId: decoded("1"),
             name: decoded("\"Example Name\""),
             label: decoded("\"label\""),
-            body: Data(base64Encoded: "ZXhhbXBsZQ==")!
+            body: XCTUnwrap(Data(base64Encoded: "ZXhhbXBsZQ=="))
         )
         let expected = try JSONSerialization.jsonObject(
             with: Data(sdkMethodFixture1830Expected.utf8),
@@ -259,12 +277,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.search.code(
-            q: decoded("\"q\""),
-            sort: decoded("\"indexed\""),
-            order: decoded("\"desc\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                q: decoded("\"q\""),
+                sort: decoded("\"indexed\""),
+                order: decoded("\"desc\""),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -337,14 +355,14 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.search.issuesAndPullRequests(
-            q: decoded("\"q\""),
-            sort: decoded("\"comments\""),
-            order: decoded("\"desc\""),
-            perPage: decoded("30"),
-            page: decoded("1"),
-            advancedSearch: decoded("\"advanced_search\""),
-            searchType: decoded("\"semantic\"")
-        )
+                q: decoded("\"q\""),
+                sort: decoded("\"comments\""),
+                order: decoded("\"desc\""),
+                perPage: decoded("30"),
+                page: decoded("1"),
+                advancedSearch: decoded("\"advanced_search\""),
+                searchType: decoded("\"semantic\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -394,13 +412,13 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.search.labels(
-            repositoryId: decoded("1"),
-            q: decoded("\"q\""),
-            sort: decoded("\"created\""),
-            order: decoded("\"desc\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                repositoryId: decoded("1"),
+                q: decoded("\"q\""),
+                sort: decoded("\"created\""),
+                order: decoded("\"desc\""),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -449,12 +467,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.search.repos(
-            q: decoded("\"q\""),
-            sort: decoded("\"stars\""),
-            order: decoded("\"desc\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                q: decoded("\"q\""),
+                sort: decoded("\"stars\""),
+                order: decoded("\"desc\""),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 422)
@@ -523,12 +541,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.search.users(
-            q: decoded("\"q\""),
-            sort: decoded("\"followers\""),
-            order: decoded("\"desc\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                q: decoded("\"q\""),
+                sort: decoded("\"followers\""),
+                order: decoded("\"desc\""),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 422)
@@ -544,7 +562,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testSecretScanningBulkCreateOrgCustomPatternsSecretScanningBulkCrX1538568927ReachesMockAndDecodesResponse() async throws {
+    func testSecretScanningBulkCreateOrgCustomPatternsSecretScanningBulkCrX1538568927ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }

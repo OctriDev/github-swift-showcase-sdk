@@ -6,13 +6,33 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ActionsMethods {
-    /// Gets a single organization secret without revealing its encrypted value. The authenticated user must have collaborator access to a repository to create, update, or read secrets OAuth tokens and personal access tokens (classic) need the`admin:org` scope to use this endpoint. If the repository is private, OAuth tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+public extension ActionsMethods {
+    /// Gets a single organization secret without revealing its encrypted value. The authenticated user must have
+    /// collaborator access to a repository to create, update, or read secrets OAuth tokens and personal access tokens
+    /// (classic) need the`admin:org` scope to use this endpoint. If the repository is private, OAuth tokens and
+    /// personal access tokens (classic) need the `repo` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - secretName: The name of the secret.
-    public static func actionsGetOrgSecret(config: ClientConfig, org: String, secretName: String, requestOptions: RequestOptions? = nil) async throws -> OrganizationActionsSecret {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/actions/secrets/", sdkEncodePathSegment(sdkWireString(secretName))].joined(), config: config, decoder: .json, operationId: "actionsGetOrgSecret", options: requestOptions)).data
+    static func actionsGetOrgSecret(
+        config: ClientConfig,
+        org: String,
+        secretName: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> OrganizationActionsSecret {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/orgs/",
+                sdkEncodePathSegment(sdkWireString(org)),
+                "/actions/secrets/",
+                sdkEncodePathSegment(sdkWireString(secretName)),
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "actionsGetOrgSecret",
+            options: requestOptions
+        )).data
     }
 }

@@ -6,22 +6,60 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension OrgsMethods {
+public extension OrgsMethods {
     /// Check if a user is, publicly or privately, a member of the organization.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - username: The handle for the GitHub user account.
-    public static func orgsCheckMembershipForUser(config: ClientConfig, org: String, username: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/members/", sdkEncodePathSegment(sdkWireString(username))].joined(), config: config, decoder: .empty, operationId: "orgsCheckMembershipForUser", options: requestOptions)).data
+    static func orgsCheckMembershipForUser(
+        config: ClientConfig,
+        org: String,
+        username: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/orgs/",
+                sdkEncodePathSegment(sdkWireString(org)),
+                "/members/",
+                sdkEncodePathSegment(sdkWireString(username)),
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "orgsCheckMembershipForUser",
+            options: requestOptions
+        )).data
     }
 
-    /// Removing a user from this list will remove them from all teams and they will no longer have any access to the organization's repositories. > [!NOTE] > If a user has both direct membership in the organization as well as indirect membership via an enterprise team, only their direct membership will be removed. Their indirect membership via an enterprise team remains until the user is removed from the enterprise team.
+    /// Removing a user from this list will remove them from all teams and they will no longer have any access to the
+    /// organization's repositories. > [!NOTE] > If a user has both direct membership in the organization as well as
+    /// indirect membership via an enterprise team, only their direct membership will be removed. Their indirect
+    /// membership via an enterprise team remains until the user is removed from the enterprise team.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - username: The handle for the GitHub user account.
-    public static func orgsRemoveMember(config: ClientConfig, org: String, username: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/members/", sdkEncodePathSegment(sdkWireString(username))].joined(), config: config, decoder: .empty, operationId: "orgsRemoveMember", options: requestOptions, errors: ["403": BasicError.self])).data
+    static func orgsRemoveMember(
+        config: ClientConfig,
+        org: String,
+        username: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            [
+                "/orgs/",
+                sdkEncodePathSegment(sdkWireString(org)),
+                "/members/",
+                sdkEncodePathSegment(sdkWireString(username)),
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "orgsRemoveMember",
+            options: requestOptions,
+            errors: ["403": BasicError.self]
+        )).data
     }
 }

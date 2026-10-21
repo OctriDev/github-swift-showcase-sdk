@@ -3,7 +3,7 @@
 
 import Foundation
 
-// SecretScanning domain models
+/// SecretScanning domain models
 /// Information on a single scan performed by secret scanning on the repository
 public struct SecretScanningScan: Codable {
     /// The type of scan
@@ -26,28 +26,28 @@ public struct SecretScanningScan: Codable {
     }
 
     init() {
-        (self.type, self.status, self.completedAt, self.startedAt) = (nil, nil, nil, nil)
+        (type, status, completedAt, startedAt) = (nil, nil, nil, nil)
     }
 }
 
-extension SecretScanningScan {
-    public init(from decoder: Decoder) throws {
+public extension SecretScanningScan {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.type = try container.sdkDecodeIfPresent(.type)
-        self.status = try container.sdkDecodeIfPresent(.status)
-        self.completedAt = try container.sdkDecodeIfPresent(.completedAt)
-        self.startedAt = try container.sdkDecodeIfPresent(.startedAt)
-        if let value = self.completedAt {
+        type = try container.sdkDecodeIfPresent(.type)
+        status = try container.sdkDecodeIfPresent(.status)
+        completedAt = try container.sdkDecodeIfPresent(.completedAt)
+        startedAt = try container.sdkDecodeIfPresent(.startedAt)
+        if let value = completedAt {
             try sdkValidateDateTime("completed_at", sdkWireString(value))
         }
-        if let value = self.startedAt {
+        if let value = startedAt {
             try sdkValidateDateTime("started_at", sdkWireString(value))
         }
     }
 }
 
-extension SecretScanningScan {
-    public init(type: String? = nil, status: String? = nil, completedAt: Date? = nil, startedAt: Date? = nil) throws {
+public extension SecretScanningScan {
+    init(type: String? = nil, status: String? = nil, completedAt: Date? = nil, startedAt: Date? = nil) throws {
         self.init()
         (self.type, self.status) = (type, status)
         (self.completedAt, self.startedAt) = (completedAt, startedAt)
@@ -82,23 +82,41 @@ public struct SecretScanningScanHistory: Codable {
     }
 
     init() {
-        (self.incrementalScans, self.patternUpdateScans, self.backfillScans, self.customPatternBackfillScans, self.genericSecretsBackfillScans) = (nil, nil, nil, nil, nil)
+        (
+            incrementalScans,
+            patternUpdateScans,
+            backfillScans,
+            customPatternBackfillScans,
+            genericSecretsBackfillScans
+        ) = (
+            nil,
+            nil,
+            nil,
+            nil,
+            nil
+        )
     }
 }
 
-extension SecretScanningScanHistory {
-    public init(from decoder: Decoder) throws {
+public extension SecretScanningScanHistory {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.incrementalScans = try container.sdkDecodeIfPresent(.incrementalScans)
-        self.patternUpdateScans = try container.sdkDecodeIfPresent(.patternUpdateScans)
-        self.backfillScans = try container.sdkDecodeIfPresent(.backfillScans)
-        self.customPatternBackfillScans = try container.sdkDecodeIfPresent(.customPatternBackfillScans)
-        self.genericSecretsBackfillScans = try container.sdkDecodeIfPresent(.genericSecretsBackfillScans)
+        incrementalScans = try container.sdkDecodeIfPresent(.incrementalScans)
+        patternUpdateScans = try container.sdkDecodeIfPresent(.patternUpdateScans)
+        backfillScans = try container.sdkDecodeIfPresent(.backfillScans)
+        customPatternBackfillScans = try container.sdkDecodeIfPresent(.customPatternBackfillScans)
+        genericSecretsBackfillScans = try container.sdkDecodeIfPresent(.genericSecretsBackfillScans)
     }
 }
 
-extension SecretScanningScanHistory {
-    public init(incrementalScans: [SecretScanningScan]? = nil, patternUpdateScans: [SecretScanningScan]? = nil, backfillScans: [SecretScanningScan]? = nil, customPatternBackfillScans: [SecretScanningScanHistoryCustomPatternBackfillScansItem]? = nil, genericSecretsBackfillScans: [SecretScanningScan]? = nil) {
+public extension SecretScanningScanHistory {
+    init(
+        incrementalScans: [SecretScanningScan]? = nil,
+        patternUpdateScans: [SecretScanningScan]? = nil,
+        backfillScans: [SecretScanningScan]? = nil,
+        customPatternBackfillScans: [SecretScanningScanHistoryCustomPatternBackfillScansItem]? = nil,
+        genericSecretsBackfillScans: [SecretScanningScan]? = nil
+    ) {
         self.init()
         (self.incrementalScans, self.patternUpdateScans) = (incrementalScans, patternUpdateScans)
         (self.backfillScans, self.customPatternBackfillScans) = (backfillScans, customPatternBackfillScans)
@@ -134,31 +152,38 @@ public struct SecretScanningScanHistoryCustomPatternBackfillScansItem: Codable {
     }
 
     init() {
-        (self.type, self.status, self.completedAt, self.startedAt, self.patternName) = (nil, nil, nil, nil, nil)
-        self.patternScope = nil
+        (type, status, completedAt, startedAt, patternName) = (nil, nil, nil, nil, nil)
+        patternScope = nil
     }
 }
 
-extension SecretScanningScanHistoryCustomPatternBackfillScansItem {
-    public init(from decoder: Decoder) throws {
+public extension SecretScanningScanHistoryCustomPatternBackfillScansItem {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.type = try container.sdkDecodeIfPresent(.type)
-        self.status = try container.sdkDecodeIfPresent(.status)
-        self.completedAt = try container.sdkDecodeIfPresent(.completedAt)
-        self.startedAt = try container.sdkDecodeIfPresent(.startedAt)
-        self.patternName = try container.sdkDecodeIfPresent(.patternName)
-        self.patternScope = try container.sdkDecodeIfPresent(.patternScope)
-        if let value = self.completedAt {
+        type = try container.sdkDecodeIfPresent(.type)
+        status = try container.sdkDecodeIfPresent(.status)
+        completedAt = try container.sdkDecodeIfPresent(.completedAt)
+        startedAt = try container.sdkDecodeIfPresent(.startedAt)
+        patternName = try container.sdkDecodeIfPresent(.patternName)
+        patternScope = try container.sdkDecodeIfPresent(.patternScope)
+        if let value = completedAt {
             try sdkValidateDateTime("completed_at", sdkWireString(value))
         }
-        if let value = self.startedAt {
+        if let value = startedAt {
             try sdkValidateDateTime("started_at", sdkWireString(value))
         }
     }
 }
 
-extension SecretScanningScanHistoryCustomPatternBackfillScansItem {
-    public init(type: String? = nil, status: String? = nil, completedAt: Date? = nil, startedAt: Date? = nil, patternName: String? = nil, patternScope: String? = nil) throws {
+public extension SecretScanningScanHistoryCustomPatternBackfillScansItem {
+    init(
+        type: String? = nil,
+        status: String? = nil,
+        completedAt: Date? = nil,
+        startedAt: Date? = nil,
+        patternName: String? = nil,
+        patternScope: String? = nil
+    ) throws {
         self.init()
         (self.type, self.status) = (type, status)
         (self.completedAt, self.startedAt) = (completedAt, startedAt)

@@ -6,7 +6,8 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testCopilotSpacesUpdateCollaboratorForOrgCopilotSpacesUpdateCollaX9253f61a95ReachesMockAndDecodesResponse() async throws {
+    func testCopilotSpacesUpdateCollaboratorForOrgCopilotSpacesUpdateCollaX9253f61a95ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -17,12 +18,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.copilotSpaces.updateCollaboratorForOrg(
-            org: decoded("\"org\""),
-            spaceNumber: decoded("1"),
-            actorType: decoded("\"User\""),
-            actorIdentifier: decoded("\"actor_identifier\""),
-            role: decoded("\"admin\"")
-        )
+                org: decoded("\"org\""),
+                spaceNumber: decoded("1"),
+                actorType: decoded("\"User\""),
+                actorIdentifier: decoded("\"actor_identifier\""),
+                role: decoded("\"admin\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -38,7 +39,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCopilotSpacesUpdateCollaboratorForUserCopilotSpacesUpdateCollXb32b0ce781ReachesMockAndDecodesResponse() async throws {
+    func testCopilotSpacesUpdateCollaboratorForUserCopilotSpacesUpdateCollXb32b0ce781ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -60,7 +62,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testCopilotSpacesUpdateCollaboratorForUserCopilotSpacesUpdateCollX1c9fd3b25dReachesMockAndDecodesResponse() async throws {
+    func testCopilotSpacesUpdateCollaboratorForUserCopilotSpacesUpdateCollX1c9fd3b25dReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -71,12 +74,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.copilotSpaces.updateCollaboratorForUser(
-            username: decoded("\"Example Name\""),
-            spaceNumber: decoded("1"),
-            actorType: decoded("\"User\""),
-            actorIdentifier: decoded("\"actor_identifier\""),
-            role: decoded("\"admin\"")
-        )
+                username: decoded("\"Example Name\""),
+                spaceNumber: decoded("1"),
+                actorType: decoded("\"User\""),
+                actorIdentifier: decoded("\"actor_identifier\""),
+                role: decoded("\"admin\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -127,14 +130,14 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.copilotSpaces.updateForOrg(
-            org: decoded("\"org\""),
-            spaceNumber: decoded("1"),
-            name: decoded("\"Updated Team Planning Space\""),
-            description: decoded("\"Updated organization space for team planning and coordination\""),
-            generalInstructions: decoded(sdkMethodFixture778Value1),
-            baseRole: decoded("null"),
-            resourcesAttributes: decoded(sdkMethodFixture778Value2)
-        )
+                org: decoded("\"org\""),
+                spaceNumber: decoded("1"),
+                name: decoded("\"Updated Team Planning Space\""),
+                description: decoded("\"Updated organization space for team planning and coordination\""),
+                generalInstructions: decoded(sdkMethodFixture778Value1),
+                baseRole: decoded("null"),
+                resourcesAttributes: decoded(sdkMethodFixture778Value2)
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -185,14 +188,14 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.copilotSpaces.updateForUser(
-            username: decoded("\"Example Name\""),
-            spaceNumber: decoded("1"),
-            name: decoded("\"Updated Development Space\""),
-            description: decoded("\"Updated personal space for development assistance\""),
-            generalInstructions: decoded(sdkMethodFixture780Value1),
-            baseRole: decoded("null"),
-            resourcesAttributes: decoded(sdkMethodFixture780Value2)
-        )
+                username: decoded("\"Example Name\""),
+                spaceNumber: decoded("1"),
+                name: decoded("\"Updated Development Space\""),
+                description: decoded("\"Updated personal space for development assistance\""),
+                generalInstructions: decoded(sdkMethodFixture780Value1),
+                baseRole: decoded("null"),
+                resourcesAttributes: decoded(sdkMethodFixture780Value2)
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -208,7 +211,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCopilotSpacesUpdateResourceForOrgCopilotSpacesUpdateResourceForOrgReachesMockAndDecodesResponse() async throws {
+    func testCopilotSpacesUpdateResourceForOrgCopilotSpacesUpdateResourceForOrgReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -229,7 +233,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testCopilotSpacesUpdateResourceForOrgCopilotSpacesUpdateResourceForOrg403ReachesMockAndDecodesResponse() async throws {
+    func testCopilotSpacesUpdateResourceForOrgCopilotSpacesUpdateResourceForOrg403ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -240,11 +245,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.copilotSpaces.updateResourceForOrg(
-            org: decoded("\"org\""),
-            spaceNumber: decoded("1"),
-            spaceResourceId: decoded("1"),
-            metadata: decoded("{\"name\":\"updated-notes.txt\",\"text\":\"Updated content\"}")
-        )
+                org: decoded("\"org\""),
+                spaceNumber: decoded("1"),
+                spaceResourceId: decoded("1"),
+                metadata: decoded("{\"name\":\"updated-notes.txt\",\"text\":\"Updated content\"}")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -260,7 +265,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCopilotSpacesUpdateResourceForUserCopilotSpacesUpdateResourceForUserReachesMockAndDecodesResponse() async throws {
+    func testCopilotSpacesUpdateResourceForUserCopilotSpacesUpdateResourceForUserReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -281,7 +287,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testCopilotSpacesUpdateResourceForUserCopilotSpacesUpdateResourceForUser403ReachesMockAndDecodesResponse() async throws {
+    func testCopilotSpacesUpdateResourceForUserCopilotSpacesUpdateResourceForUser403ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -292,11 +299,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.copilotSpaces.updateResourceForUser(
-            username: decoded("\"Example Name\""),
-            spaceNumber: decoded("1"),
-            spaceResourceId: decoded("1"),
-            metadata: decoded("{\"name\":\"updated-notes.txt\",\"text\":\"Updated content\"}")
-        )
+                username: decoded("\"Example Name\""),
+                spaceNumber: decoded("1"),
+                spaceResourceId: decoded("1"),
+                metadata: decoded("{\"name\":\"updated-notes.txt\",\"text\":\"Updated content\"}")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -341,8 +348,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.credentials.revoke(
-            credentials: decoded(sdkMethodFixture786Value1)
-        )
+                credentials: decoded(sdkMethodFixture786Value1)
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 422)
@@ -358,7 +365,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testDependabotAddSelectedRepoToOrgSecretDependabotAddSelectedRepoToOrgSecretReachesMockAndDecodesResponse() async throws {
+    func testDependabotAddSelectedRepoToOrgSecretDependabotAddSelectedRepoToOrgSecretReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -371,7 +379,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testDependabotCreateOrUpdateOrgSecretDependabotCreateOrUpdateOrgSecretReachesMockAndDecodesResponse() async throws {
+    func testDependabotCreateOrUpdateOrgSecretDependabotCreateOrUpdateOrgSecretReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -394,7 +403,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testDependabotCreateOrUpdateRepoSecretDependabotCreateOrUpdateRepoSecretReachesMockAndDecodesResponse() async throws {
+    func testDependabotCreateOrUpdateRepoSecretDependabotCreateOrUpdateRepoSecretReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -472,10 +482,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.dependabot.getAlert(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            alertNumber: decoded("1")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                alertNumber: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)

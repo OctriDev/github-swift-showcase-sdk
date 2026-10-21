@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension IssuesMethods {
-    /// Lists issue events for a repository, including event details and associated issue information. Use `page` and `per_page` to paginate the results.
+public extension IssuesMethods {
+    /// Lists issue events for a repository, including event details and associated issue information. Use `page` and
+    /// `per_page` to paginate the results.
     ///
     /// Lists events for a repository.
     ///
@@ -24,10 +25,32 @@ extension IssuesMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func issuesListEventsForRepo(config: ClientConfig, owner: String, repo: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [IssueEvent] {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/issues/events"].joined(), config: config, query: [
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "issuesListEventsForRepo", options: requestOptions, errors: ["422": ValidationError.self])).data
+    static func issuesListEventsForRepo(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [IssueEvent] {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/issues/events",
+            ].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "issuesListEventsForRepo",
+            options: requestOptions,
+            errors: ["422": ValidationError.self]
+        )).data
     }
 }

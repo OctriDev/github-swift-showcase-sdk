@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Codespaces domain models
+/// Codespaces domain models
 /// The public key used for setting user Codespaces' Secrets.
 public struct CodespacesUserPublicKey: Codable {
     /// The identifier for the key.
@@ -18,25 +18,35 @@ public struct CodespacesUserPublicKey: Codable {
         case key
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension CodespacesUserPublicKey {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.keyId) else {
-            throw SdkValidationError(field: "key_id", code: "required", message: "Validation failed for 'key_id': value is required")
-        }
-        guard container.contains(.key) else {
-            throw SdkValidationError(field: "key", code: "required", message: "Validation failed for 'key': value is required")
-        }
-        self.keyId = try container.sdkDecodeRequired(.keyId)
-        self.key = try container.sdkDecodeRequired(.key)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension CodespacesUserPublicKey {
-    public init(keyId: String, key: String) {
+public extension CodespacesUserPublicKey {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.keyId) else {
+            throw SdkValidationError(
+                field: "key_id",
+                code: "required",
+                message: "Validation failed for 'key_id': value is required"
+            )
+        }
+        guard container.contains(.key) else {
+            throw SdkValidationError(
+                field: "key",
+                code: "required",
+                message: "Validation failed for 'key': value is required"
+            )
+        }
+        keyId = try container.sdkDecodeRequired(.keyId)
+        key = try container.sdkDecodeRequired(.key)
+    }
+}
+
+public extension CodespacesUserPublicKey {
+    init(keyId: String, key: String) {
         (self.keyId, self.key) = (keyId, key)
     }
 }

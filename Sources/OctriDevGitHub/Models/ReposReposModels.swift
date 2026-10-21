@@ -3,29 +3,39 @@
 
 import Foundation
 
-// ReposRepos domain models
+/// ReposRepos domain models
 public indirect enum ReposCreateDeploymentRequestPayload {
     case jsonValue([String: JSONValue])
     case stringValue(String)
 }
 
 extension ReposCreateDeploymentRequestPayload: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ReposCreateDeploymentRequestPayload")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for ReposCreateDeploymentRequestPayload"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension ReposCreateDeploymentRequestPayload {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode([String: JSONValue].self) { return .jsonValue(value) }
-        if let value = try? container.decode(String.self) { return .stringValue(value) }
+        if let value = try? container.decode([String: JSONValue].self) {
+            return .jsonValue(value)
+        }
+        if let value = try? container.decode(String.self) {
+            return .stringValue(value)
+        }
         return nil
     }
 }
@@ -42,29 +52,39 @@ extension ReposCreateDeploymentRequestPayload {
 
 public indirect enum ReposUpdateInformationAboutPagesSiteRequestSource {
     case stringValue(String)
-    case reposUpdateInformationAboutPagesSiteRequestSourceVariant1(ReposUpdateInformationAboutPagesSiteRequestSourceVariant1)
+    case reposUpdateInformationAboutPagesSiteRequestSourceVariant1(
+        ReposUpdateInformationAboutPagesSiteRequestSourceVariant1
+    )
 }
 
 extension ReposUpdateInformationAboutPagesSiteRequestSource: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ReposUpdateInformationAboutPagesSiteRequestSource")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for ReposUpdateInformationAboutPagesSiteRequestSource"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension ReposUpdateInformationAboutPagesSiteRequestSource {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) { return .stringValue(value) }
+        if let value = try? container.decode(String.self) {
+            return .stringValue(value)
+        }
         if let value = try? container.decode(
             ReposUpdateInformationAboutPagesSiteRequestSourceVariant1.self
         ) {
-            return             .reposUpdateInformationAboutPagesSiteRequestSourceVariant1(value)
+            return .reposUpdateInformationAboutPagesSiteRequestSourceVariant1(value)
         }
         return nil
     }
@@ -75,7 +95,8 @@ extension ReposUpdateInformationAboutPagesSiteRequestSource {
         var container = encoder.singleValueContainer()
         switch self {
         case let .stringValue(value): try container.encode(value); return true
-        case let .reposUpdateInformationAboutPagesSiteRequestSourceVariant1(value): try container.encode(value); return true
+        case let .reposUpdateInformationAboutPagesSiteRequestSourceVariant1(value): try container
+            .encode(value); return true
         }
     }
 }
@@ -93,42 +114,56 @@ public struct ReposUpdateInformationAboutPagesSiteRequestSourceVariant1: Codable
         case path
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ReposUpdateInformationAboutPagesSiteRequestSourceVariant1 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.branch) else {
-            throw SdkValidationError(field: "branch", code: "required", message: "Validation failed for 'branch': value is required")
-        }
-        guard container.contains(.path) else {
-            throw SdkValidationError(field: "path", code: "required", message: "Validation failed for 'path': value is required")
-        }
-        self.branch = try container.sdkDecodeRequired(.branch)
-        self.path = try container.sdkDecodeRequired(.path)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ReposUpdateInformationAboutPagesSiteRequestSourceVariant1 {
-    public init(branch: String, path: ReposUpdateInformationAboutPagesSiteRequestSourceVariant1Path) {
+public extension ReposUpdateInformationAboutPagesSiteRequestSourceVariant1 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.branch) else {
+            throw SdkValidationError(
+                field: "branch",
+                code: "required",
+                message: "Validation failed for 'branch': value is required"
+            )
+        }
+        guard container.contains(.path) else {
+            throw SdkValidationError(
+                field: "path",
+                code: "required",
+                message: "Validation failed for 'path': value is required"
+            )
+        }
+        branch = try container.sdkDecodeRequired(.branch)
+        path = try container.sdkDecodeRequired(.path)
+    }
+}
+
+public extension ReposUpdateInformationAboutPagesSiteRequestSourceVariant1 {
+    init(branch: String, path: ReposUpdateInformationAboutPagesSiteRequestSourceVariant1Path) {
         (self.branch, self.path) = (branch, path)
     }
 }
 
 /// Update the source for the repository. Must include the branch name, and may optionally specify the
 /// subdirectory `/docs`. Possible values are `"gh-pages"`, `"master"`, and `"master /docs"`.
-public struct ReposUpdateInformationAboutPagesSiteRequestSourceVariant0: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ReposUpdateInformationAboutPagesSiteRequestSourceVariant0: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let ghPages = ReposUpdateInformationAboutPagesSiteRequestSourceVariant0(rawValue: "gh-pages")
     public static let primary = ReposUpdateInformationAboutPagesSiteRequestSourceVariant0(rawValue: "master")
     public static let primaryDocs = ReposUpdateInformationAboutPagesSiteRequestSourceVariant0(rawValue: "master /docs")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -139,16 +174,20 @@ public struct ReposUpdateInformationAboutPagesSiteRequestSourceVariant0: RawRepr
 
 /// The repository directory that includes the source files for the Pages site. Allowed paths are `/` or
 /// `/docs`.
-public struct ReposUpdateInformationAboutPagesSiteRequestSourceVariant1Path: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ReposUpdateInformationAboutPagesSiteRequestSourceVariant1Path: RawRepresentable, Hashable, Codable,
+    Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let unknown = ReposUpdateInformationAboutPagesSiteRequestSourceVariant1Path(rawValue: "/")
     public static let docs = ReposUpdateInformationAboutPagesSiteRequestSourceVariant1Path(rawValue: "/docs")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
