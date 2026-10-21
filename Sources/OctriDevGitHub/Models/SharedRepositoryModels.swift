@@ -4,204 +4,388 @@
 import Foundation
 
 /// SharedRepository domain models
-/// Optional object value serialized in the `metadata` wire field.
-public struct RepositoryRuleViolationErrorMetadata: Codable {
-    /// Optional object value serialized in the `secret_scanning` wire field.
-    public var secretScanning: RepositoryRuleViolationErrorMetadataSecretScanning?
+public extension Repository {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        name = try container.sdkDecodeRequired(.name)
+        fullName = try container.sdkDecodeRequired(.fullName)
+        license = try container.sdkDecodeNullable(.license)
+        forks = try container.sdkDecodeRequired(.forks)
+        owner = try container.sdkDecodeRequired(.owner)
+        self.private = try container.sdkDecodeRequired(.private)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        description = try container.sdkDecodeNullable(.description)
+        fork = try container.sdkDecodeRequired(.fork)
+        url = try container.sdkDecodeRequired(.url)
+        archiveUrl = try container.sdkDecodeRequired(.archiveUrl)
+        assigneesUrl = try container.sdkDecodeRequired(.assigneesUrl)
+        blobsUrl = try container.sdkDecodeRequired(.blobsUrl)
+        branchesUrl = try container.sdkDecodeRequired(.branchesUrl)
+        collaboratorsUrl = try container.sdkDecodeRequired(.collaboratorsUrl)
+        commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
+        commitsUrl = try container.sdkDecodeRequired(.commitsUrl)
+        compareUrl = try container.sdkDecodeRequired(.compareUrl)
+        contentsUrl = try container.sdkDecodeRequired(.contentsUrl)
+        contributorsUrl = try container.sdkDecodeRequired(.contributorsUrl)
+        deploymentsUrl = try container.sdkDecodeRequired(.deploymentsUrl)
+        downloadsUrl = try container.sdkDecodeRequired(.downloadsUrl)
+        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
+        forksUrl = try container.sdkDecodeRequired(.forksUrl)
+        gitCommitsUrl = try container.sdkDecodeRequired(.gitCommitsUrl)
+        gitRefsUrl = try container.sdkDecodeRequired(.gitRefsUrl)
+        gitTagsUrl = try container.sdkDecodeRequired(.gitTagsUrl)
+        gitUrl = try container.sdkDecodeRequired(.gitUrl)
+        issueCommentUrl = try container.sdkDecodeRequired(.issueCommentUrl)
+        issueEventsUrl = try container.sdkDecodeRequired(.issueEventsUrl)
+        issuesUrl = try container.sdkDecodeRequired(.issuesUrl)
+        keysUrl = try container.sdkDecodeRequired(.keysUrl)
+        labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
+        languagesUrl = try container.sdkDecodeRequired(.languagesUrl)
+        mergesUrl = try container.sdkDecodeRequired(.mergesUrl)
+        milestonesUrl = try container.sdkDecodeRequired(.milestonesUrl)
+        notificationsUrl = try container.sdkDecodeRequired(.notificationsUrl)
+        pullsUrl = try container.sdkDecodeRequired(.pullsUrl)
+        releasesUrl = try container.sdkDecodeRequired(.releasesUrl)
+        sshUrl = try container.sdkDecodeRequired(.sshUrl)
+        stargazersUrl = try container.sdkDecodeRequired(.stargazersUrl)
+        statusesUrl = try container.sdkDecodeRequired(.statusesUrl)
+        subscribersUrl = try container.sdkDecodeRequired(.subscribersUrl)
+        subscriptionUrl = try container.sdkDecodeRequired(.subscriptionUrl)
+        tagsUrl = try container.sdkDecodeRequired(.tagsUrl)
+        teamsUrl = try container.sdkDecodeRequired(.teamsUrl)
+        treesUrl = try container.sdkDecodeRequired(.treesUrl)
+        cloneUrl = try container.sdkDecodeRequired(.cloneUrl)
+        mirrorUrl = try container.sdkDecodeNullable(.mirrorUrl)
+        hooksUrl = try container.sdkDecodeRequired(.hooksUrl)
+        svnUrl = try container.sdkDecodeRequired(.svnUrl)
+        homepage = try container.sdkDecodeNullable(.homepage)
+        language = try container.sdkDecodeNullable(.language)
+        forksCount = try container.sdkDecodeRequired(.forksCount)
+        stargazersCount = try container.sdkDecodeRequired(.stargazersCount)
+        watchersCount = try container.sdkDecodeRequired(.watchersCount)
+        size = try container.sdkDecodeRequired(.size)
+        defaultBranch = try container.sdkDecodeRequired(.defaultBranch)
+        openIssuesCount = try container.sdkDecodeRequired(.openIssuesCount)
+        hasIssues = try container.sdkDecodeRequired(.hasIssues)
+        hasProjects = try container.sdkDecodeRequired(.hasProjects)
+        hasWiki = try container.sdkDecodeRequired(.hasWiki)
+        hasPages = try container.sdkDecodeRequired(.hasPages)
+        hasDownloads = try container.sdkDecodeRequired(.hasDownloads)
+        archived = try container.sdkDecodeRequired(.archived)
+        disabled = try container.sdkDecodeRequired(.disabled)
+        pushedAt = try container.sdkDecodeNullable(.pushedAt)
+        createdAt = try container.sdkDecodeNullable(.createdAt)
+        updatedAt = try container.sdkDecodeNullable(.updatedAt)
+        openIssues = try container.sdkDecodeRequired(.openIssues)
+        watchers = try container.sdkDecodeRequired(.watchers)
+        permissions = try container.sdkDecodeIfPresent(.permissions)
+        isTemplate = try container.sdkDecodeIfPresent(.isTemplate)
+        topics = try container.sdkDecodeIfPresent(.topics)
+        hasDiscussions = try container.sdkDecodeIfPresent(.hasDiscussions)
+        hasPullRequests = try container.sdkDecodeIfPresent(.hasPullRequests)
+        pullRequestCreationPolicy = try container.sdkDecodeIfPresent(.pullRequestCreationPolicy)
+        visibility = try container.sdkDecodeIfPresent(.visibility)
+        allowRebaseMerge = try container.sdkDecodeIfPresent(.allowRebaseMerge)
+        tempCloneToken = try container.sdkDecodeIfPresent(.tempCloneToken)
+        allowSquashMerge = try container.sdkDecodeIfPresent(.allowSquashMerge)
+        allowAutoMerge = try container.sdkDecodeIfPresent(.allowAutoMerge)
+        deleteBranchOnMerge = try container.sdkDecodeIfPresent(.deleteBranchOnMerge)
+        allowUpdateBranch = try container.sdkDecodeIfPresent(.allowUpdateBranch)
+        useSquashPrTitleAsDefault = try container.sdkDecodeIfPresent(.useSquashPrTitleAsDefault)
+        squashMergeCommitTitle = try container.sdkDecodeIfPresent(.squashMergeCommitTitle)
+        squashMergeCommitMessage = try container.sdkDecodeIfPresent(.squashMergeCommitMessage)
+        mergeCommitTitle = try container.sdkDecodeIfPresent(.mergeCommitTitle)
+        mergeCommitMessage = try container.sdkDecodeIfPresent(.mergeCommitMessage)
+        allowMergeCommit = try container.sdkDecodeIfPresent(.allowMergeCommit)
+        allowForking = try container.sdkDecodeIfPresent(.allowForking)
+        webCommitSignoffRequired = try container.sdkDecodeIfPresent(.webCommitSignoffRequired)
+        primaryBranch = try container.sdkDecodeIfPresent(.primaryBranch)
+        starredAt = try container.sdkDecodeIfPresent(.starredAt)
+        anonymousAccessEnabled = try container.sdkDecodeIfPresent(.anonymousAccessEnabled)
+        codeSearchIndexStatus = try container.sdkDecodeIfPresent(.codeSearchIndexStatus)
+        try sdkValidateConstraintsPart1()
+        try sdkValidateConstraintsPart2()
+    }
+}
+
+public extension Repository {
+    init(
+        id: Int,
+        nodeId: String,
+        name: String,
+        fullName: String,
+        license: NullableLicenseSimple?,
+        forks: Int,
+        owner: SimpleUser,
+        private: Bool,
+        htmlUrl: String,
+        description: String?,
+        fork: Bool,
+        url: String,
+        archiveUrl: String,
+        assigneesUrl: String,
+        blobsUrl: String,
+        branchesUrl: String,
+        collaboratorsUrl: String,
+        commentsUrl: String,
+        commitsUrl: String,
+        compareUrl: String,
+        contentsUrl: String,
+        contributorsUrl: String,
+        deploymentsUrl: String,
+        downloadsUrl: String,
+        eventsUrl: String,
+        forksUrl: String,
+        gitCommitsUrl: String,
+        gitRefsUrl: String,
+        gitTagsUrl: String,
+        gitUrl: String,
+        issueCommentUrl: String,
+        issueEventsUrl: String,
+        issuesUrl: String,
+        keysUrl: String,
+        labelsUrl: String,
+        languagesUrl: String,
+        mergesUrl: String,
+        milestonesUrl: String,
+        notificationsUrl: String,
+        pullsUrl: String,
+        releasesUrl: String,
+        sshUrl: String,
+        stargazersUrl: String,
+        statusesUrl: String,
+        subscribersUrl: String,
+        subscriptionUrl: String,
+        tagsUrl: String,
+        teamsUrl: String,
+        treesUrl: String,
+        cloneUrl: String,
+        mirrorUrl: String?,
+        hooksUrl: String,
+        svnUrl: String,
+        homepage: String?,
+        language: String?,
+        forksCount: Int,
+        stargazersCount: Int,
+        watchersCount: Int,
+        size: Int,
+        defaultBranch: String,
+        openIssuesCount: Int,
+        hasIssues: Bool,
+        hasProjects: Bool,
+        hasWiki: Bool,
+        hasPages: Bool,
+        hasDownloads: Bool,
+        archived: Bool,
+        disabled: Bool,
+        pushedAt: Date?,
+        createdAt: Date?,
+        updatedAt: Date?,
+        openIssues: Int,
+        watchers: Int,
+        permissions: RepositoryPermissions? = nil,
+        isTemplate: Bool? = nil,
+        topics: [String]? = nil,
+        hasDiscussions: Bool? = nil,
+        hasPullRequests: Bool? = nil,
+        pullRequestCreationPolicy: RepositoryPullRequestCreationPolicy? = nil,
+        visibility: String? = nil,
+        allowRebaseMerge: Bool? = nil,
+        tempCloneToken: String? = nil,
+        allowSquashMerge: Bool? = nil,
+        allowAutoMerge: Bool? = nil,
+        deleteBranchOnMerge: Bool? = nil,
+        allowUpdateBranch: Bool? = nil,
+        useSquashPrTitleAsDefault: Bool? = nil,
+        squashMergeCommitTitle: RepositorySquashMergeCommitTitle? = nil,
+        squashMergeCommitMessage: RepositorySquashMergeCommitMessage? = nil,
+        mergeCommitTitle: RepositoryMergeCommitTitle? = nil,
+        mergeCommitMessage: RepositoryMergeCommitMessage? = nil,
+        allowMergeCommit: Bool? = nil,
+        allowForking: Bool? = nil,
+        webCommitSignoffRequired: Bool? = nil,
+        primaryBranch: String? = nil,
+        starredAt: String? = nil,
+        anonymousAccessEnabled: Bool? = nil,
+        codeSearchIndexStatus: RepositoryCodeSearchIndexStatus? = nil
+    ) throws {
+        (self.id, self.nodeId) = (id, nodeId)
+        (self.name, self.fullName) = (name, fullName)
+        (self.license, self.forks) = (license, forks)
+        (self.owner, self.private) = (owner, `private`)
+        (self.htmlUrl, self.description) = (htmlUrl, description)
+        (self.fork, self.url) = (fork, url)
+        (self.archiveUrl, self.assigneesUrl) = (archiveUrl, assigneesUrl)
+        (self.blobsUrl, self.branchesUrl) = (blobsUrl, branchesUrl)
+        (self.collaboratorsUrl, self.commentsUrl) = (collaboratorsUrl, commentsUrl)
+        (self.commitsUrl, self.compareUrl) = (commitsUrl, compareUrl)
+        (self.contentsUrl, self.contributorsUrl) = (contentsUrl, contributorsUrl)
+        (self.deploymentsUrl, self.downloadsUrl) = (deploymentsUrl, downloadsUrl)
+        (self.eventsUrl, self.forksUrl) = (eventsUrl, forksUrl)
+        (self.gitCommitsUrl, self.gitRefsUrl) = (gitCommitsUrl, gitRefsUrl)
+        (self.gitTagsUrl, self.gitUrl) = (gitTagsUrl, gitUrl)
+        (self.issueCommentUrl, self.issueEventsUrl) = (issueCommentUrl, issueEventsUrl)
+        (self.issuesUrl, self.keysUrl) = (issuesUrl, keysUrl)
+        (self.labelsUrl, self.languagesUrl) = (labelsUrl, languagesUrl)
+        (self.mergesUrl, self.milestonesUrl) = (mergesUrl, milestonesUrl)
+        (self.notificationsUrl, self.pullsUrl) = (notificationsUrl, pullsUrl)
+        (self.releasesUrl, self.sshUrl) = (releasesUrl, sshUrl)
+        (self.stargazersUrl, self.statusesUrl) = (stargazersUrl, statusesUrl)
+        (self.subscribersUrl, self.subscriptionUrl) = (subscribersUrl, subscriptionUrl)
+        (self.tagsUrl, self.teamsUrl) = (tagsUrl, teamsUrl)
+        (self.treesUrl, self.cloneUrl) = (treesUrl, cloneUrl)
+        (self.mirrorUrl, self.hooksUrl) = (mirrorUrl, hooksUrl)
+        (self.svnUrl, self.homepage) = (svnUrl, homepage)
+        (self.language, self.forksCount) = (language, forksCount)
+        (self.stargazersCount, self.watchersCount) = (stargazersCount, watchersCount)
+        (self.size, self.defaultBranch) = (size, defaultBranch)
+        (self.openIssuesCount, self.hasIssues) = (openIssuesCount, hasIssues)
+        (self.hasProjects, self.hasWiki) = (hasProjects, hasWiki)
+        (self.hasPages, self.hasDownloads) = (hasPages, hasDownloads)
+        (self.archived, self.disabled) = (archived, disabled)
+        (self.pushedAt, self.createdAt) = (pushedAt, createdAt)
+        (self.updatedAt, self.openIssues) = (updatedAt, openIssues)
+        (self.watchers, self.permissions) = (watchers, permissions)
+        (self.isTemplate, self.topics) = (isTemplate, topics)
+        (self.hasDiscussions, self.hasPullRequests) = (hasDiscussions, hasPullRequests)
+        (self.pullRequestCreationPolicy, self.visibility) = (pullRequestCreationPolicy, visibility)
+        (self.allowRebaseMerge, self.tempCloneToken) = (allowRebaseMerge, tempCloneToken)
+        (self.allowSquashMerge, self.allowAutoMerge) = (allowSquashMerge, allowAutoMerge)
+        (self.deleteBranchOnMerge, self.allowUpdateBranch) = (deleteBranchOnMerge, allowUpdateBranch)
+        self.useSquashPrTitleAsDefault = useSquashPrTitleAsDefault
+        self.squashMergeCommitTitle = squashMergeCommitTitle
+        self.squashMergeCommitMessage = squashMergeCommitMessage
+        (self.mergeCommitTitle, self.mergeCommitMessage) = (mergeCommitTitle, mergeCommitMessage)
+        (self.allowMergeCommit, self.allowForking) = (allowMergeCommit, allowForking)
+        (self.webCommitSignoffRequired, self.primaryBranch) = (webCommitSignoffRequired, primaryBranch)
+        (self.starredAt, self.anonymousAccessEnabled) = (starredAt, anonymousAccessEnabled)
+        self.codeSearchIndexStatus = codeSearchIndexStatus
+        try sdkValidateConstraintsPart1()
+        try sdkValidateConstraintsPart2()
+    }
+}
+
+extension Repository {
+    func sdkValidateConstraintsPart1() throws {
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateUri("url", url)
+        try sdkValidateUri("contributors_url", contributorsUrl)
+        try sdkValidateUri("deployments_url", deploymentsUrl)
+        try sdkValidateUri("downloads_url", downloadsUrl)
+        try sdkValidateUri("events_url", eventsUrl)
+        try sdkValidateUri("forks_url", forksUrl)
+        try sdkValidateUri("languages_url", languagesUrl)
+        try sdkValidateUri("merges_url", mergesUrl)
+        try sdkValidateUri("stargazers_url", stargazersUrl)
+        try sdkValidateUri("subscribers_url", subscribersUrl)
+        try sdkValidateUri("subscription_url", subscriptionUrl)
+    }
+}
+
+extension Repository {
+    func sdkValidateConstraintsPart2() throws {
+        try sdkValidateUri("tags_url", tagsUrl)
+        try sdkValidateUri("teams_url", teamsUrl)
+        if let value = mirrorUrl {
+            try sdkValidateUri("mirror_url", value)
+        }
+        try sdkValidateUri("hooks_url", hooksUrl)
+        try sdkValidateUri("svn_url", svnUrl)
+        if let value = homepage {
+            try sdkValidateUri("homepage", value)
+        }
+        if let value = pushedAt {
+            try sdkValidateDateTime("pushed_at", sdkWireString(value))
+        }
+        if let value = createdAt {
+            try sdkValidateDateTime("created_at", sdkWireString(value))
+        }
+        if let value = updatedAt {
+            try sdkValidateDateTime("updated_at", sdkWireString(value))
+        }
+    }
+}
+
+/// The status of the code search index for this repository
+public struct RepositoryCodeSearchIndexStatus: Codable {
+    /// Optional `boolean` value serialized in the `lexical_search_ok` wire field.
+    public var lexicalSearchOk: Bool?
+    /// Optional `string` value serialized in the `lexical_commit_sha` wire field.
+    public var lexicalCommitSha: String?
 
     enum CodingKeys: String, CodingKey {
-        case secretScanning = "secret_scanning"
+        case lexicalSearchOk = "lexical_search_ok"
+        case lexicalCommitSha = "lexical_commit_sha"
     }
 
     init() {
-        secretScanning = nil
+        (lexicalSearchOk, lexicalCommitSha) = (nil, nil)
     }
 }
 
-public extension RepositoryRuleViolationErrorMetadata {
+public extension RepositoryCodeSearchIndexStatus {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        secretScanning = try container.sdkDecodeIfPresent(.secretScanning)
+        lexicalSearchOk = try container.sdkDecodeIfPresent(.lexicalSearchOk)
+        lexicalCommitSha = try container.sdkDecodeIfPresent(.lexicalCommitSha)
     }
 }
 
-public extension RepositoryRuleViolationErrorMetadata {
-    init(secretScanning: RepositoryRuleViolationErrorMetadataSecretScanning? = nil) {
+public extension RepositoryCodeSearchIndexStatus {
+    init(lexicalSearchOk: Bool? = nil, lexicalCommitSha: String? = nil) {
         self.init()
-        self.secretScanning = secretScanning
+        (self.lexicalSearchOk, self.lexicalCommitSha) = (lexicalSearchOk, lexicalCommitSha)
     }
 }
 
-/// Optional object value serialized in the `permissions` wire field.
-public struct RepositoryPermissions: Codable {
-    /// Required `boolean` value serialized in the `admin` wire field.
-    public var admin: Bool
-    /// Required `boolean` value serialized in the `pull` wire field.
-    public var pull: Bool
-    /// Required `boolean` value serialized in the `push` wire field.
-    public var push: Bool
-    /// Optional `boolean` value serialized in the `triage` wire field.
-    public var triage: Bool?
-    /// Optional `boolean` value serialized in the `maintain` wire field.
-    public var maintain: Bool?
-
-    enum CodingKeys: String, CodingKey {
-        case admin
-        case pull
-        case push
-        case triage
-        case maintain
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension RepositoryPermissions {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.admin) else {
-            throw SdkValidationError(
-                field: "admin",
-                code: "required",
-                message: "Validation failed for 'admin': value is required"
-            )
-        }
-        guard container.contains(.pull) else {
-            throw SdkValidationError(
-                field: "pull",
-                code: "required",
-                message: "Validation failed for 'pull': value is required"
-            )
-        }
-        guard container.contains(.push) else {
-            throw SdkValidationError(
-                field: "push",
-                code: "required",
-                message: "Validation failed for 'push': value is required"
-            )
-        }
-        admin = try container.sdkDecodeRequired(.admin)
-        pull = try container.sdkDecodeRequired(.pull)
-        push = try container.sdkDecodeRequired(.push)
-        triage = try container.sdkDecodeIfPresent(.triage)
-        maintain = try container.sdkDecodeIfPresent(.maintain)
-    }
-}
-
-public extension RepositoryPermissions {
-    init(admin: Bool, pull: Bool, push: Bool, triage: Bool? = nil, maintain: Bool? = nil) {
-        (self.admin, self.pull) = (admin, pull)
-        (self.push, self.triage) = (push, triage)
-        self.maintain = maintain
-    }
-}
-
-/// Required object value serialized in the `bypass_placeholders[]` wire field.
-public struct RepositoryRuleViolationErrorMetadataSecretScanningBypassPlaceholdersItem: Codable {
-    /// The ID of the push protection bypass placeholder. This value is returned on any push protected routes.
-    public var placeholderId: SecretScanningPushProtectionBypassPlaceholderId?
-    /// Optional `string` value serialized in the `token_type` wire field.
-    public var tokenType: String?
-
-    enum CodingKeys: String, CodingKey {
-        case placeholderId = "placeholder_id"
-        case tokenType = "token_type"
-    }
-
-    init() {
-        (placeholderId, tokenType) = (nil, nil)
-    }
-}
-
-public extension RepositoryRuleViolationErrorMetadataSecretScanningBypassPlaceholdersItem {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        placeholderId = try container.sdkDecodeIfPresent(.placeholderId)
-        tokenType = try container.sdkDecodeIfPresent(.tokenType)
-    }
-}
-
-public extension RepositoryRuleViolationErrorMetadataSecretScanningBypassPlaceholdersItem {
-    init(placeholderId: SecretScanningPushProtectionBypassPlaceholderId? = nil, tokenType: String? = nil) {
-        self.init()
-        (self.placeholderId, self.tokenType) = (placeholderId, tokenType)
-    }
-}
-
-/// Required object value serialized in the `repository_id` wire field.
-public struct RepositoryRulesetConditionsRepositoryIdTargetRepositoryId: Codable {
-    /// The repository IDs that the ruleset applies to. One of these IDs must match for the condition to pass.
-    public var repositoryIds: [Int]?
-
-    enum CodingKeys: String, CodingKey {
-        case repositoryIds = "repository_ids"
-    }
-
-    init() {
-        repositoryIds = nil
-    }
-}
-
-public extension RepositoryRulesetConditionsRepositoryIdTargetRepositoryId {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        repositoryIds = try container.sdkDecodeIfPresent(.repositoryIds)
-    }
-}
-
-public extension RepositoryRulesetConditionsRepositoryIdTargetRepositoryId {
-    init(repositoryIds: [Int]? = nil) {
-        self.init()
-        self.repositoryIds = repositoryIds
-    }
-}
-
-/// Required object value serialized in the `repository_property` wire field.
-public struct RepositoryRulesetConditionsRepositoryPropertyTargetRepositoryProperty: Codable {
-    /// The repository properties and values to include. All of these properties must match for the condition to
-    /// pass.
-    public var include: [RepositoryRulesetConditionsRepositoryPropertySpec]?
-    /// The repository properties and values to exclude. The condition will not pass if any of these properties
+/// Required object value serialized in the `repository_name` wire field.
+public struct RepositoryRulesetConditionsRepositoryNameTargetRepositoryName: Codable {
+    /// Array of repository names or patterns to include. One of these patterns must match for the condition to
+    /// pass. Also accepts `~ALL` to include all repositories.
+    public var include: [String]?
+    /// Array of repository names or patterns to exclude. The condition will not pass if any of these patterns
     /// match.
-    public var exclude: [RepositoryRulesetConditionsRepositoryPropertySpec]?
+    public var exclude: [String]?
+    /// Whether renaming of target repositories is prevented.
+    public var protected: Bool?
 
     enum CodingKeys: String, CodingKey {
         case include
         case exclude
+        case protected
     }
 
     init() {
-        (include, exclude) = (nil, nil)
+        (include, exclude, protected) = (nil, nil, nil)
     }
 }
 
-public extension RepositoryRulesetConditionsRepositoryPropertyTargetRepositoryProperty {
+public extension RepositoryRulesetConditionsRepositoryNameTargetRepositoryName {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         include = try container.sdkDecodeIfPresent(.include)
         exclude = try container.sdkDecodeIfPresent(.exclude)
+        protected = try container.sdkDecodeIfPresent(.protected)
     }
 }
 
-public extension RepositoryRulesetConditionsRepositoryPropertyTargetRepositoryProperty {
-    init(
-        include: [RepositoryRulesetConditionsRepositoryPropertySpec]? = nil,
-        exclude: [RepositoryRulesetConditionsRepositoryPropertySpec]? = nil
-    ) {
+public extension RepositoryRulesetConditionsRepositoryNameTargetRepositoryName {
+    init(include: [String]? = nil, exclude: [String]? = nil, protected: Bool? = nil) {
         self.init()
         (self.include, self.exclude) = (include, exclude)
+        self.protected = protected
     }
 }
 
-/// Parameters for a repository ID condition
-public struct RepositoryRulesetConditionsRepositoryIdTarget: Codable {
-    /// Required object value serialized in the `repository_id` wire field.
-    public var repositoryId: RepositoryRulesetConditionsRepositoryIdTargetRepositoryId
+/// Parameters for a repository property condition
+public struct RepositoryRulesetConditionsRepositoryPropertyTarget: Codable {
+    /// Required object value serialized in the `repository_property` wire field.
+    public var repositoryProperty: RepositoryRulesetConditionsRepositoryPropertyTargetRepositoryProperty
 
     enum CodingKeys: String, CodingKey {
-        case repositoryId = "repository_id"
+        case repositoryProperty = "repository_property"
     }
 
     private init(sdkCopy value: Self) {
@@ -209,405 +393,234 @@ public struct RepositoryRulesetConditionsRepositoryIdTarget: Codable {
     }
 }
 
-public extension RepositoryRulesetConditionsRepositoryIdTarget {
+public extension RepositoryRulesetConditionsRepositoryPropertyTarget {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.repositoryId) else {
+        guard container.contains(.repositoryProperty) else {
             throw SdkValidationError(
-                field: "repository_id",
+                field: "repository_property",
                 code: "required",
-                message: "Validation failed for 'repository_id': value is required"
+                message: "Validation failed for 'repository_property': value is required"
             )
         }
-        repositoryId = try container.sdkDecodeRequired(.repositoryId)
+        repositoryProperty = try container.sdkDecodeRequired(.repositoryProperty)
     }
 }
 
-public extension RepositoryRulesetConditionsRepositoryIdTarget {
-    init(repositoryId: RepositoryRulesetConditionsRepositoryIdTargetRepositoryId) {
-        self.repositoryId = repositoryId
+public extension RepositoryRulesetConditionsRepositoryPropertyTarget {
+    init(repositoryProperty: RepositoryRulesetConditionsRepositoryPropertyTargetRepositoryProperty) {
+        self.repositoryProperty = repositoryProperty
     }
 }
 
-/// A repository on GitHub.
-public struct Repository: Codable {
-    /// Unique identifier of the repository
-    /// - Example: 42
-    public var id: Int
-    /// Required `string` value serialized in the `node_id` wire field.
-    /// - Example: "MDEwOlJlcG9zaXRvcnkxMjk2MjY5"
-    public var nodeId: String
-    /// The name of the repository.
-    /// - Example: "Team Environment"
-    public var name: String
-    /// Required `string` value serialized in the `full_name` wire field.
-    /// - Example: "octocat/Hello-World"
-    public var fullName: String
-    /// License Simple
-    public var license: NullableLicenseSimple?
-    /// Required `integer` value serialized in the `forks` wire field.
-    public var forks: Int
-    /// A GitHub user.
-    public var owner: SimpleUser
-    /// Whether the repository is private or public.
-    public var `private`: Bool
-    /// Required `uri`-formatted value serialized in the `html_url` wire field.
-    /// - Example: "https://github.com/octocat/Hello-World"
-    public var htmlUrl: String
-    /// Required `string` value serialized in the `description` wire field.
-    /// - Example: "This your first repo!"
-    public var description: String?
-    /// Required `boolean` value serialized in the `fork` wire field.
-    public var fork: Bool
-    /// Required `uri`-formatted value serialized in the `url` wire field.
-    /// - Example: "https://api.github.com/repos/octocat/Hello-World"
-    public var url: String
-    /// Required `string` value serialized in the `archive_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/{archive_format}{/ref}"
-    public var archiveUrl: String
-    /// Required `string` value serialized in the `assignees_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/assignees{/user}"
-    public var assigneesUrl: String
-    /// Required `string` value serialized in the `blobs_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/git/blobs{/sha}"
-    public var blobsUrl: String
-    /// Required `string` value serialized in the `branches_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/branches{/branch}"
-    public var branchesUrl: String
-    /// Required `string` value serialized in the `collaborators_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/collaborators{/collaborator}"
-    public var collaboratorsUrl: String
-    /// Required `string` value serialized in the `comments_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/comments{/number}"
-    public var commentsUrl: String
-    /// Required `string` value serialized in the `commits_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/commits{/sha}"
-    public var commitsUrl: String
-    /// Required `string` value serialized in the `compare_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/compare/{base}...{head}"
-    public var compareUrl: String
-    /// Required `string` value serialized in the `contents_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/contents/{+path}"
-    public var contentsUrl: String
-    /// Required `uri`-formatted value serialized in the `contributors_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/contributors"
-    public var contributorsUrl: String
-    /// Required `uri`-formatted value serialized in the `deployments_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/deployments"
-    public var deploymentsUrl: String
-    /// Required `uri`-formatted value serialized in the `downloads_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/downloads"
-    public var downloadsUrl: String
-    /// Required `uri`-formatted value serialized in the `events_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/events"
-    public var eventsUrl: String
-    /// Required `uri`-formatted value serialized in the `forks_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/forks"
-    public var forksUrl: String
-    /// Required `string` value serialized in the `git_commits_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/git/commits{/sha}"
-    public var gitCommitsUrl: String
-    /// Required `string` value serialized in the `git_refs_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/git/refs{/sha}"
-    public var gitRefsUrl: String
-    /// Required `string` value serialized in the `git_tags_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/git/tags{/sha}"
-    public var gitTagsUrl: String
-    /// Required `string` value serialized in the `git_url` wire field.
-    /// - Example: "git:github.com/octocat/Hello-World.git"
-    public var gitUrl: String
-    /// Required `string` value serialized in the `issue_comment_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/issues/comments{/number}"
-    public var issueCommentUrl: String
-    /// Required `string` value serialized in the `issue_events_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/issues/events{/number}"
-    public var issueEventsUrl: String
-    /// Required `string` value serialized in the `issues_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/issues{/number}"
-    public var issuesUrl: String
-    /// Required `string` value serialized in the `keys_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/keys{/key_id}"
-    public var keysUrl: String
-    /// Required `string` value serialized in the `labels_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/labels{/name}"
-    public var labelsUrl: String
-    /// Required `uri`-formatted value serialized in the `languages_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/languages"
-    public var languagesUrl: String
-    /// Required `uri`-formatted value serialized in the `merges_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/merges"
-    public var mergesUrl: String
-    /// Required `string` value serialized in the `milestones_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/milestones{/number}"
-    public var milestonesUrl: String
-    /// Required `string` value serialized in the `notifications_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/notifications{?since,all,participating}"
-    public var notificationsUrl: String
-    /// Required `string` value serialized in the `pulls_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/pulls{/number}"
-    public var pullsUrl: String
-    /// Required `string` value serialized in the `releases_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/releases{/id}"
-    public var releasesUrl: String
-    /// Required `string` value serialized in the `ssh_url` wire field.
-    /// - Example: "git@github.com:octocat/Hello-World.git"
-    public var sshUrl: String
-    /// Required `uri`-formatted value serialized in the `stargazers_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/stargazers"
-    public var stargazersUrl: String
-    /// Required `string` value serialized in the `statuses_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/statuses/{sha}"
-    public var statusesUrl: String
-    /// Required `uri`-formatted value serialized in the `subscribers_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/subscribers"
-    public var subscribersUrl: String
-    /// Required `uri`-formatted value serialized in the `subscription_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/subscription"
-    public var subscriptionUrl: String
-    /// Required `uri`-formatted value serialized in the `tags_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/tags"
-    public var tagsUrl: String
-    /// Required `uri`-formatted value serialized in the `teams_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/teams"
-    public var teamsUrl: String
-    /// Required `string` value serialized in the `trees_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/git/trees{/sha}"
-    public var treesUrl: String
-    /// Required `string` value serialized in the `clone_url` wire field.
-    /// - Example: "https://github.com/octocat/Hello-World.git"
-    public var cloneUrl: String
-    /// Required `uri`-formatted value serialized in the `mirror_url` wire field.
-    /// - Example: "git:git.example.com/octocat/Hello-World"
-    public var mirrorUrl: String?
-    /// Required `uri`-formatted value serialized in the `hooks_url` wire field.
-    /// - Example: "http://api.github.com/repos/octocat/Hello-World/hooks"
-    public var hooksUrl: String
-    /// Required `uri`-formatted value serialized in the `svn_url` wire field.
-    /// - Example: "https://svn.github.com/octocat/Hello-World"
-    public var svnUrl: String
-    /// Required `uri`-formatted value serialized in the `homepage` wire field.
-    /// - Example: "https://github.com"
-    public var homepage: String?
-    /// Required `string` value serialized in the `language` wire field.
-    public var language: String?
-    /// Required `integer` value serialized in the `forks_count` wire field.
-    /// - Example: 9
-    public var forksCount: Int
-    /// Required `integer` value serialized in the `stargazers_count` wire field.
-    /// - Example: 80
-    public var stargazersCount: Int
-    /// Required `integer` value serialized in the `watchers_count` wire field.
-    /// - Example: 80
-    public var watchersCount: Int
-    /// The size of the repository, in kilobytes. Size is calculated hourly. When a repository is initially created,
-    /// the size is 0.
-    /// - Example: 108
-    public var size: Int
-    /// The default branch of the repository.
-    /// - Example: "master"
-    public var defaultBranch: String
-    /// Required `integer` value serialized in the `open_issues_count` wire field.
-    public var openIssuesCount: Int
-    /// Whether issues are enabled.
-    /// - Example: true
-    public var hasIssues: Bool
-    /// Whether projects are enabled.
-    /// - Example: true
-    public var hasProjects: Bool
-    /// Whether the wiki is enabled.
-    /// - Example: true
-    public var hasWiki: Bool
-    /// Required `boolean` value serialized in the `has_pages` wire field.
-    public var hasPages: Bool
-    /// Whether downloads are enabled.
-    /// - Example: true
-    public var hasDownloads: Bool
-    /// Whether the repository is archived.
-    public var archived: Bool
-    /// Returns whether or not this repository disabled.
-    public var disabled: Bool
-    /// Required `date-time`-formatted value serialized in the `pushed_at` wire field.
-    /// - Example: "2011-01-26T19:06:43Z"
-    public var pushedAt: Date?
-    /// Required `date-time`-formatted value serialized in the `created_at` wire field.
-    /// - Example: "2011-01-26T19:01:12Z"
-    public var createdAt: Date?
-    /// Required `date-time`-formatted value serialized in the `updated_at` wire field.
-    /// - Example: "2011-01-26T19:14:43Z"
-    public var updatedAt: Date?
-    /// Required `integer` value serialized in the `open_issues` wire field.
-    public var openIssues: Int
-    /// Required `integer` value serialized in the `watchers` wire field.
-    public var watchers: Int
-    /// Optional object value serialized in the `permissions` wire field.
-    public var permissions: RepositoryPermissions?
-    /// Whether this repository acts as a template that can be used to generate new repositories.
-    /// - Example: true
-    public var isTemplate: Bool?
-    /// Optional array value serialized in the `topics` wire field.
-    public var topics: [String]?
-    /// Whether discussions are enabled.
-    /// - Example: true
-    public var hasDiscussions: Bool?
-    /// Whether pull requests are enabled.
-    /// - Example: true
-    public var hasPullRequests: Bool?
-    /// The policy controlling who can create pull requests: all or collaborators_only.
-    /// - Example: "all"
-    public var pullRequestCreationPolicy: RepositoryPullRequestCreationPolicy?
-    /// The repository visibility: public, private, or internal.
-    public var visibility: String?
-    /// Whether to allow rebase merges for pull requests.
-    /// - Example: true
-    public var allowRebaseMerge: Bool?
-    /// Optional `string` value serialized in the `temp_clone_token` wire field.
-    public var tempCloneToken: String?
-    /// Whether to allow squash merges for pull requests.
-    /// - Example: true
-    public var allowSquashMerge: Bool?
-    /// Whether to allow Auto-merge to be used on pull requests.
-    public var allowAutoMerge: Bool?
-    /// Whether to delete head branches when pull requests are merged
-    public var deleteBranchOnMerge: Bool?
-    /// Whether or not a pull request head branch that is behind its base branch can always be updated even if it is
-    /// not required to be up to date before merging.
-    public var allowUpdateBranch: Bool?
-    /// Whether a squash merge commit can use the pull request title as default. **This property is closing down.
-    /// Please use `squash_merge_commit_title` instead.
-    public var useSquashPrTitleAsDefault: Bool?
-    /// The default value for a squash merge commit title: - `PR_TITLE` - default to the pull request's title. -
-    /// `COMMIT_OR_PR_TITLE` - default to the commit's title (if only one commit) or the pull request's title (when
-    /// more than one commit).
-    public var squashMergeCommitTitle: RepositorySquashMergeCommitTitle?
-    /// The default value for a squash merge commit message: - `PR_BODY` - default to the pull request's body. -
-    /// `COMMIT_MESSAGES` - default to the branch's commit messages. - `BLANK` - default to a blank commit message.
-    public var squashMergeCommitMessage: RepositorySquashMergeCommitMessage?
-    /// The default value for a merge commit title. - `PR_TITLE` - default to the pull request's title. -
-    /// `MERGE_MESSAGE` - default to the classic title for a merge message (e.g., Merge pull request #123 from
-    /// branch-name).
-    public var mergeCommitTitle: RepositoryMergeCommitTitle?
-    /// The default value for a merge commit message. - `PR_TITLE` - default to the pull request's title. -
-    /// `PR_BODY` - default to the pull request's body. - `BLANK` - default to a blank commit message.
-    public var mergeCommitMessage: RepositoryMergeCommitMessage?
-    /// Whether to allow merge commits for pull requests.
-    /// - Example: true
-    public var allowMergeCommit: Bool?
-    /// Whether to allow forking this repo
-    public var allowForking: Bool?
-    /// Whether to require contributors to sign off on web-based commits
-    public var webCommitSignoffRequired: Bool?
-    /// Optional `string` value serialized in the `master_branch` wire field.
-    public var primaryBranch: String?
-    /// Optional `string` value serialized in the `starred_at` wire field.
-    /// - Example: "\"2020-07-09T00:17:42Z\""
-    public var starredAt: String?
-    /// Whether anonymous git access is enabled for this repository
-    public var anonymousAccessEnabled: Bool?
-    /// The status of the code search index for this repository
-    public var codeSearchIndexStatus: RepositoryCodeSearchIndexStatus?
+/// Repository rule violation was detected
+public struct RepositoryRuleViolationError: Codable {
+    /// Optional `string` value serialized in the `message` wire field.
+    public var message: String?
+    /// Optional `string` value serialized in the `documentation_url` wire field.
+    public var documentationUrl: String?
+    /// Optional `string` value serialized in the `status` wire field.
+    public var status: String?
+    /// Optional object value serialized in the `metadata` wire field.
+    public var metadata: RepositoryRuleViolationErrorMetadata?
 
     enum CodingKeys: String, CodingKey {
-        case id
-        case nodeId = "node_id"
-        case name
-        case fullName = "full_name"
-        case license
-        case forks
-        case owner
-        case `private`
-        case htmlUrl = "html_url"
-        case description
-        case fork
-        case url
-        case archiveUrl = "archive_url"
-        case assigneesUrl = "assignees_url"
-        case blobsUrl = "blobs_url"
-        case branchesUrl = "branches_url"
-        case collaboratorsUrl = "collaborators_url"
-        case commentsUrl = "comments_url"
-        case commitsUrl = "commits_url"
-        case compareUrl = "compare_url"
-        case contentsUrl = "contents_url"
-        case contributorsUrl = "contributors_url"
-        case deploymentsUrl = "deployments_url"
-        case downloadsUrl = "downloads_url"
-        case eventsUrl = "events_url"
-        case forksUrl = "forks_url"
-        case gitCommitsUrl = "git_commits_url"
-        case gitRefsUrl = "git_refs_url"
-        case gitTagsUrl = "git_tags_url"
-        case gitUrl = "git_url"
-        case issueCommentUrl = "issue_comment_url"
-        case issueEventsUrl = "issue_events_url"
-        case issuesUrl = "issues_url"
-        case keysUrl = "keys_url"
-        case labelsUrl = "labels_url"
-        case languagesUrl = "languages_url"
-        case mergesUrl = "merges_url"
-        case milestonesUrl = "milestones_url"
-        case notificationsUrl = "notifications_url"
-        case pullsUrl = "pulls_url"
-        case releasesUrl = "releases_url"
-        case sshUrl = "ssh_url"
-        case stargazersUrl = "stargazers_url"
-        case statusesUrl = "statuses_url"
-        case subscribersUrl = "subscribers_url"
-        case subscriptionUrl = "subscription_url"
-        case tagsUrl = "tags_url"
-        case teamsUrl = "teams_url"
-        case treesUrl = "trees_url"
-        case cloneUrl = "clone_url"
-        case mirrorUrl = "mirror_url"
-        case hooksUrl = "hooks_url"
-        case svnUrl = "svn_url"
-        case homepage
-        case language
-        case forksCount = "forks_count"
-        case stargazersCount = "stargazers_count"
-        case watchersCount = "watchers_count"
-        case size
-        case defaultBranch = "default_branch"
-        case openIssuesCount = "open_issues_count"
-        case hasIssues = "has_issues"
-        case hasProjects = "has_projects"
-        case hasWiki = "has_wiki"
-        case hasPages = "has_pages"
-        case hasDownloads = "has_downloads"
-        case archived
-        case disabled
-        case pushedAt = "pushed_at"
-        case createdAt = "created_at"
-        case updatedAt = "updated_at"
-        case openIssues = "open_issues"
-        case watchers
-        case permissions
-        case isTemplate = "is_template"
-        case topics
-        case hasDiscussions = "has_discussions"
-        case hasPullRequests = "has_pull_requests"
-        case pullRequestCreationPolicy = "pull_request_creation_policy"
-        case visibility
-        case allowRebaseMerge = "allow_rebase_merge"
-        case tempCloneToken = "temp_clone_token"
-        case allowSquashMerge = "allow_squash_merge"
-        case allowAutoMerge = "allow_auto_merge"
-        case deleteBranchOnMerge = "delete_branch_on_merge"
-        case allowUpdateBranch = "allow_update_branch"
-        case useSquashPrTitleAsDefault = "use_squash_pr_title_as_default"
-        case squashMergeCommitTitle = "squash_merge_commit_title"
-        case squashMergeCommitMessage = "squash_merge_commit_message"
-        case mergeCommitTitle = "merge_commit_title"
-        case mergeCommitMessage = "merge_commit_message"
-        case allowMergeCommit = "allow_merge_commit"
-        case allowForking = "allow_forking"
-        case webCommitSignoffRequired = "web_commit_signoff_required"
-        case primaryBranch = "master_branch"
-        case starredAt = "starred_at"
-        case anonymousAccessEnabled = "anonymous_access_enabled"
-        case codeSearchIndexStatus = "code_search_index_status"
+        case message
+        case documentationUrl = "documentation_url"
+        case status
+        case metadata
+    }
+
+    init() {
+        (message, documentationUrl, status, metadata) = (nil, nil, nil, nil)
+    }
+}
+
+public extension RepositoryRuleViolationError {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        message = try container.sdkDecodeIfPresent(.message)
+        documentationUrl = try container.sdkDecodeIfPresent(.documentationUrl)
+        status = try container.sdkDecodeIfPresent(.status)
+        metadata = try container.sdkDecodeIfPresent(.metadata)
+    }
+}
+
+public extension RepositoryRuleViolationError {
+    init(
+        message: String? = nil,
+        documentationUrl: String? = nil,
+        status: String? = nil,
+        metadata: RepositoryRuleViolationErrorMetadata? = nil
+    ) {
+        self.init()
+        (self.message, self.documentationUrl) = (message, documentationUrl)
+        (self.status, self.metadata) = (status, metadata)
+    }
+}
+
+/// Parameters for a repository name condition
+public struct RepositoryRulesetConditionsRepositoryNameTarget: Codable {
+    /// Required object value serialized in the `repository_name` wire field.
+    public var repositoryName: RepositoryRulesetConditionsRepositoryNameTargetRepositoryName
+
+    enum CodingKeys: String, CodingKey {
+        case repositoryName = "repository_name"
     }
 
     private init(sdkCopy value: Self) {
         self = value
+    }
+}
+
+public extension RepositoryRulesetConditionsRepositoryNameTarget {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.repositoryName) else {
+            throw SdkValidationError(
+                field: "repository_name",
+                code: "required",
+                message: "Validation failed for 'repository_name': value is required"
+            )
+        }
+        repositoryName = try container.sdkDecodeRequired(.repositoryName)
+    }
+}
+
+public extension RepositoryRulesetConditionsRepositoryNameTarget {
+    init(repositoryName: RepositoryRulesetConditionsRepositoryNameTargetRepositoryName) {
+        self.repositoryName = repositoryName
+    }
+}
+
+/// Parameters for a targeting a repository property
+public struct RepositoryRulesetConditionsRepositoryPropertySpec: Codable {
+    /// The name of the repository property to target
+    public var name: String
+    /// The values to match for the repository property
+    public var propertyValues: [String]
+    /// The source of the repository property. Defaults to 'custom' if not specified.
+    public var source: RepositoryRulesetConditionsRepositoryPropertySpecSource?
+
+    enum CodingKeys: String, CodingKey {
+        case name
+        case propertyValues = "property_values"
+        case source
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension RepositoryRulesetConditionsRepositoryPropertySpec {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        guard container.contains(.propertyValues) else {
+            throw SdkValidationError(
+                field: "property_values",
+                code: "required",
+                message: "Validation failed for 'property_values': value is required"
+            )
+        }
+        name = try container.sdkDecodeRequired(.name)
+        propertyValues = try container.sdkDecodeRequired(.propertyValues)
+        source = try container.sdkDecodeIfPresent(.source)
+    }
+}
+
+public extension RepositoryRulesetConditionsRepositoryPropertySpec {
+    init(
+        name: String,
+        propertyValues: [String],
+        source: RepositoryRulesetConditionsRepositoryPropertySpecSource? = nil
+    ) {
+        (self.name, self.propertyValues) = (name, propertyValues)
+        self.source = source
+    }
+}
+
+public typealias RepositoryRuleViolationErrorMetadataSecretScanningBypassPlaceholdersList =
+    [RepositoryRuleViolationErrorMetadataSecretScanningBypassPlaceholdersItem]
+
+/// Optional object value serialized in the `secret_scanning` wire field.
+public struct RepositoryRuleViolationErrorMetadataSecretScanning: Codable {
+    /// Optional array value serialized in the `bypass_placeholders` wire field.
+    public var bypassPlaceholders: RepositoryRuleViolationErrorMetadataSecretScanningBypassPlaceholdersList?
+
+    enum CodingKeys: String, CodingKey {
+        case bypassPlaceholders = "bypass_placeholders"
+    }
+
+    init() {
+        bypassPlaceholders = nil
+    }
+}
+
+public extension RepositoryRuleViolationErrorMetadataSecretScanning {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        bypassPlaceholders = try container.sdkDecodeIfPresent(.bypassPlaceholders)
+    }
+}
+
+public extension RepositoryRuleViolationErrorMetadataSecretScanning {
+    init(bypassPlaceholders: RepositoryRuleViolationErrorMetadataSecretScanningBypassPlaceholdersList? = nil) {
+        self.init()
+        self.bypassPlaceholders = bypassPlaceholders
+    }
+}
+
+/// The source of the repository property. Defaults to 'custom' if not specified.
+public struct RepositoryRulesetConditionsRepositoryPropertySpecSource: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let custom = RepositoryRulesetConditionsRepositoryPropertySpecSource(rawValue: "custom")
+    public static let system = RepositoryRulesetConditionsRepositoryPropertySpecSource(rawValue: "system")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
+/// The default value for a merge commit message. - `PR_TITLE` - default to the pull request's title. -
+/// `PR_BODY` - default to the pull request's body. - `BLANK` - default to a blank commit message.
+public struct RepositoryMergeCommitMessage: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let prBody = RepositoryMergeCommitMessage(rawValue: "PR_BODY")
+    public static let prTitle = RepositoryMergeCommitMessage(rawValue: "PR_TITLE")
+    public static let blank = RepositoryMergeCommitMessage(rawValue: "BLANK")
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        try self.init(rawValue: container.decode(String.self))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
     }
 }

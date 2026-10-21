@@ -4,161 +4,28 @@
 import Foundation
 
 /// WebhookPullRequestAssigned domain models
-/// Required object value serialized in the `head` wire field.
-public struct WebhookPullRequestAssignedPullRequestHead: Codable {
-    /// Required `string` value serialized in the `label` wire field.
-    public var label: String?
-    /// Required `string` value serialized in the `ref` wire field.
-    public var ref: String
-    /// A git repository
-    public var repo: WebhookPullRequestAssignedPullRequestHeadRepo?
-    /// Required `string` value serialized in the `sha` wire field.
-    public var sha: String
-    /// Required object value serialized in the `user` wire field.
-    public var user: WebhookPullRequestAssignedPullRequestHeadUser?
-
-    enum CodingKeys: String, CodingKey {
-        case label
-        case ref
-        case repo
-        case sha
-        case user
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension WebhookPullRequestAssignedPullRequestHead {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.label) else {
-            throw SdkValidationError(
-                field: "label",
-                code: "required",
-                message: "Validation failed for 'label': value is required"
-            )
-        }
-        guard container.contains(.ref) else {
-            throw SdkValidationError(
-                field: "ref",
-                code: "required",
-                message: "Validation failed for 'ref': value is required"
-            )
-        }
-        guard container.contains(.repo) else {
-            throw SdkValidationError(
-                field: "repo",
-                code: "required",
-                message: "Validation failed for 'repo': value is required"
-            )
-        }
-        guard container.contains(.sha) else {
-            throw SdkValidationError(
-                field: "sha",
-                code: "required",
-                message: "Validation failed for 'sha': value is required"
-            )
-        }
-        guard container.contains(.user) else {
-            throw SdkValidationError(
-                field: "user",
-                code: "required",
-                message: "Validation failed for 'user': value is required"
-            )
-        }
-        label = try container.sdkDecodeNullable(.label)
-        ref = try container.sdkDecodeRequired(.ref)
-        repo = try container.sdkDecodeNullable(.repo)
-        sha = try container.sdkDecodeRequired(.sha)
-        user = try container.sdkDecodeNullable(.user)
-    }
-}
-
-public extension WebhookPullRequestAssignedPullRequestHead {
+public extension WebhookPullRequestAssigned {
     init(
-        label: String?,
-        ref: String,
-        repo: WebhookPullRequestAssignedPullRequestHeadRepo?,
-        sha: String,
-        user: WebhookPullRequestAssignedPullRequestHeadUser?
+        action: WebhookPullRequestAssignedAction,
+        assignee: WebhooksUser?,
+        number: WebhooksNumber,
+        pullRequest: WebhookPullRequestAssignedPullRequest,
+        repository: RepositoryWebhooks,
+        sender: SimpleUser,
+        enterprise: EnterpriseWebhooks? = nil,
+        installation: SimpleInstallation? = nil,
+        organization: OrganizationSimpleWebhooks? = nil
     ) {
-        (self.label, self.ref) = (label, ref)
-        (self.repo, self.sha) = (repo, sha)
-        self.user = user
+        (self.action, self.assignee) = (action, assignee)
+        (self.number, self.pullRequest) = (number, pullRequest)
+        (self.repository, self.sender) = (repository, sender)
+        (self.enterprise, self.installation) = (enterprise, installation)
+        self.organization = organization
     }
 }
 
-/// Required object value serialized in the `_links` wire field.
-public struct WebhookPullRequestAssignedPullRequestLinks: Codable {
-    /// Required object value serialized in the `comments` wire field.
-    public var comments: WebhookPullRequestAssignedPullRequestLinksComments
-    /// Required object value serialized in the `commits` wire field.
-    public var commits: WebhookPullRequestAssignedPullRequestLinksCommits
-    /// Required object value serialized in the `html` wire field.
-    public var html: WebhookPullRequestAssignedPullRequestLinksHtml
-    /// Required object value serialized in the `issue` wire field.
-    public var issue: WebhookPullRequestAssignedPullRequestLinksIssue
-    /// Required object value serialized in the `review_comment` wire field.
-    public var reviewComment: WebhookPullRequestAssignedPullRequestLinksReviewComment
-    /// Required object value serialized in the `review_comments` wire field.
-    public var reviewComments: WebhookPullRequestAssignedPullRequestLinksReviewComments
-    /// Required object value serialized in the `self` wire field.
-    public var `self`: WebhookPullRequestAssignedPullRequestLinksSelf
-    /// Required object value serialized in the `statuses` wire field.
-    public var statuses: WebhookPullRequestAssignedPullRequestLinksStatuses
-
-    enum CodingKeys: String, CodingKey {
-        case comments
-        case commits
-        case html
-        case issue
-        case reviewComment = "review_comment"
-        case reviewComments = "review_comments"
-        case `self`
-        case statuses
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension WebhookPullRequestAssignedPullRequestLinks {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        comments = try container.sdkDecodeRequired(.comments)
-        commits = try container.sdkDecodeRequired(.commits)
-        html = try container.sdkDecodeRequired(.html)
-        issue = try container.sdkDecodeRequired(.issue)
-        reviewComment = try container.sdkDecodeRequired(.reviewComment)
-        reviewComments = try container.sdkDecodeRequired(.reviewComments)
-        self.`self` = try container.sdkDecodeRequired(.`self`)
-        statuses = try container.sdkDecodeRequired(.statuses)
-    }
-}
-
-public extension WebhookPullRequestAssignedPullRequestLinks {
-    init(
-        comments: WebhookPullRequestAssignedPullRequestLinksComments,
-        commits: WebhookPullRequestAssignedPullRequestLinksCommits,
-        html: WebhookPullRequestAssignedPullRequestLinksHtml,
-        issue: WebhookPullRequestAssignedPullRequestLinksIssue,
-        reviewComment: WebhookPullRequestAssignedPullRequestLinksReviewComment,
-        reviewComments: WebhookPullRequestAssignedPullRequestLinksReviewComments,
-        self selfValue: WebhookPullRequestAssignedPullRequestLinksSelf,
-        statuses: WebhookPullRequestAssignedPullRequestLinksStatuses
-    ) {
-        (self.comments, self.commits) = (comments, commits)
-        (self.html, self.issue) = (html, issue)
-        (self.reviewComment, self.reviewComments) = (reviewComment, reviewComments)
-        (self.`self`, self.statuses) = (selfValue, statuses)
-    }
-}
-
-/// Required object value serialized in the `owner` wire field.
-public struct WebhookPullRequestAssignedPullRequestBaseRepoOwner: Codable {
+/// Required object value serialized in the `creator` wire field.
+public struct WebhookPullRequestAssignedPullRequestMilestoneCreator: Codable {
     /// Required `integer` value serialized in the `id` wire field.
     public var id: Int
     /// Required `string` value serialized in the `login` wire field.
@@ -198,7 +65,7 @@ public struct WebhookPullRequestAssignedPullRequestBaseRepoOwner: Codable {
     /// Optional `uri`-formatted value serialized in the `subscriptions_url` wire field.
     public var subscriptionsUrl: String?
     /// Optional enumerated value serialized in the `type` wire field.
-    public var type: WebhookPullRequestAssignedPullRequestBaseRepoOwnerType?
+    public var type: WebhookPullRequestAssignedPullRequestMilestoneCreatorType?
     /// Optional `uri`-formatted value serialized in the `url` wire field.
     public var url: String?
     /// Optional `string` value serialized in the `user_view_type` wire field.
@@ -234,7 +101,7 @@ public struct WebhookPullRequestAssignedPullRequestBaseRepoOwner: Codable {
     }
 }
 
-public extension WebhookPullRequestAssignedPullRequestBaseRepoOwner {
+public extension WebhookPullRequestAssignedPullRequestMilestoneCreator {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
@@ -277,7 +144,7 @@ public extension WebhookPullRequestAssignedPullRequestBaseRepoOwner {
     }
 }
 
-public extension WebhookPullRequestAssignedPullRequestBaseRepoOwner {
+public extension WebhookPullRequestAssignedPullRequestMilestoneCreator {
     init(
         id: Int,
         login: String,
@@ -298,7 +165,7 @@ public extension WebhookPullRequestAssignedPullRequestBaseRepoOwner {
         siteAdmin: Bool? = nil,
         starredUrl: String? = nil,
         subscriptionsUrl: String? = nil,
-        type: WebhookPullRequestAssignedPullRequestBaseRepoOwnerType? = nil,
+        type: WebhookPullRequestAssignedPullRequestMilestoneCreatorType? = nil,
         url: String? = nil,
         userViewType: String? = nil
     ) throws {
@@ -317,7 +184,7 @@ public extension WebhookPullRequestAssignedPullRequestBaseRepoOwner {
     }
 }
 
-extension WebhookPullRequestAssignedPullRequestBaseRepoOwner {
+extension WebhookPullRequestAssignedPullRequestMilestoneCreator {
     func sdkValidateConstraints() throws {
         if let value = avatarUrl {
             try sdkValidateUri("avatar_url", value)
@@ -346,58 +213,13 @@ extension WebhookPullRequestAssignedPullRequestBaseRepoOwner {
     }
 }
 
-/// A collection of related issues and pull requests.
-public struct WebhookPullRequestAssignedPullRequestMilestone: Codable {
-    /// Required `date-time`-formatted value serialized in the `closed_at` wire field.
-    public var closedAt: Date?
-    /// Required `integer` value serialized in the `closed_issues` wire field.
-    public var closedIssues: Int
-    /// Required `date-time`-formatted value serialized in the `created_at` wire field.
-    public var createdAt: Date
-    /// Required object value serialized in the `creator` wire field.
-    public var creator: WebhookPullRequestAssignedPullRequestMilestoneCreator?
-    /// Required `string` value serialized in the `description` wire field.
-    public var description: String?
-    /// Required `date-time`-formatted value serialized in the `due_on` wire field.
-    public var dueOn: Date?
-    /// Required `uri`-formatted value serialized in the `html_url` wire field.
-    public var htmlUrl: String
-    /// Required `integer` value serialized in the `id` wire field.
-    public var id: Int
-    /// Required `uri`-formatted value serialized in the `labels_url` wire field.
-    public var labelsUrl: String
-    /// Required `string` value serialized in the `node_id` wire field.
-    public var nodeId: String
-    /// The number of the milestone.
-    public var number: Int
-    /// Required `integer` value serialized in the `open_issues` wire field.
-    public var openIssues: Int
-    /// The state of the milestone.
-    public var state: WebhookPullRequestAssignedPullRequestMilestoneState
-    /// The title of the milestone.
-    public var title: String
-    /// Required `date-time`-formatted value serialized in the `updated_at` wire field.
-    public var updatedAt: Date
-    /// Required `uri`-formatted value serialized in the `url` wire field.
-    public var url: String
+/// Required object value serialized in the `review_comments` wire field.
+public struct WebhookPullRequestAssignedPullRequestLinksReviewComments: Codable {
+    /// Required `uri-template`-formatted value serialized in the `href` wire field.
+    public var href: String
 
     enum CodingKeys: String, CodingKey {
-        case closedAt = "closed_at"
-        case closedIssues = "closed_issues"
-        case createdAt = "created_at"
-        case creator
-        case description
-        case dueOn = "due_on"
-        case htmlUrl = "html_url"
-        case id
-        case labelsUrl = "labels_url"
-        case nodeId = "node_id"
-        case number
-        case openIssues = "open_issues"
-        case state
-        case title
-        case updatedAt = "updated_at"
-        case url
+        case href
     }
 
     private init(sdkCopy value: Self) {
@@ -405,230 +227,355 @@ public struct WebhookPullRequestAssignedPullRequestMilestone: Codable {
     }
 }
 
-public extension WebhookPullRequestAssignedPullRequestMilestone {
+public extension WebhookPullRequestAssignedPullRequestLinksReviewComments {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        closedAt = try container.sdkDecodeNullable(.closedAt)
-        closedIssues = try container.sdkDecodeRequired(.closedIssues)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        creator = try container.sdkDecodeNullable(.creator)
-        description = try container.sdkDecodeNullable(.description)
-        dueOn = try container.sdkDecodeNullable(.dueOn)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        id = try container.sdkDecodeRequired(.id)
-        labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        number = try container.sdkDecodeRequired(.number)
-        openIssues = try container.sdkDecodeRequired(.openIssues)
-        state = try container.sdkDecodeRequired(.state)
-        title = try container.sdkDecodeRequired(.title)
-        updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        url = try container.sdkDecodeRequired(.url)
-        try sdkValidateConstraints()
-    }
-}
-
-public extension WebhookPullRequestAssignedPullRequestMilestone {
-    init(
-        closedAt: Date?,
-        closedIssues: Int,
-        createdAt: Date,
-        creator: WebhookPullRequestAssignedPullRequestMilestoneCreator?,
-        description: String?,
-        dueOn: Date?,
-        htmlUrl: String,
-        id: Int,
-        labelsUrl: String,
-        nodeId: String,
-        number: Int,
-        openIssues: Int,
-        state: WebhookPullRequestAssignedPullRequestMilestoneState,
-        title: String,
-        updatedAt: Date,
-        url: String
-    ) throws {
-        (self.closedAt, self.closedIssues) = (closedAt, closedIssues)
-        (self.createdAt, self.creator) = (createdAt, creator)
-        (self.description, self.dueOn) = (description, dueOn)
-        (self.htmlUrl, self.id) = (htmlUrl, id)
-        (self.labelsUrl, self.nodeId) = (labelsUrl, nodeId)
-        (self.number, self.openIssues) = (number, openIssues)
-        (self.state, self.title) = (state, title)
-        (self.updatedAt, self.url) = (updatedAt, url)
-        try sdkValidateConstraints()
-    }
-}
-
-extension WebhookPullRequestAssignedPullRequestMilestone {
-    func sdkValidateConstraints() throws {
-        if let value = closedAt {
-            try sdkValidateDateTime("closed_at", sdkWireString(value))
+        guard container.contains(.href) else {
+            throw SdkValidationError(
+                field: "href",
+                code: "required",
+                message: "Validation failed for 'href': value is required"
+            )
         }
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
-        if let value = dueOn {
-            try sdkValidateDateTime("due_on", sdkWireString(value))
-        }
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateUri("labels_url", labelsUrl)
-        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
-        try sdkValidateUri("url", url)
+        href = try container.sdkDecodeRequired(.href)
     }
 }
 
-/// Required object value serialized in the `pull_request` wire field.
-public struct WebhookPullRequestAssignedPullRequest: Codable {
-    /// Required object value serialized in the `_links` wire field.
-    public var links: WebhookPullRequestAssignedPullRequestLinks
-    /// Required enumerated value serialized in the `active_lock_reason` wire field.
-    public var activeLockReason: WebhookPullRequestAssignedPullRequestActiveLockReason?
-    /// Required object value serialized in the `assignee` wire field.
-    public var assignee: WebhookPullRequestAssignedPullRequestAssignee?
-    /// Required array value serialized in the `assignees` wire field.
-    public var assignees: [WebhookPullRequestAssignedPullRequestAssigneesItem?]
-    /// How the author is associated with the repository.
-    public var authorAssociation: WebhookPullRequestAssignedPullRequestAuthorAssociation
-    /// The status of auto merging a pull request.
-    public var autoMerge: WebhookPullRequestAssignedPullRequestAutoMerge?
-    /// Required object value serialized in the `base` wire field.
-    public var base: WebhookPullRequestAssignedPullRequestBase
-    /// Required `string` value serialized in the `body` wire field.
-    public var body: String?
-    /// Required `date-time`-formatted value serialized in the `closed_at` wire field.
-    public var closedAt: Date?
-    /// Required `uri`-formatted value serialized in the `comments_url` wire field.
-    public var commentsUrl: String
-    /// Required `uri`-formatted value serialized in the `commits_url` wire field.
-    public var commitsUrl: String
-    /// Required `date-time`-formatted value serialized in the `created_at` wire field.
-    public var createdAt: Date
-    /// Required `uri`-formatted value serialized in the `diff_url` wire field.
-    public var diffUrl: String
-    /// Indicates whether or not the pull request is a draft.
-    public var draft: Bool
-    /// Required object value serialized in the `head` wire field.
-    public var head: WebhookPullRequestAssignedPullRequestHead
-    /// Required `uri`-formatted value serialized in the `html_url` wire field.
-    public var htmlUrl: String
+public extension WebhookPullRequestAssignedPullRequestLinksReviewComments {
+    init(href: String) {
+        self.href = href
+    }
+}
+
+public indirect enum WebhookPullRequestAssignedPullRequestHeadRepoCreatedAt {
+    case intValue(Int)
+    case date(Date)
+}
+
+extension WebhookPullRequestAssignedPullRequestHeadRepoCreatedAt: Codable {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for WebhookPullRequestAssignedPullRequestHeadRepoCreatedAt"
+        )
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        if try encodeGroup1(to: encoder) {
+            return
+        }
+    }
+}
+
+extension WebhookPullRequestAssignedPullRequestHeadRepoCreatedAt {
+    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
+        if let value = try? container.decode(Int.self) {
+            return .intValue(value)
+        }
+        if let value = try? container.decode(Date.self) {
+            return .date(value)
+        }
+        return nil
+    }
+}
+
+extension WebhookPullRequestAssignedPullRequestHeadRepoCreatedAt {
+    func encodeGroup1(to encoder: Encoder) throws -> Bool {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case let .intValue(value): try container.encode(value); return true
+        case let .date(value): try container.encode(value); return true
+        }
+    }
+}
+
+extension WebhookPullRequestAssignedPullRequestHeadRepoCreatedAt: SdkNumericValueConvertible {
+    var sdkNumericValue: Double? {
+        switch self {
+        case let .intValue(value): Double(value)
+        default: nil
+        }
+    }
+}
+
+public indirect enum WebhookPullRequestAssignedPullRequestHeadRepoPushedAt {
+    case intValue(Int)
+    case date(Date)
+}
+
+extension WebhookPullRequestAssignedPullRequestHeadRepoPushedAt: Codable {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for WebhookPullRequestAssignedPullRequestHeadRepoPushedAt"
+        )
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        if try encodeGroup1(to: encoder) {
+            return
+        }
+    }
+}
+
+extension WebhookPullRequestAssignedPullRequestHeadRepoPushedAt {
+    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
+        if let value = try? container.decode(Int.self) {
+            return .intValue(value)
+        }
+        if let value = try? container.decode(Date.self) {
+            return .date(value)
+        }
+        return nil
+    }
+}
+
+extension WebhookPullRequestAssignedPullRequestHeadRepoPushedAt {
+    func encodeGroup1(to encoder: Encoder) throws -> Bool {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case let .intValue(value): try container.encode(value); return true
+        case let .date(value): try container.encode(value); return true
+        }
+    }
+}
+
+extension WebhookPullRequestAssignedPullRequestHeadRepoPushedAt: SdkNumericValueConvertible {
+    var sdkNumericValue: Double? {
+        switch self {
+        case let .intValue(value): Double(value)
+        default: nil
+        }
+    }
+}
+
+/// Optional object value serialized in the `merged_by` wire field.
+public struct WebhookPullRequestAssignedPullRequestMergedBy: Codable {
     /// Required `integer` value serialized in the `id` wire field.
     public var id: Int
-    /// Required `uri`-formatted value serialized in the `issue_url` wire field.
-    public var issueUrl: String
-    /// Required array value serialized in the `labels` wire field.
-    public var labels: [WebhookPullRequestAssignedPullRequestLabelsItem]
-    /// Required `boolean` value serialized in the `locked` wire field.
-    public var locked: Bool
-    /// Required `string` value serialized in the `merge_commit_sha` wire field.
-    public var mergeCommitSha: String?
-    /// Required `date-time`-formatted value serialized in the `merged_at` wire field.
-    public var mergedAt: Date?
-    /// A collection of related issues and pull requests.
-    public var milestone: WebhookPullRequestAssignedPullRequestMilestone?
-    /// Required `string` value serialized in the `node_id` wire field.
-    public var nodeId: String
-    /// Number uniquely identifying the pull request within its repository.
-    public var number: Int
-    /// Required `uri`-formatted value serialized in the `patch_url` wire field.
-    public var patchUrl: String
-    /// Required array value serialized in the `requested_reviewers` wire field.
-    public var requestedReviewers: [WebhookPullRequestAssignedPullRequestRequestedReviewersItem?]
-    /// Required array value serialized in the `requested_teams` wire field.
-    public var requestedTeams: [WebhookPullRequestAssignedPullRequestRequestedTeamsItem]
-    /// Required `uri-template`-formatted value serialized in the `review_comment_url` wire field.
-    public var reviewCommentUrl: String
-    /// Required `uri`-formatted value serialized in the `review_comments_url` wire field.
-    public var reviewCommentsUrl: String
-    /// State of this Pull Request. Either `open` or `closed`.
-    public var state: WebhookPullRequestAssignedPullRequestState
-    /// Required `uri`-formatted value serialized in the `statuses_url` wire field.
-    public var statusesUrl: String
-    /// The title of the pull request.
-    public var title: String
-    /// Required `date-time`-formatted value serialized in the `updated_at` wire field.
-    public var updatedAt: Date
-    /// Required `uri`-formatted value serialized in the `url` wire field.
-    public var url: String
-    /// Required object value serialized in the `user` wire field.
-    public var user: WebhookPullRequestAssignedPullRequestUser?
-    /// Optional `integer` value serialized in the `additions` wire field.
-    public var additions: Int?
-    /// Optional `integer` value serialized in the `changed_files` wire field.
-    public var changedFiles: Int?
-    /// Optional `integer` value serialized in the `comments` wire field.
-    public var comments: Int?
-    /// Optional `integer` value serialized in the `commits` wire field.
-    public var commits: Int?
-    /// Optional `integer` value serialized in the `deletions` wire field.
-    public var deletions: Int?
-    /// Indicates whether maintainers can modify the pull request.
-    public var maintainerCanModify: Bool?
-    /// Optional `boolean` value serialized in the `mergeable` wire field.
-    public var mergeable: Bool?
-    /// Optional `string` value serialized in the `mergeable_state` wire field.
-    public var mergeableState: String?
-    /// Optional `boolean` value serialized in the `merged` wire field.
-    public var merged: Bool?
-    /// Optional object value serialized in the `merged_by` wire field.
-    public var mergedBy: WebhookPullRequestAssignedPullRequestMergedBy?
-    /// Optional `boolean` value serialized in the `rebaseable` wire field.
-    public var rebaseable: Bool?
-    /// Optional `integer` value serialized in the `review_comments` wire field.
-    public var reviewComments: Int?
-    /// The stack information associated with a pull request.
-    public var stack: PullRequestStack?
+    /// Required `string` value serialized in the `login` wire field.
+    public var login: String
+    /// Optional `uri`-formatted value serialized in the `avatar_url` wire field.
+    public var avatarUrl: String?
+    /// Optional `boolean` value serialized in the `deleted` wire field.
+    public var deleted: Bool?
+    /// Optional `string` value serialized in the `email` wire field.
+    public var email: String?
+    /// Optional `uri-template`-formatted value serialized in the `events_url` wire field.
+    public var eventsUrl: String?
+    /// Optional `uri`-formatted value serialized in the `followers_url` wire field.
+    public var followersUrl: String?
+    /// Optional `uri-template`-formatted value serialized in the `following_url` wire field.
+    public var followingUrl: String?
+    /// Optional `uri-template`-formatted value serialized in the `gists_url` wire field.
+    public var gistsUrl: String?
+    /// Optional `string` value serialized in the `gravatar_id` wire field.
+    public var gravatarId: String?
+    /// Optional `uri`-formatted value serialized in the `html_url` wire field.
+    public var htmlUrl: String?
+    /// Optional `string` value serialized in the `name` wire field.
+    public var name: String?
+    /// Optional `string` value serialized in the `node_id` wire field.
+    public var nodeId: String?
+    /// Optional `uri`-formatted value serialized in the `organizations_url` wire field.
+    public var organizationsUrl: String?
+    /// Optional `uri`-formatted value serialized in the `received_events_url` wire field.
+    public var receivedEventsUrl: String?
+    /// Optional `uri`-formatted value serialized in the `repos_url` wire field.
+    public var reposUrl: String?
+    /// Optional `boolean` value serialized in the `site_admin` wire field.
+    public var siteAdmin: Bool?
+    /// Optional `uri-template`-formatted value serialized in the `starred_url` wire field.
+    public var starredUrl: String?
+    /// Optional `uri`-formatted value serialized in the `subscriptions_url` wire field.
+    public var subscriptionsUrl: String?
+    /// Optional enumerated value serialized in the `type` wire field.
+    public var type: WebhookPullRequestAssignedPullRequestMergedByType?
+    /// Optional `uri`-formatted value serialized in the `url` wire field.
+    public var url: String?
+    /// Optional `string` value serialized in the `user_view_type` wire field.
+    public var userViewType: String?
 
     enum CodingKeys: String, CodingKey {
-        case links = "_links"
-        case activeLockReason = "active_lock_reason"
-        case assignee
-        case assignees
-        case authorAssociation = "author_association"
-        case autoMerge = "auto_merge"
-        case base
-        case body
-        case closedAt = "closed_at"
-        case commentsUrl = "comments_url"
-        case commitsUrl = "commits_url"
-        case createdAt = "created_at"
-        case diffUrl = "diff_url"
-        case draft
-        case head
-        case htmlUrl = "html_url"
         case id
-        case issueUrl = "issue_url"
-        case labels
-        case locked
-        case mergeCommitSha = "merge_commit_sha"
-        case mergedAt = "merged_at"
-        case milestone
+        case login
+        case avatarUrl = "avatar_url"
+        case deleted
+        case email
+        case eventsUrl = "events_url"
+        case followersUrl = "followers_url"
+        case followingUrl = "following_url"
+        case gistsUrl = "gists_url"
+        case gravatarId = "gravatar_id"
+        case htmlUrl = "html_url"
+        case name
         case nodeId = "node_id"
-        case number
-        case patchUrl = "patch_url"
-        case requestedReviewers = "requested_reviewers"
-        case requestedTeams = "requested_teams"
-        case reviewCommentUrl = "review_comment_url"
-        case reviewCommentsUrl = "review_comments_url"
-        case state
-        case statusesUrl = "statuses_url"
-        case title
-        case updatedAt = "updated_at"
+        case organizationsUrl = "organizations_url"
+        case receivedEventsUrl = "received_events_url"
+        case reposUrl = "repos_url"
+        case siteAdmin = "site_admin"
+        case starredUrl = "starred_url"
+        case subscriptionsUrl = "subscriptions_url"
+        case type
         case url
-        case user
-        case additions
-        case changedFiles = "changed_files"
-        case comments
-        case commits
-        case deletions
-        case maintainerCanModify = "maintainer_can_modify"
-        case mergeable
-        case mergeableState = "mergeable_state"
-        case merged
-        case mergedBy = "merged_by"
-        case rebaseable
-        case reviewComments = "review_comments"
-        case stack
+        case userViewType = "user_view_type"
     }
 
     private init(sdkCopy value: Self) {
         self = value
+    }
+}
+
+public extension WebhookPullRequestAssignedPullRequestMergedBy {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.login) else {
+            throw SdkValidationError(
+                field: "login",
+                code: "required",
+                message: "Validation failed for 'login': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        login = try container.sdkDecodeRequired(.login)
+        avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
+        deleted = try container.sdkDecodeIfPresent(.deleted)
+        email = try container.sdkDecodeIfPresent(.email)
+        eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
+        followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
+        gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
+        gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
+        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        name = try container.sdkDecodeIfPresent(.name)
+        nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
+        receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
+        reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
+        siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
+        starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
+        subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
+        type = try container.sdkDecodeIfPresent(.type)
+        url = try container.sdkDecodeIfPresent(.url)
+        userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        try sdkValidateConstraints()
+    }
+}
+
+public extension WebhookPullRequestAssignedPullRequestMergedBy {
+    init(
+        id: Int,
+        login: String,
+        avatarUrl: String? = nil,
+        deleted: Bool? = nil,
+        email: String? = nil,
+        eventsUrl: String? = nil,
+        followersUrl: String? = nil,
+        followingUrl: String? = nil,
+        gistsUrl: String? = nil,
+        gravatarId: String? = nil,
+        htmlUrl: String? = nil,
+        name: String? = nil,
+        nodeId: String? = nil,
+        organizationsUrl: String? = nil,
+        receivedEventsUrl: String? = nil,
+        reposUrl: String? = nil,
+        siteAdmin: Bool? = nil,
+        starredUrl: String? = nil,
+        subscriptionsUrl: String? = nil,
+        type: WebhookPullRequestAssignedPullRequestMergedByType? = nil,
+        url: String? = nil,
+        userViewType: String? = nil
+    ) throws {
+        (self.id, self.login) = (id, login)
+        (self.avatarUrl, self.deleted) = (avatarUrl, deleted)
+        (self.email, self.eventsUrl) = (email, eventsUrl)
+        (self.followersUrl, self.followingUrl) = (followersUrl, followingUrl)
+        (self.gistsUrl, self.gravatarId) = (gistsUrl, gravatarId)
+        (self.htmlUrl, self.name) = (htmlUrl, name)
+        (self.nodeId, self.organizationsUrl) = (nodeId, organizationsUrl)
+        (self.receivedEventsUrl, self.reposUrl) = (receivedEventsUrl, reposUrl)
+        (self.siteAdmin, self.starredUrl) = (siteAdmin, starredUrl)
+        (self.subscriptionsUrl, self.type) = (subscriptionsUrl, type)
+        (self.url, self.userViewType) = (url, userViewType)
+        try sdkValidateConstraints()
+    }
+}
+
+extension WebhookPullRequestAssignedPullRequestMergedBy {
+    func sdkValidateConstraints() throws {
+        if let value = avatarUrl {
+            try sdkValidateUri("avatar_url", value)
+        }
+        if let value = followersUrl {
+            try sdkValidateUri("followers_url", value)
+        }
+        if let value = htmlUrl {
+            try sdkValidateUri("html_url", value)
+        }
+        if let value = organizationsUrl {
+            try sdkValidateUri("organizations_url", value)
+        }
+        if let value = receivedEventsUrl {
+            try sdkValidateUri("received_events_url", value)
+        }
+        if let value = reposUrl {
+            try sdkValidateUri("repos_url", value)
+        }
+        if let value = subscriptionsUrl {
+            try sdkValidateUri("subscriptions_url", value)
+        }
+        if let value = url {
+            try sdkValidateUri("url", value)
+        }
+    }
+}
+
+/// Required object value serialized in the `review_comment` wire field.
+public struct WebhookPullRequestAssignedPullRequestLinksReviewComment: Codable {
+    /// Required `uri-template`-formatted value serialized in the `href` wire field.
+    public var href: String
+
+    enum CodingKeys: String, CodingKey {
+        case href
+    }
+
+    private init(sdkCopy value: Self) {
+        self = value
+    }
+}
+
+public extension WebhookPullRequestAssignedPullRequestLinksReviewComment {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.href) else {
+            throw SdkValidationError(
+                field: "href",
+                code: "required",
+                message: "Validation failed for 'href': value is required"
+            )
+        }
+        href = try container.sdkDecodeRequired(.href)
+    }
+}
+
+public extension WebhookPullRequestAssignedPullRequestLinksReviewComment {
+    init(href: String) {
+        self.href = href
     }
 }

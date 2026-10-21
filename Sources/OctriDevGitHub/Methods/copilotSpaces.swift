@@ -7,3 +7,52 @@ import Foundation
     import FoundationNetworking
 #endif
 public enum CopilotSpacesMethods {}
+
+public extension CopilotSpacesMethods {
+    /// Lists Copilot Spaces owned by an organization. The authenticated user must have read access to the
+    /// organization's Copilot Spaces. Only Spaces that are readable by the authenticated user are returned. This
+    /// includes public Spaces and internal Spaces if the user is a member of the organization. OAuth app tokens and
+    /// personal access tokens (classic) need the `read:org` scope to use this endpoint. Fine-grained tokens and GitHub
+    /// App user access tokens must have been granted access to the organization that owns the space. They must also
+    /// have been granted access to every repository referenced by resources in a space; spaces with inaccessible
+    /// resources are omitted from the response.
+    ///
+    /// - Parameters:
+    /// - org: The organization name. The name is not case sensitive.
+    /// - perPage: The number of results per page (max 100).
+    /// - before: A cursor, as given in the [Link
+    ///   header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api
+    ///   #using-link-headers). If specified, the query only searches for results
+    ///   before this cursor.
+    /// - after: A cursor, as given in the [Link
+    ///   header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api
+    ///   #using-link-headers). If specified, the query only searches for results
+    ///   after this cursor.
+    static func copilotSpacesListForOrg(
+        config: ClientConfig,
+        org: String,
+        perPage: Int? = nil,
+        before: String? = nil,
+        after: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CopilotSpacesListForOrgResponse {
+        if let perPage {
+            try validateRange("per_page", Double(perPage), min: 1, max: 100)
+        }
+
+        return try await (sdkRequest(
+            "GET",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/copilot-spaces"].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("before", value: before),
+                SdkQueryParameter("after", value: after),
+            ],
+            decoder: .json,
+            operationId: "copilotSpacesListForOrg",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self]
+        )).data
+    }
+}

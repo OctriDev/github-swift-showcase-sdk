@@ -7,3 +7,26 @@ import Foundation
     import FoundationNetworking
 #endif
 public enum AppsMethods {}
+
+public extension AppsMethods {
+    /// Retrieves a GitHub App by its URL-friendly slug. Use the `app_slug` path parameter shown in the app's settings
+    /// URL to identify the app.
+    ///
+    /// > [!NOTE] > The `:app_slug` is just the URL-friendly name of your GitHub App. You can find this on the settings
+    /// page for your GitHub App (e.g., `https://github.com/settings/apps/:app_slug`).
+    static func appsGetBySlug(
+        config: ClientConfig,
+        appSlug: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Integration {
+        try await (sdkRequest(
+            "GET",
+            ["/apps/", sdkEncodePathSegment(sdkWireString(appSlug))].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "appsGetBySlug",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self]
+        )).data
+    }
+}

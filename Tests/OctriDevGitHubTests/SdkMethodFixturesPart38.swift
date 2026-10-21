@@ -5,6 +5,14 @@ import Foundation
 @testable import OctriDevGitHub
 import XCTest
 
+let sdkMethodFixture1254Expected = String(
+    data: Data(base64Encoded: [
+        "eyJtZXNzYWdlIjoiZXhhbXBsZSB0ZXh0IiwiZG9jdW1lbnRhdGlvbl91cmwiOiJodHRwczovL2V4YW1w",
+        "bGUuY29tIiwidXJsIjoiaHR0cHM6Ly9leGFtcGxlLmNvbSIsInN0YXR1cyI6ImFjdGl2ZSJ9",
+    ].joined())!,
+    encoding: .utf8
+)!
+
 let sdkMethodFixture1259Expected = String(
     data: Data(base64Encoded: [
         "eyJtZXNzYWdlIjoiZXhhbXBsZSB0ZXh0IiwiZG9jdW1lbnRhdGlvbl91cmwiOiJodHRwczovL2V4YW1w",
@@ -631,21 +639,6 @@ let sdkMethodFixture1310Expected = String(
         "Oi8vYXBpLmdpdGh1Yi5jb20vcmVwb3Mvb2N0b2NhdC9vY3RvLW5hbWUtcmVwby9kZXBsb3ltZW50cyJ9",
         "LCJodG1sX3VybCI6Imh0dHBzOi8vZ2l0aHViLmNvbS9vY3RvY2F0L29jdG8tbmFtZS1yZXBvL3BhY2th",
         "Z2VzLzQwMjAxIn0=",
-    ].joined())!,
-    encoding: .utf8
-)!
-
-let sdkMethodFixture1311Expected = String(
-    data: Data(base64Encoded: [
-        "eyJpZCI6MjE0LCJuYW1lIjoic2hhMjU2OjM1NjFmMGNmZjA2Y2FjY2RkYjk5YzkzYmQyNmU3MTJmY2M1",
-        "NmE4MTFkZTBmOGVhN2ExN2JiODY1ZjMwYjE3NmEiLCJ1cmwiOiJodHRwczovL2FwaS5naXRodWIuY29t",
-        "L3VzZXJzL29jdG9jYXQvcGFja2FnZXMvY29udGFpbmVyL2hlbGxvX2RvY2tlci92ZXJzaW9ucy8yMTQi",
-        "LCJwYWNrYWdlX2h0bWxfdXJsIjoiaHR0cHM6Ly9naXRodWIuY29tL3VzZXJzL29jdG9jYXQvcGFja2Fn",
-        "ZXMvY29udGFpbmVyL3BhY2thZ2UvaGVsbG9fZG9ja2VyIiwiY3JlYXRlZF9hdCI6IjIwMjAtMDUtMTVU",
-        "MDM6NDY6NDVaIiwidXBkYXRlZF9hdCI6IjIwMjAtMDUtMTVUMDM6NDY6NDVaIiwiaHRtbF91cmwiOiJo",
-        "dHRwczovL2dpdGh1Yi5jb20vdXNlcnMvb2N0b2NhdC9wYWNrYWdlcy9jb250YWluZXIvaGVsbG9fZG9j",
-        "a2VyLzIxNCIsIm1ldGFkYXRhIjp7InBhY2thZ2VfdHlwZSI6ImNvbnRhaW5lciIsImNvbnRhaW5lciI6",
-        "eyJ0YWdzIjpbIjEuMTMuNiJdfX19",
     ].joined())!,
     encoding: .utf8
 )!

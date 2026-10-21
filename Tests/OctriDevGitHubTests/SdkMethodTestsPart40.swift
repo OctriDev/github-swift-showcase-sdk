@@ -208,22 +208,6 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testGitignoreGetAllTemplatesGitignoreGetAllTemplatesReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.gitignore.getAllTemplates()
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture895Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "decoded a response that differs from the mock"
-        )
-    }
-
     func testGitignoreGetTemplateGitignoreGetTemplateReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
@@ -233,7 +217,7 @@ extension SdkMethodTests {
             name: decoded("\"Example Name\"")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture896Expected.utf8),
+            with: Data(sdkMethodFixture895Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
@@ -253,7 +237,7 @@ extension SdkMethodTests {
             ref: decoded("\"heads/feature-a\"")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture897Expected.utf8),
+            with: Data(sdkMethodFixture896Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
@@ -268,7 +252,7 @@ extension SdkMethodTests {
         }
         _ = client
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture898Expected.utf8),
+            with: Data(sdkMethodFixture897Expected.utf8),
             options: [.fragmentsAllowed]
         )
         do {
@@ -305,7 +289,7 @@ extension SdkMethodTests {
             force: decoded("true")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture899Expected.utf8),
+            with: Data(sdkMethodFixture898Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
@@ -320,7 +304,7 @@ extension SdkMethodTests {
         }
         _ = client
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture900Expected.utf8),
+            with: Data(sdkMethodFixture899Expected.utf8),
             options: [.fragmentsAllowed]
         )
         do {
@@ -361,7 +345,7 @@ extension SdkMethodTests {
             failoverNetworkEnabled: decoded("null")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture901Expected.utf8),
+            with: Data(sdkMethodFixture900Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
@@ -394,7 +378,7 @@ extension SdkMethodTests {
             networkConfigurationId: decoded("\"network_configuration-1\"")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture903Expected.utf8),
+            with: Data(sdkMethodFixture902Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
@@ -414,7 +398,7 @@ extension SdkMethodTests {
             networkSettingsId: decoded("\"network_settings-1\"")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture904Expected.utf8),
+            with: Data(sdkMethodFixture903Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
@@ -435,7 +419,7 @@ extension SdkMethodTests {
             page: decoded("1")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture905Expected.utf8),
+            with: Data(sdkMethodFixture904Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
@@ -460,7 +444,7 @@ extension SdkMethodTests {
             failoverNetworkEnabled: decoded("null")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture906Expected.utf8),
+            with: Data(sdkMethodFixture905Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
@@ -480,7 +464,7 @@ extension SdkMethodTests {
             repo: decoded("\"repo\"")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture907Expected.utf8),
+            with: Data(sdkMethodFixture906Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
@@ -496,7 +480,7 @@ extension SdkMethodTests {
         }
         _ = client
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture908Expected.utf8),
+            with: Data(sdkMethodFixture907Expected.utf8),
             options: [.fragmentsAllowed]
         )
         do {
@@ -529,12 +513,41 @@ extension SdkMethodTests {
             org: decoded("\"org\"")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture909Expected.utf8),
+            with: Data(sdkMethodFixture908Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
             try mismatch(jsonValue(actual), expected),
             "decoded a response that differs from the mock"
         )
+    }
+
+    func testInteractionsGetPullRequestCreationCapForOrgInteractionsGetPulX290ed82f7fReachesMockAndDecodesResponse(
+    ) async throws {
+        guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
+            return
+        }
+        _ = client
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture909Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        do {
+            _ = try await client.interactions.getPullRequestCreationCapForOrg(
+                org: decoded("\"org\"")
+            )
+            XCTFail("did not raise its declared error")
+        } catch let error as SdkHttpError {
+            XCTAssertEqual(error.statusCode, 403)
+            let data = try XCTUnwrap(
+                error.data as? any Encodable,
+                "decoded no error body"
+            )
+            XCTAssertNil(
+                try mismatch(jsonValue(data), expected),
+                "decoded an error body that differs from the mock"
+            )
+        }
+        XCTAssertTrue(true)
     }
 }

@@ -9,7 +9,7 @@ import Foundation
 public enum GitignoreMethods {
     /// List all templates available to pass as an option when [creating a
     /// repository](https://docs.github.com/rest/repos/repos#create-a-repository-for-the-authenticated-user).
-    public static func gitignoreGetAllTemplates(
+    public static func listTemplates(
         config: ClientConfig,
         requestOptions: RequestOptions? = nil
     ) async throws -> [String] {
@@ -18,7 +18,7 @@ public enum GitignoreMethods {
             "/gitignore/templates",
             config: config,
             decoder: .json,
-            operationId: "gitignoreGetAllTemplates",
+            operationId: "listTemplates",
             options: requestOptions
         )).data
     }

@@ -4,9 +4,297 @@
 import Foundation
 
 /// WebhookIssuesDeleted domain models
-/// Required object value serialized in the `user` wire field.
-public struct WebhookIssuesDeletedIssueUser: Codable {
-    /// Required `int64`-formatted value serialized in the `id` wire field.
+public extension WebhookIssuesDeleted {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.action) else {
+            throw SdkValidationError(
+                field: "action",
+                code: "required",
+                message: "Validation failed for 'action': value is required"
+            )
+        }
+        guard container.contains(.issue) else {
+            throw SdkValidationError(
+                field: "issue",
+                code: "required",
+                message: "Validation failed for 'issue': value is required"
+            )
+        }
+        guard container.contains(.repository) else {
+            throw SdkValidationError(
+                field: "repository",
+                code: "required",
+                message: "Validation failed for 'repository': value is required"
+            )
+        }
+        guard container.contains(.sender) else {
+            throw SdkValidationError(
+                field: "sender",
+                code: "required",
+                message: "Validation failed for 'sender': value is required"
+            )
+        }
+        action = try container.sdkDecodeRequired(.action)
+        issue = try container.sdkDecodeRequired(.issue)
+        repository = try container.sdkDecodeRequired(.repository)
+        sender = try container.sdkDecodeRequired(.sender)
+        enterprise = try container.sdkDecodeIfPresent(.enterprise)
+        installation = try container.sdkDecodeIfPresent(.installation)
+        organization = try container.sdkDecodeIfPresent(.organization)
+    }
+}
+
+public extension WebhookIssuesDeleted {
+    init(
+        action: WebhookIssuesDeletedAction,
+        issue: WebhookIssuesDeletedIssue,
+        repository: RepositoryWebhooks,
+        sender: SimpleUser,
+        enterprise: EnterpriseWebhooks? = nil,
+        installation: SimpleInstallation? = nil,
+        organization: OrganizationSimpleWebhooks? = nil
+    ) {
+        (self.action, self.issue) = (action, issue)
+        (self.repository, self.sender) = (repository, sender)
+        (self.enterprise, self.installation) = (enterprise, installation)
+        self.organization = organization
+    }
+}
+
+/// The set of permissions for the GitHub app
+public struct WebhookIssuesDeletedIssuePerformedViaGithubAppPermissions: Codable {
+    /// Optional enumerated value serialized in the `actions` wire field.
+    public var actions: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsActions?
+    /// Optional enumerated value serialized in the `administration` wire field.
+    public var administration: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsAdministration?
+    /// Optional enumerated value serialized in the `checks` wire field.
+    public var checks: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsChecks?
+    /// Optional enumerated value serialized in the `content_references` wire field.
+    public var contentReferences: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsContXd5c8af3ce1?
+    /// Optional enumerated value serialized in the `contents` wire field.
+    public var contents: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsContents?
+    /// Optional enumerated value serialized in the `deployments` wire field.
+    public var deployments: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsDeployments?
+    /// Optional enumerated value serialized in the `discussions` wire field.
+    public var discussions: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsDiscussions?
+    /// Optional enumerated value serialized in the `emails` wire field.
+    public var emails: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsEmails?
+    /// Optional enumerated value serialized in the `environments` wire field.
+    public var environments: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsEnvironments?
+    /// Optional enumerated value serialized in the `issues` wire field.
+    public var issues: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsIssues?
+    /// Optional enumerated value serialized in the `keys` wire field.
+    public var keys: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsKeys?
+    /// Optional enumerated value serialized in the `members` wire field.
+    public var members: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsMembers?
+    /// Optional enumerated value serialized in the `metadata` wire field.
+    public var metadata: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsMetadata?
+    /// Optional enumerated value serialized in the `organization_administration` wire field.
+    public var organizationAdministration: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsOrgaXbaca39b798?
+    /// Optional enumerated value serialized in the `organization_hooks` wire field.
+    public var organizationHooks: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsOrgaX0fc214f990?
+    /// Optional enumerated value serialized in the `organization_packages` wire field.
+    public var organizationPackages: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsOrgaXa6453eb00c?
+    /// Optional enumerated value serialized in the `organization_plan` wire field.
+    public var organizationPlan: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsOrgaXede27de751?
+    /// Optional enumerated value serialized in the `organization_projects` wire field.
+    public var organizationProjects: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsOrgaX9affd417bd?
+    /// Optional enumerated value serialized in the `organization_secrets` wire field.
+    public var organizationSecrets: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsOrgaX42bbb50660?
+    /// Optional enumerated value serialized in the `organization_self_hosted_runners` wire field.
+    public var organizationSelfHostedRunners: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsOrgaX9ea4d38641?
+    /// Optional enumerated value serialized in the `organization_user_blocking` wire field.
+    public var organizationUserBlocking: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsOrgaXb9b6c98ea0?
+    /// Optional enumerated value serialized in the `packages` wire field.
+    public var packages: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsPackages?
+    /// Optional enumerated value serialized in the `pages` wire field.
+    public var pages: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsPages?
+    /// Optional enumerated value serialized in the `pull_requests` wire field.
+    public var pullRequests: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsPullRequests?
+    /// Optional enumerated value serialized in the `repository_hooks` wire field.
+    public var repositoryHooks: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsRepositoryHooks?
+    /// Optional enumerated value serialized in the `repository_projects` wire field.
+    public var repositoryProjects: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsRepoXbc420b7212?
+    /// Optional enumerated value serialized in the `secret_scanning_alerts` wire field.
+    public var secretScanningAlerts: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsSecrXe956ccef30?
+    /// Optional enumerated value serialized in the `secrets` wire field.
+    public var secrets: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsSecrets?
+    /// Optional enumerated value serialized in the `security_events` wire field.
+    public var securityEvents: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsSecurityEvents?
+    /// Optional enumerated value serialized in the `security_scanning_alert` wire field.
+    public var securityScanningAlert: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsSecuX420be8aac4?
+    /// Optional enumerated value serialized in the `single_file` wire field.
+    public var singleFile: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsSingleFile?
+    /// Optional enumerated value serialized in the `statuses` wire field.
+    public var statuses: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsStatuses?
+    /// Optional enumerated value serialized in the `vulnerability_alerts` wire field.
+    public var vulnerabilityAlerts: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsVulnXd78659be69?
+    /// Optional enumerated value serialized in the `workflows` wire field.
+    public var workflows: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsWorkflows?
+
+    enum CodingKeys: String, CodingKey {
+        case actions
+        case administration
+        case checks
+        case contentReferences = "content_references"
+        case contents
+        case deployments
+        case discussions
+        case emails
+        case environments
+        case issues
+        case keys
+        case members
+        case metadata
+        case organizationAdministration = "organization_administration"
+        case organizationHooks = "organization_hooks"
+        case organizationPackages = "organization_packages"
+        case organizationPlan = "organization_plan"
+        case organizationProjects = "organization_projects"
+        case organizationSecrets = "organization_secrets"
+        case organizationSelfHostedRunners = "organization_self_hosted_runners"
+        case organizationUserBlocking = "organization_user_blocking"
+        case packages
+        case pages
+        case pullRequests = "pull_requests"
+        case repositoryHooks = "repository_hooks"
+        case repositoryProjects = "repository_projects"
+        case secretScanningAlerts = "secret_scanning_alerts"
+        case secrets
+        case securityEvents = "security_events"
+        case securityScanningAlert = "security_scanning_alert"
+        case singleFile = "single_file"
+        case statuses
+        case vulnerabilityAlerts = "vulnerability_alerts"
+        case workflows
+    }
+
+    init() {
+        (actions, administration, checks, contentReferences, contents) = (nil, nil, nil, nil, nil)
+        (deployments, discussions, emails, environments, issues) = (nil, nil, nil, nil, nil)
+        (keys, members, metadata, organizationAdministration, organizationHooks) = (nil, nil, nil, nil, nil)
+        (
+            organizationPackages,
+            organizationPlan,
+            organizationProjects,
+            organizationSecrets,
+            organizationSelfHostedRunners
+        ) = (nil, nil, nil, nil, nil)
+        (organizationUserBlocking, packages, pages, pullRequests, repositoryHooks) = (nil, nil, nil, nil, nil)
+        (repositoryProjects, secretScanningAlerts, secrets, securityEvents, securityScanningAlert) = (
+            nil,
+            nil,
+            nil,
+            nil,
+            nil
+        )
+        (singleFile, statuses, vulnerabilityAlerts, workflows) = (nil, nil, nil, nil)
+    }
+}
+
+public extension WebhookIssuesDeletedIssuePerformedViaGithubAppPermissions {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        actions = try container.sdkDecodeIfPresent(.actions)
+        administration = try container.sdkDecodeIfPresent(.administration)
+        checks = try container.sdkDecodeIfPresent(.checks)
+        contentReferences = try container.sdkDecodeIfPresent(.contentReferences)
+        contents = try container.sdkDecodeIfPresent(.contents)
+        deployments = try container.sdkDecodeIfPresent(.deployments)
+        discussions = try container.sdkDecodeIfPresent(.discussions)
+        emails = try container.sdkDecodeIfPresent(.emails)
+        environments = try container.sdkDecodeIfPresent(.environments)
+        issues = try container.sdkDecodeIfPresent(.issues)
+        keys = try container.sdkDecodeIfPresent(.keys)
+        members = try container.sdkDecodeIfPresent(.members)
+        metadata = try container.sdkDecodeIfPresent(.metadata)
+        organizationAdministration = try container.sdkDecodeIfPresent(.organizationAdministration)
+        organizationHooks = try container.sdkDecodeIfPresent(.organizationHooks)
+        organizationPackages = try container.sdkDecodeIfPresent(.organizationPackages)
+        organizationPlan = try container.sdkDecodeIfPresent(.organizationPlan)
+        organizationProjects = try container.sdkDecodeIfPresent(.organizationProjects)
+        organizationSecrets = try container.sdkDecodeIfPresent(.organizationSecrets)
+        organizationSelfHostedRunners = try container.sdkDecodeIfPresent(.organizationSelfHostedRunners)
+        organizationUserBlocking = try container.sdkDecodeIfPresent(.organizationUserBlocking)
+        packages = try container.sdkDecodeIfPresent(.packages)
+        pages = try container.sdkDecodeIfPresent(.pages)
+        pullRequests = try container.sdkDecodeIfPresent(.pullRequests)
+        repositoryHooks = try container.sdkDecodeIfPresent(.repositoryHooks)
+        repositoryProjects = try container.sdkDecodeIfPresent(.repositoryProjects)
+        secretScanningAlerts = try container.sdkDecodeIfPresent(.secretScanningAlerts)
+        secrets = try container.sdkDecodeIfPresent(.secrets)
+        securityEvents = try container.sdkDecodeIfPresent(.securityEvents)
+        securityScanningAlert = try container.sdkDecodeIfPresent(.securityScanningAlert)
+        singleFile = try container.sdkDecodeIfPresent(.singleFile)
+        statuses = try container.sdkDecodeIfPresent(.statuses)
+        vulnerabilityAlerts = try container.sdkDecodeIfPresent(.vulnerabilityAlerts)
+        workflows = try container.sdkDecodeIfPresent(.workflows)
+    }
+}
+
+public extension WebhookIssuesDeletedIssuePerformedViaGithubAppPermissions {
+    init(
+        actions: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsActions? = nil,
+        administration: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsAdministration? = nil,
+        checks: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsChecks? = nil,
+        contentReferences: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsContXd5c8af3ce1? = nil,
+        contents: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsContents? = nil,
+        deployments: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsDeployments? = nil,
+        discussions: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsDiscussions? = nil,
+        emails: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsEmails? = nil,
+        environments: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsEnvironments? = nil,
+        issues: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsIssues? = nil,
+        keys: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsKeys? = nil,
+        members: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsMembers? = nil,
+        metadata: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsMetadata? = nil,
+        organizationAdministration: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsOrgaXbaca39b798? = nil,
+        organizationHooks: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsOrgaX0fc214f990? = nil,
+        organizationPackages: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsOrgaXa6453eb00c? = nil,
+        organizationPlan: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsOrgaXede27de751? = nil,
+        organizationProjects: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsOrgaX9affd417bd? = nil,
+        organizationSecrets: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsOrgaX42bbb50660? = nil,
+        organizationSelfHostedRunners: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsOrgaX9ea4d38641? = nil,
+        organizationUserBlocking: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsOrgaXb9b6c98ea0? = nil,
+        packages: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsPackages? = nil,
+        pages: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsPages? = nil,
+        pullRequests: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsPullRequests? = nil,
+        repositoryHooks: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsRepositoryHooks? = nil,
+        repositoryProjects: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsRepoXbc420b7212? = nil,
+        secretScanningAlerts: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsSecrXe956ccef30? = nil,
+        secrets: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsSecrets? = nil,
+        securityEvents: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsSecurityEvents? = nil,
+        securityScanningAlert: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsSecuX420be8aac4? = nil,
+        singleFile: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsSingleFile? = nil,
+        statuses: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsStatuses? = nil,
+        vulnerabilityAlerts: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsVulnXd78659be69? = nil,
+        workflows: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissionsWorkflows? = nil
+    ) {
+        self.init()
+        (self.actions, self.administration) = (actions, administration)
+        (self.checks, self.contentReferences) = (checks, contentReferences)
+        (self.contents, self.deployments) = (contents, deployments)
+        (self.discussions, self.emails) = (discussions, emails)
+        (self.environments, self.issues) = (environments, issues)
+        (self.keys, self.members) = (keys, members)
+        (self.metadata, self.organizationAdministration) = (metadata, organizationAdministration)
+        (self.organizationHooks, self.organizationPackages) = (organizationHooks, organizationPackages)
+        (self.organizationPlan, self.organizationProjects) = (organizationPlan, organizationProjects)
+        self.organizationSecrets = organizationSecrets
+        self.organizationSelfHostedRunners = organizationSelfHostedRunners
+        (self.organizationUserBlocking, self.packages) = (organizationUserBlocking, packages)
+        (self.pages, self.pullRequests) = (pages, pullRequests)
+        (self.repositoryHooks, self.repositoryProjects) = (repositoryHooks, repositoryProjects)
+        (self.secretScanningAlerts, self.secrets) = (secretScanningAlerts, secrets)
+        (self.securityEvents, self.securityScanningAlert) = (securityEvents, securityScanningAlert)
+        (self.singleFile, self.statuses) = (singleFile, statuses)
+        (self.vulnerabilityAlerts, self.workflows) = (vulnerabilityAlerts, workflows)
+    }
+}
+
+/// Optional object value serialized in the `assignee` wire field.
+public struct WebhookIssuesDeletedIssueAssignee: Codable {
+    /// Required `integer` value serialized in the `id` wire field.
     public var id: Int
     /// Required `string` value serialized in the `login` wire field.
     public var login: String
@@ -45,7 +333,7 @@ public struct WebhookIssuesDeletedIssueUser: Codable {
     /// Optional `uri`-formatted value serialized in the `subscriptions_url` wire field.
     public var subscriptionsUrl: String?
     /// Optional enumerated value serialized in the `type` wire field.
-    public var type: WebhookIssuesDeletedIssueUserType?
+    public var type: WebhookIssuesDeletedIssueAssigneeType?
     /// Optional `uri`-formatted value serialized in the `url` wire field.
     public var url: String?
     /// Optional `string` value serialized in the `user_view_type` wire field.
@@ -81,7 +369,7 @@ public struct WebhookIssuesDeletedIssueUser: Codable {
     }
 }
 
-public extension WebhookIssuesDeletedIssueUser {
+public extension WebhookIssuesDeletedIssueAssignee {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
@@ -124,7 +412,7 @@ public extension WebhookIssuesDeletedIssueUser {
     }
 }
 
-public extension WebhookIssuesDeletedIssueUser {
+public extension WebhookIssuesDeletedIssueAssignee {
     init(
         id: Int,
         login: String,
@@ -145,7 +433,7 @@ public extension WebhookIssuesDeletedIssueUser {
         siteAdmin: Bool? = nil,
         starredUrl: String? = nil,
         subscriptionsUrl: String? = nil,
-        type: WebhookIssuesDeletedIssueUserType? = nil,
+        type: WebhookIssuesDeletedIssueAssigneeType? = nil,
         url: String? = nil,
         userViewType: String? = nil
     ) throws {
@@ -164,7 +452,7 @@ public extension WebhookIssuesDeletedIssueUser {
     }
 }
 
-extension WebhookIssuesDeletedIssueUser {
+extension WebhookIssuesDeletedIssueAssignee {
     func sdkValidateConstraints() throws {
         if let value = avatarUrl {
             try sdkValidateUri("avatar_url", value)
@@ -193,118 +481,48 @@ extension WebhookIssuesDeletedIssueUser {
     }
 }
 
-/// The issue itself.
-public struct WebhookIssuesDeletedIssue: Codable {
-    /// Required enumerated value serialized in the `active_lock_reason` wire field.
-    public var activeLockReason: WebhookIssuesDeletedIssueActiveLockReason?
-    /// Required array value serialized in the `assignees` wire field.
-    public var assignees: [WebhookIssuesDeletedIssueAssigneesItem?]
-    /// How the author is associated with the repository.
-    public var authorAssociation: WebhookIssuesDeletedIssueAuthorAssociation
-    /// Contents of the issue
-    public var body: String?
-    /// Required `date-time`-formatted value serialized in the `closed_at` wire field.
-    public var closedAt: Date?
-    /// Required `integer` value serialized in the `comments` wire field.
-    public var comments: Int
-    /// Required `uri`-formatted value serialized in the `comments_url` wire field.
-    public var commentsUrl: String
+/// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts
+/// and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub
+/// apps are first class actors within GitHub.
+public struct WebhookIssuesDeletedIssuePerformedViaGithubApp: Codable {
     /// Required `date-time`-formatted value serialized in the `created_at` wire field.
-    public var createdAt: Date
-    /// Required `uri`-formatted value serialized in the `events_url` wire field.
-    public var eventsUrl: String
+    public var createdAt: Date?
+    /// Required `string` value serialized in the `description` wire field.
+    public var description: String?
+    /// Required `uri`-formatted value serialized in the `external_url` wire field.
+    public var externalUrl: String?
     /// Required `uri`-formatted value serialized in the `html_url` wire field.
     public var htmlUrl: String
-    /// Required `int64`-formatted value serialized in the `id` wire field.
-    public var id: Int
-    /// Required `uri-template`-formatted value serialized in the `labels_url` wire field.
-    public var labelsUrl: String
-    /// A collection of related issues and pull requests.
-    public var milestone: WebhookIssuesDeletedIssueMilestone?
+    /// Unique identifier of the GitHub app
+    public var id: Int?
+    /// The name of the GitHub app
+    public var name: String
     /// Required `string` value serialized in the `node_id` wire field.
     public var nodeId: String
-    /// Required `integer` value serialized in the `number` wire field.
-    public var number: Int
-    /// Required object value serialized in the `reactions` wire field.
-    public var reactions: WebhookIssuesDeletedIssueReactions
-    /// Required `uri`-formatted value serialized in the `repository_url` wire field.
-    public var repositoryUrl: String
-    /// Title of the issue
-    public var title: String
+    /// Required object value serialized in the `owner` wire field.
+    public var owner: WebhookIssuesDeletedIssuePerformedViaGithubAppOwner?
     /// Required `date-time`-formatted value serialized in the `updated_at` wire field.
-    public var updatedAt: Date
-    /// URL for the issue
-    public var url: String
-    /// Required object value serialized in the `user` wire field.
-    public var user: WebhookIssuesDeletedIssueUser?
-    /// Optional object value serialized in the `assignee` wire field.
-    public var assignee: WebhookIssuesDeletedIssueAssignee?
-    /// Optional `boolean` value serialized in the `draft` wire field.
-    public var draft: Bool?
-    /// Optional array value serialized in the `labels` wire field.
-    public var labels: [WebhookIssuesDeletedIssueLabelsItem]?
-    /// Optional `boolean` value serialized in the `locked` wire field.
-    public var locked: Bool?
-    /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user
-    /// accounts and granted access to specific repositories. They come with granular permissions and built-in
-    /// webhooks. GitHub apps are first class actors within GitHub.
-    public var performedViaGithubApp: WebhookIssuesDeletedIssuePerformedViaGithubApp?
-    /// Optional object value serialized in the `pull_request` wire field.
-    public var pullRequest: WebhookIssuesDeletedIssuePullRequest?
-    /// Comments provide a way for people to collaborate on an issue.
-    public var pinnedComment: NullableIssueComment?
-    /// Optional object value serialized in the `sub_issues_summary` wire field.
-    public var subIssuesSummary: SubIssuesSummary?
-    /// Optional object value serialized in the `issue_dependencies_summary` wire field.
-    public var issueDependenciesSummary: IssueDependenciesSummary?
-    /// Optional array value serialized in the `issue_field_values` wire field.
-    public var issueFieldValues: [IssueFieldValue]?
-    /// State of the issue; either 'open' or 'closed'
-    public var state: WebhookIssuesDeletedIssueState?
-    /// Optional `string` value serialized in the `state_reason` wire field.
-    public var stateReason: String?
-    /// Optional `uri`-formatted value serialized in the `timeline_url` wire field.
-    public var timelineUrl: String?
-    /// The type assigned to the issue. This is only present for issues in repositories where issue types are
-    /// supported.
-    public var type: IssueType?
+    public var updatedAt: Date?
+    /// The list of events for the GitHub app
+    public var events: [WebhookIssuesDeletedIssuePerformedViaGithubAppEventsItem]?
+    /// The set of permissions for the GitHub app
+    public var permissions: WebhookIssuesDeletedIssuePerformedViaGithubAppPermissions?
+    /// The slug name of the GitHub app
+    public var slug: String?
 
     enum CodingKeys: String, CodingKey {
-        case activeLockReason = "active_lock_reason"
-        case assignees
-        case authorAssociation = "author_association"
-        case body
-        case closedAt = "closed_at"
-        case comments
-        case commentsUrl = "comments_url"
         case createdAt = "created_at"
-        case eventsUrl = "events_url"
+        case description
+        case externalUrl = "external_url"
         case htmlUrl = "html_url"
         case id
-        case labelsUrl = "labels_url"
-        case milestone
+        case name
         case nodeId = "node_id"
-        case number
-        case reactions
-        case repositoryUrl = "repository_url"
-        case title
+        case owner
         case updatedAt = "updated_at"
-        case url
-        case user
-        case assignee
-        case draft
-        case labels
-        case locked
-        case performedViaGithubApp = "performed_via_github_app"
-        case pullRequest = "pull_request"
-        case pinnedComment = "pinned_comment"
-        case subIssuesSummary = "sub_issues_summary"
-        case issueDependenciesSummary = "issue_dependencies_summary"
-        case issueFieldValues = "issue_field_values"
-        case state
-        case stateReason = "state_reason"
-        case timelineUrl = "timeline_url"
-        case type
+        case events
+        case permissions
+        case slug
     }
 
     private init(sdkCopy value: Self) {
@@ -312,285 +530,30 @@ public struct WebhookIssuesDeletedIssue: Codable {
     }
 }
 
-public extension WebhookIssuesDeletedIssue {
+public extension WebhookIssuesDeletedIssuePerformedViaGithubApp {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        activeLockReason = try container.sdkDecodeNullable(.activeLockReason)
-        assignees = try container.sdkDecodeRequired(.assignees)
-        authorAssociation = try container.sdkDecodeRequired(.authorAssociation)
-        body = try container.sdkDecodeNullable(.body)
-        closedAt = try container.sdkDecodeNullable(.closedAt)
-        comments = try container.sdkDecodeRequired(.comments)
-        commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
+        createdAt = try container.sdkDecodeNullable(.createdAt)
+        description = try container.sdkDecodeNullable(.description)
+        externalUrl = try container.sdkDecodeNullable(.externalUrl)
         htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        id = try container.sdkDecodeRequired(.id)
-        labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
-        milestone = try container.sdkDecodeNullable(.milestone)
+        id = try container.sdkDecodeNullable(.id)
+        name = try container.sdkDecodeRequired(.name)
         nodeId = try container.sdkDecodeRequired(.nodeId)
-        number = try container.sdkDecodeRequired(.number)
-        reactions = try container.sdkDecodeRequired(.reactions)
-        repositoryUrl = try container.sdkDecodeRequired(.repositoryUrl)
-        title = try container.sdkDecodeRequired(.title)
-        updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        url = try container.sdkDecodeRequired(.url)
-        user = try container.sdkDecodeNullable(.user)
-        assignee = try container.sdkDecodeIfPresent(.assignee)
-        draft = try container.sdkDecodeIfPresent(.draft)
-        labels = try container.sdkDecodeIfPresent(.labels)
-        locked = try container.sdkDecodeIfPresent(.locked)
-        performedViaGithubApp = try container.sdkDecodeIfPresent(.performedViaGithubApp)
-        pullRequest = try container.sdkDecodeIfPresent(.pullRequest)
-        pinnedComment = try container.sdkDecodeIfPresent(.pinnedComment)
-        subIssuesSummary = try container.sdkDecodeIfPresent(.subIssuesSummary)
-        issueDependenciesSummary = try container.sdkDecodeIfPresent(.issueDependenciesSummary)
-        issueFieldValues = try container.sdkDecodeIfPresent(.issueFieldValues)
-        state = try container.sdkDecodeIfPresent(.state)
-        stateReason = try container.sdkDecodeIfPresent(.stateReason)
-        timelineUrl = try container.sdkDecodeIfPresent(.timelineUrl)
-        type = try container.sdkDecodeIfPresent(.type)
-        try sdkValidateConstraints()
-    }
-}
-
-public extension WebhookIssuesDeletedIssue {
-    init(
-        activeLockReason: WebhookIssuesDeletedIssueActiveLockReason?,
-        assignees: [WebhookIssuesDeletedIssueAssigneesItem?],
-        authorAssociation: WebhookIssuesDeletedIssueAuthorAssociation,
-        body: String?,
-        closedAt: Date?,
-        comments: Int,
-        commentsUrl: String,
-        createdAt: Date,
-        eventsUrl: String,
-        htmlUrl: String,
-        id: Int,
-        labelsUrl: String,
-        milestone: WebhookIssuesDeletedIssueMilestone?,
-        nodeId: String,
-        number: Int,
-        reactions: WebhookIssuesDeletedIssueReactions,
-        repositoryUrl: String,
-        title: String,
-        updatedAt: Date,
-        url: String,
-        user: WebhookIssuesDeletedIssueUser?,
-        assignee: WebhookIssuesDeletedIssueAssignee? = nil,
-        draft: Bool? = nil,
-        labels: [WebhookIssuesDeletedIssueLabelsItem]? = nil,
-        locked: Bool? = nil,
-        performedViaGithubApp: WebhookIssuesDeletedIssuePerformedViaGithubApp? = nil,
-        pullRequest: WebhookIssuesDeletedIssuePullRequest? = nil,
-        pinnedComment: NullableIssueComment? = nil,
-        subIssuesSummary: SubIssuesSummary? = nil,
-        issueDependenciesSummary: IssueDependenciesSummary? = nil,
-        issueFieldValues: [IssueFieldValue]? = nil,
-        state: WebhookIssuesDeletedIssueState? = nil,
-        stateReason: String? = nil,
-        timelineUrl: String? = nil,
-        type: IssueType? = nil
-    ) throws {
-        (self.activeLockReason, self.assignees) = (activeLockReason, assignees)
-        (self.authorAssociation, self.body) = (authorAssociation, body)
-        (self.closedAt, self.comments) = (closedAt, comments)
-        (self.commentsUrl, self.createdAt) = (commentsUrl, createdAt)
-        (self.eventsUrl, self.htmlUrl) = (eventsUrl, htmlUrl)
-        (self.id, self.labelsUrl) = (id, labelsUrl)
-        (self.milestone, self.nodeId) = (milestone, nodeId)
-        (self.number, self.reactions) = (number, reactions)
-        (self.repositoryUrl, self.title) = (repositoryUrl, title)
-        (self.updatedAt, self.url) = (updatedAt, url)
-        (self.user, self.assignee) = (user, assignee)
-        (self.draft, self.labels) = (draft, labels)
-        (self.locked, self.performedViaGithubApp) = (locked, performedViaGithubApp)
-        (self.pullRequest, self.pinnedComment) = (pullRequest, pinnedComment)
-        self.subIssuesSummary = subIssuesSummary
-        self.issueDependenciesSummary = issueDependenciesSummary
-        (self.issueFieldValues, self.state) = (issueFieldValues, state)
-        (self.stateReason, self.timelineUrl) = (stateReason, timelineUrl)
-        self.type = type
-        try sdkValidateConstraints()
-    }
-}
-
-extension WebhookIssuesDeletedIssue {
-    func sdkValidateConstraints() throws {
-        if let value = closedAt {
-            try sdkValidateDateTime("closed_at", sdkWireString(value))
+        owner = try container.sdkDecodeNullable(.owner)
+        updatedAt = try container.sdkDecodeNullable(.updatedAt)
+        events = try container.sdkDecodeIfPresent(.events)
+        permissions = try container.sdkDecodeIfPresent(.permissions)
+        slug = try container.sdkDecodeIfPresent(.slug)
+        if let value = createdAt {
+            try sdkValidateDateTime("created_at", sdkWireString(value))
         }
-        try sdkValidateUri("comments_url", commentsUrl)
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
-        try sdkValidateUri("events_url", eventsUrl)
+        if let value = externalUrl {
+            try sdkValidateUri("external_url", value)
+        }
         try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateUri("repository_url", repositoryUrl)
-        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
-        try sdkValidateUri("url", url)
-        if let value = timelineUrl {
-            try sdkValidateUri("timeline_url", value)
-        }
-    }
-}
-
-/// Required object value serialized in the `reactions` wire field.
-public struct WebhookIssuesDeletedIssueReactions: Codable {
-    /// Required `integer` value serialized in the `+1` wire field.
-    public var plus1: Int
-    /// Required `integer` value serialized in the `-1` wire field.
-    public var minus1: Int
-    /// Required `integer` value serialized in the `confused` wire field.
-    public var confused: Int
-    /// Required `integer` value serialized in the `eyes` wire field.
-    public var eyes: Int
-    /// Required `integer` value serialized in the `heart` wire field.
-    public var heart: Int
-    /// Required `integer` value serialized in the `hooray` wire field.
-    public var hooray: Int
-    /// Required `integer` value serialized in the `laugh` wire field.
-    public var laugh: Int
-    /// Required `integer` value serialized in the `rocket` wire field.
-    public var rocket: Int
-    /// Required `integer` value serialized in the `total_count` wire field.
-    public var totalCount: Int
-    /// Required `uri`-formatted value serialized in the `url` wire field.
-    public var url: String
-
-    enum CodingKeys: String, CodingKey {
-        case plus1 = "+1"
-        case minus1 = "-1"
-        case confused
-        case eyes
-        case heart
-        case hooray
-        case laugh
-        case rocket
-        case totalCount = "total_count"
-        case url
-    }
-
-    private init(sdkCopy value: Self) {
-        self = value
-    }
-}
-
-public extension WebhookIssuesDeletedIssueReactions {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        plus1 = try container.sdkDecodeRequired(.plus1)
-        minus1 = try container.sdkDecodeRequired(.minus1)
-        confused = try container.sdkDecodeRequired(.confused)
-        eyes = try container.sdkDecodeRequired(.eyes)
-        heart = try container.sdkDecodeRequired(.heart)
-        hooray = try container.sdkDecodeRequired(.hooray)
-        laugh = try container.sdkDecodeRequired(.laugh)
-        rocket = try container.sdkDecodeRequired(.rocket)
-        totalCount = try container.sdkDecodeRequired(.totalCount)
-        url = try container.sdkDecodeRequired(.url)
-        try sdkValidateUri("url", url)
-    }
-}
-
-public extension WebhookIssuesDeletedIssueReactions {
-    init(
-        plus1: Int,
-        minus1: Int,
-        confused: Int,
-        eyes: Int,
-        heart: Int,
-        hooray: Int,
-        laugh: Int,
-        rocket: Int,
-        totalCount: Int,
-        url: String
-    ) throws {
-        (self.plus1, self.minus1) = (plus1, minus1)
-        (self.confused, self.eyes) = (confused, eyes)
-        (self.heart, self.hooray) = (heart, hooray)
-        (self.laugh, self.rocket) = (laugh, rocket)
-        (self.totalCount, self.url) = (totalCount, url)
-        try sdkValidateUri("url", self.url)
-    }
-}
-
-/// Optional object value serialized in the `pull_request` wire field.
-public struct WebhookIssuesDeletedIssuePullRequest: Codable {
-    /// Optional `uri`-formatted value serialized in the `diff_url` wire field.
-    public var diffUrl: String?
-    /// Optional `uri`-formatted value serialized in the `html_url` wire field.
-    public var htmlUrl: String?
-    /// Optional `date-time`-formatted value serialized in the `merged_at` wire field.
-    public var mergedAt: Date?
-    /// Optional `uri`-formatted value serialized in the `patch_url` wire field.
-    public var patchUrl: String?
-    /// Optional `uri`-formatted value serialized in the `url` wire field.
-    public var url: String?
-
-    enum CodingKeys: String, CodingKey {
-        case diffUrl = "diff_url"
-        case htmlUrl = "html_url"
-        case mergedAt = "merged_at"
-        case patchUrl = "patch_url"
-        case url
-    }
-
-    init() {
-        (diffUrl, htmlUrl, mergedAt, patchUrl, url) = (nil, nil, nil, nil, nil)
-    }
-}
-
-public extension WebhookIssuesDeletedIssuePullRequest {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        diffUrl = try container.sdkDecodeIfPresent(.diffUrl)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        mergedAt = try container.sdkDecodeIfPresent(.mergedAt)
-        patchUrl = try container.sdkDecodeIfPresent(.patchUrl)
-        url = try container.sdkDecodeIfPresent(.url)
-        if let value = diffUrl {
-            try sdkValidateUri("diff_url", value)
-        }
-        if let value = htmlUrl {
-            try sdkValidateUri("html_url", value)
-        }
-        if let value = mergedAt {
-            try sdkValidateDateTime("merged_at", sdkWireString(value))
-        }
-        if let value = patchUrl {
-            try sdkValidateUri("patch_url", value)
-        }
-        if let value = url {
-            try sdkValidateUri("url", value)
-        }
-    }
-}
-
-public extension WebhookIssuesDeletedIssuePullRequest {
-    init(
-        diffUrl: String? = nil,
-        htmlUrl: String? = nil,
-        mergedAt: Date? = nil,
-        patchUrl: String? = nil,
-        url: String? = nil
-    ) throws {
-        self.init()
-        (self.diffUrl, self.htmlUrl) = (diffUrl, htmlUrl)
-        (self.mergedAt, self.patchUrl) = (mergedAt, patchUrl)
-        self.url = url
-        if let value = self.diffUrl {
-            try sdkValidateUri("diff_url", value)
-        }
-        if let value = self.htmlUrl {
-            try sdkValidateUri("html_url", value)
-        }
-        if let value = self.mergedAt {
-            try sdkValidateDateTime("merged_at", sdkWireString(value))
-        }
-        if let value = self.patchUrl {
-            try sdkValidateUri("patch_url", value)
-        }
-        if let value = self.url {
-            try sdkValidateUri("url", value)
+        if let value = updatedAt {
+            try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
     }
 }

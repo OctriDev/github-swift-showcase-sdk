@@ -7,3 +7,45 @@ import Foundation
     import FoundationNetworking
 #endif
 public enum TeamsMethods {}
+
+public extension TeamsMethods {
+    /// Lists all teams in an organization that are visible to the authenticated user.
+    ///
+    /// - Parameters:
+    /// - org: The organization name. The name is not case sensitive.
+    /// - perPage: The number of results per page (max 100). For more information,
+    ///   see "[Using pagination in the REST
+    ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
+    ///   -rest-api)."
+    /// - page: The page number of the results to fetch. For more information, see
+    ///   "[Using pagination in the REST
+    ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
+    ///   -rest-api)."
+    /// - teamType: Filter team results by their type. For more information, see
+    ///   "[What kind of team should I
+    ///   use?](https://docs.github.com/enterprise-cloud@latest/admin/concepts/enterpr
+    ///   ise-fundamentals/teams-in-an-enterprise#what-kind-of-team-should-i-use)"
+    static func teamsList(
+        config: ClientConfig,
+        org: String,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        teamType: TeamsListParameter? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [Team] {
+        try await (sdkRequest(
+            "GET",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/teams"].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+                SdkQueryParameter("team_type", value: teamType),
+            ],
+            decoder: .json,
+            operationId: "teamsList",
+            options: requestOptions,
+            errors: ["403": BasicError.self]
+        )).data
+    }
+}
