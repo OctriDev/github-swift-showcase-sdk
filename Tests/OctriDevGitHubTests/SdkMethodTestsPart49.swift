@@ -11,10 +11,7 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try MigrationsMethods.MigrationsStartForOrgOptions(
-            org: decoded("\"org\""),
-            repositories: decoded("[\"github/Hello-World\"]")
-        )
+        var options = try MigrationsMethods.MigrationsStartForOrgOptions(org: decoded("\"org\""), repositories: decoded("[\"github/Hello-World\"]"))
         options.lockRepositories = try decoded("true")
         options.excludeMetadata = try decoded("null")
         options.excludeGitData = try decoded("null")
@@ -25,8 +22,8 @@ extension SdkMethodTests {
         options.exclude = try decoded("null")
         do {
             _ = try await client.migrations.startForOrg(
-                options: options
-            )
+            options: options
+        )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -40,10 +37,7 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try MigrationsMethods.MigrationsStartForOrgOptions(
-            org: decoded("\"org\""),
-            repositories: decoded("[\"github/Hello-World\"]")
-        )
+        var options = try MigrationsMethods.MigrationsStartForOrgOptions(org: decoded("\"org\""), repositories: decoded("[\"github/Hello-World\"]"))
         options.lockRepositories = try decoded("true")
         options.excludeMetadata = try decoded("null")
         options.excludeGitData = try decoded("null")
@@ -58,8 +52,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.migrations.startForOrg(
-                options: options
-            )
+            options: options
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -110,14 +104,14 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.migrations.startImport(
-                owner: decoded("\"owner\""),
-                repo: decoded("\"repo\""),
-                vcsUrl: decoded("\"http://svn.example.com/svn/myproject\""),
-                vcs: decoded("\"subversion\""),
-                vcsUsername: decoded("\"octocat\""),
-                vcsPassword: decoded("\"secret\""),
-                tfvcProject: decoded("null")
-            )
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            vcsUrl: decoded("\"http://svn.example.com/svn/myproject\""),
+            vcs: decoded("\"subversion\""),
+            vcsUsername: decoded("\"octocat\""),
+            vcsPassword: decoded("\"secret\""),
+            tfvcProject: decoded("null")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -133,8 +127,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testMigrationsUnlockRepoForAuthenticatedUserMigrationsUnlockRepoFX8c3ea8acb8ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testMigrationsUnlockRepoForAuthenticatedUserMigrationsUnlockRepoFX8c3ea8acb8ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -146,8 +139,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testMigrationsUnlockRepoForAuthenticatedUserMigrationsUnlockRepoFX8acc5c8762ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testMigrationsUnlockRepoForAuthenticatedUserMigrationsUnlockRepoFX8acc5c8762ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -158,9 +150,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.migrations.unlockRepoForAuthenticatedUser(
-                migrationId: decoded("1"),
-                repoName: decoded("\"Example Name\"")
-            )
+            migrationId: decoded("1"),
+            repoName: decoded("\"Example Name\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -200,10 +192,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.migrations.unlockRepoForOrg(
-                org: decoded("\"org\""),
-                migrationId: decoded("1"),
-                repoName: decoded("\"Example Name\"")
-            )
+            org: decoded("\"org\""),
+            migrationId: decoded("1"),
+            repoName: decoded("\"Example Name\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -242,17 +234,16 @@ extension SdkMethodTests {
         )
     }
 
-    func testOidcCreateOidcCustomPropertyInclusionForEnterpriseOidcCreateOX0c0e63f2a5ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOidcCreateOidcCustomPropertyInclusionForEnterpriseOidcCreateOX0c0e63f2a5ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
         do {
             _ = try await client.oidc.createOidcCustomPropertyInclusionForEnterprise(
-                enterprise: decoded("\"enterprise\""),
-                customPropertyName: decoded("\"environment\"")
-            )
+            enterprise: decoded("\"enterprise\""),
+            customPropertyName: decoded("\"environment\"")
+        )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -261,8 +252,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOidcCreateOidcCustomPropertyInclusionForEnterpriseOidcCreateOXb397070878ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOidcCreateOidcCustomPropertyInclusionForEnterpriseOidcCreateOXb397070878ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -273,9 +263,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.oidc.createOidcCustomPropertyInclusionForEnterprise(
-                enterprise: decoded("\"enterprise\""),
-                customPropertyName: decoded("\"environment\"")
-            )
+            enterprise: decoded("\"enterprise\""),
+            customPropertyName: decoded("\"environment\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -291,17 +281,16 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOidcCreateOidcCustomPropertyInclusionForOrgOidcCreateOidcCustX31c708ef27ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOidcCreateOidcCustomPropertyInclusionForOrgOidcCreateOidcCustX31c708ef27ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
         do {
             _ = try await client.oidc.createOidcCustomPropertyInclusionForOrg(
-                org: decoded("\"org\""),
-                customPropertyName: decoded("\"environment\"")
-            )
+            org: decoded("\"org\""),
+            customPropertyName: decoded("\"environment\"")
+        )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -310,8 +299,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOidcCreateOidcCustomPropertyInclusionForOrgOidcCreateOidcCustX7919ce94a4ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOidcCreateOidcCustomPropertyInclusionForOrgOidcCreateOidcCustX7919ce94a4ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -322,9 +310,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.oidc.createOidcCustomPropertyInclusionForOrg(
-                org: decoded("\"org\""),
-                customPropertyName: decoded("\"environment\"")
-            )
+            org: decoded("\"org\""),
+            customPropertyName: decoded("\"environment\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -340,8 +328,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOidcDeleteOidcCustomPropertyInclusionForEnterpriseOidcDeleteOX8551652eccReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOidcDeleteOidcCustomPropertyInclusionForEnterpriseOidcDeleteOX8551652eccReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -353,8 +340,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOidcDeleteOidcCustomPropertyInclusionForEnterpriseOidcDeleteOX62a36f8f29ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOidcDeleteOidcCustomPropertyInclusionForEnterpriseOidcDeleteOX62a36f8f29ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -365,9 +351,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.oidc.deleteOidcCustomPropertyInclusionForEnterprise(
-                enterprise: decoded("\"enterprise\""),
-                customPropertyName: decoded("\"Example Name\"")
-            )
+            enterprise: decoded("\"enterprise\""),
+            customPropertyName: decoded("\"Example Name\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -383,8 +369,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOidcDeleteOidcCustomPropertyInclusionForOrgOidcDeleteOidcCustX3054c7b537ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOidcDeleteOidcCustomPropertyInclusionForOrgOidcDeleteOidcCustX3054c7b537ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -396,8 +381,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOidcDeleteOidcCustomPropertyInclusionForOrgOidcDeleteOidcCustXc6faf908a3ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOidcDeleteOidcCustomPropertyInclusionForOrgOidcDeleteOidcCustXc6faf908a3ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -408,9 +392,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.oidc.deleteOidcCustomPropertyInclusionForOrg(
-                org: decoded("\"org\""),
-                customPropertyName: decoded("\"Example Name\"")
-            )
+            org: decoded("\"org\""),
+            customPropertyName: decoded("\"Example Name\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -426,8 +410,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOidcGetOidcCustomSubTemplateForOrgOidcGetOidcCustomSubTemplateForOrgReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOidcGetOidcCustomSubTemplateForOrgOidcGetOidcCustomSubTemplateForOrgReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -445,8 +428,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testOidcListOidcCustomPropertyInclusionsForEnterpriseOidcListOidcXc4876d84c4ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOidcListOidcCustomPropertyInclusionsForEnterpriseOidcListOidcXc4876d84c4ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -464,8 +446,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testOidcListOidcCustomPropertyInclusionsForEnterpriseOidcListOidcX80a16377aeReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOidcListOidcCustomPropertyInclusionsForEnterpriseOidcListOidcX80a16377aeReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -476,8 +457,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.oidc.listOidcCustomPropertyInclusionsForEnterprise(
-                enterprise: decoded("\"enterprise\"")
-            )
+            enterprise: decoded("\"enterprise\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -493,16 +474,15 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOidcListOidcCustomPropertyInclusionsForOrgOidcListOidcCustomPXa005c04653ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOidcListOidcCustomPropertyInclusionsForOrgOidcListOidcCustomPXa005c04653ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
         do {
             _ = try await client.oidc.listOidcCustomPropertyInclusionsForOrg(
-                org: decoded("\"org\"")
-            )
+            org: decoded("\"org\"")
+        )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -511,8 +491,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOidcListOidcCustomPropertyInclusionsForOrgOidcListOidcCustomPX755a35baf4ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOidcListOidcCustomPropertyInclusionsForOrgOidcListOidcCustomPX755a35baf4ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -523,8 +502,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.oidc.listOidcCustomPropertyInclusionsForOrg(
-                org: decoded("\"org\"")
-            )
+            org: decoded("\"org\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)

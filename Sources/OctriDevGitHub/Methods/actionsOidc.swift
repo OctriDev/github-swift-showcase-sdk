@@ -6,35 +6,15 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ActionsMethods {
-    /// Gets the customization template for an OpenID Connect (OIDC) subject claim. OAuth tokens and personal access
-    /// tokens (classic) need the `repo` scope to use this endpoint.
+extension ActionsMethods {
+    /// Gets the customization template for an OpenID Connect (OIDC) subject claim. OAuth tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    static func actionsGetCustomOidcSubClaimForRepo(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> OidcCustomSubRepo {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/actions/oidc/customization/sub",
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "actionsGetCustomOidcSubClaimForRepo",
-            options: requestOptions,
-            errors: ["400": BasicError.self, "404": BasicError.self]
-        )).data
+    public static func actionsGetCustomOidcSubClaimForRepo(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> OidcCustomSubRepo {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/actions/oidc/customization/sub"].joined(), config: config, decoder: .json, operationId: "actionsGetCustomOidcSubClaimForRepo", options: requestOptions, errors: ["400": BasicError.self, "404": BasicError.self])).data
     }
 }

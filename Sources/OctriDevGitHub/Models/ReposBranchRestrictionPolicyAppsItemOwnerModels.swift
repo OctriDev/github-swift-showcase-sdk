@@ -3,64 +3,39 @@
 
 import Foundation
 
-/// ReposBranch domain models
-public extension BranchRestrictionPolicyAppsItemOwner {
-    init(from decoder: Decoder) throws {
+// ReposBranch domain models
+extension BranchRestrictionPolicyAppsItemOwner {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        login = try container.sdkDecodeIfPresent(.login)
-        id = try container.sdkDecodeIfPresent(.id)
-        nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        url = try container.sdkDecodeIfPresent(.url)
-        reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
-        eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
-        hooksUrl = try container.sdkDecodeIfPresent(.hooksUrl)
-        issuesUrl = try container.sdkDecodeIfPresent(.issuesUrl)
-        membersUrl = try container.sdkDecodeIfPresent(.membersUrl)
-        publicMembersUrl = try container.sdkDecodeIfPresent(.publicMembersUrl)
-        avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
-        description = try container.sdkDecodeIfPresent(.description)
-        gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
-        followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
-        gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
-        starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
-        subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
-        organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
-        receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
-        type = try container.sdkDecodeIfPresent(.type)
-        siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
-        userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        self.login = try container.sdkDecodeIfPresent(.login)
+        self.id = try container.sdkDecodeIfPresent(.id)
+        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        self.url = try container.sdkDecodeIfPresent(.url)
+        self.reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
+        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        self.hooksUrl = try container.sdkDecodeIfPresent(.hooksUrl)
+        self.issuesUrl = try container.sdkDecodeIfPresent(.issuesUrl)
+        self.membersUrl = try container.sdkDecodeIfPresent(.membersUrl)
+        self.publicMembersUrl = try container.sdkDecodeIfPresent(.publicMembersUrl)
+        self.avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
+        self.description = try container.sdkDecodeIfPresent(.description)
+        self.gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        self.followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
+        self.followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
+        self.gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
+        self.starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
+        self.subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
+        self.organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
+        self.receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
+        self.type = try container.sdkDecodeIfPresent(.type)
+        self.siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
+        self.userViewType = try container.sdkDecodeIfPresent(.userViewType)
     }
 }
 
-public extension BranchRestrictionPolicyAppsItemOwner {
-    init(
-        login: String? = nil,
-        id: Int? = nil,
-        nodeId: String? = nil,
-        url: String? = nil,
-        reposUrl: String? = nil,
-        eventsUrl: String? = nil,
-        hooksUrl: String? = nil,
-        issuesUrl: String? = nil,
-        membersUrl: String? = nil,
-        publicMembersUrl: String? = nil,
-        avatarUrl: String? = nil,
-        description: String? = nil,
-        gravatarId: String? = nil,
-        htmlUrl: String? = nil,
-        followersUrl: String? = nil,
-        followingUrl: String? = nil,
-        gistsUrl: String? = nil,
-        starredUrl: String? = nil,
-        subscriptionsUrl: String? = nil,
-        organizationsUrl: String? = nil,
-        receivedEventsUrl: String? = nil,
-        type: String? = nil,
-        siteAdmin: Bool? = nil,
-        userViewType: String? = nil
-    ) {
+extension BranchRestrictionPolicyAppsItemOwner {
+    public init(login: String? = nil, id: Int? = nil, nodeId: String? = nil, url: String? = nil, reposUrl: String? = nil, eventsUrl: String? = nil, hooksUrl: String? = nil, issuesUrl: String? = nil, membersUrl: String? = nil, publicMembersUrl: String? = nil, avatarUrl: String? = nil, description: String? = nil, gravatarId: String? = nil, htmlUrl: String? = nil, followersUrl: String? = nil, followingUrl: String? = nil, gistsUrl: String? = nil, starredUrl: String? = nil, subscriptionsUrl: String? = nil, organizationsUrl: String? = nil, receivedEventsUrl: String? = nil, type: String? = nil, siteAdmin: Bool? = nil, userViewType: String? = nil) {
         self.init()
         (self.login, self.id) = (login, id)
         (self.nodeId, self.url) = (nodeId, url)
@@ -123,47 +98,33 @@ public struct BranchRestrictionPolicyAppsItem: Codable {
     }
 
     init() {
-        (id, slug, nodeId, owner, name) = (nil, nil, nil, nil, nil)
-        (clientId, description, externalUrl, htmlUrl, createdAt) = (nil, nil, nil, nil, nil)
-        (updatedAt, permissions, events) = (nil, nil, nil)
+        (self.id, self.slug, self.nodeId, self.owner, self.name) = (nil, nil, nil, nil, nil)
+        (self.clientId, self.description, self.externalUrl, self.htmlUrl, self.createdAt) = (nil, nil, nil, nil, nil)
+        (self.updatedAt, self.permissions, self.events) = (nil, nil, nil)
     }
 }
 
-public extension BranchRestrictionPolicyAppsItem {
-    init(from decoder: Decoder) throws {
+extension BranchRestrictionPolicyAppsItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeIfPresent(.id)
-        slug = try container.sdkDecodeIfPresent(.slug)
-        nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        owner = try container.sdkDecodeIfPresent(.owner)
-        name = try container.sdkDecodeIfPresent(.name)
-        clientId = try container.sdkDecodeIfPresent(.clientId)
-        description = try container.sdkDecodeIfPresent(.description)
-        externalUrl = try container.sdkDecodeIfPresent(.externalUrl)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        createdAt = try container.sdkDecodeIfPresent(.createdAt)
-        updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
-        permissions = try container.sdkDecodeIfPresent(.permissions)
-        events = try container.sdkDecodeIfPresent(.events)
+        self.id = try container.sdkDecodeIfPresent(.id)
+        self.slug = try container.sdkDecodeIfPresent(.slug)
+        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        self.owner = try container.sdkDecodeIfPresent(.owner)
+        self.name = try container.sdkDecodeIfPresent(.name)
+        self.clientId = try container.sdkDecodeIfPresent(.clientId)
+        self.description = try container.sdkDecodeIfPresent(.description)
+        self.externalUrl = try container.sdkDecodeIfPresent(.externalUrl)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        self.createdAt = try container.sdkDecodeIfPresent(.createdAt)
+        self.updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
+        self.permissions = try container.sdkDecodeIfPresent(.permissions)
+        self.events = try container.sdkDecodeIfPresent(.events)
     }
 }
 
-public extension BranchRestrictionPolicyAppsItem {
-    init(
-        id: Int? = nil,
-        slug: String? = nil,
-        nodeId: String? = nil,
-        owner: BranchRestrictionPolicyAppsItemOwner? = nil,
-        name: String? = nil,
-        clientId: String? = nil,
-        description: String? = nil,
-        externalUrl: String? = nil,
-        htmlUrl: String? = nil,
-        createdAt: String? = nil,
-        updatedAt: String? = nil,
-        permissions: BranchRestrictionPolicyAppsItemPermissions? = nil,
-        events: [String]? = nil
-    ) {
+extension BranchRestrictionPolicyAppsItem {
+    public init(id: Int? = nil, slug: String? = nil, nodeId: String? = nil, owner: BranchRestrictionPolicyAppsItemOwner? = nil, name: String? = nil, clientId: String? = nil, description: String? = nil, externalUrl: String? = nil, htmlUrl: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, permissions: BranchRestrictionPolicyAppsItemPermissions? = nil, events: [String]? = nil) {
         self.init()
         (self.id, self.slug) = (id, slug)
         (self.nodeId, self.owner) = (nodeId, owner)
@@ -239,60 +200,40 @@ public struct BranchRestrictionPolicyUsersItem: Codable {
     }
 
     init() {
-        (login, id, nodeId, avatarUrl, gravatarId) = (nil, nil, nil, nil, nil)
-        (url, htmlUrl, followersUrl, followingUrl, gistsUrl) = (nil, nil, nil, nil, nil)
-        (starredUrl, subscriptionsUrl, organizationsUrl, reposUrl, eventsUrl) = (nil, nil, nil, nil, nil)
-        (receivedEventsUrl, type, siteAdmin, userViewType) = (nil, nil, nil, nil)
+        (self.login, self.id, self.nodeId, self.avatarUrl, self.gravatarId) = (nil, nil, nil, nil, nil)
+        (self.url, self.htmlUrl, self.followersUrl, self.followingUrl, self.gistsUrl) = (nil, nil, nil, nil, nil)
+        (self.starredUrl, self.subscriptionsUrl, self.organizationsUrl, self.reposUrl, self.eventsUrl) = (nil, nil, nil, nil, nil)
+        (self.receivedEventsUrl, self.type, self.siteAdmin, self.userViewType) = (nil, nil, nil, nil)
     }
 }
 
-public extension BranchRestrictionPolicyUsersItem {
-    init(from decoder: Decoder) throws {
+extension BranchRestrictionPolicyUsersItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        login = try container.sdkDecodeIfPresent(.login)
-        id = try container.sdkDecodeIfPresent(.id)
-        nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
-        gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
-        url = try container.sdkDecodeIfPresent(.url)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
-        followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
-        gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
-        starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
-        subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
-        organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
-        reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
-        eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
-        receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
-        type = try container.sdkDecodeIfPresent(.type)
-        siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
-        userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        self.login = try container.sdkDecodeIfPresent(.login)
+        self.id = try container.sdkDecodeIfPresent(.id)
+        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        self.avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
+        self.gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
+        self.url = try container.sdkDecodeIfPresent(.url)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        self.followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
+        self.followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
+        self.gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
+        self.starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
+        self.subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
+        self.organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
+        self.reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
+        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        self.receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
+        self.type = try container.sdkDecodeIfPresent(.type)
+        self.siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
+        self.userViewType = try container.sdkDecodeIfPresent(.userViewType)
     }
 }
 
-public extension BranchRestrictionPolicyUsersItem {
-    init(
-        login: String? = nil,
-        id: Int? = nil,
-        nodeId: String? = nil,
-        avatarUrl: String? = nil,
-        gravatarId: String? = nil,
-        url: String? = nil,
-        htmlUrl: String? = nil,
-        followersUrl: String? = nil,
-        followingUrl: String? = nil,
-        gistsUrl: String? = nil,
-        starredUrl: String? = nil,
-        subscriptionsUrl: String? = nil,
-        organizationsUrl: String? = nil,
-        reposUrl: String? = nil,
-        eventsUrl: String? = nil,
-        receivedEventsUrl: String? = nil,
-        type: String? = nil,
-        siteAdmin: Bool? = nil,
-        userViewType: String? = nil
-    ) {
+extension BranchRestrictionPolicyUsersItem {
+    public init(login: String? = nil, id: Int? = nil, nodeId: String? = nil, avatarUrl: String? = nil, gravatarId: String? = nil, url: String? = nil, htmlUrl: String? = nil, followersUrl: String? = nil, followingUrl: String? = nil, gistsUrl: String? = nil, starredUrl: String? = nil, subscriptionsUrl: String? = nil, organizationsUrl: String? = nil, reposUrl: String? = nil, eventsUrl: String? = nil, receivedEventsUrl: String? = nil, type: String? = nil, siteAdmin: Bool? = nil, userViewType: String? = nil) {
         self.init()
         (self.login, self.id) = (login, id)
         (self.nodeId, self.avatarUrl) = (nodeId, avatarUrl)
@@ -334,95 +275,57 @@ public struct BranchRestrictionPolicy: Codable {
         case apps
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension BranchRestrictionPolicy {
-    init(from decoder: Decoder) throws {
+extension BranchRestrictionPolicy {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.url) else {
-            throw SdkValidationError(
-                field: "url",
-                code: "required",
-                message: "Validation failed for 'url': value is required"
-            )
+            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
         }
         guard container.contains(.usersUrl) else {
-            throw SdkValidationError(
-                field: "users_url",
-                code: "required",
-                message: "Validation failed for 'users_url': value is required"
-            )
+            throw SdkValidationError(field: "users_url", code: "required", message: "Validation failed for 'users_url': value is required")
         }
         guard container.contains(.teamsUrl) else {
-            throw SdkValidationError(
-                field: "teams_url",
-                code: "required",
-                message: "Validation failed for 'teams_url': value is required"
-            )
+            throw SdkValidationError(field: "teams_url", code: "required", message: "Validation failed for 'teams_url': value is required")
         }
         guard container.contains(.appsUrl) else {
-            throw SdkValidationError(
-                field: "apps_url",
-                code: "required",
-                message: "Validation failed for 'apps_url': value is required"
-            )
+            throw SdkValidationError(field: "apps_url", code: "required", message: "Validation failed for 'apps_url': value is required")
         }
         guard container.contains(.users) else {
-            throw SdkValidationError(
-                field: "users",
-                code: "required",
-                message: "Validation failed for 'users': value is required"
-            )
+            throw SdkValidationError(field: "users", code: "required", message: "Validation failed for 'users': value is required")
         }
         guard container.contains(.teams) else {
-            throw SdkValidationError(
-                field: "teams",
-                code: "required",
-                message: "Validation failed for 'teams': value is required"
-            )
+            throw SdkValidationError(field: "teams", code: "required", message: "Validation failed for 'teams': value is required")
         }
         guard container.contains(.apps) else {
-            throw SdkValidationError(
-                field: "apps",
-                code: "required",
-                message: "Validation failed for 'apps': value is required"
-            )
+            throw SdkValidationError(field: "apps", code: "required", message: "Validation failed for 'apps': value is required")
         }
-        url = try container.sdkDecodeRequired(.url)
-        usersUrl = try container.sdkDecodeRequired(.usersUrl)
-        teamsUrl = try container.sdkDecodeRequired(.teamsUrl)
-        appsUrl = try container.sdkDecodeRequired(.appsUrl)
-        users = try container.sdkDecodeRequired(.users)
-        teams = try container.sdkDecodeRequired(.teams)
-        apps = try container.sdkDecodeRequired(.apps)
-        try sdkValidateUri("url", url)
-        try sdkValidateUri("users_url", usersUrl)
-        try sdkValidateUri("teams_url", teamsUrl)
-        try sdkValidateUri("apps_url", appsUrl)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.usersUrl = try container.sdkDecodeRequired(.usersUrl)
+        self.teamsUrl = try container.sdkDecodeRequired(.teamsUrl)
+        self.appsUrl = try container.sdkDecodeRequired(.appsUrl)
+        self.users = try container.sdkDecodeRequired(.users)
+        self.teams = try container.sdkDecodeRequired(.teams)
+        self.apps = try container.sdkDecodeRequired(.apps)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("users_url", self.usersUrl)
+            try sdkValidateUri("teams_url", self.teamsUrl)
+            try sdkValidateUri("apps_url", self.appsUrl)
     }
 }
 
-public extension BranchRestrictionPolicy {
-    init(
-        url: String,
-        usersUrl: String,
-        teamsUrl: String,
-        appsUrl: String,
-        users: [BranchRestrictionPolicyUsersItem],
-        teams: [Team],
-        apps: [BranchRestrictionPolicyAppsItem]
-    ) throws {
+extension BranchRestrictionPolicy {
+    public init(url: String, usersUrl: String, teamsUrl: String, appsUrl: String, users: [BranchRestrictionPolicyUsersItem], teams: [Team], apps: [BranchRestrictionPolicyAppsItem]) throws {
         (self.url, self.usersUrl) = (url, usersUrl)
         (self.teamsUrl, self.appsUrl) = (teamsUrl, appsUrl)
         (self.users, self.teams) = (users, teams)
         self.apps = apps
-        try sdkValidateUri("url", self.url)
-        try sdkValidateUri("users_url", self.usersUrl)
-        try sdkValidateUri("teams_url", self.teamsUrl)
-        try sdkValidateUri("apps_url", self.appsUrl)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("users_url", self.usersUrl)
+            try sdkValidateUri("teams_url", self.teamsUrl)
+            try sdkValidateUri("apps_url", self.appsUrl)
     }
 }
 
@@ -458,83 +361,48 @@ public struct BranchWithProtection: Codable {
         case requiredApprovingReviewCount = "required_approving_review_count"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension BranchWithProtection {
-    init(from decoder: Decoder) throws {
+extension BranchWithProtection {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.commit) else {
-            throw SdkValidationError(
-                field: "commit",
-                code: "required",
-                message: "Validation failed for 'commit': value is required"
-            )
+            throw SdkValidationError(field: "commit", code: "required", message: "Validation failed for 'commit': value is required")
         }
         guard container.contains(.links) else {
-            throw SdkValidationError(
-                field: "_links",
-                code: "required",
-                message: "Validation failed for '_links': value is required"
-            )
+            throw SdkValidationError(field: "_links", code: "required", message: "Validation failed for '_links': value is required")
         }
         guard container.contains(.protected) else {
-            throw SdkValidationError(
-                field: "protected",
-                code: "required",
-                message: "Validation failed for 'protected': value is required"
-            )
+            throw SdkValidationError(field: "protected", code: "required", message: "Validation failed for 'protected': value is required")
         }
         guard container.contains(.protection) else {
-            throw SdkValidationError(
-                field: "protection",
-                code: "required",
-                message: "Validation failed for 'protection': value is required"
-            )
+            throw SdkValidationError(field: "protection", code: "required", message: "Validation failed for 'protection': value is required")
         }
         guard container.contains(.protectionUrl) else {
-            throw SdkValidationError(
-                field: "protection_url",
-                code: "required",
-                message: "Validation failed for 'protection_url': value is required"
-            )
+            throw SdkValidationError(field: "protection_url", code: "required", message: "Validation failed for 'protection_url': value is required")
         }
-        name = try container.sdkDecodeRequired(.name)
-        commit = try container.sdkDecodeRequired(.commit)
-        links = try container.sdkDecodeRequired(.links)
-        protected = try container.sdkDecodeRequired(.protected)
-        protection = try container.sdkDecodeRequired(.protection)
-        protectionUrl = try container.sdkDecodeRequired(.protectionUrl)
-        pattern = try container.sdkDecodeIfPresent(.pattern)
-        requiredApprovingReviewCount = try container.sdkDecodeIfPresent(.requiredApprovingReviewCount)
-        try sdkValidateUri("protection_url", protectionUrl)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.commit = try container.sdkDecodeRequired(.commit)
+        self.links = try container.sdkDecodeRequired(.links)
+        self.protected = try container.sdkDecodeRequired(.protected)
+        self.protection = try container.sdkDecodeRequired(.protection)
+        self.protectionUrl = try container.sdkDecodeRequired(.protectionUrl)
+        self.pattern = try container.sdkDecodeIfPresent(.pattern)
+        self.requiredApprovingReviewCount = try container.sdkDecodeIfPresent(.requiredApprovingReviewCount)
+            try sdkValidateUri("protection_url", self.protectionUrl)
     }
 }
 
-public extension BranchWithProtection {
-    init(
-        name: String,
-        commit: Commit,
-        links: BranchWithProtectionLinks,
-        protected: Bool,
-        protection: BranchProtection,
-        protectionUrl: String,
-        pattern: String? = nil,
-        requiredApprovingReviewCount: Int? = nil
-    ) throws {
+extension BranchWithProtection {
+    public init(name: String, commit: Commit, links: BranchWithProtectionLinks, protected: Bool, protection: BranchProtection, protectionUrl: String, pattern: String? = nil, requiredApprovingReviewCount: Int? = nil) throws {
         (self.name, self.commit) = (name, commit)
         (self.links, self.protected) = (links, protected)
         (self.protection, self.protectionUrl) = (protection, protectionUrl)
         (self.pattern, self.requiredApprovingReviewCount) = (pattern, requiredApprovingReviewCount)
-        try sdkValidateUri("protection_url", self.protectionUrl)
+            try sdkValidateUri("protection_url", self.protectionUrl)
     }
 }

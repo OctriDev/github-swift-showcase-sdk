@@ -6,20 +6,15 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension MetaMethods {
-    /// Returns Octocat as ASCII art. Supply the optional `s` query parameter to set the words in Octocat's speech
-    /// bubble.
+extension MetaMethods {
+    /// Returns Octocat as ASCII art. Supply the optional `s` query parameter to set the words in Octocat's speech bubble.
     ///
     /// Get the octocat as ASCII art
     ///
     /// - Parameters:
     /// - s: The words to show in Octocat's speech bubble
-    static func metaGetOctocat(
-        config: ClientConfig,
-        s: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> String {
-        try await (sdkRequest("GET", "/octocat", config: config, query: [
+    public static func metaGetOctocat(config: ClientConfig, s: String? = nil, requestOptions: RequestOptions? = nil) async throws -> String {
+        return try (await sdkRequest("GET", "/octocat", config: config, query: [
             SdkQueryParameter("s", value: s),
         ], decoder: .text, operationId: "metaGetOctocat", options: requestOptions)).data
     }

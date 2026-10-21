@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// PrivateRegistries domain models
+// PrivateRegistries domain models
 /// Private registry configuration for an organization
 public struct OrgPrivateRegistryConfigurationWithSelectedRepositories: Codable {
     /// The name of the private registry configuration.
@@ -93,110 +93,62 @@ public struct OrgPrivateRegistryConfigurationWithSelectedRepositories: Codable {
         case serviceAccount = "service_account"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension OrgPrivateRegistryConfigurationWithSelectedRepositories {
-    init(from decoder: Decoder) throws {
+extension OrgPrivateRegistryConfigurationWithSelectedRepositories {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.registryType) else {
-            throw SdkValidationError(
-                field: "registry_type",
-                code: "required",
-                message: "Validation failed for 'registry_type': value is required"
-            )
+            throw SdkValidationError(field: "registry_type", code: "required", message: "Validation failed for 'registry_type': value is required")
         }
         guard container.contains(.visibility) else {
-            throw SdkValidationError(
-                field: "visibility",
-                code: "required",
-                message: "Validation failed for 'visibility': value is required"
-            )
+            throw SdkValidationError(field: "visibility", code: "required", message: "Validation failed for 'visibility': value is required")
         }
         guard container.contains(.createdAt) else {
-            throw SdkValidationError(
-                field: "created_at",
-                code: "required",
-                message: "Validation failed for 'created_at': value is required"
-            )
+            throw SdkValidationError(field: "created_at", code: "required", message: "Validation failed for 'created_at': value is required")
         }
         guard container.contains(.updatedAt) else {
-            throw SdkValidationError(
-                field: "updated_at",
-                code: "required",
-                message: "Validation failed for 'updated_at': value is required"
-            )
+            throw SdkValidationError(field: "updated_at", code: "required", message: "Validation failed for 'updated_at': value is required")
         }
-        name = try container.sdkDecodeRequired(.name)
-        registryType = try container.sdkDecodeRequired(.registryType)
-        visibility = try container.sdkDecodeRequired(.visibility)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        authType = try container.sdkDecodeIfPresent(.authType)
-        url = try container.sdkDecodeIfPresent(.url)
-        username = try container.sdkDecodeIfPresent(.username)
-        replacesBase = try container.sdkDecodeIfPresent(.replacesBase)
-        selectedRepositoryIds = try container.sdkDecodeIfPresent(.selectedRepositoryIds)
-        tenantId = try container.sdkDecodeIfPresent(.tenantId)
-        clientId = try container.sdkDecodeIfPresent(.clientId)
-        awsRegion = try container.sdkDecodeIfPresent(.awsRegion)
-        accountId = try container.sdkDecodeIfPresent(.accountId)
-        roleName = try container.sdkDecodeIfPresent(.roleName)
-        domain = try container.sdkDecodeIfPresent(.domain)
-        domainOwner = try container.sdkDecodeIfPresent(.domainOwner)
-        jfrogOidcProviderName = try container.sdkDecodeIfPresent(.jfrogOidcProviderName)
-        audience = try container.sdkDecodeIfPresent(.audience)
-        identityMappingName = try container.sdkDecodeIfPresent(.identityMappingName)
-        namespace = try container.sdkDecodeIfPresent(.namespace)
-        serviceSlug = try container.sdkDecodeIfPresent(.serviceSlug)
-        apiHost = try container.sdkDecodeIfPresent(.apiHost)
-        workloadIdentityProvider = try container.sdkDecodeIfPresent(.workloadIdentityProvider)
-        serviceAccount = try container.sdkDecodeIfPresent(.serviceAccount)
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
-        if let value = url {
+        self.name = try container.sdkDecodeRequired(.name)
+        self.registryType = try container.sdkDecodeRequired(.registryType)
+        self.visibility = try container.sdkDecodeRequired(.visibility)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        self.authType = try container.sdkDecodeIfPresent(.authType)
+        self.url = try container.sdkDecodeIfPresent(.url)
+        self.username = try container.sdkDecodeIfPresent(.username)
+        self.replacesBase = try container.sdkDecodeIfPresent(.replacesBase)
+        self.selectedRepositoryIds = try container.sdkDecodeIfPresent(.selectedRepositoryIds)
+        self.tenantId = try container.sdkDecodeIfPresent(.tenantId)
+        self.clientId = try container.sdkDecodeIfPresent(.clientId)
+        self.awsRegion = try container.sdkDecodeIfPresent(.awsRegion)
+        self.accountId = try container.sdkDecodeIfPresent(.accountId)
+        self.roleName = try container.sdkDecodeIfPresent(.roleName)
+        self.domain = try container.sdkDecodeIfPresent(.domain)
+        self.domainOwner = try container.sdkDecodeIfPresent(.domainOwner)
+        self.jfrogOidcProviderName = try container.sdkDecodeIfPresent(.jfrogOidcProviderName)
+        self.audience = try container.sdkDecodeIfPresent(.audience)
+        self.identityMappingName = try container.sdkDecodeIfPresent(.identityMappingName)
+        self.namespace = try container.sdkDecodeIfPresent(.namespace)
+        self.serviceSlug = try container.sdkDecodeIfPresent(.serviceSlug)
+        self.apiHost = try container.sdkDecodeIfPresent(.apiHost)
+        self.workloadIdentityProvider = try container.sdkDecodeIfPresent(.workloadIdentityProvider)
+        self.serviceAccount = try container.sdkDecodeIfPresent(.serviceAccount)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+        if let value = self.url {
             try sdkValidateUri("url", value)
         }
     }
 }
 
-public extension OrgPrivateRegistryConfigurationWithSelectedRepositories {
-    init(
-        name: String,
-        registryType: OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType,
-        visibility: OrgPrivateRegistryConfigurationWithSelectedRepositoriesVisibility,
-        createdAt: Date,
-        updatedAt: Date,
-        authType: OrgPrivateRegistryConfigurationWithSelectedRepositoriesAuthType? = nil,
-        url: String? = nil,
-        username: String? = nil,
-        replacesBase: Bool? = nil,
-        selectedRepositoryIds: [Int]? = nil,
-        tenantId: String? = nil,
-        clientId: String? = nil,
-        awsRegion: String? = nil,
-        accountId: String? = nil,
-        roleName: String? = nil,
-        domain: String? = nil,
-        domainOwner: String? = nil,
-        jfrogOidcProviderName: String? = nil,
-        audience: String? = nil,
-        identityMappingName: String? = nil,
-        namespace: String? = nil,
-        serviceSlug: String? = nil,
-        apiHost: String? = nil,
-        workloadIdentityProvider: String? = nil,
-        serviceAccount: String? = nil
-    ) throws {
+extension OrgPrivateRegistryConfigurationWithSelectedRepositories {
+    public init(name: String, registryType: OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType, visibility: OrgPrivateRegistryConfigurationWithSelectedRepositoriesVisibility, createdAt: Date, updatedAt: Date, authType: OrgPrivateRegistryConfigurationWithSelectedRepositoriesAuthType? = nil, url: String? = nil, username: String? = nil, replacesBase: Bool? = nil, selectedRepositoryIds: [Int]? = nil, tenantId: String? = nil, clientId: String? = nil, awsRegion: String? = nil, accountId: String? = nil, roleName: String? = nil, domain: String? = nil, domainOwner: String? = nil, jfrogOidcProviderName: String? = nil, audience: String? = nil, identityMappingName: String? = nil, namespace: String? = nil, serviceSlug: String? = nil, apiHost: String? = nil, workloadIdentityProvider: String? = nil, serviceAccount: String? = nil) throws {
         (self.name, self.registryType) = (name, registryType)
         (self.visibility, self.createdAt) = (visibility, createdAt)
         (self.updatedAt, self.authType) = (updatedAt, authType)
@@ -210,8 +162,8 @@ public extension OrgPrivateRegistryConfigurationWithSelectedRepositories {
         (self.namespace, self.serviceSlug) = (namespace, serviceSlug)
         (self.apiHost, self.workloadIdentityProvider) = (apiHost, workloadIdentityProvider)
         self.serviceAccount = serviceAccount
-        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
         if let value = self.url {
             try sdkValidateUri("url", value)
         }
@@ -219,30 +171,22 @@ public extension OrgPrivateRegistryConfigurationWithSelectedRepositories {
 }
 
 /// The authentication type for the private registry.
-public struct OrgPrivateRegistryConfigurationWithSelectedRepositoriesAuthType: RawRepresentable, Hashable, Codable,
-    Sendable, SdkWireConvertible {
+public struct OrgPrivateRegistryConfigurationWithSelectedRepositoriesAuthType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let token = OrgPrivateRegistryConfigurationWithSelectedRepositoriesAuthType(rawValue: "token")
-    public static let usernamePassword =
-        OrgPrivateRegistryConfigurationWithSelectedRepositoriesAuthType(rawValue: "username_password")
-    public static let oidcAzure =
-        OrgPrivateRegistryConfigurationWithSelectedRepositoriesAuthType(rawValue: "oidc_azure")
+    public static let usernamePassword = OrgPrivateRegistryConfigurationWithSelectedRepositoriesAuthType(rawValue: "username_password")
+    public static let oidcAzure = OrgPrivateRegistryConfigurationWithSelectedRepositoriesAuthType(rawValue: "oidc_azure")
     public static let oidcAws = OrgPrivateRegistryConfigurationWithSelectedRepositoriesAuthType(rawValue: "oidc_aws")
-    public static let oidcJfrog =
-        OrgPrivateRegistryConfigurationWithSelectedRepositoriesAuthType(rawValue: "oidc_jfrog")
-    public static let oidcCloudsmith =
-        OrgPrivateRegistryConfigurationWithSelectedRepositoriesAuthType(rawValue: "oidc_cloudsmith")
+    public static let oidcJfrog = OrgPrivateRegistryConfigurationWithSelectedRepositoriesAuthType(rawValue: "oidc_jfrog")
+    public static let oidcCloudsmith = OrgPrivateRegistryConfigurationWithSelectedRepositoriesAuthType(rawValue: "oidc_cloudsmith")
     public static let oidcGcp = OrgPrivateRegistryConfigurationWithSelectedRepositoriesAuthType(rawValue: "oidc_gcp")
     public static let anonymous = OrgPrivateRegistryConfigurationWithSelectedRepositoriesAuthType(rawValue: "anonymous")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -253,21 +197,17 @@ public struct OrgPrivateRegistryConfigurationWithSelectedRepositoriesAuthType: R
 
 /// Which type of organization repositories have access to the private registry. `selected` means only the
 /// repositories specified by `selected_repository_ids` can access the private registry.
-public struct OrgPrivateRegistryConfigurationWithSelectedRepositoriesVisibility: RawRepresentable, Hashable, Codable,
-    Sendable, SdkWireConvertible {
+public struct OrgPrivateRegistryConfigurationWithSelectedRepositoriesVisibility: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let all = OrgPrivateRegistryConfigurationWithSelectedRepositoriesVisibility(rawValue: "all")
     public static let `private` = OrgPrivateRegistryConfigurationWithSelectedRepositoriesVisibility(rawValue: "private")
     public static let selected = OrgPrivateRegistryConfigurationWithSelectedRepositoriesVisibility(rawValue: "selected")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -277,48 +217,29 @@ public struct OrgPrivateRegistryConfigurationWithSelectedRepositoriesVisibility:
 }
 
 /// The registry type.
-public struct OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType: RawRepresentable, Hashable, Codable,
-    Sendable, SdkWireConvertible {
+public struct OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let mavenRepository =
-        OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType(rawValue: "maven_repository")
-    public static let nugetFeed =
-        OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType(rawValue: "nuget_feed")
-    public static let goproxyServer =
-        OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType(rawValue: "goproxy_server")
-    public static let npmRegistry =
-        OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType(rawValue: "npm_registry")
-    public static let rubygemsServer =
-        OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType(rawValue: "rubygems_server")
-    public static let cargoRegistry =
-        OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType(rawValue: "cargo_registry")
-    public static let composerRepository =
-        OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType(rawValue: "composer_repository")
-    public static let dockerRegistry =
-        OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType(rawValue: "docker_registry")
-    public static let gitSource =
-        OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType(rawValue: "git_source")
-    public static let helmRegistry =
-        OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType(rawValue: "helm_registry")
-    public static let hexOrganization =
-        OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType(rawValue: "hex_organization")
-    public static let hexRepository =
-        OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType(rawValue: "hex_repository")
-    public static let pubRepository =
-        OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType(rawValue: "pub_repository")
-    public static let pythonIndex =
-        OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType(rawValue: "python_index")
-    public static let terraformRegistry =
-        OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType(rawValue: "terraform_registry")
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let mavenRepository = OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType(rawValue: "maven_repository")
+    public static let nugetFeed = OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType(rawValue: "nuget_feed")
+    public static let goproxyServer = OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType(rawValue: "goproxy_server")
+    public static let npmRegistry = OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType(rawValue: "npm_registry")
+    public static let rubygemsServer = OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType(rawValue: "rubygems_server")
+    public static let cargoRegistry = OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType(rawValue: "cargo_registry")
+    public static let composerRepository = OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType(rawValue: "composer_repository")
+    public static let dockerRegistry = OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType(rawValue: "docker_registry")
+    public static let gitSource = OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType(rawValue: "git_source")
+    public static let helmRegistry = OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType(rawValue: "helm_registry")
+    public static let hexOrganization = OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType(rawValue: "hex_organization")
+    public static let hexRepository = OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType(rawValue: "hex_repository")
+    public static let pubRepository = OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType(rawValue: "pub_repository")
+    public static let pythonIndex = OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType(rawValue: "python_index")
+    public static let terraformRegistry = OrgPrivateRegistryConfigurationWithSelectedRepositoriesRegistryType(rawValue: "terraform_registry")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

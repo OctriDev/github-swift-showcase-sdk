@@ -6,10 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ReposMethods {
-    /// Merges a branch or commit into a base branch in a repository. Supply `base` and `head`; `commit_message` is
-    /// optional and defaults to a generated message when omitted. If the changes are already merged, the endpoint
-    /// returns 204 without a merge commit body.
+extension ReposMethods {
+    /// Merges a branch or commit into a base branch in a repository. Supply `base` and `head`; `commit_message` is optional and defaults to a generated message when omitted. If the changes are already merged, the endpoint returns 204 without a merge commit body.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -20,32 +18,9 @@ public extension ReposMethods {
     /// - head: The head to merge. This can be a branch name or a commit SHA1.
     /// - commitMessage: Commit message to use for the merge commit. If omitted, a
     ///   default message will be used.
-    static func reposMerge(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        base: String,
-        head: String,
-        commitMessage: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> Commit {
+    public static func reposMerge(config: ClientConfig, owner: String, repo: String, base: String, head: String, commitMessage: String? = nil, requestOptions: RequestOptions? = nil) async throws -> Commit {
         let requestBody = ReposMergeRequestBody(base: base, head: head, commitMessage: commitMessage)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/merges",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "reposMerge",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "422": ValidationError.self]
-        )).data
+        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/merges"].joined(), config: config, body: requestBody, decoder: .json, operationId: "reposMerge", options: requestOptions, errors: ["403": BasicError.self, "422": ValidationError.self])).data
     }
 }

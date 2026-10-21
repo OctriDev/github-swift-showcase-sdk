@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// SecretScanning domain models
+// SecretScanning domain models
 /// A collection of secret scanning patterns and their settings related to push protection.
 public struct SecretScanningPatternConfiguration: Codable {
     /// The version of the entity. This is used to confirm you're updating the current version of the entity and
@@ -21,25 +21,21 @@ public struct SecretScanningPatternConfiguration: Codable {
     }
 
     init() {
-        (patternConfigVersion, providerPatternOverrides, customPatternOverrides) = (nil, nil, nil)
+        (self.patternConfigVersion, self.providerPatternOverrides, self.customPatternOverrides) = (nil, nil, nil)
     }
 }
 
-public extension SecretScanningPatternConfiguration {
-    init(from decoder: Decoder) throws {
+extension SecretScanningPatternConfiguration {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        patternConfigVersion = try container.sdkDecodeIfPresent(.patternConfigVersion)
-        providerPatternOverrides = try container.sdkDecodeIfPresent(.providerPatternOverrides)
-        customPatternOverrides = try container.sdkDecodeIfPresent(.customPatternOverrides)
+        self.patternConfigVersion = try container.sdkDecodeIfPresent(.patternConfigVersion)
+        self.providerPatternOverrides = try container.sdkDecodeIfPresent(.providerPatternOverrides)
+        self.customPatternOverrides = try container.sdkDecodeIfPresent(.customPatternOverrides)
     }
 }
 
-public extension SecretScanningPatternConfiguration {
-    init(
-        patternConfigVersion: SecretScanningRowVersion? = nil,
-        providerPatternOverrides: [SecretScanningPatternOverride]? = nil,
-        customPatternOverrides: [SecretScanningPatternOverride]? = nil
-    ) {
+extension SecretScanningPatternConfiguration {
+    public init(patternConfigVersion: SecretScanningRowVersion? = nil, providerPatternOverrides: [SecretScanningPatternOverride]? = nil, customPatternOverrides: [SecretScanningPatternOverride]? = nil) {
         self.init()
         self.patternConfigVersion = patternConfigVersion
         self.providerPatternOverrides = providerPatternOverrides
@@ -92,51 +88,32 @@ public struct SecretScanningPatternOverride: Codable {
     }
 
     init() {
-        (tokenType, customPatternVersion, slug, displayName, alertTotal) = (nil, nil, nil, nil, nil)
-        (alertTotalPercentage, falsePositives, falsePositiveRate, bypassRate, defaultSetting) = (
-            nil,
-            nil,
-            nil,
-            nil,
-            nil
-        )
-        (enterpriseSetting, setting) = (nil, nil)
+        (self.tokenType, self.customPatternVersion, self.slug, self.displayName, self.alertTotal) = (nil, nil, nil, nil, nil)
+        (self.alertTotalPercentage, self.falsePositives, self.falsePositiveRate, self.bypassRate, self.defaultSetting) = (nil, nil, nil, nil, nil)
+        (self.enterpriseSetting, self.setting) = (nil, nil)
     }
 }
 
-public extension SecretScanningPatternOverride {
-    init(from decoder: Decoder) throws {
+extension SecretScanningPatternOverride {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        tokenType = try container.sdkDecodeIfPresent(.tokenType)
-        customPatternVersion = try container.sdkDecodeIfPresent(.customPatternVersion)
-        slug = try container.sdkDecodeIfPresent(.slug)
-        displayName = try container.sdkDecodeIfPresent(.displayName)
-        alertTotal = try container.sdkDecodeIfPresent(.alertTotal)
-        alertTotalPercentage = try container.sdkDecodeIfPresent(.alertTotalPercentage)
-        falsePositives = try container.sdkDecodeIfPresent(.falsePositives)
-        falsePositiveRate = try container.sdkDecodeIfPresent(.falsePositiveRate)
-        bypassRate = try container.sdkDecodeIfPresent(.bypassRate)
-        defaultSetting = try container.sdkDecodeIfPresent(.defaultSetting)
-        enterpriseSetting = try container.sdkDecodeIfPresent(.enterpriseSetting)
-        setting = try container.sdkDecodeIfPresent(.setting)
+        self.tokenType = try container.sdkDecodeIfPresent(.tokenType)
+        self.customPatternVersion = try container.sdkDecodeIfPresent(.customPatternVersion)
+        self.slug = try container.sdkDecodeIfPresent(.slug)
+        self.displayName = try container.sdkDecodeIfPresent(.displayName)
+        self.alertTotal = try container.sdkDecodeIfPresent(.alertTotal)
+        self.alertTotalPercentage = try container.sdkDecodeIfPresent(.alertTotalPercentage)
+        self.falsePositives = try container.sdkDecodeIfPresent(.falsePositives)
+        self.falsePositiveRate = try container.sdkDecodeIfPresent(.falsePositiveRate)
+        self.bypassRate = try container.sdkDecodeIfPresent(.bypassRate)
+        self.defaultSetting = try container.sdkDecodeIfPresent(.defaultSetting)
+        self.enterpriseSetting = try container.sdkDecodeIfPresent(.enterpriseSetting)
+        self.setting = try container.sdkDecodeIfPresent(.setting)
     }
 }
 
-public extension SecretScanningPatternOverride {
-    init(
-        tokenType: String? = nil,
-        customPatternVersion: String? = nil,
-        slug: String? = nil,
-        displayName: String? = nil,
-        alertTotal: Int? = nil,
-        alertTotalPercentage: Int? = nil,
-        falsePositives: Int? = nil,
-        falsePositiveRate: Int? = nil,
-        bypassRate: Int? = nil,
-        defaultSetting: SecretScanningPatternOverrideDefaultSetting? = nil,
-        enterpriseSetting: SecretScanningPatternOverrideEnterpriseSetting? = nil,
-        setting: SecretScanningPatternOverrideSetting? = nil
-    ) {
+extension SecretScanningPatternOverride {
+    public init(tokenType: String? = nil, customPatternVersion: String? = nil, slug: String? = nil, displayName: String? = nil, alertTotal: Int? = nil, alertTotalPercentage: Int? = nil, falsePositives: Int? = nil, falsePositiveRate: Int? = nil, bypassRate: Int? = nil, defaultSetting: SecretScanningPatternOverrideDefaultSetting? = nil, enterpriseSetting: SecretScanningPatternOverrideEnterpriseSetting? = nil, setting: SecretScanningPatternOverrideSetting? = nil) {
         self.init()
         (self.tokenType, self.customPatternVersion) = (tokenType, customPatternVersion)
         (self.slug, self.displayName) = (slug, displayName)
@@ -149,21 +126,17 @@ public extension SecretScanningPatternOverride {
 
 /// The push protection setting for this pattern set at the enterprise level. Only present for partner patterns
 /// when the organization has a parent enterprise.
-public struct SecretScanningPatternOverrideEnterpriseSetting: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct SecretScanningPatternOverrideEnterpriseSetting: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let notSet = SecretScanningPatternOverrideEnterpriseSetting(rawValue: "not-set")
     public static let disabled = SecretScanningPatternOverrideEnterpriseSetting(rawValue: "disabled")
     public static let enabled = SecretScanningPatternOverrideEnterpriseSetting(rawValue: "enabled")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -177,17 +150,14 @@ public struct SecretScanningPatternOverrideEnterpriseSetting: RawRepresentable, 
 public struct SecretScanningPatternOverrideSetting: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let notSet = SecretScanningPatternOverrideSetting(rawValue: "not-set")
     public static let disabled = SecretScanningPatternOverrideSetting(rawValue: "disabled")
     public static let enabled = SecretScanningPatternOverrideSetting(rawValue: "enabled")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -197,20 +167,16 @@ public struct SecretScanningPatternOverrideSetting: RawRepresentable, Hashable, 
 }
 
 /// The default push protection setting for this pattern.
-public struct SecretScanningPatternOverrideDefaultSetting: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct SecretScanningPatternOverrideDefaultSetting: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let disabled = SecretScanningPatternOverrideDefaultSetting(rawValue: "disabled")
     public static let enabled = SecretScanningPatternOverrideDefaultSetting(rawValue: "enabled")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

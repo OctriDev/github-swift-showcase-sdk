@@ -6,10 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ReposMethods {
-    /// Updates the name, label, or state of a release asset in a repository. The authenticated user must have push
-    /// access to the repository; supply any of `name`, `label`, or `state` that you want to change. The response
-    /// includes the updated release asset details.
+extension ReposMethods {
+    /// Updates the name, label, or state of a release asset in a repository. The authenticated user must have push access to the repository; supply any of `name`, `label`, or `state` that you want to change. The response includes the updated release asset details.
     ///
     /// Users with push access to the repository can edit a release asset.
     ///
@@ -22,33 +20,9 @@ public extension ReposMethods {
     /// - name: The file name of the asset.
     /// - label: An alternate short description of the asset. Used in place of the
     ///   filename.
-    static func reposUpdateReleaseAsset(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        assetId: Int,
-        name: String? = nil,
-        label: String? = nil,
-        state: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ReleaseAsset {
+    public static func reposUpdateReleaseAsset(config: ClientConfig, owner: String, repo: String, assetId: Int, name: String? = nil, label: String? = nil, state: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ReleaseAsset {
         let requestBody = ReposUpdateReleaseAssetRequestBody(name: name, label: label, state: state)
 
-        return try await (sdkRequest(
-            "PATCH",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/releases/assets/",
-                sdkEncodePathSegment(sdkWireString(assetId)),
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "reposUpdateReleaseAsset",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("PATCH", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/releases/assets/", sdkEncodePathSegment(sdkWireString(assetId))].joined(), config: config, body: requestBody, decoder: .json, operationId: "reposUpdateReleaseAsset", options: requestOptions)).data
     }
 }

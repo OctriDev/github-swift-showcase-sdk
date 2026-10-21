@@ -3,56 +3,29 @@
 
 import Foundation
 
-public extension GistsNamespace {
-    /// Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information,
-    /// see "[HTTP method](https://docs.github.com/rest/guides/getting-started-with-the-rest-api#http-method)."
-    func star(gistId: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        try await GistsMethods.gistsStar(config: config, gistId: gistId, requestOptions: requestOptions)
+extension GistsNamespace {
+/// Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP method](https://docs.github.com/rest/guides/getting-started-with-the-rest-api#http-method)."
+    public func star(gistId: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await GistsMethods.gistsStar(config: config, gistId: gistId, requestOptions: requestOptions)
     }
 
-    /// Removes the authenticated user's star from a gist. Supply `gist_id` to identify the gist whose star you want to
-    /// remove; the operation returns no content.
-    func unstar(gistId: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        try await GistsMethods.gistsUnstar(config: config, gistId: gistId, requestOptions: requestOptions)
+/// Removes the authenticated user's star from a gist. Supply `gist_id` to identify the gist whose star you want to remove; the operation returns no content.
+    public func unstar(gistId: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await GistsMethods.gistsUnstar(config: config, gistId: gistId, requestOptions: requestOptions)
     }
 
-    /// Retrieves a specified revision of a gist. Supply `gist_id` and `sha` to identify the gist and revision; the
-    /// `application/vnd.github.raw+json` media type returns the raw Markdown and is the default when you do not specify
-    /// a media type.
+/// Retrieves a specified revision of a gist. Supply `gist_id` and `sha` to identify the gist and revision; the `application/vnd.github.raw+json` media type returns the raw Markdown and is the default when you do not specify a media type.
     ///
-    /// Gets a specified gist revision. This endpoint supports the following custom media types. For more information,
-    /// see "[Media
-    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
-    /// **`application/vnd.github.raw+json`**: Returns the raw markdown. This is the default if you do not pass any
-    /// specific media type.
-    func getRevision(gistId: String, sha: String, requestOptions: RequestOptions? = nil) async throws -> GistSimple {
-        try await GistsMethods.gistsGetRevision(
-            config: config,
-            gistId: gistId,
-            sha: sha,
-            requestOptions: requestOptions
-        )
+    /// Gets a specified gist revision. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.raw+json`**: Returns the raw markdown. This is the default if you do not pass any specific media type.
+    public func getRevision(gistId: String, sha: String, requestOptions: RequestOptions? = nil) async throws -> GistSimple {
+        return try await GistsMethods.gistsGetRevision(config: config, gistId: gistId, sha: sha, requestOptions: requestOptions)
     }
 
-    /// Lists public gists for the specified user. Use `since` to filter by last-updated time, and use `page` and
-    /// `per_page` to paginate the results. `per_page` accepts up to 100 results per page.
+/// Lists public gists for the specified user. Use `since` to filter by last-updated time, and use `page` and `per_page` to paginate the results. `per_page` accepts up to 100 results per page.
     ///
     /// Lists public gists for the specified user:
-    func listForUser(
-        username: String,
-        since: Date? = nil,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [BaseGist] {
-        try await GistsMethods.gistsListForUser(
-            config: config,
-            username: username,
-            since: since,
-            perPage: perPage,
-            page: page,
-            requestOptions: requestOptions
-        )
+    public func listForUser(username: String, since: Date? = nil, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [BaseGist] {
+        return try await GistsMethods.gistsListForUser(config: config, username: username, since: since, perPage: perPage, page: page, requestOptions: requestOptions)
     }
 }
 
@@ -62,21 +35,16 @@ public class GitignoreNamespace {
         self.config = config
     }
 
-    /// List all templates available to pass as an option when [creating a
-    /// repository](https://docs.github.com/rest/repos/repos#create-a-repository-for-the-authenticated-user).
+/// List all templates available to pass as an option when [creating a repository](https://docs.github.com/rest/repos/repos#create-a-repository-for-the-authenticated-user).
     public func listTemplates(requestOptions: RequestOptions? = nil) async throws -> [String] {
-        try await GitignoreMethods.listTemplates(config: config, requestOptions: requestOptions)
+        return try await GitignoreMethods.listTemplates(config: config, requestOptions: requestOptions)
     }
 
-    /// Retrieves the content of a gitignore template by name. The `application/vnd.github.raw+json` media type returns
-    /// the raw `.gitignore` contents; the response object includes the template name and source.
+/// Retrieves the content of a gitignore template by name. The `application/vnd.github.raw+json` media type returns the raw `.gitignore` contents; the response object includes the template name and source.
     ///
-    /// Get the content of a gitignore template. This endpoint supports the following custom media types. For more
-    /// information, see "[Media
-    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
-    /// **`application/vnd.github.raw+json`**: Returns the raw .gitignore contents.
+    /// Get the content of a gitignore template. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.raw+json`**: Returns the raw .gitignore contents.
     public func getTemplate(name: String, requestOptions: RequestOptions? = nil) async throws -> GitignoreTemplate {
-        try await GitignoreMethods.gitignoreGetTemplate(config: config, name: name, requestOptions: requestOptions)
+        return try await GitignoreMethods.gitignoreGetTemplate(config: config, name: name, requestOptions: requestOptions)
     }
 }
 
@@ -86,389 +54,103 @@ public class IssuesNamespace {
         self.config = config
     }
 
-    /// Lists issues assigned to the authenticated user across repositories the user can access, including owned,
-    /// member, and organization repositories. Use `filter`, `state`, and `labels` to narrow the results, and use `page`
-    /// and `per_page` to paginate the results. Responses can include pull requests; identify them by the `pull_request`
-    /// key, and use the pull requests endpoint to retrieve a pull request ID.
+/// Lists issues assigned to the authenticated user across repositories the user can access, including owned, member, and organization repositories. Use `filter`, `state`, and `labels` to narrow the results, and use `page` and `per_page` to paginate the results. Responses can include pull requests; identify them by the `pull_request` key, and use the pull requests endpoint to retrieve a pull request ID.
     ///
-    /// List issues assigned to the authenticated user across all visible repositories including owned repositories,
-    /// member repositories, and organization repositories. You can use the `filter` query parameter to fetch issues
-    /// that are not necessarily assigned to you. > [!NOTE] > GitHub's REST API considers every pull request an issue,
-    /// but not every issue is a pull request. For this reason, "Issues" endpoints may return both issues and pull
-    /// requests in the response. You can identify pull requests by the `pull_request` key. Be aware that the `id` of a
-    /// pull request returned from "Issues" endpoints will be an _issue id_. To find out the pull request id, use the
-    /// "[List pull requests](https://docs.github.com/rest/pulls/pulls#list-pull-requests)" endpoint. This endpoint
-    /// supports the following custom media types. For more information, see "[Media
-    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
-    /// **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the
-    /// default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text
-    /// only representation of the markdown body. Response will include `body_text`. -
-    /// **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include
-    /// `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response
-    /// will include `body`, `body_text`, and `body_html`.
-    public func list(
-        options: IssuesMethods.IssuesListOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [Issue] {
-        try await IssuesMethods.issuesList(config: config, options: options, requestOptions: requestOptions)
+    /// List issues assigned to the authenticated user across all visible repositories including owned repositories, member repositories, and organization repositories. You can use the `filter` query parameter to fetch issues that are not necessarily assigned to you. > [!NOTE] > GitHub's REST API considers every pull request an issue, but not every issue is a pull request. For this reason, "Issues" endpoints may return both issues and pull requests in the response. You can identify pull requests by the `pull_request` key. Be aware that the `id` of a pull request returned from "Issues" endpoints will be an _issue id_. To find out the pull request id, use the "[List pull requests](https://docs.github.com/rest/pulls/pulls#list-pull-requests)" endpoint. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text only representation of the markdown body. Response will include `body_text`. - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    public func list(options: IssuesMethods.IssuesListOptions, requestOptions: RequestOptions? = nil) async throws -> [Issue] {
+        return try await IssuesMethods.issuesList(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// List issues in an organization assigned to the authenticated user. > [!NOTE] > GitHub's REST API considers every
-    /// pull request an issue, but not every issue is a pull request. For this reason, "Issues" endpoints may return
-    /// both issues and pull requests in the response. You can identify pull requests by the `pull_request` key. Be
-    /// aware that the `id` of a pull request returned from "Issues" endpoints will be an _issue id_. To find out the
-    /// pull request id, use the "[List pull requests](https://docs.github.com/rest/pulls/pulls#list-pull-requests)"
-    /// endpoint. This endpoint supports the following custom media types. For more information, see "[Media
-    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
-    /// **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the
-    /// default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text
-    /// only representation of the markdown body. Response will include `body_text`. -
-    /// **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include
-    /// `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response
-    /// will include `body`, `body_text`, and `body_html`.
-    public func listForOrg(
-        options: IssuesMethods.IssuesListForOrgOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [Issue] {
-        try await IssuesMethods.issuesListForOrg(config: config, options: options, requestOptions: requestOptions)
+/// List issues in an organization assigned to the authenticated user. > [!NOTE] > GitHub's REST API considers every pull request an issue, but not every issue is a pull request. For this reason, "Issues" endpoints may return both issues and pull requests in the response. You can identify pull requests by the `pull_request` key. Be aware that the `id` of a pull request returned from "Issues" endpoints will be an _issue id_. To find out the pull request id, use the "[List pull requests](https://docs.github.com/rest/pulls/pulls#list-pull-requests)" endpoint. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text only representation of the markdown body. Response will include `body_text`. - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    public func listForOrg(options: IssuesMethods.IssuesListForOrgOptions, requestOptions: RequestOptions? = nil) async throws -> [Issue] {
+        return try await IssuesMethods.issuesListForOrg(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Lists the [available
-    /// assignees](https://docs.github.com/articles/assigning-issues-and-pull-requests-to-other-github-users/) for
-    /// issues in a repository.
-    public func listAssignees(
-        owner: String,
-        repo: String,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [SimpleUser] {
-        try await IssuesMethods.issuesListAssignees(
-            config: config,
-            owner: owner,
-            repo: repo,
-            perPage: perPage,
-            page: page,
-            requestOptions: requestOptions
-        )
+/// Lists the [available assignees](https://docs.github.com/articles/assigning-issues-and-pull-requests-to-other-github-users/) for issues in a repository.
+    public func listAssignees(owner: String, repo: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [SimpleUser] {
+        return try await IssuesMethods.issuesListAssignees(config: config, owner: owner, repo: repo, perPage: perPage, page: page, requestOptions: requestOptions)
     }
 
-    /// Checks whether a user can be assigned to issues in a repository. Use `owner` and `repo` to identify the
-    /// repository and `assignee` to identify the user; a 204 response has no body when assignment is allowed.
+/// Checks whether a user can be assigned to issues in a repository. Use `owner` and `repo` to identify the repository and `assignee` to identify the user; a 204 response has no body when assignment is allowed.
     ///
-    /// Checks if a user has permission to be assigned to an issue in this repository. If the `assignee` can be assigned
-    /// to issues in the repository, a `204` header with no content is returned. Otherwise a `404` status code is
-    /// returned.
-    public func checkUserCanBeAssigned(
-        owner: String,
-        repo: String,
-        assignee: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await IssuesMethods.issuesCheckUserCanBeAssigned(
-            config: config,
-            owner: owner,
-            repo: repo,
-            assignee: assignee,
-            requestOptions: requestOptions
-        )
+    /// Checks if a user has permission to be assigned to an issue in this repository. If the `assignee` can be assigned to issues in the repository, a `204` header with no content is returned. Otherwise a `404` status code is returned.
+    public func checkUserCanBeAssigned(owner: String, repo: String, assignee: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await IssuesMethods.issuesCheckUserCanBeAssigned(config: config, owner: owner, repo: repo, assignee: assignee, requestOptions: requestOptions)
     }
 
-    /// List issues in a repository. Only open issues will be listed. > [!NOTE] > GitHub's REST API considers every pull
-    /// request an issue, but not every issue is a pull request. For this reason, "Issues" endpoints may return both
-    /// issues and pull requests in the response. You can identify pull requests by the `pull_request` key. Be aware
-    /// that the `id` of a pull request returned from "Issues" endpoints will be an _issue id_. To find out the pull
-    /// request id, use the "[List pull requests](https://docs.github.com/rest/pulls/pulls#list-pull-requests)"
-    /// endpoint. This endpoint supports the following custom media types. For more information, see "[Media
-    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
-    /// **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the
-    /// default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text
-    /// only representation of the markdown body. Response will include `body_text`. -
-    /// **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include
-    /// `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response
-    /// will include `body`, `body_text`, and `body_html`.
-    public func listForRepo(
-        options: IssuesMethods.IssuesListForRepoOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [Issue] {
-        try await IssuesMethods.issuesListForRepo(config: config, options: options, requestOptions: requestOptions)
+/// List issues in a repository. Only open issues will be listed. > [!NOTE] > GitHub's REST API considers every pull request an issue, but not every issue is a pull request. For this reason, "Issues" endpoints may return both issues and pull requests in the response. You can identify pull requests by the `pull_request` key. Be aware that the `id` of a pull request returned from "Issues" endpoints will be an _issue id_. To find out the pull request id, use the "[List pull requests](https://docs.github.com/rest/pulls/pulls#list-pull-requests)" endpoint. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text only representation of the markdown body. Response will include `body_text`. - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    public func listForRepo(options: IssuesMethods.IssuesListForRepoOptions, requestOptions: RequestOptions? = nil) async throws -> [Issue] {
+        return try await IssuesMethods.issuesListForRepo(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Creates an issue in a repository. Provide a `title`; you can also include a body, labels, assignees, milestone,
-    /// issue type, parent issue, or issue field values. Creating an issue triggers notifications, and creating content
-    /// too quickly may result in secondary rate limiting.
+/// Creates an issue in a repository. Provide a `title`; you can also include a body, labels, assignees, milestone, issue type, parent issue, or issue field values. Creating an issue triggers notifications, and creating content too quickly may result in secondary rate limiting.
     ///
-    /// Any user with pull access to a repository can create an issue. If [issues are disabled in the
-    /// repository](https://docs.github.com/articles/disabling-issues/), the API returns a `410 Gone` status. This
-    /// endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications).
-    /// Creating content too quickly using this endpoint may result in secondary rate limiting. For more information,
-    /// see "[Rate limits for the
-    /// API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)"
-    /// and "[Best practices for using the REST
-    /// API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)." This endpoint supports the
-    /// following custom media types. For more information, see "[Media
-    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
-    /// **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the
-    /// default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text
-    /// only representation of the markdown body. Response will include `body_text`. -
-    /// **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include
-    /// `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response
-    /// will include `body`, `body_text`, and `body_html`.
-    public func create(
-        options: IssuesMethods.IssuesCreateOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> Issue {
-        try await IssuesMethods.issuesCreate(config: config, options: options, requestOptions: requestOptions)
+    /// Any user with pull access to a repository can create an issue. If [issues are disabled in the repository](https://docs.github.com/articles/disabling-issues/), the API returns a `410 Gone` status. This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. For more information, see "[Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)" and "[Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)." This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text only representation of the markdown body. Response will include `body_text`. - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    public func create(options: IssuesMethods.IssuesCreateOptions, requestOptions: RequestOptions? = nil) async throws -> Issue {
+        return try await IssuesMethods.issuesCreate(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// You can use the REST API to list comments on issues and pull requests for a repository. Every pull request is an
-    /// issue, but not every issue is a pull request. By default, issue comments are ordered by ascending ID. This
-    /// endpoint supports the following custom media types. For more information, see "[Media
-    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
-    /// **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the
-    /// default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text
-    /// only representation of the markdown body. Response will include `body_text`. -
-    /// **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include
-    /// `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response
-    /// will include `body`, `body_text`, and `body_html`.
-    public func listCommentsForRepo(
-        owner: String,
-        repo: String,
-        sort: AppsListAccountsForPlanParameter? = nil,
-        direction: IssuesListCommentsForRepoParameter? = nil,
-        since: Date? = nil,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [IssueComment] {
-        try await IssuesMethods.issuesListCommentsForRepo(
-            config: config,
-            owner: owner,
-            repo: repo,
-            sort: sort,
-            direction: direction,
-            since: since,
-            perPage: perPage,
-            page: page,
-            requestOptions: requestOptions
-        )
+/// You can use the REST API to list comments on issues and pull requests for a repository. Every pull request is an issue, but not every issue is a pull request. By default, issue comments are ordered by ascending ID. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text only representation of the markdown body. Response will include `body_text`. - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    public func listCommentsForRepo(owner: String, repo: String, sort: AppsListAccountsForPlanParameter? = nil, direction: IssuesListCommentsForRepoParameter? = nil, since: Date? = nil, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [IssueComment] {
+        return try await IssuesMethods.issuesListCommentsForRepo(config: config, owner: owner, repo: repo, sort: sort, direction: direction, since: since, perPage: perPage, page: page, requestOptions: requestOptions)
     }
 
-    /// You can use the REST API to get comments on issues and pull requests. Every pull request is an issue, but not
-    /// every issue is a pull request. This endpoint supports the following custom media types. For more information,
-    /// see "[Media
-    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
-    /// **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the
-    /// default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text
-    /// only representation of the markdown body. Response will include `body_text`. -
-    /// **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include
-    /// `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response
-    /// will include `body`, `body_text`, and `body_html`.
-    public func getComment(
-        owner: String,
-        repo: String,
-        commentId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> IssueComment {
-        try await IssuesMethods.issuesGetComment(
-            config: config,
-            owner: owner,
-            repo: repo,
-            commentId: commentId,
-            requestOptions: requestOptions
-        )
+/// You can use the REST API to get comments on issues and pull requests. Every pull request is an issue, but not every issue is a pull request. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text only representation of the markdown body. Response will include `body_text`. - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    public func getComment(owner: String, repo: String, commentId: Int, requestOptions: RequestOptions? = nil) async throws -> IssueComment {
+        return try await IssuesMethods.issuesGetComment(config: config, owner: owner, repo: repo, commentId: commentId, requestOptions: requestOptions)
     }
 }
 
-public extension IssuesNamespace {
-    /// You can use the REST API to update comments on issues and pull requests. Every pull request is an issue, but not
-    /// every issue is a pull request. This endpoint supports the following custom media types. For more information,
-    /// see "[Media
-    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
-    /// **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the
-    /// default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text
-    /// only representation of the markdown body. Response will include `body_text`. -
-    /// **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include
-    /// `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response
-    /// will include `body`, `body_text`, and `body_html`.
-    func updateComment(
-        owner: String,
-        repo: String,
-        commentId: Int,
-        body: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> IssueComment {
-        try await IssuesMethods.issuesUpdateComment(
-            config: config,
-            owner: owner,
-            repo: repo,
-            commentId: commentId,
-            body: body,
-            requestOptions: requestOptions
-        )
+extension IssuesNamespace {
+/// You can use the REST API to update comments on issues and pull requests. Every pull request is an issue, but not every issue is a pull request. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text only representation of the markdown body. Response will include `body_text`. - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    public func updateComment(owner: String, repo: String, commentId: Int, body: String, requestOptions: RequestOptions? = nil) async throws -> IssueComment {
+        return try await IssuesMethods.issuesUpdateComment(config: config, owner: owner, repo: repo, commentId: commentId, body: body, requestOptions: requestOptions)
     }
 
-    /// You can use the REST API to delete comments on issues and pull requests. Every pull request is an issue, but not
-    /// every issue is a pull request.
-    func deleteComment(
-        owner: String,
-        repo: String,
-        commentId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await IssuesMethods.issuesDeleteComment(
-            config: config,
-            owner: owner,
-            repo: repo,
-            commentId: commentId,
-            requestOptions: requestOptions
-        )
+/// You can use the REST API to delete comments on issues and pull requests. Every pull request is an issue, but not every issue is a pull request.
+    public func deleteComment(owner: String, repo: String, commentId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await IssuesMethods.issuesDeleteComment(config: config, owner: owner, repo: repo, commentId: commentId, requestOptions: requestOptions)
     }
 
-    /// Pins an issue comment in the specified repository. Use `owner`, `repo`, and `comment_id` to identify the comment
-    /// to pin. The response includes the comment and details about who pinned it and when.
+/// Pins an issue comment in the specified repository. Use `owner`, `repo`, and `comment_id` to identify the comment to pin. The response includes the comment and details about who pinned it and when.
     ///
-    /// You can use the REST API to pin comments on issues. This endpoint supports the following custom media types. For
-    /// more information, see "[Media
-    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
-    /// **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the
-    /// default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text
-    /// only representation of the markdown body. Response will include `body_text`. -
-    /// **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include
-    /// `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response
-    /// will include `body`, `body_text`, and `body_html`.
-    func pinComment(
-        owner: String,
-        repo: String,
-        commentId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> IssueComment {
-        try await IssuesMethods.issuesPinComment(
-            config: config,
-            owner: owner,
-            repo: repo,
-            commentId: commentId,
-            requestOptions: requestOptions
-        )
+    /// You can use the REST API to pin comments on issues. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text only representation of the markdown body. Response will include `body_text`. - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    public func pinComment(owner: String, repo: String, commentId: Int, requestOptions: RequestOptions? = nil) async throws -> IssueComment {
+        return try await IssuesMethods.issuesPinComment(config: config, owner: owner, repo: repo, commentId: commentId, requestOptions: requestOptions)
     }
 
-    /// Removes the pin from an issue comment in the specified repository. Use `owner`, `repo`, and `comment_id` to
-    /// identify the comment whose pin you want to remove.
+/// Removes the pin from an issue comment in the specified repository. Use `owner`, `repo`, and `comment_id` to identify the comment whose pin you want to remove.
     ///
     /// You can use the REST API to unpin comments on issues.
-    func unpinComment(
-        owner: String,
-        repo: String,
-        commentId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await IssuesMethods.issuesUnpinComment(
-            config: config,
-            owner: owner,
-            repo: repo,
-            commentId: commentId,
-            requestOptions: requestOptions
-        )
+    public func unpinComment(owner: String, repo: String, commentId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await IssuesMethods.issuesUnpinComment(config: config, owner: owner, repo: repo, commentId: commentId, requestOptions: requestOptions)
     }
 
-    /// Lists issue events for a repository, including event details and associated issue information. Use `page` and
-    /// `per_page` to paginate the results.
+/// Lists issue events for a repository, including event details and associated issue information. Use `page` and `per_page` to paginate the results.
     ///
     /// Lists events for a repository.
-    func listEventsForRepo(
-        owner: String,
-        repo: String,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [IssueEvent] {
-        try await IssuesMethods.issuesListEventsForRepo(
-            config: config,
-            owner: owner,
-            repo: repo,
-            perPage: perPage,
-            page: page,
-            requestOptions: requestOptions
-        )
+    public func listEventsForRepo(owner: String, repo: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [IssueEvent] {
+        return try await IssuesMethods.issuesListEventsForRepo(config: config, owner: owner, repo: repo, perPage: perPage, page: page, requestOptions: requestOptions)
     }
 
-    /// Retrieves a single issue event from a repository by its event identifier. Use `event_id` to select the event and
-    /// `owner` and `repo` to identify the repository.
+/// Retrieves a single issue event from a repository by its event identifier. Use `event_id` to select the event and `owner` and `repo` to identify the repository.
     ///
     /// Gets a single event by the event id.
-    func getEvent(
-        owner: String,
-        repo: String,
-        eventId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> IssueEvent {
-        try await IssuesMethods.issuesGetEvent(
-            config: config,
-            owner: owner,
-            repo: repo,
-            eventId: eventId,
-            requestOptions: requestOptions
-        )
+    public func getEvent(owner: String, repo: String, eventId: Int, requestOptions: RequestOptions? = nil) async throws -> IssueEvent {
+        return try await IssuesMethods.issuesGetEvent(config: config, owner: owner, repo: repo, eventId: eventId, requestOptions: requestOptions)
     }
 
-    /// Retrieves an issue from a repository by its issue number. Use `owner`, `repo`, and `issue_number` to identify
-    /// the repository and issue; the response may also represent a pull request. Transferred issues return a 301
-    /// redirect, while deleted issues return 404 or 410 depending on the authenticated user's read access.
+/// Retrieves an issue from a repository by its issue number. Use `owner`, `repo`, and `issue_number` to identify the repository and issue; the response may also represent a pull request. Transferred issues return a 301 redirect, while deleted issues return 404 or 410 depending on the authenticated user's read access.
     ///
-    /// The API returns a [`301 Moved Permanently`
-    /// status](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api#follow-redirects) if the issue
-    /// was [transferred](https://docs.github.com/articles/transferring-an-issue-to-another-repository/) to another
-    /// repository. If the issue was transferred to or deleted from a repository where the authenticated user lacks read
-    /// access, the API returns a `404 Not Found` status. If the issue was deleted from a repository where the
-    /// authenticated user has read access, the API returns a `410 Gone` status. To receive webhook events for
-    /// transferred and deleted issues, subscribe to the
-    /// [`issues`](https://docs.github.com/webhooks/event-payloads/#issues) webhook. > [!NOTE] > GitHub's REST API
-    /// considers every pull request an issue, but not every issue is a pull request. For this reason, "Issues"
-    /// endpoints may return both issues and pull requests in the response. You can identify pull requests by the
-    /// `pull_request` key. Be aware that the `id` of a pull request returned from "Issues" endpoints will be an _issue
-    /// id_. To find out the pull request id, use the "[List pull
-    /// requests](https://docs.github.com/rest/pulls/pulls#list-pull-requests)" endpoint. This endpoint supports the
-    /// following custom media types. For more information, see "[Media
-    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
-    /// **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the
-    /// default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text
-    /// only representation of the markdown body. Response will include `body_text`. -
-    /// **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include
-    /// `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response
-    /// will include `body`, `body_text`, and `body_html`.
-    func get(
-        owner: String,
-        repo: String,
-        issueNumber: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> Issue {
-        try await IssuesMethods.issuesGet(
-            config: config,
-            owner: owner,
-            repo: repo,
-            issueNumber: issueNumber,
-            requestOptions: requestOptions
-        )
+    /// The API returns a [`301 Moved Permanently` status](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api#follow-redirects) if the issue was [transferred](https://docs.github.com/articles/transferring-an-issue-to-another-repository/) to another repository. If the issue was transferred to or deleted from a repository where the authenticated user lacks read access, the API returns a `404 Not Found` status. If the issue was deleted from a repository where the authenticated user has read access, the API returns a `410 Gone` status. To receive webhook events for transferred and deleted issues, subscribe to the [`issues`](https://docs.github.com/webhooks/event-payloads/#issues) webhook. > [!NOTE] > GitHub's REST API considers every pull request an issue, but not every issue is a pull request. For this reason, "Issues" endpoints may return both issues and pull requests in the response. You can identify pull requests by the `pull_request` key. Be aware that the `id` of a pull request returned from "Issues" endpoints will be an _issue id_. To find out the pull request id, use the "[List pull requests](https://docs.github.com/rest/pulls/pulls#list-pull-requests)" endpoint. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text only representation of the markdown body. Response will include `body_text`. - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    public func get(owner: String, repo: String, issueNumber: Int, requestOptions: RequestOptions? = nil) async throws -> Issue {
+        return try await IssuesMethods.issuesGet(config: config, owner: owner, repo: repo, issueNumber: issueNumber, requestOptions: requestOptions)
     }
 
-    /// Updates the title, body, state, assignees, labels, milestone, type, or field values of an issue. Supply only the
-    /// properties you want to change; `state_reason` applies only when you change `state`, and `duplicate_issue_id`
-    /// applies only when `state_reason` is `duplicate`. Users with push access or the Triage role can edit issues, but
-    /// milestone, label, type, and field-value changes require push access.
+/// Updates the title, body, state, assignees, labels, milestone, type, or field values of an issue. Supply only the properties you want to change; `state_reason` applies only when you change `state`, and `duplicate_issue_id` applies only when `state_reason` is `duplicate`. Users with push access or the Triage role can edit issues, but milestone, label, type, and field-value changes require push access.
     ///
-    /// Issue owners and users with push access or Triage role can edit an issue. This endpoint supports the following
-    /// custom media types. For more information, see "[Media
-    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
-    /// **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the
-    /// default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text
-    /// only representation of the markdown body. Response will include `body_text`. -
-    /// **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include
-    /// `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response
-    /// will include `body`, `body_text`, and `body_html`.
-    func update(
-        options: IssuesMethods.IssuesUpdateOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> IssuesUpdateResponse {
-        try await IssuesMethods.issuesUpdate(config: config, options: options, requestOptions: requestOptions)
+    /// Issue owners and users with push access or Triage role can edit an issue. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text only representation of the markdown body. Response will include `body_text`. - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    public func update(options: IssuesMethods.IssuesUpdateOptions, requestOptions: RequestOptions? = nil) async throws -> IssuesUpdateResponse {
+        return try await IssuesMethods.issuesUpdate(config: config, options: options, requestOptions: requestOptions)
     }
 }

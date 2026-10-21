@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Search domain models
+// Search domain models
 /// Optional object value serialized in the `permissions` wire field.
 public struct RepoSearchResultItemPermissions: Codable {
     /// Required `boolean` value serialized in the `admin` wire field.
@@ -25,45 +25,31 @@ public struct RepoSearchResultItemPermissions: Codable {
         case triage
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension RepoSearchResultItemPermissions {
-    init(from decoder: Decoder) throws {
+extension RepoSearchResultItemPermissions {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.admin) else {
-            throw SdkValidationError(
-                field: "admin",
-                code: "required",
-                message: "Validation failed for 'admin': value is required"
-            )
+            throw SdkValidationError(field: "admin", code: "required", message: "Validation failed for 'admin': value is required")
         }
         guard container.contains(.push) else {
-            throw SdkValidationError(
-                field: "push",
-                code: "required",
-                message: "Validation failed for 'push': value is required"
-            )
+            throw SdkValidationError(field: "push", code: "required", message: "Validation failed for 'push': value is required")
         }
         guard container.contains(.pull) else {
-            throw SdkValidationError(
-                field: "pull",
-                code: "required",
-                message: "Validation failed for 'pull': value is required"
-            )
+            throw SdkValidationError(field: "pull", code: "required", message: "Validation failed for 'pull': value is required")
         }
-        admin = try container.sdkDecodeRequired(.admin)
-        push = try container.sdkDecodeRequired(.push)
-        pull = try container.sdkDecodeRequired(.pull)
-        maintain = try container.sdkDecodeIfPresent(.maintain)
-        triage = try container.sdkDecodeIfPresent(.triage)
+        self.admin = try container.sdkDecodeRequired(.admin)
+        self.push = try container.sdkDecodeRequired(.push)
+        self.pull = try container.sdkDecodeRequired(.pull)
+        self.maintain = try container.sdkDecodeIfPresent(.maintain)
+        self.triage = try container.sdkDecodeIfPresent(.triage)
     }
 }
 
-public extension RepoSearchResultItemPermissions {
-    init(admin: Bool, push: Bool, pull: Bool, maintain: Bool? = nil, triage: Bool? = nil) {
+extension RepoSearchResultItemPermissions {
+    public init(admin: Bool, push: Bool, pull: Bool, maintain: Bool? = nil, triage: Bool? = nil) {
         (self.admin, self.push) = (admin, push)
         (self.pull, self.maintain) = (pull, maintain)
         self.triage = triage
@@ -349,207 +335,113 @@ public struct RepoSearchResultItem: Codable {
         case webCommitSignoffRequired = "web_commit_signoff_required"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension RepoSearchResultItem {
-    init(from decoder: Decoder) throws {
+extension RepoSearchResultItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        name = try container.sdkDecodeRequired(.name)
-        fullName = try container.sdkDecodeRequired(.fullName)
-        owner = try container.sdkDecodeNullable(.owner)
-        self.private = try container.sdkDecodeRequired(.private)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        description = try container.sdkDecodeNullable(.description)
-        fork = try container.sdkDecodeRequired(.fork)
-        url = try container.sdkDecodeRequired(.url)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        pushedAt = try container.sdkDecodeRequired(.pushedAt)
-        homepage = try container.sdkDecodeNullable(.homepage)
-        size = try container.sdkDecodeRequired(.size)
-        stargazersCount = try container.sdkDecodeRequired(.stargazersCount)
-        watchersCount = try container.sdkDecodeRequired(.watchersCount)
-        language = try container.sdkDecodeNullable(.language)
-        forksCount = try container.sdkDecodeRequired(.forksCount)
-        openIssuesCount = try container.sdkDecodeRequired(.openIssuesCount)
-        defaultBranch = try container.sdkDecodeRequired(.defaultBranch)
-        score = try container.sdkDecodeRequired(.score)
-        forksUrl = try container.sdkDecodeRequired(.forksUrl)
-        keysUrl = try container.sdkDecodeRequired(.keysUrl)
-        collaboratorsUrl = try container.sdkDecodeRequired(.collaboratorsUrl)
-        teamsUrl = try container.sdkDecodeRequired(.teamsUrl)
-        hooksUrl = try container.sdkDecodeRequired(.hooksUrl)
-        issueEventsUrl = try container.sdkDecodeRequired(.issueEventsUrl)
-        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        assigneesUrl = try container.sdkDecodeRequired(.assigneesUrl)
-        branchesUrl = try container.sdkDecodeRequired(.branchesUrl)
-        tagsUrl = try container.sdkDecodeRequired(.tagsUrl)
-        blobsUrl = try container.sdkDecodeRequired(.blobsUrl)
-        gitTagsUrl = try container.sdkDecodeRequired(.gitTagsUrl)
-        gitRefsUrl = try container.sdkDecodeRequired(.gitRefsUrl)
-        treesUrl = try container.sdkDecodeRequired(.treesUrl)
-        statusesUrl = try container.sdkDecodeRequired(.statusesUrl)
-        languagesUrl = try container.sdkDecodeRequired(.languagesUrl)
-        stargazersUrl = try container.sdkDecodeRequired(.stargazersUrl)
-        contributorsUrl = try container.sdkDecodeRequired(.contributorsUrl)
-        subscribersUrl = try container.sdkDecodeRequired(.subscribersUrl)
-        subscriptionUrl = try container.sdkDecodeRequired(.subscriptionUrl)
-        commitsUrl = try container.sdkDecodeRequired(.commitsUrl)
-        gitCommitsUrl = try container.sdkDecodeRequired(.gitCommitsUrl)
-        commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
-        issueCommentUrl = try container.sdkDecodeRequired(.issueCommentUrl)
-        contentsUrl = try container.sdkDecodeRequired(.contentsUrl)
-        compareUrl = try container.sdkDecodeRequired(.compareUrl)
-        mergesUrl = try container.sdkDecodeRequired(.mergesUrl)
-        archiveUrl = try container.sdkDecodeRequired(.archiveUrl)
-        downloadsUrl = try container.sdkDecodeRequired(.downloadsUrl)
-        issuesUrl = try container.sdkDecodeRequired(.issuesUrl)
-        pullsUrl = try container.sdkDecodeRequired(.pullsUrl)
-        milestonesUrl = try container.sdkDecodeRequired(.milestonesUrl)
-        notificationsUrl = try container.sdkDecodeRequired(.notificationsUrl)
-        labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
-        releasesUrl = try container.sdkDecodeRequired(.releasesUrl)
-        deploymentsUrl = try container.sdkDecodeRequired(.deploymentsUrl)
-        gitUrl = try container.sdkDecodeRequired(.gitUrl)
-        sshUrl = try container.sdkDecodeRequired(.sshUrl)
-        cloneUrl = try container.sdkDecodeRequired(.cloneUrl)
-        svnUrl = try container.sdkDecodeRequired(.svnUrl)
-        forks = try container.sdkDecodeRequired(.forks)
-        openIssues = try container.sdkDecodeRequired(.openIssues)
-        watchers = try container.sdkDecodeRequired(.watchers)
-        mirrorUrl = try container.sdkDecodeNullable(.mirrorUrl)
-        hasIssues = try container.sdkDecodeRequired(.hasIssues)
-        hasProjects = try container.sdkDecodeRequired(.hasProjects)
-        hasPages = try container.sdkDecodeRequired(.hasPages)
-        hasWiki = try container.sdkDecodeRequired(.hasWiki)
-        hasDownloads = try container.sdkDecodeRequired(.hasDownloads)
-        archived = try container.sdkDecodeRequired(.archived)
-        disabled = try container.sdkDecodeRequired(.disabled)
-        license = try container.sdkDecodeNullable(.license)
-        primaryBranch = try container.sdkDecodeIfPresent(.primaryBranch)
-        topics = try container.sdkDecodeIfPresent(.topics)
-        hasDiscussions = try container.sdkDecodeIfPresent(.hasDiscussions)
-        hasPullRequests = try container.sdkDecodeIfPresent(.hasPullRequests)
-        pullRequestCreationPolicy = try container.sdkDecodeIfPresent(.pullRequestCreationPolicy)
-        visibility = try container.sdkDecodeIfPresent(.visibility)
-        permissions = try container.sdkDecodeIfPresent(.permissions)
-        textMatches = try container.sdkDecodeIfPresent(.textMatches)
-        tempCloneToken = try container.sdkDecodeIfPresent(.tempCloneToken)
-        allowMergeCommit = try container.sdkDecodeIfPresent(.allowMergeCommit)
-        allowSquashMerge = try container.sdkDecodeIfPresent(.allowSquashMerge)
-        allowRebaseMerge = try container.sdkDecodeIfPresent(.allowRebaseMerge)
-        allowAutoMerge = try container.sdkDecodeIfPresent(.allowAutoMerge)
-        deleteBranchOnMerge = try container.sdkDecodeIfPresent(.deleteBranchOnMerge)
-        allowForking = try container.sdkDecodeIfPresent(.allowForking)
-        isTemplate = try container.sdkDecodeIfPresent(.isTemplate)
-        webCommitSignoffRequired = try container.sdkDecodeIfPresent(.webCommitSignoffRequired)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.fullName = try container.sdkDecodeRequired(.fullName)
+        self.owner = try container.sdkDecodeNullable(.owner)
+        self.`private` = try container.sdkDecodeRequired(.`private`)
+        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        self.description = try container.sdkDecodeNullable(.description)
+        self.fork = try container.sdkDecodeRequired(.fork)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        self.pushedAt = try container.sdkDecodeRequired(.pushedAt)
+        self.homepage = try container.sdkDecodeNullable(.homepage)
+        self.size = try container.sdkDecodeRequired(.size)
+        self.stargazersCount = try container.sdkDecodeRequired(.stargazersCount)
+        self.watchersCount = try container.sdkDecodeRequired(.watchersCount)
+        self.language = try container.sdkDecodeNullable(.language)
+        self.forksCount = try container.sdkDecodeRequired(.forksCount)
+        self.openIssuesCount = try container.sdkDecodeRequired(.openIssuesCount)
+        self.defaultBranch = try container.sdkDecodeRequired(.defaultBranch)
+        self.score = try container.sdkDecodeRequired(.score)
+        self.forksUrl = try container.sdkDecodeRequired(.forksUrl)
+        self.keysUrl = try container.sdkDecodeRequired(.keysUrl)
+        self.collaboratorsUrl = try container.sdkDecodeRequired(.collaboratorsUrl)
+        self.teamsUrl = try container.sdkDecodeRequired(.teamsUrl)
+        self.hooksUrl = try container.sdkDecodeRequired(.hooksUrl)
+        self.issueEventsUrl = try container.sdkDecodeRequired(.issueEventsUrl)
+        self.eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
+        self.assigneesUrl = try container.sdkDecodeRequired(.assigneesUrl)
+        self.branchesUrl = try container.sdkDecodeRequired(.branchesUrl)
+        self.tagsUrl = try container.sdkDecodeRequired(.tagsUrl)
+        self.blobsUrl = try container.sdkDecodeRequired(.blobsUrl)
+        self.gitTagsUrl = try container.sdkDecodeRequired(.gitTagsUrl)
+        self.gitRefsUrl = try container.sdkDecodeRequired(.gitRefsUrl)
+        self.treesUrl = try container.sdkDecodeRequired(.treesUrl)
+        self.statusesUrl = try container.sdkDecodeRequired(.statusesUrl)
+        self.languagesUrl = try container.sdkDecodeRequired(.languagesUrl)
+        self.stargazersUrl = try container.sdkDecodeRequired(.stargazersUrl)
+        self.contributorsUrl = try container.sdkDecodeRequired(.contributorsUrl)
+        self.subscribersUrl = try container.sdkDecodeRequired(.subscribersUrl)
+        self.subscriptionUrl = try container.sdkDecodeRequired(.subscriptionUrl)
+        self.commitsUrl = try container.sdkDecodeRequired(.commitsUrl)
+        self.gitCommitsUrl = try container.sdkDecodeRequired(.gitCommitsUrl)
+        self.commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
+        self.issueCommentUrl = try container.sdkDecodeRequired(.issueCommentUrl)
+        self.contentsUrl = try container.sdkDecodeRequired(.contentsUrl)
+        self.compareUrl = try container.sdkDecodeRequired(.compareUrl)
+        self.mergesUrl = try container.sdkDecodeRequired(.mergesUrl)
+        self.archiveUrl = try container.sdkDecodeRequired(.archiveUrl)
+        self.downloadsUrl = try container.sdkDecodeRequired(.downloadsUrl)
+        self.issuesUrl = try container.sdkDecodeRequired(.issuesUrl)
+        self.pullsUrl = try container.sdkDecodeRequired(.pullsUrl)
+        self.milestonesUrl = try container.sdkDecodeRequired(.milestonesUrl)
+        self.notificationsUrl = try container.sdkDecodeRequired(.notificationsUrl)
+        self.labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
+        self.releasesUrl = try container.sdkDecodeRequired(.releasesUrl)
+        self.deploymentsUrl = try container.sdkDecodeRequired(.deploymentsUrl)
+        self.gitUrl = try container.sdkDecodeRequired(.gitUrl)
+        self.sshUrl = try container.sdkDecodeRequired(.sshUrl)
+        self.cloneUrl = try container.sdkDecodeRequired(.cloneUrl)
+        self.svnUrl = try container.sdkDecodeRequired(.svnUrl)
+        self.forks = try container.sdkDecodeRequired(.forks)
+        self.openIssues = try container.sdkDecodeRequired(.openIssues)
+        self.watchers = try container.sdkDecodeRequired(.watchers)
+        self.mirrorUrl = try container.sdkDecodeNullable(.mirrorUrl)
+        self.hasIssues = try container.sdkDecodeRequired(.hasIssues)
+        self.hasProjects = try container.sdkDecodeRequired(.hasProjects)
+        self.hasPages = try container.sdkDecodeRequired(.hasPages)
+        self.hasWiki = try container.sdkDecodeRequired(.hasWiki)
+        self.hasDownloads = try container.sdkDecodeRequired(.hasDownloads)
+        self.archived = try container.sdkDecodeRequired(.archived)
+        self.disabled = try container.sdkDecodeRequired(.disabled)
+        self.license = try container.sdkDecodeNullable(.license)
+        self.primaryBranch = try container.sdkDecodeIfPresent(.primaryBranch)
+        self.topics = try container.sdkDecodeIfPresent(.topics)
+        self.hasDiscussions = try container.sdkDecodeIfPresent(.hasDiscussions)
+        self.hasPullRequests = try container.sdkDecodeIfPresent(.hasPullRequests)
+        self.pullRequestCreationPolicy = try container.sdkDecodeIfPresent(.pullRequestCreationPolicy)
+        self.visibility = try container.sdkDecodeIfPresent(.visibility)
+        self.permissions = try container.sdkDecodeIfPresent(.permissions)
+        self.textMatches = try container.sdkDecodeIfPresent(.textMatches)
+        self.tempCloneToken = try container.sdkDecodeIfPresent(.tempCloneToken)
+        self.allowMergeCommit = try container.sdkDecodeIfPresent(.allowMergeCommit)
+        self.allowSquashMerge = try container.sdkDecodeIfPresent(.allowSquashMerge)
+        self.allowRebaseMerge = try container.sdkDecodeIfPresent(.allowRebaseMerge)
+        self.allowAutoMerge = try container.sdkDecodeIfPresent(.allowAutoMerge)
+        self.deleteBranchOnMerge = try container.sdkDecodeIfPresent(.deleteBranchOnMerge)
+        self.allowForking = try container.sdkDecodeIfPresent(.allowForking)
+        self.isTemplate = try container.sdkDecodeIfPresent(.isTemplate)
+        self.webCommitSignoffRequired = try container.sdkDecodeIfPresent(.webCommitSignoffRequired)
         try sdkValidateConstraintsPart1()
         try sdkValidateConstraintsPart2()
     }
 }
 
-public extension RepoSearchResultItem {
-    init(
-        id: Int,
-        nodeId: String,
-        name: String,
-        fullName: String,
-        owner: NullableSimpleUser?,
-        private: Bool,
-        htmlUrl: String,
-        description: String?,
-        fork: Bool,
-        url: String,
-        createdAt: Date,
-        updatedAt: Date,
-        pushedAt: Date,
-        homepage: String?,
-        size: Int,
-        stargazersCount: Int,
-        watchersCount: Int,
-        language: String?,
-        forksCount: Int,
-        openIssuesCount: Int,
-        defaultBranch: String,
-        score: Double,
-        forksUrl: String,
-        keysUrl: String,
-        collaboratorsUrl: String,
-        teamsUrl: String,
-        hooksUrl: String,
-        issueEventsUrl: String,
-        eventsUrl: String,
-        assigneesUrl: String,
-        branchesUrl: String,
-        tagsUrl: String,
-        blobsUrl: String,
-        gitTagsUrl: String,
-        gitRefsUrl: String,
-        treesUrl: String,
-        statusesUrl: String,
-        languagesUrl: String,
-        stargazersUrl: String,
-        contributorsUrl: String,
-        subscribersUrl: String,
-        subscriptionUrl: String,
-        commitsUrl: String,
-        gitCommitsUrl: String,
-        commentsUrl: String,
-        issueCommentUrl: String,
-        contentsUrl: String,
-        compareUrl: String,
-        mergesUrl: String,
-        archiveUrl: String,
-        downloadsUrl: String,
-        issuesUrl: String,
-        pullsUrl: String,
-        milestonesUrl: String,
-        notificationsUrl: String,
-        labelsUrl: String,
-        releasesUrl: String,
-        deploymentsUrl: String,
-        gitUrl: String,
-        sshUrl: String,
-        cloneUrl: String,
-        svnUrl: String,
-        forks: Int,
-        openIssues: Int,
-        watchers: Int,
-        mirrorUrl: String?,
-        hasIssues: Bool,
-        hasProjects: Bool,
-        hasPages: Bool,
-        hasWiki: Bool,
-        hasDownloads: Bool,
-        archived: Bool,
-        disabled: Bool,
-        license: NullableLicenseSimple?,
-        primaryBranch: String? = nil,
-        topics: [String]? = nil,
-        hasDiscussions: Bool? = nil,
-        hasPullRequests: Bool? = nil,
-        pullRequestCreationPolicy: RepoSearchResultItemPullRequestCreationPolicy? = nil,
-        visibility: String? = nil,
-        permissions: RepoSearchResultItemPermissions? = nil,
-        textMatches: SearchResultTextMatches? = nil,
-        tempCloneToken: String? = nil,
-        allowMergeCommit: Bool? = nil,
-        allowSquashMerge: Bool? = nil,
-        allowRebaseMerge: Bool? = nil,
-        allowAutoMerge: Bool? = nil,
-        deleteBranchOnMerge: Bool? = nil,
-        allowForking: Bool? = nil,
-        isTemplate: Bool? = nil,
-        webCommitSignoffRequired: Bool? = nil
-    ) throws {
+extension RepoSearchResultItem {
+    public init(id: Int, nodeId: String, name: String, fullName: String, owner: NullableSimpleUser?, `private`: Bool, htmlUrl: String, description: String?, fork: Bool, url: String, createdAt: Date, updatedAt: Date, pushedAt: Date, homepage: String?, size: Int, stargazersCount: Int, watchersCount: Int, language: String?, forksCount: Int, openIssuesCount: Int, defaultBranch: String, score: Double, forksUrl: String, keysUrl: String, collaboratorsUrl: String, teamsUrl: String, hooksUrl: String, issueEventsUrl: String, eventsUrl: String, assigneesUrl: String, branchesUrl: String, tagsUrl: String, blobsUrl: String, gitTagsUrl: String, gitRefsUrl: String, treesUrl: String, statusesUrl: String, languagesUrl: String, stargazersUrl: String, contributorsUrl: String, subscribersUrl: String, subscriptionUrl: String, commitsUrl: String, gitCommitsUrl: String, commentsUrl: String, issueCommentUrl: String, contentsUrl: String, compareUrl: String, mergesUrl: String, archiveUrl: String, downloadsUrl: String, issuesUrl: String, pullsUrl: String, milestonesUrl: String, notificationsUrl: String, labelsUrl: String, releasesUrl: String, deploymentsUrl: String, gitUrl: String, sshUrl: String, cloneUrl: String, svnUrl: String, forks: Int, openIssues: Int, watchers: Int, mirrorUrl: String?, hasIssues: Bool, hasProjects: Bool, hasPages: Bool, hasWiki: Bool, hasDownloads: Bool, archived: Bool, disabled: Bool, license: NullableLicenseSimple?, primaryBranch: String? = nil, topics: [String]? = nil, hasDiscussions: Bool? = nil, hasPullRequests: Bool? = nil, pullRequestCreationPolicy: RepoSearchResultItemPullRequestCreationPolicy? = nil, visibility: String? = nil, permissions: RepoSearchResultItemPermissions? = nil, textMatches: SearchResultTextMatches? = nil, tempCloneToken: String? = nil, allowMergeCommit: Bool? = nil, allowSquashMerge: Bool? = nil, allowRebaseMerge: Bool? = nil, allowAutoMerge: Bool? = nil, deleteBranchOnMerge: Bool? = nil, allowForking: Bool? = nil, isTemplate: Bool? = nil, webCommitSignoffRequired: Bool? = nil) throws {
         (self.id, self.nodeId) = (id, nodeId)
         (self.name, self.fullName) = (name, fullName)
-        (self.owner, self.private) = (owner, `private`)
+        (self.owner, self.`private`) = (owner, `private`)
         (self.htmlUrl, self.description) = (htmlUrl, description)
         (self.fork, self.url) = (fork, url)
         (self.createdAt, self.updatedAt) = (createdAt, updatedAt)
@@ -600,19 +492,19 @@ public extension RepoSearchResultItem {
 
 extension RepoSearchResultItem {
     func sdkValidateConstraintsPart1() throws {
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateUri("url", url)
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
-        try sdkValidateDateTime("pushed_at", sdkWireString(pushedAt))
-        if let value = homepage {
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateDateTime("pushed_at", sdkWireString(self.pushedAt))
+        if let value = self.homepage {
             try sdkValidateUri("homepage", value)
         }
-        try sdkValidateUri("forks_url", forksUrl)
-        try sdkValidateUri("teams_url", teamsUrl)
-        try sdkValidateUri("hooks_url", hooksUrl)
-        try sdkValidateUri("events_url", eventsUrl)
-        try sdkValidateUri("tags_url", tagsUrl)
-        try sdkValidateUri("languages_url", languagesUrl)
+            try sdkValidateUri("forks_url", self.forksUrl)
+            try sdkValidateUri("teams_url", self.teamsUrl)
+            try sdkValidateUri("hooks_url", self.hooksUrl)
+            try sdkValidateUri("events_url", self.eventsUrl)
+            try sdkValidateUri("tags_url", self.tagsUrl)
+            try sdkValidateUri("languages_url", self.languagesUrl)
     }
 }

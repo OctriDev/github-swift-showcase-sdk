@@ -3,36 +3,24 @@
 
 import Foundation
 
-/// ActionsActionsPolicy domain models
-public extension ActionsPolicyEnterpriseConditionsVariant2 {
-    init(from decoder: Decoder) throws {
+// ActionsActionsPolicy domain models
+extension ActionsPolicyEnterpriseConditionsVariant2 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.organizationId) else {
-            throw SdkValidationError(
-                field: "organization_id",
-                code: "required",
-                message: "Validation failed for 'organization_id': value is required"
-            )
+            throw SdkValidationError(field: "organization_id", code: "required", message: "Validation failed for 'organization_id': value is required")
         }
         guard container.contains(.repositoryName) else {
-            throw SdkValidationError(
-                field: "repository_name",
-                code: "required",
-                message: "Validation failed for 'repository_name': value is required"
-            )
+            throw SdkValidationError(field: "repository_name", code: "required", message: "Validation failed for 'repository_name': value is required")
         }
-        organizationId = try container.sdkDecodeRequired(.organizationId)
-        repositoryName = try container.sdkDecodeRequired(.repositoryName)
-        workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
+        self.organizationId = try container.sdkDecodeRequired(.organizationId)
+        self.repositoryName = try container.sdkDecodeRequired(.repositoryName)
+        self.workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
     }
 }
 
-public extension ActionsPolicyEnterpriseConditionsVariant2 {
-    init(
-        organizationId: EnterpriseRulesetConditionsOrganizationIdTargetOrganizationId,
-        repositoryName: RepositoryRulesetConditionsRepositoryNameTargetRepositoryName,
-        workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil
-    ) {
+extension ActionsPolicyEnterpriseConditionsVariant2 {
+    public init(organizationId: EnterpriseRulesetConditionsOrganizationIdTargetOrganizationId, repositoryName: RepositoryRulesetConditionsRepositoryNameTargetRepositoryName, workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil) {
         (self.organizationId, self.repositoryName) = (organizationId, repositoryName)
         self.workflowPath = workflowPath
     }
@@ -53,40 +41,26 @@ public struct ActionsPolicyEnterpriseConditionsVariant1: Codable {
         case workflowPath = "workflow_path"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsPolicyEnterpriseConditionsVariant1 {
-    init(from decoder: Decoder) throws {
+extension ActionsPolicyEnterpriseConditionsVariant1 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.organizationName) else {
-            throw SdkValidationError(
-                field: "organization_name",
-                code: "required",
-                message: "Validation failed for 'organization_name': value is required"
-            )
+            throw SdkValidationError(field: "organization_name", code: "required", message: "Validation failed for 'organization_name': value is required")
         }
         guard container.contains(.repositoryProperty) else {
-            throw SdkValidationError(
-                field: "repository_property",
-                code: "required",
-                message: "Validation failed for 'repository_property': value is required"
-            )
+            throw SdkValidationError(field: "repository_property", code: "required", message: "Validation failed for 'repository_property': value is required")
         }
-        organizationName = try container.sdkDecodeRequired(.organizationName)
-        repositoryProperty = try container.sdkDecodeRequired(.repositoryProperty)
-        workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
+        self.organizationName = try container.sdkDecodeRequired(.organizationName)
+        self.repositoryProperty = try container.sdkDecodeRequired(.repositoryProperty)
+        self.workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
     }
 }
 
-public extension ActionsPolicyEnterpriseConditionsVariant1 {
-    init(
-        organizationName: EnterpriseRulesetConditionsOrganizationNameTargetOrganizationName,
-        repositoryProperty: RepositoryRulesetConditionsRepositoryPropertyTargetRepositoryProperty,
-        workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil
-    ) {
+extension ActionsPolicyEnterpriseConditionsVariant1 {
+    public init(organizationName: EnterpriseRulesetConditionsOrganizationNameTargetOrganizationName, repositoryProperty: RepositoryRulesetConditionsRepositoryPropertyTargetRepositoryProperty, workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil) {
         (self.organizationName, self.repositoryProperty) = (organizationName, repositoryProperty)
         self.workflowPath = workflowPath
     }
@@ -104,31 +78,22 @@ public struct ActionsPolicyOrgConditionsVariant2: Codable {
         case workflowPath = "workflow_path"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsPolicyOrgConditionsVariant2 {
-    init(from decoder: Decoder) throws {
+extension ActionsPolicyOrgConditionsVariant2 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.repositoryProperty) else {
-            throw SdkValidationError(
-                field: "repository_property",
-                code: "required",
-                message: "Validation failed for 'repository_property': value is required"
-            )
+            throw SdkValidationError(field: "repository_property", code: "required", message: "Validation failed for 'repository_property': value is required")
         }
-        repositoryProperty = try container.sdkDecodeRequired(.repositoryProperty)
-        workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
+        self.repositoryProperty = try container.sdkDecodeRequired(.repositoryProperty)
+        self.workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
     }
 }
 
-public extension ActionsPolicyOrgConditionsVariant2 {
-    init(
-        repositoryProperty: RepositoryRulesetConditionsRepositoryPropertyTargetRepositoryProperty,
-        workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil
-    ) {
+extension ActionsPolicyOrgConditionsVariant2 {
+    public init(repositoryProperty: RepositoryRulesetConditionsRepositoryPropertyTargetRepositoryProperty, workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil) {
         (self.repositoryProperty, self.workflowPath) = (repositoryProperty, workflowPath)
     }
 }
@@ -148,35 +113,25 @@ public struct ActionsPolicyRepoConditionsVariant1WorkflowPath: Codable {
         case exclude
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsPolicyRepoConditionsVariant1WorkflowPath {
-    init(from decoder: Decoder) throws {
+extension ActionsPolicyRepoConditionsVariant1WorkflowPath {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.include) else {
-            throw SdkValidationError(
-                field: "include",
-                code: "required",
-                message: "Validation failed for 'include': value is required"
-            )
+            throw SdkValidationError(field: "include", code: "required", message: "Validation failed for 'include': value is required")
         }
         guard container.contains(.exclude) else {
-            throw SdkValidationError(
-                field: "exclude",
-                code: "required",
-                message: "Validation failed for 'exclude': value is required"
-            )
+            throw SdkValidationError(field: "exclude", code: "required", message: "Validation failed for 'exclude': value is required")
         }
-        include = try container.sdkDecodeRequired(.include)
-        exclude = try container.sdkDecodeRequired(.exclude)
+        self.include = try container.sdkDecodeRequired(.include)
+        self.exclude = try container.sdkDecodeRequired(.exclude)
     }
 }
 
-public extension ActionsPolicyRepoConditionsVariant1WorkflowPath {
-    init(include: [String], exclude: [String]) {
+extension ActionsPolicyRepoConditionsVariant1WorkflowPath {
+    public init(include: [String], exclude: [String]) {
         (self.include, self.exclude) = (include, exclude)
     }
 }
@@ -196,40 +151,26 @@ public struct ActionsPolicyEnterpriseConditionsVariant3: Codable {
         case workflowPath = "workflow_path"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsPolicyEnterpriseConditionsVariant3 {
-    init(from decoder: Decoder) throws {
+extension ActionsPolicyEnterpriseConditionsVariant3 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.organizationId) else {
-            throw SdkValidationError(
-                field: "organization_id",
-                code: "required",
-                message: "Validation failed for 'organization_id': value is required"
-            )
+            throw SdkValidationError(field: "organization_id", code: "required", message: "Validation failed for 'organization_id': value is required")
         }
         guard container.contains(.repositoryProperty) else {
-            throw SdkValidationError(
-                field: "repository_property",
-                code: "required",
-                message: "Validation failed for 'repository_property': value is required"
-            )
+            throw SdkValidationError(field: "repository_property", code: "required", message: "Validation failed for 'repository_property': value is required")
         }
-        organizationId = try container.sdkDecodeRequired(.organizationId)
-        repositoryProperty = try container.sdkDecodeRequired(.repositoryProperty)
-        workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
+        self.organizationId = try container.sdkDecodeRequired(.organizationId)
+        self.repositoryProperty = try container.sdkDecodeRequired(.repositoryProperty)
+        self.workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
     }
 }
 
-public extension ActionsPolicyEnterpriseConditionsVariant3 {
-    init(
-        organizationId: EnterpriseRulesetConditionsOrganizationIdTargetOrganizationId,
-        repositoryProperty: RepositoryRulesetConditionsRepositoryPropertyTargetRepositoryProperty,
-        workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil
-    ) {
+extension ActionsPolicyEnterpriseConditionsVariant3 {
+    public init(organizationId: EnterpriseRulesetConditionsOrganizationIdTargetOrganizationId, repositoryProperty: RepositoryRulesetConditionsRepositoryPropertyTargetRepositoryProperty, workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil) {
         (self.organizationId, self.repositoryProperty) = (organizationId, repositoryProperty)
         self.workflowPath = workflowPath
     }
@@ -250,40 +191,26 @@ public struct ActionsPolicyEnterpriseConditionsVariant0: Codable {
         case workflowPath = "workflow_path"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsPolicyEnterpriseConditionsVariant0 {
-    init(from decoder: Decoder) throws {
+extension ActionsPolicyEnterpriseConditionsVariant0 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.organizationName) else {
-            throw SdkValidationError(
-                field: "organization_name",
-                code: "required",
-                message: "Validation failed for 'organization_name': value is required"
-            )
+            throw SdkValidationError(field: "organization_name", code: "required", message: "Validation failed for 'organization_name': value is required")
         }
         guard container.contains(.repositoryName) else {
-            throw SdkValidationError(
-                field: "repository_name",
-                code: "required",
-                message: "Validation failed for 'repository_name': value is required"
-            )
+            throw SdkValidationError(field: "repository_name", code: "required", message: "Validation failed for 'repository_name': value is required")
         }
-        organizationName = try container.sdkDecodeRequired(.organizationName)
-        repositoryName = try container.sdkDecodeRequired(.repositoryName)
-        workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
+        self.organizationName = try container.sdkDecodeRequired(.organizationName)
+        self.repositoryName = try container.sdkDecodeRequired(.repositoryName)
+        self.workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
     }
 }
 
-public extension ActionsPolicyEnterpriseConditionsVariant0 {
-    init(
-        organizationName: EnterpriseRulesetConditionsOrganizationNameTargetOrganizationName,
-        repositoryName: RepositoryRulesetConditionsRepositoryNameTargetRepositoryName,
-        workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil
-    ) {
+extension ActionsPolicyEnterpriseConditionsVariant0 {
+    public init(organizationName: EnterpriseRulesetConditionsOrganizationNameTargetOrganizationName, repositoryName: RepositoryRulesetConditionsRepositoryNameTargetRepositoryName, workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil) {
         (self.organizationName, self.repositoryName) = (organizationName, repositoryName)
         self.workflowPath = workflowPath
     }
@@ -302,20 +229,20 @@ public struct ActionsPolicyLinks: Codable {
     }
 
     init() {
-        (self.`self`, html) = (nil, nil)
+        (self.`self`, self.html) = (nil, nil)
     }
 }
 
-public extension ActionsPolicyLinks {
-    init(from decoder: Decoder) throws {
+extension ActionsPolicyLinks {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.`self` = try container.sdkDecodeIfPresent(.`self`)
-        html = try container.sdkDecodeIfPresent(.html)
+        self.html = try container.sdkDecodeIfPresent(.html)
     }
 }
 
-public extension ActionsPolicyLinks {
-    init(self selfValue: ActionsPolicyLinksSelf? = nil, html: ActionsPolicyLinksHtml? = nil) {
+extension ActionsPolicyLinks {
+    public init(`self` selfValue: ActionsPolicyLinksSelf? = nil, html: ActionsPolicyLinksHtml? = nil) {
         self.init()
         (self.`self`, self.html) = (selfValue, html)
     }
@@ -335,19 +262,19 @@ public struct ActionsPolicyWorkflowPathCondition: Codable {
     }
 
     init() {
-        workflowPath = nil
+        self.workflowPath = nil
     }
 }
 
-public extension ActionsPolicyWorkflowPathCondition {
-    init(from decoder: Decoder) throws {
+extension ActionsPolicyWorkflowPathCondition {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
+        self.workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
     }
 }
 
-public extension ActionsPolicyWorkflowPathCondition {
-    init(workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil) {
+extension ActionsPolicyWorkflowPathCondition {
+    public init(workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil) {
         self.init()
         self.workflowPath = workflowPath
     }
@@ -368,35 +295,25 @@ public struct ActionsPolicyWorkflowPathConditionWorkflowPath: Codable {
         case exclude
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsPolicyWorkflowPathConditionWorkflowPath {
-    init(from decoder: Decoder) throws {
+extension ActionsPolicyWorkflowPathConditionWorkflowPath {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.include) else {
-            throw SdkValidationError(
-                field: "include",
-                code: "required",
-                message: "Validation failed for 'include': value is required"
-            )
+            throw SdkValidationError(field: "include", code: "required", message: "Validation failed for 'include': value is required")
         }
         guard container.contains(.exclude) else {
-            throw SdkValidationError(
-                field: "exclude",
-                code: "required",
-                message: "Validation failed for 'exclude': value is required"
-            )
+            throw SdkValidationError(field: "exclude", code: "required", message: "Validation failed for 'exclude': value is required")
         }
-        include = try container.sdkDecodeRequired(.include)
-        exclude = try container.sdkDecodeRequired(.exclude)
+        self.include = try container.sdkDecodeRequired(.include)
+        self.exclude = try container.sdkDecodeRequired(.exclude)
     }
 }
 
-public extension ActionsPolicyWorkflowPathConditionWorkflowPath {
-    init(include: [String], exclude: [String]) {
+extension ActionsPolicyWorkflowPathConditionWorkflowPath {
+    public init(include: [String], exclude: [String]) {
         (self.include, self.exclude) = (include, exclude)
     }
 }
@@ -411,19 +328,19 @@ public struct ActionsPolicyLinksHtml: Codable {
     }
 
     init() {
-        href = nil
+        self.href = nil
     }
 }
 
-public extension ActionsPolicyLinksHtml {
-    init(from decoder: Decoder) throws {
+extension ActionsPolicyLinksHtml {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        href = try container.sdkDecodeIfPresent(.href)
+        self.href = try container.sdkDecodeIfPresent(.href)
     }
 }
 
-public extension ActionsPolicyLinksHtml {
-    init(href: String? = nil) {
+extension ActionsPolicyLinksHtml {
+    public init(href: String? = nil) {
         self.init()
         self.href = href
     }
@@ -444,40 +361,26 @@ public struct ActionsPolicyEnterpriseConditionsVariant4: Codable {
         case workflowPath = "workflow_path"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsPolicyEnterpriseConditionsVariant4 {
-    init(from decoder: Decoder) throws {
+extension ActionsPolicyEnterpriseConditionsVariant4 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.organizationProperty) else {
-            throw SdkValidationError(
-                field: "organization_property",
-                code: "required",
-                message: "Validation failed for 'organization_property': value is required"
-            )
+            throw SdkValidationError(field: "organization_property", code: "required", message: "Validation failed for 'organization_property': value is required")
         }
         guard container.contains(.repositoryName) else {
-            throw SdkValidationError(
-                field: "repository_name",
-                code: "required",
-                message: "Validation failed for 'repository_name': value is required"
-            )
+            throw SdkValidationError(field: "repository_name", code: "required", message: "Validation failed for 'repository_name': value is required")
         }
-        organizationProperty = try container.sdkDecodeRequired(.organizationProperty)
-        repositoryName = try container.sdkDecodeRequired(.repositoryName)
-        workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
+        self.organizationProperty = try container.sdkDecodeRequired(.organizationProperty)
+        self.repositoryName = try container.sdkDecodeRequired(.repositoryName)
+        self.workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
     }
 }
 
-public extension ActionsPolicyEnterpriseConditionsVariant4 {
-    init(
-        organizationProperty: EnterpriseRulesetConditionsOrganizationPropertyTargetOrganizaXfd8187e868,
-        repositoryName: RepositoryRulesetConditionsRepositoryNameTargetRepositoryName,
-        workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil
-    ) {
+extension ActionsPolicyEnterpriseConditionsVariant4 {
+    public init(organizationProperty: EnterpriseRulesetConditionsOrganizationPropertyTargetOrganizaXfd8187e868, repositoryName: RepositoryRulesetConditionsRepositoryNameTargetRepositoryName, workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil) {
         (self.organizationProperty, self.repositoryName) = (organizationProperty, repositoryName)
         self.workflowPath = workflowPath
     }
@@ -495,31 +398,22 @@ public struct ActionsPolicyOrgConditionsVariant0: Codable {
         case workflowPath = "workflow_path"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsPolicyOrgConditionsVariant0 {
-    init(from decoder: Decoder) throws {
+extension ActionsPolicyOrgConditionsVariant0 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.repositoryName) else {
-            throw SdkValidationError(
-                field: "repository_name",
-                code: "required",
-                message: "Validation failed for 'repository_name': value is required"
-            )
+            throw SdkValidationError(field: "repository_name", code: "required", message: "Validation failed for 'repository_name': value is required")
         }
-        repositoryName = try container.sdkDecodeRequired(.repositoryName)
-        workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
+        self.repositoryName = try container.sdkDecodeRequired(.repositoryName)
+        self.workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
     }
 }
 
-public extension ActionsPolicyOrgConditionsVariant0 {
-    init(
-        repositoryName: RepositoryRulesetConditionsRepositoryNameTargetRepositoryName,
-        workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil
-    ) {
+extension ActionsPolicyOrgConditionsVariant0 {
+    public init(repositoryName: RepositoryRulesetConditionsRepositoryNameTargetRepositoryName, workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil) {
         (self.repositoryName, self.workflowPath) = (repositoryName, workflowPath)
     }
 }
@@ -528,15 +422,12 @@ public extension ActionsPolicyOrgConditionsVariant0 {
 public struct ActionsPolicyTarget: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let actions = ActionsPolicyTarget(rawValue: "actions")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -549,17 +440,14 @@ public struct ActionsPolicyTarget: RawRepresentable, Hashable, Codable, Sendable
 public struct ActionsPolicySourceType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let repository = ActionsPolicySourceType(rawValue: "Repository")
     public static let organization = ActionsPolicySourceType(rawValue: "Organization")
     public static let enterprise = ActionsPolicySourceType(rawValue: "Enterprise")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

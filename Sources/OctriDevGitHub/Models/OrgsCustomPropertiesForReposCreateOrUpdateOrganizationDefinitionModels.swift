@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Orgs domain models
+// Orgs domain models
 /// Custom property set payload
 public struct CustomPropertySetPayload: Codable {
     /// The type of the value for the property
@@ -33,41 +33,27 @@ public struct CustomPropertySetPayload: Codable {
         case requireExplicitValues = "require_explicit_values"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension CustomPropertySetPayload {
-    init(from decoder: Decoder) throws {
+extension CustomPropertySetPayload {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.valueType) else {
-            throw SdkValidationError(
-                field: "value_type",
-                code: "required",
-                message: "Validation failed for 'value_type': value is required"
-            )
+            throw SdkValidationError(field: "value_type", code: "required", message: "Validation failed for 'value_type': value is required")
         }
-        valueType = try container.sdkDecodeRequired(.valueType)
-        required = try container.sdkDecodeIfPresent(.required)
-        defaultValue = try container.sdkDecodeIfPresent(.defaultValue)
-        description = try container.sdkDecodeIfPresent(.description)
-        allowedValues = try container.sdkDecodeIfPresent(.allowedValues)
-        valuesEditableBy = try container.sdkDecodeIfPresent(.valuesEditableBy)
-        requireExplicitValues = try container.sdkDecodeIfPresent(.requireExplicitValues)
+        self.valueType = try container.sdkDecodeRequired(.valueType)
+        self.required = try container.sdkDecodeIfPresent(.required)
+        self.defaultValue = try container.sdkDecodeIfPresent(.defaultValue)
+        self.description = try container.sdkDecodeIfPresent(.description)
+        self.allowedValues = try container.sdkDecodeIfPresent(.allowedValues)
+        self.valuesEditableBy = try container.sdkDecodeIfPresent(.valuesEditableBy)
+        self.requireExplicitValues = try container.sdkDecodeIfPresent(.requireExplicitValues)
     }
 }
 
-public extension CustomPropertySetPayload {
-    init(
-        valueType: CustomPropertySetPayloadValueType,
-        required: Bool? = nil,
-        defaultValue: CustomPropertySetPayloadDefaultValue? = nil,
-        description: String? = nil,
-        allowedValues: [String]? = nil,
-        valuesEditableBy: CustomPropertySetPayloadValuesEditableBy? = nil,
-        requireExplicitValues: Bool? = nil
-    ) {
+extension CustomPropertySetPayload {
+    public init(valueType: CustomPropertySetPayloadValueType, required: Bool? = nil, defaultValue: CustomPropertySetPayloadDefaultValue? = nil, description: String? = nil, allowedValues: [String]? = nil, valuesEditableBy: CustomPropertySetPayloadValuesEditableBy? = nil, requireExplicitValues: Bool? = nil) {
         (self.valueType, self.required) = (valueType, required)
         (self.defaultValue, self.description) = (defaultValue, description)
         (self.allowedValues, self.valuesEditableBy) = (allowedValues, valuesEditableBy)
@@ -81,32 +67,22 @@ public indirect enum CustomPropertySetPayloadDefaultValue {
 }
 
 extension CustomPropertySetPayloadDefaultValue: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for CustomPropertySetPayloadDefaultValue"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for CustomPropertySetPayloadDefaultValue")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
 extension CustomPropertySetPayloadDefaultValue {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) {
-            return .stringValue(value)
-        }
-        if let value = try? container.decode([String].self) {
-            return .stringList(value)
-        }
+        if let value = try? container.decode(String.self) { return .stringValue(value) }
+        if let value = try? container.decode([String].self) { return .stringList(value) }
         return nil
     }
 }
@@ -125,10 +101,7 @@ extension CustomPropertySetPayloadDefaultValue {
 public struct CustomPropertySetPayloadValueType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let string = CustomPropertySetPayloadValueType(rawValue: "string")
     public static let singleSelect = CustomPropertySetPayloadValueType(rawValue: "single_select")
     public static let multiSelect = CustomPropertySetPayloadValueType(rawValue: "multi_select")
@@ -137,7 +110,7 @@ public struct CustomPropertySetPayloadValueType: RawRepresentable, Hashable, Cod
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -147,20 +120,16 @@ public struct CustomPropertySetPayloadValueType: RawRepresentable, Hashable, Cod
 }
 
 /// Who can edit the values of the property
-public struct CustomPropertySetPayloadValuesEditableBy: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct CustomPropertySetPayloadValuesEditableBy: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let orgActors = CustomPropertySetPayloadValuesEditableBy(rawValue: "org_actors")
     public static let orgAndRepoActors = CustomPropertySetPayloadValuesEditableBy(rawValue: "org_and_repo_actors")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

@@ -3,35 +3,9 @@
 
 import Foundation
 
-/// WebhookPackageUpdated domain models
-public extension WebhookPackageUpdatedPackagePackageVersion {
-    init(
-        author: WebhookPackageUpdatedPackagePackageVersionAuthor?,
-        body: String,
-        bodyHtml: String,
-        createdAt: String,
-        description: String,
-        htmlUrl: String,
-        id: Int,
-        installationCommand: String,
-        metadata: [[String: JSONValue]],
-        name: String,
-        packageFiles: [WebhookPackageUpdatedPackagePackageVersionPackageFilesItem],
-        summary: String,
-        targetCommitish: String,
-        targetOid: String,
-        updatedAt: String,
-        version: String,
-        dockerMetadata: [WebhookPackageUpdatedPackagePackageVersionDockerMetadataItem]? = nil,
-        draft: Bool? = nil,
-        manifest: String? = nil,
-        packageUrl: String? = nil,
-        prerelease: Bool? = nil,
-        release: WebhookPackageUpdatedPackagePackageVersionRelease? = nil,
-        rubygemsMetadata: [WebhookRubygemsMetadata]? = nil,
-        sourceUrl: String? = nil,
-        tagName: String? = nil
-    ) throws {
+// WebhookPackageUpdated domain models
+extension WebhookPackageUpdatedPackagePackageVersion {
+    public init(author: WebhookPackageUpdatedPackagePackageVersionAuthor?, body: String, bodyHtml: String, createdAt: String, description: String, htmlUrl: String, id: Int, installationCommand: String, metadata: [[String: JSONValue]], name: String, packageFiles: [WebhookPackageUpdatedPackagePackageVersionPackageFilesItem], summary: String, targetCommitish: String, targetOid: String, updatedAt: String, version: String, dockerMetadata: [WebhookPackageUpdatedPackagePackageVersionDockerMetadataItem]? = nil, draft: Bool? = nil, manifest: String? = nil, packageUrl: String? = nil, prerelease: Bool? = nil, release: WebhookPackageUpdatedPackagePackageVersionRelease? = nil, rubygemsMetadata: [WebhookRubygemsMetadata]? = nil, sourceUrl: String? = nil, tagName: String? = nil) throws {
         (self.author, self.body) = (author, body)
         (self.bodyHtml, self.createdAt) = (bodyHtml, createdAt)
         (self.description, self.htmlUrl) = (description, htmlUrl)
@@ -45,7 +19,7 @@ public extension WebhookPackageUpdatedPackagePackageVersion {
         (self.prerelease, self.release) = (prerelease, release)
         (self.rubygemsMetadata, self.sourceUrl) = (rubygemsMetadata, sourceUrl)
         self.tagName = tagName
-        try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("html_url", self.htmlUrl)
         if let value = self.sourceUrl {
             try sdkValidateUri("source_url", value)
         }
@@ -91,50 +65,36 @@ public struct WebhookPackageUpdatedPackagePackageVersionPackageFilesItem: Codabl
         case updatedAt = "updated_at"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookPackageUpdatedPackagePackageVersionPackageFilesItem {
-    init(from decoder: Decoder) throws {
+extension WebhookPackageUpdatedPackagePackageVersionPackageFilesItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        contentType = try container.sdkDecodeRequired(.contentType)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        downloadUrl = try container.sdkDecodeRequired(.downloadUrl)
-        id = try container.sdkDecodeRequired(.id)
-        md5 = try container.sdkDecodeNullable(.md5)
-        name = try container.sdkDecodeRequired(.name)
-        sha1 = try container.sdkDecodeNullable(.sha1)
-        sha256 = try container.sdkDecodeRequired(.sha256)
-        size = try container.sdkDecodeRequired(.size)
-        state = try container.sdkDecodeRequired(.state)
-        updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        try sdkValidateUri("download_url", downloadUrl)
+        self.contentType = try container.sdkDecodeRequired(.contentType)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.downloadUrl = try container.sdkDecodeRequired(.downloadUrl)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.md5 = try container.sdkDecodeNullable(.md5)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.sha1 = try container.sdkDecodeNullable(.sha1)
+        self.sha256 = try container.sdkDecodeRequired(.sha256)
+        self.size = try container.sdkDecodeRequired(.size)
+        self.state = try container.sdkDecodeRequired(.state)
+        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
+            try sdkValidateUri("download_url", self.downloadUrl)
     }
 }
 
-public extension WebhookPackageUpdatedPackagePackageVersionPackageFilesItem {
-    init(
-        contentType: String,
-        createdAt: String,
-        downloadUrl: String,
-        id: Int,
-        md5: String?,
-        name: String,
-        sha1: String?,
-        sha256: String,
-        size: Int,
-        state: String,
-        updatedAt: String
-    ) throws {
+extension WebhookPackageUpdatedPackagePackageVersionPackageFilesItem {
+    public init(contentType: String, createdAt: String, downloadUrl: String, id: Int, md5: String?, name: String, sha1: String?, sha256: String, size: Int, state: String, updatedAt: String) throws {
         (self.contentType, self.createdAt) = (contentType, createdAt)
         (self.downloadUrl, self.id) = (downloadUrl, id)
         (self.md5, self.name) = (md5, name)
         (self.sha1, self.sha256) = (sha1, sha256)
         (self.size, self.state) = (size, state)
         self.updatedAt = updatedAt
-        try sdkValidateUri("download_url", self.downloadUrl)
+            try sdkValidateUri("download_url", self.downloadUrl)
     }
 }
 
@@ -210,79 +170,46 @@ public struct WebhookPackageUpdatedPackageOwner: Codable {
         case userViewType = "user_view_type"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookPackageUpdatedPackageOwner {
-    init(from decoder: Decoder) throws {
+extension WebhookPackageUpdatedPackageOwner {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
         guard container.contains(.login) else {
-            throw SdkValidationError(
-                field: "login",
-                code: "required",
-                message: "Validation failed for 'login': value is required"
-            )
+            throw SdkValidationError(field: "login", code: "required", message: "Validation failed for 'login': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
-        login = try container.sdkDecodeRequired(.login)
-        avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
-        deleted = try container.sdkDecodeIfPresent(.deleted)
-        email = try container.sdkDecodeIfPresent(.email)
-        eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
-        followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
-        followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
-        gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
-        gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        name = try container.sdkDecodeIfPresent(.name)
-        nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
-        receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
-        reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
-        siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
-        starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
-        subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
-        type = try container.sdkDecodeIfPresent(.type)
-        url = try container.sdkDecodeIfPresent(.url)
-        userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.login = try container.sdkDecodeRequired(.login)
+        self.avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
+        self.deleted = try container.sdkDecodeIfPresent(.deleted)
+        self.email = try container.sdkDecodeIfPresent(.email)
+        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        self.followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
+        self.followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
+        self.gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
+        self.gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        self.name = try container.sdkDecodeIfPresent(.name)
+        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        self.organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
+        self.receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
+        self.reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
+        self.siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
+        self.starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
+        self.subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
+        self.type = try container.sdkDecodeIfPresent(.type)
+        self.url = try container.sdkDecodeIfPresent(.url)
+        self.userViewType = try container.sdkDecodeIfPresent(.userViewType)
         try sdkValidateConstraints()
     }
 }
 
-public extension WebhookPackageUpdatedPackageOwner {
-    init(
-        id: Int,
-        login: String,
-        avatarUrl: String? = nil,
-        deleted: Bool? = nil,
-        email: String? = nil,
-        eventsUrl: String? = nil,
-        followersUrl: String? = nil,
-        followingUrl: String? = nil,
-        gistsUrl: String? = nil,
-        gravatarId: String? = nil,
-        htmlUrl: String? = nil,
-        name: String? = nil,
-        nodeId: String? = nil,
-        organizationsUrl: String? = nil,
-        receivedEventsUrl: String? = nil,
-        reposUrl: String? = nil,
-        siteAdmin: Bool? = nil,
-        starredUrl: String? = nil,
-        subscriptionsUrl: String? = nil,
-        type: WebhookPackageUpdatedPackageOwnerType? = nil,
-        url: String? = nil,
-        userViewType: String? = nil
-    ) throws {
+extension WebhookPackageUpdatedPackageOwner {
+    public init(id: Int, login: String, avatarUrl: String? = nil, deleted: Bool? = nil, email: String? = nil, eventsUrl: String? = nil, followersUrl: String? = nil, followingUrl: String? = nil, gistsUrl: String? = nil, gravatarId: String? = nil, htmlUrl: String? = nil, name: String? = nil, nodeId: String? = nil, organizationsUrl: String? = nil, receivedEventsUrl: String? = nil, reposUrl: String? = nil, siteAdmin: Bool? = nil, starredUrl: String? = nil, subscriptionsUrl: String? = nil, type: WebhookPackageUpdatedPackageOwnerType? = nil, url: String? = nil, userViewType: String? = nil) throws {
         (self.id, self.login) = (id, login)
         (self.avatarUrl, self.deleted) = (avatarUrl, deleted)
         (self.email, self.eventsUrl) = (email, eventsUrl)
@@ -300,28 +227,28 @@ public extension WebhookPackageUpdatedPackageOwner {
 
 extension WebhookPackageUpdatedPackageOwner {
     func sdkValidateConstraints() throws {
-        if let value = avatarUrl {
+        if let value = self.avatarUrl {
             try sdkValidateUri("avatar_url", value)
         }
-        if let value = followersUrl {
+        if let value = self.followersUrl {
             try sdkValidateUri("followers_url", value)
         }
-        if let value = htmlUrl {
+        if let value = self.htmlUrl {
             try sdkValidateUri("html_url", value)
         }
-        if let value = organizationsUrl {
+        if let value = self.organizationsUrl {
             try sdkValidateUri("organizations_url", value)
         }
-        if let value = receivedEventsUrl {
+        if let value = self.receivedEventsUrl {
             try sdkValidateUri("received_events_url", value)
         }
-        if let value = reposUrl {
+        if let value = self.reposUrl {
             try sdkValidateUri("repos_url", value)
         }
-        if let value = subscriptionsUrl {
+        if let value = self.subscriptionsUrl {
             try sdkValidateUri("subscriptions_url", value)
         }
-        if let value = url {
+        if let value = self.url {
             try sdkValidateUri("url", value)
         }
     }
@@ -348,66 +275,44 @@ public struct WebhookPackageUpdatedPackageRegistry: Codable {
         case vendor
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookPackageUpdatedPackageRegistry {
-    init(from decoder: Decoder) throws {
+extension WebhookPackageUpdatedPackageRegistry {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.aboutUrl) else {
-            throw SdkValidationError(
-                field: "about_url",
-                code: "required",
-                message: "Validation failed for 'about_url': value is required"
-            )
+            throw SdkValidationError(field: "about_url", code: "required", message: "Validation failed for 'about_url': value is required")
         }
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.type) else {
-            throw SdkValidationError(
-                field: "type",
-                code: "required",
-                message: "Validation failed for 'type': value is required"
-            )
+            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
         }
         guard container.contains(.url) else {
-            throw SdkValidationError(
-                field: "url",
-                code: "required",
-                message: "Validation failed for 'url': value is required"
-            )
+            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
         }
         guard container.contains(.vendor) else {
-            throw SdkValidationError(
-                field: "vendor",
-                code: "required",
-                message: "Validation failed for 'vendor': value is required"
-            )
+            throw SdkValidationError(field: "vendor", code: "required", message: "Validation failed for 'vendor': value is required")
         }
-        aboutUrl = try container.sdkDecodeRequired(.aboutUrl)
-        name = try container.sdkDecodeRequired(.name)
-        type = try container.sdkDecodeRequired(.type)
-        url = try container.sdkDecodeRequired(.url)
-        vendor = try container.sdkDecodeRequired(.vendor)
-        try sdkValidateUri("about_url", aboutUrl)
-        try sdkValidateUri("url", url)
+        self.aboutUrl = try container.sdkDecodeRequired(.aboutUrl)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.type = try container.sdkDecodeRequired(.type)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.vendor = try container.sdkDecodeRequired(.vendor)
+            try sdkValidateUri("about_url", self.aboutUrl)
+            try sdkValidateUri("url", self.url)
     }
 }
 
-public extension WebhookPackageUpdatedPackageRegistry {
-    init(aboutUrl: String, name: String, type: String, url: String, vendor: String) throws {
+extension WebhookPackageUpdatedPackageRegistry {
+    public init(aboutUrl: String, name: String, type: String, url: String, vendor: String) throws {
         (self.aboutUrl, self.name) = (aboutUrl, name)
         (self.type, self.url) = (type, url)
         self.vendor = vendor
-        try sdkValidateUri("about_url", self.aboutUrl)
-        try sdkValidateUri("url", self.url)
+            try sdkValidateUri("about_url", self.aboutUrl)
+            try sdkValidateUri("url", self.url)
     }
 }
 
@@ -483,79 +388,46 @@ public struct WebhookPackageUpdatedPackagePackageVersionAuthor: Codable {
         case userViewType = "user_view_type"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookPackageUpdatedPackagePackageVersionAuthor {
-    init(from decoder: Decoder) throws {
+extension WebhookPackageUpdatedPackagePackageVersionAuthor {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
         guard container.contains(.login) else {
-            throw SdkValidationError(
-                field: "login",
-                code: "required",
-                message: "Validation failed for 'login': value is required"
-            )
+            throw SdkValidationError(field: "login", code: "required", message: "Validation failed for 'login': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
-        login = try container.sdkDecodeRequired(.login)
-        avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
-        deleted = try container.sdkDecodeIfPresent(.deleted)
-        email = try container.sdkDecodeIfPresent(.email)
-        eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
-        followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
-        followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
-        gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
-        gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        name = try container.sdkDecodeIfPresent(.name)
-        nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
-        receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
-        reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
-        siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
-        starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
-        subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
-        type = try container.sdkDecodeIfPresent(.type)
-        url = try container.sdkDecodeIfPresent(.url)
-        userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.login = try container.sdkDecodeRequired(.login)
+        self.avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
+        self.deleted = try container.sdkDecodeIfPresent(.deleted)
+        self.email = try container.sdkDecodeIfPresent(.email)
+        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        self.followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
+        self.followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
+        self.gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
+        self.gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        self.name = try container.sdkDecodeIfPresent(.name)
+        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        self.organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
+        self.receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
+        self.reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
+        self.siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
+        self.starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
+        self.subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
+        self.type = try container.sdkDecodeIfPresent(.type)
+        self.url = try container.sdkDecodeIfPresent(.url)
+        self.userViewType = try container.sdkDecodeIfPresent(.userViewType)
         try sdkValidateConstraints()
     }
 }
 
-public extension WebhookPackageUpdatedPackagePackageVersionAuthor {
-    init(
-        id: Int,
-        login: String,
-        avatarUrl: String? = nil,
-        deleted: Bool? = nil,
-        email: String? = nil,
-        eventsUrl: String? = nil,
-        followersUrl: String? = nil,
-        followingUrl: String? = nil,
-        gistsUrl: String? = nil,
-        gravatarId: String? = nil,
-        htmlUrl: String? = nil,
-        name: String? = nil,
-        nodeId: String? = nil,
-        organizationsUrl: String? = nil,
-        receivedEventsUrl: String? = nil,
-        reposUrl: String? = nil,
-        siteAdmin: Bool? = nil,
-        starredUrl: String? = nil,
-        subscriptionsUrl: String? = nil,
-        type: WebhookPackageUpdatedPackagePackageVersionAuthorType? = nil,
-        url: String? = nil,
-        userViewType: String? = nil
-    ) throws {
+extension WebhookPackageUpdatedPackagePackageVersionAuthor {
+    public init(id: Int, login: String, avatarUrl: String? = nil, deleted: Bool? = nil, email: String? = nil, eventsUrl: String? = nil, followersUrl: String? = nil, followingUrl: String? = nil, gistsUrl: String? = nil, gravatarId: String? = nil, htmlUrl: String? = nil, name: String? = nil, nodeId: String? = nil, organizationsUrl: String? = nil, receivedEventsUrl: String? = nil, reposUrl: String? = nil, siteAdmin: Bool? = nil, starredUrl: String? = nil, subscriptionsUrl: String? = nil, type: WebhookPackageUpdatedPackagePackageVersionAuthorType? = nil, url: String? = nil, userViewType: String? = nil) throws {
         (self.id, self.login) = (id, login)
         (self.avatarUrl, self.deleted) = (avatarUrl, deleted)
         (self.email, self.eventsUrl) = (email, eventsUrl)
@@ -573,28 +445,28 @@ public extension WebhookPackageUpdatedPackagePackageVersionAuthor {
 
 extension WebhookPackageUpdatedPackagePackageVersionAuthor {
     func sdkValidateConstraints() throws {
-        if let value = avatarUrl {
+        if let value = self.avatarUrl {
             try sdkValidateUri("avatar_url", value)
         }
-        if let value = followersUrl {
+        if let value = self.followersUrl {
             try sdkValidateUri("followers_url", value)
         }
-        if let value = htmlUrl {
+        if let value = self.htmlUrl {
             try sdkValidateUri("html_url", value)
         }
-        if let value = organizationsUrl {
+        if let value = self.organizationsUrl {
             try sdkValidateUri("organizations_url", value)
         }
-        if let value = receivedEventsUrl {
+        if let value = self.receivedEventsUrl {
             try sdkValidateUri("received_events_url", value)
         }
-        if let value = reposUrl {
+        if let value = self.reposUrl {
             try sdkValidateUri("repos_url", value)
         }
-        if let value = subscriptionsUrl {
+        if let value = self.subscriptionsUrl {
             try sdkValidateUri("subscriptions_url", value)
         }
-        if let value = url {
+        if let value = self.url {
             try sdkValidateUri("url", value)
         }
     }
@@ -604,15 +476,12 @@ extension WebhookPackageUpdatedPackagePackageVersionAuthor {
 public struct WebhookPackageUpdatedAction: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let updated = WebhookPackageUpdatedAction(rawValue: "updated")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

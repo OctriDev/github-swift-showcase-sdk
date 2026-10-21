@@ -3,44 +3,9 @@
 
 import Foundation
 
-/// SecretScanning domain models
-public extension SecretScanningAlertWithMetadata {
-    init(
-        number: AlertNumber? = nil,
-        createdAt: AlertCreatedAt? = nil,
-        updatedAt: NullableAlertUpdatedAt? = nil,
-        url: AlertUrl? = nil,
-        htmlUrl: AlertHtmlUrl? = nil,
-        locationsUrl: String? = nil,
-        state: SecretScanningAlertState? = nil,
-        resolution: SecretScanningAlertResolution? = nil,
-        resolvedAt: Date? = nil,
-        resolvedBy: NullableSimpleUser? = nil,
-        resolutionComment: String? = nil,
-        secretType: String? = nil,
-        secretTypeDisplayName: String? = nil,
-        provider: String? = nil,
-        providerSlug: String? = nil,
-        secret: String? = nil,
-        pushProtectionBypassed: Bool? = nil,
-        pushProtectionBypassedBy: NullableSimpleUser? = nil,
-        pushProtectionBypassedAt: Date? = nil,
-        pushProtectionBypassRequestReviewer: NullableSimpleUser? = nil,
-        pushProtectionBypassRequestReviewerComment: String? = nil,
-        pushProtectionBypassRequestComment: String? = nil,
-        pushProtectionBypassRequestHtmlUrl: String? = nil,
-        validity: SecretScanningAlertWithMetadataValidity? = nil,
-        publiclyLeaked: Bool? = nil,
-        multiRepo: Bool? = nil,
-        isBase64Encoded: Bool? = nil,
-        firstLocationDetected: NullableSecretScanningFirstDetectedLocation? = nil,
-        hasMoreLocations: Bool? = nil,
-        assignedTo: NullableSimpleUser? = nil,
-        closureRequestComment: String? = nil,
-        closureRequestReviewerComment: String? = nil,
-        closureRequestReviewer: NullableSimpleUser? = nil,
-        metadata: SecretScanningAlertMetadata? = nil
-    ) throws {
+// SecretScanning domain models
+extension SecretScanningAlertWithMetadata {
+    public init(number: AlertNumber? = nil, createdAt: AlertCreatedAt? = nil, updatedAt: NullableAlertUpdatedAt? = nil, url: AlertUrl? = nil, htmlUrl: AlertHtmlUrl? = nil, locationsUrl: String? = nil, state: SecretScanningAlertState? = nil, resolution: SecretScanningAlertResolution? = nil, resolvedAt: Date? = nil, resolvedBy: NullableSimpleUser? = nil, resolutionComment: String? = nil, secretType: String? = nil, secretTypeDisplayName: String? = nil, provider: String? = nil, providerSlug: String? = nil, secret: String? = nil, pushProtectionBypassed: Bool? = nil, pushProtectionBypassedBy: NullableSimpleUser? = nil, pushProtectionBypassedAt: Date? = nil, pushProtectionBypassRequestReviewer: NullableSimpleUser? = nil, pushProtectionBypassRequestReviewerComment: String? = nil, pushProtectionBypassRequestComment: String? = nil, pushProtectionBypassRequestHtmlUrl: String? = nil, validity: SecretScanningAlertWithMetadataValidity? = nil, publiclyLeaked: Bool? = nil, multiRepo: Bool? = nil, isBase64Encoded: Bool? = nil, firstLocationDetected: NullableSecretScanningFirstDetectedLocation? = nil, hasMoreLocations: Bool? = nil, assignedTo: NullableSimpleUser? = nil, closureRequestComment: String? = nil, closureRequestReviewerComment: String? = nil, closureRequestReviewer: NullableSimpleUser? = nil, metadata: SecretScanningAlertMetadata? = nil) throws {
         self.init()
         (self.number, self.createdAt) = (number, createdAt)
         (self.updatedAt, self.url) = (updatedAt, url)
@@ -69,28 +34,28 @@ public extension SecretScanningAlertWithMetadata {
 
 extension SecretScanningAlertWithMetadata {
     func sdkValidateConstraints() throws {
-        if let value = createdAt {
+        if let value = self.createdAt {
             try sdkValidateDateTime("created_at", sdkWireString(value))
         }
-        if let value = updatedAt {
+        if let value = self.updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
-        if let value = url {
+        if let value = self.url {
             try sdkValidateUri("url", sdkWireString(value))
         }
-        if let value = htmlUrl {
+        if let value = self.htmlUrl {
             try sdkValidateUri("html_url", sdkWireString(value))
         }
-        if let value = locationsUrl {
+        if let value = self.locationsUrl {
             try sdkValidateUri("locations_url", value)
         }
-        if let value = resolvedAt {
+        if let value = self.resolvedAt {
             try sdkValidateDateTime("resolved_at", sdkWireString(value))
         }
-        if let value = pushProtectionBypassedAt {
+        if let value = self.pushProtectionBypassedAt {
             try sdkValidateDateTime("push_protection_bypassed_at", sdkWireString(value))
         }
-        if let value = pushProtectionBypassRequestHtmlUrl {
+        if let value = self.pushProtectionBypassRequestHtmlUrl {
             try sdkValidateUri("push_protection_bypass_request_html_url", value)
         }
     }
@@ -111,34 +76,28 @@ public struct SecretScanningLocationPullRequestComment: Codable {
         case htmlUrl = "html_url"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension SecretScanningLocationPullRequestComment {
-    init(from decoder: Decoder) throws {
+extension SecretScanningLocationPullRequestComment {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.pullRequestCommentUrl) else {
-            throw SdkValidationError(
-                field: "pull_request_comment_url",
-                code: "required",
-                message: "Validation failed for 'pull_request_comment_url': value is required"
-            )
+            throw SdkValidationError(field: "pull_request_comment_url", code: "required", message: "Validation failed for 'pull_request_comment_url': value is required")
         }
-        pullRequestCommentUrl = try container.sdkDecodeRequired(.pullRequestCommentUrl)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        try sdkValidateUri("pull_request_comment_url", pullRequestCommentUrl)
-        if let value = htmlUrl {
+        self.pullRequestCommentUrl = try container.sdkDecodeRequired(.pullRequestCommentUrl)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+            try sdkValidateUri("pull_request_comment_url", self.pullRequestCommentUrl)
+        if let value = self.htmlUrl {
             try sdkValidateUri("html_url", value)
         }
     }
 }
 
-public extension SecretScanningLocationPullRequestComment {
-    init(pullRequestCommentUrl: String, htmlUrl: String? = nil) throws {
+extension SecretScanningLocationPullRequestComment {
+    public init(pullRequestCommentUrl: String, htmlUrl: String? = nil) throws {
         (self.pullRequestCommentUrl, self.htmlUrl) = (pullRequestCommentUrl, htmlUrl)
-        try sdkValidateUri("pull_request_comment_url", self.pullRequestCommentUrl)
+            try sdkValidateUri("pull_request_comment_url", self.pullRequestCommentUrl)
         if let value = self.htmlUrl {
             try sdkValidateUri("html_url", value)
         }
@@ -146,14 +105,10 @@ public extension SecretScanningLocationPullRequestComment {
 }
 
 /// A machine-readable code describing the error.
-public struct SecretScanningCustomPatternValidationErrorCode: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct SecretScanningCustomPatternValidationErrorCode: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let invalid = SecretScanningCustomPatternValidationErrorCode(rawValue: "invalid")
     public static let unprocessable = SecretScanningCustomPatternValidationErrorCode(rawValue: "unprocessable")
     public static let startDelimiter = SecretScanningCustomPatternValidationErrorCode(rawValue: "start_delimiter")
@@ -161,12 +116,11 @@ public struct SecretScanningCustomPatternValidationErrorCode: RawRepresentable, 
     public static let name = SecretScanningCustomPatternValidationErrorCode(rawValue: "name")
     public static let mustMatch = SecretScanningCustomPatternValidationErrorCode(rawValue: "must_match")
     public static let mustNotMatch = SecretScanningCustomPatternValidationErrorCode(rawValue: "must_not_match")
-    public static let customPatternVersionMismatch =
-        SecretScanningCustomPatternValidationErrorCode(rawValue: "custom_pattern_version_mismatch")
+    public static let customPatternVersionMismatch = SecretScanningCustomPatternValidationErrorCode(rawValue: "custom_pattern_version_mismatch")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -179,10 +133,7 @@ public struct SecretScanningCustomPatternValidationErrorCode: RawRepresentable, 
 public struct SecretScanningAlertResolution: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let falsePositive = SecretScanningAlertResolution(rawValue: "false_positive")
     public static let wontFix = SecretScanningAlertResolution(rawValue: "wont_fix")
     public static let revoked = SecretScanningAlertResolution(rawValue: "revoked")
@@ -190,7 +141,7 @@ public struct SecretScanningAlertResolution: RawRepresentable, Hashable, Codable
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -204,16 +155,13 @@ public struct SecretScanningAlertResolution: RawRepresentable, Hashable, Codable
 public struct SecretScanningAlertState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let open = SecretScanningAlertState(rawValue: "open")
     public static let resolved = SecretScanningAlertState(rawValue: "resolved")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -226,17 +174,14 @@ public struct SecretScanningAlertState: RawRepresentable, Hashable, Codable, Sen
 public struct SecretScanningAlertWebhookValidity: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let active = SecretScanningAlertWebhookValidity(rawValue: "active")
     public static let inactive = SecretScanningAlertWebhookValidity(rawValue: "inactive")
     public static let unknown = SecretScanningAlertWebhookValidity(rawValue: "unknown")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -247,20 +192,16 @@ public struct SecretScanningAlertWebhookValidity: RawRepresentable, Hashable, Co
 
 /// The category of the detected secret. `default` covers specific provider patterns and custom patterns;
 /// `generic` covers non-specific patterns and AI-detected secrets.
-public struct SecretScanningAlertWebhookSecretCategory: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct SecretScanningAlertWebhookSecretCategory: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let `default` = SecretScanningAlertWebhookSecretCategory(rawValue: "default")
     public static let generic = SecretScanningAlertWebhookSecretCategory(rawValue: "generic")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -273,16 +214,13 @@ public struct SecretScanningAlertWebhookSecretCategory: RawRepresentable, Hashab
 public struct SecretScanningCustomPatternState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let published = SecretScanningCustomPatternState(rawValue: "published")
     public static let unpublished = SecretScanningCustomPatternState(rawValue: "unpublished")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -292,21 +230,17 @@ public struct SecretScanningCustomPatternState: RawRepresentable, Hashable, Coda
 }
 
 /// The token status as of the latest validity check.
-public struct SecretScanningAlertWithMetadataValidity: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct SecretScanningAlertWithMetadataValidity: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let active = SecretScanningAlertWithMetadataValidity(rawValue: "active")
     public static let inactive = SecretScanningAlertWithMetadataValidity(rawValue: "inactive")
     public static let unknown = SecretScanningAlertWithMetadataValidity(rawValue: "unknown")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -319,10 +253,7 @@ public struct SecretScanningAlertWithMetadataValidity: RawRepresentable, Hashabl
 public struct SecretScanningAlertResolutionWebhook: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let falsePositive = SecretScanningAlertResolutionWebhook(rawValue: "false_positive")
     public static let wontFix = SecretScanningAlertResolutionWebhook(rawValue: "wont_fix")
     public static let revoked = SecretScanningAlertResolutionWebhook(rawValue: "revoked")
@@ -332,7 +263,7 @@ public struct SecretScanningAlertResolutionWebhook: RawRepresentable, Hashable, 
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

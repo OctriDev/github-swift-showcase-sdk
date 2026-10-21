@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Orgs domain models
+// Orgs domain models
 /// Repository name and associated external custom property value
 public struct RepositoryExternalPropertyPayload: Codable {
     /// The name of the repository
@@ -16,35 +16,25 @@ public struct RepositoryExternalPropertyPayload: Codable {
         case value
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension RepositoryExternalPropertyPayload {
-    init(from decoder: Decoder) throws {
+extension RepositoryExternalPropertyPayload {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.repositoryName) else {
-            throw SdkValidationError(
-                field: "repository_name",
-                code: "required",
-                message: "Validation failed for 'repository_name': value is required"
-            )
+            throw SdkValidationError(field: "repository_name", code: "required", message: "Validation failed for 'repository_name': value is required")
         }
         guard container.contains(.value) else {
-            throw SdkValidationError(
-                field: "value",
-                code: "required",
-                message: "Validation failed for 'value': value is required"
-            )
+            throw SdkValidationError(field: "value", code: "required", message: "Validation failed for 'value': value is required")
         }
-        repositoryName = try container.sdkDecodeRequired(.repositoryName)
-        value = try container.sdkDecodeNullable(.value)
+        self.repositoryName = try container.sdkDecodeRequired(.repositoryName)
+        self.value = try container.sdkDecodeNullable(.value)
     }
 }
 
-public extension RepositoryExternalPropertyPayload {
-    init(repositoryName: String, value: String?) {
+extension RepositoryExternalPropertyPayload {
+    public init(repositoryName: String, value: String?) {
         (self.repositoryName, self.value) = (repositoryName, value)
     }
 }

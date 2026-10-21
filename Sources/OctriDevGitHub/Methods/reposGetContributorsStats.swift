@@ -6,70 +6,26 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ReposMethods {
-    /// Returns the `total` number of commits authored by the contributor. In addition, the response includes a Weekly
-    /// Hash (`weeks` array) with the following information: * `w` - Start of the week, given as a [Unix
-    /// timestamp](https://en.wikipedia.org/wiki/Unix_time). * `a` - Number of additions * `d` - Number of deletions *
-    /// `c` - Number of commits > [!NOTE] > This endpoint will return `0` values for all addition and deletion counts in
-    /// repositories with 10,000 or more commits.
+extension ReposMethods {
+    /// Returns the `total` number of commits authored by the contributor. In addition, the response includes a Weekly Hash (`weeks` array) with the following information: * `w` - Start of the week, given as a [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time). * `a` - Number of additions * `d` - Number of deletions * `c` - Number of commits > [!NOTE] > This endpoint will return `0` values for all addition and deletion counts in repositories with 10,000 or more commits.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    static func reposGetContributorsStats(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [ContributorActivity] {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/stats/contributors",
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "reposGetContributorsStats",
-            options: requestOptions
-        )).data
+    public static func reposGetContributorsStats(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> [ContributorActivity] {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/stats/contributors"].joined(), config: config, decoder: .json, operationId: "reposGetContributorsStats", options: requestOptions)).data
     }
 
-    /// Returns the total commit counts for the `owner` and total commit counts in `all`. `all` is everyone combined,
-    /// including the `owner` in the last 52 weeks. If you'd like to get the commit counts for non-owners, you can
-    /// subtract `owner` from `all`. The array order is oldest week (index 0) to most recent week. The most recent week
-    /// is seven days ago at UTC midnight to today at UTC midnight.
+    /// Returns the total commit counts for the `owner` and total commit counts in `all`. `all` is everyone combined, including the `owner` in the last 52 weeks. If you'd like to get the commit counts for non-owners, you can subtract `owner` from `all`. The array order is oldest week (index 0) to most recent week. The most recent week is seven days ago at UTC midnight to today at UTC midnight.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    static func reposGetParticipationStats(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ParticipationStats {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/stats/participation",
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "reposGetParticipationStats",
-            options: requestOptions,
-            errors: ["404": BasicError.self]
-        )).data
+    public static func reposGetParticipationStats(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> ParticipationStats {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/stats/participation"].joined(), config: config, decoder: .json, operationId: "reposGetParticipationStats", options: requestOptions, errors: ["404": BasicError.self])).data
     }
 }

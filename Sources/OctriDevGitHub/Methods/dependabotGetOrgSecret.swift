@@ -6,31 +6,13 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension DependabotMethods {
-    /// Gets a single organization secret without revealing its encrypted value. OAuth app tokens and personal access
-    /// tokens (classic) need the `admin:org` scope to use this endpoint.
+extension DependabotMethods {
+    /// Gets a single organization secret without revealing its encrypted value. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - secretName: The name of the secret.
-    static func dependabotGetOrgSecret(
-        config: ClientConfig,
-        org: String,
-        secretName: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> OrganizationDependabotSecret {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/orgs/",
-                sdkEncodePathSegment(sdkWireString(org)),
-                "/dependabot/secrets/",
-                sdkEncodePathSegment(sdkWireString(secretName)),
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "dependabotGetOrgSecret",
-            options: requestOptions
-        )).data
+    public static func dependabotGetOrgSecret(config: ClientConfig, org: String, secretName: String, requestOptions: RequestOptions? = nil) async throws -> OrganizationDependabotSecret {
+        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/dependabot/secrets/", sdkEncodePathSegment(sdkWireString(secretName))].joined(), config: config, decoder: .json, operationId: "dependabotGetOrgSecret", options: requestOptions)).data
     }
 }

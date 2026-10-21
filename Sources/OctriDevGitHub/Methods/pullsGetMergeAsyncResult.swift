@@ -6,18 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension PullsMethods {
-    /// Fetches the current result of an asynchronous merge request, identified by the UUID that was returned when the
-    /// merge was requested. While the request's status is `pending`, the response includes the UUID, merge method,
-    /// merge action, and expected head SHA of the request. Once the asynchronous request completes, its status is one
-    /// of: - `merged`: The pull request was merged into the base branch. The response includes the merge commit OID. -
-    /// `enqueued`: The pull request was added to a merge queue. - `failed`: The request failed. The response includes a
-    /// message describing the failure. An `enqueued` result is final for the merge queue requests and does not mean the
-    /// pull request has merged. This result does not change when the merge queue later merges the pull request. To get
-    /// the eventual merge status, [check if a pull request has been
-    /// merged](https://docs.github.com/rest/pulls/pulls#check-if-a-pull-request-has-been-merged). The result of an
-    /// asynchronous merge request is retained for 24 hours after its most recent update. After this window the request
-    /// expires and this endpoint returns a `404` response for its UUID.
+extension PullsMethods {
+    /// Fetches the current result of an asynchronous merge request, identified by the UUID that was returned when the merge was requested. While the request's status is `pending`, the response includes the UUID, merge method, merge action, and expected head SHA of the request. Once the asynchronous request completes, its status is one of: - `merged`: The pull request was merged into the base branch. The response includes the merge commit OID. - `enqueued`: The pull request was added to a merge queue. - `failed`: The request failed. The response includes a message describing the failure. An `enqueued` result is final for the merge queue requests and does not mean the pull request has merged. This result does not change when the merge queue later merges the pull request. To get the eventual merge status, [check if a pull request has been merged](https://docs.github.com/rest/pulls/pulls#check-if-a-pull-request-has-been-merged). The result of an asynchronous merge request is retained for 24 hours after its most recent update. After this window the request expires and this endpoint returns a `404` response for its UUID.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -27,31 +17,7 @@ public extension PullsMethods {
     /// - pullNumber: The number that identifies the pull request.
     /// - uuid: The UUID of the asynchronous merge request, as returned when the
     ///   merge was requested.
-    static func pullsGetMergeAsyncResult(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        pullNumber: Int,
-        uuid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> PullRequestMergeAsyncResult {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/pulls/",
-                sdkEncodePathSegment(sdkWireString(pullNumber)),
-                "/merge-async/",
-                sdkEncodePathSegment(sdkWireString(uuid)),
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "pullsGetMergeAsyncResult",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self]
-        )).data
+    public static func pullsGetMergeAsyncResult(config: ClientConfig, owner: String, repo: String, pullNumber: Int, uuid: String, requestOptions: RequestOptions? = nil) async throws -> PullRequestMergeAsyncResult {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/pulls/", sdkEncodePathSegment(sdkWireString(pullNumber)), "/merge-async/", sdkEncodePathSegment(sdkWireString(uuid))].joined(), config: config, decoder: .json, operationId: "pullsGetMergeAsyncResult", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
     }
 }

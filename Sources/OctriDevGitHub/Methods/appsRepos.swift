@@ -6,37 +6,15 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension AppsMethods {
-    /// Enables an authenticated GitHub App to find the repository's installation information. The installation's
-    /// account type will be either an organization or a user account, depending which account the repository belongs
-    /// to. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
-    /// to access this endpoint.
+extension AppsMethods {
+    /// Enables an authenticated GitHub App to find the repository's installation information. The installation's account type will be either an organization or a user account, depending which account the repository belongs to. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    static func appsGetRepoInstallation(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> Installation {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/installation",
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "appsGetRepoInstallation",
-            options: requestOptions,
-            errors: ["301": BasicError.self, "404": BasicError.self]
-        )).data
+    public static func appsGetRepoInstallation(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> Installation {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/installation"].joined(), config: config, decoder: .json, operationId: "appsGetRepoInstallation", options: requestOptions, errors: ["301": BasicError.self, "404": BasicError.self])).data
     }
 }

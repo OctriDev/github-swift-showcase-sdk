@@ -9,340 +9,77 @@ public class GitNamespace {
         self.config = config
     }
 
-    /// Creates a Git blob in a repository from the supplied content. Provide `content` and, if needed, set `encoding`
-    /// to control how the content is decoded; the default encoding is UTF-8. A 201 response returns the blob's URL and
-    /// SHA.
-    public func createBlob(
-        owner: String,
-        repo: String,
-        content: String,
-        encoding: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ShortBlob {
-        try await GitMethods.gitCreateBlob(
-            config: config,
-            owner: owner,
-            repo: repo,
-            content: content,
-            encoding: encoding,
-            requestOptions: requestOptions
-        )
+/// Creates a Git blob in a repository from the supplied content. Provide `content` and, if needed, set `encoding` to control how the content is decoded; the default encoding is UTF-8. A 201 response returns the blob's URL and SHA.
+    public func createBlob(owner: String, repo: String, content: String, encoding: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ShortBlob {
+        return try await GitMethods.gitCreateBlob(config: config, owner: owner, repo: repo, content: content, encoding: encoding, requestOptions: requestOptions)
     }
 
-    /// Retrieves a Git blob from a repository using its file SHA. The JSON response encodes `content` as Base64;
-    /// request `application/vnd.github.raw+json` for raw blob data instead. Blobs can be up to 100 megabytes.
+/// Retrieves a Git blob from a repository using its file SHA. The JSON response encodes `content` as Base64; request `application/vnd.github.raw+json` for raw blob data instead. Blobs can be up to 100 megabytes.
     ///
-    /// The `content` in the response will always be Base64 encoded. This endpoint supports the following custom media
-    /// types. For more information, see "[Media
-    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
-    /// **`application/vnd.github.raw+json`**: Returns the raw blob data. - **`application/vnd.github+json`**: Returns a
-    /// JSON representation of the blob with `content` as a base64 encoded string. This is the default if no media type
-    /// is specified. **Note** This endpoint supports blobs up to 100 megabytes in size.
-    public func getBlob(
-        owner: String,
-        repo: String,
-        fileSha: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> Blob {
-        try await GitMethods.gitGetBlob(
-            config: config,
-            owner: owner,
-            repo: repo,
-            fileSha: fileSha,
-            requestOptions: requestOptions
-        )
+    /// The `content` in the response will always be Base64 encoded. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.raw+json`**: Returns the raw blob data. - **`application/vnd.github+json`**: Returns a JSON representation of the blob with `content` as a base64 encoded string. This is the default if no media type is specified. **Note** This endpoint supports blobs up to 100 megabytes in size.
+    public func getBlob(owner: String, repo: String, fileSha: String, requestOptions: RequestOptions? = nil) async throws -> Blob {
+        return try await GitMethods.gitGetBlob(config: config, owner: owner, repo: repo, fileSha: fileSha, requestOptions: requestOptions)
     }
 
-    /// Creates a new Git [commit object](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects). **Signature
-    /// verification object** The response will include a `verification` object that describes the result of verifying
-    /// the commit's signature. The following fields are included in the `verification` object: | Name | Type |
-    /// Description | | ---- | ---- | ----------- | | `verified` | `boolean` | Indicates whether GitHub considers the
-    /// signature in this commit to be verified. | | `reason` | `string` | The reason for verified value. Possible
-    /// values and their meanings are enumerated in the table below. | | `signature` | `string` | The signature that was
-    /// extracted from the commit. | | `payload` | `string` | The value that was signed. | | `verified_at` | `string` |
-    /// The date the signature was verified by GitHub. | These are the possible values for `reason` in the
-    /// `verification` object: | Value | Description | | ----- | ----------- | | `expired_key` | The key that made the
-    /// signature is expired. | | `not_signing_key` | The "signing" flag is not among the usage flags in the GPG key
-    /// that made the signature. | | `gpgverify_error` | There was an error communicating with the signature
-    /// verification service. | | `gpgverify_unavailable` | The signature verification service is currently unavailable.
-    /// | | `unsigned` | The object does not include a signature. | | `unknown_signature_type` | A non-PGP signature was
-    /// found in the commit. | | `no_user` | No user was associated with the `committer` email address in the commit. |
-    /// | `unverified_email` | The `committer` email address in the commit was associated with a user, but the email
-    /// address is not verified on their account. | | `bad_email` | The `committer` email address in the commit is not
-    /// included in the identities of the PGP key that made the signature. | | `unknown_key` | The key that made the
-    /// signature has not been registered with any user's account. | | `malformed_signature` | There was an error
-    /// parsing the signature. | | `invalid` | The…
-    public func createCommit(
-        options: GitMethods.GitCreateCommitOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> GitCommit {
-        try await GitMethods.gitCreateCommit(config: config, options: options, requestOptions: requestOptions)
+/// Creates a new Git [commit object](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects). **Signature verification object** The response will include a `verification` object that describes the result of verifying the commit's signature. The following fields are included in the `verification` object: | Name | Type | Description | | ---- | ---- | ----------- | | `verified` | `boolean` | Indicates whether GitHub considers the signature in this commit to be verified. | | `reason` | `string` | The reason for verified value. Possible values and their meanings are enumerated in the table below. | | `signature` | `string` | The signature that was extracted from the commit. | | `payload` | `string` | The value that was signed. | | `verified_at` | `string` | The date the signature was verified by GitHub. | These are the possible values for `reason` in the `verification` object: | Value | Description | | ----- | ----------- | | `expired_key` | The key that made the signature is expired. | | `not_signing_key` | The "signing" flag is not among the usage flags in the GPG key that made the signature. | | `gpgverify_error` | There was an error communicating with the signature verification service. | | `gpgverify_unavailable` | The signature verification service is currently unavailable. | | `unsigned` | The object does not include a signature. | | `unknown_signature_type` | A non-PGP signature was found in the commit. | | `no_user` | No user was associated with the `committer` email address in the commit. | | `unverified_email` | The `committer` email address in the commit was associated with a user, but the email address is not verified on their account. | | `bad_email` | The `committer` email address in the commit is not included in the identities of the PGP key that made the signature. | | `unknown_key` | The key that made the signature has not been registered with any user's account. | | `malformed_signature` | There was an error parsing the signature. | | `invalid` | The…
+    public func createCommit(options: GitMethods.GitCreateCommitOptions, requestOptions: RequestOptions? = nil) async throws -> GitCommit {
+        return try await GitMethods.gitCreateCommit(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Gets a Git [commit object](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects). To get the contents of a
-    /// commit, see "Get a commit." **Signature verification object** The response will include a `verification` object
-    /// that describes the result of verifying the commit's signature. The following fields are included in the
-    /// `verification` object: | Name | Type | Description | | ---- | ---- | ----------- | | `verified` | `boolean` |
-    /// Indicates whether GitHub considers the signature in this commit to be verified. | | `reason` | `string` | The
-    /// reason for verified value. Possible values and their meanings are enumerated in the table below. | | `signature`
-    /// | `string` | The signature that was extracted from the commit. | | `payload` | `string` | The value that was
-    /// signed. | | `verified_at` | `string` | The date the signature was verified by GitHub. | These are the possible
-    /// values for `reason` in the `verification` object: | Value | Description | | ----- | ----------- | |
-    /// `expired_key` | The key that made the signature is expired. | | `not_signing_key` | The "signing" flag is not
-    /// among the usage flags in the GPG key that made the signature. | | `gpgverify_error` | There was an error
-    /// communicating with the signature verification service. | | `gpgverify_unavailable` | The signature verification
-    /// service is currently unavailable. | | `unsigned` | The object does not include a signature. | |
-    /// `unknown_signature_type` | A non-PGP signature was found in the commit. | | `no_user` | No user was associated
-    /// with the `committer` email address in the commit. | | `unverified_email` | The `committer` email address in the
-    /// commit was associated with a user, but the email address is not verified on their account. | | `bad_email` | The
-    /// `committer` email address in the commit is not included in the identities of the PGP key that made the
-    /// signature. | | `unknown_key` | The key that made the signature has not been registered with any user's account.
-    /// | | `malformed_signature` | There was an…
-    public func getCommit(
-        owner: String,
-        repo: String,
-        commitSha: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> GitCommit {
-        try await GitMethods.gitGetCommit(
-            config: config,
-            owner: owner,
-            repo: repo,
-            commitSha: commitSha,
-            requestOptions: requestOptions
-        )
+/// Gets a Git [commit object](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects). To get the contents of a commit, see "Get a commit." **Signature verification object** The response will include a `verification` object that describes the result of verifying the commit's signature. The following fields are included in the `verification` object: | Name | Type | Description | | ---- | ---- | ----------- | | `verified` | `boolean` | Indicates whether GitHub considers the signature in this commit to be verified. | | `reason` | `string` | The reason for verified value. Possible values and their meanings are enumerated in the table below. | | `signature` | `string` | The signature that was extracted from the commit. | | `payload` | `string` | The value that was signed. | | `verified_at` | `string` | The date the signature was verified by GitHub. | These are the possible values for `reason` in the `verification` object: | Value | Description | | ----- | ----------- | | `expired_key` | The key that made the signature is expired. | | `not_signing_key` | The "signing" flag is not among the usage flags in the GPG key that made the signature. | | `gpgverify_error` | There was an error communicating with the signature verification service. | | `gpgverify_unavailable` | The signature verification service is currently unavailable. | | `unsigned` | The object does not include a signature. | | `unknown_signature_type` | A non-PGP signature was found in the commit. | | `no_user` | No user was associated with the `committer` email address in the commit. | | `unverified_email` | The `committer` email address in the commit was associated with a user, but the email address is not verified on their account. | | `bad_email` | The `committer` email address in the commit is not included in the identities of the PGP key that made the signature. | | `unknown_key` | The key that made the signature has not been registered with any user's account. | | `malformed_signature` | There was an…
+    public func getCommit(owner: String, repo: String, commitSha: String, requestOptions: RequestOptions? = nil) async throws -> GitCommit {
+        return try await GitMethods.gitGetCommit(config: config, owner: owner, repo: repo, commitSha: commitSha, requestOptions: requestOptions)
     }
 
-    /// Returns an array of references from your Git database that match the supplied name. The `:ref` in the URL must
-    /// be formatted as `heads/<branch name>` for branches and `tags/<tag name>` for tags. If the `:ref` doesn't exist
-    /// in the repository, but existing refs start with `:ref`, they will be returned as an array. When you use this
-    /// endpoint without providing a `:ref`, it will return an array of all the references from your Git database,
-    /// including notes and stashes if they exist on the server. Anything in the namespace is returned, not just `heads`
-    /// and `tags`. > [!NOTE] > You need to explicitly [request a pull
-    /// request](https://docs.github.com/rest/pulls/pulls#get-a-pull-request) to trigger a test merge commit, which
-    /// checks the mergeability of pull requests. For more information, see "[Checking mergeability of pull requests](https://docs.github.com/rest/guides/getting-started-with-the-git-database-api#checking-mergeability-of-pull-requests)".
-    /// If you request matching references for a branch named `feature` but the branch `feature` doesn't exist, the
-    /// response can still include other matching head refs that start with the word `feature`, such as `featureA` and
-    /// `featureB`.
-    public func listMatchingRefs(
-        owner: String,
-        repo: String,
-        ref: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [GitRef] {
-        try await GitMethods.gitListMatchingRefs(
-            config: config,
-            owner: owner,
-            repo: repo,
-            ref: ref,
-            requestOptions: requestOptions
-        )
+/// Returns an array of references from your Git database that match the supplied name. The `:ref` in the URL must be formatted as `heads/<branch name>` for branches and `tags/<tag name>` for tags. If the `:ref` doesn't exist in the repository, but existing refs start with `:ref`, they will be returned as an array. When you use this endpoint without providing a `:ref`, it will return an array of all the references from your Git database, including notes and stashes if they exist on the server. Anything in the namespace is returned, not just `heads` and `tags`. > [!NOTE] > You need to explicitly [request a pull request](https://docs.github.com/rest/pulls/pulls#get-a-pull-request) to trigger a test merge commit, which checks the mergeability of pull requests. For more information, see "[Checking mergeability of pull requests](https://docs.github.com/rest/guides/getting-started-with-the-git-database-api#checking-mergeability-of-pull-requests)". If you request matching references for a branch named `feature` but the branch `feature` doesn't exist, the response can still include other matching head refs that start with the word `feature`, such as `featureA` and `featureB`.
+    public func listMatchingRefs(owner: String, repo: String, ref: String, requestOptions: RequestOptions? = nil) async throws -> [GitRef] {
+        return try await GitMethods.gitListMatchingRefs(config: config, owner: owner, repo: repo, ref: ref, requestOptions: requestOptions)
     }
 
-    /// Returns a single reference from your Git database. The `:ref` in the URL must be formatted as `heads/<branch
-    /// name>` for branches and `tags/<tag name>` for tags. If the `:ref` doesn't match an existing ref, a `404` is
-    /// returned. > [!NOTE] > You need to explicitly [request a pull
-    /// request](https://docs.github.com/rest/pulls/pulls#get-a-pull-request) to trigger a test merge commit, which
-    /// checks the mergeability of pull requests. For more information, see "[Checking mergeability of pull requests](https://docs.github.com/rest/guides/getting-started-with-the-git-database-api#checking-mergeability-of-pull-requests)".
-    public func getRef(
-        owner: String,
-        repo: String,
-        ref: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> GitRef {
-        try await GitMethods.gitGetRef(
-            config: config,
-            owner: owner,
-            repo: repo,
-            ref: ref,
-            requestOptions: requestOptions
-        )
+/// Returns a single reference from your Git database. The `:ref` in the URL must be formatted as `heads/<branch name>` for branches and `tags/<tag name>` for tags. If the `:ref` doesn't match an existing ref, a `404` is returned. > [!NOTE] > You need to explicitly [request a pull request](https://docs.github.com/rest/pulls/pulls#get-a-pull-request) to trigger a test merge commit, which checks the mergeability of pull requests. For more information, see "[Checking mergeability of pull requests](https://docs.github.com/rest/guides/getting-started-with-the-git-database-api#checking-mergeability-of-pull-requests)".
+    public func getRef(owner: String, repo: String, ref: String, requestOptions: RequestOptions? = nil) async throws -> GitRef {
+        return try await GitMethods.gitGetRef(config: config, owner: owner, repo: repo, ref: ref, requestOptions: requestOptions)
     }
 
-    /// Creates a reference for your repository. You are unable to create new references for empty repositories, even if
-    /// the commit SHA-1 hash used exists. Empty repositories are repositories without branches.
-    public func createRef(
-        owner: String,
-        repo: String,
-        ref: String,
-        sha: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> GitRef {
-        try await GitMethods.gitCreateRef(
-            config: config,
-            owner: owner,
-            repo: repo,
-            ref: ref,
-            sha: sha,
-            requestOptions: requestOptions
-        )
+/// Creates a reference for your repository. You are unable to create new references for empty repositories, even if the commit SHA-1 hash used exists. Empty repositories are repositories without branches.
+    public func createRef(owner: String, repo: String, ref: String, sha: String, requestOptions: RequestOptions? = nil) async throws -> GitRef {
+        return try await GitMethods.gitCreateRef(config: config, owner: owner, repo: repo, ref: ref, sha: sha, requestOptions: requestOptions)
     }
 
-    /// Updates the provided reference to point to a new SHA. For more information, see "[Git
-    /// References](https://git-scm.com/book/en/v2/Git-Internals-Git-References)" in the Git documentation.
-    public func updateRef(
-        owner: String,
-        repo: String,
-        ref: String,
-        sha: String,
-        force: Bool? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> GitRef {
-        try await GitMethods.gitUpdateRef(
-            config: config,
-            owner: owner,
-            repo: repo,
-            ref: ref,
-            sha: sha,
-            force: force,
-            requestOptions: requestOptions
-        )
+/// Updates the provided reference to point to a new SHA. For more information, see "[Git References](https://git-scm.com/book/en/v2/Git-Internals-Git-References)" in the Git documentation.
+    public func updateRef(owner: String, repo: String, ref: String, sha: String, force: Bool? = nil, requestOptions: RequestOptions? = nil) async throws -> GitRef {
+        return try await GitMethods.gitUpdateRef(config: config, owner: owner, repo: repo, ref: ref, sha: sha, force: force, requestOptions: requestOptions)
     }
 }
 
-public extension GitNamespace {
-    /// Deletes a Git reference from a repository. Use `owner` and `repo` to identify the repository and `ref` to select
-    /// the reference to remove. The default branch cannot be deleted.
+extension GitNamespace {
+/// Deletes a Git reference from a repository. Use `owner` and `repo` to identify the repository and `ref` to select the reference to remove. The default branch cannot be deleted.
     ///
     /// Deletes the provided reference.
-    func deleteRef(
-        owner: String,
-        repo: String,
-        ref: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await GitMethods.gitDeleteRef(
-            config: config,
-            owner: owner,
-            repo: repo,
-            ref: ref,
-            requestOptions: requestOptions
-        )
+    public func deleteRef(owner: String, repo: String, ref: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await GitMethods.gitDeleteRef(config: config, owner: owner, repo: repo, ref: ref, requestOptions: requestOptions)
     }
 
-    /// Note that creating a tag object does not create the reference that makes a tag in Git. If you want to create an
-    /// annotated tag in Git, you have to do this call to create the tag object, and then
-    /// [create](https://docs.github.com/rest/git/refs#create-a-reference) the `refs/tags/[tag]` reference. If you want
-    /// to create a lightweight tag, you only have to [create](https://docs.github.com/rest/git/refs#create-a-reference)
-    /// the tag reference - this call would be unnecessary. **Signature verification object** The response will include
-    /// a `verification` object that describes the result of verifying the commit's signature. The following fields are
-    /// included in the `verification` object: | Name | Type | Description | | ---- | ---- | ----------- | | `verified`
-    /// | `boolean` | Indicates whether GitHub considers the signature in this commit to be verified. | | `reason` |
-    /// `string` | The reason for verified value. Possible values and their meanings are enumerated in table below. | |
-    /// `signature` | `string` | The signature that was extracted from the commit. | | `payload` | `string` | The value
-    /// that was signed. | | `verified_at` | `string` | The date the signature was verified by GitHub. | These are the
-    /// possible values for `reason` in the `verification` object: | Value | Description | | ----- | ----------- | |
-    /// `expired_key` | The key that made the signature is expired. | | `not_signing_key` | The "signing" flag is not
-    /// among the usage flags in the GPG key that made the signature. | | `gpgverify_error` | There was an error
-    /// communicating with the signature verification service. | | `gpgverify_unavailable` | The signature verification
-    /// service is currently unavailable. | | `unsigned` | The object does not include a signature. | |
-    /// `unknown_signature_type` | A non-PGP signature was found in the commit. | | `no_user` | No user was associated
-    /// with the `committer` email address in the commit. | | `unverified_email` | The `committer` email address in the
-    /// commit was associated with a user, but the…
-    func createTag(
-        owner: String,
-        repo: String,
-        tag: String,
-        message: String,
-        object: String,
-        type: GitCreateTagRequestBodyType,
-        tagger: GitCreateTagRequestBodyTagger? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> GitTag {
-        try await GitMethods.gitCreateTag(
-            config: config,
-            owner: owner,
-            repo: repo,
-            tag: tag,
-            message: message,
-            object: object,
-            type: type,
-            tagger: tagger,
-            requestOptions: requestOptions
-        )
+/// Note that creating a tag object does not create the reference that makes a tag in Git. If you want to create an annotated tag in Git, you have to do this call to create the tag object, and then [create](https://docs.github.com/rest/git/refs#create-a-reference) the `refs/tags/[tag]` reference. If you want to create a lightweight tag, you only have to [create](https://docs.github.com/rest/git/refs#create-a-reference) the tag reference - this call would be unnecessary. **Signature verification object** The response will include a `verification` object that describes the result of verifying the commit's signature. The following fields are included in the `verification` object: | Name | Type | Description | | ---- | ---- | ----------- | | `verified` | `boolean` | Indicates whether GitHub considers the signature in this commit to be verified. | | `reason` | `string` | The reason for verified value. Possible values and their meanings are enumerated in table below. | | `signature` | `string` | The signature that was extracted from the commit. | | `payload` | `string` | The value that was signed. | | `verified_at` | `string` | The date the signature was verified by GitHub. | These are the possible values for `reason` in the `verification` object: | Value | Description | | ----- | ----------- | | `expired_key` | The key that made the signature is expired. | | `not_signing_key` | The "signing" flag is not among the usage flags in the GPG key that made the signature. | | `gpgverify_error` | There was an error communicating with the signature verification service. | | `gpgverify_unavailable` | The signature verification service is currently unavailable. | | `unsigned` | The object does not include a signature. | | `unknown_signature_type` | A non-PGP signature was found in the commit. | | `no_user` | No user was associated with the `committer` email address in the commit. | | `unverified_email` | The `committer` email address in the commit was associated with a user, but the…
+    public func createTag(owner: String, repo: String, tag: String, message: String, object: String, type: GitCreateTagRequestBodyType, tagger: GitCreateTagRequestBodyTagger? = nil, requestOptions: RequestOptions? = nil) async throws -> GitTag {
+        return try await GitMethods.gitCreateTag(config: config, owner: owner, repo: repo, tag: tag, message: message, object: object, type: type, tagger: tagger, requestOptions: requestOptions)
     }
 
-    /// Retrieves metadata for a Git tag in a repository, including its target object and signature-verification result.
-    /// Use `tag_sha` to identify the tag and inspect `verification.reason` to understand why GitHub considers its
-    /// signature verified or unverified.
+/// Retrieves metadata for a Git tag in a repository, including its target object and signature-verification result. Use `tag_sha` to identify the tag and inspect `verification.reason` to understand why GitHub considers its signature verified or unverified.
     ///
-    /// **Signature verification object** The response will include a `verification` object that describes the result of
-    /// verifying the commit's signature. The following fields are included in the `verification` object: | Name | Type
-    /// | Description | | ---- | ---- | ----------- | | `verified` | `boolean` | Indicates whether GitHub considers the
-    /// signature in this commit to be verified. | | `reason` | `string` | The reason for verified value. Possible
-    /// values and their meanings are enumerated in table below. | | `signature` | `string` | The signature that was
-    /// extracted from the commit. | | `payload` | `string` | The value that was signed. | | `verified_at` | `string` |
-    /// The date the signature was verified by GitHub. | These are the possible values for `reason` in the
-    /// `verification` object: | Value | Description | | ----- | ----------- | | `expired_key` | The key that made the
-    /// signature is expired. | | `not_signing_key` | The "signing" flag is not among the usage flags in the GPG key
-    /// that made the signature. | | `gpgverify_error` | There was an error communicating with the signature
-    /// verification service. | | `gpgverify_unavailable` | The signature verification service is currently unavailable.
-    /// | | `unsigned` | The object does not include a signature. | | `unknown_signature_type` | A non-PGP signature was
-    /// found in the commit. | | `no_user` | No user was associated with the `committer` email address in the commit. |
-    /// | `unverified_email` | The `committer` email address in the commit was associated with a user, but the email
-    /// address is not verified on their account. | | `bad_email` | The `committer` email address in the commit is not
-    /// included in the identities of the PGP key that made the signature. | | `unknown_key` | The key that made the
-    /// signature has not been registered with any user's account. | | `malformed_signature` | There was an error
-    /// parsing the signature. | | `invalid` | The signature could not be cryptographically verified using the key whose
-    /// key-id was found in the…
-    func getTag(
-        owner: String,
-        repo: String,
-        tagSha: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> GitTag {
-        try await GitMethods.gitGetTag(
-            config: config,
-            owner: owner,
-            repo: repo,
-            tagSha: tagSha,
-            requestOptions: requestOptions
-        )
+    /// **Signature verification object** The response will include a `verification` object that describes the result of verifying the commit's signature. The following fields are included in the `verification` object: | Name | Type | Description | | ---- | ---- | ----------- | | `verified` | `boolean` | Indicates whether GitHub considers the signature in this commit to be verified. | | `reason` | `string` | The reason for verified value. Possible values and their meanings are enumerated in table below. | | `signature` | `string` | The signature that was extracted from the commit. | | `payload` | `string` | The value that was signed. | | `verified_at` | `string` | The date the signature was verified by GitHub. | These are the possible values for `reason` in the `verification` object: | Value | Description | | ----- | ----------- | | `expired_key` | The key that made the signature is expired. | | `not_signing_key` | The "signing" flag is not among the usage flags in the GPG key that made the signature. | | `gpgverify_error` | There was an error communicating with the signature verification service. | | `gpgverify_unavailable` | The signature verification service is currently unavailable. | | `unsigned` | The object does not include a signature. | | `unknown_signature_type` | A non-PGP signature was found in the commit. | | `no_user` | No user was associated with the `committer` email address in the commit. | | `unverified_email` | The `committer` email address in the commit was associated with a user, but the email address is not verified on their account. | | `bad_email` | The `committer` email address in the commit is not included in the identities of the PGP key that made the signature. | | `unknown_key` | The key that made the signature has not been registered with any user's account. | | `malformed_signature` | There was an error parsing the signature. | | `invalid` | The signature could not be cryptographically verified using the key whose key-id was found in the…
+    public func getTag(owner: String, repo: String, tagSha: String, requestOptions: RequestOptions? = nil) async throws -> GitTag {
+        return try await GitMethods.gitGetTag(config: config, owner: owner, repo: repo, tagSha: tagSha, requestOptions: requestOptions)
     }
 
-    /// The tree creation API accepts nested entries. If you specify both a tree and a nested path modifying that tree,
-    /// this endpoint will overwrite the contents of the tree with the new path contents, and create a new tree
-    /// structure. If you use this endpoint to add, delete, or modify the file contents in a tree, you will need to
-    /// commit the tree and then update a branch to point to the commit. For more information see "[Create a
-    /// commit](https://docs.github.com/rest/git/commits#create-a-commit)" and "[Update a
-    /// reference](https://docs.github.com/rest/git/refs#update-a-reference)." Returns an error if you try to delete a
-    /// file that does not exist.
-    func createTree(
-        owner: String,
-        repo: String,
-        tree: [GitCreateTreeRequestBodyTreeItem],
-        baseTree: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> GitTree {
-        try await GitMethods.gitCreateTree(
-            config: config,
-            owner: owner,
-            repo: repo,
-            tree: tree,
-            baseTree: baseTree,
-            requestOptions: requestOptions
-        )
+/// The tree creation API accepts nested entries. If you specify both a tree and a nested path modifying that tree, this endpoint will overwrite the contents of the tree with the new path contents, and create a new tree structure. If you use this endpoint to add, delete, or modify the file contents in a tree, you will need to commit the tree and then update a branch to point to the commit. For more information see "[Create a commit](https://docs.github.com/rest/git/commits#create-a-commit)" and "[Update a reference](https://docs.github.com/rest/git/refs#update-a-reference)." Returns an error if you try to delete a file that does not exist.
+    public func createTree(owner: String, repo: String, tree: [GitCreateTreeRequestBodyTreeItem], baseTree: String? = nil, requestOptions: RequestOptions? = nil) async throws -> GitTree {
+        return try await GitMethods.gitCreateTree(config: config, owner: owner, repo: repo, tree: tree, baseTree: baseTree, requestOptions: requestOptions)
     }
 
-    /// Returns a single tree using the SHA1 value or ref name for that tree. If `truncated` is `true` in the response
-    /// then the number of items in the `tree` array exceeded our maximum limit. If you need to fetch more items, use
-    /// the non-recursive method of fetching trees, and fetch one sub-tree at a time. > [!NOTE] > The limit for the
-    /// `tree` array is 100,000 entries with a maximum size of 7 MB when using the `recursive` parameter.
-    func getTree(
-        owner: String,
-        repo: String,
-        treeSha: String,
-        recursive: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> GitTree {
-        try await GitMethods.gitGetTree(
-            config: config,
-            owner: owner,
-            repo: repo,
-            treeSha: treeSha,
-            recursive: recursive,
-            requestOptions: requestOptions
-        )
+/// Returns a single tree using the SHA1 value or ref name for that tree. If `truncated` is `true` in the response then the number of items in the `tree` array exceeded our maximum limit. If you need to fetch more items, use the non-recursive method of fetching trees, and fetch one sub-tree at a time. > [!NOTE] > The limit for the `tree` array is 100,000 entries with a maximum size of 7 MB when using the `recursive` parameter.
+    public func getTree(owner: String, repo: String, treeSha: String, recursive: String? = nil, requestOptions: RequestOptions? = nil) async throws -> GitTree {
+        return try await GitMethods.gitGetTree(config: config, owner: owner, repo: repo, treeSha: treeSha, recursive: recursive, requestOptions: requestOptions)
     }
 }
 
@@ -352,215 +89,47 @@ public class PullsNamespace {
         self.config = config
     }
 
-    /// Lists pull requests in a specified repository. Draft pull requests are available in public repositories with
-    /// GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in
-    /// public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see
-    /// [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub
-    /// Help documentation. This endpoint supports the following custom media types. For more information, see "[Media
-    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
-    /// **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the
-    /// default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text
-    /// only representation of the markdown body. Response will include `body_text`. -
-    /// **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include
-    /// `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response
-    /// will include `body`, `body_text`, and `body_html`.
-    public func list(
-        options: PullsMethods.PullsListOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [PullRequestSimple] {
-        try await PullsMethods.pullsList(config: config, options: options, requestOptions: requestOptions)
+/// Lists pull requests in a specified repository. Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text only representation of the markdown body. Response will include `body_text`. - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    public func list(options: PullsMethods.PullsListOptions, requestOptions: RequestOptions? = nil) async throws -> [PullRequestSimple] {
+        return try await PullsMethods.pullsList(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations,
-    /// GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and
-    /// GitHub Enterprise Cloud. For more information, see [GitHub's
-    /// products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help
-    /// documentation. To open or update a pull request in a public repository, you must have write access to the head
-    /// or the source branch. For organization-owned repositories, you must be a member of the organization that owns
-    /// the repository to open or update a pull request. This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications).
-    /// Creating content too quickly using this endpoint may result in secondary rate limiting. For more information,
-    /// see "[Rate limits for the
-    /// API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)"
-    /// and "[Best practices for using the REST
-    /// API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)." This endpoint supports the
-    /// following custom media types. For more information, see "[Media
-    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
-    /// **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the
-    /// default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text
-    /// only representation of the markdown body. Response will include `body_text`. -
-    /// **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include
-    /// `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response
-    /// will include `body`, `body_text`, and `body_html`.
-    public func create(
-        options: PullsMethods.PullsCreateOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> PullRequest {
-        try await PullsMethods.pullsCreate(config: config, options: options, requestOptions: requestOptions)
+/// Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation. To open or update a pull request in a public repository, you must have write access to the head or the source branch. For organization-owned repositories, you must be a member of the organization that owns the repository to open or update a pull request. This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. For more information, see "[Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)" and "[Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)." This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text only representation of the markdown body. Response will include `body_text`. - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    public func create(options: PullsMethods.PullsCreateOptions, requestOptions: RequestOptions? = nil) async throws -> PullRequest {
+        return try await PullsMethods.pullsCreate(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Lists review comments across all pull requests in a repository, ordered by ID in ascending order by default. Use
-    /// `sort`, `direction`, and `since` to control the results, and select a custom media type to receive the comment
-    /// body as raw Markdown, plain text, rendered HTML, or all three. Use `page` and `per_page` to paginate the
-    /// results.
+/// Lists review comments across all pull requests in a repository, ordered by ID in ascending order by default. Use `sort`, `direction`, and `since` to control the results, and select a custom media type to receive the comment body as raw Markdown, plain text, rendered HTML, or all three. Use `page` and `per_page` to paginate the results.
     ///
-    /// Lists review comments for all pull requests in a repository. By default, review comments are in ascending order
-    /// by ID. This endpoint supports the following custom media types. For more information, see "[Media
-    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
-    /// **`application/vnd.github-commitcomment.raw+json`**: Returns the raw markdown body. Response will include
-    /// `body`. This is the default if you do not pass any specific media type. -
-    /// **`application/vnd.github-commitcomment.text+json`**: Returns a text only representation of the markdown body.
-    /// Response will include `body_text`. - **`application/vnd.github-commitcomment.html+json`**: Returns HTML rendered
-    /// from the body's markdown. Response will include `body_html`. -
-    /// **`application/vnd.github-commitcomment.full+json`**: Returns raw, text, and HTML representations. Response will
-    /// include `body`, `body_text`, and `body_html`.
-    public func listReviewCommentsForRepo(
-        owner: String,
-        repo: String,
-        sort: PullsListReviewCommentsForRepoParameter? = nil,
-        direction: PullsListReviewCommentsForRepoParameterXb8109f3c? = nil,
-        since: Date? = nil,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [PullRequestReviewComment] {
-        try await PullsMethods.pullsListReviewCommentsForRepo(
-            config: config,
-            owner: owner,
-            repo: repo,
-            sort: sort,
-            direction: direction,
-            since: since,
-            perPage: perPage,
-            page: page,
-            requestOptions: requestOptions
-        )
+    /// Lists review comments for all pull requests in a repository. By default, review comments are in ascending order by ID. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github-commitcomment.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the default if you do not pass any specific media type. - **`application/vnd.github-commitcomment.text+json`**: Returns a text only representation of the markdown body. Response will include `body_text`. - **`application/vnd.github-commitcomment.html+json`**: Returns HTML rendered from the body's markdown. Response will include `body_html`. - **`application/vnd.github-commitcomment.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    public func listReviewCommentsForRepo(owner: String, repo: String, sort: PullsListReviewCommentsForRepoParameter? = nil, direction: PullsListReviewCommentsForRepoParameterXb8109f3c? = nil, since: Date? = nil, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [PullRequestReviewComment] {
+        return try await PullsMethods.pullsListReviewCommentsForRepo(config: config, owner: owner, repo: repo, sort: sort, direction: direction, since: since, perPage: perPage, page: page, requestOptions: requestOptions)
     }
 
-    /// Provides details for a specified review comment. This endpoint supports the following custom media types. For
-    /// more information, see "[Media
-    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
-    /// **`application/vnd.github-commitcomment.raw+json`**: Returns the raw markdown body. Response will include
-    /// `body`. This is the default if you do not pass any specific media type. -
-    /// **`application/vnd.github-commitcomment.text+json`**: Returns a text only representation of the markdown body.
-    /// Response will include `body_text`. - **`application/vnd.github-commitcomment.html+json`**: Returns HTML rendered
-    /// from the body's markdown. Response will include `body_html`. -
-    /// **`application/vnd.github-commitcomment.full+json`**: Returns raw, text, and HTML representations. Response will
-    /// include `body`, `body_text`, and `body_html`.
-    public func getReviewComment(
-        owner: String,
-        repo: String,
-        commentId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> PullRequestReviewComment {
-        try await PullsMethods.pullsGetReviewComment(
-            config: config,
-            owner: owner,
-            repo: repo,
-            commentId: commentId,
-            requestOptions: requestOptions
-        )
+/// Provides details for a specified review comment. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github-commitcomment.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the default if you do not pass any specific media type. - **`application/vnd.github-commitcomment.text+json`**: Returns a text only representation of the markdown body. Response will include `body_text`. - **`application/vnd.github-commitcomment.html+json`**: Returns HTML rendered from the body's markdown. Response will include `body_html`. - **`application/vnd.github-commitcomment.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    public func getReviewComment(owner: String, repo: String, commentId: Int, requestOptions: RequestOptions? = nil) async throws -> PullRequestReviewComment {
+        return try await PullsMethods.pullsGetReviewComment(config: config, owner: owner, repo: repo, commentId: commentId, requestOptions: requestOptions)
     }
 
-    /// Edits the content of a specified review comment. This endpoint supports the following custom media types. For
-    /// more information, see "[Media
-    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
-    /// **`application/vnd.github-commitcomment.raw+json`**: Returns the raw markdown body. Response will include
-    /// `body`. This is the default if you do not pass any specific media type. -
-    /// **`application/vnd.github-commitcomment.text+json`**: Returns a text only representation of the markdown body.
-    /// Response will include `body_text`. - **`application/vnd.github-commitcomment.html+json`**: Returns HTML rendered
-    /// from the body's markdown. Response will include `body_html`. -
-    /// **`application/vnd.github-commitcomment.full+json`**: Returns raw, text, and HTML representations. Response will
-    /// include `body`, `body_text`, and `body_html`.
-    public func updateReviewComment(
-        owner: String,
-        repo: String,
-        commentId: Int,
-        body: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> PullRequestReviewComment {
-        try await PullsMethods.pullsUpdateReviewComment(
-            config: config,
-            owner: owner,
-            repo: repo,
-            commentId: commentId,
-            body: body,
-            requestOptions: requestOptions
-        )
+/// Edits the content of a specified review comment. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github-commitcomment.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the default if you do not pass any specific media type. - **`application/vnd.github-commitcomment.text+json`**: Returns a text only representation of the markdown body. Response will include `body_text`. - **`application/vnd.github-commitcomment.html+json`**: Returns HTML rendered from the body's markdown. Response will include `body_html`. - **`application/vnd.github-commitcomment.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    public func updateReviewComment(owner: String, repo: String, commentId: Int, body: String, requestOptions: RequestOptions? = nil) async throws -> PullRequestReviewComment {
+        return try await PullsMethods.pullsUpdateReviewComment(config: config, owner: owner, repo: repo, commentId: commentId, body: body, requestOptions: requestOptions)
     }
 
-    /// Deletes a review comment from a pull request in a repository. Supply `owner` and `repo` to identify the
-    /// repository and `comment_id` to select the comment. A 204 response confirms deletion without returning a response
-    /// body.
+/// Deletes a review comment from a pull request in a repository. Supply `owner` and `repo` to identify the repository and `comment_id` to select the comment. A 204 response confirms deletion without returning a response body.
     ///
     /// Deletes a review comment.
-    public func deleteReviewComment(
-        owner: String,
-        repo: String,
-        commentId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await PullsMethods.pullsDeleteReviewComment(
-            config: config,
-            owner: owner,
-            repo: repo,
-            commentId: commentId,
-            requestOptions: requestOptions
-        )
+    public func deleteReviewComment(owner: String, repo: String, commentId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await PullsMethods.pullsDeleteReviewComment(config: config, owner: owner, repo: repo, commentId: commentId, requestOptions: requestOptions)
     }
 
-    /// Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations,
-    /// GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and
-    /// GitHub Enterprise Cloud. For more information, see [GitHub's
-    /// products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help
-    /// documentation. Lists details of a pull request by providing its number. When you get,
-    /// [create](https://docs.github.com/rest/pulls/pulls/#create-a-pull-request), or
-    /// [edit](https://docs.github.com/rest/pulls/pulls#update-a-pull-request) a pull request, GitHub creates a merge
-    /// commit to test whether the pull request can be automatically merged into the base branch. This test commit is
-    /// not added to the base branch or the head branch. You can review the status of the test commit using the
-    /// `mergeable` key. For more information, see "[Checking mergeability of pull requests](https://docs.github.com/rest/guides/getting-started-with-the-git-database-api#checking-mergeability-of-pull-requests)".
-    /// The value of the `mergeable` attribute can be `true`, `false`, or `null`. If the value is `null`, then GitHub
-    /// has started a background job to compute the mergeability. After giving the job time to complete, resubmit the
-    /// request. When the job finishes, you will see a non-`null` value for the `mergeable` attribute in the response.
-    /// If `mergeable` is `true`, then `merge_commit_sha` will be the SHA of the _test_ merge commit. The value of the
-    /// `merge_commit_sha` attribute changes depending on the state of the pull request. Before merging a pull request,
-    /// the `merge_commit_sha` attribute holds the SHA of the _test_ merge commit. After merging a pull request, the
-    /// `merge_commit_sha` attribute changes depending on how you merged the pull request: * If merged as a [merge
-    /// commit](https://docs.github.com/articles/about-merge-methods-on-github/), `merge_commit_sha` represents the SHA
-    /// of the merge commit. * If merged…
-    public func get(
-        owner: String,
-        repo: String,
-        pullNumber: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> PullRequest {
-        try await PullsMethods.pullsGet(
-            config: config,
-            owner: owner,
-            repo: repo,
-            pullNumber: pullNumber,
-            requestOptions: requestOptions
-        )
+/// Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation. Lists details of a pull request by providing its number. When you get, [create](https://docs.github.com/rest/pulls/pulls/#create-a-pull-request), or [edit](https://docs.github.com/rest/pulls/pulls#update-a-pull-request) a pull request, GitHub creates a merge commit to test whether the pull request can be automatically merged into the base branch. This test commit is not added to the base branch or the head branch. You can review the status of the test commit using the `mergeable` key. For more information, see "[Checking mergeability of pull requests](https://docs.github.com/rest/guides/getting-started-with-the-git-database-api#checking-mergeability-of-pull-requests)". The value of the `mergeable` attribute can be `true`, `false`, or `null`. If the value is `null`, then GitHub has started a background job to compute the mergeability. After giving the job time to complete, resubmit the request. When the job finishes, you will see a non-`null` value for the `mergeable` attribute in the response. If `mergeable` is `true`, then `merge_commit_sha` will be the SHA of the _test_ merge commit. The value of the `merge_commit_sha` attribute changes depending on the state of the pull request. Before merging a pull request, the `merge_commit_sha` attribute holds the SHA of the _test_ merge commit. After merging a pull request, the `merge_commit_sha` attribute changes depending on how you merged the pull request: * If merged as a [merge commit](https://docs.github.com/articles/about-merge-methods-on-github/), `merge_commit_sha` represents the SHA of the merge commit. * If merged…
+    public func get(owner: String, repo: String, pullNumber: Int, requestOptions: RequestOptions? = nil) async throws -> PullRequest {
+        return try await PullsMethods.pullsGet(config: config, owner: owner, repo: repo, pullNumber: pullNumber, requestOptions: requestOptions)
     }
 
-    /// Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations,
-    /// GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and
-    /// GitHub Enterprise Cloud. For more information, see [GitHub's
-    /// products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help
-    /// documentation. To open or update a pull request in a public repository, you must have write access to the head
-    /// or the source branch. For organization-owned repositories, you must be a member of the organization that owns
-    /// the repository to open or update a pull request. This endpoint supports the following custom media types. For
-    /// more information, see "[Media
-    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
-    /// **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the
-    /// default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text
-    /// only representation of the markdown body. Response will include `body_text`. -
-    /// **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include
-    /// `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response
-    /// will include `body`, `body_text`, and `body_html`.
-    public func update(
-        options: PullsMethods.PullsUpdateOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> PullRequest {
-        try await PullsMethods.pullsUpdate(config: config, options: options, requestOptions: requestOptions)
+/// Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation. To open or update a pull request in a public repository, you must have write access to the head or the source branch. For organization-owned repositories, you must be a member of the organization that owns the repository to open or update a pull request. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text only representation of the markdown body. Response will include `body_text`. - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    public func update(options: PullsMethods.PullsUpdateOptions, requestOptions: RequestOptions? = nil) async throws -> PullRequest {
+        return try await PullsMethods.pullsUpdate(config: config, options: options, requestOptions: requestOptions)
     }
 }

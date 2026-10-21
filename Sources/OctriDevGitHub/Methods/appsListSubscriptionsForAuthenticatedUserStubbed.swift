@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension AppsMethods {
+extension AppsMethods {
     /// Lists the active subscriptions for the authenticated user.
     ///
     /// - Parameters:
@@ -18,24 +18,10 @@ public extension AppsMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    static func appsListSubscriptionsForAuthenticatedUserStubbed(
-        config: ClientConfig,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [UserMarketplacePurchase] {
-        try await (sdkRequest(
-            "GET",
-            "/user/marketplace_purchases/stubbed",
-            config: config,
-            query: [
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("page", value: page),
-            ],
-            decoder: .json,
-            operationId: "appsListSubscriptionsForAuthenticatedUserStubbed",
-            options: requestOptions,
-            errors: ["401": BasicError.self]
-        )).data
+    public static func appsListSubscriptionsForAuthenticatedUserStubbed(config: ClientConfig, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [UserMarketplacePurchase] {
+        return try (await sdkRequest("GET", "/user/marketplace_purchases/stubbed", config: config, query: [
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("page", value: page),
+        ], decoder: .json, operationId: "appsListSubscriptionsForAuthenticatedUserStubbed", options: requestOptions, errors: ["401": BasicError.self])).data
     }
 }

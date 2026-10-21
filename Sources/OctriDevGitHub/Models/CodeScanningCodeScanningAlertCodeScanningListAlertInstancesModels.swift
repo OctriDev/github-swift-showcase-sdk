@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// CodeScanningCodeScanningAlert domain models
+// CodeScanningCodeScanningAlert domain models
 /// Typed representation of the `CodeScanningAlertInstanceList` API schema.
 public struct CodeScanningAlertInstanceList: Codable {
     /// The Git reference, formatted as `refs/pull/<number>/merge`, `refs/pull/<number>/head`, `refs/heads/<branch
@@ -46,40 +46,29 @@ public struct CodeScanningAlertInstanceList: Codable {
     }
 
     init() {
-        (ref, analysisKey, environment, category, state) = (nil, nil, nil, nil, nil)
-        (commitSha, message, location, htmlUrl, classifications) = (nil, nil, nil, nil, nil)
+        (self.ref, self.analysisKey, self.environment, self.category, self.state) = (nil, nil, nil, nil, nil)
+        (self.commitSha, self.message, self.location, self.htmlUrl, self.classifications) = (nil, nil, nil, nil, nil)
     }
 }
 
-public extension CodeScanningAlertInstanceList {
-    init(from decoder: Decoder) throws {
+extension CodeScanningAlertInstanceList {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        ref = try container.sdkDecodeIfPresent(.ref)
-        analysisKey = try container.sdkDecodeIfPresent(.analysisKey)
-        environment = try container.sdkDecodeIfPresent(.environment)
-        category = try container.sdkDecodeIfPresent(.category)
-        state = try container.sdkDecodeIfPresent(.state)
-        commitSha = try container.sdkDecodeIfPresent(.commitSha)
-        message = try container.sdkDecodeIfPresent(.message)
-        location = try container.sdkDecodeIfPresent(.location)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        classifications = try container.sdkDecodeIfPresent(.classifications)
+        self.ref = try container.sdkDecodeIfPresent(.ref)
+        self.analysisKey = try container.sdkDecodeIfPresent(.analysisKey)
+        self.environment = try container.sdkDecodeIfPresent(.environment)
+        self.category = try container.sdkDecodeIfPresent(.category)
+        self.state = try container.sdkDecodeIfPresent(.state)
+        self.commitSha = try container.sdkDecodeIfPresent(.commitSha)
+        self.message = try container.sdkDecodeIfPresent(.message)
+        self.location = try container.sdkDecodeIfPresent(.location)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        self.classifications = try container.sdkDecodeIfPresent(.classifications)
     }
 }
 
-public extension CodeScanningAlertInstanceList {
-    init(
-        ref: CodeScanningRef? = nil,
-        analysisKey: CodeScanningAnalysisAnalysisKey? = nil,
-        environment: CodeScanningAlertEnvironment? = nil,
-        category: CodeScanningAnalysisCategory? = nil,
-        state: CodeScanningAlertInstanceState? = nil,
-        commitSha: String? = nil,
-        message: CodeScanningAlertInstanceListMessage? = nil,
-        location: CodeScanningAlertLocation? = nil,
-        htmlUrl: String? = nil,
-        classifications: [CodeScanningAlertClassification?]? = nil
-    ) {
+extension CodeScanningAlertInstanceList {
+    public init(ref: CodeScanningRef? = nil, analysisKey: CodeScanningAnalysisAnalysisKey? = nil, environment: CodeScanningAlertEnvironment? = nil, category: CodeScanningAnalysisCategory? = nil, state: CodeScanningAlertInstanceState? = nil, commitSha: String? = nil, message: CodeScanningAlertInstanceListMessage? = nil, location: CodeScanningAlertLocation? = nil, htmlUrl: String? = nil, classifications: [CodeScanningAlertClassification?]? = nil) {
         self.init()
         (self.ref, self.analysisKey) = (ref, analysisKey)
         (self.environment, self.category) = (environment, category)
@@ -99,19 +88,19 @@ public struct CodeScanningAlertInstanceListMessage: Codable {
     }
 
     init() {
-        text = nil
+        self.text = nil
     }
 }
 
-public extension CodeScanningAlertInstanceListMessage {
-    init(from decoder: Decoder) throws {
+extension CodeScanningAlertInstanceListMessage {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        text = try container.sdkDecodeIfPresent(.text)
+        self.text = try container.sdkDecodeIfPresent(.text)
     }
 }
 
-public extension CodeScanningAlertInstanceListMessage {
-    init(text: String? = nil) {
+extension CodeScanningAlertInstanceListMessage {
+    public init(text: String? = nil) {
         self.init()
         self.text = text
     }
@@ -121,16 +110,13 @@ public extension CodeScanningAlertInstanceListMessage {
 public struct CodeScanningAlertInstanceState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let open = CodeScanningAlertInstanceState(rawValue: "open")
     public static let fixed = CodeScanningAlertInstanceState(rawValue: "fixed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

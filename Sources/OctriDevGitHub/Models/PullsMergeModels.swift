@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Pulls domain models
+// Pulls domain models
 /// Pull Request Merge Result
 public struct PullRequestMergeResult: Codable {
     /// Required `string` value serialized in the `sha` wire field.
@@ -19,43 +19,29 @@ public struct PullRequestMergeResult: Codable {
         case message
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension PullRequestMergeResult {
-    init(from decoder: Decoder) throws {
+extension PullRequestMergeResult {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.sha) else {
-            throw SdkValidationError(
-                field: "sha",
-                code: "required",
-                message: "Validation failed for 'sha': value is required"
-            )
+            throw SdkValidationError(field: "sha", code: "required", message: "Validation failed for 'sha': value is required")
         }
         guard container.contains(.merged) else {
-            throw SdkValidationError(
-                field: "merged",
-                code: "required",
-                message: "Validation failed for 'merged': value is required"
-            )
+            throw SdkValidationError(field: "merged", code: "required", message: "Validation failed for 'merged': value is required")
         }
         guard container.contains(.message) else {
-            throw SdkValidationError(
-                field: "message",
-                code: "required",
-                message: "Validation failed for 'message': value is required"
-            )
+            throw SdkValidationError(field: "message", code: "required", message: "Validation failed for 'message': value is required")
         }
-        sha = try container.sdkDecodeRequired(.sha)
-        merged = try container.sdkDecodeRequired(.merged)
-        message = try container.sdkDecodeRequired(.message)
+        self.sha = try container.sdkDecodeRequired(.sha)
+        self.merged = try container.sdkDecodeRequired(.merged)
+        self.message = try container.sdkDecodeRequired(.message)
     }
 }
 
-public extension PullRequestMergeResult {
-    init(sha: String, merged: Bool, message: String) {
+extension PullRequestMergeResult {
+    public init(sha: String, merged: Bool, message: String) {
         (self.sha, self.merged) = (sha, merged)
         self.message = message
     }

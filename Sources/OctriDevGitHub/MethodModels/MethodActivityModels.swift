@@ -7,39 +7,29 @@ import Foundation
     import FoundationNetworking
 #endif
 
-/// Canonical activity operation model declarations
+// Canonical activity operation model declarations
 public indirect enum ActivityListReposStarredByUserResponse {
     case starredRepositoryList([StarredRepository])
     case repositoryList([Repository])
 }
 
 extension ActivityListReposStarredByUserResponse: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for ActivityListReposStarredByUserResponse"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ActivityListReposStarredByUserResponse")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
 extension ActivityListReposStarredByUserResponse {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode([StarredRepository].self) {
-            return .starredRepositoryList(value)
-        }
-        if let value = try? container.decode([Repository].self) {
-            return .repositoryList(value)
-        }
+        if let value = try? container.decode([StarredRepository].self) { return .starredRepositoryList(value) }
+        if let value = try? container.decode([Repository].self) { return .repositoryList(value) }
         return nil
     }
 }
@@ -62,46 +52,24 @@ public struct ActivityGetStargazerCountForRepoResponse: Codable {
         case count
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActivityGetStargazerCountForRepoResponse {
-    init(from decoder: Decoder) throws {
+extension ActivityGetStargazerCountForRepoResponse {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.count) else {
-            throw SdkValidationError(
-                field: "count",
-                code: "required",
-                message: "Validation failed for 'count': value is required"
-            )
+            throw SdkValidationError(field: "count", code: "required", message: "Validation failed for 'count': value is required")
         }
-        count = try container.sdkDecodeRequired(.count)
-        try validateRange(
-            "count",
-            Double(count),
-            min: 0,
-            max: nil,
-            exclusiveMin: nil,
-            exclusiveMax: nil,
-            multipleOf: nil
-        )
+        self.count = try container.sdkDecodeRequired(.count)
+            try validateRange("count", Double(self.count), min: 0, max: nil, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
     }
 }
 
-public extension ActivityGetStargazerCountForRepoResponse {
-    init(count: Int) throws {
+extension ActivityGetStargazerCountForRepoResponse {
+    public init(count: Int) throws {
         self.count = count
-        try validateRange(
-            "count",
-            Double(self.count),
-            min: 0,
-            max: nil,
-            exclusiveMin: nil,
-            exclusiveMax: nil,
-            multipleOf: nil
-        )
+            try validateRange("count", Double(self.count), min: 0, max: nil, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
     }
 }
 
@@ -115,20 +83,20 @@ public struct ActivityMarkRepoNotificationsAsReadResponse: Codable {
     }
 
     init() {
-        (message, url) = (nil, nil)
+        (self.message, self.url) = (nil, nil)
     }
 }
 
-public extension ActivityMarkRepoNotificationsAsReadResponse {
-    init(from decoder: Decoder) throws {
+extension ActivityMarkRepoNotificationsAsReadResponse {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        message = try container.sdkDecodeIfPresent(.message)
-        url = try container.sdkDecodeIfPresent(.url)
+        self.message = try container.sdkDecodeIfPresent(.message)
+        self.url = try container.sdkDecodeIfPresent(.url)
     }
 }
 
-public extension ActivityMarkRepoNotificationsAsReadResponse {
-    init(message: String? = nil, url: String? = nil) {
+extension ActivityMarkRepoNotificationsAsReadResponse {
+    public init(message: String? = nil, url: String? = nil) {
         self.init()
         (self.message, self.url) = (message, url)
     }
@@ -140,32 +108,22 @@ public indirect enum ActivityListStargazersForRepoResponse {
 }
 
 extension ActivityListStargazersForRepoResponse: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for ActivityListStargazersForRepoResponse"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ActivityListStargazersForRepoResponse")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
 extension ActivityListStargazersForRepoResponse {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode([SimpleUser].self) {
-            return .simpleUserList(value)
-        }
-        if let value = try? container.decode([Stargazer].self) {
-            return .stargazerList(value)
-        }
+        if let value = try? container.decode([SimpleUser].self) { return .simpleUserList(value) }
+        if let value = try? container.decode([Stargazer].self) { return .stargazerList(value) }
         return nil
     }
 }
@@ -188,19 +146,19 @@ public struct ActivityMarkNotificationsAsReadResponse: Codable {
     }
 
     init() {
-        message = nil
+        self.message = nil
     }
 }
 
-public extension ActivityMarkNotificationsAsReadResponse {
-    init(from decoder: Decoder) throws {
+extension ActivityMarkNotificationsAsReadResponse {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        message = try container.sdkDecodeIfPresent(.message)
+        self.message = try container.sdkDecodeIfPresent(.message)
     }
 }
 
-public extension ActivityMarkNotificationsAsReadResponse {
-    init(message: String? = nil) {
+extension ActivityMarkNotificationsAsReadResponse {
+    public init(message: String? = nil) {
         self.init()
         self.message = message
     }

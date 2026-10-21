@@ -6,22 +6,16 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public struct AgentAutomationsGetAutomationResponseTriggersPullRequestCommeX6840452c27: RawRepresentable, Hashable,
-    Codable, Sendable, SdkWireConvertible {
+public struct AgentAutomationsGetAutomationResponseTriggersPullRequestCommeX6840452c27: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let timelineComment =
-        AgentAutomationsGetAutomationResponseTriggersPullRequestCommeX6840452c27(rawValue: "timeline_comment")
-    public static let reviewComment =
-        AgentAutomationsGetAutomationResponseTriggersPullRequestCommeX6840452c27(rawValue: "review_comment")
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let timelineComment = AgentAutomationsGetAutomationResponseTriggersPullRequestCommeX6840452c27(rawValue: "timeline_comment")
+    public static let reviewComment = AgentAutomationsGetAutomationResponseTriggersPullRequestCommeX6840452c27(rawValue: "review_comment")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -31,21 +25,17 @@ public struct AgentAutomationsGetAutomationResponseTriggersPullRequestCommeX6840
 }
 
 /// The type of search that was performed. Possible values are `lexical`, `semantic`, or `hybrid`.
-public struct SearchIssuesAndPullRequestsResponseSearchType: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct SearchIssuesAndPullRequestsResponseSearchType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let lexical = SearchIssuesAndPullRequestsResponseSearchType(rawValue: "lexical")
     public static let semantic = SearchIssuesAndPullRequestsResponseSearchType(rawValue: "semantic")
     public static let hybrid = SearchIssuesAndPullRequestsResponseSearchType(rawValue: "hybrid")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -57,22 +47,16 @@ public struct SearchIssuesAndPullRequestsResponseSearchType: RawRepresentable, H
 /// The notification setting the team has chosen. Editing teams without specifying this parameter leaves
 /// `notification_setting` intact. The options are: * `notifications_enabled` - team members receive
 /// notifications when the team is @mentioned. * `notifications_disabled` - no one receives notifications.
-public struct TeamsUpdateInOrgRequestBodyNotificationSetting: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct TeamsUpdateInOrgRequestBodyNotificationSetting: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let notificationsEnabled =
-        TeamsUpdateInOrgRequestBodyNotificationSetting(rawValue: "notifications_enabled")
-    public static let notificationsDisabled =
-        TeamsUpdateInOrgRequestBodyNotificationSetting(rawValue: "notifications_disabled")
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let notificationsEnabled = TeamsUpdateInOrgRequestBodyNotificationSetting(rawValue: "notifications_enabled")
+    public static let notificationsDisabled = TeamsUpdateInOrgRequestBodyNotificationSetting(rawValue: "notifications_disabled")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -86,17 +70,14 @@ public struct TeamsUpdateInOrgRequestBodyNotificationSetting: RawRepresentable, 
 public struct TeamsUpdateInOrgRequestBodyPermission: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let pull = TeamsUpdateInOrgRequestBodyPermission(rawValue: "pull")
     public static let push = TeamsUpdateInOrgRequestBodyPermission(rawValue: "push")
     public static let admin = TeamsUpdateInOrgRequestBodyPermission(rawValue: "admin")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -107,22 +88,16 @@ public struct TeamsUpdateInOrgRequestBodyPermission: RawRepresentable, Hashable,
 
 /// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
 /// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
-public struct AgentAutomationsListAutomationsResponseItemTriggersPullRequesX924006a1fa: RawRepresentable, Hashable,
-    Codable, Sendable, SdkWireConvertible {
+public struct AgentAutomationsListAutomationsResponseItemTriggersPullRequesX924006a1fa: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let trigger =
-        AgentAutomationsListAutomationsResponseItemTriggersPullRequesX924006a1fa(rawValue: "trigger")
-    public static let repository =
-        AgentAutomationsListAutomationsResponseItemTriggersPullRequesX924006a1fa(rawValue: "repository")
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let trigger = AgentAutomationsListAutomationsResponseItemTriggersPullRequesX924006a1fa(rawValue: "trigger")
+    public static let repository = AgentAutomationsListAutomationsResponseItemTriggersPullRequesX924006a1fa(rawValue: "repository")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -131,25 +106,20 @@ public struct AgentAutomationsListAutomationsResponseItemTriggersPullRequesX9240
     }
 }
 
-public struct AgentAutomationsCreateRepoAutomationRequestBodyReasoningEffortVariant1: RawRepresentable, Hashable,
-    Codable, Sendable, SdkWireConvertible {
+public struct AgentAutomationsCreateRepoAutomationRequestBodyReasoningEffortVariant1: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let none = AgentAutomationsCreateRepoAutomationRequestBodyReasoningEffortVariant1(rawValue: "none")
     public static let low = AgentAutomationsCreateRepoAutomationRequestBodyReasoningEffortVariant1(rawValue: "low")
-    public static let medium =
-        AgentAutomationsCreateRepoAutomationRequestBodyReasoningEffortVariant1(rawValue: "medium")
+    public static let medium = AgentAutomationsCreateRepoAutomationRequestBodyReasoningEffortVariant1(rawValue: "medium")
     public static let high = AgentAutomationsCreateRepoAutomationRequestBodyReasoningEffortVariant1(rawValue: "high")
     public static let xhigh = AgentAutomationsCreateRepoAutomationRequestBodyReasoningEffortVariant1(rawValue: "xhigh")
     public static let max = AgentAutomationsCreateRepoAutomationRequestBodyReasoningEffortVariant1(rawValue: "max")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -161,15 +131,12 @@ public struct AgentAutomationsCreateRepoAutomationRequestBodyReasoningEffortVari
 public struct OrgsListPatGrantRequestsParameter: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let createdAt = OrgsListPatGrantRequestsParameter(rawValue: "created_at")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -179,24 +146,17 @@ public struct OrgsListPatGrantRequestsParameter: RawRepresentable, Hashable, Cod
 }
 
 /// The enablement status of secret scanning push protection
-public struct CodeSecurityUpdateConfigurationRequestBodySecretScanningPushProtection: RawRepresentable, Hashable,
-    Codable, Sendable, SdkWireConvertible {
+public struct CodeSecurityUpdateConfigurationRequestBodySecretScanningPushProtection: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let enabled =
-        CodeSecurityUpdateConfigurationRequestBodySecretScanningPushProtection(rawValue: "enabled")
-    public static let disabled =
-        CodeSecurityUpdateConfigurationRequestBodySecretScanningPushProtection(rawValue: "disabled")
-    public static let notSet =
-        CodeSecurityUpdateConfigurationRequestBodySecretScanningPushProtection(rawValue: "not_set")
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let enabled = CodeSecurityUpdateConfigurationRequestBodySecretScanningPushProtection(rawValue: "enabled")
+    public static let disabled = CodeSecurityUpdateConfigurationRequestBodySecretScanningPushProtection(rawValue: "disabled")
+    public static let notSet = CodeSecurityUpdateConfigurationRequestBodySecretScanningPushProtection(rawValue: "not_set")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -207,22 +167,16 @@ public struct CodeSecurityUpdateConfigurationRequestBodySecretScanningPushProtec
 
 /// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
 /// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
-public struct AgentAutomationsListRepoAutomationsResponseAutomationsItemTriX10303bc223: RawRepresentable, Hashable,
-    Codable, Sendable, SdkWireConvertible {
+public struct AgentAutomationsListRepoAutomationsResponseAutomationsItemTriX10303bc223: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let trigger =
-        AgentAutomationsListRepoAutomationsResponseAutomationsItemTriX10303bc223(rawValue: "trigger")
-    public static let repository =
-        AgentAutomationsListRepoAutomationsResponseAutomationsItemTriX10303bc223(rawValue: "repository")
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let trigger = AgentAutomationsListRepoAutomationsResponseAutomationsItemTriX10303bc223(rawValue: "trigger")
+    public static let repository = AgentAutomationsListRepoAutomationsResponseAutomationsItemTriX10303bc223(rawValue: "repository")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -233,22 +187,16 @@ public struct AgentAutomationsListRepoAutomationsResponseAutomationsItemTriX1030
 
 /// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
 /// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
-public struct AgentAutomationsGetRepoAutomationResponseTriggersPullRequestRX0a001ef48b: RawRepresentable, Hashable,
-    Codable, Sendable, SdkWireConvertible {
+public struct AgentAutomationsGetRepoAutomationResponseTriggersPullRequestRX0a001ef48b: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let trigger =
-        AgentAutomationsGetRepoAutomationResponseTriggersPullRequestRX0a001ef48b(rawValue: "trigger")
-    public static let repository =
-        AgentAutomationsGetRepoAutomationResponseTriggersPullRequestRX0a001ef48b(rawValue: "repository")
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let trigger = AgentAutomationsGetRepoAutomationResponseTriggersPullRequestRX0a001ef48b(rawValue: "trigger")
+    public static let repository = AgentAutomationsGetRepoAutomationResponseTriggersPullRequestRX0a001ef48b(rawValue: "repository")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

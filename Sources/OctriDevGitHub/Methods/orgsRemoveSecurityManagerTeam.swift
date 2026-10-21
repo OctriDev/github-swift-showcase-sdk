@@ -6,34 +6,15 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension OrgsMethods {
-    /// > [!WARNING] > **Closing down notice:** This operation is closing down and will be removed starting January 1,
-    /// 2026. Please use the "[Organization Roles](https://docs.github.com/rest/orgs/organization-roles)" endpoints
-    /// instead.
+extension OrgsMethods {
+    /// > [!WARNING] > **Closing down notice:** This operation is closing down and will be removed starting January 1, 2026. Please use the "[Organization Roles](https://docs.github.com/rest/orgs/organization-roles)" endpoints instead.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - teamSlug: The slug of the team name.
     ///
     /// - Warning: This operation is deprecated and may be removed in a future release.
-    static func orgsRemoveSecurityManagerTeam(
-        config: ClientConfig,
-        org: String,
-        teamSlug: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "DELETE",
-            [
-                "/orgs/",
-                sdkEncodePathSegment(sdkWireString(org)),
-                "/security-managers/teams/",
-                sdkEncodePathSegment(sdkWireString(teamSlug)),
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "orgsRemoveSecurityManagerTeam",
-            options: requestOptions
-        )).data
+    public static func orgsRemoveSecurityManagerTeam(config: ClientConfig, org: String, teamSlug: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("DELETE", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/security-managers/teams/", sdkEncodePathSegment(sdkWireString(teamSlug))].joined(), config: config, decoder: .empty, operationId: "orgsRemoveSecurityManagerTeam", options: requestOptions)).data
     }
 }

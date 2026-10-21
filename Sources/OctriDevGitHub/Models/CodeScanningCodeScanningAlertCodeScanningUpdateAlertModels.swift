@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// CodeScanningCodeScanningAlert domain models
+// CodeScanningCodeScanningAlert domain models
 public typealias CodeScanningAlertAssignees = [String]
 
 public typealias CodeScanningAlertCreateRequest = Bool
@@ -13,16 +13,13 @@ public typealias CodeScanningAlertCreateRequest = Bool
 public struct CodeScanningAlertSetState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let open = CodeScanningAlertSetState(rawValue: "open")
     public static let dismissed = CodeScanningAlertSetState(rawValue: "dismissed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

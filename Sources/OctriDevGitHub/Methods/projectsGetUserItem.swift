@@ -6,10 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ProjectsMethods {
-    /// Retrieves a specific item from a project owned by the specified user. Use `fields` to limit the returned field
-    /// values; when omitted, the response includes the title field. The item response also identifies its content type
-    /// and includes item and project details.
+extension ProjectsMethods {
+    /// Retrieves a specific item from a project owned by the specified user. Use `fields` to limit the returned field values; when omitted, the response includes the title field. The item response also identifies its content type and includes item and project details.
     ///
     /// Get a specific item from a user-owned project.
     ///
@@ -20,32 +18,9 @@ public extension ProjectsMethods {
     /// - fields: Limit results to specific fields, by their IDs. If not specified,
     ///   the title field will be returned. Example:
     ///   fields[]=123&fields[]=456&fields[]=789 or fields=123,456,789
-    static func projectsGetUserItem(
-        config: ClientConfig,
-        projectNumber: Int,
-        username: String,
-        itemId: Int,
-        fields: ProjectsGetUserItemParameter? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ProjectsV2ItemWithContent {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/users/",
-                sdkEncodePathSegment(sdkWireString(username)),
-                "/projectsV2/",
-                sdkEncodePathSegment(sdkWireString(projectNumber)),
-                "/items/",
-                sdkEncodePathSegment(sdkWireString(itemId)),
-            ].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("fields", value: fields),
-            ],
-            decoder: .json,
-            operationId: "projectsGetUserItem",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self]
-        )).data
+    public static func projectsGetUserItem(config: ClientConfig, projectNumber: Int, username: String, itemId: Int, fields: ProjectsGetUserItemParameter? = nil, requestOptions: RequestOptions? = nil) async throws -> ProjectsV2ItemWithContent {
+        return try (await sdkRequest("GET", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/projectsV2/", sdkEncodePathSegment(sdkWireString(projectNumber)), "/items/", sdkEncodePathSegment(sdkWireString(itemId))].joined(), config: config, query: [
+            SdkQueryParameter("fields", value: fields),
+        ], decoder: .json, operationId: "projectsGetUserItem", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self])).data
     }
 }

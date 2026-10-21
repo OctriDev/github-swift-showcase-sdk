@@ -3,39 +3,29 @@
 
 import Foundation
 
-/// Billing domain models
+// Billing domain models
 public indirect enum UpdateBudgetBudgetBudgetType {
     case stringValue(String)
     case stringValue1(String)
 }
 
 extension UpdateBudgetBudgetBudgetType: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for UpdateBudgetBudgetBudgetType"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for UpdateBudgetBudgetBudgetType")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
 extension UpdateBudgetBudgetBudgetType {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) {
-            return .stringValue(value)
-        }
-        if let value = try? container.decode(String.self) {
-            return .stringValue1(value)
-        }
+        if let value = try? container.decode(String.self) { return .stringValue(value) }
+        if let value = try? container.decode(String.self) { return .stringValue1(value) }
         return nil
     }
 }
@@ -66,20 +56,20 @@ public struct UpdateBudgetBudgetBudgetAlerting: Codable {
     }
 
     init() {
-        (willAlert, alertRecipients) = (nil, nil)
+        (self.willAlert, self.alertRecipients) = (nil, nil)
     }
 }
 
-public extension UpdateBudgetBudgetBudgetAlerting {
-    init(from decoder: Decoder) throws {
+extension UpdateBudgetBudgetBudgetAlerting {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        willAlert = try container.sdkDecodeIfPresent(.willAlert)
-        alertRecipients = try container.sdkDecodeIfPresent(.alertRecipients)
+        self.willAlert = try container.sdkDecodeIfPresent(.willAlert)
+        self.alertRecipients = try container.sdkDecodeIfPresent(.alertRecipients)
     }
 }
 
-public extension UpdateBudgetBudgetBudgetAlerting {
-    init(willAlert: Bool? = nil, alertRecipients: [String]? = nil) {
+extension UpdateBudgetBudgetBudgetAlerting {
+    public init(willAlert: Bool? = nil, alertRecipients: [String]? = nil) {
         self.init()
         (self.willAlert, self.alertRecipients) = (willAlert, alertRecipients)
     }
@@ -135,57 +125,37 @@ public struct UpdateBudgetBudget: Codable {
     }
 
     init() {
-        (id, budgetScope, budgetEntityName, user, consumedAmount) = (nil, nil, nil, nil, nil)
-        (budgetAmount, preventFurtherUsage, budgetProductSku, budgetType, budgetAlerting) = (nil, nil, nil, nil, nil)
-        expiresAt = nil
+        (self.id, self.budgetScope, self.budgetEntityName, self.user, self.consumedAmount) = (nil, nil, nil, nil, nil)
+        (self.budgetAmount, self.preventFurtherUsage, self.budgetProductSku, self.budgetType, self.budgetAlerting) = (nil, nil, nil, nil, nil)
+        self.expiresAt = nil
     }
 }
 
-public extension UpdateBudgetBudget {
-    init(from decoder: Decoder) throws {
+extension UpdateBudgetBudget {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeIfPresent(.id)
-        budgetScope = try container.sdkDecodeIfPresent(.budgetScope)
-        budgetEntityName = try container.sdkDecodeIfPresent(.budgetEntityName)
-        user = try container.sdkDecodeIfPresent(.user)
-        consumedAmount = try container.sdkDecodeIfPresent(.consumedAmount)
-        budgetAmount = try container.sdkDecodeIfPresent(.budgetAmount)
-        preventFurtherUsage = try container.sdkDecodeIfPresent(.preventFurtherUsage)
-        budgetProductSku = try container.sdkDecodeIfPresent(.budgetProductSku)
-        budgetType = try container.sdkDecodeIfPresent(.budgetType)
-        budgetAlerting = try container.sdkDecodeIfPresent(.budgetAlerting)
-        expiresAt = try container.sdkDecodeIfPresent(.expiresAt)
-        if let value = budgetAmount {
-            try validateRange(
-                "budget_amount",
-                Double(value),
-                min: 0,
-                max: nil,
-                exclusiveMin: nil,
-                exclusiveMax: nil,
-                multipleOf: nil
-            )
+        self.id = try container.sdkDecodeIfPresent(.id)
+        self.budgetScope = try container.sdkDecodeIfPresent(.budgetScope)
+        self.budgetEntityName = try container.sdkDecodeIfPresent(.budgetEntityName)
+        self.user = try container.sdkDecodeIfPresent(.user)
+        self.consumedAmount = try container.sdkDecodeIfPresent(.consumedAmount)
+        self.budgetAmount = try container.sdkDecodeIfPresent(.budgetAmount)
+        self.preventFurtherUsage = try container.sdkDecodeIfPresent(.preventFurtherUsage)
+        self.budgetProductSku = try container.sdkDecodeIfPresent(.budgetProductSku)
+        self.budgetType = try container.sdkDecodeIfPresent(.budgetType)
+        self.budgetAlerting = try container.sdkDecodeIfPresent(.budgetAlerting)
+        self.expiresAt = try container.sdkDecodeIfPresent(.expiresAt)
+        if let value = self.budgetAmount {
+            try validateRange("budget_amount", Double(value), min: 0, max: nil, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
         }
-        if let value = expiresAt {
+        if let value = self.expiresAt {
             try sdkValidateDate("expires_at", value)
         }
     }
 }
 
-public extension UpdateBudgetBudget {
-    init(
-        id: String? = nil,
-        budgetScope: UpdateBudgetBudgetBudgetScope? = nil,
-        budgetEntityName: String? = nil,
-        user: String? = nil,
-        consumedAmount: Double? = nil,
-        budgetAmount: Int? = nil,
-        preventFurtherUsage: Bool? = nil,
-        budgetProductSku: String? = nil,
-        budgetType: UpdateBudgetBudgetBudgetType? = nil,
-        budgetAlerting: UpdateBudgetBudgetBudgetAlerting? = nil,
-        expiresAt: String? = nil
-    ) throws {
+extension UpdateBudgetBudget {
+    public init(id: String? = nil, budgetScope: UpdateBudgetBudgetBudgetScope? = nil, budgetEntityName: String? = nil, user: String? = nil, consumedAmount: Double? = nil, budgetAmount: Int? = nil, preventFurtherUsage: Bool? = nil, budgetProductSku: String? = nil, budgetType: UpdateBudgetBudgetBudgetType? = nil, budgetAlerting: UpdateBudgetBudgetBudgetAlerting? = nil, expiresAt: String? = nil) throws {
         self.init()
         (self.id, self.budgetScope) = (id, budgetScope)
         (self.budgetEntityName, self.user) = (budgetEntityName, user)
@@ -194,15 +164,7 @@ public extension UpdateBudgetBudget {
         (self.budgetType, self.budgetAlerting) = (budgetType, budgetAlerting)
         self.expiresAt = expiresAt
         if let value = self.budgetAmount {
-            try validateRange(
-                "budget_amount",
-                Double(value),
-                min: 0,
-                max: nil,
-                exclusiveMin: nil,
-                exclusiveMax: nil,
-                multipleOf: nil
-            )
+            try validateRange("budget_amount", Double(value), min: 0, max: nil, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
         }
         if let value = self.expiresAt {
             try sdkValidateDate("expires_at", value)
@@ -222,35 +184,25 @@ public struct UpdateBudget: Codable {
         case budget
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension UpdateBudget {
-    init(from decoder: Decoder) throws {
+extension UpdateBudget {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.message) else {
-            throw SdkValidationError(
-                field: "message",
-                code: "required",
-                message: "Validation failed for 'message': value is required"
-            )
+            throw SdkValidationError(field: "message", code: "required", message: "Validation failed for 'message': value is required")
         }
         guard container.contains(.budget) else {
-            throw SdkValidationError(
-                field: "budget",
-                code: "required",
-                message: "Validation failed for 'budget': value is required"
-            )
+            throw SdkValidationError(field: "budget", code: "required", message: "Validation failed for 'budget': value is required")
         }
-        message = try container.sdkDecodeRequired(.message)
-        budget = try container.sdkDecodeRequired(.budget)
+        self.message = try container.sdkDecodeRequired(.message)
+        self.budget = try container.sdkDecodeRequired(.budget)
     }
 }
 
-public extension UpdateBudget {
-    init(message: String, budget: UpdateBudgetBudget) {
+extension UpdateBudget {
+    public init(message: String, budget: UpdateBudgetBudget) {
         (self.message, self.budget) = (message, budget)
     }
 }
@@ -259,10 +211,7 @@ public extension UpdateBudget {
 public struct UpdateBudgetBudgetBudgetScope: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let enterprise = UpdateBudgetBudgetBudgetScope(rawValue: "enterprise")
     public static let organization = UpdateBudgetBudgetBudgetScope(rawValue: "organization")
     public static let repository = UpdateBudgetBudgetBudgetScope(rawValue: "repository")
@@ -273,7 +222,7 @@ public struct UpdateBudgetBudgetBudgetScope: RawRepresentable, Hashable, Codable
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -286,15 +235,12 @@ public struct UpdateBudgetBudgetBudgetScope: RawRepresentable, Hashable, Codable
 public struct UpdateBudgetBudgetBudgetTypeVariant1: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let skuPricing = UpdateBudgetBudgetBudgetTypeVariant1(rawValue: "SkuPricing")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -307,15 +253,12 @@ public struct UpdateBudgetBudgetBudgetTypeVariant1: RawRepresentable, Hashable, 
 public struct UpdateBudgetBudgetBudgetTypeVariant0: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let productPricing = UpdateBudgetBudgetBudgetTypeVariant0(rawValue: "ProductPricing")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

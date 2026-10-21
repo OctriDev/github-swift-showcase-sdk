@@ -3,15 +3,12 @@
 
 import Foundation
 
-/// CodeScanningCodeScanningAlert domain models
+// CodeScanningCodeScanningAlert domain models
 /// Severity of a code scanning alert.
 public struct CodeScanningAlertSeverity: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let critical = CodeScanningAlertSeverity(rawValue: "critical")
     public static let high = CodeScanningAlertSeverity(rawValue: "high")
     public static let medium = CodeScanningAlertSeverity(rawValue: "medium")
@@ -22,7 +19,7 @@ public struct CodeScanningAlertSeverity: RawRepresentable, Hashable, Codable, Se
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -35,10 +32,7 @@ public struct CodeScanningAlertSeverity: RawRepresentable, Hashable, Codable, Se
 public struct CodeScanningAlertStateQuery: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let open = CodeScanningAlertStateQuery(rawValue: "open")
     public static let closed = CodeScanningAlertStateQuery(rawValue: "closed")
     public static let dismissed = CodeScanningAlertStateQuery(rawValue: "dismissed")
@@ -46,7 +40,7 @@ public struct CodeScanningAlertStateQuery: RawRepresentable, Hashable, Codable, 
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -56,14 +50,10 @@ public struct CodeScanningAlertStateQuery: RawRepresentable, Hashable, Codable, 
 }
 
 /// The security severity of the alert.
-public struct CodeScanningAlertRuleSecuritySeverityLevel: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct CodeScanningAlertRuleSecuritySeverityLevel: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let low = CodeScanningAlertRuleSecuritySeverityLevel(rawValue: "low")
     public static let medium = CodeScanningAlertRuleSecuritySeverityLevel(rawValue: "medium")
     public static let high = CodeScanningAlertRuleSecuritySeverityLevel(rawValue: "high")
@@ -71,7 +61,7 @@ public struct CodeScanningAlertRuleSecuritySeverityLevel: RawRepresentable, Hash
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

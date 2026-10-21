@@ -6,11 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension CopilotMethods {
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Lists the selected repositories that
-    /// are enabled for Copilot cloud agent in an organization. Organization owners can use this endpoint when the
-    /// coding agent repository policy is set to `selected` to see which repositories have been enabled. OAuth app
-    /// tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+extension CopilotMethods {
+    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Lists the selected repositories that are enabled for Copilot cloud agent in an organization. Organization owners can use this endpoint when the coding agent repository policy is set to `selected` to see which repositories have been enabled. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
@@ -22,32 +19,10 @@ public extension CopilotMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    static func copilotListCopilotCodingAgentSelectedRepositoriesForOrganization(
-        config: ClientConfig,
-        org: String,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CopilotListCopilotCodingAgentSelectedRepositoriesForOrganizationResponse {
-        try await (sdkRequest(
-            "GET",
-            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/copilot/coding-agent/permissions/repositories"]
-                .joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("page", value: page),
-            ],
-            decoder: .json,
-            operationId: "copilotListCopilotCodingAgentSelectedRepositoriesForOrganization",
-            options: requestOptions,
-            errors: [
-                "401": BasicError.self,
-                "403": BasicError.self,
-                "404": BasicError.self,
-                "409": BasicError.self,
-                "500": BasicError.self,
-            ]
-        )).data
+    public static func copilotListCopilotCodingAgentSelectedRepositoriesForOrganization(config: ClientConfig, org: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> CopilotListCopilotCodingAgentSelectedRepositoriesForOrganizationResponse {
+        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/copilot/coding-agent/permissions/repositories"].joined(), config: config, query: [
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("page", value: page),
+        ], decoder: .json, operationId: "copilotListCopilotCodingAgentSelectedRepositoriesForOrganization", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "409": BasicError.self, "500": BasicError.self])).data
     }
 }

@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// CodeScanningCodeScanningAlert domain models
+// CodeScanningCodeScanningAlert domain models
 /// Typed representation of the `CodeScanningAlertItems` API schema.
 public struct CodeScanningAlertItems: Codable {
     /// The security alert number.
@@ -62,55 +62,35 @@ public struct CodeScanningAlertItems: Codable {
         case assignees
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension CodeScanningAlertItems {
-    init(from decoder: Decoder) throws {
+extension CodeScanningAlertItems {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        number = try container.sdkDecodeRequired(.number)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        url = try container.sdkDecodeRequired(.url)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        instancesUrl = try container.sdkDecodeRequired(.instancesUrl)
-        state = try container.sdkDecodeNullable(.state)
-        dismissedBy = try container.sdkDecodeNullable(.dismissedBy)
-        dismissedAt = try container.sdkDecodeNullable(.dismissedAt)
-        dismissedReason = try container.sdkDecodeNullable(.dismissedReason)
-        rule = try container.sdkDecodeRequired(.rule)
-        tool = try container.sdkDecodeRequired(.tool)
-        mostRecentInstance = try container.sdkDecodeRequired(.mostRecentInstance)
-        updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
-        fixedAt = try container.sdkDecodeIfPresent(.fixedAt)
-        dismissedComment = try container.sdkDecodeIfPresent(.dismissedComment)
-        dismissalApprovedBy = try container.sdkDecodeIfPresent(.dismissalApprovedBy)
-        assignees = try container.sdkDecodeIfPresent(.assignees)
+        self.number = try container.sdkDecodeRequired(.number)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        self.instancesUrl = try container.sdkDecodeRequired(.instancesUrl)
+        self.state = try container.sdkDecodeNullable(.state)
+        self.dismissedBy = try container.sdkDecodeNullable(.dismissedBy)
+        self.dismissedAt = try container.sdkDecodeNullable(.dismissedAt)
+        self.dismissedReason = try container.sdkDecodeNullable(.dismissedReason)
+        self.rule = try container.sdkDecodeRequired(.rule)
+        self.tool = try container.sdkDecodeRequired(.tool)
+        self.mostRecentInstance = try container.sdkDecodeRequired(.mostRecentInstance)
+        self.updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
+        self.fixedAt = try container.sdkDecodeIfPresent(.fixedAt)
+        self.dismissedComment = try container.sdkDecodeIfPresent(.dismissedComment)
+        self.dismissalApprovedBy = try container.sdkDecodeIfPresent(.dismissalApprovedBy)
+        self.assignees = try container.sdkDecodeIfPresent(.assignees)
         try sdkValidateConstraints()
     }
 }
 
-public extension CodeScanningAlertItems {
-    init(
-        number: AlertNumber,
-        createdAt: AlertCreatedAt,
-        url: AlertUrl,
-        htmlUrl: AlertHtmlUrl,
-        instancesUrl: AlertInstancesUrl,
-        state: CodeScanningAlertState?,
-        dismissedBy: NullableSimpleUser?,
-        dismissedAt: AlertDismissedAt?,
-        dismissedReason: CodeScanningAlertDismissedReason?,
-        rule: CodeScanningAlertRuleSummary,
-        tool: CodeScanningAnalysisTool,
-        mostRecentInstance: CodeScanningAlertInstance,
-        updatedAt: AlertUpdatedAt? = nil,
-        fixedAt: AlertFixedAt? = nil,
-        dismissedComment: CodeScanningAlertDismissedComment? = nil,
-        dismissalApprovedBy: NullableSimpleUser? = nil,
-        assignees: [SimpleUser]? = nil
-    ) throws {
+extension CodeScanningAlertItems {
+    public init(number: AlertNumber, createdAt: AlertCreatedAt, url: AlertUrl, htmlUrl: AlertHtmlUrl, instancesUrl: AlertInstancesUrl, state: CodeScanningAlertState?, dismissedBy: NullableSimpleUser?, dismissedAt: AlertDismissedAt?, dismissedReason: CodeScanningAlertDismissedReason?, rule: CodeScanningAlertRuleSummary, tool: CodeScanningAnalysisTool, mostRecentInstance: CodeScanningAlertInstance, updatedAt: AlertUpdatedAt? = nil, fixedAt: AlertFixedAt? = nil, dismissedComment: CodeScanningAlertDismissedComment? = nil, dismissalApprovedBy: NullableSimpleUser? = nil, assignees: [SimpleUser]? = nil) throws {
         (self.number, self.createdAt) = (number, createdAt)
         (self.url, self.htmlUrl) = (url, htmlUrl)
         (self.instancesUrl, self.state) = (instancesUrl, state)
@@ -126,20 +106,20 @@ public extension CodeScanningAlertItems {
 
 extension CodeScanningAlertItems {
     func sdkValidateConstraints() throws {
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
-        try sdkValidateUri("url", sdkWireString(url))
-        try sdkValidateUri("html_url", sdkWireString(htmlUrl))
-        try sdkValidateUri("instances_url", sdkWireString(instancesUrl))
-        if let value = dismissedAt {
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateUri("url", sdkWireString(self.url))
+            try sdkValidateUri("html_url", sdkWireString(self.htmlUrl))
+            try sdkValidateUri("instances_url", sdkWireString(self.instancesUrl))
+        if let value = self.dismissedAt {
             try sdkValidateDateTime("dismissed_at", sdkWireString(value))
         }
-        if let value = updatedAt {
+        if let value = self.updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
-        if let value = fixedAt {
+        if let value = self.fixedAt {
             try sdkValidateDateTime("fixed_at", sdkWireString(value))
         }
-        if let value = dismissedComment {
+        if let value = self.dismissedComment {
             try validateLength("dismissed_comment", sdkWireString(value), min: nil, max: 280)
         }
     }

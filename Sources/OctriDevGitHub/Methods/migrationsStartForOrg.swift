@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension MigrationsMethods {
-    struct MigrationsStartForOrgOptions: Codable {
+extension MigrationsMethods {
+    public struct MigrationsStartForOrgOptions: Codable {
         public var org: String
         public var repositories: [String]
         public var lockRepositories: Bool?
@@ -25,10 +25,7 @@ public extension MigrationsMethods {
         }
     }
 
-    /// Starts an organization migration to generate a migration archive. Supply `repositories` to select the
-    /// repositories to include; the other boolean options default to false when omitted. Set `org_metadata_only` to
-    /// true and provide an empty `repositories` list to include only organization metadata; a 201 response returns the
-    /// migration record.
+    /// Starts an organization migration to generate a migration archive. Supply `repositories` to select the repositories to include; the other boolean options default to false when omitted. Set `org_metadata_only` to true and provide an empty `repositories` list to include only organization metadata; a 201 response returns the migration record.
     ///
     /// Initiates the generation of a migration archive.
     ///
@@ -52,22 +49,9 @@ public extension MigrationsMethods {
     ///   metadata (repositories array should be empty and will ignore other flags).
     /// - exclude: Exclude related items from being returned in the response in
     ///   order to improve performance of the request.
-    static func migrationsStartForOrg(
-        config: ClientConfig,
-        options: MigrationsStartForOrgOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> Migration {
+    public static func migrationsStartForOrg(config: ClientConfig, options: MigrationsStartForOrgOptions, requestOptions: RequestOptions? = nil) async throws -> Migration {
         let requestBody = MigrationsStartForOrgRequestBody(options: options)
 
-        return try await (sdkRequest(
-            "POST",
-            ["/orgs/", sdkEncodePathSegment(sdkWireString(options.org)), "/migrations"].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "migrationsStartForOrg",
-            options: requestOptions,
-            errors: ["404": BasicError.self, "422": ValidationError.self]
-        )).data
+        return try (await sdkRequest("POST", ["/orgs/", sdkEncodePathSegment(sdkWireString(options.org)), "/migrations"].joined(), config: config, body: requestBody, decoder: .json, operationId: "migrationsStartForOrg", options: requestOptions, errors: ["404": BasicError.self, "422": ValidationError.self])).data
     }
 }

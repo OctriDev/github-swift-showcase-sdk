@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension IssuesMethods {
-    /// Removes all labels from an issue in a repository. Use `owner`, `repo`, and `issue_number` to identify the issue
-    /// whose labels you want to clear.
+extension IssuesMethods {
+    /// Removes all labels from an issue in a repository. Use `owner`, `repo`, and `issue_number` to identify the issue whose labels you want to clear.
     ///
     /// Removes all labels from an issue.
     ///
@@ -18,29 +17,7 @@ public extension IssuesMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - issueNumber: The number that identifies the issue.
-    static func issuesRemoveAllLabels(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        issueNumber: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "DELETE",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/issues/",
-                sdkEncodePathSegment(sdkWireString(issueNumber)),
-                "/labels",
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "issuesRemoveAllLabels",
-            options: requestOptions,
-            errors: ["301": BasicError.self, "404": BasicError.self, "410": BasicError.self]
-        )).data
+    public static func issuesRemoveAllLabels(config: ClientConfig, owner: String, repo: String, issueNumber: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/issues/", sdkEncodePathSegment(sdkWireString(issueNumber)), "/labels"].joined(), config: config, decoder: .empty, operationId: "issuesRemoveAllLabels", options: requestOptions, errors: ["301": BasicError.self, "404": BasicError.self, "410": BasicError.self])).data
     }
 }

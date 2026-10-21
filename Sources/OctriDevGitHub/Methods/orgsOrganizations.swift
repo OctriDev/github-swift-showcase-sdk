@@ -6,11 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension OrgsMethods {
-    /// Lists all organizations, in the order that they were created. > [!NOTE] > Pagination is powered exclusively by
-    /// the `since` parameter. Use the [Link
-    /// header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers) to get the URL
-    /// for the next page of organizations.
+extension OrgsMethods {
+    /// Lists all organizations, in the order that they were created. > [!NOTE] > Pagination is powered exclusively by the `since` parameter. Use the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers) to get the URL for the next page of organizations.
     ///
     /// - Parameters:
     /// - since: An organization ID. Only return organizations with an ID greater
@@ -19,13 +16,8 @@ public extension OrgsMethods {
     ///   see "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    static func orgsList(
-        config: ClientConfig,
-        since: Int? = nil,
-        perPage: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [OrganizationSimple] {
-        try await (sdkRequest("GET", "/organizations", config: config, query: [
+    public static func orgsList(config: ClientConfig, since: Int? = nil, perPage: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [OrganizationSimple] {
+        return try (await sdkRequest("GET", "/organizations", config: config, query: [
             SdkQueryParameter("since", value: since),
             SdkQueryParameter("per_page", value: perPage),
         ], decoder: .json, operationId: "orgsList", options: requestOptions)).data

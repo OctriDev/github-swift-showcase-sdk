@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Orgs domain models
+// Orgs domain models
 /// Permissions requested, categorized by type of permission.
 public struct OrganizationProgrammaticAccessGrantRequestPermissions: Codable {
     /// Optional object value serialized in the `organization` wire field.
@@ -20,21 +20,21 @@ public struct OrganizationProgrammaticAccessGrantRequestPermissions: Codable {
     }
 
     init() {
-        (organization, repository, other) = (nil, nil, nil)
+        (self.organization, self.repository, self.other) = (nil, nil, nil)
     }
 }
 
-public extension OrganizationProgrammaticAccessGrantRequestPermissions {
-    init(from decoder: Decoder) throws {
+extension OrganizationProgrammaticAccessGrantRequestPermissions {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        organization = try container.sdkDecodeIfPresent(.organization)
-        repository = try container.sdkDecodeIfPresent(.repository)
-        other = try container.sdkDecodeIfPresent(.other)
+        self.organization = try container.sdkDecodeIfPresent(.organization)
+        self.repository = try container.sdkDecodeIfPresent(.repository)
+        self.other = try container.sdkDecodeIfPresent(.other)
     }
 }
 
-public extension OrganizationProgrammaticAccessGrantRequestPermissions {
-    init(organization: [String: String]? = nil, repository: [String: String]? = nil, other: [String: String]? = nil) {
+extension OrganizationProgrammaticAccessGrantRequestPermissions {
+    public init(organization: [String: String]? = nil, repository: [String: String]? = nil, other: [String: String]? = nil) {
         self.init()
         (self.organization, self.repository) = (organization, repository)
         self.other = other
@@ -87,44 +87,29 @@ public struct OrganizationProgrammaticAccessGrantRequest: Codable {
         case tokenLastUsedAt = "token_last_used_at"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension OrganizationProgrammaticAccessGrantRequest {
-    init(from decoder: Decoder) throws {
+extension OrganizationProgrammaticAccessGrantRequest {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeRequired(.id)
-        reason = try container.sdkDecodeNullable(.reason)
-        owner = try container.sdkDecodeRequired(.owner)
-        repositorySelection = try container.sdkDecodeRequired(.repositorySelection)
-        repositoriesUrl = try container.sdkDecodeRequired(.repositoriesUrl)
-        permissions = try container.sdkDecodeRequired(.permissions)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        tokenId = try container.sdkDecodeRequired(.tokenId)
-        tokenName = try container.sdkDecodeRequired(.tokenName)
-        tokenExpired = try container.sdkDecodeRequired(.tokenExpired)
-        tokenExpiresAt = try container.sdkDecodeNullable(.tokenExpiresAt)
-        tokenLastUsedAt = try container.sdkDecodeNullable(.tokenLastUsedAt)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.reason = try container.sdkDecodeNullable(.reason)
+        self.owner = try container.sdkDecodeRequired(.owner)
+        self.repositorySelection = try container.sdkDecodeRequired(.repositorySelection)
+        self.repositoriesUrl = try container.sdkDecodeRequired(.repositoriesUrl)
+        self.permissions = try container.sdkDecodeRequired(.permissions)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.tokenId = try container.sdkDecodeRequired(.tokenId)
+        self.tokenName = try container.sdkDecodeRequired(.tokenName)
+        self.tokenExpired = try container.sdkDecodeRequired(.tokenExpired)
+        self.tokenExpiresAt = try container.sdkDecodeNullable(.tokenExpiresAt)
+        self.tokenLastUsedAt = try container.sdkDecodeNullable(.tokenLastUsedAt)
     }
 }
 
-public extension OrganizationProgrammaticAccessGrantRequest {
-    init(
-        id: Int,
-        reason: String?,
-        owner: SimpleUser,
-        repositorySelection: OrganizationProgrammaticAccessGrantRequestRepositorySelection,
-        repositoriesUrl: String,
-        permissions: OrganizationProgrammaticAccessGrantRequestPermissions,
-        createdAt: String,
-        tokenId: Int,
-        tokenName: String,
-        tokenExpired: Bool,
-        tokenExpiresAt: String?,
-        tokenLastUsedAt: String?
-    ) {
+extension OrganizationProgrammaticAccessGrantRequest {
+    public init(id: Int, reason: String?, owner: SimpleUser, repositorySelection: OrganizationProgrammaticAccessGrantRequestRepositorySelection, repositoriesUrl: String, permissions: OrganizationProgrammaticAccessGrantRequestPermissions, createdAt: String, tokenId: Int, tokenName: String, tokenExpired: Bool, tokenExpiresAt: String?, tokenLastUsedAt: String?) {
         (self.id, self.reason) = (id, reason)
         (self.owner, self.repositorySelection) = (owner, repositorySelection)
         (self.repositoriesUrl, self.permissions) = (repositoriesUrl, permissions)
@@ -135,21 +120,17 @@ public extension OrganizationProgrammaticAccessGrantRequest {
 }
 
 /// Type of repository selection requested.
-public struct OrganizationProgrammaticAccessGrantRequestRepositorySelection: RawRepresentable, Hashable, Codable,
-    Sendable, SdkWireConvertible {
+public struct OrganizationProgrammaticAccessGrantRequestRepositorySelection: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let none = OrganizationProgrammaticAccessGrantRequestRepositorySelection(rawValue: "none")
     public static let all = OrganizationProgrammaticAccessGrantRequestRepositorySelection(rawValue: "all")
     public static let subset = OrganizationProgrammaticAccessGrantRequestRepositorySelection(rawValue: "subset")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

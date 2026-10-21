@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Activity domain models
+// Activity domain models
 /// Hypermedia Link with Type
 public struct LinkWithType: Codable {
     /// Required `string` value serialized in the `href` wire field.
@@ -16,35 +16,25 @@ public struct LinkWithType: Codable {
         case type
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension LinkWithType {
-    init(from decoder: Decoder) throws {
+extension LinkWithType {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.href) else {
-            throw SdkValidationError(
-                field: "href",
-                code: "required",
-                message: "Validation failed for 'href': value is required"
-            )
+            throw SdkValidationError(field: "href", code: "required", message: "Validation failed for 'href': value is required")
         }
         guard container.contains(.type) else {
-            throw SdkValidationError(
-                field: "type",
-                code: "required",
-                message: "Validation failed for 'type': value is required"
-            )
+            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
         }
-        href = try container.sdkDecodeRequired(.href)
-        type = try container.sdkDecodeRequired(.type)
+        self.href = try container.sdkDecodeRequired(.href)
+        self.type = try container.sdkDecodeRequired(.type)
     }
 }
 
-public extension LinkWithType {
-    init(href: String, type: String) {
+extension LinkWithType {
+    public init(href: String, type: String) {
         (self.href, self.type) = (href, type)
     }
 }
@@ -98,63 +88,37 @@ public struct Feed: Codable {
         case repositoryDiscussionsCategoryUrl = "repository_discussions_category_url"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension Feed {
-    init(from decoder: Decoder) throws {
+extension Feed {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.timelineUrl) else {
-            throw SdkValidationError(
-                field: "timeline_url",
-                code: "required",
-                message: "Validation failed for 'timeline_url': value is required"
-            )
+            throw SdkValidationError(field: "timeline_url", code: "required", message: "Validation failed for 'timeline_url': value is required")
         }
         guard container.contains(.userUrl) else {
-            throw SdkValidationError(
-                field: "user_url",
-                code: "required",
-                message: "Validation failed for 'user_url': value is required"
-            )
+            throw SdkValidationError(field: "user_url", code: "required", message: "Validation failed for 'user_url': value is required")
         }
         guard container.contains(.links) else {
-            throw SdkValidationError(
-                field: "_links",
-                code: "required",
-                message: "Validation failed for '_links': value is required"
-            )
+            throw SdkValidationError(field: "_links", code: "required", message: "Validation failed for '_links': value is required")
         }
-        timelineUrl = try container.sdkDecodeRequired(.timelineUrl)
-        userUrl = try container.sdkDecodeRequired(.userUrl)
-        links = try container.sdkDecodeRequired(.links)
-        currentUserPublicUrl = try container.sdkDecodeIfPresent(.currentUserPublicUrl)
-        currentUserUrl = try container.sdkDecodeIfPresent(.currentUserUrl)
-        currentUserActorUrl = try container.sdkDecodeIfPresent(.currentUserActorUrl)
-        currentUserOrganizationUrl = try container.sdkDecodeIfPresent(.currentUserOrganizationUrl)
-        currentUserOrganizationUrls = try container.sdkDecodeIfPresent(.currentUserOrganizationUrls)
-        securityAdvisoriesUrl = try container.sdkDecodeIfPresent(.securityAdvisoriesUrl)
-        repositoryDiscussionsUrl = try container.sdkDecodeIfPresent(.repositoryDiscussionsUrl)
-        repositoryDiscussionsCategoryUrl = try container.sdkDecodeIfPresent(.repositoryDiscussionsCategoryUrl)
+        self.timelineUrl = try container.sdkDecodeRequired(.timelineUrl)
+        self.userUrl = try container.sdkDecodeRequired(.userUrl)
+        self.links = try container.sdkDecodeRequired(.links)
+        self.currentUserPublicUrl = try container.sdkDecodeIfPresent(.currentUserPublicUrl)
+        self.currentUserUrl = try container.sdkDecodeIfPresent(.currentUserUrl)
+        self.currentUserActorUrl = try container.sdkDecodeIfPresent(.currentUserActorUrl)
+        self.currentUserOrganizationUrl = try container.sdkDecodeIfPresent(.currentUserOrganizationUrl)
+        self.currentUserOrganizationUrls = try container.sdkDecodeIfPresent(.currentUserOrganizationUrls)
+        self.securityAdvisoriesUrl = try container.sdkDecodeIfPresent(.securityAdvisoriesUrl)
+        self.repositoryDiscussionsUrl = try container.sdkDecodeIfPresent(.repositoryDiscussionsUrl)
+        self.repositoryDiscussionsCategoryUrl = try container.sdkDecodeIfPresent(.repositoryDiscussionsCategoryUrl)
     }
 }
 
-public extension Feed {
-    init(
-        timelineUrl: String,
-        userUrl: String,
-        links: FeedLinks,
-        currentUserPublicUrl: String? = nil,
-        currentUserUrl: String? = nil,
-        currentUserActorUrl: String? = nil,
-        currentUserOrganizationUrl: String? = nil,
-        currentUserOrganizationUrls: [String]? = nil,
-        securityAdvisoriesUrl: String? = nil,
-        repositoryDiscussionsUrl: String? = nil,
-        repositoryDiscussionsCategoryUrl: String? = nil
-    ) {
+extension Feed {
+    public init(timelineUrl: String, userUrl: String, links: FeedLinks, currentUserPublicUrl: String? = nil, currentUserUrl: String? = nil, currentUserActorUrl: String? = nil, currentUserOrganizationUrl: String? = nil, currentUserOrganizationUrls: [String]? = nil, securityAdvisoriesUrl: String? = nil, repositoryDiscussionsUrl: String? = nil, repositoryDiscussionsCategoryUrl: String? = nil) {
         (self.timelineUrl, self.userUrl) = (timelineUrl, userUrl)
         (self.links, self.currentUserPublicUrl) = (links, currentUserPublicUrl)
         (self.currentUserUrl, self.currentUserActorUrl) = (currentUserUrl, currentUserActorUrl)
@@ -202,54 +166,33 @@ public struct FeedLinks: Codable {
         case repositoryDiscussionsCategory = "repository_discussions_category"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension FeedLinks {
-    init(from decoder: Decoder) throws {
+extension FeedLinks {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.timeline) else {
-            throw SdkValidationError(
-                field: "timeline",
-                code: "required",
-                message: "Validation failed for 'timeline': value is required"
-            )
+            throw SdkValidationError(field: "timeline", code: "required", message: "Validation failed for 'timeline': value is required")
         }
         guard container.contains(.user) else {
-            throw SdkValidationError(
-                field: "user",
-                code: "required",
-                message: "Validation failed for 'user': value is required"
-            )
+            throw SdkValidationError(field: "user", code: "required", message: "Validation failed for 'user': value is required")
         }
-        timeline = try container.sdkDecodeRequired(.timeline)
-        user = try container.sdkDecodeRequired(.user)
-        securityAdvisories = try container.sdkDecodeIfPresent(.securityAdvisories)
-        currentUser = try container.sdkDecodeIfPresent(.currentUser)
-        currentUserPublic = try container.sdkDecodeIfPresent(.currentUserPublic)
-        currentUserActor = try container.sdkDecodeIfPresent(.currentUserActor)
-        currentUserOrganization = try container.sdkDecodeIfPresent(.currentUserOrganization)
-        currentUserOrganizations = try container.sdkDecodeIfPresent(.currentUserOrganizations)
-        repositoryDiscussions = try container.sdkDecodeIfPresent(.repositoryDiscussions)
-        repositoryDiscussionsCategory = try container.sdkDecodeIfPresent(.repositoryDiscussionsCategory)
+        self.timeline = try container.sdkDecodeRequired(.timeline)
+        self.user = try container.sdkDecodeRequired(.user)
+        self.securityAdvisories = try container.sdkDecodeIfPresent(.securityAdvisories)
+        self.currentUser = try container.sdkDecodeIfPresent(.currentUser)
+        self.currentUserPublic = try container.sdkDecodeIfPresent(.currentUserPublic)
+        self.currentUserActor = try container.sdkDecodeIfPresent(.currentUserActor)
+        self.currentUserOrganization = try container.sdkDecodeIfPresent(.currentUserOrganization)
+        self.currentUserOrganizations = try container.sdkDecodeIfPresent(.currentUserOrganizations)
+        self.repositoryDiscussions = try container.sdkDecodeIfPresent(.repositoryDiscussions)
+        self.repositoryDiscussionsCategory = try container.sdkDecodeIfPresent(.repositoryDiscussionsCategory)
     }
 }
 
-public extension FeedLinks {
-    init(
-        timeline: LinkWithType,
-        user: LinkWithType,
-        securityAdvisories: LinkWithType? = nil,
-        currentUser: LinkWithType? = nil,
-        currentUserPublic: LinkWithType? = nil,
-        currentUserActor: LinkWithType? = nil,
-        currentUserOrganization: LinkWithType? = nil,
-        currentUserOrganizations: [LinkWithType]? = nil,
-        repositoryDiscussions: LinkWithType? = nil,
-        repositoryDiscussionsCategory: LinkWithType? = nil
-    ) {
+extension FeedLinks {
+    public init(timeline: LinkWithType, user: LinkWithType, securityAdvisories: LinkWithType? = nil, currentUser: LinkWithType? = nil, currentUserPublic: LinkWithType? = nil, currentUserActor: LinkWithType? = nil, currentUserOrganization: LinkWithType? = nil, currentUserOrganizations: [LinkWithType]? = nil, repositoryDiscussions: LinkWithType? = nil, repositoryDiscussionsCategory: LinkWithType? = nil) {
         (self.timeline, self.user) = (timeline, user)
         (self.securityAdvisories, self.currentUser) = (securityAdvisories, currentUser)
         (self.currentUserPublic, self.currentUserActor) = (currentUserPublic, currentUserActor)

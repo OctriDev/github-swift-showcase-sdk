@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// AgentAutomations domain models
+// AgentAutomations domain models
 public indirect enum AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemData {
     case agentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a(
         AgentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a
@@ -14,39 +14,29 @@ public indirect enum AgentAutomationsListAutomationTasksResponseTasksItemArtifac
 }
 
 extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemData: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let raw = try? container.decode(JSONValue.self) {
-            if let value = Self.decodeLossless1(from: container, raw) {
-                self = value; return
-            }
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
         }
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemData"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemData")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
 extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemData {
     static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
-        if let value = try? container
-            .decode(AgentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a.self),
-            sdkKeepsEveryKey(value, of: raw) {
+        if let value = try? container.decode(AgentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a.self),
+           sdkKeepsEveryKey(value, of: raw) {
             return .agentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a(value)
         }
-        if let value = try? container
-            .decode(AgentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4.self),
-            sdkKeepsEveryKey(value, of: raw) {
+        if let value = try? container.decode(AgentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4.self),
+           sdkKeepsEveryKey(value, of: raw) {
             return .agentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4(value)
         }
         return nil
@@ -58,12 +48,12 @@ extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemData 
         if let value = try? container.decode(
             AgentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a.self
         ) {
-            return .agentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a(value)
+            return             .agentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a(value)
         }
         if let value = try? container.decode(
             AgentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4.self
         ) {
-            return .agentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4(value)
+            return             .agentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4(value)
         }
         return nil
     }
@@ -73,10 +63,8 @@ extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsItemData 
     func encodeGroup1(to encoder: Encoder) throws -> Bool {
         var container = encoder.singleValueContainer()
         switch self {
-        case let .agentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a(value): try container
-            .encode(value); return true
-        case let .agentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4(value): try container
-            .encode(value); return true
+        case let .agentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a(value): try container.encode(value); return true
+        case let .agentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4(value): try container.encode(value); return true
         }
     }
 }
@@ -93,28 +81,22 @@ public struct AgentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12
         case globalId = "global_id"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a {
-    init(from decoder: Decoder) throws {
+extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
-        globalId = try container.sdkDecodeIfPresent(.globalId)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.globalId = try container.sdkDecodeIfPresent(.globalId)
     }
 }
 
-public extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a {
-    init(id: Int, globalId: String? = nil) {
+extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsXff12b2977a {
+    public init(id: Int, globalId: String? = nil) {
         (self.id, self.globalId) = (id, globalId)
     }
 }
@@ -131,35 +113,25 @@ public struct AgentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37
         case baseRef = "base_ref"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4 {
-    init(from decoder: Decoder) throws {
+extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.headRef) else {
-            throw SdkValidationError(
-                field: "head_ref",
-                code: "required",
-                message: "Validation failed for 'head_ref': value is required"
-            )
+            throw SdkValidationError(field: "head_ref", code: "required", message: "Validation failed for 'head_ref': value is required")
         }
         guard container.contains(.baseRef) else {
-            throw SdkValidationError(
-                field: "base_ref",
-                code: "required",
-                message: "Validation failed for 'base_ref': value is required"
-            )
+            throw SdkValidationError(field: "base_ref", code: "required", message: "Validation failed for 'base_ref': value is required")
         }
-        headRef = try container.sdkDecodeRequired(.headRef)
-        baseRef = try container.sdkDecodeRequired(.baseRef)
+        self.headRef = try container.sdkDecodeRequired(.headRef)
+        self.baseRef = try container.sdkDecodeRequired(.baseRef)
     }
 }
 
-public extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4 {
-    init(headRef: String, baseRef: String) {
+extension AgentAutomationsListAutomationTasksResponseTasksItemArtifactsX3f37b14db4 {
+    public init(headRef: String, baseRef: String) {
         (self.headRef, self.baseRef) = (headRef, baseRef)
     }
 }

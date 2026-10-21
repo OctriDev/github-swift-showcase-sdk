@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// ReposRule domain models
+// ReposRule domain models
 /// Optional object value serialized in the `rule_source` wire field.
 public struct RuleSuiteRuleEvaluationsItemRuleSource: Codable {
     /// The type of rule source.
@@ -20,21 +20,21 @@ public struct RuleSuiteRuleEvaluationsItemRuleSource: Codable {
     }
 
     init() {
-        (type, id, name) = (nil, nil, nil)
+        (self.type, self.id, self.name) = (nil, nil, nil)
     }
 }
 
-public extension RuleSuiteRuleEvaluationsItemRuleSource {
-    init(from decoder: Decoder) throws {
+extension RuleSuiteRuleEvaluationsItemRuleSource {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        type = try container.sdkDecodeIfPresent(.type)
-        id = try container.sdkDecodeIfPresent(.id)
-        name = try container.sdkDecodeIfPresent(.name)
+        self.type = try container.sdkDecodeIfPresent(.type)
+        self.id = try container.sdkDecodeIfPresent(.id)
+        self.name = try container.sdkDecodeIfPresent(.name)
     }
 }
 
-public extension RuleSuiteRuleEvaluationsItemRuleSource {
-    init(type: String? = nil, id: Int? = nil, name: String? = nil) {
+extension RuleSuiteRuleEvaluationsItemRuleSource {
+    public init(type: String? = nil, id: Int? = nil, name: String? = nil) {
         self.init()
         (self.type, self.id) = (type, id)
         self.name = name
@@ -63,29 +63,23 @@ public struct RuleSuitePullRequestPullRequest: Codable {
     }
 
     init() {
-        (id, number, user, reviews, proofOfPresence) = (nil, nil, nil, nil, nil)
+        (self.id, self.number, self.user, self.reviews, self.proofOfPresence) = (nil, nil, nil, nil, nil)
     }
 }
 
-public extension RuleSuitePullRequestPullRequest {
-    init(from decoder: Decoder) throws {
+extension RuleSuitePullRequestPullRequest {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeIfPresent(.id)
-        number = try container.sdkDecodeIfPresent(.number)
-        user = try container.sdkDecodeIfPresent(.user)
-        reviews = try container.sdkDecodeIfPresent(.reviews)
-        proofOfPresence = try container.sdkDecodeIfPresent(.proofOfPresence)
+        self.id = try container.sdkDecodeIfPresent(.id)
+        self.number = try container.sdkDecodeIfPresent(.number)
+        self.user = try container.sdkDecodeIfPresent(.user)
+        self.reviews = try container.sdkDecodeIfPresent(.reviews)
+        self.proofOfPresence = try container.sdkDecodeIfPresent(.proofOfPresence)
     }
 }
 
-public extension RuleSuitePullRequestPullRequest {
-    init(
-        id: Int? = nil,
-        number: Int? = nil,
-        user: RuleSuitePullRequestPullRequestUser? = nil,
-        reviews: [RuleSuitePullRequestPullRequestReviewsItem]? = nil,
-        proofOfPresence: RuleSuitePullRequestPullRequestProofOfPresence? = nil
-    ) {
+extension RuleSuitePullRequestPullRequest {
+    public init(id: Int? = nil, number: Int? = nil, user: RuleSuitePullRequestPullRequestUser? = nil, reviews: [RuleSuitePullRequestPullRequestReviewsItem]? = nil, proofOfPresence: RuleSuitePullRequestPullRequestProofOfPresence? = nil) {
         self.init()
         (self.id, self.number) = (id, number)
         (self.user, self.reviews) = (user, reviews)
@@ -125,36 +119,27 @@ public struct RuleSuitePullRequestPullRequestProofOfPresence: Codable {
     }
 
     init() {
-        (state, code, baseSha, headSha, requiredLevel) = (nil, nil, nil, nil, nil)
-        (verifiedLevel, verifiedAt, verifier) = (nil, nil, nil)
+        (self.state, self.code, self.baseSha, self.headSha, self.requiredLevel) = (nil, nil, nil, nil, nil)
+        (self.verifiedLevel, self.verifiedAt, self.verifier) = (nil, nil, nil)
     }
 }
 
-public extension RuleSuitePullRequestPullRequestProofOfPresence {
-    init(from decoder: Decoder) throws {
+extension RuleSuitePullRequestPullRequestProofOfPresence {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        state = try container.sdkDecodeIfPresent(.state)
-        code = try container.sdkDecodeIfPresent(.code)
-        baseSha = try container.sdkDecodeIfPresent(.baseSha)
-        headSha = try container.sdkDecodeIfPresent(.headSha)
-        requiredLevel = try container.sdkDecodeIfPresent(.requiredLevel)
-        verifiedLevel = try container.sdkDecodeIfPresent(.verifiedLevel)
-        verifiedAt = try container.sdkDecodeIfPresent(.verifiedAt)
-        verifier = try container.sdkDecodeIfPresent(.verifier)
+        self.state = try container.sdkDecodeIfPresent(.state)
+        self.code = try container.sdkDecodeIfPresent(.code)
+        self.baseSha = try container.sdkDecodeIfPresent(.baseSha)
+        self.headSha = try container.sdkDecodeIfPresent(.headSha)
+        self.requiredLevel = try container.sdkDecodeIfPresent(.requiredLevel)
+        self.verifiedLevel = try container.sdkDecodeIfPresent(.verifiedLevel)
+        self.verifiedAt = try container.sdkDecodeIfPresent(.verifiedAt)
+        self.verifier = try container.sdkDecodeIfPresent(.verifier)
     }
 }
 
-public extension RuleSuitePullRequestPullRequestProofOfPresence {
-    init(
-        state: String? = nil,
-        code: String? = nil,
-        baseSha: String? = nil,
-        headSha: String? = nil,
-        requiredLevel: String? = nil,
-        verifiedLevel: String? = nil,
-        verifiedAt: String? = nil,
-        verifier: RuleSuitePullRequestPullRequestProofOfPresenceVerifier? = nil
-    ) {
+extension RuleSuitePullRequestPullRequestProofOfPresence {
+    public init(state: String? = nil, code: String? = nil, baseSha: String? = nil, headSha: String? = nil, requiredLevel: String? = nil, verifiedLevel: String? = nil, verifiedAt: String? = nil, verifier: RuleSuitePullRequestPullRequestProofOfPresenceVerifier? = nil) {
         self.init()
         (self.state, self.code) = (state, code)
         (self.baseSha, self.headSha) = (baseSha, headSha)
@@ -179,21 +164,21 @@ public struct RuleSuitePullRequestPullRequestUser: Codable {
     }
 
     init() {
-        (id, login, type) = (nil, nil, nil)
+        (self.id, self.login, self.type) = (nil, nil, nil)
     }
 }
 
-public extension RuleSuitePullRequestPullRequestUser {
-    init(from decoder: Decoder) throws {
+extension RuleSuitePullRequestPullRequestUser {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeIfPresent(.id)
-        login = try container.sdkDecodeIfPresent(.login)
-        type = try container.sdkDecodeIfPresent(.type)
+        self.id = try container.sdkDecodeIfPresent(.id)
+        self.login = try container.sdkDecodeIfPresent(.login)
+        self.type = try container.sdkDecodeIfPresent(.type)
     }
 }
 
-public extension RuleSuitePullRequestPullRequestUser {
-    init(id: Int? = nil, login: String? = nil, type: String? = nil) {
+extension RuleSuitePullRequestPullRequestUser {
+    public init(id: Int? = nil, login: String? = nil, type: String? = nil) {
         self.init()
         (self.id, self.login) = (id, login)
         self.type = type
@@ -204,17 +189,14 @@ public extension RuleSuitePullRequestPullRequestUser {
 public struct RuleSuitesItemResult: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let pass = RuleSuitesItemResult(rawValue: "pass")
     public static let fail = RuleSuitesItemResult(rawValue: "fail")
     public static let bypass = RuleSuitesItemResult(rawValue: "bypass")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -227,17 +209,14 @@ public struct RuleSuitesItemResult: RawRepresentable, Hashable, Codable, Sendabl
 public struct RuleSuiteResult: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let pass = RuleSuiteResult(rawValue: "pass")
     public static let fail = RuleSuiteResult(rawValue: "fail")
     public static let bypass = RuleSuiteResult(rawValue: "bypass")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -268,16 +247,13 @@ public enum RuleSuitePullRequestRuleType: String, CaseIterable, Codable {
 public struct RuleSuiteRuleEvaluationsItemResult: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let pass = RuleSuiteRuleEvaluationsItemResult(rawValue: "pass")
     public static let fail = RuleSuiteRuleEvaluationsItemResult(rawValue: "fail")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -291,17 +267,14 @@ public struct RuleSuiteRuleEvaluationsItemResult: RawRepresentable, Hashable, Co
 public struct RuleSuitesItemEvaluationResult: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let pass = RuleSuitesItemEvaluationResult(rawValue: "pass")
     public static let fail = RuleSuitesItemEvaluationResult(rawValue: "fail")
     public static let bypass = RuleSuitesItemEvaluationResult(rawValue: "bypass")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -334,17 +307,14 @@ public enum RuleSuiteRequiredStatusChecksRuleType: String, CaseIterable, Codable
 public struct RuleSuiteEvaluationResult: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let pass = RuleSuiteEvaluationResult(rawValue: "pass")
     public static let fail = RuleSuiteEvaluationResult(rawValue: "fail")
     public static let bypass = RuleSuiteEvaluationResult(rawValue: "bypass")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -354,21 +324,17 @@ public struct RuleSuiteEvaluationResult: RawRepresentable, Hashable, Codable, Se
 }
 
 /// The enforcement level of this rule source.
-public struct RuleSuiteRuleEvaluationsItemEnforcement: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct RuleSuiteRuleEvaluationsItemEnforcement: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let active = RuleSuiteRuleEvaluationsItemEnforcement(rawValue: "active")
     public static let evaluate = RuleSuiteRuleEvaluationsItemEnforcement(rawValue: "evaluate")
     public static let deletedRuleset = RuleSuiteRuleEvaluationsItemEnforcement(rawValue: "deleted ruleset")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

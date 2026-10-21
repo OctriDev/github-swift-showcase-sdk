@@ -6,12 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ReposMethods {
-    /// Create a fork for the authenticated user. > [!NOTE] > Forking a Repository happens asynchronously. You may have
-    /// to wait a short period of time before you can access the git objects. If this takes longer than 5 minutes, be
-    /// sure to contact [GitHub Support](https://support.github.com/contact?tags=dotcom-rest-api). > [!NOTE] > Although
-    /// this endpoint works with GitHub Apps, the GitHub App must be installed on the destination account with access to
-    /// all repositories and on the source account with access to the source repository.
+extension ReposMethods {
+    /// Create a fork for the authenticated user. > [!NOTE] > Forking a Repository happens asynchronously. You may have to wait a short period of time before you can access the git objects. If this takes longer than 5 minutes, be sure to contact [GitHub Support](https://support.github.com/contact?tags=dotcom-rest-api). > [!NOTE] > Although this endpoint works with GitHub Apps, the GitHub App must be installed on the destination account with access to all repositories and on the source account with access to the source repository.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -23,41 +19,9 @@ public extension ReposMethods {
     /// - name: When forking from an existing repository, a new name for the fork.
     /// - defaultBranchOnly: When forking from an existing repository, fork with
     ///   only the default branch.
-    static func reposCreateFork(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        organization: String? = nil,
-        name: String? = nil,
-        defaultBranchOnly: Bool? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> FullRepository {
-        let requestBody = ReposCreateForkRequestBody(
-            organization: organization,
-            name: name,
-            defaultBranchOnly: defaultBranchOnly
-        )
+    public static func reposCreateFork(config: ClientConfig, owner: String, repo: String, organization: String? = nil, name: String? = nil, defaultBranchOnly: Bool? = nil, requestOptions: RequestOptions? = nil) async throws -> FullRepository {
+        let requestBody = ReposCreateForkRequestBody(organization: organization, name: name, defaultBranchOnly: defaultBranchOnly)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/forks",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "reposCreateFork",
-            options: requestOptions,
-            errors: [
-                "400": BasicError.self,
-                "403": BasicError.self,
-                "404": BasicError.self,
-                "422": ValidationError.self,
-            ]
-        )).data
+        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/forks"].joined(), config: config, body: requestBody, decoder: .json, operationId: "reposCreateFork", options: requestOptions, errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
     }
 }

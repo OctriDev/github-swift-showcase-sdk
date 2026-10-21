@@ -6,26 +6,12 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension PrivateRegistriesMethods {
-    /// Gets the org public key, which is needed to encrypt private registry secrets. You need to encrypt a secret
-    /// before you can create or update secrets. OAuth tokens and personal access tokens (classic) need the `admin:org`
-    /// scope to use this endpoint.
+extension PrivateRegistriesMethods {
+    /// Gets the org public key, which is needed to encrypt private registry secrets. You need to encrypt a secret before you can create or update secrets. OAuth tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
-    static func privateRegistriesGetOrgPublicKey(
-        config: ClientConfig,
-        org: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> PrivateRegistriesGetOrgPublicKeyResponse {
-        try await (sdkRequest(
-            "GET",
-            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/private-registries/public-key"].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "privateRegistriesGetOrgPublicKey",
-            options: requestOptions,
-            errors: ["404": BasicError.self]
-        )).data
+    public static func privateRegistriesGetOrgPublicKey(config: ClientConfig, org: String, requestOptions: RequestOptions? = nil) async throws -> PrivateRegistriesGetOrgPublicKeyResponse {
+        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/private-registries/public-key"].joined(), config: config, decoder: .json, operationId: "privateRegistriesGetOrgPublicKey", options: requestOptions, errors: ["404": BasicError.self])).data
     }
 }

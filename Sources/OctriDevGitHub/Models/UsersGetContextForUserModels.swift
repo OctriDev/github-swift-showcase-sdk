@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Users domain models
+// Users domain models
 /// Required object value serialized in the `contexts[]` wire field.
 public struct HovercardContextsItem: Codable {
     /// Required `string` value serialized in the `message` wire field.
@@ -16,35 +16,25 @@ public struct HovercardContextsItem: Codable {
         case octicon
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension HovercardContextsItem {
-    init(from decoder: Decoder) throws {
+extension HovercardContextsItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.message) else {
-            throw SdkValidationError(
-                field: "message",
-                code: "required",
-                message: "Validation failed for 'message': value is required"
-            )
+            throw SdkValidationError(field: "message", code: "required", message: "Validation failed for 'message': value is required")
         }
         guard container.contains(.octicon) else {
-            throw SdkValidationError(
-                field: "octicon",
-                code: "required",
-                message: "Validation failed for 'octicon': value is required"
-            )
+            throw SdkValidationError(field: "octicon", code: "required", message: "Validation failed for 'octicon': value is required")
         }
-        message = try container.sdkDecodeRequired(.message)
-        octicon = try container.sdkDecodeRequired(.octicon)
+        self.message = try container.sdkDecodeRequired(.message)
+        self.octicon = try container.sdkDecodeRequired(.octicon)
     }
 }
 
-public extension HovercardContextsItem {
-    init(message: String, octicon: String) {
+extension HovercardContextsItem {
+    public init(message: String, octicon: String) {
         (self.message, self.octicon) = (message, octicon)
     }
 }
@@ -58,27 +48,21 @@ public struct Hovercard: Codable {
         case contexts
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension Hovercard {
-    init(from decoder: Decoder) throws {
+extension Hovercard {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.contexts) else {
-            throw SdkValidationError(
-                field: "contexts",
-                code: "required",
-                message: "Validation failed for 'contexts': value is required"
-            )
+            throw SdkValidationError(field: "contexts", code: "required", message: "Validation failed for 'contexts': value is required")
         }
-        contexts = try container.sdkDecodeRequired(.contexts)
+        self.contexts = try container.sdkDecodeRequired(.contexts)
     }
 }
 
-public extension Hovercard {
-    init(contexts: [HovercardContextsItem]) {
+extension Hovercard {
+    public init(contexts: [HovercardContextsItem]) {
         self.contexts = contexts
     }
 }

@@ -7,21 +7,10 @@ import Foundation
     import FoundationNetworking
 #endif
 public enum EmojisMethods {
-    /// Lists the emojis available to use on GitHub. Use the emoji names as keys and their string values to identify the
-    /// corresponding entries.
+    /// Lists the emojis available to use on GitHub. Use the emoji names as keys and their string values to identify the corresponding entries.
     ///
     /// Lists all the emojis available to use on GitHub.
-    public static func emojisGet(
-        config: ClientConfig,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [String: String] {
-        try await (sdkRequest(
-            "GET",
-            "/emojis",
-            config: config,
-            decoder: .json,
-            operationId: "emojisGet",
-            options: requestOptions
-        )).data
+    public static func emojisGet(config: ClientConfig, requestOptions: RequestOptions? = nil) async throws -> [String: String] {
+        return try (await sdkRequest("GET", "/emojis", config: config, decoder: .json, operationId: "emojisGet", options: requestOptions)).data
     }
 }

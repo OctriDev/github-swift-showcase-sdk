@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// DependencyGraph domain models
+// DependencyGraph domain models
 public typealias DependencyGraphDiff = [DependencyGraphDiffItem]
 
 public struct DependencyGraphDiffItem: Codable {
@@ -41,40 +41,27 @@ public struct DependencyGraphDiffItem: Codable {
         case scope
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension DependencyGraphDiffItem {
-    init(from decoder: Decoder) throws {
+extension DependencyGraphDiffItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        changeType = try container.sdkDecodeRequired(.changeType)
-        manifest = try container.sdkDecodeRequired(.manifest)
-        ecosystem = try container.sdkDecodeRequired(.ecosystem)
-        name = try container.sdkDecodeRequired(.name)
-        version = try container.sdkDecodeRequired(.version)
-        packageUrl = try container.sdkDecodeNullable(.packageUrl)
-        license = try container.sdkDecodeNullable(.license)
-        sourceRepositoryUrl = try container.sdkDecodeNullable(.sourceRepositoryUrl)
-        vulnerabilities = try container.sdkDecodeRequired(.vulnerabilities)
-        scope = try container.sdkDecodeRequired(.scope)
+        self.changeType = try container.sdkDecodeRequired(.changeType)
+        self.manifest = try container.sdkDecodeRequired(.manifest)
+        self.ecosystem = try container.sdkDecodeRequired(.ecosystem)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.version = try container.sdkDecodeRequired(.version)
+        self.packageUrl = try container.sdkDecodeNullable(.packageUrl)
+        self.license = try container.sdkDecodeNullable(.license)
+        self.sourceRepositoryUrl = try container.sdkDecodeNullable(.sourceRepositoryUrl)
+        self.vulnerabilities = try container.sdkDecodeRequired(.vulnerabilities)
+        self.scope = try container.sdkDecodeRequired(.scope)
     }
 }
 
-public extension DependencyGraphDiffItem {
-    init(
-        changeType: DependencyGraphDiffItemChangeType,
-        manifest: String,
-        ecosystem: String,
-        name: String,
-        version: String,
-        packageUrl: String?,
-        license: String?,
-        sourceRepositoryUrl: String?,
-        vulnerabilities: [DependencyGraphDiffItemVulnerabilitiesItem],
-        scope: DependencyGraphDiffItemScope
-    ) {
+extension DependencyGraphDiffItem {
+    public init(changeType: DependencyGraphDiffItemChangeType, manifest: String, ecosystem: String, name: String, version: String, packageUrl: String?, license: String?, sourceRepositoryUrl: String?, vulnerabilities: [DependencyGraphDiffItemVulnerabilitiesItem], scope: DependencyGraphDiffItemScope) {
         (self.changeType, self.manifest) = (changeType, manifest)
         (self.ecosystem, self.name) = (ecosystem, name)
         (self.version, self.packageUrl) = (version, packageUrl)
@@ -100,51 +87,33 @@ public struct DependencyGraphDiffItemVulnerabilitiesItem: Codable {
         case advisoryUrl = "advisory_url"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension DependencyGraphDiffItemVulnerabilitiesItem {
-    init(from decoder: Decoder) throws {
+extension DependencyGraphDiffItemVulnerabilitiesItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.severity) else {
-            throw SdkValidationError(
-                field: "severity",
-                code: "required",
-                message: "Validation failed for 'severity': value is required"
-            )
+            throw SdkValidationError(field: "severity", code: "required", message: "Validation failed for 'severity': value is required")
         }
         guard container.contains(.advisoryGhsaId) else {
-            throw SdkValidationError(
-                field: "advisory_ghsa_id",
-                code: "required",
-                message: "Validation failed for 'advisory_ghsa_id': value is required"
-            )
+            throw SdkValidationError(field: "advisory_ghsa_id", code: "required", message: "Validation failed for 'advisory_ghsa_id': value is required")
         }
         guard container.contains(.advisorySummary) else {
-            throw SdkValidationError(
-                field: "advisory_summary",
-                code: "required",
-                message: "Validation failed for 'advisory_summary': value is required"
-            )
+            throw SdkValidationError(field: "advisory_summary", code: "required", message: "Validation failed for 'advisory_summary': value is required")
         }
         guard container.contains(.advisoryUrl) else {
-            throw SdkValidationError(
-                field: "advisory_url",
-                code: "required",
-                message: "Validation failed for 'advisory_url': value is required"
-            )
+            throw SdkValidationError(field: "advisory_url", code: "required", message: "Validation failed for 'advisory_url': value is required")
         }
-        severity = try container.sdkDecodeRequired(.severity)
-        advisoryGhsaId = try container.sdkDecodeRequired(.advisoryGhsaId)
-        advisorySummary = try container.sdkDecodeRequired(.advisorySummary)
-        advisoryUrl = try container.sdkDecodeRequired(.advisoryUrl)
+        self.severity = try container.sdkDecodeRequired(.severity)
+        self.advisoryGhsaId = try container.sdkDecodeRequired(.advisoryGhsaId)
+        self.advisorySummary = try container.sdkDecodeRequired(.advisorySummary)
+        self.advisoryUrl = try container.sdkDecodeRequired(.advisoryUrl)
     }
 }
 
-public extension DependencyGraphDiffItemVulnerabilitiesItem {
-    init(severity: String, advisoryGhsaId: String, advisorySummary: String, advisoryUrl: String) {
+extension DependencyGraphDiffItemVulnerabilitiesItem {
+    public init(severity: String, advisoryGhsaId: String, advisorySummary: String, advisoryUrl: String) {
         (self.severity, self.advisoryGhsaId) = (severity, advisoryGhsaId)
         (self.advisorySummary, self.advisoryUrl) = (advisorySummary, advisoryUrl)
     }
@@ -153,16 +122,13 @@ public extension DependencyGraphDiffItemVulnerabilitiesItem {
 public struct DependencyGraphDiffItemChangeType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let added = DependencyGraphDiffItemChangeType(rawValue: "added")
     public static let removed = DependencyGraphDiffItemChangeType(rawValue: "removed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -177,17 +143,14 @@ public struct DependencyGraphDiffItemChangeType: RawRepresentable, Hashable, Cod
 public struct DependencyGraphDiffItemScope: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let unknown = DependencyGraphDiffItemScope(rawValue: "unknown")
     public static let runtime = DependencyGraphDiffItemScope(rawValue: "runtime")
     public static let development = DependencyGraphDiffItemScope(rawValue: "development")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

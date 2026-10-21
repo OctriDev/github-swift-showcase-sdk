@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Search domain models
+// Search domain models
 /// Label Search Result Item
 public struct LabelSearchResultItem: Codable {
     /// Required `integer` value serialized in the `id` wire field.
@@ -43,53 +43,39 @@ public struct LabelSearchResultItem: Codable {
         case textMatches = "text_matches"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension LabelSearchResultItem {
-    init(from decoder: Decoder) throws {
+extension LabelSearchResultItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        url = try container.sdkDecodeRequired(.url)
-        name = try container.sdkDecodeRequired(.name)
-        color = try container.sdkDecodeRequired(.color)
-        self.default = try container.sdkDecodeRequired(.default)
-        description = try container.sdkDecodeNullable(.description)
-        archivedAt = try container.sdkDecodeNullable(.archivedAt)
-        archivedBy = try container.sdkDecodeNullable(.archivedBy)
-        score = try container.sdkDecodeRequired(.score)
-        textMatches = try container.sdkDecodeIfPresent(.textMatches)
-        try sdkValidateUri("url", url)
-        if let value = archivedAt {
+        self.id = try container.sdkDecodeRequired(.id)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.color = try container.sdkDecodeRequired(.color)
+        self.`default` = try container.sdkDecodeRequired(.`default`)
+        self.description = try container.sdkDecodeNullable(.description)
+        self.archivedAt = try container.sdkDecodeNullable(.archivedAt)
+        self.archivedBy = try container.sdkDecodeNullable(.archivedBy)
+        self.score = try container.sdkDecodeRequired(.score)
+        self.textMatches = try container.sdkDecodeIfPresent(.textMatches)
+            try sdkValidateUri("url", self.url)
+        if let value = self.archivedAt {
             try sdkValidateDateTime("archived_at", sdkWireString(value))
         }
     }
 }
 
-public extension LabelSearchResultItem {
-    init(
-        id: Int,
-        nodeId: String,
-        url: String,
-        name: String,
-        color: String,
-        default: Bool,
-        description: String?,
-        archivedAt: Date?,
-        archivedBy: SimpleUser?,
-        score: Double,
-        textMatches: SearchResultTextMatches? = nil
-    ) throws {
+extension LabelSearchResultItem {
+    public init(id: Int, nodeId: String, url: String, name: String, color: String, `default`: Bool, description: String?, archivedAt: Date?, archivedBy: SimpleUser?, score: Double, textMatches: SearchResultTextMatches? = nil) throws {
         (self.id, self.nodeId) = (id, nodeId)
         (self.url, self.name) = (url, name)
-        (self.color, self.default) = (color, `default`)
+        (self.color, self.`default`) = (color, `default`)
         (self.description, self.archivedAt) = (description, archivedAt)
         (self.archivedBy, self.score) = (archivedBy, score)
         self.textMatches = textMatches
-        try sdkValidateUri("url", self.url)
+            try sdkValidateUri("url", self.url)
         if let value = self.archivedAt {
             try sdkValidateDateTime("archived_at", sdkWireString(value))
         }

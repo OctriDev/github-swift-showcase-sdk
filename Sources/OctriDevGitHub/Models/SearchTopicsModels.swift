@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Search domain models
+// Search domain models
 /// Optional object value serialized in the `topic_relation` wire field.
 public struct TopicSearchResultItemRelatedItemTopicRelation: Codable {
     /// Optional `integer` value serialized in the `id` wire field.
@@ -23,22 +23,22 @@ public struct TopicSearchResultItemRelatedItemTopicRelation: Codable {
     }
 
     init() {
-        (id, name, topicId, relationType) = (nil, nil, nil, nil)
+        (self.id, self.name, self.topicId, self.relationType) = (nil, nil, nil, nil)
     }
 }
 
-public extension TopicSearchResultItemRelatedItemTopicRelation {
-    init(from decoder: Decoder) throws {
+extension TopicSearchResultItemRelatedItemTopicRelation {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeIfPresent(.id)
-        name = try container.sdkDecodeIfPresent(.name)
-        topicId = try container.sdkDecodeIfPresent(.topicId)
-        relationType = try container.sdkDecodeIfPresent(.relationType)
+        self.id = try container.sdkDecodeIfPresent(.id)
+        self.name = try container.sdkDecodeIfPresent(.name)
+        self.topicId = try container.sdkDecodeIfPresent(.topicId)
+        self.relationType = try container.sdkDecodeIfPresent(.relationType)
     }
 }
 
-public extension TopicSearchResultItemRelatedItemTopicRelation {
-    init(id: Int? = nil, name: String? = nil, topicId: Int? = nil, relationType: String? = nil) {
+extension TopicSearchResultItemRelatedItemTopicRelation {
+    public init(id: Int? = nil, name: String? = nil, topicId: Int? = nil, relationType: String? = nil) {
         self.init()
         (self.id, self.name) = (id, name)
         (self.topicId, self.relationType) = (topicId, relationType)
@@ -99,57 +99,38 @@ public struct TopicSearchResultItem: Codable {
         case aliases
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension TopicSearchResultItem {
-    init(from decoder: Decoder) throws {
+extension TopicSearchResultItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        name = try container.sdkDecodeRequired(.name)
-        displayName = try container.sdkDecodeNullable(.displayName)
-        shortDescription = try container.sdkDecodeNullable(.shortDescription)
-        description = try container.sdkDecodeNullable(.description)
-        createdBy = try container.sdkDecodeNullable(.createdBy)
-        released = try container.sdkDecodeNullable(.released)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        featured = try container.sdkDecodeRequired(.featured)
-        curated = try container.sdkDecodeRequired(.curated)
-        score = try container.sdkDecodeRequired(.score)
-        repositoryCount = try container.sdkDecodeIfPresent(.repositoryCount)
-        logoUrl = try container.sdkDecodeIfPresent(.logoUrl)
-        textMatches = try container.sdkDecodeIfPresent(.textMatches)
-        related = try container.sdkDecodeIfPresent(.related)
-        aliases = try container.sdkDecodeIfPresent(.aliases)
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
-        if let value = logoUrl {
+        self.name = try container.sdkDecodeRequired(.name)
+        self.displayName = try container.sdkDecodeNullable(.displayName)
+        self.shortDescription = try container.sdkDecodeNullable(.shortDescription)
+        self.description = try container.sdkDecodeNullable(.description)
+        self.createdBy = try container.sdkDecodeNullable(.createdBy)
+        self.released = try container.sdkDecodeNullable(.released)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        self.featured = try container.sdkDecodeRequired(.featured)
+        self.curated = try container.sdkDecodeRequired(.curated)
+        self.score = try container.sdkDecodeRequired(.score)
+        self.repositoryCount = try container.sdkDecodeIfPresent(.repositoryCount)
+        self.logoUrl = try container.sdkDecodeIfPresent(.logoUrl)
+        self.textMatches = try container.sdkDecodeIfPresent(.textMatches)
+        self.related = try container.sdkDecodeIfPresent(.related)
+        self.aliases = try container.sdkDecodeIfPresent(.aliases)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+        if let value = self.logoUrl {
             try sdkValidateUri("logo_url", value)
         }
     }
 }
 
-public extension TopicSearchResultItem {
-    init(
-        name: String,
-        displayName: String?,
-        shortDescription: String?,
-        description: String?,
-        createdBy: String?,
-        released: String?,
-        createdAt: Date,
-        updatedAt: Date,
-        featured: Bool,
-        curated: Bool,
-        score: Double,
-        repositoryCount: Int? = nil,
-        logoUrl: String? = nil,
-        textMatches: SearchResultTextMatches? = nil,
-        related: [TopicSearchResultItemRelatedItem]? = nil,
-        aliases: [TopicSearchResultItemAliasesItem]? = nil
-    ) throws {
+extension TopicSearchResultItem {
+    public init(name: String, displayName: String?, shortDescription: String?, description: String?, createdBy: String?, released: String?, createdAt: Date, updatedAt: Date, featured: Bool, curated: Bool, score: Double, repositoryCount: Int? = nil, logoUrl: String? = nil, textMatches: SearchResultTextMatches? = nil, related: [TopicSearchResultItemRelatedItem]? = nil, aliases: [TopicSearchResultItemAliasesItem]? = nil) throws {
         (self.name, self.displayName) = (name, displayName)
         (self.shortDescription, self.description) = (shortDescription, description)
         (self.createdBy, self.released) = (createdBy, released)
@@ -158,8 +139,8 @@ public extension TopicSearchResultItem {
         (self.score, self.repositoryCount) = (score, repositoryCount)
         (self.logoUrl, self.textMatches) = (logoUrl, textMatches)
         (self.related, self.aliases) = (related, aliases)
-        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
         if let value = self.logoUrl {
             try sdkValidateUri("logo_url", value)
         }
@@ -176,19 +157,19 @@ public struct TopicSearchResultItemRelatedItem: Codable {
     }
 
     init() {
-        topicRelation = nil
+        self.topicRelation = nil
     }
 }
 
-public extension TopicSearchResultItemRelatedItem {
-    init(from decoder: Decoder) throws {
+extension TopicSearchResultItemRelatedItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        topicRelation = try container.sdkDecodeIfPresent(.topicRelation)
+        self.topicRelation = try container.sdkDecodeIfPresent(.topicRelation)
     }
 }
 
-public extension TopicSearchResultItemRelatedItem {
-    init(topicRelation: TopicSearchResultItemRelatedItemTopicRelation? = nil) {
+extension TopicSearchResultItemRelatedItem {
+    public init(topicRelation: TopicSearchResultItemRelatedItemTopicRelation? = nil) {
         self.init()
         self.topicRelation = topicRelation
     }
@@ -204,19 +185,19 @@ public struct TopicSearchResultItemAliasesItem: Codable {
     }
 
     init() {
-        topicRelation = nil
+        self.topicRelation = nil
     }
 }
 
-public extension TopicSearchResultItemAliasesItem {
-    init(from decoder: Decoder) throws {
+extension TopicSearchResultItemAliasesItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        topicRelation = try container.sdkDecodeIfPresent(.topicRelation)
+        self.topicRelation = try container.sdkDecodeIfPresent(.topicRelation)
     }
 }
 
-public extension TopicSearchResultItemAliasesItem {
-    init(topicRelation: TopicSearchResultItemAliasesItemTopicRelation? = nil) {
+extension TopicSearchResultItemAliasesItem {
+    public init(topicRelation: TopicSearchResultItemAliasesItemTopicRelation? = nil) {
         self.init()
         self.topicRelation = topicRelation
     }
@@ -241,22 +222,22 @@ public struct TopicSearchResultItemAliasesItemTopicRelation: Codable {
     }
 
     init() {
-        (id, name, topicId, relationType) = (nil, nil, nil, nil)
+        (self.id, self.name, self.topicId, self.relationType) = (nil, nil, nil, nil)
     }
 }
 
-public extension TopicSearchResultItemAliasesItemTopicRelation {
-    init(from decoder: Decoder) throws {
+extension TopicSearchResultItemAliasesItemTopicRelation {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeIfPresent(.id)
-        name = try container.sdkDecodeIfPresent(.name)
-        topicId = try container.sdkDecodeIfPresent(.topicId)
-        relationType = try container.sdkDecodeIfPresent(.relationType)
+        self.id = try container.sdkDecodeIfPresent(.id)
+        self.name = try container.sdkDecodeIfPresent(.name)
+        self.topicId = try container.sdkDecodeIfPresent(.topicId)
+        self.relationType = try container.sdkDecodeIfPresent(.relationType)
     }
 }
 
-public extension TopicSearchResultItemAliasesItemTopicRelation {
-    init(id: Int? = nil, name: String? = nil, topicId: Int? = nil, relationType: String? = nil) {
+extension TopicSearchResultItemAliasesItemTopicRelation {
+    public init(id: Int? = nil, name: String? = nil, topicId: Int? = nil, relationType: String? = nil) {
         self.init()
         (self.id, self.name) = (id, name)
         (self.topicId, self.relationType) = (topicId, relationType)

@@ -6,12 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension SecurityAdvisoriesMethods {
-    /// Create a temporary private fork to collaborate on fixing a security vulnerability in a repository. Repository
-    /// administrators, organization owners, and security managers can create a temporary private fork. The original
-    /// reporter of a privately reported vulnerability can also create one while they remain a collaborator on the
-    /// security advisory. > [!NOTE] > Forking a repository happens asynchronously. You may have to wait up to 5 minutes
-    /// before you can access the fork.
+extension SecurityAdvisoriesMethods {
+    /// Create a temporary private fork to collaborate on fixing a security vulnerability in a repository. Repository administrators, organization owners, and security managers can create a temporary private fork. The original reporter of a privately reported vulnerability can also create one while they remain a collaborator on the security advisory. > [!NOTE] > Forking a repository happens asynchronously. You may have to wait up to 5 minutes before you can access the fork.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -19,34 +15,7 @@ public extension SecurityAdvisoriesMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - ghsaId: The GHSA (GitHub Security Advisory) identifier of the advisory.
-    static func securityAdvisoriesCreateFork(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        ghsaId: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> FullRepository {
-        try await (sdkRequest(
-            "POST",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/security-advisories/",
-                sdkEncodePathSegment(sdkWireString(ghsaId)),
-                "/forks",
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "securityAdvisoriesCreateFork",
-            options: requestOptions,
-            errors: [
-                "400": BasicError.self,
-                "403": BasicError.self,
-                "404": BasicError.self,
-                "422": ValidationError.self,
-            ]
-        )).data
+    public static func securityAdvisoriesCreateFork(config: ClientConfig, owner: String, repo: String, ghsaId: String, requestOptions: RequestOptions? = nil) async throws -> FullRepository {
+        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/security-advisories/", sdkEncodePathSegment(sdkWireString(ghsaId)), "/forks"].joined(), config: config, decoder: .json, operationId: "securityAdvisoriesCreateFork", options: requestOptions, errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
     }
 }

@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Billing domain models
+// Billing domain models
 /// Typed representation of the `GetAllBudgets` API schema.
 public struct GetAllBudgets: Codable {
     /// Array of budget objects for the enterprise
@@ -25,37 +25,25 @@ public struct GetAllBudgets: Codable {
         case totalCount = "total_count"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension GetAllBudgets {
-    init(from decoder: Decoder) throws {
+extension GetAllBudgets {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.budgets) else {
-            throw SdkValidationError(
-                field: "budgets",
-                code: "required",
-                message: "Validation failed for 'budgets': value is required"
-            )
+            throw SdkValidationError(field: "budgets", code: "required", message: "Validation failed for 'budgets': value is required")
         }
-        budgets = try container.sdkDecodeRequired(.budgets)
-        user = try container.sdkDecodeIfPresent(.user)
-        effectiveBudget = try container.sdkDecodeIfPresent(.effectiveBudget)
-        hasNextPage = try container.sdkDecodeIfPresent(.hasNextPage)
-        totalCount = try container.sdkDecodeIfPresent(.totalCount)
+        self.budgets = try container.sdkDecodeRequired(.budgets)
+        self.user = try container.sdkDecodeIfPresent(.user)
+        self.effectiveBudget = try container.sdkDecodeIfPresent(.effectiveBudget)
+        self.hasNextPage = try container.sdkDecodeIfPresent(.hasNextPage)
+        self.totalCount = try container.sdkDecodeIfPresent(.totalCount)
     }
 }
 
-public extension GetAllBudgets {
-    init(
-        budgets: [Budget],
-        user: String? = nil,
-        effectiveBudget: GetAllBudgetsEffectiveBudget? = nil,
-        hasNextPage: Bool? = nil,
-        totalCount: Int? = nil
-    ) {
+extension GetAllBudgets {
+    public init(budgets: [Budget], user: String? = nil, effectiveBudget: GetAllBudgetsEffectiveBudget? = nil, hasNextPage: Bool? = nil, totalCount: Int? = nil) {
         (self.budgets, self.user) = (budgets, user)
         (self.effectiveBudget, self.hasNextPage) = (effectiveBudget, hasNextPage)
         self.totalCount = totalCount
@@ -76,35 +64,25 @@ public struct BudgetBudgetAlerting: Codable {
         case alertRecipients = "alert_recipients"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension BudgetBudgetAlerting {
-    init(from decoder: Decoder) throws {
+extension BudgetBudgetAlerting {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.willAlert) else {
-            throw SdkValidationError(
-                field: "will_alert",
-                code: "required",
-                message: "Validation failed for 'will_alert': value is required"
-            )
+            throw SdkValidationError(field: "will_alert", code: "required", message: "Validation failed for 'will_alert': value is required")
         }
         guard container.contains(.alertRecipients) else {
-            throw SdkValidationError(
-                field: "alert_recipients",
-                code: "required",
-                message: "Validation failed for 'alert_recipients': value is required"
-            )
+            throw SdkValidationError(field: "alert_recipients", code: "required", message: "Validation failed for 'alert_recipients': value is required")
         }
-        willAlert = try container.sdkDecodeRequired(.willAlert)
-        alertRecipients = try container.sdkDecodeRequired(.alertRecipients)
+        self.willAlert = try container.sdkDecodeRequired(.willAlert)
+        self.alertRecipients = try container.sdkDecodeRequired(.alertRecipients)
     }
 }
 
-public extension BudgetBudgetAlerting {
-    init(willAlert: Bool, alertRecipients: [String]) {
+extension BudgetBudgetAlerting {
+    public init(willAlert: Bool, alertRecipients: [String]) {
         (self.willAlert, self.alertRecipients) = (willAlert, alertRecipients)
     }
 }
@@ -115,32 +93,22 @@ public indirect enum BudgetBudgetType {
 }
 
 extension BudgetBudgetType: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for BudgetBudgetType"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for BudgetBudgetType")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
 extension BudgetBudgetType {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) {
-            return .stringValue(value)
-        }
-        if let value = try? container.decode(String.self) {
-            return .stringValue1(value)
-        }
+        if let value = try? container.decode(String.self) { return .stringValue(value) }
+        if let value = try? container.decode(String.self) { return .stringValue1(value) }
         return nil
     }
 }
@@ -170,43 +138,29 @@ public struct GetAllBudgetsEffectiveBudget: Codable {
         case consumedAmount = "consumed_amount"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension GetAllBudgetsEffectiveBudget {
-    init(from decoder: Decoder) throws {
+extension GetAllBudgetsEffectiveBudget {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
         guard container.contains(.budgetAmount) else {
-            throw SdkValidationError(
-                field: "budget_amount",
-                code: "required",
-                message: "Validation failed for 'budget_amount': value is required"
-            )
+            throw SdkValidationError(field: "budget_amount", code: "required", message: "Validation failed for 'budget_amount': value is required")
         }
         guard container.contains(.consumedAmount) else {
-            throw SdkValidationError(
-                field: "consumed_amount",
-                code: "required",
-                message: "Validation failed for 'consumed_amount': value is required"
-            )
+            throw SdkValidationError(field: "consumed_amount", code: "required", message: "Validation failed for 'consumed_amount': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
-        budgetAmount = try container.sdkDecodeRequired(.budgetAmount)
-        consumedAmount = try container.sdkDecodeRequired(.consumedAmount)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.budgetAmount = try container.sdkDecodeRequired(.budgetAmount)
+        self.consumedAmount = try container.sdkDecodeRequired(.consumedAmount)
     }
 }
 
-public extension GetAllBudgetsEffectiveBudget {
-    init(id: String, budgetAmount: Int, consumedAmount: Double) {
+extension GetAllBudgetsEffectiveBudget {
+    public init(id: String, budgetAmount: Int, consumedAmount: Double) {
         (self.id, self.budgetAmount) = (id, budgetAmount)
         self.consumedAmount = consumedAmount
     }
@@ -260,94 +214,52 @@ public struct Budget: Codable {
         case expiresAt = "expires_at"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension Budget {
-    init(from decoder: Decoder) throws {
+extension Budget {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
         guard container.contains(.budgetType) else {
-            throw SdkValidationError(
-                field: "budget_type",
-                code: "required",
-                message: "Validation failed for 'budget_type': value is required"
-            )
+            throw SdkValidationError(field: "budget_type", code: "required", message: "Validation failed for 'budget_type': value is required")
         }
         guard container.contains(.budgetAmount) else {
-            throw SdkValidationError(
-                field: "budget_amount",
-                code: "required",
-                message: "Validation failed for 'budget_amount': value is required"
-            )
+            throw SdkValidationError(field: "budget_amount", code: "required", message: "Validation failed for 'budget_amount': value is required")
         }
         guard container.contains(.preventFurtherUsage) else {
-            throw SdkValidationError(
-                field: "prevent_further_usage",
-                code: "required",
-                message: "Validation failed for 'prevent_further_usage': value is required"
-            )
+            throw SdkValidationError(field: "prevent_further_usage", code: "required", message: "Validation failed for 'prevent_further_usage': value is required")
         }
         guard container.contains(.budgetScope) else {
-            throw SdkValidationError(
-                field: "budget_scope",
-                code: "required",
-                message: "Validation failed for 'budget_scope': value is required"
-            )
+            throw SdkValidationError(field: "budget_scope", code: "required", message: "Validation failed for 'budget_scope': value is required")
         }
         guard container.contains(.budgetProductSku) else {
-            throw SdkValidationError(
-                field: "budget_product_sku",
-                code: "required",
-                message: "Validation failed for 'budget_product_sku': value is required"
-            )
+            throw SdkValidationError(field: "budget_product_sku", code: "required", message: "Validation failed for 'budget_product_sku': value is required")
         }
         guard container.contains(.budgetAlerting) else {
-            throw SdkValidationError(
-                field: "budget_alerting",
-                code: "required",
-                message: "Validation failed for 'budget_alerting': value is required"
-            )
+            throw SdkValidationError(field: "budget_alerting", code: "required", message: "Validation failed for 'budget_alerting': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
-        budgetType = try container.sdkDecodeRequired(.budgetType)
-        budgetAmount = try container.sdkDecodeRequired(.budgetAmount)
-        preventFurtherUsage = try container.sdkDecodeRequired(.preventFurtherUsage)
-        budgetScope = try container.sdkDecodeRequired(.budgetScope)
-        budgetProductSku = try container.sdkDecodeRequired(.budgetProductSku)
-        budgetAlerting = try container.sdkDecodeRequired(.budgetAlerting)
-        budgetEntityName = try container.sdkDecodeIfPresent(.budgetEntityName)
-        user = try container.sdkDecodeIfPresent(.user)
-        consumedAmount = try container.sdkDecodeIfPresent(.consumedAmount)
-        expiresAt = try container.sdkDecodeIfPresent(.expiresAt)
-        if let value = expiresAt {
+        self.id = try container.sdkDecodeRequired(.id)
+        self.budgetType = try container.sdkDecodeRequired(.budgetType)
+        self.budgetAmount = try container.sdkDecodeRequired(.budgetAmount)
+        self.preventFurtherUsage = try container.sdkDecodeRequired(.preventFurtherUsage)
+        self.budgetScope = try container.sdkDecodeRequired(.budgetScope)
+        self.budgetProductSku = try container.sdkDecodeRequired(.budgetProductSku)
+        self.budgetAlerting = try container.sdkDecodeRequired(.budgetAlerting)
+        self.budgetEntityName = try container.sdkDecodeIfPresent(.budgetEntityName)
+        self.user = try container.sdkDecodeIfPresent(.user)
+        self.consumedAmount = try container.sdkDecodeIfPresent(.consumedAmount)
+        self.expiresAt = try container.sdkDecodeIfPresent(.expiresAt)
+        if let value = self.expiresAt {
             try sdkValidateDate("expires_at", value)
         }
     }
 }
 
-public extension Budget {
-    init(
-        id: String,
-        budgetType: BudgetBudgetType,
-        budgetAmount: Int,
-        preventFurtherUsage: Bool,
-        budgetScope: BudgetBudgetScope,
-        budgetProductSku: String,
-        budgetAlerting: BudgetBudgetAlerting,
-        budgetEntityName: String? = nil,
-        user: String? = nil,
-        consumedAmount: Double? = nil,
-        expiresAt: String? = nil
-    ) throws {
+extension Budget {
+    public init(id: String, budgetType: BudgetBudgetType, budgetAmount: Int, preventFurtherUsage: Bool, budgetScope: BudgetBudgetScope, budgetProductSku: String, budgetAlerting: BudgetBudgetAlerting, budgetEntityName: String? = nil, user: String? = nil, consumedAmount: Double? = nil, expiresAt: String? = nil) throws {
         (self.id, self.budgetType) = (id, budgetType)
         (self.budgetAmount, self.preventFurtherUsage) = (budgetAmount, preventFurtherUsage)
         (self.budgetScope, self.budgetProductSku) = (budgetScope, budgetProductSku)
@@ -364,10 +276,7 @@ public extension Budget {
 public struct BudgetBudgetScope: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let enterprise = BudgetBudgetScope(rawValue: "enterprise")
     public static let organization = BudgetBudgetScope(rawValue: "organization")
     public static let repository = BudgetBudgetScope(rawValue: "repository")
@@ -378,7 +287,7 @@ public struct BudgetBudgetScope: RawRepresentable, Hashable, Codable, Sendable, 
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -391,15 +300,12 @@ public struct BudgetBudgetScope: RawRepresentable, Hashable, Codable, Sendable, 
 public struct BudgetBudgetTypeVariant1: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let productPricing = BudgetBudgetTypeVariant1(rawValue: "ProductPricing")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -412,15 +318,12 @@ public struct BudgetBudgetTypeVariant1: RawRepresentable, Hashable, Codable, Sen
 public struct BudgetBudgetTypeVariant0: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let skuPricing = BudgetBudgetTypeVariant0(rawValue: "SkuPricing")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

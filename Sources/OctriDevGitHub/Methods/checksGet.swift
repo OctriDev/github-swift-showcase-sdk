@@ -6,11 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ChecksMethods {
-    /// Gets a single check run using its `id`. > [!NOTE] > The Checks API only looks for pushes in the repository where
-    /// the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return
-    /// an empty `pull_requests` array. OAuth app tokens and personal access tokens (classic) need the `repo` scope to
-    /// use this endpoint on a private repository.
+extension ChecksMethods {
+    /// Gets a single check run using its `id`. > [!NOTE] > The Checks API only looks for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint on a private repository.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -18,34 +15,11 @@ public extension ChecksMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - checkRunId: The unique identifier of the check run.
-    static func checksGet(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        checkRunId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CheckRun {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/check-runs/",
-                sdkEncodePathSegment(sdkWireString(checkRunId)),
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "checksGet",
-            options: requestOptions
-        )).data
+    public static func checksGet(config: ClientConfig, owner: String, repo: String, checkRunId: Int, requestOptions: RequestOptions? = nil) async throws -> CheckRun {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/check-runs/", sdkEncodePathSegment(sdkWireString(checkRunId))].joined(), config: config, decoder: .json, operationId: "checksGet", options: requestOptions)).data
     }
 
-    /// Updates a check run for a specific commit in a repository. > [!NOTE] > The endpoints to manage checks only look
-    /// for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked
-    /// repository are not detected and return an empty `pull_requests` array. OAuth apps and personal access tokens
-    /// (classic) cannot use this endpoint.
+    /// Updates a check run for a specific commit in a repository. > [!NOTE] > The endpoints to manage checks only look for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array. OAuth apps and personal access tokens (classic) cannot use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -53,29 +27,7 @@ public extension ChecksMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - checkRunId: The unique identifier of the check run.
-    static func checksUpdate(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        checkRunId: Int,
-        body: [String: JSONValue],
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CheckRun {
-        try await (sdkRequest(
-            "PATCH",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/check-runs/",
-                sdkEncodePathSegment(sdkWireString(checkRunId)),
-            ].joined(),
-            config: config,
-            rawBody: sdkEncodeBody(body, contentType: "application/json"),
-            decoder: .json,
-            operationId: "checksUpdate",
-            options: requestOptions
-        )).data
+    public static func checksUpdate(config: ClientConfig, owner: String, repo: String, checkRunId: Int, body: [String: JSONValue], requestOptions: RequestOptions? = nil) async throws -> CheckRun {
+        return try (await sdkRequest("PATCH", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/check-runs/", sdkEncodePathSegment(sdkWireString(checkRunId))].joined(), config: config, rawBody: (try sdkEncodeBody(body, contentType: "application/json")), decoder: .json, operationId: "checksUpdate", options: requestOptions)).data
     }
 }

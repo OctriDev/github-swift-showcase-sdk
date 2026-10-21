@@ -6,10 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension CodespacesMethods {
-    /// Sets which users can access codespaces in an organization. This is synonymous with granting or revoking
-    /// codespaces access permissions for users according to the visibility. OAuth app tokens and personal access tokens
-    /// (classic) need the `admin:org` scope to use this endpoint.
+extension CodespacesMethods {
+    /// Sets which users can access codespaces in an organization. This is synonymous with granting or revoking codespaces access permissions for users according to the visibility. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
@@ -21,31 +19,13 @@ public extension CodespacesMethods {
     ///   value.
     ///
     /// - Warning: This operation is deprecated and may be removed in a future release.
-    static func codespacesSetCodespacesAccess(
-        config: ClientConfig,
-        org: String,
-        visibility: CodespacesSetCodespacesAccessRequestBodyVisibility,
-        selectedUsernames: [String]? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        if let selectedUsernames {
+    public static func codespacesSetCodespacesAccess(config: ClientConfig, org: String, visibility: CodespacesSetCodespacesAccessRequestBodyVisibility, selectedUsernames: [String]? = nil, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        if let selectedUsernames = selectedUsernames {
             try validateItems("selected_usernames", selectedUsernames, max: 100)
         }
 
-        let requestBody = CodespacesSetCodespacesAccessRequestBody(
-            visibility: visibility,
-            selectedUsernames: selectedUsernames
-        )
+        let requestBody = CodespacesSetCodespacesAccessRequestBody(visibility: visibility, selectedUsernames: selectedUsernames)
 
-        return try await (sdkRequest(
-            "PUT",
-            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/codespaces/access"].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .empty,
-            operationId: "codespacesSetCodespacesAccess",
-            options: requestOptions,
-            errors: ["404": BasicError.self, "422": ValidationError.self, "500": BasicError.self]
-        )).data
+        return try (await sdkRequest("PUT", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/codespaces/access"].joined(), config: config, body: requestBody, decoder: .empty, operationId: "codespacesSetCodespacesAccess", options: requestOptions, errors: ["404": BasicError.self, "422": ValidationError.self, "500": BasicError.self])).data
     }
 }

@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Billing domain models
+// Billing domain models
 /// Required object value serialized in the `budget_alerting` wire field.
 public struct GetBudgetBudgetAlerting: Codable {
     /// Whether alerts are enabled for this budget. Present but not applicable for user-scope as alerting is always
@@ -21,20 +21,20 @@ public struct GetBudgetBudgetAlerting: Codable {
     }
 
     init() {
-        (willAlert, alertRecipients) = (nil, nil)
+        (self.willAlert, self.alertRecipients) = (nil, nil)
     }
 }
 
-public extension GetBudgetBudgetAlerting {
-    init(from decoder: Decoder) throws {
+extension GetBudgetBudgetAlerting {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        willAlert = try container.sdkDecodeIfPresent(.willAlert)
-        alertRecipients = try container.sdkDecodeIfPresent(.alertRecipients)
+        self.willAlert = try container.sdkDecodeIfPresent(.willAlert)
+        self.alertRecipients = try container.sdkDecodeIfPresent(.alertRecipients)
     }
 }
 
-public extension GetBudgetBudgetAlerting {
-    init(willAlert: Bool? = nil, alertRecipients: [String]? = nil) {
+extension GetBudgetBudgetAlerting {
+    public init(willAlert: Bool? = nil, alertRecipients: [String]? = nil) {
         self.init()
         (self.willAlert, self.alertRecipients) = (willAlert, alertRecipients)
     }
@@ -46,32 +46,22 @@ public indirect enum GetBudgetBudgetType {
 }
 
 extension GetBudgetBudgetType: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for GetBudgetBudgetType"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for GetBudgetBudgetType")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
 extension GetBudgetBudgetType {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) {
-            return .stringValue(value)
-        }
-        if let value = try? container.decode(String.self) {
-            return .stringValue1(value)
-        }
+        if let value = try? container.decode(String.self) { return .stringValue(value) }
+        if let value = try? container.decode(String.self) { return .stringValue1(value) }
         return nil
     }
 }
@@ -129,40 +119,27 @@ public struct GetBudget: Codable {
         case consumedAmount = "consumed_amount"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension GetBudget {
-    init(from decoder: Decoder) throws {
+extension GetBudget {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeRequired(.id)
-        budgetScope = try container.sdkDecodeRequired(.budgetScope)
-        budgetEntityName = try container.sdkDecodeRequired(.budgetEntityName)
-        budgetAmount = try container.sdkDecodeRequired(.budgetAmount)
-        preventFurtherUsage = try container.sdkDecodeRequired(.preventFurtherUsage)
-        budgetProductSku = try container.sdkDecodeRequired(.budgetProductSku)
-        budgetType = try container.sdkDecodeRequired(.budgetType)
-        budgetAlerting = try container.sdkDecodeRequired(.budgetAlerting)
-        user = try container.sdkDecodeIfPresent(.user)
-        consumedAmount = try container.sdkDecodeIfPresent(.consumedAmount)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.budgetScope = try container.sdkDecodeRequired(.budgetScope)
+        self.budgetEntityName = try container.sdkDecodeRequired(.budgetEntityName)
+        self.budgetAmount = try container.sdkDecodeRequired(.budgetAmount)
+        self.preventFurtherUsage = try container.sdkDecodeRequired(.preventFurtherUsage)
+        self.budgetProductSku = try container.sdkDecodeRequired(.budgetProductSku)
+        self.budgetType = try container.sdkDecodeRequired(.budgetType)
+        self.budgetAlerting = try container.sdkDecodeRequired(.budgetAlerting)
+        self.user = try container.sdkDecodeIfPresent(.user)
+        self.consumedAmount = try container.sdkDecodeIfPresent(.consumedAmount)
     }
 }
 
-public extension GetBudget {
-    init(
-        id: String,
-        budgetScope: GetBudgetBudgetScope,
-        budgetEntityName: String,
-        budgetAmount: Int,
-        preventFurtherUsage: Bool,
-        budgetProductSku: String,
-        budgetType: GetBudgetBudgetType,
-        budgetAlerting: GetBudgetBudgetAlerting,
-        user: String? = nil,
-        consumedAmount: Double? = nil
-    ) {
+extension GetBudget {
+    public init(id: String, budgetScope: GetBudgetBudgetScope, budgetEntityName: String, budgetAmount: Int, preventFurtherUsage: Bool, budgetProductSku: String, budgetType: GetBudgetBudgetType, budgetAlerting: GetBudgetBudgetAlerting, user: String? = nil, consumedAmount: Double? = nil) {
         (self.id, self.budgetScope) = (id, budgetScope)
         (self.budgetEntityName, self.budgetAmount) = (budgetEntityName, budgetAmount)
         (self.preventFurtherUsage, self.budgetProductSku) = (preventFurtherUsage, budgetProductSku)
@@ -175,15 +152,12 @@ public extension GetBudget {
 public struct GetBudgetBudgetTypeVariant0: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let productPricing = GetBudgetBudgetTypeVariant0(rawValue: "ProductPricing")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -196,15 +170,12 @@ public struct GetBudgetBudgetTypeVariant0: RawRepresentable, Hashable, Codable, 
 public struct GetBudgetBudgetTypeVariant1: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let skuPricing = GetBudgetBudgetTypeVariant1(rawValue: "SkuPricing")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -217,10 +188,7 @@ public struct GetBudgetBudgetTypeVariant1: RawRepresentable, Hashable, Codable, 
 public struct GetBudgetBudgetScope: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let enterprise = GetBudgetBudgetScope(rawValue: "enterprise")
     public static let organization = GetBudgetBudgetScope(rawValue: "organization")
     public static let repository = GetBudgetBudgetScope(rawValue: "repository")
@@ -231,7 +199,7 @@ public struct GetBudgetBudgetScope: RawRepresentable, Hashable, Codable, Sendabl
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

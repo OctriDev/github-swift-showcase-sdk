@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// CodeQuality domain models
+// CodeQuality domain models
 /// You can use `run_url` to track the status of the run. This includes a property status and conclusion. You should
 /// not rely on this always being an actions workflow run object.
 public struct CodeQualitySetupUpdateResponse: Codable {
@@ -18,20 +18,20 @@ public struct CodeQualitySetupUpdateResponse: Codable {
     }
 
     init() {
-        (runId, runUrl) = (nil, nil)
+        (self.runId, self.runUrl) = (nil, nil)
     }
 }
 
-public extension CodeQualitySetupUpdateResponse {
-    init(from decoder: Decoder) throws {
+extension CodeQualitySetupUpdateResponse {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        runId = try container.sdkDecodeIfPresent(.runId)
-        runUrl = try container.sdkDecodeIfPresent(.runUrl)
+        self.runId = try container.sdkDecodeIfPresent(.runId)
+        self.runUrl = try container.sdkDecodeIfPresent(.runUrl)
     }
 }
 
-public extension CodeQualitySetupUpdateResponse {
-    init(runId: Int? = nil, runUrl: String? = nil) {
+extension CodeQualitySetupUpdateResponse {
+    public init(runId: Int? = nil, runUrl: String? = nil) {
         self.init()
         (self.runId, self.runUrl) = (runId, runUrl)
     }
@@ -60,29 +60,23 @@ public struct CodeQualitySetupUpdate: Codable {
     }
 
     init() {
-        (state, runnerType, runnerLabel, languages, aiFindingsOption) = (nil, nil, nil, nil, nil)
+        (self.state, self.runnerType, self.runnerLabel, self.languages, self.aiFindingsOption) = (nil, nil, nil, nil, nil)
     }
 }
 
-public extension CodeQualitySetupUpdate {
-    init(from decoder: Decoder) throws {
+extension CodeQualitySetupUpdate {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        state = try container.sdkDecodeIfPresent(.state)
-        runnerType = try container.sdkDecodeIfPresent(.runnerType)
-        runnerLabel = try container.sdkDecodeIfPresent(.runnerLabel)
-        languages = try container.sdkDecodeIfPresent(.languages)
-        aiFindingsOption = try container.sdkDecodeIfPresent(.aiFindingsOption)
+        self.state = try container.sdkDecodeIfPresent(.state)
+        self.runnerType = try container.sdkDecodeIfPresent(.runnerType)
+        self.runnerLabel = try container.sdkDecodeIfPresent(.runnerLabel)
+        self.languages = try container.sdkDecodeIfPresent(.languages)
+        self.aiFindingsOption = try container.sdkDecodeIfPresent(.aiFindingsOption)
     }
 }
 
-public extension CodeQualitySetupUpdate {
-    init(
-        state: CodeQualitySetupUpdateState? = nil,
-        runnerType: CodeQualitySetupUpdateRunnerType? = nil,
-        runnerLabel: String? = nil,
-        languages: [CodeQualitySetupUpdateLanguagesItem]? = nil,
-        aiFindingsOption: CodeQualitySetupUpdateAiFindingsOption? = nil
-    ) {
+extension CodeQualitySetupUpdate {
+    public init(state: CodeQualitySetupUpdateState? = nil, runnerType: CodeQualitySetupUpdateRunnerType? = nil, runnerLabel: String? = nil, languages: [CodeQualitySetupUpdateLanguagesItem]? = nil, aiFindingsOption: CodeQualitySetupUpdateAiFindingsOption? = nil) {
         self.init()
         (self.state, self.runnerType) = (state, runnerType)
         (self.runnerLabel, self.languages) = (runnerLabel, languages)
@@ -94,16 +88,13 @@ public extension CodeQualitySetupUpdate {
 public struct CodeQualitySetupUpdateState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let configured = CodeQualitySetupUpdateState(rawValue: "configured")
     public static let notConfigured = CodeQualitySetupUpdateState(rawValue: "not-configured")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -113,20 +104,16 @@ public struct CodeQualitySetupUpdateState: RawRepresentable, Hashable, Codable, 
 }
 
 /// Whether AI findings run for Code Quality on this repository.
-public struct CodeQualitySetupUpdateAiFindingsOption: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct CodeQualitySetupUpdateAiFindingsOption: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let disabled = CodeQualitySetupUpdateAiFindingsOption(rawValue: "disabled")
     public static let onPush = CodeQualitySetupUpdateAiFindingsOption(rawValue: "on_push")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -139,16 +126,13 @@ public struct CodeQualitySetupUpdateAiFindingsOption: RawRepresentable, Hashable
 public struct CodeQualitySetupUpdateRunnerType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let standard = CodeQualitySetupUpdateRunnerType(rawValue: "standard")
     public static let labeled = CodeQualitySetupUpdateRunnerType(rawValue: "labeled")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -161,10 +145,7 @@ public struct CodeQualitySetupUpdateRunnerType: RawRepresentable, Hashable, Coda
 public struct CodeQualitySetupUpdateLanguagesItem: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let csharp = CodeQualitySetupUpdateLanguagesItem(rawValue: "csharp")
     public static let go = CodeQualitySetupUpdateLanguagesItem(rawValue: "go")
     public static let javaKotlin = CodeQualitySetupUpdateLanguagesItem(rawValue: "java-kotlin")
@@ -174,7 +155,7 @@ public struct CodeQualitySetupUpdateLanguagesItem: RawRepresentable, Hashable, C
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

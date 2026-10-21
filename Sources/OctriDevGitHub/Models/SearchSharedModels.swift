@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Search domain models
+// Search domain models
 public typealias SearchResultTextMatches = [SearchResultTextMatchesItem]
 
 /// Required object value serialized in the `text_matches[]` wire field.
@@ -28,29 +28,23 @@ public struct SearchResultTextMatchesItem: Codable {
     }
 
     init() {
-        (objectUrl, objectType, property, fragment, matches) = (nil, nil, nil, nil, nil)
+        (self.objectUrl, self.objectType, self.property, self.fragment, self.matches) = (nil, nil, nil, nil, nil)
     }
 }
 
-public extension SearchResultTextMatchesItem {
-    init(from decoder: Decoder) throws {
+extension SearchResultTextMatchesItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        objectUrl = try container.sdkDecodeIfPresent(.objectUrl)
-        objectType = try container.sdkDecodeIfPresent(.objectType)
-        property = try container.sdkDecodeIfPresent(.property)
-        fragment = try container.sdkDecodeIfPresent(.fragment)
-        matches = try container.sdkDecodeIfPresent(.matches)
+        self.objectUrl = try container.sdkDecodeIfPresent(.objectUrl)
+        self.objectType = try container.sdkDecodeIfPresent(.objectType)
+        self.property = try container.sdkDecodeIfPresent(.property)
+        self.fragment = try container.sdkDecodeIfPresent(.fragment)
+        self.matches = try container.sdkDecodeIfPresent(.matches)
     }
 }
 
-public extension SearchResultTextMatchesItem {
-    init(
-        objectUrl: String? = nil,
-        objectType: String? = nil,
-        property: String? = nil,
-        fragment: String? = nil,
-        matches: [SearchResultTextMatchesItemMatchesItem]? = nil
-    ) {
+extension SearchResultTextMatchesItem {
+    public init(objectUrl: String? = nil, objectType: String? = nil, property: String? = nil, fragment: String? = nil, matches: [SearchResultTextMatchesItemMatchesItem]? = nil) {
         self.init()
         (self.objectUrl, self.objectType) = (objectUrl, objectType)
         (self.property, self.fragment) = (property, fragment)
@@ -71,20 +65,20 @@ public struct SearchResultTextMatchesItemMatchesItem: Codable {
     }
 
     init() {
-        (text, indices) = (nil, nil)
+        (self.text, self.indices) = (nil, nil)
     }
 }
 
-public extension SearchResultTextMatchesItemMatchesItem {
-    init(from decoder: Decoder) throws {
+extension SearchResultTextMatchesItemMatchesItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        text = try container.sdkDecodeIfPresent(.text)
-        indices = try container.sdkDecodeIfPresent(.indices)
+        self.text = try container.sdkDecodeIfPresent(.text)
+        self.indices = try container.sdkDecodeIfPresent(.indices)
     }
 }
 
-public extension SearchResultTextMatchesItemMatchesItem {
-    init(text: String? = nil, indices: [Int]? = nil) {
+extension SearchResultTextMatchesItemMatchesItem {
+    public init(text: String? = nil, indices: [Int]? = nil) {
         self.init()
         (self.text, self.indices) = (text, indices)
     }

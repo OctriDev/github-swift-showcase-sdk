@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension IssuesMethods {
-    /// Creates a label for the specified repository with the given name and color. The name and color parameters are
-    /// required. The color must be a valid [hexadecimal color code](http://www.color-hex.com/).
+extension IssuesMethods {
+    /// Creates a label for the specified repository with the given name and color. The name and color parameters are required. The color must be a valid [hexadecimal color code](http://www.color-hex.com/).
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -25,32 +24,9 @@ public extension IssuesMethods {
     ///   label, without the leading `#`.
     /// - description: A short description of the label. Must be 100 characters or
     ///   fewer.
-    static func issuesCreateLabel(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        name: String,
-        color: String? = nil,
-        description: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> Label {
+    public static func issuesCreateLabel(config: ClientConfig, owner: String, repo: String, name: String, color: String? = nil, description: String? = nil, requestOptions: RequestOptions? = nil) async throws -> Label {
         let requestBody = IssuesCreateLabelRequestBody(name: name, color: color, description: description)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/labels",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "issuesCreateLabel",
-            options: requestOptions,
-            errors: ["404": BasicError.self, "422": ValidationError.self]
-        )).data
+        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/labels"].joined(), config: config, body: requestBody, decoder: .json, operationId: "issuesCreateLabel", options: requestOptions, errors: ["404": BasicError.self, "422": ValidationError.self])).data
     }
 }

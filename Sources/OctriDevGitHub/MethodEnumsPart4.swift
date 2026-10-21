@@ -7,27 +7,20 @@ import Foundation
     import FoundationNetworking
 #endif
 /// Machine-readable error code
-public struct AgentAutomationsEditRepoAutomationResponseErrorsItemCodeXce1214b7: RawRepresentable, Hashable, Codable,
-    Sendable, SdkWireConvertible {
+public struct AgentAutomationsEditRepoAutomationResponseErrorsItemCodeXce1214b7: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let missing = AgentAutomationsEditRepoAutomationResponseErrorsItemCodeXce1214b7(rawValue: "missing")
-    public static let missingField =
-        AgentAutomationsEditRepoAutomationResponseErrorsItemCodeXce1214b7(rawValue: "missing_field")
+    public static let missingField = AgentAutomationsEditRepoAutomationResponseErrorsItemCodeXce1214b7(rawValue: "missing_field")
     public static let invalid = AgentAutomationsEditRepoAutomationResponseErrorsItemCodeXce1214b7(rawValue: "invalid")
-    public static let alreadyExists =
-        AgentAutomationsEditRepoAutomationResponseErrorsItemCodeXce1214b7(rawValue: "already_exists")
-    public static let unprocessable =
-        AgentAutomationsEditRepoAutomationResponseErrorsItemCodeXce1214b7(rawValue: "unprocessable")
+    public static let alreadyExists = AgentAutomationsEditRepoAutomationResponseErrorsItemCodeXce1214b7(rawValue: "already_exists")
+    public static let unprocessable = AgentAutomationsEditRepoAutomationResponseErrorsItemCodeXce1214b7(rawValue: "unprocessable")
     public static let custom = AgentAutomationsEditRepoAutomationResponseErrorsItemCodeXce1214b7(rawValue: "custom")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -36,14 +29,10 @@ public struct AgentAutomationsEditRepoAutomationResponseErrorsItemCodeXce1214b7:
     }
 }
 
-public struct IssuesListForAuthenticatedUserParameter: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct IssuesListForAuthenticatedUserParameter: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let assigned = IssuesListForAuthenticatedUserParameter(rawValue: "assigned")
     public static let created = IssuesListForAuthenticatedUserParameter(rawValue: "created")
     public static let mentioned = IssuesListForAuthenticatedUserParameter(rawValue: "mentioned")
@@ -53,7 +42,7 @@ public struct IssuesListForAuthenticatedUserParameter: RawRepresentable, Hashabl
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -66,14 +55,10 @@ public struct IssuesListForAuthenticatedUserParameter: RawRepresentable, Hashabl
 /// admin permissions. - `no_access`: No default access (default) - `reader`: Organization members can read the
 /// space - `writer`: Organization members can read and edit the space - `admin`: Organization members have full
 /// admin access to the space
-public struct CopilotSpacesUpdateForOrgRequestBodyBaseRole: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct CopilotSpacesUpdateForOrgRequestBodyBaseRole: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let reader = CopilotSpacesUpdateForOrgRequestBodyBaseRole(rawValue: "reader")
     public static let writer = CopilotSpacesUpdateForOrgRequestBodyBaseRole(rawValue: "writer")
     public static let admin = CopilotSpacesUpdateForOrgRequestBodyBaseRole(rawValue: "admin")
@@ -81,7 +66,7 @@ public struct CopilotSpacesUpdateForOrgRequestBodyBaseRole: RawRepresentable, Ha
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -91,23 +76,18 @@ public struct CopilotSpacesUpdateForOrgRequestBodyBaseRole: RawRepresentable, Ha
 }
 
 /// Specify which types of repository this security configuration should be applied to by default.
-public struct CodeSecuritySetConfigurationAsDefaultRequestBodyDefaultForNewRepos: RawRepresentable, Hashable, Codable,
-    Sendable, SdkWireConvertible {
+public struct CodeSecuritySetConfigurationAsDefaultRequestBodyDefaultForNewRepos: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let all = CodeSecuritySetConfigurationAsDefaultRequestBodyDefaultForNewRepos(rawValue: "all")
     public static let none = CodeSecuritySetConfigurationAsDefaultRequestBodyDefaultForNewRepos(rawValue: "none")
-    public static let privateAndInternal =
-        CodeSecuritySetConfigurationAsDefaultRequestBodyDefaultForNewRepos(rawValue: "private_and_internal")
+    public static let privateAndInternal = CodeSecuritySetConfigurationAsDefaultRequestBodyDefaultForNewRepos(rawValue: "private_and_internal")
     public static let `public` = CodeSecuritySetConfigurationAsDefaultRequestBodyDefaultForNewRepos(rawValue: "public")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -117,27 +97,20 @@ public struct CodeSecuritySetConfigurationAsDefaultRequestBodyDefaultForNewRepos
 }
 
 /// Machine-readable error code
-public struct AgentTasksListTasksForRepoResponseErrorsItemCodeX99fc27bc: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct AgentTasksListTasksForRepoResponseErrorsItemCodeX99fc27bc: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let missing = AgentTasksListTasksForRepoResponseErrorsItemCodeX99fc27bc(rawValue: "missing")
-    public static let missingField =
-        AgentTasksListTasksForRepoResponseErrorsItemCodeX99fc27bc(rawValue: "missing_field")
+    public static let missingField = AgentTasksListTasksForRepoResponseErrorsItemCodeX99fc27bc(rawValue: "missing_field")
     public static let invalid = AgentTasksListTasksForRepoResponseErrorsItemCodeX99fc27bc(rawValue: "invalid")
-    public static let alreadyExists =
-        AgentTasksListTasksForRepoResponseErrorsItemCodeX99fc27bc(rawValue: "already_exists")
-    public static let unprocessable =
-        AgentTasksListTasksForRepoResponseErrorsItemCodeX99fc27bc(rawValue: "unprocessable")
+    public static let alreadyExists = AgentTasksListTasksForRepoResponseErrorsItemCodeX99fc27bc(rawValue: "already_exists")
+    public static let unprocessable = AgentTasksListTasksForRepoResponseErrorsItemCodeX99fc27bc(rawValue: "unprocessable")
     public static let custom = AgentTasksListTasksForRepoResponseErrorsItemCodeX99fc27bc(rawValue: "custom")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -146,20 +119,16 @@ public struct AgentTasksListTasksForRepoResponseErrorsItemCodeX99fc27bc: RawRepr
     }
 }
 
-public struct CodeSecurityGetConfigurationsForOrgParameter: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct CodeSecurityGetConfigurationsForOrgParameter: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let global = CodeSecurityGetConfigurationsForOrgParameter(rawValue: "global")
     public static let all = CodeSecurityGetConfigurationsForOrgParameter(rawValue: "all")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -170,22 +139,16 @@ public struct CodeSecurityGetConfigurationsForOrgParameter: RawRepresentable, Ha
 
 /// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
 /// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
-public struct AgentAutomationsEditRepoAutomationRequestBodyTriggersPullRequX07597c9e9b: RawRepresentable, Hashable,
-    Codable, Sendable, SdkWireConvertible {
+public struct AgentAutomationsEditRepoAutomationRequestBodyTriggersPullRequX07597c9e9b: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let trigger =
-        AgentAutomationsEditRepoAutomationRequestBodyTriggersPullRequX07597c9e9b(rawValue: "trigger")
-    public static let repository =
-        AgentAutomationsEditRepoAutomationRequestBodyTriggersPullRequX07597c9e9b(rawValue: "repository")
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let trigger = AgentAutomationsEditRepoAutomationRequestBodyTriggersPullRequX07597c9e9b(rawValue: "trigger")
+    public static let repository = AgentAutomationsEditRepoAutomationRequestBodyTriggersPullRequX07597c9e9b(rawValue: "repository")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -197,14 +160,10 @@ public struct AgentAutomationsEditRepoAutomationRequestBodyTriggersPullRequX0759
 /// **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check.
 /// **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot
 /// change a check run conclusion to `stale`, only GitHub can set this.
-public struct ChecksUpdateRequestBodyVariant1Conclusion: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct ChecksUpdateRequestBodyVariant1Conclusion: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let actionRequired = ChecksUpdateRequestBodyVariant1Conclusion(rawValue: "action_required")
     public static let cancelled = ChecksUpdateRequestBodyVariant1Conclusion(rawValue: "cancelled")
     public static let failure = ChecksUpdateRequestBodyVariant1Conclusion(rawValue: "failure")
@@ -216,7 +175,7 @@ public struct ChecksUpdateRequestBodyVariant1Conclusion: RawRepresentable, Hasha
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -226,48 +185,29 @@ public struct ChecksUpdateRequestBodyVariant1Conclusion: RawRepresentable, Hasha
 }
 
 /// The registry type.
-public struct PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType: RawRepresentable, Hashable, Codable,
-    Sendable, SdkWireConvertible {
+public struct PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let mavenRepository =
-        PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "maven_repository")
-    public static let nugetFeed =
-        PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "nuget_feed")
-    public static let goproxyServer =
-        PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "goproxy_server")
-    public static let npmRegistry =
-        PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "npm_registry")
-    public static let rubygemsServer =
-        PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "rubygems_server")
-    public static let cargoRegistry =
-        PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "cargo_registry")
-    public static let composerRepository =
-        PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "composer_repository")
-    public static let dockerRegistry =
-        PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "docker_registry")
-    public static let gitSource =
-        PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "git_source")
-    public static let helmRegistry =
-        PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "helm_registry")
-    public static let hexOrganization =
-        PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "hex_organization")
-    public static let hexRepository =
-        PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "hex_repository")
-    public static let pubRepository =
-        PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "pub_repository")
-    public static let pythonIndex =
-        PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "python_index")
-    public static let terraformRegistry =
-        PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "terraform_registry")
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let mavenRepository = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "maven_repository")
+    public static let nugetFeed = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "nuget_feed")
+    public static let goproxyServer = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "goproxy_server")
+    public static let npmRegistry = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "npm_registry")
+    public static let rubygemsServer = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "rubygems_server")
+    public static let cargoRegistry = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "cargo_registry")
+    public static let composerRepository = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "composer_repository")
+    public static let dockerRegistry = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "docker_registry")
+    public static let gitSource = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "git_source")
+    public static let helmRegistry = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "helm_registry")
+    public static let hexOrganization = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "hex_organization")
+    public static let hexRepository = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "hex_repository")
+    public static let pubRepository = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "pub_repository")
+    public static let pythonIndex = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "python_index")
+    public static let terraformRegistry = PrivateRegistriesCreateOrgPrivateRegistryRequestBodyRegistryType(rawValue: "terraform_registry")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

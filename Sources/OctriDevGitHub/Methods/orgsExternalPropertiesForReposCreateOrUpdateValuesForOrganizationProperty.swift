@@ -6,46 +6,20 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension OrgsMethods {
-    /// Create new or update existing external custom property values for a single named property across repositories
-    /// that belong to an organization. Up to 100 repository values can be updated in a single request. Repositories not
-    /// included in the request are left unchanged. Using a value of `null` for a repository will remove or 'unset' the
-    /// property value for that repository. A request that only contains `null` values for a property that does not yet
-    /// exist is a no-op. To use this endpoint, the authenticated GitHub App must have the
-    /// `organization_external_properties_for_repos:write` permission.
+extension OrgsMethods {
+    /// Create new or update existing external custom property values for a single named property across repositories that belong to an organization. Up to 100 repository values can be updated in a single request. Repositories not included in the request are left unchanged. Using a value of `null` for a repository will remove or 'unset' the property value for that repository. A request that only contains `null` values for a property that does not yet exist is a no-op. To use this endpoint, the authenticated GitHub App must have the `organization_external_properties_for_repos:write` permission.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - propertyName: The name of the external custom property
     /// - repositoryValues: The names of repositories and the values that the named
     ///   external custom property will be set to.
-    static func orgsExternalPropertiesForReposCreateOrUpdateValuesForOrganizaX8613084668(
-        config: ClientConfig,
-        org: String,
-        propertyName: String,
-        repositoryValues: [RepositoryExternalPropertyPayload],
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
+    public static func orgsExternalPropertiesForReposCreateOrUpdateValuesForOrganizaX8613084668(config: ClientConfig, org: String, propertyName: String, repositoryValues: [RepositoryExternalPropertyPayload], requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
         try validateItems("repository_values", repositoryValues, min: 1, max: 100)
 
-        let requestBody =
-            OrgsExternalPropertiesForReposCreateOrUpdateValuesForOrganizaX717360a990(repositoryValues: repositoryValues)
+        let requestBody = OrgsExternalPropertiesForReposCreateOrUpdateValuesForOrganizaX717360a990(repositoryValues: repositoryValues)
 
-        return try await (sdkRequest(
-            "PATCH",
-            [
-                "/orgs/",
-                sdkEncodePathSegment(sdkWireString(org)),
-                "/properties/installations/values/",
-                sdkEncodePathSegment(sdkWireString(propertyName)),
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .empty,
-            operationId: "orgsExternalPropertiesForReposCreateOrUpdateValuesForOrganizationProperty",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self]
-        )).data
+        return try (await sdkRequest("PATCH", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/properties/installations/values/", sdkEncodePathSegment(sdkWireString(propertyName))].joined(), config: config, body: requestBody, decoder: .empty, operationId: "orgsExternalPropertiesForReposCreateOrUpdateValuesForOrganizationProperty", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
     }
 
     private struct OrgsExternalPropertiesForReposCreateOrUpdateValuesForOrganizaX717360a990: Encodable {
@@ -53,36 +27,16 @@ public extension OrgsMethods {
 
         func encode(to encoder: Encoder) throws {
             var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-            try keyedContainer.encode(repositoryValues, forKey: SdkCodingKey("repository_values"))
+            try keyedContainer.encode(self.repositoryValues, forKey: SdkCodingKey("repository_values"))
         }
     }
 
-    /// Removes all external custom property values for a specified property name across all repositories that belong to
-    /// an organization. To use this endpoint, the authenticated GitHub App must have the
-    /// `organization_external_properties_for_repos:write` permission.
+    /// Removes all external custom property values for a specified property name across all repositories that belong to an organization. To use this endpoint, the authenticated GitHub App must have the `organization_external_properties_for_repos:write` permission.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - propertyName: The name of the external custom property
-    static func orgsExternalPropertiesForReposDeleteOrganizationValues(
-        config: ClientConfig,
-        org: String,
-        propertyName: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "DELETE",
-            [
-                "/orgs/",
-                sdkEncodePathSegment(sdkWireString(org)),
-                "/properties/installations/values/",
-                sdkEncodePathSegment(sdkWireString(propertyName)),
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "orgsExternalPropertiesForReposDeleteOrganizationValues",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self]
-        )).data
+    public static func orgsExternalPropertiesForReposDeleteOrganizationValues(config: ClientConfig, org: String, propertyName: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("DELETE", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/properties/installations/values/", sdkEncodePathSegment(sdkWireString(propertyName))].joined(), config: config, decoder: .empty, operationId: "orgsExternalPropertiesForReposDeleteOrganizationValues", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
     }
 }

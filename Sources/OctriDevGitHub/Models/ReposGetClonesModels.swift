@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Repos domain models
+// Repos domain models
 /// Clone Traffic
 public struct CloneTraffic: Codable {
     /// Required `integer` value serialized in the `count` wire field.
@@ -21,43 +21,29 @@ public struct CloneTraffic: Codable {
         case clones
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension CloneTraffic {
-    init(from decoder: Decoder) throws {
+extension CloneTraffic {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.count) else {
-            throw SdkValidationError(
-                field: "count",
-                code: "required",
-                message: "Validation failed for 'count': value is required"
-            )
+            throw SdkValidationError(field: "count", code: "required", message: "Validation failed for 'count': value is required")
         }
         guard container.contains(.uniques) else {
-            throw SdkValidationError(
-                field: "uniques",
-                code: "required",
-                message: "Validation failed for 'uniques': value is required"
-            )
+            throw SdkValidationError(field: "uniques", code: "required", message: "Validation failed for 'uniques': value is required")
         }
         guard container.contains(.clones) else {
-            throw SdkValidationError(
-                field: "clones",
-                code: "required",
-                message: "Validation failed for 'clones': value is required"
-            )
+            throw SdkValidationError(field: "clones", code: "required", message: "Validation failed for 'clones': value is required")
         }
-        count = try container.sdkDecodeRequired(.count)
-        uniques = try container.sdkDecodeRequired(.uniques)
-        clones = try container.sdkDecodeRequired(.clones)
+        self.count = try container.sdkDecodeRequired(.count)
+        self.uniques = try container.sdkDecodeRequired(.uniques)
+        self.clones = try container.sdkDecodeRequired(.clones)
     }
 }
 
-public extension CloneTraffic {
-    init(count: Int, uniques: Int, clones: [Traffic]) {
+extension CloneTraffic {
+    public init(count: Int, uniques: Int, clones: [Traffic]) {
         (self.count, self.uniques) = (count, uniques)
         self.clones = clones
     }

@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Actions domain models
+// Actions domain models
 /// Actions OIDC subject customization for a repository
 public struct OidcCustomSubRepo: Codable {
     /// Whether to use the default template or not. If `true`, the `include_claim_keys` field is ignored.
@@ -24,35 +24,24 @@ public struct OidcCustomSubRepo: Codable {
         case subClaimPrefix = "sub_claim_prefix"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension OidcCustomSubRepo {
-    init(from decoder: Decoder) throws {
+extension OidcCustomSubRepo {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.useDefault) else {
-            throw SdkValidationError(
-                field: "use_default",
-                code: "required",
-                message: "Validation failed for 'use_default': value is required"
-            )
+            throw SdkValidationError(field: "use_default", code: "required", message: "Validation failed for 'use_default': value is required")
         }
-        useDefault = try container.sdkDecodeRequired(.useDefault)
-        includeClaimKeys = try container.sdkDecodeIfPresent(.includeClaimKeys)
-        useImmutableSubject = try container.sdkDecodeIfPresent(.useImmutableSubject)
-        subClaimPrefix = try container.sdkDecodeIfPresent(.subClaimPrefix)
+        self.useDefault = try container.sdkDecodeRequired(.useDefault)
+        self.includeClaimKeys = try container.sdkDecodeIfPresent(.includeClaimKeys)
+        self.useImmutableSubject = try container.sdkDecodeIfPresent(.useImmutableSubject)
+        self.subClaimPrefix = try container.sdkDecodeIfPresent(.subClaimPrefix)
     }
 }
 
-public extension OidcCustomSubRepo {
-    init(
-        useDefault: Bool,
-        includeClaimKeys: [String]? = nil,
-        useImmutableSubject: Bool? = nil,
-        subClaimPrefix: String? = nil
-    ) {
+extension OidcCustomSubRepo {
+    public init(useDefault: Bool, includeClaimKeys: [String]? = nil, useImmutableSubject: Bool? = nil, subClaimPrefix: String? = nil) {
         (self.useDefault, self.includeClaimKeys) = (useDefault, includeClaimKeys)
         (self.useImmutableSubject, self.subClaimPrefix) = (useImmutableSubject, subClaimPrefix)
     }

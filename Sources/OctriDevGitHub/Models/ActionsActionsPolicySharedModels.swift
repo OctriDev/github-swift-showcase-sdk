@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// ActionsActionsPolicy domain models
+// ActionsActionsPolicy domain models
 public indirect enum ActionsPolicyConditions {
     case actionsPolicyRepoConditions(ActionsPolicyRepoConditions)
     case actionsPolicyOrgConditions(ActionsPolicyOrgConditions)
@@ -11,26 +11,18 @@ public indirect enum ActionsPolicyConditions {
 }
 
 extension ActionsPolicyConditions: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let raw = try? container.decode(JSONValue.self) {
-            if let value = Self.decodeLossless1(from: container, raw) {
-                self = value; return
-            }
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
         }
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for ActionsPolicyConditions"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ActionsPolicyConditions")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
@@ -51,18 +43,9 @@ extension ActionsPolicyConditions {
 
 extension ActionsPolicyConditions {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container
-            .decode(ActionsPolicyRepoConditions.self) {
-            return .actionsPolicyRepoConditions(value)
-        }
-        if let value = try? container
-            .decode(ActionsPolicyOrgConditions.self) {
-            return .actionsPolicyOrgConditions(value)
-        }
-        if let value = try? container
-            .decode(ActionsPolicyEnterpriseConditions.self) {
-            return .actionsPolicyEnterpriseConditions(value)
-        }
+        if let value = try? container.decode(ActionsPolicyRepoConditions.self) { return .actionsPolicyRepoConditions(value) }
+        if let value = try? container.decode(ActionsPolicyOrgConditions.self) { return .actionsPolicyOrgConditions(value) }
+        if let value = try? container.decode(ActionsPolicyEnterpriseConditions.self) { return .actionsPolicyEnterpriseConditions(value) }
         return nil
     }
 }
@@ -88,44 +71,26 @@ public indirect enum ActionsPolicyEnterpriseConditions {
 }
 
 extension ActionsPolicyEnterpriseConditions: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for ActionsPolicyEnterpriseConditions"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ActionsPolicyEnterpriseConditions")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
 extension ActionsPolicyEnterpriseConditions {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode([String: JSONValue].self) {
-            return .jsonValue(value)
-        }
-        if let value = try? container.decode([String: JSONValue].self) {
-            return .jsonValue1(value)
-        }
-        if let value = try? container.decode([String: JSONValue].self) {
-            return .jsonValue2(value)
-        }
-        if let value = try? container.decode([String: JSONValue].self) {
-            return .jsonValue3(value)
-        }
-        if let value = try? container.decode([String: JSONValue].self) {
-            return .jsonValue4(value)
-        }
-        if let value = try? container.decode([String: JSONValue].self) {
-            return .jsonValue5(value)
-        }
+        if let value = try? container.decode([String: JSONValue].self) { return .jsonValue(value) }
+        if let value = try? container.decode([String: JSONValue].self) { return .jsonValue1(value) }
+        if let value = try? container.decode([String: JSONValue].self) { return .jsonValue2(value) }
+        if let value = try? container.decode([String: JSONValue].self) { return .jsonValue3(value) }
+        if let value = try? container.decode([String: JSONValue].self) { return .jsonValue4(value) }
+        if let value = try? container.decode([String: JSONValue].self) { return .jsonValue5(value) }
         return nil
     }
 }
@@ -151,41 +116,30 @@ public indirect enum ActionsPolicyOrgConditions {
 }
 
 extension ActionsPolicyOrgConditions: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let raw = try? container.decode(JSONValue.self) {
-            if let value = Self.decodeLossless1(from: container, raw) {
-                self = value; return
-            }
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
         }
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for ActionsPolicyOrgConditions"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ActionsPolicyOrgConditions")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
 extension ActionsPolicyOrgConditions {
     static func decodeLossless1(from container: SingleValueDecodingContainer, _ raw: JSONValue) -> Self? {
-        if let value = try? container.decode(ActionsPolicyOrgConditionsVariant0.self),
-           sdkKeepsEveryKey(value, of: raw) {
+        if let value = try? container.decode(ActionsPolicyOrgConditionsVariant0.self), sdkKeepsEveryKey(value, of: raw) {
             return .actionsPolicyOrgConditionsVariant0(value)
         }
-        if let value = try? container.decode(ActionsPolicyOrgConditionsVariant1.self),
-           sdkKeepsEveryKey(value, of: raw) {
+        if let value = try? container.decode(ActionsPolicyOrgConditionsVariant1.self), sdkKeepsEveryKey(value, of: raw) {
             return .actionsPolicyOrgConditionsVariant1(value)
         }
-        if let value = try? container.decode(ActionsPolicyOrgConditionsVariant2.self),
-           sdkKeepsEveryKey(value, of: raw) {
+        if let value = try? container.decode(ActionsPolicyOrgConditionsVariant2.self), sdkKeepsEveryKey(value, of: raw) {
             return .actionsPolicyOrgConditionsVariant2(value)
         }
         return nil
@@ -194,18 +148,9 @@ extension ActionsPolicyOrgConditions {
 
 extension ActionsPolicyOrgConditions {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container
-            .decode(ActionsPolicyOrgConditionsVariant0.self) {
-            return .actionsPolicyOrgConditionsVariant0(value)
-        }
-        if let value = try? container
-            .decode(ActionsPolicyOrgConditionsVariant1.self) {
-            return .actionsPolicyOrgConditionsVariant1(value)
-        }
-        if let value = try? container
-            .decode(ActionsPolicyOrgConditionsVariant2.self) {
-            return .actionsPolicyOrgConditionsVariant2(value)
-        }
+        if let value = try? container.decode(ActionsPolicyOrgConditionsVariant0.self) { return .actionsPolicyOrgConditionsVariant0(value) }
+        if let value = try? container.decode(ActionsPolicyOrgConditionsVariant1.self) { return .actionsPolicyOrgConditionsVariant1(value) }
+        if let value = try? container.decode(ActionsPolicyOrgConditionsVariant2.self) { return .actionsPolicyOrgConditionsVariant2(value) }
         return nil
     }
 }
@@ -227,33 +172,25 @@ public indirect enum ActionsPolicyRepoConditions {
 }
 
 extension ActionsPolicyRepoConditions: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for ActionsPolicyRepoConditions"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for ActionsPolicyRepoConditions")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
 extension ActionsPolicyRepoConditions {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode([String: JSONValue].self) {
-            return .jsonValue(value)
-        }
+        if let value = try? container.decode([String: JSONValue].self) { return .jsonValue(value) }
         if let value = try? container.decode(
             ActionsPolicyRepoConditionsVariant1.self
         ) {
-            return .actionsPolicyRepoConditionsVariant1(value)
+            return             .actionsPolicyRepoConditionsVariant1(value)
         }
         return nil
     }
@@ -281,31 +218,22 @@ public struct ActionsPolicyOrgConditionsVariant1: Codable {
         case workflowPath = "workflow_path"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsPolicyOrgConditionsVariant1 {
-    init(from decoder: Decoder) throws {
+extension ActionsPolicyOrgConditionsVariant1 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.repositoryId) else {
-            throw SdkValidationError(
-                field: "repository_id",
-                code: "required",
-                message: "Validation failed for 'repository_id': value is required"
-            )
+            throw SdkValidationError(field: "repository_id", code: "required", message: "Validation failed for 'repository_id': value is required")
         }
-        repositoryId = try container.sdkDecodeRequired(.repositoryId)
-        workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
+        self.repositoryId = try container.sdkDecodeRequired(.repositoryId)
+        self.workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
     }
 }
 
-public extension ActionsPolicyOrgConditionsVariant1 {
-    init(
-        repositoryId: RepositoryRulesetConditionsRepositoryIdTargetRepositoryId,
-        workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil
-    ) {
+extension ActionsPolicyOrgConditionsVariant1 {
+    public init(repositoryId: RepositoryRulesetConditionsRepositoryIdTargetRepositoryId, workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil) {
         (self.repositoryId, self.workflowPath) = (repositoryId, workflowPath)
     }
 }
@@ -325,40 +253,26 @@ public struct ActionsPolicyEnterpriseConditionsVariant5: Codable {
         case workflowPath = "workflow_path"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsPolicyEnterpriseConditionsVariant5 {
-    init(from decoder: Decoder) throws {
+extension ActionsPolicyEnterpriseConditionsVariant5 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.organizationProperty) else {
-            throw SdkValidationError(
-                field: "organization_property",
-                code: "required",
-                message: "Validation failed for 'organization_property': value is required"
-            )
+            throw SdkValidationError(field: "organization_property", code: "required", message: "Validation failed for 'organization_property': value is required")
         }
         guard container.contains(.repositoryProperty) else {
-            throw SdkValidationError(
-                field: "repository_property",
-                code: "required",
-                message: "Validation failed for 'repository_property': value is required"
-            )
+            throw SdkValidationError(field: "repository_property", code: "required", message: "Validation failed for 'repository_property': value is required")
         }
-        organizationProperty = try container.sdkDecodeRequired(.organizationProperty)
-        repositoryProperty = try container.sdkDecodeRequired(.repositoryProperty)
-        workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
+        self.organizationProperty = try container.sdkDecodeRequired(.organizationProperty)
+        self.repositoryProperty = try container.sdkDecodeRequired(.repositoryProperty)
+        self.workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
     }
 }
 
-public extension ActionsPolicyEnterpriseConditionsVariant5 {
-    init(
-        organizationProperty: EnterpriseRulesetConditionsOrganizationPropertyTargetOrganizaXfd8187e868,
-        repositoryProperty: RepositoryRulesetConditionsRepositoryPropertyTargetRepositoryProperty,
-        workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil
-    ) {
+extension ActionsPolicyEnterpriseConditionsVariant5 {
+    public init(organizationProperty: EnterpriseRulesetConditionsOrganizationPropertyTargetOrganizaXfd8187e868, repositoryProperty: RepositoryRulesetConditionsRepositoryPropertyTargetRepositoryProperty, workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil) {
         (self.organizationProperty, self.repositoryProperty) = (organizationProperty, repositoryProperty)
         self.workflowPath = workflowPath
     }
@@ -374,19 +288,19 @@ public struct ActionsPolicyLinksSelf: Codable {
     }
 
     init() {
-        href = nil
+        self.href = nil
     }
 }
 
-public extension ActionsPolicyLinksSelf {
-    init(from decoder: Decoder) throws {
+extension ActionsPolicyLinksSelf {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        href = try container.sdkDecodeIfPresent(.href)
+        self.href = try container.sdkDecodeIfPresent(.href)
     }
 }
 
-public extension ActionsPolicyLinksSelf {
-    init(href: String? = nil) {
+extension ActionsPolicyLinksSelf {
+    public init(href: String? = nil) {
         self.init()
         self.href = href
     }
@@ -437,92 +351,53 @@ public struct ActionsPolicy: Codable {
         case updatedAt = "updated_at"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsPolicy {
-    init(from decoder: Decoder) throws {
+extension ActionsPolicy {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.target) else {
-            throw SdkValidationError(
-                field: "target",
-                code: "required",
-                message: "Validation failed for 'target': value is required"
-            )
+            throw SdkValidationError(field: "target", code: "required", message: "Validation failed for 'target': value is required")
         }
         guard container.contains(.sourceType) else {
-            throw SdkValidationError(
-                field: "source_type",
-                code: "required",
-                message: "Validation failed for 'source_type': value is required"
-            )
+            throw SdkValidationError(field: "source_type", code: "required", message: "Validation failed for 'source_type': value is required")
         }
         guard container.contains(.source) else {
-            throw SdkValidationError(
-                field: "source",
-                code: "required",
-                message: "Validation failed for 'source': value is required"
-            )
+            throw SdkValidationError(field: "source", code: "required", message: "Validation failed for 'source': value is required")
         }
         guard container.contains(.enforcement) else {
-            throw SdkValidationError(
-                field: "enforcement",
-                code: "required",
-                message: "Validation failed for 'enforcement': value is required"
-            )
+            throw SdkValidationError(field: "enforcement", code: "required", message: "Validation failed for 'enforcement': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
-        name = try container.sdkDecodeRequired(.name)
-        target = try container.sdkDecodeRequired(.target)
-        sourceType = try container.sdkDecodeRequired(.sourceType)
-        source = try container.sdkDecodeRequired(.source)
-        enforcement = try container.sdkDecodeRequired(.enforcement)
-        conditions = try container.sdkDecodeIfPresent(.conditions)
-        rules = try container.sdkDecodeIfPresent(.rules)
-        nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        links = try container.sdkDecodeIfPresent(.links)
-        createdAt = try container.sdkDecodeIfPresent(.createdAt)
-        updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
-        if let value = createdAt {
+        self.id = try container.sdkDecodeRequired(.id)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.target = try container.sdkDecodeRequired(.target)
+        self.sourceType = try container.sdkDecodeRequired(.sourceType)
+        self.source = try container.sdkDecodeRequired(.source)
+        self.enforcement = try container.sdkDecodeRequired(.enforcement)
+        self.conditions = try container.sdkDecodeIfPresent(.conditions)
+        self.rules = try container.sdkDecodeIfPresent(.rules)
+        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        self.links = try container.sdkDecodeIfPresent(.links)
+        self.createdAt = try container.sdkDecodeIfPresent(.createdAt)
+        self.updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
+        if let value = self.createdAt {
             try sdkValidateDateTime("created_at", sdkWireString(value))
         }
-        if let value = updatedAt {
+        if let value = self.updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
     }
 }
 
-public extension ActionsPolicy {
-    init(
-        id: Int,
-        name: String,
-        target: ActionsPolicyTarget,
-        sourceType: ActionsPolicySourceType,
-        source: String,
-        enforcement: RepositoryRuleEnforcement,
-        conditions: ActionsPolicyConditions? = nil,
-        rules: [ActionsRule]? = nil,
-        nodeId: String? = nil,
-        links: ActionsPolicyLinks? = nil,
-        createdAt: Date? = nil,
-        updatedAt: Date? = nil
-    ) throws {
+extension ActionsPolicy {
+    public init(id: Int, name: String, target: ActionsPolicyTarget, sourceType: ActionsPolicySourceType, source: String, enforcement: RepositoryRuleEnforcement, conditions: ActionsPolicyConditions? = nil, rules: [ActionsRule]? = nil, nodeId: String? = nil, links: ActionsPolicyLinks? = nil, createdAt: Date? = nil, updatedAt: Date? = nil) throws {
         (self.id, self.name) = (id, name)
         (self.target, self.sourceType) = (target, sourceType)
         (self.source, self.enforcement) = (source, enforcement)
@@ -547,27 +422,21 @@ public struct ActionsPolicyRepoConditionsVariant1: Codable {
         case workflowPath = "workflow_path"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsPolicyRepoConditionsVariant1 {
-    init(from decoder: Decoder) throws {
+extension ActionsPolicyRepoConditionsVariant1 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.workflowPath) else {
-            throw SdkValidationError(
-                field: "workflow_path",
-                code: "required",
-                message: "Validation failed for 'workflow_path': value is required"
-            )
+            throw SdkValidationError(field: "workflow_path", code: "required", message: "Validation failed for 'workflow_path': value is required")
         }
-        workflowPath = try container.sdkDecodeRequired(.workflowPath)
+        self.workflowPath = try container.sdkDecodeRequired(.workflowPath)
     }
 }
 
-public extension ActionsPolicyRepoConditionsVariant1 {
-    init(workflowPath: ActionsPolicyRepoConditionsVariant1WorkflowPath) {
+extension ActionsPolicyRepoConditionsVariant1 {
+    public init(workflowPath: ActionsPolicyRepoConditionsVariant1WorkflowPath) {
         self.workflowPath = workflowPath
     }
 }
@@ -587,7 +456,5 @@ public struct ActionsPolicyEnterpriseConditionsVariant2: Codable {
         case workflowPath = "workflow_path"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }

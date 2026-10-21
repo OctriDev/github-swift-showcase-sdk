@@ -6,23 +6,11 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension MetaMethods {
-    /// Lists the API versions supported by the service. Use this endpoint to discover the version strings available for
-    /// API requests; each value is formatted as a date.
+extension MetaMethods {
+    /// Lists the API versions supported by the service. Use this endpoint to discover the version strings available for API requests; each value is formatted as a date.
     ///
     /// Get all supported GitHub API versions.
-    static func metaGetAllVersions(
-        config: ClientConfig,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [String] {
-        try await (sdkRequest(
-            "GET",
-            "/versions",
-            config: config,
-            decoder: .json,
-            operationId: "metaGetAllVersions",
-            options: requestOptions,
-            errors: ["404": BasicError.self]
-        )).data
+    public static func metaGetAllVersions(config: ClientConfig, requestOptions: RequestOptions? = nil) async throws -> [String] {
+        return try (await sdkRequest("GET", "/versions", config: config, decoder: .json, operationId: "metaGetAllVersions", options: requestOptions, errors: ["404": BasicError.self])).data
     }
 }

@@ -6,10 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension OrgsMethods {
-    /// Deletes artifact attestations in bulk by subject digest or unique attestation ID. Provide one of
-    /// `subject_digests` or `attestation_ids` to identify the attestations to remove, but not both. A 200 response
-    /// confirms the bulk deletion request was processed.
+extension OrgsMethods {
+    /// Deletes artifact attestations in bulk by subject digest or unique attestation ID. Provide one of `subject_digests` or `attestation_ids` to identify the attestations to remove, but not both. A 200 response confirms the bulk deletion request was processed.
     ///
     /// Delete artifact attestations in bulk by either subject digests or unique ID.
     ///
@@ -17,51 +15,18 @@ public extension OrgsMethods {
     /// - org: The organization name. The name is not case sensitive.
     /// - body: The request body must include either `subject_digests` or
     ///   `attestation_ids`, but not both.
-    static func orgsDeleteAttestationsBulk(
-        config: ClientConfig,
-        org: String,
-        body: [String: JSONValue],
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "POST",
-            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/attestations/delete-request"].joined(),
-            config: config,
-            rawBody: sdkEncodeBody(body, contentType: "application/json"),
-            decoder: .empty,
-            operationId: "orgsDeleteAttestationsBulk",
-            options: requestOptions,
-            errors: ["404": BasicError.self]
-        )).data
+    public static func orgsDeleteAttestationsBulk(config: ClientConfig, org: String, body: [String: JSONValue], requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("POST", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/attestations/delete-request"].joined(), config: config, rawBody: (try sdkEncodeBody(body, contentType: "application/json")), decoder: .empty, operationId: "orgsDeleteAttestationsBulk", options: requestOptions, errors: ["404": BasicError.self])).data
     }
 
-    /// Deletes artifact attestations associated with a subject digest. Use `org` and `subject_digest` to identify the
-    /// organization and the artifact whose attestations you want to remove.
+    /// Deletes artifact attestations associated with a subject digest. Use `org` and `subject_digest` to identify the organization and the artifact whose attestations you want to remove.
     ///
     /// Delete an artifact attestation by subject digest.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - subjectDigest: Subject Digest
-    static func orgsDeleteAttestationsBySubjectDigest(
-        config: ClientConfig,
-        org: String,
-        subjectDigest: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "DELETE",
-            [
-                "/orgs/",
-                sdkEncodePathSegment(sdkWireString(org)),
-                "/attestations/digest/",
-                sdkEncodePathSegment(sdkWireString(subjectDigest)),
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "orgsDeleteAttestationsBySubjectDigest",
-            options: requestOptions,
-            errors: ["404": BasicError.self]
-        )).data
+    public static func orgsDeleteAttestationsBySubjectDigest(config: ClientConfig, org: String, subjectDigest: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("DELETE", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/attestations/digest/", sdkEncodePathSegment(sdkWireString(subjectDigest))].joined(), config: config, decoder: .empty, operationId: "orgsDeleteAttestationsBySubjectDigest", options: requestOptions, errors: ["404": BasicError.self])).data
     }
 }

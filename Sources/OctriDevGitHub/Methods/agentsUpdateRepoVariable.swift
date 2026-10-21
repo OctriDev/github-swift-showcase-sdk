@@ -6,10 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension AgentsMethods {
-    /// Updates a repository variable that you can reference in a GitHub Actions workflow. Authenticated users must have
-    /// collaborator access to a repository to create, update, or read variables. OAuth app tokens and personal access
-    /// tokens (classic) need the `repo` scope to use this endpoint.
+extension AgentsMethods {
+    /// Updates a repository variable that you can reference in a GitHub Actions workflow. Authenticated users must have collaborator access to a repository to create, update, or read variables. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -19,38 +17,13 @@ public extension AgentsMethods {
     /// - name: The name of the variable.
     /// - name2: The name of the variable.
     /// - value: The value of the variable.
-    static func agentsUpdateRepoVariable(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        name: String,
-        name2: String? = nil,
-        value: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
+    public static func agentsUpdateRepoVariable(config: ClientConfig, owner: String, repo: String, name: String, name2: String? = nil, value: String? = nil, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
         let requestBody = AgentsUpdateRepoVariableRequestBody(name2: name2, value: value)
 
-        return try await (sdkRequest(
-            "PATCH",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/agents/variables/",
-                sdkEncodePathSegment(sdkWireString(name)),
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .empty,
-            operationId: "agentsUpdateRepoVariable",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("PATCH", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/agents/variables/", sdkEncodePathSegment(sdkWireString(name))].joined(), config: config, body: requestBody, decoder: .empty, operationId: "agentsUpdateRepoVariable", options: requestOptions)).data
     }
 
-    /// Deletes a repository variable using the variable name. Authenticated users must have collaborator access to a
-    /// repository to create, update, or read variables. OAuth tokens and personal access tokens (classic) need the
-    /// `repo` scope to use this endpoint.
+    /// Deletes a repository variable using the variable name. Authenticated users must have collaborator access to a repository to create, update, or read variables. OAuth tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -58,27 +31,7 @@ public extension AgentsMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - name: The name of the variable.
-    static func agentsDeleteRepoVariable(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        name: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "DELETE",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/agents/variables/",
-                sdkEncodePathSegment(sdkWireString(name)),
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "agentsDeleteRepoVariable",
-            options: requestOptions
-        )).data
+    public static func agentsDeleteRepoVariable(config: ClientConfig, owner: String, repo: String, name: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/agents/variables/", sdkEncodePathSegment(sdkWireString(name))].joined(), config: config, decoder: .empty, operationId: "agentsDeleteRepoVariable", options: requestOptions)).data
     }
 }

@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// IssuesIssue domain models
+// IssuesIssue domain models
 public indirect enum IssueEventForIssue {
     case labeledIssueEvent(LabeledIssueEvent)
     case unlabeledIssueEvent(UnlabeledIssueEvent)
@@ -34,47 +34,25 @@ public indirect enum IssueEventForIssue {
 }
 
 extension IssueEventForIssue: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let raw = try? container.decode(JSONValue.self) {
-            if let value = Self.decodeLossless1(from: container, raw) {
-                self = value; return
-            }
-            if let value = Self.decodeLossless2(from: container, raw) {
-                self = value; return
-            }
-            if let value = Self.decodeLossless3(from: container, raw) {
-                self = value; return
-            }
-            if let value = Self.decodeLossless4(from: container, raw) {
-                self = value; return
-            }
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
+            if let value = Self.decodeLossless2(from: container, raw) { self = value; return }
+            if let value = Self.decodeLossless3(from: container, raw) { self = value; return }
+            if let value = Self.decodeLossless4(from: container, raw) { self = value; return }
         }
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        if let value = Self.decodeGroup2(from: container) {
-            self = value; return
-        }
-        if let value = Self.decodeGroup3(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for IssueEventForIssue"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        if let value = Self.decodeGroup2(from: container) { self = value; return }
+        if let value = Self.decodeGroup3(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for IssueEventForIssue")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
-        if try encodeGroup2(to: encoder) {
-            return
-        }
-        if try encodeGroup3(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup2(to: encoder) { return }
+        if try encodeGroup3(to: encoder) { return }
     }
 }
 
@@ -182,109 +160,44 @@ extension IssueEventForIssue {
 
 extension IssueEventForIssue {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(LabeledIssueEvent.self) {
-            return .labeledIssueEvent(value)
-        }
-        if let value = try? container.decode(UnlabeledIssueEvent.self) {
-            return .unlabeledIssueEvent(value)
-        }
-        if let value = try? container.decode(AssignedIssueEvent.self) {
-            return .assignedIssueEvent(value)
-        }
-        if let value = try? container.decode(UnassignedIssueEvent.self) {
-            return .unassignedIssueEvent(value)
-        }
-        if let value = try? container.decode(MilestonedIssueEvent.self) {
-            return .milestonedIssueEvent(value)
-        }
-        if let value = try? container.decode(DemilestonedIssueEvent.self) {
-            return .demilestonedIssueEvent(value)
-        }
-        if let value = try? container.decode(RenamedIssueEvent.self) {
-            return .renamedIssueEvent(value)
-        }
-        if let value = try? container
-            .decode(ReviewRequestedIssueEvent.self) {
-            return .reviewRequestedIssueEvent(value)
-        }
-        if let value = try? container
-            .decode(ReviewRequestRemovedIssueEvent.self) {
-            return .reviewRequestRemovedIssueEvent(value)
-        }
-        if let value = try? container
-            .decode(ReviewDismissedIssueEvent.self) {
-            return .reviewDismissedIssueEvent(value)
-        }
-        if let value = try? container.decode(LockedIssueEvent.self) {
-            return .lockedIssueEvent(value)
-        }
-        if let value = try? container.decode(AddedToProjectIssueEvent.self) {
-            return .addedToProjectIssueEvent(value)
-        }
+        if let value = try? container.decode(LabeledIssueEvent.self) { return .labeledIssueEvent(value) }
+        if let value = try? container.decode(UnlabeledIssueEvent.self) { return .unlabeledIssueEvent(value) }
+        if let value = try? container.decode(AssignedIssueEvent.self) { return .assignedIssueEvent(value) }
+        if let value = try? container.decode(UnassignedIssueEvent.self) { return .unassignedIssueEvent(value) }
+        if let value = try? container.decode(MilestonedIssueEvent.self) { return .milestonedIssueEvent(value) }
+        if let value = try? container.decode(DemilestonedIssueEvent.self) { return .demilestonedIssueEvent(value) }
+        if let value = try? container.decode(RenamedIssueEvent.self) { return .renamedIssueEvent(value) }
+        if let value = try? container.decode(ReviewRequestedIssueEvent.self) { return .reviewRequestedIssueEvent(value) }
+        if let value = try? container.decode(ReviewRequestRemovedIssueEvent.self) { return .reviewRequestRemovedIssueEvent(value) }
+        if let value = try? container.decode(ReviewDismissedIssueEvent.self) { return .reviewDismissedIssueEvent(value) }
+        if let value = try? container.decode(LockedIssueEvent.self) { return .lockedIssueEvent(value) }
+        if let value = try? container.decode(AddedToProjectIssueEvent.self) { return .addedToProjectIssueEvent(value) }
         return nil
     }
 }
 
 extension IssueEventForIssue {
     static func decodeGroup2(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container
-            .decode(MovedColumnInProjectIssueEvent.self) {
-            return .movedColumnInProjectIssueEvent(value)
-        }
-        if let value = try? container
-            .decode(RemovedFromProjectIssueEvent.self) {
-            return .removedFromProjectIssueEvent(value)
-        }
-        if let value = try? container
-            .decode(ConvertedNoteToIssueIssueEvent.self) {
-            return .convertedNoteToIssueIssueEvent(value)
-        }
-        if let value = try? container.decode(IssueTypeAddedIssueEvent.self) {
-            return .issueTypeAddedIssueEvent(value)
-        }
-        if let value = try? container
-            .decode(IssueTypeRemovedIssueEvent.self) {
-            return .issueTypeRemovedIssueEvent(value)
-        }
-        if let value = try? container
-            .decode(IssueTypeChangedIssueEvent.self) {
-            return .issueTypeChangedIssueEvent(value)
-        }
-        if let value = try? container.decode(SubIssueAddedIssueEvent.self) {
-            return .subIssueAddedIssueEvent(value)
-        }
-        if let value = try? container
-            .decode(SubIssueRemovedIssueEvent.self) {
-            return .subIssueRemovedIssueEvent(value)
-        }
-        if let value = try? container
-            .decode(ParentIssueAddedIssueEvent.self) {
-            return .parentIssueAddedIssueEvent(value)
-        }
-        if let value = try? container
-            .decode(ParentIssueRemovedIssueEvent.self) {
-            return .parentIssueRemovedIssueEvent(value)
-        }
-        if let value = try? container.decode(BlockedByAddedIssueEvent.self) {
-            return .blockedByAddedIssueEvent(value)
-        }
-        if let value = try? container
-            .decode(BlockedByRemovedIssueEvent.self) {
-            return .blockedByRemovedIssueEvent(value)
-        }
+        if let value = try? container.decode(MovedColumnInProjectIssueEvent.self) { return .movedColumnInProjectIssueEvent(value) }
+        if let value = try? container.decode(RemovedFromProjectIssueEvent.self) { return .removedFromProjectIssueEvent(value) }
+        if let value = try? container.decode(ConvertedNoteToIssueIssueEvent.self) { return .convertedNoteToIssueIssueEvent(value) }
+        if let value = try? container.decode(IssueTypeAddedIssueEvent.self) { return .issueTypeAddedIssueEvent(value) }
+        if let value = try? container.decode(IssueTypeRemovedIssueEvent.self) { return .issueTypeRemovedIssueEvent(value) }
+        if let value = try? container.decode(IssueTypeChangedIssueEvent.self) { return .issueTypeChangedIssueEvent(value) }
+        if let value = try? container.decode(SubIssueAddedIssueEvent.self) { return .subIssueAddedIssueEvent(value) }
+        if let value = try? container.decode(SubIssueRemovedIssueEvent.self) { return .subIssueRemovedIssueEvent(value) }
+        if let value = try? container.decode(ParentIssueAddedIssueEvent.self) { return .parentIssueAddedIssueEvent(value) }
+        if let value = try? container.decode(ParentIssueRemovedIssueEvent.self) { return .parentIssueRemovedIssueEvent(value) }
+        if let value = try? container.decode(BlockedByAddedIssueEvent.self) { return .blockedByAddedIssueEvent(value) }
+        if let value = try? container.decode(BlockedByRemovedIssueEvent.self) { return .blockedByRemovedIssueEvent(value) }
         return nil
     }
 }
 
 extension IssueEventForIssue {
     static func decodeGroup3(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(BlockingAddedIssueEvent.self) {
-            return .blockingAddedIssueEvent(value)
-        }
-        if let value = try? container
-            .decode(BlockingRemovedIssueEvent.self) {
-            return .blockingRemovedIssueEvent(value)
-        }
+        if let value = try? container.decode(BlockingAddedIssueEvent.self) { return .blockingAddedIssueEvent(value) }
+        if let value = try? container.decode(BlockingRemovedIssueEvent.self) { return .blockingRemovedIssueEvent(value) }
         return nil
     }
 }

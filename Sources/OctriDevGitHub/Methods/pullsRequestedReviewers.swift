@@ -6,11 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension PullsMethods {
-    /// Gets the users or teams whose review is requested for a pull request. Once a requested reviewer submits a
-    /// review, they are no longer considered a requested reviewer. Their review will instead be returned by the [List
-    /// reviews for a pull request](https://docs.github.com/rest/pulls/reviews#list-reviews-for-a-pull-request)
-    /// operation.
+extension PullsMethods {
+    /// Gets the users or teams whose review is requested for a pull request. Once a requested reviewer submits a review, they are no longer considered a requested reviewer. Their review will instead be returned by the [List reviews for a pull request](https://docs.github.com/rest/pulls/reviews#list-reviews-for-a-pull-request) operation.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -18,37 +15,11 @@ public extension PullsMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - pullNumber: The number that identifies the pull request.
-    static func pullsListRequestedReviewers(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        pullNumber: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> PullRequestReviewRequest {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/pulls/",
-                sdkEncodePathSegment(sdkWireString(pullNumber)),
-                "/requested_reviewers",
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "pullsListRequestedReviewers",
-            options: requestOptions
-        )).data
+    public static func pullsListRequestedReviewers(config: ClientConfig, owner: String, repo: String, pullNumber: Int, requestOptions: RequestOptions? = nil) async throws -> PullRequestReviewRequest {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/pulls/", sdkEncodePathSegment(sdkWireString(pullNumber)), "/requested_reviewers"].joined(), config: config, decoder: .json, operationId: "pullsListRequestedReviewers", options: requestOptions)).data
     }
 
-    /// Requests reviews for a pull request from a given set of users and/or teams. This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications).
-    /// Creating content too quickly using this endpoint may result in secondary rate limiting. For more information,
-    /// see "[Rate limits for the
-    /// API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)"
-    /// and "[Best practices for using the REST
-    /// API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)."
+    /// Requests reviews for a pull request from a given set of users and/or teams. This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. For more information, see "[Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)" and "[Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)."
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -58,34 +29,9 @@ public extension PullsMethods {
     /// - pullNumber: The number that identifies the pull request.
     /// - reviewers: An array of user `login`s that will be requested.
     /// - teamReviewers: An array of team `slug`s that will be requested.
-    static func pullsRequestReviewers(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        pullNumber: Int,
-        reviewers: [String]? = nil,
-        teamReviewers: [String]? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> PullRequestSimple {
+    public static func pullsRequestReviewers(config: ClientConfig, owner: String, repo: String, pullNumber: Int, reviewers: [String]? = nil, teamReviewers: [String]? = nil, requestOptions: RequestOptions? = nil) async throws -> PullRequestSimple {
         let requestBody = PullsRequestReviewersRequestBody(reviewers: reviewers, teamReviewers: teamReviewers)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/pulls/",
-                sdkEncodePathSegment(sdkWireString(pullNumber)),
-                "/requested_reviewers",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "pullsRequestReviewers",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "503": ServiceUnavailable.self]
-        )).data
+        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/pulls/", sdkEncodePathSegment(sdkWireString(pullNumber)), "/requested_reviewers"].joined(), config: config, body: requestBody, decoder: .json, operationId: "pullsRequestReviewers", options: requestOptions, errors: ["403": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

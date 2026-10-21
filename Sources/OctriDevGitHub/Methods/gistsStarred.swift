@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension GistsMethods {
-    /// Lists gists starred by the authenticated user. Use `since` to filter by the last-updated timestamp and `page`
-    /// with `per_page` to paginate the results.
+extension GistsMethods {
+    /// Lists gists starred by the authenticated user. Use `since` to filter by the last-updated timestamp and `page` with `per_page` to paginate the results.
     ///
     /// List the authenticated user's starred gists:
     ///
@@ -24,30 +23,15 @@ public extension GistsMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    static func gistsListStarred(
-        config: ClientConfig,
-        since: Date? = nil,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [BaseGist] {
-        if let since {
+    public static func gistsListStarred(config: ClientConfig, since: Date? = nil, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [BaseGist] {
+        if let since = since {
             try sdkValidateDateTime("since", since)
         }
 
-        return try await (sdkRequest(
-            "GET",
-            "/gists/starred",
-            config: config,
-            query: [
-                SdkQueryParameter("since", value: since),
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("page", value: page),
-            ],
-            decoder: .json,
-            operationId: "gistsListStarred",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self]
-        )).data
+        return try (await sdkRequest("GET", "/gists/starred", config: config, query: [
+            SdkQueryParameter("since", value: since),
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("page", value: page),
+        ], decoder: .json, operationId: "gistsListStarred", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self])).data
     }
 }

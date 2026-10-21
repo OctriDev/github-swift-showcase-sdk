@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Orgs domain models
+// Orgs domain models
 /// Optional object value serialized in the `permissions` wire field.
 public struct TeamRoleAssignmentPermissions: Codable {
     /// Required `boolean` value serialized in the `pull` wire field.
@@ -25,59 +25,37 @@ public struct TeamRoleAssignmentPermissions: Codable {
         case admin
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension TeamRoleAssignmentPermissions {
-    init(from decoder: Decoder) throws {
+extension TeamRoleAssignmentPermissions {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.pull) else {
-            throw SdkValidationError(
-                field: "pull",
-                code: "required",
-                message: "Validation failed for 'pull': value is required"
-            )
+            throw SdkValidationError(field: "pull", code: "required", message: "Validation failed for 'pull': value is required")
         }
         guard container.contains(.triage) else {
-            throw SdkValidationError(
-                field: "triage",
-                code: "required",
-                message: "Validation failed for 'triage': value is required"
-            )
+            throw SdkValidationError(field: "triage", code: "required", message: "Validation failed for 'triage': value is required")
         }
         guard container.contains(.push) else {
-            throw SdkValidationError(
-                field: "push",
-                code: "required",
-                message: "Validation failed for 'push': value is required"
-            )
+            throw SdkValidationError(field: "push", code: "required", message: "Validation failed for 'push': value is required")
         }
         guard container.contains(.maintain) else {
-            throw SdkValidationError(
-                field: "maintain",
-                code: "required",
-                message: "Validation failed for 'maintain': value is required"
-            )
+            throw SdkValidationError(field: "maintain", code: "required", message: "Validation failed for 'maintain': value is required")
         }
         guard container.contains(.admin) else {
-            throw SdkValidationError(
-                field: "admin",
-                code: "required",
-                message: "Validation failed for 'admin': value is required"
-            )
+            throw SdkValidationError(field: "admin", code: "required", message: "Validation failed for 'admin': value is required")
         }
-        pull = try container.sdkDecodeRequired(.pull)
-        triage = try container.sdkDecodeRequired(.triage)
-        push = try container.sdkDecodeRequired(.push)
-        maintain = try container.sdkDecodeRequired(.maintain)
-        admin = try container.sdkDecodeRequired(.admin)
+        self.pull = try container.sdkDecodeRequired(.pull)
+        self.triage = try container.sdkDecodeRequired(.triage)
+        self.push = try container.sdkDecodeRequired(.push)
+        self.maintain = try container.sdkDecodeRequired(.maintain)
+        self.admin = try container.sdkDecodeRequired(.admin)
     }
 }
 
-public extension TeamRoleAssignmentPermissions {
-    init(pull: Bool, triage: Bool, push: Bool, maintain: Bool, admin: Bool) {
+extension TeamRoleAssignmentPermissions {
+    public init(pull: Bool, triage: Bool, push: Bool, maintain: Bool, admin: Bool) {
         (self.pull, self.triage) = (pull, triage)
         (self.push, self.maintain) = (push, maintain)
         self.admin = admin
@@ -148,59 +126,38 @@ public struct TeamRoleAssignment: Codable {
         case enterpriseId = "enterprise_id"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension TeamRoleAssignment {
-    init(from decoder: Decoder) throws {
+extension TeamRoleAssignment {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        name = try container.sdkDecodeRequired(.name)
-        slug = try container.sdkDecodeRequired(.slug)
-        description = try container.sdkDecodeNullable(.description)
-        permission = try container.sdkDecodeRequired(.permission)
-        url = try container.sdkDecodeRequired(.url)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        membersUrl = try container.sdkDecodeRequired(.membersUrl)
-        repositoriesUrl = try container.sdkDecodeRequired(.repositoriesUrl)
-        parent = try container.sdkDecodeNullable(.parent)
-        type = try container.sdkDecodeRequired(.type)
-        assignment = try container.sdkDecodeIfPresent(.assignment)
-        privacy = try container.sdkDecodeIfPresent(.privacy)
-        notificationSetting = try container.sdkDecodeIfPresent(.notificationSetting)
-        permissions = try container.sdkDecodeIfPresent(.permissions)
-        organizationId = try container.sdkDecodeIfPresent(.organizationId)
-        enterpriseId = try container.sdkDecodeIfPresent(.enterpriseId)
-        try sdkValidateUri("url", url)
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateUri("repositories_url", repositoriesUrl)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.slug = try container.sdkDecodeRequired(.slug)
+        self.description = try container.sdkDecodeNullable(.description)
+        self.permission = try container.sdkDecodeRequired(.permission)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        self.membersUrl = try container.sdkDecodeRequired(.membersUrl)
+        self.repositoriesUrl = try container.sdkDecodeRequired(.repositoriesUrl)
+        self.parent = try container.sdkDecodeNullable(.parent)
+        self.type = try container.sdkDecodeRequired(.type)
+        self.assignment = try container.sdkDecodeIfPresent(.assignment)
+        self.privacy = try container.sdkDecodeIfPresent(.privacy)
+        self.notificationSetting = try container.sdkDecodeIfPresent(.notificationSetting)
+        self.permissions = try container.sdkDecodeIfPresent(.permissions)
+        self.organizationId = try container.sdkDecodeIfPresent(.organizationId)
+        self.enterpriseId = try container.sdkDecodeIfPresent(.enterpriseId)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("repositories_url", self.repositoriesUrl)
     }
 }
 
-public extension TeamRoleAssignment {
-    init(
-        id: Int,
-        nodeId: String,
-        name: String,
-        slug: String,
-        description: String?,
-        permission: String,
-        url: String,
-        htmlUrl: String,
-        membersUrl: String,
-        repositoriesUrl: String,
-        parent: NullableTeamSimple?,
-        type: TeamRoleAssignmentType,
-        assignment: TeamRoleAssignmentAssignment? = nil,
-        privacy: String? = nil,
-        notificationSetting: String? = nil,
-        permissions: TeamRoleAssignmentPermissions? = nil,
-        organizationId: Int? = nil,
-        enterpriseId: Int? = nil
-    ) throws {
+extension TeamRoleAssignment {
+    public init(id: Int, nodeId: String, name: String, slug: String, description: String?, permission: String, url: String, htmlUrl: String, membersUrl: String, repositoriesUrl: String, parent: NullableTeamSimple?, type: TeamRoleAssignmentType, assignment: TeamRoleAssignmentAssignment? = nil, privacy: String? = nil, notificationSetting: String? = nil, permissions: TeamRoleAssignmentPermissions? = nil, organizationId: Int? = nil, enterpriseId: Int? = nil) throws {
         (self.id, self.nodeId) = (id, nodeId)
         (self.name, self.slug) = (name, slug)
         (self.description, self.permission) = (description, permission)
@@ -210,9 +167,9 @@ public extension TeamRoleAssignment {
         (self.assignment, self.privacy) = (assignment, privacy)
         (self.notificationSetting, self.permissions) = (notificationSetting, permissions)
         (self.organizationId, self.enterpriseId) = (organizationId, enterpriseId)
-        try sdkValidateUri("url", self.url)
-        try sdkValidateUri("html_url", self.htmlUrl)
-        try sdkValidateUri("repositories_url", self.repositoriesUrl)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("repositories_url", self.repositoriesUrl)
     }
 }
 
@@ -220,16 +177,13 @@ public extension TeamRoleAssignment {
 public struct TeamRoleAssignmentType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let enterprise = TeamRoleAssignmentType(rawValue: "enterprise")
     public static let organization = TeamRoleAssignmentType(rawValue: "organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -242,17 +196,14 @@ public struct TeamRoleAssignmentType: RawRepresentable, Hashable, Codable, Senda
 public struct TeamRoleAssignmentAssignment: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let direct = TeamRoleAssignmentAssignment(rawValue: "direct")
     public static let indirect = TeamRoleAssignmentAssignment(rawValue: "indirect")
     public static let mixed = TeamRoleAssignmentAssignment(rawValue: "mixed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

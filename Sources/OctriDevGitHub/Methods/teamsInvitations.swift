@@ -6,11 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension TeamsMethods {
-    /// The return hash contains a `role` field which refers to the Organization Invitation role and will be one of the
-    /// following values: `direct_member`, `admin`, `billing_manager`, `hiring_manager`, or `reinstate`. If the invitee
-    /// is not a GitHub member, the `login` field in the return hash will be `null`. > [!NOTE] > You can also specify a
-    /// team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/invitations`.
+extension TeamsMethods {
+    /// The return hash contains a `role` field which refers to the Organization Invitation role and will be one of the following values: `direct_member`, `admin`, `billing_manager`, `hiring_manager`, or `reinstate`. If the invitee is not a GitHub member, the `login` field in the return hash will be `null`. > [!NOTE] > You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/invitations`.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
@@ -23,31 +20,10 @@ public extension TeamsMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    static func teamsListPendingInvitationsInOrg(
-        config: ClientConfig,
-        org: String,
-        teamSlug: String,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [OrganizationInvitation] {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/orgs/",
-                sdkEncodePathSegment(sdkWireString(org)),
-                "/teams/",
-                sdkEncodePathSegment(sdkWireString(teamSlug)),
-                "/invitations",
-            ].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("page", value: page),
-            ],
-            decoder: .json,
-            operationId: "teamsListPendingInvitationsInOrg",
-            options: requestOptions
-        )).data
+    public static func teamsListPendingInvitationsInOrg(config: ClientConfig, org: String, teamSlug: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [OrganizationInvitation] {
+        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/teams/", sdkEncodePathSegment(sdkWireString(teamSlug)), "/invitations"].joined(), config: config, query: [
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("page", value: page),
+        ], decoder: .json, operationId: "teamsListPendingInvitationsInOrg", options: requestOptions)).data
     }
 }

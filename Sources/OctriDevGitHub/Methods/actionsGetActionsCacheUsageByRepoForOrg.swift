@@ -6,10 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ActionsMethods {
-    /// Lists repositories and their GitHub Actions cache usage for an organization. The data fetched using this API is
-    /// refreshed approximately every 5 minutes, so values returned from this endpoint may take at least 5 minutes to
-    /// get updated. OAuth tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
+extension ActionsMethods {
+    /// Lists repositories and their GitHub Actions cache usage for an organization. The data fetched using this API is refreshed approximately every 5 minutes, so values returned from this endpoint may take at least 5 minutes to get updated. OAuth tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
@@ -21,56 +19,21 @@ public extension ActionsMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    static func actionsGetActionsCacheUsageByRepoForOrg(
-        config: ClientConfig,
-        org: String,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsGetActionsCacheUsageByRepoForOrgResponse {
-        try await (sdkRequest(
-            "GET",
-            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/actions/cache/usage-by-repository"].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("page", value: page),
-            ],
-            decoder: .json,
-            operationId: "actionsGetActionsCacheUsageByRepoForOrg",
-            options: requestOptions
-        )).data
+    public static func actionsGetActionsCacheUsageByRepoForOrg(config: ClientConfig, org: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> ActionsGetActionsCacheUsageByRepoForOrgResponse {
+        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/actions/cache/usage-by-repository"].joined(), config: config, query: [
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("page", value: page),
+        ], decoder: .json, operationId: "actionsGetActionsCacheUsageByRepoForOrg", options: requestOptions)).data
     }
 
-    /// Gets GitHub Actions cache retention limit for a repository. This determines how long caches will be retained
-    /// for, if not manually removed or evicted due to size constraints. OAuth tokens and personal access tokens
-    /// (classic) need the `admin:repository` scope to use this endpoint.
+    /// Gets GitHub Actions cache retention limit for a repository. This determines how long caches will be retained for, if not manually removed or evicted due to size constraints. OAuth tokens and personal access tokens (classic) need the `admin:repository` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    static func actionsGetActionsCacheRetentionLimitForRepository(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ActionsCacheRetentionLimitForRepository {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/actions/cache/retention-limit",
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "actionsGetActionsCacheRetentionLimitForRepository",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self]
-        )).data
+    public static func actionsGetActionsCacheRetentionLimitForRepository(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> ActionsCacheRetentionLimitForRepository {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/actions/cache/retention-limit"].joined(), config: config, decoder: .json, operationId: "actionsGetActionsCacheRetentionLimitForRepository", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
     }
 }

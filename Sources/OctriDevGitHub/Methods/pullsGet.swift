@@ -6,26 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension PullsMethods {
-    /// Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations,
-    /// GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and
-    /// GitHub Enterprise Cloud. For more information, see [GitHub's
-    /// products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help
-    /// documentation. Lists details of a pull request by providing its number. When you get,
-    /// [create](https://docs.github.com/rest/pulls/pulls/#create-a-pull-request), or
-    /// [edit](https://docs.github.com/rest/pulls/pulls#update-a-pull-request) a pull request, GitHub creates a merge
-    /// commit to test whether the pull request can be automatically merged into the base branch. This test commit is
-    /// not added to the base branch or the head branch. You can review the status of the test commit using the
-    /// `mergeable` key. For more information, see "[Checking mergeability of pull requests](https://docs.github.com/rest/guides/getting-started-with-the-git-database-api#checking-mergeability-of-pull-requests)".
-    /// The value of the `mergeable` attribute can be `true`, `false`, or `null`. If the value is `null`, then GitHub
-    /// has started a background job to compute the mergeability. After giving the job time to complete, resubmit the
-    /// request. When the job finishes, you will see a non-`null` value for the `mergeable` attribute in the response.
-    /// If `mergeable` is `true`, then `merge_commit_sha` will be the SHA of the _test_ merge commit. The value of the
-    /// `merge_commit_sha` attribute changes depending on the state of the pull request. Before merging a pull request,
-    /// the `merge_commit_sha` attribute holds the SHA of the _test_ merge commit. After merging a pull request, the
-    /// `merge_commit_sha` attribute changes depending on how you merged the pull request: * If merged as a [merge
-    /// commit](https://docs.github.com/articles/about-merge-methods-on-github/), `merge_commit_sha` represents the SHA
-    /// of the merge commit. * If merged…
+extension PullsMethods {
+    /// Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation. Lists details of a pull request by providing its number. When you get, [create](https://docs.github.com/rest/pulls/pulls/#create-a-pull-request), or [edit](https://docs.github.com/rest/pulls/pulls#update-a-pull-request) a pull request, GitHub creates a merge commit to test whether the pull request can be automatically merged into the base branch. This test commit is not added to the base branch or the head branch. You can review the status of the test commit using the `mergeable` key. For more information, see "[Checking mergeability of pull requests](https://docs.github.com/rest/guides/getting-started-with-the-git-database-api#checking-mergeability-of-pull-requests)". The value of the `mergeable` attribute can be `true`, `false`, or `null`. If the value is `null`, then GitHub has started a background job to compute the mergeability. After giving the job time to complete, resubmit the request. When the job finishes, you will see a non-`null` value for the `mergeable` attribute in the response. If `mergeable` is `true`, then `merge_commit_sha` will be the SHA of the _test_ merge commit. The value of the `merge_commit_sha` attribute changes depending on the state of the pull request. Before merging a pull request, the `merge_commit_sha` attribute holds the SHA of the _test_ merge commit. After merging a pull request, the `merge_commit_sha` attribute changes depending on how you merged the pull request: * If merged as a [merge commit](https://docs.github.com/articles/about-merge-methods-on-github/), `merge_commit_sha` represents the SHA of the merge commit. * If merged…
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -33,34 +15,7 @@ public extension PullsMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - pullNumber: The number that identifies the pull request.
-    static func pullsGet(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        pullNumber: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> PullRequest {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/pulls/",
-                sdkEncodePathSegment(sdkWireString(pullNumber)),
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "pullsGet",
-            options: requestOptions,
-            errors: [
-                "404": BasicError.self,
-                "406": BasicError.self,
-                "422": ValidationError.self,
-                "500": BasicError.self,
-                "503": ServiceUnavailable.self,
-            ]
-        )).data
+    public static func pullsGet(config: ClientConfig, owner: String, repo: String, pullNumber: Int, requestOptions: RequestOptions? = nil) async throws -> PullRequest {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/pulls/", sdkEncodePathSegment(sdkWireString(pullNumber))].joined(), config: config, decoder: .json, operationId: "pullsGet", options: requestOptions, errors: ["404": BasicError.self, "406": BasicError.self, "422": ValidationError.self, "500": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

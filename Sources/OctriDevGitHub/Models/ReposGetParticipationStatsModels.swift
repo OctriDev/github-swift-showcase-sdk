@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Repos domain models
+// Repos domain models
 /// Typed representation of the `ParticipationStats` API schema.
 public struct ParticipationStats: Codable {
     /// Required array value serialized in the `all` wire field.
@@ -16,35 +16,25 @@ public struct ParticipationStats: Codable {
         case owner
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ParticipationStats {
-    init(from decoder: Decoder) throws {
+extension ParticipationStats {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.all) else {
-            throw SdkValidationError(
-                field: "all",
-                code: "required",
-                message: "Validation failed for 'all': value is required"
-            )
+            throw SdkValidationError(field: "all", code: "required", message: "Validation failed for 'all': value is required")
         }
         guard container.contains(.owner) else {
-            throw SdkValidationError(
-                field: "owner",
-                code: "required",
-                message: "Validation failed for 'owner': value is required"
-            )
+            throw SdkValidationError(field: "owner", code: "required", message: "Validation failed for 'owner': value is required")
         }
-        all = try container.sdkDecodeRequired(.all)
-        owner = try container.sdkDecodeRequired(.owner)
+        self.all = try container.sdkDecodeRequired(.all)
+        self.owner = try container.sdkDecodeRequired(.owner)
     }
 }
 
-public extension ParticipationStats {
-    init(all: [Int], owner: [Int]) {
+extension ParticipationStats {
+    public init(all: [Int], owner: [Int]) {
         (self.all, self.owner) = (all, owner)
     }
 }

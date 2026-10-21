@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Pulls domain models
+// Pulls domain models
 /// Typed representation of the `PullRequestStackMinimal` API schema.
 public struct PullRequestStackMinimal: Codable {
     /// Required `integer` value serialized in the `id` wire field.
@@ -34,44 +34,33 @@ public struct PullRequestStackMinimal: Codable {
         case pullRequests = "pull_requests"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension PullRequestStackMinimal {
-    init(from decoder: Decoder) throws {
+extension PullRequestStackMinimal {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeRequired(.id)
-        number = try container.sdkDecodeRequired(.number)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        url = try container.sdkDecodeRequired(.url)
-        base = try container.sdkDecodeRequired(.base)
-        open = try container.sdkDecodeRequired(.open)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        pullRequests = try container.sdkDecodeRequired(.pullRequests)
-        try sdkValidateUri("url", url)
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        self.id = try container.sdkDecodeRequired(.id)
+        self.number = try container.sdkDecodeRequired(.number)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.base = try container.sdkDecodeRequired(.base)
+        self.open = try container.sdkDecodeRequired(.open)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.pullRequests = try container.sdkDecodeRequired(.pullRequests)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
     }
 }
 
-public extension PullRequestStackMinimal {
-    init(
-        id: Int,
-        number: Int,
-        nodeId: String,
-        url: String,
-        base: PullRequestStackMinimalBase,
-        open: Bool,
-        createdAt: Date,
-        pullRequests: [PullRequestStackMinimalPullRequestsItem]
-    ) throws {
+extension PullRequestStackMinimal {
+    public init(id: Int, number: Int, nodeId: String, url: String, base: PullRequestStackMinimalBase, open: Bool, createdAt: Date, pullRequests: [PullRequestStackMinimalPullRequestsItem]) throws {
         (self.id, self.number) = (id, number)
         (self.nodeId, self.url) = (nodeId, url)
         (self.base, self.open) = (base, open)
         (self.createdAt, self.pullRequests) = (createdAt, pullRequests)
-        try sdkValidateUri("url", self.url)
-        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateUri("url", self.url)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
     }
 }
 
@@ -84,27 +73,21 @@ public struct PullRequestStackMinimalBase: Codable {
         case ref
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension PullRequestStackMinimalBase {
-    init(from decoder: Decoder) throws {
+extension PullRequestStackMinimalBase {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.ref) else {
-            throw SdkValidationError(
-                field: "ref",
-                code: "required",
-                message: "Validation failed for 'ref': value is required"
-            )
+            throw SdkValidationError(field: "ref", code: "required", message: "Validation failed for 'ref': value is required")
         }
-        ref = try container.sdkDecodeRequired(.ref)
+        self.ref = try container.sdkDecodeRequired(.ref)
     }
 }
 
-public extension PullRequestStackMinimalBase {
-    init(ref: String) {
+extension PullRequestStackMinimalBase {
+    public init(ref: String) {
         self.ref = ref
     }
 }
@@ -121,35 +104,25 @@ public struct PullRequestStackMinimalPullRequestsItemHead: Codable {
         case sha
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension PullRequestStackMinimalPullRequestsItemHead {
-    init(from decoder: Decoder) throws {
+extension PullRequestStackMinimalPullRequestsItemHead {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.ref) else {
-            throw SdkValidationError(
-                field: "ref",
-                code: "required",
-                message: "Validation failed for 'ref': value is required"
-            )
+            throw SdkValidationError(field: "ref", code: "required", message: "Validation failed for 'ref': value is required")
         }
         guard container.contains(.sha) else {
-            throw SdkValidationError(
-                field: "sha",
-                code: "required",
-                message: "Validation failed for 'sha': value is required"
-            )
+            throw SdkValidationError(field: "sha", code: "required", message: "Validation failed for 'sha': value is required")
         }
-        ref = try container.sdkDecodeRequired(.ref)
-        sha = try container.sdkDecodeRequired(.sha)
+        self.ref = try container.sdkDecodeRequired(.ref)
+        self.sha = try container.sdkDecodeRequired(.sha)
     }
 }
 
-public extension PullRequestStackMinimalPullRequestsItemHead {
-    init(ref: String, sha: String) {
+extension PullRequestStackMinimalPullRequestsItemHead {
+    public init(ref: String, sha: String) {
         (self.ref, self.sha) = (ref, sha)
     }
 }
@@ -175,68 +148,40 @@ public struct PullRequestStackMinimalPullRequestsItem: Codable {
         case head
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension PullRequestStackMinimalPullRequestsItem {
-    init(from decoder: Decoder) throws {
+extension PullRequestStackMinimalPullRequestsItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.number) else {
-            throw SdkValidationError(
-                field: "number",
-                code: "required",
-                message: "Validation failed for 'number': value is required"
-            )
+            throw SdkValidationError(field: "number", code: "required", message: "Validation failed for 'number': value is required")
         }
         guard container.contains(.state) else {
-            throw SdkValidationError(
-                field: "state",
-                code: "required",
-                message: "Validation failed for 'state': value is required"
-            )
+            throw SdkValidationError(field: "state", code: "required", message: "Validation failed for 'state': value is required")
         }
         guard container.contains(.draft) else {
-            throw SdkValidationError(
-                field: "draft",
-                code: "required",
-                message: "Validation failed for 'draft': value is required"
-            )
+            throw SdkValidationError(field: "draft", code: "required", message: "Validation failed for 'draft': value is required")
         }
         guard container.contains(.mergedAt) else {
-            throw SdkValidationError(
-                field: "merged_at",
-                code: "required",
-                message: "Validation failed for 'merged_at': value is required"
-            )
+            throw SdkValidationError(field: "merged_at", code: "required", message: "Validation failed for 'merged_at': value is required")
         }
         guard container.contains(.head) else {
-            throw SdkValidationError(
-                field: "head",
-                code: "required",
-                message: "Validation failed for 'head': value is required"
-            )
+            throw SdkValidationError(field: "head", code: "required", message: "Validation failed for 'head': value is required")
         }
-        number = try container.sdkDecodeRequired(.number)
-        state = try container.sdkDecodeRequired(.state)
-        draft = try container.sdkDecodeRequired(.draft)
-        mergedAt = try container.sdkDecodeNullable(.mergedAt)
-        head = try container.sdkDecodeRequired(.head)
-        if let value = mergedAt {
+        self.number = try container.sdkDecodeRequired(.number)
+        self.state = try container.sdkDecodeRequired(.state)
+        self.draft = try container.sdkDecodeRequired(.draft)
+        self.mergedAt = try container.sdkDecodeNullable(.mergedAt)
+        self.head = try container.sdkDecodeRequired(.head)
+        if let value = self.mergedAt {
             try sdkValidateDateTime("merged_at", sdkWireString(value))
         }
     }
 }
 
-public extension PullRequestStackMinimalPullRequestsItem {
-    init(
-        number: Int,
-        state: PullRequestStackMinimalPullRequestsItemState,
-        draft: Bool,
-        mergedAt: Date?,
-        head: PullRequestStackMinimalPullRequestsItemHead
-    ) throws {
+extension PullRequestStackMinimalPullRequestsItem {
+    public init(number: Int, state: PullRequestStackMinimalPullRequestsItemState, draft: Bool, mergedAt: Date?, head: PullRequestStackMinimalPullRequestsItemHead) throws {
         (self.number, self.state) = (number, state)
         (self.draft, self.mergedAt) = (draft, mergedAt)
         self.head = head
@@ -247,20 +192,16 @@ public extension PullRequestStackMinimalPullRequestsItem {
 }
 
 /// Required enumerated value serialized in the `state` wire field.
-public struct PullRequestStackMinimalPullRequestsItemState: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct PullRequestStackMinimalPullRequestsItemState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let open = PullRequestStackMinimalPullRequestsItemState(rawValue: "open")
     public static let closed = PullRequestStackMinimalPullRequestsItemState(rawValue: "closed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

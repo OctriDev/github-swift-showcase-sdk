@@ -6,27 +6,11 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension AppsMethods {
-    /// Creates a GitHub App from a manifest to complete the GitHub App Manifest flow. Use the temporary `code` to
-    /// retrieve the app details and credentials, including its `id`, `pem`, and `webhook_secret`.
+extension AppsMethods {
+    /// Creates a GitHub App from a manifest to complete the GitHub App Manifest flow. Use the temporary `code` to retrieve the app details and credentials, including its `id`, `pem`, and `webhook_secret`.
     ///
-    /// Use this endpoint to complete the handshake necessary when implementing the [GitHub App Manifest
-    /// flow](https://docs.github.com/apps/building-github-apps/creating-github-apps-from-a-manifest/). When you create
-    /// a GitHub App with the manifest flow, you receive a temporary `code` used to retrieve the GitHub App's `id`,
-    /// `pem` (private key), and `webhook_secret`.
-    static func appsCreateFromManifest(
-        config: ClientConfig,
-        code: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> AppsCreateFromManifestResponse {
-        try await (sdkRequest(
-            "POST",
-            ["/app-manifests/", sdkEncodePathSegment(sdkWireString(code)), "/conversions"].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "appsCreateFromManifest",
-            options: requestOptions,
-            errors: ["404": BasicError.self, "422": ValidationErrorSimple.self]
-        )).data
+    /// Use this endpoint to complete the handshake necessary when implementing the [GitHub App Manifest flow](https://docs.github.com/apps/building-github-apps/creating-github-apps-from-a-manifest/). When you create a GitHub App with the manifest flow, you receive a temporary `code` used to retrieve the GitHub App's `id`, `pem` (private key), and `webhook_secret`.
+    public static func appsCreateFromManifest(config: ClientConfig, code: String, requestOptions: RequestOptions? = nil) async throws -> AppsCreateFromManifestResponse {
+        return try (await sdkRequest("POST", ["/app-manifests/", sdkEncodePathSegment(sdkWireString(code)), "/conversions"].joined(), config: config, decoder: .json, operationId: "appsCreateFromManifest", options: requestOptions, errors: ["404": BasicError.self, "422": ValidationErrorSimple.self])).data
     }
 }

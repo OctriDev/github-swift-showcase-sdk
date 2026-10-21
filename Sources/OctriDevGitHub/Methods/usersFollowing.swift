@@ -6,11 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension UsersMethods {
-    /// Lists the people who the specified user follows. If the specified user has a [private
-    /// profile](https://docs.github.com/account-and-profile/concepts/personal-profile#private-profiles), this endpoint
-    /// returns an empty list unless the request is authenticated as that user. A request authenticated as the specified
-    /// user returns the list even if the token has no OAuth scopes.
+extension UsersMethods {
+    /// Lists the people who the specified user follows. If the specified user has a [private profile](https://docs.github.com/account-and-profile/concepts/personal-profile#private-profiles), this endpoint returns an empty list unless the request is authenticated as that user. A request authenticated as the specified user returns the list even if the token has no OAuth scopes.
     ///
     /// - Parameters:
     /// - username: The handle for the GitHub user account.
@@ -22,50 +19,18 @@ public extension UsersMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    static func usersListFollowingForUser(
-        config: ClientConfig,
-        username: String,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [SimpleUser] {
-        try await (sdkRequest(
-            "GET",
-            ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/following"].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("page", value: page),
-            ],
-            decoder: .json,
-            operationId: "usersListFollowingForUser",
-            options: requestOptions
-        )).data
+    public static func usersListFollowingForUser(config: ClientConfig, username: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [SimpleUser] {
+        return try (await sdkRequest("GET", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/following"].joined(), config: config, query: [
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("page", value: page),
+        ], decoder: .json, operationId: "usersListFollowingForUser", options: requestOptions)).data
     }
 
-    /// Checks whether one GitHub user follows another user. Use `username` and `target_user` to identify the follower
-    /// and the account being checked.
+    /// Checks whether one GitHub user follows another user. Use `username` and `target_user` to identify the follower and the account being checked.
     ///
     /// - Parameters:
     /// - username: The handle for the GitHub user account.
-    static func usersCheckFollowingForUser(
-        config: ClientConfig,
-        username: String,
-        targetUser: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/users/",
-                sdkEncodePathSegment(sdkWireString(username)),
-                "/following/",
-                sdkEncodePathSegment(sdkWireString(targetUser)),
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "usersCheckFollowingForUser",
-            options: requestOptions
-        )).data
+    public static func usersCheckFollowingForUser(config: ClientConfig, username: String, targetUser: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("GET", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/following/", sdkEncodePathSegment(sdkWireString(targetUser))].joined(), config: config, decoder: .empty, operationId: "usersCheckFollowingForUser", options: requestOptions)).data
     }
 }

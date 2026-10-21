@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ReposMethods {
-    struct ReposUpdateOrgRulesetOptions: Codable {
+extension ReposMethods {
+    public struct ReposUpdateOrgRulesetOptions: Codable {
         public var org: String
         public var rulesetId: Int
         public var name: String?
@@ -23,9 +23,7 @@ public extension ReposMethods {
         }
     }
 
-    /// Replaces an organization repository ruleset. Supply the ruleset properties you want to change, including
-    /// `target` and `enforcement` where applicable; `bypass_actors`, `conditions`, and `rules` configure access and
-    /// matching behavior. A 200 response returns the updated ruleset.
+    /// Replaces an organization repository ruleset. Supply the ruleset properties you want to change, including `target` and `enforcement` where applicable; `bypass_actors`, `conditions`, and `rules` configure access and matching behavior. A 200 response returns the updated ruleset.
     ///
     /// Update a ruleset for an organization.
     ///
@@ -46,27 +44,9 @@ public extension ReposMethods {
     ///   policy rulesets, the conditions object should only contain the
     ///   `repository_name`, the `repository_id`, or the `repository_property`.
     /// - rules: An array of rules within the ruleset.
-    static func reposUpdateOrgRuleset(
-        config: ClientConfig,
-        options: ReposUpdateOrgRulesetOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> RepositoryRuleset {
+    public static func reposUpdateOrgRuleset(config: ClientConfig, options: ReposUpdateOrgRulesetOptions, requestOptions: RequestOptions? = nil) async throws -> RepositoryRuleset {
         let requestBody = ReposUpdateOrgRulesetRequestBody(options: options)
 
-        return try await (sdkRequest(
-            "PUT",
-            [
-                "/orgs/",
-                sdkEncodePathSegment(sdkWireString(options.org)),
-                "/rulesets/",
-                sdkEncodePathSegment(sdkWireString(options.rulesetId)),
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "reposUpdateOrgRuleset",
-            options: requestOptions,
-            errors: ["404": BasicError.self, "422": ValidationError.self, "500": BasicError.self]
-        )).data
+        return try (await sdkRequest("PUT", ["/orgs/", sdkEncodePathSegment(sdkWireString(options.org)), "/rulesets/", sdkEncodePathSegment(sdkWireString(options.rulesetId))].joined(), config: config, body: requestBody, decoder: .json, operationId: "reposUpdateOrgRuleset", options: requestOptions, errors: ["404": BasicError.self, "422": ValidationError.self, "500": BasicError.self])).data
     }
 }

@@ -6,28 +6,14 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension TeamsMethods {
-    /// > [!WARNING] > **Endpoint closing down notice:** This endpoint route is closing down and will be removed from
-    /// the Teams API. We recommend migrating your existing code to use the [Get a team by
-    /// name](https://docs.github.com/rest/teams/teams#get-a-team-by-name) endpoint.
+extension TeamsMethods {
+    /// > [!WARNING] > **Endpoint closing down notice:** This endpoint route is closing down and will be removed from the Teams API. We recommend migrating your existing code to use the [Get a team by name](https://docs.github.com/rest/teams/teams#get-a-team-by-name) endpoint.
     ///
     /// - Parameters:
     /// - teamId: The unique identifier of the team.
     ///
     /// - Warning: This operation is deprecated and may be removed in a future release.
-    static func teamsGetLegacy(
-        config: ClientConfig,
-        teamId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> TeamFull {
-        try await (sdkRequest(
-            "GET",
-            ["/teams/", sdkEncodePathSegment(sdkWireString(teamId))].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "teamsGetLegacy",
-            options: requestOptions,
-            errors: ["404": BasicError.self]
-        )).data
+    public static func teamsGetLegacy(config: ClientConfig, teamId: Int, requestOptions: RequestOptions? = nil) async throws -> TeamFull {
+        return try (await sdkRequest("GET", ["/teams/", sdkEncodePathSegment(sdkWireString(teamId))].joined(), config: config, decoder: .json, operationId: "teamsGetLegacy", options: requestOptions, errors: ["404": BasicError.self])).data
     }
 }

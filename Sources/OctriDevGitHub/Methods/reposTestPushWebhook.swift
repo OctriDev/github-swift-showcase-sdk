@@ -6,10 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ReposMethods {
-    /// This will trigger the hook with the latest push to the current repository if the hook is subscribed to `push`
-    /// events. If the hook is not subscribed to `push` events, the server will respond with 204 but no test POST will
-    /// be generated. > [!NOTE] > Previously `/repos/:owner/:repo/hooks/:hook_id/test`
+extension ReposMethods {
+    /// This will trigger the hook with the latest push to the current repository if the hook is subscribed to `push` events. If the hook is not subscribed to `push` events, the server will respond with 204 but no test POST will be generated. > [!NOTE] > Previously `/repos/:owner/:repo/hooks/:hook_id/test`
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -18,29 +16,7 @@ public extension ReposMethods {
     ///   not case sensitive.
     /// - hookId: The unique identifier of the hook. You can find this value in the
     ///   `X-GitHub-Hook-ID` header of a webhook delivery.
-    static func reposTestPushWebhook(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        hookId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "POST",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/hooks/",
-                sdkEncodePathSegment(sdkWireString(hookId)),
-                "/tests",
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "reposTestPushWebhook",
-            options: requestOptions,
-            errors: ["404": BasicError.self]
-        )).data
+    public static func reposTestPushWebhook(config: ClientConfig, owner: String, repo: String, hookId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/hooks/", sdkEncodePathSegment(sdkWireString(hookId)), "/tests"].joined(), config: config, decoder: .empty, operationId: "reposTestPushWebhook", options: requestOptions, errors: ["404": BasicError.self])).data
     }
 }

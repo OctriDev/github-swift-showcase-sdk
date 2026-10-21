@@ -6,21 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension PackagesMethods {
-    /// Lists all packages that are owned by the authenticated user within the user's namespace, and that encountered a
-    /// conflict during a Docker migration. OAuth app tokens and personal access tokens (classic) need the
-    /// `read:packages` scope to use this endpoint.
-    static func packagesListDockerMigrationConflictingPackagesForAuthenticatedUser(
-        config: ClientConfig,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [Package] {
-        try await (sdkRequest(
-            "GET",
-            "/user/docker/conflicts",
-            config: config,
-            decoder: .json,
-            operationId: "packagesListDockerMigrationConflictingPackagesForAuthenticatedUser",
-            options: requestOptions
-        )).data
+extension PackagesMethods {
+    /// Lists all packages that are owned by the authenticated user within the user's namespace, and that encountered a conflict during a Docker migration. OAuth app tokens and personal access tokens (classic) need the `read:packages` scope to use this endpoint.
+    public static func packagesListDockerMigrationConflictingPackagesForAuthenticatedUser(config: ClientConfig, requestOptions: RequestOptions? = nil) async throws -> [Package] {
+        return try (await sdkRequest("GET", "/user/docker/conflicts", config: config, decoder: .json, operationId: "packagesListDockerMigrationConflictingPackagesForAuthenticatedUser", options: requestOptions)).data
     }
 }

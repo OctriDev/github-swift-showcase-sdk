@@ -6,60 +6,22 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension OrgsMethods {
-    /// The user can publicize their own membership. (A user cannot publicize the membership for another user.) Note
-    /// that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see
-    /// "[HTTP method](https://docs.github.com/rest/guides/getting-started-with-the-rest-api#http-method)."
+extension OrgsMethods {
+    /// The user can publicize their own membership. (A user cannot publicize the membership for another user.) Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP method](https://docs.github.com/rest/guides/getting-started-with-the-rest-api#http-method)."
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - username: The handle for the GitHub user account.
-    static func orgsSetPublicMembershipForAuthenticatedUser(
-        config: ClientConfig,
-        org: String,
-        username: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "PUT",
-            [
-                "/orgs/",
-                sdkEncodePathSegment(sdkWireString(org)),
-                "/public_members/",
-                sdkEncodePathSegment(sdkWireString(username)),
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "orgsSetPublicMembershipForAuthenticatedUser",
-            options: requestOptions,
-            errors: ["403": BasicError.self]
-        )).data
+    public static func orgsSetPublicMembershipForAuthenticatedUser(config: ClientConfig, org: String, username: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("PUT", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/public_members/", sdkEncodePathSegment(sdkWireString(username))].joined(), config: config, decoder: .empty, operationId: "orgsSetPublicMembershipForAuthenticatedUser", options: requestOptions, errors: ["403": BasicError.self])).data
     }
 
-    /// Removes the public membership for the authenticated user from the specified organization, unless public
-    /// visibility is enforced by default.
+    /// Removes the public membership for the authenticated user from the specified organization, unless public visibility is enforced by default.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - username: The handle for the GitHub user account.
-    static func orgsRemovePublicMembershipForAuthenticatedUser(
-        config: ClientConfig,
-        org: String,
-        username: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "DELETE",
-            [
-                "/orgs/",
-                sdkEncodePathSegment(sdkWireString(org)),
-                "/public_members/",
-                sdkEncodePathSegment(sdkWireString(username)),
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "orgsRemovePublicMembershipForAuthenticatedUser",
-            options: requestOptions
-        )).data
+    public static func orgsRemovePublicMembershipForAuthenticatedUser(config: ClientConfig, org: String, username: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("DELETE", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/public_members/", sdkEncodePathSegment(sdkWireString(username))].joined(), config: config, decoder: .empty, operationId: "orgsRemovePublicMembershipForAuthenticatedUser", options: requestOptions)).data
     }
 }

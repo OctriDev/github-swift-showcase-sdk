@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension DependencyGraphMethods {
+extension DependencyGraphMethods {
     /// Triggers a job to generate a software bill of materials (SBOM) for a repository in SPDX JSON format.
     ///
     /// - Parameters:
@@ -14,26 +14,7 @@ public extension DependencyGraphMethods {
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    static func dependencyGraphGenerateSbomReport(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> DependencyGraphGenerateSbomReportResponse {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/dependency-graph/sbom/generate-report",
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "dependencyGraphGenerateSbomReport",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self]
-        )).data
+    public static func dependencyGraphGenerateSbomReport(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> DependencyGraphGenerateSbomReportResponse {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/dependency-graph/sbom/generate-report"].joined(), config: config, decoder: .json, operationId: "dependencyGraphGenerateSbomReport", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
     }
 }

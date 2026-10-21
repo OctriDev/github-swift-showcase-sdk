@@ -3,15 +3,9 @@
 
 import Foundation
 
-/// Nullable domain models
+// Nullable domain models
 extension NullableRepositoryWebhooksTemplateRepository {
-    mutating func sdkSet14(
-        _ hasDownloads: Bool?,
-        _ archived: Bool?,
-        _ disabled: Bool?,
-        _ visibility: String?,
-        _ pushedAt: String?
-    ) {
+    mutating func sdkSet14(_ hasDownloads: Bool?, _ archived: Bool?, _ disabled: Bool?, _ visibility: String?, _ pushedAt: String?) {
         self.hasDownloads = hasDownloads
         self.archived = archived
         self.disabled = disabled
@@ -21,13 +15,7 @@ extension NullableRepositoryWebhooksTemplateRepository {
 }
 
 extension NullableRepositoryWebhooksTemplateRepository {
-    mutating func sdkSet15(
-        _ createdAt: String?,
-        _ updatedAt: String?,
-        _ permissions: NullableRepositoryWebhooksTemplateRepositoryPermissions?,
-        _ allowRebaseMerge: Bool?,
-        _ tempCloneToken: String?
-    ) {
+    mutating func sdkSet15(_ createdAt: String?, _ updatedAt: String?, _ permissions: NullableRepositoryWebhooksTemplateRepositoryPermissions?, _ allowRebaseMerge: Bool?, _ tempCloneToken: String?) {
         self.createdAt = createdAt
         self.updatedAt = updatedAt
         self.permissions = permissions
@@ -37,13 +25,7 @@ extension NullableRepositoryWebhooksTemplateRepository {
 }
 
 extension NullableRepositoryWebhooksTemplateRepository {
-    mutating func sdkSet16(
-        _ allowSquashMerge: Bool?,
-        _ allowAutoMerge: Bool?,
-        _ deleteBranchOnMerge: Bool?,
-        _ allowUpdateBranch: Bool?,
-        _ useSquashPrTitleAsDefault: Bool?
-    ) {
+    mutating func sdkSet16(_ allowSquashMerge: Bool?, _ allowAutoMerge: Bool?, _ deleteBranchOnMerge: Bool?, _ allowUpdateBranch: Bool?, _ useSquashPrTitleAsDefault: Bool?) {
         self.allowSquashMerge = allowSquashMerge
         self.allowAutoMerge = allowAutoMerge
         self.deleteBranchOnMerge = deleteBranchOnMerge
@@ -53,12 +35,7 @@ extension NullableRepositoryWebhooksTemplateRepository {
 }
 
 extension NullableRepositoryWebhooksTemplateRepository {
-    mutating func sdkSet17(
-        _ squashMergeCommitTitle: NullableRepositoryWebhooksTemplateRepositorySquashMergeCommitTitle?,
-        _ squashMergeCommitMessage: NullableRepositoryWebhooksTemplateRepositorySquashMergeCommitMessage?,
-        _ mergeCommitTitle: NullableRepositoryWebhooksTemplateRepositoryMergeCommitTitle?,
-        _ mergeCommitMessage: NullableRepositoryWebhooksTemplateRepositoryMergeCommitMessage?
-    ) {
+    mutating func sdkSet17(_ squashMergeCommitTitle: NullableRepositoryWebhooksTemplateRepositorySquashMergeCommitTitle?, _ squashMergeCommitMessage: NullableRepositoryWebhooksTemplateRepositorySquashMergeCommitMessage?, _ mergeCommitTitle: NullableRepositoryWebhooksTemplateRepositoryMergeCommitTitle?, _ mergeCommitMessage: NullableRepositoryWebhooksTemplateRepositoryMergeCommitMessage?) {
         self.squashMergeCommitTitle = squashMergeCommitTitle
         self.squashMergeCommitMessage = squashMergeCommitMessage
         self.mergeCommitTitle = mergeCommitTitle
@@ -76,128 +53,128 @@ extension NullableRepositoryWebhooksTemplateRepository {
 
 extension NullableRepositoryWebhooksTemplateRepository {
     mutating func sdkDecodeFieldsPart1(_ container: KeyedDecodingContainer<CodingKeys>) throws {
-        id = try container.sdkDecodeIfPresent(.id)
-        nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        name = try container.sdkDecodeIfPresent(.name)
-        fullName = try container.sdkDecodeIfPresent(.fullName)
-        owner = try container.sdkDecodeIfPresent(.owner)
-        self.private = try container.sdkDecodeIfPresent(.private)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        description = try container.sdkDecodeIfPresent(.description)
-        fork = try container.sdkDecodeIfPresent(.fork)
-        url = try container.sdkDecodeIfPresent(.url)
-        archiveUrl = try container.sdkDecodeIfPresent(.archiveUrl)
-        assigneesUrl = try container.sdkDecodeIfPresent(.assigneesUrl)
+        self.id = try container.sdkDecodeIfPresent(.id)
+        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        self.name = try container.sdkDecodeIfPresent(.name)
+        self.fullName = try container.sdkDecodeIfPresent(.fullName)
+        self.owner = try container.sdkDecodeIfPresent(.owner)
+        self.`private` = try container.sdkDecodeIfPresent(.`private`)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        self.description = try container.sdkDecodeIfPresent(.description)
+        self.fork = try container.sdkDecodeIfPresent(.fork)
+        self.url = try container.sdkDecodeIfPresent(.url)
+        self.archiveUrl = try container.sdkDecodeIfPresent(.archiveUrl)
+        self.assigneesUrl = try container.sdkDecodeIfPresent(.assigneesUrl)
     }
 }
 
 extension NullableRepositoryWebhooksTemplateRepository {
     mutating func sdkDecodeFieldsPart2(_ container: KeyedDecodingContainer<CodingKeys>) throws {
-        blobsUrl = try container.sdkDecodeIfPresent(.blobsUrl)
-        branchesUrl = try container.sdkDecodeIfPresent(.branchesUrl)
-        collaboratorsUrl = try container.sdkDecodeIfPresent(.collaboratorsUrl)
-        commentsUrl = try container.sdkDecodeIfPresent(.commentsUrl)
-        commitsUrl = try container.sdkDecodeIfPresent(.commitsUrl)
-        compareUrl = try container.sdkDecodeIfPresent(.compareUrl)
-        contentsUrl = try container.sdkDecodeIfPresent(.contentsUrl)
-        contributorsUrl = try container.sdkDecodeIfPresent(.contributorsUrl)
-        deploymentsUrl = try container.sdkDecodeIfPresent(.deploymentsUrl)
-        downloadsUrl = try container.sdkDecodeIfPresent(.downloadsUrl)
-        eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
-        forksUrl = try container.sdkDecodeIfPresent(.forksUrl)
+        self.blobsUrl = try container.sdkDecodeIfPresent(.blobsUrl)
+        self.branchesUrl = try container.sdkDecodeIfPresent(.branchesUrl)
+        self.collaboratorsUrl = try container.sdkDecodeIfPresent(.collaboratorsUrl)
+        self.commentsUrl = try container.sdkDecodeIfPresent(.commentsUrl)
+        self.commitsUrl = try container.sdkDecodeIfPresent(.commitsUrl)
+        self.compareUrl = try container.sdkDecodeIfPresent(.compareUrl)
+        self.contentsUrl = try container.sdkDecodeIfPresent(.contentsUrl)
+        self.contributorsUrl = try container.sdkDecodeIfPresent(.contributorsUrl)
+        self.deploymentsUrl = try container.sdkDecodeIfPresent(.deploymentsUrl)
+        self.downloadsUrl = try container.sdkDecodeIfPresent(.downloadsUrl)
+        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        self.forksUrl = try container.sdkDecodeIfPresent(.forksUrl)
     }
 }
 
 extension NullableRepositoryWebhooksTemplateRepository {
     mutating func sdkDecodeFieldsPart3(_ container: KeyedDecodingContainer<CodingKeys>) throws {
-        gitCommitsUrl = try container.sdkDecodeIfPresent(.gitCommitsUrl)
-        gitRefsUrl = try container.sdkDecodeIfPresent(.gitRefsUrl)
-        gitTagsUrl = try container.sdkDecodeIfPresent(.gitTagsUrl)
-        gitUrl = try container.sdkDecodeIfPresent(.gitUrl)
-        issueCommentUrl = try container.sdkDecodeIfPresent(.issueCommentUrl)
-        issueEventsUrl = try container.sdkDecodeIfPresent(.issueEventsUrl)
-        issuesUrl = try container.sdkDecodeIfPresent(.issuesUrl)
-        keysUrl = try container.sdkDecodeIfPresent(.keysUrl)
-        labelsUrl = try container.sdkDecodeIfPresent(.labelsUrl)
-        languagesUrl = try container.sdkDecodeIfPresent(.languagesUrl)
-        mergesUrl = try container.sdkDecodeIfPresent(.mergesUrl)
-        milestonesUrl = try container.sdkDecodeIfPresent(.milestonesUrl)
+        self.gitCommitsUrl = try container.sdkDecodeIfPresent(.gitCommitsUrl)
+        self.gitRefsUrl = try container.sdkDecodeIfPresent(.gitRefsUrl)
+        self.gitTagsUrl = try container.sdkDecodeIfPresent(.gitTagsUrl)
+        self.gitUrl = try container.sdkDecodeIfPresent(.gitUrl)
+        self.issueCommentUrl = try container.sdkDecodeIfPresent(.issueCommentUrl)
+        self.issueEventsUrl = try container.sdkDecodeIfPresent(.issueEventsUrl)
+        self.issuesUrl = try container.sdkDecodeIfPresent(.issuesUrl)
+        self.keysUrl = try container.sdkDecodeIfPresent(.keysUrl)
+        self.labelsUrl = try container.sdkDecodeIfPresent(.labelsUrl)
+        self.languagesUrl = try container.sdkDecodeIfPresent(.languagesUrl)
+        self.mergesUrl = try container.sdkDecodeIfPresent(.mergesUrl)
+        self.milestonesUrl = try container.sdkDecodeIfPresent(.milestonesUrl)
     }
 }
 
 extension NullableRepositoryWebhooksTemplateRepository {
     mutating func sdkDecodeFieldsPart4(_ container: KeyedDecodingContainer<CodingKeys>) throws {
-        notificationsUrl = try container.sdkDecodeIfPresent(.notificationsUrl)
-        pullsUrl = try container.sdkDecodeIfPresent(.pullsUrl)
-        releasesUrl = try container.sdkDecodeIfPresent(.releasesUrl)
-        sshUrl = try container.sdkDecodeIfPresent(.sshUrl)
-        stargazersUrl = try container.sdkDecodeIfPresent(.stargazersUrl)
-        statusesUrl = try container.sdkDecodeIfPresent(.statusesUrl)
-        subscribersUrl = try container.sdkDecodeIfPresent(.subscribersUrl)
-        subscriptionUrl = try container.sdkDecodeIfPresent(.subscriptionUrl)
-        tagsUrl = try container.sdkDecodeIfPresent(.tagsUrl)
-        teamsUrl = try container.sdkDecodeIfPresent(.teamsUrl)
-        treesUrl = try container.sdkDecodeIfPresent(.treesUrl)
-        cloneUrl = try container.sdkDecodeIfPresent(.cloneUrl)
+        self.notificationsUrl = try container.sdkDecodeIfPresent(.notificationsUrl)
+        self.pullsUrl = try container.sdkDecodeIfPresent(.pullsUrl)
+        self.releasesUrl = try container.sdkDecodeIfPresent(.releasesUrl)
+        self.sshUrl = try container.sdkDecodeIfPresent(.sshUrl)
+        self.stargazersUrl = try container.sdkDecodeIfPresent(.stargazersUrl)
+        self.statusesUrl = try container.sdkDecodeIfPresent(.statusesUrl)
+        self.subscribersUrl = try container.sdkDecodeIfPresent(.subscribersUrl)
+        self.subscriptionUrl = try container.sdkDecodeIfPresent(.subscriptionUrl)
+        self.tagsUrl = try container.sdkDecodeIfPresent(.tagsUrl)
+        self.teamsUrl = try container.sdkDecodeIfPresent(.teamsUrl)
+        self.treesUrl = try container.sdkDecodeIfPresent(.treesUrl)
+        self.cloneUrl = try container.sdkDecodeIfPresent(.cloneUrl)
     }
 }
 
 extension NullableRepositoryWebhooksTemplateRepository {
     mutating func sdkDecodeFieldsPart5(_ container: KeyedDecodingContainer<CodingKeys>) throws {
-        mirrorUrl = try container.sdkDecodeIfPresent(.mirrorUrl)
-        hooksUrl = try container.sdkDecodeIfPresent(.hooksUrl)
-        svnUrl = try container.sdkDecodeIfPresent(.svnUrl)
-        homepage = try container.sdkDecodeIfPresent(.homepage)
-        language = try container.sdkDecodeIfPresent(.language)
-        forksCount = try container.sdkDecodeIfPresent(.forksCount)
-        stargazersCount = try container.sdkDecodeIfPresent(.stargazersCount)
-        watchersCount = try container.sdkDecodeIfPresent(.watchersCount)
-        size = try container.sdkDecodeIfPresent(.size)
-        defaultBranch = try container.sdkDecodeIfPresent(.defaultBranch)
-        openIssuesCount = try container.sdkDecodeIfPresent(.openIssuesCount)
-        isTemplate = try container.sdkDecodeIfPresent(.isTemplate)
+        self.mirrorUrl = try container.sdkDecodeIfPresent(.mirrorUrl)
+        self.hooksUrl = try container.sdkDecodeIfPresent(.hooksUrl)
+        self.svnUrl = try container.sdkDecodeIfPresent(.svnUrl)
+        self.homepage = try container.sdkDecodeIfPresent(.homepage)
+        self.language = try container.sdkDecodeIfPresent(.language)
+        self.forksCount = try container.sdkDecodeIfPresent(.forksCount)
+        self.stargazersCount = try container.sdkDecodeIfPresent(.stargazersCount)
+        self.watchersCount = try container.sdkDecodeIfPresent(.watchersCount)
+        self.size = try container.sdkDecodeIfPresent(.size)
+        self.defaultBranch = try container.sdkDecodeIfPresent(.defaultBranch)
+        self.openIssuesCount = try container.sdkDecodeIfPresent(.openIssuesCount)
+        self.isTemplate = try container.sdkDecodeIfPresent(.isTemplate)
     }
 }
 
 extension NullableRepositoryWebhooksTemplateRepository {
     mutating func sdkDecodeFieldsPart6(_ container: KeyedDecodingContainer<CodingKeys>) throws {
-        topics = try container.sdkDecodeIfPresent(.topics)
-        hasIssues = try container.sdkDecodeIfPresent(.hasIssues)
-        hasProjects = try container.sdkDecodeIfPresent(.hasProjects)
-        hasWiki = try container.sdkDecodeIfPresent(.hasWiki)
-        hasPages = try container.sdkDecodeIfPresent(.hasPages)
-        hasDownloads = try container.sdkDecodeIfPresent(.hasDownloads)
-        archived = try container.sdkDecodeIfPresent(.archived)
-        disabled = try container.sdkDecodeIfPresent(.disabled)
-        visibility = try container.sdkDecodeIfPresent(.visibility)
-        pushedAt = try container.sdkDecodeIfPresent(.pushedAt)
-        createdAt = try container.sdkDecodeIfPresent(.createdAt)
-        updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
+        self.topics = try container.sdkDecodeIfPresent(.topics)
+        self.hasIssues = try container.sdkDecodeIfPresent(.hasIssues)
+        self.hasProjects = try container.sdkDecodeIfPresent(.hasProjects)
+        self.hasWiki = try container.sdkDecodeIfPresent(.hasWiki)
+        self.hasPages = try container.sdkDecodeIfPresent(.hasPages)
+        self.hasDownloads = try container.sdkDecodeIfPresent(.hasDownloads)
+        self.archived = try container.sdkDecodeIfPresent(.archived)
+        self.disabled = try container.sdkDecodeIfPresent(.disabled)
+        self.visibility = try container.sdkDecodeIfPresent(.visibility)
+        self.pushedAt = try container.sdkDecodeIfPresent(.pushedAt)
+        self.createdAt = try container.sdkDecodeIfPresent(.createdAt)
+        self.updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
     }
 }
 
 extension NullableRepositoryWebhooksTemplateRepository {
     mutating func sdkDecodeFieldsPart7(_ container: KeyedDecodingContainer<CodingKeys>) throws {
-        permissions = try container.sdkDecodeIfPresent(.permissions)
-        allowRebaseMerge = try container.sdkDecodeIfPresent(.allowRebaseMerge)
-        tempCloneToken = try container.sdkDecodeIfPresent(.tempCloneToken)
-        allowSquashMerge = try container.sdkDecodeIfPresent(.allowSquashMerge)
-        allowAutoMerge = try container.sdkDecodeIfPresent(.allowAutoMerge)
-        deleteBranchOnMerge = try container.sdkDecodeIfPresent(.deleteBranchOnMerge)
-        allowUpdateBranch = try container.sdkDecodeIfPresent(.allowUpdateBranch)
-        useSquashPrTitleAsDefault = try container.sdkDecodeIfPresent(.useSquashPrTitleAsDefault)
-        squashMergeCommitTitle = try container.sdkDecodeIfPresent(.squashMergeCommitTitle)
-        squashMergeCommitMessage = try container.sdkDecodeIfPresent(.squashMergeCommitMessage)
-        mergeCommitTitle = try container.sdkDecodeIfPresent(.mergeCommitTitle)
-        mergeCommitMessage = try container.sdkDecodeIfPresent(.mergeCommitMessage)
+        self.permissions = try container.sdkDecodeIfPresent(.permissions)
+        self.allowRebaseMerge = try container.sdkDecodeIfPresent(.allowRebaseMerge)
+        self.tempCloneToken = try container.sdkDecodeIfPresent(.tempCloneToken)
+        self.allowSquashMerge = try container.sdkDecodeIfPresent(.allowSquashMerge)
+        self.allowAutoMerge = try container.sdkDecodeIfPresent(.allowAutoMerge)
+        self.deleteBranchOnMerge = try container.sdkDecodeIfPresent(.deleteBranchOnMerge)
+        self.allowUpdateBranch = try container.sdkDecodeIfPresent(.allowUpdateBranch)
+        self.useSquashPrTitleAsDefault = try container.sdkDecodeIfPresent(.useSquashPrTitleAsDefault)
+        self.squashMergeCommitTitle = try container.sdkDecodeIfPresent(.squashMergeCommitTitle)
+        self.squashMergeCommitMessage = try container.sdkDecodeIfPresent(.squashMergeCommitMessage)
+        self.mergeCommitTitle = try container.sdkDecodeIfPresent(.mergeCommitTitle)
+        self.mergeCommitMessage = try container.sdkDecodeIfPresent(.mergeCommitMessage)
     }
 }
 
 extension NullableRepositoryWebhooksTemplateRepository {
     mutating func sdkDecodeFieldsPart8(_ container: KeyedDecodingContainer<CodingKeys>) throws {
-        allowMergeCommit = try container.sdkDecodeIfPresent(.allowMergeCommit)
-        subscribersCount = try container.sdkDecodeIfPresent(.subscribersCount)
-        networkCount = try container.sdkDecodeIfPresent(.networkCount)
+        self.allowMergeCommit = try container.sdkDecodeIfPresent(.allowMergeCommit)
+        self.subscribersCount = try container.sdkDecodeIfPresent(.subscribersCount)
+        self.networkCount = try container.sdkDecodeIfPresent(.networkCount)
     }
 }
 
@@ -262,58 +239,39 @@ public struct NullableRepositoryWebhooksTemplateRepositoryOwner: Codable {
     }
 
     init() {
-        (login, id, nodeId, avatarUrl, gravatarId) = (nil, nil, nil, nil, nil)
-        (url, htmlUrl, followersUrl, followingUrl, gistsUrl) = (nil, nil, nil, nil, nil)
-        (starredUrl, subscriptionsUrl, organizationsUrl, reposUrl, eventsUrl) = (nil, nil, nil, nil, nil)
-        (receivedEventsUrl, type, siteAdmin) = (nil, nil, nil)
+        (self.login, self.id, self.nodeId, self.avatarUrl, self.gravatarId) = (nil, nil, nil, nil, nil)
+        (self.url, self.htmlUrl, self.followersUrl, self.followingUrl, self.gistsUrl) = (nil, nil, nil, nil, nil)
+        (self.starredUrl, self.subscriptionsUrl, self.organizationsUrl, self.reposUrl, self.eventsUrl) = (nil, nil, nil, nil, nil)
+        (self.receivedEventsUrl, self.type, self.siteAdmin) = (nil, nil, nil)
     }
 }
 
-public extension NullableRepositoryWebhooksTemplateRepositoryOwner {
-    init(from decoder: Decoder) throws {
+extension NullableRepositoryWebhooksTemplateRepositoryOwner {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        login = try container.sdkDecodeIfPresent(.login)
-        id = try container.sdkDecodeIfPresent(.id)
-        nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
-        gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
-        url = try container.sdkDecodeIfPresent(.url)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
-        followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
-        gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
-        starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
-        subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
-        organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
-        reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
-        eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
-        receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
-        type = try container.sdkDecodeIfPresent(.type)
-        siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
+        self.login = try container.sdkDecodeIfPresent(.login)
+        self.id = try container.sdkDecodeIfPresent(.id)
+        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        self.avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
+        self.gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
+        self.url = try container.sdkDecodeIfPresent(.url)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        self.followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
+        self.followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
+        self.gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
+        self.starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
+        self.subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
+        self.organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
+        self.reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
+        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        self.receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
+        self.type = try container.sdkDecodeIfPresent(.type)
+        self.siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
     }
 }
 
-public extension NullableRepositoryWebhooksTemplateRepositoryOwner {
-    init(
-        login: String? = nil,
-        id: Int? = nil,
-        nodeId: String? = nil,
-        avatarUrl: String? = nil,
-        gravatarId: String? = nil,
-        url: String? = nil,
-        htmlUrl: String? = nil,
-        followersUrl: String? = nil,
-        followingUrl: String? = nil,
-        gistsUrl: String? = nil,
-        starredUrl: String? = nil,
-        subscriptionsUrl: String? = nil,
-        organizationsUrl: String? = nil,
-        reposUrl: String? = nil,
-        eventsUrl: String? = nil,
-        receivedEventsUrl: String? = nil,
-        type: String? = nil,
-        siteAdmin: Bool? = nil
-    ) {
+extension NullableRepositoryWebhooksTemplateRepositoryOwner {
+    public init(login: String? = nil, id: Int? = nil, nodeId: String? = nil, avatarUrl: String? = nil, gravatarId: String? = nil, url: String? = nil, htmlUrl: String? = nil, followersUrl: String? = nil, followingUrl: String? = nil, gistsUrl: String? = nil, starredUrl: String? = nil, subscriptionsUrl: String? = nil, organizationsUrl: String? = nil, reposUrl: String? = nil, eventsUrl: String? = nil, receivedEventsUrl: String? = nil, type: String? = nil, siteAdmin: Bool? = nil) {
         self.init()
         (self.login, self.id) = (login, id)
         (self.nodeId, self.avatarUrl) = (nodeId, avatarUrl)
@@ -349,23 +307,23 @@ public struct NullableRepositoryWebhooksTemplateRepositoryPermissions: Codable {
     }
 
     init() {
-        (admin, maintain, push, triage, pull) = (nil, nil, nil, nil, nil)
+        (self.admin, self.maintain, self.push, self.triage, self.pull) = (nil, nil, nil, nil, nil)
     }
 }
 
-public extension NullableRepositoryWebhooksTemplateRepositoryPermissions {
-    init(from decoder: Decoder) throws {
+extension NullableRepositoryWebhooksTemplateRepositoryPermissions {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        admin = try container.sdkDecodeIfPresent(.admin)
-        maintain = try container.sdkDecodeIfPresent(.maintain)
-        push = try container.sdkDecodeIfPresent(.push)
-        triage = try container.sdkDecodeIfPresent(.triage)
-        pull = try container.sdkDecodeIfPresent(.pull)
+        self.admin = try container.sdkDecodeIfPresent(.admin)
+        self.maintain = try container.sdkDecodeIfPresent(.maintain)
+        self.push = try container.sdkDecodeIfPresent(.push)
+        self.triage = try container.sdkDecodeIfPresent(.triage)
+        self.pull = try container.sdkDecodeIfPresent(.pull)
     }
 }
 
-public extension NullableRepositoryWebhooksTemplateRepositoryPermissions {
-    init(admin: Bool? = nil, maintain: Bool? = nil, push: Bool? = nil, triage: Bool? = nil, pull: Bool? = nil) {
+extension NullableRepositoryWebhooksTemplateRepositoryPermissions {
+    public init(admin: Bool? = nil, maintain: Bool? = nil, push: Bool? = nil, triage: Bool? = nil, pull: Bool? = nil) {
         self.init()
         (self.admin, self.maintain) = (admin, maintain)
         (self.push, self.triage) = (push, triage)
@@ -394,45 +352,31 @@ public struct NullableRepositoryWebhooksPermissions: Codable {
         case maintain
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension NullableRepositoryWebhooksPermissions {
-    init(from decoder: Decoder) throws {
+extension NullableRepositoryWebhooksPermissions {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.admin) else {
-            throw SdkValidationError(
-                field: "admin",
-                code: "required",
-                message: "Validation failed for 'admin': value is required"
-            )
+            throw SdkValidationError(field: "admin", code: "required", message: "Validation failed for 'admin': value is required")
         }
         guard container.contains(.pull) else {
-            throw SdkValidationError(
-                field: "pull",
-                code: "required",
-                message: "Validation failed for 'pull': value is required"
-            )
+            throw SdkValidationError(field: "pull", code: "required", message: "Validation failed for 'pull': value is required")
         }
         guard container.contains(.push) else {
-            throw SdkValidationError(
-                field: "push",
-                code: "required",
-                message: "Validation failed for 'push': value is required"
-            )
+            throw SdkValidationError(field: "push", code: "required", message: "Validation failed for 'push': value is required")
         }
-        admin = try container.sdkDecodeRequired(.admin)
-        pull = try container.sdkDecodeRequired(.pull)
-        push = try container.sdkDecodeRequired(.push)
-        triage = try container.sdkDecodeIfPresent(.triage)
-        maintain = try container.sdkDecodeIfPresent(.maintain)
+        self.admin = try container.sdkDecodeRequired(.admin)
+        self.pull = try container.sdkDecodeRequired(.pull)
+        self.push = try container.sdkDecodeRequired(.push)
+        self.triage = try container.sdkDecodeIfPresent(.triage)
+        self.maintain = try container.sdkDecodeIfPresent(.maintain)
     }
 }
 
-public extension NullableRepositoryWebhooksPermissions {
-    init(admin: Bool, pull: Bool, push: Bool, triage: Bool? = nil, maintain: Bool? = nil) {
+extension NullableRepositoryWebhooksPermissions {
+    public init(admin: Bool, pull: Bool, push: Bool, triage: Bool? = nil, maintain: Bool? = nil) {
         (self.admin, self.pull) = (admin, pull)
         (self.push, self.triage) = (push, triage)
         self.maintain = maintain

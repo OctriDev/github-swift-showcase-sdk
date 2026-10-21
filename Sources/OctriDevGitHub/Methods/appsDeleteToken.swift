@@ -6,31 +6,16 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension AppsMethods {
-    /// OAuth or GitHub application owners can revoke a single token for an OAuth application or a GitHub application
-    /// with an OAuth authorization.
+extension AppsMethods {
+    /// OAuth or GitHub application owners can revoke a single token for an OAuth application or a GitHub application with an OAuth authorization.
     ///
     /// - Parameters:
     /// - clientId: The client ID of the GitHub app.
     /// - accessToken: The OAuth access token used to authenticate to the GitHub
     ///   API.
-    static func appsDeleteToken(
-        config: ClientConfig,
-        clientId: String,
-        accessToken: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
+    public static func appsDeleteToken(config: ClientConfig, clientId: String, accessToken: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
         let requestBody = AppsDeleteTokenRequestBody(accessToken: accessToken)
 
-        return try await (sdkRequest(
-            "DELETE",
-            ["/applications/", sdkEncodePathSegment(sdkWireString(clientId)), "/token"].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .empty,
-            operationId: "appsDeleteToken",
-            options: requestOptions,
-            errors: ["422": ValidationError.self]
-        )).data
+        return try (await sdkRequest("DELETE", ["/applications/", sdkEncodePathSegment(sdkWireString(clientId)), "/token"].joined(), config: config, body: requestBody, decoder: .empty, operationId: "appsDeleteToken", options: requestOptions, errors: ["422": ValidationError.self])).data
     }
 }

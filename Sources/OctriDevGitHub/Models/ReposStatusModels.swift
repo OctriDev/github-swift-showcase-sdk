@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// ReposStatus domain models
+// ReposStatus domain models
 /// Status Check Policy
 public struct StatusCheckPolicy: Codable {
     /// Required `uri`-formatted value serialized in the `url` wire field.
@@ -32,72 +32,44 @@ public struct StatusCheckPolicy: Codable {
         case contextsUrl = "contexts_url"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension StatusCheckPolicy {
-    init(from decoder: Decoder) throws {
+extension StatusCheckPolicy {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.url) else {
-            throw SdkValidationError(
-                field: "url",
-                code: "required",
-                message: "Validation failed for 'url': value is required"
-            )
+            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
         }
         guard container.contains(.strict) else {
-            throw SdkValidationError(
-                field: "strict",
-                code: "required",
-                message: "Validation failed for 'strict': value is required"
-            )
+            throw SdkValidationError(field: "strict", code: "required", message: "Validation failed for 'strict': value is required")
         }
         guard container.contains(.contexts) else {
-            throw SdkValidationError(
-                field: "contexts",
-                code: "required",
-                message: "Validation failed for 'contexts': value is required"
-            )
+            throw SdkValidationError(field: "contexts", code: "required", message: "Validation failed for 'contexts': value is required")
         }
         guard container.contains(.checks) else {
-            throw SdkValidationError(
-                field: "checks",
-                code: "required",
-                message: "Validation failed for 'checks': value is required"
-            )
+            throw SdkValidationError(field: "checks", code: "required", message: "Validation failed for 'checks': value is required")
         }
         guard container.contains(.contextsUrl) else {
-            throw SdkValidationError(
-                field: "contexts_url",
-                code: "required",
-                message: "Validation failed for 'contexts_url': value is required"
-            )
+            throw SdkValidationError(field: "contexts_url", code: "required", message: "Validation failed for 'contexts_url': value is required")
         }
-        url = try container.sdkDecodeRequired(.url)
-        strict = try container.sdkDecodeRequired(.strict)
-        contexts = try container.sdkDecodeRequired(.contexts)
-        checks = try container.sdkDecodeRequired(.checks)
-        contextsUrl = try container.sdkDecodeRequired(.contextsUrl)
-        try sdkValidateUri("url", url)
-        try sdkValidateUri("contexts_url", contextsUrl)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.strict = try container.sdkDecodeRequired(.strict)
+        self.contexts = try container.sdkDecodeRequired(.contexts)
+        self.checks = try container.sdkDecodeRequired(.checks)
+        self.contextsUrl = try container.sdkDecodeRequired(.contextsUrl)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("contexts_url", self.contextsUrl)
     }
 }
 
-public extension StatusCheckPolicy {
-    init(
-        url: String,
-        strict: Bool,
-        contexts: [String],
-        checks: [StatusCheckPolicyChecksItem],
-        contextsUrl: String
-    ) throws {
+extension StatusCheckPolicy {
+    public init(url: String, strict: Bool, contexts: [String], checks: [StatusCheckPolicyChecksItem], contextsUrl: String) throws {
         (self.url, self.strict) = (url, strict)
         (self.contexts, self.checks) = (contexts, checks)
         self.contextsUrl = contextsUrl
-        try sdkValidateUri("url", self.url)
-        try sdkValidateUri("contexts_url", self.contextsUrl)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("contexts_url", self.contextsUrl)
     }
 }
 
@@ -114,35 +86,25 @@ public struct StatusCheckPolicyChecksItem: Codable {
         case appId = "app_id"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension StatusCheckPolicyChecksItem {
-    init(from decoder: Decoder) throws {
+extension StatusCheckPolicyChecksItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.context) else {
-            throw SdkValidationError(
-                field: "context",
-                code: "required",
-                message: "Validation failed for 'context': value is required"
-            )
+            throw SdkValidationError(field: "context", code: "required", message: "Validation failed for 'context': value is required")
         }
         guard container.contains(.appId) else {
-            throw SdkValidationError(
-                field: "app_id",
-                code: "required",
-                message: "Validation failed for 'app_id': value is required"
-            )
+            throw SdkValidationError(field: "app_id", code: "required", message: "Validation failed for 'app_id': value is required")
         }
-        context = try container.sdkDecodeRequired(.context)
-        appId = try container.sdkDecodeNullable(.appId)
+        self.context = try container.sdkDecodeRequired(.context)
+        self.appId = try container.sdkDecodeNullable(.appId)
     }
 }
 
-public extension StatusCheckPolicyChecksItem {
-    init(context: String, appId: Int?) {
+extension StatusCheckPolicyChecksItem {
+    public init(context: String, appId: Int?) {
         (self.context, self.appId) = (context, appId)
     }
 }
@@ -186,42 +148,28 @@ public struct Status: Codable {
         case creator
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension Status {
-    init(from decoder: Decoder) throws {
+extension Status {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        url = try container.sdkDecodeRequired(.url)
-        avatarUrl = try container.sdkDecodeNullable(.avatarUrl)
-        id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        state = try container.sdkDecodeRequired(.state)
-        description = try container.sdkDecodeNullable(.description)
-        targetUrl = try container.sdkDecodeNullable(.targetUrl)
-        context = try container.sdkDecodeRequired(.context)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        creator = try container.sdkDecodeNullable(.creator)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.avatarUrl = try container.sdkDecodeNullable(.avatarUrl)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.state = try container.sdkDecodeRequired(.state)
+        self.description = try container.sdkDecodeNullable(.description)
+        self.targetUrl = try container.sdkDecodeNullable(.targetUrl)
+        self.context = try container.sdkDecodeRequired(.context)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        self.creator = try container.sdkDecodeNullable(.creator)
     }
 }
 
-public extension Status {
-    init(
-        url: String,
-        avatarUrl: String?,
-        id: Int,
-        nodeId: String,
-        state: String,
-        description: String?,
-        targetUrl: String?,
-        context: String,
-        createdAt: String,
-        updatedAt: String,
-        creator: NullableSimpleUser?
-    ) {
+extension Status {
+    public init(url: String, avatarUrl: String?, id: Int, nodeId: String, state: String, description: String?, targetUrl: String?, context: String, createdAt: String, updatedAt: String, creator: NullableSimpleUser?) {
         (self.url, self.avatarUrl) = (url, avatarUrl)
         (self.id, self.nodeId) = (id, nodeId)
         (self.state, self.description) = (state, description)

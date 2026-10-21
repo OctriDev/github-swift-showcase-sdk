@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Activity domain models
+// Activity domain models
 /// Stargazer History
 public struct StargazerHistory: Codable {
     /// The number of stars created on each day of the week, starting on Sunday.
@@ -22,43 +22,29 @@ public struct StargazerHistory: Codable {
         case week
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension StargazerHistory {
-    init(from decoder: Decoder) throws {
+extension StargazerHistory {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.days) else {
-            throw SdkValidationError(
-                field: "days",
-                code: "required",
-                message: "Validation failed for 'days': value is required"
-            )
+            throw SdkValidationError(field: "days", code: "required", message: "Validation failed for 'days': value is required")
         }
         guard container.contains(.total) else {
-            throw SdkValidationError(
-                field: "total",
-                code: "required",
-                message: "Validation failed for 'total': value is required"
-            )
+            throw SdkValidationError(field: "total", code: "required", message: "Validation failed for 'total': value is required")
         }
         guard container.contains(.week) else {
-            throw SdkValidationError(
-                field: "week",
-                code: "required",
-                message: "Validation failed for 'week': value is required"
-            )
+            throw SdkValidationError(field: "week", code: "required", message: "Validation failed for 'week': value is required")
         }
-        days = try container.sdkDecodeRequired(.days)
-        total = try container.sdkDecodeRequired(.total)
-        week = try container.sdkDecodeRequired(.week)
+        self.days = try container.sdkDecodeRequired(.days)
+        self.total = try container.sdkDecodeRequired(.total)
+        self.week = try container.sdkDecodeRequired(.week)
     }
 }
 
-public extension StargazerHistory {
-    init(days: [Int], total: Int, week: Int) {
+extension StargazerHistory {
+    public init(days: [Int], total: Int, week: Int) {
         (self.days, self.total) = (days, total)
         self.week = week
     }

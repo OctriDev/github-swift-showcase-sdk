@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// ReposRepositoryRule domain models
+// ReposRepositoryRule domain models
 public indirect enum RepositoryRuleDetailed {
     case repositoryRuleDetailedVariant0(RepositoryRuleDetailedVariant0)
     case repositoryRuleDetailedVariant1(RepositoryRuleDetailedVariant1)
@@ -33,47 +33,25 @@ public indirect enum RepositoryRuleDetailed {
 }
 
 extension RepositoryRuleDetailed: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let raw = try? container.decode(JSONValue.self) {
-            if let value = Self.decodeLossless1(from: container, raw) {
-                self = value; return
-            }
-            if let value = Self.decodeLossless2(from: container, raw) {
-                self = value; return
-            }
-            if let value = Self.decodeLossless3(from: container, raw) {
-                self = value; return
-            }
-            if let value = Self.decodeLossless4(from: container, raw) {
-                self = value; return
-            }
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
+            if let value = Self.decodeLossless2(from: container, raw) { self = value; return }
+            if let value = Self.decodeLossless3(from: container, raw) { self = value; return }
+            if let value = Self.decodeLossless4(from: container, raw) { self = value; return }
         }
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        if let value = Self.decodeGroup2(from: container) {
-            self = value; return
-        }
-        if let value = Self.decodeGroup3(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for RepositoryRuleDetailed"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        if let value = Self.decodeGroup2(from: container) { self = value; return }
+        if let value = Self.decodeGroup3(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for RepositoryRuleDetailed")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
-        if try encodeGroup2(to: encoder) {
-            return
-        }
-        if try encodeGroup3(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup2(to: encoder) { return }
+        if try encodeGroup3(to: encoder) { return }
     }
 }
 
@@ -178,118 +156,43 @@ extension RepositoryRuleDetailed {
 
 extension RepositoryRuleDetailed {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container
-            .decode(RepositoryRuleDetailedVariant0.self) {
-            return .repositoryRuleDetailedVariant0(value)
-        }
-        if let value = try? container
-            .decode(RepositoryRuleDetailedVariant1.self) {
-            return .repositoryRuleDetailedVariant1(value)
-        }
-        if let value = try? container
-            .decode(RepositoryRuleDetailedVariant2.self) {
-            return .repositoryRuleDetailedVariant2(value)
-        }
-        if let value = try? container
-            .decode(RepositoryRuleDetailedVariant3.self) {
-            return .repositoryRuleDetailedVariant3(value)
-        }
-        if let value = try? container
-            .decode(RepositoryRuleDetailedVariant4.self) {
-            return .repositoryRuleDetailedVariant4(value)
-        }
-        if let value = try? container
-            .decode(RepositoryRuleDetailedVariant5.self) {
-            return .repositoryRuleDetailedVariant5(value)
-        }
-        if let value = try? container
-            .decode(RepositoryRuleDetailedVariant6.self) {
-            return .repositoryRuleDetailedVariant6(value)
-        }
-        if let value = try? container
-            .decode(RepositoryRuleDetailedVariant7.self) {
-            return .repositoryRuleDetailedVariant7(value)
-        }
-        if let value = try? container
-            .decode(RepositoryRuleDetailedVariant8.self) {
-            return .repositoryRuleDetailedVariant8(value)
-        }
-        if let value = try? container
-            .decode(RepositoryRuleDetailedVariant9.self) {
-            return .repositoryRuleDetailedVariant9(value)
-        }
-        if let value = try? container
-            .decode(RepositoryRuleDetailedVariant10.self) {
-            return .repositoryRuleDetailedVariant10(value)
-        }
-        if let value = try? container
-            .decode(RepositoryRuleDetailedVariant11.self) {
-            return .repositoryRuleDetailedVariant11(value)
-        }
+        if let value = try? container.decode(RepositoryRuleDetailedVariant0.self) { return .repositoryRuleDetailedVariant0(value) }
+        if let value = try? container.decode(RepositoryRuleDetailedVariant1.self) { return .repositoryRuleDetailedVariant1(value) }
+        if let value = try? container.decode(RepositoryRuleDetailedVariant2.self) { return .repositoryRuleDetailedVariant2(value) }
+        if let value = try? container.decode(RepositoryRuleDetailedVariant3.self) { return .repositoryRuleDetailedVariant3(value) }
+        if let value = try? container.decode(RepositoryRuleDetailedVariant4.self) { return .repositoryRuleDetailedVariant4(value) }
+        if let value = try? container.decode(RepositoryRuleDetailedVariant5.self) { return .repositoryRuleDetailedVariant5(value) }
+        if let value = try? container.decode(RepositoryRuleDetailedVariant6.self) { return .repositoryRuleDetailedVariant6(value) }
+        if let value = try? container.decode(RepositoryRuleDetailedVariant7.self) { return .repositoryRuleDetailedVariant7(value) }
+        if let value = try? container.decode(RepositoryRuleDetailedVariant8.self) { return .repositoryRuleDetailedVariant8(value) }
+        if let value = try? container.decode(RepositoryRuleDetailedVariant9.self) { return .repositoryRuleDetailedVariant9(value) }
+        if let value = try? container.decode(RepositoryRuleDetailedVariant10.self) { return .repositoryRuleDetailedVariant10(value) }
+        if let value = try? container.decode(RepositoryRuleDetailedVariant11.self) { return .repositoryRuleDetailedVariant11(value) }
         return nil
     }
 }
 
 extension RepositoryRuleDetailed {
     static func decodeGroup2(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container
-            .decode(RepositoryRuleDetailedVariant12.self) {
-            return .repositoryRuleDetailedVariant12(value)
-        }
-        if let value = try? container
-            .decode(RepositoryRuleDetailedVariant13.self) {
-            return .repositoryRuleDetailedVariant13(value)
-        }
-        if let value = try? container
-            .decode(RepositoryRuleDetailedVariant14.self) {
-            return .repositoryRuleDetailedVariant14(value)
-        }
-        if let value = try? container
-            .decode(RepositoryRuleDetailedVariant15.self) {
-            return .repositoryRuleDetailedVariant15(value)
-        }
-        if let value = try? container
-            .decode(RepositoryRuleDetailedVariant16.self) {
-            return .repositoryRuleDetailedVariant16(value)
-        }
-        if let value = try? container
-            .decode(RepositoryRuleDetailedVariant17.self) {
-            return .repositoryRuleDetailedVariant17(value)
-        }
-        if let value = try? container
-            .decode(RepositoryRuleDetailedVariant18.self) {
-            return .repositoryRuleDetailedVariant18(value)
-        }
-        if let value = try? container
-            .decode(RepositoryRuleDetailedVariant19.self) {
-            return .repositoryRuleDetailedVariant19(value)
-        }
-        if let value = try? container
-            .decode(RepositoryRuleDetailedVariant20.self) {
-            return .repositoryRuleDetailedVariant20(value)
-        }
-        if let value = try? container
-            .decode(RepositoryRuleDetailedVariant21.self) {
-            return .repositoryRuleDetailedVariant21(value)
-        }
-        if let value = try? container
-            .decode(RepositoryRuleDetailedVariant22.self) {
-            return .repositoryRuleDetailedVariant22(value)
-        }
-        if let value = try? container
-            .decode(RepositoryRuleDetailedVariant23.self) {
-            return .repositoryRuleDetailedVariant23(value)
-        }
+        if let value = try? container.decode(RepositoryRuleDetailedVariant12.self) { return .repositoryRuleDetailedVariant12(value) }
+        if let value = try? container.decode(RepositoryRuleDetailedVariant13.self) { return .repositoryRuleDetailedVariant13(value) }
+        if let value = try? container.decode(RepositoryRuleDetailedVariant14.self) { return .repositoryRuleDetailedVariant14(value) }
+        if let value = try? container.decode(RepositoryRuleDetailedVariant15.self) { return .repositoryRuleDetailedVariant15(value) }
+        if let value = try? container.decode(RepositoryRuleDetailedVariant16.self) { return .repositoryRuleDetailedVariant16(value) }
+        if let value = try? container.decode(RepositoryRuleDetailedVariant17.self) { return .repositoryRuleDetailedVariant17(value) }
+        if let value = try? container.decode(RepositoryRuleDetailedVariant18.self) { return .repositoryRuleDetailedVariant18(value) }
+        if let value = try? container.decode(RepositoryRuleDetailedVariant19.self) { return .repositoryRuleDetailedVariant19(value) }
+        if let value = try? container.decode(RepositoryRuleDetailedVariant20.self) { return .repositoryRuleDetailedVariant20(value) }
+        if let value = try? container.decode(RepositoryRuleDetailedVariant21.self) { return .repositoryRuleDetailedVariant21(value) }
+        if let value = try? container.decode(RepositoryRuleDetailedVariant22.self) { return .repositoryRuleDetailedVariant22(value) }
+        if let value = try? container.decode(RepositoryRuleDetailedVariant23.self) { return .repositoryRuleDetailedVariant23(value) }
         return nil
     }
 }
 
 extension RepositoryRuleDetailed {
     static func decodeGroup3(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container
-            .decode(RepositoryRuleDetailedVariant24.self) {
-            return .repositoryRuleDetailedVariant24(value)
-        }
+        if let value = try? container.decode(RepositoryRuleDetailedVariant24.self) { return .repositoryRuleDetailedVariant24(value) }
         return nil
     }
 }
@@ -366,42 +269,30 @@ public struct RepositoryRuleDetailedVariant8: Codable {
         case rulesetId = "ruleset_id"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension RepositoryRuleDetailedVariant8 {
-    init(from decoder: Decoder) throws {
+extension RepositoryRuleDetailedVariant8 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.type) else {
-            throw SdkValidationError(
-                field: "type",
-                code: "required",
-                message: "Validation failed for 'type': value is required"
-            )
+            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
         }
-        type = try container.sdkDecodeRequired(.type)
-        parameters = try container.sdkDecodeIfPresent(.parameters)
-        rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
-        rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
-        rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
-        try sdkValidateRawEnum("type", type, RepositoryRuleRequiredStatusChecksType.allCases.map(\.rawValue))
+        self.type = try container.sdkDecodeRequired(.type)
+        self.parameters = try container.sdkDecodeIfPresent(.parameters)
+        self.rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
+        self.rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
+        self.rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
+            try sdkValidateRawEnum("type", self.type, RepositoryRuleRequiredStatusChecksType.allCases.map(\.rawValue))
     }
 }
 
-public extension RepositoryRuleDetailedVariant8 {
-    init(
-        type: RepositoryRuleRequiredStatusChecksType,
-        parameters: RepositoryRuleRequiredStatusChecksParameters? = nil,
-        rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil,
-        rulesetSource: String? = nil,
-        rulesetId: Int? = nil
-    ) throws {
+extension RepositoryRuleDetailedVariant8 {
+    public init(type: RepositoryRuleRequiredStatusChecksType, parameters: RepositoryRuleRequiredStatusChecksParameters? = nil, rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil, rulesetSource: String? = nil, rulesetId: Int? = nil) throws {
         (self.type, self.parameters) = (type, parameters)
         (self.rulesetSourceType, self.rulesetSource) = (rulesetSourceType, rulesetSource)
         self.rulesetId = rulesetId
-        try sdkValidateRawEnum("type", self.type, RepositoryRuleRequiredStatusChecksType.allCases.map(\.rawValue))
+            try sdkValidateRawEnum("type", self.type, RepositoryRuleRequiredStatusChecksType.allCases.map(\.rawValue))
     }
 }
 
@@ -425,42 +316,30 @@ public struct RepositoryRuleDetailedVariant23: Codable {
         case rulesetId = "ruleset_id"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension RepositoryRuleDetailedVariant23 {
-    init(from decoder: Decoder) throws {
+extension RepositoryRuleDetailedVariant23 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.type) else {
-            throw SdkValidationError(
-                field: "type",
-                code: "required",
-                message: "Validation failed for 'type': value is required"
-            )
+            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
         }
-        type = try container.sdkDecodeRequired(.type)
-        parameters = try container.sdkDecodeIfPresent(.parameters)
-        rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
-        rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
-        rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
-        try sdkValidateRawEnum("type", type, RepositoryRuleFileExtensionRestrictionType.allCases.map(\.rawValue))
+        self.type = try container.sdkDecodeRequired(.type)
+        self.parameters = try container.sdkDecodeIfPresent(.parameters)
+        self.rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
+        self.rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
+        self.rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
+            try sdkValidateRawEnum("type", self.type, RepositoryRuleFileExtensionRestrictionType.allCases.map(\.rawValue))
     }
 }
 
-public extension RepositoryRuleDetailedVariant23 {
-    init(
-        type: RepositoryRuleFileExtensionRestrictionType,
-        parameters: RepositoryRuleFileExtensionRestrictionParameters? = nil,
-        rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil,
-        rulesetSource: String? = nil,
-        rulesetId: Int? = nil
-    ) throws {
+extension RepositoryRuleDetailedVariant23 {
+    public init(type: RepositoryRuleFileExtensionRestrictionType, parameters: RepositoryRuleFileExtensionRestrictionParameters? = nil, rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil, rulesetSource: String? = nil, rulesetId: Int? = nil) throws {
         (self.type, self.parameters) = (type, parameters)
         (self.rulesetSourceType, self.rulesetSource) = (rulesetSourceType, rulesetSource)
         self.rulesetId = rulesetId
-        try sdkValidateRawEnum("type", self.type, RepositoryRuleFileExtensionRestrictionType.allCases.map(\.rawValue))
+            try sdkValidateRawEnum("type", self.type, RepositoryRuleFileExtensionRestrictionType.allCases.map(\.rawValue))
     }
 }
 
@@ -484,42 +363,30 @@ public struct RepositoryRuleDetailedVariant17: Codable {
         case rulesetId = "ruleset_id"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension RepositoryRuleDetailedVariant17 {
-    init(from decoder: Decoder) throws {
+extension RepositoryRuleDetailedVariant17 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.type) else {
-            throw SdkValidationError(
-                field: "type",
-                code: "required",
-                message: "Validation failed for 'type': value is required"
-            )
+            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
         }
-        type = try container.sdkDecodeRequired(.type)
-        parameters = try container.sdkDecodeIfPresent(.parameters)
-        rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
-        rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
-        rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
-        try sdkValidateRawEnum("type", type, RepositoryRuleCodeQualityType.allCases.map(\.rawValue))
+        self.type = try container.sdkDecodeRequired(.type)
+        self.parameters = try container.sdkDecodeIfPresent(.parameters)
+        self.rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
+        self.rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
+        self.rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
+            try sdkValidateRawEnum("type", self.type, RepositoryRuleCodeQualityType.allCases.map(\.rawValue))
     }
 }
 
-public extension RepositoryRuleDetailedVariant17 {
-    init(
-        type: RepositoryRuleCodeQualityType,
-        parameters: RepositoryRuleCodeQualityParameters? = nil,
-        rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil,
-        rulesetSource: String? = nil,
-        rulesetId: Int? = nil
-    ) throws {
+extension RepositoryRuleDetailedVariant17 {
+    public init(type: RepositoryRuleCodeQualityType, parameters: RepositoryRuleCodeQualityParameters? = nil, rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil, rulesetSource: String? = nil, rulesetId: Int? = nil) throws {
         (self.type, self.parameters) = (type, parameters)
         (self.rulesetSourceType, self.rulesetSource) = (rulesetSourceType, rulesetSource)
         self.rulesetId = rulesetId
-        try sdkValidateRawEnum("type", self.type, RepositoryRuleCodeQualityType.allCases.map(\.rawValue))
+            try sdkValidateRawEnum("type", self.type, RepositoryRuleCodeQualityType.allCases.map(\.rawValue))
     }
 }
 
@@ -543,26 +410,20 @@ public struct RepositoryRuleDetailedVariant24: Codable {
         case rulesetId = "ruleset_id"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension RepositoryRuleDetailedVariant24 {
-    init(from decoder: Decoder) throws {
+extension RepositoryRuleDetailedVariant24 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.type) else {
-            throw SdkValidationError(
-                field: "type",
-                code: "required",
-                message: "Validation failed for 'type': value is required"
-            )
+            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
         }
-        type = try container.sdkDecodeRequired(.type)
-        parameters = try container.sdkDecodeIfPresent(.parameters)
-        rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
-        rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
-        rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
-        try sdkValidateRawEnum("type", type, RepositoryRuleMaxFileSizeType.allCases.map(\.rawValue))
+        self.type = try container.sdkDecodeRequired(.type)
+        self.parameters = try container.sdkDecodeIfPresent(.parameters)
+        self.rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
+        self.rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
+        self.rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
+            try sdkValidateRawEnum("type", self.type, RepositoryRuleMaxFileSizeType.allCases.map(\.rawValue))
     }
 }

@@ -3,22 +3,19 @@
 
 import Foundation
 
-/// WebhookPackageUpdated domain models
+// WebhookPackageUpdated domain models
 /// Optional enumerated value serialized in the `type` wire field.
 public struct WebhookPackageUpdatedPackageOwnerType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let bot = WebhookPackageUpdatedPackageOwnerType(rawValue: "Bot")
     public static let user = WebhookPackageUpdatedPackageOwnerType(rawValue: "User")
     public static let organization = WebhookPackageUpdatedPackageOwnerType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -28,23 +25,17 @@ public struct WebhookPackageUpdatedPackageOwnerType: RawRepresentable, Hashable,
 }
 
 /// Optional enumerated value serialized in the `type` wire field.
-public struct WebhookPackageUpdatedPackagePackageVersionReleaseAuthorType: RawRepresentable, Hashable, Codable,
-    Sendable,
-    SdkWireConvertible {
+public struct WebhookPackageUpdatedPackagePackageVersionReleaseAuthorType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let bot = WebhookPackageUpdatedPackagePackageVersionReleaseAuthorType(rawValue: "Bot")
     public static let user = WebhookPackageUpdatedPackagePackageVersionReleaseAuthorType(rawValue: "User")
-    public static let organization =
-        WebhookPackageUpdatedPackagePackageVersionReleaseAuthorType(rawValue: "Organization")
+    public static let organization = WebhookPackageUpdatedPackagePackageVersionReleaseAuthorType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -54,21 +45,17 @@ public struct WebhookPackageUpdatedPackagePackageVersionReleaseAuthorType: RawRe
 }
 
 /// Optional enumerated value serialized in the `type` wire field.
-public struct WebhookPackageUpdatedPackagePackageVersionAuthorType: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct WebhookPackageUpdatedPackagePackageVersionAuthorType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let bot = WebhookPackageUpdatedPackagePackageVersionAuthorType(rawValue: "Bot")
     public static let user = WebhookPackageUpdatedPackagePackageVersionAuthorType(rawValue: "User")
     public static let organization = WebhookPackageUpdatedPackagePackageVersionAuthorType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

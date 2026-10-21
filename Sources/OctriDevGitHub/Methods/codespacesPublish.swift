@@ -6,39 +6,16 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension CodespacesMethods {
-    /// Publishes an unpublished codespace, creating a new repository and assigning it to the codespace. The codespace's
-    /// token is granted write permissions to the repository, allowing the user to push their changes. This will fail
-    /// for a codespace that is already published, meaning it has an associated repository. OAuth app tokens and
-    /// personal access tokens (classic) need the `codespace` scope to use this endpoint.
+extension CodespacesMethods {
+    /// Publishes an unpublished codespace, creating a new repository and assigning it to the codespace. The codespace's token is granted write permissions to the repository, allowing the user to push their changes. This will fail for a codespace that is already published, meaning it has an associated repository. OAuth app tokens and personal access tokens (classic) need the `codespace` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - codespaceName: The name of the codespace.
     /// - name: A name for the new repository.
     /// - `private`: Whether the new repository should be private.
-    static func codespacesPublishForAuthenticatedUser(
-        config: ClientConfig,
-        codespaceName: String,
-        name: String? = nil,
-        private: Bool? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CodespaceWithFullRepository {
+    public static func codespacesPublishForAuthenticatedUser(config: ClientConfig, codespaceName: String, name: String? = nil, private: Bool? = nil, requestOptions: RequestOptions? = nil) async throws -> CodespaceWithFullRepository {
         let requestBody = CodespacesPublishForAuthenticatedUserRequestBody(name: name, private: `private`)
 
-        return try await (sdkRequest(
-            "POST",
-            ["/user/codespaces/", sdkEncodePathSegment(sdkWireString(codespaceName)), "/publish"].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "codespacesPublishForAuthenticatedUser",
-            options: requestOptions,
-            errors: [
-                "401": BasicError.self,
-                "403": BasicError.self,
-                "404": BasicError.self,
-                "422": ValidationError.self,
-            ]
-        )).data
+        return try (await sdkRequest("POST", ["/user/codespaces/", sdkEncodePathSegment(sdkWireString(codespaceName)), "/publish"].joined(), config: config, body: requestBody, decoder: .json, operationId: "codespacesPublishForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
     }
 }

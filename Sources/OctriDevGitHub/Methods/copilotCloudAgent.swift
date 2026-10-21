@@ -6,37 +6,15 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension CopilotMethods {
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Gets the Copilot cloud agent
-    /// configuration for a repository, including MCP server configuration, enabled review tools, Actions workflow
-    /// approval settings, and firewall configuration. OAuth app tokens and personal access tokens (classic) need the
-    /// `repo` scope to use this endpoint.
+extension CopilotMethods {
+    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Gets the Copilot cloud agent configuration for a repository, including MCP server configuration, enabled review tools, Actions workflow approval settings, and firewall configuration. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    static func copilotGetCopilotCloudAgentConfiguration(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CopilotGetCopilotCloudAgentConfigurationResponse {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/copilot/cloud-agent/configuration",
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "copilotGetCopilotCloudAgentConfiguration",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self]
-        )).data
+    public static func copilotGetCopilotCloudAgentConfiguration(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> CopilotGetCopilotCloudAgentConfigurationResponse {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/copilot/cloud-agent/configuration"].joined(), config: config, decoder: .json, operationId: "copilotGetCopilotCloudAgentConfiguration", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self])).data
     }
 }

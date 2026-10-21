@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Actions domain models
+// Actions domain models
 /// An entry in the reviews log for environment deployments
 public struct EnvironmentApprovals: Codable {
     /// The list of environments that were approved or rejected
@@ -24,56 +24,33 @@ public struct EnvironmentApprovals: Codable {
         case comment
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension EnvironmentApprovals {
-    init(from decoder: Decoder) throws {
+extension EnvironmentApprovals {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.environments) else {
-            throw SdkValidationError(
-                field: "environments",
-                code: "required",
-                message: "Validation failed for 'environments': value is required"
-            )
+            throw SdkValidationError(field: "environments", code: "required", message: "Validation failed for 'environments': value is required")
         }
         guard container.contains(.state) else {
-            throw SdkValidationError(
-                field: "state",
-                code: "required",
-                message: "Validation failed for 'state': value is required"
-            )
+            throw SdkValidationError(field: "state", code: "required", message: "Validation failed for 'state': value is required")
         }
         guard container.contains(.user) else {
-            throw SdkValidationError(
-                field: "user",
-                code: "required",
-                message: "Validation failed for 'user': value is required"
-            )
+            throw SdkValidationError(field: "user", code: "required", message: "Validation failed for 'user': value is required")
         }
         guard container.contains(.comment) else {
-            throw SdkValidationError(
-                field: "comment",
-                code: "required",
-                message: "Validation failed for 'comment': value is required"
-            )
+            throw SdkValidationError(field: "comment", code: "required", message: "Validation failed for 'comment': value is required")
         }
-        environments = try container.sdkDecodeRequired(.environments)
-        state = try container.sdkDecodeRequired(.state)
-        user = try container.sdkDecodeRequired(.user)
-        comment = try container.sdkDecodeRequired(.comment)
+        self.environments = try container.sdkDecodeRequired(.environments)
+        self.state = try container.sdkDecodeRequired(.state)
+        self.user = try container.sdkDecodeRequired(.user)
+        self.comment = try container.sdkDecodeRequired(.comment)
     }
 }
 
-public extension EnvironmentApprovals {
-    init(
-        environments: [EnvironmentApprovalsEnvironmentsItem],
-        state: EnvironmentApprovalsState,
-        user: SimpleUser,
-        comment: String
-    ) {
+extension EnvironmentApprovals {
+    public init(environments: [EnvironmentApprovalsEnvironmentsItem], state: EnvironmentApprovalsState, user: SimpleUser, comment: String) {
         (self.environments, self.state) = (environments, state)
         (self.user, self.comment) = (user, comment)
     }
@@ -114,40 +91,32 @@ public struct EnvironmentApprovalsEnvironmentsItem: Codable {
     }
 
     init() {
-        (id, nodeId, name, url, htmlUrl) = (nil, nil, nil, nil, nil)
-        (createdAt, updatedAt) = (nil, nil)
+        (self.id, self.nodeId, self.name, self.url, self.htmlUrl) = (nil, nil, nil, nil, nil)
+        (self.createdAt, self.updatedAt) = (nil, nil)
     }
 }
 
-public extension EnvironmentApprovalsEnvironmentsItem {
-    init(from decoder: Decoder) throws {
+extension EnvironmentApprovalsEnvironmentsItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeIfPresent(.id)
-        nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        name = try container.sdkDecodeIfPresent(.name)
-        url = try container.sdkDecodeIfPresent(.url)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        createdAt = try container.sdkDecodeIfPresent(.createdAt)
-        updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
-        if let value = createdAt {
+        self.id = try container.sdkDecodeIfPresent(.id)
+        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        self.name = try container.sdkDecodeIfPresent(.name)
+        self.url = try container.sdkDecodeIfPresent(.url)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        self.createdAt = try container.sdkDecodeIfPresent(.createdAt)
+        self.updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
+        if let value = self.createdAt {
             try sdkValidateDateTime("created_at", sdkWireString(value))
         }
-        if let value = updatedAt {
+        if let value = self.updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
     }
 }
 
-public extension EnvironmentApprovalsEnvironmentsItem {
-    init(
-        id: Int? = nil,
-        nodeId: String? = nil,
-        name: String? = nil,
-        url: String? = nil,
-        htmlUrl: String? = nil,
-        createdAt: Date? = nil,
-        updatedAt: Date? = nil
-    ) throws {
+extension EnvironmentApprovalsEnvironmentsItem {
+    public init(id: Int? = nil, nodeId: String? = nil, name: String? = nil, url: String? = nil, htmlUrl: String? = nil, createdAt: Date? = nil, updatedAt: Date? = nil) throws {
         self.init()
         (self.id, self.nodeId) = (id, nodeId)
         (self.name, self.url) = (name, url)
@@ -166,17 +135,14 @@ public extension EnvironmentApprovalsEnvironmentsItem {
 public struct EnvironmentApprovalsState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let approved = EnvironmentApprovalsState(rawValue: "approved")
     public static let rejected = EnvironmentApprovalsState(rawValue: "rejected")
     public static let pending = EnvironmentApprovalsState(rawValue: "pending")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension UsersMethods {
+extension UsersMethods {
     /// List the users you've blocked on your personal account.
     ///
     /// - Parameters:
@@ -18,71 +18,26 @@ public extension UsersMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    static func usersListBlockedByAuthenticatedUser(
-        config: ClientConfig,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [SimpleUser] {
-        try await (sdkRequest(
-            "GET",
-            "/user/blocks",
-            config: config,
-            query: [
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("page", value: page),
-            ],
-            decoder: .json,
-            operationId: "usersListBlockedByAuthenticatedUser",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self]
-        )).data
+    public static func usersListBlockedByAuthenticatedUser(config: ClientConfig, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [SimpleUser] {
+        return try (await sdkRequest("GET", "/user/blocks", config: config, query: [
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("page", value: page),
+        ], decoder: .json, operationId: "usersListBlockedByAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
     }
 
-    /// Returns a 204 if the given user is blocked by the authenticated user. Returns a 404 if the given user is not
-    /// blocked by the authenticated user, or if the given user account has been identified as spam by GitHub.
+    /// Returns a 204 if the given user is blocked by the authenticated user. Returns a 404 if the given user is not blocked by the authenticated user, or if the given user account has been identified as spam by GitHub.
     ///
     /// - Parameters:
     /// - username: The handle for the GitHub user account.
-    static func usersCheckBlocked(
-        config: ClientConfig,
-        username: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "GET",
-            ["/user/blocks/", sdkEncodePathSegment(sdkWireString(username))].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "usersCheckBlocked",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self]
-        )).data
+    public static func usersCheckBlocked(config: ClientConfig, username: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("GET", ["/user/blocks/", sdkEncodePathSegment(sdkWireString(username))].joined(), config: config, decoder: .empty, operationId: "usersCheckBlocked", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
     }
 
-    /// Blocks the given user and returns a 204. If the authenticated user cannot block the given user a 422 is
-    /// returned.
+    /// Blocks the given user and returns a 204. If the authenticated user cannot block the given user a 422 is returned.
     ///
     /// - Parameters:
     /// - username: The handle for the GitHub user account.
-    static func usersBlock(
-        config: ClientConfig,
-        username: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "PUT",
-            ["/user/blocks/", sdkEncodePathSegment(sdkWireString(username))].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "usersBlock",
-            options: requestOptions,
-            errors: [
-                "401": BasicError.self,
-                "403": BasicError.self,
-                "404": BasicError.self,
-                "422": ValidationError.self,
-            ]
-        )).data
+    public static func usersBlock(config: ClientConfig, username: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("PUT", ["/user/blocks/", sdkEncodePathSegment(sdkWireString(username))].joined(), config: config, decoder: .empty, operationId: "usersBlock", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
     }
 }

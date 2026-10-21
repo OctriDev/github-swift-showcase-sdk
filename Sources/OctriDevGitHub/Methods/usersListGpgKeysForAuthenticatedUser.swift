@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension UsersMethods {
-    /// Lists the current user's GPG keys. OAuth app tokens and personal access tokens (classic) need the `read:gpg_key`
-    /// scope to use this endpoint.
+extension UsersMethods {
+    /// Lists the current user's GPG keys. OAuth app tokens and personal access tokens (classic) need the `read:gpg_key` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - perPage: The number of results per page (max 100). For more information,
@@ -19,58 +18,21 @@ public extension UsersMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    static func usersListGpgKeysForAuthenticatedUser(
-        config: ClientConfig,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [GpgKey] {
-        try await (sdkRequest(
-            "GET",
-            "/user/gpg_keys",
-            config: config,
-            query: [
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("page", value: page),
-            ],
-            decoder: .json,
-            operationId: "usersListGpgKeysForAuthenticatedUser",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self]
-        )).data
+    public static func usersListGpgKeysForAuthenticatedUser(config: ClientConfig, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [GpgKey] {
+        return try (await sdkRequest("GET", "/user/gpg_keys", config: config, query: [
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("page", value: page),
+        ], decoder: .json, operationId: "usersListGpgKeysForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
     }
 
-    /// Adds a GPG key to the authenticated user's GitHub account. OAuth app tokens and personal access tokens (classic)
-    /// need the `write:gpg_key` scope to use this endpoint.
+    /// Adds a GPG key to the authenticated user's GitHub account. OAuth app tokens and personal access tokens (classic) need the `write:gpg_key` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - armoredPublicKey: A GPG key in ASCII-armored format.
     /// - name: A descriptive name for the new key.
-    static func usersCreateGpgKeyForAuthenticatedUser(
-        config: ClientConfig,
-        armoredPublicKey: String,
-        name: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> GpgKey {
-        let requestBody = UsersCreateGpgKeyForAuthenticatedUserRequestBody(
-            armoredPublicKey: armoredPublicKey,
-            name: name
-        )
+    public static func usersCreateGpgKeyForAuthenticatedUser(config: ClientConfig, armoredPublicKey: String, name: String? = nil, requestOptions: RequestOptions? = nil) async throws -> GpgKey {
+        let requestBody = UsersCreateGpgKeyForAuthenticatedUserRequestBody(armoredPublicKey: armoredPublicKey, name: name)
 
-        return try await (sdkRequest(
-            "POST",
-            "/user/gpg_keys",
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "usersCreateGpgKeyForAuthenticatedUser",
-            options: requestOptions,
-            errors: [
-                "401": BasicError.self,
-                "403": BasicError.self,
-                "404": BasicError.self,
-                "422": ValidationError.self,
-            ]
-        )).data
+        return try (await sdkRequest("POST", "/user/gpg_keys", config: config, body: requestBody, decoder: .json, operationId: "usersCreateGpgKeyForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
     }
 }

@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Gists domain models
+// Gists domain models
 /// Required object value serialized in the `change_status` wire field.
 public struct GistCommitChangeStatus: Codable {
     /// Optional `integer` value serialized in the `total` wire field.
@@ -20,21 +20,21 @@ public struct GistCommitChangeStatus: Codable {
     }
 
     init() {
-        (total, additions, deletions) = (nil, nil, nil)
+        (self.total, self.additions, self.deletions) = (nil, nil, nil)
     }
 }
 
-public extension GistCommitChangeStatus {
-    init(from decoder: Decoder) throws {
+extension GistCommitChangeStatus {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        total = try container.sdkDecodeIfPresent(.total)
-        additions = try container.sdkDecodeIfPresent(.additions)
-        deletions = try container.sdkDecodeIfPresent(.deletions)
+        self.total = try container.sdkDecodeIfPresent(.total)
+        self.additions = try container.sdkDecodeIfPresent(.additions)
+        self.deletions = try container.sdkDecodeIfPresent(.deletions)
     }
 }
 
-public extension GistCommitChangeStatus {
-    init(total: Int? = nil, additions: Int? = nil, deletions: Int? = nil) {
+extension GistCommitChangeStatus {
+    public init(total: Int? = nil, additions: Int? = nil, deletions: Int? = nil) {
         self.init()
         (self.total, self.additions) = (total, additions)
         self.deletions = deletions
@@ -65,71 +65,43 @@ public struct GistCommit: Codable {
         case committedAt = "committed_at"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension GistCommit {
-    init(from decoder: Decoder) throws {
+extension GistCommit {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.url) else {
-            throw SdkValidationError(
-                field: "url",
-                code: "required",
-                message: "Validation failed for 'url': value is required"
-            )
+            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
         }
         guard container.contains(.version) else {
-            throw SdkValidationError(
-                field: "version",
-                code: "required",
-                message: "Validation failed for 'version': value is required"
-            )
+            throw SdkValidationError(field: "version", code: "required", message: "Validation failed for 'version': value is required")
         }
         guard container.contains(.user) else {
-            throw SdkValidationError(
-                field: "user",
-                code: "required",
-                message: "Validation failed for 'user': value is required"
-            )
+            throw SdkValidationError(field: "user", code: "required", message: "Validation failed for 'user': value is required")
         }
         guard container.contains(.changeStatus) else {
-            throw SdkValidationError(
-                field: "change_status",
-                code: "required",
-                message: "Validation failed for 'change_status': value is required"
-            )
+            throw SdkValidationError(field: "change_status", code: "required", message: "Validation failed for 'change_status': value is required")
         }
         guard container.contains(.committedAt) else {
-            throw SdkValidationError(
-                field: "committed_at",
-                code: "required",
-                message: "Validation failed for 'committed_at': value is required"
-            )
+            throw SdkValidationError(field: "committed_at", code: "required", message: "Validation failed for 'committed_at': value is required")
         }
-        url = try container.sdkDecodeRequired(.url)
-        version = try container.sdkDecodeRequired(.version)
-        user = try container.sdkDecodeNullable(.user)
-        changeStatus = try container.sdkDecodeRequired(.changeStatus)
-        committedAt = try container.sdkDecodeRequired(.committedAt)
-        try sdkValidateUri("url", url)
-        try sdkValidateDateTime("committed_at", sdkWireString(committedAt))
+        self.url = try container.sdkDecodeRequired(.url)
+        self.version = try container.sdkDecodeRequired(.version)
+        self.user = try container.sdkDecodeNullable(.user)
+        self.changeStatus = try container.sdkDecodeRequired(.changeStatus)
+        self.committedAt = try container.sdkDecodeRequired(.committedAt)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateDateTime("committed_at", sdkWireString(self.committedAt))
     }
 }
 
-public extension GistCommit {
-    init(
-        url: String,
-        version: String,
-        user: NullableSimpleUser?,
-        changeStatus: GistCommitChangeStatus,
-        committedAt: Date
-    ) throws {
+extension GistCommit {
+    public init(url: String, version: String, user: NullableSimpleUser?, changeStatus: GistCommitChangeStatus, committedAt: Date) throws {
         (self.url, self.version) = (url, version)
         (self.user, self.changeStatus) = (user, changeStatus)
         self.committedAt = committedAt
-        try sdkValidateUri("url", self.url)
-        try sdkValidateDateTime("committed_at", sdkWireString(self.committedAt))
+            try sdkValidateUri("url", self.url)
+            try sdkValidateDateTime("committed_at", sdkWireString(self.committedAt))
     }
 }

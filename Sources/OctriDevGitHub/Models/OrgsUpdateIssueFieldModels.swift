@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Orgs domain models
+// Orgs domain models
 /// Required object value serialized in the `options[]` wire field.
 public struct OrganizationUpdateIssueFieldOptionsItem: Codable {
     /// Name of the option.
@@ -25,51 +25,31 @@ public struct OrganizationUpdateIssueFieldOptionsItem: Codable {
         case description
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension OrganizationUpdateIssueFieldOptionsItem {
-    init(from decoder: Decoder) throws {
+extension OrganizationUpdateIssueFieldOptionsItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.color) else {
-            throw SdkValidationError(
-                field: "color",
-                code: "required",
-                message: "Validation failed for 'color': value is required"
-            )
+            throw SdkValidationError(field: "color", code: "required", message: "Validation failed for 'color': value is required")
         }
         guard container.contains(.priority) else {
-            throw SdkValidationError(
-                field: "priority",
-                code: "required",
-                message: "Validation failed for 'priority': value is required"
-            )
+            throw SdkValidationError(field: "priority", code: "required", message: "Validation failed for 'priority': value is required")
         }
-        name = try container.sdkDecodeRequired(.name)
-        color = try container.sdkDecodeRequired(.color)
-        priority = try container.sdkDecodeRequired(.priority)
-        id = try container.sdkDecodeIfPresent(.id)
-        description = try container.sdkDecodeIfPresent(.description)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.color = try container.sdkDecodeRequired(.color)
+        self.priority = try container.sdkDecodeRequired(.priority)
+        self.id = try container.sdkDecodeIfPresent(.id)
+        self.description = try container.sdkDecodeIfPresent(.description)
     }
 }
 
-public extension OrganizationUpdateIssueFieldOptionsItem {
-    init(
-        name: String,
-        color: OrganizationUpdateIssueFieldOptionsItemColor,
-        priority: Int,
-        id: Int? = nil,
-        description: String? = nil
-    ) {
+extension OrganizationUpdateIssueFieldOptionsItem {
+    public init(name: String, color: OrganizationUpdateIssueFieldOptionsItemColor, priority: Int, id: Int? = nil, description: String? = nil) {
         (self.name, self.color) = (name, color)
         (self.priority, self.id) = (priority, id)
         self.description = description
@@ -100,27 +80,22 @@ public struct OrganizationUpdateIssueField: Codable {
     }
 
     init() {
-        (name, description, visibility, options) = (nil, nil, nil, nil)
+        (self.name, self.description, self.visibility, self.options) = (nil, nil, nil, nil)
     }
 }
 
-public extension OrganizationUpdateIssueField {
-    init(from decoder: Decoder) throws {
+extension OrganizationUpdateIssueField {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        name = try container.sdkDecodeIfPresent(.name)
-        description = try container.sdkDecodeIfPresent(.description)
-        visibility = try container.sdkDecodeIfPresent(.visibility)
-        options = try container.sdkDecodeIfPresent(.options)
+        self.name = try container.sdkDecodeIfPresent(.name)
+        self.description = try container.sdkDecodeIfPresent(.description)
+        self.visibility = try container.sdkDecodeIfPresent(.visibility)
+        self.options = try container.sdkDecodeIfPresent(.options)
     }
 }
 
-public extension OrganizationUpdateIssueField {
-    init(
-        name: String? = nil,
-        description: String? = nil,
-        visibility: OrganizationUpdateIssueFieldVisibility? = nil,
-        options: [OrganizationUpdateIssueFieldOptionsItem]? = nil
-    ) {
+extension OrganizationUpdateIssueField {
+    public init(name: String? = nil, description: String? = nil, visibility: OrganizationUpdateIssueFieldVisibility? = nil, options: [OrganizationUpdateIssueFieldOptionsItem]? = nil) {
         self.init()
         (self.name, self.description) = (name, description)
         (self.visibility, self.options) = (visibility, options)
@@ -130,21 +105,16 @@ public extension OrganizationUpdateIssueField {
 /// The visibility of the issue field. Can be `organization_members_only` (visible only within the organization)
 /// or `all` (visible to all users who can see issues). Only used when the visibility settings feature is
 /// enabled.
-public struct OrganizationUpdateIssueFieldVisibility: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct OrganizationUpdateIssueFieldVisibility: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let organizationMembersOnly =
-        OrganizationUpdateIssueFieldVisibility(rawValue: "organization_members_only")
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let organizationMembersOnly = OrganizationUpdateIssueFieldVisibility(rawValue: "organization_members_only")
     public static let all = OrganizationUpdateIssueFieldVisibility(rawValue: "all")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -154,14 +124,10 @@ public struct OrganizationUpdateIssueFieldVisibility: RawRepresentable, Hashable
 }
 
 /// Color for the option.
-public struct OrganizationUpdateIssueFieldOptionsItemColor: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct OrganizationUpdateIssueFieldOptionsItemColor: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let gray = OrganizationUpdateIssueFieldOptionsItemColor(rawValue: "gray")
     public static let blue = OrganizationUpdateIssueFieldOptionsItemColor(rawValue: "blue")
     public static let green = OrganizationUpdateIssueFieldOptionsItemColor(rawValue: "green")
@@ -173,7 +139,7 @@ public struct OrganizationUpdateIssueFieldOptionsItemColor: RawRepresentable, Ha
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

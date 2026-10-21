@@ -6,24 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension AgentAutomationsMethods {
-    /// Returns the tools available to the authenticated caller for use when creating or updating an automation.
-    /// **Fine-grained access tokens for "List available automation tools"** This endpoint works with the following
-    /// fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app)
-    /// * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token)
-    /// This endpoint does not require repository permissions. GitHub App installation access tokens are not supported
-    /// for this endpoint.
-    static func agentAutomationsListAvailableAutomationTools(
-        config: ClientConfig,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [AgentAutomationsListAvailableAutomationToolsResponseItem] {
-        try await (sdkRequest(
-            "GET",
-            "/agents/automations/available-tools",
-            config: config,
-            decoder: .json,
-            operationId: "agentAutomationsListAvailableAutomationTools",
-            options: requestOptions
-        )).data
+extension AgentAutomationsMethods {
+    /// Returns the tools available to the authenticated caller for use when creating or updating an automation. **Fine-grained access tokens for "List available automation tools"** This endpoint works with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app) * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) This endpoint does not require repository permissions. GitHub App installation access tokens are not supported for this endpoint.
+    public static func agentAutomationsListAvailableAutomationTools(config: ClientConfig, requestOptions: RequestOptions? = nil) async throws -> [AgentAutomationsListAvailableAutomationToolsResponseItem] {
+        return try (await sdkRequest("GET", "/agents/automations/available-tools", config: config, decoder: .json, operationId: "agentAutomationsListAvailableAutomationTools", options: requestOptions)).data
     }
 }

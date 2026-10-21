@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Repos domain models
+// Repos domain models
 /// Required object value serialized in the `commit` wire field.
 public struct ShortBranchCommit: Codable {
     /// Required `string` value serialized in the `sha` wire field.
@@ -16,38 +16,28 @@ public struct ShortBranchCommit: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ShortBranchCommit {
-    init(from decoder: Decoder) throws {
+extension ShortBranchCommit {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.sha) else {
-            throw SdkValidationError(
-                field: "sha",
-                code: "required",
-                message: "Validation failed for 'sha': value is required"
-            )
+            throw SdkValidationError(field: "sha", code: "required", message: "Validation failed for 'sha': value is required")
         }
         guard container.contains(.url) else {
-            throw SdkValidationError(
-                field: "url",
-                code: "required",
-                message: "Validation failed for 'url': value is required"
-            )
+            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
         }
-        sha = try container.sdkDecodeRequired(.sha)
-        url = try container.sdkDecodeRequired(.url)
-        try sdkValidateUri("url", url)
+        self.sha = try container.sdkDecodeRequired(.sha)
+        self.url = try container.sdkDecodeRequired(.url)
+            try sdkValidateUri("url", self.url)
     }
 }
 
-public extension ShortBranchCommit {
-    init(sha: String, url: String) throws {
+extension ShortBranchCommit {
+    public init(sha: String, url: String) throws {
         (self.sha, self.url) = (sha, url)
-        try sdkValidateUri("url", self.url)
+            try sdkValidateUri("url", self.url)
     }
 }
 
@@ -72,54 +62,34 @@ public struct ShortBranch: Codable {
         case protectionUrl = "protection_url"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ShortBranch {
-    init(from decoder: Decoder) throws {
+extension ShortBranch {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.commit) else {
-            throw SdkValidationError(
-                field: "commit",
-                code: "required",
-                message: "Validation failed for 'commit': value is required"
-            )
+            throw SdkValidationError(field: "commit", code: "required", message: "Validation failed for 'commit': value is required")
         }
         guard container.contains(.protected) else {
-            throw SdkValidationError(
-                field: "protected",
-                code: "required",
-                message: "Validation failed for 'protected': value is required"
-            )
+            throw SdkValidationError(field: "protected", code: "required", message: "Validation failed for 'protected': value is required")
         }
-        name = try container.sdkDecodeRequired(.name)
-        commit = try container.sdkDecodeRequired(.commit)
-        protected = try container.sdkDecodeRequired(.protected)
-        protection = try container.sdkDecodeIfPresent(.protection)
-        protectionUrl = try container.sdkDecodeIfPresent(.protectionUrl)
-        if let value = protectionUrl {
+        self.name = try container.sdkDecodeRequired(.name)
+        self.commit = try container.sdkDecodeRequired(.commit)
+        self.protected = try container.sdkDecodeRequired(.protected)
+        self.protection = try container.sdkDecodeIfPresent(.protection)
+        self.protectionUrl = try container.sdkDecodeIfPresent(.protectionUrl)
+        if let value = self.protectionUrl {
             try sdkValidateUri("protection_url", value)
         }
     }
 }
 
-public extension ShortBranch {
-    init(
-        name: String,
-        commit: ShortBranchCommit,
-        protected: Bool,
-        protection: BranchProtection? = nil,
-        protectionUrl: String? = nil
-    ) throws {
+extension ShortBranch {
+    public init(name: String, commit: ShortBranchCommit, protected: Bool, protection: BranchProtection? = nil, protectionUrl: String? = nil) throws {
         (self.name, self.commit) = (name, commit)
         (self.protected, self.protection) = (protected, protection)
         self.protectionUrl = protectionUrl

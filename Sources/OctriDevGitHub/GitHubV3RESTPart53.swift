@@ -9,308 +9,93 @@ public class SecretScanningNamespace {
         self.config = config
     }
 
-    /// Lists secret scanning alerts for eligible repositories in an organization, from newest to oldest. The
-    /// authenticated user must be an administrator or security manager for the organization to use this endpoint. OAuth
-    /// app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint.
-    /// If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
-    public func listAlertsForOrg(
-        options: SecretScanningMethods.SecretScanningListAlertsForOrgOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [OrganizationSecretScanningAlert] {
-        try await SecretScanningMethods.secretScanningListAlertsForOrg(
-            config: config,
-            options: options,
-            requestOptions: requestOptions
-        )
+/// Lists secret scanning alerts for eligible repositories in an organization, from newest to oldest. The authenticated user must be an administrator or security manager for the organization to use this endpoint. OAuth app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
+    public func listAlertsForOrg(options: SecretScanningMethods.SecretScanningListAlertsForOrgOptions, requestOptions: RequestOptions? = nil) async throws -> [OrganizationSecretScanningAlert] {
+        return try await SecretScanningMethods.secretScanningListAlertsForOrg(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Lists secret scanning custom patterns for an organization. Personal access tokens (classic) need the `read:org`
-    /// scope to use this endpoint.
-    public func listOrgCustomPatterns(
-        org: String,
-        state: SecretScanningListOrgCustomPatternsParameterX192aabd9? = nil,
-        pushProtection: SecretScanningListOrgCustomPatternsParameter? = nil,
-        sort: SecretScanningListOrgCustomPatternsParameterX9139ab32? = nil,
-        direction: SecurityAdvisoriesListGlobalAdvisoriesParameter? = nil,
-        before: String? = nil,
-        after: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [SecretScanningCustomPattern] {
-        try await SecretScanningMethods.secretScanningListOrgCustomPatterns(
-            config: config,
-            org: org,
-            state: state,
-            pushProtection: pushProtection,
-            sort: sort,
-            direction: direction,
-            before: before,
-            after: after,
-            requestOptions: requestOptions
-        )
+/// Lists secret scanning custom patterns for an organization. Personal access tokens (classic) need the `read:org` scope to use this endpoint.
+    public func listOrgCustomPatterns(org: String, state: SecretScanningListOrgCustomPatternsParameterX192aabd9? = nil, pushProtection: SecretScanningListOrgCustomPatternsParameter? = nil, sort: SecretScanningListOrgCustomPatternsParameterX9139ab32? = nil, direction: SecurityAdvisoriesListGlobalAdvisoriesParameter? = nil, before: String? = nil, after: String? = nil, requestOptions: RequestOptions? = nil) async throws -> [SecretScanningCustomPattern] {
+        return try await SecretScanningMethods.secretScanningListOrgCustomPatterns(config: config, org: org, state: state, pushProtection: pushProtection, sort: sort, direction: direction, before: before, after: after, requestOptions: requestOptions)
     }
 
-    /// Bulk creates secret scanning custom patterns for an organization. Personal access tokens (classic) need the
-    /// `write:org` scope to use this endpoint.
-    public func bulkCreateOrgCustomPatterns(
-        org: String,
-        patterns: [SecretScanningCustomPatternToCreate],
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SecretScanningBulkCreateOrgCustomPatternsResponse {
-        try await SecretScanningMethods.secretScanningBulkCreateOrgCustomPatterns(
-            config: config,
-            org: org,
-            patterns: patterns,
-            requestOptions: requestOptions
-        )
+/// Bulk creates secret scanning custom patterns for an organization. Personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    public func bulkCreateOrgCustomPatterns(org: String, patterns: [SecretScanningCustomPatternToCreate], requestOptions: RequestOptions? = nil) async throws -> SecretScanningBulkCreateOrgCustomPatternsResponse {
+        return try await SecretScanningMethods.secretScanningBulkCreateOrgCustomPatterns(config: config, org: org, patterns: patterns, requestOptions: requestOptions)
     }
 
-    /// Bulk deletes secret scanning custom patterns for an organization. Personal access tokens (classic) need the
-    /// `write:org` scope to use this endpoint.
-    public func bulkDeleteOrgCustomPatterns(
-        org: String,
-        patterns: [SecretScanningCustomPatternToDelete],
-        postDeleteAction: SecretScanningBulkDeleteOrgCustomPatternsRequestBodyPostDeleteAction? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await SecretScanningMethods.secretScanningBulkDeleteOrgCustomPatterns(
-            config: config,
-            org: org,
-            patterns: patterns,
-            postDeleteAction: postDeleteAction,
-            requestOptions: requestOptions
-        )
+/// Bulk deletes secret scanning custom patterns for an organization. Personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    public func bulkDeleteOrgCustomPatterns(org: String, patterns: [SecretScanningCustomPatternToDelete], postDeleteAction: SecretScanningBulkDeleteOrgCustomPatternsRequestBodyPostDeleteAction? = nil, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await SecretScanningMethods.secretScanningBulkDeleteOrgCustomPatterns(config: config, org: org, patterns: patterns, postDeleteAction: postDeleteAction, requestOptions: requestOptions)
     }
 
-    /// Updates a secret scanning custom pattern for an organization. Personal access tokens (classic) need the
-    /// `write:org` scope to use this endpoint.
-    public func updateOrgCustomPattern(
-        options: SecretScanningMethods.SecretScanningUpdateOrgCustomPatternOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SecretScanningCustomPattern {
-        try await SecretScanningMethods.secretScanningUpdateOrgCustomPattern(
-            config: config,
-            options: options,
-            requestOptions: requestOptions
-        )
+/// Updates a secret scanning custom pattern for an organization. Personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    public func updateOrgCustomPattern(options: SecretScanningMethods.SecretScanningUpdateOrgCustomPatternOptions, requestOptions: RequestOptions? = nil) async throws -> SecretScanningCustomPattern {
+        return try await SecretScanningMethods.secretScanningUpdateOrgCustomPattern(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Lists the secret scanning pattern configurations for an organization. Personal access tokens (classic) need the
-    /// `read:org` scope to use this endpoint.
-    public func listOrgPatternConfigs(
-        org: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SecretScanningPatternConfiguration {
-        try await SecretScanningMethods.secretScanningListOrgPatternConfigs(
-            config: config,
-            org: org,
-            requestOptions: requestOptions
-        )
+/// Lists the secret scanning pattern configurations for an organization. Personal access tokens (classic) need the `read:org` scope to use this endpoint.
+    public func listOrgPatternConfigs(org: String, requestOptions: RequestOptions? = nil) async throws -> SecretScanningPatternConfiguration {
+        return try await SecretScanningMethods.secretScanningListOrgPatternConfigs(config: config, org: org, requestOptions: requestOptions)
     }
 
-    /// Updates the secret scanning pattern configurations for an organization. Personal access tokens (classic) need
-    /// the `write:org` scope to use this endpoint.
-    public func updateOrgPatternConfigs(
-        org: String,
-        patternConfigVersion: SdkOptional<SecretScanningRowVersion>? = nil,
-        providerPatternSettings: SecretScanningUpdateOrgPatternConfigsProviderPatternSettingsList? = nil,
-        customPatternSettings: SecretScanningUpdateOrgPatternConfigsCustomPatternSettingsList? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SecretScanningUpdateOrgPatternConfigsResponse {
-        try await SecretScanningMethods.secretScanningUpdateOrgPatternConfigs(
-            config: config,
-            org: org,
-            patternConfigVersion: patternConfigVersion,
-            providerPatternSettings: providerPatternSettings,
-            customPatternSettings: customPatternSettings,
-            requestOptions: requestOptions
-        )
+/// Updates the secret scanning pattern configurations for an organization. Personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    public func updateOrgPatternConfigs(org: String, patternConfigVersion: SdkOptional<SecretScanningRowVersion>? = nil, providerPatternSettings: SecretScanningUpdateOrgPatternConfigsProviderPatternSettingsList? = nil, customPatternSettings: SecretScanningUpdateOrgPatternConfigsCustomPatternSettingsList? = nil, requestOptions: RequestOptions? = nil) async throws -> SecretScanningUpdateOrgPatternConfigsResponse {
+        return try await SecretScanningMethods.secretScanningUpdateOrgPatternConfigs(config: config, org: org, patternConfigVersion: patternConfigVersion, providerPatternSettings: providerPatternSettings, customPatternSettings: customPatternSettings, requestOptions: requestOptions)
     }
 
-    /// Lists secret scanning alerts for an eligible repository, from newest to oldest. The authenticated user must be
-    /// an administrator for the repository or for the organization that owns the repository to use this endpoint. OAuth
-    /// app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint.
-    /// If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
-    public func listAlertsForRepo(
-        options: SecretScanningMethods.SecretScanningListAlertsForRepoOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [SecretScanningAlert] {
-        try await SecretScanningMethods.secretScanningListAlertsForRepo(
-            config: config,
-            options: options,
-            requestOptions: requestOptions
-        )
+/// Lists secret scanning alerts for an eligible repository, from newest to oldest. The authenticated user must be an administrator for the repository or for the organization that owns the repository to use this endpoint. OAuth app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
+    public func listAlertsForRepo(options: SecretScanningMethods.SecretScanningListAlertsForRepoOptions, requestOptions: RequestOptions? = nil) async throws -> [SecretScanningAlert] {
+        return try await SecretScanningMethods.secretScanningListAlertsForRepo(config: config, options: options, requestOptions: requestOptions)
     }
 }
 
-public extension SecretScanningNamespace {
-    /// Gets a single secret scanning alert detected in an eligible repository. The authenticated user must be an
-    /// administrator for the repository or for the organization that owns the repository to use this endpoint. OAuth
-    /// app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint.
-    /// If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
-    func getAlert(
-        owner: String,
-        repo: String,
-        alertNumber: AlertNumber,
-        hideSecret: Bool? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SecretScanningAlertWithMetadata {
-        try await SecretScanningMethods.secretScanningGetAlert(
-            config: config,
-            owner: owner,
-            repo: repo,
-            alertNumber: alertNumber,
-            hideSecret: hideSecret,
-            requestOptions: requestOptions
-        )
+extension SecretScanningNamespace {
+/// Gets a single secret scanning alert detected in an eligible repository. The authenticated user must be an administrator for the repository or for the organization that owns the repository to use this endpoint. OAuth app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
+    public func getAlert(owner: String, repo: String, alertNumber: AlertNumber, hideSecret: Bool? = nil, requestOptions: RequestOptions? = nil) async throws -> SecretScanningAlertWithMetadata {
+        return try await SecretScanningMethods.secretScanningGetAlert(config: config, owner: owner, repo: repo, alertNumber: alertNumber, hideSecret: hideSecret, requestOptions: requestOptions)
     }
 
-    /// Updates the status of a secret scanning alert in an eligible repository. You can also use this endpoint to
-    /// assign or unassign an alert to a user who has write access to the repository. The authenticated user must be an
-    /// administrator for the repository or for the organization that owns the repository to use this endpoint. OAuth
-    /// app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint.
-    /// If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
-    func updateAlert(
-        options: SecretScanningMethods.SecretScanningUpdateAlertOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SecretScanningAlertWithMetadata {
-        try await SecretScanningMethods.secretScanningUpdateAlert(
-            config: config,
-            options: options,
-            requestOptions: requestOptions
-        )
+/// Updates the status of a secret scanning alert in an eligible repository. You can also use this endpoint to assign or unassign an alert to a user who has write access to the repository. The authenticated user must be an administrator for the repository or for the organization that owns the repository to use this endpoint. OAuth app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
+    public func updateAlert(options: SecretScanningMethods.SecretScanningUpdateAlertOptions, requestOptions: RequestOptions? = nil) async throws -> SecretScanningAlertWithMetadata {
+        return try await SecretScanningMethods.secretScanningUpdateAlert(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Lists all locations for a given secret scanning alert for an eligible repository. The authenticated user must be
-    /// an administrator for the repository or for the organization that owns the repository to use this endpoint. OAuth
-    /// app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint.
-    /// If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
-    func listLocationsForAlert(
-        owner: String,
-        repo: String,
-        alertNumber: AlertNumber,
-        page: Int? = nil,
-        perPage: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [SecretScanningLocation] {
-        try await SecretScanningMethods.secretScanningListLocationsForAlert(
-            config: config,
-            owner: owner,
-            repo: repo,
-            alertNumber: alertNumber,
-            page: page,
-            perPage: perPage,
-            requestOptions: requestOptions
-        )
+/// Lists all locations for a given secret scanning alert for an eligible repository. The authenticated user must be an administrator for the repository or for the organization that owns the repository to use this endpoint. OAuth app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
+    public func listLocationsForAlert(owner: String, repo: String, alertNumber: AlertNumber, page: Int? = nil, perPage: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [SecretScanningLocation] {
+        return try await SecretScanningMethods.secretScanningListLocationsForAlert(config: config, owner: owner, repo: repo, alertNumber: alertNumber, page: page, perPage: perPage, requestOptions: requestOptions)
     }
 
-    /// Lists secret scanning custom patterns for a repository. OAuth app tokens and personal access tokens (classic)
-    /// need the `repo` scope to use this endpoint. If this endpoint is only used with public repositories, the token
-    /// can use the `public_repo` scope instead. Fine-grained access tokens require the `administration:write`
-    /// repository permission.
-    func listRepoCustomPatterns(
-        options: SecretScanningMethods.SecretScanningListRepoCustomPatternsOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [SecretScanningCustomPattern] {
-        try await SecretScanningMethods.secretScanningListRepoCustomPatterns(
-            config: config,
-            options: options,
-            requestOptions: requestOptions
-        )
+/// Lists secret scanning custom patterns for a repository. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead. Fine-grained access tokens require the `administration:write` repository permission.
+    public func listRepoCustomPatterns(options: SecretScanningMethods.SecretScanningListRepoCustomPatternsOptions, requestOptions: RequestOptions? = nil) async throws -> [SecretScanningCustomPattern] {
+        return try await SecretScanningMethods.secretScanningListRepoCustomPatterns(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Bulk creates secret scanning custom patterns for a repository. OAuth app tokens and personal access tokens
-    /// (classic) need the `repo` scope to use this endpoint. If this endpoint is only used with public repositories,
-    /// the token can use the `public_repo` scope instead. Fine-grained access tokens require the `administration:write`
-    /// repository permission.
-    func bulkCreateRepoCustomPatterns(
-        owner: String,
-        repo: String,
-        patterns: [SecretScanningCustomPatternToCreate],
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SecretScanningBulkCreateRepoCustomPatternsResponse {
-        try await SecretScanningMethods.secretScanningBulkCreateRepoCustomPatterns(
-            config: config,
-            owner: owner,
-            repo: repo,
-            patterns: patterns,
-            requestOptions: requestOptions
-        )
+/// Bulk creates secret scanning custom patterns for a repository. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead. Fine-grained access tokens require the `administration:write` repository permission.
+    public func bulkCreateRepoCustomPatterns(owner: String, repo: String, patterns: [SecretScanningCustomPatternToCreate], requestOptions: RequestOptions? = nil) async throws -> SecretScanningBulkCreateRepoCustomPatternsResponse {
+        return try await SecretScanningMethods.secretScanningBulkCreateRepoCustomPatterns(config: config, owner: owner, repo: repo, patterns: patterns, requestOptions: requestOptions)
     }
 
-    /// Bulk deletes secret scanning custom patterns for a repository. OAuth app tokens and personal access tokens
-    /// (classic) need the `repo` scope to use this endpoint. If this endpoint is only used with public repositories,
-    /// the token can use the `public_repo` scope instead. Fine-grained access tokens require the `administration:write`
-    /// repository permission.
-    func bulkDeleteRepoCustomPatterns(
-        owner: String,
-        repo: String,
-        patterns: [SecretScanningCustomPatternToDelete],
-        postDeleteAction: SecretScanningBulkDeleteRepoCustomPatternsRequestBodyPostDeleteAction? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await SecretScanningMethods.secretScanningBulkDeleteRepoCustomPatterns(
-            config: config,
-            owner: owner,
-            repo: repo,
-            patterns: patterns,
-            postDeleteAction: postDeleteAction,
-            requestOptions: requestOptions
-        )
+/// Bulk deletes secret scanning custom patterns for a repository. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead. Fine-grained access tokens require the `administration:write` repository permission.
+    public func bulkDeleteRepoCustomPatterns(owner: String, repo: String, patterns: [SecretScanningCustomPatternToDelete], postDeleteAction: SecretScanningBulkDeleteRepoCustomPatternsRequestBodyPostDeleteAction? = nil, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await SecretScanningMethods.secretScanningBulkDeleteRepoCustomPatterns(config: config, owner: owner, repo: repo, patterns: patterns, postDeleteAction: postDeleteAction, requestOptions: requestOptions)
     }
 
-    /// Updates a secret scanning custom pattern for a repository. OAuth app tokens and personal access tokens (classic)
-    /// need the `repo` scope to use this endpoint. If this endpoint is only used with public repositories, the token
-    /// can use the `public_repo` scope instead. Fine-grained access tokens require the `administration:write`
-    /// repository permission.
-    func updateRepoCustomPattern(
-        options: SecretScanningMethods.SecretScanningUpdateRepoCustomPatternOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SecretScanningCustomPattern {
-        try await SecretScanningMethods.secretScanningUpdateRepoCustomPattern(
-            config: config,
-            options: options,
-            requestOptions: requestOptions
-        )
+/// Updates a secret scanning custom pattern for a repository. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead. Fine-grained access tokens require the `administration:write` repository permission.
+    public func updateRepoCustomPattern(options: SecretScanningMethods.SecretScanningUpdateRepoCustomPatternOptions, requestOptions: RequestOptions? = nil) async throws -> SecretScanningCustomPattern {
+        return try await SecretScanningMethods.secretScanningUpdateRepoCustomPattern(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Creates a bypass for a previously push protected secret. The authenticated user must be the original author of
-    /// the committed secret. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this
-    /// endpoint.
-    func createPushProtectionBypass(
-        owner: String,
-        repo: String,
-        reason: SecretScanningPushProtectionBypassReason,
-        placeholderId: SecretScanningPushProtectionBypassPlaceholderId,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SecretScanningPushProtectionBypass {
-        try await SecretScanningMethods.secretScanningCreatePushProtectionBypass(
-            config: config,
-            owner: owner,
-            repo: repo,
-            reason: reason,
-            placeholderId: placeholderId,
-            requestOptions: requestOptions
-        )
+/// Creates a bypass for a previously push protected secret. The authenticated user must be the original author of the committed secret. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    public func createPushProtectionBypass(owner: String, repo: String, reason: SecretScanningPushProtectionBypassReason, placeholderId: SecretScanningPushProtectionBypassPlaceholderId, requestOptions: RequestOptions? = nil) async throws -> SecretScanningPushProtectionBypass {
+        return try await SecretScanningMethods.secretScanningCreatePushProtectionBypass(config: config, owner: owner, repo: repo, reason: reason, placeholderId: placeholderId, requestOptions: requestOptions)
     }
 }
 
-public extension SecretScanningNamespace {
-    /// Lists the latest default incremental and backfill scans by type for a repository. > [!NOTE] > This endpoint
-    /// requires [GitHub Advanced
-    /// Security](https://docs.github.com/get-started/learning-about-github/about-github-advanced-security). OAuth app
-    /// tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint. If
-    /// this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
-    func getScanHistory(
-        owner: String,
-        repo: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SecretScanningScanHistory {
-        try await SecretScanningMethods.secretScanningGetScanHistory(
-            config: config,
-            owner: owner,
-            repo: repo,
-            requestOptions: requestOptions
-        )
+extension SecretScanningNamespace {
+/// Lists the latest default incremental and backfill scans by type for a repository. > [!NOTE] > This endpoint requires [GitHub Advanced Security](https://docs.github.com/get-started/learning-about-github/about-github-advanced-security). OAuth app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
+    public func getScanHistory(owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> SecretScanningScanHistory {
+        return try await SecretScanningMethods.secretScanningGetScanHistory(config: config, owner: owner, repo: repo, requestOptions: requestOptions)
     }
 }
 
@@ -320,114 +105,34 @@ public class HostedComputeNamespace {
         self.config = config
     }
 
-    /// Lists all hosted compute network configurations configured in an organization. OAuth app tokens and personal
-    /// access tokens (classic) need the `read:network_configurations` scope to use this endpoint.
-    public func listNetworkConfigurationsForOrg(
-        org: String,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> HostedComputeListNetworkConfigurationsForOrgResponse {
-        try await HostedComputeMethods.hostedComputeListNetworkConfigurationsForOrg(
-            config: config,
-            org: org,
-            perPage: perPage,
-            page: page,
-            requestOptions: requestOptions
-        )
+/// Lists all hosted compute network configurations configured in an organization. OAuth app tokens and personal access tokens (classic) need the `read:network_configurations` scope to use this endpoint.
+    public func listNetworkConfigurationsForOrg(org: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> HostedComputeListNetworkConfigurationsForOrgResponse {
+        return try await HostedComputeMethods.hostedComputeListNetworkConfigurationsForOrg(config: config, org: org, perPage: perPage, page: page, requestOptions: requestOptions)
     }
 
-    /// Creates a hosted compute network configuration for an organization. OAuth app tokens and personal access tokens
-    /// (classic) need the `write:network_configurations` scope to use this endpoint.
-    public func createNetworkConfigurationForOrg(
-        org: String,
-        name: String,
-        networkSettingsIds: [String],
-        computeService: HostedComputeCreateNetworkConfigurationForOrgRequestBodyComputeService? = nil,
-        failoverNetworkSettingsIds: [String]? = nil,
-        failoverNetworkEnabled: Bool? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> NetworkConfiguration {
-        try await HostedComputeMethods.hostedComputeCreateNetworkConfigurationForOrg(
-            config: config,
-            org: org,
-            name: name,
-            networkSettingsIds: networkSettingsIds,
-            computeService: computeService,
-            failoverNetworkSettingsIds: failoverNetworkSettingsIds,
-            failoverNetworkEnabled: failoverNetworkEnabled,
-            requestOptions: requestOptions
-        )
+/// Creates a hosted compute network configuration for an organization. OAuth app tokens and personal access tokens (classic) need the `write:network_configurations` scope to use this endpoint.
+    public func createNetworkConfigurationForOrg(org: String, name: String, networkSettingsIds: [String], computeService: HostedComputeCreateNetworkConfigurationForOrgRequestBodyComputeService? = nil, failoverNetworkSettingsIds: [String]? = nil, failoverNetworkEnabled: Bool? = nil, requestOptions: RequestOptions? = nil) async throws -> NetworkConfiguration {
+        return try await HostedComputeMethods.hostedComputeCreateNetworkConfigurationForOrg(config: config, org: org, name: name, networkSettingsIds: networkSettingsIds, computeService: computeService, failoverNetworkSettingsIds: failoverNetworkSettingsIds, failoverNetworkEnabled: failoverNetworkEnabled, requestOptions: requestOptions)
     }
 
-    /// Gets a hosted compute network configuration configured in an organization. OAuth app tokens and personal access
-    /// tokens (classic) need the `read:network_configurations` scope to use this endpoint.
-    public func getNetworkConfigurationForOrg(
-        org: String,
-        networkConfigurationId: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> NetworkConfiguration {
-        try await HostedComputeMethods.hostedComputeGetNetworkConfigurationForOrg(
-            config: config,
-            org: org,
-            networkConfigurationId: networkConfigurationId,
-            requestOptions: requestOptions
-        )
+/// Gets a hosted compute network configuration configured in an organization. OAuth app tokens and personal access tokens (classic) need the `read:network_configurations` scope to use this endpoint.
+    public func getNetworkConfigurationForOrg(org: String, networkConfigurationId: String, requestOptions: RequestOptions? = nil) async throws -> NetworkConfiguration {
+        return try await HostedComputeMethods.hostedComputeGetNetworkConfigurationForOrg(config: config, org: org, networkConfigurationId: networkConfigurationId, requestOptions: requestOptions)
     }
 
-    /// Updates a hosted compute network configuration for an organization. OAuth app tokens and personal access tokens
-    /// (classic) need the `write:network_configurations` scope to use this endpoint.
-    public func updateNetworkConfigurationForOrg(
-        org: String,
-        networkConfigurationId: String,
-        name: String? = nil,
-        computeService: HostedComputeUpdateNetworkConfigurationForOrgRequestBodyComputeService? = nil,
-        networkSettingsIds: [String]? = nil,
-        failoverNetworkSettingsIds: [String]? = nil,
-        failoverNetworkEnabled: Bool? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> NetworkConfiguration {
-        try await HostedComputeMethods.hostedComputeUpdateNetworkConfigurationForOrg(
-            config: config,
-            org: org,
-            networkConfigurationId: networkConfigurationId,
-            name: name,
-            computeService: computeService,
-            networkSettingsIds: networkSettingsIds,
-            failoverNetworkSettingsIds: failoverNetworkSettingsIds,
-            failoverNetworkEnabled: failoverNetworkEnabled,
-            requestOptions: requestOptions
-        )
+/// Updates a hosted compute network configuration for an organization. OAuth app tokens and personal access tokens (classic) need the `write:network_configurations` scope to use this endpoint.
+    public func updateNetworkConfigurationForOrg(org: String, networkConfigurationId: String, name: String? = nil, computeService: HostedComputeUpdateNetworkConfigurationForOrgRequestBodyComputeService? = nil, networkSettingsIds: [String]? = nil, failoverNetworkSettingsIds: [String]? = nil, failoverNetworkEnabled: Bool? = nil, requestOptions: RequestOptions? = nil) async throws -> NetworkConfiguration {
+        return try await HostedComputeMethods.hostedComputeUpdateNetworkConfigurationForOrg(config: config, org: org, networkConfigurationId: networkConfigurationId, name: name, computeService: computeService, networkSettingsIds: networkSettingsIds, failoverNetworkSettingsIds: failoverNetworkSettingsIds, failoverNetworkEnabled: failoverNetworkEnabled, requestOptions: requestOptions)
     }
 
-    /// Deletes a hosted compute network configuration from an organization. OAuth app tokens and personal access tokens
-    /// (classic) need the `write:network_configurations` scope to use this endpoint.
-    public func deleteNetworkConfigurationFromOrg(
-        org: String,
-        networkConfigurationId: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await HostedComputeMethods.hostedComputeDeleteNetworkConfigurationFromOrg(
-            config: config,
-            org: org,
-            networkConfigurationId: networkConfigurationId,
-            requestOptions: requestOptions
-        )
+/// Deletes a hosted compute network configuration from an organization. OAuth app tokens and personal access tokens (classic) need the `write:network_configurations` scope to use this endpoint.
+    public func deleteNetworkConfigurationFromOrg(org: String, networkConfigurationId: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await HostedComputeMethods.hostedComputeDeleteNetworkConfigurationFromOrg(config: config, org: org, networkConfigurationId: networkConfigurationId, requestOptions: requestOptions)
     }
 
-    /// Gets a hosted compute network settings resource configured for an organization. OAuth app tokens and personal
-    /// access tokens (classic) need the `read:network_configurations` scope to use this endpoint.
-    public func getNetworkSettingsForOrg(
-        org: String,
-        networkSettingsId: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> NetworkSettings {
-        try await HostedComputeMethods.hostedComputeGetNetworkSettingsForOrg(
-            config: config,
-            org: org,
-            networkSettingsId: networkSettingsId,
-            requestOptions: requestOptions
-        )
+/// Gets a hosted compute network settings resource configured for an organization. OAuth app tokens and personal access tokens (classic) need the `read:network_configurations` scope to use this endpoint.
+    public func getNetworkSettingsForOrg(org: String, networkSettingsId: String, requestOptions: RequestOptions? = nil) async throws -> NetworkSettings {
+        return try await HostedComputeMethods.hostedComputeGetNetworkSettingsForOrg(config: config, org: org, networkSettingsId: networkSettingsId, requestOptions: requestOptions)
     }
 }
 
@@ -437,145 +142,43 @@ public class TeamsNamespace {
         self.config = config
     }
 
-    /// Lists all teams in an organization that are visible to the authenticated user.
-    public func list(
-        org: String,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        teamType: TeamsListParameter? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [Team] {
-        try await TeamsMethods.teamsList(
-            config: config,
-            org: org,
-            perPage: perPage,
-            page: page,
-            teamType: teamType,
-            requestOptions: requestOptions
-        )
+/// Lists all teams in an organization that are visible to the authenticated user.
+    public func list(org: String, perPage: Int? = nil, page: Int? = nil, teamType: TeamsListParameter? = nil, requestOptions: RequestOptions? = nil) async throws -> [Team] {
+        return try await TeamsMethods.teamsList(config: config, org: org, perPage: perPage, page: page, teamType: teamType, requestOptions: requestOptions)
     }
 
-    /// To create a team, the authenticated user must be a member or owner of `{org}`. By default, organization members
-    /// can create teams. Organization owners can limit team creation to organization owners. For more information, see
-    /// "[Setting team creation
-    /// permissions](https://docs.github.com/articles/setting-team-creation-permissions-in-your-organization)." When you
-    /// create a new team, you automatically become a team maintainer without explicitly adding yourself to the optional
-    /// array of `maintainers`. For more information, see "[About
-    /// teams](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/about-teams)".
-    public func create(
-        options: TeamsMethods.TeamsCreateOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> TeamFull {
-        try await TeamsMethods.teamsCreate(config: config, options: options, requestOptions: requestOptions)
+/// To create a team, the authenticated user must be a member or owner of `{org}`. By default, organization members can create teams. Organization owners can limit team creation to organization owners. For more information, see "[Setting team creation permissions](https://docs.github.com/articles/setting-team-creation-permissions-in-your-organization)." When you create a new team, you automatically become a team maintainer without explicitly adding yourself to the optional array of `maintainers`. For more information, see "[About teams](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/about-teams)".
+    public func create(options: TeamsMethods.TeamsCreateOptions, requestOptions: RequestOptions? = nil) async throws -> TeamFull {
+        return try await TeamsMethods.teamsCreate(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Gets a team using the team's `slug`. To create the `slug`, GitHub replaces special characters in the `name`
-    /// string, changes all words to lowercase, and replaces spaces with a `-` separator. For example, `"My TEam Näme"`
-    /// would become `my-team-name`. > [!NOTE] > You can also specify a team by `org_id` and `team_id` using the route
-    /// `GET /organizations/{org_id}/team/{team_id}`.
-    public func getByName(
-        org: String,
-        teamSlug: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> TeamFull {
-        try await TeamsMethods.teamsGetByName(
-            config: config,
-            org: org,
-            teamSlug: teamSlug,
-            requestOptions: requestOptions
-        )
+/// Gets a team using the team's `slug`. To create the `slug`, GitHub replaces special characters in the `name` string, changes all words to lowercase, and replaces spaces with a `-` separator. For example, `"My TEam Näme"` would become `my-team-name`. > [!NOTE] > You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}`.
+    public func getByName(org: String, teamSlug: String, requestOptions: RequestOptions? = nil) async throws -> TeamFull {
+        return try await TeamsMethods.teamsGetByName(config: config, org: org, teamSlug: teamSlug, requestOptions: requestOptions)
     }
 
-    /// To edit a team, the authenticated user must either be an organization owner or a team maintainer. > [!NOTE] >
-    /// You can also specify a team by `org_id` and `team_id` using the route `PATCH
-    /// /organizations/{org_id}/team/{team_id}`.
-    public func updateInOrg(
-        options: TeamsMethods.TeamsUpdateInOrgOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> TeamFull {
-        try await TeamsMethods.teamsUpdateInOrg(config: config, options: options, requestOptions: requestOptions)
+/// To edit a team, the authenticated user must either be an organization owner or a team maintainer. > [!NOTE] > You can also specify a team by `org_id` and `team_id` using the route `PATCH /organizations/{org_id}/team/{team_id}`.
+    public func updateInOrg(options: TeamsMethods.TeamsUpdateInOrgOptions, requestOptions: RequestOptions? = nil) async throws -> TeamFull {
+        return try await TeamsMethods.teamsUpdateInOrg(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// To delete a team, the authenticated user must be an organization owner or team maintainer. If you are an
-    /// organization owner, deleting a parent team will delete all of its child teams as well. > [!NOTE] > You can also
-    /// specify a team by `org_id` and `team_id` using the route `DELETE /organizations/{org_id}/team/{team_id}`.
-    public func deleteInOrg(
-        org: String,
-        teamSlug: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await TeamsMethods.teamsDeleteInOrg(
-            config: config,
-            org: org,
-            teamSlug: teamSlug,
-            requestOptions: requestOptions
-        )
+/// To delete a team, the authenticated user must be an organization owner or team maintainer. If you are an organization owner, deleting a parent team will delete all of its child teams as well. > [!NOTE] > You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/{org_id}/team/{team_id}`.
+    public func deleteInOrg(org: String, teamSlug: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await TeamsMethods.teamsDeleteInOrg(config: config, org: org, teamSlug: teamSlug, requestOptions: requestOptions)
     }
 
-    /// The return hash contains a `role` field which refers to the Organization Invitation role and will be one of the
-    /// following values: `direct_member`, `admin`, `billing_manager`, `hiring_manager`, or `reinstate`. If the invitee
-    /// is not a GitHub member, the `login` field in the return hash will be `null`. > [!NOTE] > You can also specify a
-    /// team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/invitations`.
-    public func listPendingInvitationsInOrg(
-        org: String,
-        teamSlug: String,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [OrganizationInvitation] {
-        try await TeamsMethods.teamsListPendingInvitationsInOrg(
-            config: config,
-            org: org,
-            teamSlug: teamSlug,
-            perPage: perPage,
-            page: page,
-            requestOptions: requestOptions
-        )
+/// The return hash contains a `role` field which refers to the Organization Invitation role and will be one of the following values: `direct_member`, `admin`, `billing_manager`, `hiring_manager`, or `reinstate`. If the invitee is not a GitHub member, the `login` field in the return hash will be `null`. > [!NOTE] > You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/invitations`.
+    public func listPendingInvitationsInOrg(org: String, teamSlug: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [OrganizationInvitation] {
+        return try await TeamsMethods.teamsListPendingInvitationsInOrg(config: config, org: org, teamSlug: teamSlug, perPage: perPage, page: page, requestOptions: requestOptions)
     }
 
-    /// Team members will include the members of child teams. Each member includes their `role` on the team (`member` or
-    /// `maintainer`) and an `inherited` flag indicating whether the membership is inherited from a child team (`true`)
-    /// or is a direct membership (`false`). These fields let you read a member's role and direct/inherited status
-    /// without additional requests. To list members in a team, the team must be visible to the authenticated user. >
-    /// [!NOTE] > You can also specify a team by `org_id` and `team_id` using the route `GET
-    /// /organizations/{org_id}/team/{team_id}/members`.
-    public func listMembersInOrg(
-        org: String,
-        teamSlug: String,
-        role: TeamsListMembersInOrgParameter? = nil,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [TeamMember] {
-        try await TeamsMethods.teamsListMembersInOrg(
-            config: config,
-            org: org,
-            teamSlug: teamSlug,
-            role: role,
-            perPage: perPage,
-            page: page,
-            requestOptions: requestOptions
-        )
+/// Team members will include the members of child teams. Each member includes their `role` on the team (`member` or `maintainer`) and an `inherited` flag indicating whether the membership is inherited from a child team (`true`) or is a direct membership (`false`). These fields let you read a member's role and direct/inherited status without additional requests. To list members in a team, the team must be visible to the authenticated user. > [!NOTE] > You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/members`.
+    public func listMembersInOrg(org: String, teamSlug: String, role: TeamsListMembersInOrgParameter? = nil, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [TeamMember] {
+        return try await TeamsMethods.teamsListMembersInOrg(config: config, org: org, teamSlug: teamSlug, role: role, perPage: perPage, page: page, requestOptions: requestOptions)
     }
 
-    /// Team members will include the members of child teams. To get a user's membership with a team, the team must be
-    /// visible to the authenticated user. > [!NOTE] > You can also specify a team by `org_id` and `team_id` using the
-    /// route `GET /organizations/{org_id}/team/{team_id}/memberships/{username}`. > [!NOTE] > The response contains the
-    /// `state` of the membership and the member's `role`. The `role` for organization owners is set to `maintainer`.
-    /// For more information about `maintainer` roles, see [Create a
-    /// team](https://docs.github.com/rest/teams/teams#create-a-team).
-    public func getMembershipForUserInOrg(
-        org: String,
-        teamSlug: String,
-        username: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> TeamMembership {
-        try await TeamsMethods.teamsGetMembershipForUserInOrg(
-            config: config,
-            org: org,
-            teamSlug: teamSlug,
-            username: username,
-            requestOptions: requestOptions
-        )
+/// Team members will include the members of child teams. To get a user's membership with a team, the team must be visible to the authenticated user. > [!NOTE] > You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/memberships/{username}`. > [!NOTE] > The response contains the `state` of the membership and the member's `role`. The `role` for organization owners is set to `maintainer`. For more information about `maintainer` roles, see [Create a team](https://docs.github.com/rest/teams/teams#create-a-team).
+    public func getMembershipForUserInOrg(org: String, teamSlug: String, username: String, requestOptions: RequestOptions? = nil) async throws -> TeamMembership {
+        return try await TeamsMethods.teamsGetMembershipForUserInOrg(config: config, org: org, teamSlug: teamSlug, username: username, requestOptions: requestOptions)
     }
 }

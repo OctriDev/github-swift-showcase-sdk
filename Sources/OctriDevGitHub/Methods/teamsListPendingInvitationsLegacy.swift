@@ -6,13 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension TeamsMethods {
-    /// > [!WARNING] > **Endpoint closing down notice:** This endpoint route is closing down and will be removed from
-    /// the Teams API. We recommend migrating your existing code to use the new [`List pending team
-    /// invitations`](https://docs.github.com/rest/teams/members#list-pending-team-invitations) endpoint. The return
-    /// hash contains a `role` field which refers to the Organization Invitation role and will be one of the following
-    /// values: `direct_member`, `admin`, `billing_manager`, `hiring_manager`, or `reinstate`. If the invitee is not a
-    /// GitHub member, the `login` field in the return hash will be `null`.
+extension TeamsMethods {
+    /// > [!WARNING] > **Endpoint closing down notice:** This endpoint route is closing down and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List pending team invitations`](https://docs.github.com/rest/teams/members#list-pending-team-invitations) endpoint. The return hash contains a `role` field which refers to the Organization Invitation role and will be one of the following values: `direct_member`, `admin`, `billing_manager`, `hiring_manager`, or `reinstate`. If the invitee is not a GitHub member, the `login` field in the return hash will be `null`.
     ///
     /// - Parameters:
     /// - teamId: The unique identifier of the team.
@@ -26,24 +21,10 @@ public extension TeamsMethods {
     ///   -rest-api)."
     ///
     /// - Warning: This operation is deprecated and may be removed in a future release.
-    static func teamsListPendingInvitationsLegacy(
-        config: ClientConfig,
-        teamId: Int,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [OrganizationInvitation] {
-        try await (sdkRequest(
-            "GET",
-            ["/teams/", sdkEncodePathSegment(sdkWireString(teamId)), "/invitations"].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("page", value: page),
-            ],
-            decoder: .json,
-            operationId: "teamsListPendingInvitationsLegacy",
-            options: requestOptions
-        )).data
+    public static func teamsListPendingInvitationsLegacy(config: ClientConfig, teamId: Int, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [OrganizationInvitation] {
+        return try (await sdkRequest("GET", ["/teams/", sdkEncodePathSegment(sdkWireString(teamId)), "/invitations"].joined(), config: config, query: [
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("page", value: page),
+        ], decoder: .json, operationId: "teamsListPendingInvitationsLegacy", options: requestOptions)).data
     }
 }

@@ -6,26 +6,12 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension PackagesMethods {
-    /// Lists all packages that are in a specific user's namespace, that the requesting user has access to, and that
-    /// encountered a conflict during Docker migration. OAuth app tokens and personal access tokens (classic) need the
-    /// `read:packages` scope to use this endpoint.
+extension PackagesMethods {
+    /// Lists all packages that are in a specific user's namespace, that the requesting user has access to, and that encountered a conflict during Docker migration. OAuth app tokens and personal access tokens (classic) need the `read:packages` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - username: The handle for the GitHub user account.
-    static func packagesListDockerMigrationConflictingPackagesForUser(
-        config: ClientConfig,
-        username: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [Package] {
-        try await (sdkRequest(
-            "GET",
-            ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/docker/conflicts"].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "packagesListDockerMigrationConflictingPackagesForUser",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self]
-        )).data
+    public static func packagesListDockerMigrationConflictingPackagesForUser(config: ClientConfig, username: String, requestOptions: RequestOptions? = nil) async throws -> [Package] {
+        return try (await sdkRequest("GET", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/docker/conflicts"].joined(), config: config, decoder: .json, operationId: "packagesListDockerMigrationConflictingPackagesForUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self])).data
     }
 }

@@ -9,88 +9,28 @@ public class CampaignsNamespace {
         self.config = config
     }
 
-    /// Lists campaigns in an organization. The authenticated user must be an owner or security manager for the
-    /// organization to use this endpoint. OAuth app tokens and personal access tokens (classic) need the
-    /// `security_events` scope to use this endpoint.
-    public func listOrgCampaigns(
-        org: String,
-        page: Int? = nil,
-        perPage: Int? = nil,
-        direction: SecurityAdvisoriesListGlobalAdvisoriesParameter? = nil,
-        state: CampaignState? = nil,
-        sort: CampaignsListOrgCampaignsParameter? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [CampaignSummary] {
-        try await CampaignsMethods.campaignsListOrgCampaigns(
-            config: config,
-            org: org,
-            page: page,
-            perPage: perPage,
-            direction: direction,
-            state: state,
-            sort: sort,
-            requestOptions: requestOptions
-        )
+/// Lists campaigns in an organization. The authenticated user must be an owner or security manager for the organization to use this endpoint. OAuth app tokens and personal access tokens (classic) need the `security_events` scope to use this endpoint.
+    public func listOrgCampaigns(org: String, page: Int? = nil, perPage: Int? = nil, direction: SecurityAdvisoriesListGlobalAdvisoriesParameter? = nil, state: CampaignState? = nil, sort: CampaignsListOrgCampaignsParameter? = nil, requestOptions: RequestOptions? = nil) async throws -> [CampaignSummary] {
+        return try await CampaignsMethods.campaignsListOrgCampaigns(config: config, org: org, page: page, perPage: perPage, direction: direction, state: state, sort: sort, requestOptions: requestOptions)
     }
 
-    /// Create a campaign for an organization. The authenticated user must be an owner or security manager for the
-    /// organization to use this endpoint. OAuth app tokens and personal access tokens (classic) need the
-    /// `security_events` scope to use this endpoint. Fine-grained tokens must have the "Code scanning alerts"
-    /// repository permissions (read) on all repositories included in the campaign.
-    public func createCampaign(
-        options: CampaignsMethods.CampaignsCreateCampaignOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CampaignSummary {
-        try await CampaignsMethods.campaignsCreateCampaign(
-            config: config,
-            options: options,
-            requestOptions: requestOptions
-        )
+/// Create a campaign for an organization. The authenticated user must be an owner or security manager for the organization to use this endpoint. OAuth app tokens and personal access tokens (classic) need the `security_events` scope to use this endpoint. Fine-grained tokens must have the "Code scanning alerts" repository permissions (read) on all repositories included in the campaign.
+    public func createCampaign(options: CampaignsMethods.CampaignsCreateCampaignOptions, requestOptions: RequestOptions? = nil) async throws -> CampaignSummary {
+        return try await CampaignsMethods.campaignsCreateCampaign(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Gets a campaign for an organization. The authenticated user must be an owner or security manager for the
-    /// organization to use this endpoint. OAuth app tokens and personal access tokens (classic) need the
-    /// `security_events` scope to use this endpoint.
-    public func getCampaignSummary(
-        org: String,
-        campaignNumber: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CampaignSummary {
-        try await CampaignsMethods.campaignsGetCampaignSummary(
-            config: config,
-            org: org,
-            campaignNumber: campaignNumber,
-            requestOptions: requestOptions
-        )
+/// Gets a campaign for an organization. The authenticated user must be an owner or security manager for the organization to use this endpoint. OAuth app tokens and personal access tokens (classic) need the `security_events` scope to use this endpoint.
+    public func getCampaignSummary(org: String, campaignNumber: Int, requestOptions: RequestOptions? = nil) async throws -> CampaignSummary {
+        return try await CampaignsMethods.campaignsGetCampaignSummary(config: config, org: org, campaignNumber: campaignNumber, requestOptions: requestOptions)
     }
 
-    /// Updates a campaign in an organization. The authenticated user must be an owner or security manager for the
-    /// organization to use this endpoint. OAuth app tokens and personal access tokens (classic) need the
-    /// `security_events` scope to use this endpoint.
-    public func updateCampaign(
-        options: CampaignsMethods.CampaignsUpdateCampaignOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CampaignSummary {
-        try await CampaignsMethods.campaignsUpdateCampaign(
-            config: config,
-            options: options,
-            requestOptions: requestOptions
-        )
+/// Updates a campaign in an organization. The authenticated user must be an owner or security manager for the organization to use this endpoint. OAuth app tokens and personal access tokens (classic) need the `security_events` scope to use this endpoint.
+    public func updateCampaign(options: CampaignsMethods.CampaignsUpdateCampaignOptions, requestOptions: RequestOptions? = nil) async throws -> CampaignSummary {
+        return try await CampaignsMethods.campaignsUpdateCampaign(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Deletes a campaign in an organization. The authenticated user must be an owner or security manager for the
-    /// organization to use this endpoint. OAuth app tokens and personal access tokens (classic) need the
-    /// `security_events` scope to use this endpoint.
-    public func deleteCampaign(
-        org: String,
-        campaignNumber: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await CampaignsMethods.campaignsDeleteCampaign(
-            config: config,
-            org: org,
-            campaignNumber: campaignNumber,
-            requestOptions: requestOptions
-        )
+/// Deletes a campaign in an organization. The authenticated user must be an owner or security manager for the organization to use this endpoint. OAuth app tokens and personal access tokens (classic) need the `security_events` scope to use this endpoint.
+    public func deleteCampaign(org: String, campaignNumber: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await CampaignsMethods.campaignsDeleteCampaign(config: config, org: org, campaignNumber: campaignNumber, requestOptions: requestOptions)
     }
 }

@@ -6,13 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ActionsMethods {
-    /// Gets a redirect URL to download a plain text file of logs for a specific step of a workflow job. This link
-    /// expires after 1 minute. Look for `Location:` in the response header to find the URL for the download. This
-    /// endpoint is intended for selective retrieval of one step. To download complete job logs, use the [job logs
-    /// endpoint](https://docs.github.com/rest/actions/workflow-jobs#download-job-logs-for-a-workflow-run). Anyone with
-    /// read access to the repository can use this endpoint. If the repository is private, OAuth tokens and personal
-    /// access tokens (classic) need the `repo` scope to use this endpoint.
+extension ActionsMethods {
+    /// Gets a redirect URL to download a plain text file of logs for a specific step of a workflow job. This link expires after 1 minute. Look for `Location:` in the response header to find the URL for the download. This endpoint is intended for selective retrieval of one step. To download complete job logs, use the [job logs endpoint](https://docs.github.com/rest/actions/workflow-jobs#download-job-logs-for-a-workflow-run). Anyone with read access to the repository can use this endpoint. If the repository is private, OAuth tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -21,33 +16,9 @@ public extension ActionsMethods {
     ///   not case sensitive.
     /// - jobId: The unique identifier of the job.
     /// - stepNumber: The zero-based position number of the step in the job.
-    static func actionsDownloadStepLogsForWorkflowRunJob(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        jobId: Int,
-        stepNumber: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
+    public static func actionsDownloadStepLogsForWorkflowRunJob(config: ClientConfig, owner: String, repo: String, jobId: Int, stepNumber: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
         try validateRange("step_number", Double(stepNumber), min: 0)
 
-        return try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/actions/jobs/",
-                sdkEncodePathSegment(sdkWireString(jobId)),
-                "/steps/",
-                sdkEncodePathSegment(sdkWireString(stepNumber)),
-                "/logs",
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "actionsDownloadStepLogsForWorkflowRunJob",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/actions/jobs/", sdkEncodePathSegment(sdkWireString(jobId)), "/steps/", sdkEncodePathSegment(sdkWireString(stepNumber)), "/logs"].joined(), config: config, decoder: .empty, operationId: "actionsDownloadStepLogsForWorkflowRunJob", options: requestOptions)).data
     }
 }

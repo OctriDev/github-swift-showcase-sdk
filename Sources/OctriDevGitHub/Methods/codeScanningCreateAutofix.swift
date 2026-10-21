@@ -6,18 +6,10 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension CodeScanningMethods {
-    /// Creates an autofix for a code scanning alert using the repository's default branch. If an autofix already
-    /// exists, the response returns it; if one is being generated, the response confirms the request was accepted.
-    /// OAuth app tokens and personal access tokens (classic) require the `security_events` scope for public or private
-    /// repositories, or the `public_repo` scope for public repositories only.
+extension CodeScanningMethods {
+    /// Creates an autofix for a code scanning alert using the repository's default branch. If an autofix already exists, the response returns it; if one is being generated, the response confirms the request was accepted. OAuth app tokens and personal access tokens (classic) require the `security_events` scope for public or private repositories, or the `public_repo` scope for public repositories only.
     ///
-    /// Creates an autofix for a code scanning alert from the repository's default branch. If a new autofix is to be
-    /// created as a result of this request or is currently being generated, then this endpoint will return a 202
-    /// Accepted response. If an autofix already exists for a given alert, then this endpoint will return a 200 OK
-    /// response. OAuth app tokens and personal access tokens (classic) need the `security_events` scope to use this
-    /// endpoint with private or public repositories, or the `public_repo` scope to use this endpoint with only public
-    /// repositories.
+    /// Creates an autofix for a code scanning alert from the repository's default branch. If a new autofix is to be created as a result of this request or is currently being generated, then this endpoint will return a 202 Accepted response. If an autofix already exists for a given alert, then this endpoint will return a 200 OK response. OAuth app tokens and personal access tokens (classic) need the `security_events` scope to use this endpoint with private or public repositories, or the `public_repo` scope to use this endpoint with only public repositories.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -28,29 +20,7 @@ public extension CodeScanningMethods {
     ///   end of the URL for a code scanning alert within GitHub, and in the `number`
     ///   field in the response from the `GET
     ///   /repos/{owner}/{repo}/code-scanning/alerts` operation.
-    static func codeScanningCreateAutofix(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        alertNumber: AlertNumber,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CodeScanningAutofix {
-        try await (sdkRequest(
-            "POST",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/code-scanning/alerts/",
-                sdkEncodePathSegment(sdkWireString(alertNumber)),
-                "/autofix",
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "codeScanningCreateAutofix",
-            options: requestOptions,
-            errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self]
-        )).data
+    public static func codeScanningCreateAutofix(config: ClientConfig, owner: String, repo: String, alertNumber: AlertNumber, requestOptions: RequestOptions? = nil) async throws -> CodeScanningAutofix {
+        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/code-scanning/alerts/", sdkEncodePathSegment(sdkWireString(alertNumber)), "/autofix"].joined(), config: config, decoder: .json, operationId: "codeScanningCreateAutofix", options: requestOptions, errors: ["400": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self])).data
     }
 }

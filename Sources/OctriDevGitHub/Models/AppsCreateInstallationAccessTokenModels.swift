@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Apps domain models
+// Apps domain models
 /// Authentication token for a GitHub App installed on a user or org.
 public struct InstallationToken: Codable {
     /// Required `string` value serialized in the `token` wire field.
@@ -38,50 +38,31 @@ public struct InstallationToken: Codable {
         case singleFilePaths = "single_file_paths"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension InstallationToken {
-    init(from decoder: Decoder) throws {
+extension InstallationToken {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.token) else {
-            throw SdkValidationError(
-                field: "token",
-                code: "required",
-                message: "Validation failed for 'token': value is required"
-            )
+            throw SdkValidationError(field: "token", code: "required", message: "Validation failed for 'token': value is required")
         }
         guard container.contains(.expiresAt) else {
-            throw SdkValidationError(
-                field: "expires_at",
-                code: "required",
-                message: "Validation failed for 'expires_at': value is required"
-            )
+            throw SdkValidationError(field: "expires_at", code: "required", message: "Validation failed for 'expires_at': value is required")
         }
-        token = try container.sdkDecodeRequired(.token)
-        expiresAt = try container.sdkDecodeRequired(.expiresAt)
-        permissions = try container.sdkDecodeIfPresent(.permissions)
-        repositorySelection = try container.sdkDecodeIfPresent(.repositorySelection)
-        repositories = try container.sdkDecodeIfPresent(.repositories)
-        singleFile = try container.sdkDecodeIfPresent(.singleFile)
-        hasMultipleSingleFiles = try container.sdkDecodeIfPresent(.hasMultipleSingleFiles)
-        singleFilePaths = try container.sdkDecodeIfPresent(.singleFilePaths)
+        self.token = try container.sdkDecodeRequired(.token)
+        self.expiresAt = try container.sdkDecodeRequired(.expiresAt)
+        self.permissions = try container.sdkDecodeIfPresent(.permissions)
+        self.repositorySelection = try container.sdkDecodeIfPresent(.repositorySelection)
+        self.repositories = try container.sdkDecodeIfPresent(.repositories)
+        self.singleFile = try container.sdkDecodeIfPresent(.singleFile)
+        self.hasMultipleSingleFiles = try container.sdkDecodeIfPresent(.hasMultipleSingleFiles)
+        self.singleFilePaths = try container.sdkDecodeIfPresent(.singleFilePaths)
     }
 }
 
-public extension InstallationToken {
-    init(
-        token: String,
-        expiresAt: String,
-        permissions: AppPermissions? = nil,
-        repositorySelection: InstallationTokenRepositorySelection? = nil,
-        repositories: [Repository]? = nil,
-        singleFile: String? = nil,
-        hasMultipleSingleFiles: Bool? = nil,
-        singleFilePaths: [String]? = nil
-    ) {
+extension InstallationToken {
+    public init(token: String, expiresAt: String, permissions: AppPermissions? = nil, repositorySelection: InstallationTokenRepositorySelection? = nil, repositories: [Repository]? = nil, singleFile: String? = nil, hasMultipleSingleFiles: Bool? = nil, singleFilePaths: [String]? = nil) {
         (self.token, self.expiresAt) = (token, expiresAt)
         (self.permissions, self.repositorySelection) = (permissions, repositorySelection)
         (self.repositories, self.singleFile) = (repositories, singleFile)
@@ -93,16 +74,13 @@ public extension InstallationToken {
 public struct InstallationTokenRepositorySelection: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let all = InstallationTokenRepositorySelection(rawValue: "all")
     public static let selected = InstallationTokenRepositorySelection(rawValue: "selected")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

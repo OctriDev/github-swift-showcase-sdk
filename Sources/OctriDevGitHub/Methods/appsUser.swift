@@ -6,11 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension AppsMethods {
-    /// Lists installations of your GitHub App that the authenticated user has explicit permission (`:read`, `:write`,
-    /// or `:admin`) to access. The authenticated user has explicit permission to access repositories they own,
-    /// repositories where they are a collaborator, and repositories that they can access through an organization
-    /// membership. You can find the permissions for the installation under the `permissions` key.
+extension AppsMethods {
+    /// Lists installations of your GitHub App that the authenticated user has explicit permission (`:read`, `:write`, or `:admin`) to access. The authenticated user has explicit permission to access repositories they own, repositories where they are a collaborator, and repositories that they can access through an organization membership. You can find the permissions for the installation under the `permissions` key.
     ///
     /// - Parameters:
     /// - perPage: The number of results per page (max 100). For more information,
@@ -21,24 +18,10 @@ public extension AppsMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    static func appsListInstallationsForAuthenticatedUser(
-        config: ClientConfig,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> AppsListInstallationsForAuthenticatedUserResponse {
-        try await (sdkRequest(
-            "GET",
-            "/user/installations",
-            config: config,
-            query: [
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("page", value: page),
-            ],
-            decoder: .json,
-            operationId: "appsListInstallationsForAuthenticatedUser",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self]
-        )).data
+    public static func appsListInstallationsForAuthenticatedUser(config: ClientConfig, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> AppsListInstallationsForAuthenticatedUserResponse {
+        return try (await sdkRequest("GET", "/user/installations", config: config, query: [
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("page", value: page),
+        ], decoder: .json, operationId: "appsListInstallationsForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self])).data
     }
 }

@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ActionsMethods {
-    /// Re-run a job and its dependent jobs in a workflow run. OAuth app tokens and personal access tokens (classic)
-    /// need the `repo` scope to use this endpoint.
+extension ActionsMethods {
+    /// Re-run a job and its dependent jobs in a workflow run. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -18,37 +17,9 @@ public extension ActionsMethods {
     /// - jobId: The unique identifier of the job.
     /// - enableDebugLogging: Whether to enable debug logging for the re-run.
     /// - enableDebugger: Whether to enable the debugger for the re-run of this job.
-    static func actionsReRunJobForWorkflowRun(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        jobId: Int,
-        enableDebugLogging: Bool? = nil,
-        enableDebugger: Bool? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> EmptyObject {
-        let requestBody = ActionsReRunJobForWorkflowRunRequestBody(
-            enableDebugLogging: enableDebugLogging,
-            enableDebugger: enableDebugger
-        )
+    public static func actionsReRunJobForWorkflowRun(config: ClientConfig, owner: String, repo: String, jobId: Int, enableDebugLogging: Bool? = nil, enableDebugger: Bool? = nil, requestOptions: RequestOptions? = nil) async throws -> EmptyObject {
+        let requestBody = ActionsReRunJobForWorkflowRunRequestBody(enableDebugLogging: enableDebugLogging, enableDebugger: enableDebugger)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/actions/jobs/",
-                sdkEncodePathSegment(sdkWireString(jobId)),
-                "/rerun",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "actionsReRunJobForWorkflowRun",
-            options: requestOptions,
-            errors: ["403": BasicError.self]
-        )).data
+        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/actions/jobs/", sdkEncodePathSegment(sdkWireString(jobId)), "/rerun"].joined(), config: config, body: requestBody, decoder: .json, operationId: "actionsReRunJobForWorkflowRun", options: requestOptions, errors: ["403": BasicError.self])).data
     }
 }

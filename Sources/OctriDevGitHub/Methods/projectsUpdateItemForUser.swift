@@ -6,10 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ProjectsMethods {
-    /// Updates field values on a specific item in a project owned by the specified user. Supply the field IDs and new
-    /// values in `fields`; only text, number, date, single-select, and iteration fields are supported. A 200 response
-    /// returns the updated project item.
+extension ProjectsMethods {
+    /// Updates field values on a specific item in a project owned by the specified user. Supply the field IDs and new values in `fields`; only text, number, date, single-select, and iteration fields are supported. A 200 response returns the updated project item.
     ///
     /// Update a specific item in a user-owned project.
     ///
@@ -18,43 +16,13 @@ public extension ProjectsMethods {
     /// - username: The handle for the GitHub user account.
     /// - itemId: The unique identifier of the project item.
     /// - fields: A list of field updates to apply.
-    static func projectsUpdateItemForUser(
-        config: ClientConfig,
-        projectNumber: Int,
-        username: String,
-        itemId: Int,
-        fields: [ProjectsUpdateItemForUserRequestBodyFieldsItem],
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ProjectsV2ItemWithContent {
+    public static func projectsUpdateItemForUser(config: ClientConfig, projectNumber: Int, username: String, itemId: Int, fields: [ProjectsUpdateItemForUserRequestBodyFieldsItem], requestOptions: RequestOptions? = nil) async throws -> ProjectsV2ItemWithContent {
         let requestBody = ProjectsUpdateItemForUserRequestBody(fields: fields)
 
-        return try await (sdkRequest(
-            "PATCH",
-            [
-                "/users/",
-                sdkEncodePathSegment(sdkWireString(username)),
-                "/projectsV2/",
-                sdkEncodePathSegment(sdkWireString(projectNumber)),
-                "/items/",
-                sdkEncodePathSegment(sdkWireString(itemId)),
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "projectsUpdateItemForUser",
-            options: requestOptions,
-            errors: [
-                "401": BasicError.self,
-                "403": BasicError.self,
-                "404": BasicError.self,
-                "422": ValidationError.self,
-            ]
-        )).data
+        return try (await sdkRequest("PATCH", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/projectsV2/", sdkEncodePathSegment(sdkWireString(projectNumber)), "/items/", sdkEncodePathSegment(sdkWireString(itemId))].joined(), config: config, body: requestBody, decoder: .json, operationId: "projectsUpdateItemForUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
     }
 
-    /// Deletes a specific item from a project owned by the specified user. Provide the project number, user handle, and
-    /// item identifier to select the item to remove. A 204 response confirms the deletion and contains no response
-    /// body.
+    /// Deletes a specific item from a project owned by the specified user. Provide the project number, user handle, and item identifier to select the item to remove. A 204 response confirms the deletion and contains no response body.
     ///
     /// Delete a specific item from a user-owned project.
     ///
@@ -62,28 +30,7 @@ public extension ProjectsMethods {
     /// - projectNumber: The project's number.
     /// - username: The handle for the GitHub user account.
     /// - itemId: The unique identifier of the project item.
-    static func projectsDeleteItemForUser(
-        config: ClientConfig,
-        projectNumber: Int,
-        username: String,
-        itemId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "DELETE",
-            [
-                "/users/",
-                sdkEncodePathSegment(sdkWireString(username)),
-                "/projectsV2/",
-                sdkEncodePathSegment(sdkWireString(projectNumber)),
-                "/items/",
-                sdkEncodePathSegment(sdkWireString(itemId)),
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "projectsDeleteItemForUser",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self]
-        )).data
+    public static func projectsDeleteItemForUser(config: ClientConfig, projectNumber: Int, username: String, itemId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("DELETE", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/projectsV2/", sdkEncodePathSegment(sdkWireString(projectNumber)), "/items/", sdkEncodePathSegment(sdkWireString(itemId))].joined(), config: config, decoder: .empty, operationId: "projectsDeleteItemForUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self])).data
     }
 }

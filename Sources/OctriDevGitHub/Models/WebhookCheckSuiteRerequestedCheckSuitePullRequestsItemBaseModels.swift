@@ -3,9 +3,9 @@
 
 import Foundation
 
-/// WebhookCheckSuiteRerequested domain models
-public extension WebhookCheckSuiteRerequestedCheckSuitePullRequestsItemBase {
-    init(ref: String, repo: WebhookCheckSuiteRerequestedCheckSuitePullRequestsItemBaseRepo, sha: String) {
+// WebhookCheckSuiteRerequested domain models
+extension WebhookCheckSuiteRerequestedCheckSuitePullRequestsItemBase {
+    public init(ref: String, repo: WebhookCheckSuiteRerequestedCheckSuitePullRequestsItemBaseRepo, sha: String) {
         (self.ref, self.repo) = (ref, repo)
         self.sha = sha
     }
@@ -26,47 +26,33 @@ public struct WebhookCheckSuiteRerequestedCheckSuitePullRequestsItemBaseRepo: Co
         case url
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookCheckSuiteRerequestedCheckSuitePullRequestsItemBaseRepo {
-    init(from decoder: Decoder) throws {
+extension WebhookCheckSuiteRerequestedCheckSuitePullRequestsItemBaseRepo {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.url) else {
-            throw SdkValidationError(
-                field: "url",
-                code: "required",
-                message: "Validation failed for 'url': value is required"
-            )
+            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
-        name = try container.sdkDecodeRequired(.name)
-        url = try container.sdkDecodeRequired(.url)
-        try sdkValidateUri("url", url)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.url = try container.sdkDecodeRequired(.url)
+            try sdkValidateUri("url", self.url)
     }
 }
 
-public extension WebhookCheckSuiteRerequestedCheckSuitePullRequestsItemBaseRepo {
-    init(id: Int, name: String, url: String) throws {
+extension WebhookCheckSuiteRerequestedCheckSuitePullRequestsItemBaseRepo {
+    public init(id: Int, name: String, url: String) throws {
         (self.id, self.name) = (id, name)
         self.url = url
-        try sdkValidateUri("url", self.url)
+            try sdkValidateUri("url", self.url)
     }
 }
 
@@ -85,43 +71,29 @@ public struct WebhookCheckSuiteRerequestedCheckSuitePullRequestsItemHead: Codabl
         case sha
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookCheckSuiteRerequestedCheckSuitePullRequestsItemHead {
-    init(from decoder: Decoder) throws {
+extension WebhookCheckSuiteRerequestedCheckSuitePullRequestsItemHead {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.ref) else {
-            throw SdkValidationError(
-                field: "ref",
-                code: "required",
-                message: "Validation failed for 'ref': value is required"
-            )
+            throw SdkValidationError(field: "ref", code: "required", message: "Validation failed for 'ref': value is required")
         }
         guard container.contains(.repo) else {
-            throw SdkValidationError(
-                field: "repo",
-                code: "required",
-                message: "Validation failed for 'repo': value is required"
-            )
+            throw SdkValidationError(field: "repo", code: "required", message: "Validation failed for 'repo': value is required")
         }
         guard container.contains(.sha) else {
-            throw SdkValidationError(
-                field: "sha",
-                code: "required",
-                message: "Validation failed for 'sha': value is required"
-            )
+            throw SdkValidationError(field: "sha", code: "required", message: "Validation failed for 'sha': value is required")
         }
-        ref = try container.sdkDecodeRequired(.ref)
-        repo = try container.sdkDecodeRequired(.repo)
-        sha = try container.sdkDecodeRequired(.sha)
+        self.ref = try container.sdkDecodeRequired(.ref)
+        self.repo = try container.sdkDecodeRequired(.repo)
+        self.sha = try container.sdkDecodeRequired(.sha)
     }
 }
 
-public extension WebhookCheckSuiteRerequestedCheckSuitePullRequestsItemHead {
-    init(ref: String, repo: WebhookCheckSuiteRerequestedCheckSuitePullRequestsItemHeadRepo, sha: String) {
+extension WebhookCheckSuiteRerequestedCheckSuitePullRequestsItemHead {
+    public init(ref: String, repo: WebhookCheckSuiteRerequestedCheckSuitePullRequestsItemHeadRepo, sha: String) {
         (self.ref, self.repo) = (ref, repo)
         self.sha = sha
     }
@@ -151,74 +123,41 @@ public struct WebhookCheckSuiteRerequestedCheckSuiteHeadCommit: Codable {
         case treeId = "tree_id"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookCheckSuiteRerequestedCheckSuiteHeadCommit {
-    init(from decoder: Decoder) throws {
+extension WebhookCheckSuiteRerequestedCheckSuiteHeadCommit {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.author) else {
-            throw SdkValidationError(
-                field: "author",
-                code: "required",
-                message: "Validation failed for 'author': value is required"
-            )
+            throw SdkValidationError(field: "author", code: "required", message: "Validation failed for 'author': value is required")
         }
         guard container.contains(.committer) else {
-            throw SdkValidationError(
-                field: "committer",
-                code: "required",
-                message: "Validation failed for 'committer': value is required"
-            )
+            throw SdkValidationError(field: "committer", code: "required", message: "Validation failed for 'committer': value is required")
         }
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
         guard container.contains(.message) else {
-            throw SdkValidationError(
-                field: "message",
-                code: "required",
-                message: "Validation failed for 'message': value is required"
-            )
+            throw SdkValidationError(field: "message", code: "required", message: "Validation failed for 'message': value is required")
         }
         guard container.contains(.timestamp) else {
-            throw SdkValidationError(
-                field: "timestamp",
-                code: "required",
-                message: "Validation failed for 'timestamp': value is required"
-            )
+            throw SdkValidationError(field: "timestamp", code: "required", message: "Validation failed for 'timestamp': value is required")
         }
         guard container.contains(.treeId) else {
-            throw SdkValidationError(
-                field: "tree_id",
-                code: "required",
-                message: "Validation failed for 'tree_id': value is required"
-            )
+            throw SdkValidationError(field: "tree_id", code: "required", message: "Validation failed for 'tree_id': value is required")
         }
-        author = try container.sdkDecodeRequired(.author)
-        committer = try container.sdkDecodeRequired(.committer)
-        id = try container.sdkDecodeRequired(.id)
-        message = try container.sdkDecodeRequired(.message)
-        timestamp = try container.sdkDecodeRequired(.timestamp)
-        treeId = try container.sdkDecodeRequired(.treeId)
+        self.author = try container.sdkDecodeRequired(.author)
+        self.committer = try container.sdkDecodeRequired(.committer)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.message = try container.sdkDecodeRequired(.message)
+        self.timestamp = try container.sdkDecodeRequired(.timestamp)
+        self.treeId = try container.sdkDecodeRequired(.treeId)
     }
 }
 
-public extension WebhookCheckSuiteRerequestedCheckSuiteHeadCommit {
-    init(
-        author: WebhookCheckSuiteRerequestedCheckSuiteHeadCommitAuthor,
-        committer: WebhookCheckSuiteRerequestedCheckSuiteHeadCommitCommitter,
-        id: String,
-        message: String,
-        timestamp: String,
-        treeId: String
-    ) {
+extension WebhookCheckSuiteRerequestedCheckSuiteHeadCommit {
+    public init(author: WebhookCheckSuiteRerequestedCheckSuiteHeadCommitAuthor, committer: WebhookCheckSuiteRerequestedCheckSuiteHeadCommitCommitter, id: String, message: String, timestamp: String, treeId: String) {
         (self.author, self.committer) = (author, committer)
         (self.id, self.message) = (id, message)
         (self.timestamp, self.treeId) = (timestamp, treeId)
@@ -257,62 +196,36 @@ public struct WebhookCheckSuiteRerequested: Codable {
         case organization
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookCheckSuiteRerequested {
-    init(from decoder: Decoder) throws {
+extension WebhookCheckSuiteRerequested {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.action) else {
-            throw SdkValidationError(
-                field: "action",
-                code: "required",
-                message: "Validation failed for 'action': value is required"
-            )
+            throw SdkValidationError(field: "action", code: "required", message: "Validation failed for 'action': value is required")
         }
         guard container.contains(.checkSuite) else {
-            throw SdkValidationError(
-                field: "check_suite",
-                code: "required",
-                message: "Validation failed for 'check_suite': value is required"
-            )
+            throw SdkValidationError(field: "check_suite", code: "required", message: "Validation failed for 'check_suite': value is required")
         }
         guard container.contains(.repository) else {
-            throw SdkValidationError(
-                field: "repository",
-                code: "required",
-                message: "Validation failed for 'repository': value is required"
-            )
+            throw SdkValidationError(field: "repository", code: "required", message: "Validation failed for 'repository': value is required")
         }
         guard container.contains(.sender) else {
-            throw SdkValidationError(
-                field: "sender",
-                code: "required",
-                message: "Validation failed for 'sender': value is required"
-            )
+            throw SdkValidationError(field: "sender", code: "required", message: "Validation failed for 'sender': value is required")
         }
-        action = try container.sdkDecodeRequired(.action)
-        checkSuite = try container.sdkDecodeRequired(.checkSuite)
-        repository = try container.sdkDecodeRequired(.repository)
-        sender = try container.sdkDecodeRequired(.sender)
-        enterprise = try container.sdkDecodeIfPresent(.enterprise)
-        installation = try container.sdkDecodeIfPresent(.installation)
-        organization = try container.sdkDecodeIfPresent(.organization)
+        self.action = try container.sdkDecodeRequired(.action)
+        self.checkSuite = try container.sdkDecodeRequired(.checkSuite)
+        self.repository = try container.sdkDecodeRequired(.repository)
+        self.sender = try container.sdkDecodeRequired(.sender)
+        self.enterprise = try container.sdkDecodeIfPresent(.enterprise)
+        self.installation = try container.sdkDecodeIfPresent(.installation)
+        self.organization = try container.sdkDecodeIfPresent(.organization)
     }
 }
 
-public extension WebhookCheckSuiteRerequested {
-    init(
-        action: WebhookCheckSuiteRerequestedAction,
-        checkSuite: WebhookCheckSuiteRerequestedCheckSuite,
-        repository: RepositoryWebhooks,
-        sender: SimpleUser,
-        enterprise: EnterpriseWebhooks? = nil,
-        installation: SimpleInstallation? = nil,
-        organization: OrganizationSimpleWebhooks? = nil
-    ) {
+extension WebhookCheckSuiteRerequested {
+    public init(action: WebhookCheckSuiteRerequestedAction, checkSuite: WebhookCheckSuiteRerequestedCheckSuite, repository: RepositoryWebhooks, sender: SimpleUser, enterprise: EnterpriseWebhooks? = nil, installation: SimpleInstallation? = nil, organization: OrganizationSimpleWebhooks? = nil) {
         (self.action, self.checkSuite) = (action, checkSuite)
         (self.repository, self.sender) = (repository, sender)
         (self.enterprise, self.installation) = (enterprise, installation)
@@ -363,8 +276,7 @@ public struct WebhookCheckSuiteRerequestedCheckSuiteAppPermissions: Codable {
     /// Optional enumerated value serialized in the `models` wire field.
     public var models: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsModels? = .none
     /// Optional enumerated value serialized in the `organization_administration` wire field.
-    public var organizationAdministration: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizatXce77842aea? =
-        .none
+    public var organizationAdministration: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizatXce77842aea? = .none
     /// Optional enumerated value serialized in the `organization_hooks` wire field.
     public var organizationHooks: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizationHooks? = .none
     /// Optional enumerated value serialized in the `organization_packages` wire field.
@@ -376,11 +288,9 @@ public struct WebhookCheckSuiteRerequestedCheckSuiteAppPermissions: Codable {
     /// Optional enumerated value serialized in the `organization_secrets` wire field.
     public var organizationSecrets: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizationSecrets? = .none
     /// Optional enumerated value serialized in the `organization_self_hosted_runners` wire field.
-    public var organizationSelfHostedRunners: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizatXa7b17e815d? =
-        .none
+    public var organizationSelfHostedRunners: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizatXa7b17e815d? = .none
     /// Optional enumerated value serialized in the `organization_user_blocking` wire field.
-    public var organizationUserBlocking: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizatX3af983b870? =
-        .none
+    public var organizationUserBlocking: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizatX3af983b870? = .none
     /// Optional enumerated value serialized in the `packages` wire field.
     public var packages: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsPackages? = .none
     /// Optional enumerated value serialized in the `pages` wire field.
@@ -457,8 +367,8 @@ extension WebhookCheckSuiteRerequestedCheckSuiteAppPermissions {
     }
 }
 
-public extension WebhookCheckSuiteRerequestedCheckSuiteAppPermissions {
-    init(from decoder: Decoder) throws {
+extension WebhookCheckSuiteRerequestedCheckSuiteAppPermissions {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.init(sdkDefaults: ())
         try sdkDecodeFieldsPart1(container)
@@ -468,50 +378,8 @@ public extension WebhookCheckSuiteRerequestedCheckSuiteAppPermissions {
     }
 }
 
-public extension WebhookCheckSuiteRerequestedCheckSuiteAppPermissions {
-    init(
-        actions: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsActions? = nil,
-        administration: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsAdministration? = nil,
-        artifactMetadata: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsArtifactMetadata? = nil,
-        attestations: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsAttestations? = nil,
-        checks: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsChecks? = nil,
-        codeQuality: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsCodeQuality? = nil,
-        contentReferences: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsContentReferences? = nil,
-        contents: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsContents? = nil,
-        copilotRequests: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsCopilotRequests? = nil,
-        deployments: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsDeployments? = nil,
-        discussions: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsDiscussions? = nil,
-        drives: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsDrives? = nil,
-        emails: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsEmails? = nil,
-        environments: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsEnvironments? = nil,
-        issues: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsIssues? = nil,
-        keys: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsKeys? = nil,
-        members: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsMembers? = nil,
-        mergeQueues: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsMergeQueues? = nil,
-        metadata: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsMetadata? = nil,
-        models: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsModels? = nil,
-        organizationAdministration: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizatXce77842aea? = nil,
-        organizationHooks: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizationHooks? = nil,
-        organizationPackages: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizationPackages? = nil,
-        organizationPlan: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizationPlan? = nil,
-        organizationProjects: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizationProjects? = nil,
-        organizationSecrets: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizationSecrets? = nil,
-        organizationSelfHostedRunners: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizatXa7b17e815d? = nil,
-        organizationUserBlocking: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizatX3af983b870? = nil,
-        packages: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsPackages? = nil,
-        pages: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsPages? = nil,
-        pullRequests: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsPullRequests? = nil,
-        repositoryHooks: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsRepositoryHooks? = nil,
-        repositoryProjects: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsRepositoryProjects? = nil,
-        secretScanningAlerts: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsSecretScanningAlerts? = nil,
-        secrets: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsSecrets? = nil,
-        securityEvents: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsSecurityEvents? = nil,
-        securityScanningAlert: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsSecuritySX71e37b76ea? = nil,
-        singleFile: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsSingleFile? = nil,
-        statuses: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsStatuses? = nil,
-        vulnerabilityAlerts: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsVulnerabilityAlerts? = nil,
-        workflows: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsWorkflows? = nil
-    ) {
+extension WebhookCheckSuiteRerequestedCheckSuiteAppPermissions {
+    public init(actions: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsActions? = nil, administration: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsAdministration? = nil, artifactMetadata: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsArtifactMetadata? = nil, attestations: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsAttestations? = nil, checks: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsChecks? = nil, codeQuality: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsCodeQuality? = nil, contentReferences: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsContentReferences? = nil, contents: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsContents? = nil, copilotRequests: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsCopilotRequests? = nil, deployments: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsDeployments? = nil, discussions: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsDiscussions? = nil, drives: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsDrives? = nil, emails: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsEmails? = nil, environments: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsEnvironments? = nil, issues: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsIssues? = nil, keys: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsKeys? = nil, members: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsMembers? = nil, mergeQueues: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsMergeQueues? = nil, metadata: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsMetadata? = nil, models: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsModels? = nil, organizationAdministration: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizatXce77842aea? = nil, organizationHooks: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizationHooks? = nil, organizationPackages: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizationPackages? = nil, organizationPlan: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizationPlan? = nil, organizationProjects: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizationProjects? = nil, organizationSecrets: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizationSecrets? = nil, organizationSelfHostedRunners: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizatXa7b17e815d? = nil, organizationUserBlocking: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizatX3af983b870? = nil, packages: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsPackages? = nil, pages: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsPages? = nil, pullRequests: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsPullRequests? = nil, repositoryHooks: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsRepositoryHooks? = nil, repositoryProjects: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsRepositoryProjects? = nil, secretScanningAlerts: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsSecretScanningAlerts? = nil, secrets: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsSecrets? = nil, securityEvents: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsSecurityEvents? = nil, securityScanningAlert: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsSecuritySX71e37b76ea? = nil, singleFile: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsSingleFile? = nil, statuses: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsStatuses? = nil, vulnerabilityAlerts: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsVulnerabilityAlerts? = nil, workflows: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsWorkflows? = nil) {
         self.init(sdkDefaults: ())
         sdkSet1(actions, administration, artifactMetadata, attestations, checks)
         sdkSet2(codeQuality, contentReferences, contents, copilotRequests, deployments)
@@ -526,13 +394,7 @@ public extension WebhookCheckSuiteRerequestedCheckSuiteAppPermissions {
 }
 
 extension WebhookCheckSuiteRerequestedCheckSuiteAppPermissions {
-    mutating func sdkSet1(
-        _ actions: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsActions?,
-        _ administration: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsAdministration?,
-        _ artifactMetadata: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsArtifactMetadata?,
-        _ attestations: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsAttestations?,
-        _ checks: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsChecks?
-    ) {
+    mutating func sdkSet1(_ actions: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsActions?, _ administration: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsAdministration?, _ artifactMetadata: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsArtifactMetadata?, _ attestations: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsAttestations?, _ checks: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsChecks?) {
         self.actions = actions
         self.administration = administration
         self.artifactMetadata = artifactMetadata
@@ -542,13 +404,7 @@ extension WebhookCheckSuiteRerequestedCheckSuiteAppPermissions {
 }
 
 extension WebhookCheckSuiteRerequestedCheckSuiteAppPermissions {
-    mutating func sdkSet2(
-        _ codeQuality: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsCodeQuality?,
-        _ contentReferences: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsContentReferences?,
-        _ contents: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsContents?,
-        _ copilotRequests: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsCopilotRequests?,
-        _ deployments: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsDeployments?
-    ) {
+    mutating func sdkSet2(_ codeQuality: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsCodeQuality?, _ contentReferences: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsContentReferences?, _ contents: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsContents?, _ copilotRequests: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsCopilotRequests?, _ deployments: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsDeployments?) {
         self.codeQuality = codeQuality
         self.contentReferences = contentReferences
         self.contents = contents
@@ -558,13 +414,7 @@ extension WebhookCheckSuiteRerequestedCheckSuiteAppPermissions {
 }
 
 extension WebhookCheckSuiteRerequestedCheckSuiteAppPermissions {
-    mutating func sdkSet3(
-        _ discussions: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsDiscussions?,
-        _ drives: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsDrives?,
-        _ emails: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsEmails?,
-        _ environments: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsEnvironments?,
-        _ issues: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsIssues?
-    ) {
+    mutating func sdkSet3(_ discussions: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsDiscussions?, _ drives: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsDrives?, _ emails: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsEmails?, _ environments: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsEnvironments?, _ issues: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsIssues?) {
         self.discussions = discussions
         self.drives = drives
         self.emails = emails
@@ -574,13 +424,7 @@ extension WebhookCheckSuiteRerequestedCheckSuiteAppPermissions {
 }
 
 extension WebhookCheckSuiteRerequestedCheckSuiteAppPermissions {
-    mutating func sdkSet4(
-        _ keys: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsKeys?,
-        _ members: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsMembers?,
-        _ mergeQueues: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsMergeQueues?,
-        _ metadata: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsMetadata?,
-        _ models: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsModels?
-    ) {
+    mutating func sdkSet4(_ keys: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsKeys?, _ members: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsMembers?, _ mergeQueues: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsMergeQueues?, _ metadata: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsMetadata?, _ models: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsModels?) {
         self.keys = keys
         self.members = members
         self.mergeQueues = mergeQueues
@@ -590,12 +434,7 @@ extension WebhookCheckSuiteRerequestedCheckSuiteAppPermissions {
 }
 
 extension WebhookCheckSuiteRerequestedCheckSuiteAppPermissions {
-    mutating func sdkSet5(
-        _ organizationAdministration: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizatXce77842aea?,
-        _ organizationHooks: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizationHooks?,
-        _ organizationPackages: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizationPackages?,
-        _ organizationPlan: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizationPlan?
-    ) {
+    mutating func sdkSet5(_ organizationAdministration: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizatXce77842aea?, _ organizationHooks: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizationHooks?, _ organizationPackages: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizationPackages?, _ organizationPlan: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizationPlan?) {
         self.organizationAdministration = organizationAdministration
         self.organizationHooks = organizationHooks
         self.organizationPackages = organizationPackages
@@ -604,12 +443,7 @@ extension WebhookCheckSuiteRerequestedCheckSuiteAppPermissions {
 }
 
 extension WebhookCheckSuiteRerequestedCheckSuiteAppPermissions {
-    mutating func sdkSet6(
-        _ organizationProjects: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizationProjects?,
-        _ organizationSecrets: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizationSecrets?,
-        _ organizationSelfHostedRunners: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizatXa7b17e815d?,
-        _ organizationUserBlocking: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizatX3af983b870?
-    ) {
+    mutating func sdkSet6(_ organizationProjects: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizationProjects?, _ organizationSecrets: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizationSecrets?, _ organizationSelfHostedRunners: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizatXa7b17e815d?, _ organizationUserBlocking: WebhookCheckSuiteRerequestedCheckSuiteAppPermissionsOrganizatX3af983b870?) {
         self.organizationProjects = organizationProjects
         self.organizationSecrets = organizationSecrets
         self.organizationSelfHostedRunners = organizationSelfHostedRunners

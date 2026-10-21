@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// ReposPages domain models
+// ReposPages domain models
 /// Typed representation of the `PagesDeploymentStatus` API schema.
 public struct PagesDeploymentStatus: Codable {
     /// The current status of the deployment.
@@ -14,19 +14,19 @@ public struct PagesDeploymentStatus: Codable {
     }
 
     init() {
-        status = nil
+        self.status = nil
     }
 }
 
-public extension PagesDeploymentStatus {
-    init(from decoder: Decoder) throws {
+extension PagesDeploymentStatus {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        status = try container.sdkDecodeIfPresent(.status)
+        self.status = try container.sdkDecodeIfPresent(.status)
     }
 }
 
-public extension PagesDeploymentStatus {
-    init(status: PagesDeploymentStatusStatus? = nil) {
+extension PagesDeploymentStatus {
+    public init(status: PagesDeploymentStatusStatus? = nil) {
         self.init()
         self.status = status
     }
@@ -36,10 +36,7 @@ public extension PagesDeploymentStatus {
 public struct PagesDeploymentStatusStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let deploymentInProgress = PagesDeploymentStatusStatus(rawValue: "deployment_in_progress")
     public static let syncingFiles = PagesDeploymentStatusStatus(rawValue: "syncing_files")
     public static let finishedFileSync = PagesDeploymentStatusStatus(rawValue: "finished_file_sync")
@@ -54,7 +51,7 @@ public struct PagesDeploymentStatusStatus: RawRepresentable, Hashable, Codable, 
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

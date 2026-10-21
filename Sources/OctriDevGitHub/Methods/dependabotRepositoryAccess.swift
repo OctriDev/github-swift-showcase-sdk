@@ -6,79 +6,37 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension DependabotMethods {
-    /// Lists repositories that enterprise admins have allowed Dependabot to access when updating dependencies across
-    /// organizations in the enterprise. The authenticated user must be an enterprise owner to use this endpoint. >
-    /// [!NOTE] > The "Enterprise administration" fine-grained permission is not available to callers. To use this API,
-    /// you must use an OAuth app token or a personal access token (classic).
+extension DependabotMethods {
+    /// Lists repositories that enterprise admins have allowed Dependabot to access when updating dependencies across organizations in the enterprise. The authenticated user must be an enterprise owner to use this endpoint. > [!NOTE] > The "Enterprise administration" fine-grained permission is not available to callers. To use this API, you must use an OAuth app token or a personal access token (classic).
     ///
     /// - Parameters:
     /// - enterprise: The slug version of the enterprise name.
     /// - page: The page number of results to fetch.
     /// - perPage: Number of results per page.
-    static func dependabotRepositoryAccessForEnterprise(
-        config: ClientConfig,
-        enterprise: String,
-        page: Int? = nil,
-        perPage: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> DependabotRepositoryAccessDetails {
-        if let page {
+    public static func dependabotRepositoryAccessForEnterprise(config: ClientConfig, enterprise: String, page: Int? = nil, perPage: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> DependabotRepositoryAccessDetails {
+        if let page = page {
             try validateRange("page", Double(page), min: 1)
         }
 
-        if let perPage {
+        if let perPage = perPage {
             try validateRange("per_page", Double(perPage), min: 1, max: 100)
         }
 
-        return try await (sdkRequest(
-            "GET",
-            ["/enterprises/", sdkEncodePathSegment(sdkWireString(enterprise)), "/dependabot/repository-access"]
-                .joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("page", value: page),
-                SdkQueryParameter("per_page", value: perPage),
-            ],
-            decoder: .json,
-            operationId: "dependabotRepositoryAccessForEnterprise",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self]
-        )).data
+        return try (await sdkRequest("GET", ["/enterprises/", sdkEncodePathSegment(sdkWireString(enterprise)), "/dependabot/repository-access"].joined(), config: config, query: [
+            SdkQueryParameter("page", value: page),
+            SdkQueryParameter("per_page", value: perPage),
+        ], decoder: .json, operationId: "dependabotRepositoryAccessForEnterprise", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
     }
 
-    /// Updates repositories according to the list of repositories that enterprise admins have given Dependabot access
-    /// to when they've updated dependencies across organizations in the enterprise. The authenticated user must be an
-    /// enterprise owner to use this endpoint. **Example request body:** ```json { "repository_ids_to_add": [123, 456],
-    /// "repository_ids_to_remove": [789] } ``` > [!NOTE] > The "Enterprise administration" fine-grained permission is
-    /// not available to callers. To use this API, you must use an OAuth app token or a personal access token (classic).
+    /// Updates repositories according to the list of repositories that enterprise admins have given Dependabot access to when they've updated dependencies across organizations in the enterprise. The authenticated user must be an enterprise owner to use this endpoint. **Example request body:** ```json { "repository_ids_to_add": [123, 456], "repository_ids_to_remove": [789] } ``` > [!NOTE] > The "Enterprise administration" fine-grained permission is not available to callers. To use this API, you must use an OAuth app token or a personal access token (classic).
     ///
     /// - Parameters:
     /// - enterprise: The slug version of the enterprise name.
     /// - repositoryIdsToAdd: List of repository IDs to add.
     /// - repositoryIdsToRemove: List of repository IDs to remove.
-    static func dependabotUpdateRepositoryAccessForEnterprise(
-        config: ClientConfig,
-        enterprise: String,
-        repositoryIdsToAdd: [Int]? = nil,
-        repositoryIdsToRemove: [Int]? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        let requestBody = DependabotUpdateRepositoryAccessForEnterpriseRequestBody(
-            repositoryIdsToAdd: repositoryIdsToAdd,
-            repositoryIdsToRemove: repositoryIdsToRemove
-        )
+    public static func dependabotUpdateRepositoryAccessForEnterprise(config: ClientConfig, enterprise: String, repositoryIdsToAdd: [Int]? = nil, repositoryIdsToRemove: [Int]? = nil, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        let requestBody = DependabotUpdateRepositoryAccessForEnterpriseRequestBody(repositoryIdsToAdd: repositoryIdsToAdd, repositoryIdsToRemove: repositoryIdsToRemove)
 
-        return try await (sdkRequest(
-            "PATCH",
-            ["/enterprises/", sdkEncodePathSegment(sdkWireString(enterprise)), "/dependabot/repository-access"]
-                .joined(),
-            config: config,
-            body: requestBody,
-            decoder: .empty,
-            operationId: "dependabotUpdateRepositoryAccessForEnterprise",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self]
-        )).data
+        return try (await sdkRequest("PATCH", ["/enterprises/", sdkEncodePathSegment(sdkWireString(enterprise)), "/dependabot/repository-access"].joined(), config: config, body: requestBody, decoder: .empty, operationId: "dependabotUpdateRepositoryAccessForEnterprise", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
     }
 }

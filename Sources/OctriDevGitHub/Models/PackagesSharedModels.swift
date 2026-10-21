@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Packages domain models
+// Packages domain models
 /// A version of a software package
 public struct PackageVersion: Codable {
     /// Unique identifier of the package version.
@@ -52,97 +52,59 @@ public struct PackageVersion: Codable {
         case metadata
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension PackageVersion {
-    init(from decoder: Decoder) throws {
+extension PackageVersion {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.url) else {
-            throw SdkValidationError(
-                field: "url",
-                code: "required",
-                message: "Validation failed for 'url': value is required"
-            )
+            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
         }
         guard container.contains(.packageHtmlUrl) else {
-            throw SdkValidationError(
-                field: "package_html_url",
-                code: "required",
-                message: "Validation failed for 'package_html_url': value is required"
-            )
+            throw SdkValidationError(field: "package_html_url", code: "required", message: "Validation failed for 'package_html_url': value is required")
         }
         guard container.contains(.createdAt) else {
-            throw SdkValidationError(
-                field: "created_at",
-                code: "required",
-                message: "Validation failed for 'created_at': value is required"
-            )
+            throw SdkValidationError(field: "created_at", code: "required", message: "Validation failed for 'created_at': value is required")
         }
         guard container.contains(.updatedAt) else {
-            throw SdkValidationError(
-                field: "updated_at",
-                code: "required",
-                message: "Validation failed for 'updated_at': value is required"
-            )
+            throw SdkValidationError(field: "updated_at", code: "required", message: "Validation failed for 'updated_at': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
-        name = try container.sdkDecodeRequired(.name)
-        url = try container.sdkDecodeRequired(.url)
-        packageHtmlUrl = try container.sdkDecodeRequired(.packageHtmlUrl)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        license = try container.sdkDecodeIfPresent(.license)
-        description = try container.sdkDecodeIfPresent(.description)
-        deletedAt = try container.sdkDecodeIfPresent(.deletedAt)
-        metadata = try container.sdkDecodeIfPresent(.metadata)
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
-        if let value = deletedAt {
+        self.id = try container.sdkDecodeRequired(.id)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.packageHtmlUrl = try container.sdkDecodeRequired(.packageHtmlUrl)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        self.license = try container.sdkDecodeIfPresent(.license)
+        self.description = try container.sdkDecodeIfPresent(.description)
+        self.deletedAt = try container.sdkDecodeIfPresent(.deletedAt)
+        self.metadata = try container.sdkDecodeIfPresent(.metadata)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+        if let value = self.deletedAt {
             try sdkValidateDateTime("deleted_at", sdkWireString(value))
         }
     }
 }
 
-public extension PackageVersion {
-    init(
-        id: Int,
-        name: String,
-        url: String,
-        packageHtmlUrl: String,
-        createdAt: Date,
-        updatedAt: Date,
-        htmlUrl: String? = nil,
-        license: String? = nil,
-        description: String? = nil,
-        deletedAt: Date? = nil,
-        metadata: PackageVersionMetadata? = nil
-    ) throws {
+extension PackageVersion {
+    public init(id: Int, name: String, url: String, packageHtmlUrl: String, createdAt: Date, updatedAt: Date, htmlUrl: String? = nil, license: String? = nil, description: String? = nil, deletedAt: Date? = nil, metadata: PackageVersionMetadata? = nil) throws {
         (self.id, self.name) = (id, name)
         (self.url, self.packageHtmlUrl) = (url, packageHtmlUrl)
         (self.createdAt, self.updatedAt) = (createdAt, updatedAt)
         (self.htmlUrl, self.license) = (htmlUrl, license)
         (self.description, self.deletedAt) = (description, deletedAt)
         self.metadata = metadata
-        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
         if let value = self.deletedAt {
             try sdkValidateDateTime("deleted_at", sdkWireString(value))
         }
@@ -165,34 +127,24 @@ public struct PackageVersionMetadata: Codable {
         case docker
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension PackageVersionMetadata {
-    init(from decoder: Decoder) throws {
+extension PackageVersionMetadata {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.packageType) else {
-            throw SdkValidationError(
-                field: "package_type",
-                code: "required",
-                message: "Validation failed for 'package_type': value is required"
-            )
+            throw SdkValidationError(field: "package_type", code: "required", message: "Validation failed for 'package_type': value is required")
         }
-        packageType = try container.sdkDecodeRequired(.packageType)
+        self.packageType = try container.sdkDecodeRequired(.packageType)
         self.container = try container.sdkDecodeIfPresent(.container)
-        docker = try container.sdkDecodeIfPresent(.docker)
+        self.docker = try container.sdkDecodeIfPresent(.docker)
     }
 }
 
-public extension PackageVersionMetadata {
-    init(
-        packageType: PackageVersionMetadataPackageType,
-        container containerValue: PackageVersionMetadataContainer? = nil,
-        docker: PackageVersionMetadataDocker? = nil
-    ) {
-        (self.packageType, container) = (packageType, containerValue)
+extension PackageVersionMetadata {
+    public init(packageType: PackageVersionMetadataPackageType, container containerValue: PackageVersionMetadataContainer? = nil, docker: PackageVersionMetadataDocker? = nil) {
+        (self.packageType, self.container) = (packageType, containerValue)
         self.docker = docker
     }
 }
@@ -207,19 +159,19 @@ public struct PackageVersionMetadataDocker: Codable {
     }
 
     init() {
-        tag = nil
+        self.tag = nil
     }
 }
 
-public extension PackageVersionMetadataDocker {
-    init(from decoder: Decoder) throws {
+extension PackageVersionMetadataDocker {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        tag = try container.sdkDecodeIfPresent(.tag)
+        self.tag = try container.sdkDecodeIfPresent(.tag)
     }
 }
 
-public extension PackageVersionMetadataDocker {
-    init(tag: [String]? = nil) {
+extension PackageVersionMetadataDocker {
+    public init(tag: [String]? = nil) {
         self.init()
         self.tag = tag
     }
@@ -550,7 +502,5 @@ public struct NullableMinimalRepository: Codable {
         case customProperties = "custom_properties"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }

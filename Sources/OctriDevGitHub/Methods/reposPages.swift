@@ -6,41 +6,19 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ReposMethods {
-    /// Gets information about a GitHub Pages site. OAuth app tokens and personal access tokens (classic) need the
-    /// `repo` scope to use this endpoint.
+extension ReposMethods {
+    /// Gets information about a GitHub Pages site. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    static func reposGetPages(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> Page {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/pages",
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "reposGetPages",
-            options: requestOptions,
-            errors: ["404": BasicError.self]
-        )).data
+    public static func reposGetPages(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> Page {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/pages"].joined(), config: config, decoder: .json, operationId: "reposGetPages", options: requestOptions, errors: ["404": BasicError.self])).data
     }
 
-    /// Configures a GitHub Pages site. For more information, see "About GitHub Pages." The authenticated user must be a
-    /// repository administrator, maintainer, or have the 'manage GitHub Pages settings' permission. OAuth app tokens
-    /// and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    /// Configures a GitHub Pages site. For more information, see "About GitHub Pages." The authenticated user must be a repository administrator, maintainer, or have the 'manage GitHub Pages settings' permission. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -50,31 +28,9 @@ public extension ReposMethods {
     /// - buildType: The process in which the Page will be built. Possible values
     ///   are `"legacy"` and `"workflow"`.
     /// - source: The source branch and directory used to publish your Pages site.
-    static func reposCreatePagesSite(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        buildType: ReposCreatePagesSiteRequestBodyBuildType? = nil,
-        source: ReposCreatePagesSiteRequestBodySource? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> Page {
+    public static func reposCreatePagesSite(config: ClientConfig, owner: String, repo: String, buildType: ReposCreatePagesSiteRequestBodyBuildType? = nil, source: ReposCreatePagesSiteRequestBodySource? = nil, requestOptions: RequestOptions? = nil) async throws -> Page {
         let requestBody = ReposCreatePagesSiteRequestBody(buildType: buildType, source: source)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/pages",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "reposCreatePagesSite",
-            options: requestOptions,
-            errors: ["409": BasicError.self, "422": ValidationError.self]
-        )).data
+        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/pages"].joined(), config: config, body: requestBody, decoder: .json, operationId: "reposCreatePagesSite", options: requestOptions, errors: ["409": BasicError.self, "422": ValidationError.self])).data
     }
 }

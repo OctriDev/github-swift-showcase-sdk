@@ -6,57 +6,28 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ClassroomMethods {
-    /// Retrieves a classroom assignment by its unique identifier. This operation is closing down and will be removed on
-    /// August 28, 2026. Use the `assignment_id` path parameter to identify the classroom assignment.
+extension ClassroomMethods {
+    /// Retrieves a classroom assignment by its unique identifier. This operation is closing down and will be removed on August 28, 2026. Use the `assignment_id` path parameter to identify the classroom assignment.
     ///
-    /// > [!WARNING] > **Closed notice:** This operation is no longer available as of August 28, 2026. > For more
-    /// information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
+    /// > [!WARNING] > **Closed notice:** This operation is no longer available as of August 28, 2026. > For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
     ///
     /// - Parameters:
     /// - assignmentId: The unique identifier of the classroom assignment.
     ///
     /// - Warning: This operation is deprecated and may be removed in a future release.
-    static func classroomGetAnAssignment(
-        config: ClientConfig,
-        assignmentId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "GET",
-            ["/assignments/", sdkEncodePathSegment(sdkWireString(assignmentId))].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "classroomGetAnAssignment",
-            options: requestOptions,
-            errors: ["410": BasicError.self]
-        )).data
+    public static func classroomGetAnAssignment(config: ClientConfig, assignmentId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("GET", ["/assignments/", sdkEncodePathSegment(sdkWireString(assignmentId))].joined(), config: config, decoder: .empty, operationId: "classroomGetAnAssignment", options: requestOptions, errors: ["410": BasicError.self])).data
     }
 
-    /// Lists accepted assignments for a classroom assignment. This operation is closing down and will be removed on
-    /// August 28, 2026. Use the `assignment_id` path parameter to select the assignment whose accepted assignments you
-    /// want to retrieve.
+    /// Lists accepted assignments for a classroom assignment. This operation is closing down and will be removed on August 28, 2026. Use the `assignment_id` path parameter to select the assignment whose accepted assignments you want to retrieve.
     ///
-    /// > [!WARNING] > **Closed notice:** This operation is no longer available as of August 28, 2026. > For more
-    /// information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
+    /// > [!WARNING] > **Closed notice:** This operation is no longer available as of August 28, 2026. > For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
     ///
     /// - Parameters:
     /// - assignmentId: The unique identifier of the classroom assignment.
     ///
     /// - Warning: This operation is deprecated and may be removed in a future release.
-    static func classroomListAcceptedAssignmentsForAnAssignment(
-        config: ClientConfig,
-        assignmentId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "GET",
-            ["/assignments/", sdkEncodePathSegment(sdkWireString(assignmentId)), "/accepted_assignments"].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "classroomListAcceptedAssignmentsForAnAssignment",
-            options: requestOptions,
-            errors: ["410": BasicError.self]
-        )).data
+    public static func classroomListAcceptedAssignmentsForAnAssignment(config: ClientConfig, assignmentId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("GET", ["/assignments/", sdkEncodePathSegment(sdkWireString(assignmentId)), "/accepted_assignments"].joined(), config: config, decoder: .empty, operationId: "classroomListAcceptedAssignmentsForAnAssignment", options: requestOptions, errors: ["410": BasicError.self])).data
     }
 }

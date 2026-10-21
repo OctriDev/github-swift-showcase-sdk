@@ -6,10 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension CodeQualityMethods {
-    /// Gets a single code quality finding. OAuth app tokens and personal access tokens (classic) need the `repo` scope
-    /// to use this endpoint with private or public repositories, or the `public_repo` scope to use this endpoint with
-    /// only public repositories.
+extension CodeQualityMethods {
+    /// Gets a single code quality finding. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with private or public repositories, or the `public_repo` scope to use this endpoint with only public repositories.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -17,28 +15,7 @@ public extension CodeQualityMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - findingNumber: The number that identifies a finding.
-    static func codeQualityGetFinding(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        findingNumber: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CodeQualityFinding {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/code-quality/findings/",
-                sdkEncodePathSegment(sdkWireString(findingNumber)),
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "codeQualityGetFinding",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self, "503": ServiceUnavailable.self]
-        )).data
+    public static func codeQualityGetFinding(config: ClientConfig, owner: String, repo: String, findingNumber: Int, requestOptions: RequestOptions? = nil) async throws -> CodeQualityFinding {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/code-quality/findings/", sdkEncodePathSegment(sdkWireString(findingNumber))].joined(), config: config, decoder: .json, operationId: "codeQualityGetFinding", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "503": ServiceUnavailable.self])).data
     }
 }

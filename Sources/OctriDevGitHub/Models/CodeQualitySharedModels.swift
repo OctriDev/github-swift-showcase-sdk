@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// CodeQuality domain models
+// CodeQuality domain models
 /// Code quality finding
 public struct CodeQualityFinding: Codable {
     /// The finding number.
@@ -31,85 +31,51 @@ public struct CodeQualityFinding: Codable {
         case createdAt = "created_at"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension CodeQualityFinding {
-    init(from decoder: Decoder) throws {
+extension CodeQualityFinding {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.number) else {
-            throw SdkValidationError(
-                field: "number",
-                code: "required",
-                message: "Validation failed for 'number': value is required"
-            )
+            throw SdkValidationError(field: "number", code: "required", message: "Validation failed for 'number': value is required")
         }
         guard container.contains(.state) else {
-            throw SdkValidationError(
-                field: "state",
-                code: "required",
-                message: "Validation failed for 'state': value is required"
-            )
+            throw SdkValidationError(field: "state", code: "required", message: "Validation failed for 'state': value is required")
         }
         guard container.contains(.url) else {
-            throw SdkValidationError(
-                field: "url",
-                code: "required",
-                message: "Validation failed for 'url': value is required"
-            )
+            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
         }
         guard container.contains(.rule) else {
-            throw SdkValidationError(
-                field: "rule",
-                code: "required",
-                message: "Validation failed for 'rule': value is required"
-            )
+            throw SdkValidationError(field: "rule", code: "required", message: "Validation failed for 'rule': value is required")
         }
         guard container.contains(.location) else {
-            throw SdkValidationError(
-                field: "location",
-                code: "required",
-                message: "Validation failed for 'location': value is required"
-            )
+            throw SdkValidationError(field: "location", code: "required", message: "Validation failed for 'location': value is required")
         }
         guard container.contains(.message) else {
-            throw SdkValidationError(
-                field: "message",
-                code: "required",
-                message: "Validation failed for 'message': value is required"
-            )
+            throw SdkValidationError(field: "message", code: "required", message: "Validation failed for 'message': value is required")
         }
-        number = try container.sdkDecodeRequired(.number)
-        state = try container.sdkDecodeRequired(.state)
-        url = try container.sdkDecodeRequired(.url)
-        rule = try container.sdkDecodeRequired(.rule)
-        location = try container.sdkDecodeRequired(.location)
-        message = try container.sdkDecodeRequired(.message)
-        createdAt = try container.sdkDecodeIfPresent(.createdAt)
-        try sdkValidateUri("url", url)
-        if let value = createdAt {
+        self.number = try container.sdkDecodeRequired(.number)
+        self.state = try container.sdkDecodeRequired(.state)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.rule = try container.sdkDecodeRequired(.rule)
+        self.location = try container.sdkDecodeRequired(.location)
+        self.message = try container.sdkDecodeRequired(.message)
+        self.createdAt = try container.sdkDecodeIfPresent(.createdAt)
+            try sdkValidateUri("url", self.url)
+        if let value = self.createdAt {
             try sdkValidateDateTime("created_at", sdkWireString(value))
         }
     }
 }
 
-public extension CodeQualityFinding {
-    init(
-        number: Int,
-        state: CodeQualityFindingState,
-        url: String,
-        rule: CodeQualityFindingRule,
-        location: CodeQualityFindingLocation,
-        message: CodeQualityFindingMessage,
-        createdAt: Date? = nil
-    ) throws {
+extension CodeQualityFinding {
+    public init(number: Int, state: CodeQualityFindingState, url: String, rule: CodeQualityFindingRule, location: CodeQualityFindingLocation, message: CodeQualityFindingMessage, createdAt: Date? = nil) throws {
         (self.number, self.state) = (number, state)
         (self.url, self.rule) = (url, rule)
         (self.location, self.message) = (location, message)
         self.createdAt = createdAt
-        try sdkValidateUri("url", self.url)
+            try sdkValidateUri("url", self.url)
         if let value = self.createdAt {
             try sdkValidateDateTime("created_at", sdkWireString(value))
         }
@@ -137,31 +103,25 @@ public struct CodeQualityFindingLocation: Codable {
         case endColumn = "end_column"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension CodeQualityFindingLocation {
-    init(from decoder: Decoder) throws {
+extension CodeQualityFindingLocation {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.path) else {
-            throw SdkValidationError(
-                field: "path",
-                code: "required",
-                message: "Validation failed for 'path': value is required"
-            )
+            throw SdkValidationError(field: "path", code: "required", message: "Validation failed for 'path': value is required")
         }
-        path = try container.sdkDecodeRequired(.path)
-        startLine = try container.sdkDecodeIfPresent(.startLine)
-        startColumn = try container.sdkDecodeIfPresent(.startColumn)
-        endLine = try container.sdkDecodeIfPresent(.endLine)
-        endColumn = try container.sdkDecodeIfPresent(.endColumn)
+        self.path = try container.sdkDecodeRequired(.path)
+        self.startLine = try container.sdkDecodeIfPresent(.startLine)
+        self.startColumn = try container.sdkDecodeIfPresent(.startColumn)
+        self.endLine = try container.sdkDecodeIfPresent(.endLine)
+        self.endColumn = try container.sdkDecodeIfPresent(.endColumn)
     }
 }
 
-public extension CodeQualityFindingLocation {
-    init(path: String, startLine: Int? = nil, startColumn: Int? = nil, endLine: Int? = nil, endColumn: Int? = nil) {
+extension CodeQualityFindingLocation {
+    public init(path: String, startLine: Int? = nil, startColumn: Int? = nil, endLine: Int? = nil, endColumn: Int? = nil) {
         (self.path, self.startLine) = (path, startLine)
         (self.startColumn, self.endLine) = (startColumn, endLine)
         self.endColumn = endColumn
@@ -192,67 +152,38 @@ public struct CodeQualityFindingRule: Codable {
         case help
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension CodeQualityFindingRule {
-    init(from decoder: Decoder) throws {
+extension CodeQualityFindingRule {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
         guard container.contains(.title) else {
-            throw SdkValidationError(
-                field: "title",
-                code: "required",
-                message: "Validation failed for 'title': value is required"
-            )
+            throw SdkValidationError(field: "title", code: "required", message: "Validation failed for 'title': value is required")
         }
         guard container.contains(.description) else {
-            throw SdkValidationError(
-                field: "description",
-                code: "required",
-                message: "Validation failed for 'description': value is required"
-            )
+            throw SdkValidationError(field: "description", code: "required", message: "Validation failed for 'description': value is required")
         }
         guard container.contains(.severity) else {
-            throw SdkValidationError(
-                field: "severity",
-                code: "required",
-                message: "Validation failed for 'severity': value is required"
-            )
+            throw SdkValidationError(field: "severity", code: "required", message: "Validation failed for 'severity': value is required")
         }
         guard container.contains(.category) else {
-            throw SdkValidationError(
-                field: "category",
-                code: "required",
-                message: "Validation failed for 'category': value is required"
-            )
+            throw SdkValidationError(field: "category", code: "required", message: "Validation failed for 'category': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
-        title = try container.sdkDecodeRequired(.title)
-        description = try container.sdkDecodeRequired(.description)
-        severity = try container.sdkDecodeRequired(.severity)
-        category = try container.sdkDecodeRequired(.category)
-        help = try container.sdkDecodeIfPresent(.help)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.title = try container.sdkDecodeRequired(.title)
+        self.description = try container.sdkDecodeRequired(.description)
+        self.severity = try container.sdkDecodeRequired(.severity)
+        self.category = try container.sdkDecodeRequired(.category)
+        self.help = try container.sdkDecodeIfPresent(.help)
     }
 }
 
-public extension CodeQualityFindingRule {
-    init(
-        id: String,
-        title: String,
-        description: String,
-        severity: CodeQualityFindingRuleSeverity,
-        category: CodeQualityFindingRuleCategory,
-        help: String? = nil
-    ) {
+extension CodeQualityFindingRule {
+    public init(id: String, title: String, description: String, severity: CodeQualityFindingRuleSeverity, category: CodeQualityFindingRuleCategory, help: String? = nil) {
         (self.id, self.title) = (id, title)
         (self.description, self.severity) = (description, severity)
         (self.category, self.help) = (category, help)
@@ -271,35 +202,25 @@ public struct CodeQualityFindingMessage: Codable {
         case markdown
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension CodeQualityFindingMessage {
-    init(from decoder: Decoder) throws {
+extension CodeQualityFindingMessage {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.text) else {
-            throw SdkValidationError(
-                field: "text",
-                code: "required",
-                message: "Validation failed for 'text': value is required"
-            )
+            throw SdkValidationError(field: "text", code: "required", message: "Validation failed for 'text': value is required")
         }
         guard container.contains(.markdown) else {
-            throw SdkValidationError(
-                field: "markdown",
-                code: "required",
-                message: "Validation failed for 'markdown': value is required"
-            )
+            throw SdkValidationError(field: "markdown", code: "required", message: "Validation failed for 'markdown': value is required")
         }
-        text = try container.sdkDecodeRequired(.text)
-        markdown = try container.sdkDecodeRequired(.markdown)
+        self.text = try container.sdkDecodeRequired(.text)
+        self.markdown = try container.sdkDecodeRequired(.markdown)
     }
 }
 
-public extension CodeQualityFindingMessage {
-    init(text: String, markdown: String) {
+extension CodeQualityFindingMessage {
+    public init(text: String, markdown: String) {
         (self.text, self.markdown) = (text, markdown)
     }
 }
@@ -308,10 +229,7 @@ public extension CodeQualityFindingMessage {
 public struct CodeQualityFindingRuleSeverity: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let error = CodeQualityFindingRuleSeverity(rawValue: "error")
     public static let warning = CodeQualityFindingRuleSeverity(rawValue: "warning")
     public static let note = CodeQualityFindingRuleSeverity(rawValue: "note")
@@ -319,7 +237,7 @@ public struct CodeQualityFindingRuleSeverity: RawRepresentable, Hashable, Codabl
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -332,16 +250,13 @@ public struct CodeQualityFindingRuleSeverity: RawRepresentable, Hashable, Codabl
 public struct CodeQualityFindingState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let open = CodeQualityFindingState(rawValue: "open")
     public static let dismissed = CodeQualityFindingState(rawValue: "dismissed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -354,17 +269,14 @@ public struct CodeQualityFindingState: RawRepresentable, Hashable, Codable, Send
 public struct CodeQualityFindingRuleCategory: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let none = CodeQualityFindingRuleCategory(rawValue: "none")
     public static let maintainability = CodeQualityFindingRuleCategory(rawValue: "maintainability")
     public static let reliability = CodeQualityFindingRuleCategory(rawValue: "reliability")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

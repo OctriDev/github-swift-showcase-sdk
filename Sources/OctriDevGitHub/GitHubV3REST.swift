@@ -9,44 +9,35 @@ public class MetaNamespace {
         self.config = config
     }
 
-    /// Get Hypermedia links to resources accessible in GitHub's REST API
+/// Get Hypermedia links to resources accessible in GitHub's REST API
     public func root(requestOptions: RequestOptions? = nil) async throws -> Root {
-        try await MetaMethods.metaRoot(config: config, requestOptions: requestOptions)
+        return try await MetaMethods.metaRoot(config: config, requestOptions: requestOptions)
     }
 
-    /// Returns meta information about GitHub, including a list of GitHub's IP addresses. For more information, see
-    /// "[About GitHub's IP addresses](https://docs.github.com/articles/about-github-s-ip-addresses/)." The API's
-    /// response also includes a list of GitHub's domain names, and the public keys used by GitHub to sign commits made
-    /// through the web UI. The values shown in the documentation's response are example values. You must always query
-    /// the API directly to get the latest values. > [!NOTE] > This endpoint returns both IPv4 and IPv6 addresses.
-    /// However, not all features support IPv6. You should refer to the specific documentation for each feature to
-    /// determine if IPv6 is supported.
+/// Returns meta information about GitHub, including a list of GitHub's IP addresses. For more information, see "[About GitHub's IP addresses](https://docs.github.com/articles/about-github-s-ip-addresses/)." The API's response also includes a list of GitHub's domain names, and the public keys used by GitHub to sign commits made through the web UI. The values shown in the documentation's response are example values. You must always query the API directly to get the latest values. > [!NOTE] > This endpoint returns both IPv4 and IPv6 addresses. However, not all features support IPv6. You should refer to the specific documentation for each feature to determine if IPv6 is supported.
     public func get(requestOptions: RequestOptions? = nil) async throws -> ApiOverview {
-        try await MetaMethods.metaGet(config: config, requestOptions: requestOptions)
+        return try await MetaMethods.metaGet(config: config, requestOptions: requestOptions)
     }
 
-    /// Returns Octocat as ASCII art. Supply the optional `s` query parameter to set the words in Octocat's speech
-    /// bubble.
+/// Returns Octocat as ASCII art. Supply the optional `s` query parameter to set the words in Octocat's speech bubble.
     ///
     /// Get the octocat as ASCII art
     public func getOctocat(s: String? = nil, requestOptions: RequestOptions? = nil) async throws -> String {
-        try await MetaMethods.metaGetOctocat(config: config, s: s, requestOptions: requestOptions)
+        return try await MetaMethods.metaGetOctocat(config: config, s: s, requestOptions: requestOptions)
     }
 
-    /// Lists the API versions supported by the service. Use this endpoint to discover the version strings available for
-    /// API requests; each value is formatted as a date.
+/// Lists the API versions supported by the service. Use this endpoint to discover the version strings available for API requests; each value is formatted as a date.
     ///
     /// Get all supported GitHub API versions.
     public func getAllVersions(requestOptions: RequestOptions? = nil) async throws -> [String] {
-        try await MetaMethods.metaGetAllVersions(config: config, requestOptions: requestOptions)
+        return try await MetaMethods.metaGetAllVersions(config: config, requestOptions: requestOptions)
     }
 
-    /// Returns a random sentence from the Zen of GitHub. Use it when you want a brief, randomly selected phrase; the
-    /// response is plain text.
+/// Returns a random sentence from the Zen of GitHub. Use it when you want a brief, randomly selected phrase; the response is plain text.
     ///
     /// Get a random sentence from the Zen of GitHub
     public func getZen(requestOptions: RequestOptions? = nil) async throws -> String {
-        try await MetaMethods.metaGetZen(config: config, requestOptions: requestOptions)
+        return try await MetaMethods.metaGetZen(config: config, requestOptions: requestOptions)
     }
 }
 
@@ -56,181 +47,56 @@ public class SecurityAdvisoriesNamespace {
         self.config = config
     }
 
-    /// Lists all global security advisories that match the specified parameters. If no other parameters are defined,
-    /// the request will return only GitHub-reviewed advisories that are not malware. By default, all responses will
-    /// exclude advisories for malware, because malware are not standard vulnerabilities. To list advisories for
-    /// malware, you must include the `type` parameter in your request, with the value `malware`. For more information
-    /// about the different types of security advisories, see "[About the GitHub Advisory database](https://docs.github.com/code-security/security-advisories/global-security-advisories/about-the-github-advisory-database#about-types-of-security-advisories)."
-    public func listGlobalAdvisories(
-        options: SecurityAdvisoriesMethods.SecurityAdvisoriesListGlobalAdvisoriesOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [GlobalAdvisory] {
-        try await SecurityAdvisoriesMethods.securityAdvisoriesListGlobalAdvisories(
-            config: config,
-            options: options,
-            requestOptions: requestOptions
-        )
+/// Lists all global security advisories that match the specified parameters. If no other parameters are defined, the request will return only GitHub-reviewed advisories that are not malware. By default, all responses will exclude advisories for malware, because malware are not standard vulnerabilities. To list advisories for malware, you must include the `type` parameter in your request, with the value `malware`. For more information about the different types of security advisories, see "[About the GitHub Advisory database](https://docs.github.com/code-security/security-advisories/global-security-advisories/about-the-github-advisory-database#about-types-of-security-advisories)."
+    public func listGlobalAdvisories(options: SecurityAdvisoriesMethods.SecurityAdvisoriesListGlobalAdvisoriesOptions, requestOptions: RequestOptions? = nil) async throws -> [GlobalAdvisory] {
+        return try await SecurityAdvisoriesMethods.securityAdvisoriesListGlobalAdvisories(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Gets a global security advisory using its GitHub Security Advisory (GHSA) identifier.
-    public func getGlobalAdvisory(
-        ghsaId: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> GlobalAdvisory {
-        try await SecurityAdvisoriesMethods.securityAdvisoriesGetGlobalAdvisory(
-            config: config,
-            ghsaId: ghsaId,
-            requestOptions: requestOptions
-        )
+/// Gets a global security advisory using its GitHub Security Advisory (GHSA) identifier.
+    public func getGlobalAdvisory(ghsaId: String, requestOptions: RequestOptions? = nil) async throws -> GlobalAdvisory {
+        return try await SecurityAdvisoriesMethods.securityAdvisoriesGetGlobalAdvisory(config: config, ghsaId: ghsaId, requestOptions: requestOptions)
     }
 
-    /// Lists repository security advisories for an organization. The authenticated user must be an owner or security
-    /// manager for the organization to use this endpoint. OAuth app tokens and personal access tokens (classic) need
-    /// the `repo` or `repository_advisories:write` scope to use this endpoint.
-    public func listOrgRepositoryAdvisories(
-        org: String,
-        direction: SecurityAdvisoriesListGlobalAdvisoriesParameter? = nil,
-        sort: SecurityAdvisoriesListOrgRepositoryAdvisoriesParameter? = nil,
-        before: String? = nil,
-        after: String? = nil,
-        perPage: Int? = nil,
-        state: SecurityAdvisoriesListOrgRepositoryAdvisoriesParameterX737430cc? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [RepositoryAdvisory] {
-        try await SecurityAdvisoriesMethods.securityAdvisoriesListOrgRepositoryAdvisories(
-            config: config,
-            org: org,
-            direction: direction,
-            sort: sort,
-            before: before,
-            after: after,
-            perPage: perPage,
-            state: state,
-            requestOptions: requestOptions
-        )
+/// Lists repository security advisories for an organization. The authenticated user must be an owner or security manager for the organization to use this endpoint. OAuth app tokens and personal access tokens (classic) need the `repo` or `repository_advisories:write` scope to use this endpoint.
+    public func listOrgRepositoryAdvisories(org: String, direction: SecurityAdvisoriesListGlobalAdvisoriesParameter? = nil, sort: SecurityAdvisoriesListOrgRepositoryAdvisoriesParameter? = nil, before: String? = nil, after: String? = nil, perPage: Int? = nil, state: SecurityAdvisoriesListOrgRepositoryAdvisoriesParameterX737430cc? = nil, requestOptions: RequestOptions? = nil) async throws -> [RepositoryAdvisory] {
+        return try await SecurityAdvisoriesMethods.securityAdvisoriesListOrgRepositoryAdvisories(config: config, org: org, direction: direction, sort: sort, before: before, after: after, perPage: perPage, state: state, requestOptions: requestOptions)
     }
 
-    /// Lists security advisories in a repository. The authenticated user can access unpublished security advisories
-    /// from a repository if they are a security manager or administrator of that repository, or if they are a
-    /// collaborator on any security advisory. OAuth app tokens and personal access tokens (classic) need the `repo` or
-    /// `repository_advisories:read` scope to to get a published security advisory in a private repository, or any
-    /// unpublished security advisory that the authenticated user has access to.
-    public func listRepositoryAdvisories(
-        options: SecurityAdvisoriesMethods.SecurityAdvisoriesListRepositoryAdvisoriesOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [RepositoryAdvisory] {
-        try await SecurityAdvisoriesMethods.securityAdvisoriesListRepositoryAdvisories(
-            config: config,
-            options: options,
-            requestOptions: requestOptions
-        )
+/// Lists security advisories in a repository. The authenticated user can access unpublished security advisories from a repository if they are a security manager or administrator of that repository, or if they are a collaborator on any security advisory. OAuth app tokens and personal access tokens (classic) need the `repo` or `repository_advisories:read` scope to to get a published security advisory in a private repository, or any unpublished security advisory that the authenticated user has access to.
+    public func listRepositoryAdvisories(options: SecurityAdvisoriesMethods.SecurityAdvisoriesListRepositoryAdvisoriesOptions, requestOptions: RequestOptions? = nil) async throws -> [RepositoryAdvisory] {
+        return try await SecurityAdvisoriesMethods.securityAdvisoriesListRepositoryAdvisories(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Creates a new repository security advisory. In order to create a draft repository security advisory, the
-    /// authenticated user must be a security manager or administrator of that repository. OAuth app tokens and personal
-    /// access tokens (classic) need the `repo` or `repository_advisories:write` scope to use this endpoint.
-    public func createRepositoryAdvisory(
-        options: SecurityAdvisoriesMethods.SecurityAdvisoriesCreateRepositoryAdvisoryOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> RepositoryAdvisory {
-        try await SecurityAdvisoriesMethods.securityAdvisoriesCreateRepositoryAdvisory(
-            config: config,
-            options: options,
-            requestOptions: requestOptions
-        )
+/// Creates a new repository security advisory. In order to create a draft repository security advisory, the authenticated user must be a security manager or administrator of that repository. OAuth app tokens and personal access tokens (classic) need the `repo` or `repository_advisories:write` scope to use this endpoint.
+    public func createRepositoryAdvisory(options: SecurityAdvisoriesMethods.SecurityAdvisoriesCreateRepositoryAdvisoryOptions, requestOptions: RequestOptions? = nil) async throws -> RepositoryAdvisory {
+        return try await SecurityAdvisoriesMethods.securityAdvisoriesCreateRepositoryAdvisory(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Report a security vulnerability to the maintainers of the repository. See "[Privately reporting a security vulnerability](https://docs.github.com/code-security/security-advisories/guidance-on-reporting-and-writing/privately-reporting-a-security-vulnerability)"
-    /// for more information about private vulnerability reporting.
-    public func createPrivateVulnerabilityReport(
-        options: SecurityAdvisoriesMethods.SecurityAdvisoriesCreatePrivateVulnerabilityReportOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> RepositoryAdvisory {
-        try await SecurityAdvisoriesMethods.securityAdvisoriesCreatePrivateVulnerabilityReport(
-            config: config,
-            options: options,
-            requestOptions: requestOptions
-        )
+/// Report a security vulnerability to the maintainers of the repository. See "[Privately reporting a security vulnerability](https://docs.github.com/code-security/security-advisories/guidance-on-reporting-and-writing/privately-reporting-a-security-vulnerability)" for more information about private vulnerability reporting.
+    public func createPrivateVulnerabilityReport(options: SecurityAdvisoriesMethods.SecurityAdvisoriesCreatePrivateVulnerabilityReportOptions, requestOptions: RequestOptions? = nil) async throws -> RepositoryAdvisory {
+        return try await SecurityAdvisoriesMethods.securityAdvisoriesCreatePrivateVulnerabilityReport(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Get a repository security advisory using its GitHub Security Advisory (GHSA) identifier. Anyone can access any
-    /// published security advisory on a public repository. The authenticated user can access an unpublished security
-    /// advisory from a repository if they are a security manager or administrator of that repository, or if they are a
-    /// collaborator on the security advisory. OAuth app tokens and personal access tokens (classic) need the `repo` or
-    /// `repository_advisories:read` scope to to get a published security advisory in a private repository, or any
-    /// unpublished security advisory that the authenticated user has access to.
-    public func getRepositoryAdvisory(
-        owner: String,
-        repo: String,
-        ghsaId: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> RepositoryAdvisory {
-        try await SecurityAdvisoriesMethods.securityAdvisoriesGetRepositoryAdvisory(
-            config: config,
-            owner: owner,
-            repo: repo,
-            ghsaId: ghsaId,
-            requestOptions: requestOptions
-        )
+/// Get a repository security advisory using its GitHub Security Advisory (GHSA) identifier. Anyone can access any published security advisory on a public repository. The authenticated user can access an unpublished security advisory from a repository if they are a security manager or administrator of that repository, or if they are a collaborator on the security advisory. OAuth app tokens and personal access tokens (classic) need the `repo` or `repository_advisories:read` scope to to get a published security advisory in a private repository, or any unpublished security advisory that the authenticated user has access to.
+    public func getRepositoryAdvisory(owner: String, repo: String, ghsaId: String, requestOptions: RequestOptions? = nil) async throws -> RepositoryAdvisory {
+        return try await SecurityAdvisoriesMethods.securityAdvisoriesGetRepositoryAdvisory(config: config, owner: owner, repo: repo, ghsaId: ghsaId, requestOptions: requestOptions)
     }
 
-    /// Update a repository security advisory using its GitHub Security Advisory (GHSA) identifier. In order to update
-    /// any security advisory, the authenticated user must be a security manager or administrator of that repository, or
-    /// a collaborator on the repository security advisory. OAuth app tokens and personal access tokens (classic) need
-    /// the `repo` or `repository_advisories:write` scope to use this endpoint.
-    public func updateRepositoryAdvisory(
-        options: SecurityAdvisoriesMethods.SecurityAdvisoriesUpdateRepositoryAdvisoryOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> RepositoryAdvisory {
-        try await SecurityAdvisoriesMethods.securityAdvisoriesUpdateRepositoryAdvisory(
-            config: config,
-            options: options,
-            requestOptions: requestOptions
-        )
+/// Update a repository security advisory using its GitHub Security Advisory (GHSA) identifier. In order to update any security advisory, the authenticated user must be a security manager or administrator of that repository, or a collaborator on the repository security advisory. OAuth app tokens and personal access tokens (classic) need the `repo` or `repository_advisories:write` scope to use this endpoint.
+    public func updateRepositoryAdvisory(options: SecurityAdvisoriesMethods.SecurityAdvisoriesUpdateRepositoryAdvisoryOptions, requestOptions: RequestOptions? = nil) async throws -> RepositoryAdvisory {
+        return try await SecurityAdvisoriesMethods.securityAdvisoriesUpdateRepositoryAdvisory(config: config, options: options, requestOptions: requestOptions)
     }
 }
 
-public extension SecurityAdvisoriesNamespace {
-    /// If you want a CVE identification number for the security vulnerability in your project, and don't already have
-    /// one, you can request a CVE identification number from GitHub. For more information see "[Requesting a CVE
-    /// identification number](https://docs.github.com/code-security/security-advisories/repository-security-advisories/publishing-a-repository-security-advisory#requesting-a-cve-identification-number-optional)."
-    /// You may request a CVE for public repositories, but cannot do so for private repositories. In order to request a
-    /// CVE for a repository security advisory, the authenticated user must be a security manager or administrator of
-    /// that repository. OAuth app tokens and personal access tokens (classic) need the `repo` or
-    /// `repository_advisories:write` scope to use this endpoint.
-    func createRepositoryAdvisoryCveRequest(
-        owner: String,
-        repo: String,
-        ghsaId: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [String: JSONValue] {
-        try await SecurityAdvisoriesMethods.securityAdvisoriesCreateRepositoryAdvisoryCveRequest(
-            config: config,
-            owner: owner,
-            repo: repo,
-            ghsaId: ghsaId,
-            requestOptions: requestOptions
-        )
+extension SecurityAdvisoriesNamespace {
+/// If you want a CVE identification number for the security vulnerability in your project, and don't already have one, you can request a CVE identification number from GitHub. For more information see "[Requesting a CVE identification number](https://docs.github.com/code-security/security-advisories/repository-security-advisories/publishing-a-repository-security-advisory#requesting-a-cve-identification-number-optional)." You may request a CVE for public repositories, but cannot do so for private repositories. In order to request a CVE for a repository security advisory, the authenticated user must be a security manager or administrator of that repository. OAuth app tokens and personal access tokens (classic) need the `repo` or `repository_advisories:write` scope to use this endpoint.
+    public func createRepositoryAdvisoryCveRequest(owner: String, repo: String, ghsaId: String, requestOptions: RequestOptions? = nil) async throws -> [String: JSONValue] {
+        return try await SecurityAdvisoriesMethods.securityAdvisoriesCreateRepositoryAdvisoryCveRequest(config: config, owner: owner, repo: repo, ghsaId: ghsaId, requestOptions: requestOptions)
     }
 
-    /// Create a temporary private fork to collaborate on fixing a security vulnerability in a repository. Repository
-    /// administrators, organization owners, and security managers can create a temporary private fork. The original
-    /// reporter of a privately reported vulnerability can also create one while they remain a collaborator on the
-    /// security advisory. > [!NOTE] > Forking a repository happens asynchronously. You may have to wait up to 5 minutes
-    /// before you can access the fork.
-    func createFork(
-        owner: String,
-        repo: String,
-        ghsaId: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> FullRepository {
-        try await SecurityAdvisoriesMethods.securityAdvisoriesCreateFork(
-            config: config,
-            owner: owner,
-            repo: repo,
-            ghsaId: ghsaId,
-            requestOptions: requestOptions
-        )
+/// Create a temporary private fork to collaborate on fixing a security vulnerability in a repository. Repository administrators, organization owners, and security managers can create a temporary private fork. The original reporter of a privately reported vulnerability can also create one while they remain a collaborator on the security advisory. > [!NOTE] > Forking a repository happens asynchronously. You may have to wait up to 5 minutes before you can access the fork.
+    public func createFork(owner: String, repo: String, ghsaId: String, requestOptions: RequestOptions? = nil) async throws -> FullRepository {
+        return try await SecurityAdvisoriesMethods.securityAdvisoriesCreateFork(config: config, owner: owner, repo: repo, ghsaId: ghsaId, requestOptions: requestOptions)
     }
 }
 
@@ -240,234 +106,56 @@ public class AgentAutomationsNamespace {
         self.config = config
     }
 
-    /// Returns automations whose `created_by` user is the authenticated caller, across repositories the caller can
-    /// read. This includes both user-owned and repository-owned automations created by the caller but excludes
-    /// repository-owned automations created by someone else even if the caller has write access to the repository. Use
-    /// the repository-scoped list operation for those automations. The `owner_type` filter only narrows this
-    /// creator-scoped collection. **Fine-grained access tokens for "List automations for user"** This endpoint works
-    /// with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app)
-    /// * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token)
-    /// The fine-grained token must have one of the following permission sets for each repository accessed by this
-    /// request: * "Agent tasks" repository permissions (read) * "Contents" repository permissions (read) The required
-    /// permission set depends on each repository's Automation permission configuration. GitHub App installation access
-    /// tokens are not supported for this endpoint.
-    public func listAutomations(
-        page: Int? = nil,
-        perPage: Int? = nil,
-        ownerType: AgentAutomationsListAutomationsParameter? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [AgentAutomationsListAutomationsResponseItem] {
-        try await AgentAutomationsMethods.agentAutomationsListAutomations(
-            config: config,
-            page: page,
-            perPage: perPage,
-            ownerType: ownerType,
-            requestOptions: requestOptions
-        )
+/// Returns automations whose `created_by` user is the authenticated caller, across repositories the caller can read. This includes both user-owned and repository-owned automations created by the caller but excludes repository-owned automations created by someone else even if the caller has write access to the repository. Use the repository-scoped list operation for those automations. The `owner_type` filter only narrows this creator-scoped collection. **Fine-grained access tokens for "List automations for user"** This endpoint works with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app) * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) The fine-grained token must have one of the following permission sets for each repository accessed by this request: * "Agent tasks" repository permissions (read) * "Contents" repository permissions (read) The required permission set depends on each repository's Automation permission configuration. GitHub App installation access tokens are not supported for this endpoint.
+    public func listAutomations(page: Int? = nil, perPage: Int? = nil, ownerType: AgentAutomationsListAutomationsParameter? = nil, requestOptions: RequestOptions? = nil) async throws -> [AgentAutomationsListAutomationsResponseItem] {
+        return try await AgentAutomationsMethods.agentAutomationsListAutomations(config: config, page: page, perPage: perPage, ownerType: ownerType, requestOptions: requestOptions)
     }
 
-    /// Returns the tools available to the authenticated caller for use when creating or updating an automation.
-    /// **Fine-grained access tokens for "List available automation tools"** This endpoint works with the following
-    /// fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app)
-    /// * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token)
-    /// This endpoint does not require repository permissions. GitHub App installation access tokens are not supported
-    /// for this endpoint.
-    public func listAvailableAutomationTools(requestOptions: RequestOptions? = nil) async throws
-        -> [AgentAutomationsListAvailableAutomationToolsResponseItem] {
-        try await AgentAutomationsMethods.agentAutomationsListAvailableAutomationTools(
-            config: config,
-            requestOptions: requestOptions
-        )
+/// Returns the tools available to the authenticated caller for use when creating or updating an automation. **Fine-grained access tokens for "List available automation tools"** This endpoint works with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app) * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) This endpoint does not require repository permissions. GitHub App installation access tokens are not supported for this endpoint.
+    public func listAvailableAutomationTools(requestOptions: RequestOptions? = nil) async throws -> [AgentAutomationsListAvailableAutomationToolsResponseItem] {
+        return try await AgentAutomationsMethods.agentAutomationsListAvailableAutomationTools(config: config, requestOptions: requestOptions)
     }
 
-    /// Returns the triggers available to the authenticated caller, including machine-readable schemas for their
-    /// configurable fields. **Fine-grained access tokens for "List available automation triggers"** This endpoint works
-    /// with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app)
-    /// * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token)
-    /// This endpoint does not require repository permissions. GitHub App installation access tokens are not supported
-    /// for this endpoint.
-    public func listAvailableAutomationTriggers(requestOptions: RequestOptions? = nil) async throws
-        -> [AgentAutomationsListAvailableAutomationTriggersResponseItem] {
-        try await AgentAutomationsMethods.agentAutomationsListAvailableAutomationTriggers(
-            config: config,
-            requestOptions: requestOptions
-        )
+/// Returns the triggers available to the authenticated caller, including machine-readable schemas for their configurable fields. **Fine-grained access tokens for "List available automation triggers"** This endpoint works with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app) * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) This endpoint does not require repository permissions. GitHub App installation access tokens are not supported for this endpoint.
+    public func listAvailableAutomationTriggers(requestOptions: RequestOptions? = nil) async throws -> [AgentAutomationsListAvailableAutomationTriggersResponseItem] {
+        return try await AgentAutomationsMethods.agentAutomationsListAvailableAutomationTriggers(config: config, requestOptions: requestOptions)
     }
 
-    /// Returns an automation by ID without requiring repository context when its `created_by` user is the authenticated
-    /// caller and the caller can read its repository. This includes both user-owned and repository-owned automations
-    /// created by the caller but excludes repository-owned automations created by someone else even if the caller has
-    /// write access to the repository. Use the repository-scoped get operation for those automations. The response
-    /// includes repository identity so clients can link back to the repository. **Fine-grained access tokens for "Get
-    /// an automation by ID"** This endpoint works with the following fine-grained token types: * [GitHub App user
-    /// access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app)
-    /// * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token)
-    /// The fine-grained token must have one of the following permission sets for each repository accessed by this
-    /// request: * "Agent tasks" repository permissions (read) * "Contents" repository permissions (read) The required
-    /// permission set depends on each repository's Automation permission configuration. GitHub App installation access
-    /// tokens are not supported for this endpoint.
-    public func getAutomation(
-        automationId: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> AgentAutomationsGetAutomationResponse {
-        try await AgentAutomationsMethods.agentAutomationsGetAutomation(
-            config: config,
-            automationId: automationId,
-            requestOptions: requestOptions
-        )
+/// Returns an automation by ID without requiring repository context when its `created_by` user is the authenticated caller and the caller can read its repository. This includes both user-owned and repository-owned automations created by the caller but excludes repository-owned automations created by someone else even if the caller has write access to the repository. Use the repository-scoped get operation for those automations. The response includes repository identity so clients can link back to the repository. **Fine-grained access tokens for "Get an automation by ID"** This endpoint works with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app) * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) The fine-grained token must have one of the following permission sets for each repository accessed by this request: * "Agent tasks" repository permissions (read) * "Contents" repository permissions (read) The required permission set depends on each repository's Automation permission configuration. GitHub App installation access tokens are not supported for this endpoint.
+    public func getAutomation(automationId: String, requestOptions: RequestOptions? = nil) async throws -> AgentAutomationsGetAutomationResponse {
+        return try await AgentAutomationsMethods.agentAutomationsGetAutomation(config: config, automationId: automationId, requestOptions: requestOptions)
     }
 
-    /// Returns a list of tasks triggered by the specified automation. User-owned automation history is available only
-    /// to its creator, while repository-owned automation history is available to anyone with read access to the
-    /// repository. Deleted and unlisted tasks are excluded. Tasks produced by private-session agents are excluded
-    /// unless the caller created the task, is a task collaborator, or the task is shared. **Fine-grained access tokens
-    /// for "List tasks for an automation"** This endpoint works with the following fine-grained token types: * [GitHub
-    /// App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app)
-    /// * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token)
-    /// The fine-grained token must have one of the following permission sets for each repository accessed by this
-    /// request: * "Agent tasks" repository permissions (read) * "Contents" repository permissions (read) The required
-    /// permission set depends on each repository's Automation permission configuration. GitHub App installation access
-    /// tokens are not supported for this endpoint.
-    public func listAutomationTasks(
-        automationId: String,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        sort: AgentAutomationsListAutomationTasksParameter? = nil,
-        direction: AgentAutomationsListAutomationTasksParameterXa11df8cb? = nil,
-        state: String? = nil,
-        isArchived: Bool? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> AgentAutomationsListAutomationTasksResponse {
-        try await AgentAutomationsMethods.agentAutomationsListAutomationTasks(
-            config: config,
-            automationId: automationId,
-            perPage: perPage,
-            page: page,
-            sort: sort,
-            direction: direction,
-            state: state,
-            isArchived: isArchived,
-            requestOptions: requestOptions
-        )
+/// Returns a list of tasks triggered by the specified automation. User-owned automation history is available only to its creator, while repository-owned automation history is available to anyone with read access to the repository. Deleted and unlisted tasks are excluded. Tasks produced by private-session agents are excluded unless the caller created the task, is a task collaborator, or the task is shared. **Fine-grained access tokens for "List tasks for an automation"** This endpoint works with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app) * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) The fine-grained token must have one of the following permission sets for each repository accessed by this request: * "Agent tasks" repository permissions (read) * "Contents" repository permissions (read) The required permission set depends on each repository's Automation permission configuration. GitHub App installation access tokens are not supported for this endpoint.
+    public func listAutomationTasks(automationId: String, perPage: Int? = nil, page: Int? = nil, sort: AgentAutomationsListAutomationTasksParameter? = nil, direction: AgentAutomationsListAutomationTasksParameterXa11df8cb? = nil, state: String? = nil, isArchived: Bool? = nil, requestOptions: RequestOptions? = nil) async throws -> AgentAutomationsListAutomationTasksResponse {
+        return try await AgentAutomationsMethods.agentAutomationsListAutomationTasks(config: config, automationId: automationId, perPage: perPage, page: page, sort: sort, direction: direction, state: state, isArchived: isArchived, requestOptions: requestOptions)
     }
 
-    /// Returns a paginated list of the authenticated user's automations for a repository, together with every
-    /// repository-owned automation in it. `total_count` is the number of caller-visible automations matching the
-    /// supplied filters across all pages. Repository-owned automations are visible to anyone with read access to the
-    /// repository, so the results are not limited to automations the caller created. Use the `owner_type` field on each
-    /// automation to tell the two apart. **Fine-grained access tokens for "List automations for a repository"** This
-    /// endpoint works with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app)
-    /// * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token)
-    /// The fine-grained token must have one of the following permission sets for each repository accessed by this
-    /// request: * "Agent tasks" repository permissions (read) * "Contents" repository permissions (read) The required
-    /// permission set depends on each repository's Automation permission configuration. GitHub App installation access
-    /// tokens are not supported for this endpoint.
-    public func listRepoAutomations(
-        owner: String,
-        repo: String,
-        page: Int? = nil,
-        perPage: Int? = nil,
-        ownerType: AgentAutomationsListRepoAutomationsParameter? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> AgentAutomationsListRepoAutomationsResponse {
-        try await AgentAutomationsMethods.agentAutomationsListRepoAutomations(
-            config: config,
-            owner: owner,
-            repo: repo,
-            page: page,
-            perPage: perPage,
-            ownerType: ownerType,
-            requestOptions: requestOptions
-        )
+/// Returns a paginated list of the authenticated user's automations for a repository, together with every repository-owned automation in it. `total_count` is the number of caller-visible automations matching the supplied filters across all pages. Repository-owned automations are visible to anyone with read access to the repository, so the results are not limited to automations the caller created. Use the `owner_type` field on each automation to tell the two apart. **Fine-grained access tokens for "List automations for a repository"** This endpoint works with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app) * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) The fine-grained token must have one of the following permission sets for each repository accessed by this request: * "Agent tasks" repository permissions (read) * "Contents" repository permissions (read) The required permission set depends on each repository's Automation permission configuration. GitHub App installation access tokens are not supported for this endpoint.
+    public func listRepoAutomations(owner: String, repo: String, page: Int? = nil, perPage: Int? = nil, ownerType: AgentAutomationsListRepoAutomationsParameter? = nil, requestOptions: RequestOptions? = nil) async throws -> AgentAutomationsListRepoAutomationsResponse {
+        return try await AgentAutomationsMethods.agentAutomationsListRepoAutomations(config: config, owner: owner, repo: repo, page: page, perPage: perPage, ownerType: ownerType, requestOptions: requestOptions)
     }
 
-    /// Creates a new automation in a repository. User-owned automations remain private to their creator.
-    /// Repository-owned automations are visible to anyone with read access to the repository and manageable by anyone
-    /// with write access to the repository. **Fine-grained access tokens for "Create an automation for a repository"**
-    /// This endpoint works with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app)
-    /// * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token)
-    /// The fine-grained token must have one of the following permission sets for each repository accessed by this
-    /// request: * "Agent tasks" repository permissions (read and write) * "Contents" repository permissions (read and
-    /// write) The required permission set depends on each repository's Automation permission configuration. GitHub App
-    /// installation access tokens are not supported for this endpoint.
-    public func createRepoAutomation(
-        options: AgentAutomationsMethods.AgentAutomationsCreateRepoAutomationOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> AgentAutomationsCreateRepoAutomationResponse {
-        try await AgentAutomationsMethods.agentAutomationsCreateRepoAutomation(
-            config: config,
-            options: options,
-            requestOptions: requestOptions
-        )
+/// Creates a new automation in a repository. User-owned automations remain private to their creator. Repository-owned automations are visible to anyone with read access to the repository and manageable by anyone with write access to the repository. **Fine-grained access tokens for "Create an automation for a repository"** This endpoint works with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app) * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) The fine-grained token must have one of the following permission sets for each repository accessed by this request: * "Agent tasks" repository permissions (read and write) * "Contents" repository permissions (read and write) The required permission set depends on each repository's Automation permission configuration. GitHub App installation access tokens are not supported for this endpoint.
+    public func createRepoAutomation(options: AgentAutomationsMethods.AgentAutomationsCreateRepoAutomationOptions, requestOptions: RequestOptions? = nil) async throws -> AgentAutomationsCreateRepoAutomationResponse {
+        return try await AgentAutomationsMethods.agentAutomationsCreateRepoAutomation(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Returns an automation by ID in a repository. User-owned automations are visible only to their creator.
-    /// Repository-owned automations are visible to anyone with read access to the repository. The `created_by` field
-    /// identifies the creator and is distinct from the automation's `owner_type`. **Fine-grained access tokens for "Get
-    /// an automation for a repository"** This endpoint works with the following fine-grained token types: * [GitHub App
-    /// user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app)
-    /// * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token)
-    /// The fine-grained token must have one of the following permission sets for each repository accessed by this
-    /// request: * "Agent tasks" repository permissions (read) * "Contents" repository permissions (read) The required
-    /// permission set depends on each repository's Automation permission configuration. GitHub App installation access
-    /// tokens are not supported for this endpoint.
-    public func getRepoAutomation(
-        owner: String,
-        repo: String,
-        automationId: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> AgentAutomationsGetRepoAutomationResponse {
-        try await AgentAutomationsMethods.agentAutomationsGetRepoAutomation(
-            config: config,
-            owner: owner,
-            repo: repo,
-            automationId: automationId,
-            requestOptions: requestOptions
-        )
+/// Returns an automation by ID in a repository. User-owned automations are visible only to their creator. Repository-owned automations are visible to anyone with read access to the repository. The `created_by` field identifies the creator and is distinct from the automation's `owner_type`. **Fine-grained access tokens for "Get an automation for a repository"** This endpoint works with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app) * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) The fine-grained token must have one of the following permission sets for each repository accessed by this request: * "Agent tasks" repository permissions (read) * "Contents" repository permissions (read) The required permission set depends on each repository's Automation permission configuration. GitHub App installation access tokens are not supported for this endpoint.
+    public func getRepoAutomation(owner: String, repo: String, automationId: String, requestOptions: RequestOptions? = nil) async throws -> AgentAutomationsGetRepoAutomationResponse {
+        return try await AgentAutomationsMethods.agentAutomationsGetRepoAutomation(config: config, owner: owner, repo: repo, automationId: automationId, requestOptions: requestOptions)
     }
 }
 
-public extension AgentAutomationsNamespace {
-    /// Edits specified fields on an existing automation in a repository. Omitted fields are left unchanged. The
-    /// automation's `owner_type` is immutable and cannot be changed by this operation. **Fine-grained access tokens for
-    /// "Edit an automation for a repository"** This endpoint works with the following fine-grained token types: *
-    /// [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app)
-    /// * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token)
-    /// The fine-grained token must have one of the following permission sets for each repository accessed by this
-    /// request: * "Agent tasks" repository permissions (read and write) * "Contents" repository permissions (read and
-    /// write) The required permission set depends on each repository's Automation permission configuration. GitHub App
-    /// installation access tokens are not supported for this endpoint.
-    func editRepoAutomation(
-        options: AgentAutomationsMethods.AgentAutomationsEditRepoAutomationOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> AgentAutomationsEditRepoAutomationResponse {
-        try await AgentAutomationsMethods.agentAutomationsEditRepoAutomation(
-            config: config,
-            options: options,
-            requestOptions: requestOptions
-        )
+extension AgentAutomationsNamespace {
+/// Edits specified fields on an existing automation in a repository. Omitted fields are left unchanged. The automation's `owner_type` is immutable and cannot be changed by this operation. **Fine-grained access tokens for "Edit an automation for a repository"** This endpoint works with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app) * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) The fine-grained token must have one of the following permission sets for each repository accessed by this request: * "Agent tasks" repository permissions (read and write) * "Contents" repository permissions (read and write) The required permission set depends on each repository's Automation permission configuration. GitHub App installation access tokens are not supported for this endpoint.
+    public func editRepoAutomation(options: AgentAutomationsMethods.AgentAutomationsEditRepoAutomationOptions, requestOptions: RequestOptions? = nil) async throws -> AgentAutomationsEditRepoAutomationResponse {
+        return try await AgentAutomationsMethods.agentAutomationsEditRepoAutomation(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Deletes an automation in a repository. **Fine-grained access tokens for "Delete an automation for a
-    /// repository"** This endpoint works with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app)
-    /// * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token)
-    /// The fine-grained token must have one of the following permission sets for each repository accessed by this
-    /// request: * "Agent tasks" repository permissions (read and write) * "Contents" repository permissions (read and
-    /// write) The required permission set depends on each repository's Automation permission configuration. GitHub App
-    /// installation access tokens are not supported for this endpoint.
-    func deleteRepoAutomation(
-        owner: String,
-        repo: String,
-        automationId: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await AgentAutomationsMethods.agentAutomationsDeleteRepoAutomation(
-            config: config,
-            owner: owner,
-            repo: repo,
-            automationId: automationId,
-            requestOptions: requestOptions
-        )
+/// Deletes an automation in a repository. **Fine-grained access tokens for "Delete an automation for a repository"** This endpoint works with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app) * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) The fine-grained token must have one of the following permission sets for each repository accessed by this request: * "Agent tasks" repository permissions (read and write) * "Contents" repository permissions (read and write) The required permission set depends on each repository's Automation permission configuration. GitHub App installation access tokens are not supported for this endpoint.
+    public func deleteRepoAutomation(owner: String, repo: String, automationId: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await AgentAutomationsMethods.agentAutomationsDeleteRepoAutomation(config: config, owner: owner, repo: repo, automationId: automationId, requestOptions: requestOptions)
     }
 }
 
@@ -477,105 +165,28 @@ public class AgentTasksNamespace {
         self.config = config
     }
 
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Returns a list of tasks for a specific
-    /// repository **Fine-grained access tokens for "List tasks for repository"** This endpoint works with the following
-    /// fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app)
-    /// * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token)
-    /// The fine-grained token must have the following permission set: * "Agent tasks" repository permissions (read)
-    /// GitHub App installation access tokens are not supported for this endpoint.
-    public func listTasksForRepo(
-        options: AgentTasksMethods.AgentTasksListTasksForRepoOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> AgentTasksListTasksForRepoResponse {
-        try await AgentTasksMethods.agentTasksListTasksForRepo(
-            config: config,
-            options: options,
-            requestOptions: requestOptions
-        )
+/// > [!NOTE] > This endpoint is in public preview and is subject to change. Returns a list of tasks for a specific repository **Fine-grained access tokens for "List tasks for repository"** This endpoint works with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app) * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) The fine-grained token must have the following permission set: * "Agent tasks" repository permissions (read) GitHub App installation access tokens are not supported for this endpoint.
+    public func listTasksForRepo(options: AgentTasksMethods.AgentTasksListTasksForRepoOptions, requestOptions: RequestOptions? = nil) async throws -> AgentTasksListTasksForRepoResponse {
+        return try await AgentTasksMethods.agentTasksListTasksForRepo(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Starts a new Copilot cloud agent task
-    /// for a repository. This endpoint is only available to users with a Copilot Business or Copilot Enterprise
-    /// subscription. **Fine-grained access tokens for "Start a task"** This endpoint works with the following
-    /// fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app)
-    /// * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token)
-    /// The fine-grained token must have the following permission set: * "Agent tasks" repository permissions (read and
-    /// write) GitHub App installation access tokens are not supported for this endpoint.
-    public func createTaskInRepo(
-        options: AgentTasksMethods.AgentTasksCreateTaskInRepoOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> AgentTasksCreateTaskInRepoResponse {
-        try await AgentTasksMethods.agentTasksCreateTaskInRepo(
-            config: config,
-            options: options,
-            requestOptions: requestOptions
-        )
+/// > [!NOTE] > This endpoint is in public preview and is subject to change. Starts a new Copilot cloud agent task for a repository. This endpoint is only available to users with a Copilot Business or Copilot Enterprise subscription. **Fine-grained access tokens for "Start a task"** This endpoint works with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app) * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) The fine-grained token must have the following permission set: * "Agent tasks" repository permissions (read and write) GitHub App installation access tokens are not supported for this endpoint.
+    public func createTaskInRepo(options: AgentTasksMethods.AgentTasksCreateTaskInRepoOptions, requestOptions: RequestOptions? = nil) async throws -> AgentTasksCreateTaskInRepoResponse {
+        return try await AgentTasksMethods.agentTasksCreateTaskInRepo(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Returns a task by ID scoped to an
-    /// owner/repo path **Fine-grained access tokens for "Get a task by repo"** This endpoint works with the following
-    /// fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app)
-    /// * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token)
-    /// The fine-grained token must have the following permission set: * "Agent tasks" repository permissions (read)
-    /// GitHub App installation access tokens are not supported for this endpoint.
-    public func getTaskByRepoAndId(
-        owner: String,
-        repo: String,
-        taskId: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> AgentTasksGetTaskByRepoAndIdResponse {
-        try await AgentTasksMethods.agentTasksGetTaskByRepoAndId(
-            config: config,
-            owner: owner,
-            repo: repo,
-            taskId: taskId,
-            requestOptions: requestOptions
-        )
+/// > [!NOTE] > This endpoint is in public preview and is subject to change. Returns a task by ID scoped to an owner/repo path **Fine-grained access tokens for "Get a task by repo"** This endpoint works with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app) * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) The fine-grained token must have the following permission set: * "Agent tasks" repository permissions (read) GitHub App installation access tokens are not supported for this endpoint.
+    public func getTaskByRepoAndId(owner: String, repo: String, taskId: String, requestOptions: RequestOptions? = nil) async throws -> AgentTasksGetTaskByRepoAndIdResponse {
+        return try await AgentTasksMethods.agentTasksGetTaskByRepoAndId(config: config, owner: owner, repo: repo, taskId: taskId, requestOptions: requestOptions)
     }
 
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Returns a list of tasks for the
-    /// authenticated user **Fine-grained access tokens for "List tasks"** This endpoint works with the following
-    /// fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app)
-    /// * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token)
-    /// The fine-grained token must have the following permission set: * "Agent tasks" repository permissions (read)
-    /// GitHub App installation access tokens are not supported for this endpoint.
-    public func listTasks(
-        perPage: Int? = nil,
-        page: Int? = nil,
-        sort: AgentTasksListTasksParameter? = nil,
-        direction: AgentTasksListTasksParameterX8d1144b0? = nil,
-        state: String? = nil,
-        isArchived: Bool? = nil,
-        since: Date? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> AgentTasksListTasksResponse {
-        try await AgentTasksMethods.agentTasksListTasks(
-            config: config,
-            perPage: perPage,
-            page: page,
-            sort: sort,
-            direction: direction,
-            state: state,
-            isArchived: isArchived,
-            since: since,
-            requestOptions: requestOptions
-        )
+/// > [!NOTE] > This endpoint is in public preview and is subject to change. Returns a list of tasks for the authenticated user **Fine-grained access tokens for "List tasks"** This endpoint works with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app) * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) The fine-grained token must have the following permission set: * "Agent tasks" repository permissions (read) GitHub App installation access tokens are not supported for this endpoint.
+    public func listTasks(perPage: Int? = nil, page: Int? = nil, sort: AgentTasksListTasksParameter? = nil, direction: AgentTasksListTasksParameterX8d1144b0? = nil, state: String? = nil, isArchived: Bool? = nil, since: Date? = nil, requestOptions: RequestOptions? = nil) async throws -> AgentTasksListTasksResponse {
+        return try await AgentTasksMethods.agentTasksListTasks(config: config, perPage: perPage, page: page, sort: sort, direction: direction, state: state, isArchived: isArchived, since: since, requestOptions: requestOptions)
     }
 
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Returns a task by ID with its
-    /// associated sessions **Fine-grained access tokens for "Get a task by ID"** This endpoint works with the following
-    /// fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app)
-    /// * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token)
-    /// The fine-grained token must have the following permission set: * "Agent tasks" repository permissions (read)
-    /// GitHub App installation access tokens are not supported for this endpoint.
-    public func getTaskById(
-        taskId: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> AgentTasksGetTaskByIdResponse {
-        try await AgentTasksMethods.agentTasksGetTaskById(
-            config: config,
-            taskId: taskId,
-            requestOptions: requestOptions
-        )
+/// > [!NOTE] > This endpoint is in public preview and is subject to change. Returns a task by ID with its associated sessions **Fine-grained access tokens for "Get a task by ID"** This endpoint works with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app) * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) The fine-grained token must have the following permission set: * "Agent tasks" repository permissions (read) GitHub App installation access tokens are not supported for this endpoint.
+    public func getTaskById(taskId: String, requestOptions: RequestOptions? = nil) async throws -> AgentTasksGetTaskByIdResponse {
+        return try await AgentTasksMethods.agentTasksGetTaskById(config: config, taskId: taskId, requestOptions: requestOptions)
     }
 }

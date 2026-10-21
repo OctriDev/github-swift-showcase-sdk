@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// WebhookCheckSuiteRequested domain models
+// WebhookCheckSuiteRequested domain models
 /// Required object value serialized in the `head_commit` wire field.
 public struct WebhookCheckSuiteRequestedCheckSuiteHeadCommit: Codable {
     /// Metaproperties for Git author/committer information.
@@ -28,74 +28,41 @@ public struct WebhookCheckSuiteRequestedCheckSuiteHeadCommit: Codable {
         case treeId = "tree_id"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookCheckSuiteRequestedCheckSuiteHeadCommit {
-    init(from decoder: Decoder) throws {
+extension WebhookCheckSuiteRequestedCheckSuiteHeadCommit {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.author) else {
-            throw SdkValidationError(
-                field: "author",
-                code: "required",
-                message: "Validation failed for 'author': value is required"
-            )
+            throw SdkValidationError(field: "author", code: "required", message: "Validation failed for 'author': value is required")
         }
         guard container.contains(.committer) else {
-            throw SdkValidationError(
-                field: "committer",
-                code: "required",
-                message: "Validation failed for 'committer': value is required"
-            )
+            throw SdkValidationError(field: "committer", code: "required", message: "Validation failed for 'committer': value is required")
         }
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
         guard container.contains(.message) else {
-            throw SdkValidationError(
-                field: "message",
-                code: "required",
-                message: "Validation failed for 'message': value is required"
-            )
+            throw SdkValidationError(field: "message", code: "required", message: "Validation failed for 'message': value is required")
         }
         guard container.contains(.timestamp) else {
-            throw SdkValidationError(
-                field: "timestamp",
-                code: "required",
-                message: "Validation failed for 'timestamp': value is required"
-            )
+            throw SdkValidationError(field: "timestamp", code: "required", message: "Validation failed for 'timestamp': value is required")
         }
         guard container.contains(.treeId) else {
-            throw SdkValidationError(
-                field: "tree_id",
-                code: "required",
-                message: "Validation failed for 'tree_id': value is required"
-            )
+            throw SdkValidationError(field: "tree_id", code: "required", message: "Validation failed for 'tree_id': value is required")
         }
-        author = try container.sdkDecodeRequired(.author)
-        committer = try container.sdkDecodeRequired(.committer)
-        id = try container.sdkDecodeRequired(.id)
-        message = try container.sdkDecodeRequired(.message)
-        timestamp = try container.sdkDecodeRequired(.timestamp)
-        treeId = try container.sdkDecodeRequired(.treeId)
+        self.author = try container.sdkDecodeRequired(.author)
+        self.committer = try container.sdkDecodeRequired(.committer)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.message = try container.sdkDecodeRequired(.message)
+        self.timestamp = try container.sdkDecodeRequired(.timestamp)
+        self.treeId = try container.sdkDecodeRequired(.treeId)
     }
 }
 
-public extension WebhookCheckSuiteRequestedCheckSuiteHeadCommit {
-    init(
-        author: WebhookCheckSuiteRequestedCheckSuiteHeadCommitAuthor,
-        committer: WebhookCheckSuiteRequestedCheckSuiteHeadCommitCommitter,
-        id: String,
-        message: String,
-        timestamp: String,
-        treeId: String
-    ) {
+extension WebhookCheckSuiteRequestedCheckSuiteHeadCommit {
+    public init(author: WebhookCheckSuiteRequestedCheckSuiteHeadCommitAuthor, committer: WebhookCheckSuiteRequestedCheckSuiteHeadCommitCommitter, id: String, message: String, timestamp: String, treeId: String) {
         (self.author, self.committer) = (author, committer)
         (self.id, self.message) = (id, message)
         (self.timestamp, self.treeId) = (timestamp, treeId)
@@ -120,43 +87,33 @@ public struct WebhookCheckSuiteRequestedCheckSuiteHeadCommitCommitter: Codable {
         case username
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookCheckSuiteRequestedCheckSuiteHeadCommitCommitter {
-    init(from decoder: Decoder) throws {
+extension WebhookCheckSuiteRequestedCheckSuiteHeadCommitCommitter {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.email) else {
-            throw SdkValidationError(
-                field: "email",
-                code: "required",
-                message: "Validation failed for 'email': value is required"
-            )
+            throw SdkValidationError(field: "email", code: "required", message: "Validation failed for 'email': value is required")
         }
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
-        email = try container.sdkDecodeNullable(.email)
-        name = try container.sdkDecodeRequired(.name)
-        date = try container.sdkDecodeIfPresent(.date)
-        username = try container.sdkDecodeIfPresent(.username)
-        if let value = email {
+        self.email = try container.sdkDecodeNullable(.email)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.date = try container.sdkDecodeIfPresent(.date)
+        self.username = try container.sdkDecodeIfPresent(.username)
+        if let value = self.email {
             try sdkValidateEmail("email", value)
         }
-        if let value = date {
+        if let value = self.date {
             try sdkValidateDateTime("date", sdkWireString(value))
         }
     }
 }
 
-public extension WebhookCheckSuiteRequestedCheckSuiteHeadCommitCommitter {
-    init(email: String?, name: String, date: Date? = nil, username: String? = nil) throws {
+extension WebhookCheckSuiteRequestedCheckSuiteHeadCommitCommitter {
+    public init(email: String?, name: String, date: Date? = nil, username: String? = nil) throws {
         (self.email, self.name) = (email, name)
         (self.date, self.username) = (date, username)
         if let value = self.email {
@@ -183,43 +140,29 @@ public struct WebhookCheckSuiteRequestedCheckSuitePullRequestsItemHead: Codable 
         case sha
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookCheckSuiteRequestedCheckSuitePullRequestsItemHead {
-    init(from decoder: Decoder) throws {
+extension WebhookCheckSuiteRequestedCheckSuitePullRequestsItemHead {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.ref) else {
-            throw SdkValidationError(
-                field: "ref",
-                code: "required",
-                message: "Validation failed for 'ref': value is required"
-            )
+            throw SdkValidationError(field: "ref", code: "required", message: "Validation failed for 'ref': value is required")
         }
         guard container.contains(.repo) else {
-            throw SdkValidationError(
-                field: "repo",
-                code: "required",
-                message: "Validation failed for 'repo': value is required"
-            )
+            throw SdkValidationError(field: "repo", code: "required", message: "Validation failed for 'repo': value is required")
         }
         guard container.contains(.sha) else {
-            throw SdkValidationError(
-                field: "sha",
-                code: "required",
-                message: "Validation failed for 'sha': value is required"
-            )
+            throw SdkValidationError(field: "sha", code: "required", message: "Validation failed for 'sha': value is required")
         }
-        ref = try container.sdkDecodeRequired(.ref)
-        repo = try container.sdkDecodeRequired(.repo)
-        sha = try container.sdkDecodeRequired(.sha)
+        self.ref = try container.sdkDecodeRequired(.ref)
+        self.repo = try container.sdkDecodeRequired(.repo)
+        self.sha = try container.sdkDecodeRequired(.sha)
     }
 }
 
-public extension WebhookCheckSuiteRequestedCheckSuitePullRequestsItemHead {
-    init(ref: String, repo: WebhookCheckSuiteRequestedCheckSuitePullRequestsItemHeadRepo, sha: String) {
+extension WebhookCheckSuiteRequestedCheckSuitePullRequestsItemHead {
+    public init(ref: String, repo: WebhookCheckSuiteRequestedCheckSuitePullRequestsItemHeadRepo, sha: String) {
         (self.ref, self.repo) = (ref, repo)
         self.sha = sha
     }
@@ -257,62 +200,36 @@ public struct WebhookCheckSuiteRequested: Codable {
         case organization
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookCheckSuiteRequested {
-    init(from decoder: Decoder) throws {
+extension WebhookCheckSuiteRequested {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.action) else {
-            throw SdkValidationError(
-                field: "action",
-                code: "required",
-                message: "Validation failed for 'action': value is required"
-            )
+            throw SdkValidationError(field: "action", code: "required", message: "Validation failed for 'action': value is required")
         }
         guard container.contains(.checkSuite) else {
-            throw SdkValidationError(
-                field: "check_suite",
-                code: "required",
-                message: "Validation failed for 'check_suite': value is required"
-            )
+            throw SdkValidationError(field: "check_suite", code: "required", message: "Validation failed for 'check_suite': value is required")
         }
         guard container.contains(.repository) else {
-            throw SdkValidationError(
-                field: "repository",
-                code: "required",
-                message: "Validation failed for 'repository': value is required"
-            )
+            throw SdkValidationError(field: "repository", code: "required", message: "Validation failed for 'repository': value is required")
         }
         guard container.contains(.sender) else {
-            throw SdkValidationError(
-                field: "sender",
-                code: "required",
-                message: "Validation failed for 'sender': value is required"
-            )
+            throw SdkValidationError(field: "sender", code: "required", message: "Validation failed for 'sender': value is required")
         }
-        action = try container.sdkDecodeRequired(.action)
-        checkSuite = try container.sdkDecodeRequired(.checkSuite)
-        repository = try container.sdkDecodeRequired(.repository)
-        sender = try container.sdkDecodeRequired(.sender)
-        enterprise = try container.sdkDecodeIfPresent(.enterprise)
-        installation = try container.sdkDecodeIfPresent(.installation)
-        organization = try container.sdkDecodeIfPresent(.organization)
+        self.action = try container.sdkDecodeRequired(.action)
+        self.checkSuite = try container.sdkDecodeRequired(.checkSuite)
+        self.repository = try container.sdkDecodeRequired(.repository)
+        self.sender = try container.sdkDecodeRequired(.sender)
+        self.enterprise = try container.sdkDecodeIfPresent(.enterprise)
+        self.installation = try container.sdkDecodeIfPresent(.installation)
+        self.organization = try container.sdkDecodeIfPresent(.organization)
     }
 }
 
-public extension WebhookCheckSuiteRequested {
-    init(
-        action: WebhookCheckSuiteRequestedAction,
-        checkSuite: WebhookCheckSuiteRequestedCheckSuite,
-        repository: RepositoryWebhooks,
-        sender: SimpleUser,
-        enterprise: EnterpriseWebhooks? = nil,
-        installation: SimpleInstallation? = nil,
-        organization: OrganizationSimpleWebhooks? = nil
-    ) {
+extension WebhookCheckSuiteRequested {
+    public init(action: WebhookCheckSuiteRequestedAction, checkSuite: WebhookCheckSuiteRequestedCheckSuite, repository: RepositoryWebhooks, sender: SimpleUser, enterprise: EnterpriseWebhooks? = nil, installation: SimpleInstallation? = nil, organization: OrganizationSimpleWebhooks? = nil) {
         (self.action, self.checkSuite) = (action, checkSuite)
         (self.repository, self.sender) = (repository, sender)
         (self.enterprise, self.installation) = (enterprise, installation)
@@ -386,60 +303,39 @@ public struct WebhookCheckSuiteRequestedCheckSuite: Codable {
         case runsRerequestable = "runs_rerequestable"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookCheckSuiteRequestedCheckSuite {
-    init(from decoder: Decoder) throws {
+extension WebhookCheckSuiteRequestedCheckSuite {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        after = try container.sdkDecodeNullable(.after)
-        app = try container.sdkDecodeRequired(.app)
-        before = try container.sdkDecodeNullable(.before)
-        checkRunsUrl = try container.sdkDecodeRequired(.checkRunsUrl)
-        conclusion = try container.sdkDecodeNullable(.conclusion)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        headBranch = try container.sdkDecodeNullable(.headBranch)
-        headCommit = try container.sdkDecodeRequired(.headCommit)
-        headSha = try container.sdkDecodeRequired(.headSha)
-        id = try container.sdkDecodeRequired(.id)
-        latestCheckRunsCount = try container.sdkDecodeRequired(.latestCheckRunsCount)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        pullRequests = try container.sdkDecodeRequired(.pullRequests)
-        status = try container.sdkDecodeNullable(.status)
-        updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        url = try container.sdkDecodeRequired(.url)
-        rerequestable = try container.sdkDecodeIfPresent(.rerequestable)
-        runsRerequestable = try container.sdkDecodeIfPresent(.runsRerequestable)
-        try sdkValidateUri("check_runs_url", checkRunsUrl)
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
-        try sdkValidateUri("url", url)
+        self.after = try container.sdkDecodeNullable(.after)
+        self.app = try container.sdkDecodeRequired(.app)
+        self.before = try container.sdkDecodeNullable(.before)
+        self.checkRunsUrl = try container.sdkDecodeRequired(.checkRunsUrl)
+        self.conclusion = try container.sdkDecodeNullable(.conclusion)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.headBranch = try container.sdkDecodeNullable(.headBranch)
+        self.headCommit = try container.sdkDecodeRequired(.headCommit)
+        self.headSha = try container.sdkDecodeRequired(.headSha)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.latestCheckRunsCount = try container.sdkDecodeRequired(.latestCheckRunsCount)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.pullRequests = try container.sdkDecodeRequired(.pullRequests)
+        self.status = try container.sdkDecodeNullable(.status)
+        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.rerequestable = try container.sdkDecodeIfPresent(.rerequestable)
+        self.runsRerequestable = try container.sdkDecodeIfPresent(.runsRerequestable)
+            try sdkValidateUri("check_runs_url", self.checkRunsUrl)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateUri("url", self.url)
     }
 }
 
-public extension WebhookCheckSuiteRequestedCheckSuite {
-    init(
-        after: String?,
-        app: WebhookCheckSuiteRequestedCheckSuiteApp,
-        before: String?,
-        checkRunsUrl: String,
-        conclusion: WebhookCheckSuiteRequestedCheckSuiteConclusion?,
-        createdAt: Date,
-        headBranch: String?,
-        headCommit: WebhookCheckSuiteRequestedCheckSuiteHeadCommit,
-        headSha: String,
-        id: Int,
-        latestCheckRunsCount: Int,
-        nodeId: String,
-        pullRequests: [WebhookCheckSuiteRequestedCheckSuitePullRequestsItem],
-        status: WebhookCheckSuiteRequestedCheckSuiteStatus?,
-        updatedAt: Date,
-        url: String,
-        rerequestable: Bool? = nil,
-        runsRerequestable: Bool? = nil
-    ) throws {
+extension WebhookCheckSuiteRequestedCheckSuite {
+    public init(after: String?, app: WebhookCheckSuiteRequestedCheckSuiteApp, before: String?, checkRunsUrl: String, conclusion: WebhookCheckSuiteRequestedCheckSuiteConclusion?, createdAt: Date, headBranch: String?, headCommit: WebhookCheckSuiteRequestedCheckSuiteHeadCommit, headSha: String, id: Int, latestCheckRunsCount: Int, nodeId: String, pullRequests: [WebhookCheckSuiteRequestedCheckSuitePullRequestsItem], status: WebhookCheckSuiteRequestedCheckSuiteStatus?, updatedAt: Date, url: String, rerequestable: Bool? = nil, runsRerequestable: Bool? = nil) throws {
         (self.after, self.app) = (after, app)
         (self.before, self.checkRunsUrl) = (before, checkRunsUrl)
         (self.conclusion, self.createdAt) = (conclusion, createdAt)
@@ -449,10 +345,10 @@ public extension WebhookCheckSuiteRequestedCheckSuite {
         (self.pullRequests, self.status) = (pullRequests, status)
         (self.updatedAt, self.url) = (updatedAt, url)
         (self.rerequestable, self.runsRerequestable) = (rerequestable, runsRerequestable)
-        try sdkValidateUri("check_runs_url", self.checkRunsUrl)
-        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-        try sdkValidateUri("url", self.url)
+            try sdkValidateUri("check_runs_url", self.checkRunsUrl)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateUri("url", self.url)
     }
 }
 
@@ -471,43 +367,29 @@ public struct WebhookCheckSuiteRequestedCheckSuitePullRequestsItemBase: Codable 
         case sha
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookCheckSuiteRequestedCheckSuitePullRequestsItemBase {
-    init(from decoder: Decoder) throws {
+extension WebhookCheckSuiteRequestedCheckSuitePullRequestsItemBase {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.ref) else {
-            throw SdkValidationError(
-                field: "ref",
-                code: "required",
-                message: "Validation failed for 'ref': value is required"
-            )
+            throw SdkValidationError(field: "ref", code: "required", message: "Validation failed for 'ref': value is required")
         }
         guard container.contains(.repo) else {
-            throw SdkValidationError(
-                field: "repo",
-                code: "required",
-                message: "Validation failed for 'repo': value is required"
-            )
+            throw SdkValidationError(field: "repo", code: "required", message: "Validation failed for 'repo': value is required")
         }
         guard container.contains(.sha) else {
-            throw SdkValidationError(
-                field: "sha",
-                code: "required",
-                message: "Validation failed for 'sha': value is required"
-            )
+            throw SdkValidationError(field: "sha", code: "required", message: "Validation failed for 'sha': value is required")
         }
-        ref = try container.sdkDecodeRequired(.ref)
-        repo = try container.sdkDecodeRequired(.repo)
-        sha = try container.sdkDecodeRequired(.sha)
+        self.ref = try container.sdkDecodeRequired(.ref)
+        self.repo = try container.sdkDecodeRequired(.repo)
+        self.sha = try container.sdkDecodeRequired(.sha)
     }
 }
 
-public extension WebhookCheckSuiteRequestedCheckSuitePullRequestsItemBase {
-    init(ref: String, repo: WebhookCheckSuiteRequestedCheckSuitePullRequestsItemBaseRepo, sha: String) {
+extension WebhookCheckSuiteRequestedCheckSuitePullRequestsItemBase {
+    public init(ref: String, repo: WebhookCheckSuiteRequestedCheckSuitePullRequestsItemBaseRepo, sha: String) {
         (self.ref, self.repo) = (ref, repo)
         self.sha = sha
     }
@@ -556,8 +438,7 @@ public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissions: Codable {
     /// Optional enumerated value serialized in the `models` wire field.
     public var models: WebhookCheckSuiteRequestedCheckSuiteAppPermissionsModels? = .none
     /// Optional enumerated value serialized in the `organization_administration` wire field.
-    public var organizationAdministration: WebhookCheckSuiteRequestedCheckSuiteAppPermissionsOrganizatioX63d5319fa2? =
-        .none
+    public var organizationAdministration: WebhookCheckSuiteRequestedCheckSuiteAppPermissionsOrganizatioX63d5319fa2? = .none
     /// Optional enumerated value serialized in the `organization_hooks` wire field.
     public var organizationHooks: WebhookCheckSuiteRequestedCheckSuiteAppPermissionsOrganizationHooks? = .none
     /// Optional enumerated value serialized in the `organization_packages` wire field.
@@ -569,11 +450,9 @@ public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissions: Codable {
     /// Optional enumerated value serialized in the `organization_secrets` wire field.
     public var organizationSecrets: WebhookCheckSuiteRequestedCheckSuiteAppPermissionsOrganizationSecrets? = .none
     /// Optional enumerated value serialized in the `organization_self_hosted_runners` wire field.
-    public var organizationSelfHostedRunners: WebhookCheckSuiteRequestedCheckSuiteAppPermissionsOrganizatioX6b36a481b6? =
-        .none
+    public var organizationSelfHostedRunners: WebhookCheckSuiteRequestedCheckSuiteAppPermissionsOrganizatioX6b36a481b6? = .none
     /// Optional enumerated value serialized in the `organization_user_blocking` wire field.
-    public var organizationUserBlocking: WebhookCheckSuiteRequestedCheckSuiteAppPermissionsOrganizatioX4881826930? =
-        .none
+    public var organizationUserBlocking: WebhookCheckSuiteRequestedCheckSuiteAppPermissionsOrganizatioX4881826930? = .none
     /// Optional enumerated value serialized in the `packages` wire field.
     public var packages: WebhookCheckSuiteRequestedCheckSuiteAppPermissionsPackages? = .none
     /// Optional enumerated value serialized in the `pages` wire field.

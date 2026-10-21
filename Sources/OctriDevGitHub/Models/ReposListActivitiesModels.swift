@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Repos domain models
+// Repos domain models
 /// Activity
 public struct Activity: Codable {
     /// Required `integer` value serialized in the `id` wire field.
@@ -41,42 +41,31 @@ public struct Activity: Codable {
         case actor
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension Activity {
-    init(from decoder: Decoder) throws {
+extension Activity {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        before = try container.sdkDecodeRequired(.before)
-        after = try container.sdkDecodeRequired(.after)
-        ref = try container.sdkDecodeRequired(.ref)
-        timestamp = try container.sdkDecodeRequired(.timestamp)
-        activityType = try container.sdkDecodeRequired(.activityType)
-        actor = try container.sdkDecodeNullable(.actor)
-        try sdkValidateDateTime("timestamp", sdkWireString(timestamp))
+        self.id = try container.sdkDecodeRequired(.id)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.before = try container.sdkDecodeRequired(.before)
+        self.after = try container.sdkDecodeRequired(.after)
+        self.ref = try container.sdkDecodeRequired(.ref)
+        self.timestamp = try container.sdkDecodeRequired(.timestamp)
+        self.activityType = try container.sdkDecodeRequired(.activityType)
+        self.actor = try container.sdkDecodeNullable(.actor)
+            try sdkValidateDateTime("timestamp", sdkWireString(self.timestamp))
     }
 }
 
-public extension Activity {
-    init(
-        id: Int,
-        nodeId: String,
-        before: String,
-        after: String,
-        ref: String,
-        timestamp: Date,
-        activityType: ActivityActivityType,
-        actor: NullableSimpleUser?
-    ) throws {
+extension Activity {
+    public init(id: Int, nodeId: String, before: String, after: String, ref: String, timestamp: Date, activityType: ActivityActivityType, actor: NullableSimpleUser?) throws {
         (self.id, self.nodeId) = (id, nodeId)
         (self.before, self.after) = (before, after)
         (self.ref, self.timestamp) = (ref, timestamp)
         (self.activityType, self.actor) = (activityType, actor)
-        try sdkValidateDateTime("timestamp", sdkWireString(self.timestamp))
+            try sdkValidateDateTime("timestamp", sdkWireString(self.timestamp))
     }
 }
 
@@ -84,10 +73,7 @@ public extension Activity {
 public struct ActivityActivityType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let push = ActivityActivityType(rawValue: "push")
     public static let forcePush = ActivityActivityType(rawValue: "force_push")
     public static let branchDeletion = ActivityActivityType(rawValue: "branch_deletion")
@@ -97,7 +83,7 @@ public struct ActivityActivityType: RawRepresentable, Hashable, Codable, Sendabl
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

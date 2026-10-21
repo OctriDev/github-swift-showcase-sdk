@@ -6,36 +6,16 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension MigrationsMethods {
-    /// Retrieves the status and details of a user migration. Use `migration_id` to identify the migration, and check
-    /// `state` to see whether it is pending, exporting, exported, or failed. Once the migration is exported, download
-    /// its archive using the user migration archive endpoint.
+extension MigrationsMethods {
+    /// Retrieves the status and details of a user migration. Use `migration_id` to identify the migration, and check `state` to see whether it is pending, exporting, exported, or failed. Once the migration is exported, download its archive using the user migration archive endpoint.
     ///
-    /// Fetches a single user migration. The response includes the `state` of the migration, which can be one of the
-    /// following values: * `pending` - the migration hasn't started yet. * `exporting` - the migration is in progress.
-    /// * `exported` - the migration finished successfully. * `failed` - the migration failed. Once the migration has
-    /// been `exported` you can [download the migration
-    /// archive](https://docs.github.com/rest/migrations/users#download-a-user-migration-archive).
+    /// Fetches a single user migration. The response includes the `state` of the migration, which can be one of the following values: * `pending` - the migration hasn't started yet. * `exporting` - the migration is in progress. * `exported` - the migration finished successfully. * `failed` - the migration failed. Once the migration has been `exported` you can [download the migration archive](https://docs.github.com/rest/migrations/users#download-a-user-migration-archive).
     ///
     /// - Parameters:
     /// - migrationId: The unique identifier of the migration.
-    static func migrationsGetStatusForAuthenticatedUser(
-        config: ClientConfig,
-        migrationId: Int,
-        exclude: [String]? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> Migration {
-        try await (sdkRequest(
-            "GET",
-            ["/user/migrations/", sdkEncodePathSegment(sdkWireString(migrationId))].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("exclude", values: exclude, style: "form", explode: true),
-            ],
-            decoder: .json,
-            operationId: "migrationsGetStatusForAuthenticatedUser",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self]
-        )).data
+    public static func migrationsGetStatusForAuthenticatedUser(config: ClientConfig, migrationId: Int, exclude: [String]? = nil, requestOptions: RequestOptions? = nil) async throws -> Migration {
+        return try (await sdkRequest("GET", ["/user/migrations/", sdkEncodePathSegment(sdkWireString(migrationId))].joined(), config: config, query: [
+            SdkQueryParameter("exclude", values: exclude, style: "form", explode: true),
+        ], decoder: .json, operationId: "migrationsGetStatusForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
     }
 }

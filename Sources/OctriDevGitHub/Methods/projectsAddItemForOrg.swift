@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ProjectsMethods {
+extension ProjectsMethods {
     /// Add an issue or pull request item to the specified organization owned project.
     ///
     /// - Parameters:
@@ -19,34 +19,9 @@ public extension ProjectsMethods {
     /// - owner: The repository owner login.
     /// - repo: The repository name.
     /// - number: The issue or pull request number.
-    static func projectsAddItemForOrg(
-        config: ClientConfig,
-        org: String,
-        projectNumber: Int,
-        type: ProjectsAddItemForOrgRequestBodyType,
-        id: Int? = nil,
-        owner: String? = nil,
-        repo: String? = nil,
-        number: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ProjectsV2ItemSimple {
+    public static func projectsAddItemForOrg(config: ClientConfig, org: String, projectNumber: Int, type: ProjectsAddItemForOrgRequestBodyType, id: Int? = nil, owner: String? = nil, repo: String? = nil, number: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> ProjectsV2ItemSimple {
         let requestBody = ProjectsAddItemForOrgRequestBody(type: type, id: id, owner: owner, repo: repo, number: number)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/orgs/",
-                sdkEncodePathSegment(sdkWireString(org)),
-                "/projectsV2/",
-                sdkEncodePathSegment(sdkWireString(projectNumber)),
-                "/items",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "projectsAddItemForOrg",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self]
-        )).data
+        return try (await sdkRequest("POST", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/projectsV2/", sdkEncodePathSegment(sdkWireString(projectNumber)), "/items"].joined(), config: config, body: requestBody, decoder: .json, operationId: "projectsAddItemForOrg", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self])).data
     }
 }

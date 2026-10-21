@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// ReposPages domain models
+// ReposPages domain models
 /// Typed representation of the `PagesSourceHash` API schema.
 public struct PagesSourceHash: Codable {
     /// Required `string` value serialized in the `branch` wire field.
@@ -16,35 +16,25 @@ public struct PagesSourceHash: Codable {
         case path
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension PagesSourceHash {
-    init(from decoder: Decoder) throws {
+extension PagesSourceHash {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.branch) else {
-            throw SdkValidationError(
-                field: "branch",
-                code: "required",
-                message: "Validation failed for 'branch': value is required"
-            )
+            throw SdkValidationError(field: "branch", code: "required", message: "Validation failed for 'branch': value is required")
         }
         guard container.contains(.path) else {
-            throw SdkValidationError(
-                field: "path",
-                code: "required",
-                message: "Validation failed for 'path': value is required"
-            )
+            throw SdkValidationError(field: "path", code: "required", message: "Validation failed for 'path': value is required")
         }
-        branch = try container.sdkDecodeRequired(.branch)
-        path = try container.sdkDecodeRequired(.path)
+        self.branch = try container.sdkDecodeRequired(.branch)
+        self.path = try container.sdkDecodeRequired(.path)
     }
 }
 
-public extension PagesSourceHash {
-    init(branch: String, path: String) {
+extension PagesSourceHash {
+    public init(branch: String, path: String) {
         (self.branch, self.path) = (branch, path)
     }
 }
@@ -70,47 +60,33 @@ public struct PagesHttpsCertificate: Codable {
         case expiresAt = "expires_at"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension PagesHttpsCertificate {
-    init(from decoder: Decoder) throws {
+extension PagesHttpsCertificate {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.state) else {
-            throw SdkValidationError(
-                field: "state",
-                code: "required",
-                message: "Validation failed for 'state': value is required"
-            )
+            throw SdkValidationError(field: "state", code: "required", message: "Validation failed for 'state': value is required")
         }
         guard container.contains(.description) else {
-            throw SdkValidationError(
-                field: "description",
-                code: "required",
-                message: "Validation failed for 'description': value is required"
-            )
+            throw SdkValidationError(field: "description", code: "required", message: "Validation failed for 'description': value is required")
         }
         guard container.contains(.domains) else {
-            throw SdkValidationError(
-                field: "domains",
-                code: "required",
-                message: "Validation failed for 'domains': value is required"
-            )
+            throw SdkValidationError(field: "domains", code: "required", message: "Validation failed for 'domains': value is required")
         }
-        state = try container.sdkDecodeRequired(.state)
-        description = try container.sdkDecodeRequired(.description)
-        domains = try container.sdkDecodeRequired(.domains)
-        expiresAt = try container.sdkDecodeIfPresent(.expiresAt)
-        if let value = expiresAt {
+        self.state = try container.sdkDecodeRequired(.state)
+        self.description = try container.sdkDecodeRequired(.description)
+        self.domains = try container.sdkDecodeRequired(.domains)
+        self.expiresAt = try container.sdkDecodeIfPresent(.expiresAt)
+        if let value = self.expiresAt {
             try sdkValidateDate("expires_at", value)
         }
     }
 }
 
-public extension PagesHttpsCertificate {
-    init(state: PagesHttpsCertificateState, description: String, domains: [String], expiresAt: String? = nil) throws {
+extension PagesHttpsCertificate {
+    public init(state: PagesHttpsCertificateState, description: String, domains: [String], expiresAt: String? = nil) throws {
         (self.state, self.description) = (state, description)
         (self.domains, self.expiresAt) = (domains, expiresAt)
         if let value = self.expiresAt {
@@ -123,10 +99,7 @@ public extension PagesHttpsCertificate {
 public struct PagesHttpsCertificateState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let new = PagesHttpsCertificateState(rawValue: "new")
     public static let authorizationCreated = PagesHttpsCertificateState(rawValue: "authorization_created")
     public static let authorizationPending = PagesHttpsCertificateState(rawValue: "authorization_pending")
@@ -142,7 +115,7 @@ public struct PagesHttpsCertificateState: RawRepresentable, Hashable, Codable, S
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

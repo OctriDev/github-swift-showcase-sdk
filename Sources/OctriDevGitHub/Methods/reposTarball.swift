@@ -6,42 +6,17 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ReposMethods {
-    /// Returns a redirect to a tar archive for a repository. Use `ref` to select a branch, tag, or commit; if you omit
-    /// it, the repository's default branch is used. Follow the redirect or use its `Location` header to make a second
-    /// GET request; download links for private repositories expire after five minutes.
+extension ReposMethods {
+    /// Returns a redirect to a tar archive for a repository. Use `ref` to select a branch, tag, or commit; if you omit it, the repository's default branch is used. Follow the redirect or use its `Location` header to make a second GET request; download links for private repositories expire after five minutes.
     ///
-    /// Gets a redirect URL to download a tar archive for a repository. If you omit `:ref`, the repository’s default
-    /// branch (usually `main`) will be used. Please make sure your HTTP framework is configured to follow redirects or
-    /// you will need to use the `Location` header to make a second `GET` request. > [!NOTE] > For private repositories,
-    /// these links are temporary and expire after five minutes.
+    /// Gets a redirect URL to download a tar archive for a repository. If you omit `:ref`, the repository’s default branch (usually `main`) will be used. Please make sure your HTTP framework is configured to follow redirects or you will need to use the `Location` header to make a second `GET` request. > [!NOTE] > For private repositories, these links are temporary and expire after five minutes.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    static func reposDownloadTarballArchive(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        ref: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/tarball/",
-                sdkEncodePathSegment(sdkWireString(ref)),
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "reposDownloadTarballArchive",
-            options: requestOptions
-        )).data
+    public static func reposDownloadTarballArchive(config: ClientConfig, owner: String, repo: String, ref: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/tarball/", sdkEncodePathSegment(sdkWireString(ref))].joined(), config: config, decoder: .empty, operationId: "reposDownloadTarballArchive", options: requestOptions)).data
     }
 }

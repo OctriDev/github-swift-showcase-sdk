@@ -3,31 +3,31 @@
 
 import Foundation
 
-/// WebhooksReview domain models
+// WebhooksReview domain models
 extension WebhooksReviewUser {
     func sdkValidateConstraints() throws {
-        if let value = avatarUrl {
+        if let value = self.avatarUrl {
             try sdkValidateUri("avatar_url", value)
         }
-        if let value = followersUrl {
+        if let value = self.followersUrl {
             try sdkValidateUri("followers_url", value)
         }
-        if let value = htmlUrl {
+        if let value = self.htmlUrl {
             try sdkValidateUri("html_url", value)
         }
-        if let value = organizationsUrl {
+        if let value = self.organizationsUrl {
             try sdkValidateUri("organizations_url", value)
         }
-        if let value = receivedEventsUrl {
+        if let value = self.receivedEventsUrl {
             try sdkValidateUri("received_events_url", value)
         }
-        if let value = reposUrl {
+        if let value = self.reposUrl {
             try sdkValidateUri("repos_url", value)
         }
-        if let value = subscriptionsUrl {
+        if let value = self.subscriptionsUrl {
             try sdkValidateUri("subscriptions_url", value)
         }
-        if let value = url {
+        if let value = self.url {
             try sdkValidateUri("url", value)
         }
     }
@@ -42,27 +42,21 @@ public struct WebhooksReviewLinksPullRequest: Codable {
         case href
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhooksReviewLinksPullRequest {
-    init(from decoder: Decoder) throws {
+extension WebhooksReviewLinksPullRequest {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.href) else {
-            throw SdkValidationError(
-                field: "href",
-                code: "required",
-                message: "Validation failed for 'href': value is required"
-            )
+            throw SdkValidationError(field: "href", code: "required", message: "Validation failed for 'href': value is required")
         }
-        href = try container.sdkDecodeRequired(.href)
+        self.href = try container.sdkDecodeRequired(.href)
     }
 }
 
-public extension WebhooksReviewLinksPullRequest {
-    init(href: String) {
+extension WebhooksReviewLinksPullRequest {
+    public init(href: String) {
         self.href = href
     }
 }
@@ -103,47 +97,34 @@ public struct WebhooksReviewCommentReactions: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhooksReviewCommentReactions {
-    init(from decoder: Decoder) throws {
+extension WebhooksReviewCommentReactions {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        plus1 = try container.sdkDecodeRequired(.plus1)
-        minus1 = try container.sdkDecodeRequired(.minus1)
-        confused = try container.sdkDecodeRequired(.confused)
-        eyes = try container.sdkDecodeRequired(.eyes)
-        heart = try container.sdkDecodeRequired(.heart)
-        hooray = try container.sdkDecodeRequired(.hooray)
-        laugh = try container.sdkDecodeRequired(.laugh)
-        rocket = try container.sdkDecodeRequired(.rocket)
-        totalCount = try container.sdkDecodeRequired(.totalCount)
-        url = try container.sdkDecodeRequired(.url)
-        try sdkValidateUri("url", url)
+        self.plus1 = try container.sdkDecodeRequired(.plus1)
+        self.minus1 = try container.sdkDecodeRequired(.minus1)
+        self.confused = try container.sdkDecodeRequired(.confused)
+        self.eyes = try container.sdkDecodeRequired(.eyes)
+        self.heart = try container.sdkDecodeRequired(.heart)
+        self.hooray = try container.sdkDecodeRequired(.hooray)
+        self.laugh = try container.sdkDecodeRequired(.laugh)
+        self.rocket = try container.sdkDecodeRequired(.rocket)
+        self.totalCount = try container.sdkDecodeRequired(.totalCount)
+        self.url = try container.sdkDecodeRequired(.url)
+            try sdkValidateUri("url", self.url)
     }
 }
 
-public extension WebhooksReviewCommentReactions {
-    init(
-        plus1: Int,
-        minus1: Int,
-        confused: Int,
-        eyes: Int,
-        heart: Int,
-        hooray: Int,
-        laugh: Int,
-        rocket: Int,
-        totalCount: Int,
-        url: String
-    ) throws {
+extension WebhooksReviewCommentReactions {
+    public init(plus1: Int, minus1: Int, confused: Int, eyes: Int, heart: Int, hooray: Int, laugh: Int, rocket: Int, totalCount: Int, url: String) throws {
         (self.plus1, self.minus1) = (plus1, minus1)
         (self.confused, self.eyes) = (confused, eyes)
         (self.heart, self.hooray) = (heart, hooray)
         (self.laugh, self.rocket) = (laugh, rocket)
         (self.totalCount, self.url) = (totalCount, url)
-        try sdkValidateUri("url", self.url)
+            try sdkValidateUri("url", self.url)
     }
 }
 
@@ -189,60 +170,45 @@ public struct WebhooksReview: Codable {
         case updatedAt = "updated_at"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhooksReview {
-    init(from decoder: Decoder) throws {
+extension WebhooksReview {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        links = try container.sdkDecodeRequired(.links)
-        authorAssociation = try container.sdkDecodeRequired(.authorAssociation)
-        body = try container.sdkDecodeNullable(.body)
-        commitId = try container.sdkDecodeRequired(.commitId)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        pullRequestUrl = try container.sdkDecodeRequired(.pullRequestUrl)
-        state = try container.sdkDecodeRequired(.state)
-        submittedAt = try container.sdkDecodeNullable(.submittedAt)
-        user = try container.sdkDecodeNullable(.user)
-        updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateUri("pull_request_url", pullRequestUrl)
-        if let value = submittedAt {
+        self.links = try container.sdkDecodeRequired(.links)
+        self.authorAssociation = try container.sdkDecodeRequired(.authorAssociation)
+        self.body = try container.sdkDecodeNullable(.body)
+        self.commitId = try container.sdkDecodeRequired(.commitId)
+        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.pullRequestUrl = try container.sdkDecodeRequired(.pullRequestUrl)
+        self.state = try container.sdkDecodeRequired(.state)
+        self.submittedAt = try container.sdkDecodeNullable(.submittedAt)
+        self.user = try container.sdkDecodeNullable(.user)
+        self.updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("pull_request_url", self.pullRequestUrl)
+        if let value = self.submittedAt {
             try sdkValidateDateTime("submitted_at", sdkWireString(value))
         }
-        if let value = updatedAt {
+        if let value = self.updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
     }
 }
 
-public extension WebhooksReview {
-    init(
-        links: WebhooksReviewLinks,
-        authorAssociation: WebhooksReviewAuthorAssociation,
-        body: String?,
-        commitId: String,
-        htmlUrl: String,
-        id: Int,
-        nodeId: String,
-        pullRequestUrl: String,
-        state: String,
-        submittedAt: Date?,
-        user: WebhooksReviewUser?,
-        updatedAt: Date? = nil
-    ) throws {
+extension WebhooksReview {
+    public init(links: WebhooksReviewLinks, authorAssociation: WebhooksReviewAuthorAssociation, body: String?, commitId: String, htmlUrl: String, id: Int, nodeId: String, pullRequestUrl: String, state: String, submittedAt: Date?, user: WebhooksReviewUser?, updatedAt: Date? = nil) throws {
         (self.links, self.authorAssociation) = (links, authorAssociation)
         (self.body, self.commitId) = (body, commitId)
         (self.htmlUrl, self.id) = (htmlUrl, id)
         (self.nodeId, self.pullRequestUrl) = (nodeId, pullRequestUrl)
         (self.state, self.submittedAt) = (state, submittedAt)
         (self.user, self.updatedAt) = (user, updatedAt)
-        try sdkValidateUri("html_url", self.htmlUrl)
-        try sdkValidateUri("pull_request_url", self.pullRequestUrl)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("pull_request_url", self.pullRequestUrl)
         if let value = self.submittedAt {
             try sdkValidateDateTime("submitted_at", sdkWireString(value))
         }
@@ -261,27 +227,21 @@ public struct WebhooksReviewCommentLinksHtml: Codable {
         case href
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhooksReviewCommentLinksHtml {
-    init(from decoder: Decoder) throws {
+extension WebhooksReviewCommentLinksHtml {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.href) else {
-            throw SdkValidationError(
-                field: "href",
-                code: "required",
-                message: "Validation failed for 'href': value is required"
-            )
+            throw SdkValidationError(field: "href", code: "required", message: "Validation failed for 'href': value is required")
         }
-        href = try container.sdkDecodeRequired(.href)
+        self.href = try container.sdkDecodeRequired(.href)
     }
 }
 
-public extension WebhooksReviewCommentLinksHtml {
-    init(href: String) {
+extension WebhooksReviewCommentLinksHtml {
+    public init(href: String) {
         self.href = href
     }
 }
@@ -295,27 +255,21 @@ public struct WebhooksReviewLinksHtml: Codable {
         case href
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhooksReviewLinksHtml {
-    init(from decoder: Decoder) throws {
+extension WebhooksReviewLinksHtml {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.href) else {
-            throw SdkValidationError(
-                field: "href",
-                code: "required",
-                message: "Validation failed for 'href': value is required"
-            )
+            throw SdkValidationError(field: "href", code: "required", message: "Validation failed for 'href': value is required")
         }
-        href = try container.sdkDecodeRequired(.href)
+        self.href = try container.sdkDecodeRequired(.href)
     }
 }
 
-public extension WebhooksReviewLinksHtml {
-    init(href: String) {
+extension WebhooksReviewLinksHtml {
+    public init(href: String) {
         self.href = href
     }
 }
@@ -329,27 +283,21 @@ public struct WebhooksReviewCommentLinksSelf: Codable {
         case href
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhooksReviewCommentLinksSelf {
-    init(from decoder: Decoder) throws {
+extension WebhooksReviewCommentLinksSelf {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.href) else {
-            throw SdkValidationError(
-                field: "href",
-                code: "required",
-                message: "Validation failed for 'href': value is required"
-            )
+            throw SdkValidationError(field: "href", code: "required", message: "Validation failed for 'href': value is required")
         }
-        href = try container.sdkDecodeRequired(.href)
+        self.href = try container.sdkDecodeRequired(.href)
     }
 }
 
-public extension WebhooksReviewCommentLinksSelf {
-    init(href: String) {
+extension WebhooksReviewCommentLinksSelf {
+    public init(href: String) {
         self.href = href
     }
 }
@@ -366,35 +314,25 @@ public struct WebhooksReviewLinks: Codable {
         case pullRequest = "pull_request"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhooksReviewLinks {
-    init(from decoder: Decoder) throws {
+extension WebhooksReviewLinks {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.html) else {
-            throw SdkValidationError(
-                field: "html",
-                code: "required",
-                message: "Validation failed for 'html': value is required"
-            )
+            throw SdkValidationError(field: "html", code: "required", message: "Validation failed for 'html': value is required")
         }
         guard container.contains(.pullRequest) else {
-            throw SdkValidationError(
-                field: "pull_request",
-                code: "required",
-                message: "Validation failed for 'pull_request': value is required"
-            )
+            throw SdkValidationError(field: "pull_request", code: "required", message: "Validation failed for 'pull_request': value is required")
         }
-        html = try container.sdkDecodeRequired(.html)
-        pullRequest = try container.sdkDecodeRequired(.pullRequest)
+        self.html = try container.sdkDecodeRequired(.html)
+        self.pullRequest = try container.sdkDecodeRequired(.pullRequest)
     }
 }
 
-public extension WebhooksReviewLinks {
-    init(html: WebhooksReviewLinksHtml, pullRequest: WebhooksReviewLinksPullRequest) {
+extension WebhooksReviewLinks {
+    public init(html: WebhooksReviewLinksHtml, pullRequest: WebhooksReviewLinksPullRequest) {
         (self.html, self.pullRequest) = (html, pullRequest)
     }
 }
@@ -403,10 +341,7 @@ public extension WebhooksReviewLinks {
 public struct WebhooksReviewAuthorAssociation: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let collaborator = WebhooksReviewAuthorAssociation(rawValue: "COLLABORATOR")
     public static let contributor = WebhooksReviewAuthorAssociation(rawValue: "CONTRIBUTOR")
     public static let firstTimer = WebhooksReviewAuthorAssociation(rawValue: "FIRST_TIMER")
@@ -418,7 +353,7 @@ public struct WebhooksReviewAuthorAssociation: RawRepresentable, Hashable, Codab
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -431,16 +366,13 @@ public struct WebhooksReviewAuthorAssociation: RawRepresentable, Hashable, Codab
 public struct WebhooksReviewCommentSide: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let left = WebhooksReviewCommentSide(rawValue: "LEFT")
     public static let right = WebhooksReviewCommentSide(rawValue: "RIGHT")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -453,16 +385,13 @@ public struct WebhooksReviewCommentSide: RawRepresentable, Hashable, Codable, Se
 public struct WebhooksReviewCommentStartSide: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let left = WebhooksReviewCommentStartSide(rawValue: "LEFT")
     public static let right = WebhooksReviewCommentStartSide(rawValue: "RIGHT")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -475,16 +404,13 @@ public struct WebhooksReviewCommentStartSide: RawRepresentable, Hashable, Codabl
 public struct WebhooksReviewCommentSubjectType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let line = WebhooksReviewCommentSubjectType(rawValue: "line")
     public static let file = WebhooksReviewCommentSubjectType(rawValue: "file")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -497,17 +423,14 @@ public struct WebhooksReviewCommentSubjectType: RawRepresentable, Hashable, Coda
 public struct WebhooksReviewCommentUserType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let bot = WebhooksReviewCommentUserType(rawValue: "Bot")
     public static let user = WebhooksReviewCommentUserType(rawValue: "User")
     public static let organization = WebhooksReviewCommentUserType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -520,17 +443,14 @@ public struct WebhooksReviewCommentUserType: RawRepresentable, Hashable, Codable
 public struct WebhooksReviewUserType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let bot = WebhooksReviewUserType(rawValue: "Bot")
     public static let user = WebhooksReviewUserType(rawValue: "User")
     public static let organization = WebhooksReviewUserType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -540,14 +460,10 @@ public struct WebhooksReviewUserType: RawRepresentable, Hashable, Codable, Senda
 }
 
 /// How the author is associated with the repository.
-public struct WebhooksReviewCommentAuthorAssociation: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct WebhooksReviewCommentAuthorAssociation: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let collaborator = WebhooksReviewCommentAuthorAssociation(rawValue: "COLLABORATOR")
     public static let contributor = WebhooksReviewCommentAuthorAssociation(rawValue: "CONTRIBUTOR")
     public static let firstTimer = WebhooksReviewCommentAuthorAssociation(rawValue: "FIRST_TIMER")
@@ -559,7 +475,7 @@ public struct WebhooksReviewCommentAuthorAssociation: RawRepresentable, Hashable
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

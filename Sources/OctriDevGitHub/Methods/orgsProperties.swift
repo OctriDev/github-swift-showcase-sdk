@@ -6,42 +6,16 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension OrgsMethods {
-    /// Gets the registered GitHub App installations used to read and write external custom properties for an
-    /// organization. A GitHub App installation token will only be able to see its own registration info, whereas an
-    /// authenticated user will be able to see all registrations for the organization. To use this endpoint, the
-    /// authenticated caller must have the `organization_external_properties_for_repos:admin` permission.
+extension OrgsMethods {
+    /// Gets the registered GitHub App installations used to read and write external custom properties for an organization. A GitHub App installation token will only be able to see its own registration info, whereas an authenticated user will be able to see all registrations for the organization. To use this endpoint, the authenticated caller must have the `organization_external_properties_for_repos:admin` permission.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
-    static func orgsExternalPropertiesForReposGetOrganizationAppInstallations(
-        config: ClientConfig,
-        org: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [OrganizationExternalPropertyInstallation] {
-        try await (sdkRequest(
-            "GET",
-            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/properties/installations"].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "orgsExternalPropertiesForReposGetOrganizationAppInstallations",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self]
-        )).data
+    public static func orgsExternalPropertiesForReposGetOrganizationAppInstallations(config: ClientConfig, org: String, requestOptions: RequestOptions? = nil) async throws -> [OrganizationExternalPropertyInstallation] {
+        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/properties/installations"].joined(), config: config, decoder: .json, operationId: "orgsExternalPropertiesForReposGetOrganizationAppInstallations", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
     }
 
-    /// Registers a GitHub App installation so it can read and write external custom properties for an organization, and
-    /// assigns it a display name. The display name must be 1 to 15 characters and contain only letters and numbers.
-    /// Capitalization is preserved as entered. An app installation can only be registered once, and its display name
-    /// can't be changed afterward. Calling with an app installation that has already been registered returns a `422`
-    /// response with an `already_exists` error code for `installation_id`. If the display name is already in use by
-    /// another app installation in the organization, the response is `422` with an `already_exists` error code for
-    /// `display_name`. An invalid display name also returns `422`. The app installation being registered must have
-    /// write or admin permission for organization external custom properties for repositories. If it doesn't, the
-    /// response is `422`. This is the permission of the installation being registered, which isn't necessarily the
-    /// caller. Uninstalling the GitHub App unregisters it, and removes the external custom properties it created. To
-    /// use this endpoint, the authenticated caller must have the `organization_external_properties_for_repos:admin`
-    /// permission.
+    /// Registers a GitHub App installation so it can read and write external custom properties for an organization, and assigns it a display name. The display name must be 1 to 15 characters and contain only letters and numbers. Capitalization is preserved as entered. An app installation can only be registered once, and its display name can't be changed afterward. Calling with an app installation that has already been registered returns a `422` response with an `already_exists` error code for `installation_id`. If the display name is already in use by another app installation in the organization, the response is `422` with an `already_exists` error code for `display_name`. An invalid display name also returns `422`. The app installation being registered must have write or admin permission for organization external custom properties for repositories. If it doesn't, the response is `422`. This is the permission of the installation being registered, which isn't necessarily the caller. Uninstalling the GitHub App unregisters it, and removes the external custom properties it created. To use this endpoint, the authenticated caller must have the `organization_external_properties_for_repos:admin` permission.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
@@ -54,31 +28,13 @@ public extension OrgsMethods {
     ///   GitHub App installation, this defaults to the authenticated installation and
     ///   can be omitted. It is required for all other callers (users and fine-grained
     ///   personal access tokens).
-    static func orgsExternalPropertiesForReposRegisterOrganizationAppInstallation(
-        config: ClientConfig,
-        org: String,
-        displayName: String,
-        installationId: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> OrganizationExternalPropertyInstallation {
+    public static func orgsExternalPropertiesForReposRegisterOrganizationAppInstallation(config: ClientConfig, org: String, displayName: String, installationId: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> OrganizationExternalPropertyInstallation {
         try validateLength("display_name", displayName, min: 1, max: 15)
         try sdkValidatePattern("display_name", displayName, sdkPattern4aa403e626b8)
 
-        let requestBody = OrgsExternalPropertiesForReposRegisterOrganizationAppInstallaX6e933446ef(
-            displayName: displayName,
-            installationId: installationId
-        )
+        let requestBody = OrgsExternalPropertiesForReposRegisterOrganizationAppInstallaX6e933446ef(displayName: displayName, installationId: installationId)
 
-        return try await (sdkRequest(
-            "POST",
-            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/properties/installations"].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "orgsExternalPropertiesForReposRegisterOrganizationAppInstallation",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self]
-        )).data
+        return try (await sdkRequest("POST", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/properties/installations"].joined(), config: config, body: requestBody, decoder: .json, operationId: "orgsExternalPropertiesForReposRegisterOrganizationAppInstallation", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
     }
 
     private struct OrgsExternalPropertiesForReposRegisterOrganizationAppInstallaX6e933446ef: Encodable {
@@ -87,8 +43,8 @@ public extension OrgsMethods {
 
         func encode(to encoder: Encoder) throws {
             var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-            try keyedContainer.encode(displayName, forKey: SdkCodingKey("display_name"))
-            try keyedContainer.encodeIfPresent(installationId, forKey: SdkCodingKey("installation_id"))
+            try keyedContainer.encode(self.displayName, forKey: SdkCodingKey("display_name"))
+            try keyedContainer.encodeIfPresent(self.installationId, forKey: SdkCodingKey("installation_id"))
         }
     }
 }

@@ -6,41 +6,15 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension AgentAutomationsMethods {
-    /// Deletes an automation in a repository. **Fine-grained access tokens for "Delete an automation for a
-    /// repository"** This endpoint works with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app)
-    /// * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token)
-    /// The fine-grained token must have one of the following permission sets for each repository accessed by this
-    /// request: * "Agent tasks" repository permissions (read and write) * "Contents" repository permissions (read and
-    /// write) The required permission set depends on each repository's Automation permission configuration. GitHub App
-    /// installation access tokens are not supported for this endpoint.
+extension AgentAutomationsMethods {
+    /// Deletes an automation in a repository. **Fine-grained access tokens for "Delete an automation for a repository"** This endpoint works with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app) * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) The fine-grained token must have one of the following permission sets for each repository accessed by this request: * "Agent tasks" repository permissions (read and write) * "Contents" repository permissions (read and write) The required permission set depends on each repository's Automation permission configuration. GitHub App installation access tokens are not supported for this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
     ///   sensitive.
     /// - repo: The name of the repository. The name is not case sensitive.
     /// - automationId: The unique identifier of the automation.
-    static func agentAutomationsDeleteRepoAutomation(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        automationId: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "DELETE",
-            [
-                "/agents/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/automations/",
-                sdkEncodePathSegment(sdkWireString(automationId)),
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "agentAutomationsDeleteRepoAutomation",
-            options: requestOptions
-        )).data
+    public static func agentAutomationsDeleteRepoAutomation(config: ClientConfig, owner: String, repo: String, automationId: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("DELETE", ["/agents/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/automations/", sdkEncodePathSegment(sdkWireString(automationId))].joined(), config: config, decoder: .empty, operationId: "agentAutomationsDeleteRepoAutomation", options: requestOptions)).data
     }
 }

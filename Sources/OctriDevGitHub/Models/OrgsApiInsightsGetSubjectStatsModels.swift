@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Orgs domain models
+// Orgs domain models
 public typealias ApiInsightsSubjectStats = [ApiInsightsSubjectStatsItem]
 
 public struct ApiInsightsSubjectStatsItem: Codable {
@@ -26,34 +26,26 @@ public struct ApiInsightsSubjectStatsItem: Codable {
     }
 
     init() {
-        (subjectType, subjectName, subjectId, totalRequestCount, rateLimitedRequestCount) = (nil, nil, nil, nil, nil)
-        (lastRateLimitedTimestamp, lastRequestTimestamp) = (nil, nil)
+        (self.subjectType, self.subjectName, self.subjectId, self.totalRequestCount, self.rateLimitedRequestCount) = (nil, nil, nil, nil, nil)
+        (self.lastRateLimitedTimestamp, self.lastRequestTimestamp) = (nil, nil)
     }
 }
 
-public extension ApiInsightsSubjectStatsItem {
-    init(from decoder: Decoder) throws {
+extension ApiInsightsSubjectStatsItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        subjectType = try container.sdkDecodeIfPresent(.subjectType)
-        subjectName = try container.sdkDecodeIfPresent(.subjectName)
-        subjectId = try container.sdkDecodeIfPresent(.subjectId)
-        totalRequestCount = try container.sdkDecodeIfPresent(.totalRequestCount)
-        rateLimitedRequestCount = try container.sdkDecodeIfPresent(.rateLimitedRequestCount)
-        lastRateLimitedTimestamp = try container.sdkDecodeIfPresent(.lastRateLimitedTimestamp)
-        lastRequestTimestamp = try container.sdkDecodeIfPresent(.lastRequestTimestamp)
+        self.subjectType = try container.sdkDecodeIfPresent(.subjectType)
+        self.subjectName = try container.sdkDecodeIfPresent(.subjectName)
+        self.subjectId = try container.sdkDecodeIfPresent(.subjectId)
+        self.totalRequestCount = try container.sdkDecodeIfPresent(.totalRequestCount)
+        self.rateLimitedRequestCount = try container.sdkDecodeIfPresent(.rateLimitedRequestCount)
+        self.lastRateLimitedTimestamp = try container.sdkDecodeIfPresent(.lastRateLimitedTimestamp)
+        self.lastRequestTimestamp = try container.sdkDecodeIfPresent(.lastRequestTimestamp)
     }
 }
 
-public extension ApiInsightsSubjectStatsItem {
-    init(
-        subjectType: String? = nil,
-        subjectName: String? = nil,
-        subjectId: Int? = nil,
-        totalRequestCount: Int? = nil,
-        rateLimitedRequestCount: Int? = nil,
-        lastRateLimitedTimestamp: String? = nil,
-        lastRequestTimestamp: String? = nil
-    ) {
+extension ApiInsightsSubjectStatsItem {
+    public init(subjectType: String? = nil, subjectName: String? = nil, subjectId: Int? = nil, totalRequestCount: Int? = nil, rateLimitedRequestCount: Int? = nil, lastRateLimitedTimestamp: String? = nil, lastRequestTimestamp: String? = nil) {
         self.init()
         (self.subjectType, self.subjectName) = (subjectType, subjectName)
         (self.subjectId, self.totalRequestCount) = (subjectId, totalRequestCount)

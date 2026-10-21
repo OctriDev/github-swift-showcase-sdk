@@ -6,13 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension CopilotMethods {
-    /// Disables Copilot cloud agent for the specified organizations within the enterprise. The enterprise's coding
-    /// agent policy must be set to `enabled_for_selected_orgs` before using this endpoint. Organizations can be
-    /// specified by login or matched via custom properties. Only organizations that have Copilot enabled and belong to
-    /// the enterprise will be affected. Only enterprise owners can remove organizations from the coding agent policy.
-    /// OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or
-    /// `admin:enterprise` scopes to use this endpoint.
+extension CopilotMethods {
+    /// Disables Copilot cloud agent for the specified organizations within the enterprise. The enterprise's coding agent policy must be set to `enabled_for_selected_orgs` before using this endpoint. Organizations can be specified by login or matched via custom properties. Only organizations that have Copilot enabled and belong to the enterprise will be affected. Only enterprise owners can remove organizations from the coding agent policy. OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `admin:enterprise` scopes to use this endpoint.
     ///
     /// - Parameters:
     /// - enterprise: The slug version of the enterprise name.
@@ -23,31 +18,9 @@ public extension CopilotMethods {
     ///   be included. This is a one-time operation, setting the property on an
     ///   organization in the future will not automatically update its coding agent
     ///   policy.
-    static func copilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy(
-        config: ClientConfig,
-        enterprise: String,
-        organizations: [String]? = nil,
-        customProperties: CopilotRemoveOrganizationsFromEnterpriseCodingAgentPolicyCustXd9c994a561? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        let requestBody = CopilotRemoveOrganizationsFromEnterpriseCodingAgentPolicyRequestBody(
-            organizations: organizations,
-            customProperties: customProperties
-        )
+    public static func copilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy(config: ClientConfig, enterprise: String, organizations: [String]? = nil, customProperties: CopilotRemoveOrganizationsFromEnterpriseCodingAgentPolicyCustXd9c994a561? = nil, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        let requestBody = CopilotRemoveOrganizationsFromEnterpriseCodingAgentPolicyRequestBody(organizations: organizations, customProperties: customProperties)
 
-        return try await (sdkRequest(
-            "DELETE",
-            [
-                "/enterprises/",
-                sdkEncodePathSegment(sdkWireString(enterprise)),
-                "/copilot/policies/coding_agent/organizations",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            decoder: .empty,
-            operationId: "copilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy",
-            options: requestOptions,
-            errors: ["400": BasicError.self]
-        )).data
+        return try (await sdkRequest("DELETE", ["/enterprises/", sdkEncodePathSegment(sdkWireString(enterprise)), "/copilot/policies/coding_agent/organizations"].joined(), config: config, body: requestBody, decoder: .empty, operationId: "copilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy", options: requestOptions, errors: ["400": BasicError.self])).data
     }
 }

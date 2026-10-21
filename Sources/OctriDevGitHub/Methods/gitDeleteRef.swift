@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension GitMethods {
-    /// Deletes a Git reference from a repository. Use `owner` and `repo` to identify the repository and `ref` to select
-    /// the reference to remove. The default branch cannot be deleted.
+extension GitMethods {
+    /// Deletes a Git reference from a repository. Use `owner` and `repo` to identify the repository and `ref` to select the reference to remove. The default branch cannot be deleted.
     ///
     /// Deletes the provided reference.
     ///
@@ -20,28 +19,7 @@ public extension GitMethods {
     /// - ref: The Git reference. For more information, see "[Git
     ///   References](https://git-scm.com/book/en/v2/Git-Internals-Git-References)" in
     ///   the Git documentation.
-    static func gitDeleteRef(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        ref: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "DELETE",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/git/refs/",
-                sdkEncodePathSegment(sdkWireString(ref)),
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "gitDeleteRef",
-            options: requestOptions,
-            errors: ["409": BasicError.self]
-        )).data
+    public static func gitDeleteRef(config: ClientConfig, owner: String, repo: String, ref: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/git/refs/", sdkEncodePathSegment(sdkWireString(ref))].joined(), config: config, decoder: .empty, operationId: "gitDeleteRef", options: requestOptions, errors: ["409": BasicError.self])).data
     }
 }

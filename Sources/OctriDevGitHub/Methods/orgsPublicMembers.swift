@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension OrgsMethods {
+extension OrgsMethods {
     /// Members of an organization can choose to have their membership publicized or not.
     ///
     /// - Parameters:
@@ -19,25 +19,11 @@ public extension OrgsMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    static func orgsListPublicMembers(
-        config: ClientConfig,
-        org: String,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [SimpleUser] {
-        try await (sdkRequest(
-            "GET",
-            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/public_members"].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("page", value: page),
-            ],
-            decoder: .json,
-            operationId: "orgsListPublicMembers",
-            options: requestOptions
-        )).data
+    public static func orgsListPublicMembers(config: ClientConfig, org: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [SimpleUser] {
+        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/public_members"].joined(), config: config, query: [
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("page", value: page),
+        ], decoder: .json, operationId: "orgsListPublicMembers", options: requestOptions)).data
     }
 
     /// Check if the provided user is a public member of the organization.
@@ -45,24 +31,7 @@ public extension OrgsMethods {
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - username: The handle for the GitHub user account.
-    static func orgsCheckPublicMembershipForUser(
-        config: ClientConfig,
-        org: String,
-        username: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/orgs/",
-                sdkEncodePathSegment(sdkWireString(org)),
-                "/public_members/",
-                sdkEncodePathSegment(sdkWireString(username)),
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "orgsCheckPublicMembershipForUser",
-            options: requestOptions
-        )).data
+    public static func orgsCheckPublicMembershipForUser(config: ClientConfig, org: String, username: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/public_members/", sdkEncodePathSegment(sdkWireString(username))].joined(), config: config, decoder: .empty, operationId: "orgsCheckPublicMembershipForUser", options: requestOptions)).data
     }
 }

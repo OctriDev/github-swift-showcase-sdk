@@ -40,13 +40,13 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.createIssueField(
-                org: decoded("\"org\""),
-                name: decoded("\"Priority\""),
-                dataType: decoded("\"single_select\""),
-                description: decoded("\"Level of importance for the issue\""),
-                visibility: decoded("null"),
-                options: decoded(sdkMethodFixture1134Value1)
-            )
+            org: decoded("\"org\""),
+            name: decoded("\"Priority\""),
+            dataType: decoded("\"single_select\""),
+            description: decoded("\"Level of importance for the issue\""),
+            visibility: decoded("null"),
+            options: decoded(sdkMethodFixture1134Value1)
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -95,12 +95,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.createIssueType(
-                org: decoded("\"org\""),
-                name: decoded("\"Epic\""),
-                isEnabled: decoded("true"),
-                description: decoded("\"An issue type for a multi-week tracking of work\""),
-                color: decoded("\"green\"")
-            )
+            org: decoded("\"org\""),
+            name: decoded("\"Epic\""),
+            isEnabled: decoded("true"),
+            description: decoded("\"An issue type for a multi-week tracking of work\""),
+            color: decoded("\"green\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -149,12 +149,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.createWebhook(
-                org: decoded("\"org\""),
-                name: decoded("\"web\""),
-                config: decoded("{\"url\":\"http://example.com/webhook\",\"content_type\":\"json\"}"),
-                events: decoded("[\"push\",\"pull_request\"]"),
-                active: decoded("true")
-            )
+            org: decoded("\"org\""),
+            name: decoded("\"web\""),
+            config: decoded("{\"url\":\"http://example.com/webhook\",\"content_type\":\"json\"}"),
+            events: decoded("[\"push\",\"pull_request\"]"),
+            active: decoded("true")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -170,17 +170,12 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitXad4e51920dReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitXad4e51920dReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        var options = try OrgsMethods.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitionOptions(
-            org: decoded("\"org\""),
-            customPropertyName: decoded("\"Example Name\""),
-            valueType: decoded("\"single_select\"")
-        )
+        var options = try OrgsMethods.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitionOptions(org: decoded("\"org\""), customPropertyName: decoded("\"Example Name\""), valueType: decoded("\"single_select\""))
         options.required = try decoded("true")
         options.defaultValue = try decoded("\"production\"")
         options.description = try decoded("\"Prod or dev environment\"")
@@ -200,17 +195,12 @@ extension SdkMethodTests {
         )
     }
 
-    func testOrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitX803f4078a5ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitX803f4078a5ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
         _ = client
-        var options = try OrgsMethods.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitionOptions(
-            org: decoded("\"org\""),
-            customPropertyName: decoded("\"Example Name\""),
-            valueType: decoded("\"single_select\"")
-        )
+        var options = try OrgsMethods.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitionOptions(org: decoded("\"org\""), customPropertyName: decoded("\"Example Name\""), valueType: decoded("\"single_select\""))
         options.required = try decoded("true")
         options.defaultValue = try decoded("\"production\"")
         options.description = try decoded("\"Prod or dev environment\"")
@@ -223,8 +213,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.customPropertiesForReposCreateOrUpdateOrganizationDefinition(
-                options: options
-            )
+            options: options
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -240,8 +230,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitXda477d7b17ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitXda477d7b17ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -260,8 +249,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testOrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitX37acca8ddcReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitX37acca8ddcReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -272,9 +260,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.customPropertiesForReposCreateOrUpdateOrganizationDefinitions(
-                org: decoded("\"org\""),
-                properties: decoded(sdkMethodFixture1142Value1)
-            )
+            org: decoded("\"org\""),
+            properties: decoded(sdkMethodFixture1142Value1)
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -290,8 +278,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOrgsCustomPropertiesForReposCreateOrUpdateOrganizationValuesOXe57f22c19cReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOrgsCustomPropertiesForReposCreateOrUpdateOrganizationValuesOXe57f22c19cReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -304,8 +291,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOrgsCustomPropertiesForReposCreateOrUpdateOrganizationValuesOX2a5af179ddReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOrgsCustomPropertiesForReposCreateOrUpdateOrganizationValuesOX2a5af179ddReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -316,10 +302,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.customPropertiesForReposCreateOrUpdateOrganizationValues(
-                org: decoded("\"org\""),
-                repositoryNames: decoded("[\"Hello-World\",\"octo-repo\"]"),
-                properties: decoded(sdkMethodFixture1144Value1)
-            )
+            org: decoded("\"org\""),
+            repositoryNames: decoded("[\"Hello-World\",\"octo-repo\"]"),
+            properties: decoded(sdkMethodFixture1144Value1)
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -335,8 +321,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOrgsCustomPropertiesForReposDeleteOrganizationDefinitionOrgsCX4fb8297294ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOrgsCustomPropertiesForReposDeleteOrganizationDefinitionOrgsCX4fb8297294ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -348,8 +333,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOrgsCustomPropertiesForReposDeleteOrganizationDefinitionOrgsCX1fe9d04d58ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOrgsCustomPropertiesForReposDeleteOrganizationDefinitionOrgsCX1fe9d04d58ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -360,9 +344,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.customPropertiesForReposDeleteOrganizationDefinition(
-                org: decoded("\"org\""),
-                customPropertyName: decoded("\"Example Name\"")
-            )
+            org: decoded("\"org\""),
+            customPropertyName: decoded("\"Example Name\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -378,8 +362,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOrgsCustomPropertiesForReposGetOrganizationDefinitionOrgsCustX89f6c26d4aReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOrgsCustomPropertiesForReposGetOrganizationDefinitionOrgsCustX89f6c26d4aReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -398,8 +381,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testOrgsCustomPropertiesForReposGetOrganizationDefinitionOrgsCustX33d18d7711ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOrgsCustomPropertiesForReposGetOrganizationDefinitionOrgsCustX33d18d7711ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -410,9 +392,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.customPropertiesForReposGetOrganizationDefinition(
-                org: decoded("\"org\""),
-                customPropertyName: decoded("\"Example Name\"")
-            )
+            org: decoded("\"org\""),
+            customPropertyName: decoded("\"Example Name\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -428,8 +410,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOrgsCustomPropertiesForReposGetOrganizationDefinitionsOrgsCusX581c72281dReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOrgsCustomPropertiesForReposGetOrganizationDefinitionsOrgsCusX581c72281dReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -447,8 +428,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testOrgsCustomPropertiesForReposGetOrganizationDefinitionsOrgsCusX0c0a2cbed5ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOrgsCustomPropertiesForReposGetOrganizationDefinitionsOrgsCusX0c0a2cbed5ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -459,8 +439,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.customPropertiesForReposGetOrganizationDefinitions(
-                org: decoded("\"org\"")
-            )
+            org: decoded("\"org\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -476,8 +456,7 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOrgsCustomPropertiesForReposGetOrganizationValuesOrgsCustomPrXff84b0066fReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOrgsCustomPropertiesForReposGetOrganizationValuesOrgsCustomPrXff84b0066fReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -498,8 +477,7 @@ extension SdkMethodTests {
         )
     }
 
-    func testOrgsCustomPropertiesForReposGetOrganizationValuesOrgsCustomPrXe7158fc023ReachesMockAndDecodesResponse(
-    ) async throws {
+    func testOrgsCustomPropertiesForReposGetOrganizationValuesOrgsCustomPrXe7158fc023ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -510,11 +488,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.customPropertiesForReposGetOrganizationValues(
-                org: decoded("\"org\""),
-                perPage: decoded("30"),
-                page: decoded("1"),
-                repositoryQuery: decoded("\"repository_query\"")
-            )
+            org: decoded("\"org\""),
+            perPage: decoded("30"),
+            page: decoded("1"),
+            repositoryQuery: decoded("\"repository_query\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)

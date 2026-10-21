@@ -6,39 +6,16 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ProjectsMethods {
-    /// Creates a field in an organization-owned project. Supply a request body matching a supported field
-    /// configuration, such as an issue field reference or a named field with its data type. A single-select field
-    /// configuration includes its available options.
+extension ProjectsMethods {
+    /// Creates a field in an organization-owned project. Supply a request body matching a supported field configuration, such as an issue field reference or a named field with its data type. A single-select field configuration includes its available options.
     ///
     /// Add a field to an organization-owned project.
     ///
     /// - Parameters:
     /// - projectNumber: The project's number.
     /// - org: The organization name. The name is not case sensitive.
-    static func projectsAddFieldForOrg(
-        config: ClientConfig,
-        projectNumber: Int,
-        org: String,
-        body: ProjectsAddFieldForOrgRequestBody,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ProjectsV2Field {
-        try await (sdkRequest(
-            "POST",
-            [
-                "/orgs/",
-                sdkEncodePathSegment(sdkWireString(org)),
-                "/projectsV2/",
-                sdkEncodePathSegment(sdkWireString(projectNumber)),
-                "/fields",
-            ].joined(),
-            config: config,
-            rawBody: sdkEncodeBody(body, contentType: "application/json"),
-            decoder: .json,
-            operationId: "projectsAddFieldForOrg",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self, "422": ValidationError.self]
-        )).data
+    public static func projectsAddFieldForOrg(config: ClientConfig, projectNumber: Int, org: String, body: ProjectsAddFieldForOrgRequestBody, requestOptions: RequestOptions? = nil) async throws -> ProjectsV2Field {
+        return try (await sdkRequest("POST", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/projectsV2/", sdkEncodePathSegment(sdkWireString(projectNumber)), "/fields"].joined(), config: config, rawBody: (try sdkEncodeBody(body, contentType: "application/json")), decoder: .json, operationId: "projectsAddFieldForOrg", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "422": ValidationError.self])).data
     }
 
     /// Get a specific field for an organization-owned project.
@@ -47,28 +24,7 @@ public extension ProjectsMethods {
     /// - projectNumber: The project's number.
     /// - fieldId: The unique identifier of the field.
     /// - org: The organization name. The name is not case sensitive.
-    static func projectsGetFieldForOrg(
-        config: ClientConfig,
-        projectNumber: Int,
-        fieldId: Int,
-        org: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ProjectsV2Field {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/orgs/",
-                sdkEncodePathSegment(sdkWireString(org)),
-                "/projectsV2/",
-                sdkEncodePathSegment(sdkWireString(projectNumber)),
-                "/fields/",
-                sdkEncodePathSegment(sdkWireString(fieldId)),
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "projectsGetFieldForOrg",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self]
-        )).data
+    public static func projectsGetFieldForOrg(config: ClientConfig, projectNumber: Int, fieldId: Int, org: String, requestOptions: RequestOptions? = nil) async throws -> ProjectsV2Field {
+        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/projectsV2/", sdkEncodePathSegment(sdkWireString(projectNumber)), "/fields/", sdkEncodePathSegment(sdkWireString(fieldId))].joined(), config: config, decoder: .json, operationId: "projectsGetFieldForOrg", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self])).data
     }
 }

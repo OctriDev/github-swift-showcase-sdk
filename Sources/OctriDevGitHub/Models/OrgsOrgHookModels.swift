@@ -3,31 +3,19 @@
 
 import Foundation
 
-/// Orgs domain models
-public extension OrgHook {
-    init(
-        id: Int,
-        url: String,
-        pingUrl: String,
-        name: String,
-        events: [String],
-        active: Bool,
-        config: OrgHookConfig,
-        updatedAt: Date,
-        createdAt: Date,
-        type: String,
-        deliveriesUrl: String? = nil
-    ) throws {
+// Orgs domain models
+extension OrgHook {
+    public init(id: Int, url: String, pingUrl: String, name: String, events: [String], active: Bool, config: OrgHookConfig, updatedAt: Date, createdAt: Date, type: String, deliveriesUrl: String? = nil) throws {
         (self.id, self.url) = (id, url)
         (self.pingUrl, self.name) = (pingUrl, name)
         (self.events, self.active) = (events, active)
         (self.config, self.updatedAt) = (config, updatedAt)
         (self.createdAt, self.type) = (createdAt, type)
         self.deliveriesUrl = deliveriesUrl
-        try sdkValidateUri("url", self.url)
-        try sdkValidateUri("ping_url", self.pingUrl)
-        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("ping_url", self.pingUrl)
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
         if let value = self.deliveriesUrl {
             try sdkValidateUri("deliveries_url", value)
         }
@@ -43,27 +31,21 @@ public struct OrgMembershipPermissions: Codable {
         case canCreateRepository = "can_create_repository"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension OrgMembershipPermissions {
-    init(from decoder: Decoder) throws {
+extension OrgMembershipPermissions {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.canCreateRepository) else {
-            throw SdkValidationError(
-                field: "can_create_repository",
-                code: "required",
-                message: "Validation failed for 'can_create_repository': value is required"
-            )
+            throw SdkValidationError(field: "can_create_repository", code: "required", message: "Validation failed for 'can_create_repository': value is required")
         }
-        canCreateRepository = try container.sdkDecodeRequired(.canCreateRepository)
+        self.canCreateRepository = try container.sdkDecodeRequired(.canCreateRepository)
     }
 }
 
-public extension OrgMembershipPermissions {
-    init(canCreateRepository: Bool) {
+extension OrgMembershipPermissions {
+    public init(canCreateRepository: Bool) {
         self.canCreateRepository = canCreateRepository
     }
 }
@@ -107,57 +89,36 @@ public struct CustomProperty: Codable {
         case requireExplicitValues = "require_explicit_values"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension CustomProperty {
-    init(from decoder: Decoder) throws {
+extension CustomProperty {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.propertyName) else {
-            throw SdkValidationError(
-                field: "property_name",
-                code: "required",
-                message: "Validation failed for 'property_name': value is required"
-            )
+            throw SdkValidationError(field: "property_name", code: "required", message: "Validation failed for 'property_name': value is required")
         }
         guard container.contains(.valueType) else {
-            throw SdkValidationError(
-                field: "value_type",
-                code: "required",
-                message: "Validation failed for 'value_type': value is required"
-            )
+            throw SdkValidationError(field: "value_type", code: "required", message: "Validation failed for 'value_type': value is required")
         }
-        propertyName = try container.sdkDecodeRequired(.propertyName)
-        valueType = try container.sdkDecodeRequired(.valueType)
-        url = try container.sdkDecodeIfPresent(.url)
-        sourceType = try container.sdkDecodeIfPresent(.sourceType)
-        required = try container.sdkDecodeIfPresent(.required)
-        defaultValue = try container.sdkDecodeIfPresent(.defaultValue)
-        description = try container.sdkDecodeIfPresent(.description)
-        allowedValues = try container.sdkDecodeIfPresent(.allowedValues)
-        valuesEditableBy = try container.sdkDecodeIfPresent(.valuesEditableBy)
-        requireExplicitValues = try container.sdkDecodeIfPresent(.requireExplicitValues)
-        if let value = url {
+        self.propertyName = try container.sdkDecodeRequired(.propertyName)
+        self.valueType = try container.sdkDecodeRequired(.valueType)
+        self.url = try container.sdkDecodeIfPresent(.url)
+        self.sourceType = try container.sdkDecodeIfPresent(.sourceType)
+        self.required = try container.sdkDecodeIfPresent(.required)
+        self.defaultValue = try container.sdkDecodeIfPresent(.defaultValue)
+        self.description = try container.sdkDecodeIfPresent(.description)
+        self.allowedValues = try container.sdkDecodeIfPresent(.allowedValues)
+        self.valuesEditableBy = try container.sdkDecodeIfPresent(.valuesEditableBy)
+        self.requireExplicitValues = try container.sdkDecodeIfPresent(.requireExplicitValues)
+        if let value = self.url {
             try sdkValidateUri("url", value)
         }
     }
 }
 
-public extension CustomProperty {
-    init(
-        propertyName: String,
-        valueType: CustomPropertyValueType,
-        url: String? = nil,
-        sourceType: CustomPropertySourceType? = nil,
-        required: Bool? = nil,
-        defaultValue: CustomPropertyDefaultValue? = nil,
-        description: String? = nil,
-        allowedValues: [String]? = nil,
-        valuesEditableBy: CustomPropertyValuesEditableBy? = nil,
-        requireExplicitValues: Bool? = nil
-    ) throws {
+extension CustomProperty {
+    public init(propertyName: String, valueType: CustomPropertyValueType, url: String? = nil, sourceType: CustomPropertySourceType? = nil, required: Bool? = nil, defaultValue: CustomPropertyDefaultValue? = nil, description: String? = nil, allowedValues: [String]? = nil, valuesEditableBy: CustomPropertyValuesEditableBy? = nil, requireExplicitValues: Bool? = nil) throws {
         (self.propertyName, self.valueType) = (propertyName, valueType)
         (self.url, self.sourceType) = (url, sourceType)
         (self.required, self.defaultValue) = (required, defaultValue)
@@ -209,46 +170,34 @@ public struct ArtifactDeploymentRecord: Codable {
     }
 
     init() {
-        (id, digest, logicalEnvironment, physicalEnvironment, cluster) = (nil, nil, nil, nil, nil)
-        (deploymentName, tags, runtimeRisks, createdAt, updatedAt) = (nil, nil, nil, nil, nil)
-        attestationId = nil
+        (self.id, self.digest, self.logicalEnvironment, self.physicalEnvironment, self.cluster) = (nil, nil, nil, nil, nil)
+        (self.deploymentName, self.tags, self.runtimeRisks, self.createdAt, self.updatedAt) = (nil, nil, nil, nil, nil)
+        self.attestationId = nil
     }
 }
 
-public extension ArtifactDeploymentRecord {
-    init(from decoder: Decoder) throws {
+extension ArtifactDeploymentRecord {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeIfPresent(.id)
-        digest = try container.sdkDecodeIfPresent(.digest)
-        logicalEnvironment = try container.sdkDecodeIfPresent(.logicalEnvironment)
-        physicalEnvironment = try container.sdkDecodeIfPresent(.physicalEnvironment)
-        cluster = try container.sdkDecodeIfPresent(.cluster)
-        deploymentName = try container.sdkDecodeIfPresent(.deploymentName)
-        tags = try container.sdkDecodeIfPresent(.tags)
-        runtimeRisks = try container.sdkDecodeIfPresent(.runtimeRisks)
-        createdAt = try container.sdkDecodeIfPresent(.createdAt)
-        updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
-        attestationId = try container.sdkDecodeIfPresent(.attestationId)
-        if let value = runtimeRisks {
+        self.id = try container.sdkDecodeIfPresent(.id)
+        self.digest = try container.sdkDecodeIfPresent(.digest)
+        self.logicalEnvironment = try container.sdkDecodeIfPresent(.logicalEnvironment)
+        self.physicalEnvironment = try container.sdkDecodeIfPresent(.physicalEnvironment)
+        self.cluster = try container.sdkDecodeIfPresent(.cluster)
+        self.deploymentName = try container.sdkDecodeIfPresent(.deploymentName)
+        self.tags = try container.sdkDecodeIfPresent(.tags)
+        self.runtimeRisks = try container.sdkDecodeIfPresent(.runtimeRisks)
+        self.createdAt = try container.sdkDecodeIfPresent(.createdAt)
+        self.updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
+        self.attestationId = try container.sdkDecodeIfPresent(.attestationId)
+        if let value = self.runtimeRisks {
             try validateItems("runtime_risks", value, min: nil, max: 4)
         }
     }
 }
 
-public extension ArtifactDeploymentRecord {
-    init(
-        id: Int? = nil,
-        digest: String? = nil,
-        logicalEnvironment: String? = nil,
-        physicalEnvironment: String? = nil,
-        cluster: String? = nil,
-        deploymentName: String? = nil,
-        tags: [String: String]? = nil,
-        runtimeRisks: [ArtifactDeploymentRecordRuntimeRisksItem]? = nil,
-        createdAt: String? = nil,
-        updatedAt: String? = nil,
-        attestationId: Int? = nil
-    ) throws {
+extension ArtifactDeploymentRecord {
+    public init(id: Int? = nil, digest: String? = nil, logicalEnvironment: String? = nil, physicalEnvironment: String? = nil, cluster: String? = nil, deploymentName: String? = nil, tags: [String: String]? = nil, runtimeRisks: [ArtifactDeploymentRecordRuntimeRisksItem]? = nil, createdAt: String? = nil, updatedAt: String? = nil, attestationId: Int? = nil) throws {
         self.init()
         (self.id, self.digest) = (id, digest)
         (self.logicalEnvironment, self.physicalEnvironment) = (logicalEnvironment, physicalEnvironment)
@@ -303,94 +252,57 @@ public struct OrgMembership: Codable {
         case permissions
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension OrgMembership {
-    init(from decoder: Decoder) throws {
+extension OrgMembership {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.url) else {
-            throw SdkValidationError(
-                field: "url",
-                code: "required",
-                message: "Validation failed for 'url': value is required"
-            )
+            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
         }
         guard container.contains(.state) else {
-            throw SdkValidationError(
-                field: "state",
-                code: "required",
-                message: "Validation failed for 'state': value is required"
-            )
+            throw SdkValidationError(field: "state", code: "required", message: "Validation failed for 'state': value is required")
         }
         guard container.contains(.role) else {
-            throw SdkValidationError(
-                field: "role",
-                code: "required",
-                message: "Validation failed for 'role': value is required"
-            )
+            throw SdkValidationError(field: "role", code: "required", message: "Validation failed for 'role': value is required")
         }
         guard container.contains(.organizationUrl) else {
-            throw SdkValidationError(
-                field: "organization_url",
-                code: "required",
-                message: "Validation failed for 'organization_url': value is required"
-            )
+            throw SdkValidationError(field: "organization_url", code: "required", message: "Validation failed for 'organization_url': value is required")
         }
         guard container.contains(.organization) else {
-            throw SdkValidationError(
-                field: "organization",
-                code: "required",
-                message: "Validation failed for 'organization': value is required"
-            )
+            throw SdkValidationError(field: "organization", code: "required", message: "Validation failed for 'organization': value is required")
         }
         guard container.contains(.user) else {
-            throw SdkValidationError(
-                field: "user",
-                code: "required",
-                message: "Validation failed for 'user': value is required"
-            )
+            throw SdkValidationError(field: "user", code: "required", message: "Validation failed for 'user': value is required")
         }
-        url = try container.sdkDecodeRequired(.url)
-        state = try container.sdkDecodeRequired(.state)
-        role = try container.sdkDecodeRequired(.role)
-        organizationUrl = try container.sdkDecodeRequired(.organizationUrl)
-        organization = try container.sdkDecodeRequired(.organization)
-        user = try container.sdkDecodeNullable(.user)
-        directMembership = try container.sdkDecodeIfPresent(.directMembership)
-        enterpriseTeamsProvidingIndirectMembership = try container
-            .sdkDecodeIfPresent(.enterpriseTeamsProvidingIndirectMembership)
-        permissions = try container.sdkDecodeIfPresent(.permissions)
-        try sdkValidateUri("url", url)
-        try sdkValidateUri("organization_url", organizationUrl)
-        if let value = enterpriseTeamsProvidingIndirectMembership {
+        self.url = try container.sdkDecodeRequired(.url)
+        self.state = try container.sdkDecodeRequired(.state)
+        self.role = try container.sdkDecodeRequired(.role)
+        self.organizationUrl = try container.sdkDecodeRequired(.organizationUrl)
+        self.organization = try container.sdkDecodeRequired(.organization)
+        self.user = try container.sdkDecodeNullable(.user)
+        self.directMembership = try container.sdkDecodeIfPresent(.directMembership)
+        self.enterpriseTeamsProvidingIndirectMembership = try container.sdkDecodeIfPresent(.enterpriseTeamsProvidingIndirectMembership)
+        self.permissions = try container.sdkDecodeIfPresent(.permissions)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("organization_url", self.organizationUrl)
+        if let value = self.enterpriseTeamsProvidingIndirectMembership {
             try validateItems("enterprise_teams_providing_indirect_membership", value, min: nil, max: 100)
         }
     }
 }
 
-public extension OrgMembership {
-    init(
-        url: String,
-        state: OrgMembershipState,
-        role: OrgMembershipRole,
-        organizationUrl: String,
-        organization: OrganizationSimple,
-        user: NullableSimpleUser?,
-        directMembership: Bool? = nil,
-        enterpriseTeamsProvidingIndirectMembership: [String]? = nil,
-        permissions: OrgMembershipPermissions? = nil
-    ) throws {
+extension OrgMembership {
+    public init(url: String, state: OrgMembershipState, role: OrgMembershipRole, organizationUrl: String, organization: OrganizationSimple, user: NullableSimpleUser?, directMembership: Bool? = nil, enterpriseTeamsProvidingIndirectMembership: [String]? = nil, permissions: OrgMembershipPermissions? = nil) throws {
         (self.url, self.state) = (url, state)
         (self.role, self.organizationUrl) = (role, organizationUrl)
         (self.organization, self.user) = (organization, user)
         self.directMembership = directMembership
         self.enterpriseTeamsProvidingIndirectMembership = enterpriseTeamsProvidingIndirectMembership
         self.permissions = permissions
-        try sdkValidateUri("url", self.url)
-        try sdkValidateUri("organization_url", self.organizationUrl)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("organization_url", self.organizationUrl)
         if let value = self.enterpriseTeamsProvidingIndirectMembership {
             try validateItems("enterprise_teams_providing_indirect_membership", value, min: nil, max: 100)
         }
@@ -420,22 +332,22 @@ public struct OrgHookConfig: Codable {
     }
 
     init() {
-        (url, insecureSsl, contentType, secret) = (nil, nil, nil, nil)
+        (self.url, self.insecureSsl, self.contentType, self.secret) = (nil, nil, nil, nil)
     }
 }
 
-public extension OrgHookConfig {
-    init(from decoder: Decoder) throws {
+extension OrgHookConfig {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        url = try container.sdkDecodeIfPresent(.url)
-        insecureSsl = try container.sdkDecodeIfPresent(.insecureSsl)
-        contentType = try container.sdkDecodeIfPresent(.contentType)
-        secret = try container.sdkDecodeIfPresent(.secret)
+        self.url = try container.sdkDecodeIfPresent(.url)
+        self.insecureSsl = try container.sdkDecodeIfPresent(.insecureSsl)
+        self.contentType = try container.sdkDecodeIfPresent(.contentType)
+        self.secret = try container.sdkDecodeIfPresent(.secret)
     }
 }
 
-public extension OrgHookConfig {
-    init(url: String? = nil, insecureSsl: String? = nil, contentType: String? = nil, secret: String? = nil) {
+extension OrgHookConfig {
+    public init(url: String? = nil, insecureSsl: String? = nil, contentType: String? = nil, secret: String? = nil) {
         self.init()
         (self.url, self.insecureSsl) = (url, insecureSsl)
         (self.contentType, self.secret) = (contentType, secret)
@@ -476,72 +388,44 @@ public struct IssueField: Codable {
         case updatedAt = "updated_at"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension IssueField {
-    init(from decoder: Decoder) throws {
+extension IssueField {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(
-                field: "id",
-                code: "required",
-                message: "Validation failed for 'id': value is required"
-            )
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
         guard container.contains(.nodeId) else {
-            throw SdkValidationError(
-                field: "node_id",
-                code: "required",
-                message: "Validation failed for 'node_id': value is required"
-            )
+            throw SdkValidationError(field: "node_id", code: "required", message: "Validation failed for 'node_id': value is required")
         }
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.dataType) else {
-            throw SdkValidationError(
-                field: "data_type",
-                code: "required",
-                message: "Validation failed for 'data_type': value is required"
-            )
+            throw SdkValidationError(field: "data_type", code: "required", message: "Validation failed for 'data_type': value is required")
         }
-        id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        name = try container.sdkDecodeRequired(.name)
-        dataType = try container.sdkDecodeRequired(.dataType)
-        description = try container.sdkDecodeIfPresent(.description)
-        visibility = try container.sdkDecodeIfPresent(.visibility)
-        options = try container.sdkDecodeIfPresent(.options)
-        createdAt = try container.sdkDecodeIfPresent(.createdAt)
-        updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
-        if let value = createdAt {
+        self.id = try container.sdkDecodeRequired(.id)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.dataType = try container.sdkDecodeRequired(.dataType)
+        self.description = try container.sdkDecodeIfPresent(.description)
+        self.visibility = try container.sdkDecodeIfPresent(.visibility)
+        self.options = try container.sdkDecodeIfPresent(.options)
+        self.createdAt = try container.sdkDecodeIfPresent(.createdAt)
+        self.updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
+        if let value = self.createdAt {
             try sdkValidateDateTime("created_at", sdkWireString(value))
         }
-        if let value = updatedAt {
+        if let value = self.updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
     }
 }
 
-public extension IssueField {
-    init(
-        id: Int,
-        nodeId: String,
-        name: String,
-        dataType: IssueFieldDataType,
-        description: String? = nil,
-        visibility: IssueFieldVisibility? = nil,
-        options: [IssueFieldOptionsItem]? = nil,
-        createdAt: Date? = nil,
-        updatedAt: Date? = nil
-    ) throws {
+extension IssueField {
+    public init(id: Int, nodeId: String, name: String, dataType: IssueFieldDataType, description: String? = nil, visibility: IssueFieldVisibility? = nil, options: [IssueFieldOptionsItem]? = nil, createdAt: Date? = nil, updatedAt: Date? = nil) throws {
         (self.id, self.nodeId) = (id, nodeId)
         (self.name, self.dataType) = (name, dataType)
         (self.description, self.visibility) = (description, visibility)
@@ -560,17 +444,14 @@ public extension IssueField {
 public struct OrganizationRoleSource: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let organization = OrganizationRoleSource(rawValue: "Organization")
     public static let enterprise = OrganizationRoleSource(rawValue: "Enterprise")
     public static let predefined = OrganizationRoleSource(rawValue: "Predefined")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -583,10 +464,7 @@ public struct OrganizationRoleSource: RawRepresentable, Hashable, Codable, Senda
 public struct IssueFieldDataType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let text = IssueFieldDataType(rawValue: "text")
     public static let date = IssueFieldDataType(rawValue: "date")
     public static let singleSelect = IssueFieldDataType(rawValue: "single_select")
@@ -595,7 +473,7 @@ public struct IssueFieldDataType: RawRepresentable, Hashable, Codable, Sendable,
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

@@ -6,28 +6,12 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension MigrationsMethods {
-    /// Deletes a previous migration archive. Downloadable migration archives are automatically deleted after seven
-    /// days. Migration metadata, which is returned in the [List user
-    /// migrations](https://docs.github.com/rest/migrations/users#list-user-migrations) and [Get a user migration
-    /// status](https://docs.github.com/rest/migrations/users#get-a-user-migration-status) endpoints, will continue to
-    /// be available even after an archive is deleted.
+extension MigrationsMethods {
+    /// Deletes a previous migration archive. Downloadable migration archives are automatically deleted after seven days. Migration metadata, which is returned in the [List user migrations](https://docs.github.com/rest/migrations/users#list-user-migrations) and [Get a user migration status](https://docs.github.com/rest/migrations/users#get-a-user-migration-status) endpoints, will continue to be available even after an archive is deleted.
     ///
     /// - Parameters:
     /// - migrationId: The unique identifier of the migration.
-    static func migrationsDeleteArchiveForAuthenticatedUser(
-        config: ClientConfig,
-        migrationId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "DELETE",
-            ["/user/migrations/", sdkEncodePathSegment(sdkWireString(migrationId)), "/archive"].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "migrationsDeleteArchiveForAuthenticatedUser",
-            options: requestOptions,
-            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self]
-        )).data
+    public static func migrationsDeleteArchiveForAuthenticatedUser(config: ClientConfig, migrationId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("DELETE", ["/user/migrations/", sdkEncodePathSegment(sdkWireString(migrationId)), "/archive"].joined(), config: config, decoder: .empty, operationId: "migrationsDeleteArchiveForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self])).data
     }
 }

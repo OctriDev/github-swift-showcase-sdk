@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// ReposBranch domain models
+// ReposBranch domain models
 /// Branch Short
 public struct BranchShort: Codable {
     /// Required `string` value serialized in the `name` wire field.
@@ -19,43 +19,29 @@ public struct BranchShort: Codable {
         case protected
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension BranchShort {
-    init(from decoder: Decoder) throws {
+extension BranchShort {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.commit) else {
-            throw SdkValidationError(
-                field: "commit",
-                code: "required",
-                message: "Validation failed for 'commit': value is required"
-            )
+            throw SdkValidationError(field: "commit", code: "required", message: "Validation failed for 'commit': value is required")
         }
         guard container.contains(.protected) else {
-            throw SdkValidationError(
-                field: "protected",
-                code: "required",
-                message: "Validation failed for 'protected': value is required"
-            )
+            throw SdkValidationError(field: "protected", code: "required", message: "Validation failed for 'protected': value is required")
         }
-        name = try container.sdkDecodeRequired(.name)
-        commit = try container.sdkDecodeRequired(.commit)
-        protected = try container.sdkDecodeRequired(.protected)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.commit = try container.sdkDecodeRequired(.commit)
+        self.protected = try container.sdkDecodeRequired(.protected)
     }
 }
 
-public extension BranchShort {
-    init(name: String, commit: BranchShortCommit, protected: Bool) {
+extension BranchShort {
+    public init(name: String, commit: BranchShortCommit, protected: Bool) {
         (self.name, self.commit) = (name, commit)
         self.protected = protected
     }
@@ -73,35 +59,25 @@ public struct BranchShortCommit: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension BranchShortCommit {
-    init(from decoder: Decoder) throws {
+extension BranchShortCommit {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.sha) else {
-            throw SdkValidationError(
-                field: "sha",
-                code: "required",
-                message: "Validation failed for 'sha': value is required"
-            )
+            throw SdkValidationError(field: "sha", code: "required", message: "Validation failed for 'sha': value is required")
         }
         guard container.contains(.url) else {
-            throw SdkValidationError(
-                field: "url",
-                code: "required",
-                message: "Validation failed for 'url': value is required"
-            )
+            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
         }
-        sha = try container.sdkDecodeRequired(.sha)
-        url = try container.sdkDecodeRequired(.url)
+        self.sha = try container.sdkDecodeRequired(.sha)
+        self.url = try container.sdkDecodeRequired(.url)
     }
 }
 
-public extension BranchShortCommit {
-    init(sha: String, url: String) {
+extension BranchShortCommit {
+    public init(sha: String, url: String) {
         (self.sha, self.url) = (sha, url)
     }
 }

@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// ActionsActionsArtifact domain models
+// ActionsActionsArtifact domain models
 /// Typed representation of the `ActionsArtifactAndLogRetentionResponse` API schema.
 public struct ActionsArtifactAndLogRetentionResponse: Codable {
     /// The number of days checks, workflow runs, commit statuses, artifacts, and logs are retained
@@ -16,35 +16,25 @@ public struct ActionsArtifactAndLogRetentionResponse: Codable {
         case maximumAllowedDays = "maximum_allowed_days"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsArtifactAndLogRetentionResponse {
-    init(from decoder: Decoder) throws {
+extension ActionsArtifactAndLogRetentionResponse {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.days) else {
-            throw SdkValidationError(
-                field: "days",
-                code: "required",
-                message: "Validation failed for 'days': value is required"
-            )
+            throw SdkValidationError(field: "days", code: "required", message: "Validation failed for 'days': value is required")
         }
         guard container.contains(.maximumAllowedDays) else {
-            throw SdkValidationError(
-                field: "maximum_allowed_days",
-                code: "required",
-                message: "Validation failed for 'maximum_allowed_days': value is required"
-            )
+            throw SdkValidationError(field: "maximum_allowed_days", code: "required", message: "Validation failed for 'maximum_allowed_days': value is required")
         }
-        days = try container.sdkDecodeRequired(.days)
-        maximumAllowedDays = try container.sdkDecodeRequired(.maximumAllowedDays)
+        self.days = try container.sdkDecodeRequired(.days)
+        self.maximumAllowedDays = try container.sdkDecodeRequired(.maximumAllowedDays)
     }
 }
 
-public extension ActionsArtifactAndLogRetentionResponse {
-    init(days: Int, maximumAllowedDays: Int) {
+extension ActionsArtifactAndLogRetentionResponse {
+    public init(days: Int, maximumAllowedDays: Int) {
         (self.days, self.maximumAllowedDays) = (days, maximumAllowedDays)
     }
 }
@@ -58,27 +48,21 @@ public struct ActionsArtifactAndLogRetention: Codable {
         case days
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension ActionsArtifactAndLogRetention {
-    init(from decoder: Decoder) throws {
+extension ActionsArtifactAndLogRetention {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.days) else {
-            throw SdkValidationError(
-                field: "days",
-                code: "required",
-                message: "Validation failed for 'days': value is required"
-            )
+            throw SdkValidationError(field: "days", code: "required", message: "Validation failed for 'days': value is required")
         }
-        days = try container.sdkDecodeRequired(.days)
+        self.days = try container.sdkDecodeRequired(.days)
     }
 }
 
-public extension ActionsArtifactAndLogRetention {
-    init(days: Int) {
+extension ActionsArtifactAndLogRetention {
+    public init(days: Int) {
         self.days = days
     }
 }

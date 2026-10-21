@@ -6,51 +6,25 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ClassroomMethods {
+extension ClassroomMethods {
     /// Lists classrooms. This operation is no longer available as of August 28, 2026.
     ///
-    /// > [!WARNING] > **Closed notice:** This operation is no longer available as of August 28, 2026. > For more
-    /// information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
+    /// > [!WARNING] > **Closed notice:** This operation is no longer available as of August 28, 2026. > For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
     ///
     /// - Warning: This operation is deprecated and may be removed in a future release.
-    static func classroomListClassrooms(
-        config: ClientConfig,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "GET",
-            "/classrooms",
-            config: config,
-            decoder: .empty,
-            operationId: "classroomListClassrooms",
-            options: requestOptions,
-            errors: ["410": BasicError.self]
-        )).data
+    public static func classroomListClassrooms(config: ClientConfig, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("GET", "/classrooms", config: config, decoder: .empty, operationId: "classroomListClassrooms", options: requestOptions, errors: ["410": BasicError.self])).data
     }
 
-    /// Retrieves a classroom by its unique identifier. Supply `classroom_id` to identify the classroom you want to
-    /// retrieve. This operation is no longer available as of August 28, 2026.
+    /// Retrieves a classroom by its unique identifier. Supply `classroom_id` to identify the classroom you want to retrieve. This operation is no longer available as of August 28, 2026.
     ///
-    /// > [!WARNING] > **Closed notice:** This operation is no longer available as of August 28, 2026. > For more
-    /// information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
+    /// > [!WARNING] > **Closed notice:** This operation is no longer available as of August 28, 2026. > For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
     ///
     /// - Parameters:
     /// - classroomId: The unique identifier of the classroom.
     ///
     /// - Warning: This operation is deprecated and may be removed in a future release.
-    static func classroomGetAClassroom(
-        config: ClientConfig,
-        classroomId: Int,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await (sdkRequest(
-            "GET",
-            ["/classrooms/", sdkEncodePathSegment(sdkWireString(classroomId))].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "classroomGetAClassroom",
-            options: requestOptions,
-            errors: ["410": BasicError.self]
-        )).data
+    public static func classroomGetAClassroom(config: ClientConfig, classroomId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try (await sdkRequest("GET", ["/classrooms/", sdkEncodePathSegment(sdkWireString(classroomId))].joined(), config: config, decoder: .empty, operationId: "classroomGetAClassroom", options: requestOptions, errors: ["410": BasicError.self])).data
     }
 }

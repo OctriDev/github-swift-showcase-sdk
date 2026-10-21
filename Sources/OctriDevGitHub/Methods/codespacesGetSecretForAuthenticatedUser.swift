@@ -6,25 +6,12 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension CodespacesMethods {
-    /// Gets a development environment secret available to a user's codespaces without revealing its encrypted value.
-    /// The authenticated user must have Codespaces access to use this endpoint. OAuth app tokens and personal access
-    /// tokens (classic) need the `codespace` or `codespace:secrets` scope to use this endpoint.
+extension CodespacesMethods {
+    /// Gets a development environment secret available to a user's codespaces without revealing its encrypted value. The authenticated user must have Codespaces access to use this endpoint. OAuth app tokens and personal access tokens (classic) need the `codespace` or `codespace:secrets` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - secretName: The name of the secret.
-    static func codespacesGetSecretForAuthenticatedUser(
-        config: ClientConfig,
-        secretName: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CodespacesSecret {
-        try await (sdkRequest(
-            "GET",
-            ["/user/codespaces/secrets/", sdkEncodePathSegment(sdkWireString(secretName))].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "codespacesGetSecretForAuthenticatedUser",
-            options: requestOptions
-        )).data
+    public static func codespacesGetSecretForAuthenticatedUser(config: ClientConfig, secretName: String, requestOptions: RequestOptions? = nil) async throws -> CodespacesSecret {
+        return try (await sdkRequest("GET", ["/user/codespaces/secrets/", sdkEncodePathSegment(sdkWireString(secretName))].joined(), config: config, decoder: .json, operationId: "codespacesGetSecretForAuthenticatedUser", options: requestOptions)).data
     }
 }

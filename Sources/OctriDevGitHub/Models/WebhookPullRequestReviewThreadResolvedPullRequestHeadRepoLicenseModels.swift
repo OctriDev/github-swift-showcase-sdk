@@ -3,58 +3,38 @@
 
 import Foundation
 
-/// WebhookPullRequestReviewThreadResolved domain models
-public extension WebhookPullRequestReviewThreadResolvedPullRequestHeadRepoLicense {
-    init(from decoder: Decoder) throws {
+// WebhookPullRequestReviewThreadResolved domain models
+extension WebhookPullRequestReviewThreadResolvedPullRequestHeadRepoLicense {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.key) else {
-            throw SdkValidationError(
-                field: "key",
-                code: "required",
-                message: "Validation failed for 'key': value is required"
-            )
+            throw SdkValidationError(field: "key", code: "required", message: "Validation failed for 'key': value is required")
         }
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.nodeId) else {
-            throw SdkValidationError(
-                field: "node_id",
-                code: "required",
-                message: "Validation failed for 'node_id': value is required"
-            )
+            throw SdkValidationError(field: "node_id", code: "required", message: "Validation failed for 'node_id': value is required")
         }
         guard container.contains(.spdxId) else {
-            throw SdkValidationError(
-                field: "spdx_id",
-                code: "required",
-                message: "Validation failed for 'spdx_id': value is required"
-            )
+            throw SdkValidationError(field: "spdx_id", code: "required", message: "Validation failed for 'spdx_id': value is required")
         }
         guard container.contains(.url) else {
-            throw SdkValidationError(
-                field: "url",
-                code: "required",
-                message: "Validation failed for 'url': value is required"
-            )
+            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
         }
-        key = try container.sdkDecodeRequired(.key)
-        name = try container.sdkDecodeRequired(.name)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        spdxId = try container.sdkDecodeRequired(.spdxId)
-        url = try container.sdkDecodeNullable(.url)
-        if let value = url {
+        self.key = try container.sdkDecodeRequired(.key)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.spdxId = try container.sdkDecodeRequired(.spdxId)
+        self.url = try container.sdkDecodeNullable(.url)
+        if let value = self.url {
             try sdkValidateUri("url", value)
         }
     }
 }
 
-public extension WebhookPullRequestReviewThreadResolvedPullRequestHeadRepoLicense {
-    init(key: String, name: String, nodeId: String, spdxId: String, url: String?) throws {
+extension WebhookPullRequestReviewThreadResolvedPullRequestHeadRepoLicense {
+    public init(key: String, name: String, nodeId: String, spdxId: String, url: String?) throws {
         (self.key, self.name) = (key, name)
         (self.nodeId, self.spdxId) = (nodeId, spdxId)
         self.url = url
@@ -103,54 +83,40 @@ public struct WebhookPullRequestReviewThreadResolvedPullRequestRequestedTeaXde3f
         case url
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookPullRequestReviewThreadResolvedPullRequestRequestedTeaXde3fd96e3b {
-    init(from decoder: Decoder) throws {
+extension WebhookPullRequestReviewThreadResolvedPullRequestRequestedTeaXde3fd96e3b {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        description = try container.sdkDecodeNullable(.description)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        id = try container.sdkDecodeRequired(.id)
-        membersUrl = try container.sdkDecodeRequired(.membersUrl)
-        name = try container.sdkDecodeRequired(.name)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        permission = try container.sdkDecodeRequired(.permission)
-        privacy = try container.sdkDecodeRequired(.privacy)
-        repositoriesUrl = try container.sdkDecodeRequired(.repositoriesUrl)
-        slug = try container.sdkDecodeRequired(.slug)
-        url = try container.sdkDecodeRequired(.url)
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateUri("repositories_url", repositoriesUrl)
-        try sdkValidateUri("url", url)
+        self.description = try container.sdkDecodeNullable(.description)
+        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.membersUrl = try container.sdkDecodeRequired(.membersUrl)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.permission = try container.sdkDecodeRequired(.permission)
+        self.privacy = try container.sdkDecodeRequired(.privacy)
+        self.repositoriesUrl = try container.sdkDecodeRequired(.repositoriesUrl)
+        self.slug = try container.sdkDecodeRequired(.slug)
+        self.url = try container.sdkDecodeRequired(.url)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("repositories_url", self.repositoriesUrl)
+            try sdkValidateUri("url", self.url)
     }
 }
 
-public extension WebhookPullRequestReviewThreadResolvedPullRequestRequestedTeaXde3fd96e3b {
-    init(
-        description: String?,
-        htmlUrl: String,
-        id: Int,
-        membersUrl: String,
-        name: String,
-        nodeId: String,
-        permission: String,
-        privacy: WebhookPullRequestReviewThreadResolvedPullRequestRequestedTeaXdde344797b,
-        repositoriesUrl: String,
-        slug: String,
-        url: String
-    ) throws {
+extension WebhookPullRequestReviewThreadResolvedPullRequestRequestedTeaXde3fd96e3b {
+    public init(description: String?, htmlUrl: String, id: Int, membersUrl: String, name: String, nodeId: String, permission: String, privacy: WebhookPullRequestReviewThreadResolvedPullRequestRequestedTeaXdde344797b, repositoriesUrl: String, slug: String, url: String) throws {
         (self.description, self.htmlUrl) = (description, htmlUrl)
         (self.id, self.membersUrl) = (id, membersUrl)
         (self.name, self.nodeId) = (name, nodeId)
         (self.permission, self.privacy) = (permission, privacy)
         (self.repositoriesUrl, self.slug) = (repositoriesUrl, slug)
         self.url = url
-        try sdkValidateUri("html_url", self.htmlUrl)
-        try sdkValidateUri("repositories_url", self.repositoriesUrl)
-        try sdkValidateUri("url", self.url)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("repositories_url", self.repositoriesUrl)
+            try sdkValidateUri("url", self.url)
     }
 }
 
@@ -241,79 +207,49 @@ public struct WebhookPullRequestReviewThreadResolvedThreadCommentsItem: Codable 
         case subjectType = "subject_type"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WebhookPullRequestReviewThreadResolvedThreadCommentsItem {
-    init(from decoder: Decoder) throws {
+extension WebhookPullRequestReviewThreadResolvedThreadCommentsItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        links = try container.sdkDecodeRequired(.links)
-        authorAssociation = try container.sdkDecodeRequired(.authorAssociation)
-        body = try container.sdkDecodeRequired(.body)
-        commitId = try container.sdkDecodeRequired(.commitId)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        diffHunk = try container.sdkDecodeRequired(.diffHunk)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        id = try container.sdkDecodeRequired(.id)
-        line = try container.sdkDecodeNullable(.line)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        originalCommitId = try container.sdkDecodeRequired(.originalCommitId)
-        originalLine = try container.sdkDecodeNullable(.originalLine)
-        originalPosition = try container.sdkDecodeRequired(.originalPosition)
-        originalStartLine = try container.sdkDecodeNullable(.originalStartLine)
-        path = try container.sdkDecodeRequired(.path)
-        position = try container.sdkDecodeNullable(.position)
-        pullRequestReviewId = try container.sdkDecodeNullable(.pullRequestReviewId)
-        pullRequestUrl = try container.sdkDecodeRequired(.pullRequestUrl)
-        reactions = try container.sdkDecodeRequired(.reactions)
-        side = try container.sdkDecodeRequired(.side)
-        startLine = try container.sdkDecodeNullable(.startLine)
-        startSide = try container.sdkDecodeNullable(.startSide)
-        updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        url = try container.sdkDecodeRequired(.url)
-        user = try container.sdkDecodeNullable(.user)
-        inReplyToId = try container.sdkDecodeIfPresent(.inReplyToId)
-        subjectType = try container.sdkDecodeIfPresent(.subjectType)
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateUri("pull_request_url", pullRequestUrl)
-        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
-        try sdkValidateUri("url", url)
+        self.links = try container.sdkDecodeRequired(.links)
+        self.authorAssociation = try container.sdkDecodeRequired(.authorAssociation)
+        self.body = try container.sdkDecodeRequired(.body)
+        self.commitId = try container.sdkDecodeRequired(.commitId)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.diffHunk = try container.sdkDecodeRequired(.diffHunk)
+        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.line = try container.sdkDecodeNullable(.line)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.originalCommitId = try container.sdkDecodeRequired(.originalCommitId)
+        self.originalLine = try container.sdkDecodeNullable(.originalLine)
+        self.originalPosition = try container.sdkDecodeRequired(.originalPosition)
+        self.originalStartLine = try container.sdkDecodeNullable(.originalStartLine)
+        self.path = try container.sdkDecodeRequired(.path)
+        self.position = try container.sdkDecodeNullable(.position)
+        self.pullRequestReviewId = try container.sdkDecodeNullable(.pullRequestReviewId)
+        self.pullRequestUrl = try container.sdkDecodeRequired(.pullRequestUrl)
+        self.reactions = try container.sdkDecodeRequired(.reactions)
+        self.side = try container.sdkDecodeRequired(.side)
+        self.startLine = try container.sdkDecodeNullable(.startLine)
+        self.startSide = try container.sdkDecodeNullable(.startSide)
+        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.user = try container.sdkDecodeNullable(.user)
+        self.inReplyToId = try container.sdkDecodeIfPresent(.inReplyToId)
+        self.subjectType = try container.sdkDecodeIfPresent(.subjectType)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("pull_request_url", self.pullRequestUrl)
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateUri("url", self.url)
     }
 }
 
-public extension WebhookPullRequestReviewThreadResolvedThreadCommentsItem {
-    init(
-        links: WebhookPullRequestReviewThreadResolvedThreadCommentsItemLinks,
-        authorAssociation: WebhookPullRequestReviewThreadResolvedThreadCommentsItemAuthoX1b529938eb,
-        body: String,
-        commitId: String,
-        createdAt: Date,
-        diffHunk: String,
-        htmlUrl: String,
-        id: Int,
-        line: Int?,
-        nodeId: String,
-        originalCommitId: String,
-        originalLine: Int?,
-        originalPosition: Int,
-        originalStartLine: Int?,
-        path: String,
-        position: Int?,
-        pullRequestReviewId: Int?,
-        pullRequestUrl: String,
-        reactions: WebhookPullRequestReviewThreadResolvedThreadCommentsItemReactions,
-        side: WebhookPullRequestReviewThreadResolvedThreadCommentsItemSide,
-        startLine: Int?,
-        startSide: WebhookPullRequestReviewThreadResolvedThreadCommentsItemStartSide?,
-        updatedAt: Date,
-        url: String,
-        user: WebhookPullRequestReviewThreadResolvedThreadCommentsItemUser?,
-        inReplyToId: Int? = nil,
-        subjectType: WebhookPullRequestReviewThreadResolvedThreadCommentsItemSubjectType? = nil
-    ) throws {
+extension WebhookPullRequestReviewThreadResolvedThreadCommentsItem {
+    public init(links: WebhookPullRequestReviewThreadResolvedThreadCommentsItemLinks, authorAssociation: WebhookPullRequestReviewThreadResolvedThreadCommentsItemAuthoX1b529938eb, body: String, commitId: String, createdAt: Date, diffHunk: String, htmlUrl: String, id: Int, line: Int?, nodeId: String, originalCommitId: String, originalLine: Int?, originalPosition: Int, originalStartLine: Int?, path: String, position: Int?, pullRequestReviewId: Int?, pullRequestUrl: String, reactions: WebhookPullRequestReviewThreadResolvedThreadCommentsItemReactions, side: WebhookPullRequestReviewThreadResolvedThreadCommentsItemSide, startLine: Int?, startSide: WebhookPullRequestReviewThreadResolvedThreadCommentsItemStartSide?, updatedAt: Date, url: String, user: WebhookPullRequestReviewThreadResolvedThreadCommentsItemUser?, inReplyToId: Int? = nil, subjectType: WebhookPullRequestReviewThreadResolvedThreadCommentsItemSubjectType? = nil) throws {
         (self.links, self.authorAssociation) = (links, authorAssociation)
         (self.body, self.commitId) = (body, commitId)
         (self.createdAt, self.diffHunk) = (createdAt, diffHunk)
@@ -328,11 +264,11 @@ public extension WebhookPullRequestReviewThreadResolvedThreadCommentsItem {
         (self.updatedAt, self.url) = (updatedAt, url)
         (self.user, self.inReplyToId) = (user, inReplyToId)
         self.subjectType = subjectType
-        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-        try sdkValidateUri("html_url", self.htmlUrl)
-        try sdkValidateUri("pull_request_url", self.pullRequestUrl)
-        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-        try sdkValidateUri("url", self.url)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("pull_request_url", self.pullRequestUrl)
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateUri("url", self.url)
     }
 }
 
@@ -621,7 +557,5 @@ public struct WebhookPullRequestReviewThreadResolvedPullRequestBaseRepo: Codable
         case webCommitSignoffRequired = "web_commit_signoff_required"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }

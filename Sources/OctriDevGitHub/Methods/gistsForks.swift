@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension GistsMethods {
+extension GistsMethods {
     /// Lists forks of a gist, returning the forked gist objects. Use `page` and `per_page` to paginate the results.
     ///
     /// - Parameters:
@@ -19,46 +19,18 @@ public extension GistsMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    static func gistsListForks(
-        config: ClientConfig,
-        gistId: String,
-        perPage: Int? = nil,
-        page: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [GistSimple] {
-        try await (sdkRequest(
-            "GET",
-            ["/gists/", sdkEncodePathSegment(sdkWireString(gistId)), "/forks"].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("per_page", value: perPage),
-                SdkQueryParameter("page", value: page),
-            ],
-            decoder: .json,
-            operationId: "gistsListForks",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self]
-        )).data
+    public static func gistsListForks(config: ClientConfig, gistId: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [GistSimple] {
+        return try (await sdkRequest("GET", ["/gists/", sdkEncodePathSegment(sdkWireString(gistId)), "/forks"].joined(), config: config, query: [
+            SdkQueryParameter("per_page", value: perPage),
+            SdkQueryParameter("page", value: page),
+        ], decoder: .json, operationId: "gistsListForks", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
     }
 
-    /// Creates a fork of a gist for the authenticated user. Supply the gist identifier to select the gist to fork; the
-    /// response contains the created fork.
+    /// Creates a fork of a gist for the authenticated user. Supply the gist identifier to select the gist to fork; the response contains the created fork.
     ///
     /// - Parameters:
     /// - gistId: The unique identifier of the gist.
-    static func gistsFork(
-        config: ClientConfig,
-        gistId: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> BaseGist {
-        try await (sdkRequest(
-            "POST",
-            ["/gists/", sdkEncodePathSegment(sdkWireString(gistId)), "/forks"].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "gistsFork",
-            options: requestOptions,
-            errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self]
-        )).data
+    public static func gistsFork(config: ClientConfig, gistId: String, requestOptions: RequestOptions? = nil) async throws -> BaseGist {
+        return try (await sdkRequest("POST", ["/gists/", sdkEncodePathSegment(sdkWireString(gistId)), "/forks"].joined(), config: config, decoder: .json, operationId: "gistsFork", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
     }
 }

@@ -17,10 +17,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.gists.listStarred(
-                since: decoded("\"2024-01-01T00:00:00Z\""),
-                perPage: decoded("30"),
-                page: decoded("1")
-            )
+            since: decoded("\"2024-01-01T00:00:00Z\""),
+            perPage: decoded("30"),
+            page: decoded("1")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -58,8 +58,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.gists.star(
-                gistId: decoded("\"gist-1\"")
-            )
+            gistId: decoded("\"gist-1\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -97,8 +97,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.gists.unstar(
-                gistId: decoded("\"gist-1\"")
-            )
+            gistId: decoded("\"gist-1\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -145,10 +145,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.gists.update(
-                gistId: decoded("\"gist-1\""),
-                description: decoded("\"An updated gist description\""),
-                files: decoded("{\"README.md\":{\"content\":\"Hello World from GitHub\"}}")
-            )
+            gistId: decoded("\"gist-1\""),
+            description: decoded("\"An updated gist description\""),
+            files: decoded("{\"README.md\":{\"content\":\"Hello World from GitHub\"}}")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -195,10 +195,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.gists.updateComment(
-                gistId: decoded("\"gist-1\""),
-                commentId: decoded("1"),
-                body: decoded("\"This is an update to a comment in a gist\"")
-            )
+            gistId: decoded("\"gist-1\""),
+            commentId: decoded("1"),
+            body: decoded("\"This is an update to a comment in a gist\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -246,11 +246,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.git.createBlob(
-                owner: decoded("\"owner\""),
-                repo: decoded("\"repo\""),
-                content: decoded("\"Content of the blob\""),
-                encoding: decoded("\"utf-8\"")
-            )
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            content: decoded("\"Content of the blob\""),
+            encoding: decoded("\"utf-8\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -271,12 +271,7 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try GitMethods.GitCreateCommitOptions(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            message: decoded("\"my commit message\""),
-            tree: decoded("\"827efc6d56897b048c772eb4087f854f46256132\"")
-        )
+        var options = try GitMethods.GitCreateCommitOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), message: decoded("\"my commit message\""), tree: decoded("\"827efc6d56897b048c772eb4087f854f46256132\""))
         options.parents = try decoded("[\"7d1b31e74ee336d15cbd21741bc88a537ed063a0\"]")
         options.author = try decoded(sdkMethodFixture875Value1)
         options.committer = try decoded("null")
@@ -299,12 +294,7 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try GitMethods.GitCreateCommitOptions(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            message: decoded("\"my commit message\""),
-            tree: decoded("\"827efc6d56897b048c772eb4087f854f46256132\"")
-        )
+        var options = try GitMethods.GitCreateCommitOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), message: decoded("\"my commit message\""), tree: decoded("\"827efc6d56897b048c772eb4087f854f46256132\""))
         options.parents = try decoded("[\"7d1b31e74ee336d15cbd21741bc88a537ed063a0\"]")
         options.author = try decoded(sdkMethodFixture876Value1)
         options.committer = try decoded("null")
@@ -315,8 +305,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.git.createCommit(
-                options: options
-            )
+            options: options
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -364,11 +354,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.git.createRef(
-                owner: decoded("\"owner\""),
-                repo: decoded("\"repo\""),
-                ref: decoded("\"refs/heads/featureA\""),
-                sha: decoded("\"aa218f56b14c9653891f9e74264a383fa43fefbd\"")
-            )
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            ref: decoded("\"refs/heads/featureA\""),
+            sha: decoded("\"aa218f56b14c9653891f9e74264a383fa43fefbd\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 409)
@@ -419,14 +409,14 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.git.createTag(
-                owner: decoded("\"owner\""),
-                repo: decoded("\"repo\""),
-                tag: decoded("\"v0.0.1\""),
-                message: decoded("\"initial version\""),
-                object: decoded("\"c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c\""),
-                type: decoded("\"commit\""),
-                tagger: decoded(sdkMethodFixture880Value1)
-            )
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            tag: decoded("\"v0.0.1\""),
+            message: decoded("\"initial version\""),
+            object: decoded("\"c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c\""),
+            type: decoded("\"commit\""),
+            tagger: decoded(sdkMethodFixture880Value1)
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 409)
@@ -474,11 +464,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.git.createTree(
-                owner: decoded("\"owner\""),
-                repo: decoded("\"repo\""),
-                tree: decoded(sdkMethodFixture882Value1),
-                baseTree: decoded("\"9fb037999f264ba9a7fc6274d15fa3ae2ab98312\"")
-            )
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            tree: decoded(sdkMethodFixture882Value1),
+            baseTree: decoded("\"9fb037999f264ba9a7fc6274d15fa3ae2ab98312\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -518,10 +508,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.git.deleteRef(
-                owner: decoded("\"owner\""),
-                repo: decoded("\"repo\""),
-                ref: decoded("\"heads/feature-a\"")
-            )
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            ref: decoded("\"heads/feature-a\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 409)
@@ -568,10 +558,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.git.getBlob(
-                owner: decoded("\"owner\""),
-                repo: decoded("\"repo\""),
-                fileSha: decoded("\"file_sha\"")
-            )
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            fileSha: decoded("\"file_sha\"")
+        )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)

@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Repos domain models
+// Repos domain models
 /// Results of a successful merge upstream request
 public struct MergedUpstream: Codable {
     /// Optional `string` value serialized in the `message` wire field.
@@ -20,21 +20,21 @@ public struct MergedUpstream: Codable {
     }
 
     init() {
-        (message, mergeType, baseBranch) = (nil, nil, nil)
+        (self.message, self.mergeType, self.baseBranch) = (nil, nil, nil)
     }
 }
 
-public extension MergedUpstream {
-    init(from decoder: Decoder) throws {
+extension MergedUpstream {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        message = try container.sdkDecodeIfPresent(.message)
-        mergeType = try container.sdkDecodeIfPresent(.mergeType)
-        baseBranch = try container.sdkDecodeIfPresent(.baseBranch)
+        self.message = try container.sdkDecodeIfPresent(.message)
+        self.mergeType = try container.sdkDecodeIfPresent(.mergeType)
+        self.baseBranch = try container.sdkDecodeIfPresent(.baseBranch)
     }
 }
 
-public extension MergedUpstream {
-    init(message: String? = nil, mergeType: MergedUpstreamMergeType? = nil, baseBranch: String? = nil) {
+extension MergedUpstream {
+    public init(message: String? = nil, mergeType: MergedUpstreamMergeType? = nil, baseBranch: String? = nil) {
         self.init()
         (self.message, self.mergeType) = (message, mergeType)
         self.baseBranch = baseBranch
@@ -45,17 +45,14 @@ public extension MergedUpstream {
 public struct MergedUpstreamMergeType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let merge = MergedUpstreamMergeType(rawValue: "merge")
     public static let fastForward = MergedUpstreamMergeType(rawValue: "fast-forward")
     public static let none = MergedUpstreamMergeType(rawValue: "none")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

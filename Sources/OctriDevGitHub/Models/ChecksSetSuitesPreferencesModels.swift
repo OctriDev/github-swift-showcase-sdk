@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Checks domain models
+// Checks domain models
 /// Required object value serialized in the `preferences` wire field.
 public struct CheckSuitePreferencePreferences: Codable {
     /// Optional array value serialized in the `auto_trigger_checks` wire field.
@@ -14,19 +14,19 @@ public struct CheckSuitePreferencePreferences: Codable {
     }
 
     init() {
-        autoTriggerChecks = nil
+        self.autoTriggerChecks = nil
     }
 }
 
-public extension CheckSuitePreferencePreferences {
-    init(from decoder: Decoder) throws {
+extension CheckSuitePreferencePreferences {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        autoTriggerChecks = try container.sdkDecodeIfPresent(.autoTriggerChecks)
+        self.autoTriggerChecks = try container.sdkDecodeIfPresent(.autoTriggerChecks)
     }
 }
 
-public extension CheckSuitePreferencePreferences {
-    init(autoTriggerChecks: [CheckSuitePreferencePreferencesAutoTriggerChecksItem]? = nil) {
+extension CheckSuitePreferencePreferences {
+    public init(autoTriggerChecks: [CheckSuitePreferencePreferencesAutoTriggerChecksItem]? = nil) {
         self.init()
         self.autoTriggerChecks = autoTriggerChecks
     }
@@ -44,35 +44,25 @@ public struct CheckSuitePreference: Codable {
         case repository
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension CheckSuitePreference {
-    init(from decoder: Decoder) throws {
+extension CheckSuitePreference {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.preferences) else {
-            throw SdkValidationError(
-                field: "preferences",
-                code: "required",
-                message: "Validation failed for 'preferences': value is required"
-            )
+            throw SdkValidationError(field: "preferences", code: "required", message: "Validation failed for 'preferences': value is required")
         }
         guard container.contains(.repository) else {
-            throw SdkValidationError(
-                field: "repository",
-                code: "required",
-                message: "Validation failed for 'repository': value is required"
-            )
+            throw SdkValidationError(field: "repository", code: "required", message: "Validation failed for 'repository': value is required")
         }
-        preferences = try container.sdkDecodeRequired(.preferences)
-        repository = try container.sdkDecodeRequired(.repository)
+        self.preferences = try container.sdkDecodeRequired(.preferences)
+        self.repository = try container.sdkDecodeRequired(.repository)
     }
 }
 
-public extension CheckSuitePreference {
-    init(preferences: CheckSuitePreferencePreferences, repository: MinimalRepository) {
+extension CheckSuitePreference {
+    public init(preferences: CheckSuitePreferencePreferences, repository: MinimalRepository) {
         (self.preferences, self.repository) = (preferences, repository)
     }
 }
@@ -89,35 +79,25 @@ public struct CheckSuitePreferencePreferencesAutoTriggerChecksItem: Codable {
         case setting
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension CheckSuitePreferencePreferencesAutoTriggerChecksItem {
-    init(from decoder: Decoder) throws {
+extension CheckSuitePreferencePreferencesAutoTriggerChecksItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.appId) else {
-            throw SdkValidationError(
-                field: "app_id",
-                code: "required",
-                message: "Validation failed for 'app_id': value is required"
-            )
+            throw SdkValidationError(field: "app_id", code: "required", message: "Validation failed for 'app_id': value is required")
         }
         guard container.contains(.setting) else {
-            throw SdkValidationError(
-                field: "setting",
-                code: "required",
-                message: "Validation failed for 'setting': value is required"
-            )
+            throw SdkValidationError(field: "setting", code: "required", message: "Validation failed for 'setting': value is required")
         }
-        appId = try container.sdkDecodeRequired(.appId)
-        setting = try container.sdkDecodeRequired(.setting)
+        self.appId = try container.sdkDecodeRequired(.appId)
+        self.setting = try container.sdkDecodeRequired(.setting)
     }
 }
 
-public extension CheckSuitePreferencePreferencesAutoTriggerChecksItem {
-    init(appId: Int, setting: Bool) {
+extension CheckSuitePreferencePreferencesAutoTriggerChecksItem {
+    public init(appId: Int, setting: Bool) {
         (self.appId, self.setting) = (appId, setting)
     }
 }

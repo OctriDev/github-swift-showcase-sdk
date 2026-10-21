@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ReposMethods {
-    /// Get the total number of clones and breakdown per day or week for the last 14 days. Timestamps are aligned to UTC
-    /// midnight of the beginning of the day or week. Week begins on Monday.
+extension ReposMethods {
+    /// Get the total number of clones and breakdown per day or week for the last 14 days. Timestamps are aligned to UTC midnight of the beginning of the day or week. Week begins on Monday.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -16,23 +15,10 @@ public extension ReposMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - per: The time frame to display results for.
-    static func reposGetClones(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        per: ReposGetClonesParameter? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> CloneTraffic {
-        try await (sdkRequest("GET", [
-            "/repos/",
-            sdkEncodePathSegment(sdkWireString(owner)),
-            "/",
-            sdkEncodePathSegment(sdkWireString(repo)),
-            "/traffic/clones",
-        ].joined(), config: config, query: [
+    public static func reposGetClones(config: ClientConfig, owner: String, repo: String, per: ReposGetClonesParameter? = nil, requestOptions: RequestOptions? = nil) async throws -> CloneTraffic {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/traffic/clones"].joined(), config: config, query: [
             SdkQueryParameter("per", value: per),
-        ], decoder: .json, operationId: "reposGetClones", options: requestOptions, errors: ["403": BasicError.self]))
-            .data
+        ], decoder: .json, operationId: "reposGetClones", options: requestOptions, errors: ["403": BasicError.self])).data
     }
 
     /// Get the top 10 popular contents over the last 14 days.
@@ -42,26 +28,7 @@ public extension ReposMethods {
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    static func reposGetTopPaths(
-        config: ClientConfig,
-        owner: String,
-        repo: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> [ContentTraffic] {
-        try await (sdkRequest(
-            "GET",
-            [
-                "/repos/",
-                sdkEncodePathSegment(sdkWireString(owner)),
-                "/",
-                sdkEncodePathSegment(sdkWireString(repo)),
-                "/traffic/popular/paths",
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "reposGetTopPaths",
-            options: requestOptions,
-            errors: ["403": BasicError.self]
-        )).data
+    public static func reposGetTopPaths(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> [ContentTraffic] {
+        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/traffic/popular/paths"].joined(), config: config, decoder: .json, operationId: "reposGetTopPaths", options: requestOptions, errors: ["403": BasicError.self])).data
     }
 }

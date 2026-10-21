@@ -7,24 +7,17 @@ import Foundation
     import FoundationNetworking
 #endif
 /// The enablement status of secret scanning validity checks
-public struct CodeSecurityCreateConfigurationForEnterpriseRequestBodySecretXdc4bb0a9a9: RawRepresentable, Hashable,
-    Codable, Sendable, SdkWireConvertible {
+public struct CodeSecurityCreateConfigurationForEnterpriseRequestBodySecretXdc4bb0a9a9: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let enabled =
-        CodeSecurityCreateConfigurationForEnterpriseRequestBodySecretXdc4bb0a9a9(rawValue: "enabled")
-    public static let disabled =
-        CodeSecurityCreateConfigurationForEnterpriseRequestBodySecretXdc4bb0a9a9(rawValue: "disabled")
-    public static let notSet =
-        CodeSecurityCreateConfigurationForEnterpriseRequestBodySecretXdc4bb0a9a9(rawValue: "not_set")
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let enabled = CodeSecurityCreateConfigurationForEnterpriseRequestBodySecretXdc4bb0a9a9(rawValue: "enabled")
+    public static let disabled = CodeSecurityCreateConfigurationForEnterpriseRequestBodySecretXdc4bb0a9a9(rawValue: "disabled")
+    public static let notSet = CodeSecurityCreateConfigurationForEnterpriseRequestBodySecretXdc4bb0a9a9(rawValue: "not_set")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -36,15 +29,12 @@ public struct CodeSecurityCreateConfigurationForEnterpriseRequestBodySecretXdc4b
 public struct PullsDismissReviewRequestBodyEvent: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let dismiss = PullsDismissReviewRequestBodyEvent(rawValue: "DISMISS")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -58,10 +48,7 @@ public struct PullsDismissReviewRequestBodyEvent: RawRepresentable, Hashable, Co
 public struct ChecksCreateRequestBodyStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let queued = ChecksCreateRequestBodyStatus(rawValue: "queued")
     public static let inProgress = ChecksCreateRequestBodyStatus(rawValue: "in_progress")
     public static let completed = ChecksCreateRequestBodyStatus(rawValue: "completed")
@@ -71,7 +58,7 @@ public struct ChecksCreateRequestBodyStatus: RawRepresentable, Hashable, Codable
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -84,17 +71,14 @@ public struct ChecksCreateRequestBodyStatus: RawRepresentable, Hashable, Codable
 public struct GitCreateTagRequestBodyType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let commit = GitCreateTagRequestBodyType(rawValue: "commit")
     public static let tree = GitCreateTagRequestBodyType(rawValue: "tree")
     public static let blob = GitCreateTagRequestBodyType(rawValue: "blob")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -106,16 +90,13 @@ public struct GitCreateTagRequestBodyType: RawRepresentable, Hashable, Codable, 
 public struct SearchCodeParameterX5b868389: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let desc = SearchCodeParameterX5b868389(rawValue: "desc")
     public static let asc = SearchCodeParameterX5b868389(rawValue: "asc")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -127,17 +108,14 @@ public struct SearchCodeParameterX5b868389: RawRepresentable, Hashable, Codable,
 public struct IssuesListMilestonesParameter: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let open = IssuesListMilestonesParameter(rawValue: "open")
     public static let closed = IssuesListMilestonesParameter(rawValue: "closed")
     public static let all = IssuesListMilestonesParameter(rawValue: "all")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -147,24 +125,18 @@ public struct IssuesListMilestonesParameter: RawRepresentable, Hashable, Codable
 }
 
 /// Specify which types of repository this security configuration should be applied to by default.
-public struct CodeSecuritySetConfigurationAsDefaultForEnterpriseRequestBodyXd7696bf466: RawRepresentable, Hashable,
-    Codable, Sendable, SdkWireConvertible {
+public struct CodeSecuritySetConfigurationAsDefaultForEnterpriseRequestBodyXd7696bf466: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let all = CodeSecuritySetConfigurationAsDefaultForEnterpriseRequestBodyXd7696bf466(rawValue: "all")
     public static let none = CodeSecuritySetConfigurationAsDefaultForEnterpriseRequestBodyXd7696bf466(rawValue: "none")
-    public static let privateAndInternal =
-        CodeSecuritySetConfigurationAsDefaultForEnterpriseRequestBodyXd7696bf466(rawValue: "private_and_internal")
-    public static let `public` =
-        CodeSecuritySetConfigurationAsDefaultForEnterpriseRequestBodyXd7696bf466(rawValue: "public")
+    public static let privateAndInternal = CodeSecuritySetConfigurationAsDefaultForEnterpriseRequestBodyXd7696bf466(rawValue: "private_and_internal")
+    public static let `public` = CodeSecuritySetConfigurationAsDefaultForEnterpriseRequestBodyXd7696bf466(rawValue: "public")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -175,22 +147,16 @@ public struct CodeSecuritySetConfigurationAsDefaultForEnterpriseRequestBodyXd769
 
 /// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
 /// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
-public struct AgentAutomationsListAutomationsResponseItemTriggersSubIssueAdX6bb7c08f91: RawRepresentable, Hashable,
-    Codable, Sendable, SdkWireConvertible {
+public struct AgentAutomationsListAutomationsResponseItemTriggersSubIssueAdX6bb7c08f91: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let trigger =
-        AgentAutomationsListAutomationsResponseItemTriggersSubIssueAdX6bb7c08f91(rawValue: "trigger")
-    public static let repository =
-        AgentAutomationsListAutomationsResponseItemTriggersSubIssueAdX6bb7c08f91(rawValue: "repository")
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let trigger = AgentAutomationsListAutomationsResponseItemTriggersSubIssueAdX6bb7c08f91(rawValue: "trigger")
+    public static let repository = AgentAutomationsListAutomationsResponseItemTriggersSubIssueAdX6bb7c08f91(rawValue: "repository")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -199,24 +165,17 @@ public struct AgentAutomationsListAutomationsResponseItemTriggersSubIssueAdX6bb7
     }
 }
 
-public struct AgentAutomationsListRepoAutomationsResponseAutomationsItemTriXf09eb1b937: RawRepresentable, Hashable,
-    Codable, Sendable, SdkWireConvertible {
+public struct AgentAutomationsListRepoAutomationsResponseAutomationsItemTriXf09eb1b937: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    public static let approved =
-        AgentAutomationsListRepoAutomationsResponseAutomationsItemTriXf09eb1b937(rawValue: "approved")
-    public static let changesRequested =
-        AgentAutomationsListRepoAutomationsResponseAutomationsItemTriXf09eb1b937(rawValue: "changes_requested")
-    public static let commented =
-        AgentAutomationsListRepoAutomationsResponseAutomationsItemTriXf09eb1b937(rawValue: "commented")
+    public init(rawValue: String) { self.rawValue = rawValue }
+    public static let approved = AgentAutomationsListRepoAutomationsResponseAutomationsItemTriXf09eb1b937(rawValue: "approved")
+    public static let changesRequested = AgentAutomationsListRepoAutomationsResponseAutomationsItemTriXf09eb1b937(rawValue: "changes_requested")
+    public static let commented = AgentAutomationsListRepoAutomationsResponseAutomationsItemTriXf09eb1b937(rawValue: "commented")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -226,22 +185,17 @@ public struct AgentAutomationsListRepoAutomationsResponseAutomationsItemTriXf09e
 }
 
 /// The enablement status of secret scanning
-public struct CodeSecurityUpdateEnterpriseConfigurationRequestBodySecretScanning: RawRepresentable, Hashable, Codable,
-    Sendable, SdkWireConvertible {
+public struct CodeSecurityUpdateEnterpriseConfigurationRequestBodySecretScanning: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let enabled = CodeSecurityUpdateEnterpriseConfigurationRequestBodySecretScanning(rawValue: "enabled")
-    public static let disabled =
-        CodeSecurityUpdateEnterpriseConfigurationRequestBodySecretScanning(rawValue: "disabled")
+    public static let disabled = CodeSecurityUpdateEnterpriseConfigurationRequestBodySecretScanning(rawValue: "disabled")
     public static let notSet = CodeSecurityUpdateEnterpriseConfigurationRequestBodySecretScanning(rawValue: "not_set")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

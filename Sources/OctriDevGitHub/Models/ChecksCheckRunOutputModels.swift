@@ -3,60 +3,40 @@
 
 import Foundation
 
-/// Checks domain models
-public extension CheckRunOutput {
-    init(from decoder: Decoder) throws {
+// Checks domain models
+extension CheckRunOutput {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.title) else {
-            throw SdkValidationError(
-                field: "title",
-                code: "required",
-                message: "Validation failed for 'title': value is required"
-            )
+            throw SdkValidationError(field: "title", code: "required", message: "Validation failed for 'title': value is required")
         }
         guard container.contains(.summary) else {
-            throw SdkValidationError(
-                field: "summary",
-                code: "required",
-                message: "Validation failed for 'summary': value is required"
-            )
+            throw SdkValidationError(field: "summary", code: "required", message: "Validation failed for 'summary': value is required")
         }
         guard container.contains(.text) else {
-            throw SdkValidationError(
-                field: "text",
-                code: "required",
-                message: "Validation failed for 'text': value is required"
-            )
+            throw SdkValidationError(field: "text", code: "required", message: "Validation failed for 'text': value is required")
         }
         guard container.contains(.annotationsCount) else {
-            throw SdkValidationError(
-                field: "annotations_count",
-                code: "required",
-                message: "Validation failed for 'annotations_count': value is required"
-            )
+            throw SdkValidationError(field: "annotations_count", code: "required", message: "Validation failed for 'annotations_count': value is required")
         }
         guard container.contains(.annotationsUrl) else {
-            throw SdkValidationError(
-                field: "annotations_url",
-                code: "required",
-                message: "Validation failed for 'annotations_url': value is required"
-            )
+            throw SdkValidationError(field: "annotations_url", code: "required", message: "Validation failed for 'annotations_url': value is required")
         }
-        title = try container.sdkDecodeNullable(.title)
-        summary = try container.sdkDecodeNullable(.summary)
-        text = try container.sdkDecodeNullable(.text)
-        annotationsCount = try container.sdkDecodeRequired(.annotationsCount)
-        annotationsUrl = try container.sdkDecodeRequired(.annotationsUrl)
-        try sdkValidateUri("annotations_url", annotationsUrl)
+        self.title = try container.sdkDecodeNullable(.title)
+        self.summary = try container.sdkDecodeNullable(.summary)
+        self.text = try container.sdkDecodeNullable(.text)
+        self.annotationsCount = try container.sdkDecodeRequired(.annotationsCount)
+        self.annotationsUrl = try container.sdkDecodeRequired(.annotationsUrl)
+            try sdkValidateUri("annotations_url", self.annotationsUrl)
     }
 }
 
-public extension CheckRunOutput {
-    init(title: String?, summary: String?, text: String?, annotationsCount: Int, annotationsUrl: String) throws {
+extension CheckRunOutput {
+    public init(title: String?, summary: String?, text: String?, annotationsCount: Int, annotationsUrl: String) throws {
         (self.title, self.summary) = (title, summary)
         (self.text, self.annotationsCount) = (text, annotationsCount)
         self.annotationsUrl = annotationsUrl
-        try sdkValidateUri("annotations_url", self.annotationsUrl)
+            try sdkValidateUri("annotations_url", self.annotationsUrl)
     }
 }
 
@@ -74,38 +54,28 @@ public struct SimpleCommitCommitter: Codable {
         case email
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension SimpleCommitCommitter {
-    init(from decoder: Decoder) throws {
+extension SimpleCommitCommitter {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.email) else {
-            throw SdkValidationError(
-                field: "email",
-                code: "required",
-                message: "Validation failed for 'email': value is required"
-            )
+            throw SdkValidationError(field: "email", code: "required", message: "Validation failed for 'email': value is required")
         }
-        name = try container.sdkDecodeRequired(.name)
-        email = try container.sdkDecodeRequired(.email)
-        try sdkValidateEmail("email", email)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.email = try container.sdkDecodeRequired(.email)
+            try sdkValidateEmail("email", self.email)
     }
 }
 
-public extension SimpleCommitCommitter {
-    init(name: String, email: String) throws {
+extension SimpleCommitCommitter {
+    public init(name: String, email: String) throws {
         (self.name, self.email) = (name, email)
-        try sdkValidateEmail("email", self.email)
+            try sdkValidateEmail("email", self.email)
     }
 }
 
@@ -114,10 +84,7 @@ public extension SimpleCommitCommitter {
 public struct CheckSuiteStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let queued = CheckSuiteStatus(rawValue: "queued")
     public static let inProgress = CheckSuiteStatus(rawValue: "in_progress")
     public static let completed = CheckSuiteStatus(rawValue: "completed")
@@ -127,7 +94,7 @@ public struct CheckSuiteStatus: RawRepresentable, Hashable, Codable, Sendable, S
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -140,10 +107,7 @@ public struct CheckSuiteStatus: RawRepresentable, Hashable, Codable, Sendable, S
 public struct CheckSuiteConclusion: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let success = CheckSuiteConclusion(rawValue: "success")
     public static let failure = CheckSuiteConclusion(rawValue: "failure")
     public static let neutral = CheckSuiteConclusion(rawValue: "neutral")
@@ -156,7 +120,7 @@ public struct CheckSuiteConclusion: RawRepresentable, Hashable, Codable, Sendabl
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -170,10 +134,7 @@ public struct CheckSuiteConclusion: RawRepresentable, Hashable, Codable, Sendabl
 public struct CheckRunStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let queued = CheckRunStatus(rawValue: "queued")
     public static let inProgress = CheckRunStatus(rawValue: "in_progress")
     public static let completed = CheckRunStatus(rawValue: "completed")
@@ -183,7 +144,7 @@ public struct CheckRunStatus: RawRepresentable, Hashable, Codable, Sendable, Sdk
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -196,10 +157,7 @@ public struct CheckRunStatus: RawRepresentable, Hashable, Codable, Sendable, Sdk
 public struct CheckRunConclusion: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let success = CheckRunConclusion(rawValue: "success")
     public static let failure = CheckRunConclusion(rawValue: "failure")
     public static let neutral = CheckRunConclusion(rawValue: "neutral")
@@ -210,7 +168,7 @@ public struct CheckRunConclusion: RawRepresentable, Hashable, Codable, Sendable,
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

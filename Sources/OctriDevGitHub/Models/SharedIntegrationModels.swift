@@ -3,33 +3,25 @@
 
 import Foundation
 
-/// SharedIntegration domain models
+// SharedIntegration domain models
 public indirect enum IntegrationOwner {
     case simpleUser(SimpleUser)
     case enterprise(Enterprise)
 }
 
 extension IntegrationOwner: Codable {
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let raw = try? container.decode(JSONValue.self) {
-            if let value = Self.decodeLossless1(from: container, raw) {
-                self = value; return
-            }
+            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
         }
-        if let value = Self.decodeGroup1(from: container) {
-            self = value; return
-        }
-        throw DecodingError.dataCorruptedError(
-            in: container,
-            debugDescription: "No variant matched for IntegrationOwner"
-        )
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for IntegrationOwner")
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) {
-            return
-        }
+        if try encodeGroup1(to: encoder) { return }
     }
 }
 
@@ -47,12 +39,8 @@ extension IntegrationOwner {
 
 extension IntegrationOwner {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(SimpleUser.self) {
-            return .simpleUser(value)
-        }
-        if let value = try? container.decode(Enterprise.self) {
-            return .enterprise(value)
-        }
+        if let value = try? container.decode(SimpleUser.self) { return .simpleUser(value) }
+        if let value = try? container.decode(Enterprise.self) { return .enterprise(value) }
         return nil
     }
 }
@@ -91,30 +79,24 @@ public struct IntegrationPermissions: Codable {
     }
 
     init() {
-        (issues, checks, metadata, contents, deployments) = (nil, nil, nil, nil, nil)
+        (self.issues, self.checks, self.metadata, self.contents, self.deployments) = (nil, nil, nil, nil, nil)
     }
 }
 
-public extension IntegrationPermissions {
-    init(from decoder: Decoder) throws {
+extension IntegrationPermissions {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        issues = try container.sdkDecodeIfPresent(.issues)
-        checks = try container.sdkDecodeIfPresent(.checks)
-        metadata = try container.sdkDecodeIfPresent(.metadata)
-        contents = try container.sdkDecodeIfPresent(.contents)
-        deployments = try container.sdkDecodeIfPresent(.deployments)
+        self.issues = try container.sdkDecodeIfPresent(.issues)
+        self.checks = try container.sdkDecodeIfPresent(.checks)
+        self.metadata = try container.sdkDecodeIfPresent(.metadata)
+        self.contents = try container.sdkDecodeIfPresent(.contents)
+        self.deployments = try container.sdkDecodeIfPresent(.deployments)
         additionalProperties = try decoder.sdkAdditionalProperties(besides: CodingKeys.self)
     }
 }
 
-public extension IntegrationPermissions {
-    init(
-        issues: String? = nil,
-        checks: String? = nil,
-        metadata: String? = nil,
-        contents: String? = nil,
-        deployments: String? = nil
-    ) {
+extension IntegrationPermissions {
+    public init(issues: String? = nil, checks: String? = nil, metadata: String? = nil, contents: String? = nil, deployments: String? = nil) {
         self.init()
         (self.issues, self.checks) = (issues, checks)
         (self.metadata, self.contents) = (metadata, contents)
@@ -122,8 +104,8 @@ public extension IntegrationPermissions {
     }
 }
 
-public extension IntegrationPermissions {
-    func encode(to encoder: Encoder) throws {
+extension IntegrationPermissions {
+    public func encode(to encoder: Encoder) throws {
         try encoder.sdkEncodeAdditionalProperties(additionalProperties)
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(issues, forKey: .issues)
@@ -199,52 +181,35 @@ public struct Integration: Codable {
         case installationsCount = "installations_count"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension Integration {
-    init(from decoder: Decoder) throws {
+extension Integration {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.sdkDecodeRequired(.id)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        owner = try container.sdkDecodeRequired(.owner)
-        name = try container.sdkDecodeRequired(.name)
-        description = try container.sdkDecodeNullable(.description)
-        externalUrl = try container.sdkDecodeRequired(.externalUrl)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        permissions = try container.sdkDecodeRequired(.permissions)
-        events = try container.sdkDecodeRequired(.events)
-        slug = try container.sdkDecodeIfPresent(.slug)
-        clientId = try container.sdkDecodeIfPresent(.clientId)
-        installationsCount = try container.sdkDecodeIfPresent(.installationsCount)
-        try sdkValidateUri("external_url", externalUrl)
-        try sdkValidateUri("html_url", htmlUrl)
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+        self.id = try container.sdkDecodeRequired(.id)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.owner = try container.sdkDecodeRequired(.owner)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.description = try container.sdkDecodeNullable(.description)
+        self.externalUrl = try container.sdkDecodeRequired(.externalUrl)
+        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        self.permissions = try container.sdkDecodeRequired(.permissions)
+        self.events = try container.sdkDecodeRequired(.events)
+        self.slug = try container.sdkDecodeIfPresent(.slug)
+        self.clientId = try container.sdkDecodeIfPresent(.clientId)
+        self.installationsCount = try container.sdkDecodeIfPresent(.installationsCount)
+            try sdkValidateUri("external_url", self.externalUrl)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
     }
 }
 
-public extension Integration {
-    init(
-        id: Int,
-        nodeId: String,
-        owner: IntegrationOwner,
-        name: String,
-        description: String?,
-        externalUrl: String,
-        htmlUrl: String,
-        createdAt: Date,
-        updatedAt: Date,
-        permissions: IntegrationPermissions,
-        events: [String],
-        slug: String? = nil,
-        clientId: String? = nil,
-        installationsCount: Int? = nil
-    ) throws {
+extension Integration {
+    public init(id: Int, nodeId: String, owner: IntegrationOwner, name: String, description: String?, externalUrl: String, htmlUrl: String, createdAt: Date, updatedAt: Date, permissions: IntegrationPermissions, events: [String], slug: String? = nil, clientId: String? = nil, installationsCount: Int? = nil) throws {
         (self.id, self.nodeId) = (id, nodeId)
         (self.owner, self.name) = (owner, name)
         (self.description, self.externalUrl) = (description, externalUrl)
@@ -252,9 +217,9 @@ public extension Integration {
         (self.updatedAt, self.permissions) = (updatedAt, permissions)
         (self.events, self.slug) = (events, slug)
         (self.clientId, self.installationsCount) = (clientId, installationsCount)
-        try sdkValidateUri("external_url", self.externalUrl)
-        try sdkValidateUri("html_url", self.htmlUrl)
-        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateUri("external_url", self.externalUrl)
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
     }
 }

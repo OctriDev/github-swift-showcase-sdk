@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Search domain models
+// Search domain models
 /// Code Search Result Item
 public struct CodeSearchResultItem: Codable {
     /// Required `string` value serialized in the `name` wire field.
@@ -50,52 +50,36 @@ public struct CodeSearchResultItem: Codable {
         case textMatches = "text_matches"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension CodeSearchResultItem {
-    init(from decoder: Decoder) throws {
+extension CodeSearchResultItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        name = try container.sdkDecodeRequired(.name)
-        path = try container.sdkDecodeRequired(.path)
-        sha = try container.sdkDecodeRequired(.sha)
-        url = try container.sdkDecodeRequired(.url)
-        gitUrl = try container.sdkDecodeRequired(.gitUrl)
-        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        repository = try container.sdkDecodeRequired(.repository)
-        score = try container.sdkDecodeRequired(.score)
-        fileSize = try container.sdkDecodeIfPresent(.fileSize)
-        language = try container.sdkDecodeIfPresent(.language)
-        lastModifiedAt = try container.sdkDecodeIfPresent(.lastModifiedAt)
-        lineNumbers = try container.sdkDecodeIfPresent(.lineNumbers)
-        textMatches = try container.sdkDecodeIfPresent(.textMatches)
-        try sdkValidateUri("url", url)
-        try sdkValidateUri("git_url", gitUrl)
-        try sdkValidateUri("html_url", htmlUrl)
-        if let value = lastModifiedAt {
+        self.name = try container.sdkDecodeRequired(.name)
+        self.path = try container.sdkDecodeRequired(.path)
+        self.sha = try container.sdkDecodeRequired(.sha)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.gitUrl = try container.sdkDecodeRequired(.gitUrl)
+        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        self.repository = try container.sdkDecodeRequired(.repository)
+        self.score = try container.sdkDecodeRequired(.score)
+        self.fileSize = try container.sdkDecodeIfPresent(.fileSize)
+        self.language = try container.sdkDecodeIfPresent(.language)
+        self.lastModifiedAt = try container.sdkDecodeIfPresent(.lastModifiedAt)
+        self.lineNumbers = try container.sdkDecodeIfPresent(.lineNumbers)
+        self.textMatches = try container.sdkDecodeIfPresent(.textMatches)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("git_url", self.gitUrl)
+            try sdkValidateUri("html_url", self.htmlUrl)
+        if let value = self.lastModifiedAt {
             try sdkValidateDateTime("last_modified_at", sdkWireString(value))
         }
     }
 }
 
-public extension CodeSearchResultItem {
-    init(
-        name: String,
-        path: String,
-        sha: String,
-        url: String,
-        gitUrl: String,
-        htmlUrl: String,
-        repository: MinimalRepository,
-        score: Double,
-        fileSize: Int? = nil,
-        language: String? = nil,
-        lastModifiedAt: Date? = nil,
-        lineNumbers: [String]? = nil,
-        textMatches: SearchResultTextMatches? = nil
-    ) throws {
+extension CodeSearchResultItem {
+    public init(name: String, path: String, sha: String, url: String, gitUrl: String, htmlUrl: String, repository: MinimalRepository, score: Double, fileSize: Int? = nil, language: String? = nil, lastModifiedAt: Date? = nil, lineNumbers: [String]? = nil, textMatches: SearchResultTextMatches? = nil) throws {
         (self.name, self.path) = (name, path)
         (self.sha, self.url) = (sha, url)
         (self.gitUrl, self.htmlUrl) = (gitUrl, htmlUrl)
@@ -103,9 +87,9 @@ public extension CodeSearchResultItem {
         (self.fileSize, self.language) = (fileSize, language)
         (self.lastModifiedAt, self.lineNumbers) = (lastModifiedAt, lineNumbers)
         self.textMatches = textMatches
-        try sdkValidateUri("url", self.url)
-        try sdkValidateUri("git_url", self.gitUrl)
-        try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("url", self.url)
+            try sdkValidateUri("git_url", self.gitUrl)
+            try sdkValidateUri("html_url", self.htmlUrl)
         if let value = self.lastModifiedAt {
             try sdkValidateDateTime("last_modified_at", sdkWireString(value))
         }

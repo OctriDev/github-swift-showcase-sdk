@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Git domain models
+// Git domain models
 /// Blob
 public struct Blob: Codable {
     /// Required `string` value serialized in the `content` wire field.
@@ -31,81 +31,47 @@ public struct Blob: Codable {
         case highlightedContent = "highlighted_content"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension Blob {
-    init(from decoder: Decoder) throws {
+extension Blob {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.content) else {
-            throw SdkValidationError(
-                field: "content",
-                code: "required",
-                message: "Validation failed for 'content': value is required"
-            )
+            throw SdkValidationError(field: "content", code: "required", message: "Validation failed for 'content': value is required")
         }
         guard container.contains(.encoding) else {
-            throw SdkValidationError(
-                field: "encoding",
-                code: "required",
-                message: "Validation failed for 'encoding': value is required"
-            )
+            throw SdkValidationError(field: "encoding", code: "required", message: "Validation failed for 'encoding': value is required")
         }
         guard container.contains(.url) else {
-            throw SdkValidationError(
-                field: "url",
-                code: "required",
-                message: "Validation failed for 'url': value is required"
-            )
+            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
         }
         guard container.contains(.sha) else {
-            throw SdkValidationError(
-                field: "sha",
-                code: "required",
-                message: "Validation failed for 'sha': value is required"
-            )
+            throw SdkValidationError(field: "sha", code: "required", message: "Validation failed for 'sha': value is required")
         }
         guard container.contains(.size) else {
-            throw SdkValidationError(
-                field: "size",
-                code: "required",
-                message: "Validation failed for 'size': value is required"
-            )
+            throw SdkValidationError(field: "size", code: "required", message: "Validation failed for 'size': value is required")
         }
         guard container.contains(.nodeId) else {
-            throw SdkValidationError(
-                field: "node_id",
-                code: "required",
-                message: "Validation failed for 'node_id': value is required"
-            )
+            throw SdkValidationError(field: "node_id", code: "required", message: "Validation failed for 'node_id': value is required")
         }
-        content = try container.sdkDecodeRequired(.content)
-        encoding = try container.sdkDecodeRequired(.encoding)
-        url = try container.sdkDecodeRequired(.url)
-        sha = try container.sdkDecodeRequired(.sha)
-        size = try container.sdkDecodeNullable(.size)
-        nodeId = try container.sdkDecodeRequired(.nodeId)
-        highlightedContent = try container.sdkDecodeIfPresent(.highlightedContent)
-        try sdkValidateUri("url", url)
+        self.content = try container.sdkDecodeRequired(.content)
+        self.encoding = try container.sdkDecodeRequired(.encoding)
+        self.url = try container.sdkDecodeRequired(.url)
+        self.sha = try container.sdkDecodeRequired(.sha)
+        self.size = try container.sdkDecodeNullable(.size)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.highlightedContent = try container.sdkDecodeIfPresent(.highlightedContent)
+            try sdkValidateUri("url", self.url)
     }
 }
 
-public extension Blob {
-    init(
-        content: String,
-        encoding: String,
-        url: String,
-        sha: String,
-        size: Int?,
-        nodeId: String,
-        highlightedContent: String? = nil
-    ) throws {
+extension Blob {
+    public init(content: String, encoding: String, url: String, sha: String, size: Int?, nodeId: String, highlightedContent: String? = nil) throws {
         (self.content, self.encoding) = (content, encoding)
         (self.url, self.sha) = (url, sha)
         (self.size, self.nodeId) = (size, nodeId)
         self.highlightedContent = highlightedContent
-        try sdkValidateUri("url", self.url)
+            try sdkValidateUri("url", self.url)
     }
 }

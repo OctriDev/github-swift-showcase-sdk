@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// ActionsWorkflow domain models
+// ActionsWorkflow domain models
 /// Workflow Usage
 public struct WorkflowUsage: Codable {
     /// Required object value serialized in the `billable` wire field.
@@ -13,27 +13,21 @@ public struct WorkflowUsage: Codable {
         case billable
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension WorkflowUsage {
-    init(from decoder: Decoder) throws {
+extension WorkflowUsage {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.billable) else {
-            throw SdkValidationError(
-                field: "billable",
-                code: "required",
-                message: "Validation failed for 'billable': value is required"
-            )
+            throw SdkValidationError(field: "billable", code: "required", message: "Validation failed for 'billable': value is required")
         }
-        billable = try container.sdkDecodeRequired(.billable)
+        self.billable = try container.sdkDecodeRequired(.billable)
     }
 }
 
-public extension WorkflowUsage {
-    init(billable: WorkflowUsageBillable) {
+extension WorkflowUsage {
+    public init(billable: WorkflowUsageBillable) {
         self.billable = billable
     }
 }
@@ -48,19 +42,19 @@ public struct WorkflowUsageBillableMACOS: Codable {
     }
 
     init() {
-        totalMs = nil
+        self.totalMs = nil
     }
 }
 
-public extension WorkflowUsageBillableMACOS {
-    init(from decoder: Decoder) throws {
+extension WorkflowUsageBillableMACOS {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        totalMs = try container.sdkDecodeIfPresent(.totalMs)
+        self.totalMs = try container.sdkDecodeIfPresent(.totalMs)
     }
 }
 
-public extension WorkflowUsageBillableMACOS {
-    init(totalMs: Int? = nil) {
+extension WorkflowUsageBillableMACOS {
+    public init(totalMs: Int? = nil) {
         self.init()
         self.totalMs = totalMs
     }
@@ -76,19 +70,19 @@ public struct WorkflowUsageBillableUBUNTU: Codable {
     }
 
     init() {
-        totalMs = nil
+        self.totalMs = nil
     }
 }
 
-public extension WorkflowUsageBillableUBUNTU {
-    init(from decoder: Decoder) throws {
+extension WorkflowUsageBillableUBUNTU {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        totalMs = try container.sdkDecodeIfPresent(.totalMs)
+        self.totalMs = try container.sdkDecodeIfPresent(.totalMs)
     }
 }
 
-public extension WorkflowUsageBillableUBUNTU {
-    init(totalMs: Int? = nil) {
+extension WorkflowUsageBillableUBUNTU {
+    public init(totalMs: Int? = nil) {
         self.init()
         self.totalMs = totalMs
     }
@@ -104,19 +98,19 @@ public struct WorkflowUsageBillableWINDOWS: Codable {
     }
 
     init() {
-        totalMs = nil
+        self.totalMs = nil
     }
 }
 
-public extension WorkflowUsageBillableWINDOWS {
-    init(from decoder: Decoder) throws {
+extension WorkflowUsageBillableWINDOWS {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        totalMs = try container.sdkDecodeIfPresent(.totalMs)
+        self.totalMs = try container.sdkDecodeIfPresent(.totalMs)
     }
 }
 
-public extension WorkflowUsageBillableWINDOWS {
-    init(totalMs: Int? = nil) {
+extension WorkflowUsageBillableWINDOWS {
+    public init(totalMs: Int? = nil) {
         self.init()
         self.totalMs = totalMs
     }
@@ -138,25 +132,21 @@ public struct WorkflowUsageBillable: Codable {
     }
 
     init() {
-        (ubuntu, macos, windows) = (nil, nil, nil)
+        (self.ubuntu, self.macos, self.windows) = (nil, nil, nil)
     }
 }
 
-public extension WorkflowUsageBillable {
-    init(from decoder: Decoder) throws {
+extension WorkflowUsageBillable {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        ubuntu = try container.sdkDecodeIfPresent(.ubuntu)
-        macos = try container.sdkDecodeIfPresent(.macos)
-        windows = try container.sdkDecodeIfPresent(.windows)
+        self.ubuntu = try container.sdkDecodeIfPresent(.ubuntu)
+        self.macos = try container.sdkDecodeIfPresent(.macos)
+        self.windows = try container.sdkDecodeIfPresent(.windows)
     }
 }
 
-public extension WorkflowUsageBillable {
-    init(
-        ubuntu: WorkflowUsageBillableUBUNTU? = nil,
-        macos: WorkflowUsageBillableMACOS? = nil,
-        windows: WorkflowUsageBillableWINDOWS? = nil
-    ) {
+extension WorkflowUsageBillable {
+    public init(ubuntu: WorkflowUsageBillableUBUNTU? = nil, macos: WorkflowUsageBillableMACOS? = nil, windows: WorkflowUsageBillableWINDOWS? = nil) {
         self.init()
         (self.ubuntu, self.macos) = (ubuntu, macos)
         self.windows = windows

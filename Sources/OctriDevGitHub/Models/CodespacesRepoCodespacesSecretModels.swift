@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Codespaces domain models
+// Codespaces domain models
 /// Set repository secrets for GitHub Codespaces.
 public struct RepoCodespacesSecret: Codable {
     /// The name of the secret.
@@ -20,49 +20,35 @@ public struct RepoCodespacesSecret: Codable {
         case updatedAt = "updated_at"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension RepoCodespacesSecret {
-    init(from decoder: Decoder) throws {
+extension RepoCodespacesSecret {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.createdAt) else {
-            throw SdkValidationError(
-                field: "created_at",
-                code: "required",
-                message: "Validation failed for 'created_at': value is required"
-            )
+            throw SdkValidationError(field: "created_at", code: "required", message: "Validation failed for 'created_at': value is required")
         }
         guard container.contains(.updatedAt) else {
-            throw SdkValidationError(
-                field: "updated_at",
-                code: "required",
-                message: "Validation failed for 'updated_at': value is required"
-            )
+            throw SdkValidationError(field: "updated_at", code: "required", message: "Validation failed for 'updated_at': value is required")
         }
-        name = try container.sdkDecodeRequired(.name)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+        self.name = try container.sdkDecodeRequired(.name)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
     }
 }
 
-public extension RepoCodespacesSecret {
-    init(name: String, createdAt: Date, updatedAt: Date) throws {
+extension RepoCodespacesSecret {
+    public init(name: String, createdAt: Date, updatedAt: Date) throws {
         (self.name, self.createdAt) = (name, createdAt)
         self.updatedAt = updatedAt
-        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
     }
 }
 
@@ -89,74 +75,46 @@ public struct CodespacesSecret: Codable {
         case selectedRepositoriesUrl = "selected_repositories_url"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension CodespacesSecret {
-    init(from decoder: Decoder) throws {
+extension CodespacesSecret {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.createdAt) else {
-            throw SdkValidationError(
-                field: "created_at",
-                code: "required",
-                message: "Validation failed for 'created_at': value is required"
-            )
+            throw SdkValidationError(field: "created_at", code: "required", message: "Validation failed for 'created_at': value is required")
         }
         guard container.contains(.updatedAt) else {
-            throw SdkValidationError(
-                field: "updated_at",
-                code: "required",
-                message: "Validation failed for 'updated_at': value is required"
-            )
+            throw SdkValidationError(field: "updated_at", code: "required", message: "Validation failed for 'updated_at': value is required")
         }
         guard container.contains(.visibility) else {
-            throw SdkValidationError(
-                field: "visibility",
-                code: "required",
-                message: "Validation failed for 'visibility': value is required"
-            )
+            throw SdkValidationError(field: "visibility", code: "required", message: "Validation failed for 'visibility': value is required")
         }
         guard container.contains(.selectedRepositoriesUrl) else {
-            throw SdkValidationError(
-                field: "selected_repositories_url",
-                code: "required",
-                message: "Validation failed for 'selected_repositories_url': value is required"
-            )
+            throw SdkValidationError(field: "selected_repositories_url", code: "required", message: "Validation failed for 'selected_repositories_url': value is required")
         }
-        name = try container.sdkDecodeRequired(.name)
-        createdAt = try container.sdkDecodeRequired(.createdAt)
-        updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        visibility = try container.sdkDecodeRequired(.visibility)
-        selectedRepositoriesUrl = try container.sdkDecodeRequired(.selectedRepositoriesUrl)
-        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
-        try sdkValidateUri("selected_repositories_url", selectedRepositoriesUrl)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        self.visibility = try container.sdkDecodeRequired(.visibility)
+        self.selectedRepositoriesUrl = try container.sdkDecodeRequired(.selectedRepositoriesUrl)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateUri("selected_repositories_url", self.selectedRepositoriesUrl)
     }
 }
 
-public extension CodespacesSecret {
-    init(
-        name: String,
-        createdAt: Date,
-        updatedAt: Date,
-        visibility: CodespacesSecretVisibility,
-        selectedRepositoriesUrl: String
-    ) throws {
+extension CodespacesSecret {
+    public init(name: String, createdAt: Date, updatedAt: Date, visibility: CodespacesSecretVisibility, selectedRepositoriesUrl: String) throws {
         (self.name, self.createdAt) = (name, createdAt)
         (self.updatedAt, self.visibility) = (updatedAt, visibility)
         self.selectedRepositoriesUrl = selectedRepositoriesUrl
-        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-        try sdkValidateUri("selected_repositories_url", self.selectedRepositoriesUrl)
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateUri("selected_repositories_url", self.selectedRepositoriesUrl)
     }
 }
 
@@ -195,37 +153,29 @@ public struct CodespaceExportDetails: Codable {
     }
 
     init() {
-        (state, completedAt, branch, sha, id) = (nil, nil, nil, nil, nil)
-        (exportUrl, htmlUrl) = (nil, nil)
+        (self.state, self.completedAt, self.branch, self.sha, self.id) = (nil, nil, nil, nil, nil)
+        (self.exportUrl, self.htmlUrl) = (nil, nil)
     }
 }
 
-public extension CodespaceExportDetails {
-    init(from decoder: Decoder) throws {
+extension CodespaceExportDetails {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        state = try container.sdkDecodeIfPresent(.state)
-        completedAt = try container.sdkDecodeIfPresent(.completedAt)
-        branch = try container.sdkDecodeIfPresent(.branch)
-        sha = try container.sdkDecodeIfPresent(.sha)
-        id = try container.sdkDecodeIfPresent(.id)
-        exportUrl = try container.sdkDecodeIfPresent(.exportUrl)
-        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        if let value = completedAt {
+        self.state = try container.sdkDecodeIfPresent(.state)
+        self.completedAt = try container.sdkDecodeIfPresent(.completedAt)
+        self.branch = try container.sdkDecodeIfPresent(.branch)
+        self.sha = try container.sdkDecodeIfPresent(.sha)
+        self.id = try container.sdkDecodeIfPresent(.id)
+        self.exportUrl = try container.sdkDecodeIfPresent(.exportUrl)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        if let value = self.completedAt {
             try sdkValidateDateTime("completed_at", sdkWireString(value))
         }
     }
 }
 
-public extension CodespaceExportDetails {
-    init(
-        state: String? = nil,
-        completedAt: Date? = nil,
-        branch: String? = nil,
-        sha: String? = nil,
-        id: String? = nil,
-        exportUrl: String? = nil,
-        htmlUrl: String? = nil
-    ) throws {
+extension CodespaceExportDetails {
+    public init(state: String? = nil, completedAt: Date? = nil, branch: String? = nil, sha: String? = nil, id: String? = nil, exportUrl: String? = nil, htmlUrl: String? = nil) throws {
         self.init()
         (self.state, self.completedAt) = (state, completedAt)
         (self.branch, self.sha) = (branch, sha)
@@ -274,83 +224,45 @@ public struct NullableCodespaceMachine: Codable {
         case prebuildAvailability = "prebuild_availability"
     }
 
-    private init(sdkCopy value: Self) {
-        self = value
-    }
+    private init(sdkCopy value: Self) { self = value }
 }
 
-public extension NullableCodespaceMachine {
-    init(from decoder: Decoder) throws {
+extension NullableCodespaceMachine {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.name) else {
-            throw SdkValidationError(
-                field: "name",
-                code: "required",
-                message: "Validation failed for 'name': value is required"
-            )
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
         }
         guard container.contains(.displayName) else {
-            throw SdkValidationError(
-                field: "display_name",
-                code: "required",
-                message: "Validation failed for 'display_name': value is required"
-            )
+            throw SdkValidationError(field: "display_name", code: "required", message: "Validation failed for 'display_name': value is required")
         }
         guard container.contains(.operatingSystem) else {
-            throw SdkValidationError(
-                field: "operating_system",
-                code: "required",
-                message: "Validation failed for 'operating_system': value is required"
-            )
+            throw SdkValidationError(field: "operating_system", code: "required", message: "Validation failed for 'operating_system': value is required")
         }
         guard container.contains(.storageInBytes) else {
-            throw SdkValidationError(
-                field: "storage_in_bytes",
-                code: "required",
-                message: "Validation failed for 'storage_in_bytes': value is required"
-            )
+            throw SdkValidationError(field: "storage_in_bytes", code: "required", message: "Validation failed for 'storage_in_bytes': value is required")
         }
         guard container.contains(.memoryInBytes) else {
-            throw SdkValidationError(
-                field: "memory_in_bytes",
-                code: "required",
-                message: "Validation failed for 'memory_in_bytes': value is required"
-            )
+            throw SdkValidationError(field: "memory_in_bytes", code: "required", message: "Validation failed for 'memory_in_bytes': value is required")
         }
         guard container.contains(.cpus) else {
-            throw SdkValidationError(
-                field: "cpus",
-                code: "required",
-                message: "Validation failed for 'cpus': value is required"
-            )
+            throw SdkValidationError(field: "cpus", code: "required", message: "Validation failed for 'cpus': value is required")
         }
         guard container.contains(.prebuildAvailability) else {
-            throw SdkValidationError(
-                field: "prebuild_availability",
-                code: "required",
-                message: "Validation failed for 'prebuild_availability': value is required"
-            )
+            throw SdkValidationError(field: "prebuild_availability", code: "required", message: "Validation failed for 'prebuild_availability': value is required")
         }
-        name = try container.sdkDecodeRequired(.name)
-        displayName = try container.sdkDecodeRequired(.displayName)
-        operatingSystem = try container.sdkDecodeRequired(.operatingSystem)
-        storageInBytes = try container.sdkDecodeRequired(.storageInBytes)
-        memoryInBytes = try container.sdkDecodeRequired(.memoryInBytes)
-        cpus = try container.sdkDecodeRequired(.cpus)
-        prebuildAvailability = try container.sdkDecodeNullable(.prebuildAvailability)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.displayName = try container.sdkDecodeRequired(.displayName)
+        self.operatingSystem = try container.sdkDecodeRequired(.operatingSystem)
+        self.storageInBytes = try container.sdkDecodeRequired(.storageInBytes)
+        self.memoryInBytes = try container.sdkDecodeRequired(.memoryInBytes)
+        self.cpus = try container.sdkDecodeRequired(.cpus)
+        self.prebuildAvailability = try container.sdkDecodeNullable(.prebuildAvailability)
     }
 }
 
-public extension NullableCodespaceMachine {
-    init(
-        name: String,
-        displayName: String,
-        operatingSystem: String,
-        storageInBytes: Int,
-        memoryInBytes: Int,
-        cpus: Int,
-        prebuildAvailability: NullableCodespaceMachinePrebuildAvailability?
-    ) {
+extension NullableCodespaceMachine {
+    public init(name: String, displayName: String, operatingSystem: String, storageInBytes: Int, memoryInBytes: Int, cpus: Int, prebuildAvailability: NullableCodespaceMachinePrebuildAvailability?) {
         (self.name, self.displayName) = (name, displayName)
         (self.operatingSystem, self.storageInBytes) = (operatingSystem, storageInBytes)
         (self.memoryInBytes, self.cpus) = (memoryInBytes, cpus)
@@ -362,10 +274,7 @@ public extension NullableCodespaceMachine {
 public struct CodespaceState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let unknown = CodespaceState(rawValue: "Unknown")
     public static let created = CodespaceState(rawValue: "Created")
     public static let queued = CodespaceState(rawValue: "Queued")
@@ -386,7 +295,7 @@ public struct CodespaceState: RawRepresentable, Hashable, Codable, Sendable, Sdk
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -402,17 +311,14 @@ public struct CodespaceState: RawRepresentable, Hashable, Codable, Sendable, Sdk
 public struct CodespaceMachinePrebuildAvailability: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let none = CodespaceMachinePrebuildAvailability(rawValue: "none")
     public static let ready = CodespaceMachinePrebuildAvailability(rawValue: "ready")
     public static let inProgress = CodespaceMachinePrebuildAvailability(rawValue: "in_progress")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -425,10 +331,7 @@ public struct CodespaceMachinePrebuildAvailability: RawRepresentable, Hashable, 
 public struct CodespaceLocation: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let eastUs = CodespaceLocation(rawValue: "EastUs")
     public static let southEastAsia = CodespaceLocation(rawValue: "SouthEastAsia")
     public static let westEurope = CodespaceLocation(rawValue: "WestEurope")
@@ -436,7 +339,7 @@ public struct CodespaceLocation: RawRepresentable, Hashable, Codable, Sendable, 
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -449,17 +352,14 @@ public struct CodespaceLocation: RawRepresentable, Hashable, Codable, Sendable, 
 public struct CodespacesSecretVisibility: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let all = CodespacesSecretVisibility(rawValue: "all")
     public static let `private` = CodespacesSecretVisibility(rawValue: "private")
     public static let selected = CodespacesSecretVisibility(rawValue: "selected")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -472,17 +372,14 @@ public struct CodespacesSecretVisibility: RawRepresentable, Hashable, Codable, S
 public struct CodespacesOrgSecretVisibility: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let all = CodespacesOrgSecretVisibility(rawValue: "all")
     public static let `private` = CodespacesOrgSecretVisibility(rawValue: "private")
     public static let selected = CodespacesOrgSecretVisibility(rawValue: "selected")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -495,21 +392,17 @@ public struct CodespacesOrgSecretVisibility: RawRepresentable, Hashable, Codable
 /// branch was not specified as a ref, the default branch will be assumed. Value will be "null" if prebuilds are
 /// not supported or prebuild availability could not be determined. Value will be "none" if no prebuild is
 /// available. Latest values "ready" and "in_progress" indicate the prebuild availability status.
-public struct NullableCodespaceMachinePrebuildAvailability: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct NullableCodespaceMachinePrebuildAvailability: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let none = NullableCodespaceMachinePrebuildAvailability(rawValue: "none")
     public static let ready = NullableCodespaceMachinePrebuildAvailability(rawValue: "ready")
     public static let inProgress = NullableCodespaceMachinePrebuildAvailability(rawValue: "in_progress")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

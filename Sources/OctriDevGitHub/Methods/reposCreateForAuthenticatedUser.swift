@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ReposMethods {
-    struct ReposCreateForAuthenticatedUserOptions: Codable {
+extension ReposMethods {
+    public struct ReposCreateForAuthenticatedUserOptions: Codable {
         public var name: String
         public var description: String?
         public var homepage: String?
@@ -37,9 +37,7 @@ public extension ReposMethods {
         }
     }
 
-    /// Creates a new repository for the authenticated user. OAuth app tokens and personal access tokens (classic) need
-    /// the `public_repo` or `repo` scope to create a public repository, and `repo` scope to create a private
-    /// repository.
+    /// Creates a new repository for the authenticated user. OAuth app tokens and personal access tokens (classic) need the `public_repo` or `repo` scope to create a public repository, and `repo` scope to create a private repository.
     ///
     /// - Parameters:
     /// - name: The name of the repository.
@@ -82,28 +80,9 @@ public extension ReposMethods {
     /// - hasDownloads: Whether downloads are enabled.
     /// - isTemplate: Whether this repository acts as a template that can be used to
     ///   generate new repositories.
-    static func reposCreateForAuthenticatedUser(
-        config: ClientConfig,
-        options: ReposCreateForAuthenticatedUserOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> FullRepository {
+    public static func reposCreateForAuthenticatedUser(config: ClientConfig, options: ReposCreateForAuthenticatedUserOptions, requestOptions: RequestOptions? = nil) async throws -> FullRepository {
         let requestBody = ReposCreateForAuthenticatedUserRequestBody(options: options)
 
-        return try await (sdkRequest(
-            "POST",
-            "/user/repos",
-            config: config,
-            body: requestBody,
-            decoder: .json,
-            operationId: "reposCreateForAuthenticatedUser",
-            options: requestOptions,
-            errors: [
-                "400": BasicError.self,
-                "401": BasicError.self,
-                "403": BasicError.self,
-                "404": BasicError.self,
-                "422": ValidationError.self,
-            ]
-        )).data
+        return try (await sdkRequest("POST", "/user/repos", config: config, body: requestBody, decoder: .json, operationId: "reposCreateForAuthenticatedUser", options: requestOptions, errors: ["400": BasicError.self, "401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
     }
 }
