@@ -5,7 +5,7 @@ import Foundation
 @testable import OctriDevGitHub
 import XCTest
 
-let sdkMethodFixture1046Expected = String(
+let sdkMethodFixture1045Expected = String(
     data: Data(base64Encoded: [
     "eyJ1cmwiOiJodHRwczovL2FwaS5naXRodWIuY29tL3JlcG9zL29jdG9jYXQvSGVsbG8tV29ybGQvbWls",
     "ZXN0b25lcy8xIiwiaHRtbF91cmwiOiJodHRwczovL2dpdGh1Yi5jb20vb2N0b2NhdC9IZWxsby1Xb3Js",
@@ -35,7 +35,7 @@ let sdkMethodFixture1046Expected = String(
     encoding: .utf8
 )!
 
-let sdkMethodFixture1047Expected = String(
+let sdkMethodFixture1046Expected = String(
     data: Data(base64Encoded: [
     "eyJrZXkiOiJtaXQiLCJuYW1lIjoiTUlUIExpY2Vuc2UiLCJzcGR4X2lkIjoiTUlUIiwidXJsIjoiaHR0",
     "cHM6Ly9hcGkuZ2l0aHViLmNvbS9saWNlbnNlcy9taXQiLCJub2RlX2lkIjoiTURjNlRHbGpaVzV6Wlcx",
@@ -73,7 +73,7 @@ let sdkMethodFixture1047Expected = String(
     encoding: .utf8
 )!
 
-let sdkMethodFixture1048Expected = String(
+let sdkMethodFixture1047Expected = String(
     data: Data(base64Encoded: [
     "eyJtZXNzYWdlIjoiZXhhbXBsZSB0ZXh0IiwiZG9jdW1lbnRhdGlvbl91cmwiOiJodHRwczovL2V4YW1w",
     "bGUuY29tIiwidXJsIjoiaHR0cHM6Ly9leGFtcGxlLmNvbSIsInN0YXR1cyI6ImFjdGl2ZSJ9",
@@ -81,7 +81,7 @@ let sdkMethodFixture1048Expected = String(
     encoding: .utf8
 )!
 
-let sdkMethodFixture1049Expected = String(
+let sdkMethodFixture1048Expected = String(
     data: Data(base64Encoded: [
     "W3sia2V5IjoibWl0IiwibmFtZSI6Ik1JVCBMaWNlbnNlIiwic3BkeF9pZCI6Ik1JVCIsInVybCI6Imh0",
     "dHBzOi8vYXBpLmdpdGh1Yi5jb20vbGljZW5zZXMvbWl0Iiwibm9kZV9pZCI6Ik1EYzZUR2xqWlc1elpX",
@@ -106,7 +106,7 @@ let sdkMethodFixture1049Expected = String(
     encoding: .utf8
 )!
 
-let sdkMethodFixture1050Expected = String(
+let sdkMethodFixture1049Expected = String(
     data: Data(base64Encoded: [
     "eyJuYW1lIjoiTElDRU5TRSIsInBhdGgiOiJMSUNFTlNFIiwic2hhIjoiNDAxYzU5ZGNjNDU3MGI5NTRk",
     "ZDZkMzQ1ZTc2MTk5ZTFmNGU3NjI2NiIsInNpemUiOjEwNzcsInVybCI6Imh0dHBzOi8vYXBpLmdpdGh1",
@@ -152,10 +152,18 @@ let sdkMethodFixture1050Expected = String(
     encoding: .utf8
 )!
 
-let sdkMethodFixture1051Expected = String(
+let sdkMethodFixture1050Expected = String(
     data: Data(base64Encoded: [
     "eyJtZXNzYWdlIjoiZXhhbXBsZSB0ZXh0IiwiZG9jdW1lbnRhdGlvbl91cmwiOiJodHRwczovL2V4YW1w",
     "bGUuY29tIiwidXJsIjoiaHR0cHM6Ly9leGFtcGxlLmNvbSIsInN0YXR1cyI6ImFjdGl2ZSJ9",
+    ].joined())!,
+    encoding: .utf8
+)!
+
+let sdkMethodFixture1051Expected = String(
+    data: Data(base64Encoded: [
+    "WyJBY3Rpb25zY3JpcHQiLCJBbmRyb2lkIiwiQXBwY2VsZXJhdG9yVGl0YW5pdW0iLCJBdXRvdG9vbHMi",
+    "LCJCYW5jaGEiLCJDIiwiQysrIl0=",
     ].joined())!,
     encoding: .utf8
 )!
@@ -641,14 +649,6 @@ let sdkMethodFixture1085Expected = String(
 )!
 
 let sdkMethodFixture1087Expected = String(
-    data: Data(base64Encoded: [
-    "eyJtZXNzYWdlIjoiZXhhbXBsZSB0ZXh0IiwiZG9jdW1lbnRhdGlvbl91cmwiOiJodHRwczovL2V4YW1w",
-    "bGUuY29tIiwidXJsIjoiaHR0cHM6Ly9leGFtcGxlLmNvbSIsInN0YXR1cyI6ImFjdGl2ZSJ9",
-    ].joined())!,
-    encoding: .utf8
-)!
-
-let sdkMethodFixture1089Expected = String(
     data: Data(base64Encoded: [
     "eyJtZXNzYWdlIjoiZXhhbXBsZSB0ZXh0IiwiZG9jdW1lbnRhdGlvbl91cmwiOiJodHRwczovL2V4YW1w",
     "bGUuY29tIiwidXJsIjoiaHR0cHM6Ly9leGFtcGxlLmNvbSIsInN0YXR1cyI6ImFjdGl2ZSJ9",

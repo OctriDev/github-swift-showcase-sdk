@@ -106,10 +106,6 @@ extension WebhookProjectsV2StatusUpdateEditedChanges {
     }
 }
 
-
-
-
-
 /// Optional object value serialized in the `status` wire field.
 public struct WebhookProjectsV2StatusUpdateEditedChangesStatus: Codable {
     /// Optional enumerated value serialized in the `from` wire field.

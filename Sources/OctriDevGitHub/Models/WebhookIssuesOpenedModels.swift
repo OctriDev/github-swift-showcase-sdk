@@ -4,347 +4,86 @@
 import Foundation
 
 // WebhookIssuesOpened domain models
-/// Optional object value serialized in the `permissions` wire field.
-public struct WebhookIssuesOpenedChangesOldRepositoryPermissions: Codable {
-    /// Required `boolean` value serialized in the `admin` wire field.
-    public var admin: Bool
-    /// Required `boolean` value serialized in the `pull` wire field.
-    public var pull: Bool
-    /// Required `boolean` value serialized in the `push` wire field.
-    public var push: Bool
-    /// Optional `boolean` value serialized in the `maintain` wire field.
-    public var maintain: Bool?
-    /// Optional `boolean` value serialized in the `triage` wire field.
-    public var triage: Bool?
-
-    enum CodingKeys: String, CodingKey {
-        case admin
-        case pull
-        case push
-        case maintain
-        case triage
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookIssuesOpenedChangesOldRepositoryPermissions {
+extension WebhookIssuesOpened {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.admin) else {
-            throw SdkValidationError(field: "admin", code: "required", message: "Validation failed for 'admin': value is required")
+        guard container.contains(.action) else {
+            throw SdkValidationError(field: "action", code: "required", message: "Validation failed for 'action': value is required")
         }
-        guard container.contains(.pull) else {
-            throw SdkValidationError(field: "pull", code: "required", message: "Validation failed for 'pull': value is required")
+        guard container.contains(.issue) else {
+            throw SdkValidationError(field: "issue", code: "required", message: "Validation failed for 'issue': value is required")
         }
-        guard container.contains(.push) else {
-            throw SdkValidationError(field: "push", code: "required", message: "Validation failed for 'push': value is required")
+        guard container.contains(.repository) else {
+            throw SdkValidationError(field: "repository", code: "required", message: "Validation failed for 'repository': value is required")
         }
-        self.admin = try container.sdkDecodeRequired(.admin)
-        self.pull = try container.sdkDecodeRequired(.pull)
-        self.push = try container.sdkDecodeRequired(.push)
-        self.maintain = try container.sdkDecodeIfPresent(.maintain)
-        self.triage = try container.sdkDecodeIfPresent(.triage)
+        guard container.contains(.sender) else {
+            throw SdkValidationError(field: "sender", code: "required", message: "Validation failed for 'sender': value is required")
+        }
+        self.action = try container.sdkDecodeRequired(.action)
+        self.issue = try container.sdkDecodeRequired(.issue)
+        self.repository = try container.sdkDecodeRequired(.repository)
+        self.sender = try container.sdkDecodeRequired(.sender)
+        self.changes = try container.sdkDecodeIfPresent(.changes)
+        self.enterprise = try container.sdkDecodeIfPresent(.enterprise)
+        self.installation = try container.sdkDecodeIfPresent(.installation)
+        self.organization = try container.sdkDecodeIfPresent(.organization)
     }
 }
 
-extension WebhookIssuesOpenedChangesOldRepositoryPermissions {
-    public init(admin: Bool, pull: Bool, push: Bool, maintain: Bool? = nil, triage: Bool? = nil) {
-        (self.admin, self.pull) = (admin, pull)
-        (self.push, self.maintain) = (push, maintain)
-        self.triage = triage
+extension WebhookIssuesOpened {
+    public init(action: WebhookIssuesOpenedAction, issue: WebhookIssuesOpenedIssue, repository: RepositoryWebhooks, sender: SimpleUser, changes: WebhookIssuesOpenedChanges? = nil, enterprise: EnterpriseWebhooks? = nil, installation: SimpleInstallation? = nil, organization: OrganizationSimpleWebhooks? = nil) {
+        (self.action, self.issue) = (action, issue)
+        (self.repository, self.sender) = (repository, sender)
+        (self.changes, self.enterprise) = (changes, enterprise)
+        (self.installation, self.organization) = (installation, organization)
     }
 }
 
-/// Required object value serialized in the `labels[]` wire field.
-public struct WebhookIssuesOpenedChangesOldIssueLabelsItem: Codable {
-    /// 6-character hex code, without the leading #, identifying the color
-    public var color: String
-    /// Required `boolean` value serialized in the `default` wire field.
-    public var `default`: Bool
-    /// Required `string` value serialized in the `description` wire field.
-    public var description: String?
-    /// Required `integer` value serialized in the `id` wire field.
-    public var id: Int
-    /// The name of the label.
-    public var name: String
-    /// Required `string` value serialized in the `node_id` wire field.
-    public var nodeId: String
-    /// URL for the label
-    public var url: String
-
-    enum CodingKeys: String, CodingKey {
-        case color
-        case `default`
-        case description
-        case id
-        case name
-        case nodeId = "node_id"
-        case url
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookIssuesOpenedChangesOldIssueLabelsItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.color) else {
-            throw SdkValidationError(field: "color", code: "required", message: "Validation failed for 'color': value is required")
-        }
-        guard container.contains(.`default`) else {
-            throw SdkValidationError(field: "default", code: "required", message: "Validation failed for 'default': value is required")
-        }
-        guard container.contains(.description) else {
-            throw SdkValidationError(field: "description", code: "required", message: "Validation failed for 'description': value is required")
-        }
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        guard container.contains(.nodeId) else {
-            throw SdkValidationError(field: "node_id", code: "required", message: "Validation failed for 'node_id': value is required")
-        }
-        guard container.contains(.url) else {
-            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
-        }
-        self.color = try container.sdkDecodeRequired(.color)
-        self.`default` = try container.sdkDecodeRequired(.`default`)
-        self.description = try container.sdkDecodeNullable(.description)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.url = try container.sdkDecodeRequired(.url)
-            try sdkValidateUri("url", self.url)
-    }
-}
-
-extension WebhookIssuesOpenedChangesOldIssueLabelsItem {
-    public init(color: String, `default`: Bool, description: String?, id: Int, name: String, nodeId: String, url: String) throws {
-        (self.color, self.`default`) = (color, `default`)
-        (self.description, self.id) = (description, id)
-        (self.name, self.nodeId) = (name, nodeId)
-        self.url = url
-            try sdkValidateUri("url", self.url)
-    }
-}
-
-/// The issue itself.
-public struct WebhookIssuesOpenedChangesOldIssue: Codable {
-    /// Required `int64`-formatted value serialized in the `id` wire field.
-    public var id: Int
-    /// Required `integer` value serialized in the `number` wire field.
-    public var number: Int
-    /// Optional enumerated value serialized in the `active_lock_reason` wire field.
-    public var activeLockReason: WebhookIssuesOpenedChangesOldIssueActiveLockReason?
-    /// Optional object value serialized in the `assignee` wire field.
-    public var assignee: WebhookIssuesOpenedChangesOldIssueAssignee?
-    /// Optional array value serialized in the `assignees` wire field.
-    public var assignees: [WebhookIssuesOpenedChangesOldIssueAssigneesItem?]?
-    /// How the author is associated with the repository.
-    public var authorAssociation: WebhookIssuesOpenedChangesOldIssueAuthorAssociation?
-    /// Contents of the issue
-    public var body: String?
-    /// Optional `date-time`-formatted value serialized in the `closed_at` wire field.
-    public var closedAt: Date?
-    /// Optional `integer` value serialized in the `comments` wire field.
-    public var comments: Int?
-    /// Optional `uri`-formatted value serialized in the `comments_url` wire field.
-    public var commentsUrl: String?
-    /// Optional `date-time`-formatted value serialized in the `created_at` wire field.
-    public var createdAt: Date?
-    /// Optional `boolean` value serialized in the `draft` wire field.
-    public var draft: Bool?
-    /// Optional `uri`-formatted value serialized in the `events_url` wire field.
-    public var eventsUrl: String?
+/// Optional object value serialized in the `pull_request` wire field.
+public struct WebhookIssuesOpenedIssuePullRequest: Codable {
+    /// Optional `uri`-formatted value serialized in the `diff_url` wire field.
+    public var diffUrl: String?
     /// Optional `uri`-formatted value serialized in the `html_url` wire field.
     public var htmlUrl: String?
-    /// Optional array value serialized in the `labels` wire field.
-    public var labels: [WebhookIssuesOpenedChangesOldIssueLabelsItem]?
-    /// Optional `uri-template`-formatted value serialized in the `labels_url` wire field.
-    public var labelsUrl: String?
-    /// Optional `boolean` value serialized in the `locked` wire field.
-    public var locked: Bool?
-    /// A collection of related issues and pull requests.
-    public var milestone: WebhookIssuesOpenedChangesOldIssueMilestone?
-    /// Optional `string` value serialized in the `node_id` wire field.
-    public var nodeId: String?
-    /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user
-    /// accounts and granted access to specific repositories. They come with granular permissions and built-in
-    /// webhooks. GitHub apps are first class actors within GitHub.
-    public var performedViaGithubApp: WebhookIssuesOpenedChangesOldIssuePerformedViaGithubApp?
-    /// Optional object value serialized in the `pull_request` wire field.
-    public var pullRequest: WebhookIssuesOpenedChangesOldIssuePullRequest?
-    /// Optional object value serialized in the `reactions` wire field.
-    public var reactions: WebhookIssuesOpenedChangesOldIssueReactions?
-    /// Optional `uri`-formatted value serialized in the `repository_url` wire field.
-    public var repositoryUrl: String?
-    /// Optional object value serialized in the `sub_issues_summary` wire field.
-    public var subIssuesSummary: SubIssuesSummary?
-    /// Optional object value serialized in the `issue_dependencies_summary` wire field.
-    public var issueDependenciesSummary: IssueDependenciesSummary?
-    /// Optional array value serialized in the `issue_field_values` wire field.
-    public var issueFieldValues: [IssueFieldValue]?
-    /// State of the issue; either 'open' or 'closed'
-    public var state: WebhookIssuesOpenedChangesOldIssueState?
-    /// Optional `string` value serialized in the `state_reason` wire field.
-    public var stateReason: String?
-    /// Optional `uri`-formatted value serialized in the `timeline_url` wire field.
-    public var timelineUrl: String?
-    /// Title of the issue
-    public var title: String?
-    /// Optional `date-time`-formatted value serialized in the `updated_at` wire field.
-    public var updatedAt: Date?
-    /// URL for the issue
+    /// Optional `date-time`-formatted value serialized in the `merged_at` wire field.
+    public var mergedAt: Date?
+    /// Optional `uri`-formatted value serialized in the `patch_url` wire field.
+    public var patchUrl: String?
+    /// Optional `uri`-formatted value serialized in the `url` wire field.
     public var url: String?
-    /// Comments provide a way for people to collaborate on an issue.
-    public var pinnedComment: NullableIssueComment?
-    /// Optional object value serialized in the `user` wire field.
-    public var user: WebhookIssuesOpenedChangesOldIssueUser?
-    /// The type assigned to the issue. This is only present for issues in repositories where issue types are
-    /// supported.
-    public var type: IssueType?
 
     enum CodingKeys: String, CodingKey {
-        case id
-        case number
-        case activeLockReason = "active_lock_reason"
-        case assignee
-        case assignees
-        case authorAssociation = "author_association"
-        case body
-        case closedAt = "closed_at"
-        case comments
-        case commentsUrl = "comments_url"
-        case createdAt = "created_at"
-        case draft
-        case eventsUrl = "events_url"
+        case diffUrl = "diff_url"
         case htmlUrl = "html_url"
-        case labels
-        case labelsUrl = "labels_url"
-        case locked
-        case milestone
-        case nodeId = "node_id"
-        case performedViaGithubApp = "performed_via_github_app"
-        case pullRequest = "pull_request"
-        case reactions
-        case repositoryUrl = "repository_url"
-        case subIssuesSummary = "sub_issues_summary"
-        case issueDependenciesSummary = "issue_dependencies_summary"
-        case issueFieldValues = "issue_field_values"
-        case state
-        case stateReason = "state_reason"
-        case timelineUrl = "timeline_url"
-        case title
-        case updatedAt = "updated_at"
+        case mergedAt = "merged_at"
+        case patchUrl = "patch_url"
         case url
-        case pinnedComment = "pinned_comment"
-        case user
-        case type
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    init() {
+        (self.diffUrl, self.htmlUrl, self.mergedAt, self.patchUrl, self.url) = (nil, nil, nil, nil, nil)
+    }
 }
 
-extension WebhookIssuesOpenedChangesOldIssue {
+extension WebhookIssuesOpenedIssuePullRequest {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.number) else {
-            throw SdkValidationError(field: "number", code: "required", message: "Validation failed for 'number': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.number = try container.sdkDecodeRequired(.number)
-        self.activeLockReason = try container.sdkDecodeIfPresent(.activeLockReason)
-        self.assignee = try container.sdkDecodeIfPresent(.assignee)
-        self.assignees = try container.sdkDecodeIfPresent(.assignees)
-        self.authorAssociation = try container.sdkDecodeIfPresent(.authorAssociation)
-        self.body = try container.sdkDecodeIfPresent(.body)
-        self.closedAt = try container.sdkDecodeIfPresent(.closedAt)
-        self.comments = try container.sdkDecodeIfPresent(.comments)
-        self.commentsUrl = try container.sdkDecodeIfPresent(.commentsUrl)
-        self.createdAt = try container.sdkDecodeIfPresent(.createdAt)
-        self.draft = try container.sdkDecodeIfPresent(.draft)
-        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        self.diffUrl = try container.sdkDecodeIfPresent(.diffUrl)
         self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        self.labels = try container.sdkDecodeIfPresent(.labels)
-        self.labelsUrl = try container.sdkDecodeIfPresent(.labelsUrl)
-        self.locked = try container.sdkDecodeIfPresent(.locked)
-        self.milestone = try container.sdkDecodeIfPresent(.milestone)
-        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        self.performedViaGithubApp = try container.sdkDecodeIfPresent(.performedViaGithubApp)
-        self.pullRequest = try container.sdkDecodeIfPresent(.pullRequest)
-        self.reactions = try container.sdkDecodeIfPresent(.reactions)
-        self.repositoryUrl = try container.sdkDecodeIfPresent(.repositoryUrl)
-        self.subIssuesSummary = try container.sdkDecodeIfPresent(.subIssuesSummary)
-        self.issueDependenciesSummary = try container.sdkDecodeIfPresent(.issueDependenciesSummary)
-        self.issueFieldValues = try container.sdkDecodeIfPresent(.issueFieldValues)
-        self.state = try container.sdkDecodeIfPresent(.state)
-        self.stateReason = try container.sdkDecodeIfPresent(.stateReason)
-        self.timelineUrl = try container.sdkDecodeIfPresent(.timelineUrl)
-        self.title = try container.sdkDecodeIfPresent(.title)
-        self.updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
+        self.mergedAt = try container.sdkDecodeIfPresent(.mergedAt)
+        self.patchUrl = try container.sdkDecodeIfPresent(.patchUrl)
         self.url = try container.sdkDecodeIfPresent(.url)
-        self.pinnedComment = try container.sdkDecodeIfPresent(.pinnedComment)
-        self.user = try container.sdkDecodeIfPresent(.user)
-        self.type = try container.sdkDecodeIfPresent(.type)
-        try sdkValidateConstraints()
-    }
-}
-
-extension WebhookIssuesOpenedChangesOldIssue {
-    public init(id: Int, number: Int, activeLockReason: WebhookIssuesOpenedChangesOldIssueActiveLockReason? = nil, assignee: WebhookIssuesOpenedChangesOldIssueAssignee? = nil, assignees: [WebhookIssuesOpenedChangesOldIssueAssigneesItem?]? = nil, authorAssociation: WebhookIssuesOpenedChangesOldIssueAuthorAssociation? = nil, body: String? = nil, closedAt: Date? = nil, comments: Int? = nil, commentsUrl: String? = nil, createdAt: Date? = nil, draft: Bool? = nil, eventsUrl: String? = nil, htmlUrl: String? = nil, labels: [WebhookIssuesOpenedChangesOldIssueLabelsItem]? = nil, labelsUrl: String? = nil, locked: Bool? = nil, milestone: WebhookIssuesOpenedChangesOldIssueMilestone? = nil, nodeId: String? = nil, performedViaGithubApp: WebhookIssuesOpenedChangesOldIssuePerformedViaGithubApp? = nil, pullRequest: WebhookIssuesOpenedChangesOldIssuePullRequest? = nil, reactions: WebhookIssuesOpenedChangesOldIssueReactions? = nil, repositoryUrl: String? = nil, subIssuesSummary: SubIssuesSummary? = nil, issueDependenciesSummary: IssueDependenciesSummary? = nil, issueFieldValues: [IssueFieldValue]? = nil, state: WebhookIssuesOpenedChangesOldIssueState? = nil, stateReason: String? = nil, timelineUrl: String? = nil, title: String? = nil, updatedAt: Date? = nil, url: String? = nil, pinnedComment: NullableIssueComment? = nil, user: WebhookIssuesOpenedChangesOldIssueUser? = nil, type: IssueType? = nil) throws {
-        (self.id, self.number) = (id, number)
-        (self.activeLockReason, self.assignee) = (activeLockReason, assignee)
-        (self.assignees, self.authorAssociation) = (assignees, authorAssociation)
-        (self.body, self.closedAt) = (body, closedAt)
-        (self.comments, self.commentsUrl) = (comments, commentsUrl)
-        (self.createdAt, self.draft) = (createdAt, draft)
-        (self.eventsUrl, self.htmlUrl) = (eventsUrl, htmlUrl)
-        (self.labels, self.labelsUrl) = (labels, labelsUrl)
-        (self.locked, self.milestone) = (locked, milestone)
-        (self.nodeId, self.performedViaGithubApp) = (nodeId, performedViaGithubApp)
-        (self.pullRequest, self.reactions) = (pullRequest, reactions)
-        (self.repositoryUrl, self.subIssuesSummary) = (repositoryUrl, subIssuesSummary)
-        self.issueDependenciesSummary = issueDependenciesSummary
-        (self.issueFieldValues, self.state) = (issueFieldValues, state)
-        (self.stateReason, self.timelineUrl) = (stateReason, timelineUrl)
-        (self.title, self.updatedAt) = (title, updatedAt)
-        (self.url, self.pinnedComment) = (url, pinnedComment)
-        (self.user, self.type) = (user, type)
-        try sdkValidateConstraints()
-    }
-}
-
-extension WebhookIssuesOpenedChangesOldIssue {
-    func sdkValidateConstraints() throws {
-        if let value = self.closedAt {
-            try sdkValidateDateTime("closed_at", sdkWireString(value))
-        }
-        if let value = self.commentsUrl {
-            try sdkValidateUri("comments_url", value)
-        }
-        if let value = self.createdAt {
-            try sdkValidateDateTime("created_at", sdkWireString(value))
-        }
-        if let value = self.eventsUrl {
-            try sdkValidateUri("events_url", value)
+        if let value = self.diffUrl {
+            try sdkValidateUri("diff_url", value)
         }
         if let value = self.htmlUrl {
             try sdkValidateUri("html_url", value)
         }
-        if let value = self.repositoryUrl {
-            try sdkValidateUri("repository_url", value)
+        if let value = self.mergedAt {
+            try sdkValidateDateTime("merged_at", sdkWireString(value))
         }
-        if let value = self.timelineUrl {
-            try sdkValidateUri("timeline_url", value)
-        }
-        if let value = self.updatedAt {
-            try sdkValidateDateTime("updated_at", sdkWireString(value))
+        if let value = self.patchUrl {
+            try sdkValidateUri("patch_url", value)
         }
         if let value = self.url {
             try sdkValidateUri("url", value)
@@ -352,98 +91,414 @@ extension WebhookIssuesOpenedChangesOldIssue {
     }
 }
 
-/// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts
-/// and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub
-/// apps are first class actors within GitHub.
-public struct WebhookIssuesOpenedIssuePerformedViaGithubApp: Codable {
-    /// Required `date-time`-formatted value serialized in the `created_at` wire field.
-    public var createdAt: Date?
-    /// Required `string` value serialized in the `description` wire field.
-    public var description: String?
-    /// Required `uri`-formatted value serialized in the `external_url` wire field.
-    public var externalUrl: String?
-    /// Required `uri`-formatted value serialized in the `html_url` wire field.
-    public var htmlUrl: String
-    /// Unique identifier of the GitHub app
-    public var id: Int?
-    /// The name of the GitHub app
-    public var name: String
-    /// Required `string` value serialized in the `node_id` wire field.
-    public var nodeId: String
-    /// Required object value serialized in the `owner` wire field.
-    public var owner: WebhookIssuesOpenedIssuePerformedViaGithubAppOwner?
-    /// Required `date-time`-formatted value serialized in the `updated_at` wire field.
-    public var updatedAt: Date?
-    /// The list of events for the GitHub app
-    public var events: [WebhookIssuesOpenedIssuePerformedViaGithubAppEventsItem]?
-    /// The set of permissions for the GitHub app
-    public var permissions: WebhookIssuesOpenedIssuePerformedViaGithubAppPermissions?
-    /// The slug name of the GitHub app
-    public var slug: String?
+extension WebhookIssuesOpenedIssuePullRequest {
+    public init(diffUrl: String? = nil, htmlUrl: String? = nil, mergedAt: Date? = nil, patchUrl: String? = nil, url: String? = nil) throws {
+        self.init()
+        (self.diffUrl, self.htmlUrl) = (diffUrl, htmlUrl)
+        (self.mergedAt, self.patchUrl) = (mergedAt, patchUrl)
+        self.url = url
+        if let value = self.diffUrl {
+            try sdkValidateUri("diff_url", value)
+        }
+        if let value = self.htmlUrl {
+            try sdkValidateUri("html_url", value)
+        }
+        if let value = self.mergedAt {
+            try sdkValidateDateTime("merged_at", sdkWireString(value))
+        }
+        if let value = self.patchUrl {
+            try sdkValidateUri("patch_url", value)
+        }
+        if let value = self.url {
+            try sdkValidateUri("url", value)
+        }
+    }
+}
+
+/// Required object value serialized in the `creator` wire field.
+public struct WebhookIssuesOpenedChangesOldIssueMilestoneCreator: Codable {
+    /// Required `integer` value serialized in the `id` wire field.
+    public var id: Int
+    /// Required `string` value serialized in the `login` wire field.
+    public var login: String
+    /// Optional `uri`-formatted value serialized in the `avatar_url` wire field.
+    public var avatarUrl: String?
+    /// Optional `boolean` value serialized in the `deleted` wire field.
+    public var deleted: Bool?
+    /// Optional `string` value serialized in the `email` wire field.
+    public var email: String?
+    /// Optional `uri-template`-formatted value serialized in the `events_url` wire field.
+    public var eventsUrl: String?
+    /// Optional `uri`-formatted value serialized in the `followers_url` wire field.
+    public var followersUrl: String?
+    /// Optional `uri-template`-formatted value serialized in the `following_url` wire field.
+    public var followingUrl: String?
+    /// Optional `uri-template`-formatted value serialized in the `gists_url` wire field.
+    public var gistsUrl: String?
+    /// Optional `string` value serialized in the `gravatar_id` wire field.
+    public var gravatarId: String?
+    /// Optional `uri`-formatted value serialized in the `html_url` wire field.
+    public var htmlUrl: String?
+    /// Optional `string` value serialized in the `name` wire field.
+    public var name: String?
+    /// Optional `string` value serialized in the `node_id` wire field.
+    public var nodeId: String?
+    /// Optional `uri`-formatted value serialized in the `organizations_url` wire field.
+    public var organizationsUrl: String?
+    /// Optional `uri`-formatted value serialized in the `received_events_url` wire field.
+    public var receivedEventsUrl: String?
+    /// Optional `uri`-formatted value serialized in the `repos_url` wire field.
+    public var reposUrl: String?
+    /// Optional `boolean` value serialized in the `site_admin` wire field.
+    public var siteAdmin: Bool?
+    /// Optional `uri-template`-formatted value serialized in the `starred_url` wire field.
+    public var starredUrl: String?
+    /// Optional `uri`-formatted value serialized in the `subscriptions_url` wire field.
+    public var subscriptionsUrl: String?
+    /// Optional enumerated value serialized in the `type` wire field.
+    public var type: WebhookIssuesOpenedChangesOldIssueMilestoneCreatorType?
+    /// Optional `uri`-formatted value serialized in the `url` wire field.
+    public var url: String?
+    /// Optional `string` value serialized in the `user_view_type` wire field.
+    public var userViewType: String?
 
     enum CodingKeys: String, CodingKey {
-        case createdAt = "created_at"
-        case description
-        case externalUrl = "external_url"
-        case htmlUrl = "html_url"
         case id
+        case login
+        case avatarUrl = "avatar_url"
+        case deleted
+        case email
+        case eventsUrl = "events_url"
+        case followersUrl = "followers_url"
+        case followingUrl = "following_url"
+        case gistsUrl = "gists_url"
+        case gravatarId = "gravatar_id"
+        case htmlUrl = "html_url"
         case name
         case nodeId = "node_id"
-        case owner
-        case updatedAt = "updated_at"
-        case events
-        case permissions
-        case slug
+        case organizationsUrl = "organizations_url"
+        case receivedEventsUrl = "received_events_url"
+        case reposUrl = "repos_url"
+        case siteAdmin = "site_admin"
+        case starredUrl = "starred_url"
+        case subscriptionsUrl = "subscriptions_url"
+        case type
+        case url
+        case userViewType = "user_view_type"
     }
 
     private init(sdkCopy value: Self) { self = value }
 }
 
-extension WebhookIssuesOpenedIssuePerformedViaGithubApp {
+extension WebhookIssuesOpenedChangesOldIssueMilestoneCreator {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.createdAt = try container.sdkDecodeNullable(.createdAt)
-        self.description = try container.sdkDecodeNullable(.description)
-        self.externalUrl = try container.sdkDecodeNullable(.externalUrl)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.id = try container.sdkDecodeNullable(.id)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.owner = try container.sdkDecodeNullable(.owner)
-        self.updatedAt = try container.sdkDecodeNullable(.updatedAt)
-        self.events = try container.sdkDecodeIfPresent(.events)
-        self.permissions = try container.sdkDecodeIfPresent(.permissions)
-        self.slug = try container.sdkDecodeIfPresent(.slug)
-        if let value = self.createdAt {
-            try sdkValidateDateTime("created_at", sdkWireString(value))
+        guard container.contains(.id) else {
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
-        if let value = self.externalUrl {
-            try sdkValidateUri("external_url", value)
+        guard container.contains(.login) else {
+            throw SdkValidationError(field: "login", code: "required", message: "Validation failed for 'login': value is required")
         }
-            try sdkValidateUri("html_url", self.htmlUrl)
-        if let value = self.updatedAt {
-            try sdkValidateDateTime("updated_at", sdkWireString(value))
+        self.id = try container.sdkDecodeRequired(.id)
+        self.login = try container.sdkDecodeRequired(.login)
+        self.avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
+        self.deleted = try container.sdkDecodeIfPresent(.deleted)
+        self.email = try container.sdkDecodeIfPresent(.email)
+        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        self.followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
+        self.followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
+        self.gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
+        self.gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        self.name = try container.sdkDecodeIfPresent(.name)
+        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        self.organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
+        self.receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
+        self.reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
+        self.siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
+        self.starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
+        self.subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
+        self.type = try container.sdkDecodeIfPresent(.type)
+        self.url = try container.sdkDecodeIfPresent(.url)
+        self.userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        try sdkValidateConstraints()
+    }
+}
+
+extension WebhookIssuesOpenedChangesOldIssueMilestoneCreator {
+    public init(id: Int, login: String, avatarUrl: String? = nil, deleted: Bool? = nil, email: String? = nil, eventsUrl: String? = nil, followersUrl: String? = nil, followingUrl: String? = nil, gistsUrl: String? = nil, gravatarId: String? = nil, htmlUrl: String? = nil, name: String? = nil, nodeId: String? = nil, organizationsUrl: String? = nil, receivedEventsUrl: String? = nil, reposUrl: String? = nil, siteAdmin: Bool? = nil, starredUrl: String? = nil, subscriptionsUrl: String? = nil, type: WebhookIssuesOpenedChangesOldIssueMilestoneCreatorType? = nil, url: String? = nil, userViewType: String? = nil) throws {
+        (self.id, self.login) = (id, login)
+        (self.avatarUrl, self.deleted) = (avatarUrl, deleted)
+        (self.email, self.eventsUrl) = (email, eventsUrl)
+        (self.followersUrl, self.followingUrl) = (followersUrl, followingUrl)
+        (self.gistsUrl, self.gravatarId) = (gistsUrl, gravatarId)
+        (self.htmlUrl, self.name) = (htmlUrl, name)
+        (self.nodeId, self.organizationsUrl) = (nodeId, organizationsUrl)
+        (self.receivedEventsUrl, self.reposUrl) = (receivedEventsUrl, reposUrl)
+        (self.siteAdmin, self.starredUrl) = (siteAdmin, starredUrl)
+        (self.subscriptionsUrl, self.type) = (subscriptionsUrl, type)
+        (self.url, self.userViewType) = (url, userViewType)
+        try sdkValidateConstraints()
+    }
+}
+
+extension WebhookIssuesOpenedChangesOldIssueMilestoneCreator {
+    func sdkValidateConstraints() throws {
+        if let value = self.avatarUrl {
+            try sdkValidateUri("avatar_url", value)
+        }
+        if let value = self.followersUrl {
+            try sdkValidateUri("followers_url", value)
+        }
+        if let value = self.htmlUrl {
+            try sdkValidateUri("html_url", value)
+        }
+        if let value = self.organizationsUrl {
+            try sdkValidateUri("organizations_url", value)
+        }
+        if let value = self.receivedEventsUrl {
+            try sdkValidateUri("received_events_url", value)
+        }
+        if let value = self.reposUrl {
+            try sdkValidateUri("repos_url", value)
+        }
+        if let value = self.subscriptionsUrl {
+            try sdkValidateUri("subscriptions_url", value)
+        }
+        if let value = self.url {
+            try sdkValidateUri("url", value)
         }
     }
 }
 
-extension WebhookIssuesOpenedIssuePerformedViaGithubApp {
-    public init(createdAt: Date?, description: String?, externalUrl: String?, htmlUrl: String, id: Int?, name: String, nodeId: String, owner: WebhookIssuesOpenedIssuePerformedViaGithubAppOwner?, updatedAt: Date?, events: [WebhookIssuesOpenedIssuePerformedViaGithubAppEventsItem]? = nil, permissions: WebhookIssuesOpenedIssuePerformedViaGithubAppPermissions? = nil, slug: String? = nil) throws {
-        (self.createdAt, self.description) = (createdAt, description)
-        (self.externalUrl, self.htmlUrl) = (externalUrl, htmlUrl)
-        (self.id, self.name) = (id, name)
-        (self.nodeId, self.owner) = (nodeId, owner)
-        (self.updatedAt, self.events) = (updatedAt, events)
-        (self.permissions, self.slug) = (permissions, slug)
-        if let value = self.createdAt {
-            try sdkValidateDateTime("created_at", sdkWireString(value))
+/// Required object value serialized in the `assignees[]` wire field.
+public struct WebhookIssuesOpenedChangesOldIssueAssigneesItem: Codable {
+    /// Required `integer` value serialized in the `id` wire field.
+    public var id: Int
+    /// Required `string` value serialized in the `login` wire field.
+    public var login: String
+    /// Optional `uri`-formatted value serialized in the `avatar_url` wire field.
+    public var avatarUrl: String?
+    /// Optional `boolean` value serialized in the `deleted` wire field.
+    public var deleted: Bool?
+    /// Optional `string` value serialized in the `email` wire field.
+    public var email: String?
+    /// Optional `uri-template`-formatted value serialized in the `events_url` wire field.
+    public var eventsUrl: String?
+    /// Optional `uri`-formatted value serialized in the `followers_url` wire field.
+    public var followersUrl: String?
+    /// Optional `uri-template`-formatted value serialized in the `following_url` wire field.
+    public var followingUrl: String?
+    /// Optional `uri-template`-formatted value serialized in the `gists_url` wire field.
+    public var gistsUrl: String?
+    /// Optional `string` value serialized in the `gravatar_id` wire field.
+    public var gravatarId: String?
+    /// Optional `uri`-formatted value serialized in the `html_url` wire field.
+    public var htmlUrl: String?
+    /// Optional `string` value serialized in the `name` wire field.
+    public var name: String?
+    /// Optional `string` value serialized in the `node_id` wire field.
+    public var nodeId: String?
+    /// Optional `uri`-formatted value serialized in the `organizations_url` wire field.
+    public var organizationsUrl: String?
+    /// Optional `uri`-formatted value serialized in the `received_events_url` wire field.
+    public var receivedEventsUrl: String?
+    /// Optional `uri`-formatted value serialized in the `repos_url` wire field.
+    public var reposUrl: String?
+    /// Optional `boolean` value serialized in the `site_admin` wire field.
+    public var siteAdmin: Bool?
+    /// Optional `uri-template`-formatted value serialized in the `starred_url` wire field.
+    public var starredUrl: String?
+    /// Optional `uri`-formatted value serialized in the `subscriptions_url` wire field.
+    public var subscriptionsUrl: String?
+    /// Optional enumerated value serialized in the `type` wire field.
+    public var type: WebhookIssuesOpenedChangesOldIssueAssigneesItemType?
+    /// Optional `uri`-formatted value serialized in the `url` wire field.
+    public var url: String?
+    /// Optional `string` value serialized in the `user_view_type` wire field.
+    public var userViewType: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case login
+        case avatarUrl = "avatar_url"
+        case deleted
+        case email
+        case eventsUrl = "events_url"
+        case followersUrl = "followers_url"
+        case followingUrl = "following_url"
+        case gistsUrl = "gists_url"
+        case gravatarId = "gravatar_id"
+        case htmlUrl = "html_url"
+        case name
+        case nodeId = "node_id"
+        case organizationsUrl = "organizations_url"
+        case receivedEventsUrl = "received_events_url"
+        case reposUrl = "repos_url"
+        case siteAdmin = "site_admin"
+        case starredUrl = "starred_url"
+        case subscriptionsUrl = "subscriptions_url"
+        case type
+        case url
+        case userViewType = "user_view_type"
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension WebhookIssuesOpenedChangesOldIssueAssigneesItem {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
         }
-        if let value = self.externalUrl {
-            try sdkValidateUri("external_url", value)
+        guard container.contains(.login) else {
+            throw SdkValidationError(field: "login", code: "required", message: "Validation failed for 'login': value is required")
         }
-            try sdkValidateUri("html_url", self.htmlUrl)
-        if let value = self.updatedAt {
-            try sdkValidateDateTime("updated_at", sdkWireString(value))
+        self.id = try container.sdkDecodeRequired(.id)
+        self.login = try container.sdkDecodeRequired(.login)
+        self.avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
+        self.deleted = try container.sdkDecodeIfPresent(.deleted)
+        self.email = try container.sdkDecodeIfPresent(.email)
+        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        self.followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
+        self.followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
+        self.gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
+        self.gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        self.name = try container.sdkDecodeIfPresent(.name)
+        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        self.organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
+        self.receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
+        self.reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
+        self.siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
+        self.starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
+        self.subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
+        self.type = try container.sdkDecodeIfPresent(.type)
+        self.url = try container.sdkDecodeIfPresent(.url)
+        self.userViewType = try container.sdkDecodeIfPresent(.userViewType)
+        try sdkValidateConstraints()
+    }
+}
+
+extension WebhookIssuesOpenedChangesOldIssueAssigneesItem {
+    public init(id: Int, login: String, avatarUrl: String? = nil, deleted: Bool? = nil, email: String? = nil, eventsUrl: String? = nil, followersUrl: String? = nil, followingUrl: String? = nil, gistsUrl: String? = nil, gravatarId: String? = nil, htmlUrl: String? = nil, name: String? = nil, nodeId: String? = nil, organizationsUrl: String? = nil, receivedEventsUrl: String? = nil, reposUrl: String? = nil, siteAdmin: Bool? = nil, starredUrl: String? = nil, subscriptionsUrl: String? = nil, type: WebhookIssuesOpenedChangesOldIssueAssigneesItemType? = nil, url: String? = nil, userViewType: String? = nil) throws {
+        (self.id, self.login) = (id, login)
+        (self.avatarUrl, self.deleted) = (avatarUrl, deleted)
+        (self.email, self.eventsUrl) = (email, eventsUrl)
+        (self.followersUrl, self.followingUrl) = (followersUrl, followingUrl)
+        (self.gistsUrl, self.gravatarId) = (gistsUrl, gravatarId)
+        (self.htmlUrl, self.name) = (htmlUrl, name)
+        (self.nodeId, self.organizationsUrl) = (nodeId, organizationsUrl)
+        (self.receivedEventsUrl, self.reposUrl) = (receivedEventsUrl, reposUrl)
+        (self.siteAdmin, self.starredUrl) = (siteAdmin, starredUrl)
+        (self.subscriptionsUrl, self.type) = (subscriptionsUrl, type)
+        (self.url, self.userViewType) = (url, userViewType)
+        try sdkValidateConstraints()
+    }
+}
+
+extension WebhookIssuesOpenedChangesOldIssueAssigneesItem {
+    func sdkValidateConstraints() throws {
+        if let value = self.avatarUrl {
+            try sdkValidateUri("avatar_url", value)
+        }
+        if let value = self.followersUrl {
+            try sdkValidateUri("followers_url", value)
+        }
+        if let value = self.htmlUrl {
+            try sdkValidateUri("html_url", value)
+        }
+        if let value = self.organizationsUrl {
+            try sdkValidateUri("organizations_url", value)
+        }
+        if let value = self.receivedEventsUrl {
+            try sdkValidateUri("received_events_url", value)
+        }
+        if let value = self.reposUrl {
+            try sdkValidateUri("repos_url", value)
+        }
+        if let value = self.subscriptionsUrl {
+            try sdkValidateUri("subscriptions_url", value)
+        }
+        if let value = self.url {
+            try sdkValidateUri("url", value)
+        }
+    }
+}
+
+/// Optional object value serialized in the `pull_request` wire field.
+public struct WebhookIssuesOpenedChangesOldIssuePullRequest: Codable {
+    /// Optional `uri`-formatted value serialized in the `diff_url` wire field.
+    public var diffUrl: String?
+    /// Optional `uri`-formatted value serialized in the `html_url` wire field.
+    public var htmlUrl: String?
+    /// Optional `date-time`-formatted value serialized in the `merged_at` wire field.
+    public var mergedAt: Date?
+    /// Optional `uri`-formatted value serialized in the `patch_url` wire field.
+    public var patchUrl: String?
+    /// Optional `uri`-formatted value serialized in the `url` wire field.
+    public var url: String?
+
+    enum CodingKeys: String, CodingKey {
+        case diffUrl = "diff_url"
+        case htmlUrl = "html_url"
+        case mergedAt = "merged_at"
+        case patchUrl = "patch_url"
+        case url
+    }
+
+    init() {
+        (self.diffUrl, self.htmlUrl, self.mergedAt, self.patchUrl, self.url) = (nil, nil, nil, nil, nil)
+    }
+}
+
+extension WebhookIssuesOpenedChangesOldIssuePullRequest {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.diffUrl = try container.sdkDecodeIfPresent(.diffUrl)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        self.mergedAt = try container.sdkDecodeIfPresent(.mergedAt)
+        self.patchUrl = try container.sdkDecodeIfPresent(.patchUrl)
+        self.url = try container.sdkDecodeIfPresent(.url)
+        if let value = self.diffUrl {
+            try sdkValidateUri("diff_url", value)
+        }
+        if let value = self.htmlUrl {
+            try sdkValidateUri("html_url", value)
+        }
+        if let value = self.mergedAt {
+            try sdkValidateDateTime("merged_at", sdkWireString(value))
+        }
+        if let value = self.patchUrl {
+            try sdkValidateUri("patch_url", value)
+        }
+        if let value = self.url {
+            try sdkValidateUri("url", value)
+        }
+    }
+}
+
+extension WebhookIssuesOpenedChangesOldIssuePullRequest {
+    public init(diffUrl: String? = nil, htmlUrl: String? = nil, mergedAt: Date? = nil, patchUrl: String? = nil, url: String? = nil) throws {
+        self.init()
+        (self.diffUrl, self.htmlUrl) = (diffUrl, htmlUrl)
+        (self.mergedAt, self.patchUrl) = (mergedAt, patchUrl)
+        self.url = url
+        if let value = self.diffUrl {
+            try sdkValidateUri("diff_url", value)
+        }
+        if let value = self.htmlUrl {
+            try sdkValidateUri("html_url", value)
+        }
+        if let value = self.mergedAt {
+            try sdkValidateDateTime("merged_at", sdkWireString(value))
+        }
+        if let value = self.patchUrl {
+            try sdkValidateUri("patch_url", value)
+        }
+        if let value = self.url {
+            try sdkValidateUri("url", value)
         }
     }
 }

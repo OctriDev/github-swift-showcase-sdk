@@ -62,8 +62,6 @@ extension WebhookInstallationRepositoriesRemovedRepositoriesRemovedItem {
     }
 }
 
-
-
 public typealias WebhookInstallationRepositoriesRemovedRepositoriesRemovedList = [WebhookInstallationRepositoriesRemovedRepositoriesRemovedItem]
 
 /// Typed representation of the `WebhookInstallationRepositoriesRemoved` API schema.

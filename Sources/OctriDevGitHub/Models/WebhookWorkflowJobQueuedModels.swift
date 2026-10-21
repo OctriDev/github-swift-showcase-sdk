@@ -211,10 +211,6 @@ extension WebhookWorkflowJobQueuedWorkflowJob {
     }
 }
 
-
-
-
-
 /// Required object value serialized in the `steps[]` wire field.
 public struct WebhookWorkflowJobQueuedWorkflowJobStepsItem: Codable {
     /// Required `string` value serialized in the `completed_at` wire field.

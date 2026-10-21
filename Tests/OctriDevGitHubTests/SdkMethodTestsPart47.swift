@@ -6,36 +6,6 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testIssuesUpdateIssuesUpdateReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        var options = try IssuesMethods.IssuesUpdateOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), issueNumber: decoded("1"))
-        options.title = try decoded("\"Found a bug\"")
-        options.body = try decoded("\"I'm having a problem with this.\"")
-        options.assignee = try decoded("null")
-        options.state = try decoded("\"open\"")
-        options.stateReason = try decoded("null")
-        options.duplicateIssueId = try decoded("null")
-        options.milestone = try decoded("1")
-        options.labels = try decoded("[\"bug\"]")
-        options.assignees = try decoded("[\"octocat\"]")
-        options.issueFieldValues = try decoded("null")
-        options.type = try decoded("null")
-        let actual = try await client.issues.update(
-            options: options
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1041Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "decoded a response that differs from the mock"
-        )
-    }
-
     func testIssuesUpdateIssuesUpdate301ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/301") else {
             return
@@ -54,7 +24,7 @@ extension SdkMethodTests {
         options.issueFieldValues = try decoded("null")
         options.type = try decoded("null")
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1042Expected.utf8),
+            with: Data(sdkMethodFixture1041Expected.utf8),
             options: [.fragmentsAllowed]
         )
         do {
@@ -88,7 +58,7 @@ extension SdkMethodTests {
             body: decoded("\"Me too\"")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1043Expected.utf8),
+            with: Data(sdkMethodFixture1042Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
@@ -103,7 +73,7 @@ extension SdkMethodTests {
         }
         _ = client
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1044Expected.utf8),
+            with: Data(sdkMethodFixture1043Expected.utf8),
             options: [.fragmentsAllowed]
         )
         do {
@@ -143,7 +113,7 @@ extension SdkMethodTests {
             archived: decoded("null")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1045Expected.utf8),
+            with: Data(sdkMethodFixture1044Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
@@ -167,7 +137,7 @@ extension SdkMethodTests {
             dueOn: decoded("\"2012-10-09T23:39:01Z\"")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1046Expected.utf8),
+            with: Data(sdkMethodFixture1045Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
@@ -185,7 +155,7 @@ extension SdkMethodTests {
             license: decoded("\"license\"")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1047Expected.utf8),
+            with: Data(sdkMethodFixture1046Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
@@ -200,7 +170,7 @@ extension SdkMethodTests {
         }
         _ = client
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1048Expected.utf8),
+            with: Data(sdkMethodFixture1047Expected.utf8),
             options: [.fragmentsAllowed]
         )
         do {
@@ -233,7 +203,7 @@ extension SdkMethodTests {
             page: decoded("1")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1049Expected.utf8),
+            with: Data(sdkMethodFixture1048Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
@@ -253,7 +223,7 @@ extension SdkMethodTests {
             ref: decoded("\"ref\"")
         )
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1050Expected.utf8),
+            with: Data(sdkMethodFixture1049Expected.utf8),
             options: [.fragmentsAllowed]
         )
         XCTAssertNil(
@@ -268,7 +238,7 @@ extension SdkMethodTests {
         }
         _ = client
         let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1051Expected.utf8),
+            with: Data(sdkMethodFixture1050Expected.utf8),
             options: [.fragmentsAllowed]
         )
         do {
@@ -290,6 +260,22 @@ extension SdkMethodTests {
             )
         }
         XCTAssertTrue(true)
+    }
+
+    func testListTemplatesListTemplatesReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.gitignore.listTemplates()
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1051Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
     }
 
     func testMarkdownRenderMarkdownRenderReachesMockAndDecodesResponse() async throws {
@@ -547,5 +533,25 @@ extension SdkMethodTests {
             )
         }
         XCTAssertTrue(true)
+    }
+
+    func testMigrationsGetCommitAuthorsMigrationsGetCommitAuthorsReachesMockAndDecodesResponse() async throws {
+        guard let client = configuredClient() else {
+            return
+        }
+        _ = client
+        let actual = try await client.migrations.getCommitAuthors(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            since: decoded("1")
+        )
+        let expected = try JSONSerialization.jsonObject(
+            with: Data(sdkMethodFixture1066Expected.utf8),
+            options: [.fragmentsAllowed]
+        )
+        XCTAssertNil(
+            try mismatch(jsonValue(actual), expected),
+            "decoded a response that differs from the mock"
+        )
     }
 }

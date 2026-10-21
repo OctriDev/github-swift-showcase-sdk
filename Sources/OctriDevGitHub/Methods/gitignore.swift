@@ -8,8 +8,8 @@ import Foundation
 #endif
 public enum GitignoreMethods {
     /// List all templates available to pass as an option when [creating a repository](https://docs.github.com/rest/repos/repos#create-a-repository-for-the-authenticated-user).
-    public static func gitignoreGetAllTemplates(config: ClientConfig, requestOptions: RequestOptions? = nil) async throws -> [String] {
-        return try (await sdkRequest("GET", "/gitignore/templates", config: config, decoder: .json, operationId: "gitignoreGetAllTemplates", options: requestOptions)).data
+    public static func listTemplates(config: ClientConfig, requestOptions: RequestOptions? = nil) async throws -> [String] {
+        return try (await sdkRequest("GET", "/gitignore/templates", config: config, decoder: .json, operationId: "listTemplates", options: requestOptions)).data
     }
     /// Retrieves the content of a gitignore template by name. The `application/vnd.github.raw+json` media type returns the raw `.gitignore` contents; the response object includes the template name and source.
     ///

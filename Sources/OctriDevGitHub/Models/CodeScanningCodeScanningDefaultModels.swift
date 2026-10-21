@@ -37,16 +37,6 @@ extension CodeScanningDefaultSetupUpdateResponse {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
 /// Configuration for code scanning default setup.
 public struct CodeScanningDefaultSetupUpdate: Codable {
     /// The desired state of code scanning default setup.
@@ -100,18 +90,6 @@ extension CodeScanningDefaultSetupUpdate {
         (self.threatModel, self.languages) = (threatModel, languages)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 /// Configuration for code scanning default setup.
 public struct CodeScanningDefaultSetup: Codable {

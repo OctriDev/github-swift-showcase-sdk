@@ -4,114 +4,264 @@
 import Foundation
 
 // WebhookPullRequestReviewThreadResolved domain models
-/// Required object value serialized in the `commits` wire field.
-public struct WebhookPullRequestReviewThreadResolvedPullRequestLinksCommits: Codable {
-    /// Required `uri-template`-formatted value serialized in the `href` wire field.
-    public var href: String
-
-    enum CodingKeys: String, CodingKey {
-        case href
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookPullRequestReviewThreadResolvedPullRequestLinksCommits {
+extension WebhookPullRequestReviewThreadResolved {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.href) else {
-            throw SdkValidationError(field: "href", code: "required", message: "Validation failed for 'href': value is required")
-        }
-        self.href = try container.sdkDecodeRequired(.href)
-    }
-}
-
-extension WebhookPullRequestReviewThreadResolvedPullRequestLinksCommits {
-    public init(href: String) {
-        self.href = href
-    }
-}
-
-/// Required object value serialized in the `thread` wire field.
-public struct WebhookPullRequestReviewThreadResolvedThread: Codable {
-    /// Required array value serialized in the `comments` wire field.
-    public var comments: [WebhookPullRequestReviewThreadResolvedThreadCommentsItem]
-    /// Required `string` value serialized in the `node_id` wire field.
-    public var nodeId: String
-
-    enum CodingKeys: String, CodingKey {
-        case comments
-        case nodeId = "node_id"
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookPullRequestReviewThreadResolvedThread {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.comments) else {
-            throw SdkValidationError(field: "comments", code: "required", message: "Validation failed for 'comments': value is required")
-        }
-        guard container.contains(.nodeId) else {
-            throw SdkValidationError(field: "node_id", code: "required", message: "Validation failed for 'node_id': value is required")
-        }
-        self.comments = try container.sdkDecodeRequired(.comments)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-    }
-}
-
-extension WebhookPullRequestReviewThreadResolvedThread {
-    public init(comments: [WebhookPullRequestReviewThreadResolvedThreadCommentsItem], nodeId: String) {
-        (self.comments, self.nodeId) = (comments, nodeId)
-    }
-}
-
-/// Required object value serialized in the `_links` wire field.
-public struct WebhookPullRequestReviewThreadResolvedThreadCommentsItemLinks: Codable {
-    /// Required object value serialized in the `html` wire field.
-    public var html: WebhookPullRequestReviewThreadResolvedThreadCommentsItemLinksHtml
-    /// Required object value serialized in the `pull_request` wire field.
-    public var pullRequest: WebhookPullRequestReviewThreadResolvedThreadCommentsItemLinksPullRequest
-    /// Required object value serialized in the `self` wire field.
-    public var `self`: WebhookPullRequestReviewThreadResolvedThreadCommentsItemLinksSelf
-
-    enum CodingKeys: String, CodingKey {
-        case html
-        case pullRequest = "pull_request"
-        case `self`
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookPullRequestReviewThreadResolvedThreadCommentsItemLinks {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.html) else {
-            throw SdkValidationError(field: "html", code: "required", message: "Validation failed for 'html': value is required")
+        guard container.contains(.action) else {
+            throw SdkValidationError(field: "action", code: "required", message: "Validation failed for 'action': value is required")
         }
         guard container.contains(.pullRequest) else {
             throw SdkValidationError(field: "pull_request", code: "required", message: "Validation failed for 'pull_request': value is required")
         }
-        guard container.contains(.`self`) else {
-            throw SdkValidationError(field: "self", code: "required", message: "Validation failed for 'self': value is required")
+        guard container.contains(.repository) else {
+            throw SdkValidationError(field: "repository", code: "required", message: "Validation failed for 'repository': value is required")
         }
-        self.html = try container.sdkDecodeRequired(.html)
+        guard container.contains(.thread) else {
+            throw SdkValidationError(field: "thread", code: "required", message: "Validation failed for 'thread': value is required")
+        }
+        self.action = try container.sdkDecodeRequired(.action)
         self.pullRequest = try container.sdkDecodeRequired(.pullRequest)
-        self.`self` = try container.sdkDecodeRequired(.`self`)
+        self.repository = try container.sdkDecodeRequired(.repository)
+        self.thread = try container.sdkDecodeRequired(.thread)
+        self.enterprise = try container.sdkDecodeIfPresent(.enterprise)
+        self.installation = try container.sdkDecodeIfPresent(.installation)
+        self.organization = try container.sdkDecodeIfPresent(.organization)
+        self.sender = try container.sdkDecodeIfPresent(.sender)
+        self.updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
+        if let value = self.updatedAt {
+            try sdkValidateDateTime("updated_at", sdkWireString(value))
+        }
     }
 }
 
-extension WebhookPullRequestReviewThreadResolvedThreadCommentsItemLinks {
-    public init(html: WebhookPullRequestReviewThreadResolvedThreadCommentsItemLinksHtml, pullRequest: WebhookPullRequestReviewThreadResolvedThreadCommentsItemLinksPullRequest, `self` selfValue: WebhookPullRequestReviewThreadResolvedThreadCommentsItemLinksSelf) {
-        (self.html, self.pullRequest) = (html, pullRequest)
-        self.`self` = selfValue
+extension WebhookPullRequestReviewThreadResolved {
+    public init(action: WebhookPullRequestReviewThreadResolvedAction, pullRequest: WebhookPullRequestReviewThreadResolvedPullRequest, repository: RepositoryWebhooks, thread: WebhookPullRequestReviewThreadResolvedThread, enterprise: EnterpriseWebhooks? = nil, installation: SimpleInstallation? = nil, organization: OrganizationSimpleWebhooks? = nil, sender: SimpleUser? = nil, updatedAt: Date? = nil) throws {
+        (self.action, self.pullRequest) = (action, pullRequest)
+        (self.repository, self.thread) = (repository, thread)
+        (self.enterprise, self.installation) = (enterprise, installation)
+        (self.organization, self.sender) = (organization, sender)
+        self.updatedAt = updatedAt
+        if let value = self.updatedAt {
+            try sdkValidateDateTime("updated_at", sdkWireString(value))
+        }
     }
 }
 
-/// Required object value serialized in the `self` wire field.
-public struct WebhookPullRequestReviewThreadResolvedThreadCommentsItemLinksSelf: Codable {
+/// Groups of organization members that gives permissions on specified repositories.
+public struct WebhookPullRequestReviewThreadResolvedPullRequestRequestedTeamsItem: Codable {
+    /// Unique identifier of the team
+    public var id: Int
+    /// Name of the team
+    public var name: String
+    /// Optional `boolean` value serialized in the `deleted` wire field.
+    public var deleted: Bool?
+    /// Description of the team
+    public var description: String?
+    /// Optional `uri`-formatted value serialized in the `html_url` wire field.
+    public var htmlUrl: String?
+    /// Optional `uri-template`-formatted value serialized in the `members_url` wire field.
+    public var membersUrl: String?
+    /// Optional `string` value serialized in the `node_id` wire field.
+    public var nodeId: String?
+    /// Optional object value serialized in the `parent` wire field.
+    public var parent: WebhookPullRequestReviewThreadResolvedPullRequestRequestedTeaXde3fd96e3b?
+    /// Permission that the team will have for its repositories
+    public var permission: String?
+    /// Optional enumerated value serialized in the `privacy` wire field.
+    public var privacy: WebhookPullRequestReviewThreadResolvedPullRequestRequestedTeaX620644c332?
+    /// Optional `uri`-formatted value serialized in the `repositories_url` wire field.
+    public var repositoriesUrl: String?
+    /// Optional `string` value serialized in the `slug` wire field.
+    public var slug: String?
+    /// URL for the team
+    public var url: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case deleted
+        case description
+        case htmlUrl = "html_url"
+        case membersUrl = "members_url"
+        case nodeId = "node_id"
+        case parent
+        case permission
+        case privacy
+        case repositoriesUrl = "repositories_url"
+        case slug
+        case url
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension WebhookPullRequestReviewThreadResolvedPullRequestRequestedTeamsItem {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
+        }
+        guard container.contains(.name) else {
+            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
+        }
+        self.id = try container.sdkDecodeRequired(.id)
+        self.name = try container.sdkDecodeRequired(.name)
+        self.deleted = try container.sdkDecodeIfPresent(.deleted)
+        self.description = try container.sdkDecodeIfPresent(.description)
+        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        self.membersUrl = try container.sdkDecodeIfPresent(.membersUrl)
+        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        self.parent = try container.sdkDecodeIfPresent(.parent)
+        self.permission = try container.sdkDecodeIfPresent(.permission)
+        self.privacy = try container.sdkDecodeIfPresent(.privacy)
+        self.repositoriesUrl = try container.sdkDecodeIfPresent(.repositoriesUrl)
+        self.slug = try container.sdkDecodeIfPresent(.slug)
+        self.url = try container.sdkDecodeIfPresent(.url)
+        if let value = self.htmlUrl {
+            try sdkValidateUri("html_url", value)
+        }
+        if let value = self.repositoriesUrl {
+            try sdkValidateUri("repositories_url", value)
+        }
+        if let value = self.url {
+            try sdkValidateUri("url", value)
+        }
+    }
+}
+
+extension WebhookPullRequestReviewThreadResolvedPullRequestRequestedTeamsItem {
+    public init(id: Int, name: String, deleted: Bool? = nil, description: String? = nil, htmlUrl: String? = nil, membersUrl: String? = nil, nodeId: String? = nil, parent: WebhookPullRequestReviewThreadResolvedPullRequestRequestedTeaXde3fd96e3b? = nil, permission: String? = nil, privacy: WebhookPullRequestReviewThreadResolvedPullRequestRequestedTeaX620644c332? = nil, repositoriesUrl: String? = nil, slug: String? = nil, url: String? = nil) throws {
+        (self.id, self.name) = (id, name)
+        (self.deleted, self.description) = (deleted, description)
+        (self.htmlUrl, self.membersUrl) = (htmlUrl, membersUrl)
+        (self.nodeId, self.parent) = (nodeId, parent)
+        (self.permission, self.privacy) = (permission, privacy)
+        (self.repositoriesUrl, self.slug) = (repositoriesUrl, slug)
+        self.url = url
+        if let value = self.htmlUrl {
+            try sdkValidateUri("html_url", value)
+        }
+        if let value = self.repositoriesUrl {
+            try sdkValidateUri("repositories_url", value)
+        }
+        if let value = self.url {
+            try sdkValidateUri("url", value)
+        }
+    }
+}
+
+/// A collection of related issues and pull requests.
+public struct WebhookPullRequestReviewThreadResolvedPullRequestMilestone: Codable {
+    /// Required `date-time`-formatted value serialized in the `closed_at` wire field.
+    public var closedAt: Date?
+    /// Required `integer` value serialized in the `closed_issues` wire field.
+    public var closedIssues: Int
+    /// Required `date-time`-formatted value serialized in the `created_at` wire field.
+    public var createdAt: Date
+    /// Required object value serialized in the `creator` wire field.
+    public var creator: WebhookPullRequestReviewThreadResolvedPullRequestMilestoneCreator?
+    /// Required `string` value serialized in the `description` wire field.
+    public var description: String?
+    /// Required `date-time`-formatted value serialized in the `due_on` wire field.
+    public var dueOn: Date?
+    /// Required `uri`-formatted value serialized in the `html_url` wire field.
+    public var htmlUrl: String
+    /// Required `integer` value serialized in the `id` wire field.
+    public var id: Int
+    /// Required `uri`-formatted value serialized in the `labels_url` wire field.
+    public var labelsUrl: String
+    /// Required `string` value serialized in the `node_id` wire field.
+    public var nodeId: String
+    /// The number of the milestone.
+    public var number: Int
+    /// Required `integer` value serialized in the `open_issues` wire field.
+    public var openIssues: Int
+    /// The state of the milestone.
+    public var state: WebhookPullRequestReviewThreadResolvedPullRequestMilestoneState
+    /// The title of the milestone.
+    public var title: String
+    /// Required `date-time`-formatted value serialized in the `updated_at` wire field.
+    public var updatedAt: Date
+    /// Required `uri`-formatted value serialized in the `url` wire field.
+    public var url: String
+
+    enum CodingKeys: String, CodingKey {
+        case closedAt = "closed_at"
+        case closedIssues = "closed_issues"
+        case createdAt = "created_at"
+        case creator
+        case description
+        case dueOn = "due_on"
+        case htmlUrl = "html_url"
+        case id
+        case labelsUrl = "labels_url"
+        case nodeId = "node_id"
+        case number
+        case openIssues = "open_issues"
+        case state
+        case title
+        case updatedAt = "updated_at"
+        case url
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension WebhookPullRequestReviewThreadResolvedPullRequestMilestone {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.closedAt = try container.sdkDecodeNullable(.closedAt)
+        self.closedIssues = try container.sdkDecodeRequired(.closedIssues)
+        self.createdAt = try container.sdkDecodeRequired(.createdAt)
+        self.creator = try container.sdkDecodeNullable(.creator)
+        self.description = try container.sdkDecodeNullable(.description)
+        self.dueOn = try container.sdkDecodeNullable(.dueOn)
+        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        self.id = try container.sdkDecodeRequired(.id)
+        self.labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
+        self.nodeId = try container.sdkDecodeRequired(.nodeId)
+        self.number = try container.sdkDecodeRequired(.number)
+        self.openIssues = try container.sdkDecodeRequired(.openIssues)
+        self.state = try container.sdkDecodeRequired(.state)
+        self.title = try container.sdkDecodeRequired(.title)
+        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        self.url = try container.sdkDecodeRequired(.url)
+        try sdkValidateConstraints()
+    }
+}
+
+extension WebhookPullRequestReviewThreadResolvedPullRequestMilestone {
+    public init(closedAt: Date?, closedIssues: Int, createdAt: Date, creator: WebhookPullRequestReviewThreadResolvedPullRequestMilestoneCreator?, description: String?, dueOn: Date?, htmlUrl: String, id: Int, labelsUrl: String, nodeId: String, number: Int, openIssues: Int, state: WebhookPullRequestReviewThreadResolvedPullRequestMilestoneState, title: String, updatedAt: Date, url: String) throws {
+        (self.closedAt, self.closedIssues) = (closedAt, closedIssues)
+        (self.createdAt, self.creator) = (createdAt, creator)
+        (self.description, self.dueOn) = (description, dueOn)
+        (self.htmlUrl, self.id) = (htmlUrl, id)
+        (self.labelsUrl, self.nodeId) = (labelsUrl, nodeId)
+        (self.number, self.openIssues) = (number, openIssues)
+        (self.state, self.title) = (state, title)
+        (self.updatedAt, self.url) = (updatedAt, url)
+        try sdkValidateConstraints()
+    }
+}
+
+extension WebhookPullRequestReviewThreadResolvedPullRequestMilestone {
+    func sdkValidateConstraints() throws {
+        if let value = self.closedAt {
+            try sdkValidateDateTime("closed_at", sdkWireString(value))
+        }
+            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        if let value = self.dueOn {
+            try sdkValidateDateTime("due_on", sdkWireString(value))
+        }
+            try sdkValidateUri("html_url", self.htmlUrl)
+            try sdkValidateUri("labels_url", self.labelsUrl)
+            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+            try sdkValidateUri("url", self.url)
+    }
+}
+
+/// Required object value serialized in the `review_comment` wire field.
+public struct WebhookPullRequestReviewThreadResolvedPullRequestLinksReviewComment: Codable {
     /// Required `uri-template`-formatted value serialized in the `href` wire field.
     public var href: String
 
@@ -122,7 +272,7 @@ public struct WebhookPullRequestReviewThreadResolvedThreadCommentsItemLinksSelf:
     private init(sdkCopy value: Self) { self = value }
 }
 
-extension WebhookPullRequestReviewThreadResolvedThreadCommentsItemLinksSelf {
+extension WebhookPullRequestReviewThreadResolvedPullRequestLinksReviewComment {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.href) else {
@@ -132,376 +282,200 @@ extension WebhookPullRequestReviewThreadResolvedThreadCommentsItemLinksSelf {
     }
 }
 
-extension WebhookPullRequestReviewThreadResolvedThreadCommentsItemLinksSelf {
+extension WebhookPullRequestReviewThreadResolvedPullRequestLinksReviewComment {
     public init(href: String) {
         self.href = href
     }
 }
 
-/// Required object value serialized in the `user` wire field.
-public struct WebhookPullRequestReviewThreadResolvedPullRequestHeadUser: Codable {
-    /// Required `int64`-formatted value serialized in the `id` wire field.
-    public var id: Int
-    /// Required `string` value serialized in the `login` wire field.
-    public var login: String
-    /// Optional `uri`-formatted value serialized in the `avatar_url` wire field.
-    public var avatarUrl: String?
-    /// Optional `boolean` value serialized in the `deleted` wire field.
-    public var deleted: Bool?
-    /// Optional `string` value serialized in the `email` wire field.
-    public var email: String?
-    /// Optional `uri-template`-formatted value serialized in the `events_url` wire field.
-    public var eventsUrl: String?
-    /// Optional `uri`-formatted value serialized in the `followers_url` wire field.
-    public var followersUrl: String?
-    /// Optional `uri-template`-formatted value serialized in the `following_url` wire field.
-    public var followingUrl: String?
-    /// Optional `uri-template`-formatted value serialized in the `gists_url` wire field.
-    public var gistsUrl: String?
-    /// Optional `string` value serialized in the `gravatar_id` wire field.
-    public var gravatarId: String?
-    /// Optional `uri`-formatted value serialized in the `html_url` wire field.
-    public var htmlUrl: String?
-    /// Optional `string` value serialized in the `name` wire field.
-    public var name: String?
-    /// Optional `string` value serialized in the `node_id` wire field.
-    public var nodeId: String?
-    /// Optional `uri`-formatted value serialized in the `organizations_url` wire field.
-    public var organizationsUrl: String?
-    /// Optional `uri`-formatted value serialized in the `received_events_url` wire field.
-    public var receivedEventsUrl: String?
-    /// Optional `uri`-formatted value serialized in the `repos_url` wire field.
-    public var reposUrl: String?
-    /// Optional `boolean` value serialized in the `site_admin` wire field.
-    public var siteAdmin: Bool?
-    /// Optional `uri-template`-formatted value serialized in the `starred_url` wire field.
-    public var starredUrl: String?
-    /// Optional `uri`-formatted value serialized in the `subscriptions_url` wire field.
-    public var subscriptionsUrl: String?
-    /// Optional enumerated value serialized in the `type` wire field.
-    public var type: WebhookPullRequestReviewThreadResolvedPullRequestHeadUserType?
-    /// Optional `uri`-formatted value serialized in the `url` wire field.
-    public var url: String?
-    /// Optional `string` value serialized in the `user_view_type` wire field.
-    public var userViewType: String?
+/// Required object value serialized in the `comments` wire field.
+public struct WebhookPullRequestReviewThreadResolvedPullRequestLinksComments: Codable {
+    /// Required `uri-template`-formatted value serialized in the `href` wire field.
+    public var href: String
 
     enum CodingKeys: String, CodingKey {
-        case id
-        case login
-        case avatarUrl = "avatar_url"
-        case deleted
-        case email
-        case eventsUrl = "events_url"
-        case followersUrl = "followers_url"
-        case followingUrl = "following_url"
-        case gistsUrl = "gists_url"
-        case gravatarId = "gravatar_id"
-        case htmlUrl = "html_url"
+        case href
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension WebhookPullRequestReviewThreadResolvedPullRequestLinksComments {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.href) else {
+            throw SdkValidationError(field: "href", code: "required", message: "Validation failed for 'href': value is required")
+        }
+        self.href = try container.sdkDecodeRequired(.href)
+    }
+}
+
+extension WebhookPullRequestReviewThreadResolvedPullRequestLinksComments {
+    public init(href: String) {
+        self.href = href
+    }
+}
+
+public indirect enum WebhookPullRequestReviewThreadResolvedPullRequestBaseRepoPushedAt {
+    case intValue(Int)
+    case date(Date)
+}
+
+extension WebhookPullRequestReviewThreadResolvedPullRequestBaseRepoPushedAt: Codable {
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let value = Self.decodeGroup1(from: container) { self = value; return }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for WebhookPullRequestReviewThreadResolvedPullRequestBaseRepoPushedAt")
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        if try encodeGroup1(to: encoder) { return }
+    }
+}
+
+extension WebhookPullRequestReviewThreadResolvedPullRequestBaseRepoPushedAt {
+    static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
+        if let value = try? container.decode(Int.self) { return .intValue(value) }
+        if let value = try? container.decode(Date.self) { return .date(value) }
+        return nil
+    }
+}
+
+extension WebhookPullRequestReviewThreadResolvedPullRequestBaseRepoPushedAt {
+    func encodeGroup1(to encoder: Encoder) throws -> Bool {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case let .intValue(value): try container.encode(value); return true
+        case let .date(value): try container.encode(value); return true
+        }
+    }
+}
+
+extension WebhookPullRequestReviewThreadResolvedPullRequestBaseRepoPushedAt: SdkNumericValueConvertible {
+    var sdkNumericValue: Double? {
+        switch self {
+        case let .intValue(value): Double(value)
+        default: nil
+        }
+    }
+}
+
+/// Required object value serialized in the `reactions` wire field.
+public struct WebhookPullRequestReviewThreadResolvedThreadCommentsItemReactions: Codable {
+    /// Required `integer` value serialized in the `+1` wire field.
+    public var plus1: Int
+    /// Required `integer` value serialized in the `-1` wire field.
+    public var minus1: Int
+    /// Required `integer` value serialized in the `confused` wire field.
+    public var confused: Int
+    /// Required `integer` value serialized in the `eyes` wire field.
+    public var eyes: Int
+    /// Required `integer` value serialized in the `heart` wire field.
+    public var heart: Int
+    /// Required `integer` value serialized in the `hooray` wire field.
+    public var hooray: Int
+    /// Required `integer` value serialized in the `laugh` wire field.
+    public var laugh: Int
+    /// Required `integer` value serialized in the `rocket` wire field.
+    public var rocket: Int
+    /// Required `integer` value serialized in the `total_count` wire field.
+    public var totalCount: Int
+    /// Required `uri`-formatted value serialized in the `url` wire field.
+    public var url: String
+
+    enum CodingKeys: String, CodingKey {
+        case plus1 = "+1"
+        case minus1 = "-1"
+        case confused
+        case eyes
+        case heart
+        case hooray
+        case laugh
+        case rocket
+        case totalCount = "total_count"
+        case url
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension WebhookPullRequestReviewThreadResolvedThreadCommentsItemReactions {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.plus1 = try container.sdkDecodeRequired(.plus1)
+        self.minus1 = try container.sdkDecodeRequired(.minus1)
+        self.confused = try container.sdkDecodeRequired(.confused)
+        self.eyes = try container.sdkDecodeRequired(.eyes)
+        self.heart = try container.sdkDecodeRequired(.heart)
+        self.hooray = try container.sdkDecodeRequired(.hooray)
+        self.laugh = try container.sdkDecodeRequired(.laugh)
+        self.rocket = try container.sdkDecodeRequired(.rocket)
+        self.totalCount = try container.sdkDecodeRequired(.totalCount)
+        self.url = try container.sdkDecodeRequired(.url)
+            try sdkValidateUri("url", self.url)
+    }
+}
+
+extension WebhookPullRequestReviewThreadResolvedThreadCommentsItemReactions {
+    public init(plus1: Int, minus1: Int, confused: Int, eyes: Int, heart: Int, hooray: Int, laugh: Int, rocket: Int, totalCount: Int, url: String) throws {
+        (self.plus1, self.minus1) = (plus1, minus1)
+        (self.confused, self.eyes) = (confused, eyes)
+        (self.heart, self.hooray) = (heart, hooray)
+        (self.laugh, self.rocket) = (laugh, rocket)
+        (self.totalCount, self.url) = (totalCount, url)
+            try sdkValidateUri("url", self.url)
+    }
+}
+
+/// Required object value serialized in the `self` wire field.
+public struct WebhookPullRequestReviewThreadResolvedPullRequestLinksSelf: Codable {
+    /// Required `uri-template`-formatted value serialized in the `href` wire field.
+    public var href: String
+
+    enum CodingKeys: String, CodingKey {
+        case href
+    }
+
+    private init(sdkCopy value: Self) { self = value }
+}
+
+extension WebhookPullRequestReviewThreadResolvedPullRequestLinksSelf {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.href) else {
+            throw SdkValidationError(field: "href", code: "required", message: "Validation failed for 'href': value is required")
+        }
+        self.href = try container.sdkDecodeRequired(.href)
+    }
+}
+
+extension WebhookPullRequestReviewThreadResolvedPullRequestLinksSelf {
+    public init(href: String) {
+        self.href = href
+    }
+}
+
+/// Required object value serialized in the `license` wire field.
+public struct WebhookPullRequestReviewThreadResolvedPullRequestHeadRepoLicense: Codable {
+    /// Required `string` value serialized in the `key` wire field.
+    public var key: String
+    /// Required `string` value serialized in the `name` wire field.
+    public var name: String
+    /// Required `string` value serialized in the `node_id` wire field.
+    public var nodeId: String
+    /// Required `string` value serialized in the `spdx_id` wire field.
+    public var spdxId: String
+    /// Required `uri`-formatted value serialized in the `url` wire field.
+    public var url: String?
+
+    enum CodingKeys: String, CodingKey {
+        case key
         case name
         case nodeId = "node_id"
-        case organizationsUrl = "organizations_url"
-        case receivedEventsUrl = "received_events_url"
-        case reposUrl = "repos_url"
-        case siteAdmin = "site_admin"
-        case starredUrl = "starred_url"
-        case subscriptionsUrl = "subscriptions_url"
-        case type
+        case spdxId = "spdx_id"
         case url
-        case userViewType = "user_view_type"
     }
 
     private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookPullRequestReviewThreadResolvedPullRequestHeadUser {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.login) else {
-            throw SdkValidationError(field: "login", code: "required", message: "Validation failed for 'login': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.login = try container.sdkDecodeRequired(.login)
-        self.avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
-        self.deleted = try container.sdkDecodeIfPresent(.deleted)
-        self.email = try container.sdkDecodeIfPresent(.email)
-        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
-        self.followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
-        self.followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
-        self.gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
-        self.gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
-        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        self.organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
-        self.receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
-        self.reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
-        self.siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
-        self.starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
-        self.subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
-        self.type = try container.sdkDecodeIfPresent(.type)
-        self.url = try container.sdkDecodeIfPresent(.url)
-        self.userViewType = try container.sdkDecodeIfPresent(.userViewType)
-        try sdkValidateConstraints()
-    }
-}
-
-extension WebhookPullRequestReviewThreadResolvedPullRequestHeadUser {
-    public init(id: Int, login: String, avatarUrl: String? = nil, deleted: Bool? = nil, email: String? = nil, eventsUrl: String? = nil, followersUrl: String? = nil, followingUrl: String? = nil, gistsUrl: String? = nil, gravatarId: String? = nil, htmlUrl: String? = nil, name: String? = nil, nodeId: String? = nil, organizationsUrl: String? = nil, receivedEventsUrl: String? = nil, reposUrl: String? = nil, siteAdmin: Bool? = nil, starredUrl: String? = nil, subscriptionsUrl: String? = nil, type: WebhookPullRequestReviewThreadResolvedPullRequestHeadUserType? = nil, url: String? = nil, userViewType: String? = nil) throws {
-        (self.id, self.login) = (id, login)
-        (self.avatarUrl, self.deleted) = (avatarUrl, deleted)
-        (self.email, self.eventsUrl) = (email, eventsUrl)
-        (self.followersUrl, self.followingUrl) = (followersUrl, followingUrl)
-        (self.gistsUrl, self.gravatarId) = (gistsUrl, gravatarId)
-        (self.htmlUrl, self.name) = (htmlUrl, name)
-        (self.nodeId, self.organizationsUrl) = (nodeId, organizationsUrl)
-        (self.receivedEventsUrl, self.reposUrl) = (receivedEventsUrl, reposUrl)
-        (self.siteAdmin, self.starredUrl) = (siteAdmin, starredUrl)
-        (self.subscriptionsUrl, self.type) = (subscriptionsUrl, type)
-        (self.url, self.userViewType) = (url, userViewType)
-        try sdkValidateConstraints()
-    }
-}
-
-extension WebhookPullRequestReviewThreadResolvedPullRequestHeadUser {
-    func sdkValidateConstraints() throws {
-        if let value = self.avatarUrl {
-            try sdkValidateUri("avatar_url", value)
-        }
-        if let value = self.followersUrl {
-            try sdkValidateUri("followers_url", value)
-        }
-        if let value = self.htmlUrl {
-            try sdkValidateUri("html_url", value)
-        }
-        if let value = self.organizationsUrl {
-            try sdkValidateUri("organizations_url", value)
-        }
-        if let value = self.receivedEventsUrl {
-            try sdkValidateUri("received_events_url", value)
-        }
-        if let value = self.reposUrl {
-            try sdkValidateUri("repos_url", value)
-        }
-        if let value = self.subscriptionsUrl {
-            try sdkValidateUri("subscriptions_url", value)
-        }
-        if let value = self.url {
-            try sdkValidateUri("url", value)
-        }
-    }
-}
-
-/// Required object value serialized in the `_links` wire field.
-public struct WebhookPullRequestReviewThreadResolvedPullRequestLinks: Codable {
-    /// Required object value serialized in the `comments` wire field.
-    public var comments: WebhookPullRequestReviewThreadResolvedPullRequestLinksComments
-    /// Required object value serialized in the `commits` wire field.
-    public var commits: WebhookPullRequestReviewThreadResolvedPullRequestLinksCommits
-    /// Required object value serialized in the `html` wire field.
-    public var html: WebhookPullRequestReviewThreadResolvedPullRequestLinksHtml
-    /// Required object value serialized in the `issue` wire field.
-    public var issue: WebhookPullRequestReviewThreadResolvedPullRequestLinksIssue
-    /// Required object value serialized in the `review_comment` wire field.
-    public var reviewComment: WebhookPullRequestReviewThreadResolvedPullRequestLinksReviewComment
-    /// Required object value serialized in the `review_comments` wire field.
-    public var reviewComments: WebhookPullRequestReviewThreadResolvedPullRequestLinksReviewComments
-    /// Required object value serialized in the `self` wire field.
-    public var `self`: WebhookPullRequestReviewThreadResolvedPullRequestLinksSelf
-    /// Required object value serialized in the `statuses` wire field.
-    public var statuses: WebhookPullRequestReviewThreadResolvedPullRequestLinksStatuses
-
-    enum CodingKeys: String, CodingKey {
-        case comments
-        case commits
-        case html
-        case issue
-        case reviewComment = "review_comment"
-        case reviewComments = "review_comments"
-        case `self`
-        case statuses
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookPullRequestReviewThreadResolvedPullRequestLinks {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.comments = try container.sdkDecodeRequired(.comments)
-        self.commits = try container.sdkDecodeRequired(.commits)
-        self.html = try container.sdkDecodeRequired(.html)
-        self.issue = try container.sdkDecodeRequired(.issue)
-        self.reviewComment = try container.sdkDecodeRequired(.reviewComment)
-        self.reviewComments = try container.sdkDecodeRequired(.reviewComments)
-        self.`self` = try container.sdkDecodeRequired(.`self`)
-        self.statuses = try container.sdkDecodeRequired(.statuses)
-    }
-}
-
-extension WebhookPullRequestReviewThreadResolvedPullRequestLinks {
-    public init(comments: WebhookPullRequestReviewThreadResolvedPullRequestLinksComments, commits: WebhookPullRequestReviewThreadResolvedPullRequestLinksCommits, html: WebhookPullRequestReviewThreadResolvedPullRequestLinksHtml, issue: WebhookPullRequestReviewThreadResolvedPullRequestLinksIssue, reviewComment: WebhookPullRequestReviewThreadResolvedPullRequestLinksReviewComment, reviewComments: WebhookPullRequestReviewThreadResolvedPullRequestLinksReviewComments, `self` selfValue: WebhookPullRequestReviewThreadResolvedPullRequestLinksSelf, statuses: WebhookPullRequestReviewThreadResolvedPullRequestLinksStatuses) {
-        (self.comments, self.commits) = (comments, commits)
-        (self.html, self.issue) = (html, issue)
-        (self.reviewComment, self.reviewComments) = (reviewComment, reviewComments)
-        (self.`self`, self.statuses) = (selfValue, statuses)
-    }
-}
-
-/// Required object value serialized in the `enabled_by` wire field.
-public struct WebhookPullRequestReviewThreadResolvedPullRequestAutoMergeEnabledBy: Codable {
-    /// Required `integer` value serialized in the `id` wire field.
-    public var id: Int
-    /// Required `string` value serialized in the `login` wire field.
-    public var login: String
-    /// Optional `uri`-formatted value serialized in the `avatar_url` wire field.
-    public var avatarUrl: String?
-    /// Optional `boolean` value serialized in the `deleted` wire field.
-    public var deleted: Bool?
-    /// Optional `string` value serialized in the `email` wire field.
-    public var email: String?
-    /// Optional `uri-template`-formatted value serialized in the `events_url` wire field.
-    public var eventsUrl: String?
-    /// Optional `uri`-formatted value serialized in the `followers_url` wire field.
-    public var followersUrl: String?
-    /// Optional `uri-template`-formatted value serialized in the `following_url` wire field.
-    public var followingUrl: String?
-    /// Optional `uri-template`-formatted value serialized in the `gists_url` wire field.
-    public var gistsUrl: String?
-    /// Optional `string` value serialized in the `gravatar_id` wire field.
-    public var gravatarId: String?
-    /// Optional `uri`-formatted value serialized in the `html_url` wire field.
-    public var htmlUrl: String?
-    /// Optional `string` value serialized in the `name` wire field.
-    public var name: String?
-    /// Optional `string` value serialized in the `node_id` wire field.
-    public var nodeId: String?
-    /// Optional `uri`-formatted value serialized in the `organizations_url` wire field.
-    public var organizationsUrl: String?
-    /// Optional `uri`-formatted value serialized in the `received_events_url` wire field.
-    public var receivedEventsUrl: String?
-    /// Optional `uri`-formatted value serialized in the `repos_url` wire field.
-    public var reposUrl: String?
-    /// Optional `boolean` value serialized in the `site_admin` wire field.
-    public var siteAdmin: Bool?
-    /// Optional `uri-template`-formatted value serialized in the `starred_url` wire field.
-    public var starredUrl: String?
-    /// Optional `uri`-formatted value serialized in the `subscriptions_url` wire field.
-    public var subscriptionsUrl: String?
-    /// Optional enumerated value serialized in the `type` wire field.
-    public var type: WebhookPullRequestReviewThreadResolvedPullRequestAutoMergeEnabledByType?
-    /// Optional `uri`-formatted value serialized in the `url` wire field.
-    public var url: String?
-    /// Optional `string` value serialized in the `user_view_type` wire field.
-    public var userViewType: String?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case login
-        case avatarUrl = "avatar_url"
-        case deleted
-        case email
-        case eventsUrl = "events_url"
-        case followersUrl = "followers_url"
-        case followingUrl = "following_url"
-        case gistsUrl = "gists_url"
-        case gravatarId = "gravatar_id"
-        case htmlUrl = "html_url"
-        case name
-        case nodeId = "node_id"
-        case organizationsUrl = "organizations_url"
-        case receivedEventsUrl = "received_events_url"
-        case reposUrl = "repos_url"
-        case siteAdmin = "site_admin"
-        case starredUrl = "starred_url"
-        case subscriptionsUrl = "subscriptions_url"
-        case type
-        case url
-        case userViewType = "user_view_type"
-    }
-
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookPullRequestReviewThreadResolvedPullRequestAutoMergeEnabledBy {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.login) else {
-            throw SdkValidationError(field: "login", code: "required", message: "Validation failed for 'login': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.login = try container.sdkDecodeRequired(.login)
-        self.avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
-        self.deleted = try container.sdkDecodeIfPresent(.deleted)
-        self.email = try container.sdkDecodeIfPresent(.email)
-        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
-        self.followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
-        self.followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
-        self.gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
-        self.gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
-        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        self.organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
-        self.receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
-        self.reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
-        self.siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
-        self.starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
-        self.subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
-        self.type = try container.sdkDecodeIfPresent(.type)
-        self.url = try container.sdkDecodeIfPresent(.url)
-        self.userViewType = try container.sdkDecodeIfPresent(.userViewType)
-        try sdkValidateConstraints()
-    }
-}
-
-extension WebhookPullRequestReviewThreadResolvedPullRequestAutoMergeEnabledBy {
-    public init(id: Int, login: String, avatarUrl: String? = nil, deleted: Bool? = nil, email: String? = nil, eventsUrl: String? = nil, followersUrl: String? = nil, followingUrl: String? = nil, gistsUrl: String? = nil, gravatarId: String? = nil, htmlUrl: String? = nil, name: String? = nil, nodeId: String? = nil, organizationsUrl: String? = nil, receivedEventsUrl: String? = nil, reposUrl: String? = nil, siteAdmin: Bool? = nil, starredUrl: String? = nil, subscriptionsUrl: String? = nil, type: WebhookPullRequestReviewThreadResolvedPullRequestAutoMergeEnabledByType? = nil, url: String? = nil, userViewType: String? = nil) throws {
-        (self.id, self.login) = (id, login)
-        (self.avatarUrl, self.deleted) = (avatarUrl, deleted)
-        (self.email, self.eventsUrl) = (email, eventsUrl)
-        (self.followersUrl, self.followingUrl) = (followersUrl, followingUrl)
-        (self.gistsUrl, self.gravatarId) = (gistsUrl, gravatarId)
-        (self.htmlUrl, self.name) = (htmlUrl, name)
-        (self.nodeId, self.organizationsUrl) = (nodeId, organizationsUrl)
-        (self.receivedEventsUrl, self.reposUrl) = (receivedEventsUrl, reposUrl)
-        (self.siteAdmin, self.starredUrl) = (siteAdmin, starredUrl)
-        (self.subscriptionsUrl, self.type) = (subscriptionsUrl, type)
-        (self.url, self.userViewType) = (url, userViewType)
-        try sdkValidateConstraints()
-    }
-}
-
-extension WebhookPullRequestReviewThreadResolvedPullRequestAutoMergeEnabledBy {
-    func sdkValidateConstraints() throws {
-        if let value = self.avatarUrl {
-            try sdkValidateUri("avatar_url", value)
-        }
-        if let value = self.followersUrl {
-            try sdkValidateUri("followers_url", value)
-        }
-        if let value = self.htmlUrl {
-            try sdkValidateUri("html_url", value)
-        }
-        if let value = self.organizationsUrl {
-            try sdkValidateUri("organizations_url", value)
-        }
-        if let value = self.receivedEventsUrl {
-            try sdkValidateUri("received_events_url", value)
-        }
-        if let value = self.reposUrl {
-            try sdkValidateUri("repos_url", value)
-        }
-        if let value = self.subscriptionsUrl {
-            try sdkValidateUri("subscriptions_url", value)
-        }
-        if let value = self.url {
-            try sdkValidateUri("url", value)
-        }
-    }
 }

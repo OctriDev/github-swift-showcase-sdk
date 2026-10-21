@@ -36,8 +36,8 @@ public class GitignoreNamespace {
     }
 
 /// List all templates available to pass as an option when [creating a repository](https://docs.github.com/rest/repos/repos#create-a-repository-for-the-authenticated-user).
-    public func getAllTemplates(requestOptions: RequestOptions? = nil) async throws -> [String] {
-        return try await GitignoreMethods.gitignoreGetAllTemplates(config: config, requestOptions: requestOptions)
+    public func listTemplates(requestOptions: RequestOptions? = nil) async throws -> [String] {
+        return try await GitignoreMethods.listTemplates(config: config, requestOptions: requestOptions)
     }
 
 /// Retrieves the content of a gitignore template by name. The `application/vnd.github.raw+json` media type returns the raw `.gitignore` contents; the response object includes the template name and source.

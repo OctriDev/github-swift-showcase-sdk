@@ -6,26 +6,6 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testMigrationsGetCommitAuthorsMigrationsGetCommitAuthorsReachesMockAndDecodesResponse() async throws {
-        guard let client = configuredClient() else {
-            return
-        }
-        _ = client
-        let actual = try await client.migrations.getCommitAuthors(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            since: decoded("1")
-        )
-        let expected = try JSONSerialization.jsonObject(
-            with: Data(sdkMethodFixture1066Expected.utf8),
-            options: [.fragmentsAllowed]
-        )
-        XCTAssertNil(
-            try mismatch(jsonValue(actual), expected),
-            "decoded a response that differs from the mock"
-        )
-    }
-
     func testMigrationsGetCommitAuthorsMigrationsGetCommitAuthors404ReachesMockAndDecodesResponse() async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return

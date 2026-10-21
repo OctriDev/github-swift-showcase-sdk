@@ -87,12 +87,6 @@ extension RepositoryRulesetLinks {
     }
 }
 
-
-
-
-
-
-
 /// A set of rules to apply when specified conditions are met.
 public struct RepositoryRuleset: Codable {
     /// The ID of the ruleset
@@ -318,10 +312,6 @@ extension RepositoryRulesetLinksHtml {
         self.href = href
     }
 }
-
-
-
-
 
 /// An actor that can bypass rules in a ruleset
 public struct RepositoryRulesetBypassActor: Codable {

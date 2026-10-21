@@ -42,10 +42,6 @@ extension SimpleInstallation {
     }
 }
 
-
-
-
-
 /// A suite of checks performed on the code of a given code change
 public struct SimpleCheckSuite: Codable {
     /// Optional `string` value serialized in the `after` wire field.

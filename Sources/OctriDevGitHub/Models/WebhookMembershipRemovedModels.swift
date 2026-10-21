@@ -160,10 +160,6 @@ extension WebhookMembershipRemovedSender {
     }
 }
 
-
-
-
-
 /// Typed representation of the `WebhookMembershipRemoved` API schema.
 public struct WebhookMembershipRemoved: Codable {
     /// Required enumerated value serialized in the `action` wire field.

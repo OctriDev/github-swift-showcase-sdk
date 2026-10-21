@@ -69303,8 +69303,8 @@
       }
     },
     {
-      "id": "authored-gitignoreGetAllTemplates-200-application/json",
-      "operationId": "gitignoreGetAllTemplates",
+      "id": "authored-listTemplates-200-application/json",
+      "operationId": "listTemplates",
       "kinds": [
         "json-response"
       ],

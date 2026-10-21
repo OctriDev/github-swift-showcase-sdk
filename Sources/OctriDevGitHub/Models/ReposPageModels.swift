@@ -110,12 +110,6 @@ extension PageDeploymentId: SdkNumericValueConvertible {
     }
 }
 
-
-
-
-
-
-
 /// The configuration for GitHub Pages for a repository.
 public struct Page: Codable {
     /// The API address for accessing this Page resource.
