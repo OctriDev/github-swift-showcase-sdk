@@ -6,16 +6,36 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension MigrationsMethods {
-    /// Retrieves the download URL for an organization's migration archive. Identify the migration with `org` and `migration_id`; the response redirects to the archive URL.
+public extension MigrationsMethods {
+    /// Retrieves the download URL for an organization's migration archive. Identify the migration with `org` and
+    /// `migration_id`; the response redirects to the archive URL.
     ///
     /// Fetches the URL to a migration archive.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - migrationId: The unique identifier of the migration.
-    public static func migrationsDownloadArchiveForOrg(config: ClientConfig, org: String, migrationId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/migrations/", sdkEncodePathSegment(sdkWireString(migrationId)), "/archive"].joined(), config: config, decoder: .empty, operationId: "migrationsDownloadArchiveForOrg", options: requestOptions, errors: ["404": BasicError.self])).data
+    static func migrationsDownloadArchiveForOrg(
+        config: ClientConfig,
+        org: String,
+        migrationId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/orgs/",
+                sdkEncodePathSegment(sdkWireString(org)),
+                "/migrations/",
+                sdkEncodePathSegment(sdkWireString(migrationId)),
+                "/archive",
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "migrationsDownloadArchiveForOrg",
+            options: requestOptions,
+            errors: ["404": BasicError.self]
+        )).data
     }
 
     /// Deletes a previous migration archive. Migration archives are automatically deleted after seven days.
@@ -23,15 +43,51 @@ extension MigrationsMethods {
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - migrationId: The unique identifier of the migration.
-    public static func migrationsDeleteArchiveForOrg(config: ClientConfig, org: String, migrationId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/migrations/", sdkEncodePathSegment(sdkWireString(migrationId)), "/archive"].joined(), config: config, decoder: .empty, operationId: "migrationsDeleteArchiveForOrg", options: requestOptions, errors: ["404": BasicError.self])).data
+    static func migrationsDeleteArchiveForOrg(
+        config: ClientConfig,
+        org: String,
+        migrationId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            [
+                "/orgs/",
+                sdkEncodePathSegment(sdkWireString(org)),
+                "/migrations/",
+                sdkEncodePathSegment(sdkWireString(migrationId)),
+                "/archive",
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "migrationsDeleteArchiveForOrg",
+            options: requestOptions,
+            errors: ["404": BasicError.self]
+        )).data
     }
 
-    /// Fetches the URL to download the migration archive as a `tar.gz` file. Depending on the resources your repository uses, the migration archive can contain JSON files with data for these objects: * attachments * bases * commit\_comments * issue\_comments * issue\_events * issues * milestones * organizations * projects * protected\_branches * pull\_request\_reviews * pull\_requests * releases * repositories * review\_comments * schema * users The archive will also contain an `attachments` directory that includes all attachment files uploaded to GitHub.com and a `repositories` directory that contains the repository's Git data.
+    /// Fetches the URL to download the migration archive as a `tar.gz` file. Depending on the resources your repository
+    /// uses, the migration archive can contain JSON files with data for these objects: * attachments * bases *
+    /// commit\_comments * issue\_comments * issue\_events * issues * milestones * organizations * projects *
+    /// protected\_branches * pull\_request\_reviews * pull\_requests * releases * repositories * review\_comments *
+    /// schema * users The archive will also contain an `attachments` directory that includes all attachment files
+    /// uploaded to GitHub.com and a `repositories` directory that contains the repository's Git data.
     ///
     /// - Parameters:
     /// - migrationId: The unique identifier of the migration.
-    public static func migrationsGetArchiveForAuthenticatedUser(config: ClientConfig, migrationId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("GET", ["/user/migrations/", sdkEncodePathSegment(sdkWireString(migrationId)), "/archive"].joined(), config: config, decoder: .empty, operationId: "migrationsGetArchiveForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self])).data
+    static func migrationsGetArchiveForAuthenticatedUser(
+        config: ClientConfig,
+        migrationId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "GET",
+            ["/user/migrations/", sdkEncodePathSegment(sdkWireString(migrationId)), "/archive"].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "migrationsGetArchiveForAuthenticatedUser",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self]
+        )).data
     }
 }

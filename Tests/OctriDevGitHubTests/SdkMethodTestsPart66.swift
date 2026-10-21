@@ -6,7 +6,8 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testReactionsCreateForCommitCommentReactionsCreateForCommitComment422ReachesMockAndDecodesResponse() async throws {
+    func testReactionsCreateForCommitCommentReactionsCreateForCommitComment422ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/422") else {
             return
         }
@@ -17,11 +18,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.reactions.createForCommitComment(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            commentId: decoded("1"),
-            content: decoded("\"heart\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                commentId: decoded("1"),
+                content: decoded("\"heart\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 422)
@@ -69,11 +70,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.reactions.createForIssue(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            issueNumber: decoded("1"),
-            content: decoded("\"heart\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                issueNumber: decoded("1"),
+                content: decoded("\"heart\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 422)
@@ -110,7 +111,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testReactionsCreateForIssueCommentReactionsCreateForIssueComment422ReachesMockAndDecodesResponse() async throws {
+    func testReactionsCreateForIssueCommentReactionsCreateForIssueComment422ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/422") else {
             return
         }
@@ -121,11 +123,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.reactions.createForIssueComment(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            commentId: decoded("1"),
-            content: decoded("\"heart\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                commentId: decoded("1"),
+                content: decoded("\"heart\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 422)
@@ -141,7 +143,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testReactionsCreateForPullRequestReviewCommentReactionsCreateForPXbde21e2dceReachesMockAndDecodesResponse() async throws {
+    func testReactionsCreateForPullRequestReviewCommentReactionsCreateForPXbde21e2dceReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -162,7 +165,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testReactionsCreateForPullRequestReviewCommentReactionsCreateForPX741e5071d1ReachesMockAndDecodesResponse() async throws {
+    func testReactionsCreateForPullRequestReviewCommentReactionsCreateForPX741e5071d1ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/422") else {
             return
         }
@@ -173,11 +177,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.reactions.createForPullRequestReviewComment(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            commentId: decoded("1"),
-            content: decoded("\"heart\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                commentId: decoded("1"),
+                content: decoded("\"heart\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 422)
@@ -225,11 +229,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.reactions.createForRelease(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            releaseId: decoded("1"),
-            content: decoded("\"heart\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                releaseId: decoded("1"),
+                content: decoded("\"heart\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 422)
@@ -287,7 +291,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testReactionsDeleteForPullRequestCommentReactionsDeleteForPullRequestCommentReachesMockAndDecodesResponse() async throws {
+    func testReactionsDeleteForPullRequestCommentReactionsDeleteForPullRequestCommentReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -349,13 +354,13 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.reactions.listForCommitComment(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            commentId: decoded("1"),
-            content: decoded("\"+1\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                commentId: decoded("1"),
+                content: decoded("\"+1\""),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -405,13 +410,13 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.reactions.listForIssue(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            issueNumber: decoded("1"),
-            content: decoded("\"+1\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                issueNumber: decoded("1"),
+                content: decoded("\"+1\""),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -461,13 +466,13 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.reactions.listForIssueComment(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            commentId: decoded("1"),
-            content: decoded("\"+1\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                commentId: decoded("1"),
+                content: decoded("\"+1\""),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -483,7 +488,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testReactionsListForPullRequestReviewCommentReactionsListForPullRX489d0545ddReachesMockAndDecodesResponse() async throws {
+    func testReactionsListForPullRequestReviewCommentReactionsListForPullRX489d0545ddReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -506,7 +512,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testReactionsListForPullRequestReviewCommentReactionsListForPullRXddd89a15dbReachesMockAndDecodesResponse() async throws {
+    func testReactionsListForPullRequestReviewCommentReactionsListForPullRXddd89a15dbReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -517,13 +524,13 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.reactions.listForPullRequestReviewComment(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            commentId: decoded("1"),
-            content: decoded("\"+1\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                commentId: decoded("1"),
+                content: decoded("\"+1\""),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)

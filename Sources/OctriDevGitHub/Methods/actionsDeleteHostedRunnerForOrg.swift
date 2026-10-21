@@ -6,13 +6,30 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ActionsMethods {
+public extension ActionsMethods {
     /// Deletes a GitHub-hosted runner for an organization.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - hostedRunnerId: Unique identifier of the GitHub-hosted runner.
-    public static func actionsDeleteHostedRunnerForOrg(config: ClientConfig, org: String, hostedRunnerId: Int, requestOptions: RequestOptions? = nil) async throws -> ActionsHostedRunner {
-        return try (await sdkRequest("DELETE", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/actions/hosted-runners/", sdkEncodePathSegment(sdkWireString(hostedRunnerId))].joined(), config: config, decoder: .json, operationId: "actionsDeleteHostedRunnerForOrg", options: requestOptions)).data
+    static func actionsDeleteHostedRunnerForOrg(
+        config: ClientConfig,
+        org: String,
+        hostedRunnerId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ActionsHostedRunner {
+        try await (sdkRequest(
+            "DELETE",
+            [
+                "/orgs/",
+                sdkEncodePathSegment(sdkWireString(org)),
+                "/actions/hosted-runners/",
+                sdkEncodePathSegment(sdkWireString(hostedRunnerId)),
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "actionsDeleteHostedRunnerForOrg",
+            options: requestOptions
+        )).data
     }
 }

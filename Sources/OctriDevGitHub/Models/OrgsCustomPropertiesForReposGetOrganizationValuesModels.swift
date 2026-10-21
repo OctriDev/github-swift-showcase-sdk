@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Orgs domain models
+/// Orgs domain models
 /// List of custom property values for a repository
 public struct OrgRepoCustomPropertyValues: Codable {
     /// Required `integer` value serialized in the `repository_id` wire field.
@@ -25,33 +25,51 @@ public struct OrgRepoCustomPropertyValues: Codable {
         case properties
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension OrgRepoCustomPropertyValues {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.repositoryId) else {
-            throw SdkValidationError(field: "repository_id", code: "required", message: "Validation failed for 'repository_id': value is required")
-        }
-        guard container.contains(.repositoryName) else {
-            throw SdkValidationError(field: "repository_name", code: "required", message: "Validation failed for 'repository_name': value is required")
-        }
-        guard container.contains(.repositoryFullName) else {
-            throw SdkValidationError(field: "repository_full_name", code: "required", message: "Validation failed for 'repository_full_name': value is required")
-        }
-        guard container.contains(.properties) else {
-            throw SdkValidationError(field: "properties", code: "required", message: "Validation failed for 'properties': value is required")
-        }
-        self.repositoryId = try container.sdkDecodeRequired(.repositoryId)
-        self.repositoryName = try container.sdkDecodeRequired(.repositoryName)
-        self.repositoryFullName = try container.sdkDecodeRequired(.repositoryFullName)
-        self.properties = try container.sdkDecodeRequired(.properties)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension OrgRepoCustomPropertyValues {
-    public init(repositoryId: Int, repositoryName: String, repositoryFullName: String, properties: [CustomPropertyValue]) {
+public extension OrgRepoCustomPropertyValues {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.repositoryId) else {
+            throw SdkValidationError(
+                field: "repository_id",
+                code: "required",
+                message: "Validation failed for 'repository_id': value is required"
+            )
+        }
+        guard container.contains(.repositoryName) else {
+            throw SdkValidationError(
+                field: "repository_name",
+                code: "required",
+                message: "Validation failed for 'repository_name': value is required"
+            )
+        }
+        guard container.contains(.repositoryFullName) else {
+            throw SdkValidationError(
+                field: "repository_full_name",
+                code: "required",
+                message: "Validation failed for 'repository_full_name': value is required"
+            )
+        }
+        guard container.contains(.properties) else {
+            throw SdkValidationError(
+                field: "properties",
+                code: "required",
+                message: "Validation failed for 'properties': value is required"
+            )
+        }
+        repositoryId = try container.sdkDecodeRequired(.repositoryId)
+        repositoryName = try container.sdkDecodeRequired(.repositoryName)
+        repositoryFullName = try container.sdkDecodeRequired(.repositoryFullName)
+        properties = try container.sdkDecodeRequired(.properties)
+    }
+}
+
+public extension OrgRepoCustomPropertyValues {
+    init(repositoryId: Int, repositoryName: String, repositoryFullName: String, properties: [CustomPropertyValue]) {
         (self.repositoryId, self.repositoryName) = (repositoryId, repositoryName)
         (self.repositoryFullName, self.properties) = (repositoryFullName, properties)
     }

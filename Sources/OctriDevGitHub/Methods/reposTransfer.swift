@@ -6,8 +6,11 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ReposMethods {
-    /// A transfer request will need to be accepted by the new owner when transferring a personal repository to another user. The response will contain the original `owner`, and the transfer will continue asynchronously. For more details on the requirements to transfer personal and organization-owned repositories, see [about repository transfers](https://docs.github.com/articles/about-repository-transfers/).
+public extension ReposMethods {
+    /// A transfer request will need to be accepted by the new owner when transferring a personal repository to another
+    /// user. The response will contain the original `owner`, and the transfer will continue asynchronously. For more
+    /// details on the requirements to transfer personal and organization-owned repositories, see [about repository
+    /// transfers](https://docs.github.com/articles/about-repository-transfers/).
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -19,9 +22,31 @@ extension ReposMethods {
     /// - newName: The new name to be given to the repository.
     /// - teamIds: ID of the team or teams to add to the repository. Teams can only
     ///   be added to organization-owned repositories.
-    public static func reposTransfer(config: ClientConfig, owner: String, repo: String, newOwner: String, newName: String? = nil, teamIds: [Int]? = nil, requestOptions: RequestOptions? = nil) async throws -> MinimalRepository {
+    static func reposTransfer(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        newOwner: String,
+        newName: String? = nil,
+        teamIds: [Int]? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> MinimalRepository {
         let requestBody = ReposTransferRequestBody(newOwner: newOwner, newName: newName, teamIds: teamIds)
 
-        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/transfer"].joined(), config: config, body: requestBody, decoder: .json, operationId: "reposTransfer", options: requestOptions)).data
+        return try await (sdkRequest(
+            "POST",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/transfer",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "reposTransfer",
+            options: requestOptions
+        )).data
     }
 }

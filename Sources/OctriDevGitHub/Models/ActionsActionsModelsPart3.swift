@@ -3,9 +3,22 @@
 
 import Foundation
 
-// ActionsActions domain models
-extension ActionsPolicy {
-    public init(id: Int, name: String, target: ActionsPolicyTarget, sourceType: ActionsPolicySourceType, source: String, enforcement: RepositoryRuleEnforcement, conditions: ActionsPolicyConditions? = nil, rules: [ActionsRule]? = nil, nodeId: String? = nil, links: ActionsPolicyLinks? = nil, createdAt: Date? = nil, updatedAt: Date? = nil) throws {
+/// ActionsActions domain models
+public extension ActionsPolicy {
+    init(
+        id: Int,
+        name: String,
+        target: ActionsPolicyTarget,
+        sourceType: ActionsPolicySourceType,
+        source: String,
+        enforcement: RepositoryRuleEnforcement,
+        conditions: ActionsPolicyConditions? = nil,
+        rules: [ActionsRule]? = nil,
+        nodeId: String? = nil,
+        links: ActionsPolicyLinks? = nil,
+        createdAt: Date? = nil,
+        updatedAt: Date? = nil
+    ) throws {
         (self.id, self.name) = (id, name)
         (self.target, self.sourceType) = (target, sourceType)
         (self.source, self.enforcement) = (source, enforcement)
@@ -30,21 +43,27 @@ public struct ActionsPolicyRepoConditionsVariant1: Codable {
         case workflowPath = "workflow_path"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsPolicyRepoConditionsVariant1 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.workflowPath) else {
-            throw SdkValidationError(field: "workflow_path", code: "required", message: "Validation failed for 'workflow_path': value is required")
-        }
-        self.workflowPath = try container.sdkDecodeRequired(.workflowPath)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsPolicyRepoConditionsVariant1 {
-    public init(workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath) {
+public extension ActionsPolicyRepoConditionsVariant1 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.workflowPath) else {
+            throw SdkValidationError(
+                field: "workflow_path",
+                code: "required",
+                message: "Validation failed for 'workflow_path': value is required"
+            )
+        }
+        workflowPath = try container.sdkDecodeRequired(.workflowPath)
+    }
+}
+
+public extension ActionsPolicyRepoConditionsVariant1 {
+    init(workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath) {
         self.workflowPath = workflowPath
     }
 }
@@ -64,26 +83,40 @@ public struct ActionsPolicyEnterpriseConditionsVariant2: Codable {
         case workflowPath = "workflow_path"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsPolicyEnterpriseConditionsVariant2 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.organizationId) else {
-            throw SdkValidationError(field: "organization_id", code: "required", message: "Validation failed for 'organization_id': value is required")
-        }
-        guard container.contains(.repositoryName) else {
-            throw SdkValidationError(field: "repository_name", code: "required", message: "Validation failed for 'repository_name': value is required")
-        }
-        self.organizationId = try container.sdkDecodeRequired(.organizationId)
-        self.repositoryName = try container.sdkDecodeRequired(.repositoryName)
-        self.workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsPolicyEnterpriseConditionsVariant2 {
-    public init(organizationId: EnterpriseRulesetConditionsOrganizationIdTargetOrganizationId, repositoryName: RepositoryRulesetConditionsRepositoryNameTargetRepositoryName, workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil) {
+public extension ActionsPolicyEnterpriseConditionsVariant2 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.organizationId) else {
+            throw SdkValidationError(
+                field: "organization_id",
+                code: "required",
+                message: "Validation failed for 'organization_id': value is required"
+            )
+        }
+        guard container.contains(.repositoryName) else {
+            throw SdkValidationError(
+                field: "repository_name",
+                code: "required",
+                message: "Validation failed for 'repository_name': value is required"
+            )
+        }
+        organizationId = try container.sdkDecodeRequired(.organizationId)
+        repositoryName = try container.sdkDecodeRequired(.repositoryName)
+        workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
+    }
+}
+
+public extension ActionsPolicyEnterpriseConditionsVariant2 {
+    init(
+        organizationId: EnterpriseRulesetConditionsOrganizationIdTargetOrganizationId,
+        repositoryName: RepositoryRulesetConditionsRepositoryNameTargetRepositoryName,
+        workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil
+    ) {
         (self.organizationId, self.repositoryName) = (organizationId, repositoryName)
         self.workflowPath = workflowPath
     }
@@ -109,33 +142,56 @@ public struct ActionsForkPrWorkflowsPrivateRepos: Codable {
         case requireApprovalForForkPrWorkflows = "require_approval_for_fork_pr_workflows"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsForkPrWorkflowsPrivateRepos {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.runWorkflowsFromForkPullRequests) else {
-            throw SdkValidationError(field: "run_workflows_from_fork_pull_requests", code: "required", message: "Validation failed for 'run_workflows_from_fork_pull_requests': value is required")
-        }
-        guard container.contains(.sendWriteTokensToWorkflows) else {
-            throw SdkValidationError(field: "send_write_tokens_to_workflows", code: "required", message: "Validation failed for 'send_write_tokens_to_workflows': value is required")
-        }
-        guard container.contains(.sendSecretsAndVariables) else {
-            throw SdkValidationError(field: "send_secrets_and_variables", code: "required", message: "Validation failed for 'send_secrets_and_variables': value is required")
-        }
-        guard container.contains(.requireApprovalForForkPrWorkflows) else {
-            throw SdkValidationError(field: "require_approval_for_fork_pr_workflows", code: "required", message: "Validation failed for 'require_approval_for_fork_pr_workflows': value is required")
-        }
-        self.runWorkflowsFromForkPullRequests = try container.sdkDecodeRequired(.runWorkflowsFromForkPullRequests)
-        self.sendWriteTokensToWorkflows = try container.sdkDecodeRequired(.sendWriteTokensToWorkflows)
-        self.sendSecretsAndVariables = try container.sdkDecodeRequired(.sendSecretsAndVariables)
-        self.requireApprovalForForkPrWorkflows = try container.sdkDecodeRequired(.requireApprovalForForkPrWorkflows)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsForkPrWorkflowsPrivateRepos {
-    public init(runWorkflowsFromForkPullRequests: Bool, sendWriteTokensToWorkflows: Bool, sendSecretsAndVariables: Bool, requireApprovalForForkPrWorkflows: Bool) {
+public extension ActionsForkPrWorkflowsPrivateRepos {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.runWorkflowsFromForkPullRequests) else {
+            throw SdkValidationError(
+                field: "run_workflows_from_fork_pull_requests",
+                code: "required",
+                message: "Validation failed for 'run_workflows_from_fork_pull_requests': value is required"
+            )
+        }
+        guard container.contains(.sendWriteTokensToWorkflows) else {
+            throw SdkValidationError(
+                field: "send_write_tokens_to_workflows",
+                code: "required",
+                message: "Validation failed for 'send_write_tokens_to_workflows': value is required"
+            )
+        }
+        guard container.contains(.sendSecretsAndVariables) else {
+            throw SdkValidationError(
+                field: "send_secrets_and_variables",
+                code: "required",
+                message: "Validation failed for 'send_secrets_and_variables': value is required"
+            )
+        }
+        guard container.contains(.requireApprovalForForkPrWorkflows) else {
+            throw SdkValidationError(
+                field: "require_approval_for_fork_pr_workflows",
+                code: "required",
+                message: "Validation failed for 'require_approval_for_fork_pr_workflows': value is required"
+            )
+        }
+        runWorkflowsFromForkPullRequests = try container.sdkDecodeRequired(.runWorkflowsFromForkPullRequests)
+        sendWriteTokensToWorkflows = try container.sdkDecodeRequired(.sendWriteTokensToWorkflows)
+        sendSecretsAndVariables = try container.sdkDecodeRequired(.sendSecretsAndVariables)
+        requireApprovalForForkPrWorkflows = try container.sdkDecodeRequired(.requireApprovalForForkPrWorkflows)
+    }
+}
+
+public extension ActionsForkPrWorkflowsPrivateRepos {
+    init(
+        runWorkflowsFromForkPullRequests: Bool,
+        sendWriteTokensToWorkflows: Bool,
+        sendSecretsAndVariables: Bool,
+        requireApprovalForForkPrWorkflows: Bool
+    ) {
         self.runWorkflowsFromForkPullRequests = runWorkflowsFromForkPullRequests
         self.sendWriteTokensToWorkflows = sendWriteTokensToWorkflows
         self.sendSecretsAndVariables = sendSecretsAndVariables
@@ -169,37 +225,59 @@ public struct ActionsHostedRunnerCustomImageVersion: Codable {
         case stateDetails = "state_details"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsHostedRunnerCustomImageVersion {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.version) else {
-            throw SdkValidationError(field: "version", code: "required", message: "Validation failed for 'version': value is required")
-        }
-        guard container.contains(.state) else {
-            throw SdkValidationError(field: "state", code: "required", message: "Validation failed for 'state': value is required")
-        }
-        guard container.contains(.sizeGb) else {
-            throw SdkValidationError(field: "size_gb", code: "required", message: "Validation failed for 'size_gb': value is required")
-        }
-        guard container.contains(.createdOn) else {
-            throw SdkValidationError(field: "created_on", code: "required", message: "Validation failed for 'created_on': value is required")
-        }
-        guard container.contains(.stateDetails) else {
-            throw SdkValidationError(field: "state_details", code: "required", message: "Validation failed for 'state_details': value is required")
-        }
-        self.version = try container.sdkDecodeRequired(.version)
-        self.state = try container.sdkDecodeRequired(.state)
-        self.sizeGb = try container.sdkDecodeRequired(.sizeGb)
-        self.createdOn = try container.sdkDecodeRequired(.createdOn)
-        self.stateDetails = try container.sdkDecodeRequired(.stateDetails)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsHostedRunnerCustomImageVersion {
-    public init(version: String, state: String, sizeGb: Int, createdOn: String, stateDetails: String) {
+public extension ActionsHostedRunnerCustomImageVersion {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.version) else {
+            throw SdkValidationError(
+                field: "version",
+                code: "required",
+                message: "Validation failed for 'version': value is required"
+            )
+        }
+        guard container.contains(.state) else {
+            throw SdkValidationError(
+                field: "state",
+                code: "required",
+                message: "Validation failed for 'state': value is required"
+            )
+        }
+        guard container.contains(.sizeGb) else {
+            throw SdkValidationError(
+                field: "size_gb",
+                code: "required",
+                message: "Validation failed for 'size_gb': value is required"
+            )
+        }
+        guard container.contains(.createdOn) else {
+            throw SdkValidationError(
+                field: "created_on",
+                code: "required",
+                message: "Validation failed for 'created_on': value is required"
+            )
+        }
+        guard container.contains(.stateDetails) else {
+            throw SdkValidationError(
+                field: "state_details",
+                code: "required",
+                message: "Validation failed for 'state_details': value is required"
+            )
+        }
+        version = try container.sdkDecodeRequired(.version)
+        state = try container.sdkDecodeRequired(.state)
+        sizeGb = try container.sdkDecodeRequired(.sizeGb)
+        createdOn = try container.sdkDecodeRequired(.createdOn)
+        stateDetails = try container.sdkDecodeRequired(.stateDetails)
+    }
+}
+
+public extension ActionsHostedRunnerCustomImageVersion {
+    init(version: String, state: String, sizeGb: Int, createdOn: String, stateDetails: String) {
         (self.version, self.state) = (version, state)
         (self.sizeGb, self.createdOn) = (sizeGb, createdOn)
         self.stateDetails = stateDetails
@@ -215,21 +293,27 @@ public struct ActionsHostedRunnerLimits: Codable {
         case publicIps = "public_ips"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsHostedRunnerLimits {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.publicIps) else {
-            throw SdkValidationError(field: "public_ips", code: "required", message: "Validation failed for 'public_ips': value is required")
-        }
-        self.publicIps = try container.sdkDecodeRequired(.publicIps)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsHostedRunnerLimits {
-    public init(publicIps: ActionsHostedRunnerLimitsPublicIps) {
+public extension ActionsHostedRunnerLimits {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.publicIps) else {
+            throw SdkValidationError(
+                field: "public_ips",
+                code: "required",
+                message: "Validation failed for 'public_ips': value is required"
+            )
+        }
+        publicIps = try container.sdkDecodeRequired(.publicIps)
+    }
+}
+
+public extension ActionsHostedRunnerLimits {
+    init(publicIps: ActionsHostedRunnerLimitsPublicIps) {
         self.publicIps = publicIps
     }
 }
@@ -249,26 +333,40 @@ public struct ActionsPolicyEnterpriseConditionsVariant1: Codable {
         case workflowPath = "workflow_path"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsPolicyEnterpriseConditionsVariant1 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.organizationName) else {
-            throw SdkValidationError(field: "organization_name", code: "required", message: "Validation failed for 'organization_name': value is required")
-        }
-        guard container.contains(.repositoryProperty) else {
-            throw SdkValidationError(field: "repository_property", code: "required", message: "Validation failed for 'repository_property': value is required")
-        }
-        self.organizationName = try container.sdkDecodeRequired(.organizationName)
-        self.repositoryProperty = try container.sdkDecodeRequired(.repositoryProperty)
-        self.workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsPolicyEnterpriseConditionsVariant1 {
-    public init(organizationName: EnterpriseRulesetConditionsOrganizationNameTargetOrganizationName, repositoryProperty: RepositoryRulesetConditionsRepositoryPropertyTargetRepositoryProperty, workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil) {
+public extension ActionsPolicyEnterpriseConditionsVariant1 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.organizationName) else {
+            throw SdkValidationError(
+                field: "organization_name",
+                code: "required",
+                message: "Validation failed for 'organization_name': value is required"
+            )
+        }
+        guard container.contains(.repositoryProperty) else {
+            throw SdkValidationError(
+                field: "repository_property",
+                code: "required",
+                message: "Validation failed for 'repository_property': value is required"
+            )
+        }
+        organizationName = try container.sdkDecodeRequired(.organizationName)
+        repositoryProperty = try container.sdkDecodeRequired(.repositoryProperty)
+        workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
+    }
+}
+
+public extension ActionsPolicyEnterpriseConditionsVariant1 {
+    init(
+        organizationName: EnterpriseRulesetConditionsOrganizationNameTargetOrganizationName,
+        repositoryProperty: RepositoryRulesetConditionsRepositoryPropertyTargetRepositoryProperty,
+        workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil
+    ) {
         (self.organizationName, self.repositoryProperty) = (organizationName, repositoryProperty)
         self.workflowPath = workflowPath
     }
@@ -286,22 +384,31 @@ public struct ActionsPolicyOrgConditionsVariant2: Codable {
         case workflowPath = "workflow_path"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsPolicyOrgConditionsVariant2 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.repositoryProperty) else {
-            throw SdkValidationError(field: "repository_property", code: "required", message: "Validation failed for 'repository_property': value is required")
-        }
-        self.repositoryProperty = try container.sdkDecodeRequired(.repositoryProperty)
-        self.workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsPolicyOrgConditionsVariant2 {
-    public init(repositoryProperty: RepositoryRulesetConditionsRepositoryPropertyTargetRepositoryProperty, workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil) {
+public extension ActionsPolicyOrgConditionsVariant2 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.repositoryProperty) else {
+            throw SdkValidationError(
+                field: "repository_property",
+                code: "required",
+                message: "Validation failed for 'repository_property': value is required"
+            )
+        }
+        repositoryProperty = try container.sdkDecodeRequired(.repositoryProperty)
+        workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
+    }
+}
+
+public extension ActionsPolicyOrgConditionsVariant2 {
+    init(
+        repositoryProperty: RepositoryRulesetConditionsRepositoryPropertyTargetRepositoryProperty,
+        workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil
+    ) {
         (self.repositoryProperty, self.workflowPath) = (repositoryProperty, workflowPath)
     }
 }
@@ -321,26 +428,40 @@ public struct ActionsPolicyEnterpriseConditionsVariant3: Codable {
         case workflowPath = "workflow_path"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsPolicyEnterpriseConditionsVariant3 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.organizationId) else {
-            throw SdkValidationError(field: "organization_id", code: "required", message: "Validation failed for 'organization_id': value is required")
-        }
-        guard container.contains(.repositoryProperty) else {
-            throw SdkValidationError(field: "repository_property", code: "required", message: "Validation failed for 'repository_property': value is required")
-        }
-        self.organizationId = try container.sdkDecodeRequired(.organizationId)
-        self.repositoryProperty = try container.sdkDecodeRequired(.repositoryProperty)
-        self.workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsPolicyEnterpriseConditionsVariant3 {
-    public init(organizationId: EnterpriseRulesetConditionsOrganizationIdTargetOrganizationId, repositoryProperty: RepositoryRulesetConditionsRepositoryPropertyTargetRepositoryProperty, workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil) {
+public extension ActionsPolicyEnterpriseConditionsVariant3 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.organizationId) else {
+            throw SdkValidationError(
+                field: "organization_id",
+                code: "required",
+                message: "Validation failed for 'organization_id': value is required"
+            )
+        }
+        guard container.contains(.repositoryProperty) else {
+            throw SdkValidationError(
+                field: "repository_property",
+                code: "required",
+                message: "Validation failed for 'repository_property': value is required"
+            )
+        }
+        organizationId = try container.sdkDecodeRequired(.organizationId)
+        repositoryProperty = try container.sdkDecodeRequired(.repositoryProperty)
+        workflowPath = try container.sdkDecodeIfPresent(.workflowPath)
+    }
+}
+
+public extension ActionsPolicyEnterpriseConditionsVariant3 {
+    init(
+        organizationId: EnterpriseRulesetConditionsOrganizationIdTargetOrganizationId,
+        repositoryProperty: RepositoryRulesetConditionsRepositoryPropertyTargetRepositoryProperty,
+        workflowPath: ActionsPolicyWorkflowPathConditionWorkflowPath? = nil
+    ) {
         (self.organizationId, self.repositoryProperty) = (organizationId, repositoryProperty)
         self.workflowPath = workflowPath
     }
@@ -355,21 +476,27 @@ public struct ActionsRuleRestrictActionEventsParameters: Codable {
         case allowedEvents = "allowed_events"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsRuleRestrictActionEventsParameters {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.allowedEvents) else {
-            throw SdkValidationError(field: "allowed_events", code: "required", message: "Validation failed for 'allowed_events': value is required")
-        }
-        self.allowedEvents = try container.sdkDecodeRequired(.allowedEvents)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsRuleRestrictActionEventsParameters {
-    public init(allowedEvents: [ActionsRuleRestrictActionEventsParametersAllowedEventsItem]) {
+public extension ActionsRuleRestrictActionEventsParameters {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.allowedEvents) else {
+            throw SdkValidationError(
+                field: "allowed_events",
+                code: "required",
+                message: "Validation failed for 'allowed_events': value is required"
+            )
+        }
+        allowedEvents = try container.sdkDecodeRequired(.allowedEvents)
+    }
+}
+
+public extension ActionsRuleRestrictActionEventsParameters {
+    init(allowedEvents: [ActionsRuleRestrictActionEventsParametersAllowedEventsItem]) {
         self.allowedEvents = allowedEvents
     }
 }
@@ -412,25 +539,36 @@ public struct ActionsHostedRunnerCustomImage: Codable {
         case state
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsHostedRunnerCustomImage {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.platform = try container.sdkDecodeRequired(.platform)
-        self.totalVersionsSize = try container.sdkDecodeRequired(.totalVersionsSize)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.source = try container.sdkDecodeRequired(.source)
-        self.versionsCount = try container.sdkDecodeRequired(.versionsCount)
-        self.latestVersion = try container.sdkDecodeRequired(.latestVersion)
-        self.state = try container.sdkDecodeRequired(.state)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsHostedRunnerCustomImage {
-    public init(id: Int, platform: String, totalVersionsSize: Int, name: String, source: String, versionsCount: Int, latestVersion: String, state: String) {
+public extension ActionsHostedRunnerCustomImage {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.sdkDecodeRequired(.id)
+        platform = try container.sdkDecodeRequired(.platform)
+        totalVersionsSize = try container.sdkDecodeRequired(.totalVersionsSize)
+        name = try container.sdkDecodeRequired(.name)
+        source = try container.sdkDecodeRequired(.source)
+        versionsCount = try container.sdkDecodeRequired(.versionsCount)
+        latestVersion = try container.sdkDecodeRequired(.latestVersion)
+        state = try container.sdkDecodeRequired(.state)
+    }
+}
+
+public extension ActionsHostedRunnerCustomImage {
+    init(
+        id: Int,
+        platform: String,
+        totalVersionsSize: Int,
+        name: String,
+        source: String,
+        versionsCount: Int,
+        latestVersion: String,
+        state: String
+    ) {
         (self.id, self.platform) = (id, platform)
         (self.totalVersionsSize, self.name) = (totalVersionsSize, name)
         (self.source, self.versionsCount) = (source, versionsCount)
@@ -450,19 +588,19 @@ public struct ActionsCacheStorageLimitForEnterprise: Codable {
     }
 
     init() {
-        self.maxCacheSizeGb = nil
+        maxCacheSizeGb = nil
     }
 }
 
-extension ActionsCacheStorageLimitForEnterprise {
-    public init(from decoder: Decoder) throws {
+public extension ActionsCacheStorageLimitForEnterprise {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.maxCacheSizeGb = try container.sdkDecodeIfPresent(.maxCacheSizeGb)
+        maxCacheSizeGb = try container.sdkDecodeIfPresent(.maxCacheSizeGb)
     }
 }
 
-extension ActionsCacheStorageLimitForEnterprise {
-    public init(maxCacheSizeGb: Int? = nil) {
+public extension ActionsCacheStorageLimitForEnterprise {
+    init(maxCacheSizeGb: Int? = nil) {
         self.init()
         self.maxCacheSizeGb = maxCacheSizeGb
     }
@@ -477,21 +615,27 @@ public struct ActionsForkPrContributorApproval: Codable {
         case approvalPolicy = "approval_policy"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsForkPrContributorApproval {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.approvalPolicy) else {
-            throw SdkValidationError(field: "approval_policy", code: "required", message: "Validation failed for 'approval_policy': value is required")
-        }
-        self.approvalPolicy = try container.sdkDecodeRequired(.approvalPolicy)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsForkPrContributorApproval {
-    public init(approvalPolicy: ActionsForkPrContributorApprovalApprovalPolicy) {
+public extension ActionsForkPrContributorApproval {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.approvalPolicy) else {
+            throw SdkValidationError(
+                field: "approval_policy",
+                code: "required",
+                message: "Validation failed for 'approval_policy': value is required"
+            )
+        }
+        approvalPolicy = try container.sdkDecodeRequired(.approvalPolicy)
+    }
+}
+
+public extension ActionsForkPrContributorApproval {
+    init(approvalPolicy: ActionsForkPrContributorApprovalApprovalPolicy) {
         self.approvalPolicy = approvalPolicy
     }
 }

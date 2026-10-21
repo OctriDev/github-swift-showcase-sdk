@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ReposMethods {
-    /// Retrieves the top 10 referral sources for a repository over the last 14 days. Use this endpoint to review which sources drive visits to the repository.
+public extension ReposMethods {
+    /// Retrieves the top 10 referral sources for a repository over the last 14 days. Use this endpoint to review which
+    /// sources drive visits to the repository.
     ///
     /// Get the top 10 referrers over the last 14 days.
     ///
@@ -16,11 +17,31 @@ extension ReposMethods {
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    public static func reposGetTopReferrers(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> [ReferrerTraffic] {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/traffic/popular/referrers"].joined(), config: config, decoder: .json, operationId: "reposGetTopReferrers", options: requestOptions, errors: ["403": BasicError.self])).data
+    static func reposGetTopReferrers(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [ReferrerTraffic] {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/traffic/popular/referrers",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "reposGetTopReferrers",
+            options: requestOptions,
+            errors: ["403": BasicError.self]
+        )).data
     }
 
-    /// Get the total number of views and breakdown per day or week for the last 14 days. Timestamps are aligned to UTC midnight of the beginning of the day or week. Week begins on Monday.
+    /// Get the total number of views and breakdown per day or week for the last 14 days. Timestamps are aligned to UTC
+    /// midnight of the beginning of the day or week. Week begins on Monday.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -28,9 +49,22 @@ extension ReposMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - per: The time frame to display results for.
-    public static func reposGetViews(config: ClientConfig, owner: String, repo: String, per: ReposGetClonesParameter? = nil, requestOptions: RequestOptions? = nil) async throws -> ViewTraffic {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/traffic/views"].joined(), config: config, query: [
+    static func reposGetViews(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        per: ReposGetClonesParameter? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ViewTraffic {
+        try await (sdkRequest("GET", [
+            "/repos/",
+            sdkEncodePathSegment(sdkWireString(owner)),
+            "/",
+            sdkEncodePathSegment(sdkWireString(repo)),
+            "/traffic/views",
+        ].joined(), config: config, query: [
             SdkQueryParameter("per", value: per),
-        ], decoder: .json, operationId: "reposGetViews", options: requestOptions, errors: ["403": BasicError.self])).data
+        ], decoder: .json, operationId: "reposGetViews", options: requestOptions, errors: ["403": BasicError.self]))
+            .data
     }
 }

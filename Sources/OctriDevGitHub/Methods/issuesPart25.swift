@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension IssuesMethods {
-    /// Lists events recorded for an issue in a repository. Use `owner`, `repo`, and `issue_number` to identify the issue, and paginate the results with `page` and `per_page`.
+public extension IssuesMethods {
+    /// Lists events recorded for an issue in a repository. Use `owner`, `repo`, and `issue_number` to identify the
+    /// issue, and paginate the results with `page` and `per_page`.
     ///
     /// Lists all events for an issue.
     ///
@@ -25,10 +26,27 @@ extension IssuesMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func issuesListEvents(config: ClientConfig, owner: String, repo: String, issueNumber: Int, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [IssueEventForIssue] {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/issues/", sdkEncodePathSegment(sdkWireString(issueNumber)), "/events"].joined(), config: config, query: [
+    static func issuesListEvents(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        issueNumber: Int,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [IssueEventForIssue] {
+        try await (sdkRequest("GET", [
+            "/repos/",
+            sdkEncodePathSegment(sdkWireString(owner)),
+            "/",
+            sdkEncodePathSegment(sdkWireString(repo)),
+            "/issues/",
+            sdkEncodePathSegment(sdkWireString(issueNumber)),
+            "/events",
+        ].joined(), config: config, query: [
             SdkQueryParameter("per_page", value: perPage),
             SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "issuesListEvents", options: requestOptions, errors: ["410": BasicError.self])).data
+        ], decoder: .json, operationId: "issuesListEvents", options: requestOptions, errors: ["410": BasicError.self]))
+            .data
     }
 }

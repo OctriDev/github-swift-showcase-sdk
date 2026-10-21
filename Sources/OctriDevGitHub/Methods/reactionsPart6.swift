@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ReactionsMethods {
-    /// Lists reactions to an issue in a repository. Use `content` to filter the results to one reaction type, or omit it to list all reactions; use `page` and `per_page` to paginate the results.
+public extension ReactionsMethods {
+    /// Lists reactions to an issue in a repository. Use `content` to filter the results to one reaction type, or omit
+    /// it to list all reactions; use `page` and `per_page` to paginate the results.
     ///
     /// List the reactions to an [issue](https://docs.github.com/rest/issues/issues#get-an-issue).
     ///
@@ -28,11 +29,37 @@ extension ReactionsMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func reactionsListForIssue(config: ClientConfig, owner: String, repo: String, issueNumber: Int, content: ReactionsListForIssueParameter? = nil, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [Reaction] {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/issues/", sdkEncodePathSegment(sdkWireString(issueNumber)), "/reactions"].joined(), config: config, query: [
-            SdkQueryParameter("content", value: content),
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "reactionsListForIssue", options: requestOptions, errors: ["404": BasicError.self, "410": BasicError.self])).data
+    static func reactionsListForIssue(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        issueNumber: Int,
+        content: ReactionsListForIssueParameter? = nil,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [Reaction] {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/issues/",
+                sdkEncodePathSegment(sdkWireString(issueNumber)),
+                "/reactions",
+            ].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("content", value: content),
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "reactionsListForIssue",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "410": BasicError.self]
+        )).data
     }
 }

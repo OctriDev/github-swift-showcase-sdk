@@ -8,8 +8,10 @@ import Foundation
 #endif
 public enum ReposMethods {}
 
-extension ReposMethods {
-    /// Lists repositories for the specified organization. > [!NOTE] > In order to see the `security_and_analysis` block for a repository you must have admin permissions for the repository or be an owner or security manager for the organization that owns the repository. For more information, see "[Managing security managers in your organization](https://docs.github.com/organizations/managing-peoples-access-to-your-organization-with-roles/managing-security-managers-in-your-organization)."
+public extension ReposMethods {
+    /// Lists repositories for the specified organization. > [!NOTE] > In order to see the `security_and_analysis` block
+    /// for a repository you must have admin permissions for the repository or be an owner or security manager for the
+    /// organization that owns the repository. For more information, see "[Managing security managers in your organization](https://docs.github.com/organizations/managing-peoples-access-to-your-organization-with-roles/managing-security-managers-in-your-organization)."
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
@@ -25,13 +27,30 @@ extension ReposMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func reposListForOrg(config: ClientConfig, org: String, type: ReposListForOrgParameter? = nil, sort: ReposListForOrgParameterX0727468a? = nil, direction: ReposListForOrgParameterX03d095bc? = nil, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [MinimalRepository] {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/repos"].joined(), config: config, query: [
-            SdkQueryParameter("type", value: type),
-            SdkQueryParameter("sort", value: sort),
-            SdkQueryParameter("direction", value: direction),
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "reposListForOrg", options: requestOptions)).data
+    static func reposListForOrg(
+        config: ClientConfig,
+        org: String,
+        type: ReposListForOrgParameter? = nil,
+        sort: ReposListForOrgParameterX0727468a? = nil,
+        direction: ReposListForOrgParameterX03d095bc? = nil,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [MinimalRepository] {
+        try await (sdkRequest(
+            "GET",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/repos"].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("type", value: type),
+                SdkQueryParameter("sort", value: sort),
+                SdkQueryParameter("direction", value: direction),
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "reposListForOrg",
+            options: requestOptions
+        )).data
     }
 }

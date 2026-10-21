@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ActionsMethods {
-    /// Create an Actions policy for an organization. Omitting `workflow_path` targets all workflows without storing an explicit condition.
+public extension ActionsMethods {
+    /// Create an Actions policy for an organization. Omitting `workflow_path` targets all workflows without storing an
+    /// explicit condition.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
@@ -19,10 +20,32 @@ extension ActionsMethods {
     ///   object should contain one of `repository_name`, `repository_id`, or
     ///   `repository_property`, and may also contain `workflow_path`.
     /// - rules: An array of rules within the policy.
-    public static func actionsCreateOrgActionsPolicy(config: ClientConfig, org: String, name: String, enforcement: RepositoryRuleEnforcement, conditions: ActionsPolicyOrgConditions? = nil, rules: [ActionsRule]? = nil, requestOptions: RequestOptions? = nil) async throws -> ActionsPolicy {
-        let requestBody = ActionsCreateOrgActionsPolicyRequestBody(name: name, enforcement: enforcement, conditions: conditions, rules: rules)
+    static func actionsCreateOrgActionsPolicy(
+        config: ClientConfig,
+        org: String,
+        name: String,
+        enforcement: RepositoryRuleEnforcement,
+        conditions: ActionsPolicyOrgConditions? = nil,
+        rules: [ActionsRule]? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ActionsPolicy {
+        let requestBody = ActionsCreateOrgActionsPolicyRequestBody(
+            name: name,
+            enforcement: enforcement,
+            conditions: conditions,
+            rules: rules
+        )
 
-        return try (await sdkRequest("POST", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/actions/policies"].joined(), config: config, body: requestBody, decoder: .json, operationId: "actionsCreateOrgActionsPolicy", options: requestOptions, errors: ["404": BasicError.self, "422": ValidationError.self, "500": BasicError.self])).data
+        return try await (sdkRequest(
+            "POST",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/actions/policies"].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "actionsCreateOrgActionsPolicy",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "422": ValidationError.self, "500": BasicError.self]
+        )).data
     }
 
     /// Get a specific Actions policy for an organization.
@@ -30,7 +53,25 @@ extension ActionsMethods {
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - policyId: The ID of the policy.
-    public static func actionsGetOrgActionsPolicy(config: ClientConfig, org: String, policyId: Int, requestOptions: RequestOptions? = nil) async throws -> ActionsPolicy {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/actions/policies/", sdkEncodePathSegment(sdkWireString(policyId))].joined(), config: config, decoder: .json, operationId: "actionsGetOrgActionsPolicy", options: requestOptions, errors: ["404": BasicError.self, "500": BasicError.self])).data
+    static func actionsGetOrgActionsPolicy(
+        config: ClientConfig,
+        org: String,
+        policyId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ActionsPolicy {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/orgs/",
+                sdkEncodePathSegment(sdkWireString(org)),
+                "/actions/policies/",
+                sdkEncodePathSegment(sdkWireString(policyId)),
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "actionsGetOrgActionsPolicy",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "500": BasicError.self]
+        )).data
     }
 }

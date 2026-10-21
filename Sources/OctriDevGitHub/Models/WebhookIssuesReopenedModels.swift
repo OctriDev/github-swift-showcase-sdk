@@ -3,7 +3,7 @@
 
 import Foundation
 
-// WebhookIssuesReopened domain models
+/// WebhookIssuesReopened domain models
 /// A collection of related issues and pull requests.
 public struct WebhookIssuesReopenedIssueMilestone: Codable {
     /// Required `date-time`-formatted value serialized in the `closed_at` wire field.
@@ -58,34 +58,53 @@ public struct WebhookIssuesReopenedIssueMilestone: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension WebhookIssuesReopenedIssueMilestone {
-    public init(from decoder: Decoder) throws {
+public extension WebhookIssuesReopenedIssueMilestone {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.closedAt = try container.sdkDecodeNullable(.closedAt)
-        self.closedIssues = try container.sdkDecodeRequired(.closedIssues)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.creator = try container.sdkDecodeNullable(.creator)
-        self.description = try container.sdkDecodeNullable(.description)
-        self.dueOn = try container.sdkDecodeNullable(.dueOn)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.number = try container.sdkDecodeRequired(.number)
-        self.openIssues = try container.sdkDecodeRequired(.openIssues)
-        self.state = try container.sdkDecodeRequired(.state)
-        self.title = try container.sdkDecodeRequired(.title)
-        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        self.url = try container.sdkDecodeRequired(.url)
+        closedAt = try container.sdkDecodeNullable(.closedAt)
+        closedIssues = try container.sdkDecodeRequired(.closedIssues)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        creator = try container.sdkDecodeNullable(.creator)
+        description = try container.sdkDecodeNullable(.description)
+        dueOn = try container.sdkDecodeNullable(.dueOn)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        id = try container.sdkDecodeRequired(.id)
+        labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        number = try container.sdkDecodeRequired(.number)
+        openIssues = try container.sdkDecodeRequired(.openIssues)
+        state = try container.sdkDecodeRequired(.state)
+        title = try container.sdkDecodeRequired(.title)
+        updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        url = try container.sdkDecodeRequired(.url)
         try sdkValidateConstraints()
     }
 }
 
-extension WebhookIssuesReopenedIssueMilestone {
-    public init(closedAt: Date?, closedIssues: Int, createdAt: Date, creator: WebhookIssuesReopenedIssueMilestoneCreator?, description: String?, dueOn: Date?, htmlUrl: String, id: Int, labelsUrl: String, nodeId: String, number: Int, openIssues: Int, state: WebhookIssuesReopenedIssueMilestoneState, title: String, updatedAt: Date, url: String) throws {
+public extension WebhookIssuesReopenedIssueMilestone {
+    init(
+        closedAt: Date?,
+        closedIssues: Int,
+        createdAt: Date,
+        creator: WebhookIssuesReopenedIssueMilestoneCreator?,
+        description: String?,
+        dueOn: Date?,
+        htmlUrl: String,
+        id: Int,
+        labelsUrl: String,
+        nodeId: String,
+        number: Int,
+        openIssues: Int,
+        state: WebhookIssuesReopenedIssueMilestoneState,
+        title: String,
+        updatedAt: Date,
+        url: String
+    ) throws {
         (self.closedAt, self.closedIssues) = (closedAt, closedIssues)
         (self.createdAt, self.creator) = (createdAt, creator)
         (self.description, self.dueOn) = (description, dueOn)
@@ -100,17 +119,17 @@ extension WebhookIssuesReopenedIssueMilestone {
 
 extension WebhookIssuesReopenedIssueMilestone {
     func sdkValidateConstraints() throws {
-        if let value = self.closedAt {
+        if let value = closedAt {
             try sdkValidateDateTime("closed_at", sdkWireString(value))
         }
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-        if let value = self.dueOn {
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        if let value = dueOn {
             try sdkValidateDateTime("due_on", sdkWireString(value))
         }
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("labels_url", self.labelsUrl)
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-            try sdkValidateUri("url", self.url)
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateUri("labels_url", labelsUrl)
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+        try sdkValidateUri("url", url)
     }
 }
 
@@ -223,58 +242,105 @@ public struct WebhookIssuesReopenedIssuePerformedViaGithubAppPermissions: Codabl
     }
 
     init() {
-        (self.actions, self.administration, self.checks, self.contentReferences, self.contents) = (nil, nil, nil, nil, nil)
-        (self.deployments, self.discussions, self.emails, self.environments, self.issues) = (nil, nil, nil, nil, nil)
-        (self.keys, self.members, self.metadata, self.organizationAdministration, self.organizationHooks) = (nil, nil, nil, nil, nil)
-        (self.organizationPackages, self.organizationPlan, self.organizationProjects, self.organizationSecrets, self.organizationSelfHostedRunners) = (nil, nil, nil, nil, nil)
-        (self.organizationUserBlocking, self.packages, self.pages, self.pullRequests, self.repositoryHooks) = (nil, nil, nil, nil, nil)
-        (self.repositoryProjects, self.secretScanningAlerts, self.secrets, self.securityEvents, self.securityScanningAlert) = (nil, nil, nil, nil, nil)
-        (self.singleFile, self.statuses, self.vulnerabilityAlerts, self.workflows) = (nil, nil, nil, nil)
+        (actions, administration, checks, contentReferences, contents) = (nil, nil, nil, nil, nil)
+        (deployments, discussions, emails, environments, issues) = (nil, nil, nil, nil, nil)
+        (keys, members, metadata, organizationAdministration, organizationHooks) = (nil, nil, nil, nil, nil)
+        (
+            organizationPackages,
+            organizationPlan,
+            organizationProjects,
+            organizationSecrets,
+            organizationSelfHostedRunners
+        ) = (nil, nil, nil, nil, nil)
+        (organizationUserBlocking, packages, pages, pullRequests, repositoryHooks) = (nil, nil, nil, nil, nil)
+        (repositoryProjects, secretScanningAlerts, secrets, securityEvents, securityScanningAlert) = (
+            nil,
+            nil,
+            nil,
+            nil,
+            nil
+        )
+        (singleFile, statuses, vulnerabilityAlerts, workflows) = (nil, nil, nil, nil)
     }
 }
 
-extension WebhookIssuesReopenedIssuePerformedViaGithubAppPermissions {
-    public init(from decoder: Decoder) throws {
+public extension WebhookIssuesReopenedIssuePerformedViaGithubAppPermissions {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.actions = try container.sdkDecodeIfPresent(.actions)
-        self.administration = try container.sdkDecodeIfPresent(.administration)
-        self.checks = try container.sdkDecodeIfPresent(.checks)
-        self.contentReferences = try container.sdkDecodeIfPresent(.contentReferences)
-        self.contents = try container.sdkDecodeIfPresent(.contents)
-        self.deployments = try container.sdkDecodeIfPresent(.deployments)
-        self.discussions = try container.sdkDecodeIfPresent(.discussions)
-        self.emails = try container.sdkDecodeIfPresent(.emails)
-        self.environments = try container.sdkDecodeIfPresent(.environments)
-        self.issues = try container.sdkDecodeIfPresent(.issues)
-        self.keys = try container.sdkDecodeIfPresent(.keys)
-        self.members = try container.sdkDecodeIfPresent(.members)
-        self.metadata = try container.sdkDecodeIfPresent(.metadata)
-        self.organizationAdministration = try container.sdkDecodeIfPresent(.organizationAdministration)
-        self.organizationHooks = try container.sdkDecodeIfPresent(.organizationHooks)
-        self.organizationPackages = try container.sdkDecodeIfPresent(.organizationPackages)
-        self.organizationPlan = try container.sdkDecodeIfPresent(.organizationPlan)
-        self.organizationProjects = try container.sdkDecodeIfPresent(.organizationProjects)
-        self.organizationSecrets = try container.sdkDecodeIfPresent(.organizationSecrets)
-        self.organizationSelfHostedRunners = try container.sdkDecodeIfPresent(.organizationSelfHostedRunners)
-        self.organizationUserBlocking = try container.sdkDecodeIfPresent(.organizationUserBlocking)
-        self.packages = try container.sdkDecodeIfPresent(.packages)
-        self.pages = try container.sdkDecodeIfPresent(.pages)
-        self.pullRequests = try container.sdkDecodeIfPresent(.pullRequests)
-        self.repositoryHooks = try container.sdkDecodeIfPresent(.repositoryHooks)
-        self.repositoryProjects = try container.sdkDecodeIfPresent(.repositoryProjects)
-        self.secretScanningAlerts = try container.sdkDecodeIfPresent(.secretScanningAlerts)
-        self.secrets = try container.sdkDecodeIfPresent(.secrets)
-        self.securityEvents = try container.sdkDecodeIfPresent(.securityEvents)
-        self.securityScanningAlert = try container.sdkDecodeIfPresent(.securityScanningAlert)
-        self.singleFile = try container.sdkDecodeIfPresent(.singleFile)
-        self.statuses = try container.sdkDecodeIfPresent(.statuses)
-        self.vulnerabilityAlerts = try container.sdkDecodeIfPresent(.vulnerabilityAlerts)
-        self.workflows = try container.sdkDecodeIfPresent(.workflows)
+        actions = try container.sdkDecodeIfPresent(.actions)
+        administration = try container.sdkDecodeIfPresent(.administration)
+        checks = try container.sdkDecodeIfPresent(.checks)
+        contentReferences = try container.sdkDecodeIfPresent(.contentReferences)
+        contents = try container.sdkDecodeIfPresent(.contents)
+        deployments = try container.sdkDecodeIfPresent(.deployments)
+        discussions = try container.sdkDecodeIfPresent(.discussions)
+        emails = try container.sdkDecodeIfPresent(.emails)
+        environments = try container.sdkDecodeIfPresent(.environments)
+        issues = try container.sdkDecodeIfPresent(.issues)
+        keys = try container.sdkDecodeIfPresent(.keys)
+        members = try container.sdkDecodeIfPresent(.members)
+        metadata = try container.sdkDecodeIfPresent(.metadata)
+        organizationAdministration = try container.sdkDecodeIfPresent(.organizationAdministration)
+        organizationHooks = try container.sdkDecodeIfPresent(.organizationHooks)
+        organizationPackages = try container.sdkDecodeIfPresent(.organizationPackages)
+        organizationPlan = try container.sdkDecodeIfPresent(.organizationPlan)
+        organizationProjects = try container.sdkDecodeIfPresent(.organizationProjects)
+        organizationSecrets = try container.sdkDecodeIfPresent(.organizationSecrets)
+        organizationSelfHostedRunners = try container.sdkDecodeIfPresent(.organizationSelfHostedRunners)
+        organizationUserBlocking = try container.sdkDecodeIfPresent(.organizationUserBlocking)
+        packages = try container.sdkDecodeIfPresent(.packages)
+        pages = try container.sdkDecodeIfPresent(.pages)
+        pullRequests = try container.sdkDecodeIfPresent(.pullRequests)
+        repositoryHooks = try container.sdkDecodeIfPresent(.repositoryHooks)
+        repositoryProjects = try container.sdkDecodeIfPresent(.repositoryProjects)
+        secretScanningAlerts = try container.sdkDecodeIfPresent(.secretScanningAlerts)
+        secrets = try container.sdkDecodeIfPresent(.secrets)
+        securityEvents = try container.sdkDecodeIfPresent(.securityEvents)
+        securityScanningAlert = try container.sdkDecodeIfPresent(.securityScanningAlert)
+        singleFile = try container.sdkDecodeIfPresent(.singleFile)
+        statuses = try container.sdkDecodeIfPresent(.statuses)
+        vulnerabilityAlerts = try container.sdkDecodeIfPresent(.vulnerabilityAlerts)
+        workflows = try container.sdkDecodeIfPresent(.workflows)
     }
 }
 
-extension WebhookIssuesReopenedIssuePerformedViaGithubAppPermissions {
-    public init(actions: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsActions? = nil, administration: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsAdministration? = nil, checks: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsChecks? = nil, contentReferences: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsConX8c9cf56f0c? = nil, contents: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsContents? = nil, deployments: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsDeployments? = nil, discussions: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsDiscussions? = nil, emails: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsEmails? = nil, environments: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsEnvironments? = nil, issues: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsIssues? = nil, keys: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsKeys? = nil, members: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsMembers? = nil, metadata: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsMetadata? = nil, organizationAdministration: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsOrgX0626ea730a? = nil, organizationHooks: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsOrgXaf5013c65c? = nil, organizationPackages: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsOrgX57a29c9788? = nil, organizationPlan: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsOrgXae82a01526? = nil, organizationProjects: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsOrgX1b44bd468d? = nil, organizationSecrets: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsOrgXd7cd696083? = nil, organizationSelfHostedRunners: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsOrgXa08e81864a? = nil, organizationUserBlocking: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsOrgX0a21888306? = nil, packages: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsPackages? = nil, pages: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsPages? = nil, pullRequests: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsPullRequests? = nil, repositoryHooks: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsRepX760c2fba3b? = nil, repositoryProjects: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsRepX65cc8a0c71? = nil, secretScanningAlerts: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsSecX740eb78e4f? = nil, secrets: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsSecrets? = nil, securityEvents: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsSecurityEvents? = nil, securityScanningAlert: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsSecX192c4c343e? = nil, singleFile: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsSingleFile? = nil, statuses: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsStatuses? = nil, vulnerabilityAlerts: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsVulX7f9165f2d7? = nil, workflows: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsWorkflows? = nil) {
+public extension WebhookIssuesReopenedIssuePerformedViaGithubAppPermissions {
+    init(
+        actions: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsActions? = nil,
+        administration: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsAdministration? = nil,
+        checks: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsChecks? = nil,
+        contentReferences: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsConX8c9cf56f0c? = nil,
+        contents: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsContents? = nil,
+        deployments: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsDeployments? = nil,
+        discussions: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsDiscussions? = nil,
+        emails: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsEmails? = nil,
+        environments: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsEnvironments? = nil,
+        issues: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsIssues? = nil,
+        keys: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsKeys? = nil,
+        members: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsMembers? = nil,
+        metadata: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsMetadata? = nil,
+        organizationAdministration: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsOrgX0626ea730a? = nil,
+        organizationHooks: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsOrgXaf5013c65c? = nil,
+        organizationPackages: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsOrgX57a29c9788? = nil,
+        organizationPlan: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsOrgXae82a01526? = nil,
+        organizationProjects: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsOrgX1b44bd468d? = nil,
+        organizationSecrets: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsOrgXd7cd696083? = nil,
+        organizationSelfHostedRunners: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsOrgXa08e81864a? = nil,
+        organizationUserBlocking: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsOrgX0a21888306? = nil,
+        packages: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsPackages? = nil,
+        pages: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsPages? = nil,
+        pullRequests: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsPullRequests? = nil,
+        repositoryHooks: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsRepX760c2fba3b? = nil,
+        repositoryProjects: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsRepX65cc8a0c71? = nil,
+        secretScanningAlerts: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsSecX740eb78e4f? = nil,
+        secrets: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsSecrets? = nil,
+        securityEvents: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsSecurityEvents? = nil,
+        securityScanningAlert: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsSecX192c4c343e? = nil,
+        singleFile: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsSingleFile? = nil,
+        statuses: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsStatuses? = nil,
+        vulnerabilityAlerts: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsVulX7f9165f2d7? = nil,
+        workflows: WebhookIssuesReopenedIssuePerformedViaGithubAppPermissionsWorkflows? = nil
+    ) {
         self.init()
         (self.actions, self.administration) = (actions, administration)
         (self.checks, self.contentReferences) = (checks, contentReferences)
@@ -319,38 +385,44 @@ public struct WebhookIssuesReopenedIssuePullRequest: Codable {
     }
 
     init() {
-        (self.diffUrl, self.htmlUrl, self.mergedAt, self.patchUrl, self.url) = (nil, nil, nil, nil, nil)
+        (diffUrl, htmlUrl, mergedAt, patchUrl, url) = (nil, nil, nil, nil, nil)
     }
 }
 
-extension WebhookIssuesReopenedIssuePullRequest {
-    public init(from decoder: Decoder) throws {
+public extension WebhookIssuesReopenedIssuePullRequest {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.diffUrl = try container.sdkDecodeIfPresent(.diffUrl)
-        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        self.mergedAt = try container.sdkDecodeIfPresent(.mergedAt)
-        self.patchUrl = try container.sdkDecodeIfPresent(.patchUrl)
-        self.url = try container.sdkDecodeIfPresent(.url)
-        if let value = self.diffUrl {
+        diffUrl = try container.sdkDecodeIfPresent(.diffUrl)
+        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        mergedAt = try container.sdkDecodeIfPresent(.mergedAt)
+        patchUrl = try container.sdkDecodeIfPresent(.patchUrl)
+        url = try container.sdkDecodeIfPresent(.url)
+        if let value = diffUrl {
             try sdkValidateUri("diff_url", value)
         }
-        if let value = self.htmlUrl {
+        if let value = htmlUrl {
             try sdkValidateUri("html_url", value)
         }
-        if let value = self.mergedAt {
+        if let value = mergedAt {
             try sdkValidateDateTime("merged_at", sdkWireString(value))
         }
-        if let value = self.patchUrl {
+        if let value = patchUrl {
             try sdkValidateUri("patch_url", value)
         }
-        if let value = self.url {
+        if let value = url {
             try sdkValidateUri("url", value)
         }
     }
 }
 
-extension WebhookIssuesReopenedIssuePullRequest {
-    public init(diffUrl: String? = nil, htmlUrl: String? = nil, mergedAt: Date? = nil, patchUrl: String? = nil, url: String? = nil) throws {
+public extension WebhookIssuesReopenedIssuePullRequest {
+    init(
+        diffUrl: String? = nil,
+        htmlUrl: String? = nil,
+        mergedAt: Date? = nil,
+        patchUrl: String? = nil,
+        url: String? = nil
+    ) throws {
         self.init()
         (self.diffUrl, self.htmlUrl) = (diffUrl, htmlUrl)
         (self.mergedAt, self.patchUrl) = (mergedAt, patchUrl)
@@ -400,50 +472,88 @@ public struct WebhookIssuesReopenedIssueLabelsItem: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookIssuesReopenedIssueLabelsItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.color) else {
-            throw SdkValidationError(field: "color", code: "required", message: "Validation failed for 'color': value is required")
-        }
-        guard container.contains(.`default`) else {
-            throw SdkValidationError(field: "default", code: "required", message: "Validation failed for 'default': value is required")
-        }
-        guard container.contains(.description) else {
-            throw SdkValidationError(field: "description", code: "required", message: "Validation failed for 'description': value is required")
-        }
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        guard container.contains(.nodeId) else {
-            throw SdkValidationError(field: "node_id", code: "required", message: "Validation failed for 'node_id': value is required")
-        }
-        guard container.contains(.url) else {
-            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
-        }
-        self.color = try container.sdkDecodeRequired(.color)
-        self.`default` = try container.sdkDecodeRequired(.`default`)
-        self.description = try container.sdkDecodeNullable(.description)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.url = try container.sdkDecodeRequired(.url)
-            try sdkValidateUri("url", self.url)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WebhookIssuesReopenedIssueLabelsItem {
-    public init(color: String, `default`: Bool, description: String?, id: Int, name: String, nodeId: String, url: String) throws {
-        (self.color, self.`default`) = (color, `default`)
+public extension WebhookIssuesReopenedIssueLabelsItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.color) else {
+            throw SdkValidationError(
+                field: "color",
+                code: "required",
+                message: "Validation failed for 'color': value is required"
+            )
+        }
+        guard container.contains(.default) else {
+            throw SdkValidationError(
+                field: "default",
+                code: "required",
+                message: "Validation failed for 'default': value is required"
+            )
+        }
+        guard container.contains(.description) else {
+            throw SdkValidationError(
+                field: "description",
+                code: "required",
+                message: "Validation failed for 'description': value is required"
+            )
+        }
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        guard container.contains(.nodeId) else {
+            throw SdkValidationError(
+                field: "node_id",
+                code: "required",
+                message: "Validation failed for 'node_id': value is required"
+            )
+        }
+        guard container.contains(.url) else {
+            throw SdkValidationError(
+                field: "url",
+                code: "required",
+                message: "Validation failed for 'url': value is required"
+            )
+        }
+        color = try container.sdkDecodeRequired(.color)
+        self.default = try container.sdkDecodeRequired(.default)
+        description = try container.sdkDecodeNullable(.description)
+        id = try container.sdkDecodeRequired(.id)
+        name = try container.sdkDecodeRequired(.name)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        url = try container.sdkDecodeRequired(.url)
+        try sdkValidateUri("url", url)
+    }
+}
+
+public extension WebhookIssuesReopenedIssueLabelsItem {
+    init(
+        color: String,
+        default: Bool,
+        description: String?,
+        id: Int,
+        name: String,
+        nodeId: String,
+        url: String
+    ) throws {
+        (self.color, self.default) = (color, `default`)
         (self.description, self.id) = (description, id)
         (self.name, self.nodeId) = (name, nodeId)
         self.url = url
-            try sdkValidateUri("url", self.url)
+        try sdkValidateUri("url", self.url)
     }
 }

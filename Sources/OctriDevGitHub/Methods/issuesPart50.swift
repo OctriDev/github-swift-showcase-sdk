@@ -6,8 +6,10 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension IssuesMethods {
-    /// Updates a label in a repository using its current name. Supply any fields you want to change; all body fields are optional, and `description` can contain at most 100 characters. Set `archived` to archive or unarchive the label.
+public extension IssuesMethods {
+    /// Updates a label in a repository using its current name. Supply any fields you want to change; all body fields
+    /// are optional, and `description` can contain at most 100 characters. Set `archived` to archive or unarchive the
+    /// label.
     ///
     /// Updates a label using the given label name.
     ///
@@ -31,9 +33,39 @@ extension IssuesMethods {
     ///   "[Archiving
     ///   labels](https://docs.github.com/issues/organizing-your-work-with-labels/mana
     ///   ging-labels)."
-    public static func issuesUpdateLabel(config: ClientConfig, owner: String, repo: String, name: String, newName: String? = nil, color: String? = nil, description: String? = nil, archived: Bool? = nil, requestOptions: RequestOptions? = nil) async throws -> Label {
-        let requestBody = IssuesUpdateLabelRequestBody(newName: newName, color: color, description: description, archived: archived)
+    static func issuesUpdateLabel(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        name: String,
+        newName: String? = nil,
+        color: String? = nil,
+        description: String? = nil,
+        archived: Bool? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Label {
+        let requestBody = IssuesUpdateLabelRequestBody(
+            newName: newName,
+            color: color,
+            description: description,
+            archived: archived
+        )
 
-        return try (await sdkRequest("PATCH", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/labels/", sdkEncodePathSegment(sdkWireString(name))].joined(), config: config, body: requestBody, decoder: .json, operationId: "issuesUpdateLabel", options: requestOptions)).data
+        return try await (sdkRequest(
+            "PATCH",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/labels/",
+                sdkEncodePathSegment(sdkWireString(name)),
+            ].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "issuesUpdateLabel",
+            options: requestOptions
+        )).data
     }
 }

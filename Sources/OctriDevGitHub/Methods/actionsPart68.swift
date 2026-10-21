@@ -6,19 +6,44 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ActionsMethods {
-    /// Gets retention settings for checks, workflow runs, commit statuses, artifacts, and logs for a repository. Checks include check suites, check runs, and check annotations. These settings also apply to checks and commit statuses created by third-party integrations, and are not limited to data created by GitHub Actions. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+public extension ActionsMethods {
+    /// Gets retention settings for checks, workflow runs, commit statuses, artifacts, and logs for a repository. Checks
+    /// include check suites, check runs, and check annotations. These settings also apply to checks and commit statuses
+    /// created by third-party integrations, and are not limited to data created by GitHub Actions. OAuth app tokens and
+    /// personal access tokens (classic) need the `repo` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    public static func actionsGetArtifactAndLogRetentionSettingsRepository(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> ActionsArtifactAndLogRetentionResponse {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/actions/permissions/artifact-and-log-retention"].joined(), config: config, decoder: .json, operationId: "actionsGetArtifactAndLogRetentionSettingsRepository", options: requestOptions, errors: ["404": BasicError.self])).data
+    static func actionsGetArtifactAndLogRetentionSettingsRepository(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ActionsArtifactAndLogRetentionResponse {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/actions/permissions/artifact-and-log-retention",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "actionsGetArtifactAndLogRetentionSettingsRepository",
+            options: requestOptions,
+            errors: ["404": BasicError.self]
+        )).data
     }
 
-    /// Sets retention settings for checks, workflow runs, commit statuses, artifacts, and logs for a repository. Checks include check suites, check runs, and check annotations. These settings also apply to checks and commit statuses created by third-party integrations, and are not limited to data created by GitHub Actions. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    /// Sets retention settings for checks, workflow runs, commit statuses, artifacts, and logs for a repository. Checks
+    /// include check suites, check runs, and check annotations. These settings also apply to checks and commit statuses
+    /// created by third-party integrations, and are not limited to data created by GitHub Actions. OAuth app tokens and
+    /// personal access tokens (classic) need the `repo` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -27,9 +52,30 @@ extension ActionsMethods {
     ///   not case sensitive.
     /// - days: The number of days to retain checks, workflow runs, commit statuses,
     ///   artifacts, and logs
-    public static func actionsSetArtifactAndLogRetentionSettingsRepository(config: ClientConfig, owner: String, repo: String, days: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+    static func actionsSetArtifactAndLogRetentionSettingsRepository(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        days: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
         let requestBody = ActionsSetArtifactAndLogRetentionSettingsRepositoryRequestBody(days: days)
 
-        return try (await sdkRequest("PUT", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/actions/permissions/artifact-and-log-retention"].joined(), config: config, body: requestBody, decoder: .empty, operationId: "actionsSetArtifactAndLogRetentionSettingsRepository", options: requestOptions, errors: ["404": BasicError.self, "422": ValidationError.self])).data
+        return try await (sdkRequest(
+            "PUT",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/actions/permissions/artifact-and-log-retention",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .empty,
+            operationId: "actionsSetArtifactAndLogRetentionSettingsRepository",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "422": ValidationError.self]
+        )).data
     }
 }

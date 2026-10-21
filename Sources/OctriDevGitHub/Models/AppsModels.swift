@@ -3,25 +3,33 @@
 
 import Foundation
 
-// Apps domain models
+/// Apps domain models
 public indirect enum IntegrationInstallationRequestAccount {
     case simpleUser(SimpleUser)
     case enterprise(Enterprise)
 }
 
 extension IntegrationInstallationRequestAccount: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let raw = try? container.decode(JSONValue.self) {
-            if let value = Self.decodeLossless1(from: container, raw) { self = value; return }
+            if let value = Self.decodeLossless1(from: container, raw) {
+                self = value; return
+            }
         }
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for IntegrationInstallationRequestAccount")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for IntegrationInstallationRequestAccount"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
@@ -39,8 +47,12 @@ extension IntegrationInstallationRequestAccount {
 
 extension IntegrationInstallationRequestAccount {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(SimpleUser.self) { return .simpleUser(value) }
-        if let value = try? container.decode(Enterprise.self) { return .enterprise(value) }
+        if let value = try? container.decode(SimpleUser.self) {
+            return .simpleUser(value)
+        }
+        if let value = try? container.decode(Enterprise.self) {
+            return .enterprise(value)
+        }
         return nil
     }
 }
@@ -79,39 +91,63 @@ public struct IntegrationInstallationRequest: Codable {
         case nodeId = "node_id"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension IntegrationInstallationRequest {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.account) else {
-            throw SdkValidationError(field: "account", code: "required", message: "Validation failed for 'account': value is required")
-        }
-        guard container.contains(.requester) else {
-            throw SdkValidationError(field: "requester", code: "required", message: "Validation failed for 'requester': value is required")
-        }
-        guard container.contains(.createdAt) else {
-            throw SdkValidationError(field: "created_at", code: "required", message: "Validation failed for 'created_at': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.account = try container.sdkDecodeRequired(.account)
-        self.requester = try container.sdkDecodeRequired(.requester)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension IntegrationInstallationRequest {
-    public init(id: Int, account: IntegrationInstallationRequestAccount, requester: SimpleUser, createdAt: Date, nodeId: String? = nil) throws {
+public extension IntegrationInstallationRequest {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.account) else {
+            throw SdkValidationError(
+                field: "account",
+                code: "required",
+                message: "Validation failed for 'account': value is required"
+            )
+        }
+        guard container.contains(.requester) else {
+            throw SdkValidationError(
+                field: "requester",
+                code: "required",
+                message: "Validation failed for 'requester': value is required"
+            )
+        }
+        guard container.contains(.createdAt) else {
+            throw SdkValidationError(
+                field: "created_at",
+                code: "required",
+                message: "Validation failed for 'created_at': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        account = try container.sdkDecodeRequired(.account)
+        requester = try container.sdkDecodeRequired(.requester)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+    }
+}
+
+public extension IntegrationInstallationRequest {
+    init(
+        id: Int,
+        account: IntegrationInstallationRequestAccount,
+        requester: SimpleUser,
+        createdAt: Date,
+        nodeId: String? = nil
+    ) throws {
         (self.id, self.account) = (id, account)
         (self.requester, self.createdAt) = (requester, createdAt)
         self.nodeId = nodeId
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
     }
 }
 
@@ -146,27 +182,36 @@ public struct MarketplacePurchaseMarketplacePurchase: Codable {
     }
 
     init() {
-        (self.billingCycle, self.nextBillingDate, self.isInstalled, self.unitCount, self.onFreeTrial) = (nil, nil, nil, nil, nil)
-        (self.freeTrialEndsOn, self.updatedAt, self.plan) = (nil, nil, nil)
+        (billingCycle, nextBillingDate, isInstalled, unitCount, onFreeTrial) = (nil, nil, nil, nil, nil)
+        (freeTrialEndsOn, updatedAt, plan) = (nil, nil, nil)
     }
 }
 
-extension MarketplacePurchaseMarketplacePurchase {
-    public init(from decoder: Decoder) throws {
+public extension MarketplacePurchaseMarketplacePurchase {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.billingCycle = try container.sdkDecodeIfPresent(.billingCycle)
-        self.nextBillingDate = try container.sdkDecodeIfPresent(.nextBillingDate)
-        self.isInstalled = try container.sdkDecodeIfPresent(.isInstalled)
-        self.unitCount = try container.sdkDecodeIfPresent(.unitCount)
-        self.onFreeTrial = try container.sdkDecodeIfPresent(.onFreeTrial)
-        self.freeTrialEndsOn = try container.sdkDecodeIfPresent(.freeTrialEndsOn)
-        self.updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
-        self.plan = try container.sdkDecodeIfPresent(.plan)
+        billingCycle = try container.sdkDecodeIfPresent(.billingCycle)
+        nextBillingDate = try container.sdkDecodeIfPresent(.nextBillingDate)
+        isInstalled = try container.sdkDecodeIfPresent(.isInstalled)
+        unitCount = try container.sdkDecodeIfPresent(.unitCount)
+        onFreeTrial = try container.sdkDecodeIfPresent(.onFreeTrial)
+        freeTrialEndsOn = try container.sdkDecodeIfPresent(.freeTrialEndsOn)
+        updatedAt = try container.sdkDecodeIfPresent(.updatedAt)
+        plan = try container.sdkDecodeIfPresent(.plan)
     }
 }
 
-extension MarketplacePurchaseMarketplacePurchase {
-    public init(billingCycle: String? = nil, nextBillingDate: String? = nil, isInstalled: Bool? = nil, unitCount: Int? = nil, onFreeTrial: Bool? = nil, freeTrialEndsOn: String? = nil, updatedAt: String? = nil, plan: MarketplaceListingPlan? = nil) {
+public extension MarketplacePurchaseMarketplacePurchase {
+    init(
+        billingCycle: String? = nil,
+        nextBillingDate: String? = nil,
+        isInstalled: Bool? = nil,
+        unitCount: Int? = nil,
+        onFreeTrial: Bool? = nil,
+        freeTrialEndsOn: String? = nil,
+        updatedAt: String? = nil,
+        plan: MarketplaceListingPlan? = nil
+    ) {
         self.init()
         (self.billingCycle, self.nextBillingDate) = (billingCycle, nextBillingDate)
         (self.isInstalled, self.unitCount) = (isInstalled, unitCount)
@@ -190,33 +235,47 @@ public struct AuthorizationApp: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension AuthorizationApp {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.clientId) else {
-            throw SdkValidationError(field: "client_id", code: "required", message: "Validation failed for 'client_id': value is required")
-        }
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        guard container.contains(.url) else {
-            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
-        }
-        self.clientId = try container.sdkDecodeRequired(.clientId)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.url = try container.sdkDecodeRequired(.url)
-            try sdkValidateUri("url", self.url)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension AuthorizationApp {
-    public init(clientId: String, name: String, url: String) throws {
+public extension AuthorizationApp {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.clientId) else {
+            throw SdkValidationError(
+                field: "client_id",
+                code: "required",
+                message: "Validation failed for 'client_id': value is required"
+            )
+        }
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        guard container.contains(.url) else {
+            throw SdkValidationError(
+                field: "url",
+                code: "required",
+                message: "Validation failed for 'url': value is required"
+            )
+        }
+        clientId = try container.sdkDecodeRequired(.clientId)
+        name = try container.sdkDecodeRequired(.name)
+        url = try container.sdkDecodeRequired(.url)
+        try sdkValidateUri("url", url)
+    }
+}
+
+public extension AuthorizationApp {
+    init(clientId: String, name: String, url: String) throws {
         (self.clientId, self.name) = (clientId, name)
         self.url = url
-            try sdkValidateUri("url", self.url)
+        try sdkValidateUri("url", self.url)
     }
 }
 
@@ -250,40 +309,71 @@ public struct MarketplacePurchase: Codable {
         case marketplacePendingChange = "marketplace_pending_change"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension MarketplacePurchase {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.url) else {
-            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
-        }
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.login) else {
-            throw SdkValidationError(field: "login", code: "required", message: "Validation failed for 'login': value is required")
-        }
-        guard container.contains(.marketplacePurchase) else {
-            throw SdkValidationError(field: "marketplace_purchase", code: "required", message: "Validation failed for 'marketplace_purchase': value is required")
-        }
-        self.url = try container.sdkDecodeRequired(.url)
-        self.type = try container.sdkDecodeRequired(.type)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.login = try container.sdkDecodeRequired(.login)
-        self.marketplacePurchase = try container.sdkDecodeRequired(.marketplacePurchase)
-        self.organizationBillingEmail = try container.sdkDecodeIfPresent(.organizationBillingEmail)
-        self.email = try container.sdkDecodeIfPresent(.email)
-        self.marketplacePendingChange = try container.sdkDecodeIfPresent(.marketplacePendingChange)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension MarketplacePurchase {
-    public init(url: String, type: String, id: Int, login: String, marketplacePurchase: MarketplacePurchaseMarketplacePurchase, organizationBillingEmail: String? = nil, email: String? = nil, marketplacePendingChange: MarketplacePurchaseMarketplacePendingChange? = nil) {
+public extension MarketplacePurchase {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.url) else {
+            throw SdkValidationError(
+                field: "url",
+                code: "required",
+                message: "Validation failed for 'url': value is required"
+            )
+        }
+        guard container.contains(.type) else {
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
+        }
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.login) else {
+            throw SdkValidationError(
+                field: "login",
+                code: "required",
+                message: "Validation failed for 'login': value is required"
+            )
+        }
+        guard container.contains(.marketplacePurchase) else {
+            throw SdkValidationError(
+                field: "marketplace_purchase",
+                code: "required",
+                message: "Validation failed for 'marketplace_purchase': value is required"
+            )
+        }
+        url = try container.sdkDecodeRequired(.url)
+        type = try container.sdkDecodeRequired(.type)
+        id = try container.sdkDecodeRequired(.id)
+        login = try container.sdkDecodeRequired(.login)
+        marketplacePurchase = try container.sdkDecodeRequired(.marketplacePurchase)
+        organizationBillingEmail = try container.sdkDecodeIfPresent(.organizationBillingEmail)
+        email = try container.sdkDecodeIfPresent(.email)
+        marketplacePendingChange = try container.sdkDecodeIfPresent(.marketplacePendingChange)
+    }
+}
+
+public extension MarketplacePurchase {
+    init(
+        url: String,
+        type: String,
+        id: Int,
+        login: String,
+        marketplacePurchase: MarketplacePurchaseMarketplacePurchase,
+        organizationBillingEmail: String? = nil,
+        email: String? = nil,
+        marketplacePendingChange: MarketplacePurchaseMarketplacePendingChange? = nil
+    ) {
         (self.url, self.type) = (url, type)
         (self.id, self.login) = (id, login)
         self.marketplacePurchase = marketplacePurchase
@@ -343,41 +433,59 @@ public struct Authorization: Codable {
         case installation
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension Authorization {
-    public init(from decoder: Decoder) throws {
+public extension Authorization {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.scopes = try container.sdkDecodeNullable(.scopes)
-        self.token = try container.sdkDecodeRequired(.token)
-        self.tokenLastEight = try container.sdkDecodeNullable(.tokenLastEight)
-        self.hashedToken = try container.sdkDecodeNullable(.hashedToken)
-        self.app = try container.sdkDecodeRequired(.app)
-        self.note = try container.sdkDecodeNullable(.note)
-        self.noteUrl = try container.sdkDecodeNullable(.noteUrl)
-        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.fingerprint = try container.sdkDecodeNullable(.fingerprint)
-        self.expiresAt = try container.sdkDecodeNullable(.expiresAt)
-        self.user = try container.sdkDecodeIfPresent(.user)
-        self.installation = try container.sdkDecodeIfPresent(.installation)
-            try sdkValidateUri("url", self.url)
-        if let value = self.noteUrl {
+        id = try container.sdkDecodeRequired(.id)
+        url = try container.sdkDecodeRequired(.url)
+        scopes = try container.sdkDecodeNullable(.scopes)
+        token = try container.sdkDecodeRequired(.token)
+        tokenLastEight = try container.sdkDecodeNullable(.tokenLastEight)
+        hashedToken = try container.sdkDecodeNullable(.hashedToken)
+        app = try container.sdkDecodeRequired(.app)
+        note = try container.sdkDecodeNullable(.note)
+        noteUrl = try container.sdkDecodeNullable(.noteUrl)
+        updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        fingerprint = try container.sdkDecodeNullable(.fingerprint)
+        expiresAt = try container.sdkDecodeNullable(.expiresAt)
+        user = try container.sdkDecodeIfPresent(.user)
+        installation = try container.sdkDecodeIfPresent(.installation)
+        try sdkValidateUri("url", url)
+        if let value = noteUrl {
             try sdkValidateUri("note_url", value)
         }
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-        if let value = self.expiresAt {
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        if let value = expiresAt {
             try sdkValidateDateTime("expires_at", sdkWireString(value))
         }
     }
 }
 
-extension Authorization {
-    public init(id: Int, url: String, scopes: [String]?, token: String, tokenLastEight: String?, hashedToken: String?, app: AuthorizationApp, note: String?, noteUrl: String?, updatedAt: Date, createdAt: Date, fingerprint: String?, expiresAt: Date?, user: NullableSimpleUser? = nil, installation: NullableScopedInstallation? = nil) throws {
+public extension Authorization {
+    init(
+        id: Int,
+        url: String,
+        scopes: [String]?,
+        token: String,
+        tokenLastEight: String?,
+        hashedToken: String?,
+        app: AuthorizationApp,
+        note: String?,
+        noteUrl: String?,
+        updatedAt: Date,
+        createdAt: Date,
+        fingerprint: String?,
+        expiresAt: Date?,
+        user: NullableSimpleUser? = nil,
+        installation: NullableScopedInstallation? = nil
+    ) throws {
         (self.id, self.url) = (id, url)
         (self.scopes, self.token) = (scopes, token)
         (self.tokenLastEight, self.hashedToken) = (tokenLastEight, hashedToken)
@@ -386,12 +494,12 @@ extension Authorization {
         (self.createdAt, self.fingerprint) = (createdAt, fingerprint)
         (self.expiresAt, self.user) = (expiresAt, user)
         self.installation = installation
-            try sdkValidateUri("url", self.url)
+        try sdkValidateUri("url", self.url)
         if let value = self.noteUrl {
             try sdkValidateUri("note_url", value)
         }
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
         if let value = self.expiresAt {
             try sdkValidateDateTime("expires_at", sdkWireString(value))
         }
@@ -420,23 +528,29 @@ public struct MarketplacePurchaseMarketplacePendingChange: Codable {
     }
 
     init() {
-        (self.isInstalled, self.effectiveDate, self.unitCount, self.id, self.plan) = (nil, nil, nil, nil, nil)
+        (isInstalled, effectiveDate, unitCount, id, plan) = (nil, nil, nil, nil, nil)
     }
 }
 
-extension MarketplacePurchaseMarketplacePendingChange {
-    public init(from decoder: Decoder) throws {
+public extension MarketplacePurchaseMarketplacePendingChange {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.isInstalled = try container.sdkDecodeIfPresent(.isInstalled)
-        self.effectiveDate = try container.sdkDecodeIfPresent(.effectiveDate)
-        self.unitCount = try container.sdkDecodeIfPresent(.unitCount)
-        self.id = try container.sdkDecodeIfPresent(.id)
-        self.plan = try container.sdkDecodeIfPresent(.plan)
+        isInstalled = try container.sdkDecodeIfPresent(.isInstalled)
+        effectiveDate = try container.sdkDecodeIfPresent(.effectiveDate)
+        unitCount = try container.sdkDecodeIfPresent(.unitCount)
+        id = try container.sdkDecodeIfPresent(.id)
+        plan = try container.sdkDecodeIfPresent(.plan)
     }
 }
 
-extension MarketplacePurchaseMarketplacePendingChange {
-    public init(isInstalled: Bool? = nil, effectiveDate: String? = nil, unitCount: Int? = nil, id: Int? = nil, plan: MarketplaceListingPlan? = nil) {
+public extension MarketplacePurchaseMarketplacePendingChange {
+    init(
+        isInstalled: Bool? = nil,
+        effectiveDate: String? = nil,
+        unitCount: Int? = nil,
+        id: Int? = nil,
+        plan: MarketplaceListingPlan? = nil
+    ) {
         self.init()
         (self.isInstalled, self.effectiveDate) = (isInstalled, effectiveDate)
         (self.unitCount, self.id) = (unitCount, id)
@@ -501,5 +615,7 @@ public struct MarketplaceListingPlan: Codable {
         case bullets
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }

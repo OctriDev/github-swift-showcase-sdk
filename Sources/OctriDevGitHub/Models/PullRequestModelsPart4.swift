@@ -3,7 +3,7 @@
 
 import Foundation
 
-// PullRequest domain models
+/// PullRequest domain models
 public struct PullRequestRequestedReviewersItem2Variant1Parent: Codable {
     /// Description of the team
     public var description: String?
@@ -36,40 +36,54 @@ public struct PullRequestRequestedReviewersItem2Variant1Parent: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension PullRequestRequestedReviewersItem2Variant1Parent {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.description = try container.sdkDecodeNullable(.description)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.membersUrl = try container.sdkDecodeRequired(.membersUrl)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.permission = try container.sdkDecodeRequired(.permission)
-        self.privacy = try container.sdkDecodeRequired(.privacy)
-        self.repositoriesUrl = try container.sdkDecodeRequired(.repositoriesUrl)
-        self.slug = try container.sdkDecodeRequired(.slug)
-        self.url = try container.sdkDecodeRequired(.url)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("repositories_url", self.repositoriesUrl)
-            try sdkValidateUri("url", self.url)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension PullRequestRequestedReviewersItem2Variant1Parent {
-    public init(description: String?, htmlUrl: String, id: Int, membersUrl: String, name: String, nodeId: String, permission: String, privacy: PullRequestRequestedReviewersItem2Variant1ParentPrivacy, repositoriesUrl: String, slug: String, url: String) throws {
+public extension PullRequestRequestedReviewersItem2Variant1Parent {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        description = try container.sdkDecodeNullable(.description)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        id = try container.sdkDecodeRequired(.id)
+        membersUrl = try container.sdkDecodeRequired(.membersUrl)
+        name = try container.sdkDecodeRequired(.name)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        permission = try container.sdkDecodeRequired(.permission)
+        privacy = try container.sdkDecodeRequired(.privacy)
+        repositoriesUrl = try container.sdkDecodeRequired(.repositoriesUrl)
+        slug = try container.sdkDecodeRequired(.slug)
+        url = try container.sdkDecodeRequired(.url)
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateUri("repositories_url", repositoriesUrl)
+        try sdkValidateUri("url", url)
+    }
+}
+
+public extension PullRequestRequestedReviewersItem2Variant1Parent {
+    init(
+        description: String?,
+        htmlUrl: String,
+        id: Int,
+        membersUrl: String,
+        name: String,
+        nodeId: String,
+        permission: String,
+        privacy: PullRequestRequestedReviewersItem2Variant1ParentPrivacy,
+        repositoriesUrl: String,
+        slug: String,
+        url: String
+    ) throws {
         (self.description, self.htmlUrl) = (description, htmlUrl)
         (self.id, self.membersUrl) = (id, membersUrl)
         (self.name, self.nodeId) = (name, nodeId)
         (self.permission, self.privacy) = (permission, privacy)
         (self.repositoriesUrl, self.slug) = (repositoriesUrl, slug)
         self.url = url
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("repositories_url", self.repositoriesUrl)
-            try sdkValidateUri("url", self.url)
+        try sdkValidateUri("html_url", self.htmlUrl)
+        try sdkValidateUri("repositories_url", self.repositoriesUrl)
+        try sdkValidateUri("url", self.url)
     }
 }
 
@@ -105,40 +119,54 @@ public struct PullRequestRequestedReviewersItemVariant1Parent: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension PullRequestRequestedReviewersItemVariant1Parent {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.description = try container.sdkDecodeNullable(.description)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.membersUrl = try container.sdkDecodeRequired(.membersUrl)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.permission = try container.sdkDecodeRequired(.permission)
-        self.privacy = try container.sdkDecodeRequired(.privacy)
-        self.repositoriesUrl = try container.sdkDecodeRequired(.repositoriesUrl)
-        self.slug = try container.sdkDecodeRequired(.slug)
-        self.url = try container.sdkDecodeRequired(.url)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("repositories_url", self.repositoriesUrl)
-            try sdkValidateUri("url", self.url)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension PullRequestRequestedReviewersItemVariant1Parent {
-    public init(description: String?, htmlUrl: String, id: Int, membersUrl: String, name: String, nodeId: String, permission: String, privacy: PullRequestRequestedReviewersItemVariant1ParentPrivacy, repositoriesUrl: String, slug: String, url: String) throws {
+public extension PullRequestRequestedReviewersItemVariant1Parent {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        description = try container.sdkDecodeNullable(.description)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        id = try container.sdkDecodeRequired(.id)
+        membersUrl = try container.sdkDecodeRequired(.membersUrl)
+        name = try container.sdkDecodeRequired(.name)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        permission = try container.sdkDecodeRequired(.permission)
+        privacy = try container.sdkDecodeRequired(.privacy)
+        repositoriesUrl = try container.sdkDecodeRequired(.repositoriesUrl)
+        slug = try container.sdkDecodeRequired(.slug)
+        url = try container.sdkDecodeRequired(.url)
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateUri("repositories_url", repositoriesUrl)
+        try sdkValidateUri("url", url)
+    }
+}
+
+public extension PullRequestRequestedReviewersItemVariant1Parent {
+    init(
+        description: String?,
+        htmlUrl: String,
+        id: Int,
+        membersUrl: String,
+        name: String,
+        nodeId: String,
+        permission: String,
+        privacy: PullRequestRequestedReviewersItemVariant1ParentPrivacy,
+        repositoriesUrl: String,
+        slug: String,
+        url: String
+    ) throws {
         (self.description, self.htmlUrl) = (description, htmlUrl)
         (self.id, self.membersUrl) = (id, membersUrl)
         (self.name, self.nodeId) = (name, nodeId)
         (self.permission, self.privacy) = (permission, privacy)
         (self.repositoriesUrl, self.slug) = (repositoriesUrl, slug)
         self.url = url
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("repositories_url", self.repositoriesUrl)
-            try sdkValidateUri("url", self.url)
+        try sdkValidateUri("html_url", self.htmlUrl)
+        try sdkValidateUri("repositories_url", self.repositoriesUrl)
+        try sdkValidateUri("url", self.url)
     }
 }
 
@@ -179,33 +207,49 @@ public struct PullRequestRequestedReviewersItem2Variant1: Codable {
         case parent
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension PullRequestRequestedReviewersItem2Variant1 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.description = try container.sdkDecodeNullable(.description)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.membersUrl = try container.sdkDecodeRequired(.membersUrl)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.permission = try container.sdkDecodeRequired(.permission)
-        self.privacy = try container.sdkDecodeRequired(.privacy)
-        self.repositoriesUrl = try container.sdkDecodeRequired(.repositoriesUrl)
-        self.slug = try container.sdkDecodeRequired(.slug)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.deleted = try container.sdkDecodeIfPresent(.deleted)
-        self.parent = try container.sdkDecodeIfPresent(.parent)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("repositories_url", self.repositoriesUrl)
-            try sdkValidateUri("url", self.url)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension PullRequestRequestedReviewersItem2Variant1 {
-    public init(description: String?, htmlUrl: String, id: Int, membersUrl: String, name: String, nodeId: String, permission: String, privacy: PullRequestRequestedReviewersItem2Variant1Privacy, repositoriesUrl: String, slug: String, url: String, deleted: Bool? = nil, parent: PullRequestRequestedReviewersItem2Variant1Parent? = nil) throws {
+public extension PullRequestRequestedReviewersItem2Variant1 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        description = try container.sdkDecodeNullable(.description)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        id = try container.sdkDecodeRequired(.id)
+        membersUrl = try container.sdkDecodeRequired(.membersUrl)
+        name = try container.sdkDecodeRequired(.name)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        permission = try container.sdkDecodeRequired(.permission)
+        privacy = try container.sdkDecodeRequired(.privacy)
+        repositoriesUrl = try container.sdkDecodeRequired(.repositoriesUrl)
+        slug = try container.sdkDecodeRequired(.slug)
+        url = try container.sdkDecodeRequired(.url)
+        deleted = try container.sdkDecodeIfPresent(.deleted)
+        parent = try container.sdkDecodeIfPresent(.parent)
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateUri("repositories_url", repositoriesUrl)
+        try sdkValidateUri("url", url)
+    }
+}
+
+public extension PullRequestRequestedReviewersItem2Variant1 {
+    init(
+        description: String?,
+        htmlUrl: String,
+        id: Int,
+        membersUrl: String,
+        name: String,
+        nodeId: String,
+        permission: String,
+        privacy: PullRequestRequestedReviewersItem2Variant1Privacy,
+        repositoriesUrl: String,
+        slug: String,
+        url: String,
+        deleted: Bool? = nil,
+        parent: PullRequestRequestedReviewersItem2Variant1Parent? = nil
+    ) throws {
         (self.description, self.htmlUrl) = (description, htmlUrl)
         (self.id, self.membersUrl) = (id, membersUrl)
         (self.name, self.nodeId) = (name, nodeId)
@@ -213,23 +257,27 @@ extension PullRequestRequestedReviewersItem2Variant1 {
         (self.repositoriesUrl, self.slug) = (repositoriesUrl, slug)
         (self.url, self.deleted) = (url, deleted)
         self.parent = parent
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("repositories_url", self.repositoriesUrl)
-            try sdkValidateUri("url", self.url)
+        try sdkValidateUri("html_url", self.htmlUrl)
+        try sdkValidateUri("repositories_url", self.repositoriesUrl)
+        try sdkValidateUri("url", self.url)
     }
 }
 
-public struct PullRequestRequestedReviewersItemVariant1ParentPrivacy: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct PullRequestRequestedReviewersItemVariant1ParentPrivacy: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let open = PullRequestRequestedReviewersItemVariant1ParentPrivacy(rawValue: "open")
     public static let closed = PullRequestRequestedReviewersItemVariant1ParentPrivacy(rawValue: "closed")
     public static let secret = PullRequestRequestedReviewersItemVariant1ParentPrivacy(rawValue: "secret")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -240,17 +288,21 @@ public struct PullRequestRequestedReviewersItemVariant1ParentPrivacy: RawReprese
 
 /// The default value for a merge commit message. - `PR_TITLE` - default to the pull request's title. -
 /// `PR_BODY` - default to the pull request's body. - `BLANK` - default to a blank commit message.
-public struct PullRequestWebhookVariant1MergeCommitMessage: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct PullRequestWebhookVariant1MergeCommitMessage: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let prBody = PullRequestWebhookVariant1MergeCommitMessage(rawValue: "PR_BODY")
     public static let prTitle = PullRequestWebhookVariant1MergeCommitMessage(rawValue: "PR_TITLE")
     public static let blank = PullRequestWebhookVariant1MergeCommitMessage(rawValue: "BLANK")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -259,17 +311,21 @@ public struct PullRequestWebhookVariant1MergeCommitMessage: RawRepresentable, Ha
     }
 }
 
-public struct PullRequestRequestedReviewersItemVariant1Privacy: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct PullRequestRequestedReviewersItemVariant1Privacy: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let open = PullRequestRequestedReviewersItemVariant1Privacy(rawValue: "open")
     public static let closed = PullRequestRequestedReviewersItemVariant1Privacy(rawValue: "closed")
     public static let secret = PullRequestRequestedReviewersItemVariant1Privacy(rawValue: "secret")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -278,17 +334,21 @@ public struct PullRequestRequestedReviewersItemVariant1Privacy: RawRepresentable
     }
 }
 
-public struct PullRequestRequestedReviewersItem3Variant0Type: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct PullRequestRequestedReviewersItem3Variant0Type: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = PullRequestRequestedReviewersItem3Variant0Type(rawValue: "Bot")
     public static let user = PullRequestRequestedReviewersItem3Variant0Type(rawValue: "User")
     public static let organization = PullRequestRequestedReviewersItem3Variant0Type(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -297,17 +357,21 @@ public struct PullRequestRequestedReviewersItem3Variant0Type: RawRepresentable, 
     }
 }
 
-public struct PullRequestRequestedReviewersItem4Variant1ParentPrivacy: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct PullRequestRequestedReviewersItem4Variant1ParentPrivacy: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let open = PullRequestRequestedReviewersItem4Variant1ParentPrivacy(rawValue: "open")
     public static let closed = PullRequestRequestedReviewersItem4Variant1ParentPrivacy(rawValue: "closed")
     public static let secret = PullRequestRequestedReviewersItem4Variant1ParentPrivacy(rawValue: "secret")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -316,17 +380,21 @@ public struct PullRequestRequestedReviewersItem4Variant1ParentPrivacy: RawRepres
     }
 }
 
-public struct PullRequestRequestedReviewersItem4Variant0Type: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct PullRequestRequestedReviewersItem4Variant0Type: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = PullRequestRequestedReviewersItem4Variant0Type(rawValue: "Bot")
     public static let user = PullRequestRequestedReviewersItem4Variant0Type(rawValue: "User")
     public static let organization = PullRequestRequestedReviewersItem4Variant0Type(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -338,16 +406,20 @@ public struct PullRequestRequestedReviewersItem4Variant0Type: RawRepresentable, 
 /// The default value for a merge commit title. - `PR_TITLE` - default to the pull request's title. -
 /// `MERGE_MESSAGE` - default to the classic title for a merge message (e.g., "Merge pull request #123 from
 /// branch-name").
-public struct PullRequestWebhookVariant1MergeCommitTitle: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct PullRequestWebhookVariant1MergeCommitTitle: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let prTitle = PullRequestWebhookVariant1MergeCommitTitle(rawValue: "PR_TITLE")
     public static let mergeMessage = PullRequestWebhookVariant1MergeCommitTitle(rawValue: "MERGE_MESSAGE")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -356,17 +428,21 @@ public struct PullRequestWebhookVariant1MergeCommitTitle: RawRepresentable, Hash
     }
 }
 
-public struct PullRequestRequestedReviewersItem2Variant1Privacy: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct PullRequestRequestedReviewersItem2Variant1Privacy: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let open = PullRequestRequestedReviewersItem2Variant1Privacy(rawValue: "open")
     public static let closed = PullRequestRequestedReviewersItem2Variant1Privacy(rawValue: "closed")
     public static let secret = PullRequestRequestedReviewersItem2Variant1Privacy(rawValue: "secret")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -375,17 +451,21 @@ public struct PullRequestRequestedReviewersItem2Variant1Privacy: RawRepresentabl
     }
 }
 
-public struct PullRequestRequestedReviewersItemVariant0Type: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct PullRequestRequestedReviewersItemVariant0Type: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = PullRequestRequestedReviewersItemVariant0Type(rawValue: "Bot")
     public static let user = PullRequestRequestedReviewersItemVariant0Type(rawValue: "User")
     public static let organization = PullRequestRequestedReviewersItemVariant0Type(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -397,16 +477,20 @@ public struct PullRequestRequestedReviewersItemVariant0Type: RawRepresentable, H
 /// The default value for a squash merge commit title: - `PR_TITLE` - default to the pull request's title. -
 /// `COMMIT_OR_PR_TITLE` - default to the commit's title (if only one commit) or the pull request's title (when
 /// more than one commit).
-public struct PullRequestWebhookVariant1SquashMergeCommitTitle: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct PullRequestWebhookVariant1SquashMergeCommitTitle: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let prTitle = PullRequestWebhookVariant1SquashMergeCommitTitle(rawValue: "PR_TITLE")
     public static let commitOrPrTitle = PullRequestWebhookVariant1SquashMergeCommitTitle(rawValue: "COMMIT_OR_PR_TITLE")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -415,17 +499,21 @@ public struct PullRequestWebhookVariant1SquashMergeCommitTitle: RawRepresentable
     }
 }
 
-public struct PullRequestRequestedReviewersItem2Variant0Type: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct PullRequestRequestedReviewersItem2Variant0Type: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = PullRequestRequestedReviewersItem2Variant0Type(rawValue: "Bot")
     public static let user = PullRequestRequestedReviewersItem2Variant0Type(rawValue: "User")
     public static let organization = PullRequestRequestedReviewersItem2Variant0Type(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -434,17 +522,21 @@ public struct PullRequestRequestedReviewersItem2Variant0Type: RawRepresentable, 
     }
 }
 
-public struct PullRequestRequestedReviewersItem4Variant1Privacy: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct PullRequestRequestedReviewersItem4Variant1Privacy: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let open = PullRequestRequestedReviewersItem4Variant1Privacy(rawValue: "open")
     public static let closed = PullRequestRequestedReviewersItem4Variant1Privacy(rawValue: "closed")
     public static let secret = PullRequestRequestedReviewersItem4Variant1Privacy(rawValue: "secret")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -453,17 +545,21 @@ public struct PullRequestRequestedReviewersItem4Variant1Privacy: RawRepresentabl
     }
 }
 
-public struct PullRequestRequestedReviewersItem3Variant1ParentPrivacy: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct PullRequestRequestedReviewersItem3Variant1ParentPrivacy: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let open = PullRequestRequestedReviewersItem3Variant1ParentPrivacy(rawValue: "open")
     public static let closed = PullRequestRequestedReviewersItem3Variant1ParentPrivacy(rawValue: "closed")
     public static let secret = PullRequestRequestedReviewersItem3Variant1ParentPrivacy(rawValue: "secret")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -474,17 +570,21 @@ public struct PullRequestRequestedReviewersItem3Variant1ParentPrivacy: RawRepres
 
 /// The default value for a squash merge commit message: - `PR_BODY` - default to the pull request's body. -
 /// `COMMIT_MESSAGES` - default to the branch's commit messages. - `BLANK` - default to a blank commit message.
-public struct PullRequestWebhookVariant1SquashMergeCommitMessage: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct PullRequestWebhookVariant1SquashMergeCommitMessage: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let prBody = PullRequestWebhookVariant1SquashMergeCommitMessage(rawValue: "PR_BODY")
     public static let commitMessages = PullRequestWebhookVariant1SquashMergeCommitMessage(rawValue: "COMMIT_MESSAGES")
     public static let blank = PullRequestWebhookVariant1SquashMergeCommitMessage(rawValue: "BLANK")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

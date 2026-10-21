@@ -6,25 +6,74 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension CopilotMethods {
-    /// Use this endpoint to retrieve download links for the Copilot organization user usage metrics report for a specific day. The report provides detailed user-level usage data and engagement metrics for Copilot features across the organization. The report contains user-specific metrics for the specified day, including individual user engagement statistics, feature usage patterns, and adoption metrics broken down by user. This report allows authorized users to analyze Copilot usage at the user level to understand adoption patterns and identify opportunities for increased engagement. Reports are generated daily and made available for download through signed URLs with a limited expiration time. The response includes download links to the report files, along with the specific date of the report. The report covers a complete day for which data has been processed. Organization owners and authorized users with fine-grained "View Organization Copilot Metrics" permission can retrieve Copilot metrics reports for the organization. OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint. For more information about organization metrics attribution, see [How are metrics attributed across organizations](https://docs.github.com/copilot/concepts/copilot-metrics#how-are-metrics-attributed-across-organizations).
+public extension CopilotMethods {
+    /// Use this endpoint to retrieve download links for the Copilot organization user usage metrics report for a
+    /// specific day. The report provides detailed user-level usage data and engagement metrics for Copilot features
+    /// across the organization. The report contains user-specific metrics for the specified day, including individual
+    /// user engagement statistics, feature usage patterns, and adoption metrics broken down by user. This report allows
+    /// authorized users to analyze Copilot usage at the user level to understand adoption patterns and identify
+    /// opportunities for increased engagement. Reports are generated daily and made available for download through
+    /// signed URLs with a limited expiration time. The response includes download links to the report files, along with
+    /// the specific date of the report. The report covers a complete day for which data has been processed.
+    /// Organization owners and authorized users with fine-grained "View Organization Copilot Metrics" permission can
+    /// retrieve Copilot metrics reports for the organization. OAuth app tokens and personal access tokens (classic)
+    /// need the `read:org` scope to use this endpoint. For more information about organization metrics attribution, see
+    /// [How are metrics attributed across organizations](https://docs.github.com/copilot/concepts/copilot-metrics#how-are-metrics-attributed-across-organizations).
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - day: The day to request data for, in `YYYY-MM-DD` format.
-    public static func copilotCopilotOrganizationUsersOneDayUsageMetrics(config: ClientConfig, org: String, day: String, requestOptions: RequestOptions? = nil) async throws -> CopilotUsageMetrics1DayReport {
+    static func copilotCopilotOrganizationUsersOneDayUsageMetrics(
+        config: ClientConfig,
+        org: String,
+        day: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CopilotUsageMetrics1DayReport {
         try sdkValidateDate("day", day)
 
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/copilot/metrics/reports/users-1-day"].joined(), config: config, query: [
-            SdkQueryParameter("day", value: day),
-        ], decoder: .json, operationId: "copilotCopilotOrganizationUsersOneDayUsageMetrics", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "500": BasicError.self])).data
+        return try await (sdkRequest(
+            "GET",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/copilot/metrics/reports/users-1-day"].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("day", value: day),
+            ],
+            decoder: .json,
+            operationId: "copilotCopilotOrganizationUsersOneDayUsageMetrics",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self, "500": BasicError.self]
+        )).data
     }
 
-    /// Use this endpoint to retrieve download links for the latest 28-day organization users Copilot usage metrics report. The report provides detailed user-level usage data and engagement metrics for Copilot features across the organization. The report contains user-specific metrics for the previous 28 days, including individual user engagement statistics, feature usage patterns, and adoption metrics broken down by user. This report allows authorized users to analyze Copilot usage at the user level to understand adoption patterns and identify opportunities for increased engagement. Reports are generated daily and made available for download through signed URLs with a limited expiration time. The response includes download links to the report files, along with the specific date range covered by the report. The report covers a complete 28-day period ending on the most recent day for which data has been processed. Organization owners and authorized users with fine-grained "View Organization Copilot Metrics" permission can retrieve Copilot metrics reports for the organization. OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint. For more information about organization metrics attribution, see [How are metrics attributed across organizations](https://docs.github.com/copilot/concepts/copilot-metrics#how-are-metrics-attributed-across-organizations).
+    /// Use this endpoint to retrieve download links for the latest 28-day organization users Copilot usage metrics
+    /// report. The report provides detailed user-level usage data and engagement metrics for Copilot features across
+    /// the organization. The report contains user-specific metrics for the previous 28 days, including individual user
+    /// engagement statistics, feature usage patterns, and adoption metrics broken down by user. This report allows
+    /// authorized users to analyze Copilot usage at the user level to understand adoption patterns and identify
+    /// opportunities for increased engagement. Reports are generated daily and made available for download through
+    /// signed URLs with a limited expiration time. The response includes download links to the report files, along with
+    /// the specific date range covered by the report. The report covers a complete 28-day period ending on the most
+    /// recent day for which data has been processed. Organization owners and authorized users with fine-grained "View
+    /// Organization Copilot Metrics" permission can retrieve Copilot metrics reports for the organization. OAuth app
+    /// tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint. For more information
+    /// about organization metrics attribution, see [How are metrics attributed across organizations](https://docs.github.com/copilot/concepts/copilot-metrics#how-are-metrics-attributed-across-organizations).
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
-    public static func copilotCopilotOrganizationUsersUsageMetrics(config: ClientConfig, org: String, requestOptions: RequestOptions? = nil) async throws -> CopilotUsageMetrics28DayReport {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/copilot/metrics/reports/users-28-day/latest"].joined(), config: config, decoder: .json, operationId: "copilotCopilotOrganizationUsersUsageMetrics", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "500": BasicError.self])).data
+    static func copilotCopilotOrganizationUsersUsageMetrics(
+        config: ClientConfig,
+        org: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CopilotUsageMetrics28DayReport {
+        try await (sdkRequest(
+            "GET",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/copilot/metrics/reports/users-28-day/latest"]
+                .joined(),
+            config: config,
+            decoder: .json,
+            operationId: "copilotCopilotOrganizationUsersUsageMetrics",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self, "500": BasicError.self]
+        )).data
     }
 }

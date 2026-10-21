@@ -3,19 +3,23 @@
 
 import Foundation
 
-// WebhookPackagePublished domain models
+/// WebhookPackagePublished domain models
 /// Optional enumerated value serialized in the `type` wire field.
-public struct WebhookPackagePublishedPackagePackageVersionAuthorType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookPackagePublishedPackagePackageVersionAuthorType: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = WebhookPackagePublishedPackagePackageVersionAuthorType(rawValue: "Bot")
     public static let user = WebhookPackagePublishedPackagePackageVersionAuthorType(rawValue: "User")
     public static let organization = WebhookPackagePublishedPackagePackageVersionAuthorType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

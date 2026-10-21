@@ -6,19 +6,40 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ActionsMethods {
-    /// Gets the fork PR contributor approval policy for a repository. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+public extension ActionsMethods {
+    /// Gets the fork PR contributor approval policy for a repository. OAuth app tokens and personal access tokens
+    /// (classic) need the `repo` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    public static func actionsGetForkPrContributorApprovalPermissionsRepository(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> ActionsForkPrContributorApproval {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/actions/permissions/fork-pr-contributor-approval"].joined(), config: config, decoder: .json, operationId: "actionsGetForkPrContributorApprovalPermissionsRepository", options: requestOptions, errors: ["404": BasicError.self])).data
+    static func actionsGetForkPrContributorApprovalPermissionsRepository(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ActionsForkPrContributorApproval {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/actions/permissions/fork-pr-contributor-approval",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "actionsGetForkPrContributorApprovalPermissionsRepository",
+            options: requestOptions,
+            errors: ["404": BasicError.self]
+        )).data
     }
 
-    /// Sets the fork PR contributor approval policy for a repository. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    /// Sets the fork PR contributor approval policy for a repository. OAuth app tokens and personal access tokens
+    /// (classic) need the `repo` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -27,9 +48,31 @@ extension ActionsMethods {
     ///   not case sensitive.
     /// - approvalPolicy: The policy that controls when fork PR workflows require
     ///   approval from a maintainer.
-    public static func actionsSetForkPrContributorApprovalPermissionsRepository(config: ClientConfig, owner: String, repo: String, approvalPolicy: ActionsForkPrContributorApprovalApprovalPolicy, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        let requestBody = ActionsSetForkPrContributorApprovalPermissionsRepositoryRequestBody(approvalPolicy: approvalPolicy)
+    static func actionsSetForkPrContributorApprovalPermissionsRepository(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        approvalPolicy: ActionsForkPrContributorApprovalApprovalPolicy,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        let requestBody =
+            ActionsSetForkPrContributorApprovalPermissionsRepositoryRequestBody(approvalPolicy: approvalPolicy)
 
-        return try (await sdkRequest("PUT", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/actions/permissions/fork-pr-contributor-approval"].joined(), config: config, body: requestBody, decoder: .empty, operationId: "actionsSetForkPrContributorApprovalPermissionsRepository", options: requestOptions, errors: ["404": BasicError.self, "422": ValidationError.self])).data
+        return try await (sdkRequest(
+            "PUT",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/actions/permissions/fork-pr-contributor-approval",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .empty,
+            operationId: "actionsSetForkPrContributorApprovalPermissionsRepository",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "422": ValidationError.self]
+        )).data
     }
 }

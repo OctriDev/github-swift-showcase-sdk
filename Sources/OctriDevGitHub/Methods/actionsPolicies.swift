@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ActionsMethods {
-    /// Lists Actions policies configured for an organization. Set `has_parents` to include policies configured at higher levels that apply to the organization, and use `page` and `per_page` to paginate the results.
+public extension ActionsMethods {
+    /// Lists Actions policies configured for an organization. Set `has_parents` to include policies configured at
+    /// higher levels that apply to the organization, and use `page` and `per_page` to paginate the results.
     ///
     /// List all Actions policies for an organization.
     ///
@@ -23,11 +24,27 @@ extension ActionsMethods {
     ///   -rest-api)."
     /// - hasParents: Include policies configured at higher levels that apply to
     ///   this organization
-    public static func actionsGetOrgActionsPolicies(config: ClientConfig, org: String, perPage: Int? = nil, page: Int? = nil, hasParents: Bool? = nil, requestOptions: RequestOptions? = nil) async throws -> ActionsGetOrgActionsPoliciesResponse {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/actions/policies"].joined(), config: config, query: [
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-            SdkQueryParameter("has_parents", value: hasParents),
-        ], decoder: .json, operationId: "actionsGetOrgActionsPolicies", options: requestOptions, errors: ["404": BasicError.self, "500": BasicError.self])).data
+    static func actionsGetOrgActionsPolicies(
+        config: ClientConfig,
+        org: String,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        hasParents: Bool? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ActionsGetOrgActionsPoliciesResponse {
+        try await (sdkRequest(
+            "GET",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/actions/policies"].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+                SdkQueryParameter("has_parents", value: hasParents),
+            ],
+            decoder: .json,
+            operationId: "actionsGetOrgActionsPolicies",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "500": BasicError.self]
+        )).data
     }
 }

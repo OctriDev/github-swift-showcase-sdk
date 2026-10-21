@@ -6,15 +6,34 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ReposMethods {
-    /// Lists languages for the specified repository. The value shown for each language is the number of bytes of code written in that language.
+public extension ReposMethods {
+    /// Lists languages for the specified repository. The value shown for each language is the number of bytes of code
+    /// written in that language.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    public static func reposListLanguages(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> Language {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/languages"].joined(), config: config, decoder: .json, operationId: "reposListLanguages", options: requestOptions)).data
+    static func reposListLanguages(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Language {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/languages",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "reposListLanguages",
+            options: requestOptions
+        )).data
     }
 }

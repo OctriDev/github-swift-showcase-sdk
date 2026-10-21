@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Orgs domain models
+/// Orgs domain models
 /// Check immutable releases settings for an organization.
 public struct ImmutableReleasesOrganizationSettings: Codable {
     /// The policy that controls how immutable releases are enforced in the organization.
@@ -18,39 +18,52 @@ public struct ImmutableReleasesOrganizationSettings: Codable {
         case selectedRepositoriesUrl = "selected_repositories_url"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ImmutableReleasesOrganizationSettings {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.enforcedRepositories) else {
-            throw SdkValidationError(field: "enforced_repositories", code: "required", message: "Validation failed for 'enforced_repositories': value is required")
-        }
-        self.enforcedRepositories = try container.sdkDecodeRequired(.enforcedRepositories)
-        self.selectedRepositoriesUrl = try container.sdkDecodeIfPresent(.selectedRepositoriesUrl)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ImmutableReleasesOrganizationSettings {
-    public init(enforcedRepositories: ImmutableReleasesOrganizationSettingsEnforcedRepositories, selectedRepositoriesUrl: String? = nil) {
+public extension ImmutableReleasesOrganizationSettings {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.enforcedRepositories) else {
+            throw SdkValidationError(
+                field: "enforced_repositories",
+                code: "required",
+                message: "Validation failed for 'enforced_repositories': value is required"
+            )
+        }
+        enforcedRepositories = try container.sdkDecodeRequired(.enforcedRepositories)
+        selectedRepositoriesUrl = try container.sdkDecodeIfPresent(.selectedRepositoriesUrl)
+    }
+}
+
+public extension ImmutableReleasesOrganizationSettings {
+    init(
+        enforcedRepositories: ImmutableReleasesOrganizationSettingsEnforcedRepositories,
+        selectedRepositoriesUrl: String? = nil
+    ) {
         self.enforcedRepositories = enforcedRepositories
         self.selectedRepositoriesUrl = selectedRepositoriesUrl
     }
 }
 
 /// The policy that controls how immutable releases are enforced in the organization.
-public struct ImmutableReleasesOrganizationSettingsEnforcedRepositories: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ImmutableReleasesOrganizationSettingsEnforcedRepositories: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let all = ImmutableReleasesOrganizationSettingsEnforcedRepositories(rawValue: "all")
     public static let none = ImmutableReleasesOrganizationSettingsEnforcedRepositories(rawValue: "none")
     public static let selected = ImmutableReleasesOrganizationSettingsEnforcedRepositories(rawValue: "selected")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

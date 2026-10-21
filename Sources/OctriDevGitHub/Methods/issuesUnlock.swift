@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension IssuesMethods {
+public extension IssuesMethods {
     /// Users with push access can unlock an issue's conversation.
     ///
     /// - Parameters:
@@ -15,7 +15,29 @@ extension IssuesMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - issueNumber: The number that identifies the issue.
-    public static func issuesUnlock(config: ClientConfig, owner: String, repo: String, issueNumber: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/issues/", sdkEncodePathSegment(sdkWireString(issueNumber)), "/lock"].joined(), config: config, decoder: .empty, operationId: "issuesUnlock", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+    static func issuesUnlock(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        issueNumber: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/issues/",
+                sdkEncodePathSegment(sdkWireString(issueNumber)),
+                "/lock",
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "issuesUnlock",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 }

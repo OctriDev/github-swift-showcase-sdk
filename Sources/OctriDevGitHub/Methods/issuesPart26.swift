@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension IssuesMethods {
-    /// Lists the field values assigned to an issue in a repository. Use `owner`, `repo`, and `issue_number` to identify the issue, and paginate the results with `page` and `per_page`.
+public extension IssuesMethods {
+    /// Lists the field values assigned to an issue in a repository. Use `owner`, `repo`, and `issue_number` to identify
+    /// the issue, and paginate the results with `page` and `per_page`.
     ///
     /// Lists all issue field values for an issue.
     ///
@@ -25,10 +26,35 @@ extension IssuesMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func issuesListIssueFieldValuesForIssue(config: ClientConfig, owner: String, repo: String, issueNumber: Int, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [IssueFieldValue] {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/issues/", sdkEncodePathSegment(sdkWireString(issueNumber)), "/issue-field-values"].joined(), config: config, query: [
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "issuesListIssueFieldValuesForIssue", options: requestOptions, errors: ["301": BasicError.self, "404": BasicError.self, "410": BasicError.self])).data
+    static func issuesListIssueFieldValuesForIssue(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        issueNumber: Int,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [IssueFieldValue] {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/issues/",
+                sdkEncodePathSegment(sdkWireString(issueNumber)),
+                "/issue-field-values",
+            ].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "issuesListIssueFieldValuesForIssue",
+            options: requestOptions,
+            errors: ["301": BasicError.self, "404": BasicError.self, "410": BasicError.self]
+        )).data
     }
 }

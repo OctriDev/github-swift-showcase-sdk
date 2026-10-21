@@ -3,7 +3,7 @@
 
 import Foundation
 
-// ActionsActionsRule domain models
+/// ActionsActionsRule domain models
 public indirect enum ActionsRule {
     case actionsRuleRestrictActionsActors(ActionsRuleRestrictActionsActors)
     case actionsRuleRestrictActionEvents(ActionsRuleRestrictActionEvents)
@@ -12,7 +12,6 @@ public indirect enum ActionsRule {
 }
 
 extension ActionsRule: Codable {
-
     private enum CodingKeys: String, CodingKey {
         case discriminator = "type"
     }
@@ -20,12 +19,16 @@ extension ActionsRule: Codable {
     public init(from decoder: Decoder) throws {
         let tagged = try decoder.container(keyedBy: CodingKeys.self)
         let discriminator = try tagged.decode(String.self, forKey: .discriminator)
-        if let value = try Self.decodeGroup1(discriminator, from: decoder) { self = value; return }
+        if let value = try Self.decodeGroup1(discriminator, from: decoder) {
+            self = value; return
+        }
         self = try .unknown(tag: discriminator, raw: JSONValue(from: decoder))
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
         if case let .unknown(_, raw) = self {
             var container = encoder.singleValueContainer()
             try container.encode(raw)
@@ -36,9 +39,13 @@ extension ActionsRule: Codable {
 extension ActionsRule {
     static func decodeGroup1(_ discriminator: String, from decoder: Decoder) throws -> Self? {
         switch discriminator {
-        case "restrict_actions_actors": return .actionsRuleRestrictActionsActors(try ActionsRuleRestrictActionsActors(from: decoder))
-        case "restrict_action_events": return .actionsRuleRestrictActionEvents(try ActionsRuleRestrictActionEvents(from: decoder))
-        default: return nil
+        case "restrict_actions_actors": try .actionsRuleRestrictActionsActors(
+                ActionsRuleRestrictActionsActors(from: decoder)
+            )
+        case "restrict_action_events": try .actionsRuleRestrictActionEvents(
+                ActionsRuleRestrictActionEvents(from: decoder)
+            )
+        default: nil
         }
     }
 }
@@ -66,25 +73,34 @@ public struct ActionsRuleRestrictActionEvents: Codable {
         case parameters
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsRuleRestrictActionEvents {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        self.type = try container.sdkDecodeRequired(.type)
-        self.parameters = try container.sdkDecodeIfPresent(.parameters)
-            try sdkValidateRawEnum("type", self.type, ActionsRuleRestrictActionEventsType.allCases.map(\.rawValue))
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsRuleRestrictActionEvents {
-    public init(type: ActionsRuleRestrictActionEventsType, parameters: ActionsRuleRestrictActionEventsParameters? = nil) throws {
+public extension ActionsRuleRestrictActionEvents {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.type) else {
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
+        }
+        type = try container.sdkDecodeRequired(.type)
+        parameters = try container.sdkDecodeIfPresent(.parameters)
+        try sdkValidateRawEnum("type", type, ActionsRuleRestrictActionEventsType.allCases.map(\.rawValue))
+    }
+}
+
+public extension ActionsRuleRestrictActionEvents {
+    init(
+        type: ActionsRuleRestrictActionEventsType,
+        parameters: ActionsRuleRestrictActionEventsParameters? = nil
+    ) throws {
         (self.type, self.parameters) = (type, parameters)
-            try sdkValidateRawEnum("type", self.type, ActionsRuleRestrictActionEventsType.allCases.map(\.rawValue))
+        try sdkValidateRawEnum("type", self.type, ActionsRuleRestrictActionEventsType.allCases.map(\.rawValue))
     }
 }
 
@@ -97,21 +113,27 @@ public struct ActionsRuleRestrictActionEventsParameters: Codable {
         case allowedEvents = "allowed_events"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsRuleRestrictActionEventsParameters {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.allowedEvents) else {
-            throw SdkValidationError(field: "allowed_events", code: "required", message: "Validation failed for 'allowed_events': value is required")
-        }
-        self.allowedEvents = try container.sdkDecodeRequired(.allowedEvents)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsRuleRestrictActionEventsParameters {
-    public init(allowedEvents: [ActionsRuleRestrictActionEventsParametersAllowedEventsItem]) {
+public extension ActionsRuleRestrictActionEventsParameters {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.allowedEvents) else {
+            throw SdkValidationError(
+                field: "allowed_events",
+                code: "required",
+                message: "Validation failed for 'allowed_events': value is required"
+            )
+        }
+        allowedEvents = try container.sdkDecodeRequired(.allowedEvents)
+    }
+}
+
+public extension ActionsRuleRestrictActionEventsParameters {
+    init(allowedEvents: [ActionsRuleRestrictActionEventsParametersAllowedEventsItem]) {
         self.allowedEvents = allowedEvents
     }
 }
@@ -125,21 +147,27 @@ public struct ActionsRuleRestrictActionsActorsParameters: Codable {
         case allowedActors = "allowed_actors"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsRuleRestrictActionsActorsParameters {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.allowedActors) else {
-            throw SdkValidationError(field: "allowed_actors", code: "required", message: "Validation failed for 'allowed_actors': value is required")
-        }
-        self.allowedActors = try container.sdkDecodeRequired(.allowedActors)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsRuleRestrictActionsActorsParameters {
-    public init(allowedActors: [ActionsRuleParamsActor]) {
+public extension ActionsRuleRestrictActionsActorsParameters {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.allowedActors) else {
+            throw SdkValidationError(
+                field: "allowed_actors",
+                code: "required",
+                message: "Validation failed for 'allowed_actors': value is required"
+            )
+        }
+        allowedActors = try container.sdkDecodeRequired(.allowedActors)
+    }
+}
+
+public extension ActionsRuleRestrictActionsActorsParameters {
+    init(allowedActors: [ActionsRuleParamsActor]) {
         self.allowedActors = allowedActors
     }
 }
@@ -156,25 +184,34 @@ public struct ActionsRuleRestrictActionsActors: Codable {
         case parameters
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsRuleRestrictActionsActors {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        self.type = try container.sdkDecodeRequired(.type)
-        self.parameters = try container.sdkDecodeIfPresent(.parameters)
-            try sdkValidateRawEnum("type", self.type, ActionsRuleRestrictActionsActorsType.allCases.map(\.rawValue))
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsRuleRestrictActionsActors {
-    public init(type: ActionsRuleRestrictActionsActorsType, parameters: ActionsRuleRestrictActionsActorsParameters? = nil) throws {
+public extension ActionsRuleRestrictActionsActors {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.type) else {
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
+        }
+        type = try container.sdkDecodeRequired(.type)
+        parameters = try container.sdkDecodeIfPresent(.parameters)
+        try sdkValidateRawEnum("type", type, ActionsRuleRestrictActionsActorsType.allCases.map(\.rawValue))
+    }
+}
+
+public extension ActionsRuleRestrictActionsActors {
+    init(
+        type: ActionsRuleRestrictActionsActorsType,
+        parameters: ActionsRuleRestrictActionsActorsParameters? = nil
+    ) throws {
         (self.type, self.parameters) = (type, parameters)
-            try sdkValidateRawEnum("type", self.type, ActionsRuleRestrictActionsActorsType.allCases.map(\.rawValue))
+        try sdkValidateRawEnum("type", self.type, ActionsRuleRestrictActionsActorsType.allCases.map(\.rawValue))
     }
 }
 
@@ -190,47 +227,66 @@ public struct ActionsRuleParamsActor: Codable {
         case type
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ActionsRuleParamsActor {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.type = try container.sdkDecodeRequired(.type)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ActionsRuleParamsActor {
-    public init(id: Int, type: ActionsRuleParamsActorType) {
+public extension ActionsRuleParamsActor {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.type) else {
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        type = try container.sdkDecodeRequired(.type)
+    }
+}
+
+public extension ActionsRuleParamsActor {
+    init(id: Int, type: ActionsRuleParamsActorType) {
         (self.id, self.type) = (id, type)
     }
 }
 
 /// Required enumerated value serialized in the `allowed_events[]` wire field.
-public struct ActionsRuleRestrictActionEventsParametersAllowedEventsItem: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ActionsRuleRestrictActionEventsParametersAllowedEventsItem: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let branchProtectionRule = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "branch_protection_rule")
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let branchProtectionRule =
+        ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "branch_protection_rule")
     public static let checkRun = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "check_run")
     public static let checkSuite = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "check_suite")
     public static let create = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "create")
     public static let delete = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "delete")
     public static let deployment = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "deployment")
-    public static let deploymentStatus = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "deployment_status")
+    public static let deploymentStatus =
+        ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "deployment_status")
     public static let discussion = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "discussion")
-    public static let discussionComment = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "discussion_comment")
+    public static let discussionComment =
+        ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "discussion_comment")
     public static let fork = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "fork")
     public static let gollum = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "gollum")
-    public static let imageVersion = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "image_version")
-    public static let issueComment = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "issue_comment")
+    public static let imageVersion =
+        ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "image_version")
+    public static let issueComment =
+        ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "issue_comment")
     public static let issues = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "issues")
     public static let label = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "label")
     public static let mergeGroup = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "merge_group")
@@ -238,26 +294,34 @@ public struct ActionsRuleRestrictActionEventsParametersAllowedEventsItem: RawRep
     public static let pageBuild = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "page_build")
     public static let project = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "project")
     public static let projectCard = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "project_card")
-    public static let projectColumn = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "project_column")
+    public static let projectColumn =
+        ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "project_column")
     public static let `public` = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "public")
     public static let pullRequest = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "pull_request")
-    public static let pullRequestReview = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "pull_request_review")
-    public static let pullRequestReviewComment = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "pull_request_review_comment")
-    public static let pullRequestTarget = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "pull_request_target")
+    public static let pullRequestReview =
+        ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "pull_request_review")
+    public static let pullRequestReviewComment =
+        ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "pull_request_review_comment")
+    public static let pullRequestTarget =
+        ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "pull_request_target")
     public static let push = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "push")
-    public static let registryPackage = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "registry_package")
+    public static let registryPackage =
+        ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "registry_package")
     public static let release = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "release")
-    public static let repositoryDispatch = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "repository_dispatch")
+    public static let repositoryDispatch =
+        ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "repository_dispatch")
     public static let schedule = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "schedule")
     public static let status = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "status")
     public static let watch = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "watch")
-    public static let workflowCall = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "workflow_call")
-    public static let workflowDispatch = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "workflow_dispatch")
+    public static let workflowCall =
+        ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "workflow_call")
+    public static let workflowDispatch =
+        ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "workflow_dispatch")
     public static let workflowRun = ActionsRuleRestrictActionEventsParametersAllowedEventsItem(rawValue: "workflow_run")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -288,7 +352,10 @@ public enum ActionsRuleRestrictActionsActorsType: String, CaseIterable, Codable 
 public struct ActionsRuleParamsActorType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let user = ActionsRuleParamsActorType(rawValue: "User")
     public static let bot = ActionsRuleParamsActorType(rawValue: "Bot")
     public static let team = ActionsRuleParamsActorType(rawValue: "Team")
@@ -300,7 +367,7 @@ public struct ActionsRuleParamsActorType: RawRepresentable, Hashable, Codable, S
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

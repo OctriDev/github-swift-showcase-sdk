@@ -6,16 +6,36 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension GistsMethods {
-    /// Gets a specified gist. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.raw+json`**: Returns the raw markdown. This is the default if you do not pass any specific media type.
+public extension GistsMethods {
+    /// Gets a specified gist. This endpoint supports the following custom media types. For more information, see
+    /// "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)."
+    /// - **`application/vnd.github.raw+json`**: Returns the raw markdown. This is the default if you do not pass any
+    /// specific media type.
     ///
     /// - Parameters:
     /// - gistId: The unique identifier of the gist.
-    public static func gistsGet(config: ClientConfig, gistId: String, requestOptions: RequestOptions? = nil) async throws -> GistSimple {
-        return try (await sdkRequest("GET", ["/gists/", sdkEncodePathSegment(sdkWireString(gistId))].joined(), config: config, decoder: .json, operationId: "gistsGet", options: requestOptions, errors: ["403": ForbiddenGist.self, "404": BasicError.self])).data
+    static func gistsGet(
+        config: ClientConfig,
+        gistId: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> GistSimple {
+        try await (sdkRequest(
+            "GET",
+            ["/gists/", sdkEncodePathSegment(sdkWireString(gistId))].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "gistsGet",
+            options: requestOptions,
+            errors: ["403": ForbiddenGist.self, "404": BasicError.self]
+        )).data
     }
 
-    /// Allows you to update a gist's description and to update, delete, or rename gist files. Files from the previous version of the gist that aren't explicitly changed during an edit are unchanged. At least one of `description` or `files` is required. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.raw+json`**: Returns the raw markdown. This is the default if you do not pass any specific media type.
+    /// Allows you to update a gist's description and to update, delete, or rename gist files. Files from the previous
+    /// version of the gist that aren't explicitly changed during an edit are unchanged. At least one of `description`
+    /// or `files` is required. This endpoint supports the following custom media types. For more information, see
+    /// "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)."
+    /// - **`application/vnd.github.raw+json`**: Returns the raw markdown. This is the default if you do not pass any
+    /// specific media type.
     ///
     /// - Parameters:
     /// - gistId: The unique identifier of the gist.
@@ -25,17 +45,45 @@ extension GistsMethods {
     ///   For example: `hello.py`. To delete a file, set the whole file to null. For
     ///   example: `hello.py : null`. The file will also be deleted if the specified
     ///   object does not contain at least one of `content` or `filename`.
-    public static func gistsUpdate(config: ClientConfig, gistId: String, description: String? = nil, files: [String: GistsUpdateRequestBodyFilesValue?]? = nil, requestOptions: RequestOptions? = nil) async throws -> GistSimple {
+    static func gistsUpdate(
+        config: ClientConfig,
+        gistId: String,
+        description: String? = nil,
+        files: [String: GistsUpdateRequestBodyFilesValue?]? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> GistSimple {
         let requestBody = GistsUpdateRequestBody(description: description, files: files)
 
-        return try (await sdkRequest("PATCH", ["/gists/", sdkEncodePathSegment(sdkWireString(gistId))].joined(), config: config, body: requestBody, decoder: .json, operationId: "gistsUpdate", options: requestOptions, errors: ["404": BasicError.self, "422": ValidationError.self])).data
+        return try await (sdkRequest(
+            "PATCH",
+            ["/gists/", sdkEncodePathSegment(sdkWireString(gistId))].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "gistsUpdate",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "422": ValidationError.self]
+        )).data
     }
 
-    /// Deletes a specific gist. Use `gist_id` to identify the gist you want to remove; the operation returns no response body when deletion completes.
+    /// Deletes a specific gist. Use `gist_id` to identify the gist you want to remove; the operation returns no
+    /// response body when deletion completes.
     ///
     /// - Parameters:
     /// - gistId: The unique identifier of the gist.
-    public static func gistsDelete(config: ClientConfig, gistId: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/gists/", sdkEncodePathSegment(sdkWireString(gistId))].joined(), config: config, decoder: .empty, operationId: "gistsDelete", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+    static func gistsDelete(
+        config: ClientConfig,
+        gistId: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            ["/gists/", sdkEncodePathSegment(sdkWireString(gistId))].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "gistsDelete",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 }

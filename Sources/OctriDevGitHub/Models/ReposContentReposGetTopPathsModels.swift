@@ -3,7 +3,7 @@
 
 import Foundation
 
-// ReposContent domain models
+/// ReposContent domain models
 /// Content Traffic
 public struct ContentTraffic: Codable {
     /// Required `string` value serialized in the `path` wire field.
@@ -26,33 +26,51 @@ public struct ContentTraffic: Codable {
         case uniques
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ContentTraffic {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.path) else {
-            throw SdkValidationError(field: "path", code: "required", message: "Validation failed for 'path': value is required")
-        }
-        guard container.contains(.title) else {
-            throw SdkValidationError(field: "title", code: "required", message: "Validation failed for 'title': value is required")
-        }
-        guard container.contains(.count) else {
-            throw SdkValidationError(field: "count", code: "required", message: "Validation failed for 'count': value is required")
-        }
-        guard container.contains(.uniques) else {
-            throw SdkValidationError(field: "uniques", code: "required", message: "Validation failed for 'uniques': value is required")
-        }
-        self.path = try container.sdkDecodeRequired(.path)
-        self.title = try container.sdkDecodeRequired(.title)
-        self.count = try container.sdkDecodeRequired(.count)
-        self.uniques = try container.sdkDecodeRequired(.uniques)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ContentTraffic {
-    public init(path: String, title: String, count: Int, uniques: Int) {
+public extension ContentTraffic {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.path) else {
+            throw SdkValidationError(
+                field: "path",
+                code: "required",
+                message: "Validation failed for 'path': value is required"
+            )
+        }
+        guard container.contains(.title) else {
+            throw SdkValidationError(
+                field: "title",
+                code: "required",
+                message: "Validation failed for 'title': value is required"
+            )
+        }
+        guard container.contains(.count) else {
+            throw SdkValidationError(
+                field: "count",
+                code: "required",
+                message: "Validation failed for 'count': value is required"
+            )
+        }
+        guard container.contains(.uniques) else {
+            throw SdkValidationError(
+                field: "uniques",
+                code: "required",
+                message: "Validation failed for 'uniques': value is required"
+            )
+        }
+        path = try container.sdkDecodeRequired(.path)
+        title = try container.sdkDecodeRequired(.title)
+        count = try container.sdkDecodeRequired(.count)
+        uniques = try container.sdkDecodeRequired(.uniques)
+    }
+}
+
+public extension ContentTraffic {
+    init(path: String, title: String, count: Int, uniques: Int) {
         (self.path, self.title) = (path, title)
         (self.count, self.uniques) = (count, uniques)
     }

@@ -6,16 +6,35 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ReposMethods {
-    /// Shows whether immutable releases are enabled or disabled. Also identifies whether immutability is being enforced by the repository owner. The authenticated user must have admin read access to the repository.
+public extension ReposMethods {
+    /// Shows whether immutable releases are enabled or disabled. Also identifies whether immutability is being enforced
+    /// by the repository owner. The authenticated user must have admin read access to the repository.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    public static func reposCheckImmutableReleases(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> CheckImmutableReleases {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/immutable-releases"].joined(), config: config, decoder: .json, operationId: "reposCheckImmutableReleases", options: requestOptions)).data
+    static func reposCheckImmutableReleases(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CheckImmutableReleases {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/immutable-releases",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "reposCheckImmutableReleases",
+            options: requestOptions
+        )).data
     }
 
     /// Enables immutable releases for a repository. The authenticated user must have admin access to the repository.
@@ -25,7 +44,26 @@ extension ReposMethods {
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    public static func reposEnableImmutableReleases(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("PUT", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/immutable-releases"].joined(), config: config, decoder: .empty, operationId: "reposEnableImmutableReleases", options: requestOptions, errors: ["409": BasicError.self])).data
+    static func reposEnableImmutableReleases(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "PUT",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/immutable-releases",
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "reposEnableImmutableReleases",
+            options: requestOptions,
+            errors: ["409": BasicError.self]
+        )).data
     }
 }

@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Repos domain models
+/// Repos domain models
 /// Combined Commit Status
 public struct CombinedCommitStatus: Codable {
     /// Required `string` value serialized in the `state` wire field.
@@ -31,53 +31,91 @@ public struct CombinedCommitStatus: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension CombinedCommitStatus {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.state) else {
-            throw SdkValidationError(field: "state", code: "required", message: "Validation failed for 'state': value is required")
-        }
-        guard container.contains(.statuses) else {
-            throw SdkValidationError(field: "statuses", code: "required", message: "Validation failed for 'statuses': value is required")
-        }
-        guard container.contains(.sha) else {
-            throw SdkValidationError(field: "sha", code: "required", message: "Validation failed for 'sha': value is required")
-        }
-        guard container.contains(.totalCount) else {
-            throw SdkValidationError(field: "total_count", code: "required", message: "Validation failed for 'total_count': value is required")
-        }
-        guard container.contains(.repository) else {
-            throw SdkValidationError(field: "repository", code: "required", message: "Validation failed for 'repository': value is required")
-        }
-        guard container.contains(.commitUrl) else {
-            throw SdkValidationError(field: "commit_url", code: "required", message: "Validation failed for 'commit_url': value is required")
-        }
-        guard container.contains(.url) else {
-            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
-        }
-        self.state = try container.sdkDecodeRequired(.state)
-        self.statuses = try container.sdkDecodeRequired(.statuses)
-        self.sha = try container.sdkDecodeRequired(.sha)
-        self.totalCount = try container.sdkDecodeRequired(.totalCount)
-        self.repository = try container.sdkDecodeRequired(.repository)
-        self.commitUrl = try container.sdkDecodeRequired(.commitUrl)
-        self.url = try container.sdkDecodeRequired(.url)
-            try sdkValidateUri("commit_url", self.commitUrl)
-            try sdkValidateUri("url", self.url)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension CombinedCommitStatus {
-    public init(state: String, statuses: [SimpleCommitStatus], sha: String, totalCount: Int, repository: MinimalRepository, commitUrl: String, url: String) throws {
+public extension CombinedCommitStatus {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.state) else {
+            throw SdkValidationError(
+                field: "state",
+                code: "required",
+                message: "Validation failed for 'state': value is required"
+            )
+        }
+        guard container.contains(.statuses) else {
+            throw SdkValidationError(
+                field: "statuses",
+                code: "required",
+                message: "Validation failed for 'statuses': value is required"
+            )
+        }
+        guard container.contains(.sha) else {
+            throw SdkValidationError(
+                field: "sha",
+                code: "required",
+                message: "Validation failed for 'sha': value is required"
+            )
+        }
+        guard container.contains(.totalCount) else {
+            throw SdkValidationError(
+                field: "total_count",
+                code: "required",
+                message: "Validation failed for 'total_count': value is required"
+            )
+        }
+        guard container.contains(.repository) else {
+            throw SdkValidationError(
+                field: "repository",
+                code: "required",
+                message: "Validation failed for 'repository': value is required"
+            )
+        }
+        guard container.contains(.commitUrl) else {
+            throw SdkValidationError(
+                field: "commit_url",
+                code: "required",
+                message: "Validation failed for 'commit_url': value is required"
+            )
+        }
+        guard container.contains(.url) else {
+            throw SdkValidationError(
+                field: "url",
+                code: "required",
+                message: "Validation failed for 'url': value is required"
+            )
+        }
+        state = try container.sdkDecodeRequired(.state)
+        statuses = try container.sdkDecodeRequired(.statuses)
+        sha = try container.sdkDecodeRequired(.sha)
+        totalCount = try container.sdkDecodeRequired(.totalCount)
+        repository = try container.sdkDecodeRequired(.repository)
+        commitUrl = try container.sdkDecodeRequired(.commitUrl)
+        url = try container.sdkDecodeRequired(.url)
+        try sdkValidateUri("commit_url", commitUrl)
+        try sdkValidateUri("url", url)
+    }
+}
+
+public extension CombinedCommitStatus {
+    init(
+        state: String,
+        statuses: [SimpleCommitStatus],
+        sha: String,
+        totalCount: Int,
+        repository: MinimalRepository,
+        commitUrl: String,
+        url: String
+    ) throws {
         (self.state, self.statuses) = (state, statuses)
         (self.sha, self.totalCount) = (sha, totalCount)
         (self.repository, self.commitUrl) = (repository, commitUrl)
         self.url = url
-            try sdkValidateUri("commit_url", self.commitUrl)
-            try sdkValidateUri("url", self.url)
+        try sdkValidateUri("commit_url", self.commitUrl)
+        try sdkValidateUri("url", self.url)
     }
 }
 
@@ -120,37 +158,51 @@ public struct SimpleCommitStatus: Codable {
         case required
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension SimpleCommitStatus {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.description = try container.sdkDecodeNullable(.description)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.state = try container.sdkDecodeRequired(.state)
-        self.context = try container.sdkDecodeRequired(.context)
-        self.targetUrl = try container.sdkDecodeNullable(.targetUrl)
-        self.avatarUrl = try container.sdkDecodeNullable(.avatarUrl)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        self.required = try container.sdkDecodeIfPresent(.required)
-        if let value = self.targetUrl {
-            try sdkValidateUri("target_url", value)
-        }
-        if let value = self.avatarUrl {
-            try sdkValidateUri("avatar_url", value)
-        }
-            try sdkValidateUri("url", self.url)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension SimpleCommitStatus {
-    public init(description: String?, id: Int, nodeId: String, state: String, context: String, targetUrl: String?, avatarUrl: String?, url: String, createdAt: Date, updatedAt: Date, required: Bool? = nil) throws {
+public extension SimpleCommitStatus {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        description = try container.sdkDecodeNullable(.description)
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        state = try container.sdkDecodeRequired(.state)
+        context = try container.sdkDecodeRequired(.context)
+        targetUrl = try container.sdkDecodeNullable(.targetUrl)
+        avatarUrl = try container.sdkDecodeNullable(.avatarUrl)
+        url = try container.sdkDecodeRequired(.url)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        required = try container.sdkDecodeIfPresent(.required)
+        if let value = targetUrl {
+            try sdkValidateUri("target_url", value)
+        }
+        if let value = avatarUrl {
+            try sdkValidateUri("avatar_url", value)
+        }
+        try sdkValidateUri("url", url)
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+    }
+}
+
+public extension SimpleCommitStatus {
+    init(
+        description: String?,
+        id: Int,
+        nodeId: String,
+        state: String,
+        context: String,
+        targetUrl: String?,
+        avatarUrl: String?,
+        url: String,
+        createdAt: Date,
+        updatedAt: Date,
+        required: Bool? = nil
+    ) throws {
         (self.description, self.id) = (description, id)
         (self.nodeId, self.state) = (nodeId, state)
         (self.context, self.targetUrl) = (context, targetUrl)
@@ -163,8 +215,8 @@ extension SimpleCommitStatus {
         if let value = self.avatarUrl {
             try sdkValidateUri("avatar_url", value)
         }
-            try sdkValidateUri("url", self.url)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+        try sdkValidateUri("url", self.url)
+        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
     }
 }

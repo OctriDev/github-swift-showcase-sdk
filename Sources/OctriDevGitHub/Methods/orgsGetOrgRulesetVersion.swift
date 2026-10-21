@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension OrgsMethods {
-    /// Retrieves a specific historical version of an organization ruleset. Use `org`, `ruleset_id`, and `version_id` to identify the organization, ruleset, and version to retrieve.
+public extension OrgsMethods {
+    /// Retrieves a specific historical version of an organization ruleset. Use `org`, `ruleset_id`, and `version_id` to
+    /// identify the organization, ruleset, and version to retrieve.
     ///
     /// Get a version of an organization ruleset.
     ///
@@ -15,7 +16,28 @@ extension OrgsMethods {
     /// - org: The organization name. The name is not case sensitive.
     /// - rulesetId: The ID of the ruleset.
     /// - versionId: The ID of the version
-    public static func orgsGetOrgRulesetVersion(config: ClientConfig, org: String, rulesetId: Int, versionId: Int, requestOptions: RequestOptions? = nil) async throws -> RulesetVersionWithState {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/rulesets/", sdkEncodePathSegment(sdkWireString(rulesetId)), "/history/", sdkEncodePathSegment(sdkWireString(versionId))].joined(), config: config, decoder: .json, operationId: "orgsGetOrgRulesetVersion", options: requestOptions, errors: ["404": BasicError.self, "500": BasicError.self])).data
+    static func orgsGetOrgRulesetVersion(
+        config: ClientConfig,
+        org: String,
+        rulesetId: Int,
+        versionId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> RulesetVersionWithState {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/orgs/",
+                sdkEncodePathSegment(sdkWireString(org)),
+                "/rulesets/",
+                sdkEncodePathSegment(sdkWireString(rulesetId)),
+                "/history/",
+                sdkEncodePathSegment(sdkWireString(versionId)),
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "orgsGetOrgRulesetVersion",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "500": BasicError.self]
+        )).data
     }
 }

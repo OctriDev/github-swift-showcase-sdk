@@ -6,12 +6,33 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension CodespacesMethods {
-    /// Starts a user's codespace. OAuth app tokens and personal access tokens (classic) need the `codespace` scope to use this endpoint.
+public extension CodespacesMethods {
+    /// Starts a user's codespace. OAuth app tokens and personal access tokens (classic) need the `codespace` scope to
+    /// use this endpoint.
     ///
     /// - Parameters:
     /// - codespaceName: The name of the codespace.
-    public static func codespacesStartForAuthenticatedUser(config: ClientConfig, codespaceName: String, requestOptions: RequestOptions? = nil) async throws -> Codespace {
-        return try (await sdkRequest("POST", ["/user/codespaces/", sdkEncodePathSegment(sdkWireString(codespaceName)), "/start"].joined(), config: config, decoder: .json, operationId: "codespacesStartForAuthenticatedUser", options: requestOptions, errors: ["400": BasicError.self, "401": BasicError.self, "402": BasicError.self, "403": BasicError.self, "404": BasicError.self, "409": BasicError.self, "500": BasicError.self])).data
+    static func codespacesStartForAuthenticatedUser(
+        config: ClientConfig,
+        codespaceName: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Codespace {
+        try await (sdkRequest(
+            "POST",
+            ["/user/codespaces/", sdkEncodePathSegment(sdkWireString(codespaceName)), "/start"].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "codespacesStartForAuthenticatedUser",
+            options: requestOptions,
+            errors: [
+                "400": BasicError.self,
+                "401": BasicError.self,
+                "402": BasicError.self,
+                "403": BasicError.self,
+                "404": BasicError.self,
+                "409": BasicError.self,
+                "500": BasicError.self,
+            ]
+        )).data
     }
 }

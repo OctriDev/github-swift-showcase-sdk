@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Repos domain models
+/// Repos domain models
 /// View Traffic
 public struct ViewTraffic: Codable {
     /// Required `integer` value serialized in the `count` wire field.
@@ -21,29 +21,43 @@ public struct ViewTraffic: Codable {
         case views
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ViewTraffic {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.count) else {
-            throw SdkValidationError(field: "count", code: "required", message: "Validation failed for 'count': value is required")
-        }
-        guard container.contains(.uniques) else {
-            throw SdkValidationError(field: "uniques", code: "required", message: "Validation failed for 'uniques': value is required")
-        }
-        guard container.contains(.views) else {
-            throw SdkValidationError(field: "views", code: "required", message: "Validation failed for 'views': value is required")
-        }
-        self.count = try container.sdkDecodeRequired(.count)
-        self.uniques = try container.sdkDecodeRequired(.uniques)
-        self.views = try container.sdkDecodeRequired(.views)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ViewTraffic {
-    public init(count: Int, uniques: Int, views: [Traffic]) {
+public extension ViewTraffic {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.count) else {
+            throw SdkValidationError(
+                field: "count",
+                code: "required",
+                message: "Validation failed for 'count': value is required"
+            )
+        }
+        guard container.contains(.uniques) else {
+            throw SdkValidationError(
+                field: "uniques",
+                code: "required",
+                message: "Validation failed for 'uniques': value is required"
+            )
+        }
+        guard container.contains(.views) else {
+            throw SdkValidationError(
+                field: "views",
+                code: "required",
+                message: "Validation failed for 'views': value is required"
+            )
+        }
+        count = try container.sdkDecodeRequired(.count)
+        uniques = try container.sdkDecodeRequired(.uniques)
+        views = try container.sdkDecodeRequired(.views)
+    }
+}
+
+public extension ViewTraffic {
+    init(count: Int, uniques: Int, views: [Traffic]) {
         (self.count, self.uniques) = (count, uniques)
         self.views = views
     }

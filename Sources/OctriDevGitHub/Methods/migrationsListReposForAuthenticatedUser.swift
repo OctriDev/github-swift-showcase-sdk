@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension MigrationsMethods {
+public extension MigrationsMethods {
     /// Lists all the repositories for this user migration.
     ///
     /// - Parameters:
@@ -19,10 +19,25 @@ extension MigrationsMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func migrationsListReposForAuthenticatedUser(config: ClientConfig, migrationId: Int, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [MinimalRepository] {
-        return try (await sdkRequest("GET", ["/user/migrations/", sdkEncodePathSegment(sdkWireString(migrationId)), "/repositories"].joined(), config: config, query: [
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "migrationsListReposForAuthenticatedUser", options: requestOptions, errors: ["404": BasicError.self])).data
+    static func migrationsListReposForAuthenticatedUser(
+        config: ClientConfig,
+        migrationId: Int,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [MinimalRepository] {
+        try await (sdkRequest(
+            "GET",
+            ["/user/migrations/", sdkEncodePathSegment(sdkWireString(migrationId)), "/repositories"].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "migrationsListReposForAuthenticatedUser",
+            options: requestOptions,
+            errors: ["404": BasicError.self]
+        )).data
     }
 }

@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ActivityMethods {
-    /// > [!NOTE] > This API is not built to serve real-time use cases. Depending on the time of day, event latency can be anywhere from 30s to 6h.
+public extension ActivityMethods {
+    /// > [!NOTE] > This API is not built to serve real-time use cases. Depending on the time of day, event latency can
+    /// be anywhere from 30s to 6h.
     ///
     /// - Parameters:
     /// - username: The handle for the GitHub user account.
@@ -19,10 +20,24 @@ extension ActivityMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func activityListReceivedPublicEventsForUser(config: ClientConfig, username: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [Event] {
-        return try (await sdkRequest("GET", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/received_events/public"].joined(), config: config, query: [
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "activityListReceivedPublicEventsForUser", options: requestOptions)).data
+    static func activityListReceivedPublicEventsForUser(
+        config: ClientConfig,
+        username: String,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [Event] {
+        try await (sdkRequest(
+            "GET",
+            ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/received_events/public"].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "activityListReceivedPublicEventsForUser",
+            options: requestOptions
+        )).data
     }
 }

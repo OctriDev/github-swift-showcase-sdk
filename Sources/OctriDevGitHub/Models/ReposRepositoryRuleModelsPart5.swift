@@ -3,22 +3,26 @@
 
 import Foundation
 
-// ReposRepositoryRule domain models
-extension RepositoryRuleNonFastForward {
-    public init(from decoder: Decoder) throws {
+/// ReposRepositoryRule domain models
+public extension RepositoryRuleNonFastForward {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
         }
-        self.type = try container.sdkDecodeRequired(.type)
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleNonFastForwardType.allCases.map(\.rawValue))
+        type = try container.sdkDecodeRequired(.type)
+        try sdkValidateRawEnum("type", type, RepositoryRuleNonFastForwardType.allCases.map(\.rawValue))
     }
 }
 
-extension RepositoryRuleNonFastForward {
-    public init(type: RepositoryRuleNonFastForwardType) throws {
+public extension RepositoryRuleNonFastForward {
+    init(type: RepositoryRuleNonFastForwardType) throws {
         self.type = type
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleNonFastForwardType.allCases.map(\.rawValue))
+        try sdkValidateRawEnum("type", self.type, RepositoryRuleNonFastForwardType.allCases.map(\.rawValue))
     }
 }
 
@@ -31,21 +35,27 @@ public struct RepositoryRuleCodeScanningParameters: Codable {
         case codeScanningTools = "code_scanning_tools"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryRuleCodeScanningParameters {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.codeScanningTools) else {
-            throw SdkValidationError(field: "code_scanning_tools", code: "required", message: "Validation failed for 'code_scanning_tools': value is required")
-        }
-        self.codeScanningTools = try container.sdkDecodeRequired(.codeScanningTools)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension RepositoryRuleCodeScanningParameters {
-    public init(codeScanningTools: [RepositoryRuleParamsCodeScanningTool]) {
+public extension RepositoryRuleCodeScanningParameters {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.codeScanningTools) else {
+            throw SdkValidationError(
+                field: "code_scanning_tools",
+                code: "required",
+                message: "Validation failed for 'code_scanning_tools': value is required"
+            )
+        }
+        codeScanningTools = try container.sdkDecodeRequired(.codeScanningTools)
+    }
+}
+
+public extension RepositoryRuleCodeScanningParameters {
+    init(codeScanningTools: [RepositoryRuleParamsCodeScanningTool]) {
         self.codeScanningTools = codeScanningTools
     }
 }
@@ -67,28 +77,39 @@ public struct RepositoryRuleDetailedVariant6: Codable {
         case rulesetId = "ruleset_id"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryRuleDetailedVariant6 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        self.type = try container.sdkDecodeRequired(.type)
-        self.rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
-        self.rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
-        self.rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleRequiredSignaturesType.allCases.map(\.rawValue))
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension RepositoryRuleDetailedVariant6 {
-    public init(type: RepositoryRuleRequiredSignaturesType, rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil, rulesetSource: String? = nil, rulesetId: Int? = nil) throws {
+public extension RepositoryRuleDetailedVariant6 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.type) else {
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
+        }
+        type = try container.sdkDecodeRequired(.type)
+        rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
+        rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
+        rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
+        try sdkValidateRawEnum("type", type, RepositoryRuleRequiredSignaturesType.allCases.map(\.rawValue))
+    }
+}
+
+public extension RepositoryRuleDetailedVariant6 {
+    init(
+        type: RepositoryRuleRequiredSignaturesType,
+        rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil,
+        rulesetSource: String? = nil,
+        rulesetId: Int? = nil
+    ) throws {
         (self.type, self.rulesetSourceType) = (type, rulesetSourceType)
         (self.rulesetSource, self.rulesetId) = (rulesetSource, rulesetId)
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleRequiredSignaturesType.allCases.map(\.rawValue))
+        try sdkValidateRawEnum("type", self.type, RepositoryRuleRequiredSignaturesType.allCases.map(\.rawValue))
     }
 }
 
@@ -123,60 +144,178 @@ public struct RepositoryRuleMergeQueueParameters: Codable {
         case minEntriesToMergeWaitMinutes = "min_entries_to_merge_wait_minutes"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryRuleMergeQueueParameters {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.checkResponseTimeoutMinutes) else {
-            throw SdkValidationError(field: "check_response_timeout_minutes", code: "required", message: "Validation failed for 'check_response_timeout_minutes': value is required")
-        }
-        guard container.contains(.groupingStrategy) else {
-            throw SdkValidationError(field: "grouping_strategy", code: "required", message: "Validation failed for 'grouping_strategy': value is required")
-        }
-        guard container.contains(.maxEntriesToBuild) else {
-            throw SdkValidationError(field: "max_entries_to_build", code: "required", message: "Validation failed for 'max_entries_to_build': value is required")
-        }
-        guard container.contains(.maxEntriesToMerge) else {
-            throw SdkValidationError(field: "max_entries_to_merge", code: "required", message: "Validation failed for 'max_entries_to_merge': value is required")
-        }
-        guard container.contains(.mergeMethod) else {
-            throw SdkValidationError(field: "merge_method", code: "required", message: "Validation failed for 'merge_method': value is required")
-        }
-        guard container.contains(.minEntriesToMerge) else {
-            throw SdkValidationError(field: "min_entries_to_merge", code: "required", message: "Validation failed for 'min_entries_to_merge': value is required")
-        }
-        guard container.contains(.minEntriesToMergeWaitMinutes) else {
-            throw SdkValidationError(field: "min_entries_to_merge_wait_minutes", code: "required", message: "Validation failed for 'min_entries_to_merge_wait_minutes': value is required")
-        }
-        self.checkResponseTimeoutMinutes = try container.sdkDecodeRequired(.checkResponseTimeoutMinutes)
-        self.groupingStrategy = try container.sdkDecodeRequired(.groupingStrategy)
-        self.maxEntriesToBuild = try container.sdkDecodeRequired(.maxEntriesToBuild)
-        self.maxEntriesToMerge = try container.sdkDecodeRequired(.maxEntriesToMerge)
-        self.mergeMethod = try container.sdkDecodeRequired(.mergeMethod)
-        self.minEntriesToMerge = try container.sdkDecodeRequired(.minEntriesToMerge)
-        self.minEntriesToMergeWaitMinutes = try container.sdkDecodeRequired(.minEntriesToMergeWaitMinutes)
-            try validateRange("check_response_timeout_minutes", Double(self.checkResponseTimeoutMinutes), min: 1, max: 360, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
-            try validateRange("max_entries_to_build", Double(self.maxEntriesToBuild), min: 0, max: 100, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
-            try validateRange("max_entries_to_merge", Double(self.maxEntriesToMerge), min: 0, max: 100, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
-            try validateRange("min_entries_to_merge", Double(self.minEntriesToMerge), min: 0, max: 100, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
-            try validateRange("min_entries_to_merge_wait_minutes", Double(self.minEntriesToMergeWaitMinutes), min: 0, max: 360, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension RepositoryRuleMergeQueueParameters {
-    public init(checkResponseTimeoutMinutes: Int, groupingStrategy: RepositoryRuleMergeQueueParametersGroupingStrategy, maxEntriesToBuild: Int, maxEntriesToMerge: Int, mergeMethod: RepositoryRuleMergeQueueParametersMergeMethod, minEntriesToMerge: Int, minEntriesToMergeWaitMinutes: Int) throws {
+public extension RepositoryRuleMergeQueueParameters {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.checkResponseTimeoutMinutes) else {
+            throw SdkValidationError(
+                field: "check_response_timeout_minutes",
+                code: "required",
+                message: "Validation failed for 'check_response_timeout_minutes': value is required"
+            )
+        }
+        guard container.contains(.groupingStrategy) else {
+            throw SdkValidationError(
+                field: "grouping_strategy",
+                code: "required",
+                message: "Validation failed for 'grouping_strategy': value is required"
+            )
+        }
+        guard container.contains(.maxEntriesToBuild) else {
+            throw SdkValidationError(
+                field: "max_entries_to_build",
+                code: "required",
+                message: "Validation failed for 'max_entries_to_build': value is required"
+            )
+        }
+        guard container.contains(.maxEntriesToMerge) else {
+            throw SdkValidationError(
+                field: "max_entries_to_merge",
+                code: "required",
+                message: "Validation failed for 'max_entries_to_merge': value is required"
+            )
+        }
+        guard container.contains(.mergeMethod) else {
+            throw SdkValidationError(
+                field: "merge_method",
+                code: "required",
+                message: "Validation failed for 'merge_method': value is required"
+            )
+        }
+        guard container.contains(.minEntriesToMerge) else {
+            throw SdkValidationError(
+                field: "min_entries_to_merge",
+                code: "required",
+                message: "Validation failed for 'min_entries_to_merge': value is required"
+            )
+        }
+        guard container.contains(.minEntriesToMergeWaitMinutes) else {
+            throw SdkValidationError(
+                field: "min_entries_to_merge_wait_minutes",
+                code: "required",
+                message: "Validation failed for 'min_entries_to_merge_wait_minutes': value is required"
+            )
+        }
+        checkResponseTimeoutMinutes = try container.sdkDecodeRequired(.checkResponseTimeoutMinutes)
+        groupingStrategy = try container.sdkDecodeRequired(.groupingStrategy)
+        maxEntriesToBuild = try container.sdkDecodeRequired(.maxEntriesToBuild)
+        maxEntriesToMerge = try container.sdkDecodeRequired(.maxEntriesToMerge)
+        mergeMethod = try container.sdkDecodeRequired(.mergeMethod)
+        minEntriesToMerge = try container.sdkDecodeRequired(.minEntriesToMerge)
+        minEntriesToMergeWaitMinutes = try container.sdkDecodeRequired(.minEntriesToMergeWaitMinutes)
+        try validateRange(
+            "check_response_timeout_minutes",
+            Double(checkResponseTimeoutMinutes),
+            min: 1,
+            max: 360,
+            exclusiveMin: nil,
+            exclusiveMax: nil,
+            multipleOf: nil
+        )
+        try validateRange(
+            "max_entries_to_build",
+            Double(maxEntriesToBuild),
+            min: 0,
+            max: 100,
+            exclusiveMin: nil,
+            exclusiveMax: nil,
+            multipleOf: nil
+        )
+        try validateRange(
+            "max_entries_to_merge",
+            Double(maxEntriesToMerge),
+            min: 0,
+            max: 100,
+            exclusiveMin: nil,
+            exclusiveMax: nil,
+            multipleOf: nil
+        )
+        try validateRange(
+            "min_entries_to_merge",
+            Double(minEntriesToMerge),
+            min: 0,
+            max: 100,
+            exclusiveMin: nil,
+            exclusiveMax: nil,
+            multipleOf: nil
+        )
+        try validateRange(
+            "min_entries_to_merge_wait_minutes",
+            Double(minEntriesToMergeWaitMinutes),
+            min: 0,
+            max: 360,
+            exclusiveMin: nil,
+            exclusiveMax: nil,
+            multipleOf: nil
+        )
+    }
+}
+
+public extension RepositoryRuleMergeQueueParameters {
+    init(
+        checkResponseTimeoutMinutes: Int,
+        groupingStrategy: RepositoryRuleMergeQueueParametersGroupingStrategy,
+        maxEntriesToBuild: Int,
+        maxEntriesToMerge: Int,
+        mergeMethod: RepositoryRuleMergeQueueParametersMergeMethod,
+        minEntriesToMerge: Int,
+        minEntriesToMergeWaitMinutes: Int
+    ) throws {
         self.checkResponseTimeoutMinutes = checkResponseTimeoutMinutes
         (self.groupingStrategy, self.maxEntriesToBuild) = (groupingStrategy, maxEntriesToBuild)
         (self.maxEntriesToMerge, self.mergeMethod) = (maxEntriesToMerge, mergeMethod)
         self.minEntriesToMerge = minEntriesToMerge
         self.minEntriesToMergeWaitMinutes = minEntriesToMergeWaitMinutes
-            try validateRange("check_response_timeout_minutes", Double(self.checkResponseTimeoutMinutes), min: 1, max: 360, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
-            try validateRange("max_entries_to_build", Double(self.maxEntriesToBuild), min: 0, max: 100, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
-            try validateRange("max_entries_to_merge", Double(self.maxEntriesToMerge), min: 0, max: 100, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
-            try validateRange("min_entries_to_merge", Double(self.minEntriesToMerge), min: 0, max: 100, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
-            try validateRange("min_entries_to_merge_wait_minutes", Double(self.minEntriesToMergeWaitMinutes), min: 0, max: 360, exclusiveMin: nil, exclusiveMax: nil, multipleOf: nil)
+        try validateRange(
+            "check_response_timeout_minutes",
+            Double(self.checkResponseTimeoutMinutes),
+            min: 1,
+            max: 360,
+            exclusiveMin: nil,
+            exclusiveMax: nil,
+            multipleOf: nil
+        )
+        try validateRange(
+            "max_entries_to_build",
+            Double(self.maxEntriesToBuild),
+            min: 0,
+            max: 100,
+            exclusiveMin: nil,
+            exclusiveMax: nil,
+            multipleOf: nil
+        )
+        try validateRange(
+            "max_entries_to_merge",
+            Double(self.maxEntriesToMerge),
+            min: 0,
+            max: 100,
+            exclusiveMin: nil,
+            exclusiveMax: nil,
+            multipleOf: nil
+        )
+        try validateRange(
+            "min_entries_to_merge",
+            Double(self.minEntriesToMerge),
+            min: 0,
+            max: 100,
+            exclusiveMin: nil,
+            exclusiveMax: nil,
+            multipleOf: nil
+        )
+        try validateRange(
+            "min_entries_to_merge_wait_minutes",
+            Double(self.minEntriesToMergeWaitMinutes),
+            min: 0,
+            max: 360,
+            exclusiveMin: nil,
+            exclusiveMax: nil,
+            multipleOf: nil
+        )
     }
 }
 
@@ -196,21 +335,25 @@ public struct RepositoryRuleRulesetInfo: Codable {
     }
 
     init() {
-        (self.rulesetSourceType, self.rulesetSource, self.rulesetId) = (nil, nil, nil)
+        (rulesetSourceType, rulesetSource, rulesetId) = (nil, nil, nil)
     }
 }
 
-extension RepositoryRuleRulesetInfo {
-    public init(from decoder: Decoder) throws {
+public extension RepositoryRuleRulesetInfo {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
-        self.rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
-        self.rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
+        rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
+        rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
+        rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
     }
 }
 
-extension RepositoryRuleRulesetInfo {
-    public init(rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil, rulesetSource: String? = nil, rulesetId: Int? = nil) {
+public extension RepositoryRuleRulesetInfo {
+    init(
+        rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil,
+        rulesetSource: String? = nil,
+        rulesetId: Int? = nil
+    ) {
         self.init()
         (self.rulesetSourceType, self.rulesetSource) = (rulesetSourceType, rulesetSource)
         self.rulesetId = rulesetId
@@ -237,30 +380,42 @@ public struct RepositoryRuleDetailedVariant15: Codable {
         case rulesetId = "ruleset_id"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryRuleDetailedVariant15 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        self.type = try container.sdkDecodeRequired(.type)
-        self.parameters = try container.sdkDecodeIfPresent(.parameters)
-        self.rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
-        self.rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
-        self.rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleWorkflowsType.allCases.map(\.rawValue))
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension RepositoryRuleDetailedVariant15 {
-    public init(type: RepositoryRuleWorkflowsType, parameters: RepositoryRuleWorkflowsParameters? = nil, rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil, rulesetSource: String? = nil, rulesetId: Int? = nil) throws {
+public extension RepositoryRuleDetailedVariant15 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.type) else {
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
+        }
+        type = try container.sdkDecodeRequired(.type)
+        parameters = try container.sdkDecodeIfPresent(.parameters)
+        rulesetSourceType = try container.sdkDecodeIfPresent(.rulesetSourceType)
+        rulesetSource = try container.sdkDecodeIfPresent(.rulesetSource)
+        rulesetId = try container.sdkDecodeIfPresent(.rulesetId)
+        try sdkValidateRawEnum("type", type, RepositoryRuleWorkflowsType.allCases.map(\.rawValue))
+    }
+}
+
+public extension RepositoryRuleDetailedVariant15 {
+    init(
+        type: RepositoryRuleWorkflowsType,
+        parameters: RepositoryRuleWorkflowsParameters? = nil,
+        rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil,
+        rulesetSource: String? = nil,
+        rulesetId: Int? = nil
+    ) throws {
         (self.type, self.parameters) = (type, parameters)
         (self.rulesetSourceType, self.rulesetSource) = (rulesetSourceType, rulesetSource)
         self.rulesetId = rulesetId
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleWorkflowsType.allCases.map(\.rawValue))
+        try sdkValidateRawEnum("type", self.type, RepositoryRuleWorkflowsType.allCases.map(\.rawValue))
     }
 }
 
@@ -282,27 +437,37 @@ public struct RepositoryRuleParamsWorkflowFileReference: Codable {
         case sha
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryRuleParamsWorkflowFileReference {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.path) else {
-            throw SdkValidationError(field: "path", code: "required", message: "Validation failed for 'path': value is required")
-        }
-        guard container.contains(.repositoryId) else {
-            throw SdkValidationError(field: "repository_id", code: "required", message: "Validation failed for 'repository_id': value is required")
-        }
-        self.path = try container.sdkDecodeRequired(.path)
-        self.repositoryId = try container.sdkDecodeRequired(.repositoryId)
-        self.ref = try container.sdkDecodeIfPresent(.ref)
-        self.sha = try container.sdkDecodeIfPresent(.sha)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension RepositoryRuleParamsWorkflowFileReference {
-    public init(path: String, repositoryId: Int, ref: String? = nil, sha: String? = nil) {
+public extension RepositoryRuleParamsWorkflowFileReference {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.path) else {
+            throw SdkValidationError(
+                field: "path",
+                code: "required",
+                message: "Validation failed for 'path': value is required"
+            )
+        }
+        guard container.contains(.repositoryId) else {
+            throw SdkValidationError(
+                field: "repository_id",
+                code: "required",
+                message: "Validation failed for 'repository_id': value is required"
+            )
+        }
+        path = try container.sdkDecodeRequired(.path)
+        repositoryId = try container.sdkDecodeRequired(.repositoryId)
+        ref = try container.sdkDecodeIfPresent(.ref)
+        sha = try container.sdkDecodeIfPresent(.sha)
+    }
+}
+
+public extension RepositoryRuleParamsWorkflowFileReference {
+    init(path: String, repositoryId: Int, ref: String? = nil, sha: String? = nil) {
         (self.path, self.repositoryId) = (path, repositoryId)
         (self.ref, self.sha) = (ref, sha)
     }
@@ -326,28 +491,43 @@ public struct RepositoryRuleCommitMessagePatternParameters: Codable {
         case negate
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryRuleCommitMessagePatternParameters {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.`operator`) else {
-            throw SdkValidationError(field: "operator", code: "required", message: "Validation failed for 'operator': value is required")
-        }
-        guard container.contains(.pattern) else {
-            throw SdkValidationError(field: "pattern", code: "required", message: "Validation failed for 'pattern': value is required")
-        }
-        self.`operator` = try container.sdkDecodeRequired(.`operator`)
-        self.pattern = try container.sdkDecodeRequired(.pattern)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.negate = try container.sdkDecodeIfPresent(.negate)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension RepositoryRuleCommitMessagePatternParameters {
-    public init(`operator`: RepositoryRuleCommitMessagePatternParametersOperator, pattern: String, name: String? = nil, negate: Bool? = nil) {
-        (self.`operator`, self.pattern) = (`operator`, pattern)
+public extension RepositoryRuleCommitMessagePatternParameters {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.operator) else {
+            throw SdkValidationError(
+                field: "operator",
+                code: "required",
+                message: "Validation failed for 'operator': value is required"
+            )
+        }
+        guard container.contains(.pattern) else {
+            throw SdkValidationError(
+                field: "pattern",
+                code: "required",
+                message: "Validation failed for 'pattern': value is required"
+            )
+        }
+        self.operator = try container.sdkDecodeRequired(.operator)
+        pattern = try container.sdkDecodeRequired(.pattern)
+        name = try container.sdkDecodeIfPresent(.name)
+        negate = try container.sdkDecodeIfPresent(.negate)
+    }
+}
+
+public extension RepositoryRuleCommitMessagePatternParameters {
+    init(
+        operator: RepositoryRuleCommitMessagePatternParametersOperator,
+        pattern: String,
+        name: String? = nil,
+        negate: Bool? = nil
+    ) {
+        (self.operator, self.pattern) = (`operator`, pattern)
         (self.name, self.negate) = (name, negate)
     }
 }
@@ -361,21 +541,27 @@ public struct RepositoryRuleFilePathRestrictionParameters: Codable {
         case restrictedFilePaths = "restricted_file_paths"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryRuleFilePathRestrictionParameters {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.restrictedFilePaths) else {
-            throw SdkValidationError(field: "restricted_file_paths", code: "required", message: "Validation failed for 'restricted_file_paths': value is required")
-        }
-        self.restrictedFilePaths = try container.sdkDecodeRequired(.restrictedFilePaths)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension RepositoryRuleFilePathRestrictionParameters {
-    public init(restrictedFilePaths: [String]) {
+public extension RepositoryRuleFilePathRestrictionParameters {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.restrictedFilePaths) else {
+            throw SdkValidationError(
+                field: "restricted_file_paths",
+                code: "required",
+                message: "Validation failed for 'restricted_file_paths': value is required"
+            )
+        }
+        restrictedFilePaths = try container.sdkDecodeRequired(.restrictedFilePaths)
+    }
+}
+
+public extension RepositoryRuleFilePathRestrictionParameters {
+    init(restrictedFilePaths: [String]) {
         self.restrictedFilePaths = restrictedFilePaths
     }
 }
@@ -392,25 +578,35 @@ public struct RepositoryRuleParamsReviewer: Codable {
         case type
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension RepositoryRuleParamsReviewer {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.type) else {
-            throw SdkValidationError(field: "type", code: "required", message: "Validation failed for 'type': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.type = try container.sdkDecodeRequired(.type)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension RepositoryRuleParamsReviewer {
-    public init(id: Int, type: RepositoryRuleParamsReviewerType) {
+public extension RepositoryRuleParamsReviewer {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.type) else {
+            throw SdkValidationError(
+                field: "type",
+                code: "required",
+                message: "Validation failed for 'type': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        type = try container.sdkDecodeRequired(.type)
+    }
+}
+
+public extension RepositoryRuleParamsReviewer {
+    init(id: Int, type: RepositoryRuleParamsReviewerType) {
         (self.id, self.type) = (id, type)
     }
 }
@@ -424,15 +620,21 @@ public struct RepositoryRuleRequiredDeploymentsParameters: Codable {
         case requiredDeploymentEnvironments = "required_deployment_environments"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension RepositoryRuleRequiredDeploymentsParameters {
-    public init(from decoder: Decoder) throws {
+public extension RepositoryRuleRequiredDeploymentsParameters {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.requiredDeploymentEnvironments) else {
-            throw SdkValidationError(field: "required_deployment_environments", code: "required", message: "Validation failed for 'required_deployment_environments': value is required")
+            throw SdkValidationError(
+                field: "required_deployment_environments",
+                code: "required",
+                message: "Validation failed for 'required_deployment_environments': value is required"
+            )
         }
-        self.requiredDeploymentEnvironments = try container.sdkDecodeRequired(.requiredDeploymentEnvironments)
+        requiredDeploymentEnvironments = try container.sdkDecodeRequired(.requiredDeploymentEnvironments)
     }
 }

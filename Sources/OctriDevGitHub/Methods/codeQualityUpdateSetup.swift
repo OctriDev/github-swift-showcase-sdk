@@ -6,8 +6,10 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension CodeQualityMethods {
-    /// Updates a code quality setup configuration. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with private or public repositories, or the `public_repo` scope to use this endpoint with only public repositories.
+public extension CodeQualityMethods {
+    /// Updates a code quality setup configuration. OAuth app tokens and personal access tokens (classic) need the
+    /// `repo` scope to use this endpoint with private or public repositories, or the `public_repo` scope to use this
+    /// endpoint with only public repositories.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -20,9 +22,46 @@ extension CodeQualityMethods {
     /// - languages: Languages to be analyzed.
     /// - aiFindingsOption: Whether AI findings run for Code Quality on this
     ///   repository.
-    public static func codeQualityUpdateSetup(config: ClientConfig, owner: String, repo: String, state: CodeQualitySetupUpdateState? = nil, runnerType: CodeQualitySetupUpdateRunnerType? = nil, runnerLabel: SdkOptional<String>? = nil, languages: [CodeQualitySetupUpdateLanguagesItem]? = nil, aiFindingsOption: CodeQualitySetupUpdateAiFindingsOption? = nil, requestOptions: RequestOptions? = nil) async throws -> EmptyObject {
-        let requestBody = CodeQualityUpdateSetupRequestBody(state: state, runnerType: runnerType, runnerLabel: runnerLabel, languages: languages, aiFindingsOption: aiFindingsOption)
+    static func codeQualityUpdateSetup(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        state: CodeQualitySetupUpdateState? = nil,
+        runnerType: CodeQualitySetupUpdateRunnerType? = nil,
+        runnerLabel: SdkOptional<String>? = nil,
+        languages: [CodeQualitySetupUpdateLanguagesItem]? = nil,
+        aiFindingsOption: CodeQualitySetupUpdateAiFindingsOption? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> EmptyObject {
+        let requestBody = CodeQualityUpdateSetupRequestBody(
+            state: state,
+            runnerType: runnerType,
+            runnerLabel: runnerLabel,
+            languages: languages,
+            aiFindingsOption: aiFindingsOption
+        )
 
-        return try (await sdkRequest("PATCH", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/code-quality/setup"].joined(), config: config, body: requestBody, decoder: .json, operationId: "codeQualityUpdateSetup", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "409": BasicError.self, "422": BasicError.self, "503": ServiceUnavailable.self])).data
+        return try await (sdkRequest(
+            "PATCH",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/code-quality/setup",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "codeQualityUpdateSetup",
+            options: requestOptions,
+            errors: [
+                "403": BasicError.self,
+                "404": BasicError.self,
+                "409": BasicError.self,
+                "422": BasicError.self,
+                "503": ServiceUnavailable.self,
+            ]
+        )).data
     }
 }

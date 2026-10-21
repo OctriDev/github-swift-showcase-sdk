@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ActivityMethods {
-    /// > [!NOTE] > This API is not built to serve real-time use cases. Depending on the time of day, event latency can be anywhere from 30s to 6h.
+public extension ActivityMethods {
+    /// > [!NOTE] > This API is not built to serve real-time use cases. Depending on the time of day, event latency can
+    /// be anywhere from 30s to 6h.
     ///
     /// - Parameters:
     /// - perPage: The number of results per page (max 100). For more information,
@@ -18,10 +19,24 @@ extension ActivityMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func activityListPublicEvents(config: ClientConfig, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [Event] {
-        return try (await sdkRequest("GET", "/events", config: config, query: [
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "activityListPublicEvents", options: requestOptions, errors: ["403": BasicError.self, "503": ServiceUnavailable.self])).data
+    static func activityListPublicEvents(
+        config: ClientConfig,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [Event] {
+        try await (sdkRequest(
+            "GET",
+            "/events",
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "activityListPublicEvents",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "503": ServiceUnavailable.self]
+        )).data
     }
 }

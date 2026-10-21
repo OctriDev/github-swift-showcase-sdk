@@ -3,7 +3,7 @@
 
 import Foundation
 
-// SecretScanning domain models
+/// SecretScanning domain models
 /// Typed representation of the `SecretScanningPushProtectionBypass` API schema.
 public struct SecretScanningPushProtectionBypass: Codable {
     /// The reason for bypassing push protection.
@@ -20,24 +20,28 @@ public struct SecretScanningPushProtectionBypass: Codable {
     }
 
     init() {
-        (self.reason, self.expireAt, self.tokenType) = (nil, nil, nil)
+        (reason, expireAt, tokenType) = (nil, nil, nil)
     }
 }
 
-extension SecretScanningPushProtectionBypass {
-    public init(from decoder: Decoder) throws {
+public extension SecretScanningPushProtectionBypass {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.reason = try container.sdkDecodeIfPresent(.reason)
-        self.expireAt = try container.sdkDecodeIfPresent(.expireAt)
-        self.tokenType = try container.sdkDecodeIfPresent(.tokenType)
-        if let value = self.expireAt {
+        reason = try container.sdkDecodeIfPresent(.reason)
+        expireAt = try container.sdkDecodeIfPresent(.expireAt)
+        tokenType = try container.sdkDecodeIfPresent(.tokenType)
+        if let value = expireAt {
             try sdkValidateDateTime("expire_at", sdkWireString(value))
         }
     }
 }
 
-extension SecretScanningPushProtectionBypass {
-    public init(reason: SecretScanningPushProtectionBypassReason? = nil, expireAt: Date? = nil, tokenType: String? = nil) throws {
+public extension SecretScanningPushProtectionBypass {
+    init(
+        reason: SecretScanningPushProtectionBypassReason? = nil,
+        expireAt: Date? = nil,
+        tokenType: String? = nil
+    ) throws {
         self.init()
         (self.reason, self.expireAt) = (reason, expireAt)
         self.tokenType = tokenType
@@ -48,17 +52,21 @@ extension SecretScanningPushProtectionBypass {
 }
 
 /// The reason for bypassing push protection.
-public struct SecretScanningPushProtectionBypassReason: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct SecretScanningPushProtectionBypassReason: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let falsePositive = SecretScanningPushProtectionBypassReason(rawValue: "false_positive")
     public static let usedInTests = SecretScanningPushProtectionBypassReason(rawValue: "used_in_tests")
     public static let willFixLater = SecretScanningPushProtectionBypassReason(rawValue: "will_fix_later")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

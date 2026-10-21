@@ -3,7 +3,7 @@
 
 import Foundation
 
-// ReposPages domain models
+/// ReposPages domain models
 /// Optional object value serialized in the `alt_domain` wire field.
 public struct PagesHealthCheckAltDomain: Codable {
     /// Optional `string` value serialized in the `host` wire field.
@@ -95,51 +95,92 @@ public struct PagesHealthCheckAltDomain: Codable {
     }
 
     init() {
-        (self.host, self.uri, self.nameservers, self.dnsResolves, self.isProxied) = (nil, nil, nil, nil, nil)
-        (self.isCloudflareIp, self.isFastlyIp, self.isOldIpAddress, self.isARecord, self.hasCnameRecord) = (nil, nil, nil, nil, nil)
-        (self.hasMxRecordsPresent, self.isValidDomain, self.isApexDomain, self.shouldBeARecord, self.isCnameToGithubUserDomain) = (nil, nil, nil, nil, nil)
-        (self.isCnameToPagesDotGithubDotCom, self.isCnameToFastly, self.isPointedToGithubPagesIp, self.isNonGithubPagesIpPresent, self.isPagesDomain) = (nil, nil, nil, nil, nil)
-        (self.isServedByPages, self.isValid, self.reason, self.respondsToHttps, self.enforcesHttps) = (nil, nil, nil, nil, nil)
-        (self.httpsError, self.isHttpsEligible, self.caaError) = (nil, nil, nil)
+        (host, uri, nameservers, dnsResolves, isProxied) = (nil, nil, nil, nil, nil)
+        (isCloudflareIp, isFastlyIp, isOldIpAddress, isARecord, hasCnameRecord) = (nil, nil, nil, nil, nil)
+        (hasMxRecordsPresent, isValidDomain, isApexDomain, shouldBeARecord, isCnameToGithubUserDomain) = (
+            nil,
+            nil,
+            nil,
+            nil,
+            nil
+        )
+        (
+            isCnameToPagesDotGithubDotCom,
+            isCnameToFastly,
+            isPointedToGithubPagesIp,
+            isNonGithubPagesIpPresent,
+            isPagesDomain
+        ) = (nil, nil, nil, nil, nil)
+        (isServedByPages, isValid, reason, respondsToHttps, enforcesHttps) = (nil, nil, nil, nil, nil)
+        (httpsError, isHttpsEligible, caaError) = (nil, nil, nil)
     }
 }
 
-extension PagesHealthCheckAltDomain {
-    public init(from decoder: Decoder) throws {
+public extension PagesHealthCheckAltDomain {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.host = try container.sdkDecodeIfPresent(.host)
-        self.uri = try container.sdkDecodeIfPresent(.uri)
-        self.nameservers = try container.sdkDecodeIfPresent(.nameservers)
-        self.dnsResolves = try container.sdkDecodeIfPresent(.dnsResolves)
-        self.isProxied = try container.sdkDecodeIfPresent(.isProxied)
-        self.isCloudflareIp = try container.sdkDecodeIfPresent(.isCloudflareIp)
-        self.isFastlyIp = try container.sdkDecodeIfPresent(.isFastlyIp)
-        self.isOldIpAddress = try container.sdkDecodeIfPresent(.isOldIpAddress)
-        self.isARecord = try container.sdkDecodeIfPresent(.isARecord)
-        self.hasCnameRecord = try container.sdkDecodeIfPresent(.hasCnameRecord)
-        self.hasMxRecordsPresent = try container.sdkDecodeIfPresent(.hasMxRecordsPresent)
-        self.isValidDomain = try container.sdkDecodeIfPresent(.isValidDomain)
-        self.isApexDomain = try container.sdkDecodeIfPresent(.isApexDomain)
-        self.shouldBeARecord = try container.sdkDecodeIfPresent(.shouldBeARecord)
-        self.isCnameToGithubUserDomain = try container.sdkDecodeIfPresent(.isCnameToGithubUserDomain)
-        self.isCnameToPagesDotGithubDotCom = try container.sdkDecodeIfPresent(.isCnameToPagesDotGithubDotCom)
-        self.isCnameToFastly = try container.sdkDecodeIfPresent(.isCnameToFastly)
-        self.isPointedToGithubPagesIp = try container.sdkDecodeIfPresent(.isPointedToGithubPagesIp)
-        self.isNonGithubPagesIpPresent = try container.sdkDecodeIfPresent(.isNonGithubPagesIpPresent)
-        self.isPagesDomain = try container.sdkDecodeIfPresent(.isPagesDomain)
-        self.isServedByPages = try container.sdkDecodeIfPresent(.isServedByPages)
-        self.isValid = try container.sdkDecodeIfPresent(.isValid)
-        self.reason = try container.sdkDecodeIfPresent(.reason)
-        self.respondsToHttps = try container.sdkDecodeIfPresent(.respondsToHttps)
-        self.enforcesHttps = try container.sdkDecodeIfPresent(.enforcesHttps)
-        self.httpsError = try container.sdkDecodeIfPresent(.httpsError)
-        self.isHttpsEligible = try container.sdkDecodeIfPresent(.isHttpsEligible)
-        self.caaError = try container.sdkDecodeIfPresent(.caaError)
+        host = try container.sdkDecodeIfPresent(.host)
+        uri = try container.sdkDecodeIfPresent(.uri)
+        nameservers = try container.sdkDecodeIfPresent(.nameservers)
+        dnsResolves = try container.sdkDecodeIfPresent(.dnsResolves)
+        isProxied = try container.sdkDecodeIfPresent(.isProxied)
+        isCloudflareIp = try container.sdkDecodeIfPresent(.isCloudflareIp)
+        isFastlyIp = try container.sdkDecodeIfPresent(.isFastlyIp)
+        isOldIpAddress = try container.sdkDecodeIfPresent(.isOldIpAddress)
+        isARecord = try container.sdkDecodeIfPresent(.isARecord)
+        hasCnameRecord = try container.sdkDecodeIfPresent(.hasCnameRecord)
+        hasMxRecordsPresent = try container.sdkDecodeIfPresent(.hasMxRecordsPresent)
+        isValidDomain = try container.sdkDecodeIfPresent(.isValidDomain)
+        isApexDomain = try container.sdkDecodeIfPresent(.isApexDomain)
+        shouldBeARecord = try container.sdkDecodeIfPresent(.shouldBeARecord)
+        isCnameToGithubUserDomain = try container.sdkDecodeIfPresent(.isCnameToGithubUserDomain)
+        isCnameToPagesDotGithubDotCom = try container.sdkDecodeIfPresent(.isCnameToPagesDotGithubDotCom)
+        isCnameToFastly = try container.sdkDecodeIfPresent(.isCnameToFastly)
+        isPointedToGithubPagesIp = try container.sdkDecodeIfPresent(.isPointedToGithubPagesIp)
+        isNonGithubPagesIpPresent = try container.sdkDecodeIfPresent(.isNonGithubPagesIpPresent)
+        isPagesDomain = try container.sdkDecodeIfPresent(.isPagesDomain)
+        isServedByPages = try container.sdkDecodeIfPresent(.isServedByPages)
+        isValid = try container.sdkDecodeIfPresent(.isValid)
+        reason = try container.sdkDecodeIfPresent(.reason)
+        respondsToHttps = try container.sdkDecodeIfPresent(.respondsToHttps)
+        enforcesHttps = try container.sdkDecodeIfPresent(.enforcesHttps)
+        httpsError = try container.sdkDecodeIfPresent(.httpsError)
+        isHttpsEligible = try container.sdkDecodeIfPresent(.isHttpsEligible)
+        caaError = try container.sdkDecodeIfPresent(.caaError)
     }
 }
 
-extension PagesHealthCheckAltDomain {
-    public init(host: String? = nil, uri: String? = nil, nameservers: String? = nil, dnsResolves: Bool? = nil, isProxied: Bool? = nil, isCloudflareIp: Bool? = nil, isFastlyIp: Bool? = nil, isOldIpAddress: Bool? = nil, isARecord: Bool? = nil, hasCnameRecord: Bool? = nil, hasMxRecordsPresent: Bool? = nil, isValidDomain: Bool? = nil, isApexDomain: Bool? = nil, shouldBeARecord: Bool? = nil, isCnameToGithubUserDomain: Bool? = nil, isCnameToPagesDotGithubDotCom: Bool? = nil, isCnameToFastly: Bool? = nil, isPointedToGithubPagesIp: Bool? = nil, isNonGithubPagesIpPresent: Bool? = nil, isPagesDomain: Bool? = nil, isServedByPages: Bool? = nil, isValid: Bool? = nil, reason: String? = nil, respondsToHttps: Bool? = nil, enforcesHttps: Bool? = nil, httpsError: String? = nil, isHttpsEligible: Bool? = nil, caaError: String? = nil) {
+public extension PagesHealthCheckAltDomain {
+    init(
+        host: String? = nil,
+        uri: String? = nil,
+        nameservers: String? = nil,
+        dnsResolves: Bool? = nil,
+        isProxied: Bool? = nil,
+        isCloudflareIp: Bool? = nil,
+        isFastlyIp: Bool? = nil,
+        isOldIpAddress: Bool? = nil,
+        isARecord: Bool? = nil,
+        hasCnameRecord: Bool? = nil,
+        hasMxRecordsPresent: Bool? = nil,
+        isValidDomain: Bool? = nil,
+        isApexDomain: Bool? = nil,
+        shouldBeARecord: Bool? = nil,
+        isCnameToGithubUserDomain: Bool? = nil,
+        isCnameToPagesDotGithubDotCom: Bool? = nil,
+        isCnameToFastly: Bool? = nil,
+        isPointedToGithubPagesIp: Bool? = nil,
+        isNonGithubPagesIpPresent: Bool? = nil,
+        isPagesDomain: Bool? = nil,
+        isServedByPages: Bool? = nil,
+        isValid: Bool? = nil,
+        reason: String? = nil,
+        respondsToHttps: Bool? = nil,
+        enforcesHttps: Bool? = nil,
+        httpsError: String? = nil,
+        isHttpsEligible: Bool? = nil,
+        caaError: String? = nil
+    ) {
         self.init()
         (self.host, self.uri) = (host, uri)
         (self.nameservers, self.dnsResolves) = (nameservers, dnsResolves)
@@ -172,20 +213,20 @@ public struct PagesHealthCheck: Codable {
     }
 
     init() {
-        (self.domain, self.altDomain) = (nil, nil)
+        (domain, altDomain) = (nil, nil)
     }
 }
 
-extension PagesHealthCheck {
-    public init(from decoder: Decoder) throws {
+public extension PagesHealthCheck {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.domain = try container.sdkDecodeIfPresent(.domain)
-        self.altDomain = try container.sdkDecodeIfPresent(.altDomain)
+        domain = try container.sdkDecodeIfPresent(.domain)
+        altDomain = try container.sdkDecodeIfPresent(.altDomain)
     }
 }
 
-extension PagesHealthCheck {
-    public init(domain: PagesHealthCheckDomain? = nil, altDomain: PagesHealthCheckAltDomain? = nil) {
+public extension PagesHealthCheck {
+    init(domain: PagesHealthCheckDomain? = nil, altDomain: PagesHealthCheckAltDomain? = nil) {
         self.init()
         (self.domain, self.altDomain) = (domain, altDomain)
     }
@@ -282,51 +323,92 @@ public struct PagesHealthCheckDomain: Codable {
     }
 
     init() {
-        (self.host, self.uri, self.nameservers, self.dnsResolves, self.isProxied) = (nil, nil, nil, nil, nil)
-        (self.isCloudflareIp, self.isFastlyIp, self.isOldIpAddress, self.isARecord, self.hasCnameRecord) = (nil, nil, nil, nil, nil)
-        (self.hasMxRecordsPresent, self.isValidDomain, self.isApexDomain, self.shouldBeARecord, self.isCnameToGithubUserDomain) = (nil, nil, nil, nil, nil)
-        (self.isCnameToPagesDotGithubDotCom, self.isCnameToFastly, self.isPointedToGithubPagesIp, self.isNonGithubPagesIpPresent, self.isPagesDomain) = (nil, nil, nil, nil, nil)
-        (self.isServedByPages, self.isValid, self.reason, self.respondsToHttps, self.enforcesHttps) = (nil, nil, nil, nil, nil)
-        (self.httpsError, self.isHttpsEligible, self.caaError) = (nil, nil, nil)
+        (host, uri, nameservers, dnsResolves, isProxied) = (nil, nil, nil, nil, nil)
+        (isCloudflareIp, isFastlyIp, isOldIpAddress, isARecord, hasCnameRecord) = (nil, nil, nil, nil, nil)
+        (hasMxRecordsPresent, isValidDomain, isApexDomain, shouldBeARecord, isCnameToGithubUserDomain) = (
+            nil,
+            nil,
+            nil,
+            nil,
+            nil
+        )
+        (
+            isCnameToPagesDotGithubDotCom,
+            isCnameToFastly,
+            isPointedToGithubPagesIp,
+            isNonGithubPagesIpPresent,
+            isPagesDomain
+        ) = (nil, nil, nil, nil, nil)
+        (isServedByPages, isValid, reason, respondsToHttps, enforcesHttps) = (nil, nil, nil, nil, nil)
+        (httpsError, isHttpsEligible, caaError) = (nil, nil, nil)
     }
 }
 
-extension PagesHealthCheckDomain {
-    public init(from decoder: Decoder) throws {
+public extension PagesHealthCheckDomain {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.host = try container.sdkDecodeIfPresent(.host)
-        self.uri = try container.sdkDecodeIfPresent(.uri)
-        self.nameservers = try container.sdkDecodeIfPresent(.nameservers)
-        self.dnsResolves = try container.sdkDecodeIfPresent(.dnsResolves)
-        self.isProxied = try container.sdkDecodeIfPresent(.isProxied)
-        self.isCloudflareIp = try container.sdkDecodeIfPresent(.isCloudflareIp)
-        self.isFastlyIp = try container.sdkDecodeIfPresent(.isFastlyIp)
-        self.isOldIpAddress = try container.sdkDecodeIfPresent(.isOldIpAddress)
-        self.isARecord = try container.sdkDecodeIfPresent(.isARecord)
-        self.hasCnameRecord = try container.sdkDecodeIfPresent(.hasCnameRecord)
-        self.hasMxRecordsPresent = try container.sdkDecodeIfPresent(.hasMxRecordsPresent)
-        self.isValidDomain = try container.sdkDecodeIfPresent(.isValidDomain)
-        self.isApexDomain = try container.sdkDecodeIfPresent(.isApexDomain)
-        self.shouldBeARecord = try container.sdkDecodeIfPresent(.shouldBeARecord)
-        self.isCnameToGithubUserDomain = try container.sdkDecodeIfPresent(.isCnameToGithubUserDomain)
-        self.isCnameToPagesDotGithubDotCom = try container.sdkDecodeIfPresent(.isCnameToPagesDotGithubDotCom)
-        self.isCnameToFastly = try container.sdkDecodeIfPresent(.isCnameToFastly)
-        self.isPointedToGithubPagesIp = try container.sdkDecodeIfPresent(.isPointedToGithubPagesIp)
-        self.isNonGithubPagesIpPresent = try container.sdkDecodeIfPresent(.isNonGithubPagesIpPresent)
-        self.isPagesDomain = try container.sdkDecodeIfPresent(.isPagesDomain)
-        self.isServedByPages = try container.sdkDecodeIfPresent(.isServedByPages)
-        self.isValid = try container.sdkDecodeIfPresent(.isValid)
-        self.reason = try container.sdkDecodeIfPresent(.reason)
-        self.respondsToHttps = try container.sdkDecodeIfPresent(.respondsToHttps)
-        self.enforcesHttps = try container.sdkDecodeIfPresent(.enforcesHttps)
-        self.httpsError = try container.sdkDecodeIfPresent(.httpsError)
-        self.isHttpsEligible = try container.sdkDecodeIfPresent(.isHttpsEligible)
-        self.caaError = try container.sdkDecodeIfPresent(.caaError)
+        host = try container.sdkDecodeIfPresent(.host)
+        uri = try container.sdkDecodeIfPresent(.uri)
+        nameservers = try container.sdkDecodeIfPresent(.nameservers)
+        dnsResolves = try container.sdkDecodeIfPresent(.dnsResolves)
+        isProxied = try container.sdkDecodeIfPresent(.isProxied)
+        isCloudflareIp = try container.sdkDecodeIfPresent(.isCloudflareIp)
+        isFastlyIp = try container.sdkDecodeIfPresent(.isFastlyIp)
+        isOldIpAddress = try container.sdkDecodeIfPresent(.isOldIpAddress)
+        isARecord = try container.sdkDecodeIfPresent(.isARecord)
+        hasCnameRecord = try container.sdkDecodeIfPresent(.hasCnameRecord)
+        hasMxRecordsPresent = try container.sdkDecodeIfPresent(.hasMxRecordsPresent)
+        isValidDomain = try container.sdkDecodeIfPresent(.isValidDomain)
+        isApexDomain = try container.sdkDecodeIfPresent(.isApexDomain)
+        shouldBeARecord = try container.sdkDecodeIfPresent(.shouldBeARecord)
+        isCnameToGithubUserDomain = try container.sdkDecodeIfPresent(.isCnameToGithubUserDomain)
+        isCnameToPagesDotGithubDotCom = try container.sdkDecodeIfPresent(.isCnameToPagesDotGithubDotCom)
+        isCnameToFastly = try container.sdkDecodeIfPresent(.isCnameToFastly)
+        isPointedToGithubPagesIp = try container.sdkDecodeIfPresent(.isPointedToGithubPagesIp)
+        isNonGithubPagesIpPresent = try container.sdkDecodeIfPresent(.isNonGithubPagesIpPresent)
+        isPagesDomain = try container.sdkDecodeIfPresent(.isPagesDomain)
+        isServedByPages = try container.sdkDecodeIfPresent(.isServedByPages)
+        isValid = try container.sdkDecodeIfPresent(.isValid)
+        reason = try container.sdkDecodeIfPresent(.reason)
+        respondsToHttps = try container.sdkDecodeIfPresent(.respondsToHttps)
+        enforcesHttps = try container.sdkDecodeIfPresent(.enforcesHttps)
+        httpsError = try container.sdkDecodeIfPresent(.httpsError)
+        isHttpsEligible = try container.sdkDecodeIfPresent(.isHttpsEligible)
+        caaError = try container.sdkDecodeIfPresent(.caaError)
     }
 }
 
-extension PagesHealthCheckDomain {
-    public init(host: String? = nil, uri: String? = nil, nameservers: String? = nil, dnsResolves: Bool? = nil, isProxied: Bool? = nil, isCloudflareIp: Bool? = nil, isFastlyIp: Bool? = nil, isOldIpAddress: Bool? = nil, isARecord: Bool? = nil, hasCnameRecord: Bool? = nil, hasMxRecordsPresent: Bool? = nil, isValidDomain: Bool? = nil, isApexDomain: Bool? = nil, shouldBeARecord: Bool? = nil, isCnameToGithubUserDomain: Bool? = nil, isCnameToPagesDotGithubDotCom: Bool? = nil, isCnameToFastly: Bool? = nil, isPointedToGithubPagesIp: Bool? = nil, isNonGithubPagesIpPresent: Bool? = nil, isPagesDomain: Bool? = nil, isServedByPages: Bool? = nil, isValid: Bool? = nil, reason: String? = nil, respondsToHttps: Bool? = nil, enforcesHttps: Bool? = nil, httpsError: String? = nil, isHttpsEligible: Bool? = nil, caaError: String? = nil) {
+public extension PagesHealthCheckDomain {
+    init(
+        host: String? = nil,
+        uri: String? = nil,
+        nameservers: String? = nil,
+        dnsResolves: Bool? = nil,
+        isProxied: Bool? = nil,
+        isCloudflareIp: Bool? = nil,
+        isFastlyIp: Bool? = nil,
+        isOldIpAddress: Bool? = nil,
+        isARecord: Bool? = nil,
+        hasCnameRecord: Bool? = nil,
+        hasMxRecordsPresent: Bool? = nil,
+        isValidDomain: Bool? = nil,
+        isApexDomain: Bool? = nil,
+        shouldBeARecord: Bool? = nil,
+        isCnameToGithubUserDomain: Bool? = nil,
+        isCnameToPagesDotGithubDotCom: Bool? = nil,
+        isCnameToFastly: Bool? = nil,
+        isPointedToGithubPagesIp: Bool? = nil,
+        isNonGithubPagesIpPresent: Bool? = nil,
+        isPagesDomain: Bool? = nil,
+        isServedByPages: Bool? = nil,
+        isValid: Bool? = nil,
+        reason: String? = nil,
+        respondsToHttps: Bool? = nil,
+        enforcesHttps: Bool? = nil,
+        httpsError: String? = nil,
+        isHttpsEligible: Bool? = nil,
+        caaError: String? = nil
+    ) {
         self.init()
         (self.host, self.uri) = (host, uri)
         (self.nameservers, self.dnsResolves) = (nameservers, dnsResolves)

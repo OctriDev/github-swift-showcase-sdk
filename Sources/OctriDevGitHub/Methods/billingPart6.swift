@@ -6,10 +6,13 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension BillingMethods {
-    /// Updates an existing budget for an organization. Supply the budget fields you want to change; expiration updates are supported only for existing user-scoped budgets, and setting `expires_at` to `0` removes the expiration date. The authenticated user must be an organization admin or billing manager.
+public extension BillingMethods {
+    /// Updates an existing budget for an organization. Supply the budget fields you want to change; expiration updates
+    /// are supported only for existing user-scoped budgets, and setting `expires_at` to `0` removes the expiration
+    /// date. The authenticated user must be an organization admin or billing manager.
     ///
-    /// Updates an existing budget for an organization. The authenticated user must be an organization admin or billing manager.
+    /// Updates an existing budget for an organization. The authenticated user must be an organization admin or billing
+    /// manager.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
@@ -23,9 +26,44 @@ extension BillingMethods {
     ///   dates in the future are accepted. If not set, the budget will not expire.
     ///   Setting to `null` or `0` will remove the expiration date from a budget if
     ///   set. Only supported for existing user-scoped budgets.
-    public static func billingUpdateBudgetOrg(config: ClientConfig, org: String, budgetId: String, budgetAmount: Int? = nil, preventFurtherUsage: Bool? = nil, budgetAlerting: BillingUpdateBudgetOrgRequestBodyBudgetAlerting? = nil, expiresAt: SdkOptional<BillingUpdateBudgetOrgRequestBodyExpiresAt>? = nil, requestOptions: RequestOptions? = nil) async throws -> UpdateBudget {
-        let requestBody = BillingUpdateBudgetOrgRequestBody(budgetAmount: budgetAmount, preventFurtherUsage: preventFurtherUsage, budgetAlerting: budgetAlerting, expiresAt: expiresAt)
+    static func billingUpdateBudgetOrg(
+        config: ClientConfig,
+        org: String,
+        budgetId: String,
+        budgetAmount: Int? = nil,
+        preventFurtherUsage: Bool? = nil,
+        budgetAlerting: BillingUpdateBudgetOrgRequestBodyBudgetAlerting? = nil,
+        expiresAt: SdkOptional<BillingUpdateBudgetOrgRequestBodyExpiresAt>? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> UpdateBudget {
+        let requestBody = BillingUpdateBudgetOrgRequestBody(
+            budgetAmount: budgetAmount,
+            preventFurtherUsage: preventFurtherUsage,
+            budgetAlerting: budgetAlerting,
+            expiresAt: expiresAt
+        )
 
-        return try (await sdkRequest("PATCH", ["/organizations/", sdkEncodePathSegment(sdkWireString(org)), "/settings/billing/budgets/", sdkEncodePathSegment(sdkWireString(budgetId))].joined(), config: config, body: requestBody, decoder: .json, operationId: "billingUpdateBudgetOrg", options: requestOptions, errors: ["400": BasicError.self, "401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "422": ValidationError.self, "500": BasicError.self])).data
+        return try await (sdkRequest(
+            "PATCH",
+            [
+                "/organizations/",
+                sdkEncodePathSegment(sdkWireString(org)),
+                "/settings/billing/budgets/",
+                sdkEncodePathSegment(sdkWireString(budgetId)),
+            ].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "billingUpdateBudgetOrg",
+            options: requestOptions,
+            errors: [
+                "400": BasicError.self,
+                "401": BasicError.self,
+                "403": BasicError.self,
+                "404": BasicError.self,
+                "422": ValidationError.self,
+                "500": BasicError.self,
+            ]
+        )).data
     }
 }

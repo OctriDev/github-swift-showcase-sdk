@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ReposMethods {
+public extension ReposMethods {
     /// Returns the hash algorithm used to store repository objects.
     ///
     /// - Parameters:
@@ -14,7 +14,26 @@ extension ReposMethods {
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    public static func reposGetHashAlgorithm(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> RepositoryHashAlgorithm {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/hash-algorithm"].joined(), config: config, decoder: .json, operationId: "reposGetHashAlgorithm", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+    static func reposGetHashAlgorithm(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> RepositoryHashAlgorithm {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/hash-algorithm",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "reposGetHashAlgorithm",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 }

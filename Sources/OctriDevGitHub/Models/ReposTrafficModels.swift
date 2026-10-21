@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Repos domain models
+/// Repos domain models
 /// Typed representation of the `Traffic` API schema.
 public struct Traffic: Codable {
     /// Required `date-time`-formatted value serialized in the `timestamp` wire field.
@@ -19,33 +19,47 @@ public struct Traffic: Codable {
         case count
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension Traffic {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.timestamp) else {
-            throw SdkValidationError(field: "timestamp", code: "required", message: "Validation failed for 'timestamp': value is required")
-        }
-        guard container.contains(.uniques) else {
-            throw SdkValidationError(field: "uniques", code: "required", message: "Validation failed for 'uniques': value is required")
-        }
-        guard container.contains(.count) else {
-            throw SdkValidationError(field: "count", code: "required", message: "Validation failed for 'count': value is required")
-        }
-        self.timestamp = try container.sdkDecodeRequired(.timestamp)
-        self.uniques = try container.sdkDecodeRequired(.uniques)
-        self.count = try container.sdkDecodeRequired(.count)
-            try sdkValidateDateTime("timestamp", sdkWireString(self.timestamp))
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension Traffic {
-    public init(timestamp: Date, uniques: Int, count: Int) throws {
+public extension Traffic {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.timestamp) else {
+            throw SdkValidationError(
+                field: "timestamp",
+                code: "required",
+                message: "Validation failed for 'timestamp': value is required"
+            )
+        }
+        guard container.contains(.uniques) else {
+            throw SdkValidationError(
+                field: "uniques",
+                code: "required",
+                message: "Validation failed for 'uniques': value is required"
+            )
+        }
+        guard container.contains(.count) else {
+            throw SdkValidationError(
+                field: "count",
+                code: "required",
+                message: "Validation failed for 'count': value is required"
+            )
+        }
+        timestamp = try container.sdkDecodeRequired(.timestamp)
+        uniques = try container.sdkDecodeRequired(.uniques)
+        count = try container.sdkDecodeRequired(.count)
+        try sdkValidateDateTime("timestamp", sdkWireString(timestamp))
+    }
+}
+
+public extension Traffic {
+    init(timestamp: Date, uniques: Int, count: Int) throws {
         (self.timestamp, self.uniques) = (timestamp, uniques)
         self.count = count
-            try sdkValidateDateTime("timestamp", sdkWireString(self.timestamp))
+        try sdkValidateDateTime("timestamp", sdkWireString(self.timestamp))
     }
 }
 
@@ -65,21 +79,21 @@ public struct FileCommitCommitAuthor: Codable {
     }
 
     init() {
-        (self.date, self.name, self.email) = (nil, nil, nil)
+        (date, name, email) = (nil, nil, nil)
     }
 }
 
-extension FileCommitCommitAuthor {
-    public init(from decoder: Decoder) throws {
+public extension FileCommitCommitAuthor {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.date = try container.sdkDecodeIfPresent(.date)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.email = try container.sdkDecodeIfPresent(.email)
+        date = try container.sdkDecodeIfPresent(.date)
+        name = try container.sdkDecodeIfPresent(.name)
+        email = try container.sdkDecodeIfPresent(.email)
     }
 }
 
-extension FileCommitCommitAuthor {
-    public init(date: String? = nil, name: String? = nil, email: String? = nil) {
+public extension FileCommitCommitAuthor {
+    init(date: String? = nil, name: String? = nil, email: String? = nil) {
         self.init()
         (self.date, self.name) = (date, name)
         self.email = email
@@ -95,21 +109,27 @@ public struct Topic: Codable {
         case names
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension Topic {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.names) else {
-            throw SdkValidationError(field: "names", code: "required", message: "Validation failed for 'names': value is required")
-        }
-        self.names = try container.sdkDecodeRequired(.names)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension Topic {
-    public init(names: [String]) {
+public extension Topic {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.names) else {
+            throw SdkValidationError(
+                field: "names",
+                code: "required",
+                message: "Validation failed for 'names': value is required"
+            )
+        }
+        names = try container.sdkDecodeRequired(.names)
+    }
+}
+
+public extension Topic {
+    init(names: [String]) {
         self.names = names
     }
 }
@@ -151,29 +171,40 @@ public struct FileCommitCommit: Codable {
     }
 
     init() {
-        (self.sha, self.nodeId, self.url, self.htmlUrl, self.author) = (nil, nil, nil, nil, nil)
-        (self.committer, self.message, self.tree, self.parents, self.verification) = (nil, nil, nil, nil, nil)
+        (sha, nodeId, url, htmlUrl, author) = (nil, nil, nil, nil, nil)
+        (committer, message, tree, parents, verification) = (nil, nil, nil, nil, nil)
     }
 }
 
-extension FileCommitCommit {
-    public init(from decoder: Decoder) throws {
+public extension FileCommitCommit {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.sha = try container.sdkDecodeIfPresent(.sha)
-        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        self.url = try container.sdkDecodeIfPresent(.url)
-        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        self.author = try container.sdkDecodeIfPresent(.author)
-        self.committer = try container.sdkDecodeIfPresent(.committer)
-        self.message = try container.sdkDecodeIfPresent(.message)
-        self.tree = try container.sdkDecodeIfPresent(.tree)
-        self.parents = try container.sdkDecodeIfPresent(.parents)
-        self.verification = try container.sdkDecodeIfPresent(.verification)
+        sha = try container.sdkDecodeIfPresent(.sha)
+        nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        url = try container.sdkDecodeIfPresent(.url)
+        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        author = try container.sdkDecodeIfPresent(.author)
+        committer = try container.sdkDecodeIfPresent(.committer)
+        message = try container.sdkDecodeIfPresent(.message)
+        tree = try container.sdkDecodeIfPresent(.tree)
+        parents = try container.sdkDecodeIfPresent(.parents)
+        verification = try container.sdkDecodeIfPresent(.verification)
     }
 }
 
-extension FileCommitCommit {
-    public init(sha: String? = nil, nodeId: String? = nil, url: String? = nil, htmlUrl: String? = nil, author: FileCommitCommitAuthor? = nil, committer: FileCommitCommitCommitter? = nil, message: String? = nil, tree: FileCommitCommitTree? = nil, parents: [FileCommitCommitParentsItem]? = nil, verification: FileCommitCommitVerification? = nil) {
+public extension FileCommitCommit {
+    init(
+        sha: String? = nil,
+        nodeId: String? = nil,
+        url: String? = nil,
+        htmlUrl: String? = nil,
+        author: FileCommitCommitAuthor? = nil,
+        committer: FileCommitCommitCommitter? = nil,
+        message: String? = nil,
+        tree: FileCommitCommitTree? = nil,
+        parents: [FileCommitCommitParentsItem]? = nil,
+        verification: FileCommitCommitVerification? = nil
+    ) {
         self.init()
         (self.sha, self.nodeId) = (sha, nodeId)
         (self.url, self.htmlUrl) = (url, htmlUrl)

@@ -17,10 +17,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.migrations.getCommitAuthors(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            since: decoded("1")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                since: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -66,9 +66,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.migrations.getImportStatus(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -103,16 +103,17 @@ extension SdkMethodTests {
         )
     }
 
-    func testMigrationsGetStatusForAuthenticatedUserMigrationsGetStatusForX864b3ffec2ReachesMockAndDecodesResponse() async throws {
+    func testMigrationsGetStatusForAuthenticatedUserMigrationsGetStatusForX864b3ffec2ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
         do {
             _ = try await client.migrations.getStatusForAuthenticatedUser(
-            migrationId: decoded("1"),
-            exclude: decoded("[\"exclude\"]")
-        )
+                migrationId: decoded("1"),
+                exclude: decoded("[\"exclude\"]")
+            )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -121,7 +122,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testMigrationsGetStatusForAuthenticatedUserMigrationsGetStatusForX9b33138480ReachesMockAndDecodesResponse() async throws {
+    func testMigrationsGetStatusForAuthenticatedUserMigrationsGetStatusForX9b33138480ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -132,9 +134,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.migrations.getStatusForAuthenticatedUser(
-            migrationId: decoded("1"),
-            exclude: decoded("[\"exclude\"]")
-        )
+                migrationId: decoded("1"),
+                exclude: decoded("[\"exclude\"]")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -157,10 +159,10 @@ extension SdkMethodTests {
         _ = client
         do {
             _ = try await client.migrations.getStatusForOrg(
-            org: decoded("\"org\""),
-            migrationId: decoded("1"),
-            exclude: decoded("[\"repositories\"]")
-        )
+                org: decoded("\"org\""),
+                migrationId: decoded("1"),
+                exclude: decoded("[\"repositories\"]")
+            )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -180,10 +182,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.migrations.getStatusForOrg(
-            org: decoded("\"org\""),
-            migrationId: decoded("1"),
-            exclude: decoded("[\"repositories\"]")
-        )
+                org: decoded("\"org\""),
+                migrationId: decoded("1"),
+                exclude: decoded("[\"repositories\"]")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -199,16 +201,17 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testMigrationsListForAuthenticatedUserMigrationsListForAuthenticatedUserReachesMockAndDecodesResponse() async throws {
+    func testMigrationsListForAuthenticatedUserMigrationsListForAuthenticatedUserReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
         do {
             _ = try await client.migrations.listForAuthenticatedUser(
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -217,7 +220,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testMigrationsListForAuthenticatedUserMigrationsListForAuthenticatedUser401ReachesMockAndDecodesResponse() async throws {
+    func testMigrationsListForAuthenticatedUserMigrationsListForAuthenticatedUser401ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -228,9 +232,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.migrations.listForAuthenticatedUser(
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -253,11 +257,11 @@ extension SdkMethodTests {
         _ = client
         do {
             _ = try await client.migrations.listForOrg(
-            org: decoded("\"org\""),
-            perPage: decoded("30"),
-            page: decoded("1"),
-            exclude: decoded("[\"repositories\"]")
-        )
+                org: decoded("\"org\""),
+                perPage: decoded("30"),
+                page: decoded("1"),
+                exclude: decoded("[\"repositories\"]")
+            )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -266,7 +270,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testMigrationsListReposForAuthenticatedUserMigrationsListReposForX02eb98f7a9ReachesMockAndDecodesResponse() async throws {
+    func testMigrationsListReposForAuthenticatedUserMigrationsListReposForX02eb98f7a9ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -286,7 +291,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testMigrationsListReposForAuthenticatedUserMigrationsListReposForX509e9e6b7dReachesMockAndDecodesResponse() async throws {
+    func testMigrationsListReposForAuthenticatedUserMigrationsListReposForX509e9e6b7dReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -297,10 +303,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.migrations.listReposForAuthenticatedUser(
-            migrationId: decoded("1"),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                migrationId: decoded("1"),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -348,11 +354,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.migrations.listReposForOrg(
-            org: decoded("\"org\""),
-            migrationId: decoded("1"),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                org: decoded("\"org\""),
+                migrationId: decoded("1"),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -401,12 +407,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.migrations.mapCommitAuthor(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            authorId: decoded("1"),
-            email: decoded("\"hubot@github.com\""),
-            name: decoded("\"Hubot the Robot\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                authorId: decoded("1"),
+                email: decoded("\"hubot@github.com\""),
+                name: decoded("\"Hubot the Robot\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -453,10 +459,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.migrations.setLfsPreference(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            useLfs: decoded("\"opt_in\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                useLfs: decoded("\"opt_in\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 422)
@@ -472,12 +478,14 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testMigrationsStartForAuthenticatedUserMigrationsStartForAuthenticatedUserReachesMockAndDecodesResponse() async throws {
+    func testMigrationsStartForAuthenticatedUserMigrationsStartForAuthenticatedUserReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
-        var options = try MigrationsMethods.MigrationsStartForAuthenticatedUserOptions(repositories: decoded("[\"octocat/Hello-World\"]"))
+        var options = try MigrationsMethods
+            .MigrationsStartForAuthenticatedUserOptions(repositories: decoded("[\"octocat/Hello-World\"]"))
         options.lockRepositories = try decoded("true")
         options.excludeMetadata = try decoded("null")
         options.excludeGitData = try decoded("null")
@@ -488,8 +496,8 @@ extension SdkMethodTests {
         options.exclude = try decoded("null")
         do {
             _ = try await client.migrations.startForAuthenticatedUser(
-            options: options
-        )
+                options: options
+            )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -498,12 +506,14 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testMigrationsStartForAuthenticatedUserMigrationsStartForAuthentiX6c1f40ccc6ReachesMockAndDecodesResponse() async throws {
+    func testMigrationsStartForAuthenticatedUserMigrationsStartForAuthentiX6c1f40ccc6ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
         _ = client
-        var options = try MigrationsMethods.MigrationsStartForAuthenticatedUserOptions(repositories: decoded("[\"octocat/Hello-World\"]"))
+        var options = try MigrationsMethods
+            .MigrationsStartForAuthenticatedUserOptions(repositories: decoded("[\"octocat/Hello-World\"]"))
         options.lockRepositories = try decoded("true")
         options.excludeMetadata = try decoded("null")
         options.excludeGitData = try decoded("null")
@@ -518,8 +528,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.migrations.startForAuthenticatedUser(
-            options: options
-        )
+                options: options
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)

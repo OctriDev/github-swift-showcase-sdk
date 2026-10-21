@@ -6,27 +6,91 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension TeamsMethods {
-    /// Team members will include the members of child teams. To get a user's membership with a team, the team must be visible to the authenticated user. > [!NOTE] > You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/memberships/{username}`. > [!NOTE] > The response contains the `state` of the membership and the member's `role`. The `role` for organization owners is set to `maintainer`. For more information about `maintainer` roles, see [Create a team](https://docs.github.com/rest/teams/teams#create-a-team).
+public extension TeamsMethods {
+    /// Team members will include the members of child teams. To get a user's membership with a team, the team must be
+    /// visible to the authenticated user. > [!NOTE] > You can also specify a team by `org_id` and `team_id` using the
+    /// route `GET /organizations/{org_id}/team/{team_id}/memberships/{username}`. > [!NOTE] > The response contains the
+    /// `state` of the membership and the member's `role`. The `role` for organization owners is set to `maintainer`.
+    /// For more information about `maintainer` roles, see [Create a
+    /// team](https://docs.github.com/rest/teams/teams#create-a-team).
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - teamSlug: The slug of the team name.
     /// - username: The handle for the GitHub user account.
-    public static func teamsGetMembershipForUserInOrg(config: ClientConfig, org: String, teamSlug: String, username: String, requestOptions: RequestOptions? = nil) async throws -> TeamMembership {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/teams/", sdkEncodePathSegment(sdkWireString(teamSlug)), "/memberships/", sdkEncodePathSegment(sdkWireString(username))].joined(), config: config, decoder: .json, operationId: "teamsGetMembershipForUserInOrg", options: requestOptions)).data
+    static func teamsGetMembershipForUserInOrg(
+        config: ClientConfig,
+        org: String,
+        teamSlug: String,
+        username: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> TeamMembership {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/orgs/",
+                sdkEncodePathSegment(sdkWireString(org)),
+                "/teams/",
+                sdkEncodePathSegment(sdkWireString(teamSlug)),
+                "/memberships/",
+                sdkEncodePathSegment(sdkWireString(username)),
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "teamsGetMembershipForUserInOrg",
+            options: requestOptions
+        )).data
     }
 
-    /// Adds an organization member to a team. An authenticated organization owner or team maintainer can add organization members to a team. Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation. > [!NOTE] > When you have team synchronization set up for a team with your organization's identity provider (IdP), you will see an error if you attempt to use the API for making changes to the team's membership. If you have access to manage group membership in your IdP, you can manage GitHub team membership through your identity provider, which automatically adds and removes team members in an organization. For more information, see "[Synchronizing teams between your identity provider and GitHub](https://docs.github.com/articles/synchronizing-teams-between-your-identity-provider-and-github/)." An organization owner can add someone who is not part of the team's organization to a team. When an organization owner adds someone to a team who is not an organization member, this endpoint will send an invitation to the person via email. This newly-created membership will be in the "pending" state until the person accepts the invitation, at which point the membership will transition to the "active" state and the user will be added as a member of the team. If the user is already a member of the team, this endpoint will update the role of the team member's role. To update the membership of a team member, the authenticated user must be an organization owner or a team maintainer. > [!NOTE] > You can also specify a team by `org_id` and `team_id` using the route `PUT /organizations/{org_id}/team/{team_id}/memberships/{username}`.
+    /// Adds an organization member to a team. An authenticated organization owner or team maintainer can add
+    /// organization members to a team. Team synchronization is available for organizations using GitHub Enterprise
+    /// Cloud. For more information, see [GitHub's
+    /// products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help
+    /// documentation. > [!NOTE] > When you have team synchronization set up for a team with your organization's
+    /// identity provider (IdP), you will see an error if you attempt to use the API for making changes to the team's
+    /// membership. If you have access to manage group membership in your IdP, you can manage GitHub team membership
+    /// through your identity provider, which automatically adds and removes team members in an organization. For more
+    /// information, see "[Synchronizing teams between your identity provider and
+    /// GitHub](https://docs.github.com/articles/synchronizing-teams-between-your-identity-provider-and-github/)." An
+    /// organization owner can add someone who is not part of the team's organization to a team. When an organization
+    /// owner adds someone to a team who is not an organization member, this endpoint will send an invitation to the
+    /// person via email. This newly-created membership will be in the "pending" state until the person accepts the
+    /// invitation, at which point the membership will transition to the "active" state and the user will be added as a
+    /// member of the team. If the user is already a member of the team, this endpoint will update the role of the team
+    /// member's role. To update the membership of a team member, the authenticated user must be an organization owner
+    /// or a team maintainer. > [!NOTE] > You can also specify a team by `org_id` and `team_id` using the route `PUT
+    /// /organizations/{org_id}/team/{team_id}/memberships/{username}`.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - teamSlug: The slug of the team name.
     /// - username: The handle for the GitHub user account.
     /// - role: The role that this user should have in the team.
-    public static func teamsAddOrUpdateMembershipForUserInOrg(config: ClientConfig, org: String, teamSlug: String, username: String, role: TeamsAddOrUpdateMembershipForUserInOrgRequestBodyRole? = nil, requestOptions: RequestOptions? = nil) async throws -> TeamMembership {
+    static func teamsAddOrUpdateMembershipForUserInOrg(
+        config: ClientConfig,
+        org: String,
+        teamSlug: String,
+        username: String,
+        role: TeamsAddOrUpdateMembershipForUserInOrgRequestBodyRole? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> TeamMembership {
         let requestBody = TeamsAddOrUpdateMembershipForUserInOrgRequestBody(role: role)
 
-        return try (await sdkRequest("PUT", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/teams/", sdkEncodePathSegment(sdkWireString(teamSlug)), "/memberships/", sdkEncodePathSegment(sdkWireString(username))].joined(), config: config, body: requestBody, decoder: .json, operationId: "teamsAddOrUpdateMembershipForUserInOrg", options: requestOptions)).data
+        return try await (sdkRequest(
+            "PUT",
+            [
+                "/orgs/",
+                sdkEncodePathSegment(sdkWireString(org)),
+                "/teams/",
+                sdkEncodePathSegment(sdkWireString(teamSlug)),
+                "/memberships/",
+                sdkEncodePathSegment(sdkWireString(username)),
+            ].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "teamsAddOrUpdateMembershipForUserInOrg",
+            options: requestOptions
+        )).data
     }
 }

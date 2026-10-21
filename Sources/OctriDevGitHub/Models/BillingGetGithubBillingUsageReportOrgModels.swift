@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Billing domain models
+/// Billing domain models
 /// Typed representation of the `BillingUsageReport` API schema.
 public struct BillingUsageReport: Codable {
     /// Optional array value serialized in the `usageItems` wire field.
@@ -14,19 +14,19 @@ public struct BillingUsageReport: Codable {
     }
 
     init() {
-        self.usageItems = nil
+        usageItems = nil
     }
 }
 
-extension BillingUsageReport {
-    public init(from decoder: Decoder) throws {
+public extension BillingUsageReport {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.usageItems = try container.sdkDecodeIfPresent(.usageItems)
+        usageItems = try container.sdkDecodeIfPresent(.usageItems)
     }
 }
 
-extension BillingUsageReport {
-    public init(usageItems: [BillingUsageReportUsageItemsItem]? = nil) {
+public extension BillingUsageReport {
+    init(usageItems: [BillingUsageReportUsageItemsItem]? = nil) {
         self.init()
         self.usageItems = usageItems
     }
@@ -71,28 +71,42 @@ public struct BillingUsageReportUsageItemsItem: Codable {
         case repositoryName
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension BillingUsageReportUsageItemsItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.date = try container.sdkDecodeRequired(.date)
-        self.product = try container.sdkDecodeRequired(.product)
-        self.sku = try container.sdkDecodeRequired(.sku)
-        self.quantity = try container.sdkDecodeRequired(.quantity)
-        self.unitType = try container.sdkDecodeRequired(.unitType)
-        self.pricePerUnit = try container.sdkDecodeRequired(.pricePerUnit)
-        self.grossAmount = try container.sdkDecodeRequired(.grossAmount)
-        self.discountAmount = try container.sdkDecodeRequired(.discountAmount)
-        self.netAmount = try container.sdkDecodeRequired(.netAmount)
-        self.organizationName = try container.sdkDecodeRequired(.organizationName)
-        self.repositoryName = try container.sdkDecodeIfPresent(.repositoryName)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension BillingUsageReportUsageItemsItem {
-    public init(date: String, product: String, sku: String, quantity: Int, unitType: String, pricePerUnit: Double, grossAmount: Double, discountAmount: Double, netAmount: Double, organizationName: String, repositoryName: String? = nil) {
+public extension BillingUsageReportUsageItemsItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        date = try container.sdkDecodeRequired(.date)
+        product = try container.sdkDecodeRequired(.product)
+        sku = try container.sdkDecodeRequired(.sku)
+        quantity = try container.sdkDecodeRequired(.quantity)
+        unitType = try container.sdkDecodeRequired(.unitType)
+        pricePerUnit = try container.sdkDecodeRequired(.pricePerUnit)
+        grossAmount = try container.sdkDecodeRequired(.grossAmount)
+        discountAmount = try container.sdkDecodeRequired(.discountAmount)
+        netAmount = try container.sdkDecodeRequired(.netAmount)
+        organizationName = try container.sdkDecodeRequired(.organizationName)
+        repositoryName = try container.sdkDecodeIfPresent(.repositoryName)
+    }
+}
+
+public extension BillingUsageReportUsageItemsItem {
+    init(
+        date: String,
+        product: String,
+        sku: String,
+        quantity: Int,
+        unitType: String,
+        pricePerUnit: Double,
+        grossAmount: Double,
+        discountAmount: Double,
+        netAmount: Double,
+        organizationName: String,
+        repositoryName: String? = nil
+    ) {
         (self.date, self.product) = (date, product)
         (self.sku, self.quantity) = (sku, quantity)
         (self.unitType, self.pricePerUnit) = (unitType, pricePerUnit)

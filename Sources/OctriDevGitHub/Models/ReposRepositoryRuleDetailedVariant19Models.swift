@@ -3,27 +3,37 @@
 
 import Foundation
 
-// ReposRepositoryRule domain models
-extension RepositoryRuleDetailedVariant19 {
-    public init(type: RepositoryRuleCopilotCodeReviewType, parameters: RepositoryRuleCopilotCodeReviewParameters? = nil, rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil, rulesetSource: String? = nil, rulesetId: Int? = nil) throws {
+/// ReposRepositoryRule domain models
+public extension RepositoryRuleDetailedVariant19 {
+    init(
+        type: RepositoryRuleCopilotCodeReviewType,
+        parameters: RepositoryRuleCopilotCodeReviewParameters? = nil,
+        rulesetSourceType: RepositoryRuleRulesetInfoRulesetSourceType? = nil,
+        rulesetSource: String? = nil,
+        rulesetId: Int? = nil
+    ) throws {
         (self.type, self.parameters) = (type, parameters)
         (self.rulesetSourceType, self.rulesetSource) = (rulesetSourceType, rulesetSource)
         self.rulesetId = rulesetId
-            try sdkValidateRawEnum("type", self.type, RepositoryRuleCopilotCodeReviewType.allCases.map(\.rawValue))
+        try sdkValidateRawEnum("type", self.type, RepositoryRuleCopilotCodeReviewType.allCases.map(\.rawValue))
     }
 }
 
 /// The type of source for the ruleset that includes this rule.
-public struct RepositoryRuleRulesetInfoRulesetSourceType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct RepositoryRuleRulesetInfoRulesetSourceType: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let repository = RepositoryRuleRulesetInfoRulesetSourceType(rawValue: "Repository")
     public static let organization = RepositoryRuleRulesetInfoRulesetSourceType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

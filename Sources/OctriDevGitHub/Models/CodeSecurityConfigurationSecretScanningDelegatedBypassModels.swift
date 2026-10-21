@@ -3,19 +3,23 @@
 
 import Foundation
 
-// CodeSecurity domain models
+/// CodeSecurity domain models
 /// The enablement status of secret scanning delegated bypass
-public struct CodeSecurityConfigurationSecretScanningDelegatedBypass: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct CodeSecurityConfigurationSecretScanningDelegatedBypass: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let enabled = CodeSecurityConfigurationSecretScanningDelegatedBypass(rawValue: "enabled")
     public static let disabled = CodeSecurityConfigurationSecretScanningDelegatedBypass(rawValue: "disabled")
     public static let notSet = CodeSecurityConfigurationSecretScanningDelegatedBypass(rawValue: "not_set")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

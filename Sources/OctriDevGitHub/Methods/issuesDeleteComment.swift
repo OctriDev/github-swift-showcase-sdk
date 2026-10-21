@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension IssuesMethods {
-    /// You can use the REST API to delete comments on issues and pull requests. Every pull request is an issue, but not every issue is a pull request.
+public extension IssuesMethods {
+    /// You can use the REST API to delete comments on issues and pull requests. Every pull request is an issue, but not
+    /// every issue is a pull request.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -15,13 +16,42 @@ extension IssuesMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - commentId: The unique identifier of the comment.
-    public static func issuesDeleteComment(config: ClientConfig, owner: String, repo: String, commentId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/issues/comments/", sdkEncodePathSegment(sdkWireString(commentId))].joined(), config: config, decoder: .empty, operationId: "issuesDeleteComment", options: requestOptions)).data
+    static func issuesDeleteComment(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        commentId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/issues/comments/",
+                sdkEncodePathSegment(sdkWireString(commentId)),
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "issuesDeleteComment",
+            options: requestOptions
+        )).data
     }
 
-    /// Pins an issue comment in the specified repository. Use `owner`, `repo`, and `comment_id` to identify the comment to pin. The response includes the comment and details about who pinned it and when.
+    /// Pins an issue comment in the specified repository. Use `owner`, `repo`, and `comment_id` to identify the comment
+    /// to pin. The response includes the comment and details about who pinned it and when.
     ///
-    /// You can use the REST API to pin comments on issues. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text only representation of the markdown body. Response will include `body_text`. - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    /// You can use the REST API to pin comments on issues. This endpoint supports the following custom media types. For
+    /// more information, see "[Media
+    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
+    /// **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the
+    /// default if you do not pass any specific media type. - **`application/vnd.github.text+json`**: Returns a text
+    /// only representation of the markdown body. Response will include `body_text`. -
+    /// **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include
+    /// `body_html`. - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response
+    /// will include `body`, `body_text`, and `body_html`.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -29,7 +59,35 @@ extension IssuesMethods {
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
     /// - commentId: The unique identifier of the comment.
-    public static func issuesPinComment(config: ClientConfig, owner: String, repo: String, commentId: Int, requestOptions: RequestOptions? = nil) async throws -> IssueComment {
-        return try (await sdkRequest("PUT", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/issues/comments/", sdkEncodePathSegment(sdkWireString(commentId)), "/pin"].joined(), config: config, decoder: .json, operationId: "issuesPinComment", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "410": BasicError.self, "422": ValidationError.self])).data
+    static func issuesPinComment(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        commentId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> IssueComment {
+        try await (sdkRequest(
+            "PUT",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/issues/comments/",
+                sdkEncodePathSegment(sdkWireString(commentId)),
+                "/pin",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "issuesPinComment",
+            options: requestOptions,
+            errors: [
+                "401": BasicError.self,
+                "403": BasicError.self,
+                "404": BasicError.self,
+                "410": BasicError.self,
+                "422": ValidationError.self,
+            ]
+        )).data
     }
 }

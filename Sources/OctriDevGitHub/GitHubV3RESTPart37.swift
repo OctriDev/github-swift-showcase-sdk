@@ -3,45 +3,127 @@
 
 import Foundation
 
-extension CodespacesNamespace {
-/// Updates a codespace owned by the authenticated user. Currently only the codespace's machine type and recent folders can be modified using this endpoint. If you specify a new machine type it will be applied the next time your codespace is started. OAuth app tokens and personal access tokens (classic) need the `codespace` scope to use this endpoint.
-    public func updateForAuthenticatedUser(codespaceName: String, machine: String? = nil, displayName: String? = nil, recentFolders: [String]? = nil, requestOptions: RequestOptions? = nil) async throws -> Codespace {
-        return try await CodespacesMethods.codespacesUpdateForAuthenticatedUser(config: config, codespaceName: codespaceName, machine: machine, displayName: displayName, recentFolders: recentFolders, requestOptions: requestOptions)
+public extension CodespacesNamespace {
+    /// Updates a codespace owned by the authenticated user. Currently only the codespace's machine type and recent
+    /// folders can be modified using this endpoint. If you specify a new machine type it will be applied the next time
+    /// your codespace is started. OAuth app tokens and personal access tokens (classic) need the `codespace` scope to
+    /// use this endpoint.
+    func updateForAuthenticatedUser(
+        codespaceName: String,
+        machine: String? = nil,
+        displayName: String? = nil,
+        recentFolders: [String]? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Codespace {
+        try await CodespacesMethods.codespacesUpdateForAuthenticatedUser(
+            config: config,
+            codespaceName: codespaceName,
+            machine: machine,
+            displayName: displayName,
+            recentFolders: recentFolders,
+            requestOptions: requestOptions
+        )
     }
 
-/// Deletes a user's codespace. OAuth app tokens and personal access tokens (classic) need the `codespace` scope to use this endpoint.
-    public func deleteForAuthenticatedUser(codespaceName: String, requestOptions: RequestOptions? = nil) async throws -> [String: JSONValue] {
-        return try await CodespacesMethods.codespacesDeleteForAuthenticatedUser(config: config, codespaceName: codespaceName, requestOptions: requestOptions)
+    /// Deletes a user's codespace. OAuth app tokens and personal access tokens (classic) need the `codespace` scope to
+    /// use this endpoint.
+    func deleteForAuthenticatedUser(
+        codespaceName: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [String: JSONValue] {
+        try await CodespacesMethods.codespacesDeleteForAuthenticatedUser(
+            config: config,
+            codespaceName: codespaceName,
+            requestOptions: requestOptions
+        )
     }
 
-/// Triggers an export of the specified codespace and returns a URL and ID where the status of the export can be monitored. If changes cannot be pushed to the codespace's repository, they will be pushed to a new or previously-existing fork instead. OAuth app tokens and personal access tokens (classic) need the `codespace` scope to use this endpoint.
-    public func exportForAuthenticatedUser(codespaceName: String, requestOptions: RequestOptions? = nil) async throws -> CodespaceExportDetails {
-        return try await CodespacesMethods.codespacesExportForAuthenticatedUser(config: config, codespaceName: codespaceName, requestOptions: requestOptions)
+    /// Triggers an export of the specified codespace and returns a URL and ID where the status of the export can be
+    /// monitored. If changes cannot be pushed to the codespace's repository, they will be pushed to a new or
+    /// previously-existing fork instead. OAuth app tokens and personal access tokens (classic) need the `codespace`
+    /// scope to use this endpoint.
+    func exportForAuthenticatedUser(
+        codespaceName: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CodespaceExportDetails {
+        try await CodespacesMethods.codespacesExportForAuthenticatedUser(
+            config: config,
+            codespaceName: codespaceName,
+            requestOptions: requestOptions
+        )
     }
 
-/// Gets information about an export of a codespace. OAuth app tokens and personal access tokens (classic) need the `codespace` scope to use this endpoint.
-    public func getExportDetailsForAuthenticatedUser(codespaceName: String, exportId: String, requestOptions: RequestOptions? = nil) async throws -> CodespaceExportDetails {
-        return try await CodespacesMethods.codespacesGetExportDetailsForAuthenticatedUser(config: config, codespaceName: codespaceName, exportId: exportId, requestOptions: requestOptions)
+    /// Gets information about an export of a codespace. OAuth app tokens and personal access tokens (classic) need the
+    /// `codespace` scope to use this endpoint.
+    func getExportDetailsForAuthenticatedUser(
+        codespaceName: String,
+        exportId: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CodespaceExportDetails {
+        try await CodespacesMethods.codespacesGetExportDetailsForAuthenticatedUser(
+            config: config,
+            codespaceName: codespaceName,
+            exportId: exportId,
+            requestOptions: requestOptions
+        )
     }
 
-/// List the machine types a codespace can transition to use. OAuth app tokens and personal access tokens (classic) need the `codespace` scope to use this endpoint.
-    public func codespaceMachinesForAuthenticatedUser(codespaceName: String, requestOptions: RequestOptions? = nil) async throws -> CodespacesCodespaceMachinesForAuthenticatedUserResponse {
-        return try await CodespacesMethods.codespacesCodespaceMachinesForAuthenticatedUser(config: config, codespaceName: codespaceName, requestOptions: requestOptions)
+    /// List the machine types a codespace can transition to use. OAuth app tokens and personal access tokens (classic)
+    /// need the `codespace` scope to use this endpoint.
+    func codespaceMachinesForAuthenticatedUser(
+        codespaceName: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CodespacesCodespaceMachinesForAuthenticatedUserResponse {
+        try await CodespacesMethods.codespacesCodespaceMachinesForAuthenticatedUser(
+            config: config,
+            codespaceName: codespaceName,
+            requestOptions: requestOptions
+        )
     }
 
-/// Publishes an unpublished codespace, creating a new repository and assigning it to the codespace. The codespace's token is granted write permissions to the repository, allowing the user to push their changes. This will fail for a codespace that is already published, meaning it has an associated repository. OAuth app tokens and personal access tokens (classic) need the `codespace` scope to use this endpoint.
-    public func publishForAuthenticatedUser(codespaceName: String, name: String? = nil, private: Bool? = nil, requestOptions: RequestOptions? = nil) async throws -> CodespaceWithFullRepository {
-        return try await CodespacesMethods.codespacesPublishForAuthenticatedUser(config: config, codespaceName: codespaceName, name: name, private: `private`, requestOptions: requestOptions)
+    /// Publishes an unpublished codespace, creating a new repository and assigning it to the codespace. The codespace's
+    /// token is granted write permissions to the repository, allowing the user to push their changes. This will fail
+    /// for a codespace that is already published, meaning it has an associated repository. OAuth app tokens and
+    /// personal access tokens (classic) need the `codespace` scope to use this endpoint.
+    func publishForAuthenticatedUser(
+        codespaceName: String,
+        name: String? = nil,
+        private: Bool? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CodespaceWithFullRepository {
+        try await CodespacesMethods.codespacesPublishForAuthenticatedUser(
+            config: config,
+            codespaceName: codespaceName,
+            name: name,
+            private: `private`,
+            requestOptions: requestOptions
+        )
     }
 
-/// Starts a user's codespace. OAuth app tokens and personal access tokens (classic) need the `codespace` scope to use this endpoint.
-    public func startForAuthenticatedUser(codespaceName: String, requestOptions: RequestOptions? = nil) async throws -> Codespace {
-        return try await CodespacesMethods.codespacesStartForAuthenticatedUser(config: config, codespaceName: codespaceName, requestOptions: requestOptions)
+    /// Starts a user's codespace. OAuth app tokens and personal access tokens (classic) need the `codespace` scope to
+    /// use this endpoint.
+    func startForAuthenticatedUser(
+        codespaceName: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Codespace {
+        try await CodespacesMethods.codespacesStartForAuthenticatedUser(
+            config: config,
+            codespaceName: codespaceName,
+            requestOptions: requestOptions
+        )
     }
 
-/// Stops a user's codespace. OAuth app tokens and personal access tokens (classic) need the `codespace` scope to use this endpoint.
-    public func stopForAuthenticatedUser(codespaceName: String, requestOptions: RequestOptions? = nil) async throws -> Codespace {
-        return try await CodespacesMethods.codespacesStopForAuthenticatedUser(config: config, codespaceName: codespaceName, requestOptions: requestOptions)
+    /// Stops a user's codespace. OAuth app tokens and personal access tokens (classic) need the `codespace` scope to
+    /// use this endpoint.
+    func stopForAuthenticatedUser(
+        codespaceName: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Codespace {
+        try await CodespacesMethods.codespacesStopForAuthenticatedUser(
+            config: config,
+            codespaceName: codespaceName,
+            requestOptions: requestOptions
+        )
     }
 }
 
@@ -51,85 +133,366 @@ public class CopilotSpacesNamespace {
         self.config = config
     }
 
-/// Lists Copilot Spaces owned by an organization. The authenticated user must have read access to the organization's Copilot Spaces. Only Spaces that are readable by the authenticated user are returned. This includes public Spaces and internal Spaces if the user is a member of the organization. OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint. Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in a space; spaces with inaccessible resources are omitted from the response.
-    public func listForOrg(org: String, perPage: Int? = nil, before: String? = nil, after: String? = nil, requestOptions: RequestOptions? = nil) async throws -> CopilotSpacesListForOrgResponse {
-        return try await CopilotSpacesMethods.copilotSpacesListForOrg(config: config, org: org, perPage: perPage, before: before, after: after, requestOptions: requestOptions)
+    /// Lists Copilot Spaces owned by an organization. The authenticated user must have read access to the
+    /// organization's Copilot Spaces. Only Spaces that are readable by the authenticated user are returned. This
+    /// includes public Spaces and internal Spaces if the user is a member of the organization. OAuth app tokens and
+    /// personal access tokens (classic) need the `read:org` scope to use this endpoint. Fine-grained tokens and GitHub
+    /// App user access tokens must have been granted access to the organization that owns the space. They must also
+    /// have been granted access to every repository referenced by resources in a space; spaces with inaccessible
+    /// resources are omitted from the response.
+    public func listForOrg(
+        org: String,
+        perPage: Int? = nil,
+        before: String? = nil,
+        after: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CopilotSpacesListForOrgResponse {
+        try await CopilotSpacesMethods.copilotSpacesListForOrg(
+            config: config,
+            org: org,
+            perPage: perPage,
+            before: before,
+            after: after,
+            requestOptions: requestOptions
+        )
     }
 
-/// Creates a new Copilot Space owned by an organization. The authenticated user must have permissions to create spaces in the organization. Organization members with appropriate permissions can create Copilot Spaces to be shared within their organization. OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint. Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by the submitted resources.
-    public func createForOrg(org: String, name: String, description: String? = nil, generalInstructions: String? = nil, baseRole: CopilotSpacesCreateForOrgRequestBodyBaseRole? = nil, resourcesAttributes: [CopilotSpacesCreateForOrgRequestBodyResourcesAttributesItem]? = nil, requestOptions: RequestOptions? = nil) async throws -> CopilotSpace {
-        return try await CopilotSpacesMethods.copilotSpacesCreateForOrg(config: config, org: org, name: name, description: description, generalInstructions: generalInstructions, baseRole: baseRole, resourcesAttributes: resourcesAttributes, requestOptions: requestOptions)
+    /// Creates a new Copilot Space owned by an organization. The authenticated user must have permissions to create
+    /// spaces in the organization. Organization members with appropriate permissions can create Copilot Spaces to be
+    /// shared within their organization. OAuth app tokens and personal access tokens (classic) need the `read:org`
+    /// scope to use this endpoint. Fine-grained tokens and GitHub App user access tokens must have been granted access
+    /// to the organization that owns the space. They must also have been granted access to every repository referenced
+    /// by the submitted resources.
+    public func createForOrg(
+        org: String,
+        name: String,
+        description: String? = nil,
+        generalInstructions: String? = nil,
+        baseRole: CopilotSpacesCreateForOrgRequestBodyBaseRole? = nil,
+        resourcesAttributes: [CopilotSpacesCreateForOrgRequestBodyResourcesAttributesItem]? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CopilotSpace {
+        try await CopilotSpacesMethods.copilotSpacesCreateForOrg(
+            config: config,
+            org: org,
+            name: name,
+            description: description,
+            generalInstructions: generalInstructions,
+            baseRole: baseRole,
+            resourcesAttributes: resourcesAttributes,
+            requestOptions: requestOptions
+        )
     }
 
-/// Gets details about a specific Copilot Space owned by an organization. The authenticated user must have read access to the Space. Internal Spaces require the authenticated user to be a member of the organization or have been granted read permissions. OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint. Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
-    public func getForOrg(org: String, spaceNumber: Int, requestOptions: RequestOptions? = nil) async throws -> CopilotSpace {
-        return try await CopilotSpacesMethods.copilotSpacesGetForOrg(config: config, org: org, spaceNumber: spaceNumber, requestOptions: requestOptions)
+    /// Gets details about a specific Copilot Space owned by an organization. The authenticated user must have read
+    /// access to the Space. Internal Spaces require the authenticated user to be a member of the organization or have
+    /// been granted read permissions. OAuth app tokens and personal access tokens (classic) need the `read:org` scope
+    /// to use this endpoint. Fine-grained tokens and GitHub App user access tokens must have been granted access to the
+    /// organization that owns the space. They must also have been granted access to every repository referenced by
+    /// resources in the space.
+    public func getForOrg(
+        org: String,
+        spaceNumber: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CopilotSpace {
+        try await CopilotSpacesMethods.copilotSpacesGetForOrg(
+            config: config,
+            org: org,
+            spaceNumber: spaceNumber,
+            requestOptions: requestOptions
+        )
     }
 
-/// Updates a Copilot Space owned by an organization. The authenticated user must have permissions to update spaces in the organization. Organization members with appropriate permissions can update Copilot Spaces owned by their organization. OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint. Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space, including any being added or updated.
-    public func updateForOrg(org: String, spaceNumber: Int, name: String? = nil, description: String? = nil, generalInstructions: String? = nil, baseRole: CopilotSpacesUpdateForOrgRequestBodyBaseRole? = nil, resourcesAttributes: [CopilotSpacesUpdateForOrgRequestBodyResourcesAttributesItem]? = nil, requestOptions: RequestOptions? = nil) async throws -> CopilotSpace {
-        return try await CopilotSpacesMethods.copilotSpacesUpdateForOrg(config: config, org: org, spaceNumber: spaceNumber, name: name, description: description, generalInstructions: generalInstructions, baseRole: baseRole, resourcesAttributes: resourcesAttributes, requestOptions: requestOptions)
+    /// Updates a Copilot Space owned by an organization. The authenticated user must have permissions to update spaces
+    /// in the organization. Organization members with appropriate permissions can update Copilot Spaces owned by their
+    /// organization. OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this
+    /// endpoint. Fine-grained tokens and GitHub App user access tokens must have been granted access to the
+    /// organization that owns the space. They must also have been granted access to every repository referenced by
+    /// resources in the space, including any being added or updated.
+    public func updateForOrg(
+        org: String,
+        spaceNumber: Int,
+        name: String? = nil,
+        description: String? = nil,
+        generalInstructions: String? = nil,
+        baseRole: CopilotSpacesUpdateForOrgRequestBodyBaseRole? = nil,
+        resourcesAttributes: [CopilotSpacesUpdateForOrgRequestBodyResourcesAttributesItem]? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CopilotSpace {
+        try await CopilotSpacesMethods.copilotSpacesUpdateForOrg(
+            config: config,
+            org: org,
+            spaceNumber: spaceNumber,
+            name: name,
+            description: description,
+            generalInstructions: generalInstructions,
+            baseRole: baseRole,
+            resourcesAttributes: resourcesAttributes,
+            requestOptions: requestOptions
+        )
     }
 
-/// Deletes a Copilot Space owned by an organization. The authenticated user must have permissions to delete spaces in the organization. **Warning:** This action is permanent and cannot be undone. Deleting a Copilot Space will remove all associated resources and configurations. Organization members with appropriate permissions can delete Copilot Spaces owned by their organization. OAuth app tokens and personal access tokens (classic) need both the `read:org` and `repo` scopes to use this endpoint. Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
-    public func deleteForOrg(org: String, spaceNumber: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await CopilotSpacesMethods.copilotSpacesDeleteForOrg(config: config, org: org, spaceNumber: spaceNumber, requestOptions: requestOptions)
+    /// Deletes a Copilot Space owned by an organization. The authenticated user must have permissions to delete spaces
+    /// in the organization. **Warning:** This action is permanent and cannot be undone. Deleting a Copilot Space will
+    /// remove all associated resources and configurations. Organization members with appropriate permissions can delete
+    /// Copilot Spaces owned by their organization. OAuth app tokens and personal access tokens (classic) need both the
+    /// `read:org` and `repo` scopes to use this endpoint. Fine-grained tokens and GitHub App user access tokens must
+    /// have been granted access to the organization that owns the space. They must also have been granted access to
+    /// every repository referenced by resources in the space.
+    public func deleteForOrg(
+        org: String,
+        spaceNumber: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await CopilotSpacesMethods.copilotSpacesDeleteForOrg(
+            config: config,
+            org: org,
+            spaceNumber: spaceNumber,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists all collaborators for a specific Copilot Space owned by an organization. The authenticated user must have appropriate permissions to view collaborators. Each collaborator entry specifies which user or team has access to the space and at what level (reader, writer, or admin). The space owner (organization) is excluded from this list. **Note:** Team collaborators listed here are teams that are defined in the organization. OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint. Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
-    public func listCollaboratorsForOrg(org: String, spaceNumber: Int, requestOptions: RequestOptions? = nil) async throws -> CopilotSpacesListCollaboratorsForOrgResponse {
-        return try await CopilotSpacesMethods.copilotSpacesListCollaboratorsForOrg(config: config, org: org, spaceNumber: spaceNumber, requestOptions: requestOptions)
+    /// Lists all collaborators for a specific Copilot Space owned by an organization. The authenticated user must have
+    /// appropriate permissions to view collaborators. Each collaborator entry specifies which user or team has access
+    /// to the space and at what level (reader, writer, or admin). The space owner (organization) is excluded from this
+    /// list. **Note:** Team collaborators listed here are teams that are defined in the organization. OAuth app tokens
+    /// and personal access tokens (classic) need the `read:org` scope to use this endpoint. Fine-grained tokens and
+    /// GitHub App user access tokens must have been granted access to the organization that owns the space. They must
+    /// also have been granted access to every repository referenced by resources in the space.
+    public func listCollaboratorsForOrg(
+        org: String,
+        spaceNumber: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CopilotSpacesListCollaboratorsForOrgResponse {
+        try await CopilotSpacesMethods.copilotSpacesListCollaboratorsForOrg(
+            config: config,
+            org: org,
+            spaceNumber: spaceNumber,
+            requestOptions: requestOptions
+        )
     }
 
-/// Adds a collaborator (user or team) to a specific Copilot Space owned by an organization. The authenticated user must have appropriate permissions to manage collaborators. **Note:** When adding users as collaborators, they must already be members of the organization. When adding teams as collaborators, they must be defined in the organization. OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint. Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
-    public func addCollaboratorForOrg(org: String, spaceNumber: Int, actorType: CopilotSpacesAddCollaboratorForOrgRequestBodyActorType, actorIdentifier: String, role: CopilotSpacesAddCollaboratorForOrgRequestBodyRole, requestOptions: RequestOptions? = nil) async throws -> CopilotSpaceCollaborator {
-        return try await CopilotSpacesMethods.copilotSpacesAddCollaboratorForOrg(config: config, org: org, spaceNumber: spaceNumber, actorType: actorType, actorIdentifier: actorIdentifier, role: role, requestOptions: requestOptions)
+    /// Adds a collaborator (user or team) to a specific Copilot Space owned by an organization. The authenticated user
+    /// must have appropriate permissions to manage collaborators. **Note:** When adding users as collaborators, they
+    /// must already be members of the organization. When adding teams as collaborators, they must be defined in the
+    /// organization. OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this
+    /// endpoint. Fine-grained tokens and GitHub App user access tokens must have been granted access to the
+    /// organization that owns the space. They must also have been granted access to every repository referenced by
+    /// resources in the space.
+    public func addCollaboratorForOrg(
+        org: String,
+        spaceNumber: Int,
+        actorType: CopilotSpacesAddCollaboratorForOrgRequestBodyActorType,
+        actorIdentifier: String,
+        role: CopilotSpacesAddCollaboratorForOrgRequestBodyRole,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CopilotSpaceCollaborator {
+        try await CopilotSpacesMethods.copilotSpacesAddCollaboratorForOrg(
+            config: config,
+            org: org,
+            spaceNumber: spaceNumber,
+            actorType: actorType,
+            actorIdentifier: actorIdentifier,
+            role: role,
+            requestOptions: requestOptions
+        )
     }
 
-/// Updates the role of a collaborator for a specific Copilot Space owned by an organization. The authenticated user must have appropriate permissions to manage collaborators. OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint. Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
-    public func updateCollaboratorForOrg(org: String, spaceNumber: Int, actorType: CopilotSpacesUpdateCollaboratorForOrgParameter, actorIdentifier: String, role: CopilotSpacesUpdateCollaboratorForOrgRequestBodyRole, requestOptions: RequestOptions? = nil) async throws -> CopilotSpaceCollaborator {
-        return try await CopilotSpacesMethods.copilotSpacesUpdateCollaboratorForOrg(config: config, org: org, spaceNumber: spaceNumber, actorType: actorType, actorIdentifier: actorIdentifier, role: role, requestOptions: requestOptions)
+    /// Updates the role of a collaborator for a specific Copilot Space owned by an organization. The authenticated user
+    /// must have appropriate permissions to manage collaborators. OAuth app tokens and personal access tokens (classic)
+    /// need the `write:org` scope to use this endpoint. Fine-grained tokens and GitHub App user access tokens must have
+    /// been granted access to the organization that owns the space. They must also have been granted access to every
+    /// repository referenced by resources in the space.
+    public func updateCollaboratorForOrg(
+        org: String,
+        spaceNumber: Int,
+        actorType: CopilotSpacesUpdateCollaboratorForOrgParameter,
+        actorIdentifier: String,
+        role: CopilotSpacesUpdateCollaboratorForOrgRequestBodyRole,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CopilotSpaceCollaborator {
+        try await CopilotSpacesMethods.copilotSpacesUpdateCollaboratorForOrg(
+            config: config,
+            org: org,
+            spaceNumber: spaceNumber,
+            actorType: actorType,
+            actorIdentifier: actorIdentifier,
+            role: role,
+            requestOptions: requestOptions
+        )
     }
 }
 
-extension CopilotSpacesNamespace {
-/// Removes a collaborator from a specific Copilot Space owned by an organization. The authenticated user must have appropriate permissions to manage collaborators. OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint. Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
-    public func removeCollaboratorForOrg(org: String, spaceNumber: Int, actorType: CopilotSpacesRemoveCollaboratorForOrgParameter, actorIdentifier: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await CopilotSpacesMethods.copilotSpacesRemoveCollaboratorForOrg(config: config, org: org, spaceNumber: spaceNumber, actorType: actorType, actorIdentifier: actorIdentifier, requestOptions: requestOptions)
+public extension CopilotSpacesNamespace {
+    /// Removes a collaborator from a specific Copilot Space owned by an organization. The authenticated user must have
+    /// appropriate permissions to manage collaborators. OAuth app tokens and personal access tokens (classic) need the
+    /// `write:org` scope to use this endpoint. Fine-grained tokens and GitHub App user access tokens must have been
+    /// granted access to the organization that owns the space. They must also have been granted access to every
+    /// repository referenced by resources in the space.
+    func removeCollaboratorForOrg(
+        org: String,
+        spaceNumber: Int,
+        actorType: CopilotSpacesRemoveCollaboratorForOrgParameter,
+        actorIdentifier: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await CopilotSpacesMethods.copilotSpacesRemoveCollaboratorForOrg(
+            config: config,
+            org: org,
+            spaceNumber: spaceNumber,
+            actorType: actorType,
+            actorIdentifier: actorIdentifier,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists all resources attached to a specific Copilot Space owned by an organization. The authenticated user must have appropriate permissions to view the space. OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint. Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
-    public func listResourcesForOrg(org: String, spaceNumber: Int, requestOptions: RequestOptions? = nil) async throws -> CopilotSpacesListResourcesForOrgResponse {
-        return try await CopilotSpacesMethods.copilotSpacesListResourcesForOrg(config: config, org: org, spaceNumber: spaceNumber, requestOptions: requestOptions)
+    /// Lists all resources attached to a specific Copilot Space owned by an organization. The authenticated user must
+    /// have appropriate permissions to view the space. OAuth app tokens and personal access tokens (classic) need the
+    /// `read:org` scope to use this endpoint. Fine-grained tokens and GitHub App user access tokens must have been
+    /// granted access to the organization that owns the space. They must also have been granted access to every
+    /// repository referenced by resources in the space.
+    func listResourcesForOrg(
+        org: String,
+        spaceNumber: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CopilotSpacesListResourcesForOrgResponse {
+        try await CopilotSpacesMethods.copilotSpacesListResourcesForOrg(
+            config: config,
+            org: org,
+            spaceNumber: spaceNumber,
+            requestOptions: requestOptions
+        )
     }
 
-/// Creates a new resource in a specific Copilot Space owned by an organization. The authenticated user must have write permissions on the space. The following resource types are supported: `repository`, `github_file`, `free_text`, `github_issue`, `github_pull_request`. The `uploaded_text_file` and `media_content` types are not supported via this endpoint. For `github_file` resources, if a resource with the same repository, file path, and SHA already exists, the existing resource is returned with a `200` status. OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint. Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space, including the resource being created.
-    public func createResourceForOrg(org: String, spaceNumber: Int, resourceType: CopilotSpacesCreateResourceForOrgRequestBodyResourceType, metadata: [String: JSONValue], requestOptions: RequestOptions? = nil) async throws -> CopilotSpaceResource {
-        return try await CopilotSpacesMethods.copilotSpacesCreateResourceForOrg(config: config, org: org, spaceNumber: spaceNumber, resourceType: resourceType, metadata: metadata, requestOptions: requestOptions)
+    /// Creates a new resource in a specific Copilot Space owned by an organization. The authenticated user must have
+    /// write permissions on the space. The following resource types are supported: `repository`, `github_file`,
+    /// `free_text`, `github_issue`, `github_pull_request`. The `uploaded_text_file` and `media_content` types are not
+    /// supported via this endpoint. For `github_file` resources, if a resource with the same repository, file path, and
+    /// SHA already exists, the existing resource is returned with a `200` status. OAuth app tokens and personal access
+    /// tokens (classic) need the `write:org` scope to use this endpoint. Fine-grained tokens and GitHub App user access
+    /// tokens must have been granted access to the organization that owns the space. They must also have been granted
+    /// access to every repository referenced by resources in the space, including the resource being created.
+    func createResourceForOrg(
+        org: String,
+        spaceNumber: Int,
+        resourceType: CopilotSpacesCreateResourceForOrgRequestBodyResourceType,
+        metadata: [String: JSONValue],
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CopilotSpaceResource {
+        try await CopilotSpacesMethods.copilotSpacesCreateResourceForOrg(
+            config: config,
+            org: org,
+            spaceNumber: spaceNumber,
+            resourceType: resourceType,
+            metadata: metadata,
+            requestOptions: requestOptions
+        )
     }
 
-/// Gets a specific resource attached to a Copilot Space owned by an organization. The authenticated user must have appropriate permissions to view the space. OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint. Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
-    public func getResourceForOrg(org: String, spaceNumber: Int, spaceResourceId: Int, requestOptions: RequestOptions? = nil) async throws -> CopilotSpaceResource {
-        return try await CopilotSpacesMethods.copilotSpacesGetResourceForOrg(config: config, org: org, spaceNumber: spaceNumber, spaceResourceId: spaceResourceId, requestOptions: requestOptions)
+    /// Gets a specific resource attached to a Copilot Space owned by an organization. The authenticated user must have
+    /// appropriate permissions to view the space. OAuth app tokens and personal access tokens (classic) need the
+    /// `read:org` scope to use this endpoint. Fine-grained tokens and GitHub App user access tokens must have been
+    /// granted access to the organization that owns the space. They must also have been granted access to every
+    /// repository referenced by resources in the space.
+    func getResourceForOrg(
+        org: String,
+        spaceNumber: Int,
+        spaceResourceId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CopilotSpaceResource {
+        try await CopilotSpacesMethods.copilotSpacesGetResourceForOrg(
+            config: config,
+            org: org,
+            spaceNumber: spaceNumber,
+            spaceResourceId: spaceResourceId,
+            requestOptions: requestOptions
+        )
     }
 
-/// Updates the metadata of a resource in a specific Copilot Space owned by an organization. The authenticated user must have write permissions on the space. OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint. Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space, including the resource being updated.
-    public func updateResourceForOrg(org: String, spaceNumber: Int, spaceResourceId: Int, metadata: [String: JSONValue]? = nil, requestOptions: RequestOptions? = nil) async throws -> CopilotSpaceResource {
-        return try await CopilotSpacesMethods.copilotSpacesUpdateResourceForOrg(config: config, org: org, spaceNumber: spaceNumber, spaceResourceId: spaceResourceId, metadata: metadata, requestOptions: requestOptions)
+    /// Updates the metadata of a resource in a specific Copilot Space owned by an organization. The authenticated user
+    /// must have write permissions on the space. OAuth app tokens and personal access tokens (classic) need the
+    /// `write:org` scope to use this endpoint. Fine-grained tokens and GitHub App user access tokens must have been
+    /// granted access to the organization that owns the space. They must also have been granted access to every
+    /// repository referenced by resources in the space, including the resource being updated.
+    func updateResourceForOrg(
+        org: String,
+        spaceNumber: Int,
+        spaceResourceId: Int,
+        metadata: [String: JSONValue]? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CopilotSpaceResource {
+        try await CopilotSpacesMethods.copilotSpacesUpdateResourceForOrg(
+            config: config,
+            org: org,
+            spaceNumber: spaceNumber,
+            spaceResourceId: spaceResourceId,
+            metadata: metadata,
+            requestOptions: requestOptions
+        )
     }
 
-/// Deletes a resource from a specific Copilot Space owned by an organization. The authenticated user must have write permissions on the space. OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint. Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
-    public func deleteResourceForOrg(org: String, spaceNumber: Int, spaceResourceId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await CopilotSpacesMethods.copilotSpacesDeleteResourceForOrg(config: config, org: org, spaceNumber: spaceNumber, spaceResourceId: spaceResourceId, requestOptions: requestOptions)
+    /// Deletes a resource from a specific Copilot Space owned by an organization. The authenticated user must have
+    /// write permissions on the space. OAuth app tokens and personal access tokens (classic) need the `write:org` scope
+    /// to use this endpoint. Fine-grained tokens and GitHub App user access tokens must have been granted access to the
+    /// organization that owns the space. They must also have been granted access to every repository referenced by
+    /// resources in the space.
+    func deleteResourceForOrg(
+        org: String,
+        spaceNumber: Int,
+        spaceResourceId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await CopilotSpacesMethods.copilotSpacesDeleteResourceForOrg(
+            config: config,
+            org: org,
+            spaceNumber: spaceNumber,
+            spaceResourceId: spaceResourceId,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists Copilot Spaces owned by a user. The authenticated user must have read access to the user's Copilot Spaces. Only Spaces that are readable by the authenticated user are returned. This includes the user's own spaces, and public user spaces when accessing another user's spaces. OAuth app tokens and personal access tokens (classic) need the `read:user` scope to use this endpoint.
-    public func listForUser(username: String, perPage: Int? = nil, before: String? = nil, after: String? = nil, requestOptions: RequestOptions? = nil) async throws -> CopilotSpacesListForUserResponse {
-        return try await CopilotSpacesMethods.copilotSpacesListForUser(config: config, username: username, perPage: perPage, before: before, after: after, requestOptions: requestOptions)
+    /// Lists Copilot Spaces owned by a user. The authenticated user must have read access to the user's Copilot Spaces.
+    /// Only Spaces that are readable by the authenticated user are returned. This includes the user's own spaces, and
+    /// public user spaces when accessing another user's spaces. OAuth app tokens and personal access tokens (classic)
+    /// need the `read:user` scope to use this endpoint.
+    func listForUser(
+        username: String,
+        perPage: Int? = nil,
+        before: String? = nil,
+        after: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CopilotSpacesListForUserResponse {
+        try await CopilotSpacesMethods.copilotSpacesListForUser(
+            config: config,
+            username: username,
+            perPage: perPage,
+            before: before,
+            after: after,
+            requestOptions: requestOptions
+        )
     }
 
-/// Creates a new Copilot Space owned by a user. Only the authenticated user can create spaces for their own account. Users can create personal Copilot Spaces for their individual use. OAuth app tokens and personal access tokens (classic) need the `read:user` scope to use this endpoint.
-    public func createForUser(username: String, name: String, description: String? = nil, generalInstructions: String? = nil, baseRole: CopilotSpacesCreateForUserRequestBodyBaseRole? = nil, resourcesAttributes: [CopilotSpacesCreateForUserRequestBodyResourcesAttributesItem]? = nil, requestOptions: RequestOptions? = nil) async throws -> CopilotSpace {
-        return try await CopilotSpacesMethods.copilotSpacesCreateForUser(config: config, username: username, name: name, description: description, generalInstructions: generalInstructions, baseRole: baseRole, resourcesAttributes: resourcesAttributes, requestOptions: requestOptions)
+    /// Creates a new Copilot Space owned by a user. Only the authenticated user can create spaces for their own
+    /// account. Users can create personal Copilot Spaces for their individual use. OAuth app tokens and personal access
+    /// tokens (classic) need the `read:user` scope to use this endpoint.
+    func createForUser(
+        username: String,
+        name: String,
+        description: String? = nil,
+        generalInstructions: String? = nil,
+        baseRole: CopilotSpacesCreateForUserRequestBodyBaseRole? = nil,
+        resourcesAttributes: [CopilotSpacesCreateForUserRequestBodyResourcesAttributesItem]? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CopilotSpace {
+        try await CopilotSpacesMethods.copilotSpacesCreateForUser(
+            config: config,
+            username: username,
+            name: name,
+            description: description,
+            generalInstructions: generalInstructions,
+            baseRole: baseRole,
+            resourcesAttributes: resourcesAttributes,
+            requestOptions: requestOptions
+        )
     }
 }

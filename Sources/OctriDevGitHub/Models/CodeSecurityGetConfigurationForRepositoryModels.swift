@@ -3,7 +3,7 @@
 
 import Foundation
 
-// CodeSecurity domain models
+/// CodeSecurity domain models
 /// Code security configuration associated with a repository and attachment status
 public struct CodeSecurityConfigurationForRepository: Codable {
     /// The attachment status of the code security configuration on the repository.
@@ -17,30 +17,34 @@ public struct CodeSecurityConfigurationForRepository: Codable {
     }
 
     init() {
-        (self.status, self.configuration) = (nil, nil)
+        (status, configuration) = (nil, nil)
     }
 }
 
-extension CodeSecurityConfigurationForRepository {
-    public init(from decoder: Decoder) throws {
+public extension CodeSecurityConfigurationForRepository {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.status = try container.sdkDecodeIfPresent(.status)
-        self.configuration = try container.sdkDecodeIfPresent(.configuration)
+        status = try container.sdkDecodeIfPresent(.status)
+        configuration = try container.sdkDecodeIfPresent(.configuration)
     }
 }
 
-extension CodeSecurityConfigurationForRepository {
-    public init(status: CodeSecurityConfigurationForRepositoryStatus? = nil, configuration: CodeSecurityConfiguration? = nil) {
+public extension CodeSecurityConfigurationForRepository {
+    init(status: CodeSecurityConfigurationForRepositoryStatus? = nil, configuration: CodeSecurityConfiguration? = nil) {
         self.init()
         (self.status, self.configuration) = (status, configuration)
     }
 }
 
 /// The attachment status of the code security configuration on the repository.
-public struct CodeSecurityConfigurationForRepositoryStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct CodeSecurityConfigurationForRepositoryStatus: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let attached = CodeSecurityConfigurationForRepositoryStatus(rawValue: "attached")
     public static let attaching = CodeSecurityConfigurationForRepositoryStatus(rawValue: "attaching")
     public static let detached = CodeSecurityConfigurationForRepositoryStatus(rawValue: "detached")
@@ -48,12 +52,13 @@ public struct CodeSecurityConfigurationForRepositoryStatus: RawRepresentable, Ha
     public static let enforced = CodeSecurityConfigurationForRepositoryStatus(rawValue: "enforced")
     public static let failed = CodeSecurityConfigurationForRepositoryStatus(rawValue: "failed")
     public static let updating = CodeSecurityConfigurationForRepositoryStatus(rawValue: "updating")
-    public static let removedByEnterprise = CodeSecurityConfigurationForRepositoryStatus(rawValue: "removed_by_enterprise")
+    public static let removedByEnterprise =
+        CodeSecurityConfigurationForRepositoryStatus(rawValue: "removed_by_enterprise")
     public static let enterpriseEnforced = CodeSecurityConfigurationForRepositoryStatus(rawValue: "enterprise_enforced")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

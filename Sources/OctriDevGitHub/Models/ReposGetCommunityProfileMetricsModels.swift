@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Repos domain models
+/// Repos domain models
 /// Required object value serialized in the `files` wire field.
 public struct CommunityProfileFiles: Codable {
     /// Code of Conduct Simple
@@ -31,45 +31,83 @@ public struct CommunityProfileFiles: Codable {
         case pullRequestTemplate = "pull_request_template"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension CommunityProfileFiles {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.codeOfConduct) else {
-            throw SdkValidationError(field: "code_of_conduct", code: "required", message: "Validation failed for 'code_of_conduct': value is required")
-        }
-        guard container.contains(.codeOfConductFile) else {
-            throw SdkValidationError(field: "code_of_conduct_file", code: "required", message: "Validation failed for 'code_of_conduct_file': value is required")
-        }
-        guard container.contains(.license) else {
-            throw SdkValidationError(field: "license", code: "required", message: "Validation failed for 'license': value is required")
-        }
-        guard container.contains(.contributing) else {
-            throw SdkValidationError(field: "contributing", code: "required", message: "Validation failed for 'contributing': value is required")
-        }
-        guard container.contains(.readme) else {
-            throw SdkValidationError(field: "readme", code: "required", message: "Validation failed for 'readme': value is required")
-        }
-        guard container.contains(.issueTemplate) else {
-            throw SdkValidationError(field: "issue_template", code: "required", message: "Validation failed for 'issue_template': value is required")
-        }
-        guard container.contains(.pullRequestTemplate) else {
-            throw SdkValidationError(field: "pull_request_template", code: "required", message: "Validation failed for 'pull_request_template': value is required")
-        }
-        self.codeOfConduct = try container.sdkDecodeNullable(.codeOfConduct)
-        self.codeOfConductFile = try container.sdkDecodeNullable(.codeOfConductFile)
-        self.license = try container.sdkDecodeNullable(.license)
-        self.contributing = try container.sdkDecodeNullable(.contributing)
-        self.readme = try container.sdkDecodeNullable(.readme)
-        self.issueTemplate = try container.sdkDecodeNullable(.issueTemplate)
-        self.pullRequestTemplate = try container.sdkDecodeNullable(.pullRequestTemplate)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension CommunityProfileFiles {
-    public init(codeOfConduct: NullableCodeOfConductSimple?, codeOfConductFile: NullableCommunityHealthFile?, license: NullableLicenseSimple?, contributing: NullableCommunityHealthFile?, readme: NullableCommunityHealthFile?, issueTemplate: NullableCommunityHealthFile?, pullRequestTemplate: NullableCommunityHealthFile?) {
+public extension CommunityProfileFiles {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.codeOfConduct) else {
+            throw SdkValidationError(
+                field: "code_of_conduct",
+                code: "required",
+                message: "Validation failed for 'code_of_conduct': value is required"
+            )
+        }
+        guard container.contains(.codeOfConductFile) else {
+            throw SdkValidationError(
+                field: "code_of_conduct_file",
+                code: "required",
+                message: "Validation failed for 'code_of_conduct_file': value is required"
+            )
+        }
+        guard container.contains(.license) else {
+            throw SdkValidationError(
+                field: "license",
+                code: "required",
+                message: "Validation failed for 'license': value is required"
+            )
+        }
+        guard container.contains(.contributing) else {
+            throw SdkValidationError(
+                field: "contributing",
+                code: "required",
+                message: "Validation failed for 'contributing': value is required"
+            )
+        }
+        guard container.contains(.readme) else {
+            throw SdkValidationError(
+                field: "readme",
+                code: "required",
+                message: "Validation failed for 'readme': value is required"
+            )
+        }
+        guard container.contains(.issueTemplate) else {
+            throw SdkValidationError(
+                field: "issue_template",
+                code: "required",
+                message: "Validation failed for 'issue_template': value is required"
+            )
+        }
+        guard container.contains(.pullRequestTemplate) else {
+            throw SdkValidationError(
+                field: "pull_request_template",
+                code: "required",
+                message: "Validation failed for 'pull_request_template': value is required"
+            )
+        }
+        codeOfConduct = try container.sdkDecodeNullable(.codeOfConduct)
+        codeOfConductFile = try container.sdkDecodeNullable(.codeOfConductFile)
+        license = try container.sdkDecodeNullable(.license)
+        contributing = try container.sdkDecodeNullable(.contributing)
+        readme = try container.sdkDecodeNullable(.readme)
+        issueTemplate = try container.sdkDecodeNullable(.issueTemplate)
+        pullRequestTemplate = try container.sdkDecodeNullable(.pullRequestTemplate)
+    }
+}
+
+public extension CommunityProfileFiles {
+    init(
+        codeOfConduct: NullableCodeOfConductSimple?,
+        codeOfConductFile: NullableCommunityHealthFile?,
+        license: NullableLicenseSimple?,
+        contributing: NullableCommunityHealthFile?,
+        readme: NullableCommunityHealthFile?,
+        issueTemplate: NullableCommunityHealthFile?,
+        pullRequestTemplate: NullableCommunityHealthFile?
+    ) {
         (self.codeOfConduct, self.codeOfConductFile) = (codeOfConduct, codeOfConductFile)
         (self.license, self.contributing) = (license, contributing)
         (self.readme, self.issueTemplate) = (readme, issueTemplate)
@@ -106,41 +144,70 @@ public struct CommunityProfile: Codable {
         case contentReportsEnabled = "content_reports_enabled"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension CommunityProfile {
-    public init(from decoder: Decoder) throws {
+public extension CommunityProfile {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.healthPercentage) else {
-            throw SdkValidationError(field: "health_percentage", code: "required", message: "Validation failed for 'health_percentage': value is required")
+            throw SdkValidationError(
+                field: "health_percentage",
+                code: "required",
+                message: "Validation failed for 'health_percentage': value is required"
+            )
         }
         guard container.contains(.description) else {
-            throw SdkValidationError(field: "description", code: "required", message: "Validation failed for 'description': value is required")
+            throw SdkValidationError(
+                field: "description",
+                code: "required",
+                message: "Validation failed for 'description': value is required"
+            )
         }
         guard container.contains(.documentation) else {
-            throw SdkValidationError(field: "documentation", code: "required", message: "Validation failed for 'documentation': value is required")
+            throw SdkValidationError(
+                field: "documentation",
+                code: "required",
+                message: "Validation failed for 'documentation': value is required"
+            )
         }
         guard container.contains(.files) else {
-            throw SdkValidationError(field: "files", code: "required", message: "Validation failed for 'files': value is required")
+            throw SdkValidationError(
+                field: "files",
+                code: "required",
+                message: "Validation failed for 'files': value is required"
+            )
         }
         guard container.contains(.updatedAt) else {
-            throw SdkValidationError(field: "updated_at", code: "required", message: "Validation failed for 'updated_at': value is required")
+            throw SdkValidationError(
+                field: "updated_at",
+                code: "required",
+                message: "Validation failed for 'updated_at': value is required"
+            )
         }
-        self.healthPercentage = try container.sdkDecodeRequired(.healthPercentage)
-        self.description = try container.sdkDecodeNullable(.description)
-        self.documentation = try container.sdkDecodeNullable(.documentation)
-        self.files = try container.sdkDecodeRequired(.files)
-        self.updatedAt = try container.sdkDecodeNullable(.updatedAt)
-        self.contentReportsEnabled = try container.sdkDecodeIfPresent(.contentReportsEnabled)
-        if let value = self.updatedAt {
+        healthPercentage = try container.sdkDecodeRequired(.healthPercentage)
+        description = try container.sdkDecodeNullable(.description)
+        documentation = try container.sdkDecodeNullable(.documentation)
+        files = try container.sdkDecodeRequired(.files)
+        updatedAt = try container.sdkDecodeNullable(.updatedAt)
+        contentReportsEnabled = try container.sdkDecodeIfPresent(.contentReportsEnabled)
+        if let value = updatedAt {
             try sdkValidateDateTime("updated_at", sdkWireString(value))
         }
     }
 }
 
-extension CommunityProfile {
-    public init(healthPercentage: Int, description: String?, documentation: String?, files: CommunityProfileFiles, updatedAt: Date?, contentReportsEnabled: Bool? = nil) throws {
+public extension CommunityProfile {
+    init(
+        healthPercentage: Int,
+        description: String?,
+        documentation: String?,
+        files: CommunityProfileFiles,
+        updatedAt: Date?,
+        contentReportsEnabled: Bool? = nil
+    ) throws {
         (self.healthPercentage, self.description) = (healthPercentage, description)
         (self.documentation, self.files) = (documentation, files)
         (self.updatedAt, self.contentReportsEnabled) = (updatedAt, contentReportsEnabled)

@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Repos domain models
+/// Repos domain models
 /// A list of errors found in a repo's CODEOWNERS file
 public struct CodeownersErrors: Codable {
     /// Required array value serialized in the `errors` wire field.
@@ -13,21 +13,27 @@ public struct CodeownersErrors: Codable {
         case errors
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension CodeownersErrors {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.errors) else {
-            throw SdkValidationError(field: "errors", code: "required", message: "Validation failed for 'errors': value is required")
-        }
-        self.errors = try container.sdkDecodeRequired(.errors)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension CodeownersErrors {
-    public init(errors: [CodeownersErrorsErrorsItem]) {
+public extension CodeownersErrors {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.errors) else {
+            throw SdkValidationError(
+                field: "errors",
+                code: "required",
+                message: "Validation failed for 'errors': value is required"
+            )
+        }
+        errors = try container.sdkDecodeRequired(.errors)
+    }
+}
+
+public extension CodeownersErrors {
+    init(errors: [CodeownersErrorsErrorsItem]) {
         self.errors = errors
     }
 }
@@ -67,39 +73,69 @@ public struct CodeownersErrorsErrorsItem: Codable {
         case suggestion
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension CodeownersErrorsErrorsItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.line) else {
-            throw SdkValidationError(field: "line", code: "required", message: "Validation failed for 'line': value is required")
-        }
-        guard container.contains(.column) else {
-            throw SdkValidationError(field: "column", code: "required", message: "Validation failed for 'column': value is required")
-        }
-        guard container.contains(.kind) else {
-            throw SdkValidationError(field: "kind", code: "required", message: "Validation failed for 'kind': value is required")
-        }
-        guard container.contains(.message) else {
-            throw SdkValidationError(field: "message", code: "required", message: "Validation failed for 'message': value is required")
-        }
-        guard container.contains(.path) else {
-            throw SdkValidationError(field: "path", code: "required", message: "Validation failed for 'path': value is required")
-        }
-        self.line = try container.sdkDecodeRequired(.line)
-        self.column = try container.sdkDecodeRequired(.column)
-        self.kind = try container.sdkDecodeRequired(.kind)
-        self.message = try container.sdkDecodeRequired(.message)
-        self.path = try container.sdkDecodeRequired(.path)
-        self.source = try container.sdkDecodeIfPresent(.source)
-        self.suggestion = try container.sdkDecodeIfPresent(.suggestion)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension CodeownersErrorsErrorsItem {
-    public init(line: Int, column: Int, kind: String, message: String, path: String, source: String? = nil, suggestion: String? = nil) {
+public extension CodeownersErrorsErrorsItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.line) else {
+            throw SdkValidationError(
+                field: "line",
+                code: "required",
+                message: "Validation failed for 'line': value is required"
+            )
+        }
+        guard container.contains(.column) else {
+            throw SdkValidationError(
+                field: "column",
+                code: "required",
+                message: "Validation failed for 'column': value is required"
+            )
+        }
+        guard container.contains(.kind) else {
+            throw SdkValidationError(
+                field: "kind",
+                code: "required",
+                message: "Validation failed for 'kind': value is required"
+            )
+        }
+        guard container.contains(.message) else {
+            throw SdkValidationError(
+                field: "message",
+                code: "required",
+                message: "Validation failed for 'message': value is required"
+            )
+        }
+        guard container.contains(.path) else {
+            throw SdkValidationError(
+                field: "path",
+                code: "required",
+                message: "Validation failed for 'path': value is required"
+            )
+        }
+        line = try container.sdkDecodeRequired(.line)
+        column = try container.sdkDecodeRequired(.column)
+        kind = try container.sdkDecodeRequired(.kind)
+        message = try container.sdkDecodeRequired(.message)
+        path = try container.sdkDecodeRequired(.path)
+        source = try container.sdkDecodeIfPresent(.source)
+        suggestion = try container.sdkDecodeIfPresent(.suggestion)
+    }
+}
+
+public extension CodeownersErrorsErrorsItem {
+    init(
+        line: Int,
+        column: Int,
+        kind: String,
+        message: String,
+        path: String,
+        source: String? = nil,
+        suggestion: String? = nil
+    ) {
         (self.line, self.column) = (line, column)
         (self.kind, self.message) = (kind, message)
         (self.path, self.source) = (path, source)

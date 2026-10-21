@@ -6,8 +6,10 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension SecretScanningMethods {
-    /// Creates a bypass for a previously push protected secret. The authenticated user must be the original author of the committed secret. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+public extension SecretScanningMethods {
+    /// Creates a bypass for a previously push protected secret. The authenticated user must be the original author of
+    /// the committed secret. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this
+    /// endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -17,9 +19,34 @@ extension SecretScanningMethods {
     /// - reason: The reason for bypassing push protection.
     /// - placeholderId: The ID of the push protection bypass placeholder. This
     ///   value is returned on any push protected routes.
-    public static func secretScanningCreatePushProtectionBypass(config: ClientConfig, owner: String, repo: String, reason: SecretScanningPushProtectionBypassReason, placeholderId: SecretScanningPushProtectionBypassPlaceholderId, requestOptions: RequestOptions? = nil) async throws -> SecretScanningPushProtectionBypass {
-        let requestBody = SecretScanningCreatePushProtectionBypassRequestBody(reason: reason, placeholderId: placeholderId)
+    static func secretScanningCreatePushProtectionBypass(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        reason: SecretScanningPushProtectionBypassReason,
+        placeholderId: SecretScanningPushProtectionBypassPlaceholderId,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SecretScanningPushProtectionBypass {
+        let requestBody = SecretScanningCreatePushProtectionBypassRequestBody(
+            reason: reason,
+            placeholderId: placeholderId
+        )
 
-        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/secret-scanning/push-protection-bypasses"].joined(), config: config, body: requestBody, decoder: .json, operationId: "secretScanningCreatePushProtectionBypass", options: requestOptions, errors: ["503": ServiceUnavailable.self])).data
+        return try await (sdkRequest(
+            "POST",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/secret-scanning/push-protection-bypasses",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "secretScanningCreatePushProtectionBypass",
+            options: requestOptions,
+            errors: ["503": ServiceUnavailable.self]
+        )).data
     }
 }

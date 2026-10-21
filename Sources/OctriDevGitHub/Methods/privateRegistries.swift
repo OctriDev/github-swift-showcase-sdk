@@ -8,8 +8,9 @@ import Foundation
 #endif
 public enum PrivateRegistriesMethods {}
 
-extension PrivateRegistriesMethods {
-    /// Lists all private registry configurations available at the organization-level without revealing their encrypted values. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+public extension PrivateRegistriesMethods {
+    /// Lists all private registry configurations available at the organization-level without revealing their encrypted
+    /// values. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
@@ -21,10 +22,25 @@ extension PrivateRegistriesMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func privateRegistriesListOrgPrivateRegistries(config: ClientConfig, org: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> PrivateRegistriesListOrgPrivateRegistriesResponse {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/private-registries"].joined(), config: config, query: [
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "privateRegistriesListOrgPrivateRegistries", options: requestOptions, errors: ["400": BasicError.self, "404": BasicError.self])).data
+    static func privateRegistriesListOrgPrivateRegistries(
+        config: ClientConfig,
+        org: String,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> PrivateRegistriesListOrgPrivateRegistriesResponse {
+        try await (sdkRequest(
+            "GET",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/private-registries"].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "privateRegistriesListOrgPrivateRegistries",
+            options: requestOptions,
+            errors: ["400": BasicError.self, "404": BasicError.self]
+        )).data
     }
 }

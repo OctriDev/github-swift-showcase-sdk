@@ -6,16 +6,35 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension OrgsMethods {
-    /// Gets all external custom properties defined for the authenticated GitHub App installation on an organization. To use this endpoint, the authenticated GitHub App must have the `organization_external_properties_for_repos:read` permission.
+public extension OrgsMethods {
+    /// Gets all external custom properties defined for the authenticated GitHub App installation on an organization. To
+    /// use this endpoint, the authenticated GitHub App must have the `organization_external_properties_for_repos:read`
+    /// permission.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
-    public static func orgsExternalPropertiesForReposGetOrganizationDefinitions(config: ClientConfig, org: String, requestOptions: RequestOptions? = nil) async throws -> [ExternalProperty] {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/properties/installations/schema"].joined(), config: config, decoder: .json, operationId: "orgsExternalPropertiesForReposGetOrganizationDefinitions", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
+    static func orgsExternalPropertiesForReposGetOrganizationDefinitions(
+        config: ClientConfig,
+        org: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [ExternalProperty] {
+        try await (sdkRequest(
+            "GET",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/properties/installations/schema"].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "orgsExternalPropertiesForReposGetOrganizationDefinitions",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self]
+        )).data
     }
 
-    /// Create new or update existing external custom property values for repositories in a batch that belong to an organization. Each target repository will have its external custom property values updated to match the values provided in the request. A maximum of 30 repositories can be updated in a single request. Using a value of `null` for an external custom property will remove or 'unset' the property value from the repository. To use this endpoint, the authenticated GitHub App must have the `organization_external_properties_for_repos:write` permission.
+    /// Create new or update existing external custom property values for repositories in a batch that belong to an
+    /// organization. Each target repository will have its external custom property values updated to match the values
+    /// provided in the request. A maximum of 30 repositories can be updated in a single request. Using a value of
+    /// `null` for an external custom property will remove or 'unset' the property value from the repository. To use
+    /// this endpoint, the authenticated GitHub App must have the `organization_external_properties_for_repos:write`
+    /// permission.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
@@ -23,12 +42,30 @@ extension OrgsMethods {
     ///   property values will be applied to.
     /// - properties: List of external custom property names and associated values
     ///   to apply to the repositories.
-    public static func orgsExternalPropertiesForReposCreateOrUpdateOrganizationValues(config: ClientConfig, org: String, repositoryNames: [String], properties: [CustomPropertyValue], requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+    static func orgsExternalPropertiesForReposCreateOrUpdateOrganizationValues(
+        config: ClientConfig,
+        org: String,
+        repositoryNames: [String],
+        properties: [CustomPropertyValue],
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
         try validateItems("repository_names", repositoryNames, min: 1, max: 30)
 
-        let requestBody = OrgsExternalPropertiesForReposCreateOrUpdateOrganizationValueX19c2b39ff2(repositoryNames: repositoryNames, properties: properties)
+        let requestBody = OrgsExternalPropertiesForReposCreateOrUpdateOrganizationValueX19c2b39ff2(
+            repositoryNames: repositoryNames,
+            properties: properties
+        )
 
-        return try (await sdkRequest("PATCH", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/properties/installations/values"].joined(), config: config, body: requestBody, decoder: .empty, operationId: "orgsExternalPropertiesForReposCreateOrUpdateOrganizationValues", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self])).data
+        return try await (sdkRequest(
+            "PATCH",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/properties/installations/values"].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .empty,
+            operationId: "orgsExternalPropertiesForReposCreateOrUpdateOrganizationValues",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self, "422": ValidationError.self]
+        )).data
     }
 
     private struct OrgsExternalPropertiesForReposCreateOrUpdateOrganizationValueX19c2b39ff2: Encodable {
@@ -37,8 +74,8 @@ extension OrgsMethods {
 
         func encode(to encoder: Encoder) throws {
             var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-            try keyedContainer.encode(self.repositoryNames, forKey: SdkCodingKey("repository_names"))
-            try keyedContainer.encode(self.properties, forKey: SdkCodingKey("properties"))
+            try keyedContainer.encode(repositoryNames, forKey: SdkCodingKey("repository_names"))
+            try keyedContainer.encode(properties, forKey: SdkCodingKey("properties"))
         }
     }
 }

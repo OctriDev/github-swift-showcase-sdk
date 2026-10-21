@@ -3,24 +3,35 @@
 
 import Foundation
 
-// WebhookIssuesFieldAdded domain models
-extension WebhookIssuesFieldAddedChangesIssueFieldValueFrom {
-    public init(from decoder: Decoder) throws {
+/// WebhookIssuesFieldAdded domain models
+public extension WebhookIssuesFieldAddedChangesIssueFieldValueFrom {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
         }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.value = try container.sdkDecodeIfPresent(.value)
-        self.valueId = try container.sdkDecodeIfPresent(.valueId)
-        self.option = try container.sdkDecodeIfPresent(.option)
-        self.valueIds = try container.sdkDecodeIfPresent(.valueIds)
-        self.options = try container.sdkDecodeIfPresent(.options)
+        id = try container.sdkDecodeRequired(.id)
+        value = try container.sdkDecodeIfPresent(.value)
+        valueId = try container.sdkDecodeIfPresent(.valueId)
+        option = try container.sdkDecodeIfPresent(.option)
+        valueIds = try container.sdkDecodeIfPresent(.valueIds)
+        options = try container.sdkDecodeIfPresent(.options)
     }
 }
 
-extension WebhookIssuesFieldAddedChangesIssueFieldValueFrom {
-    public init(id: Int, value: WebhookIssuesFieldAddedChangesIssueFieldValueFromValue? = nil, valueId: Int? = nil, option: WebhookIssuesFieldAddedChangesIssueFieldValueFromOption? = nil, valueIds: [Int]? = nil, options: [WebhookIssuesFieldAddedChangesIssueFieldValueFromOptionsItem]? = nil) {
+public extension WebhookIssuesFieldAddedChangesIssueFieldValueFrom {
+    init(
+        id: Int,
+        value: WebhookIssuesFieldAddedChangesIssueFieldValueFromValue? = nil,
+        valueId: Int? = nil,
+        option: WebhookIssuesFieldAddedChangesIssueFieldValueFromOption? = nil,
+        valueIds: [Int]? = nil,
+        options: [WebhookIssuesFieldAddedChangesIssueFieldValueFromOptionsItem]? = nil
+    ) {
         (self.id, self.value) = (id, value)
         (self.valueId, self.option) = (valueId, option)
         (self.valueIds, self.options) = (valueIds, options)
@@ -31,12 +42,15 @@ extension WebhookIssuesFieldAddedChangesIssueFieldValueFrom {
 public struct WebhookIssuesFieldAddedAction: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let fieldAdded = WebhookIssuesFieldAddedAction(rawValue: "field_added")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -46,10 +60,14 @@ public struct WebhookIssuesFieldAddedAction: RawRepresentable, Hashable, Codable
 }
 
 /// The data type of the issue field.
-public struct WebhookIssuesFieldAddedIssueFieldFieldType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookIssuesFieldAddedIssueFieldFieldType: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let text = WebhookIssuesFieldAddedIssueFieldFieldType(rawValue: "text")
     public static let date = WebhookIssuesFieldAddedIssueFieldFieldType(rawValue: "date")
     public static let singleSelect = WebhookIssuesFieldAddedIssueFieldFieldType(rawValue: "single_select")
@@ -58,7 +76,7 @@ public struct WebhookIssuesFieldAddedIssueFieldFieldType: RawRepresentable, Hash
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

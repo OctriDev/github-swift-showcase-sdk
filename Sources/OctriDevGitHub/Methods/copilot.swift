@@ -8,13 +8,38 @@ import Foundation
 #endif
 public enum CopilotMethods {}
 
-extension CopilotMethods {
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Gets the GitHub Copilot seat details for a member of an organization who currently has access to GitHub Copilot. The seat object contains information about the user's most recent Copilot activity. Users must have telemetry enabled in their IDE for Copilot in the IDE activity to be reflected in `last_activity_at`. For more information about activity data, see [Metrics data properties for GitHub Copilot](https://docs.github.com/copilot/reference/metrics-data). Only organization owners can view Copilot seat assignment details for members of their organization. OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `read:org` scopes to use this endpoint.
+public extension CopilotMethods {
+    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Gets the GitHub Copilot seat details
+    /// for a member of an organization who currently has access to GitHub Copilot. The seat object contains information
+    /// about the user's most recent Copilot activity. Users must have telemetry enabled in their IDE for Copilot in the
+    /// IDE activity to be reflected in `last_activity_at`. For more information about activity data, see [Metrics data
+    /// properties for GitHub Copilot](https://docs.github.com/copilot/reference/metrics-data). Only organization owners
+    /// can view Copilot seat assignment details for members of their organization. OAuth app tokens and personal access
+    /// tokens (classic) need either the `manage_billing:copilot` or `read:org` scopes to use this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - username: The handle for the GitHub user account.
-    public static func copilotGetCopilotSeatDetailsForUser(config: ClientConfig, org: String, username: String, requestOptions: RequestOptions? = nil) async throws -> CopilotSeatDetails {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/members/", sdkEncodePathSegment(sdkWireString(username)), "/copilot"].joined(), config: config, decoder: .json, operationId: "copilotGetCopilotSeatDetailsForUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self])).data
+    static func copilotGetCopilotSeatDetailsForUser(
+        config: ClientConfig,
+        org: String,
+        username: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CopilotSeatDetails {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/orgs/",
+                sdkEncodePathSegment(sdkWireString(org)),
+                "/members/",
+                sdkEncodePathSegment(sdkWireString(username)),
+                "/copilot",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "copilotGetCopilotSeatDetailsForUser",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self]
+        )).data
     }
 }

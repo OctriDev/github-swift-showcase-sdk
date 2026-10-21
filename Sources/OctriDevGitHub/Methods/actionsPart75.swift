@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ActionsMethods {
-    /// Lists Actions policies that apply to a repository. Use `has_parents` to include policies configured at higher levels, and `page` and `per_page` to paginate the results.
+public extension ActionsMethods {
+    /// Lists Actions policies that apply to a repository. Use `has_parents` to include policies configured at higher
+    /// levels, and `page` and `per_page` to paginate the results.
     ///
     /// List all Actions policies for a repository.
     ///
@@ -26,11 +27,34 @@ extension ActionsMethods {
     ///   -rest-api)."
     /// - hasParents: Include policies configured at higher levels that apply to
     ///   this repository
-    public static func actionsGetRepoActionsPolicies(config: ClientConfig, owner: String, repo: String, perPage: Int? = nil, page: Int? = nil, hasParents: Bool? = nil, requestOptions: RequestOptions? = nil) async throws -> ActionsGetRepoActionsPoliciesResponse {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/actions/policies"].joined(), config: config, query: [
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-            SdkQueryParameter("has_parents", value: hasParents),
-        ], decoder: .json, operationId: "actionsGetRepoActionsPolicies", options: requestOptions, errors: ["404": BasicError.self, "500": BasicError.self])).data
+    static func actionsGetRepoActionsPolicies(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        hasParents: Bool? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ActionsGetRepoActionsPoliciesResponse {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/actions/policies",
+            ].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+                SdkQueryParameter("has_parents", value: hasParents),
+            ],
+            decoder: .json,
+            operationId: "actionsGetRepoActionsPolicies",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "500": BasicError.self]
+        )).data
     }
 }

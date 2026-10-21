@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension DependabotMethods {
-    /// Lists all secrets available in an organization without revealing their encrypted values. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+public extension DependabotMethods {
+    /// Lists all secrets available in an organization without revealing their encrypted values. OAuth app tokens and
+    /// personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
@@ -19,18 +20,45 @@ extension DependabotMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func dependabotListOrgSecrets(config: ClientConfig, org: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> DependabotListOrgSecretsResponse {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/dependabot/secrets"].joined(), config: config, query: [
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "dependabotListOrgSecrets", options: requestOptions)).data
+    static func dependabotListOrgSecrets(
+        config: ClientConfig,
+        org: String,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> DependabotListOrgSecretsResponse {
+        try await (sdkRequest(
+            "GET",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/dependabot/secrets"].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "dependabotListOrgSecrets",
+            options: requestOptions
+        )).data
     }
 
-    /// Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or update secrets. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    /// Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or
+    /// update secrets. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this
+    /// endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
-    public static func dependabotGetOrgPublicKey(config: ClientConfig, org: String, requestOptions: RequestOptions? = nil) async throws -> DependabotPublicKey {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/dependabot/secrets/public-key"].joined(), config: config, decoder: .json, operationId: "dependabotGetOrgPublicKey", options: requestOptions)).data
+    static func dependabotGetOrgPublicKey(
+        config: ClientConfig,
+        org: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> DependabotPublicKey {
+        try await (sdkRequest(
+            "GET",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/dependabot/secrets/public-key"].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "dependabotGetOrgPublicKey",
+            options: requestOptions
+        )).data
     }
 }

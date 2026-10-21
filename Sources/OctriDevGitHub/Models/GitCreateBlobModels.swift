@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Git domain models
+/// Git domain models
 /// Short Blob
 public struct ShortBlob: Codable {
     /// Required `string` value serialized in the `url` wire field.
@@ -16,25 +16,35 @@ public struct ShortBlob: Codable {
         case sha
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension ShortBlob {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.url) else {
-            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
-        }
-        guard container.contains(.sha) else {
-            throw SdkValidationError(field: "sha", code: "required", message: "Validation failed for 'sha': value is required")
-        }
-        self.url = try container.sdkDecodeRequired(.url)
-        self.sha = try container.sdkDecodeRequired(.sha)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension ShortBlob {
-    public init(url: String, sha: String) {
+public extension ShortBlob {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.url) else {
+            throw SdkValidationError(
+                field: "url",
+                code: "required",
+                message: "Validation failed for 'url': value is required"
+            )
+        }
+        guard container.contains(.sha) else {
+            throw SdkValidationError(
+                field: "sha",
+                code: "required",
+                message: "Validation failed for 'sha': value is required"
+            )
+        }
+        url = try container.sdkDecodeRequired(.url)
+        sha = try container.sdkDecodeRequired(.sha)
+    }
+}
+
+public extension ShortBlob {
+    init(url: String, sha: String) {
         (self.url, self.sha) = (url, sha)
     }
 }

@@ -6,7 +6,8 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testCodeSecurityGetConfigurationsForEnterpriseCodeSecurityGetConfX7617be87b2ReachesMockAndDecodesResponse() async throws {
+    func testCodeSecurityGetConfigurationsForEnterpriseCodeSecurityGetConfX7617be87b2ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -17,11 +18,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codeSecurity.getConfigurationsForEnterprise(
-            enterprise: decoded("\"enterprise\""),
-            perPage: decoded("30"),
-            before: decoded("\"before\""),
-            after: decoded("\"after\"")
-        )
+                enterprise: decoded("\"enterprise\""),
+                perPage: decoded("30"),
+                before: decoded("\"before\""),
+                after: decoded("\"after\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -37,7 +38,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCodeSecurityGetConfigurationsForOrgCodeSecurityGetConfigurationsForOrgReachesMockAndDecodesResponse() async throws {
+    func testCodeSecurityGetConfigurationsForOrgCodeSecurityGetConfigurationsForOrgReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -59,7 +61,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testCodeSecurityGetConfigurationsForOrgCodeSecurityGetConfiguratiX9da345e387ReachesMockAndDecodesResponse() async throws {
+    func testCodeSecurityGetConfigurationsForOrgCodeSecurityGetConfiguratiX9da345e387ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -70,12 +73,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codeSecurity.getConfigurationsForOrg(
-            org: decoded("\"org\""),
-            targetType: decoded("\"all\""),
-            perPage: decoded("30"),
-            before: decoded("\"before\""),
-            after: decoded("\"after\"")
-        )
+                org: decoded("\"org\""),
+                targetType: decoded("\"all\""),
+                perPage: decoded("30"),
+                before: decoded("\"before\""),
+                after: decoded("\"after\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -91,7 +94,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCodeSecurityGetDefaultConfigurationsCodeSecurityGetDefaultConfigurationsReachesMockAndDecodesResponse() async throws {
+    func testCodeSecurityGetDefaultConfigurationsCodeSecurityGetDefaultConfigurationsReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -109,7 +113,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testCodeSecurityGetDefaultConfigurationsCodeSecurityGetDefaultConXb5fbd235a0ReachesMockAndDecodesResponse() async throws {
+    func testCodeSecurityGetDefaultConfigurationsCodeSecurityGetDefaultConXb5fbd235a0ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -120,8 +125,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codeSecurity.getDefaultConfigurations(
-            org: decoded("\"org\"")
-        )
+                org: decoded("\"org\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -137,7 +142,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCodeSecurityGetDefaultConfigurationsForEnterpriseCodeSecurityXced9c38b7bReachesMockAndDecodesResponse() async throws {
+    func testCodeSecurityGetDefaultConfigurationsForEnterpriseCodeSecurityXced9c38b7bReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -155,20 +161,21 @@ extension SdkMethodTests {
         )
     }
 
-    func testCodeSecurityGetRepositoriesForConfigurationCodeSecurityGetRepXdda4e18796ReachesMockAndDecodesResponse() async throws {
+    func testCodeSecurityGetRepositoriesForConfigurationCodeSecurityGetRepXdda4e18796ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
         do {
             _ = try await client.codeSecurity.getRepositoriesForConfiguration(
-            org: decoded("\"org\""),
-            configurationId: decoded("1"),
-            perPage: decoded("30"),
-            before: decoded("\"before\""),
-            after: decoded("\"after\""),
-            status: decoded("\"all\"")
-        )
+                org: decoded("\"org\""),
+                configurationId: decoded("1"),
+                perPage: decoded("30"),
+                before: decoded("\"before\""),
+                after: decoded("\"after\""),
+                status: decoded("\"all\"")
+            )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -177,7 +184,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCodeSecurityGetRepositoriesForConfigurationCodeSecurityGetRepX289cfef752ReachesMockAndDecodesResponse() async throws {
+    func testCodeSecurityGetRepositoriesForConfigurationCodeSecurityGetRepX289cfef752ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
             return
         }
@@ -188,13 +196,13 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codeSecurity.getRepositoriesForConfiguration(
-            org: decoded("\"org\""),
-            configurationId: decoded("1"),
-            perPage: decoded("30"),
-            before: decoded("\"before\""),
-            after: decoded("\"after\""),
-            status: decoded("\"all\"")
-        )
+                org: decoded("\"org\""),
+                configurationId: decoded("1"),
+                perPage: decoded("30"),
+                before: decoded("\"before\""),
+                after: decoded("\"after\""),
+                status: decoded("\"all\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -210,20 +218,21 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCodeSecurityGetRepositoriesForEnterpriseConfigurationCodeSecuX89b41c7795ReachesMockAndDecodesResponse() async throws {
+    func testCodeSecurityGetRepositoriesForEnterpriseConfigurationCodeSecuX89b41c7795ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
         _ = client
         do {
             _ = try await client.codeSecurity.getRepositoriesForEnterpriseConfiguration(
-            enterprise: decoded("\"enterprise\""),
-            configurationId: decoded("1"),
-            perPage: decoded("30"),
-            before: decoded("\"before\""),
-            after: decoded("\"after\""),
-            status: decoded("\"all\"")
-        )
+                enterprise: decoded("\"enterprise\""),
+                configurationId: decoded("1"),
+                perPage: decoded("30"),
+                before: decoded("\"before\""),
+                after: decoded("\"after\""),
+                status: decoded("\"all\"")
+            )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -232,7 +241,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCodeSecurityGetRepositoriesForEnterpriseConfigurationCodeSecuXbbed89aba8ReachesMockAndDecodesResponse() async throws {
+    func testCodeSecurityGetRepositoriesForEnterpriseConfigurationCodeSecuXbbed89aba8ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
             return
         }
@@ -243,13 +253,13 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codeSecurity.getRepositoriesForEnterpriseConfiguration(
-            enterprise: decoded("\"enterprise\""),
-            configurationId: decoded("1"),
-            perPage: decoded("30"),
-            before: decoded("\"before\""),
-            after: decoded("\"after\""),
-            status: decoded("\"all\"")
-        )
+                enterprise: decoded("\"enterprise\""),
+                configurationId: decoded("1"),
+                perPage: decoded("30"),
+                before: decoded("\"before\""),
+                after: decoded("\"after\""),
+                status: decoded("\"all\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -265,7 +275,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCodeSecurityGetSingleConfigurationForEnterpriseCodeSecurityGeX2b15181a7aReachesMockAndDecodesResponse() async throws {
+    func testCodeSecurityGetSingleConfigurationForEnterpriseCodeSecurityGeX2b15181a7aReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -284,7 +295,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testCodeSecurityGetSingleConfigurationForEnterpriseCodeSecurityGeX130d025e14ReachesMockAndDecodesResponse() async throws {
+    func testCodeSecurityGetSingleConfigurationForEnterpriseCodeSecurityGeX130d025e14ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -295,9 +307,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codeSecurity.getSingleConfigurationForEnterprise(
-            enterprise: decoded("\"enterprise\""),
-            configurationId: decoded("1")
-        )
+                enterprise: decoded("\"enterprise\""),
+                configurationId: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -313,7 +325,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCodeSecuritySetConfigurationAsDefaultCodeSecuritySetConfiguraX8a168f879fReachesMockAndDecodesResponse() async throws {
+    func testCodeSecuritySetConfigurationAsDefaultCodeSecuritySetConfiguraX8a168f879fReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -333,7 +346,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testCodeSecuritySetConfigurationAsDefaultCodeSecuritySetConfiguraX19b235c59dReachesMockAndDecodesResponse() async throws {
+    func testCodeSecuritySetConfigurationAsDefaultCodeSecuritySetConfiguraX19b235c59dReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -344,10 +358,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codeSecurity.setConfigurationAsDefault(
-            org: decoded("\"org\""),
-            configurationId: decoded("1"),
-            defaultForNewRepos: decoded("\"all\"")
-        )
+                org: decoded("\"org\""),
+                configurationId: decoded("1"),
+                defaultForNewRepos: decoded("\"all\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -363,7 +377,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testCodeSecuritySetConfigurationAsDefaultForEnterpriseCodeSecuritX08af3becbfReachesMockAndDecodesResponse() async throws {
+    func testCodeSecuritySetConfigurationAsDefaultForEnterpriseCodeSecuritX08af3becbfReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -383,7 +398,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testCodeSecuritySetConfigurationAsDefaultForEnterpriseCodeSecuritX30a8108222ReachesMockAndDecodesResponse() async throws {
+    func testCodeSecuritySetConfigurationAsDefaultForEnterpriseCodeSecuritX30a8108222ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -394,10 +410,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codeSecurity.setConfigurationAsDefaultForEnterprise(
-            enterprise: decoded("\"enterprise\""),
-            configurationId: decoded("1"),
-            defaultForNewRepos: decoded("\"all\"")
-        )
+                enterprise: decoded("\"enterprise\""),
+                configurationId: decoded("1"),
+                defaultForNewRepos: decoded("\"all\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -418,7 +434,10 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try CodeSecurityMethods.CodeSecurityUpdateConfigurationOptions(org: decoded("\"org\""), configurationId: decoded("1"))
+        var options = try CodeSecurityMethods.CodeSecurityUpdateConfigurationOptions(
+            org: decoded("\"org\""),
+            configurationId: decoded("1")
+        )
         options.name = try decoded("\"octo-org recommended settings v2\"")
         options.description = try decoded("null")
         options.advancedSecurity = try decoded("null")
@@ -458,12 +477,16 @@ extension SdkMethodTests {
         )
     }
 
-    func testCodeSecurityUpdateConfigurationCodeSecurityUpdateConfiguration400ReachesMockAndDecodesResponse() async throws {
+    func testCodeSecurityUpdateConfigurationCodeSecurityUpdateConfiguration400ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/400") else {
             return
         }
         _ = client
-        var options = try CodeSecurityMethods.CodeSecurityUpdateConfigurationOptions(org: decoded("\"org\""), configurationId: decoded("1"))
+        var options = try CodeSecurityMethods.CodeSecurityUpdateConfigurationOptions(
+            org: decoded("\"org\""),
+            configurationId: decoded("1")
+        )
         options.name = try decoded("\"octo-org recommended settings v2\"")
         options.description = try decoded("null")
         options.advancedSecurity = try decoded("null")
@@ -496,8 +519,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.codeSecurity.updateConfiguration(
-            options: options
-        )
+                options: options
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)

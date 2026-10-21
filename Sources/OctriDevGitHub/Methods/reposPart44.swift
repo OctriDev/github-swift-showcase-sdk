@@ -6,10 +6,17 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ReposMethods {
-    /// Replaces the list of teams that have push access to a protected branch, including access for child teams. Provide the complete list in `teams`; teams not included in the new list lose push access.
+public extension ReposMethods {
+    /// Replaces the list of teams that have push access to a protected branch, including access for child teams.
+    /// Provide the complete list in `teams`; teams not included in the new list lose push access.
     ///
-    /// Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation. Replaces the list of teams that have push access to this branch. This removes all teams that previously had push access and grants push access to the new list of teams. Team restrictions include child teams.
+    /// Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and
+    /// in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise
+    /// Server. For more information, see [GitHub's
+    /// products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help
+    /// documentation. Replaces the list of teams that have push access to this branch. This removes all teams that
+    /// previously had push access and grants push access to the new list of teams. Team restrictions include child
+    /// teams.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -19,7 +26,31 @@ extension ReposMethods {
     /// - branch: The name of the branch. Cannot contain wildcard characters. To use
     ///   wildcard characters in branch names, use [the GraphQL
     ///   API](https://docs.github.com/graphql).
-    public static func reposSetTeamAccessRestrictions(config: ClientConfig, owner: String, repo: String, branch: String, body: ReposSetTeamAccessRestrictionsRequestBody? = nil, requestOptions: RequestOptions? = nil) async throws -> [Team] {
-        return try (await sdkRequest("PUT", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/branches/", sdkEncodePathSegment(sdkWireString(branch)), "/protection/restrictions/teams"].joined(), config: config, rawBody: (try body.map { try sdkEncodeBody($0, contentType: "application/json") }), decoder: .json, operationId: "reposSetTeamAccessRestrictions", options: requestOptions, errors: ["422": ValidationError.self])).data
+    static func reposSetTeamAccessRestrictions(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        branch: String,
+        body: ReposSetTeamAccessRestrictionsRequestBody? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [Team] {
+        try await (sdkRequest(
+            "PUT",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/branches/",
+                sdkEncodePathSegment(sdkWireString(branch)),
+                "/protection/restrictions/teams",
+            ].joined(),
+            config: config,
+            rawBody: (body.map { try sdkEncodeBody($0, contentType: "application/json") }),
+            decoder: .json,
+            operationId: "reposSetTeamAccessRestrictions",
+            options: requestOptions,
+            errors: ["422": ValidationError.self]
+        )).data
     }
 }

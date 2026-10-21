@@ -11,7 +11,11 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try IssuesMethods.IssuesUpdateOptions(owner: decoded("\"owner\""), repo: decoded("\"repo\""), issueNumber: decoded("1"))
+        var options = try IssuesMethods.IssuesUpdateOptions(
+            owner: decoded("\"owner\""),
+            repo: decoded("\"repo\""),
+            issueNumber: decoded("1")
+        )
         options.title = try decoded("\"Found a bug\"")
         options.body = try decoded("\"I'm having a problem with this.\"")
         options.assignee = try decoded("null")
@@ -29,8 +33,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.issues.update(
-            options: options
-        )
+                options: options
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 301)
@@ -78,11 +82,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.issues.updateComment(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            commentId: decoded("1"),
-            body: decoded("\"Me too\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                commentId: decoded("1"),
+                body: decoded("\"Me too\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 422)
@@ -175,8 +179,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.licenses.get(
-            license: decoded("\"license\"")
-        )
+                license: decoded("\"license\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -243,10 +247,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.licenses.getForRepo(
-            owner: decoded("\"owner\""),
-            repo: decoded("\"repo\""),
-            ref: decoded("\"ref\"")
-        )
+                owner: decoded("\"owner\""),
+                repo: decoded("\"repo\""),
+                ref: decoded("\"ref\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -455,7 +459,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testMigrationsDeleteArchiveForAuthenticatedUserMigrationsDeleteArXd065ae2b61ReachesMockAndDecodesResponse() async throws {
+    func testMigrationsDeleteArchiveForAuthenticatedUserMigrationsDeleteArXd065ae2b61ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -466,7 +471,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testMigrationsDeleteArchiveForAuthenticatedUserMigrationsDeleteArX18be19b8f6ReachesMockAndDecodesResponse() async throws {
+    func testMigrationsDeleteArchiveForAuthenticatedUserMigrationsDeleteArX18be19b8f6ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -477,8 +483,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.migrations.deleteArchiveForAuthenticatedUser(
-            migrationId: decoded("1")
-        )
+                migrationId: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -517,9 +523,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.migrations.deleteArchiveForOrg(
-            org: decoded("\"org\""),
-            migrationId: decoded("1")
-        )
+                org: decoded("\"org\""),
+                migrationId: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)

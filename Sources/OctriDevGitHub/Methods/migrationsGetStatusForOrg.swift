@@ -6,20 +6,43 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension MigrationsMethods {
-    /// Fetches the status of a migration. The `state` of a migration can be one of the following values: * `pending`, which means the migration hasn't started yet. * `exporting`, which means the migration is in progress. * `exported`, which means the migration finished successfully. * `failed`, which means the migration failed.
+public extension MigrationsMethods {
+    /// Fetches the status of a migration. The `state` of a migration can be one of the following values: * `pending`,
+    /// which means the migration hasn't started yet. * `exporting`, which means the migration is in progress. *
+    /// `exported`, which means the migration finished successfully. * `failed`, which means the migration failed.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - migrationId: The unique identifier of the migration.
     /// - exclude: Exclude attributes from the API response to improve performance
-    public static func migrationsGetStatusForOrg(config: ClientConfig, org: String, migrationId: Int, exclude: [MigrationsGetStatusForOrgParameterItem]? = nil, requestOptions: RequestOptions? = nil) async throws -> Migration {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/migrations/", sdkEncodePathSegment(sdkWireString(migrationId))].joined(), config: config, query: [
-            SdkQueryParameter("exclude", values: exclude, style: "form", explode: true),
-        ], decoder: .json, operationId: "migrationsGetStatusForOrg", options: requestOptions, errors: ["404": BasicError.self])).data
+    static func migrationsGetStatusForOrg(
+        config: ClientConfig,
+        org: String,
+        migrationId: Int,
+        exclude: [MigrationsGetStatusForOrgParameterItem]? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Migration {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/orgs/",
+                sdkEncodePathSegment(sdkWireString(org)),
+                "/migrations/",
+                sdkEncodePathSegment(sdkWireString(migrationId)),
+            ].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("exclude", values: exclude, style: "form", explode: true),
+            ],
+            decoder: .json,
+            operationId: "migrationsGetStatusForOrg",
+            options: requestOptions,
+            errors: ["404": BasicError.self]
+        )).data
     }
 
-    /// Lists migrations started by the authenticated user, including their state and repository details when available. Use `page` and `per_page` to paginate the results; `per_page` defaults to 30 and is capped at 100.
+    /// Lists migrations started by the authenticated user, including their state and repository details when available.
+    /// Use `page` and `per_page` to paginate the results; `per_page` defaults to 30 and is capped at 100.
     ///
     /// Lists all migrations a user has started.
     ///
@@ -32,10 +55,24 @@ extension MigrationsMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func migrationsListForAuthenticatedUser(config: ClientConfig, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [Migration] {
-        return try (await sdkRequest("GET", "/user/migrations", config: config, query: [
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "migrationsListForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self])).data
+    static func migrationsListForAuthenticatedUser(
+        config: ClientConfig,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [Migration] {
+        try await (sdkRequest(
+            "GET",
+            "/user/migrations",
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "migrationsListForAuthenticatedUser",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self]
+        )).data
     }
 }

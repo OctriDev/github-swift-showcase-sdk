@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Search domain models
+/// Search domain models
 /// Commit Search Result Item
 public struct CommitSearchResultItem: Codable {
     /// Required `uri`-formatted value serialized in the `url` wire field.
@@ -46,41 +46,56 @@ public struct CommitSearchResultItem: Codable {
         case textMatches = "text_matches"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension CommitSearchResultItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.sha = try container.sdkDecodeRequired(.sha)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
-        self.commit = try container.sdkDecodeRequired(.commit)
-        self.author = try container.sdkDecodeNullable(.author)
-        self.committer = try container.sdkDecodeNullable(.committer)
-        self.parents = try container.sdkDecodeRequired(.parents)
-        self.repository = try container.sdkDecodeRequired(.repository)
-        self.score = try container.sdkDecodeRequired(.score)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.textMatches = try container.sdkDecodeIfPresent(.textMatches)
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("comments_url", self.commentsUrl)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension CommitSearchResultItem {
-    public init(url: String, sha: String, htmlUrl: String, commentsUrl: String, commit: CommitSearchResultItemCommit, author: NullableSimpleUser?, committer: NullableGitUser?, parents: [CommitSearchResultItemParentsItem], repository: MinimalRepository, score: Double, nodeId: String, textMatches: SearchResultTextMatches? = nil) throws {
+public extension CommitSearchResultItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        url = try container.sdkDecodeRequired(.url)
+        sha = try container.sdkDecodeRequired(.sha)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
+        commit = try container.sdkDecodeRequired(.commit)
+        author = try container.sdkDecodeNullable(.author)
+        committer = try container.sdkDecodeNullable(.committer)
+        parents = try container.sdkDecodeRequired(.parents)
+        repository = try container.sdkDecodeRequired(.repository)
+        score = try container.sdkDecodeRequired(.score)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        textMatches = try container.sdkDecodeIfPresent(.textMatches)
+        try sdkValidateUri("url", url)
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateUri("comments_url", commentsUrl)
+    }
+}
+
+public extension CommitSearchResultItem {
+    init(
+        url: String,
+        sha: String,
+        htmlUrl: String,
+        commentsUrl: String,
+        commit: CommitSearchResultItemCommit,
+        author: NullableSimpleUser?,
+        committer: NullableGitUser?,
+        parents: [CommitSearchResultItemParentsItem],
+        repository: MinimalRepository,
+        score: Double,
+        nodeId: String,
+        textMatches: SearchResultTextMatches? = nil
+    ) throws {
         (self.url, self.sha) = (url, sha)
         (self.htmlUrl, self.commentsUrl) = (htmlUrl, commentsUrl)
         (self.commit, self.author) = (commit, author)
         (self.committer, self.parents) = (committer, parents)
         (self.repository, self.score) = (repository, score)
         (self.nodeId, self.textMatches) = (nodeId, textMatches)
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("comments_url", self.commentsUrl)
+        try sdkValidateUri("url", self.url)
+        try sdkValidateUri("html_url", self.htmlUrl)
+        try sdkValidateUri("comments_url", self.commentsUrl)
     }
 }
 
@@ -94,19 +109,19 @@ public struct TopicSearchResultItemAliasesItem: Codable {
     }
 
     init() {
-        self.topicRelation = nil
+        topicRelation = nil
     }
 }
 
-extension TopicSearchResultItemAliasesItem {
-    public init(from decoder: Decoder) throws {
+public extension TopicSearchResultItemAliasesItem {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.topicRelation = try container.sdkDecodeIfPresent(.topicRelation)
+        topicRelation = try container.sdkDecodeIfPresent(.topicRelation)
     }
 }
 
-extension TopicSearchResultItemAliasesItem {
-    public init(topicRelation: TopicSearchResultItemAliasesItemTopicRelation? = nil) {
+public extension TopicSearchResultItemAliasesItem {
+    init(topicRelation: TopicSearchResultItemAliasesItemTopicRelation? = nil) {
         self.init()
         self.topicRelation = topicRelation
     }
@@ -124,28 +139,38 @@ public struct CommitSearchResultItemCommitTree: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension CommitSearchResultItemCommitTree {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.sha) else {
-            throw SdkValidationError(field: "sha", code: "required", message: "Validation failed for 'sha': value is required")
-        }
-        guard container.contains(.url) else {
-            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
-        }
-        self.sha = try container.sdkDecodeRequired(.sha)
-        self.url = try container.sdkDecodeRequired(.url)
-            try sdkValidateUri("url", self.url)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension CommitSearchResultItemCommitTree {
-    public init(sha: String, url: String) throws {
+public extension CommitSearchResultItemCommitTree {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.sha) else {
+            throw SdkValidationError(
+                field: "sha",
+                code: "required",
+                message: "Validation failed for 'sha': value is required"
+            )
+        }
+        guard container.contains(.url) else {
+            throw SdkValidationError(
+                field: "url",
+                code: "required",
+                message: "Validation failed for 'url': value is required"
+            )
+        }
+        sha = try container.sdkDecodeRequired(.sha)
+        url = try container.sdkDecodeRequired(.url)
+        try sdkValidateUri("url", url)
+    }
+}
+
+public extension CommitSearchResultItemCommitTree {
+    init(sha: String, url: String) throws {
         (self.sha, self.url) = (sha, url)
-            try sdkValidateUri("url", self.url)
+        try sdkValidateUri("url", self.url)
     }
 }
 
@@ -168,22 +193,22 @@ public struct TopicSearchResultItemAliasesItemTopicRelation: Codable {
     }
 
     init() {
-        (self.id, self.name, self.topicId, self.relationType) = (nil, nil, nil, nil)
+        (id, name, topicId, relationType) = (nil, nil, nil, nil)
     }
 }
 
-extension TopicSearchResultItemAliasesItemTopicRelation {
-    public init(from decoder: Decoder) throws {
+public extension TopicSearchResultItemAliasesItemTopicRelation {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeIfPresent(.id)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.topicId = try container.sdkDecodeIfPresent(.topicId)
-        self.relationType = try container.sdkDecodeIfPresent(.relationType)
+        id = try container.sdkDecodeIfPresent(.id)
+        name = try container.sdkDecodeIfPresent(.name)
+        topicId = try container.sdkDecodeIfPresent(.topicId)
+        relationType = try container.sdkDecodeIfPresent(.relationType)
     }
 }
 
-extension TopicSearchResultItemAliasesItemTopicRelation {
-    public init(id: Int? = nil, name: String? = nil, topicId: Int? = nil, relationType: String? = nil) {
+public extension TopicSearchResultItemAliasesItemTopicRelation {
+    init(id: Int? = nil, name: String? = nil, topicId: Int? = nil, relationType: String? = nil) {
         self.init()
         (self.id, self.name) = (id, name)
         (self.topicId, self.relationType) = (topicId, relationType)
@@ -217,48 +242,82 @@ public struct CommitSearchResultItemCommit: Codable {
         case verification
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension CommitSearchResultItemCommit {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.author) else {
-            throw SdkValidationError(field: "author", code: "required", message: "Validation failed for 'author': value is required")
-        }
-        guard container.contains(.committer) else {
-            throw SdkValidationError(field: "committer", code: "required", message: "Validation failed for 'committer': value is required")
-        }
-        guard container.contains(.commentCount) else {
-            throw SdkValidationError(field: "comment_count", code: "required", message: "Validation failed for 'comment_count': value is required")
-        }
-        guard container.contains(.message) else {
-            throw SdkValidationError(field: "message", code: "required", message: "Validation failed for 'message': value is required")
-        }
-        guard container.contains(.tree) else {
-            throw SdkValidationError(field: "tree", code: "required", message: "Validation failed for 'tree': value is required")
-        }
-        guard container.contains(.url) else {
-            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
-        }
-        self.author = try container.sdkDecodeRequired(.author)
-        self.committer = try container.sdkDecodeNullable(.committer)
-        self.commentCount = try container.sdkDecodeRequired(.commentCount)
-        self.message = try container.sdkDecodeRequired(.message)
-        self.tree = try container.sdkDecodeRequired(.tree)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.verification = try container.sdkDecodeIfPresent(.verification)
-            try sdkValidateUri("url", self.url)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension CommitSearchResultItemCommit {
-    public init(author: CommitSearchResultItemCommitAuthor, committer: NullableGitUser?, commentCount: Int, message: String, tree: CommitSearchResultItemCommitTree, url: String, verification: Verification? = nil) throws {
+public extension CommitSearchResultItemCommit {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.author) else {
+            throw SdkValidationError(
+                field: "author",
+                code: "required",
+                message: "Validation failed for 'author': value is required"
+            )
+        }
+        guard container.contains(.committer) else {
+            throw SdkValidationError(
+                field: "committer",
+                code: "required",
+                message: "Validation failed for 'committer': value is required"
+            )
+        }
+        guard container.contains(.commentCount) else {
+            throw SdkValidationError(
+                field: "comment_count",
+                code: "required",
+                message: "Validation failed for 'comment_count': value is required"
+            )
+        }
+        guard container.contains(.message) else {
+            throw SdkValidationError(
+                field: "message",
+                code: "required",
+                message: "Validation failed for 'message': value is required"
+            )
+        }
+        guard container.contains(.tree) else {
+            throw SdkValidationError(
+                field: "tree",
+                code: "required",
+                message: "Validation failed for 'tree': value is required"
+            )
+        }
+        guard container.contains(.url) else {
+            throw SdkValidationError(
+                field: "url",
+                code: "required",
+                message: "Validation failed for 'url': value is required"
+            )
+        }
+        author = try container.sdkDecodeRequired(.author)
+        committer = try container.sdkDecodeNullable(.committer)
+        commentCount = try container.sdkDecodeRequired(.commentCount)
+        message = try container.sdkDecodeRequired(.message)
+        tree = try container.sdkDecodeRequired(.tree)
+        url = try container.sdkDecodeRequired(.url)
+        verification = try container.sdkDecodeIfPresent(.verification)
+        try sdkValidateUri("url", url)
+    }
+}
+
+public extension CommitSearchResultItemCommit {
+    init(
+        author: CommitSearchResultItemCommitAuthor,
+        committer: NullableGitUser?,
+        commentCount: Int,
+        message: String,
+        tree: CommitSearchResultItemCommitTree,
+        url: String,
+        verification: Verification? = nil
+    ) throws {
         (self.author, self.committer) = (author, committer)
         (self.commentCount, self.message) = (commentCount, message)
         (self.tree, self.url) = (tree, url)
         self.verification = verification
-            try sdkValidateUri("url", self.url)
+        try sdkValidateUri("url", self.url)
     }
 }
 
@@ -278,21 +337,21 @@ public struct CommitSearchResultItemParentsItem: Codable {
     }
 
     init() {
-        (self.url, self.htmlUrl, self.sha) = (nil, nil, nil)
+        (url, htmlUrl, sha) = (nil, nil, nil)
     }
 }
 
-extension CommitSearchResultItemParentsItem {
-    public init(from decoder: Decoder) throws {
+public extension CommitSearchResultItemParentsItem {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.url = try container.sdkDecodeIfPresent(.url)
-        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        self.sha = try container.sdkDecodeIfPresent(.sha)
+        url = try container.sdkDecodeIfPresent(.url)
+        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        sha = try container.sdkDecodeIfPresent(.sha)
     }
 }
 
-extension CommitSearchResultItemParentsItem {
-    public init(url: String? = nil, htmlUrl: String? = nil, sha: String? = nil) {
+public extension CommitSearchResultItemParentsItem {
+    init(url: String? = nil, htmlUrl: String? = nil, sha: String? = nil) {
         self.init()
         (self.url, self.htmlUrl) = (url, htmlUrl)
         self.sha = sha
@@ -300,16 +359,20 @@ extension CommitSearchResultItemParentsItem {
 }
 
 /// The policy controlling who can create pull requests: all or collaborators_only.
-public struct RepoSearchResultItemPullRequestCreationPolicy: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct RepoSearchResultItemPullRequestCreationPolicy: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let all = RepoSearchResultItemPullRequestCreationPolicy(rawValue: "all")
     public static let collaboratorsOnly = RepoSearchResultItemPullRequestCreationPolicy(rawValue: "collaborators_only")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

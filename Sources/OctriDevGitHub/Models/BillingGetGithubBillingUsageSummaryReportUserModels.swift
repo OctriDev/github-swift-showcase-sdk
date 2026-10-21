@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Billing domain models
+/// Billing domain models
 /// Required object value serialized in the `timePeriod` wire field.
 public struct BillingUsageSummaryReportUserTimePeriod: Codable {
     /// The year for the usage report.
@@ -19,23 +19,29 @@ public struct BillingUsageSummaryReportUserTimePeriod: Codable {
         case day
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension BillingUsageSummaryReportUserTimePeriod {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.year) else {
-            throw SdkValidationError(field: "year", code: "required", message: "Validation failed for 'year': value is required")
-        }
-        self.year = try container.sdkDecodeRequired(.year)
-        self.month = try container.sdkDecodeIfPresent(.month)
-        self.day = try container.sdkDecodeIfPresent(.day)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension BillingUsageSummaryReportUserTimePeriod {
-    public init(year: Int, month: Int? = nil, day: Int? = nil) {
+public extension BillingUsageSummaryReportUserTimePeriod {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.year) else {
+            throw SdkValidationError(
+                field: "year",
+                code: "required",
+                message: "Validation failed for 'year': value is required"
+            )
+        }
+        year = try container.sdkDecodeRequired(.year)
+        month = try container.sdkDecodeIfPresent(.month)
+        day = try container.sdkDecodeIfPresent(.day)
+    }
+}
+
+public extension BillingUsageSummaryReportUserTimePeriod {
+    init(year: Int, month: Int? = nil, day: Int? = nil) {
         (self.year, self.month) = (year, month)
         self.day = day
     }
@@ -77,27 +83,40 @@ public struct BillingUsageSummaryReportUserUsageItemsItem: Codable {
         case netAmount
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension BillingUsageSummaryReportUserUsageItemsItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.product = try container.sdkDecodeRequired(.product)
-        self.sku = try container.sdkDecodeRequired(.sku)
-        self.unitType = try container.sdkDecodeRequired(.unitType)
-        self.pricePerUnit = try container.sdkDecodeRequired(.pricePerUnit)
-        self.grossQuantity = try container.sdkDecodeRequired(.grossQuantity)
-        self.grossAmount = try container.sdkDecodeRequired(.grossAmount)
-        self.discountQuantity = try container.sdkDecodeRequired(.discountQuantity)
-        self.discountAmount = try container.sdkDecodeRequired(.discountAmount)
-        self.netQuantity = try container.sdkDecodeRequired(.netQuantity)
-        self.netAmount = try container.sdkDecodeRequired(.netAmount)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension BillingUsageSummaryReportUserUsageItemsItem {
-    public init(product: String, sku: String, unitType: String, pricePerUnit: Double, grossQuantity: Double, grossAmount: Double, discountQuantity: Double, discountAmount: Double, netQuantity: Double, netAmount: Double) {
+public extension BillingUsageSummaryReportUserUsageItemsItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        product = try container.sdkDecodeRequired(.product)
+        sku = try container.sdkDecodeRequired(.sku)
+        unitType = try container.sdkDecodeRequired(.unitType)
+        pricePerUnit = try container.sdkDecodeRequired(.pricePerUnit)
+        grossQuantity = try container.sdkDecodeRequired(.grossQuantity)
+        grossAmount = try container.sdkDecodeRequired(.grossAmount)
+        discountQuantity = try container.sdkDecodeRequired(.discountQuantity)
+        discountAmount = try container.sdkDecodeRequired(.discountAmount)
+        netQuantity = try container.sdkDecodeRequired(.netQuantity)
+        netAmount = try container.sdkDecodeRequired(.netAmount)
+    }
+}
+
+public extension BillingUsageSummaryReportUserUsageItemsItem {
+    init(
+        product: String,
+        sku: String,
+        unitType: String,
+        pricePerUnit: Double,
+        grossQuantity: Double,
+        grossAmount: Double,
+        discountQuantity: Double,
+        discountAmount: Double,
+        netQuantity: Double,
+        netAmount: Double
+    ) {
         (self.product, self.sku) = (product, sku)
         (self.unitType, self.pricePerUnit) = (unitType, pricePerUnit)
         (self.grossQuantity, self.grossAmount) = (grossQuantity, grossAmount)
@@ -130,32 +149,53 @@ public struct BillingUsageSummaryReportUser: Codable {
         case sku
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension BillingUsageSummaryReportUser {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.timePeriod) else {
-            throw SdkValidationError(field: "timePeriod", code: "required", message: "Validation failed for 'timePeriod': value is required")
-        }
-        guard container.contains(.user) else {
-            throw SdkValidationError(field: "user", code: "required", message: "Validation failed for 'user': value is required")
-        }
-        guard container.contains(.usageItems) else {
-            throw SdkValidationError(field: "usageItems", code: "required", message: "Validation failed for 'usageItems': value is required")
-        }
-        self.timePeriod = try container.sdkDecodeRequired(.timePeriod)
-        self.user = try container.sdkDecodeRequired(.user)
-        self.usageItems = try container.sdkDecodeRequired(.usageItems)
-        self.repository = try container.sdkDecodeIfPresent(.repository)
-        self.product = try container.sdkDecodeIfPresent(.product)
-        self.sku = try container.sdkDecodeIfPresent(.sku)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension BillingUsageSummaryReportUser {
-    public init(timePeriod: BillingUsageSummaryReportUserTimePeriod, user: String, usageItems: [BillingUsageSummaryReportUserUsageItemsItem], repository: String? = nil, product: String? = nil, sku: String? = nil) {
+public extension BillingUsageSummaryReportUser {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.timePeriod) else {
+            throw SdkValidationError(
+                field: "timePeriod",
+                code: "required",
+                message: "Validation failed for 'timePeriod': value is required"
+            )
+        }
+        guard container.contains(.user) else {
+            throw SdkValidationError(
+                field: "user",
+                code: "required",
+                message: "Validation failed for 'user': value is required"
+            )
+        }
+        guard container.contains(.usageItems) else {
+            throw SdkValidationError(
+                field: "usageItems",
+                code: "required",
+                message: "Validation failed for 'usageItems': value is required"
+            )
+        }
+        timePeriod = try container.sdkDecodeRequired(.timePeriod)
+        user = try container.sdkDecodeRequired(.user)
+        usageItems = try container.sdkDecodeRequired(.usageItems)
+        repository = try container.sdkDecodeIfPresent(.repository)
+        product = try container.sdkDecodeIfPresent(.product)
+        sku = try container.sdkDecodeIfPresent(.sku)
+    }
+}
+
+public extension BillingUsageSummaryReportUser {
+    init(
+        timePeriod: BillingUsageSummaryReportUserTimePeriod,
+        user: String,
+        usageItems: [BillingUsageSummaryReportUserUsageItemsItem],
+        repository: String? = nil,
+        product: String? = nil,
+        sku: String? = nil
+    ) {
         (self.timePeriod, self.user) = (timePeriod, user)
         (self.usageItems, self.repository) = (usageItems, repository)
         (self.product, self.sku) = (product, sku)
