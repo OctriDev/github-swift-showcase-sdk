@@ -3,7 +3,7 @@
 
 import Foundation
 
-// SecretScanning domain models
+/// SecretScanning domain models
 public typealias SecretScanningAlertAssignee = String
 
 public typealias SecretScanningAlertResolutionComment = String

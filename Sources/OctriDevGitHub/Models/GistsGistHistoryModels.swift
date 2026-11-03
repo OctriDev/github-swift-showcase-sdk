@@ -3,26 +3,32 @@
 
 import Foundation
 
-// Gists domain models
-extension GistHistory {
-    public init(from decoder: Decoder) throws {
+/// Gists domain models
+public extension GistHistory {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.user = try container.sdkDecodeIfPresent(.user)
-        self.version = try container.sdkDecodeIfPresent(.version)
-        self.committedAt = try container.sdkDecodeIfPresent(.committedAt)
-        self.changeStatus = try container.sdkDecodeIfPresent(.changeStatus)
-        self.url = try container.sdkDecodeIfPresent(.url)
-        if let value = self.committedAt {
+        user = try container.sdkDecodeIfPresent(.user)
+        version = try container.sdkDecodeIfPresent(.version)
+        committedAt = try container.sdkDecodeIfPresent(.committedAt)
+        changeStatus = try container.sdkDecodeIfPresent(.changeStatus)
+        url = try container.sdkDecodeIfPresent(.url)
+        if let value = committedAt {
             try sdkValidateDateTime("committed_at", sdkWireString(value))
         }
-        if let value = self.url {
+        if let value = url {
             try sdkValidateUri("url", value)
         }
     }
 }
 
-extension GistHistory {
-    public init(user: NullableSimpleUser? = nil, version: String? = nil, committedAt: Date? = nil, changeStatus: GistHistoryChangeStatus? = nil, url: String? = nil) throws {
+public extension GistHistory {
+    init(
+        user: NullableSimpleUser? = nil,
+        version: String? = nil,
+        committedAt: Date? = nil,
+        changeStatus: GistHistoryChangeStatus? = nil,
+        url: String? = nil
+    ) throws {
         self.init()
         (self.user, self.version) = (user, version)
         (self.committedAt, self.changeStatus) = (committedAt, changeStatus)
@@ -105,44 +111,68 @@ public struct GistSimpleForkOf: Codable {
         case history
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension GistSimpleForkOf {
-    public init(from decoder: Decoder) throws {
+public extension GistSimpleForkOf {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.forksUrl = try container.sdkDecodeRequired(.forksUrl)
-        self.commitsUrl = try container.sdkDecodeRequired(.commitsUrl)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.gitPullUrl = try container.sdkDecodeRequired(.gitPullUrl)
-        self.gitPushUrl = try container.sdkDecodeRequired(.gitPushUrl)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.files = try container.sdkDecodeRequired(.files)
-        self.`public` = try container.sdkDecodeRequired(.`public`)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        self.description = try container.sdkDecodeNullable(.description)
-        self.comments = try container.sdkDecodeRequired(.comments)
-        self.user = try container.sdkDecodeNullable(.user)
-        self.commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
-        self.commentsEnabled = try container.sdkDecodeIfPresent(.commentsEnabled)
-        self.owner = try container.sdkDecodeIfPresent(.owner)
-        self.truncated = try container.sdkDecodeIfPresent(.truncated)
-        self.forks = try container.sdkDecodeIfPresent(.forks)
-        self.history = try container.sdkDecodeIfPresent(.history)
+        url = try container.sdkDecodeRequired(.url)
+        forksUrl = try container.sdkDecodeRequired(.forksUrl)
+        commitsUrl = try container.sdkDecodeRequired(.commitsUrl)
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        gitPullUrl = try container.sdkDecodeRequired(.gitPullUrl)
+        gitPushUrl = try container.sdkDecodeRequired(.gitPushUrl)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        files = try container.sdkDecodeRequired(.files)
+        self.public = try container.sdkDecodeRequired(.public)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        description = try container.sdkDecodeNullable(.description)
+        comments = try container.sdkDecodeRequired(.comments)
+        user = try container.sdkDecodeNullable(.user)
+        commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
+        commentsEnabled = try container.sdkDecodeIfPresent(.commentsEnabled)
+        owner = try container.sdkDecodeIfPresent(.owner)
+        truncated = try container.sdkDecodeIfPresent(.truncated)
+        forks = try container.sdkDecodeIfPresent(.forks)
+        history = try container.sdkDecodeIfPresent(.history)
         try sdkValidateConstraints()
     }
 }
 
-extension GistSimpleForkOf {
-    public init(url: String, forksUrl: String, commitsUrl: String, id: String, nodeId: String, gitPullUrl: String, gitPushUrl: String, htmlUrl: String, files: [String: GistSimpleForkOfFilesValue], `public`: Bool, createdAt: Date, updatedAt: Date, description: String?, comments: Int, user: NullableSimpleUser?, commentsUrl: String, commentsEnabled: Bool? = nil, owner: NullableSimpleUser? = nil, truncated: Bool? = nil, forks: [JSONValue]? = nil, history: [JSONValue]? = nil) throws {
+public extension GistSimpleForkOf {
+    init(
+        url: String,
+        forksUrl: String,
+        commitsUrl: String,
+        id: String,
+        nodeId: String,
+        gitPullUrl: String,
+        gitPushUrl: String,
+        htmlUrl: String,
+        files: [String: GistSimpleForkOfFilesValue],
+        public: Bool,
+        createdAt: Date,
+        updatedAt: Date,
+        description: String?,
+        comments: Int,
+        user: NullableSimpleUser?,
+        commentsUrl: String,
+        commentsEnabled: Bool? = nil,
+        owner: NullableSimpleUser? = nil,
+        truncated: Bool? = nil,
+        forks: [JSONValue]? = nil,
+        history: [JSONValue]? = nil
+    ) throws {
         (self.url, self.forksUrl) = (url, forksUrl)
         (self.commitsUrl, self.id) = (commitsUrl, id)
         (self.nodeId, self.gitPullUrl) = (nodeId, gitPullUrl)
         (self.gitPushUrl, self.htmlUrl) = (gitPushUrl, htmlUrl)
-        (self.files, self.`public`) = (files, `public`)
+        (self.files, self.public) = (files, `public`)
         (self.createdAt, self.updatedAt) = (createdAt, updatedAt)
         (self.description, self.comments) = (description, comments)
         (self.user, self.commentsUrl) = (user, commentsUrl)
@@ -155,15 +185,15 @@ extension GistSimpleForkOf {
 
 extension GistSimpleForkOf {
     func sdkValidateConstraints() throws {
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("forks_url", self.forksUrl)
-            try sdkValidateUri("commits_url", self.commitsUrl)
-            try sdkValidateUri("git_pull_url", self.gitPullUrl)
-            try sdkValidateUri("git_push_url", self.gitPushUrl)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-            try sdkValidateUri("comments_url", self.commentsUrl)
+        try sdkValidateUri("url", url)
+        try sdkValidateUri("forks_url", forksUrl)
+        try sdkValidateUri("commits_url", commitsUrl)
+        try sdkValidateUri("git_pull_url", gitPullUrl)
+        try sdkValidateUri("git_push_url", gitPushUrl)
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+        try sdkValidateUri("comments_url", commentsUrl)
     }
 }
 
@@ -186,25 +216,32 @@ public struct BaseGistFilesValue: Codable {
     }
 
     init() {
-        (self.filename, self.type, self.language, self.rawUrl, self.size) = (nil, nil, nil, nil, nil)
-        self.encoding = nil
+        (filename, type, language, rawUrl, size) = (nil, nil, nil, nil, nil)
+        encoding = nil
     }
 }
 
-extension BaseGistFilesValue {
-    public init(from decoder: Decoder) throws {
+public extension BaseGistFilesValue {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.filename = try container.sdkDecodeIfPresent(.filename)
-        self.type = try container.sdkDecodeIfPresent(.type)
-        self.language = try container.sdkDecodeIfPresent(.language)
-        self.rawUrl = try container.sdkDecodeIfPresent(.rawUrl)
-        self.size = try container.sdkDecodeIfPresent(.size)
-        self.encoding = try container.sdkDecodeIfPresent(.encoding)
+        filename = try container.sdkDecodeIfPresent(.filename)
+        type = try container.sdkDecodeIfPresent(.type)
+        language = try container.sdkDecodeIfPresent(.language)
+        rawUrl = try container.sdkDecodeIfPresent(.rawUrl)
+        size = try container.sdkDecodeIfPresent(.size)
+        encoding = try container.sdkDecodeIfPresent(.encoding)
     }
 }
 
-extension BaseGistFilesValue {
-    public init(filename: String? = nil, type: String? = nil, language: String? = nil, rawUrl: String? = nil, size: Int? = nil, encoding: String? = nil) {
+public extension BaseGistFilesValue {
+    init(
+        filename: String? = nil,
+        type: String? = nil,
+        language: String? = nil,
+        rawUrl: String? = nil,
+        size: Int? = nil,
+        encoding: String? = nil
+    ) {
         self.init()
         (self.filename, self.type) = (filename, type)
         (self.language, self.rawUrl) = (language, rawUrl)
@@ -228,23 +265,29 @@ public struct GistSimpleForkOfFilesValue: Codable {
     }
 
     init() {
-        (self.filename, self.type, self.language, self.rawUrl, self.size) = (nil, nil, nil, nil, nil)
+        (filename, type, language, rawUrl, size) = (nil, nil, nil, nil, nil)
     }
 }
 
-extension GistSimpleForkOfFilesValue {
-    public init(from decoder: Decoder) throws {
+public extension GistSimpleForkOfFilesValue {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.filename = try container.sdkDecodeIfPresent(.filename)
-        self.type = try container.sdkDecodeIfPresent(.type)
-        self.language = try container.sdkDecodeIfPresent(.language)
-        self.rawUrl = try container.sdkDecodeIfPresent(.rawUrl)
-        self.size = try container.sdkDecodeIfPresent(.size)
+        filename = try container.sdkDecodeIfPresent(.filename)
+        type = try container.sdkDecodeIfPresent(.type)
+        language = try container.sdkDecodeIfPresent(.language)
+        rawUrl = try container.sdkDecodeIfPresent(.rawUrl)
+        size = try container.sdkDecodeIfPresent(.size)
     }
 }
 
-extension GistSimpleForkOfFilesValue {
-    public init(filename: String? = nil, type: String? = nil, language: String? = nil, rawUrl: String? = nil, size: Int? = nil) {
+public extension GistSimpleForkOfFilesValue {
+    init(
+        filename: String? = nil,
+        type: String? = nil,
+        language: String? = nil,
+        rawUrl: String? = nil,
+        size: Int? = nil
+    ) {
         self.init()
         (self.filename, self.type) = (filename, type)
         (self.language, self.rawUrl) = (language, rawUrl)
@@ -268,21 +311,21 @@ public struct ForbiddenGist: Codable {
     }
 
     init() {
-        (self.block, self.message, self.documentationUrl) = (nil, nil, nil)
+        (block, message, documentationUrl) = (nil, nil, nil)
     }
 }
 
-extension ForbiddenGist {
-    public init(from decoder: Decoder) throws {
+public extension ForbiddenGist {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.block = try container.sdkDecodeIfPresent(.block)
-        self.message = try container.sdkDecodeIfPresent(.message)
-        self.documentationUrl = try container.sdkDecodeIfPresent(.documentationUrl)
+        block = try container.sdkDecodeIfPresent(.block)
+        message = try container.sdkDecodeIfPresent(.message)
+        documentationUrl = try container.sdkDecodeIfPresent(.documentationUrl)
     }
 }
 
-extension ForbiddenGist {
-    public init(block: ForbiddenGistBlock? = nil, message: String? = nil, documentationUrl: String? = nil) {
+public extension ForbiddenGist {
+    init(block: ForbiddenGistBlock? = nil, message: String? = nil, documentationUrl: String? = nil) {
         self.init()
         (self.block, self.message) = (block, message)
         self.documentationUrl = documentationUrl

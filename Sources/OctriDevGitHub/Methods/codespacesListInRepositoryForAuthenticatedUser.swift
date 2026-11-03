@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension CodespacesMethods {
-    /// Lists the codespaces associated to a specified repository and the authenticated user. OAuth app tokens and personal access tokens (classic) need the `codespace` scope to use this endpoint.
+public extension CodespacesMethods {
+    /// Lists the codespaces associated to a specified repository and the authenticated user. OAuth app tokens and
+    /// personal access tokens (classic) need the `codespace` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -22,10 +23,32 @@ extension CodespacesMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func codespacesListInRepositoryForAuthenticatedUser(config: ClientConfig, owner: String, repo: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> CodespacesListInRepositoryForAuthenticatedUserResponse {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/codespaces"].joined(), config: config, query: [
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "codespacesListInRepositoryForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self])).data
+    static func codespacesListInRepositoryForAuthenticatedUser(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CodespacesListInRepositoryForAuthenticatedUserResponse {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/codespaces",
+            ].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "codespacesListInRepositoryForAuthenticatedUser",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self]
+        )).data
     }
 }

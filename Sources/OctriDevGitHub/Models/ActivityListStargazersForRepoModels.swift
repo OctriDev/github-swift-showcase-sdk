@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Activity domain models
+/// Activity domain models
 /// Stargazer
 public struct Stargazer: Codable {
     /// Required `date-time`-formatted value serialized in the `starred_at` wire field.
@@ -16,27 +16,37 @@ public struct Stargazer: Codable {
         case user
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension Stargazer {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.starredAt) else {
-            throw SdkValidationError(field: "starred_at", code: "required", message: "Validation failed for 'starred_at': value is required")
-        }
-        guard container.contains(.user) else {
-            throw SdkValidationError(field: "user", code: "required", message: "Validation failed for 'user': value is required")
-        }
-        self.starredAt = try container.sdkDecodeRequired(.starredAt)
-        self.user = try container.sdkDecodeNullable(.user)
-            try sdkValidateDateTime("starred_at", sdkWireString(self.starredAt))
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension Stargazer {
-    public init(starredAt: Date, user: NullableSimpleUser?) throws {
+public extension Stargazer {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.starredAt) else {
+            throw SdkValidationError(
+                field: "starred_at",
+                code: "required",
+                message: "Validation failed for 'starred_at': value is required"
+            )
+        }
+        guard container.contains(.user) else {
+            throw SdkValidationError(
+                field: "user",
+                code: "required",
+                message: "Validation failed for 'user': value is required"
+            )
+        }
+        starredAt = try container.sdkDecodeRequired(.starredAt)
+        user = try container.sdkDecodeNullable(.user)
+        try sdkValidateDateTime("starred_at", sdkWireString(starredAt))
+    }
+}
+
+public extension Stargazer {
+    init(starredAt: Date, user: NullableSimpleUser?) throws {
         (self.starredAt, self.user) = (starredAt, user)
-            try sdkValidateDateTime("starred_at", sdkWireString(self.starredAt))
+        try sdkValidateDateTime("starred_at", sdkWireString(self.starredAt))
     }
 }

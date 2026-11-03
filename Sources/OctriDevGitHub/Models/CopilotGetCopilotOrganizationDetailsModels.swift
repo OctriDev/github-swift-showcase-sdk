@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Copilot domain models
+/// Copilot domain models
 /// Information about the seat breakdown and policies set for an organization with a Copilot Business or Copilot
 /// Enterprise subscription.
 public struct CopilotOrganizationDetails: Codable {
@@ -35,34 +35,56 @@ public struct CopilotOrganizationDetails: Codable {
         case planType = "plan_type"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension CopilotOrganizationDetails {
-    public init(from decoder: Decoder) throws {
+public extension CopilotOrganizationDetails {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.seatBreakdown) else {
-            throw SdkValidationError(field: "seat_breakdown", code: "required", message: "Validation failed for 'seat_breakdown': value is required")
+            throw SdkValidationError(
+                field: "seat_breakdown",
+                code: "required",
+                message: "Validation failed for 'seat_breakdown': value is required"
+            )
         }
         guard container.contains(.publicCodeSuggestions) else {
-            throw SdkValidationError(field: "public_code_suggestions", code: "required", message: "Validation failed for 'public_code_suggestions': value is required")
+            throw SdkValidationError(
+                field: "public_code_suggestions",
+                code: "required",
+                message: "Validation failed for 'public_code_suggestions': value is required"
+            )
         }
         guard container.contains(.seatManagementSetting) else {
-            throw SdkValidationError(field: "seat_management_setting", code: "required", message: "Validation failed for 'seat_management_setting': value is required")
+            throw SdkValidationError(
+                field: "seat_management_setting",
+                code: "required",
+                message: "Validation failed for 'seat_management_setting': value is required"
+            )
         }
-        self.seatBreakdown = try container.sdkDecodeRequired(.seatBreakdown)
-        self.publicCodeSuggestions = try container.sdkDecodeRequired(.publicCodeSuggestions)
-        self.seatManagementSetting = try container.sdkDecodeRequired(.seatManagementSetting)
-        self.ideChat = try container.sdkDecodeIfPresent(.ideChat)
-        self.platformChat = try container.sdkDecodeIfPresent(.platformChat)
-        self.cli = try container.sdkDecodeIfPresent(.cli)
-        self.planType = try container.sdkDecodeIfPresent(.planType)
+        seatBreakdown = try container.sdkDecodeRequired(.seatBreakdown)
+        publicCodeSuggestions = try container.sdkDecodeRequired(.publicCodeSuggestions)
+        seatManagementSetting = try container.sdkDecodeRequired(.seatManagementSetting)
+        ideChat = try container.sdkDecodeIfPresent(.ideChat)
+        platformChat = try container.sdkDecodeIfPresent(.platformChat)
+        cli = try container.sdkDecodeIfPresent(.cli)
+        planType = try container.sdkDecodeIfPresent(.planType)
         additionalProperties = try decoder.sdkAdditionalProperties(besides: CodingKeys.self)
     }
 }
 
-extension CopilotOrganizationDetails {
-    public init(seatBreakdown: CopilotOrganizationSeatBreakdown, publicCodeSuggestions: CopilotOrganizationDetailsPublicCodeSuggestions, seatManagementSetting: CopilotOrganizationDetailsSeatManagementSetting, ideChat: CopilotOrganizationDetailsIdeChat? = nil, platformChat: CopilotOrganizationDetailsPlatformChat? = nil, cli: CopilotOrganizationDetailsCli? = nil, planType: CopilotOrganizationDetailsPlanType? = nil) {
+public extension CopilotOrganizationDetails {
+    init(
+        seatBreakdown: CopilotOrganizationSeatBreakdown,
+        publicCodeSuggestions: CopilotOrganizationDetailsPublicCodeSuggestions,
+        seatManagementSetting: CopilotOrganizationDetailsSeatManagementSetting,
+        ideChat: CopilotOrganizationDetailsIdeChat? = nil,
+        platformChat: CopilotOrganizationDetailsPlatformChat? = nil,
+        cli: CopilotOrganizationDetailsCli? = nil,
+        planType: CopilotOrganizationDetailsPlanType? = nil
+    ) {
         (self.seatBreakdown, self.publicCodeSuggestions) = (seatBreakdown, publicCodeSuggestions)
         (self.seatManagementSetting, self.ideChat) = (seatManagementSetting, ideChat)
         (self.platformChat, self.cli) = (platformChat, cli)
@@ -70,8 +92,8 @@ extension CopilotOrganizationDetails {
     }
 }
 
-extension CopilotOrganizationDetails {
-    public func encode(to encoder: Encoder) throws {
+public extension CopilotOrganizationDetails {
+    func encode(to encoder: Encoder) throws {
         try encoder.sdkEncodeAdditionalProperties(additionalProperties)
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(seatBreakdown, forKey: .seatBreakdown)
@@ -109,25 +131,32 @@ public struct CopilotOrganizationSeatBreakdown: Codable {
     }
 
     init() {
-        (self.total, self.addedThisCycle, self.pendingCancellation, self.pendingInvitation, self.activeThisCycle) = (nil, nil, nil, nil, nil)
-        self.inactiveThisCycle = nil
+        (total, addedThisCycle, pendingCancellation, pendingInvitation, activeThisCycle) = (nil, nil, nil, nil, nil)
+        inactiveThisCycle = nil
     }
 }
 
-extension CopilotOrganizationSeatBreakdown {
-    public init(from decoder: Decoder) throws {
+public extension CopilotOrganizationSeatBreakdown {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.total = try container.sdkDecodeIfPresent(.total)
-        self.addedThisCycle = try container.sdkDecodeIfPresent(.addedThisCycle)
-        self.pendingCancellation = try container.sdkDecodeIfPresent(.pendingCancellation)
-        self.pendingInvitation = try container.sdkDecodeIfPresent(.pendingInvitation)
-        self.activeThisCycle = try container.sdkDecodeIfPresent(.activeThisCycle)
-        self.inactiveThisCycle = try container.sdkDecodeIfPresent(.inactiveThisCycle)
+        total = try container.sdkDecodeIfPresent(.total)
+        addedThisCycle = try container.sdkDecodeIfPresent(.addedThisCycle)
+        pendingCancellation = try container.sdkDecodeIfPresent(.pendingCancellation)
+        pendingInvitation = try container.sdkDecodeIfPresent(.pendingInvitation)
+        activeThisCycle = try container.sdkDecodeIfPresent(.activeThisCycle)
+        inactiveThisCycle = try container.sdkDecodeIfPresent(.inactiveThisCycle)
     }
 }
 
-extension CopilotOrganizationSeatBreakdown {
-    public init(total: Int? = nil, addedThisCycle: Int? = nil, pendingCancellation: Int? = nil, pendingInvitation: Int? = nil, activeThisCycle: Int? = nil, inactiveThisCycle: Int? = nil) {
+public extension CopilotOrganizationSeatBreakdown {
+    init(
+        total: Int? = nil,
+        addedThisCycle: Int? = nil,
+        pendingCancellation: Int? = nil,
+        pendingInvitation: Int? = nil,
+        activeThisCycle: Int? = nil,
+        inactiveThisCycle: Int? = nil
+    ) {
         self.init()
         (self.total, self.addedThisCycle) = (total, addedThisCycle)
         (self.pendingCancellation, self.pendingInvitation) = (pendingCancellation, pendingInvitation)
@@ -139,13 +168,16 @@ extension CopilotOrganizationSeatBreakdown {
 public struct CopilotOrganizationDetailsPlanType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let business = CopilotOrganizationDetailsPlanType(rawValue: "business")
     public static let enterprise = CopilotOrganizationDetailsPlanType(rawValue: "enterprise")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -156,17 +188,21 @@ public struct CopilotOrganizationDetailsPlanType: RawRepresentable, Hashable, Co
 
 /// The organization policy for allowing or blocking suggestions matching public code (duplication detection
 /// filter).
-public struct CopilotOrganizationDetailsPublicCodeSuggestions: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct CopilotOrganizationDetailsPublicCodeSuggestions: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let allow = CopilotOrganizationDetailsPublicCodeSuggestions(rawValue: "allow")
     public static let block = CopilotOrganizationDetailsPublicCodeSuggestions(rawValue: "block")
     public static let unconfigured = CopilotOrganizationDetailsPublicCodeSuggestions(rawValue: "unconfigured")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -176,10 +212,14 @@ public struct CopilotOrganizationDetailsPublicCodeSuggestions: RawRepresentable,
 }
 
 /// The mode of assigning new seats.
-public struct CopilotOrganizationDetailsSeatManagementSetting: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct CopilotOrganizationDetailsSeatManagementSetting: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let assignAll = CopilotOrganizationDetailsSeatManagementSetting(rawValue: "assign_all")
     public static let assignSelected = CopilotOrganizationDetailsSeatManagementSetting(rawValue: "assign_selected")
     public static let disabled = CopilotOrganizationDetailsSeatManagementSetting(rawValue: "disabled")
@@ -187,7 +227,7 @@ public struct CopilotOrganizationDetailsSeatManagementSetting: RawRepresentable,
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -200,14 +240,17 @@ public struct CopilotOrganizationDetailsSeatManagementSetting: RawRepresentable,
 public struct CopilotOrganizationDetailsCli: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let enabled = CopilotOrganizationDetailsCli(rawValue: "enabled")
     public static let disabled = CopilotOrganizationDetailsCli(rawValue: "disabled")
     public static let unconfigured = CopilotOrganizationDetailsCli(rawValue: "unconfigured")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -217,17 +260,21 @@ public struct CopilotOrganizationDetailsCli: RawRepresentable, Hashable, Codable
 }
 
 /// The organization policy for allowing or disallowing Copilot features on GitHub.com.
-public struct CopilotOrganizationDetailsPlatformChat: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct CopilotOrganizationDetailsPlatformChat: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let enabled = CopilotOrganizationDetailsPlatformChat(rawValue: "enabled")
     public static let disabled = CopilotOrganizationDetailsPlatformChat(rawValue: "disabled")
     public static let unconfigured = CopilotOrganizationDetailsPlatformChat(rawValue: "unconfigured")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -240,14 +287,17 @@ public struct CopilotOrganizationDetailsPlatformChat: RawRepresentable, Hashable
 public struct CopilotOrganizationDetailsIdeChat: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let enabled = CopilotOrganizationDetailsIdeChat(rawValue: "enabled")
     public static let disabled = CopilotOrganizationDetailsIdeChat(rawValue: "disabled")
     public static let unconfigured = CopilotOrganizationDetailsIdeChat(rawValue: "unconfigured")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

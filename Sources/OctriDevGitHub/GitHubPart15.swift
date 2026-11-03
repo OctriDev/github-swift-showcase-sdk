@@ -9,43 +9,182 @@ public class CopilotNamespace {
         self.config = config
     }
 
-/// Use this endpoint to retrieve download links for the Copilot enterprise usage metrics report for a specific day. The report provides comprehensive usage data for Copilot features across the enterprise. The report contains aggregated metrics for the specified day, including usage statistics for various Copilot features, user engagement data, and feature adoption metrics. Reports are generated daily and made available for download through signed URLs with a limited expiration time. The response includes download links to the report files, along with the specific date of the report. The report covers a complete day for which data has been processed. Reports are available starting from October 10, 2025, and historical data can be accessed for up to 1 year from the current date. Enterprise owners, billing managers, and authorized users with fine-grained "View Enterprise Copilot Metrics" permission can retrieve Copilot metrics reports for the enterprise. OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `read:enterprise` scopes to use this endpoint.
-    public func copilotEnterpriseOneDayUsageMetrics(enterprise: String, day: String, requestOptions: RequestOptions? = nil) async throws -> CopilotUsageMetrics1DayReport {
-        return try await CopilotMethods.copilotCopilotEnterpriseOneDayUsageMetrics(config: config, enterprise: enterprise, day: day, requestOptions: requestOptions)
+    /// Use this endpoint to retrieve download links for the Copilot enterprise usage metrics report for a specific day.
+    /// The report provides comprehensive usage data for Copilot features across the enterprise. The report contains
+    /// aggregated metrics for the specified day, including usage statistics for various Copilot features, user
+    /// engagement data, and feature adoption metrics. Reports are generated daily and made available for download
+    /// through signed URLs with a limited expiration time. The response includes download links to the report files,
+    /// along with the specific date of the report. The report covers a complete day for which data has been processed.
+    /// Reports are available starting from October 10, 2025, and historical data can be accessed for up to 1 year from
+    /// the current date. Enterprise owners, billing managers, and authorized users with fine-grained "View Enterprise
+    /// Copilot Metrics" permission can retrieve Copilot metrics reports for the enterprise. OAuth app tokens and
+    /// personal access tokens (classic) need either the `manage_billing:copilot` or `read:enterprise` scopes to use
+    /// this endpoint.
+    public func copilotEnterpriseOneDayUsageMetrics(
+        enterprise: String,
+        day: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CopilotUsageMetrics1DayReport {
+        try await CopilotMethods.copilotCopilotEnterpriseOneDayUsageMetrics(
+            config: config,
+            enterprise: enterprise,
+            day: day,
+            requestOptions: requestOptions
+        )
     }
 
-/// Use this endpoint to retrieve download links for the latest 28-day enterprise Copilot usage metrics report. The report provides comprehensive usage data for Copilot features across the enterprise. The report contains aggregated metrics for the previous 28 days, including usage statistics for various Copilot features, user engagement data, and feature adoption metrics. Reports are generated daily and made available for download through signed URLs with a limited expiration time. The response includes download links to the report files, along with the specific date range covered by the report. The report covers a complete 28-day period ending on the most recent day for which data has been processed. Enterprise owners, billing managers, and authorized users with fine-grained "View Enterprise Copilot Metrics" permission can retrieve Copilot metrics reports for the enterprise. OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `read:enterprise` scopes to use this endpoint.
-    public func copilotEnterpriseUsageMetrics(enterprise: String, requestOptions: RequestOptions? = nil) async throws -> CopilotUsageMetrics28DayReport {
-        return try await CopilotMethods.copilotCopilotEnterpriseUsageMetrics(config: config, enterprise: enterprise, requestOptions: requestOptions)
+    /// Use this endpoint to retrieve download links for the latest 28-day enterprise Copilot usage metrics report. The
+    /// report provides comprehensive usage data for Copilot features across the enterprise. The report contains
+    /// aggregated metrics for the previous 28 days, including usage statistics for various Copilot features, user
+    /// engagement data, and feature adoption metrics. Reports are generated daily and made available for download
+    /// through signed URLs with a limited expiration time. The response includes download links to the report files,
+    /// along with the specific date range covered by the report. The report covers a complete 28-day period ending on
+    /// the most recent day for which data has been processed. Enterprise owners, billing managers, and authorized users
+    /// with fine-grained "View Enterprise Copilot Metrics" permission can retrieve Copilot metrics reports for the
+    /// enterprise. OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or
+    /// `read:enterprise` scopes to use this endpoint.
+    public func copilotEnterpriseUsageMetrics(
+        enterprise: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CopilotUsageMetrics28DayReport {
+        try await CopilotMethods.copilotCopilotEnterpriseUsageMetrics(
+            config: config,
+            enterprise: enterprise,
+            requestOptions: requestOptions
+        )
     }
 
-/// Use this endpoint to retrieve download links for the Copilot enterprise repository report for a specific day. The report provides per-repository pull request metrics for Copilot across the enterprise, with one entry per repository. The report contains repository-level pull request activity for the specified day, including the Copilot Coding Agent (CCA) and Copilot Code Review (CCR) breakdowns. Only repositories that had activity on the specified day are included. Reports are generated daily and made available for download through signed URLs with a limited expiration time. The response includes download links to the report files, along with the specific date of the report. The report covers a complete day for which data has been processed. Enterprise owners, billing managers, and authorized users with fine-grained "View Enterprise Copilot Metrics" permission can retrieve Copilot metrics reports for the enterprise. OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `read:enterprise` scopes to use this endpoint.
-    public func copilotEnterpriseReposOneDayReport(enterprise: String, day: String, requestOptions: RequestOptions? = nil) async throws -> CopilotUsageMetrics1DayReport {
-        return try await CopilotMethods.copilotCopilotEnterpriseReposOneDayReport(config: config, enterprise: enterprise, day: day, requestOptions: requestOptions)
+    /// Use this endpoint to retrieve download links for the Copilot enterprise repository report for a specific day.
+    /// The report provides per-repository pull request metrics for Copilot across the enterprise, with one entry per
+    /// repository. The report contains repository-level pull request activity for the specified day, including the
+    /// Copilot Coding Agent (CCA) and Copilot Code Review (CCR) breakdowns. Only repositories that had activity on the
+    /// specified day are included. Reports are generated daily and made available for download through signed URLs with
+    /// a limited expiration time. The response includes download links to the report files, along with the specific
+    /// date of the report. The report covers a complete day for which data has been processed. Enterprise owners,
+    /// billing managers, and authorized users with fine-grained "View Enterprise Copilot Metrics" permission can
+    /// retrieve Copilot metrics reports for the enterprise. OAuth app tokens and personal access tokens (classic) need
+    /// either the `manage_billing:copilot` or `read:enterprise` scopes to use this endpoint.
+    public func copilotEnterpriseReposOneDayReport(
+        enterprise: String,
+        day: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CopilotUsageMetrics1DayReport {
+        try await CopilotMethods.copilotCopilotEnterpriseReposOneDayReport(
+            config: config,
+            enterprise: enterprise,
+            day: day,
+            requestOptions: requestOptions
+        )
     }
 
-/// Use this endpoint to retrieve download links for the Copilot enterprise user-teams report for a specific day. The report provides user-team join data for Copilot across the enterprise, with one entry per user-team pair. The report contains user-team membership data for the specified day, enabling consumers to join with the existing enterprise user reports to compute team-level usage metrics. Reports are generated daily and made available for download through signed URLs with a limited expiration time. The response includes download links to the report files, along with the specific date of the report. The report covers a complete day for which data has been processed. Enterprise owners, billing managers, and authorized users with fine-grained "View Enterprise Copilot Metrics" permission can retrieve Copilot metrics reports for the enterprise. OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `read:enterprise` scopes to use this endpoint.
-    public func copilotEnterpriseUserTeamsOneDayReport(enterprise: String, day: String, requestOptions: RequestOptions? = nil) async throws -> CopilotUsageMetrics1DayReport {
-        return try await CopilotMethods.copilotCopilotEnterpriseUserTeamsOneDayReport(config: config, enterprise: enterprise, day: day, requestOptions: requestOptions)
+    /// Use this endpoint to retrieve download links for the Copilot enterprise user-teams report for a specific day.
+    /// The report provides user-team join data for Copilot across the enterprise, with one entry per user-team pair.
+    /// The report contains user-team membership data for the specified day, enabling consumers to join with the
+    /// existing enterprise user reports to compute team-level usage metrics. Reports are generated daily and made
+    /// available for download through signed URLs with a limited expiration time. The response includes download links
+    /// to the report files, along with the specific date of the report. The report covers a complete day for which data
+    /// has been processed. Enterprise owners, billing managers, and authorized users with fine-grained "View Enterprise
+    /// Copilot Metrics" permission can retrieve Copilot metrics reports for the enterprise. OAuth app tokens and
+    /// personal access tokens (classic) need either the `manage_billing:copilot` or `read:enterprise` scopes to use
+    /// this endpoint.
+    public func copilotEnterpriseUserTeamsOneDayReport(
+        enterprise: String,
+        day: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CopilotUsageMetrics1DayReport {
+        try await CopilotMethods.copilotCopilotEnterpriseUserTeamsOneDayReport(
+            config: config,
+            enterprise: enterprise,
+            day: day,
+            requestOptions: requestOptions
+        )
     }
 
-/// Use this endpoint to retrieve download links for the Copilot user usage metrics report for a specific day. The report provides detailed user-level usage data and engagement metrics for Copilot features across the enterprise. The report contains user-specific metrics for the specified day, including individual user engagement statistics, feature usage patterns, and adoption metrics broken down by user. This report allows authorized users to analyze Copilot usage at the user level to understand adoption patterns and identify opportunities for increased engagement. Reports are generated daily and made available for download through signed URLs with a limited expiration time. The response includes download links to the report files, along with the specific date of the report. The report covers a complete day for which data has been processed. Reports are available starting from October 10, 2025, and historical data can be accessed for up to 1 year from the current date. Enterprise owners, billing managers, and authorized users with fine-grained "View Enterprise Copilot Metrics" permission can retrieve Copilot metrics reports for the enterprise. OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `read:enterprise` scopes to use this endpoint.
-    public func copilotUsersOneDayUsageMetrics(enterprise: String, day: String, requestOptions: RequestOptions? = nil) async throws -> CopilotUsageMetrics1DayReport {
-        return try await CopilotMethods.copilotCopilotUsersOneDayUsageMetrics(config: config, enterprise: enterprise, day: day, requestOptions: requestOptions)
+    /// Use this endpoint to retrieve download links for the Copilot user usage metrics report for a specific day. The
+    /// report provides detailed user-level usage data and engagement metrics for Copilot features across the
+    /// enterprise. The report contains user-specific metrics for the specified day, including individual user
+    /// engagement statistics, feature usage patterns, and adoption metrics broken down by user. This report allows
+    /// authorized users to analyze Copilot usage at the user level to understand adoption patterns and identify
+    /// opportunities for increased engagement. Reports are generated daily and made available for download through
+    /// signed URLs with a limited expiration time. The response includes download links to the report files, along with
+    /// the specific date of the report. The report covers a complete day for which data has been processed. Reports are
+    /// available starting from October 10, 2025, and historical data can be accessed for up to 1 year from the current
+    /// date. Enterprise owners, billing managers, and authorized users with fine-grained "View Enterprise Copilot
+    /// Metrics" permission can retrieve Copilot metrics reports for the enterprise. OAuth app tokens and personal
+    /// access tokens (classic) need either the `manage_billing:copilot` or `read:enterprise` scopes to use this
+    /// endpoint.
+    public func copilotUsersOneDayUsageMetrics(
+        enterprise: String,
+        day: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CopilotUsageMetrics1DayReport {
+        try await CopilotMethods.copilotCopilotUsersOneDayUsageMetrics(
+            config: config,
+            enterprise: enterprise,
+            day: day,
+            requestOptions: requestOptions
+        )
     }
 
-/// Use this endpoint to retrieve download links for the latest 28-day enterprise users Copilot usage metrics report. The report provides detailed user-level usage data and engagement metrics for Copilot features across the enterprise. The report contains user-specific metrics for the previous 28 days, including individual user engagement statistics, feature usage patterns, and adoption metrics broken down by user. This report allows authorized users to analyze Copilot usage at the user level to understand adoption patterns and identify opportunities for increased engagement. Reports are generated daily and made available for download through signed URLs with a limited expiration time. The response includes download links to the report files, along with the specific date range covered by the report. The report covers a complete 28-day period ending on the most recent day for which data has been processed. Enterprise owners, billing managers, and authorized users with fine-grained "View Enterprise Copilot Metrics" permission can retrieve Copilot metrics reports for the enterprise. OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `read:enterprise` scopes to use this endpoint.
-    public func copilotUsersUsageMetrics(enterprise: String, requestOptions: RequestOptions? = nil) async throws -> CopilotUsageMetrics28DayReport {
-        return try await CopilotMethods.copilotCopilotUsersUsageMetrics(config: config, enterprise: enterprise, requestOptions: requestOptions)
+    /// Use this endpoint to retrieve download links for the latest 28-day enterprise users Copilot usage metrics
+    /// report. The report provides detailed user-level usage data and engagement metrics for Copilot features across
+    /// the enterprise. The report contains user-specific metrics for the previous 28 days, including individual user
+    /// engagement statistics, feature usage patterns, and adoption metrics broken down by user. This report allows
+    /// authorized users to analyze Copilot usage at the user level to understand adoption patterns and identify
+    /// opportunities for increased engagement. Reports are generated daily and made available for download through
+    /// signed URLs with a limited expiration time. The response includes download links to the report files, along with
+    /// the specific date range covered by the report. The report covers a complete 28-day period ending on the most
+    /// recent day for which data has been processed. Enterprise owners, billing managers, and authorized users with
+    /// fine-grained "View Enterprise Copilot Metrics" permission can retrieve Copilot metrics reports for the
+    /// enterprise. OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or
+    /// `read:enterprise` scopes to use this endpoint.
+    public func copilotUsersUsageMetrics(
+        enterprise: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CopilotUsageMetrics28DayReport {
+        try await CopilotMethods.copilotCopilotUsersUsageMetrics(
+            config: config,
+            enterprise: enterprise,
+            requestOptions: requestOptions
+        )
     }
 
-/// Sets the policy for Copilot cloud agent usage across an enterprise. Enterprise owners can configure whether Copilot cloud agent is enabled for all organizations, disabled for all organizations, configured by individual organization admins, or enabled for selected organizations only. Only enterprise owners can set the coding agent policy for their enterprise. OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `admin:enterprise` scopes to use this endpoint.
-    public func setEnterpriseCodingAgentPolicy(enterprise: String, policyState: CopilotSetEnterpriseCodingAgentPolicyRequestBodyPolicyState, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await CopilotMethods.copilotSetEnterpriseCodingAgentPolicy(config: config, enterprise: enterprise, policyState: policyState, requestOptions: requestOptions)
+    /// Sets the policy for Copilot cloud agent usage across an enterprise. Enterprise owners can configure whether
+    /// Copilot cloud agent is enabled for all organizations, disabled for all organizations, configured by individual
+    /// organization admins, or enabled for selected organizations only. Only enterprise owners can set the coding agent
+    /// policy for their enterprise. OAuth app tokens and personal access tokens (classic) need either the
+    /// `manage_billing:copilot` or `admin:enterprise` scopes to use this endpoint.
+    public func setEnterpriseCodingAgentPolicy(
+        enterprise: String,
+        policyState: CopilotSetEnterpriseCodingAgentPolicyRequestBodyPolicyState,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await CopilotMethods.copilotSetEnterpriseCodingAgentPolicy(
+            config: config,
+            enterprise: enterprise,
+            policyState: policyState,
+            requestOptions: requestOptions
+        )
     }
 
-/// Enables Copilot cloud agent for the specified organizations within the enterprise. The enterprise's coding agent policy must be set to `enabled_for_selected_orgs` before using this endpoint. Organizations can be specified by login or matched via custom properties. Only organizations that have Copilot enabled and belong to the enterprise will be affected. Only enterprise owners can add organizations to the coding agent policy. OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `admin:enterprise` scopes to use this endpoint.
-    public func addOrganizationsToEnterpriseCodingAgentPolicy(enterprise: String, organizations: [String]? = nil, customProperties: CopilotAddOrganizationsToEnterpriseCodingAgentPolicyCustomPropertiesList? = nil, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await CopilotMethods.copilotAddOrganizationsToEnterpriseCodingAgentPolicy(config: config, enterprise: enterprise, organizations: organizations, customProperties: customProperties, requestOptions: requestOptions)
+    /// Enables Copilot cloud agent for the specified organizations within the enterprise. The enterprise's coding agent
+    /// policy must be set to `enabled_for_selected_orgs` before using this endpoint. Organizations can be specified by
+    /// login or matched via custom properties. Only organizations that have Copilot enabled and belong to the
+    /// enterprise will be affected. Only enterprise owners can add organizations to the coding agent policy. OAuth app
+    /// tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `admin:enterprise`
+    /// scopes to use this endpoint.
+    public func addOrganizationsToEnterpriseCodingAgentPolicy(
+        enterprise: String,
+        organizations: [String]? = nil,
+        customProperties: CopilotAddOrganizationsToEnterpriseCodingAgentPolicyCustomPropertiesList? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await CopilotMethods.copilotAddOrganizationsToEnterpriseCodingAgentPolicy(
+            config: config,
+            enterprise: enterprise,
+            organizations: organizations,
+            customProperties: customProperties,
+            requestOptions: requestOptions
+        )
     }
 }

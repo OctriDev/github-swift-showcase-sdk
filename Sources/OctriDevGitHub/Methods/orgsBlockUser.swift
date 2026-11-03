@@ -6,14 +6,33 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension OrgsMethods {
-    /// Blocks the given user on behalf of the specified organization and returns a 204. If the organization cannot block the given user a 422 is returned.
+public extension OrgsMethods {
+    /// Blocks the given user on behalf of the specified organization and returns a 204. If the organization cannot
+    /// block the given user a 422 is returned.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - username: The handle for the GitHub user account.
-    public static func orgsBlockUser(config: ClientConfig, org: String, username: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("PUT", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/blocks/", sdkEncodePathSegment(sdkWireString(username))].joined(), config: config, decoder: .empty, operationId: "orgsBlockUser", options: requestOptions, errors: ["422": ValidationError.self])).data
+    static func orgsBlockUser(
+        config: ClientConfig,
+        org: String,
+        username: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "PUT",
+            [
+                "/orgs/",
+                sdkEncodePathSegment(sdkWireString(org)),
+                "/blocks/",
+                sdkEncodePathSegment(sdkWireString(username)),
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "orgsBlockUser",
+            options: requestOptions,
+            errors: ["422": ValidationError.self]
+        )).data
     }
 
     /// Unblocks the given user on behalf of the specified organization.
@@ -21,7 +40,24 @@ extension OrgsMethods {
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - username: The handle for the GitHub user account.
-    public static func orgsUnblockUser(config: ClientConfig, org: String, username: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/blocks/", sdkEncodePathSegment(sdkWireString(username))].joined(), config: config, decoder: .empty, operationId: "orgsUnblockUser", options: requestOptions)).data
+    static func orgsUnblockUser(
+        config: ClientConfig,
+        org: String,
+        username: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            [
+                "/orgs/",
+                sdkEncodePathSegment(sdkWireString(org)),
+                "/blocks/",
+                sdkEncodePathSegment(sdkWireString(username)),
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "orgsUnblockUser",
+            options: requestOptions
+        )).data
     }
 }

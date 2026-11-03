@@ -17,23 +17,23 @@ struct SecurityAdvisoriesCreatePrivateVulnerabilityReportRequestBody: Encodable 
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.summary, forKey: SdkCodingKey("summary"))
-        try keyedContainer.encode(self.description, forKey: SdkCodingKey("description"))
-        try keyedContainer.encodeIfPresent(self.vulnerabilities, forKey: SdkCodingKey("vulnerabilities"))
-        try keyedContainer.encodeIfPresent(self.cweIds, forKey: SdkCodingKey("cwe_ids"))
-        try keyedContainer.encodeIfPresent(self.severity, forKey: SdkCodingKey("severity"))
-        try keyedContainer.encodeIfPresent(self.cvssVectorString, forKey: SdkCodingKey("cvss_vector_string"))
-        try keyedContainer.encodeIfPresent(self.startPrivateFork, forKey: SdkCodingKey("start_private_fork"))
+        try keyedContainer.encode(summary, forKey: SdkCodingKey("summary"))
+        try keyedContainer.encode(description, forKey: SdkCodingKey("description"))
+        try keyedContainer.encodeIfPresent(vulnerabilities, forKey: SdkCodingKey("vulnerabilities"))
+        try keyedContainer.encodeIfPresent(cweIds, forKey: SdkCodingKey("cwe_ids"))
+        try keyedContainer.encodeIfPresent(severity, forKey: SdkCodingKey("severity"))
+        try keyedContainer.encodeIfPresent(cvssVectorString, forKey: SdkCodingKey("cvss_vector_string"))
+        try keyedContainer.encodeIfPresent(startPrivateFork, forKey: SdkCodingKey("start_private_fork"))
     }
 
     init(options: SecurityAdvisoriesMethods.SecurityAdvisoriesCreatePrivateVulnerabilityReportOptions) {
-        self.summary = options.summary
-        self.description = options.description
-        self.vulnerabilities = options.vulnerabilities
-        self.cweIds = options.cweIds
-        self.severity = options.severity
-        self.cvssVectorString = options.cvssVectorString
-        self.startPrivateFork = options.startPrivateFork
+        summary = options.summary
+        description = options.description
+        vulnerabilities = options.vulnerabilities
+        cweIds = options.cweIds
+        severity = options.severity
+        cvssVectorString = options.cvssVectorString
+        startPrivateFork = options.startPrivateFork
     }
 }
 
@@ -52,31 +52,31 @@ struct SecurityAdvisoriesUpdateRepositoryAdvisoryRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.summary, forKey: SdkCodingKey("summary"))
-        try keyedContainer.encodeIfPresent(self.description, forKey: SdkCodingKey("description"))
-        try keyedContainer.encodeIfPresent(self.cveId, forKey: SdkCodingKey("cve_id"))
-        try keyedContainer.encodeIfPresent(self.vulnerabilities, forKey: SdkCodingKey("vulnerabilities"))
-        try keyedContainer.encodeIfPresent(self.cweIds, forKey: SdkCodingKey("cwe_ids"))
-        try keyedContainer.encodeIfPresent(self.credits, forKey: SdkCodingKey("credits"))
-        try keyedContainer.encodeIfPresent(self.severity, forKey: SdkCodingKey("severity"))
-        try keyedContainer.encodeIfPresent(self.cvssVectorString, forKey: SdkCodingKey("cvss_vector_string"))
-        try keyedContainer.encodeIfPresent(self.state, forKey: SdkCodingKey("state"))
-        try keyedContainer.encodeIfPresent(self.collaboratingUsers, forKey: SdkCodingKey("collaborating_users"))
-        try keyedContainer.encodeIfPresent(self.collaboratingTeams, forKey: SdkCodingKey("collaborating_teams"))
+        try keyedContainer.encodeIfPresent(summary, forKey: SdkCodingKey("summary"))
+        try keyedContainer.encodeIfPresent(description, forKey: SdkCodingKey("description"))
+        try keyedContainer.encodeIfPresent(cveId, forKey: SdkCodingKey("cve_id"))
+        try keyedContainer.encodeIfPresent(vulnerabilities, forKey: SdkCodingKey("vulnerabilities"))
+        try keyedContainer.encodeIfPresent(cweIds, forKey: SdkCodingKey("cwe_ids"))
+        try keyedContainer.encodeIfPresent(credits, forKey: SdkCodingKey("credits"))
+        try keyedContainer.encodeIfPresent(severity, forKey: SdkCodingKey("severity"))
+        try keyedContainer.encodeIfPresent(cvssVectorString, forKey: SdkCodingKey("cvss_vector_string"))
+        try keyedContainer.encodeIfPresent(state, forKey: SdkCodingKey("state"))
+        try keyedContainer.encodeIfPresent(collaboratingUsers, forKey: SdkCodingKey("collaborating_users"))
+        try keyedContainer.encodeIfPresent(collaboratingTeams, forKey: SdkCodingKey("collaborating_teams"))
     }
 
     init(options: SecurityAdvisoriesMethods.SecurityAdvisoriesUpdateRepositoryAdvisoryOptions) {
-        self.summary = options.summary
-        self.description = options.description
-        self.cveId = options.cveId
-        self.vulnerabilities = options.vulnerabilities
-        self.cweIds = options.cweIds
-        self.credits = options.credits
-        self.severity = options.severity
-        self.cvssVectorString = options.cvssVectorString
-        self.state = options.state
-        self.collaboratingUsers = options.collaboratingUsers
-        self.collaboratingTeams = options.collaboratingTeams
+        summary = options.summary
+        description = options.description
+        cveId = options.cveId
+        vulnerabilities = options.vulnerabilities
+        cweIds = options.cweIds
+        credits = options.credits
+        severity = options.severity
+        cvssVectorString = options.cvssVectorString
+        state = options.state
+        collaboratingUsers = options.collaboratingUsers
+        collaboratingTeams = options.collaboratingTeams
     }
 }
 
@@ -95,31 +95,34 @@ struct AgentAutomationsCreateRepoAutomationRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.name, forKey: SdkCodingKey("name"))
-        try keyedContainer.encode(self.prompt, forKey: SdkCodingKey("prompt"))
-        try keyedContainer.encodeIfPresent(self.triggers, forKey: SdkCodingKey("triggers"))
-        try keyedContainer.encodeIfPresent(self.model, forKey: SdkCodingKey("model"))
-        try keyedContainer.encodeIfPresent(self.reasoningEffort, forKey: SdkCodingKey("reasoning_effort"))
-        try keyedContainer.encodeIfPresent(self.tools, forKey: SdkCodingKey("tools"))
-        try keyedContainer.encodeIfPresent(self.allowedCustomAgents, forKey: SdkCodingKey("allowed_custom_agents"))
-        try keyedContainer.encodeIfPresent(self.enabled, forKey: SdkCodingKey("enabled"))
-        try keyedContainer.encodeIfPresent(self.ownerType, forKey: SdkCodingKey("owner_type"))
-        try keyedContainer.encodeIfPresent(self.writeScope, forKey: SdkCodingKey("write_scope"))
-        try keyedContainer.encodeIfPresent(self.requireActorWritePermission, forKey: SdkCodingKey("require_actor_write_permission"))
+        try keyedContainer.encode(name, forKey: SdkCodingKey("name"))
+        try keyedContainer.encode(prompt, forKey: SdkCodingKey("prompt"))
+        try keyedContainer.encodeIfPresent(triggers, forKey: SdkCodingKey("triggers"))
+        try keyedContainer.encodeIfPresent(model, forKey: SdkCodingKey("model"))
+        try keyedContainer.encodeIfPresent(reasoningEffort, forKey: SdkCodingKey("reasoning_effort"))
+        try keyedContainer.encodeIfPresent(tools, forKey: SdkCodingKey("tools"))
+        try keyedContainer.encodeIfPresent(allowedCustomAgents, forKey: SdkCodingKey("allowed_custom_agents"))
+        try keyedContainer.encodeIfPresent(enabled, forKey: SdkCodingKey("enabled"))
+        try keyedContainer.encodeIfPresent(ownerType, forKey: SdkCodingKey("owner_type"))
+        try keyedContainer.encodeIfPresent(writeScope, forKey: SdkCodingKey("write_scope"))
+        try keyedContainer.encodeIfPresent(
+            requireActorWritePermission,
+            forKey: SdkCodingKey("require_actor_write_permission")
+        )
     }
 
     init(options: AgentAutomationsMethods.AgentAutomationsCreateRepoAutomationOptions) {
-        self.name = options.name
-        self.prompt = options.prompt
-        self.triggers = options.triggers
-        self.model = options.model
-        self.reasoningEffort = options.reasoningEffort
-        self.tools = options.tools
-        self.allowedCustomAgents = options.allowedCustomAgents
-        self.enabled = options.enabled
-        self.ownerType = options.ownerType
-        self.writeScope = options.writeScope
-        self.requireActorWritePermission = options.requireActorWritePermission
+        name = options.name
+        prompt = options.prompt
+        triggers = options.triggers
+        model = options.model
+        reasoningEffort = options.reasoningEffort
+        tools = options.tools
+        allowedCustomAgents = options.allowedCustomAgents
+        enabled = options.enabled
+        ownerType = options.ownerType
+        writeScope = options.writeScope
+        requireActorWritePermission = options.requireActorWritePermission
     }
 }
 
@@ -137,29 +140,32 @@ struct AgentAutomationsEditRepoAutomationRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.name, forKey: SdkCodingKey("name"))
-        try keyedContainer.encodeIfPresent(self.enabled, forKey: SdkCodingKey("enabled"))
-        try keyedContainer.encodeIfPresent(self.writeScope, forKey: SdkCodingKey("write_scope"))
-        try keyedContainer.encodeIfPresent(self.requireActorWritePermission, forKey: SdkCodingKey("require_actor_write_permission"))
-        try keyedContainer.encodeIfPresent(self.model, forKey: SdkCodingKey("model"))
-        try keyedContainer.encodeIfPresent(self.reasoningEffort, forKey: SdkCodingKey("reasoning_effort"))
-        try keyedContainer.encodeIfPresent(self.triggers, forKey: SdkCodingKey("triggers"))
-        try keyedContainer.encodeIfPresent(self.prompt, forKey: SdkCodingKey("prompt"))
-        try keyedContainer.encodeIfPresent(self.tools, forKey: SdkCodingKey("tools"))
-        try keyedContainer.encodeIfPresent(self.allowedCustomAgents, forKey: SdkCodingKey("allowed_custom_agents"))
+        try keyedContainer.encodeIfPresent(name, forKey: SdkCodingKey("name"))
+        try keyedContainer.encodeIfPresent(enabled, forKey: SdkCodingKey("enabled"))
+        try keyedContainer.encodeIfPresent(writeScope, forKey: SdkCodingKey("write_scope"))
+        try keyedContainer.encodeIfPresent(
+            requireActorWritePermission,
+            forKey: SdkCodingKey("require_actor_write_permission")
+        )
+        try keyedContainer.encodeIfPresent(model, forKey: SdkCodingKey("model"))
+        try keyedContainer.encodeIfPresent(reasoningEffort, forKey: SdkCodingKey("reasoning_effort"))
+        try keyedContainer.encodeIfPresent(triggers, forKey: SdkCodingKey("triggers"))
+        try keyedContainer.encodeIfPresent(prompt, forKey: SdkCodingKey("prompt"))
+        try keyedContainer.encodeIfPresent(tools, forKey: SdkCodingKey("tools"))
+        try keyedContainer.encodeIfPresent(allowedCustomAgents, forKey: SdkCodingKey("allowed_custom_agents"))
     }
 
     init(options: AgentAutomationsMethods.AgentAutomationsEditRepoAutomationOptions) {
-        self.name = options.name
-        self.enabled = options.enabled
-        self.writeScope = options.writeScope
-        self.requireActorWritePermission = options.requireActorWritePermission
-        self.model = options.model
-        self.reasoningEffort = options.reasoningEffort
-        self.triggers = options.triggers
-        self.prompt = options.prompt
-        self.tools = options.tools
-        self.allowedCustomAgents = options.allowedCustomAgents
+        name = options.name
+        enabled = options.enabled
+        writeScope = options.writeScope
+        requireActorWritePermission = options.requireActorWritePermission
+        model = options.model
+        reasoningEffort = options.reasoningEffort
+        triggers = options.triggers
+        prompt = options.prompt
+        tools = options.tools
+        allowedCustomAgents = options.allowedCustomAgents
     }
 }
 
@@ -173,21 +179,21 @@ struct AgentTasksCreateTaskInRepoRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.prompt, forKey: SdkCodingKey("prompt"))
-        try keyedContainer.encodeIfPresent(self.model, forKey: SdkCodingKey("model"))
-        try keyedContainer.encodeIfPresent(self.customAgent, forKey: SdkCodingKey("custom_agent"))
-        try keyedContainer.encodeIfPresent(self.createPullRequest, forKey: SdkCodingKey("create_pull_request"))
-        try keyedContainer.encodeIfPresent(self.baseRef, forKey: SdkCodingKey("base_ref"))
-        try keyedContainer.encodeIfPresent(self.headRef, forKey: SdkCodingKey("head_ref"))
+        try keyedContainer.encode(prompt, forKey: SdkCodingKey("prompt"))
+        try keyedContainer.encodeIfPresent(model, forKey: SdkCodingKey("model"))
+        try keyedContainer.encodeIfPresent(customAgent, forKey: SdkCodingKey("custom_agent"))
+        try keyedContainer.encodeIfPresent(createPullRequest, forKey: SdkCodingKey("create_pull_request"))
+        try keyedContainer.encodeIfPresent(baseRef, forKey: SdkCodingKey("base_ref"))
+        try keyedContainer.encodeIfPresent(headRef, forKey: SdkCodingKey("head_ref"))
     }
 
     init(options: AgentTasksMethods.AgentTasksCreateTaskInRepoOptions) {
-        self.prompt = options.prompt
-        self.model = options.model
-        self.customAgent = options.customAgent
-        self.createPullRequest = options.createPullRequest
-        self.baseRef = options.baseRef
-        self.headRef = options.headRef
+        prompt = options.prompt
+        model = options.model
+        customAgent = options.customAgent
+        createPullRequest = options.createPullRequest
+        baseRef = options.baseRef
+        headRef = options.headRef
     }
 }
 
@@ -199,10 +205,10 @@ struct AppsUpdateWebhookConfigForAppRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.url, forKey: SdkCodingKey("url"))
-        try keyedContainer.encodeIfPresent(self.contentType, forKey: SdkCodingKey("content_type"))
-        try keyedContainer.encodeIfPresent(self.secret, forKey: SdkCodingKey("secret"))
-        try keyedContainer.encodeIfPresent(self.insecureSsl, forKey: SdkCodingKey("insecure_ssl"))
+        try keyedContainer.encodeIfPresent(url, forKey: SdkCodingKey("url"))
+        try keyedContainer.encodeIfPresent(contentType, forKey: SdkCodingKey("content_type"))
+        try keyedContainer.encodeIfPresent(secret, forKey: SdkCodingKey("secret"))
+        try keyedContainer.encodeIfPresent(insecureSsl, forKey: SdkCodingKey("insecure_ssl"))
     }
 }
 
@@ -213,8 +219,8 @@ struct AppsCreateInstallationAccessTokenRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.repositories, forKey: SdkCodingKey("repositories"))
-        try keyedContainer.encodeIfPresent(self.repositoryIds, forKey: SdkCodingKey("repository_ids"))
-        try keyedContainer.encodeIfPresent(self.permissions, forKey: SdkCodingKey("permissions"))
+        try keyedContainer.encodeIfPresent(repositories, forKey: SdkCodingKey("repositories"))
+        try keyedContainer.encodeIfPresent(repositoryIds, forKey: SdkCodingKey("repository_ids"))
+        try keyedContainer.encodeIfPresent(permissions, forKey: SdkCodingKey("permissions"))
     }
 }

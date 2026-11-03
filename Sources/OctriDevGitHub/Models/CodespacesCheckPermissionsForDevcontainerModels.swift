@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Codespaces domain models
+/// Codespaces domain models
 /// Permission check result for a given devcontainer config.
 public struct CodespacesPermissionsCheckForDevcontainer: Codable, SdkResource {
     /// Whether the user has accepted the permissions defined by the devcontainer config
@@ -15,21 +15,27 @@ public struct CodespacesPermissionsCheckForDevcontainer: Codable, SdkResource {
         case accepted
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension CodespacesPermissionsCheckForDevcontainer {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.accepted) else {
-            throw SdkValidationError(field: "accepted", code: "required", message: "Validation failed for 'accepted': value is required")
-        }
-        self.accepted = try container.sdkDecodeRequired(.accepted)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension CodespacesPermissionsCheckForDevcontainer {
-    public init(accepted: Bool) {
+public extension CodespacesPermissionsCheckForDevcontainer {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.accepted) else {
+            throw SdkValidationError(
+                field: "accepted",
+                code: "required",
+                message: "Validation failed for 'accepted': value is required"
+            )
+        }
+        accepted = try container.sdkDecodeRequired(.accepted)
+    }
+}
+
+public extension CodespacesPermissionsCheckForDevcontainer {
+    init(accepted: Bool) {
         self.accepted = accepted
     }
 }

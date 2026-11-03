@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Issues domain models
+/// Issues domain models
 /// Assigned Issue Event
 public struct AssignedIssueEvent: Codable {
     /// Required `integer` value serialized in the `id` wire field.
@@ -51,29 +51,44 @@ public struct AssignedIssueEvent: Codable {
         case intent
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension AssignedIssueEvent {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.actor = try container.sdkDecodeRequired(.actor)
-        self.event = try container.sdkDecodeRequired(.event)
-        self.commitId = try container.sdkDecodeNullable(.commitId)
-        self.commitUrl = try container.sdkDecodeNullable(.commitUrl)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.performedViaGithubApp = try container.sdkDecodeNullable(.performedViaGithubApp)
-        self.assignee = try container.sdkDecodeRequired(.assignee)
-        self.assigner = try container.sdkDecodeRequired(.assigner)
-        self.intent = try container.sdkDecodeIfPresent(.intent)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension AssignedIssueEvent {
-    public init(id: Int, nodeId: String, url: String, actor: SimpleUser, event: String, commitId: String?, commitUrl: String?, createdAt: String, performedViaGithubApp: Integration?, assignee: SimpleUser, assigner: SimpleUser, intent: NullableIssueEventIntent? = nil) {
+public extension AssignedIssueEvent {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        url = try container.sdkDecodeRequired(.url)
+        actor = try container.sdkDecodeRequired(.actor)
+        event = try container.sdkDecodeRequired(.event)
+        commitId = try container.sdkDecodeNullable(.commitId)
+        commitUrl = try container.sdkDecodeNullable(.commitUrl)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        performedViaGithubApp = try container.sdkDecodeNullable(.performedViaGithubApp)
+        assignee = try container.sdkDecodeRequired(.assignee)
+        assigner = try container.sdkDecodeRequired(.assigner)
+        intent = try container.sdkDecodeIfPresent(.intent)
+    }
+}
+
+public extension AssignedIssueEvent {
+    init(
+        id: Int,
+        nodeId: String,
+        url: String,
+        actor: SimpleUser,
+        event: String,
+        commitId: String?,
+        commitUrl: String?,
+        createdAt: String,
+        performedViaGithubApp: Integration?,
+        assignee: SimpleUser,
+        assigner: SimpleUser,
+        intent: NullableIssueEventIntent? = nil
+    ) {
         (self.id, self.nodeId) = (id, nodeId)
         (self.url, self.actor) = (url, actor)
         (self.event, self.commitId) = (event, commitId)
@@ -124,28 +139,42 @@ public struct UnassignedIssueEvent: Codable {
         case assigner
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension UnassignedIssueEvent {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.actor = try container.sdkDecodeRequired(.actor)
-        self.event = try container.sdkDecodeRequired(.event)
-        self.commitId = try container.sdkDecodeNullable(.commitId)
-        self.commitUrl = try container.sdkDecodeNullable(.commitUrl)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.performedViaGithubApp = try container.sdkDecodeNullable(.performedViaGithubApp)
-        self.assignee = try container.sdkDecodeRequired(.assignee)
-        self.assigner = try container.sdkDecodeRequired(.assigner)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension UnassignedIssueEvent {
-    public init(id: Int, nodeId: String, url: String, actor: SimpleUser, event: String, commitId: String?, commitUrl: String?, createdAt: String, performedViaGithubApp: NullableIntegration?, assignee: SimpleUser, assigner: SimpleUser) {
+public extension UnassignedIssueEvent {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        url = try container.sdkDecodeRequired(.url)
+        actor = try container.sdkDecodeRequired(.actor)
+        event = try container.sdkDecodeRequired(.event)
+        commitId = try container.sdkDecodeNullable(.commitId)
+        commitUrl = try container.sdkDecodeNullable(.commitUrl)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        performedViaGithubApp = try container.sdkDecodeNullable(.performedViaGithubApp)
+        assignee = try container.sdkDecodeRequired(.assignee)
+        assigner = try container.sdkDecodeRequired(.assigner)
+    }
+}
+
+public extension UnassignedIssueEvent {
+    init(
+        id: Int,
+        nodeId: String,
+        url: String,
+        actor: SimpleUser,
+        event: String,
+        commitId: String?,
+        commitUrl: String?,
+        createdAt: String,
+        performedViaGithubApp: NullableIntegration?,
+        assignee: SimpleUser,
+        assigner: SimpleUser
+    ) {
         (self.id, self.nodeId) = (id, nodeId)
         (self.url, self.actor) = (url, actor)
         (self.event, self.commitId) = (event, commitId)

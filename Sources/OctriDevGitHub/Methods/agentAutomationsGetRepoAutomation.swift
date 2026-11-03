@@ -6,15 +6,44 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension AgentAutomationsMethods {
-    /// Returns an automation by ID in a repository. User-owned automations are visible only to their creator. Repository-owned automations are visible to anyone with read access to the repository. The `created_by` field identifies the creator and is distinct from the automation's `owner_type`. **Fine-grained access tokens for "Get an automation for a repository"** This endpoint works with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app) * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) The fine-grained token must have one of the following permission sets for each repository accessed by this request: * "Agent tasks" repository permissions (read) * "Contents" repository permissions (read) The required permission set depends on each repository's Automation permission configuration. GitHub App installation access tokens are not supported for this endpoint.
+public extension AgentAutomationsMethods {
+    /// Returns an automation by ID in a repository. User-owned automations are visible only to their creator.
+    /// Repository-owned automations are visible to anyone with read access to the repository. The `created_by` field
+    /// identifies the creator and is distinct from the automation's `owner_type`. **Fine-grained access tokens for "Get
+    /// an automation for a repository"** This endpoint works with the following fine-grained token types: * [GitHub App
+    /// user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app)
+    /// * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token)
+    /// The fine-grained token must have one of the following permission sets for each repository accessed by this
+    /// request: * "Agent tasks" repository permissions (read) * "Contents" repository permissions (read) The required
+    /// permission set depends on each repository's Automation permission configuration. GitHub App installation access
+    /// tokens are not supported for this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
     ///   sensitive.
     /// - repo: The name of the repository. The name is not case sensitive.
     /// - automationId: The unique identifier of the automation.
-    public static func agentAutomationsGetRepoAutomation(config: ClientConfig, owner: String, repo: String, automationId: String, requestOptions: RequestOptions? = nil) async throws -> AgentAutomationsGetRepoAutomationResponse {
-        return try (await sdkRequest("GET", ["/agents/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/automations/", sdkEncodePathSegment(sdkWireString(automationId))].joined(), config: config, decoder: .json, operationId: "agentAutomationsGetRepoAutomation", options: requestOptions)).data
+    static func agentAutomationsGetRepoAutomation(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        automationId: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> AgentAutomationsGetRepoAutomationResponse {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/agents/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/automations/",
+                sdkEncodePathSegment(sdkWireString(automationId)),
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "agentAutomationsGetRepoAutomation",
+            options: requestOptions
+        )).data
     }
 }

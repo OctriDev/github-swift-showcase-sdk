@@ -6,8 +6,10 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ReposMethods {
-    /// Submits a redelivery attempt for a delivery made by a webhook configured in a repository. Use the repository owner, repository name, hook ID, and delivery ID to identify the delivery to retry. A 202 response confirms that the redelivery request was accepted.
+public extension ReposMethods {
+    /// Submits a redelivery attempt for a delivery made by a webhook configured in a repository. Use the repository
+    /// owner, repository name, hook ID, and delivery ID to identify the delivery to retry. A 202 response confirms that
+    /// the redelivery request was accepted.
     ///
     /// Redeliver a webhook delivery for a webhook configured in a repository.
     ///
@@ -18,8 +20,33 @@ extension ReposMethods {
     ///   not case sensitive.
     /// - hookId: The unique identifier of the hook. You can find this value in the
     ///   `X-GitHub-Hook-ID` header of a webhook delivery.
-    public static func reposRedeliverWebhookDelivery(config: ClientConfig, owner: String, repo: String, hookId: Int, deliveryId: Int, requestOptions: RequestOptions? = nil) async throws -> [String: JSONValue] {
-        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/hooks/", sdkEncodePathSegment(sdkWireString(hookId)), "/deliveries/", sdkEncodePathSegment(sdkWireString(deliveryId)), "/attempts"].joined(), config: config, decoder: .json, operationId: "reposRedeliverWebhookDelivery", options: requestOptions, errors: ["400": BasicError.self, "422": ValidationError.self])).data
+    static func reposRedeliverWebhookDelivery(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        hookId: Int,
+        deliveryId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [String: JSONValue] {
+        try await (sdkRequest(
+            "POST",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/hooks/",
+                sdkEncodePathSegment(sdkWireString(hookId)),
+                "/deliveries/",
+                sdkEncodePathSegment(sdkWireString(deliveryId)),
+                "/attempts",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "reposRedeliverWebhookDelivery",
+            options: requestOptions,
+            errors: ["400": BasicError.self, "422": ValidationError.self]
+        )).data
     }
 
     /// This will trigger a [ping event](https://docs.github.com/webhooks/#ping-event) to be sent to the hook.
@@ -31,7 +58,29 @@ extension ReposMethods {
     ///   not case sensitive.
     /// - hookId: The unique identifier of the hook. You can find this value in the
     ///   `X-GitHub-Hook-ID` header of a webhook delivery.
-    public static func reposPingWebhook(config: ClientConfig, owner: String, repo: String, hookId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/hooks/", sdkEncodePathSegment(sdkWireString(hookId)), "/pings"].joined(), config: config, decoder: .empty, operationId: "reposPingWebhook", options: requestOptions, errors: ["404": BasicError.self])).data
+    static func reposPingWebhook(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        hookId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "POST",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/hooks/",
+                sdkEncodePathSegment(sdkWireString(hookId)),
+                "/pings",
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "reposPingWebhook",
+            options: requestOptions,
+            errors: ["404": BasicError.self]
+        )).data
     }
 }

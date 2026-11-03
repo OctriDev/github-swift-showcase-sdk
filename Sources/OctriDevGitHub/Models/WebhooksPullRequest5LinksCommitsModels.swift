@@ -3,19 +3,23 @@
 
 import Foundation
 
-// WebhooksPullRequest5 domain models
-extension WebhooksPullRequest5LinksCommits {
-    public init(from decoder: Decoder) throws {
+/// WebhooksPullRequest5 domain models
+public extension WebhooksPullRequest5LinksCommits {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.href) else {
-            throw SdkValidationError(field: "href", code: "required", message: "Validation failed for 'href': value is required")
+            throw SdkValidationError(
+                field: "href",
+                code: "required",
+                message: "Validation failed for 'href': value is required"
+            )
         }
-        self.href = try container.sdkDecodeRequired(.href)
+        href = try container.sdkDecodeRequired(.href)
     }
 }
 
-extension WebhooksPullRequest5LinksCommits {
-    public init(href: String) {
+public extension WebhooksPullRequest5LinksCommits {
+    init(href: String) {
         self.href = href
     }
 }
@@ -24,7 +28,10 @@ extension WebhooksPullRequest5LinksCommits {
 public struct WebhooksPullRequest5ActiveLockReason: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let resolved = WebhooksPullRequest5ActiveLockReason(rawValue: "resolved")
     public static let offTopic = WebhooksPullRequest5ActiveLockReason(rawValue: "off-topic")
     public static let tooHeated = WebhooksPullRequest5ActiveLockReason(rawValue: "too heated")
@@ -32,7 +39,7 @@ public struct WebhooksPullRequest5ActiveLockReason: RawRepresentable, Hashable, 
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -42,17 +49,21 @@ public struct WebhooksPullRequest5ActiveLockReason: RawRepresentable, Hashable, 
 }
 
 /// Optional enumerated value serialized in the `type` wire field.
-public struct WebhooksPullRequest5AutoMergeEnabledByType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhooksPullRequest5AutoMergeEnabledByType: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = WebhooksPullRequest5AutoMergeEnabledByType(rawValue: "Bot")
     public static let user = WebhooksPullRequest5AutoMergeEnabledByType(rawValue: "User")
     public static let organization = WebhooksPullRequest5AutoMergeEnabledByType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -65,14 +76,17 @@ public struct WebhooksPullRequest5AutoMergeEnabledByType: RawRepresentable, Hash
 public struct WebhooksPullRequest5HeadUserType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = WebhooksPullRequest5HeadUserType(rawValue: "Bot")
     public static let user = WebhooksPullRequest5HeadUserType(rawValue: "User")
     public static let organization = WebhooksPullRequest5HeadUserType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -85,13 +99,16 @@ public struct WebhooksPullRequest5HeadUserType: RawRepresentable, Hashable, Coda
 public struct WebhooksPullRequest5MilestoneState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let open = WebhooksPullRequest5MilestoneState(rawValue: "open")
     public static let closed = WebhooksPullRequest5MilestoneState(rawValue: "closed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -104,14 +121,17 @@ public struct WebhooksPullRequest5MilestoneState: RawRepresentable, Hashable, Co
 public struct WebhooksPullRequest5HeadRepoOwnerType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = WebhooksPullRequest5HeadRepoOwnerType(rawValue: "Bot")
     public static let user = WebhooksPullRequest5HeadRepoOwnerType(rawValue: "User")
     public static let organization = WebhooksPullRequest5HeadRepoOwnerType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -121,17 +141,21 @@ public struct WebhooksPullRequest5HeadRepoOwnerType: RawRepresentable, Hashable,
 }
 
 /// Optional enumerated value serialized in the `type` wire field.
-public struct WebhooksPullRequest5RequestedReviewersItemVariant0Type: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhooksPullRequest5RequestedReviewersItemVariant0Type: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = WebhooksPullRequest5RequestedReviewersItemVariant0Type(rawValue: "Bot")
     public static let user = WebhooksPullRequest5RequestedReviewersItemVariant0Type(rawValue: "User")
     public static let organization = WebhooksPullRequest5RequestedReviewersItemVariant0Type(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -141,17 +165,21 @@ public struct WebhooksPullRequest5RequestedReviewersItemVariant0Type: RawReprese
 }
 
 /// The merge method to use.
-public struct WebhooksPullRequest5AutoMergeMergeMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhooksPullRequest5AutoMergeMergeMethod: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let merge = WebhooksPullRequest5AutoMergeMergeMethod(rawValue: "merge")
     public static let squash = WebhooksPullRequest5AutoMergeMergeMethod(rawValue: "squash")
     public static let rebase = WebhooksPullRequest5AutoMergeMergeMethod(rawValue: "rebase")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -164,13 +192,16 @@ public struct WebhooksPullRequest5AutoMergeMergeMethod: RawRepresentable, Hashab
 public struct WebhooksPullRequest5State: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let open = WebhooksPullRequest5State(rawValue: "open")
     public static let closed = WebhooksPullRequest5State(rawValue: "closed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -183,7 +214,10 @@ public struct WebhooksPullRequest5State: RawRepresentable, Hashable, Codable, Se
 public struct WebhooksPullRequest5UserType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = WebhooksPullRequest5UserType(rawValue: "Bot")
     public static let user = WebhooksPullRequest5UserType(rawValue: "User")
     public static let organization = WebhooksPullRequest5UserType(rawValue: "Organization")
@@ -191,7 +225,7 @@ public struct WebhooksPullRequest5UserType: RawRepresentable, Hashable, Codable,
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -201,17 +235,21 @@ public struct WebhooksPullRequest5UserType: RawRepresentable, Hashable, Codable,
 }
 
 /// Required enumerated value serialized in the `privacy` wire field.
-public struct WebhooksPullRequest5RequestedReviewersItemVariant1ParentPrivacy: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhooksPullRequest5RequestedReviewersItemVariant1ParentPrivacy: RawRepresentable, Hashable, Codable,
+    Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let open = WebhooksPullRequest5RequestedReviewersItemVariant1ParentPrivacy(rawValue: "open")
     public static let closed = WebhooksPullRequest5RequestedReviewersItemVariant1ParentPrivacy(rawValue: "closed")
     public static let secret = WebhooksPullRequest5RequestedReviewersItemVariant1ParentPrivacy(rawValue: "secret")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -223,16 +261,20 @@ public struct WebhooksPullRequest5RequestedReviewersItemVariant1ParentPrivacy: R
 /// The default value for a merge commit title. - `PR_TITLE` - default to the pull request's title. -
 /// `MERGE_MESSAGE` - default to the classic title for a merge message (e.g., Merge pull request #123 from
 /// branch-name).
-public struct WebhooksPullRequest5BaseRepoMergeCommitTitle: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhooksPullRequest5BaseRepoMergeCommitTitle: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let prTitle = WebhooksPullRequest5BaseRepoMergeCommitTitle(rawValue: "PR_TITLE")
     public static let mergeMessage = WebhooksPullRequest5BaseRepoMergeCommitTitle(rawValue: "MERGE_MESSAGE")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -243,17 +285,21 @@ public struct WebhooksPullRequest5BaseRepoMergeCommitTitle: RawRepresentable, Ha
 
 /// The default value for a merge commit message. - `PR_TITLE` - default to the pull request's title. -
 /// `PR_BODY` - default to the pull request's body. - `BLANK` - default to a blank commit message.
-public struct WebhooksPullRequest5HeadRepoMergeCommitMessage: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhooksPullRequest5HeadRepoMergeCommitMessage: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let prBody = WebhooksPullRequest5HeadRepoMergeCommitMessage(rawValue: "PR_BODY")
     public static let prTitle = WebhooksPullRequest5HeadRepoMergeCommitMessage(rawValue: "PR_TITLE")
     public static let blank = WebhooksPullRequest5HeadRepoMergeCommitMessage(rawValue: "BLANK")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -265,16 +311,21 @@ public struct WebhooksPullRequest5HeadRepoMergeCommitMessage: RawRepresentable, 
 /// The default value for a squash merge commit title: - `PR_TITLE` - default to the pull request's title. -
 /// `COMMIT_OR_PR_TITLE` - default to the commit's title (if only one commit) or the pull request's title (when
 /// more than one commit).
-public struct WebhooksPullRequest5BaseRepoSquashMergeCommitTitle: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhooksPullRequest5BaseRepoSquashMergeCommitTitle: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let prTitle = WebhooksPullRequest5BaseRepoSquashMergeCommitTitle(rawValue: "PR_TITLE")
-    public static let commitOrPrTitle = WebhooksPullRequest5BaseRepoSquashMergeCommitTitle(rawValue: "COMMIT_OR_PR_TITLE")
+    public static let commitOrPrTitle =
+        WebhooksPullRequest5BaseRepoSquashMergeCommitTitle(rawValue: "COMMIT_OR_PR_TITLE")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -287,7 +338,10 @@ public struct WebhooksPullRequest5BaseRepoSquashMergeCommitTitle: RawRepresentab
 public struct WebhooksPullRequest5AssigneesItemType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = WebhooksPullRequest5AssigneesItemType(rawValue: "Bot")
     public static let user = WebhooksPullRequest5AssigneesItemType(rawValue: "User")
     public static let organization = WebhooksPullRequest5AssigneesItemType(rawValue: "Organization")
@@ -295,7 +349,7 @@ public struct WebhooksPullRequest5AssigneesItemType: RawRepresentable, Hashable,
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -306,17 +360,21 @@ public struct WebhooksPullRequest5AssigneesItemType: RawRepresentable, Hashable,
 
 /// The default value for a merge commit message. - `PR_TITLE` - default to the pull request's title. -
 /// `PR_BODY` - default to the pull request's body. - `BLANK` - default to a blank commit message.
-public struct WebhooksPullRequest5BaseRepoMergeCommitMessage: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhooksPullRequest5BaseRepoMergeCommitMessage: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let prBody = WebhooksPullRequest5BaseRepoMergeCommitMessage(rawValue: "PR_BODY")
     public static let prTitle = WebhooksPullRequest5BaseRepoMergeCommitMessage(rawValue: "PR_TITLE")
     public static let blank = WebhooksPullRequest5BaseRepoMergeCommitMessage(rawValue: "BLANK")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -326,17 +384,21 @@ public struct WebhooksPullRequest5BaseRepoMergeCommitMessage: RawRepresentable, 
 }
 
 /// Required enumerated value serialized in the `privacy` wire field.
-public struct WebhooksPullRequest5RequestedTeamsItemParentPrivacy: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhooksPullRequest5RequestedTeamsItemParentPrivacy: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let open = WebhooksPullRequest5RequestedTeamsItemParentPrivacy(rawValue: "open")
     public static let closed = WebhooksPullRequest5RequestedTeamsItemParentPrivacy(rawValue: "closed")
     public static let secret = WebhooksPullRequest5RequestedTeamsItemParentPrivacy(rawValue: "secret")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -346,16 +408,21 @@ public struct WebhooksPullRequest5RequestedTeamsItemParentPrivacy: RawRepresenta
 }
 
 /// The policy controlling who can create pull requests: all or collaborators_only.
-public struct WebhooksPullRequest5HeadRepoPullRequestCreationPolicy: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhooksPullRequest5HeadRepoPullRequestCreationPolicy: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let all = WebhooksPullRequest5HeadRepoPullRequestCreationPolicy(rawValue: "all")
-    public static let collaboratorsOnly = WebhooksPullRequest5HeadRepoPullRequestCreationPolicy(rawValue: "collaborators_only")
+    public static let collaboratorsOnly =
+        WebhooksPullRequest5HeadRepoPullRequestCreationPolicy(rawValue: "collaborators_only")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -368,7 +435,10 @@ public struct WebhooksPullRequest5HeadRepoPullRequestCreationPolicy: RawRepresen
 public struct WebhooksPullRequest5AssigneeType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = WebhooksPullRequest5AssigneeType(rawValue: "Bot")
     public static let user = WebhooksPullRequest5AssigneeType(rawValue: "User")
     public static let organization = WebhooksPullRequest5AssigneeType(rawValue: "Organization")
@@ -376,7 +446,7 @@ public struct WebhooksPullRequest5AssigneeType: RawRepresentable, Hashable, Coda
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -386,17 +456,21 @@ public struct WebhooksPullRequest5AssigneeType: RawRepresentable, Hashable, Coda
 }
 
 /// Required enumerated value serialized in the `visibility` wire field.
-public struct WebhooksPullRequest5BaseRepoVisibility: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhooksPullRequest5BaseRepoVisibility: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let `public` = WebhooksPullRequest5BaseRepoVisibility(rawValue: "public")
     public static let `private` = WebhooksPullRequest5BaseRepoVisibility(rawValue: "private")
     public static let `internal` = WebhooksPullRequest5BaseRepoVisibility(rawValue: "internal")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -406,17 +480,21 @@ public struct WebhooksPullRequest5BaseRepoVisibility: RawRepresentable, Hashable
 }
 
 /// Optional enumerated value serialized in the `privacy` wire field.
-public struct WebhooksPullRequest5RequestedReviewersItemVariant1Privacy: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhooksPullRequest5RequestedReviewersItemVariant1Privacy: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let open = WebhooksPullRequest5RequestedReviewersItemVariant1Privacy(rawValue: "open")
     public static let closed = WebhooksPullRequest5RequestedReviewersItemVariant1Privacy(rawValue: "closed")
     public static let secret = WebhooksPullRequest5RequestedReviewersItemVariant1Privacy(rawValue: "secret")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -426,16 +504,21 @@ public struct WebhooksPullRequest5RequestedReviewersItemVariant1Privacy: RawRepr
 }
 
 /// The policy controlling who can create pull requests: all or collaborators_only.
-public struct WebhooksPullRequest5BaseRepoPullRequestCreationPolicy: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhooksPullRequest5BaseRepoPullRequestCreationPolicy: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let all = WebhooksPullRequest5BaseRepoPullRequestCreationPolicy(rawValue: "all")
-    public static let collaboratorsOnly = WebhooksPullRequest5BaseRepoPullRequestCreationPolicy(rawValue: "collaborators_only")
+    public static let collaboratorsOnly =
+        WebhooksPullRequest5BaseRepoPullRequestCreationPolicy(rawValue: "collaborators_only")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -448,14 +531,17 @@ public struct WebhooksPullRequest5BaseRepoPullRequestCreationPolicy: RawRepresen
 public struct WebhooksPullRequest5BaseRepoOwnerType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = WebhooksPullRequest5BaseRepoOwnerType(rawValue: "Bot")
     public static let user = WebhooksPullRequest5BaseRepoOwnerType(rawValue: "User")
     public static let organization = WebhooksPullRequest5BaseRepoOwnerType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -467,16 +553,20 @@ public struct WebhooksPullRequest5BaseRepoOwnerType: RawRepresentable, Hashable,
 /// The default value for a merge commit title. - `PR_TITLE` - default to the pull request's title. -
 /// `MERGE_MESSAGE` - default to the classic title for a merge message (e.g., Merge pull request #123 from
 /// branch-name).
-public struct WebhooksPullRequest5HeadRepoMergeCommitTitle: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhooksPullRequest5HeadRepoMergeCommitTitle: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let prTitle = WebhooksPullRequest5HeadRepoMergeCommitTitle(rawValue: "PR_TITLE")
     public static let mergeMessage = WebhooksPullRequest5HeadRepoMergeCommitTitle(rawValue: "MERGE_MESSAGE")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -486,17 +576,21 @@ public struct WebhooksPullRequest5HeadRepoMergeCommitTitle: RawRepresentable, Ha
 }
 
 /// Optional enumerated value serialized in the `privacy` wire field.
-public struct WebhooksPullRequest5RequestedTeamsItemPrivacy: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhooksPullRequest5RequestedTeamsItemPrivacy: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let open = WebhooksPullRequest5RequestedTeamsItemPrivacy(rawValue: "open")
     public static let closed = WebhooksPullRequest5RequestedTeamsItemPrivacy(rawValue: "closed")
     public static let secret = WebhooksPullRequest5RequestedTeamsItemPrivacy(rawValue: "secret")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

@@ -3,24 +3,34 @@
 
 import Foundation
 
-// WebhookPullRequestReviewCommentCreated domain models
+/// WebhookPullRequestReviewCommentCreated domain models
 extension WebhookPullRequestReviewCommentCreatedPullRequestHeadRepoCreatedAt: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for WebhookPullRequestReviewCommentCreatedPullRequestHeadRepoCreatedAt")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for WebhookPullRequestReviewCommentCreatedPullRequestHeadRepoCreatedAt"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension WebhookPullRequestReviewCommentCreatedPullRequestHeadRepoCreatedAt {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(Int.self) { return .intValue(value) }
-        if let value = try? container.decode(Date.self) { return .date(value) }
+        if let value = try? container.decode(Int.self) {
+            return .intValue(value)
+        }
+        if let value = try? container.decode(Date.self) {
+            return .date(value)
+        }
         return nil
     }
 }
@@ -71,51 +81,89 @@ public struct WebhookPullRequestReviewCommentCreatedPullRequestLabelsItem: Codab
         case url
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookPullRequestReviewCommentCreatedPullRequestLabelsItem {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.color) else {
-            throw SdkValidationError(field: "color", code: "required", message: "Validation failed for 'color': value is required")
-        }
-        guard container.contains(.`default`) else {
-            throw SdkValidationError(field: "default", code: "required", message: "Validation failed for 'default': value is required")
-        }
-        guard container.contains(.description) else {
-            throw SdkValidationError(field: "description", code: "required", message: "Validation failed for 'description': value is required")
-        }
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        guard container.contains(.nodeId) else {
-            throw SdkValidationError(field: "node_id", code: "required", message: "Validation failed for 'node_id': value is required")
-        }
-        guard container.contains(.url) else {
-            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
-        }
-        self.color = try container.sdkDecodeRequired(.color)
-        self.`default` = try container.sdkDecodeRequired(.`default`)
-        self.description = try container.sdkDecodeNullable(.description)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.url = try container.sdkDecodeRequired(.url)
-            try sdkValidateUri("url", self.url)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WebhookPullRequestReviewCommentCreatedPullRequestLabelsItem {
-    public init(color: String, `default`: Bool, description: String?, id: Int, name: String, nodeId: String, url: String) throws {
-        (self.color, self.`default`) = (color, `default`)
+public extension WebhookPullRequestReviewCommentCreatedPullRequestLabelsItem {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.color) else {
+            throw SdkValidationError(
+                field: "color",
+                code: "required",
+                message: "Validation failed for 'color': value is required"
+            )
+        }
+        guard container.contains(.default) else {
+            throw SdkValidationError(
+                field: "default",
+                code: "required",
+                message: "Validation failed for 'default': value is required"
+            )
+        }
+        guard container.contains(.description) else {
+            throw SdkValidationError(
+                field: "description",
+                code: "required",
+                message: "Validation failed for 'description': value is required"
+            )
+        }
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        guard container.contains(.nodeId) else {
+            throw SdkValidationError(
+                field: "node_id",
+                code: "required",
+                message: "Validation failed for 'node_id': value is required"
+            )
+        }
+        guard container.contains(.url) else {
+            throw SdkValidationError(
+                field: "url",
+                code: "required",
+                message: "Validation failed for 'url': value is required"
+            )
+        }
+        color = try container.sdkDecodeRequired(.color)
+        self.default = try container.sdkDecodeRequired(.default)
+        description = try container.sdkDecodeNullable(.description)
+        id = try container.sdkDecodeRequired(.id)
+        name = try container.sdkDecodeRequired(.name)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        url = try container.sdkDecodeRequired(.url)
+        try sdkValidateUri("url", url)
+    }
+}
+
+public extension WebhookPullRequestReviewCommentCreatedPullRequestLabelsItem {
+    init(
+        color: String,
+        default: Bool,
+        description: String?,
+        id: Int,
+        name: String,
+        nodeId: String,
+        url: String
+    ) throws {
+        (self.color, self.default) = (color, `default`)
         (self.description, self.id) = (description, id)
         (self.name, self.nodeId) = (name, nodeId)
         self.url = url
-            try sdkValidateUri("url", self.url)
+        try sdkValidateUri("url", self.url)
     }
 }
 
@@ -164,45 +212,69 @@ public struct WebhookPullRequestReviewCommentCreatedPullRequestRequestedTeamsIte
         case url
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension WebhookPullRequestReviewCommentCreatedPullRequestRequestedTeamsItem {
-    public init(from decoder: Decoder) throws {
+public extension WebhookPullRequestReviewCommentCreatedPullRequestRequestedTeamsItem {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
         }
         guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
         }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.deleted = try container.sdkDecodeIfPresent(.deleted)
-        self.description = try container.sdkDecodeIfPresent(.description)
-        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        self.membersUrl = try container.sdkDecodeIfPresent(.membersUrl)
-        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        self.parent = try container.sdkDecodeIfPresent(.parent)
-        self.permission = try container.sdkDecodeIfPresent(.permission)
-        self.privacy = try container.sdkDecodeIfPresent(.privacy)
-        self.repositoriesUrl = try container.sdkDecodeIfPresent(.repositoriesUrl)
-        self.slug = try container.sdkDecodeIfPresent(.slug)
-        self.url = try container.sdkDecodeIfPresent(.url)
-        if let value = self.htmlUrl {
+        id = try container.sdkDecodeRequired(.id)
+        name = try container.sdkDecodeRequired(.name)
+        deleted = try container.sdkDecodeIfPresent(.deleted)
+        description = try container.sdkDecodeIfPresent(.description)
+        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        membersUrl = try container.sdkDecodeIfPresent(.membersUrl)
+        nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        parent = try container.sdkDecodeIfPresent(.parent)
+        permission = try container.sdkDecodeIfPresent(.permission)
+        privacy = try container.sdkDecodeIfPresent(.privacy)
+        repositoriesUrl = try container.sdkDecodeIfPresent(.repositoriesUrl)
+        slug = try container.sdkDecodeIfPresent(.slug)
+        url = try container.sdkDecodeIfPresent(.url)
+        if let value = htmlUrl {
             try sdkValidateUri("html_url", value)
         }
-        if let value = self.repositoriesUrl {
+        if let value = repositoriesUrl {
             try sdkValidateUri("repositories_url", value)
         }
-        if let value = self.url {
+        if let value = url {
             try sdkValidateUri("url", value)
         }
     }
 }
 
-extension WebhookPullRequestReviewCommentCreatedPullRequestRequestedTeamsItem {
-    public init(id: Int, name: String, deleted: Bool? = nil, description: String? = nil, htmlUrl: String? = nil, membersUrl: String? = nil, nodeId: String? = nil, parent: WebhookPullRequestReviewCommentCreatedPullRequestRequestedTeaX7080479275? = nil, permission: String? = nil, privacy: WebhookPullRequestReviewCommentCreatedPullRequestRequestedTeaXb267c93eea? = nil, repositoriesUrl: String? = nil, slug: String? = nil, url: String? = nil) throws {
+public extension WebhookPullRequestReviewCommentCreatedPullRequestRequestedTeamsItem {
+    init(
+        id: Int,
+        name: String,
+        deleted: Bool? = nil,
+        description: String? = nil,
+        htmlUrl: String? = nil,
+        membersUrl: String? = nil,
+        nodeId: String? = nil,
+        parent: WebhookPullRequestReviewCommentCreatedPullRequestRequestedTeaX7080479275? = nil,
+        permission: String? = nil,
+        privacy: WebhookPullRequestReviewCommentCreatedPullRequestRequestedTeaXb267c93eea? = nil,
+        repositoriesUrl: String? = nil,
+        slug: String? = nil,
+        url: String? = nil
+    ) throws {
         (self.id, self.name) = (id, name)
         (self.deleted, self.description) = (deleted, description)
         (self.htmlUrl, self.membersUrl) = (htmlUrl, membersUrl)
@@ -276,34 +348,53 @@ public struct WebhookPullRequestReviewCommentCreatedPullRequestMilestone: Codabl
         case url
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension WebhookPullRequestReviewCommentCreatedPullRequestMilestone {
-    public init(from decoder: Decoder) throws {
+public extension WebhookPullRequestReviewCommentCreatedPullRequestMilestone {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.closedAt = try container.sdkDecodeNullable(.closedAt)
-        self.closedIssues = try container.sdkDecodeRequired(.closedIssues)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.creator = try container.sdkDecodeNullable(.creator)
-        self.description = try container.sdkDecodeNullable(.description)
-        self.dueOn = try container.sdkDecodeNullable(.dueOn)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.number = try container.sdkDecodeRequired(.number)
-        self.openIssues = try container.sdkDecodeRequired(.openIssues)
-        self.state = try container.sdkDecodeRequired(.state)
-        self.title = try container.sdkDecodeRequired(.title)
-        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        self.url = try container.sdkDecodeRequired(.url)
+        closedAt = try container.sdkDecodeNullable(.closedAt)
+        closedIssues = try container.sdkDecodeRequired(.closedIssues)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        creator = try container.sdkDecodeNullable(.creator)
+        description = try container.sdkDecodeNullable(.description)
+        dueOn = try container.sdkDecodeNullable(.dueOn)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        id = try container.sdkDecodeRequired(.id)
+        labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        number = try container.sdkDecodeRequired(.number)
+        openIssues = try container.sdkDecodeRequired(.openIssues)
+        state = try container.sdkDecodeRequired(.state)
+        title = try container.sdkDecodeRequired(.title)
+        updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        url = try container.sdkDecodeRequired(.url)
         try sdkValidateConstraints()
     }
 }
 
-extension WebhookPullRequestReviewCommentCreatedPullRequestMilestone {
-    public init(closedAt: Date?, closedIssues: Int, createdAt: Date, creator: WebhookPullRequestReviewCommentCreatedPullRequestMilestoneCreator?, description: String?, dueOn: Date?, htmlUrl: String, id: Int, labelsUrl: String, nodeId: String, number: Int, openIssues: Int, state: WebhookPullRequestReviewCommentCreatedPullRequestMilestoneState, title: String, updatedAt: Date, url: String) throws {
+public extension WebhookPullRequestReviewCommentCreatedPullRequestMilestone {
+    init(
+        closedAt: Date?,
+        closedIssues: Int,
+        createdAt: Date,
+        creator: WebhookPullRequestReviewCommentCreatedPullRequestMilestoneCreator?,
+        description: String?,
+        dueOn: Date?,
+        htmlUrl: String,
+        id: Int,
+        labelsUrl: String,
+        nodeId: String,
+        number: Int,
+        openIssues: Int,
+        state: WebhookPullRequestReviewCommentCreatedPullRequestMilestoneState,
+        title: String,
+        updatedAt: Date,
+        url: String
+    ) throws {
         (self.closedAt, self.closedIssues) = (closedAt, closedIssues)
         (self.createdAt, self.creator) = (createdAt, creator)
         (self.description, self.dueOn) = (description, dueOn)
@@ -318,16 +409,16 @@ extension WebhookPullRequestReviewCommentCreatedPullRequestMilestone {
 
 extension WebhookPullRequestReviewCommentCreatedPullRequestMilestone {
     func sdkValidateConstraints() throws {
-        if let value = self.closedAt {
+        if let value = closedAt {
             try sdkValidateDateTime("closed_at", sdkWireString(value))
         }
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-        if let value = self.dueOn {
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        if let value = dueOn {
             try sdkValidateDateTime("due_on", sdkWireString(value))
         }
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("labels_url", self.labelsUrl)
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-            try sdkValidateUri("url", self.url)
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateUri("labels_url", labelsUrl)
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+        try sdkValidateUri("url", url)
     }
 }

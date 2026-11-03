@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Orgs domain models
+/// Orgs domain models
 /// Typed representation of the `OrganizationUpdateIssueType` API schema.
 public struct OrganizationUpdateIssueType: Codable {
     /// Name of the issue type.
@@ -22,27 +22,37 @@ public struct OrganizationUpdateIssueType: Codable {
         case color
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension OrganizationUpdateIssueType {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        guard container.contains(.isEnabled) else {
-            throw SdkValidationError(field: "is_enabled", code: "required", message: "Validation failed for 'is_enabled': value is required")
-        }
-        self.name = try container.sdkDecodeRequired(.name)
-        self.isEnabled = try container.sdkDecodeRequired(.isEnabled)
-        self.description = try container.sdkDecodeIfPresent(.description)
-        self.color = try container.sdkDecodeIfPresent(.color)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension OrganizationUpdateIssueType {
-    public init(name: String, isEnabled: Bool, description: String? = nil, color: OrganizationUpdateIssueTypeColor? = nil) {
+public extension OrganizationUpdateIssueType {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        guard container.contains(.isEnabled) else {
+            throw SdkValidationError(
+                field: "is_enabled",
+                code: "required",
+                message: "Validation failed for 'is_enabled': value is required"
+            )
+        }
+        name = try container.sdkDecodeRequired(.name)
+        isEnabled = try container.sdkDecodeRequired(.isEnabled)
+        description = try container.sdkDecodeIfPresent(.description)
+        color = try container.sdkDecodeIfPresent(.color)
+    }
+}
+
+public extension OrganizationUpdateIssueType {
+    init(name: String, isEnabled: Bool, description: String? = nil, color: OrganizationUpdateIssueTypeColor? = nil) {
         (self.name, self.isEnabled) = (name, isEnabled)
         (self.description, self.color) = (description, color)
     }
@@ -52,7 +62,10 @@ extension OrganizationUpdateIssueType {
 public struct OrganizationUpdateIssueTypeColor: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let gray = OrganizationUpdateIssueTypeColor(rawValue: "gray")
     public static let blue = OrganizationUpdateIssueTypeColor(rawValue: "blue")
     public static let green = OrganizationUpdateIssueTypeColor(rawValue: "green")
@@ -64,7 +77,7 @@ public struct OrganizationUpdateIssueTypeColor: RawRepresentable, Hashable, Coda
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

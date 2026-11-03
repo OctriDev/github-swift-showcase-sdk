@@ -30,10 +30,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.issues.removeAllLabels(
-            owner: decoded("\"octocat\""),
-            repo: decoded("\"Hello-World\""),
-            issueNumber: decoded("1")
-        )
+                owner: decoded("\"octocat\""),
+                repo: decoded("\"Hello-World\""),
+                issueNumber: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 301)
@@ -91,7 +91,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testIssuesRemoveDependencyBlockedByIssuesRemoveDependencyBlockedBy301ReachesMockAndDecodesResponse() async throws {
+    func testIssuesRemoveDependencyBlockedByIssuesRemoveDependencyBlockedBy301ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/301") else {
             return
         }
@@ -102,11 +103,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.issues.removeDependencyBlockedBy(
-            owner: decoded("\"octocat\""),
-            repo: decoded("\"Hello-World\""),
-            issueNumber: decoded("1"),
-            issueId: decoded("1")
-        )
+                owner: decoded("\"octocat\""),
+                repo: decoded("\"Hello-World\""),
+                issueNumber: decoded("1"),
+                issueId: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 301)
@@ -154,11 +155,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.issues.removeLabel(
-            owner: decoded("\"octocat\""),
-            repo: decoded("\"Hello-World\""),
-            issueNumber: decoded("1"),
-            name: decoded("\"Example Name\"")
-        )
+                owner: decoded("\"octocat\""),
+                repo: decoded("\"Hello-World\""),
+                issueNumber: decoded("1"),
+                name: decoded("\"Example Name\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 301)
@@ -206,11 +207,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.issues.removeRelatesTo(
-            owner: decoded("\"octocat\""),
-            repo: decoded("\"Hello-World\""),
-            issueNumber: decoded("1"),
-            issueId: decoded("1")
-        )
+                owner: decoded("\"octocat\""),
+                repo: decoded("\"Hello-World\""),
+                issueNumber: decoded("1"),
+                issueId: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 301)
@@ -258,11 +259,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.issues.removeSubIssue(
-            owner: decoded("\"octocat\""),
-            repo: decoded("\"Hello-World\""),
-            issueNumber: decoded("1"),
-            subIssueId: decoded("6")
-        )
+                owner: decoded("\"octocat\""),
+                repo: decoded("\"Hello-World\""),
+                issueNumber: decoded("1"),
+                subIssueId: decoded("6")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -312,13 +313,13 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.issues.reprioritizeSubIssue(
-            owner: decoded("\"octocat\""),
-            repo: decoded("\"Hello-World\""),
-            issueNumber: decoded("1"),
-            subIssueId: decoded("6"),
-            afterId: decoded("5"),
-            beforeId: decoded("null")
-        )
+                owner: decoded("\"octocat\""),
+                repo: decoded("\"Hello-World\""),
+                issueNumber: decoded("1"),
+                subIssueId: decoded("6"),
+                afterId: decoded("5"),
+                beforeId: decoded("null")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -366,11 +367,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.issues.setIssueFieldValues(
-            owner: decoded("\"octocat\""),
-            repo: decoded("\"Hello-World\""),
-            issueNumber: decoded("1"),
-            issueFieldValues: decoded(sdkMethodFixture1033Value1)
-        )
+                owner: decoded("\"octocat\""),
+                repo: decoded("\"Hello-World\""),
+                issueNumber: decoded("1"),
+                issueFieldValues: decoded(sdkMethodFixture1033Value1)
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -418,11 +419,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.issues.setLabels(
-            owner: decoded("\"octocat\""),
-            repo: decoded("\"Hello-World\""),
-            issueNumber: decoded("1"),
-            body: decoded("{\"labels\":[\"bug\",\"enhancement\"]}")
-        )
+                owner: decoded("\"octocat\""),
+                repo: decoded("\"Hello-World\""),
+                issueNumber: decoded("1"),
+                body: decoded("{\"labels\":[\"bug\",\"enhancement\"]}")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 301)
@@ -462,10 +463,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.issues.unlock(
-            owner: decoded("\"octocat\""),
-            repo: decoded("\"Hello-World\""),
-            issueNumber: decoded("1")
-        )
+                owner: decoded("\"octocat\""),
+                repo: decoded("\"Hello-World\""),
+                issueNumber: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -505,10 +506,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.issues.unpinComment(
-            owner: decoded("\"octocat\""),
-            repo: decoded("\"Hello-World\""),
-            commentId: decoded("1")
-        )
+                owner: decoded("\"octocat\""),
+                repo: decoded("\"Hello-World\""),
+                commentId: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -529,7 +530,11 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try IssuesMethods.IssuesUpdateOptions(owner: decoded("\"octocat\""), repo: decoded("\"Hello-World\""), issueNumber: decoded("1"))
+        var options = try IssuesMethods.IssuesUpdateOptions(
+            owner: decoded("\"octocat\""),
+            repo: decoded("\"Hello-World\""),
+            issueNumber: decoded("1")
+        )
         options.title = try decoded("\"Found a bug\"")
         options.body = try decoded("\"I'm having a problem with this.\"")
         options.assignee = try decoded("null")

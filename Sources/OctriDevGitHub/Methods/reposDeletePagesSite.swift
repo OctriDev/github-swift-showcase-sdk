@@ -6,15 +6,36 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ReposMethods {
-    /// Deletes a GitHub Pages site. For more information, see "About GitHub Pages. The authenticated user must be a repository administrator, maintainer, or have the 'manage GitHub Pages settings' permission. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+public extension ReposMethods {
+    /// Deletes a GitHub Pages site. For more information, see "About GitHub Pages. The authenticated user must be a
+    /// repository administrator, maintainer, or have the 'manage GitHub Pages settings' permission. OAuth app tokens
+    /// and personal access tokens (classic) need the `repo` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    public static func reposDeletePagesSite(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/pages"].joined(), config: config, decoder: .empty, operationId: "reposDeletePagesSite", options: requestOptions, errors: ["404": BasicError.self, "409": BasicError.self, "422": ValidationError.self])).data
+    static func reposDeletePagesSite(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/pages",
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "reposDeletePagesSite",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "409": BasicError.self, "422": ValidationError.self]
+        )).data
     }
 }

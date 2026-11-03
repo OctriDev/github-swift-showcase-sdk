@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Orgs domain models
+/// Orgs domain models
 public typealias ApiInsightsRouteStats = [ApiInsightsRouteStatsItem]
 
 public struct ApiInsightsRouteStatsItem: Codable {
@@ -28,25 +28,38 @@ public struct ApiInsightsRouteStatsItem: Codable {
     }
 
     init() {
-        (self.httpMethod, self.apiRoute, self.totalRequestCount, self.rateLimitedRequestCount, self.lastRateLimitedTimestamp) = (nil, nil, nil, nil, nil)
-        self.lastRequestTimestamp = nil
+        (httpMethod, apiRoute, totalRequestCount, rateLimitedRequestCount, lastRateLimitedTimestamp) = (
+            nil,
+            nil,
+            nil,
+            nil,
+            nil
+        )
+        lastRequestTimestamp = nil
     }
 }
 
-extension ApiInsightsRouteStatsItem {
-    public init(from decoder: Decoder) throws {
+public extension ApiInsightsRouteStatsItem {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.httpMethod = try container.sdkDecodeIfPresent(.httpMethod)
-        self.apiRoute = try container.sdkDecodeIfPresent(.apiRoute)
-        self.totalRequestCount = try container.sdkDecodeIfPresent(.totalRequestCount)
-        self.rateLimitedRequestCount = try container.sdkDecodeIfPresent(.rateLimitedRequestCount)
-        self.lastRateLimitedTimestamp = try container.sdkDecodeIfPresent(.lastRateLimitedTimestamp)
-        self.lastRequestTimestamp = try container.sdkDecodeIfPresent(.lastRequestTimestamp)
+        httpMethod = try container.sdkDecodeIfPresent(.httpMethod)
+        apiRoute = try container.sdkDecodeIfPresent(.apiRoute)
+        totalRequestCount = try container.sdkDecodeIfPresent(.totalRequestCount)
+        rateLimitedRequestCount = try container.sdkDecodeIfPresent(.rateLimitedRequestCount)
+        lastRateLimitedTimestamp = try container.sdkDecodeIfPresent(.lastRateLimitedTimestamp)
+        lastRequestTimestamp = try container.sdkDecodeIfPresent(.lastRequestTimestamp)
     }
 }
 
-extension ApiInsightsRouteStatsItem {
-    public init(httpMethod: String? = nil, apiRoute: String? = nil, totalRequestCount: Int? = nil, rateLimitedRequestCount: Int? = nil, lastRateLimitedTimestamp: String? = nil, lastRequestTimestamp: String? = nil) {
+public extension ApiInsightsRouteStatsItem {
+    init(
+        httpMethod: String? = nil,
+        apiRoute: String? = nil,
+        totalRequestCount: Int? = nil,
+        rateLimitedRequestCount: Int? = nil,
+        lastRateLimitedTimestamp: String? = nil,
+        lastRequestTimestamp: String? = nil
+    ) {
         self.init()
         (self.httpMethod, self.apiRoute) = (httpMethod, apiRoute)
         self.totalRequestCount = totalRequestCount

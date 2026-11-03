@@ -6,8 +6,11 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension AppsMethods {
-    /// List repositories that the authenticated user has explicit permission (`:read`, `:write`, or `:admin`) to access for an installation. The authenticated user has explicit permission to access repositories they own, repositories where they are a collaborator, and repositories that they can access through an organization membership. The access the user has to each repository is included in the hash under the `permissions` key.
+public extension AppsMethods {
+    /// List repositories that the authenticated user has explicit permission (`:read`, `:write`, or `:admin`) to access
+    /// for an installation. The authenticated user has explicit permission to access repositories they own,
+    /// repositories where they are a collaborator, and repositories that they can access through an organization
+    /// membership. The access the user has to each repository is included in the hash under the `permissions` key.
     ///
     /// - Parameters:
     /// - installationId: The unique identifier of the installation.
@@ -19,11 +22,26 @@ extension AppsMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func appsListInstallationReposForAuthenticatedUser(config: ClientConfig, installationId: Int, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> AppsListInstallationReposForAuthenticatedUserResponse {
-        return try (await sdkRequest("GET", ["/user/installations/", sdkEncodePathSegment(sdkWireString(installationId)), "/repositories"].joined(), config: config, query: [
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "appsListInstallationReposForAuthenticatedUser", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+    static func appsListInstallationReposForAuthenticatedUser(
+        config: ClientConfig,
+        installationId: Int,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> AppsListInstallationReposForAuthenticatedUserResponse {
+        try await (sdkRequest(
+            "GET",
+            ["/user/installations/", sdkEncodePathSegment(sdkWireString(installationId)), "/repositories"].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "appsListInstallationReposForAuthenticatedUser",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 
     /// Add a single repository to an installation. The authenticated user must have admin access to the repository.
@@ -31,7 +49,25 @@ extension AppsMethods {
     /// - Parameters:
     /// - installationId: The unique identifier of the installation.
     /// - repositoryId: The unique identifier of the repository.
-    public static func appsAddRepoToInstallationForAuthenticatedUser(config: ClientConfig, installationId: Int, repositoryId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("PUT", ["/user/installations/", sdkEncodePathSegment(sdkWireString(installationId)), "/repositories/", sdkEncodePathSegment(sdkWireString(repositoryId))].joined(), config: config, decoder: .empty, operationId: "appsAddRepoToInstallationForAuthenticatedUser", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+    static func appsAddRepoToInstallationForAuthenticatedUser(
+        config: ClientConfig,
+        installationId: Int,
+        repositoryId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "PUT",
+            [
+                "/user/installations/",
+                sdkEncodePathSegment(sdkWireString(installationId)),
+                "/repositories/",
+                sdkEncodePathSegment(sdkWireString(repositoryId)),
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "appsAddRepoToInstallationForAuthenticatedUser",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 }

@@ -6,28 +6,67 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension GistsMethods {
-    /// Checks whether the authenticated user has starred a gist. Use `gist_id` to identify the gist; a 204 response indicates that it is starred.
+public extension GistsMethods {
+    /// Checks whether the authenticated user has starred a gist. Use `gist_id` to identify the gist; a 204 response
+    /// indicates that it is starred.
     ///
     /// - Parameters:
     /// - gistId: The unique identifier of the gist.
-    public static func gistsCheckIsStarred(config: ClientConfig, gistId: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("GET", ["/gists/", sdkEncodePathSegment(sdkWireString(gistId)), "/star"].joined(), config: config, decoder: .empty, operationId: "gistsCheckIsStarred", options: requestOptions, errors: ["403": BasicError.self])).data
+    static func gistsCheckIsStarred(
+        config: ClientConfig,
+        gistId: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "GET",
+            ["/gists/", sdkEncodePathSegment(sdkWireString(gistId)), "/star"].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "gistsCheckIsStarred",
+            options: requestOptions,
+            errors: ["403": BasicError.self]
+        )).data
     }
 
-    /// Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP method](https://docs.github.com/rest/guides/getting-started-with-the-rest-api#http-method)."
+    /// Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information,
+    /// see "[HTTP method](https://docs.github.com/rest/guides/getting-started-with-the-rest-api#http-method)."
     ///
     /// - Parameters:
     /// - gistId: The unique identifier of the gist.
-    public static func gistsStar(config: ClientConfig, gistId: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("PUT", ["/gists/", sdkEncodePathSegment(sdkWireString(gistId)), "/star"].joined(), config: config, decoder: .empty, operationId: "gistsStar", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+    static func gistsStar(
+        config: ClientConfig,
+        gistId: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "PUT",
+            ["/gists/", sdkEncodePathSegment(sdkWireString(gistId)), "/star"].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "gistsStar",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 
-    /// Removes the authenticated user's star from a gist. Supply `gist_id` to identify the gist whose star you want to remove; the operation returns no content.
+    /// Removes the authenticated user's star from a gist. Supply `gist_id` to identify the gist whose star you want to
+    /// remove; the operation returns no content.
     ///
     /// - Parameters:
     /// - gistId: The unique identifier of the gist.
-    public static func gistsUnstar(config: ClientConfig, gistId: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/gists/", sdkEncodePathSegment(sdkWireString(gistId)), "/star"].joined(), config: config, decoder: .empty, operationId: "gistsUnstar", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+    static func gistsUnstar(
+        config: ClientConfig,
+        gistId: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            ["/gists/", sdkEncodePathSegment(sdkWireString(gistId)), "/star"].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "gistsUnstar",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 }

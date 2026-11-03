@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension CodespacesMethods {
-    /// List the machine types available for a given repository based on its configuration. OAuth app tokens and personal access tokens (classic) need the `codespace` scope to use this endpoint.
+public extension CodespacesMethods {
+    /// List the machine types available for a given repository based on its configuration. OAuth app tokens and
+    /// personal access tokens (classic) need the `codespace` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -19,19 +20,55 @@ extension CodespacesMethods {
     /// - clientIp: IP for location auto-detection when proxying a request
     /// - ref: The branch or commit to check for prebuild availability and
     ///   devcontainer restrictions.
-    public static func codespacesRepoMachinesForAuthenticatedUser(config: ClientConfig, owner: String, repo: String, location: String? = nil, clientIp: String? = nil, ref: String? = nil, requestOptions: RequestOptions? = nil) async throws -> CodespacesRepoMachinesForAuthenticatedUserResponse {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/codespaces/machines"].joined(), config: config, query: [
-            SdkQueryParameter("location", value: location),
-            SdkQueryParameter("client_ip", value: clientIp),
-            SdkQueryParameter("ref", value: ref),
-        ], decoder: .json, operationId: "codespacesRepoMachinesForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self])).data
+    static func codespacesRepoMachinesForAuthenticatedUser(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        location: String? = nil,
+        clientIp: String? = nil,
+        ref: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CodespacesRepoMachinesForAuthenticatedUserResponse {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/codespaces/machines",
+            ].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("location", value: location),
+                SdkQueryParameter("client_ip", value: clientIp),
+                SdkQueryParameter("ref", value: ref),
+            ],
+            decoder: .json,
+            operationId: "codespacesRepoMachinesForAuthenticatedUser",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self]
+        )).data
     }
 
-    /// List the machine types a codespace can transition to use. OAuth app tokens and personal access tokens (classic) need the `codespace` scope to use this endpoint.
+    /// List the machine types a codespace can transition to use. OAuth app tokens and personal access tokens (classic)
+    /// need the `codespace` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - codespaceName: The name of the codespace.
-    public static func codespacesCodespaceMachinesForAuthenticatedUser(config: ClientConfig, codespaceName: String, requestOptions: RequestOptions? = nil) async throws -> CodespacesCodespaceMachinesForAuthenticatedUserResponse {
-        return try (await sdkRequest("GET", ["/user/codespaces/", sdkEncodePathSegment(sdkWireString(codespaceName)), "/machines"].joined(), config: config, decoder: .json, operationId: "codespacesCodespaceMachinesForAuthenticatedUser", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self])).data
+    static func codespacesCodespaceMachinesForAuthenticatedUser(
+        config: ClientConfig,
+        codespaceName: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CodespacesCodespaceMachinesForAuthenticatedUserResponse {
+        try await (sdkRequest(
+            "GET",
+            ["/user/codespaces/", sdkEncodePathSegment(sdkWireString(codespaceName)), "/machines"].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "codespacesCodespaceMachinesForAuthenticatedUser",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self]
+        )).data
     }
 }

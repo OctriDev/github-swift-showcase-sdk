@@ -6,20 +6,48 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension AppsMethods {
-    /// Suspends a GitHub App on a user, organization, or enterprise account, which blocks the app from accessing the account's resources. When a GitHub App is suspended, the app's access to the GitHub API or webhook events is blocked for that account. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
+public extension AppsMethods {
+    /// Suspends a GitHub App on a user, organization, or enterprise account, which blocks the app from accessing the
+    /// account's resources. When a GitHub App is suspended, the app's access to the GitHub API or webhook events is
+    /// blocked for that account. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
+    /// to access this endpoint.
     ///
     /// - Parameters:
     /// - installationId: The unique identifier of the installation.
-    public static func appsSuspendInstallation(config: ClientConfig, installationId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("PUT", ["/app/installations/", sdkEncodePathSegment(sdkWireString(installationId)), "/suspended"].joined(), config: config, decoder: .empty, operationId: "appsSuspendInstallation", options: requestOptions, errors: ["404": BasicError.self])).data
+    static func appsSuspendInstallation(
+        config: ClientConfig,
+        installationId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "PUT",
+            ["/app/installations/", sdkEncodePathSegment(sdkWireString(installationId)), "/suspended"].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "appsSuspendInstallation",
+            options: requestOptions,
+            errors: ["404": BasicError.self]
+        )).data
     }
 
-    /// Removes a GitHub App installation suspension. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
+    /// Removes a GitHub App installation suspension. You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app)
+    /// to access this endpoint.
     ///
     /// - Parameters:
     /// - installationId: The unique identifier of the installation.
-    public static func appsUnsuspendInstallation(config: ClientConfig, installationId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/app/installations/", sdkEncodePathSegment(sdkWireString(installationId)), "/suspended"].joined(), config: config, decoder: .empty, operationId: "appsUnsuspendInstallation", options: requestOptions, errors: ["404": BasicError.self])).data
+    static func appsUnsuspendInstallation(
+        config: ClientConfig,
+        installationId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            ["/app/installations/", sdkEncodePathSegment(sdkWireString(installationId)), "/suspended"].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "appsUnsuspendInstallation",
+            options: requestOptions,
+            errors: ["404": BasicError.self]
+        )).data
     }
 }

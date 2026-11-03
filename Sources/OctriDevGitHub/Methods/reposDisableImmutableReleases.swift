@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ReposMethods {
+public extension ReposMethods {
     /// Disables immutable releases for a repository. The authenticated user must have admin access to the repository.
     ///
     /// - Parameters:
@@ -14,7 +14,26 @@ extension ReposMethods {
     ///   sensitive.
     /// - repo: The name of the repository without the `.git` extension. The name is
     ///   not case sensitive.
-    public static func reposDisableImmutableReleases(config: ClientConfig, owner: String, repo: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/immutable-releases"].joined(), config: config, decoder: .empty, operationId: "reposDisableImmutableReleases", options: requestOptions, errors: ["409": BasicError.self])).data
+    static func reposDisableImmutableReleases(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/immutable-releases",
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "reposDisableImmutableReleases",
+            options: requestOptions,
+            errors: ["409": BasicError.self]
+        )).data
     }
 }

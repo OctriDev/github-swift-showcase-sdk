@@ -9,14 +9,17 @@ import Foundation
 public struct TeamsListMembersLegacyParameter: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let member = TeamsListMembersLegacyParameter(rawValue: "member")
     public static let maintainer = TeamsListMembersLegacyParameter(rawValue: "maintainer")
     public static let all = TeamsListMembersLegacyParameter(rawValue: "all")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -28,7 +31,10 @@ public struct TeamsListMembersLegacyParameter: RawRepresentable, Hashable, Codab
 public struct PackagesListPackagesForUserParameter: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let npm = PackagesListPackagesForUserParameter(rawValue: "npm")
     public static let maven = PackagesListPackagesForUserParameter(rawValue: "maven")
     public static let rubygems = PackagesListPackagesForUserParameter(rawValue: "rubygems")
@@ -38,7 +44,7 @@ public struct PackagesListPackagesForUserParameter: RawRepresentable, Hashable, 
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -50,7 +56,10 @@ public struct PackagesListPackagesForUserParameter: RawRepresentable, Hashable, 
 public struct BillingGetAllBudgetsOrgParameter: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let enterprise = BillingGetAllBudgetsOrgParameter(rawValue: "enterprise")
     public static let organization = BillingGetAllBudgetsOrgParameter(rawValue: "organization")
     public static let repository = BillingGetAllBudgetsOrgParameter(rawValue: "repository")
@@ -60,7 +69,7 @@ public struct BillingGetAllBudgetsOrgParameter: RawRepresentable, Hashable, Coda
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -71,16 +80,22 @@ public struct BillingGetAllBudgetsOrgParameter: RawRepresentable, Hashable, Coda
 
 /// Override the Automation `write_scope` for runs started by this trigger. If omitted, the automation's
 /// `write_scope` is used. Organization or repository policy may restrict the effective scope to `trigger`.
-public struct AgentAutomationsCreateRepoAutomationResponseTriggersIssueOpenXd0af30c897: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct AgentAutomationsCreateRepoAutomationResponseTriggersIssueOpenXd0af30c897: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let trigger = AgentAutomationsCreateRepoAutomationResponseTriggersIssueOpenXd0af30c897(rawValue: "trigger")
-    public static let repository = AgentAutomationsCreateRepoAutomationResponseTriggersIssueOpenXd0af30c897(rawValue: "repository")
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let trigger =
+        AgentAutomationsCreateRepoAutomationResponseTriggersIssueOpenXd0af30c897(rawValue: "trigger")
+    public static let repository =
+        AgentAutomationsCreateRepoAutomationResponseTriggersIssueOpenXd0af30c897(rawValue: "repository")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -93,13 +108,16 @@ public struct AgentAutomationsCreateRepoAutomationResponseTriggersIssueOpenXd0af
 public struct MarkdownRenderRequestBodyMode: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let markdown = MarkdownRenderRequestBodyMode(rawValue: "markdown")
     public static let gfm = MarkdownRenderRequestBodyMode(rawValue: "gfm")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -108,21 +126,32 @@ public struct MarkdownRenderRequestBodyMode: RawRepresentable, Hashable, Codable
     }
 }
 
-public struct OrgsEnableOrDisableSecurityProductOnAllOrgReposParameterXd5c8b4d9: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct OrgsEnableOrDisableSecurityProductOnAllOrgReposParameterXd5c8b4d9: RawRepresentable, Hashable, Codable,
+    Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let dependencyGraph = OrgsEnableOrDisableSecurityProductOnAllOrgReposParameterXd5c8b4d9(rawValue: "dependency_graph")
-    public static let dependabotAlerts = OrgsEnableOrDisableSecurityProductOnAllOrgReposParameterXd5c8b4d9(rawValue: "dependabot_alerts")
-    public static let dependabotSecurityUpdates = OrgsEnableOrDisableSecurityProductOnAllOrgReposParameterXd5c8b4d9(rawValue: "dependabot_security_updates")
-    public static let advancedSecurity = OrgsEnableOrDisableSecurityProductOnAllOrgReposParameterXd5c8b4d9(rawValue: "advanced_security")
-    public static let codeScanningDefaultSetup = OrgsEnableOrDisableSecurityProductOnAllOrgReposParameterXd5c8b4d9(rawValue: "code_scanning_default_setup")
-    public static let secretScanning = OrgsEnableOrDisableSecurityProductOnAllOrgReposParameterXd5c8b4d9(rawValue: "secret_scanning")
-    public static let secretScanningPushProtection = OrgsEnableOrDisableSecurityProductOnAllOrgReposParameterXd5c8b4d9(rawValue: "secret_scanning_push_protection")
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let dependencyGraph =
+        OrgsEnableOrDisableSecurityProductOnAllOrgReposParameterXd5c8b4d9(rawValue: "dependency_graph")
+    public static let dependabotAlerts =
+        OrgsEnableOrDisableSecurityProductOnAllOrgReposParameterXd5c8b4d9(rawValue: "dependabot_alerts")
+    public static let dependabotSecurityUpdates =
+        OrgsEnableOrDisableSecurityProductOnAllOrgReposParameterXd5c8b4d9(rawValue: "dependabot_security_updates")
+    public static let advancedSecurity =
+        OrgsEnableOrDisableSecurityProductOnAllOrgReposParameterXd5c8b4d9(rawValue: "advanced_security")
+    public static let codeScanningDefaultSetup =
+        OrgsEnableOrDisableSecurityProductOnAllOrgReposParameterXd5c8b4d9(rawValue: "code_scanning_default_setup")
+    public static let secretScanning =
+        OrgsEnableOrDisableSecurityProductOnAllOrgReposParameterXd5c8b4d9(rawValue: "secret_scanning")
+    public static let secretScanningPushProtection =
+        OrgsEnableOrDisableSecurityProductOnAllOrgReposParameterXd5c8b4d9(rawValue: "secret_scanning_push_protection")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -133,16 +162,21 @@ public struct OrgsEnableOrDisableSecurityProductOnAllOrgReposParameterXd5c8b4d9:
 
 /// Billing unit used for this session. New sessions since June 1, 2026 use `ai_credits`, but older sessions use
 /// `premium_requests`.
-public struct AgentTasksGetTaskByIdResponseVariant1SessionsItemUsageType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct AgentTasksGetTaskByIdResponseVariant1SessionsItemUsageType: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let aiCredits = AgentTasksGetTaskByIdResponseVariant1SessionsItemUsageType(rawValue: "ai_credits")
-    public static let premiumRequests = AgentTasksGetTaskByIdResponseVariant1SessionsItemUsageType(rawValue: "premium_requests")
+    public static let premiumRequests =
+        AgentTasksGetTaskByIdResponseVariant1SessionsItemUsageType(rawValue: "premium_requests")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -170,17 +204,21 @@ public enum ChecksCreateRequestBodyVariant1Status: String, CaseIterable, Codable
 }
 
 /// The enablement status of secret scanning
-public struct CodeSecurityUpdateConfigurationRequestBodySecretScanning: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct CodeSecurityUpdateConfigurationRequestBodySecretScanning: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let enabled = CodeSecurityUpdateConfigurationRequestBodySecretScanning(rawValue: "enabled")
     public static let disabled = CodeSecurityUpdateConfigurationRequestBodySecretScanning(rawValue: "disabled")
     public static let notSet = CodeSecurityUpdateConfigurationRequestBodySecretScanning(rawValue: "not_set")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -189,16 +227,22 @@ public struct CodeSecurityUpdateConfigurationRequestBodySecretScanning: RawRepre
     }
 }
 
-public struct IssuesUpdateResponseVariant1SuggestionsAssigneesItemIgnoredReason: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct IssuesUpdateResponseVariant1SuggestionsAssigneesItemIgnoredReason: RawRepresentable, Hashable, Codable,
+    Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
-    public static let alreadyApplied = IssuesUpdateResponseVariant1SuggestionsAssigneesItemIgnoredReason(rawValue: "already_applied")
-    public static let issueAlreadyClosed = IssuesUpdateResponseVariant1SuggestionsAssigneesItemIgnoredReason(rawValue: "issue_already_closed")
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public static let alreadyApplied =
+        IssuesUpdateResponseVariant1SuggestionsAssigneesItemIgnoredReason(rawValue: "already_applied")
+    public static let issueAlreadyClosed =
+        IssuesUpdateResponseVariant1SuggestionsAssigneesItemIgnoredReason(rawValue: "issue_already_closed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

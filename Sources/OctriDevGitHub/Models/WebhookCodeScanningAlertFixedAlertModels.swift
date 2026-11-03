@@ -3,42 +3,58 @@
 
 import Foundation
 
-// WebhookCodeScanningAlertFixed domain models
-extension WebhookCodeScanningAlertFixedAlert {
-    public init(from decoder: Decoder) throws {
+/// WebhookCodeScanningAlertFixed domain models
+public extension WebhookCodeScanningAlertFixedAlert {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.dismissedAt = try container.sdkDecodeNullable(.dismissedAt)
-        self.dismissedBy = try container.sdkDecodeNullable(.dismissedBy)
-        self.dismissedReason = try container.sdkDecodeNullable(.dismissedReason)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.number = try container.sdkDecodeRequired(.number)
-        self.rule = try container.sdkDecodeRequired(.rule)
-        self.state = try container.sdkDecodeNullable(.state)
-        self.tool = try container.sdkDecodeRequired(.tool)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.assignees = try container.sdkDecodeIfPresent(.assignees)
-        self.dismissedComment = try container.sdkDecodeIfPresent(.dismissedComment)
-        self.fixedAt = try container.sdkDecodeIfPresent(.fixedAt)
-        self.instancesUrl = try container.sdkDecodeIfPresent(.instancesUrl)
-        self.mostRecentInstance = try container.sdkDecodeIfPresent(.mostRecentInstance)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-        if let value = self.dismissedAt {
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        dismissedAt = try container.sdkDecodeNullable(.dismissedAt)
+        dismissedBy = try container.sdkDecodeNullable(.dismissedBy)
+        dismissedReason = try container.sdkDecodeNullable(.dismissedReason)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        number = try container.sdkDecodeRequired(.number)
+        rule = try container.sdkDecodeRequired(.rule)
+        state = try container.sdkDecodeNullable(.state)
+        tool = try container.sdkDecodeRequired(.tool)
+        url = try container.sdkDecodeRequired(.url)
+        assignees = try container.sdkDecodeIfPresent(.assignees)
+        dismissedComment = try container.sdkDecodeIfPresent(.dismissedComment)
+        fixedAt = try container.sdkDecodeIfPresent(.fixedAt)
+        instancesUrl = try container.sdkDecodeIfPresent(.instancesUrl)
+        mostRecentInstance = try container.sdkDecodeIfPresent(.mostRecentInstance)
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        if let value = dismissedAt {
             try sdkValidateDateTime("dismissed_at", sdkWireString(value))
         }
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("url", self.url)
-        if let value = self.dismissedComment {
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateUri("url", url)
+        if let value = dismissedComment {
             try validateLength("dismissed_comment", sdkWireString(value), min: nil, max: 280)
         }
-        if let value = self.instancesUrl {
+        if let value = instancesUrl {
             try sdkValidateUri("instances_url", value)
         }
     }
 }
 
-extension WebhookCodeScanningAlertFixedAlert {
-    public init(createdAt: Date, dismissedAt: Date?, dismissedBy: WebhookCodeScanningAlertFixedAlertDismissedBy?, dismissedReason: WebhookCodeScanningAlertFixedAlertDismissedReason?, htmlUrl: String, number: Int, rule: WebhookCodeScanningAlertFixedAlertRule, state: WebhookCodeScanningAlertFixedAlertState?, tool: WebhookCodeScanningAlertFixedAlertTool, url: String, assignees: [SimpleUser]? = nil, dismissedComment: CodeScanningAlertDismissedComment? = nil, fixedAt: JSONValue? = nil, instancesUrl: String? = nil, mostRecentInstance: WebhookCodeScanningAlertFixedAlertMostRecentInstance? = nil) throws {
+public extension WebhookCodeScanningAlertFixedAlert {
+    init(
+        createdAt: Date,
+        dismissedAt: Date?,
+        dismissedBy: WebhookCodeScanningAlertFixedAlertDismissedBy?,
+        dismissedReason: WebhookCodeScanningAlertFixedAlertDismissedReason?,
+        htmlUrl: String,
+        number: Int,
+        rule: WebhookCodeScanningAlertFixedAlertRule,
+        state: WebhookCodeScanningAlertFixedAlertState?,
+        tool: WebhookCodeScanningAlertFixedAlertTool,
+        url: String,
+        assignees: [SimpleUser]? = nil,
+        dismissedComment: CodeScanningAlertDismissedComment? = nil,
+        fixedAt: JSONValue? = nil,
+        instancesUrl: String? = nil,
+        mostRecentInstance: WebhookCodeScanningAlertFixedAlertMostRecentInstance? = nil
+    ) throws {
         (self.createdAt, self.dismissedAt) = (createdAt, dismissedAt)
         (self.dismissedBy, self.dismissedReason) = (dismissedBy, dismissedReason)
         (self.htmlUrl, self.number) = (htmlUrl, number)
@@ -47,12 +63,12 @@ extension WebhookCodeScanningAlertFixedAlert {
         (self.assignees, self.dismissedComment) = (assignees, dismissedComment)
         (self.fixedAt, self.instancesUrl) = (fixedAt, instancesUrl)
         self.mostRecentInstance = mostRecentInstance
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
         if let value = self.dismissedAt {
             try sdkValidateDateTime("dismissed_at", sdkWireString(value))
         }
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("url", self.url)
+        try sdkValidateUri("html_url", self.htmlUrl)
+        try sdkValidateUri("url", self.url)
         if let value = self.dismissedComment {
             try validateLength("dismissed_comment", sdkWireString(value), min: nil, max: 280)
         }
@@ -92,34 +108,57 @@ public struct WebhookCodeScanningAlertFixedAlertRule: Codable {
         case tags
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookCodeScanningAlertFixedAlertRule {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.description) else {
-            throw SdkValidationError(field: "description", code: "required", message: "Validation failed for 'description': value is required")
-        }
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.severity) else {
-            throw SdkValidationError(field: "severity", code: "required", message: "Validation failed for 'severity': value is required")
-        }
-        self.description = try container.sdkDecodeRequired(.description)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.severity = try container.sdkDecodeNullable(.severity)
-        self.fullDescription = try container.sdkDecodeIfPresent(.fullDescription)
-        self.help = try container.sdkDecodeIfPresent(.help)
-        self.helpUri = try container.sdkDecodeIfPresent(.helpUri)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.tags = try container.sdkDecodeIfPresent(.tags)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WebhookCodeScanningAlertFixedAlertRule {
-    public init(description: String, id: String, severity: WebhookCodeScanningAlertFixedAlertRuleSeverity?, fullDescription: String? = nil, help: String? = nil, helpUri: String? = nil, name: String? = nil, tags: [String]? = nil) {
+public extension WebhookCodeScanningAlertFixedAlertRule {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.description) else {
+            throw SdkValidationError(
+                field: "description",
+                code: "required",
+                message: "Validation failed for 'description': value is required"
+            )
+        }
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.severity) else {
+            throw SdkValidationError(
+                field: "severity",
+                code: "required",
+                message: "Validation failed for 'severity': value is required"
+            )
+        }
+        description = try container.sdkDecodeRequired(.description)
+        id = try container.sdkDecodeRequired(.id)
+        severity = try container.sdkDecodeNullable(.severity)
+        fullDescription = try container.sdkDecodeIfPresent(.fullDescription)
+        help = try container.sdkDecodeIfPresent(.help)
+        helpUri = try container.sdkDecodeIfPresent(.helpUri)
+        name = try container.sdkDecodeIfPresent(.name)
+        tags = try container.sdkDecodeIfPresent(.tags)
+    }
+}
+
+public extension WebhookCodeScanningAlertFixedAlertRule {
+    init(
+        description: String,
+        id: String,
+        severity: WebhookCodeScanningAlertFixedAlertRuleSeverity?,
+        fullDescription: String? = nil,
+        help: String? = nil,
+        helpUri: String? = nil,
+        name: String? = nil,
+        tags: [String]? = nil
+    ) {
         (self.description, self.id) = (description, id)
         (self.severity, self.fullDescription) = (severity, fullDescription)
         (self.help, self.helpUri) = (help, helpUri)
@@ -128,10 +167,14 @@ extension WebhookCodeScanningAlertFixedAlertRule {
 }
 
 /// The reason for dismissing or closing the alert.
-public struct WebhookCodeScanningAlertFixedAlertDismissedReason: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookCodeScanningAlertFixedAlertDismissedReason: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let falsePositive = WebhookCodeScanningAlertFixedAlertDismissedReason(rawValue: "false positive")
     public static let wonTFix = WebhookCodeScanningAlertFixedAlertDismissedReason(rawValue: "won't fix")
     public static let usedInTests = WebhookCodeScanningAlertFixedAlertDismissedReason(rawValue: "used in tests")
@@ -139,7 +182,7 @@ public struct WebhookCodeScanningAlertFixedAlertDismissedReason: RawRepresentabl
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -150,15 +193,19 @@ public struct WebhookCodeScanningAlertFixedAlertDismissedReason: RawRepresentabl
 
 /// State of a code scanning alert. Events for alerts found outside the default branch will return a `null`
 /// value until they are dismissed or fixed.
-public struct WebhookCodeScanningAlertFixedAlertState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookCodeScanningAlertFixedAlertState: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let fixed = WebhookCodeScanningAlertFixedAlertState(rawValue: "fixed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -168,17 +215,21 @@ public struct WebhookCodeScanningAlertFixedAlertState: RawRepresentable, Hashabl
 }
 
 /// Optional enumerated value serialized in the `type` wire field.
-public struct WebhookCodeScanningAlertFixedAlertDismissedByType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookCodeScanningAlertFixedAlertDismissedByType: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = WebhookCodeScanningAlertFixedAlertDismissedByType(rawValue: "Bot")
     public static let user = WebhookCodeScanningAlertFixedAlertDismissedByType(rawValue: "User")
     public static let organization = WebhookCodeScanningAlertFixedAlertDismissedByType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -188,10 +239,14 @@ public struct WebhookCodeScanningAlertFixedAlertDismissedByType: RawRepresentabl
 }
 
 /// The severity of the alert.
-public struct WebhookCodeScanningAlertFixedAlertRuleSeverity: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookCodeScanningAlertFixedAlertRuleSeverity: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let none = WebhookCodeScanningAlertFixedAlertRuleSeverity(rawValue: "none")
     public static let note = WebhookCodeScanningAlertFixedAlertRuleSeverity(rawValue: "note")
     public static let warning = WebhookCodeScanningAlertFixedAlertRuleSeverity(rawValue: "warning")
@@ -199,7 +254,7 @@ public struct WebhookCodeScanningAlertFixedAlertRuleSeverity: RawRepresentable, 
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -209,17 +264,21 @@ public struct WebhookCodeScanningAlertFixedAlertRuleSeverity: RawRepresentable, 
 }
 
 /// State of a code scanning alert.
-public struct WebhookCodeScanningAlertFixedAlertMostRecentInstanceState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookCodeScanningAlertFixedAlertMostRecentInstanceState: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let open = WebhookCodeScanningAlertFixedAlertMostRecentInstanceState(rawValue: "open")
     public static let dismissed = WebhookCodeScanningAlertFixedAlertMostRecentInstanceState(rawValue: "dismissed")
     public static let fixed = WebhookCodeScanningAlertFixedAlertMostRecentInstanceState(rawValue: "fixed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -232,12 +291,15 @@ public struct WebhookCodeScanningAlertFixedAlertMostRecentInstanceState: RawRepr
 public struct WebhookCodeScanningAlertFixedAction: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let fixed = WebhookCodeScanningAlertFixedAction(rawValue: "fixed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

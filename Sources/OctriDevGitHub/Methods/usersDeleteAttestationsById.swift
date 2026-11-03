@@ -6,13 +6,31 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension UsersMethods {
+public extension UsersMethods {
     /// Delete an artifact attestation by unique ID that is associated with a repository owned by a user.
     ///
     /// - Parameters:
     /// - username: The handle for the GitHub user account.
     /// - attestationId: Attestation ID
-    public static func usersDeleteAttestationsById(config: ClientConfig, username: String, attestationId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/users/", sdkEncodePathSegment(sdkWireString(username)), "/attestations/", sdkEncodePathSegment(sdkWireString(attestationId))].joined(), config: config, decoder: .empty, operationId: "usersDeleteAttestationsById", options: requestOptions, errors: ["403": BasicError.self, "404": BasicError.self])).data
+    static func usersDeleteAttestationsById(
+        config: ClientConfig,
+        username: String,
+        attestationId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            [
+                "/users/",
+                sdkEncodePathSegment(sdkWireString(username)),
+                "/attestations/",
+                sdkEncodePathSegment(sdkWireString(attestationId)),
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "usersDeleteAttestationsById",
+            options: requestOptions,
+            errors: ["403": BasicError.self, "404": BasicError.self]
+        )).data
     }
 }

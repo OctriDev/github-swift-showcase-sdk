@@ -18,25 +18,25 @@ struct UsersUpdateAuthenticatedRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.name, forKey: SdkCodingKey("name"))
-        try keyedContainer.encodeIfPresent(self.email, forKey: SdkCodingKey("email"))
-        try keyedContainer.encodeIfPresent(self.blog, forKey: SdkCodingKey("blog"))
-        try keyedContainer.encodeIfPresent(self.twitterUsername, forKey: SdkCodingKey("twitter_username"))
-        try keyedContainer.encodeIfPresent(self.company, forKey: SdkCodingKey("company"))
-        try keyedContainer.encodeIfPresent(self.location, forKey: SdkCodingKey("location"))
-        try keyedContainer.encodeIfPresent(self.hireable, forKey: SdkCodingKey("hireable"))
-        try keyedContainer.encodeIfPresent(self.bio, forKey: SdkCodingKey("bio"))
+        try keyedContainer.encodeIfPresent(name, forKey: SdkCodingKey("name"))
+        try keyedContainer.encodeIfPresent(email, forKey: SdkCodingKey("email"))
+        try keyedContainer.encodeIfPresent(blog, forKey: SdkCodingKey("blog"))
+        try keyedContainer.encodeIfPresent(twitterUsername, forKey: SdkCodingKey("twitter_username"))
+        try keyedContainer.encodeIfPresent(company, forKey: SdkCodingKey("company"))
+        try keyedContainer.encodeIfPresent(location, forKey: SdkCodingKey("location"))
+        try keyedContainer.encodeIfPresent(hireable, forKey: SdkCodingKey("hireable"))
+        try keyedContainer.encodeIfPresent(bio, forKey: SdkCodingKey("bio"))
     }
 
     init(options: UsersMethods.UsersUpdateAuthenticatedOptions) {
-        self.name = options.name
-        self.email = options.email
-        self.blog = options.blog
-        self.twitterUsername = options.twitterUsername
-        self.company = options.company
-        self.location = options.location
-        self.hireable = options.hireable
-        self.bio = options.bio
+        name = options.name
+        email = options.email
+        blog = options.blog
+        twitterUsername = options.twitterUsername
+        company = options.company
+        location = options.location
+        hireable = options.hireable
+        bio = options.bio
     }
 }
 
@@ -45,7 +45,7 @@ struct UsersSetPrimaryEmailVisibilityForAuthenticatedUserRequestBody: Encodable 
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.visibility, forKey: SdkCodingKey("visibility"))
+        try keyedContainer.encode(visibility, forKey: SdkCodingKey("visibility"))
     }
 }
 
@@ -55,8 +55,8 @@ struct UsersCreateGpgKeyForAuthenticatedUserRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.armoredPublicKey, forKey: SdkCodingKey("armored_public_key"))
-        try keyedContainer.encodeIfPresent(self.name, forKey: SdkCodingKey("name"))
+        try keyedContainer.encode(armoredPublicKey, forKey: SdkCodingKey("armored_public_key"))
+        try keyedContainer.encodeIfPresent(name, forKey: SdkCodingKey("name"))
     }
 }
 
@@ -66,8 +66,8 @@ struct UsersCreatePublicSshKeyForAuthenticatedUserRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.key, forKey: SdkCodingKey("key"))
-        try keyedContainer.encodeIfPresent(self.title, forKey: SdkCodingKey("title"))
+        try keyedContainer.encode(key, forKey: SdkCodingKey("key"))
+        try keyedContainer.encodeIfPresent(title, forKey: SdkCodingKey("title"))
     }
 }
 
@@ -76,7 +76,7 @@ struct UsersAddSocialAccountForAuthenticatedUserRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.accountUrls, forKey: SdkCodingKey("account_urls"))
+        try keyedContainer.encode(accountUrls, forKey: SdkCodingKey("account_urls"))
     }
 }
 
@@ -85,7 +85,7 @@ struct UsersDeleteSocialAccountForAuthenticatedUserRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.accountUrls, forKey: SdkCodingKey("account_urls"))
+        try keyedContainer.encode(accountUrls, forKey: SdkCodingKey("account_urls"))
     }
 }
 
@@ -95,8 +95,8 @@ struct UsersCreateSshSigningKeyForAuthenticatedUserRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.key, forKey: SdkCodingKey("key"))
-        try keyedContainer.encodeIfPresent(self.title, forKey: SdkCodingKey("title"))
+        try keyedContainer.encode(key, forKey: SdkCodingKey("key"))
+        try keyedContainer.encodeIfPresent(title, forKey: SdkCodingKey("title"))
     }
 }
 
@@ -106,7 +106,7 @@ struct UsersListAttestationsBulkRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.subjectDigests, forKey: SdkCodingKey("subject_digests"))
-        try keyedContainer.encodeIfPresent(self.predicateType, forKey: SdkCodingKey("predicate_type"))
+        try keyedContainer.encode(subjectDigests, forKey: SdkCodingKey("subject_digests"))
+        try keyedContainer.encodeIfPresent(predicateType, forKey: SdkCodingKey("predicate_type"))
     }
 }

@@ -3,34 +3,38 @@
 
 import Foundation
 
-// Search domain models
+/// Search domain models
 extension RepoSearchResultItem {
     func sdkValidateConstraintsPart2() throws {
-            try sdkValidateUri("stargazers_url", self.stargazersUrl)
-            try sdkValidateUri("contributors_url", self.contributorsUrl)
-            try sdkValidateUri("subscribers_url", self.subscribersUrl)
-            try sdkValidateUri("subscription_url", self.subscriptionUrl)
-            try sdkValidateUri("merges_url", self.mergesUrl)
-            try sdkValidateUri("downloads_url", self.downloadsUrl)
-            try sdkValidateUri("deployments_url", self.deploymentsUrl)
-            try sdkValidateUri("svn_url", self.svnUrl)
-        if let value = self.mirrorUrl {
+        try sdkValidateUri("stargazers_url", stargazersUrl)
+        try sdkValidateUri("contributors_url", contributorsUrl)
+        try sdkValidateUri("subscribers_url", subscribersUrl)
+        try sdkValidateUri("subscription_url", subscriptionUrl)
+        try sdkValidateUri("merges_url", mergesUrl)
+        try sdkValidateUri("downloads_url", downloadsUrl)
+        try sdkValidateUri("deployments_url", deploymentsUrl)
+        try sdkValidateUri("svn_url", svnUrl)
+        if let value = mirrorUrl {
             try sdkValidateUri("mirror_url", value)
         }
     }
 }
 
 /// The policy controlling who can create pull requests: all or collaborators_only.
-public struct RepoSearchResultItemPullRequestCreationPolicy: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct RepoSearchResultItemPullRequestCreationPolicy: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let all = RepoSearchResultItemPullRequestCreationPolicy(rawValue: "all")
     public static let collaboratorsOnly = RepoSearchResultItemPullRequestCreationPolicy(rawValue: "collaborators_only")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

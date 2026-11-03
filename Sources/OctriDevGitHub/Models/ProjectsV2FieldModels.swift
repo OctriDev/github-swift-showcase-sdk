@@ -3,16 +3,27 @@
 
 import Foundation
 
-// Projects domain models
-extension ProjectsV2Field {
-    public init(id: Int, projectUrl: String, name: String, dataType: ProjectsV2FieldDataType, createdAt: Date, updatedAt: Date, issueFieldId: Int? = nil, nodeId: String? = nil, options: [ProjectsV2SingleSelectOptions]? = nil, configuration: ProjectsV2FieldConfiguration? = nil) throws {
+/// Projects domain models
+public extension ProjectsV2Field {
+    init(
+        id: Int,
+        projectUrl: String,
+        name: String,
+        dataType: ProjectsV2FieldDataType,
+        createdAt: Date,
+        updatedAt: Date,
+        issueFieldId: Int? = nil,
+        nodeId: String? = nil,
+        options: [ProjectsV2SingleSelectOptions]? = nil,
+        configuration: ProjectsV2FieldConfiguration? = nil
+    ) throws {
         (self.id, self.projectUrl) = (id, projectUrl)
         (self.name, self.dataType) = (name, dataType)
         (self.createdAt, self.updatedAt) = (createdAt, updatedAt)
         (self.issueFieldId, self.nodeId) = (issueFieldId, nodeId)
         (self.options, self.configuration) = (options, configuration)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
+        try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
     }
 }
 
@@ -20,13 +31,16 @@ extension ProjectsV2Field {
 public struct ProjectsV2State: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let open = ProjectsV2State(rawValue: "open")
     public static let closed = ProjectsV2State(rawValue: "closed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -39,7 +53,10 @@ public struct ProjectsV2State: RawRepresentable, Hashable, Codable, Sendable, Sd
 public struct NullableProjectsV2StatusUpdateStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let inactive = NullableProjectsV2StatusUpdateStatus(rawValue: "INACTIVE")
     public static let onTrack = NullableProjectsV2StatusUpdateStatus(rawValue: "ON_TRACK")
     public static let atRisk = NullableProjectsV2StatusUpdateStatus(rawValue: "AT_RISK")
@@ -48,7 +65,7 @@ public struct NullableProjectsV2StatusUpdateStatus: RawRepresentable, Hashable, 
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -61,7 +78,10 @@ public struct NullableProjectsV2StatusUpdateStatus: RawRepresentable, Hashable, 
 public struct ProjectsV2FieldDataType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let assignees = ProjectsV2FieldDataType(rawValue: "assignees")
     public static let linkedPullRequests = ProjectsV2FieldDataType(rawValue: "linked_pull_requests")
     public static let reviewers = ProjectsV2FieldDataType(rawValue: "reviewers")
@@ -80,7 +100,7 @@ public struct ProjectsV2FieldDataType: RawRepresentable, Hashable, Codable, Send
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -90,10 +110,14 @@ public struct ProjectsV2FieldDataType: RawRepresentable, Hashable, Codable, Send
 }
 
 /// The color associated with the option.
-public struct ProjectsV2FieldSingleSelectOptionColor: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ProjectsV2FieldSingleSelectOptionColor: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let blue = ProjectsV2FieldSingleSelectOptionColor(rawValue: "BLUE")
     public static let gray = ProjectsV2FieldSingleSelectOptionColor(rawValue: "GRAY")
     public static let green = ProjectsV2FieldSingleSelectOptionColor(rawValue: "GREEN")
@@ -105,7 +129,7 @@ public struct ProjectsV2FieldSingleSelectOptionColor: RawRepresentable, Hashable
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -118,14 +142,17 @@ public struct ProjectsV2FieldSingleSelectOptionColor: RawRepresentable, Hashable
 public struct ProjectsV2ViewLayout: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let table = ProjectsV2ViewLayout(rawValue: "table")
     public static let board = ProjectsV2ViewLayout(rawValue: "board")
     public static let roadmap = ProjectsV2ViewLayout(rawValue: "roadmap")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -138,7 +165,10 @@ public struct ProjectsV2ViewLayout: RawRepresentable, Hashable, Codable, Sendabl
 public struct ProjectsV2StatusUpdateStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let inactive = ProjectsV2StatusUpdateStatus(rawValue: "INACTIVE")
     public static let onTrack = ProjectsV2StatusUpdateStatus(rawValue: "ON_TRACK")
     public static let atRisk = ProjectsV2StatusUpdateStatus(rawValue: "AT_RISK")
@@ -147,7 +177,7 @@ public struct ProjectsV2StatusUpdateStatus: RawRepresentable, Hashable, Codable,
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -160,14 +190,17 @@ public struct ProjectsV2StatusUpdateStatus: RawRepresentable, Hashable, Codable,
 public struct ProjectsV2ItemContentType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let issue = ProjectsV2ItemContentType(rawValue: "Issue")
     public static let pullRequest = ProjectsV2ItemContentType(rawValue: "PullRequest")
     public static let draftIssue = ProjectsV2ItemContentType(rawValue: "DraftIssue")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

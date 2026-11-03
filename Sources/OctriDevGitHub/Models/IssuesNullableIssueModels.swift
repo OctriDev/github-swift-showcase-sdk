@@ -3,9 +3,50 @@
 
 import Foundation
 
-// IssuesNullable domain models
-extension NullableIssue {
-    public init(id: Int, nodeId: String, url: String, repositoryUrl: String, labelsUrl: String, commentsUrl: String, eventsUrl: String, htmlUrl: String, number: Int, state: String, title: String, user: NullableSimpleUser?, labels: [NullableIssueLabelsItem], assignee: NullableSimpleUser?, milestone: NullableMilestone?, locked: Bool, comments: Int, closedAt: Date?, createdAt: Date, updatedAt: Date, stateReason: NullableIssueStateReason? = nil, body: String? = nil, assignees: [SimpleUser]? = nil, activeLockReason: String? = nil, pullRequest: NullableIssuePullRequest? = nil, draft: Bool? = nil, closedBy: NullableSimpleUser? = nil, bodyHtml: String? = nil, bodyText: String? = nil, timelineUrl: String? = nil, type: IssueType? = nil, repository: Repository? = nil, performedViaGithubApp: NullableIntegration? = nil, authorAssociation: AuthorAssociation? = nil, reactions: ReactionRollup? = nil, subIssuesSummary: SubIssuesSummary? = nil, parentIssueUrl: String? = nil, pinnedComment: NullableIssueComment? = nil, issueDependenciesSummary: IssueDependenciesSummary? = nil, issueFieldValues: [IssueFieldValue]? = nil) throws {
+/// IssuesNullable domain models
+public extension NullableIssue {
+    init(
+        id: Int,
+        nodeId: String,
+        url: String,
+        repositoryUrl: String,
+        labelsUrl: String,
+        commentsUrl: String,
+        eventsUrl: String,
+        htmlUrl: String,
+        number: Int,
+        state: String,
+        title: String,
+        user: NullableSimpleUser?,
+        labels: [NullableIssueLabelsItem],
+        assignee: NullableSimpleUser?,
+        milestone: NullableMilestone?,
+        locked: Bool,
+        comments: Int,
+        closedAt: Date?,
+        createdAt: Date,
+        updatedAt: Date,
+        stateReason: NullableIssueStateReason? = nil,
+        body: String? = nil,
+        assignees: [SimpleUser]? = nil,
+        activeLockReason: String? = nil,
+        pullRequest: NullableIssuePullRequest? = nil,
+        draft: Bool? = nil,
+        closedBy: NullableSimpleUser? = nil,
+        bodyHtml: String? = nil,
+        bodyText: String? = nil,
+        timelineUrl: String? = nil,
+        type: IssueType? = nil,
+        repository: Repository? = nil,
+        performedViaGithubApp: NullableIntegration? = nil,
+        authorAssociation: AuthorAssociation? = nil,
+        reactions: ReactionRollup? = nil,
+        subIssuesSummary: SubIssuesSummary? = nil,
+        parentIssueUrl: String? = nil,
+        pinnedComment: NullableIssueComment? = nil,
+        issueDependenciesSummary: IssueDependenciesSummary? = nil,
+        issueFieldValues: [IssueFieldValue]? = nil
+    ) throws {
         (self.id, self.nodeId) = (id, nodeId)
         (self.url, self.repositoryUrl) = (url, repositoryUrl)
         (self.labelsUrl, self.commentsUrl) = (labelsUrl, commentsUrl)
@@ -33,20 +74,20 @@ extension NullableIssue {
 
 extension NullableIssue {
     func sdkValidateConstraints() throws {
-            try sdkValidateUri("url", self.url)
-            try sdkValidateUri("repository_url", self.repositoryUrl)
-            try sdkValidateUri("comments_url", self.commentsUrl)
-            try sdkValidateUri("events_url", self.eventsUrl)
-            try sdkValidateUri("html_url", self.htmlUrl)
-        if let value = self.closedAt {
+        try sdkValidateUri("url", url)
+        try sdkValidateUri("repository_url", repositoryUrl)
+        try sdkValidateUri("comments_url", commentsUrl)
+        try sdkValidateUri("events_url", eventsUrl)
+        try sdkValidateUri("html_url", htmlUrl)
+        if let value = closedAt {
             try sdkValidateDateTime("closed_at", sdkWireString(value))
         }
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-        if let value = self.timelineUrl {
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+        if let value = timelineUrl {
             try sdkValidateUri("timeline_url", value)
         }
-        if let value = self.parentIssueUrl {
+        if let value = parentIssueUrl {
             try sdkValidateUri("parent_issue_url", value)
         }
     }
@@ -56,14 +97,17 @@ extension NullableIssue {
 public struct NullableIssueEventIntentConfidence: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let low = NullableIssueEventIntentConfidence(rawValue: "LOW")
     public static let medium = NullableIssueEventIntentConfidence(rawValue: "MEDIUM")
     public static let high = NullableIssueEventIntentConfidence(rawValue: "HIGH")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -76,7 +120,10 @@ public struct NullableIssueEventIntentConfidence: RawRepresentable, Hashable, Co
 public struct NullableIssueStateReason: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let completed = NullableIssueStateReason(rawValue: "completed")
     public static let reopened = NullableIssueStateReason(rawValue: "reopened")
     public static let notPlanned = NullableIssueStateReason(rawValue: "not_planned")
@@ -84,7 +131,7 @@ public struct NullableIssueStateReason: RawRepresentable, Hashable, Codable, Sen
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

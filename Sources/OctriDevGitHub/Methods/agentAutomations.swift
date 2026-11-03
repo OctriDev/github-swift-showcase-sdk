@@ -8,8 +8,18 @@ import Foundation
 #endif
 public enum AgentAutomationsMethods {}
 
-extension AgentAutomationsMethods {
-    /// Returns automations whose `created_by` user is the authenticated caller, across repositories the caller can read. This includes both user-owned and repository-owned automations created by the caller but excludes repository-owned automations created by someone else even if the caller has write access to the repository. Use the repository-scoped list operation for those automations. The `owner_type` filter only narrows this creator-scoped collection. **Fine-grained access tokens for "List automations for user"** This endpoint works with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app) * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) The fine-grained token must have one of the following permission sets for each repository accessed by this request: * "Agent tasks" repository permissions (read) * "Contents" repository permissions (read) The required permission set depends on each repository's Automation permission configuration. GitHub App installation access tokens are not supported for this endpoint.
+public extension AgentAutomationsMethods {
+    /// Returns automations whose `created_by` user is the authenticated caller, across repositories the caller can
+    /// read. This includes both user-owned and repository-owned automations created by the caller but excludes
+    /// repository-owned automations created by someone else even if the caller has write access to the repository. Use
+    /// the repository-scoped list operation for those automations. The `owner_type` filter only narrows this
+    /// creator-scoped collection. **Fine-grained access tokens for "List automations for user"** This endpoint works
+    /// with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app)
+    /// * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token)
+    /// The fine-grained token must have one of the following permission sets for each repository accessed by this
+    /// request: * "Agent tasks" repository permissions (read) * "Contents" repository permissions (read) The required
+    /// permission set depends on each repository's Automation permission configuration. GitHub App installation access
+    /// tokens are not supported for this endpoint.
     ///
     /// - Parameters:
     /// - page: The page number of the results to fetch.
@@ -17,27 +27,55 @@ extension AgentAutomationsMethods {
     /// - ownerType: Filter automations by owner type. `user` returns automations
     ///   owned by their creator, `repository` returns automations owned by the
     ///   repository. Omit to return both.
-    public static func agentAutomationsListAutomations(config: ClientConfig, page: Int? = nil, perPage: Int? = nil, ownerType: AgentAutomationsListAutomationsParameter? = nil, requestOptions: RequestOptions? = nil) async throws -> [AgentAutomationsListAutomationsResponseItem] {
-        if let page = page {
+    static func agentAutomationsListAutomations(
+        config: ClientConfig,
+        page: Int? = nil,
+        perPage: Int? = nil,
+        ownerType: AgentAutomationsListAutomationsParameter? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [AgentAutomationsListAutomationsResponseItem] {
+        if let page {
             try validateRange("page", Double(page), min: 1)
         }
 
-        if let perPage = perPage {
+        if let perPage {
             try validateRange("per_page", Double(perPage), min: 1, max: 100)
         }
 
-        return try (await sdkRequest("GET", "/agents/automations", config: config, query: [
+        return try await (sdkRequest("GET", "/agents/automations", config: config, query: [
             SdkQueryParameter("page", value: page),
             SdkQueryParameter("per_page", value: perPage),
             SdkQueryParameter("owner_type", value: ownerType),
         ], decoder: .json, operationId: "agentAutomationsListAutomations", options: requestOptions)).data
     }
 
-    /// Returns an automation by ID without requiring repository context when its `created_by` user is the authenticated caller and the caller can read its repository. This includes both user-owned and repository-owned automations created by the caller but excludes repository-owned automations created by someone else even if the caller has write access to the repository. Use the repository-scoped get operation for those automations. The response includes repository identity so clients can link back to the repository. **Fine-grained access tokens for "Get an automation by ID"** This endpoint works with the following fine-grained token types: * [GitHub App user access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app) * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) The fine-grained token must have one of the following permission sets for each repository accessed by this request: * "Agent tasks" repository permissions (read) * "Contents" repository permissions (read) The required permission set depends on each repository's Automation permission configuration. GitHub App installation access tokens are not supported for this endpoint.
+    /// Returns an automation by ID without requiring repository context when its `created_by` user is the authenticated
+    /// caller and the caller can read its repository. This includes both user-owned and repository-owned automations
+    /// created by the caller but excludes repository-owned automations created by someone else even if the caller has
+    /// write access to the repository. Use the repository-scoped get operation for those automations. The response
+    /// includes repository identity so clients can link back to the repository. **Fine-grained access tokens for "Get
+    /// an automation by ID"** This endpoint works with the following fine-grained token types: * [GitHub App user
+    /// access tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app)
+    /// * [Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token)
+    /// The fine-grained token must have one of the following permission sets for each repository accessed by this
+    /// request: * "Agent tasks" repository permissions (read) * "Contents" repository permissions (read) The required
+    /// permission set depends on each repository's Automation permission configuration. GitHub App installation access
+    /// tokens are not supported for this endpoint.
     ///
     /// - Parameters:
     /// - automationId: The unique identifier of the automation.
-    public static func agentAutomationsGetAutomation(config: ClientConfig, automationId: String, requestOptions: RequestOptions? = nil) async throws -> AgentAutomationsGetAutomationResponse {
-        return try (await sdkRequest("GET", ["/agents/automations/", sdkEncodePathSegment(sdkWireString(automationId))].joined(), config: config, decoder: .json, operationId: "agentAutomationsGetAutomation", options: requestOptions)).data
+    static func agentAutomationsGetAutomation(
+        config: ClientConfig,
+        automationId: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> AgentAutomationsGetAutomationResponse {
+        try await (sdkRequest(
+            "GET",
+            ["/agents/automations/", sdkEncodePathSegment(sdkWireString(automationId))].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "agentAutomationsGetAutomation",
+            options: requestOptions
+        )).data
     }
 }

@@ -6,16 +6,32 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension OrgsMethods {
-    /// Lists all issue fields for an organization. OAuth app tokens and personal access tokens (classic) need the read:org scope to use this endpoint.
+public extension OrgsMethods {
+    /// Lists all issue fields for an organization. OAuth app tokens and personal access tokens (classic) need the
+    /// read:org scope to use this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
-    public static func orgsListIssueFields(config: ClientConfig, org: String, requestOptions: RequestOptions? = nil) async throws -> [IssueField?] {
-        return try (await sdkRequest("GET", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/issue-fields"].joined(), config: config, decoder: .json, operationId: "orgsListIssueFields", options: requestOptions, errors: ["404": BasicError.self])).data
+    static func orgsListIssueFields(
+        config: ClientConfig,
+        org: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [IssueField?] {
+        try await (sdkRequest(
+            "GET",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/issue-fields"].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "orgsListIssueFields",
+            options: requestOptions,
+            errors: ["404": BasicError.self]
+        )).data
     }
 
-    /// Creates a new issue field for an organization. You can find out more about issue fields in [Managing issue fields in an organization](https://docs.github.com/issues/tracking-your-work-with-issues/using-issues/managing-issue-fields-in-an-organization). To use this endpoint, the authenticated user must be an administrator for the organization. OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    /// Creates a new issue field for an organization. You can find out more about issue fields in [Managing issue
+    /// fields in an organization](https://docs.github.com/issues/tracking-your-work-with-issues/using-issues/managing-issue-fields-in-an-organization).
+    /// To use this endpoint, the authenticated user must be an administrator for the organization. OAuth app tokens and
+    /// personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
@@ -28,9 +44,33 @@ extension OrgsMethods {
     ///   settings feature is enabled. Defaults to `organization_members_only`.
     /// - options: Options for select fields. Required when data_type is
     ///   'single_select' or 'multi_select'.
-    public static func orgsCreateIssueField(config: ClientConfig, org: String, name: String, dataType: OrganizationCreateIssueFieldDataType, description: SdkOptional<String>? = nil, visibility: OrganizationCreateIssueFieldVisibility? = nil, options: SdkOptional<[OrganizationCreateIssueFieldOptionsItem]>? = nil, requestOptions: RequestOptions? = nil) async throws -> IssueField {
-        let requestBody = OrgsCreateIssueFieldRequestBody(name: name, dataType: dataType, description: description, visibility: visibility, options: options)
+    static func orgsCreateIssueField(
+        config: ClientConfig,
+        org: String,
+        name: String,
+        dataType: OrganizationCreateIssueFieldDataType,
+        description: SdkOptional<String>? = nil,
+        visibility: OrganizationCreateIssueFieldVisibility? = nil,
+        options: SdkOptional<[OrganizationCreateIssueFieldOptionsItem]>? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> IssueField {
+        let requestBody = OrgsCreateIssueFieldRequestBody(
+            name: name,
+            dataType: dataType,
+            description: description,
+            visibility: visibility,
+            options: options
+        )
 
-        return try (await sdkRequest("POST", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/issue-fields"].joined(), config: config, body: requestBody, decoder: .json, operationId: "orgsCreateIssueField", options: requestOptions, errors: ["404": BasicError.self, "422": ValidationErrorSimple.self])).data
+        return try await (sdkRequest(
+            "POST",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/issue-fields"].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "orgsCreateIssueField",
+            options: requestOptions,
+            errors: ["404": BasicError.self, "422": ValidationErrorSimple.self]
+        )).data
     }
 }

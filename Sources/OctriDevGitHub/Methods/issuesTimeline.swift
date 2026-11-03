@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension IssuesMethods {
-    /// Lists timeline events recorded for a repository issue. Use `exclude` to omit selected event types, and `page` and `per_page` to paginate the results.
+public extension IssuesMethods {
+    /// Lists timeline events recorded for a repository issue. Use `exclude` to omit selected event types, and `page`
+    /// and `per_page` to paginate the results.
     ///
     /// List all timeline events for an issue.
     ///
@@ -27,11 +28,37 @@ extension IssuesMethods {
     ///   -rest-api)."
     /// - exclude: A comma-separated list of timeline event names to exclude from
     ///   the response.
-    public static func issuesListEventsForTimeline(config: ClientConfig, owner: String, repo: String, issueNumber: Int, perPage: Int? = nil, page: Int? = nil, exclude: String? = nil, requestOptions: RequestOptions? = nil) async throws -> [TimelineIssueEvents] {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/issues/", sdkEncodePathSegment(sdkWireString(issueNumber)), "/timeline"].joined(), config: config, query: [
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-            SdkQueryParameter("exclude", value: exclude),
-        ], decoder: .json, operationId: "issuesListEventsForTimeline", options: requestOptions, errors: ["400": BasicError.self, "404": BasicError.self, "410": BasicError.self])).data
+    static func issuesListEventsForTimeline(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        issueNumber: Int,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        exclude: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [TimelineIssueEvents] {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/issues/",
+                sdkEncodePathSegment(sdkWireString(issueNumber)),
+                "/timeline",
+            ].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+                SdkQueryParameter("exclude", value: exclude),
+            ],
+            decoder: .json,
+            operationId: "issuesListEventsForTimeline",
+            options: requestOptions,
+            errors: ["400": BasicError.self, "404": BasicError.self, "410": BasicError.self]
+        )).data
     }
 }

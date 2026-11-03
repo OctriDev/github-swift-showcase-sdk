@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension DependencyGraphMethods {
-    public struct DependencyGraphCreateRepositorySnapshotOptions: Codable {
+public extension DependencyGraphMethods {
+    struct DependencyGraphCreateRepositorySnapshotOptions: Codable {
         public var owner: String
         public var repo: String
         public var version: Int
@@ -19,21 +19,28 @@ extension DependencyGraphMethods {
         public var metadata: Metadata?
         public var manifests: [String: Manifest]?
 
-        public init(required1: DependencyGraphCreateRepositorySnapshotOptionsRequired1, required2: DependencyGraphCreateRepositorySnapshotOptionsRequired2) {
-            self.owner = required1.owner
-            self.repo = required1.repo
-            self.version = required1.version
-            self.job = required1.job
-            self.sha = required1.sha
-            self.ref = required1.ref
-            self.detector = required1.detector
-            self.scanned = required2.scanned
+        public init(
+            required1: DependencyGraphCreateRepositorySnapshotOptionsRequired1,
+            required2: DependencyGraphCreateRepositorySnapshotOptionsRequired2
+        ) {
+            owner = required1.owner
+            repo = required1.repo
+            version = required1.version
+            job = required1.job
+            sha = required1.sha
+            ref = required1.ref
+            detector = required1.detector
+            scanned = required2.scanned
         }
     }
 
-    /// Creates a dependency snapshot for a repository, recording the dependencies detected at a specific commit and ref. Supply the required `detector`, `version`, `ref`, `sha`, `job`, and `scanned` fields; `ref` must begin with `refs/`, and `sha` must be 40–64 characters. Add `manifests` and up to eight scalar-valued `metadata` entries when you need to include dependency details or domain-specific information.
+    /// Creates a dependency snapshot for a repository, recording the dependencies detected at a specific commit and
+    /// ref. Supply the required `detector`, `version`, `ref`, `sha`, `job`, and `scanned` fields; `ref` must begin with
+    /// `refs/`, and `sha` must be 40–64 characters. Add `manifests` and up to eight scalar-valued `metadata` entries
+    /// when you need to include dependency details or domain-specific information.
     ///
-    /// Create a new snapshot of a repository's dependencies. The authenticated user must have access to the repository. OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    /// Create a new snapshot of a repository's dependencies. The authenticated user must have access to the repository.
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -52,7 +59,11 @@ extension DependencyGraphMethods {
     /// - manifests: A collection of package manifests, which are a collection of
     ///   related dependencies declared in a file or representing a logical group of
     ///   dependencies.
-    public static func dependencyGraphCreateRepositorySnapshot(config: ClientConfig, options: DependencyGraphCreateRepositorySnapshotOptions, requestOptions: RequestOptions? = nil) async throws -> DependencyGraphCreateRepositorySnapshotResponse {
+    static func dependencyGraphCreateRepositorySnapshot(
+        config: ClientConfig,
+        options: DependencyGraphCreateRepositorySnapshotOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> DependencyGraphCreateRepositorySnapshotResponse {
         try validateLength("sha", options.sha, min: 40, max: 64)
 
         try sdkValidatePattern("ref", options.ref, sdkPattern4ca596ae636f)
@@ -61,6 +72,20 @@ extension DependencyGraphMethods {
 
         let requestBody = DependencyGraphCreateRepositorySnapshotRequestBody(options: options)
 
-        return try (await sdkRequest("POST", ["/repos/", sdkEncodePathSegment(sdkWireString(options.owner)), "/", sdkEncodePathSegment(sdkWireString(options.repo)), "/dependency-graph/snapshots"].joined(), config: config, body: requestBody, decoder: .json, operationId: "dependencyGraphCreateRepositorySnapshot", options: requestOptions)).data
+        return try await (sdkRequest(
+            "POST",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(options.owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(options.repo)),
+                "/dependency-graph/snapshots",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "dependencyGraphCreateRepositorySnapshot",
+            options: requestOptions
+        )).data
     }
 }

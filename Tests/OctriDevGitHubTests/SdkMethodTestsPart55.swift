@@ -35,8 +35,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.listOrgRoles(
-            org: decoded("\"org\"")
-        )
+                org: decoded("\"org\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -59,11 +59,11 @@ extension SdkMethodTests {
         _ = client
         do {
             _ = try await client.orgs.listOrgRoleTeams(
-            org: decoded("\"org\""),
-            roleId: decoded("1"),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                org: decoded("\"org\""),
+                roleId: decoded("1"),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -146,11 +146,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.listPatGrantRepositories(
-            org: decoded("\"org\""),
-            patId: decoded("1"),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                org: decoded("\"org\""),
+                patId: decoded("1"),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -166,7 +166,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testOrgsListPatGrantRequestRepositoriesOrgsListPatGrantRequestRepositoriesReachesMockAndDecodesResponse() async throws {
+    func testOrgsListPatGrantRequestRepositoriesOrgsListPatGrantRequestRepositoriesReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -187,7 +188,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testOrgsListPatGrantRequestRepositoriesOrgsListPatGrantRequestRepXf83b19c514ReachesMockAndDecodesResponse() async throws {
+    func testOrgsListPatGrantRequestRepositoriesOrgsListPatGrantRequestRepXf83b19c514ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/403") else {
             return
         }
@@ -198,11 +200,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.listPatGrantRequestRepositories(
-            org: decoded("\"org\""),
-            patRequestId: decoded("1"),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                org: decoded("\"org\""),
+                patRequestId: decoded("1"),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -269,8 +271,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.listPatGrantRequests(
-            options: options
-        )
+                options: options
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -337,8 +339,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.listPatGrants(
-            options: options
-        )
+                options: options
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -387,12 +389,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.listPendingInvitations(
-            org: decoded("\"org\""),
-            perPage: decoded("30"),
-            page: decoded("1"),
-            role: decoded("\"all\""),
-            invitationSource: decoded("\"all\"")
-        )
+                org: decoded("\"org\""),
+                perPage: decoded("30"),
+                page: decoded("1"),
+                role: decoded("\"all\""),
+                invitationSource: decoded("\"all\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -479,12 +481,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.listWebhookDeliveries(
-            org: decoded("\"org\""),
-            hookId: decoded("1"),
-            perPage: decoded("30"),
-            cursor: decoded("\"cursor\""),
-            status: decoded("\"success\"")
-        )
+                org: decoded("\"org\""),
+                hookId: decoded("1"),
+                perPage: decoded("30"),
+                cursor: decoded("\"cursor\""),
+                status: decoded("\"success\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -531,10 +533,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.orgs.listWebhooks(
-            org: decoded("\"org\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                org: decoded("\"org\""),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)

@@ -3,63 +3,110 @@
 
 import Foundation
 
-// WebhookWorkflowRunInProgress domain models
-extension WebhookWorkflowRunInProgressWorkflowRunHeadRepository {
-    public init(from decoder: Decoder) throws {
+/// WebhookWorkflowRunInProgress domain models
+public extension WebhookWorkflowRunInProgressWorkflowRunHeadRepository {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.archiveUrl = try container.sdkDecodeRequired(.archiveUrl)
-        self.assigneesUrl = try container.sdkDecodeRequired(.assigneesUrl)
-        self.blobsUrl = try container.sdkDecodeRequired(.blobsUrl)
-        self.branchesUrl = try container.sdkDecodeRequired(.branchesUrl)
-        self.collaboratorsUrl = try container.sdkDecodeRequired(.collaboratorsUrl)
-        self.commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
-        self.commitsUrl = try container.sdkDecodeRequired(.commitsUrl)
-        self.compareUrl = try container.sdkDecodeRequired(.compareUrl)
-        self.contentsUrl = try container.sdkDecodeRequired(.contentsUrl)
-        self.contributorsUrl = try container.sdkDecodeRequired(.contributorsUrl)
-        self.deploymentsUrl = try container.sdkDecodeRequired(.deploymentsUrl)
-        self.description = try container.sdkDecodeNullable(.description)
-        self.downloadsUrl = try container.sdkDecodeRequired(.downloadsUrl)
-        self.eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
-        self.fork = try container.sdkDecodeRequired(.fork)
-        self.forksUrl = try container.sdkDecodeRequired(.forksUrl)
-        self.fullName = try container.sdkDecodeRequired(.fullName)
-        self.gitCommitsUrl = try container.sdkDecodeRequired(.gitCommitsUrl)
-        self.gitRefsUrl = try container.sdkDecodeRequired(.gitRefsUrl)
-        self.gitTagsUrl = try container.sdkDecodeRequired(.gitTagsUrl)
-        self.hooksUrl = try container.sdkDecodeRequired(.hooksUrl)
-        self.htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.issueCommentUrl = try container.sdkDecodeRequired(.issueCommentUrl)
-        self.issueEventsUrl = try container.sdkDecodeRequired(.issueEventsUrl)
-        self.issuesUrl = try container.sdkDecodeRequired(.issuesUrl)
-        self.keysUrl = try container.sdkDecodeRequired(.keysUrl)
-        self.labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
-        self.languagesUrl = try container.sdkDecodeRequired(.languagesUrl)
-        self.mergesUrl = try container.sdkDecodeRequired(.mergesUrl)
-        self.milestonesUrl = try container.sdkDecodeRequired(.milestonesUrl)
-        self.name = try container.sdkDecodeNullable(.name)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.notificationsUrl = try container.sdkDecodeRequired(.notificationsUrl)
-        self.owner = try container.sdkDecodeNullable(.owner)
-        self.`private` = try container.sdkDecodeRequired(.`private`)
-        self.pullsUrl = try container.sdkDecodeRequired(.pullsUrl)
-        self.releasesUrl = try container.sdkDecodeRequired(.releasesUrl)
-        self.stargazersUrl = try container.sdkDecodeRequired(.stargazersUrl)
-        self.statusesUrl = try container.sdkDecodeRequired(.statusesUrl)
-        self.subscribersUrl = try container.sdkDecodeRequired(.subscribersUrl)
-        self.subscriptionUrl = try container.sdkDecodeRequired(.subscriptionUrl)
-        self.tagsUrl = try container.sdkDecodeRequired(.tagsUrl)
-        self.teamsUrl = try container.sdkDecodeRequired(.teamsUrl)
-        self.treesUrl = try container.sdkDecodeRequired(.treesUrl)
-        self.url = try container.sdkDecodeRequired(.url)
+        archiveUrl = try container.sdkDecodeRequired(.archiveUrl)
+        assigneesUrl = try container.sdkDecodeRequired(.assigneesUrl)
+        blobsUrl = try container.sdkDecodeRequired(.blobsUrl)
+        branchesUrl = try container.sdkDecodeRequired(.branchesUrl)
+        collaboratorsUrl = try container.sdkDecodeRequired(.collaboratorsUrl)
+        commentsUrl = try container.sdkDecodeRequired(.commentsUrl)
+        commitsUrl = try container.sdkDecodeRequired(.commitsUrl)
+        compareUrl = try container.sdkDecodeRequired(.compareUrl)
+        contentsUrl = try container.sdkDecodeRequired(.contentsUrl)
+        contributorsUrl = try container.sdkDecodeRequired(.contributorsUrl)
+        deploymentsUrl = try container.sdkDecodeRequired(.deploymentsUrl)
+        description = try container.sdkDecodeNullable(.description)
+        downloadsUrl = try container.sdkDecodeRequired(.downloadsUrl)
+        eventsUrl = try container.sdkDecodeRequired(.eventsUrl)
+        fork = try container.sdkDecodeRequired(.fork)
+        forksUrl = try container.sdkDecodeRequired(.forksUrl)
+        fullName = try container.sdkDecodeRequired(.fullName)
+        gitCommitsUrl = try container.sdkDecodeRequired(.gitCommitsUrl)
+        gitRefsUrl = try container.sdkDecodeRequired(.gitRefsUrl)
+        gitTagsUrl = try container.sdkDecodeRequired(.gitTagsUrl)
+        hooksUrl = try container.sdkDecodeRequired(.hooksUrl)
+        htmlUrl = try container.sdkDecodeRequired(.htmlUrl)
+        id = try container.sdkDecodeRequired(.id)
+        issueCommentUrl = try container.sdkDecodeRequired(.issueCommentUrl)
+        issueEventsUrl = try container.sdkDecodeRequired(.issueEventsUrl)
+        issuesUrl = try container.sdkDecodeRequired(.issuesUrl)
+        keysUrl = try container.sdkDecodeRequired(.keysUrl)
+        labelsUrl = try container.sdkDecodeRequired(.labelsUrl)
+        languagesUrl = try container.sdkDecodeRequired(.languagesUrl)
+        mergesUrl = try container.sdkDecodeRequired(.mergesUrl)
+        milestonesUrl = try container.sdkDecodeRequired(.milestonesUrl)
+        name = try container.sdkDecodeNullable(.name)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        notificationsUrl = try container.sdkDecodeRequired(.notificationsUrl)
+        owner = try container.sdkDecodeNullable(.owner)
+        self.private = try container.sdkDecodeRequired(.private)
+        pullsUrl = try container.sdkDecodeRequired(.pullsUrl)
+        releasesUrl = try container.sdkDecodeRequired(.releasesUrl)
+        stargazersUrl = try container.sdkDecodeRequired(.stargazersUrl)
+        statusesUrl = try container.sdkDecodeRequired(.statusesUrl)
+        subscribersUrl = try container.sdkDecodeRequired(.subscribersUrl)
+        subscriptionUrl = try container.sdkDecodeRequired(.subscriptionUrl)
+        tagsUrl = try container.sdkDecodeRequired(.tagsUrl)
+        teamsUrl = try container.sdkDecodeRequired(.teamsUrl)
+        treesUrl = try container.sdkDecodeRequired(.treesUrl)
+        url = try container.sdkDecodeRequired(.url)
         try sdkValidateConstraintsPart1()
         try sdkValidateConstraintsPart2()
     }
 }
 
-extension WebhookWorkflowRunInProgressWorkflowRunHeadRepository {
-    public init(archiveUrl: String, assigneesUrl: String, blobsUrl: String, branchesUrl: String, collaboratorsUrl: String, commentsUrl: String, commitsUrl: String, compareUrl: String, contentsUrl: String, contributorsUrl: String, deploymentsUrl: String, description: String?, downloadsUrl: String, eventsUrl: String, fork: Bool, forksUrl: String, fullName: String, gitCommitsUrl: String, gitRefsUrl: String, gitTagsUrl: String, hooksUrl: String, htmlUrl: String, id: Int, issueCommentUrl: String, issueEventsUrl: String, issuesUrl: String, keysUrl: String, labelsUrl: String, languagesUrl: String, mergesUrl: String, milestonesUrl: String, name: String?, nodeId: String, notificationsUrl: String, owner: WebhookWorkflowRunInProgressWorkflowRunHeadRepositoryOwner?, `private`: Bool, pullsUrl: String, releasesUrl: String, stargazersUrl: String, statusesUrl: String, subscribersUrl: String, subscriptionUrl: String, tagsUrl: String, teamsUrl: String, treesUrl: String, url: String) throws {
+public extension WebhookWorkflowRunInProgressWorkflowRunHeadRepository {
+    init(
+        archiveUrl: String,
+        assigneesUrl: String,
+        blobsUrl: String,
+        branchesUrl: String,
+        collaboratorsUrl: String,
+        commentsUrl: String,
+        commitsUrl: String,
+        compareUrl: String,
+        contentsUrl: String,
+        contributorsUrl: String,
+        deploymentsUrl: String,
+        description: String?,
+        downloadsUrl: String,
+        eventsUrl: String,
+        fork: Bool,
+        forksUrl: String,
+        fullName: String,
+        gitCommitsUrl: String,
+        gitRefsUrl: String,
+        gitTagsUrl: String,
+        hooksUrl: String,
+        htmlUrl: String,
+        id: Int,
+        issueCommentUrl: String,
+        issueEventsUrl: String,
+        issuesUrl: String,
+        keysUrl: String,
+        labelsUrl: String,
+        languagesUrl: String,
+        mergesUrl: String,
+        milestonesUrl: String,
+        name: String?,
+        nodeId: String,
+        notificationsUrl: String,
+        owner: WebhookWorkflowRunInProgressWorkflowRunHeadRepositoryOwner?,
+        private: Bool,
+        pullsUrl: String,
+        releasesUrl: String,
+        stargazersUrl: String,
+        statusesUrl: String,
+        subscribersUrl: String,
+        subscriptionUrl: String,
+        tagsUrl: String,
+        teamsUrl: String,
+        treesUrl: String,
+        url: String
+    ) throws {
         (self.archiveUrl, self.assigneesUrl) = (archiveUrl, assigneesUrl)
         (self.blobsUrl, self.branchesUrl) = (blobsUrl, branchesUrl)
         (self.collaboratorsUrl, self.commentsUrl) = (collaboratorsUrl, commentsUrl)
@@ -77,7 +124,7 @@ extension WebhookWorkflowRunInProgressWorkflowRunHeadRepository {
         (self.languagesUrl, self.mergesUrl) = (languagesUrl, mergesUrl)
         (self.milestonesUrl, self.name) = (milestonesUrl, name)
         (self.nodeId, self.notificationsUrl) = (nodeId, notificationsUrl)
-        (self.owner, self.`private`) = (owner, `private`)
+        (self.owner, self.private) = (owner, `private`)
         (self.pullsUrl, self.releasesUrl) = (pullsUrl, releasesUrl)
         (self.stargazersUrl, self.statusesUrl) = (stargazersUrl, statusesUrl)
         (self.subscribersUrl, self.subscriptionUrl) = (subscribersUrl, subscriptionUrl)
@@ -90,26 +137,26 @@ extension WebhookWorkflowRunInProgressWorkflowRunHeadRepository {
 
 extension WebhookWorkflowRunInProgressWorkflowRunHeadRepository {
     func sdkValidateConstraintsPart1() throws {
-            try sdkValidateUri("contributors_url", self.contributorsUrl)
-            try sdkValidateUri("deployments_url", self.deploymentsUrl)
-            try sdkValidateUri("downloads_url", self.downloadsUrl)
-            try sdkValidateUri("events_url", self.eventsUrl)
-            try sdkValidateUri("forks_url", self.forksUrl)
-            try sdkValidateUri("hooks_url", self.hooksUrl)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("languages_url", self.languagesUrl)
-            try sdkValidateUri("merges_url", self.mergesUrl)
-            try sdkValidateUri("stargazers_url", self.stargazersUrl)
-            try sdkValidateUri("subscribers_url", self.subscribersUrl)
-            try sdkValidateUri("subscription_url", self.subscriptionUrl)
+        try sdkValidateUri("contributors_url", contributorsUrl)
+        try sdkValidateUri("deployments_url", deploymentsUrl)
+        try sdkValidateUri("downloads_url", downloadsUrl)
+        try sdkValidateUri("events_url", eventsUrl)
+        try sdkValidateUri("forks_url", forksUrl)
+        try sdkValidateUri("hooks_url", hooksUrl)
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateUri("languages_url", languagesUrl)
+        try sdkValidateUri("merges_url", mergesUrl)
+        try sdkValidateUri("stargazers_url", stargazersUrl)
+        try sdkValidateUri("subscribers_url", subscribersUrl)
+        try sdkValidateUri("subscription_url", subscriptionUrl)
     }
 }
 
 extension WebhookWorkflowRunInProgressWorkflowRunHeadRepository {
     func sdkValidateConstraintsPart2() throws {
-            try sdkValidateUri("tags_url", self.tagsUrl)
-            try sdkValidateUri("teams_url", self.teamsUrl)
-            try sdkValidateUri("url", self.url)
+        try sdkValidateUri("tags_url", tagsUrl)
+        try sdkValidateUri("teams_url", teamsUrl)
+        try sdkValidateUri("url", url)
     }
 }
 
@@ -148,40 +195,71 @@ public struct WebhookWorkflowRunInProgress: Codable {
         case organization
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookWorkflowRunInProgress {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.action) else {
-            throw SdkValidationError(field: "action", code: "required", message: "Validation failed for 'action': value is required")
-        }
-        guard container.contains(.repository) else {
-            throw SdkValidationError(field: "repository", code: "required", message: "Validation failed for 'repository': value is required")
-        }
-        guard container.contains(.sender) else {
-            throw SdkValidationError(field: "sender", code: "required", message: "Validation failed for 'sender': value is required")
-        }
-        guard container.contains(.workflow) else {
-            throw SdkValidationError(field: "workflow", code: "required", message: "Validation failed for 'workflow': value is required")
-        }
-        guard container.contains(.workflowRun) else {
-            throw SdkValidationError(field: "workflow_run", code: "required", message: "Validation failed for 'workflow_run': value is required")
-        }
-        self.action = try container.sdkDecodeRequired(.action)
-        self.repository = try container.sdkDecodeRequired(.repository)
-        self.sender = try container.sdkDecodeRequired(.sender)
-        self.workflow = try container.sdkDecodeNullable(.workflow)
-        self.workflowRun = try container.sdkDecodeRequired(.workflowRun)
-        self.enterprise = try container.sdkDecodeIfPresent(.enterprise)
-        self.installation = try container.sdkDecodeIfPresent(.installation)
-        self.organization = try container.sdkDecodeIfPresent(.organization)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WebhookWorkflowRunInProgress {
-    public init(action: WebhookWorkflowRunInProgressAction, repository: RepositoryWebhooks, sender: SimpleUser, workflow: WebhooksWorkflow?, workflowRun: WebhookWorkflowRunInProgressWorkflowRun, enterprise: EnterpriseWebhooks? = nil, installation: SimpleInstallation? = nil, organization: OrganizationSimpleWebhooks? = nil) {
+public extension WebhookWorkflowRunInProgress {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.action) else {
+            throw SdkValidationError(
+                field: "action",
+                code: "required",
+                message: "Validation failed for 'action': value is required"
+            )
+        }
+        guard container.contains(.repository) else {
+            throw SdkValidationError(
+                field: "repository",
+                code: "required",
+                message: "Validation failed for 'repository': value is required"
+            )
+        }
+        guard container.contains(.sender) else {
+            throw SdkValidationError(
+                field: "sender",
+                code: "required",
+                message: "Validation failed for 'sender': value is required"
+            )
+        }
+        guard container.contains(.workflow) else {
+            throw SdkValidationError(
+                field: "workflow",
+                code: "required",
+                message: "Validation failed for 'workflow': value is required"
+            )
+        }
+        guard container.contains(.workflowRun) else {
+            throw SdkValidationError(
+                field: "workflow_run",
+                code: "required",
+                message: "Validation failed for 'workflow_run': value is required"
+            )
+        }
+        action = try container.sdkDecodeRequired(.action)
+        repository = try container.sdkDecodeRequired(.repository)
+        sender = try container.sdkDecodeRequired(.sender)
+        workflow = try container.sdkDecodeNullable(.workflow)
+        workflowRun = try container.sdkDecodeRequired(.workflowRun)
+        enterprise = try container.sdkDecodeIfPresent(.enterprise)
+        installation = try container.sdkDecodeIfPresent(.installation)
+        organization = try container.sdkDecodeIfPresent(.organization)
+    }
+}
+
+public extension WebhookWorkflowRunInProgress {
+    init(
+        action: WebhookWorkflowRunInProgressAction,
+        repository: RepositoryWebhooks,
+        sender: SimpleUser,
+        workflow: WebhooksWorkflow?,
+        workflowRun: WebhookWorkflowRunInProgressWorkflowRun,
+        enterprise: EnterpriseWebhooks? = nil,
+        installation: SimpleInstallation? = nil,
+        organization: OrganizationSimpleWebhooks? = nil
+    ) {
         (self.action, self.repository) = (action, repository)
         (self.sender, self.workflow) = (sender, workflow)
         (self.workflowRun, self.enterprise) = (workflowRun, enterprise)
@@ -258,45 +336,77 @@ public struct WebhookWorkflowRunInProgressWorkflowRunTriggeringActor: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension WebhookWorkflowRunInProgressWorkflowRunTriggeringActor {
-    public init(from decoder: Decoder) throws {
+public extension WebhookWorkflowRunInProgressWorkflowRunTriggeringActor {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
         }
         guard container.contains(.login) else {
-            throw SdkValidationError(field: "login", code: "required", message: "Validation failed for 'login': value is required")
+            throw SdkValidationError(
+                field: "login",
+                code: "required",
+                message: "Validation failed for 'login': value is required"
+            )
         }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.login = try container.sdkDecodeRequired(.login)
-        self.avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
-        self.deleted = try container.sdkDecodeIfPresent(.deleted)
-        self.email = try container.sdkDecodeIfPresent(.email)
-        self.eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
-        self.followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
-        self.followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
-        self.gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
-        self.gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
-        self.htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        self.organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
-        self.receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
-        self.reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
-        self.siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
-        self.starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
-        self.subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
-        self.type = try container.sdkDecodeIfPresent(.type)
-        self.url = try container.sdkDecodeIfPresent(.url)
+        id = try container.sdkDecodeRequired(.id)
+        login = try container.sdkDecodeRequired(.login)
+        avatarUrl = try container.sdkDecodeIfPresent(.avatarUrl)
+        deleted = try container.sdkDecodeIfPresent(.deleted)
+        email = try container.sdkDecodeIfPresent(.email)
+        eventsUrl = try container.sdkDecodeIfPresent(.eventsUrl)
+        followersUrl = try container.sdkDecodeIfPresent(.followersUrl)
+        followingUrl = try container.sdkDecodeIfPresent(.followingUrl)
+        gistsUrl = try container.sdkDecodeIfPresent(.gistsUrl)
+        gravatarId = try container.sdkDecodeIfPresent(.gravatarId)
+        htmlUrl = try container.sdkDecodeIfPresent(.htmlUrl)
+        name = try container.sdkDecodeIfPresent(.name)
+        nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        organizationsUrl = try container.sdkDecodeIfPresent(.organizationsUrl)
+        receivedEventsUrl = try container.sdkDecodeIfPresent(.receivedEventsUrl)
+        reposUrl = try container.sdkDecodeIfPresent(.reposUrl)
+        siteAdmin = try container.sdkDecodeIfPresent(.siteAdmin)
+        starredUrl = try container.sdkDecodeIfPresent(.starredUrl)
+        subscriptionsUrl = try container.sdkDecodeIfPresent(.subscriptionsUrl)
+        type = try container.sdkDecodeIfPresent(.type)
+        url = try container.sdkDecodeIfPresent(.url)
         try sdkValidateConstraints()
     }
 }
 
-extension WebhookWorkflowRunInProgressWorkflowRunTriggeringActor {
-    public init(id: Int, login: String, avatarUrl: String? = nil, deleted: Bool? = nil, email: String? = nil, eventsUrl: String? = nil, followersUrl: String? = nil, followingUrl: String? = nil, gistsUrl: String? = nil, gravatarId: String? = nil, htmlUrl: String? = nil, name: String? = nil, nodeId: String? = nil, organizationsUrl: String? = nil, receivedEventsUrl: String? = nil, reposUrl: String? = nil, siteAdmin: Bool? = nil, starredUrl: String? = nil, subscriptionsUrl: String? = nil, type: WebhookWorkflowRunInProgressWorkflowRunTriggeringActorType? = nil, url: String? = nil) throws {
+public extension WebhookWorkflowRunInProgressWorkflowRunTriggeringActor {
+    init(
+        id: Int,
+        login: String,
+        avatarUrl: String? = nil,
+        deleted: Bool? = nil,
+        email: String? = nil,
+        eventsUrl: String? = nil,
+        followersUrl: String? = nil,
+        followingUrl: String? = nil,
+        gistsUrl: String? = nil,
+        gravatarId: String? = nil,
+        htmlUrl: String? = nil,
+        name: String? = nil,
+        nodeId: String? = nil,
+        organizationsUrl: String? = nil,
+        receivedEventsUrl: String? = nil,
+        reposUrl: String? = nil,
+        siteAdmin: Bool? = nil,
+        starredUrl: String? = nil,
+        subscriptionsUrl: String? = nil,
+        type: WebhookWorkflowRunInProgressWorkflowRunTriggeringActorType? = nil,
+        url: String? = nil
+    ) throws {
         (self.id, self.login) = (id, login)
         (self.avatarUrl, self.deleted) = (avatarUrl, deleted)
         (self.email, self.eventsUrl) = (email, eventsUrl)
@@ -314,45 +424,49 @@ extension WebhookWorkflowRunInProgressWorkflowRunTriggeringActor {
 
 extension WebhookWorkflowRunInProgressWorkflowRunTriggeringActor {
     func sdkValidateConstraints() throws {
-        if let value = self.avatarUrl {
+        if let value = avatarUrl {
             try sdkValidateUri("avatar_url", value)
         }
-        if let value = self.followersUrl {
+        if let value = followersUrl {
             try sdkValidateUri("followers_url", value)
         }
-        if let value = self.htmlUrl {
+        if let value = htmlUrl {
             try sdkValidateUri("html_url", value)
         }
-        if let value = self.organizationsUrl {
+        if let value = organizationsUrl {
             try sdkValidateUri("organizations_url", value)
         }
-        if let value = self.receivedEventsUrl {
+        if let value = receivedEventsUrl {
             try sdkValidateUri("received_events_url", value)
         }
-        if let value = self.reposUrl {
+        if let value = reposUrl {
             try sdkValidateUri("repos_url", value)
         }
-        if let value = self.subscriptionsUrl {
+        if let value = subscriptionsUrl {
             try sdkValidateUri("subscriptions_url", value)
         }
-        if let value = self.url {
+        if let value = url {
             try sdkValidateUri("url", value)
         }
     }
 }
 
 /// Optional enumerated value serialized in the `type` wire field.
-public struct WebhookWorkflowRunInProgressWorkflowRunActorType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookWorkflowRunInProgressWorkflowRunActorType: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = WebhookWorkflowRunInProgressWorkflowRunActorType(rawValue: "Bot")
     public static let user = WebhookWorkflowRunInProgressWorkflowRunActorType(rawValue: "User")
     public static let organization = WebhookWorkflowRunInProgressWorkflowRunActorType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -362,17 +476,22 @@ public struct WebhookWorkflowRunInProgressWorkflowRunActorType: RawRepresentable
 }
 
 /// Optional enumerated value serialized in the `type` wire field.
-public struct WebhookWorkflowRunInProgressWorkflowRunRepositoryOwnerType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookWorkflowRunInProgressWorkflowRunRepositoryOwnerType: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = WebhookWorkflowRunInProgressWorkflowRunRepositoryOwnerType(rawValue: "Bot")
     public static let user = WebhookWorkflowRunInProgressWorkflowRunRepositoryOwnerType(rawValue: "User")
-    public static let organization = WebhookWorkflowRunInProgressWorkflowRunRepositoryOwnerType(rawValue: "Organization")
+    public static let organization =
+        WebhookWorkflowRunInProgressWorkflowRunRepositoryOwnerType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -382,10 +501,14 @@ public struct WebhookWorkflowRunInProgressWorkflowRunRepositoryOwnerType: RawRep
 }
 
 /// Required enumerated value serialized in the `conclusion` wire field.
-public struct WebhookWorkflowRunInProgressWorkflowRunConclusion: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookWorkflowRunInProgressWorkflowRunConclusion: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let actionRequired = WebhookWorkflowRunInProgressWorkflowRunConclusion(rawValue: "action_required")
     public static let cancelled = WebhookWorkflowRunInProgressWorkflowRunConclusion(rawValue: "cancelled")
     public static let failure = WebhookWorkflowRunInProgressWorkflowRunConclusion(rawValue: "failure")
@@ -397,7 +520,7 @@ public struct WebhookWorkflowRunInProgressWorkflowRunConclusion: RawRepresentabl
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -410,12 +533,15 @@ public struct WebhookWorkflowRunInProgressWorkflowRunConclusion: RawRepresentabl
 public struct WebhookWorkflowRunInProgressAction: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let inProgress = WebhookWorkflowRunInProgressAction(rawValue: "in_progress")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -425,17 +551,22 @@ public struct WebhookWorkflowRunInProgressAction: RawRepresentable, Hashable, Co
 }
 
 /// Optional enumerated value serialized in the `type` wire field.
-public struct WebhookWorkflowRunInProgressWorkflowRunHeadRepositoryOwnerType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookWorkflowRunInProgressWorkflowRunHeadRepositoryOwnerType: RawRepresentable, Hashable, Codable,
+    Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = WebhookWorkflowRunInProgressWorkflowRunHeadRepositoryOwnerType(rawValue: "Bot")
     public static let user = WebhookWorkflowRunInProgressWorkflowRunHeadRepositoryOwnerType(rawValue: "User")
-    public static let organization = WebhookWorkflowRunInProgressWorkflowRunHeadRepositoryOwnerType(rawValue: "Organization")
+    public static let organization =
+        WebhookWorkflowRunInProgressWorkflowRunHeadRepositoryOwnerType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -445,17 +576,22 @@ public struct WebhookWorkflowRunInProgressWorkflowRunHeadRepositoryOwnerType: Ra
 }
 
 /// Optional enumerated value serialized in the `type` wire field.
-public struct WebhookWorkflowRunInProgressWorkflowRunTriggeringActorType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookWorkflowRunInProgressWorkflowRunTriggeringActorType: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = WebhookWorkflowRunInProgressWorkflowRunTriggeringActorType(rawValue: "Bot")
     public static let user = WebhookWorkflowRunInProgressWorkflowRunTriggeringActorType(rawValue: "User")
-    public static let organization = WebhookWorkflowRunInProgressWorkflowRunTriggeringActorType(rawValue: "Organization")
+    public static let organization =
+        WebhookWorkflowRunInProgressWorkflowRunTriggeringActorType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

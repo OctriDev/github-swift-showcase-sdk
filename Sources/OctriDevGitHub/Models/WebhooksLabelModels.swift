@@ -3,7 +3,7 @@
 
 import Foundation
 
-// WebhooksLabel domain models
+/// WebhooksLabel domain models
 /// Required object value serialized in the `label` wire field.
 public struct WebhooksLabelArchivedVariant1: Codable {
     /// Timestamp indicating when the label was archived.
@@ -16,28 +16,38 @@ public struct WebhooksLabelArchivedVariant1: Codable {
         case archivedBy = "archived_by"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhooksLabelArchivedVariant1 {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.archivedAt) else {
-            throw SdkValidationError(field: "archived_at", code: "required", message: "Validation failed for 'archived_at': value is required")
-        }
-        guard container.contains(.archivedBy) else {
-            throw SdkValidationError(field: "archived_by", code: "required", message: "Validation failed for 'archived_by': value is required")
-        }
-        self.archivedAt = try container.sdkDecodeRequired(.archivedAt)
-        self.archivedBy = try container.sdkDecodeRequired(.archivedBy)
-            try sdkValidateDateTime("archived_at", sdkWireString(self.archivedAt))
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WebhooksLabelArchivedVariant1 {
-    public init(archivedAt: Date, archivedBy: SimpleUser) throws {
+public extension WebhooksLabelArchivedVariant1 {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.archivedAt) else {
+            throw SdkValidationError(
+                field: "archived_at",
+                code: "required",
+                message: "Validation failed for 'archived_at': value is required"
+            )
+        }
+        guard container.contains(.archivedBy) else {
+            throw SdkValidationError(
+                field: "archived_by",
+                code: "required",
+                message: "Validation failed for 'archived_by': value is required"
+            )
+        }
+        archivedAt = try container.sdkDecodeRequired(.archivedAt)
+        archivedBy = try container.sdkDecodeRequired(.archivedBy)
+        try sdkValidateDateTime("archived_at", sdkWireString(archivedAt))
+    }
+}
+
+public extension WebhooksLabelArchivedVariant1 {
+    init(archivedAt: Date, archivedBy: SimpleUser) throws {
         (self.archivedAt, self.archivedBy) = (archivedAt, archivedBy)
-            try sdkValidateDateTime("archived_at", sdkWireString(self.archivedAt))
+        try sdkValidateDateTime("archived_at", sdkWireString(self.archivedAt))
     }
 }
 
@@ -74,31 +84,43 @@ public struct WebhooksLabel: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhooksLabel {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.color = try container.sdkDecodeRequired(.color)
-        self.`default` = try container.sdkDecodeRequired(.`default`)
-        self.description = try container.sdkDecodeNullable(.description)
-        self.archivedAt = try container.sdkDecodeNullable(.archivedAt)
-        self.archivedBy = try container.sdkDecodeNullable(.archivedBy)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.url = try container.sdkDecodeRequired(.url)
-        if let value = self.archivedAt {
-            try sdkValidateDateTime("archived_at", sdkWireString(value))
-        }
-            try sdkValidateUri("url", self.url)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WebhooksLabel {
-    public init(color: String, `default`: Bool, description: String?, archivedAt: Date?, archivedBy: SimpleUser?, id: Int, name: String, nodeId: String, url: String) throws {
-        (self.color, self.`default`) = (color, `default`)
+public extension WebhooksLabel {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        color = try container.sdkDecodeRequired(.color)
+        self.default = try container.sdkDecodeRequired(.default)
+        description = try container.sdkDecodeNullable(.description)
+        archivedAt = try container.sdkDecodeNullable(.archivedAt)
+        archivedBy = try container.sdkDecodeNullable(.archivedBy)
+        id = try container.sdkDecodeRequired(.id)
+        name = try container.sdkDecodeRequired(.name)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        url = try container.sdkDecodeRequired(.url)
+        if let value = archivedAt {
+            try sdkValidateDateTime("archived_at", sdkWireString(value))
+        }
+        try sdkValidateUri("url", url)
+    }
+}
+
+public extension WebhooksLabel {
+    init(
+        color: String,
+        default: Bool,
+        description: String?,
+        archivedAt: Date?,
+        archivedBy: SimpleUser?,
+        id: Int,
+        name: String,
+        nodeId: String,
+        url: String
+    ) throws {
+        (self.color, self.default) = (color, `default`)
         (self.description, self.archivedAt) = (description, archivedAt)
         (self.archivedBy, self.id) = (archivedBy, id)
         (self.name, self.nodeId) = (name, nodeId)
@@ -106,7 +128,7 @@ extension WebhooksLabel {
         if let value = self.archivedAt {
             try sdkValidateDateTime("archived_at", sdkWireString(value))
         }
-            try sdkValidateUri("url", self.url)
+        try sdkValidateUri("url", self.url)
     }
 }
 
@@ -122,28 +144,38 @@ public struct WebhooksLabelUnarchivedVariant1: Codable {
         case archivedBy = "archived_by"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension WebhooksLabelUnarchivedVariant1 {
-    public init(from decoder: Decoder) throws {
+public extension WebhooksLabelUnarchivedVariant1 {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.archivedAt) else {
-            throw SdkValidationError(field: "archived_at", code: "required", message: "Validation failed for 'archived_at': value is required")
+            throw SdkValidationError(
+                field: "archived_at",
+                code: "required",
+                message: "Validation failed for 'archived_at': value is required"
+            )
         }
         guard container.contains(.archivedBy) else {
-            throw SdkValidationError(field: "archived_by", code: "required", message: "Validation failed for 'archived_by': value is required")
+            throw SdkValidationError(
+                field: "archived_by",
+                code: "required",
+                message: "Validation failed for 'archived_by': value is required"
+            )
         }
-        self.archivedAt = try container.sdkDecodeNullable(.archivedAt)
-        self.archivedBy = try container.sdkDecodeNullable(.archivedBy)
-        if let value = self.archivedAt {
+        archivedAt = try container.sdkDecodeNullable(.archivedAt)
+        archivedBy = try container.sdkDecodeNullable(.archivedBy)
+        if let value = archivedAt {
             try sdkValidateDateTime("archived_at", sdkWireString(value))
         }
     }
 }
 
-extension WebhooksLabelUnarchivedVariant1 {
-    public init(archivedAt: Date?, archivedBy: SimpleUser?) throws {
+public extension WebhooksLabelUnarchivedVariant1 {
+    init(archivedAt: Date?, archivedBy: SimpleUser?) throws {
         (self.archivedAt, self.archivedBy) = (archivedAt, archivedBy)
         if let value = self.archivedAt {
             try sdkValidateDateTime("archived_at", sdkWireString(value))
@@ -184,35 +216,47 @@ public struct WebhooksLabelArchived: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhooksLabelArchived {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.color = try container.sdkDecodeRequired(.color)
-        self.`default` = try container.sdkDecodeRequired(.`default`)
-        self.description = try container.sdkDecodeNullable(.description)
-        self.archivedAt = try container.sdkDecodeRequired(.archivedAt)
-        self.archivedBy = try container.sdkDecodeRequired(.archivedBy)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.url = try container.sdkDecodeRequired(.url)
-            try sdkValidateDateTime("archived_at", sdkWireString(self.archivedAt))
-            try sdkValidateUri("url", self.url)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WebhooksLabelArchived {
-    public init(color: String, `default`: Bool, description: String?, archivedAt: Date, archivedBy: SimpleUser, id: Int, name: String, nodeId: String, url: String) throws {
-        (self.color, self.`default`) = (color, `default`)
+public extension WebhooksLabelArchived {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        color = try container.sdkDecodeRequired(.color)
+        self.default = try container.sdkDecodeRequired(.default)
+        description = try container.sdkDecodeNullable(.description)
+        archivedAt = try container.sdkDecodeRequired(.archivedAt)
+        archivedBy = try container.sdkDecodeRequired(.archivedBy)
+        id = try container.sdkDecodeRequired(.id)
+        name = try container.sdkDecodeRequired(.name)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        url = try container.sdkDecodeRequired(.url)
+        try sdkValidateDateTime("archived_at", sdkWireString(archivedAt))
+        try sdkValidateUri("url", url)
+    }
+}
+
+public extension WebhooksLabelArchived {
+    init(
+        color: String,
+        default: Bool,
+        description: String?,
+        archivedAt: Date,
+        archivedBy: SimpleUser,
+        id: Int,
+        name: String,
+        nodeId: String,
+        url: String
+    ) throws {
+        (self.color, self.default) = (color, `default`)
         (self.description, self.archivedAt) = (description, archivedAt)
         (self.archivedBy, self.id) = (archivedBy, id)
         (self.name, self.nodeId) = (name, nodeId)
         self.url = url
-            try sdkValidateDateTime("archived_at", sdkWireString(self.archivedAt))
-            try sdkValidateUri("url", self.url)
+        try sdkValidateDateTime("archived_at", sdkWireString(self.archivedAt))
+        try sdkValidateUri("url", self.url)
     }
 }
 
@@ -249,31 +293,43 @@ public struct WebhooksLabelUnarchived: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhooksLabelUnarchived {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.color = try container.sdkDecodeRequired(.color)
-        self.`default` = try container.sdkDecodeRequired(.`default`)
-        self.description = try container.sdkDecodeNullable(.description)
-        self.archivedAt = try container.sdkDecodeNullable(.archivedAt)
-        self.archivedBy = try container.sdkDecodeNullable(.archivedBy)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.url = try container.sdkDecodeRequired(.url)
-        if let value = self.archivedAt {
-            try sdkValidateDateTime("archived_at", sdkWireString(value))
-        }
-            try sdkValidateUri("url", self.url)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WebhooksLabelUnarchived {
-    public init(color: String, `default`: Bool, description: String?, archivedAt: Date?, archivedBy: SimpleUser?, id: Int, name: String, nodeId: String, url: String) throws {
-        (self.color, self.`default`) = (color, `default`)
+public extension WebhooksLabelUnarchived {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        color = try container.sdkDecodeRequired(.color)
+        self.default = try container.sdkDecodeRequired(.default)
+        description = try container.sdkDecodeNullable(.description)
+        archivedAt = try container.sdkDecodeNullable(.archivedAt)
+        archivedBy = try container.sdkDecodeNullable(.archivedBy)
+        id = try container.sdkDecodeRequired(.id)
+        name = try container.sdkDecodeRequired(.name)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        url = try container.sdkDecodeRequired(.url)
+        if let value = archivedAt {
+            try sdkValidateDateTime("archived_at", sdkWireString(value))
+        }
+        try sdkValidateUri("url", url)
+    }
+}
+
+public extension WebhooksLabelUnarchived {
+    init(
+        color: String,
+        default: Bool,
+        description: String?,
+        archivedAt: Date?,
+        archivedBy: SimpleUser?,
+        id: Int,
+        name: String,
+        nodeId: String,
+        url: String
+    ) throws {
+        (self.color, self.default) = (color, `default`)
         (self.description, self.archivedAt) = (description, archivedAt)
         (self.archivedBy, self.id) = (archivedBy, id)
         (self.name, self.nodeId) = (name, nodeId)
@@ -281,6 +337,6 @@ extension WebhooksLabelUnarchived {
         if let value = self.archivedAt {
             try sdkValidateDateTime("archived_at", sdkWireString(value))
         }
-            try sdkValidateUri("url", self.url)
+        try sdkValidateUri("url", self.url)
     }
 }

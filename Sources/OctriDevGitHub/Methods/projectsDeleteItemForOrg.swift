@@ -6,14 +6,35 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ProjectsMethods {
+public extension ProjectsMethods {
     /// Delete a specific item from an organization-owned project.
     ///
     /// - Parameters:
     /// - projectNumber: The project's number.
     /// - org: The organization name. The name is not case sensitive.
     /// - itemId: The unique identifier of the project item.
-    public static func projectsDeleteItemForOrg(config: ClientConfig, projectNumber: Int, org: String, itemId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/projectsV2/", sdkEncodePathSegment(sdkWireString(projectNumber)), "/items/", sdkEncodePathSegment(sdkWireString(itemId))].joined(), config: config, decoder: .empty, operationId: "projectsDeleteItemForOrg", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self])).data
+    static func projectsDeleteItemForOrg(
+        config: ClientConfig,
+        projectNumber: Int,
+        org: String,
+        itemId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            [
+                "/orgs/",
+                sdkEncodePathSegment(sdkWireString(org)),
+                "/projectsV2/",
+                sdkEncodePathSegment(sdkWireString(projectNumber)),
+                "/items/",
+                sdkEncodePathSegment(sdkWireString(itemId)),
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "projectsDeleteItemForOrg",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self]
+        )).data
     }
 }

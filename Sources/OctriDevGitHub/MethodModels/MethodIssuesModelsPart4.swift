@@ -7,9 +7,16 @@ import Foundation
     import FoundationNetworking
 #endif
 
-// Canonical issues operation model declarations
-extension IssuesUpdateResponseVariant1SuggestionsLabelsItem {
-    public init(name: String? = nil, rationale: String? = nil, suggest: Bool? = nil, confidence: IssuesUpdateResponseVariant1SuggestionsLabelsItemConfidence? = nil, ignored: Bool? = nil, ignoredReason: IssuesUpdateResponseVariant1SuggestionsLabelsItemIgnoredReason? = nil) {
+/// Canonical issues operation model declarations
+public extension IssuesUpdateResponseVariant1SuggestionsLabelsItem {
+    init(
+        name: String? = nil,
+        rationale: String? = nil,
+        suggest: Bool? = nil,
+        confidence: IssuesUpdateResponseVariant1SuggestionsLabelsItemConfidence? = nil,
+        ignored: Bool? = nil,
+        ignoredReason: IssuesUpdateResponseVariant1SuggestionsLabelsItemIgnoredReason? = nil
+    ) {
         self.init()
         (self.name, self.rationale) = (name, rationale)
         (self.suggest, self.confidence) = (suggest, confidence)
@@ -23,25 +30,33 @@ public indirect enum IssuesAddLabelsRequestBodyVariant0LabelsItem {
 }
 
 extension IssuesAddLabelsRequestBodyVariant0LabelsItem: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for IssuesAddLabelsRequestBodyVariant0LabelsItem")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for IssuesAddLabelsRequestBodyVariant0LabelsItem"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension IssuesAddLabelsRequestBodyVariant0LabelsItem {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(String.self) { return .stringValue(value) }
+        if let value = try? container.decode(String.self) {
+            return .stringValue(value)
+        }
         if let value = try? container.decode(
             IssuesAddLabelsRequestBodyVariant0LabelsItemVariant1.self
         ) {
-            return             .issuesAddLabelsRequestBodyVariant0LabelsItemVariant1(value)
+            return .issuesAddLabelsRequestBodyVariant0LabelsItemVariant1(value)
         }
         return nil
     }
@@ -68,22 +83,22 @@ public struct IssuesAddLabelsRequestBodyVariant0: Codable {
     }
 
     init() {
-        self.labels = nil
+        labels = nil
     }
 }
 
-extension IssuesAddLabelsRequestBodyVariant0 {
-    public init(from decoder: Decoder) throws {
+public extension IssuesAddLabelsRequestBodyVariant0 {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.labels = try container.sdkDecodeIfPresent(.labels)
-        if let value = self.labels {
+        labels = try container.sdkDecodeIfPresent(.labels)
+        if let value = labels {
             try validateItems("labels", value, min: 1, max: nil)
         }
     }
 }
 
-extension IssuesAddLabelsRequestBodyVariant0 {
-    public init(labels: [IssuesAddLabelsRequestBodyVariant0LabelsItem]? = nil) throws {
+public extension IssuesAddLabelsRequestBodyVariant0 {
+    init(labels: [IssuesAddLabelsRequestBodyVariant0LabelsItem]? = nil) throws {
         self.init()
         self.labels = labels
         if let value = self.labels {

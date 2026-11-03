@@ -3,9 +3,104 @@
 
 import Foundation
 
-// WebhookPush domain models
-extension WebhookPushRepository {
-    public init(archiveUrl: String, archived: Bool, assigneesUrl: String, blobsUrl: String, branchesUrl: String, cloneUrl: String, collaboratorsUrl: String, commentsUrl: String, commitsUrl: String, compareUrl: String, contentsUrl: String, contributorsUrl: String, createdAt: WebhookPushRepositoryCreatedAt, defaultBranch: String, deploymentsUrl: String, description: String?, downloadsUrl: String, eventsUrl: String, fork: Bool, forks: Int, forksCount: Int, forksUrl: String, fullName: String, gitCommitsUrl: String, gitRefsUrl: String, gitTagsUrl: String, gitUrl: String, hasDownloads: Bool, hasIssues: Bool, hasPages: Bool, hasProjects: Bool, hasWiki: Bool, hasDiscussions: Bool, homepage: String?, hooksUrl: String, htmlUrl: String, id: Int, issueCommentUrl: String, issueEventsUrl: String, issuesUrl: String, keysUrl: String, labelsUrl: String, language: String?, languagesUrl: String, license: WebhookPushRepositoryLicense?, mergesUrl: String, milestonesUrl: String, mirrorUrl: String?, name: String, nodeId: String, notificationsUrl: String, openIssues: Int, openIssuesCount: Int, owner: WebhookPushRepositoryOwner?, `private`: Bool, pullsUrl: String, pushedAt: WebhookPushRepositoryPushedAt?, releasesUrl: String, size: Int, sshUrl: String, stargazersCount: Int, stargazersUrl: String, statusesUrl: String, subscribersUrl: String, subscriptionUrl: String, svnUrl: String, tagsUrl: String, teamsUrl: String, topics: [String], treesUrl: String, updatedAt: Date, url: String, visibility: WebhookPushRepositoryVisibility, watchers: Int, watchersCount: Int, allowAutoMerge: Bool? = nil, allowForking: Bool? = nil, allowMergeCommit: Bool? = nil, allowRebaseMerge: Bool? = nil, allowSquashMerge: Bool? = nil, allowUpdateBranch: Bool? = nil, customProperties: [String: JSONValue]? = nil, deleteBranchOnMerge: Bool? = nil, disabled: Bool? = nil, hasPullRequests: Bool? = nil, pullRequestCreationPolicy: WebhookPushRepositoryPullRequestCreationPolicy? = nil, isTemplate: Bool? = nil, primaryBranch: String? = nil, organization: String? = nil, permissions: WebhookPushRepositoryPermissions? = nil, `public`: Bool? = nil, roleName: String? = nil, stargazers: Int? = nil, webCommitSignoffRequired: Bool? = nil) throws {
+/// WebhookPush domain models
+public extension WebhookPushRepository {
+    init(
+        archiveUrl: String,
+        archived: Bool,
+        assigneesUrl: String,
+        blobsUrl: String,
+        branchesUrl: String,
+        cloneUrl: String,
+        collaboratorsUrl: String,
+        commentsUrl: String,
+        commitsUrl: String,
+        compareUrl: String,
+        contentsUrl: String,
+        contributorsUrl: String,
+        createdAt: WebhookPushRepositoryCreatedAt,
+        defaultBranch: String,
+        deploymentsUrl: String,
+        description: String?,
+        downloadsUrl: String,
+        eventsUrl: String,
+        fork: Bool,
+        forks: Int,
+        forksCount: Int,
+        forksUrl: String,
+        fullName: String,
+        gitCommitsUrl: String,
+        gitRefsUrl: String,
+        gitTagsUrl: String,
+        gitUrl: String,
+        hasDownloads: Bool,
+        hasIssues: Bool,
+        hasPages: Bool,
+        hasProjects: Bool,
+        hasWiki: Bool,
+        hasDiscussions: Bool,
+        homepage: String?,
+        hooksUrl: String,
+        htmlUrl: String,
+        id: Int,
+        issueCommentUrl: String,
+        issueEventsUrl: String,
+        issuesUrl: String,
+        keysUrl: String,
+        labelsUrl: String,
+        language: String?,
+        languagesUrl: String,
+        license: WebhookPushRepositoryLicense?,
+        mergesUrl: String,
+        milestonesUrl: String,
+        mirrorUrl: String?,
+        name: String,
+        nodeId: String,
+        notificationsUrl: String,
+        openIssues: Int,
+        openIssuesCount: Int,
+        owner: WebhookPushRepositoryOwner?,
+        private: Bool,
+        pullsUrl: String,
+        pushedAt: WebhookPushRepositoryPushedAt?,
+        releasesUrl: String,
+        size: Int,
+        sshUrl: String,
+        stargazersCount: Int,
+        stargazersUrl: String,
+        statusesUrl: String,
+        subscribersUrl: String,
+        subscriptionUrl: String,
+        svnUrl: String,
+        tagsUrl: String,
+        teamsUrl: String,
+        topics: [String],
+        treesUrl: String,
+        updatedAt: Date,
+        url: String,
+        visibility: WebhookPushRepositoryVisibility,
+        watchers: Int,
+        watchersCount: Int,
+        allowAutoMerge: Bool? = nil,
+        allowForking: Bool? = nil,
+        allowMergeCommit: Bool? = nil,
+        allowRebaseMerge: Bool? = nil,
+        allowSquashMerge: Bool? = nil,
+        allowUpdateBranch: Bool? = nil,
+        customProperties: [String: JSONValue]? = nil,
+        deleteBranchOnMerge: Bool? = nil,
+        disabled: Bool? = nil,
+        hasPullRequests: Bool? = nil,
+        pullRequestCreationPolicy: WebhookPushRepositoryPullRequestCreationPolicy? = nil,
+        isTemplate: Bool? = nil,
+        primaryBranch: String? = nil,
+        organization: String? = nil,
+        permissions: WebhookPushRepositoryPermissions? = nil,
+        public: Bool? = nil,
+        roleName: String? = nil,
+        stargazers: Int? = nil,
+        webCommitSignoffRequired: Bool? = nil
+    ) throws {
         (self.archiveUrl, self.archived) = (archiveUrl, archived)
         (self.assigneesUrl, self.blobsUrl) = (assigneesUrl, blobsUrl)
         (self.branchesUrl, self.cloneUrl) = (branchesUrl, cloneUrl)
@@ -33,7 +128,7 @@ extension WebhookPushRepository {
         (self.name, self.nodeId) = (name, nodeId)
         (self.notificationsUrl, self.openIssues) = (notificationsUrl, openIssues)
         (self.openIssuesCount, self.owner) = (openIssuesCount, owner)
-        (self.`private`, self.pullsUrl) = (`private`, pullsUrl)
+        (self.private, self.pullsUrl) = (`private`, pullsUrl)
         (self.pushedAt, self.releasesUrl) = (pushedAt, releasesUrl)
         (self.size, self.sshUrl) = (size, sshUrl)
         (self.stargazersCount, self.stargazersUrl) = (stargazersCount, stargazersUrl)
@@ -51,7 +146,7 @@ extension WebhookPushRepository {
         self.hasPullRequests = hasPullRequests
         (self.pullRequestCreationPolicy, self.isTemplate) = (pullRequestCreationPolicy, isTemplate)
         (self.primaryBranch, self.organization) = (primaryBranch, organization)
-        (self.permissions, self.`public`) = (permissions, `public`)
+        (self.permissions, self.public) = (permissions, `public`)
         (self.roleName, self.stargazers) = (roleName, stargazers)
         self.webCommitSignoffRequired = webCommitSignoffRequired
         try sdkValidateConstraintsPart1()
@@ -61,18 +156,18 @@ extension WebhookPushRepository {
 
 extension WebhookPushRepository {
     func sdkValidateConstraintsPart1() throws {
-            try sdkValidateUri("clone_url", self.cloneUrl)
-            try sdkValidateUri("contributors_url", self.contributorsUrl)
-            try sdkValidateUri("deployments_url", self.deploymentsUrl)
-            try sdkValidateUri("downloads_url", self.downloadsUrl)
-            try sdkValidateUri("events_url", self.eventsUrl)
-            try sdkValidateUri("forks_url", self.forksUrl)
-            try sdkValidateUri("git_url", self.gitUrl)
-            try sdkValidateUri("hooks_url", self.hooksUrl)
-            try sdkValidateUri("html_url", self.htmlUrl)
-            try sdkValidateUri("languages_url", self.languagesUrl)
-            try sdkValidateUri("merges_url", self.mergesUrl)
-        if let value = self.mirrorUrl {
+        try sdkValidateUri("clone_url", cloneUrl)
+        try sdkValidateUri("contributors_url", contributorsUrl)
+        try sdkValidateUri("deployments_url", deploymentsUrl)
+        try sdkValidateUri("downloads_url", downloadsUrl)
+        try sdkValidateUri("events_url", eventsUrl)
+        try sdkValidateUri("forks_url", forksUrl)
+        try sdkValidateUri("git_url", gitUrl)
+        try sdkValidateUri("hooks_url", hooksUrl)
+        try sdkValidateUri("html_url", htmlUrl)
+        try sdkValidateUri("languages_url", languagesUrl)
+        try sdkValidateUri("merges_url", mergesUrl)
+        if let value = mirrorUrl {
             try sdkValidateUri("mirror_url", value)
         }
     }
@@ -80,14 +175,14 @@ extension WebhookPushRepository {
 
 extension WebhookPushRepository {
     func sdkValidateConstraintsPart2() throws {
-            try sdkValidateUri("stargazers_url", self.stargazersUrl)
-            try sdkValidateUri("subscribers_url", self.subscribersUrl)
-            try sdkValidateUri("subscription_url", self.subscriptionUrl)
-            try sdkValidateUri("svn_url", self.svnUrl)
-            try sdkValidateUri("tags_url", self.tagsUrl)
-            try sdkValidateUri("teams_url", self.teamsUrl)
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-            try sdkValidateUri("url", self.url)
+        try sdkValidateUri("stargazers_url", stargazersUrl)
+        try sdkValidateUri("subscribers_url", subscribersUrl)
+        try sdkValidateUri("subscription_url", subscriptionUrl)
+        try sdkValidateUri("svn_url", svnUrl)
+        try sdkValidateUri("tags_url", tagsUrl)
+        try sdkValidateUri("teams_url", teamsUrl)
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+        try sdkValidateUri("url", url)
     }
 }
 
@@ -109,33 +204,43 @@ public struct WebhookPushCommitsItemCommitter: Codable {
         case username
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension WebhookPushCommitsItemCommitter {
-    public init(from decoder: Decoder) throws {
+public extension WebhookPushCommitsItemCommitter {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.email) else {
-            throw SdkValidationError(field: "email", code: "required", message: "Validation failed for 'email': value is required")
+            throw SdkValidationError(
+                field: "email",
+                code: "required",
+                message: "Validation failed for 'email': value is required"
+            )
         }
         guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
         }
-        self.email = try container.sdkDecodeNullable(.email)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.date = try container.sdkDecodeIfPresent(.date)
-        self.username = try container.sdkDecodeIfPresent(.username)
-        if let value = self.email {
+        email = try container.sdkDecodeNullable(.email)
+        name = try container.sdkDecodeRequired(.name)
+        date = try container.sdkDecodeIfPresent(.date)
+        username = try container.sdkDecodeIfPresent(.username)
+        if let value = email {
             try sdkValidateEmail("email", value)
         }
-        if let value = self.date {
+        if let value = date {
             try sdkValidateDateTime("date", sdkWireString(value))
         }
     }
 }
 
-extension WebhookPushCommitsItemCommitter {
-    public init(email: String?, name: String, date: Date? = nil, username: String? = nil) throws {
+public extension WebhookPushCommitsItemCommitter {
+    init(email: String?, name: String, date: Date? = nil, username: String? = nil) throws {
         (self.email, self.name) = (email, name)
         (self.date, self.username) = (date, username)
         if let value = self.email {
@@ -168,31 +273,45 @@ public struct WebhookPushRepositoryPermissions: Codable {
         case triage
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension WebhookPushRepositoryPermissions {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.admin) else {
-            throw SdkValidationError(field: "admin", code: "required", message: "Validation failed for 'admin': value is required")
-        }
-        guard container.contains(.pull) else {
-            throw SdkValidationError(field: "pull", code: "required", message: "Validation failed for 'pull': value is required")
-        }
-        guard container.contains(.push) else {
-            throw SdkValidationError(field: "push", code: "required", message: "Validation failed for 'push': value is required")
-        }
-        self.admin = try container.sdkDecodeRequired(.admin)
-        self.pull = try container.sdkDecodeRequired(.pull)
-        self.push = try container.sdkDecodeRequired(.push)
-        self.maintain = try container.sdkDecodeIfPresent(.maintain)
-        self.triage = try container.sdkDecodeIfPresent(.triage)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension WebhookPushRepositoryPermissions {
-    public init(admin: Bool, pull: Bool, push: Bool, maintain: Bool? = nil, triage: Bool? = nil) {
+public extension WebhookPushRepositoryPermissions {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.admin) else {
+            throw SdkValidationError(
+                field: "admin",
+                code: "required",
+                message: "Validation failed for 'admin': value is required"
+            )
+        }
+        guard container.contains(.pull) else {
+            throw SdkValidationError(
+                field: "pull",
+                code: "required",
+                message: "Validation failed for 'pull': value is required"
+            )
+        }
+        guard container.contains(.push) else {
+            throw SdkValidationError(
+                field: "push",
+                code: "required",
+                message: "Validation failed for 'push': value is required"
+            )
+        }
+        admin = try container.sdkDecodeRequired(.admin)
+        pull = try container.sdkDecodeRequired(.pull)
+        push = try container.sdkDecodeRequired(.push)
+        maintain = try container.sdkDecodeIfPresent(.maintain)
+        triage = try container.sdkDecodeIfPresent(.triage)
+    }
+}
+
+public extension WebhookPushRepositoryPermissions {
+    init(admin: Bool, pull: Bool, push: Bool, maintain: Bool? = nil, triage: Bool? = nil) {
         (self.admin, self.pull) = (admin, pull)
         (self.push, self.maintain) = (push, maintain)
         self.triage = triage
@@ -217,33 +336,43 @@ public struct WebhookPushCommitsItemAuthor: Codable {
         case username
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension WebhookPushCommitsItemAuthor {
-    public init(from decoder: Decoder) throws {
+public extension WebhookPushCommitsItemAuthor {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.email) else {
-            throw SdkValidationError(field: "email", code: "required", message: "Validation failed for 'email': value is required")
+            throw SdkValidationError(
+                field: "email",
+                code: "required",
+                message: "Validation failed for 'email': value is required"
+            )
         }
         guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
         }
-        self.email = try container.sdkDecodeNullable(.email)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.date = try container.sdkDecodeIfPresent(.date)
-        self.username = try container.sdkDecodeIfPresent(.username)
-        if let value = self.email {
+        email = try container.sdkDecodeNullable(.email)
+        name = try container.sdkDecodeRequired(.name)
+        date = try container.sdkDecodeIfPresent(.date)
+        username = try container.sdkDecodeIfPresent(.username)
+        if let value = email {
             try sdkValidateEmail("email", value)
         }
-        if let value = self.date {
+        if let value = date {
             try sdkValidateDateTime("date", sdkWireString(value))
         }
     }
 }
 
-extension WebhookPushCommitsItemAuthor {
-    public init(email: String?, name: String, date: Date? = nil, username: String? = nil) throws {
+public extension WebhookPushCommitsItemAuthor {
+    init(email: String?, name: String, date: Date? = nil, username: String? = nil) throws {
         (self.email, self.name) = (email, name)
         (self.date, self.username) = (date, username)
         if let value = self.email {
@@ -276,40 +405,62 @@ public struct WebhookPushRepositoryLicense: Codable {
         case url
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension WebhookPushRepositoryLicense {
-    public init(from decoder: Decoder) throws {
+public extension WebhookPushRepositoryLicense {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.key) else {
-            throw SdkValidationError(field: "key", code: "required", message: "Validation failed for 'key': value is required")
+            throw SdkValidationError(
+                field: "key",
+                code: "required",
+                message: "Validation failed for 'key': value is required"
+            )
         }
         guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
         }
         guard container.contains(.nodeId) else {
-            throw SdkValidationError(field: "node_id", code: "required", message: "Validation failed for 'node_id': value is required")
+            throw SdkValidationError(
+                field: "node_id",
+                code: "required",
+                message: "Validation failed for 'node_id': value is required"
+            )
         }
         guard container.contains(.spdxId) else {
-            throw SdkValidationError(field: "spdx_id", code: "required", message: "Validation failed for 'spdx_id': value is required")
+            throw SdkValidationError(
+                field: "spdx_id",
+                code: "required",
+                message: "Validation failed for 'spdx_id': value is required"
+            )
         }
         guard container.contains(.url) else {
-            throw SdkValidationError(field: "url", code: "required", message: "Validation failed for 'url': value is required")
+            throw SdkValidationError(
+                field: "url",
+                code: "required",
+                message: "Validation failed for 'url': value is required"
+            )
         }
-        self.key = try container.sdkDecodeRequired(.key)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.spdxId = try container.sdkDecodeRequired(.spdxId)
-        self.url = try container.sdkDecodeNullable(.url)
-        if let value = self.url {
+        key = try container.sdkDecodeRequired(.key)
+        name = try container.sdkDecodeRequired(.name)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        spdxId = try container.sdkDecodeRequired(.spdxId)
+        url = try container.sdkDecodeNullable(.url)
+        if let value = url {
             try sdkValidateUri("url", value)
         }
     }
 }
 
-extension WebhookPushRepositoryLicense {
-    public init(key: String, name: String, nodeId: String, spdxId: String, url: String?) throws {
+public extension WebhookPushRepositoryLicense {
+    init(key: String, name: String, nodeId: String, spdxId: String, url: String?) throws {
         (self.key, self.name) = (key, name)
         (self.nodeId, self.spdxId) = (nodeId, spdxId)
         self.url = url
@@ -337,33 +488,43 @@ public struct WebhookPushHeadCommitCommitter: Codable {
         case username
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension WebhookPushHeadCommitCommitter {
-    public init(from decoder: Decoder) throws {
+public extension WebhookPushHeadCommitCommitter {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard container.contains(.email) else {
-            throw SdkValidationError(field: "email", code: "required", message: "Validation failed for 'email': value is required")
+            throw SdkValidationError(
+                field: "email",
+                code: "required",
+                message: "Validation failed for 'email': value is required"
+            )
         }
         guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
         }
-        self.email = try container.sdkDecodeNullable(.email)
-        self.name = try container.sdkDecodeRequired(.name)
-        self.date = try container.sdkDecodeIfPresent(.date)
-        self.username = try container.sdkDecodeIfPresent(.username)
-        if let value = self.email {
+        email = try container.sdkDecodeNullable(.email)
+        name = try container.sdkDecodeRequired(.name)
+        date = try container.sdkDecodeIfPresent(.date)
+        username = try container.sdkDecodeIfPresent(.username)
+        if let value = email {
             try sdkValidateEmail("email", value)
         }
-        if let value = self.date {
+        if let value = date {
             try sdkValidateDateTime("date", sdkWireString(value))
         }
     }
 }
 
-extension WebhookPushHeadCommitCommitter {
-    public init(email: String?, name: String, date: Date? = nil, username: String? = nil) throws {
+public extension WebhookPushHeadCommitCommitter {
+    init(email: String?, name: String, date: Date? = nil, username: String? = nil) throws {
         (self.email, self.name) = (email, name)
         (self.date, self.username) = (date, username)
         if let value = self.email {
@@ -379,14 +540,17 @@ extension WebhookPushHeadCommitCommitter {
 public struct WebhookPushRepositoryOwnerType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = WebhookPushRepositoryOwnerType(rawValue: "Bot")
     public static let user = WebhookPushRepositoryOwnerType(rawValue: "User")
     public static let organization = WebhookPushRepositoryOwnerType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -396,16 +560,20 @@ public struct WebhookPushRepositoryOwnerType: RawRepresentable, Hashable, Codabl
 }
 
 /// The policy controlling who can create pull requests: all or collaborators_only.
-public struct WebhookPushRepositoryPullRequestCreationPolicy: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookPushRepositoryPullRequestCreationPolicy: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let all = WebhookPushRepositoryPullRequestCreationPolicy(rawValue: "all")
     public static let collaboratorsOnly = WebhookPushRepositoryPullRequestCreationPolicy(rawValue: "collaborators_only")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -418,14 +586,17 @@ public struct WebhookPushRepositoryPullRequestCreationPolicy: RawRepresentable, 
 public struct WebhookPushRepositoryVisibility: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let `public` = WebhookPushRepositoryVisibility(rawValue: "public")
     public static let `private` = WebhookPushRepositoryVisibility(rawValue: "private")
     public static let `internal` = WebhookPushRepositoryVisibility(rawValue: "internal")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

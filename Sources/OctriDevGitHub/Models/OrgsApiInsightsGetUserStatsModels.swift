@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Orgs domain models
+/// Orgs domain models
 public typealias ApiInsightsUserStats = [ApiInsightsUserStatsItem]
 
 public struct ApiInsightsUserStatsItem: Codable {
@@ -30,28 +30,43 @@ public struct ApiInsightsUserStatsItem: Codable {
     }
 
     init() {
-        (self.actorType, self.actorName, self.actorId, self.integrationId, self.oauthApplicationId) = (nil, nil, nil, nil, nil)
-        (self.totalRequestCount, self.rateLimitedRequestCount, self.lastRateLimitedTimestamp, self.lastRequestTimestamp) = (nil, nil, nil, nil)
+        (actorType, actorName, actorId, integrationId, oauthApplicationId) = (nil, nil, nil, nil, nil)
+        (totalRequestCount, rateLimitedRequestCount, lastRateLimitedTimestamp, lastRequestTimestamp) = (
+            nil,
+            nil,
+            nil,
+            nil
+        )
     }
 }
 
-extension ApiInsightsUserStatsItem {
-    public init(from decoder: Decoder) throws {
+public extension ApiInsightsUserStatsItem {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.actorType = try container.sdkDecodeIfPresent(.actorType)
-        self.actorName = try container.sdkDecodeIfPresent(.actorName)
-        self.actorId = try container.sdkDecodeIfPresent(.actorId)
-        self.integrationId = try container.sdkDecodeIfPresent(.integrationId)
-        self.oauthApplicationId = try container.sdkDecodeIfPresent(.oauthApplicationId)
-        self.totalRequestCount = try container.sdkDecodeIfPresent(.totalRequestCount)
-        self.rateLimitedRequestCount = try container.sdkDecodeIfPresent(.rateLimitedRequestCount)
-        self.lastRateLimitedTimestamp = try container.sdkDecodeIfPresent(.lastRateLimitedTimestamp)
-        self.lastRequestTimestamp = try container.sdkDecodeIfPresent(.lastRequestTimestamp)
+        actorType = try container.sdkDecodeIfPresent(.actorType)
+        actorName = try container.sdkDecodeIfPresent(.actorName)
+        actorId = try container.sdkDecodeIfPresent(.actorId)
+        integrationId = try container.sdkDecodeIfPresent(.integrationId)
+        oauthApplicationId = try container.sdkDecodeIfPresent(.oauthApplicationId)
+        totalRequestCount = try container.sdkDecodeIfPresent(.totalRequestCount)
+        rateLimitedRequestCount = try container.sdkDecodeIfPresent(.rateLimitedRequestCount)
+        lastRateLimitedTimestamp = try container.sdkDecodeIfPresent(.lastRateLimitedTimestamp)
+        lastRequestTimestamp = try container.sdkDecodeIfPresent(.lastRequestTimestamp)
     }
 }
 
-extension ApiInsightsUserStatsItem {
-    public init(actorType: String? = nil, actorName: String? = nil, actorId: Int? = nil, integrationId: Int? = nil, oauthApplicationId: Int? = nil, totalRequestCount: Int? = nil, rateLimitedRequestCount: Int? = nil, lastRateLimitedTimestamp: String? = nil, lastRequestTimestamp: String? = nil) {
+public extension ApiInsightsUserStatsItem {
+    init(
+        actorType: String? = nil,
+        actorName: String? = nil,
+        actorId: Int? = nil,
+        integrationId: Int? = nil,
+        oauthApplicationId: Int? = nil,
+        totalRequestCount: Int? = nil,
+        rateLimitedRequestCount: Int? = nil,
+        lastRateLimitedTimestamp: String? = nil,
+        lastRequestTimestamp: String? = nil
+    ) {
         self.init()
         (self.actorType, self.actorName) = (actorType, actorName)
         (self.actorId, self.integrationId) = (actorId, integrationId)

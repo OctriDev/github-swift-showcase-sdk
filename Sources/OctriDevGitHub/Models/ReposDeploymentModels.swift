@@ -3,7 +3,7 @@
 
 import Foundation
 
-// ReposDeployment domain models
+/// ReposDeployment domain models
 /// Deployment protection rule
 public struct DeploymentProtectionRule: Codable, SdkResource {
     /// The unique identifier for the deployment protection rule.
@@ -26,33 +26,51 @@ public struct DeploymentProtectionRule: Codable, SdkResource {
         case app
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension DeploymentProtectionRule {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.id) else {
-            throw SdkValidationError(field: "id", code: "required", message: "Validation failed for 'id': value is required")
-        }
-        guard container.contains(.nodeId) else {
-            throw SdkValidationError(field: "node_id", code: "required", message: "Validation failed for 'node_id': value is required")
-        }
-        guard container.contains(.enabled) else {
-            throw SdkValidationError(field: "enabled", code: "required", message: "Validation failed for 'enabled': value is required")
-        }
-        guard container.contains(.app) else {
-            throw SdkValidationError(field: "app", code: "required", message: "Validation failed for 'app': value is required")
-        }
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.enabled = try container.sdkDecodeRequired(.enabled)
-        self.app = try container.sdkDecodeRequired(.app)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension DeploymentProtectionRule {
-    public init(id: Int, nodeId: String, enabled: Bool, app: CustomDeploymentRuleApp) {
+public extension DeploymentProtectionRule {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.id) else {
+            throw SdkValidationError(
+                field: "id",
+                code: "required",
+                message: "Validation failed for 'id': value is required"
+            )
+        }
+        guard container.contains(.nodeId) else {
+            throw SdkValidationError(
+                field: "node_id",
+                code: "required",
+                message: "Validation failed for 'node_id': value is required"
+            )
+        }
+        guard container.contains(.enabled) else {
+            throw SdkValidationError(
+                field: "enabled",
+                code: "required",
+                message: "Validation failed for 'enabled': value is required"
+            )
+        }
+        guard container.contains(.app) else {
+            throw SdkValidationError(
+                field: "app",
+                code: "required",
+                message: "Validation failed for 'app': value is required"
+            )
+        }
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        enabled = try container.sdkDecodeRequired(.enabled)
+        app = try container.sdkDecodeRequired(.app)
+    }
+}
+
+public extension DeploymentProtectionRule {
+    init(id: Int, nodeId: String, enabled: Bool, app: CustomDeploymentRuleApp) {
         (self.id, self.nodeId) = (id, nodeId)
         (self.enabled, self.app) = (enabled, app)
     }
@@ -75,22 +93,28 @@ public struct DeploymentBranchPolicyNamePatternWithType: Codable {
         case type
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension DeploymentBranchPolicyNamePatternWithType {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        self.name = try container.sdkDecodeRequired(.name)
-        self.type = try container.sdkDecodeIfPresent(.type)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension DeploymentBranchPolicyNamePatternWithType {
-    public init(name: String, type: DeploymentBranchPolicyNamePatternWithTypeType? = nil) {
+public extension DeploymentBranchPolicyNamePatternWithType {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        name = try container.sdkDecodeRequired(.name)
+        type = try container.sdkDecodeIfPresent(.type)
+    }
+}
+
+public extension DeploymentBranchPolicyNamePatternWithType {
+    init(name: String, type: DeploymentBranchPolicyNamePatternWithTypeType? = nil) {
         (self.name, self.type) = (name, type)
     }
 }
@@ -119,22 +143,22 @@ public struct DeploymentBranchPolicy: Codable, SdkResource {
     }
 
     init() {
-        (self.id, self.nodeId, self.name, self.type) = (nil, nil, nil, nil)
+        (id, nodeId, name, type) = (nil, nil, nil, nil)
     }
 }
 
-extension DeploymentBranchPolicy {
-    public init(from decoder: Decoder) throws {
+public extension DeploymentBranchPolicy {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.sdkDecodeIfPresent(.id)
-        self.nodeId = try container.sdkDecodeIfPresent(.nodeId)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.type = try container.sdkDecodeIfPresent(.type)
+        id = try container.sdkDecodeIfPresent(.id)
+        nodeId = try container.sdkDecodeIfPresent(.nodeId)
+        name = try container.sdkDecodeIfPresent(.name)
+        type = try container.sdkDecodeIfPresent(.type)
     }
 }
 
-extension DeploymentBranchPolicy {
-    public init(id: Int? = nil, nodeId: String? = nil, name: String? = nil, type: DeploymentBranchPolicyType? = nil) {
+public extension DeploymentBranchPolicy {
+    init(id: Int? = nil, nodeId: String? = nil, name: String? = nil, type: DeploymentBranchPolicyType? = nil) {
         self.init()
         (self.id, self.nodeId) = (id, nodeId)
         (self.name, self.type) = (name, type)
@@ -208,33 +232,51 @@ public struct DeploymentStatus: Codable, SdkResource {
         case performedViaGithubApp = "performed_via_github_app"
     }
 
-    private init(sdkCopy value: Self) { self = value }
+    private init(sdkCopy value: Self) {
+        self = value
+    }
 }
 
-extension DeploymentStatus {
-    public init(from decoder: Decoder) throws {
+public extension DeploymentStatus {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.url = try container.sdkDecodeRequired(.url)
-        self.id = try container.sdkDecodeRequired(.id)
-        self.nodeId = try container.sdkDecodeRequired(.nodeId)
-        self.state = try container.sdkDecodeRequired(.state)
-        self.creator = try container.sdkDecodeNullable(.creator)
-        self.description = try container.sdkDecodeRequired(.description)
-        self.targetUrl = try container.sdkDecodeRequired(.targetUrl)
-        self.createdAt = try container.sdkDecodeRequired(.createdAt)
-        self.updatedAt = try container.sdkDecodeRequired(.updatedAt)
-        self.deploymentUrl = try container.sdkDecodeRequired(.deploymentUrl)
-        self.repositoryUrl = try container.sdkDecodeRequired(.repositoryUrl)
-        self.environment = try container.sdkDecodeIfPresent(.environment)
-        self.environmentUrl = try container.sdkDecodeIfPresent(.environmentUrl)
-        self.logUrl = try container.sdkDecodeIfPresent(.logUrl)
-        self.performedViaGithubApp = try container.sdkDecodeIfPresent(.performedViaGithubApp)
+        url = try container.sdkDecodeRequired(.url)
+        id = try container.sdkDecodeRequired(.id)
+        nodeId = try container.sdkDecodeRequired(.nodeId)
+        state = try container.sdkDecodeRequired(.state)
+        creator = try container.sdkDecodeNullable(.creator)
+        description = try container.sdkDecodeRequired(.description)
+        targetUrl = try container.sdkDecodeRequired(.targetUrl)
+        createdAt = try container.sdkDecodeRequired(.createdAt)
+        updatedAt = try container.sdkDecodeRequired(.updatedAt)
+        deploymentUrl = try container.sdkDecodeRequired(.deploymentUrl)
+        repositoryUrl = try container.sdkDecodeRequired(.repositoryUrl)
+        environment = try container.sdkDecodeIfPresent(.environment)
+        environmentUrl = try container.sdkDecodeIfPresent(.environmentUrl)
+        logUrl = try container.sdkDecodeIfPresent(.logUrl)
+        performedViaGithubApp = try container.sdkDecodeIfPresent(.performedViaGithubApp)
         try sdkValidateConstraints()
     }
 }
 
-extension DeploymentStatus {
-    public init(url: String, id: Int, nodeId: String, state: DeploymentStatusState, creator: NullableSimpleUser?, description: String, targetUrl: String, createdAt: Date, updatedAt: Date, deploymentUrl: String, repositoryUrl: String, environment: String? = nil, environmentUrl: String? = nil, logUrl: String? = nil, performedViaGithubApp: NullableIntegration? = nil) throws {
+public extension DeploymentStatus {
+    init(
+        url: String,
+        id: Int,
+        nodeId: String,
+        state: DeploymentStatusState,
+        creator: NullableSimpleUser?,
+        description: String,
+        targetUrl: String,
+        createdAt: Date,
+        updatedAt: Date,
+        deploymentUrl: String,
+        repositoryUrl: String,
+        environment: String? = nil,
+        environmentUrl: String? = nil,
+        logUrl: String? = nil,
+        performedViaGithubApp: NullableIntegration? = nil
+    ) throws {
         (self.url, self.id) = (url, id)
         (self.nodeId, self.state) = (nodeId, state)
         (self.creator, self.description) = (creator, description)
@@ -249,17 +291,17 @@ extension DeploymentStatus {
 
 extension DeploymentStatus {
     func sdkValidateConstraints() throws {
-            try sdkValidateUri("url", self.url)
-            try validateLength("description", self.description, min: nil, max: 140)
-            try sdkValidateUri("target_url", self.targetUrl)
-            try sdkValidateDateTime("created_at", sdkWireString(self.createdAt))
-            try sdkValidateDateTime("updated_at", sdkWireString(self.updatedAt))
-            try sdkValidateUri("deployment_url", self.deploymentUrl)
-            try sdkValidateUri("repository_url", self.repositoryUrl)
-        if let value = self.environmentUrl {
+        try sdkValidateUri("url", url)
+        try validateLength("description", description, min: nil, max: 140)
+        try sdkValidateUri("target_url", targetUrl)
+        try sdkValidateDateTime("created_at", sdkWireString(createdAt))
+        try sdkValidateDateTime("updated_at", sdkWireString(updatedAt))
+        try sdkValidateUri("deployment_url", deploymentUrl)
+        try sdkValidateUri("repository_url", repositoryUrl)
+        if let value = environmentUrl {
             try sdkValidateUri("environment_url", value)
         }
-        if let value = self.logUrl {
+        if let value = logUrl {
             try sdkValidateUri("log_url", value)
         }
     }
@@ -281,25 +323,35 @@ public struct DeploymentBranchPolicySettings: Codable {
         case customBranchPolicies = "custom_branch_policies"
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension DeploymentBranchPolicySettings {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.protectedBranches) else {
-            throw SdkValidationError(field: "protected_branches", code: "required", message: "Validation failed for 'protected_branches': value is required")
-        }
-        guard container.contains(.customBranchPolicies) else {
-            throw SdkValidationError(field: "custom_branch_policies", code: "required", message: "Validation failed for 'custom_branch_policies': value is required")
-        }
-        self.protectedBranches = try container.sdkDecodeRequired(.protectedBranches)
-        self.customBranchPolicies = try container.sdkDecodeRequired(.customBranchPolicies)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension DeploymentBranchPolicySettings {
-    public init(protectedBranches: Bool, customBranchPolicies: Bool) {
+public extension DeploymentBranchPolicySettings {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.protectedBranches) else {
+            throw SdkValidationError(
+                field: "protected_branches",
+                code: "required",
+                message: "Validation failed for 'protected_branches': value is required"
+            )
+        }
+        guard container.contains(.customBranchPolicies) else {
+            throw SdkValidationError(
+                field: "custom_branch_policies",
+                code: "required",
+                message: "Validation failed for 'custom_branch_policies': value is required"
+            )
+        }
+        protectedBranches = try container.sdkDecodeRequired(.protectedBranches)
+        customBranchPolicies = try container.sdkDecodeRequired(.customBranchPolicies)
+    }
+}
+
+public extension DeploymentBranchPolicySettings {
+    init(protectedBranches: Bool, customBranchPolicies: Bool) {
         (self.protectedBranches, self.customBranchPolicies) = (protectedBranches, customBranchPolicies)
     }
 }
@@ -317,21 +369,27 @@ public struct DeploymentBranchPolicyNamePattern: Codable {
         case name
     }
 
-    private init(sdkCopy value: Self) { self = value }
-}
-
-extension DeploymentBranchPolicyNamePattern {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard container.contains(.name) else {
-            throw SdkValidationError(field: "name", code: "required", message: "Validation failed for 'name': value is required")
-        }
-        self.name = try container.sdkDecodeRequired(.name)
+    private init(sdkCopy value: Self) {
+        self = value
     }
 }
 
-extension DeploymentBranchPolicyNamePattern {
-    public init(name: String) {
+public extension DeploymentBranchPolicyNamePattern {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard container.contains(.name) else {
+            throw SdkValidationError(
+                field: "name",
+                code: "required",
+                message: "Validation failed for 'name': value is required"
+            )
+        }
+        name = try container.sdkDecodeRequired(.name)
+    }
+}
+
+public extension DeploymentBranchPolicyNamePattern {
+    init(name: String) {
         self.name = name
     }
 }
@@ -340,13 +398,16 @@ extension DeploymentBranchPolicyNamePattern {
 public struct DeploymentBranchPolicyType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let branch = DeploymentBranchPolicyType(rawValue: "branch")
     public static let tag = DeploymentBranchPolicyType(rawValue: "tag")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -356,16 +417,20 @@ public struct DeploymentBranchPolicyType: RawRepresentable, Hashable, Codable, S
 }
 
 /// Whether this rule targets a branch or tag
-public struct DeploymentBranchPolicyNamePatternWithTypeType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct DeploymentBranchPolicyNamePatternWithTypeType: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let branch = DeploymentBranchPolicyNamePatternWithTypeType(rawValue: "branch")
     public static let tag = DeploymentBranchPolicyNamePatternWithTypeType(rawValue: "tag")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -378,7 +443,10 @@ public struct DeploymentBranchPolicyNamePatternWithTypeType: RawRepresentable, H
 public struct DeploymentStatusState: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let error = DeploymentStatusState(rawValue: "error")
     public static let failure = DeploymentStatusState(rawValue: "failure")
     public static let inactive = DeploymentStatusState(rawValue: "inactive")
@@ -389,7 +457,7 @@ public struct DeploymentStatusState: RawRepresentable, Hashable, Codable, Sendab
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

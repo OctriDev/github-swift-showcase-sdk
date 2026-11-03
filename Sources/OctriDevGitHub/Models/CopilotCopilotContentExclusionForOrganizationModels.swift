@@ -3,5 +3,5 @@
 
 import Foundation
 
-// Copilot domain models
+/// Copilot domain models
 public typealias CopilotOrganizationContentExclusionDetails = [String: [String]]

@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension AppsMethods {
+public extension AppsMethods {
     /// List repositories that an app installation can access.
     ///
     /// - Parameters:
@@ -18,15 +18,43 @@ extension AppsMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func appsListReposAccessibleToInstallation(config: ClientConfig, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> AppsListReposAccessibleToInstallationResponse {
-        return try (await sdkRequest("GET", "/installation/repositories", config: config, query: [
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "appsListReposAccessibleToInstallation", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self])).data
+    static func appsListReposAccessibleToInstallation(
+        config: ClientConfig,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> AppsListReposAccessibleToInstallationResponse {
+        try await (sdkRequest(
+            "GET",
+            "/installation/repositories",
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "appsListReposAccessibleToInstallation",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self]
+        )).data
     }
 
-    /// Revokes the installation token you're using to authenticate as an installation and access this endpoint. Once an installation token is revoked, the token is invalidated and cannot be used. Other endpoints that require the revoked installation token must have a new installation token to work. You can create a new token using the "[Create an installation access token for an app](https://docs.github.com/rest/apps/apps#create-an-installation-access-token-for-an-app)" endpoint.
-    public static func appsRevokeInstallationAccessToken(config: ClientConfig, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try (await sdkRequest("DELETE", "/installation/token", config: config, decoder: .empty, operationId: "appsRevokeInstallationAccessToken", options: requestOptions)).data
+    /// Revokes the installation token you're using to authenticate as an installation and access this endpoint. Once an
+    /// installation token is revoked, the token is invalidated and cannot be used. Other endpoints that require the
+    /// revoked installation token must have a new installation token to work. You can create a new token using the
+    /// "[Create an installation access token for an
+    /// app](https://docs.github.com/rest/apps/apps#create-an-installation-access-token-for-an-app)" endpoint.
+    static func appsRevokeInstallationAccessToken(
+        config: ClientConfig,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await (sdkRequest(
+            "DELETE",
+            "/installation/token",
+            config: config,
+            decoder: .empty,
+            operationId: "appsRevokeInstallationAccessToken",
+            options: requestOptions
+        )).data
     }
 }

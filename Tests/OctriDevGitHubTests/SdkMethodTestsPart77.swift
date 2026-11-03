@@ -37,10 +37,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.getWebhook(
-            owner: decoded("\"octocat\""),
-            repo: decoded("\"Hello-World\""),
-            hookId: decoded("1")
-        )
+                owner: decoded("\"octocat\""),
+                repo: decoded("\"Hello-World\""),
+                hookId: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -108,11 +108,11 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.getWebhookDelivery(
-            owner: decoded("\"octocat\""),
-            repo: decoded("\"Hello-World\""),
-            hookId: decoded("1"),
-            deliveryId: decoded("1")
-        )
+                owner: decoded("\"octocat\""),
+                repo: decoded("\"Hello-World\""),
+                hookId: decoded("1"),
+                deliveryId: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -133,7 +133,10 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try ReposMethods.ReposListActivitiesOptions(owner: decoded("\"octocat\""), repo: decoded("\"Hello-World\""))
+        var options = try ReposMethods.ReposListActivitiesOptions(
+            owner: decoded("\"octocat\""),
+            repo: decoded("\"Hello-World\"")
+        )
         options.direction = try decoded("\"desc\"")
         options.perPage = try decoded("30")
         options.before = try decoded("\"before\"")
@@ -144,8 +147,8 @@ extension SdkMethodTests {
         options.activityType = try decoded("\"push\"")
         do {
             _ = try await client.repos.listActivities(
-            options: options
-        )
+                options: options
+            )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -159,7 +162,10 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try ReposMethods.ReposListActivitiesOptions(owner: decoded("\"octocat\""), repo: decoded("\"Hello-World\""))
+        var options = try ReposMethods.ReposListActivitiesOptions(
+            owner: decoded("\"octocat\""),
+            repo: decoded("\"Hello-World\"")
+        )
         options.direction = try decoded("\"desc\"")
         options.perPage = try decoded("30")
         options.before = try decoded("\"before\"")
@@ -174,8 +180,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.listActivities(
-            options: options
-        )
+                options: options
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 422)
@@ -241,12 +247,12 @@ extension SdkMethodTests {
         _ = client
         do {
             _ = try await client.repos.listBranches(
-            owner: decoded("\"octocat\""),
-            repo: decoded("\"Hello-World\""),
-            protected: decoded("false"),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                owner: decoded("\"octocat\""),
+                repo: decoded("\"Hello-World\""),
+                protected: decoded("false"),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("decoded a body its schema refuses")
         } catch is SdkResponseDecodeError {
         } catch {
@@ -266,12 +272,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.listBranches(
-            owner: decoded("\"octocat\""),
-            repo: decoded("\"Hello-World\""),
-            protected: decoded("false"),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                owner: decoded("\"octocat\""),
+                repo: decoded("\"Hello-World\""),
+                protected: decoded("false"),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -307,7 +313,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testReposListBranchesForHeadCommitReposListBranchesForHeadCommit409ReachesMockAndDecodesResponse() async throws {
+    func testReposListBranchesForHeadCommitReposListBranchesForHeadCommit409ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/409") else {
             return
         }
@@ -318,10 +325,10 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.listBranchesForHeadCommit(
-            owner: decoded("\"octocat\""),
-            repo: decoded("\"Hello-World\""),
-            commitSha: decoded("\"commit_sha\"")
-        )
+                owner: decoded("\"octocat\""),
+                repo: decoded("\"Hello-World\""),
+                commitSha: decoded("\"commit_sha\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 409)
@@ -371,13 +378,13 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.listCollaborators(
-            owner: decoded("\"octocat\""),
-            repo: decoded("\"Hello-World\""),
-            affiliation: decoded("\"all\""),
-            permission: decoded("\"pull\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                owner: decoded("\"octocat\""),
+                repo: decoded("\"Hello-World\""),
+                affiliation: decoded("\"all\""),
+                permission: decoded("\"pull\""),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -441,7 +448,10 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try ReposMethods.ReposListCommitsOptions(owner: decoded("\"octocat\""), repo: decoded("\"Hello-World\""))
+        var options = try ReposMethods.ReposListCommitsOptions(
+            owner: decoded("\"octocat\""),
+            repo: decoded("\"Hello-World\"")
+        )
         options.sha = try decoded("\"sha\"")
         options.path = try decoded("\"path\"")
         options.author = try decoded("\"author\"")
@@ -468,7 +478,10 @@ extension SdkMethodTests {
             return
         }
         _ = client
-        var options = try ReposMethods.ReposListCommitsOptions(owner: decoded("\"octocat\""), repo: decoded("\"Hello-World\""))
+        var options = try ReposMethods.ReposListCommitsOptions(
+            owner: decoded("\"octocat\""),
+            repo: decoded("\"Hello-World\"")
+        )
         options.sha = try decoded("\"sha\"")
         options.path = try decoded("\"path\"")
         options.author = try decoded("\"author\"")
@@ -483,8 +496,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.listCommits(
-            options: options
-        )
+                options: options
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 400)
@@ -533,12 +546,12 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.repos.listCommitStatusesForRef(
-            owner: decoded("\"octocat\""),
-            repo: decoded("\"Hello-World\""),
-            ref: decoded("\"ref\""),
-            perPage: decoded("30"),
-            page: decoded("1")
-        )
+                owner: decoded("\"octocat\""),
+                repo: decoded("\"Hello-World\""),
+                ref: decoded("\"ref\""),
+                perPage: decoded("30"),
+                page: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 301)

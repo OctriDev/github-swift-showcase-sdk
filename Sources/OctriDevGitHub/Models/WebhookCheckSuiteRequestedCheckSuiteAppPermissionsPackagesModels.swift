@@ -3,18 +3,22 @@
 
 import Foundation
 
-// WebhookCheckSuiteRequested domain models
+/// WebhookCheckSuiteRequested domain models
 /// Optional enumerated value serialized in the `packages` wire field.
-public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsPackages: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsPackages: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsPackages(rawValue: "read")
     public static let write = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsPackages(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -25,10 +29,14 @@ public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsPackages: RawRep
 
 /// The summary status for all check runs that are part of the check suite. Can be `requested`, `in_progress`,
 /// or `completed`.
-public struct WebhookCheckSuiteRequestedCheckSuiteStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookCheckSuiteRequestedCheckSuiteStatus: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let requested = WebhookCheckSuiteRequestedCheckSuiteStatus(rawValue: "requested")
     public static let inProgress = WebhookCheckSuiteRequestedCheckSuiteStatus(rawValue: "in_progress")
     public static let completed = WebhookCheckSuiteRequestedCheckSuiteStatus(rawValue: "completed")
@@ -36,7 +44,7 @@ public struct WebhookCheckSuiteRequestedCheckSuiteStatus: RawRepresentable, Hash
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -46,16 +54,20 @@ public struct WebhookCheckSuiteRequestedCheckSuiteStatus: RawRepresentable, Hash
 }
 
 /// Optional enumerated value serialized in the `security_scanning_alert` wire field.
-public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsSecurityScanningAlert: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsSecurityScanningAlert: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsSecurityScanningAlert(rawValue: "read")
     public static let write = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsSecurityScanningAlert(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -65,16 +77,20 @@ public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsSecurityScanning
 }
 
 /// Optional enumerated value serialized in the `organization_hooks` wire field.
-public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsOrganizationHooks: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsOrganizationHooks: RawRepresentable, Hashable, Codable,
+    Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsOrganizationHooks(rawValue: "read")
     public static let write = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsOrganizationHooks(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -84,16 +100,20 @@ public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsOrganizationHook
 }
 
 /// Optional enumerated value serialized in the `organization_plan` wire field.
-public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsOrganizationPlan: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsOrganizationPlan: RawRepresentable, Hashable, Codable,
+    Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsOrganizationPlan(rawValue: "read")
     public static let write = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsOrganizationPlan(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -103,16 +123,20 @@ public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsOrganizationPlan
 }
 
 /// Optional enumerated value serialized in the `content_references` wire field.
-public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsContentReferences: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsContentReferences: RawRepresentable, Hashable, Codable,
+    Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsContentReferences(rawValue: "read")
     public static let write = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsContentReferences(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -122,16 +146,20 @@ public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsContentReference
 }
 
 /// Optional enumerated value serialized in the `code_quality` wire field.
-public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsCodeQuality: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsCodeQuality: RawRepresentable, Hashable, Codable,
+    Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsCodeQuality(rawValue: "read")
     public static let write = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsCodeQuality(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -141,16 +169,21 @@ public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsCodeQuality: Raw
 }
 
 /// Optional enumerated value serialized in the `organization_secrets` wire field.
-public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsOrganizationSecrets: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsOrganizationSecrets: RawRepresentable, Hashable,
+    Codable,
+    Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsOrganizationSecrets(rawValue: "read")
     public static let write = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsOrganizationSecrets(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -160,16 +193,20 @@ public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsOrganizationSecr
 }
 
 /// Optional enumerated value serialized in the `checks` wire field.
-public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsChecks: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsChecks: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsChecks(rawValue: "read")
     public static let write = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsChecks(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -179,16 +216,20 @@ public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsChecks: RawRepre
 }
 
 /// Optional enumerated value serialized in the `deployments` wire field.
-public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsDeployments: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsDeployments: RawRepresentable, Hashable, Codable,
+    Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsDeployments(rawValue: "read")
     public static let write = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsDeployments(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -198,16 +239,20 @@ public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsDeployments: Raw
 }
 
 /// Optional enumerated value serialized in the `repository_hooks` wire field.
-public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsRepositoryHooks: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsRepositoryHooks: RawRepresentable, Hashable, Codable,
+    Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsRepositoryHooks(rawValue: "read")
     public static let write = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsRepositoryHooks(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -217,16 +262,20 @@ public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsRepositoryHooks:
 }
 
 /// Optional enumerated value serialized in the `discussions` wire field.
-public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsDiscussions: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsDiscussions: RawRepresentable, Hashable, Codable,
+    Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsDiscussions(rawValue: "read")
     public static let write = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsDiscussions(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -239,12 +288,15 @@ public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsDiscussions: Raw
 public struct WebhookCheckSuiteRequestedAction: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let requested = WebhookCheckSuiteRequestedAction(rawValue: "requested")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -254,16 +306,21 @@ public struct WebhookCheckSuiteRequestedAction: RawRepresentable, Hashable, Coda
 }
 
 /// Optional enumerated value serialized in the `workflows` wire field.
-public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsWorkflows: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsWorkflows: RawRepresentable, Hashable, Codable,
+    Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsWorkflows(rawValue: "read")
     public static let write = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsWorkflows(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -273,16 +330,20 @@ public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsWorkflows: RawRe
 }
 
 /// Optional enumerated value serialized in the `organization_packages` wire field.
-public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsOrganizationPackages: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsOrganizationPackages: RawRepresentable, Hashable,
+    Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsOrganizationPackages(rawValue: "read")
     public static let write = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsOrganizationPackages(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -292,16 +353,20 @@ public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsOrganizationPack
 }
 
 /// Optional enumerated value serialized in the `environments` wire field.
-public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsEnvironments: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsEnvironments: RawRepresentable, Hashable, Codable,
+    Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsEnvironments(rawValue: "read")
     public static let write = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsEnvironments(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -311,16 +376,20 @@ public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsEnvironments: Ra
 }
 
 /// Optional enumerated value serialized in the `statuses` wire field.
-public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsStatuses: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsStatuses: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsStatuses(rawValue: "read")
     public static let write = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsStatuses(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -330,17 +399,21 @@ public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsStatuses: RawRep
 }
 
 /// Optional enumerated value serialized in the `type` wire field.
-public struct WebhookCheckSuiteRequestedCheckSuiteAppOwnerType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookCheckSuiteRequestedCheckSuiteAppOwnerType: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let bot = WebhookCheckSuiteRequestedCheckSuiteAppOwnerType(rawValue: "Bot")
     public static let user = WebhookCheckSuiteRequestedCheckSuiteAppOwnerType(rawValue: "User")
     public static let organization = WebhookCheckSuiteRequestedCheckSuiteAppOwnerType(rawValue: "Organization")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -350,16 +423,20 @@ public struct WebhookCheckSuiteRequestedCheckSuiteAppOwnerType: RawRepresentable
 }
 
 /// Optional enumerated value serialized in the `pages` wire field.
-public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsPages: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsPages: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsPages(rawValue: "read")
     public static let write = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsPages(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -370,10 +447,14 @@ public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsPages: RawRepres
 
 /// The summary conclusion for all check runs that are part of the check suite. This value will be `null` until
 /// the check run has completed.
-public struct WebhookCheckSuiteRequestedCheckSuiteConclusion: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookCheckSuiteRequestedCheckSuiteConclusion: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let success = WebhookCheckSuiteRequestedCheckSuiteConclusion(rawValue: "success")
     public static let failure = WebhookCheckSuiteRequestedCheckSuiteConclusion(rawValue: "failure")
     public static let neutral = WebhookCheckSuiteRequestedCheckSuiteConclusion(rawValue: "neutral")
@@ -385,7 +466,7 @@ public struct WebhookCheckSuiteRequestedCheckSuiteConclusion: RawRepresentable, 
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -395,16 +476,20 @@ public struct WebhookCheckSuiteRequestedCheckSuiteConclusion: RawRepresentable, 
 }
 
 /// Optional enumerated value serialized in the `single_file` wire field.
-public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsSingleFile: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsSingleFile: RawRepresentable, Hashable, Codable,
+    Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsSingleFile(rawValue: "read")
     public static let write = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsSingleFile(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -414,16 +499,20 @@ public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsSingleFile: RawR
 }
 
 /// Optional enumerated value serialized in the `drives` wire field.
-public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsDrives: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsDrives: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsDrives(rawValue: "read")
     public static let write = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsDrives(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -433,16 +522,20 @@ public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsDrives: RawRepre
 }
 
 /// Optional enumerated value serialized in the `models` wire field.
-public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsModels: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct WebhookCheckSuiteRequestedCheckSuiteAppPermissionsModels: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let read = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsModels(rawValue: "read")
     public static let write = WebhookCheckSuiteRequestedCheckSuiteAppPermissionsModels(rawValue: "write")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

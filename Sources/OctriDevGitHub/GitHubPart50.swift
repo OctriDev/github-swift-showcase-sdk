@@ -3,50 +3,183 @@
 
 import Foundation
 
-extension ReposNamespace {
-/// Gets a public release with the specified release ID. > [!NOTE] > This returns an `upload_url` key corresponding to the endpoint for uploading release assets. This key is a hypermedia resource. For more information, see "[Getting started with the REST API](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#hypermedia)."
-    public func getRelease(owner: String, repo: String, releaseId: Int, requestOptions: RequestOptions? = nil) async throws -> Release {
-        return try await ReposMethods.reposGetRelease(config: config, owner: owner, repo: repo, releaseId: releaseId, requestOptions: requestOptions)
+public extension ReposNamespace {
+    /// Gets a public release with the specified release ID. > [!NOTE] > This returns an `upload_url` key corresponding
+    /// to the endpoint for uploading release assets. This key is a hypermedia resource. For more information, see
+    /// "[Getting started with the REST
+    /// API](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#hypermedia)."
+    func getRelease(
+        owner: String,
+        repo: String,
+        releaseId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Release {
+        try await ReposMethods.reposGetRelease(
+            config: config,
+            owner: owner,
+            repo: repo,
+            releaseId: releaseId,
+            requestOptions: requestOptions
+        )
     }
 
-/// Users with push access to the repository can edit a release. > [!NOTE] > If the resolved target commit (the new value of `target_commitish` if you are changing it, otherwise the existing target) adds or modifies any file under `.github/workflows/` relative to the repository's default branch, the authenticating token must be authorized to modify workflows. Otherwise, this endpoint returns `404 Not Found`; some authentication paths surface `403 Resource not accessible by integration` instead. OAuth app tokens and personal access tokens (classic) need the `workflow` scope when the resolved target commit modifies workflow files. Fine-grained access tokens and GitHub App installation tokens also need the "Workflows" repository permission (write). The `GITHUB_TOKEN` available to GitHub Actions cannot be authorized for this; for more information, see "[Automatic token authentication](https://docs.github.com/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token)".
-    public func updateRelease(options: ReposMethods.ReposUpdateReleaseOptions, requestOptions: RequestOptions? = nil) async throws -> Release {
-        return try await ReposMethods.reposUpdateRelease(config: config, options: options, requestOptions: requestOptions)
+    /// Users with push access to the repository can edit a release. > [!NOTE] > If the resolved target commit (the new
+    /// value of `target_commitish` if you are changing it, otherwise the existing target) adds or modifies any file
+    /// under `.github/workflows/` relative to the repository's default branch, the authenticating token must be
+    /// authorized to modify workflows. Otherwise, this endpoint returns `404 Not Found`; some authentication paths
+    /// surface `403 Resource not accessible by integration` instead. OAuth app tokens and personal access tokens
+    /// (classic) need the `workflow` scope when the resolved target commit modifies workflow files. Fine-grained access
+    /// tokens and GitHub App installation tokens also need the "Workflows" repository permission (write). The
+    /// `GITHUB_TOKEN` available to GitHub Actions cannot be authorized for this; for more information, see "[Automatic
+    /// token authentication](https://docs.github.com/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token)".
+    func updateRelease(
+        options: ReposMethods.ReposUpdateReleaseOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> Release {
+        try await ReposMethods.reposUpdateRelease(config: config, options: options, requestOptions: requestOptions)
     }
 
-/// Users with push access to the repository can delete a release.
-    public func deleteRelease(owner: String, repo: String, releaseId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await ReposMethods.reposDeleteRelease(config: config, owner: owner, repo: repo, releaseId: releaseId, requestOptions: requestOptions)
+    /// Users with push access to the repository can delete a release.
+    func deleteRelease(
+        owner: String,
+        repo: String,
+        releaseId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await ReposMethods.reposDeleteRelease(
+            config: config,
+            owner: owner,
+            repo: repo,
+            releaseId: releaseId,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists the assets attached to a specific release in a repository. Use `page` and `per_page` to paginate the results.
-    public func listReleaseAssets(owner: String, repo: String, releaseId: Int, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [ReleaseAsset] {
-        return try await ReposMethods.reposListReleaseAssets(config: config, owner: owner, repo: repo, releaseId: releaseId, perPage: perPage, page: page, requestOptions: requestOptions)
+    /// Lists the assets attached to a specific release in a repository. Use `page` and `per_page` to paginate the
+    /// results.
+    func listReleaseAssets(
+        owner: String,
+        repo: String,
+        releaseId: Int,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [ReleaseAsset] {
+        try await ReposMethods.reposListReleaseAssets(
+            config: config,
+            owner: owner,
+            repo: repo,
+            releaseId: releaseId,
+            perPage: perPage,
+            page: page,
+            requestOptions: requestOptions
+        )
     }
 
-/// Uploads a binary asset to a specific release in a repository. Use the release-specific `upload_url` returned when creating the release, provide the asset filename in `name`, and send the raw file data with a media-type `Content-Type` header. The API may rename filenames containing special characters or leading or trailing periods.
+    /// Uploads a binary asset to a specific release in a repository. Use the release-specific `upload_url` returned
+    /// when creating the release, provide the asset filename in `name`, and send the raw file data with a media-type
+    /// `Content-Type` header. The API may rename filenames containing special characters or leading or trailing
+    /// periods.
     ///
-    /// This endpoint makes use of a [Hypermedia relation](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#hypermedia) to determine which URL to access. The endpoint you call to upload release assets is specific to your release. Use the `upload_url` returned in the response of the [Create a release endpoint](https://docs.github.com/rest/releases/releases#create-a-release) to upload a release asset. You need to use an HTTP client which supports [SNI](http://en.wikipedia.org/wiki/Server_Name_Indication) to make calls to this endpoint. Most libraries will set the required `Content-Length` header automatically. Use the required `Content-Type` header to provide the media type of the asset. For a list of media types, see [Media Types](https://www.iana.org/assignments/media-types/media-types.xhtml). For example: `application/zip` GitHub expects the asset data in its raw binary form, rather than JSON. You will send the raw binary content of the asset as the request body. Everything else about the endpoint is the same as the rest of the API. For example, you'll still need to pass your authentication to be able to upload an asset. When an upstream failure occurs, you will receive a `502 Bad Gateway` status. This may leave an empty asset with a state of `starter`. It can be safely deleted. **Notes:** * GitHub renames asset filenames that have special characters, non-alphanumeric characters, and leading or trailing periods. The "[List release assets](https://docs.github.com/rest/releases/assets#list-release-assets)" endpoint lists the renamed filenames. For more information and help, contact [GitHub Support](https://support.github.com/contact?tags=dotcom-rest-api). * To find the `release_id` query the [`GET /repos/{owner}/{repo}/releases/latest` endpoint](https://docs.github.com/rest/releases/releases#get-the-latest-release). * If you upload an asset with the same filename as another uploaded asset, you'll receive an error and must delete the old file…
-    public func uploadReleaseAsset(owner: String, repo: String, releaseId: Int, name: String, label: String? = nil, body: Data? = nil, requestOptions: RequestOptions? = nil) async throws -> ReleaseAsset {
-        return try await ReposMethods.reposUploadReleaseAsset(config: config, owner: owner, repo: repo, releaseId: releaseId, name: name, label: label, body: body, requestOptions: requestOptions)
+    /// This endpoint makes use of a [Hypermedia
+    /// relation](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#hypermedia) to
+    /// determine which URL to access. The endpoint you call to upload release assets is specific to your release. Use
+    /// the `upload_url` returned in the response of the [Create a release
+    /// endpoint](https://docs.github.com/rest/releases/releases#create-a-release) to upload a release asset. You need
+    /// to use an HTTP client which supports [SNI](http://en.wikipedia.org/wiki/Server_Name_Indication) to make calls to
+    /// this endpoint. Most libraries will set the required `Content-Length` header automatically. Use the required
+    /// `Content-Type` header to provide the media type of the asset. For a list of media types, see [Media
+    /// Types](https://www.iana.org/assignments/media-types/media-types.xhtml). For example: `application/zip` GitHub
+    /// expects the asset data in its raw binary form, rather than JSON. You will send the raw binary content of the
+    /// asset as the request body. Everything else about the endpoint is the same as the rest of the API. For example,
+    /// you'll still need to pass your authentication to be able to upload an asset. When an upstream failure occurs,
+    /// you will receive a `502 Bad Gateway` status. This may leave an empty asset with a state of `starter`. It can be
+    /// safely deleted. **Notes:** * GitHub renames asset filenames that have special characters, non-alphanumeric
+    /// characters, and leading or trailing periods. The "[List release
+    /// assets](https://docs.github.com/rest/releases/assets#list-release-assets)" endpoint lists the renamed filenames.
+    /// For more information and help, contact [GitHub
+    /// Support](https://support.github.com/contact?tags=dotcom-rest-api). * To find the `release_id` query the [`GET
+    /// /repos/{owner}/{repo}/releases/latest`
+    /// endpoint](https://docs.github.com/rest/releases/releases#get-the-latest-release). * If you upload an asset with
+    /// the same filename as another uploaded asset, you'll receive an error and must delete the old file…
+    func uploadReleaseAsset(
+        owner: String,
+        repo: String,
+        releaseId: Int,
+        name: String,
+        label: String? = nil,
+        body: Data? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ReleaseAsset {
+        try await ReposMethods.reposUploadReleaseAsset(
+            config: config,
+            owner: owner,
+            repo: repo,
+            releaseId: releaseId,
+            name: name,
+            label: label,
+            body: body,
+            requestOptions: requestOptions
+        )
     }
 
-/// Returns all active rules that apply to the specified branch. The branch does not need to exist; rules that would apply to a branch with that name will be returned. All active rules that apply will be returned, regardless of the level at which they are configured (e.g. repository or organization). Rules in rulesets with "evaluate" or "disabled" enforcement statuses are not returned.
-    public func getBranchRules(owner: String, repo: String, branch: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [RepositoryRuleDetailed] {
-        return try await ReposMethods.reposGetBranchRules(config: config, owner: owner, repo: repo, branch: branch, perPage: perPage, page: page, requestOptions: requestOptions)
+    /// Returns all active rules that apply to the specified branch. The branch does not need to exist; rules that would
+    /// apply to a branch with that name will be returned. All active rules that apply will be returned, regardless of
+    /// the level at which they are configured (e.g. repository or organization). Rules in rulesets with "evaluate" or
+    /// "disabled" enforcement statuses are not returned.
+    func getBranchRules(
+        owner: String,
+        repo: String,
+        branch: String,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [RepositoryRuleDetailed] {
+        try await ReposMethods.reposGetBranchRules(
+            config: config,
+            owner: owner,
+            repo: repo,
+            branch: branch,
+            perPage: perPage,
+            page: page,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists the rulesets for a repository. Use `includes_parents` to include rulesets configured at higher levels and `targets` to filter by a comma-separated list of rule targets.
+    /// Lists the rulesets for a repository. Use `includes_parents` to include rulesets configured at higher levels and
+    /// `targets` to filter by a comma-separated list of rule targets.
     ///
     /// Get all the rulesets for a repository.
-    public func getRepoRulesets(owner: String, repo: String, perPage: Int? = nil, page: Int? = nil, includesParents: Bool? = nil, targets: String? = nil, requestOptions: RequestOptions? = nil) async throws -> [RepositoryRuleset] {
-        return try await ReposMethods.reposGetRepoRulesets(config: config, owner: owner, repo: repo, perPage: perPage, page: page, includesParents: includesParents, targets: targets, requestOptions: requestOptions)
+    func getRepoRulesets(
+        owner: String,
+        repo: String,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        includesParents: Bool? = nil,
+        targets: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [RepositoryRuleset] {
+        try await ReposMethods.reposGetRepoRulesets(
+            config: config,
+            owner: owner,
+            repo: repo,
+            perPage: perPage,
+            page: page,
+            includesParents: includesParents,
+            targets: targets,
+            requestOptions: requestOptions
+        )
     }
 
-/// Creates a ruleset for a repository to apply rules when its specified conditions are met. Supply a `name` and `enforcement` level, and use `target`, `conditions`, and `rules` to configure where the ruleset applies and which rules it enforces. You can also configure actors that can bypass the ruleset with `bypass_actors`.
+    /// Creates a ruleset for a repository to apply rules when its specified conditions are met. Supply a `name` and
+    /// `enforcement` level, and use `target`, `conditions`, and `rules` to configure where the ruleset applies and
+    /// which rules it enforces. You can also configure actors that can bypass the ruleset with `bypass_actors`.
     ///
     /// Create a ruleset for a repository.
-    public func createRepoRuleset(options: ReposMethods.ReposCreateRepoRulesetOptions, requestOptions: RequestOptions? = nil) async throws -> RepositoryRuleset {
-        return try await ReposMethods.reposCreateRepoRuleset(config: config, options: options, requestOptions: requestOptions)
+    func createRepoRuleset(
+        options: ReposMethods.ReposCreateRepoRulesetOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> RepositoryRuleset {
+        try await ReposMethods.reposCreateRepoRuleset(config: config, options: options, requestOptions: requestOptions)
     }
 }

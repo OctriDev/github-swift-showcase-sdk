@@ -6,7 +6,8 @@ import Foundation
 import XCTest
 
 extension SdkMethodTests {
-    func testUsersCreateGpgKeyForAuthenticatedUserUsersCreateGpgKeyForAuthX5af8ba0297ReachesMockAndDecodesResponse() async throws {
+    func testUsersCreateGpgKeyForAuthenticatedUserUsersCreateGpgKeyForAuthX5af8ba0297ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -25,7 +26,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testUsersCreateGpgKeyForAuthenticatedUserUsersCreateGpgKeyForAuthX858d44bf72ReachesMockAndDecodesResponse() async throws {
+    func testUsersCreateGpgKeyForAuthenticatedUserUsersCreateGpgKeyForAuthX858d44bf72ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -36,9 +38,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.users.createGpgKeyForAuthenticatedUser(
-            armoredPublicKey: decoded(sdkMethodFixture1950Value1),
-            name: decoded("\"Octocat's GPG Key\"")
-        )
+                armoredPublicKey: decoded(sdkMethodFixture1950Value1),
+                name: decoded("\"Octocat's GPG Key\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -54,7 +56,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testUsersCreatePublicSshKeyForAuthenticatedUserUsersCreatePublicSX4d053a12f0ReachesMockAndDecodesResponse() async throws {
+    func testUsersCreatePublicSshKeyForAuthenticatedUserUsersCreatePublicSX4d053a12f0ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -73,7 +76,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testUsersCreatePublicSshKeyForAuthenticatedUserUsersCreatePublicSX9118874fc1ReachesMockAndDecodesResponse() async throws {
+    func testUsersCreatePublicSshKeyForAuthenticatedUserUsersCreatePublicSX9118874fc1ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -84,9 +88,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.users.createPublicSshKeyForAuthenticatedUser(
-            key: decoded("\"ssh-rsa \""),
-            title: decoded("\"ssh-rsa AAAAB3NzaC1yc2EAAA\"")
-        )
+                key: decoded("\"ssh-rsa \""),
+                title: decoded("\"ssh-rsa AAAAB3NzaC1yc2EAAA\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -102,7 +106,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testUsersCreateSshSigningKeyForAuthenticatedUserUsersCreateSshSigXb2be43d6daReachesMockAndDecodesResponse() async throws {
+    func testUsersCreateSshSigningKeyForAuthenticatedUserUsersCreateSshSigXb2be43d6daReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -121,7 +126,8 @@ extension SdkMethodTests {
         )
     }
 
-    func testUsersCreateSshSigningKeyForAuthenticatedUserUsersCreateSshSigX53ab62a183ReachesMockAndDecodesResponse() async throws {
+    func testUsersCreateSshSigningKeyForAuthenticatedUserUsersCreateSshSigX53ab62a183ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -132,9 +138,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.users.createSshSigningKeyForAuthenticatedUser(
-            key: decoded("\"ssh-rsa \""),
-            title: decoded("\"ssh-rsa AAAAB3NzaC1yc2EAAA\"")
-        )
+                key: decoded("\"ssh-rsa \""),
+                title: decoded("\"ssh-rsa AAAAB3NzaC1yc2EAAA\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -173,9 +179,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.users.deleteAttestationsBulk(
-            username: decoded("\"Example Name\""),
-            body: decoded("{\"subject_digests\":[\"sha256:abc123\",\"sha512:def456\"]}")
-        )
+                username: decoded("\"Example Name\""),
+                body: decoded("{\"subject_digests\":[\"sha256:abc123\",\"sha512:def456\"]}")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -214,9 +220,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.users.deleteAttestationsById(
-            username: decoded("\"Example Name\""),
-            attestationId: decoded("1")
-        )
+                username: decoded("\"Example Name\""),
+                attestationId: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 403)
@@ -232,7 +238,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testUsersDeleteAttestationsBySubjectDigestUsersDeleteAttestationsXfaed73af27ReachesMockAndDecodesResponse() async throws {
+    func testUsersDeleteAttestationsBySubjectDigestUsersDeleteAttestationsXfaed73af27ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -244,7 +251,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testUsersDeleteAttestationsBySubjectDigestUsersDeleteAttestationsXb5df789f74ReachesMockAndDecodesResponse() async throws {
+    func testUsersDeleteAttestationsBySubjectDigestUsersDeleteAttestationsXb5df789f74ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/404") else {
             return
         }
@@ -255,9 +263,9 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.users.deleteAttestationsBySubjectDigest(
-            username: decoded("\"Example Name\""),
-            subjectDigest: decoded("\"subject_digest\"")
-        )
+                username: decoded("\"Example Name\""),
+                subjectDigest: decoded("\"subject_digest\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 404)
@@ -273,7 +281,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testUsersDeleteEmailForAuthenticatedUserUsersDeleteEmailForAuthenticatedUserReachesMockAndDecodesResponse() async throws {
+    func testUsersDeleteEmailForAuthenticatedUserUsersDeleteEmailForAuthenticatedUserReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -284,7 +293,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testUsersDeleteEmailForAuthenticatedUserUsersDeleteEmailForAuthenXaf9605e06dReachesMockAndDecodesResponse() async throws {
+    func testUsersDeleteEmailForAuthenticatedUserUsersDeleteEmailForAuthenXaf9605e06dReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -295,8 +305,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.users.deleteEmailForAuthenticatedUser(
-            body: decoded("{\"emails\":[\"octocat@github.com\",\"mona@github.com\"]}")
-        )
+                body: decoded("{\"emails\":[\"octocat@github.com\",\"mona@github.com\"]}")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -312,7 +322,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testUsersDeleteGpgKeyForAuthenticatedUserUsersDeleteGpgKeyForAuthX0c01bda996ReachesMockAndDecodesResponse() async throws {
+    func testUsersDeleteGpgKeyForAuthenticatedUserUsersDeleteGpgKeyForAuthX0c01bda996ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -323,7 +334,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testUsersDeleteGpgKeyForAuthenticatedUserUsersDeleteGpgKeyForAuthX5a5dbfed1fReachesMockAndDecodesResponse() async throws {
+    func testUsersDeleteGpgKeyForAuthenticatedUserUsersDeleteGpgKeyForAuthX5a5dbfed1fReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -334,8 +346,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.users.deleteGpgKeyForAuthenticatedUser(
-            gpgKeyId: decoded("1")
-        )
+                gpgKeyId: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -351,7 +363,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testUsersDeletePublicSshKeyForAuthenticatedUserUsersDeletePublicSXd7c1a1e641ReachesMockAndDecodesResponse() async throws {
+    func testUsersDeletePublicSshKeyForAuthenticatedUserUsersDeletePublicSXd7c1a1e641ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -362,7 +375,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testUsersDeletePublicSshKeyForAuthenticatedUserUsersDeletePublicSX393e5aa8bdReachesMockAndDecodesResponse() async throws {
+    func testUsersDeletePublicSshKeyForAuthenticatedUserUsersDeletePublicSX393e5aa8bdReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -373,8 +387,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.users.deletePublicSshKeyForAuthenticatedUser(
-            keyId: decoded("1")
-        )
+                keyId: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -390,7 +404,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testUsersDeleteSocialAccountForAuthenticatedUserUsersDeleteSocialX5f8a7b59ffReachesMockAndDecodesResponse() async throws {
+    func testUsersDeleteSocialAccountForAuthenticatedUserUsersDeleteSocialX5f8a7b59ffReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -401,7 +416,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testUsersDeleteSocialAccountForAuthenticatedUserUsersDeleteSocialXe7df5aba98ReachesMockAndDecodesResponse() async throws {
+    func testUsersDeleteSocialAccountForAuthenticatedUserUsersDeleteSocialXe7df5aba98ReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -412,8 +428,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.users.deleteSocialAccountForAuthenticatedUser(
-            accountUrls: decoded("[\"https://facebook.com/GitHub\",\"https://www.youtube.com/@GitHub\"]")
-        )
+                accountUrls: decoded("[\"https://facebook.com/GitHub\",\"https://www.youtube.com/@GitHub\"]")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -429,7 +445,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testUsersDeleteSshSigningKeyForAuthenticatedUserUsersDeleteSshSigX8e7a15da8fReachesMockAndDecodesResponse() async throws {
+    func testUsersDeleteSshSigningKeyForAuthenticatedUserUsersDeleteSshSigX8e7a15da8fReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient() else {
             return
         }
@@ -440,7 +457,8 @@ extension SdkMethodTests {
         XCTAssertTrue(true)
     }
 
-    func testUsersDeleteSshSigningKeyForAuthenticatedUserUsersDeleteSshSigX6f560d630eReachesMockAndDecodesResponse() async throws {
+    func testUsersDeleteSshSigningKeyForAuthenticatedUserUsersDeleteSshSigX6f560d630eReachesMockAndDecodesResponse(
+    ) async throws {
         guard let client = configuredClient(statusPrefix: "/__mockStatus/401") else {
             return
         }
@@ -451,8 +469,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.users.deleteSshSigningKeyForAuthenticatedUser(
-            sshSigningKeyId: decoded("1")
-        )
+                sshSigningKeyId: decoded("1")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)
@@ -490,8 +508,8 @@ extension SdkMethodTests {
         )
         do {
             _ = try await client.users.follow(
-            username: decoded("\"Example Name\"")
-        )
+                username: decoded("\"Example Name\"")
+            )
             XCTFail("did not raise its declared error")
         } catch let error as SdkHttpError {
             XCTAssertEqual(error.statusCode, 401)

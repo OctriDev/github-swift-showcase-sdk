@@ -3,21 +3,55 @@
 
 import Foundation
 
-extension ReposNamespace {
-/// Accepts a repository invitation for the authenticated user. Use `invitation_id` to identify the invitation to accept. A 204 response confirms acceptance without returning a response body.
-    public func acceptInvitationForAuthenticatedUser(invitationId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await ReposMethods.reposAcceptInvitationForAuthenticatedUser(config: config, invitationId: invitationId, requestOptions: requestOptions)
+public extension ReposNamespace {
+    /// Accepts a repository invitation for the authenticated user. Use `invitation_id` to identify the invitation to
+    /// accept. A 204 response confirms acceptance without returning a response body.
+    func acceptInvitationForAuthenticatedUser(
+        invitationId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await ReposMethods.reposAcceptInvitationForAuthenticatedUser(
+            config: config,
+            invitationId: invitationId,
+            requestOptions: requestOptions
+        )
     }
 
-/// Declines a repository invitation for the authenticated user. Use `invitation_id` to identify the invitation to decline. A 204 response confirms the invitation was declined without returning a response body.
-    public func declineInvitationForAuthenticatedUser(invitationId: Int, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await ReposMethods.reposDeclineInvitationForAuthenticatedUser(config: config, invitationId: invitationId, requestOptions: requestOptions)
+    /// Declines a repository invitation for the authenticated user. Use `invitation_id` to identify the invitation to
+    /// decline. A 204 response confirms the invitation was declined without returning a response body.
+    func declineInvitationForAuthenticatedUser(
+        invitationId: Int,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await ReposMethods.reposDeclineInvitationForAuthenticatedUser(
+            config: config,
+            invitationId: invitationId,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists public repositories for the specified GitHub user. Filter by repository `type` and sort by `sort` and `direction`; use `page` and `per_page` to paginate the results.
+    /// Lists public repositories for the specified GitHub user. Filter by repository `type` and sort by `sort` and
+    /// `direction`; use `page` and `per_page` to paginate the results.
     ///
     /// Lists public repositories for the specified user.
-    public func listForUser(username: String, type: ReposListForUserParameter? = nil, sort: ReposListForUserParameterX089fad86? = nil, direction: ReposListForUserParameterX6f083e9f? = nil, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [MinimalRepository] {
-        return try await ReposMethods.reposListForUser(config: config, username: username, type: type, sort: sort, direction: direction, perPage: perPage, page: page, requestOptions: requestOptions)
+    func listForUser(
+        username: String,
+        type: ReposListForUserParameter? = nil,
+        sort: ReposListForUserParameterX089fad86? = nil,
+        direction: ReposListForUserParameterX6f083e9f? = nil,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> [MinimalRepository] {
+        try await ReposMethods.reposListForUser(
+            config: config,
+            username: username,
+            type: type,
+            sort: sort,
+            direction: direction,
+            perPage: perPage,
+            page: page,
+            requestOptions: requestOptions
+        )
     }
 }

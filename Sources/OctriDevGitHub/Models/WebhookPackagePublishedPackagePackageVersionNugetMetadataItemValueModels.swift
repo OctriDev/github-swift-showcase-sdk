@@ -3,7 +3,7 @@
 
 import Foundation
 
-// WebhookPackagePublishedPackagePackageVersionNugetMetadataItemValue domain models
+/// WebhookPackagePublishedPackagePackageVersionNugetMetadataItemValue domain models
 public indirect enum WebhookPackagePublishedPackagePackageVersionNugetMetadataItemValue {
     case boolValue(Bool)
     case stringValue(String)
@@ -14,27 +14,39 @@ public indirect enum WebhookPackagePublishedPackagePackageVersionNugetMetadataIt
 }
 
 extension WebhookPackagePublishedPackagePackageVersionNugetMetadataItemValue: Codable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = Self.decodeGroup1(from: container) { self = value; return }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "No variant matched for WebhookPackagePublishedPackagePackageVersionNugetMetadataItemValue")
+        if let value = Self.decodeGroup1(from: container) {
+            self = value; return
+        }
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "No variant matched for WebhookPackagePublishedPackagePackageVersionNugetMetadataItemValue"
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
-        if try encodeGroup1(to: encoder) { return }
+        if try encodeGroup1(to: encoder) {
+            return
+        }
     }
 }
 
 extension WebhookPackagePublishedPackagePackageVersionNugetMetadataItemValue {
     static func decodeGroup1(from container: SingleValueDecodingContainer) -> Self? {
-        if let value = try? container.decode(Bool.self) { return .boolValue(value) }
-        if let value = try? container.decode(String.self) { return .stringValue(value) }
-        if let value = try? container.decode(Int.self) { return .intValue(value) }
+        if let value = try? container.decode(Bool.self) {
+            return .boolValue(value)
+        }
+        if let value = try? container.decode(String.self) {
+            return .stringValue(value)
+        }
+        if let value = try? container.decode(Int.self) {
+            return .intValue(value)
+        }
         if let value = try? container.decode(
             WebhookPackagePublishedPackagePackageVersionNugetMetadataItemX69135351c1.self
         ) {
-            return             .webhookPackagePublishedPackagePackageVersionNugetMetadataItemX69135351c1(value)
+            return .webhookPackagePublishedPackagePackageVersionNugetMetadataItemX69135351c1(value)
         }
         return nil
     }
@@ -47,7 +59,8 @@ extension WebhookPackagePublishedPackagePackageVersionNugetMetadataItemValue {
         case let .boolValue(value): try container.encode(value); return true
         case let .stringValue(value): try container.encode(value); return true
         case let .intValue(value): try container.encode(value); return true
-        case let .webhookPackagePublishedPackagePackageVersionNugetMetadataItemX69135351c1(value): try container.encode(value); return true
+        case let .webhookPackagePublishedPackagePackageVersionNugetMetadataItemX69135351c1(value): try container
+            .encode(value); return true
         }
     }
 }
@@ -80,22 +93,22 @@ public struct WebhookPackagePublishedPackagePackageVersionNugetMetadataItemX6913
     }
 
     init() {
-        (self.url, self.branch, self.commit, self.type) = (nil, nil, nil, nil)
+        (url, branch, commit, type) = (nil, nil, nil, nil)
     }
 }
 
-extension WebhookPackagePublishedPackagePackageVersionNugetMetadataItemX69135351c1 {
-    public init(from decoder: Decoder) throws {
+public extension WebhookPackagePublishedPackagePackageVersionNugetMetadataItemX69135351c1 {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.url = try container.sdkDecodeIfPresent(.url)
-        self.branch = try container.sdkDecodeIfPresent(.branch)
-        self.commit = try container.sdkDecodeIfPresent(.commit)
-        self.type = try container.sdkDecodeIfPresent(.type)
+        url = try container.sdkDecodeIfPresent(.url)
+        branch = try container.sdkDecodeIfPresent(.branch)
+        commit = try container.sdkDecodeIfPresent(.commit)
+        type = try container.sdkDecodeIfPresent(.type)
     }
 }
 
-extension WebhookPackagePublishedPackagePackageVersionNugetMetadataItemX69135351c1 {
-    public init(url: String? = nil, branch: String? = nil, commit: String? = nil, type: String? = nil) {
+public extension WebhookPackagePublishedPackagePackageVersionNugetMetadataItemX69135351c1 {
+    init(url: String? = nil, branch: String? = nil, commit: String? = nil, type: String? = nil) {
         self.init()
         (self.url, self.branch) = (url, branch)
         (self.commit, self.type) = (commit, type)

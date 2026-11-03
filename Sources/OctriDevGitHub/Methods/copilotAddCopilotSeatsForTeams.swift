@@ -6,36 +6,84 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension CopilotMethods {
-    /// Creates Copilot seats for users in the specified organization teams. Supply `selected_teams` with at least one team name; the organization must have a Copilot Business or Copilot Enterprise subscription and a configured public code suggestions policy. The organization is billed for each seat according to its Copilot plan.
+public extension CopilotMethods {
+    /// Creates Copilot seats for users in the specified organization teams. Supply `selected_teams` with at least one
+    /// team name; the organization must have a Copilot Business or Copilot Enterprise subscription and a configured
+    /// public code suggestions policy. The organization is billed for each seat according to its Copilot plan.
     ///
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Purchases a GitHub Copilot seat for all users within each specified team. The organization will be billed for each seat based on the organization's Copilot plan. For more information about Copilot pricing, see "[About billing for GitHub Copilot in your organization](https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization/managing-the-copilot-subscription-for-your-organization/about-billing-for-github-copilot-in-your-organization)." Only organization owners can purchase Copilot seats for their organization members. The organization must have a Copilot Business or Copilot Enterprise subscription and a configured suggestion matching policy. For more information about setting up a Copilot subscription, see "[Subscribing to Copilot for your organization](https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization/managing-the-copilot-subscription-for-your-organization/subscribing-to-copilot-for-your-organization)." For more information about setting a suggestion matching policy, see "[Managing policies for Copilot in your organization](https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization/setting-policies-for-copilot-in-your-organization/managing-policies-for-copilot-in-your-organization#policies-for-suggestion-matching)." The response contains the total number of new seats that were created and existing seats that were refreshed. OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `admin:org` scopes to use this endpoint.
+    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Purchases a GitHub Copilot seat for all
+    /// users within each specified team. The organization will be billed for each seat based on the organization's
+    /// Copilot plan. For more information about Copilot pricing, see "[About billing for GitHub Copilot in your organization](https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization/managing-the-copilot-subscription-for-your-organization/about-billing-for-github-copilot-in-your-organization)."
+    /// Only organization owners can purchase Copilot seats for their organization members. The organization must have a
+    /// Copilot Business or Copilot Enterprise subscription and a configured suggestion matching policy. For more
+    /// information about setting up a Copilot subscription, see "[Subscribing to Copilot for your organization](https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization/managing-the-copilot-subscription-for-your-organization/subscribing-to-copilot-for-your-organization)."
+    /// For more information about setting a suggestion matching policy, see "[Managing policies for Copilot in your organization](https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization/setting-policies-for-copilot-in-your-organization/managing-policies-for-copilot-in-your-organization#policies-for-suggestion-matching)."
+    /// The response contains the total number of new seats that were created and existing seats that were refreshed.
+    /// OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `admin:org`
+    /// scopes to use this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - selectedTeams: List of team names within the organization to which to
     ///   grant access to GitHub Copilot.
-    public static func copilotAddCopilotSeatsForTeams(config: ClientConfig, org: String, selectedTeams: [String], requestOptions: RequestOptions? = nil) async throws -> CopilotAddCopilotSeatsForTeamsResponse {
+    static func copilotAddCopilotSeatsForTeams(
+        config: ClientConfig,
+        org: String,
+        selectedTeams: [String],
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CopilotAddCopilotSeatsForTeamsResponse {
         try validateItems("selected_teams", selectedTeams, min: 1)
 
         let requestBody = CopilotAddCopilotSeatsForTeamsRequestBody(selectedTeams: selectedTeams)
 
-        return try (await sdkRequest("POST", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/copilot/billing/selected_teams"].joined(), config: config, body: requestBody, decoder: .json, operationId: "copilotAddCopilotSeatsForTeams", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self])).data
+        return try await (sdkRequest(
+            "POST",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/copilot/billing/selected_teams"].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "copilotAddCopilotSeatsForTeams",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self]
+        )).data
     }
 
-    /// Triggers cancellation of Copilot seats for users in the specified organization teams by setting those seats to pending cancellation. Supply `selected_teams` with at least one team name; only organization owners can cancel seats for organization members. Affected users lose Copilot access at the end of the current billing cycle unless they retain access through another team.
+    /// Triggers cancellation of Copilot seats for users in the specified organization teams by setting those seats to
+    /// pending cancellation. Supply `selected_teams` with at least one team name; only organization owners can cancel
+    /// seats for organization members. Affected users lose Copilot access at the end of the current billing cycle
+    /// unless they retain access through another team.
     ///
-    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Sets seats for all members of each team specified to "pending cancellation". This will cause the members of the specified team(s) to lose access to GitHub Copilot at the end of the current billing cycle unless they retain access through another team. For more information about disabling access to Copilot, see "[Revoking access to Copilot for members of your organization](https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization/managing-access-to-github-copilot-in-your-organization/revoking-access-to-copilot-for-members-of-your-organization)." Only organization owners can cancel Copilot seats for their organization members. The response contains the total number of seats set to "pending cancellation". OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `admin:org` scopes to use this endpoint.
+    /// > [!NOTE] > This endpoint is in public preview and is subject to change. Sets seats for all members of each team
+    /// specified to "pending cancellation". This will cause the members of the specified team(s) to lose access to
+    /// GitHub Copilot at the end of the current billing cycle unless they retain access through another team. For more
+    /// information about disabling access to Copilot, see "[Revoking access to Copilot for members of your organization](https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization/managing-access-to-github-copilot-in-your-organization/revoking-access-to-copilot-for-members-of-your-organization)."
+    /// Only organization owners can cancel Copilot seats for their organization members. The response contains the
+    /// total number of seats set to "pending cancellation". OAuth app tokens and personal access tokens (classic) need
+    /// either the `manage_billing:copilot` or `admin:org` scopes to use this endpoint.
     ///
     /// - Parameters:
     /// - org: The organization name. The name is not case sensitive.
     /// - selectedTeams: The names of teams from which to revoke access to GitHub
     ///   Copilot.
-    public static func copilotCancelCopilotSeatAssignmentForTeams(config: ClientConfig, org: String, selectedTeams: [String], requestOptions: RequestOptions? = nil) async throws -> CopilotCancelCopilotSeatAssignmentForTeamsResponse {
+    static func copilotCancelCopilotSeatAssignmentForTeams(
+        config: ClientConfig,
+        org: String,
+        selectedTeams: [String],
+        requestOptions: RequestOptions? = nil
+    ) async throws -> CopilotCancelCopilotSeatAssignmentForTeamsResponse {
         try validateItems("selected_teams", selectedTeams, min: 1)
 
         let requestBody = CopilotCancelCopilotSeatAssignmentForTeamsRequestBody(selectedTeams: selectedTeams)
 
-        return try (await sdkRequest("DELETE", ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/copilot/billing/selected_teams"].joined(), config: config, body: requestBody, decoder: .json, operationId: "copilotCancelCopilotSeatAssignmentForTeams", options: requestOptions, errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self])).data
+        return try await (sdkRequest(
+            "DELETE",
+            ["/orgs/", sdkEncodePathSegment(sdkWireString(org)), "/copilot/billing/selected_teams"].joined(),
+            config: config,
+            body: requestBody,
+            decoder: .json,
+            operationId: "copilotCancelCopilotSeatAssignmentForTeams",
+            options: requestOptions,
+            errors: ["401": BasicError.self, "403": BasicError.self, "404": BasicError.self, "500": BasicError.self]
+        )).data
     }
 }

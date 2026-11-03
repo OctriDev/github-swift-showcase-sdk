@@ -6,8 +6,11 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ActivityMethods {
-    /// Lists the people that have starred the repository. This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." - **`application/vnd.github.star+json`**: Includes a timestamp of when the star was created.
+public extension ActivityMethods {
+    /// Lists the people that have starred the repository. This endpoint supports the following custom media types. For
+    /// more information, see "[Media
+    /// types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)." -
+    /// **`application/vnd.github.star+json`**: Includes a timestamp of when the star was created.
     ///
     /// - Parameters:
     /// - owner: The account owner of the repository. The name is not case
@@ -22,10 +25,32 @@ extension ActivityMethods {
     ///   "[Using pagination in the REST
     ///   API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the
     ///   -rest-api)."
-    public static func activityListStargazersForRepo(config: ClientConfig, owner: String, repo: String, perPage: Int? = nil, page: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> ActivityListStargazersForRepoResponse {
-        return try (await sdkRequest("GET", ["/repos/", sdkEncodePathSegment(sdkWireString(owner)), "/", sdkEncodePathSegment(sdkWireString(repo)), "/stargazers"].joined(), config: config, query: [
-            SdkQueryParameter("per_page", value: perPage),
-            SdkQueryParameter("page", value: page),
-        ], decoder: .json, operationId: "activityListStargazersForRepo", options: requestOptions, errors: ["422": ValidationError.self])).data
+    static func activityListStargazersForRepo(
+        config: ClientConfig,
+        owner: String,
+        repo: String,
+        perPage: Int? = nil,
+        page: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ActivityListStargazersForRepoResponse {
+        try await (sdkRequest(
+            "GET",
+            [
+                "/repos/",
+                sdkEncodePathSegment(sdkWireString(owner)),
+                "/",
+                sdkEncodePathSegment(sdkWireString(repo)),
+                "/stargazers",
+            ].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("per_page", value: perPage),
+                SdkQueryParameter("page", value: page),
+            ],
+            decoder: .json,
+            operationId: "activityListStargazersForRepo",
+            options: requestOptions,
+            errors: ["422": ValidationError.self]
+        )).data
     }
 }
